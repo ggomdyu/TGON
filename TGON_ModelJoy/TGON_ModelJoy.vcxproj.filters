@@ -17,16 +17,22 @@
     <Filter Include="02.Main">
       <UniqueIdentifier>{4f7d2fd9-975a-4cd9-97b7-d63faf556c87}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Direct3D Components\Direct3D">
+    <Filter Include="00.Direct3D Components\01.Direct Input">
+      <UniqueIdentifier>{5bd35519-58bf-4c10-b2c3-5f3652d72c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Direct3D Components\00.Direct3D">
       <UniqueIdentifier>{44c39603-1ece-46a0-a48d-a690ac95238f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Direct3D Components\Direct Input">
-      <UniqueIdentifier>{5bd35519-58bf-4c10-b2c3-5f3652d72c93}</UniqueIdentifier>
+    <Filter Include="-1.Test">
+      <UniqueIdentifier>{4bc1139c-aeb3-40ca-b731-4cc97c392e71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>02.Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D.cpp">
+      <Filter>00.Direct3D Components\00.Direct3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>01.Design Pattern\00.Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D.h">
+      <Filter>00.Direct3D Components\00.Direct3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

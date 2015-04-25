@@ -1,10 +1,29 @@
+/*
+* 작성자 : 김태우
+* 작성일 : 2015-04-25
+* 최종 수정 : 김태우
+* 최종 수정일 : 2015-04-26
+*/
+
 #include <Windows.h>
 #include "Define.h"
+#include "Direct3D.h" // Temp
+
+#ifdef _DEBUG // Memory Leak
+	#include <crtdbg.h>
+	#define _CRTDBG_MAP_ALLOC
+	#define new new ( _NORMAL_BLOCK, __FILE__, __LINE__ )
+#endif
+
 
 LRESULT CALLBACK MsgProc( HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam );
 
 INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 {
+
+	#ifdef _DEBUG
+		_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+	#endif
 
 	WNDCLASSEX wc;
 	ZeroMemory( &wc, sizeof( wc ) );
@@ -21,6 +40,8 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 		GetSystemMetrics( SM_CXSCREEN ) / 2 - SCREEN_WIDTH / 2, GetSystemMetrics( SM_CYSCREEN ) / 2 - SCREEN_HEIGHT / 2,
 		SCREEN_WIDTH, SCREEN_HEIGHT, NULL, NULL, hInstance, NULL );
 
+	Direct3D( )->Initialize( hWnd, true );
+
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
 	UpdateWindow( hWnd );
 
@@ -29,14 +50,17 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 	while ( Message.message != WM_QUIT )
 	{
 		if ( PeekMessage( &Message, NULL, 0L, 0L, PM_REMOVE ) )
+		{
 			DispatchMessage( &Message );
+		}
 		else
 		{
-
+			Direct3D( )->Render( );
 		}
 	}
 
-
+	Direct3D( )->Release( );
+	Direct3D( )->DestroyInstance( );
 	return 0;
 }
 
