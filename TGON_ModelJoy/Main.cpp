@@ -7,7 +7,7 @@
 
 #include <Windows.h>
 #include "Define.h"
-#include "Direct3D.h" // Temp
+#include "ToolManager.h"
 
 #ifdef _DEBUG // Memory Leak
 	#include <crtdbg.h>
@@ -21,15 +21,15 @@ LRESULT CALLBACK MsgProc( HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 {
 
-	#ifdef _DEBUG
-		_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
-	#endif
+#ifdef _DEBUG
+	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+#endif
 
 	WNDCLASSEX wc;
 	ZeroMemory( &wc, sizeof( wc ) );
 	wc.cbSize = sizeof( WNDCLASSEX );
 	wc.style = CS_VREDRAW | CS_HREDRAW;
-	wc.lpfnWndProc = (WNDPROC)MsgProc;
+	wc.lpfnWndProc = ( WNDPROC )MsgProc;
 	wc.hInstance = hInstance;
 	wc.hIcon = LoadIcon( hInstance, NULL );
 	wc.hCursor = LoadCursor( NULL, IDC_ARROW );
@@ -37,10 +37,12 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 	RegisterClassEx( &wc );
 
 	HWND hWnd = CreateWindowEx( NULL, wc.lpszClassName, WINDOW_NAME, WS_OVERLAPPEDWINDOW,
-		GetSystemMetrics( SM_CXSCREEN ) / 2 - SCREEN_WIDTH / 2, GetSystemMetrics( SM_CYSCREEN ) / 2 - SCREEN_HEIGHT / 2,
-		SCREEN_WIDTH, SCREEN_HEIGHT, NULL, NULL, hInstance, NULL );
+								GetSystemMetrics( SM_CXSCREEN ) / 2 - SCREEN_WIDTH / 2, GetSystemMetrics( SM_CYSCREEN ) / 2 - SCREEN_HEIGHT / 2,
+								SCREEN_WIDTH, SCREEN_HEIGHT, NULL, NULL, hInstance, NULL );
 
-	Direct3D( )->Initialize( hWnd, true );
+	ToolMgr( )->TOOLINIT( hWnd, true );
+	ToolMgr( )->GetLoadMgr( )->LoadModel( "Resource//FBXModel//humanoid.fbx", "FBX" );
+	Direct3D( )->InitializeVB( );
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
 	UpdateWindow( hWnd );
@@ -55,12 +57,13 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 		}
 		else
 		{
-			Direct3D( )->Render( );
+			ToolMgr( )->Render( );
 		}
 	}
 
-	Direct3D( )->Release( );
-	Direct3D( )->DestroyInstance( );
+	ToolMgr( )->TOOLUNINIT( );
+	ToolMgr( )->DestroyInstance( );
+
 	return 0;
 }
 
