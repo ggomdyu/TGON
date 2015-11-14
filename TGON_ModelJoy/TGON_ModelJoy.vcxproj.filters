@@ -5,45 +5,145 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="00.Direct3D Components">
-      <UniqueIdentifier>{3700d35d-d184-4b90-a654-d9f0e918ec69}</UniqueIdentifier>
+    <Filter Include="01. Present Core">
+      <UniqueIdentifier>{77b5e47e-b4fd-4538-93d1-aa9de7fa8081}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Design Pattern">
-      <UniqueIdentifier>{9e3a59eb-3dde-49ce-9901-b00b9a9e8b80}</UniqueIdentifier>
+    <Filter Include="02. Core">
+      <UniqueIdentifier>{7313d0a4-b1fb-4b43-961a-6dc4d02d619d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Design Pattern\00.Singleton">
-      <UniqueIdentifier>{6219d256-dd91-44cc-b16e-22f79a3fdf36}</UniqueIdentifier>
+    <Filter Include="02. Core\private">
+      <UniqueIdentifier>{b35b79b1-4bf4-4ccf-8b58-fc734b7c762b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Main">
-      <UniqueIdentifier>{4f7d2fd9-975a-4cd9-97b7-d63faf556c87}</UniqueIdentifier>
+    <Filter Include="02. Core\public">
+      <UniqueIdentifier>{4e58ad12-f93e-425a-b140-11c42c318ef9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Direct3D Components\01.Direct Input">
-      <UniqueIdentifier>{5bd35519-58bf-4c10-b2c3-5f3652d72c93}</UniqueIdentifier>
+    <Filter Include="02. Core\public\Pattern">
+      <UniqueIdentifier>{675b9593-019b-4383-8fb3-65dc0725b88d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.Direct3D Components\00.Direct3D">
-      <UniqueIdentifier>{44c39603-1ece-46a0-a48d-a690ac95238f}</UniqueIdentifier>
+    <Filter Include="02. Core\public\Thirdparty">
+      <UniqueIdentifier>{5673f540-0a64-42cf-900d-4857e389412a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="-1.Test">
-      <UniqueIdentifier>{4bc1139c-aeb3-40ca-b731-4cc97c392e71}</UniqueIdentifier>
+    <Filter Include="02. Core\public\Utility">
+      <UniqueIdentifier>{94644c85-e1fd-45a4-8ff6-8816339c2a7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Present Core\public">
+      <UniqueIdentifier>{9e7aa995-1e31-49a7-ac2e-61cd93e09a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Present Core\private">
+      <UniqueIdentifier>{0ede85c9-83f5-4cb0-9bc1-3fafaf0a89a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\public\Model">
+      <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\public\Manager">
+      <UniqueIdentifier>{c6f02084-8355-4f8b-a991-bd484a7502d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\public\Windows">
+      <UniqueIdentifier>{f57a1ba2-00e9-412e-899b-601082de3404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\private\Utility">
+      <UniqueIdentifier>{7e4e241c-9dbb-4d59-91f7-cfaf8c093d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\private\Thirdparty">
+      <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\private\Windows">
+      <UniqueIdentifier>{10f010d8-68aa-481b-9ae7-1aca3afbc529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Core\private\Pattren">
+      <UniqueIdentifier>{9344e325-d97b-4baa-8e8a-bba03354012f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>02.Main</Filter>
+    <ClCompile Include="Sources\stdafx.cpp">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Direct3D.cpp">
-      <Filter>00.Direct3D Components\00.Direct3D</Filter>
+    <ClCompile Include="Sources\Direct3D.cpp">
+      <Filter>01. Present Core\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseModel.cpp">
+      <Filter>02. Core\public\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\FBXModel.cpp">
+      <Filter>02. Core\public\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ToolManager.cpp">
+      <Filter>02. Core\public\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsMain.cpp">
+      <Filter>02. Core\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsWindow.cpp">
+      <Filter>02. Core\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsDwStyle.cpp">
+      <Filter>02. Core\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GenericWindow.cpp">
+      <Filter>02. Core\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\GenericApplication.cpp">
+      <Filter>02. Core\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsApplication.cpp">
+      <Filter>02. Core\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\FBX.cpp">
+      <Filter>02. Core\private\Thirdparty</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Define.h">
+    <ClInclude Include="Sources\stdafx.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>01.Design Pattern\00.Singleton</Filter>
+    <ClInclude Include="Sources\Singleton.h">
+      <Filter>02. Core\public\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Direct3D.h">
-      <Filter>00.Direct3D Components\00.Direct3D</Filter>
+    <ClInclude Include="Sources\msgstream.h">
+      <Filter>02. Core\public\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3D.h">
+      <Filter>01. Present Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseModel.h">
+      <Filter>02. Core\public\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\FBXModel.h">
+      <Filter>02. Core\public\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ToolManager.h">
+      <Filter>02. Core\public\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsMain.h">
+      <Filter>02. Core\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsWindow.h">
+      <Filter>02. Core\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericWindow.h">
+      <Filter>02. Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowStyle.h">
+      <Filter>02. Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowMessage.h">
+      <Filter>02. Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Uncopyable.h">
+      <Filter>02. Core\public\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsDwStyle.h">
+      <Filter>02. Core\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsApplication.h">
+      <Filter>02. Core\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericApplication.h">
+      <Filter>02. Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\FBX.h">
+      <Filter>02. Core\public\Thirdparty</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

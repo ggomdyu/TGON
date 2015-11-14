@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -14,18 +14,19 @@
     <ProjectGuid>{CB29A8D6-B2E8-40C9-BDAE-0C1B6058AFDF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TGON_ModelJoy</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -41,24 +42,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(ProjectDir)\include\FBX;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\lib\x86;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\bin\$(PlatformTarget)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)\bin\$(PlatformTarget)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;PLATFORM_WINDOWS_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\OneDrive\Programming\Projects\TGON_ModelJoy\TGON_ModelJoy\include;$(SolutionDir)\Sources</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,13 +84,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Direct3D.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sources\BaseModel.cpp" />
+    <ClCompile Include="Sources\FBX.cpp" />
+    <ClCompile Include="Sources\FBXModel.cpp" />
+    <ClCompile Include="Sources\Direct3D.cpp" />
+    <ClCompile Include="Sources\GenericApplication.cpp" />
+    <ClCompile Include="Sources\GenericWindow.cpp" />
+    <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\stdafx.cpp" />
+    <ClCompile Include="Sources\ToolManager.cpp" />
+    <ClCompile Include="Sources\WindowsApplication.cpp" />
+    <ClCompile Include="Sources\WindowsDwStyle.cpp" />
+    <ClCompile Include="Sources\WindowsMain.cpp" />
+    <ClCompile Include="Sources\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="Direct3D.h" />
-    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Sources\BaseModel.h" />
+    <ClInclude Include="Sources\Direct3D.h" />
+    <ClInclude Include="Sources\FBX.h" />
+    <ClInclude Include="Sources\FBXModel.h" />
+    <ClInclude Include="Sources\GenericApplication.h" />
+    <ClInclude Include="Sources\GenericWindow.h" />
+    <ClInclude Include="Sources\msgstream.h" />
+    <ClInclude Include="Sources\Singleton.h" />
+    <ClInclude Include="Sources\stdafx.h" />
+    <ClInclude Include="Sources\ToolManager.h" />
+    <ClInclude Include="Sources\Uncopyable.h" />
+    <ClInclude Include="Sources\WindowMessage.h" />
+    <ClInclude Include="Sources\WindowsApplication.h" />
+    <ClInclude Include="Sources\WindowsDwStyle.h" />
+    <ClInclude Include="Sources\WindowsMain.h" />
+    <ClInclude Include="Sources\WindowStyle.h" />
+    <ClInclude Include="Sources\WindowsWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
