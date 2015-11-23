@@ -16,12 +16,11 @@ NSBEGIN( tgon );
 class GenericApplication : private Uncopyable
 {
 public:
-	static void AddWindow( const std::string& key,
-						   _In_ const std::shared_ptr<PlatformWindow>& window );
-	static const std::shared_ptr<PlatformWindow> GetWindow( const std::string& key );
+	static void AddWindow( const std::string& key, _In_ const std::shared_ptr<Window>& window );
+	static const std::shared_ptr<Window> GetWindow( _In_ const std::string& key );
 
 private:
-	static std::map<std::string, std::shared_ptr<PlatformWindow>> m_windowRepository;
+	static std::map<std::string, std::shared_ptr<Window>> m_wndRepository;
 };
 NSEND( );
 

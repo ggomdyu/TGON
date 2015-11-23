@@ -7,14 +7,14 @@
 */
 
 
-class BaseModel
+class IModelBase
 {
 public:
-	BaseModel( );
-	~BaseModel( );
+	IModelBase( );
+	~IModelBase( );
 
 	virtual void Render( ) = 0;
 
 public:
-	virtual bool LoadMesh( const char* const szFilePath ) = 0;
+	virtual void LoadMesh( const char* const szFilePath ) = 0;
 };

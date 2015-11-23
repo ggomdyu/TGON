@@ -2,6 +2,10 @@
 #include "stdafx.h"
 #include "WindowsMain.h"
 
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <Windows.h>
+#endif
+
 #ifdef _DEBUG
 	#include <crtdbg.h>
 	#define _CRTDBG_MAP_ALLOC

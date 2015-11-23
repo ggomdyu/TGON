@@ -1,9 +1,15 @@
+/*
+* 작성자 : 차준호
+* 작성일 : 2015-11-12
+* 최종 수정 : 
+* 최종 수정일 : 
+*/
 #pragma once
 #include "GenericApplication.h"
 
 NSBEGIN( tgon );
 class WindowsApplication;
-typedef WindowsApplication PlatformApplication;
+typedef WindowsApplication Application;
 
 class WindowsApplication final : public GenericApplication
 {

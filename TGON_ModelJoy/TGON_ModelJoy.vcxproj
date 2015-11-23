@@ -58,11 +58,12 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;PLATFORM_WINDOWS_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\OneDrive\Programming\Projects\TGON_ModelJoy\TGON_ModelJoy\include;$(SolutionDir)\Sources</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libfbxsdk.lib;d3dx9d.lib;d3d9.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,10 +85,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\BaseModel.cpp" />
+    <ClCompile Include="Sources\ModelBase.cpp" />
     <ClCompile Include="Sources\FBX.cpp" />
     <ClCompile Include="Sources\FBXModel.cpp" />
-    <ClCompile Include="Sources\Direct3D.cpp" />
+    <ClCompile Include="Sources\Direct3D9.cpp" />
     <ClCompile Include="Sources\GenericApplication.cpp" />
     <ClCompile Include="Sources\GenericWindow.cpp" />
     <ClCompile Include="Sources\main.cpp" />
@@ -99,8 +100,8 @@
     <ClCompile Include="Sources\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\BaseModel.h" />
-    <ClInclude Include="Sources\Direct3D.h" />
+    <ClInclude Include="Sources\ModelBase.h" />
+    <ClInclude Include="Sources\Direct3D9.h" />
     <ClInclude Include="Sources\FBX.h" />
     <ClInclude Include="Sources\FBXModel.h" />
     <ClInclude Include="Sources\GenericApplication.h" />

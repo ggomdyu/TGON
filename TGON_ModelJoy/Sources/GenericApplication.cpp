@@ -1,23 +1,27 @@
 #include "stdafx.h"
 #include "GenericApplication.h"
 
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <memory>
+#endif
+
 NSBEGIN( tgon );
-decltype( GenericApplication::m_windowRepository ) GenericApplication::m_windowRepository;
+decltype( GenericApplication::m_wndRepository ) GenericApplication::m_wndRepository;
 
 void GenericApplication::AddWindow( const std::string& key,
-									_In_ const std::shared_ptr<PlatformWindow>& window )
+									_In_ const std::shared_ptr<Window>& window )
 {
-	// It's Intended code; not mistake
-	assert( m_windowRepository.find( key ) == m_windowRepository.end( ));
+	// not mistake
+	assert( m_wndRepository.find( key ) == m_wndRepository.end( ));
 
-	m_windowRepository.insert( std::make_pair( key, window ));
+	m_wndRepository.insert( std::make_pair( key, window ));
 }
 
-const std::shared_ptr<PlatformWindow> GenericApplication::GetWindow( const std::string& key )
+const std::shared_ptr<Window> GenericApplication::GetWindow( const std::string& key )
 {
-	decltype( m_windowRepository )::iterator iter = m_windowRepository.find( key );
+	decltype( m_wndRepository )::iterator iter = m_wndRepository.find( key );
 
-	if ( iter != m_windowRepository.end( ))
+	if ( iter != m_wndRepository.end( ))
 		return iter->second;
 	return nullptr;
 }

@@ -29,8 +29,8 @@ namespace msg
 		void operator<<( alert_traits )
 		{
 #if defined( WIN32 ) | defined( WIN64 )
-			MessageBoxA( GetFocus( ), ss.str().c_str( ), "Alert", MB_OK );
-			ss.str( "" ); // clear
+			MessageBoxA( GetFocus( ), ss.str( ).c_str( ), "Alert", MB_OK );
+			ss.str( "" ); // clear all buffer
 #elif
 #error "msgstream support only Win32"
 #endif
@@ -39,8 +39,8 @@ namespace msg
 		void operator<<( warn_traits )
 		{
 #if defined( WIN32 ) | defined( WIN64 )
-			MessageBoxA( GetFocus(), ss.str().c_str( ), "Warning", MB_OK | MB_ICONEXCLAMATION );
-			ss.str( "" ); // clear
+			MessageBoxA( GetFocus(), ss.str( ).c_str( ), "Warning", MB_OK | MB_ICONEXCLAMATION );
+			ss.str( "" ); // clear all buffer
 #elif
 #error "msgstream support only Win32"
 #endif

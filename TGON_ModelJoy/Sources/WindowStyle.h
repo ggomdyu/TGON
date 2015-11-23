@@ -15,11 +15,15 @@ public:
 	int nHeight = 500;
 
 	wchar_t* wsCaption = L"Default caption";
+	
+	/* Shape */
+	bool bThickFrame = false;
+	bool bPopUp = false;
 
+	/* Show */
 	bool bMaximized = false;
 	bool bMinimized = false;
 	bool bVisible = true;
 	bool bShowMiddle = true;
-	bool bFullScreen = false;
 	bool bTopMost = false;
 };

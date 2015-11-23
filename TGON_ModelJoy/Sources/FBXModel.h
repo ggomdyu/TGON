@@ -11,11 +11,17 @@
 	#include <atlbase.h>
 #endif
 
-#include "BaseModel.h"
-#include "Singleton.h"
+#include "ModelBase.h"
 
-class CFBXModel : public BaseModel
+class CFBXModel : public IModelBase
 {
+private:
+	struct ModelVertex
+	{
+		float x, y, z;
+		DWORD dwColor;
+	};
+
 public:
 	CFBXModel( _In_ const char* const szFilePath = nullptr );
 	~CFBXModel( );
@@ -23,17 +29,18 @@ public:
 	virtual void Render( ) override;
 
 public:
-	virtual bool LoadMesh( _In_ const char* const szFilePath ) override;
+	virtual void LoadMesh( _In_ const char* const szFilePath ) override;
 
 private:
-	void ImportFBX( _In_ const char* const szFilePath );
+	void SetUpVertices( );
 
-private:
+public:
 	FbxScene* m_pFbxScene;
 	FbxMesh* m_pFbxMesh;
 
-	D3DXMATRIX m_matLocal;
 	CComPtr<IDirect3DVertexBuffer9> m_pVB;
-	std::vector<CUSTOMVERTEX> m_vertices;
+	std::vector<ModelVertex> m_vertices;
+
+	D3DXMATRIX m_matLocal;
 };
 

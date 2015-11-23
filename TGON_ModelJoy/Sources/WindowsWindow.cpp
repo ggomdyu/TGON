@@ -13,7 +13,7 @@ WindowsWindow::WindowsWindow( const WindowStyle& ws ) :
 	// 1. Register window info
 	if ( !RegisterWindow( ws ))
 	{
-		msg::out << "Failed to call RegisterWindow function." << msg::warn;
+		msg::out << "Failed to call RegisterWindow function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 }
@@ -24,9 +24,9 @@ WindowsWindow::~WindowsWindow( )
 
 void WindowsWindow::Make( )
 {
-	CDwExStyle dwExStyle;
-	const WindowStyle& ws = this->GetWindowStyle( );
+	const WindowStyle& ws( this->GetWindowStyle( ));
 
+	CDwExStyle dwExStyle;
 	CDwStyle dwStyle;
 	ConvertWsToDw( ws, &dwExStyle, &dwStyle );
 
@@ -81,7 +81,7 @@ void WindowsWindow::Show( )
 
 void WindowsWindow::SetPosition( const int x, const int y )
 {
-	SetWindowPos( m_hWnd, NULL, x, y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_hWnd, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
 void WindowsWindow::Move( const int x, const int y )
@@ -89,7 +89,7 @@ void WindowsWindow::Move( const int x, const int y )
 	RECT rt;
 	GetWindowRect( m_hWnd, &rt );
 
-	SetWindowPos( m_hWnd, NULL, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_hWnd, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
 }
 
 bool WindowsWindow::RegisterWindow( const WindowStyle& ws, const HICON hIcon, const HCURSOR hCursor )
@@ -99,7 +99,7 @@ bool WindowsWindow::RegisterWindow( const WindowStyle& ws, const HICON hIcon, co
 	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
 	wcex.hCursor = hCursor;
 	wcex.hIcon = hIcon;
-	wcex.hInstance = GetModuleHandle( NULL );
+	wcex.hInstance = GetModuleHandle( nullptr );
 	wcex.lpfnWndProc = MsgBaseProc;
 	wcex.lpszClassName = ws.wsCaption;
 	wcex.style = CS_VREDRAW | CS_HREDRAW;
@@ -126,9 +126,19 @@ LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPA
 
 LRESULT CALLBACK WindowsWindow::MsgDelivedProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam )
 {
+	static bool bClicked = false;
+
+	/* WARN: DON'T ADD CASE into the follow code!!!! */
 	switch( uMsg )
 	{
 	case WM_CREATE:
+#ifdef TGON_USE_PRECOMPILED_HEADER
+		{
+			MARGINS margins = { -1, -1, -1, -1 };
+			DwmExtendFrameIntoClientArea( hWnd, &margins );
+		}
+#endif
+
 	case WM_MOVE:
 	case WM_SIZE:
 		SetCurrentMessage( uMsg );

@@ -35,9 +35,6 @@
     <Filter Include="02. Core\public\Model">
       <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Core\public\Manager">
-      <UniqueIdentifier>{c6f02084-8355-4f8b-a991-bd484a7502d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Core\public\Windows">
       <UniqueIdentifier>{f57a1ba2-00e9-412e-899b-601082de3404}</UniqueIdentifier>
     </Filter>
@@ -53,16 +50,13 @@
     <Filter Include="02. Core\private\Pattren">
       <UniqueIdentifier>{9344e325-d97b-4baa-8e8a-bba03354012f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Core\public\Manager">
+      <UniqueIdentifier>{c6f02084-8355-4f8b-a991-bd484a7502d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\stdafx.cpp">
       <Filter>헤더 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Direct3D.cpp">
-      <Filter>01. Present Core\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\BaseModel.cpp">
-      <Filter>02. Core\public\Model</Filter>
     </ClCompile>
     <ClCompile Include="Sources\FBXModel.cpp">
       <Filter>02. Core\public\Model</Filter>
@@ -92,6 +86,12 @@
     <ClCompile Include="Sources\FBX.cpp">
       <Filter>02. Core\private\Thirdparty</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Direct3D9.cpp">
+      <Filter>01. Present Core\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ModelBase.cpp">
+      <Filter>02. Core\public\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\stdafx.h">
@@ -102,12 +102,6 @@
     </ClInclude>
     <ClInclude Include="Sources\msgstream.h">
       <Filter>02. Core\public\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Direct3D.h">
-      <Filter>01. Present Core\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\BaseModel.h">
-      <Filter>02. Core\public\Model</Filter>
     </ClInclude>
     <ClInclude Include="Sources\FBXModel.h">
       <Filter>02. Core\public\Model</Filter>
@@ -144,6 +138,12 @@
     </ClInclude>
     <ClInclude Include="Sources\FBX.h">
       <Filter>02. Core\public\Thirdparty</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3D9.h">
+      <Filter>01. Present Core\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ModelBase.h">
+      <Filter>02. Core\public\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

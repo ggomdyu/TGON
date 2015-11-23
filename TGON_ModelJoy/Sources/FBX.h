@@ -15,13 +15,14 @@
 class FBX final
 {
 private:
-	struct FBXProxy : CSingleton<FBXProxy>
+	struct FBXProxy final : CSingleton<FBXProxy>
 	{
 	public:
 		FBXProxy( );
 		~FBXProxy( );
 
-		__forceinline FbxManager* GetFbxManager( ) const { return m_pFbxManager; }
+		__forceinline static void ImportFBX( _In_ const char* const szFilePath, _Out_ FbxScene* const pScene );
+		__forceinline FbxManager* GetManager( ) const { return m_pFbxManager; }
 
 	private:
 		FbxManager* m_pFbxManager;
@@ -29,13 +30,10 @@ private:
 	};
 
 public:
-	static void ImfortFBX( _In_ const char* const szFilePath, _In_ FbxScene* const pScene );
-
-	static void LoadAttributes( _In_ const char* const szFilePath, _In_ const FbxScene* const pScene,
+	static void LoadAttributes( _In_ const char* const szFilePath, _Out_ FbxScene* const pScene,
 										_Out_ FbxMesh*& pMesh );
 
-public:
-	__forceinline static FbxManager* GetManager( ) { return FBXProxy::get( )->GetFbxManager( ); }
+	__forceinline static FbxManager* GetManager( ) { return FBXProxy::get( )->GetManager( ); }
 
 private:
 	FBX( ) = delete;

@@ -7,12 +7,12 @@ FBX::FBXProxy::FBXProxy( ) :
 {
 	if ( !m_pFbxManager )
 	{
-		msg::out << "Failed to call FbxIOSettings::Create function." << msg::warn;
+		msg::out << "Failed to call FbxIOSettings::Create function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 	if ( !m_pFbxIOSettings )
 	{
-		msg::out << "Failed to call FbxIOSettings::Create function." << msg::warn;
+		msg::out << "Failed to call FbxIOSettings::Create function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 
@@ -23,18 +23,35 @@ FBX::FBXProxy::~FBXProxy( )
 {
 }
 
-void FBX::LoadAttributes( const char* const szFilePath, const FbxScene* const pCurScene, FbxMesh*& pNewMesh )
+void FBX::FBXProxy::ImportFBX( const char* const szFilePath, FbxScene* const pScene )
 {
-	// Get root node of FBX
-	FbxNode* const pRootNode = pCurScene->GetRootNode( );
-	FbxNode* pChildNode = nullptr;
+	FbxImporter* const pImporter( FbxImporter::Create( FBXProxy::get( )->GetManager( ), "" ));
+	assert( pImporter != nullptr );
 
+	if ( !pImporter->Initialize( szFilePath )) {
+		msg::out << "Failed to call FBXImporter::Initialize function. ( " << szFilePath << " )" << msg::warn;
+		abort( );
+	}
+
+	if ( !pImporter->Import( pScene )) {
+		msg::out << "Failed to call FBXImporter::Import function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
+		abort( );
+	}
+}
+
+void FBX::LoadAttributes( const char* const szFilePath, FbxScene* const pScene, FbxMesh*& pMesh )
+{
+	FBXProxy::get( )->ImportFBX( szFilePath, pScene );
+
+
+	// Get root node of FBX
+	FbxNode* const pRootNode = pScene->GetRootNode( );
+	FbxNode* pChildNode = nullptr;
 	assert( pRootNode != nullptr );
 
 	// Search each other child's hierarchy.
 	for ( int nChildCount =0; nChildCount <pRootNode->GetChildCount( ); ++nChildCount )
 	{
-
 		pChildNode = pRootNode->GetChild( nChildCount );
 		assert( pChildNode != nullptr );
 
@@ -43,7 +60,7 @@ void FBX::LoadAttributes( const char* const szFilePath, const FbxScene* const pC
 			switch ( pChildNode->GetNodeAttribute( )->GetAttributeType( ))
 			{
 			case FbxNodeAttribute::eMesh:
-				pNewMesh = static_cast<FbxMesh*>( pChildNode->GetNodeAttribute( ));
+				pMesh = static_cast<FbxMesh*>( pChildNode->GetNodeAttribute( ));
 				break;
 
 			//case FbxNodeAttribute::eLight:

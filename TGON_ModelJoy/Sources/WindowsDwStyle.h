@@ -1,4 +1,8 @@
 #pragma once
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <iostream>
+#endif
+
 typedef unsigned long DWORD;
 struct WindowStyle;
 

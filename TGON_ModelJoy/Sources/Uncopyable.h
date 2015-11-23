@@ -24,7 +24,7 @@ private:
 
 /* Type 2
 	
-	bad way ( because of code bloat & i hate preprocessor )  
+	bad way ( code bloat issue & I hate preprocessor )  
 
 */
 #define Implement_Uncopyable( T )			\

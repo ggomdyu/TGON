@@ -2,6 +2,7 @@
 #include "WindowsDwStyle.h"
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <Windows.h>
 	#include "WindowStyle.h"
 #endif
 
@@ -14,11 +15,10 @@ void ConvertWsToDw( _In_ const WindowStyle& ws, _Out_ CDwExStyle* const pDwExSty
 	}
 
 	/* Normal style */
-	*pDwStyle = WS_OVERLAPPEDWINDOW;
-
 	if ( ws.bMaximized )
 	{
 		*pDwStyle |= WS_MAXIMIZE;
+		assert( !ws.bMinimized );
 	}
 	else if ( ws.bMinimized )
 	{
@@ -27,5 +27,13 @@ void ConvertWsToDw( _In_ const WindowStyle& ws, _Out_ CDwExStyle* const pDwExSty
 	if ( ws.bVisible )
 	{
 		*pDwStyle |= WS_VISIBLE;
+	}
+	if ( ws.bThickFrame )
+	{
+		*pDwStyle |= WS_THICKFRAME;
+	}
+	if ( ws.bPopUp )
+	{
+		*pDwStyle |= WS_POPUP;
 	}
 }

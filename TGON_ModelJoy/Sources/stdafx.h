@@ -12,6 +12,7 @@
 #include <sstream>
 #include <map>
 #include <string>
+#include <memory>
 
 // Platform dependent SDK
 #if defined( WIN32 )
@@ -19,23 +20,27 @@
 	#include <d3d9.h>
 	#include <d3dx9.h>
 	#include <atlbase.h>
+	#include <dwmapi.h>
 #endif
 
 // SDK
 #include <fbxsdk.h>
 
 // etc¡¦
-#include "msgstream.h"
-#include "Singleton.h"
-#include "WindowsDwStyle.h"
-#include "WindowStyle.h"
 #include "Uncopyable.h"
+#include "WindowStyle.h"
+#include "WindowsDwStyle.h"
+#include "Singleton.h"
+#include "msgstream.h"
+
+#include "Direct3D9.h"
+
 
 #define NSBEGIN( entry ) namespace entry {
 #define NSEND( ) }
 
-struct CUSTOMVERTEX
-{
-	FLOAT x, y, z, rhw;
-	DWORD dwColor;
-};
+#if defined( _WIN32 ) | defined( _MSC_VER ) 
+	#define TGON_MEMSORT_16 __declspec( align( 16 ))
+#else
+#define TGON_MEMSORT_16
+#endif

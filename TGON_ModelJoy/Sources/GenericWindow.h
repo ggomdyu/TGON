@@ -7,8 +7,9 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include "Uncopyable.h"
+	#include <iostream>
 	#include "WindowStyle.h"
+	#include "Uncopyable.h"
 #endif
 
 NSBEGIN( tgon );
