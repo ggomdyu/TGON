@@ -61,9 +61,6 @@
     <ClCompile Include="Sources\FBXModel.cpp">
       <Filter>02. Core\public\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ToolManager.cpp">
-      <Filter>02. Core\public\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\WindowsMain.cpp">
       <Filter>02. Core\private\Windows</Filter>
     </ClCompile>
@@ -105,9 +102,6 @@
     </ClInclude>
     <ClInclude Include="Sources\FBXModel.h">
       <Filter>02. Core\public\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ToolManager.h">
-      <Filter>02. Core\public\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowsMain.h">
       <Filter>02. Core\public\Windows</Filter>

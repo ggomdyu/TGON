@@ -93,7 +93,6 @@
     <ClCompile Include="Sources\GenericWindow.cpp" />
     <ClCompile Include="Sources\main.cpp" />
     <ClCompile Include="Sources\stdafx.cpp" />
-    <ClCompile Include="Sources\ToolManager.cpp" />
     <ClCompile Include="Sources\WindowsApplication.cpp" />
     <ClCompile Include="Sources\WindowsDwStyle.cpp" />
     <ClCompile Include="Sources\WindowsMain.cpp" />
@@ -109,7 +108,6 @@
     <ClInclude Include="Sources\msgstream.h" />
     <ClInclude Include="Sources\Singleton.h" />
     <ClInclude Include="Sources\stdafx.h" />
-    <ClInclude Include="Sources\ToolManager.h" />
     <ClInclude Include="Sources\Uncopyable.h" />
     <ClInclude Include="Sources\WindowMessage.h" />
     <ClInclude Include="Sources\WindowsApplication.h" />

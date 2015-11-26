@@ -22,19 +22,26 @@ int KapMain( int argc, char* argv[] )
 	pWindow->Make( );
 
 	CDirect3D9::get()->Initialize(pWindow->GetWindowHandle());
+	Application::AddWindow( "MainWnd", pWindow );
 
 	// test
 	std::unique_ptr<CFBXModel> pModel( new CFBXModel( "Resources\\FBXModel\\humanoid.FBX" ));
 
 
-	Application::AddWindow( "MainWnd", pWindow );
-	while ( pWindow->GetCurrentMessage( ) != WindowMessage::Destroy )
+	while ( pWindow->GetWindowEvent( ) != WindowEvent::Destroy )
 	{
 		if ( !Application::ResponseMessage( ))
 		{
 			CDirect3D9::get( )->BeginDraw( );
 			pModel->Render();
 			CDirect3D9::get( )->EndDraw( );
+		}
+		else
+		{
+			if ( pWindow->GetWindowEvent() == WM_RBUTTONDOWN )
+			{
+				break;
+			}
 		}
 	}
 	return 0;

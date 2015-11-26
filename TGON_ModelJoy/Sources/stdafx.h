@@ -7,12 +7,13 @@
 
 #pragma once
 // Standard
-#include <vector>
 #include <cassert>
-#include <sstream>
-#include <map>
-#include <string>
 #include <memory>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <unordered_set>
 
 // Platform dependent SDK
 #if defined( WIN32 )
