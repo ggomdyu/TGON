@@ -21,6 +21,7 @@ int KapMain( int argc, char* argv[] )
 	const std::shared_ptr<Window> pWindow( new Window( ws ));
 	pWindow->Make( );
 
+	//CDirect3D9::CDirect3D9( );
 	CDirect3D9::get()->Initialize(pWindow->GetWindowHandle());
 	Application::AddWindow( "MainWnd", pWindow );
 

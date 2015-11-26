@@ -17,4 +17,5 @@ public:
 
 public:
 	virtual void LoadMesh( const char* const szFilePath ) = 0;
+	virtual void LoadAnim( ) = 0;
 };

@@ -30,6 +30,7 @@ public:
 
 public:
 	virtual void LoadMesh( _In_ const char* const szFilePath ) override;
+	virtual void LoadAnim( ) override; // 임시 FBX는 FBX Scene을 사용하지만 다른 모델들은 모르니 일단 보류
 
 private:
 	void SetUpVertices( );
