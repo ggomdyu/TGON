@@ -126,9 +126,9 @@ LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPA
 
 LRESULT CALLBACK WindowsWindow::MsgDelivedProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam )
 {
-	static bool bClicked = false;
+	SetWindowEvent( uMsg );
 
-	/* WARN: DON'T ADD CASE into the follow code!!!! */
+	/* WARN: DON'T ADD CASE into the follow switch-syntax!!!! */
 	switch( uMsg )
 	{
 	case WM_CREATE:
@@ -138,15 +138,10 @@ LRESULT CALLBACK WindowsWindow::MsgDelivedProc( HWND hWnd, uint32_t uMsg, WPARAM
 			DwmExtendFrameIntoClientArea( hWnd, &margins );
 		}
 #endif
-
-	case WM_MOVE:
-	case WM_SIZE:
-		SetCurrentMessage( uMsg );
 		break;
 
-	case WM_DESTROY:
-		SetCurrentMessage( uMsg );
-		PostQuitMessage( 0 );
+	case WM_CLOSE:
+		msg::out << "마우스 오른쪽버튼 눌러서 꺼주셈" << msg::warn;
 		break;
 
 	default:
