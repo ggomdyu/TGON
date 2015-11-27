@@ -3,6 +3,7 @@
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <Windows.h>
+	#include <cassert>
 	#include "WindowStyle.h"
 #endif
 

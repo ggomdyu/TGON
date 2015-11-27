@@ -7,12 +7,14 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <iostream>
-	#include "WindowStyle.h"
 	#include "Uncopyable.h"
+
+	#include <iostream>
+	#include <unordered_set>
+	#include "WindowStyle.h"
+	#include "WindowMessage.h"
 #endif
 
-#include "WindowMessage.h"
 
 NSBEGIN( tgon );
 class GenericWindow : private Uncopyable

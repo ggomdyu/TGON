@@ -7,7 +7,7 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <unordered_set>
+	#include <windows.h>
 #endif
 
 #ifdef PLATFORM_WINDOWS_OS

@@ -3,6 +3,7 @@
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <memory>
+	#include <cassert>
 #endif
 
 NSBEGIN( tgon );
