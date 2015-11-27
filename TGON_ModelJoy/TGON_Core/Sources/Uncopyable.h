@@ -11,6 +11,7 @@
 	Baisically follow 'Implement in term of'
 
 */
+
 class Uncopyable
 {
 protected:

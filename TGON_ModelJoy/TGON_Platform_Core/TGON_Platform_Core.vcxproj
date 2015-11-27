@@ -138,7 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Sources\GenericApplication.h" />
     <ClInclude Include="Sources\GenericWindow.h" />
-    <ClInclude Include="Sources\WindowMessage.h" />
+    <ClInclude Include="Sources\WindowEvent.h" />
     <ClInclude Include="Sources\WindowsApplication.h" />
     <ClInclude Include="Sources\WindowsDwStyle.h" />
     <ClInclude Include="Sources\WindowsMain.h" />

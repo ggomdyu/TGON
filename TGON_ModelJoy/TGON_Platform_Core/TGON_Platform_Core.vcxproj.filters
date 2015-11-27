@@ -21,6 +21,12 @@
     <Filter Include="Sources\private\Windows">
       <UniqueIdentifier>{83180a09-a0bb-4e07-b406-c2f9aaf6f37e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\private\Android">
+      <UniqueIdentifier>{afc1c2e9-4834-479a-9b87-1c8b5f0696a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Android">
+      <UniqueIdentifier>{3b4aac6c-68fb-4241-828e-f62b432b1498}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\WindowsApplication.h">
@@ -38,9 +44,6 @@
     <ClInclude Include="Sources\WindowStyle.h">
       <Filter>Sources\public</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\WindowMessage.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\GenericApplication.h">
       <Filter>Sources\public</Filter>
     </ClInclude>
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Sources\targetver.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowEvent.h">
+      <Filter>Sources\public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

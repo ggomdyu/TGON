@@ -1,92 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{755ec319-5fce-4a6f-be9d-6daff30e79bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Present Core">
-      <UniqueIdentifier>{77b5e47e-b4fd-4538-93d1-aa9de7fa8081}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core">
-      <UniqueIdentifier>{7313d0a4-b1fb-4b43-961a-6dc4d02d619d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\private">
-      <UniqueIdentifier>{b35b79b1-4bf4-4ccf-8b58-fc734b7c762b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public">
-      <UniqueIdentifier>{4e58ad12-f93e-425a-b140-11c42c318ef9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Pattern">
-      <UniqueIdentifier>{675b9593-019b-4383-8fb3-65dc0725b88d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Thirdparty">
-      <UniqueIdentifier>{5673f540-0a64-42cf-900d-4857e389412a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Utility">
-      <UniqueIdentifier>{94644c85-e1fd-45a4-8ff6-8816339c2a7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Present Core\public">
+    <Filter Include="Sources\public">
       <UniqueIdentifier>{9e7aa995-1e31-49a7-ac2e-61cd93e09a6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Present Core\private">
-      <UniqueIdentifier>{0ede85c9-83f5-4cb0-9bc1-3fafaf0a89a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Model">
-      <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\private\Utility">
-      <UniqueIdentifier>{7e4e241c-9dbb-4d59-91f7-cfaf8c093d19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\private\Thirdparty">
-      <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\private\Pattren">
-      <UniqueIdentifier>{9344e325-d97b-4baa-8e8a-bba03354012f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Manager">
-      <UniqueIdentifier>{c6f02084-8355-4f8b-a991-bd484a7502d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Core\public\Animation">
+    <Filter Include="Sources\public\Animation">
       <UniqueIdentifier>{d9e6bbfd-50f6-486e-8bab-3479c9cea9f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\Model">
+      <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Thirdparty">
+      <UniqueIdentifier>{5673f540-0a64-42cf-900d-4857e389412a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private">
+      <UniqueIdentifier>{0ede85c9-83f5-4cb0-9bc1-3fafaf0a89a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Thirdparty">
+      <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\stdafx.cpp">
-      <Filter>헤더 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\FBXModel.cpp">
-      <Filter>02. Core\public\Model</Filter>
+      <Filter>Sources\public\Model</Filter>
     </ClCompile>
     <ClCompile Include="Sources\FBX.cpp">
-      <Filter>02. Core\private\Thirdparty</Filter>
+      <Filter>Sources\private\Thirdparty</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Direct3D9.cpp">
-      <Filter>01. Present Core\private</Filter>
+      <Filter>Sources\private</Filter>
     </ClCompile>
     <ClCompile Include="Sources\ModelBase.cpp">
-      <Filter>02. Core\public\Model</Filter>
+      <Filter>Sources\public\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\stdafx.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\main.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\msgstream.h">
-      <Filter>02. Core\public\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\FBXModel.h">
-      <Filter>02. Core\public\Model</Filter>
+      <Filter>Sources\public\Model</Filter>
     </ClInclude>
     <ClInclude Include="Sources\FBX.h">
-      <Filter>02. Core\public\Thirdparty</Filter>
+      <Filter>Sources\public\Thirdparty</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Direct3D9.h">
-      <Filter>01. Present Core\public</Filter>
+      <Filter>Sources\public</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ModelBase.h">
-      <Filter>02. Core\public\Model</Filter>
+      <Filter>Sources\public\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\stdafx.h">
+      <Filter>Sources\public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

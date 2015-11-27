@@ -28,7 +28,7 @@ namespace msg
 
 		void operator<<( alert_traits )
 		{
-#if defined( WIN32 ) | defined( WIN64 )
+#ifdef PLATFORM_WINDOWS_OS
 			MessageBoxA( GetFocus( ), ss.str( ).c_str( ), "Alert", MB_OK );
 			ss.str( "" ); // clear all buffer
 #elif
@@ -38,7 +38,7 @@ namespace msg
 
 		void operator<<( warn_traits )
 		{
-#if defined( WIN32 ) | defined( WIN64 )
+#ifdef PLATFORM_WINDOWS_OS
 			MessageBoxA( GetFocus(), ss.str( ).c_str( ), "Warning", MB_OK | MB_ICONEXCLAMATION );
 			ss.str( "" ); // clear all buffer
 #elif

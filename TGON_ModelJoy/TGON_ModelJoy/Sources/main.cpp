@@ -4,7 +4,6 @@
 #include "GenericApplication.h"
 #include "FBXModel.h"
 #include "Direct3D9.h"
-#include "WindowMessage.h"
 
 using namespace tgon;
 

@@ -28,6 +28,8 @@
 
 // etc¡¦
 #include "Uncopyable.h"
+
+#include "WindowEvent.h"
 #include "WindowStyle.h"
 #include "WindowsDwStyle.h"
 #include "Singleton.h"

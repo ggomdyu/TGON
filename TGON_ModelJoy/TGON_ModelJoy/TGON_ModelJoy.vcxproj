@@ -104,7 +104,6 @@
     <ClInclude Include="Sources\Direct3D9.h" />
     <ClInclude Include="Sources\FBX.h" />
     <ClInclude Include="Sources\FBXModel.h" />
-    <ClInclude Include="Sources\msgstream.h" />
     <ClInclude Include="Sources\stdafx.h" />
   </ItemGroup>
   <ItemGroup>

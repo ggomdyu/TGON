@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{103D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Solution Items", "3. Solution Items", "{86405515-4365-4C09-B31B-213D514112B2}"
 	ProjectSection(SolutionItems) = preProject
+		TGON_ModelJoy\Sources\main.cpp = TGON_ModelJoy\Sources\main.cpp
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject

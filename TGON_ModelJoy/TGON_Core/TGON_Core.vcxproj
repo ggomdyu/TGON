@@ -136,13 +136,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\msgstream.h" />
     <ClInclude Include="Sources\Singleton.h" />
     <ClInclude Include="Sources\Uncopyable.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Sources\Uncopyable.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
