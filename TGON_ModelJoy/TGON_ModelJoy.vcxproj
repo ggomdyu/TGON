@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimBase.cpp" />
+    <ClCompile Include="FBXAnimation.cpp" />
     <ClCompile Include="Sources\ModelBase.cpp" />
     <ClCompile Include="Sources\FBX.cpp" />
     <ClCompile Include="Sources\FBXModel.cpp" />
@@ -99,6 +101,8 @@
     <ClCompile Include="Sources\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimBase.h" />
+    <ClInclude Include="FBXAnimation.h" />
     <ClInclude Include="Sources\ModelBase.h" />
     <ClInclude Include="Sources\Direct3D9.h" />
     <ClInclude Include="Sources\FBX.h" />
