@@ -74,11 +74,6 @@ void CFBXModel::LoadMesh( const char* const szFilePath )
 	SetUpVertices( );
 }
 
-void CFBXModel::LoadAnim( )
-{
-	
-}
-
 void CFBXModel::SetUpVertices( )
 {
 	if ( FAILED( CDirect3D9::get( )->GetD3DDevice( )->CreateVertexBuffer( m_pFbxMesh->GetPolygonCount( ) * 3 * sizeof( ModelVertex ),

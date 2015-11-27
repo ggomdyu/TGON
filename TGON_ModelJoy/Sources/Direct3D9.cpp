@@ -41,8 +41,10 @@ bool CDirect3D9::Initialize( HWND hWnd )
 	d3dpp.BackBufferCount = 1;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.Windowed = TRUE;
+	// TW Labtop Set
 	d3dpp.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES;
 	d3dpp.MultiSampleQuality = 0;
+	//
 	/*d3dpp.MultiSampleType = D3DMULTISAMPLE_NONMASKABLE;
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
 

@@ -53,6 +53,9 @@
     <Filter Include="02. Core\public\Manager">
       <UniqueIdentifier>{c6f02084-8355-4f8b-a991-bd484a7502d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Core\public\Animation">
+      <UniqueIdentifier>{d9e6bbfd-50f6-486e-8bab-3479c9cea9f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\stdafx.cpp">
@@ -88,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Sources\ModelBase.cpp">
       <Filter>02. Core\public\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimBase.cpp">
+      <Filter>02. Core\public\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="FBXAnimation.cpp">
+      <Filter>02. Core\public\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +147,12 @@
     </ClInclude>
     <ClInclude Include="Sources\ModelBase.h">
       <Filter>02. Core\public\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimBase.h">
+      <Filter>02. Core\public\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="FBXAnimation.h">
+      <Filter>02. Core\public\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
