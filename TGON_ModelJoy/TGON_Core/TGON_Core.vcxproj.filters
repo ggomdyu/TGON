@@ -26,4 +26,9 @@
       <Filter>Sources\public\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Uncopyable.cpp">
+      <Filter>Sources\private\Pattern</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

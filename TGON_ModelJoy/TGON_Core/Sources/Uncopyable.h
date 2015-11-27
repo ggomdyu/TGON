@@ -14,8 +14,8 @@
 class Uncopyable
 {
 protected:
-	Uncopyable( ) {};
-	~Uncopyable( ) {};
+	Uncopyable( );
+	~Uncopyable( );
 
 private:
 	Uncopyable( const Uncopyable& ) = delete;
