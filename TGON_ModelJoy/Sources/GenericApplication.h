@@ -20,6 +20,10 @@ public:
 	static const std::shared_ptr<Window> GetWindow( _In_ const std::string& key );
 
 private:
+	GenericApplication( ) = delete;
+	virtual ~GenericApplication( ) = delete;
+
+private:
 	static std::map<std::string, std::shared_ptr<Window>> m_wndRepository;
 };
 NSEND( );

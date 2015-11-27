@@ -15,13 +15,11 @@ class WindowsApplication final : public GenericApplication
 {
 public:
 	static bool ResponseMessage( );
-
-public:
 	static HINSTANCE GetInstanceHandle( ) { return m_hInstance; }
 
 private:
-	WindowsApplication( ) {}
-	virtual ~WindowsApplication( ) {}
+	WindowsApplication( ) = delete;
+	virtual ~WindowsApplication( ) = delete;
 
 private:
 	static HINSTANCE m_hInstance;

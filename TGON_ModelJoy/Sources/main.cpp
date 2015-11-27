@@ -3,8 +3,6 @@
 #include "GenericWindow.h"
 #include "GenericApplication.h"
 #include "FBXModel.h"
-#include "WindowMessage.h"
-#include "WindowStyle.h"
 #include "Direct3D9.h"
 
 using namespace tgon;
@@ -21,7 +19,6 @@ int KapMain( int argc, char* argv[] )
 	const std::shared_ptr<Window> pWindow( new Window( ws ));
 	pWindow->Make( );
 
-	//CDirect3D9::CDirect3D9( );
 	CDirect3D9::get()->Initialize(pWindow->GetWindowHandle());
 	Application::AddWindow( "MainWnd", pWindow );
 
