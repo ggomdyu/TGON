@@ -61,7 +61,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;PLATFORM_WINDOWS_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Sources</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Sources;$(SolutionDir)\..\TGON_Core\Sources</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -113,15 +113,18 @@
     <ClInclude Include="Sources\GenericApplication.h" />
     <ClInclude Include="Sources\GenericWindow.h" />
     <ClInclude Include="Sources\msgstream.h" />
-    <ClInclude Include="Sources\Singleton.h" />
     <ClInclude Include="Sources\stdafx.h" />
-    <ClInclude Include="Sources\Uncopyable.h" />
     <ClInclude Include="Sources\WindowMessage.h" />
     <ClInclude Include="Sources\WindowsApplication.h" />
     <ClInclude Include="Sources\WindowsDwStyle.h" />
     <ClInclude Include="Sources\WindowsMain.h" />
     <ClInclude Include="Sources\WindowStyle.h" />
     <ClInclude Include="Sources\WindowsWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
+      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
