@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -92,8 +92,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimBase.cpp" />
-    <ClCompile Include="FBXAnimation.cpp" />
     <ClCompile Include="Sources\ModelBase.cpp" />
     <ClCompile Include="Sources\FBX.cpp" />
     <ClCompile Include="Sources\FBXModel.cpp" />
@@ -108,8 +106,6 @@
     <ClCompile Include="Sources\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimBase.h" />
-    <ClInclude Include="FBXAnimation.h" />
     <ClInclude Include="Sources\ModelBase.h" />
     <ClInclude Include="Sources\Direct3D9.h" />
     <ClInclude Include="Sources\FBX.h" />

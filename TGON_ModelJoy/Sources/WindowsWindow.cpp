@@ -111,6 +111,12 @@ LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPA
 {
 	if ( uMsg == WM_NCCREATE )
 	{
+		/*
+			When window created, receive allocated pointer( WindowsWindow* ) by 'CreateWindowEx' funtion's last parameter.
+			because MsgBaseProc func is static, so it can't access WindowsWindow's stack data.
+
+			※ So this func works to make possible to access stack data through call MsgDelivedProc.
+		*/
 		SetWindowLong( hWnd, GWL_USERDATA, reinterpret_cast<LONG>((
 				LPCREATESTRUCT( lParam )->lpCreateParams ))); 
 	}
@@ -118,6 +124,9 @@ LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPA
 	WindowsWindow* pWindow = reinterpret_cast<WindowsWindow*>(
 			GetWindowLong( hWnd, GWL_USERDATA ));
 
+	/*
+		
+	*/
 	if ( pWindow )
 		return pWindow->MsgDelivedProc( hWnd, uMsg, wParam, lParam );
 	else
@@ -141,7 +150,7 @@ LRESULT CALLBACK WindowsWindow::MsgDelivedProc( HWND hWnd, uint32_t uMsg, WPARAM
 		break;
 
 	case WM_CLOSE:
-		msg::out << "마우스 오른쪽버튼 눌러서 꺼주셈" << msg::warn;
+		msg::out << "Close clicking by right mouse button" << msg::warn;
 		break;
 
 	default:

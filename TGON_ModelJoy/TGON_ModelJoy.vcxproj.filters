@@ -92,12 +92,6 @@
     <ClCompile Include="Sources\ModelBase.cpp">
       <Filter>02. Core\public\Model</Filter>
     </ClCompile>
-    <ClCompile Include="AnimBase.cpp">
-      <Filter>02. Core\public\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="FBXAnimation.cpp">
-      <Filter>02. Core\public\Animation</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\stdafx.h">
@@ -147,12 +141,6 @@
     </ClInclude>
     <ClInclude Include="Sources\ModelBase.h">
       <Filter>02. Core\public\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimBase.h">
-      <Filter>02. Core\public\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="FBXAnimation.h">
-      <Filter>02. Core\public\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
