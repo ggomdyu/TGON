@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\private">
+      <UniqueIdentifier>{f29f82fa-6cd9-47b8-a84d-f2813568eda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public">
+      <UniqueIdentifier>{de337581-71fb-4833-8bce-71d4454eee27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Windows">
+      <UniqueIdentifier>{9de937b9-3e6d-44a8-a407-70ef709e1dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Windows">
+      <UniqueIdentifier>{83180a09-a0bb-4e07-b406-c2f9aaf6f37e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\WindowsApplication.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsDwStyle.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsMain.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsWindow.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowStyle.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowMessage.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericApplication.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericWindow.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\GenericApplication.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GenericWindow.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsWindow.cpp">
+      <Filter>Sources\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsDwStyle.cpp">
+      <Filter>Sources\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsMain.cpp">
+      <Filter>Sources\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsApplication.cpp">
+      <Filter>Sources\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

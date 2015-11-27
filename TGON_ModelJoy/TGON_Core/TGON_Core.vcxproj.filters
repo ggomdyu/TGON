@@ -27,7 +27,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Uncopyable.cpp">
+    <ClCompile Include="Sources\Uncopyable.cpp">
       <Filter>Sources\private\Pattern</Filter>
     </ClCompile>
   </ItemGroup>

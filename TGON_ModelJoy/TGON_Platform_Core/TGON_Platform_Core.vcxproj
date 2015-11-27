@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>
+    <ProjectGuid>{074B46C4-DFD9-4505-A84F-7A32BE057E16}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TGON_Core</RootNamespace>
+    <RootNamespace>TGON_Platform_Core</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -78,9 +78,9 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;PLATFORM_WINDOWS_OS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;PLATFORM_WINDOWS_OS;TGON_USE_PRECOMPILED_HEADER;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Sources;$(ProjectDir)\..\TGON_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -136,13 +136,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Singleton.h" />
-    <ClInclude Include="Sources\Uncopyable.h" />
+    <ClInclude Include="Sources\GenericApplication.h" />
+    <ClInclude Include="Sources\GenericWindow.h" />
+    <ClInclude Include="Sources\WindowMessage.h" />
+    <ClInclude Include="Sources\WindowsApplication.h" />
+    <ClInclude Include="Sources\WindowsDwStyle.h" />
+    <ClInclude Include="Sources\WindowsMain.h" />
+    <ClInclude Include="Sources\WindowStyle.h" />
+    <ClInclude Include="Sources\WindowsWindow.h" />
+    <ClInclude Include="Sources\stdafx.h" />
+    <ClInclude Include="Sources\targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Uncopyable.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    <ClCompile Include="Sources\GenericApplication.cpp" />
+    <ClCompile Include="Sources\GenericWindow.cpp" />
+    <ClCompile Include="Sources\WindowsApplication.cpp" />
+    <ClCompile Include="Sources\WindowsDwStyle.cpp" />
+    <ClCompile Include="Sources\WindowsMain.cpp" />
+    <ClCompile Include="Sources\WindowsWindow.cpp" />
+    <ClCompile Include="Sources\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
+      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
