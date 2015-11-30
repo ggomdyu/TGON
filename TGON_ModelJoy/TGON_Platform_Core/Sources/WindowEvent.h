@@ -11,11 +11,11 @@
 #endif
 
 #ifdef PLATFORM_WINDOWS_OS
-	#define MT_NONE 0
-	#define MT_CREATE WM_CREATE
-	#define MT_SIZE WM_SIZE
-	#define MT_MOVE WM_MOVE
-	#define MT_DESTROY WM_QUIT
+	#define ET_NONE 0
+	#define ET_CREATE WM_CREATE
+	#define ET_SIZE WM_SIZE
+	#define ET_MOVE WM_MOVE
+	#define ET_DESTROY WM_QUIT
 #endif
 
 struct WindowEvent
@@ -26,11 +26,11 @@ public:
 
 	enum : uint32_t
 	{
-		None = MT_NONE,
-		Create = MT_CREATE,
-		Size = MT_SIZE,
-		Move = MT_MOVE,
-		Destroy = MT_DESTROY,
+		None = ET_NONE,
+		Create = ET_CREATE,
+		Size = ET_SIZE,
+		Move = ET_MOVE,
+		Destroy = ET_DESTROY,
 	};
 
 	uint32_t uMsg = 0;

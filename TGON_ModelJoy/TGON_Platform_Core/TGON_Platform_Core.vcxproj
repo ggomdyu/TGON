@@ -75,7 +75,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;PLATFORM_WINDOWS_OS;TGON_USE_PRECOMPILED_HEADER;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\msgstream.h" />
     <ClInclude Include="Sources\GenericApplication.h" />
     <ClInclude Include="Sources\GenericWindow.h" />
     <ClInclude Include="Sources\WindowEvent.h" />
@@ -160,6 +161,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Sources\msgstream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">

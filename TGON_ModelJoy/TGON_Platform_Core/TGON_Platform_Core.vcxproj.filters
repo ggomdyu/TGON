@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -27,6 +23,12 @@
     <Filter Include="Sources\public\Android">
       <UniqueIdentifier>{3b4aac6c-68fb-4241-828e-f62b432b1498}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\pch">
+      <UniqueIdentifier>{5eb5bc6e-65f8-4837-a1ce-3a134f706f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\pch">
+      <UniqueIdentifier>{45ea0669-93e6-4b18-9d93-5b00b93fc7c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\WindowsApplication.h">
@@ -38,9 +40,6 @@
     <ClInclude Include="Sources\WindowsMain.h">
       <Filter>Sources\public\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\WindowsWindow.h">
-      <Filter>Sources\public\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\WindowStyle.h">
       <Filter>Sources\public</Filter>
     </ClInclude>
@@ -50,14 +49,20 @@
     <ClInclude Include="Sources\GenericWindow.h">
       <Filter>Sources\public</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\WindowEvent.h">
       <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\msgstream.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowsWindow.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\targetver.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\stdafx.h">
+      <Filter>Sources\public\pch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +85,10 @@
       <Filter>Sources\private\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\stdafx.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\private\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\msgstream.cpp">
+      <Filter>Sources\private</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

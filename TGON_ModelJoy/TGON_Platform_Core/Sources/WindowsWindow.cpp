@@ -3,6 +3,7 @@
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <dwmapi.h>
+	#include "msgstream.h"
 	#include "WindowStyle.h"
 	#include "WindowsDwStyle.h"
 #endif
@@ -14,7 +15,7 @@ WindowsWindow::WindowsWindow( const WindowStyle& ws ) :
 	// 1. Register window info
 	if ( !RegisterWindow( ws ))
 	{
-//		msg::out << "Failed to call RegisterWindow function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
+		msg::out << "Failed to call RegisterWindow function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 }
@@ -32,65 +33,64 @@ void WindowsWindow::Make( )
 	ConvertWsToDw( ws, &dwExStyle, &dwStyle );
 
 	// 2. Set window's coordinate
-	int nX = ws.nX, nY = ws.nY;
-	if ( ws.bShowMiddle )
+	int x = ws.X, y = ws.Y;
+	if ( ws.ShowMiddle )
 	{
-		nX = static_cast<int>( GetSystemMetrics( SM_CXSCREEN )*0.5 - ws.nWidth*0.5 );
-		nY = static_cast<int>( GetSystemMetrics( SM_CYSCREEN )*0.5 - ws.nHeight*0.5 );
+		x = static_cast<int>( GetSystemMetrics( SM_CXSCREEN )*0.5 - ws.Width*0.5 );
+		y = static_cast<int>( GetSystemMetrics( SM_CYSCREEN )*0.5 - ws.Height*0.5 );
 	}
 
 	// 3. Make
-	m_hWnd = CreateWindowEx( dwExStyle, ws.wsCaption, ws.wsCaption, dwStyle,
-								nX, nY, ws.nWidth, ws.nHeight,
+	m_window_handle = CreateWindowEx( dwExStyle, ws.Caption, ws.Caption, dwStyle, x, y, ws.Width, ws.Height,
 						nullptr, nullptr, GetModuleHandle( NULL ), this );
-	if ( !m_hWnd )
+	if ( !m_window_handle )
 	{
-//		msg::out << "Failed to call CreateWindowEx function." << msg::warn;
+		msg::out << "Failed to call CreateWindowEx function." << " ( errCode : " << GetLastError( ) << " )" << msg::warn;
 		//goto retry_make_window;
 	}
 }
 
 HWND WindowsWindow::GetWindowHandle( ) const
 {
-	return m_hWnd;
+	return m_window_handle;
 }
 
 void WindowsWindow::BringToTop( )
 {
-	//HWND hForeground;
-	//DWORD dwId, foreground_id;
-	//hForeground = GetForegroundWindow( );
+	// Foreground window currently?
+	const HWND foreground_handle( GetForegroundWindow( ));
+	if ( foreground_handle == m_window_handle )
+		return;
 
-	//if ( hForeground == m_hWnd )
-	//	return;
+	// 1. Otherwise, get each other window's PID 
+	const DWORD current_window_pid = GetWindowThreadProcessId( m_window_handle, NULL );
+	const DWORD foreground_window_pid = GetWindowThreadProcessId( foreground_handle, NULL );
 
-	//foreground_id = GetWindowThreadProcessId( hForeground, NULL );
-	//id = GetWindowThreadProcessId( m_hWnd, NULL );
-
-	//if ( AttachThreadInput( id, foreground_id, TRUE ))
-	//{
-	//	SetForegroundWindow( m_hWnd );
-	//	BringWindowToTop( m_hWnd );
-	//	AttachThreadInput( id, foreground_id, TRUE );
-	//}
+	// 2. Request to system to attach input what I bring to top
+	if ( AttachThreadInput( current_window_pid, foreground_window_pid, TRUE ))
+	{
+		SetForegroundWindow( m_window_handle );
+		BringWindowToTop( m_window_handle );
+		AttachThreadInput( current_window_pid, foreground_window_pid, TRUE );
+	}
 }
 
 void WindowsWindow::Show( )
 {
-	ShowWindow( m_hWnd, SW_NORMAL );
+	ShowWindow( m_window_handle, SW_NORMAL );
 }
 
 void WindowsWindow::SetPosition( const int x, const int y )
 {
-	SetWindowPos( m_hWnd, nullptr, x, y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_window_handle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
 void WindowsWindow::Move( const int x, const int y )
 {
 	RECT rt;
-	GetWindowRect( m_hWnd, &rt );
+	GetWindowRect( m_window_handle, &rt );
 
-	SetWindowPos( m_hWnd, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_window_handle, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
 }
 
 bool WindowsWindow::RegisterWindow( const WindowStyle& ws, const HICON hIcon, const HCURSOR hCursor )
@@ -102,7 +102,7 @@ bool WindowsWindow::RegisterWindow( const WindowStyle& ws, const HICON hIcon, co
 	wcex.hIcon = hIcon;
 	wcex.hInstance = GetModuleHandle( nullptr );
 	wcex.lpfnWndProc = MsgBaseProc;
-	wcex.lpszClassName = ws.wsCaption;
+	wcex.lpszClassName = ws.Caption;
 	wcex.style = CS_VREDRAW | CS_HREDRAW;
 
 	return RegisterClassEx( &wcex ) != 0;
@@ -125,9 +125,6 @@ LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPA
 	WindowsWindow* pWindow = reinterpret_cast<WindowsWindow*>(
 			GetWindowLong( hWnd, GWL_USERDATA ));
 
-	/*
-		
-	*/
 	if ( pWindow )
 		return pWindow->MsgDelivedProc( hWnd, uMsg, wParam, lParam );
 	else

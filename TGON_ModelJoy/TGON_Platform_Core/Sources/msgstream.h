@@ -49,8 +49,9 @@ namespace msg
 	private:
 		std::stringstream ss;
 		
-	}
-	static out;
-	static msgstream::alert_traits alert;
-	static msgstream::warn_traits warn;
+	};
+
+	extern msgstream out;
+	extern msgstream::alert_traits alert;
+	extern msgstream::warn_traits warn;
 }

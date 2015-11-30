@@ -17,8 +17,8 @@
     <Filter Include="Sources\public\TextParse">
       <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\MessageBox">
-      <UniqueIdentifier>{ac62d87a-cdd2-4b8d-8bd5-f32410dc8695}</UniqueIdentifier>
+    <Filter Include="Sources\private\Pattern">
+      <UniqueIdentifier>{60c44462-b00b-4f4a-a7b9-c3b4bb55a2e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,8 +28,10 @@
     <ClInclude Include="Sources\Uncopyable.h">
       <Filter>Sources\public\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\msgstream.h">
-      <Filter>Sources\public\MessageBox</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\Uncopyable.cpp">
+      <Filter>Sources\private\Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

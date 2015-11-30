@@ -2,10 +2,10 @@
 #include "Direct3D9.h"
 
 CDirect3D9::CDirect3D9( ) :
-m_pd3d9( Direct3DCreate9( D3D_SDK_VERSION ) ),
-m_vEye( 0.0f, 3.0f, -5.0f ),
-m_vLookAt( 0.0f, 0.0f, 0.0f ),
-m_vUp( 0.0f, 1.0f, 0.0f )
+	m_pd3d9( Direct3DCreate9( D3D_SDK_VERSION )),
+	m_vEye( 0.0f, 3.0f, -5.0f ),
+	m_vLookAt( 0.0f, 0.0f, 0.0f ),
+	m_vUp( 0.0f, 1.0f, 0.0f )
 {
 	if ( !m_pd3d9 )
 	{
@@ -66,7 +66,7 @@ void CDirect3D9::BeginDraw( )
 {
 	m_pd3dDevice9->Clear( 0, NULL, D3DCLEAR_TARGET, 0x000000, 1.0f, 0 );
 
-	if ( SUCCEEDED( m_pd3dDevice9->BeginScene( ) ) )
+	if ( SUCCEEDED( m_pd3dDevice9->BeginScene( )))
 	{
 		SetMatrices( );
 	}

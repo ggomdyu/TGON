@@ -10,30 +10,30 @@
 void ConvertWsToDw( _In_ const WindowStyle& ws, _Out_ CDwExStyle* const pDwExStyle, _Out_ CDwStyle* const pDwStyle )
 {
 	/* Extended style */
-	if ( ws.bTopMost )
+	if ( ws.TopMost )
 	{
 		*pDwExStyle |= WS_EX_TOPMOST;
 	}
 
 	/* Normal style */
-	if ( ws.bMaximized )
+	if ( ws.Maximized )
 	{
 		*pDwStyle |= WS_MAXIMIZE;
-		assert( !ws.bMinimized );
+		assert( !ws.Minimized );
 	}
-	else if ( ws.bMinimized )
+	else if ( ws.Minimized )
 	{
 		*pDwStyle |= WS_MINIMIZE;
 	}
-	if ( ws.bVisible )
+	if ( ws.Visible )
 	{
 		*pDwStyle |= WS_VISIBLE;
 	}
-	if ( ws.bThickFrame )
+	if ( ws.Resizeable )
 	{
 		*pDwStyle |= WS_THICKFRAME;
 	}
-	if ( ws.bPopUp )
+	if ( ws.Popup )
 	{
 		*pDwStyle |= WS_POPUP;
 	}

@@ -48,6 +48,6 @@ private:
 	LRESULT CALLBACK MsgDelivedProc( HWND, uint32_t, WPARAM, LPARAM );
 
 private:
-	HWND m_hWnd;
+	HWND m_window_handle;
 };
 NSEND( );

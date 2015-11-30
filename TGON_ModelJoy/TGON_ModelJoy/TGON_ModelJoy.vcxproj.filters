@@ -7,9 +7,6 @@
     <Filter Include="Sources\public">
       <UniqueIdentifier>{9e7aa995-1e31-49a7-ac2e-61cd93e09a6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\Animation">
-      <UniqueIdentifier>{d9e6bbfd-50f6-486e-8bab-3479c9cea9f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\public\Model">
       <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
     </Filter>
@@ -21,6 +18,15 @@
     </Filter>
     <Filter Include="Sources\private\Thirdparty">
       <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Animation">
+      <UniqueIdentifier>{d9e6bbfd-50f6-486e-8bab-3479c9cea9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\pch">
+      <UniqueIdentifier>{6e401d27-1d97-4fc3-92d7-ed5f1a3a3f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\pch">
+      <UniqueIdentifier>{7fb28465-95a3-4001-a121-0566111849b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,11 +42,11 @@
     <ClCompile Include="Sources\ModelBase.cpp">
       <Filter>Sources\public\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\stdafx.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\main.cpp">
       <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\stdafx.cpp">
+      <Filter>Sources\private\pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +63,7 @@
       <Filter>Sources\public\Model</Filter>
     </ClInclude>
     <ClInclude Include="Sources\stdafx.h">
-      <Filter>Sources\public</Filter>
+      <Filter>Sources\public\pch</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

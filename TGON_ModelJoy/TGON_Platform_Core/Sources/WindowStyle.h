@@ -9,21 +9,21 @@
 struct WindowStyle
 {
 public:
-	int nX = 100;
-	int nY = 100;
-	int nWidth = 500;
-	int nHeight = 500;
+	int X = 100;
+	int Y = 100;
+	int Width = 500;
+	int Height = 500;
 
-	wchar_t* wsCaption = L"Default caption";
-	
+	wchar_t* Caption = L"";
+
 	/* Shape */
-	bool bThickFrame = false;
-	bool bPopUp = false;
+	bool Resizeable = false;
+	bool Popup = false;
 
 	/* Show */
-	bool bMaximized = false;
-	bool bMinimized = false;
-	bool bVisible = true;
-	bool bShowMiddle = true;
-	bool bTopMost = false;
+	bool Maximized = false;
+	bool Minimized = false;
+	bool Visible = true;
+	bool ShowMiddle = true;
+	bool TopMost = false;
 };
