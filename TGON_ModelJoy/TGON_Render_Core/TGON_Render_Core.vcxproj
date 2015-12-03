@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{074B46C4-DFD9-4505-A84F-7A32BE057E16}</ProjectGuid>
+    <ProjectGuid>{B5F066EE-B082-4A67-ACF4-BB4DF03A01D3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TGON_Platform_Core</RootNamespace>
+    <RootNamespace>TGON_Renderer_Core</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>TGON_Render_Core</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -58,19 +59,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="TGON_Direct3D_x86.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="TGON_Direct3D_x64.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="TGON_Direct3D_x86.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="TGON_Direct3D_x64.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -79,13 +80,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,40 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\msgstream.h" />
-    <ClInclude Include="Sources\GenericApplication.h" />
-    <ClInclude Include="Sources\GenericWindow.h" />
-    <ClInclude Include="Sources\WindowEvent.h" />
-    <ClInclude Include="Sources\WindowsApplication.h" />
-    <ClInclude Include="Sources\WindowsMain.h" />
-    <ClInclude Include="Sources\WindowStyle.h" />
-    <ClInclude Include="Sources\WindowsWindow.h" />
-    <ClInclude Include="Sources\stdafx.h" />
-    <ClInclude Include="Sources\targetver.h" />
-    <ClInclude Include="Sources\WindowsWindowUtil.h" />
+    <ClInclude Include="Sources\Direct3Dt.h" />
+    <ClInclude Include="Sources\GraphicsInterface.h" />
+    <ClInclude Include="Sources\D3dFVF.h" />
+    <ClInclude Include="Sources\D3dFrameType.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\GenericApplication.cpp" />
-    <ClCompile Include="Sources\GenericWindow.cpp" />
-    <ClCompile Include="Sources\WindowsApplication.cpp" />
-    <ClCompile Include="Sources\WindowsMain.cpp" />
-    <ClCompile Include="Sources\WindowsWindow.cpp" />
-    <ClCompile Include="Sources\stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\msgstream.cpp" />
-    <ClCompile Include="Sources\WindowsWindowUtil.cpp" />
+    <ClCompile Include="Sources\Direct3Dt.cpp" />
+    <ClCompile Include="Sources\GraphicsInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
-      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TGON_Win.props" />
+    <None Include="p\TGON_Direct3D_x64.props" />
+    <None Include="p\TGON_Direct3D_x86.props" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

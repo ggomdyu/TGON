@@ -12,7 +12,7 @@
 	#include <iostream>
 	#include <unordered_set>
 	#include "WindowStyle.h"
-	#include "WindowMessage.h"
+	#include "WindowEvent.h"
 #endif
 
 

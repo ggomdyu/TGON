@@ -3,13 +3,16 @@
   <ItemGroup>
     <Filter Include="Sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>
+      </Extensions>
     </Filter>
     <Filter Include="Sources\private">
       <UniqueIdentifier>{f29f82fa-6cd9-47b8-a84d-f2813568eda1}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="Sources\public">
       <UniqueIdentifier>{de337581-71fb-4833-8bce-71d4454eee27}</UniqueIdentifier>
+      <Extensions>h</Extensions>
     </Filter>
     <Filter Include="Sources\public\Windows">
       <UniqueIdentifier>{9de937b9-3e6d-44a8-a407-70ef709e1dfd}</UniqueIdentifier>
@@ -29,28 +32,25 @@
     <Filter Include="Sources\private\pch">
       <UniqueIdentifier>{45ea0669-93e6-4b18-9d93-5b00b93fc7c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\Window">
+      <UniqueIdentifier>{526d8987-e9d4-4bc6-a5d5-87a495ecba77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Generic">
+      <UniqueIdentifier>{2100c0c2-2ffe-432e-9b09-581e2c4d009b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Generic">
+      <UniqueIdentifier>{f7d93b22-7b28-4d30-bc83-323b86c3dc27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Platform">
+      <UniqueIdentifier>{3714cc7f-28bf-48cc-be78-dc3da666686f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\WindowsApplication.h">
       <Filter>Sources\public\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\WindowsDwStyle.h">
-      <Filter>Sources\public\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\WindowsMain.h">
       <Filter>Sources\public\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\WindowStyle.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GenericApplication.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GenericWindow.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\WindowEvent.h">
-      <Filter>Sources\public</Filter>
     </ClInclude>
     <ClInclude Include="Sources\msgstream.h">
       <Filter>Sources\public</Filter>
@@ -64,18 +64,24 @@
     <ClInclude Include="Sources\stdafx.h">
       <Filter>Sources\public\pch</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\WindowsWindowUtil.h">
+      <Filter>Sources\public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowStyle.h">
+      <Filter>Sources\public\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericWindow.h">
+      <Filter>Sources\public\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GenericApplication.h">
+      <Filter>Sources\public\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowEvent.h">
+      <Filter>Sources\public\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\GenericApplication.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\GenericWindow.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\WindowsWindow.cpp">
-      <Filter>Sources\private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\WindowsDwStyle.cpp">
       <Filter>Sources\private\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\WindowsMain.cpp">
@@ -90,5 +96,17 @@
     <ClCompile Include="Sources\msgstream.cpp">
       <Filter>Sources\private</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\WindowsWindowUtil.cpp">
+      <Filter>Sources\private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GenericApplication.cpp">
+      <Filter>Sources\private\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GenericWindow.cpp">
+      <Filter>Sources\private\Generic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TGON_Win.props" />
   </ItemGroup>
 </Project>

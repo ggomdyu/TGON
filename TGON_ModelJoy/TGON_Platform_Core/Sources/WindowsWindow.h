@@ -9,11 +9,9 @@
 #include "GenericWindow.h"
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
+	#define WIN32_LEAN_AND_MEAN /* fwd declare */
 	#include <Windows.h>
 #endif
-
-struct CDwExStyle;
-struct CDwStyle;
 
 NSBEGIN( tgon );
 class WindowsWindow;
@@ -40,14 +38,10 @@ public:
 	virtual void Move( const int x, const int y ) override;
 
 private:
-	bool RegisterWindow( _In_ const WindowStyle&,
-						_In_opt_ const HICON = LoadIcon( NULL, IDI_APPLICATION ),
-						_In_opt_ const HCURSOR = LoadCursor( NULL, IDC_ARROW ));
-
-	static LRESULT CALLBACK MsgBaseProc( HWND, uint32_t, WPARAM, LPARAM );
-	LRESULT CALLBACK MsgDelivedProc( HWND, uint32_t, WPARAM, LPARAM );
+	static LRESULT CALLBACK CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
+	LRESULT CALLBACK CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );
 
 private:
-	HWND m_window_handle;
+	HWND m_wndHandle;
 };
 NSEND( );

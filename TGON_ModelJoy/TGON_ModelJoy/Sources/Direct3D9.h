@@ -11,14 +11,17 @@
 	#include "Singleton.h"
 #endif
 
-#define D3DFVF_CUSTOMVERTEX ( D3DFVF_XYZ | D3DFVF_DIFFUSE )
+struct LineVertex
+{
+	D3DXVECTOR3 pos;
+	DWORD color;
+};
 
-
-class CDirect3D9 : public CSingleton<CDirect3D9>
+class Direct3D9 : public CSingleton<Direct3D9>
 {
 public:
-	CDirect3D9( );
-	~CDirect3D9( );
+	Direct3D9( );
+	~Direct3D9( );
 
 	bool Initialize( HWND hWnd );
 
@@ -26,23 +29,24 @@ public:
 	void EndDraw( );
 
 public:
-	CComPtr<IDirect3D9> GetD3D( ) { return m_pd3d9; }
-	CComPtr<IDirect3DDevice9> GetD3DDevice( ) { return m_pd3dDevice9; }
+	CComPtr<IDirect3D9> GetD3d( ) const { return m_d3d; }
+	CComPtr<IDirect3DDevice9> GetD3dDevice( ) const { return m_d3dDevice; }
 
-	D3DXMATRIXA16* MoveLocalX(float dist);
-	D3DXMATRIXA16* SetView(D3DXVECTOR3* pvEye, D3DXVECTOR3* pvLookat, D3DXVECTOR3* pvUp);
+
+	void DrawLine( const D3DXVECTOR3& p1, const D3DXVECTOR3& p2, DWORD color );
+	void MoveLocalX( float dist );
 
 private:
+	void MakeView( D3DXVECTOR3& eye, D3DXVECTOR3& lookAt, D3DXVECTOR3& up );
 	void SetMatrices( );
 
 private:
-	CComPtr<IDirect3D9> m_pd3d9;
-	CComPtr<IDirect3DDevice9> m_pd3dDevice9;
+	CComPtr<IDirect3D9> m_d3d;
+	CComPtr<IDirect3DDevice9> m_d3dDevice;
 
-	D3DXMATRIXA16 matView;
-	D3DXMATRIXA16 matProj;
-	D3DXVECTOR3 m_vEye, m_vLookAt, m_vUp;
+	//D3DXMATRIXA16 m_matWorld;
+	D3DXMATRIXA16 m_matView, m_matProj; // m_matOrtho, m_matWorld
+	D3DXVECTOR3 m_eye, m_lookAt, m_up;
 
-	D3DXVECTOR3		m_vView, m_vCross;
-	//D3DXMATRIXA16 m_matWorld, m_matView, m_matProj, m_matOrtho;
+	D3DXVECTOR3 m_vView, m_vCross;
 };

@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "msgstream.h"
 
-NSBEGIN( msg )
-
-extern msgstream out;
-extern msgstream::alert_traits alert;
-extern msgstream::warn_traits warn;
-
-NSEND( )
+namespace msg {
+	msg::msgstream out;
+	msg::msgstream::alert_traits alert;
+	msg::msgstream::warn_traits warn;
+}

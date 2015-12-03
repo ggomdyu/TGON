@@ -9,12 +9,12 @@
 struct WindowStyle
 {
 public:
-	int X = 100;
-	int Y = 100;
-	int Width = 500;
-	int Height = 500;
+	int x = 100;
+	int y = 100;
+	int width = 500;
+	int height = 500;
 
-	wchar_t* Caption = L"";
+	wchar_t* caption = L"";
 
 	/* Shape */
 	bool Resizeable = false;

@@ -4,12 +4,20 @@
 * 작성일 : 2015-11-11
 * 최종 수정 : 
 * 최종 수정일 :
+* TODO: Support other platforms
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <Windows.h>
 	#include <sstream>
 #endif
+
+/*
+#if defined( _WIN32 ) | defined( _WIN64 ) 
+	#include "WindowsMessageBox.h"
+#elif defined( __ANDROID__ )
+#endif
+*/
 
 namespace msg
 {
@@ -28,7 +36,7 @@ namespace msg
 
 		void operator<<( alert_traits )
 		{
-#ifdef PLATFORM_WINDOWS_OS
+#if defined( _WIN32 ) | defined( _WIN64 ) 
 			MessageBoxA( GetFocus( ), ss.str( ).c_str( ), "Alert", MB_OK );
 			ss.str( "" ); // clear all buffer
 #elif
@@ -38,7 +46,7 @@ namespace msg
 
 		void operator<<( warn_traits )
 		{
-#ifdef PLATFORM_WINDOWS_OS
+#if defined( _WIN32 ) | defined( _WIN64 ) 
 			MessageBoxA( GetFocus(), ss.str( ).c_str( ), "Warning", MB_OK | MB_ICONEXCLAMATION );
 			ss.str( "" ); // clear all buffer
 #elif

@@ -1,42 +1,36 @@
 #include "stdafx.h"
 #include "Direct3D9.h"
 
-CDirect3D9::CDirect3D9( ) :
-	m_pd3d9( Direct3DCreate9( D3D_SDK_VERSION )),
-	m_vEye( 0.0f, 3.0f, -5.0f ),
-	m_vLookAt( 0.0f, 0.0f, 0.0f ),
-	m_vUp( 0.0f, 1.0f, 0.0f )
+#include "D3dFVF.h"
+
+static IDirect3DVertexBuffer9* g_vertexBuffer;
+
+Direct3D9::Direct3D9( ) :
+	m_d3d( Direct3DCreate9( D3D_SDK_VERSION )),
+	m_eye( 0.0f, 3.0f, -5.0f ),
+	m_lookAt( 0.0f, 0.0f, 0.0f ),
+	m_up( 0.0f, 1.0f, 0.0f )
 {
-	if ( !m_pd3d9 )
+	if ( !m_d3d )
 	{
 		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 }
 
-CDirect3D9::~CDirect3D9( )
+Direct3D9::~Direct3D9( )
 {
 
 }
 
-bool CDirect3D9::Initialize( HWND hWnd )
+bool Direct3D9::Initialize( HWND hWnd )
 {
 	RECT rt;
 	GetClientRect( hWnd, &rt );
-	//GetWindowRect( hWnd, &rt );
 
-	if ( ( m_pd3d9 = Direct3DCreate9( D3D_SDK_VERSION ) ) == nullptr )
-	{
-		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
-		abort( );
-	}
-
-	D3DPRESENT_PARAMETERS d3dpp;
-
-	ZeroMemory( &d3dpp, sizeof( d3dpp ) );
-
-	d3dpp.BackBufferWidth = rt.right - rt.left;
-	d3dpp.BackBufferHeight = rt.bottom - rt.top;
+	D3DPRESENT_PARAMETERS d3dpp = { 0 };
+	d3dpp.BackBufferWidth = rt.right;
+	d3dpp.BackBufferHeight = rt.bottom;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 	d3dpp.BackBufferCount = 1;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
@@ -48,68 +42,100 @@ bool CDirect3D9::Initialize( HWND hWnd )
 	/*d3dpp.MultiSampleType = D3DMULTISAMPLE_NONMASKABLE;
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
 
-	if ( FAILED( m_pd3d9->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-		D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pd3dDevice9 ) ) )
+	if ( FAILED( m_d3d->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
+		D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_d3dDevice ) ) )
 	{
 		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 
-	m_pd3dDevice9->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
-	m_pd3dDevice9->SetRenderState( D3DRS_LIGHTING, FALSE );
-	m_pd3dDevice9->SetRenderState( D3DRS_ZENABLE, TRUE );
+	m_d3dDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
+	m_d3dDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
+	m_d3dDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
+
+//	m_d3dDevice->CreateVertexBuffer(  )
 
 	return true;
 }
 
-void CDirect3D9::BeginDraw( )
+void Direct3D9::BeginDraw( )
 {
-	m_pd3dDevice9->Clear( 0, NULL, D3DCLEAR_TARGET, 0x000000, 1.0f, 0 );
+	m_d3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET, 0x000000, 1.0f, 0 );
 
-	if ( SUCCEEDED( m_pd3dDevice9->BeginScene( )))
+	if ( SUCCEEDED( m_d3dDevice->BeginScene( )))
 	{
 		SetMatrices( );
 	}
 }
 
-void CDirect3D9::EndDraw( )
+void Direct3D9::EndDraw( )
 {
-	m_pd3dDevice9->EndScene( );
-	m_pd3dDevice9->Present( NULL, NULL, NULL, NULL );
+	m_d3dDevice->EndScene( );
+	m_d3dDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-D3DXMATRIXA16*	CDirect3D9::SetView( D3DXVECTOR3* pvEye, D3DXVECTOR3* pvLookat, D3DXVECTOR3* pvUp )
+void Direct3D9::MakeView( D3DXVECTOR3& eye, D3DXVECTOR3& lookAt, D3DXVECTOR3& up )
 {
-	m_vEye = *pvEye;
-	m_vLookAt = *pvLookat;
-	m_vUp = *pvUp;
-	D3DXVec3Normalize( &m_vView, &( m_vLookAt - m_vEye ) );
+	m_eye = eye;
+	m_lookAt = lookAt;
+	m_up = up;
+
+	D3DXVec3Normalize( &m_vView, &( m_lookAt-m_eye ));
 	//D3DXVec3Cross( &m_vCross, &m_vUp, &m_vView );
 
-	D3DXMatrixLookAtLH( &matView, &m_vEye, &m_vLookAt, &m_vUp );
-
-	return &matView;
+	D3DXMatrixLookAtLH( &m_matView, &m_eye, &m_lookAt, &m_up );
 }
 
-D3DXMATRIXA16* CDirect3D9::MoveLocalX( float dist )
+void Direct3D9::DrawLine( const D3DXVECTOR3& p1, const D3DXVECTOR3& p2, DWORD color )
 {
-	D3DXVECTOR3 vNewEye = m_vEye;
-	D3DXVECTOR3 vNewDst = m_vLookAt;
+	HRESULT hr;
+	m_d3dDevice->SetRenderState( D3DRS_COLORVERTEX, true );
+	m_d3dDevice->SetRenderState( D3DRS_LIGHTING, false );
+	m_d3dDevice->SetRenderState( D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_COLOR1 );
+	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1 );
+	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE );
+	m_d3dDevice->SetTextureStageState( 1, D3DTSS_COLOROP, D3DTOP_DISABLE );
 
-	D3DXVECTOR3 vMove;
-	D3DXVec3Normalize( &vMove, &m_vView );
+	LineVertex line[2];
+	line[0].pos = p1;
+	line[0].color = color;
+	line[1].pos = p2;
+	line[1].color = color;
+
+	hr = m_d3dDevice->SetFVF( FVF::Line_FVF );
+	hr = m_d3dDevice->SetPixelShader( 0 );
+	hr = m_d3dDevice->SetVertexShader( 0 );
+
+	hr = m_d3dDevice->DrawPrimitiveUP( D3DPT_LINELIST, 1, line, sizeof( LineVertex ));
+
+	if ( FAILED( hr ))
+	{
+		//MessageBox( NULL, DXGetErrorString9(hr), "Points Error", MB_OK );
+		return;
+	}
+}
+
+void Direct3D9::MoveLocalX( float dist )
+{
+	D3DXVECTOR3 vNewEye = m_eye;
+	D3DXVECTOR3 vNewDst = m_lookAt;
+
+	D3DXVECTOR3 vMove( 0.0f, 1.0f, 1.0f );
+	//D3DXVec3Normalize( &vMove, &m_vView );
+	//msg::out << vMove.x << " / " << vMove.y << " / " << vMove.z << msg::warn;
+	
 	vMove *= dist;
 	vNewEye += vMove;
 	vNewDst += vMove;
 
-	return SetView( &vNewEye, &vNewDst, &m_vUp );
+	MakeView( vNewEye, vNewDst, m_up );
 }
 
-void CDirect3D9::SetMatrices( )
+void Direct3D9::SetMatrices( )
 {
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixTranslation( &matWorld, 0.0f, 0.0f, 0.0f );
-	m_pd3dDevice9->SetTransform( D3DTS_WORLD, &matWorld );
+	m_d3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 
 	static float x, y;
 	if ( GetAsyncKeyState( VK_LEFT ) & 0x8000 )
@@ -121,14 +147,14 @@ void CDirect3D9::SetMatrices( )
 	if ( GetAsyncKeyState( VK_UP ) & 0x8000 )
 		y += 0.1f;
 
-	D3DXMatrixLookAtLH( &matView, &m_vEye, &m_vLookAt, &m_vUp );
-	m_pd3dDevice9->SetTransform( D3DTS_VIEW, &matView );
+	D3DXMatrixLookAtLH( &m_matView, &m_eye, &m_lookAt, &m_up );
+	m_d3dDevice->SetTransform( D3DTS_VIEW, &m_matView );
 
 
-	/*	D3DXMatrixPerspectiveFovLH receive the follow arguments; FOV, Aspect ratio, Near/Far clipping plane
+	/*	D3DXMatrixPerspectiveFovLH receive the arguments: FOV, Aspect ratio, Near/Far clipping plane
 		FOV : https://namu.wiki/w/FOV
 		Aspect ratio ¡æ http://www.slingmedia.co.kr/object/KB-005350.html */
-	D3DXMatrixPerspectiveFovLH( &matProj, D3DX_PI / 4, 1.0f, 1.0f, 1000.0f );
+	D3DXMatrixPerspectiveFovLH( &m_matProj, D3DX_PI / 4, 1.0f, 1.0f, 1000.0f );
 	//D3DXMatrixOrthoLH(&matProj, 1280, 720, 1.0f, 100.0f );
-	m_pd3dDevice9->SetTransform( D3DTS_PROJECTION, &matProj );
+	m_d3dDevice->SetTransform( D3DTS_PROJECTION, &m_matProj );
 }

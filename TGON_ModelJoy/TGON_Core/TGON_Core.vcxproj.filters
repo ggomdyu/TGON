@@ -3,13 +3,16 @@
   <ItemGroup>
     <Filter Include="Sources">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>
+      </Extensions>
     </Filter>
     <Filter Include="Sources\private">
       <UniqueIdentifier>{522edeb3-92eb-4050-9c0f-dce5fec30526}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="Sources\public">
       <UniqueIdentifier>{69ced53d-188a-4c72-a1f2-f606872b4a59}</UniqueIdentifier>
+      <Extensions>h</Extensions>
     </Filter>
     <Filter Include="Sources\public\Pattern">
       <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>

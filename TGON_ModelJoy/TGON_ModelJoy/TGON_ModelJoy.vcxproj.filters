@@ -3,9 +3,12 @@
   <ItemGroup>
     <Filter Include="Sources">
       <UniqueIdentifier>{755ec319-5fce-4a6f-be9d-6daff30e79bf}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
     </Filter>
     <Filter Include="Sources\public">
       <UniqueIdentifier>{9e7aa995-1e31-49a7-ac2e-61cd93e09a6e}</UniqueIdentifier>
+      <Extensions>h</Extensions>
     </Filter>
     <Filter Include="Sources\public\Model">
       <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
@@ -15,6 +18,7 @@
     </Filter>
     <Filter Include="Sources\private">
       <UniqueIdentifier>{0ede85c9-83f5-4cb0-9bc1-3fafaf0a89a8}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="Sources\private\Thirdparty">
       <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>

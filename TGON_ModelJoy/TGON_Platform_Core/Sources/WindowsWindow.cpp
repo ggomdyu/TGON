@@ -2,157 +2,138 @@
 #include "WindowsWindow.h"
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <Windows.h>
 	#include <dwmapi.h>
 	#include "msgstream.h"
 	#include "WindowStyle.h"
-	#include "WindowsDwStyle.h"
+	#include "WindowsWindowUtil.h"
 #endif
 
-NSBEGIN( tgon );
-WindowsWindow::WindowsWindow( const WindowStyle& ws ) :
+tgon::WindowsWindow::WindowsWindow( const WindowStyle& ws ) :
 	GenericWindow( ws )
 {
 	// 1. Register window info
-	if ( !RegisterWindow( ws ))
+	if ( !RegisterWindow( ws, CallbackMsgProc ))
 	{
 		msg::out << "Failed to call RegisterWindow function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
 	}
 }
 
-WindowsWindow::~WindowsWindow( )
+tgon::WindowsWindow::~WindowsWindow( )
 {
 }
 
-void WindowsWindow::Make( )
+void tgon::WindowsWindow::Make( )
 {
 	const WindowStyle& ws( this->GetWindowStyle( ));
 
-	CDwExStyle dwExStyle;
-	CDwStyle dwStyle;
-	ConvertWsToDw( ws, &dwExStyle, &dwStyle );
+	DWORD normalWindowStyle = 0, exWindowStyle = 0;
+	ConvertWsToDw( ws, &exWindowStyle, &normalWindowStyle );
 
 	// 2. Set window's coordinate
-	int x = ws.X, y = ws.Y;
+	int x = ws.x, y = ws.y;
 	if ( ws.ShowMiddle )
 	{
-		x = static_cast<int>( GetSystemMetrics( SM_CXSCREEN )*0.5 - ws.Width*0.5 );
-		y = static_cast<int>( GetSystemMetrics( SM_CYSCREEN )*0.5 - ws.Height*0.5 );
+		x = static_cast<int>( GetSystemMetrics( SM_CXSCREEN )*0.5 - ws.width*0.5 );
+		y = static_cast<int>( GetSystemMetrics( SM_CYSCREEN )*0.5 - ws.height*0.5 );
 	}
 
 	// 3. Make
-	m_window_handle = CreateWindowEx( dwExStyle, ws.Caption, ws.Caption, dwStyle, x, y, ws.Width, ws.Height,
+	m_wndHandle = CreateWindowEx( exWindowStyle, ws.caption, ws.caption, normalWindowStyle, x, y, ws.width, ws.height,
 						nullptr, nullptr, GetModuleHandle( NULL ), this );
-	if ( !m_window_handle )
+	if ( !m_wndHandle )
 	{
 		msg::out << "Failed to call CreateWindowEx function." << " ( errCode : " << GetLastError( ) << " )" << msg::warn;
 		//goto retry_make_window;
 	}
 }
 
-HWND WindowsWindow::GetWindowHandle( ) const
+HWND tgon::WindowsWindow::GetWindowHandle( ) const
 {
-	return m_window_handle;
+	return m_wndHandle;
 }
 
-void WindowsWindow::BringToTop( )
+void tgon::WindowsWindow::BringToTop( )
 {
-	// Foreground window currently?
-	const HWND foreground_handle( GetForegroundWindow( ));
-	if ( foreground_handle == m_window_handle )
+	// Current window is Foreground window?
+	const HWND topWndHandle( GetForegroundWindow( ));
+	if ( topWndHandle == m_wndHandle )
 		return;
 
-	// 1. Otherwise, get each other window's PID 
-	const DWORD current_window_pid = GetWindowThreadProcessId( m_window_handle, NULL );
-	const DWORD foreground_window_pid = GetWindowThreadProcessId( foreground_handle, NULL );
 
-	// 2. Request to system to attach input what I bring to top
-	if ( AttachThreadInput( current_window_pid, foreground_window_pid, TRUE ))
+	// 1. Otherwise, get each other window's PID 
+	const DWORD curWndPid = GetWindowThreadProcessId( m_wndHandle, NULL );
+	const DWORD topWndPid = GetWindowThreadProcessId( topWndHandle, NULL );
+
+	// 2. Attach input
+	if ( AttachThreadInput( curWndPid, topWndPid, TRUE ))
 	{
-		SetForegroundWindow( m_window_handle );
-		BringWindowToTop( m_window_handle );
-		AttachThreadInput( current_window_pid, foreground_window_pid, TRUE );
+		SetForegroundWindow( m_wndHandle );
+		BringWindowToTop( m_wndHandle );
+		AttachThreadInput( curWndPid, topWndPid, TRUE );
 	}
 }
 
-void WindowsWindow::Show( )
+void tgon::WindowsWindow::Show( )
 {
-	ShowWindow( m_window_handle, SW_NORMAL );
+	ShowWindow( m_wndHandle, SW_NORMAL );
 }
 
-void WindowsWindow::SetPosition( const int x, const int y )
+void tgon::WindowsWindow::SetPosition( const int x, const int y )
 {
-	SetWindowPos( m_window_handle, nullptr, x, y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
-void WindowsWindow::Move( const int x, const int y )
+void tgon::WindowsWindow::Move( const int x, const int y )
 {
 	RECT rt;
-	GetWindowRect( m_window_handle, &rt );
+	GetWindowRect( m_wndHandle, &rt );
 
-	SetWindowPos( m_window_handle, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
+	SetWindowPos( m_wndHandle, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
 }
 
-bool WindowsWindow::RegisterWindow( const WindowStyle& ws, const HICON hIcon, const HCURSOR hCursor )
+LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
-	WNDCLASSEX wcex = { 0 };
-	wcex.cbSize = sizeof( wcex );
-	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
-	wcex.hCursor = hCursor;
-	wcex.hIcon = hIcon;
-	wcex.hInstance = GetModuleHandle( nullptr );
-	wcex.lpfnWndProc = MsgBaseProc;
-	wcex.lpszClassName = ws.Caption;
-	wcex.style = CS_VREDRAW | CS_HREDRAW;
+	/*
+		CallbackMsgProc is static function so it can't access WindowsWindow's member.
+		This problem is solved by calling CustomMsgProc function.
+	*/
 
-	return RegisterClassEx( &wcex ) != 0;
-}
-
-LRESULT WindowsWindow::MsgBaseProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam )
-{
-	if ( uMsg == WM_NCCREATE )
+	if ( msg == WM_NCCREATE )
 	{
-		/*
-			When window created, receive allocated pointer( WindowsWindow* ) by 'CreateWindowEx' funtion's last parameter.
-			because MsgBaseProc func is static, so it can't access WindowsWindow's stack data.
-
-			¡Ø So this func works to make possible to access stack data through call MsgDelivedProc.
-		*/
-		SetWindowLong( hWnd, GWL_USERDATA, reinterpret_cast<LONG>((
+		SetWindowLong( wndHandle, GWL_USERDATA, reinterpret_cast<LONG>((
 				LPCREATESTRUCT( lParam )->lpCreateParams ))); 
 	}
 
 	WindowsWindow* pWindow = reinterpret_cast<WindowsWindow*>(
-			GetWindowLong( hWnd, GWL_USERDATA ));
+			GetWindowLong( wndHandle, GWL_USERDATA ));
 
 	if ( pWindow )
-		return pWindow->MsgDelivedProc( hWnd, uMsg, wParam, lParam );
+		return pWindow->CustomMsgProc( wndHandle, msg, wParam, lParam );
 	else
-		return DefWindowProc( hWnd, uMsg, wParam, lParam );
+		return DefWindowProc( wndHandle, msg, wParam, lParam );
 }
 
-LRESULT CALLBACK WindowsWindow::MsgDelivedProc( HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam )
+LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
-	SetWindowEvent( uMsg );
+	SetWindowEvent( msg );
 
-	/* WARN: DON'T ADD CASE into the follow switch-syntax!!!! */
-	switch( uMsg )
+	switch( msg )
 	{
 	case WM_CREATE:
 		{
 			MARGINS margins = { -1, -1, -1, -1 };
-			DwmExtendFrameIntoClientArea( hWnd, &margins );
+			DwmExtendFrameIntoClientArea( wndHandle, &margins );
 		}
 		break;
 
 	case WM_CLOSE:
-//		msg::out << "Close clicking by right mouse button" << msg::warn;
 		break;
 
 	default:
-		return DefWindowProc( hWnd, uMsg, wParam, lParam );
+		return DefWindowProc( wndHandle, msg, wParam, lParam );
 	}
 	
 	return 0;
 }
-NSEND( );

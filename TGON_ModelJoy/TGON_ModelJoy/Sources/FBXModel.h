@@ -23,7 +23,7 @@ private:
 	};
 
 public:
-	CFBXModel( _In_ const char* const szFilePath = nullptr );
+	CFBXModel( _In_ const char* const filePath = nullptr );
 	~CFBXModel( );
 
 	virtual void Render( ) override;

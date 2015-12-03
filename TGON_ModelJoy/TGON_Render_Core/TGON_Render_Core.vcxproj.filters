@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Sources\private">
+      <UniqueIdentifier>{34e5074b-2b6c-4268-bb16-7c856f7a87b9}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="Sources\public">
+      <UniqueIdentifier>{ffa840b3-d5ec-47ad-b1e2-debd353652be}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Sources\private\Direct3D">
+      <UniqueIdentifier>{e6d4bd68-9675-4f0d-b6bc-fdcd1daeff84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Properties">
+      <UniqueIdentifier>{a9000e4b-c800-4168-80dd-8362cf9e57ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Direct3D">
+      <UniqueIdentifier>{e0802c63-1c10-47a9-bae2-54b1e505d004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Interface">
+      <UniqueIdentifier>{1ab58e65-caf1-4741-9ce4-a4c520db122d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Interface">
+      <UniqueIdentifier>{0d468509-355f-40d3-953a-8d5c75c961cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\D3dFrameType.h">
+      <Filter>Sources\public\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3dFVF.h">
+      <Filter>Sources\public\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsInterface.h">
+      <Filter>Sources\public\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3Dt.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\GraphicsInterface.cpp">
+      <Filter>Sources\private\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Direct3Dt.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="p\TGON_Direct3D_x64.props">
+      <Filter>Properties</Filter>
+    </None>
+    <None Include="p\TGON_Direct3D_x86.props">
+      <Filter>Properties</Filter>
+    </None>
+  </ItemGroup>
+</Project>

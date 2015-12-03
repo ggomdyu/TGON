@@ -11,16 +11,16 @@ int KapMain( int argc, char* argv[] )
 {
 	WindowStyle ws;
 	ws.ShowMiddle = true;
-	ws.Width = 1200;
-	ws.Height = 1000;
+	ws.width = 1200;
+	ws.height = 1000;
+	ws.caption = L"ModelJoy";
 	ws.Popup = true;
 	//ws.Resizeable = true;
-	ws.Caption = L"ModelJoy";
 
 	const std::shared_ptr<Window> pWindow( new Window( ws ));
 	pWindow->Make( );
 
-	CDirect3D9::get()->Initialize(pWindow->GetWindowHandle());
+	Direct3D9::get()->Initialize(pWindow->GetWindowHandle());
 	Application::AddWindow( "MainWnd", pWindow );
 
 	// test
@@ -31,9 +31,9 @@ int KapMain( int argc, char* argv[] )
 	{
 		if ( !Application::ResponseMessage( ))
 		{
-			CDirect3D9::get( )->BeginDraw( );
+			Direct3D9::get( )->BeginDraw( );
 			pModel->Render();
-			CDirect3D9::get( )->EndDraw( );
+			Direct3D9::get( )->EndDraw( );
 		}
 		else
 		{
