@@ -117,6 +117,9 @@
     <ProjectReference Include="..\TGON_Platform_Core\TGON_Platform_Core.vcxproj">
       <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TGON_Render_Core\TGON_Render_Core.vcxproj">
+      <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

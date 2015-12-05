@@ -1,6 +1,8 @@
 #pragma once
 
-namespace FrameType {
+#include <string>
+
+namespace FrameEnum {
 	enum
 	{
 		Empty,
@@ -16,3 +18,13 @@ namespace FrameType {
 		Root,
 	};
 }
+
+struct FbxFrame
+{
+	FbxFrame( ) :
+		frameType( FrameEnum::Empty ) {}
+
+	int frameType;
+	std::string name;
+};
+

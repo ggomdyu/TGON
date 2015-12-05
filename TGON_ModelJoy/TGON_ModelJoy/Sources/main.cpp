@@ -20,7 +20,7 @@ int KapMain( int argc, char* argv[] )
 	const std::shared_ptr<Window> pWindow( new Window( ws ));
 	pWindow->Make( );
 
-	Direct3D9::get()->Initialize(pWindow->GetWindowHandle());
+	Direct3D9::GetInstance()->Initialize(pWindow->GetWindowHandle());
 	Application::AddWindow( "MainWnd", pWindow );
 
 	// test
@@ -31,9 +31,9 @@ int KapMain( int argc, char* argv[] )
 	{
 		if ( !Application::ResponseMessage( ))
 		{
-			Direct3D9::get( )->BeginDraw( );
+			Direct3D9::GetInstance( )->BeginDraw( );
 			pModel->Render();
-			Direct3D9::get( )->EndDraw( );
+			Direct3D9::GetInstance( )->EndDraw( );
 		}
 		else
 		{

@@ -10,3 +10,11 @@ Direct3Dt::Direct3Dt( )
 Direct3Dt::~Direct3Dt( )
 {
 }
+
+void Direct3Dt::BeginDraw( )
+{
+}
+
+void Direct3Dt::EndDraw( )
+{
+}

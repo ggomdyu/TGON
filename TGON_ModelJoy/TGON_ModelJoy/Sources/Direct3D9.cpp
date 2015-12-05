@@ -3,8 +3,6 @@
 
 #include "D3dFVF.h"
 
-static IDirect3DVertexBuffer9* g_vertexBuffer;
-
 Direct3D9::Direct3D9( ) :
 	m_d3d( Direct3DCreate9( D3D_SDK_VERSION )),
 	m_eye( 0.0f, 3.0f, -5.0f ),
@@ -43,7 +41,7 @@ bool Direct3D9::Initialize( HWND hWnd )
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
 
 	if ( FAILED( m_d3d->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-		D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_d3dDevice ) ) )
+		D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_d3dDevice )))
 	{
 		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
 		abort( );
@@ -52,8 +50,6 @@ bool Direct3D9::Initialize( HWND hWnd )
 	m_d3dDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
 	m_d3dDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
 	m_d3dDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
-
-//	m_d3dDevice->CreateVertexBuffer(  )
 
 	return true;
 }

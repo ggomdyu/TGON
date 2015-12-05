@@ -23,9 +23,6 @@
     <Filter Include="Sources\private\Thirdparty">
       <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\private\Animation">
-      <UniqueIdentifier>{d9e6bbfd-50f6-486e-8bab-3479c9cea9f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\private\pch">
       <UniqueIdentifier>{6e401d27-1d97-4fc3-92d7-ed5f1a3a3f48}</UniqueIdentifier>
     </Filter>

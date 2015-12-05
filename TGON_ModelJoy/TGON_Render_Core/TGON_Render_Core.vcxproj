@@ -139,12 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\FbxFrame.h" />
     <ClInclude Include="Sources\Direct3Dt.h" />
     <ClInclude Include="Sources\GraphicsInterface.h" />
     <ClInclude Include="Sources\D3dFVF.h" />
-    <ClInclude Include="Sources\D3dFrameType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\FbxFrame.cpp" />
     <ClCompile Include="Sources\Direct3Dt.cpp" />
     <ClCompile Include="Sources\GraphicsInterface.cpp" />
   </ItemGroup>

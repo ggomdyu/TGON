@@ -17,11 +17,14 @@
     <Filter Include="Sources\public\Pattern">
       <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\TextParse">
-      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\private\Pattern">
       <UniqueIdentifier>{60c44462-b00b-4f4a-a7b9-c3b4bb55a2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Math">
+      <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\String">
+      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

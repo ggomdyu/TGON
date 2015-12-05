@@ -25,11 +25,11 @@ void CFBXModel::Render( )
 {
 	D3DXMATRIXA16 matLocal;
 	D3DXMatrixScaling( &matLocal, 0.005f, 0.006f, 0.005f );
-	Direct3D9::get( )->GetD3dDevice( )->SetTransform( D3DTS_WORLD, &matLocal );
+	Direct3D9::GetInstance( )->GetD3dDevice( )->SetTransform( D3DTS_WORLD, &matLocal );
 
-	Direct3D9::get( )->GetD3dDevice( )->SetStreamSource( 0, m_pVB, 0, sizeof( ModelVertex ));
-	Direct3D9::get( )->GetD3dDevice( )->SetFVF( FVF::ModelVertex_FVF );
-	Direct3D9::get( )->GetD3dDevice( )->DrawPrimitive( D3DPT_TRIANGLELIST, 0, m_pFbxMesh->GetPolygonCount( ) );
+	Direct3D9::GetInstance( )->GetD3dDevice( )->SetStreamSource( 0, m_pVB, 0, sizeof( ModelVertex ));
+	Direct3D9::GetInstance( )->GetD3dDevice( )->SetFVF( FVF::ModelVertex_FVF );
+	Direct3D9::GetInstance( )->GetD3dDevice( )->DrawPrimitive( D3DPT_TRIANGLELIST, 0, m_pFbxMesh->GetPolygonCount( ) );
 }
 
 void CFBXModel::LoadMesh( const char* const szFilePath )
@@ -77,7 +77,7 @@ void CFBXModel::LoadMesh( const char* const szFilePath )
 
 void CFBXModel::SetUpVertices( )
 {
-	if ( FAILED( Direct3D9::get( )->GetD3dDevice( )->CreateVertexBuffer( m_pFbxMesh->GetPolygonCount( ) * 3 * sizeof( ModelVertex ),
+	if ( FAILED( Direct3D9::GetInstance( )->GetD3dDevice( )->CreateVertexBuffer( m_pFbxMesh->GetPolygonCount( ) * 3 * sizeof( ModelVertex ),
 		0, FVF::ModelVertex_FVF, D3DPOOL_MANAGED, &m_pVB, nullptr ) ) )
 	{
 		msg::out << "Failed to call IDirect3D9Device::CreateVertexBuffer function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;

@@ -7,36 +7,68 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <fbxsdk.h>
 	#include "Singleton.h"
+
+
+	#include <fbxsdk.h>
 	#include "msgstream.h"
 #endif
 
-class FBX final
+	#include <unordered_map>
+#include "FbxFrame.h"
+
+class FBX : public CSingleton<FBX>
 {
-private:
-	struct FBXProxy final : CSingleton<FBXProxy>
-	{
-	public:
-		FBXProxy( );
-		~FBXProxy( );
-
-		__forceinline static void ImportFBX( _In_ const char* const szFilePath, _Out_ FbxScene* const pScene );
-		__forceinline FbxManager* GetManager( ) const { return m_pFbxManager; }
-
-	private:
-		FbxManager* m_pFbxManager;
-		FbxIOSettings* m_pFbxIOSettings;
-	};
-
 public:
-	static void LoadAttributes( _In_ const char* const szFilePath, _Out_ FbxScene* const pScene,
-										_Out_ FbxMesh*& pMesh );
+	FBX( );
+	~FBX( );
 
-	__forceinline static FbxManager* GetManager( ) { return FBXProxy::get( )->GetManager( ); }
+	FbxManager* GetFbxManager( ) const { return m_fbxManager; }
 
 private:
-	FBX( ) = delete;
-	~FBX( ) = delete;
+	FbxManager* m_fbxManager;
+	FbxIOSettings* m_fbxIOSettings;
 };
 
+class FBXImporter
+{
+public:
+	explicit FBXImporter( _In_ const char* fbxFilepath = nullptr );
+	~FBXImporter( );
+
+	void ReadFBX( _In_ const char* fbxFilepath );
+
+private:
+	//void InitializeFBXInterface( );
+
+	/*
+		¡Ø First - Load FbxScene which contains nodes
+	*/
+	void LoadScene( _In_ const char* fbxFilepath );
+
+	void ProcessScene( int poseIndex = -1 );
+	void ProcessNodeRecursive( FbxNode*, FbxPose*, FbxFrame* );
+	void ProcessNode( FbxNode*, FbxPose*, FbxFrame* ); /* Find outted node */
+
+	void SetNodeProperties( FbxNode*, FbxPose*, FbxFrame* );
+
+	/*
+		¡Ø Second - 
+	*/
+	void ProcessMeshNode( FbxNode*, FbxPose*, FbxFrame* );
+	void ProcessLightNode( );
+	void ProcessCameraNode( );
+
+	/*
+		¡Ø Third
+	*/
+	bool CreateMeshObject( FbxFrame* fbxFrame, FbxNode* fbxNode/*, NodeToFrameMap & nodeToFrameMap*/ );
+
+private:
+	FbxScene* m_fbxScene;
+	FbxImporter* m_fbxImporter;
+	std::unordered_map<FbxNode*, FbxFrame*> m_fbxFrameContainer;
+
+	FbxMesh* m_fbxMesh;
+	FbxFrame* m_fbxRootFrame;
+};

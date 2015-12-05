@@ -23,25 +23,31 @@
     <Filter Include="Sources\public\Direct3D">
       <UniqueIdentifier>{e0802c63-1c10-47a9-bae2-54b1e505d004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\Interface">
-      <UniqueIdentifier>{1ab58e65-caf1-4741-9ce4-a4c520db122d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\private\Interface">
       <UniqueIdentifier>{0d468509-355f-40d3-953a-8d5c75c961cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\Direct3D\FVF">
+      <UniqueIdentifier>{cb8d8ebf-6d32-4f5d-bd59-e36081658581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Interface">
+      <UniqueIdentifier>{1ab58e65-caf1-4741-9ce4-a4c520db122d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\FBX">
+      <UniqueIdentifier>{78e99bc7-0df2-41a9-8c7d-fe04705d7ef9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\D3dFrameType.h">
-      <Filter>Sources\public\Direct3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\D3dFVF.h">
-      <Filter>Sources\public\Direct3D</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\GraphicsInterface.h">
       <Filter>Sources\public\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\D3dFVF.h">
+      <Filter>Sources\public\Direct3D\FVF</Filter>
+    </ClInclude>
     <ClInclude Include="Sources\Direct3Dt.h">
-      <Filter>Sources\public</Filter>
+      <Filter>Sources\public\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\FbxFrame.h">
+      <Filter>Sources\public\FBX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +55,9 @@
       <Filter>Sources\private\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Direct3Dt.cpp">
+      <Filter>Sources\private\Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\FbxFrame.cpp">
       <Filter>Sources\private</Filter>
     </ClCompile>
   </ItemGroup>

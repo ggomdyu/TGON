@@ -19,7 +19,7 @@ template <typename T>
 class CSingleton : private Uncopyable
 {
 public:
-	static const std::shared_ptr<T> get( )
+	static const std::shared_ptr<T> GetInstance( )
 	{
 		if ( !m_Instance ) {
 			m_Instance.reset( new T );
