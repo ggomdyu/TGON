@@ -7,21 +7,21 @@
 #pragma once
 #include "GenericApplication.h"
 
-NSBEGIN( tgon );
-class WindowsApplication;
-typedef WindowsApplication Application;
+namespace tgon {
+	class WindowsApplication;
+	typedef WindowsApplication Application;
 
-class WindowsApplication final : public GenericApplication
-{
-public:
-	static bool ResponseMessage( );
-	static HINSTANCE GetInstanceHandle( ) { return m_hInstance; }
+	class WindowsApplication final : public GenericApplication
+	{
+	public:
+		static	bool			ResponseMessage( );
+		static	HINSTANCE	GetInstanceHandle( ) { return m_hInstance; }
 
-private:
-	WindowsApplication( ) = delete;
-	virtual ~WindowsApplication( ) = delete;
+	private:
+		WindowsApplication( ) = delete;
+		virtual ~WindowsApplication( ) = delete;
 
-private:
-	static HINSTANCE m_hInstance;
-};
-NSEND( );
+	private:
+		static HINSTANCE m_hInstance;
+	};
+}

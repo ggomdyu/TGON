@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -58,19 +58,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="TGON_Win.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -82,9 +82,9 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TGON_USE_PRECOMPILED_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -140,22 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\msgstream.h" />
-    <ClInclude Include="Sources\GenericApplication.h" />
     <ClInclude Include="Sources\GenericWindow.h" />
     <ClInclude Include="Sources\WindowEvent.h" />
-    <ClInclude Include="Sources\WindowsApplication.h" />
     <ClInclude Include="Sources\WindowsMain.h" />
     <ClInclude Include="Sources\WindowStyle.h" />
     <ClInclude Include="Sources\WindowsWindow.h" />
-    <ClInclude Include="Sources\stdafx.h" />
-    <ClInclude Include="Sources\targetver.h" />
+    <ClInclude Include="Sources\pch\stdafx.h" />
+    <ClInclude Include="Sources\pch\targetver.h" />
     <ClInclude Include="Sources\WindowsWindowUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\GenericApplication.cpp" />
     <ClCompile Include="Sources\GenericWindow.cpp" />
-    <ClCompile Include="Sources\WindowsApplication.cpp" />
+    <ClCompile Include="Sources\WindowEvent.cpp" />
     <ClCompile Include="Sources\WindowsMain.cpp" />
     <ClCompile Include="Sources\WindowsWindow.cpp" />
     <ClCompile Include="Sources\stdafx.cpp">
@@ -164,16 +160,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Sources\msgstream.cpp" />
     <ClCompile Include="Sources\WindowsWindowUtil.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
-      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TGON_Win.props" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

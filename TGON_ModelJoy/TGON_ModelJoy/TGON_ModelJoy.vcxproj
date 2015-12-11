@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -35,19 +35,17 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Platform_Core\TGON_Win.props" />
-    <Import Project="..\TGON_Render_Core\TGON_Direct3D_x86.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Platform_Core\TGON_Win.props" />
-    <Import Project="..\TGON_Render_Core\TGON_Direct3D_x86.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\include\FBX;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\include\FBX;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -65,7 +63,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Core\Sources;$(ProjectDir)\..\TGON_Platform_Core\Sources;$(ProjectDir)\..\TGON_Render_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Core\Sources;$(ProjectDir)\..\TGON_Platform_Core\Sources;$(ProjectDir)\..\TGON_DirectX\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -96,18 +94,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\ModelBase.cpp" />
-    <ClCompile Include="Sources\FBX.cpp" />
-    <ClCompile Include="Sources\FBXModel.cpp" />
-    <ClCompile Include="Sources\Direct3D9.cpp" />
     <ClCompile Include="Sources\main.cpp" />
     <ClCompile Include="Sources\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\ModelBase.h" />
-    <ClInclude Include="Sources\Direct3D9.h" />
-    <ClInclude Include="Sources\FBX.h" />
-    <ClInclude Include="Sources\FBXModel.h" />
     <ClInclude Include="Sources\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +107,7 @@
     <ProjectReference Include="..\TGON_Platform_Core\TGON_Platform_Core.vcxproj">
       <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TGON_Render_Core\TGON_Render_Core.vcxproj">
+    <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
       <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
     </ProjectReference>
   </ItemGroup>

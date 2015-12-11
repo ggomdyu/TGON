@@ -13,15 +13,9 @@
     <Filter Include="Sources\public\Model">
       <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\Thirdparty">
-      <UniqueIdentifier>{5673f540-0a64-42cf-900d-4857e389412a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\private">
       <UniqueIdentifier>{0ede85c9-83f5-4cb0-9bc1-3fafaf0a89a8}</UniqueIdentifier>
       <Extensions>cpp</Extensions>
-    </Filter>
-    <Filter Include="Sources\private\Thirdparty">
-      <UniqueIdentifier>{0abf721e-79e3-42c0-afc7-c6804b8a5bff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\private\pch">
       <UniqueIdentifier>{6e401d27-1d97-4fc3-92d7-ed5f1a3a3f48}</UniqueIdentifier>
@@ -31,18 +25,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\FBXModel.cpp">
-      <Filter>Sources\public\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\FBX.cpp">
-      <Filter>Sources\private\Thirdparty</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Direct3D9.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ModelBase.cpp">
-      <Filter>Sources\public\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\main.cpp">
       <Filter>Sources\private</Filter>
     </ClCompile>
@@ -51,18 +33,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\FBXModel.h">
-      <Filter>Sources\public\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\FBX.h">
-      <Filter>Sources\public\Thirdparty</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Direct3D9.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ModelBase.h">
-      <Filter>Sources\public\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\stdafx.h">
       <Filter>Sources\public\pch</Filter>
     </ClInclude>

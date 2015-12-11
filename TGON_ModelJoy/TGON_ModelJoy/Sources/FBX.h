@@ -9,6 +9,7 @@
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include "Singleton.h"
 
+	#include <unordered_set>
 
 	#include <fbxsdk.h>
 	#include "msgstream.h"
@@ -32,6 +33,9 @@ private:
 
 class FBXImporter
 {
+private:
+	typedef std::vector<std::unordered_set<int>> ControlPointRemap;
+
 public:
 	explicit FBXImporter( _In_ const char* fbxFilepath = nullptr );
 	~FBXImporter( );
@@ -47,8 +51,8 @@ private:
 	void LoadScene( _In_ const char* fbxFilepath );
 
 	void ProcessScene( int poseIndex = -1 );
-	void ProcessNodeRecursive( FbxNode*, FbxPose*, FbxFrame* );
-	void ProcessNode( FbxNode*, FbxPose*, FbxFrame* ); /* Find outted node */
+	void ProcessNodeRecursive( FbxNode*, FbxPose*, FbxFrame* );  /* Find out node */
+	void ProcessNode( FbxNode*, FbxPose*, FbxFrame* ); /* Found out */
 
 	void SetNodeProperties( FbxNode*, FbxPose*, FbxFrame* );
 
@@ -63,6 +67,8 @@ private:
 		¡Ø Third
 	*/
 	bool CreateMeshObject( FbxFrame* fbxFrame, FbxNode* fbxNode/*, NodeToFrameMap & nodeToFrameMap*/ );
+	void LoadGeometryFromNode( /*spFBXMesh& spMesh, */FbxNode* pNode, FbxFrame* pFrame,
+											ControlPointRemap& controlPointRemap );
 
 private:
 	FbxScene* m_fbxScene;

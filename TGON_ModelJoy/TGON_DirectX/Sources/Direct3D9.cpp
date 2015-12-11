@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "Direct3D9.h"
 
 #include "D3dFVF.h"
@@ -11,7 +11,8 @@ Direct3D9::Direct3D9( ) :
 {
 	if ( !m_d3d )
 	{
-		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
+		MessageBox( GetFocus( ), L"Failed to call Direct3DCreate9.", L"WARNING!",
+					MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
 }
@@ -43,7 +44,8 @@ bool Direct3D9::Initialize( HWND hWnd )
 	if ( FAILED( m_d3d->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 		D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_d3dDevice )))
 	{
-		msg::out << "Failed to call IDirect3D9::CreateDevice function.\n\n" << __FILE__ << " (" << __LINE__ << ")" << msg::warn;
+		MessageBox( GetFocus( ), L"Failed to call IDirect3D9::CreateDevice.", L"WARNING!",
+					MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
 
@@ -81,35 +83,35 @@ void Direct3D9::MakeView( D3DXVECTOR3& eye, D3DXVECTOR3& lookAt, D3DXVECTOR3& up
 
 	D3DXMatrixLookAtLH( &m_matView, &m_eye, &m_lookAt, &m_up );
 }
-
-void Direct3D9::DrawLine( const D3DXVECTOR3& p1, const D3DXVECTOR3& p2, DWORD color )
-{
-	HRESULT hr;
-	m_d3dDevice->SetRenderState( D3DRS_COLORVERTEX, true );
-	m_d3dDevice->SetRenderState( D3DRS_LIGHTING, false );
-	m_d3dDevice->SetRenderState( D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_COLOR1 );
-	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1 );
-	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE );
-	m_d3dDevice->SetTextureStageState( 1, D3DTSS_COLOROP, D3DTOP_DISABLE );
-
-	LineVertex line[2];
-	line[0].pos = p1;
-	line[0].color = color;
-	line[1].pos = p2;
-	line[1].color = color;
-
-	hr = m_d3dDevice->SetFVF( FVF::Line_FVF );
-	hr = m_d3dDevice->SetPixelShader( 0 );
-	hr = m_d3dDevice->SetVertexShader( 0 );
-
-	hr = m_d3dDevice->DrawPrimitiveUP( D3DPT_LINELIST, 1, line, sizeof( LineVertex ));
-
-	if ( FAILED( hr ))
-	{
-		//MessageBox( NULL, DXGetErrorString9(hr), "Points Error", MB_OK );
-		return;
-	}
-}
+//
+//void Direct3D9::DrawLine( const D3DXVECTOR3& p1, const D3DXVECTOR3& p2, DWORD color )
+//{
+//	HRESULT hr;
+//	m_d3dDevice->SetRenderState( D3DRS_COLORVERTEX, true );
+//	m_d3dDevice->SetRenderState( D3DRS_LIGHTING, false );
+//	m_d3dDevice->SetRenderState( D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_COLOR1 );
+//	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1 );
+//	m_d3dDevice->SetTextureStageState( 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE );
+//	m_d3dDevice->SetTextureStageState( 1, D3DTSS_COLOROP, D3DTOP_DISABLE );
+//
+//	LineVertex line[2];
+//	line[0].pos = p1;
+//	line[0].color = color;
+//	line[1].pos = p2;
+//	line[1].color = color;
+//
+//	hr = m_d3dDevice->SetFVF( FVF::Line_FVF );
+//	hr = m_d3dDevice->SetPixelShader( 0 );
+//	hr = m_d3dDevice->SetVertexShader( 0 );
+//
+//	hr = m_d3dDevice->DrawPrimitiveUP( D3DPT_LINELIST, 1, line, sizeof( LineVertex ));
+//
+//	if ( FAILED( hr ))
+//	{
+//		//MessageBox( NULL, DXGetErrorString9(hr), "Points Error", MB_OK );
+//		return;
+//	}
+//}
 
 void Direct3D9::MoveLocalX( float dist )
 {

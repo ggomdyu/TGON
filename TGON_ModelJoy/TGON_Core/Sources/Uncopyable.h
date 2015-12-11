@@ -25,10 +25,10 @@ private:
 
 /* Type 2
 	
-	bad way ( code bloat issue & I hate preprocessor )  
+	bad way ( code bloat issue & I hate this )  
 
 */
 #define Implement_Uncopyable( T )			\
-private:											\
+private:												\
 	T( const T& ) = delete;						\
 	T& operator=( const T& ) = delete;

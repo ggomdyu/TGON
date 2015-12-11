@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -99,6 +99,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,11 +141,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Singleton.h" />
-    <ClInclude Include="Sources\Uncopyable.h" />
+    <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\CommMessage.h" />
+    <ClInclude Include="Sources\CoreEngine.h" />
+    <ClInclude Include="Sources\ISystem.h" />
+    <ClInclude Include="Sources\MsgManager.h" />
+    <ClInclude Include="Sources\SociableManager.h" />
+    <ClInclude Include="Sources\ISociable.h" />
+    <ClInclude Include="Sources\Singleton.h" />
+    <ClInclude Include="Sources\Uncopyable.h" />
+    <ClInclude Include="Sources\WindowSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\CommMessage.cpp" />
+    <ClCompile Include="Sources\CoreEngine.cpp" />
+    <ClCompile Include="Sources\ISystem.cpp" />
+    <ClCompile Include="Sources\MsgManager.cpp" />
+    <ClCompile Include="Sources\SociableManager.cpp" />
+    <ClCompile Include="Sources\ISociable.cpp" />
     <ClCompile Include="Sources\Uncopyable.cpp" />
+    <ClCompile Include="Sources\WindowSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Platform_Core\TGON_Platform_Core.vcxproj">
+      <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

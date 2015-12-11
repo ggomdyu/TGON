@@ -35,31 +35,12 @@
     <Filter Include="Sources\public\FBX">
       <UniqueIdentifier>{78e99bc7-0df2-41a9-8c7d-fe04705d7ef9}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Sources\GraphicsInterface.h">
-      <Filter>Sources\public\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\D3dFVF.h">
-      <Filter>Sources\public\Direct3D\FVF</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Direct3Dt.h">
-      <Filter>Sources\public\Direct3D</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\FbxFrame.h">
-      <Filter>Sources\public\FBX</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Sources\GraphicsInterface.cpp">
-      <Filter>Sources\private\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Direct3Dt.cpp">
-      <Filter>Sources\private\Direct3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\FbxFrame.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
+    <Filter Include="Sources\public\Mesh">
+      <UniqueIdentifier>{e04ed8ee-8c07-4135-b120-012f79868ab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Material">
+      <UniqueIdentifier>{ba9d0d1c-04e6-4f12-a131-a8ba1510b04b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="p\TGON_Direct3D_x64.props">

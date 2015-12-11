@@ -1,46 +1,34 @@
 #include "stdafx.h"
 
-#include "GenericWindow.h"
-#include "GenericApplication.h"
-#include "FBXModel.h"
-#include "Direct3D9.h"
+
+#include "CoreEngine.h"
+#include "WindowSystem.h"
 
 using namespace tgon;
 
-int KapMain( int argc, char* argv[] )
+int tgMain( int argc, char* argv[] )
 {
-	WindowStyle ws;
-	ws.ShowMiddle = true;
-	ws.width = 1200;
-	ws.height = 1000;
-	ws.caption = L"ModelJoy";
-	ws.Popup = true;
-	//ws.Resizeable = true;
+	CoreEngine::GetInstance( )->RegisterSystem( WindowSystem::GetInstance( ));
+	CoreEngine::GetInstance( )->InitializeAllSystems( );
 
-	const std::shared_ptr<Window> pWindow( new Window( ws ));
-	pWindow->Make( );
+	bool isEventExist = false;
 
-	Direct3D9::GetInstance()->Initialize(pWindow->GetWindowHandle());
-	Application::AddWindow( "MainWnd", pWindow );
-
-	// test
-	std::unique_ptr<CFBXModel> pModel( new CFBXModel( "Resources\\FBXModel\\humanoid.FBX" ));
-
-
-	while ( pWindow->GetWindowEvent( ) != WindowEvent::Destroy )
+	while ( true )
 	{
-		if ( !Application::ResponseMessage( ))
+		isEventExist = WindowSystem::GetInstance( )->PumpWindowEvent( );
+		if ( !isEventExist ) /* Idle time */
 		{
-			Direct3D9::GetInstance( )->BeginDraw( );
-			pModel->Render();
-			Direct3D9::GetInstance( )->EndDraw( );
+			CoreEngine::GetInstance( )->FrameMoveAllSystems( );
 		}
 		else
 		{
-			if ( pWindow->GetWindowEvent() == WM_RBUTTONDOWN )
+			if ( WindowSystem::GetInstance( )->IsEventOccured( WindowEvent::Destroy ))
 			{
+				MessageBox( NULL, L"¾ÈµÅ °¡Áö¸¶¤Ð", L"", MB_OK );
 				break;
 			}
+
+			WindowSystem::GetInstance( )->ClearAllWindowEvents( );
 		}
 	}
 	return 0;

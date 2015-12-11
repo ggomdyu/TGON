@@ -7,7 +7,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Sources</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Sources;$(ProjectDir)\Sources\pch</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_WINDOWS_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

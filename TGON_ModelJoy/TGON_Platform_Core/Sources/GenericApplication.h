@@ -9,26 +9,29 @@
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <map>
 	#include <memory>
-	#include "Uncopyable.h"
 #endif
 
 #include "GenericWindow.h"
 
-NSBEGIN( tgon );
-class GenericApplication : private Uncopyable
-{
-public:
-	static void AddWindow( const std::string& key, _In_ const std::shared_ptr<Window>& window );
-	static const std::shared_ptr<Window> GetWindow( _In_ const std::string& key );
+namespace tgon {
+	class GenericApplication
+	{
+	protected:
+		typedef std::shared_ptr<Window>								sspWindow;
+		typedef std::map<std::string, std::shared_ptr<Window>>		WindowContainer;
 
-private:
-	GenericApplication( ) = delete;
-	virtual ~GenericApplication( ) = delete;
+	public:
+		static void					AddWindow( _In_ const std::string& key, _In_ const sspWindow& window );
+		static const sspWindow	GetWindow( _In_ const std::string& key );
 
-private:
-	static std::map<std::string, std::shared_ptr<Window>> m_wndRepository;
-};
-NSEND( );
+	private:
+		GenericApplication( ) = delete;
+		virtual ~GenericApplication( ) = delete;
+
+	private:
+		static WindowContainer m_wndRepo;
+	};
+}
 
 #ifdef PLATFORM_WINDOWS_OS
 	#include "WindowsApplication.h"

@@ -6,9 +6,14 @@
 */
 
 #pragma once
-#ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <atlbase.h>
+	#include <Windows.h>
+	#include <d3d9.h>
+	#include <d3dx9.h>
+	#include <atlbase.h>
+
 	#include "Singleton.h"
+#ifndef TGON_USE_PRECOMPILED_HEADER
 #endif
 
 struct LineVertex
@@ -17,7 +22,7 @@ struct LineVertex
 	DWORD color;
 };
 
-class Direct3D9 : public CSingleton<Direct3D9>
+class Direct3D9 : public Singleton<Direct3D9>
 {
 public:
 	Direct3D9( );

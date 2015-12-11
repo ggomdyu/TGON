@@ -20,6 +20,6 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 
-	int nErrCode = KapMain( 0, 0 );
+	int nErrCode = tgMain( __argc, __argv );
 	return nErrCode;
 }

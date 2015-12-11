@@ -25,6 +25,9 @@ struct FbxFrame
 		frameType( FrameEnum::Empty ) {}
 
 	int frameType;
+	FbxFrame* frameFirstChild;
+	FbxFrame* frameSibling;
+
 	std::string name;
 };
 

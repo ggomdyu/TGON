@@ -14,30 +14,111 @@
       <UniqueIdentifier>{69ced53d-188a-4c72-a1f2-f606872b4a59}</UniqueIdentifier>
       <Extensions>h</Extensions>
     </Filter>
-    <Filter Include="Sources\public\Pattern">
-      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
+    <Filter Include="Sources\private\CoreEngine">
+      <UniqueIdentifier>{a4b2ba3d-74e1-4a10-a251-ecb53832b4b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\private\Pattern">
-      <UniqueIdentifier>{60c44462-b00b-4f4a-a7b9-c3b4bb55a2e0}</UniqueIdentifier>
+    <Filter Include="Sources\public\Common">
+      <UniqueIdentifier>{e2eed7ce-f74c-4fc8-8664-76f4f6790d4e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\Math">
+    <Filter Include="Sources\public\Common\Math">
       <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\String">
+    <Filter Include="Sources\public\Common\Pattern">
+      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Common\String">
       <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Common">
+      <UniqueIdentifier>{4da17493-8f4c-4e57-a32e-c0bc7a0501e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Common\Pattern">
+      <UniqueIdentifier>{60c44462-b00b-4f4a-a7b9-c3b4bb55a2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\CoreEngine">
+      <UniqueIdentifier>{12c3ce0c-0989-4c60-a025-45f2fab719b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\CoreEngine\System">
+      <UniqueIdentifier>{f90c5df5-fdda-4253-a127-29e5ba982a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\CoreEngine\System">
+      <UniqueIdentifier>{234c0bd9-78ff-4779-827a-60f8f8b70c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\CoreEngine\Manager">
+      <UniqueIdentifier>{fcc1debe-6a30-44d9-9b78-d3d10cb7a95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\CoreEngine\Manager\Sociable">
+      <UniqueIdentifier>{865e805d-a32a-47b2-8d10-04d93f001e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\CoreEngine\Manager\Message">
+      <UniqueIdentifier>{f93a5d0f-0b53-49f5-9bd8-1cf0d05e4015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\CoreEngine\Manager">
+      <UniqueIdentifier>{c0bba221-0544-47ae-94ad-b269fadda558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\CoreEngine\Manager\Sociable">
+      <UniqueIdentifier>{fbfd65b2-add4-435b-a409-a2d15180e37d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\CoreEngine\Manager\Message">
+      <UniqueIdentifier>{f788cc27-8f59-445d-9414-70c77a4bdbd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Singleton.h">
-      <Filter>Sources\public\Pattern</Filter>
-    </ClInclude>
+    <None Include="TGON_Common.props" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="Sources\Uncopyable.h">
-      <Filter>Sources\public\Pattern</Filter>
+      <Filter>Sources\public\Common\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Singleton.h">
+      <Filter>Sources\public\Common\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\SociableManager.h">
+      <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ISociable.h">
+      <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowSystem.h">
+      <Filter>Sources\public\CoreEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\MsgManager.h">
+      <Filter>Sources\public\CoreEngine\Manager\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\CommMessage.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ISystem.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\CoreEngine.h">
+      <Filter>Sources\public\CoreEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Uncopyable.cpp">
-      <Filter>Sources\private\Pattern</Filter>
+      <Filter>Sources\private\Common\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\SociableManager.cpp">
+      <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ISociable.cpp">
+      <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowSystem.cpp">
+      <Filter>Sources\private\CoreEngine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\MsgManager.cpp">
+      <Filter>Sources\private\CoreEngine\Manager\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\CommMessage.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ISystem.cpp">
+      <Filter>Sources\private</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\CoreEngine.cpp">
+      <Filter>Sources\private\CoreEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

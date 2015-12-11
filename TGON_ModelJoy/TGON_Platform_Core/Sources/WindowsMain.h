@@ -6,4 +6,4 @@
 * 최종 수정일 : 2015-11-12
 */
 
-int KapMain( int argc, char* argv[] );
+int tgMain( int argc, char* argv[] );

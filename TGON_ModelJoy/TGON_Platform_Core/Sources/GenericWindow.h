@@ -7,66 +7,45 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include "Uncopyable.h"
-
 	#include <iostream>
 	#include <unordered_set>
+
 	#include "WindowStyle.h"
 	#include "WindowEvent.h"
 #endif
 
-
-NSBEGIN( tgon );
-class GenericWindow : private Uncopyable
-{
-private:
-	/*
-		This code violate rule of 'make common case fast'...
-		but so simple and readable
-	*/
-	struct EventProxy : private Uncopyable
+namespace tgon {
+	class GenericWindow
 	{
-		std::unordered_set<uint32_t> msgRepo;
+		typedef std::unordered_set<uint32_t> WndEventRepo;
 
-		friend bool GenericWindow::EventProxy::operator==( const EventProxy& lhs, const uint32_t uMsg )
-		{
-			return lhs.msgRepo.find( uMsg ) != lhs.msgRepo.end( );
-		}
+	public:
+		explicit						GenericWindow( const WindowStyle& ws );
+		virtual							~GenericWindow( );
 
-		friend bool GenericWindow::EventProxy::operator!=( const EventProxy& lhs, const uint32_t uMsg )
-		{
-			return lhs.msgRepo.find( uMsg ) == lhs.msgRepo.end( );
-		}
+	public:
+		virtual void					Show( ) = 0;
+		virtual void					BringToTop( ) = 0;
+		virtual void					SetPosition( const int x, const int y ) = 0;
+		virtual void					Move( const int x, const int y ) = 0;
+		virtual void					Exit( ) = 0;
+
+	public:
+		const WindowStyle&		GetWindowStyle( ) const									{ return m_ws; }
+		const WndEventRepo&		GetWindowEventRepo( ) const							{ return m_wndEventRepo; }
+
+		virtual bool					PumpWindowEvent( ) = 0;
+		void							ClearAllWindowEvent( )									{ m_wndEventRepo.clear( ); }									
+
+	protected:
+		virtual void					MakeWindow( const WindowStyle& ws ) = 0;
+		void							InsertOccuredEvent( uint32_t eventType )			{ m_wndEventRepo.insert( eventType ); }
+
+	private:
+		WindowStyle					m_ws;
+		WndEventRepo				m_wndEventRepo;
 	};
-
-public:
-	explicit GenericWindow( const WindowStyle& ws );
-	virtual ~GenericWindow( );
-
-public:
-	virtual void Make( ) = 0;
-
-	/* Show */
-	virtual void BringToTop( ) = 0;
-	virtual void Show( ) = 0;
-
-	/* Move, animate, etc... */
-	virtual void SetPosition( const int x, const int y ) = 0; 
-	virtual void Move( const int x, const int y ) = 0;
-	
-public:
-	const EventProxy& GetWindowEvent( ) const { return m_eventProxy; }
-	const WindowStyle& GetWindowStyle( ) const { return m_ws; }
-
-protected:
-	void ResetWindowEvent( ) { m_eventProxy.msgRepo.clear( ); }
-	void SetWindowEvent( const uint32_t uMsg ) { m_eventProxy.msgRepo.insert( uMsg ); }
-
-private:
-	EventProxy m_eventProxy;
-	WindowStyle m_ws;
-};
-NSEND( );
+}
 
 #ifdef PLATFORM_WINDOWS_OS
 	#include "WindowsWindow.h"

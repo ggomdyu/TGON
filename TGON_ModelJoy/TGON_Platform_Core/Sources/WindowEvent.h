@@ -7,15 +7,16 @@
 */
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <windows.h>
+	//#include <stdint.h>
 #endif
+	#include <windows.h>
 
 #ifdef PLATFORM_WINDOWS_OS
 	#define ET_NONE 0
 	#define ET_CREATE WM_CREATE
 	#define ET_SIZE WM_SIZE
 	#define ET_MOVE WM_MOVE
-	#define ET_DESTROY WM_QUIT
+	#define ET_DESTROY WM_DESTROY
 #endif
 
 struct WindowEvent
