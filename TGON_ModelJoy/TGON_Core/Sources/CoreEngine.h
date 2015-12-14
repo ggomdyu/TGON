@@ -10,11 +10,15 @@ namespace tgon {
 		Implement_Singleton( CoreEngine )
 
 	public:
-		void		InitializeAllSystems( );
-		void		FrameMoveAllSystems( );
+		void				InitializeAllSystems( );
+		void				FrameMove( );
 
 	public:
-		void		RegisterSystem( _In_ tgon::ISystem* system )		{ m_systemRepo.push_back( system ); }
+		void __cdecl		RegisterSystem( _In_ ISystem* system, ... );
+
+	private:
+		void				FrameMoveAllManagers( );
+		void				FrameMoveAllSystems( );
 
 	private:
 		CoreEngine( );

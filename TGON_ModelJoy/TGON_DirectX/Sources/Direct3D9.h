@@ -22,6 +22,11 @@ struct LineVertex
 	DWORD color;
 };
 
+class GraphicInterfaceLayer
+{
+
+};
+
 class Direct3D9 : public Singleton<Direct3D9>
 {
 public:
@@ -50,8 +55,7 @@ private:
 	CComPtr<IDirect3DDevice9> m_d3dDevice;
 
 	//D3DXMATRIXA16 m_matWorld;
-	D3DXMATRIXA16 m_matView, m_matProj; // m_matOrtho, m_matWorld
+	D3DXMATRIXA16 m_matView, m_matProj;
 	D3DXVECTOR3 m_eye, m_lookAt, m_up;
-
 	D3DXVECTOR3 m_vView, m_vCross;
 };

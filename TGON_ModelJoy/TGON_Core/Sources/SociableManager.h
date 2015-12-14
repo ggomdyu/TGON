@@ -24,14 +24,19 @@ namespace tgon {
 		typedef std::unordered_map<std::string, ISociable*> SociableRepo;
 
 	public:
-		SociableManager( );
-		virtual ~SociableManager( );
-
-	public:
 		void				FrameMove( float elapsedTime );
 
+	public:
 		void				RegisterMember( _In_ ISociable* member )						{ m_sociableMap.insert( std::make_pair( member->GetName( ), member )); }
-		void				DispatchMessage( _In_ const CommMessage& msg );
+		void				DispatchMessage( _In_ const SociableMessage& msg );
+
+	private:
+		
+
+	private:
+		SociableManager( );
+		~SociableManager( );
+
 
 	private:
 		SociableRepo	m_sociableMap;

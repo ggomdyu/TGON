@@ -38,12 +38,6 @@
     <Filter Include="Sources\public\CoreEngine">
       <UniqueIdentifier>{12c3ce0c-0989-4c60-a025-45f2fab719b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\CoreEngine\System">
-      <UniqueIdentifier>{f90c5df5-fdda-4253-a127-29e5ba982a14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\CoreEngine\System">
-      <UniqueIdentifier>{234c0bd9-78ff-4779-827a-60f8f8b70c34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\private\CoreEngine\Manager">
       <UniqueIdentifier>{fcc1debe-6a30-44d9-9b78-d3d10cb7a95a}</UniqueIdentifier>
     </Filter>
@@ -62,6 +56,24 @@
     <Filter Include="Sources\public\CoreEngine\Manager\Message">
       <UniqueIdentifier>{f788cc27-8f59-445d-9414-70c77a4bdbd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\System">
+      <UniqueIdentifier>{f90c5df5-fdda-4253-a127-29e5ba982a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\System\Graphics">
+      <UniqueIdentifier>{c28fc163-3fff-420b-a0ae-dfeea4c05fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\System\Window">
+      <UniqueIdentifier>{a7a3d9d2-fe81-4c00-93ac-17e706c29bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\System">
+      <UniqueIdentifier>{234c0bd9-78ff-4779-827a-60f8f8b70c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\System\Graphics">
+      <UniqueIdentifier>{9b0798a0-3e16-4313-a3da-d9733cfab540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\System\Window">
+      <UniqueIdentifier>{f88c8779-af8e-4a95-9e9a-80fe0383600c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
@@ -70,29 +82,35 @@
     <ClInclude Include="Sources\Uncopyable.h">
       <Filter>Sources\public\Common\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Singleton.h">
-      <Filter>Sources\public\Common\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\SociableManager.h">
       <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\CoreEngine.h">
+      <Filter>Sources\public\CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ISociable.h">
       <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\WindowSystem.h">
-      <Filter>Sources\public\CoreEngine\System</Filter>
+    <ClInclude Include="Sources\ISystem.h">
+      <Filter>Sources\public\System</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\MsgManager.h">
+    <ClInclude Include="Sources\GraphicsSystem.h">
+      <Filter>Sources\public\System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsSystemMessage.h">
+      <Filter>Sources\public\System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowSystem.h">
+      <Filter>Sources\public\System\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\SociableMessage.h">
       <Filter>Sources\public\CoreEngine\Manager\Message</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\CommMessage.h">
-      <Filter>Sources\public</Filter>
+    <ClInclude Include="Sources\MessageManager.h">
+      <Filter>Sources\public\CoreEngine\Manager\Message</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\ISystem.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CoreEngine.h">
-      <Filter>Sources\public\CoreEngine</Filter>
+    <ClInclude Include="Sources\WindowSystemMessageType.h">
+      <Filter>Sources\public\System\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,23 +120,26 @@
     <ClCompile Include="Sources\SociableManager.cpp">
       <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\CoreEngine.cpp">
+      <Filter>Sources\private\CoreEngine</Filter>
+    </ClCompile>
     <ClCompile Include="Sources\ISociable.cpp">
       <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\WindowSystem.cpp">
-      <Filter>Sources\private\CoreEngine\System</Filter>
+    <ClCompile Include="Sources\ISystem.cpp">
+      <Filter>Sources\private\System</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\MsgManager.cpp">
+    <ClCompile Include="Sources\GraphicsSystem.cpp">
+      <Filter>Sources\private\System\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowSystem.cpp">
+      <Filter>Sources\private\System\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\SociableMessage.cpp">
       <Filter>Sources\private\CoreEngine\Manager\Message</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\CommMessage.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ISystem.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CoreEngine.cpp">
-      <Filter>Sources\private\CoreEngine</Filter>
+    <ClCompile Include="Sources\MessageManager.cpp">
+      <Filter>Sources\private\CoreEngine\Manager\Message</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

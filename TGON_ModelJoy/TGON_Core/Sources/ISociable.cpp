@@ -2,7 +2,7 @@
 #include "ISociable.h"
 
 #include "SociableManager.h"
-
+ 
 tgon::ISociable::ISociable( const SociableEnum sociableType ) :
 	m_sociableType( sociableType )
 {

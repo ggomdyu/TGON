@@ -7,7 +7,7 @@
 
 #pragma once
 #include <string>
-#include "MsgManager.h"
+#include "SociableMessage.h"
 
 namespace tgon {
 	enum SociableEnum
@@ -27,14 +27,14 @@ namespace tgon {
 		virtual ~ISociable( );
 
 	public:
-		virtual void					RecvMessage( _In_ const CommMessage& msg ) = 0;
+		virtual void				RecvMessage( _In_ const SociableMessage& msg ) = 0;
 
-		void							SetName( _In_ const std::string& name )	{ m_name = name; }
-		void							SetName( _In_ std::string&& name )			{ m_name = std::move( name ); }
-		const std::string&			GetName( ) const									{ return m_name; }
+		void						SetName( _In_ const std::string& name )		{ m_name = name; }
+		void						SetName( _In_ std::string&& name )				{ m_name = std::move( name ); }
+		const std::string&		GetName( ) const									{ return m_name; }
 
 	private:
-		const SociableEnum		m_sociableType;
+		const SociableEnum	m_sociableType;
 		std::string					m_name;
 	};
 }

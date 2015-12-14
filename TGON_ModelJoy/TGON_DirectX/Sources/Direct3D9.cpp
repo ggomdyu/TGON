@@ -152,7 +152,7 @@ void Direct3D9::SetMatrices( )
 	/*	D3DXMatrixPerspectiveFovLH receive the arguments: FOV, Aspect ratio, Near/Far clipping plane
 		FOV : https://namu.wiki/w/FOV
 		Aspect ratio ¡æ http://www.slingmedia.co.kr/object/KB-005350.html */
-	D3DXMatrixPerspectiveFovLH( &m_matProj, D3DX_PI / 4, 1.0f, 1.0f, 1000.0f );
+	D3DXMatrixPerspectiveFovLH( &m_matProj, D3DX_PI/4, 1.0f, 1.0f, 1000.0f );
 	//D3DXMatrixOrthoLH(&matProj, 1280, 720, 1.0f, 100.0f );
 	m_d3dDevice->SetTransform( D3DTS_PROJECTION, &m_matProj );
 }

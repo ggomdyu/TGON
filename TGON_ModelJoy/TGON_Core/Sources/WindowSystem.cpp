@@ -2,6 +2,7 @@
 #include "WindowSystem.h"
 
 #include "WindowStyle.h"
+#include "WindowSystemMessageType.h"
 
 tgon::WindowSystem::WindowSystem( )
 {
@@ -27,6 +28,7 @@ void tgon::WindowSystem::Initialize( )
 
 void tgon::WindowSystem::FrameMove( )
 {
+
 }
 
 bool tgon::WindowSystem::PumpWindowEvent( )
@@ -36,11 +38,16 @@ bool tgon::WindowSystem::PumpWindowEvent( )
 
 bool tgon::WindowSystem::IsEventOccured( const uint32_t eventType )
 {
-	auto iter = GetWindow( )->GetWindowEventRepo( ).find( WindowEvent::Destroy );
-	
-	return GetWindow( )->GetWindowEventRepo( ).end( ) != iter;
+	auto iter = m_window->GetWindowEventRepo( ).find( WindowEvent::Destroy );
+	return m_window->GetWindowEventRepo( ).end( ) != iter;
 }
 
-void tgon::WindowSystem::RecvMessage( _In_ const CommMessage& msg )
+void tgon::WindowSystem::RecvMessage( _In_ const SociableMessage& msg )
 {
+	switch ( msg.GetMsgType( ))
+	{
+	case SociableMessageType::ClearAllWindowEvents:
+		this->ClearAllWindowEvents( );
+		break;
+	}
 }

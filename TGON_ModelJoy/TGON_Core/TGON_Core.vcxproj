@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -144,23 +144,26 @@
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\CommMessage.h" />
+    <ClInclude Include="Sources\GraphicsSystem.h" />
+    <ClInclude Include="Sources\SociableMessage.h" />
     <ClInclude Include="Sources\CoreEngine.h" />
-    <ClInclude Include="Sources\ISystem.h" />
-    <ClInclude Include="Sources\MsgManager.h" />
-    <ClInclude Include="Sources\SociableManager.h" />
+    <ClInclude Include="Sources\GraphicsSystemMessage.h" />
     <ClInclude Include="Sources\ISociable.h" />
-    <ClInclude Include="Sources\Singleton.h" />
+    <ClInclude Include="Sources\ISystem.h" />
+    <ClInclude Include="Sources\MessageManager.h" />
+    <ClInclude Include="Sources\SociableManager.h" />
     <ClInclude Include="Sources\Uncopyable.h" />
     <ClInclude Include="Sources\WindowSystem.h" />
+    <ClInclude Include="Sources\WindowSystemMessageType.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\CommMessage.cpp" />
+    <ClCompile Include="Sources\GraphicsSystem.cpp" />
+    <ClCompile Include="Sources\SociableMessage.cpp" />
     <ClCompile Include="Sources\CoreEngine.cpp" />
-    <ClCompile Include="Sources\ISystem.cpp" />
-    <ClCompile Include="Sources\MsgManager.cpp" />
-    <ClCompile Include="Sources\SociableManager.cpp" />
     <ClCompile Include="Sources\ISociable.cpp" />
+    <ClCompile Include="Sources\ISystem.cpp" />
+    <ClCompile Include="Sources\MessageManager.cpp" />
+    <ClCompile Include="Sources\SociableManager.cpp" />
     <ClCompile Include="Sources\Uncopyable.cpp" />
     <ClCompile Include="Sources\WindowSystem.cpp" />
   </ItemGroup>

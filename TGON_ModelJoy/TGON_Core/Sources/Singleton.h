@@ -9,10 +9,9 @@
 #pragma once
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <memory>
-	#include "Uncopyable.h"
 #endif
-
-#define SINGLETON_TYPE_STATIC
+//
+//#define SINGLETON_TYPE_STATIC
 
 /*
 	1. Constructor un-hideable singleton ( Inheritance ver. )
@@ -30,7 +29,7 @@ public:
 	}
 
 protected:
-	Singleton( ) {};
+	Singleton( )	{};
 	~Singleton( ) {}
 
 private:
@@ -44,7 +43,7 @@ decltype( Singleton<T>::m_Instance ) Singleton<T>::m_Instance;
 	02. Constructor hideable singleton ( define ver. )
 */
 
-#ifdef SINGLETON_TYPE_STATIC
+//#ifdef SINGLETON_TYPE_STATIC
 #define Implement_Singleton_Instance( T )
 #define Implement_Singleton( T )						\
 public:															\
@@ -53,6 +52,7 @@ public:															\
 		static T instance;										\
 		return &instance;									\
 	}
+/*
 #elif defined SINGLETON_TYPE_DYNAMIC
 #define Implement_Singleton( T )						\
 public:															\
@@ -72,4 +72,4 @@ namespace {													\
 	decltype( T::m_Instance ) T::m_Instance;				\
 }																		
 
-#endif
+#endif*/
