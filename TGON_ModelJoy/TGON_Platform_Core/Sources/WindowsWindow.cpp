@@ -89,12 +89,12 @@ void tgon::WindowsWindow::Show( )
 	ShowWindow( m_wndHandle, SW_NORMAL );
 }
 
-void tgon::WindowsWindow::SetPosition( const int x, const int y )
+void tgon::WindowsWindow::SetPosition( int x, int y )
 {
 	SetWindowPos( m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
-void tgon::WindowsWindow::Move( const int x, const int y )
+void tgon::WindowsWindow::Move( int x, int y )
 {
 	RECT rt;
 	GetWindowRect( m_wndHandle, &rt );
@@ -144,8 +144,6 @@ bool tgon::WindowsWindow::PumpWindowEvent( )
 
 LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
-	this->InsertOccuredEvent( msg );
-
 	switch( msg )
 	{
 	case WM_CREATE:

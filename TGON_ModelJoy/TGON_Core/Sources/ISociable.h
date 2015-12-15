@@ -21,20 +21,19 @@ namespace tgon {
 	class ISociable
 	{
 	public:
-		ISociable( const SociableEnum sociableType );
-		ISociable( _In_ const std::string& name, const SociableEnum sociableType );
-		ISociable( _In_ std::string&& name, const SociableEnum sociableType );
+		ISociable( uint32_t key, const SociableEnum sociableType );
 		virtual ~ISociable( );
 
 	public:
 		virtual void				RecvMessage( _In_ const SociableMessage& msg ) = 0;
 
-		void						SetName( _In_ const std::string& name )		{ m_name = name; }
-		void						SetName( _In_ std::string&& name )				{ m_name = std::move( name ); }
-		const std::string&		GetName( ) const									{ return m_name; }
+		uint32_t					GetKey( ) const					{ return m_key; }
+
+	protected:
+		void						SetKey( uint32_t key )		{ m_key = key; }
 
 	private:
 		const SociableEnum	m_sociableType;
-		std::string					m_name;
+		uint32_t					m_key;
 	};
 }

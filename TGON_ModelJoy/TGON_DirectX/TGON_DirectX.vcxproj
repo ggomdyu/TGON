@@ -20,11 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Direct3D9.h" />
-    <ClInclude Include="Sources\rtytry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Direct3D9.cpp" />
-    <ClCompile Include="Sources\rtytry.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B5F066EE-B082-4A67-ACF4-BB4DF03A01D3}</ProjectGuid>

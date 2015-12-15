@@ -27,7 +27,7 @@ class GraphicInterfaceLayer
 
 };
 
-class Direct3D9 : public Singleton<Direct3D9>
+class Direct3D9
 {
 public:
 	Direct3D9( );
@@ -39,8 +39,8 @@ public:
 	void EndDraw( );
 
 public:
-	CComPtr<IDirect3D9> GetD3d( ) const { return m_d3d; }
-	CComPtr<IDirect3DDevice9> GetD3dDevice( ) const { return m_d3dDevice; }
+	const CComPtr<IDirect3D9>& GetD3d( ) const { return m_d3d; }
+	const CComPtr<IDirect3DDevice9>& GetD3dDevice( ) const { return m_d3dDevice; }
 
 
 	void DrawLine( const D3DXVECTOR3& p1, const D3DXVECTOR3& p2, DWORD color );

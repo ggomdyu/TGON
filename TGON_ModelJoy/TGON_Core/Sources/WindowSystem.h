@@ -15,24 +15,19 @@ namespace tgon {
 	class SociableMessage;
 	class WindowSystem final : public ISystem
 	{
-		Implement_Singleton( WindowSystem )
-
-
 		typedef std::shared_ptr<Window> SpWindow;
 
 	public:
-		virtual void				Initialize( ) override;
-		virtual void				FrameMove( ) override;
+		Declare_Static_Singleton( WindowSystem )
 
-		virtual void				RecvMessage( _In_ const SociableMessage& msg ) override;
-		bool						PumpWindowEvent( );
-		
 	public:
-		bool						IsEventOccured( const uint32_t eventType );
-		
+		virtual void				Initialize( ) override;
+		virtual void				FrameMove( float elapsedTime ) override;
+		virtual void				RecvMessage( _In_ const SociableMessage& msg ) override;
+	
 	private:
-		const SpWindow&		GetWindow( ) const													{ return m_window; }
-		void						ClearAllWindowEvents( )											{ m_window->ClearAllWindowEvent( ); }
+		const SpWindow&		GetWindow( ) const												{ return m_window; }
+		void						PumpWindowEvent( );
 	
 	private:
 		WindowSystem( );

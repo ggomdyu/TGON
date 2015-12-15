@@ -1,8 +1,8 @@
 //#include "stdafx.h"
 #include "SociableMessage.h"
 
-tgon::SociableMessage::SociableMessage( const std::string& accepterName, unsigned int msgType, float delayTime ) :
-	m_accepterName( accepterName ), m_msgType( msgType ), m_delayTime( delayTime )
+tgon::SociableMessage::SociableMessage( uint32_t accepterKey, uint32_t msgType, float delayTime ) :
+	m_accepterKey( accepterKey ), m_msgType( msgType ), m_delayTime( delayTime )
 {
 }
 

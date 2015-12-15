@@ -20,18 +20,17 @@
 namespace tgon {
 	class SociableManager final
 	{
-		Implement_Singleton( SociableManager )
-		typedef std::unordered_map<std::string, ISociable*> SociableRepo;
+		typedef std::unordered_map<uint32_t, ISociable*> SociableRepo;
 
 	public:
-		void				FrameMove( float elapsedTime );
+		Declare_Static_Singleton( SociableManager )
 
 	public:
-		void				RegisterMember( _In_ ISociable* member )						{ m_sociableMap.insert( std::make_pair( member->GetName( ), member )); }
-		void				DispatchMessage( _In_ const SociableMessage& msg );
+		void		FrameMove( float elapsedTime );
 
-	private:
-		
+	public:
+		void		RegisterMember( _In_ ISociable* member );
+		void		DispatchMessage( _In_ const SociableMessage& msg );
 
 	private:
 		SociableManager( );

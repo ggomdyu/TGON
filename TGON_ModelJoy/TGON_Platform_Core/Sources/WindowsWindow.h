@@ -26,8 +26,8 @@ namespace tgon {
 	public:
 		virtual void					Show( ) override;
 		virtual void					BringToTop( ) override;
-		virtual void					SetPosition( const int x, const int y ) override;
-		virtual void					Move( const int x, const int y ) override;
+		virtual void					SetPosition( int x, int y ) override;
+		virtual void					Move( int x, int y ) override;
 		virtual void					Exit( ) override;
 
 	public:

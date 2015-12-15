@@ -16,12 +16,11 @@
 namespace tgon {
 	class MessageManager final
 	{
-		Implement_Singleton( MessageManager )
+	public:
+		Declare_Static_Singleton( MessageManager )
 
 	public:
-		void		FrameMove( );
-
-	public:
+		void		FrameMove( float elapsedTime );
 		void		Broadcast( const SociableMessage& msg )		{ m_msgRepo.push_back( msg ); }
 
 	private:

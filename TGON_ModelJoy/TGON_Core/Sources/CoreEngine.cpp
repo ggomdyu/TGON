@@ -1,12 +1,11 @@
 #include "CoreEngine.h"
 
 #include "MessageManager.h"
-#include "WindowSystem.h"
+#include "TickSystem.h"
 
 
 tgon::CoreEngine::CoreEngine( )
 {
-
 }
 
 
@@ -14,51 +13,48 @@ tgon::CoreEngine::~CoreEngine( )
 {
 }
 
-void tgon::CoreEngine::InitializeAllSystems( )
+
+void tgon::CoreEngine::Initialize( )
 {
-	for ( auto& system : m_systemRepo ) {
+	for ( auto& system : m_systemRepo )
+	{
 		system->Initialize( );
 	}
 }
 
-void tgon::CoreEngine::RegisterSystem( _In_ ISystem* system, ... )
+
+void tgon::CoreEngine::RegisterSystem( const std::initializer_list<ISystem*>& systemList )
 {
-    m_systemRepo.push_back( system );
+	//for ( auto& system : systemList )
+	//{
+	//	m_systemRepo.push_back( system );
+	//}
 }
-
-
-
-	/*va_list vList;
-	va_start( vList, system );
-
-	while ( system )
-	{
-		m_systemRepo.push_back( system );
-		++system;
-	}
-
-	va_end( vList );*/
-/*
- 
-    */
 
 
 void tgon::CoreEngine::FrameMove( )
-{ 
-	this->FrameMoveAllManagers( );
-	this->FrameMoveAllSystems( );
+{
+	const float elapsedTime = GetElapsedTime( );
+
+	/*while ( !m_isLoopExit )
+	{
+		this->FrameMoveAllSystems( elapsedTime );
+		this->FrameMoveAllManagers( elapsedTime );
+	}*/
 }
 
-void tgon::CoreEngine::FrameMoveAllSystems( )
+
+void tgon::CoreEngine::FrameMoveAllSystems( float elapsedTime )
 { 
-	for ( auto& system : m_systemRepo ) {
-		system->FrameMove( );
+	for ( auto& system : m_systemRepo )
+	{
+		system->FrameMove( elapsedTime );
 	}
 }
 
-void tgon::CoreEngine::FrameMoveAllManagers( )
+
+void tgon::CoreEngine::FrameMoveAllManagers( float elapsedTime )
 { 
-	for ( auto& system : m_systemRepo ) {
-		system->FrameMove( );
-	}
+	MessageManager::GetInstance( )->FrameMove( elapsedTime );
+	SociableManager::GetInstance( )->FrameMove( elapsedTime );
 }

@@ -1,12 +1,15 @@
 //#include "stdafx.h"
 #include "WindowSystem.h"
 
-#include "WindowStyle.h"
+#include "CoreEngine.h"
+#include "MessageManager.h"
 #include "WindowSystemMessageType.h"
+#include "WindowStyle.h"
 
-tgon::WindowSystem::WindowSystem( )
+
+tgon::WindowSystem::WindowSystem( ) :
+	ISystem( *WindowSystem::GetInstance( ))
 {
-	this->SetName( "WindowSystem" );
 }
 
 
@@ -26,28 +29,36 @@ void tgon::WindowSystem::Initialize( )
 	m_window.reset( new Window( ws ));
 }
 
-void tgon::WindowSystem::FrameMove( )
-{
 
+void tgon::WindowSystem::FrameMove( float elapsedTime )
+{
+	this->PumpWindowEvent( );
+/*
+	if ( this->IsEventOccured( WindowEvent::Destroy ))
+	{
+		CoreEngine::GetInstance( )->Exit( );
+	}
+	*/
 }
 
-bool tgon::WindowSystem::PumpWindowEvent( )
-{
-	return m_window->PumpWindowEvent( );
-}
 
-bool tgon::WindowSystem::IsEventOccured( const uint32_t eventType )
+void tgon::WindowSystem::PumpWindowEvent( )
 {
-	auto iter = m_window->GetWindowEventRepo( ).find( WindowEvent::Destroy );
-	return m_window->GetWindowEventRepo( ).end( ) != iter;
+	MessageBox( 0, 0, 0, 0 );
+
+	if ( !m_window->PumpWindowEvent( ))
+	{
+		MessageManager::GetInstance( )->Broadcast(
+			SociableMessage( this->GetKey( ), SociableMessageType::ClearAllWindowEvents ));
+	}
 }
 
 void tgon::WindowSystem::RecvMessage( _In_ const SociableMessage& msg )
 {
 	switch ( msg.GetMsgType( ))
 	{
-	case SociableMessageType::ClearAllWindowEvents:
-		this->ClearAllWindowEvents( );
+	case SociableMessageType::ReadyToExit:
+		CoreEngine::GetInstance( )->Exit( );
 		break;
 	}
 }

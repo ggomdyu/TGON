@@ -2,74 +2,78 @@
 * 작성자 : 김태우
 * 작성일 : 2015-04-25
 * 최종 수정 : 차준호
-* 최종 수정일 : 2015-12-11
+* 최종 수정일 : 2015-12-15
 */
 
-/* Prev */
 #pragma once
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <memory>
 #endif
-//
-//#define SINGLETON_TYPE_STATIC
 
 /*
 	1. Constructor un-hideable singleton ( Inheritance ver. )
 */
+
 template <typename T>
-class Singleton
+class StaticSingleton
 {
 public:
-	static const std::shared_ptr<T> GetInstance( )
+	static const T* GetInstance( )
 	{
-		if ( !m_Instance ) {
-			m_Instance.reset( new T );
-		}
-		return m_Instance;
+		static T instance;
+		return &instance;
 	}
 
 protected:
-	Singleton( )	{};
-	~Singleton( ) {}
-
-private:
-	static std::shared_ptr<T> m_Instance;
+	StaticSingleton( )		{}
+	~StaticSingleton( )		{}
 };
 
 template <typename T>
-decltype( Singleton<T>::m_Instance ) Singleton<T>::m_Instance;
+class DynamicSingleton
+{
+public:
+	static const std::shared_ptr<T>& GetInstance( )
+	{
+		if ( !m_instance ) {
+			m_instance.reset( new T );
+		}
+		return m_instance;
+	}
+
+protected:
+	DynamicSingleton( )		{}
+	~DynamicSingleton( )		{}
+
+private:
+	static std::shared_ptr<T> m_instance;
+};
 
 /*
 	02. Constructor hideable singleton ( define ver. )
 */
 
-//#ifdef SINGLETON_TYPE_STATIC
-#define Implement_Singleton_Instance( T )
-#define Implement_Singleton( T )						\
-public:															\
-	static T* GetInstance( )									\
-	{															\
-		static T instance;										\
-		return &instance;									\
+#define Declare_Static_Singleton( T )						\
+	static T* GetInstance( )										\
+	{																	\
+		static T instance;											\
+		return &instance;											\
 	}
-/*
-#elif defined SINGLETON_TYPE_DYNAMIC
-#define Implement_Singleton( T )						\
-public:															\
-	static const std::shared_ptr<T> GetInstance( )		\
-	{															\
-		if ( !m_Instance ) {									\
-			m_Instance.reset( new T );						\
-		}														\
-		return m_Instance;									\
-	}															\
-																\
-private:														\
-	static std::shared_ptr<T> m_Instance;	
 
-#define Implement_Singleton_Instance( T )				\
-namespace {													\
-	decltype( T::m_Instance ) T::m_Instance;				\
-}																		
+#define Declare_Dynamic_Singleton( T )					\
+public:																\
+	static const std::shared_ptr<T>& GetInstance( )		\
+	{																	\
+		if ( !m_instance ) {											\
+			m_instance.reset( new T );							\
+		}																\
+		return m_instance;											\
+	}																	\
+																		\
+private:																\
+	static std::shared_ptr<T> m_instance;	
 
-#endif*/
+#define Implement_Singleton_Instance( T )					\
+namespace {														\
+	decltype( typename T::m_instance ) T::m_instance;	\
+}											

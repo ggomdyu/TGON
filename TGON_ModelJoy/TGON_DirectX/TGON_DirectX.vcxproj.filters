@@ -14,17 +14,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\rtytry.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Direct3D9.cpp">
       <Filter>Sources\private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\rtytry.h">
-      <Filter>Sources\public</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Direct3D9.h">
       <Filter>Sources\public</Filter>
     </ClInclude>

@@ -3,28 +3,37 @@
 #include "Singleton.h"
 
 #include <vector>
+#include <initializer_list>
 
 namespace tgon {
 	class CoreEngine
 	{
-		Implement_Singleton( CoreEngine )
+	public:
+		Declare_Static_Singleton( CoreEngine )
 
 	public:
-		void				InitializeAllSystems( );
-		void				FrameMove( );
+		void		Initialize( );
+		void		FrameMove( );
 
 	public:
-		void __cdecl		RegisterSystem( _In_ ISystem* system, ... );
+		void		RegisterSystem( const std::initializer_list<ISystem*>& systemList );
+
+		void		Pause( )							{ m_isLoopActivated = false; }
+		void		Resume( )						{ m_isLoopActivated = true; }
+		void		Exit( )								{ m_isLoopExit = true; }
 
 	private:
-		void				FrameMoveAllManagers( );
-		void				FrameMoveAllSystems( );
+		void		FrameMoveAllManagers( float elapsedTime );
+		void		FrameMoveAllSystems( float elapsedTime );
 
 	private:
 		CoreEngine( );
 		~CoreEngine( );
 
 	private:
+		bool m_isLoopActivated;
+		bool m_isLoopExit;
+
 		std::vector<tgon::ISystem*>	m_systemRepo;
 	};
 }

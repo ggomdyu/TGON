@@ -44,6 +44,9 @@
     <Filter Include="Sources\public\Window\Windows">
       <UniqueIdentifier>{9de937b9-3e6d-44a8-a407-70ef709e1dfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\Window\Platform">
+      <UniqueIdentifier>{c7751d26-30aa-4bb3-b697-4156c3261656}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\WindowsMain.h">
@@ -69,6 +72,12 @@
     </ClInclude>
     <ClInclude Include="Sources\pch\targetver.h">
       <Filter>Sources\public\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformWindow.h">
+      <Filter>Sources\public\Window\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformMain.h">
+      <Filter>Sources\public\Window\Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

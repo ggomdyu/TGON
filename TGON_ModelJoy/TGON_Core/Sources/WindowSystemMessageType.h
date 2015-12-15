@@ -3,5 +3,5 @@
 enum SociableMessageType
 {
 	ClearAllWindowEvents,
-
+	ReadyToExit,
 };
