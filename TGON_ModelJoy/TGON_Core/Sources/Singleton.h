@@ -49,7 +49,7 @@ protected:
 };
 
 /*
-	02. Constructor hideable singleton ( define ver. )
+	02. Constructor hideable singleton ( preprocessor ver. )
 */
 
 #define Declare_Static_Singleton( T )							\
