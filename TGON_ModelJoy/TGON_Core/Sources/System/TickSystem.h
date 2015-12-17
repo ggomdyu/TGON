@@ -6,8 +6,7 @@
 */
 #pragma once
 #include "ISystem.h"
-#include "Singleton.h"
-#include "RTTI.h"
+#include <Pattern\Singleton.h>
 
 #include <chrono>
 
@@ -21,7 +20,6 @@ namespace tgon {
 		typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> MiliTimePoint;
 
 	public:
-		Declare_RTTI( )
 		Declare_Static_Singleton( TickSystem )
 
 	public:

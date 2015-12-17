@@ -13,7 +13,3 @@ tgon::ISystem::ISystem( uint32_t systemKey ) :
 tgon::ISystem::~ISystem( )
 {
 }
-
-void tgon::ISystem::Initialize( )
-{
-}

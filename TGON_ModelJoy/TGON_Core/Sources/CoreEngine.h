@@ -7,7 +7,7 @@
 
 #pragma once
 #include "ISystem.h"
-#include "Singleton.h"
+#include <Pattern\Singleton.h>
 
 #include <vector>
 #include <initializer_list>

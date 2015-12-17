@@ -23,24 +23,24 @@ namespace tgon {
 		explicit						WindowsWindow( _In_ const WindowStyle& );
 		virtual							~WindowsWindow( );
 
+		virtual bool					PumpWindowEvent( ) override;
+
 	public:
 		virtual void					Show( ) override;
 		virtual void					BringToTop( ) override;
-		virtual void					SetPosition( int x, int y ) override;
-		virtual void					Move( int x, int y ) override;
+		virtual void					SetPosition( const int x, const int y ) override;
+		virtual void					Move( const int x, const int y ) override;
 		virtual void					Exit( ) override;
 
-	public:
-		virtual bool					PumpWindowEvent( ) override;
 		HWND						GetWindowHandle( ) const;
 
 	private:
-		virtual void					MakeWindow( _In_ const WindowStyle& ws ) override;
+		void							MakeWindow( _In_ const WindowStyle& );
 
-		static LRESULT WINAPI		CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
+		static LRESULT WINAPI	CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
 		virtual LRESULT WINAPI	CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );	/* can override! */
 		 
 	private:
-		HWND			m_wndHandle;
+		HWND						m_wndHandle;
 	};
 }

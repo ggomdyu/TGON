@@ -8,35 +8,40 @@
 
 #ifndef TGON_USE_PRECOMPILED_HEADER
 	#include <iostream>
-	#include <unordered_set>
+	#include <functional>
+	#include <unordered_map>
 
 	#include "WindowStyle.h"
 	#include "WindowEvent.h"
 #endif
 
+
 namespace tgon {
 	class GenericWindow
 	{
+		typedef std::function<void()>								WorkProc;
+		typedef std::unordered_map<uint32_t, WorkProc>	WorkProcList;
+
 	public:
 		explicit						GenericWindow( const WindowStyle& ws );
 		virtual							~GenericWindow( );
 
+		void							RegisterEventCallback( const uint32_t targetEvent, const WorkProc& doWork );
+		virtual bool					PumpWindowEvent( ) = 0;
+
 	public:
 		virtual void					Show( ) = 0;
 		virtual void					BringToTop( ) = 0;
-		virtual void					SetPosition( int x, int y ) = 0;
-		virtual void					Move( int x, int y ) = 0;
+		virtual void					SetPosition( const int x, const int y ) = 0;
+		virtual void					Move( const int x, const int y ) = 0;
 		virtual void					Exit( ) = 0;
 
-	public:
-		const WindowStyle&		GetWindowStyle( ) const				{ return m_ws; }
-		virtual bool					PumpWindowEvent( ) = 0;									
-
-	protected:
-		virtual void					MakeWindow( const WindowStyle& ws ) = 0;
+		const WindowStyle&		GetWindowStyle( ) const				{ return m_wndStyle; }
+		const WorkProcList&		GetEventWorkList( )					{ return m_eventWorkList; }
 
 	private:
-		WindowStyle					m_ws;
+		WorkProcList				m_eventWorkList;
+		WindowStyle				m_wndStyle;
 	};
 }
 

@@ -12,7 +12,7 @@
 	#include <d3dx9.h>
 	#include <atlbase.h>
 
-	#include "Singleton.h"
+	#include <Pattern\Singleton.h>
 #ifndef TGON_USE_PRECOMPILED_HEADER
 #endif
 

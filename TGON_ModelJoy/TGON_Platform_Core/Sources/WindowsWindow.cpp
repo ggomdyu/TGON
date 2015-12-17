@@ -9,18 +9,19 @@
 	#include "WindowsWindowUtil.h"
 #endif
 
-tgon::WindowsWindow::WindowsWindow( const WindowStyle& ws ) :
-	GenericWindow( ws )
+
+tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
+	GenericWindow( wndStyle )
 {
 	// 1. register window information to make
-	if ( !RegisterWindow( ws, CallbackMsgProc ))
+	if ( !RegisterWindow( wndStyle, CallbackMsgProc ))
 	{
 		MessageBox( GetFocus( ), L"Failed to progress RegisterWindow function.", L"WARNING!",
 				MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
 
-	this->MakeWindow( ws );
+	this->MakeWindow( wndStyle );
 }
 
 
@@ -84,17 +85,20 @@ void tgon::WindowsWindow::BringToTop( )
 	}
 }
 
+
 void tgon::WindowsWindow::Show( )
 {
 	ShowWindow( m_wndHandle, SW_NORMAL );
 }
 
-void tgon::WindowsWindow::SetPosition( int x, int y )
+
+void tgon::WindowsWindow::SetPosition( const int x, const int y )
 {
 	SetWindowPos( m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
-void tgon::WindowsWindow::Move( int x, int y )
+
+void tgon::WindowsWindow::Move( const int x, const int y )
 {
 	RECT rt;
 	GetWindowRect( m_wndHandle, &rt );
@@ -102,10 +106,12 @@ void tgon::WindowsWindow::Move( int x, int y )
 	SetWindowPos( m_wndHandle, nullptr, rt.left+x, rt.top+y, 0, 0, SWP_NOSIZE );
 }
 
+
 void tgon::WindowsWindow::Exit( )
 {
 	PostQuitMessage( 0 );
 }
+
 
 LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
@@ -128,6 +134,7 @@ LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPAR
 		return DefWindowProc( wndHandle, msg, wParam, lParam );
 }
 
+
 bool tgon::WindowsWindow::PumpWindowEvent( )
 {
 	MSG msg;
@@ -142,8 +149,13 @@ bool tgon::WindowsWindow::PumpWindowEvent( )
 	return isExistMsg != 0;
 }
 
+
 LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
+	const auto iter = this->GetEventWorkList( ).find( msg );
+	if ( iter != this->GetEventWorkList( ).end( ))
+		iter->second( );
+
 	switch( msg )
 	{
 	case WM_CREATE:

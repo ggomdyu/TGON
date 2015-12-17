@@ -17,11 +17,11 @@
 #include <unordered_set>
 
 // etc¡¦
-#include "Uncopyable.h"
+#include <Pattern\Uncopyable.h>
+#include <Pattern\Singleton.h>
 
 #include "WindowEvent.h"
 #include "WindowStyle.h"
-#include "Singleton.h"
 
 #include "Direct3D9.h"
 

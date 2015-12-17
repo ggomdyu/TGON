@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "Singleton.h"
+#include <Pattern\Singleton.h>
 
 #include <vector>
 #include "SociableManager.h"

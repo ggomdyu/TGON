@@ -80,6 +80,9 @@
     <Filter Include="Sources\private\Common\RTTI">
       <UniqueIdentifier>{f5ff3a0c-f820-4e03-a4a5-19a9792c2af7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\public\System\Tick">
+      <UniqueIdentifier>{3f5232e7-2a4d-4a61-9204-35b42e710c45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
@@ -88,9 +91,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Uncopyable.h">
-      <Filter>Sources\public\Common\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\SociableManager.h">
       <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
     </ClInclude>
@@ -115,14 +115,8 @@
     <ClInclude Include="Sources\WindowSystemMessageType.h">
       <Filter>Sources\public\System\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Singleton.h">
-      <Filter>Sources\public\Common\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\System\WindowSystem.h">
       <Filter>Sources\public\System\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\TickSystem.h">
-      <Filter>Sources\public</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\GraphicsSystem.h">
       <Filter>Sources\public\System\Graphics</Filter>
@@ -130,14 +124,20 @@
     <ClInclude Include="Sources\RTTI.h">
       <Filter>Sources\public\Common\RTTI</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\System\TickSystem.h">
+      <Filter>Sources\public\System\Tick</Filter>
+    </ClInclude>
     <ClInclude Include="Sources\RTTIUtil.h">
-      <Filter>Sources\public</Filter>
+      <Filter>Sources\public\Common\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pattern\Uncopyable.h">
+      <Filter>Sources\public\Common\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pattern\Singleton.h">
+      <Filter>Sources\public\Common\Pattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Uncopyable.cpp">
-      <Filter>Sources\private\Common\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\SociableManager.cpp">
       <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
     </ClCompile>
@@ -170,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="Sources\RTTIUtil.cpp">
       <Filter>Sources\private\Common\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
+      <Filter>Sources\private\Common\Pattern</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,14 +7,12 @@
 
 #pragma once
 #include "ISystem.h"
-#include "Singleton.h"
-#include "RTTI.h"
+#include <Pattern\Singleton.h>
 
 namespace tgon {
 	class GraphicsSystem : public ISystem
 	{
 	public:
-		Declare_RTTI( )
 		Declare_Static_Singleton( GraphicsSystem )
 
 	public:

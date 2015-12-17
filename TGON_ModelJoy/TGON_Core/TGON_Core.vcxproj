@@ -148,7 +148,7 @@
     <ClInclude Include="Sources\RTTIUtil.h" />
     <ClInclude Include="Sources\RTTI.h" />
     <ClInclude Include="Sources\System\GraphicsSystem.h" />
-    <ClInclude Include="Sources\Singleton.h" />
+    <ClInclude Include="Sources\Pattern\Singleton.h" />
     <ClInclude Include="Sources\SociableMessage.h" />
     <ClInclude Include="Sources\CoreEngine.h" />
     <ClInclude Include="Sources\GraphicsSystemMessage.h" />
@@ -157,7 +157,7 @@
     <ClInclude Include="Sources\MessageManager.h" />
     <ClInclude Include="Sources\SociableManager.h" />
     <ClInclude Include="Sources\System\TickSystem.h" />
-    <ClInclude Include="Sources\Uncopyable.h" />
+    <ClInclude Include="Sources\Pattern\Uncopyable.h" />
     <ClInclude Include="Sources\System\WindowSystem.h" />
     <ClInclude Include="Sources\WindowSystemMessageType.h" />
   </ItemGroup>
@@ -172,7 +172,7 @@
     <ClCompile Include="Sources\MessageManager.cpp" />
     <ClCompile Include="Sources\SociableManager.cpp" />
     <ClCompile Include="Sources\System\TickSystem.cpp" />
-    <ClCompile Include="Sources\Uncopyable.cpp" />
+    <ClCompile Include="Sources\Pattern\Uncopyable.cpp" />
     <ClCompile Include="Sources\System\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>

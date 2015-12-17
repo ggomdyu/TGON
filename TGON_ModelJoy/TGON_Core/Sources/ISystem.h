@@ -15,7 +15,7 @@ namespace tgon {
 		ISystem( uint32_t systemKey );
 		virtual ~ISystem( );
 
-		virtual void		Initialize( );
+		virtual void		Initialize( )										{};
 		virtual void		FrameMove( float elapsedTime ) = 0;
 	};
 }

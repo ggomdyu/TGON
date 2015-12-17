@@ -1,9 +1,6 @@
 #include "TickSystem.h"
 
 
-Implement_Root_RTTI( tgon::TickSystem )
-
-
 float tgon::GetElapsedTime( )
 {
 	return TickSystem::GetInstance( )->GetElapsedTime( );
@@ -11,7 +8,7 @@ float tgon::GetElapsedTime( )
 
 
 tgon::TickSystem::TickSystem( ) :
-	ISystem( RTTI::GetTypeHash<TickSystem>( )),
+	ISystem( *this ),
 	m_startTime( std::chrono::time_point_cast<std::chrono::milliseconds>( std::chrono::system_clock::now( ))),
 	m_elapsedTime( 0.0f )
 {

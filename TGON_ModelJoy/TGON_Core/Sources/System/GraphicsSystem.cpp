@@ -2,11 +2,8 @@
 #include "GraphicsSystem.h"
 
 
-Implement_Root_RTTI( tgon::GraphicsSystem )
-
-
 tgon::GraphicsSystem::GraphicsSystem( ) :
-	ISystem( RTTI::GetTypeHash<GraphicsSystem>( ))
+	ISystem( *this )
 {
 }
 

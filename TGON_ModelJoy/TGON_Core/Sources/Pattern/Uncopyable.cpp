@@ -1,4 +1,4 @@
-#include "Uncopyable.h"
+#include <Pattern\Uncopyable.h>
 
 
 Uncopyable::Uncopyable( )

@@ -17,7 +17,8 @@
 #include <memory>
 #include <cassert>
 #include <map>
-#include <unordered_set>
+#include <functional>
+#include <unordered_map>
 
 
 #include "WindowsWindowUtil.h"
