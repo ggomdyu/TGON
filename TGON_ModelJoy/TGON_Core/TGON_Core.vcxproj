@@ -141,12 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Sources\Singleton.inl" />
+    <None Include="Sources\RTTIUtil.inl" />
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\RTTIUtil.h" />
     <ClInclude Include="Sources\RTTI.h" />
-    <ClInclude Include="Sources\GraphicsSystem.h" />
+    <ClInclude Include="Sources\System\GraphicsSystem.h" />
     <ClInclude Include="Sources\Singleton.h" />
     <ClInclude Include="Sources\SociableMessage.h" />
     <ClInclude Include="Sources\CoreEngine.h" />
@@ -155,23 +156,24 @@
     <ClInclude Include="Sources\ISystem.h" />
     <ClInclude Include="Sources\MessageManager.h" />
     <ClInclude Include="Sources\SociableManager.h" />
-    <ClInclude Include="Sources\TickSystem.h" />
+    <ClInclude Include="Sources\System\TickSystem.h" />
     <ClInclude Include="Sources\Uncopyable.h" />
-    <ClInclude Include="Sources\WindowSystem.h" />
+    <ClInclude Include="Sources\System\WindowSystem.h" />
     <ClInclude Include="Sources\WindowSystemMessageType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\RTTIUtil.cpp" />
     <ClCompile Include="Sources\RTTI.cpp" />
-    <ClCompile Include="Sources\GraphicsSystem.cpp" />
+    <ClCompile Include="Sources\System\GraphicsSystem.cpp" />
     <ClCompile Include="Sources\SociableMessage.cpp" />
     <ClCompile Include="Sources\CoreEngine.cpp" />
     <ClCompile Include="Sources\ISociable.cpp" />
     <ClCompile Include="Sources\ISystem.cpp" />
     <ClCompile Include="Sources\MessageManager.cpp" />
     <ClCompile Include="Sources\SociableManager.cpp" />
-    <ClCompile Include="Sources\TickSystem.cpp" />
+    <ClCompile Include="Sources\System\TickSystem.cpp" />
     <ClCompile Include="Sources\Uncopyable.cpp" />
-    <ClCompile Include="Sources\WindowSystem.cpp" />
+    <ClCompile Include="Sources\System\WindowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON_Platform_Core\TGON_Platform_Core.vcxproj">

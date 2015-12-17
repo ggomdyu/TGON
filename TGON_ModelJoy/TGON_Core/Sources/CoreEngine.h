@@ -1,3 +1,10 @@
+/*
+* 작성자 : 차준호
+* 작성일 : 2015-12-07
+* 최종 수정 :
+* 최종 수정일 :
+*/
+
 #pragma once
 #include "ISystem.h"
 #include "Singleton.h"
@@ -34,6 +41,6 @@ namespace tgon {
 		bool m_isLoopActivated;
 		bool m_isLoopExit;
 
-		std::vector<tgon::ISystem*>	m_systemRepo;
+		std::vector<ISystem*>	m_systemRepo;
 	};
 }

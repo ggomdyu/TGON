@@ -1,8 +1,8 @@
 //#include "stdafx.h"
 #include "RTTI.h"
 
-
-RTTI::RTTI( )
+RTTI::RTTI( const RTTI* parent ) :
+	m_parentRTTI( parent )
 {
 }
 

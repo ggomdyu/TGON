@@ -1,10 +1,7 @@
 #include "TickSystem.h"
 
-//Implement_Singleton_Instance( tgon::TickSystem )
 
-//std::shared_ptr<tgon::TickSystem> tgon::TickSystem::m_instance;
-
-using namespace std;
+Implement_Root_RTTI( tgon::TickSystem )
 
 
 float tgon::GetElapsedTime( )
@@ -12,10 +9,10 @@ float tgon::GetElapsedTime( )
 	return TickSystem::GetInstance( )->GetElapsedTime( );
 }
 
-#include <windows.h>
+
 tgon::TickSystem::TickSystem( ) :
-	ISystem( *TickSystem::GetInstance( )),
-	m_startTime( chrono::time_point_cast<chrono::milliseconds>( chrono::system_clock::now( ))),
+	ISystem( RTTI::GetTypeHash<TickSystem>( )),
+	m_startTime( std::chrono::time_point_cast<std::chrono::milliseconds>( std::chrono::system_clock::now( ))),
 	m_elapsedTime( 0.0f )
 {
 }
@@ -28,7 +25,7 @@ tgon::TickSystem::~TickSystem( )
 
 void tgon::TickSystem::FrameMove( float elapsedTime )
 {
-	MiliTimePoint endTime = chrono::time_point_cast<chrono::milliseconds>(
+	MiliTimePoint endTime = std::chrono::time_point_cast<std::chrono::milliseconds>(
 			std::chrono::system_clock::now( ));
 
 	m_elapsedTime = static_cast<float>(( endTime-m_startTime ).count( ))*0.001f;

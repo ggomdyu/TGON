@@ -1,7 +1,7 @@
 #include "CoreEngine.h"
 
 #include "MessageManager.h"
-#include "TickSystem.h"
+#include "System\TickSystem.h"
 
 
 tgon::CoreEngine::CoreEngine( )
@@ -25,22 +25,23 @@ void tgon::CoreEngine::Initialize( )
 
 void tgon::CoreEngine::RegisterSystem( const std::initializer_list<ISystem*>& systemList )
 {
-	//for ( auto& system : systemList )
-	//{
-	//	m_systemRepo.push_back( system );
-	//}
+	for ( auto& system : systemList )
+	{
+		m_systemRepo.push_back( system );
+	}
 }
 
-
+#include <Windows.h>
 void tgon::CoreEngine::FrameMove( )
 {
 	const float elapsedTime = GetElapsedTime( );
+		MessageBox( GetFocus( ), 0, 0, 0 );
 
-	/*while ( !m_isLoopExit )
+	while ( !m_isLoopExit )
 	{
 		this->FrameMoveAllSystems( elapsedTime );
 		this->FrameMoveAllManagers( elapsedTime );
-	}*/
+	}
 }
 
 

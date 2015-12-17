@@ -9,15 +9,17 @@
 #include "Singleton.h"
 #include "ISystem.h"
 
+#include "RTTI.h"
 #include "GenericWindow.h"
 
 namespace tgon {
 	class SociableMessage;
 	class WindowSystem final : public ISystem
 	{
-		typedef std::shared_ptr<Window> SpWindow;
+		typedef std::unique_ptr<Window> SpWindow;
 
 	public:
+		Declare_RTTI( )
 		Declare_Static_Singleton( WindowSystem )
 
 	public:
@@ -26,7 +28,6 @@ namespace tgon {
 		virtual void				RecvMessage( _In_ const SociableMessage& msg ) override;
 	
 	private:
-		const SpWindow&		GetWindow( ) const												{ return m_window; }
 		void						PumpWindowEvent( );
 	
 	private:

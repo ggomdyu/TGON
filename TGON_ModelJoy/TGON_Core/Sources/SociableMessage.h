@@ -14,7 +14,7 @@ namespace tgon {
 		float			GetDelayTime( ) const					{ return m_delayTime; }
 	
 		uint32_t		GetAccepterKey( ) const				{ return m_accepterKey; }
-		uint32_t		GetMsgType( ) const						{ return m_msgType; }
+		uint32_t		GetMsgType( ) const					{ return m_msgType; }
 
 
 	private:

@@ -3,7 +3,7 @@
 
 #include "SociableManager.h"
  
-tgon::ISociable::ISociable( uint32_t key, const SociableEnum sociableType ) :
+tgon::ISociable::ISociable( const uint32_t key, const SociableEnum sociableType ) :
 	m_key( key ), m_sociableType( sociableType )
 {
 	SociableManager::GetInstance( )->RegisterMember( this );

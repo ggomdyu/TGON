@@ -7,8 +7,11 @@
 #include "WindowStyle.h"
 
 
+Implement_Root_RTTI( tgon::WindowSystem )
+
+
 tgon::WindowSystem::WindowSystem( ) :
-	ISystem( *WindowSystem::GetInstance( ))
+	ISystem( RTTI::GetTypeHash<WindowSystem>( ))
 {
 }
 
@@ -16,6 +19,7 @@ tgon::WindowSystem::WindowSystem( ) :
 tgon::WindowSystem::~WindowSystem( )
 {
 }
+
 
 void tgon::WindowSystem::Initialize( )
 {
@@ -44,8 +48,6 @@ void tgon::WindowSystem::FrameMove( float elapsedTime )
 
 void tgon::WindowSystem::PumpWindowEvent( )
 {
-	MessageBox( 0, 0, 0, 0 );
-
 	if ( !m_window->PumpWindowEvent( ))
 	{
 		MessageManager::GetInstance( )->Broadcast(

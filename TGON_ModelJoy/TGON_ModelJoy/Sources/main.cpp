@@ -2,9 +2,9 @@
 
 
 #include "CoreEngine.h"
-#include "GraphicsSystem.h"
-#include "WindowSystem.h"
-#include "TickSystem.h"
+#include <System\GraphicsSystem.h>
+#include <System\WindowSystem.h>
+#include <System\TickSystem.h>
 
 using namespace tgon;
 

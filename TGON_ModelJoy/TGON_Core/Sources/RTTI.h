@@ -1,84 +1,45 @@
+/*
+* 작성자 : 차준호
+* 작성일 : 2015-12-14
+* 최종 수정 : 차준호
+* 최종 수정일 : 2015-12-16
+*/
+
 #pragma once
-#include <iostream>
+
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <iostream>
+#endif
+
+
 
 class RTTI
 {
 public:
-	static RTTI GetRTTI( ) {
-		return ms_RTTI;
-	}
+	RTTI( const RTTI* parent );
+	~RTTI( );
 
-
-private:
-	static RTTI	ms_RTTI;
-};
-#define Implement_RTTI
-
-#pragma once
-#define RTTIInfo( classType )																		\
-public:																									\
-	virtual const CRTTI* GetRTTI( ) const { return &ms_RTTI; }								\
-private:																								\
-	friend CRTTI;																						\
-	static const CRTTI ms_RTTI;																	\
-	typedef classType RootType;
-
-#define DeclareRootRTTI( classType )															\
-	RTTIInfo( classType )																			\
-	bool IsExactClass( const CRTTI* pRTTI ) const												\
-	{																									\
-		return GetRTTI( ) == pRTTI;																\
-	}																									\
-	bool IsKindOf( const CRTTI* pRTTI ) const													\
-	{																									\
-		const CRTTI* pBase = GetRTTI( );															\
-		while ( pBase != NULL )																	\
-		{																								\
-			if ( pBase == pRTTI )																	\
-			{																							\
-				return true;																			\
-			}																							\
-			pBase = pBase->GetBaseRTTI( );														\
-		}																								\
-		return false;																					\
-	}
-
-#define DeclareRTTI( classType )																	\
-	RTTIInfo( classType )																			\
-	typedef __super::RootType RootType;
-
-#define ImplementRootRTTI( classType ) const CRTTI classType::ms_RTTI( NULL )
-#define ImplementRTTI( classType, BaseClassType ) const CRTTI classType::ms_RTTI( CRTTI::GetRTTI<BaseClassType>( ))
-
-class CRTTI
-{
-public:
-	template<typename T> static UINT GetTypeID( )
-	{
-		return reinterpret_cast<UINT>( &T::ms_RTTI );
-	}
-	template<typename T> static const CRTTI* GetRTTI( )
-	{
-		return &T::ms_RTTI;
-	}
-
-public:
-	CRTTI( const CRTTI* pBaseRTTI )
-		: m_pBaseRTTI( pBaseRTTI )
-	{
-
-	}
-
-	~CRTTI( )
-	{
-
-	}
-
-	const CRTTI* GetBaseRTTI( ) const
-	{
-		return m_pBaseRTTI;
-	}
+	const RTTI*											GetParentRTTI( ) const		{ return m_parentRTTI; }
+	template <class T> static const RTTI*		GetRTTI( )						{ return &T::ms_RTTI; }
+	template <class T> static uint32_t				GetTypeHash( )					{ return reinterpret_cast<uint32_t>( &T::ms_RTTI ); }
 
 private:
-	const CRTTI* m_pBaseRTTI;
+	const RTTI*	m_parentRTTI;
 };
+
+
+
+#define Declare_RTTI( )															\
+private:																				\
+	friend RTTI;																		\
+	static const RTTI		ms_RTTI;												\
+																						\
+public:																				\
+	 virtual const RTTI*	GetRTTI( ) const		{ return &ms_RTTI; }
+
+
+#define Implement_Root_RTTI( ownerType )								\
+	decltype( ownerType::ms_RTTI ) ownerType::ms_RTTI( nullptr );
+
+#define Implement_RTTI( ownerType, parentType )						\
+	decltype( ownerType::ms_RTTI ) ownerType::ms_RTTI( RTTI::GetRTTI<parentType>( ));
