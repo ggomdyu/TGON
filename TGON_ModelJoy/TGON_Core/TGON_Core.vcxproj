@@ -145,6 +145,7 @@
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\CoreUtil.h" />
     <ClInclude Include="Sources\RTTIUtil.h" />
     <ClInclude Include="Sources\RTTI.h" />
     <ClInclude Include="Sources\System\GraphicsSystem.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Sources\WindowSystemMessageType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\CoreUtil.cpp" />
     <ClCompile Include="Sources\RTTIUtil.cpp" />
     <ClCompile Include="Sources\RTTI.cpp" />
     <ClCompile Include="Sources\System\GraphicsSystem.cpp" />

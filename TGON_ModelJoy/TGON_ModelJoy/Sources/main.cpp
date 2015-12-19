@@ -2,11 +2,18 @@
 
 
 #include "CoreEngine.h"
+#include "CoreUtil.h"
 #include <System\GraphicsSystem.h>
 #include <System\WindowSystem.h>
 #include <System\TickSystem.h>
 
 using namespace tgon;
+
+
+void OnFrameExit( )
+{
+	CoreEngine::GetInstance( )->Exit( );
+}
 
 int tgMain( int argc, char* argv[] )
 {
@@ -16,6 +23,8 @@ int tgMain( int argc, char* argv[] )
 		TickSystem::GetInstance( )
 	});
 
+	System::RegisterEventCallback( WindowEvent::Destroy, OnFrameExit );
+	
 	CoreEngine::GetInstance( )->Initialize( );
 	CoreEngine::GetInstance( )->FrameMove( );
 

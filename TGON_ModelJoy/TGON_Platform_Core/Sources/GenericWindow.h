@@ -37,6 +37,8 @@ namespace tgon {
 		virtual void					Exit( ) = 0;
 
 		const WindowStyle&		GetWindowStyle( ) const				{ return m_wndStyle; }
+
+	protected:
 		const WorkProcList&		GetEventWorkList( )					{ return m_eventWorkList; }
 
 	private:

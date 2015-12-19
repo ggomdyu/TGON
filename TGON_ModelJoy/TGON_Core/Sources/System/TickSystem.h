@@ -11,8 +11,6 @@
 #include <chrono>
 
 namespace tgon {
-	float GetElapsedTime( );
-
 	class TickSystem final : public ISystem
 	{
 		typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::minutes> MinTimePoint;

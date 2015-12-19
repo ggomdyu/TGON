@@ -136,6 +136,9 @@
     <ClInclude Include="Sources\Pattern\Singleton.h">
       <Filter>Sources\public\Common\Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\CoreUtil.h">
+      <Filter>Sources\public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\SociableManager.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
       <Filter>Sources\private\Common\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\CoreUtil.cpp">
+      <Filter>Sources\private</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,21 +7,8 @@
 #include "WindowStyle.h"
 
 
-Implement_Root_RTTI( tgon::WindowSystem )
-
-
 tgon::WindowSystem::WindowSystem( ) :
-	ISystem( RTTI::GetTypeHash<WindowSystem>( ))
-{
-}
-
-
-tgon::WindowSystem::~WindowSystem( )
-{
-}
-
-
-void tgon::WindowSystem::Initialize( )
+	ISystem( *this )
 {
 	WindowStyle ws;
 	ws.ShowMiddle = true;
@@ -34,15 +21,14 @@ void tgon::WindowSystem::Initialize( )
 }
 
 
+tgon::WindowSystem::~WindowSystem( )
+{
+}
+
+
 void tgon::WindowSystem::FrameMove( float elapsedTime )
 {
 	this->PumpWindowEvent( );
-/*
-	if ( this->IsEventOccured( WindowEvent::Destroy ))
-	{
-		CoreEngine::GetInstance( )->Exit( );
-	}
-	*/
 }
 
 
@@ -55,6 +41,7 @@ void tgon::WindowSystem::PumpWindowEvent( )
 	}
 }
 
+
 void tgon::WindowSystem::RecvMessage( _In_ const SociableMessage& msg )
 {
 	switch ( msg.GetMsgType( ))
@@ -63,4 +50,10 @@ void tgon::WindowSystem::RecvMessage( _In_ const SociableMessage& msg )
 		CoreEngine::GetInstance( )->Exit( );
 		break;
 	}
+}
+
+
+void tgon::WindowSystem::RegisterEventCallback( const uint32_t eventType, const WorkProc& eventWork )
+{
+	m_window->RegisterEventCallback( eventType, eventWork );
 }

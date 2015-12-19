@@ -1,12 +1,6 @@
 #include "TickSystem.h"
 
 
-float tgon::GetElapsedTime( )
-{
-	return TickSystem::GetInstance( )->GetElapsedTime( );
-}
-
-
 tgon::TickSystem::TickSystem( ) :
 	ISystem( *this ),
 	m_startTime( std::chrono::time_point_cast<std::chrono::milliseconds>( std::chrono::system_clock::now( ))),

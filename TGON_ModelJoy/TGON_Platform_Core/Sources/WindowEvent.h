@@ -22,8 +22,8 @@
 struct WindowEvent
 {
 public:
-	WindowEvent( const uint32_t _uMsg = WindowEvent::None ) :
-			uMsg( _uMsg ) {}
+	explicit WindowEvent( const uint32_t _msg = WindowEvent::None ) :
+			msg( _msg ) {}
 
 	enum : uint32_t
 	{
@@ -34,5 +34,5 @@ public:
 		Destroy = ET_DESTROY,
 	};
 
-	uint32_t uMsg = 0;
+	uint32_t msg = 0;
 };
