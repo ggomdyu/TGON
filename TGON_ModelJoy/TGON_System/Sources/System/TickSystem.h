@@ -21,11 +21,11 @@ namespace tgon {
 		Declare_Static_Singleton( TickSystem )
 
 	public:
-		virtual void		FrameMove( float elapsedTime ) override;
-		virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
+		virtual void FrameMove( float elapsedTime ) override;
+		virtual void RecvMessage( _In_ const SociableMessage& msg ) override;
 
 	public:
-		float				GetElapsedTime( ) const													 { return m_elapsedTime; }
+		float GetElapsedTime( ) const { return m_elapsedTime; }
 
 	private:
 		TickSystem( );

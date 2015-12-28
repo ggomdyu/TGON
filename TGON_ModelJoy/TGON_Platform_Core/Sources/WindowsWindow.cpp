@@ -1,13 +1,8 @@
 #include "stdafx.h"
 #include "WindowsWindow.h"
 
-#ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <Windows.h>
-	#include <dwmapi.h>
-
-	#include "WindowStyle.h"
-	#include "WindowsWindowUtil.h"
-#endif
+#include <dwmapi.h>
+#include "WindowsWindowUtil.h"
 
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
@@ -16,7 +11,7 @@ tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
 	// 1. register window information to make
 	if ( !RegisterWindow( wndStyle, CallbackMsgProc ))
 	{
-		MessageBox( GetFocus( ), L"Failed to progress RegisterWindow function.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to call RegisterWindow function.", L"WARNING!",
 				MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
@@ -50,7 +45,7 @@ void tgon::WindowsWindow::MakeWindow( const WindowStyle& ws )
 									nullptr, nullptr, GetModuleHandle( NULL ), this );
 	if ( !m_wndHandle )
 	{
-		MessageBox( GetFocus( ), L"Failed to progress CreateWindowEx function.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to call CreateWindowEx function.", L"WARNING!",
 					MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
@@ -135,9 +130,8 @@ LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPAR
 }
 
 
-bool tgon::WindowsWindow::PumpWindowEvent( )
+void tgon::WindowsWindow::FrameMove( )
 {
-	MSG msg;
 	BOOL isExistMsg = PeekMessage( &msg, NULL, 0, 0, PM_REMOVE );
 
 	if ( isExistMsg )
@@ -145,26 +139,20 @@ bool tgon::WindowsWindow::PumpWindowEvent( )
 		TranslateMessage( &msg );
 		DispatchMessage( &msg );
 	}
-
-	return isExistMsg != 0;
 }
 
 
+const WindowEvent tgon::WindowsWindow::GetWindowEvent( ) const
+{
+	return msg.message;
+}
+
 LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
 {
-	const auto iter = this->GetEventWorkList( ).find( msg );
-	if ( iter != this->GetEventWorkList( ).end( ))
-		iter->second( );
+	this->CallWindowEventProc( msg );
 
 	switch( msg )
 	{
-	case WM_CREATE:
-		{
-//			MARGINS margins = { -1, -1, -1, -1 };
-//			DwmExtendFrameIntoClientArea( wndHandle, &margins );
-		}
-		break;
-
 	case WM_DESTROY:
 		PostQuitMessage( 0 );
 		break;
