@@ -113,7 +113,8 @@ LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPAR
 	{
 		// When window created by CreateWindow Func, It throws LPCREATESTRUCT to msg Callback.
 		// Check 44 lines' func and the last argument
-		SetWindowLong( wndHandle, GWLP_USERDATA, (LONG)LPCREATESTRUCT( lParam )->lpCreateParams ); 
+		SetWindowLong( wndHandle, GWLP_USERDATA, reinterpret_cast<ULONG_PTR>(
+										LPCREATESTRUCT( lParam )->lpCreateParams )); 
 	}
 
 
