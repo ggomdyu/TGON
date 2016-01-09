@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "WindowSystem.h"
 
 #include "CoreEngine.h"
@@ -7,8 +7,7 @@
 #include "WindowStyle.h"
 
 
-tgon::WindowSystem::WindowSystem( ) :
-	ISystem( *this )
+inline const WindowStyle GetDefWindowStyle( )
 {
 	WindowStyle ws;
 	ws.ShowMiddle = true;
@@ -17,7 +16,13 @@ tgon::WindowSystem::WindowSystem( ) :
 	ws.caption = L"ModelJoy";
 	ws.Popup = true;
 
-	m_window.reset( new Window( ws ));
+	return ws;
+}
+
+
+tgon::WindowSystem::WindowSystem( ) :
+	ISystem( *this ), m_window( GetDefWindowStyle( ))
+{
 }
 
 
@@ -28,7 +33,7 @@ tgon::WindowSystem::~WindowSystem( )
 
 void tgon::WindowSystem::FrameMove( float elapsedTime )
 {
-	m_window->FrameMove( );
+	m_window.FrameMove( );
 }
 
 
@@ -37,13 +42,13 @@ void tgon::WindowSystem::RecvMessage( _In_ const SociableMessage& msg )
 }
 
 
-void tgon::WindowSystem::AddWindowEventCallback( const uint32_t evType, const EventProc& evProc )
+void tgon::WindowSystem::AddEventCallback( uint32_t evType, const EventProc& evProc )
 {
-	m_window->AddWindowEventCallback( evType, evProc );
+	m_window.AddEventCallback( evType, evProc );
 }
 
 
 const WindowEvent tgon::WindowSystem::GetWindowEvent( ) const
 {
-	return m_window->GetWindowEvent( );
+	return m_window.GetWindowEvent( );
 }

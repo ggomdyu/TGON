@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "SociableMessage.h"
 
 tgon::SociableMessage::SociableMessage( uint32_t accepterKey, uint32_t msgType, float delayTime ) :

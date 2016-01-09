@@ -3,7 +3,7 @@
   <ItemGroup>
     <Filter Include="Sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>hpp;h;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Sources\CoreEngine">
       <UniqueIdentifier>{d24a756f-00eb-4159-82d7-2f39df6616f9}</UniqueIdentifier>
@@ -28,6 +28,9 @@
     </Filter>
     <Filter Include="Sources\System\Tick">
       <UniqueIdentifier>{6a826661-41a7-4adc-af76-74aa85af14c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{fc2c1d4d-afce-4a7e-b52d-f62e45e31efc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,8 +61,11 @@
     <ClCompile Include="Sources\SociableMessage.cpp">
       <Filter>Sources\Message</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\CoreUtil.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="Sources\CoreEngineUtil.cpp">
+      <Filter>Sources\CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +84,6 @@
     <ClInclude Include="Sources\WindowSystemMessageType.h">
       <Filter>Sources\System\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\GraphicsSystemMessage.h">
-      <Filter>Sources\System\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\System\GraphicsSystem.h">
       <Filter>Sources\System\Graphics</Filter>
     </ClInclude>
@@ -96,6 +99,14 @@
     <ClInclude Include="Sources\SociableMessage.h">
       <Filter>Sources\Message</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\CoreUtil.h" />
+    <ClInclude Include="Sources\CoreEngineUtil.h">
+      <Filter>Sources\CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

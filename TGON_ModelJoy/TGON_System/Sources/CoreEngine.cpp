@@ -1,7 +1,5 @@
+#include "stdafx.h"
 #include "CoreEngine.h"
-
-#include "MessageManager.h"
-#include <System\TickSystem.h>
 
 
 tgon::CoreEngine::CoreEngine( )
@@ -41,15 +39,28 @@ void  tgon::CoreEngine::Exit( )
 
 void tgon::CoreEngine::RegisterSystem( const std::initializer_list<ISystem*>& systemList )
 {
-	for ( auto& system : systemList )
+	for ( const auto& sysElem : systemList )
 	{
-		m_systemRepo.push_back( system );
+		/*
+			To avoid duplication of system pointer that in repository.
+		*/
+		const auto findElem = std::find( m_systemRepo.begin( ), m_systemRepo.end( ), sysElem );
+		const auto notExist = m_systemRepo.end( );
+
+		// WindowSystem must be updated passively!! ( because of check idle time )
+		if ( sysElem == WindowSystem::GetInstance( ))
+			continue;
+
+		if ( findElem == notExist )
+		{
+			m_systemRepo.push_back( sysElem );
+		}
 	}
 }
 
 void tgon::CoreEngine::FrameMove( )
 {
-	float elapsedTime = 0.0f;// = Time::GetElapsedTime( );
+	float elapsedTime = 0;// Time::GetElapsedTime( );
 
 	while ( !m_isLoopExit )
 	{
@@ -58,12 +69,21 @@ void tgon::CoreEngine::FrameMove( )
 	}
 }
 
-
 void tgon::CoreEngine::UpdateSystem( float elapsedTime )
-{ 
-	for ( auto& system : m_systemRepo )
+{
+	WindowSystem::GetInstance( )->FrameMove( elapsedTime );
+
+	/*
+		Idle time - WindowSystem has no message to progress.
+	*/
+	const WindowEvent curWndEvent = WindowSystem::GetInstance( )->GetWindowEvent( ).msg;
+
+	if ( curWndEvent.msg == WindowEvent::None )
 	{
-		system->FrameMove( elapsedTime );
+		for ( auto& sysElem : m_systemRepo )
+		{
+			sysElem->FrameMove( elapsedTime );
+		}
 	}
 }
 

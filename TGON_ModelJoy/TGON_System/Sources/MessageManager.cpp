@@ -1,7 +1,5 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "MessageManager.h"
-
-#include "SociableManager.h"
 
 
 tgon::MessageManager::MessageManager( )

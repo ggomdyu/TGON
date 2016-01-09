@@ -10,31 +10,36 @@
 #include <Pattern\Singleton.h>
 
 #include <functional>
-#include "GenericWindow.h"
+#include "tgWindow.h"
 
 
 namespace tgon {
-	class SociableMessage;
-	class WindowSystem final : public ISystem
-	{
-		typedef std::function<void()> EventProc;
-		typedef std::unique_ptr<Window> SpWindow;
 
-	public:
-		Declare_Static_Singleton( WindowSystem )
+
+class SociableMessage;
+class WindowSystem final : public ISystem
+{
+	typedef std::function<void()> EventProc;
+
+public:
+	Declare_Static_Singleton( WindowSystem )
 			
-	public:
-		virtual void FrameMove( float elapsedTime ) override;
-		virtual void RecvMessage( _In_ const SociableMessage& msg ) override;
+public:
+	virtual void		FrameMove( float elapsedTime ) override;
+	virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
 
-		void AddWindowEventCallback( const uint32_t evType, const EventProc& evProc );
-		const WindowEvent GetWindowEvent( ) const;
+	void				AddEventCallback( const uint32_t evType, const EventProc& evProc );
+	const WindowEvent	GetWindowEvent( ) const;
 
-	private:
-		WindowSystem( );
-		virtual ~WindowSystem( );
+private:
+				WindowSystem( );
+	virtual		~WindowSystem( );
 		
-	private:
-		SpWindow m_window;
-	};
+private:
+	Window	m_window;
+};
+
+
+inline auto		GetWindowSystem( )	{ return WindowSystem::GetInstance( ); }
+
 }

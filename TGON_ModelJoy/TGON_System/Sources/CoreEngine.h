@@ -1,8 +1,8 @@
 /*
 * 작성자 : 차준호
 * 작성일 : 2015-12-07
-* 최종 수정 :
-* 최종 수정일 :
+* 최종 수정 : 차준호
+* 최종 수정일 : 2015-01-01
 */
 
 #pragma once
@@ -15,10 +15,6 @@
 namespace tgon {
 	class CoreEngine
 	{
-	private:
-		CoreEngine( );
-		~CoreEngine( );
-
 	public:
 		Declare_Static_Singleton( CoreEngine )
 
@@ -33,9 +29,13 @@ namespace tgon {
 		void Exit( );
 
 	private:
+		CoreEngine( );
+		~CoreEngine( );
+		void operator delete ( void* arg ) { std::free( arg ); }
+		
 		void UpdateManager( float elapsedTime );
 		void UpdateSystem( float elapsedTime );
-	
+
 	private:
 		bool m_isLoopActivated;
 		bool m_isLoopExit;

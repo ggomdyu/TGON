@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -94,7 +94,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -141,20 +141,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Sources\RTTIUtil.inl" />
+    <None Include="Sources\RTTI\RTTIUtil.inl" />
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\RTTIUtil.h" />
-    <ClInclude Include="Sources\RTTI.h" />
+    <ClInclude Include="Sources\Color\Color.h" />
     <ClInclude Include="Sources\Pattern\Singleton.h" />
     <ClInclude Include="Sources\Pattern\Uncopyable.h" />
     <ClInclude Include="Sources\delegate.h" />
+    <ClInclude Include="Sources\RTTI\RTTI.h" />
+    <ClInclude Include="Sources\RTTI\RTTIUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\RTTIUtil.cpp" />
-    <ClCompile Include="Sources\RTTI.cpp" />
     <ClCompile Include="Sources\Pattern\Uncopyable.cpp" />
+    <ClCompile Include="Sources\RTTI\RTTI.cpp" />
+    <ClCompile Include="Sources\RTTI\RTTIUtil.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowEvent.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Windows\WindowsMain.cpp">
+      <Filter>Sources\Main\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Windows\WindowsWindowUtil.cpp">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Windows\WindowsWindow.cpp">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\tgWindow.cpp">
+      <Filter>Sources\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IWindowImplBase.cpp">
+      <Filter>Sources\Window\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformWindow.h">
+      <Filter>Sources\Window\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformMain.h">
+      <Filter>Sources\Main\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowEvent.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowStyle.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Windows\WindowsMain.h">
+      <Filter>Sources\Main\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Windows\WindowsWindowUtil.h">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Windows\WindowsWindow.h">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\tgWindow.h">
+      <Filter>Sources\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IWindowImplBase.h">
+      <Filter>Sources\Window\Interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{7b33b5a8-5fd4-44ea-9351-1d902c24e583}</UniqueIdentifier>
+      <Extensions>hpp;h;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{c51f1ebb-c42a-4859-8e32-6ce1ca7bae0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window">
+      <UniqueIdentifier>{00a37e81-ebbc-453a-8bf6-88bc99d16ec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Windows">
+      <UniqueIdentifier>{933eaffa-2458-4456-8e2a-a61f75fb21d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Android">
+      <UniqueIdentifier>{9de242c2-5399-4c99-bffd-6abe80974f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Platform">
+      <UniqueIdentifier>{2bc48606-0502-4013-af07-9d6d89675c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Main">
+      <UniqueIdentifier>{e618bead-bc51-480a-9031-ff9484db40cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Main\Windows">
+      <UniqueIdentifier>{232136a8-6d72-4197-86fd-fe481d79c2d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Main\Android">
+      <UniqueIdentifier>{4b51cb34-e8e5-4e17-83b2-489f8a8b3d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Main\Platform">
+      <UniqueIdentifier>{fdb4f23a-ef08-4df1-8c32-4c7fb21a3b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Interface">
+      <UniqueIdentifier>{436764f3-d23e-4d29-b4fb-46a3eec635f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

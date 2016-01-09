@@ -4,23 +4,30 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{b8a808bc-df73-4f26-aa02-be62d4b5b595}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public">
-      <UniqueIdentifier>{3e3bd566-e36f-452e-b506-1dff74798cea}</UniqueIdentifier>
-      <Extensions>h</Extensions>
-    </Filter>
-    <Filter Include="Sources\private">
-      <UniqueIdentifier>{36bb4423-6475-4868-be09-93b3ada0976d}</UniqueIdentifier>
-      <Extensions>cpp</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Direct3D9.cpp">
-      <Filter>Sources\private</Filter>
+    <ClCompile Include="Sources\Direct3D9Device.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GraphicsDevice.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Direct3D9.h">
-      <Filter>Sources\public</Filter>
+    <ClInclude Include="Sources\Direct3D9Device.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsDevice.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsDeviceError.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GraphicsDeviceType.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformGraphicsDevice.h">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

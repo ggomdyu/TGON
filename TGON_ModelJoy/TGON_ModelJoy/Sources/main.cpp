@@ -2,7 +2,8 @@
 
 
 #include "CoreEngine.h"
-#include "CoreUtil.h"
+#include "CoreEngineUtil.h"
+
 #include <System\GraphicsSystem.h>
 #include <System\WindowSystem.h>
 #include <System\TickSystem.h>
@@ -10,11 +11,6 @@
 
 using namespace tgon;
 
-void OnFrameCreate( )
-{
-	//MARGINS margins = { -1, -1, -1, -1 };
-	//DwmExtendFrameIntoClientArea( wndHandle, &margins );
-}
 
 void OnFrameExit( )
 {
@@ -27,13 +23,15 @@ int tgMain( int argc, char* argv[] )
 	/*
 		Register running system
 	*/
+	
 	CoreEngine::GetInstance( )->RegisterSystem({
 		WindowSystem::GetInstance( ),
 		GraphicsSystem::GetInstance( ),
 		TickSystem::GetInstance( )
 	});
+	
 
-	System::AddWindowEventCallback( WindowEvent::Destroy, OnFrameExit );
+	System::AddEventCallback( WindowEvent::Destroy, OnFrameExit );
 
 
 	CoreEngine::GetInstance( )->Initialize( );

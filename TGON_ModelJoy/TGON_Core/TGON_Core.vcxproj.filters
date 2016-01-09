@@ -21,20 +21,17 @@
     <Filter Include="Sources\Misc">
       <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Color">
+      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
-    <None Include="Sources\RTTIUtil.inl">
+    <None Include="Sources\RTTI\RTTIUtil.inl">
       <Filter>Sources\RTTI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\RTTI.h">
-      <Filter>Sources\RTTI</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\RTTIUtil.h">
-      <Filter>Sources\RTTI</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Pattern\Uncopyable.h">
       <Filter>Sources\Pattern</Filter>
     </ClInclude>
@@ -44,15 +41,24 @@
     <ClInclude Include="Sources\delegate.h">
       <Filter>Sources\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\RTTI\RTTI.h">
+      <Filter>Sources\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\RTTI\RTTIUtil.h">
+      <Filter>Sources\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Color\Color.h">
+      <Filter>Sources\Color</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
       <Filter>Sources\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\RTTI.cpp">
+    <ClCompile Include="Sources\RTTI\RTTI.cpp">
       <Filter>Sources\RTTI</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\RTTIUtil.cpp">
+    <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
       <Filter>Sources\RTTI</Filter>
     </ClCompile>
   </ItemGroup>
