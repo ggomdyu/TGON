@@ -6,179 +6,54 @@
       <Extensions>
       </Extensions>
     </Filter>
-    <Filter Include="Sources\private">
-      <UniqueIdentifier>{522edeb3-92eb-4050-9c0f-dce5fec30526}</UniqueIdentifier>
-      <Extensions>cpp</Extensions>
-    </Filter>
-    <Filter Include="Sources\public">
-      <UniqueIdentifier>{69ced53d-188a-4c72-a1f2-f606872b4a59}</UniqueIdentifier>
-      <Extensions>h</Extensions>
-    </Filter>
-    <Filter Include="Sources\private\CoreEngine">
-      <UniqueIdentifier>{a4b2ba3d-74e1-4a10-a251-ecb53832b4b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\Common">
-      <UniqueIdentifier>{e2eed7ce-f74c-4fc8-8664-76f4f6790d4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\Common\Math">
-      <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\Common\Pattern">
+    <Filter Include="Sources\Pattern">
       <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\Common\String">
-      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\Common">
-      <UniqueIdentifier>{4da17493-8f4c-4e57-a32e-c0bc7a0501e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\Common\Pattern">
-      <UniqueIdentifier>{60c44462-b00b-4f4a-a7b9-c3b4bb55a2e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\CoreEngine">
-      <UniqueIdentifier>{12c3ce0c-0989-4c60-a025-45f2fab719b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\CoreEngine\Manager">
-      <UniqueIdentifier>{fcc1debe-6a30-44d9-9b78-d3d10cb7a95a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\CoreEngine\Manager\Sociable">
-      <UniqueIdentifier>{865e805d-a32a-47b2-8d10-04d93f001e89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\CoreEngine\Manager\Message">
-      <UniqueIdentifier>{f93a5d0f-0b53-49f5-9bd8-1cf0d05e4015}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\CoreEngine\Manager">
-      <UniqueIdentifier>{c0bba221-0544-47ae-94ad-b269fadda558}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\CoreEngine\Manager\Sociable">
-      <UniqueIdentifier>{fbfd65b2-add4-435b-a409-a2d15180e37d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\CoreEngine\Manager\Message">
-      <UniqueIdentifier>{f788cc27-8f59-445d-9414-70c77a4bdbd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\System">
-      <UniqueIdentifier>{f90c5df5-fdda-4253-a127-29e5ba982a14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\System\Graphics">
-      <UniqueIdentifier>{c28fc163-3fff-420b-a0ae-dfeea4c05fc4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\System\Window">
-      <UniqueIdentifier>{a7a3d9d2-fe81-4c00-93ac-17e706c29bff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\System">
-      <UniqueIdentifier>{234c0bd9-78ff-4779-827a-60f8f8b70c34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\System\Graphics">
-      <UniqueIdentifier>{9b0798a0-3e16-4313-a3da-d9733cfab540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\private\System\Window">
-      <UniqueIdentifier>{f88c8779-af8e-4a95-9e9a-80fe0383600c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\public\Common\RTTI">
+    <Filter Include="Sources\RTTI">
       <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\private\Common\RTTI">
-      <UniqueIdentifier>{f5ff3a0c-f820-4e03-a4a5-19a9792c2af7}</UniqueIdentifier>
+    <Filter Include="Sources\Math">
+      <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\public\System\Tick">
-      <UniqueIdentifier>{3f5232e7-2a4d-4a61-9204-35b42e710c45}</UniqueIdentifier>
+    <Filter Include="Sources\Parse">
+      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Misc">
+      <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
     <None Include="Sources\RTTIUtil.inl">
-      <Filter>Sources\private\Common\RTTI</Filter>
+      <Filter>Sources\RTTI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\SociableManager.h">
-      <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\CoreEngine.h">
-      <Filter>Sources\public\CoreEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ISociable.h">
-      <Filter>Sources\public\CoreEngine\Manager\Sociable</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ISystem.h">
-      <Filter>Sources\public\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GraphicsSystemMessage.h">
-      <Filter>Sources\public\System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\SociableMessage.h">
-      <Filter>Sources\public\CoreEngine\Manager\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\MessageManager.h">
-      <Filter>Sources\public\CoreEngine\Manager\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\WindowSystemMessageType.h">
-      <Filter>Sources\public\System\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\WindowSystem.h">
-      <Filter>Sources\public\System\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\GraphicsSystem.h">
-      <Filter>Sources\public\System\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\RTTI.h">
-      <Filter>Sources\public\Common\RTTI</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\TickSystem.h">
-      <Filter>Sources\public\System\Tick</Filter>
+      <Filter>Sources\RTTI</Filter>
     </ClInclude>
     <ClInclude Include="Sources\RTTIUtil.h">
-      <Filter>Sources\public\Common\RTTI</Filter>
+      <Filter>Sources\RTTI</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Pattern\Uncopyable.h">
-      <Filter>Sources\public\Common\Pattern</Filter>
+      <Filter>Sources\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Pattern\Singleton.h">
-      <Filter>Sources\public\Common\Pattern</Filter>
+      <Filter>Sources\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\CoreUtil.h">
-      <Filter>Sources\public</Filter>
+    <ClInclude Include="Sources\delegate.h">
+      <Filter>Sources\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\SociableManager.cpp">
-      <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CoreEngine.cpp">
-      <Filter>Sources\private\CoreEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ISociable.cpp">
-      <Filter>Sources\private\CoreEngine\Manager\Sociable</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\ISystem.cpp">
-      <Filter>Sources\private\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\SociableMessage.cpp">
-      <Filter>Sources\private\CoreEngine\Manager\Message</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\MessageManager.cpp">
-      <Filter>Sources\private\CoreEngine\Manager\Message</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\System\WindowSystem.cpp">
-      <Filter>Sources\private\System\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\System\TickSystem.cpp">
-      <Filter>Sources\private</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\System\GraphicsSystem.cpp">
-      <Filter>Sources\private\System\Graphics</Filter>
+    <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
+      <Filter>Sources\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Sources\RTTI.cpp">
-      <Filter>Sources\private\Common\RTTI</Filter>
+      <Filter>Sources\RTTI</Filter>
     </ClCompile>
     <ClCompile Include="Sources\RTTIUtil.cpp">
-      <Filter>Sources\private\Common\RTTI</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
-      <Filter>Sources\private\Common\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\CoreUtil.cpp">
-      <Filter>Sources\private</Filter>
+      <Filter>Sources\RTTI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

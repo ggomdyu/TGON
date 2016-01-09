@@ -12,10 +12,10 @@ namespace tgon {
 	class ISystem : public ISociable
 	{
 	public:
-		ISystem( uint32_t systemKey );
+		ISystem( uint32_t key );
 		virtual ~ISystem( );
 
-		virtual void		Initialize( )										{};
-		virtual void		FrameMove( float elapsedTime ) = 0;
+		virtual void Initialize( ) {};
+		virtual void FrameMove( float elapsedTime ) = 0;
 	};
 }

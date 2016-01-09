@@ -6,12 +6,11 @@
 */
 
 #pragma once
-#ifndef TGON_USE_PRECOMPILED_HEADER
-	#define WIN32_LEAN_AND_MEAN /* fwd declare */
-	#include <Windows.h>
-#endif
-
 #include "GenericWindow.h"
+
+#define WIN32_LEAN_AND_MEAN /* fwd declare */
+#include <Windows.h>
+
 
 namespace tgon {
 	class WindowsWindow;
@@ -20,27 +19,29 @@ namespace tgon {
 	class WindowsWindow final : public GenericWindow
 	{
 	public:
-		explicit						WindowsWindow( _In_ const WindowStyle& );
-		virtual							~WindowsWindow( );
+		explicit WindowsWindow( _In_ const WindowStyle& );
+		virtual ~WindowsWindow( );
 
-		virtual bool					PumpWindowEvent( ) override;
-
+		virtual void FrameMove( ) override;
+		
 	public:
-		virtual void					Show( ) override;
-		virtual void					BringToTop( ) override;
-		virtual void					SetPosition( const int x, const int y ) override;
-		virtual void					Move( const int x, const int y ) override;
-		virtual void					Exit( ) override;
+		virtual void Show( ) override;
+		virtual void BringToTop( ) override;
+		virtual void SetPosition( const int x, const int y ) override;
+		virtual void Move( const int x, const int y ) override;
+		virtual void Exit( ) override;
 
-		HWND						GetWindowHandle( ) const;
+		virtual const WindowEvent GetWindowEvent( ) const override;
+		HWND GetWindowHandle( ) const;
 
 	private:
-		void							MakeWindow( _In_ const WindowStyle& );
+		void MakeWindow( _In_ const WindowStyle& );
 
-		static LRESULT WINAPI	CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
-		virtual LRESULT WINAPI	CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );	/* can override! */
+		static LRESULT WINAPI CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
+		virtual LRESULT WINAPI CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );	/* can override! */
 		 
 	private:
-		HWND						m_wndHandle;
+		MSG msg;
+		HWND m_wndHandle;
 	};
 }

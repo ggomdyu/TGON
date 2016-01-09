@@ -6,9 +6,7 @@
 */
 
 #pragma once
-#ifndef TGON_USE_PRECOMPILED_HEADER
-	#include <memory>
-#endif
+#include <memory>
 
 /*
 	1. Constructor un-hideable singleton ( Inheritance ver. )
@@ -25,8 +23,8 @@ public:
 	}
 
 protected:
-	StaticSingleton( )		{}
-	~StaticSingleton( )		{}
+	StaticSingleton( )			{}
+	~StaticSingleton( )			{}
 };
 
 template <typename T>
@@ -45,7 +43,7 @@ public:
 
 protected:
 	DynamicSingleton( )		{}
-	~DynamicSingleton( )	{}
+	~DynamicSingleton( )		{}
 };
 
 /*
@@ -54,25 +52,19 @@ protected:
 
 #define Declare_Static_Singleton( T )							\
 	static T* GetInstance( )										\
-	{																\
+	{																	\
 		static T instance;											\
-		return &instance;										\
+		return &instance;											\
 	}
 
 #define Declare_Dynamic_Singleton( T )						\
 public:																\
 	static const std::shared_ptr<T>& GetInstance( )		\
-	{																\
+	{																	\
 		static std::shared_ptr<T> instance;					\
-																	\
-		if ( !instance ) {											\
+																		\
+		if ( !instance ) {												\
 			instance.reset( new T );								\
-		}															\
-		return instance;											\
+		}																\
+		return instance;												\
 	}					
-
-//
-//#define Implement_Singleton_Instance( T )					\
-//namespace {														\
-//	decltype( typename T::m_instance ) T::m_instance;	\
-//}											
