@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -145,16 +145,42 @@
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\CoreUtil.h" />
     <ClInclude Include="Sources\RTTIUtil.h" />
     <ClInclude Include="Sources\RTTI.h" />
+    <ClInclude Include="Sources\System\GraphicsSystem.h" />
     <ClInclude Include="Sources\Pattern\Singleton.h" />
+    <ClInclude Include="Sources\SociableMessage.h" />
+    <ClInclude Include="Sources\CoreEngine.h" />
+    <ClInclude Include="Sources\GraphicsSystemMessage.h" />
+    <ClInclude Include="Sources\ISociable.h" />
+    <ClInclude Include="Sources\ISystem.h" />
+    <ClInclude Include="Sources\MessageManager.h" />
+    <ClInclude Include="Sources\SociableManager.h" />
+    <ClInclude Include="Sources\System\TickSystem.h" />
     <ClInclude Include="Sources\Pattern\Uncopyable.h" />
-    <ClInclude Include="Sources\delegate.h" />
+    <ClInclude Include="Sources\System\WindowSystem.h" />
+    <ClInclude Include="Sources\WindowSystemMessageType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\CoreUtil.cpp" />
     <ClCompile Include="Sources\RTTIUtil.cpp" />
     <ClCompile Include="Sources\RTTI.cpp" />
+    <ClCompile Include="Sources\System\GraphicsSystem.cpp" />
+    <ClCompile Include="Sources\SociableMessage.cpp" />
+    <ClCompile Include="Sources\CoreEngine.cpp" />
+    <ClCompile Include="Sources\ISociable.cpp" />
+    <ClCompile Include="Sources\ISystem.cpp" />
+    <ClCompile Include="Sources\MessageManager.cpp" />
+    <ClCompile Include="Sources\SociableManager.cpp" />
+    <ClCompile Include="Sources\System\TickSystem.cpp" />
     <ClCompile Include="Sources\Pattern\Uncopyable.cpp" />
+    <ClCompile Include="Sources\System\WindowSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Platform_Core\TGON_Platform_Core.vcxproj">
+      <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

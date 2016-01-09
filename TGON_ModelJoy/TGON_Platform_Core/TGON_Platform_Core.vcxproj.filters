@@ -6,75 +6,98 @@
       <Extensions>
       </Extensions>
     </Filter>
-    <Filter Include="Sources\pch">
+    <Filter Include="Sources\private">
+      <UniqueIdentifier>{f29f82fa-6cd9-47b8-a84d-f2813568eda1}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="Sources\public">
+      <UniqueIdentifier>{de337581-71fb-4833-8bce-71d4454eee27}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Sources\public\pch">
       <UniqueIdentifier>{5eb5bc6e-65f8-4837-a1ce-3a134f706f7c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Android">
-      <UniqueIdentifier>{3b4aac6c-68fb-4241-828e-f62b432b1498}</UniqueIdentifier>
+    <Filter Include="Sources\private\pch">
+      <UniqueIdentifier>{45ea0669-93e6-4b18-9d93-5b00b93fc7c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Windows">
-      <UniqueIdentifier>{9de937b9-3e6d-44a8-a407-70ef709e1dfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Windows\Window">
+    <Filter Include="Sources\public\Window">
       <UniqueIdentifier>{526d8987-e9d4-4bc6-a5d5-87a495ecba77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Windows\Window\Generic">
+    <Filter Include="Sources\private\Window">
+      <UniqueIdentifier>{c395d6b5-223a-4357-81c2-b0dded7ffbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Window\Android">
+      <UniqueIdentifier>{afc1c2e9-4834-479a-9b87-1c8b5f0696a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Window\Windows">
+      <UniqueIdentifier>{83180a09-a0bb-4e07-b406-c2f9aaf6f37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\private\Window\Generic">
+      <UniqueIdentifier>{f7d93b22-7b28-4d30-bc83-323b86c3dc27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Window\Generic">
       <UniqueIdentifier>{2100c0c2-2ffe-432e-9b09-581e2c4d009b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Windows\Window\Platform">
+    <Filter Include="Sources\public\Window\Android">
+      <UniqueIdentifier>{3b4aac6c-68fb-4241-828e-f62b432b1498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Window\Windows">
+      <UniqueIdentifier>{9de937b9-3e6d-44a8-a407-70ef709e1dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\public\Window\Platform">
       <UniqueIdentifier>{c7751d26-30aa-4bb3-b697-4156c3261656}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\WindowsMain.h">
-      <Filter>Sources\Windows</Filter>
+      <Filter>Sources\public\Window\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowsWindow.h">
-      <Filter>Sources\Windows</Filter>
+      <Filter>Sources\public\Window\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowsWindowUtil.h">
-      <Filter>Sources\Windows</Filter>
+      <Filter>Sources\public\Window\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowStyle.h">
-      <Filter>Sources\Windows\Window</Filter>
+      <Filter>Sources\public\Window</Filter>
     </ClInclude>
     <ClInclude Include="Sources\GenericWindow.h">
-      <Filter>Sources\Windows\Window\Generic</Filter>
+      <Filter>Sources\public\Window\Generic</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowEvent.h">
-      <Filter>Sources\Windows\Window</Filter>
+      <Filter>Sources\public\Window</Filter>
     </ClInclude>
     <ClInclude Include="Sources\pch\stdafx.h">
-      <Filter>Sources\pch</Filter>
+      <Filter>Sources\public\pch</Filter>
     </ClInclude>
     <ClInclude Include="Sources\pch\targetver.h">
-      <Filter>Sources\pch</Filter>
+      <Filter>Sources\public\pch</Filter>
     </ClInclude>
     <ClInclude Include="Sources\PlatformWindow.h">
-      <Filter>Sources\Windows\Window\Platform</Filter>
+      <Filter>Sources\public\Window\Platform</Filter>
     </ClInclude>
     <ClInclude Include="PlatformMain.h">
-      <Filter>Sources\Windows\Window\Platform</Filter>
+      <Filter>Sources\public\Window\Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\WindowsMain.cpp">
-      <Filter>Sources\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\WindowsWindow.cpp">
-      <Filter>Sources\Windows</Filter>
+      <Filter>Sources\private\Window\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\WindowsWindowUtil.cpp">
-      <Filter>Sources\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\WindowEvent.cpp">
-      <Filter>Sources\Windows\Window</Filter>
+    <ClCompile Include="Sources\WindowsMain.cpp">
+      <Filter>Sources\private\Window\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\stdafx.cpp">
-      <Filter>Sources\pch</Filter>
+      <Filter>Sources\private\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowsWindowUtil.cpp">
+      <Filter>Sources\private\Window\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\GenericWindow.cpp">
-      <Filter>Sources\Windows\Window\Generic</Filter>
+      <Filter>Sources\private\Window\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowEvent.cpp">
+      <Filter>Sources\private\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "RTTIUtil.h"
 
 template <typename _To, typename _From>
-bool tgon::DynamicCast( const _From& from )
+bool DynamicCast( const _From& from )
 {
 	typedef std::remove_pointer<_From>::type _Fromrp;
 	typedef std::remove_pointer<_To>::type _Torp;

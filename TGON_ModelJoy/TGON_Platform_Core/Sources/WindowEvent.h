@@ -6,10 +6,13 @@
 * 최종 수정일 :
 */
 
-#include <windows.h>
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	//#include <stdint.h>
+#endif
+	#include <windows.h>
 
 #ifdef PLATFORM_WINDOWS_OS
-	#define ET_NONE 0xcccccccc
+	#define ET_NONE 0
 	#define ET_CREATE WM_CREATE
 	#define ET_SIZE WM_SIZE
 	#define ET_MOVE WM_MOVE
@@ -19,8 +22,8 @@
 struct WindowEvent
 {
 public:
-	WindowEvent( const uint32_t evType = WindowEvent::None ) :
-		m_evType( evType ) {}
+	explicit WindowEvent( const uint32_t _msg = WindowEvent::None ) :
+			msg( _msg ) {}
 
 	enum : uint32_t
 	{
@@ -31,8 +34,5 @@ public:
 		Destroy = ET_DESTROY,
 	};
 
-	operator uint32_t( ) { return m_evType; }
-
-private:
-	uint32_t m_evType = 0;
+	uint32_t msg = 0;
 };

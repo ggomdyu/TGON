@@ -6,7 +6,12 @@
 */
 
 #pragma once
-#include <iostream>
+
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <iostream>
+#endif
+
+
 
 class RTTI
 {
@@ -14,14 +19,14 @@ public:
 	RTTI( const RTTI* parent );
 	~RTTI( );
 
-	const RTTI*		GetParentRTTI( ) const						{ return m_parentRTTI; }
-
-	template <class T> static const RTTI* GetRTTI( )			{ return &T::ms_RTTI; }
-	template <class T> static uint32_t GetTypeHash( )		{ return reinterpret_cast<uint32_t>( &T::ms_RTTI ); }
+	const RTTI*											GetParentRTTI( ) const		{ return m_parentRTTI; }
+	template <class T> static const RTTI*		GetRTTI( )						{ return &T::ms_RTTI; }
+	template <class T> static uint32_t				GetTypeHash( )					{ return reinterpret_cast<uint32_t>( &T::ms_RTTI ); }
 
 private:
-	const RTTI*		m_parentRTTI;
+	const RTTI*	m_parentRTTI;
 };
+
 
 
 #define Declare_RTTI( )															\
@@ -30,7 +35,7 @@ private:																				\
 	static const RTTI		ms_RTTI;												\
 																						\
 public:																				\
-	 virtual const RTTI*	GetRTTI( ) const { return &ms_RTTI; }
+	 virtual const RTTI*	GetRTTI( ) const		{ return &ms_RTTI; }
 
 
 #define Implement_Root_RTTI( ownerType )								\

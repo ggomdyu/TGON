@@ -25,10 +25,12 @@ namespace tgon {
 		virtual ~ISociable( );
 
 		virtual void				RecvMessage( _In_ const SociableMessage& msg ) = 0;
-		uint32_t					GetKey( ) const							{ return m_key; }
+	
+	public:
+		uint32_t					GetKey( ) const						{ return m_key; }
 
 	private:
-		void						SetKey( const uint32_t key )			{ m_key = key; }
+		void						SetKey( const uint32_t key )		{ m_key = key; }
 
 	private:
 		const SociableEnum	m_sociableType;

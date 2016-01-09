@@ -6,44 +6,44 @@
 * 최종 수정일 :
 */
 
-#include <iostream>
-#include <functional>
-#include <unordered_map>
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <iostream>
+	#include <functional>
+	#include <unordered_map>
 
-#include "WindowStyle.h"
-#include "WindowEvent.h"
+	#include "WindowStyle.h"
+	#include "WindowEvent.h"
+#endif
 
 
 namespace tgon {
 	class GenericWindow
 	{
-		typedef std::function<void()> EventProc;
-		typedef std::unordered_map<uint32_t, EventProc> EventProcMap;
+		typedef std::function<void()>								WorkProc;
+		typedef std::unordered_map<uint32_t, WorkProc>	WorkProcList;
 
 	public:
-		explicit GenericWindow( const WindowStyle& );
-		virtual ~GenericWindow( );
+		explicit						GenericWindow( const WindowStyle& ws );
+		virtual							~GenericWindow( );
 
-		virtual void FrameMove( ) = 0;
+		void							RegisterEventCallback( const uint32_t targetEvent, const WorkProc& doWork );
+		virtual bool					PumpWindowEvent( ) = 0;
 
 	public:
-		virtual void Show( ) = 0;
-		virtual void BringToTop( ) = 0;
-		virtual void SetPosition( const int x, const int y ) = 0;
-		virtual void Move( const int x, const int y ) = 0;
-		virtual void Exit( ) = 0;
+		virtual void					Show( ) = 0;
+		virtual void					BringToTop( ) = 0;
+		virtual void					SetPosition( const int x, const int y ) = 0;
+		virtual void					Move( const int x, const int y ) = 0;
+		virtual void					Exit( ) = 0;
 
-		virtual const WindowEvent GetWindowEvent( ) const = 0;
-
-		void AddWindowEventCallback( const uint32_t evType, const EventProc& evProc );
+		const WindowStyle&		GetWindowStyle( ) const				{ return m_wndStyle; }
 
 	protected:
-		const EventProcMap& GetEventMap( );
-		void CallWindowEventProc( const uint32_t evType );
+		const WorkProcList&		GetEventWorkList( )					{ return m_eventWorkList; }
 
 	private:
-		EventProcMap m_evMap;
-		WindowStyle m_wndStyle;
+		WorkProcList				m_eventWorkList;
+		WindowStyle				m_wndStyle;
 	};
 }
 

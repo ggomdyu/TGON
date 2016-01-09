@@ -13,23 +13,7 @@ tgon::GenericWindow::~GenericWindow( )
 }
 
 
-void tgon::GenericWindow::AddWindowEventCallback( const uint32_t evType, const EventProc& evProc )
+void tgon::GenericWindow::RegisterEventCallback( const uint32_t targetEvent, const WorkProc& doWork )
 {
-	m_evMap.insert( std::make_pair( evType, evProc ));
+	m_eventWorkList.insert( std::make_pair( targetEvent, doWork ));
 }
-
-const tgon::GenericWindow::EventProcMap& tgon::GenericWindow::GetEventMap( )
-{
-	return m_evMap;
-}
-
-void tgon::GenericWindow::CallWindowEventProc( const uint32_t evType )
-{
-	const auto evProc = this->GetEventMap( ).find( evType );
-
-	if ( evProc != this->GetEventMap( ).end( ))
-	{
-		evProc->second( );
-	}
-}
-

@@ -1,8 +1,10 @@
 #pragma once
 #include "stdafx.h"
 #include "WindowsMain.h"
-#include <Windows.h>
 
+#ifndef TGON_USE_PRECOMPILED_HEADER
+	#include <Windows.h>
+#endif
 
 #ifdef _DEBUG
 	#include <crtdbg.h>

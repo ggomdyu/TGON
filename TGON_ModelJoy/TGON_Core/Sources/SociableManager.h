@@ -26,11 +26,11 @@ namespace tgon {
 		Declare_Static_Singleton( SociableManager )
 
 	public:
-		void FrameMove( float elapsedTime );
+		void		FrameMove( float elapsedTime );
 
 	public:
-		void RegisterMember( _In_ ISociable* member );
-		void DispatchMessage( _In_ const SociableMessage& msg );
+		void		RegisterMember( _In_ ISociable* member );
+		void		DispatchMessage( _In_ const SociableMessage& msg );
 
 	private:
 		SociableManager( );
@@ -38,6 +38,6 @@ namespace tgon {
 
 
 	private:
-		SociableRepo m_sociableMap;
+		SociableRepo	m_sociableMap;
 	};
 }
