@@ -2,7 +2,7 @@
 * 작성자 : 김태우
 * 작성일 : 2015-04-25
 * 최종 수정 : 차준호
-* 최종 수정일 : 2015-12-15
+* 최종 수정일 : 2016-01-08
 */
 
 #pragma once
@@ -10,6 +10,9 @@
 
 /*
 	1. Constructor un-hideable singleton ( Inheritance ver. )
+
+	User can inherit through support friend this
+	but It makes desultory interface, so I hope u all using Declare_Static_Singleton instead
 */
 
 template <typename T>
@@ -58,7 +61,6 @@ protected:
 	}
 
 #define Declare_Dynamic_Singleton( T )						\
-public:																\
 	static const std::shared_ptr<T>& GetInstance( )		\
 	{																	\
 		static std::shared_ptr<T> instance;					\
