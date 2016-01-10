@@ -28,15 +28,15 @@ public:
 	virtual void		FrameMove( float elapsedTime ) override;
 	virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
 
-	void				AddEventCallback( const uint32_t evType, const EventProc& evProc );
+	void						AddEventCallback( const uint32_t evType, const EventProc& evProc );
 	const WindowEvent	GetWindowEvent( ) const;
 
 private:
-				WindowSystem( );
-	virtual		~WindowSystem( );
+						WindowSystem( );
+	virtual				~WindowSystem( );
 		
 private:
-	Window	m_window;
+	Window		m_window;
 };
 
 

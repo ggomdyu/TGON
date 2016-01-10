@@ -41,9 +41,10 @@ public:
 
 private:
 	void					MakeWindow( const WindowStyle& );
+	static LRESULT		WINAPI CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
 
-	static LRESULT		__stdcall CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
-	virtual LRESULT		__stdcall CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );	/* can override! */
+	// Overridable message procedure
+	virtual LRESULT		WINAPI CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );
 		 
 private:
 	MSG		m_msg;

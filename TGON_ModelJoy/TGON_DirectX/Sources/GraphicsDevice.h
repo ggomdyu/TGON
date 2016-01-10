@@ -1,44 +1,43 @@
 /*
 * 작성자 : 차준호
 * 작성일 : 2016-01-08
-* 최종 수정 : 
-* 최종 수정일 : 
+* 최종 수정 : 차준호
+* 최종 수정일 : 2016-01-10
 */
 
 // Happy new year 2016!!
 
 #pragma once
-#include "GraphicsDeviceType.h"
+#include "PlatformGraphicsDevice.h"
+
+#include <memory>
 #include <Pattern\Singleton.h>
 
 
-class IGraphicsDeviceImpl;
-class GraphicsDevice : public IGraphicsDeviceImpl
+namespace tgon
 {
+
+
+class GraphicsDevice
+{
+
 public:
 	Declare_Static_Singleton( GraphicsDevice )
 
 
-	virtual bool		Setup( int width, int height, GraphicsDeviceType gdt ) override		{ device->Setup( width, height, gdt ); }
-	virtual void		Display( )	 override																	{ device->Display( ); }
+	bool		Setup( GraphicsDeviceCreateParam gdp )		{ return device.Setup( gdp ); }
+	void		Display( )					{ device.Display( ); }
 
 private:
-						GraphicsDevice( );
-	virtual				~GraphicsDevice( );
+				GraphicsDevice( );
+	virtual		~GraphicsDevice( );
 
-	void				operator delete ( void* arg )		{ std::free( arg ); }
+	void		operator delete ( void* arg )		{ std::free( arg ); }
+
 
 private:
-	IGraphicsDeviceImpl* device;
+	GraphicsDeviceImpl device;
 };
 
 
-class IGraphicsDeviceImpl
-{
-public:
-						IGraphicsDeviceImpl( ) {};
-	virtual				~IGraphicsDeviceImpl( ) = 0 {};
-
-	virtual bool		Setup( int width, int height, GraphicsDeviceType gdt ) = 0;
-	virtual void		Display( ) = 0;
-};
+}

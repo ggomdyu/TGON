@@ -113,14 +113,14 @@ LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPAR
 	{
 		// When window created by CreateWindow Func, It throws LPCREATESTRUCT to msg Callback.
 		// Check 44 lines' func and the last argument
-		SetWindowLong( wndHandle, GWLP_USERDATA, reinterpret_cast<ULONG_PTR>(
+		SetWindowLongPtr( wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(
 										LPCREATESTRUCT( lParam )->lpCreateParams )); 
 	}
 
 
 	// Get extra memory ptr through GetWindowLong( .. GWLP_USERDATA )
 	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
-			GetWindowLong( wndHandle, GWLP_USERDATA ));
+			GetWindowLongPtr( wndHandle, GWLP_USERDATA ));
 
 	if ( extraMemAsWindow )
 		return extraMemAsWindow->CustomMsgProc( wndHandle, msg, wParam, lParam );

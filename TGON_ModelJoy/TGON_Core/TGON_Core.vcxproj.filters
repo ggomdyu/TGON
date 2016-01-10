@@ -24,6 +24,9 @@
     <Filter Include="Sources\Color">
       <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\C#">
+      <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
@@ -38,9 +41,6 @@
     <ClInclude Include="Sources\Pattern\Singleton.h">
       <Filter>Sources\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\delegate.h">
-      <Filter>Sources\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\RTTI\RTTI.h">
       <Filter>Sources\RTTI</Filter>
     </ClInclude>
@@ -50,11 +50,14 @@
     <ClInclude Include="Sources\Color\Color.h">
       <Filter>Sources\Color</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\delegate.h">
+      <Filter>Sources\C#</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Sources\C#</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Pattern\Uncopyable.cpp">
-      <Filter>Sources\Pattern</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\RTTI\RTTI.cpp">
       <Filter>Sources\RTTI</Filter>
     </ClCompile>

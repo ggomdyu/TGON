@@ -1,12 +1,12 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "GraphicsDevice.h"
 
 
-GraphicsDevice::GraphicsDevice( )
+tgon::GraphicsDevice::GraphicsDevice( )
 {
 }
 
 
-GraphicsDevice::~GraphicsDevice( )
+tgon::GraphicsDevice::~GraphicsDevice( )
 {
 }

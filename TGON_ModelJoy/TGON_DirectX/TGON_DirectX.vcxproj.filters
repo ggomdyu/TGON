@@ -9,25 +9,24 @@
     <ClCompile Include="Sources\Direct3D9Device.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\GraphicsDevice.cpp">
+    <ClCompile Include="Sources\stdafx.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\GraphicsDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Direct3D9Device.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\GraphicsDevice.h">
+    <ClInclude Include="Sources\stdafx.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\GraphicsDeviceError.h">
+    <ClInclude Include="Sources\PlatformGraphicsDevice.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\GraphicsDeviceType.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformGraphicsDevice.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
+    <ClInclude Include="Sources\GraphicsDevice.h" />
+    <ClInclude Include="Sources\GraphicsDeviceMisc.h" />
+    <ClInclude Include="Sources\GraphicsDeviceType.h" />
+    <ClInclude Include="Sources\IGraphicsDeviceImpl.h" />
   </ItemGroup>
 </Project>

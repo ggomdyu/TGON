@@ -4,23 +4,23 @@
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\WindowEvent.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Windows\WindowsMain.cpp">
       <Filter>Sources\Main\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Windows\WindowsWindowUtil.cpp">
-      <Filter>Sources\Window\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Windows\WindowsWindow.cpp">
       <Filter>Sources\Window\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\tgWindow.cpp">
-      <Filter>Sources\Window</Filter>
+    <ClCompile Include="Sources\Windows\WindowsWindowUtil.cpp">
+      <Filter>Sources\Window\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\IWindowImplBase.cpp">
       <Filter>Sources\Window\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\tgWindow.cpp">
+      <Filter>Sources\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\WindowEvent.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,8 +33,20 @@
     <ClInclude Include="Sources\PlatformWindow.h">
       <Filter>Sources\Window\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\PlatformMain.h">
-      <Filter>Sources\Main\Platform</Filter>
+    <ClInclude Include="Sources\Windows\WindowsMain.h">
+      <Filter>Sources\Main\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Windows\WindowsWindow.h">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Windows\WindowsWindowUtil.h">
+      <Filter>Sources\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IWindowImplBase.h">
+      <Filter>Sources\Window\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\tgWindow.h">
+      <Filter>Sources\Window</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowEvent.h">
       <Filter>Sources</Filter>
@@ -42,20 +54,8 @@
     <ClInclude Include="Sources\WindowStyle.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Windows\WindowsMain.h">
-      <Filter>Sources\Main\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Windows\WindowsWindowUtil.h">
-      <Filter>Sources\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Windows\WindowsWindow.h">
-      <Filter>Sources\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\tgWindow.h">
-      <Filter>Sources\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IWindowImplBase.h">
-      <Filter>Sources\Window\Interface</Filter>
+    <ClInclude Include="Sources\PlatformMain.h">
+      <Filter>Sources\Main\Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -109,12 +109,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,6 +146,7 @@
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Sources\Color\Color.h" />
     <ClInclude Include="Sources\Pattern\Singleton.h" />
     <ClInclude Include="Sources\Pattern\Uncopyable.h" />
@@ -153,7 +155,6 @@
     <ClInclude Include="Sources\RTTI\RTTIUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Pattern\Uncopyable.cpp" />
     <ClCompile Include="Sources\RTTI\RTTI.cpp" />
     <ClCompile Include="Sources\RTTI\RTTIUtil.cpp" />
   </ItemGroup>
