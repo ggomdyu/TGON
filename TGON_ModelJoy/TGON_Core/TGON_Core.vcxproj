@@ -146,7 +146,7 @@
     <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="Sources\EventHandler.h" />
     <ClInclude Include="Sources\Color\Color.h" />
     <ClInclude Include="Sources\Pattern\Singleton.h" />
     <ClInclude Include="Sources\Pattern\Uncopyable.h" />

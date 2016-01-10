@@ -53,7 +53,7 @@
     <ClInclude Include="Sources\delegate.h">
       <Filter>Sources\C#</Filter>
     </ClInclude>
-    <ClInclude Include="EventHandler.h">
+    <ClInclude Include="Sources\EventHandler.h">
       <Filter>Sources\C#</Filter>
     </ClInclude>
   </ItemGroup>
