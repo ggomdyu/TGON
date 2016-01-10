@@ -42,7 +42,7 @@ void tgon::CoreEngine::RegisterSystem( const std::initializer_list<ISystem*>& sy
 	for ( const auto& sysElem : systemList )
 	{
 		/*
-			To avoid duplication of system pointer that in repository.
+			To avoid duplication of system pointer that stored in repository.
 		*/
 		const auto findElem = std::find( m_systemRepo.begin( ), m_systemRepo.end( ), sysElem );
 		const auto notExist = m_systemRepo.end( );

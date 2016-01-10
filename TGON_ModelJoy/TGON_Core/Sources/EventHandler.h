@@ -26,7 +26,7 @@ class EventHandler
 
 public:
 	EventHandler( ) { }
-	EventHandler( const delegate<EvhParam>& rhs ) { operator+=( rhs ); }
+	EventHandler( const delegate<EvhParam>& rhs )		{ operator+=( rhs ); }
 
 	void	operator=( const delegate<EvhParam>& rhs )		{ m_handlerTable.clear( ); m_handlerTable.push_back( rhs ); }
 	void	operator+=( const delegate<EvhParam>& rhs )	{ m_handlerTable.push_back( rhs ); }
@@ -46,7 +46,6 @@ public:
 private:
 	std::vector<delegate<EvhParam>> m_handlerTable;
 };
-
 
 
 }
