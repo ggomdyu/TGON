@@ -1,0 +1,95 @@
+#include "stdafx.h"
+#include "CoreEngine.h"
+
+
+tgon::CoreEngine::CoreEngine( )
+{
+}
+
+
+tgon::CoreEngine::~CoreEngine( )
+{
+}
+
+
+void tgon::CoreEngine::Initialize( )
+{
+	for ( auto& system : m_systemRepo )
+	{
+		system->Initialize( );
+	}
+}
+
+
+void  tgon::CoreEngine::Pause( )
+{
+	m_isLoopActivated = false; 
+}
+
+void  tgon::CoreEngine::Resume( )
+{
+	m_isLoopActivated = true;
+}
+
+void  tgon::CoreEngine::Exit( )
+{
+	m_isLoopExit = true;
+}
+
+
+void tgon::CoreEngine::RegisterSystem( const std::initializer_list<ISystem*>& systemList )
+{
+	for ( const auto& sysElem : systemList )
+	{
+		/*
+			To avoid duplication of system pointer that stored in repository.
+		*/
+		const auto findElem = std::find( m_systemRepo.begin( ), m_systemRepo.end( ), sysElem );
+		const auto notExist = m_systemRepo.end( );
+
+		// WindowSystem must be updated passively!! ( because of check idle time )
+		if ( sysElem == WindowSystem::GetInstance( ))
+			continue;
+
+		if ( findElem == notExist )
+		{
+			m_systemRepo.push_back( sysElem );
+		}
+	}
+}
+
+void tgon::CoreEngine::FrameMove( )
+{
+	float elapsedTime = 0;// Time::GetElapsedTime( );
+
+	while ( !m_isLoopExit )
+	{
+		this->UpdateSystem( elapsedTime );
+		this->UpdateManager( elapsedTime );
+	}
+}
+
+void tgon::CoreEngine::UpdateSystem( float elapsedTime )
+{
+	WindowSystem::GetInstance( )->FrameMove( elapsedTime );
+
+	/*
+		Idle time - WindowSystem has no message to progress.
+	*/
+	const WindowEvent curWndEvent = WindowSystem::GetInstance( )->GetWindowEvent( ).msg;
+
+	if ( curWndEvent.msg == WindowEvent::None )
+	{
+		for ( auto& sysElem : m_systemRepo )
+		{
+			sysElem->FrameMove( elapsedTime );
+		}
+	}
+}
+
+
+void tgon::CoreEngine::UpdateManager( float elapsedTime )
+{
+	MessageManager::GetInstance( )->FrameMove( elapsedTime );
+	SociableManager::GetInstance( )->FrameMove( elapsedTime );
+}

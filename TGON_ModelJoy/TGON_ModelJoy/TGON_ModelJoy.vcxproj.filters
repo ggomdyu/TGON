@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{755ec319-5fce-4a6f-be9d-6daff30e79bf}</UniqueIdentifier>
+      <Extensions>hpp;h;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\Model">
+      <UniqueIdentifier>{b469b669-a51d-473f-862a-891bfc4f8166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{7fb28465-95a3-4001-a121-0566111849b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

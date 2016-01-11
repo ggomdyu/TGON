@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Sources\Pattern">
+      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RTTI">
+      <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Math">
+      <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Parse">
+      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Misc">
+      <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Color">
+      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\C#">
+      <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TGON_Common.props" />
+    <None Include="Sources\RTTI\RTTIUtil.inl">
+      <Filter>Sources\RTTI</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\Pattern\Uncopyable.h">
+      <Filter>Sources\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Pattern\Singleton.h">
+      <Filter>Sources\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\RTTI\RTTI.h">
+      <Filter>Sources\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\RTTI\RTTIUtil.h">
+      <Filter>Sources\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Color\Color.h">
+      <Filter>Sources\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\delegate.h">
+      <Filter>Sources\C#</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\EventHandler.h">
+      <Filter>Sources\C#</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\RTTI\RTTI.cpp">
+      <Filter>Sources\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
+      <Filter>Sources\RTTI</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
