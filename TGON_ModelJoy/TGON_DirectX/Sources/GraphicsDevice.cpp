@@ -4,6 +4,7 @@
 
 tgon::GraphicsDevice::GraphicsDevice( )
 {
+
 }
 
 

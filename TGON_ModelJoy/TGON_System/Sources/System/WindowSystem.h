@@ -28,8 +28,11 @@ public:
 	virtual void		FrameMove( float elapsedTime ) override;
 	virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
 
-	void						AddEventCallback( const uint32_t evType, const EventProc& evProc );
-	const WindowEvent	GetWindowEvent( ) const;
+	void				AddEventCallback( const unsigned int evType, const EventProc& evProc )  { m_window.AddEventCallback( evType, evProc ); }
+
+public:
+	const WindowEvent	GetWindowEvent( ) const	{ return m_window.GetWindowEvent( ); }
+	const Window&		GetWindow( ) const			{ return m_window; }
 
 private:
 						WindowSystem( );
@@ -40,6 +43,6 @@ private:
 };
 
 
-inline auto		GetWindowSystem( )	{ return WindowSystem::GetInstance( ); }
+inline WindowSystem*		GetWindowSystem( )	{ return WindowSystem::GetInstance( ); }
 
 }

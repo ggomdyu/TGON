@@ -9,10 +9,13 @@
 #include <iostream>
 #include <windows.h>
 
+namespace tgon
+{
+
 struct WindowEvent
 {
 private:
-	enum PrivateEvTable
+	enum PrivateEventTable
 	{
 	#ifdef PLATFORM_WINDOWS_OS
 		TGET_NONE = 0,
@@ -30,10 +33,10 @@ private:
 	};
 
 public:
-	WindowEvent( uint32_t _msg = WindowEvent::None ) :
-		msg( _msg ) {}
+	WindowEvent( unsigned int _ev = WindowEvent::None ) :
+		ev( _ev ) {}
 
-	enum WindowEventTable : uint32_t
+	enum WindowEventTable : unsigned int
 	{
 		None = TGET_NONE,
 		Create = TGET_CREATE,
@@ -44,5 +47,11 @@ public:
 		Destroy = TGET_DESTROY,
 	};
 
-	uint32_t msg = 0;
+
+	operator unsigned int( ) const	{ return ev; }
+
+private:
+	unsigned int ev = 0;
 };
+
+}

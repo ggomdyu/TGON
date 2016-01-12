@@ -6,6 +6,10 @@
 * 최종 수정일 :
 */
 
+namespace tgon
+{
+
+
 struct WindowStyle
 {
 	/* Window creation props */
@@ -27,3 +31,6 @@ struct WindowStyle
 	bool ShowMiddle = true;
 	bool TopMost = false;
 };
+
+
+}

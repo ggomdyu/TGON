@@ -2,24 +2,28 @@
 #include <string>
 
 namespace tgon {
+
+
 /* Communicate */
-	class SociableMessage
-	{
-	public:
-		explicit SociableMessage( uint32_t accepterKey, uint32_t msgType, float delayTime = 0.0f );
-		~SociableMessage( );
+class SociableMessage
+{
+public:
+	explicit SociableMessage( unsigned int accepterKey, unsigned int msgType, float delayTime = 0.0f );
+	~SociableMessage( );
 	
-	public:
-		void			SetDelayTime( float delayTime )		{ m_delayTime = delayTime; }
-		float			GetDelayTime( ) const					{ return m_delayTime; }
+public:
+	void			SetDelayTime( float delayTime )		{ m_delayTime = delayTime; }
+	float			GetDelayTime( ) const					{ return m_delayTime; }
 	
-		uint32_t		GetAccepterKey( ) const					{ return m_accepterKey; }
-		uint32_t		GetMsgType( ) const						{ return m_msgType; }
+	unsigned int		GetAccepterKey( ) const					{ return m_accepterKey; }
+	unsigned int		GetMsgType( ) const						{ return m_msgType; }
 
 
-	private:
-		uint32_t		m_accepterKey;
-		uint32_t		m_msgType;
-		float			m_delayTime;
-	};
+private:
+	unsigned int		m_accepterKey;
+	unsigned int		m_msgType;
+	float			m_delayTime;
+};
+
+
 }

@@ -12,12 +12,6 @@
     <Filter Include="Sources\RTTI">
       <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Math">
-      <UniqueIdentifier>{32c7060a-4801-422a-9c28-3c2a101d0aea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Parse">
-      <UniqueIdentifier>{f10c57d7-0989-479a-8c13-a9ccf23804ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Misc">
       <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
     </Filter>
@@ -26,6 +20,12 @@
     </Filter>
     <Filter Include="Sources\C#">
       <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\XML">
+      <UniqueIdentifier>{4436027c-8c2d-408a-9400-fda887dda722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Math">
+      <UniqueIdentifier>{972dd77b-5bd8-433b-9a6e-e1edc8cc4a75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

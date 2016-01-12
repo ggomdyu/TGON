@@ -20,7 +20,7 @@
 namespace tgon {
 	class SociableManager final
 	{
-		typedef std::unordered_map<uint32_t, ISociable*> SociableRepo;
+		typedef std::unordered_map<unsigned int, ISociable*> SociableRepo;
 
 	public:
 		Declare_Static_Singleton( SociableManager )

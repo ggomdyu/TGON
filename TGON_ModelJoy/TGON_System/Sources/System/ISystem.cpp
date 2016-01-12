@@ -4,7 +4,7 @@
 #include "SociableManager.h"
 
 
-tgon::ISystem::ISystem( uint32_t key ) :
+tgon::ISystem::ISystem( unsigned int key ) :
 	ISociable( key, SociableEnum::Social_System )
 {
 }

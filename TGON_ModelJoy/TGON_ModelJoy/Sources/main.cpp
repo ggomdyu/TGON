@@ -12,18 +12,17 @@
 using namespace tgon;
 
 
-void OnFrameExit( )
+void OnFrameLoseFocus( )
 {
-	CoreEngine::GetInstance( )->Exit( );
+	
 }
 
 
 int tgMain( int argc, char* argv[] )
 {
 	/*
-		Register running system
+		Register system
 	*/
-	
 	CoreEngine::GetInstance( )->RegisterSystem({
 		WindowSystem::GetInstance( ),
 		GraphicsSystem::GetInstance( ),
@@ -31,7 +30,7 @@ int tgMain( int argc, char* argv[] )
 	});
 	
 
-	System::AddEventCallback( WindowEvent::Destroy, OnFrameExit );
+	System::AddEventCallback( WindowEvent::LoseFocus, OnFrameLoseFocus );
 
 
 	CoreEngine::GetInstance( )->Initialize( );

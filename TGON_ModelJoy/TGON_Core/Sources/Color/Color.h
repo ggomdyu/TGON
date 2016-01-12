@@ -6,7 +6,7 @@ namespace tgon
 	/*union Color_RGBA;
 	union Color_ARGB;*/
 
-	enum ColorTable : uint32_t
+	enum ColorTable : unsigned int
 	{
 		Red =			0xffff0000,
 		Green =		0xff00ff00,
@@ -22,13 +22,13 @@ namespace tgon
 	union Color_ARGB
 	{
 	public:
-		Color_ARGB( uint32_t _color = 0 ) :
+		Color_ARGB( unsigned int _color = 0 ) :
 			color( _color ) {}
 		Color_ARGB( unsigned char _a, unsigned char _r,
 							unsigned char _g, unsigned char _b ) :
 					a( _a ), r( _r ), g( _g ), b( _b ) {}
 
-		operator uint32_t( ) const { return color; }
+		operator unsigned int( ) const { return color; }
 
 
 	public:
@@ -46,16 +46,16 @@ namespace tgon
 
 	//union Color_RGBA
 	//{
-	//	Color_RGBA( uint32_t _color = 0 ) :
+	//	Color_RGBA( unsigned int _color = 0 ) :
 	//		color( _color ) {}
 	//	Color_RGBA( unsigned char _r, unsigned char _g,
 	//						unsigned char _b, unsigned char _a ) :
 	//				r( _r ), g( _g ), b( _b ), a( _a ) {}
 
-	//	operator uint32_t( ) const { return color; }
+	//	operator unsigned int( ) const { return color; }
 	//	inline operator Color_ARGB( ) const;
 
-	//	enum ColorTable : uint32_t
+	//	enum ColorTable : unsigned int
 	//	{
 	//		Red =			0xff0000ff,
 	//		Green =		0x00ff00ff,

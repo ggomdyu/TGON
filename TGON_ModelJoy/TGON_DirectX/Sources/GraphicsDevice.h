@@ -22,18 +22,11 @@ class GraphicsDevice
 {
 
 public:
-	Declare_Static_Singleton( GraphicsDevice )
+	GraphicsDevice( );
+	~GraphicsDevice( );
 
-
-	bool		Setup( GraphicsDeviceCreateParam gdp )		{ return device.Setup( gdp ); }
+	bool		Setup( const GraphicsDeviceCreateParam& gdp )		{ return device.Setup( gdp ); }
 	void		Display( )					{ device.Display( ); }
-
-private:
-				GraphicsDevice( );
-	virtual		~GraphicsDevice( );
-
-	void		operator delete ( void* arg )		{ std::free( arg ); }
-
 
 private:
 	GraphicsDeviceImpl device;

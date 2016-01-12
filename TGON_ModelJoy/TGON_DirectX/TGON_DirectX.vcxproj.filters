@@ -18,9 +18,6 @@
     <ClInclude Include="Sources\Direct3D9Device.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\stdafx.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\PlatformGraphicsDevice.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -28,5 +25,8 @@
     <ClInclude Include="Sources\GraphicsDeviceMisc.h" />
     <ClInclude Include="Sources\GraphicsDeviceType.h" />
     <ClInclude Include="Sources\IGraphicsDeviceImpl.h" />
+    <ClInclude Include="Sources\stdafx.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

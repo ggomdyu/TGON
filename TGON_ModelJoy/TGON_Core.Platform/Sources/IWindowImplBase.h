@@ -17,12 +17,9 @@ class IWindowImplBase
 {
 protected:
 	typedef std::function<void()> EventProc;
-	typedef std::unordered_map<uint32_t, EventProc> EventProcTable;
+	typedef std::unordered_map<unsigned int, EventProc> EventProcTable;
 
 public:
-	explicit			IWindowImplBase( const WindowStyle& );
-	virtual				~IWindowImplBase( ) = 0;
-
 	virtual void		FrameMove( ) = 0;
 
 public:
@@ -32,7 +29,7 @@ public:
 	virtual void		Move( int x, int y ) = 0;
 	virtual void		Exit( ) = 0;
 
-	void				AddEventCallback( uint32_t evType, const EventProc& evProc );
+	void				AddEventCallback( unsigned int evType, const EventProc& evProc );
 
 public:
 	virtual const WindowEvent		GetWindowEvent( ) const = 0;
@@ -40,7 +37,10 @@ public:
 
 
 protected:
-	void 				CallEventProc( uint32_t evType );
+	explicit			IWindowImplBase( const WindowStyle& );
+	virtual				~IWindowImplBase( ) = 0;
+
+	void 				CallEventProc( unsigned int evType );
 
 
 private:

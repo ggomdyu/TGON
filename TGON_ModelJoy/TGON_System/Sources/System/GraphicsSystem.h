@@ -9,19 +9,29 @@
 #include "ISystem.h"
 #include <Pattern\Singleton.h>
 
+#include "GraphicsDevice.h"
+
+
 namespace tgon {
-	class GraphicsSystem : public ISystem
-	{
-	public:
-		Declare_Static_Singleton( GraphicsSystem )
 
-	public:
-		virtual void		Initialize( ) override;
-		virtual void		FrameMove( float elapsedTime ) override;
-		virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
 
-	private:
-							GraphicsSystem( );
-		virtual				~GraphicsSystem( );
-	};
+class GraphicsSystem : public ISystem
+{
+public:
+	Declare_Static_Singleton( GraphicsSystem )
+
+public:
+	virtual void		Initialize( ) override;
+	virtual void		FrameMove( float elapsedTime ) override;
+	virtual void		RecvMessage( _In_ const SociableMessage& msg ) override;
+
+private:
+						GraphicsSystem( );
+	virtual				~GraphicsSystem( );
+
+private:
+	GraphicsDevice gd;
+};
+
+
 }

@@ -10,8 +10,6 @@
 
 #include <Windows.h>
 #include <iostream>
-#include "WindowEvent.h"
-#include "WindowStyle.h"
 
 
 namespace tgon {
@@ -40,11 +38,11 @@ public:
 	virtual const WindowEvent		GetWindowEvent( ) const override	{ return m_msg.message; }
 
 private:
-	void					MakeWindow( const WindowStyle& );
-	static LRESULT		WINAPI CallbackMsgProc( HWND, uint32_t, WPARAM, LPARAM );
+	void					CreateWindowForm( const WindowStyle& );
+	static LRESULT		WINAPI CallbackMsgProc( HWND, unsigned int, WPARAM, LPARAM );
 
 	// Overridable message procedure
-	virtual LRESULT		WINAPI CustomMsgProc( HWND, uint32_t, WPARAM, LPARAM );
+	virtual LRESULT		WINAPI CustomMsgProc( HWND, unsigned int, WPARAM, LPARAM );
 		 
 private:
 	MSG		m_msg;

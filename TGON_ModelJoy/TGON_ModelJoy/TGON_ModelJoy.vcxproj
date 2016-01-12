@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -44,8 +44,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\include\FBX;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\include\FBX;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -106,6 +106,9 @@
     </ProjectReference>
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
+      <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TGON_System\TGON_System.vcxproj">
       <Project>{a011083e-7574-48b8-8ea6-db825418f088}</Project>

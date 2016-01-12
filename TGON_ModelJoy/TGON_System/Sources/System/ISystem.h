@@ -12,7 +12,7 @@ namespace tgon {
 	class ISystem : public ISociable
 	{
 	public:
-		ISystem( uint32_t key );
+		ISystem( unsigned int key );
 		virtual ~ISystem( );
 
 		virtual void Initialize( )	{};

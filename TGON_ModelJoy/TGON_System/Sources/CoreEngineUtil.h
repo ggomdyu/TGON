@@ -14,7 +14,7 @@ namespace tgon
 {
 	namespace System
 	{
-		inline void	AddEventCallback( uint32_t evType, std::function<void()> evProc )	{ WindowSystem::GetInstance( )->AddEventCallback( evType, evProc ); }
+		inline void	AddEventCallback( unsigned int evType, std::function<void()> evProc )	{ WindowSystem::GetInstance( )->AddEventCallback( evType, evProc ); }
 	}
 
 	namespace Time

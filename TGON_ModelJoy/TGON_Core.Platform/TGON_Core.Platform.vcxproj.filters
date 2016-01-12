@@ -8,10 +8,10 @@
       <Filter>Sources\Main\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Windows\WindowsWindow.cpp">
-      <Filter>Sources\Window\Windows</Filter>
+      <Filter>Sources\Window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Windows\WindowsWindowUtil.cpp">
-      <Filter>Sources\Window\Windows</Filter>
+      <Filter>Sources\Window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Sources\IWindowImplBase.cpp">
       <Filter>Sources\Window\Interface</Filter>
@@ -37,10 +37,10 @@
       <Filter>Sources\Main\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Windows\WindowsWindow.h">
-      <Filter>Sources\Window\Windows</Filter>
+      <Filter>Sources\Window\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Windows\WindowsWindowUtil.h">
-      <Filter>Sources\Window\Windows</Filter>
+      <Filter>Sources\Window\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Sources\IWindowImplBase.h">
       <Filter>Sources\Window\Interface</Filter>
@@ -72,12 +72,6 @@
     <Filter Include="Sources\Window">
       <UniqueIdentifier>{00a37e81-ebbc-453a-8bf6-88bc99d16ec4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Window\Windows">
-      <UniqueIdentifier>{933eaffa-2458-4456-8e2a-a61f75fb21d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Window\Android">
-      <UniqueIdentifier>{9de242c2-5399-4c99-bffd-6abe80974f4e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Window\Platform">
       <UniqueIdentifier>{2bc48606-0502-4013-af07-9d6d89675c7d}</UniqueIdentifier>
     </Filter>
@@ -95,6 +89,12 @@
     </Filter>
     <Filter Include="Sources\Window\Interface">
       <UniqueIdentifier>{436764f3-d23e-4d29-b4fb-46a3eec635f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Platform\Windows">
+      <UniqueIdentifier>{933eaffa-2458-4456-8e2a-a61f75fb21d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window\Platform\Android">
+      <UniqueIdentifier>{9de242c2-5399-4c99-bffd-6abe80974f4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

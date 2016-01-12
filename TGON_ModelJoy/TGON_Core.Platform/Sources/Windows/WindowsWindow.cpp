@@ -16,7 +16,7 @@ tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
 		abort( );
 	}
 
-	this->MakeWindow( wndStyle );
+	this->CreateWindowForm( wndStyle );
 }
 
 
@@ -25,7 +25,7 @@ tgon::WindowsWindow::~WindowsWindow( )
 }
 
 
-void tgon::WindowsWindow::MakeWindow( const WindowStyle& ws )
+void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& ws )
 {
 	// 2. set coordinate of window
 	int x = ws.x, y = ws.y;
@@ -103,7 +103,7 @@ void tgon::WindowsWindow::Exit( )
 }
 
 
-LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
+LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, unsigned int msg, WPARAM wParam, LPARAM lParam )
 {
 	/*
 		CallbackMsgProc can't access member of WindowsWindow.
@@ -145,7 +145,7 @@ void tgon::WindowsWindow::FrameMove( )
 }
 
 
-LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, uint32_t msg, WPARAM wParam, LPARAM lParam )
+LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, unsigned int msg, WPARAM wParam, LPARAM lParam )
 {
 	IWindowImplBase::CallEventProc( msg );
 

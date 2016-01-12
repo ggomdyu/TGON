@@ -1,9 +1,20 @@
 #include "stdafx.h"
 #include "CoreEngine.h"
 
+#include "System\WindowSystem.h"
+#include "SociableManager.h"
+#include "MessageManager.h"
+
+
+void OnFrameExit( )
+{
+	tgon::CoreEngine::GetInstance( )->Exit( );
+}
+
 
 tgon::CoreEngine::CoreEngine( )
 {
+	WindowSystem::GetInstance( )->AddEventCallback( WindowEvent::Destroy, OnFrameExit );
 }
 
 
@@ -74,11 +85,11 @@ void tgon::CoreEngine::UpdateSystem( float elapsedTime )
 	WindowSystem::GetInstance( )->FrameMove( elapsedTime );
 
 	/*
-		Idle time - WindowSystem has no message to progress.
+		Idle time - WindowSystem has no message.
 	*/
-	const WindowEvent curWndEvent = WindowSystem::GetInstance( )->GetWindowEvent( ).msg;
+	const WindowEvent curWndEvent = WindowSystem::GetInstance( )->GetWindowEvent( );
 
-	if ( curWndEvent.msg == WindowEvent::None )
+	if ( curWndEvent == WindowEvent::None )
 	{
 		for ( auto& sysElem : m_systemRepo )
 		{

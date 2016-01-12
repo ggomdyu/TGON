@@ -17,7 +17,7 @@ public:
 	const RTTI*		GetParentRTTI( ) const						{ return m_parentRTTI; }
 
 	template <class T> static const RTTI* GetRTTI( )			{ return &T::ms_RTTI; }
-	template <class T> static uint32_t GetTypeHash( )		{ return reinterpret_cast<uint32_t>( &T::ms_RTTI ); }
+	template <class T> static unsigned int GetTypeHash( )		{ return reinterpret_cast<unsigned int>( &T::ms_RTTI ); }
 
 private:
 	const RTTI*		m_parentRTTI;
