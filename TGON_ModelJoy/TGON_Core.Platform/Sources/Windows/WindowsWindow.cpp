@@ -55,23 +55,24 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& ws )
 
 void tgon::WindowsWindow::BringToTop( )
 {
-	// Is current window same with foreground window?
+	// Is my window foreground?
 	const HWND fgWndHandle( GetForegroundWindow( ));
+	
 	if ( fgWndHandle == m_wndHandle )
 		return;
 
 
-	// 1. otherwise, bring PID from them
-	const DWORD curWndPid = GetWindowThreadProcessId( m_wndHandle, NULL );
-	const DWORD fgWndPId = GetWindowThreadProcessId( fgWndHandle, NULL );
+	// Otherwise, bring Process ID
+	const DWORD myWndPID = GetWindowThreadProcessId( m_wndHandle, NULL );
+	const DWORD fgWndPID = GetWindowThreadProcessId( fgWndHandle, NULL );
 
 
-	// 2. attach input
-	if ( AttachThreadInput( curWndPid, fgWndPId, TRUE ))
+	// Attach input
+	if ( AttachThreadInput( myWndPID, fgWndPID, TRUE ))
 	{
 		SetForegroundWindow( m_wndHandle );
 		BringWindowToTop( m_wndHandle );
-		AttachThreadInput( curWndPid, fgWndPId, TRUE );
+		AttachThreadInput( myWndPID, fgWndPID, TRUE );
 	}
 }
 
