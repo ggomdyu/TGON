@@ -7,24 +7,14 @@
 
 
 #pragma once
-#include <atlbase.h>
-#include <Windows.h>
-#include <d3d9.h>
-#include <d3dx9.h>
-
 #include "IGraphicsDeviceImpl.h"
 
+#include <atlbase.h>
+#include <Windows.h>
+#include "Direct3D9DeviceUtil.h"
 
-//TODO: $(DXSDK_DIR)\Include -> 아예 dxsdk를 통째로 엔진에 집어넣는게 조을듯.
 
-#pragma comment( lib, "d3d9.lib" )
-
-#if defined( _DEBUG ) | defined( DEBUG )
-	#pragma comment( lib, "d3dx9d.lib" )
-#elif
-	#pragma comment( lib, "d3dx9.lib" )
-#endif
-
+//TODO: $(DXSDK_DIR)\Include -> 아예 dxsdk를 통째로 엔진에 집어넣는게 조을듯;
 
 namespace tgon
 {
@@ -58,6 +48,8 @@ private:
 	HRESULT		CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3dBehaviorFlag,
 							  D3DPRESENT_PARAMETERS& d3dpp );
 
+	void DXErrorHandling( HRESULT hr );
+
 	Direct3D9Device( const Direct3D9Device& ) = delete;
 	Direct3D9Device& operator=( const Direct3D9Device& ) = delete;
 
@@ -66,7 +58,7 @@ private:
 	CComPtr<IDirect3D9Ex> m_d3d;
 	CComPtr<IDirect3DDevice9Ex> m_d3dDevice;
 
-	HWND m_presentWnd;
+	HWND m_wndHandle;
 
 	////D3DXMATRIXA16 m_matWorld;
 	//D3DXMATRIXA16 m_matView, m_matProj;

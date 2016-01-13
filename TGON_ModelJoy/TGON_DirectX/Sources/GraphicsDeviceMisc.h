@@ -16,8 +16,8 @@ enum GraphicsDeviceProcessType
 struct GraphicsDeviceCreateParam
 {
 	HWND presentWnd;
-	GraphicsDeviceProcessType gdpt;
+	unsigned int width, height;
+	bool isFullWindow;
 
-	unsigned int width;
-	unsigned int height;
+	GraphicsDeviceProcessType gdpt;
 };

@@ -9,10 +9,11 @@
     <ClCompile Include="Sources\Direct3D9Device.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\stdafx.cpp">
+    <ClCompile Include="Sources\GraphicsDevice.cpp" />
+    <ClCompile Include="Sources\Direct3D9DeviceUtil.cpp" />
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\GraphicsDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Direct3D9Device.h">
@@ -25,7 +26,8 @@
     <ClInclude Include="Sources\GraphicsDeviceMisc.h" />
     <ClInclude Include="Sources\GraphicsDeviceType.h" />
     <ClInclude Include="Sources\IGraphicsDeviceImpl.h" />
-    <ClInclude Include="Sources\stdafx.h">
+    <ClInclude Include="Sources\Direct3D9DeviceUtil.h" />
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
       <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>

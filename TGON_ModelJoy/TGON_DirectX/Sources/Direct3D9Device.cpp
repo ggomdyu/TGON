@@ -2,10 +2,21 @@
 #include "Direct3D9Device.h"
 
 #include <cassert>
-#include <DxErr.h>
+#include "Direct3D9DeviceUtil.h"
 
 
-#pragma comment( lib, "DxErr.lib" )
+#pragma comment( lib, "d3d9.lib" )
+#pragma warning( disable: 4996 )
+
+#if defined( _DEBUG ) | defined( DEBUG )
+	#pragma comment( lib, "d3dx9d.lib" )
+#elif
+	#pragma comment( lib, "d3dx9.lib" )
+#endif
+
+
+#define _L(x)  __L(x)
+#define __L(x)  L##x
 
 
 tgon::Direct3D9Device::Direct3D9Device( )
@@ -13,39 +24,24 @@ tgon::Direct3D9Device::Direct3D9Device( )
 	m_lookAt( 0.0f, 0.0f, 0.0f ), d3d 카메라에 넣기
 	m_up( 0.0f, 1.0f, 0.0f )*/
 {
-	
-	Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d );
+	this->DXErrorHandling( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
+	//( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
 
-
-	if ( !m_d3d )
-	{
-		MessageBox( GetFocus(), L"Failed to call Direct3DCreate9.", L"WARNING!",
-					MB_OK | MB_ICONEXCLAMATION );
-		abort( );
-	}
+	assert( m_d3d );
 }
 
 
 tgon::Direct3D9Device::~Direct3D9Device( )
 {
-
+	
 }
 
 
 bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 {
-	m_presentWnd = gdcp.presentWnd;
+	const D3dDeviceCreateParam d3dCreateParam = ConvertCreateParamToD3dType( gdcp );
 
-	const D3DDEVTYPE d3dDeviceType = ( gdcp.gdpt == GraphicsDeviceProcessType::kHardware ) ?
-		D3DDEVTYPE_HAL : D3DDEVTYPE_REF;
-
-	const DWORD d3dBehaviorFlag = ( gdcp.gdpt == GraphicsDeviceProcessType::kHardware ) ?
-		D3DCREATE_HARDWARE_VERTEXPROCESSING :
-			D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-
-	const D3DFORMAT surfaceFormat = D3DFORMAT::D3DFMT_A8R8G8B8;
-
-	const bool isWindowed = true;
+	m_wndHandle = d3dCreateParam.presentWnd;
 
 //	m_d3d->CheckDeviceMultiSampleType( NULL, d3dDeviceType, surfaceFormat, );
 
@@ -54,12 +50,12 @@ bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 
 	D3DPRESENT_PARAMETERS pp = { 0 };
 	pp.hDeviceWindow = gdcp.presentWnd;
-	pp.BackBufferWidth = rt.right;
+	pp.BackBufferWidth = 234343643;
 	pp.BackBufferHeight = rt.bottom;
 	pp.BackBufferFormat = D3DFMT_UNKNOWN;// D3DFORMAT::D3DFMT_A8R8G8B8;
 	pp.BackBufferCount = 1;
 	pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	pp.Windowed = isWindowed;
+	pp.Windowed = d3dCreateParam.isFullWindow;
 	// TW Labtop Set
 	pp.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES;
 	pp.MultiSampleQuality = 0;
@@ -68,18 +64,9 @@ bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
 
 
-	HRESULT hr;
-	hr = this->CreateDevice( d3dDeviceType, d3dBehaviorFlag, pp );
+	this->DXErrorHandling( this->CreateDevice( d3dCreateParam.d3dDeviceType,
+											   d3dCreateParam.d3dBehaviorFlag, pp ));
 
-	if ( FAILED( hr ))
-	{
-		// TODO : Make messagebox function seems like printf, and use it with under string variable
-		LPCTSTR errString = DXGetErrorDescription( hr );
-		MessageBox( GetFocus( ), L"Failed to call IDirect3D9Device::CreateDevice.", L"WARNING!",
-					MB_OK | MB_ICONEXCLAMATION );
-		abort( );
-	}
-	
 
 	GetD3dDevice( )->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
 	GetD3dDevice( )->SetRenderState( D3DRS_LIGHTING, FALSE );
@@ -100,6 +87,24 @@ HRESULT tgon::Direct3D9Device::CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3d
 							  d3dBehaviorFlag, &pp, NULL, &m_d3dDevice );
 	
 	return hr;
+}
+
+
+void tgon::Direct3D9Device::DXErrorHandling( HRESULT hr )
+{
+	DxErrString* dxErrString =
+
+#if defined( _DEBUG ) | defined( DEBUG )
+	tgon::DXErrorString( hr, _L( __FILE__ ), __LINE__ );
+#elif
+	tgon::DXErrorString( hr );
+#endif
+		
+	if ( dxErrString )
+	{
+		MessageBox( m_wndHandle, dxErrString, L"WARNING!", MB_OK | MB_ICONEXCLAMATION );
+		abort( );
+	}
 }
 
 
@@ -250,3 +255,5 @@ void tgon::Direct3D9Device::Display( )
 //{
 //	return false;
 //}
+
+#pragma warning( default: 4996 )
