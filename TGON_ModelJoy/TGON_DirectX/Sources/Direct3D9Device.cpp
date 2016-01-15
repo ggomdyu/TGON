@@ -5,19 +5,16 @@
 #include "Direct3D9DeviceUtil.h"
 
 
-#pragma comment( lib, "d3d9.lib" )
-#pragma warning( disable: 4996 )
-
-#if defined( _DEBUG ) | defined( DEBUG )
-	#pragma comment( lib, "d3dx9d.lib" )
-#elif
-	#pragma comment( lib, "d3dx9.lib" )
-#endif
-
-
 #define _L(x)  __L(x)
 #define __L(x)  L##x
 
+
+#include "Font\FTFontFace.h"
+
+
+FT_Face m_face;
+
+//tgon::FTFontFace face( "c:\\windows\\fonts\\SeoulNamsanB.ttf", 64 );
 
 tgon::Direct3D9Device::Direct3D9Device( )
 	/*m_eye( 0.0f, 3.0f, -5.0f ),
@@ -26,6 +23,25 @@ tgon::Direct3D9Device::Direct3D9Device( )
 {
 	this->DXErrorHandling( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
 	//( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
+
+	FT_Error err = FT_New_Face( GetFTFontManager( )->GetFTLibrary( ),
+								"c:\\windows\\fonts\\SeoulNamsanB.ttf", 0, &m_face );
+	if ( err != 0 )
+	{
+		abort( );
+	}
+
+	err = FT_Set_Pixel_Sizes( m_face, 64, 0 );
+	if ( err != 0 )
+	{
+		abort( );
+	}
+
+	err = FT_Load_Char( m_face, L'¤±', FT_LOAD_RENDER | FT_LOAD_NO_BITMAP );
+	if ( err != 0 )
+	{
+		abort( );
+	}
 
 	assert( m_d3d );
 }
@@ -50,15 +66,16 @@ bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 
 	D3DPRESENT_PARAMETERS pp = { 0 };
 	pp.hDeviceWindow = gdcp.presentWnd;
-	pp.BackBufferWidth = 234343643;
+	pp.BackBufferWidth = rt.right;
 	pp.BackBufferHeight = rt.bottom;
 	pp.BackBufferFormat = D3DFMT_UNKNOWN;// D3DFORMAT::D3DFMT_A8R8G8B8;
 	pp.BackBufferCount = 1;
 	pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	pp.Windowed = d3dCreateParam.isFullWindow;
 	// TW Labtop Set
-	pp.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES;
+	//pp.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES;
 	pp.MultiSampleQuality = 0;
+	pp.Flags = D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
 	//
 	/*d3dpp.MultiSampleType = D3DMULTISAMPLE_NONMASKABLE;
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
@@ -68,9 +85,9 @@ bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 											   d3dCreateParam.d3dBehaviorFlag, pp ));
 
 
-	GetD3dDevice( )->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
-	GetD3dDevice( )->SetRenderState( D3DRS_LIGHTING, FALSE );
-	GetD3dDevice( )->SetRenderState( D3DRS_ZENABLE, TRUE );
+//	GetD3dDevice( )->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
+	//GetD3dDevice( )->SetRenderState( D3DRS_LIGHTING, FALSE );
+//	GetD3dDevice( )->SetRenderState( D3DRS_ZENABLE, TRUE );
 
 	return true;
 }
@@ -92,17 +109,13 @@ HRESULT tgon::Direct3D9Device::CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3d
 
 void tgon::Direct3D9Device::DXErrorHandling( HRESULT hr )
 {
-	DxErrString* dxErrString =
-
-#if defined( _DEBUG ) | defined( DEBUG )
-	tgon::DXErrorString( hr, _L( __FILE__ ), __LINE__ );
-#elif
-	tgon::DXErrorString( hr );
-#endif
-		
-	if ( dxErrString )
+	if ( FAILED( hr ))
 	{
-		MessageBox( m_wndHandle, dxErrString, L"WARNING!", MB_OK | MB_ICONEXCLAMATION );
+		DxErrString errString;
+		tgon::GetDXErrorString( hr, &errString );
+
+		MessageBoxW( m_wndHandle, errString.c_str( ), L"WARNING!",
+					 MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
 }
@@ -114,18 +127,9 @@ void tgon::Direct3D9Device::Display( )
 
 	GetD3dDevice( )->Clear( 0, NULL, D3DCLEAR_TARGET, D3DCOLOR_ARGB( 255, 0, 0, 255 ), 1.0f, 0 );
 
-
-	if ( SUCCEEDED( GetD3dDevice( )->BeginScene( )))
-	{
-
-
-
+	
 		GetD3dDevice( )->EndScene( );
 	}
-
-
-	GetD3dDevice( )->Present( NULL, NULL, NULL, NULL );
-
 
 	/*assert( m_d3dDevice.p );
 
@@ -255,5 +259,3 @@ void tgon::Direct3D9Device::Display( )
 //{
 //	return false;
 //}
-
-#pragma warning( default: 4996 )

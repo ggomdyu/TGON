@@ -44,8 +44,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\include\FBX;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\include\FBX;$(DXSDK_DIR)\Include;..\include\freetype;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\Lib\x86;..\Lib\freetype\x86;$(IncludePath);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -70,7 +70,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libfbxsdk.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libfbxsdk.lib;dwmapi.lib;freetype262MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,7 +92,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libfbxsdk.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libfbxsdk.lib;dwmapi.lib;freetype262MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -106,9 +108,6 @@
     </ProjectReference>
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
-      <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TGON_System\TGON_System.vcxproj">
       <Project>{a011083e-7574-48b8-8ea6-db825418f088}</Project>

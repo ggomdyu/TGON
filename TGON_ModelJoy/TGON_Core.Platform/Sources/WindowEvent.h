@@ -15,7 +15,7 @@ namespace tgon
 struct WindowEvent
 {
 private:
-	enum PrivateEventTable
+	enum PrivateEventTable : unsigned int
 	{
 	#ifdef PLATFORM_WINDOWS_OS
 		TGET_NONE = 0,
@@ -25,16 +25,15 @@ private:
 		TGET_LOSEFOCUS = WM_KILLFOCUS,
 		TGET_MOVE = WM_MOVE,
 		TGET_DESTROY = WM_DESTROY,
-
-	#elif PLATFORM_ANDROID_OS
-
-		
+	#else
+		#error	 "You're platform is not supported."
 	#endif
 	};
 
 public:
 	WindowEvent( unsigned int _ev = WindowEvent::None ) :
-		ev( _ev ) {}
+		ev( _ev ) {};
+	~WindowEvent( ) {};
 
 	enum WindowEventTable : unsigned int
 	{

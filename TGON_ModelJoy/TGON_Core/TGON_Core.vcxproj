@@ -76,6 +76,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\freetype\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,6 +93,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>freetype262MTd.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -148,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="Sources\EventHandler.h" />
     <ClInclude Include="Sources\Color\Color.h" />
+    <ClInclude Include="Sources\Font\FTFontFace.h" />
+    <ClInclude Include="Sources\Font\FTFontManager.h" />
     <ClInclude Include="Sources\Pattern\Singleton.h" />
     <ClInclude Include="Sources\Pattern\Uncopyable.h" />
     <ClInclude Include="Sources\delegate.h" />
@@ -155,6 +162,8 @@
     <ClInclude Include="Sources\RTTI\RTTIUtil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Font\FTFontFace.cpp" />
+    <ClCompile Include="Sources\Font\FTFontManager.cpp" />
     <ClCompile Include="Sources\RTTI\RTTI.cpp" />
     <ClCompile Include="Sources\RTTI\RTTIUtil.cpp" />
   </ItemGroup>

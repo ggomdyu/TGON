@@ -2,6 +2,7 @@
 #include "Direct3D9DeviceUtil.h"
 
 #include "IGraphicsDeviceImpl.h"
+#include <iostream>
 #include <DxErr.h>
 
 #pragma comment( lib, "DxErr.lib" )
@@ -27,47 +28,17 @@ const tgon::D3dDeviceCreateParam tgon::ConvertCreateParamToD3dType( const Graphi
 }
 
 
-#if defined( _DEBUG ) | defined( DEBUG )
-
-tgon::DxErrString* tgon::DXErrorString( HRESULT hr, const wchar_t* srcFile, unsigned int line )
+void tgon::GetDXErrorString( HRESULT hr, _Out_ DxErrString* desc )
 {
-	static wchar_t errMsg[1000];
-
-
 	if ( FAILED( hr ))
 	{
-		LPCTSTR errDesc = DXGetErrorDescriptionW( hr );
-		LPCTSTR errString = DXGetErrorStringW( hr );
+		LPCWSTR errDesc = DXGetErrorDescriptionW( hr );
+		LPCWSTR errString = DXGetErrorStringW( hr );
 	
-		// Assemble
-		// DX9 Invoke Error :  Some invalid pointer [NONE_ARGS]
-		// C:\\someDir, 342 lines
-		wsprintf( errMsg,	L"DX9 Invoke Error : %s [%s]\n\
-								%s, %d lines", errDesc, errString, srcFile, line );
+		// Assemble ex
+		// DX Invoke Error :  Some invalid pointer [NONE_ARGS]
+		*desc = L"DX Invoke Error : " + errDesc;
 
-		return errMsg;
+		wsprintf( desc,	L"DX Invoke Error : %s [%s]", errDesc, errString );
 	}
-	
-	return nullptr;
 }
-
-#else
-const wchar_t* tgon::DXErrorString( HRESULT hr )
-{
-	static wchar_t errMsg[1000];
-
-
-	if ( FAILED( hr ))
-	{
-		LPCTSTR errDesc = DXGetErrorDescriptionW( hr );
-		LPCTSTR errString = DXGetErrorStringW( hr );
-	
-		// Assemble
-		// DX9 Invoke Error :  Some invalid pointer [NONE_ARGS]
-		// C:\\someDir, 342 lines
-		wsprintf( errMsg,	L"DX9 Invoke Error : %s [%s]", errDesc, errString );
-	}
-
-	return errMsg;
-}
-#endif

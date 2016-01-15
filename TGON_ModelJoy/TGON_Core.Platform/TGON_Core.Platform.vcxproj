@@ -156,9 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\IWindowImplBase.cpp" />
-    <ClCompile Include="Sources\tgWindow.cpp" />
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp" />
-    <ClCompile Include="Sources\WindowEvent.cpp" />
     <ClCompile Include="Sources\Windows\WindowsMain.cpp" />
     <ClCompile Include="Sources\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Sources\Windows\WindowsWindowUtil.cpp" />

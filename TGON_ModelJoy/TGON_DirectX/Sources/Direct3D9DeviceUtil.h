@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -21,17 +22,10 @@ namespace tgon
 
 
 	};
-	typedef const wchar_t DxErrString;
-
-
 
 	const D3dDeviceCreateParam ConvertCreateParamToD3dType( const GraphicsDeviceCreateParam& );
 
-#if defined( _DEBUG ) | defined( DEBUG )
-	// Return nullptr if It has no error
-	DxErrString* DXErrorString( HRESULT hr, const wchar_t* srcFile, unsigned int line );
-#elif
-	DxErrString* DXErrorString( HRESULT hr );
-#endif
 
+	typedef std::wstring DxErrString;
+	void GetDXErrorString( HRESULT hr, _Out_ DxErrString* desc );
 }

@@ -6,9 +6,6 @@
       <Extensions>
       </Extensions>
     </Filter>
-    <Filter Include="Sources\Pattern">
-      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\RTTI">
       <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
     </Filter>
@@ -21,11 +18,20 @@
     <Filter Include="Sources\C#">
       <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\XML">
-      <UniqueIdentifier>{4436027c-8c2d-408a-9400-fda887dda722}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Math">
       <UniqueIdentifier>{972dd77b-5bd8-433b-9a6e-e1edc8cc4a75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Thirdparty">
+      <UniqueIdentifier>{15e10a22-7182-4144-aafd-81743742d6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Thirdparty\freetype">
+      <UniqueIdentifier>{91521e6a-a48a-40da-9d32-df1ff075484c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Thirdparty\tinyXML">
+      <UniqueIdentifier>{4436027c-8c2d-408a-9400-fda887dda722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Pattern">
+      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +62,12 @@
     <ClInclude Include="Sources\EventHandler.h">
       <Filter>Sources\C#</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Font\FTFontFace.h">
+      <Filter>Sources\Thirdparty\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Font\FTFontManager.h">
+      <Filter>Sources\Thirdparty\freetype</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\RTTI\RTTI.cpp">
@@ -63,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
       <Filter>Sources\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Font\FTFontFace.cpp">
+      <Filter>Sources\Thirdparty\freetype</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Font\FTFontManager.cpp">
+      <Filter>Sources\Thirdparty\freetype</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
