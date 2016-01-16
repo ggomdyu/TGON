@@ -16,7 +16,8 @@ FT_Face m_face;
 
 //tgon::FTFontFace face( "c:\\windows\\fonts\\SeoulNamsanB.ttf", 64 );
 
-tgon::Direct3D9Device::Direct3D9Device( )
+tgon::Direct3D9Device::Direct3D9Device( HWND wndHandle ) :
+	m_wndHandle( wndHandle )
 	/*m_eye( 0.0f, 3.0f, -5.0f ),
 	m_lookAt( 0.0f, 0.0f, 0.0f ), d3d 카메라에 넣기
 	m_up( 0.0f, 1.0f, 0.0f )*/
@@ -53,25 +54,23 @@ tgon::Direct3D9Device::~Direct3D9Device( )
 }
 
 
-bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
+bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam* gdcp )
 {
-	const D3dDeviceCreateParam d3dCreateParam = ConvertCreateParamToD3dType( gdcp );
-
-	m_wndHandle = d3dCreateParam.presentWnd;
-
 //	m_d3d->CheckDeviceMultiSampleType( NULL, d3dDeviceType, surfaceFormat, );
 
+	const D3dDeviceCreateParam* d3dCreateParam = static_cast<const D3dDeviceCreateParam*>( gdcp );
+
 	RECT rt;
-	GetClientRect( gdcp.presentWnd, &rt );
+	GetClientRect( m_wndHandle, &rt );
 
 	D3DPRESENT_PARAMETERS pp = { 0 };
-	pp.hDeviceWindow = gdcp.presentWnd;
+	pp.hDeviceWindow = m_wndHandle;
 	pp.BackBufferWidth = rt.right;
 	pp.BackBufferHeight = rt.bottom;
 	pp.BackBufferFormat = D3DFMT_UNKNOWN;// D3DFORMAT::D3DFMT_A8R8G8B8;
 	pp.BackBufferCount = 1;
 	pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	pp.Windowed = d3dCreateParam.isFullWindow;
+	pp.Windowed = d3dCreateParam->isFullWindow;
 	// TW Labtop Set
 	//pp.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES;
 	pp.MultiSampleQuality = 0;
@@ -80,14 +79,17 @@ bool tgon::Direct3D9Device::Setup( const GraphicsDeviceCreateParam& gdcp )
 	/*d3dpp.MultiSampleType = D3DMULTISAMPLE_NONMASKABLE;
 	d3dpp.MultiSampleQuality = D3DMULTISAMPLE_2_SAMPLES;*/
 
+	this->DXErrorHandling(
+		this->CreateDevice(
+			D3DDEVTYPE_HAL,
+			d3dCreateParam->d3dBehaviorFlag,
+			pp
+		)
+	);
 
-	this->DXErrorHandling( this->CreateDevice( d3dCreateParam.d3dDeviceType,
-											   d3dCreateParam.d3dBehaviorFlag, pp ));
-
-
-//	GetD3dDevice( )->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
-	//GetD3dDevice( )->SetRenderState( D3DRS_LIGHTING, FALSE );
-//	GetD3dDevice( )->SetRenderState( D3DRS_ZENABLE, TRUE );
+	GetD3dDevice( )->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
+	GetD3dDevice( )->SetRenderState( D3DRS_LIGHTING, FALSE );
+	GetD3dDevice( )->SetRenderState( D3DRS_ZENABLE, TRUE );
 
 	return true;
 }
@@ -125,42 +127,22 @@ void tgon::Direct3D9Device::Display( )
 {
 	assert( m_d3dDevice.p );
 
-	GetD3dDevice( )->Clear( 0, NULL, D3DCLEAR_TARGET, D3DCOLOR_ARGB( 255, 0, 0, 255 ), 1.0f, 0 );
+	DXErrorHandling( GetD3dDevice( )->Clear( 0, NULL, D3DCLEAR_TARGET,
+									D3DCOLOR_ARGB( 255, 0, 0, 255 ), 1.0f, 0 ));
 
+	// Render 
+	DXErrorHandling( GetD3dDevice( )->BeginScene( ));
 	
-		GetD3dDevice( )->EndScene( );
+	{
 	}
 
-	/*assert( m_d3dDevice.p );
+	DXErrorHandling( GetD3dDevice( )->EndScene( ));
+	DXErrorHandling( GetD3dDevice( )->Present( NULL, NULL, NULL, NULL ));
 
-	HRESULT hr;
-
-
+	/*
 	if ( FAILED( hr = m_d3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
 						D3DCOLOR_ARGB( 255, 0, 0, 255 ), 1.0f, 0 )))
-	{
-		LPCTSTR errString = DXGetErrorString( hr );
-		MessageBox( GetFocus( ), errString, L"WARNING!",
-					MB_OK | MB_ICONEXCLAMATION );
-		return;
-	}
-
-	if ( FAILED( hr = m_d3dDevice->BeginScene( )))
-	{
-		LPCTSTR errString = DXGetErrorDescription( hr );
-		MessageBox( GetFocus( ), errString, L"WARNING!",
-					MB_OK | MB_ICONEXCLAMATION );
-		return;
-	}*/
-
-	//SetMatrices( );
-	//if ( FAILED( hr = GetD3dDevice( )->Present( nullptr, nullptr, NULL, nullptr )))
-	//{
-	//	LPCTSTR errString = DXGetErrorDescription( hr );
-	//	MessageBox( GetFocus( ), errString, L"WARNING!",
-	//				MB_OK | MB_ICONEXCLAMATION );
-	//	return;
-	//}
+						*/
 }
 
 //void tgon::Direct3D9Device::EndDraw( )

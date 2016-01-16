@@ -63,7 +63,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\TGON_Core\Sources;..\TGON_Core.Platform\Sources;..\TGON_DirectX\Sources;..\TGON_System\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -108,6 +108,12 @@
     </ProjectReference>
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
+      <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
+      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TGON_System\TGON_System.vcxproj">
       <Project>{a011083e-7574-48b8-8ea6-db825418f088}</Project>

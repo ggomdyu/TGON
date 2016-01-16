@@ -97,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\TGON_Core\Sources;..\TGON_Core.Platform\Sources;..\TGON_DirectX\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -170,6 +170,9 @@
     </ProjectReference>
     <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
       <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
+      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

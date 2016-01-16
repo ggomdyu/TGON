@@ -21,20 +21,20 @@
   <ItemGroup>
     <ClInclude Include="Sources\Direct3D9DeviceUtil.h" />
     <ClInclude Include="Sources\Direct3D9Device.h" />
-    <ClInclude Include="Sources\GraphicsDevice.h" />
-    <ClInclude Include="Sources\GraphicsDeviceMisc.h" />
-    <ClInclude Include="Sources\GraphicsDeviceType.h" />
-    <ClInclude Include="Sources\IGraphicsDeviceImpl.h" />
     <ClInclude Include="Sources\PlatformGraphicsDevice.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Direct3D9DeviceUtil.cpp" />
     <ClCompile Include="Sources\Direct3D9Device.cpp" />
-    <ClCompile Include="Sources\GraphicsDevice.cpp" />
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
+      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B5F066EE-B082-4A67-ACF4-BB4DF03A01D3}</ProjectGuid>
@@ -105,15 +105,18 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\TGON_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>d3d9.lib;d3dx9d.lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d9.lib;d3dx9d.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

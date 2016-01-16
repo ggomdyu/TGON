@@ -20,18 +20,27 @@ namespace tgon
 {
 
 
+struct D3dDeviceCreateParam : public GraphicsDeviceCreateParam
+{
+	virtual ~D3dDeviceCreateParam( ) {}
+
+	bool isFullWindow;
+	GraphicsDeviceProcessType gdpt;
+	DWORD d3dBehaviorFlag;
+};
+
+
 class Direct3D9Device;
 using GraphicsDeviceImpl = Direct3D9Device;
-
 
 
 class Direct3D9Device : public IGraphicsDeviceImpl
 {
 public:
-	Direct3D9Device( );
+	explicit Direct3D9Device( HWND wndHandle );
 	~Direct3D9Device( );
 
-	virtual bool		Setup( const GraphicsDeviceCreateParam& ) override;
+	virtual bool		Setup( const GraphicsDeviceCreateParam* ) override;
 	virtual void		Display( ) override;
 
 	/*bool Initialize( HWND hWnd, int width, int height );

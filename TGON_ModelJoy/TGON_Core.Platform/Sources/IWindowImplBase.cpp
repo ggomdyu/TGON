@@ -7,14 +7,17 @@ tgon::IWindowImplBase::IWindowImplBase( const WindowStyle& wndStyle ) :
 {
 }
 
+
 tgon::IWindowImplBase::~IWindowImplBase( )
 {
 }
+
 
 void tgon::IWindowImplBase::AddEventCallback( unsigned int evType, const EventProc& evProc )
 {
 	m_evTable.insert( std::make_pair( evType, evProc ));
 }
+
 
 void tgon::IWindowImplBase::CallEventProc( unsigned int evType )
 {
