@@ -6,84 +6,98 @@
       <Extensions>
       </Extensions>
     </Filter>
-    <Filter Include="Sources\RTTI">
-      <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
+    <Filter Include="Sources\cpp">
+      <UniqueIdentifier>{f66218f1-4e0e-4ef3-ac63-f546011ba36b}</UniqueIdentifier>
+      <Extensions>c;cpp;</Extensions>
     </Filter>
-    <Filter Include="Sources\Misc">
-      <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
+    <Filter Include="Sources\hpp">
+      <UniqueIdentifier>{402e4741-a5ad-412b-a9cb-3118498425ef}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
     </Filter>
-    <Filter Include="Sources\Color">
-      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\C#">
+    <Filter Include="Sources\hpp\C#">
       <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Math">
+    <Filter Include="Sources\hpp\Math">
       <UniqueIdentifier>{972dd77b-5bd8-433b-9a6e-e1edc8cc4a75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Pattern">
+    <Filter Include="Sources\hpp\Misc">
+      <UniqueIdentifier>{1388a002-3812-4565-ac35-2ae17e583376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\Pattern">
       <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\XML">
+    <Filter Include="Sources\hpp\RTTI">
+      <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\XML">
       <UniqueIdentifier>{15e10a22-7182-4144-aafd-81743742d6e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\XML\tinyXML">
+    <Filter Include="Sources\hpp\XML\tinyXML">
       <UniqueIdentifier>{4436027c-8c2d-408a-9400-fda887dda722}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Font">
+    <Filter Include="Sources\hpp\Font">
       <UniqueIdentifier>{6818217b-07f7-4d95-b0ea-7e622b956c66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Font\freetype">
+    <Filter Include="Sources\hpp\Font\freetype">
       <UniqueIdentifier>{91521e6a-a48a-40da-9d32-df1ff075484c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\Color">
+      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\cpp\RTTI">
+      <UniqueIdentifier>{e82a333f-389f-4d56-afd9-95a49b6a4c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\FBX">
+      <UniqueIdentifier>{da008551-3118-4b1f-8f57-fa494380ef43}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="TGON_Common.props" />
     <None Include="Sources\RTTI\RTTIUtil.inl">
-      <Filter>Sources\RTTI</Filter>
+      <Filter>Sources\hpp\RTTI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Pattern\Uncopyable.h">
-      <Filter>Sources\Pattern</Filter>
+      <Filter>Sources\hpp\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Pattern\Singleton.h">
-      <Filter>Sources\Pattern</Filter>
+      <Filter>Sources\hpp\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Sources\RTTI\RTTI.h">
-      <Filter>Sources\RTTI</Filter>
+      <Filter>Sources\hpp\RTTI</Filter>
     </ClInclude>
     <ClInclude Include="Sources\RTTI\RTTIUtil.h">
-      <Filter>Sources\RTTI</Filter>
+      <Filter>Sources\hpp\RTTI</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Color\Color.h">
-      <Filter>Sources\Color</Filter>
+      <Filter>Sources\hpp\Color</Filter>
     </ClInclude>
     <ClInclude Include="Sources\delegate.h">
-      <Filter>Sources\C#</Filter>
+      <Filter>Sources\hpp\C#</Filter>
     </ClInclude>
     <ClInclude Include="Sources\EventHandler.h">
-      <Filter>Sources\C#</Filter>
+      <Filter>Sources\hpp\C#</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Font\FTFontFace.h">
-      <Filter>Sources\Font\freetype</Filter>
+      <Filter>Sources\hpp\Font\freetype</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Font\FTFontManager.h">
-      <Filter>Sources\Font\freetype</Filter>
+      <Filter>Sources\hpp\Font\freetype</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\RTTI\RTTI.cpp">
-      <Filter>Sources\RTTI</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
-      <Filter>Sources\RTTI</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Font\FTFontFace.cpp">
-      <Filter>Sources\Font\freetype</Filter>
+      <Filter>Sources\hpp\Font\freetype</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Font\FTFontManager.cpp">
-      <Filter>Sources\Font\freetype</Filter>
+      <Filter>Sources\hpp\Font\freetype</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\RTTI\RTTI.cpp">
+      <Filter>Sources\cpp\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
+      <Filter>Sources\cpp\RTTI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

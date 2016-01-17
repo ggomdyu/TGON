@@ -76,8 +76,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>
-    <LibraryPath>..\lib\freetype\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\include\freetype;..\include\FBX 2015.1;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\freetype\x86;..\lib\FBX 2015.1\x86\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>..\lib\FBX 2015.1\x86\release;..\lib\freetype\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\include\freetype;..\include\FBX 2015.1;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -94,7 +98,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>freetype262MTd.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype262MTd.lib;libfbxsdk.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -128,6 +132,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>freetype262MT.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

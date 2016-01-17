@@ -4,6 +4,7 @@
 #include "System\WindowSystem.h"
 #include "SociableManager.h"
 #include "MessageManager.h"
+#include "CoreEngineUtil.h"
 
 
 void OnFrameExit( )
@@ -14,7 +15,7 @@ void OnFrameExit( )
 
 tgon::CoreEngine::CoreEngine( )
 {
-	WindowSystem::GetInstance( )->AddEventCallback( WindowEvent::Destroy, OnFrameExit );
+	System::AddEventCallback( WindowEvent::Destroy, OnFrameExit );
 }
 
 
@@ -82,12 +83,12 @@ void tgon::CoreEngine::FrameMove( )
 
 void tgon::CoreEngine::UpdateSystem( float elapsedTime )
 {
-	WindowSystem::GetInstance( )->FrameMove( elapsedTime );
+	GetWindowSystem( )->FrameMove( elapsedTime );
 
 	/*
 		Idle time - WindowSystem has no message.
 	*/
-	const WindowEvent curWndEvent = WindowSystem::GetInstance( )->GetWindowEvent( );
+	const WindowEvent curWndEvent = GetWindowSystem( )->GetWindowEvent( );
 
 	if ( curWndEvent == WindowEvent::None )
 	{

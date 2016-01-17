@@ -1,42 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{9081570a-4adc-4590-bee6-59379be7032c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Sources\hpp">
+      <UniqueIdentifier>{16e4e339-41b7-4938-b644-5e63402314c5}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Sources\hpp\PrecompiledHeader">
+      <UniqueIdentifier>{7b2eed51-d2ee-4892-8f8d-2bed994ba872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\cpp">
+      <UniqueIdentifier>{be470174-5cc6-4351-87b1-95345863648d}</UniqueIdentifier>
+      <Extensions>c;cpp;</Extensions>
+    </Filter>
+    <Filter Include="Sources\cpp\PrecompiledHeader">
+      <UniqueIdentifier>{07357714-33b6-4f89-b579-ba645e672480}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Sources\GraphicsDevice.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="Sources\GraphicsDeviceMisc.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GraphicsDevice.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="Sources\IGraphicsDeviceImpl.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\GraphicsDeviceType.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
+      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformGraphicsDevice.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Sources\cpp\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

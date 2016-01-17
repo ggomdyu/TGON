@@ -21,11 +21,13 @@ void tgon::IWindowImplBase::AddEventCallback( unsigned int evType, const EventPr
 
 void tgon::IWindowImplBase::CallEventProc( unsigned int evType )
 {
-	const auto findElem = m_evTable.find( evType );
-	const auto notExist = m_evTable.end( );
+	auto findElem = m_evTable.find( evType );
+	const auto notExistElem = m_evTable.end( );
 
-	if ( findElem != notExist )
+	while (( findElem != notExistElem ) && ( findElem->first == evType ))
 	{
 		findElem->second( );
+
+		++findElem;
 	}
 }

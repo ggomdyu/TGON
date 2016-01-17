@@ -137,8 +137,8 @@
   <ItemGroup>
     <ClInclude Include="Sources\GraphicsDevice.h" />
     <ClInclude Include="Sources\GraphicsDeviceMisc.h" />
-    <ClInclude Include="Sources\GraphicsDeviceType.h" />
     <ClInclude Include="Sources\IGraphicsDeviceImpl.h" />
+    <ClInclude Include="Sources\PlatformGraphicsDevice.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h" />
   </ItemGroup>

@@ -4,26 +4,44 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{b8a808bc-df73-4f26-aa02-be62d4b5b595}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\hpp">
+      <UniqueIdentifier>{8fcef444-76bf-4c42-801c-379b281209a9}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="Sources\cpp">
+      <UniqueIdentifier>{0759a193-7271-4999-9f6a-fe961013532b}</UniqueIdentifier>
+      <Extensions>c;cpp;</Extensions>
+    </Filter>
+    <Filter Include="Sources\cpp\PrecompiledHeader">
+      <UniqueIdentifier>{649c6d57-965e-44da-b831-01e9c223a957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\PrecompiledHeader">
+      <UniqueIdentifier>{8cea1578-68ba-4f5e-9800-679fe5f94418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Direct3D9Device.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="Sources\Direct3D9DeviceUtil.cpp">
+      <Filter>Sources\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Direct3D9DeviceUtil.cpp" />
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Direct3D9Device.cpp">
+      <Filter>Sources\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\Direct3D9Device.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\PlatformGraphicsDevice.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Direct3D9DeviceUtil.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
-      <Filter>Sources</Filter>
+      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3D9Device.h">
+      <Filter>Sources\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3D9DeviceUtil.h">
+      <Filter>Sources\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Direct3D9DeviceMisc.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

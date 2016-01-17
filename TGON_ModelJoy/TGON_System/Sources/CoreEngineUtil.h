@@ -14,11 +14,17 @@ namespace tgon
 {
 	namespace System
 	{
-		inline void	AddEventCallback( unsigned int evType, std::function<void()> evProc )	{ WindowSystem::GetInstance( )->AddEventCallback( evType, evProc ); }
+		inline void	AddEventCallback( unsigned int evType, std::function<void()> evProc )
+		{
+			GetWindowSystem( )->GetWindow( ).AddEventCallback( evType, evProc );
+		}
 	}
 
 	namespace Time
 	{
-		inline float	GetElapsedTime( )	{ return TickSystem::GetInstance( )->GetElapsedTime( ); }
+		inline float	GetElapsedTime( )
+		{
+			return GetTickSystem( )->GetElapsedTime( );
+		}
 	}
 }

@@ -35,4 +35,8 @@ namespace tgon {
 		MiliTimePoint m_startTime;
 		float m_elapsedTime;
 	};
+
+
+inline TickSystem*		GetTickSystem( ) { return TickSystem::GetInstance( ); }
+
 }

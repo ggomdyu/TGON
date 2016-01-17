@@ -13,8 +13,8 @@
 
 
 FT_Face m_face;
-
 //tgon::FTFontFace face( "c:\\windows\\fonts\\SeoulNamsanB.ttf", 64 );
+
 
 tgon::Direct3D9Device::Direct3D9Device( HWND wndHandle ) :
 	m_wndHandle( wndHandle )
@@ -134,6 +134,7 @@ void tgon::Direct3D9Device::Display( )
 	DXErrorHandling( GetD3dDevice( )->BeginScene( ));
 	
 	{
+
 	}
 
 	DXErrorHandling( GetD3dDevice( )->EndScene( ));

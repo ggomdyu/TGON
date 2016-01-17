@@ -2,15 +2,20 @@
 * 작성자 : 김태우
 * 작성일 : 2015-04-26
 * 최종 수정 : 차준호
-* 최종 수정일 : 2015-01-10
+* 최종 수정일 : 2015-01-17
 */
 
 
 #pragma once
 #include "IGraphicsDeviceImpl.h"
 
+#include "..\..\include\DirectX\d3d9.h"
+#include "..\..\include\DirectX\d3dx9.h"
+
 #include <atlbase.h>
 #include <Windows.h>
+
+#include "Direct3D9DeviceMisc.h"
 #include "Direct3D9DeviceUtil.h"
 
 
@@ -20,19 +25,10 @@ namespace tgon
 {
 
 
-struct D3dDeviceCreateParam : public GraphicsDeviceCreateParam
-{
-	virtual ~D3dDeviceCreateParam( ) {}
-
-	bool isFullWindow;
-	GraphicsDeviceProcessType gdpt;
-	DWORD d3dBehaviorFlag;
-};
 
 
 class Direct3D9Device;
-using GraphicsDeviceImpl = Direct3D9Device;
-
+typedef Direct3D9Device GraphicsDeviceImpl;
 
 class Direct3D9Device : public IGraphicsDeviceImpl
 {
@@ -43,21 +39,20 @@ public:
 	virtual bool		Setup( const GraphicsDeviceCreateParam* ) override;
 	virtual void		Display( ) override;
 
-	/*bool Initialize( HWND hWnd, int width, int height );
 
-	void Display( );
-	void EndDraw( );*/
+	//void EndDraw( );
 
 
 public:
 	const CComPtr<IDirect3D9Ex>&				GetD3D( ) const				{ return m_d3d; }
 	const CComPtr<IDirect3DDevice9Ex>&		GetD3dDevice( ) const		{ return m_d3dDevice; }
 
+
 private:
 	HRESULT		CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3dBehaviorFlag,
 							  D3DPRESENT_PARAMETERS& d3dpp );
-
 	void DXErrorHandling( HRESULT hr );
+
 
 	Direct3D9Device( const Direct3D9Device& ) = delete;
 	Direct3D9Device& operator=( const Direct3D9Device& ) = delete;

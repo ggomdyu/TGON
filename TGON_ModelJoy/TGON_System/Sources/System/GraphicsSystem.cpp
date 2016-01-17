@@ -5,9 +5,9 @@
 #include "WindowSystem.h"
 #include "Direct3D9Device.h"
 
+
 tgon::GraphicsSystem::GraphicsSystem( ) :
-	ISystem( *this ), gd( new Direct3D9Device( GetWindowSystem( )->GetWindow( ).
-											   GetWindowHandle( )))
+	ISystem( *this ), gd( GetWindowSystem( )->GetWindow( ). GetWindowHandle( ))
 {
 	// TODO: Use XML and assemble device info!! 
 

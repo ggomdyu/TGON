@@ -17,7 +17,7 @@ class IWindowImplBase
 {
 protected:
 	typedef std::function<void()> EventProc;
-	typedef std::unordered_map<unsigned int, EventProc> EventProcTable;
+	typedef std::unordered_multimap<unsigned int, EventProc> EventProcTable;
 
 public:
 	virtual void		FrameMove( ) = 0;
