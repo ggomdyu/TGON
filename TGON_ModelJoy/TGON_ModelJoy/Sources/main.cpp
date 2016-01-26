@@ -8,7 +8,6 @@
 #include <System\WindowSystem.h>
 #include <System\TickSystem.h>
 
-
 using namespace tgon;
 
 
@@ -17,12 +16,19 @@ void OnFrameLoseFocus( )
 	
 }
 
+#include "WindowsConsole.h"
+
 
 int tgMain( int argc, char* argv[] )
 {
 	/*
 		Register system
 	*/
+
+	CoreEngine ce( );
+	//ce.RegisterSystem( new WindowSystem,  );
+	/*
+
 	CoreEngine::GetInstance( )->RegisterSystem({
 		WindowSystem::GetInstance( ),
 		GraphicsSystem::GetInstance( ),
@@ -35,6 +41,6 @@ int tgMain( int argc, char* argv[] )
 
 	CoreEngine::GetInstance( )->Initialize( );
 	CoreEngine::GetInstance( )->FrameMove( );
-
+	*/
 	return 0;
 }
