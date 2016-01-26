@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IWindow.cpp">
+      <Filter>cpp\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IWindow.h">
+      <Filter>hpp\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\tgWindow.h">
+      <Filter>hpp\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowStyle.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\WindowEvent.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformWindow.h">
+      <Filter>hpp\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PlatformMain.h">
+      <Filter>hpp\Platform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{75e5cf4f-5bab-410f-90de-b4c0ee0d124d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{397fbd08-0f5d-4e9d-8ac3-087a421047bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\PrecompiledHeader">
+      <UniqueIdentifier>{fb6be90d-36e5-449d-bbdf-f6875f7b0b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
+      <UniqueIdentifier>{4391902e-de85-453e-b42c-6bfc435075df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Interface">
+      <UniqueIdentifier>{554acb3f-f2a3-4f45-b871-b3bddd2883a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Interface">
+      <UniqueIdentifier>{3d8b3552-2e96-458f-92b0-e6af64662f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Platform">
+      <UniqueIdentifier>{7cf5193c-eef7-413c-9d66-e5cb77775997}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
