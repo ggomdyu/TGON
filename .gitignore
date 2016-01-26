@@ -3,14 +3,16 @@
 
 # User-specific files
 *.suo
+*.sdf
 *.user
 *.sln.docstates
 
 # Build results
 
 [Ii]pch/
-build/
+[Bb]uild/
 [Dd]ebug\
+[Rr]elease\
 [Bb]in/
 [Oo]bj/
 
