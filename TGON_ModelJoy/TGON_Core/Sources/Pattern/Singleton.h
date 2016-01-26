@@ -19,7 +19,7 @@ template <typename T>
 class StaticSingleton
 {
 public:
-	static const T* GetInstance( )
+	static T* GetInstance( )
 	{
 		static T instance;
 		return &instance;

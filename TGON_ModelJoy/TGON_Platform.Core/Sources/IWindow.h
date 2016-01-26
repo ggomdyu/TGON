@@ -13,7 +13,8 @@
 
 namespace tgon {
 
-class IWindowImplBase
+
+class IWindow
 {
 protected:
 	typedef std::function<void()> EventProc;
@@ -37,11 +38,10 @@ public:
 
 
 protected:
-	explicit			IWindowImplBase( const WindowStyle& );
-	virtual				~IWindowImplBase( ) = 0;
+	explicit			IWindow( const WindowStyle& );
+	virtual				~IWindow( ) = 0;
 
 	void 				CallEventProc( unsigned int evType );
-
 
 private:
 	WindowStyle		m_wndStyle;

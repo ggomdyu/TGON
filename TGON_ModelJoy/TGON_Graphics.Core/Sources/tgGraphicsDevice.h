@@ -12,7 +12,7 @@ namespace tgon
 {
 
 
-typedef GraphicsDeviceImpl GraphicsDevice;
+typedef GraphicsDeviceImpl tgGraphicsDevice;
 
 
 }

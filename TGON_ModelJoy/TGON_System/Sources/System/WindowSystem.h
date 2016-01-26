@@ -30,14 +30,14 @@ public:
 
 public:
 	const WindowEvent	GetWindowEvent( ) const	{ return m_window.GetWindowEvent( ); }
-	Window&				GetWindow( )					{ return m_window; }
+	tgWindow&				GetWindow( )					{ return m_window; }
 
 private:
 						WindowSystem( );
 	virtual				~WindowSystem( );
 		
 private:
-	Window		m_window;
+	tgWindow		m_window;
 };
 
 

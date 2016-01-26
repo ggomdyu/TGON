@@ -12,7 +12,7 @@
 namespace tgon {
 
 
-typedef WindowImpl Window;
+typedef WindowImpl tgWindow;
 
 
 }

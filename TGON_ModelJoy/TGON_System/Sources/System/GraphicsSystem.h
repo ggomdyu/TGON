@@ -9,8 +9,8 @@
 #include "ISystem.h"
 #include <Pattern\Singleton.h>
 
-#include "GraphicsDevice.h"
-
+#include "tgGraphicsDevice.h"
+#include <memory>
 
 namespace tgon {
 
@@ -30,7 +30,7 @@ private:
 	virtual				~GraphicsSystem( );
 
 private:
-	GraphicsDevice gd;
+	tgGraphicsDevice gd;
 };
 
 

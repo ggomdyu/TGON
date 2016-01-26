@@ -1,25 +1,25 @@
 #include "stdafx.h"
-#include "IWindowImplBase.h"
+#include "IWindow.h"
 
 
-tgon::IWindowImplBase::IWindowImplBase( const WindowStyle& wndStyle ) :
+tgon::IWindow::IWindow( const WindowStyle& wndStyle ) :
 	m_wndStyle( wndStyle )
 {
 }
 
 
-tgon::IWindowImplBase::~IWindowImplBase( )
+tgon::IWindow::~IWindow( )
 {
 }
 
 
-void tgon::IWindowImplBase::AddEventCallback( unsigned int evType, const EventProc& evProc )
+void tgon::IWindow::AddEventCallback( unsigned int evType, const EventProc& evProc )
 {
 	m_evTable.insert( std::make_pair( evType, evProc ));
 }
 
 
-void tgon::IWindowImplBase::CallEventProc( unsigned int evType )
+void tgon::IWindow::CallEventProc( unsigned int evType )
 {
 	auto findElem = m_evTable.find( evType );
 	const auto notExistElem = m_evTable.end( );

@@ -1,47 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Sources">
-      <UniqueIdentifier>{b8a808bc-df73-4f26-aa02-be62d4b5b595}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\hpp">
-      <UniqueIdentifier>{8fcef444-76bf-4c42-801c-379b281209a9}</UniqueIdentifier>
-      <Extensions>h;hpp</Extensions>
-    </Filter>
-    <Filter Include="Sources\cpp">
+    <Filter Include="cpp">
       <UniqueIdentifier>{0759a193-7271-4999-9f6a-fe961013532b}</UniqueIdentifier>
       <Extensions>c;cpp;</Extensions>
     </Filter>
-    <Filter Include="Sources\cpp\PrecompiledHeader">
+    <Filter Include="cpp\PrecompiledHeader">
       <UniqueIdentifier>{649c6d57-965e-44da-b831-01e9c223a957}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\hpp\PrecompiledHeader">
+    <Filter Include="cpp\Device">
+      <UniqueIdentifier>{db23f653-8c8d-4b4f-9940-ecf53460e7de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{8fcef444-76bf-4c42-801c-379b281209a9}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{8cea1578-68ba-4f5e-9800-679fe5f94418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Device">
+      <UniqueIdentifier>{1cba1cae-f206-49e9-862f-a3ed1b48aa23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Misc">
+      <UniqueIdentifier>{59a0af22-4d87-4874-ad8b-51a0f81f456d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Shape">
+      <UniqueIdentifier>{89a6ffff-7282-4a10-8a67-6ceedcf5e404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Material">
+      <UniqueIdentifier>{9e0e3cea-99cc-4975-81df-d8e82625b27b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Direct3D9DeviceUtil.cpp">
-      <Filter>Sources\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
-      <Filter>Sources\cpp\PrecompiledHeader</Filter>
+      <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Direct3D9Device.cpp">
-      <Filter>Sources\cpp</Filter>
+    <ClCompile Include="Sources\D3d9Quad.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Camera.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Device.cpp">
+      <Filter>cpp\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Shader.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Util.cpp">
+      <Filter>cpp\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Mesh.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Texture.cpp">
+      <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
-      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+      <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Direct3D9Device.h">
-      <Filter>Sources\hpp</Filter>
+    <ClInclude Include="Sources\D3d9Type.h">
+      <Filter>hpp\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Direct3D9DeviceUtil.h">
-      <Filter>Sources\hpp</Filter>
+    <ClInclude Include="Sources\D3d9Quad.h">
+      <Filter>hpp\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Direct3D9DeviceMisc.h">
-      <Filter>Sources\hpp</Filter>
+    <ClInclude Include="Sources\D3d9Camera.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Device.h">
+      <Filter>hpp\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Shader.h">
+      <Filter>hpp\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Util.h">
+      <Filter>hpp\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Mesh.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Texture.h">
+      <Filter>hpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,12 +6,12 @@
 
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	IWindowImplBase( wndStyle )
+	IWindow( wndStyle )
 {
 	// 1. register window information to make
 	if ( !RegisterWindow( wndStyle, CallbackMsgProc ))
 	{
-		MessageBox( GetFocus( ), L"Failed to call RegisterWindow function.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to Invoke tgon::RegisterWindow.", L"WARNING!",
 				MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
@@ -42,11 +42,11 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& ws )
 	DWORD normalWndStyle, exWndStyle;
 	ConvertWndStyleToDword( ws, &exWndStyle, &normalWndStyle );
 
-	m_wndHandle = CreateWindowEx( exWndStyle, ws.caption, ws.caption, normalWndStyle, x, y, ws.width, ws.height,
+	m_wndHandle = CreateWindowExW( exWndStyle, ws.caption, ws.caption, normalWndStyle, x, y, ws.width, ws.height,
 									nullptr, nullptr, GetModuleHandle( NULL ), this );
 	if ( !m_wndHandle )
 	{
-		MessageBox( GetFocus( ), L"Failed to call CreateWindowEx function.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to Invoke CreateWindowExW.", L"WARNING!",
 					MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
@@ -106,27 +106,14 @@ void tgon::WindowsWindow::Exit( )
 
 LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, unsigned int msg, WPARAM wParam, LPARAM lParam )
 {
-	/*
-		CallbackMsgProc can't access member of WindowsWindow.
-		So WindowsWindow class uses <Extra memory> that provided when window created.
-	*/
-	if ( msg == WM_NCCREATE )
+	if ( msg == WM_DESTROY )
 	{
-		// When window created by CreateWindow Func, It throws LPCREATESTRUCT to msg Callback.
-		// Check 44 lines' func and the last argument
-		SetWindowLongPtr( wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(
-										LPCREATESTRUCT( lParam )->lpCreateParams )); 
+		PostQuitMessage( 0 );
 	}
-
-
-	// Get extra memory ptr through GetWindowLong( .. GWLP_USERDATA )
-	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
-			GetWindowLongPtr( wndHandle, GWLP_USERDATA ));
-
-	if ( extraMemAsWindow )
-		return extraMemAsWindow->CustomMsgProc( wndHandle, msg, wParam, lParam );
 	else
+	{
 		return DefWindowProc( wndHandle, msg, wParam, lParam );
+	}
 }
 
 
@@ -143,21 +130,4 @@ void tgon::WindowsWindow::FrameMove( )
 	{
 		m_msg.message = WindowEvent::None;
 	}
-}
-
-
-LRESULT CALLBACK tgon::WindowsWindow::CustomMsgProc( HWND wndHandle, unsigned int msg, WPARAM wParam, LPARAM lParam )
-{
-	IWindowImplBase::CallEventProc( msg );
-
-	if ( msg == WM_DESTROY )
-	{
-		PostQuitMessage( 0 );
-	}
-	else
-	{
-		return DefWindowProc( wndHandle, msg, wParam, lParam );
-	}
-
-	return 0;
 }

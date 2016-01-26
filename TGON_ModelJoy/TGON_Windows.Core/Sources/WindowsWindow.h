@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "IWindowImplBase.h"
+#include "IWindow.h"
 
 #include <Windows.h>
 #include <iostream>
@@ -16,9 +16,9 @@ namespace tgon {
 
 
 class WindowsWindow;
-using WindowImpl = WindowsWindow;
+typedef WindowsWindow WindowImpl;
 
-class WindowsWindow : public IWindowImplBase
+class WindowsWindow : public IWindow
 {
 public:
 	explicit			WindowsWindow( const WindowStyle& = WindowStyle( ));
@@ -41,9 +41,6 @@ private:
 	void					CreateWindowForm( const WindowStyle& );
 	static LRESULT		WINAPI CallbackMsgProc( HWND, unsigned int, WPARAM, LPARAM );
 
-	// Overridable message procedure
-	virtual LRESULT		WINAPI CustomMsgProc( HWND, unsigned int, WPARAM, LPARAM );
-		 
 private:
 	MSG		m_msg;
 	HWND	m_wndHandle;

@@ -1,47 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Sources">
-      <UniqueIdentifier>{9081570a-4adc-4590-bee6-59379be7032c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\hpp">
-      <UniqueIdentifier>{16e4e339-41b7-4938-b644-5e63402314c5}</UniqueIdentifier>
-      <Extensions>h;hpp</Extensions>
-    </Filter>
-    <Filter Include="Sources\hpp\PrecompiledHeader">
-      <UniqueIdentifier>{7b2eed51-d2ee-4892-8f8d-2bed994ba872}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\cpp">
+    <Filter Include="cpp">
       <UniqueIdentifier>{be470174-5cc6-4351-87b1-95345863648d}</UniqueIdentifier>
       <Extensions>c;cpp;</Extensions>
     </Filter>
-    <Filter Include="Sources\cpp\PrecompiledHeader">
+    <Filter Include="cpp\PrecompiledHeader">
       <UniqueIdentifier>{07357714-33b6-4f89-b579-ba645e672480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{16e4e339-41b7-4938-b644-5e63402314c5}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
+      <UniqueIdentifier>{7b2eed51-d2ee-4892-8f8d-2bed994ba872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Interface">
+      <UniqueIdentifier>{bdb8dadf-88cc-41d6-8988-a2e2beeb8063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Platform">
+      <UniqueIdentifier>{e938ab1b-cce8-4746-aed2-438ac1741c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Misc">
+      <UniqueIdentifier>{fd58a43e-130d-418c-9bd5-625007e811ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\GraphicsDevice.h">
-      <Filter>Sources\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GraphicsDeviceMisc.h">
-      <Filter>Sources\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IGraphicsDeviceImpl.h">
-      <Filter>Sources\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
-      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+      <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
-      <Filter>Sources\hpp\PrecompiledHeader</Filter>
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IGraphicsDevice.h">
+      <Filter>hpp\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\tgGraphicsDevice.h">
+      <Filter>hpp</Filter>
     </ClInclude>
     <ClInclude Include="Sources\PlatformGraphicsDevice.h">
-      <Filter>Sources\hpp</Filter>
+      <Filter>hpp\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IQuad.h">
+      <Filter>hpp\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ITexture.h">
+      <Filter>hpp\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Vertices.h">
+      <Filter>hpp\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
-      <Filter>Sources\cpp\PrecompiledHeader</Filter>
+      <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

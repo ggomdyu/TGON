@@ -11,7 +11,7 @@ inline const tgon::WindowStyle GetDefWindowStyle( )
 {
 	tgon::WindowStyle ws;
 	ws.ShowMiddle = true;
-	ws.width = 1200;
+	ws.width = 1000;
 	ws.height = 1000;
 	ws.caption = L"ModelJoy";
 	ws.Popup = true;
