@@ -15,18 +15,42 @@
     <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{ea8c2f40-5935-4744-997c-53249671b198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\NewFilter1">
+      <UniqueIdentifier>{25627af6-9512-4fba-b006-e540ffd05a49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
       <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IObject.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IComponent.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\GameTemplateTypes.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IComponent.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IObject.hpp">
+      <Filter>hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IObject.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IComponent.cpp">
+      <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

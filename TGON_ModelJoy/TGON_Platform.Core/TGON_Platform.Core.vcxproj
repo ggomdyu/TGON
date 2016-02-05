@@ -143,19 +143,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Sources\IWindow.h" />
-    <ClInclude Include="Sources\PlatformMain.h" />
-    <ClInclude Include="Sources\PlatformWindow.h" />
-    <ClInclude Include="Sources\tgWindow.h" />
+    <ClInclude Include="Sources\TWindow.h" />
     <ClInclude Include="Sources\WindowEvent.h" />
     <ClInclude Include="Sources\WindowStyle.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h" />
+    <ClInclude Include="Sources\WindowStyleUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\IWindow.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp" />
+    <ClCompile Include="Sources\WindowStyleUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

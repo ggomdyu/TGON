@@ -33,6 +33,9 @@
     <Filter Include="cpp\[Console]">
       <UniqueIdentifier>{5c4d4bc8-60b9-4fef-9bb7-d46e30221168}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\MessageBox">
+      <UniqueIdentifier>{a2148636-a379-4453-ad8b-f4a1767d141d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
@@ -53,9 +56,6 @@
     <ClInclude Include="Sources\WindowsConsole.h">
       <Filter>hpp\[Console]</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsWindowDeliverable.h">
-      <Filter>hpp\[Window]</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\WindowsMain.h">
       <Filter>hpp\[Main]</Filter>
     </ClInclude>
@@ -75,9 +75,6 @@
     </ClCompile>
     <ClCompile Include="Sources\WindowsConsole.cpp">
       <Filter>cpp\[Console]</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowsWindowDeliverable.cpp">
-      <Filter>cpp\[Window]</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

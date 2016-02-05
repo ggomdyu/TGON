@@ -168,6 +168,9 @@
     <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
       <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
+      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON_Windows.Core\TGON_Windows.Core.vcxproj">
       <Project>{7665f373-f1f9-4558-b282-05462af54119}</Project>
     </ProjectReference>
@@ -197,9 +200,6 @@
     <ClCompile Include="Sources\System\TickSystem.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Sources\System\WindowSystem.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -215,7 +215,6 @@
     <ClInclude Include="Sources\System\GraphicsSystem.h" />
     <ClInclude Include="Sources\System\ISystem.h" />
     <ClInclude Include="Sources\System\TickSystem.h" />
-    <ClInclude Include="Sources\System\WindowSystem.h" />
     <ClInclude Include="Sources\WindowSystemMessageType.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
   </ItemGroup>

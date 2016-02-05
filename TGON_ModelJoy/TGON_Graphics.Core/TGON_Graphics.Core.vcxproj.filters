@@ -15,14 +15,8 @@
     <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{7b2eed51-d2ee-4892-8f8d-2bed994ba872}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Interface">
-      <UniqueIdentifier>{bdb8dadf-88cc-41d6-8988-a2e2beeb8063}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Platform">
-      <UniqueIdentifier>{e938ab1b-cce8-4746-aed2-438ac1741c86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Misc">
-      <UniqueIdentifier>{fd58a43e-130d-418c-9bd5-625007e811ea}</UniqueIdentifier>
+    <Filter Include="hpp\FBX">
+      <UniqueIdentifier>{80caaed3-e9af-4b6a-8bf4-b474a2288ad7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,23 +26,14 @@
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\IGraphicsDevice.h">
-      <Filter>hpp\Interface</Filter>
+    <ClInclude Include="Sources\tgFbx.h">
+      <Filter>hpp\FBX</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\tgGraphicsDevice.h">
+    <ClInclude Include="Sources\TGraphicsDevice.h">
       <Filter>hpp</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\PlatformGraphicsDevice.h">
-      <Filter>hpp\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IQuad.h">
-      <Filter>hpp\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ITexture.h">
-      <Filter>hpp\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Vertices.h">
-      <Filter>hpp\Misc</Filter>
+    <ClInclude Include="Sources\IGraphicsDevice.h">
+      <Filter>hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

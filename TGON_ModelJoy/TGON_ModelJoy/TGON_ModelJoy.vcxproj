@@ -15,6 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TGON_ModelJoy</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>TGON_ModelJoy</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -107,6 +108,9 @@
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
+      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON_Platform.Core\TGON_Platform.Core.vcxproj">
       <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
     </ProjectReference>

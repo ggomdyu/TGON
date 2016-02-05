@@ -76,8 +76,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>..\include\freetype;..\include\FBX 2015.1;$(IncludePath)</IncludePath>
-    <LibraryPath>..\lib\freetype\x86;..\lib\FBX 2015.1\x86\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\freetype\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>..\lib\FBX 2015.1\x86\release;..\lib\freetype\x86;$(LibraryPath)</LibraryPath>
@@ -88,7 +88,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -158,9 +158,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Sources\RTTI\RTTIUtil.inl" />
-    <None Include="TGON_Common.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Console\TConsole.h" />
     <ClInclude Include="Sources\EventHandler.h" />
     <ClInclude Include="Sources\Color\Color.h" />
     <ClInclude Include="Sources\Font\FTFontFace.h" />
@@ -170,6 +170,9 @@
     <ClInclude Include="Sources\delegate.h" />
     <ClInclude Include="Sources\RTTI\RTTI.h" />
     <ClInclude Include="Sources\RTTI\RTTIUtil.h" />
+    <ClInclude Include="Sources\XML\TinyXML2Util.h" />
+    <ClInclude Include="Sources\tglib.h" />
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Font\FTFontFace.cpp" />
@@ -179,6 +182,10 @@
     </ClCompile>
     <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Sources\XML\TinyXML2Util.cpp" />
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

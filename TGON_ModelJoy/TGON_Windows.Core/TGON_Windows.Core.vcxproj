@@ -140,7 +140,6 @@
     <ClInclude Include="Sources\WindowsWindowUtil.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h" />
-    <ClInclude Include="WindowsWindowDeliverable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\WindowsConsole.cpp" />
@@ -153,7 +152,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WindowsWindowDeliverable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON_Platform.Core\TGON_Platform.Core.vcxproj">

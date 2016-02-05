@@ -62,9 +62,6 @@
     <ClCompile Include="Sources\System\GraphicsSystem.cpp">
       <Filter>cpp\CoreEngine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\System\WindowSystem.cpp">
-      <Filter>cpp\CoreEngine\System</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
@@ -110,9 +107,6 @@
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
     <ClInclude Include="Sources\WindowSystemMessageType.h">
-      <Filter>hpp\CoreEngine\System\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\WindowSystem.h">
       <Filter>hpp\CoreEngine\System\Window</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\GraphicsSystem.h">

@@ -15,43 +15,54 @@
     <Filter Include="hpp\C#">
       <UniqueIdentifier>{55e70203-569b-4970-ac5c-d403b9553450}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Pattern">
-      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\RTTI">
       <UniqueIdentifier>{e7f09636-ea62-4f9a-b18a-3608bd98a4de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Font">
-      <UniqueIdentifier>{6818217b-07f7-4d95-b0ea-7e622b956c66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Font\freetype">
-      <UniqueIdentifier>{91521e6a-a48a-40da-9d32-df1ff075484c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Color">
-      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
     </Filter>
     <Filter Include="hpp\Thirdparty">
       <UniqueIdentifier>{6e416290-cfb7-40fb-956c-5df23aa9b020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Thirdparty\tinyXML">
+    <Filter Include="cpp\TinyXML-2">
+      <UniqueIdentifier>{239f0d29-f3aa-43fc-b768-dfcf46d8f64f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Thirdparty\TinyXML-2">
       <UniqueIdentifier>{4436027c-8c2d-408a-9400-fda887dda722}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Thirdparty\FBX">
-      <UniqueIdentifier>{da008551-3118-4b1f-8f57-fa494380ef43}</UniqueIdentifier>
+    <Filter Include="cpp\PrecompiledHeader">
+      <UniqueIdentifier>{fb4ee076-6f82-49bb-ba83-20c194c88daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
+      <UniqueIdentifier>{baeb6555-1e1a-415c-ad1d-fc9fd3476786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\[Pattern]">
+      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Font -&gt; WillBeMoved_To_GraphicsCore">
+      <UniqueIdentifier>{6818217b-07f7-4d95-b0ea-7e622b956c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Font -&gt; WillBeMoved_To_GraphicsCore\freetype">
+      <UniqueIdentifier>{91521e6a-a48a-40da-9d32-df1ff075484c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Console">
+      <UniqueIdentifier>{b4b2c95f-e10b-4704-867d-a00f627df460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Color -&gt; WillBeMoved_To_GraphicsCore">
+      <UniqueIdentifier>{901feaf5-0d53-4923-ae1b-7497270412ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\MessageBox">
+      <UniqueIdentifier>{5f1b5636-169b-4c7c-9ed1-caf7a073f265}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TGON_Common.props" />
     <None Include="Sources\RTTI\RTTIUtil.inl">
       <Filter>hpp\RTTI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Pattern\Uncopyable.h">
-      <Filter>hpp\Pattern</Filter>
+      <Filter>hpp\[Pattern]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Pattern\Singleton.h">
-      <Filter>hpp\Pattern</Filter>
+      <Filter>hpp\[Pattern]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\RTTI\RTTI.h">
       <Filter>hpp\RTTI</Filter>
@@ -60,7 +71,7 @@
       <Filter>hpp\RTTI</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Color\Color.h">
-      <Filter>hpp\Color</Filter>
+      <Filter>hpp\Color -&gt; WillBeMoved_To_GraphicsCore</Filter>
     </ClInclude>
     <ClInclude Include="Sources\delegate.h">
       <Filter>hpp\C#</Filter>
@@ -69,24 +80,42 @@
       <Filter>hpp\C#</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Font\FTFontFace.h">
-      <Filter>hpp\Font\freetype</Filter>
+      <Filter>hpp\Font -&gt; WillBeMoved_To_GraphicsCore\freetype</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Font\FTFontManager.h">
-      <Filter>hpp\Font\freetype</Filter>
+      <Filter>hpp\Font -&gt; WillBeMoved_To_GraphicsCore\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\XML\TinyXML2Util.h">
+      <Filter>hpp\Thirdparty\TinyXML-2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\tglib.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Console\TConsole.h">
+      <Filter>hpp\Console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Font\FTFontFace.cpp">
-      <Filter>hpp\Font\freetype</Filter>
+      <Filter>hpp\Font -&gt; WillBeMoved_To_GraphicsCore\freetype</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Font\FTFontManager.cpp">
-      <Filter>hpp\Font\freetype</Filter>
+      <Filter>hpp\Font -&gt; WillBeMoved_To_GraphicsCore\freetype</Filter>
     </ClCompile>
     <ClCompile Include="Sources\RTTI\RTTI.cpp">
       <Filter>cpp\RTTI</Filter>
     </ClCompile>
     <ClCompile Include="Sources\RTTI\RTTIUtil.cpp">
       <Filter>cpp\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\XML\TinyXML2Util.cpp">
+      <Filter>cpp\TinyXML-2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

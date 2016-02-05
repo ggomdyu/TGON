@@ -81,6 +81,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,6 +112,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,14 +137,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\tgFbx.h" />
     <ClInclude Include="Sources\IGraphicsDevice.h" />
-    <ClInclude Include="Sources\IQuad.h" />
-    <ClInclude Include="Sources\ITexture.h" />
-    <ClInclude Include="Sources\PlatformGraphicsDevice.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
     <ClInclude Include="Sources\PrecompiledHeader\targetver.h" />
-    <ClInclude Include="Sources\tgGraphicsDevice.h" />
-    <ClInclude Include="Sources\Vertices.h" />
+    <ClInclude Include="Sources\TGraphicsDevice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
