@@ -6,8 +6,8 @@
     <_PropertySheetDisplayName>TGON_Common</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)\Include;..\include\FBX 2015.1;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;..\lib\FBX 2015.1\x86\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
