@@ -5,13 +5,13 @@
 #include "WindowsWindowUtil.h"
 
 
-tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	IWindow( wndStyle )
+tgon::Window::WindowsWindow::WindowsWindow( bool isEventable, const WindowStyle& wndStyle ) :
+	IWindow( isEventable )
 {
 	// 1. register window information to make
 	if ( !RegisterWindow( wndStyle, CallbackMsgProc ))
 	{
-		MessageBox( GetFocus( ), L"Failed to Invoke tgon::RegisterWindow.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to invoke tgon::RegisterWindow.", L"WARNING!",
 				MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
@@ -20,40 +20,40 @@ tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
 }
 
 
-tgon::WindowsWindow::~WindowsWindow( )
+tgon::Window::WindowsWindow::~WindowsWindow( )
 {
 }
 
 
-void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& ws )
+void tgon::Window::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 {
-	// 2. set coordinate of window
-	int x = ws.x, y = ws.y;
-	if ( ws.ShowMiddle )
+	// 2. set coordinates of window
+	int x = wndStyle.x, y = wndStyle.y;
+	if ( wndStyle.ShowMiddle )
 	{
 		x = static_cast<int>( GetSystemMetrics( SM_CXSCREEN )*0.5
-							  - ws.width*0.5 );
+							  - wndStyle.width*0.5 );
 		y = static_cast<int>( GetSystemMetrics( SM_CYSCREEN )*0.5
-							  - ws.height*0.5 );
+							  - wndStyle.height*0.5 );
 	}
 
 
 	// 3. Make
 	DWORD normalWndStyle, exWndStyle;
-	ConvertWndStyleToDword( ws, &exWndStyle, &normalWndStyle );
+	ConvertWndStyleToDword( wndStyle, &exWndStyle, &normalWndStyle );
 
-	m_wndHandle = CreateWindowExW( exWndStyle, ws.caption, ws.caption, normalWndStyle, x, y, ws.width, ws.height,
+	m_wndHandle = CreateWindowExW( exWndStyle, wndStyle.caption.c_str( ), wndStyle.caption.c_str( ), normalWndStyle, x, y, wndStyle.width, wndStyle.height,
 									nullptr, nullptr, GetModuleHandle( NULL ), this );
 	if ( !m_wndHandle )
 	{
-		MessageBox( GetFocus( ), L"Failed to Invoke CreateWindowExW.", L"WARNING!",
+		MessageBox( GetFocus( ), L"Failed to invoke CreateWindowEx.", L"WARNING!",
 					MB_OK | MB_ICONEXCLAMATION );
 		abort( );
 	}
 }
 
 
-void tgon::WindowsWindow::BringToTop( )
+void tgon::Window::WindowsWindow::BringToTop( )
 {
 	// Is my window foreground?
 	const HWND fgWndHandle( GetForegroundWindow( ));
@@ -77,19 +77,27 @@ void tgon::WindowsWindow::BringToTop( )
 }
 
 
-void tgon::WindowsWindow::Show( )
+void tgon::Window::WindowsWindow::Show( )
 {
 	ShowWindow( m_wndHandle, SW_NORMAL );
 }
 
 
-void tgon::WindowsWindow::SetPosition( int x, int y )
+void tgon::Window::WindowsWindow::SetPosition( const int x, const int y )
 {
 	SetWindowPos( m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
+void tgon::Window::WindowsWindow::GetPosition( int* x, int* y )
+{
+	RECT rt;
+	GetWindowRect( this->GetWindowHandle( ), &rt );
 
-void tgon::WindowsWindow::Move( int x, int y )
+	*x = rt.left;
+	*y = rt.top;
+}
+
+void tgon::Window::WindowsWindow::Move( const int x, const int y )
 {
 	RECT rt;
 	GetWindowRect( m_wndHandle, &rt );
@@ -98,14 +106,46 @@ void tgon::WindowsWindow::Move( int x, int y )
 }
 
 
-void tgon::WindowsWindow::Exit( )
+void tgon::Window::WindowsWindow::Exit( )
 {
 	PostQuitMessage( 0 );
 }
 
 
-LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, unsigned int msg, WPARAM wParam, LPARAM lParam )
+LRESULT tgon::Window::WindowsWindow::CallbackMsgProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+	/*
+		WARNING! : This logic can arises serious performance issue
+	*/
+
+
+	/*
+		CallbackMsgProc can't access member of WindowsWindow.
+		So WindowsWindow class uses <Extra memory> that provided when window created.
+	*/
+	if ( msg == WM_NCCREATE )
+	{
+		// When invoked 'CreateWindowEx', It throws LPCREATESTRUCT to message callback procedure.
+		SetWindowLongPtr( wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(
+										LPCREATESTRUCT( lParam )->lpCreateParams )); 
+	}
+
+
+	// Get extra memory pointer
+	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
+			GetWindowLongPtr( wndHandle, GWLP_USERDATA ));
+
+	if ( extraMemAsWindow )
+		return extraMemAsWindow->CustomMsgProc( wndHandle, msg, wParam, lParam );
+	else
+		return DefWindowProc( wndHandle, msg, wParam, lParam );
+}
+
+
+LRESULT CALLBACK tgon::Window::WindowsWindow::CustomMsgProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	this->IWindow::SetEvent( msg );
+
 	if ( msg == WM_DESTROY )
 	{
 		PostQuitMessage( 0 );
@@ -114,20 +154,6 @@ LRESULT tgon::WindowsWindow::CallbackMsgProc( HWND wndHandle, unsigned int msg, 
 	{
 		return DefWindowProc( wndHandle, msg, wParam, lParam );
 	}
-}
 
-
-void tgon::WindowsWindow::FrameMove( )
-{
-	BOOL isExistMsg = PeekMessage( &m_msg, NULL, 0, 0, PM_REMOVE );
-
-	if ( isExistMsg )
-	{
-		TranslateMessage( &m_msg );
-		DispatchMessage( &m_msg );
-	}
-	else
-	{
-		m_msg.message = WindowEvent::None;
-	}
+	return 0;
 }

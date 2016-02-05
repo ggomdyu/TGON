@@ -48,7 +48,7 @@ bool tgon::RegisterWindow( const WindowStyle& wndStyle, const WNDPROC wndProc )
 	wcex.hIcon = LoadIcon( NULL, IDI_APPLICATION );
 	wcex.hInstance = GetModuleHandle( nullptr );
 	wcex.lpfnWndProc = wndProc;
-	wcex.lpszClassName = wndStyle.caption;
+	wcex.lpszClassName = wndStyle.caption.c_str( );
 	wcex.style = CS_VREDRAW | CS_HREDRAW;
 
 	return RegisterClassEx( &wcex ) != 0;
