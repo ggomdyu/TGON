@@ -1,7 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "WindowsMain.h"
+
 #include <Windows.h>
+#include <locale>
 
 
 #ifdef _DEBUG
@@ -18,8 +20,9 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE, LPSTR, INT )
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
-	AllocConsole( );
 #endif
+
+	setlocale( LC_ALL, "" );
 
 	int nErrCode = tgMain( __argc, __argv );
 	return nErrCode;
