@@ -7,36 +7,35 @@
 */
 
 #include <iostream>
-#include <windows.h>
 
-namespace tgon
-{
+#ifdef PLATFORM_WINDOWS_OS
+	#include <windows.h>
+#endif
+
+namespace tgon {
+namespace Window {
 
 struct WindowEvent
 {
 private:
-	enum PrivateEventTable : unsigned int
+	enum PrivateEventTable
 	{
 	#ifdef PLATFORM_WINDOWS_OS
-		TGET_NONE = 0,
+		TGET_NONE = 0xcccccccc,
 		TGET_CREATE = WM_CREATE,
 		TGET_SIZE = WM_SIZE,
 		TGET_GETFOCUS = WM_SETFOCUS,
 		TGET_LOSEFOCUS = WM_KILLFOCUS,
 		TGET_MOVE = WM_MOVE,
-		TGET_DESTROY = WM_DESTROY,
-	#else
-		#error	 "You're platform is not supported."
+		TGET_DESTROY = WM_QUIT,
 	#endif
 	};
 
 public:
-	WindowEvent( unsigned int _ev = WindowEvent::None ) :
-		ev( _ev ) {};
+	WindowEvent( unsigned int ev = WindowEvent::None ) : m_ev( ev ) {};
 	~WindowEvent( ) {};
 
-	enum WindowEventTable : unsigned int
-	{
+	enum {
 		None = TGET_NONE,
 		Create = TGET_CREATE,
 		GetFocus = TGET_GETFOCUS,
@@ -46,11 +45,12 @@ public:
 		Destroy = TGET_DESTROY,
 	};
 
-
-	operator unsigned int( ) const	{ return ev; }
+	operator unsigned int( ) const		{ return m_ev; }
 
 private:
-	unsigned int ev = 0;
+	unsigned int m_ev = 0;
 };
 
+
+}
 }
