@@ -15,10 +15,7 @@ namespace tgon {
 		ISystem( unsigned int key );
 		virtual ~ISystem( );
 
-		virtual void Initialize( )	{};
+		virtual void Setup( )	{};
 		virtual void FrameMove( float elapsedTime ) = 0;
-
-	private:
-		void operator delete( void* arg )	{ std::free( arg ); }
 	};
 }

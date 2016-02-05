@@ -18,7 +18,7 @@ namespace tgon {
 		typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> MiliTimePoint;
 
 	public:
-		Declare_Static_Singleton( TickSystem )
+		DECLARE_STATIC_SINGLETON( TickSystem )
 
 	public:
 		virtual void FrameMove( float elapsedTime ) override;
