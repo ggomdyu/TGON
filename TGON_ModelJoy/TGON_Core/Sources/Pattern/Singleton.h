@@ -8,20 +8,43 @@
 #pragma once
 #include <memory>
 
-/*
-	1. Constructor un-hideable singleton ( Inheritance ver. )
 
-	User can inherit through support friend this
-	but It makes desultory interface, so I hope u all using Declare_Static_Singleton instead
+/*
+	01. Constructor hideable singleton ( preprocessor ver. )
 */
 
-template <typename T>
+#define DECLARE_STATIC_SINGLETON( type )					\
+	static type* GetInstance( )										\
+	{																		\
+		static type instance;											\
+		return &instance;												\
+	}
+
+#define DECLARE_DYNAMIC_SINGLETON( type )				\
+	static const std::shared_ptr<type>& GetInstance( )		\
+	{																		\
+		static std::shared_ptr<type> instance;					\
+																			\
+		if ( !instance ) {													\
+			instance.reset( new type );								\
+		}																	\
+		return instance;													\
+	}
+
+
+/*
+	2. Constructor un-hideable singleton ( Inheritance ver. )
+
+	Use DECLARE_STATIC_SINGLETON instead this
+*/
+
+template <typename type>
 class StaticSingleton
 {
 public:
-	static T* GetInstance( )
+	static type* GetInstance( )
 	{
-		static T instance;
+		static type instance;
 		return &instance;
 	}
 
@@ -30,16 +53,16 @@ protected:
 	~StaticSingleton( )			{}
 };
 
-template <typename T>
+template <typename type>
 class DynamicSingleton
 {
 public:
-	static const std::shared_ptr<T>& GetInstance( )
+	static const std::shared_ptr<type>& GetInstance( )
 	{
-		static std::shared_ptr<T> instance;
+		static std::shared_ptr<type> instance;
 
 		if ( !instance ) {
-			instance.reset( new T );
+			instance.reset( new type );
 		}
 		return instance;
 	}
@@ -48,25 +71,3 @@ protected:
 	DynamicSingleton( )		{}
 	~DynamicSingleton( )		{}
 };
-
-/*
-	02. Constructor hideable singleton ( preprocessor ver. )
-*/
-
-#define Declare_Static_Singleton( T )							\
-	static T* GetInstance( )										\
-	{																	\
-		static T instance;											\
-		return &instance;											\
-	}
-
-#define Declare_Dynamic_Singleton( T )						\
-	static const std::shared_ptr<T>& GetInstance( )		\
-	{																	\
-		static std::shared_ptr<T> instance;					\
-																		\
-		if ( !instance ) {												\
-			instance.reset( new T );								\
-		}																\
-		return instance;												\
-	}					
