@@ -15,7 +15,7 @@ User should implement it that named <tgMain>.
 
 ※  Window
 Include "PlatformWindow.h" header.
-And make window through using 'tgon::Window' type which declared by typedef.
+And make window through using 'TGON_Window' type which declared by typedef.
 
 
 #──────────────────────────────────────#
