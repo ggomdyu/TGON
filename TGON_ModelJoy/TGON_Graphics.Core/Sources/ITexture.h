@@ -1,16 +1,14 @@
 #pragma once
-#include "tgGraphicsDevice.h"
+#include "GraphicsDevice.h"
 
 
 namespace tgon {
 
-
-class ITexture
-{
-public:
-	ITexture( )				{}
-	virtual	 ~ITexture( )	{}
-};
-
+	class ITexture
+	{
+	public:
+		ITexture( )				{}
+		virtual	 ~ITexture( )	{}
+	};
 
 }
