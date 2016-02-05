@@ -18,7 +18,7 @@ namespace tgon {
 class FTFontManager
 {
 public:
-	Declare_Static_Singleton( FTFontManager )
+	DECLARE_STATIC_SINGLETON( FTFontManager )
 
 public:
 	FT_Library GetFTLibrary( ) const { return library; }
@@ -27,8 +27,6 @@ public:
 private:
 	FTFontManager( );
 	~FTFontManager( );
-
-	void operator delete ( void* arg ) { std::free( arg ); }
 
 private:
 	FT_Library library;
