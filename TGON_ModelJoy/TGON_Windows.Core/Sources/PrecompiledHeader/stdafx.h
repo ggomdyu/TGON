@@ -14,10 +14,8 @@
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 
 #include <memory>
-#include <cassert>
 #include <functional>
+#include <cassert>
 #include <unordered_map>
 
-
-#include "WindowStyle.h"
-#include "WindowEvent.h"
+#include <Windows.h>

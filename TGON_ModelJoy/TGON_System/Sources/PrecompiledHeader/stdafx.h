@@ -11,7 +11,6 @@
 #include <functional>
 
 #include <Pattern\Singleton.h>
-#include <System\WindowSystem.h>
 #include <System\GraphicsSystem.h>
 #include <System\TickSystem.h>
 
