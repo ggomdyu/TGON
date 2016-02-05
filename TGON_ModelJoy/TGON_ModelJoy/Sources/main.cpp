@@ -5,42 +5,54 @@
 #include "CoreEngineUtil.h"
 
 #include <System\GraphicsSystem.h>
-#include <System\WindowSystem.h>
 #include <System\TickSystem.h>
 
+#include "TGraphicsDevice.h"
+#include "WindowStyleUtil.h"
+
+
 using namespace tgon;
-
-
-void OnFrameLoseFocus( )
-{
-	
-}
-
-#include "WindowsConsole.h"
+using namespace tgon::Window;
 
 
 int tgMain( int argc, char* argv[] )
 {
-	/*
-		Register system
-	*/
+	WindowStyle wndStyle = GetWindowStyleFromXML( "WindowStyle.xml" );
 
-	CoreEngine ce( );
-	//ce.RegisterSystem( new WindowSystem,  );
-	/*
 
-	CoreEngine::GetInstance( )->RegisterSystem({
-		WindowSystem::GetInstance( ),
-		GraphicsSystem::GetInstance( ),
-		TickSystem::GetInstance( )
-	});
+	// Make window
+	auto	tgWindow			( std::make_shared<TWindow>( false, wndStyle ));
+
+
+	// Make graphics device on window
+	GraphicsDeviceCreateParam gdcp;
+	gdcp.gdpt = ::GraphicsDeviceProcessType::kHardware;
+	gdcp.isFullWindow = true;
+	gdcp.resolution_x = wndStyle.width;
+	gdcp.resoultion_y = wndStyle.height;
+
+	auto	tgGraphicsDevice	( std::make_shared<TGraphicsDevice>( tgWindow, gdcp ));
 	
 
-	System::AddEventCallback( WindowEvent::LoseFocus, OnFrameLoseFocus );
+	// Register systems that will be used and window
+	//CoreEngine::GetInstance( )->Setup(
+	//			tgWindow,
+	//			{ GraphicsSystem::GetInstance( ), TickSystem::GetInstance( )}
+	//);
 
 
-	CoreEngine::GetInstance( )->Initialize( );
-	CoreEngine::GetInstance( )->FrameMove( );
-	*/
+	WindowEvent wndEvent = WindowEvent::None;
+	while ( wndEvent != WindowEvent::Destroy )
+	{
+		CoreEngine::DispatchEvent( &wndEvent );
+
+		// Idle time
+		if ( wndEvent == WindowEvent::None )
+		{
+			CoreEngine::Run( );
+			continue;
+		}
+	}
+	
 	return 0;
 }
