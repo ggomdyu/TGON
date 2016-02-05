@@ -17,7 +17,7 @@ namespace tgon {
 	class MessageManager final
 	{
 	public:
-		Declare_Static_Singleton( MessageManager )
+		DECLARE_STATIC_SINGLETON( MessageManager )
 
 	public:
 		void		FrameMove( float elapsedTime );

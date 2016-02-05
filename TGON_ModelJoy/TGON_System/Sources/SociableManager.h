@@ -8,14 +8,9 @@
 #pragma once
 #include <Pattern\Singleton.h>
 
-#include <string>
 #include <unordered_map>
-
 #include "ISociable.h"
 
-/*
-	WARNING! : DO NOT include windows header!!!!!!!
-*/
 
 namespace tgon {
 	class SociableManager final
@@ -23,14 +18,14 @@ namespace tgon {
 		typedef std::unordered_map<unsigned int, ISociable*> SociableRepo;
 
 	public:
-		Declare_Static_Singleton( SociableManager )
+		DECLARE_STATIC_SINGLETON( SociableManager )
 
 	public:
 		void FrameMove( float elapsedTime );
 
 	public:
 		void RegisterMember( _In_ ISociable* member );
-		void DispatchMessage( _In_ const SociableMessage& msg );
+		void DispatchMessage( const SociableMessage& msg );
 
 	private:
 		SociableManager( );
