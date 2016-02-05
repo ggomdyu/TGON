@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowStyle>
+
+    <Caption>TGON_ModelJoy</Caption>
+    
+    <Position
+        x="0"
+        y="0">
+    </Position>
+    
+    <Size
+        width="1000"
+        height="1000">
+    </Size>
+
+    <Attribute
+        Resizeable="0"
+        Popup="0"
+        Maximized="0"
+        Minimized="0"
+        ShowMiddle="1"
+        TopMost="0">
+    </Attribute>
+
+</WindowStyle>
