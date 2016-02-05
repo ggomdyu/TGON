@@ -1,33 +1,75 @@
 #include "stdafx.h"
 #include "IWindow.h"
 
-
-tgon::IWindow::IWindow( const WindowStyle& wndStyle ) :
-	m_wndStyle( wndStyle )
+namespace tgon {
+namespace Window
 {
-}
 
-
-tgon::IWindow::~IWindow( )
+class Eventable : public IEventable
 {
-}
+public:
+	virtual bool	PullEvent( _Out_ tgon::Window::WindowEvent* outEvent ) override;
 
+protected:
+	virtual void	SetEvent( const tgon::Window::WindowEvent wndEvent );
 
-void tgon::IWindow::AddEventCallback( unsigned int evType, const EventProc& evProc )
+private:
+	std::unordered_multiset<unsigned int>	m_evSet;
+};
+class Uneventable : public IEventable
 {
-	m_evTable.insert( std::make_pair( evType, evProc ));
-}
-
-
-void tgon::IWindow::CallEventProc( unsigned int evType )
-{
-	auto findElem = m_evTable.find( evType );
-	const auto notExistElem = m_evTable.end( );
-
-	while (( findElem != notExistElem ) && ( findElem->first == evType ))
+public:
+	virtual bool	PullEvent( _Out_ tgon::Window::WindowEvent* outEvent ) override
 	{
-		findElem->second( );
-
-		++findElem;
+		return false;
 	}
+
+protected:
+	virtual void	SetEvent( const tgon::Window::WindowEvent wndEvent )	{}
+};
+
+}
+}
+
+
+bool tgon::Window::Eventable::PullEvent( _Out_ tgon::Window::WindowEvent* outEvent )
+{
+	const auto first_iter = m_evSet.begin( );
+	const auto not_exist_iter = m_evSet.end( );
+
+	if ( first_iter != not_exist_iter )
+	{
+		*outEvent = *first_iter;
+		m_evSet.erase( m_evSet.begin( ));
+	
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+void tgon::Window::Eventable::SetEvent( const tgon::Window::WindowEvent wndEvent )
+{
+	m_evSet.insert( wndEvent );
+}
+
+
+tgon::Window::IWindow::IWindow( bool isEventable )
+{
+	if ( isEventable ) {
+		m_pEventable.reset( new Eventable );
+		//m_pEventable.reset( new Eventable );
+	}
+	else
+	{
+		m_pEventable.reset( new Uneventable );
+		//m_pEventable.reset( new Uneventable );
+	}
+}
+
+tgon::Window::IWindow::~IWindow( )
+{
 }

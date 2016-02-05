@@ -5,48 +5,49 @@
 * 최종 수정일 :
 */
 #pragma once
-#include <functional>
-#include <unordered_map>
-#include "WindowStyle.h"
+#include <memory>
+#include <unordered_set>
+
 #include "WindowEvent.h"
 
 
 namespace tgon {
+namespace Window {
 
+class IEventable
+{
+public:
+	virtual bool	PullEvent( tgon::Window::WindowEvent* outEvent ) = 0;
+	virtual void	SetEvent( const tgon::Window::WindowEvent wndEvent ) = 0;
+};
 
 class IWindow
 {
-protected:
-	typedef std::function<void()> EventProc;
-	typedef std::unordered_multimap<unsigned int, EventProc> EventProcTable;
+public:
+	bool	PullEvent( _Out_ WindowEvent* outEvent )	{ return m_pEventable->PullEvent( outEvent ); }
+
+//protected:
+	void	SetEvent( const tgon::Window::WindowEvent wndEvent )		{ m_pEventable->SetEvent( wndEvent ); }
+
 
 public:
-	virtual void		FrameMove( ) = 0;
+	virtual void	Show( ) = 0;
+	virtual void	BringToTop( ) = 0;
+	virtual void	SetPosition( const int x, const int y ) = 0;
+	virtual void	Move( const int x, const int y ) = 0;
+	virtual void	Exit( ) = 0;
 
 public:
-	virtual void		Show( ) = 0;
-	virtual void		BringToTop( ) = 0;
-	virtual void		SetPosition( int x, int y ) = 0;
-	virtual void		Move( int x, int y ) = 0;
-	virtual void		Exit( ) = 0;
-
-	void				AddEventCallback( unsigned int evType, const EventProc& evProc );
-
-public:
-	virtual const WindowEvent		GetWindowEvent( ) const = 0;
-	const WindowStyle&				GetWindowStyle( )	 const				{ return m_wndStyle; }
-
+	virtual void	GetPosition( int* x, int* y ) = 0;
 
 protected:
-	explicit			IWindow( const WindowStyle& );
-	virtual				~IWindow( ) = 0;
-
-	void 				CallEventProc( unsigned int evType );
+	IWindow( bool isEventable );
+	virtual ~IWindow( ) = 0;
 
 private:
-	WindowStyle		m_wndStyle;
-	EventProcTable		m_evTable;
+	std::unique_ptr<IEventable>	m_pEventable;
 };
 
 
+}
 }
