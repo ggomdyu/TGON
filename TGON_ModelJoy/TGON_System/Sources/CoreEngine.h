@@ -1,45 +1,44 @@
 /*
 * 작성자 : 차준호
 * 작성일 : 2015-12-07
-* 최종 수정 : 차준호
-* 최종 수정일 : 2015-01-01
+* 최종 수정 :
+* 최종 수정일 :
 */
 
 #pragma once
+#if	!defined( PLATFORM_WINDOWS_OS ) &&		\
+		!defined( PLATFORM_ANDROID_OS )
+{
+	#error	 "Your platform is not supported."
+}
+#endif
+
 #include <System\ISystem.h>
 #include <Pattern\Singleton.h>
 
 #include <vector>
+#include "TWindow.h"
 #include <initializer_list>
 
+
 namespace tgon {
-	class CoreEngine
-	{
-	public:
-		Declare_Static_Singleton( CoreEngine )
+namespace CoreEngine {
 
-		void Initialize( );
-		void FrameMove( );
+
+	void Setup( const Window::SpTWindow& pWnd );
+	void Setup( const Window::SpTWindow& pWnd, const std::initializer_list<ISystem*>& );
+
+	const tgon::Window::SpTWindow& GetWindow( );
 	
-	public:
-		void RegisterSystem( const std::initializer_list<ISystem*>& systemList );
-		
-		void Pause( );
-		void Resume( );
-		void Exit( );
+	/*
+		- Window event dispatching?
 
-	private:
-		CoreEngine( );
-		~CoreEngine( );
-		void operator delete ( void* arg ) { std::free( arg ); }
-		
-		void UpdateManager( float elapsedTime );
-		void UpdateSystem( float elapsedTime );
+		Process all of window that has message queue.
+		If there are no message to pull, return WindowEvent::None.
+	*/
+	void DispatchEvent( _Out_ tgon::Window::WindowEvent* outGlobalEvent );
+	void Run( );
 
-	private:
-		bool m_isLoopActivated;
-		bool m_isLoopExit;
 
-		std::vector<ISystem*>	m_systemRepo;
-	};
+	}
 }

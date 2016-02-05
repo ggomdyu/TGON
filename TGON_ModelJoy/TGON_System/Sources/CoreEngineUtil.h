@@ -7,7 +7,6 @@
 
 #pragma once
 #include <functional>
-#include <System\WindowSystem.h>
 #include <System\TickSystem.h>
 
 namespace tgon
@@ -16,7 +15,8 @@ namespace tgon
 	{
 		inline void	AddEventCallback( unsigned int evType, std::function<void()> evProc )
 		{
-			GetWindowSystem( )->GetWindow( ).AddEventCallback( evType, evProc );
+			abort( );
+			//::GetInstance( )->GetWindow( )->AddEventCallback( evType, evProc );
 		}
 	}
 
