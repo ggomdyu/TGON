@@ -7,7 +7,6 @@
 
 
 #pragma once
-#include "ITexture.h"
 #include "D3d9Type.h"
 #include "D3d9Texture.h"
 #include "D3d9Camera.h"
@@ -32,8 +31,9 @@ public:
 	void BeginDisplay( );
 	void EndDisplay( );
 
-	void SetTexture( const D3d9Texture& texture );
-	void SetMatrix( const D3d9Camera& camera );
+	void SetTexture( const D3d9Texture& rTexture );
+	void SetMatrix( const D3d9Camera& rCamera );
+	void SetVector( const char* pVectorStr, const D3DXVECTOR4* rVector );
 
 public:
 	const SpD3d9Effect& GetShader( ) const	{ return m_shader; };

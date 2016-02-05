@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "D3d9Shader.h"
+#include "D3d9Util.h"
 
 
 tgon::D3d9Shader::D3d9Shader( SpD3d9DeviceEx& device, const wchar_t* shaderPath ) :
@@ -14,7 +15,7 @@ tgon::D3d9Shader::D3d9Shader( SpD3d9DeviceEx& device, const wchar_t* shaderPath,
 {
 }
 
-void tgon::D3d9Shader::SetTexture( const D3d9Texture& texture )
+void tgon::D3d9Shader::SetTexture( const D3d9Texture& rTexture )
 {
 }
 
@@ -44,6 +45,10 @@ void tgon::D3d9Shader::EndDisplay( )
 }
 
 
+void tgon::D3d9Shader::SetVector( const char* pVectorStr, const D3DXVECTOR4* rVector )
+{
+	this->GetShader( )->SetVector( pVectorStr, rVector );
+}
 
 
 void tgon::D3d9Shader::SetMatrix( const D3d9Camera& camera )

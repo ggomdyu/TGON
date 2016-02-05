@@ -2,16 +2,28 @@
 #include "D3d9Camera.h"
 
 
-tgon::D3d9Camera::D3d9Camera( tgGraphicsDevice& gd ) :
-	m_d3dDevice( gd.GetD3dDevice( ))
+tgon::D3d9Camera::D3d9Camera( const tgon::TGraphicsDevice& tgSurface ) //:
+//	m_d3dDevice( tgSurface.GetD3dDevice( ))
 {
-	D3DXMatrixIdentity( &m_matWorld );
-	D3DXMatrixIdentity( &m_matView );
-	D3DXMatrixIdentity( &m_matProj );
+	//assert( m_d3dDevice.p );
 
-	this->SetupMatrix( );
+	//D3DDEVICE_CREATION_PARAMETERS d3dCreateParam;
+	//m_d3dDevice->GetCreationParameters( &d3dCreateParam );
+
+	//assert( d3dCreateParam.hFocusWindow );
+
+	//m_aspectRatio = this->GetAspectRatio( d3dCreateParam.hFocusWindow );
+
+	//D3DXMatrixIdentity( &m_matWorld );
+	//D3DXMatrixIdentity( &m_matView );
+	//D3DXMatrixIdentity( &m_matProj );
+
+	//this->SetupMatrix( );
 }
 
+tgon::D3d9Camera::D3d9Camera( const std::shared_ptr<tgon::TGraphicsDevice>& gd )
+{
+}
 
 tgon::D3d9Camera::~D3d9Camera( )
 {
@@ -51,14 +63,19 @@ void tgon::D3d9Camera::SetupView( )
 
 void tgon::D3d9Camera::SetupProjection( )
 {
-	const float aspectRatio = static_cast<float>( GetSystemMetrics( SM_CXSCREEN )) /
-								static_cast<float>( GetSystemMetrics( SM_CYSCREEN ));
-
-	D3DXMatrixPerspectiveLH( &m_matProj,
+	D3DXMatrixPerspectiveFovLH( &m_matProj,
 				D3DX_PI /4.0f, // 90 - degree
-				aspectRatio,
+				m_aspectRatio,
 				1.0f,
 				10000.0f );
 
 	m_d3dDevice->SetTransform( D3DTS_PROJECTION, &m_matProj );
+}
+
+float tgon::D3d9Camera::GetAspectRatio( HWND clientWnd )
+{
+	RECT rt;
+	GetClientRect( clientWnd, &rt );
+
+	return ( static_cast<float>( rt.right ) / static_cast<float>( rt.bottom ));
 }

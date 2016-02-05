@@ -14,34 +14,28 @@
 #include <atlbase.h>
 #include <Windows.h>
 
-#include "tgWindow.h"
+#include "TWindow.h"
 #include "D3d9Type.h"
-#include "D3d9Util.h"
 
 
 namespace tgon
 {
 
+
 class D3d9Device;
 typedef D3d9Device GraphicsDeviceImpl;
-
-
-struct D3dDeviceCreateParam : public GraphicsDeviceCreateParam
-{
-	virtual ~D3dDeviceCreateParam( ) {}
-
-	bool isFullWindow;
-	GraphicsDeviceProcessType gdpt;
-};
 
 
 class D3d9Device : public IGraphicsDevice
 {
 public:
-	explicit D3d9Device( const tgWindow& tgWnd );
-	~D3d9Device( );
+	D3d9Device( const Window::TWindow&, const GraphicsDeviceCreateParam& );
+	D3d9Device( const Window::SpTWindow&, const GraphicsDeviceCreateParam& );
+	virtual ~D3d9Device( );
 
-	virtual bool		Setup( const GraphicsDeviceCreateParam* ) override;
+	D3d9Device( const D3d9Device& ) = delete;
+	D3d9Device& operator=( const D3d9Device& ) = delete;
+
 
 	virtual void		BeginDisplay( ) override;
 	virtual void		EndDisplay( ) override;
@@ -51,12 +45,10 @@ public:
 	SpD3d9DeviceEx&		GetD3dDevice( )		{ return m_d3dDevice; }
 
 private:
-	D3d9Device( const D3d9Device& ) = delete;
-	D3d9Device& operator=( const D3d9Device& ) = delete;
+	bool	Setup( const GraphicsDeviceCreateParam& gdcp );
+	void	SetDefRenderState( );
 
-	HRESULT		CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3dBehaviorFlag,
-							D3DPRESENT_PARAMETERS& d3dpp );
-	//void			
+	HRESULT		CreateDevice( D3DDEVTYPE d3dDeviceType, DWORD d3dBehaviorFlag, D3DPRESENT_PARAMETERS& d3dpp );
 
 private:
 	SpD3d9Ex			m_d3d;
