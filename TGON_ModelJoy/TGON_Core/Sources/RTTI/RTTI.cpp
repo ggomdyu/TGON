@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "RTTI.h"
 
 RTTI::RTTI( const RTTI* parent ) :

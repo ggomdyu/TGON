@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "RTTIUtil.h"
 
 bool DynamicCast( const RTTI* from, const RTTI* to )
