@@ -21,16 +21,28 @@
   <ItemGroup>
     <ClCompile Include="Sources\IComponent.cpp" />
     <ClCompile Include="Sources\IObject.cpp" />
+    <ClCompile Include="Sources\IScene.cpp" />
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp" />
+    <ClCompile Include="Sources\SpriteComponent.cpp" />
+    <ClCompile Include="Sources\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\GameTemplateTypes.h" />
     <ClInclude Include="Sources\IComponent.h" />
     <ClInclude Include="Sources\IComponent.hpp" />
     <ClInclude Include="Sources\IObject.h" />
     <ClInclude Include="Sources\IObject.hpp" />
+    <ClInclude Include="Sources\IScene.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
-    <ClInclude Include="Sources\PrecompiledHeader\targetver.h" />
+    <ClInclude Include="Sources\SpriteComponent.h" />
+    <ClInclude Include="Sources\TransformComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Core.Platform\TGON_Core.Platform.vcxproj">
+      <Project>{7665f373-f1f9-4558-b282-05462af54119}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
+      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F3ACC939-E315-496A-858E-E33E1338F89D}</ProjectGuid>
@@ -73,18 +85,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -95,6 +111,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -121,6 +138,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

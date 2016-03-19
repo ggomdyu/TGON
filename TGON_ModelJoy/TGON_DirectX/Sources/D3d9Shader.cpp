@@ -3,19 +3,23 @@
 #include "D3d9Util.h"
 
 
-tgon::D3d9Shader::D3d9Shader( SpD3d9DeviceEx& device, const wchar_t* shaderPath ) :
-	m_shader( dxgraphics::LoadShader( device, shaderPath ))
+tgon::D3d9Shader::D3d9Shader( const SpTGraphicsDevice& device, const wchar_t* shaderPath ) :
+	m_shader( LoadShader( device->GetD3dDevice(), shaderPath ))
 {
+	assert( device.get());
+	assert( shaderPath );
 }
 
 
-tgon::D3d9Shader::D3d9Shader( SpD3d9DeviceEx& device, const wchar_t* shaderPath, const wchar_t* texturePath ) :
-	m_shader( dxgraphics::LoadShader( device, shaderPath )),
+tgon::D3d9Shader::D3d9Shader( const SpTGraphicsDevice& device, const wchar_t* shaderPath, const wchar_t* texturePath ) :
+	m_shader( LoadShader( device->GetD3dDevice(), shaderPath )),
 	m_texture( device, texturePath )
 {
+	assert( device.get());
+	assert( shaderPath );
 }
 
-void tgon::D3d9Shader::SetTexture( const D3d9Texture& rTexture )
+void tgon::D3d9Shader::SetTexture( const D3d9Texture& texture )
 {
 }
 
@@ -27,10 +31,10 @@ tgon::D3d9Shader::~D3d9Shader( )
 
 void tgon::D3d9Shader::BeginDisplay( )
 {
-	//unsigned int numPasses = 0;
+	//uint32_t numPasses = 0;
 	//GetShader( )->Begin( &numPasses, NULL );
 
-	//for ( unsigned int i = 0; i < numPasses; ++i )
+	//for ( uint32_t i = 0; i < numPasses; ++i )
 	//{
 	//	GetShader( )->BeginPass( i );
 	//}
@@ -53,7 +57,9 @@ void tgon::D3d9Shader::SetVector( const char* pVectorStr, const D3DXVECTOR4* rVe
 
 void tgon::D3d9Shader::SetMatrix( const D3d9Camera& camera )
 {
-	DxErrorException( GetShader( )->SetMatrix( "gWorldMatrix", &camera.GetWorld( )));
-	DxErrorException( GetShader( )->SetMatrix( "gViewMatrix", &camera.GetView( )));
-	DxErrorException( GetShader( )->SetMatrix( "gProjectionMatrix", &camera.GetProjection( )));
+	HRESULT result;
+
+	V( GetShader( )->SetMatrix( "gWorldMatrix", &camera.GetWorld( )));
+	V( GetShader( )->SetMatrix( "gViewMatrix", &camera.GetView( )));
+	V( GetShader( )->SetMatrix( "gProjectionMatrix", &camera.GetProjection( )));
 }

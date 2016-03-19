@@ -2,12 +2,11 @@
 #include "D3d9Quad.h"
 
 
-tgon::D3d9Quad::D3d9Quad( SpD3d9DeviceEx& gd, const wchar_t* filePath ) :
+tgon::D3d9Quad::D3d9Quad( SpTGraphicsDevice& gd, const wchar_t* filePath ) :
 	//IQuad( gd ),
 	m_d3dShader( gd, filePath )
 {
-	assert( &gd );
-	assert( filePath );
+	assert( gd.get());
 
 	if ( filePath )
 	{

@@ -2,7 +2,6 @@
 #include <iostream>
 #include <map>
 
-#include "GameTemplateTypes.h"
 #include "IComponent.h"
 
 namespace tgon {
@@ -15,15 +14,15 @@ public:
 	IObject( );
 	virtual ~IObject( );
 	
-	virtual void Initialize( )	{};
-	virtual void FrameMove( float elapsedTime );
+	virtual void Setup( ) {};
+	virtual void Run( float tickTime );
 
 public:
-	template <typename T> T* AddComponent( T* const pComponent );
+	template <typename T> T* AddComponent( T* component );
 	template <typename T> T* GetComponent( );
 
 private:
-	std::map<unsigned int, IComponent*> m_mapComponents;
+	std::map<uint32_t, IComponent*> m_components;
 };
 
 

@@ -1,5 +1,13 @@
+/*
+* 작성자 : 차준호
+* 작성일 : 2015-04-26
+* 최종 수정 :
+* 최종 수정일 :
+*/
+
+
 #pragma once
-#include "GameTemplateTypes.h"
+#include <stdint.h>
 #include "IObject.h"
 
 
@@ -13,17 +21,20 @@ public:
 	IComponent( );
 	virtual ~IComponent( ) = 0;
 
-	virtual void FrameMove( float elapsedTime ) = 0;
+	virtual void Run( float elapsedTime ) = 0;
 
 public:
-	void SetOwner( IObject* pOwner );
+	void SetOwner( IObject* const owner );
 	IObject* GetOwner( );
 
-	template <typename T> static unsigned int GetComponentKey( );
+	template <typename T>
+	static uint32_t GetIdentifier( );
 
 private:
-	IObject* m_pOwner;
+	IObject* m_owner;
 };
 
 
 }
+
+#include "IComponent.hpp"

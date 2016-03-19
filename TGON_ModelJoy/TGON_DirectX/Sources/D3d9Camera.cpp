@@ -2,27 +2,23 @@
 #include "D3d9Camera.h"
 
 
-tgon::D3d9Camera::D3d9Camera( const tgon::TGraphicsDevice& tgSurface ) //:
-//	m_d3dDevice( tgSurface.GetD3dDevice( ))
+
+tgon::D3d9Camera::D3d9Camera( const SpTGraphicsDevice& gd ) :
+	m_d3dDevice( gd->GetD3dDevice( ))
 {
-	//assert( m_d3dDevice.p );
+	assert( gd.get());
+	assert( gd->GetD3dDevice().p );
 
-	//D3DDEVICE_CREATION_PARAMETERS d3dCreateParam;
-	//m_d3dDevice->GetCreationParameters( &d3dCreateParam );
+	D3DDEVICE_CREATION_PARAMETERS d3dCreateParam;
+	m_d3dDevice->GetCreationParameters( &d3dCreateParam );
 
-	//assert( d3dCreateParam.hFocusWindow );
+	m_aspectRatio = this->GetAspectRatio( d3dCreateParam.hFocusWindow );
 
-	//m_aspectRatio = this->GetAspectRatio( d3dCreateParam.hFocusWindow );
+	D3DXMatrixIdentity( &m_matWorld );
+	D3DXMatrixIdentity( &m_matView );
+	D3DXMatrixIdentity( &m_matProj );
 
-	//D3DXMatrixIdentity( &m_matWorld );
-	//D3DXMatrixIdentity( &m_matView );
-	//D3DXMatrixIdentity( &m_matProj );
-
-	//this->SetupMatrix( );
-}
-
-tgon::D3d9Camera::D3d9Camera( const std::shared_ptr<tgon::TGraphicsDevice>& gd )
-{
+	this->SetupMatrix( );
 }
 
 tgon::D3d9Camera::~D3d9Camera( )

@@ -3,20 +3,23 @@
 
 #include <iostream>
 #include <DxErr.h>
+#include <comdef.h>
 
-#pragma comment( lib, "DxErr.lib" )
+
+// Internal function of dxerr.lib deprecated in Visual Studio 2015
+#if _MSC_VER < 1900
+	#include <DxErr.h>
+	#pragma comment( lib, "dxerr.lib" )
+#else
+	#define DXERR_LIBRARY_DEPRECATED
+#endif
 
 
-void GetDxErrorString( HRESULT hr, _Out_ std::wstring* desc,
-								   LPCWSTR fileName,
-								   LPCWSTR funcName,
-								   int line )
+std::wstring tgon::GetErrorString( LPCWSTR fileName, UINT line, HRESULT result )
 {
-	assert( FAILED( hr ));
+	assert( FAILED( result ));
+	assert( fileName );
 
-	LPCWSTR errDesc = DXGetErrorDescriptionW( hr );
-	LPCWSTR errString = DXGetErrorStringW( hr );
-	
 	/*
 		¡Ø Assemble ex
 
@@ -26,52 +29,83 @@ void GetDxErrorString( HRESULT hr, _Out_ std::wstring* desc,
 		[Line] : 32 lines
 	*/
 
-	*desc = L"DX Invoke Error : ";
-	*desc += errDesc;
-	*desc += L" [";
-	*desc += errString;
-	*desc += L"]\n";
+	std::wstring errString;
 
-	*desc += L"[Function] : ";
-	*desc += funcName;
-	*desc += L"\n";
+	errString = L"DX Invoke Error : ";
+	errString += GetErrorString( result );
+	errString += L" [";
+	errString += std::to_wstring( result );
+	errString += L"]\n";
 
-	*desc += L"[Files] : ";
-	*desc += fileName;
-	*desc += L"\n";
 
-	*desc += L"[Line] : ";
-	*desc += std::to_wstring( line );
-	*desc += L" lines\n";
+	errString += L"[Files] : ";
+	errString += fileName;
+	errString += L"\n";
+
+
+	errString += L"[Line] : ";
+	errString += std::to_wstring( line );
+	errString += L" lines\n";
+
+	return errString;
 }
 
-
-void tgon::dxerr::DxErrorExceptionW( HRESULT hr, LPCWSTR fileName, LPCWSTR funcName, int line )
+std::wstring tgon::GetErrorString( HRESULT result )
 {
-	if ( FAILED( hr ))
+#ifndef DXERR_LIBRARY_DEPRECATED
+	return std::wstring( DXGetErrorDescriptionW( result ));
+#else	
+	LPWSTR output = nullptr;
+	
+	FormatMessage( FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+				   NULL,
+				   result,
+				   MAKELANGID( LANG_ENGLISH, SUBLANG_ENGLISH_US ),
+				   reinterpret_cast<LPWSTR>( &output ),
+				   0,
+				   NULL );
+
+	if ( output == nullptr )
 	{
-		std::wstring errString;
-		GetDxErrorString( hr, &errString, fileName, funcName, line );
-
-		MessageBoxW( GetFocus( ), errString.c_str( ), L"WARNING!",
-					 MB_OK | MB_ICONEXCLAMATION );
-		abort( );
+		output = L"Unknown error";
 	}
-}
 
+	const std::wstring ret = output;
+	LocalFree( output );
 
-void tgon::dxerr::DxErrorAssertionW( HRESULT hr, LPCWSTR fileName, LPCWSTR funcName, int line )
-{
-#if defined( _DEBUG ) | defined( DEBUG )
-	DxErrorExceptionW( hr, fileName, funcName, line );
+	return ret;
 #endif
 }
 
 
-const SpD3d9Effect tgon::dxgraphics::LoadShader( const SpD3d9DeviceEx& device, const wchar_t* shaderPath )
+void tgon::DxTraceW( LPCWSTR fileName, UINT line, HRESULT result,
+						LPCWSTR msg, bool popMsgBox )
 {
-	SpD3d9Effect retShader = nullptr;
-	LPD3DXBUFFER errBuffer = nullptr;
+#if defined( DEBUG ) | defined( _DEBUG )
+	if ( FAILED( result ))
+	{
+		std::wstring errString = GetErrorString( fileName, line, result );
+
+		if ( popMsgBox )
+		{
+			MessageBoxW( GetFocus( ),
+						 errString.c_str(),
+						 L"WARNING!",
+						 MB_OK | MB_ICONEXCLAMATION );
+		}
+		else
+		{
+			OutputDebugStringW( errString.c_str( ));
+		}
+	}
+#endif
+}
+
+
+SpD3d9Effect tgon::LoadShader( const SpD3d9DeviceEx& device, const wchar_t* shaderPath )
+{
+	SpD3d9Effect retShader;
+	LPD3DXBUFFER errBuffer;
 	DWORD shaderFlag = 0;
 
 #if defined( _DEBUG ) | defined( DEBUG )
@@ -79,10 +113,10 @@ const SpD3d9Effect tgon::dxgraphics::LoadShader( const SpD3d9DeviceEx& device, c
 #endif
 
 	HRESULT hr = D3DXCreateEffectFromFileW( device, shaderPath,
-			nullptr,			// #define definition to use when compiling the shader
-			nullptr,			// ? 
+			nullptr,		// #define definition to use when compiling the shader
+			nullptr,		// ?
 			shaderFlag,
-			nullptr,			// ?
+			nullptr,		// ?
 			&retShader,
 			&errBuffer );
 
@@ -92,55 +126,169 @@ const SpD3d9Effect tgon::dxgraphics::LoadShader( const SpD3d9DeviceEx& device, c
 		errString += shaderPath;
 		errString += L']';
 
-		MessageBoxW( GetFocus( ), errString.c_str( ), L"MB_OK", MB_OK );
+		MessageBoxW( GetFocus( ),
+					 errString.c_str( ),
+					 L"MB_OK",
+					 MB_OK );
 	}
 
 	if ( errBuffer && !retShader )
 	{
-		int size = errBuffer->GetBufferSize( );
+		int32_t size = errBuffer->GetBufferSize( );
 		void* errMsg = errBuffer->GetBufferPointer( );
 
 		if ( errMsg )
 		{
-			MessageBoxA( GetFocus( ), static_cast<const char*>( errMsg ), "WARNING!",
-						MB_OK );
+			MessageBoxA( GetFocus( ),
+						 static_cast<const char*>( errMsg ),
+						 "WARNING!",
+						 MB_OK );
 		}
 	}
 
 	return retShader;
 }
 
-const SpD3d9Mesh tgon::dxgraphics::LoadMesh( const SpD3d9DeviceEx& device, const wchar_t* meshPath )
+SpD3d9Mesh tgon::LoadMesh( const SpD3d9DeviceEx& device, const wchar_t* meshPath )
 {
-	SpD3d9Mesh retMesh = nullptr;
-
-	DxErrorException(
-		D3DXLoadMeshFromXW( meshPath,
+	SpD3d9Mesh spMesh;
+	HRESULT result;
+	
+	V( D3DXLoadMeshFromXW( meshPath,
 				D3DXMESH_SYSTEMMEM,
 				device,
 				nullptr,		// I think it's useless
 				nullptr,		// Material
 				nullptr,		// Effect instance?
 				nullptr,		// Material count
-				&retMesh )
-	);
+				&spMesh
+			));
 
-	return retMesh;
+	if ( FAILED( result ))
+	{
+		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
+	}
+
+	return spMesh;
 }
 
 
-const SpD3d9Texture tgon::dxgraphics::LoadTexture( const SpD3d9DeviceEx& device, const wchar_t* texturePath )
+SpD3d9Texture tgon::LoadTexture( const SpD3d9DeviceEx& device, const wchar_t* texturePath )
 {
-	SpD3d9Texture retTexture = nullptr;
+	SpD3d9Texture spTexture;
+	HRESULT result = D3DXCreateTextureFromFileW( device, texturePath, &spTexture );
 
-	if ( FAILED( D3DXCreateTextureFromFileW( device, texturePath, &retTexture )))
+	if ( FAILED( result ))
 	{
-		std::wstring errString = L"DX Invoke Error : Failed to load texture. [";
-		errString += texturePath;
-		errString += L']';
-
-		MessageBoxW( GetFocus( ), errString.c_str( ), L"WARNING!", MB_OK );
+		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
 	}
 
-	return retTexture;
+	return spTexture;
+}
+
+
+UINT tgon::D3d9GetColorChannelBits( const D3DFORMAT fmt )
+{
+	switch ( fmt )
+	{
+	case D3DFMT_R8G8B8:
+		return 8;
+	case D3DFMT_A8R8G8B8:
+		return 8;
+	case D3DFMT_X8R8G8B8:
+		return 8;
+	case D3DFMT_R5G6B5:
+		return 5;
+	case D3DFMT_X1R5G5B5:
+		return 5;
+	case D3DFMT_A1R5G5B5:
+		return 5;
+	case D3DFMT_A4R4G4B4:
+		return 4;
+	case D3DFMT_R3G3B2:
+		return 2;
+	case D3DFMT_A8R3G3B2:
+		return 2;
+	case D3DFMT_X4R4G4B4:
+		return 4;
+	case D3DFMT_A2B10G10R10:
+		return 10;
+	case D3DFMT_A8B8G8R8:
+		return 8;
+	case D3DFMT_A2R10G10B10:
+		return 10;
+	case D3DFMT_A16B16G16R16:
+		return 16;
+	default:
+		return 0;
+	}
+}
+
+UINT tgon::D3d9GetDepthBits( const D3DFORMAT fmt )
+{
+	switch ( fmt )
+	{
+	case D3DFMT_D32F_LOCKABLE:
+	case D3DFMT_D32:
+		return 32;
+
+	case D3DFMT_D24X8:
+	case D3DFMT_D24S8:
+	case D3DFMT_D24X4S4:
+	case D3DFMT_D24FS8:
+		return 24;
+
+	case D3DFMT_D16_LOCKABLE:
+	case D3DFMT_D16:
+		return 16;
+
+	case D3DFMT_D15S1:
+		return 15;
+
+	default:
+		return 0;
+	}
+}
+
+UINT tgon::D3d9GetStencilBits( const D3DFORMAT fmt )
+{
+    switch( fmt )
+    {
+        case D3DFMT_D16_LOCKABLE:
+        case D3DFMT_D16:
+        case D3DFMT_D32F_LOCKABLE:
+        case D3DFMT_D32:
+        case D3DFMT_D24X8:
+            return 0;
+
+        case D3DFMT_D15S1:
+            return 1;
+
+        case D3DFMT_D24X4S4:
+            return 4;
+
+        case D3DFMT_D24S8:
+        case D3DFMT_D24FS8:
+            return 8;
+
+        default:
+            return 0;
+    }
+}
+
+
+bool tgon::IsDeviceAcceptable( IDirect3D9Ex* d3dInterface,
+							   D3DCAPS9* pCaps,
+							   D3DFORMAT AdapterFormat,
+							   D3DFORMAT BackBufferFormat )
+{
+	const BOOL isSucceed = d3dInterface->CheckDeviceFormat(
+					pCaps->AdapterOrdinal,
+					pCaps->DeviceType,
+					AdapterFormat,
+					D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING, // return false backbuffer formats that don't support alpha blending.
+					D3DRTYPE_TEXTURE,
+					BackBufferFormat );
+	
+	return ( isSucceed == S_OK );
 }

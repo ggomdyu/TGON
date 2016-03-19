@@ -15,42 +15,75 @@
     <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{ea8c2f40-5935-4744-997c-53249671b198}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\NewFilter1">
-      <UniqueIdentifier>{25627af6-9512-4fba-b006-e540ffd05a49}</UniqueIdentifier>
+    <Filter Include="hpp\[Object]">
+      <UniqueIdentifier>{3e147a14-a76f-4ae5-a220-ace19770573f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\[Component]">
+      <UniqueIdentifier>{f5c4f47e-caf5-4460-b784-7b82db900dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\[Scene]">
+      <UniqueIdentifier>{34d95174-8405-46d9-bdab-d05f242b08ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\[Component]\Interface">
+      <UniqueIdentifier>{f7830408-7493-406e-9942-f87149bacda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Component]">
+      <UniqueIdentifier>{d409e739-40c6-4df9-b0da-7d2dc0d0deb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Component]\Interface">
+      <UniqueIdentifier>{863bbd30-68ab-4d71-8b20-ebb6f49d2fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Object]">
+      <UniqueIdentifier>{c23630fc-c469-4ebd-aea8-fda577792807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Scene]">
+      <UniqueIdentifier>{b6f0872c-8928-42ea-be53-2328486a34a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\PrecompiledHeader\targetver.h">
-      <Filter>hpp\PrecompiledHeader</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\IObject.h">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IComponent.h">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\GameTemplateTypes.h">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\IComponent.hpp">
-      <Filter>hpp</Filter>
+      <Filter>hpp\[Object]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\IObject.hpp">
-      <Filter>hpp</Filter>
+      <Filter>hpp\[Object]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IScene.h">
+      <Filter>hpp\[Scene]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\SpriteComponent.h">
+      <Filter>hpp\[Component]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\TransformComponent.h">
+      <Filter>hpp\[Component]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IComponent.h">
+      <Filter>hpp\[Component]\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\IComponent.hpp">
+      <Filter>hpp\[Component]\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\IObject.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\IComponent.cpp">
-      <Filter>cpp</Filter>
+      <Filter>cpp\[Component]\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\SpriteComponent.cpp">
+      <Filter>cpp\[Component]</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\TransformComponent.cpp">
+      <Filter>cpp\[Component]</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IObject.cpp">
+      <Filter>cpp\[Object]</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\IScene.cpp">
+      <Filter>cpp\[Scene]</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

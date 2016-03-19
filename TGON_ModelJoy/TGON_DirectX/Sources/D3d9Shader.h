@@ -7,6 +7,7 @@
 
 
 #pragma once
+#include "TGraphicsDevice.h"
 #include "D3d9Type.h"
 #include "D3d9Texture.h"
 #include "D3d9Camera.h"
@@ -21,9 +22,9 @@ typedef D3d9Shader ShaderImpl;
 class D3d9Shader
 {
 public:
-	explicit D3d9Shader( SpD3d9DeviceEx& device, const wchar_t* shaderPath );
-	explicit D3d9Shader( SpD3d9DeviceEx& device,
-						 const wchar_t* shaderPath, const wchar_t* texturePath );
+	explicit D3d9Shader( const SpTGraphicsDevice&, const wchar_t* shaderPath );
+	explicit D3d9Shader( const SpTGraphicsDevice&, const wchar_t* shaderPath,
+							const wchar_t* texturePath );
 	virtual ~D3d9Shader( );
 
 
@@ -31,8 +32,8 @@ public:
 	void BeginDisplay( );
 	void EndDisplay( );
 
-	void SetTexture( const D3d9Texture& rTexture );
-	void SetMatrix( const D3d9Camera& rCamera );
+	void SetTexture( const D3d9Texture& );
+	void SetMatrix( const D3d9Camera& );
 	void SetVector( const char* pVectorStr, const D3DXVECTOR4* rVector );
 
 public:
@@ -40,7 +41,7 @@ public:
 
 
 private:
-	D3d9Texture	m_texture;
+	D3d9Texture		m_texture;
 	SpD3d9Effect	m_shader;
 };
 

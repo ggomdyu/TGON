@@ -7,7 +7,8 @@
 
 
 #pragma once
-#include "IQuad.h"
+//#include "IQuad.h"
+#include "TGraphicsDevice.h"
 #include "D3d9Type.h"
 #include "D3d9Shader.h"
 
@@ -22,7 +23,7 @@ typedef D3d9Quad QuadImpl;
 class D3d9Quad //: public IQuad
 {
 public:
-	explicit	D3d9Quad( SpD3d9DeviceEx& gd, const wchar_t* filePath = nullptr );
+	explicit	D3d9Quad( SpTGraphicsDevice& gd, const wchar_t* filePath = nullptr );
 	virtual		~D3d9Quad( );
 
 	virtual void	Draw( );// override;

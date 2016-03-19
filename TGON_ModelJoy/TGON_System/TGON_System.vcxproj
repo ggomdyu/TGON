@@ -35,7 +35,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -59,19 +59,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Core\TGON_Common.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -117,7 +117,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\TGON_Core\Sources;..\TGON_Platform.Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TGON_Core\Sources;..\TGON_Core.Platform\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,6 +162,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TGON_Core.Platform\TGON_Core.Platform.vcxproj">
+      <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
@@ -171,35 +174,18 @@
     <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
       <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TGON_Windows.Core\TGON_Windows.Core.vcxproj">
-      <Project>{7665f373-f1f9-4558-b282-05462af54119}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\CoreEngine.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\ISociable.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\MessageManager.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\SociableManager.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\SociableMessage.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\System\GraphicsSystem.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\System\ISystem.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Sources\System\TickSystem.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="Sources\CoreEngineUtil.cpp" />
+    <ClCompile Include="Sources\CoreEngine.cpp" />
+    <ClCompile Include="Sources\ISociable.cpp" />
+    <ClCompile Include="Sources\MessageManager.cpp" />
+    <ClCompile Include="Sources\SociableManager.cpp" />
+    <ClCompile Include="Sources\SociableMessage.cpp" />
+    <ClCompile Include="Sources\System\GraphicsSystem.cpp" />
+    <ClCompile Include="Sources\System\ISystem.cpp" />
+    <ClCompile Include="Sources\System\TickSystem.cpp" />
+    <ClCompile Include="Sources\System\WindowSystem.cpp" />
     <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -215,6 +201,7 @@
     <ClInclude Include="Sources\System\GraphicsSystem.h" />
     <ClInclude Include="Sources\System\ISystem.h" />
     <ClInclude Include="Sources\System\TickSystem.h" />
+    <ClInclude Include="Sources\System\WindowSystem.h" />
     <ClInclude Include="Sources\WindowSystemMessageType.h" />
     <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
   </ItemGroup>

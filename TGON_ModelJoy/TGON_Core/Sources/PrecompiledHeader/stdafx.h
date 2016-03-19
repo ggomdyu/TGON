@@ -5,4 +5,4 @@
 #include <vector>
 #include <memory>
 
-#include <pattern\Singleton.h>
+#include <Singleton.h>

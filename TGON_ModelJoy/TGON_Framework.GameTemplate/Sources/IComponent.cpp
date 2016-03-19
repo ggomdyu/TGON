@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "IComponent.h"
 
+
 tgon::IComponent::IComponent( )
 {
-
 }
 
 
@@ -12,13 +12,13 @@ tgon::IComponent::~IComponent( )
 }
 
 
-void tgon::IComponent::SetOwner( IObject* pOwner )
+void tgon::IComponent::SetOwner( IObject* const owner )
 {
-	m_pOwner = pOwner;
+	m_owner = owner;
 }
 
 
 tgon::IObject* tgon::IComponent::GetOwner( )
 {
-	return m_pOwner;
+	return m_owner;
 }

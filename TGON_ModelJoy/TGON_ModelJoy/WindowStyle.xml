@@ -19,7 +19,8 @@
         Maximized="0"
         Minimized="0"
         ShowMiddle="1"
-        TopMost="0">
+        TopMost="0"
+        ShowImmediately="1">
     </Attribute>
 
 </WindowStyle>

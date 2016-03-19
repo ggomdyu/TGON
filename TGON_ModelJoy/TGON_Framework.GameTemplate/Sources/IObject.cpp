@@ -13,9 +13,9 @@ tgon::IObject::~IObject( )
 
 
 
-void tgon::IObject::FrameMove( float elapsedTime )
+void tgon::IObject::Run( float elapsedTime )
 {
-	for ( const auto& iter : m_mapComponents ) {
-		iter.second->FrameMove( elapsedTime );
+	for ( const auto& iter : m_components ) {
+		iter.second->Run( elapsedTime );
 	}
 }

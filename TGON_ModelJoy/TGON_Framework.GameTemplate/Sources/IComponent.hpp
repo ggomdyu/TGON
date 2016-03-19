@@ -2,8 +2,8 @@
 #include "IComponent.h"
 
 template<typename T>
-inline unsigned int IComponent::GetComponentKey( )
+inline uint32_t tgon::IComponent::GetIdentifier( )
 {
-	static const auto typeKey( typeid( T ).hash_code( ));
-	return typeKey;
+	static const auto keyCode( typeid(T).hash_code( ));
+	return keyCode;
 }

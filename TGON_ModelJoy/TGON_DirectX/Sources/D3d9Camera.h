@@ -8,8 +8,7 @@ namespace tgon {
 class D3d9Camera
 {
 public:
-	explicit D3d9Camera( const TGraphicsDevice& gd );
-	explicit D3d9Camera( const SpGraphicsDevice& gd );
+	explicit D3d9Camera( const SpTGraphicsDevice& gd );
 	~D3d9Camera( );
 
 	void FrameMove( float elapsedTime );
@@ -31,11 +30,11 @@ private:
 private:
 	SpD3d9DeviceEx	m_d3dDevice;
 
-	D3DXMATRIX		m_matWorld;
-	D3DXMATRIX		m_matView;
-	D3DXMATRIX		m_matProj;
+	D3DXMATRIX	m_matWorld;
+	D3DXMATRIX	m_matView;
+	D3DXMATRIX	m_matProj;
 
-	float					m_aspectRatio;
+	float m_aspectRatio;
 };
 
 
