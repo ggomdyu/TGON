@@ -10,6 +10,7 @@
 // Standard
 #include <cassert>
 #include <memory>
+#include <stdint.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -17,15 +18,7 @@
 #include <unordered_set>
 
 // etc¡¦
-#include <Pattern\Uncopyable.h>
-#include <Pattern\Singleton.h>
+#include <Singleton.h>
 
 #include "WindowEvent.h"
 #include "WindowStyle.h"
-
-
-#if defined( _WIN32 ) | defined( _MSC_VER ) /* using VC++? */
-	#define TGON_MEMSORT_16 __declspec( align( 16 ))
-#else
-#define TGON_MEMSORT_16
-#endif
