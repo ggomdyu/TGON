@@ -31,20 +31,20 @@ enum ThicknessTable
 class FTFontFace
 {
 public:
-	FTFontFace( const char* fontPath, int size );
+	FTFontFace( const char* fontPath, int32_t size );
 	~FTFontFace( );
 
 	operator	FT_Face( ) const		{ return m_face; }
 
 public:
-	int			GetHeight( ) const		{ return m_size; }
+	int32_t			GetHeight( ) const		{ return m_size; }
 	FT_Face	GetFace( ) const		{ return m_face; }
 
 private:
 	FT_Face m_face;
 
 	bool m_isKerning;
-	int m_size;
+	int32_t m_size;
 };
 
 

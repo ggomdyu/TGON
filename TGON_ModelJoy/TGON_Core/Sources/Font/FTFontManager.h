@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include <pattern\Singleton.h>
+#include <Singleton.h>
 #include <memory>
 
 #include <ft2build.h>

@@ -2,7 +2,7 @@
 #include "FTFontFace.h"
 
 
-tgon::FTFontFace::FTFontFace( const char* fontPath, int size )
+tgon::FTFontFace::FTFontFace( const char* fontPath, int32_t size )
 {
 	// Get font face, not family
 	FT_Error err = FT_New_Face( GetFTFontManager( )->GetFTLibrary( ),
