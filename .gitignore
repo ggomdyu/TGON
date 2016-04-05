@@ -14,7 +14,10 @@
 [Dd]ebug\
 [Rr]elease\
 [Bb]in/
+[Ll]ib/
 [Oo]bj/
+[Tt]hirdparty/
+[Rr]esource/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -49,6 +52,7 @@
 
 # Visual C++ cache files
 ipch/
+*.db
 *.aps
 *.ncb
 *.opensdf
@@ -155,3 +159,8 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/TGON_ModelJoy/include/boost_1_60_0/boost
+/TGON_ModelJoy/include/boost_1_60_0/boost
+*.db
+*.db
+/TGON_ModelJoy/lib
