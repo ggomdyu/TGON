@@ -21,13 +21,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -37,16 +37,18 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)\Include;..\include\freetype;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\FBX\x86\debug;$(DXSDK_DIR)\Lib\x86;..\Lib\freetype\x86;$(IncludePath);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -65,13 +67,14 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TGON_USE_PRECOMPILED_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <IgnoreAllDefaultLibraries>
@@ -99,28 +102,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\main.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
+    <ClCompile Include="Source\main.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp" />
+    <ClCompile Include="Source\ModelScene.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h" />
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+    <ClInclude Include="Source\ModelScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON_Graphics.Core\TGON_Graphics.Core.vcxproj">
-      <Project>{b2022c3b-6449-47c9-a1ab-217177f67ea8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON_Platform.Core\TGON_Platform.Core.vcxproj">
-      <Project>{074b46c4-dfd9-4505-a84f-7a32be057e16}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
-      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON_DirectX\TGON_DirectX.vcxproj">
-      <Project>{b5f066ee-b082-4a67-acf4-bb4df03a01d3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON_System\TGON_System.vcxproj">
+    <Xml Include="GraphicsStyle.xml" />
+    <Xml Include="WindowStyle.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON_Framework.System\TGON_Framework.System.vcxproj">
       <Project>{a011083e-7574-48b8-8ea6-db825418f088}</Project>
     </ProjectReference>
   </ItemGroup>

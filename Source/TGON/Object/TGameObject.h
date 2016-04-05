@@ -1,6 +1,31 @@
 #pragma once
-#include "IObject.h"
-#include <TConsole.h>
+#include "TObject.h"
+#include <map>
+
+#include "../Component/IComponent.h"
+#include "../Console/TConsole.h"
+
+
+namespace tgon
+{
+
+
+class TGameObject : public TObject
+{
+public:
+	TGameObject( );
+	virtual ~TGameObject( );
+
+public:
+	template <typename T> T* AddComponent( T* component );
+	template <typename T> T* GetComponent( );
+
+private:
+	std::map<uint32_t, IComponent*> m_components;
+};
+
+
+}
 
 
 template <typename T>

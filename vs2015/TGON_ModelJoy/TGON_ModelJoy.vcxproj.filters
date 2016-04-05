@@ -17,16 +17,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\PrecompiledHeader\stdafx.cpp">
-      <Filter>cpp\PrecompiledHeader</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\main.cpp">
+    <ClCompile Include="Source\main.cpp">
       <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModelScene.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\PrecompiledHeader\stdafx.h">
+    <ClInclude Include="Source\ModelScene.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="GraphicsStyle.xml" />
+    <Xml Include="WindowStyle.xml" />
   </ItemGroup>
 </Project>

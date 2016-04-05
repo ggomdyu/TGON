@@ -8,9 +8,6 @@
     <Filter Include="cpp\PrecompiledHeader">
       <UniqueIdentifier>{649c6d57-965e-44da-b831-01e9c223a957}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Device">
-      <UniqueIdentifier>{db23f653-8c8d-4b4f-9940-ecf53460e7de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp">
       <UniqueIdentifier>{8fcef444-76bf-4c42-801c-379b281209a9}</UniqueIdentifier>
       <Extensions>h;hpp</Extensions>
@@ -18,14 +15,17 @@
     <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{8cea1578-68ba-4f5e-9800-679fe5f94418}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Device">
-      <UniqueIdentifier>{1cba1cae-f206-49e9-862f-a3ed1b48aa23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Misc">
-      <UniqueIdentifier>{84c47631-3a64-4be9-91e8-25d9229d0d1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\[Misc]">
       <UniqueIdentifier>{59a0af22-4d87-4874-ad8b-51a0f81f456d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Core]">
+      <UniqueIdentifier>{db23f653-8c8d-4b4f-9940-ecf53460e7de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\[Core]">
+      <UniqueIdentifier>{1cba1cae-f206-49e9-862f-a3ed1b48aa23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\[Misc]">
+      <UniqueIdentifier>{84c47631-3a64-4be9-91e8-25d9229d0d1e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,25 +33,31 @@
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Device.cpp">
-      <Filter>cpp\Device</Filter>
+      <Filter>cpp\[Core]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Util.cpp">
-      <Filter>cpp\Device</Filter>
+      <Filter>cpp\[Core]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Camera.cpp">
-      <Filter>cpp\Misc</Filter>
+      <Filter>cpp\[Misc]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Mesh.cpp">
-      <Filter>cpp\Misc</Filter>
+      <Filter>cpp\[Misc]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Quad.cpp">
-      <Filter>cpp\Misc</Filter>
+      <Filter>cpp\[Misc]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Shader.cpp">
-      <Filter>cpp\Misc</Filter>
+      <Filter>cpp\[Misc]</Filter>
     </ClCompile>
     <ClCompile Include="Sources\D3d9Texture.cpp">
-      <Filter>cpp\Misc</Filter>
+      <Filter>cpp\[Misc]</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d92DSprite.cpp">
+      <Filter>cpp\[Misc]</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\D3d9Enum.cpp">
+      <Filter>cpp\[Core]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,10 +68,10 @@
       <Filter>hpp\[Misc]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\D3d9Device.h">
-      <Filter>hpp\Device</Filter>
+      <Filter>hpp\[Core]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\D3d9Util.h">
-      <Filter>hpp\Device</Filter>
+      <Filter>hpp\[Core]</Filter>
     </ClInclude>
     <ClInclude Include="Sources\D3d9Texture.h">
       <Filter>hpp\[Misc]</Filter>
@@ -81,6 +87,12 @@
     </ClInclude>
     <ClInclude Include="Sources\D3d9Shader.h">
       <Filter>hpp\[Misc]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d92DSprite.h">
+      <Filter>hpp\[Misc]</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\D3d9Enum.h">
+      <Filter>hpp\[Core]</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

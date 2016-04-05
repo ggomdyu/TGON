@@ -1,21 +1,24 @@
-#include "stdafx.h"
+#include "PrecompiledHeader.h"
 #include "D3d9Util.h"
 
+#include "../Console/TConsole.h"
+
+#include <cassert>
 #include <iostream>
-#include <DxErr.h>
-#include <comdef.h>
 
 
 // Internal function of dxerr.lib deprecated in Visual Studio 2015
-#if _MSC_VER < 1900
+#if _MSC_VER >= 1900
+	#define TGON_DXERR_DEPRECATED
+#else
 	#include <DxErr.h>
 	#pragma comment( lib, "dxerr.lib" )
-#else
-	#define DXERR_LIBRARY_DEPRECATED
 #endif
 
 
-std::wstring tgon::GetErrorString( LPCWSTR fileName, UINT line, HRESULT result )
+std::wstring tgon::GetErrorString( LPCWSTR fileName,
+								   UINT line,
+								   HRESULT result )
 {
 	assert( FAILED( result ));
 	assert( fileName );
@@ -50,36 +53,40 @@ std::wstring tgon::GetErrorString( LPCWSTR fileName, UINT line, HRESULT result )
 	return errString;
 }
 
+
 std::wstring tgon::GetErrorString( HRESULT result )
 {
-#ifndef DXERR_LIBRARY_DEPRECATED
+#ifndef TGON_DXERR_DEPRECATED
 	return std::wstring( DXGetErrorDescriptionW( result ));
 #else	
-	LPWSTR output = nullptr;
-	
-	FormatMessage( FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
-				   NULL,
-				   result,
-				   MAKELANGID( LANG_ENGLISH, SUBLANG_ENGLISH_US ),
-				   reinterpret_cast<LPWSTR>( &output ),
-				   0,
-				   NULL );
+	LPWSTR errBuf = nullptr;
 
-	if ( output == nullptr )
+	FormatMessageW( FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+				    NULL,
+				    result,
+				    MAKELANGID( LANG_ENGLISH, SUBLANG_ENGLISH_US ),
+				    reinterpret_cast<LPWSTR>( &errBuf ),
+				    0,
+				    NULL );
+
+	if ( !errBuf )
 	{
-		output = L"Unknown error";
+		TLOG( L"Failed to invoke FormatMessage." );
 	}
 
-	const std::wstring ret = output;
-	LocalFree( output );
+	const std::wstring ret = errBuf;
+	LocalFree( errBuf );
 
 	return ret;
 #endif
 }
 
 
-void tgon::DxTraceW( LPCWSTR fileName, UINT line, HRESULT result,
-						LPCWSTR msg, bool popMsgBox )
+void tgon::DxTraceW( LPCWSTR fileName,
+					 UINT line,
+					 HRESULT result,
+					 LPCWSTR msg,
+					 bool popMsgBox )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
 	if ( FAILED( result ))
@@ -134,7 +141,7 @@ SpD3d9Effect tgon::LoadShader( const SpD3d9DeviceEx& device, const wchar_t* shad
 
 	if ( errBuffer && !retShader )
 	{
-		int32_t size = errBuffer->GetBufferSize( );
+		//int32_t size = errBuffer->GetBufferSize( );
 		void* errMsg = errBuffer->GetBufferPointer( );
 
 		if ( errMsg )
