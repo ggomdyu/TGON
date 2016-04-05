@@ -164,3 +164,4 @@ $RECYCLE.BIN/
 *.db
 *.db
 /TGON_ModelJoy/lib
+*.opendb
