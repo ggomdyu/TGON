@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\Application\Windows\WindowsApplication.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Console\Layered\LayeredConsole.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Console\Windows\WindowsConsole.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Font\FTFontFace.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Font\FTFontManager.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Device.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Util.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Main\Windows\WindowsMain.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Math\Layered\LayeredMath.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Math\Matrix4x4.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Math\Windows\WindowsMath.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\String\TString.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Thread\TThreadPool.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Time\TTime.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Window\TWindow.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Window\WindowStyle.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindow.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\XML\TXML.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\Application\TApplicationTypes.h" />
+    <ClInclude Include="..\..\Source\TGON\Application\Layered\LayeredApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Application\TApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Compiler\Compiler.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Config\Compiler\SyntaxCompatible.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\Platform.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformFwd.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformGraphics.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformProperty.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformSIMD.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Config\Property\WindowsProperty.h" />
+    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Console\TConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Console\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Font\FTFontFace.h" />
+    <ClInclude Include="..\..\Source\TGON\Font\FTFontManager.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\d3d9device.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\D3d9Util.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsDeviceProp.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphicsDevice.h" />
+    <ClInclude Include="..\..\Source\TGON\Main\TMain.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Math\TMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Vector3D.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Windows\TMathSSE2.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Object\TObject.h" />
+    <ClInclude Include="..\..\Source\TGON\Object\TGameObject.h" />
+    <ClInclude Include="..\..\Source\TGON\Pattern\Singleton.h" />
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+    <ClInclude Include="..\..\Source\TGON\String\TString.h" />
+    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.h" />
+    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Time\TTime.h" />
+    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\Layered\LayeredWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\TWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\WindowEvent.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\WindowStyle.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\XML\TXML.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\TGON\Math\Vector3D.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TGON_Core</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON_Common.props" />
+    <Import Project="..\TGON_Libraries.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
+      <AdditionalOptions>/Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>freetype262MTd.lib;</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\TGON_Platform_Core\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>freetype262MT.lib;tinyxml2-vc140-mt.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
