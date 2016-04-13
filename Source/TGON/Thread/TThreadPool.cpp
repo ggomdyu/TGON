@@ -10,7 +10,7 @@ tgon::TThreadPool::TThreadPool( std::size_t numThread ) :
 {
 	for ( std::size_t i =0; i <numThread; ++i )
 	{
-		m_threadQueue.emplace_back(
+		m_threadQueue.push_back(
 				std::thread( &TThreadPool::InfiniteLoop, this )
 			);
 	}
