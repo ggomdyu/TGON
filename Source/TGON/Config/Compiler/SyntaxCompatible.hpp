@@ -1,14 +1,15 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-03-14
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 2016-03-14
+* Latest author :
+* Latest date :
 * Description : Make compatible the syntax of C++ to lower version compilers that are supported in upper.
 */
 
 
 #pragma once
 #include "../Platform/Platform.h"
+#include "Config/Compiler/Compiler.hpp"
 #include <boost/config.hpp>
 
 
@@ -49,24 +50,27 @@
 /*
 	TLS ( Thread local storage )
 */
-#ifdef BOOST_MSVC // Using Visual Studio?
-	#if ( BOOST_MSVC >= 1900 )
+#ifdef TGON_COMPILER_MSVC // Using Visual Studio?
+	#if ( _MSC_VER >= 1900 )
 		#define TGON_THREAD_LOCAL thread_local
 	#else
 		#define TGON_THREAD_LOCAL static __declspec( thread )
 	#endif
-#elif defined( BOOST_GCC ) // Using gcc?
-	#define TGON_THREAD_LOCAL __thread
 #else
-	#define TGON_THREAD_LOCAL
+	#define TGON_THREAD_LOCAL thread_local
 #endif
 
 
 /*
 	inline
 */
-#define TGON_FORCEINLINE BOOST_FORCEINLINE
-#define TGON_NOINLINE BOOST_NOINLINE
+#ifdef TGON_COMPILER_MSVC
+	#define TGON_FORCEINLINE __forceinline
+#elif defined( TGON_COMPILER_GNUC
+	#define TGON_FORCEINLINE __attribute__(( always_inline ))
+#else
+	#define TGON_FORCEINLINE inline
+#endif
 
 
 /*
