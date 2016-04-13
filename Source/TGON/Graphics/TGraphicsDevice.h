@@ -1,8 +1,8 @@
 /*
-* Author : 차준호
+* Author : Junho-Cha
 * Date : 2016-01-08
-* 최종 수정 :
-* 최종 수정일 : 
+* Latest author :
+* Latest date : 
 * Description : Polymorphic graphics type
 */
 

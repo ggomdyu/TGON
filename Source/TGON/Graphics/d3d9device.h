@@ -1,8 +1,8 @@
 /*
-* 작성자 : 김태우
-* 작성일 : 2015-04-26
-* 최종 수정 : 차준호
-* 최종 수정일 : 2016-01-17
+* Author : Taewoo-Kim
+* Date : 2015-04-26
+* Latest author : Junho-Cha
+* Latest date : 2016-01-17
 */
 
 
