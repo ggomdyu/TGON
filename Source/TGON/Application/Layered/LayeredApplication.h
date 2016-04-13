@@ -1,8 +1,8 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-03-20
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 2016-03-20
+* Latest author :
+* Latest date :
 * Description : Abstracted platform API & Util
 */
 
@@ -27,9 +27,6 @@ private:
 
 	virtual void GetScreenSize( int32_t* const width,
 								int32_t* const height ) = 0;
-
-	virtual void GetCursorPosition( int32_t* const x,
-									int32_t* const y ) = 0;
 
 	virtual struct TSystemBatteryInfo GetPowerInfo( ) = 0;
 };
