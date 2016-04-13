@@ -19,26 +19,11 @@ const wchar_t tgon::WindowsWindow::WndClassName[] = L"TGON_Window";
 
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
+	LayeredWindow( wndStyle ),
 	m_msgCallback( wndStyle.msgCallback ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
-	// Register window class to global table.
-	bool isSucceed = ( wndStyle.msgCallback ) ?
-				RegisterClass( wndStyle, EventableMsgProc ) :
-				RegisterClass( wndStyle, UneventableMsgProc );
-
-	if ( !isSucceed &&
-		 GetLastError() != ERROR_CLASS_ALREADY_EXISTS )
-	{
-		MessageBoxW( this->GetWindowHandle(), L"Failed to invoke tgon::RegisterWindow.", L"WARNING!",
-				MB_OK | MB_ICONEXCLAMATION );
-		abort();
-	}
-
-	
-	this->CreateWindowForm( wndStyle ); // CreateWindowEx will be invoked.
-	this->AdditionalInit( wndStyle );
 }
 
 tgon::WindowsWindow::~WindowsWindow( )
@@ -116,7 +101,29 @@ std::wstring tgon::WindowsWindow::GetCaption( ) const
 	return caption;
 }
 
-void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle ) 
+void tgon::WindowsWindow::LazyInitialize( )
+{
+	const WindowStyle& wndStyle = this->GetWindowStyle( );
+
+	// Register window class to global table.
+	bool isSucceed = ( wndStyle.msgCallback ) ?
+				RegisterClass( wndStyle, EventableMsgProc ) :
+				RegisterClass( wndStyle, UneventableMsgProc );
+
+	if ( !isSucceed &&
+		 GetLastError() != ERROR_CLASS_ALREADY_EXISTS )
+	{
+		MessageBoxW( this->GetWindowHandle(), L"Failed to invoke tgon::RegisterWindow.", L"WARNING!",
+				MB_OK | MB_ICONEXCLAMATION );
+		abort();
+	}
+
+	
+	this->CreateWindowForm( wndStyle ); // CreateWindowEx will be invoked.
+	this->AdditionalInit( wndStyle );
+}
+
+void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 {
 	// set coordinates of window
 	uint32_t x = wndStyle.x;
@@ -197,12 +204,7 @@ LRESULT WINAPI tgon::WindowsWindow::EventableMsgProc(
 		LPARAM lParam )
 {
 	/*
-		TODO: DANGEROUS CODE - Repair this casting
-
-		@ Here are two ways to solve problem:
-		1. Delay start of message pumping
-		2. Lazy initialization of window; User must call init function
-		   when created 'TWindow'.
+		Casting problem solved by lazy initialization.
 	*/
 	TWindow* extraMemAsWindow = reinterpret_cast<TWindow*>(
 		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));

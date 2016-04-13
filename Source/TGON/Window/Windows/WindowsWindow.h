@@ -1,8 +1,8 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2015-11-12
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 2015-11-12
+* Latest author :
+* Latest date :
 */
 
 #pragma once
@@ -81,6 +81,9 @@ public:
 	/*
 		@ Internal work
 	*/
+protected:
+	virtual void LazyInitialize( ) override;
+
 private:
 	void CreateWindowForm( const struct WindowStyle& );
 	void AdditionalInit( const struct WindowStyle& );
