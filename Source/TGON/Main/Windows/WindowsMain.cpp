@@ -3,12 +3,7 @@
 #include "../../Main/TMain.h"
 
 #include <Windows.h>
-#include <clocale>
 #include <crtdbg.h>
-
-#include "../../String/TString.h"
-#include "../../Console/TConsole.h"
-
 
 #ifdef _DEBUG
 	#define _CRTDBG_MAP_ALLOC
@@ -20,11 +15,10 @@
 
 
 int WINAPI WinMain(
-		_In_ HINSTANCE hInstance,
-		_In_ HINSTANCE hPrevInstance,
-		_In_ LPSTR	   cmdLine,
-		_In_ int	   cmdShow
-	)
+	HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPSTR cmdLine,
+	int cmdShow )
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
