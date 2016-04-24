@@ -1,15 +1,17 @@
 /*
 * Author : Junho-Cha
-* Date : 2016-03-20
+* Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : Abstracted Windows API & Util
+* Description : Abstracte Windows syetem API
 */
 
 #pragma once
 #include "../Layered/LayeredApplication.h"
 
-#include <minwindef.h>
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#undef WIN32_LEAN_AND_MEAN
 
 
 namespace tgon
@@ -29,14 +31,14 @@ protected:
 	virtual ~WindowsApplication( ) {}
 
 public:
-	virtual void DispatchEvent( _Out_ enum struct WindowEvent* const ) override;
-	
-	HINSTANCE GetInstanceHandle( ) const;
-
-	virtual void GetScreenSize( _Out_ int32_t* const width,
-								_Out_ int32_t* const height ) override;
-
+	virtual bool DispatchEvent(
+		_Out_ enum struct WindowEvent* const ) override;
 	virtual struct TSystemBatteryInfo GetPowerInfo( ) override;
+	virtual void GetScreenSize(
+		_Out_ int32_t* width,
+		_Out_ int32_t* height ) override;
+
+	HINSTANCE GetInstanceHandle( ) const;
 
 private:
 	HINSTANCE m_instanceHandle;
