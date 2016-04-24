@@ -1,6 +1,6 @@
 /*
 * Author : Junho-Cha
-* Date : 2016-04-01
+* Date : 04/01/2016
 * Latest author :
 * Latest date :
 */
@@ -10,4 +10,5 @@
 
 #ifdef TGON_PLATFORM_WINDOWS
 	#include "../../Application/Windows/WindowsApplication.h"
+#elif TGON_PLATFORM_ANDROID
 #endif

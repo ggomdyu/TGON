@@ -14,26 +14,18 @@ namespace tgon
 {
 
 #ifdef TGON_PLATFORM_WINDOWS
-	class WindowsCursor;
-	using CursorImpl = WindowsCursor;
 	class WindowsWindow;
 	using WindowImpl = WindowsWindow;
 	class WindowsApplication;
 	using ApplicationImpl = WindowsApplication;
-	class WindowsMath;
-	using MathImpl = WindowsMath;
+	class WindowsCursor;
+	using CursorImpl = WindowsCursor;
+	class WindowsPlatformMath;
+	using MathImpl = WindowsPlatformMath;
 	class WindowsConsole;
 	using ConsoleImpl = WindowsConsole;
 
 #elif TGON_PLATFORM_ANDROID
-	class AndroidCursor;
-	using CursorImpl = AndroidCursor;
-	class AndroidWindow;
-	using WindowImpl = AndroidWindow;
-	class AndroidApplication;
-	using ApplicationImpl = AndroidApplication;
-	class AndroidPlatformMath;
-	using MathImpl = AndroidPlatformMath;
 
 #elif TGON_PLATFORM_LINUX
 
@@ -41,7 +33,10 @@ namespace tgon
 
 	class TWindow;
 	using SpTWindow = std::shared_ptr<TWindow>;
+	using WpTWindow = std::weak_ptr<TWindow>;
 
-	class TGraphicsDevice;
-	using SpTGraphicsDevice = std::shared_ptr<TGraphicsDevice>;
+	class TGraphics;
+	using SpTGraphics = std::shared_ptr<TGraphics>;
+	using WpTGraphics = std::weak_ptr<TGraphics>;
+
 }
