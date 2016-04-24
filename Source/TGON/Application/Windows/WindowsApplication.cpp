@@ -5,21 +5,23 @@
 #include "../../Application/TApplicationTypes.h"
 
 
-void tgon::WindowsApplication::DispatchEvent( _Out_ WindowEvent* const globalEvent )
+bool tgon::WindowsApplication::DispatchEvent( _Out_ WindowEvent* const globalEvent )
 {
 	MSG msg;
-	BOOL isMsgExist = PeekMessage( &msg, NULL, 0, 0, PM_REMOVE );
+	BOOL isMsgExist = PeekMessageW( &msg, NULL, 0, 0, PM_REMOVE );
 
 	if ( isMsgExist )
 	{
-		TranslateMessage( &msg );
-		DispatchMessage( &msg );
+		//TranslateMessage( &msg ); // Process WM_CHAR
+		DispatchMessageW( &msg );
 
 		*globalEvent = static_cast<WindowEvent>( msg.message );
+		return true;
 	}
 	else
 	{
 		*globalEvent = WindowEvent::None;
+		return false;
 	}
 }
 
