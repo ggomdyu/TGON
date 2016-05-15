@@ -5,22 +5,32 @@
 #include "../../Application/TApplicationTypes.h"
 
 
-bool tgon::WindowsApplication::DispatchEvent( _Out_ WindowEvent* const globalEvent )
+tgon::WindowsApplication::WindowsApplication( ) :
+	m_instanceHandle( GetModuleHandle( NULL ))
 {
-	MSG msg;
-	BOOL isMsgExist = PeekMessageW( &msg, NULL, 0, 0, PM_REMOVE );
+}
+
+tgon::WindowsApplication::~WindowsApplication( )
+{
+}
+
+
+bool tgon::WindowsApplication::DispatchEvent(
+	_Out_ WindowEvent* outEvent )
+{
+	BOOL isMsgExist = PeekMessageW( &m_msg, NULL, 0, 0, PM_REMOVE );
 
 	if ( isMsgExist )
 	{
-		//TranslateMessage( &msg ); // Process WM_CHAR
-		DispatchMessageW( &msg );
+		::TranslateMessage( &m_msg ); // Process WM_CHAR
+		::DispatchMessageW( &m_msg );
 
-		*globalEvent = static_cast<WindowEvent>( msg.message );
+		*outEvent = static_cast<WindowEvent>( m_msg.message );
 		return true;
 	}
 	else
 	{
-		*globalEvent = WindowEvent::None;
+		*outEvent = WindowEvent::None;
 		return false;
 	}
 }
@@ -28,7 +38,7 @@ bool tgon::WindowsApplication::DispatchEvent( _Out_ WindowEvent* const globalEve
 tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
 {
 	SYSTEM_POWER_STATUS sps;
-	GetSystemPowerStatus( &sps );
+	::GetSystemPowerStatus( &sps );
 
 	TSystemBatteryInfo adapter;
 	adapter.batteryFlag = sps.BatteryFlag;

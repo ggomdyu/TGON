@@ -15,23 +15,8 @@
     <Filter Include="hpp\PrecompiledHeader">
       <UniqueIdentifier>{baeb6555-1e1a-415c-ad1d-fc9fd3476786}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Main">
-      <UniqueIdentifier>{6784ea74-021d-49db-abee-4adf72d5c7f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Main\Windows">
-      <UniqueIdentifier>{d8f54abe-42be-4cf6-997d-bf6fb9d76965}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cpp\XML">
       <UniqueIdentifier>{239f0d29-f3aa-43fc-b768-dfcf46d8f64f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Window">
-      <UniqueIdentifier>{9cc9c168-7526-416c-bea0-cd7576381320}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Time">
-      <UniqueIdentifier>{9c3a26ca-7464-469b-bf43-fcd78d3b9137}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Thread">
-      <UniqueIdentifier>{1a438798-1a3d-4f5e-bb4a-709f1c444f20}</UniqueIdentifier>
     </Filter>
     <Filter Include="cpp\String">
       <UniqueIdentifier>{074ef806-c4b9-4272-a63b-719ad3483621}</UniqueIdentifier>
@@ -39,41 +24,8 @@
     <Filter Include="cpp\Math">
       <UniqueIdentifier>{255089ba-94af-4830-bb5b-fb421c8f06b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Math\Windows">
-      <UniqueIdentifier>{708662b9-990c-4b08-9c06-7c4ab113ed8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Window\Windows">
-      <UniqueIdentifier>{27fc740b-609e-4bd9-8fbf-01e10fe71cd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Font">
-      <UniqueIdentifier>{5e8e935f-c559-475d-90aa-7e79b2a1132b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Application">
-      <UniqueIdentifier>{141fb476-6a97-4456-8386-1ca8faf633e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Application\Windows">
-      <UniqueIdentifier>{b59b19ae-8918-4e2a-8c77-ca82d3eaf14d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Console">
-      <UniqueIdentifier>{98ffb6de-4aa4-468e-bd0d-61a496055061}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\Font">
       <UniqueIdentifier>{6818217b-07f7-4d95-b0ea-7e622b956c66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Math">
-      <UniqueIdentifier>{6b5a27c9-44a5-4cae-8cf6-bb5ea96f6707}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Math\Windows">
-      <UniqueIdentifier>{b6982a1e-cd8d-4936-9f52-53ec61aeb6af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\String">
-      <UniqueIdentifier>{ce431be6-b3ce-46f5-a00e-3780ccce44e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Thread">
-      <UniqueIdentifier>{9fa3badd-9f2f-4d5d-9795-41c3d56ce887}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Time">
-      <UniqueIdentifier>{10431034-0228-47ed-86a7-3fb511ef445f}</UniqueIdentifier>
     </Filter>
     <Filter Include="hpp\Utility">
       <UniqueIdentifier>{cc371d9a-28eb-4062-beab-6f89373c117c}</UniqueIdentifier>
@@ -81,116 +33,62 @@
     <Filter Include="hpp\XML">
       <UniqueIdentifier>{543c1723-1cd5-4ff6-8a03-330c19ac9ae0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Window">
-      <UniqueIdentifier>{e60c3dc4-6edc-40d3-9f29-cab735ede4a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Window\Windows">
-      <UniqueIdentifier>{d1cfcac9-e058-4238-a227-f85748441004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Console">
-      <UniqueIdentifier>{ea284e9f-7b3e-403f-a01e-8784952e23ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Application">
-      <UniqueIdentifier>{32addf03-fce9-4a55-80b9-354a539701a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Application\Windows">
-      <UniqueIdentifier>{726446ad-689f-437d-8336-35a66709cdce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Main">
-      <UniqueIdentifier>{2d4316fd-4d89-4d85-9f8b-89e37b196139}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Graphics">
-      <UniqueIdentifier>{aeb51f5b-3988-4cc3-b756-0683904565ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Console\Windows">
-      <UniqueIdentifier>{361972c9-ef4b-4a28-9e7d-868ea6561df1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Console\Windows">
-      <UniqueIdentifier>{9a13ad06-60ae-4f24-b997-438920b8fae4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\※ DEPRECATED">
-      <UniqueIdentifier>{1a4dbe28-6de8-465d-90b2-1c5cece5a659}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Object">
-      <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Object">
-      <UniqueIdentifier>{c0d0bfaa-5aa3-444a-9dac-1a6638e07028}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\Component">
       <UniqueIdentifier>{1c4dd76c-fd2b-4505-a95f-75d78f7ad4d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Math\Layered">
-      <UniqueIdentifier>{d3a8e893-ead9-4a86-a435-b0c6e8bb0bb6}</UniqueIdentifier>
+    <Filter Include="hpp\String">
+      <UniqueIdentifier>{ce431be6-b3ce-46f5-a00e-3780ccce44e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Console\Layered">
-      <UniqueIdentifier>{03c11370-0162-42e8-8fee-f66317de08f2}</UniqueIdentifier>
+    <Filter Include="cpp\Component">
+      <UniqueIdentifier>{63e744c4-4a38-4a9e-9ff0-73aaf73c1c77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Application\Layered">
-      <UniqueIdentifier>{6e7b7f98-d05f-4785-ab04-2af7196cc2b8}</UniqueIdentifier>
+    <Filter Include="hpp\Core">
+      <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Console\Layered">
-      <UniqueIdentifier>{5ce5263c-d56c-47a0-b432-37a526ccab79}</UniqueIdentifier>
+    <Filter Include="cpp\Core">
+      <UniqueIdentifier>{c0d0bfaa-5aa3-444a-9dac-1a6638e07028}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Window\Layered">
-      <UniqueIdentifier>{e29c1dd1-f3bc-4e93-9969-f2dad980503e}</UniqueIdentifier>
+    <Filter Include="cpp\Font">
+      <UniqueIdentifier>{bb6d95b9-5b17-4cfb-a090-b99114cd52d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Config">
-      <UniqueIdentifier>{fd384b5d-4e56-4849-bf26-460ea9eecf07}</UniqueIdentifier>
+    <Filter Include="hpp\Error">
+      <UniqueIdentifier>{11bcc1c2-ff26-4e77-8eb8-44a926b0e080}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Config\Compiler">
-      <UniqueIdentifier>{2d919df1-61e4-405a-be5b-0c618c581cd2}</UniqueIdentifier>
+    <Filter Include="cpp\Error">
+      <UniqueIdentifier>{e01f4bbf-21a5-4c7b-94ef-6b9aee1c5840}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Config\Property">
-      <UniqueIdentifier>{ffcf9f04-64f2-4882-a590-672b7544ded7}</UniqueIdentifier>
+    <Filter Include="cpp\Math\Generic">
+      <UniqueIdentifier>{e4e3e948-3ee7-4c1b-85f4-d3a3ff031556}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Config\Platform">
-      <UniqueIdentifier>{caeefa79-5c8c-498b-97b5-42fbc5e903db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Graphics\DirectX9">
-      <UniqueIdentifier>{7f6e1904-0bf3-4d97-a7c8-d27b6ab743ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Math\Layered">
-      <UniqueIdentifier>{d6a19919-5a3f-4013-84de-e9ad66c18b58}</UniqueIdentifier>
+    <Filter Include="cpp\Math\Windows">
+      <UniqueIdentifier>{a6a8954d-f04a-4d10-ba72-7ba9e168125a}</UniqueIdentifier>
     </Filter>
     <Filter Include="cpp\Graphics">
-      <UniqueIdentifier>{e0bdec55-5bfb-48fc-8072-253752f081a9}</UniqueIdentifier>
+      <UniqueIdentifier>{1c1c5e35-42ec-40f7-baf8-ac8fa21527f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics">
+      <UniqueIdentifier>{04099287-5a36-45c3-ac93-f48cf77d4400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics\Interface">
+      <UniqueIdentifier>{19516d59-a464-4146-94bf-adbd44d2719d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics\Direct3D9">
+      <UniqueIdentifier>{ef2defee-8742-473a-bb21-3bdd18d53111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Graphics\Direct3D9">
+      <UniqueIdentifier>{25357fa0-21f4-4f4a-bc2d-ced3af454cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Math">
+      <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Math\Generic">
+      <UniqueIdentifier>{5c3c6d55-72bc-4dba-98b3-f5484b96dce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Math\Windows">
+      <UniqueIdentifier>{1fa73270-af04-4dd3-a1da-96df2bb5496c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Font\FTFontFace.cpp">
-      <Filter>cpp\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Font\FTFontManager.cpp">
-      <Filter>cpp\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Thread\TThreadPool.cpp">
-      <Filter>cpp\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Time\TTime.cpp">
-      <Filter>cpp\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\TWindow.cpp">
-      <Filter>cpp\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\WindowStyle.cpp">
-      <Filter>cpp\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.cpp">
-      <Filter>cpp\Window\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindow.cpp">
-      <Filter>cpp\Window\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Main\Windows\WindowsMain.cpp">
-      <Filter>cpp\Main\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Application\Windows\WindowsApplication.cpp">
-      <Filter>cpp\Application\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\Windows\WindowsConsole.cpp">
-      <Filter>cpp\Console\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
@@ -203,23 +101,74 @@
     <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp">
       <Filter>hpp\XML</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Math\Windows\WindowsMath.cpp">
-      <Filter>cpp\Math\Windows</Filter>
+    <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp">
+      <Filter>hpp\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Math\Layered\LayeredMath.cpp">
-      <Filter>cpp\Math\Layered</Filter>
+    <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp">
+      <Filter>cpp\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\Layered\LayeredConsole.cpp">
-      <Filter>cpp\Console\Layered</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\TCamera.cpp">
+      <Filter>cpp\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Device.cpp">
-      <Filter>hpp\Graphics\DirectX9</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\TGameObject.cpp">
+      <Filter>cpp\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Util.cpp">
+    <ClCompile Include="HDCGuard.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Font\FTFontFace.cpp">
+      <Filter>cpp\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Font\FTFontManager.cpp">
+      <Filter>cpp\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Math\TVector3.cpp">
+      <Filter>cpp\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Math\TMatrix4x4.cpp">
+      <Filter>cpp\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.cpp">
+      <Filter>cpp\Math\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Error\TErrCode.cpp">
+      <Filter>cpp\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\TGraphics.cpp">
       <Filter>cpp\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Math\Matrix4x4.cpp">
-      <Filter>hpp\Math</Filter>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Mesh.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Quad.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Shader.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\TStringHash.cpp">
+      <Filter>cpp\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,60 +177,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Font\FTFontManager.h">
       <Filter>hpp\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Pattern\Singleton.h">
-      <Filter>hpp\※ DEPRECATED</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
-      <Filter>hpp\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Main\TMain.h">
-      <Filter>hpp\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\TMath.h">
-      <Filter>hpp\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Time\TTime.h">
-      <Filter>hpp\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\WindowEvent.h">
-      <Filter>hpp\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.h">
-      <Filter>hpp\Application\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\Windows\WindowsConsole.h">
-      <Filter>hpp\Console\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\TApplication.h">
-      <Filter>hpp\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\TConsole.h">
-      <Filter>hpp\Console</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.h">
-      <Filter>hpp\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.hpp">
-      <Filter>hpp\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\TWindow.h">
-      <Filter>hpp\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.h">
-      <Filter>hpp\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.h">
-      <Filter>hpp\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\WindowStyle.h">
-      <Filter>hpp\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsDeviceProp.h">
-      <Filter>hpp\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphicsDevice.h">
-      <Filter>hpp\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
@@ -295,106 +190,95 @@
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h">
       <Filter>hpp\XML</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Object\TObject.h">
-      <Filter>hpp\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Object\TGameObject.h">
-      <Filter>hpp\Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h">
       <Filter>hpp\Component</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Vector3D.h">
+    <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h">
+      <Filter>hpp\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TCamera.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="HDCGuard.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TTypeId.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Math\TMath.h">
       <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
+      <Filter>hpp\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Math\TVector3.h">
+      <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Math\TMatrix4x4.h">
+      <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.h">
+      <Filter>hpp\Math\Generic</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Math\Windows\TMathSSE2.h">
       <Filter>hpp\Math\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsMath.h">
+    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsPlatformMath.h">
       <Filter>hpp\Math\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.hpp">
-      <Filter>hpp\Application\Windows</Filter>
+    <ClInclude Include="..\..\Source\TGON\Error\TErrCode.h">
+      <Filter>hpp\Error</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\Layered\LayeredApplication.h">
-      <Filter>hpp\Application\Layered</Filter>
+    <ClInclude Include="..\..\Source\TGON\Error\TErrCodeUtil.h">
+      <Filter>hpp\Error</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.h">
-      <Filter>hpp\Console\Layered</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.hpp">
-      <Filter>hpp\Console\Layered</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.h">
-      <Filter>hpp\Math\Layered</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.hpp">
-      <Filter>hpp\Math\Layered</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Layered\LayeredWindow.h">
-      <Filter>hpp\Window\Layered</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformWindow.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformApplication.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformConsole.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformFwd.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformMath.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformProperty.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformSIMD.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\Platform.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Property\WindowsProperty.h">
-      <Filter>hpp\Config\Property</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Compiler\SyntaxCompatible.hpp">
-      <Filter>hpp\Config\Compiler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Compiler\Compiler.hpp">
-      <Filter>hpp\Config\Compiler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\TApplicationTypes.h">
-      <Filter>hpp\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformGraphics.h">
-      <Filter>hpp\Config\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.hpp">
-      <Filter>hpp\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Graphics\d3d9device.h">
-      <Filter>hpp\Graphics\DirectX9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Graphics\D3d9Util.h">
+    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphics.h">
       <Filter>hpp\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.h">
-      <Filter>hpp\Math</Filter>
+    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsStyle.h">
+      <Filter>hpp\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.hpp">
-      <Filter>hpp\Math</Filter>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Interface\IGraphics.h">
+      <Filter>hpp\Graphics\Interface</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\Source\TGON\Math\Vector3D.hpp">
-      <Filter>hpp\Math</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Fwd.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TStringHash.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

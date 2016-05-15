@@ -1,46 +1,79 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-04-02
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 04/02/2016
+* Latest author :
+* Latest date :
 * Description :
 */
 
 
 #pragma once
 #include <map>
-#include "../Config/Compiler/SyntaxCompatible.hpp"
+#include "../Core/TObject.h"
+#include "../System/ISystem.h"
+#include "../Core/TSingleton.h"
 #include "../Window/TWindow.h"
-#include "../Object/TObject.h"
 
 
 namespace tgon
 {
 
 
-class WindowSystem final : public TObject
+class WindowSystem : 
+	public ISystem
 {
 public:
-	WindowSystem( );
-	~WindowSystem( );
+	TGON_OBJECT( WindowSystem, ISystem )
+	TGON_SINGLETON( WindowSystem )
+
+	using WindowRepo = std::map<std::wstring, WpTWindow>;
+public:
+	using iterator = WindowRepo::iterator;
+	using const_iterator = WindowRepo::const_iterator;
 
 public:
-	void AddWindow( const SpTWindow& );
-	const SpTWindow GetWindow( const std::wstring& );
+	virtual void Update( float tickTime ) override;
+	
+	void AddWindow( const SpTWindow& window );
+	const WpTWindow& GetWindow( const std::wstring& wndName );
+	
+	iterator begin( );
+	iterator end( );
+
+protected:
+	WindowSystem( );
+	virtual ~WindowSystem( );
 
 private:
-	std::map<std::wstring, SpTWindow> m_wndRepo;
+	WindowRepo m_wndRepo;
 };
 
 
-
-TGON_FORCEINLINE void WindowSystem::AddWindow( const SpTWindow& window )
+inline void WindowSystem::AddWindow(
+	const SpTWindow& window )
 {
-	m_wndRepo.insert( std::make_pair(
-			window->GetCaption( ).c_str( ),
-			window ));
+	m_wndRepo[window->GetCaption().c_str()] = window;
 }
 
+inline const tgon::WpTWindow& tgon::WindowSystem::GetWindow(
+	const std::wstring& wndName )
+{
+	return m_wndRepo[wndName.c_str()];
+}
+
+inline void tgon::WindowSystem::Update( float tickTime )
+{
+}
+
+inline WindowSystem::iterator tgon::WindowSystem::begin( )
+{
+	return m_wndRepo.begin( );
+}
+
+inline WindowSystem::iterator tgon::WindowSystem::end( )
+{
+	return m_wndRepo.end( );
+}
 
 
 }

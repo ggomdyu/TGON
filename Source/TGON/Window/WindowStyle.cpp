@@ -10,18 +10,18 @@ using namespace tinyxml2;
 tgon::WindowStyle tgon::WindowStyle::ParseFromXML(
 		const wchar_t* const xmlPath )
 {
-	::TiXMLDocument doc;
+	TiXMLDocument doc;
 	if ( doc.LoadFile( xmlPath ) != ::XMLError::XML_NO_ERROR )
 	{
 		return WindowStyle( );
 	}
 
 
-	::XMLElement* root = doc.RootElement();
+	XMLElement* root = doc.RootElement();
 	WindowStyle wndStyle;
 
 	// Caption
-	::XMLElement* sibling =
+	XMLElement* sibling =
 		FindElementFromParent( L"Caption", root );
 	wndStyle.caption = sibling->GetText( );
 

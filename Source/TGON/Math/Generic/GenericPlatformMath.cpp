@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.h"
 #include "GenericPlatformMath.h"
 
-
-TGON_STATIC_CONSTEXPR_VALUE_IMPL( tgon::GenericPlatformMath::PI, 3.141592654f )
+const float tgon::GenericPlatformMath::EPSILON = 0.0001f;
+const float tgon::GenericPlatformMath::PI = 3.141592654f;
 
 
 #define W 32
@@ -29,20 +29,21 @@ TGON_STATIC_CONSTEXPR_VALUE_IMPL( tgon::GenericPlatformMath::PI, 3.141592654f )
 
 #define FACT 2.32830643653869628906e-10
 
-
 namespace
 {
 	uint32_t state_i = 0;
 	uint32_t STATE[R];
 
-	struct WELLRNG_Initializer {
-		WELLRNG_Initializer( ) {
+	struct WELLRNG_Initializer
+	{
+		WELLRNG_Initializer( )
+		{
 			state_i = 0;
 			uint32_t init[R];
 			for ( int32_t j = 0; j < R; j++ )
 				STATE[j] = init[j];
 		}
-	} wi;
+	} g_wi;
 }
 
 float tgon::GenericPlatformMath::WELLRNG512a( ) 
@@ -59,8 +60,9 @@ float tgon::GenericPlatformMath::WELLRNG512a( )
 	return static_cast<float>( STATE[state_i]*FACT );
 }
 
-
-uint32_t tgon::GenericPlatformMath::x65599Hash( const char* str, size_t length ) 
+uint32_t tgon::GenericPlatformMath::x65599Hash(
+	const char* str,
+	size_t length ) 
 {
 	uint32_t hash = 0;
 	for ( uint32_t i = 0; i < length; ++i )
@@ -69,15 +71,4 @@ uint32_t tgon::GenericPlatformMath::x65599Hash( const char* str, size_t length )
 	}
 
 	return hash^( hash >> 16 );
-}
-
-uint32_t tgon::GenericPlatformMath::SDBMHash( const char* str, size_t length ) 
-{
-	uint32_t hash = 0;
-	for ( uint32_t i = 0; i < length; ++i )
-	{
-		hash = tolower( str[i] ) + ( hash << 6 ) + ( hash << 16 ) - hash;
-	}
-
-	return hash;
 }

@@ -1,6 +1,6 @@
 /*
 * Author : Junho-Cha
-* Date : 2015-11-12
+* Date : 11/12/2015
 * Latest author :
 * Latest date :
 */

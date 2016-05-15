@@ -1,29 +1,29 @@
 #include "PrecompiledHeader.h"
 #include "WindowsWindow.h"
 
-#include "../../Config/Platform/PlatformProperty.h"
+#include "../../Platform/PlatformProperty.h"
 #include "../../Window/WindowStyle.h"
 #include "../../Window/WindowEvent.h"
 #include "../../Window/Windows/WindowsWindowUtil.h"
 #include "../../Window/TWindow.h"
+#include "../../Application/TApplication.h"
 #include "../../Console/TConsole.h"
-#include "../../String/TString.h"
 
+#include <Windows.h>
 
 #ifdef TGON_SUPPORT_DWMAPI
 	#include <dwmapi.h>
 	#pragma comment( lib, "dwmapi.lib" )
 #endif
 
-const wchar_t tgon::WindowsWindow::WndClassName[] = L"TGON_Window";
-
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	LayeredWindow( wndStyle ),
+	m_wndStyle( wndStyle ),
 	m_msgCallback( wndStyle.msgCallback ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
+	// LazyInitialization will invoked in TWindow
 }
 
 tgon::WindowsWindow::~WindowsWindow( )
@@ -33,29 +33,29 @@ tgon::WindowsWindow::~WindowsWindow( )
 
 void tgon::WindowsWindow::BringToTop( ) 
 {
-	const HWND fg_wndHandle( GetForegroundWindow( ));
+	/*
+		@ WARNING
+		Windows 98/Me: The system restricts which processes can set the foreground window.
+		DO NOT USE SetFocus or SetForegroundWindow functions for .
+	*/
 
-	// Is my window foreground?
-	if ( fg_wndHandle == m_wndHandle )
-		return;
+	const HWND fgWndHandle( GetForegroundWindow( ));
 
-	// Otherwise, bring Process ID
-	const DWORD my_wndProcessID = GetWindowThreadProcessId(
-		m_wndHandle, NULL );
-	const DWORD fg_wndProcessID = GetWindowThreadProcessId(
-		fg_wndHandle, NULL );
+	
+	const DWORD currProcessId = GetWindowThreadProcessId( m_wndHandle, nullptr );
+	const DWORD fgProcessId = GetWindowThreadProcessId( fgWndHandle, nullptr );
 
-	// Attach input
-	if ( AttachThreadInput( my_wndProcessID, fg_wndProcessID, TRUE ))
+
+	if ( AttachThreadInput( currProcessId, fgProcessId, TRUE ))
 	{
 		SetForegroundWindow( m_wndHandle );
 		BringWindowToTop( m_wndHandle );
 
-		AttachThreadInput( my_wndProcessID, fg_wndProcessID, TRUE );
+		AttachThreadInput( currProcessId, fgProcessId, TRUE );
 	}
 }
 
-void tgon::WindowsWindow::FlashWindow( )
+void tgon::WindowsWindow::Flash( )
 {
 	FLASHWINFO fwi {0};
 	fwi.cbSize = sizeof( FLASHWINFO );
@@ -67,8 +67,9 @@ void tgon::WindowsWindow::FlashWindow( )
 	FlashWindowEx( &fwi );
 }
 
-void tgon::WindowsWindow::GetPosition( int32_t* const x,
-									   int32_t* const y ) const 
+void tgon::WindowsWindow::GetPosition(
+	_Out_ int32_t* x,
+	_Out_ int32_t* y ) const 
 {
 	RECT rt;
 	GetWindowRect( this->GetWindowHandle( ), &rt );
@@ -77,11 +78,13 @@ void tgon::WindowsWindow::GetPosition( int32_t* const x,
 	*y = rt.top;
 }
 
-void tgon::WindowsWindow::GetSize( int32_t* const width,
-								   int32_t* const height ) const 
+void tgon::WindowsWindow::GetSize(
+	int32_t* width,
+	int32_t* height ) const 
 {
 	/*
-		This RECT contains caption range
+		@ WARNING!
+		WindowRect contains caption range
 	*/
 	RECT rt;
 	GetWindowRect( m_wndHandle, &rt );
@@ -92,70 +95,80 @@ void tgon::WindowsWindow::GetSize( int32_t* const width,
 
 std::wstring tgon::WindowsWindow::GetCaption( ) const 
 {
-	const uint32_t length =
+	/*
+		@ TODO
+		Optimize here ( Every calling time, Dynamic allocation is occuring )
+	*/
+
+	const int32_t length =
 		GetWindowTextLengthW( m_wndHandle )+1; // +1 is for \0
 
 	std::wstring caption( length, L'\0' );
-
 	GetWindowTextW( m_wndHandle, &caption[0], length );
+
 	return caption;
 }
 
-void tgon::WindowsWindow::LazyInitialize( )
+
+void tgon::WindowsWindow::LazyInitialization( )
 {
-	const WindowStyle& wndStyle = this->GetWindowStyle( );
+	this->CreateWindowForm( m_wndStyle );
 
-	// Register window class to global table.
-	bool isSucceed = ( wndStyle.msgCallback ) ?
-				RegisterClass( wndStyle, EventableMsgProc ) :
-				RegisterClass( wndStyle, UneventableMsgProc );
-
-	if ( !isSucceed &&
-		 GetLastError() != ERROR_CLASS_ALREADY_EXISTS )
-	{
-		MessageBoxW( this->GetWindowHandle(), L"Failed to invoke tgon::RegisterWindow.", L"WARNING!",
-				MB_OK | MB_ICONEXCLAMATION );
-		abort();
-	}
-
-	
-	this->CreateWindowForm( wndStyle ); // CreateWindowEx will be invoked.
-	this->AdditionalInit( wndStyle );
+	// Initialization After window created ( Which needs a Created window )
+	this->AdditionalInit( m_wndStyle );
 }
 
-void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
+void tgon::WindowsWindow::CreateWindowForm( 
+	const WindowStyle& wndStyle )
 {
-	// set coordinates of window
-	uint32_t x = wndStyle.x;
-	uint32_t y = wndStyle.y;
+	// Set coordinates of window
+	int32_t x = wndStyle.x;
+	int32_t y = wndStyle.y;
 
 	if ( wndStyle.ShowMiddle )
 	{
-		x = static_cast<uint32_t>( GetSystemMetrics( SM_CXSCREEN )*0.5 -
-								   wndStyle.width*0.5 );
-		y = static_cast<uint32_t>( GetSystemMetrics( SM_CYSCREEN )*0.5 -
-								   wndStyle.height*0.5 );
+		x = static_cast<int32_t>(
+				GetSystemMetrics( SM_CXSCREEN )*0.5 -
+				wndStyle.width*0.5 );
+		y = static_cast<int32_t>(
+				GetSystemMetrics( SM_CYSCREEN )*0.5 -
+				wndStyle.height*0.5 );
 	}
-
 
 	// Convert WindowStyle to platform-dependent style.
 	DWORD normalStyle, exStyle;
-	convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
+	Convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
 
 
-	// Window creation
+
+	// Register Window class to Global table.
+	std::wstring newClassName;
+	bool isSucceed = this->RegisterMyClass( m_wndStyle, &newClassName );
+
+	if ( !isSucceed )
+	{
+		MessageBoxW(
+			this->GetWindowHandle( ),
+			L"Failed to invoke tgon::RegisterWindow.",
+			L"WARNING!",
+			MB_OK | MB_ICONEXCLAMATION );
+
+		abort( );
+	}
+
+
+	// Create a Window.
 	m_wndHandle = CreateWindowExW(
-			exStyle,
-			WindowsWindow::WndClassName,
-			wndStyle.caption.c_str(),
-			normalStyle,
-			x, y, wndStyle.width, wndStyle.height,
-			nullptr,
-			nullptr,
-			GetModuleHandle( NULL ),
-			this
-		);
-
+		exStyle,
+		newClassName.c_str(),
+		wndStyle.caption.c_str(),
+		normalStyle,
+		x, y, wndStyle.width, wndStyle.height,
+		nullptr,
+		nullptr,
+		GetModuleHandle( NULL ),
+		this
+	);
 
 	if ( !m_wndHandle )
 	{
@@ -166,48 +179,82 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 		abort( );
 	}
 
-
 	/*
 		- Why use SetWindowLongPtrW?
 
 		CallbackMsgProc can't access member of WindowsWindow.
 		So WindowsWindow class uses <Extra memory>, which have provided when window had created.
 	*/
-	SetWindowLongPtrW( m_wndHandle, GWLP_USERDATA,
-					   reinterpret_cast<LONG_PTR>( this )); 
+	SetWindowLongPtrW(
+		m_wndHandle,
+		GWLP_USERDATA, // Save window ptr to window-personal storage
+		reinterpret_cast<LONG_PTR>( this )
+	); 
 }
 
-void tgon::WindowsWindow::AdditionalInit( const WindowStyle& wndStyle ) 
+void tgon::WindowsWindow::AdditionalInit(
+	const WindowStyle& wndStyle ) 
 {
 	if ( wndStyle.SupportWindowTransparency )
 	{
-		SetLayeredWindowAttributes( m_wndHandle, NULL, 255, LWA_ALPHA );
+		SetLayeredWindowAttributes( m_wndHandle, NULL, 255,
+			LWA_ALPHA );
 	}
 
+#ifdef TGON_SUPPORT_DWMAPI
 	if ( wndStyle.SupportPerPixelTransparency )
 	{
-		BOOL isCompEnabled = FALSE;
-		DwmIsCompositionEnabled( &isCompEnabled );
+		BOOL isCompoEnabled = FALSE;
+		DwmIsCompositionEnabled( &isCompoEnabled );
 
-		if ( isCompEnabled == TRUE )
+		if ( isCompoEnabled == TRUE )
 		{
 			MARGINS margins{ -1, -1, -1, -1 };
 			DwmExtendFrameIntoClientArea( m_wndHandle, &margins );
 		}
 	}
+#endif
+}
+
+bool tgon::WindowsWindow::RegisterMyClass(
+	const WindowStyle& wndStyle,
+	std::wstring* outClassName )
+{
+	const HINSTANCE instanceHandle =
+		TApplication::Get( )->GetInstanceHandle( );
+
+	
+	//	Each windows must have diffrent class name.
+	std::wstring defClassName = L"TGON_Window";
+	static int numCreatedWindow = 0;
+	defClassName += std::to_wstring( numCreatedWindow );
+	*outClassName = defClassName;
+
+
+	// Fill the Window class information.
+	WNDCLASSEX wcex {0};
+	wcex.cbSize = sizeof( wcex );
+	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
+	wcex.hCursor = LoadCursor( NULL, IDC_ARROW );
+	wcex.hIcon = LoadIcon( NULL, IDI_APPLICATION );
+	wcex.hInstance = instanceHandle;
+	wcex.lpfnWndProc = ( wndStyle.msgCallback ) ?
+		EventableMsgProc : // Custom message proc
+		UneventableMsgProc; // Default message proc; more fast than above
+	wcex.lpszClassName = defClassName.c_str( );
+	wcex.style = CS_DBLCLKS;
+
+	return RegisterClassEx( &wcex ) != 0;
 }
 
 LRESULT WINAPI tgon::WindowsWindow::EventableMsgProc(
-		HWND wndHandle,
-		UINT msg,
-		WPARAM wParam,
-		LPARAM lParam )
+	HWND wndHandle,
+	UINT msg,
+	WPARAM wParam,
+	LPARAM lParam )
 {
-	/*
-		Casting problem solved by lazy initialization.
-	*/
-	TWindow* extraMemAsWindow = reinterpret_cast<TWindow*>(
-		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
+	TWindow* extraMemAsWindow = 
+		reinterpret_cast<TWindow*>( GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 
 	if ( extraMemAsWindow )
 	{
@@ -222,7 +269,7 @@ LRESULT WINAPI tgon::WindowsWindow::EventableMsgProc(
 		}
 		else
 		{
-			// Callback function returned zero
+			// m_msgCallback returned 0 or less
 			return 0;
 		}
 	}
@@ -232,19 +279,17 @@ LRESULT WINAPI tgon::WindowsWindow::EventableMsgProc(
 				LPCREATESTRUCT( lParam )->lpCreateParams );
 	
 		extraMemAsWindow->m_msgCallback(
-				extraMemAsWindow,
-				WindowEvent::Create
-			);
+			extraMemAsWindow, WindowEvent::Create );
 	}
 
 	return DefWindowProc( wndHandle, msg, wParam, lParam );
 }
 
 LRESULT WINAPI tgon::WindowsWindow::UneventableMsgProc(
-		HWND wndHandle,
-		UINT msg,
-		WPARAM wParam,
-		LPARAM lParam )
+	HWND wndHandle,
+	UINT msg,
+	WPARAM wParam,
+	LPARAM lParam )
 {
 	if ( msg == WM_DESTROY )
 	{

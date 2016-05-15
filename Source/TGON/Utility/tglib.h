@@ -1,21 +1,21 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-01-28
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 01/28/2016
+* Latest author :
+* Latest date :
 */
 
 
 #pragma once
 #include <iostream>
-#include "../Compiler/SyntaxCompatible.hpp"
+#include "../Config/SyntaxCompatible.h"
 
 namespace tgon 
 {
 
 
 template<typename T, std::size_t N>
-TGON_CONSTEXPR size_t array_size( T(&)[N] ) 
+TGON_CONSTEXPR std::size_t array_size( T(&)[N] ) 
 {
 	return N;
 }

@@ -1,8 +1,8 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-03-27
-* 최종 수정 : 
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 03/27/2016
+* Latest author : 
+* Latest date :
 */
 
 #pragma once
@@ -10,31 +10,39 @@
 #include <stdint.h>
 
 
-namespace tgon {
-
-
+namespace tgon
+{
 	/*
-		Encoder
+		Convert encoding
 	*/
-	// Convert variable-length character to fixed-length
+	// UTF-8
 	// cf. https://ko.wikipedia.org/wiki/UTF-8
-	void utf8_to_utf16( _In_ const char* const utf8Src,
-						_In_ const int32_t length,
-						_Out_ wchar_t* const utf16Dest );
-	//void utf16_to_utf8( const wchar_t* const utf16Src,
-	//					const int32_t length,
-	//					_Out_ char* const utf8Dest );
-
-	// wrapped function
-	std::wstring utf8_to_utf16( const std::string& utf8Src );
-	//std::string utf16_to_utf8( const std::wstring& utf16Src );
-
+	
+	void UTF8_to_UTF16( 
+		_In_ const char* utf8Src, 
+		_Out_ wchar_t* utf16Dest );
+	
+	std::wstring UTF8_to_UTF16( 
+		_In_ const std::string& utf8Src );
 
 
 	/*
 		Shell
 	*/
-	void GetFileNameFromPath( _Out_ std::wstring* outSrc,
-							  bool isDeleteFileExtension );
+	void GetFileNameFromPath(
+		std::wstring* dest,
+		bool deleteFileExtension );
+
+
+	// UTF-16
+	// cf.
+	/*void UTF16_to_UTF8(
+		_In_ const wchar_t* utf16Src,
+		const int32_t length,
+		_Out_ char* utf8Dest );*/
+
+	/*std::wstring UTF16_to_UTF8(
+		_In_ const std::wstring& utf16Src );
+	*/
 
 }

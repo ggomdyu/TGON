@@ -1,13 +1,13 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2016-03-14
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 03/14/2016
+* Latest author :
+* Latest date :
 * Description :
 */
 
 #pragma once
-#include "../Config/Platform/PlatformMath.h"
+#include "../Platform/PlatformMath.h"
 
 namespace tgon
 {

@@ -1,9 +1,9 @@
-#pragma once
 #include "PrecompiledHeader.h"
-#include "../../Main/TMain.h"
+#include "../TMain.h"
 
 #include <Windows.h>
 #include <crtdbg.h>
+
 
 #ifdef _DEBUG
 	#define _CRTDBG_MAP_ALLOC
@@ -15,10 +15,10 @@
 
 
 int WINAPI WinMain(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR cmdLine,
-	int cmdShow )
+	HINSTANCE instanceHandle,
+	HINSTANCE prevInstanceHandle,
+	LPSTR commandLine,
+	int commandShow )
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );

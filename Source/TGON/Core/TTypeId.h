@@ -8,13 +8,14 @@
 #pragma once
 #include <string>
 #include "../Math/TMath.h"
+#include "../Config/Build.h"
 
 
 namespace tgon
 {
 
 
-class TTypeId
+class TGON_API TTypeId
 {
 public:
 	TTypeId( const char* name ) :

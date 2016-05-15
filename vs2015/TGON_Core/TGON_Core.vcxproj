@@ -19,29 +19,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Application\Windows\WindowsApplication.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\Layered\LayeredConsole.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Console\Windows\WindowsConsole.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\TCamera.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\TGameObject.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\TStringHash.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Error\TErrCode.cpp" />
     <ClCompile Include="..\..\Source\TGON\Font\FTFontFace.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Font\FTFontManager.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Device.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\D3d9Util.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Main\Windows\WindowsMain.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Math\Layered\LayeredMath.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Math\Matrix4x4.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Math\Windows\WindowsMath.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Mesh.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Quad.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Shader.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Graphics\TGraphics.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Math\TMatrix4x4.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Math\TVector3.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -49,91 +58,54 @@
     <ClCompile Include="..\..\Source\TGON\String\TString.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Thread\TThreadPool.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Time\TTime.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\TWindow.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\WindowStyle.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindow.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\XML\TXML.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp" />
+    <ClCompile Include="HDCGuard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Application\TApplicationTypes.h" />
-    <ClInclude Include="..\..\Source\TGON\Application\Layered\LayeredApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Application\TApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.hpp" />
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Compiler\Compiler.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Config\Compiler\SyntaxCompatible.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\Platform.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformFwd.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformGraphics.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformSIMD.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Platform\PlatformWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Config\Property\WindowsProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Console\Layered\LayeredConsole.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Console\TConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Console\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TCamera.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TStringHash.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TTypeId.h" />
+    <ClInclude Include="..\..\Source\TGON\Error\TErrCode.h" />
+    <ClInclude Include="..\..\Source\TGON\Error\TErrCodeUtil.h" />
     <ClInclude Include="..\..\Source\TGON\Font\FTFontFace.h" />
     <ClInclude Include="..\..\Source\TGON\Font\FTFontManager.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\d3d9device.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\D3d9Util.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsDeviceProp.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphicsDevice.h" />
-    <ClInclude Include="..\..\Source\TGON\Main\TMain.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Layered\LayeredMath.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Matrix4x4.hpp" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Fwd.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsStyle.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\Interface\IGraphics.h" />
+    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphics.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\TMatrix4x4.h" />
     <ClInclude Include="..\..\Source\TGON\Math\TMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Vector3D.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\TVector3.h" />
     <ClInclude Include="..\..\Source\TGON\Math\Windows\TMathSSE2.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Object\TObject.h" />
-    <ClInclude Include="..\..\Source\TGON\Object\TGameObject.h" />
-    <ClInclude Include="..\..\Source\TGON\Pattern\Singleton.h" />
+    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsPlatformMath.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="..\..\Source\TGON\String\TString.h" />
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.h" />
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Time\TTime.h" />
     <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\Layered\LayeredWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\TWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\WindowEvent.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\WindowStyle.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.hpp" />
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.h" />
     <ClInclude Include="..\..\Source\TGON\XML\TXML.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h" />
+    <ClInclude Include="HDCGuard.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\TGON\Math\Vector3D.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <ProjectReference Include="..\TGON_Platform\TGON_Platform.vcxproj">
+      <Project>{7806527a-b31a-4faa-b22d-325ca0bc1326}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>
@@ -195,8 +167,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -215,9 +185,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
-      <AdditionalOptions>/Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Zm400 %(AdditionalOptions)</AdditionalOptions>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
     <Link>
@@ -251,7 +220,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -260,7 +228,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>freetype262MT.lib;tinyxml2-vc140-mt.lib</AdditionalDependencies>
+      <AdditionalDependencies>freetype262MT.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

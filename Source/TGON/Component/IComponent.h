@@ -1,14 +1,14 @@
 /*
 * Author : Junho-Cha
-* Date : 2015-04-26
+* Date : 04/26/2015
 * Latest author :
 * Latest date :
 */
 
-
 #pragma once
 #include <stdint.h>
-#include "../Object/TGameObject.h"
+#include "../Core/TGameObject.h"
+
 
 
 namespace tgon
@@ -18,39 +18,47 @@ namespace tgon
 class TGameObject;
 class IComponent
 {
+protected:
+	struct _component_identifier {};
+
+
+	/*
+		Cons/Destructor
+	*/
 public:
-	IComponent( ) : m_owner( nullptr ) {};
-	virtual ~IComponent( ) = 0 {};
+	IComponent( );
+	virtual ~IComponent( ) = 0;
 
-	virtual void Update( float elapsedTime ) = 0;
+	virtual void Update( float tickTime ) = 0;
 
+	/*
+		Sets
+	*/
 public:
 	void SetOwner( TGameObject* const owner );
-	TGameObject* GetOwner( ) const;
 
-	template <typename T>
-	static uint32_t GetIdentifier( );
+
+	/*
+		Gets
+	*/
+public:
+	TGameObject* GetOwner( ) const;
+	virtual uint32_t GetComponentID( ) const = 0;
+
 
 private:
 	TGameObject* m_owner;
 };
 
-
-}
-
-void tgon::IComponent::SetOwner( TGameObject* const owner )
+inline void IComponent::SetOwner( TGameObject* const owner )
 {
 	m_owner = owner;
 }
 
-inline TGameObject* tgon::IComponent::GetOwner( )
+inline TGameObject* IComponent::GetOwner( ) const
 {
 	return m_owner;
 }
 
-template<typename T>
-inline uint32_t tgon::IComponent::GetIdentifier( )
-{
-	static const auto keyCode( typeid(T).hash_code( ));
-	return keyCode;
+
 }

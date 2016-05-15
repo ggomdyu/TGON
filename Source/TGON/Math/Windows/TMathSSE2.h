@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include <xmmintrin.h>
-#include "../../Config/Compiler/SyntaxCompatible.hpp"
+#include <emmintrin.h>
+#include "../../Config/SyntaxCompatible.h"
 
 
 namespace tgon
@@ -23,12 +23,16 @@ TGON_FORCEINLINE TReg128 MakeReg128( )
 	return _mm_setzero_ps( );
 }
 
-TGON_FORCEINLINE TReg128 MakeReg128( float x, float y, float z )
+TGON_FORCEINLINE TReg128 MakeReg128(
+	float x,
+	float y,
+	float z )
 {
 	return _mm_setr_ps( x, y, z, 0.f );
 }
 
-TGON_FORCEINLINE TReg128 MakeReg128( float x, float y, float z, float w )
+TGON_FORCEINLINE TReg128 MakeReg128(
+	float x, float y, float z, float w )
 {
 	return _mm_setr_ps( x, y, z, w );
 }

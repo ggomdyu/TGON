@@ -1,12 +1,11 @@
 /*
 * Author : Junho-Cha
-* Date : 2016-01-14
+* Date : 01/14/2016
 * Latest author :
 * Latest date :
 */
 
 #pragma once
-#include <Pattern/Singleton.h>
 #include <memory>
 
 #include <ft2build.h>

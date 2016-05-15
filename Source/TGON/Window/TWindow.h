@@ -1,16 +1,16 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2015/11/12
-* 최종 수정 : 
-* 최종 수정일 : 
+* Author : Junho-Cha
+* Date : 11/12/2015
+* Latest author : 
+* Latest date : 
 * Description : Polymorphic window type
 */
 
 #pragma once
-#include <iostream>
-#include "../Config/Platform/PlatformWindow.h"
-#include "../Window/WindowStyle.h"
-#include "../Console/TConsole.h"
+#include <memory>
+#include <stdint.h>
+#include "../Platform/PlatformWindow.h"
+
 
 namespace tgon
 {
@@ -18,22 +18,23 @@ namespace tgon
 
 class TWindow;
 using SpTWindow = std::shared_ptr<TWindow>;
+using WpTWindow = std::weak_ptr<TWindow>;
 
-class TWindow : public WindowImpl
+using TMsgCallback = int32_t(*)( TWindow*, enum class WindowEvent );
+
+
+class TGON_API TWindow : public WindowImpl
 {
 public:
-	// Factory
+	TGON_OBJECT( TWindow, WindowImpl )
+
 	static SpTWindow Create( const WindowStyle& wndStyle = WindowStyle( ));
 
-	/*
-		@ Cons/Destructors
-	*/
+
+private:
+	explicit TWindow( const WindowStyle& );
 public:
 	virtual ~TWindow( );
-private:
-	explicit TWindow( const struct WindowStyle& wndStyle );
-	explicit TWindow( const TWindow& ) = delete;
-	TWindow& operator=( const TWindow& ) = delete;
 };
 
 

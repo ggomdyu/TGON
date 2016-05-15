@@ -1,13 +1,13 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2015-11-12
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 11/12/2015
+* Latest author :
+* Latest date :
 */
 
 #pragma once
-#include <iostream>
-#include "../Config/Platform/Platform.h"
+#include "../Config/Platform.h"
+
 
 #ifdef TGON_PLATFORM_WINDOWS
 	#define WIN32_LEAN_AND_MEAN
@@ -15,19 +15,22 @@
 	#undef WIN32_LEAN_AND_MEAN
 #endif
 
-namespace tgon {
+
+namespace tgon
+{
 
 
-enum class WindowEvent
+enum struct WindowEvent
 {
 #ifdef TGON_PLATFORM_WINDOWS
-	None			= 0x0000,
+	None			= 0x0,
 	Create			= WM_CREATE,
 	GetFocus		= WM_SETFOCUS,
 	LoseFocus		= WM_KILLFOCUS,
 	Size			= WM_SIZE,
 	Move			= WM_MOVE,
-	Destroy			= WM_QUIT,
+	Close			= WM_CLOSE,
+	Destroy			= WM_DESTROY,
 	LMouseDown		= WM_LBUTTONDOWN,
 	LMouseUp		= WM_LBUTTONUP,
 	RMouseDown		= WM_RBUTTONDOWN,

@@ -26,6 +26,7 @@
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+*.idb
 *_i.c
 *_p.c
 *.ilk
@@ -43,6 +44,7 @@
 *.tmp
 *.tmp_proj
 *.log
+*.tlog
 *.vspscc
 *.vssscc
 .builds

@@ -80,8 +80,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -102,7 +100,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -139,7 +136,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -173,18 +169,26 @@
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TGON_Framework.GameTemplate\TGON_Framework.GameTemplate.vcxproj">
-      <Project>{f3acc939-e315-496a-858e-e33e1338f89d}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="..\..\Source\TGON\System\EngineLoop.h" />
+    <ClInclude Include="..\..\Source\TGON\Scene\DefaultScene.h" />
+    <ClInclude Include="..\..\Source\TGON\System\ISystem.h" />
+    <ClInclude Include="..\..\Source\TGON\System\GraphicsSystem.h" />
+    <ClInclude Include="..\..\Source\TGON\System\SceneSystem.h" />
+    <ClInclude Include="..\..\Source\TGON\System\SystemManager.h" />
+    <ClInclude Include="..\..\Source\TGON\System\TCoreEngine.h" />
+    <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\WindowSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
-    <ClCompile Include="..\..\Source\TGON\System\EngineLoop.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Scene\DefaultScene.cpp" />
+    <ClCompile Include="..\..\Source\TGON\System\GraphicsSystem.cpp" />
+    <ClCompile Include="..\..\Source\TGON\System\SceneSystem.cpp" />
+    <ClCompile Include="..\..\Source\TGON\System\SystemManager.cpp" />
+    <ClCompile Include="..\..\Source\TGON\System\TCoreEngine.cpp" />
+    <ClCompile Include="..\..\Source\TGON\System\TimeSystem.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\WindowSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

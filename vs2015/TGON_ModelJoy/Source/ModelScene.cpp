@@ -22,15 +22,15 @@
 
 tgon::ModelScene::ModelScene( )
 {
-	/*d3d9Shader.reset( new D3d9Shader( GetGraphicsDevice(),
+	/*d3d9Shader.reset( new D3d9Shader( GeTGraphics(),
 			L"Resources/ColorShader.fx" ));
 
-	d3d9Mesh.reset( new D3d9Mesh( GetGraphicsDevice(),
+	d3d9Mesh.reset( new D3d9Mesh( GeTGraphics(),
 			L"Resources/sphere.x" ));
 			*/
-	//d3d9Camera.reset( new D3d9Camera( GetGraphicsDevice()));
+	//d3d9Camera.reset( new D3d9Camera( GeTGraphics()));
 ///
-	//d3d9Sprite.reset( new D3d92DSprite( GetGraphicsDevice( ),
+	//d3d9Sprite.reset( new D3d92DSprite( GeTGraphics( ),
 	//							L"D:\\1.PNG" ));
 }
 
@@ -40,7 +40,7 @@ tgon::ModelScene::~ModelScene( )
 }
 
 
-void tgon::ModelScene::Tick( float tickTime )
+void tgon::ModelScene::Update( float tickTime )
 {
 	//d3d9Shader->SetMatrix( *d3d9Camera );
 
@@ -49,17 +49,17 @@ void tgon::ModelScene::Tick( float tickTime )
 
 void tgon::ModelScene::Render( )
 {
-	//GetGraphicsDevice( )->BeginDraw( );
+	//GeTGraphics( )->BeginDraw( );
 	//{
 	//	d3d9Sprite->Render( );
 	//}
-	//GetGraphicsDevice( )->EndDraw( );
+	//GeTGraphics( )->EndDraw( );
 
 
 
 	/*uint32_t passNum =0;
 
-	GetGraphicsDevice( )->BeginDraw( );
+	GeTGraphics( )->BeginDraw( );
 	{
 		UINT numPasses = 0;
 		d3d9Shader->GetShader( )->Begin( &numPasses, NULL );
@@ -75,12 +75,12 @@ void tgon::ModelScene::Render( )
 		}
 		d3d9Shader->GetShader( )->End( );
 	}
-	GetGraphicsDevice( )->EndDraw( );*/
+	GeTGraphics( )->EndDraw( );*/
 }
 
 
 /*
-GetGraphicsDevice( )->BeginDraw( );
+GeTGraphics( )->BeginDraw( );
 
 	d3d9Shader->SetMatrix( *d3d9Camera.get( ));
 	
@@ -101,7 +101,7 @@ GetGraphicsDevice( )->BeginDraw( );
 	D3DXMatrixIdentity( &matrix );
 //	D3DXMatrixRotationX( &matrix, f );
 
-//	GetGraphicsDevice( )->GetD3dDevice( )->SetTransform( D3DTS_WORLD, &matrix );
+//	GeTGraphics( )->GetD3dDevice( )->SetTransform( D3DTS_WORLD, &matrix );
 
 
 	UINT numPasses = 0;
@@ -119,7 +119,7 @@ GetGraphicsDevice( )->BeginDraw( );
 	d3d9Shader->GetShader( )->End( );
 
 
-	GetGraphicsDevice( )->EndDraw( );
+	GeTGraphics( )->EndDraw( );
 
 
 */

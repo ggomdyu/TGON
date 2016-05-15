@@ -8,25 +8,24 @@
 
 
 #pragma once
-#include "../Config/Platform/PlatformApplication.h"
+#include "../Core/TSingleton.h"
+#include "../Platform/PlatformApplication.h"
+#include "../Config/Build.h"
 
 
 namespace tgon
 {
 
 
-class TApplication : public ApplicationImpl
+class TGON_API TApplication : public ApplicationImpl
 {
 public:
-	static TApplication* Get( )
-	{
-		static TApplication appInst;
-		return &appInst;
-	}
+	TGON_OBJECT( TApplication, ApplicationImpl )
+	TGON_SINGLETON( TApplication )
 
 protected:
-	TApplication( ) {};
-	virtual ~TApplication( ) {};
+	TApplication( );
+	virtual ~TApplication( );
 };
 
 

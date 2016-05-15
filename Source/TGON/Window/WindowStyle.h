@@ -1,18 +1,19 @@
 /*
-* 작성자 : 차준호
-* 작성일 : 2015-11-12
-* 최종 수정 :
-* 최종 수정일 :
+* Author : Junho-Cha
+* Date : 11/12/2015
+* Latest author :
+* Latest date :
 */
 
 #pragma once
-#include <string>
-#include "../Config/Platform/PlatformFwd.h"
 #include <stdint.h>
+#include <string>
+#include "../Platform/PlatformFwd.h"
 
 
-namespace tgon {
-	
+namespace tgon
+{
+
 
 struct WindowStyle
 {
@@ -22,13 +23,13 @@ public:
 	static WindowStyle ParseFromXML( const wchar_t* const xmlPath );
 
 public:
-	std::wstring caption = L"Default-Caption";
+	std::wstring caption = L"TGON-Default";
 
 	/* Shape */
-	uint32_t x = 100;
-	uint32_t y = 100;
-	uint32_t width = 500;
-	uint32_t height = 500;
+	int32_t x = 100;
+	int32_t y = 100;
+	int32_t width = 500;
+	int32_t height = 500;
 
 	bool Popup = false;
 	bool Maximized = false;
@@ -44,7 +45,7 @@ public:
 	bool ShowImmediately = true;
 	
 	/* Callback */
-	int32_t( *msgCallback )( class TWindow*, enum struct WindowEvent ) = nullptr;
+	int32_t( *msgCallback )( TWindow*, enum class WindowEvent ) = nullptr;
 };
 
 

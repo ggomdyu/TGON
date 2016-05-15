@@ -1,38 +1,62 @@
+/*
+* Author : Junho-Cha
+* Date : 05/09/2016
+* Latest author :
+* Latest date :
+* Description : API Sets for cross-platform
+*/
+
+
 #pragma once
-#include <chrono>
+#include <stdint.h>
+#include "../Platform/PlatformTime.h"
+#include "../Config/SyntaxCompatible.h"
+#include "../Config/Build.h"
 
 
 namespace tgon
 {
 
 
-class TTime
+class TGON_API TTime final : 
+	public TimeImpl
 {
-private:
-	typedef std::chrono::time_point<std::chrono::system_clock,
-		std::chrono::milliseconds> ms_time_point;
-	typedef std::chrono::time_point<std::chrono::system_clock,
-		std::chrono::minutes> m_time_point;
-	typedef std::chrono::time_point<std::chrono::system_clock,
-		std::chrono::seconds> s_time_point;
-
-	TTime( ) {};
-	~TTime( ) {};
-
 public:
-	// Singleton
-	static TTime* Get( )
-	{
-		static TTime timeInst;
-		return &timeInst;
-	}
+	// Getting OS's execution time as millisecond
+	static uint32_t GetBootTime( );
+	static uint64_t GetBootTime64( );
 
-	int64_t GetExecutionTime( ) const;
-	float	GetElapsedTime( );
+	// Get current application's execution time as millisecond
+	static uint64_t GetAppExecutionTime( );
+
+	// Getting current system time
+	static TSystemTime GetLocalTime( );
+
 
 private:
-	static const s_time_point ms_bootStartTime;
+	TTime( ) = delete;
+	~TTime( ) = delete;
 };
 
 
+TGON_FORCEINLINE uint32_t TTime::GetBootTime( )
+{
+	return TimeImpl::GetBootTime( );
 }
+
+TGON_FORCEINLINE uint64_t TTime::GetBootTime64( )
+{
+	return TimeImpl::GetBootTime64( );
+}
+
+TGON_FORCEINLINE uint64_t TTime::GetAppExecutionTime( )
+{
+	return TimeImpl::GetAppExecutionTime( );
+}
+
+TGON_FORCEINLINE tgon::TSystemTime TTime::GetLocalTime( )
+{
+	return TimeImpl::GetLocalTime( );
+}
+
+};

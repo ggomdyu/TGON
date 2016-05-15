@@ -7,51 +7,52 @@
 tgon::WindowsConsole::WindowsConsole( )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
-	if ( AllocConsole( ) == FALSE )
+	// Console already created or Console builded
+	if ( !GetConsoleWindow( ))
 	{
-		MessageBoxW( GetFocus( ),
-					 L"Failed to invoke AllocConsole.",
-					 L"WARNING!",
-					 MB_OK | MB_ICONEXCLAMATION );
-		abort( );
+		BOOL isSuccess = AllocConsole( );
+		assert( isSuccess == TRUE && "Failed to invoke AllocConsole." );
 	}
-	
-	// WARN: This function should be invoked after allocated console.
+
+	// WARNING!!
+	// This function should be invoked after allocated console!!
 	m_outputHandle = GetStdHandle( STD_OUTPUT_HANDLE );
 #endif
 }
 
-
 tgon::WindowsConsole::~WindowsConsole( )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
-	CloseHandle( m_outputHandle );
+	FreeConsole( );
 #endif
 }
-
 
 void tgon::WindowsConsole::WriteLine( ) 
 {
 #if defined( DEBUG ) | defined( _DEBUG )
 	this->FillBuffer( L"\n" );
-
-	WriteConsoleW( m_outputHandle,
-				   this->GetBuffer( ).c_str( ),
-				   this->GetBuffer( ).length( ),
-				   NULL,
-				   NULL );
+	
+	WriteConsoleW(
+		m_outputHandle,
+		this->GetBuffer( ).c_str( ),
+		this->GetBuffer( ).length( ),
+		nullptr,
+		nullptr );
 
 	this->ClearBuffer( );
+#endif
+}
 
-	if ( this->IsFlashOnLogging( ))
-	{
-		FLASHWINFO fwi = {0};
-		fwi.cbSize = sizeof( fwi );
-		fwi.hwnd = GetConsoleWindow( );
-		fwi.dwFlags = FLASHW_CAPTION;
-		fwi.uCount = 1;
+void tgon::WindowsConsole::Write( ) 
+{
+#if defined( DEBUG ) | defined( _DEBUG )
+	WriteConsoleW(
+		m_outputHandle,
+		this->GetBuffer( ).c_str( ),
+		this->GetBuffer( ).length( ),
+		nullptr,
+		nullptr );
 
-		FlashWindowEx( &fwi );
-	}
+	this->ClearBuffer( );
 #endif
 }

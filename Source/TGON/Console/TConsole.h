@@ -1,40 +1,36 @@
 /*
 * Author : Junho-Cha
-* Date : 2016-03-22
+* Date : 03/22/2016
 * Latest author :
 * Latest date :
 * Description : Polymorphic console type
 */
 
 #pragma once
-#include "../Config/Platform/PlatformConsole.h"
-#include <string>
+#include "../Platform/PlatformConsole.h"
+#include "../Core/TSingleton.h"
 
 
 namespace tgon
 {
 
-
-class TConsole : public ConsoleImpl
+class TGON_API TConsole : public ConsoleImpl
 {
 public:
-	// Singleton
-	static TConsole* Get( ) 
-	{
-		static TConsole consInst;
-		return &consInst;
-	}
+	TGON_OBJECT( TConsole, ConsoleImpl )
+	TGON_SINGLETON( TConsole )
 
 private:
-	TConsole( ) {}
-	virtual ~TConsole( ) {}
+	TConsole( );
+	virtual ~TConsole( );
 };
 
-
 template <typename ...Args>
-TGON_FORCEINLINE void TLOG( const Args& ...args ) 
+inline void TLOG( const Args& ...args ) 
 {
+#if defined( DEBUG ) || defined( _DEBUG )
 	TConsole::Get( )->WriteLine( args... );
+#endif
 }
 
 
