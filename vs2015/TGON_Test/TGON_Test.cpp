@@ -53,7 +53,6 @@ int main( )
 {
 	using namespace tgon;
 	using namespace std;
-	using namespace chrono;
 
 	while ( true )
 	{

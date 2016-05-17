@@ -2,7 +2,7 @@
 #include "SceneSystem.h"
 #include "SystemManager.h"
 
-#include "../Console/TConsole.h"
+#include "../Platform/Console/TConsole.h"
 
 
 tgon::SystemManager::SystemManager( )

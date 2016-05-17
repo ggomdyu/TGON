@@ -12,7 +12,7 @@
 #include "../Core/TObject.h"
 #include "../System/ISystem.h"
 #include "../Core/TSingleton.h"
-#include "../Window/TWindow.h"
+#include "../Platform/Window/TWindow.h"
 
 
 namespace tgon

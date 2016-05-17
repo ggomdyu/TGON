@@ -3,7 +3,7 @@
 #include <System/TCoreEngine.h>
 #include <Application/TApplication.h>
 #include <Console/TConsole.h>
-#include <Math/TMath.h>
+#include <Core/Math/TMath.h>
 #include <Window/WindowEvent.h>
 #include <Application/TApplication.h>
 #include <MessageBox/TMessageBox.h>
@@ -15,19 +15,19 @@ int32_t OnEventOccured( TWindow* sender, WindowEvent msg )
 {
 	switch ( msg )
 	{
-	case WindowEvent::Create:
+	case WindowEvent::kCreate:
 		{
 		}
 		break;
 
-	case WindowEvent::RMouseDown:
+	case WindowEvent::kRMouseDown:
 		{
-			TMessageBox::Show( L"¾Æadgd!!", L"OPOP", TMsgBoxButton::YesNoCancel );
+//			TMessageBox::Show( L"¾Æadgd!!", L"OPOP", TMsgBoxButton::YesNoCancel );
 	
 		}
 		break;
 
-	case WindowEvent::Destroy:
+	case WindowEvent::kDestroy:
 		{
 		}
 		break;
@@ -36,11 +36,13 @@ int32_t OnEventOccured( TWindow* sender, WindowEvent msg )
 	return 1;
 }
 
+#include <Application\TApplication.h>
+
 
 int32_t tgMain( int32_t argc, char* argv[] )
 {
 	using namespace tgon;
-	
+
 	TCoreEngine ce( OnEventOccured );
 	ce.Run( );
 

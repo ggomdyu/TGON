@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "TimeSystem.h"
 
-#include "../Console/TConsole.h"
+#include "../Platform/Console/TConsole.h"
 
 
 tgon::TimeSystem::TimeSystem( ) :

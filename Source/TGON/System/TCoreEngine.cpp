@@ -3,15 +3,15 @@
 
 #include <cassert>
 
-#include "../Window/TWindow.h"
-#include "../Window/WindowEvent.h"
-#include "../Window/WindowStyle.h"
-#include "../Application/TApplication.h"
-#include "../Graphics/TGraphics.h"
-#include "../Graphics/GraphicsStyle.h"
+#include "../Platform/Window/WindowEvent.h"
+#include "../Platform/Window/TWindow.h"
+#include "../Platform/Window/WindowStyle.h"
+#include "../Platform/Application/TApplication.h"
+#include "../LowLevelRenderer/Graphics/TGraphics.h"
+#include "../LowLevelRenderer/Graphics/GraphicsStyle.h"
 
 
-#include "../Console/TConsole.h"
+#include "../Platform/Console/TConsole.h"
 #include "../System/SystemManager.h"
 #include "../System/SceneSystem.h"
 #include "../System/WindowSystem.h"
@@ -73,11 +73,10 @@ void tgon::TCoreEngine::Run( )
 	/*
 		Message Loop
 	*/
-	WindowEvent wndEvent = WindowEvent::None;
+	WindowEvent wndEvent = WindowEvent::kNone;
 	while ( !m_window->IsDestroyed( ))
 	{
-		const bool isMsgExist = 
-			TApplication::Get()->DispatchEvent( &wndEvent );
+		const bool isMsgExist = TApplication::DispatchEvent( &wndEvent );
 
 		// Idle time
 		if ( !isMsgExist )

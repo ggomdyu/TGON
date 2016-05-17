@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="hpp\Font">
+      <UniqueIdentifier>{23fe8866-74c4-4abc-bbb6-838638e47c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics">
+      <UniqueIdentifier>{afc53914-c6f8-4047-a1c5-fa66c5e8b896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics\Interface">
+      <UniqueIdentifier>{f8120703-4a35-42cf-b758-7908daef1da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Graphics\Direct3D9">
+      <UniqueIdentifier>{01192c28-225f-4cfd-a4d5-29af12bc3944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Graphics">
+      <UniqueIdentifier>{6b8ebd5f-1075-4ade-8092-a132f55e57fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Graphics\Direct3D9">
+      <UniqueIdentifier>{49c6de7b-e7d6-48a3-8f72-fccdd0e82f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Font">
+      <UniqueIdentifier>{b360bce9-a4f7-45f6-95ce-71ba7fd9deb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
+      <UniqueIdentifier>{a776e8a8-ad7c-4000-9a57-9fa563eb5433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\PrecompiledHeader">
+      <UniqueIdentifier>{298da0d3-e217-4279-9410-055f59921c7d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontFace.h">
+      <Filter>hpp\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontManager.h">
+      <Filter>hpp\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
+      <Filter>hpp\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h">
+      <Filter>hpp\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Interface\IGraphics.h">
+      <Filter>hpp\Graphics\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d92DSprite.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Camera.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Enum.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Error.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Fwd.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Graphics.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Texture.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Util.h">
+      <Filter>hpp\Graphics\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
+      <Filter>cpp\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d92DSprite.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Camera.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Enum.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Error.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Graphics.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Mesh.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Quad.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Shader.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Texture.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Util.cpp">
+      <Filter>cpp\Graphics\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontFace.cpp">
+      <Filter>cpp\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontManager.cpp">
+      <Filter>cpp\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

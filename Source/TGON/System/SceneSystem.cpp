@@ -11,7 +11,6 @@ tgon::SceneSystem::SceneSystem( ) :
 
 tgon::SceneSystem::~SceneSystem( )
 {
-	m_currScene.release( );
 }
 
 void tgon::SceneSystem::LoadScene( IScene* newScene )

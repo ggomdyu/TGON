@@ -105,132 +105,159 @@
     <Filter Include="cpp\Time\Windows">
       <UniqueIdentifier>{16ff2f3e-da84-45c6-b93a-c665bc424b70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\Misc">
+      <UniqueIdentifier>{c79df330-ef72-4f8f-848b-6849e00af0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Misc\Windows">
+      <UniqueIdentifier>{3e3e2a51-d199-49af-b919-f44d8401f5d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Misc">
+      <UniqueIdentifier>{957b4dd7-31cf-44ba-b802-f43ed5fe579f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Misc\Windows">
+      <UniqueIdentifier>{99caf85b-ca6e-47b4-a3f3-87a701034815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\MessageBox\Windows">
+      <UniqueIdentifier>{92d80a21-0fa9-477c-840a-dc2bfd19dd90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\MessageBox\TMessageBox.cpp">
-      <Filter>hpp\MessageBox</Filter>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.cpp">
+      <Filter>cpp\Console\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Application\TApplication.cpp">
-      <Filter>cpp\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Application\Windows\WindowsApplication.cpp">
-      <Filter>cpp\Application\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\TWindow.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindow.cpp">
       <Filter>cpp\Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\WindowStyle.cpp">
-      <Filter>cpp\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindow.cpp">
-      <Filter>cpp\Window\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.cpp">
-      <Filter>cpp\Window\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Main\Windows\WindowsMain.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
       <Filter>cpp\Main\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Thread\TThreadPool.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp">
+      <Filter>cpp\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TThreadPool.cpp">
       <Filter>cpp\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\TConsole.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\TConsole.cpp">
       <Filter>cpp\Console</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\Windows\WindowsConsole.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp">
+      <Filter>cpp\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.cpp">
+      <Filter>cpp\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.cpp">
+      <Filter>cpp\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp">
       <Filter>cpp\Console\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Console\Interface\IConsole.cpp">
-      <Filter>cpp\Console\Interface</Filter>
+    <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp">
+      <Filter>cpp\Application\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Time\Windows\WindowsTime.cpp">
-      <Filter>cpp\Time\Windows</Filter>
+    <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.cpp">
+      <Filter>cpp\MessageBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.cpp">
+      <Filter>cpp\MessageBox\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.cpp">
+      <Filter>cpp\Misc\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\MessageBox\TMessageBox.h">
-      <Filter>hpp\MessageBox</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h">
+      <Filter>hpp\Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\TWindow.h">
-      <Filter>hpp\Window</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\Compiler.h">
+      <Filter>hpp\Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\WindowEvent.h">
-      <Filter>hpp\Window</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\Interface\IApplication.h">
+      <Filter>hpp\Application\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\WindowStyle.h">
-      <Filter>hpp\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindow.h">
-      <Filter>hpp\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Windows\WindowsWindowUtil.h">
-      <Filter>hpp\Window\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Window\Interface\IWindow.h">
-      <Filter>hpp\Window\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Main\TMain.h">
-      <Filter>hpp\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Time\TTime.h">
-      <Filter>hpp\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.h">
-      <Filter>hpp\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Thread\TThreadPool.hpp">
-      <Filter>hpp\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\TConsole.h">
-      <Filter>hpp\Console</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\Windows\WindowsConsole.h">
-      <Filter>hpp\Console\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Console\Interface\IConsole.h">
-      <Filter>hpp\Console\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\TApplication.h">
-      <Filter>hpp\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\TApplicationTypes.h">
-      <Filter>hpp\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\Windows\WindowsApplication.h">
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h">
       <Filter>hpp\Application\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Application\Interface\IApplication.h">
-      <Filter>hpp\Application\Interface</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.h">
+      <Filter>hpp\Time\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h">
+      <Filter>hpp\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.hpp">
+      <Filter>hpp\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h">
+      <Filter>hpp\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h">
+      <Filter>hpp\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
+      <Filter>hpp\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h">
+      <Filter>hpp\Console\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h">
+      <Filter>hpp\Console\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h">
+      <Filter>hpp\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h">
+      <Filter>hpp\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Interface\IWindow.h">
+      <Filter>hpp\Window\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\SyntaxCompatible.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplication.h">
+      <Filter>hpp\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\Platform.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h">
+      <Filter>hpp\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTimeType.h">
+      <Filter>hpp\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowEvent.h">
+      <Filter>hpp\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Platform.h">
-      <Filter>hpp\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\SyntaxCompatible.h">
-      <Filter>hpp\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Config\Compiler.h">
-      <Filter>hpp\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\tgon\config\Build.h">
-      <Filter>hpp\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\MessageBox\WindowsMessageBox.h">
-      <Filter>hpp\MessageBox\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\MessageBox\IMessageBox.h">
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\IMessageBox.h">
       <Filter>hpp\MessageBox\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Time\Windows\WindowsTime.h">
-      <Filter>hpp\Time\Windows</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.h">
+      <Filter>hpp\MessageBox\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Time\TTimeType.h">
-      <Filter>hpp\Time</Filter>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.h">
+      <Filter>hpp\MessageBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.h">
+      <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\unique_comptr.h">
+      <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h">
+      <Filter>hpp\Misc\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

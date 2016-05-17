@@ -10,7 +10,7 @@
 #include <stdint.h>
 
 #include "TTypeId.h"
-#include "../Config/Build.h"
+#include "../Platform/Config/Build.h"
 
 
 namespace tgon

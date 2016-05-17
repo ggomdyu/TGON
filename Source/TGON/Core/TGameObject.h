@@ -10,8 +10,8 @@
 #include <stdint.h>
 
 #include "TObject.h"
-#include "../Math/TVector3.h"
-#include "../Console/TConsole.h"
+#include "../Core/Math/TMath.h"
+#include "../Platform/Console/TConsole.h"
 
 
 namespace tgon

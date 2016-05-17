@@ -32,9 +32,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
-      <Filter>cpp\PrecompiledHeader</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\System\WindowSystem.cpp">
       <Filter>cpp\System</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Scene\DefaultScene.cpp">
       <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

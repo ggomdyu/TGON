@@ -9,7 +9,7 @@
 #pragma once
 #include "../Core/TObject.h"
 #include "../Core/TSingleton.h"
-#include "../Time/TTime.h"
+#include "../Platform/Time/TTime.h"
 #include "../System/ISystem.h"
 
 

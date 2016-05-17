@@ -3,15 +3,16 @@
 #include <vector>
 
 #include "../Core/TObject.h"
-#include "../Platform/PlatformFwd.h"
-#include "../Config/Build.h"
+#include "../Platform/Slate/PlatformFwd.h"
+#include "../Platform/Config/Build.h"
 
 
 namespace tgon
 {
 
 
-class TGON_API TCoreEngine : public TObject
+class TGON_API TCoreEngine : 
+	public TObject
 {
 public:
 	TGON_OBJECT( TCoreEngine, TObject )

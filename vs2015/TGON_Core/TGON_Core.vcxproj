@@ -21,52 +21,33 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\TCamera.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\TGameObject.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Error\TErrCode.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\TStringHash.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Error\TErrCode.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Font\FTFontFace.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Font\FTFontManager.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Mesh.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Quad.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Shader.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Graphics\TGraphics.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Math\TMatrix4x4.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\String\TString.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\XML\TXML.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp" />
-    <ClCompile Include="HDCGuard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
     <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCode.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCodeUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\TMathSSE2.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TCamera.h" />
@@ -74,33 +55,10 @@
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TStringHash.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TTypeId.h" />
-    <ClInclude Include="..\..\Source\TGON\Error\TErrCode.h" />
-    <ClInclude Include="..\..\Source\TGON\Error\TErrCodeUtil.h" />
-    <ClInclude Include="..\..\Source\TGON\Font\FTFontFace.h" />
-    <ClInclude Include="..\..\Source\TGON\Font\FTFontManager.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d92DSprite.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Camera.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Enum.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Error.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Fwd.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Graphics.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Texture.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Direct3D9\D3d9Util.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\GraphicsStyle.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\Interface\IGraphics.h" />
-    <ClInclude Include="..\..\Source\TGON\Graphics\TGraphics.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Generic\GenericPlatformMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\TMatrix4x4.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\TMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\TVector3.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Windows\TMathSSE2.h" />
-    <ClInclude Include="..\..\Source\TGON\Math\Windows\WindowsPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="..\..\Source\TGON\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
-    <ClInclude Include="..\..\Source\TGON\XML\TXML.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h" />
-    <ClInclude Include="HDCGuard.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON_Platform\TGON_Platform.vcxproj">

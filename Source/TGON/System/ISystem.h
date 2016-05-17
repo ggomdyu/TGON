@@ -1,6 +1,6 @@
 #pragma once
+#include <boost/noncopyable.hpp>
 #include "../Core/TObject.h"
-#include "../Core/TNoncopyable.h"
 
 
 namespace tgon
@@ -9,7 +9,7 @@ namespace tgon
 
 class TGON_API ISystem :
 	public TObject,
-	private TNoncopyable
+	private boost::noncopyable
 {
 public:
 	TGON_OBJECT( ISystem, TObject )
