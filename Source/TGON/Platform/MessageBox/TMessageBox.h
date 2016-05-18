@@ -6,35 +6,16 @@
 */
 
 #pragma once
-#include "../Platform/Slate/PlatformMessageBox.h"
-#include "../Platform/Config/Compiler.h"
+#include "TMessageBoxType.h"
+
 
 namespace tgon
 {
 
 
-using TMsgBoxResult = MsgBoxResultImpl;
-
-enum struct TMsgBoxButton
-{
-	Ok			= static_cast<int>( MsgBoxButtonImpl::Ok ),
-	OkCancel	= static_cast<int>( MsgBoxButtonImpl::OkCancel ),
-	YesNo		= static_cast<int>( MsgBoxButtonImpl::YesNo ),
-	YesNoCancel = static_cast<int>( MsgBoxButtonImpl::YesNoCancel ),
-};
-
-enum struct TMsgBoxFlag
-{
-	None			= 0,
-	IconQuestion	= static_cast<int>( MsgBoxFlagImpl::IconQuestion ),
-	IconExclamation = static_cast<int>( MsgBoxFlagImpl::IconExclamation ),
-	IconAsterisk	= static_cast<int>( MsgBoxFlagImpl::IconAsterisk ),
-};
-
 using TMsgBoxResult = WindowsMsgBoxResult;
 
-
-class TMessageBox : public MessageBoxImpl
+class TGON_API TMessageBox : public MessageBoxImpl
 {
 public:
 	static TMsgBoxResult Show( const wchar_t* text );

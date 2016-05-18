@@ -9,9 +9,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="cpp\MessageBox">
-      <UniqueIdentifier>{f9d1d637-d685-42e0-9aa8-8e5e2a94bfe3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\MessageBox">
       <UniqueIdentifier>{a4a8314a-5719-4928-9cc4-062562104b73}</UniqueIdentifier>
     </Filter>
@@ -116,6 +113,9 @@
     </Filter>
     <Filter Include="cpp\Misc\Windows">
       <UniqueIdentifier>{99caf85b-ca6e-47b4-a3f3-87a701034815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\MessageBox">
+      <UniqueIdentifier>{f9d1d637-d685-42e0-9aa8-8e5e2a94bfe3}</UniqueIdentifier>
     </Filter>
     <Filter Include="cpp\MessageBox\Windows">
       <UniqueIdentifier>{92d80a21-0fa9-477c-840a-dc2bfd19dd90}</UniqueIdentifier>
@@ -241,9 +241,6 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\IMessageBox.h">
-      <Filter>hpp\MessageBox\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.h">
       <Filter>hpp\MessageBox\Windows</Filter>
     </ClInclude>
@@ -258,6 +255,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h">
       <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Interface\IMessageBox.h">
+      <Filter>hpp\MessageBox\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBoxType.h">
+      <Filter>hpp\MessageBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBoxType.h">
+      <Filter>hpp\MessageBox\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

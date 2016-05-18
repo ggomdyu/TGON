@@ -83,9 +83,11 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\IMessageBox.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Interface\IMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBoxType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBoxType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\unique_comptr.h" />
