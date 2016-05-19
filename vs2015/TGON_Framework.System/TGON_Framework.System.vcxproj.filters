@@ -56,6 +56,9 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
+    <ClCompile Include="TContext.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -83,6 +86,9 @@
       <Filter>hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Scene\DefaultScene.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="TContext.h">
       <Filter>hpp</Filter>
     </ClInclude>
   </ItemGroup>

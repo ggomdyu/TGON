@@ -225,7 +225,7 @@ bool tgon::WindowsWindow::RegisterMyClass(
 	
 	//	Each windows must have diffrent class name.
 	std::wstring defClassName = L"TGON_Window";
-	static int numCreatedWindow = 0;
+	static int32_t numCreatedWindow = 0;
 	defClassName += std::to_wstring( numCreatedWindow );
 	*outClassName = defClassName;
 

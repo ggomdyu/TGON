@@ -1,10 +1,12 @@
 #pragma once
+#include "../../Config/Build.h"
+
+
 #define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 #undef WIN32_LEAN_AND_MEAN
 
-
-class HDCGuard final
+class TGON_API HDCGuard
 {
 public:
 	HDCGuard( const HWND wndHandle, const HDC dcHandle ) :

@@ -104,6 +104,9 @@
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp">
       <Filter>cpp\String</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp">
+      <Filter>cpp\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -174,6 +177,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h">
       <Filter>hpp\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
+      <Filter>hpp\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

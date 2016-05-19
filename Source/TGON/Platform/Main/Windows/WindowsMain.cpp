@@ -14,11 +14,11 @@
 #pragma comment( linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"" )
 
 
-int WINAPI WinMain(
+int32_t WINAPI WinMain(
 	HINSTANCE instanceHandle,
 	HINSTANCE prevInstanceHandle,
 	LPSTR commandLine,
-	int commandShow )
+	int32_t commandShow )
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );

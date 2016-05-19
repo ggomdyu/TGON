@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="cpp\MessageBox">
+      <UniqueIdentifier>{f9d1d637-d685-42e0-9aa8-8e5e2a94bfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\MessageBox">
+      <UniqueIdentifier>{a4a8314a-5719-4928-9cc4-062562104b73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Config">
+      <UniqueIdentifier>{d779a40e-9c6c-4040-bbe2-bde3091d291b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Window">
+      <UniqueIdentifier>{3bf719f3-40a6-40c7-a181-39d7da20f3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Window\Windows">
+      <UniqueIdentifier>{2fbb62fa-5343-46cc-b2ea-fbed806c9912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Window\Interface">
+      <UniqueIdentifier>{5708b41c-0be5-4b43-865d-562bbeacae01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Window">
+      <UniqueIdentifier>{2c97ec5e-2969-453e-9318-b6cb2c531d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Window\Windows">
+      <UniqueIdentifier>{967504e6-12da-4974-9ae7-18125e6651f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Main">
+      <UniqueIdentifier>{a9504880-24cf-4b7d-a733-4e25b1988841}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Main\Windows">
+      <UniqueIdentifier>{97276ea4-0a69-417c-97bf-77b52b065c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Main">
+      <UniqueIdentifier>{2d423b25-a909-4db5-9ea5-2014696c6fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Time">
+      <UniqueIdentifier>{67e83643-6c7e-4f9c-9d06-22156ad169a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Thread">
+      <UniqueIdentifier>{ecd6719f-c3ae-40b4-8953-d50f725f884f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Time">
+      <UniqueIdentifier>{bd9a2e37-e153-4547-98e8-273dbcfe6eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Thread">
+      <UniqueIdentifier>{c2740517-5171-4934-a581-d3e02780a2c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Console">
+      <UniqueIdentifier>{101f8bc8-b6f5-41b7-85f2-4d202eea925d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Console\Windows">
+      <UniqueIdentifier>{cd43afaa-dd62-4cad-ac2f-5c54d64aeb0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Console\Interface">
+      <UniqueIdentifier>{b785d064-177a-44d7-8185-e6e762c6c508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Console">
+      <UniqueIdentifier>{ceaa2fc9-d40b-48ad-8655-e64387865a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Console\Windows">
+      <UniqueIdentifier>{23f33668-ee9e-4363-b9b4-613a56600318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Console\Interface">
+      <UniqueIdentifier>{bb553f3b-e765-4437-83f8-6049f82e4a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Application">
+      <UniqueIdentifier>{57022cb1-73f7-4f1c-8621-9684146f1991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Application\Windows">
+      <UniqueIdentifier>{319717f7-7995-4725-93bd-333e768934e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Application">
+      <UniqueIdentifier>{30fe53d4-d364-4277-b88a-54537782e290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Application\Windows">
+      <UniqueIdentifier>{696624cf-c37c-4c58-9674-71ce5040ef9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Application\Interface">
+      <UniqueIdentifier>{5d57677e-dcc4-4d32-9d16-0163ea0ebf1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\PrecompiledHeader">
+      <UniqueIdentifier>{1877a5a6-08f1-4e25-aa16-7647366ca598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\PrecompiledHeader">
+      <UniqueIdentifier>{d8038e59-57c9-4e00-9f2b-5f8129d92d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\MessageBox\Windows">
+      <UniqueIdentifier>{56579e61-55ee-4bd5-ae20-369dbcb5db44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\MessageBox\Interface">
+      <UniqueIdentifier>{79d1de89-b808-4d09-9961-7f3c05ce913f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Time\Windows">
+      <UniqueIdentifier>{ec20fd82-11b2-4700-8a56-8bd819134d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Time\Windows">
+      <UniqueIdentifier>{16ff2f3e-da84-45c6-b93a-c665bc424b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Misc">
+      <UniqueIdentifier>{c79df330-ef72-4f8f-848b-6849e00af0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Misc\Windows">
+      <UniqueIdentifier>{3e3e2a51-d199-49af-b919-f44d8401f5d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Misc">
+      <UniqueIdentifier>{957b4dd7-31cf-44ba-b802-f43ed5fe579f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Misc\Windows">
+      <UniqueIdentifier>{99caf85b-ca6e-47b4-a3f3-87a701034815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\MessageBox\Windows">
+      <UniqueIdentifier>{92d80a21-0fa9-477c-840a-dc2bfd19dd90}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.cpp">
+      <Filter>cpp\Console\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindow.cpp">
+      <Filter>cpp\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
+      <Filter>cpp\Main\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp">
+      <Filter>cpp\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TThreadPool.cpp">
+      <Filter>cpp\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\TConsole.cpp">
+      <Filter>cpp\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp">
+      <Filter>cpp\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.cpp">
+      <Filter>cpp\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.cpp">
+      <Filter>cpp\Window\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp">
+      <Filter>cpp\Console\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp">
+      <Filter>cpp\Application\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.cpp">
+      <Filter>cpp\MessageBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.cpp">
+      <Filter>cpp\MessageBox\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.cpp">
+      <Filter>cpp\Misc\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\Compiler.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\Interface\IApplication.h">
+      <Filter>hpp\Application\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h">
+      <Filter>hpp\Application\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.h">
+      <Filter>hpp\Time\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h">
+      <Filter>hpp\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.hpp">
+      <Filter>hpp\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h">
+      <Filter>hpp\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h">
+      <Filter>hpp\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
+      <Filter>hpp\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h">
+      <Filter>hpp\Console\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h">
+      <Filter>hpp\Console\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h">
+      <Filter>hpp\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h">
+      <Filter>hpp\Window\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Interface\IWindow.h">
+      <Filter>hpp\Window\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\SyntaxCompatible.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplication.h">
+      <Filter>hpp\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Config\Platform.h">
+      <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h">
+      <Filter>hpp\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTimeType.h">
+      <Filter>hpp\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowEvent.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\IMessageBox.h">
+      <Filter>hpp\MessageBox\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.h">
+      <Filter>hpp\MessageBox\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.h">
+      <Filter>hpp\MessageBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.h">
+      <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\unique_comptr.h">
+      <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h">
+      <Filter>hpp\Misc\Windows</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -130,7 +130,12 @@ inline TVector3 TVector3::operator/(
 
 inline TVector3 TVector3::operator+( ) const
 {
-	return TVector3( std::abs(x), std::abs(y), std::abs(z));
+	return *this;
+}
+
+inline TVector3 TVector3::operator-( ) const
+{
+	return TVector3( -x, -y, -z );
 }
 
 inline TVector3& TVector3::operator+=(
@@ -188,9 +193,7 @@ inline TVector3& TVector3::operator/=(
 inline bool TVector3::operator==(
 	const TVector3& rhs ) const
 {
-	return ( x == rhs.x &&
-			 y == rhs.y &&
-			 z == rhs.z );
+	return ( x == rhs.x && y == rhs.y && z == rhs.z );
 }
 
 inline bool TVector3::operator!=(
@@ -232,13 +235,6 @@ inline TVector3 TVector3::Cross(
 			( a.z * b.x )-( a.x * b.z ),
 			( a.x * b.y )-( a.y * b.x )};
 }
-
-//inline float TVector3::Angle(
-//	const TVector3& a, const TVector3& b )
-//{
-//	return std::acosf(
-//		Dot( a, b ) / ( a.Length( )*b.Length( )));
-//}
 
 inline float TVector3::Distance(
 	const TVector3& a, const TVector3& b )

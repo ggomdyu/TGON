@@ -28,7 +28,7 @@ enum struct TErrCode
 template <typename T>
 std::string TGON_API GetErrorString( T _enum )
 {
-	int stringIndex = static_cast<int>( _enum );
+	int32_t stringIndex = static_cast<int32_t>( _enum );
 
 	const auto* errString = TEnumStrings<T>::m_stringArr[stringIndex];
 	return errString;

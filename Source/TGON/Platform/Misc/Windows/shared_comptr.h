@@ -21,14 +21,14 @@ class TGON_API shared_comptr
 
 public:
 	// Set the pointer without increasing the reference count.
-	void Attach( ComptrType* )
+	void Attach( ComptrType* rawPtr )
 	{
 		if ( m_rawPtr )
 		{
 			m_rawPtr->Relese( );
 		}
 	
-		m_rawPtr = rhs.m_rawPtr;
+		m_rawPtr = rawPtr;
 	}
 
 	// Set the pointer without decreasing the reference count.
@@ -79,7 +79,7 @@ public:
 			m_rawPtr->AddRef( );
 		}
 	}
-	shared_comptr( shared_comptr&& ) :
+	shared_comptr( shared_comptr&& rhs ) :
 		m_rawPtr( rhs.m_rawPtr )
 	{
 		rhs.m_rawPtr = nullptr;

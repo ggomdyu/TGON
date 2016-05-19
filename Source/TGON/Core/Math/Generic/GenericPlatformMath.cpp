@@ -2,9 +2,6 @@
 #include "GenericPlatformMath.h"
 
 
-const float tgon::GenericPlatformMath::EPSILON = 0.0001f;
-const float tgon::GenericPlatformMath::PI = 3.141592654f;
-
 uint32_t tgon::GenericPlatformMath::x65599Hash(
 	const char* str,
 	size_t length ) 

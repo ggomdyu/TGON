@@ -180,6 +180,7 @@
     <ClInclude Include="..\..\Source\TGON\System\TCoreEngine.h" />
     <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\WindowSystem.h" />
+    <ClInclude Include="TContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="..\..\Source\TGON\System\TCoreEngine.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\TimeSystem.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\WindowSystem.cpp" />
+    <ClCompile Include="TContext.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

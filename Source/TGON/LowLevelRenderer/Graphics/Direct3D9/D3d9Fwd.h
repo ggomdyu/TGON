@@ -1,7 +1,6 @@
 #pragma once
-#include <atlbase.h>
-#include "../../../Platform/Misc/Windows/shared_comptr.h"
 #include <d3d9.h>
+#include "../../../Platform/Misc/Windows/shared_comptr.h"
 
 
 struct IDirect3D9Ex;
@@ -13,9 +12,9 @@ struct ID3DXMesh;
 struct IDirect3DTexture9;
 
 using SpD3d9Ex = tgon::shared_comptr<IDirect3D9Ex>;
-using SpD3d9DeviceEx = CComPtr<IDirect3DDevice9Ex>;
-using SpD3d9Sprite = CComPtr<ID3DXSprite>;
-using SpVertexBuffer = CComPtr<IDirect3DVertexBuffer9>;
-using SpD3d9Effect = CComPtr<ID3DXEffect>;
-using SpD3d9Mesh = CComPtr<ID3DXMesh>;
-using SpD3d9Texture = CComPtr<IDirect3DTexture9>;
+using SpD3d9DeviceEx = tgon::shared_comptr<IDirect3DDevice9Ex>;
+using SpD3d9Sprite = tgon::shared_comptr<ID3DXSprite>;
+using SpVertexBuffer = tgon::shared_comptr<IDirect3DVertexBuffer9>;
+using SpD3d9Effect = tgon::shared_comptr<ID3DXEffect>;
+using SpD3d9Mesh = tgon::shared_comptr<ID3DXMesh>;
+using SpD3d9Texture = tgon::shared_comptr<IDirect3DTexture9>;

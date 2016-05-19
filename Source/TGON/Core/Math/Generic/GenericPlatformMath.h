@@ -10,6 +10,11 @@
 #pragma once
 #include "../TVector3.h"
 #include "../../../Platform/Config/Build.h"
+#include "../../../Platform/Config/SyntaxCompatible.h"
+
+
+#define PI 3.141592654f
+#define EPSILON 0.0001f
 
 
 namespace tgon
@@ -17,29 +22,24 @@ namespace tgon
 class TGON_API GenericPlatformMath
 {
 public:
-	static const float EPSILON;
-	static const float PI;
+	TGON_CONSTEXPR static float DegreeToRadian( float degree );
+	TGON_CONSTEXPR static float RadianToDegree( float radian );
 
-	static float DegreeToRadian( float degree );
-	static double DegreeToRadian( double degree );
-	static float RadianToDegree( float radian );
-	static double RadianToDegree( double radian );
-
-	template<class _Ty> static _Ty Sqrt( _Ty value );
-	template<class _Ty> static _Ty Max( _Ty first, _Ty second );
-	template<class _Ty> static _Ty Min( _Ty first, _Ty second );
-	template<class _Ty> static _Ty Abs( _Ty value );
-	template<class _Ty> static _Ty Clamp( _Ty value, _Ty min, _Ty max );
+	BOOST_FORCEINLINE static float Sqrt( float value );
+	TGON_CONSTEXPR static float Max( float first, float second );
+	TGON_CONSTEXPR static float Min( float first, float second );
+	TGON_CONSTEXPR static float Abs( float value );
+	TGON_CONSTEXPR static float Clamp( float value, float min, float max );
 
 	/*
 		Hashing
 	*/
-	static uint32_t GenerateHash( const char* str );
+	BOOST_FORCEINLINE static uint32_t GenerateHash( const char* str );
 
 	/*
 		Interpolation
 	*/
-	static float Lerp( float from, float to, float t );
+	TGON_CONSTEXPR static float Lerp( float from, float to, float t );
 	static float Smoothstep( float from, float to, float t );
 	static TVector3 Hermite( const TVector3& a, const TVector3& b, const TVector3& c, float t );
 
@@ -50,31 +50,19 @@ private:
 };
 
 
-BOOST_FORCEINLINE float GenericPlatformMath::DegreeToRadian(
+TGON_CONSTEXPR_OR_INLINE float GenericPlatformMath::DegreeToRadian(
 	float angle ) 
 {
 	return angle*( PI/180.f );
 }
 
-BOOST_FORCEINLINE double GenericPlatformMath::DegreeToRadian(
-	double degree )
-{
-	return degree*( PI/180.0 );
-}
-
-BOOST_FORCEINLINE float GenericPlatformMath::RadianToDegree(
+TGON_CONSTEXPR_OR_INLINE float GenericPlatformMath::RadianToDegree(
 		float radian ) 
 {
 	return radian*( 180.f/PI );
 }
 
-BOOST_FORCEINLINE double GenericPlatformMath::RadianToDegree(
-	double radian )
-{
-	return radian*( 180.0/PI );
-}
-
-BOOST_FORCEINLINE float GenericPlatformMath::Lerp(
+TGON_CONSTEXPR float GenericPlatformMath::Lerp(
 	float from,
 	float to,
 	float t ) 
@@ -82,7 +70,7 @@ BOOST_FORCEINLINE float GenericPlatformMath::Lerp(
 	return from + (( to-from )*t );
 }
 
-BOOST_FORCEINLINE float tgon::GenericPlatformMath::Smoothstep(
+inline float tgon::GenericPlatformMath::Smoothstep(
 	float from,
 	float to,
 	float t ) 
@@ -94,7 +82,7 @@ BOOST_FORCEINLINE float tgon::GenericPlatformMath::Smoothstep(
 	return _t*_t*( 3-2*_t );
 }
 
-BOOST_FORCEINLINE TVector3 GenericPlatformMath::Hermite(
+inline TVector3 GenericPlatformMath::Hermite(
 	const TVector3& a,
 	const TVector3& b,
 	const TVector3& c,
@@ -105,32 +93,28 @@ BOOST_FORCEINLINE TVector3 GenericPlatformMath::Hermite(
 			( t*t*c )};
 }
 
-template<class _Ty>
-BOOST_FORCEINLINE _Ty GenericPlatformMath::Max(
-	_Ty first, 
-	_Ty second )
+TGON_CONSTEXPR_OR_INLINE float GenericPlatformMath::Max(
+	float first,
+	float second )
 {
 	return ( first >= second ) ? first : second;
 }
 
-template<class _Ty>
-BOOST_FORCEINLINE _Ty GenericPlatformMath::Min(
-	_Ty first, 
-	_Ty second )
+TGON_CONSTEXPR_OR_INLINE float GenericPlatformMath::Min(
+	float first, 
+	float second )
 {
 	return ( first <= second ) ? first : second;
 }
 
-template<class _Ty>
-BOOST_FORCEINLINE _Ty GenericPlatformMath::Abs(
-	_Ty value )
+TGON_CONSTEXPR_OR_INLINE float GenericPlatformMath::Abs(
+	float value )
 {
-	return std::abs( value );
+	return ( value < 0 ) ? -value : value;
 }
 
-template<class _Ty>
-BOOST_FORCEINLINE _Ty tgon::GenericPlatformMath::Clamp(
-	_Ty value, _Ty min, _Ty max ) 
+TGON_CONSTEXPR_OR_INLINE float tgon::GenericPlatformMath::Clamp(
+	float value, float min, float max ) 
 {
 	return GenericPlatformMath::Max(
 		GenericPlatformMath::Min( value, max ),
@@ -138,9 +122,8 @@ BOOST_FORCEINLINE _Ty tgon::GenericPlatformMath::Clamp(
 	);
 }
 
-template<class _Ty>
-BOOST_FORCEINLINE _Ty tgon::GenericPlatformMath::Sqrt(
-	_Ty value )
+BOOST_FORCEINLINE float tgon::GenericPlatformMath::Sqrt(
+	float value )
 {
 	return std::sqrt( value );
 }
