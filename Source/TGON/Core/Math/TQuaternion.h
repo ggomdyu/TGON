@@ -18,7 +18,11 @@ struct TGON_API TQuaternion
 {
 public:
 	TQuaternion( );
+
+	// In Quaternion, x, y, z means a Axis. w is angle scalar.
 	TQuaternion( float x, float y, float z, float w );
+
+	// Pass axis as TVector3. w is angle scalar.
 	TQuaternion( const TVector3& v, float w );
 
 
