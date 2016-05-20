@@ -10,15 +10,13 @@
 #include "../Interface/IGraphics.h"
 #include "../../../Platform/Slate/PlatformFwd.h"
 
-#include <d3d9.h>
 #include <d3dx9.h>
 #include "D3d9Fwd.h"
 
 
 /*
 	Import libraries
-*/
-#pragma comment( lib, "d3d9.lib" )
+*/#pragma comment( lib, "d3d9.lib" )
 #if defined( _DEBUG ) || defined( DEBUG )
 	#pragma comment( lib, "d3dx9d.lib" )
 #else
@@ -26,12 +24,12 @@
 #endif
 
 
+
 namespace tgon
 {
 
 
-class D3d9Graphics;
-typedef D3d9Graphics GraphicsImpl;
+using GraphicsImpl = class D3d9Graphics;
 
 class D3d9Graphics : private IGraphics
 {
@@ -42,8 +40,8 @@ public:
 	virtual void BeginScene( ) override;
 	virtual void EndScene( ) override;
 
-	IDirect3D9Ex* GetD3d( );
-	IDirect3DDevice9Ex* GetD3dDevice( );
+	const SpD3d9Ex& GetD3d( ) const;
+	const SpD3d9DeviceEx& GetD3dDevice( ) const;
 
 
 	/*
@@ -71,6 +69,17 @@ private:
 	SpD3d9Sprite m_d3dSprite;
 	D3DCAPS9 m_deviceCaps;
 };
+
+
+inline const SpD3d9Ex& D3d9Graphics::GetD3d( ) const
+{
+	return m_d3d;
+}
+
+inline const SpD3d9DeviceEx& D3d9Graphics::GetD3dDevice( ) const
+{
+	return m_d3dDevice;
+}
 
 
 }

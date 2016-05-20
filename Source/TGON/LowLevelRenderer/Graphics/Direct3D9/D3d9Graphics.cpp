@@ -109,13 +109,3 @@ void tgon::D3d9Graphics::EndScene( )
 	V( m_d3dDevice->EndScene( ));
 	V( m_d3dDevice->Present( nullptr, nullptr, nullptr, nullptr ));
 }
-
-IDirect3D9Ex* tgon::D3d9Graphics::GetD3d( )
-{
-	return m_d3d;
-}
-
-IDirect3DDevice9Ex* tgon::D3d9Graphics::GetD3dDevice( )
-{
-	return m_d3dDevice;
-}
