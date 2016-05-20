@@ -17,6 +17,10 @@ namespace tgon
 struct TGON_API TQuaternion
 {
 public:
+	static const TQuaternion Zero;
+	static const TQuaternion Identity;
+
+public:
 	TQuaternion( );
 
 	// In Quaternion, x, y, z means a Axis. w is angle scalar.
@@ -44,6 +48,8 @@ public:
 	float& operator[]( int32_t );
 	float operator[]( int32_t ) const;
 	
+public:
+
 
 public:
 	float x, y, z, w;

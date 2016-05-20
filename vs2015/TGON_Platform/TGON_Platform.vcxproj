@@ -75,7 +75,7 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\config\BuildOption.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Config\Compiler.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Config\Platform.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Config\SyntaxCompatible.h" />

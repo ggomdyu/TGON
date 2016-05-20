@@ -33,7 +33,7 @@ public:
 		@ Gets
 	*/
 public:
-	virtual uint32_t	GetHashCode( ) const = 0;
+	virtual uint32_t GetHashCode( ) const = 0;
 	virtual const char* GetName( ) const = 0;
 };
 

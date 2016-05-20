@@ -169,9 +169,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h">
-      <Filter>hpp\Config</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Config\Compiler.h">
       <Filter>hpp\Config</Filter>
     </ClInclude>
@@ -264,6 +261,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBoxType.h">
       <Filter>hpp\MessageBox\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\config\BuildOption.h">
+      <Filter>hpp\Config</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
