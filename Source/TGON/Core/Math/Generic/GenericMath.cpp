@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.h"
-#include "GenericPlatformMath.h"
+#include "GenericMath.h"
 
 
-uint32_t tgon::GenericPlatformMath::x65599Hash(
+uint32_t tgon::GenericMath::x65599Hash(
 	const char* str,
 	size_t length ) 
 {

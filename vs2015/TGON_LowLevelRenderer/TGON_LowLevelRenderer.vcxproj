@@ -31,6 +31,7 @@
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Util.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Interface\IGraphics.h" />
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\PlatformGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>

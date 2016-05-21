@@ -3,10 +3,10 @@
 
 
 tgon::TThreadPool::TThreadPool( std::size_t numThread ) :
-	m_isStop( false ),
+	m_isDestroying( false ),
 	m_waitCv( ),
 	m_finishCv( ),
-	m_workCount( )
+	m_currWorkCount( )
 {
 	for ( std::size_t i =0; i <numThread; ++i )
 	{
@@ -20,7 +20,7 @@ tgon::TThreadPool::~TThreadPool( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 
-	m_isStop = true;
+	m_isDestroying = true;
 	m_waitCv.notify_all( );
 	lock.unlock( );
 
@@ -39,8 +39,13 @@ void tgon::TThreadPool::Wait( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 	m_finishCv.wait( lock,
-					[this]( ){ return ( m_workCount == 0 ) && ( m_taskQueue.empty( )); }
-			);
+		// Wait until all of works are finished..
+		[this]( )
+		{
+			return ( m_currWorkCount == 0 ) &&
+				( m_workQueue.empty( ));
+		}
+	);
 }
 
 void tgon::TThreadPool::InfiniteLoop( )
@@ -49,29 +54,37 @@ void tgon::TThreadPool::InfiniteLoop( )
 	{
 		std::unique_lock<std::mutex> lock( m_mutex );
 		m_waitCv.wait( lock,
-					[this]( ){ return ( m_isStop || !m_taskQueue.empty( )); }
-			);
+			// m_waitCv will wake up one thread when these conditions return true.
+			[this]( )
+			{ 
+				return ( m_isDestroying || 
+					!m_workQueue.empty( )); 
+			}
+		);
 
-		if ( !m_taskQueue.empty( ))
+		if ( !m_workQueue.empty( ))
 		{
 			/*
-				Starting work
+				START
 			*/
-			++m_workCount;
+			++m_currWorkCount;
 
-			auto task = m_taskQueue.front( );
-			m_taskQueue.pop_front( );
+			// Get the work and pop
+			auto poppedWork = m_workQueue.front( );
+			m_workQueue.pop_front( );
 
-			lock.unlock( );	// Unlock mutex for the other thread's running.
-			task( );
+			// Unlock mutex for the other thread's running.
+			lock.unlock( );
+			poppedWork( );
+
 
 			/*
-				Finishing work
+				FINISH
 			*/
-			--m_workCount;
+			--m_currWorkCount;
 			m_finishCv.notify_one( );
 		}
-		else if ( m_isStop )
+		else if ( m_isDestroying )
 		{
 			break;
 		}

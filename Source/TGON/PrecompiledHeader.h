@@ -8,18 +8,25 @@
 
 
 // Standard C headers are here
-#include <stdint.h>
 
 // Standard C++ headers are here
+#include <cstdint>
 #include <cassert>
 #include <memory>
+#include <string>
 #include <vector>
+#include <deque>
 #include <map>
 #include <unordered_map>
-#include <string>
-#include <map>
+#include <functional>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <atomic>
+
 
 // Third-party headers are here
 // boost
 #include <boost/noncopyable.hpp>
 #include <boost/config/suffix.hpp>
+#include <boost/predef.h>

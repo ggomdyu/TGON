@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-typedef MathImpl TMath;
+using TMath = MathImpl;
 
 
 }

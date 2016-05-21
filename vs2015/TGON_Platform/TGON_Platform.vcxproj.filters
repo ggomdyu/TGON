@@ -120,6 +120,18 @@
     <Filter Include="cpp\MessageBox\Windows">
       <UniqueIdentifier>{92d80a21-0fa9-477c-840a-dc2bfd19dd90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\Property">
+      <UniqueIdentifier>{e862433c-c516-4656-9cdb-2a02e824d067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Property\Android">
+      <UniqueIdentifier>{3f5d704c-ae6e-4c9f-bcc5-f80703bec2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Property\Windows">
+      <UniqueIdentifier>{934da62c-dab8-494e-ae2e-6d8946fc94c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Slate">
+      <UniqueIdentifier>{96c2e0c5-f289-4a67-84ff-c961acdac925}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.cpp">
@@ -183,9 +195,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h">
       <Filter>hpp\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.hpp">
-      <Filter>hpp\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h">
       <Filter>hpp\Thread</Filter>
@@ -264,6 +273,45 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\config\BuildOption.h">
       <Filter>hpp\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Property\Android\AndroidProperty.h">
+      <Filter>hpp\Property\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Property\Windows\WindowsProperty.h">
+      <Filter>hpp\Property\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\PlatformWindow.h">
+      <Filter>hpp\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMessageBox.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformSIMD.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformTime.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformWindow.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformApplication.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformConsole.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformFwd.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformGraphics.h">
+      <Filter>hpp\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformProperty.h">
+      <Filter>hpp\Slate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

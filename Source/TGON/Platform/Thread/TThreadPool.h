@@ -6,13 +6,7 @@
 */
 
 #pragma once
-#include <deque>
-#include <functional>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
-#include <atomic>
-#include <stdint.h>
+
 
 namespace tgon
 {
@@ -20,18 +14,19 @@ namespace tgon
 
 class TThreadPool final
 {
-	typedef std::deque<std::function<void()>> task_queue;
-	typedef std::deque<std::thread> thread_queue;
+	using WorkQueue = std::deque<std::function<void()>>;
+	using ThreadQueue = std::deque<std::thread>;
 
 public:
-	// Make thread as mush as core count
-	TThreadPool( std::size_t numThread = std::thread::hardware_concurrency( ));
+	// Allocate thread ( default: Make as much as core count )
+	explicit TThreadPool( std::size_t numThread = std::thread::hardware_concurrency( ));
 	~TThreadPool( );
 
-public:
+	// Enqueue the work. The idle thread will execute the work.
 	template <class T, class... Args>
 	void Request( T&& f, Args&&... args );
 
+	// Wait until the work threads finished all of works
 	void Wait( );
 
 private:
@@ -39,18 +34,27 @@ private:
 	void InfiniteLoop( );
 
 private:
-	std::atomic_uint m_workCount;
-
-	task_queue m_taskQueue;
-	thread_queue m_threadQueue;
-
+	bool m_isDestroying;
+	std::atomic_uint m_currWorkCount;
+	WorkQueue m_workQueue;
+	ThreadQueue m_threadQueue;
 	std::mutex m_mutex;
 	std::condition_variable m_waitCv;
 	std::condition_variable m_finishCv;
-	bool m_isStop;
 };
 
 
+template <class T, class... Args>
+void tgon::TThreadPool::Request( T&& f, Args&&... args )
+{
+	std::lock_guard<std::mutex> lock( m_mutex );
+
+	m_workQueue.emplace_back(
+			std::forward<T>( f ), std::forward<Args>( args )...
+		);
+
+	m_waitCv.notify_one( ); // Wake up one thread
 }
 
-#include "TThreadPool.hpp"
+
+}

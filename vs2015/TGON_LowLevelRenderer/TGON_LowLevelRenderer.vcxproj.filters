@@ -80,6 +80,9 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\PlatformGraphics.h">
+      <Filter>hpp\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">

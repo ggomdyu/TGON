@@ -1,8 +1,9 @@
 // TGON_Test.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
 //
 
-#include "stdafx.h"
+#include "PrecompiledHeader.h"
 
+#include <cassert>
 #include <iostream>
 #include <stdint.h>
 
@@ -48,15 +49,14 @@ void SpeedTest( )
 
 #include <Time/TTime.h>
 #include <iostream>
+#include <Math/TRandom.h>
+#include <Math/TMatrix3x3.h>
+#include <Math/TMatrix4x4.h>
 
 int main( )
 {
 	using namespace tgon;
-	using namespace std;
 
-	while ( true )
-	{
-	}
 
     return 0;
 }

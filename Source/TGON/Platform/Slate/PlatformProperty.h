@@ -6,10 +6,8 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
-
-#ifdef TGON_PLATFORM_WINDOWS
-	#include "../Config/Property/Windows/WindowsProperty.h"
-#elif TGON_PLATFORM_ANDROID
-	#include "../Config/Property/Android/AndroidProperty.h"
+#if BOOST_OS_WINDOWS
+	#include "../Property/Windows/WindowsProperty.h"
+#elif BOOST_OS_ANDROID
+	#include "../Property/Android/AndroidProperty.h"
 #endif

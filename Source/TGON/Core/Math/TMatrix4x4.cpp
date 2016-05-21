@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "TMatrix4x4.h"
 
-
+#include "TMatrix3x3.h"
 #include "TVector3.h"
 
 
@@ -16,7 +16,6 @@ const tgon::TMatrix4x4 tgon::TMatrix4x4::Zero(
 	0.f, 0.f, 0.f, 0.f,
 	0.f, 0.f, 0.f, 0.f,
 	0.f, 0.f, 0.f, 0.f );
-
 
 tgon::TMatrix4x4::TMatrix4x4( ) :
 	_00( 1.f ), _01( 0.f ), _02( 0.f ), _03( 0.f ),
@@ -36,6 +35,14 @@ tgon::TMatrix4x4::TMatrix4x4(
 	_10( _10 ), _11( _11 ), _12( _12 ), _13( _13 ),
 	_20( _20 ), _21( _21 ), _22( _22 ), _23( _23 ),
 	_30( _30 ), _31( _31 ), _32( _32 ), _33( _33 )
+{
+}
+
+tgon::TMatrix4x4::TMatrix4x4( const TMatrix3x3& rhs ) :
+	_00( rhs._00 ), _01( rhs._01 ), _02( rhs._02 ), _03( 0.f ),
+	_10( rhs._10 ), _11( rhs._11 ), _12( rhs._12 ), _13( 0.f ),
+	_20( rhs._20 ), _21( rhs._21 ), _22( rhs._22 ), _23( 0.f ),
+	_30( 0.f ),		_31( 0.f ),		_32( 0.f ),		_33( 1.f )
 {
 }
 
@@ -234,13 +241,11 @@ tgon::TMatrix4x4 tgon::TMatrix4x4::Viewport(
 
 void tgon::TMatrix4x4::Transpose( )
 {
-	// 불확실. 일단호출시 assert시킴
-	assert( 0 );
 	TMatrix4x4 mat(
-		m[0][0], m[1][0], m[2][0], m[3][0],
-		m[0][1], m[1][1], m[2][1], m[3][1],
-		m[0][2], m[1][2], m[2][2], m[3][2],
-		m[0][3], m[1][3], m[2][3], m[3][3]
+		_00, _10, _20, _30,
+		_01, _11, _21, _31,
+		_02, _12, _22, _32,
+		_03, _13, _23, _33
 	);
 
 	*this = mat;

@@ -9,7 +9,7 @@
 
 #pragma once
 #include "../Platform/Slate/PlatformApplication.h"
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 #include "../Config/SyntaxCompatible.h"
 
 

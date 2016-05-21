@@ -22,7 +22,8 @@
     <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Error\TErrCode.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp" />
@@ -41,14 +42,14 @@
     <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCode.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCodeUtil.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\TMathSSE2.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsPlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsMath.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h" />

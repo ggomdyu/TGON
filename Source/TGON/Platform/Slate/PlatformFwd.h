@@ -17,7 +17,7 @@ namespace tgon
 	using WindowImpl = class WindowsWindow;
 	using ApplicationImpl = class WindowsApplication;
 	using CursorImpl = class WindowsCursor;
-	using MathImpl = class WindowsPlatformMath;
+	using MathImpl = class WindowsMath;
 	using ConsoleImpl = class WindowsConsole;
 	using TimeImpl = class WindowsTime;
 

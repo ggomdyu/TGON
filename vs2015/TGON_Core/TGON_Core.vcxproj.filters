@@ -54,9 +54,6 @@
     <Filter Include="cpp\Math\Generic">
       <UniqueIdentifier>{e4e3e948-3ee7-4c1b-85f4-d3a3ff031556}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Math\Windows">
-      <UniqueIdentifier>{a6a8954d-f04a-4d10-ba72-7ba9e168125a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
     </Filter>
@@ -86,9 +83,6 @@
     <ClCompile Include="..\..\Source\TGON\Core\Error\TErrCode.cpp">
       <Filter>cpp\Error</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.cpp">
-      <Filter>cpp\Math\Generic</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp">
       <Filter>cpp\Math</Filter>
     </ClCompile>
@@ -106,6 +100,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp">
       <Filter>cpp\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
+      <Filter>cpp\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.cpp">
+      <Filter>cpp\Math\Generic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,15 +151,6 @@
     <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCodeUtil.h">
       <Filter>hpp\Error</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\TMathSSE2.h">
-      <Filter>hpp\Math\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsPlatformMath.h">
-      <Filter>hpp\Math\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericPlatformMath.h">
-      <Filter>hpp\Math\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
       <Filter>hpp\Math</Filter>
     </ClInclude>
@@ -180,6 +171,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
       <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h">
+      <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.h">
+      <Filter>hpp\Math\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsMath.h">
+      <Filter>hpp\Math\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

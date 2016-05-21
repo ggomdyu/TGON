@@ -1,5 +1,5 @@
 #pragma once
-#include "../Platform/Slate/PlatformMessageBox.h"
+#include "../Slate/PlatformMessageBox.h"
 
 
 namespace tgon

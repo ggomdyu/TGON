@@ -8,7 +8,7 @@
 #pragma once
 #include <string>
 #include "../Core/Math/TMath.h"
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 
 
 namespace tgon

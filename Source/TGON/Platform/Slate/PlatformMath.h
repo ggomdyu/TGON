@@ -7,10 +7,10 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
+#include "../Platform/Config/Platform.h"
 
 #ifdef TGON_PLATFORM_WINDOWS
-	#include "../../Core/Math/Windows/WindowsPlatformMath.h"
+	#include "../../Core/Math/Windows/WindowsMath.h"
 #elif TGON_PLATFORM_ANDROID
 #elif TGON_PLATFORM_LINUX
 #endif

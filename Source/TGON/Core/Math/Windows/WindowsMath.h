@@ -9,16 +9,16 @@
 
 #pragma once
 #include <xmmintrin.h>
-#include "../Generic/GenericPlatformMath.h"
+#include "../Generic/GenericMath.h"
 
 
 namespace tgon
 {
 
 
-using MathImpl = class WindowsPlatformMath;
+using MathImpl = class WindowsMath;
 
-class TGON_API WindowsPlatformMath : public GenericPlatformMath
+class TGON_API WindowsMath : public GenericMath
 {
 public:
 	static float Round( float val );
@@ -28,30 +28,30 @@ public:
 	static int32_t FloorToInt( float val );
 
 private:
-	WindowsPlatformMath( ) = delete;
-	~WindowsPlatformMath( ) = delete;
+	WindowsMath( ) = delete;
+	~WindowsMath( ) = delete;
 };
 
 
-inline float tgon::WindowsPlatformMath::Round( 
+inline float tgon::WindowsMath::Round( 
 	float val ) 
 {
 	return static_cast<float>( RoundToInt( val ));
 }
 
-inline int32_t tgon::WindowsPlatformMath::RoundToInt( 
+inline int32_t tgon::WindowsMath::RoundToInt( 
 	float val ) 
 {
 	return _mm_cvt_ss2si( _mm_set_ss( val+val+0.5f )) >> 1;
 }
 
-inline float tgon::WindowsPlatformMath::Floor( 
+inline float tgon::WindowsMath::Floor( 
 	float val ) 
 {
 	return static_cast<float>( FloorToInt( val ));
 }
 
-inline int32_t tgon::WindowsPlatformMath::FloorToInt(
+inline int32_t tgon::WindowsMath::FloorToInt(
 	float val ) 
 {
 	return ( _mm_cvt_ss2si( _mm_set_ss( val+val-0.5f )) >> 1 );

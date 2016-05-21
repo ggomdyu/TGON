@@ -4,7 +4,7 @@
 
 #include "../Core/TObject.h"
 #include "../Platform/Slate/PlatformFwd.h"
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 
 
 namespace tgon

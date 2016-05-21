@@ -19,17 +19,10 @@
 		#define TGON_CONSTEXPR constexpr 
 		#define TGON_CONSTEXPR_OR_CONST constexpr
 		#define TGON_CONSTEXPR_OR_INLINE constexpr
-		#define TGON_STATIC_CONSTEXPR_VALUE( type, name, value )\
-			static constexpr type name = value;
-		#define TGON_STATIC_CONSTEXPR_VALUE_IMPL( name, value )
 	#else
 		#define TGON_CONSTEXPR
 		#define TGON_CONSTEXPR_OR_CONST const
 		#define TGON_CONSTEXPR_OR_INLINE inline
-		#define TGON_STATIC_CONSTEXPR_VALUE( type, name, value )\
-			static const type name;
-		#define TGON_STATIC_CONSTEXPR_VALUE_IMPL( name, value )\
-			decltype( name ) name = value;
 	#endif
 #else // Other compiler
 	#define TGON_CONSTEXPR BOOST_CONSTEXPR
@@ -37,7 +30,7 @@
 #endif
 
 
-// TLS ( Thread local storage )
+// TLS
 #ifdef TGON_COMPILER_MSVC // Using Visual Studio?
 	#if ( _MSC_VER >= 1900 )
 		#define TGON_THREAD_LOCAL thread_local

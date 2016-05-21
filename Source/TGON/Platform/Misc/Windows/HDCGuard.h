@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Config/Build.h"
+#include "../../Config/BuildOption.h"
 
 
 #define WIN32_LEAN_AND_MEAN

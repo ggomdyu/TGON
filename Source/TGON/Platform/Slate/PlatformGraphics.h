@@ -6,13 +6,13 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
+#include "../../Platform/Config/Platform.h"
 
 
-#define TGON_WINDOWS_USING_DIRECTX9
+#define TGON_WINDOWS_USING_DIRECTX9 1
 
 
-#ifdef TGON_PLATFORM_WINDOWS
+#if BOOST_OS_WINDOWS
 	#include <sdkddkver.h>
 
 	// Using Windows version XP or lower?
@@ -20,7 +20,7 @@
 		#define TGON_WINDOWS_USING_DIRECTX9
 	#endif	
 
-	#ifdef TGON_WINDOWS_USING_DIRECTX9
+	#if TGON_WINDOWS_USING_DIRECTX9
 		#include "../Graphics/Direct3D9/D3d9Graphics.h"
 	#elif TGON_WINDOWS_USING_OPENGL
 		#include "../Graphics/OpenGL/OpenGLGraphics.h"
@@ -28,9 +28,9 @@
 		#include "../Graphics/Direct3D11/D3d11Graphics.h"
 	#endif
 
-#elif defined( TGON_PLATFORM_LINUX )
+#elif BOOST_OS_LINUX
 	#include "../Graphics/OpenGL/OpenGLGraphics.h"
 
-#elif defined( TGON_PLATFORM_ANDROID )
+#elif BOOST_OS_ANDROID
 	#include "../Graphics/OpenGL/OpenGLESGraphics.h"
 #endif

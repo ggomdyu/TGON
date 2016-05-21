@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 #include "../Core/Math/TVector3.h"
 
 
@@ -29,6 +29,8 @@ public:
 	// Pass axis as TVector3. w is angle scalar.
 	TQuaternion( const TVector3& v, float w );
 
+	TQuaternion( const TQuaternion& );
+
 
 public:
     // Arithmetic operators
@@ -49,7 +51,7 @@ public:
 	float operator[]( int32_t ) const;
 	
 public:
-
+	struct TMatrix4x4 RotateMatrix( ) const;
 
 public:
 	float x, y, z, w;
@@ -76,6 +78,15 @@ inline TQuaternion::TQuaternion(
 {
 }
 
+inline TQuaternion::TQuaternion( 
+	const TQuaternion& rhs ) :
+	x( rhs.x ),
+	y( rhs.y ),
+	z( rhs.z ),
+	w( rhs.w )
+{
+}
+
 inline TQuaternion TQuaternion::operator*(
 	const TQuaternion& rhs ) const
 {
@@ -84,7 +95,7 @@ inline TQuaternion TQuaternion::operator*(
 
 inline TQuaternion TQuaternion::operator+( ) const
 {
-	return TQuaternion( x, y, z, w );
+	return *this;
 }
 
 inline TQuaternion TQuaternion::operator-( ) const

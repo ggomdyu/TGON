@@ -11,7 +11,7 @@
 #include <stdint.h>
 
 #include <boost/noncopyable.hpp>
-#include "../../../Platform/Config/Build.h"
+#include "../../../Platform/Config/BuildOption.h"
 
 
 namespace tgon

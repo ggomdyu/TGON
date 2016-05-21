@@ -9,7 +9,7 @@
 
 #pragma once
 #include "../TTimeType.h"
-#include "../../../Platform/Config/Build.h"
+#include "../../../Platform/Config/BuildOption.h"
 
 #define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>

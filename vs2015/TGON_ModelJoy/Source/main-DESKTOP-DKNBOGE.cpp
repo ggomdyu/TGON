@@ -36,6 +36,9 @@ int32_t OnEventOccured( TWindow* sender, WindowEvent msg )
 	return 1;
 }
 
+#include <Application\TApplication.h>
+
+
 int32_t tgMain( int32_t argc, char* argv[] )
 {
 	using namespace tgon;

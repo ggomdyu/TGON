@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 
 
 namespace tgon

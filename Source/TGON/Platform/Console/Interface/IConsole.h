@@ -9,7 +9,7 @@
 #include <string>
 #include <boost/noncopyable.hpp>
 #include "../../../Core/TObject.h"
-#include "../../../Platform/Config/Build.h"
+#include "../../../Platform/Config/BuildOption.h"
 
 
 namespace tgon

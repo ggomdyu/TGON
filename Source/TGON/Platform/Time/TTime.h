@@ -9,7 +9,7 @@
 
 #pragma once
 #include "../Platform/Slate/PlatformTime.h"
-#include "../Platform/Config/Build.h"
+#include "../Platform/Config/BuildOption.h"
 
 
 namespace tgon

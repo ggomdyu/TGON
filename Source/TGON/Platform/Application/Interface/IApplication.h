@@ -10,7 +10,7 @@
 #pragma once
 #include <stdint.h>
 #include "../TApplicationType.h"
-#include "../../../Platform/Config/Build.h"
+#include "../../../Platform/Config/BuildOption.h"
 #include <Window/WindowEvent.h>
 
 namespace tgon
