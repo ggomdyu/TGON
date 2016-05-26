@@ -18,8 +18,16 @@ namespace tgon
 class TGameObject;
 class IComponent
 {
-protected:
-	struct _component_identifier {};
+public:
+	virtual void Update( float tickTime ) = 0;
+
+
+public:
+	/*
+		Set/Gets
+	*/
+	void SetOwner( TGameObject* owner );
+	TGameObject* GetOwner( ) const;
 
 
 	/*
@@ -29,28 +37,12 @@ public:
 	IComponent( );
 	virtual ~IComponent( ) = 0;
 
-	virtual void Update( float tickTime ) = 0;
-
-	/*
-		Sets
-	*/
-public:
-	void SetOwner( TGameObject* const owner );
-
-
-	/*
-		Gets
-	*/
-public:
-	TGameObject* GetOwner( ) const;
-	virtual uint32_t GetComponentID( ) const = 0;
-
 
 private:
 	TGameObject* m_owner;
 };
 
-inline void IComponent::SetOwner( TGameObject* const owner )
+inline void IComponent::SetOwner( TGameObject* owner )
 {
 	m_owner = owner;
 }

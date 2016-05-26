@@ -2,11 +2,41 @@
 #include "WindowsApplication.h"
 
 #include "../../Window/WindowEvent.h"
+#include "../../Slate/PlatformWindow.h"
 
 
-const ::HINSTANCE tgon::WindowsApplication::m_instanceHandle( ::GetModuleHandleW( NULL ));
-::MSG tgon::WindowsApplication::m_msg;
+TGON_API const HINSTANCE tgon::WindowsApplication::InstanceHandle( 
+	::GetModuleHandleW( NULL ));
+TGON_API MSG tgon::WindowsApplication::
+	m_msg;
 
+
+void tgon::WindowsApplication::Run(
+	WindowsWindow& window )
+{
+	while ( m_msg.message != WM_QUIT )
+	{
+		bool doesMsgExist = MessageLoop( );
+		if ( !doesMsgExist )
+		{
+			window.OnIdle( );
+		}
+	}
+}
+
+bool tgon::WindowsApplication::MessageLoop( )
+{
+	if ( PeekMessageW( &m_msg, nullptr, 0, 0, PM_REMOVE ) == TRUE )
+	{
+		::TranslateMessage( &m_msg ); // Process WM_CHAR
+		::DispatchMessageW( &m_msg );
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
 {
@@ -14,8 +44,8 @@ tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
 	::GetSystemPowerStatus( &sps );
 
 	TSystemBatteryInfo adapter;
-	adapter.batteryFlag = sps.BatteryFlag;
-	adapter.batteryFlag = sps.BatteryLifePercent;
+	adapter.batteryFlag = static_cast<TSystemBatteryInfo::BateryFlag>( sps.BatteryFlag );
+	adapter.batteryFlag = static_cast<TSystemBatteryInfo::BateryFlag>( sps.BatteryLifePercent );
 
 	return adapter;
 }

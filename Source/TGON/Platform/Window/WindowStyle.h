@@ -42,9 +42,6 @@ public:
 	bool TopMost = false;
 	bool ShowMiddle = true;
 	bool ShowImmediately = true;
-	
-	/* Callback */
-	int32_t( *msgCallback )( TWindow*, enum class WindowEvent ) = nullptr;
 };
 
 

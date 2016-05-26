@@ -166,9 +166,6 @@
     <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TGON_LowLevelRenderer\TGON_LowLevelRenderer.vcxproj">
-      <Project>{d51c95a5-b14a-4b3c-9c9e-4cbb411d31c6}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
@@ -176,7 +173,6 @@
     <ClInclude Include="..\..\Source\TGON\System\ISystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\GraphicsSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\SceneSystem.h" />
-    <ClInclude Include="..\..\Source\TGON\System\SystemManager.h" />
     <ClInclude Include="..\..\Source\TGON\System\TCoreEngine.h" />
     <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\WindowSystem.h" />

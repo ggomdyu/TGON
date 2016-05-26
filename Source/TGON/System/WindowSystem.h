@@ -52,7 +52,10 @@ private:
 inline void WindowSystem::AddWindow(
 	const SpTWindow& window )
 {
-	m_wndRepo[window->GetCaption().c_str()] = window;
+	wchar_t caption[256] {0};
+	window->GetCaption( caption );
+
+	m_wndRepo[caption] = window;
 }
 
 inline const tgon::WpTWindow& tgon::WindowSystem::GetWindow(

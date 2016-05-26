@@ -51,17 +51,8 @@
     <Filter Include="cpp\Error">
       <UniqueIdentifier>{e01f4bbf-21a5-4c7b-94ef-6b9aee1c5840}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Math\Generic">
-      <UniqueIdentifier>{e4e3e948-3ee7-4c1b-85f4-d3a3ff031556}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hpp\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Math\Generic">
-      <UniqueIdentifier>{5c3c6d55-72bc-4dba-98b3-f5484b96dce5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Math\Windows">
-      <UniqueIdentifier>{1fa73270-af04-4dd3-a1da-96df2bb5496c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,8 +95,8 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
       <Filter>cpp\Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.cpp">
-      <Filter>cpp\Math\Generic</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
+      <Filter>cpp\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,12 +165,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h">
       <Filter>hpp\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Generic\GenericMath.h">
-      <Filter>hpp\Math\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\Windows\WindowsMath.h">
-      <Filter>hpp\Math\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

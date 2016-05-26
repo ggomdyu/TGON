@@ -4,7 +4,7 @@
 
 #include "../Core/TObject.h"
 #include "../Platform/Slate/PlatformFwd.h"
-#include "../Platform/Config/BuildOption.h"
+#include "../Platform/Config/Build.h"
 
 
 namespace tgon
@@ -18,19 +18,19 @@ public:
 	TGON_OBJECT( TCoreEngine, TObject )
 
 public:
-	explicit TCoreEngine( TMsgCallback msgCallback );
+	explicit TCoreEngine( );
 	~TCoreEngine( );
 
 	void Run( );
 
 private:
 	void InitSystem( );
-	void InitWindow( TMsgCallback msgCallback );
+	void InitWindow( );
 	void InitGraphics( );
 
 private:
-	SpTWindow m_window;
-	SpTGraphics m_graphics;
+//	SpTWindow m_window;
+//	SpTGraphics m_graphics;
 };
 
 

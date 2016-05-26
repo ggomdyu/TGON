@@ -8,12 +8,12 @@ tgon::TimeSystem::TimeSystem( ) :
 	m_timeScale( 1.f ),
 	m_oldTime( TTime::GetBootTime( ))
 {
-	TLOG( "[CREATED] tgon::TimeSystem" );
+	TLog( L"[CREATED] tgon::TimeSystem" );
 }
 
 tgon::TimeSystem::~TimeSystem( )
 {
-	TLOG( "[DESTROYED] tgon::TimeSystem" );
+	TLog( L"[DESTROYED] tgon::TimeSystem" );
 }
 
 void tgon::TimeSystem::Update( float tickTIme )

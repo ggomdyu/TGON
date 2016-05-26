@@ -6,10 +6,7 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
 
-#ifdef TGON_PLATFORM_WINDOWS
+#if BOOST_OS_WINDOWS
 	#include "../Time/Windows/WindowsTime.h"
-#elif TGON_PLATFORM_ANDROID
-	#include "../Time/Android/AndroidTime.h"
 #endif

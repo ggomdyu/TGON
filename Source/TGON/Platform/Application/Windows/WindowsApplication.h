@@ -8,7 +8,8 @@
 
 
 #pragma once
-#include "../Interface/IApplication.h"
+#include "../Abstract/AbstractApplication.h"
+#include "../../Window/WindowEvent.h"
 
 #define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
@@ -19,50 +20,45 @@ namespace tgon
 {
 
 
-using ApplicationImpl = class WindowsApplication;
-
 class TGON_API WindowsApplication : 
-	public IApplication
+	public AbstractApplication
 {
 public:
-	static bool DispatchEvent( _Out_ enum struct WindowEvent* );
-	static void GetScreenSize( int32_t* width, int32_t* height );
-	static struct TSystemBatteryInfo GetPowerInfo( );
+	static TGON_API const HINSTANCE InstanceHandle;
 
-	static HINSTANCE GetInstanceHandle( );
+public:
+	/*
+		About using window
+	*/
+	static void Run( class WindowsWindow& );
+	static bool MessageLoop( );
+	
+	/*
+		About System
+	*/
+	static struct TSystemBatteryInfo GetPowerInfo( );
+	static void ExitThread( );
+	static void Exit( int32_t exitCode );
+	static void Quit( int32_t exitCode );
+	static void Restart( );
+
+	/*
+		About UI
+	*/
+	static void GetScreenSize( int32_t* width, int32_t* height );
+	static void EnableVisualStyles( );
+
+
 
 private:
 	WindowsApplication( ) = delete;
 	~WindowsApplication( ) = delete;
 
 private:
-	static MSG m_msg;
-	static const HINSTANCE m_instanceHandle;
+	static TGON_API MSG m_msg;
 };
 
-inline bool tgon::WindowsApplication::DispatchEvent(
-	_Out_ WindowEvent* outEvent )
-{
-	BOOL doesMsgExist = PeekMessageW( &m_msg, nullptr, 0, 0, PM_REMOVE );
-	if ( doesMsgExist )
-	{
-		::TranslateMessage( &m_msg ); // Process WM_CHAR
-		::DispatchMessageW( &m_msg );
-
-		*outEvent = static_cast<WindowEvent>( m_msg.message );
-		return true;
-	}
-	else
-	{
-		*outEvent = WindowEvent::kNone;
-		return false;
-	}
-}
-
-inline HINSTANCE WindowsApplication::GetInstanceHandle( )
-{
-	return m_instanceHandle;
-}
+using ApplicationImpl = WindowsApplication;
 
 inline void WindowsApplication::GetScreenSize(
 	int32_t* width, 
@@ -71,6 +67,60 @@ inline void WindowsApplication::GetScreenSize(
 	*width = GetSystemMetrics( SM_CXSCREEN );
 	*height = GetSystemMetrics( SM_CYSCREEN );
 }
+
+inline void WindowsApplication::EnableVisualStyles( )
+{
+	wchar_t dir[MAX_PATH]{ 0 };
+	ULONG_PTR ulpActivationCookie = FALSE;
+
+	ACTCTX actCtx =
+	{
+		sizeof( actCtx ),
+		ACTCTX_FLAG_RESOURCE_NAME_VALID
+		| ACTCTX_FLAG_SET_PROCESS_DEFAULT
+		| ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID,
+		L"shell32.dll", 0, 0, dir, ( LPCWSTR )124
+	};
+	UINT cch = GetSystemDirectory( dir, sizeof( dir ) / sizeof( *dir ) );
+	if ( cch >= sizeof( dir ) / sizeof( *dir ) ) {
+		int n = 3;
+		return; /*shouldn't happen*/
+	}
+	//dir[cch] = TEXT('\0');
+	HANDLE handle = CreateActCtx( &actCtx );
+	if ( handle == NULL )
+	{
+		int n = 3;
+	}
+
+	BOOL isS = ActivateActCtx( handle, &ulpActivationCookie );
+
+	if ( isS == FALSE )
+	{
+		auto err = GetLastError( );
+		int n = 3;
+	}
+}
+
+inline void tgon::WindowsApplication::ExitThread( )
+{
+	::ExitThread( 0 );
+}
+
+inline void tgon::WindowsApplication::Exit( int32_t exitCode )
+{
+	::exit( exitCode );
+}
+
+inline void WindowsApplication::Quit( int32_t exitCode )
+{
+	PostQuitMessage( exitCode );
+}
+
+inline void WindowsApplication::Restart( )
+{
+}
+
 
 
 }

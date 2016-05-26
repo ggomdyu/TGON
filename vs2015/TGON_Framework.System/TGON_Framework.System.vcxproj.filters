@@ -76,9 +76,6 @@
     <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h">
       <Filter>hpp\System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\System\SystemManager.h">
-      <Filter>hpp\System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\System\SceneSystem.h">
       <Filter>hpp</Filter>
     </ClInclude>

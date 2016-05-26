@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="hpp">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="hpp\Suffix">
+      <UniqueIdentifier>{dc1fc030-7162-42c6-93a9-b28594443c0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Predef">
+      <UniqueIdentifier>{939fc3c6-7f9a-4c9d-b009-3bd26285ef1a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Compiler.h">
+      <Filter>hpp\Predef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Platform.h">
+      <Filter>hpp\Predef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Suffix\SyntaxCompatible.h">
+      <Filter>hpp\Suffix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\auto_cast.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Noncopyable.h">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Graphics.h">
+      <Filter>hpp\Predef</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

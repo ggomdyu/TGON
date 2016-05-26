@@ -1,11 +1,11 @@
 #pragma once
 #include <sdkddkver.h>
 
-#define TGON_SUPPORT_SSE2
-#define TGON_SUPPORT_SIMD
+#define TGON_SUPPORT_SSE 1
+#define TGON_SUPPORT_SIMD 1
 
 // Windows Vista or better
 #if ( WINVER >= _WIN32_WINNT_VISTA )
-	#define TGON_SUPPORT_DWMAPI
-	#define TGON_SUPPORT_SHL
+	#define TGON_SUPPORT_DWMAPI 1
+	#define TGON_SUPPORT_SHL 1
 #endif

@@ -5,43 +5,45 @@
 #include <Console/TConsole.h>
 #include <Core/Math/TMath.h>
 #include <Window/WindowEvent.h>
+#include <Window/TWindow.h>
+#include <Window/WindowStyle.h>
 #include <Application/TApplication.h>
 #include <MessageBox/TMessageBox.h>
+#include <System/WindowSystem.h>
 
 
 using namespace tgon;
 
-int32_t OnEventOccured( TWindow* sender, WindowEvent msg )
+class MyWindowForm : public TWindow
 {
-	switch ( msg )
+public:
+	MyWindowForm( ) :
+		TWindow( this->MakeWindowStyle( ), true ) {}
+
+	virtual void OnIdle( ) override
 	{
-	case WindowEvent::kCreate:
-		{
-		}
-		break;
-
-	case WindowEvent::kRMouseDown:
-		{
-//			TMessageBox::Show( L"¾Æadgd!!", L"OPOP", TMsgBoxButton::YesNoCancel );
-	
-		}
-		break;
-
-	case WindowEvent::kDestroy:
-		{
-		}
-		break;
 	}
 
-	return 1;
-}
+private:
+	WindowStyle MakeWindowStyle( ) const
+	{
+		return WindowStyle::ParseFromXML( L"WindowStyle.xml" );
+	}
+};
+
+#include <tgLib/auto_cast.h>
 
 int32_t tgMain( int32_t argc, char* argv[] )
 {
 	using namespace tgon;
 
-	TCoreEngine ce( OnEventOccured );
-	ce.Run( );
+	//TCoreEngine ce( OnEventOccured );
+	//ce.Run( );
+
+	MyWindowForm window;
+	window.Make( );
+	
+	TApplication::Run( window );
 
 	return 0;
 }

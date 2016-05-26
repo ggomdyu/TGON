@@ -5,14 +5,14 @@
 #include "TMatrix4x4.h"
 
 
-const tgon::TVector3 tgon::TVector3::Forward( 0.f, 0.f, 1.f );
-const tgon::TVector3 tgon::TVector3::Back( 0.f, 0.f, -1.f );
-const tgon::TVector3 tgon::TVector3::Up( 0.f, 1.f, 0.f );
-const tgon::TVector3 tgon::TVector3::Down( 0.f, -1.f, 0.f );
-const tgon::TVector3 tgon::TVector3::Left( 1.f, 0.f, 0.f );
-const tgon::TVector3 tgon::TVector3::Right( 1.f, 0.f, 0.f );
-const tgon::TVector3 tgon::TVector3::One( 0.f, 0.f, 0.f );
-const tgon::TVector3 tgon::TVector3::Zero( 0.f, 0.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Forward( 0.f, 0.f, 1.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Back( 0.f, 0.f, -1.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Up( 0.f, 1.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Down( 0.f, -1.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Left( 1.f, 0.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Right( 1.f, 0.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::One( 0.f, 0.f, 0.f );
+TGON_API const tgon::TVector3 tgon::TVector3::Zero( 0.f, 0.f, 0.f );
 
 
 void tgon::TVector3::TransformCoord(
@@ -20,6 +20,8 @@ void tgon::TVector3::TransformCoord(
 {
 	// TVector3's w element is '1'
 
+#if TGON_SUPPORT_SSE
+#else
 	const float transX =
 		x*rhs._00 + y*rhs._10 + z*rhs._20 + rhs._30;
 	const float transY =
@@ -41,11 +43,14 @@ void tgon::TVector3::TransformCoord(
 		y *= inv;
 		z *= inv;
 	}
+#endif
 }
 
 void tgon::TVector3::TransformNormal(
 	const TMatrix4x4& rhs )
 {
+#if TGON_SUPPORT_SSE
+#else
 	// TVector3's w element is '0'
 
 	const float transX =
@@ -58,4 +63,5 @@ void tgon::TVector3::TransformNormal(
 	x = transX;
 	y = transY;
 	z = transZ;
+#endif
 }

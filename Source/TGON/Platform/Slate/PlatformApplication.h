@@ -6,9 +6,7 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
 
-#ifdef TGON_PLATFORM_WINDOWS
+#if BOOST_OS_WINDOWS
 	#include "../Application/Windows/WindowsApplication.h"
-#elif TGON_PLATFORM_ANDROID
 #endif

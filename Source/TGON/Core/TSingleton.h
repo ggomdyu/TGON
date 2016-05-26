@@ -2,23 +2,41 @@
 * Author : Taewoo-Kim
 * Date : 04/25/2015
 * Latest author : Junho-Cha
-* Latest date : 05/10/2016
+* Latest date : 05/22/2016
 */
 
 
 #pragma once
-#include <memory>
 
 
 /*
-	Inherite version
+	Preprocessor version
+*/
+#define TGON_SINGLETON( typeName )\
+	static typeName* Get( )\
+	{\
+		static typeName instance;\
+		return &instance;\
+	}
+
+#define TGON_SINGLETON_DYNAMIC( typeName )\
+	static const std::unique_ptr<typeName>& Get( )\
+	{\
+		static std::unique_ptr<typeName> instance( new typeName );\
+		return instance;\
+	}
+
+
+/*
+	Inherit version
 */
 class ISingleton
 {
-public:
-	virtual void Release( ) = 0;
-};
+	friend class TSingletonGuard;
 
+private:
+	virtual void Release( ) {};
+};
 
 template <class _Ty>
 class TSingleton : public ISingleton
@@ -33,11 +51,49 @@ public:
 		return &spInst;
 	}
 
-	virtual void Release() override {}
-
 protected:
-	TSingleton( ) {}
+	TSingleton( )
+	{
+		TSingletonGuard::Get()->Push( this );
+	}
 	virtual ~TSingleton( ) {}
+};
+
+class TSingletonGuard
+{
+public:
+	static TSingletonGuard* Get( )
+	{
+		static TSingletonGuard myInstance;
+		return &myInstance;
+	}
+
+	void Push( ISingleton* singleton )
+	{
+		auto iter = std::find(
+			m_singletonRepo.begin( ),
+			m_singletonRepo.end( ),
+			singleton
+		);
+
+		// Does not exist?
+		if ( iter != m_singletonRepo.end( ))
+		{
+			m_singletonRepo.push_back( singleton );
+		}
+	}
+
+private:
+	~TSingletonGuard( )
+	{
+		for ( auto& singletonElem : m_singletonRepo )
+		{
+			singletonElem->Release( );
+		}
+	}
+
+private:
+	std::vector<ISingleton*> m_singletonRepo;
 };
 
 
@@ -65,24 +121,6 @@ protected:
 //	TSingletonDynamic( ) {}
 //	virtual ~TSingletonDynamic( ) {}
 //};
-
-
-/*
-	Preprocessor version
-*/
-#define TGON_SINGLETON( typeName )\
-	static typeName* Get( )\
-	{\
-		static typeName instance;\
-		return &instance;\
-	}
-
-#define TGON_SINGLETON_DYNAMIC( typeName )\
-	static const std::unique_ptr<typeName>& Get( )\
-	{\
-		static std::unique_ptr<typeName> instance( new typeName );\
-		return instance;\
-	}
 
 
 // Deprecated...

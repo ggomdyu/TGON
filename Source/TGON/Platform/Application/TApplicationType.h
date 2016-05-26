@@ -3,13 +3,10 @@
 * Date : 03/12/2016
 * Latest author :
 * Latest date :
-* Description :
 */
 
 
 #pragma once
-#include <stdint.h>
-#include "../Config/Platform.h"
 
 
 namespace tgon
@@ -18,9 +15,9 @@ namespace tgon
 
 struct TSystemBatteryInfo
 {
-	enum BateryFlagTable
+	enum class BateryFlag
 	{
-#ifdef TGON_PLATFORM_WINDOWS
+#if BOOST_OS_WINDOWS
 		kHigh = 1,
 		kLow = 2,
 		kCritical = 4,
@@ -30,7 +27,7 @@ struct TSystemBatteryInfo
 #endif
 	};
 
-	uint8_t batteryFlag;
+	BateryFlag batteryFlag; // Check out the BateryFlag
 	uint16_t batteryLifePercent; // 0 ~ 100
 };
 

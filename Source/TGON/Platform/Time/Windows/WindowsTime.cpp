@@ -5,7 +5,7 @@ const uint32_t tgon::WindowsTime::ms_oldTime = GetTickCount( );
 
 tgon::TSystemTime tgon::WindowsTime::GetLocalTime( )
 {
-#ifdef TGON_PLATFORM_WINDOWS
+#if BOOST_OS_WINDOWS
 	SYSTEMTIME prevSysTime;
 	::GetLocalTime( &prevSysTime );
 

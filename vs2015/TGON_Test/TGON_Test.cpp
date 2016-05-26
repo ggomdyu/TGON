@@ -52,11 +52,11 @@ void SpeedTest( )
 #include <Math/TRandom.h>
 #include <Math/TMatrix3x3.h>
 #include <Math/TMatrix4x4.h>
+#include <Console/TConsole.h>
 
 int main( )
 {
 	using namespace tgon;
-
 
     return 0;
 }

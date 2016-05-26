@@ -6,10 +6,10 @@
 
 tgon::WindowSystem::WindowSystem( )
 {
-	TLOG( "[CREATED] tgon::WindowSystem" );
+	TLog( L"[CREATED] tgon::WindowSystem" );
 }
 
 tgon::WindowSystem::~WindowSystem( )
 {
-	TLOG( "[DESTROYED] tgon::WindowSystem" );
+	TLog( L"[DESTROYED] tgon::WindowSystem" );
 }

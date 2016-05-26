@@ -7,10 +7,10 @@
 
 tgon::SystemManager::SystemManager( )
 {
-	TLOG( "[CREATED] tgon::SystemManager" );
+	TLog( L"[CREATED] tgon::SystemManager" );
 }
 
 tgon::SystemManager::~SystemManager( )
 {
-	TLOG( "[DESTROYED] tgon::SystemManager" );
+	TLog( L"[DESTROYED] tgon::SystemManager" );
 }

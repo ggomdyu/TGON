@@ -27,32 +27,29 @@ tgon::WindowsConsole::~WindowsConsole( )
 #endif
 }
 
-void tgon::WindowsConsole::WriteLine( ) 
+
+void tgon::WindowsConsole::Write( 
+	const wchar_t* str )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
-	this->FillBuffer( L"\n" );
-	
 	WriteConsoleW(
 		m_outputHandle,
-		this->GetBuffer( ).c_str( ),
-		this->GetBuffer( ).length( ),
+		str,
+		std::wcslen( str ),
 		nullptr,
-		nullptr );
-
-	this->ClearBuffer( );
+		nullptr 
+	);
 #endif
 }
 
-void tgon::WindowsConsole::Write( ) 
+void tgon::WindowsConsole::Write( 
+	const char* str )
 {
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteConsoleW(
+	WriteConsoleA(
 		m_outputHandle,
-		this->GetBuffer( ).c_str( ),
-		this->GetBuffer( ).length( ),
+		str,
+		std::strlen( str ),
 		nullptr,
-		nullptr );
-
-	this->ClearBuffer( );
-#endif
+		nullptr
+	);
 }

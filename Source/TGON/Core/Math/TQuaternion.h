@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "../Platform/Config/BuildOption.h"
+#include "../Platform/Config/Build.h"
 #include "../Core/Math/TVector3.h"
 
 

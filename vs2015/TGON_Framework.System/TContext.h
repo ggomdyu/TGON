@@ -9,7 +9,7 @@
 #pragma once
 #include <System/ISystem.h>
 #include <Core/TObject.h>
-#include <Config/BuildOption.h>
+#include <Config/Build.h>
 
 namespace tgon
 {

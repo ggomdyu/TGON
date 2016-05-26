@@ -9,7 +9,7 @@
 
 #pragma once
 #include "../TTimeType.h"
-#include "../../../Platform/Config/BuildOption.h"
+#include "../../../Platform/Config/Build.h"
 
 #define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
@@ -20,7 +20,8 @@ namespace tgon
 {
 
 
-using TimeImpl = class WindowsTime;
+class WindowsTime;
+using TimeImpl = WindowsTime;
 
 class TGON_API WindowsTime
 {

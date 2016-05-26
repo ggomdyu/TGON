@@ -21,18 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontFace.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Font\FTFontManager.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d92DSprite.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Camera.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Enum.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Error.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Fwd.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Graphics.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Texture.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Util.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Interface\IGraphics.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\PlatformGraphics.h" />
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -48,17 +36,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d92DSprite.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Camera.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Enum.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Error.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Graphics.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Mesh.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Quad.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Shader.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Texture.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Util.cpp" />
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

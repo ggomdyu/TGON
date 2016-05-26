@@ -16,13 +16,11 @@
 #endif
 
 
-tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	m_wndStyle( wndStyle ),
-	m_msgCallback( wndStyle.msgCallback ),
+tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle, bool isEventHandleable ) :
+	AbstractWindow( wndStyle, isEventHandleable ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
-	// LazyInitialization will invoked in TWindow
 }
 
 tgon::WindowsWindow::~WindowsWindow( )
@@ -30,12 +28,19 @@ tgon::WindowsWindow::~WindowsWindow( )
 	DestroyWindow( m_wndHandle );
 }
 
+void tgon::WindowsWindow::Make( )
+{
+	this->CreateWindowForm( this->GetWindowStyle( ), this->IsEventHandleable( ));
+
+	// Initialization After window created ( Which needs a created window )
+	this->AdditionalInit( this->GetWindowStyle( ));
+}
+
 void tgon::WindowsWindow::BringToTop( ) 
 {
 	/*
-		@ WARNING
-		Windows 98/Me: The system restricts which processes can set the foreground window.
-		DO NOT USE SetFocus or SetForegroundWindow functions for .
+		After Windows 98/Me: The system restricts which processes can set the foreground window.
+		So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
 	*/
 
 	const HWND fgWndHandle( GetForegroundWindow( ));
@@ -81,44 +86,24 @@ void tgon::WindowsWindow::GetSize(
 	int32_t* width,
 	int32_t* height ) const 
 {
-	/*
-		@ WARNING!
-		WindowRect contains caption range
-	*/
 	RECT rt;
+	// @ WARNING! : WindowRect contains caption range
 	GetWindowRect( m_wndHandle, &rt );
 
 	*width = rt.right - rt.left;
 	*height = rt.bottom - rt.top;
 }
 
-std::wstring tgon::WindowsWindow::GetCaption( ) const 
+void tgon::WindowsWindow::GetCaption( 
+	_Out_ wchar_t* caption ) const
 {
-	/*
-		@ TODO
-		Optimize here ( Every calling time, Dynamic allocation is occuring )
-	*/
-
-	const int32_t length =
-		GetWindowTextLengthW( m_wndHandle )+1; // +1 is for \0
-
-	std::wstring caption( length, L'\0' );
-	GetWindowTextW( m_wndHandle, &caption[0], length );
-
-	return caption;
-}
-
-
-void tgon::WindowsWindow::LazyInitialization( )
-{
-	this->CreateWindowForm( m_wndStyle );
-
-	// Initialization After window created ( Which needs a Created window )
-	this->AdditionalInit( m_wndStyle );
+	const int32_t length = GetWindowTextLengthW( m_wndHandle );
+	GetWindowTextW( m_wndHandle, caption, length );
 }
 
 void tgon::WindowsWindow::CreateWindowForm( 
-	const WindowStyle& wndStyle )
+	const WindowStyle& wndStyle,
+	bool isEventHandleable )
 {
 	// Set coordinates of window
 	int32_t x = wndStyle.x;
@@ -142,13 +127,16 @@ void tgon::WindowsWindow::CreateWindowForm(
 
 	// Register Window class to Global table.
 	std::wstring newClassName;
-	bool isSucceed = this->RegisterMyClass( m_wndStyle, &newClassName );
+	bool isSucceed = this->RegisterMyClass( 
+		wndStyle, 
+		&newClassName,
+		isEventHandleable );
 
 	if ( !isSucceed )
 	{
 		MessageBoxW(
 			this->GetWindowHandle( ),
-			L"Failed to invoke tgon::RegisterWindow.",
+			L"Failed to invoke tgon::WindowsWindow::RegisterMyClass.",
 			L"WARNING!",
 			MB_OK | MB_ICONEXCLAMATION );
 
@@ -171,10 +159,12 @@ void tgon::WindowsWindow::CreateWindowForm(
 
 	if ( !m_wndHandle )
 	{
-		MessageBoxW( GetFocus( ),
-					 L"Failed to invoke CreateWindowEx.",
-					 L"WARNING!",
-					 MB_OK | MB_ICONEXCLAMATION );
+		MessageBoxW( 
+			GetFocus( ),
+			L"Failed to invoke CreateWindowEx.",
+			L"WARNING!",
+			MB_OK | MB_ICONEXCLAMATION 
+		);
 		abort( );
 	}
 
@@ -217,10 +207,10 @@ void tgon::WindowsWindow::AdditionalInit(
 
 bool tgon::WindowsWindow::RegisterMyClass(
 	const WindowStyle& wndStyle,
-	std::wstring* outClassName )
+	_Out_ std::wstring* outClassName,
+	bool isEventHandleable )
 {
-	const HINSTANCE instanceHandle( 
-		WindowsApplication::GetInstanceHandle( ));
+	const HINSTANCE instanceHandle( WindowsApplication::InstanceHandle );
 
 	
 	//	Each windows must have diffrent class name.
@@ -237,54 +227,61 @@ bool tgon::WindowsWindow::RegisterMyClass(
 	wcex.hCursor = LoadCursorW( NULL, IDC_ARROW );
 	wcex.hIcon = LoadIconW( NULL, IDI_APPLICATION );
 	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = ( wndStyle.msgCallback ) ?
-		EventableMsgProc : // Custom message proc
-		UneventableMsgProc; // Default message proc; more fast than above
+	wcex.lpfnWndProc = ( isEventHandleable ) ?
+		EvHandleMsgProc : 
+		UnevHandleMsgProc; // Default message procedure; More fast than EvHandleMsgProc
 	wcex.lpszClassName = defClassName.c_str( );
 	wcex.style = CS_DBLCLKS;
 
 	return RegisterClassExW( &wcex ) != 0;
 }
 
-LRESULT WINAPI tgon::WindowsWindow::EventableMsgProc(
+LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
 	HWND wndHandle,
 	UINT msg,
 	WPARAM wParam,
 	LPARAM lParam )
 {
-	TWindow* extraMemAsWindow = 
-		reinterpret_cast<TWindow*>( GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
+	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
+		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 
 	if ( extraMemAsWindow )
 	{
-		if ( extraMemAsWindow->m_msgCallback( extraMemAsWindow,
-				static_cast<WindowEvent>( msg )) > 0 )
+		switch ( msg )
 		{
-			if ( msg == WM_DESTROY )
-			{
-				PostQuitMessage( 0 );
-				extraMemAsWindow->m_isDestroyed = true;
-			}
-		}
-		else
-		{
-			// m_msgCallback returned 0 or less
-			return 0;
+		case WM_LBUTTONUP:
+			extraMemAsWindow->OnLMouseUp( LOWORD( lParam ), HIWORD( lParam ));
+			break;
+		case WM_LBUTTONDOWN:
+			extraMemAsWindow->OnLMouseDown( LOWORD( lParam ), HIWORD( lParam ) );
+			break;
+		case WM_RBUTTONUP:
+			extraMemAsWindow->OnRMouseUp( LOWORD( lParam ), HIWORD( lParam ) );
+			break;
+		case WM_RBUTTONDOWN:
+			extraMemAsWindow->OnRMouseDown( LOWORD( lParam ), HIWORD( lParam ) );
+			break;
+		case WM_MOUSEMOVE:
+			extraMemAsWindow->OnMouseMove( LOWORD( lParam ), HIWORD( lParam ) );
+			break;
+		case WM_DESTROY:
+			PostQuitMessage( 0 );
+			extraMemAsWindow->m_isDestroyed = true;
+			extraMemAsWindow->OnDestroy( );
+			break;
 		}
 	}
-	else if ( msg == WM_NCCREATE )
+	else if ( msg == WM_CREATE )
 	{
-		extraMemAsWindow = reinterpret_cast<TWindow*>(
-				LPCREATESTRUCT( lParam )->lpCreateParams );
-	
-		extraMemAsWindow->m_msgCallback(
-			extraMemAsWindow, WindowEvent::kCreate );
+		extraMemAsWindow = reinterpret_cast<WindowsWindow*>( LPCREATESTRUCT( 
+			lParam )->lpCreateParams );
+		extraMemAsWindow->OnCreate( );
 	}
 
 	return DefWindowProcW( wndHandle, msg, wParam, lParam );
 }
 
-LRESULT WINAPI tgon::WindowsWindow::UneventableMsgProc(
+LRESULT WINAPI tgon::WindowsWindow::UnevHandleMsgProc(
 	HWND wndHandle,
 	UINT msg,
 	WPARAM wParam,
@@ -292,7 +289,7 @@ LRESULT WINAPI tgon::WindowsWindow::UneventableMsgProc(
 {
 	if ( msg == WM_DESTROY )
 	{
-		TWindow* extraMemAsWindow = reinterpret_cast<TWindow*>(
+		WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
 			GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 		
 		extraMemAsWindow->m_isDestroyed = true;

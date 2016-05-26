@@ -6,6 +6,25 @@
 
 // TODO: reference additional headers your program requires here
 
+// Third-party headers are here
+// boost
+#include <boost/noncopyable.hpp>
+#include <boost/config/suffix.hpp>
+#include <boost/predef.h>
+
+// tgLib
+#include <tgLib/Suffix/SyntaxCompatible.h>
+
+
+// Platform dependent headers are here
+#if BOOST_OS_WINDOWS
+	// Disable the min and max macros that defined in <windows.h>
+#	ifndef NOMINMAX
+#		define NOMINMAX
+#	endif
+#		include <windows.h>
+#endif
+
 
 // Standard C headers are here
 
@@ -15,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <initializer_list>
 #include <deque>
 #include <map>
 #include <unordered_map>
@@ -23,10 +43,3 @@
 #include <mutex>
 #include <condition_variable>
 #include <atomic>
-
-
-// Third-party headers are here
-// boost
-#include <boost/noncopyable.hpp>
-#include <boost/config/suffix.hpp>
-#include <boost/predef.h>

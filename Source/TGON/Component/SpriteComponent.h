@@ -25,20 +25,7 @@ public:
 
 	virtual void Update( float tickTime ) override;
 	void Render( );
-
-	/*
-		Gets
-	*/
-	virtual uint32_t GetComponentID( ) const override;
-
-private:
-	static _component_identifier m_identifier;
 };
-
-inline uint32_t SpriteComponent::GetComponentID( ) const
-{
-	return reinterpret_cast<uint32_t>( &m_identifier );
-}
 
 
 }

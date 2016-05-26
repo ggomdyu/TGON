@@ -6,6 +6,7 @@
 */
 
 #pragma once
+
 #if BOOST_OS_WINDOWS
 	#include "../Property/Windows/WindowsProperty.h"
 #elif BOOST_OS_ANDROID
