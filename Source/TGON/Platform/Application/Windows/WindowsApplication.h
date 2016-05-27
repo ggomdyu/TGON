@@ -32,28 +32,14 @@ public:
 
 public:
 	virtual int32_t Run( ) override;
-	virtual void HandleInput( ) override;
-
-public:
-	/*
-		About using window
-	*/
 	static void Run( class WindowsWindow& );
 	static bool MessageLoop( );
-	
-	/*
-		About System
-	*/
-	static struct TSystemBatteryInfo GetPowerInfo( );
 	static void ExitThread( );
 	static void Exit( int32_t exitCode );
 	static void Quit( int32_t exitCode );
 	static void Restart( );
-
-	/*
-		About UI
-	*/
 	static void GetScreenSize( int32_t* width, int32_t* height );
+	static struct TSystemBatteryInfo GetPowerInfo( );
 	static void EnableVisualStyles( );
 
 public:

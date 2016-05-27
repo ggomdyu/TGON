@@ -19,19 +19,21 @@ class Tgon_ModelJoy :
 	public TApplication
 {
 public:
-	Tgon_ModelJoy( /*int argc, char* argv*/ )
+	Tgon_ModelJoy( )
 	{
 		this->SetupWindowComponents( );
 	}
 
 	virtual void OnCreate( ) override
 	{
-		TMessageBox::Show( L"æ»≥Á«œΩ≈∞≈º¿ §ª§ª" );
 	}
 
 	virtual void OnIdle( ) override
 	{
-		TLog( "z" );
+	}
+
+	virtual void OnLMouseDown( int x, int y ) override
+	{
 	}
 
 private:

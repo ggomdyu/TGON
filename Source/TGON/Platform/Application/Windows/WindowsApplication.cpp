@@ -38,10 +38,6 @@ int32_t tgon::WindowsApplication::Run( )
 	return 0;
 }
 
-void tgon::WindowsApplication::HandleInput( )
-{
-}
-
 const tgon::SpTWindow& tgon::WindowsApplication::GetWindow( ) const
 {
 	return m_window;
