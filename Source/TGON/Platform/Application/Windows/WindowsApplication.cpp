@@ -24,8 +24,6 @@ tgon::WindowsApplication::~WindowsApplication( )
 
 int32_t tgon::WindowsApplication::Run( )
 {
-	// TODO:
-
 	while ( m_msg.message != WM_QUIT )
 	{
 		bool doesMsgExist = MessageLoop( );
@@ -46,16 +44,16 @@ const tgon::SpTWindow& tgon::WindowsApplication::GetWindow( ) const
 void tgon::WindowsApplication::Run(
 	WindowsWindow& window )
 {
-	assert( false );
+	assert( false && "You just called DEPRECATED!!" );
 
-	while ( m_msg.message != WM_QUIT )
+	/*while ( m_msg.message != WM_QUIT )
 	{
 		bool doesMsgExist = MessageLoop( );
 		if ( !doesMsgExist )
 		{
-			//window.OnIdle( );
+			windOnIdle( );
 		}
-	}
+	}*/
 }
 
 bool tgon::WindowsApplication::MessageLoop( )
