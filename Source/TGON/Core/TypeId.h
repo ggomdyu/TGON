@@ -6,7 +6,6 @@
 */
 
 #pragma once
-#include <string>
 #include "../Core/Math/TMath.h"
 #include "../Platform/Config/Build.h"
 
@@ -15,30 +14,31 @@ namespace tgon
 {
 
 
-class TGON_API TTypeId
+class TGON_API TypeId
 {
 public:
-	TTypeId( const char* name ) :
+	TypeId( const char* name ) :
 		m_name( name ),
 		m_hashCode( TMath::GenerateHash( name ))
 	{
 	}
+	~TypeId( ) {}
 
-	const char* name( ) const;
-	uint32_t hash_code( ) const;
+	uint32_t GetHashCode( ) const;
+	const char* GetName( ) const;
 
 private:
-	std::string m_name;
 	uint32_t m_hashCode;
+	std::string m_name;
 };
 
 
-inline const char* TTypeId::name( ) const
+inline const char* TypeId::GetName( ) const
 {
 	return m_name.c_str( );
 }
 
-inline uint32_t TTypeId::hash_code( ) const
+inline uint32_t TypeId::GetHashCode( ) const
 {
 	return m_hashCode;
 }

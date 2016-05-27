@@ -18,28 +18,35 @@ struct WindowStyle
 {
 public:
 	WindowStyle() {}
-
 	static WindowStyle ParseFromXML( const wchar_t* const xmlPath );
 
 public:
 	std::wstring caption = L"TGON-Default";
 
-	/* Shape */
+	/*
+		Transform
+	*/
 	int32_t x = 100;
 	int32_t y = 100;
 	int32_t width = 500;
 	int32_t height = 500;
 
+	/*
+		Show style
+	*/
 	bool Popup = false;
-	bool Maximized = false;
-	bool Minimized = false;
 
-	/* Funtional */
+	/*
+		Function
+	*/
+	bool EventHandleable = true;
 	bool SupportWindowTransparency = false;
 	bool SupportPerPixelTransparency = false;
 	bool ShowTopOnCreated = false;
 	bool Resizeable = true;
 	bool TopMost = false;
+	bool Maximized = false;
+	bool Minimized = false;
 	bool ShowMiddle = true;
 	bool ShowImmediately = true;
 };

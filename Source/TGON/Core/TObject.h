@@ -7,9 +7,7 @@
 */
 
 #pragma once
-#include <stdint.h>
-
-#include "TTypeId.h"
+#include "TypeId.h"
 #include "../Platform/Config/Build.h"
 
 
@@ -20,22 +18,29 @@ namespace tgon
 class TGON_API TObject 
 {
 public:
-	/*
-		@ Cons/Destructor
-	*/
-	TObject( ) {}
-	virtual ~TObject( ) = 0 {}
-
-	static bool Equals( const TObject&, const TObject& );
 	static bool Equals( const TObject*, const TObject* );
+	static bool Equals( const TObject&, const TObject& );
+	bool Equals( const TObject* );
+	bool Equals( const TObject& );
 
-	/*
-		@ Gets
-	*/
 public:
+	/*
+		Gets
+	*/
 	virtual uint32_t GetHashCode( ) const = 0;
 	virtual const char* GetName( ) const = 0;
+
+public:
+	TObject( ) {}
+	virtual ~TObject( ) = 0 {}
 };
+
+inline bool TObject::Equals(
+	const TObject* lhs,
+	const TObject* rhs )
+{
+	return ( lhs->GetHashCode( ) == rhs->GetHashCode( ));
+}
 
 inline bool TObject::Equals(
 	const TObject& lhs,
@@ -45,10 +50,16 @@ inline bool TObject::Equals(
 }
 
 inline bool TObject::Equals(
-	const TObject* lhs,
 	const TObject* rhs )
 {
-	return ( lhs->GetHashCode( ) == rhs->GetHashCode( ));
+	return ( this->GetHashCode( ) == rhs->GetHashCode( ) );
+}
+
+inline bool TObject::Equals( 
+	const TObject& rhs )
+{
+	return ( this->GetHashCode( ) == rhs.GetHashCode( ) );
+
 }
 
 
@@ -61,16 +72,16 @@ inline bool TObject::Equals(
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\
-		return GetTypeId( ).hash_code( );\
+		return GetTypeId( ).GetHashCode( );\
 	}\
 	\
 	virtual const char* GetName( ) const override\
 	{\
-		return GetTypeId( ).name( );\
+		return GetTypeId( ).GetName( );\
 	}\
 	\
-	static const tgon::TTypeId& GetTypeId( )\
+	static const tgon::TypeId& GetTypeId( )\
 	{\
-		static tgon::TTypeId typeID( #myType );\
+		static tgon::TypeId typeID( #myType );\
 		return typeID;\
 	}

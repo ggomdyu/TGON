@@ -8,7 +8,8 @@
 
 
 #pragma once
-#include "../Core/TSingleton.h"
+#include <tgLib/Singleton.h>
+
 #include "../Core/TObject.h"
 #include "ISystem.h"
 

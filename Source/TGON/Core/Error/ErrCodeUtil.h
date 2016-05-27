@@ -14,8 +14,8 @@ namespace tgon
 {
 
 
-template<typename T>
-struct TGON_API TEnumString
+template<typename _Ty>
+struct TGON_API EnumString
 {
 	static const char* m_errString[];
 };

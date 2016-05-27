@@ -81,7 +81,7 @@ BOOST_FORCEINLINE int32_t tgon::TMath::RoundToInt(
 #if TGON_SUPPORT_SSE
 	return _mm_cvt_ss2si( _mm_set_ss( val+val+0.5f )) >> 1;
 #else
-	return std::round( val );
+	return static_cast<int32_t>( std::round( val ));
 #endif
 }
 
@@ -97,7 +97,7 @@ BOOST_FORCEINLINE int32_t tgon::TMath::FloorToInt(
 #if TGON_SUPPORT_SSE
 	return ( _mm_cvt_ss2si( _mm_set_ss( val+val-0.5f )) >> 1 );
 #else
-	return std::floor( val );
+	return static_cast<int32_t>( std::floor( val ));
 #endif
 }
 

@@ -64,6 +64,8 @@ tgon::WindowStyle tgon::WindowStyle::ParseFromXML(
 		sibling->BoolAttribute( L"SupportWindowTransparency" );
 	wndStyle.SupportPerPixelTransparency = 
 		sibling->BoolAttribute( L"SupportPerPixelTransparency" );
+	wndStyle.EventHandleable =
+		sibling->BoolAttribute( L"EventHandleable" );
 	
 	return wndStyle;
 }

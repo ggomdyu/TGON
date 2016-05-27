@@ -6,8 +6,8 @@
 */
 
 #pragma once
+#include <tgLib/Singleton.h>
 #include "../Interface/IConsole.h"
-#include "../Core/TSingleton.h"
 
 #define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>

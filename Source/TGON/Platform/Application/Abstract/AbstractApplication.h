@@ -8,16 +8,34 @@
 
 
 #pragma once
-#include "../TApplicationType.h"
-#include "../../../Platform/Config/Build.h"
+#include "../../Window/TWindow.h"
 
+#include "../../../Platform/Config/Build.h"
+#include "../TApplicationType.h"
+
+
+#define TGON_GENERATE_MAINLOOP( className )\
+int RunApplication( )\
+{\
+    std::shared_ptr<className> app( new className );\
+    return app->Run();\
+}\
 
 namespace tgon
 {
 
 
-class TGON_API AbstractApplication
+class TGON_API AbstractApplication : 
+	public AbstractWindowDelegate
 {
+public:
+	AbstractApplication( const struct WindowStyle& );
+	virtual ~AbstractApplication( );
+
+	virtual int32_t Run( ) = 0;
+	virtual void HandleInput( ) = 0;
+	virtual void SetupWindowComponents( );
+
 public:
 	/*
 		About using window
@@ -39,10 +57,9 @@ public:
 	*/
 	static void GetScreenSize( int32_t* width, int32_t* height ) {}
 
-
 private:
-	AbstractApplication( ) = delete;
-	~AbstractApplication( ) = delete;
+	SpTWindow m_window;
+	WindowStyle m_rootWndStyle;
 };
 
 

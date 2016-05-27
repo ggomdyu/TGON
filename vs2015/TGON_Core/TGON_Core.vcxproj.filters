@@ -68,12 +68,6 @@
     <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp">
       <Filter>cpp\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\TStringHash.cpp">
-      <Filter>cpp\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Error\TErrCode.cpp">
-      <Filter>cpp\Error</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp">
       <Filter>cpp\Math</Filter>
     </ClCompile>
@@ -98,6 +92,12 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
       <Filter>cpp\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp">
+      <Filter>cpp\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp">
+      <Filter>cpp\Error</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -118,13 +118,7 @@
     <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h">
       <Filter>hpp\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TTypeId.h">
       <Filter>hpp\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
@@ -132,15 +126,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
       <Filter>hpp\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TStringHash.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCode.h">
-      <Filter>hpp\Error</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCodeUtil.h">
-      <Filter>hpp\Error</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
       <Filter>hpp\Math</Filter>
@@ -165,6 +150,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h">
       <Filter>hpp\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TypeId.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h">
+      <Filter>hpp\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h">
+      <Filter>hpp\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h">
+      <Filter>hpp\Error</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

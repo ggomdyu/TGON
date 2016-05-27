@@ -1,3 +1,5 @@
+#include "WindowsWindow.h"
+#include "WindowsWindow.h"
 #include "PrecompiledHeader.h"
 #include "WindowsWindow.h"
 
@@ -16,24 +18,31 @@
 #endif
 
 
-tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle, bool isEventHandleable ) :
-	AbstractWindow( wndStyle, isEventHandleable ),
+tgon::SpTWindow tgon::WindowsWindow::Make( 
+	const WindowStyle& wndStyle,
+	AbstractWindowDelegate* wndDelegate )
+{
+	SpTWindow window( new WindowsWindow( wndStyle, wndDelegate ));
+	return window;
+}
+
+tgon::WindowsWindow::WindowsWindow( 
+	const WindowStyle& wndStyle,
+	AbstractWindowDelegate* wndDelegate ) :
+
+	AbstractWindow( wndStyle, wndDelegate ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
+	this->CreateWindowForm( this->GetWindowStyle( ), wndStyle.EventHandleable );
+
+	// Initialization After window created ( Which needs a created window )
+	this->AdditionalInit( this->GetWindowStyle( ));
 }
 
 tgon::WindowsWindow::~WindowsWindow( )
 {
 	DestroyWindow( m_wndHandle );
-}
-
-void tgon::WindowsWindow::Make( )
-{
-	this->CreateWindowForm( this->GetWindowStyle( ), this->IsEventHandleable( ));
-
-	// Initialization After window created ( Which needs a created window )
-	this->AdditionalInit( this->GetWindowStyle( ));
 }
 
 void tgon::WindowsWindow::BringToTop( ) 
@@ -245,29 +254,35 @@ LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
 	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
 		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 
-	if ( extraMemAsWindow )
+	if ( extraMemAsWindow && 
+			extraMemAsWindow->GetDelegate( ))
 	{
 		switch ( msg )
 		{
 		case WM_LBUTTONUP:
-			extraMemAsWindow->OnLMouseUp( LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->GetDelegate( )->OnLMouseUp( 
+				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_LBUTTONDOWN:
-			extraMemAsWindow->OnLMouseDown( LOWORD( lParam ), HIWORD( lParam ) );
+			extraMemAsWindow->GetDelegate( )->OnLMouseDown( 
+				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONUP:
-			extraMemAsWindow->OnRMouseUp( LOWORD( lParam ), HIWORD( lParam ) );
+			extraMemAsWindow->GetDelegate( )->OnRMouseUp( 
+				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONDOWN:
-			extraMemAsWindow->OnRMouseDown( LOWORD( lParam ), HIWORD( lParam ) );
+			extraMemAsWindow->GetDelegate( )->OnRMouseDown( 
+				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_MOUSEMOVE:
-			extraMemAsWindow->OnMouseMove( LOWORD( lParam ), HIWORD( lParam ) );
+			extraMemAsWindow->GetDelegate( )->OnMouseMove( 
+				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_DESTROY:
 			PostQuitMessage( 0 );
 			extraMemAsWindow->m_isDestroyed = true;
-			extraMemAsWindow->OnDestroy( );
+			extraMemAsWindow->GetDelegate( )->OnDestroy( );
 			break;
 		}
 	}
@@ -275,7 +290,7 @@ LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
 	{
 		extraMemAsWindow = reinterpret_cast<WindowsWindow*>( LPCREATESTRUCT( 
 			lParam )->lpCreateParams );
-		extraMemAsWindow->OnCreate( );
+		extraMemAsWindow->GetDelegate( )->OnCreate( );
 	}
 
 	return DefWindowProcW( wndHandle, msg, wParam, lParam );

@@ -33,9 +33,6 @@
     <Filter Include="cpp\Main\Windows">
       <UniqueIdentifier>{97276ea4-0a69-417c-97bf-77b52b065c7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Main">
-      <UniqueIdentifier>{2d423b25-a909-4db5-9ea5-2014696c6fe0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cpp\Time">
       <UniqueIdentifier>{67e83643-6c7e-4f9c-9d06-22156ad169a8}</UniqueIdentifier>
     </Filter>
@@ -218,6 +215,9 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d92DSprite.cpp">
       <Filter>hpp\Graphics\Direct3D9</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h">
@@ -231,9 +231,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h">
       <Filter>hpp\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h">
-      <Filter>hpp\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
       <Filter>hpp\Console</Filter>

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp">
@@ -103,7 +104,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\GraphicsStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\TGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\TGraphicsType.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Interface\IMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBoxType.h" />

@@ -4,9 +4,10 @@
 
 tgon::AbstractWindow::AbstractWindow( 
 	const WindowStyle& wndStyle,
-	bool isEventHandleable ) :
+	AbstractWindowDelegate* wndDelegate ) :
+
 	m_wndStyle( wndStyle ),
-	m_isEventHandleable( isEventHandleable )
+	m_wndDelegate( wndDelegate )
 {
 }
 

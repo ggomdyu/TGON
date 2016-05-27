@@ -348,7 +348,3 @@ inline void TVector3::Normalize( )
 
 
 }
-
-
-
-#define TGON_SUPPORT_SSE 1

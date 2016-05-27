@@ -15,12 +15,31 @@ namespace tgon
 {
 	
 
-class TGON_API AbstractWindow : 
-	boost::noncopyable
+class TGON_API AbstractWindowDelegate
 {
 public:
-	virtual void Make( ) = 0;
+	virtual void OnCreate( ) {}
+	virtual void OnDestroy( ) {}
+	virtual void OnClose( ) {}
+	virtual void OnIdle( ) = 0;	// Must be implemented
+	virtual void OnMove( int x, int y ) {}
+	virtual void OnSize( int width, int height ) {}
+	virtual void OnMouseMove( int x, int y ) {}
+	virtual void OnLMouseDown( int x, int y ) {}
+	virtual void OnLMouseUp( int x, int y ) {}
+	virtual void OnRMouseDown( int x, int y ) {}
+	virtual void OnRMouseUp( int x, int y ) {}
+};
 
+class TGON_API AbstractWindow : 
+	private boost::noncopyable
+{
+public:
+	AbstractWindow( const WindowStyle& wndStyle,
+					AbstractWindowDelegate* wndDelegate );
+	virtual ~AbstractWindow( ) = 0;
+
+public:
 	/*
 		Commands
 	*/
@@ -41,6 +60,10 @@ public:
 						   int32_t height ) {};
 	virtual void SetCaption( const wchar_t* src ) {};
 
+	// Useable to subclassing event handler
+	void SetDelegate( AbstractWindowDelegate* wndDelegate );
+
+
 	/*
 		Gets
 	*/
@@ -53,45 +76,29 @@ public:
 
 	virtual bool IsDestroyed( ) { return false; }
 
-	/*
-		EventHandler
-	*/
-	virtual void OnCreate( ) {}
-	virtual void OnClose( ) {}
-	virtual void OnIdle( ) = 0;	// Must be implemented
-	virtual void OnDestroy( ) {}
-	virtual void OnMove( int x, int y ) {}
-	virtual void OnSize( int width, int height ) {}
-	virtual void OnMouseMove( int x, int y ) {}
-	virtual void OnLMouseDown( int x, int y ) {}
-	virtual void OnLMouseUp( int x, int y ) {}
-	virtual void OnRMouseDown( int x, int y ) {}
-	virtual void OnRMouseUp( int x, int y ) {}
-
-
 protected:
 	const WindowStyle& GetWindowStyle( ) const;
-	bool IsEventHandleable( ) const;
-
-public:
-	AbstractWindow( const WindowStyle& wndStyle, 
-			 bool isEventHandleable );
-	virtual ~AbstractWindow( ) = 0;
+	AbstractWindowDelegate* GetDelegate( );
 
 private:
 	WindowStyle m_wndStyle;
-	bool m_isEventHandleable;
+	AbstractWindowDelegate* m_wndDelegate;
 };
 
+inline void AbstractWindow::SetDelegate( 
+	AbstractWindowDelegate* wndDelegate )
+{
+	m_wndDelegate = wndDelegate;
+}
 
 inline const WindowStyle& tgon::AbstractWindow::GetWindowStyle( ) const
 {
 	return m_wndStyle;
 }
 
-inline bool AbstractWindow::IsEventHandleable( ) const
+inline AbstractWindowDelegate* AbstractWindow::GetDelegate( )
 {
-	return m_isEventHandleable;
+	return m_wndDelegate;
 }
 
 

@@ -11,15 +11,53 @@ TGON_API MSG tgon::WindowsApplication::
 	m_msg;
 
 
-void tgon::WindowsApplication::Run(
-	WindowsWindow& window )
+tgon::WindowsApplication::WindowsApplication(
+	const WindowStyle& rootWndStyle ) :
+
+	AbstractApplication( rootWndStyle )
 {
+}
+
+tgon::WindowsApplication::~WindowsApplication( )
+{
+}
+
+int32_t tgon::WindowsApplication::Run( )
+{
+	// TODO:
+
 	while ( m_msg.message != WM_QUIT )
 	{
 		bool doesMsgExist = MessageLoop( );
 		if ( !doesMsgExist )
 		{
-			window.OnIdle( );
+			this->OnIdle( );
+		}
+	}
+
+	return 0;
+}
+
+void tgon::WindowsApplication::HandleInput( )
+{
+}
+
+const tgon::SpTWindow& tgon::WindowsApplication::GetWindow( ) const
+{
+	return m_window;
+}
+
+void tgon::WindowsApplication::Run(
+	WindowsWindow& window )
+{
+	assert( false );
+
+	while ( m_msg.message != WM_QUIT )
+	{
+		bool doesMsgExist = MessageLoop( );
+		if ( !doesMsgExist )
+		{
+			//window.OnIdle( );
 		}
 	}
 }

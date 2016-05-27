@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\Error\TErrCode.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
@@ -29,7 +29,7 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\TStringHash.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -40,8 +40,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
     <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCode.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Error\TErrCodeUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h" />
@@ -50,12 +50,11 @@
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\TSingleton.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TCamera.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\TStringHash.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\TTypeId.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\TypeId.h" />
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />

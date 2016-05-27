@@ -8,10 +8,10 @@
 
 
 #pragma once
-#include <map>
+#include <tgLib/Singleton.h>
+
 #include "../Core/TObject.h"
 #include "../System/ISystem.h"
-#include "../Core/TSingleton.h"
 #include "../Platform/Window/TWindow.h"
 
 

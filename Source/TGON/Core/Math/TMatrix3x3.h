@@ -78,7 +78,7 @@ inline const TMatrix3x3& TMatrix3x3::operator*=(
 inline float* TMatrix3x3::operator[](
 	int32_t row )
 {
-	assert(( row < 3 || row > -1 ) && 
+	assert(( row < 3 && row > -1 ) && 
 			"TMatrix3x3 index out of range" );
 
 	return ( &_00 + row*3 );
@@ -87,7 +87,7 @@ inline float* TMatrix3x3::operator[](
 inline const float* TMatrix3x3::operator[](
 	int32_t row ) const
 {
-	assert(( row < 3 || row > -1 ) && 
+	assert(( row < 3 && row > -1 ) && 
 			"TMatrix3x3 index out of range" );
 
 	return ( &_00 + row*3 );

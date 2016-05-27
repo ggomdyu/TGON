@@ -1,11 +1,11 @@
 #include "PrecompiledHeader.h"
 #include "D3d9Error.h"
 
-#include "../Core/Error/TErrCode.h"
+#include "../Core/Error/ErrCode.h"
 #include "D3d9Error.h"
 
 template <>
-const char* tgon::TEnumStrings<tgon::D3d9ErrorCode>::m_stringArr[] =
+const char* tgon::EnumStrings<tgon::D3d9ErrorCode>::m_stringArr[] =
 {
 	"ID_FAILED",
 	"ID_SUCCESS",

@@ -27,6 +27,14 @@ public:
 	static TGON_API const HINSTANCE InstanceHandle;
 
 public:
+	WindowsApplication( const struct WindowStyle& = WindowStyle( ));
+	virtual ~WindowsApplication( );
+
+public:
+	virtual int32_t Run( ) override;
+	virtual void HandleInput( ) override;
+
+public:
 	/*
 		About using window
 	*/
@@ -48,14 +56,12 @@ public:
 	static void GetScreenSize( int32_t* width, int32_t* height );
 	static void EnableVisualStyles( );
 
-
-
-private:
-	WindowsApplication( ) = delete;
-	~WindowsApplication( ) = delete;
+public:
+	const SpTWindow& GetWindow( ) const;
 
 private:
 	static TGON_API MSG m_msg;
+	SpTWindow m_window;
 };
 
 using ApplicationImpl = WindowsApplication;

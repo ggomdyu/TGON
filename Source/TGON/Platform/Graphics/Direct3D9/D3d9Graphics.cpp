@@ -4,6 +4,15 @@
 
 tgon::D3d9Graphics::D3d9Graphics( )
 {
+	
+}
+
+tgon::D3d9Graphics::~D3d9Graphics( )
+{
+}
+
+void tgon::D3d9Graphics::InitInterface( )
+{
 	HRESULT hr = Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d );
 	if ( FAILED( hr ))
 	{
@@ -14,8 +23,4 @@ tgon::D3d9Graphics::D3d9Graphics( )
 			MB_OK | MB_ICONEXCLAMATION
 		);
 	}
-}
-
-tgon::D3d9Graphics::~D3d9Graphics( )
-{
 }

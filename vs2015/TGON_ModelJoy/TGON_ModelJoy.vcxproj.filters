@@ -17,14 +17,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ModelScene.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tgon_ModelJoy.cpp">
+      <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tgon_ModelJoy.h">
+      <Filter>cpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

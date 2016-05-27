@@ -37,6 +37,9 @@ public:
 	const SpD3d9Ex& GetD3d( ) const;
 	
 private:
+	void InitInterface( );
+
+private:
 	SpD3d9Ex m_d3d;
 };
 

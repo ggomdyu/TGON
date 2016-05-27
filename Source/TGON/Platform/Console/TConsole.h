@@ -6,8 +6,8 @@
 */
 
 #pragma once
+#include <tgLib/Singleton.h>
 #include "../../Platform/Slate/PlatformConsole.h"
-#include "../../Core/TSingleton.h"
 
 
 namespace tgon

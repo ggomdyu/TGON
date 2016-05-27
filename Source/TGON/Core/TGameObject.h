@@ -18,7 +18,8 @@ namespace tgon
 {
 
 class IComponent;
-class TGON_API TGameObject : public TObject
+class TGON_API TGameObject :
+	public TObject
 {
 public:
 	TGON_OBJECT( TGameObject, TObject )
@@ -27,20 +28,20 @@ public:
 	virtual ~TGameObject( );
 
 public:
-	void SetPosition( const TVector3& pos );
-	void Move( const TVector3& pos );
-	void SetAngle( const TVector3& rot );
-	void Rotate( const TVector3& rot );
-	void SetScale( const TVector3& scale );
-	void Scale( const TVector3& scale );
+	void SetPosition( const TVector3& );
+	void Move( const TVector3& );
+	void SetAngle( const TVector3& );
+	void Rotate( const TVector3& );
+	void SetScale( const TVector3& );
+	void Scale( const TVector3& );
 
 	const TVector3& GetPosition( ) const;
 	const TVector3& GetAngle( ) const;
 	const TVector3& GetScale( ) const;
 
 public:
-	template <typename T> void AddComponent( T* newComponent );
-	template <typename T> T* GetComponent( );
+	template <typename _Ty> void AddComponent( _Ty* newComponent );
+	template <typename _Ty> _Ty* GetComponent( );
 
 private:
 	TVector3 m_pos;
@@ -52,7 +53,7 @@ private:
 
 
 template<typename T>
-inline void TGameObject::AddComponent( T* newComponent )
+inline void TGameObject::AddComponent( T* component )
 {
 	//const auto identifier = newComponent->GetComponentID( );
 
@@ -75,15 +76,15 @@ inline void TGameObject::AddComponent( T* newComponent )
 //	return nullptr;
 //}
 
-template<typename T>
+template<typename _Ty>
 inline uint32_t tgon::TGameObject::GetComponentIdentity( )
 {
-	static const auto keyCode( typeid( T ).hash_code( ));
+	static const auto keyCode( typeid( _Ty ).GetHashCode( ));
 	return keyCode;
 }
 
-template<typename T>
-inline T* TGameObject::GetComponent( )
+template<typename _Ty>
+inline _Ty* TGameObject::GetComponent( )
 {
 	return NULL;
 }

@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Graphics.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Noncopyable.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Platform.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Singleton.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Suffix\SyntaxCompatible.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

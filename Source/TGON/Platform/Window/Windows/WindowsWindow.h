@@ -18,9 +18,19 @@ namespace tgon
 {
 
 
+using WindowImpl = class WindowsWindow;
+
+using SpTWindow = std::shared_ptr<WindowImpl>;
+using WpTWindow = std::weak_ptr<WindowImpl>;
+
+
 class TGON_API WindowsWindow : 
 	public AbstractWindow
 {
+public:
+	static SpTWindow Make( const struct WindowStyle&,
+						   AbstractWindowDelegate* wndDelegate );
+	
 public:
 	// @ ATTENTION: What is the 'isEventHandleable'?
 	//	@ WARNING! : <OnIdle> does not applies to this description.
@@ -28,13 +38,11 @@ public:
 	// If you pass false, You can make more fast window but cannot 
 	// use event handling : OnMouseMove, OnDestroying, etc...
 	//
-	WindowsWindow( const struct WindowStyle& wndStyle, 
-				   bool isEventHandleable );
+	WindowsWindow( const struct WindowStyle&,
+				   AbstractWindowDelegate* wndDelegate );
 	virtual ~WindowsWindow( );
 
 public:
-	virtual void Make( ) override;
-
 	/*
 		Commands
 	*/
@@ -68,7 +76,6 @@ public:
 
 	HWND GetWindowHandle( ) const;
 
-
 private:
 	void CreateWindowForm( const struct WindowStyle&,
 						   bool isEventHandleable );
@@ -86,8 +93,6 @@ private:
 	bool m_isDestroyed;
 	HWND m_wndHandle;
 };
-
-using WindowImpl = WindowsWindow;
 
 inline HWND tgon::WindowsWindow::GetWindowHandle( ) const
 {

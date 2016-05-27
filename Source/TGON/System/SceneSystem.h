@@ -6,8 +6,9 @@
 */
 
 #pragma once
+#include <tgLib/Singleton.h>
+
 #include "../Core/TObject.h"
-#include "../Core/TSingleton.h"
 #include "../System/ISystem.h"
 #include "../Scene/IScene.h"
 
