@@ -5,10 +5,8 @@
 #include "../../Slate/PlatformWindow.h"
 
 
-TGON_API const HINSTANCE tgon::WindowsApplication::InstanceHandle( 
-	::GetModuleHandleW( NULL ));
-TGON_API MSG tgon::WindowsApplication::
-	m_msg;
+TGON_API const HINSTANCE tgon::WindowsApplication::InstanceHandle( ::GetModuleHandleW( NULL ));
+TGON_API MSG tgon::WindowsApplication::m_msg;
 
 
 tgon::WindowsApplication::WindowsApplication(
