@@ -1,71 +1,71 @@
 #include "PrecompiledHeader.h"
 #include "WindowStyle.h"
 
-#include "../../Core/XML/TXML.h"
+#include "../../Core/XML/TXMLReader.h"
+#include "../MessageBox/TMessageBox.h"
 
 
-using namespace tinyxml2;
-
-
-tgon::WindowStyle tgon::WindowStyle::ParseFromXML(
-		const wchar_t* const xmlPath )
+tgon::WindowStyle tgon::WindowStyle::LoadFromXML(
+	const wchar_t* xmlPath )
 {
-	TiXMLDocument doc;
-	if ( doc.LoadFile( xmlPath ) != ::XMLError::XML_NO_ERROR )
+	WindowStyle parsedWndStyle;
+
+
+	TXMLReader xmlReader( xmlPath );
+	if ( xmlReader.fail( ))
 	{
-		return WindowStyle( );
+		TMessageBox::Show( L"Failed to load WindowStyle." );
 	}
 
+	for ( const auto& xmlNodeElem : xmlReader )
+	{
+		if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Title" ))
+		{
+			parsedWndStyle.title = static_cast<TXMLElement*>( xmlNodeElem )->
+				GetText( );
+		}
+		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Transform" ))
+		{
+			parsedWndStyle.x = static_cast<TXMLElement*>( xmlNodeElem )->
+				IntAttribute( L"x" );
+			parsedWndStyle.y = static_cast<TXMLElement*>( xmlNodeElem )->
+				IntAttribute( L"y" );
+			parsedWndStyle.width = static_cast<TXMLElement*>( xmlNodeElem )->
+				IntAttribute( L"width" );
+			parsedWndStyle.height = static_cast<TXMLElement*>( xmlNodeElem )->
+				IntAttribute( L"height" );
+		}
+		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Style" ))
+		{
+			parsedWndStyle.Popup = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"Popup" );
+		}
+		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Function" ))
+		{
+			parsedWndStyle.ClipCursor = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"ClipCursor" );
+			parsedWndStyle.EventHandleable = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"EventHandleable" );
+			parsedWndStyle.Resizeable = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"Resizeable" );
+			parsedWndStyle.Maximized = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"Maximized" );
+			parsedWndStyle.Minimized = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"Minimized" );
+			parsedWndStyle.ShowTopOnCreated = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"ShowTopOnCreated" );
+			parsedWndStyle.ShowMiddle = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"ShowMiddle" );
+			parsedWndStyle.TopMost = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"TopMost" );
+			parsedWndStyle.ShowImmediately = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"ShowImmediately" );
+			parsedWndStyle.SupportWindowTransparency = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"SupportWindowTransparency" );
+			parsedWndStyle.SupportPerPixelTransparency = static_cast<TXMLElement*>( xmlNodeElem )->
+				BoolAttribute( L"SupportPerPixelTransparency" );
+		}
+	}
 
-	XMLElement* root = doc.RootElement();
-	WindowStyle wndStyle;
-
-	// Caption
-	XMLElement* sibling =
-		FindElementFromParent( L"Caption", root );
-	wndStyle.caption = sibling->GetText( );
-
-	// Position
-	sibling = 
-		FindElementFromParent( L"Position", root );
-	wndStyle.x = 
-		sibling->IntAttribute( L"x" );
-	wndStyle.y = 
-		sibling->IntAttribute( L"y" );
-
-	// Size
-	sibling = 
-		FindElementFromParent( L"Size", root );
-	wndStyle.width =
-		sibling->IntAttribute( L"width" );
-	wndStyle.height = 
-		sibling->IntAttribute( L"height" );
-
-	// Attribute
-	sibling =
-		FindElementFromParent( L"Attribute", root );
-	wndStyle.Resizeable =
-		sibling->BoolAttribute( L"Resizeable" );
-	wndStyle.Popup =
-		sibling->BoolAttribute( L"Popup" );
-	wndStyle.Maximized =
-		sibling->BoolAttribute( L"Maximized" );
-	wndStyle.Minimized =
-		sibling->BoolAttribute( L"Minimized" );
-	wndStyle.ShowTopOnCreated =
-		sibling->BoolAttribute( L"ShowTopOnCreated" );
-	wndStyle.ShowMiddle =
-		sibling->BoolAttribute( L"ShowMiddle" );
-	wndStyle.TopMost =
-		sibling->BoolAttribute( L"TopMost" );
-	wndStyle.ShowImmediately =
-		sibling->BoolAttribute( L"ShowImmediately" );
-	wndStyle.SupportWindowTransparency = 
-		sibling->BoolAttribute( L"SupportWindowTransparency" );
-	wndStyle.SupportPerPixelTransparency = 
-		sibling->BoolAttribute( L"SupportPerPixelTransparency" );
-	wndStyle.EventHandleable =
-		sibling->BoolAttribute( L"EventHandleable" );
-	
-	return wndStyle;
+	return parsedWndStyle;
 }

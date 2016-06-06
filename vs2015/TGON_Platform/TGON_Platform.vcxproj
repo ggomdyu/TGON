@@ -29,14 +29,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d92DSprite.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Camera.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Enum.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Error.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Graphics.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3D9Graphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Mesh.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Quad.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Shader.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Texture.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3D9Shader.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Util.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -55,24 +51,10 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindowUtil.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -83,23 +65,17 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Config\Platform.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Abstract\AbstractGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Abstract\AbstractGraphicsDevice.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d92DSprite.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Camera.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Enum.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Error.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9GraphicsDevice.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3D9Graphics.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3D9Shader.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Type.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Graphics.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Mesh.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Quad.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Shader.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Texture.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Util.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\GraphicsStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Graphics\TGraphics.h" />
@@ -130,8 +106,8 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindowEventHandler.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowEvent.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindowUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowFwd.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h" />

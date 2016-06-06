@@ -8,15 +8,22 @@
 
 
 #pragma once
-#include "../Platform/Config/Build.h"
 #include "../Platform/Slate/PlatformApplication.h"
 
 
 namespace tgon
 {
 
-
 using TApplication = ApplicationImpl;
 
-
 }
+
+
+#define TGON_GENERATE_APP( className )\
+namespace tgon\
+{\
+int32_t RunApplication( )\
+{\
+	return className::Main( );\
+}\
+};

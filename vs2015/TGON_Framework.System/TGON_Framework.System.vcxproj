@@ -169,10 +169,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="..\..\Source\TGON\Scene\DefaultScene.h" />
     <ClInclude Include="..\..\Source\TGON\System\ISystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\GraphicsSystem.h" />
-    <ClInclude Include="..\..\Source\TGON\System\SceneSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\TCoreEngine.h" />
     <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h" />
     <ClInclude Include="..\..\Source\TGON\System\WindowSystem.h" />
@@ -180,9 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Scene\DefaultScene.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\GraphicsSystem.cpp" />
-    <ClCompile Include="..\..\Source\TGON\System\SceneSystem.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\SystemManager.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\TCoreEngine.cpp" />
     <ClCompile Include="..\..\Source\TGON\System\TimeSystem.cpp" />

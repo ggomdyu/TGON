@@ -17,13 +17,10 @@
 
 
 std::wstring tgon::GetDXErrorString(
-	LPCWSTR fileName,
-	UINT line,
+	const wchar_t* fileName,
+	uint32_t line,
 	HRESULT result )
 {
-	assert( FAILED( result ));
-	assert( fileName );
-
 	/*
 		¡Ø Assemble ex
 
@@ -36,10 +33,10 @@ std::wstring tgon::GetDXErrorString(
 	std::wstring errString;
 
 	errString = L"DX Invoke Error : ";
-	errString += GetDXErrorString( result );
-	errString += L" [";
-	errString += std::to_wstring( result );
-	errString += L"]\n";
+	//errString += GetDXErrorString( result );
+	//errString += L" [";
+	//errString += std::to_wstring( result );
+	//errString += L"]\n";
 
 
 	errString += L"[Files] : ";
@@ -55,41 +52,11 @@ std::wstring tgon::GetDXErrorString(
 }
 
 
-std::wstring tgon::GetDXErrorString( HRESULT result )
-{
-#ifdef TGON_DXERR_DEPRECATED
-	LPWSTR errBuf( nullptr );
-
-	FormatMessageW( 
-		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_ALLOCATE_BUFFER,
-		NULL,
-		result,
-		MAKELANGID( LANG_ENGLISH, SUBLANG_ENGLISH_US ),
-		reinterpret_cast<LPWSTR>( &errBuf ),
-		0,
-		NULL
-	);
-
-	if ( !errBuf )
-	{
-		TLog( L"Failed to invoke FormatMessage." );
-	}
-
-	const std::wstring ret = errBuf;
-	LocalFree( errBuf );
-
-	return ret;
-#else	
-	return std::wstring( DXGetErrorDescriptionW( result ));
-#endif
-}
-
-
 void tgon::DxTraceW(
-	LPCWSTR fileName,
-	UINT line,
+	const wchar_t* fileName,
+	uint32_t line,
 	HRESULT result,
-	LPCWSTR msg,
+	const wchar_t* msg,
 	bool popMsgBox )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
@@ -113,89 +80,89 @@ void tgon::DxTraceW(
 }
 
 
-SpD3d9Effect tgon::LoadShader( const SpD3d9DeviceEx& device, const wchar_t* shaderPath )
-{
-	SpD3d9Effect retShader;
-	LPD3DXBUFFER errBuffer;
-	DWORD shaderFlag = 0;
-
-#if defined( _DEBUG ) | defined( DEBUG )
-	shaderFlag |= D3DXSHADER_DEBUG;
-#endif
-
-	HRESULT hr = D3DXCreateEffectFromFileW( device, shaderPath,
-			nullptr,		// #define definition to use when compiling the shader
-			nullptr,		// ?
-			shaderFlag,
-			nullptr,		// ?
-			&retShader,
-			&errBuffer );
-
-	if ( FAILED( hr ))
-	{
-		std::wstring errString = L"DX Invoke Error : Failed to load shader. [";
-		errString += shaderPath;
-		errString += L']';
-
-		MessageBoxW( GetFocus( ),
-					 errString.c_str( ),
-					 L"MB_OK",
-					 MB_OK );
-	}
-
-	if ( errBuffer && !retShader )
-	{
-		//int32_t size = errBuffer->GetBufferSize( );
-		void* errMsg = errBuffer->GetBufferPointer( );
-
-		if ( errMsg )
-		{
-			MessageBoxA( GetFocus( ),
-						 static_cast<const char*>( errMsg ),
-						 "WARNING!",
-						 MB_OK );
-		}
-	}
-
-	return retShader;
-}
-
-SpD3d9Mesh tgon::LoadMesh( const SpD3d9DeviceEx& device, const wchar_t* meshPath )
-{
-	SpD3d9Mesh spMesh;
-	HRESULT result;
-	
-	V( D3DXLoadMeshFromXW( meshPath,
-				D3DXMESH_SYSTEMMEM,
-				device,
-				nullptr,		// I think it's useless
-				nullptr,		// Material
-				nullptr,		// Effect instance?
-				nullptr,		// Material count
-				&spMesh
-			));
-
-	if ( FAILED( result ))
-	{
-		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
-	}
-
-	return spMesh;
-}
-
-
-SpD3d9Texture tgon::LoadTexture( const SpD3d9DeviceEx& device, const wchar_t* texturePath )
-{
-	SpD3d9Texture spTexture;
-	HRESULT result = D3DXCreateTextureFromFileW( device, texturePath, &spTexture );
-
-	if ( FAILED( result ))
-	{
-		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
-	}
-
-	return spTexture;
-}
+//SpD3d9Effect tgon::LoadShader( const SpD3d9DeviceEx& device, const wchar_t* shaderPath )
+//{
+//	SpD3d9Effect retShader;
+//	LPD3DXBUFFER errBuffer;
+//	DWORD shaderFlag = 0;
+//
+//#if defined( _DEBUG ) | defined( DEBUG )
+//	shaderFlag |= D3DXSHADER_DEBUG;
+//#endif
+//
+//	HRESULT hr = D3DXCreateEffectFromFileW( device, shaderPath,
+//			nullptr,		// #define definition to use when compiling the shader
+//			nullptr,		// ?
+//			shaderFlag,
+//			nullptr,		// ?
+//			&retShader,
+//			&errBuffer );
+//
+//	if ( FAILED( hr ))
+//	{
+//		std::wstring errString = L"DX Invoke Error : Failed to load shader. [";
+//		errString += shaderPath;
+//		errString += L']';
+//
+//		MessageBoxW( GetFocus( ),
+//					 errString.c_str( ),
+//					 L"MB_OK",
+//					 MB_OK );
+//	}
+//
+//	if ( errBuffer && !retShader )
+//	{
+//		//int32_t size = errBuffer->GetBufferSize( );
+//		void* errMsg = errBuffer->GetBufferPointer( );
+//
+//		if ( errMsg )
+//		{
+//			MessageBoxA( GetFocus( ),
+//						 static_cast<const char*>( errMsg ),
+//						 "WARNING!",
+//						 MB_OK );
+//		}
+//	}
+//
+//	return retShader;
+//}
+//
+//SpD3d9Mesh tgon::LoadMesh( const SpD3d9DeviceEx& device, const wchar_t* meshPath )
+//{
+//	SpD3d9Mesh spMesh;
+//	HRESULT result;
+//	
+//	V( D3DXLoadMeshFromXW( meshPath,
+//				D3DXMESH_SYSTEMMEM,
+//				device,
+//				nullptr,		// I think it's useless
+//				nullptr,		// Material
+//				nullptr,		// Effect instance?
+//				nullptr,		// Material count
+//				&spMesh
+//			));
+//
+//	if ( FAILED( result ))
+//	{
+//		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
+//	}
+//
+//	return spMesh;
+//}
+//
+//
+//SpD3d9Texture tgon::LoadTexture( const SpD3d9DeviceEx& device, const wchar_t* texturePath )
+//{
+//	SpD3d9Texture spTexture;
+//	HRESULT result = D3DXCreateTextureFromFileW( device, texturePath, &spTexture );
+//
+//	if ( FAILED( result ))
+//	{
+//		DxTraceW( __FILEW__, __LINE__, result, nullptr, true );
+//	}
+//
+//	return spTexture;
+//}
 
 
 UINT tgon::D3d9GetColorChannelBits( const D3DFORMAT fmt )
@@ -287,19 +254,19 @@ UINT tgon::D3d9GetStencilBits( const D3DFORMAT fmt )
     }
 }
 
-
-bool tgon::IsDeviceAcceptable( IDirect3D9Ex* d3dInterface,
-							   D3DCAPS9* pCaps,
-							   D3DFORMAT AdapterFormat,
-							   D3DFORMAT BackBufferFormat )
-{
-	const BOOL isSucceed = d3dInterface->CheckDeviceFormat(
-					pCaps->AdapterOrdinal,
-					pCaps->DeviceType,
-					AdapterFormat,
-					D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING, // return false backbuffer formats that don't support alpha blending.
-					D3DRTYPE_TEXTURE,
-					BackBufferFormat );
-	
-	return ( isSucceed == S_OK );
-}
+//
+//bool tgon::IsDeviceAcceptable( IDirect3D9Ex* d3dInterface,
+//							   D3DCAPS9* pCaps,
+//							   D3DFORMAT AdapterFormat,
+//							   D3DFORMAT BackBufferFormat )
+//{
+//	const BOOL isSucceed = d3dInterface->CheckDeviceFormat(
+//					pCaps->AdapterOrdinal,
+//					pCaps->DeviceType,
+//					AdapterFormat,
+//					D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING, // return false backbuffer formats that don't support alpha blending.
+//					D3DRTYPE_TEXTURE,
+//					BackBufferFormat );
+//	
+//	return ( isSucceed == S_OK );
+//}

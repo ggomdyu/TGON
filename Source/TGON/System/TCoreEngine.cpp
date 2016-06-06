@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "TCoreEngine.h"
 
-#include "../Platform/Window/WindowEvent.h"
 #include "../Platform/Window/TWindow.h"
 #include "../Platform/Window/WindowStyle.h"
 #include "../Platform/Application/TApplication.h"
@@ -10,7 +9,6 @@
 
 #include "../Platform/Console/TConsole.h"
 #include "../System/SystemManager.h"
-#include "../System/SceneSystem.h"
 #include "../System/WindowSystem.h"
 //#include "../System/GraphicsSystem.h"
 #include "../System/TimeSystem.h"

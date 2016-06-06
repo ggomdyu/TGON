@@ -1,5 +1,4 @@
 #include "PrecompiledHeader.h"
-#include "SceneSystem.h"
 #include "SystemManager.h"
 
 #include "../Platform/Console/TConsole.h"

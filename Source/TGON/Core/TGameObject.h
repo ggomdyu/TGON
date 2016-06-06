@@ -76,12 +76,6 @@ inline void TGameObject::AddComponent( T* component )
 //	return nullptr;
 //}
 
-template<typename _Ty>
-inline uint32_t tgon::TGameObject::GetComponentIdentity( )
-{
-	static const auto keyCode( typeid( _Ty ).GetHashCode( ));
-	return keyCode;
-}
 
 template<typename _Ty>
 inline _Ty* TGameObject::GetComponent( )

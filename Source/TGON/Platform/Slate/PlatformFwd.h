@@ -20,7 +20,7 @@ using ApplicationImpl = class WindowsApplication;
 using CursorImpl = class WindowsCursor;
 using ConsoleImpl = class WindowsConsole;
 using TimeImpl = class WindowsTime;
-using GraphicsImpl = class D3d9Graphics;
+using GraphicsImpl = class D3D9Graphics;
 
 /*
 	Forward declaration for T series

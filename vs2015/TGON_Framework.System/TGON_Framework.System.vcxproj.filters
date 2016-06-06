@@ -44,13 +44,7 @@
     <ClCompile Include="..\..\Source\TGON\System\SystemManager.cpp">
       <Filter>cpp\System</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\System\SceneSystem.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\System\GraphicsSystem.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Scene\DefaultScene.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -76,13 +70,7 @@
     <ClInclude Include="..\..\Source\TGON\System\TimeSystem.h">
       <Filter>hpp\System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\System\SceneSystem.h">
-      <Filter>hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\System\GraphicsSystem.h">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Scene\DefaultScene.h">
       <Filter>hpp</Filter>
     </ClInclude>
     <ClInclude Include="TContext.h">

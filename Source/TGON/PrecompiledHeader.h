@@ -15,6 +15,10 @@
 // tgLib
 #include <tgLib/Suffix/SyntaxCompatible.h>
 
+// SDL
+#include <SDL.h>
+
+
 
 // Platform dependent headers are here
 #if BOOST_OS_WINDOWS

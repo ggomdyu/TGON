@@ -15,12 +15,43 @@ namespace tgon
 {
 	
 
-class TGON_API AbstractWindowDelegate
+class TGON_API AbstractWindow :
+	private boost::noncopyable
 {
+	friend class AbstractApplication;
+
+protected:
+	AbstractWindow( const WindowStyle& wndStyle );
+	virtual ~AbstractWindow( ) = 0;
+
 public:
-	virtual void OnCreate( ) {}
-	virtual void OnDestroy( ) {}
-	virtual void OnClose( ) {}
+	/*
+		Commands
+	*/
+	void Show( );
+	void Hide( );
+	void Close( );
+	void Maximize( );
+	void Minimize( );
+	void BringToTop( ) {};
+	void Flash( ) {};
+
+	/*
+		Sets
+	*/
+	void SetPosition( int32_t x, int32_t y );
+	void SetScale( int32_t width, int32_t height );
+	void SetCaption( const wchar_t* title );
+
+	/*
+		Event handler
+	*/
+	virtual void OnShow( ) {}
+	virtual void OnHide( ) {}
+	virtual void OnGetFocus( ) {}
+	virtual void OnLostFocus( ) {}
+	virtual void OnMaximized( ) {}
+	virtual void OnMinimized( ) {}
 	virtual void OnIdle( ) = 0;	// Must be implemented
 	virtual void OnMove( int x, int y ) {}
 	virtual void OnSize( int width, int height ) {}
@@ -29,76 +60,96 @@ public:
 	virtual void OnLMouseUp( int x, int y ) {}
 	virtual void OnRMouseDown( int x, int y ) {}
 	virtual void OnRMouseUp( int x, int y ) {}
-};
-
-class TGON_API AbstractWindow : 
-	private boost::noncopyable
-{
-public:
-	AbstractWindow( const WindowStyle& wndStyle,
-					AbstractWindowDelegate* wndDelegate );
-	virtual ~AbstractWindow( ) = 0;
-
-public:
-	/*
-		Commands
-	*/
-	virtual void Show( ) {};
-	virtual void Hide( ) {};
-	virtual void Quit( ) = 0;	// Must be implemented
-	virtual void Maximize( ) {};
-	virtual void Minimize( ) {};
-	virtual void BringToTop( ) {};
-	virtual void Flash( ) {};
-
-	/*
-		Sets
-	*/
-	virtual void SetPosition( int32_t x, 
-							  int32_t y ) {};
-	virtual void SetScale( int32_t width, 
-						   int32_t height ) {};
-	virtual void SetCaption( const wchar_t* src ) {};
-
-	// Useable to subclassing event handler
-	void SetDelegate( AbstractWindowDelegate* wndDelegate );
-
+	virtual void OnMMouseDown( int x, int y ) {}
+	virtual void OnMMouseUp( int x, int y ) {}
+	virtual void OnMouseLeave( ) {}
+	virtual void OnMouseEnter( ) {}
 
 	/*
 		Gets
 	*/
-	virtual void GetPosition( _Out_ int32_t* x, 
-							  _Out_ int32_t* y ) const {};
-	virtual void GetSize( _Out_ int32_t* width, 
-						  _Out_ int32_t* height ) const {};
-
-	virtual void GetCaption( _Out_ wchar_t* caption ) const {}
-
-	virtual bool IsDestroyed( ) { return false; }
+	static int32_t GetCreationCount( );
+	void GetPosition( int32_t* x, int32_t* y ) const;
+	void GetSize( int32_t* width, int32_t* height ) const;
+	const char* GetCaption( ) const;
+	
 
 protected:
+	SDL_Window* GetSDLWindow( );
+	const SDL_Window* GetSDLWindow( ) const;
 	const WindowStyle& GetWindowStyle( ) const;
-	AbstractWindowDelegate* GetDelegate( );
+
+private:
+	void SetupWindow( );
 
 private:
 	WindowStyle m_wndStyle;
-	AbstractWindowDelegate* m_wndDelegate;
+	SDL_Window* m_sdlWindow;
+	static int32_t ms_sdlWindowCount;
 };
 
-inline void AbstractWindow::SetDelegate( 
-	AbstractWindowDelegate* wndDelegate )
+inline int32_t AbstractWindow::GetCreationCount( )
 {
-	m_wndDelegate = wndDelegate;
+	return ms_sdlWindowCount;
+}
+
+inline void AbstractWindow::Show( )
+{
+	SDL_ShowWindow( m_sdlWindow );
+}
+
+inline void AbstractWindow::Hide( )
+{
+	SDL_HideWindow( m_sdlWindow );
+}
+
+inline void AbstractWindow::Close( )
+{
+	SDL_DestroyWindow( m_sdlWindow );
+}
+
+inline void tgon::AbstractWindow::Maximize( )
+{
+	SDL_MaximizeWindow( m_sdlWindow );
+}
+
+inline void AbstractWindow::Minimize( )
+{
+	SDL_MinimizeWindow( m_sdlWindow );
+}
+
+inline void AbstractWindow::GetPosition( 
+	int32_t* x, 
+	int32_t* y ) const
+{
+	SDL_GetWindowPosition( m_sdlWindow, x, y );
+}
+
+inline void AbstractWindow::GetSize( 
+	int32_t* width, 
+	int32_t* height ) const
+{
+	SDL_GetWindowSize( m_sdlWindow, width, height );
+}
+
+inline const char* AbstractWindow::GetCaption( ) const
+{
+	return SDL_GetWindowTitle( m_sdlWindow );
+}
+
+inline SDL_Window* AbstractWindow::GetSDLWindow( )
+{
+	return m_sdlWindow;
+}
+
+inline const SDL_Window* AbstractWindow::GetSDLWindow( ) const
+{
+	return m_sdlWindow;
 }
 
 inline const WindowStyle& tgon::AbstractWindow::GetWindowStyle( ) const
 {
 	return m_wndStyle;
-}
-
-inline AbstractWindowDelegate* AbstractWindow::GetDelegate( )
-{
-	return m_wndDelegate;
 }
 
 

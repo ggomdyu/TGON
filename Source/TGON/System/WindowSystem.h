@@ -34,7 +34,7 @@ public:
 public:
 	virtual void Update( float tickTime ) override;
 	
-	void AddWindow( const SpTWindow& window );
+	//void AddWindow( const SpTWindow& window );
 	const WpTWindow& GetWindow( const std::wstring& wndName );
 	
 	iterator begin( );
@@ -49,14 +49,14 @@ private:
 };
 
 
-inline void WindowSystem::AddWindow(
-	const SpTWindow& window )
-{
-	wchar_t caption[256] {0};
+//inline void WindowSystem::AddWindow(
+//	const SpTWindow& window )
+//{
+	/*wchar_t caption[256] {0};
 	window->GetCaption( caption );
 
-	m_wndRepo[caption] = window;
-}
+	m_wndRepo[caption] = window;*/
+//}
 
 inline const tgon::WpTWindow& tgon::WindowSystem::GetWindow(
 	const std::wstring& wndName )

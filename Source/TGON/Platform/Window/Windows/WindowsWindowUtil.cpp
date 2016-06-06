@@ -1,11 +1,9 @@
 #include "PrecompiledHeader.h"
 #include "WindowsWindowUtil.h"
 
-#include <cassert>
 
 #include "../WindowStyle.h"
 #include "../Windows/WindowsWindow.h"
-#include "../../Application/TApplication.h"
 
 
 void tgon::Convert_wndstyle_to_dword(

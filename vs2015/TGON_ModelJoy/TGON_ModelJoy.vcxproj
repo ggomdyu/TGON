@@ -99,17 +99,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
-    <ClCompile Include="Source\Tgon_ModelJoy.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Source\ModelScene.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Tgon_ModelJoy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="Source\Tgon_ModelJoy.h" />
-    <ClInclude Include="Source\ModelScene.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="Tgon_ModelJoy.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="GraphicsStyle.xml" />

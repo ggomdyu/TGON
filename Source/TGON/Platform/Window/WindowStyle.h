@@ -6,22 +6,22 @@
 */
 
 #pragma once
-#include <stdint.h>
-#include <string>
 #include "../../Platform/Slate/PlatformFwd.h"
+#include "../Platform/Config/Build.h"
+
 
 namespace tgon
 {
 
 
-struct WindowStyle
+struct TGON_API WindowStyle
 {
 public:
 	WindowStyle() {}
-	static WindowStyle ParseFromXML( const wchar_t* const xmlPath );
+	static WindowStyle LoadFromXML( const wchar_t* xmlPath );
 
 public:
-	std::wstring caption = L"TGON-Default";
+	std::wstring title = L"TGON-Default";
 
 	/*
 		Transform
@@ -32,13 +32,15 @@ public:
 	int32_t height = 500;
 
 	/*
-		Show style
+		Style
 	*/
 	bool Popup = false;
 
 	/*
 		Function
 	*/
+	bool ClipCursor = false;
+	bool FullScreen = false;
 	bool EventHandleable = true;
 	bool SupportWindowTransparency = false;
 	bool SupportPerPixelTransparency = false;
