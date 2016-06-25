@@ -13,7 +13,7 @@
 #include <boost/predef.h>
 
 // tgLib
-#include <tgLib/Suffix/SyntaxCompatible.h>
+#include <tgLib/SyntaxCompatible.h>
 
 // SDL
 #include <SDL.h>
@@ -34,6 +34,7 @@
 
 // Standard C++ headers are here
 #include <cstdint>
+#include <cstdlib>
 #include <cassert>
 #include <memory>
 #include <string>

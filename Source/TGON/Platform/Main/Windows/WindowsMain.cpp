@@ -2,6 +2,7 @@
 #include "../TMain.h"
 
 #include <Windows.h>
+//#include <locale>
 #include <crtdbg.h>
 
 
@@ -25,14 +26,23 @@ int32_t WINAPI WinMain(
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 
+	setlocale( LC_ALL, "" );
+
 	if ( SDL_Init( SDL_INIT_VIDEO |
 				   SDL_INIT_JOYSTICK | 
 				   SDL_INIT_AUDIO |
 				   SDL_INIT_GAMECONTROLLER ) < 0 )
 	{
 		// TODO: Log Error
+		MessageBoxA( 
+			GetFocus( ), 
+			SDL_GetError( ), 
+			"WARNING!",
+			MB_OK | MB_ICONEXCLAMATION 
+		);
 	}
-	
+
+
 	// TODO: Make mini dump executer
 
 	int32_t errCode = tgon::RunApplication( );

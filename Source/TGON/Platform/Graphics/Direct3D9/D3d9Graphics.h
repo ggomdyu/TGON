@@ -14,7 +14,7 @@
 
 #include <d3d9.h>
 #include "D3d9Util.h"
-#include "../../../Platform/Misc/Windows/shared_comptr.h"
+#include "../../../Platform/Utility/Windows/shared_comptr.h"
 
 #pragma comment( lib, "d3d9.lib" )
 #if defined( _DEBUG ) || defined( DEBUG )

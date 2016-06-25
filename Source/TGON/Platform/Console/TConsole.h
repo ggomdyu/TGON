@@ -6,7 +6,6 @@
 */
 
 #pragma once
-#include <tgLib/Singleton.h>
 #include "../../Platform/Slate/PlatformConsole.h"
 
 
@@ -16,19 +15,19 @@ namespace tgon
 
 using TConsole = ConsoleImpl;
 
+template <typename Arg, typename ...Args>
+void TLog( 
+	/*IN*/ const Arg& arg, 
+	/*IN*/ const Args&... args )
+{
+#if defined( DEBUG ) || defined( _DEBUG )
+	TConsole::Write( arg );
+	TLog( args... );
+#endif
+}
 
 inline void TLog( )
 {
-}
-
-template <typename Arg, typename ...Args>
-void TLog( const Arg& arg, 
-		   const Args&... args )
-{
-#if defined( DEBUG ) || defined( _DEBUG )
-	TConsole::Get( )->Write( arg );
-	TLog( args... );
-#endif
 }
 
 

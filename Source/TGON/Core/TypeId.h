@@ -17,19 +17,19 @@ namespace tgon
 class TGON_API TypeId
 {
 public:
-	TypeId( const char* name ) :
+	explicit TypeId( const char* name ) :
 		m_name( name ),
 		m_hashCode( TMath::GenerateHash( name ))
 	{
 	}
 	~TypeId( ) {}
 
-	uint32_t GetHashCode( ) const;
 	const char* GetName( ) const;
+	uint32_t GetHashCode( ) const;
 
 private:
-	uint32_t m_hashCode;
-	std::string m_name;
+	const uint32_t m_hashCode;
+	const std::string m_name;
 };
 
 

@@ -48,6 +48,7 @@
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Misc\auto_cast.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TCamera.h" />
@@ -60,9 +61,6 @@
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Thirdparty\SDL2\VisualC\SDL\SDL.vcxproj">
-      <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\TGON_Platform\TGON_Platform.vcxproj">
       <Project>{7806527a-b31a-4faa-b22d-325ca0bc1326}</Project>
     </ProjectReference>
@@ -107,23 +105,23 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

@@ -24,6 +24,7 @@ class TGON_API WindowsMessageBox
 {
 public:
 	static WindowsMsgBoxResult Show( const wchar_t* text, const wchar_t* caption, WindowsMsgBoxButton msgBoxButton, WindowsMsgBoxFlag msgBoxFlag );
+	static WindowsMsgBoxResult Show( const char* text, const char* caption, WindowsMsgBoxButton msgBoxButton, WindowsMsgBoxFlag msgBoxFlag );
 };
 
 
@@ -34,6 +35,22 @@ inline WindowsMsgBoxResult WindowsMessageBox::Show(
 	WindowsMsgBoxFlag msgBoxFlag )
 {
 	auto ret = MessageBoxW(
+		GetFocus( ),
+		text,
+		caption,
+		static_cast<UINT>( msgBoxButton ) | static_cast<UINT>( msgBoxFlag )
+	);
+
+	return static_cast<WindowsMsgBoxResult>( ret );
+}
+
+inline WindowsMsgBoxResult WindowsMessageBox::Show( 
+	const char* text,
+	const char* caption,
+	WindowsMsgBoxButton msgBoxButton, 
+	WindowsMsgBoxFlag msgBoxFlag )
+{
+	auto ret = MessageBoxA(
 		GetFocus( ),
 		text,
 		caption,

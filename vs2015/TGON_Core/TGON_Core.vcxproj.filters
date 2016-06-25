@@ -54,6 +54,9 @@
     <Filter Include="hpp\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\Misc">
+      <UniqueIdentifier>{92509e57-4983-4157-bd92-cadef0ad838a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -93,10 +96,10 @@
       <Filter>cpp\Error</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp">
-      <Filter>hpp\XML</Filter>
+      <Filter>cpp\XML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.cpp">
-      <Filter>hpp\XML</Filter>
+      <Filter>cpp\XML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.h">
       <Filter>hpp\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Misc\auto_cast.h">
+      <Filter>hpp\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #pragma once
 #include <Application/TApplication.h>
 #include "Tgon_ModelJoy.h"
+#include <tgLib/auto_cast.h>
 
 
 namespace tgon
@@ -23,8 +24,8 @@ public:
 
 	static int32_t Main( )
 	{
-		auto windowForm = std::make_shared<Tgon_ModelJoy>( );
-		return TApplication::Run( windowForm );
+		auto form = std::make_shared<Tgon_ModelJoy>( );
+		return TApplication::Run( form );
 	}
 };
 

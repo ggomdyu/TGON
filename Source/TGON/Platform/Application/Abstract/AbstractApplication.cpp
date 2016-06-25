@@ -1,29 +1,31 @@
 #include "PrecompiledHeader.h"
 #include "AbstractApplication.h"
 
+#include <Platform/Window/TWindow.h>
+#include <SDL_syswm.h>
+#include <Console/TConsole.h>
 
 int32_t tgon::AbstractApplication::Run(
 	const SpTWindow& window )
 {
-	bool isQuit = false;
-	while ( !isQuit )
+	bool isQuitted = false;
+	while ( !isQuitted )
 	{
+		// Poll stacked events.
 		SDL_Event sdlEvent;
 		while ( SDL_PollEvent( &sdlEvent ))
 		{
-			if ( sdlEvent.type == SDL_QUIT )
+			if ( window->m_isWindowHandleable &&
+				sdlEvent.type != SDL_QUIT )
 			{
-				isQuit = true;
+				AbstractApplication::SubMessageProc( window, sdlEvent );
 			}
 			else
 			{
-				if ( window->GetWindowStyle( ).EventHandleable )
-				{
-					SubMessageProc( window, sdlEvent );
-				}
+				isQuitted = true;
 			}
 		}
-		
+
 		// All of events are processed; Now's the idle time.
 		window->OnIdle( );
 	}
@@ -46,23 +48,17 @@ void tgon::AbstractApplication::SubMessageProc(
 		case SDL_WINDOWEVENT_HIDDEN:
 			window->OnHide( );
 			break;
-		case SDL_WINDOWEVENT_CLOSE:
-//			if ( TWindow::GetCreationCount( ) <= 0 )
-			{
-				SDL_Quit( );
-			}
-			break;
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
 			window->OnGetFocus( );
 			break;
 		case SDL_WINDOWEVENT_FOCUS_LOST:
-			window->OnLostFocus( );
+			window->OnLoseFocus( );
 			break;
 		case SDL_WINDOWEVENT_SIZE_CHANGED:
-			window->OnSize( sdlEvent.window.data1, sdlEvent.window.data2 );
+			window->OnSized( sdlEvent.window.data1, sdlEvent.window.data2 );
 			break;
 		case SDL_WINDOWEVENT_MOVED:
-			window->OnMove( sdlEvent.window.data1, sdlEvent.window.data2 );
+			window->OnMoved( sdlEvent.window.data1, sdlEvent.window.data2 );
 			break;
 		case SDL_WINDOWEVENT_MAXIMIZED:
 			window->OnMaximized( );
@@ -113,4 +109,18 @@ void tgon::AbstractApplication::SubMessageProc(
 		}
 		break;
 	}
+}
+
+void tgon::AbstractApplication::GetScreenSize(
+	int32_t* width,
+	int32_t* height )
+{
+	SDL_DisplayMode displayMode;
+	if ( SDL_GetCurrentDisplayMode( 0, &displayMode ) < 0 )
+	{
+		// TODO : Log here
+	}
+
+	*width = displayMode.w;
+	*height = displayMode.h;
 }

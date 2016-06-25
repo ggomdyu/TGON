@@ -9,17 +9,17 @@ using namespace tinyxml2;
 
 class TXMLReader
 {
-	using _NodeRepoTy = std::vector<TXMLNode*>;
+	using _NodeRepoTy = std::vector<XMLNode*>;
 
 public:
-	TXMLReader( const wchar_t* xmlPath );
+	explicit TXMLReader( const char* xmlPath );
 	virtual ~TXMLReader( );
 
 	using iterator = _NodeRepoTy::iterator;
 	using const_iterator = _NodeRepoTy::const_iterator;
 
 public:
-	void LoadXML( const wchar_t* xmlPath );
+	void LoadXML( const char* xmlPath );
 	bool fail( ) const;
 
 	iterator begin( );
@@ -28,11 +28,11 @@ public:
 	const_iterator end( ) const;
 
 private:
-	void RecursiveLoadImpl( TXMLNode* );
+	void RecursiveLoadImpl( XMLNode* );
 
 private:
 	bool m_isFailed;
-	TXMLDocument m_xmlDocument;
+	tinyxml2::XMLDocument m_xmlDocument;
 	_NodeRepoTy m_readNodeRepo;
 };
 

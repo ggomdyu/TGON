@@ -87,18 +87,6 @@
     <Filter Include="cpp\Time\Windows">
       <UniqueIdentifier>{16ff2f3e-da84-45c6-b93a-c665bc424b70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Misc">
-      <UniqueIdentifier>{c79df330-ef72-4f8f-848b-6849e00af0f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Misc\Windows">
-      <UniqueIdentifier>{3e3e2a51-d199-49af-b919-f44d8401f5d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Misc">
-      <UniqueIdentifier>{957b4dd7-31cf-44ba-b802-f43ed5fe579f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Misc\Windows">
-      <UniqueIdentifier>{99caf85b-ca6e-47b4-a3f3-87a701034815}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cpp\MessageBox">
       <UniqueIdentifier>{f9d1d637-d685-42e0-9aa8-8e5e2a94bfe3}</UniqueIdentifier>
     </Filter>
@@ -144,6 +132,18 @@
     <Filter Include="cpp\Application\Abstract">
       <UniqueIdentifier>{6bb9c472-5bcf-4f25-b21a-16858e95899f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hpp\Utility">
+      <UniqueIdentifier>{03d98f64-08e1-43d7-a17f-8c7c263a1ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hpp\Utility\Windows">
+      <UniqueIdentifier>{3e3e2a51-d199-49af-b919-f44d8401f5d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Utility">
+      <UniqueIdentifier>{85cefa8e-6589-45ef-a0c8-c919434eab2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\Utility\Windows">
+      <UniqueIdentifier>{8c3da17a-6b29-47ab-a751-caac758706ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.cpp">
@@ -151,9 +151,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
       <Filter>cpp\Main\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TThreadPool.cpp">
-      <Filter>cpp\Thread</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp">
       <Filter>cpp\Time\Windows</Filter>
@@ -172,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.cpp">
       <Filter>cpp\MessageBox\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.cpp">
-      <Filter>cpp\Misc\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Error.cpp">
       <Filter>hpp\Graphics\Direct3D9</Filter>
@@ -212,6 +206,15 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp">
       <Filter>cpp\Application\Abstract</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp">
+      <Filter>cpp\Utility\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\HDCGuard.cpp">
+      <Filter>cpp\Utility\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TWorkThread.cpp">
+      <Filter>cpp\Thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h">
@@ -222,9 +225,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h">
       <Filter>hpp\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h">
-      <Filter>hpp\Thread</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
       <Filter>hpp\Console</Filter>
@@ -252,15 +252,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.h">
       <Filter>hpp\MessageBox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.h">
-      <Filter>hpp\Misc\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\unique_comptr.h">
-      <Filter>hpp\Misc\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h">
-      <Filter>hpp\Misc\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Interface\IMessageBox.h">
       <Filter>hpp\MessageBox\Interface</Filter>
@@ -369,6 +360,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.h">
       <Filter>hpp\Application\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\HDCGuard.h">
+      <Filter>hpp\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.h">
+      <Filter>hpp\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\shared_comptr.h">
+      <Filter>hpp\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\unique_comptr.h">
+      <Filter>hpp\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TWorkThread.h">
+      <Filter>hpp\Thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,6 @@
 */
 
 #pragma once
-#include <string>
 #include <boost/noncopyable.hpp>
 #include "../../../Core/TObject.h"
 #include "../../../Platform/Config/Build.h"
@@ -20,12 +19,12 @@ class TGON_API IConsole :
 	private boost::noncopyable
 {
 public:
-	virtual void Write( const wchar_t* str ) = 0;
-	virtual void Write( const char* str ) = 0;
+	static void Write( const wchar_t* str ) {};
+	static void Write( const char* str ) {};
 
 protected:
-	IConsole( ) {};
-	virtual ~IConsole( ) = 0 {};
+	IConsole( ) = delete;
+	virtual ~IConsole( ) = delete;
 };
 
 

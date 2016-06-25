@@ -19,13 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\array_size.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\auto_cast.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Compiler.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Graphics.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Noncopyable.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Predef\Platform.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Compiler.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Graphics.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Platform.h" />
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Singleton.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tgLib\Suffix\SyntaxCompatible.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\SyntaxCompatible.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\to_underlying.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{539AF6A5-DB75-4EC6-AD2E-182D67DCF6F5}</ProjectGuid>
@@ -65,22 +66,6 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Libraries.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Libraries.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Libraries.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

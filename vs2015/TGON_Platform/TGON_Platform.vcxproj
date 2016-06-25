@@ -42,14 +42,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\TMessageBox.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TThreadPool.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Thread\TWorkThread.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\HDCGuard.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindowUtil.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp" />
@@ -85,9 +86,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\TMessageBoxType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\MessageBox\Windows\WindowsMessageBoxType.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\HDCGuard.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\shared_comptr.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Misc\Windows\unique_comptr.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Property\Android\AndroidProperty.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Property\Windows\WindowsProperty.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformApplication.h" />
@@ -100,10 +98,14 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformSIMD.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformTime.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TThreadPool.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Thread\TWorkThread.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Time\TTimeType.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\HDCGuard.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\shared_comptr.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\unique_comptr.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindowUtil.h" />
@@ -112,6 +114,11 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Thirdparty\SDL2\VisualC\SDL\SDL.vcxproj">
+      <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7806527A-B31A-4FAA-B22D-325CA0BC1326}</ProjectGuid>
@@ -153,23 +160,23 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON_Common.props" />
-    <Import Project="..\TGON_Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

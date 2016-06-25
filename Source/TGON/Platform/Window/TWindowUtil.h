@@ -13,9 +13,9 @@ namespace tgon
 
 //
 // Transform WindowStyle struct to SDL window style. 
-// Additionally, Find out what cannot be selected both flags, and call assert.
+// Additionally, Find out what cannot be selected both flags, and invoke assert.
 //
-uint32_t Convert_WndStyle_To_SDLFlag( const struct WindowStyle& );
+uint32_t Convert_WindowStyle_To_SDLStyle( const struct WindowStyle& );
 
 
 }

@@ -19,7 +19,7 @@ using TApplication = ApplicationImpl;
 }
 
 
-#define TGON_GENERATE_APP( className )\
+#define TGON_REGISTER_MAINLOOP( className )\
 namespace tgon\
 {\
 int32_t RunApplication( )\

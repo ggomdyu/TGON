@@ -5,15 +5,10 @@
 #include "../TWindowUtil.h"
 
 
-int32_t tgon::AbstractWindow::ms_sdlWindowCount = 0;
-
-
-tgon::AbstractWindow::AbstractWindow( 
-	const WindowStyle& wndStyle ) :
-
-	m_wndStyle( wndStyle )
+tgon::AbstractWindow::AbstractWindow( const WindowStyle& wndStyle ) : 
+	m_isWindowHandleable( wndStyle.EventHandleable )
 {
-	this->SetupWindow( );
+	this->SetupWindow( wndStyle );
 }
 
 tgon::AbstractWindow::~AbstractWindow( )
@@ -21,41 +16,38 @@ tgon::AbstractWindow::~AbstractWindow( )
 	this->Close( );
 }
 
-void tgon::AbstractWindow::SetupWindow( )
+void tgon::AbstractWindow::SetupWindow( 
+	const WindowStyle& wndStyle )
 {
-	// Set coordinates of window
-	if ( m_wndStyle.ShowMiddle )
+	int32_t x = wndStyle.x;
+	int32_t y = wndStyle.y;
+
+	/* 
+		Set coordinates of window
+	*/
+	if ( wndStyle.ShowMiddle )
 	{
 		// TODO: support multi-window
+		//int32_t numVideoDisplay = SDL_GetNumVideoDisplays( );
 
 		SDL_DisplayMode displayMode;
-		if ( SDL_GetCurrentDisplayMode( 0, &displayMode ) < 0 )
-		{
-			// TODO: Error Log
-		}
+		SDL_GetCurrentDisplayMode( 0, &displayMode );
 		
-		m_wndStyle.x = static_cast<int32_t>(
-			displayMode.w*0.5 -
-			m_wndStyle.width*0.5 );
-		m_wndStyle.y = static_cast<int32_t>(
-			displayMode.h*0.5 -
-			m_wndStyle.height*0.5 );
+		x = static_cast<int32_t>( displayMode.w*0.5 - wndStyle.width*0.5 );
+		y = static_cast<int32_t>( displayMode.h*0.5 - wndStyle.height*0.5 );
 	}
 
-	const uint32_t sdlWindowFlag = 
-		Convert_WndStyle_To_SDLFlag( m_wndStyle );
-
+	/*
+		Create window
+	*/
 	m_sdlWindow = SDL_CreateWindow( 
-		"¾ÆÂ¯³ª",
-		m_wndStyle.x,
-		m_wndStyle.y,
-		m_wndStyle.width,
-		m_wndStyle.height,
-		sdlWindowFlag
+		wndStyle.title.c_str( ),
+		x, 
+		y, 
+		wndStyle.width,
+		wndStyle.height,
+		Convert_WindowStyle_To_SDLStyle( wndStyle )
 	);
-
-	++ms_sdlWindowCount;
-	SDL_SetWindowData( m_sdlWindow, "WindowPtr", this );
 }
 
 void tgon::AbstractWindow::SetPosition( 
@@ -63,6 +55,16 @@ void tgon::AbstractWindow::SetPosition(
 	int32_t y )
 {
 	SDL_SetWindowPosition( m_sdlWindow, x, y );
+}
+
+void tgon::AbstractWindow::Move(
+	int32_t x,
+	int32_t y )
+{
+	int32_t currX, currY;
+	this->GetPosition( &currX, &currY );
+
+	SDL_SetWindowPosition( m_sdlWindow, currX+x, currY+y );
 }
 
 void tgon::AbstractWindow::SetScale( 

@@ -12,41 +12,45 @@
 #include "../../Platform/Config/Build.h"
 
 
-#define PI 3.141592654f
-#define EPSILON 0.0001f
-
 
 namespace tgon
 {
 
 
+
 class TGON_API TMath
 {
 public:
-	TGON_CONSTEXPR static float Deg2Rad( float degree );
-	TGON_CONSTEXPR static float Rad2Deg( float radian );
-
+	static float PI;
+	static float EPSILON;
+	
+public:
+	/*
+		General
+	*/
 	static float Round( float val );
 	static int32_t RoundToInt( float val );
 	static float Floor( float val );
 	static int32_t FloorToInt( float val );
-	static float Sqrt( float value );
-	TGON_CONSTEXPR static float Max( float first, float second );
-	TGON_CONSTEXPR static float Min( float first, float second );
-	TGON_CONSTEXPR static float Abs( float value );
-	TGON_CONSTEXPR static float Clamp( float value, float min, float max );
-
+	static float Sqrt( float val );
+	static float Deg2Rad( float degree );
+	static float Rad2Deg( float radian );
+	static float Max( float first, float second );
+	static float Min( float first, float second );
+	static float Abs( float val );
+	static float Clamp( float val, float min, float max );
 
 	/*
 		Hashing
 	*/
-	BOOST_FORCEINLINE static uint32_t GenerateHash( const char* str );
-
+	template <std::size_t N>
+	static uint32_t GenerateHash( const char( &str )[N] );
+	static uint32_t GenerateHash( const char* str );
 
 	/*
 		Interpolation
 	*/
-	TGON_CONSTEXPR static float Lerp( float from, float to, float t );
+	static float Lerp( float from, float to, float t );
 	static float Smoothstep( float from, float to, float t );
 	static TVector3 Hermite( const TVector3& a, const TVector3& b, const TVector3& c, float t );
 
@@ -57,26 +61,15 @@ private:
 };
 
 
-TGON_CONSTEXPR_OR_INLINE float TMath::Deg2Rad(
-	float angle ) 
-{
-	return angle*( PI/180.f );
 }
 
-TGON_CONSTEXPR_OR_INLINE float TMath::Rad2Deg(
-		float radian ) 
-{
-	return radian*( 180.f/PI );
-}
 
-BOOST_FORCEINLINE float tgon::TMath::Round(
-	float val ) 
+inline float tgon::TMath::Round( float val )
 {
 	return static_cast<float>( RoundToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t tgon::TMath::RoundToInt(
-	float val ) 
+inline int32_t tgon::TMath::RoundToInt( float val )
 {
 #if TGON_SUPPORT_SSE
 	return _mm_cvt_ss2si( _mm_set_ss( val+val+0.5f )) >> 1;
@@ -85,14 +78,12 @@ BOOST_FORCEINLINE int32_t tgon::TMath::RoundToInt(
 #endif
 }
 
-BOOST_FORCEINLINE float tgon::TMath::Floor(
-	float val ) 
+inline float tgon::TMath::Floor( float val )
 {
 	return static_cast<float>( FloorToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t tgon::TMath::FloorToInt(
-	float val ) 
+inline int32_t tgon::TMath::FloorToInt( float val )
 {
 #if TGON_SUPPORT_SSE
 	return ( _mm_cvt_ss2si( _mm_set_ss( val+val-0.5f )) >> 1 );
@@ -101,77 +92,71 @@ BOOST_FORCEINLINE int32_t tgon::TMath::FloorToInt(
 #endif
 }
 
-TGON_CONSTEXPR float TMath::Lerp(
-	float from,
-	float to,
-	float t ) 
+inline float tgon::TMath::Sqrt( float val )
 {
-	return from + (( to-from )*t );
+	return std::sqrt( val );
 }
 
-inline float tgon::TMath::Smoothstep(
-	float from,
-	float to,
-	float t ) 
+inline float tgon::TMath::Deg2Rad( float degree )
 {
-	const float _t = 
-		TMath::Clamp(( t-from )/( to-from ),
-								   0.0f,
-								   1.0f );
-	return _t*_t*( 3-2*_t );
+	return degree*( PI / 180.f );
 }
 
-inline TVector3 TMath::Hermite(
-	const TVector3& a,
-	const TVector3& b,
-	const TVector3& c,
-	float t )
+inline float tgon::TMath::Rad2Deg( float radian )
 {
-	return {(( 1-t )*( 1-t )*a ) +
-			( 2*t*( 1-t )*b ) +
-			( t*t*c )};
+	return radian*( 180.f / PI );
 }
 
-TGON_CONSTEXPR_OR_INLINE float TMath::Max(
-	float first,
-	float second )
+inline float tgon::TMath::Max( float first, float second )
 {
 	return ( first >= second ) ? first : second;
 }
 
-TGON_CONSTEXPR_OR_INLINE float TMath::Min(
-	float first, 
-	float second )
+inline float tgon::TMath::Min( float first, float second )
 {
 	return ( first <= second ) ? first : second;
 }
 
-TGON_CONSTEXPR_OR_INLINE float TMath::Abs(
-	float value )
+inline float tgon::TMath::Abs( float val )
 {
-	return ( value < 0 ) ? -value : value;
+	return ( val < 0 ) ? -val : val;
 }
 
-TGON_CONSTEXPR_OR_INLINE float tgon::TMath::Clamp(
-	float value, float min, float max ) 
+inline float tgon::TMath::Clamp( float val, float min, float max )
 {
-	return TMath::Max(
-		TMath::Min( value, max ),
-		min
-	);
+	return TMath::Max( TMath::Min( val, max ), min );
 }
 
-BOOST_FORCEINLINE float tgon::TMath::Sqrt(
-	float value )
+template <std::size_t N>
+inline uint32_t tgon::TMath::GenerateHash( const char( &str )[N] )
 {
-	return std::sqrt( value );
+	return x65599Hash( str, N );
 }
 
-BOOST_FORCEINLINE uint32_t TMath::GenerateHash(
-	const char* str )
+inline uint32_t tgon::TMath::GenerateHash( const char* str )
 {
 	return x65599Hash( str, std::strlen( str ));
 }
 
+inline float tgon::TMath::Lerp( float from, float to, float t )
+{
+	return from + (( to-from )*t );
+}
 
+inline float tgon::TMath::Smoothstep( float from, float to, float t )
+{
+	t = TMath::Clamp(( t-from )/( to-from ), 
+		0.f, 1.f );
+
+	return t*t*( 3.f-( 2.f*t ));
+}
+
+inline tgon::TVector3 tgon::TMath::Hermite( 
+	const TVector3& a, 
+	const TVector3& b, 
+	const TVector3& c, 
+	float t )
+{
+	const float inv = 1.f - t;
+	return {( inv*inv*a ) + ( 2*t*inv*b ) + ( t*t*c )};
 }

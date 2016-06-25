@@ -32,7 +32,7 @@ public:
     TVector3( );
 	TVector3( float x, float y, float z );
 #if TGON_SUPPORT_SSE
-	TVector3( __m128 rhs );
+	explicit TVector3( __m128 rhs );
 #endif
 
 	static float Dot( const TVector3& a, const TVector3& b );
@@ -98,10 +98,7 @@ inline TVector3::TVector3( ) :
 {
 }
 
-inline TVector3::TVector3( 
-	float x, 
-	float y, 
-	float z ) :
+inline TVector3::TVector3( float x, float y, float z ) :
 #if TGON_SUPPORT_SSE
 	reg( _mm_setr_ps( x, y, z, 0.f ))
 #else
@@ -291,7 +288,8 @@ inline TVector3::TVector3( __m128 rhs ) :
 #endif
 
 inline float TVector3::Dot(
-	const TVector3& a, const TVector3& b ) 
+	const TVector3& a, 
+	const TVector3& b ) 
 {
 #if TGON_SUPPORT_SSE
 #else
@@ -302,7 +300,8 @@ inline float TVector3::Dot(
 }
 
 inline TVector3 TVector3::Cross(
-	const TVector3& a,  const TVector3& b )
+	const TVector3& a, 
+	const TVector3& b )
 {
 #if TGON_SUPPORT_SSE
 #else
@@ -313,7 +312,8 @@ inline TVector3 TVector3::Cross(
 }
 
 inline float TVector3::Distance(
-	const TVector3& a, const TVector3& b )
+	const TVector3& a, 
+	const TVector3& b )
 {
 	return ( a-b ).Length( );
 }

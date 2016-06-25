@@ -43,7 +43,6 @@ void SpeedTest( )
 
 #include <Window/TWindow.h>
 #include <Application/TApplication.h>
-#include <Window/WindowEvent.h>
 #include <Window/Windows/WindowsWindow.h>
 
 

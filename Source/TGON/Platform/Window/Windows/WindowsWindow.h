@@ -9,20 +9,20 @@
 #pragma once
 #include "../Abstract/AbstractWindow.h"
 
-#define WIN32_LEAN_AND_MEAN
-	#include <Windows.h>
-#undef WIN32_LEAN_AND_MEAN
+#ifndef WIN32_LEAN_AND_MEAN
+#	define WIN32_LEAN_AND_MEAN
+#	include <windows.h>
+#	undef WIN32_LEAN_AND_MEAN
+#endif
 
 
 namespace tgon
 {
 
-
 class WindowsWindow;
 using WindowImpl = WindowsWindow;
 using SpTWindow = std::shared_ptr<WindowImpl>;
 using WpTWindow = std::weak_ptr<WindowImpl>;
-
 
 class TGON_API WindowsWindow : 
 	public AbstractWindow
@@ -33,10 +33,13 @@ protected:
 
 public:
 	/*
-		Commands
+		Gets
 	*/
 	HDC GetDC( ) const;
 	HWND GetWindowHandle( ) const;
+
+private:
+	void AdditionalInit( const struct WindowStyle& );
 
 private:
 	HDC m_dcHandle;

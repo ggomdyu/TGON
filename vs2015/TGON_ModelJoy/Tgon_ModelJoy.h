@@ -1,16 +1,8 @@
 #pragma once
 
-#include <Application/TApplication.h>
-#include <Console/TConsole.h>
-#include <Core/Math/TMath.h>
 #include <Window/TWindow.h>
 #include <Window/WindowStyle.h>
-#include <Application/TApplication.h>
-#include <MessageBox/TMessageBox.h>
-#include <Graphics/TGraphics.h>
-#include <System/WindowSystem.h>
 
-#include <SDL.h>
 
 namespace tgon
 {
@@ -21,31 +13,21 @@ class Tgon_ModelJoy :
 {
 public:
 	Tgon_ModelJoy( ) :
-		TWindow( WindowStyle::LoadFromXML( L"WindowStyle.xml" ))
+		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
 	{
-		TLog( "OnCreate\n" );
 	}
 
-	~Tgon_ModelJoy( )
+	virtual ~Tgon_ModelJoy( )
 	{
-		TLog( "OnDestroy\n" );
 	}
 
 	virtual void OnIdle( ) override
 	{
 	}
 
-	virtual void OnMove( int x, int y ) override
+	virtual void OnLMouseDown( int32_t x, int32_t y )
 	{
-		TLog( "OnMove\n" );
 	}
-
-	virtual void OnLMouseDown( int x, int y ) override
-	{
-		TLog( "OnLMouseDown\n" );
-	}
-
-private:
 };
 
 

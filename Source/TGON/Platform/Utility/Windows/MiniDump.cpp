@@ -1,3 +1,4 @@
+#include "PrecompiledHeader.h"
 #include "MiniDump.h"
 
 //#include <DbgHelp.h>

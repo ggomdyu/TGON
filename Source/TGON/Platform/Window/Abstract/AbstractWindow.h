@@ -7,8 +7,8 @@
 
 
 #pragma once
-#include "../../../Platform/Config/Build.h"
-#include "../WindowStyle.h"
+#include <Platform/Config/Build.h>
+#include <Platform/Window/WindowStyle.h>
 
 
 namespace tgon
@@ -21,7 +21,7 @@ class TGON_API AbstractWindow :
 	friend class AbstractApplication;
 
 protected:
-	AbstractWindow( const WindowStyle& wndStyle );
+	explicit AbstractWindow( const WindowStyle& wndStyle );
 	virtual ~AbstractWindow( ) = 0;
 
 public:
@@ -40,6 +40,7 @@ public:
 		Sets
 	*/
 	void SetPosition( int32_t x, int32_t y );
+	void Move( int32_t x, int32_t y );
 	void SetScale( int32_t width, int32_t height );
 	void SetCaption( const wchar_t* title );
 
@@ -49,26 +50,26 @@ public:
 	virtual void OnShow( ) {}
 	virtual void OnHide( ) {}
 	virtual void OnGetFocus( ) {}
-	virtual void OnLostFocus( ) {}
+	virtual void OnLoseFocus( ) {}
 	virtual void OnMaximized( ) {}
 	virtual void OnMinimized( ) {}
 	virtual void OnIdle( ) = 0;	// Must be implemented
-	virtual void OnMove( int x, int y ) {}
-	virtual void OnSize( int width, int height ) {}
-	virtual void OnMouseMove( int x, int y ) {}
-	virtual void OnLMouseDown( int x, int y ) {}
-	virtual void OnLMouseUp( int x, int y ) {}
-	virtual void OnRMouseDown( int x, int y ) {}
-	virtual void OnRMouseUp( int x, int y ) {}
-	virtual void OnMMouseDown( int x, int y ) {}
-	virtual void OnMMouseUp( int x, int y ) {}
+	virtual void OnMoved( int32_t x, int32_t y ) {}
+	virtual void OnSized( int32_t width, int32_t height ) {}
+	virtual void OnMouseMove( int32_t x, int32_t y ) {}
+	virtual void OnLMouseDown( int32_t x, int32_t y ) {}
+	virtual void OnLMouseUp( int32_t x, int32_t y ) {}
+	virtual void OnRMouseDown( int32_t x, int32_t y ) {}
+	virtual void OnRMouseUp( int32_t x, int32_t y ) {}
+	virtual void OnMMouseDown( int32_t x, int32_t y ) {}
+	virtual void OnMMouseUp( int32_t x, int32_t y ) {}
+	virtual void OnMouseWheel( int32_t delta ) {}
 	virtual void OnMouseLeave( ) {}
 	virtual void OnMouseEnter( ) {}
 
 	/*
 		Gets
 	*/
-	static int32_t GetCreationCount( );
 	void GetPosition( int32_t* x, int32_t* y ) const;
 	void GetSize( int32_t* width, int32_t* height ) const;
 	const char* GetCaption( ) const;
@@ -77,21 +78,14 @@ public:
 protected:
 	SDL_Window* GetSDLWindow( );
 	const SDL_Window* GetSDLWindow( ) const;
-	const WindowStyle& GetWindowStyle( ) const;
 
 private:
-	void SetupWindow( );
+	void SetupWindow( const WindowStyle& wndStyle );
 
 private:
-	WindowStyle m_wndStyle;
+	bool m_isWindowHandleable;
 	SDL_Window* m_sdlWindow;
-	static int32_t ms_sdlWindowCount;
 };
-
-inline int32_t AbstractWindow::GetCreationCount( )
-{
-	return ms_sdlWindowCount;
-}
 
 inline void AbstractWindow::Show( )
 {
@@ -145,11 +139,6 @@ inline SDL_Window* AbstractWindow::GetSDLWindow( )
 inline const SDL_Window* AbstractWindow::GetSDLWindow( ) const
 {
 	return m_sdlWindow;
-}
-
-inline const WindowStyle& tgon::AbstractWindow::GetWindowStyle( ) const
-{
-	return m_wndStyle;
 }
 
 

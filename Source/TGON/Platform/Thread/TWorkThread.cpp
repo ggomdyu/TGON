@@ -1,22 +1,20 @@
 #include "PrecompiledHeader.h"
-#include "TThreadPool.h"
+#include "TWorkThread.h"
 
 
-tgon::TThreadPool::TThreadPool( std::size_t numThread ) :
+tgon::TWorkThread::TWorkThread( std::size_t numThread ) :
 	m_isDestroying( false ),
-	m_waitCv( ),
-	m_finishCv( ),
-	m_currWorkCount( )
+	m_currWorkCount( 0 )
 {
-	for ( std::size_t i =0; i <numThread; ++i )
+	for ( std::size_t i =0; i < numThread; ++i )
 	{
 		m_threadQueue.push_back(
-				std::thread( &TThreadPool::InfiniteLoop, this )
-			);
+			std::thread( &TWorkThread::InfiniteLoop, this )
+		);
 	}
 }
 
-tgon::TThreadPool::~TThreadPool( )
+tgon::TWorkThread::~TWorkThread( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 
@@ -27,7 +25,7 @@ tgon::TThreadPool::~TThreadPool( )
 	this->JoinAll( );
 }
 
-void tgon::TThreadPool::JoinAll( )
+void tgon::TWorkThread::JoinAll( )
 {
 	for ( auto& elem : m_threadQueue )
 	{
@@ -35,7 +33,7 @@ void tgon::TThreadPool::JoinAll( )
 	}
 }
 
-void tgon::TThreadPool::Wait( )
+void tgon::TWorkThread::Wait( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 	m_finishCv.wait( lock,
@@ -48,7 +46,7 @@ void tgon::TThreadPool::Wait( )
 	);
 }
 
-void tgon::TThreadPool::InfiniteLoop( )
+void tgon::TWorkThread::InfiniteLoop( )
 {
 	while ( true )
 	{
