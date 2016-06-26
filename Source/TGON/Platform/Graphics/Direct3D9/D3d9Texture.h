@@ -7,38 +7,45 @@
 
 
 #pragma once
-#include "D3D9Graphics.h"
-#include "../Platform/Misc/Windows/shared_comptr.h"
+#include <d3d9.h>
+#include <d3dx9.h>
+#include "../../Graphics/TGraphics.h"
 
 
 namespace tgon
 {
 
 
-using TextureImpl = class D3d9Texture;
-using SpTTexture = std::shared_ptr<TextureImpl>;
-using WpTTexture = std::weak_ptr<TextureImpl>;
-
-using SpD3D9Texture = tgon::shared_comptr<struct IDirect3DTexture9>;
-
 
 class D3d9Texture
 {
 public:
-	explicit D3d9Texture( const SpTGraphics& );
+	explicit D3d9Texture( const SpTGraphics&, const wchar_t* texPath );
 	virtual ~D3d9Texture( );
 
 public:
-	void SetTexture( const SpTGraphics& );
-	SpD3D9Texture GetTexture( ) const;
+	void SetTexture( const SpTGraphics&, const wchar_t* texPath );
+	const SpD3d9Texture& GetTexture( ) const;
 
 private:
-	void LoadTexture( const SpTGraphics& );
-
-private:
-	SpD3D9Texture m_texture;
-	static std::map<std::wstring, SpD3D9Texture> ms_texturePool;
+	SpD3d9Texture m_texture;
+	static std::map<std::wstring, D3d9Texture*> ms_texPool;
 };
+
+using TextureImpl = D3d9Texture;
+
+inline void D3d9Texture::SetTexture(
+	const SpTGraphics& graphics,
+	const wchar_t* texPath )
+{
+	
+}
+
+inline const SpD3d9Texture& D3d9Texture::GetTexture( ) const
+{
+	return m_texture;
+}
+
 
 
 }

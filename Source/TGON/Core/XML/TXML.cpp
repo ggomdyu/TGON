@@ -1,17 +1,11 @@
 #include "PrecompiledHeader.h"
-#include "TXMLElement.h"
+#include "TXML.h"
+
+#include <tinyxml2_wchar_t.h>
+#include <string>
 
 
-tgon::TXMLElement::TXMLElement( 
-	tinyxml2::XMLElement* xmlElement ) :
-	TXMLNode( xmlElement )
-{
-}
-
-tgon::TXMLElement::~TXMLElement( )
-{
-}
-
+using namespace tinyxml2;
 
 //void ErrorException( const XMLError xmlErr )
 //{
@@ -59,26 +53,27 @@ tgon::TXMLElement::~TXMLElement( )
 //
 //	return nullptr;
 //}
-//
-//tgon::XMLElement* tgon::FindElementFromParent(
-//	const wchar_t* nodeName,
-//	XMLElement* parentNode )
-//{
-//	XMLElement* sibling = parentNode->FirstChildElement( );
-//
-//	while ( sibling )
-//	{
-//		if ( !std::wcscmp( sibling->Name(), nodeName ))
-//		{
-//			return sibling;
-//		}
-//
-//		sibling = sibling->NextSiblingElement( );
-//	}
-//
-//	return nullptr;
-//}
-//
+
+
+XMLElement* tgon::FindElementFromParent(
+	const wchar_t* nodeName,
+	XMLElement* parentNode )
+{
+	XMLElement* sibling = parentNode->FirstChildElement( );
+
+	while ( sibling )
+	{
+		if ( !std::wcscmp( sibling->Name(), nodeName ))
+		{
+			return sibling;
+		}
+
+		sibling = sibling->NextSiblingElement( );
+	}
+
+	return nullptr;
+}
+
 
 
 //tinyxml2::XMLElement* tgon::FindElementFromParent(
@@ -107,4 +102,3 @@ tgon::TXMLElement::~TXMLElement( )
 //
 //	return FindElementRecursive( nodeName, root );
 //}
-

@@ -3,48 +3,53 @@
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : Abstract-API Sets for Windows
+* Description : Platform abstraction API
 */
 
 
 #pragma once
-#include "../../Slate/PlatformFwd.h"
-#include "../../Config/Build.h"
+#include "../../Window/TWindow.h"
 
+#include "../../../Platform/Config/Build.h"
+#include "../TApplicationType.h"
+
+
+#define TGON_GENERATE_MAINLOOP( className )\
+int RunApplication( )\
+{\
+    std::shared_ptr<className> app( new className );\
+    return app->Run();\
+}\
 
 namespace tgon
 {
 
 
-class TGON_API AbstractApplication
+class TGON_API AbstractApplication : 
+	public AbstractWindowDelegate
 {
 public:
-	static int32_t Run( 
-		/*IN*/ const SpTWindow& );
+	AbstractApplication( const struct WindowStyle& );
+	virtual ~AbstractApplication( );
 
-	static void Quit( 
-		/*IN*/ int32_t exitCode );
+public:
+	virtual int32_t Run( ) = 0;
+	static void Run( class WindowsWindow& ) {}
+	static bool MessageLoop( _Out_ enum struct WindowEvent* ) {}
+	static void ExitThread( ) {}
+	static void Exit( int32_t exitCode ) {}
+	static void Quit( int32_t exitCode ) {}
+	static void Restart( ) {}
+	static void GetScreenSize( int32_t* width, int32_t* height ) {}
+	static struct TSystemBatteryInfo GetPowerInfo( ) {}
 
-	static void GetScreenSize( 
-		/*OUT*/ int32_t* width, 
-		/*OUT*/ int32_t* height );
+protected:
+	virtual void SetupWindowComponents( );
 
 private:
-	static void SubMessageProc( 
-		/*IN*/ const SpTWindow&, 
-		/*IN*/ const SDL_Event& );
-
-private:
-	AbstractApplication( ) = delete;
-	virtual ~AbstractApplication( ) = delete;
-	
+	SpTWindow m_window;
+	WindowStyle m_rootWndStyle;
 };
-
-inline void AbstractApplication::Quit( 
-	int32_t exitCode )
-{
-	SDL_Quit( );
-}
 
 
 }

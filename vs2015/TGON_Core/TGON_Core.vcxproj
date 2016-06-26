@@ -30,12 +30,12 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
@@ -56,9 +56,10 @@
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
     <ClInclude Include="..\..\Source\TGON\Core\StringHash.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TypeId.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
+    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON_Platform\TGON_Platform.vcxproj">

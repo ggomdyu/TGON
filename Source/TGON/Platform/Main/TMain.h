@@ -7,9 +7,6 @@
 
 #pragma once
 
-namespace tgon
-{
+//int32_t tgMain( int32_t argc, char* argv[] );
 
 extern int RunApplication( );
-
-}

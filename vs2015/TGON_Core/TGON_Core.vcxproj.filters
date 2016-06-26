@@ -62,6 +62,9 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp">
+      <Filter>hpp\XML</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp">
       <Filter>hpp\Component</Filter>
     </ClCompile>
@@ -76,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp">
       <Filter>cpp\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp">
+      <Filter>cpp\XML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp">
       <Filter>cpp\String</Filter>
@@ -96,15 +102,18 @@
       <Filter>cpp\Error</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp">
-      <Filter>cpp\XML</Filter>
+      <Filter>hpp\XML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.cpp">
-      <Filter>cpp\XML</Filter>
+      <Filter>hpp\XML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h">
+      <Filter>hpp\XML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Component\IComponent.h">
       <Filter>hpp\Component</Filter>
@@ -124,6 +133,9 @@
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
       <Filter>hpp\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
+      <Filter>hpp\Utility</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
       <Filter>hpp\Math</Filter>
     </ClInclude>
@@ -138,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h">
       <Filter>hpp\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h">
+      <Filter>hpp\XML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
       <Filter>hpp\Math</Filter>
@@ -162,9 +177,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.h">
       <Filter>hpp\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Misc\auto_cast.h">
-      <Filter>hpp\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

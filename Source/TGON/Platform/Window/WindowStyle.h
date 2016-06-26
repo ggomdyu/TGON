@@ -6,26 +6,22 @@
 */
 
 #pragma once
+#include <stdint.h>
+#include <string>
 #include "../../Platform/Slate/PlatformFwd.h"
-#include "../Platform/Config/Build.h"
-
 
 namespace tgon
 {
 
 
-struct TGON_API WindowStyle
+struct WindowStyle
 {
 public:
-	static WindowStyle LoadFromXML( /*IN*/ const char* xmlPath );
-	static const WindowStyle ms_defaultStyle;
+	WindowStyle() {}
+	static WindowStyle LoadFromXML( const wchar_t* xmlPath );
 
 public:
-	/*
-		Title
-	*/
-	// UTF-8 encoded window title
-	std::string title = u8"TGON-Default";
+	std::wstring title = L"TGON-Default";
 
 
 	/*
@@ -41,7 +37,7 @@ public:
 
 
 	/*
-		Style
+		Show style
 	*/
 	// If border is Useless, switch this to true.
 	bool Popup = false;
@@ -50,14 +46,7 @@ public:
 	/*
 		Function
 	*/
-	// Clip the cursor on window or not.
-	bool ClipCursor = false;
-
-	//
 	bool FullScreen = false;
-	
-	// EventHandleable means allow event handler calling( e.g. OnLMouseDown, OnSized, ... )
-	// @ WARNING! : OnIdle is not affected by this flag.
 	bool EventHandleable = true;
 	
 	// Enable window surface's transparency or not.
