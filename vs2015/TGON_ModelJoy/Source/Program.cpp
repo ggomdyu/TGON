@@ -5,7 +5,8 @@
 #include <Application/TApplication.h>
 
 
-TGON_REGISTER_MAINLOOP( tgon::Program )
+TGON_GENERATE_APP( tgon::Program )
+
 
 tgon::Program::Program( )
 {

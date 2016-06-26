@@ -1,182 +1,135 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="cpp">
-      <UniqueIdentifier>{f66218f1-4e0e-4ef3-ac63-f546011ba36b}</UniqueIdentifier>
-      <Extensions>c;cpp;</Extensions>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{c010ece4-f856-4269-b350-295bc9a97ebd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\PrecompiledHeader">
-      <UniqueIdentifier>{fb4ee076-6f82-49bb-ba83-20c194c88daf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp">
-      <UniqueIdentifier>{402e4741-a5ad-412b-a9cb-3118498425ef}</UniqueIdentifier>
-      <Extensions>h;hpp</Extensions>
-    </Filter>
-    <Filter Include="hpp\PrecompiledHeader">
-      <UniqueIdentifier>{baeb6555-1e1a-415c-ad1d-fc9fd3476786}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\XML">
-      <UniqueIdentifier>{239f0d29-f3aa-43fc-b768-dfcf46d8f64f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\String">
-      <UniqueIdentifier>{074ef806-c4b9-4272-a63b-719ad3483621}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Math">
-      <UniqueIdentifier>{255089ba-94af-4830-bb5b-fb421c8f06b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Utility">
-      <UniqueIdentifier>{cc371d9a-28eb-4062-beab-6f89373c117c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\XML">
-      <UniqueIdentifier>{543c1723-1cd5-4ff6-8a03-330c19ac9ae0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Component">
-      <UniqueIdentifier>{1c4dd76c-fd2b-4505-a95f-75d78f7ad4d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\String">
-      <UniqueIdentifier>{ce431be6-b3ce-46f5-a00e-3780ccce44e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\Component">
-      <UniqueIdentifier>{63e744c4-4a38-4a9e-9ff0-73aaf73c1c77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hpp\Core">
+    <Filter Include="Sources\Core">
       <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Core">
-      <UniqueIdentifier>{c0d0bfaa-5aa3-444a-9dac-1a6638e07028}</UniqueIdentifier>
+    <Filter Include="Sources\Core\cpp">
+      <UniqueIdentifier>{f5776c95-6a53-4d22-998e-eca9c8d392d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Error">
+    <Filter Include="Sources\Core\hpp">
+      <UniqueIdentifier>{f56478e6-2f2a-4292-afa4-e95f9999d747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Error">
       <UniqueIdentifier>{11bcc1c2-ff26-4e77-8eb8-44a926b0e080}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\Error">
-      <UniqueIdentifier>{e01f4bbf-21a5-4c7b-94ef-6b9aee1c5840}</UniqueIdentifier>
+    <Filter Include="Sources\Error\cpp">
+      <UniqueIdentifier>{712a1f88-060a-4c8d-b8b5-a3786681493e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Math">
+    <Filter Include="Sources\Error\hpp">
+      <UniqueIdentifier>{702c99d7-8537-440f-ac80-77c3e3fa4795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hpp\Misc">
-      <UniqueIdentifier>{92509e57-4983-4157-bd92-cadef0ad838a}</UniqueIdentifier>
+    <Filter Include="Sources\Math\cpp">
+      <UniqueIdentifier>{c0834393-5c1e-4029-af96-79ec5486cfc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Math\hpp">
+      <UniqueIdentifier>{2e2c6fa0-b044-4144-a25f-3fcfe10521ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{baeb6555-1e1a-415c-ad1d-fc9fd3476786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\String">
+      <UniqueIdentifier>{ce431be6-b3ce-46f5-a00e-3780ccce44e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\XML">
+      <UniqueIdentifier>{1ae5b300-7dd9-476b-8326-73fc49260ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\XML\hpp">
+      <UniqueIdentifier>{3b05eb64-f068-4d23-bebc-385918e18cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\XML\cpp">
+      <UniqueIdentifier>{abf8370b-fee5-4eb4-ab0a-5d877abece49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
-      <Filter>cpp\PrecompiledHeader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp">
-      <Filter>hpp\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp">
-      <Filter>hpp\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp">
-      <Filter>cpp\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp">
-      <Filter>cpp\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp">
-      <Filter>cpp\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp">
-      <Filter>cpp\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp">
-      <Filter>cpp\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp">
-      <Filter>cpp\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp">
-      <Filter>cpp\Math</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
+      <Filter>Sources\Math\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
-      <Filter>cpp\Math</Filter>
+      <Filter>Sources\Math\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
-      <Filter>cpp\Math</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp">
+      <Filter>Sources\Math\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp">
+      <Filter>Sources\Math\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp">
+      <Filter>Sources\Math\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp">
+      <Filter>Sources\Math\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp">
-      <Filter>cpp\Core</Filter>
+      <Filter>Sources\Core\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp">
-      <Filter>cpp\Error</Filter>
+      <Filter>Sources\Error\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp">
+      <Filter>Sources\String</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp">
-      <Filter>hpp\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.cpp">
-      <Filter>hpp\XML</Filter>
+      <Filter>Sources\XML\hpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
-      <Filter>hpp\PrecompiledHeader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h">
-      <Filter>hpp\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Component\IComponent.h">
-      <Filter>hpp\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h">
-      <Filter>hpp\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TCamera.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
-      <Filter>hpp\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
-      <Filter>hpp\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
-      <Filter>hpp\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h">
-      <Filter>hpp\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h">
-      <Filter>hpp\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h">
-      <Filter>hpp\Math</Filter>
+      <Filter>Sources\PrecompiledHeader</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h">
-      <Filter>hpp\String</Filter>
+      <Filter>Sources\String</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h">
-      <Filter>hpp\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
-      <Filter>hpp\Math</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h">
+      <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h">
-      <Filter>hpp\Math</Filter>
+      <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TypeId.h">
-      <Filter>hpp\Core</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h">
+      <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h">
-      <Filter>hpp\Core</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
+      <Filter>Sources\Math\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h">
+      <Filter>Sources\Math\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
+      <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h">
-      <Filter>hpp\Error</Filter>
+      <Filter>Sources\Error\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h">
-      <Filter>hpp\Error</Filter>
+      <Filter>Sources\Error\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TypeId.h">
+      <Filter>Sources\Core\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h">
+      <Filter>Sources\Core\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
+      <Filter>Sources\Core\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
+      <Filter>Sources\Core\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
+      <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h">
-      <Filter>hpp\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2.h">
-      <Filter>hpp\XML</Filter>
+      <Filter>Sources\XML\cpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,9 @@
 ﻿#include "PrecompiledHeader.h"
 #include "TString.h"
-	
+#include <bitset>	
+
 //
-void tgon::UTF8_to_UTF16(
+void tgon::ConvertUTF_8ToUTF_16(
 	const char* utf16Src, 
 	wchar_t* utf16Dest )
 {
@@ -66,36 +67,37 @@ void tgon::UTF8_to_UTF16(
 //	return std::wstring();
 //}
 
-void tgon::GetFileNameFromPath(
-	std::wstring* dest,
-	bool deleteFileExtension )
+std::wstring tgon::GetFileNameFromPath( const wchar_t* srcFileName, bool deleteFileExtension )
 {
-	int32_t index = dest->length( )-1;
-	if ( index <= 0 )
-	{
-        return;
-	}
+	std::wstring ret;
+	return ret;
 
-    if ( deleteFileExtension )
-    {
-        // delete file extension
-		while (( *dest )[index--] != '.' )
-        {
-			dest->pop_back( );
-        }
+	//int32_t index = ret.length( )-1;
+	//if ( index <= 0 )
+	//{
+ //       return;
+	//}
 
-		// delete '.'
-		dest->pop_back( );
-    }
- 
-    // delete path
-    while (( *dest )[index--] != '/' )
-    {
-		if ( index <= 0 )
-		{
-            return;
-		}
-    }
+ //   if ( deleteFileExtension )
+ //   {
+ //       // delete file extension
+	//	while (( *dest )[index--] != '.' )
+ //       {
+	//		dest->pop_back( );
+ //       }
 
-	dest->erase( dest->begin( ), dest->begin( )+index+2 );
+	//	// delete '.'
+	//	dest->pop_back( );
+ //   }
+ //
+ //   // delete path
+ //   while ( srcFileName[index--] != '/' )
+ //   {
+	//	if ( index <= 0 )
+	//	{
+ //           return;
+	//	}
+ //   }
+
+	//dest->erase( dest->begin( ), dest->begin( )+index+2 );
 }

@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "Tgon_ModelJoy.h"
 
+#include <Application/TApplication.h>
 
-TGON_GENERATE_MAINLOOP( tgon::Tgon_ModelJoy )
+

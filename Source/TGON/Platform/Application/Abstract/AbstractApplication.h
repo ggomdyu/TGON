@@ -3,51 +3,59 @@
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : Platform abstraction API
+* Description : Abstracted platform API
 */
 
 
 #pragma once
-#include "../../Window/TWindow.h"
-
 #include "../../../Platform/Config/Build.h"
 #include "../TApplicationType.h"
+#include "../../Window/TWindow.h"
 
+#ifdef DispatchMessage
+	#undef DispatchMessage
+#endif
 
-#define TGON_GENERATE_MAINLOOP( className )\
-int RunApplication( )\
-{\
-    std::shared_ptr<className> app( new className );\
-    return app->Run();\
-}\
 
 namespace tgon
 {
 
 
-class TGON_API AbstractApplication : 
-	public AbstractWindowDelegate
+class TGON_API AbstractApplication
 {
 public:
-	AbstractApplication( const struct WindowStyle& );
+	AbstractApplication( );
+	
 	virtual ~AbstractApplication( );
 
+
 public:
-	virtual int32_t Run( ) = 0;
-	static void Run( class WindowsWindow& ) {}
-	static bool MessageLoop( _Out_ enum struct WindowEvent* ) {}
+	/*
+		Commands
+	*/
+	static int32_t Run( class WindowsWindow& ) {}
+
 	static void ExitThread( ) {}
-	static void Exit( int32_t exitCode ) {}
+
 	static void Quit( int32_t exitCode ) {}
-	static void Restart( ) {}
+
+
+	/*
+		Sets
+	*/
+
+
+	/*
+		Gets
+	*/
 	static void GetScreenSize( int32_t* width, int32_t* height ) {}
+
 	static struct TSystemBatteryInfo GetPowerInfo( ) {}
 
-protected:
-	virtual void SetupWindowComponents( );
 
 private:
 	SpTWindow m_window;
+
 	WindowStyle m_rootWndStyle;
 };
 

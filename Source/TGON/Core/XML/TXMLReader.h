@@ -5,11 +5,10 @@
 namespace tgon
 {
 
-using namespace tinyxml2;
 
 class TXMLReader
 {
-	using _NodeRepoTy = std::vector<XMLNode*>;
+	using _NodeRepoTy = std::vector<tinyxml2::XMLNode*>;
 
 public:
 	explicit TXMLReader( const char* xmlPath );
@@ -20,7 +19,8 @@ public:
 
 public:
 	void LoadXML( const char* xmlPath );
-	bool fail( ) const;
+	bool Fail( ) const;
+	tinyxml2::XMLError GetLastError( ) const;
 
 	iterator begin( );
 	iterator end( );
@@ -28,17 +28,23 @@ public:
 	const_iterator end( ) const;
 
 private:
-	void RecursiveLoadImpl( XMLNode* );
+	void RecursiveLoadImpl( tinyxml2::XMLNode* );
 
 private:
 	bool m_isFailed;
 	tinyxml2::XMLDocument m_xmlDocument;
 	_NodeRepoTy m_readNodeRepo;
+	tinyxml2::XMLError m_lastError;
 };
 
-inline bool TXMLReader::fail( ) const
+inline bool TXMLReader::Fail( ) const
 {
 	return m_isFailed;
+}
+
+inline tinyxml2::XMLError tgon::TXMLReader::GetLastError( ) const
+{
+	return m_lastError;
 }
 
 inline TXMLReader::iterator TXMLReader::begin( )

@@ -9,6 +9,7 @@
 #include "../../Window/WindowEvent.h"
 #include "../../Window/Windows/WindowsWindowUtil.h"
 #include "../../Window/TWindow.h"
+#include "../../../Core/String/TString.h"
 
 #include <Windows.h>
 
@@ -18,19 +19,8 @@
 #endif
 
 
-tgon::SpTWindow tgon::WindowsWindow::Make( 
-	const WindowStyle& wndStyle,
-	AbstractWindowDelegate* wndDelegate )
-{
-	SpTWindow window( new WindowsWindow( wndStyle, wndDelegate ));
-	return window;
-}
-
-tgon::WindowsWindow::WindowsWindow( 
-	const WindowStyle& wndStyle,
-	AbstractWindowDelegate* wndDelegate ) :
-
-	AbstractWindow( wndStyle, wndDelegate ),
+tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
+	AbstractWindow( wndStyle ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
@@ -54,10 +44,8 @@ void tgon::WindowsWindow::BringToTop( )
 
 	const HWND fgWndHandle( GetForegroundWindow( ));
 
-	
 	const DWORD currProcessId = GetWindowThreadProcessId( m_wndHandle, nullptr );
 	const DWORD fgProcessId = GetWindowThreadProcessId( fgWndHandle, nullptr );
-
 
 	if ( AttachThreadInput( currProcessId, fgProcessId, TRUE ))
 	{
@@ -80,9 +68,7 @@ void tgon::WindowsWindow::Flash( )
 	FlashWindowEx( &fwi );
 }
 
-void tgon::WindowsWindow::GetPosition(
-	_Out_ int32_t* x,
-	_Out_ int32_t* y ) const 
+void tgon::WindowsWindow::GetPosition( int32_t* x, int32_t* y ) const 
 {
 	RECT rt;
 	GetWindowRect( this->GetWindowHandle( ), &rt );
@@ -91,9 +77,7 @@ void tgon::WindowsWindow::GetPosition(
 	*y = rt.top;
 }
 
-void tgon::WindowsWindow::GetSize(
-	int32_t* width,
-	int32_t* height ) const 
+void tgon::WindowsWindow::GetSize( int32_t* width, int32_t* height ) const 
 {
 	RECT rt;
 	// @ WARNING! : WindowRect contains caption range
@@ -110,9 +94,7 @@ void tgon::WindowsWindow::GetCaption(
 	GetWindowTextW( m_wndHandle, caption, length );
 }
 
-void tgon::WindowsWindow::CreateWindowForm( 
-	const WindowStyle& wndStyle,
-	bool isEventHandleable )
+void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle, bool isEventHandleable )
 {
 	// Set coordinates of window
 	int32_t x = wndStyle.x;
@@ -128,19 +110,15 @@ void tgon::WindowsWindow::CreateWindowForm(
 				wndStyle.height*0.5 );
 	}
 
+
 	// Convert WindowStyle to platform-dependent style.
 	DWORD normalStyle, exStyle;
 	Convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
 
 
-
 	// Register Window class to Global table.
 	std::wstring newClassName;
-	bool isSucceed = this->RegisterMyClass( 
-		wndStyle, 
-		&newClassName,
-		isEventHandleable );
-
+	bool isSucceed = this->RegisterMyClass( wndStyle, &newClassName, isEventHandleable );
 	if ( !isSucceed )
 	{
 		MessageBoxW(
@@ -151,13 +129,17 @@ void tgon::WindowsWindow::CreateWindowForm(
 
 		abort( );
 	}
+	
+
+	wchar_t utf16Title[MAX_CLASS_NAME] {0};
+	ConvertUTF_8ToUTF_16( wndStyle.title.c_str( ), utf16Title );
 
 
 	// Create a Window.
 	m_wndHandle = CreateWindowExW(
 		exStyle,
 		newClassName.c_str(),
-		wndStyle.caption.c_str(),
+		utf16Title,
 		normalStyle,
 		x, y, wndStyle.width, wndStyle.height,
 		nullptr,
@@ -214,12 +196,9 @@ void tgon::WindowsWindow::AdditionalInit(
 #endif
 }
 
-bool tgon::WindowsWindow::RegisterMyClass(
-	const WindowStyle& wndStyle,
-	_Out_ std::wstring* outClassName,
-	bool isEventHandleable )
+bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wstring* outClassName, bool isEventHandleable )
 {
-	const HINSTANCE instanceHandle( WindowsApplication::InstanceHandle );
+	const HINSTANCE instanceHandle( WindowsApplication::GetInstanceHandle( ));
 
 	
 	//	Each windows must have diffrent class name.
@@ -230,7 +209,7 @@ bool tgon::WindowsWindow::RegisterMyClass(
 
 
 	// Fill the Window class information.
-	WNDCLASSEX wcex {0};
+	WNDCLASSEXW wcex {0};
 	wcex.cbSize = sizeof( wcex );
 	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
 	wcex.hCursor = LoadCursorW( NULL, IDC_ARROW );
@@ -254,44 +233,44 @@ LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
 	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
 		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 
-	if ( extraMemAsWindow && 
-			extraMemAsWindow->GetDelegate( ))
+	if ( extraMemAsWindow )
 	{
 		switch ( msg )
 		{
 		case WM_LBUTTONUP:
-			extraMemAsWindow->GetDelegate( )->OnLMouseUp( 
+			extraMemAsWindow->OnLMouseUp( 
 				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_LBUTTONDOWN:
-			extraMemAsWindow->GetDelegate( )->OnLMouseDown( 
+			extraMemAsWindow->OnLMouseDown( 
 				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONUP:
-			extraMemAsWindow->GetDelegate( )->OnRMouseUp( 
+			extraMemAsWindow->OnRMouseUp( 
 				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONDOWN:
-			extraMemAsWindow->GetDelegate( )->OnRMouseDown( 
+			extraMemAsWindow->OnRMouseDown( 
 				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_MOUSEMOVE:
-			extraMemAsWindow->GetDelegate( )->OnMouseMove( 
+			extraMemAsWindow->OnMouseMove( 
 				LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_DESTROY:
 			PostQuitMessage( 0 );
 			extraMemAsWindow->m_isDestroyed = true;
-			extraMemAsWindow->GetDelegate( )->OnDestroy( );
+			//extraMemAsWindow->->OnDestroy( );
 			break;
 		}
 	}
-	else if ( msg == WM_CREATE )
+	// Call the OnCreate event handler
+	/*else if ( msg == WM_CREATE )
 	{
 		extraMemAsWindow = reinterpret_cast<WindowsWindow*>( LPCREATESTRUCT( 
 			lParam )->lpCreateParams );
-		extraMemAsWindow->GetDelegate( )->OnCreate( );
-	}
+		extraMemAsWindow->OnCreate( );
+	}*/
 
 	return DefWindowProcW( wndHandle, msg, wParam, lParam );
 }

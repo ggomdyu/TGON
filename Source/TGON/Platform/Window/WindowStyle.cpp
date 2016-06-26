@@ -5,66 +5,64 @@
 #include "../MessageBox/TMessageBox.h"
 
 
-tgon::WindowStyle tgon::WindowStyle::LoadFromXML(
-	const wchar_t* xmlPath )
-{
-	WindowStyle parsedWndStyle;
+tgon::WindowStyle tgon::WindowStyle::DefaultStyle;
 
-tgon::WindowStyle::~WindowStyle( )
+tgon::WindowStyle tgon::WindowStyle::LoadFromXML( const char* xmlPath )
 {
-}
-
 	TXMLReader xmlReader( xmlPath );
-	if ( xmlReader.fail( ))
+	if ( xmlReader.Fail( ))
 	{
-		TMessageBox::Show( L"Failed to load WindowStyle." );
+		auto lastError = xmlReader.GetLastError( );
+
+		TMessageBox::Show( "Failed to load WindowStyle." );
 	}
 
+	WindowStyle parsedWndStyle;
 	for ( const auto& xmlNodeElem : xmlReader )
 	{
-		if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Title" ))
+		if ( !std::strcmp( xmlNodeElem->Value( ), "Title" ))
 		{
-			parsedWndStyle.title = static_cast<TXMLElement*>( xmlNodeElem )->
+			parsedWndStyle.title = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				GetText( );
 		}
-		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Transform" ))
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Transform" ))
 		{
-			parsedWndStyle.x = static_cast<TXMLElement*>( xmlNodeElem )->
-				IntAttribute( L"x" );
-			parsedWndStyle.y = static_cast<TXMLElement*>( xmlNodeElem )->
-				IntAttribute( L"y" );
-			parsedWndStyle.width = static_cast<TXMLElement*>( xmlNodeElem )->
-				IntAttribute( L"width" );
-			parsedWndStyle.height = static_cast<TXMLElement*>( xmlNodeElem )->
-				IntAttribute( L"height" );
+			parsedWndStyle.x = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "x" );
+			parsedWndStyle.y = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "y" );
+			parsedWndStyle.width = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "width" );
+			parsedWndStyle.height = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "height" );
 		}
-		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Style" ))
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Style" ))
 		{
-			parsedWndStyle.Popup = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"Popup" );
+			parsedWndStyle.Popup = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Popup" );
 		}
-		else if ( !std::wcscmp( xmlNodeElem->GetValue( ), L"Function" ))
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Function" ))
 		{
-			parsedWndStyle.EventHandleable = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"EventHandleable" );
-			parsedWndStyle.Resizeable = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"Resizeable" );
-			parsedWndStyle.Maximized = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"Maximized" );
-			parsedWndStyle.Minimized = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"Minimized" );
-			parsedWndStyle.ShowTopOnCreated = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"ShowTopOnCreated" );
-			parsedWndStyle.ShowMiddle = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"ShowMiddle" );
-			parsedWndStyle.TopMost = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"TopMost" );
-			parsedWndStyle.ShowImmediately = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"ShowImmediately" );
-			parsedWndStyle.SupportWindowTransparency = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"SupportWindowTransparency" );
-			parsedWndStyle.SupportPerPixelTransparency = static_cast<TXMLElement*>( xmlNodeElem )->
-				BoolAttribute( L"SupportPerPixelTransparency" );
+			parsedWndStyle.EventHandleable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "EventHandleable" );
+			parsedWndStyle.Resizeable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Resizeable" );
+			parsedWndStyle.Maximized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Maximized" );
+			parsedWndStyle.Minimized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Minimized" );
+			parsedWndStyle.ShowTopOnCreated = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowTopOnCreated" );
+			parsedWndStyle.ShowMiddle = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowMiddle" );
+			parsedWndStyle.TopMost = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "TopMost" );
+			parsedWndStyle.ShowImmediately = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowImmediately" );
+			parsedWndStyle.SupportWindowTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "SupportWindowTransparency" );
+			parsedWndStyle.SupportPerPixelTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "SupportPerPixelTransparency" );
 		}
 	}
 

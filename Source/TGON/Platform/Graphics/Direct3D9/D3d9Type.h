@@ -1,5 +1,6 @@
 #pragma once
-#include "../../../Platform/Misc/Windows/shared_comptr.h"
+#include "../../../Platform/Utility/Windows/shared_comptr.h"
+
 
 using SpD3d9Ex = tgon::shared_comptr<struct IDirect3D9Ex>;
 using SpD3d9DeviceEx = tgon::shared_comptr<struct IDirect3DDevice9Ex>;

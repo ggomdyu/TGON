@@ -4,7 +4,8 @@
 
 
 tgon::TXMLReader::TXMLReader( const char* xmlPath ) :
-	m_isFailed( false )
+	m_isFailed( false ),
+	m_lastError( tinyxml2::XMLError::XML_SUCCESS )
 {
 	this->LoadXML( xmlPath );
 }
@@ -15,7 +16,8 @@ tgon::TXMLReader::~TXMLReader( )
 
 void tgon::TXMLReader::LoadXML( const char* xmlPath )
 {
-	if ( m_xmlDocument.LoadFile( xmlPath ) != XML_SUCCESS )
+	m_lastError = m_xmlDocument.LoadFile( xmlPath );
+	if ( m_lastError != tinyxml2::XML_SUCCESS )
 	{
 		m_isFailed = true;
 		return;
@@ -36,7 +38,7 @@ void tgon::TXMLReader::RecursiveLoadImpl( tinyxml2::XMLNode* parent )
 		return;
 	}
 
-	XMLNode* child = parent->FirstChild( );
+	tinyxml2::XMLNode* child = parent->FirstChild( );
 	while ( child )
 	{
 		m_readNodeRepo.push_back( child );

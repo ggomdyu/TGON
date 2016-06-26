@@ -6,7 +6,6 @@
 */
 
 #pragma once
-#include "WindowStyle.h"
 #include "../../Platform/Slate/PlatformWindow.h"
 
 

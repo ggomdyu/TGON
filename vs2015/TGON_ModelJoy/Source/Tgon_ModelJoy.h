@@ -1,14 +1,7 @@
 #pragma once
 
-#include <Application/TApplication.h>
-#include <Console/TConsole.h>
-#include <Core/Math/TMath.h>
 #include <Window/TWindow.h>
 #include <Window/WindowStyle.h>
-#include <Application/TApplication.h>
-#include <MessageBox/TMessageBox.h>
-#include <Graphics/TGraphics.h>
-#include <System/WindowSystem.h>
 
 
 namespace tgon
@@ -20,9 +13,8 @@ class Tgon_ModelJoy :
 {
 public:
 	Tgon_ModelJoy( ) :
-		TWindow( WindowStyle::LoadFromXML( L"WindowStyle.xml" ))
+		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
 	{
-		TLog( "OnCreate\n" );
 	}
 
 	~Tgon_ModelJoy( )

@@ -5,14 +5,7 @@
 #include "../../Slate/PlatformWindow.h"
 
 
-TGON_API const HINSTANCE tgon::WindowsApplication::InstanceHandle( ::GetModuleHandleW( NULL ));
-TGON_API MSG tgon::WindowsApplication::m_msg;
-
-
-tgon::WindowsApplication::WindowsApplication(
-	const WindowStyle& rootWndStyle ) :
-
-	AbstractApplication( rootWndStyle )
+tgon::WindowsApplication::WindowsApplication( )
 {
 }
 
@@ -20,52 +13,30 @@ tgon::WindowsApplication::~WindowsApplication( )
 {
 }
 
-int32_t tgon::WindowsApplication::Run( )
-{
-	while ( m_msg.message != WM_QUIT )
-	{
-		bool doesMsgExist = MessageLoop( );
-		if ( !doesMsgExist )
-		{
-			this->OnIdle( );
-		}
-	}
-
-	return 0;
-}
-
 const tgon::SpTWindow& tgon::WindowsApplication::GetWindow( ) const
 {
 	return m_window;
 }
 
-void tgon::WindowsApplication::Run(
-	WindowsWindow& window )
+int32_t tgon::WindowsApplication::Run( WindowsWindow& window )
 {
-	assert( false && "You just called DEPRECATED!!" );
-
-	/*while ( m_msg.message != WM_QUIT )
+	MSG msg {0};
+	while ( msg.message != WM_QUIT )
 	{
-		bool doesMsgExist = MessageLoop( );
-		if ( !doesMsgExist )
+		// The message does exist
+		if ( PeekMessageW( &msg, nullptr, 0, 0, PM_REMOVE ) == TRUE )
 		{
-			windOnIdle( );
+			::TranslateMessage( &msg ); // Process the WM_CHAR
+			::DispatchMessageW( &msg );
 		}
-	}*/
-}
+		// The message does not exist
+		else
+		{
+			window.OnIdle( );
+		}
+	}
 
-bool tgon::WindowsApplication::MessageLoop( )
-{
-	if ( PeekMessageW( &m_msg, nullptr, 0, 0, PM_REMOVE ) == TRUE )
-	{
-		::TranslateMessage( &m_msg ); // Process WM_CHAR
-		::DispatchMessageW( &m_msg );
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return 0;
 }
 
 tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
@@ -74,8 +45,9 @@ tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
 	::GetSystemPowerStatus( &sps );
 
 	TSystemBatteryInfo adapter;
-	adapter.batteryFlag = static_cast<TSystemBatteryInfo::BateryFlag>( sps.BatteryFlag );
-	adapter.batteryFlag = static_cast<TSystemBatteryInfo::BateryFlag>( sps.BatteryLifePercent );
+	// If sps.BatteryFlag is 128, then hardware has no battery.
+	adapter.hasBattery = ( sps.BatteryFlag == 128 ) ? false : true;
+	adapter.batteryLifePercent = sps.BatteryLifePercent;
 
 	return adapter;
 }

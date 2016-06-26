@@ -12,37 +12,33 @@
 
 namespace tgon
 {
-	/*
-		Convert encoding
-	*/
-	// UTF-8
-	// cf. https://ko.wikipedia.org/wiki/UTF-8
 	
-	void UTF8_to_UTF16( 
-		_In_ const char* utf8Src, 
-		_Out_ wchar_t* utf16Dest );
+/*
+	Text encoding
+*/
 	
-	std::wstring UTF8_to_UTF16( 
-		_In_ const std::string& utf8Src );
+// Cf. https://ko.wikipedia.org/wiki/UTF-8
+void ConvertUTF_8ToUTF_16( const char* utf8Src, wchar_t* utf16Dest );
+	
+//
+std::wstring ConvertUTF_16ToUTF_8( const std::string& utf8Src );
 
 
-	/*
-		Shell
-	*/
-	void GetFileNameFromPath(
-		std::wstring* dest,
-		bool deleteFileExtension );
+/*
+	Shell
+*/
+std::wstring GetFileNameFromPath( const wchar_t* srcFileName, bool deleteFileExtension );
 
 
-	// UTF-16
-	// cf.
-	/*void UTF16_to_UTF8(
-		_In_ const wchar_t* utf16Src,
-		const int32_t length,
-		_Out_ char* utf8Dest );*/
+// UTF-16
+// cf.
+/*void UTF16_to_UTF8(
+	_In_ const wchar_t* utf16Src,
+	const int32_t length,
+	_Out_ char* utf8Dest );*/
 
-	/*std::wstring UTF16_to_UTF8(
-		_In_ const std::wstring& utf16Src );
-	*/
+/*std::wstring UTF16_to_UTF8(
+	_In_ const std::wstring& utf16Src );
+*/
 
 }

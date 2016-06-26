@@ -1,5 +1,4 @@
 #pragma once
-#include <Scene/IScene.h>
 
 namespace tgon
 {

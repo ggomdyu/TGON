@@ -29,7 +29,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d92DSprite.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Camera.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Enum.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Error.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Graphics.cpp" />

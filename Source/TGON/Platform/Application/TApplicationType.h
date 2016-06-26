@@ -15,19 +15,7 @@ namespace tgon
 
 struct TSystemBatteryInfo
 {
-	enum class BateryFlag
-	{
-#if BOOST_OS_WINDOWS
-		kHigh = 1,
-		kLow = 2,
-		kCritical = 4,
-		kCharging = 8,
-		kHasNoBattery = 128,
-#else
-#endif
-	};
-
-	BateryFlag batteryFlag; // Check out the BateryFlag
+	bool hasBattery;
 	uint16_t batteryLifePercent; // 0 ~ 100
 };
 

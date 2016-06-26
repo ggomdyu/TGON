@@ -2,29 +2,35 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\SyntaxCompatible.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\auto_cast.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Compiler.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Graphics.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Platform.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\Singleton.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Thirdparty\tgLib\array_size.h">
-      <Filter>hpp</Filter>
+      <Filter>Sources\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Thirdparty\tgLib\to_underlying.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="hpp">
+    <Filter Include="Sources">
+      <UniqueIdentifier>{39831e98-1056-42a9-8d3d-402943f05e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp">
       <UniqueIdentifier>{571ea5ae-7124-4262-8f7b-a5f4183eee75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

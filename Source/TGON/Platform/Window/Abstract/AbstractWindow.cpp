@@ -2,12 +2,8 @@
 #include "AbstractWindow.h"
 
 
-tgon::AbstractWindow::AbstractWindow( 
-	const WindowStyle& wndStyle,
-	AbstractWindowDelegate* wndDelegate ) :
-
-	m_wndStyle( wndStyle ),
-	m_wndDelegate( wndDelegate )
+tgon::AbstractWindow::AbstractWindow( const WindowStyle& wndStyle ) :
+	m_wndStyle( wndStyle )
 {
 }
 

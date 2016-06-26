@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Component\IComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Component\SpriteComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
@@ -30,16 +28,13 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\XML\TXML.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Component\IComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\Component\SpriteComponent.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h" />
@@ -48,20 +43,19 @@
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Misc\auto_cast.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\TCamera.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\TGameObject.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
     <ClInclude Include="..\..\Source\TGON\Core\StringHash.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TypeId.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\XML\TXML.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
-    <ClInclude Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2_wchar_t.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj">
+      <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON_Platform\TGON_Platform.vcxproj">
       <Project>{7806527a-b31a-4faa-b22d-325ca0bc1326}</Project>
     </ProjectReference>
