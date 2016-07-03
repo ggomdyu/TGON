@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 04/01/2016
 * Latest author :
 * Latest date :

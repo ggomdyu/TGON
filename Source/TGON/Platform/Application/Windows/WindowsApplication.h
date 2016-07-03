@@ -1,14 +1,16 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : Abstract-API Sets for Windows
+* Description : API Sets for Windows
 */
 
 
 #pragma once
 #include "../Abstract/AbstractApplication.h"
+#include "../TApplicationType.h"
+
 
 #ifndef WIN32_LEAN_AND_MEAN
 #	define WIN32_LEAN_AND_MEAN
@@ -28,16 +30,18 @@ class TGON_API WindowsApplication :
 	public AbstractApplication
 {
 public:
-	WindowsApplication( );
+	/*
+		Cons/Destructor
+	*/
+	WindowsApplication( ) = delete;
 
-	virtual ~WindowsApplication( );
+	virtual ~WindowsApplication( ) = delete;
 
 
-public:
 	/*
 		Commands
 	*/
-	static int32_t Run( class WindowsWindow& );
+	static int32_t Run( _In_ class WindowsWindow& );
 
 	static void ExitThread( );
 
@@ -54,24 +58,14 @@ public:
 	/*
 		Gets
 	*/
-	static void GetScreenSize( int32_t* width, int32_t* height );
+	static void GetScreenSize( _Out_ int32_t* width, _Out_ int32_t* height );
 
-	static struct TSystemBatteryInfo GetPowerInfo( );
+	static TSystemBatteryInfo GetPowerInfo( );
 
 	static HINSTANCE GetInstanceHandle( );
-
-
-public:
-	const SpTWindow& GetWindow( ) const;
-
-
-private:
-	SpTWindow m_window;
 };
 
-inline void WindowsApplication::GetScreenSize(
-	int32_t* width, 
-	int32_t* height )
+inline void WindowsApplication::GetScreenSize( int32_t* width, int32_t* height )
 {
 	*width = GetSystemMetrics( SM_CXSCREEN );
 	*height = GetSystemMetrics( SM_CYSCREEN );

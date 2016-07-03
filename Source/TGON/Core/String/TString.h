@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/27/2016
 * Latest author : 
 * Latest date :
@@ -27,6 +27,7 @@ std::wstring ConvertUTF_16ToUTF_8( const std::string& utf8Src );
 /*
 	Shell
 */
+// TODO: Move to TPath
 std::wstring GetFileNameFromPath( const wchar_t* srcFileName, bool deleteFileExtension );
 
 

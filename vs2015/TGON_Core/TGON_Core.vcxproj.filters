@@ -7,20 +7,8 @@
     <Filter Include="Sources\Core">
       <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\cpp">
-      <UniqueIdentifier>{f5776c95-6a53-4d22-998e-eca9c8d392d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\hpp">
       <UniqueIdentifier>{f56478e6-2f2a-4292-afa4-e95f9999d747}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Error">
-      <UniqueIdentifier>{11bcc1c2-ff26-4e77-8eb8-44a926b0e080}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Error\cpp">
-      <UniqueIdentifier>{712a1f88-060a-4c8d-b8b5-a3786681493e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Error\hpp">
-      <UniqueIdentifier>{702c99d7-8537-440f-ac80-77c3e3fa4795}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
@@ -46,6 +34,36 @@
     <Filter Include="Sources\XML\cpp">
       <UniqueIdentifier>{abf8370b-fee5-4eb4-ab0a-5d877abece49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\PrecompiledHeader\cpp">
+      <UniqueIdentifier>{411a6053-fc88-4ce0-9a7c-2f0fd691d199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\hpp">
+      <UniqueIdentifier>{b3fff67b-31b3-4b06-9b1b-63fcc2c4730c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object">
+      <UniqueIdentifier>{0cae8143-ba80-4d1a-971a-a333b6cb2204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\hpp">
+      <UniqueIdentifier>{84f69463-39ac-47c5-804e-f59dfd88e5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Random">
+      <UniqueIdentifier>{4f9a1302-a84f-4b00-b03e-54297bd0b408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Random\cpp">
+      <UniqueIdentifier>{c4e5d3b2-cdf4-4ee6-a72c-ddf0ed5c1443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Random\hpp">
+      <UniqueIdentifier>{8ad24166-46c0-4a81-a700-639f1b7c346b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Error">
+      <UniqueIdentifier>{e105b092-0f14-4ce5-a3e9-570331abe536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Error\cpp">
+      <UniqueIdentifier>{53931c27-9cdc-4bfc-b2c2-599f9180e5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Error\hpp">
+      <UniqueIdentifier>{04268bc3-48c1-41ff-933d-c8c8f9e74b52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
@@ -60,20 +78,8 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp">
       <Filter>Sources\Math\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp">
-      <Filter>Sources\Math\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp">
       <Filter>Sources\Math\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp">
-      <Filter>Sources\Core\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp">
-      <Filter>Sources\Error\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
-      <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp">
       <Filter>Sources\String</Filter>
@@ -81,11 +87,14 @@
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp">
       <Filter>Sources\XML\hpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Random\TRandom.cpp">
+      <Filter>Sources\Random\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
-      <Filter>Sources\PrecompiledHeader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h">
       <Filter>Sources\String</Filter>
     </ClInclude>
@@ -101,22 +110,10 @@
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h">
       <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h">
-      <Filter>Sources\Math\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
       <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h">
-      <Filter>Sources\Error\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h">
-      <Filter>Sources\Error\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\TypeId.h">
-      <Filter>Sources\Core\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h">
       <Filter>Sources\Core\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
@@ -125,11 +122,23 @@
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
       <Filter>Sources\Core\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h">
       <Filter>Sources\XML\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TObject.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TypeId.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Random\TRandom.h">
+      <Filter>Sources\Random\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrorCode.h">
+      <Filter>Sources\Error\hpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

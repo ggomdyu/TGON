@@ -20,10 +20,10 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>cpp\PrecompiledHeader</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Tgon_ModelJoy.cpp">
+    <ClCompile Include="Source\Program.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Program.cpp">
+    <ClCompile Include="Source\TgonModelJoyForm.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,10 +31,10 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>hpp\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Tgon_ModelJoy.h">
+    <ClInclude Include="Source\Program.h">
       <Filter>cpp</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Program.h">
+    <ClInclude Include="Source\TgonModelJoyForm.h">
       <Filter>cpp</Filter>
     </ClInclude>
   </ItemGroup>

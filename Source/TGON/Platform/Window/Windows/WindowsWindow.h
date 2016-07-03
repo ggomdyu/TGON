@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 11/12/2015
 * Latest author :
 * Latest date :
@@ -86,6 +86,8 @@ private:
 	static LRESULT WINAPI UnevHandleMsgProc( HWND, UINT, WPARAM, LPARAM );
 
 	static LRESULT WINAPI EvHandleMsgProc( HWND, UINT, WPARAM, LPARAM );
+
+	void GetWindowFormAccordingly( _In_ const struct WindowStyle&, _Out_ int32_t* x, _Out_ int32_t* y );
 
 private:
 	bool m_isDestroyed;

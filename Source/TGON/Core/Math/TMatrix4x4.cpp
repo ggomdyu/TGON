@@ -176,12 +176,12 @@ tgon::TMatrix4x4 tgon::TMatrix4x4::PerspectiveFovLH(
 
 		0.f,
 		0.f,
-		farZ / ( farZ - nearZ ),
+		farZ / ( farZ-nearZ ),
 		1.f,
 
 		0.f,
 		0.f,
-		-farZ * nearZ / ( farZ - nearZ ),
+		-farZ * nearZ / ( farZ-nearZ ),
 		0.f
 	);
 }
@@ -191,29 +191,7 @@ tgon::TMatrix4x4 tgon::TMatrix4x4::Viewport(
 	float width, float height,
 	float minZ, float maxZ )
 {
-	return TMatrix4x4(
-		width*0.5f,
-		0.f,
-		0.f,
-		0.f,
-
-		0.f,
-		-height*0.5f,
-		0.f,
-		0.f,
-
-		0.f,
-		0.f,
-		maxZ-minZ,
-		0.f,
-
-		x+( width*0.5 ),
-		y+( height*0.5f ),
-		minZ,
-		1.f
-	);
-
-	/*const float halfWidth = width*0.5f;
+	const float halfWidth = width*0.5f;
 	const float halfHeight = height*0.5f;
 
 	return TMatrix4x4(
@@ -236,7 +214,7 @@ tgon::TMatrix4x4 tgon::TMatrix4x4::Viewport(
 		y+( halfHeight ),
 		minZ,
 		1.f
-	);*/
+	);
 }
 
 void tgon::TMatrix4x4::Transpose( )

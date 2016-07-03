@@ -3,8 +3,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(DXSDK_DIR)\Include;$(SolutionDir)\..\Source\Thirdparty\boost_1_60_0;$(SolutionDir)\..\Source\Thirdparty\FBX 2015.1;$(SolutionDir)\..\Source\Thirdparty\freetype;$(SolutionDir)\..\Source\Thirdparty\tinyxml2;$(SolutionDir)\..\Source\Thirdparty;$(IncludePath)</IncludePath>
-    <LibraryPath>..\lib\freetype\$(PlatformTarget);..\lib\boost_1_60_0\$(PlatformTarget);$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(SolutionDir)\..\Source\Thirdparty\boost_1_61_0;$(SolutionDir)\..\Source\Thirdparty\freetype;$(SolutionDir)\..\Source\Thirdparty\tinyxml2;$(SolutionDir)\..\Source\Thirdparty;$(SolutionDir)\..\Source\Thirdparty\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

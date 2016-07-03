@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 05/09/2016
 * Latest author :
 * Latest date :
@@ -8,8 +8,7 @@
 
 
 #pragma once
-#include "../Platform/Slate/PlatformTime.h"
-#include "../Platform/Config/Build.h"
+#include "../../Platform/Slate/PlatformTime.h"
 
 
 namespace tgon

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\Graphics">
+      <UniqueIdentifier>{ffa32df3-4297-4318-b18d-4976b46fc5ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\Direct3D9">
+      <UniqueIdentifier>{dac266e5-c911-4ab5-a50c-422d05b4b197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\Abstract">
+      <UniqueIdentifier>{e9780fb0-9703-4444-86ec-6e4554094972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\General">
+      <UniqueIdentifier>{c04b7227-8a23-457e-987a-56641194edc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\Abstract\cpp">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Sources\Graphics\Abstract\hpp">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Sources\Graphics\Direct3D9\hpp">
+      <UniqueIdentifier>{0a40a9d4-18c0-4f8b-b64a-23c9df1c4f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\General\cpp">
+      <UniqueIdentifier>{b78a2ca5-a461-4934-8879-a3ce3188097f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\General\hpp">
+      <UniqueIdentifier>{a97f9b78-e88b-4181-8482-70f01f0eaba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\Direct3D9\cpp">
+      <UniqueIdentifier>{f76692ce-d1b1-4f6a-8243-1690a81f030f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{7cea8bc9-7512-4bad-a07e-ff5cd35405f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\hpp">
+      <UniqueIdentifier>{2d97d84e-74e9-4663-ab6c-4fa81516725c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\cpp">
+      <UniqueIdentifier>{aa58e28c-6e56-4ce1-956c-c6166b53cc31}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
+      <Filter>Sources\Graphics\General\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h">
+      <Filter>Sources\Graphics\General\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphicsType.h">
+      <Filter>Sources\Graphics\General\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h">
+      <Filter>Sources\Graphics\Abstract\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h">
+      <Filter>Sources\Graphics\Abstract\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.h">
+      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Fwd.h">
+      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.h">
+      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader\hpp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp">
+      <Filter>Sources\Graphics\Direct3D9\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp">
+      <Filter>Sources\Graphics\Direct3D9\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

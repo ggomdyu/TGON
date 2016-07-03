@@ -87,8 +87,7 @@ void tgon::WindowsWindow::GetSize( int32_t* width, int32_t* height ) const
 	*height = rt.bottom - rt.top;
 }
 
-void tgon::WindowsWindow::GetCaption( 
-	_Out_ wchar_t* caption ) const
+void tgon::WindowsWindow::GetCaption( wchar_t* caption ) const
 {
 	const int32_t length = GetWindowTextLengthW( m_wndHandle );
 	GetWindowTextW( m_wndHandle, caption, length );
@@ -224,11 +223,7 @@ bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wst
 	return RegisterClassExW( &wcex ) != 0;
 }
 
-LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
-	HWND wndHandle,
-	UINT msg,
-	WPARAM wParam,
-	LPARAM lParam )
+LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
 	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
 		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
@@ -238,24 +233,25 @@ LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc(
 		switch ( msg )
 		{
 		case WM_LBUTTONUP:
-			extraMemAsWindow->OnLMouseUp( 
-				LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->OnLMouseUp( LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_LBUTTONDOWN:
-			extraMemAsWindow->OnLMouseDown( 
-				LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->OnLMouseDown( LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONUP:
-			extraMemAsWindow->OnRMouseUp( 
-				LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->OnRMouseUp( LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_RBUTTONDOWN:
-			extraMemAsWindow->OnRMouseDown( 
-				LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->OnRMouseDown( LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_MOUSEMOVE:
-			extraMemAsWindow->OnMouseMove( 
-				LOWORD( lParam ), HIWORD( lParam ));
+			extraMemAsWindow->OnMouseMove( LOWORD( lParam ), HIWORD( lParam ));
+			break;
+		case WM_SIZE:
+			extraMemAsWindow->OnSize( LOWORD( lParam ), HIWORD( lParam ));
+			break;
+		case WM_MOVE:
+			extraMemAsWindow->OnMove( LOWORD( lParam ), HIWORD( lParam ));
 			break;
 		case WM_DESTROY:
 			PostQuitMessage( 0 );
@@ -295,4 +291,11 @@ LRESULT WINAPI tgon::WindowsWindow::UnevHandleMsgProc(
 	{
 		return DefWindowProc( wndHandle, msg, wParam, lParam );
 	}
+}
+
+void tgon::WindowsWindow::GetWindowFormAccordingly( 
+	const WindowStyle& wndStyle, 
+	int32_t* x,
+	int32_t* y )
+{
 }

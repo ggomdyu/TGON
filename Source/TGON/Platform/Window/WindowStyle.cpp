@@ -2,7 +2,6 @@
 #include "WindowStyle.h"
 
 #include "../../Core/XML/TXMLReader.h"
-#include "../MessageBox/TMessageBox.h"
 
 
 tgon::WindowStyle tgon::WindowStyle::DefaultStyle;
@@ -13,8 +12,10 @@ tgon::WindowStyle tgon::WindowStyle::LoadFromXML( const char* xmlPath )
 	if ( xmlReader.Fail( ))
 	{
 		auto lastError = xmlReader.GetLastError( );
-
-		TMessageBox::Show( "Failed to load WindowStyle." );
+		
+		// TODO: Activate TMessageBox
+		//TMessageBox::Show( "Failed to load WindowStyle." );
+		abort( );
 	}
 
 	WindowStyle parsedWndStyle;

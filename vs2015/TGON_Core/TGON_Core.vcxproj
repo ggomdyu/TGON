@@ -19,15 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Core\Error\ErrCode.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\Math\TRandom.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Random\TRandom.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\StringHash.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -35,22 +33,21 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCode.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrCodeUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Error\ErrorCode.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMath.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix3x3.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TMatrix4x4.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TQuaternion.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Math\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TObject.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TypeId.h" />
+    <ClInclude Include="..\..\Source\TGON\Core\Random\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TObject.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\StringHash.h" />
     <ClInclude Include="..\..\Source\TGON\Core\TypeId.h" />
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="..\..\Source\TGON\Utility\tglib.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj">
@@ -147,7 +144,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>freetype262MTd.lib;</AdditionalDependencies>
+      <AdditionalDependencies>;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -181,7 +178,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>freetype262MT.lib;</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

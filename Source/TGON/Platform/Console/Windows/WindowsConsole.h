@@ -1,13 +1,14 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 01/24/2016
 * Latest author :
 * Latest date :
 */
 
 #pragma once
-#include <tgLib/Singleton.h>
 #include "../Interface/IConsole.h"
+#include "../../Utility/Windows/WindowsConsoleHelper.h"
+
 
 #ifndef WIN32_LEAN_AND_MEAN
 #	define WIN32_LEAN_AND_MEAN
@@ -20,138 +21,104 @@ namespace tgon
 {
 
 
-class WindowsConsole;
-using ConsoleImpl = WindowsConsole;
+using ConsoleImpl = class WindowsConsole;
 
 class TGON_API WindowsConsole : 
 	private IConsole
 {
-	class WindowsConsoleExecuter :
-		public TSingleton<WindowsConsoleExecuter>
-	{
-	public:
-		HANDLE GetOutputHandle( ) const;
-	protected:
-		WindowsConsoleExecuter( );
-		virtual ~WindowsConsoleExecuter( );
-	private:
-		const HANDLE m_outputHandle;
-	};
 
 public:
 	/*
+		Cons/Destructor
+	*/
+	WindowsConsole( ) = delete;
+
+	virtual ~WindowsConsole( ) = delete;
+	
+	
+	/*
 		Commands
 	*/
-	template <typename _ValTy>
-	static void Write( _ValTy&& arg );
-	static void Write( const wchar_t* );
-	static void Write( const char* );
+	// Write
+	template<class _Ty>
+	static void Write( _Ty&& str )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		Write( std::forward<_Ty>( str ),
+			std::is_array<typename std::remove_reference<_Ty>::type>( ));
+#endif
+	}
 
-	template <typename _ValTy>
-	static void WriteLine( _ValTy&& arg );
-	static void WriteLine( const wchar_t* );
-	static void WriteLine( const char* );
+	template <std::size_t N>
+	static void Write( _In_ const char( &str )[N], std::true_type )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		WriteConsoleA(
+			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
+			str,
+			N-1,
+			nullptr,
+			nullptr
+		);
+#endif
+	}
 
-protected:
-	WindowsConsole( ) = delete;
-	virtual ~WindowsConsole( ) = delete;
+	static void Write( _In_ const char* str, std::false_type )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		WriteConsoleA(
+			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
+			str,
+			std::strlen( str ),
+			nullptr,
+			nullptr
+		);
+#endif
+	}
+
+	template<class _Ty>
+	static void Write( const _Ty& str, std::false_type )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		const std::string strTemp = std::to_string( str );
+
+		WriteConsoleA(
+			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
+			strTemp.c_str( ),
+			strTemp.length( ),
+			nullptr,
+			nullptr
+		);
+#endif
+	}
+
+	template <std::size_t N>
+	static void Write( _In_ const wchar_t( &str )[N], std::true_type )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		WriteConsoleW(
+			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
+			str,
+			N-1,
+			nullptr,
+			nullptr
+		);
+#endif
+	}
+
+	static void Write( _In_ const wchar_t* str, std::false_type )
+	{
+#if defined ( _DEBUG ) || ( DEBUG )
+		WriteConsoleW(
+			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
+			str,
+			std::wcslen( str ),
+			nullptr,
+			nullptr
+		);
+#endif
+	}
 };
 
 
-}
-
-
-inline HANDLE tgon::WindowsConsole::WindowsConsoleExecuter::GetOutputHandle( ) const
-{ 
-	return m_outputHandle; 
-}
-
-
-template<typename _ValTy>
-inline void tgon::WindowsConsole::Write( 
-	_ValTy&& arg )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	Write( std::to_wstring( std::forward<_ValTy>( arg )).c_str( ));
-#endif
-}
-
-inline void tgon::WindowsConsole::Write( 
-	const wchar_t* str )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteConsoleW(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		str,
-		std::wcslen( str ),
-		nullptr,
-		nullptr 
-	);
-#endif
-}
-
-inline void tgon::WindowsConsole::Write( 
-	const char* str )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteConsoleA(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		str,
-		std::strlen( str ),
-		nullptr,
-		nullptr
-	);
-#endif
-}
-
-template<typename _ValTy>
-inline void tgon::WindowsConsole::WriteLine(
-	_ValTy&& arg )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteLine( std::to_wstring( std::forward<_ValTy>( arg )).c_str( ));
-#endif
-}
-
-
-inline void tgon::WindowsConsole::WriteLine(
-	const wchar_t* str )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteConsoleW(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		str,
-		std::wcslen( str ),
-		nullptr,
-		nullptr 
-	);
-	WriteConsoleW(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		L"\n",
-		1,
-		nullptr,
-		nullptr 
-	);
-#endif
-}
-
-inline void tgon::WindowsConsole::WriteLine( 
-	const char* str )
-{
-#if defined( DEBUG ) | defined( _DEBUG )
-	WriteConsoleA(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		str,
-		std::strlen( str ),
-		nullptr,
-		nullptr
-	);
-	WriteConsoleA(
-		WindowsConsoleExecuter::Get( )->GetOutputHandle( ),
-		"\n",
-		1,
-		nullptr,
-		nullptr
-	);
-#endif
 }

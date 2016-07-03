@@ -1,34 +1,60 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/22/2016
 * Latest author :
 * Latest date :
 */
 
 #pragma once
-#include "../../Platform/Slate/PlatformConsole.h"
+#include "../Slate/PlatformConsole.h"
 
 
 namespace tgon
 {
 
 
-using TConsole = ConsoleImpl;
-
-template <typename Arg, typename ...Args>
-void TLog( 
-	/*IN*/ const Arg& arg, 
-	/*IN*/ const Args&... args )
+class TGON_API TConsole :
+	public ConsoleImpl
 {
-#if defined( DEBUG ) || defined( _DEBUG )
-	TConsole::Write( arg );
-	TLog( args... );
-#endif
-}
+public:
+	/*
+		Cons/Destructor
+	*/
+	TConsole( ) = delete;
 
-inline void TLog( )
-{
-}
+	virtual ~TConsole( ) = delete;
+	
+
+	/*
+		Commands
+	*/
+	// Write
+	template <typename _Ty, typename... _Args>
+	static void Write( _Ty&& arg, const _Args&... args )
+	{
+		ConsoleImpl::Write( std::forward<_Ty>( arg ));
+		Write( args... );
+	}
+
+	static void Write( )
+	{
+	}
+
+
+	// WriteLine
+	template <typename _Ty, typename... _Args>
+	static void WriteLine( _Ty&& arg, const _Args&... args )
+	{
+		ConsoleImpl::Write( std::forward<_Ty>( arg ));
+		WriteLine( args... );
+	}
+
+	static void WriteLine( )
+	{
+		ConsoleImpl::Write( L"\n" );
+	}
+
+};
 
 
 }

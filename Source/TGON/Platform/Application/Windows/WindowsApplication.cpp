@@ -5,19 +5,6 @@
 #include "../../Slate/PlatformWindow.h"
 
 
-tgon::WindowsApplication::WindowsApplication( )
-{
-}
-
-tgon::WindowsApplication::~WindowsApplication( )
-{
-}
-
-const tgon::SpTWindow& tgon::WindowsApplication::GetWindow( ) const
-{
-	return m_window;
-}
-
 int32_t tgon::WindowsApplication::Run( WindowsWindow& window )
 {
 	MSG msg {0};

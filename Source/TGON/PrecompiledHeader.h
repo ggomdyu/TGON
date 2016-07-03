@@ -12,9 +12,6 @@
 #include <boost/config/suffix.hpp>
 #include <boost/predef.h>
 
-// tgLib
-#include <tgLib/SyntaxCompatible.h>
-
 
 // Platform dependent headers are here
 #if BOOST_OS_WINDOWS

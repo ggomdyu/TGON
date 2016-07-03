@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/14/2016
 * Latest author :
 * Latest date :
@@ -22,36 +22,19 @@ public:
 	static const TMatrix4x4 Zero;
 
 public:
-	static TMatrix4x4 Scale( 
-		float x, 
-		float y, 
-		float z );
+	// for world matrix translation
+	static TMatrix4x4 Scale( float x, float y, float z );
 	static TMatrix4x4 RotateX( float theta );
 	static TMatrix4x4 RotateY( float theta );
 	static TMatrix4x4 RotateZ( float theta );
-	static TMatrix4x4 Translate( 
-		float x, 
-		float y, 
-		float z );
+	static TMatrix4x4 Translate( float x, float y, float z );
 	
-	static TMatrix4x4 View(
-		const struct TVector3& eyePt,	 // X axis
-		const struct TVector3& lookAt,	 // Y axis
-		const struct TVector3& up );	 // Z axis
-
-	static TMatrix4x4 PerspectiveFovLH(
-		float fovY,
-		float aspect,
-		float nearZ, 
-		float farZ );
-
-	static TMatrix4x4 Viewport(
-		float x, 
-		float y,
-		float width, 
-		float height,
-		float minZ, 
-		float maxZ );
+	// for view matrix translation
+	static TMatrix4x4 View( const struct TVector3& eyePt, const struct TVector3& lookAt, const struct TVector3& up );
+	
+	// for projection matrix translation
+	static TMatrix4x4 PerspectiveFovLH( float fovY, float aspect, float nearZ, float farZ );
+	static TMatrix4x4 Viewport( float x, float y, float width, float height, float minZ, float maxZ );
 
 	void Transpose( );
 	void Inverse( );
@@ -149,38 +132,38 @@ inline TMatrix4x4 TMatrix4x4::Translate(
 
 inline TMatrix4x4 TMatrix4x4::RotateX( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return {
 		1.f, 0.f,     0.f,    0.f,
-		0.f, cosRad,  sinRad, 0.f,
-		0.f, -sinRad, cosRad, 0.f,
+		0.f, radCos,  radSin, 0.f,
+		0.f, -radSin, radCos, 0.f,
 		0.f, 0.f,     0.f,    1.f
 	};
 }
 
 inline TMatrix4x4 TMatrix4x4::RotateY( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return {
-		cosRad, 0.f, -sinRad, 0.f,
+		radCos, 0.f, -radSin, 0.f,
 		0.f,    1.f, 0.f,     0.f,
-		sinRad, 0.f, cosRad,  0.f,
+		radSin, 0.f, radCos,  0.f,
 		0.f,    0.f, 0.f,     1.f
 	};
 }
 
 inline TMatrix4x4 TMatrix4x4::RotateZ( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return{
-		cosRad,  sinRad, 0.f, 0.f,
-		-sinRad, cosRad, 0.f, 0.f,
+		radCos,  radSin, 0.f, 0.f,
+		-radSin, radCos, 0.f, 0.f,
 		0.f,     0.f,    1.f, 0.f,
 		0.f,     0.f,    0.f, 1.f
 	};

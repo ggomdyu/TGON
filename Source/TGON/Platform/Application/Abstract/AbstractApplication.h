@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
@@ -24,12 +24,14 @@ namespace tgon
 class TGON_API AbstractApplication
 {
 public:
-	AbstractApplication( );
+	/*
+		Cons/Destructor
+	*/
+	AbstractApplication( ) = delete;
 	
-	virtual ~AbstractApplication( );
+	virtual ~AbstractApplication( ) = delete;
 
 
-public:
 	/*
 		Commands
 	*/
@@ -51,12 +53,6 @@ public:
 	static void GetScreenSize( int32_t* width, int32_t* height ) {}
 
 	static struct TSystemBatteryInfo GetPowerInfo( ) {}
-
-
-private:
-	SpTWindow m_window;
-
-	WindowStyle m_rootWndStyle;
 };
 
 

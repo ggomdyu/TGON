@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 01/09/2016
 * Latest author : 
 * Latest date :
@@ -7,7 +7,6 @@
 
 
 #pragma once
-#include <cstdint>
 #include "../../../Platform/Config/Build.h"
 #include "../WindowStyle.h"
 

@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 03/14/2016
 * Latest author :
 * Latest date :
@@ -95,36 +95,36 @@ inline const float* TMatrix3x3::operator[](
 
 inline TMatrix3x3 TMatrix3x3::RotateX( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return {
 		1.f, 0.f,     0.f,   
-		0.f, cosRad,  sinRad,
-		0.f, -sinRad, cosRad,
+		0.f, radCos,  radSin,
+		0.f, -radSin, radCos,
 	};
 }
 
 inline TMatrix3x3 TMatrix3x3::RotateY( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return {
-		cosRad, 0.f, -sinRad,
+		radCos, 0.f, -radSin,
 		0.f,    1.f, 0.f,    
-		sinRad, 0.f, cosRad, 
+		radSin, 0.f, radCos, 
 	};
 }
 
 inline TMatrix3x3 TMatrix3x3::RotateZ( float theta )
 {
-	const float cosRad = cosf( theta );
-	const float sinRad = sinf( theta );
+	const float radCos = cosf( theta );
+	const float radSin = sinf( theta );
 
 	return{
-		cosRad,  sinRad, 0.f,
-		-sinRad, cosRad, 0.f,
+		radCos,  radSin, 0.f,
+		-radSin, radCos, 0.f,
 		0.f,     0.f,    1.f,
 	};
 }

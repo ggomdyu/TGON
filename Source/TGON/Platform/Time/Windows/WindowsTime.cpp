@@ -13,7 +13,7 @@ tgon::TSystemTime tgon::WindowsTime::GetLocalTime( )
 	sysTime.month = prevSysTime.wMonth;
 	sysTime.day = prevSysTime.wDay;
 	sysTime.year = prevSysTime.wYear;
-	sysTime.dayOfWeek = prevSysTime.wDayOfWeek;
+	sysTime.dayOfWeek = static_cast<TDayOfWeek>( prevSysTime.wDayOfWeek );
 	sysTime.hour = prevSysTime.wHour;
 	sysTime.minute = prevSysTime.wMinute;
 	sysTime.second = prevSysTime.wSecond;
