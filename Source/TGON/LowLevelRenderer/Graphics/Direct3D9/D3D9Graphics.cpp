@@ -18,27 +18,44 @@
 
 tgon::D3D9Graphics::D3D9Graphics( const TWindow& owner ) :
 	m_deviceCaps( new D3DCAPS9 ),
-	m_ownerWindow( owner )
+	m_ownerWindow( owner ),
+	m_clearColor( 0x0000ff )
 {
 	this->InitD3DInterface( );
 	this->InitD3DDevice( );
 }
 
-tgon::D3D9Graphics::~D3D9Graphics( )
+bool tgon::D3D9Graphics::Clear( )
 {
+	HRESULT result = m_d3dDevice->Clear(
+		0,
+		nullptr,
+		D3DCLEAR_TARGET |
+		D3DCLEAR_ZBUFFER,
+		m_clearColor,
+		1.f,
+		0 
+	);
+
+	if ( SUCCEEDED( result ))
+	{
+		return true;
+	}
+	else
+	{
+		DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true );
+		return false;
+	}
 }
 
 bool tgon::D3D9Graphics::BeginScene( )
 {
-	//assert(( m_d3d.operator IDirect3D9Ex *( ) && 
-	//	m_d3dDevice.operator IDirect3DDevice9Ex *() ) && "" );
-
 	if ( SUCCEEDED( m_d3dDevice->Clear( 
 		0, 
 		nullptr, 
 		D3DCLEAR_TARGET | 
 		D3DCLEAR_ZBUFFER,
-		D3DCOLOR_XRGB( 0, 0, 255 ), 
+		m_clearColor, 
 		1.f, 
 		0 )))
 	{

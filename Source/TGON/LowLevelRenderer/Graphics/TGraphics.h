@@ -9,14 +9,32 @@
 #pragma once
 #include "../Slate/PlatformGraphics.h"
 
+
 namespace tgon
 {
 
 
-using TGraphics = GraphicsImpl;
+using SpTGraphics = std::shared_ptr<GraphicsImpl>;
 
-//using SpTGraphics = std::shared_ptr<GraphicsImpl>;
-//using WpTGraphics = std::weak_ptr<GraphicsImpl>;
+class TGraphics :
+	public GraphicsImpl
+{
+protected:
+	explicit TGraphics( const TWindow& owner );
+
+public:
+	// TGraphics only support the creation as specified type.
+	const SpTGraphics Make( const TWindow& owner );
+
+	virtual ~TGraphics( ) = default;
+};
 
 
+}
+
+
+const tgon::SpTGraphics tgon::TGraphics::Make( const TWindow& owner )
+{
+	SpTGraphics ret( new TGraphics( owner ));
+	return ret;
 }

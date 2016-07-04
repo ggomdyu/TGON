@@ -10,7 +10,7 @@
 #include "../../../Core/String/TString.h"
 
 #include <Windows.h>
-#include <Console/TConsole.h>
+
 #ifdef TGON_SUPPORT_DWMAPI
 	#include <dwmapi.h>
 	#pragma comment( lib, "dwmapi.lib" )

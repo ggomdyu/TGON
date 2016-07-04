@@ -16,19 +16,21 @@ class TgonModelJoyForm :
 {
 public:
 	TgonModelJoyForm( ) :
-		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))//,
-		//m_graphics( new TGraphics( *this ) )
+		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" )),
+		m_graphics( new TGraphics( *this ) )
 	{
+
 	}
 
 	~TgonModelJoyForm( )
 	{
+		delete m_graphics;
 	}
 
 	virtual void OnIdle( ) override
 	{
-		//m_graphics->BeginScene( );
-		//m_graphics->EndScene();
+		m_graphics->BeginScene( );
+		m_graphics->EndScene();
 
 
 	}

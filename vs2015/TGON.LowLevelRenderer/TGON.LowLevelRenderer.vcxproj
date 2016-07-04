@@ -34,6 +34,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp" />
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp" />
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>

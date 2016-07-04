@@ -104,5 +104,8 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
+      <Filter>Sources\Graphics\General\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

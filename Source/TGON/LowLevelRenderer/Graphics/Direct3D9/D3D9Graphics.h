@@ -10,8 +10,6 @@
 #include "../Abstract/AbstractGraphics.h"
 
 #include <d3d9.h>
-#include <cstdint>
-#include <memory>
 #include "D3D9Fwd.h"
 
 
@@ -24,10 +22,15 @@ using GraphicsImpl = class D3D9Graphics;
 class TGON_API D3D9Graphics : 
 	private AbstractGraphics
 {
-public:
+protected:
 	explicit D3D9Graphics( const TWindow& owner );
 	
-	virtual ~D3D9Graphics( );
+public:
+	virtual ~D3D9Graphics( ) = default;
+
+	explicit D3D9Graphics( const D3D9Graphics& ) = delete;
+
+	D3D9Graphics& operator=( const D3D9Graphics& ) = delete;
 
 public:
 	/*
@@ -39,6 +42,8 @@ public:
 	// End scene rendering. This function must be called after BeginScene
 	virtual void EndScene( ) override;
 	
+	virtual bool Clear( );
+
 	/*
 		Sets
 	*/
@@ -65,6 +70,8 @@ private:
 	std::unique_ptr<D3DCAPS9> m_deviceCaps;
 
 	const TWindow& m_ownerWindow;
+
+	const D3DCOLOR m_clearColor;
 };
 
 
