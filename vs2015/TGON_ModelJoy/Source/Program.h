@@ -21,6 +21,7 @@ public:
 	static int32_t Main( )
 	{
 		auto form = std::make_shared<TgonModelJoyForm>( );
+
 		return TApplication::Run( *form.get( ));
 	}
 };

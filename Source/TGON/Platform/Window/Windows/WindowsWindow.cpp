@@ -1,5 +1,3 @@
-#include "WindowsWindow.h"
-#include "WindowsWindow.h"
 #include "PrecompiledHeader.h"
 #include "WindowsWindow.h"
 
@@ -12,7 +10,7 @@
 #include "../../../Core/String/TString.h"
 
 #include <Windows.h>
-
+#include <Console/TConsole.h>
 #ifdef TGON_SUPPORT_DWMAPI
 	#include <dwmapi.h>
 	#pragma comment( lib, "dwmapi.lib" )
@@ -101,12 +99,12 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle, bool is
 
 	if ( wndStyle.ShowMiddle )
 	{
-		x = static_cast<int32_t>(
-				GetSystemMetrics( SM_CXSCREEN )*0.5 -
-				wndStyle.width*0.5 );
-		y = static_cast<int32_t>(
-				GetSystemMetrics( SM_CYSCREEN )*0.5 -
-				wndStyle.height*0.5 );
+		x = static_cast< int32_t >(
+			GetSystemMetrics( SM_CXSCREEN )*0.5 -
+			wndStyle.width*0.5 );
+		y = static_cast< int32_t >(
+			GetSystemMetrics( SM_CYSCREEN )*0.5 -
+			wndStyle.height*0.5 );
 	}
 
 
@@ -128,17 +126,18 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle, bool is
 
 		abort( );
 	}
-	
 
-	wchar_t utf16Title[MAX_CLASS_NAME] {0};
-	ConvertUTF_8ToUTF_16( wndStyle.title.c_str( ), utf16Title );
+
+	// Convert utf8 to utf16
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> converter;
+	std::wstring utf16Dest( converter.from_bytes( wndStyle.title.c_str( )));
 
 
 	// Create a Window.
 	m_wndHandle = CreateWindowExW(
 		exStyle,
 		newClassName.c_str(),
-		utf16Title,
+		utf16Dest.c_str( ),
 		normalStyle,
 		x, y, wndStyle.width, wndStyle.height,
 		nullptr,

@@ -88,6 +88,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;TGON_USE_PRECOMPILED_HEADER;PLATFORM_WINDOWS_OS;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

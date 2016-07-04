@@ -15,8 +15,8 @@ namespace tgon
 
 using TWindow = WindowImpl;
 
-using SpTWindow = std::shared_ptr<TWindow>;
-using WpTWindow = std::weak_ptr<TWindow>;
+//using SpTWindow = std::shared_ptr<TWindow>;
+//using WpTWindow = std::weak_ptr<TWindow>;
 
 
 

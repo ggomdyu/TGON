@@ -46,8 +46,6 @@ void tgon::DxTraceW(
 	bool doPopup )
 {
 #if defined( DEBUG ) | defined( _DEBUG )
-	assert( result != S_OK );
-
 	wchar_t errString[512] {0};
 	AssembleErrorString( errString, functionName, fileNameOfCode, numLine, result );
 

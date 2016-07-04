@@ -8,6 +8,10 @@
 
 #pragma once
 #include "../Abstract/AbstractGraphics.h"
+
+#include <d3d9.h>
+#include <cstdint>
+#include <memory>
 #include "D3D9Fwd.h"
 
 
@@ -21,7 +25,7 @@ class TGON_API D3D9Graphics :
 	private AbstractGraphics
 {
 public:
-	D3D9Graphics( );
+	explicit D3D9Graphics( const TWindow& owner );
 	
 	virtual ~D3D9Graphics( );
 
@@ -29,7 +33,11 @@ public:
 	/*
 		Command
 	*/
-	//void DrawLine( );
+	// Begin scene rendering. Return true if device can render.
+	virtual bool BeginScene( ) override;
+	
+	// End scene rendering. This function must be called after BeginScene
+	virtual void EndScene( ) override;
 	
 	/*
 		Sets
@@ -43,14 +51,20 @@ public:
 	const SpD3D9DeviceEx& GetD3DDevice( ) const;
 	
 private:
-	void InitDevice( );
+	// Initialize IDirect3D9Ex and Caps
+	void InitD3DInterface( );
+
+	// Initialize IDirect3DDevice9Ex
+	void InitD3DDevice( );
 
 private:
 	shared_comptr<IDirect3D9Ex> m_d3d;
 
 	shared_comptr<IDirect3DDevice9Ex> m_d3dDevice;
 
+	std::unique_ptr<D3DCAPS9> m_deviceCaps;
 
+	const TWindow& m_ownerWindow;
 };
 
 
@@ -62,7 +76,7 @@ inline const tgon::SpD3D9Ex& tgon::D3D9Graphics::GetD3D( ) const
 	return m_d3d;
 }
 
-const tgon::SpD3D9DeviceEx& tgon::D3D9Graphics::GetD3DDevice( ) const
+inline const tgon::SpD3D9DeviceEx& tgon::D3D9Graphics::GetD3DDevice( ) const
 {
 	return m_d3dDevice;
 }

@@ -9,7 +9,7 @@
 
 // We support only DirectX9 now... ;(
 #define TGON_FORCE_TO_DIRECTX9 1
-#include <tgLib/Graphics.h>
+#include "../Config/Graphics.h"
 
 #if TGON_GRAPHICS_DIRECTX9
 	#include "../Graphics/Direct3D9/D3d9Graphics.h"

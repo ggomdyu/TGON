@@ -7,16 +7,16 @@
 
 
 #pragma once
-#include "../Platform/Slate/PlatformGraphics.h"
-#include "../Platform/Slate/PlatformFwd.h"
+#include "../Slate/PlatformGraphics.h"
 
 namespace tgon
 {
 
 
 using TGraphics = GraphicsImpl;
-using SpTGraphics = std::shared_ptr<GraphicsImpl>;
-using WpTGraphics = std::weak_ptr<GraphicsImpl>;
+
+//using SpTGraphics = std::shared_ptr<GraphicsImpl>;
+//using WpTGraphics = std::weak_ptr<GraphicsImpl>;
 
 
 }

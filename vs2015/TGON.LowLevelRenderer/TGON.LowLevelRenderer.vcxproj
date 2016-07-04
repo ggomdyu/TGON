@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Config\Graphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphicsType.h" />
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Slate\PlatformGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -86,12 +88,18 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Libraries.props" />
+    <Import Project="..\TGON.Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+    <Import Project="..\TGON.Libraries.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

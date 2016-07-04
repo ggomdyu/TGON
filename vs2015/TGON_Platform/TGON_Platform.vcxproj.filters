@@ -186,9 +186,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Platform\Graphics\Direct3D9\D3d9Error.cpp">
-      <Filter>hpp\Graphics\Direct3D9\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp">
       <Filter>Sources\Utility\Windows\cpp</Filter>
     </ClCompile>
@@ -302,7 +299,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\WindowsConsoleHelper.h">
       <Filter>Sources\Utility\Windows\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
@@ -336,6 +332,9 @@
       <Filter>Sources\Window\General\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h">
+      <Filter>Sources\Window\General\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h">
       <Filter>Sources\Window\General\hpp</Filter>
     </ClInclude>
   </ItemGroup>

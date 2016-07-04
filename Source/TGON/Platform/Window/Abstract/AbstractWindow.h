@@ -8,6 +8,9 @@
 
 #pragma once
 #include "../../../Platform/Config/Build.h"
+
+#include <boost/noncopyable.hpp>
+#include <cstdint>
 #include "../WindowStyle.h"
 
 
@@ -38,6 +41,8 @@ public:
 	virtual void Minimize( ) {};
 
 	virtual void BringToTop( ) {};
+
+	virtual void Flash( ) {};
 
 
 	/*

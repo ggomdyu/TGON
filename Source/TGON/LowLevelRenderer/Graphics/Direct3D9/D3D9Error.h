@@ -131,16 +131,16 @@ void DxTraceW( LPCWSTR functionName, LPCWSTR fileNameOfCode, UINT numLine, HRESU
 
 #if defined( DEBUG ) || defined( _DEBUG )
 #	ifndef V
-#		define V(x) { result = (x); if ( FAILED( result )) { tgon::DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true ); }}
+#		define V(x) {{ HRESULT result = (x); if ( FAILED( result )) { tgon::DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true ); }}}
 #	endif
 #	ifndef V_RETURN
-#		define V_RETURN(x) { result = (x); if ( FAILED( result )) { tgon::DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true ); return result; }}
+#		define V_RETURN(x) {{ HRESULT result = (x); if ( FAILED( result )) { tgon::DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true ); return result; }}}
 #	endif
 #else
 #	ifndef V
-#		define V(x) { result = (x); }
+#		define V(x)
 #	endif
 #	ifndef V_RETURN
-#		define V_RETURN(x) { result = (x); if ( FAILED( result )) { return result; }}
+#		define V_RETURN(x) {{ HRESULT result = (x); if ( FAILED( result )) { return result; }}}
 #	endif
 #endif

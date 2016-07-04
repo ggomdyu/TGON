@@ -15,9 +15,6 @@
 #endif WIN32_LEAN_AND_MEAN
 
 
-#include <string> // TEST
-
-
 namespace tgon
 {
 
@@ -49,7 +46,7 @@ public:
 
 	virtual void BringToTop( ) override;
 
-	void Flash( );
+	virtual void Flash( ) override;
 
 
 	/*

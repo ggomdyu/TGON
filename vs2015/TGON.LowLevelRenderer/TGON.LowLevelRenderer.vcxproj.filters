@@ -46,6 +46,18 @@
     <Filter Include="Sources\PrecompiledHeader\cpp">
       <UniqueIdentifier>{aa58e28c-6e56-4ce1-956c-c6166b53cc31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Config">
+      <UniqueIdentifier>{ce3ef03a-ac87-4c68-99ff-95dc631a396f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Config\hpp">
+      <UniqueIdentifier>{13ff14d9-211b-4ea3-9b16-013dbc416aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Slate">
+      <UniqueIdentifier>{89da5a1f-806b-4bf9-8981-c6bf51b2ff4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Slate\hpp">
+      <UniqueIdentifier>{5bc31741-9677-4a5d-8fd5-93c4ae6c5b5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
@@ -74,6 +86,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Config\Graphics.h">
+      <Filter>Sources\Config\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Slate\PlatformGraphics.h">
+      <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

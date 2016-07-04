@@ -1,6 +1,5 @@
 ﻿#include "PrecompiledHeader.h"
 #include "TString.h"
-#include <bitset>	
 
 //
 void tgon::ConvertUTF_8ToUTF_16(
