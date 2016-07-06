@@ -117,6 +117,9 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TGON.GameCore\TGON.GameCore.vcxproj">
+      <Project>{f53c56e2-f77e-4a53-8adc-d00a9903312d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON.LowLevelRenderer\TGON.LowLevelRenderer.vcxproj">
       <Project>{bee9e817-1cf9-4f28-8c72-a6dacb7f47b6}</Project>
     </ProjectReference>

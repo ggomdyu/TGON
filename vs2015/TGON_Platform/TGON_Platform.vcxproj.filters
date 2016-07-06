@@ -184,6 +184,18 @@
     <Filter Include="Sources\Console\General\cpp">
       <UniqueIdentifier>{8d901477-4219-4c14-abc1-b7213591e694}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Screen">
+      <UniqueIdentifier>{432df674-4323-400a-9f5a-2b87963ec984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\Abstract">
+      <UniqueIdentifier>{5ee84f30-5d94-4fa2-a715-9a7618db00eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\General">
+      <UniqueIdentifier>{bd99ab56-89d4-4bec-84b3-5eb2960781f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\Windows">
+      <UniqueIdentifier>{35509720-bc64-4be8-8bb4-6d48757ec62e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp">
@@ -215,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp">
       <Filter>Sources\Window\General\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.cpp">
+      <Filter>Sources\Screen\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -336,6 +351,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h">
       <Filter>Sources\Window\General\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\TScreen.h">
+      <Filter>Sources\Screen\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Abstract\AbstractScreen.h">
+      <Filter>Sources\Screen\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.h">
+      <Filter>Sources\Screen\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformScreen.h">
+      <Filter>Sources\Slate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

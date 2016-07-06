@@ -26,6 +26,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\WindowsConsoleHelper.cpp" />
@@ -63,6 +64,9 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Abstract\AbstractScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\TScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformFwd.h" />
@@ -70,6 +74,7 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformProperty.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformScreen.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformSIMD.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformTime.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformWindow.h" />

@@ -50,8 +50,6 @@ public:
 	/*
 		Gets
 	*/
-	static void GetScreenSize( int32_t* width, int32_t* height ) {}
-
 	static struct TSystemBatteryInfo GetPowerInfo( ) {}
 };
 

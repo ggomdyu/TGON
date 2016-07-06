@@ -14,7 +14,8 @@ namespace tgon
 {
 
 
-using SpTGraphics = std::shared_ptr<GraphicsImpl>;
+using SpTGraphics = std::shared_ptr<class TGraphics>;
+
 
 class TGraphics :
 	public GraphicsImpl
@@ -24,7 +25,7 @@ protected:
 
 public:
 	// TGraphics only support the creation as specified type.
-	const SpTGraphics Make( const TWindow& owner );
+	static SpTGraphics Make( const TWindow& owner );
 
 	virtual ~TGraphics( ) = default;
 };
@@ -33,7 +34,8 @@ public:
 }
 
 
-const tgon::SpTGraphics tgon::TGraphics::Make( const TWindow& owner )
+inline tgon::SpTGraphics tgon::TGraphics::Make( 
+	const TWindow& owner )
 {
 	SpTGraphics ret( new TGraphics( owner ));
 	return ret;

@@ -58,18 +58,16 @@ public:
 	/*
 		Gets
 	*/
-	static void GetScreenSize( _Out_ int32_t* width, _Out_ int32_t* height );
-
 	static TSystemBatteryInfo GetPowerInfo( );
 
 	static HINSTANCE GetInstanceHandle( );
 };
-
-inline void WindowsApplication::GetScreenSize( int32_t* width, int32_t* height )
-{
-	*width = GetSystemMetrics( SM_CXSCREEN );
-	*height = GetSystemMetrics( SM_CYSCREEN );
-}
+//
+//inline void WindowsApplication::GetScreenSize( int32_t* width, int32_t* height )
+//{
+//	*width = GetSystemMetrics( SM_CXSCREEN );
+//	*height = GetSystemMetrics( SM_CYSCREEN );
+//}
 
 inline void WindowsApplication::EnableVisualStyles( )
 {

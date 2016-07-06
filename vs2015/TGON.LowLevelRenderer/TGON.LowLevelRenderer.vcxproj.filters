@@ -58,6 +58,15 @@
     <Filter Include="Sources\Slate\hpp">
       <UniqueIdentifier>{5bc31741-9677-4a5d-8fd5-93c4ae6c5b5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Camera">
+      <UniqueIdentifier>{5c7ac3a0-ae8f-4460-8a9e-c1afdc9601d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Camera\cpp">
+      <UniqueIdentifier>{46052c06-5bd5-4451-b69b-f89f758d0f64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Camera\hpp">
+      <UniqueIdentifier>{87102607-8982-4526-a061-e2fd1139943d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
@@ -93,6 +102,9 @@
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Slate\PlatformGraphics.h">
       <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.h">
+      <Filter>Sources\Camera\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp">
@@ -106,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
       <Filter>Sources\Graphics\General\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.cpp">
+      <Filter>Sources\Camera\cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

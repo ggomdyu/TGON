@@ -60,7 +60,8 @@ public:
 		m_rawPtr( nullptr )
 	{
 	}
-	shared_comptr( _RawPtrTy* rhs ) :
+
+	explicit shared_comptr( _RawPtrTy* rhs ) :
 		m_rawPtr( rhs )
 	{
 		if ( m_rawPtr )
@@ -68,6 +69,7 @@ public:
 			m_rawPtr->AddRef( );
 		}
 	}
+	
 	shared_comptr( const shared_comptr& rhs ) :
 		m_rawPtr( rhs.m_rawPtr )
 	{
@@ -76,11 +78,13 @@ public:
 			m_rawPtr->AddRef( );
 		}
 	}
+	
 	shared_comptr( shared_comptr&& rhs ) :
 		m_rawPtr( rhs.m_rawPtr )
 	{
 		rhs.m_rawPtr = nullptr;
 	}
+	
 	~shared_comptr( )
 	{
 		if ( m_rawPtr )
@@ -107,6 +111,7 @@ public:
 	
 		return *this;
 	}
+	
 	shared_comptr& operator=( shared_comptr&& rhs )
 	{
 		if ( m_rawPtr == rhs.m_rawPtr )
@@ -124,18 +129,22 @@ public:
 
 		return *this;
 	}
+	
 	bool operator==( const shared_comptr& rhs )
 	{
 		return ( m_rawPtr == rhs.m_rawPtr );
 	}
+	
 	bool operator!=( const shared_comptr& rhs )
 	{
 		return ( m_rawPtr != rhs.m_rawPtr );
 	}
+	
 	_RawPtrTy** operator&( )
 	{
 		return &m_rawPtr;
 	}
+	
 	_RawPtrTy* operator->( ) const
 	{
 		return m_rawPtr;

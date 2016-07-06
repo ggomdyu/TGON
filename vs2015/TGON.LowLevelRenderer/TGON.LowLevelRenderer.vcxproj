@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Config\Graphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.cpp" />
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp" />
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp" />

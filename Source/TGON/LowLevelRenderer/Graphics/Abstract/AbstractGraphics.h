@@ -32,7 +32,13 @@ public:
 	virtual bool BeginScene( ) = 0;
 
 	// End scene rendering. This function must be called after BeginScene
-	virtual void EndScene( ) = 0;
+	virtual bool EndScene( ) = 0;
+
+	// Clear the back buffer scene.
+	virtual bool Clear( ) = 0;
+
+	// Draw the back buffer to visible screen.
+	virtual bool Present( ) = 0;
 };
 
 

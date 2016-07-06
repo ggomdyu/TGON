@@ -40,9 +40,13 @@ public:
 	virtual bool BeginScene( ) override;
 	
 	// End scene rendering. This function must be called after BeginScene
-	virtual void EndScene( ) override;
+	virtual bool EndScene( ) override;
 	
-	virtual bool Clear( );
+	// Clear the back buffer scene.
+	virtual bool Clear( ) override;
+
+	// Draw the back buffer to visible screen.
+	virtual bool Present( ) override;
 
 	/*
 		Sets

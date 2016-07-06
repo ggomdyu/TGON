@@ -22,11 +22,14 @@ public:
 	static const TMatrix4x4 Zero;
 
 public:
-	// for world matrix translation
 	static TMatrix4x4 Scale( float x, float y, float z );
+
 	static TMatrix4x4 RotateX( float theta );
+
 	static TMatrix4x4 RotateY( float theta );
+
 	static TMatrix4x4 RotateZ( float theta );
+
 	static TMatrix4x4 Translate( float x, float y, float z );
 	
 	// for view matrix translation
@@ -34,6 +37,7 @@ public:
 	
 	// for projection matrix translation
 	static TMatrix4x4 PerspectiveFovLH( float fovY, float aspect, float nearZ, float farZ );
+
 	static TMatrix4x4 Viewport( float x, float y, float width, float height, float minZ, float maxZ );
 
 	void Transpose( );

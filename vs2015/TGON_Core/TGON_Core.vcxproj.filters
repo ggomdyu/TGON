@@ -40,12 +40,6 @@
     <Filter Include="Sources\PrecompiledHeader\hpp">
       <UniqueIdentifier>{b3fff67b-31b3-4b06-9b1b-63fcc2c4730c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Object">
-      <UniqueIdentifier>{0cae8143-ba80-4d1a-971a-a333b6cb2204}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Object\hpp">
-      <UniqueIdentifier>{84f69463-39ac-47c5-804e-f59dfd88e5fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Random">
       <UniqueIdentifier>{4f9a1302-a84f-4b00-b03e-54297bd0b408}</UniqueIdentifier>
     </Filter>
@@ -63,6 +57,9 @@
     </Filter>
     <Filter Include="Sources\Error\hpp">
       <UniqueIdentifier>{04268bc3-48c1-41ff-933d-c8c8f9e74b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Reflection">
+      <UniqueIdentifier>{d2a997f0-93b2-4125-a04f-510b03cf5cab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Random\TRandom.cpp">
       <Filter>Sources\Random\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Reflection\TObject.cpp">
+      <Filter>Sources\Reflection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,17 +128,20 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Object\TObject.h">
-      <Filter>Sources\Object\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Object\TypeId.h">
-      <Filter>Sources\Object\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Random\TRandom.h">
       <Filter>Sources\Random\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrorCode.h">
       <Filter>Sources\Error\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Reflection\TType.h">
+      <Filter>Sources\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Reflection\IComparable.h">
+      <Filter>Sources\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Reflection\TObject.h">
+      <Filter>Sources\Reflection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@ tgon::D3D9Graphics::D3D9Graphics( const TWindow& owner ) :
 {
 	this->InitD3DInterface( );
 	this->InitD3DDevice( );
+
 }
 
 bool tgon::D3D9Graphics::Clear( )
@@ -50,31 +51,47 @@ bool tgon::D3D9Graphics::Clear( )
 
 bool tgon::D3D9Graphics::BeginScene( )
 {
-	if ( SUCCEEDED( m_d3dDevice->Clear( 
-		0, 
-		nullptr, 
-		D3DCLEAR_TARGET | 
-		D3DCLEAR_ZBUFFER,
-		m_clearColor, 
-		1.f, 
-		0 )))
+	HRESULT result = m_d3dDevice->BeginScene( );
+
+	if ( SUCCEEDED( result ))
 	{
-		HRESULT result = m_d3dDevice->BeginScene( );
-		if ( SUCCEEDED( result ))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return true;
+	}
+	else
+	{
+		DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true );
+		return false;
 	}
 }
 
-void tgon::D3D9Graphics::EndScene( )
+bool tgon::D3D9Graphics::EndScene( )
 {
-	m_d3dDevice->EndScene( );
-	m_d3dDevice->Present( nullptr, nullptr, nullptr, nullptr );
+	HRESULT result = m_d3dDevice->EndScene( );
+
+	if ( SUCCEEDED( result ))
+	{
+		return true;
+	}
+	else
+	{
+		DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true );
+		return false;
+	}
+}
+
+bool tgon::D3D9Graphics::Present( )
+{
+	HRESULT result = m_d3dDevice->Present( nullptr, nullptr, nullptr, nullptr );
+
+	if ( SUCCEEDED( result ))
+	{
+		return true;
+	}
+	else
+	{
+		DxTraceW( __FUNCTIONW__, __FILEW__, __LINE__, result, true );
+		return false;
+	}
 }
 
 void tgon::D3D9Graphics::InitD3DInterface( )

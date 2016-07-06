@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Window/TWindow.h>
-#include <Window/WindowStyle.h>
 #include <Graphics/TGraphics.h>
 #include <Console/TConsole.h>
-#include <Graphics/Direct3D9/D3D9Error.h>
-
+#include <Screen/TScreen.h>
+#include <Reflection/TObject.h>
 
 namespace tgon
 {
@@ -16,34 +15,26 @@ class TgonModelJoyForm :
 {
 public:
 	TgonModelJoyForm( ) :
-		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" )),
-		m_graphics( new TGraphics( *this ) )
+		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
 	{
-
 	}
 
 	~TgonModelJoyForm( )
 	{
-		delete m_graphics;
 	}
 
 	virtual void OnIdle( ) override
 	{
-		m_graphics->BeginScene( );
-		m_graphics->EndScene();
-
-
 	}
 
 	virtual void OnLMouseDown( int32_t x, int32_t y )
 	{
+		class A : public TObject { public: TGON_OBJECT( A, std::nullptr_t ) };
+		class B : public A { public: TGON_OBJECT( B, A ) };
+		class C : public B { public: TGON_OBJECT( C, B ) };
 
-
-		V( D3DERR_INVALIDCALL );
+		B* b = new C;
 	}
-	
-private:
-	TGraphics* m_graphics;
 };
 
 
