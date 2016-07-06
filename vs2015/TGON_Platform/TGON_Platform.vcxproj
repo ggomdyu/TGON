@@ -102,7 +102,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7806527A-B31A-4FAA-B22D-325CA0BC1326}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TGON.Platform</RootNamespace>
+    <RootNamespace>TGON_Platform</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

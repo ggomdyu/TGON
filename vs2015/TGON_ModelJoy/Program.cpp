@@ -5,4 +5,12 @@
 #include <Application/TApplication.h>
 
 
-TGON_GENERATE_APP( tgon::Program )
+TGON_REGISTER_MAINLOOP( tgon::Program )
+
+tgon::Program::Program( )
+{
+}
+
+tgon::Program::~Program( )
+{
+}

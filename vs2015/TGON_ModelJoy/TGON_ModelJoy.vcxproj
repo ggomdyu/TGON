@@ -100,9 +100,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
+    <ClCompile Include="Source\Program.cpp" />
+    <ClCompile Include="Source\TgonModelJoyForm.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+    <ClInclude Include="Source\Program.h" />
+    <ClInclude Include="Source\TgonModelJoyForm.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="GraphicsStyle.xml" />

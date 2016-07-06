@@ -1,26 +1,41 @@
 #pragma once
 
-#include <Window/TWindow.h>
-#include <Graphics/TGraphics.h>
+#include <Application/TApplication.h>
 #include <Console/TConsole.h>
-#include <Screen/TScreen.h>
-#include <Reflection/TObject.h>
+#include <Core/Math/TMath.h>
+#include <Window/TWindow.h>
+#include <Window/WindowStyle.h>
+#include <Application/TApplication.h>
+#include <MessageBox/TMessageBox.h>
+#include <Graphics/TGraphics.h>
+#include <System/WindowSystem.h>
+
+#include <SDL_syswm.h>
+#include <tgLib/auto_cast.h>
+#include <tgLib/array_size.h>
+
 
 namespace tgon
 {
 
 
-class TgonModelJoyForm :
+
+class Tgon_ModelJoy :
 	public TWindow
 {
 public:
-	TgonModelJoyForm( ) :
+	Tgon_ModelJoy( ) :
 		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
 	{
 	}
 
-	~TgonModelJoyForm( )
+	virtual ~Tgon_ModelJoy( )
 	{
+	}
+
+	virtual void foo( ) &&
+	{
+
 	}
 
 	virtual void OnIdle( ) override
@@ -29,12 +44,9 @@ public:
 
 	virtual void OnLMouseDown( int32_t x, int32_t y )
 	{
-		class A : public TObject { public: TGON_OBJECT( A, std::nullptr_t ) };
-		class B : public A { public: TGON_OBJECT( B, A ) };
-		class C : public B { public: TGON_OBJECT( C, B ) };
-
-		B* b = new C;
 	}
+
+private:
 };
 
 
