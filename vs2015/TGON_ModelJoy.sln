@@ -11,7 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON_ModelJoy", "TGON_Model
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Platform", "1. Platform", "{7D12C4EE-B757-487F-9F2A-2B865981676C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON_Platform", "TGON_Platform\TGON_Platform.vcxproj", "{7806527A-B31A-4FAA-B22D-325CA0BC1326}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Platform", "TGON.Platform\TGON.Platform.vcxproj", "{7806527A-B31A-4FAA-B22D-325CA0BC1326}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Solution Items", "6. Solution Items", "{E9E2D4A9-BA0F-4812-8C56-56A690687C50}"
 	ProjectSection(SolutionItems) = preProject

@@ -34,7 +34,7 @@ public:
 	/*
 		Gets
 	*/
-	// Return dynamic binded type's hash code.
+	// Return dynam ic binded type's hash code.
 	virtual uint32_t GetHashCode( ) const = 0;
 	
 	// Return dynamic binded type's name.
