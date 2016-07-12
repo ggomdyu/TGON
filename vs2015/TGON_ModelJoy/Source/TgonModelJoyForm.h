@@ -4,10 +4,30 @@
 #include <Graphics/TGraphics.h>
 #include <Console/TConsole.h>
 #include <Screen/TScreen.h>
-#include <Reflection/TObject.h>
+#include <Object/TObject.h>
+#include <Object/TEventListener.h>
 
 namespace tgon
 {
+
+	class W :
+		public TEventSubject
+	{
+	public:
+//		TGON_OBJECT( W, TEventSubject )
+
+	public:
+		W( )
+		{
+//			this->SubscribeEvent( TEvent::OnEscDown, &W::P );
+		}
+
+
+		void P( )
+		{
+
+		}
+	};
 
 
 class TgonModelJoyForm :
@@ -17,6 +37,7 @@ public:
 	TgonModelJoyForm( ) :
 		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
 	{
+		W w;
 	}
 
 	~TgonModelJoyForm( )
@@ -29,11 +50,6 @@ public:
 
 	virtual void OnLMouseDown( int32_t x, int32_t y )
 	{
-		class A : public TObject { public: TGON_OBJECT( A, std::nullptr_t ) };
-		class B : public A { public: TGON_OBJECT( B, A ) };
-		class C : public B { public: TGON_OBJECT( C, B ) };
-
-		B* b = new C;
 	}
 };
 

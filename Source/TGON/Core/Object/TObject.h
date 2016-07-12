@@ -7,7 +7,8 @@
 
 #pragma once
 #include "../Platform/Config/Build.h"
-#include "../Math/TMath.h"
+
+#include "TType.h"
 
 
 namespace tgon
@@ -17,15 +18,28 @@ namespace tgon
 class TGON_API TObject 
 {
 public:
+	/*
+		Cons/Destructor
+	*/
 	TObject( );
 	
 	virtual ~TObject( ) = 0;
 
 	/*
+		Opeators
+	*/
+	bool operator==( const TObject& ) const;
+
+	bool operator!=( const TObject& ) const;
+
+
+public:
+	/*
 		Commands
 	*/
 	static bool Equals( const TObject&, const TObject& );
 	
+	// Compare the object paremeter. This can be overridden.
 	virtual bool Equals( const TObject& ) const;
 
 	// Compare two instance. Return true if both refer to the same object.
@@ -38,11 +52,20 @@ public:
 	virtual uint32_t GetHashCode( ) const = 0;
 	
 	// Return dynamic binded type's name.
-	virtual const char* ToString( ) const = 0;
+	virtual const char* GetName( ) const = 0;
 
-	//virtual const TType* GetType( ) const = 0;
 };
 
+
+inline bool tgon::TObject::operator==( const TObject& rhs ) const
+{
+	return this->Equals( rhs );
+}
+
+inline bool tgon::TObject::operator!=( const TObject& rhs ) const
+{
+	return !( *this == rhs );
+}
 
 inline bool TObject::Equals(
 	const TObject& lhs,
@@ -54,14 +77,14 @@ inline bool TObject::Equals(
 inline bool TObject::Equals( 
 	const TObject& rhs ) const
 {
-	return ( this->GetHashCode( ) == rhs.GetHashCode( ) );
+	return ( this->GetHashCode( ) == rhs.GetHashCode( ));
 }
 
 inline bool TObject::ReferenceEquals( 
 	const TObject& lhs, 
 	const TObject& rhs )
 {
-	return false;
+	return ( &lhs == &rhs );
 }
 
 
@@ -73,17 +96,14 @@ inline bool TObject::ReferenceEquals(
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\
-		static uint32_t hashCode = TMath::GenerateHash( this->ToString( ));\
-		return hashCode;\
+		return myType::GetType( ).GetHashCode( );\
 	}\
-	virtual const char* ToString( ) const override\
+	virtual const char* GetName( ) const override\
 	{\
 		return #myType;\
+	}\
+	static const TType& GetType( )\
+	{\
+		static const TType ret( #myType );\
+		return ret;\
 	}
-
-//\
-//	virtual const TType& GetType( ) const\
-//	{\
-//		static TTypeImpl<myType> typeImpl;\
-//		return typeImpl;\
-//	}

@@ -22,27 +22,31 @@ class TGON_API AbstractWindow :
 	private boost::noncopyable
 {
 protected:
+	/*
+		Cons/Destructor
+	*/
 	explicit AbstractWindow( const WindowStyle& wndStyle );
 
 	virtual ~AbstractWindow( ) = 0;
+
 
 public:
 	/*
 		Commands
 	*/
-	virtual void Show( ) {};
+	virtual void Show( ) {}
 
-	virtual void Hide( ) {};
+	virtual void Hide( ) {}
 
-	virtual void Quit( ) = 0;	// Must be implemented
+	virtual void Quit( ) {}
 
-	virtual void Maximize( ) {};
+	virtual void Maximize( ) {}
 
-	virtual void Minimize( ) {};
+	virtual void Minimize( ) {}
 
-	virtual void BringToTop( ) {};
+	virtual void BringToTop( ) {}
 
-	virtual void Flash( ) {};
+	virtual void Flash( ) {}
 
 
 	/*
@@ -69,10 +73,9 @@ public:
 	/*
 		Event handlers
 	*/
-
 	virtual void OnClose( ) {}
 
-	virtual void OnIdle( ) = 0;	// Must be implemented
+	virtual void OnIdle( ) {}
 
 	virtual void OnMove( int x, int y ) {}
 
@@ -91,6 +94,7 @@ public:
 
 protected:
 	const WindowStyle& GetWindowStyle( ) const;
+
 
 private:
 	WindowStyle m_wndStyle;

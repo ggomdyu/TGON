@@ -31,12 +31,10 @@ public:
 		Transform
 	*/
 	// Window's position
-	// @ Platform : Windows
 	int32_t x = 100;
 	int32_t y = 100;
 	
 	// Window's scale
-	// @ Platform : Windows
 	int32_t width = 500;
 	int32_t height = 500;
 
@@ -44,8 +42,7 @@ public:
 	/*
 		Show style
 	*/
-	// If border is Useless, switch this to true.
-	// @ Platform : Windows
+	// If border is useless, switch this to true.
 	bool Popup = false;
 
 
@@ -53,35 +50,28 @@ public:
 		Function
 	*/
 	// Show window as full-screen when created
-	// @ Platform : Windows
 	bool FullScreen = false;
 
 	// @ WARNING : <OnIdle> event handler is not applied to the description below.
-	// --- What is the 'EventHandleable'?
-	// If you pass false to this, You can make more fast window 
+	// -- What is the 'EventHandleable'?
+	// If you set false to this, You can make more fast window 
 	// but which cannot handle event( e.g. OnMouseMove, OnDestroying, etc... )
-	// @ Platform : Windows
 	bool EventHandleable = true;
 	
 	// Enable window surface's transparency or not.
-	// @ Platform : Windows
 	bool SupportWindowTransparency = false;
 	
 	// Enable window surface's per-pixel transparency or not.
-	// @ Platform : Windows
 	bool SupportPerPixelTransparency = false;
 	
 	// 
-	// @ Platform : Windows
 	bool ShowTopOnCreated = false;
 
 	// Enable resize frame 
-	// @ Platform : Windows
 	bool Resizeable = true;
 	
 	// Show window always top.
 	// @ WARNING : It can cause race each other top-most window
-	// @ Platform : Windows
 	bool TopMost = false;
 
 	//

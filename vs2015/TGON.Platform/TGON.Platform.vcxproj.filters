@@ -231,6 +231,12 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.cpp">
       <Filter>Sources\Screen\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Time\TTime.cpp">
+      <Filter>Sources\Time\General\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindow.cpp">
+      <Filter>Sources\Window\General\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h">
@@ -363,6 +369,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformScreen.h">
       <Filter>Sources\Slate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Time\Abstract\AbstractTime.h">
+      <Filter>Sources\Time\Abstract\hpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

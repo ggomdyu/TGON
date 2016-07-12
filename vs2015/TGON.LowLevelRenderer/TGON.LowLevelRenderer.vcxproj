@@ -42,7 +42,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON_Core\TGON_Core.vcxproj">
+    <ProjectReference Include="..\TGON.Core\TGON.Core.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
   </ItemGroup>

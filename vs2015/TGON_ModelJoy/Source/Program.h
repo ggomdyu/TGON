@@ -8,6 +8,7 @@
 
 #pragma once
 #include <Application/TApplication.h>
+#include <Object/TEventSubject.h>
 #include "TgonModelJoyForm.h"
 
 
@@ -20,9 +21,10 @@ class Program
 public:
 	static int32_t Main( )
 	{
-		auto form = std::make_shared<TgonModelJoyForm>( );
+		// Make window as default style
+		auto window = TWindow::Make( WindowStyle::DefaultStyle );
 
-		return TApplication::Run( *form.get( ));
+		return TApplication::Run( *window.get( ));
 	}
 };
 

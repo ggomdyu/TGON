@@ -26,9 +26,13 @@ class TGON_API WindowsWindow :
 	public AbstractWindow
 {
 protected:
+	/*
+		Cons/Destructor
+	*/
 	explicit WindowsWindow( const struct WindowStyle& );
 
 	virtual ~WindowsWindow( );
+
 
 public:
 	/*
@@ -86,8 +90,10 @@ private:
 
 	void GetWindowFormAccordingly( _In_ const struct WindowStyle&, _Out_ int32_t* x, _Out_ int32_t* y );
 
+
 private:
 	bool m_isDestroyed;
+
 	HWND m_wndHandle;
 };
 

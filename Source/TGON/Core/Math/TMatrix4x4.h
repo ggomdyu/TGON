@@ -10,6 +10,11 @@
 #pragma once
 #include "../Platform/Config/Build.h"
 
+//#include "../Platform/Slate/PlatformSIMD.h"
+//#if TGON_SUPPORT_SSE
+//#	include <xmmintrin.h>
+//#endif
+#undef TGON_SUPPORT_SSE
 
 namespace tgon
 {
@@ -19,31 +24,14 @@ struct TGON_API TMatrix4x4
 {
 public:
 	static const TMatrix4x4 Identity;
+
 	static const TMatrix4x4 Zero;
 
-public:
-	static TMatrix4x4 Scale( float x, float y, float z );
-
-	static TMatrix4x4 RotateX( float theta );
-
-	static TMatrix4x4 RotateY( float theta );
-
-	static TMatrix4x4 RotateZ( float theta );
-
-	static TMatrix4x4 Translate( float x, float y, float z );
 	
-	// for view matrix translation
-	static TMatrix4x4 View( const struct TVector3& eyePt, const struct TVector3& lookAt, const struct TVector3& up );
-	
-	// for projection matrix translation
-	static TMatrix4x4 PerspectiveFovLH( float fovY, float aspect, float nearZ, float farZ );
-
-	static TMatrix4x4 Viewport( float x, float y, float width, float height, float minZ, float maxZ );
-
-	void Transpose( );
-	void Inverse( );
-
 public:
+	/*
+		Cons/Destructor
+	*/
 	TMatrix4x4( );
 	TMatrix4x4(
 		float _00, float _01, float _02, float _03,
@@ -53,27 +41,58 @@ public:
 	);
 	TMatrix4x4( const struct TMatrix3x3& );
 
-	// Arithmetic operators
+
+public:
+	/*
+		Operators
+	*/
 	TMatrix4x4 operator+( const TMatrix4x4& ) const;
+
 	TMatrix4x4 operator-( const TMatrix4x4& ) const;
+
 	TMatrix4x4 operator*( const TMatrix4x4& ) const;
+
 	TMatrix4x4 operator*( float ) const;
 
-	// Unary operators
-	TMatrix4x4 operator+( ) const;
-	TMatrix4x4 operator-( ) const;
-
-	// Compound assignment operators
 	const TMatrix4x4& operator+=( const TMatrix4x4& );
+
 	const TMatrix4x4& operator-=( const TMatrix4x4& );
+
 	const TMatrix4x4& operator*=( const TMatrix4x4& );
 
-	// Comparison operators
 	bool operator==( const TMatrix4x4& rhs ) const;
+
 	bool operator!=( const TMatrix4x4& rhs ) const;
 
 	float* operator[]( int32_t index );
+
 	const float* operator[]( int32_t index ) const;
+
+
+public:
+	/*
+		Commands
+	*/
+	static TMatrix4x4 Scale( float x, float y, float z );
+
+	static TMatrix4x4 RotateX( float theta );
+
+	static TMatrix4x4 RotateY( float theta );
+
+	static TMatrix4x4 RotateZ( float theta );
+
+	static TMatrix4x4 Translate( float x, float y, float z );
+
+	static TMatrix4x4 View( const struct TVector3& eyePt, const struct TVector3& lookAt, const struct TVector3& up );
+	
+	static TMatrix4x4 PerspectiveFovLH( float fovY, float aspect, float nearZ, float farZ );
+
+	static TMatrix4x4 Viewport( float x, float y, float width, float height, float minZ, float maxZ );
+
+	void Transpose( );
+
+	void Inverse( );
+
 
 public:
 	float _00, _01, _02, _03,
@@ -81,6 +100,46 @@ public:
 		  _20, _21, _22, _23,
 		  _30, _31, _32, _33;
 };
+
+
+#if TGON_SUPPORT_SSE
+inline TMatrix4x4::TMatrix4x4( )
+{
+    _mm_storeu_ps( &_00, _mm_set_ps( 0.f, 0.f, 0.f, 1.f ));
+    _mm_storeu_ps( &_10, _mm_set_ps( 0.f, 0.f, 1.f, 0.f ));
+    _mm_storeu_ps( &_20, _mm_set_ps( 0.f, 1.f, 0.f, 0.f ));
+    _mm_storeu_ps( &_30, _mm_set_ps( 1.f, 0.f, 0.f, 0.f ));
+}
+#else
+inline TMatrix4x4::TMatrix4x4( ) :
+	_00( 1.f ), _01( 0.f ), _02( 0.f ), _03( 0.f ),
+	_10( 0.f ), _11( 1.f ), _12( 0.f ), _13( 0.f ),
+	_20( 0.f ), _21( 0.f ), _22( 1.f ), _23( 0.f ),
+	_30( 0.f ), _31( 0.f ), _32( 0.f ), _33( 1.f )
+{
+}
+#endif
+
+inline TMatrix4x4 TMatrix4x4::operator+(
+	const TMatrix4x4& rhs ) const
+{
+#if TGON_SUPPORT_SSE
+	TMatrix4x4 ret;
+	_mm_storeu_ps( &ret._00, _mm_add_ps( _mm_loadu_ps( &_00 ), _mm_loadu_ps( &rhs._00 )));
+	_mm_storeu_ps( &ret._10, _mm_add_ps( _mm_loadu_ps( &_10 ), _mm_loadu_ps( &rhs._10 )));
+	_mm_storeu_ps( &ret._20, _mm_add_ps( _mm_loadu_ps( &_20 ), _mm_loadu_ps( &rhs._20 )));
+	_mm_storeu_ps( &ret._30, _mm_add_ps( _mm_loadu_ps( &_30 ), _mm_loadu_ps( &rhs._30 )));
+	
+	return ret;
+#else
+	return TMatrix4x4(
+		_00+rhs._00, _01+rhs._01, _02+rhs._02, _03+rhs._03,
+		_10+rhs._10, _11+rhs._11, _12+rhs._12, _13+rhs._13,
+		_20+rhs._20, _21+rhs._21, _22+rhs._22, _23+rhs._23,
+		_30+rhs._30, _31+rhs._31, _32+rhs._32, _33+rhs._33
+	);
+#endif
+}
 
 inline const TMatrix4x4& TMatrix4x4::operator*=(
 	const TMatrix4x4& rhs )

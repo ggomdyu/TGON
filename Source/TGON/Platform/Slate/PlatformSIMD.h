@@ -6,11 +6,8 @@
 */
 
 #pragma once
-#include "../Config/Platform.h"
-
-#ifdef TGON_PLATFORM_WINDOWS
-	#include "../Math/Windows/TMathSSE2.h"
-#elif TGON_PLATFORM_ANDROID
+#ifdef BOOST_OS_WINDOWS
+	#include "../Config/Windows/WindowsProperty.h"
+#elif BOOST_OS_ANDROID
 	#include "../Math/Android/TMathNeon.h"
-#elif TGON_PLATFORM_LINUX
 #endif

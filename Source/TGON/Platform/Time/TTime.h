@@ -15,7 +15,35 @@ namespace tgon
 {
 
 
-using TTime = TimeImpl;
+class TGON_API TTime :
+	public TimeImpl
+{
+public:
+	/*
+		Commands
+	*/
+	// Get current application's execution time as millisecond
+	static uint32_t GetAppExecutionTime( );
+
+
+public:
+	/*
+		Cons/Destructor
+	*/
+	TTime( ) = delete;
+	
+	virtual ~TTime( ) = delete;
+
+
+private:
+	static const uint32_t ms_oldTime;
+};
+
+
+inline uint32_t TTime::GetAppExecutionTime( )
+{
+	return TimeImpl::GetBootTime( ) - ms_oldTime;
+}
 
 
 };

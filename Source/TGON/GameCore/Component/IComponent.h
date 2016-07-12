@@ -1,11 +1,12 @@
 /*
-* Author : Junho-Cha
+* Author : Cha Junho
 * Date : 04/26/2015
 * Latest author :
 * Latest date :
 */
 
 #pragma once
+#include "../../Core/Object/TObject.h"
 #include "../../Platform/Config/Build.h"
 
 
@@ -13,38 +14,38 @@ namespace tgon
 {
 
 
-class TGON_API IComponent
+class TGON_API IComponent :
+	public TObject
 {
 public:
+	TGON_OBJECT( IComponent, std::nullptr_t )
+
+public:
 	/*
-		Constructor
+		Cons/Destructor
 	*/
-	IComponent( class TGameObject* owner );
+	explicit IComponent( class TGameObject* owner );
 	
-	/*
-		Destructor
-	*/
 	virtual ~IComponent( ) = 0;
+	
+	//virtual void Clone( ) = 0;
+
 
 public:
 	/*
 		Commands
 	*/
-	//virtual void Clone( ) = 0;
-	
 	virtual void Update( float tickTime ) = 0;
 
 public:
 	/*
 		Sets
 	*/
-	// Set this component's owner.
 	void SetOwner( class TGameObject* owner );
 	
 	/*
 		Gets
 	*/
-	// Return component's owner.
 	class TGameObject* GetOwner( ) const;
 
 

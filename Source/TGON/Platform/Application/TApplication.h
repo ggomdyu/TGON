@@ -3,7 +3,6 @@
 * Date : 04/02/2016
 * Latest author :
 * Latest date :
-* Description : API Sets for cross-platform
 */
 
 

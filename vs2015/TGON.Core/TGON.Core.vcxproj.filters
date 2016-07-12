@@ -4,12 +4,6 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{c010ece4-f856-4269-b350-295bc9a97ebd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core">
-      <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Core\hpp">
-      <UniqueIdentifier>{f56478e6-2f2a-4292-afa4-e95f9999d747}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Math">
       <UniqueIdentifier>{de4ad1a4-9588-4fc2-805c-5f8a4bb16b78}</UniqueIdentifier>
     </Filter>
@@ -58,8 +52,17 @@
     <Filter Include="Sources\Error\hpp">
       <UniqueIdentifier>{04268bc3-48c1-41ff-933d-c8c8f9e74b52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Reflection">
-      <UniqueIdentifier>{d2a997f0-93b2-4125-a04f-510b03cf5cab}</UniqueIdentifier>
+    <Filter Include="Sources\Object">
+      <UniqueIdentifier>{865ba0a5-5b13-404d-8854-b4fb3af0d45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\hpp">
+      <UniqueIdentifier>{59c60fd4-a5b5-422d-9be0-6f86ba8bf13a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\cpp">
+      <UniqueIdentifier>{16d9e3a3-2db1-454a-84de-86eb2313b1dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Window">
+      <UniqueIdentifier>{cd0dc7f5-a4bb-4356-b1f2-8dfd70c1b57e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,8 +93,14 @@
     <ClCompile Include="..\..\Source\TGON\Core\Random\TRandom.cpp">
       <Filter>Sources\Random\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Reflection\TObject.cpp">
-      <Filter>Sources\Reflection</Filter>
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TObject.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TEventSubject.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Window\TEventWindow.cpp">
+      <Filter>Sources\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,15 +122,6 @@
     <ClInclude Include="..\..\Source\TGON\Core\Math\TVector3.h">
       <Filter>Sources\Math\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TypeId.h">
-      <Filter>Sources\Core\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TNoncopyable.h">
-      <Filter>Sources\Core\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\TObject.h">
-      <Filter>Sources\Core\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h">
       <Filter>Sources\XML\cpp</Filter>
     </ClInclude>
@@ -134,14 +134,23 @@
     <ClInclude Include="..\..\Source\TGON\Core\Error\ErrorCode.h">
       <Filter>Sources\Error\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Reflection\TType.h">
-      <Filter>Sources\Reflection</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TObject.h">
+      <Filter>Sources\Object\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Reflection\IComparable.h">
-      <Filter>Sources\Reflection</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TType.h">
+      <Filter>Sources\Object\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Reflection\TObject.h">
-      <Filter>Sources\Reflection</Filter>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\IComparable.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventListener.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventSubject.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Core\Window\TEventWindow.h">
+      <Filter>Sources\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

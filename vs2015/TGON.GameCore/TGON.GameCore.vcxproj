@@ -21,17 +21,19 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h" />
+    <ClInclude Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\World\TWorld.h" />
+    <ClInclude Include="..\..\Source\TGON\GameCore\World\TGameWorld.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\GameCore\Component\IComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp" />
+    <ClCompile Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameCamera.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameObject.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\World\TWorld.cpp" />
+    <ClCompile Include="..\..\Source\TGON\GameCore\World\TGameWorld.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,12 +130,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

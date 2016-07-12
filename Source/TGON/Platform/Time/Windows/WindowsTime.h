@@ -8,57 +8,56 @@
 
 
 #pragma once
-#include "../TTimeType.h"
-#include "../../../Platform/Config/Build.h"
+#include "../Abstract/AbstractTime.h"
+#include "../../Config/Build.h"
 
-#define WIN32_LEAN_AND_MEAN
-	#include <Windows.h>
-#undef WIN32_LEAN_AND_MEAN
+#ifndef WIN32_LEAN_AND_MEAN
+#	define WIN32_LEAN_AND_MEAN
+#	include <Windows.h>
+#	undef WIN32_LEAN_AND_MEAN
+#endif
 
 
 namespace tgon
 {
 
 
-class WindowsTime;
-using TimeImpl = WindowsTime;
+using TimeImpl = class WindowsTime;
 
-class TGON_API WindowsTime
+class TGON_API WindowsTime :
+	public AbstractTime
 {
 public:
+	/*
+		Commands
+	*/
 	// Getting OS's execution time as millisecond
 	static uint32_t GetBootTime( );
+	
 	static uint64_t GetBootTime64( );
-
-	// Get current application's execution time as millisecond
-	static uint64_t GetAppExecutionTime( );
 
 	// Getting current system time
 	static TSystemTime GetLocalTime( );
-
+	
 
 private:
+	/*
+		Cons/Destructor
+	*/
 	WindowsTime( ) = delete;
-	~WindowsTime( ) = delete;
 
-private:
-	static const uint32_t ms_oldTime;
+	virtual ~WindowsTime( ) = delete;
 };
 
 
-BOOST_FORCEINLINE uint32_t WindowsTime::GetBootTime( )
+inline uint32_t WindowsTime::GetBootTime( )
 {
 	return GetTickCount( );
 }
 
-BOOST_FORCEINLINE uint64_t WindowsTime::GetBootTime64( )
+inline uint64_t WindowsTime::GetBootTime64( )
 {
 	return GetTickCount64( );
-}
-
-BOOST_FORCEINLINE uint64_t WindowsTime::GetAppExecutionTime( )
-{
-	return GetTickCount( ) - ms_oldTime;
 }
 
 

@@ -21,22 +21,31 @@ class TGraphics :
 	public GraphicsImpl
 {
 protected:
+	/*
+		Cons/Destructor
+	*/
 	explicit TGraphics( const TWindow& owner );
 
 public:
+	virtual ~TGraphics( ) = default;
+
+
+public:
+	/*
+		Commands
+	*/
 	// TGraphics only support the creation as specified type.
 	static SpTGraphics Make( const TWindow& owner );
 
-	virtual ~TGraphics( ) = default;
 };
 
 
+inline SpTGraphics TGraphics::Make( 
+	const TWindow& owner )
+{
+	SpTGraphics graphics( new TGraphics( owner ));
+	return graphics;
 }
 
 
-inline tgon::SpTGraphics tgon::TGraphics::Make( 
-	const TWindow& owner )
-{
-	SpTGraphics ret( new TGraphics( owner ));
-	return ret;
 }

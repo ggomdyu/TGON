@@ -7,14 +7,14 @@
 
 #pragma once
 #include "../../Platform/Config/Build.h"
-#include "../../Core/Reflection/TObject.h"
+#include "../../Core/Object/TObject.h"
 
 
 namespace tgon
 {
 
 
-class TGON_API TWorld :
+class TGON_API TGameWorld :
 	public TObject
 {
 public:

@@ -6,9 +6,7 @@
 */
 
 #pragma once
-#include "../../Platform/Config/Build.h"
-
-#include "../../Core/Reflection/TObject.h"
+#include "../../Core/Object/TObject.h"
 #include "../../Core/Math/TVector3.h"
 #include "../../Core/Math/TMatrix4x4.h"
 

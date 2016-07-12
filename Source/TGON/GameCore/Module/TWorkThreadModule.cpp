@@ -1,20 +1,20 @@
 #include "PrecompiledHeader.h"
-#include "TWorkThread.h"
+#include "TWorkThreadModule.h"
 
 
-tgon::TWorkThread::TWorkThread( std::size_t numThread ) :
+tgon::TWorkThreadModule::TWorkThreadModule( std::size_t numThread ) :
 	m_isDestroying( false ),
 	m_currWorkCount( 0 )
 {
-	for ( std::size_t i =0; i < numThread; ++i )
+	for ( std::size_t i = 0; i < numThread; ++i )
 	{
 		m_threadQueue.push_back(
-			std::thread( &TWorkThread::InfiniteLoop, this )
+			std::thread( &TWorkThreadModule::InfiniteLoop, this )
 		);
 	}
 }
 
-tgon::TWorkThread::~TWorkThread( )
+tgon::TWorkThreadModule::~TWorkThreadModule( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 
@@ -25,7 +25,7 @@ tgon::TWorkThread::~TWorkThread( )
 	this->JoinAll( );
 }
 
-void tgon::TWorkThread::JoinAll( )
+void tgon::TWorkThreadModule::JoinAll( )
 {
 	for ( auto& elem : m_threadQueue )
 	{
@@ -33,7 +33,7 @@ void tgon::TWorkThread::JoinAll( )
 	}
 }
 
-void tgon::TWorkThread::Wait( )
+void tgon::TWorkThreadModule::Wait( )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 	m_finishCv.wait( lock,
@@ -46,13 +46,13 @@ void tgon::TWorkThread::Wait( )
 	);
 }
 
-void tgon::TWorkThread::InfiniteLoop( )
+void tgon::TWorkThreadModule::InfiniteLoop( )
 {
 	while ( true )
 	{
 		std::unique_lock<std::mutex> lock( m_mutex );
 		m_waitCv.wait( lock,
-			// m_waitCv will wake up one thread when these conditions return true.
+			// m_waitCv will wake up one thread when function below return true.
 			[this]( )
 			{ 
 				return ( m_isDestroying || 

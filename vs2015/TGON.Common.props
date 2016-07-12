@@ -13,6 +13,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\..\Source\TGON;$(SolutionDir)\..\Source\TGON\Platform;$(SolutionDir)\..\Source\TGON\Core;$(SolutionDir)\..\Source\TGON\LowLevelRenderer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TGON_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

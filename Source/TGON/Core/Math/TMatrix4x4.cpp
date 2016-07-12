@@ -17,14 +17,6 @@ const tgon::TMatrix4x4 tgon::TMatrix4x4::Zero(
 	0.f, 0.f, 0.f, 0.f,
 	0.f, 0.f, 0.f, 0.f );
 
-tgon::TMatrix4x4::TMatrix4x4( ) :
-	_00( 1.f ), _01( 0.f ), _02( 0.f ), _03( 0.f ),
-	_10( 0.f ), _11( 1.f ), _12( 0.f ), _13( 0.f ),
-	_20( 0.f ), _21( 0.f ), _22( 1.f ), _23( 0.f ),
-	_30( 0.f ), _31( 0.f ), _32( 0.f ), _33( 1.f )
-{
-}
-
 tgon::TMatrix4x4::TMatrix4x4(
 	float _00, float _01, float _02, float _03,
 	float _10, float _11, float _12, float _13,
@@ -44,17 +36,6 @@ tgon::TMatrix4x4::TMatrix4x4( const TMatrix3x3& rhs ) :
 	_20( rhs._20 ), _21( rhs._21 ), _22( rhs._22 ), _23( 0.f ),
 	_30( 0.f ),		_31( 0.f ),		_32( 0.f ),		_33( 1.f )
 {
-}
-
-tgon::TMatrix4x4 tgon::TMatrix4x4::operator+(
-	const TMatrix4x4& rhs ) const
-{
-	return TMatrix4x4(
-		_00+rhs._00, _01+rhs._01, _02+rhs._02, _03+rhs._03,
-		_10+rhs._10, _11+rhs._11, _12+rhs._12, _13+rhs._13,
-		_20+rhs._20, _21+rhs._21, _22+rhs._22, _23+rhs._23,
-		_30+rhs._30, _31+rhs._31, _32+rhs._32, _33+rhs._33
-	);
 }
 
 tgon::TMatrix4x4 tgon::TMatrix4x4::operator-(

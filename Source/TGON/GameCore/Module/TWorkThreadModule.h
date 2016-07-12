@@ -12,7 +12,7 @@ namespace tgon
 {
 
 
-class TWorkThread final
+class TWorkThreadModule final
 {
 	// It's not thread-safe, so we using mutex on here
 	using WorkQueue = std::deque<std::function<void()>>;
@@ -20,8 +20,8 @@ class TWorkThread final
 
 public:
 	// Allocate thread ( default: Make as much as core count )
-	explicit TWorkThread( std::size_t numThread = std::thread::hardware_concurrency( ));
-	~TWorkThread( );
+	explicit TWorkThreadModule( std::size_t numThread = std::thread::hardware_concurrency( ));
+	~TWorkThreadModule( );
 
 	// Enqueue the work. The idle thread will execute the work.
 	template <class T, class... Args>
@@ -46,7 +46,7 @@ private:
 
 
 template <class T, class... Args>
-void tgon::TWorkThread::Request( T&& f, Args&&... args )
+void tgon::TWorkThreadModule::Request( T&& f, Args&&... args )
 {
 	std::lock_guard<std::mutex> lock( m_mutex );
 

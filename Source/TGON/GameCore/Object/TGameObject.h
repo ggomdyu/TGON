@@ -6,9 +6,8 @@
 */
 
 #pragma once
-#include "../Core/Reflection/TObject.h"
+#include "../Core/Object/TObject.h"
 #include "../Core/Math/TMath.h"
-#include "../Platform/Console/TConsole.h"
 
 #include "../Component/TransformComponent.h"
 
@@ -16,22 +15,24 @@
 namespace tgon
 {
 
+
+class TransformComponent;
+
 class TGON_API TGameObject :
 	public TObject
 {
 public:
-	TGON_OBJECT( TGameObject, TObject )
+	TGON_OBJECT( TGameObject, std::nullptr_t )
 
+
+public:
 	/*
-		Constructor
+		Cons/Destructor
 	*/
 	TGameObject( );
 
 	TGameObject( const TGameObject& ) = delete;
 	
-	/*
-		Destructor
-	*/
 	virtual ~TGameObject( );
 
 	/*
@@ -44,53 +45,51 @@ public:
 	/*
 		Sets
 	*/
-	template <typename _Ty> void AddComponent( _Ty* );
+	template <typename _ComponentTy> void AddComponent( _ComponentTy* );
 	
 	/*
 		Gets
 	*/
-	template <typename _Ty> _Ty* GetComponent( );
+	template <typename _ComponentTy> _ComponentTy* GetComponent( );
 
 private:
-	std::unique_ptr<class TransformComponent> m_transformComponent;
+	TransformComponent* m_transformComponent;
 
-	std::map<uint32_t, class IComponent*> m_components;
+	std::map<uint32_t, IComponent*> m_components;
 };
 
 
 template<>
 inline void TGameObject::AddComponent( TransformComponent* newComponent ) = delete;
 
-template<typename T>
-inline void TGameObject::AddComponent( T* component )
+template<typename _ComponentTy>
+inline void TGameObject::AddComponent( _ComponentTy* component )
 {
-
 	//const auto identifier = newComponent->GetComponentID( );
 
 	//m_components.insert( std::make_pair( identifier, newComponent ));
 	//newComponent->SetOwner( this );
 }
 
-//template<typename T>
-//T* TObject::GetComponent( )
+//template<typename _Ty>
+//inline void TGameObject::AddComponent( _Ty * )
 //{
-//	auto iter = m_components.find( IComponent::GetIdentifier<T>( ));
-//
+//	/*auto iter = m_components.find( IComponent::GetIdentifier<T>( ));
 //	if ( iter != m_components.end( )) {
 //		return static_cast<T*>( iter->second );
 //	}
 //	else {
 //		TConsole::WriteLine( L"Unable to find component. ( ", typeid( T ).name( ), L" )" );
 //	}
-//
+//*/
 //	return nullptr;
 //}
 
-//template <> 
-//std::unique_ptr<TransformComponent>& TGameObject::GetComponent( )//->decltype( m_transformComponent.get( ))
-//{
-//	return m_transformComponent.get();
-//}
+template<>
+inline TransformComponent* TGameObject::GetComponent( )
+{	
+	return m_transformComponent;
+}
 
 
 }

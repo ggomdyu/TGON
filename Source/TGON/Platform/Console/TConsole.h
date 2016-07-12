@@ -25,6 +25,7 @@ public:
 	virtual ~TConsole( ) = delete;
 	
 
+public:
 	/*
 		Commands
 	*/

@@ -3,7 +3,6 @@
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : API Sets for Windows
 */
 
 
@@ -62,7 +61,8 @@ public:
 
 	static HINSTANCE GetInstanceHandle( );
 };
-//
+
+
 //inline void WindowsApplication::GetScreenSize( int32_t* width, int32_t* height )
 //{
 //	*width = GetSystemMetrics( SM_CXSCREEN );

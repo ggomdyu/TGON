@@ -4,7 +4,6 @@
 #include "../Platform/Slate/PlatformApplication.h"
 #include "../Platform/Slate/PlatformProperty.h"
 #include "../../Window/WindowStyle.h"
-#include "../../Window/WindowEvent.h"
 #include "../../Window/Windows/WindowsWindowUtil.h"
 #include "../../Window/TWindow.h"
 #include "../../../Core/String/TString.h"

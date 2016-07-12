@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "WindowsApplication.h"
 
-#include "../../Window/WindowEvent.h"
 #include "../../Slate/PlatformWindow.h"
 
 

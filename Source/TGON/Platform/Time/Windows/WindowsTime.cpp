@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "WindowsTime.h"
 
-const uint32_t tgon::WindowsTime::ms_oldTime = GetTickCount( );
 
 tgon::TSystemTime tgon::WindowsTime::GetLocalTime( )
 {
