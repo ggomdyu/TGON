@@ -8,35 +8,6 @@
     <Filter Include="Sources\Graphics">
       <UniqueIdentifier>{ffa32df3-4297-4318-b18d-4976b46fc5ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Graphics\Direct3D9">
-      <UniqueIdentifier>{dac266e5-c911-4ab5-a50c-422d05b4b197}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\Abstract">
-      <UniqueIdentifier>{e9780fb0-9703-4444-86ec-6e4554094972}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\General">
-      <UniqueIdentifier>{c04b7227-8a23-457e-987a-56641194edc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\Abstract\cpp">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Sources\Graphics\Abstract\hpp">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Sources\Graphics\Direct3D9\hpp">
-      <UniqueIdentifier>{0a40a9d4-18c0-4f8b-b64a-23c9df1c4f7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\General\cpp">
-      <UniqueIdentifier>{b78a2ca5-a461-4934-8879-a3ce3188097f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\General\hpp">
-      <UniqueIdentifier>{a97f9b78-e88b-4181-8482-70f01f0eaba7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Graphics\Direct3D9\cpp">
-      <UniqueIdentifier>{f76692ce-d1b1-4f6a-8243-1690a81f030f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\PrecompiledHeader">
       <UniqueIdentifier>{7cea8bc9-7512-4bad-a07e-ff5cd35405f0}</UniqueIdentifier>
     </Filter>
@@ -67,32 +38,23 @@
     <Filter Include="Sources\Camera\hpp">
       <UniqueIdentifier>{87102607-8982-4526-a061-e2fd1139943d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Graphics\cpp">
+      <UniqueIdentifier>{497ec891-481a-4a31-8b6f-349eb3872b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\hpp">
+      <UniqueIdentifier>{8fa5fae8-3baa-4c23-b7e7-041769357ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\hpp\Abstract">
+      <UniqueIdentifier>{e9780fb0-9703-4444-86ec-6e4554094972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\hpp\Direct3D9">
+      <UniqueIdentifier>{dac266e5-c911-4ab5-a50c-422d05b4b197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\cpp\Direct3D9">
+      <UniqueIdentifier>{2d2a5921-371d-4ac8-8617-5fc1f451e304}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
-      <Filter>Sources\Graphics\General\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h">
-      <Filter>Sources\Graphics\General\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphicsType.h">
-      <Filter>Sources\Graphics\General\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h">
-      <Filter>Sources\Graphics\Abstract\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h">
-      <Filter>Sources\Graphics\Abstract\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.h">
-      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Fwd.h">
-      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.h">
-      <Filter>Sources\Graphics\Direct3D9\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
     </ClInclude>
@@ -105,22 +67,46 @@
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.h">
       <Filter>Sources\Camera\hpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h">
+      <Filter>Sources\Graphics\hpp\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h">
+      <Filter>Sources\Graphics\hpp\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphicsType.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Fwd.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp">
-      <Filter>Sources\Graphics\Direct3D9\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp">
-      <Filter>Sources\Graphics\Direct3D9\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
-      <Filter>Sources\Graphics\General\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.cpp">
       <Filter>Sources\Camera\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
+      <Filter>Sources\Graphics\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ decltype( tgon::TEventSubject::ms_globalMap ) tgon::TEventSubject::ms_globalMap;
 
 tgon::TEventSubject::~TEventSubject( )
 {
-
+	this->UnsubscribeAllEvents( );
 }
 
 void tgon::TEventSubject::UnsubscribeEvent( TEvent eventType )
@@ -18,7 +18,7 @@ void tgon::TEventSubject::UnsubscribeEvent( TEvent eventType )
 	if ( eventMapIter != ms_globalMap.end( ))
 	{
 		// Then, delete all of event handlers
-		for ( auto& eventHandler : eventMapIter->second )
+		for ( auto eventHandler : eventMapIter->second )
 		{
 			delete eventHandler.second;
 			eventHandler.second = nullptr;
@@ -30,6 +30,20 @@ void tgon::TEventSubject::UnsubscribeEvent( TEvent eventType )
 
 void tgon::TEventSubject::UnsubscribeAllEvents( )
 {
+	// Unsubscribe global event
+	for ( auto eventMapIter : ms_globalMap )
+	{
+		auto eveneHandlerIter = eventMapIter.second.find( this );
+
+		// Does exist event handlers?
+		if ( eveneHandlerIter != eventMapIter.second.end( ))
+		{
+			delete eveneHandlerIter->second;
+			eveneHandlerIter->second = nullptr;
+		}
+
+		eventMapIter.second.erase( this );
+	}
 }
 
 void tgon::TEventSubject::NotifyEvent( TEvent eventType )

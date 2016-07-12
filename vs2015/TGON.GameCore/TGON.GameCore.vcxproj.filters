@@ -4,9 +4,6 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{93f13029-2300-4f1a-b334-24109ff964a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\GameObject">
-      <UniqueIdentifier>{58de4b37-2a7e-4925-bd0f-54ebea44347d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Camera">
       <UniqueIdentifier>{fe0db997-e3d3-49a5-a053-c0d7be149510}</UniqueIdentifier>
     </Filter>
@@ -25,9 +22,6 @@
     <Filter Include="Sources\Component\cpp">
       <UniqueIdentifier>{407ea71d-586b-4d07-bc01-10bce5a70a74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Component\NewFilter1">
-      <UniqueIdentifier>{63af5073-82bd-445a-bf87-71eb19651a5d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Component\hpp">
       <UniqueIdentifier>{b63229cb-fdf4-4012-ac50-ad90ccf96e98}</UniqueIdentifier>
     </Filter>
@@ -43,22 +37,22 @@
     <Filter Include="Sources\Module\WorkThread">
       <UniqueIdentifier>{5c65b778-71b2-493c-910a-57bcf73a29e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Application">
+      <UniqueIdentifier>{d5d09f39-96de-4ea2-89ae-38f5438e5602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object">
+      <UniqueIdentifier>{58de4b37-2a7e-4925-bd0f-54ebea44347d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\hpp">
+      <UniqueIdentifier>{6862b4eb-faf7-4922-bd3c-fc5dfcd26aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Object\cpp">
+      <UniqueIdentifier>{d8dc6b88-dd16-466f-b21e-e06a2ad03271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h">
-      <Filter>Sources\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h">
-      <Filter>Sources\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h">
-      <Filter>Sources\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h">
-      <Filter>Sources\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\GameCore\World\TGameWorld.h">
       <Filter>Sources\GameWorld</Filter>
@@ -66,28 +60,43 @@
     <ClInclude Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.h">
       <Filter>Sources\Module\WorkThread</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Object\IComparable.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h">
+      <Filter>Sources\Object\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h">
+      <Filter>Sources\Component\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h">
+      <Filter>Sources\Component\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameCamera.cpp">
-      <Filter>Sources\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\GameCore\Component\IComponent.cpp">
-      <Filter>Sources\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameObject.cpp">
-      <Filter>Sources\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp">
-      <Filter>Sources\Component</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\GameCore\World\TGameWorld.cpp">
       <Filter>Sources\GameWorld</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.cpp">
       <Filter>Sources\Module\WorkThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameCamera.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameObject.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\GameCore\Component\IComponent.cpp">
+      <Filter>Sources\Component\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp">
+      <Filter>Sources\Component\cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

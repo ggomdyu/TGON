@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.h" />
+    <ClInclude Include="..\..\Source\TGON\GameCore\Object\IComparable.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\World\TGameWorld.h" />

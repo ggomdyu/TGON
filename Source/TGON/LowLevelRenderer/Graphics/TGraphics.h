@@ -16,8 +16,7 @@ namespace tgon
 
 using SpTGraphics = std::shared_ptr<class TGraphics>;
 
-
-class TGraphics :
+class  TGON_API TGraphics :
 	public GraphicsImpl
 {
 protected:
@@ -25,6 +24,8 @@ protected:
 		Cons/Destructor
 	*/
 	explicit TGraphics( const TWindow& owner );
+
+	explicit TGraphics( const SpTWindow& owner );
 
 public:
 	virtual ~TGraphics( ) = default;

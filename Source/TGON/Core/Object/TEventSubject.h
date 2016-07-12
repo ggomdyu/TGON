@@ -24,7 +24,7 @@ enum TEvent
 class TGON_API TEventSubject :
 	public TObject
 {
-	template <typename _ReceiverTy, typename... _Args>
+	template <typename _ReceiverTy>
 	using _HandlerFunctionTy = void( _ReceiverTy::* )( );
 
 	using _ListenerMapTy = std::unordered_map<TEventSubject*, TEventListener*>;
@@ -58,10 +58,12 @@ public:
 	// Unsubscribe all of events that this object subscribed
 	void UnsubscribeAllEvents( );
 
+protected:
 	void NotifyEvent( TEvent eventType );
 
 
 private:
+	// It Includes global event subscription info ( e.g. Input, BeginUpdate, ... )
 	static _EventMapTy ms_globalMap;
 };
 
