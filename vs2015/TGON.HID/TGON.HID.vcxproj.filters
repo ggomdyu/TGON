@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{c53f5b44-d6f5-42fa-8a0a-fed98b4b34ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\cpp">
+      <UniqueIdentifier>{5301e8f7-68df-4e19-9087-dc26a522a752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\hpp">
+      <UniqueIdentifier>{cc9bb595-ca30-4d54-bb30-b495949d7294}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader\hpp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

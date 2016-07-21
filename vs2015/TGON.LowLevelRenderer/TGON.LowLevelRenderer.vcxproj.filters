@@ -91,6 +91,9 @@
     <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Utility.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -107,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Utility.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

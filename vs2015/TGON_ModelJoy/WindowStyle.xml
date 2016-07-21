@@ -18,7 +18,6 @@
   
     <Function
         FullScreen="0"
-        EventHandleable="1"
         Resizeable="0"
         Popup="0"
         Maximized="0"

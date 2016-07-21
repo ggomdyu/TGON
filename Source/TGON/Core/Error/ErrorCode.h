@@ -22,10 +22,7 @@ struct ErrorStrings
 template<typename _ErrorCodeTy>
 inline const wchar_t* GetErrorString( _ErrorCodeTy errEnum )
 {
-	const auto errStringNum = 
-		typename std::underlying_type<D3D9ErrorCode>::type( errEnum );
-
-	return ErrorStrings<_ErrorCodeTy>::m_errStrings[errStringNum];
+	return ErrorStrings<_ErrorCodeTy>::m_errStrings[static_cast<int>( errEnum )];
 }
 
 

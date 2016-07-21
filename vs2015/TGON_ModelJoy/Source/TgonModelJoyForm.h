@@ -7,6 +7,7 @@
 #include <Object/TObject.h>
 #include <Object/TEventSubject.h>
 
+
 namespace tgon
 {
 
@@ -18,8 +19,9 @@ class TgonModelJoyForm :
 public:
 	TgonModelJoyForm( ) :
 		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" )),
-		m_graphics( TGraphics::Make( *this ))
+		m_graphics( TGraphics::Make( this ))
 	{
+		m_graphics->SetClearColor( 0x0000ff );
 	}
 
 	~TgonModelJoyForm( )
@@ -28,11 +30,20 @@ public:
 
 	virtual void OnIdle( ) override
 	{
+		m_graphics->Clear( );
+		m_graphics->BeginScene( );
+
+
+
+		m_graphics->EndScene( );
+		m_graphics->Present( );
 	}
 
-	virtual void OnLMouseDown( int32_t x, int32_t y )
+	void OnMM(  )
 	{
+
 	}
+
 
 private:
 	SpTGraphics m_graphics;

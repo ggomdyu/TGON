@@ -2,8 +2,9 @@
 #include "TMath.h"
 
 
-float tgon::TMath::PI = 3.141592654f;
-float tgon::TMath::EPSILON = 0.0001f;
+decltype( tgon::TMath::PI ) tgon::TMath::PI = 3.141592654f;
+decltype( tgon::TMath::EPSILON ) tgon::TMath::EPSILON = 0.0001f;
+
 
 uint32_t tgon::TMath::x65599Hash( const char* str, std::size_t length )
 {

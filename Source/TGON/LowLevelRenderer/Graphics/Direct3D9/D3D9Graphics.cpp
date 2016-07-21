@@ -3,27 +3,21 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
+
+#include "D3d9Utility.h"
 #include "D3D9Error.h"
-
-#pragma comment( lib, "d3d9.lib" )
-
-#if defined( _DEBUG ) || \
-	defined( DEBUG )
-#	pragma comment( lib, "d3dx9d.lib" )
-#else
-#	pragma comment( lib, "d3dx9.lib" )
-#endif
+#include "../../../Platform/Window/TWindow.h"
 
 
-
-tgon::D3D9Graphics::D3D9Graphics( const TWindow& owner ) :
-	m_deviceCaps( new D3DCAPS9 ),
-	m_ownerWindow( owner ),
-	m_clearColor( 0x0000ff )
+tgon::D3D9Graphics::D3D9Graphics( TWindow* deviceWindow ) :
+	AbstractGraphics( deviceWindow ),
+	m_deviceCaps( new D3DCAPS9 )
 {
+	// Connect to hardware.
 	this->InitD3DInterface( );
-	this->InitD3DDevice( );
 
+	// And make instruction device to communicate with hardware.
+	this->InitD3DDevice( );
 }
 
 bool tgon::D3D9Graphics::Clear( )
@@ -31,9 +25,8 @@ bool tgon::D3D9Graphics::Clear( )
 	HRESULT result = m_d3dDevice->Clear(
 		0,
 		nullptr,
-		D3DCLEAR_TARGET |
-		D3DCLEAR_ZBUFFER,
-		m_clearColor,
+		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+		this->GetClearColor( ),
 		1.f,
 		0 
 	);
@@ -94,6 +87,15 @@ bool tgon::D3D9Graphics::Present( )
 	}
 }
 
+void tgon::D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
+{
+	m_d3dDevice->DrawPrimitive( 
+		ConvertPrimitiveToD3D9( primitiveType ), 
+		startVertex, 
+		primitiveCount 
+	);
+}
+
 void tgon::D3D9Graphics::InitD3DInterface( )
 {
 	// Initialize direct3D interface.
@@ -111,9 +113,12 @@ void tgon::D3D9Graphics::InitD3DDevice( )
 		D3DCREATE_HARDWARE_VERTEXPROCESSING :
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING;
 
-
+	
 	D3DPRESENT_PARAMETERS pp {0};
 	pp.Windowed = TRUE;
+	pp.BackBufferWidth = this->GetBackBufferWidth( );
+	pp.BackBufferHeight = this->GetBackBufferHeight( );
+	pp.hDeviceWindow = this->GetDeviceWindow( )->GetWindowHandle( );
 	pp.SwapEffect = D3DSWAPEFFECT::D3DSWAPEFFECT_DISCARD;
 	pp.BackBufferCount = 1;
 	pp.BackBufferFormat = D3DFORMAT::D3DFMT_UNKNOWN; // D3DFMT_A8R8G8B8
@@ -129,7 +134,7 @@ void tgon::D3D9Graphics::InitD3DDevice( )
 	V( m_d3d->CreateDeviceEx( 
 		D3DADAPTER_DEFAULT, 
 		D3DDEVTYPE::D3DDEVTYPE_HAL,
-		m_ownerWindow.GetWindowHandle( ), 
+		this->GetDeviceWindow( )->GetWindowHandle( ), 
 		behaviorFlag,
 		&pp, 
 		nullptr, 

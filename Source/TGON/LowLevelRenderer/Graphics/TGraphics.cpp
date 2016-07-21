@@ -1,14 +1,10 @@
-#include "TGraphics.h"
 #include "PrecompiledHeader.h"
 #include "TGraphics.h"
 
+#include "../../Platform/Window/TWindow.h"
 
-tgon::TGraphics::TGraphics( const TWindow& owner ) :
+
+tgon::TGraphics::TGraphics( TWindow* owner ) :
 	GraphicsImpl( owner )
-{
-}
-
-tgon::TGraphics::TGraphics( const SpTWindow& owner ) :
-	GraphicsImpl( *owner.get( ))
 {
 }

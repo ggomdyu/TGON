@@ -19,12 +19,30 @@ namespace tgon
 class TGON_API TMath
 {
 public:
-	static float PI;
-	static float EPSILON;
+	/*
+		Cons/Destructor
+	*/
+
+	TMath( ) = delete;
+
+	virtual ~TMath( ) = delete;
+
 
 	/*
-		General
+		Public members
 	*/
+	
+	static const float PI;
+
+	static const float EPSILON;
+
+
+	/*
+		Commands
+	*/
+
+	// General
+
 	static float Round( float val );
 
 	static int32_t RoundToInt( float val );
@@ -48,15 +66,13 @@ public:
 	static float Clamp( float val, float min, float max );
 
 
-	/*
-		Hashing
-	*/
+	// Hashing
+
 	static uint32_t GenerateHash( const char* str );
 
 
-	/*
-		Interpolation
-	*/
+	// Interpolation
+
 	static float Lerp( float from, float to, float t );
 
 	static float Smoothstep( float from, float to, float t );

@@ -9,8 +9,6 @@
 #pragma once
 #include "../../../Platform/Config/Build.h"
 
-#include <boost/noncopyable.hpp>
-#include <cstdint>
 #include "../WindowStyle.h"
 
 
@@ -25,7 +23,7 @@ protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit AbstractWindow( const WindowStyle& wndStyle );
+	AbstractWindow( );
 
 	virtual ~AbstractWindow( ) = 0;
 
@@ -73,37 +71,9 @@ public:
 	/*
 		Event handlers
 	*/
-	virtual void OnClose( ) {}
-
 	virtual void OnIdle( ) {}
 
-	virtual void OnMove( int x, int y ) {}
-
-	virtual void OnSize( int width, int height ) {}
-
-	virtual void OnMouseMove( int x, int y ) {}
-
-	virtual void OnLMouseDown( int x, int y ) {}
-
-	virtual void OnLMouseUp( int x, int y ) {}
-
-	virtual void OnRMouseDown( int x, int y ) {}
-
-	virtual void OnRMouseUp( int x, int y ) {}
-
-
-protected:
-	const WindowStyle& GetWindowStyle( ) const;
-
-
-private:
-	WindowStyle m_wndStyle;
 };
-
-inline const WindowStyle& tgon::AbstractWindow::GetWindowStyle( ) const
-{
-	return m_wndStyle;
-}
 
 
 }

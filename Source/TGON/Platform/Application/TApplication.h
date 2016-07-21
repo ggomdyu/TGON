@@ -17,7 +17,8 @@ using TApplication = ApplicationImpl;
 
 }
 
-#define TGON_GENERATE_APP( className )\
+
+#define TGON_REGISTER_MAINAPP( className )\
 int32_t RunApplication( )\
 {\
 	return className::Main( );\

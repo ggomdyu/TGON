@@ -75,6 +75,9 @@
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h">
       <Filter>Sources\Component\hpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.h">
+      <Filter>Sources\Module\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp">
       <Filter>Sources\Component\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.cpp">
+      <Filter>Sources\Module\Interface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

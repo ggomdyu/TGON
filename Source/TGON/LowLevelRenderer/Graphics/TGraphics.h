@@ -16,16 +16,14 @@ namespace tgon
 
 using SpTGraphics = std::shared_ptr<class TGraphics>;
 
-class  TGON_API TGraphics :
+class TGON_API TGraphics :
 	public GraphicsImpl
 {
 protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit TGraphics( const TWindow& owner );
-
-	explicit TGraphics( const SpTWindow& owner );
+	explicit TGraphics( class TWindow* deviceWindow );
 
 public:
 	virtual ~TGraphics( ) = default;
@@ -36,15 +34,14 @@ public:
 		Commands
 	*/
 	// TGraphics only support the creation as specified type.
-	static SpTGraphics Make( const TWindow& owner );
+	static SpTGraphics Make( class TWindow* deviceWindow );
 
 };
 
-
 inline SpTGraphics TGraphics::Make( 
-	const TWindow& owner )
+	class TWindow* deviceWindow )
 {
-	SpTGraphics graphics( new TGraphics( owner ));
+	SpTGraphics graphics( new TGraphics( deviceWindow ));
 	return graphics;
 }
 

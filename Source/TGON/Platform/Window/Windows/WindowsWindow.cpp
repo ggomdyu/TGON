@@ -17,14 +17,13 @@
 
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	AbstractWindow( wndStyle ),
 	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
-	this->CreateWindowForm( this->GetWindowStyle( ), wndStyle.EventHandleable );
+	this->CreateWindowForm( wndStyle );
 
 	// Initialization After window created ( Which needs a created window )
-	this->AdditionalInit( this->GetWindowStyle( ));
+	this->AdditionalInit( wndStyle );
 }
 
 tgon::WindowsWindow::~WindowsWindow( )
@@ -90,7 +89,7 @@ void tgon::WindowsWindow::GetCaption( wchar_t* caption ) const
 	GetWindowTextW( m_wndHandle, caption, length );
 }
 
-void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle, bool isEventHandleable )
+void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 {
 	// Set coordinates of window
 	int32_t x = wndStyle.x;
@@ -114,14 +113,15 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle, bool is
 
 	// Register Window class to Global table.
 	std::wstring newClassName;
-	bool isSucceed = this->RegisterMyClass( wndStyle, &newClassName, isEventHandleable );
+	bool isSucceed = this->RegisterMyClass( wndStyle, &newClassName );
 	if ( !isSucceed )
 	{
 		MessageBoxW(
 			this->GetWindowHandle( ),
 			L"Failed to invoke tgon::WindowsWindow::RegisterMyClass.",
 			L"WARNING!",
-			MB_OK | MB_ICONEXCLAMATION );
+			MB_OK | MB_ICONEXCLAMATION 
+		);
 
 		abort( );
 	}
@@ -193,7 +193,7 @@ void tgon::WindowsWindow::AdditionalInit(
 #endif
 }
 
-bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wstring* outClassName, bool isEventHandleable )
+bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wstring* outClassName )
 {
 	const HINSTANCE instanceHandle( WindowsApplication::GetInstanceHandle( ));
 
@@ -212,68 +212,14 @@ bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wst
 	wcex.hCursor = LoadCursorW( NULL, IDC_ARROW );
 	wcex.hIcon = LoadIconW( NULL, IDI_APPLICATION );
 	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = ( isEventHandleable ) ?
-		EvHandleMsgProc : 
-		UnevHandleMsgProc; // Default message procedure; More fast than EvHandleMsgProc
+	wcex.lpfnWndProc = MessageProc; // Default message procedure; More fast than EvHandleMsgProc
 	wcex.lpszClassName = defClassName.c_str( );
 	wcex.style = CS_DBLCLKS;
 
 	return RegisterClassExW( &wcex ) != 0;
 }
 
-LRESULT WINAPI tgon::WindowsWindow::EvHandleMsgProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
-{
-	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
-		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
-
-	if ( extraMemAsWindow )
-	{
-		switch ( msg )
-		{
-		case WM_LBUTTONUP:
-			extraMemAsWindow->OnLMouseUp( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_LBUTTONDOWN:
-			extraMemAsWindow->OnLMouseDown( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_RBUTTONUP:
-			extraMemAsWindow->OnRMouseUp( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_RBUTTONDOWN:
-			extraMemAsWindow->OnRMouseDown( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_MOUSEMOVE:
-			extraMemAsWindow->OnMouseMove( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_SIZE:
-			extraMemAsWindow->OnSize( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_MOVE:
-			extraMemAsWindow->OnMove( LOWORD( lParam ), HIWORD( lParam ));
-			break;
-		case WM_DESTROY:
-			PostQuitMessage( 0 );
-			extraMemAsWindow->m_isDestroyed = true;
-			//extraMemAsWindow->->OnDestroy( );
-			break;
-		}
-	}
-	// Call the OnCreate event handler
-	/*else if ( msg == WM_CREATE )
-	{
-		extraMemAsWindow = reinterpret_cast<WindowsWindow*>( LPCREATESTRUCT( 
-			lParam )->lpCreateParams );
-		extraMemAsWindow->OnCreate( );
-	}*/
-
-	return DefWindowProcW( wndHandle, msg, wParam, lParam );
-}
-
-LRESULT WINAPI tgon::WindowsWindow::UnevHandleMsgProc(
-	HWND wndHandle,
-	UINT msg,
-	WPARAM wParam,
-	LPARAM lParam )
+LRESULT WINAPI tgon::WindowsWindow::MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
 	if ( msg == WM_DESTROY )
 	{
@@ -289,11 +235,4 @@ LRESULT WINAPI tgon::WindowsWindow::UnevHandleMsgProc(
 	{
 		return DefWindowProc( wndHandle, msg, wParam, lParam );
 	}
-}
-
-void tgon::WindowsWindow::GetWindowFormAccordingly( 
-	const WindowStyle& wndStyle, 
-	int32_t* x,
-	int32_t* y )
-{
 }

@@ -10,6 +10,7 @@ namespace tgon {
 namespace 
 {
 
+
 void AssembleErrorString( 
 	_Out_ wchar_t* outErrorString,
 	LPCWSTR functionName,

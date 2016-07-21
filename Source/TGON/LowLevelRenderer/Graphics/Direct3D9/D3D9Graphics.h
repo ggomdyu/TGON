@@ -20,16 +20,21 @@ namespace tgon
 using GraphicsImpl = class D3D9Graphics;
 
 class TGON_API D3D9Graphics : 
-	private AbstractGraphics
+	public AbstractGraphics
 {
 protected:
-	explicit D3D9Graphics( const TWindow& owner );
+	/*
+		Cons/Destructor
+	*/
+	explicit D3D9Graphics( class TWindow* deviceWindow );
 	
-public:
+	D3D9Graphics( const D3D9Graphics& ) = delete;
+
 	virtual ~D3D9Graphics( ) = default;
 
-	explicit D3D9Graphics( const D3D9Graphics& ) = delete;
-
+	/*
+		Operators
+	*/
 	D3D9Graphics& operator=( const D3D9Graphics& ) = delete;
 
 public:
@@ -48,6 +53,10 @@ public:
 	// Draw the back buffer to visible screen.
 	virtual bool Present( ) override;
 
+	//
+	void DrawPrimitive( TPrimitiveType, uint32_t, uint32_t );
+
+
 	/*
 		Sets
 	*/
@@ -59,12 +68,18 @@ public:
 
 	const SpD3D9DeviceEx& GetD3DDevice( ) const;
 	
+
 private:
+	/*
+		Internal works
+	*/
+
 	// Initialize IDirect3D9Ex and Caps
 	void InitD3DInterface( );
 
 	// Initialize IDirect3DDevice9Ex
 	void InitD3DDevice( );
+
 
 private:
 	shared_comptr<IDirect3D9Ex> m_d3d;
@@ -72,10 +87,6 @@ private:
 	shared_comptr<IDirect3DDevice9Ex> m_d3dDevice;
 
 	std::unique_ptr<D3DCAPS9> m_deviceCaps;
-
-	const TWindow& m_ownerWindow;
-
-	const D3DCOLOR m_clearColor;
 };
 
 

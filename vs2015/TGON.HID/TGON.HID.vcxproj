@@ -18,38 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\IComparable.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\World\TGameWorld.h" />
-    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\GameCore\Component\IComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameCamera.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameObject.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\World\TGameWorld.cpp" />
-    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TGON.LowLevelRenderer\TGON.LowLevelRenderer.vcxproj">
-      <Project>{bee9e817-1cf9-4f28-8c72-a6dacb7f47b6}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F53C56E2-F77E-4A53-8ADC-D00A9903312D}</ProjectGuid>
+    <ProjectGuid>{3D01D61E-7100-413B-BB45-8C1B744DD5F4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TGON.GameCore</RootNamespace>
+    <RootNamespace>TGONHID</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>TGON.GameCore</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -107,12 +80,11 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,13 +105,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,6 +134,12 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

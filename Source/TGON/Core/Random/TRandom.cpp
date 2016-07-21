@@ -31,9 +31,9 @@ namespace
 	uint32_t state_i = 0;
 	uint32_t STATE[R];
 
-	struct WELLRNG_Initializer
+	struct WELLRNGHelper
 	{
-		WELLRNG_Initializer( )
+		WELLRNGHelper( )
 		{
 			state_i = 0;
 			uint32_t init[R];

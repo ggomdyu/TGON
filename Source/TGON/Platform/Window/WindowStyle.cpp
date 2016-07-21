@@ -4,7 +4,8 @@
 #include "../../Core/XML/TXMLReader.h"
 
 
-tgon::WindowStyle tgon::WindowStyle::DefaultStyle;
+decltype( tgon::WindowStyle::DefaultStyle ) tgon::WindowStyle::DefaultStyle;
+
 
 tgon::WindowStyle tgon::WindowStyle::LoadFromXML( const char* xmlPath )
 {
@@ -44,8 +45,6 @@ tgon::WindowStyle tgon::WindowStyle::LoadFromXML( const char* xmlPath )
 		}
 		else if ( !std::strcmp( xmlNodeElem->Value( ), "Function" ))
 		{
-			parsedWndStyle.EventHandleable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
-				BoolAttribute( "EventHandleable" );
 			parsedWndStyle.Resizeable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "Resizeable" );
 			parsedWndStyle.Maximized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->

@@ -4,7 +4,7 @@
 
 tgon::TWorkThreadModule::TWorkThreadModule( std::size_t numThread ) :
 	m_isDestroying( false ),
-	m_currWorkCount( 0 )
+	m_workingCount( 0 )
 {
 	for ( std::size_t i = 0; i < numThread; ++i )
 	{
@@ -40,7 +40,7 @@ void tgon::TWorkThreadModule::Wait( )
 		// Wait until all of works are finished..
 		[this]( )
 		{
-			return ( m_currWorkCount == 0 ) &&
+			return ( m_workingCount == 0 ) &&
 				( m_workQueue.empty( ));
 		}
 	);
@@ -65,7 +65,7 @@ void tgon::TWorkThreadModule::InfiniteLoop( )
 			/*
 				START
 			*/
-			++m_currWorkCount;
+			++m_workingCount;
 
 			// Get the work and pop
 			auto poppedWork = m_workQueue.front( );
@@ -79,7 +79,7 @@ void tgon::TWorkThreadModule::InfiniteLoop( )
 			/*
 				FINISH
 			*/
-			--m_currWorkCount;
+			--m_workingCount;
 			m_finishCv.notify_one( );
 		}
 		else if ( m_isDestroying )

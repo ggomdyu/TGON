@@ -10,11 +10,6 @@
 #pragma once
 #include "../../../Platform/Config/Build.h"
 #include "../TApplicationType.h"
-#include "../../Window/TWindow.h"
-
-#ifdef DispatchMessage
-	#undef DispatchMessage
-#endif
 
 
 namespace tgon

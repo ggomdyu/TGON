@@ -4,4 +4,4 @@
 #include <Application/TApplication.h>
 
 
-TGON_GENERATE_APP( tgon::Program )
+TGON_REGISTER_MAINAPP( tgon::Program )

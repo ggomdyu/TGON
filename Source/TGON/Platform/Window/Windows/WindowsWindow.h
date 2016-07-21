@@ -33,7 +33,6 @@ protected:
 
 	virtual ~WindowsWindow( );
 
-
 public:
 	/*
 		Commands
@@ -78,17 +77,13 @@ public:
 
 
 private:
-	void CreateWindowForm( _In_ const struct WindowStyle&, bool isEventHandleable );
+	void CreateWindowForm( _In_ const struct WindowStyle& );
 
 	void AdditionalInit( _In_ const struct WindowStyle& );
 
-	bool RegisterMyClass( _In_ const struct WindowStyle& wndStyle, _Out_ std::wstring* outClassName, bool isEventHandleable );
+	bool RegisterMyClass( _In_ const struct WindowStyle& wndStyle, _Out_ std::wstring* outClassName );
 	
-	static LRESULT WINAPI UnevHandleMsgProc( HWND, UINT, WPARAM, LPARAM );
-
-	static LRESULT WINAPI EvHandleMsgProc( HWND, UINT, WPARAM, LPARAM );
-
-	void GetWindowFormAccordingly( _In_ const struct WindowStyle&, _Out_ int32_t* x, _Out_ int32_t* y );
+	static LRESULT WINAPI MessageProc( HWND, UINT, WPARAM, LPARAM );
 
 
 private:
