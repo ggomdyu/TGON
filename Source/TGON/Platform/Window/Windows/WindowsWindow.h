@@ -15,6 +15,7 @@
 #endif WIN32_LEAN_AND_MEAN
 
 
+
 namespace tgon
 {
 
@@ -25,6 +26,8 @@ using WindowImpl = class WindowsWindow;
 class TGON_API WindowsWindow : 
 	public AbstractWindow
 {
+	friend class WindowsApplication;
+
 protected:
 	/*
 		Cons/Destructor
@@ -51,6 +54,8 @@ public:
 
 	virtual void Flash( ) override;
 
+	virtual void EnableGlobalMouseFocus( bool isEnable );
+
 
 	/*
 		Sets
@@ -71,8 +76,6 @@ public:
 
 	virtual void GetCaption( _Out_ wchar_t* caption ) const override;
 	
-	virtual bool IsDestroyed( ) const;
-
 	HWND GetWindowHandle( ) const;
 
 
@@ -81,16 +84,13 @@ private:
 
 	void AdditionalInit( _In_ const struct WindowStyle& );
 
-	bool RegisterMyClass( _In_ const struct WindowStyle& wndStyle, _Out_ std::wstring* outClassName );
-	
-	static LRESULT WINAPI MessageProc( HWND, UINT, WPARAM, LPARAM );
+	virtual LRESULT ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 
 private:
-	bool m_isDestroyed;
-
 	HWND m_wndHandle;
 };
+
 
 inline HWND tgon::WindowsWindow::GetWindowHandle( ) const
 {
@@ -133,11 +133,6 @@ inline void tgon::WindowsWindow::SetScale(
 	int32_t height ) 
 {
 	SetWindowPos( m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE );
-}
-
-inline bool tgon::WindowsWindow::IsDestroyed( ) const
-{
-	return m_isDestroyed;
 }
 
 inline void tgon::WindowsWindow::SetCaption(

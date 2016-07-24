@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{6717f028-7319-4700-957e-753b2f9be48f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{2b9e93b8-26c6-4d02-bc9f-80d94de32259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\hpp">
+      <UniqueIdentifier>{6166ebdc-5443-49d6-b553-e66ac432d5a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader\cpp">
+      <UniqueIdentifier>{6922300e-0fa0-4e6e-821c-7a276701e22e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Executable">
+      <UniqueIdentifier>{7ba32176-eea4-4e6b-8be2-615590cc8dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Executable\cpp">
+      <UniqueIdentifier>{b5e086c4-dea5-4c23-a0e9-c28b03d79019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Executable\hpp">
+      <UniqueIdentifier>{eaaee444-0a69-413a-b959-3b9a7c88ef9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\EngineLoop.h">
+      <Filter>Sources\Executable\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\Program.h">
+      <Filter>Sources\Executable\hpp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\Program.cpp">
+      <Filter>Sources\Executable\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

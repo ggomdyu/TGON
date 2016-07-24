@@ -38,47 +38,47 @@ public:
 	int32_t height = 500;
 
 	// If border is useless, switch this to true.
-	bool Popup = false;
+	bool popup = false;
 
 	// Show window as full-screen when it was created.
-	bool FullScreen = false;
+	bool fullScreen = false;
 
 	// Enable window surface's transparency.
-	bool SupportWindowTransparency = false;
+	bool supportWindowTransparency = false;
 	
 	// Enable window surface's per-pixel transparency.
-	bool SupportPerPixelTransparency = false;
+	bool supportPerPixelTransparency = false;
 	
 	// 
-	bool ShowTopOnCreated = false;
+	bool showTopOnCreated = false;
 
 	// Enable window's resizing. 
-	bool Resizeable = true;
+	bool resizeable = true;
 	
 	// Show window always top.
 	// @ WARNING : It can cause race each other top-most window
-	bool TopMost = false;
+	bool topMost = false;
 
 	// Set window maximized when it was created.
-	bool Maximized = false;
+	bool maximized = false;
 	
 	// Set window minimized when it was created.
-	bool Minimized = false;
+	bool minimized = false;
 	
 	// Set window's position to middle when it was created.
-	bool ShowMiddle = true;
+	bool showMiddle = true;
 	
 	//
-	bool ShowImmediately = true;
+	bool showImmediately = true;
 
 
 public:
 	/*
 		Cons/Destructor
 	*/
-	WindowStyle( ) {};
+	WindowStyle( ) = default;
 
-	~WindowStyle( ) {};
+	~WindowStyle( ) = default;
 };
 
 

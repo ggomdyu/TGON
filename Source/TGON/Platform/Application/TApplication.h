@@ -13,13 +13,25 @@
 namespace tgon
 {
 
-using TApplication = ApplicationImpl;
 
-}
+class TGON_API TApplication :
+	public ApplicationImpl
+{
+public:
+	static TApplication* Get( )
+	{
+		static TApplication ret;
+		return &ret;
+	}
+
+private:
+	/*
+		Cons/Destructor
+	*/
+	TApplication( ) = default;
+
+	virtual ~TApplication( ) = default;
+};
 
 
-#define TGON_REGISTER_MAINAPP( className )\
-int32_t RunApplication( )\
-{\
-	return className::Main( );\
 }

@@ -8,6 +8,7 @@
 
 #pragma once
 #include "../Abstract/AbstractApplication.h"
+
 #include "../TApplicationType.h"
 
 
@@ -17,50 +18,69 @@
 #	undef WIN32_LEAN_AND_MEAN
 #endif
 
+#ifdef RegisterClass
+	#undef RegisterClass
+#endif
+
 
 namespace tgon
 {
 
 
-using ApplicationImpl = class WindowsApplication;
+class WindowsWindow;
+class WindowsApplication;
+
+using ApplicationImpl = WindowsApplication;
 
 
 class TGON_API WindowsApplication : 
 	public AbstractApplication
 {
 public:
+	static const wchar_t* ms_appClassName;
+
+public:
 	/*
 		Cons/Destructor
 	*/
-	WindowsApplication( ) = delete;
+	WindowsApplication( );
 
-	virtual ~WindowsApplication( ) = delete;
+	virtual ~WindowsApplication( );
 
 
 	/*
 		Commands
 	*/
-	static int32_t Run( _In_ class WindowsWindow& );
+	// Update the event queue. Return false if it's empty.
+	virtual bool PumpEvent( ) override;
 
-	static void ExitThread( );
+	virtual void ExitThread( ) override;
 
-	static void Quit( int32_t exitCode );
-
-	static void EnableVisualStyles( );
+	virtual void Quit( int32_t exitCode ) override;
 
 
 	/*
 		Sets
 	*/
+	void EnableVisualStyles( );
 
 
 	/*
 		Gets
 	*/
-	static TSystemBatteryInfo GetPowerInfo( );
+	virtual TSystemBatteryInfo GetPowerInfo( ) override;
 
-	static HINSTANCE GetInstanceHandle( );
+	HINSTANCE GetInstanceHandle( );
+
+	static WindowsWindow* GetWindowFromHWND( HWND wndHandle );
+
+
+private:
+	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
+
+	bool RegisterClass( );
 };
+
 
 inline void WindowsApplication::EnableVisualStyles( )
 {
@@ -110,8 +130,13 @@ inline void WindowsApplication::Quit( int32_t exitCode )
 
 inline HINSTANCE tgon::WindowsApplication::GetInstanceHandle( )
 {
-	static HINSTANCE instanceHandle = GetModuleHandle( nullptr );
-	return instanceHandle;
+	static HINSTANCE ret = GetModuleHandle( nullptr );
+	return ret;
+}
+
+inline WindowsWindow* WindowsApplication::GetWindowFromHWND( HWND wndHandle )
+{
+	return reinterpret_cast<WindowsWindow*>( GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 }
 
 

@@ -28,7 +28,6 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\TObject.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Random\TRandom.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\String\TString.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Core\Window\TEventWindow.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -49,7 +48,6 @@
     <ClInclude Include="..\..\Source\TGON\Core\Object\TType.h" />
     <ClInclude Include="..\..\Source\TGON\Core\Random\TRandom.h" />
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h" />
-    <ClInclude Include="..\..\Source\TGON\Core\Window\TEventWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Core\XML\TXMLReader.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>

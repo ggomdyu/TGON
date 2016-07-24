@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -67,6 +68,7 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Screen\Abstract\AbstractScreen.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Screen\TScreen.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\unique_comptr.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\WindowsConsoleHelper.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindowEventHandler.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />

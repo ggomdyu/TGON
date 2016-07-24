@@ -176,40 +176,40 @@ UINT tgon::GetD3D9StencilBits( const D3DFORMAT fmt )
             return 0;
     }
 }
-
-D3DPRIMITIVETYPE tgon::ConvertPrimitiveToD3D9( TPrimitiveType from )
-{
-	switch ( from )
-	{
-	case TPrimitiveType::kPointList:
-		return D3DPRIMITIVETYPE::D3DPT_POINTLIST;
-		break;
-	
-	case TPrimitiveType::kLineList:
-		return D3DPRIMITIVETYPE::D3DPT_LINELIST;
-		break;
-
-	case TPrimitiveType::kLineStrip:
-		return D3DPRIMITIVETYPE::D3DPT_LINESTRIP;
-		break;
-	
-	case TPrimitiveType::kTriangleList:
-		return D3DPRIMITIVETYPE::D3DPT_TRIANGLELIST;
-		break;
-
-	case TPrimitiveType::kTriangleStrip:
-		return D3DPRIMITIVETYPE::D3DPT_TRIANGLESTRIP;
-		break;
-
-	case TPrimitiveType::kTriangleFan:
-		return D3DPRIMITIVETYPE::D3DPT_TRIANGLEFAN;
-		break;
-
-	default:
-		abort( );
-		break;
-	}
-}
+//
+//D3DPRIMITIVETYPE tgon::ConvertPrimitiveToD3D9( TPrimitiveType from )
+//{
+//	switch ( from )
+//	{
+//	case TPrimitiveType::kPointList:
+//		return D3DPRIMITIVETYPE::D3DPT_POINTLIST;
+//		break;
+//	
+//	case TPrimitiveType::kLineList:
+//		return D3DPRIMITIVETYPE::D3DPT_LINELIST;
+//		break;
+//
+//	case TPrimitiveType::kLineStrip:
+//		return D3DPRIMITIVETYPE::D3DPT_LINESTRIP;
+//		break;
+//	
+//	case TPrimitiveType::kTriangleList:
+//		return D3DPRIMITIVETYPE::D3DPT_TRIANGLELIST;
+//		break;
+//
+//	case TPrimitiveType::kTriangleStrip:
+//		return D3DPRIMITIVETYPE::D3DPT_TRIANGLESTRIP;
+//		break;
+//
+//	case TPrimitiveType::kTriangleFan:
+//		return D3DPRIMITIVETYPE::D3DPT_TRIANGLEFAN;
+//		break;
+//
+//	default:
+//		abort( );
+//		break;
+//	}
+//}
 
 //
 //

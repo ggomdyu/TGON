@@ -6,9 +6,6 @@
 */
 
 #pragma once
-
-// We support only DirectX9 now... ;(
-#define TGON_FORCE_TO_DIRECTX9 1
 #include "../Config/Graphics.h"
 
 #if TGON_GRAPHICS_DIRECTX9

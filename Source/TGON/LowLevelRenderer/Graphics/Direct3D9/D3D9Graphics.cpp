@@ -87,15 +87,6 @@ bool tgon::D3D9Graphics::Present( )
 	}
 }
 
-void tgon::D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
-{
-	m_d3dDevice->DrawPrimitive( 
-		ConvertPrimitiveToD3D9( primitiveType ), 
-		startVertex, 
-		primitiveCount 
-	);
-}
-
 void tgon::D3D9Graphics::InitD3DInterface( )
 {
 	// Initialize direct3D interface.

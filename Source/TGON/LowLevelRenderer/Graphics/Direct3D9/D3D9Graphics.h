@@ -42,19 +42,19 @@ public:
 		Command
 	*/
 	// Begin scene rendering. Return true if device can render.
-	virtual bool BeginScene( ) override;
+	virtual bool BeginScene( );
 	
 	// End scene rendering. This function must be called after BeginScene
-	virtual bool EndScene( ) override;
+	virtual bool EndScene( );
 	
 	// Clear the back buffer scene.
-	virtual bool Clear( ) override;
+	virtual bool Clear( );
 
 	// Draw the back buffer to visible screen.
-	virtual bool Present( ) override;
+	virtual bool Present( );
 
 	//
-	void DrawPrimitive( TPrimitiveType, uint32_t, uint32_t );
+	void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount );
 
 
 	/*
@@ -90,15 +90,24 @@ private:
 };
 
 
-}
-
-
-inline const tgon::SpD3D9Ex& tgon::D3D9Graphics::GetD3D( ) const
+inline const SpD3D9Ex& D3D9Graphics::GetD3D( ) const
 {
 	return m_d3d;
 }
 
-inline const tgon::SpD3D9DeviceEx& tgon::D3D9Graphics::GetD3DDevice( ) const
+inline const SpD3D9DeviceEx& D3D9Graphics::GetD3DDevice( ) const
 {
 	return m_d3dDevice;
+}
+
+inline void D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
+{
+	m_d3dDevice->DrawPrimitive(
+		static_cast<D3DPRIMITIVETYPE>( primitiveType ),
+		startVertex,
+		primitiveCount
+	);
+}
+
+
 }

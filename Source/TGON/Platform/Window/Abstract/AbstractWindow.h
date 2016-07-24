@@ -16,6 +16,8 @@ namespace tgon
 {
 
 
+class AbstractWindowEventHandler;
+
 class TGON_API AbstractWindow : 
 	private boost::noncopyable
 {
@@ -46,10 +48,14 @@ public:
 
 	virtual void Flash( ) {}
 
+	virtual void EnableGlobalMouseFocus( bool isEnable ) {};
+
 
 	/*
 		Sets
 	*/
+	void SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventHandler );
+
 	virtual void SetPosition( int32_t x, int32_t y ) {};
 
 	virtual void SetScale( int32_t width, int32_t height ) {};
@@ -59,21 +65,38 @@ public:
 	/*
 		Gets
 	*/
+	const std::shared_ptr<AbstractWindowEventHandler>& GetEventHandler( ) const;
+
 	virtual void GetPosition( int32_t* x, int32_t* y ) const {};
 
 	virtual void GetSize( int32_t* width, int32_t* height ) const {};
 
 	virtual void GetCaption( wchar_t* caption ) const {}
 
-	virtual bool IsDestroyed( ) const { return false; }
+	bool IsEnabledGlobalInputFocus( ) const;
 
+	
+protected:
+	bool m_isEnabledGlobalMouseFocus;
 
-	/*
-		Event handlers
-	*/
-	virtual void OnIdle( ) {}
-
+	std::shared_ptr<AbstractWindowEventHandler> m_eventListener;
 };
+
+
+inline void tgon::AbstractWindow::SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventListener )
+{
+	m_eventListener = eventListener;
+}
+
+inline const std::shared_ptr<AbstractWindowEventHandler>& AbstractWindow::GetEventHandler( ) const
+{
+	return m_eventListener;
+}
+
+inline bool AbstractWindow::IsEnabledGlobalInputFocus( ) const
+{
+	return m_isEnabledGlobalMouseFocus;
+}
 
 
 }

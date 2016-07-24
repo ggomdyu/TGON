@@ -20,5 +20,5 @@ namespace tgon
 	
 	UINT GetD3D9StencilBits( const D3DFORMAT );
 
-	D3DPRIMITIVETYPE ConvertPrimitiveToD3D9( TPrimitiveType from );
+	//D3DPRIMITIVETYPE ConvertPrimitiveToD3D9( TPrimitiveType from );
 }

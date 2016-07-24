@@ -8,6 +8,8 @@
 #pragma once
 #include <boost/predef.h>
 
+#define TGON_FORCE_TO_DIRECTX9 1
+
 #if BOOST_OS_WINDOWS
 #	include <sdkddkver.h>
 

@@ -29,4 +29,6 @@ int32_t WINAPI WinMain(
 	
 	// Call the program's main
 	RunApplication( );
+
+	// TODO: Insert mini-dump setting code here or call
 }

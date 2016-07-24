@@ -61,9 +61,6 @@
     <Filter Include="Sources\Object\cpp">
       <UniqueIdentifier>{16d9e3a3-2db1-454a-84de-86eb2313b1dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Window">
-      <UniqueIdentifier>{cd0dc7f5-a4bb-4356-b1f2-8dfd70c1b57e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMath.cpp">
@@ -98,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Object\TEventSubject.cpp">
       <Filter>Sources\Object\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Window\TEventWindow.cpp">
-      <Filter>Sources\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Core\Object\TEventSubject.h">
       <Filter>Sources\Object\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Window\TEventWindow.h">
-      <Filter>Sources\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

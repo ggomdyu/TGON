@@ -20,15 +20,15 @@ void tgon::Convert_wndstyle_to_dword(
 	/*
 		Extended style
 	*/
-	if ( wndStyle.TopMost )
+	if ( wndStyle.topMost )
 	{
 		*exWndStyle |= WS_EX_TOPMOST;
 	}
-	else if ( wndStyle.ShowTopOnCreated )
+	else if ( wndStyle.showTopOnCreated )
 	{
 		*exWndStyle |= WS_EX_APPWINDOW;
 	}
-	if ( wndStyle.SupportPerPixelTransparency )
+	if ( wndStyle.supportPerPixelTransparency )
 	{
 		*exWndStyle |= WS_EX_LAYERED;
 	}
@@ -37,34 +37,34 @@ void tgon::Convert_wndstyle_to_dword(
 	/*
 		Normal style
 	*/
-	if ( wndStyle.Maximized )
+	if ( wndStyle.maximized )
 	{
 		*normalWndStyle |= WS_MAXIMIZE;
-		assert( !wndStyle.Minimized &&
+		assert( !wndStyle.minimized &&
 				"Can't be selected both Maximized and Minimized." );
 	}
-	else if ( wndStyle.Minimized )
+	else if ( wndStyle.minimized )
 	{
 		*normalWndStyle |= WS_MINIMIZE;
 	}
 
-	if ( wndStyle.Resizeable )
+	if ( wndStyle.resizeable )
 	{
 		*normalWndStyle |= WS_THICKFRAME;
-		assert( !wndStyle.Popup &&
+		assert( !wndStyle.popup &&
 				"Can't be selected both Resizeable and Popup." );
 	}
-	else if ( wndStyle.Popup )
+	else if ( wndStyle.popup )
 	{
 		*normalWndStyle |= WS_POPUP;
 	}
 
 	// Single member
-	if ( wndStyle.ShowImmediately )
+	if ( wndStyle.showImmediately )
 	{
 		*normalWndStyle |= WS_VISIBLE;
 	}
-	if ( wndStyle.SupportWindowTransparency )
+	if ( wndStyle.supportWindowTransparency )
 	{
 		*normalWndStyle |= WS_EX_LAYERED;
 	}

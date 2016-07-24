@@ -3,7 +3,6 @@
 * Date : 03/14/2016
 * Latest author :
 * Latest date :
-* Description :
 */
 
 #pragma once

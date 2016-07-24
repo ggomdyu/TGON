@@ -5,10 +5,13 @@
 #include "../Platform/Slate/PlatformProperty.h"
 #include "../../Window/WindowStyle.h"
 #include "../../Window/Windows/WindowsWindowUtil.h"
-#include "../../Window/TWindow.h"
-#include "../../../Core/String/TString.h"
+#include "../../Window/Abstract/AbstractWindowEventHandler.h"
+#include "../../Application/TApplication.h"
 
 #include <Windows.h>
+#include <codecvt>
+
+#include <Console/TConsole.h>
 
 #ifdef TGON_SUPPORT_DWMAPI
 	#include <dwmapi.h>
@@ -17,7 +20,6 @@
 
 
 tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
-	m_isDestroyed( false ),
 	m_wndHandle( nullptr )
 {
 	this->CreateWindowForm( wndStyle );
@@ -33,10 +35,8 @@ tgon::WindowsWindow::~WindowsWindow( )
 
 void tgon::WindowsWindow::BringToTop( ) 
 {
-	/*
-		After Windows 98/Me: The system restricts which processes can set the foreground window.
-		So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
-	*/
+	// After Windows 98/Me: The system restricts which processes can set the foreground window.
+	// So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
 
 	const HWND fgWndHandle( GetForegroundWindow( ));
 
@@ -62,6 +62,42 @@ void tgon::WindowsWindow::Flash( )
 	fwi.uCount = 1;
 
 	FlashWindowEx( &fwi );
+}
+
+void tgon::WindowsWindow::EnableGlobalMouseFocus( bool isEnable )
+{
+	assert( m_wndHandle && "tgon::WindowsWindow::EnableGlobalMouseFocus must be invoked after window created!" );
+
+	m_isEnabledGlobalMouseFocus = isEnable;
+
+
+	enum class RawInputDeviceType : USHORT
+	{
+		kPointer = 0x01,
+		kMouse = 0x02,
+		kJoyStick = 0x04,
+		kGamePad = 0x05,
+		kKeyboard = 0x06,
+		kKeyPad = 0x07,
+	};
+
+	RAWINPUTDEVICE rid {0};
+
+	rid.usUsagePage = 0x01;
+	rid.usUsage = static_cast<USHORT>( RawInputDeviceType::kMouse );
+	rid.dwFlags = ( isEnable ) ? RIDEV_INPUTSINK : RIDEV_REMOVE;
+	rid.hwndTarget = this->GetWindowHandle( );
+	
+
+	if ( ::RegisterRawInputDevices( &rid, 1, sizeof( RAWINPUTDEVICE )) == FALSE )
+	{
+		MessageBoxW( 
+			this->GetWindowHandle( ),
+			L"Failed to initialize global input focus.",
+			L"WARNINIG!",
+			MB_OK 
+		);
+	}
 }
 
 void tgon::WindowsWindow::GetPosition( int32_t* x, int32_t* y ) const 
@@ -95,53 +131,33 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 	int32_t x = wndStyle.x;
 	int32_t y = wndStyle.y;
 
-	if ( wndStyle.ShowMiddle )
+	if ( wndStyle.showMiddle )
 	{
-		x = static_cast< int32_t >(
-			GetSystemMetrics( SM_CXSCREEN )*0.5 -
-			wndStyle.width*0.5 );
-		y = static_cast< int32_t >(
-			GetSystemMetrics( SM_CYSCREEN )*0.5 -
-			wndStyle.height*0.5 );
+		x = static_cast<int32_t>( GetSystemMetrics( SM_CXSCREEN )*0.5 - wndStyle.width*0.5 );
+		y = static_cast<int32_t>( GetSystemMetrics( SM_CYSCREEN )*0.5 - wndStyle.height*0.5 );
 	}
 
-
-	// Convert WindowStyle to platform-dependent style.
+	// Convert WindowStyle to platform dependent style.
 	DWORD normalStyle, exStyle;
 	Convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
-
-
-	// Register Window class to Global table.
-	std::wstring newClassName;
-	bool isSucceed = this->RegisterMyClass( wndStyle, &newClassName );
-	if ( !isSucceed )
-	{
-		MessageBoxW(
-			this->GetWindowHandle( ),
-			L"Failed to invoke tgon::WindowsWindow::RegisterMyClass.",
-			L"WARNING!",
-			MB_OK | MB_ICONEXCLAMATION 
-		);
-
-		abort( );
-	}
-
-
-	// Convert utf8 to utf16
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> converter;
-	std::wstring utf16Dest( converter.from_bytes( wndStyle.title.c_str( )));
-
+	
+	// Convert utf8 encode title to utf16.
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utfConverter;
+	std::wstring utf16Title( utfConverter.from_bytes( wndStyle.title.c_str( )));
 
 	// Create a Window.
 	m_wndHandle = CreateWindowExW(
 		exStyle,
-		newClassName.c_str(),
-		utf16Dest.c_str( ),
+		WindowsApplication::ms_appClassName,
+		utf16Title.c_str( ),
 		normalStyle,
-		x, y, wndStyle.width, wndStyle.height,
+		x,
+		y, 
+		wndStyle.width, 
+		wndStyle.height,
 		nullptr,
 		nullptr,
-		GetModuleHandle( NULL ),
+		TApplication::Get( )->GetInstanceHandle( ),
 		this
 	);
 
@@ -156,15 +172,11 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 		abort( );
 	}
 
-	/*
-		- Why use SetWindowLongPtrW?
-
-		CallbackMsgProc can't access member of WindowsWindow.
-		So WindowsWindow class uses <Extra memory>, which have provided when window had created.
-	*/
+	// Save this class's pointer to window-personal storage.
+	// Then accessible this class even static function.
 	SetWindowLongPtrW(
 		m_wndHandle,
-		GWLP_USERDATA, // Save window ptr to window-personal storage
+		GWLP_USERDATA,
 		reinterpret_cast<LONG_PTR>( this )
 	); 
 }
@@ -172,14 +184,13 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 void tgon::WindowsWindow::AdditionalInit(
 	const WindowStyle& wndStyle ) 
 {
-	if ( wndStyle.SupportWindowTransparency )
+	if ( wndStyle.supportWindowTransparency )
 	{
-		SetLayeredWindowAttributes( m_wndHandle, NULL, 255,
-			LWA_ALPHA );
+		SetLayeredWindowAttributes( m_wndHandle, NULL, 255, LWA_ALPHA );
 	}
 
 #ifdef TGON_SUPPORT_DWMAPI
-	if ( wndStyle.SupportPerPixelTransparency )
+	if ( wndStyle.supportPerPixelTransparency )
 	{
 		BOOL isCompoEnabled = FALSE;
 		DwmIsCompositionEnabled( &isCompoEnabled );
@@ -193,46 +204,174 @@ void tgon::WindowsWindow::AdditionalInit(
 #endif
 }
 
-bool tgon::WindowsWindow::RegisterMyClass( const WindowStyle& wndStyle, std::wstring* outClassName )
+LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
-	const HINSTANCE instanceHandle( WindowsApplication::GetInstanceHandle( ));
+	switch ( msg )
+	{
+	case WM_MOVE:
+		{
+			this->GetEventHandler( )->OnMove(
+				static_cast<int32_t>( LOWORD( lParam )), 
+				static_cast<int32_t>( HIWORD( lParam ))
+			);
+			return 0;
+		}
+		break;
 
+	case WM_CHAR:
+		break;
+
+	case WM_SIZE:
+		{
+			this->GetEventHandler( )->OnResize(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam ))
+			);
+			return 0;
+		}
+		break;
+			
+	case WM_DESTROY:
+		{
+			this->GetEventHandler( )->OnDestroy( );
+			PostQuitMessage( 0 );
+			return 0;
+		}
+		break;
+
+	case WM_LBUTTONDOWN:
+		{
+			this->GetEventHandler( )->OnMouseDown(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kLeft
+			);
+			return 0;
+		}
+		break;
+
+	case WM_LBUTTONUP:
+		{
+			this->GetEventHandler( )->OnMouseUp(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kLeft
+			);
+			return 0;
+		}
+		break;
+
+	case WM_RBUTTONDOWN:
+		{
+			this->GetEventHandler( )->OnMouseDown(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kRight
+			);
+			return 0;
+		}
+		break;
+
+	case WM_RBUTTONUP:
+		{
+			this->GetEventHandler( )->OnMouseUp(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kRight
+			);
+			return 0;
+		}
+		break;
+
+	case WM_MBUTTONDOWN:
+		{
+			this->GetEventHandler( )->OnMouseDown(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kMiddle
+			);
+			return 0;
+		}
+		break;
+
+	case WM_MBUTTONUP:
+		{
+			this->GetEventHandler( )->OnMouseUp(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kMiddle
+			);
+			return 0;
+		}
+		break;
+
+	case WM_LBUTTONDBLCLK:
+		{
+			this->GetEventHandler( )->OnMouseDoubleClick(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kLeft
+			);
+			return 0;
+		}
+		break;
 	
-	//	Each windows must have diffrent class name.
-	std::wstring defClassName = L"TGON_Window";
-	static int32_t numCreatedWindow = 0;
-	defClassName += std::to_wstring( numCreatedWindow );
-	*outClassName = defClassName;
+	case WM_RBUTTONDBLCLK:
+		{
+			this->GetEventHandler( )->OnMouseDoubleClick(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kRight
+			);
+			return 0;
+		}
+		break;
 
+	case WM_MBUTTONDBLCLK:
+		{
+			this->GetEventHandler( )->OnMouseDoubleClick(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam )),
+				TMouseType::kMiddle
+			);
+			return 0;
+		}
+		break;
 
-	// Fill the Window class information.
-	WNDCLASSEXW wcex {0};
-	wcex.cbSize = sizeof( wcex );
-	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
-	wcex.hCursor = LoadCursorW( NULL, IDC_ARROW );
-	wcex.hIcon = LoadIconW( NULL, IDI_APPLICATION );
-	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = MessageProc; // Default message procedure; More fast than EvHandleMsgProc
-	wcex.lpszClassName = defClassName.c_str( );
-	wcex.style = CS_DBLCLKS;
+	case WM_MOUSEMOVE:
+		{
+			this->GetEventHandler( )->OnMouseMove(
+				static_cast<int32_t>( LOWORD( lParam )),
+				static_cast<int32_t>( HIWORD( lParam ))
+			);
+			return 0;
+		}
+		break;
 
-	return RegisterClassExW( &wcex ) != 0;
-}
+	case WM_INPUT:
+		{
+			RAWINPUT rawInput{ 0 };
 
-LRESULT WINAPI tgon::WindowsWindow::MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
-{
-	if ( msg == WM_DESTROY )
-	{
-		WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>(
-			GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
-		
-		extraMemAsWindow->m_isDestroyed = true;
-		PostQuitMessage( 0 );
+			UINT cbSize = sizeof( RAWINPUT );
+			::GetRawInputData( reinterpret_cast<HRAWINPUT>( lParam ), RID_INPUT, &rawInput, &cbSize, sizeof( RAWINPUTHEADER ) );
 
-		return 0;
+			if ( rawInput.header.dwType == RIM_TYPEMOUSE )
+			{
+				if ( rawInput.data.mouse.usButtonFlags == 0 )
+				{
+				}
+				else if ( rawInput.data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_DOWN )
+				{
+				}
+				else if ( rawInput.data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_UP )
+				{
+				}
+			}
+
+			return 0;
+		}
+		break;
 	}
-	else
-	{
-		return DefWindowProc( wndHandle, msg, wParam, lParam );
-	}
+
+	return DefWindowProc( wndHandle, msg, wParam, lParam );
 }

@@ -28,7 +28,7 @@ public:
 	{
 	}
 
-	virtual void OnIdle( ) override
+	/*virtual void OnIdle( ) override
 	{
 		m_graphics->Clear( );
 		m_graphics->BeginScene( );
@@ -37,12 +37,7 @@ public:
 
 		m_graphics->EndScene( );
 		m_graphics->Present( );
-	}
-
-	void OnMM(  )
-	{
-
-	}
+	}*/
 
 
 private:

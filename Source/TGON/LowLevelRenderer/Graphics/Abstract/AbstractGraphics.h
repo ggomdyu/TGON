@@ -15,7 +15,7 @@ namespace tgon
 
 
 class TGON_API AbstractGraphics : 
-	boost::noncopyable
+	private boost::noncopyable
 {
 protected:
 	/*
@@ -55,6 +55,8 @@ public:
 	*/
 	void SetClearColor( uint32_t clearColor );
 
+	void SetCullMode( TCullMode cullMode );
+
 
 	/*
 		Gets
@@ -71,6 +73,9 @@ public:
 	//
 	uint32_t GetClearColor( ) const;
 
+	//
+	TCullMode GetCullMode( ) const;
+
 
 protected:
 	void UpdateBackBufferWidth( int32_t width );
@@ -86,6 +91,8 @@ private:
 	class TWindow* m_deviceWindow;
 
 	uint32_t m_clearColor;
+
+	TCullMode m_currMode;
 };
 
 
@@ -97,6 +104,16 @@ inline void AbstractGraphics::SetClearColor( uint32_t clearColor )
 inline uint32_t AbstractGraphics::GetClearColor( ) const
 {
 	return m_clearColor;
+}
+
+inline void AbstractGraphics::SetCullMode( TCullMode cullMode )
+{
+	m_currMode = cullMode;
+}
+
+inline TCullMode AbstractGraphics::GetCullMode( ) const
+{
+	return m_currMode;
 }
 
 inline class TWindow* AbstractGraphics::GetDeviceWindow( )

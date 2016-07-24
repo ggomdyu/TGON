@@ -100,14 +100,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
-    <ClCompile Include="Source\Program.cpp" />
     <ClCompile Include="Source\TgonModelJoyForm.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="Source\Program.h" />
     <ClInclude Include="Source\TgonModelJoyForm.h" />
   </ItemGroup>
   <ItemGroup>
@@ -117,8 +115,8 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON.GameCore\TGON.GameCore.vcxproj">
-      <Project>{f53c56e2-f77e-4a53-8adc-d00a9903312d}</Project>
+    <ProjectReference Include="..\TGON.Engine\TGON.Engine.vcxproj">
+      <Project>{79a4ad79-b64d-414f-a2de-7635d062f2a7}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

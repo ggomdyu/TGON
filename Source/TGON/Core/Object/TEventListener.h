@@ -52,22 +52,22 @@ private:
 };
 
 
-template <class _ReceiverTy>
+template <class ReceiverTy>
 class TGON_API TEventListenerImpl :
 	public TEventListener
 {
-	using _HandlerFunctionTy = void( _ReceiverTy::* )( );
+	using HandlerFunctionTy = void( ReceiverTy::* )( );
 
 
 public:
-	TGON_OBJECT( TEventListenerImpl<_ReceiverTy>, TEventListener )
+	TGON_OBJECT( TEventListenerImpl<ReceiverTy>, TEventListener )
 
 
 public:
 	/*
 		Cons/Destructor
 	*/
-	TEventListenerImpl( class TEventSubject* receiver, _HandlerFunctionTy eventHandlerFunc ) :
+	TEventListenerImpl( class TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
 		TEventListener( receiver ),
 		m_handlerFunction( eventHandlerFunc )
 	{
@@ -81,12 +81,12 @@ public:
 	*/
 	virtual void Notify( ) override
 	{
-		( static_cast<_ReceiverTy*>( GetReceiver( ))->*m_handlerFunction )( );
+		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_handlerFunction )( );
 	}
 
 
 private:
-	_HandlerFunctionTy m_handlerFunction;
+	HandlerFunctionTy m_handlerFunction;
 };
 
 

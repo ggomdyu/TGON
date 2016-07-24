@@ -2,7 +2,11 @@
 #include "AbstractWindow.h"
 
 
-tgon::AbstractWindow::AbstractWindow( )
+#include "AbstractWindowEventHandler.h"
+
+
+tgon::AbstractWindow::AbstractWindow( ) :
+	m_eventListener( new AbstractWindowEventHandler )
 {
 }
 

@@ -3,12 +3,12 @@
 * Date : 03/20/2016
 * Latest author :
 * Latest date :
-* Description : Abstracted platform API
 */
 
 
 #pragma once
 #include "../../../Platform/Config/Build.h"
+
 #include "../TApplicationType.h"
 
 
@@ -16,36 +16,35 @@ namespace tgon
 {
 
 
+class TWindow;
+
 class TGON_API AbstractApplication
 {
 public:
 	/*
 		Cons/Destructor
 	*/
-	AbstractApplication( ) = delete;
+	AbstractApplication( ) = default;
 	
-	virtual ~AbstractApplication( ) = delete;
+	virtual ~AbstractApplication( ) = default;
 
 
 	/*
 		Commands
 	*/
-	static int32_t Run( class WindowsWindow& ) {}
+	//Update the event queue. Return false if the system queue is empty.
+	virtual bool PumpEvent( ) = 0;
 
-	static void ExitThread( ) {}
+	virtual void ExitThread( ) = 0;
 
-	static void Quit( int32_t exitCode ) {}
-
-
-	/*
-		Sets
-	*/
+	virtual void Quit( int32_t exitCode ) = 0;
 
 
 	/*
 		Gets
 	*/
-	static struct TSystemBatteryInfo GetPowerInfo( ) {}
+	virtual struct TSystemBatteryInfo GetPowerInfo( ) = 0;
+
 };
 
 

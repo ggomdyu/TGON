@@ -40,28 +40,28 @@ tgon::WindowStyle tgon::WindowStyle::LoadFromXML( const char* xmlPath )
 		}
 		else if ( !std::strcmp( xmlNodeElem->Value( ), "Style" ))
 		{
-			parsedWndStyle.Popup = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.popup = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "Popup" );
 		}
 		else if ( !std::strcmp( xmlNodeElem->Value( ), "Function" ))
 		{
-			parsedWndStyle.Resizeable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.resizeable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "Resizeable" );
-			parsedWndStyle.Maximized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.maximized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "Maximized" );
-			parsedWndStyle.Minimized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.minimized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "Minimized" );
-			parsedWndStyle.ShowTopOnCreated = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.showTopOnCreated = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "ShowTopOnCreated" );
-			parsedWndStyle.ShowMiddle = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.showMiddle = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "ShowMiddle" );
-			parsedWndStyle.TopMost = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.topMost = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "TopMost" );
-			parsedWndStyle.ShowImmediately = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.showImmediately = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "ShowImmediately" );
-			parsedWndStyle.SupportWindowTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.supportWindowTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "SupportWindowTransparency" );
-			parsedWndStyle.SupportPerPixelTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+			parsedWndStyle.supportPerPixelTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
 				BoolAttribute( "SupportPerPixelTransparency" );
 		}
 	}
