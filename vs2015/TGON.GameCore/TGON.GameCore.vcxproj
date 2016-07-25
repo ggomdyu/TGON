@@ -36,7 +36,7 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON.LowLevelRenderer\TGON.LowLevelRenderer.vcxproj">
+    <ProjectReference Include="..\TGON.RenderCore\TGON.RenderCore.vcxproj">
       <Project>{bee9e817-1cf9-4f28-8c72-a6dacb7f47b6}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -58,40 +58,40 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Config\Graphics.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Config\Graphics.h">
       <Filter>Sources\Config\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Slate\PlatformGraphics.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformGraphics.h">
       <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Camera\TCamera.h">
       <Filter>Sources\Camera\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphics.h">
       <Filter>Sources\Graphics\hpp\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphicsDevice.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDevice.h">
       <Filter>Sources\Graphics\hpp\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\GraphicsStyle.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsStyle.h">
       <Filter>Sources\Graphics\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.h">
       <Filter>Sources\Graphics\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphicsType.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsType.h">
       <Filter>Sources\Graphics\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Fwd.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Fwd.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Utility.h">
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
   </ItemGroup>
@@ -99,22 +99,22 @@
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Camera\TCamera.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Camera\TCamera.cpp">
       <Filter>Sources\Camera\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\TGraphics.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.cpp">
       <Filter>Sources\Graphics\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Error.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3D9Graphics.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Direct3D9\D3d9Utility.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\LowLevelRenderer\Graphics\Abstract\AbstractGraphics.cpp">
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphics.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

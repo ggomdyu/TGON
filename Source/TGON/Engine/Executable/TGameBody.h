@@ -9,7 +9,7 @@
 #pragma once
 #include "../../Platform/Window/TWindow.h"
 #include "../../Core/Object/TEventSubject.h"
-#include "../../LowLevelRenderer/Graphics/TGraphics.h"
+#include "../../RenderCore/Graphics/TGraphics.h"
 #include "../../Engine/Module/Interface/IModule.h"
 
 

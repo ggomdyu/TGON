@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Sample", "2. Sample", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml2", "..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj", "{D1C528B6-AA02-4D29-9D61-DC08E317A70D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.LowLevelRenderer", "TGON.LowLevelRenderer\TGON.LowLevelRenderer.vcxproj", "{BEE9E817-1CF9-4F28-8C72-A6DACB7F47B6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.RenderCore", "TGON.RenderCore\TGON.RenderCore.vcxproj", "{BEE9E817-1CF9-4F28-8C72-A6DACB7F47B6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.GameCore", "TGON.GameCore\TGON.GameCore.vcxproj", "{F53C56E2-F77E-4A53-8ADC-D00A9903312D}"
 EndProject
