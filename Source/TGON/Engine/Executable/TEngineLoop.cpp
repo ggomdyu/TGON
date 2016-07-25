@@ -60,7 +60,14 @@ int32_t tgon::TEngineLoop::Execute( int argc, char** argv )
 		// Idle time
 		if ( !TApplication::Get( )->PumpEvent( ))
 		{
+			NotifyEvent( TEvent::OnUpdateBegin );
+			m_gameBody->Update( );
+			NotifyEvent( TEvent::OnUpdateEnd );
 
+
+			NotifyEvent( TEvent::OnRenderBegin );
+			m_gameBody->Render( );
+			NotifyEvent( TEvent::OnRenderEnd );
 		}
 	}
 
