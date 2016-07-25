@@ -45,12 +45,12 @@ public:
 	/*
 		Sets
 	*/
-	template <typename _ComponentTy> void AddComponent( _ComponentTy* );
+	template <typename ComponentTy> void AddComponent( ComponentTy* );
 	
 	/*
 		Gets
 	*/
-	template <typename _ComponentTy> _ComponentTy* GetComponent( );
+	template <typename ComponentTy> ComponentTy* GetComponent( );
 
 private:
 	TransformComponent* m_transformComponent;
@@ -62,8 +62,8 @@ private:
 template<>
 inline void TGameObject::AddComponent( TransformComponent* newComponent ) = delete;
 
-template<typename _ComponentTy>
-inline void TGameObject::AddComponent( _ComponentTy* component )
+template<typename ComponentTy>
+inline void TGameObject::AddComponent( ComponentTy* component )
 {
 	//const auto identifier = newComponent->GetComponentID( );
 

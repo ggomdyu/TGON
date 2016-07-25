@@ -45,25 +45,24 @@ public:
 	// Compare two instance. Return true if both refer to the same object.
 	static bool ReferenceEquals( const TObject&, const TObject& );
 
-	// THESE CODE ARE NOT OPTIMIZED. SO BE CAREFUL TO USE IT
-	//template <typename ToTy>
-	//bool IsKindOf( )
-	//{
-	//	if ( this->GetHashCode( ) == ToTy::GetType( ).GetHashCode( ))
-	//	{
-	//		return true;
-	//	}
-	//	else
-	//	{
-	//		return IsKindOf<ToTy::Super>( );
-	//	}
-	//}
-	//
-	//template<>
-	//bool IsKindOf<std::nullptr_t>( )
-	//{
-	//	return false;
-	//}
+	template <typename ToTy>
+	bool IsKindOf( )
+	{
+		if ( this->GetHashCode( ) == ToTy::GetType( ).GetHashCode( ))
+		{
+			return true;
+		}
+		else
+		{
+			return IsKindOf<ToTy::Super>( );
+		}
+	}
+
+	template<>
+	bool IsKindOf<std::nullptr_t>( )
+	{
+		return false;
+	}
 
 
 	/*

@@ -1,49 +1,22 @@
 #pragma once
-
-#include <Window/TWindow.h>
-#include <Graphics/TGraphics.h>
-#include <Console/TConsole.h>
-#include <Screen/TScreen.h>
-#include <Object/TObject.h>
-#include <Object/TEventSubject.h>
+#include <Engine/Executable/TGameBody.h>
 
 
-namespace tgon
-{
+using namespace tgon;
 
 
-
-class TgonModelJoyForm :
-	public TWindow
+class TgonModelJoy :
+	public TGameBody
 {
 public:
-	TgonModelJoyForm( ) :
-		TWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" )),
-		m_graphics( TGraphics::Make( this ))
-	{
-		m_graphics->SetClearColor( 0x0000ff );
-	}
-
-	~TgonModelJoyForm( )
+	TgonModelJoy( ) :
+		TGameBody( WindowStyle::DefaultStyle )
 	{
 	}
 
-	/*virtual void OnIdle( ) override
+	void OnUpdateBegin( )
 	{
-		m_graphics->Clear( );
-		m_graphics->BeginScene( );
-
-
-
-		m_graphics->EndScene( );
-		m_graphics->Present( );
-	}*/
-
-
-private:
-	SpTGraphics m_graphics;
-
+		
+	}
 };
 
-
-}

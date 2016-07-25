@@ -21,8 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\IComponent.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Component\TransformComponent.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.h" />
-    <ClInclude Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\IComparable.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h" />
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameObject.h" />
@@ -32,8 +30,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\GameCore\Component\IComponent.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Component\TransformComponent.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Module\Interface\IModule.cpp" />
-    <ClCompile Include="..\..\Source\TGON\GameCore\Module\TWorkThreadModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameCamera.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\Object\TGameObject.cpp" />
     <ClCompile Include="..\..\Source\TGON\GameCore\World\TGameWorld.cpp" />

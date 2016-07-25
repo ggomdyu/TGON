@@ -17,7 +17,7 @@ class TGON_API TEventListener :
 	public TObject
 {
 public:
-	TGON_OBJECT( TEventListener, std::nullptr_t )
+	TGON_OBJECT( TEventListener, TObject )
 
 
 public:

@@ -16,7 +16,7 @@ namespace tgon
 class Program
 {
 public:
-	static int32_t Main( );
+	static int32_t Main( int32_t argc, char** argv );
 };
 
 

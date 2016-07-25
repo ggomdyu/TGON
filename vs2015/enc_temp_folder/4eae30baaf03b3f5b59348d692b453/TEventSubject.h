@@ -36,7 +36,7 @@ class TGON_API TEventSubject :
 
 
 public:
-	TGON_OBJECT( TEventSubject, std::nullptr_t )
+	TGON_OBJECT( TEventSubject, TObject )
 
 public:
 	/*

@@ -30,10 +30,10 @@ public:
 		Commands
 	*/
 	// Write
-	template <typename _Ty, typename... _Args>
-	static void Write( _Ty&& arg, const _Args&... args )
+	template <typename Ty, typename... _Args>
+	static void Write( Ty&& arg, const _Args&... args )
 	{
-		ConsoleImpl::Write( std::forward<_Ty>( arg ));
+		ConsoleImpl::Write( std::forward<Ty>( arg ));
 		Write( args... );
 	}
 
@@ -43,10 +43,10 @@ public:
 
 
 	// WriteLine
-	template <typename _Ty, typename... _Args>
-	static void WriteLine( _Ty&& arg, const _Args&... args )
+	template <typename Ty, typename... _Args>
+	static void WriteLine( Ty&& arg, const _Args&... args )
 	{
-		ConsoleImpl::Write( std::forward<_Ty>( arg ));
+		ConsoleImpl::Write( std::forward<Ty>( arg ));
 		WriteLine( args... );
 	}
 

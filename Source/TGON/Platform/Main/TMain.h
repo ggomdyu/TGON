@@ -10,8 +10,8 @@
 #pragma once
 
 
-#define TGON_REGISTER_MAINAPP( className )\
-int32_t RunApplication( )\
+#define TGON_REGISTER_MAIN( className )\
+int32_t RunAppMain( int32_t argc, char** argv )\
 {\
-	return className::Main( );\
+	return className::Main( argc, argv );\
 }

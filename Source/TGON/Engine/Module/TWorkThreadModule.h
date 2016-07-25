@@ -68,17 +68,14 @@ private:
 
 
 template <class _FuncTy, class... _Args>
-void tgon::TWorkThreadModule::Request( 
-	_FuncTy&& work, 
-	_Args&&... args )
+void tgon::TWorkThreadModule::Request( _FuncTy&& work,  _Args&&... args )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 
-	m_workQueue.emplace_back(
-			std::forward<_FuncTy>( work ), std::forward<_Args>( args )...
-		);
-
-	m_waitCv.notify_one( ); // Wake up one thread
+	m_workQueue.emplace_back( std::forward<_FuncTy>( work ), std::forward<_Args>( args )... );
+	
+	// Wake up one thread
+	m_waitCv.notify_one( );
 }
 
 
