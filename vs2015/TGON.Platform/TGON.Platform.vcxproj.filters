@@ -195,11 +195,14 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp">
       <Filter>Sources\Utility\cpp\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\WindowsConsoleHelper.cpp">
-      <Filter>Sources\Utility\cpp\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp">
       <Filter>Sources\Application\cpp\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp">
+      <Filter>Sources\Console\hpp\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Console\TConsole.cpp">
+      <Filter>Sources\Console\hpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,9 +288,6 @@
       <Filter>Sources\Utility\hpp\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\unique_comptr.h">
-      <Filter>Sources\Utility\hpp\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\WindowsConsoleHelper.h">
       <Filter>Sources\Utility\hpp\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Time\Abstract\AbstractTime.h">

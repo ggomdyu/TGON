@@ -1,6 +1,6 @@
 #pragma once
 #include <Engine/Executable/TGameBody.h>
-
+#include <Console/TConsole.h>
 
 using namespace tgon;
 

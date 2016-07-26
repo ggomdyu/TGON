@@ -7,7 +7,6 @@
 
 #pragma once
 #include "../Interface/IConsole.h"
-#include "../../Utility/Windows/WindowsConsoleHelper.h"
 
 
 #ifndef WIN32_LEAN_AND_MEAN
@@ -24,47 +23,27 @@ namespace tgon
 using ConsoleImpl = class WindowsConsole;
 
 class TGON_API WindowsConsole : 
-	private IConsole
+	public IConsole
 {
-
 public:
-	/*
-		Cons/Destructor
-	*/
-	WindowsConsole( ) = delete;
-
-	virtual ~WindowsConsole( ) = delete;
-	
-	
 	/*
 		Commands
 	*/
-	// Write
-	static void Write( _In_ const char* str )
-	{
-#if defined ( _DEBUG ) || ( DEBUG )
-		WriteConsoleA(
-			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
-			str,
-			std::strlen( str ),
-			nullptr,
-			nullptr
-		);
-#endif
-	}
+	virtual void Write( _In_ const char* str ) override;
 
-	static void Write( _In_ const wchar_t* str )
-	{
-#if defined ( _DEBUG ) || ( DEBUG )
-		WriteConsoleW(
-			WindowsConsoleHelper::Get( )->GetConsoleHandle( ),
-			str,
-			std::wcslen( str ),
-			nullptr,
-			nullptr
-		);
-#endif
-	}
+	virtual void Write( _In_ const wchar_t* str ) override;
+
+
+protected:
+	/*
+		Cons/Destructor
+	*/
+	WindowsConsole( );
+
+	virtual ~WindowsConsole( );
+	
+private:
+	HANDLE m_outputHandle;
 };
 
 

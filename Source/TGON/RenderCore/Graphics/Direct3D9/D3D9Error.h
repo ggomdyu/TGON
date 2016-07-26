@@ -103,7 +103,7 @@ class ErrorStrings<D3D9ErrorCode>
 			// Is errCode duplicated?
 			if ( m_errStrings.find( errCode ) != m_errStrings.end( ))
 			{
-				TConsole::WriteLine( L"A error code has duplicated. [", errString, L"]" );
+				//TConsole::WriteLine( L"A error code has duplicated. [", errString, L"]" );
 			}
 			// Otherwise, insert the error string
 			else

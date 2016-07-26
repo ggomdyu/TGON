@@ -19,20 +19,20 @@ class TGON_API IConsole :
 {
 public:
 	/*
-		Cons/Destructor
-	*/
-	IConsole( ) = delete;
-
-	virtual ~IConsole( ) = delete;
-
-
-public:
-	/*
 		Commands
 	*/
-	static void Write( const char* str ) {}
+	virtual void Write( const char* str ) = 0;
 
-	static void Write( const wchar_t* str ) {}
+	virtual void Write( const wchar_t* str ) = 0;
+
+protected:
+	/*
+		Cons/Destructor
+	*/
+	IConsole( ) = default;
+
+	virtual ~IConsole( ) = default;
+
 };
 
 

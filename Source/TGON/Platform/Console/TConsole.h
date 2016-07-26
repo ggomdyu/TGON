@@ -17,43 +17,40 @@ class TGON_API TConsole :
 	public ConsoleImpl
 {
 public:
-	/*
-		Cons/Destructor
-	*/
-	TConsole( ) = delete;
-
-	virtual ~TConsole( ) = delete;
-	
+	static TConsole& Get( )
+	{
+		static TConsole ret;
+		return ret;
+	}
 
 public:
 	/*
 		Commands
 	*/
 	// Write
-	template <typename Ty, typename... _Args>
-	static void Write( Ty&& arg, const _Args&... args )
-	{
-		ConsoleImpl::Write( std::forward<Ty>( arg ));
-		Write( args... );
-	}
+	void Write( const char* format, ... );
 
-	static void Write( )
-	{
-	}
+	void Write( const wchar_t* format, ... );
+
+	void WriteLine( const char* format, ... );
+
+	void WriteLine( const wchar_t* format, ... );
 
 
-	// WriteLine
-	template <typename Ty, typename... _Args>
-	static void WriteLine( Ty&& arg, const _Args&... args )
-	{
-		ConsoleImpl::Write( std::forward<Ty>( arg ));
-		WriteLine( args... );
-	}
+protected:
+	/*
+		Cons/Destructor
+	*/
+	TConsole( ) = default;
 
-	static void WriteLine( )
-	{
-		ConsoleImpl::Write( L"\n" );
-	}
+	virtual ~TConsole( ) = default;
+
+
+private:
+	void WriteImpl( const char* format, va_list vaList );
+	
+	void WriteImpl( const wchar_t* format, va_list vaList );
+
 
 };
 
