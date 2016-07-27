@@ -139,7 +139,7 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 	DWORD normalStyle, exStyle;
 	Convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
 	
-	// Convert utf8 encode title to utf16.
+	// Convert utf8 encoded title to utf16.
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utfConverter;
 	std::wstring utf16Title( utfConverter.from_bytes( wndStyle.title.c_str( )));
 
