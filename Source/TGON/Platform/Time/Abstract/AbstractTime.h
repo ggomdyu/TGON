@@ -3,12 +3,12 @@
 * Date : 05/15/2016
 * Latest author :
 * Latest date :
-* Description : Abstract-API Sets for Windows
 */
 
 
 #pragma once
 #include "../../../Platform/Config/Build.h"
+
 #include "../TTimeType.h"
 
 
@@ -22,16 +22,19 @@ public:
 	/*
 		Commands
 	*/
-	// Getting OS's execution time as millisecond
-	static uint32_t GetBootTime( ) {};
+	// Get execution time of OS as millisecond
+	static uint32_t GetBootTime( ) {}
 
-	static uint64_t GetBootTime64( ) {};
+	// Get execution time of OS as millisecond
+	static uint64_t GetBootTime64( ) {}
 
-	// Getting current system time
-	static TSystemTime GetLocalTime( ) {};
+	// Get current system time
+	static TSystemTime GetLocalTime( ) {}
+
+	static void Sleep( unsigned int milliSec ) {}
 
 
-private:
+public:
 	/*
 		Cons/Destructor
 	*/

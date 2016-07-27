@@ -23,7 +23,7 @@ public:
 		Commands
 	*/
 	// Get current application's execution time as millisecond
-	static uint32_t GetAppExecutionTime( );
+	static uint32_t GetAppExecTime( );
 
 
 public:
@@ -40,7 +40,7 @@ private:
 };
 
 
-inline uint32_t TTime::GetAppExecutionTime( )
+inline uint32_t TTime::GetAppExecTime( )
 {
 	return TimeImpl::GetBootTime( ) - ms_oldTime;
 }

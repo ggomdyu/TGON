@@ -64,7 +64,6 @@ int32_t tgon::TEngineLoop::Execute( int argc, char** argv )
 			m_gameBody->Update( );
 			NotifyEvent( TEvent::OnUpdateEnd );
 
-
 			NotifyEvent( TEvent::OnRenderBegin );
 			m_gameBody->Render( );
 			NotifyEvent( TEvent::OnRenderEnd );

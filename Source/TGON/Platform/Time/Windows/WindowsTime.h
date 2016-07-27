@@ -3,26 +3,23 @@
 * Date : 05/15/2016
 * Latest author :
 * Latest date :
-* Description : Abstract-API Sets for Windows
 */
 
 
 #pragma once
 #include "../Abstract/AbstractTime.h"
-#include "../../Config/Build.h"
 
-#ifndef WIN32_LEAN_AND_MEAN
-#	define WIN32_LEAN_AND_MEAN
-#	include <Windows.h>
-#	undef WIN32_LEAN_AND_MEAN
-#endif
+#include <Windows.h>
 
 
 namespace tgon
 {
 
 
-using TimeImpl = class WindowsTime;
+class WindowsTime;
+
+using TimeImpl = WindowsTime;
+
 
 class TGON_API WindowsTime :
 	public AbstractTime
@@ -31,16 +28,19 @@ public:
 	/*
 		Commands
 	*/
-	// Getting OS's execution time as millisecond
+	// Get execution time of OS as millisecond
 	static uint32_t GetBootTime( );
 	
+	// Get execution time of OS as millisecond
 	static uint64_t GetBootTime64( );
 
-	// Getting current system time
+	// Get current system time
 	static TSystemTime GetLocalTime( );
 	
+	static void Sleep( unsigned int milliSec );
 
-private:
+
+public:
 	/*
 		Cons/Destructor
 	*/
@@ -58,6 +58,11 @@ inline uint32_t WindowsTime::GetBootTime( )
 inline uint64_t WindowsTime::GetBootTime64( )
 {
 	return GetTickCount64( );
+}
+
+inline void tgon::WindowsTime::Sleep( unsigned int milliSec )
+{
+	::Sleep( milliSec );
 }
 
 

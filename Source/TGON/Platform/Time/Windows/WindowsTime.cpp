@@ -1,10 +1,11 @@
 #include "PrecompiledHeader.h"
 #include "WindowsTime.h"
 
+#include <Windows.h>
+
 
 tgon::TSystemTime tgon::WindowsTime::GetLocalTime( )
 {
-#if BOOST_OS_WINDOWS
 	SYSTEMTIME prevSysTime;
 	::GetLocalTime( &prevSysTime );
 
@@ -18,7 +19,4 @@ tgon::TSystemTime tgon::WindowsTime::GetLocalTime( )
 	sysTime.second = prevSysTime.wSecond;
 
 	return sysTime;
-#else
-
-#endif
 }

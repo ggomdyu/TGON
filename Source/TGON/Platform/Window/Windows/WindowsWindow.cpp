@@ -11,8 +11,6 @@
 #include <Windows.h>
 #include <codecvt>
 
-#include <Console/TConsole.h>
-
 #ifdef TGON_SUPPORT_DWMAPI
 	#include <dwmapi.h>
 	#pragma comment( lib, "dwmapi.lib" )
@@ -148,7 +146,7 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 	// Create a Window.
 	m_wndHandle = CreateWindowExW(
 		exStyle,
-		WindowsApplication::ms_appClassName,
+		WindowsApplication::AppClassName,
 		utf16Title.c_str( ),
 		normalStyle,
 		x,

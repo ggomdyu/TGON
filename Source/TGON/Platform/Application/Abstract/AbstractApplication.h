@@ -32,7 +32,7 @@ public:
 	/*
 		Commands
 	*/
-	//Update the event queue. Return false if the system queue is empty.
+	// Update the event queue. Return false if the system queue is empty.
 	virtual bool PumpEvent( ) = 0;
 
 	virtual void ExitThread( ) = 0;

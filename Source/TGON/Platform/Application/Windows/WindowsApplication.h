@@ -37,7 +37,7 @@ class TGON_API WindowsApplication :
 	public AbstractApplication
 {
 public:
-	static const wchar_t* ms_appClassName;
+	static const wchar_t* AppClassName;
 
 public:
 	/*

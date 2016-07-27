@@ -50,6 +50,8 @@ public:
 	*/
 	const SpTWindow& GetWindow( ) const;
 
+	const SpTGraphics& GetGraphics( ) const;
+
 	//template <typename ModuleTy>
 	//const std::shared_ptr<ModuleTy>& GetModule( ) const;
 
@@ -73,6 +75,11 @@ private:
 inline const SpTWindow & tgon::TGameBody::GetWindow( ) const
 {
 	return m_window;
+}
+
+inline const SpTGraphics& TGameBody::GetGraphics( ) const
+{
+	return m_graphics;
 }
 
 

@@ -7,16 +7,16 @@
 
 #pragma once
 #include "../../Platform/Config/Build.h"
-#include "TObject.h"
 
 
 namespace tgon
 {
 
-class IComparable
+
+class TGON_API IComparable
 {
 public:
-	virtual void CompareTo( const TObject& ) = 0;
+	virtual void CompareTo( class TObject& ) = 0;
 };
 
 

@@ -48,9 +48,6 @@
     <ClInclude Include="..\..\Source\TGON\GameCore\World\TGameWorld.h">
       <Filter>Sources\GameWorld</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\GameCore\Object\IComparable.h">
-      <Filter>Sources\Object\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\GameCore\Object\TGameCamera.h">
       <Filter>Sources\Object\hpp</Filter>
     </ClInclude>

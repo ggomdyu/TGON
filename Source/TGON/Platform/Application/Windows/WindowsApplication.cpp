@@ -5,7 +5,7 @@
 #include "../../Window/TWindow.h"
 
 
-const wchar_t* tgon::WindowsApplication::ms_appClassName = L"TGON_Application";
+const wchar_t* tgon::WindowsApplication::AppClassName = L"TGON_Application";
 
 
 tgon::WindowsApplication::WindowsApplication( )
@@ -53,7 +53,7 @@ bool tgon::WindowsApplication::RegisterClass( )
 	WNDCLASSEXW wcex {0};
 
 	wcex.cbSize = sizeof( wcex );
-	wcex.lpszClassName = WindowsApplication::ms_appClassName;
+	wcex.lpszClassName = WindowsApplication::AppClassName;
 	wcex.style = CS_DBLCLKS;
 	wcex.hbrBackground = static_cast<HBRUSH>( GetStockObject( WHITE_BRUSH ));
 	wcex.hCursor = LoadCursorW( NULL, IDC_ARROW );
