@@ -55,7 +55,7 @@ public:
 	*/
 	void SetClearColor( uint32_t clearColor );
 
-	void SetCullMode( TCullMode cullMode );
+	virtual void SetCullMode( TCullMode cullMode ) = 0;
 
 
 	/*
@@ -78,12 +78,6 @@ public:
 
 
 protected:
-	void UpdateBackBufferWidth( int32_t width );
-
-	void UpdateBackBufferHeight( int32_t height );
-
-
-private:
 	int32_t m_backBufferWidth;
 
 	int32_t m_backBufferHeight;
@@ -129,16 +123,6 @@ inline int32_t AbstractGraphics::GetBackBufferWidth( ) const
 inline int32_t AbstractGraphics::GetBackBufferHeight( ) const
 {
 	return m_backBufferHeight;
-}
-
-inline void AbstractGraphics::UpdateBackBufferWidth( int32_t width )
-{
-	m_backBufferWidth = width;
-}
-
-inline void AbstractGraphics::UpdateBackBufferHeight( int32_t height )
-{
-	m_backBufferHeight = height;
 }
 
 
