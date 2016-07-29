@@ -42,24 +42,26 @@ public:
 		Command
 	*/
 	// Begin scene rendering. Return true if device can render.
-	virtual bool BeginScene( );
+	virtual bool BeginScene( ) override;
 	
 	// End scene rendering. This function must be called after BeginScene
-	virtual bool EndScene( );
+	virtual bool EndScene( ) override;
 	
 	// Clear the back buffer scene.
-	virtual bool Clear( );
+	virtual bool Clear( ) override;
 
 	// Draw the back buffer to visible screen.
-	virtual bool Present( );
+	virtual bool Present( ) override;
 
 	//
-	void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount );
+	virtual void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) override;
 
 
 	/*
 		Sets
 	*/
+	virtual void EnableDepthBuffer( bool isEnable ) override;
+	
 
 	/*
 		Gets
@@ -107,6 +109,11 @@ inline void D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t 
 		startVertex,
 		primitiveCount
 	);
+}
+
+inline void tgon::D3D9Graphics::EnableDepthBuffer( bool isEnable )
+{
+	m_d3dDevice->SetRenderState( D3DRS_ZENABLE, ( isEnable ) ? D3DZB_TRUE : D3DZB_FALSE );
 }
 
 
