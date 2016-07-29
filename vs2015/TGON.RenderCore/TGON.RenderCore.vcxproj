@@ -27,11 +27,14 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Fwd.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsStyle.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsType.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Camera\TCamera.cpp" />
@@ -39,10 +42,12 @@
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.cpp" />
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON.Core\TGON.Core.vcxproj">

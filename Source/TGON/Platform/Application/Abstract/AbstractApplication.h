@@ -22,14 +22,6 @@ class TGON_API AbstractApplication
 {
 public:
 	/*
-		Cons/Destructor
-	*/
-	AbstractApplication( ) = default;
-	
-	virtual ~AbstractApplication( ) = default;
-
-
-	/*
 		Commands
 	*/
 	// Update the event queue. Return false if the system queue is empty.
@@ -44,6 +36,15 @@ public:
 		Gets
 	*/
 	virtual struct TSystemBatteryInfo GetPowerInfo( ) = 0;
+
+
+public:
+	/*
+		Cons/Destructor
+	*/
+	AbstractApplication( ) = default;
+	
+	virtual ~AbstractApplication( ) = default;
 
 };
 

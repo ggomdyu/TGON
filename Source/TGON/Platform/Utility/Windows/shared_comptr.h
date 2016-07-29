@@ -13,46 +13,21 @@ namespace tgon
 {
 
 
-template <typename _RawPtrTy>
+template <typename RawPtrTy>
 class shared_comptr
 {
 public:
 	// Set the pointer without increasing the reference count.
-	void Attach( _RawPtrTy* rawPtr )
-	{
-		if ( m_rawPtr )
-		{
-			m_rawPtr->Relese( );
-		}
-	
-		m_rawPtr = rawPtr;
-	}
+	void Attach( RawPtrTy* rawPtr );
 
 	// Set the pointer without decreasing the reference count.
-	void Detach( )
-	{
-		m_rawPtr = nullptr;
-	}
+	void Detach( );
 
 	// Release and attach the pointer.
-	void Reset( _RawPtrTy* rawPtr )
-	{
-		this->Release( );
-		if ( rawPtr )
-		{
-			rawPtr->AddRef( );
-		}
-	}
+	void Reset( RawPtrTy* rawPtr );
 
 	// Relese the pointer.
-	void Release( )
-	{
-		if ( m_rawPtr )
-		{
-			m_rawPtr->Release( );
-			m_rawPtr = nullptr;
-		}
-	}
+	void Release( );
 
 
 public:
@@ -61,7 +36,7 @@ public:
 	{
 	}
 
-	explicit shared_comptr( _RawPtrTy* rhs ) :
+	shared_comptr( RawPtrTy* rhs ) :
 		m_rawPtr( rhs )
 	{
 		if ( m_rawPtr )
@@ -140,24 +115,62 @@ public:
 		return ( m_rawPtr != rhs.m_rawPtr );
 	}
 	
-	_RawPtrTy** operator&( )
+	RawPtrTy** operator&( )
 	{
 		return &m_rawPtr;
 	}
 	
-	_RawPtrTy* operator->( ) const
+	RawPtrTy* operator->( ) const
 	{
 		return m_rawPtr;
 	}
 
-	operator _RawPtrTy*( ) const
+	operator RawPtrTy*( ) const
 	{
 		return m_rawPtr;
 	}
 
 private:
-	_RawPtrTy* m_rawPtr;
+	RawPtrTy* m_rawPtr;
 };
+
+
+template<typename RawPtrTy>
+inline void shared_comptr<RawPtrTy>::Attach( RawPtrTy* rawPtr )
+{
+	if ( m_rawPtr )
+	{
+		m_rawPtr->Relese( );
+	}
+
+	m_rawPtr = rawPtr;
+}
+
+template<typename RawPtrTy>
+inline void shared_comptr<RawPtrTy>::Detach( )
+{
+	m_rawPtr = nullptr;
+}
+
+template<typename RawPtrTy>
+inline void shared_comptr<RawPtrTy>::Reset( RawPtrTy* rawPtr )
+{
+	this->Release( );
+	if ( rawPtr )
+	{
+		rawPtr->AddRef( );
+	}
+}
+
+template<typename RawPtrTy>
+inline void shared_comptr<RawPtrTy>::Release( )
+{
+	if ( m_rawPtr )
+	{
+		m_rawPtr->Release( );
+		m_rawPtr = nullptr;
+	}
+}
 
 
 }

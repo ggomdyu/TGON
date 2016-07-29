@@ -53,6 +53,12 @@
     <Filter Include="Sources\Graphics\cpp\Direct3D9">
       <UniqueIdentifier>{2d2a5921-371d-4ac8-8617-5fc1f451e304}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Graphics\cpp\Abstract">
+      <UniqueIdentifier>{115dc88c-e94f-47d8-bb88-d53b32c41c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Slate\cpp">
+      <UniqueIdentifier>{c4435528-cb3c-46cc-a6c3-bf1af0e8c8d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -94,6 +100,15 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformVertexBuffer.h">
+      <Filter>Sources\Slate\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -115,7 +130,13 @@
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphics.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\Graphics\cpp\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.cpp">
+      <Filter>Sources\Graphics\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
