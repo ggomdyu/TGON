@@ -14,7 +14,8 @@ namespace tgon
 {
 
 
-class TGON_API TVertexBuffer
+class TGON_API TVertexBuffer : 
+  public VertexBufferImpl
 {
 };
 
