@@ -18,6 +18,8 @@ namespace tgon
 {
 
 
+using VertexBufferImpl = class D3D9VertexBuffer;
+
 class TGON_API D3D9VertexBuffer
 {
 public:
