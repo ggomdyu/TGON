@@ -105,7 +105,7 @@ void tgon::D3D9Graphics::InitD3DDevice( )
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING;
 
 	
-	D3DPRESENT_PARAMETERS pp {0};
+	D3DPRESENT_PARAMETERS pp;
 	pp.Windowed = TRUE;
 	pp.BackBufferWidth = this->GetBackBufferWidth( );
 	pp.BackBufferHeight = this->GetBackBufferHeight( );

@@ -48,13 +48,18 @@ public:
 
 	bool Unlock( );
 
-	IDirect3DVertexBuffer9* GetVertexBuffer( );
+
+	/*
+		Sets
+	*/
 
 
 	/*
 		Gets
 	*/
-	D3DVERTEXBUFFER_DESC GetDesc( );
+	IDirect3DVertexBuffer9* GetVertexBuffer( );
+	
+	D3DVERTEXBUFFER_DESC GetDesc( ) const;
 
 
 private:
@@ -73,7 +78,7 @@ inline IDirect3DVertexBuffer9* tgon::D3D9VertexBuffer::GetVertexBuffer( )
 	return m_vertexBuffer;
 }
 
-inline D3DVERTEXBUFFER_DESC D3D9VertexBuffer::GetDesc( )
+inline D3DVERTEXBUFFER_DESC D3D9VertexBuffer::GetDesc( ) const
 {
 	D3DVERTEXBUFFER_DESC desc;
 	m_vertexBuffer->GetDesc( &desc );

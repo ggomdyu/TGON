@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include "../../Core/Object/TObject.h"
 #include "../../Platform/Config/Build.h"
+#include "../../Core/Object/TObject.h"
 
 
 namespace tgon
