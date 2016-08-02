@@ -18,8 +18,13 @@ struct TGON_API TQuaternion
 {
 public:
 	static const TQuaternion Zero;
+
 	static const TQuaternion Identity;
 
+
+	/*	
+		Cons/Destructor
+	*/
 public:
 	TQuaternion( );
 
@@ -32,28 +37,39 @@ public:
 	TQuaternion( const TQuaternion& );
 
 
+	/*
+		Operators
+	*/
 public:
-    // Arithmetic operators
 	TQuaternion operator*( const TQuaternion& ) const;
 
-	// Unary operators
 	TQuaternion operator+( ) const;
+	
 	TQuaternion operator-( ) const;
 
-	// Compound assignment operators
 	TQuaternion& operator*=( const TQuaternion& );
 
-	// Comparison operators
 	bool operator==( const TQuaternion& ) const;
+	
 	bool operator!=( const TQuaternion& ) const;
 
 	float& operator[]( int32_t );
+	
 	float operator[]( int32_t ) const;
 	
+
+	/*
+		Commands
+	*/
 public:
 	struct TMatrix4x4 RotateMatrix( ) const;
 
+
+	/*
+		Member variables
+	*/
 public:
+	// sdfskopwfok
 	float x, y, z, w;
 };
 
@@ -66,11 +82,7 @@ inline TQuaternion::TQuaternion( ) :
 {
 }
 
-inline TQuaternion::TQuaternion(
-	float x, 
-	float y, 
-	float z,
-	float w ) :
+inline TQuaternion::TQuaternion( float x, float y, float z, float w ) :
 	x( x ), 
 	y( y ), 
 	z( z ),
@@ -78,8 +90,7 @@ inline TQuaternion::TQuaternion(
 {
 }
 
-inline TQuaternion::TQuaternion( 
-	const TQuaternion& rhs ) :
+inline TQuaternion::TQuaternion( const TQuaternion& rhs ) :
 	x( rhs.x ),
 	y( rhs.y ),
 	z( rhs.z ),
@@ -87,8 +98,7 @@ inline TQuaternion::TQuaternion(
 {
 }
 
-inline TQuaternion TQuaternion::operator*(
-	const TQuaternion& rhs ) const
+inline TQuaternion TQuaternion::operator*( const TQuaternion& rhs ) const
 {
 	return TQuaternion( x*rhs.x, y*rhs.y, z*rhs.z, w*rhs.w );
 }
@@ -129,18 +139,14 @@ inline bool TQuaternion::operator!=(
 inline float& TQuaternion::operator[](
 	int32_t index )
 {
-	assert(( index < 4 && index > -1 ) &&
-		"TVector3 index out of range" );
-
+	assert(( index < 4 && index > -1 ) && "TQuaternion index out of range" );
 	return *( &x + index );
 }
 
 inline float TQuaternion::operator[](
 	int32_t index ) const
 {
-	assert(( index < 4 && index > -1 ) &&
-		"TVector3 index out of range" );
-
+	assert(( index < 4 && index > -1 ) && "TQuaternion index out of range" );
 	return *( &x + index );
 }
 

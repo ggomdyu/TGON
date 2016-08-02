@@ -4,7 +4,7 @@
 #include "../../Platform/Window/TWindow.h"
 
 
-tgon::TGraphics::TGraphics( TWindow* owner ) :
-	GraphicsImpl( owner )
+tgon::TGraphics::TGraphics( TWindow* owner, bool isWindowed ) :
+	GraphicsImpl( owner, isWindowed )
 {
 }

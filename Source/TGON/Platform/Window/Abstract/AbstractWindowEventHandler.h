@@ -28,9 +28,7 @@ public:
 	*/
 	AbstractWindowEventHandler( ) = default;
 
-	virtual ~AbstractWindowEventHandler( )
-	{
-	}
+	virtual ~AbstractWindowEventHandler( ) = default;
 
 
 	/*

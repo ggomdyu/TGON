@@ -13,36 +13,20 @@ namespace tgon
 {
 
 
-using SpTWindow = std::shared_ptr<class TWindow>;
+class TWindow;
+using SpTWindow = std::shared_ptr<TWindow>;
 
 class TGON_API TWindow :
 	public WindowImpl
 {
-protected:
+public:
 	/*
 		Cons/Destructor
 	*/
 	explicit TWindow( const WindowStyle& wndStyle );
 
-public:
 	virtual ~TWindow( ) = default;
-
-
-public:
-	/*
-		Commands
-	*/
-	// TWindow only support the creation as specified type.
-	static SpTWindow Make( const WindowStyle& );
-
 };
-
-
-inline SpTWindow TWindow::Make( const WindowStyle& wndStyle )
-{
-	SpTWindow window( new TWindow( wndStyle ));
-	return window;
-}
 
 
 }

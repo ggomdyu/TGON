@@ -112,19 +112,19 @@ inline bool TObject::ReferenceEquals(
 }
 
 
-#define TGON_OBJECT( classType, baseType )\
-	using Super = baseType;\
+#define TGON_OBJECT( baseType, superType )\
+	using Super = superType;\
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\
-		return classType::GetType( ).GetHashCode( );\
+		return baseType::GetType( ).GetHashCode( );\
 	}\
 	virtual const char* GetName( ) const override\
 	{\
-		return #classType;\
+		return #baseType;\
 	}\
 	static const tgon::TType& GetType( )\
 	{\
-		static const tgon::TType ret( #classType );\
+		static const tgon::TType ret( #baseType );\
 		return ret;\
 	}

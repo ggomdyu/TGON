@@ -8,6 +8,7 @@
 
 #pragma once
 #include "../../Platform/Window/TWindow.h"
+#include "../../Platform/Window/WindowStyle.h"
 #include "../../Core/Object/TEventSubject.h"
 #include "../../RenderCore/Graphics/TGraphics.h"
 #include "../../Engine/Module/Interface/IModule.h"

@@ -17,7 +17,8 @@ namespace tgon
 {
 
 
-using GraphicsImpl = class D3D9Graphics;
+class D3D9Graphics;
+using GraphicsImpl = D3D9Graphics;
 
 class TGON_API D3D9Graphics : 
 	public AbstractGraphics
@@ -26,7 +27,7 @@ protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit D3D9Graphics( class TWindow* deviceWindow );
+	explicit D3D9Graphics( TWindow* deviceWindow, bool isWindowed );
 	
 	D3D9Graphics( const D3D9Graphics& ) = delete;
 
@@ -36,6 +37,7 @@ protected:
 		Operators
 	*/
 	D3D9Graphics& operator=( const D3D9Graphics& ) = delete;
+
 
 public:
 	/*
@@ -60,6 +62,8 @@ public:
 	/*
 		Sets
 	*/
+	virtual void SetCullMode( TCullMode cullMode ) override;
+	
 	virtual void EnableDepthBuffer( bool isEnable ) override;
 	
 
@@ -109,6 +113,24 @@ inline void D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t 
 		startVertex,
 		primitiveCount
 	);
+}
+
+inline void D3D9Graphics::SetCullMode( TCullMode cullMode )
+{
+	m_currMode = m_currMode;
+
+	if ( cullMode == TCullMode::kCW )
+	{
+		m_d3dDevice->SetRenderState( D3DRENDERSTATETYPE::D3DRS_CULLMODE, D3DCULL::D3DCULL_CW );
+	}
+	else if ( cullMode == TCullMode::kCCW )
+	{
+		m_d3dDevice->SetRenderState( D3DRENDERSTATETYPE::D3DRS_CULLMODE, D3DCULL::D3DCULL_CCW );
+	}
+	else if ( cullMode == TCullMode::kNone )
+	{
+		m_d3dDevice->SetRenderState( D3DRENDERSTATETYPE::D3DRS_CULLMODE, D3DCULL::D3DCULL_NONE );
+	}
 }
 
 inline void tgon::D3D9Graphics::EnableDepthBuffer( bool isEnable )

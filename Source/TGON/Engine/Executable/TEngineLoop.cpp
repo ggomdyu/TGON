@@ -11,22 +11,20 @@ std::shared_ptr<tgon::TGameBody> GenerateGameBody( );
 
 namespace tgon
 {
-	class EngineWindowEventListener :
+	class EngineWindowEventHandler :
 		public AbstractWindowEventHandler,
 		public TEventSubject
 	{
 	public:
-		TGON_OBJECT( EngineWindowEventListener, TEventSubject )
+		TGON_OBJECT( EngineWindowEventHandler, TEventSubject )
 
-	public:
 		/*
 			Cons/Destructor
 		*/
-		EngineWindowEventListener( ) {}
+		EngineWindowEventHandler( ) {}
 
-		virtual ~EngineWindowEventListener( ) {}
+		virtual ~EngineWindowEventHandler( ) {}
 
-	public:
 		/*
 			Event handler
 		*/
@@ -48,7 +46,7 @@ tgon::TEngineLoop::TEngineLoop( ) :
 int32_t tgon::TEngineLoop::Execute( int argc, char** argv )
 {
 	// Make custom event handler.
-	auto customEventHandler = std::make_shared<EngineWindowEventListener>( );
+	auto customEventHandler = std::make_shared<EngineWindowEventHandler>( );
 
 	// Register event handler.
 	SpTWindow window = m_gameBody->GetWindow( );
@@ -58,7 +56,7 @@ int32_t tgon::TEngineLoop::Execute( int argc, char** argv )
 	while ( !m_isGameDone )
 	{
 		// Idle time
-		if ( !TApplication::Get( )->PumpEvent( ))
+		if ( !window->PumpEvent( ))
 		{
 			NotifyEvent( TEvent::OnUpdateBegin );
 			m_gameBody->Update( );

@@ -47,7 +47,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.cpp">
+    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtility.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -97,7 +97,7 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtil.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtility.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>

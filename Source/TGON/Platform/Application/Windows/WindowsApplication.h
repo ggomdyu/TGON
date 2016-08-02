@@ -10,6 +10,7 @@
 #include "../Abstract/AbstractApplication.h"
 
 #include "../TApplicationType.h"
+#include <cassert>
 
 
 #ifndef WIN32_LEAN_AND_MEAN

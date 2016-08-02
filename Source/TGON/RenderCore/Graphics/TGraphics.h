@@ -14,7 +14,8 @@ namespace tgon
 {
 
 
-using SpTGraphics = std::shared_ptr<class TGraphics>;
+class TGraphics;
+using SpTGraphics = std::shared_ptr<TGraphics>;
 
 class TGON_API TGraphics :
 	public GraphicsImpl
@@ -23,7 +24,7 @@ protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit TGraphics( class TWindow* deviceWindow );
+	explicit TGraphics( TWindow* deviceWindow, bool isWindowed );
 
 public:
 	virtual ~TGraphics( ) = default;
@@ -34,14 +35,15 @@ public:
 		Commands
 	*/
 	// TGraphics only support the creation as specified type.
-	static SpTGraphics Make( class TWindow* deviceWindow );
+	static SpTGraphics Make( TWindow* deviceWindow, bool isWindowed );
 
 };
 
 inline SpTGraphics TGraphics::Make( 
-	class TWindow* deviceWindow )
+	TWindow* deviceWindow, 
+	bool isWindowed )
 {
-	SpTGraphics graphics( new TGraphics( deviceWindow ));
+	SpTGraphics graphics( new TGraphics( deviceWindow, isWindowed ));
 	return graphics;
 }
 

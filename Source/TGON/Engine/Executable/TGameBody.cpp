@@ -4,8 +4,8 @@
 
 tgon::TGameBody::TGameBody( const WindowStyle& wndStyle ) :
 	m_isGameDone( false ),
-	m_window( TWindow::Make( wndStyle )),
-	m_graphics( TGraphics::Make( m_window.get()))
+	m_window( std::make_shared<TWindow>( wndStyle )),
+	m_graphics( TGraphics::Make( m_window.get(), true ))
 {
 }
 

@@ -9,14 +9,13 @@
 #pragma once
 #include "../../../Platform/Config/Build.h"
 
-#include "../WindowStyle.h"
+#include "../../Window/Abstract/AbstractWindowEventHandler.h"
+#include <memory>
 
 
 namespace tgon
 {
 
-
-class AbstractWindowEventHandler;
 
 class TGON_API AbstractWindow : 
 	private boost::noncopyable
@@ -34,6 +33,8 @@ public:
 	/*
 		Commands
 	*/
+	virtual bool PumpEvent( ) { return false; }
+
 	virtual void Show( ) {}
 
 	virtual void Hide( ) {}
@@ -65,8 +66,6 @@ public:
 	/*
 		Gets
 	*/
-	const std::shared_ptr<AbstractWindowEventHandler>& GetEventHandler( ) const;
-
 	virtual void GetPosition( int32_t* x, int32_t* y ) const {};
 
 	virtual void GetSize( int32_t* width, int32_t* height ) const {};
@@ -86,11 +85,6 @@ protected:
 inline void tgon::AbstractWindow::SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventListener )
 {
 	m_eventListener = eventListener;
-}
-
-inline const std::shared_ptr<AbstractWindowEventHandler>& AbstractWindow::GetEventHandler( ) const
-{
-	return m_eventListener;
 }
 
 inline bool AbstractWindow::IsEnabledGlobalInputFocus( ) const

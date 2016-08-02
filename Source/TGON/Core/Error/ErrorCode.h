@@ -6,23 +6,22 @@
 */
 
 #pragma once
-#include "../Platform/Config/Build.h"
 
 
 namespace tgon
 {
 
 
-template<typename _ErrorCodeTy>
+template<typename ErrorCodeTy>
 struct ErrorStrings
 {
 	static const wchar_t* m_errStrings[];
 };
 
-template<typename _ErrorCodeTy>
-inline const wchar_t* GetErrorString( _ErrorCodeTy errEnum )
+template<typename ErrorCodeTy>
+inline const wchar_t* GetErrorString( ErrorCodeTy errEnum )
 {
-	return ErrorStrings<_ErrorCodeTy>::m_errStrings[static_cast<int>( errEnum )];
+	return ErrorStrings<ErrorCodeTy>::m_errStrings[static_cast<int>( errEnum )];
 }
 
 

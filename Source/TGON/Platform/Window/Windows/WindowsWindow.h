@@ -12,15 +12,16 @@
 #	define WIN32_LEAN_AND_MEAN
 #	include <Windows.h>
 #	undef WIN32_LEAN_AND_MEAN
-#endif WIN32_LEAN_AND_MEAN
-
+#endif
 
 
 namespace tgon
 {
 
 
-using WindowImpl = class WindowsWindow;
+struct WindowStyle;
+class WindowsWindow;
+using WindowImpl = WindowsWindow;
 
 
 class TGON_API WindowsWindow : 
@@ -32,7 +33,7 @@ protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit WindowsWindow( const struct WindowStyle& );
+	explicit WindowsWindow( const WindowStyle& );
 
 	virtual ~WindowsWindow( );
 
@@ -40,6 +41,8 @@ public:
 	/*
 		Commands
 	*/
+	virtual bool PumpEvent( ) override;
+
 	virtual void Show( ) override;
 
 	virtual void Hide( ) override;
@@ -64,25 +67,28 @@ public:
 
 	virtual void SetScale( int32_t width, int32_t height ) override;
 
-	virtual void SetCaption( _In_ const wchar_t* caption );
+	virtual void SetCaption( IN const wchar_t* caption );
 	
 
 	/*
 		Gets
 	*/
-	virtual void GetPosition( _Out_ int32_t* x, _Out_ int32_t* y ) const override;
+	virtual void GetPosition( OUT int32_t* x, OUT int32_t* y ) const override;
 
-	virtual void GetSize( _Out_ int32_t* width, _Out_ int32_t* height ) const override;
+	virtual void GetSize( OUT int32_t* width, OUT int32_t* height ) const override;
 
-	virtual void GetCaption( _Out_ wchar_t* caption ) const override;
+	virtual void GetCaption( OUT wchar_t* caption ) const override;
 	
 	HWND GetWindowHandle( ) const;
 
 
 private:
-	void CreateWindowForm( _In_ const struct WindowStyle& );
+	/*
+		Internal works
+	*/
+	void CreateWindowForm( IN const WindowStyle& );
 
-	void AdditionalInit( _In_ const struct WindowStyle& );
+	void AdditionalInit( IN const WindowStyle& );
 
 	virtual LRESULT ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
@@ -97,7 +103,7 @@ inline HWND tgon::WindowsWindow::GetWindowHandle( ) const
 	return m_wndHandle;
 }
 
-inline void tgon::WindowsWindow::Show( ) 
+inline void tgon::WindowsWindow::Show( )
 {
 	ShowWindow( m_wndHandle, SW_NORMAL );
 }

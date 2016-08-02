@@ -2,8 +2,7 @@
 #include "D3d9Error.h"
 
 
-tgon::ErrorStrings<tgon::D3D9ErrorCode>::D3D9ErrorStringsProxy 
-	tgon::ErrorStrings<tgon::D3D9ErrorCode>::m_errStrings;
+tgon::ErrorStrings<tgon::D3D9ErrorCode>::D3D9ErrorStringsProxy tgon::ErrorStrings<tgon::D3D9ErrorCode>::m_errStrings;
 
 
 namespace tgon {

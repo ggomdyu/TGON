@@ -9,8 +9,8 @@
 #include "../../../Platform/Window/TWindow.h"
 
 
-tgon::D3D9Graphics::D3D9Graphics( TWindow* deviceWindow ) :
-	AbstractGraphics( deviceWindow ),
+tgon::D3D9Graphics::D3D9Graphics( TWindow* deviceWindow, bool isWindowed ) :
+	AbstractGraphics( deviceWindow, isWindowed ),
 	m_deviceCaps( new D3DCAPS9 )
 {
 	// Connect to hardware.
@@ -105,10 +105,10 @@ void tgon::D3D9Graphics::InitD3DDevice( )
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING;
 
 	
-	D3DPRESENT_PARAMETERS pp;
-	pp.Windowed = TRUE;
-	pp.BackBufferWidth = this->GetBackBufferWidth( );
-	pp.BackBufferHeight = this->GetBackBufferHeight( );
+	D3DPRESENT_PARAMETERS pp {0};
+	pp.Windowed = ( m_isWindowed ) ? TRUE : FALSE;;
+	pp.BackBufferWidth = 0; // Follow current window's width
+	pp.BackBufferHeight = 0; // Follow current window's height
 	pp.hDeviceWindow = this->GetDeviceWindow( )->GetWindowHandle( );
 	pp.SwapEffect = D3DSWAPEFFECT::D3DSWAPEFFECT_DISCARD;
 	pp.BackBufferCount = 1;

@@ -4,11 +4,11 @@
 #include "../Platform/Slate/PlatformApplication.h"
 #include "../Platform/Slate/PlatformProperty.h"
 #include "../../Window/WindowStyle.h"
-#include "../../Window/Windows/WindowsWindowUtil.h"
-#include "../../Window/Abstract/AbstractWindowEventHandler.h"
+#include "../../Window/Windows/WindowsWindowUtility.h"
 #include "../../Application/TApplication.h"
 
 #include <Windows.h>
+#include <cassert>
 #include <codecvt>
 
 #ifdef TGON_SUPPORT_DWMAPI
@@ -29,6 +29,25 @@ tgon::WindowsWindow::WindowsWindow( const WindowStyle& wndStyle ) :
 tgon::WindowsWindow::~WindowsWindow( )
 {
 	DestroyWindow( m_wndHandle );
+}
+
+bool tgon::WindowsWindow::PumpEvent( )
+{
+	MSG msg {0};
+
+	if ( PeekMessageW( &msg, m_wndHandle, 0, 0, PM_REMOVE ) == TRUE )
+	{
+		// To Process WM_CHAR
+		::TranslateMessage( &msg );
+
+		// This will invke tgon::WindowsApplication::MessageProc each of events
+		::DispatchMessageW( &msg );
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void tgon::WindowsWindow::BringToTop( ) 
@@ -107,7 +126,9 @@ void tgon::WindowsWindow::GetPosition( int32_t* x, int32_t* y ) const
 	*y = rt.top;
 }
 
-void tgon::WindowsWindow::GetSize( int32_t* width, int32_t* height ) const 
+void tgon::WindowsWindow::GetSize( 
+	OUT int32_t* width, 
+	OUT int32_t* height ) const 
 {
 	RECT rt;
 	// @ WARNING! : WindowRect contains caption range
@@ -117,13 +138,13 @@ void tgon::WindowsWindow::GetSize( int32_t* width, int32_t* height ) const
 	*height = rt.bottom - rt.top;
 }
 
-void tgon::WindowsWindow::GetCaption( wchar_t* caption ) const
+void tgon::WindowsWindow::GetCaption( OUT wchar_t* caption ) const
 {
 	const int32_t length = GetWindowTextLengthW( m_wndHandle );
 	GetWindowTextW( m_wndHandle, caption, length );
 }
 
-void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
+void tgon::WindowsWindow::CreateWindowForm( IN const WindowStyle& wndStyle )
 {
 	// Set coordinates of window
 	int32_t x = wndStyle.x;
@@ -137,37 +158,40 @@ void tgon::WindowsWindow::CreateWindowForm( const WindowStyle& wndStyle )
 
 	// Convert WindowStyle to platform dependent style.
 	DWORD normalStyle, exStyle;
-	Convert_wndstyle_to_dword( wndStyle, &exStyle, &normalStyle );
+	ConvertWindowStyleToDword( wndStyle, &exStyle, &normalStyle );
 	
 	// Convert utf8 encoded title to utf16.
+	// This string encoding converter shows bad performance.
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> utfConverter;
 	std::wstring utf16Title( utfConverter.from_bytes( wndStyle.title.c_str( )));
 
 	// Create a Window.
 	m_wndHandle = CreateWindowExW(
 		exStyle,
-		WindowsApplication::AppClassName,
+		TApplication::AppClassName,
 		utf16Title.c_str( ),
 		normalStyle,
 		x,
 		y, 
 		wndStyle.width, 
 		wndStyle.height,
-		nullptr,
-		nullptr,
+		nullptr,	// No parent ( Unsupported now )
+		nullptr,	// No menu ( Unsupported now )
 		TApplication::Get( )->GetInstanceHandle( ),
-		this
+		nullptr		// No extra parameter
 	);
 
+	// Is failed to create window?
 	if ( !m_wndHandle )
 	{
-		MessageBoxW( 
-			GetFocus( ),
+		// Then, show error message.
+		MessageBoxW( nullptr,
 			L"Failed to invoke CreateWindowEx.",
 			L"WARNING!",
 			MB_OK | MB_ICONEXCLAMATION 
 		);
-		abort( );
+
+		std::abort( );
 	}
 
 	// Save this class's pointer to window-personal storage.
@@ -208,7 +232,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 	{
 	case WM_MOVE:
 		{
-			this->GetEventHandler( )->OnMove(
+			m_eventListener->OnMove(
 				static_cast<int32_t>( LOWORD( lParam )), 
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
@@ -221,7 +245,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_SIZE:
 		{
-			this->GetEventHandler( )->OnResize(
+			m_eventListener->OnResize(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
@@ -231,7 +255,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 			
 	case WM_DESTROY:
 		{
-			this->GetEventHandler( )->OnDestroy( );
+			m_eventListener->OnDestroy( );
 			PostQuitMessage( 0 );
 			return 0;
 		}
@@ -239,7 +263,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_LBUTTONDOWN:
 		{
-			this->GetEventHandler( )->OnMouseDown(
+			m_eventListener->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kLeft
@@ -250,7 +274,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_LBUTTONUP:
 		{
-			this->GetEventHandler( )->OnMouseUp(
+			m_eventListener->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kLeft
@@ -261,7 +285,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_RBUTTONDOWN:
 		{
-			this->GetEventHandler( )->OnMouseDown(
+			m_eventListener->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kRight
@@ -272,7 +296,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_RBUTTONUP:
 		{
-			this->GetEventHandler( )->OnMouseUp(
+			m_eventListener->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kRight
@@ -283,7 +307,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_MBUTTONDOWN:
 		{
-			this->GetEventHandler( )->OnMouseDown(
+			m_eventListener->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kMiddle
@@ -294,7 +318,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_MBUTTONUP:
 		{
-			this->GetEventHandler( )->OnMouseUp(
+			m_eventListener->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kMiddle
@@ -305,7 +329,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_LBUTTONDBLCLK:
 		{
-			this->GetEventHandler( )->OnMouseDoubleClick(
+			m_eventListener->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kLeft
@@ -316,7 +340,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 	
 	case WM_RBUTTONDBLCLK:
 		{
-			this->GetEventHandler( )->OnMouseDoubleClick(
+			m_eventListener->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kRight
@@ -327,7 +351,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_MBUTTONDBLCLK:
 		{
-			this->GetEventHandler( )->OnMouseDoubleClick(
+			m_eventListener->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kMiddle
@@ -338,7 +362,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 
 	case WM_MOUSEMOVE:
 		{
-			this->GetEventHandler( )->OnMouseMove(
+			m_eventListener->OnMouseMove(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam ))
 			);

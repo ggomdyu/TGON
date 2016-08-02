@@ -14,6 +14,8 @@ namespace tgon
 {
 
 
+class TWindow;
+
 class TGON_API AbstractGraphics : 
 	private boost::noncopyable
 {
@@ -21,19 +23,19 @@ protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit AbstractGraphics( class TWindow* deviceWindow );
+	explicit AbstractGraphics( TWindow* deviceWindow, bool isWindowed );
 	
 	virtual ~AbstractGraphics( ) = default;
 
 	AbstractGraphics( const AbstractGraphics& ) = delete;
+
 
 	/*
 		Operators
 	*/
 	AbstractGraphics& operator=( const AbstractGraphics& ) = delete;
 
-
-public:
+	
 	/*
 		Commands
 	*/
@@ -49,6 +51,9 @@ public:
 	// Draw the back buffer to visible screen.
 	virtual bool Present( ) = 0;
 
+	//
+	virtual void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) = 0;
+
 
 	/*
 		Sets
@@ -57,12 +62,14 @@ public:
 
 	virtual void SetCullMode( TCullMode cullMode ) = 0;
 
+	virtual void EnableDepthBuffer( bool isEnable ) = 0;
+
 
 	/*
 		Gets
 	*/
 	//
-	class TWindow* GetDeviceWindow( );
+	TWindow* GetDeviceWindow( );
 	
 	// Get owner window's screen width
 	int32_t GetBackBufferWidth( ) const;
@@ -82,11 +89,13 @@ protected:
 
 	int32_t m_backBufferHeight;
 
-	class TWindow* m_deviceWindow;
+	TWindow* m_deviceWindow;
 
 	uint32_t m_clearColor;
 
 	TCullMode m_currMode;
+
+	bool m_isWindowed;
 };
 
 
