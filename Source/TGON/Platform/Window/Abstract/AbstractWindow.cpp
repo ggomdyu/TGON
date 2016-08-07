@@ -6,10 +6,12 @@
 
 
 tgon::AbstractWindow::AbstractWindow( ) :
-	m_eventListener( new AbstractWindowEventHandler )
+	m_eventListener( new AbstractWindowEventHandler ),
+	m_destroyed( false )
 {
 }
 
 tgon::AbstractWindow::~AbstractWindow( )
 {
+	m_destroyed = true;
 }

@@ -6,7 +6,8 @@
 */
 
 #pragma once
+#include <boost/predef.h>
 
 #if BOOST_OS_WINDOWS
-	#include "../Time/Windows/WindowsTime.h"
+#	include "../Time/Windows/WindowsTime.h"
 #endif

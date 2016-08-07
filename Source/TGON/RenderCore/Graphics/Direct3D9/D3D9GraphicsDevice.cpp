@@ -1,5 +1,5 @@
 #include "PrecompiledHeader.h"
-#include "D3d9Graphics.h"
+#include "D3D9GraphicsDevice.h"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -9,18 +9,18 @@
 #include "../../../Platform/Window/TWindow.h"
 
 
-tgon::D3D9Graphics::D3D9Graphics( TWindow* deviceWindow, bool isWindowed ) :
-	AbstractGraphics( deviceWindow, isWindowed ),
+tgon::D3D9GraphicsDevice::D3D9GraphicsDevice( TWindow* deviceWindow, const GraphicsProperty& grpProp ) :
+	AbstractGraphicsDevice( deviceWindow ),
 	m_deviceCaps( new D3DCAPS9 )
 {
 	// Connect to hardware.
 	this->InitD3DInterface( );
 
 	// And make instruction device to communicate with hardware.
-	this->InitD3DDevice( );
+	this->InitD3DDevice( grpProp );
 }
 
-bool tgon::D3D9Graphics::Clear( )
+bool tgon::D3D9GraphicsDevice::Clear( )
 {
 	HRESULT result = m_d3dDevice->Clear(
 		0,
@@ -42,7 +42,7 @@ bool tgon::D3D9Graphics::Clear( )
 	}
 }
 
-bool tgon::D3D9Graphics::BeginScene( )
+bool tgon::D3D9GraphicsDevice::BeginScene( )
 {
 	HRESULT result = m_d3dDevice->BeginScene( );
 
@@ -57,7 +57,7 @@ bool tgon::D3D9Graphics::BeginScene( )
 	}
 }
 
-bool tgon::D3D9Graphics::EndScene( )
+bool tgon::D3D9GraphicsDevice::EndScene( )
 {
 	HRESULT result = m_d3dDevice->EndScene( );
 
@@ -72,7 +72,7 @@ bool tgon::D3D9Graphics::EndScene( )
 	}
 }
 
-bool tgon::D3D9Graphics::Present( )
+bool tgon::D3D9GraphicsDevice::Present( )
 {
 	HRESULT result = m_d3dDevice->Present( nullptr, nullptr, nullptr, nullptr );
 
@@ -87,7 +87,7 @@ bool tgon::D3D9Graphics::Present( )
 	}
 }
 
-void tgon::D3D9Graphics::InitD3DInterface( )
+void tgon::D3D9GraphicsDevice::InitD3DInterface( )
 {
 	// Initialize direct3D interface.
 	V( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
@@ -98,7 +98,7 @@ void tgon::D3D9Graphics::InitD3DInterface( )
 		m_deviceCaps.get( )));
 }
 
-void tgon::D3D9Graphics::InitD3DDevice( )
+void tgon::D3D9GraphicsDevice::InitD3DDevice( const GraphicsProperty& grpProp )
 {
 	DWORD behaviorFlag = ( m_deviceCaps->DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT ) ?
 		D3DCREATE_HARDWARE_VERTEXPROCESSING :
@@ -106,7 +106,7 @@ void tgon::D3D9Graphics::InitD3DDevice( )
 
 	
 	D3DPRESENT_PARAMETERS pp {0};
-	pp.Windowed = ( m_isWindowed ) ? TRUE : FALSE;;
+	pp.Windowed = ( grpProp.enableFullScreen ) ? TRUE : FALSE;;
 	pp.BackBufferWidth = 0; // Follow current window's width
 	pp.BackBufferHeight = 0; // Follow current window's height
 	pp.hDeviceWindow = this->GetDeviceWindow( )->GetWindowHandle( );

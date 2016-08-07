@@ -13,9 +13,17 @@ namespace tgon
 {
 
 
-class TGON_API TConsole :
+class TGON_API TConsole final :
 	public ConsoleImpl
 {
+/*
+	Gets
+*/
+	// 
+	// TApplication singleton interface
+	// 
+	// @return Return Global TApplication instance
+	// 
 public:
 	static TConsole& Get( )
 	{
@@ -23,11 +31,10 @@ public:
 		return ret;
 	}
 
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
-	// Write
 	void Write( const char* format, ... );
 
 	void Write( const wchar_t* format, ... );
@@ -37,15 +44,18 @@ public:
 	void WriteLine( const wchar_t* format, ... );
 
 
-protected:
-	/*
-		Cons/Destructor
-	*/
+/*
+	Cons/Destructor
+*/
+private:
 	TConsole( ) = default;
 
 	virtual ~TConsole( ) = default;
 
 
+/*
+	Internal works
+*/
 private:
 	void WriteImpl( const char* format, va_list vaList );
 	

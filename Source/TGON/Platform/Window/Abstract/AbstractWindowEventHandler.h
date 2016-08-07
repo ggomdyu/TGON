@@ -7,6 +7,9 @@
 
 
 #pragma once
+#include "../../Config/Build.h"
+
+#include <cstdint>
 
 
 namespace tgon
@@ -20,23 +23,15 @@ enum class TMouseType
 	kRight,
 };
 
-class AbstractWindowEventHandler
+class TGON_API AbstractWindowEventHandler
 {
+/*
+	Event handlers
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
-	AbstractWindowEventHandler( ) = default;
+	virtual void OnMove( int32_t x, int32_t y );
 
-	virtual ~AbstractWindowEventHandler( ) = default;
-
-
-	/*
-		Event handlers
-	*/
-	virtual bool OnMove( int32_t x, int32_t y );
-
-	virtual bool OnResize( int32_t width, int32_t height );
+	virtual void OnResize( int32_t width, int32_t height );
 
 	virtual void OnMouseMove( int32_t x, int32_t y );
 
@@ -52,18 +47,31 @@ public:
 	
 	virtual void OnRawMouseUp( int32_t x, int32_t y, TMouseType mouseType );
 
+	//
+	// Called when window has begun closing.
+	//
+	// @return If you want to keep close, return true.
+	//
 	virtual bool OnDestroy( );
+
+
+	/*
+		Cons/Destructor
+	*/
+public:
+	AbstractWindowEventHandler( ) = default;
+
+	virtual ~AbstractWindowEventHandler( ) = default;
+
 };
 
 
-inline bool AbstractWindowEventHandler::OnMove( int32_t x, int32_t y )
+inline void AbstractWindowEventHandler::OnMove( int32_t x, int32_t y )
 {
-	return false;
 }
 
-inline bool AbstractWindowEventHandler::OnResize( int32_t width, int32_t height )
+inline void AbstractWindowEventHandler::OnResize( int32_t width, int32_t height )
 {
-	return false;
 }
 
 inline void AbstractWindowEventHandler::OnMouseMove( int32_t x, int32_t y )
@@ -96,7 +104,7 @@ inline void AbstractWindowEventHandler::OnRawMouseUp( int32_t x, int32_t y, TMou
 
 inline bool AbstractWindowEventHandler::OnDestroy( )
 {
-	return false;
+	return true;
 }
 
 

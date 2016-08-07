@@ -6,7 +6,8 @@
 */
 
 #pragma once
+#include <boost/predef.h>
 
 #if BOOST_OS_WINDOWS
-	#include "../Application/Windows/WindowsApplication.h"
+#	include "../Application/Windows/WindowsApplication.h"
 #endif

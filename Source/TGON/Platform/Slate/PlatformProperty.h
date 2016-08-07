@@ -6,9 +6,10 @@
 */
 
 #pragma once
+#include <boost/predef.h>
 
 #if BOOST_OS_WINDOWS
-	#include "../Config/Windows/WindowsProperty.h"
+#	include "../Config/Windows/WindowsProperty.h"
 #elif BOOST_OS_ANDROID
-	#include "../Config/Android/AndroidProperty.h"
+#	include "../Config/Android/AndroidProperty.h"
 #endif

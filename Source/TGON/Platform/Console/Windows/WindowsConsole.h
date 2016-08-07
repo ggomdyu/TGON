@@ -6,8 +6,7 @@
 */
 
 #pragma once
-#include "../Interface/IConsole.h"
-
+#include "../Interface/InterfaceConsole.h"
 
 #ifndef WIN32_LEAN_AND_MEAN
 #	define WIN32_LEAN_AND_MEAN
@@ -20,28 +19,72 @@ namespace tgon
 {
 
 
-using ConsoleImpl = class WindowsConsole;
+class WindowsConsole;
+using ConsoleImpl = WindowsConsole;
 
 class TGON_API WindowsConsole : 
-	public IConsole
+	public InterfaceConsole
 {
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
-	virtual void Write( _In_ const char* str ) override;
+	//
+	// Write char* string to console.
+	//
+	// @param str String that you want to write to console
+	//
+	virtual void Write( /*In*/ const char* str ) override;
 
-	virtual void Write( _In_ const wchar_t* str ) override;
+	//
+	// Write wchar_t* string to console.
+	//
+	// @param str String that you want to write to console
+	//
+	virtual void Write( /*In*/ const wchar_t* str ) override;
 
 
+/*
+	Cons/Destructor
+*/
 protected:
-	/*
-		Cons/Destructor
-	*/
+	//
+	// Constructor
+	//
 	WindowsConsole( );
 
+	//
+	// Destructor
+	//
 	virtual ~WindowsConsole( );
-	
+
+
+public:
+	//
+	// Copy constructor
+	//
+	WindowsConsole( /*In*/ const WindowsConsole& ) = delete;
+
+
+/*
+	Operators
+*/
+	//
+	// Copy assignment operator
+	//
+	WindowsConsole& operator=( /*In*/ const WindowsConsole& ) = delete;
+
+
+/*
+	Internal works
+*/
+private:
+	void SetupConsole( );
+
+
+/*
+	Private variables
+*/
 private:
 	HANDLE m_outputHandle;
 };

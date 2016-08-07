@@ -1,17 +1,28 @@
 /*
 * Author : Cha Junho
-* Date : 07/23/2016
+* Date : 06/02/2016
 * Latest author :
 * Latest date :
-* Description :
 */
 
 
 #pragma once
+#include <cstdint>
+//#include <vector>
 
 
-#define TGON_REGISTER_MAIN( className )\
-int32_t RunAppMain( int32_t argc, char** argv )\
-{\
-	return className::Main( argc, argv );\
+namespace tgon
+{
+
+
+//
+// Platform generic main function
+//
+// @param
+// @return Error code
+//
+// const std::vector<const std::string>& commandArgs
+extern int32_t TMain( int32_t argc, char** argv );
+
+
 }

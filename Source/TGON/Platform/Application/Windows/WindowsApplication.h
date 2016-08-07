@@ -10,15 +10,7 @@
 #include "../Abstract/AbstractApplication.h"
 
 #include "../TApplicationType.h"
-#include <cassert>
-
-
-#ifndef WIN32_LEAN_AND_MEAN
-#	define WIN32_LEAN_AND_MEAN
-#	include <Windows.h>
-#	undef WIN32_LEAN_AND_MEAN
-#endif
-
+#include <Windows.h>
 #ifdef RegisterClass
 	#undef RegisterClass
 #endif
@@ -28,7 +20,6 @@ namespace tgon
 {
 
 
-class WindowsWindow;
 class WindowsApplication;
 
 using ApplicationImpl = WindowsApplication;
@@ -40,42 +31,85 @@ class TGON_API WindowsApplication :
 public:
 	static const wchar_t* AppClassName;
 
-public:
-	/*
-		Cons/Destructor
-	*/
-	WindowsApplication( );
 
-	virtual ~WindowsApplication( );
-
-
-	/*
-		Commands
-	*/
+/*
+	Commands
+*/
+	//
 	// Update the event queue. Return false if it's empty.
+	//
+	// @return Return false on idle time. 
+	//
 	virtual bool PumpEvent( ) override;
 
-	virtual void ExitThread( ) override;
+	//
+	// Exit thread by force. This function is not recommended on quit.
+	//
+	virtual void ExitThread( int32_t exitCode ) override;
 
+	//
+	// Quit the application by passing quit message.
+	//
+	// @param exitCode
+	//
 	virtual void Quit( int32_t exitCode ) override;
 
+	//
+	// Toggle the full-screen.
+	//
+	// @return Return true on success.
+	//
+	virtual bool ToggleFullScreen( const AbstractWindow& ) override;
 
-	/*
-		Sets
-	*/
+	//
+	// Enable show cursor mode.
+	//
+	// @param enableShow
+	//
+	virtual void ShowCursor( bool enableShow );
+
+/*
+	Sets
+*/
+	//
+	// TODO : ENABLE THIS
+	//
 	void EnableVisualStyles( );
 
 
-	/*
-		Gets
-	*/
-	virtual TSystemBatteryInfo GetPowerInfo( ) override;
+/*
+	Gets
+*/
+	virtual TBatteryInfo GetPowerInfo( ) override;
 
+
+	//
+	// Get the program application's instance handle.
+	//
+	// @platform Windows
+	// @param exitCode
+	//
 	HINSTANCE GetInstanceHandle( );
 
-	static WindowsWindow* GetWindowFromHWND( HWND wndHandle );
+
+/*
+	Cons/Destructor
+*/
+public:
+	//
+	// Constructor
+	//
+	WindowsApplication( );
+
+	//
+	// Destructor
+	//
+	virtual ~WindowsApplication( );
 
 
+/*
+	Internal works
+*/
 private:
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
@@ -85,8 +119,6 @@ private:
 
 inline void WindowsApplication::EnableVisualStyles( )
 {
-	assert( false && "EnableVisualStyles function is deprecated." );
-
 	//wchar_t dir[MAX_PATH]{ 0 };
 	//ULONG_PTR ulpActivationCookie = FALSE;
 
@@ -119,9 +151,9 @@ inline void WindowsApplication::EnableVisualStyles( )
 	//}
 }
 
-inline void tgon::WindowsApplication::ExitThread( )
+inline void WindowsApplication::ExitThread( int32_t exitCode )
 {
-	::ExitThread( 0 );
+	::ExitThread( exitCode );
 }
 
 inline void WindowsApplication::Quit( int32_t exitCode )
@@ -129,15 +161,15 @@ inline void WindowsApplication::Quit( int32_t exitCode )
 	PostQuitMessage( exitCode );
 }
 
-inline HINSTANCE tgon::WindowsApplication::GetInstanceHandle( )
+inline HINSTANCE WindowsApplication::GetInstanceHandle( )
 {
 	static HINSTANCE ret = GetModuleHandle( nullptr );
 	return ret;
 }
 
-inline WindowsWindow* WindowsApplication::GetWindowFromHWND( HWND wndHandle )
+inline void WindowsApplication::ShowCursor( bool enableShow )
 {
-	return reinterpret_cast<WindowsWindow*>( GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
+	::ShowCursor(( enableShow ) ? TRUE : FALSE );
 }
 
 

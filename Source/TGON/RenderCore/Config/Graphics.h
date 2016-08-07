@@ -8,7 +8,7 @@
 #pragma once
 #include <boost/predef.h>
 
-#define TGON_FORCE_TO_DIRECTX9 1
+#define TGON_FORCE_TO_OPENGL 1
 
 #if BOOST_OS_WINDOWS
 #	include <sdkddkver.h>
@@ -16,7 +16,7 @@
 // Select DX9 if Windows version is XP or lower or forced
 #	if ((( WINVER <= 0x0501 ) || ( _WIN32_WINNT <= 0x0501 )) && \
 		!TGON_FORCE_TO_OPENGL ) || TGON_FORCE_TO_DIRECTX9
-#		define TGON_GRAPHICS_DIRECTX9 1
+#		define TGON_GRAPHICS_DIRECT3D9 1
 #	elif TGON_FORCE_TO_OPENGL
 #		define TGON_GRAPHICS_OPENGL 1
 #	else

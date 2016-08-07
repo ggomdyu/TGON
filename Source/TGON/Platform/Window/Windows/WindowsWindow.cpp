@@ -85,7 +85,7 @@ void tgon::WindowsWindow::EnableGlobalMouseFocus( bool isEnable )
 {
 	assert( m_wndHandle && "tgon::WindowsWindow::EnableGlobalMouseFocus must be invoked after window created!" );
 
-	m_isEnabledGlobalMouseFocus = isEnable;
+	m_enabledGlobalMouseFocus = isEnable;
 
 
 	enum class RawInputDeviceType : USHORT
@@ -117,7 +117,7 @@ void tgon::WindowsWindow::EnableGlobalMouseFocus( bool isEnable )
 	}
 }
 
-void tgon::WindowsWindow::GetPosition( int32_t* x, int32_t* y ) const 
+void tgon::WindowsWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
 {
 	RECT rt;
 	GetWindowRect( this->GetWindowHandle( ), &rt );
@@ -138,13 +138,13 @@ void tgon::WindowsWindow::GetSize(
 	*height = rt.bottom - rt.top;
 }
 
-void tgon::WindowsWindow::GetCaption( OUT wchar_t* caption ) const
+void tgon::WindowsWindow::GetCaption( /*Out*/ wchar_t* caption ) const
 {
 	const int32_t length = GetWindowTextLengthW( m_wndHandle );
 	GetWindowTextW( m_wndHandle, caption, length );
 }
 
-void tgon::WindowsWindow::CreateWindowForm( IN const WindowStyle& wndStyle )
+void tgon::WindowsWindow::CreateWindowForm( /*In*/ const WindowStyle& wndStyle )
 {
 	// Set coordinates of window
 	int32_t x = wndStyle.x;
@@ -170,7 +170,8 @@ void tgon::WindowsWindow::CreateWindowForm( IN const WindowStyle& wndStyle )
 		exStyle,
 		TApplication::AppClassName,
 		utf16Title.c_str( ),
-		normalStyle,
+		// WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our Window.
+		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
 		x,
 		y, 
 		wndStyle.width, 
@@ -194,7 +195,7 @@ void tgon::WindowsWindow::CreateWindowForm( IN const WindowStyle& wndStyle )
 		std::abort( );
 	}
 
-	// Save this class's pointer to window-personal storage.
+	// Save this class pointer to storage.
 	// Then accessible this class even static function.
 	SetWindowLongPtrW(
 		m_wndHandle,
@@ -203,8 +204,7 @@ void tgon::WindowsWindow::CreateWindowForm( IN const WindowStyle& wndStyle )
 	); 
 }
 
-void tgon::WindowsWindow::AdditionalInit(
-	const WindowStyle& wndStyle ) 
+void tgon::WindowsWindow::AdditionalInit( const WindowStyle& wndStyle ) 
 {
 	if ( wndStyle.supportWindowTransparency )
 	{
@@ -228,6 +228,11 @@ void tgon::WindowsWindow::AdditionalInit(
 
 LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
+	if ( !m_eventListener )
+	{
+		return DefWindowProc( wndHandle, msg, wParam, lParam );
+	}
+
 	switch ( msg )
 	{
 	case WM_MOVE:
@@ -236,12 +241,8 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 				static_cast<int32_t>( LOWORD( lParam )), 
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
-			return 0;
 		}
-		break;
-
-	case WM_CHAR:
-		break;
+		return 0;
 
 	case WM_SIZE:
 		{
@@ -249,17 +250,24 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
-			return 0;
+		}
+		return 0;
+
+	case WM_CLOSE:
+		{
+			if ( !m_eventListener->OnDestroy( ))
+			{
+				return 0;
+			}
 		}
 		break;
-			
+				
 	case WM_DESTROY:
 		{
-			m_eventListener->OnDestroy( );
+			m_destroyed = true;
 			PostQuitMessage( 0 );
-			return 0;
 		}
-		break;
+		return 0;
 
 	case WM_LBUTTONDOWN:
 		{
@@ -268,9 +276,8 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 				static_cast<int32_t>( HIWORD( lParam )),
 				TMouseType::kLeft
 			);
-			return 0;
 		}
-		break;
+		return 0;
 
 	case WM_LBUTTONUP:
 		{
@@ -337,7 +344,7 @@ LRESULT tgon::WindowsWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wP
 			return 0;
 		}
 		break;
-	
+		
 	case WM_RBUTTONDBLCLK:
 		{
 			m_eventListener->OnMouseDoubleClick(

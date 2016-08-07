@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Console\TConsole.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp" />
@@ -61,12 +60,11 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\TCommandArgs.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Config\Android\AndroidProperty.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Config\Windows\WindowsProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\InterfaceConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h" />
@@ -76,7 +74,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformConsole.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformFwd.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMessageBox.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformProperty.h" />

@@ -59,6 +59,12 @@
     <Filter Include="Sources\Slate\cpp">
       <UniqueIdentifier>{c4435528-cb3c-46cc-a6c3-bf1af0e8c8d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Graphics\hpp\OpenGL">
+      <UniqueIdentifier>{b8bb7935-6af0-498b-acc3-bed5745c050d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\cpp\OpenGL">
+      <UniqueIdentifier>{df4d7056-d3fc-46e7-8601-97e4e6fac489}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -73,18 +79,6 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Camera\TCamera.h">
       <Filter>Sources\Camera\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphics.h">
-      <Filter>Sources\Graphics\hpp\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDevice.h">
-      <Filter>Sources\Graphics\hpp\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsStyle.h">
-      <Filter>Sources\Graphics\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.h">
-      <Filter>Sources\Graphics\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsType.h">
       <Filter>Sources\Graphics\hpp</Filter>
     </ClInclude>
@@ -92,9 +86,6 @@
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Fwd.h">
-      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.h">
@@ -109,6 +100,27 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformVertexBuffer.h">
       <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDevice.h">
+      <Filter>Sources\Graphics\hpp\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsDevice.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9GraphicsDevice.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLGraphicsDevice.h">
+      <Filter>Sources\Graphics\hpp\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDeviceEventHandler.h">
+      <Filter>Sources\Graphics\hpp\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLVertexBuffer.h">
+      <Filter>Sources\Graphics\hpp\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsProperty.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -117,26 +129,32 @@
     <ClCompile Include="..\..\Source\TGON\RenderCore\Camera\TCamera.cpp">
       <Filter>Sources\Camera\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TGraphics.cpp">
-      <Filter>Sources\Graphics\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.cpp">
-      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Graphics.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphics.cpp">
-      <Filter>Sources\Graphics\cpp\Abstract</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.cpp">
       <Filter>Sources\Graphics\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.cpp">
       <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsDevice.cpp">
+      <Filter>Sources\Graphics\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDevice.cpp">
+      <Filter>Sources\Graphics\cpp\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9GraphicsDevice.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLGraphicsDevice.cpp">
+      <Filter>Sources\Graphics\cpp\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Sources\Graphics\cpp\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

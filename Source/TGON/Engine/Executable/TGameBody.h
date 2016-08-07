@@ -7,10 +7,13 @@
 
 
 #pragma once
+#include <vector>
+
 #include "../../Platform/Window/TWindow.h"
 #include "../../Platform/Window/WindowStyle.h"
 #include "../../Core/Object/TEventSubject.h"
-#include "../../RenderCore/Graphics/TGraphics.h"
+#include "../../RenderCore/Graphics/TGraphicsDevice.h"
+#include "../../RenderCore/Graphics/GraphicsProperty.h"
 #include "../../Engine/Module/Interface/IModule.h"
 
 
@@ -20,7 +23,6 @@ std::shared_ptr<tgon::TGameBody> GenerateGameBody( )\
 	return std::make_shared<className>( );\
 }
 
-
 namespace tgon
 {
 
@@ -28,59 +30,95 @@ namespace tgon
 class TGON_API TGameBody :
 	public TEventSubject
 {
+/*
+	Generator
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
-	explicit TGameBody( const WindowStyle& wndStyle );
+	TGON_OBJECT( TGameBody, TEventSubject )
 
+public:
+/*
+	Cons/Destructor
+*/
+	//
+	// Constructor
+	//
+	// @param wndStyle
+	// @param graphicsProp
+	//
+	explicit TGameBody( const WindowStyle& wndStyle, const GraphicsProperty& graphicsProp );
+
+	//
+	// Destructor
+	//
 	virtual ~TGameBody( );
 
+
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
-	// Main function calls this directly. These arguments will be parsed 
-	virtual void Update( );
+	void Update( );
 
-	virtual void Render( );
+	void Render( );
 
 
-	/*
-		Gets
-	*/
-	const SpTWindow& GetWindow( ) const;
-
-	const SpTGraphics& GetGraphics( ) const;
-
-	//template <typename ModuleTy>
-	//const std::shared_ptr<ModuleTy>& GetModule( ) const;
+/*
+	Sets
+*/
+	void Pause( bool enablePause );
 
 
+/*
+	Gets
+*/
+	TWindow* GetWindow( );
+
+	//TGraphicsDeivce& GetGraphicsDevice( ) ;
+
+	//
+	bool IsPaused( ) const;
+
+	template <typename ModuleTy>
+	ModuleTy* GetModule( );
+
+
+/*
+	Internal works
+*/
 private:
-	// Initialize all of modules for game play
-	void InitializeModule( );
+	void SetupModule( );
 
 
+/*
+	Private variables
+*/
 private:
-	bool m_isGameDone;
 
-	SpTWindow m_window;
+	std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
 
-	SpTGraphics m_graphics;
+	// For fast iterating
+	std::vector<std::shared_ptr<IModule>> m_modulesForUpdate;
 
-	std::map<uint32_t, std::shared_ptr<IModule>> m_modules;
+	bool m_paused;
+
+	TWindow m_window;
 };
 
 
-inline const SpTWindow & tgon::TGameBody::GetWindow( ) const
+inline void tgon::TGameBody::Pause( bool enablePause )
 {
-	return m_window;
+	m_paused = enablePause;
 }
 
-inline const SpTGraphics& TGameBody::GetGraphics( ) const
+inline TWindow* TGameBody::GetWindow( )
 {
-	return m_graphics;
+	return &m_window;
+}
+
+inline bool tgon::TGameBody::IsPaused( ) const
+{
+	return m_paused;
 }
 
 

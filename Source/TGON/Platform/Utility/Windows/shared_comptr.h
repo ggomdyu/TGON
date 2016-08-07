@@ -16,20 +16,9 @@ namespace tgon
 template <typename RawPtrTy>
 class shared_comptr
 {
-public:
-	// Set the pointer without increasing the reference count.
-	void Attach( RawPtrTy* rawPtr );
-
-	// Set the pointer without decreasing the reference count.
-	void Detach( );
-
-	// Release and attach the pointer.
-	void Reset( RawPtrTy* rawPtr );
-
-	// Relese the pointer.
-	void Release( );
-
-
+	/*
+		Cons/Destructor
+	*/
 public:
 	shared_comptr( ) :
 		m_rawPtr( nullptr )
@@ -69,6 +58,10 @@ public:
 		}
 	}
 
+
+	/*
+		Operators
+	*/
 	shared_comptr& operator=( const shared_comptr& rhs )
 	{
 		if ( m_rawPtr == rhs.m_rawPtr )
@@ -105,31 +98,37 @@ public:
 		return *this;
 	}
 	
-	bool operator==( const shared_comptr& rhs )
-	{
-		return ( m_rawPtr == rhs.m_rawPtr );
-	}
+	bool operator==( const shared_comptr& rhs );
 	
-	bool operator!=( const shared_comptr& rhs )
-	{
-		return ( m_rawPtr != rhs.m_rawPtr );
-	}
+	bool operator!=( const shared_comptr& rhs );
 	
-	RawPtrTy** operator&( )
-	{
-		return &m_rawPtr;
-	}
-	
-	RawPtrTy* operator->( ) const
-	{
-		return m_rawPtr;
-	}
+	RawPtrTy** operator&( );
 
-	operator RawPtrTy*( ) const
-	{
-		return m_rawPtr;
-	}
+	RawPtrTy* operator->( ) const;
 
+	operator RawPtrTy*( ) const;
+
+
+public:
+	/*
+		Commands
+	*/
+	// Set the pointer without increasing the reference count.
+	void Attach( RawPtrTy* rawPtr );
+
+	// Set the pointer without decreasing the reference count.
+	void Detach( );
+
+	// Release and attach the pointer.
+	void Reset( RawPtrTy* rawPtr );
+
+	// Relese the pointer.
+	void Release( );
+
+
+	/*
+		Private variables
+	*/
 private:
 	RawPtrTy* m_rawPtr;
 };
@@ -170,6 +169,36 @@ inline void shared_comptr<RawPtrTy>::Release( )
 		m_rawPtr->Release( );
 		m_rawPtr = nullptr;
 	}
+}
+
+template<typename RawPtrTy>
+inline bool shared_comptr<RawPtrTy>::operator==( const shared_comptr& rhs )
+{
+	return ( m_rawPtr == rhs.m_rawPtr );
+}
+
+template<typename RawPtrTy>
+inline bool shared_comptr<RawPtrTy>::operator!=( const shared_comptr& rhs )
+{
+	return ( m_rawPtr != rhs.m_rawPtr );
+}
+
+template<typename RawPtrTy>
+inline RawPtrTy** shared_comptr<RawPtrTy>::operator&( )
+{
+	return &m_rawPtr;
+}
+
+template<typename RawPtrTy>
+inline RawPtrTy* shared_comptr<RawPtrTy>::operator->( ) const
+{
+	return m_rawPtr;
+}
+
+template<typename RawPtrTy>
+inline shared_comptr<RawPtrTy>::operator RawPtrTy*( ) const
+{
+	return m_rawPtr;
 }
 
 

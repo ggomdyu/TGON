@@ -1,12 +1,11 @@
 #include "PrecompiledHeader.h"
-#include "AbstractGraphics.h"
+#include "AbstractGraphicsDevice.h"
 
 #include "../../../Platform/Window/TWindow.h"
 
 
-tgon::AbstractGraphics::AbstractGraphics( TWindow* deviceWindow, bool isWindowed ) :
+tgon::AbstractGraphicsDevice::AbstractGraphicsDevice( TWindow* deviceWindow ) :
 	m_deviceWindow( deviceWindow ),
-	m_isWindowed( isWindowed ),
 //	m_currMode( TCullMode::kNone ),
 	m_clearColor( 0x000000 )
 {

@@ -36,21 +36,43 @@ bool tgon::WindowsApplication::PumpEvent( )
 	}
 }
 
-tgon::TSystemBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
+tgon::TBatteryInfo tgon::WindowsApplication::GetPowerInfo( )
 {
 	SYSTEM_POWER_STATUS sps;
 	::GetSystemPowerStatus( &sps );
 
-	TSystemBatteryInfo adapter;
+	TBatteryInfo adapter;
 	adapter.hasBattery = ( sps.BatteryFlag == 128 ) ? false : true;
 	adapter.batteryLifePercent = sps.BatteryLifePercent;
 
 	return adapter;
 }
 
+bool tgon::WindowsApplication::ToggleFullScreen( const AbstractWindow& window )
+{
+	return false;
+
+	//// Get the monitor info from the window handle.
+	//HMONITOR hMonitor = MonitorFromWindow( Context->WindowHandle, MONITOR_DEFAULTTOPRIMARY );
+	//MONITORINFOEX MonitorInfo;
+	//memset( &MonitorInfo, 0, sizeof( MONITORINFOEX ));
+	//MonitorInfo.cbSize = sizeof( MONITORINFOEX );
+	//GetMonitorInfo( hMonitor, &MonitorInfo );
+	//
+	//DEVMODE dmScreenSettings{ 0 };
+	//dmScreenSettings.dmSize = sizeof( dmScreenSettings );
+	//dmScreenSettings.dmPelsWidth = 1;
+	//dmScreenSettings.dmPelsHeight = 1;
+	//dmScreenSettings.dmBitsPerPel = 32;
+	//dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
+	//
+	//
+	//return ( ChangeDisplaySettingsEx( &dmScreenSettings, CDS_FULLSCREEN ) == DISP_CHANGE_SUCCESSFUL ) ? true : false;
+}
+
 bool tgon::WindowsApplication::RegisterClass( )
 {
-	WNDCLASSEXW wcex {0};
+	WNDCLASSEXW wcex {};
 
 	wcex.cbSize = sizeof( wcex );
 	wcex.lpszClassName = WindowsApplication::AppClassName;
@@ -66,7 +88,8 @@ bool tgon::WindowsApplication::RegisterClass( )
 
 LRESULT WINAPI tgon::WindowsApplication::MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
-	WindowsWindow* extraMemAsWindow = WindowsApplication::GetWindowFromHWND( wndHandle );
+	WindowsWindow* extraMemAsWindow = reinterpret_cast<WindowsWindow*>( 
+		GetWindowLongPtrW( wndHandle, GWLP_USERDATA ));
 	
 	if ( extraMemAsWindow )
 	{

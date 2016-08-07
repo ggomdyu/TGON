@@ -40,13 +40,13 @@
     <Filter Include="Sources\Module\hpp\WorkThread">
       <UniqueIdentifier>{bd21449e-174e-41ff-9c35-1a9a26f620cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Module\hpp\Input">
+      <UniqueIdentifier>{a048e3c3-e2ea-4250-a051-877b4854b670}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\Program.h">
-      <Filter>Sources\Executable\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameBody.h">
       <Filter>Sources\Executable\hpp</Filter>
@@ -60,16 +60,16 @@
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.h">
       <Filter>Sources\Module\hpp\WorkThread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngineLoop.h">
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h">
       <Filter>Sources\Executable\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h">
+      <Filter>Sources\Module\hpp\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\Program.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameBody.cpp">
       <Filter>Sources\Executable\cpp</Filter>
@@ -83,8 +83,14 @@
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp">
       <Filter>Sources\Module\hpp\WorkThread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngineLoop.cpp">
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp">
       <Filter>Sources\Executable\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TMain.cpp">
+      <Filter>Sources\Executable\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Module\InputModule.cpp">
+      <Filter>Sources\Module\hpp\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

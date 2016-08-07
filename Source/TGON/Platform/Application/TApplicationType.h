@@ -14,9 +14,10 @@ namespace tgon
 {
 
 
-struct TSystemBatteryInfo
+struct TBatteryInfo
 {
 	bool hasBattery;
+
 	uint16_t batteryLifePercent; // 0 ~ 100
 };
 

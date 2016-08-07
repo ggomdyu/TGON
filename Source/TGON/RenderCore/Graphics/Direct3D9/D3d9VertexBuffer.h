@@ -10,6 +10,7 @@
 #include "../../../Platform/Config/Build.h"
 
 #include "../../../Platform/Utility/Windows/unique_comptr.h"
+#include <cstdint>
 #include <d3d9.h>
 #include <d3dx9.h>
 

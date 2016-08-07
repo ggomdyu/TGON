@@ -7,8 +7,8 @@
 */
 
 #pragma once
-
+#include <boost/predef.h>
 
 #if BOOST_OS_WINDOWS
-	#include "../Screen/Windows/WindowsScreen.h"
+#	include "../Screen/Windows/WindowsScreen.h"
 #endif

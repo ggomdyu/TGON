@@ -20,76 +20,146 @@ namespace tgon
 class TGON_API AbstractWindow : 
 	private boost::noncopyable
 {
+/*
+	Cons/Destructor
+*/
 protected:
-	/*
-		Cons/Destructor
-	*/
 	AbstractWindow( );
 
 	virtual ~AbstractWindow( ) = 0;
 
 
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
-	virtual bool PumpEvent( ) { return false; }
+	virtual bool PumpEvent( );
 
-	virtual void Show( ) {}
+	virtual void Show( );
 
-	virtual void Hide( ) {}
+	virtual void Hide( );
 
-	virtual void Quit( ) {}
+	virtual void Quit( );
 
-	virtual void Maximize( ) {}
+	virtual void Maximize( );
 
-	virtual void Minimize( ) {}
+	virtual void Minimize( );
 
-	virtual void BringToTop( ) {}
+	virtual void BringToTop( );
 
-	virtual void Flash( ) {}
+	virtual void Flash( );
 
-	virtual void EnableGlobalMouseFocus( bool isEnable ) {};
+	virtual void EnableGlobalMouseFocus( bool isEnable );
 
 
-	/*
-		Sets
-	*/
+/*
+	Sets
+*/
 	void SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventHandler );
 
-	virtual void SetPosition( int32_t x, int32_t y ) {};
+	virtual void SetPosition( int32_t x, int32_t y );
 
-	virtual void SetScale( int32_t width, int32_t height ) {};
+	virtual void SetScale( int32_t width, int32_t height );
 
-	virtual void SetCaption( const wchar_t* src ) {};
+	virtual void SetCaption( const wchar_t* src );
 
-	/*
-		Gets
-	*/
-	virtual void GetPosition( int32_t* x, int32_t* y ) const {};
+/*
+	Gets
+*/
+	virtual void GetPosition( int32_t* x, int32_t* y ) const;
 
-	virtual void GetSize( int32_t* width, int32_t* height ) const {};
+	virtual void GetSize( int32_t* width, int32_t* height ) const;
 
-	virtual void GetCaption( wchar_t* caption ) const {}
+	virtual void GetCaption( wchar_t* caption ) const;
 
 	bool IsEnabledGlobalInputFocus( ) const;
 
+	bool IsDestroyed( ) const;
+
 	
 protected:
-	bool m_isEnabledGlobalMouseFocus;
+	bool m_enabledGlobalMouseFocus;
+
+	bool m_destroyed;
 
 	std::shared_ptr<AbstractWindowEventHandler> m_eventListener;
 };
 
+
+inline bool tgon::AbstractWindow::PumpEvent( )
+{
+	return false;
+}
+
+inline void tgon::AbstractWindow::Show( )
+{
+}
+
+inline void tgon::AbstractWindow::Hide( )
+{
+}
+
+inline void tgon::AbstractWindow::Quit( )
+{
+}
+
+inline void tgon::AbstractWindow::Maximize( )
+{
+}
+
+inline void tgon::AbstractWindow::Minimize( )
+{
+}
+
+inline void tgon::AbstractWindow::BringToTop( )
+{
+}
+
+inline void AbstractWindow::Flash( )
+{
+}
+
+inline void AbstractWindow::EnableGlobalMouseFocus( bool isEnable )
+{
+}
 
 inline void tgon::AbstractWindow::SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventListener )
 {
 	m_eventListener = eventListener;
 }
 
+inline void AbstractWindow::SetPosition( int32_t x, int32_t y )
+{
+}
+
+inline void AbstractWindow::SetScale( int32_t width, int32_t height )
+{
+}
+
+inline void AbstractWindow::SetCaption( const wchar_t * src )
+{
+}
+
+inline void AbstractWindow::GetPosition( int32_t * x, int32_t * y ) const
+{
+}
+
+inline void AbstractWindow::GetSize( int32_t * width, int32_t * height ) const
+{
+}
+
+inline void AbstractWindow::GetCaption( wchar_t * caption ) const
+{
+}
+
 inline bool AbstractWindow::IsEnabledGlobalInputFocus( ) const
 {
-	return m_isEnabledGlobalMouseFocus;
+	return m_enabledGlobalMouseFocus;
+}
+
+inline bool AbstractWindow::IsDestroyed( ) const
+{
+	return m_destroyed;
 }
 
 

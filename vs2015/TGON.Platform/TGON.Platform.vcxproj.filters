@@ -192,9 +192,6 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp">
       <Filter>Sources\Utility\cpp\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.cpp">
-      <Filter>Sources\Application\cpp\Abstract</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp">
       <Filter>Sources\Console\hpp\Windows</Filter>
     </ClCompile>
@@ -251,9 +248,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformFwd.h">
       <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformGraphics.h">
-      <Filter>Sources\Slate\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h">
       <Filter>Sources\Slate\hpp</Filter>
     </ClInclude>
@@ -299,9 +293,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h">
       <Filter>Sources\Console\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\IConsole.h">
-      <Filter>Sources\Console\hpp\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h">
       <Filter>Sources\Console\hpp\Windows</Filter>
     </ClInclude>
@@ -329,9 +320,6 @@
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.h">
       <Filter>Sources\Window\hpp\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\TCommandArgs.h">
-      <Filter>Sources\Application\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h">
       <Filter>Sources\Main\hpp</Filter>
     </ClInclude>
@@ -343,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtility.h">
       <Filter>Sources\Window\hpp\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\InterfaceConsole.h">
+      <Filter>Sources\Console\hpp\Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

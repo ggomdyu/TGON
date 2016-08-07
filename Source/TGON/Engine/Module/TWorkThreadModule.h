@@ -16,48 +16,69 @@ namespace tgon
 class TGON_API TWorkThreadModule :
 	public IModule
 {
-	using WorkQueue = std::deque<std::function<void()>>;
+	using WorkPool = std::deque<std::function<void( )>>;
+	using ThreadPool = std::deque<std::thread>;
 
-	using ThreadQueue = std::deque<std::thread>;
-
+/*
+	Generator
+*/
 public:
 	TGON_OBJECT( TWorkThreadModule, IModule )
 
+/*
+	Cons/Destructor
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
-	// Fill the thread queue.
+	//
+	// Initialize thread module.
+	// Make thread as much as hardware thread supports
+	//
+	// @param numThread Number of thread you want to use
+	//
 	explicit TWorkThreadModule( std::size_t numThread = std::thread::hardware_concurrency( ));
 	
 	virtual ~TWorkThreadModule( );
 
-public:
-	/*
-		Commands
-	*/
-	// Enqueue the work. The idle thread will execute the work.
-	template <class _FuncTy, class... _Args>
-	void Request( _FuncTy&& work, _Args&&... args );
 
-	// Wait until the work threads finished all of works
+/*
+	Commands
+*/
+public:
+	//
+	// Enqueue the work. The idle thread will execute the work.
+	//
+	// @param workFunc Work which you want to register to work pool
+	// @param workFuncArgs workFunc's parameter list
+	//
+	template <class WorkFunc, class... WorkFuncArgs>
+	void Request( WorkFunc&& workFunc, WorkFuncArgs&&... workFuncArgs );
+
+	//
+	// Wait until the work threads finished all of works.
+	//
 	void Wait( );
 
 
+/*
+	Internal works
+*/
 private:
 	void JoinAll( );
 
 	void InfiniteLoop( );
 
 
+/*
+	Private variables
+*/
 private:
 	bool m_isDestroying;
 
 	std::atomic_uint m_workingCount;
 
-	WorkQueue m_workQueue;
+	WorkPool m_workQueue;
 
-	ThreadQueue m_threadQueue;
+	ThreadPool m_threadQueue;
 
 	std::mutex m_mutex;
 
@@ -67,12 +88,12 @@ private:
 };
 
 
-template <class _FuncTy, class... _Args>
-void tgon::TWorkThreadModule::Request( _FuncTy&& work,  _Args&&... args )
+template <class WorkFunc, class... WorkFuncArgs>
+void tgon::TWorkThreadModule::Request( WorkFunc&& workFunc, WorkFuncArgs&&... workFuncArgs )
 {
 	std::unique_lock<std::mutex> lock( m_mutex );
 
-	m_workQueue.emplace_back( std::forward<_FuncTy>( work ), std::forward<_Args>( args )... );
+	m_workQueue.emplace_back( std::forward<WorkFunc>( workFunc ), std::forward<WorkFuncArgs>( workFuncArgs )... );
 	
 	// Wake up one thread
 	m_waitCv.notify_one( );

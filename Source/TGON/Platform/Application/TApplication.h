@@ -14,9 +14,19 @@ namespace tgon
 {
 
 
+class TWindow;
+
 class TGON_API TApplication :
 	public ApplicationImpl
 {
+/*
+	Gets
+*/
+	// 
+	// TApplication singleton interface
+	// 
+	// @return Return Global TApplication instance
+	// 
 public:
 	static TApplication* Get( )
 	{
@@ -25,12 +35,15 @@ public:
 	}
 
 private:
-	/*
-		Cons/Destructor
-	*/
+/*
+	Cons/Destructor
+*/
 	TApplication( ) = default;
 
 	virtual ~TApplication( ) = default;
+
+private:
+	//std::map<std::string, TWindow*> m_windows;
 };
 
 

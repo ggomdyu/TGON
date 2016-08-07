@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngineLoop.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameBody.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\Program.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TMain.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Engine\Module\InputModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TimeModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp" />
@@ -31,15 +32,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngineLoop.h" />
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameBody.h" />
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\Program.h" />
+    <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TimeModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Thirdparty\OIS-master\Win32\OIS_vs2010.vcxproj">
+      <Project>{9cc704cb-4956-4479-bdec-57cbc03f700e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TGON.GameCore\TGON.GameCore.vcxproj">
       <Project>{f53c56e2-f77e-4a53-8adc-d00a9903312d}</Project>
     </ProjectReference>

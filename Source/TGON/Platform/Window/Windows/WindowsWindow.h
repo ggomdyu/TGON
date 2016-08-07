@@ -20,6 +20,7 @@ namespace tgon
 
 
 struct WindowStyle;
+
 class WindowsWindow;
 using WindowImpl = WindowsWindow;
 
@@ -29,18 +30,18 @@ class TGON_API WindowsWindow :
 {
 	friend class WindowsApplication;
 
+/*
+	Cons/Destructor
+*/
 protected:
-	/*
-		Cons/Destructor
-	*/
-	explicit WindowsWindow( const WindowStyle& );
+	explicit WindowsWindow( /*In*/ const WindowStyle& wndStyle );
 
 	virtual ~WindowsWindow( );
 
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
 	virtual bool PumpEvent( ) override;
 
 	virtual void Show( ) override;
@@ -60,39 +61,42 @@ public:
 	virtual void EnableGlobalMouseFocus( bool isEnable );
 
 
-	/*
-		Sets
-	*/
+/*
+	Sets
+*/
 	virtual void SetPosition( int32_t x, int32_t y ) override;
 
 	virtual void SetScale( int32_t width, int32_t height ) override;
 
-	virtual void SetCaption( IN const wchar_t* caption );
+	virtual void SetCaption( /*In*/ const wchar_t* caption );
 	
 
-	/*
-		Gets
-	*/
-	virtual void GetPosition( OUT int32_t* x, OUT int32_t* y ) const override;
+/*
+	Gets
+*/
+	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const override;
 
-	virtual void GetSize( OUT int32_t* width, OUT int32_t* height ) const override;
+	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const override;
 
-	virtual void GetCaption( OUT wchar_t* caption ) const override;
+	virtual void GetCaption( /*Out*/ wchar_t* caption ) const override;
 	
 	HWND GetWindowHandle( ) const;
 
 
+/*
+	Internal works
+*/
 private:
-	/*
-		Internal works
-	*/
-	void CreateWindowForm( IN const WindowStyle& );
+	void CreateWindowForm( /*In*/ const WindowStyle& );
 
-	void AdditionalInit( IN const WindowStyle& );
+	void AdditionalInit( /*In*/ const WindowStyle& );
 
 	virtual LRESULT ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 
+/*
+	Private variables
+*/
 private:
 	HWND m_wndHandle;
 };

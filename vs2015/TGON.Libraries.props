@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(DXSDK_DIR)\Include;$(SolutionDir)\..\Source\Thirdparty\boost_1_61_0;$(SolutionDir)\..\Source\Thirdparty\freetype;$(SolutionDir)\..\Source\Thirdparty\tinyxml2;$(SolutionDir)\..\Source\Thirdparty;$(SolutionDir)\..\Source\Thirdparty\SDL2\include;$(SolutionDir)\..\Source\Thirdparty\icu4c-57_1\icu\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(SolutionDir)\..\Source\Thirdparty\boost_1_61_0;$(SolutionDir)\..\Source\Thirdparty\freetype;$(SolutionDir)\..\Source\Thirdparty\tinyxml2;$(SolutionDir)\..\Source\Thirdparty;$(SolutionDir)\..\Source\Thirdparty\SDL2\include;$(SolutionDir)\..\Source\Thirdparty\icu4c-57_1\icu\include;$(SolutionDir)\..\Source\Thirdparty\OIS-master\includes;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(SolutionDir)\..\Source\Thirdparty\icu4c-57_1\icu\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>

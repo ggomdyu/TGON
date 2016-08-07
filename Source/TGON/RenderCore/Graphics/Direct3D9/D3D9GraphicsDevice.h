@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../Abstract/AbstractGraphics.h"
+#include "../Abstract/AbstractGraphicsDevice.h"
 
 #include <d3d9.h>
 #include "D3D9Fwd.h"
@@ -17,26 +17,26 @@ namespace tgon
 {
 
 
-class D3D9Graphics;
-using GraphicsImpl = D3D9Graphics;
+class D3D9GraphicsDevice;
+using GraphicsDeviceImpl = D3D9GraphicsDevice;
 
-class TGON_API D3D9Graphics : 
-	public AbstractGraphics
+class TGON_API D3D9GraphicsDevice : 
+	public AbstractGraphicsDevice
 {
 protected:
 	/*
 		Cons/Destructor
 	*/
-	explicit D3D9Graphics( TWindow* deviceWindow, bool isWindowed );
+	explicit D3D9GraphicsDevice( /*In*/ TWindow* deviceWindow, /*In*/ const GraphicsProperty& grpProp );
 	
-	D3D9Graphics( const D3D9Graphics& ) = delete;
+	D3D9GraphicsDevice( /*In*/ const D3D9GraphicsDevice& ) = delete;
 
-	virtual ~D3D9Graphics( ) = default;
+	virtual ~D3D9GraphicsDevice( ) = default;
 
 	/*
 		Operators
 	*/
-	D3D9Graphics& operator=( const D3D9Graphics& ) = delete;
+	D3D9GraphicsDevice& operator=( const D3D9GraphicsDevice& ) = delete;
 
 
 public:
@@ -84,7 +84,7 @@ private:
 	void InitD3DInterface( );
 
 	// Initialize IDirect3DDevice9Ex
-	void InitD3DDevice( );
+	void InitD3DDevice( const GraphicsProperty& grpProp );
 
 
 private:
@@ -96,17 +96,17 @@ private:
 };
 
 
-inline const SpD3D9Ex& D3D9Graphics::GetD3D( ) const
+inline const SpD3D9Ex& D3D9GraphicsDevice::GetD3D( ) const
 {
 	return m_d3d;
 }
 
-inline const SpD3D9DeviceEx& D3D9Graphics::GetD3DDevice( ) const
+inline const SpD3D9DeviceEx& D3D9GraphicsDevice::GetD3DDevice( ) const
 {
 	return m_d3dDevice;
 }
 
-inline void D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
+inline void D3D9GraphicsDevice::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
 {
 	m_d3dDevice->DrawPrimitive(
 		static_cast<D3DPRIMITIVETYPE>( primitiveType ),
@@ -115,7 +115,7 @@ inline void D3D9Graphics::DrawPrimitive( TPrimitiveType primitiveType, uint32_t 
 	);
 }
 
-inline void D3D9Graphics::SetCullMode( TCullMode cullMode )
+inline void D3D9GraphicsDevice::SetCullMode( TCullMode cullMode )
 {
 	m_currMode = m_currMode;
 
@@ -133,7 +133,7 @@ inline void D3D9Graphics::SetCullMode( TCullMode cullMode )
 	}
 }
 
-inline void tgon::D3D9Graphics::EnableDepthBuffer( bool isEnable )
+inline void tgon::D3D9GraphicsDevice::EnableDepthBuffer( bool isEnable )
 {
 	m_d3dDevice->SetRenderState( D3DRS_ZENABLE, ( isEnable ) ? D3DZB_TRUE : D3DZB_FALSE );
 }

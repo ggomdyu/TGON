@@ -8,9 +8,19 @@ using namespace tgon;
 class TgonModelJoy :
 	public TGameBody
 {
+
+/*
+	Generator
+*/
+public:
+	TGON_OBJECT( TgonModelJoy, TGameBody )
+
+/*
+	Cons/Destructor
+*/
 public:
 	TgonModelJoy( ) :
-		TGameBody( WindowStyle::DefaultStyle )
+		TGameBody( WindowStyle::DefaultStyle, GraphicsProperty{} )
 	{
 	}
 
@@ -18,5 +28,9 @@ public:
 	{
 		
 	}
+
+//	virtual void Update( ) override
+//	{
+//	}
 };
 

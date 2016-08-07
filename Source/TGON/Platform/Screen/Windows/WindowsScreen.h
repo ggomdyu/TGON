@@ -9,41 +9,32 @@
 #pragma once
 #include "../Abstract/AbstractScreen.h"
 
-#include <windows.h>
-
 
 namespace tgon
 {
 
 
-using ScreenImpl = class WindowsScreen;
+class WindowsScreen;
+using ScreenImpl = WindowsScreen;
 
 
 class TGON_API WindowsScreen : 
 	public AbstractScreen
 {
+/*
+	Commands
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
-	WindowsScreen( ) = delete;
-
-	virtual ~WindowsScreen( ) = delete;
 
 
-	/*
-		Commands
-	*/
+/*
+	Sets
+*/
 
 
-	/*
-		Sets
-	*/
-
-
-	/*
-		Gets
-	*/
+/*
+	Gets
+*/
 	// Get monitor's count. Return 0 on Win95/NT.
 	static int32_t GetMonitorCount( );
 
@@ -52,23 +43,17 @@ public:
 
 	// Get main monitor's screen height. This function works exactly on single monitor.
 	static int32_t GetMainHeight( );
+
+	
+/*
+	Cons/Destructor
+*/
+public:
+	WindowsScreen( ) = delete;
+
+	virtual ~WindowsScreen( ) = delete;
+
 };
 
 
-}
-
-
-inline int32_t tgon::WindowsScreen::GetMonitorCount( )
-{
-	return GetSystemMetrics( SM_CMONITORS );
-}
-
-inline int32_t tgon::WindowsScreen::GetMainWidth( )
-{
-	return GetSystemMetrics( SM_CXSCREEN );
-}
-
-inline int32_t tgon::WindowsScreen::GetMainHeight( )
-{
-	return GetSystemMetrics( SM_CYSCREEN );
 }
