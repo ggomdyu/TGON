@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TEventListener.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Object\TEventSubject.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Object\TObject.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Object\TType.cpp" />

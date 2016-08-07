@@ -62,5 +62,8 @@ int32_t tgon::TEngine::Execute( int argc, char** argv )
 
 	}
 
+	this->NotifyEvent( TEventType( "OnDestroy" ) );
+
+
 	return int32_t( );
 }

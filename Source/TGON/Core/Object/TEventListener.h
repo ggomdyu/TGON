@@ -29,11 +29,7 @@ public:
 	/*
 		Cons/Destructor
 	*/
-	explicit TEventListener( TEventSubject* receiver ) :
-		m_receiver( receiver )
-	{
-		assert( receiver );
-	}
+	explicit TEventListener( TEventSubject* receiver );
 
 
 public:
@@ -68,16 +64,11 @@ public:
 	TGON_GENERATE_OBJECT_INTERFACE( TEventListenerImpl<ReceiverTy>, TEventListener )
 
 
+/*
+	Cons/Destructor
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
-	TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
-		TEventListener( receiver ),
-		m_handlerFunction( eventHandlerFunc )
-	{
-		assert( m_handlerFunction );
-	}
+	TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc );
 
 
 public:
@@ -86,13 +77,22 @@ public:
 	*/
 	virtual void Notify( ) override
 	{
-		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_handlerFunction )( );
+		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_eventHandlerFunc )( );
 	}
 
 
 private:
-	HandlerFunctionTy m_handlerFunction;
+	HandlerFunctionTy m_eventHandlerFunc;
 };
+
+
+template <class ReceiverTy>
+inline tgon::TEventListenerImpl<ReceiverTy>::TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
+	TEventListener( receiver ),
+	m_eventHandlerFunc( eventHandlerFunc )
+{
+	assert( m_eventHandlerFunc );
+}
 
 
 }

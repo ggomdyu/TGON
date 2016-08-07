@@ -99,6 +99,9 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\TType.cpp">
       <Filter>Sources\Object\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TEventListener.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h">
@@ -140,10 +143,10 @@
     <ClInclude Include="..\..\Source\TGON\Core\Object\IComparable.h">
       <Filter>Sources\Object\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventListener.h">
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventSubject.h">
       <Filter>Sources\Object\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventSubject.h">
+    <ClInclude Include="..\..\Source\TGON\Core\Object\TEventListener.h">
       <Filter>Sources\Object\hpp</Filter>
     </ClInclude>
   </ItemGroup>
