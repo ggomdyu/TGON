@@ -18,25 +18,25 @@ namespace tgon
 class TGON_API TObject 
 {
 public:
-	/*
-		Cons/Destructor
-	*/
+/*
+	Cons/Destructor
+*/
 	TObject( );
 	
 	virtual ~TObject( ) = 0;
 
-	/*
-		Opeators
-	*/
+/*
+	Opeators
+*/
 	bool operator==( const TObject& ) const;
 
 	bool operator!=( const TObject& ) const;
 
 
+/*
+	Commands
+*/
 public:
-	/*
-		Commands
-	*/
 	static bool Equals( const TObject&, const TObject& );
 	
 	// Compare the object paremeter. This can be overridden.
@@ -45,7 +45,7 @@ public:
 	// Compare two instance. Return true if both refer to the same object.
 	static bool ReferenceEquals( const TObject&, const TObject& );
 
-	// THESE CODE ARE NOT OPTIMIZED. SO BE CAREFUL WHEN USE IT
+	// THESE CODES ARE NOT OPTIMIZED. SO BE CAREFUL WHEN USE IT
 	//template <typename ToTy>
 	//bool IsKindOf( )
 	//{
@@ -112,7 +112,7 @@ inline bool TObject::ReferenceEquals(
 }
 
 
-#define TGON_OBJECT( baseType, superType )\
+#define TGON_GENERATE_OBJECT_INTERFACE( baseType, superType )\
 	using Super = superType;\
 	\
 	virtual uint32_t GetHashCode( ) const override\

@@ -19,7 +19,7 @@ class TGON_API TCamera final :
 	public TObject
 {
 public:
-	TGON_OBJECT( TCamera, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( TCamera, std::nullptr_t )
 
 	TCamera( );
 	

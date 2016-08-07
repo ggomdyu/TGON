@@ -17,7 +17,7 @@ class TGON_API IModule :
 	public TEventSubject
 {
 public:
-	TGON_OBJECT( IModule, TEventSubject )
+	TGON_GENERATE_OBJECT_INTERFACE( IModule, TEventSubject )
 
 public:
 	/*

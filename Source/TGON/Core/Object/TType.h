@@ -8,44 +8,38 @@
 #pragma once
 #include "../Platform/Config/Build.h"
 
-#include "../Math/TMath.h"
-
 
 namespace tgon
 {
 
 
-class TGON_API TType
+class TGON_API TType final
 {
+/*
+	Cons/Destructor
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
 	explicit TType( const char* name );
 
 	~TType( );
 
+/*
+	Gets
+*/
 public:
 	uint32_t GetHashCode( ) const;
 
 	const char* GetName( ) const;
 
+/*
+	Private variables
+*/
 private:
 	uint32_t m_hashCode;
 
 	const char* m_name;
 };
 
-
-inline TType::TType( const char* name ) :
-	m_hashCode( TMath::GenerateHash( name )),
-	m_name( name )
-{
-}
-
-inline TType::~TType( )
-{
-}
 
 inline uint32_t TType::GetHashCode( ) const
 {

@@ -96,6 +96,12 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\TEventSubject.cpp">
       <Filter>Sources\Object\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TEventType.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Object\TType.cpp">
+      <Filter>Sources\Object\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Core\String\TString.h">

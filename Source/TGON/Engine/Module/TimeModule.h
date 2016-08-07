@@ -17,7 +17,7 @@ class TGON_API TimeModule :
 	public IModule
 {
 public:
-	TGON_OBJECT( TimeModule, IModule )
+	TGON_GENERATE_OBJECT_INTERFACE( TimeModule, IModule )
 
 public:
 	/*

@@ -13,18 +13,23 @@ namespace tgon
 {
 
 
+class TEventSubject;
+
+//
+// Listen some event and inform to subject 
+//
 class TGON_API TEventListener :
 	public TObject
 {
 public:
-	TGON_OBJECT( TEventListener, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( TEventListener, std::nullptr_t )
 
 
 public:
 	/*
 		Cons/Destructor
 	*/
-	explicit TEventListener( class TEventSubject* receiver ) :
+	explicit TEventListener( TEventSubject* receiver ) :
 		m_receiver( receiver )
 	{
 		assert( receiver );
@@ -41,14 +46,14 @@ public:
 	/*
 		Gets
 	*/
-	class TEventSubject* GetReceiver( )
+	TEventSubject* GetReceiver( )
 	{
 		return m_receiver;
 	}
 
 
 private:
-	class TEventSubject* m_receiver;
+	TEventSubject* m_receiver;
 };
 
 
@@ -60,14 +65,14 @@ class TGON_API TEventListenerImpl :
 
 
 public:
-	TGON_OBJECT( TEventListenerImpl<ReceiverTy>, TEventListener )
+	TGON_GENERATE_OBJECT_INTERFACE( TEventListenerImpl<ReceiverTy>, TEventListener )
 
 
 public:
 	/*
 		Cons/Destructor
 	*/
-	TEventListenerImpl( class TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
+	TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
 		TEventListener( receiver ),
 		m_handlerFunction( eventHandlerFunc )
 	{

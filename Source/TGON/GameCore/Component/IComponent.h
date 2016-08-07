@@ -18,7 +18,7 @@ class TGON_API IComponent :
 	public TObject
 {
 public:
-	TGON_OBJECT( IComponent, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( IComponent, std::nullptr_t )
 
 public:
 	/*

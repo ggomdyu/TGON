@@ -195,7 +195,7 @@ public:
 /*
 	Generator
 */
-	TGON_OBJECT( TInputModule, IModule )
+	TGON_GENERATE_OBJECT_INTERFACE( TInputModule, IModule )
 
 
 /*

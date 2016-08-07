@@ -22,7 +22,7 @@ class TGON_API TGameObject :
 	public TObject
 {
 public:
-	TGON_OBJECT( TGameObject, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( TGameObject, std::nullptr_t )
 
 
 public:

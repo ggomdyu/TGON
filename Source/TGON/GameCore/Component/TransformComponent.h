@@ -20,7 +20,7 @@ class TGON_API TransformComponent :
 	public IComponent
 {
 public:
-	TGON_OBJECT( TransformComponent, IComponent )
+	TGON_GENERATE_OBJECT_INTERFACE( TransformComponent, IComponent )
 
 public:
 	TransformComponent( class TGameObject* owner );

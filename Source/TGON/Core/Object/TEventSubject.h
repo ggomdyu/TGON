@@ -14,27 +14,19 @@ namespace tgon
 {
 
 
-enum TEvent
-{
-	OnUpdateBegin,
-	OnUpdateEnd,
-	OnRenderBegin,
-	OnRenderEnd,
-	OnDestroy,
-};
-
-
 class TGON_API TEventSubject :
 	public TObject
 {
 	template <typename ReceiverTy>
 	using HandlerFunctionTy = void( ReceiverTy::* )( );
+
 	using ListenerMap = std::unordered_map<TEventSubject*, TEventListener*>;
-	using EventMap = std::unordered_map<TEvent, ListenerMap>;
+
+	using EventMap = std::unordered_map<uint32_t, ListenerMap>;
 
 
 public:
-	TGON_OBJECT( TEventSubject, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( TEventSubject, std::nullptr_t )
 
 public:
 	/*

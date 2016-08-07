@@ -8,6 +8,7 @@
 
 #pragma once
 #include <vector>
+#include <type_traits>
 
 #include "../../Platform/Window/TWindow.h"
 #include "../../Platform/Window/WindowStyle.h"
@@ -34,7 +35,7 @@ class TGON_API TGameBody :
 	Generator
 */
 public:
-	TGON_OBJECT( TGameBody, TEventSubject )
+	TGON_GENERATE_OBJECT_INTERFACE( TGameBody, TEventSubject )
 
 public:
 /*
@@ -79,8 +80,13 @@ public:
 	//
 	bool IsPaused( ) const;
 
+	//
+	//
+	//
+	// @return 
+	//
 	template <typename ModuleTy>
-	ModuleTy* GetModule( );
+	const std::shared_ptr<ModuleTy>& GetModule( );
 
 
 /*
@@ -94,10 +100,10 @@ private:
 	Private variables
 */
 private:
-
+	// Use on finding module
 	std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
 
-	// For fast iterating
+	// For fast iterating than std::map
 	std::vector<std::shared_ptr<IModule>> m_modulesForUpdate;
 
 	bool m_paused;
@@ -119,6 +125,23 @@ inline TWindow* TGameBody::GetWindow( )
 inline bool tgon::TGameBody::IsPaused( ) const
 {
 	return m_paused;
+}
+
+template<typename ModuleTy>
+inline const std::shared_ptr<ModuleTy>& TGameBody::GetModule( )
+{
+	static_assert( std::is_convertible<ModuleTy*, IModule*>::value,
+		"Good work????????" );
+
+	auto iter = m_modules.find( ModuleTy::GetHashCode( ));
+	if ( m_modules.end != iter )
+	{
+		return iter->second;
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
 
