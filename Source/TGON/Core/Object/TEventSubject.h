@@ -8,33 +8,45 @@
 
 #pragma once
 #include "TEventListener.h"
+#include "TType.h"
 
+
+#define TGON_GENERATE_EVENT( eventName )\
+namespace tgon\
+{\
+	namespace TEvent\
+	{\
+		tgon::TEventType eventName( #eventName );\
+	}\
+}
 
 namespace tgon
 {
 
 
+using TEventType = TType;
+
 class TGON_API TEventSubject :
 	public TObject
 {
+/*
+	Type definitions
+*/
 	template <typename ReceiverTy>
-	using HandlerFunctionTy = void( ReceiverTy::* )( );
+	using HandlerFunction = void( ReceiverTy::* )( );
 
-	using ListenerMap = std::unordered_map<TEventSubject*, TEventListener*>;
+	using ListenerRepo = std::unordered_map<TEventSubject*, TEventListener*>;
+	
+	// uint32_t is TEventType's hash code.
+	// ListenerRepo is the subscriber list of this event.
+	using EventListenerRepo = std::unordered_map<uint32_t, ListenerRepo>;
 
-	using EventMap = std::unordered_map<uint32_t, ListenerMap>;
-
-
+	
+/*
+	Generator
+*/
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( TEventSubject, std::nullptr_t )
-
-public:
-	/*
-		Cons/Destructor
-	*/
-	TEventSubject( ) = default;
-
-	virtual ~TEventSubject( );
 
 
 public:
@@ -42,47 +54,55 @@ public:
 		Commands
 	*/
 	//
-	// Subscribe event. EventListener will invoke event handler on event.
+	// Subscribe specific event's handling. 
 	//
 	// @param eventType Specify what you want to subscribe
 	// @param handlerFunction Set Event handler function. It will be invoken when event handled
 	//
 	template<typename ReceiverTy>
-	void SubscribeEvent( TEvent eventType, HandlerFunctionTy<ReceiverTy> handlerFunction );
+	void SubscribeEvent( TEventType eventType, HandlerFunction<ReceiverTy> handlerFunction );
 
 	//
 	// Unsubscribe specific event that this object subscribed
 	//
 	// @param eventType Specify what you want to unsubscribe event
 	//
-	void UnsubscribeEvent( TEvent eventType );
+	void UnsubscribeEvent( TEventType eventType );
 
 	//
-	// Unsubscribe all of events that this object subscribed
+	// Unsubscribe all of events this object subscribed
 	//
 	void UnsubscribeAllEvents( );
 
 
-	/*
-		Protect functions
-	*/
+/*
+	Cons/Destructor
+*/
+public:
+	TEventSubject( ) = default;
+
+	virtual ~TEventSubject( );
+
+
+/*
+	Protect functions
+*/
 protected:
-	void NotifyEvent( TEvent eventType );
+	void NotifyEvent( TEventType eventType );
 
 
-	/*
-		Private variables
-	*/
+/*
+	Private variables
+*/
 private:
-	// It Includes global event subscription info ( e.g. Input, BeginUpdate, ... )
-	static EventMap ms_globalMap;
+	static EventListenerRepo ms_globalEventListenerRepo;
 };
 
 
 template<typename ReceiverTy>
-inline void TEventSubject::SubscribeEvent( TEvent eventType, HandlerFunctionTy<ReceiverTy> handlerFunction )
+inline void TEventSubject::SubscribeEvent( TEventType eventType, HandlerFunction<ReceiverTy> handlerFunction )
 {
-	ms_globalMap[eventType][this] = new TEventListenerImpl<ReceiverTy>( this, handlerFunction );
+	ms_globalEventListenerRepo[eventType.GetHashCode( )][this] = new TEventListenerImpl<ReceiverTy>( this, handlerFunction );
 }
 
 

@@ -1,13 +1,14 @@
 #pragma once
 #include <Engine/Executable/TGameBody.h>
+#include <Engine/Module/InputModule.h>
 #include <Console/TConsole.h>
+
+
 
 using namespace tgon;
 
-#define TGON_GENARATE_EVENT
 
-
-//const uint32_t OnDestroy
+//TGON_GENERATE_EVENT( OnDestroy )
 
 
 class TgonModelJoy :
@@ -27,12 +28,12 @@ public:
 	TgonModelJoy( ) :
 		TGameBody( WindowStyle::DefaultStyle, GraphicsProperty{} )
 	{
-		this->SubscribeEvent( );
+		this->SubscribeEvent( TEventType( "OnDestroy" ), &TgonModelJoy::OnDestroy );
 	}
 
-	void OnUpdateBegin( )
+	void OnDestroy( )
 	{
-		
+		MessageBox( 0,0,0,0 );
 	}
 
 //	virtual void Update( ) override

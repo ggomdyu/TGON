@@ -19,12 +19,18 @@ using SpTWindow = std::shared_ptr<TWindow>;
 class TGON_API TWindow :
 	public WindowImpl
 {
+/*
+	Cons/Destructor
+*/
 public:
-	/*
-		Cons/Destructor
-	*/
+	//
+	//	Constructor
+	//
 	explicit TWindow( const WindowStyle& wndStyle );
 
+	//
+	// Desturctor
+	//
 	virtual ~TWindow( ) = default;
 };
 

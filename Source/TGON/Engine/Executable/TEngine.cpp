@@ -55,13 +55,9 @@ int32_t tgon::TEngine::Execute( int argc, char** argv )
 		// Idle time
 		if ( !window->PumpEvent( ))
 		{
-			this->NotifyEvent( TEvent::OnUpdateBegin );
-			m_mainGameBody->Update( );
-			this->NotifyEvent( TEvent::OnUpdateEnd );
-
-			this->NotifyEvent( TEvent::OnRenderBegin );
-			m_mainGameBody->Render( );
-			this->NotifyEvent( TEvent::OnRenderEnd );
+			//this->NotifyEvent( TEvent::OnUpdateBegin );
+			m_mainGameBody->FrameUpdate( );
+			//this->NotifyEvent( TEvent::OnUpdateEnd );
 		}
 
 	}

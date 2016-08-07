@@ -119,6 +119,7 @@ void tgon::WindowsWindow::EnableGlobalMouseFocus( bool isEnable )
 
 void tgon::WindowsWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
 {
+	// RECT contains caption range
 	RECT rt;
 	GetWindowRect( this->GetWindowHandle( ), &rt );
 
@@ -126,16 +127,14 @@ void tgon::WindowsWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) 
 	*y = rt.top;
 }
 
-void tgon::WindowsWindow::GetSize( 
-	OUT int32_t* width, 
-	OUT int32_t* height ) const 
+void tgon::WindowsWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const 
 {
+	// RECT contains caption range
 	RECT rt;
-	// @ WARNING! : WindowRect contains caption range
-	GetWindowRect( m_wndHandle, &rt );
+	GetClientRect( m_wndHandle, &rt );
 
-	*width = rt.right - rt.left;
-	*height = rt.bottom - rt.top;
+	*width = rt.right;
+	*height = rt.bottom;
 }
 
 void tgon::WindowsWindow::GetCaption( /*Out*/ wchar_t* caption ) const

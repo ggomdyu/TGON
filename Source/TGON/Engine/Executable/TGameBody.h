@@ -47,7 +47,7 @@ public:
 	// @param wndStyle
 	// @param graphicsProp
 	//
-	explicit TGameBody( const WindowStyle& wndStyle, const GraphicsProperty& graphicsProp );
+	explicit TGameBody( /*In*/ const WindowStyle& wndStyle, /*In*/ const GraphicsProperty& graphicsProp );
 
 	//
 	// Destructor
@@ -59,9 +59,7 @@ public:
 	Commands
 */
 public:
-	void Update( );
-
-	void Render( );
+	void FrameUpdate( );
 
 
 /*
@@ -93,7 +91,7 @@ public:
 	Internal works
 */
 private:
-	void SetupModule( );
+	void SetupModules( );
 
 
 /*

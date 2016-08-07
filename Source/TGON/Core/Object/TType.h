@@ -8,6 +8,8 @@
 #pragma once
 #include "../Platform/Config/Build.h"
 
+#include <string>
+
 
 namespace tgon
 {
@@ -19,7 +21,7 @@ class TGON_API TType final
 	Cons/Destructor
 */
 public:
-	explicit TType( const char* name );
+	explicit TType( const std::string& name );
 
 	~TType( );
 
@@ -29,15 +31,15 @@ public:
 public:
 	uint32_t GetHashCode( ) const;
 
-	const char* GetName( ) const;
+	const std::string& GetName( ) const;
 
 /*
 	Private variables
 */
 private:
-	uint32_t m_hashCode;
+	const uint32_t m_hashCode;
 
-	const char* m_name;
+	const std::string m_name;
 };
 
 
@@ -46,7 +48,7 @@ inline uint32_t TType::GetHashCode( ) const
 	return m_hashCode;
 }
 
-inline const char* TType::GetName( ) const
+inline const std::string& TType::GetName( ) const
 {
 	return m_name;
 }

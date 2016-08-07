@@ -202,8 +202,6 @@ public:
 	Cons/Destructor
 */
 public:
-	/*
-	*/
 	//
 	// Constructor
 	// Initialize input module.
@@ -253,18 +251,25 @@ public:
 	//
 	// Returns true while the user holds down the key identified by name.
 	//
-	bool GetKey( KeyCode keyCode ) const;
+	bool GetKey( KeyCode keyCode ) const
+	{
+		return false;
+	}
 
 	//
 	// Returns true during the frame the user releases the key identified by name.
 	//
-	bool GetKeyUp( KeyCode keyCode ) const;
+	bool GetKeyUp( KeyCode keyCode ) const
+	{
+		return false;
+	}
 
 	//
 	// Returns true during the frame the user starts pressing down the key identified by name.
 	//
 	bool GetKeyDown( KeyCode keyCode ) const
 	{
+		return false;
 	}
 
 

@@ -4,8 +4,8 @@
 #include "../Math/TMath.h"
 
 
-tgon::TType::TType( const char* name ) :
-	m_hashCode( TMath::GenerateHash( name )),
+tgon::TType::TType( const std::string& name ):
+	m_hashCode( TMath::GenerateHash( name.c_str( ))),
 	m_name( name )
 {
 }

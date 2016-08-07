@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "TCamera.h"
 
+#include ".././Core/Math/TMath.h"
 
 const tgon::TVector3 tgon::TCamera::Eye( 0.f, 0.f, 0.f );
 

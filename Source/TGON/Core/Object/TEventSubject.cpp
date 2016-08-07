@@ -2,7 +2,7 @@
 #include "TEventSubject.h"
 
 
-decltype( tgon::TEventSubject::ms_globalMap ) tgon::TEventSubject::ms_globalMap;
+decltype( tgon::TEventSubject::ms_globalEventListenerRepo ) tgon::TEventSubject::ms_globalEventListenerRepo;
 
 
 tgon::TEventSubject::~TEventSubject( )
@@ -10,48 +10,48 @@ tgon::TEventSubject::~TEventSubject( )
 	this->UnsubscribeAllEvents( );
 }
 
-void tgon::TEventSubject::UnsubscribeEvent( TEvent eventType )
+void tgon::TEventSubject::UnsubscribeEvent( TEventType eventType )
 {
-	auto eventMapIter = ms_globalMap.find( eventType );
+	auto iter = ms_globalEventListenerRepo.find( eventType.GetHashCode( ));
 	
 	// Does eventMapIter exist?
-	if ( eventMapIter != ms_globalMap.end( ))
+	if ( iter != ms_globalEventListenerRepo.end( ))
 	{
 		// Then, delete all of event handlers
-		for ( auto eventHandler : eventMapIter->second )
+		for ( auto eventHandler : iter->second )
 		{
 			delete eventHandler.second;
 			eventHandler.second = nullptr;
 		}
 
-	 	eventMapIter->second.erase( this );
+	 	iter->second.erase( this );
 	}
 }
 
 void tgon::TEventSubject::UnsubscribeAllEvents( )
 {
 	// Unsubscribe global event
-	for ( auto eventMapIter : ms_globalMap )
+	for ( auto& eventMapIter : ms_globalEventListenerRepo )
 	{
-		auto eveneHandlerIter = eventMapIter.second.find( this );
+		auto eventHandlerIter = eventMapIter.second.find( this );
 
 		// Does exist event handlers?
-		if ( eveneHandlerIter != eventMapIter.second.end( ))
+		if ( eventHandlerIter != eventMapIter.second.end( ))
 		{
-			delete eveneHandlerIter->second;
-			eveneHandlerIter->second = nullptr;
+			delete eventHandlerIter->second;
+			eventHandlerIter->second = nullptr;
 		}
 
 		eventMapIter.second.erase( this );
 	}
 }
 
-void tgon::TEventSubject::NotifyEvent( TEvent eventType )
+void tgon::TEventSubject::NotifyEvent( TEventType eventType )
 {
-	for ( auto eventMap : ms_globalMap )
+	for ( auto eventMap : ms_globalEventListenerRepo )
 	{
 		// Find event type which we want to notify 
-		if ( eventMap.first != eventType )
+		if ( eventMap.first != eventType.GetHashCode( ))
 		{
 			continue;
 		}

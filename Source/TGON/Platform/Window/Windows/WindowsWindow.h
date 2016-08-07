@@ -34,8 +34,14 @@ class TGON_API WindowsWindow :
 	Cons/Destructor
 */
 protected:
+	//
+	// Constructor
+	//
 	explicit WindowsWindow( /*In*/ const WindowStyle& wndStyle );
 
+	//
+	// Destructor
+	//
 	virtual ~WindowsWindow( );
 
 /*
@@ -58,7 +64,7 @@ public:
 
 	virtual void Flash( ) override;
 
-	virtual void EnableGlobalMouseFocus( bool isEnable );
+	virtual void EnableGlobalMouseFocus( bool isEnable ) override;
 
 
 /*
@@ -68,7 +74,7 @@ public:
 
 	virtual void SetScale( int32_t width, int32_t height ) override;
 
-	virtual void SetCaption( /*In*/ const wchar_t* caption );
+	virtual void SetCaption( /*In*/ const wchar_t* caption ) override;
 	
 
 /*
@@ -99,6 +105,7 @@ private:
 */
 private:
 	HWND m_wndHandle;
+
 };
 
 

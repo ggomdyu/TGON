@@ -12,12 +12,12 @@
 namespace tgon
 {
 
-
-class TGON_API IComparable
-{
-public:
-	virtual void CompareTo( class TObject& ) = 0;
-};
-
+//
+//class TGON_API IComparable
+//{
+//public:
+//	virtual void CompareTo( class TObject& ) = 0;
+//};
+//
 
 }

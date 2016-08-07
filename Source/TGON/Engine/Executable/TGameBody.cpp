@@ -9,14 +9,14 @@ tgon::TGameBody::TGameBody( const WindowStyle& wndStyle, const GraphicsProperty&
 	m_paused( false ),
 	m_window( wndStyle )
 {
-	this->SetupModule( );
+	this->SetupModules( );
 }
 
 tgon::TGameBody::~TGameBody( )
 {
 }
 
-void tgon::TGameBody::Update( )
+void tgon::TGameBody::FrameUpdate( )
 {
 	for ( auto module : m_modulesForUpdate )
 	{
@@ -24,11 +24,7 @@ void tgon::TGameBody::Update( )
 	}
 }
 
-void tgon::TGameBody::Render( )
-{
-}
-
-void tgon::TGameBody::SetupModule( )
+void tgon::TGameBody::SetupModules( )
 {
 	auto AddModule = [this]( const std::shared_ptr<IModule>& module )
 	{

@@ -39,7 +39,7 @@ public:
 public:
 	static bool Equals( const TObject&, const TObject& );
 	
-	// Compare the object paremeter. This can be overridden.
+	// Compare two instance. This can be overridden.
 	virtual bool Equals( const TObject& ) const;
 
 	// Compare two instance. Return true if both refer to the same object.
@@ -66,13 +66,13 @@ public:
 	//}
 
 
-	/*
-		Gets
-	*/
-	// Return dynamic binded type's hash code.
+/*
+	Gets
+*/
+	// Return dynamic bound type's hash code.
 	virtual uint32_t GetHashCode( ) const = 0;
 	
-	// Return dynamic binded type's name.
+	// Return dynamic bound type's name.
 	virtual const char* GetName( ) const = 0;
 
 };
@@ -88,22 +88,17 @@ inline bool tgon::TObject::operator!=( const TObject& rhs ) const
 	return !( *this == rhs );
 }
 
-inline bool TObject::Equals(
-	const TObject& lhs,
-	const TObject& rhs )
+inline bool TObject::Equals( const TObject& lhs, const TObject& rhs )
 {
 	return lhs.Equals( rhs );
 }
 
-inline bool TObject::Equals( 
-	const TObject& rhs ) const
+inline bool TObject::Equals( const TObject& rhs ) const
 {
 	return ( this->GetHashCode( ) == rhs.GetHashCode( ));
 }
 
-inline bool TObject::ReferenceEquals( 
-	const TObject& lhs, 
-	const TObject& rhs )
+inline bool TObject::ReferenceEquals( const TObject& lhs, const TObject& rhs )
 {
 	return ( &lhs == &rhs );
 }

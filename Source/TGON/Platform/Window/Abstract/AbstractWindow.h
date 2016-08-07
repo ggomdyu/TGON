@@ -55,22 +55,22 @@ public:
 /*
 	Sets
 */
-	void SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventHandler );
+	void SetEventHandler( /*In*/ const std::shared_ptr<AbstractWindowEventHandler>& eventHandler );
 
 	virtual void SetPosition( int32_t x, int32_t y );
 
 	virtual void SetScale( int32_t width, int32_t height );
 
-	virtual void SetCaption( const wchar_t* src );
+	virtual void SetCaption( /*In*/ const wchar_t* src );
 
 /*
 	Gets
 */
-	virtual void GetPosition( int32_t* x, int32_t* y ) const;
+	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const;
 
-	virtual void GetSize( int32_t* width, int32_t* height ) const;
+	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const;
 
-	virtual void GetCaption( wchar_t* caption ) const;
+	virtual void GetCaption( /*Out*/ wchar_t* caption ) const;
 
 	bool IsEnabledGlobalInputFocus( ) const;
 
@@ -123,7 +123,7 @@ inline void AbstractWindow::EnableGlobalMouseFocus( bool isEnable )
 {
 }
 
-inline void tgon::AbstractWindow::SetEventHandler( const std::shared_ptr<AbstractWindowEventHandler>& eventListener )
+inline void tgon::AbstractWindow::SetEventHandler( /*In*/ const std::shared_ptr<AbstractWindowEventHandler>& eventListener )
 {
 	m_eventListener = eventListener;
 }
@@ -136,19 +136,19 @@ inline void AbstractWindow::SetScale( int32_t width, int32_t height )
 {
 }
 
-inline void AbstractWindow::SetCaption( const wchar_t * src )
+inline void AbstractWindow::SetCaption( /*In*/ const wchar_t* src )
 {
 }
 
-inline void AbstractWindow::GetPosition( int32_t * x, int32_t * y ) const
+inline void AbstractWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
 {
 }
 
-inline void AbstractWindow::GetSize( int32_t * width, int32_t * height ) const
+inline void AbstractWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const
 {
 }
 
-inline void AbstractWindow::GetCaption( wchar_t * caption ) const
+inline void AbstractWindow::GetCaption( /*Out*/ wchar_t* caption ) const
 {
 }
 
