@@ -20,15 +20,6 @@ class TGON_API TMath
 {
 public:
 	/*
-		Cons/Destructor
-	*/
-
-	TMath( ) = delete;
-
-	virtual ~TMath( ) = delete;
-
-
-	/*
 		Public members
 	*/
 	
@@ -78,6 +69,15 @@ public:
 	static float Smoothstep( float from, float to, float t );
 
 	static TVector3 Hermite( const TVector3& a, const TVector3& b, const TVector3& c, float t );
+
+
+	/*
+		Cons/Destructor
+	*/
+
+	TMath( ) = delete;
+
+	virtual ~TMath( ) = delete;
 
 
 private:
