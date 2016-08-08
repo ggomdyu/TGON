@@ -66,6 +66,9 @@
     <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h">
       <Filter>Sources\Module\hpp\Input</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Object\TCoreEvents.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Module\InputModule.cpp">
       <Filter>Sources\Module\hpp\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Object\TCoreEvents.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

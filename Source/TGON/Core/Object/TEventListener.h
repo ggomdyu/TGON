@@ -18,48 +18,58 @@ class TEventSubject;
 //
 // Listen some event and inform to subject 
 //
-class TGON_API TEventListener :
-	public TObject
+class TEventListener :
+	public tgon::TObject
 {
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( TEventListener, std::nullptr_t )
 
 
 public:
-	/*
-		Cons/Destructor
-	*/
-	explicit TEventListener( TEventSubject* receiver );
+/*
+	Cons/Destructor
+*/
+	explicit TEventListener( tgon::TEventSubject* receiver ) :
+		m_receiver( receiver )
+	{
+		assert( receiver );
+	}
 
 
 public:
-	/*
-		Commands
-	*/
-	virtual void Notify( ) = 0;
-	
+/*
+	Commands
+*/
+	//virtual void Notify( ) = 0;
 
-	/*
-		Gets
-	*/
-	TEventSubject* GetReceiver( )
+
+/*
+	Gets
+*/
+	tgon::TEventSubject* GetReceiver( )
 	{
 		return m_receiver;
 	}
 
 
 private:
-	TEventSubject* m_receiver;
+	tgon::TEventSubject* m_receiver;
 };
 
 
-template <class ReceiverTy>
+template <class ReceiverTy, typename... HandlerArgs>
 class TGON_API TEventListenerImpl :
 	public TEventListener
 {
-	using HandlerFunctionTy = void( ReceiverTy::* )( );
+/*
+	Type definitions
+*/
+	using HandlerFunction = void( ReceiverTy::* )( HandlerArgs... );
 
 
+/*
+	Generators
+*/
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( TEventListenerImpl<ReceiverTy>, TEventListener )
 
@@ -68,31 +78,31 @@ public:
 	Cons/Destructor
 */
 public:
-	TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc );
-
-
-public:
-	/*
-		Commands
-	*/
-	virtual void Notify( ) override
+	TEventListenerImpl( tgon::TEventSubject* receiver, HandlerFunction eventHandlerFunc ) :
+		TEventListener( receiver ),
+		m_eventHandlerFunc( eventHandlerFunc )
 	{
-		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_eventHandlerFunc )( );
+		assert( m_eventHandlerFunc );
 	}
 
 
+/*
+	Commands
+*/
+public:
+	template <typename... EventHandlerArgs>
+	void Notify( EventHandlerArgs&&... args )
+	{
+		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_eventHandlerFunc )( std::forward<EventHandlerArgs>( args )... );
+	}
+
+
+/*
+	Private variables
+*/
 private:
-	HandlerFunctionTy m_eventHandlerFunc;
+	HandlerFunction m_eventHandlerFunc;
 };
-
-
-template <class ReceiverTy>
-inline tgon::TEventListenerImpl<ReceiverTy>::TEventListenerImpl( TEventSubject* receiver, HandlerFunctionTy eventHandlerFunc ) :
-	TEventListener( receiver ),
-	m_eventHandlerFunc( eventHandlerFunc )
-{
-	assert( m_eventHandlerFunc );
-}
 
 
 }

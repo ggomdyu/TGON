@@ -17,13 +17,22 @@ namespace tgon
 
 class TGON_API TObject 
 {
+/*
+	Type definitions
+*/
 public:
+	using Super = void;
+	using This = TObject;
+
+
 /*
 	Cons/Destructor
 */
+public:
 	TObject( );
 	
 	virtual ~TObject( ) = 0;
+
 
 /*
 	Opeators
@@ -44,26 +53,6 @@ public:
 
 	// Compare two instance. Return true if both refer to the same object.
 	static bool ReferenceEquals( const TObject&, const TObject& );
-
-	// THESE CODES ARE NOT OPTIMIZED. SO BE CAREFUL WHEN USE IT
-	//template <typename ToTy>
-	//bool IsKindOf( )
-	//{
-	//	if ( this->GetHashCode( ) == ToTy::GetType( ).GetHashCode( ))
-	//	{
-	//		return true;
-	//	}
-	//	else
-	//	{
-	//		return IsKindOf<ToTy::Super>( );
-	//	}
-	//}
-	//
-	//template<>
-	//bool IsKindOf<std::nullptr_t>( )
-	//{
-	//	return false;
-	//}
 
 
 /*
@@ -109,6 +98,7 @@ inline bool TObject::ReferenceEquals( const TObject& lhs, const TObject& rhs )
 
 #define TGON_GENERATE_OBJECT_INTERFACE( baseType, superType )\
 	using Super = superType;\
+	using This = baseType;\
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\

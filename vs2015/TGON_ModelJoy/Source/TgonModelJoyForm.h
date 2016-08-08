@@ -33,7 +33,6 @@ public:
 
 	void OnDestroy( )
 	{
-		MessageBox( 0,0,0,0 );
 	}
 
 //	virtual void Update( ) override

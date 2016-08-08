@@ -12,53 +12,53 @@ tgon::TEventSubject::~TEventSubject( )
 
 void tgon::TEventSubject::UnsubscribeEvent( TEventType eventType )
 {
-	auto iter = ms_globalEventListenerRepo.find( eventType.GetHashCode( ));
+	auto eventMapIter = ms_globalEventListenerRepo.find( eventType.GetHashCode( ));
 	
 	// Does eventMapIter exist?
-	if ( iter != ms_globalEventListenerRepo.end( ))
+	if ( eventMapIter != ms_globalEventListenerRepo.end( ))
 	{
 		// Then, delete all of event handlers
-		for ( auto eventHandler : iter->second )
+		for ( auto eventHandler : eventMapIter->second )
 		{
 			delete eventHandler.second;
 			eventHandler.second = nullptr;
 		}
 
-	 	iter->second.erase( this );
+	 	eventMapIter->second.erase( this );
 	}
 }
 
 void tgon::TEventSubject::UnsubscribeAllEvents( )
 {
 	// Unsubscribe global event
-	for ( auto& eventMapIter : ms_globalEventListenerRepo )
+	for ( auto eventMapIter : ms_globalEventListenerRepo )
 	{
-		auto eventHandlerIter = eventMapIter.second.find( this );
+		auto eveneHandlerIter = eventMapIter.second.find( this );
 
 		// Does exist event handlers?
-		if ( eventHandlerIter != eventMapIter.second.end( ))
+		if ( eveneHandlerIter != eventMapIter.second.end( ))
 		{
-			delete eventHandlerIter->second;
-			eventHandlerIter->second = nullptr;
+			delete eveneHandlerIter->second;
+			eveneHandlerIter->second = nullptr;
 		}
 
 		eventMapIter.second.erase( this );
 	}
 }
 
-void tgon::TEventSubject::NotifyEvent( TEventType eventType )
-{
-	for ( auto eventMap : ms_globalEventListenerRepo )
-	{
-		// Find event type which we want to notify 
-		if ( eventMap.first != eventType.GetHashCode( ))
-		{
-			continue;
-		}
-
-		for ( auto listener : eventMap.second )
-		{
-			listener.second->Notify( );
-		}
-	}
-}
+//void tgon::TEventSubject::NotifyEvent( TEventType eventType )
+//{
+//	for ( auto eventMap : ms_globalEventListenerRepo )
+//	{
+//		// Find event type which we want to notify 
+//		if ( eventMap.first != eventType.GetHashCode( ))
+//		{
+//			continue;
+//		}
+//
+//		for ( auto listener : eventMap.second )
+//		{
+//			listener.second->Notify( );
+//		}
+//	}
+//}

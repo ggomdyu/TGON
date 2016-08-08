@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TimeModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Engine\Object\TCoreEvents.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
@@ -38,6 +39,7 @@
     <ClInclude Include="..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TimeModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
+    <ClInclude Include="..\..\Source\TGON\Engine\Object\TCoreEvents.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>

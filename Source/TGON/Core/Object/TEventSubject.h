@@ -32,9 +32,10 @@ class TGON_API TEventSubject :
 /*
 	Type definitions
 */
-	template <typename ReceiverTy>
-	using HandlerFunction = void( ReceiverTy::* )( );
+	template <typename ReceiverTy, typename... HandlerFuncArgs>
+	using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
+	//
 	using ListenerRepo = std::unordered_map<TEventSubject*, TEventListener*>;
 	
 	// uint32_t is TEventType's hash code.
@@ -46,7 +47,7 @@ class TGON_API TEventSubject :
 	Generator
 */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( TEventSubject, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( TEventSubject, TObject )
 
 
 public:
@@ -59,8 +60,12 @@ public:
 	// @param eventType Specify what you want to subscribe
 	// @param handlerFunction Set Event handler function. It will be invoken when event handled
 	//
-	template<typename ReceiverTy>
-	void SubscribeEvent( TEventType eventType, HandlerFunction<ReceiverTy> handlerFunction );
+	template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
+	void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
+	{
+		ms_globalEventListenerRepo[EventTy::GetType( ).GetHashCode( )][this] = new TEventListenerImpl<ReceiverTy, HandlerFuncArgs...>(
+			this, handlerFunc );
+	}
 
 	//
 	// Unsubscribe specific event that this object subscribed
@@ -88,7 +93,21 @@ public:
 	Protect functions
 */
 protected:
-	void NotifyEvent( TEventType eventType );
+	template <typename EventTy, typename CallerTy, typename... EventHandlerArgs>
+	void NotifyEvent( EventHandlerArgs... args )
+	{
+		auto listenerRepoIter = ms_globalEventListenerRepo.find( EventTy::GetType( ).GetHashCode( ));
+
+		// Does exist event subscriber?
+		if ( listenerRepoIter != ms_globalEventListenerRepo.end( ))
+		{
+			for ( auto& listener : listenerRepoIter->second )
+			{
+				static_cast<TEventListenerImpl<CallerTy, EventHandlerArgs...>*>( 
+					listener.second )->Notify( args... );
+			}
+		}
+	}
 
 
 /*
@@ -97,13 +116,6 @@ protected:
 private:
 	static EventListenerRepo ms_globalEventListenerRepo;
 };
-
-
-template<typename ReceiverTy>
-inline void TEventSubject::SubscribeEvent( TEventType eventType, HandlerFunction<ReceiverTy> handlerFunction )
-{
-	ms_globalEventListenerRepo[eventType.GetHashCode( )][this] = new TEventListenerImpl<ReceiverTy>( this, handlerFunction );
-}
 
 
 }

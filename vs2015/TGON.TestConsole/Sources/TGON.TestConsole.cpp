@@ -4,159 +4,154 @@
 #include "PrecompiledHeader.h"
 
 #include <iostream>
-#include <GameCore/Module/TWorkThreadModule.h>
 #include <atomic>
 #include <condition_variable>
 #include <thread>
 #include <boost/lexical_cast.hpp>
+#include <Object/TObject.h>
+#include <Core/Object/TEventSubject.h>
 
-using namespace tgon;
 
-
-class TWorkThread
+namespace tgon
 {
-	// It's not thread-safe, so we using mutex on here
-	using WorkQueue = std::deque<std::function<void( )>>;
+	//class TEventSubject;
+}
 
-	using ThreadQueue = std::vector<std::thread>;
 
+struct OnDestroy {};
+struct OnMouseDown {};
+
+
+
+//template <typename... Args>
+//struct STR
+//{
+//};
+
+
+template<typename... Args>
+using VariadicFuncPtr = void(*)( Args... );
+
+
+struct E_DESTROY : 
+	public tgon::TObject
+{
 public:
-	TWorkThread( int threadNum = std::thread::hardware_concurrency() ) :
-		m_workCount( 0 )
-	{
-		for ( int i = 0; i < threadNum; ++i )
-		{
-			m_threadQueue.push_back( std::thread( &TWorkThread::InfiniteLoop, this ) );
-		}
-	}
-
-	void Wait( )
-	{
-		std::unique_lock<std::mutex> lock( m_mutex );
-		m_finishConditionVar.wait( lock,
-			[this]( ) { return ( m_workCount == 0 &&
-				m_workQueue.empty( ) ); }
-		);
-	}
-
-	void InfiniteLoop( )
-	{
-		while ( true )
-		{
-			std::unique_lock<std::mutex> lock( m_mutex );
-
-			if ( !m_workQueue.empty( ))
-			{
-				auto work = m_workQueue.front( );
-				m_workQueue.pop_front( );
-			
-				lock.unlock( );
-
-				++m_workCount;
-				work( );
-				--m_workCount;
-
-				m_finishConditionVar.notify_one( );
-			}
-		}
-	}
-
-	// Enqueue the work. The idle thread will execute the work.
-	template <typename _FuncTy, typename... _FuncArgs>
-	void Request( _FuncTy&& f, _FuncArgs&&... args )
-	{
-		m_workQueue.emplace_back( 
-			std::forward<_FuncTy>( f ), 
-			std::forward<_FuncArgs>( args )... 
-		);
-		
-		m_waitConditionVar.notify_one( );
-	}
-
-private:
-	std::atomic<int> m_workCount;
-	WorkQueue m_workQueue;
-	ThreadQueue m_threadQueue;
-	std::mutex m_mutex;
-	std::condition_variable m_waitConditionVar;
-	std::condition_variable m_finishConditionVar;
+	TGON_GENERATE_OBJECT_INTERFACE( E_DESTROY, TObject )
 };
 
+class WOWOW :
+	public tgon::TEventSubject
+{
+public:
+	TGON_GENERATE_OBJECT_INTERFACE( WOWOW, tgon::TEventSubject )
+
+public:
+	WOWOW( )
+	{
+		this->SubscribeEvent<E_DESTROY>( &WOWOW::OnDestroy );
+	}
+
+	void OnDestroy( int a, int b, int c )
+	{
+		std::cout << a + b + c << std::endl;
+	}
+
+	void Update( )
+	{
+		this->NotifyEvent<E_DESTROY, WOWOW>( 1,1,1 );
+	}
+
+	int m = -234;
+};
+
+template <typename ReceiverTy, typename... HandlerFuncArgs>
+using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
 int main()
 {
-	/*TWorkThread tt;
-	DWORD b = GetTickCount( );
+	WOWOW a;
+	a.Update( );
+	WOWOW b;
+	b.Update( );
+	WOWOW c;
+	c.Update( );
 
-	std::atomic<int> v = 0;
-	auto work = [&]( )
-	{
-		int temp = 0;
-		for ( int i = 0 ; i < 25000000; ++i )
-			temp += 1;
+	//VariadicFuncPtr<int> a;
+	int  v = 3;
 
-		v += temp;
-	};
+	///*TWorkThread tt;
+	//DWORD b = GetTickCount( );
 
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	tt.Request( work );
-	
-	std::cout << "b";
-	tt.Wait( );
-	std::cout << "a";
+	//std::atomic<int> v = 0;
+	//auto work = [&]( )
+	//{
+	//	int temp = 0;
+	//	for ( int i = 0 ; i < 25000000; ++i )
+	//		temp += 1;
 
-	DWORD e = GetTickCount( ) - b;
+	//	v += temp;
+	//};
 
-	std::cout << v;
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//tt.Request( work );
+	//
+	//std::cout << "b";
+	//tt.Wait( );
+	//std::cout << "a";
 
-	Sleep( 10000 );
+	//DWORD e = GetTickCount( ) - b;
 
-	std::cout << v.load( ) << ", 걸린 시간: " << e;
+	//std::cout << v;
 
+	//Sleep( 10000 );
 
-	return  0;*/
-	{
-
-	TWorkThreadModule tw;
-
-	DWORD b = GetTickCount( );
-
-	std::atomic<int> v = 0;
-	auto work = [&]( )
-	{
-		int temp = 0;
-		for ( int i = 0; i < 25000000; ++i )
-			temp += 1;
-
-		v += temp;
-	};
-
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-	tw.Request( work );
-
-	std::cout << "a";
-	tw.Wait( );
-	std::cout << "b";
+	//std::cout << v.load( ) << ", 걸린 시간: " << e;
 
 
+	//return  0;*/
+	//{
 
-	DWORD e = GetTickCount( ) - b;
+	//TWorkThreadModule tw;
 
-	
-	std::cout << v << " "<<e << std::endl;
-	}
+	//DWORD b = GetTickCount( );
+
+	//std::atomic<int> v = 0;
+	//auto work = [&]( )
+	//{
+	//	int temp = 0;
+	//	for ( int i = 0; i < 25000000; ++i )
+	//		temp += 1;
+
+	//	v += temp;
+	//};
+
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+	//tw.Request( work );
+
+	//std::cout << "a";
+	//tw.Wait( );
+	//std::cout << "b";
+
+
+
+	//DWORD e = GetTickCount( ) - b;
+
+	//
+	//std::cout << v << " "<<e << std::endl;
+	//}
 
 
 
