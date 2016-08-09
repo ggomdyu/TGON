@@ -13,7 +13,7 @@ namespace tgon
 {
 
 
-template <typename PtrTy>
+template <typename RawPtrTy>
 class unique_comptr final
 {
 public:
@@ -24,7 +24,7 @@ public:
 
 	~unique_comptr( );
 	
-	unique_comptr( PtrTy* rhs );
+	unique_comptr( RawPtrTy* rhs );
 
 	unique_comptr( const unique_comptr& rhs ) = delete;
 
@@ -42,11 +42,11 @@ public:
 	
 	bool operator!=( const unique_comptr& rhs );
 	
-	PtrTy** operator&( );
+	RawPtrTy** operator&( );
 	
-	PtrTy* operator->( ) const;
+	RawPtrTy* operator->( ) const;
 
-	operator PtrTy*( ) const;
+	operator RawPtrTy*( ) const;
 
 
 public:
@@ -54,22 +54,22 @@ public:
 		Commands
 	*/
 	// Release and attach the new pointer.
-	void Reset( PtrTy* rawPtr );
+	void Reset( RawPtrTy* rawPtr );
 
 	// Relese the pointer.
 	void Release( );
 
 	// Get the real pointer.
-	PtrTy* Get( );
+	RawPtrTy* Get( );
 
 
 private:
-	PtrTy* m_ptr;
+	RawPtrTy* m_ptr;
 };
 
 
-template<typename PtrTy>
-inline void unique_comptr<PtrTy>::Reset( PtrTy* rawPtr )
+template<typename RawPtrTy>
+inline void unique_comptr<RawPtrTy>::Reset( RawPtrTy* rawPtr )
 {
 	this->Release( );
 	if ( rawPtr )
@@ -78,8 +78,8 @@ inline void unique_comptr<PtrTy>::Reset( PtrTy* rawPtr )
 	}
 }
 
-template<typename PtrTy>
-inline void unique_comptr<PtrTy>::Release( )
+template<typename RawPtrTy>
+inline void unique_comptr<RawPtrTy>::Release( )
 {
 	if ( m_ptr )
 	{
@@ -88,20 +88,20 @@ inline void unique_comptr<PtrTy>::Release( )
 	}
 }
 
-template<typename PtrTy>
-inline PtrTy* unique_comptr<PtrTy>::Get( )
+template<typename RawPtrTy>
+inline RawPtrTy* unique_comptr<RawPtrTy>::Get( )
 {
 	return m_ptr;
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>::unique_comptr( ) :
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>::unique_comptr( ) :
 	m_ptr( nullptr )
 {
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>::unique_comptr( PtrTy* rhs ) :
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>::unique_comptr( RawPtrTy* rhs ) :
 	m_ptr( rhs )
 {
 	if ( m_ptr )
@@ -110,15 +110,15 @@ inline unique_comptr<PtrTy>::unique_comptr( PtrTy* rhs ) :
 	}
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>::unique_comptr( unique_comptr&& rhs ) :
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>::unique_comptr( unique_comptr&& rhs ) :
 	m_ptr( rhs.m_ptr )
 {
 	rhs.m_ptr = nullptr;
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>::~unique_comptr( )
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>::~unique_comptr( )
 {
 	if ( m_ptr )
 	{
@@ -127,39 +127,39 @@ inline unique_comptr<PtrTy>::~unique_comptr( )
 	}
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>& unique_comptr<PtrTy>::operator=( unique_comptr&& rhs )
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>& unique_comptr<RawPtrTy>::operator=( unique_comptr&& rhs )
 {
 	m_ptr = rhs.m_ptr;
 	rhs.m_ptr = nullptr;
 }
 
-template<typename PtrTy>
-inline bool unique_comptr<PtrTy>::operator==( const unique_comptr& rhs )
+template<typename RawPtrTy>
+inline bool unique_comptr<RawPtrTy>::operator==( const unique_comptr& rhs )
 {
 	return ( m_ptr == rhs.m_ptr );
 }
 
-template<typename PtrTy>
-inline bool unique_comptr<PtrTy>::operator!=( const unique_comptr& rhs )
+template<typename RawPtrTy>
+inline bool unique_comptr<RawPtrTy>::operator!=( const unique_comptr& rhs )
 {
 	return ( m_ptr != rhs.m_ptr );
 }
 
-template<typename PtrTy>
-inline PtrTy** unique_comptr<PtrTy>::operator&( )
+template<typename RawPtrTy>
+inline RawPtrTy** unique_comptr<RawPtrTy>::operator&( )
 {
 	return &m_ptr;
 }
 
-template<typename PtrTy>
-inline PtrTy* unique_comptr<PtrTy>::operator->( ) const
+template<typename RawPtrTy>
+inline RawPtrTy* unique_comptr<RawPtrTy>::operator->( ) const
 {
 	return m_ptr;
 }
 
-template<typename PtrTy>
-inline unique_comptr<PtrTy>::operator PtrTy*( ) const
+template<typename RawPtrTy>
+inline unique_comptr<RawPtrTy>::operator RawPtrTy*( ) const
 {
 	return m_ptr;
 }
