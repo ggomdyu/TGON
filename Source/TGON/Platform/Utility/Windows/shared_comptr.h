@@ -16,9 +16,9 @@ namespace tgon
 template <typename RawPtrTy>
 class shared_comptr
 {
-	/*
-		Cons/Destructor
-	*/
+/*
+	Cons/Destructor
+*/
 public:
 	shared_comptr( ) :
 		m_rawPtr( nullptr )
@@ -59,9 +59,9 @@ public:
 	}
 
 
-	/*
-		Operators
-	*/
+/*
+	Operators
+*/
 	shared_comptr& operator=( const shared_comptr& rhs )
 	{
 		if ( m_rawPtr == rhs.m_rawPtr )
@@ -110,25 +110,37 @@ public:
 
 
 public:
-	/*
-		Commands
-	*/
+/*
+	Commands
+*/
+	//
 	// Set the pointer without increasing the reference count.
+	//
+	// @param rawPtr raw pointer you want to attach
+	//
 	void Attach( RawPtrTy* rawPtr );
 
-	// Set the pointer without decreasing the reference count.
+	//
+	// Detach pointer without decreasing the reference count.
+	//
 	void Detach( );
 
-	// Release and attach the pointer.
+	//
+	// Release and attach the pointer with increasing reference count.
+	//
+	// @rawPtr raw pointer you want to reset
+	//
 	void Reset( RawPtrTy* rawPtr );
 
+	//
 	// Relese the pointer.
+	//
 	void Release( );
 
 
-	/*
-		Private variables
-	*/
+/*
+	Private variables
+*/
 private:
 	RawPtrTy* m_rawPtr;
 };
