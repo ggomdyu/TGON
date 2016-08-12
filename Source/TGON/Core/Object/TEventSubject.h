@@ -10,13 +10,6 @@
 #include "TEventListener.h"
 #include "TType.h"
 
-struct E_DFDF : public tgon::TObject\
-{\
-public:\
-	TGON_GENERATE_OBJECT_INTERFACE( E_DFDF, tgon::TObject )\
-public:\
-	virtual ~E_DFDF( ) = default; \
-}; \
 
 namespace tgon
 {
