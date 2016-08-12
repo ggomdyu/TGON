@@ -21,9 +21,24 @@ class TGON_API TType final
 	Cons/Destructor
 */
 public:
+	//
+	// Constructor
+	//
+	// @param name Save name and make hash key
+	//
 	explicit TType( const std::string& name );
 
 	~TType( );
+
+/*
+	Operators
+*/
+	//
+	// Now we can insert this structure to std::map
+	//
+	// @param rhs Compare target
+	//
+	bool operator<( const TType& rhs ) const;
 
 
 /*
@@ -52,6 +67,11 @@ inline uint32_t TType::GetHashCode( ) const
 inline const std::string& TType::GetName( ) const
 {
 	return m_name;
+}
+
+inline bool tgon::TType::operator<( const TType& rhs ) const
+{
+	return m_hashCode < rhs.m_hashCode;
 }
 
 

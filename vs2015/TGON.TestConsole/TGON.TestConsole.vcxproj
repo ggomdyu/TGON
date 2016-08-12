@@ -157,11 +157,6 @@
     <ClCompile Include="Sources\TGON.TestConsole.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON.GameCore\TGON.GameCore.vcxproj">
-      <Project>{f53c56e2-f77e-4a53-8adc-d00a9903312d}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

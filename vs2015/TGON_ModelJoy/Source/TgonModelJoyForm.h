@@ -8,7 +8,7 @@
 using namespace tgon;
 
 
-//TGON_GENERATE_EVENT( OnDestroy )
+TGON_GENERATE_EVENT( E_DESTROY, int )
 
 
 class TgonModelJoy :
@@ -28,11 +28,13 @@ public:
 	TgonModelJoy( ) :
 		TGameBody( WindowStyle::DefaultStyle, GraphicsProperty{} )
 	{
-		this->SubscribeEvent( TEventType( "OnDestroy" ), &TgonModelJoy::OnDestroy );
+		this->SubscribeEvent<E_DESTROY>( &This::OnDestroy );
+		this->NotifyEvent<E_DESTROY, This>( 3 );
 	}
 
-	void OnDestroy( )
+	void OnDestroy( int )
 	{
+		MessageBox( 0,0,0,0 );
 	}
 
 //	virtual void Update( ) override

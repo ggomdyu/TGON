@@ -177,8 +177,8 @@ class TWindow;
 
 class TGON_API TInputModule :
 	public IModule,
-	public OIS::KeyListener, 
-	public OIS::MouseListener, 
+	public OIS::KeyListener,
+	public OIS::MouseListener,
 	public OIS::JoyStickListener
 {
 public:
