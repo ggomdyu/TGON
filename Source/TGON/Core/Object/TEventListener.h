@@ -15,38 +15,6 @@ namespace tgon
 
 class TEventSubject;
 
-class TEventListener :
-	public tgon::TObject
-{
-/*
-	Generator
-*/
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( TEventListener, tgon::TObject )
-
-/*
-	
-*/
-public:
-	virtual void OnCreate( );
-
-	virtual void OnUpdate( );
-
-	virtual void OnDestroy( );
-
-/*
-	Gets
-*/
-public:
-	TEventSubject* GetReceiver( );
-
-/*
-	Private variables
-*/
-private:
-	TEventSubject* m_receiver;
-};
-
 
 class TEventListener :
 	public tgon::TObject
@@ -117,6 +85,7 @@ public:
 
 	virtual ~TEventListenerImpl( )
 	{
+
 	}
 
 
