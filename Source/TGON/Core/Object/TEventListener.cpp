@@ -8,3 +8,7 @@ tgon::TEventListener::TEventListener( TEventSubject* receiver ) :
 {
 	assert( receiver );
 }
+
+tgon::TEventListener::~TEventListener( )
+{
+}

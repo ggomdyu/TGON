@@ -7,19 +7,11 @@
 
 
 #pragma once
-#include <vector>
-#include <type_traits>
-
-#include "../../Platform/Window/TWindow.h"
-#include "../../Platform/Window/WindowStyle.h"
 #include "../../Core/Object/TEventSubject.h"
-#include "../../RenderCore/Graphics/TGraphicsDevice.h"
-#include "../../RenderCore/Graphics/GraphicsProperty.h"
-#include "../../Engine/Module/Interface/IModule.h"
 
 
-#define TGON_GENERATE_GAMEBODY( className )\
-std::shared_ptr<tgon::TGameBody> GenerateGameBody( )\
+#define TGON_GENERATE_GAMEAPP( className )\
+std::shared_ptr<tgon::TGameApplication> GenerateGameApplication( )\
 {\
 	return std::make_shared<className>( );\
 }
@@ -28,119 +20,78 @@ namespace tgon
 {
 
 
-class TGON_API TGameBody :
+class TGON_API TGameApplication :
 	public TEventSubject
 {
 /*
 	Generator
 */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( TGameBody, TEventSubject )
+	TGON_GENERATE_OBJECT_INTERFACE( TGameApplication, TEventSubject )
 
-public:
+
 /*
 	Cons/Destructor
 */
-	//
-	// Constructor
-	//
-	// @param wndStyle
-	// @param graphicsProp
-	//
-	explicit TGameBody( /*In*/ const WindowStyle& wndStyle, /*In*/ const GraphicsProperty& graphicsProp );
+public:
+	explicit TGameApplication( );
 
-	//
-	// Destructor
-	//
-	virtual ~TGameBody( );
+	virtual ~TGameApplication( );
 
 
 /*
 	Commands
 */
 public:
-	void FrameUpdate( );
+	//
+	// @note Update the frame
+	//
+	void Update( );
 
 
 /*
 	Sets
 */
-	void Pause( bool enablePause );
+	//
+	// @note Play the game application's frame update ( Use on paused )
+	//
+	void Play( );
+	
+	//
+	// @note Pause the game application's frame update
+	//
+	void Pause( );
 
 
 /*
 	Gets
 */
-	TWindow* GetWindow( );
-
-	//TGraphicsDeivce& GetGraphicsDevice( ) ;
-
-	//
 	bool IsPaused( ) const;
-
-	//
-	//
-	//
-	// @return 
-	//
-	template <typename ModuleTy>
-	const std::shared_ptr<ModuleTy>& GetModule( );
-
-
-/*
-	Internal works
-*/
-private:
-	void SetupModules( );
 
 
 /*
 	Private variables
 */
 private:
-	// Use on finding module
-	std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
-
-	// For fast iterating than std::map
-	std::vector<std::shared_ptr<IModule>> m_modulesForUpdate;
-
 	bool m_paused;
-
-	TWindow m_window;
 };
 
 
-inline void tgon::TGameBody::Pause( bool enablePause )
+inline void TGameApplication::Play( )
 {
-	m_paused = enablePause;
+	m_paused = false;
 }
 
-inline TWindow* TGameBody::GetWindow( )
+inline void tgon::TGameApplication::Pause( )
 {
-	return &m_window;
+	m_paused = true;
 }
 
-inline bool tgon::TGameBody::IsPaused( ) const
+inline bool tgon::TGameApplication::IsPaused( ) const
 {
 	return m_paused;
 }
 
-template<typename ModuleTy>
-inline const std::shared_ptr<ModuleTy>& TGameBody::GetModule( )
-{
-	static_assert( std::is_convertible<ModuleTy*, IModule*>::value,
-		"Good work????????" );
-
-	auto iter = m_modules.find( ModuleTy::GetHashCode( ));
-	if ( m_modules.end != iter )
-	{
-		return iter->second;
-	}
-	else
-	{
-		return nullptr;
-	}
-}
 
 
 }

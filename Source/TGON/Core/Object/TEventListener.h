@@ -29,7 +29,17 @@ public:
 	Cons/Destructor
 */
 public:
+	//
+	// This class will notify to receiver when event handled.
+	//
+	// @param receiver Event handling receiver
+	//
 	explicit TEventListener( TEventSubject* receiver );
+	
+	//
+	// Destructor
+	//
+	virtual ~TEventListener( ) = 0;
 
 /*
 	Gets
@@ -43,6 +53,7 @@ public:
 private:
 	TEventSubject* m_receiver;
 };
+
 
 template <class ReceiverTy, typename... HandlerArgs>
 class TGON_API TEventListenerImpl :
@@ -70,6 +81,11 @@ public:
 		m_eventHandlerFunc( eventHandlerFunc )
 	{
 		assert( m_eventHandlerFunc );
+	}
+
+	virtual ~TEventListenerImpl( )
+	{
+
 	}
 
 

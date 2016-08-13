@@ -4,4 +4,4 @@
 #include <Engine/Executable/TEngine.h>
 
 
-TGON_GENERATE_GAMEBODY( TgonModelJoy );
+TGON_GENERATE_GAMEAPP( TgonModelJoy );

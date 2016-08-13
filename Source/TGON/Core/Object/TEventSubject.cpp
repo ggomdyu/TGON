@@ -10,9 +10,9 @@ tgon::TEventSubject::~TEventSubject( )
 	this->UnsubscribeAllEvents( );
 }
 
-void tgon::TEventSubject::UnsubscribeEvent( TEventType eventType )
+void tgon::TEventSubject::UnsubscribeEventImpl( uint32_t eventTypeHashCode )
 {
-	auto eventMapIter = ms_globalEventListenerRepo.find( eventType.GetHashCode( ));
+	auto eventMapIter = ms_globalEventListenerRepo.find( eventTypeHashCode );
 	
 	// Does eventMapIter exist?
 	if ( eventMapIter != ms_globalEventListenerRepo.end( ))

@@ -13,9 +13,6 @@
     <Filter Include="Sources\PrecompiledHeader\hpp">
       <UniqueIdentifier>{130a6c44-1a2e-4c2a-ba7d-4ab3e92e8590}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Slate">
-      <UniqueIdentifier>{96c2e0c5-f289-4a67-84ff-c961acdac925}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Time">
       <UniqueIdentifier>{bd9a2e37-e153-4547-98e8-273dbcfe6eb6}</UniqueIdentifier>
     </Filter>
@@ -37,9 +34,6 @@
     <Filter Include="Sources\Console">
       <UniqueIdentifier>{611973ea-6510-40c7-b71f-93a8322d44d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Screen">
-      <UniqueIdentifier>{432df674-4323-400a-9f5a-2b87963ec984}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Window\cpp">
       <UniqueIdentifier>{25585fd8-2859-41b8-9561-1fac4dd3b782}</UniqueIdentifier>
     </Filter>
@@ -57,9 +51,6 @@
     </Filter>
     <Filter Include="Sources\Window\hpp\Abstract">
       <UniqueIdentifier>{742edbfe-b1b6-4689-86d1-8cd5f63d44a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Slate\hpp">
-      <UniqueIdentifier>{8d09278d-d303-49d4-a461-143734891e99}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Utility\cpp">
       <UniqueIdentifier>{a3060a5d-d318-4e03-9e44-04a492f636cf}</UniqueIdentifier>
@@ -84,24 +75,6 @@
     </Filter>
     <Filter Include="Sources\Time\cpp\Windows">
       <UniqueIdentifier>{7de033cd-c25d-4ed4-8ba3-2ee250057052}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\cpp">
-      <UniqueIdentifier>{2ff25ae0-138f-49b9-b325-79ce2a4802f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\hpp">
-      <UniqueIdentifier>{cdaa5d74-1e08-4703-9445-c32955d283c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\hpp\Abstract">
-      <UniqueIdentifier>{5ee84f30-5d94-4fa2-a715-9a7618db00eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\hpp\Windows">
-      <UniqueIdentifier>{35509720-bc64-4be8-8bb4-6d48757ec62e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\cpp\Windows">
-      <UniqueIdentifier>{a4594f63-fcfa-474e-bddd-aac0b7571f63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Screen\cpp\Abstract">
-      <UniqueIdentifier>{2724a437-a0a5-4223-a617-e85dd4cde796}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Main\cpp">
       <UniqueIdentifier>{017f11f6-3797-4ab5-9a9e-ed7d69bddc73}</UniqueIdentifier>
@@ -156,6 +129,33 @@
     </Filter>
     <Filter Include="Sources\Utility\cpp\Windows">
       <UniqueIdentifier>{7883a706-2ac9-4b67-ab8b-bb7b7f861d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen">
+      <UniqueIdentifier>{432df674-4323-400a-9f5a-2b87963ec984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\cpp">
+      <UniqueIdentifier>{2ff25ae0-138f-49b9-b325-79ce2a4802f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\cpp\Windows">
+      <UniqueIdentifier>{a4594f63-fcfa-474e-bddd-aac0b7571f63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\cpp\Abstract">
+      <UniqueIdentifier>{2724a437-a0a5-4223-a617-e85dd4cde796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\hpp">
+      <UniqueIdentifier>{cdaa5d74-1e08-4703-9445-c32955d283c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\hpp\Abstract">
+      <UniqueIdentifier>{5ee84f30-5d94-4fa2-a715-9a7618db00eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Screen\hpp\Windows">
+      <UniqueIdentifier>{35509720-bc64-4be8-8bb4-6d48757ec62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Slate">
+      <UniqueIdentifier>{96c2e0c5-f289-4a67-84ff-c961acdac925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Slate\hpp">
+      <UniqueIdentifier>{8d09278d-d303-49d4-a461-143734891e99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
