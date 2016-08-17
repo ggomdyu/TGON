@@ -19,64 +19,36 @@ namespace tgon
 class TGON_API TMath
 {
 public:
-	/*
-		Public members
-	*/
-	
-	static const float PI;
+/*
+	Public members
+*/
+	static constexpr float PI = 3.141592654f;
+	static constexpr float EPSILON = 0.0001f;
+	static constexpr float Deg2Rad = PI/180;
+	static constexpr float Rad2Deg = 180/PI;
 
-	static const float EPSILON;
-
-
-	/*
-		Commands
-	*/
-
-	// General
-
+/*
+	Commands
+*/
 	static float Round( float val );
-
 	static int32_t RoundToInt( float val );
-
 	static float Floor( float val );
-
 	static int32_t FloorToInt( float val );
-
 	static float Sqrt( float val );
-
-	static float Deg2Rad( float degree );
-
-	static float Rad2Deg( float radian );
-
 	static float Max( float first, float second );
-
 	static float Min( float first, float second );
-
 	static float Abs( float val );
-
 	static float Clamp( float val, float min, float max );
-
-
-	// Hashing
-
 	static uint32_t GenerateHash( const char* str );
-
-
-	// Interpolation
-
 	static float Lerp( float from, float to, float t );
-
 	static float Smoothstep( float from, float to, float t );
-
 	static TVector3 Hermite( const TVector3& a, const TVector3& b, const TVector3& c, float t );
 
 
-	/*
-		Cons/Destructor
-	*/
-
+/*
+	Cons/Destructor
+*/
 	TMath( ) = delete;
-
 	virtual ~TMath( ) = delete;
 
 
@@ -116,18 +88,6 @@ inline int32_t TMath::FloorToInt( float val )
 inline float TMath::Sqrt( float val )
 {
 	return std::sqrt( val );
-}
-
-inline float TMath::Deg2Rad( float degree )
-{
-	/* 3.141592741/180 -> 0.017453293 */
-	return degree * 0.017453293f;
-}
-
-inline float TMath::Rad2Deg( float radian )
-{
-	/* 180/3.141592741 -> 57.295777919 */
-	return radian * 57.295777919f;
 }
 
 inline float TMath::Max( float first, float second )

@@ -1,6 +1,6 @@
 #pragma once
 #include <Platform/Console/TConsole.h>
-#include <Engine/Executable/TGameBody.h>
+#include <Engine/Executable/TGameApplication.h>
 #include <Engine/Object/TCoreEvents.h>
 
 
@@ -27,9 +27,11 @@ public:
 	{
 		this->SubscribeEvent<E_DESTROY>( &This::OnDestroy );
 		this->SubscribeEvent<E_BEGINUPDATE>( &This::OnUpdate );
+
+		this->NotifyEvent<E_DESTROY>( );
 	}
 
-	void OnUpdate( int n )
+	void OnUpdate( )
 	{
 		MessageBoxA( 0, "BEGIN UPDATE", 0, 0 );
 	}

@@ -16,11 +16,16 @@ namespace tgon
 
 class TGON_API TRandom
 {
+/*
+	Commands
+*/
 public:
+	static float Range( float min, float max );
+
+private:
 	TRandom( ) = delete;
 	~TRandom( ) = delete;
 	
-	static float Range( float min, float max );
 
 private:
 	//	WELL Random number generator

@@ -20,9 +20,9 @@ namespace tgon
 class TGON_API TEngine :
 	public TEventSubject
 {
-	/*
-		Commands
-	*/
+/*
+	Commands
+*/
 public:
 	int32_t Execute( int argc, char** argv );
 

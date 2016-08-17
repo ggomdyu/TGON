@@ -48,9 +48,6 @@
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameBody.h">
-      <Filter>Sources\Executable\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Engine\Module\Interface\IModule.h">
       <Filter>Sources\Module\hpp\Interface</Filter>
     </ClInclude>
@@ -60,22 +57,22 @@
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.h">
       <Filter>Sources\Module\hpp\WorkThread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h">
-      <Filter>Sources\Executable\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h">
       <Filter>Sources\Module\hpp\Input</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Engine\Object\TCoreEvents.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameApplication.h">
+      <Filter>Sources\Executable\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h">
+      <Filter>Sources\Executable\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameBody.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Module\Interface\IModule.cpp">
       <Filter>Sources\Module\hpp\Interface</Filter>
@@ -86,9 +83,6 @@
     <ClCompile Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp">
       <Filter>Sources\Module\hpp\WorkThread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Executable\TMain.cpp">
       <Filter>Sources\Executable\cpp</Filter>
     </ClCompile>
@@ -97,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Object\TCoreEvents.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameApplication.cpp">
+      <Filter>Sources\Executable\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp">
+      <Filter>Sources\Executable\cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -34,7 +34,7 @@ public:\
 namespace tgon {\
 namespace details {\
 	template<typename ReceiverTy>\
-	class SubscribeEventImpl<eventName, ReceiverTy, __VA_ARGS__>\
+	class SubscribeEventAssert<eventName, ReceiverTy, __VA_ARGS__>\
 	{\
 	private:\
 		template <typename ReceiverTy>\
@@ -43,7 +43,7 @@ namespace details {\
 		static void SubscribeEvent( HandlerFunction<ReceiverTy> handlerFunc ) { /*Do not insert anything here*/ }\
 	};\
 	template <>\
-	class NotifyEventImpl<eventName, __VA_ARGS__>\
+	class NotifyEventAssert<eventName, __VA_ARGS__>\
 	{\
 	public:\
 		static void NotifyEvent( __VA_ARGS__ ) { /*Do not insert anything here*/ }\
@@ -60,7 +60,7 @@ namespace details
 {
 	// Check Event Handler function has correct arguments type and number
 	template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
-	class SubscribeEventImpl
+	class SubscribeEventAssert
 	{
 	private:
 		template <typename ReceiverTy, typename... HandlerFuncArgs>
@@ -74,7 +74,7 @@ namespace details
 	};
 
 	template <typename EventTy, typename... HandlerFuncArgs>
-	class NotifyEventImpl
+	class NotifyEventAssert
 	{
 	public:
 		static void NotifyEvent( HandlerFuncArgs... args )
@@ -119,7 +119,7 @@ public:
 	// @param handlerFunction Set Event handler function. It will be invoken when event handled
 	//
 	template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
-	void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc ); // = delete;
+	void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc );
 
 	//
 	// @note Unsubscribe specific event that this object subscribed
@@ -157,9 +157,12 @@ protected:
 	Internal works
 */
 private:
-	void UnsubscribeEventImpl( uint32_t eventTypeHashCode );
+	void UnsubscribeEventImpl( uint32_t eventHash );
 
 	void SubscribeEventImpl( uint32_t eventHash, TEventListener* eventListener );
+
+	template<typename... HandlerFuncArgs>
+	void NotifyEventImpl( uint32_t eventHash, HandlerFuncArgs... eventArgs );
 
 
 /*
@@ -175,10 +178,10 @@ inline void TEventSubject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFu
 {
 	// If event handler is not generated, then this code will output compile error.
 	// This code will be deleted in release mode.
-	details::SubscribeEventImpl<EventTy, ReceiverTy, HandlerFuncArgs...>::SubscribeEvent( handlerFunc );
+	details::SubscribeEventAssert<EventTy, ReceiverTy, HandlerFuncArgs...>::SubscribeEvent( handlerFunc );
 
 	// And register listener info to table.
-	SubscribeEventImpl( EventTy::GetType( ).GetHashCode( ), 
+	this->SubscribeEventImpl( EventTy::GetType( ).GetHashCode( ), 
 		new TEventListenerImpl<ReceiverTy>( this, handlerFunc ));
 }
 
@@ -193,10 +196,16 @@ inline void TEventSubject::NotifyEvent( HandlerFuncArgs... eventArgs )
 {
 	// If parameter is not passed correctly, this code will output compile error.
 	// This code will be deleted in release mode.
-	details::NotifyEventImpl<EventTy, HandlerFuncArgs...>::NotifyEvent( eventArgs... );
+	details::NotifyEventAssert<EventTy, HandlerFuncArgs...>::NotifyEvent( eventArgs... );
 
+	this->NotifyEventImpl( EventTy::GetType( ).GetHashCode( ), eventArgs... );
+}
+
+template<typename ...HandlerFuncArgs>
+inline void TEventSubject::NotifyEventImpl( uint32_t eventHash, HandlerFuncArgs... eventArgs )
+{
 	// Does exist subscriber?
-	auto iter = ms_globalEventListenerRepo.find( EventTy::GetType( ).GetHashCode( ));
+	auto iter = ms_globalEventListenerRepo.find( eventHash );
 	if ( iter != ms_globalEventListenerRepo.end( ))
 	{
 		// Then, iterate the repository and notify event to them
@@ -206,5 +215,6 @@ inline void TEventSubject::NotifyEvent( HandlerFuncArgs... eventArgs )
 		}
 	}
 }
+
 
 }

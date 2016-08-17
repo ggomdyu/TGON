@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameBody.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Executable\TMain.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\InputModule.cpp" />
     <ClCompile Include="..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h" />
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameBody.h" />
+    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
     <ClInclude Include="..\..\Source\TGON\Engine\Module\TimeModule.h" />

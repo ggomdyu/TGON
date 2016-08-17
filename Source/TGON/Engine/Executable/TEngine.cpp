@@ -1,13 +1,14 @@
 #include "PrecompiledHeader.h"
 #include "TEngine.h"
 
-#include "TGameBody.h"
+#include "TGameApplication.h"
 #include "../../Platform/Window/Abstract/AbstractWindowEventHandler.h"
 #include "../../Platform/Application/TApplication.h"
 
 #include "../../Engine/Module/InputModule.h"
 #include "../../Engine/Module/TimeModule.h"
 #include "../Object/TCoreEvents.h"
+
 
 std::shared_ptr<tgon::TGameApplication> GenerateGameApplication( );
 
@@ -19,7 +20,6 @@ public:
 	{
 		return MessageBox( NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO ) == IDYES;
 	}
-
 
 	/*
 		Cons/Destructor
