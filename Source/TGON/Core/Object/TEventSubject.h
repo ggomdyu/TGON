@@ -9,7 +9,7 @@
 #pragma once
 #include "TEventListener.h"
 #include "TType.h"
-#include <boost/variant.hpp>
+
 
 /*
 	BEAR IN MIND THIS CODE RAISE SERIOUS CODE BLOAT
@@ -42,8 +42,8 @@ namespace details {\
 	public:\
 		static void SubscribeEvent( HandlerFunction<ReceiverTy> handlerFunc ) { /*Do not insert anything here*/ }\
 	};\
-	template <typename CallerTy>\
-	class NotifyEventImpl<eventName, CallerTy, __VA_ARGS__>\
+	template <>\
+	class NotifyEventImpl<eventName, __VA_ARGS__>\
 	{\
 	public:\
 		static void NotifyEvent( __VA_ARGS__ ) { /*Do not insert anything here*/ }\
@@ -73,7 +73,7 @@ namespace details
 		}
 	};
 
-	template <typename EventTy, typename CallerTy, typename... HandlerFuncArgs>
+	template <typename EventTy, typename... HandlerFuncArgs>
 	class NotifyEventImpl
 	{
 	public:
@@ -128,11 +128,11 @@ public:
 	template<typename EventTy>
 	void UnsubscribeEvent( );
 
-
 	//
 	// @note Unsubscribe all of events this object subscribed
 	//
 	void UnsubscribeAllEvents( );
+
 
 /*
 	Cons/Destructor
@@ -146,13 +146,20 @@ public:
 	Protect functions
 */
 protected:
+	//
+	// @note Notify to all subscriber of specific event.
+	// @args event argument
+	//
 	template <typename EventTy, typename... HandlerFuncArgs>
-	void NotifyEvent( HandlerFuncArgs... args );
+	void NotifyEvent( HandlerFuncArgs... eventArgs );
 
+/*
+	Internal works
+*/
 private:
 	void UnsubscribeEventImpl( uint32_t eventTypeHashCode );
 
-	TEventListener** GetEventSubscriptionInfo( uint32_t eventHash );
+	void SubscribeEventImpl( uint32_t eventHash, TEventListener* eventListener );
 
 
 /*
@@ -171,10 +178,8 @@ inline void TEventSubject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFu
 	details::SubscribeEventImpl<EventTy, ReceiverTy, HandlerFuncArgs...>::SubscribeEvent( handlerFunc );
 
 	// And register listener info to table.
-	TEventListener** ppListener = GetEventSubscriptionInfo( EventTy::GetType( ).GetHashCode( ));
-
-	*ppListener = new TEventListenerImpl<ReceiverTy, HandlerFuncArgs...>( 
-		this, handlerFunc );
+	SubscribeEventImpl( EventTy::GetType( ).GetHashCode( ), 
+		new TEventListenerImpl<ReceiverTy>( this, handlerFunc ));
 }
 
 template<typename EventTy>
@@ -184,11 +189,11 @@ inline void TEventSubject::UnsubscribeEvent( )
 }
 
 template<typename EventTy, typename ...HandlerFuncArgs>
-inline void TEventSubject::NotifyEvent( HandlerFuncArgs... args )
+inline void TEventSubject::NotifyEvent( HandlerFuncArgs... eventArgs )
 {
 	// If parameter is not passed correctly, this code will output compile error.
 	// This code will be deleted in release mode.
-	details::NotifyEventImpl<EventTy, Dummy, HandlerFuncArgs...>::NotifyEvent( args... );
+	details::NotifyEventImpl<EventTy, HandlerFuncArgs...>::NotifyEvent( eventArgs... );
 
 	// Does exist subscriber?
 	auto iter = ms_globalEventListenerRepo.find( EventTy::GetType( ).GetHashCode( ));
@@ -197,8 +202,7 @@ inline void TEventSubject::NotifyEvent( HandlerFuncArgs... args )
 		// Then, iterate the repository and notify event to them
 		for ( auto& listener : iter->second )
 		{
-			static_cast<TEventListenerImpl<Dummy, HandlerFuncArgs...>*>(
-				listener.second )->Notify( args... );
+			static_cast<TEventListenerImpl<Dummy>*>( listener.second )->Notify( eventArgs... );
 		}
 	}
 }

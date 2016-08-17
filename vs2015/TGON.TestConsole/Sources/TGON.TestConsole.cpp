@@ -111,6 +111,13 @@ public:
 public:
 };
 
+#include <iostream>
+#define WW( ... ) __VA_ARGS__
+
+void wow( WW( int, int ) )
+{
+}
+
 int main( int argc, char* argv[] )
 {
 	

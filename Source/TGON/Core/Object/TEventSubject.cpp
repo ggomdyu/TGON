@@ -30,6 +30,19 @@ void tgon::TEventSubject::UnsubscribeEventImpl( uint32_t eventTypeHashCode )
 	}
 }
 
+void tgon::TEventSubject::SubscribeEventImpl( uint32_t eventHash, TEventListener* eventListener )
+{
+	TEventListener** ppListener = &ms_globalEventListenerRepo[eventHash][this];
+	if ( *ppListener )
+	{
+		assert( false && "You already had subscribed this event!" );
+	}
+	else
+	{
+		*ppListener = eventListener;
+	}
+}
+
 void tgon::TEventSubject::UnsubscribeAllEvents( )
 {
 	// Unsubscribe global event
@@ -46,16 +59,4 @@ void tgon::TEventSubject::UnsubscribeAllEvents( )
 
 		eventMapIter.second.erase( this );
 	}
-}
-
-
-tgon::TEventListener** tgon::TEventSubject::GetEventSubscriptionInfo( uint32_t eventHashCode )
-{
-	TEventListener** ppListener = &ms_globalEventListenerRepo[eventHashCode][this];
-	if ( *ppListener )
-	{
-		assert( false && "You already had subscribed this event!" );
-	}
-
-	return ppListener;
 }

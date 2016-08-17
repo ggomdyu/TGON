@@ -29,7 +29,7 @@ public:
 		this->SubscribeEvent<E_BEGINUPDATE>( &This::OnUpdate );
 	}
 
-	void OnUpdate(  )
+	void OnUpdate( int n )
 	{
 		MessageBoxA( 0, "BEGIN UPDATE", 0, 0 );
 	}
