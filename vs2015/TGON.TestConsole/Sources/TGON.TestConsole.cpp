@@ -2,21 +2,118 @@
 //
 
 #include "PrecompiledHeader.h"
+//#include <boost/signals2.hpp>
+#include <iostream>
+#include <vector>
+#include <cstdint>
 
-#include <iostream>
-#include <atomic>
-#include <condition_variable>
-#include <thread>
-#include <boost/lexical_cast.hpp>
-#include <Object/TObject.h>
-#include <Core/Object/TEventSubject.h>
-#include <iostream>
-#include <iostream>
-#include <complex>
 
+class TEvent;
+class TObserver
+{
+public:
+	TObserver( )
+	{
+	}
+
+	virtual ~TObserver( ) = 0
+	{
+	};
+
+public:
+
+public:
+	virtual void Update( ) = 0;
+};
+
+class TEvent
+{
+public:
+	void Attach( TObserver* observer )
+	{
+		m_observerList.push_back( observer );
+	}
+
+	virtual void Notify( )
+	{
+		for ( TObserver* observer : m_observerList )
+		{
+			observer->Update( );
+		}
+	}
+
+	virtual uint32_t GetHashCode( ) const = 0;
+
+
+private:
+	std::vector<TObserver*> m_observerList;
+};
+
+class TErrorEvent :
+	public TEvent
+{
+public:
+	int GetErrorCode( ) const
+	{ 
+		return m_errCode; 
+	}
+
+	virtual uint32_t GetHashCode( ) const
+	{
+		return 194;
+	}
+
+private:
+	int m_errCode;
+};
+
+class TErrorEventHandler : public TObserver
+{
+public:
+	TErrorEventHandler( TErrorEvent* errEvent ) :
+		m_errEvent( errEvent )
+	{
+		errEvent->Attach( this );
+		//m_errEvent->Detach( this );
+	}
+
+	virtual void Update( )
+	{
+		MessageBox( 0,0,0,0 );
+	}
+
+private:
+	TErrorEvent* m_errEvent;
+};
+
+class TEventReceiver
+{
+public:
+
+private:
+	static std::map<uint32_t, TEvent> m_eventList;
+};
+
+class FOO_CLASS :
+	public TEventReceiver
+{
+public:
+	FOO_CLASS( )
+	{
+
+	}
+
+	virtual ~FOO_CLASS( )
+	{
+
+	}
+
+public:
+};
 
 int main( int argc, char* argv[] )
 {
+	
 
 	//std::couta.foo<2, 3>( );
 

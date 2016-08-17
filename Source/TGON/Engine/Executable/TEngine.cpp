@@ -7,7 +7,7 @@
 
 #include "../../Engine/Module/InputModule.h"
 #include "../../Engine/Module/TimeModule.h"
-
+#include "../Object/TCoreEvents.h"
 
 std::shared_ptr<tgon::TGameApplication> GenerateGameApplication( );
 
@@ -40,6 +40,7 @@ public:
 tgon::TEngine::TEngine( ) :
 	m_gameApp( GenerateGameApplication( ))
 {
+	//this->SubscribeEvent<E_DESTROY>( &TEngine::WowCPAR );
 }
 
 void tgon::TEngine::AddModule( const std::shared_ptr<IModule>& module )
@@ -66,6 +67,7 @@ void tgon::TEngine::SetupModules( )
 	//);
 }
 
+
 int32_t tgon::TEngine::Execute( int argc, char** argv )
 {
 	//auto window = std::make_shared<TWindow>( WindowStyle::DefaultStyle );
@@ -89,8 +91,7 @@ int32_t tgon::TEngine::Execute( int argc, char** argv )
 	//
 	//}
 	//
-	////this->NotifyEvent( TEventType( "OnDestroy" ), );
-
+	this->NotifyEvent<E_DESTROY>( );
 
 	return int32_t( );
 }

@@ -9,11 +9,11 @@
 #pragma once
 #include "TEventListener.h"
 #include "TType.h"
-
+#include <boost/variant.hpp>
 
 /*
 	BEAR IN MIND THIS CODE RAISE SERIOUS CODE BLOAT
-	SO, DO NOT MAKE MANY EVENT THROUGHT TGON_GENERATE_EVENT
+	SO, DO NOT MAKE MANY EVENTS THROUGHT TGON_GENERATE_EVENT
 */
 
 
@@ -31,27 +31,24 @@ public:\
 public:\
 	virtual ~eventName( ) = default;\
 };\
-\
-namespace tgon\
-{\
-\
-template<typename ReceiverTy>\
-class SubscribeEventProxy<eventName, ReceiverTy, __VA_ARGS__>\
-{\
-private:\
-	template <typename ReceiverTy>\
-	using HandlerFunction = void( ReceiverTy::* )( __VA_ARGS__ );\
-	\
-public:\
-	static void SubscribeEvent( HandlerFunction<ReceiverTy> handlerFunc ) { /*Do not insert anything here*/ }\
-};\
-\
-template <typename CallerTy>\
-class NotifyEventProxy<eventName, CallerTy, __VA_ARGS__>\
-{\
-public:\
-	static void NotifyEvent( __VA_ARGS__ ) {}\
-};\
+namespace tgon {\
+namespace details {\
+	template<typename ReceiverTy>\
+	class SubscribeEventImpl<eventName, ReceiverTy, __VA_ARGS__>\
+	{\
+	private:\
+		template <typename ReceiverTy>\
+		using HandlerFunction = void( ReceiverTy::* )( __VA_ARGS__ );\
+	public:\
+		static void SubscribeEvent( HandlerFunction<ReceiverTy> handlerFunc ) { /*Do not insert anything here*/ }\
+	};\
+	template <typename CallerTy>\
+	class NotifyEventImpl<eventName, CallerTy, __VA_ARGS__>\
+	{\
+	public:\
+		static void NotifyEvent( __VA_ARGS__ ) { /*Do not insert anything here*/ }\
+	};\
+}\
 }
 
 
@@ -59,33 +56,33 @@ namespace tgon
 {
 
 
-using TEventType = TType;
-
-
-// Check Event Handler function has correct arguments type and number
-template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
-class SubscribeEventProxy
+namespace details
 {
-private:
-	template <typename ReceiverTy, typename... HandlerFuncArgs>
-	using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
-
-public:
-	static void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
+	// Check Event Handler function has correct arguments type and number
+	template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
+	class SubscribeEventImpl
 	{
-		static_assert( false, "Failed to subscribe event. Check event handler's paramter type and number exactly correct." );
-	}
-};
+	private:
+		template <typename ReceiverTy, typename... HandlerFuncArgs>
+		using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
-template <typename EventTy, typename CallerTy, typename... HandlerFuncArgs>
-class NotifyEventProxy
-{
-public:
-	static void NotifyEvent( HandlerFuncArgs... args )
+	public:
+		static void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
+		{
+			static_assert( false, "Failed to subscribe event. Check event handler's paramter type and number exactly correct." );
+		}
+	};
+
+	template <typename EventTy, typename CallerTy, typename... HandlerFuncArgs>
+	class NotifyEventImpl
 	{
-		static_assert( false, "Failed to notify event. Check paramter type and number passed correctly." );
-	}
-};
+	public:
+		static void NotifyEvent( HandlerFuncArgs... args )
+		{
+			static_assert( false, "Failed to notify event. Check paramter type and number passed correctly." );
+		}
+	};
+}
 
 
 class TGON_API TEventSubject :
@@ -94,6 +91,8 @@ class TGON_API TEventSubject :
 /*
 	Type definitions
 */
+	class Dummy {};
+
 	template <typename ReceiverTy, typename... HandlerFuncArgs>
 	using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
@@ -104,21 +103,18 @@ class TGON_API TEventSubject :
 	// ListenerRepo is the subscriber list of this event.
 	using EventListenerRepo = std::unordered_map<uint32_t, ListenerRepo>;
 
-	
 /*
 	Generator
 */
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( TEventSubject, TObject )
 
-
 /*
 	Commands
 */
 public:
 	//
-	// Subscribe specific event's handling. 
-	//
+	// @note Subscribe specific event's handling. 
 	// @param eventType Specify what you want to subscribe
 	// @param handlerFunction Set Event handler function. It will be invoken when event handled
 	//
@@ -126,18 +122,17 @@ public:
 	void SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc ); // = delete;
 
 	//
-	// Unsubscribe specific event that this object subscribed
-	//
-	// @param eventType Specify what you want to unsubscribe event
+	// @note Unsubscribe specific event that this object subscribed
+	// @param eventType Specify what you want to unsubscribe
 	//
 	template<typename EventTy>
 	void UnsubscribeEvent( );
 
+
 	//
-	// Unsubscribe all of events this object subscribed
+	// @note Unsubscribe all of events this object subscribed
 	//
 	void UnsubscribeAllEvents( );
-
 
 /*
 	Cons/Destructor
@@ -147,17 +142,17 @@ public:
 
 	virtual ~TEventSubject( );
 
-
 /*
 	Protect functions
 */
 protected:
-	template <typename EventTy, typename CallerTy, typename... HandlerFuncArgs>
-	void NotifyEvent( HandlerFuncArgs... args ); // = delete;
-
+	template <typename EventTy, typename... HandlerFuncArgs>
+	void NotifyEvent( HandlerFuncArgs... args );
 
 private:
 	void UnsubscribeEventImpl( uint32_t eventTypeHashCode );
+
+	TEventListener** GetEventSubscriptionInfo( uint32_t eventHash );
 
 
 /*
@@ -171,15 +166,15 @@ private:
 template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
 inline void TEventSubject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc ) // = delete;
 {
-	static_assert( std::is_convertible<EventTy, tgon::TObject>::value,
-		"The template paramter only accept class based on tgon::TObject." );
-
 	// If event handler is not generated, then this code will output compile error.
-	SubscribeEventProxy<EventTy, ReceiverTy, HandlerFuncArgs...>::SubscribeEvent( handlerFunc );
+	// This code will be deleted in release mode.
+	details::SubscribeEventImpl<EventTy, ReceiverTy, HandlerFuncArgs...>::SubscribeEvent( handlerFunc );
 
 	// And register listener info to table.
-	ms_globalEventListenerRepo[EventTy::GetType( ).GetHashCode( )][this] = 
-		new TEventListenerImpl<ReceiverTy, HandlerFuncArgs...>( this, handlerFunc );
+	TEventListener** ppListener = GetEventSubscriptionInfo( EventTy::GetType( ).GetHashCode( ));
+
+	*ppListener = new TEventListenerImpl<ReceiverTy, HandlerFuncArgs...>( 
+		this, handlerFunc );
 }
 
 template<typename EventTy>
@@ -188,20 +183,21 @@ inline void TEventSubject::UnsubscribeEvent( )
 	UnsubscribeEventImpl( EventTy::GetType( ).GetHashCode( ));
 }
 
-template<typename EventTy, typename CallerTy, typename ...HandlerFuncArgs>
-inline void TEventSubject::NotifyEvent( HandlerFuncArgs ...args )
+template<typename EventTy, typename ...HandlerFuncArgs>
+inline void TEventSubject::NotifyEvent( HandlerFuncArgs... args )
 {
 	// If parameter is not passed correctly, this code will output compile error.
-	NotifyEventProxy<EventTy, CallerTy, HandlerFuncArgs...>::NotifyEvent( args... );
+	// This code will be deleted in release mode.
+	details::NotifyEventImpl<EventTy, Dummy, HandlerFuncArgs...>::NotifyEvent( args... );
 
-	// Does exist event subscriber?
-	auto listenerRepoIter = ms_globalEventListenerRepo.find( EventTy::GetType( ).GetHashCode( ));
-	if ( listenerRepoIter != ms_globalEventListenerRepo.end( ))
+	// Does exist subscriber?
+	auto iter = ms_globalEventListenerRepo.find( EventTy::GetType( ).GetHashCode( ));
+	if ( iter != ms_globalEventListenerRepo.end( ))
 	{
 		// Then, iterate the repository and notify event to them
-		for ( auto& listener : listenerRepoIter->second )
+		for ( auto& listener : iter->second )
 		{
-			static_cast<TEventListenerImpl<CallerTy, HandlerFuncArgs...>*>(
+			static_cast<TEventListenerImpl<Dummy, HandlerFuncArgs...>*>(
 				listener.second )->Notify( args... );
 		}
 	}

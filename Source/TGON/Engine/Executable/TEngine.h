@@ -13,12 +13,6 @@
 #include "../../Engine/Module/Interface/IModule.h"
 
 
-
-
-TGON_GENERATE_EVENT( E_DESTROY )
-TGON_GENERATE_EVENT( E_UPDATE )
-
-
 namespace tgon
 {
 
@@ -67,7 +61,7 @@ private:
 	
 	void UpdateModules( );
 
-
+	void WowCPAR( ) {};
 
 	/*
 		Private variables

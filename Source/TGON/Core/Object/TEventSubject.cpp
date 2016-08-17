@@ -12,19 +12,21 @@ tgon::TEventSubject::~TEventSubject( )
 
 void tgon::TEventSubject::UnsubscribeEventImpl( uint32_t eventTypeHashCode )
 {
-	auto eventMapIter = ms_globalEventListenerRepo.find( eventTypeHashCode );
+	auto iter = ms_globalEventListenerRepo.find( eventTypeHashCode );
 	
-	// Does eventMapIter exist?
-	if ( eventMapIter != ms_globalEventListenerRepo.end( ))
+	// Does exist subscribers?
+	if ( iter != ms_globalEventListenerRepo.end( ))
 	{
-		// Then, delete all of event handlers
-		for ( auto eventHandler : eventMapIter->second )
+		auto& eventSubscribers = iter->second;
+
+		// Then, delete all of listener
+		for ( auto& eventListener : eventSubscribers )
 		{
-			delete eventHandler.second;
-			eventHandler.second = nullptr;
+			delete eventListener.second;
+			eventListener.second = nullptr;
 		}
 
-	 	eventMapIter->second.erase( this );
+		eventSubscribers.erase( this );
 	}
 }
 
@@ -33,32 +35,27 @@ void tgon::TEventSubject::UnsubscribeAllEvents( )
 	// Unsubscribe global event
 	for ( auto eventMapIter : ms_globalEventListenerRepo )
 	{
-		auto eveneHandlerIter = eventMapIter.second.find( this );
+		auto eventListenerIter = eventMapIter.second.find( this );
 
 		// Does exist event handlers?
-		if ( eveneHandlerIter != eventMapIter.second.end( ))
+		if ( eventListenerIter != eventMapIter.second.end( ))
 		{
-			delete eveneHandlerIter->second;
-			eveneHandlerIter->second = nullptr;
+			delete eventListenerIter->second;
+			eventListenerIter->second = nullptr;
 		}
 
 		eventMapIter.second.erase( this );
 	}
 }
 
-//void tgon::TEventSubject::NotifyEvent( TEventType eventType )
-//{
-//	for ( auto eventMap : ms_globalEventListenerRepo )
-//	{
-//		// Find event type which we want to notify 
-//		if ( eventMap.first != eventType.GetHashCode( ))
-//		{
-//			continue;
-//		}
-//
-//		for ( auto listener : eventMap.second )
-//		{
-//			listener.second->Notify( );
-//		}
-//	}
-//}
+
+tgon::TEventListener** tgon::TEventSubject::GetEventSubscriptionInfo( uint32_t eventHashCode )
+{
+	TEventListener** ppListener = &ms_globalEventListenerRepo[eventHashCode][this];
+	if ( *ppListener )
+	{
+		assert( false && "You already had subscribed this event!" );
+	}
+
+	return ppListener;
+}

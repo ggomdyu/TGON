@@ -52,10 +52,10 @@ void tgon::TConsole::WriteImpl( const char* format, va_list vaList )
 	const int bufferSize = 256;
 	char buffer[bufferSize] {0};
 
-	// Build strings
+	// Build string
 	vsprintf_s( buffer, bufferSize, format, vaList );
 
-	// And present to console
+	// And output to console
 	ConsoleImpl::Write( buffer );
 }
 
@@ -64,9 +64,9 @@ void tgon::TConsole::WriteImpl( const wchar_t* format, va_list vaList )
 	const int bufferSize = 256;
 	wchar_t buffer[bufferSize] {0};
 
-	// Build strings
+	// Build string
 	vswprintf_s( buffer, bufferSize, format, vaList );
 
-	// And present to console
+	// And output to console
 	ConsoleImpl::Write( buffer );
 }

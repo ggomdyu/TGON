@@ -15,30 +15,18 @@ namespace tgon
 
 class TEventSubject;
 
-
-class TEventListener :
-	public tgon::TObject
+class TEventListener
 {
-/*
-	Generator
-*/
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( TEventListener, tgon::TObject )
-
 /*
 	Cons/Destructor
 */
 public:
 	//
-	// This class will notify to receiver when event handled.
-	//
+	// @note This class will notify to receiver when event handled.
 	// @param receiver Event handling receiver
 	//
 	explicit TEventListener( TEventSubject* receiver );
 	
-	//
-	// Destructor
-	//
 	virtual ~TEventListener( ) = 0;
 
 /*
@@ -54,63 +42,60 @@ private:
 	TEventSubject* m_receiver;
 };
 
+inline TEventSubject* TEventListener::GetReceiver( )
+{
+	return m_receiver;
+}
 
-template <class ReceiverTy, typename... HandlerArgs>
+
+template <class ReceiverTy>
 class TGON_API TEventListenerImpl :
 	public TEventListener
 {
 /*
 	Type definitions
 */
-	using HandlerFunction = void( ReceiverTy::* )( HandlerArgs... );
-
-
-/*
-	Generators
-*/
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( TEventListenerImpl<ReceiverTy>, TEventListener )
-
+	template <typename... HandlerFuncArgs>
+	using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
 /*
 	Cons/Destructor
 */
 public:
-	TEventListenerImpl( TEventSubject* receiver, HandlerFunction eventHandlerFunc ) :
-		TEventListener( receiver ),
-		m_eventHandlerFunc( eventHandlerFunc )
-	{
-		assert( m_eventHandlerFunc );
-	}
+	template <typename... HandlerFuncArgs>
+	TEventListenerImpl( TEventSubject* receiver, HandlerFunction<HandlerFuncArgs...> eventHandlerFunc );
 
-	virtual ~TEventListenerImpl( )
-	{
-
-	}
-
+	virtual ~TEventListenerImpl( ) = default;
 
 /*
 	Commands
 */
 public:
-	template <typename... EventHandlerArgs>
-	void Notify( EventHandlerArgs&&... args )
+	template <typename... HandlerFuncArgs>
+	void Notify( HandlerFuncArgs&&... args )
 	{
-		( static_cast<ReceiverTy*>( GetReceiver( ))->*m_eventHandlerFunc )( std::forward<EventHandlerArgs>( args )... );
-	}
+		HandlerFunction<HandlerFuncArgs...> realFunc = reinterpret_cast<HandlerFunction<HandlerFuncArgs...>>( 
+			m_eventHandlerFunc );
 
+		( reinterpret_cast<ReceiverTy*>( GetReceiver( ))->*realFunc )(
+			std::forward<HandlerFuncArgs>( args )... );
+	}
 
 /*
 	Private variables
 */
 private:
-	HandlerFunction m_eventHandlerFunc;
+	HandlerFunction<> m_eventHandlerFunc;
 };
 
 
-inline TEventSubject* TEventListener::GetReceiver( )
+template<typename ReceiverTy>
+template<typename... HandlerFuncArgs>
+inline TEventListenerImpl<ReceiverTy>::TEventListenerImpl( TEventSubject* receiver, HandlerFunction<HandlerFuncArgs...> eventHandlerFunc ) :
+	TEventListener( receiver ),
+	m_eventHandlerFunc( eventHandlerFunc )
 {
-	return m_receiver;
+	assert( m_eventHandlerFunc );
 }
 
 

@@ -6,6 +6,11 @@
 */
 
 #pragma once
-#include "../Platform/Config/Build.h"
-
 #include "../../Core/Object/TEventSubject.h"
+
+
+TGON_GENERATE_EVENT( E_DESTROY )
+TGON_GENERATE_EVENT( E_BEGINUPDATE )
+TGON_GENERATE_EVENT( E_ENDUPDATE )
+TGON_GENERATE_EVENT( E_BEGINRENDER )
+TGON_GENERATE_EVENT( E_ENDRENDER )

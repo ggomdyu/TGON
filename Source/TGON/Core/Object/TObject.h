@@ -21,7 +21,12 @@ class TGON_API TObject
 	Type definitions
 */
 public:
+	//
+	// Parent class' type
+	//
 	using Super = void;
+
+	// @note static This type.
 	using This = TObject;
 
 
@@ -48,20 +53,34 @@ public:
 public:
 	static bool Equals( const TObject&, const TObject& );
 	
-	// Compare two instance. This can be overridden.
-	virtual bool Equals( const TObject& ) const;
+	//
+	// @note Compare two instance. This can be overridden.
+	//
+	// @return Return true if both refer to the same object.
+	//
+	virtual bool Equals( const TObject& rhs ) const;
 
-	// Compare two instance. Return true if both refer to the same object.
-	static bool ReferenceEquals( const TObject&, const TObject& );
+	//
+	// @note Compare two instance.
+	//
+	// @param lhs Left handling side
+	// @param rhs Right handling side
+	// @return Return true if both refer to the same object.
+	//
+	static bool ReferenceEquals( const TObject& lhs, const TObject& rhs );
 
 
 /*
 	Gets
 */
-	// Return dynamic bound type's hash code.
+	//
+	// @return Dynamic bound type's hash code
+	//
 	virtual uint32_t GetHashCode( ) const = 0;
 	
-	// Return dynamic bound type's name.
+	//
+	// @return Dynamic bound type's name.
+	//
 	virtual const char* GetName( ) const = 0;
 
 };
@@ -97,8 +116,8 @@ inline bool TObject::ReferenceEquals( const TObject& lhs, const TObject& rhs )
 
 
 #define TGON_GENERATE_OBJECT_INTERFACE( baseType, superType )\
-	using Super = superType;\
 	using This = baseType;\
+	using Super = superType;\
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\
