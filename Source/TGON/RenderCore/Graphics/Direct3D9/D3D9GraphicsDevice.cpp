@@ -6,10 +6,14 @@
 
 #include "D3d9Utility.h"
 #include "D3D9Error.h"
-#include "../../../Platform/Window/TWindow.h"
+#include "../../../Core/Platform/OSAL/PlatformWindow.h"
 
 
-tgon::D3D9GraphicsDevice::D3D9GraphicsDevice( TWindow* deviceWindow, const GraphicsProperty& grpProp ) :
+
+namespace tgon {
+
+
+D3D9GraphicsDevice::D3D9GraphicsDevice( TPlatformWindow* deviceWindow, const GraphicsProperty& grpProp ) :
 	AbstractGraphicsDevice( deviceWindow ),
 	m_deviceCaps( new D3DCAPS9 )
 {
@@ -20,7 +24,7 @@ tgon::D3D9GraphicsDevice::D3D9GraphicsDevice( TWindow* deviceWindow, const Graph
 	this->InitD3DDevice( grpProp );
 }
 
-bool tgon::D3D9GraphicsDevice::Clear( )
+bool D3D9GraphicsDevice::Clear( )
 {
 	HRESULT result = m_d3dDevice->Clear(
 		0,
@@ -42,7 +46,7 @@ bool tgon::D3D9GraphicsDevice::Clear( )
 	}
 }
 
-bool tgon::D3D9GraphicsDevice::BeginScene( )
+bool D3D9GraphicsDevice::BeginScene( )
 {
 	HRESULT result = m_d3dDevice->BeginScene( );
 
@@ -57,7 +61,7 @@ bool tgon::D3D9GraphicsDevice::BeginScene( )
 	}
 }
 
-bool tgon::D3D9GraphicsDevice::EndScene( )
+bool D3D9GraphicsDevice::EndScene( )
 {
 	HRESULT result = m_d3dDevice->EndScene( );
 
@@ -72,7 +76,7 @@ bool tgon::D3D9GraphicsDevice::EndScene( )
 	}
 }
 
-bool tgon::D3D9GraphicsDevice::Present( )
+bool D3D9GraphicsDevice::Present( )
 {
 	HRESULT result = m_d3dDevice->Present( nullptr, nullptr, nullptr, nullptr );
 
@@ -87,7 +91,7 @@ bool tgon::D3D9GraphicsDevice::Present( )
 	}
 }
 
-void tgon::D3D9GraphicsDevice::InitD3DInterface( )
+void D3D9GraphicsDevice::InitD3DInterface( )
 {
 	// Initialize direct3D interface.
 	V( Direct3DCreate9Ex( D3D_SDK_VERSION, &m_d3d ));
@@ -98,7 +102,7 @@ void tgon::D3D9GraphicsDevice::InitD3DInterface( )
 		m_deviceCaps.get( )));
 }
 
-void tgon::D3D9GraphicsDevice::InitD3DDevice( const GraphicsProperty& grpProp )
+void D3D9GraphicsDevice::InitD3DDevice( const GraphicsProperty& grpProp )
 {
 	DWORD behaviorFlag = ( m_deviceCaps->DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT ) ?
 		D3DCREATE_HARDWARE_VERTEXPROCESSING :
@@ -131,4 +135,7 @@ void tgon::D3D9GraphicsDevice::InitD3DDevice( const GraphicsProperty& grpProp )
 		nullptr, 
 		&m_d3dDevice
 	))
+}
+
+
 }

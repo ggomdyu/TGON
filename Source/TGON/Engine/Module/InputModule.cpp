@@ -1,26 +1,27 @@
 #include "PrecompiledHeader.h"
 #include "InputModule.h"
 
-#include "../../Platform/Window/TWindow.h"
+#include "../Core/Platform/OSAL/PlatformWindow.h"
 #include <string>
 
 
-tgon::TInputModule::TInputModule( TWindow* inputAcceptTargets, int32_t supportInputBits ) :
+namespace tgon {
+
+
+InputModule::InputModule( TPlatformWindow* inputAcceptTargets, uint32_t supportInputFlag ) :
 	m_inputManager( nullptr ),
 	m_keyboardDevice( nullptr ),
 	m_mouseDeivece( nullptr ),
 	m_joyStickDevice{ 0 }
 {
-	this->CreateInputManager( inputAcceptTargets );
-
-	this->SetupInputDevice( supportInputBits );
+	this->InitializeInputManager( inputAcceptTargets, supportInputFlag );
 }
 
-tgon::TInputModule::~TInputModule( )
+InputModule::~InputModule( )
 {
 }
 
-void tgon::TInputModule::Update( )
+void InputModule::Update( )
 {
 	if ( m_keyboardDevice )
 	{
@@ -48,13 +49,13 @@ void tgon::TInputModule::Update( )
 	//}
 }
 
-void tgon::TInputModule::CreateInputManager( TWindow* inputAcceptTargets )
+void InputModule::InitializeInputManager( TPlatformWindow* inputAcceptWindow, uint32_t supportInputFlag )
 {
 	// Insert OS Specific Info here
 	OIS::ParamList paramList;
 	{
 		const std::string wndHandleStr = std::to_string( reinterpret_cast<size_t>( 
-			inputAcceptTargets->GetWindowHandle( )));
+			inputAcceptWindow->GetWindowHandle( )));
 
 		paramList.insert({ "WINDOW", wndHandleStr.c_str( )});
 		paramList.insert({ "w32_mouse", "DISCL_FOREGROUND" });
@@ -76,21 +77,26 @@ void tgon::TInputModule::CreateInputManager( TWindow* inputAcceptTargets )
 	{
 		std::abort( );
 	}
+
+
+	this->SetupInputDevice( supportInputFlag );
 }
 
-void tgon::TInputModule::SetupInputDevice( int32_t supportInputBits )
+void InputModule::SetupInputDevice( uint32_t supportInputFlag )
 {
-	if ( supportInputBits & SupportInput::kMouse )
+	if ( supportInputFlag & InputSupport::Mouse )
 	{
 		m_mouseDeivece = static_cast<decltype( m_mouseDeivece )>(
 			m_inputManager->createInputObject( OIS::OISMouse, true ));
+
 		m_mouseDeivece->setEventCallback( this );
 	}
 
-	if ( supportInputBits & SupportInput::kKeyboard )
+	if ( supportInputFlag & InputSupport::Keyboard )
 	{
 		m_keyboardDevice = static_cast<decltype( m_keyboardDevice )>( 
 			m_inputManager->createInputObject( OIS::OISKeyboard, true ));
+
 		m_keyboardDevice->setEventCallback( this );
 	}
 
@@ -121,3 +127,6 @@ void tgon::TInputModule::SetupInputDevice( int32_t supportInputBits )
 //	std::cout << "\nMouse: Abs(" << ms.X.abs << " " << ms.Y.abs << " " << ms.Z.abs
 //		<< ") B: " << ms.buttons << " Rel(" << ms.X.rel << " " << ms.Y.rel << " " << ms.Z.rel << ")";
 //}
+
+
+}

@@ -2,7 +2,6 @@
 #include "TXMLReader.h"
 
 
-
 tgon::TXMLReader::TXMLReader( const char* xmlPath ) :
 	m_isFailed( false ),
 	m_lastError( tinyxml2::XMLError::XML_SUCCESS )
@@ -43,7 +42,7 @@ void tgon::TXMLReader::RecursiveLoadImpl( tinyxml2::XMLNode* parent )
 	{
 		m_readNodeRepo.push_back( child );
 
-		// Is the child has children?
+		// Is node has children?
 		if ( child->FirstChild( ))
 		{
 			this->RecursiveLoadImpl( child );

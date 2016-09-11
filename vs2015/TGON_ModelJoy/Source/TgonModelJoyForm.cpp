@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "TgonModelJoyForm.h"
 
-#include <Engine/Executable/TEngine.h>
+#include <Engine/Engine.h>
 
 
-TGON_GENERATE_GAMEAPP( TgonModelJoy );
+TGON_GENERATE_GAMEAPP( TGONSample );

@@ -4,7 +4,7 @@
 #include "../Object/TGameObject.h"
 
 
-tgon::IComponent::IComponent( TGameObject* owner ) :
+tgon::IComponent::IComponent( GameObject* owner ) :
 	m_owner( owner )
 {
 }

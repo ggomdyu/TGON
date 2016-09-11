@@ -7,9 +7,9 @@
 
 
 #pragma once
-#include "../../../Platform/Config/Build.h"
+#include "../../../Core/Platform/OSAL/PlatformInclude.h"
 
-#include "../../../Platform/Utility/Windows/unique_comptr.h"
+#include "../../../Core/Platform/Windows/Misc/unique_comptr.h"
 #include <cstdint>
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -25,15 +25,15 @@ class TGON_API D3D9VertexBuffer
 {
 public:
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
 	// The vertex buffer size will be vertexSize * vertexCount.
 	// If isDynamic is true, then the device move vertex data to write efficient memory( AGP ).
 	D3D9VertexBuffer( int32_t vertexSize, int32_t vertexCount, bool isDynamic );
 
-	virtual ~D3D9VertexBuffer( );
-
 	D3D9VertexBuffer( const D3D9VertexBuffer& rhs ) = delete;
+
+	virtual ~D3D9VertexBuffer( );
 
 
 	/*

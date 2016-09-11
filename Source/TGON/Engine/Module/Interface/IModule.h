@@ -6,7 +6,9 @@
 */
 
 #pragma once
-#include "../../../Core/Object/TEventSubject.h"
+#include "../../../Core/Object/EventObject.h"
+
+#include <boost/noncopyable.hpp>
 
 
 namespace tgon
@@ -14,25 +16,30 @@ namespace tgon
 
 
 class TGON_API IModule :
-	public TEventSubject
+	public EventObject,
+	private boost::noncopyable
 {
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( IModule, TEventSubject )
-
-public:
 	/*
-		Cons/Destructor
+		Generator
 	*/
+public:
+	TGON_GENERATE_OBJECT_INTERFACE( IModule, EventObject )
+
+
+	/*
+		Ctor/Dtor
+	*/
+public:
 	IModule( );
 
 	virtual ~IModule( ) = 0;
 
 
-public:
 	/*
 		Commands
 	*/
-	virtual void Update( ) {};
+public:
+	virtual void Update( ) = 0;
 };
 
 

@@ -1,203 +1,176 @@
-// TGON.TestConsole.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
-//
-
 #include "PrecompiledHeader.h"
-//#include <boost/signals2.hpp>
 #include <iostream>
 #include <vector>
 #include <cstdint>
+#include <functional>
+#include <Math/Vector3.h>
 
+#pragma once
 
-class TEvent;
-class TObserver
+#include <iostream>
+#include <string>
+
+class Hello
 {
 public:
-	TObserver( )
-	{
-	}
+    Hello() : msg("Hello") {}
 
-	virtual ~TObserver( ) = 0
-	{
-	};
-
-public:
-
-public:
-	virtual void Update( ) = 0;
+    void execute(int n)
+    {
+        for(int i=0; i<n; ++i) {
+            std::cout << msg;
+        }
+        std::cout << std::endl;
+    }
+private:
+    std::string msg;
 };
 
-class TEvent
+class World
 {
 public:
-	void Attach( TObserver* observer )
+    World() : msg("World") {}
+
+    void execute(int n)
+    {
+        for(int i=0; i<n; ++i) {
+            std::cout << msg;
+        }
+        std::cout << std::endl;
+    }
+private:
+    std::string msg;
+};
+
+class VirtualHello : virtual Hello
+{
+public:   
+    void execute(int n) {
+        std::cout << "VirtualHello" << std::endl;
+    }
+};
+
+class HelloWorld : public Hello, public World
+{
+public:
+    HelloWorld() {}
+
+    void execute(int n)
+    {
+        Hello::execute(n);
+        World::execute(n);
+    }
+};
+
+class UnknownGreeting;
+typedef void (UnknownGreeting::*UnknownExecute) (int n);
+
+
+#include <tgLib/Include/auto_cast.h>
+
+template<typename RetTy, typename... Args>
+class TDelegate
+{
+	using DelegateChain = std::vector<std::function<RetTy( Args... )>>;
+
+
+public:
+	TDelegate( std::function<RetTy( Args... )> del ) :
+		m_delegateChain{ del }
 	{
-		m_observerList.push_back( observer );
 	}
 
-	virtual void Notify( )
+	TDelegate( )
 	{
-		for ( TObserver* observer : m_observerList )
+
+	}
+	
+
+public:
+	void operator()( Args... args )
+	{
+		for ( auto& _delegate : m_delegateChain )
 		{
-			observer->Update( );
+			_delegate( args... );
 		}
 	}
 
-	virtual uint32_t GetHashCode( ) const = 0;
-
-
-private:
-	std::vector<TObserver*> m_observerList;
-};
-
-class TErrorEvent :
-	public TEvent
-{
-public:
-	int GetErrorCode( ) const
-	{ 
-		return m_errCode; 
-	}
-
-	virtual uint32_t GetHashCode( ) const
+	void operator=( const std::function<RetTy( Args... )>& del )
 	{
-		return 194;
+		m_delegateChain.clear( );
+		m_delegateChain.push_back( del );
 	}
 
-private:
-	int m_errCode;
-};
-
-class TErrorEventHandler : public TObserver
-{
-public:
-	TErrorEventHandler( TErrorEvent* errEvent ) :
-		m_errEvent( errEvent )
+	void operator+=( const std::function<RetTy( Args... )>& del )
 	{
-		errEvent->Attach( this );
-		//m_errEvent->Detach( this );
+		m_delegateChain.push_back( del );
 	}
 
-	virtual void Update( )
-	{
-		MessageBox( 0,0,0,0 );
-	}
-
-private:
-	TErrorEvent* m_errEvent;
-};
-
-class TEventReceiver
-{
-public:
-
-private:
-	static std::map<uint32_t, TEvent> m_eventList;
-};
-
-class FOO_CLASS :
-	public TEventReceiver
-{
-public:
-	FOO_CLASS( )
-	{
-
-	}
-
-	virtual ~FOO_CLASS( )
-	{
-
-	}
 
 public:
-};
+	/*DelegateChain::iterator begin( )
+	{
+		return nullptr;
+	}*/
 
-#include <iostream>
-#define WW( ... ) __VA_ARGS__
-
-void wow( WW( int, int ) )
-{
-}
-
-int main( int argc, char* argv[] )
-{
-	
-
-	//std::couta.foo<2, 3>( );
-
-	///*TWorkThread tt;
-	//DWORD b = GetTickCount( );
-
-	//std::atomic<int> v = 0;
-	//auto work = [&]( )
+	//DelegateChain::iterator end( )
 	//{
-	//	int temp = 0;
-	//	for ( int i = 0 ; i < 25000000; ++i )
-	//		temp += 1;
+	//	return m_delegateChain.end( );
+	//}
 
-	//	v += temp;
-	//};
-
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//tt.Request( work );
-	//
-	//std::cout << "b";
-	//tt.Wait( );
-	//std::cout << "a";
-
-	//DWORD e = GetTickCount( ) - b;
-
-	//std::cout << v;
-
-	//Sleep( 10000 );
-
-	//std::cout << v.load( ) << ", 걸린 시간: " << e;
-
-
-	//return  0;*/
+	//DelegateChain::const_iterator cbegin( ) const
 	//{
+	//	return m_delegateChain.cbegin( );
+	//}
 
-	//TWorkThreadModule tw;
-
-	//DWORD b = GetTickCount( );
-
-	//std::atomic<int> v = 0;
-	//auto work = [&]( )
+	//DelegateChain::const_iterator cend( ) const
 	//{
-	//	int temp = 0;
-	//	for ( int i = 0; i < 25000000; ++i )
-	//		temp += 1;
-
-	//	v += temp;
-	//};
-
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-	//tw.Request( work );
-
-	//std::cout << "a";
-	//tw.Wait( );
-	//std::cout << "b";
-
-
-
-	//DWORD e = GetTickCount( ) - b;
-
-	//
-	//std::cout << v << " "<<e << std::endl;
+	//	return m_delegateChain.cend( );
 	//}
 
 
+private:
+	DelegateChain m_delegateChain;
+};
+
+class SampleApplication
+{
+public:
+	void Exec( )
+	{
+
+	}
+
+	TDelegate<void, int> OnDestroy = [&]( int arg1 )
+	{
+		std::cout << "OnDestroy" << std::endl;
+		n = arg1;
+	};
+
+	int n = 2342;
+};
+
+template <std::size_t N, std::size_t Exponent>
+struct Pow
+{
+	enum { value = N * Pow<N, Exponent-1>::value };
+};
+
+template <std::size_t N>
+struct Pow<N, 0>
+{
+	enum { value = 1 };
+};
+
+
+int main( int argc, char* argv[] )
+{
+	pow( 3, 4 );
+
+	/*SampleApplication sa;
+	sa.Exec( );
+
+	sa.OnDestroy( 234 );*/
 
     return 0;
 }

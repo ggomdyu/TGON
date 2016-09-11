@@ -79,9 +79,6 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Camera\TCamera.h">
       <Filter>Sources\Camera\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsType.h">
-      <Filter>Sources\Graphics\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.h">
       <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
     </ClInclude>
@@ -121,6 +118,18 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsProperty.h">
       <Filter>Sources\Graphics\hpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsType.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Texture2D.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Sprite.h">
+      <Filter>Sources\Graphics\hpp\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Image.h">
+      <Filter>Sources\Graphics\hpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
@@ -155,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLVertexBuffer.cpp">
       <Filter>Sources\Graphics\cpp\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Texture2D.cpp">
+      <Filter>Sources\Graphics\cpp\Direct3D9</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

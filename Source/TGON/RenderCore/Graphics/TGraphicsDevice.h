@@ -21,16 +21,16 @@ class TGON_API TGraphicsDevice :
 	public GraphicsDeviceImpl
 {
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
-protected:
+private:
 	//
 	// Constructor
 	//
 	// @param deviceWindow Set window which want to present 3D space
 	// @param graphicsProp Set graphics device property ( Describe Enable toggle full-screen, depth buffer bits, ... )
 	//
-	explicit TGraphicsDevice( /*In*/ TWindow* deviceWindow, /*In*/ const GraphicsProperty& grpProp );
+	explicit TGraphicsDevice( /*In*/ TPlatformWindow* deviceWindow, /*In*/ const GraphicsProperty& grpProp );
 
 public:
 	//
@@ -44,19 +44,17 @@ public:
 		Commands
 	*/
 	//
-	// TGraphics only support the creation as specified type.
-	//
+	// @note TGraphics only support the creation as specified type.
 	// @param deviceWindow Set window which want to present 3D space
 	// @param graphicsProp Set graphics device property ( Describe Enable toggle full-screen, depth buffer bits, ... )
-	//
 	// @return Return the reference counting smart pointer type( = std::shared_ptr ) of this class.
 	//
-	static SpTGraphicsDevice Make( /*In*/ TWindow* deviceWindow, /*In*/ const GraphicsProperty& graphicsProp );
+	static SpTGraphicsDevice Make( /*In*/ TPlatformWindow* deviceWindow, /*In*/ const GraphicsProperty& graphicsProp );
 
 };
 
 
-inline SpTGraphicsDevice TGraphicsDevice::Make( TWindow* deviceWindow, const GraphicsProperty& grpProp )
+inline SpTGraphicsDevice TGraphicsDevice::Make( TPlatformWindow* deviceWindow, const GraphicsProperty& grpProp )
 {
 	SpTGraphicsDevice graphics( new TGraphicsDevice( deviceWindow, grpProp ));
 	return graphics;

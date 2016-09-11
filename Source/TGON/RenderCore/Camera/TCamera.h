@@ -6,9 +6,9 @@
 */
 
 #pragma once
-#include "../../Core/Object/TObject.h"
-#include "../../Core/Math/TVector3.h"
-#include "../../Core/Math/TMatrix4x4.h"
+#include "../../Core/Object/Object.h"
+#include "../../Core/Math/Vector3.h"
+#include "../../Core/Math/Matrix4x4.h"
 
 
 namespace tgon
@@ -16,7 +16,7 @@ namespace tgon
 
 
 class TGON_API TCamera final :
-	public TObject
+	public Object
 {
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( TCamera, std::nullptr_t )
@@ -26,21 +26,21 @@ public:
 	virtual ~TCamera( );
 
 public:
-	static const TVector3 Eye;
+	static const Vector3 Eye;
 
-	static const TVector3 LookAt;
+	static const Vector3 LookAt;
 
-	static const TVector3 Up;
+	static const Vector3 Up;
 
 
 	/*
 		Sets
 	*/
-	void SetEye( const TVector3& );
+	void SetEye( const Vector3& );
 	
-	void SetLookAt( const TVector3& );
+	void SetLookAt( const Vector3& );
 	
-	void SetUp( const TVector3& );
+	void SetUp( const Vector3& );
 
 	void SetFieldOfView( float fov );
 
@@ -55,78 +55,77 @@ public:
 		Gets
 	*/
 	//
-	const TMatrix4x4& GetView( ) const;
+	const Matrix4x4& GetView( ) const;
 
 	// Return 3D projection matrix.
-	const TMatrix4x4& GetPerspective( ) const;
+	const Matrix4x4& GetPerspective( ) const;
 
 	// Return 2D projection matrix.
-	const TMatrix4x4& GetOrthographic( ) const; 
+	const Matrix4x4& GetOrthographic( ) const; 
 
 	//
-	const TMatrix4x4& GetViewport( ) const;
+	const Matrix4x4& GetViewport( ) const;
+
 
 private:
-	TVector3 m_eye;
+	Vector3 m_eye;
 
-	TVector3 m_up;
+	Vector3 m_up;
 
-	TVector3 m_lookAt;
+	Vector3 m_lookAt;
 
-	TMatrix4x4 m_matPerspective;
+	Matrix4x4 m_matPerspective;
 
-	TMatrix4x4 m_matOrtho;
+	Matrix4x4 m_matOrtho;
 
-	TMatrix4x4 m_matView;
+	Matrix4x4 m_matView;
 
-	TMatrix4x4 m_matViewport;
+	Matrix4x4 m_matViewport;
 
 	float m_fov;
 
-	// Near clipping plane's Z position
 	float m_nearZ;
 
-	// Far clipping plane's Z position
 	float m_farZ;
 };
 
 
-inline const TMatrix4x4& tgon::TCamera::GetPerspective( ) const
+inline const Matrix4x4& TCamera::GetPerspective( ) const
 {
 	return m_matPerspective;
 }
 
-inline const TMatrix4x4& TCamera::GetOrthographic( ) const
+inline const Matrix4x4& TCamera::GetOrthographic( ) const
 {
 	return m_matOrtho;
 }
 
-inline const TMatrix4x4& tgon::TCamera::GetView( ) const
+inline const Matrix4x4& TCamera::GetView( ) const
 {
 	return m_matView;
 }
 
-inline const TMatrix4x4& tgon::TCamera::GetViewport( ) const
+inline const Matrix4x4& TCamera::GetViewport( ) const
 {
 	return m_matViewport;
 }
 
-inline void TCamera::SetEye( const TVector3& eye )
+inline void TCamera::SetEye( const Vector3& eye )
 {
 	m_eye = eye;
 }
 
-inline void TCamera::SetLookAt( const TVector3& lookAt )
+inline void TCamera::SetLookAt( const Vector3& lookAt )
 {
 	m_lookAt = lookAt;
 }
 
-inline void TCamera::SetUp( const TVector3& up )
+inline void TCamera::SetUp( const Vector3& up )
 {
 	m_up = up;
 }
 
-inline void tgon::TCamera::SetFieldOfView( float fov )
+inline void TCamera::SetFieldOfView( float fov )
 {
 	m_fov = fov;
 }
@@ -136,10 +135,10 @@ inline void TCamera::SetNearClippingZ( float nearZ )
 	m_nearZ = nearZ;
 }
 
-inline void tgon::TCamera::SetFarClippingZ( float farZ )
+inline void TCamera::SetFarClippingZ( float farZ )
 {
 	m_farZ = farZ;
 }
 
 
-}
+} /*namespace tgon*/

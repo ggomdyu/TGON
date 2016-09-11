@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include "../Core/Object/TObject.h"
-#include "../Core/Math/TMath.h"
+#include "../Core/Object/Object.h"
+#include "../Core/Math/Mathf.h"
 
 #include "../Component/TransformComponent.h"
 
@@ -16,61 +16,58 @@ namespace tgon
 {
 
 
-class TransformComponent;
-
-class TGON_API TGameObject :
-	public TObject
+class TGON_API GameObject :
+	public Object
 {
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( TGameObject, std::nullptr_t )
+	TGON_GENERATE_OBJECT_INTERFACE( GameObject, std::nullptr_t )
 
 
+	// 
+	// Ctor/Dtor
+	// 
 public:
-	/*
-		Cons/Destructor
-	*/
-	TGameObject( );
-
-	TGameObject( const TGameObject& ) = delete;
-	
-	virtual ~TGameObject( );
+	GameObject( );
+	GameObject( const GameObject& ) = delete;
+	virtual ~GameObject( );
 
 	/*
 		Operators
 	*/
-	TGameObject& operator=( const TGameObject& ) = delete;
+	GameObject& operator=( const GameObject& ) = delete;
 
 
 public:
-	/*
-		Sets
-	*/
-	template <typename ComponentTy> void AddComponent( ComponentTy* );
-	
-	/*
-		Gets
-	*/
-	template <typename ComponentTy> ComponentTy* GetComponent( );
-
-private:
-	TransformComponent* m_transformComponent;
-
-	std::map<uint32_t, IComponent*> m_components;
 };
 
-
-template<>
-inline void TGameObject::AddComponent( TransformComponent* newComponent ) = delete;
-
-template<typename ComponentTy>
-inline void TGameObject::AddComponent( ComponentTy* component )
-{
-	//const auto identifier = newComponent->GetComponentID( );
-
-	//m_components.insert( std::make_pair( identifier, newComponent ));
-	//newComponent->SetOwner( this );
-}
-
+//class TransformComponent;
+//	/*
+//		Sets
+//	*/
+//	template <typename ComponentTy> void AddComponent( ComponentTy* );
+//	
+//	/*
+//		Gets
+//	*/
+//	template <typename ComponentTy> ComponentTy* GetComponent( );
+//
+//private:
+//	TransformComponent* m_transformComponent;
+//
+//	std::map<uint32_t, IComponent*> m_components;
+//
+//template<>
+//inline void GameObject::AddComponent( TransformComponent* newComponent ) = delete;
+//
+//template<typename ComponentTy>
+//inline void GameObject::AddComponent( ComponentTy* component )
+//{
+//	//const auto identifier = newComponent->GetComponentID( );
+//
+//	//m_components.insert( std::make_pair( identifier, newComponent ));
+//	//newComponent->SetOwner( this );
+//}
+////////////////////////////////////////////
 //template<typename _Ty>
 //inline void TGameObject::AddComponent( _Ty * )
 //{
@@ -85,11 +82,11 @@ inline void TGameObject::AddComponent( ComponentTy* component )
 //	return nullptr;
 //}
 
-template<>
-inline TransformComponent* TGameObject::GetComponent( )
-{	
-	return m_transformComponent;
-}
+//template<>
+//inline TransformComponent* GameObject::GetComponent( )
+//{	
+//	return m_transformComponent;
+//}
 
 
 }

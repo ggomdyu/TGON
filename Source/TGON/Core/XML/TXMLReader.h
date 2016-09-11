@@ -8,32 +8,69 @@ namespace tgon
 
 class TXMLReader
 {
-	using _NodeRepoTy = std::vector<tinyxml2::XMLNode*>;
+	/*
+		Type definitions
+	*/
+private:
+	using NodeRepoTy = std::vector<tinyxml2::XMLNode*>;
 
+	using iterator = NodeRepoTy::iterator;
+	using const_iterator = NodeRepoTy::const_iterator;
+
+
+	/*
+		Con/Destructor
+	*/
 public:
+	//
+	// @note Load XML and analyze
+	// @param xmlPath XML path what you want to load
+	//
 	explicit TXMLReader( const char* xmlPath );
+	
 	virtual ~TXMLReader( );
 
-	using iterator = _NodeRepoTy::iterator;
-	using const_iterator = _NodeRepoTy::const_iterator;
 
+	/*
+		Commands
+	*/
 public:
 	void LoadXML( const char* xmlPath );
-	bool Fail( ) const;
-	tinyxml2::XMLError GetLastError( ) const;
 
+
+	/*
+		Gets
+	*/
+	bool Fail( ) const;
+	
+	tinyxml2::XMLError GetLastError( ) const;
+	
 	iterator begin( );
+
 	iterator end( );
+
 	const_iterator begin( ) const;
+
 	const_iterator end( ) const;
 
+
+	/*
+		Internal works
+	*/
 private:
 	void RecursiveLoadImpl( tinyxml2::XMLNode* );
 
+
+	/*
+		Private variables
+	*/
 private:
 	bool m_isFailed;
+
 	tinyxml2::XMLDocument m_xmlDocument;
-	_NodeRepoTy m_readNodeRepo;
+
+	NodeRepoTy m_readNodeRepo;
+
 	tinyxml2::XMLError m_lastError;
 };
 

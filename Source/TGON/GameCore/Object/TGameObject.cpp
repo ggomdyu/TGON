@@ -4,11 +4,16 @@
 #include "../Component/TransformComponent.h"
 
 
-tgon::TGameObject::TGameObject( ) :
-	m_transformComponent( new TransformComponent( this ))
+namespace tgon
+{
+
+tgon::GameObject::GameObject( ) /*:
+	m_transformComponent( new TransformComponent( this ))*/
 {
 }
 
-tgon::TGameObject::~TGameObject( )
+tgon::GameObject::~GameObject( )
 {
 }
+
+} /*namespace tgon*/

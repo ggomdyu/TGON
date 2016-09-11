@@ -7,11 +7,9 @@
 
 
 #pragma once
+#include "./Core/Platform/OSAL/PlatformInclude.h"
+#include "./Core/Error/ErrorCode.h"
 #include <d3d9.h>
-
-#include "../../../Platform/Config/Build.h"
-#include "../../../Platform/Console/TConsole.h"
-#include "../../../Core/Error/ErrorCode.h"
 
 
 namespace tgon

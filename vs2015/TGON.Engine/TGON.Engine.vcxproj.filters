@@ -13,35 +13,23 @@
     <Filter Include="Sources\PrecompiledHeader\cpp">
       <UniqueIdentifier>{6922300e-0fa0-4e6e-821c-7a276701e22e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Executable">
-      <UniqueIdentifier>{7ba32176-eea4-4e6b-8be2-615590cc8dac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Executable\cpp">
-      <UniqueIdentifier>{b5e086c4-dea5-4c23-a0e9-c28b03d79019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Executable\hpp">
-      <UniqueIdentifier>{eaaee444-0a69-413a-b959-3b9a7c88ef9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Module">
-      <UniqueIdentifier>{d7d57f01-f2de-4f41-815f-410900365a7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Module\cpp">
+    <Filter Include="Sources\cpp">
       <UniqueIdentifier>{fe8db98f-34fc-4402-9d42-23d654784827}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Module\hpp">
+    <Filter Include="Sources\hpp">
       <UniqueIdentifier>{cd9b2224-1747-471f-b965-0254ff798bb0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Module\hpp\Interface">
+    <Filter Include="Sources\hpp\Module">
+      <UniqueIdentifier>{d7d57f01-f2de-4f41-815f-410900365a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\hpp\Module\Interface">
       <UniqueIdentifier>{bd2ec299-609d-4e95-a1db-cffb76d53eb5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Module\hpp\Time">
-      <UniqueIdentifier>{003be8a4-67bd-4f2c-a6c7-13514103dd0a}</UniqueIdentifier>
+    <Filter Include="Sources\cpp\Module">
+      <UniqueIdentifier>{9b887b1b-34dc-429a-81f9-a2b24292baf7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Module\hpp\WorkThread">
-      <UniqueIdentifier>{bd21449e-174e-41ff-9c35-1a9a26f620cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Module\hpp\Input">
-      <UniqueIdentifier>{a048e3c3-e2ea-4250-a051-877b4854b670}</UniqueIdentifier>
+    <Filter Include="Sources\cpp\Module\Interface">
+      <UniqueIdentifier>{01694687-0fd7-4513-8048-7d057ba4999b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,54 +37,39 @@
       <Filter>Sources\PrecompiledHeader\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\TGON\Engine\Module\Interface\IModule.h">
-      <Filter>Sources\Module\hpp\Interface</Filter>
+      <Filter>Sources\hpp\Module\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Module\TimeModule.h">
-      <Filter>Sources\Module\hpp\Time</Filter>
+    <ClInclude Include="..\..\Source\TGON\Engine\GameApplication.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.h">
-      <Filter>Sources\Module\hpp\WorkThread</Filter>
+    <ClInclude Include="..\..\Source\TGON\Engine\CoreEvents.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Module\InputModule.h">
-      <Filter>Sources\Module\hpp\Input</Filter>
+    <ClInclude Include="..\..\Source\TGON\Engine\Engine.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Object\TCoreEvents.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TGameApplication.h">
-      <Filter>Sources\Executable\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\TGON\Engine\Executable\TEngine.h">
-      <Filter>Sources\Executable\hpp</Filter>
+    <ClInclude Include="..\..\Source\TGON\Engine\EngineContextObject.h">
+      <Filter>Sources\hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Engine\TMain.cpp">
+      <Filter>Sources\cpp</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Engine\Module\Interface\IModule.cpp">
-      <Filter>Sources\Module\hpp\Interface</Filter>
+      <Filter>Sources\cpp\Module\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Module\TimeModule.cpp">
-      <Filter>Sources\Module\hpp\Time</Filter>
+    <ClCompile Include="..\..\Source\TGON\Engine\GameApplication.cpp">
+      <Filter>Sources\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp">
-      <Filter>Sources\Module\hpp\WorkThread</Filter>
+    <ClCompile Include="..\..\Source\TGON\Engine\Engine.cpp">
+      <Filter>Sources\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TMain.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Module\InputModule.cpp">
-      <Filter>Sources\Module\hpp\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Object\TCoreEvents.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TGameApplication.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Engine\Executable\TEngine.cpp">
-      <Filter>Sources\Executable\cpp</Filter>
+    <ClCompile Include="..\..\Source\TGON\Engine\EngineContextObject.cpp">
+      <Filter>Sources\cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 #pragma once
 #include <boost/predef.h>
 
-#define TGON_FORCE_TO_OPENGL 1
+#define TGON_GRAPHICS_DIRECT3D9 1
 
 #if BOOST_OS_WINDOWS
 #	include <sdkddkver.h>

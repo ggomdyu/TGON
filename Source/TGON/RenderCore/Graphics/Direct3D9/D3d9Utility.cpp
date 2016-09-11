@@ -177,31 +177,31 @@ UINT tgon::GetD3D9StencilBits( const D3DFORMAT fmt )
     }
 }
 //
-//D3DPRIMITIVETYPE tgon::ConvertPrimitiveToD3D9( TPrimitiveType from )
+//D3DPRIMITIVETYPE tgon::ConvertPrimitiveToD3D9( PrimitiveType from )
 //{
 //	switch ( from )
 //	{
-//	case TPrimitiveType::kPointList:
+//	case PrimitiveType::kPointList:
 //		return D3DPRIMITIVETYPE::D3DPT_POINTLIST;
 //		break;
 //	
-//	case TPrimitiveType::kLineList:
+//	case PrimitiveType::kLineList:
 //		return D3DPRIMITIVETYPE::D3DPT_LINELIST;
 //		break;
 //
-//	case TPrimitiveType::kLineStrip:
+//	case PrimitiveType::kLineStrip:
 //		return D3DPRIMITIVETYPE::D3DPT_LINESTRIP;
 //		break;
 //	
-//	case TPrimitiveType::kTriangleList:
+//	case PrimitiveType::kTriangleList:
 //		return D3DPRIMITIVETYPE::D3DPT_TRIANGLELIST;
 //		break;
 //
-//	case TPrimitiveType::kTriangleStrip:
+//	case PrimitiveType::kTriangleStrip:
 //		return D3DPRIMITIVETYPE::D3DPT_TRIANGLESTRIP;
 //		break;
 //
-//	case TPrimitiveType::kTriangleFan:
+//	case PrimitiveType::kTriangleFan:
 //		return D3DPRIMITIVETYPE::D3DPT_TRIANGLEFAN;
 //		break;
 //

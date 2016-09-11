@@ -26,13 +26,16 @@
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Fwd.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9GraphicsDevice.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Sprite.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Texture2D.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\Image.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLGraphicsDevice.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLVertexBuffer.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsProperty.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsDevice.h" />
-    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TGraphicsType.h" />
+    <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\GraphicsType.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Graphics\TVertexBuffer.h" />
     <ClInclude Include="..\..\Source\TGON\RenderCore\Slate\PlatformGraphics.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
@@ -43,6 +46,7 @@
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Abstract\AbstractGraphicsDevice.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Error.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9GraphicsDevice.cpp" />
+    <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9Texture2D.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3d9Utility.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\Direct3D9\D3D9VertexBuffer.cpp" />
     <ClCompile Include="..\..\Source\TGON\RenderCore\Graphics\OpenGL\OpenGLGraphicsDevice.cpp" />

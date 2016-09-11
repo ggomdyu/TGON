@@ -1,12 +1,19 @@
 #include "PrecompiledHeader.h"
 #include "AbstractGraphicsDevice.h"
 
-#include "../../../Platform/Window/TWindow.h"
+#include "../../../Core/Platform/OSAL/PlatformWindow.h"
 
 
-tgon::AbstractGraphicsDevice::AbstractGraphicsDevice( TWindow* deviceWindow ) :
+
+namespace tgon {
+
+
+AbstractGraphicsDevice::AbstractGraphicsDevice( TPlatformWindow* deviceWindow ) :
 	m_deviceWindow( deviceWindow ),
 //	m_currMode( TCullMode::kNone ),
 	m_clearColor( 0x000000 )
 {
+}
+
+
 }

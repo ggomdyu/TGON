@@ -6,13 +6,14 @@
 */
 
 #pragma once
-#include "../../../Platform/Config/Build.h"
+#include "../Core/Platform/OSAL/PlatformInclude.h"
 
 #include <memory>
 #include <boost/noncopyable.hpp>
 
+#include "../Core/Platform/OSAL/PlatformWindow.h"
 #include "../GraphicsProperty.h"
-#include "../TGraphicsType.h"
+#include "../GraphicsType.h"
 #include "AbstractGraphicsDeviceEventHandler.h"
 
 
@@ -20,38 +21,27 @@ namespace tgon
 {
 
 
-class TWindow;
-
 class TGON_API AbstractGraphicsDevice : 
 	private boost::noncopyable
 {
 /*
-	Cons/Destructor
+	Ctor/Dtor
 */
 protected:
 	//
-	// Constructor
-	//
+	// @note Constructor
 	// @param deviceWindow Window which you want to present 3D space
 	//
-	explicit AbstractGraphicsDevice( /*In*/ TWindow* deviceWindow );
+	explicit AbstractGraphicsDevice( /*In*/ TPlatformWindow* deviceWindow );
 	
-	//
-	// Destructor
-	//
-	virtual ~AbstractGraphicsDevice( ) = default;
-
-	//
-	// Copy Constructor
-	//
-	// @param rhs ignore, DO NOT CALL this
-	//
 	AbstractGraphicsDevice( const AbstractGraphicsDevice& rhs ) = delete;
 
+	virtual ~AbstractGraphicsDevice( ) = default;
 
-/*
-	Operators
-*/
+
+	/*
+		Operators
+	*/
 	//
 	// Copy assignment operator
 	//
@@ -60,9 +50,9 @@ protected:
 	AbstractGraphicsDevice& operator=( const AbstractGraphicsDevice& ) = delete;
 
 	
-/*
-	Commands
-*/
+	/*
+		Commands
+	*/
 public:
 	//
 	// Begin scene rendering. Return true if device can render.
@@ -86,28 +76,25 @@ public:
 	virtual bool Clear( ) = 0;
 
 	//
-	// Draw the back buffer to visible screen.
-	//
+	// @note Draw the back buffer to visible screen.
 	// @return Return true on success.
 	//
 	virtual bool Present( ) = 0;
 
 	//
-	// Draw geometry figure or point.
+	// @note Draw geometry data
+	// @param primitiveType 
+	// @param startVertex 
+	// @param primitiveCount 
 	//
-	// @param primitiveType ???
-	// @param startVertex ???
-	// @param primitiveCount ???
-	//
-	virtual void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) = 0;
+	virtual void DrawPrimitive( PrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) = 0;
 
 
-/*
-	Sets
-*/
+	/*
+		Sets
+	*/
 	//
-	// Set the graphics event handler.
-	//
+	// @note Set the graphics event handler.
 	// @param eventHandler Event handler which you want to set
 	//
 	void SetEventHandler( const std::shared_ptr<AbstractGraphicsDeviceEventHandler>& eventHandler );
@@ -127,12 +114,13 @@ public:
 	//
 	virtual void SetCullMode( TCullMode cullMode ) = 0;
 
+	//
 	virtual void EnableDepthBuffer( bool isEnable ) = 0;
 
 
-/*
-	Gets
-*/
+	/*
+		Gets
+	*/
 	//
 	// Return current event handler.
 	//
@@ -141,21 +129,27 @@ public:
 	const std::shared_ptr<AbstractGraphicsDeviceEventHandler>& GetEventHandler( ) const;
 
 	//
-	// Return present window target.
+	// @return Return present window target.
 	//
-	// @return TWindow as .
-	//
-	TWindow* GetDeviceWindow( );
+	TPlatformWindow* GetDeviceWindow( );
 	
-	// Get owner window's screen width
+	//
+	// @return Return owner window's screen width
+	//
 	int32_t GetBackBufferWidth( ) const;
 
-	// Get owner window's screen height
+	//
+	// @return Return owner window's screen height
+	// 
 	int32_t GetBackBufferHeight( ) const;
 
 	//
+	// @return Return device's background clear color.
+	//
 	uint32_t GetClearColor( ) const;
 
+	//
+	// @return Return device's culling mode.
 	//
 	TCullMode GetCullMode( ) const;
 
@@ -164,16 +158,16 @@ public:
 	Variables
 */
 protected:
+	TPlatformWindow* m_deviceWindow;
+
 	std::shared_ptr<AbstractGraphicsDeviceEventHandler> m_eventHandler;
 
 	int32_t m_backBufferWidth;
-
+	
 	int32_t m_backBufferHeight;
-
-	TWindow* m_deviceWindow;
-
+	
 	uint32_t m_clearColor;
-
+	
 	TCullMode m_currMode;
 };
 
@@ -207,7 +201,7 @@ inline const std::shared_ptr<AbstractGraphicsDeviceEventHandler>& AbstractGraphi
 	return m_eventHandler;
 }
 
-inline class TWindow* AbstractGraphicsDevice::GetDeviceWindow( )
+inline TPlatformWindow* AbstractGraphicsDevice::GetDeviceWindow( )
 {
 	return m_deviceWindow;
 }

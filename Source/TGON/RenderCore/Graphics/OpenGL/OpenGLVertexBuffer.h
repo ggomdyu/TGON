@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../../../Platform/Config/Build.h"
+#include "../Core/Platform/OSAL/PlatformInclude.h"
 #include <cstdint>
 
 
@@ -22,7 +22,7 @@ class TGON_API OpenGLVertexBuffer
 {
 public:
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
 	OpenGLVertexBuffer( const OpenGLVertexBuffer& rhs ) = delete;
 

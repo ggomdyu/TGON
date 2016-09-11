@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include "../../Platform/Config/Build.h"
-#include "../../Core/Object/TObject.h"
+#include "../../Core/Platform/OSAL/PlatformInclude.h"
+#include "../../Core/Object/Object.h"
 
 
 namespace tgon
@@ -15,16 +15,16 @@ namespace tgon
 
 
 class TGON_API IComponent :
-	public TObject
+	public Object
 {
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( IComponent, std::nullptr_t )
 
 public:
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
-	explicit IComponent( class TGameObject* owner );
+	explicit IComponent( class GameObject* owner );
 	
 	virtual ~IComponent( ) = 0;
 	
@@ -41,24 +41,24 @@ public:
 	/*
 		Sets
 	*/
-	void SetOwner( class TGameObject* owner );
+	void SetOwner( class GameObject* owner );
 	
 	/*
 		Gets
 	*/
-	class TGameObject* GetOwner( ) const;
+	class GameObject* GetOwner( ) const;
 
 
 private:
-	class TGameObject* m_owner;
+	class GameObject* m_owner;
 };
 
-inline void IComponent::SetOwner( TGameObject* owner )
+inline void IComponent::SetOwner( GameObject* owner )
 {
 	m_owner = owner;
 }
 
-inline TGameObject* IComponent::GetOwner( ) const
+inline GameObject* IComponent::GetOwner( ) const
 {
 	return m_owner;
 }

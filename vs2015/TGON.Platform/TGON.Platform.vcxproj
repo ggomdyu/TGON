@@ -19,82 +19,61 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Console\TConsole.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Main\Windows\WindowsMain.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Time\TTime.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\TWindow.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\WindowStyle.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtility.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PrecompiledHeader.h</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Platform\Abstract\AWindow.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\TConsole.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\TTime.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\TWindow.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\WindowStyle.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\Utility\MiniDump.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\Utility\WindowsWindowUtility.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsConsole.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsMain.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsScreen.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="..\..\Source\TGON\PrecompiledHeader.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\Abstract\AbstractApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\TApplicationType.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Application\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Config\Android\AndroidProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\config\Build.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Config\Windows\WindowsProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Console\Interface\InterfaceConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Console\TConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Console\Windows\WindowsConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Main\TMain.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Abstract\AbstractScreen.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Screen\TScreen.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Screen\Windows\WindowsScreen.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformApplication.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformConsole.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformFwd.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMath.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformMessageBox.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformProperty.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformScreen.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformSIMD.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformTime.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Slate\PlatformWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Time\Abstract\AbstractTime.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTime.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Time\TTimeType.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Time\Windows\WindowsTime.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\HDCGuard.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\MiniDump.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\shared_comptr.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Utility\Windows\unique_comptr.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\Abstract\AbstractWindowEventHandler.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\TWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\WindowStyle.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindow.h" />
-    <ClInclude Include="..\..\Source\TGON\Platform\Window\Windows\WindowsWindowUtility.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\AApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\AConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\AScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\ATime.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\AWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Abstract\AWindowEventHandler.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\BuildConfig.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformFwd.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformMath.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformProperty.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformSIMD.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformTime.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Platform\PlatformWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TMain.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TTime.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\TWindow.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Typedef\ApplicationType.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Typedef\TimeType.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\WindowStyle.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Utility\HDCGuard.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Utility\MiniDump.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Utility\shared_comptr.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Utility\unique_comptr.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Utility\WindowsWindowUtility.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsApplicationType.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsProperty.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsScreen.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsTime.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>

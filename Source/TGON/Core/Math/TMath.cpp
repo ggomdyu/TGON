@@ -1,8 +1,12 @@
 #include "PrecompiledHeader.h"
-#include "TMath.h"
+#include "Mathf.h"
 
 
-uint32_t tgon::TMath::x65599Hash( const char* str, std::size_t length )
+namespace tgon
+{
+
+
+uint32_t Math::x65599Hash( const char* str, std::size_t length )
 {
 	uint32_t hash = 0;
 	for ( uint32_t i = 0; i < length; ++i )
@@ -12,3 +16,6 @@ uint32_t tgon::TMath::x65599Hash( const char* str, std::size_t length )
 
 	return hash^( hash >> 16 );
 }
+
+
+} /*namespace tgon*/

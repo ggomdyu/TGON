@@ -8,9 +8,9 @@
 
 #pragma once
 #include "IComponent.h"
-#include "../../Platform/Config/Build.h"
+#include "../../Core/Platform/OSAL/PlatformInclude.h"
  
-#include "../../Core/Math/TVector3.h"
+#include "../../Core/Math/Vector3.h"
 
 
 namespace tgon
@@ -23,7 +23,7 @@ public:
 	TGON_GENERATE_OBJECT_INTERFACE( TransformComponent, IComponent )
 
 public:
-	TransformComponent( class TGameObject* owner );
+	TransformComponent( class GameObject* owner );
 	
 	virtual ~TransformComponent( );
 
@@ -36,80 +36,80 @@ public:
 		Sets
 	*/
 	// Initialize as new vector.
-	void SetPosition( const TVector3& );
+	void SetPosition( const Vector3& );
 
 	// Adjust current position.
-	void Move( const TVector3& );
+	void Move( const Vector3& );
 
 	// Initialize as new angle.
-	void SetAngle( const TVector3& );
+	void SetAngle( const Vector3& );
 
 	// Adjust current angle.
-	void Rotate( const TVector3& );
+	void Rotate( const Vector3& );
 
 	// Initialize as new scale.
-	void SetScale( const TVector3& );
+	void SetScale( const Vector3& );
 
 	// Adjust current scale.
-	void Scale( const TVector3& );
+	void Scale( const Vector3& );
 
 	/*
 		Gets
 	*/
-	const TVector3& GetPosition( ) const;
+	const Vector3& GetPosition( ) const;
 
-	const TVector3& GetAngle( ) const;
+	const Vector3& GetAngle( ) const;
 
-	const TVector3& GetScale( ) const;
+	const Vector3& GetScale( ) const;
 
 private:
-	TVector3 m_pos;
-	TVector3 m_angle;
-	TVector3 m_scale;
+	Vector3 m_pos;
+	Vector3 m_angle;
+	Vector3 m_scale;
 };
 
 
-inline void TransformComponent::SetPosition( const TVector3& pos )
+inline void TransformComponent::SetPosition( const Vector3& pos )
 {
 	m_pos = pos;
 }
 
-inline void TransformComponent::Move( const TVector3& pos )
+inline void TransformComponent::Move( const Vector3& pos )
 {
 	m_pos += pos;
 }
 
-inline void TransformComponent::SetAngle( const TVector3& rot )
+inline void TransformComponent::SetAngle( const Vector3& rot )
 {
 	m_angle = rot;
 }
 
-inline void TransformComponent::Rotate( const TVector3& rot )
+inline void TransformComponent::Rotate( const Vector3& rot )
 {
 	m_angle += rot;
 }
 
-inline void TransformComponent::SetScale( const TVector3& scale )
+inline void TransformComponent::SetScale( const Vector3& scale )
 {
 	m_scale = scale;
 }
 
-inline void TransformComponent::Scale( const TVector3& scale )
+inline void TransformComponent::Scale( const Vector3& scale )
 {
 	m_scale += scale;
 }
 
-inline const TVector3& TransformComponent::GetPosition( ) const
+inline const Vector3& TransformComponent::GetPosition( ) const
 {
 	return m_pos;
 }
 
-inline const TVector3& TransformComponent::GetAngle( ) const
+inline const Vector3& TransformComponent::GetAngle( ) const
 {
 	return m_angle;
 }
 
-inline const TVector3& TransformComponent::GetScale( ) const
+inline const Vector3& TransformComponent::GetScale( ) const
 {
 	return m_scale;
 }

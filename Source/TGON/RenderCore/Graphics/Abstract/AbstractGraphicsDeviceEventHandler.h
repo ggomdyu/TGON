@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "../../../Platform/Config/Build.h"
+#include "../../../Core/Platform/OSAL/PlatformInclude.h"
 
 #include <cstdint>
 
@@ -17,7 +17,7 @@ namespace tgon
 class AbstractGraphicsDeviceEventHandler
 {
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
 public:
 	AbstractGraphicsDeviceEventHandler( ) = default;

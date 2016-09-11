@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../../../Platform/Utility/Windows/shared_comptr.h"
+#include "../../../Core/Platform/Windows/Misc/shared_comptr.h"
 
 
 struct IDirect3D9Ex;

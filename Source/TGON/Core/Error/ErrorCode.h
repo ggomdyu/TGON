@@ -3,10 +3,10 @@
 * Date : 04/25/2016
 * Latest author : 
 * Latest date : 
+* Description : Error code generator
 */
 
 #pragma once
-
 
 namespace tgon
 {

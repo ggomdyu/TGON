@@ -2,10 +2,17 @@
 #include "IModule.h"
 
 
-tgon::IModule::IModule( )
+
+namespace tgon {
+
+
+IModule::IModule( )
 {
 }
 
-tgon::IModule::~IModule( )
+IModule::~IModule( )
 {
+}
+
+
 }

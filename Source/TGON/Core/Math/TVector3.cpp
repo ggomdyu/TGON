@@ -1,24 +1,28 @@
 #include "PrecompiledHeader.h"
-#include "TVector3.h"
+#include "Vector3.h"
 
-#include "TMath.h"
-#include "TMatrix4x4.h"
-
-
-TGON_API const tgon::TVector3 tgon::TVector3::Forward( 0.f, 0.f, 1.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Back( 0.f, 0.f, -1.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Up( 0.f, 1.f, 0.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Down( 0.f, -1.f, 0.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Left( 1.f, 0.f, 0.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Right( 1.f, 0.f, 0.f );
-TGON_API const tgon::TVector3 tgon::TVector3::One( 0.f, 0.f, 0.f );
-TGON_API const tgon::TVector3 tgon::TVector3::Zero( 0.f, 0.f, 0.f );
+#include "Mathf.h"
+#include "Matrix4x4.h"
 
 
-void tgon::TVector3::TransformCoord(
-	const TMatrix4x4& rhs )
+namespace tgon
 {
-	// TVector3's w element is '1'
+
+
+TGON_API const Vector3 Vector3::Forward( 0.f, 0.f, 1.f );
+TGON_API const Vector3 Vector3::Back( 0.f, 0.f, -1.f );
+TGON_API const Vector3 Vector3::Up( 0.f, 1.f, 0.f );
+TGON_API const Vector3 Vector3::Down( 0.f, -1.f, 0.f );
+TGON_API const Vector3 Vector3::Left( -1.f, 0.f, 0.f );
+TGON_API const Vector3 Vector3::Right( 1.f, 0.f, 0.f );
+TGON_API const Vector3 Vector3::One( 0.f, 0.f, 0.f );
+TGON_API const Vector3 Vector3::Zero( 0.f, 0.f, 0.f );
+
+
+void Vector3::TransformCoord(
+	const Matrix4x4& rhs )
+{
+	// Vector3's w element is '1'
 
 #if TGON_SUPPORT_SSE
 #else
@@ -35,7 +39,7 @@ void tgon::TVector3::TransformCoord(
 	y = transY;
 	z = transZ;
 
-	if ( std::abs( transW-1.0f ) >= TMath::EPSILON )
+	if ( std::abs( transW-1.0f ) >= Math::EPSILON )
 	{		
 		const float inv = 1.f / transW;
 
@@ -46,12 +50,12 @@ void tgon::TVector3::TransformCoord(
 #endif
 }
 
-void tgon::TVector3::TransformNormal(
-	const TMatrix4x4& rhs )
+void Vector3::TransformNormal(
+	const Matrix4x4& rhs )
 {
 #if TGON_SUPPORT_SSE
 #else
-	// TVector3's w element is '0'
+	// Vector3's w element is '0'
 
 	const float transX =
 		x*rhs._00 + y*rhs._10 + z*rhs._20;
@@ -65,3 +69,6 @@ void tgon::TVector3::TransformNormal(
 	z = transZ;
 #endif
 }
+
+
+} /* namespace tgon */

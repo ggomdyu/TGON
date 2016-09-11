@@ -6,16 +6,16 @@
 */
 
 #pragma once
-#include "../../Platform/Config/Build.h"
-#include "../../Core/Object/TObject.h"
+#include "../../Core/Platform/OSAL/PlatformInclude.h"
+#include "../../Core/Object/Object.h"
 
 
 namespace tgon
 {
 
 
-class TGON_API TGameWorld :
-	public TObject
+class TGON_API GameWorld :
+	public Object
 {
 public:
 	

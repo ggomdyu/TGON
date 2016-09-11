@@ -2,7 +2,7 @@
 #include "TransformComponent.h"
 
 
-tgon::TransformComponent::TransformComponent( TGameObject* owner ) :
+tgon::TransformComponent::TransformComponent( GameObject* owner ) :
 	IComponent( owner )
 {
 }

@@ -25,9 +25,9 @@ class TGON_API D3D9GraphicsDevice :
 {
 protected:
 	/*
-		Cons/Destructor
+		Ctor/Dtor
 	*/
-	explicit D3D9GraphicsDevice( /*In*/ TWindow* deviceWindow, /*In*/ const GraphicsProperty& grpProp );
+	explicit D3D9GraphicsDevice( /*In*/ TPlatformWindow* deviceWindow, /*In*/ const GraphicsProperty& grpProp );
 	
 	D3D9GraphicsDevice( /*In*/ const D3D9GraphicsDevice& ) = delete;
 
@@ -56,7 +56,7 @@ public:
 	virtual bool Present( ) override;
 
 	//
-	virtual void DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) override;
+	virtual void DrawPrimitive( PrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount ) override;
 
 
 	/*
@@ -106,7 +106,7 @@ inline const SpD3D9DeviceEx& D3D9GraphicsDevice::GetD3DDevice( ) const
 	return m_d3dDevice;
 }
 
-inline void D3D9GraphicsDevice::DrawPrimitive( TPrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
+inline void D3D9GraphicsDevice::DrawPrimitive( PrimitiveType primitiveType, uint32_t startVertex, uint32_t primitiveCount )
 {
 	m_d3dDevice->DrawPrimitive(
 		static_cast<D3DPRIMITIVETYPE>( primitiveType ),
