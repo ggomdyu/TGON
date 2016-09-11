@@ -9,6 +9,7 @@
 #pragma once
 #include "../Abstract/APlatformTime.h"
 
+#include <boost/predef.h>
 #include <Windows.h>
 
 
@@ -16,59 +17,52 @@ namespace tgon
 {
 
 
-class WindowsTime;
-using TimeImpl = WindowsTime;
-
-class TGON_API WindowsTime :
-	public AbstractTime
+class TGON_API WindowsPlatformTime :
+	public APlatformTime<WindowsPlatformTime>
 {
-	/*
-		Commands
-	*/
+	// 
+	// Commands
+	// 
 public:
-	//
-	// @return Return execution time of OS as millisecond
-	//
+	/* @return Return execution time of OS as millisecond */
 	static uint32_t GetBootTime( );
 	
-	//
-	// @return Return execution time of OS as millisecond
-	//
+	/* @return Return this process's execution time as millisecond */
 	static uint64_t GetBootTime64( );
 
-	//
-	// @return Return current system time
-	//
+	/* @return Return current system time */
 	static LocalTime GetLocalTime( );
 	
-	//
-	// @note Put to sleep which caller thread of this function while passed millisecond
-	// @param milliSec Caller thread's sleep time
-	//
+	/*
+	 * @note Put to sleep which caller thread of this function while passed millisecond
+	 * @param milliSec Caller thread's sleep time
+	*/
 	static void Sleep( unsigned int milliSec );
 
-
-	/*
-		Ctor/Dtor
-	*/
+	// 
+	// Ctor/Dtor
+	// 
 public:
-	WindowsTime( ) = delete;
+	WindowsPlatformTime( ) = delete;
+	virtual ~WindowsPlatformTime( ) = delete;
 
-	virtual ~WindowsTime( ) = delete;
 };
 
 
-inline uint32_t WindowsTime::GetBootTime( )
+using TPlatformTime = WindowsPlatformTime;
+
+
+inline uint32_t WindowsPlatformTime::GetBootTime( )
 {
 	return GetTickCount( );
 }
 
-inline uint64_t WindowsTime::GetBootTime64( )
+ uint64_t WindowsPlatformTime::GetBootTime64( )
 {
 	return GetTickCount64( );
 }
 
-inline void WindowsTime::Sleep( unsigned int milliSec )
+inline void WindowsPlatformTime::Sleep( unsigned int milliSec )
 {
 	::Sleep( milliSec );
 }

@@ -8,70 +8,73 @@
 #pragma once
 #include "../Abstract/APlatformConsole.h"
 
-#ifndef WIN32_LEAN_AND_MEAN
-#	define WIN32_LEAN_AND_MEAN
-#	include <Windows.h>
-#	undef WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
+#	define NOMINMAX
 #endif
+#include <Windows.h>
 
 
 namespace tgon
 {
 
 
-class WindowsConsole;
-using ConsoleImpl = WindowsConsole;
-
-class TGON_API WindowsConsole : 
-	public IConsole
+class TGON_API WindowsPlatformConsole : 
+	public APlatformConsole<WindowsPlatformConsole>
 {
-	/*
-		Commands
-	*/
+	friend APlatformConsole<WindowsPlatformConsole>;
+
+	// 
+	// Gets
+	// 
 public:
-	//
-	// @note Write char* string to console.
-	// @param str String that you want to write to console
-	//
-	virtual void Write( /*In*/ const char* str ) override;
-
-	//
-	// @note Write wchar_t* string to console.
-	// @param str String that you want to write to console
-	//
-	virtual void Write( /*In*/ const wchar_t* str ) override;
-
-
 	/*
-		Ctor/Dtor
+	 * @note	Singleton interface for this class
+	 * @return	Return instance reference of this class
 	*/
+	static WindowsPlatformConsole& Get( )
+	{
+		static WindowsPlatformConsole instance;
+		return instance;
+	}
+
+	// 
+	// Internal works
+	// 
+private:
+	/*
+	 * @note			Write string to console.
+	 * @param	str		String which you want to write to console
+	*/
+	void WriteImpl( /*In*/ const char* str );
+	void WriteImpl( /*In*/ const wchar_t* str );
+
+	// 
+	// Ctor/Dtor
+	// 
 protected:
-	WindowsConsole( );
+	WindowsPlatformConsole( );
+	virtual ~WindowsPlatformConsole( );
 
-	WindowsConsole( /*In*/ const WindowsConsole& ) = delete;
+	// 
+	// Operators
+	// 
+	WindowsPlatformConsole& operator=( /*In*/ const WindowsPlatformConsole& ) = delete;
 
-	virtual ~WindowsConsole( );
-
-
-	/*
-		Operators
-	*/
-	WindowsConsole& operator=( /*In*/ const WindowsConsole& ) = delete;
-
-
-	/*
-		Internal works
-	*/
+	// 
+	// Internal works
+	// 
 private:
 	void SetupConsole( );
 
-
-	/*
-		Private variables
-	*/
+	// 
+	// Private variables
+	// 
 private:
 	HANDLE m_outputHandle;
 };
+
+
+using TPlatformConsole = WindowsPlatformConsole;
 
 
 } /*namespace tgon*/

@@ -10,6 +10,7 @@
 #include "../OSAL/PlatformInclude.h"
 
 #include <cstdint>
+#include <boost/config/suffix.hpp>
 
 
 namespace tgon
@@ -38,7 +39,8 @@ struct LocalTime
 	DayOfWeek dayOfWeek;
 };
 
-class TGON_API AbstractTime
+template <typename DerivedTy>
+class TGON_API APlatformTime
 {
 	//
 	//	Commands
@@ -47,8 +49,8 @@ public:
 	/* @return Return execution time of OS as millisecond */
 	static uint32_t GetBootTime( ) {}
 	
-	/* @@return Return current application's execution time as millisecond */
-	static uint32_t GetAppExecTime( );
+	/* @return Return this process's execution time as millisecond */
+	static uint32_t GetAppExecutionTime( );
 
 	/* @return Return execution time of OS as millisecond */
 	static uint64_t GetBootTime64( ) {}
@@ -66,8 +68,8 @@ public:
 	// Ctor/Dtor
 	// 
 public:
-	AbstractTime( ) = delete;
-	virtual ~AbstractTime( ) = delete;
+	APlatformTime( ) = delete;
+	virtual ~APlatformTime( ) = delete;
 
 	//
 	// Private variables
@@ -78,3 +80,6 @@ private:
 
 
 } /*namespace tgon*/
+
+
+#include "APlatformTime.inl"

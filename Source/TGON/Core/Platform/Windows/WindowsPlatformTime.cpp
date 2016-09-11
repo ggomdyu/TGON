@@ -6,7 +6,7 @@ namespace tgon
 {
 
 
-LocalTime WindowsTime::GetLocalTime( )
+LocalTime WindowsPlatformTime::GetLocalTime( )
 {
 	SYSTEMTIME prevSysTime;
 	::GetLocalTime( &prevSysTime );

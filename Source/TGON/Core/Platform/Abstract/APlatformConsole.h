@@ -10,14 +10,15 @@
 #include "../OSAL/PlatformInclude.h"
 
 #include <boost/noncopyable.hpp>
+#include <memory>
 
 
 namespace tgon
 {
 
 
-// todo: Use CRTP
-class TGON_API IConsole : 
+template <typename DerivedTy>
+class TGON_API APlatformConsole : 
 	private boost::noncopyable
 {
 	//
@@ -25,25 +26,44 @@ class TGON_API IConsole :
 	//
 public:
 	/*
-	 * @note Write char* string to console.
-	 * @param str String that you want to write to console
+	 * @note		Write string to console.
+	 * @param	str	String which you want to write to console
 	*/
-	virtual void Write( /*In*/ const char* str ) = 0;
+	void Write( /*In*/ const char* str, ... );
+	void Write( /*In*/ const wchar_t* str, ... );
 
 	/*
-	 * @note Write wchar_t* string to console.
-	 * @param str String that you want to write to console
+	* @note			Write string to console and jump to next line.
+	* @param	str	String which you want to write to console
 	*/
-	virtual void Write( /*In*/ const wchar_t* str ) = 0;
+	void WriteLine( const char* str, ... );		
+	void WriteLine( const wchar_t* str, ... );
 
-	/*
-		Ctor/Dtor
-	*/
+	//
+	// Internal works
+	//
+private:
+	void WriteImpl( const char* str );
+	void WriteImpl( const wchar_t* str );
+
+	// 
+	// Ctor/Dtor
+	// 
 protected:
-	IConsole( ) = default;
-	
-	virtual ~IConsole( ) = default;
+	APlatformConsole( ) = default;
+	virtual ~APlatformConsole( ) = default;
+
+	// 
+	// Private variables
+	//
+private:
+	enum { BUFFER_SIZE = 256 };
+	static std::unique_ptr<char[]> m_buffer;
+	static std::unique_ptr<wchar_t[]> m_wideBuffer;
 };
 
 
 } /*namespace tgon*/
+
+
+#include "APlatformConsole.inl"
