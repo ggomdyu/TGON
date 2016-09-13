@@ -102,7 +102,7 @@ private:
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 	/* @note Register WNDCLASSEX */
-	static bool RegisterClass( );
+	static bool RegisterDefWndClass( );
 };
 
 using TApplication = WindowsPlatformApplication;
