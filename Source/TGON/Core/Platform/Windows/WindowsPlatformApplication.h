@@ -101,8 +101,8 @@ private:
 	/* @note Static message procedure */
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
-	/* @note Register default WNDCLASSEX */
-	static bool RegisterDefaultWndClass( );
+	/* @note Register WNDCLASSEX */
+	static bool RegisterClass( );
 };
 
 using TApplication = WindowsPlatformApplication;
