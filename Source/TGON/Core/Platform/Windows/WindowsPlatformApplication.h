@@ -40,31 +40,31 @@ public:
 	 * @note Update all of message queue.
 	 * @return Return false if there is no event to pump out
 	*/
-	virtual bool PumpEvent( ) override;
+	static bool PumpEvent( ) override;
 
 	/*
 	 * @note Exit thread by force. This function is not recommended.
 	 * @param exitCode Pass exit code.
 	*/
-	virtual void ExitThread( int32_t exitCode ) override;
+	static void ExitThread( int32_t exitCode ) override;
 
 	/*
 	 * @note Quit application with passing exit code.
 	 * @param exitCode Pass exit code.
 	*/
-	virtual void Quit( int32_t exitCode ) override;
+	static void Quit( int32_t exitCode ) override;
 
 	/*
 	 * @note Toggle the full-screen.
 	 * @return Return true on success.
 	*/
-	virtual bool ToggleFullScreen( const class APlatformWindow& window ) override;
+	static bool ToggleFullScreen( const class APlatformWindow& window ) override;
 
 	/*
 	 * @note Enable show cursor mode: Hide or Show
 	 * @param enableShow True is show, false is hide.
 	*/
-	virtual void ShowCursor( bool enableShow );
+	static void ShowCursor( bool enableShow );
 
 
 	//
@@ -79,7 +79,7 @@ public:
 	 * @note Get the system power information. Desktop does not apply.
 	 * @return Return the property that described about system power.
 	*/
-	virtual BatteryProperty GetPowerInfo( ) const override;
+	static BatteryProperty GetPowerInfo( ) const override;
 
 	/*
 	 * @return Return the program application's instance handle.
@@ -90,8 +90,8 @@ public:
 	// Ctor/Dtor
 	// 
 public:
-	WindowsPlatformApplication( );
-	virtual ~WindowsPlatformApplication( ) = default;
+	WindowsPlatformApplication( ) = delete;
+	virtual ~WindowsPlatformApplication( ) = delete;
 
 
 	// 
@@ -102,10 +102,10 @@ private:
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 	/* @note Register default WNDCLASSEX */
-	bool RegisterDefaultWndClass( );
+	static bool RegisterDefaultWndClass( );
 };
 
-using ApplicationImpl = WindowsPlatformApplication;
+using TApplication = WindowsPlatformApplication;
 
 
 } /*namespace tgon*/
