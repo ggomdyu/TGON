@@ -14,7 +14,7 @@ const wchar_t* WindowsPlatformApplication::AppClassName = L"TGON";
 
 WindowsPlatformApplication::WindowsPlatformApplication( )
 {
-	RegisterClass( );
+	RegisterDefWndClass( );
 }
 
 bool WindowsPlatformApplication::PumpEvent( )
@@ -69,7 +69,7 @@ bool WindowsPlatformApplication::ToggleFullScreen( const APlatformWindow& window
 	//return ( ChangeDisplaySettingsEx( &dmScreenSettings, CDS_FULLSCREEN ) == DISP_CHANGE_SUCCESSFUL ) ? true : false;
 }
 
-bool WindowsPlatformApplication::RegisteClass( )
+bool WindowsPlatformApplication::RegisterDefWndClass( )
 {
 	WNDCLASSEXW wcex {};
 
