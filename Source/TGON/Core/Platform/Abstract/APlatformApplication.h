@@ -10,7 +10,6 @@
 #include "../OSAL/PlatformInclude.h"
 
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 
 namespace tgon 
@@ -23,8 +22,7 @@ struct BatteryProperty
 	uint16_t batteryLifePercent; // 0% ~ 100%
 };
 
-class TGON_API APlatformApplication :
-	private boost::noncopyable
+class TGON_API APlatformApplication
 {
 	// 
 	// Commands
@@ -34,31 +32,31 @@ public:
 	 * @note Update all of message queue.
 	 * @return Return false if there is no event to pump out
 	*/
-	virtual bool PumpEvent( ) = 0;
+	static bool PumpEvent( ) {}
 
 	/*
 	 * @note Exit thread by force. This function is not recommended.
 	 * @param exitCode Pass exit code.
 	*/
-	virtual void ExitThread( int32_t exitCode ) = 0;
+	static void ExitThread( int32_t exitCode ) {}
 
 	/*
 	 * @note Quit application with passing exit code.
 	 * @param exitCode Pass exit code.
 	*/
-	virtual void Quit( int32_t exitCode ) = 0;
+	static void Quit( int32_t exitCode ) {}
 
 	/*
 	 * @note Toggle the full-screen.
 	 * @return Return true on success.
 	*/
-	virtual bool ToggleFullScreen( const class APlatformWindow& ) { return false; }
+	static bool ToggleFullScreen( const class APlatformWindow& ) { return false; }
 
 	/*
 	 * @note Enable show cursor mode: Hide or Show
 	 * @param enableShow True is show, false is hide.
 	*/
-	virtual void ShowCursor( bool enableShow ) {};
+	static void ShowCursor( bool enableShow ) {}
 
 	// 
 	// Gets
@@ -67,15 +65,15 @@ public:
 	 * @note Get the system power information. Desktop does not apply.
 	 * @return Return the property that described about system power.
 	*/
-	virtual BatteryProperty GetPowerInfo( ) const = 0;
+	static BatteryProperty GetPowerInfo( ) const {}
 
 	// 
 	// Ctor/Dtor
 	// 
 public:
-	APlatformApplication( ) = default;
+	APlatformApplication( ) = delete;
 
-	virtual ~APlatformApplication( ) = default;
+	virtual ~APlatformApplication( ) = delete;
 
 };
 
