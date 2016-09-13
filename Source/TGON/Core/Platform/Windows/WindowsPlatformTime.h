@@ -45,27 +45,13 @@ public:
 public:
 	WindowsPlatformTime( ) = delete;
 	virtual ~WindowsPlatformTime( ) = delete;
-
 };
 
 
 using TPlatformTime = WindowsPlatformTime;
 
 
-inline uint32_t WindowsPlatformTime::GetBootTime( )
-{
-	return GetTickCount( );
-}
-
- uint64_t WindowsPlatformTime::GetBootTime64( )
-{
-	return GetTickCount64( );
-}
-
-inline void WindowsPlatformTime::Sleep( unsigned int milliSec )
-{
-	::Sleep( milliSec );
-}
-
-
 } /*namespace tgon*/
+
+
+#include "WindowsPlatformTime.inl"
