@@ -42,7 +42,7 @@ public:
 
 	/*
 	 * @note	Called when window has begun closing.
-	 * @return	If you want to keep close, return true.
+	 * @return	Return true if you want to keep close.
 	*/
 	virtual bool OnDestroy( ) { return true; }
 

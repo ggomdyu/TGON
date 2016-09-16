@@ -66,7 +66,6 @@ class UnknownGreeting;
 typedef void (UnknownGreeting::*UnknownExecute) (int n);
 
 
-#include <tgLib/Include/auto_cast.h>
 
 template<typename RetTy, typename... Args>
 class TDelegate

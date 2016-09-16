@@ -9,6 +9,8 @@
 #pragma once
 #include "APlatformTime.h"
 
+#include <boost/config/suffix.hpp>
+
 
 namespace tgon
 {

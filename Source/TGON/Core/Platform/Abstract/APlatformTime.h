@@ -10,7 +10,6 @@
 #include "../OSAL/PlatformInclude.h"
 
 #include <cstdint>
-#include <boost/config/suffix.hpp>
 
 
 namespace tgon

@@ -30,7 +30,7 @@ inline void APlatformConsole<DerivedTy>::Write( const char* str, ... )
 	vsprintf_s( m_buffer.get( ), BUFFER_SIZE, str, vaList );
 	
 	// And finally output
-	this->WriteImpl( m_buffer.get( ));
+	DerivedTy::WriteImpl( m_buffer.get( ));
 }
 
 template<typename DerivedTy>
@@ -43,7 +43,7 @@ inline void APlatformConsole<DerivedTy>::Write( const wchar_t* str, ... )
 	vswprintf_s( m_wideBuffer.get( ), BUFFER_SIZE, str, vaList );
 	
 	// And finally output
-	this->WriteImpl( m_wideBuffer.get( ));
+	DerivedTy::WriteImpl( m_wideBuffer.get( ));
 }
 
 template<typename DerivedTy>
@@ -56,8 +56,8 @@ inline void APlatformConsole<DerivedTy>::WriteLine( const char* str, ... )
 	vsprintf_s( m_buffer.get( ), BUFFER_SIZE, str, vaList );
 	
 	// And finally output
-	this->WriteImpl( m_buffer.get( ));
-	this->WriteImpl( "\n" );
+	DerivedTy::WriteImpl( m_buffer.get( ));
+	DerivedTy::WriteImpl( "\n" );
 }
 
 template<typename DerivedTy>
@@ -70,20 +70,8 @@ inline void APlatformConsole<DerivedTy>::WriteLine( const wchar_t* str, ... )
 	vswprintf_s( m_wideBuffer.get( ), BUFFER_SIZE, str, vaList );
 	
 	// And finally output
-	this->WriteImpl( m_wideBuffer.get( ));
-	this->WriteImpl( "\n" );
-}
-
-template<typename DerivedTy>
-inline void APlatformConsole<DerivedTy>::WriteImpl( const char* str )
-{
-	static_cast<DerivedTy*>( this )->WriteImpl( str );
-}
-
-template<typename DerivedTy>
-inline void APlatformConsole<DerivedTy>::WriteImpl( const wchar_t* str )
-{
-	static_cast<DerivedTy*>( this )->WriteImpl( str );
+	DerivedTy::WriteImpl( m_wideBuffer.get( ));
+	DerivedTy::WriteImpl( "\n" );
 }
 
 

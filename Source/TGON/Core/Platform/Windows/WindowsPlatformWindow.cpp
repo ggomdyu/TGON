@@ -23,12 +23,15 @@ WindowsPlatformWindow::WindowsPlatformWindow( const WindowStyle& wndStyle ) :
 	   WindowsPlatformApplication::AppClassName, 
 	   WindowsPlatformApplication::InstanceHandle ))
 {
+	DragAcceptFiles( m_wndHandle, true );
+
 	// Initialization After window created ( Which needs a created window )
 	this->AdditionalInit( wndStyle );
 }
 
 WindowsPlatformWindow::~WindowsPlatformWindow( )
 {
+	this->Release( );
 	DestroyWindow( m_wndHandle );
 }
 
@@ -117,7 +120,6 @@ void WindowsPlatformWindow::EnableGlobalMouseFocus( bool isEnable )
 
 void WindowsPlatformWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
 {
-	// RECT contains caption range
 	RECT rt;
 	GetWindowRect( this->GetWindowHandle( ), &rt );
 
@@ -127,7 +129,6 @@ void WindowsPlatformWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y 
 
 void WindowsPlatformWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const 
 {
-	// RECT contains caption range
 	RECT rt;
 	GetClientRect( m_wndHandle, &rt );
 
@@ -135,15 +136,55 @@ void WindowsPlatformWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* he
 	*height = rt.bottom;
 }
 
-void WindowsPlatformWindow::GetCaption( /*Out*/ wchar_t* caption ) const
+void WindowsPlatformWindow::GetCaptionText( /*Out*/ wchar_t* dest ) const
 {
-	const int32_t length = GetWindowTextLengthW( m_wndHandle );
-	GetWindowTextW( m_wndHandle, caption, length );
+	int32_t length = GetWindowTextLengthW( m_wndHandle );
+	GetWindowTextW( m_wndHandle, dest, length );
 }
 
 HWND WindowsPlatformWindow::GetWindowHandle( ) const
 {
 	return m_wndHandle;
+}
+
+STDMETHODIMP WindowsPlatformWindow::QueryInterface( REFIID riid, void** ppvObject )
+{
+	if ( riid == IID_IUnknown || riid == IID_IDropTarget )
+	{
+		*ppvObject = static_cast<IUnknown*>( this );
+		this->AddRef( );
+		return S_OK;
+	}
+	else
+	{
+		*ppvObject = NULL;
+		return E_NOINTERFACE;
+	}
+}
+
+STDMETHODIMP_( ULONG ) WindowsPlatformWindow::AddRef( )
+{
+	return ++m_refCount;
+}
+
+STDMETHODIMP_( ULONG ) WindowsPlatformWindow::Release( )
+{
+	if ( --m_refCount == 0 )
+	{
+		delete this;
+		return 0;
+	}
+	return m_refCount;
+}
+
+STDMETHODIMP WindowsPlatformWindow::DragEnter( LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+{
+	return E_NOTIMPL;
+}
+
+STDMETHODIMP WindowsPlatformWindow::DragOver( DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+{
+	return E_NOTIMPL;
 }
 
 void WindowsPlatformWindow::Show( )
@@ -186,7 +227,17 @@ void WindowsPlatformWindow::SetCaption( const wchar_t* caption )
 	SetWindowTextW( m_wndHandle, caption );
 }
 
-void WindowsPlatformWindow::AdditionalInit( const WindowStyle& wndStyle ) 
+HRESULT WindowsPlatformWindow::DragLeave( )
+{
+	return S_OK;
+}
+
+STDMETHODIMP WindowsPlatformWindow::Drop( LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+{
+	return E_NOTIMPL;
+}
+
+void WindowsPlatformWindow::AdditionalInit( const WindowStyle& wndStyle )
 {
 	// Save this class pointer to storage.
 	// Then accessible this class even static function.

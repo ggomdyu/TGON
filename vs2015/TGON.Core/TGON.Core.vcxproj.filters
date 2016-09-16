@@ -125,6 +125,7 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\Type.cpp">
       <Filter>Sources\cpp\Object</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -257,6 +258,15 @@
   <ItemGroup>
     <None Include="..\..\Source\TGON\Core\Math\Mathf.inl">
       <Filter>Sources\hpp\Math</Filter>
+    </None>
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl">
+      <Filter>Sources\hpp\Platform\Abstract</Filter>
+    </None>
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl">
+      <Filter>Sources\hpp\Platform\Abstract</Filter>
+    </None>
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl">
+      <Filter>Sources\hpp\Platform\Abstract</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -33,7 +33,7 @@ public:
 	// 
 public:
 	/*
-	 * @param	xmlPath	full path of XML file
+	 * @param	xmlPath	Full path of XML file
 	 * @return	Return	WindowStyle which read from xml 
 	*/
 	static WindowStyle LoadFromXML( const char* xmlPath );
@@ -86,14 +86,6 @@ public:
 	
 	/* @note	If true, then show window immediately when it was created, else */
 	bool showImmediately = true;
-
-
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	WindowStyle( ) = default;
-	~WindowStyle( ) = default;
 };
 
 class TGON_API APlatformWindow : 
@@ -134,7 +126,7 @@ public:
 	// 
 	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const {}
 	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const {}
-	virtual void GetCaption( /*Out*/ wchar_t* caption ) const {}
+	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const {}
 	bool IsEnabledGlobalInputFocus( ) const;
 	bool IsClosed( ) const;
 

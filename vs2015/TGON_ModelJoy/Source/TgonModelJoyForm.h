@@ -1,5 +1,7 @@
 #pragma once
 #include <Platform/TApplication.h>
+#include <Platform/OSAL/PlatformTime.h>
+#include <Platform/OSAL/PlatformConsole.h>
 #include <Engine/GameApplication.h>
 #include <Engine/CoreEvents.h>
 #include <Core/Template/Cast.h>
@@ -10,9 +12,9 @@ class EngineWindowEventHandler :
 	public AWindowEventHandler
 {
 public:
-	/*
-		Event handlers
-	*/
+	// 
+	// Event handlers
+	// 
 	virtual bool OnDestroy( )
 	{
 		//TPlatformConsole::Get( ).WriteLine( "OnDestroy" );
@@ -32,9 +34,9 @@ public:
 		return false;
 	}
 
-	/*
-		Ctor/Dtor
-	*/
+	// 
+	// Ctor/Dtor
+	// 
 public:
 	EngineWindowEventHandler( ) = default;
 	virtual ~EngineWindowEventHandler( ) = default;
@@ -59,7 +61,10 @@ public:
 	{
 		this->SubscribeEvent<E_DESTROY>( &This::OnDestroy );
 		this->GetRootWindow( )->SetEventHandler( std::make_shared<EngineWindowEventHandler>( ));
+	}
 
+	virtual void Update( )
+	{
 	}
 
 	void OnBeginUpdate( )

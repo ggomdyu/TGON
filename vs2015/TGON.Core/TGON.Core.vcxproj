@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\EventObject.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Object\Object.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Object\Type.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
     <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp" />
@@ -95,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\TGON\Core\Math\Mathf.inl" />
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl" />
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl" />
+    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>

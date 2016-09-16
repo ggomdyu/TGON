@@ -2,26 +2,44 @@
 #include "WindowsPlatformConsole.h"
 
 
-namespace tgon
+namespace tgon {
+namespace {
+
+class WindowsPlatformConsoleHelper final
 {
+public:
+	//
+	// Gets
+	//
+	static WindowsPlatformConsoleHelper& Get( )
+	{
+		static WindowsPlatformConsoleHelper instance;
+		return instance;
+	}
 
+	HANDLE GetConsoleHandle( ) const
+	{
+		return m_outputHandle;
+	}
 
-WindowsPlatformConsole::WindowsPlatformConsole( )
+	//
+	// Ctor/Dtor
+	//
+private:
+	WindowsPlatformConsoleHelper( );
+public:
+	~WindowsPlatformConsoleHelper( );
+
+	//
+	// Private variables
+	//
+private:
+	HANDLE m_outputHandle;
+};
+
+WindowsPlatformConsoleHelper::WindowsPlatformConsoleHelper( )
 {
 #if defined ( _DEBUG ) || ( DEBUG )
-	this->SetupConsole( );
-#endif
-}
-
-WindowsPlatformConsole::~WindowsPlatformConsole( )
-{
-#if defined ( _DEBUG ) || ( DEBUG )
-	::FreeConsole( );
-#endif
-}
-
-void WindowsPlatformConsole::SetupConsole( )
-{
 	// GetConsoleWindow return handle if the console already created, else NULL.
 	if ( !::GetConsoleWindow( ))
 	{
@@ -37,14 +55,31 @@ void WindowsPlatformConsole::SetupConsole( )
 	}
 
 	// <GetStdHandle> must be invoked after AllocConsole.
-	const_cast<HANDLE>( m_outputHandle ) = ::GetStdHandle( STD_OUTPUT_HANDLE );
+	m_outputHandle = ::GetStdHandle( STD_OUTPUT_HANDLE );
+#endif
 }
 
-void WindowsPlatformConsole::WriteImpl( const char* str )
+WindowsPlatformConsoleHelper::~WindowsPlatformConsoleHelper( )
+{
+#if defined ( _DEBUG ) || ( DEBUG )
+	::FreeConsole( );
+#endif
+}
+
+
+} /*namespace*/
+} /*namespace tgon*/
+
+
+namespace tgon
+{
+
+
+void WindowsPlatformConsole::WriteImpl( /*IN*/ const char* str )
 {
 #if defined ( _DEBUG ) || ( DEBUG )
 	::WriteConsoleA(
-		m_outputHandle,
+		WindowsPlatformConsoleHelper::Get().GetConsoleHandle( ),
 		str,
 		std::strlen( str ),
 		nullptr,
@@ -53,11 +88,11 @@ void WindowsPlatformConsole::WriteImpl( const char* str )
 #endif
 }
 
-void WindowsPlatformConsole::WriteImpl( const wchar_t* str )
+void WindowsPlatformConsole::WriteImpl( /*IN*/ const wchar_t* str )
 {
 #if defined ( _DEBUG ) || ( DEBUG )
 	::WriteConsoleW(
-		m_outputHandle,
+		WindowsPlatformConsoleHelper::Get( ).GetConsoleHandle( ),
 		str,
 		std::wcslen( str ),
 		nullptr,

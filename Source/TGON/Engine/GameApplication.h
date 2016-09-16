@@ -50,7 +50,7 @@ public:
 	//
 	// @note Update the frame
 	//
-	void Update( );
+	virtual void Update( );
 
 
 	/*

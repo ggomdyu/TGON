@@ -9,7 +9,6 @@
 #pragma once
 #include "../OSAL/PlatformInclude.h"
 
-#include <boost/noncopyable.hpp>
 #include <memory>
 
 
@@ -18,40 +17,32 @@ namespace tgon
 
 
 template <typename DerivedTy>
-class TGON_API APlatformConsole : 
-	private boost::noncopyable
+class TGON_API APlatformConsole
 {
 	//
 	// Commands
 	//
 public:
 	/*
-	 * @note		Write string to console.
-	 * @param	str	String which you want to write to console
+	 * @note			Write string to console.
+	 * @param	str		String which you want to write to console
 	*/
-	void Write( /*In*/ const char* str, ... );
-	void Write( /*In*/ const wchar_t* str, ... );
-
+	static void Write( /*In*/ const char* str, ... );
+	static void Write( /*In*/ const wchar_t* str, ... );
+	
 	/*
-	* @note			Write string to console and jump to next line.
-	* @param	str	String which you want to write to console
+	 * @note			Write string to console and jump to next line.
+	 * @param	str		String which you want to write to console
 	*/
-	void WriteLine( const char* str, ... );		
-	void WriteLine( const wchar_t* str, ... );
-
-	//
-	// Internal works
-	//
-private:
-	void WriteImpl( const char* str );
-	void WriteImpl( const wchar_t* str );
+	static void WriteLine( /*In*/ const char* str, ... );
+	static void WriteLine( /*In*/ const wchar_t* str, ... );
 
 	// 
 	// Ctor/Dtor
 	// 
 protected:
-	APlatformConsole( ) = default;
-	virtual ~APlatformConsole( ) = default;
+	APlatformConsole( ) = delete;
+	virtual ~APlatformConsole( ) = delete;
 
 	// 
 	// Private variables
