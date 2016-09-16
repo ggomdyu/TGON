@@ -40,31 +40,31 @@ public:
 	 * @note Update all of message queue.
 	 * @return Return false if there is no event to pump out
 	*/
-	static bool PumpEvent( );
+	virtual bool PumpEvent( ) override;
 
 	/*
 	 * @note Exit thread by force. This function is not recommended.
 	 * @param exitCode Pass exit code.
 	*/
-	static void ExitThread( int32_t exitCode );
+	virtual void ExitThread( int32_t exitCode ) override;
 
 	/*
 	 * @note Quit application with passing exit code.
 	 * @param exitCode Pass exit code.
 	*/
-	static void Quit( int32_t exitCode );
+	virtual void Quit( int32_t exitCode ) override;
 
 	/*
 	 * @note Toggle the full-screen.
 	 * @return Return true on success.
 	*/
-	static bool ToggleFullScreen( const class APlatformWindow& window );
+	virtual bool ToggleFullScreen( const class APlatformWindow& window ) override;
 
 	/*
 	 * @note Enable show cursor mode: Hide or Show
 	 * @param enableShow True is show, false is hide.
 	*/
-	static void ShowCursor( bool enableShow );
+	virtual void ShowCursor( bool enableShow );
 
 
 	//
@@ -79,7 +79,7 @@ public:
 	 * @note Get the system power information. Desktop does not apply.
 	 * @return Return the property that described about system power.
 	*/
-	static BatteryProperty GetPowerInfo( );
+	virtual BatteryProperty GetPowerInfo( ) const override;
 
 	/*
 	 * @return Return the program application's instance handle.
@@ -90,8 +90,8 @@ public:
 	// Ctor/Dtor
 	// 
 public:
-	WindowsPlatformApplication( ) = delete;
-	virtual ~WindowsPlatformApplication( ) = delete;
+	WindowsPlatformApplication( );
+	virtual ~WindowsPlatformApplication( ) = default;
 
 
 	// 
@@ -102,7 +102,7 @@ private:
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 	/* @note Register default WNDCLASSEX */
-	static bool RegisterDefaultWndClass( );
+	bool RegisterDefaultWndClass( );
 };
 
 using ApplicationImpl = WindowsPlatformApplication;
