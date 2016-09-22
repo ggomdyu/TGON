@@ -1,10 +1,11 @@
 #pragma once
-#include <Platform/TApplication.h>
+#include <Platform/OSAL/PlatformApplication.h>
 #include <Platform/OSAL/PlatformTime.h>
 #include <Platform/OSAL/PlatformConsole.h>
 #include <Engine/GameApplication.h>
 #include <Engine/CoreEvents.h>
 #include <Core/Template/Cast.h>
+
 
 using namespace tgon;
 
@@ -17,6 +18,7 @@ public:
 	// 
 	virtual bool OnDestroy( )
 	{
+
 		//TPlatformConsole::Get( ).WriteLine( "OnDestroy" );
 		return MessageBox( NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO ) == IDYES;
 	}

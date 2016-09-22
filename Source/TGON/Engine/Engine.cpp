@@ -3,7 +3,7 @@
 
 #include "GameApplication.h"
 #include "../Core/Platform/Abstract/APlatformWindowEventHandler.h"
-#include "../Core/Platform/TApplication.h"
+#include "../Core/Platform/OSAL/PlatformApplication.h"
 #include "Module/InputModule.h"
 #include "CoreEvents.h"
 

@@ -101,9 +101,6 @@
     <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.cpp">
       <Filter>Sources\hpp\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp">
-      <Filter>Sources\hpp\Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">
       <Filter>Sources\hpp\Platform\Windows\Misc</Filter>
     </ClCompile>
@@ -125,7 +122,9 @@
     <ClCompile Include="..\..\Source\TGON\Core\Object\Type.cpp">
       <Filter>Sources\cpp\Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp">
+      <Filter>Sources\hpp\Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\TGON\PrecompiledHeader.h">
@@ -263,9 +262,6 @@
       <Filter>Sources\hpp\Platform\Abstract</Filter>
     </None>
     <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl">
-      <Filter>Sources\hpp\Platform\Abstract</Filter>
-    </None>
-    <None Include="..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl">
       <Filter>Sources\hpp\Platform\Abstract</Filter>
     </None>
   </ItemGroup>

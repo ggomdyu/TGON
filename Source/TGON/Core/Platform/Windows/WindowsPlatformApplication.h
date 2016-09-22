@@ -74,7 +74,13 @@ public:
 
 	// 
 	// Gets
-	// 
+	//
+	static WindowsPlatformApplication& Get( )
+	{
+		static WindowsPlatformApplication instance;
+		return instance;
+	}
+
 	/*
 	 * @note Get the system power information. Desktop does not apply.
 	 * @return Return the property that described about system power.
@@ -102,10 +108,10 @@ private:
 	static LRESULT WINAPI MessageProc( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
 	/* @note Register default WNDCLASSEX */
-	bool RegisterDefaultWndClass( );
+	bool RegisterDefWndClass( );
 };
 
-using ApplicationImpl = WindowsPlatformApplication;
+using TApplication = WindowsPlatformApplication;
 
 
 } /*namespace tgon*/

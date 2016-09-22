@@ -1,12 +1,11 @@
 #include "PrecompiledHeader.h"
 #include "../TMain.h"
-#include "../TApplication.h"
 
 #include <Windows.h>
 #include <crtdbg.h>
 
 
-#ifdef _DEBUG
+#ifndef NDEBUG
 	#define _CRTDBG_MAP_ALLOC
 	#define new new ( _NORMAL_BLOCK, __FILE__, __LINE__ )
 #endif
@@ -21,7 +20,7 @@ int32_t WINAPI WinMain(
 	LPSTR commandLine,
 	int32_t commandShow )
 {
-#ifdef _DEBUG
+#ifndef NDEBUG
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 

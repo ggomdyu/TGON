@@ -7,10 +7,10 @@ namespace {
 
 class WindowsPlatformConsoleHelper final
 {
-public:
 	//
 	// Gets
 	//
+public:
 	static WindowsPlatformConsoleHelper& Get( )
 	{
 		static WindowsPlatformConsoleHelper instance;
@@ -39,8 +39,8 @@ private:
 
 WindowsPlatformConsoleHelper::WindowsPlatformConsoleHelper( )
 {
-#if defined ( _DEBUG ) || ( DEBUG )
-	// GetConsoleWindow return handle if the console already created, else NULL.
+#ifndef NDEBUG
+	// If console already created, GetConsoleWindow return NULL.
 	if ( !::GetConsoleWindow( ))
 	{
 		if ( ::AllocConsole( ) == FALSE )
@@ -54,14 +54,14 @@ WindowsPlatformConsoleHelper::WindowsPlatformConsoleHelper( )
 		}
 	}
 
-	// <GetStdHandle> must be invoked after AllocConsole.
+	// GetStdHandle must be invoked after created console by AllocConsole!
 	m_outputHandle = ::GetStdHandle( STD_OUTPUT_HANDLE );
 #endif
 }
 
 WindowsPlatformConsoleHelper::~WindowsPlatformConsoleHelper( )
 {
-#if defined ( _DEBUG ) || ( DEBUG )
+#ifndef NDEBUG
 	::FreeConsole( );
 #endif
 }
@@ -77,7 +77,7 @@ namespace tgon
 
 void WindowsPlatformConsole::WriteImpl( /*IN*/ const char* str )
 {
-#if defined ( _DEBUG ) || ( DEBUG )
+#ifndef NDEBUG
 	::WriteConsoleA(
 		WindowsPlatformConsoleHelper::Get().GetConsoleHandle( ),
 		str,
@@ -90,7 +90,7 @@ void WindowsPlatformConsole::WriteImpl( /*IN*/ const char* str )
 
 void WindowsPlatformConsole::WriteImpl( /*IN*/ const wchar_t* str )
 {
-#if defined ( _DEBUG ) || ( DEBUG )
+#ifndef NDEBUG
 	::WriteConsoleW(
 		WindowsPlatformConsoleHelper::Get( ).GetConsoleHandle( ),
 		str,

@@ -1,11 +1,3 @@
-/*
-* Author : Cha Junho
-* Date : 03/23/2016
-* Latest author :
-* Latest date :
-*/
-
-
 #pragma once
 #include "APlatformConsole.h"
 
