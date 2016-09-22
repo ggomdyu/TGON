@@ -14,12 +14,10 @@
 #include <unordered_map>
 
 
-//
-// Generate event type.
-//
-// @param eventName (Ex): E_DESTROY, E_UPDATE, etc
-// @param ... The parameters what event will aceept in event handler
-//
+/*
+ * @note			Generate event type.
+ * @param	eventName	e.g. E_DESTROY, E_UPDATE, etc
+*/
 #define TGON_GENERATE_EVENT( eventName, ... )\
 struct eventName : public tgon::Object\
 {\
@@ -50,13 +48,10 @@ namespace details {\
 
 
 namespace tgon
+{ namespace details
 {
 
-
-namespace details
-{
-
-// Check Event Handler function has correct arguments type and number
+/* Check Event Handler function has correct arguments type and number */
 template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
 class SubscribeEventAssert
 {
@@ -98,7 +93,6 @@ private:
 
 	/* @note This make fast to find observer list by owner pointer. */
 	using EventObserverRepo = std::unordered_map<EventObject*, /*std::vector<*/EventObserver*>;
-
 	/* @note Observer owner has observer list about event. */
 	using EventObserverOwnerRepo = std::unordered_map<EventSubjectHash, EventObserverRepo>;
 
@@ -153,9 +147,8 @@ protected:
 	// 
 private:
 	void UnsubscribeEventImpl( uint32_t eventHash );
-
 	void SubscribeEventImpl( uint32_t eventHash, EventObserver* eventListener );
-
+	
 	template<typename ReceiverTy, typename... HandlerFuncArgs>
 	void NotifyEventImpl( uint32_t eventHash, HandlerFuncArgs... eventArgs );
 
