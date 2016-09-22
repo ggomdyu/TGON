@@ -26,13 +26,6 @@ public:
 	using This = Object;
 
 	// 
-	// Ctor/Dtor
-	// 
-public:
-	Object( );
-	virtual ~Object( ) = 0;
-
-	// 
 	// Opeators
 	// 
 	bool operator==( const Object& ) const;
@@ -50,7 +43,6 @@ public:
 	*/
 	virtual bool Equals( const Object& rhs ) const;
 
-	//
 	/* @note Compare two instance.
 	 * @param lhs Left handling side
 	 * @param rhs Right handling side
@@ -61,16 +53,18 @@ public:
 	// 
 	// Gets
 	// 
-	/*
-	 * @return Return dynamic bound type's hash code.
-	*/
+	/* @return Return dynamic bound type's hash code. */
 	virtual uint32_t GetHashCode( ) const = 0;
 	
-	/*
-	 * @return Return dynamic bound type's name.
-	*/
+	/* @return Return dynamic bound type's name. */
 	virtual const char* GetName( ) const = 0;
 
+	// 
+	// Ctor/Dtor
+	// 
+public:
+	Object( );
+	virtual ~Object( ) = 0;
 };
 
 
