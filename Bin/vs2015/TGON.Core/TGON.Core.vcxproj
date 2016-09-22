@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMath.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObject.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObserver.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Type.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformMain.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Random\Random.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\EngineContextObject.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\GameApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\InputModule.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TimeModule.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Mathf.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Matrix4x4.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Quaternion.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Vector3.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Object\EventObject.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Object\EventObserver.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Object\Object.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Object\Type.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Interface\IWindowEventHandler.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformFwd.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformInclude.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformMath.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformWindow.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\TMain.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\shared_comptr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\unique_comptr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformInclude.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Random\Random.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Template\Array.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Template\Cast.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Template\Enumerator.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\XML\TXMLReader.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\CoreEvents.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Engine.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\EngineContextObject.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\GameApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\InputModule.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TimeModule.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Typedef\KeyCode.h" />
+    <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\TGON\Core\Math\Mathf.inl" />
+    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl" />
+    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl" />
+    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl" />
+    <None Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\Thirdparty\OIS\Win32\OIS_vs2010.vcxproj">
+      <Project>{9cc704cb-4956-4479-bdec-57cbc03f700e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj">
+      <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TGON.Core</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>TGON</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TGON.Common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
+      <AdditionalOptions>/Zm400 %(AdditionalOptions)</AdditionalOptions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>;</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

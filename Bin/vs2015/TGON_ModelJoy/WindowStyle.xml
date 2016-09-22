@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowStyle>
+
+    <Title>TGON_ModelJoy가나다라みみひ</Title>
+    
+    <Transform
+        x="0"
+        y="0"
+        width="600"
+        height="600">
+    </Transform>
+
+    <!--
+      <Style
+          Popup="0">
+      </Style>
+    -->
+  
+    <Function
+        FullScreen="0"
+        Resizeable="0"
+        Popup="0"
+        Maximized="0"
+        Minimized="0"
+        ShowTopOnCreated="0"
+        ShowMiddle="1"
+        TopMost="0"
+        ShowImmediately="1"
+        SupportWindowTransparency="0"
+        SupportPerPixelTransparency="0">
+    </Function>
+
+</WindowStyle>
