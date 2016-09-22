@@ -161,12 +161,7 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-/TGON_ModelJoy/include/boost_1_60_0/boost
-/TGON_ModelJoy/include/boost_1_60_0/boost
 *.db
 *.db
-/TGON_ModelJoy/lib
 *.opendb
-*.dll
-*.lib
 *.exp
