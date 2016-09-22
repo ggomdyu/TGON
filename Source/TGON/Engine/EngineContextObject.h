@@ -24,40 +24,34 @@ namespace tgon
 class EngineContextObject :
 	public EventObject
 {
-	/*
-		Generator
-	*/
+	// 
+	// Generator
+	// 
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( EngineContextObject, EventObject )
 
-
-	/*
-		Commands
-	*/
+	// 
+	// Commands
+	// 
 public:
-	//
-	// @param module
-	//
+	/* @param module */
 	void AddModule( const std::shared_ptr<IModule>& module );
 
+	// 
+	// Gets
+	// 
 	/*
-		Gets
+	 * @param ModuleTy Module type that inherited by IModule
+	 * @return Return registered module
 	*/
-	//
-	// @param ModuleTy Module type that inherited by IModule
-	// @return Return registered module
-	//
 	template <typename ModuleTy>
 	const std::shared_ptr<ModuleTy>& GetModule( ) const;
 
-
-	/*
-		Private variables
-	*/
+	// 
+	// Private variables
+	// 
 private:
-	//
-	// @note Use on finding module
-	//
+	/* @note Use on finding module */
 	static std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
 };
 

@@ -58,7 +58,7 @@ public:
 	 * @note Toggle the full-screen.
 	 * @return Return true on success.
 	*/
-	virtual bool ToggleFullScreen( const class APlatformWindow& window ) override;
+	virtual bool ToggleFullScreen( const class APlatformWindowFrame& window ) override;
 
 	/*
 	 * @note Enable show cursor mode: Hide or Show

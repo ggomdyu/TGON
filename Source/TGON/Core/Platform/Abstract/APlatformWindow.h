@@ -7,8 +7,8 @@
 
 
 #pragma once
-#include "../OSAL/PlatformInclude.h"
-#include "../Abstract/APlatformWindowEventHandler.h"
+#include "../PlatformInclude.h"
+#include "../Interface/IWindowEventHandler.h"
 
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -44,7 +44,6 @@ public:
 public:
 	/* @note	Set caption text of the window */
 	std::string title = "TGON-Default";
-
 	/* @note	Window transform */
 	int32_t x = 100;
 	int32_t y = 100;
@@ -53,20 +52,15 @@ public:
 
 	/* @note	If true, then do not make window frame. */
 	bool popup = false;
-
 	/* @note	If true, then show window as full-screen when it was created. */
 	bool fullScreen = false;
-
 	/* @note	If true, then enable window surface's transparency. */
 	bool supportWindowTransparency = false;
-	
 	/* @note	If true, then enable the window surface's perpixel transparency. */
 	bool supportPerPixelTransparency = false;
-	
 	/* @todo	Add comment */ 
 	bool showTopOnCreated = false;
-
-	/* @note	If true, then make resize frame to window. */
+	/* @note	If true, then make resizable frame to window. */
 	bool resizeable = true;
 	
 	/*
@@ -74,30 +68,26 @@ public:
 	 * @warn	This can cause race each other top-most window.
 	*/
 	bool topMost = false;
-
 	/* @note	If true, then set window maximized when it was created. */
 	bool maximized = false;
-	
 	/* @note	If true, then set window minimized when it was created. */
 	bool minimized = false;
-	
 	/* @note	If true, then set window position to middle of screen when it was created. */
 	bool showMiddle = true;
-	
 	/* @note	If true, then show window immediately when it was created, else */
 	bool showImmediately = true;
 };
 
-class TGON_API APlatformWindow : 
+class TGON_API APlatformWindowFrame : 
+	public IWindowEventHandler,
 	private boost::noncopyable
 {
 	// 
 	// Ctor/Dtor
 	// 
 protected:
-	APlatformWindow( );
-	virtual ~APlatformWindow( ) = 0;
-
+	APlatformWindowFrame( );
+	virtual ~APlatformWindowFrame( ) = 0;
 
 	// 
 	// Commands
@@ -119,7 +109,6 @@ public:
 	virtual void SetPosition( int32_t x, int32_t y ) {}
 	virtual void SetScale( int32_t width, int32_t height ) {}
 	virtual void SetCaption( /*In*/ const wchar_t* src ) {}
-	void SetEventHandler( /*In*/ const std::shared_ptr<AWindowEventHandler>& eventHandler );
 
 	// 
 	// Gets
@@ -131,32 +120,42 @@ public:
 	bool IsClosed( ) const;
 
 	//
-	// rotected variables
+	// Event handlers
+	//
+	virtual void OnMove( int32_t x, int32_t y ) override {}
+	virtual void OnResize( int32_t width, int32_t height ) override {}
+	virtual void OnMouseMove( int32_t x, int32_t y ) override {}
+	virtual void OnMouseDown( int32_t x, int32_t y, EMouseType mouseType ) override {}
+	virtual void OnMouseUp( int32_t x, int32_t y, EMouseType mouseType ) override {}
+	virtual void OnMouseDoubleClick( int32_t x, int32_t y, EMouseType mouseType ) override {}
+	virtual void OnRawMouseMove( int32_t x, int32_t y ) override {}
+	virtual void OnRawMouseDown( int32_t x, int32_t y, EMouseType mouseType ) override {}
+	virtual void OnRawMouseUp( int32_t x, int32_t y, EMouseType mouseType ) override {}
+	virtual bool OnGetFocus( ) override { return true; }
+	virtual bool OnLoseFocus( ) override { return true; }
+	virtual bool OnDestroy( ) override { return true; }
+
+	//
+	// Protected variables
 	//
 protected:
-	bool m_enabledGlobalMouseFocus;
 	bool m_closed;
+	bool m_enabledGlobalMouseFocus;
 	uint32_t m_backgroundColor;
-	std::shared_ptr<AWindowEventHandler> m_eventListener;
 };
 
 
-inline void APlatformWindow::EnableGlobalMouseFocus( bool isEnable )
+inline void APlatformWindowFrame::EnableGlobalMouseFocus( bool isEnable )
 {
 	m_enabledGlobalMouseFocus = isEnable;
 }
 
-inline void APlatformWindow::SetEventHandler( /*In*/ const std::shared_ptr<AWindowEventHandler>& eventListener )
-{
-	m_eventListener = eventListener;
-}
-
-inline bool APlatformWindow::IsEnabledGlobalInputFocus( ) const
+inline bool APlatformWindowFrame::IsEnabledGlobalInputFocus( ) const
 {
 	return m_enabledGlobalMouseFocus;
 }
 
-inline bool APlatformWindow::IsClosed( ) const
+inline bool APlatformWindowFrame::IsClosed( ) const
 {
 	return m_closed;
 }

@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../OSAL/PlatformInclude.h"
+#include "../PlatformInclude.h"
 
 #include <cstdint>
 #include <boost/noncopyable.hpp>
@@ -52,7 +52,7 @@ public:
 	 * @note Toggle the full-screen.
 	 * @return Return true on success.
 	*/
-	virtual bool ToggleFullScreen( const class APlatformWindow& ) { return false; }
+	virtual bool ToggleFullScreen( const class APlatformWindowFrame& ) { return false; }
 
 	/*
 	 * @note Enable show cursor mode: Hide or Show

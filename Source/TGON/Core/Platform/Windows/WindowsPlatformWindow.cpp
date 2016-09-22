@@ -3,7 +3,7 @@
 
 #include "WindowsPlatformWindowUtility.h"
 #include "WindowsPlatformInclude.h"
-#include "../OSAL/PlatformApplication.h"
+#include "../PlatformApplication.h"
 
 #include <Windows.h>
 #include <cassert>
@@ -269,16 +269,11 @@ void WindowsPlatformWindow::AdditionalInit( const WindowStyle& wndStyle )
 
 LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
 {
-	if ( !m_eventListener )
-	{
-		return DefWindowProc( wndHandle, msg, wParam, lParam );
-	}
-
 	switch ( msg )
 	{
 	case WM_SETFOCUS:
 		{
-			if ( !m_eventListener->OnGetFocus( ))
+			if ( !this->OnGetFocus( ))
 			{
 				// Ignore window focus
 				return 0;
@@ -288,7 +283,7 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_KILLFOCUS:
 		{
-			if ( !m_eventListener->OnLoseFocus( ))
+			if ( !this->OnLoseFocus( ))
 			{
 				// Ignore window focus
 				return -1;
@@ -298,7 +293,7 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_MOVE:
 		{
-			m_eventListener->OnMove(
+			this->OnMove(
 				static_cast<int32_t>( LOWORD( lParam )), 
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
@@ -307,7 +302,7 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_SIZE:
 		{
-			m_eventListener->OnResize(
+			this->OnResize(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam ))
 			);
@@ -316,7 +311,7 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_CLOSE:
 		{
-			if ( !m_eventListener->OnDestroy( ))
+			if ( !this->OnDestroy( ))
 			{
 				// Ignore window destroying process
 				return 0;
@@ -334,20 +329,20 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_LBUTTONDOWN:
 		{
-			m_eventListener->OnMouseDown(
+			this->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Left
+				EMouseType::Left
 			);
 		}
 		return 0;
 
 	case WM_LBUTTONUP:
 		{
-			m_eventListener->OnMouseUp(
+			this->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Left
+				EMouseType::Left
 			);
 			return 0;
 		}
@@ -355,10 +350,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_RBUTTONDOWN:
 		{
-			m_eventListener->OnMouseDown(
+			this->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Right
+				EMouseType::Right
 			);
 			return 0;
 		}
@@ -366,10 +361,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_RBUTTONUP:
 		{
-			m_eventListener->OnMouseUp(
+			this->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Right
+				EMouseType::Right
 			);
 			return 0;
 		}
@@ -377,10 +372,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_MBUTTONDOWN:
 		{
-			m_eventListener->OnMouseDown(
+			this->OnMouseDown(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Middle
+				EMouseType::Middle
 			);
 			return 0;
 		}
@@ -388,10 +383,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_MBUTTONUP:
 		{
-			m_eventListener->OnMouseUp(
+			this->OnMouseUp(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Middle
+				EMouseType::Middle
 			);
 			return 0;
 		}
@@ -399,10 +394,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_LBUTTONDBLCLK:
 		{
-			m_eventListener->OnMouseDoubleClick(
+			this->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Left
+				EMouseType::Left
 			);
 			return 0;
 		}
@@ -410,10 +405,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 		
 	case WM_RBUTTONDBLCLK:
 		{
-			m_eventListener->OnMouseDoubleClick(
+			this->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Right
+				EMouseType::Right
 			);
 			return 0;
 		}
@@ -421,10 +416,10 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_MBUTTONDBLCLK:
 		{
-			m_eventListener->OnMouseDoubleClick(
+			this->OnMouseDoubleClick(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam )),
-				MouseType::Middle
+				EMouseType::Middle
 			);
 			return 0;
 		}
@@ -432,7 +427,7 @@ LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM 
 
 	case WM_MOUSEMOVE:
 		{
-			m_eventListener->OnMouseMove(
+			this->OnMouseMove(
 				static_cast<int32_t>( LOWORD( lParam )),
 				static_cast<int32_t>( HIWORD( lParam ))
 			);

@@ -8,6 +8,10 @@
 #pragma once
 #include "Interface/IModule.h"
 
+#include <atomic>
+#include <thread>
+#include <mutex>
+#include <deque>
 
 namespace tgon
 {
@@ -73,17 +77,11 @@ private:
 */
 private:
 	bool m_isDestroying;
-
 	std::atomic_uint m_workingCount;
-
 	WorkPool m_workQueue;
-
 	ThreadPool m_threadQueue;
-
 	std::mutex m_mutex;
-
 	std::condition_variable m_waitCv;
-
 	std::condition_variable m_finishCv;
 };
 

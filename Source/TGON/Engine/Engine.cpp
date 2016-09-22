@@ -2,8 +2,7 @@
 #include "Engine.h"
 
 #include "GameApplication.h"
-#include "../Core/Platform/Abstract/APlatformWindowEventHandler.h"
-#include "../Core/Platform/OSAL/PlatformApplication.h"
+#include "../Core/Platform/PlatformApplication.h"
 #include "Module/InputModule.h"
 #include "CoreEvents.h"
 
@@ -49,7 +48,7 @@ int32_t Engine::Execute( int argc, char** argv )
 		{
 			this->FrameMoveModules( );
 
-			m_gameApplication->Update( );
+			m_gameApplication->OnUpdate( );
 		}
 	}
 	

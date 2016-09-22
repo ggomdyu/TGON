@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../Core/Platform/OSAL/PlatformInclude.h"
+#include "../../Platform/PlatformInclude.h"
 
 #include <boost/noncopyable.hpp>
 #include <cstdint>
@@ -20,35 +20,33 @@ namespace tgon
 class TGON_API AbstractScreen :
 	private boost::noncopyable
 {
-/*
-	Commands
-*/
+	// 
+	// Commands
+	// 
 
 
-/*
-	Sets
-*/
+	// 
+	// Sets
+	// 
 
 
-/*
-	Gets
-*/
-	// Get monitor's count.
+	// 
+	// Gets
+	// 
+	/* Get monitor's count. */
 	static int32_t GetMonitorCount( );
 
-	// Get main monitor's screen width.
+	/* Get main monitor's screen width. */
 	static int32_t GetMainWidth( );
 
-	// Get main monitor's screen height.
+	/* note	Get main monitor's screen height. */
 	static int32_t GetMainHeight( );
-
 	
-/*
-	Ctor/Dtor
-*/
+	// 
+	// Ctor/Dtor
+	// 
 public:
 	AbstractScreen( ) = delete;
-	
 	virtual ~AbstractScreen( ) = delete;
 
 };

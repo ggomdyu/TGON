@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "../Core/Platform/TMain.h"
 
-#include "../Core/Platform/OSAL/PlatformApplication.h"
+#include "../Core/Platform/PlatformApplication.h"
 #include "../Engine/Engine.h"
 
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <tinyxml2/tinyxml2.h>
+#include <tinyxml2.h>
 
 
 namespace tgon
@@ -8,69 +8,54 @@ namespace tgon
 
 class TXMLReader
 {
-	/*
-		Type definitions
-	*/
+	// 
+	// Type definitions
+	// 
 private:
 	using NodeRepoTy = std::vector<tinyxml2::XMLNode*>;
-
 	using iterator = NodeRepoTy::iterator;
 	using const_iterator = NodeRepoTy::const_iterator;
 
-
-	/*
-		Con/Destructor
-	*/
+	// 
+	// Con/Destructor
+	// 
 public:
-	//
-	// @note Load XML and analyze
-	// @param xmlPath XML path what you want to load
-	//
+	/*
+	 * @note Load XML and analyze
+	 * @param xmlPath XML path what you want to load
+	*/
 	explicit TXMLReader( const char* xmlPath );
-	
 	virtual ~TXMLReader( );
 
-
-	/*
-		Commands
-	*/
+	// 
+	// Commands
+	// 
 public:
 	void LoadXML( const char* xmlPath );
 
-
-	/*
-		Gets
-	*/
+	// 
+	// Gets
+	// 
 	bool Fail( ) const;
-	
 	tinyxml2::XMLError GetLastError( ) const;
-	
 	iterator begin( );
-
 	iterator end( );
-
 	const_iterator begin( ) const;
-
 	const_iterator end( ) const;
 
-
-	/*
-		Internal works
-	*/
+	// 
+	// Internal works
+	// 
 private:
 	void RecursiveLoadImpl( tinyxml2::XMLNode* );
 
-
-	/*
-		Private variables
-	*/
+	// 
+	// Private variables
+	// 
 private:
 	bool m_isFailed;
-
 	tinyxml2::XMLDocument m_xmlDocument;
-
 	NodeRepoTy m_readNodeRepo;
-
 	tinyxml2::XMLError m_lastError;
 };
 

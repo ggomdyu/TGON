@@ -19,7 +19,7 @@ void APlatformApplication::Quit( int32_t exitCode )
 {
 }
 
-bool APlatformApplication::ToggleFullScreen( const APlatformWindow & )
+bool APlatformApplication::ToggleFullScreen( const APlatformWindowFrame & )
 {
 	return false;
 }

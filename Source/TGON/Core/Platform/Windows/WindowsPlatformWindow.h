@@ -20,7 +20,7 @@ namespace tgon
 
 
 class TGON_API WindowsPlatformWindow : 
-	public APlatformWindow,
+	public APlatformWindowFrame,
 	public IDropTarget
 {
 	friend class WindowsPlatformApplication;

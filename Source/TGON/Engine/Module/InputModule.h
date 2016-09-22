@@ -18,7 +18,7 @@
 #include <OISJoyStick.h>
 #include <OISEvents.h>
 
-#include "../Core/Platform/OSAL/PlatformWindow.h"
+#include "../../Core/Platform//PlatformWindow.h"
 
 
 namespace tgon

@@ -47,7 +47,7 @@ BatteryProperty WindowsPlatformApplication::GetPowerInfo( ) const
 	return adapter;
 }
 
-bool WindowsPlatformApplication::ToggleFullScreen( const APlatformWindow& window )
+bool WindowsPlatformApplication::ToggleFullScreen( const APlatformWindowFrame& window )
 {
 	return false;
 

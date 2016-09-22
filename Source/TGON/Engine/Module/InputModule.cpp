@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 #include "InputModule.h"
 
-#include "../Core/Platform/OSAL/PlatformWindow.h"
+#include "../../Core/Platform/PlatformWindow.h"
 #include <string>
 
 

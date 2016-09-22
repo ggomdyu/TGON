@@ -1,10 +1,8 @@
 #include "PrecompiledHeader.h"
 #include "APlatformWindow.h"
 
-#include "APlatformWindowEventHandler.h"
-
 //////////////////TEMP///////////////////
-#include "../Core/XML/TXMLReader.h"
+#include "../../XML/TXMLReader.h"
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
 /////////////////////////////////////////
@@ -84,13 +82,12 @@ WindowStyle WindowStyle::LoadFromXML( const char* xmlPath )
 	return parsedWndStyle;
 }
 
-APlatformWindow::APlatformWindow( ) :
-	m_eventListener( new AWindowEventHandler ),
+APlatformWindowFrame::APlatformWindowFrame( ) :
 	m_closed( false )
 {
 }
 
-APlatformWindow::~APlatformWindow( )
+APlatformWindowFrame::~APlatformWindowFrame( )
 {
 	m_closed = true;
 }
