@@ -23,20 +23,30 @@ namespace tgon
 {
 
 
+
+
 class TGON_API GameApplication :
-	public EngineContextObject
+	public ModuleContext
 {
 	// 
 	// Generator
 	// 
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( GameApplication, EngineContextObject )
+	TGON_GENERATE_OBJECT_INTERFACE( GameApplication, ModuleContext )
 
 	// 
 	// Ctor/Dtor
 	// 
 public:
-	explicit GameApplication( const std::shared_ptr<TPlatformWindow>& windowFrame );
+	/* note Create default window, no custom event handler, by WindowStyle */
+	explicit GameApplication( const std::shared_ptr<TPlatformWindow>& window ) :
+		m_paused( false ),
+		m_rootWindow( window )
+	{
+	}
+
+	GameApplication( ) = default;
+	
 	virtual ~GameApplication( );
 
 	// 

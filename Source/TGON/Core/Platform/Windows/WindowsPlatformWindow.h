@@ -68,13 +68,12 @@ public:
 	// 
 	// Gets
 	// 
-	/* @return	Return position that contains non-client area */
 	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const override;
-	/* @return	Return window size that contains non-client area */
+	/* @return			Return window size that contains non-client area */
 	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const override;
 	/* @param	caption	Destination of caption text */
 	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const override;
-	/* @return	Return window's handle */
+	/* @return			Return handle of window */
 	HWND GetWindowHandle( ) const;
 
 	// 
@@ -88,7 +87,7 @@ private:
 	// Private variables
 	// 
 private:
-	HWND m_wndHandle;
+	const HWND m_wndHandle;
 	uint32_t m_refCount;
 };
 

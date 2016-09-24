@@ -25,7 +25,7 @@ WindowsPlatformWindow::WindowsPlatformWindow( const WindowStyle& wndStyle ) :
 {
 	DragAcceptFiles( m_wndHandle, true );
 
-	// Initialization After window created ( Which needs a created window )
+	// Setup Transparency support
 	this->AdditionalInit( wndStyle );
 }
 
@@ -57,7 +57,6 @@ void WindowsPlatformWindow::BringToFront( )
 {
 	// After Windows 98/Me: The system restricts which processes can set the foreground window.
 	// So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
-
 	DWORD currProcessId = GetWindowThreadProcessId( m_wndHandle, nullptr );
 	DWORD foregroundProcessId = GetWindowThreadProcessId( GetForegroundWindow( ), nullptr );
 	
@@ -84,7 +83,8 @@ void WindowsPlatformWindow::Flash( )
 
 void WindowsPlatformWindow::EnableGlobalMouseFocus( bool isEnable )
 {
-	assert( m_wndHandle && "tgon::WindowsPlatformWindow::EnableGlobalMouseFocus must be invoked after window created!" );
+	assert( m_wndHandle && 
+			"tgon::WindowsPlatformWindow::EnableGlobalMouseFocus must be invoked after window created!" );
 
 	m_enabledGlobalMouseFocus = isEnable;
 
@@ -127,7 +127,9 @@ void WindowsPlatformWindow::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y 
 	*y = rt.top;
 }
 
-void WindowsPlatformWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const 
+void WindowsPlatformWindow::GetSize( 
+	/*Out*/ int32_t* width, 
+	/*Out*/ int32_t* height ) const 
 {
 	RECT rt;
 	GetClientRect( m_wndHandle, &rt );
@@ -136,7 +138,8 @@ void WindowsPlatformWindow::GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* he
 	*height = rt.bottom;
 }
 
-void WindowsPlatformWindow::GetCaptionText( /*Out*/ wchar_t* dest ) const
+void WindowsPlatformWindow::GetCaptionText( 
+	/*Out*/ wchar_t* dest ) const
 {
 	int32_t length = GetWindowTextLengthW( m_wndHandle );
 	GetWindowTextW( m_wndHandle, dest, length );
@@ -147,7 +150,9 @@ HWND WindowsPlatformWindow::GetWindowHandle( ) const
 	return m_wndHandle;
 }
 
-STDMETHODIMP WindowsPlatformWindow::QueryInterface( REFIID riid, void** ppvObject )
+STDMETHODIMP WindowsPlatformWindow::QueryInterface( 
+	REFIID riid, 
+	void** ppvObject )
 {
 	if ( riid == IID_IUnknown || riid == IID_IDropTarget )
 	{
@@ -177,12 +182,19 @@ STDMETHODIMP_( ULONG ) WindowsPlatformWindow::Release( )
 	return m_refCount;
 }
 
-STDMETHODIMP WindowsPlatformWindow::DragEnter( LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+STDMETHODIMP WindowsPlatformWindow::DragEnter( 
+	LPDATAOBJECT pDataObj, 
+	DWORD grfKeyState, 
+	POINTL pt, 
+	LPDWORD pdwEffect )
 {
 	return E_NOTIMPL;
 }
 
-STDMETHODIMP WindowsPlatformWindow::DragOver( DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+STDMETHODIMP WindowsPlatformWindow::DragOver( 
+	DWORD grfKeyState, 
+	POINTL pt, 
+	LPDWORD pdwEffect )
 {
 	return E_NOTIMPL;
 }
@@ -212,17 +224,22 @@ void WindowsPlatformWindow::Quit( )
 	PostQuitMessage( 0 );
 }
 
-void WindowsPlatformWindow::SetPosition( int32_t x, int32_t y )
+void WindowsPlatformWindow::SetPosition( 
+	int32_t x, 
+	int32_t y )
 {
 	SetWindowPos( m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE );
 }
 
-void WindowsPlatformWindow::SetScale( int32_t width, int32_t height ) 
+void WindowsPlatformWindow::SetScale( 
+	int32_t width, 
+	int32_t height ) 
 {
 	SetWindowPos( m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE );
 }
 
-void WindowsPlatformWindow::SetCaption( const wchar_t* caption )
+void WindowsPlatformWindow::SetCaption( 
+	const wchar_t* caption )
 {
 	SetWindowTextW( m_wndHandle, caption );
 }
@@ -232,12 +249,17 @@ HRESULT WindowsPlatformWindow::DragLeave( )
 	return S_OK;
 }
 
-STDMETHODIMP WindowsPlatformWindow::Drop( LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect )
+STDMETHODIMP WindowsPlatformWindow::Drop( 
+	LPDATAOBJECT pDataObj, 
+	DWORD grfKeyState, 
+	POINTL pt, 
+	LPDWORD pdwEffect )
 {
 	return E_NOTIMPL;
 }
 
-void WindowsPlatformWindow::AdditionalInit( const WindowStyle& wndStyle )
+void WindowsPlatformWindow::AdditionalInit( 
+	const WindowStyle& wndStyle )
 {
 	// Save this class pointer to storage.
 	// Then accessible this class even static function.
@@ -267,7 +289,11 @@ void WindowsPlatformWindow::AdditionalInit( const WindowStyle& wndStyle )
 #endif
 }
 
-LRESULT WindowsPlatformWindow::ProcessMessage( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam )
+LRESULT WindowsPlatformWindow::ProcessMessage( 
+	HWND wndHandle, 
+	UINT msg, 
+	WPARAM wParam, 
+	LPARAM lParam )
 {
 	switch ( msg )
 	{

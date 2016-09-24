@@ -11,7 +11,9 @@
 #include "../Engine/Module/Interface/IModule.h"
 
 #include <memory>
+#include <algorithm>
 #include <map>
+#include <boost/variant.hpp>
 
 
 TGON_GENERATE_EVENT( E_MODULEADDED, tgon::IModule* )
@@ -21,21 +23,22 @@ namespace tgon
 {
 
 
-class EngineContextObject :
+/* Static method class */
+class ModuleContext :
 	public EventObject
 {
-	// 
-	// Generator
-	// 
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( EngineContextObject, EventObject )
-
 	// 
 	// Commands
 	// 
 public:
+	TGON_GENERATE_OBJECT_INTERFACE( ModuleContext, EventObject )
+
 	/* @param module */
-	void AddModule( const std::shared_ptr<IModule>& module );
+	static void AddModule( const std::shared_ptr<IModule>& module );
+
+	// 
+	// Sets
+	// 
 
 	// 
 	// Gets
@@ -45,7 +48,7 @@ public:
 	 * @return Return registered module
 	*/
 	template <typename ModuleTy>
-	const std::shared_ptr<ModuleTy>& GetModule( ) const;
+	static const std::shared_ptr<ModuleTy>& GetModule( );
 
 	// 
 	// Private variables
@@ -57,7 +60,7 @@ private:
 
 
 template<typename ModuleTy>
-inline const std::shared_ptr<ModuleTy>& EngineContextObject::GetModule( ) const
+inline const std::shared_ptr<ModuleTy>& ModuleContext::GetModule( )
 {
 	static_assert( std::is_convertible<ModuleTy*, IModule*>::value,
 		"ModuleTy must be intherited by IModule." );

@@ -58,6 +58,9 @@
     <Filter Include="Sources\Core\Platform\Interface">
       <UniqueIdentifier>{f6811dff-6489-4eda-9854-0e60ffe51b21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Core\Delegate">
+      <UniqueIdentifier>{4f41413f-9740-4917-bb42-93bbd83535b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\XML\TXMLReader.cpp">
@@ -304,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Interface\IWindowEventHandler.h">
       <Filter>Sources\Core\Platform\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Template\TypeTraits.h">
+      <Filter>Sources\Core\Template</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

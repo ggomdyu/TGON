@@ -2,7 +2,7 @@
 #include "EngineContextObject.h"
 
 
-void tgon::EngineContextObject::AddModule( const std::shared_ptr<IModule>& module )
+void tgon::ModuleContext::AddModule( const std::shared_ptr<IModule>& module )
 {
 	//std::lock_guard<std::mutex>( this->GetSystemMutex( ));
 
@@ -14,7 +14,7 @@ void tgon::EngineContextObject::AddModule( const std::shared_ptr<IModule>& modul
 		m_modules.insert({ module->GetHashCode( ), module });
 
 		// Notify module added event to all subscriber.
-		this->NotifyEvent<E_MODULEADDED, IModule*>( module.get( ));
+		//EventObject::NotifyEvent<E_MODULEADDED, IModule*>( module.get( ));
 	}
 	else
 	{

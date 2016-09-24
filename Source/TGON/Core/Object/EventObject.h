@@ -147,6 +147,7 @@ protected:
 	// 
 private:
 	void UnsubscribeEventImpl( uint32_t eventHash );
+	
 	void SubscribeEventImpl( uint32_t eventHash, EventObserver* eventListener );
 	
 	template<typename ReceiverTy, typename... HandlerFuncArgs>
@@ -164,7 +165,7 @@ template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
 inline void EventObject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
 {
 	// If event handler is not generated, then this code will output compile error.
-	// This code will be deleted in release mode.
+	// This code will be deleted in compile time.
 	details::SubscribeEventAssert<EventTy, ReceiverTy, HandlerFuncArgs...>::Assert( );
 
 	// And register listener info to table.
@@ -183,10 +184,10 @@ template<typename EventTy, typename... HandlerFuncArgs>
 inline void EventObject::NotifyEvent( HandlerFuncArgs... eventArgs )
 {
 	// If parameter is not passed correctly, this code will output compile error.
-	// This code will be deleted in release mode.
+	// This code will be deleted in compile time.
 	details::NotifyEventAssert<EventTy, HandlerFuncArgs...>::Assert( );
 
-	this->NotifyEventImpl<Dummy, HandlerFuncArgs...>( EventTy::GetType( ).GetHashCode( ), eventArgs... );
+	NotifyEventImpl<Dummy, HandlerFuncArgs...>( EventTy::GetType( ).GetHashCode( ), eventArgs... );
 }
 
 template<typename ReceiverTy, typename... HandlerFuncArgs>

@@ -91,6 +91,7 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\Array.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\Cast.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\Enumerator.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Template\TypeTraits.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\XML\TXMLReader.h" />
     <ClInclude Include="..\..\..\Source\TGON\Engine\CoreEvents.h" />
     <ClInclude Include="..\..\..\Source\TGON\Engine\Engine.h" />

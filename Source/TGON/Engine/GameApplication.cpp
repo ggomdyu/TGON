@@ -7,12 +7,6 @@
 namespace tgon {
 
 
-GameApplication::GameApplication( const std::shared_ptr<TPlatformWindow>& windowFrame ) :
-	m_paused( false ),
-	m_rootWindow( std::make_shared<TPlatformWindow>( ))
-{
-}
-
 GameApplication::~GameApplication( )
 {
 }

@@ -13,6 +13,8 @@ class MyCustomWindow :
 	public TPlatformWindow
 {
 public:
+	using TPlatformWindow::TPlatformWindow;
+
 	// 
 	// Event handlers
 	// 
@@ -33,6 +35,16 @@ public:
 
 };
 
+TGON_GENERATE_EVENT( E_FOO, int )
+
+
+
+
+template <typename... Args>
+void foo( Args&&... args )
+{
+	int n = 3;
+}
 
 class TGONSample :
 	public GameApplication
@@ -48,18 +60,28 @@ public:
 	// 
 public:
 	TGONSample( ) :
-		GameApplication( 
-			new MyCustomWindow( WindowStyle::LoadFromXML( "WindowStyle.xml" ))
-		)
+		GameApplication( MakeWindow<MyCustomWindow>( WindowStyle::DefaultStyle ))
 	{
-	}
+	};
 
 	virtual ~TGONSample( )
 	{
+	}
+
+	void OnFoo( )
+	{
 
 	}
 
-	virtual void Update( )
+	virtual void OnUpdate( ) override
+	{
+	}
+
+	virtual void OnRender( ) override
+	{
+	}
+
+	virtual void OnDestroy( ) override
 	{
 	}
 

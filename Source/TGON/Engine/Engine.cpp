@@ -31,24 +31,23 @@ void Engine::AddDefaultModulesToRepo( )
 
 int32_t Engine::Execute( int argc, char** argv )
 {
-	// Register event handler to window.
 	const std::shared_ptr<TPlatformWindow>& window = m_gameApplication->GetRootWindow( );
-	
-
-	// Loop for window event( =messsage )
-	while ( !window->IsClosed( ))
+	if ( window.get( ) )
 	{
-		// If engine was paused, then ignore update.
-		if ( m_gameApplication->IsPaused( ))
+		// Loop for window event( =messsage )
+		while ( !window->IsClosed( ))
 		{
-			continue;
-		}
-	
-		if ( !window->PumpEvent( ))
-		{
-			this->FrameMoveModules( );
+			// If engine was paused, then ignore update. -> Needs optimization
+			//if ( m_gameApplication->IsPaused( ))
+			//{
+			//	continue;
+			//}
 
-			m_gameApplication->OnUpdate( );
+			if ( !window->PumpEvent( ))
+			{
+				this->UpdateModules( );
+				m_gameApplication->OnUpdate( );
+			}
 		}
 	}
 	

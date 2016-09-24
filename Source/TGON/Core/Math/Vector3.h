@@ -71,6 +71,7 @@ public:
 	static float Angle( const Vector3& a, const Vector3& b );
 	static float Distance( const Vector3& a, const Vector3& b );
 	void Normalize( );
+	//Vector3 Normalized
 	void TransformCoord( const struct Matrix4x4& );
 	void TransformNormal( const struct Matrix4x4& );
 
