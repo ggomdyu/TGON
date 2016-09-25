@@ -8,29 +8,41 @@
 
 #pragma once
 
+/* Extension of type_traits header */
 
 namespace tgon
 {
 
+/* For Functions */
 template <typename>
-struct member_function_traits;
+struct function_traits;
 
-template <typename RetTy, typename ClassTy, typename... Args>
-struct member_function_traits<RetTy( ClassTy::* )( Args... )>
+template <typename RetTy, typename... Args>
+struct function_traits<RetTy( Args... )>
 {
+public:
 	using return_type = RetTy;
-	using class_type = ClassTy;
 	enum
 	{
 		argument_count = sizeof...( Args ),
 	};
+
+public:
+	function_traits<RetTy( Args... )>( ) = delete;
 };
 
-/* Simillar with std::result_of but more useful */
-template <typename T>
-struct result_of
+template <typename RetTy, typename... Args>
+struct function_traits<RetTy(*)( Args... )> :
+	public function_traits<RetTy( Args... )>
 {
-	using b = member_function_traits<T>;
 };
+
+template <typename RetTy, typename ClassTy, typename... Args>
+struct function_traits<RetTy( ClassTy::* )( Args... )> :
+	public function_traits<RetTy( Args... )>
+{
+	using class_type = ClassTy;
+};
+
 
 } /*namespace tgon*/
