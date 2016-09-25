@@ -8,7 +8,7 @@
 //
 //  SIMD
 //
-#define TGON_SUPPORT_SSE 1
+#define TGON_SUPPORT_SSE2 1
 #define TGON_SUPPORT_SIMD 1
 #include <intrin.h>
 
