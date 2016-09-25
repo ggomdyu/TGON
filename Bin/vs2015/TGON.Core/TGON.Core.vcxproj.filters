@@ -108,9 +108,6 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp">
       <Filter>Sources\Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMath.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Math\TVector3.cpp">
       <Filter>Sources\Core\Math</Filter>
     </ClCompile>
@@ -269,9 +266,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Mathf.h">
-      <Filter>Sources\Core\Math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\Vector3.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
@@ -311,6 +305,12 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\TypeTraits.h">
       <Filter>Sources\Core\Template</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Delegate\Delegate.h">
+      <Filter>Sources\Core\Delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\TMath.h">
+      <Filter>Sources\Core\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.inl">
@@ -324,9 +324,6 @@
     </None>
     <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl">
       <Filter>Sources\Core\Platform\Abstract</Filter>
-    </None>
-    <None Include="..\..\..\Source\TGON\Core\Math\Mathf.inl">
-      <Filter>Sources\Core\Math</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

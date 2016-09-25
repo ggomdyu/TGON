@@ -104,14 +104,9 @@ inline bool Object::ReferenceEquals( const Object& lhs, const Object& rhs )
 	\
 	virtual uint32_t GetHashCode( ) const override\
 	{\
-		return This::GetType( ).GetHashCode( );\
+		return GetType<This>().GetHashCode( );\
 	}\
 	virtual const char* GetName( ) const override\
 	{\
-		return This::GetType( ).GetName( ).c_str( );\
-	}\
-	static const tgon::Type& GetType( )\
-	{\
-		static const tgon::Type ret( #subclassType );\
-		return ret;\
+		return GetType<This>().GetName( ).c_str( );\
 	}

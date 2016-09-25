@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMath.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
@@ -50,7 +49,8 @@
     <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Math\Mathf.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Delegate\Delegate.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Math\TMath.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\Matrix4x4.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\Quaternion.h" />
@@ -105,7 +105,6 @@
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Source\TGON\Core\Math\Mathf.inl" />
     <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl" />
     <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl" />
     <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl" />

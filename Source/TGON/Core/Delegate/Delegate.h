@@ -1,13 +1,10 @@
-/*
-* Author : Cha Junho
-* Date : 09/25/2016
-* Latest author :
-* Latest date :
-*/
+//---------------------------------------------------------------------------------
+// Author : Cha Junho
+// Date : 09/25/2016
+//---------------------------------------------------------------------------------
 
 #pragma once
 #include <type_traits>
-
 #include "Core/Template/TypeTraits.h"
 
 /* 
@@ -32,15 +29,26 @@ class Delegate<RetTy( Args... )> final
 	// Con/Dtor
 	//
 public:
-	Delegate( ) noexcept;
-	Delegate( void* receiver, StubTy stub ) noexcept;
+	Delegate( ) noexcept :
+		m_receiver( nullptr ),
+		m_stub( nullptr )
+	{
+	}
+	Delegate( void* receiver, StubTy stub ) noexcept :
+		m_receiver( receiver ),
+		m_stub( stub )
+	{
+	}
 	Delegate( const Delegate& ) noexcept = default;
 	~Delegate( ) noexcept = default;
 
 	//
 	// Operators
 	//
-	RetTy operator()( Args&&... args );
+	RetTy operator()( Args&&... args )
+	{
+		return m_stub( m_receiver, std::forward<Args>( args )... );
+	}
 
 	//
 	// Commands
@@ -49,14 +57,20 @@ public:
 		RetTy( ReceiverTy::*Handler )( Args... ),
 		typename = typename std::enable_if<std::is_class<ReceiverTy>::value>::type
 	>
-	static Delegate Bind( ReceiverTy* receiver ) noexcept;
+	static Delegate Bind( ReceiverTy* receiver ) noexcept
+	{
+		return Delegate( receiver, &MakeStub<ReceiverTy, Handler> );
+	}
 
 	//
 	// Internal works
 	//
 private:
 	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
-	static RetTy MakeStub( void* receiver, Args... args ) noexcept;
+	static RetTy MakeStub( void* receiver, Args... args ) noexcept
+	{
+		return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
+	}
 	
 	//
 	// Private variables
@@ -65,41 +79,3 @@ private:
 	StubTy m_stub;
 	void* m_receiver;
 };
-
-template<typename RetTy, typename ...Args>
-inline Delegate<RetTy( Args... )>::Delegate( ) noexcept :
-	m_receiver( nullptr ),
-	m_stub( nullptr )
-{
-}
-
-template<typename RetTy, typename ...Args>
-inline Delegate<RetTy( Args... )>::Delegate( void* receiver, StubTy stub ) noexcept :
-	m_receiver( receiver ),
-	m_stub( stub )
-{
-}
-
-template<typename RetTy, typename... Args>
-inline RetTy Delegate<RetTy( Args... )>::operator()( 
-	Args&&... args )
-{
-	return m_stub( m_receiver, std::forward<Args>( args )... );
-}
-
-template<typename RetTy, typename ...Args>
-template<typename ReceiverTy, RetTy( ReceiverTy::* Handler )( Args... ), typename>
-inline Delegate<RetTy( Args... )> Delegate<RetTy( Args... )>::Bind( ReceiverTy * receiver ) noexcept
-{
-	return Delegate( receiver, &MakeStub<ReceiverTy, Handler> );
-}
-
-template<typename RetTy, typename ...Args>
-template<typename ReceiverTy, 
-	RetTy( ReceiverTy::* Handler )( Args... )>
-inline RetTy Delegate<RetTy( Args... )>::MakeStub( 
-	void* receiver, 
-	Args... args ) noexcept
-{
-	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
-}

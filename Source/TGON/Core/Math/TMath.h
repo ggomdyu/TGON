@@ -10,8 +10,8 @@
 #include "../Platform/PlatformInclude.h"
 #include "Vector3.h"
 
-#include <cstdint>
 #include <cmath>
+#include <cstdint>
 #include <boost/config/suffix.hpp>
 
 
@@ -39,7 +39,7 @@ public:
 	static float Floor( float val );
 	static int32_t FloorToInt( float val );
 
-	// @return Return root of value 
+	/* @return Return root of value */
 	static float Sqrt( float value );
 
 	/* @return	Return maximum value between first and second */
@@ -62,14 +62,34 @@ public:
 	template <class Ty>
 	static constexpr Ty Clamp( Ty value, Ty min, Ty max );
 
-	/* @return	Return x65599 hash key */
+	/* 
+	 * @return			Return x65599 hash key, Length is passed in compile-time.
+	 * @param	str		Undecayed string ( like "Text", not const char* = "Text" )
+	*/
 	template <std::size_t N>
 	static uint32_t StringToHash( const char( &str )[N] );
+	
+	/* 
+	 * @return			Return x65599 hash key, Length is passed in run-time.
+	 * @param	str		Decayed string ( like const char* = "Text", not "Text" )
+	*/
 	static uint32_t StringToHash( const char* str, std::size_t length );
 
+	/* 
+	 * @return			Return smoothly interpolated value 
+	 * @param	from	Interpolation start value
+	 * @param	to		Interpolation end value
+	 * @param	t		Elapsed time
+	*/
 	static constexpr float Lerp( float from, float to, float t );
 	static float Smoothstep( float from, float to, float t );
-	static Vector3 BezierCurve( const Vector3& a, const Vector3& b, const Vector3& c, float t );
+	
+	/* 
+	 * @return			Return smoothly interpolated value between three vector
+	 * @param	a/b/c	Interpolate target
+	 * @param	t		Elapsed time
+	*/
+	static Vector3 Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t );
 
 	// 
 	// Ctor/Dtor
@@ -82,6 +102,7 @@ public:
 	//  Private variables
 	//
 private:
+	/* TODO: Do Collision check */
 	static uint32_t x65599Hash( const char* str, std::size_t length );
 };
 
@@ -178,13 +199,6 @@ BOOST_FORCEINLINE uint32_t TMath::StringToHash(
 	return x65599Hash( str, length );
 }
 
-BOOST_FORCEINLINE uint32_t TMath::StringToHash( 
-	/*IN*/ const char* str, 
-	std::size_t length )
-{
-	return x65599Hash( str, length );
-}
-
 constexpr float TMath::Lerp( 
 	float from, 
 	float to, 
@@ -202,7 +216,7 @@ inline float TMath::Smoothstep(
 	return t*t*( 3.f-( 2.f*t ));
 }
 
-inline Vector3 TMath::BezierCurve( 
+inline Vector3 TMath::Bezier( 
 	/*IN*/ const Vector3& a,
 	/*IN*/ const Vector3& b,
 	/*IN*/ const Vector3& c, 
@@ -226,6 +240,3 @@ BOOST_FORCEINLINE uint32_t TMath::x65599Hash(
 }
 
 } /* namespace tgon */
-
-
-#include "Mathf.inl"
