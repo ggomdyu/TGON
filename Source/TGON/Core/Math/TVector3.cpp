@@ -39,7 +39,7 @@ void Vector3::TransformCoord(
 	y = transY;
 	z = transZ;
 
-	if ( std::abs( transW-1.0f ) >= Math::EPSILON )
+	if ( std::abs( transW-1.0f ) >= TMath::EPSILON )
 	{		
 		const float inv = 1.f / transW;
 

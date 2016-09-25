@@ -9,7 +9,7 @@ namespace tgon
 
 
 Type::Type( const std::string& name ) :
-	m_hashCode( Math::StringToHash( name.c_str( ))),
+	m_hashCode( TMath::StringToHash( name.c_str( ))),
 	m_name( name )
 {
 }
