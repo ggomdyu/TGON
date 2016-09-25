@@ -21,10 +21,10 @@
 
 
 template <typename Ty>
-struct Delegate;
+class Delegate;
 
 template <typename RetTy, typename... Args>
-struct Delegate<RetTy( Args... )> final
+class Delegate<RetTy( Args... )> final
 {
 	using StubTy = RetTy(*)( void*, Args... );
 
