@@ -16,9 +16,6 @@
 #include <boost/variant.hpp>
 
 
-TGON_GENERATE_EVENT( E_MODULEADDED, tgon::IModule* )
-
-
 namespace tgon
 {
 

@@ -169,7 +169,7 @@ inline void EventObject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFunc
 	details::SubscribeEventAssert<EventTy, ReceiverTy, HandlerFuncArgs...>::Assert( );
 
 	// And register listener info to table.
-	this->SubscribeEventImpl( EventTy::GetType( ).GetHashCode( ), 
+	this->SubscribeEventImpl( GetType<EventTy>( ).GetHashCode( ),
 		new EventObserverImpl<ReceiverTy>( this, reinterpret_cast<HandlerFunction<ReceiverTy>>( handlerFunc ))
 	);
 }
@@ -177,7 +177,7 @@ inline void EventObject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFunc
 template<typename EventTy>
 inline void EventObject::UnsubscribeEvent( )
 {
-	UnsubscribeEventImpl( EventTy::GetType( ).GetHashCode( ));
+	UnsubscribeEventImpl( GetType<EventTy>( ).GetHashCode( ));
 }
 
 template<typename EventTy, typename... HandlerFuncArgs>
@@ -187,7 +187,7 @@ inline void EventObject::NotifyEvent( HandlerFuncArgs... eventArgs )
 	// This code will be deleted in compile time.
 	details::NotifyEventAssert<EventTy, HandlerFuncArgs...>::Assert( );
 
-	NotifyEventImpl<Dummy, HandlerFuncArgs...>( EventTy::GetType( ).GetHashCode( ), eventArgs... );
+	NotifyEventImpl<Dummy, HandlerFuncArgs...>( GetType<EventTy>( ).GetHashCode( ), eventArgs... );
 }
 
 template<typename ReceiverTy, typename... HandlerFuncArgs>

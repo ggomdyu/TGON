@@ -37,23 +37,6 @@ public:
 
 TGON_GENERATE_EVENT( E_FOO, int )
 
-
-
-template<class F>
-struct function_traits;
-
-// function pointer
-template<class R, class... Args>
-struct function_traits<R( *)( Args... )> : public function_traits<R( Args... )>
-{};
-
-
-template <typename... Args>
-void foo( Args&&... args )
-{
-	int n = 3;
-}
-
 class TGONSample :
 	public GameApplication
 {
