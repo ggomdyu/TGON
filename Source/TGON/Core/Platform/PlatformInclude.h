@@ -13,7 +13,7 @@
 #	include "Windows/WindowsPlatformConfig.h"
 #endif
 
-#ifndef TGON_SUPPORT_SSE
+#ifndef TGON_SUPPORT_SSE2
 #   define TGON_SUPPORT_SSE 0
 #endif
 #ifndef TGON_SUPPORT_NEON
