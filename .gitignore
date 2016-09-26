@@ -6,6 +6,9 @@
 *.sdf
 *.user
 *.sln.docstates
+*.exe
+*.lib
+*.dll
 
 # Build results
 
