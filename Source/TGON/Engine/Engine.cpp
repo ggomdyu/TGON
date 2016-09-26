@@ -31,7 +31,7 @@ void Engine::AddDefaultModulesToRepo( )
 
 int32_t Engine::Execute( int argc, char** argv )
 {
-	const std::shared_ptr<TPlatformWindow>& window = m_gameApplication->GetRootWindow( );
+	const std::shared_ptr<TWindowFrame>& window = m_gameApplication->GetRootWindow( );
 	if ( window.get( ) )
 	{
 		// Loop for window event( =messsage )

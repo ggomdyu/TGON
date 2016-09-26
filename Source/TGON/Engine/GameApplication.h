@@ -47,7 +47,7 @@ public:
 	// 
 public:
 	/* note Create default window, no custom event handler, by WindowStyle */
-	explicit GameApplication( const std::shared_ptr<TPlatformWindow>& window ) :
+	explicit GameApplication( const std::shared_ptr<TWindowFrame>& window ) :
 		m_paused( false ),
 		m_rootWindow( window )
 	{
@@ -65,7 +65,7 @@ public:
 	// 
 	// Gets
 	// 
-	const std::shared_ptr<TPlatformWindow>& GetRootWindow( ) const;
+	const std::shared_ptr<TWindowFrame>& GetRootWindow( ) const;
 	bool IsPaused( ) const;
 
 	// 
@@ -73,7 +73,7 @@ public:
 	// 
 private:
 	bool m_paused;
-	std::shared_ptr<TPlatformWindow> m_rootWindow;
+	std::shared_ptr<TWindowFrame> m_rootWindow;
 };
 
 
@@ -87,7 +87,7 @@ inline void tgon::GameApplication::Pause( )
 	m_paused = true;
 }
 
-inline const std::shared_ptr<TPlatformWindow>& GameApplication::GetRootWindow( ) const
+inline const std::shared_ptr<TWindowFrame>& GameApplication::GetRootWindow( ) const
 {
 	return m_rootWindow;
 }

@@ -6,13 +6,11 @@
 *.sdf
 *.user
 *.sln.docstates
-*.exe
-*.lib
-*.dll
 
 # Build results
 
 [Ii]pch/
+[Bb]in/
 [Bb]uild/
 [Dd]ebug\
 [Rr]elease\

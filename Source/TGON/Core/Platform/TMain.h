@@ -20,7 +20,7 @@ namespace tgon
  * @param	argv	Command arguments
  * @return			Return error code
 */
-extern int32_t TMain( int32_t argc, char** argv );
+extern int main( int argc, char** argv );
 
 
 } /*namespace tgon*/

@@ -11,11 +11,12 @@
 using namespace tgon;
 
 class MyCustomWindow :
-	public TPlatformWindow
+	public TWindowFrame
 {
 public:
-	using TPlatformWindow::TPlatformWindow;
+	using TWindowFrame::TWindowFrame;
 
+public:
 	// 
 	// Event handlers
 	// 
@@ -30,21 +31,26 @@ TGON_GENERATE_EVENT( E_FOO, int )
 class TGONSample :
 	public GameApplication
 {
+public:
 	// 
 	// Generator
 	// 
-public:
 	TGON_GENERATE_OBJECT_INTERFACE( TGONSample, GameApplication )
 
+public:
 	// 
 	// Ctor/Dtor
 	// 
-public:
 	TGONSample( ) :
 		GameApplication( MakeWindow<MyCustomWindow>( WindowStyle::DefaultStyle ))
 	{
 	};
 
+
+public:
+	//
+	// Commands
+	//
 	virtual ~TGONSample( )
 	{
 	}

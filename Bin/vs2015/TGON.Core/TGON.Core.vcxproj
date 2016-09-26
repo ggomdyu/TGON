@@ -26,16 +26,15 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObject.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObserver.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Type.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformMain.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Random\Random.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\XML\TXMLReader.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp" />
@@ -59,12 +58,11 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Object\EventObserver.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Object\Object.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Object\Type.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformScreen.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Interface\IWindowEventHandler.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformApplication.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConsole.h" />
@@ -79,14 +77,14 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\shared_comptr.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\unique_comptr.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConfig.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformInclude.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsInclude.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Random\Random.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\Array.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\Cast.h" />
@@ -105,12 +103,6 @@
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl" />
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl" />
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl" />
-    <None Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.inl" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +112,10 @@
     <ProjectReference Include="..\..\..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj">
       <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.inl" />
+    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>

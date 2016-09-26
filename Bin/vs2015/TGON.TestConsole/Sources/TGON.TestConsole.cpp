@@ -31,27 +31,52 @@ void foo( const char( &str )[N] )
 	std::cout << N;
 }
 
-
-int main( int argc, char* argv[] )
+void Do1( )
 {
-	const char* a;
-	const char* b;
-
-	std::cout << GetType<decltype( a )>( ).GetName( );
-
-
-
-	/*for ( int r = 0; r < 10; ++r )
+	int ret = 0;
+	for ( int r = 0; r < 10; ++r )
 	{
 		auto b = GetTickCount( );
-		for ( int i = 0; i < 100000000; ++i )
+		for ( int i = 0; i < 1000000000; ++i )
 		{
-			const char* name = typeid( A ).name( );
+			try
+			{
+				++ret;
+			}
+			catch ( std::runtime_error re )
+			{
+			}
 		}
 		auto e = GetTickCount( );
 		std::cout << e - b << "\n";
 	}
-*/
+}
+
+void Do2( )
+{
+	int ret = 0;
+	for ( int r = 0; r < 10; ++r )
+	{
+		auto b = GetTickCount( );
+		for ( int i = 0; i < 1000000000; ++i )
+		{
+			try
+			{
+				++ret;
+			}
+			catch ( std::runtime_error re )
+			{
+			}
+		}
+		auto e = GetTickCount( );
+		std::cout << e - b << "\n";
+	}
+}
+
+int main( int argc, char* argv[] )
+{
+	
+
 	//
 	//std::cout << a.IsAbstract( ) << std::endl;
 	//std::cout << a.IsArray( ) << std::endl;

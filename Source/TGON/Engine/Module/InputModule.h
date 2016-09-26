@@ -60,7 +60,7 @@ public:
 	// @param inputAcceptWindow The window which you want to receive input message
 	// @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
 	//
-	InputModule( TPlatformWindow* inputAcceptWindow, uint32_t supportInputFlag );
+	InputModule( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 
 	virtual ~InputModule( );
 
@@ -224,7 +224,7 @@ private:
 		Internal works
 	*/
 private:
-	void InitializeInputManager( TPlatformWindow* inputAcceptWindow, uint32_t supportInputFlag );
+	void InitializeInputManager( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 
 	void SetupInputDevice( uint32_t supportInputFlag );
 

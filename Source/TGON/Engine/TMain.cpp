@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 #include "../Core/Platform/TMain.h"
 
-#include "../Core/Platform/PlatformApplication.h"
 #include "../Engine/Engine.h"
 
 
@@ -9,21 +8,25 @@ namespace tgon
 {
 
 
-int32_t TMain( int32_t argc, char** argv )
+int main( int argc, char** argv )
 {
 	// Singleton on demand
 	{
-		tgon::TApplication::Get( );
-		//tgon::TPlatformConsole::Get( );
 	}
 
-	// Start loop engine
+	// Start engine loop
 	{
 		Engine engineLoop;
-		
-		const int32_t errCode = engineLoop.Execute( argc, argv );
+		return engineLoop.Execute( argc, argv );
+
+		//try
+		//{
+		//}
+		//catch ( std::runtime_error re )
+		//{
+		//
+		//}
 	}
-	return 0;
 }
 
 

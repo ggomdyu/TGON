@@ -1,0 +1,116 @@
+#include "PrecompiledHeader.h"
+#include "GenericWindowFrame.h"
+
+//////////////////TEMP///////////////////
+#include "../../XML/TXMLReader.h"
+#include <boost/property_tree/xml_parser.hpp>
+#include <boost/foreach.hpp>
+/////////////////////////////////////////
+
+
+namespace tgon
+{
+
+
+decltype( WindowStyle::DefaultStyle ) WindowStyle::DefaultStyle;
+
+WindowStyle WindowStyle::LoadFromXML( const char* xmlPath )
+{
+	/*using boost::property_tree::ptree;
+	ptree pt;
+	read_xml( xmlPath, pt );
+	std::vector<ptree::value_type> vec;
+	for ( const auto& v : pt.get_child( "WindowStyle" )) {vec.push_back( v );}*/
+
+	TXMLReader xmlReader( xmlPath );
+	if ( xmlReader.Fail( ))
+	{
+		auto lastError = xmlReader.GetLastError( );
+		
+		// TODO: Activate TMessageBox
+		//TMessageBox::Show( "Failed to load WindowStyle." );
+		abort( );
+	}
+
+	WindowStyle parsedWndStyle;
+	for ( const auto& xmlNodeElem : xmlReader )
+	{
+		if ( !std::strcmp( xmlNodeElem->Value( ), "Title" ))
+		{
+			parsedWndStyle.title = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				GetText( );
+		}
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Transform" ))
+		{
+			parsedWndStyle.x = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "x" );
+			parsedWndStyle.y = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "y" );
+			parsedWndStyle.width = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "width" );
+			parsedWndStyle.height = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				IntAttribute( "height" );
+		}
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Style" ))
+		{
+			parsedWndStyle.popup = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Popup" );
+		}
+		else if ( !std::strcmp( xmlNodeElem->Value( ), "Function" ))
+		{
+			parsedWndStyle.resizeable = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Resizeable" );
+			parsedWndStyle.maximized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Maximized" );
+			parsedWndStyle.minimized = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "Minimized" );
+			parsedWndStyle.showTopOnCreated = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowTopOnCreated" );
+			parsedWndStyle.showMiddle = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowMiddle" );
+			parsedWndStyle.topMost = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "TopMost" );
+			parsedWndStyle.showImmediately = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "ShowImmediately" );
+			parsedWndStyle.supportWindowTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "SupportWindowTransparency" );
+			parsedWndStyle.supportPerPixelTransparency = static_cast<tinyxml2::XMLElement*>( xmlNodeElem )->
+				BoolAttribute( "SupportPerPixelTransparency" );
+		}
+	}
+
+	return parsedWndStyle;
+}
+
+GenericWindowFrame::GenericWindowFrame( ) :
+	m_closed( false )
+{
+}
+
+GenericWindowFrame::~GenericWindowFrame( )
+{
+	m_closed = true;
+}
+
+bool GenericWindowFrame::PumpEvent( )
+{
+	return false;
+}
+
+bool GenericWindowFrame::IsEnabledGlobalInputFocus( ) const
+{
+	return m_enabledGlobalMouseFocus;
+}
+
+bool GenericWindowFrame::IsClosed( ) const
+{
+	return m_closed;
+}
+
+void GenericWindowFrame::EnableGlobalMouseFocus( bool isEnable )
+{
+	m_enabledGlobalMouseFocus = isEnable;
+}
+
+
+} /*namespace tgon*/

@@ -22,9 +22,6 @@
     <Filter Include="Sources\Core\Platform\Windows\Misc">
       <UniqueIdentifier>{e5794263-3eae-4254-b3d1-c49f7e3dd1ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Abstract">
-      <UniqueIdentifier>{91df2c55-5c28-4197-b8a3-b81fd9d38606}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\Random">
       <UniqueIdentifier>{8ad24166-46c0-4a81-a700-639f1b7c346b}</UniqueIdentifier>
     </Filter>
@@ -55,11 +52,11 @@
     <Filter Include="Sources\PrecompiledHeader\hpp">
       <UniqueIdentifier>{b3fff67b-31b3-4b06-9b1b-63fcc2c4730c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Interface">
-      <UniqueIdentifier>{f6811dff-6489-4eda-9854-0e60ffe51b21}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\Delegate">
       <UniqueIdentifier>{4f41413f-9740-4917-bb42-93bbd83535b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform\Generic">
+      <UniqueIdentifier>{91df2c55-5c28-4197-b8a3-b81fd9d38606}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,40 +66,13 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Random\Random.cpp">
       <Filter>Sources\Core\Random</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformMain.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.cpp">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObserver.cpp">
       <Filter>Sources\Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObject.cpp">
-      <Filter>Sources\Core\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Type.cpp">
       <Filter>Sources\Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp">
@@ -121,9 +91,6 @@
       <Filter>Sources\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp">
-      <Filter>Sources\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
       <Filter>Sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Engine\GameApplication.cpp">
@@ -146,6 +113,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
+      <Filter>Sources\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.cpp">
+      <Filter>Sources\Core\Platform\Generic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,30 +188,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformApplication.h">
       <Filter>Sources\Core\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformInclude.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConsole.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformConfig.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformApplication.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindowUtility.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformWindow.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformScreen.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
@@ -229,21 +199,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\shared_comptr.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformScreen.h">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.h">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.h">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformWindow.h">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.h">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Object\EventObserver.h">
       <Filter>Sources\Core\Object</Filter>
@@ -299,9 +254,6 @@
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Interface\IWindowEventHandler.h">
-      <Filter>Sources\Core\Platform\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Template\TypeTraits.h">
       <Filter>Sources\Core\Template</Filter>
     </ClInclude>
@@ -311,24 +263,57 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Math\TMath.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsPlatformTime.inl">
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
-    </None>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformConsole.inl">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </None>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformApplication.inl">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </None>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Abstract\APlatformTime.inl">
-      <Filter>Sources\Core\Platform\Abstract</Filter>
-    </None>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsInclude.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericScreen.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">
       <Filter>Sources\Core\Math</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.inl">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </None>
+    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.inl">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </None>
   </ItemGroup>
 </Project>

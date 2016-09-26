@@ -9,5 +9,5 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Windows/WindowsPlatformApplication.h"
+#	include "Windows/WindowsApplication.h"
 #endif
