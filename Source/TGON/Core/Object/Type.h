@@ -114,7 +114,7 @@ namespace detail
 {
 
 template <typename Ty>
-struct TypeInfoImpl :
+struct TypeInfoImpl final :
 	public TypeInfo
 {
 	//
