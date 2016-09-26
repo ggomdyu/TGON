@@ -154,6 +154,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TGON\TGON.vcxproj">
+      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
