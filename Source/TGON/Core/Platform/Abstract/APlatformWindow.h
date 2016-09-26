@@ -8,7 +8,6 @@
 
 #pragma once
 #include "../PlatformInclude.h"
-#include "../Interface/IWindowEventHandler.h"
 
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -19,6 +18,39 @@
 namespace tgon
 {
 
+
+enum class EMouseType
+{
+	Left,
+	Middle,
+	Right,
+};
+
+class WindowEventHandler
+{
+	//
+	// Event handlers
+	//
+public:
+	virtual void OnMove( int32_t x, int32_t y ) {}
+	virtual void OnResize( int32_t width, int32_t height ) {}
+	virtual void OnMouseMove( int32_t x, int32_t y ) {}
+	virtual void OnMouseDown( int32_t x, int32_t y, EMouseType mouseType ) {}
+	virtual void OnMouseUp( int32_t x, int32_t y, EMouseType mouseType ) {}
+	virtual void OnMouseDoubleClick( int32_t x, int32_t y, EMouseType mouseType ) {}
+	virtual void OnRawMouseMove( int32_t x, int32_t y ) {}
+	virtual void OnRawMouseDown( int32_t x, int32_t y, EMouseType mouseType ) {}
+	virtual void OnRawMouseUp( int32_t x, int32_t y, EMouseType mouseType ) {}
+	virtual bool OnGetFocus( ) { return true; }
+	virtual bool OnLoseFocus( ) { return true; }
+
+	/*
+	 * @note	Called when window has begun closing.
+	 * @return	Return true if you want to keep close.
+	*/
+	virtual bool OnDestroy( ) { return true; }
+
+};
 
 struct WindowStyle
 {
@@ -79,7 +111,7 @@ public:
 };
 
 class TGON_API APlatformWindowFrame : 
-	public IWindowEventHandler,
+	public WindowEventHandler,
 	private boost::noncopyable
 {
 	// 
@@ -93,7 +125,10 @@ protected:
 	// Commands
 	// 
 public:
-	virtual bool PumpEvent( ) { return false; }
+	virtual bool PumpEvent( )
+	{
+		return false; 
+	}
 	virtual void Show( ) {}
 	virtual void Hide( ) {}
 	virtual void Quit( ) {}
@@ -101,7 +136,10 @@ public:
 	virtual void Minimize( ) {}
 	virtual void BringToFront( ) {}
 	virtual void Flash( ) {}
-	virtual void EnableGlobalMouseFocus( bool isEnable );
+	virtual void EnableGlobalMouseFocus( bool isEnable )
+	{
+		m_enabledGlobalMouseFocus = isEnable;
+	}
 
 	// 
 	// Sets
@@ -116,24 +154,14 @@ public:
 	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const {}
 	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const {}
 	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const {}
-	bool IsEnabledGlobalInputFocus( ) const;
-	bool IsClosed( ) const;
-
-	//
-	// Event handlers
-	//
-	virtual void OnMove( int32_t x, int32_t y ) override {}
-	virtual void OnResize( int32_t width, int32_t height ) override {}
-	virtual void OnMouseMove( int32_t x, int32_t y ) override {}
-	virtual void OnMouseDown( int32_t x, int32_t y, EMouseType mouseType ) override {}
-	virtual void OnMouseUp( int32_t x, int32_t y, EMouseType mouseType ) override {}
-	virtual void OnMouseDoubleClick( int32_t x, int32_t y, EMouseType mouseType ) override {}
-	virtual void OnRawMouseMove( int32_t x, int32_t y ) override {}
-	virtual void OnRawMouseDown( int32_t x, int32_t y, EMouseType mouseType ) override {}
-	virtual void OnRawMouseUp( int32_t x, int32_t y, EMouseType mouseType ) override {}
-	virtual bool OnGetFocus( ) override { return true; }
-	virtual bool OnLoseFocus( ) override { return true; }
-	virtual bool OnDestroy( ) override { return true; }
+	bool IsEnabledGlobalInputFocus( ) const
+	{
+		return m_enabledGlobalMouseFocus;
+	}
+	bool IsClosed( ) const
+	{
+		return m_closed;
+	}
 
 	//
 	// Protected variables
@@ -143,22 +171,6 @@ protected:
 	bool m_enabledGlobalMouseFocus;
 	uint32_t m_backgroundColor;
 };
-
-
-inline void APlatformWindowFrame::EnableGlobalMouseFocus( bool isEnable )
-{
-	m_enabledGlobalMouseFocus = isEnable;
-}
-
-inline bool APlatformWindowFrame::IsEnabledGlobalInputFocus( ) const
-{
-	return m_enabledGlobalMouseFocus;
-}
-
-inline bool APlatformWindowFrame::IsClosed( ) const
-{
-	return m_closed;
-}
 
 
 } /*namespace tgon*/

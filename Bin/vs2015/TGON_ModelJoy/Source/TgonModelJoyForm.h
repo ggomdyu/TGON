@@ -5,7 +5,8 @@
 #include <Engine/GameApplication.h>
 #include <Engine/CoreEvents.h>
 #include <Core/Template/Cast.h>
-
+#include <Core/Object/Type.h>
+#include <Core/Delegate/Delegate.h>
 
 using namespace tgon;
 
@@ -18,21 +19,10 @@ public:
 	// 
 	// Event handlers
 	// 
-	virtual bool OnDestroy( )
+	virtual bool OnDestroy( ) override
 	{
 		return MessageBox( NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO ) == IDYES;
 	}
-
-	virtual bool OnGetFocus( ) override
-	{
-		return false;
-	}
-
-	virtual bool OnLoseFocus( ) override
-	{
-		return false;
-	}
-
 };
 
 TGON_GENERATE_EVENT( E_FOO, int )
@@ -53,28 +43,13 @@ public:
 	TGONSample( ) :
 		GameApplication( MakeWindow<MyCustomWindow>( WindowStyle::DefaultStyle ))
 	{
-		std::tuple_element<3, std::tuple<int, int, int>>;
 	};
 
 	virtual ~TGONSample( )
 	{
 	}
 
-	void OnFoo( )
-	{
-
-	}
-
 	virtual void OnUpdate( ) override
 	{
 	}
-
-	virtual void OnRender( ) override
-	{
-	}
-
-	virtual void OnDestroy( ) override
-	{
-	}
-
 };

@@ -30,7 +30,6 @@ class ModuleContext :
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( ModuleContext, EventObject )
 
-	/* @param module */
 	static void AddModule( const std::shared_ptr<IModule>& module );
 
 	// 
@@ -41,8 +40,8 @@ public:
 	// Gets
 	// 
 	/*
-	 * @param ModuleTy Module type that inherited by IModule
-	 * @return Return registered module
+	 * @param	ModuleTy	Module type that inherited by IModule
+	 * @return				Return registered module
 	*/
 	template <typename ModuleTy>
 	static const std::shared_ptr<ModuleTy>& GetModule( );
@@ -51,7 +50,7 @@ public:
 	// Private variables
 	// 
 private:
-	/* @note Use on finding module */
+	/* @note Use on find module */
 	static std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
 };
 

@@ -28,27 +28,42 @@ public:
 	// 
 	// Opeators
 	// 
-	bool operator==( const Object& ) const;
-	bool operator!=( const Object& ) const;
+	bool operator==( const Object& rhs ) const
+	{
+		return this->Equals( rhs );
+	}
+	bool operator!=( const Object& rhs ) const
+	{
+		return !( *this == rhs );
+	}
 
 	// 
 	// Commands
 	// 
 public:
-	static bool Equals( const Object&, const Object& );
+	static bool Equals( const Object& lhs, const Object& rhs )
+	{
+		return lhs.Equals( rhs );
+	}
 	
 	/*
 	 * @note Compare two instance. This can be overridden.
 	 * @return Return true if both refer to the same object.
 	*/
-	virtual bool Equals( const Object& rhs ) const;
+	virtual bool Equals( const Object& rhs ) const
+	{
+		return ( this->GetHashCode( ) == rhs.GetHashCode( ));
+	}
 
 	/* @note Compare two instance.
 	 * @param lhs Left handling side
 	 * @param rhs Right handling side
 	 * @return Return true if both refer to the same object.
 	*/
-	static bool ReferenceEquals( const Object& lhs, const Object& rhs );
+	static bool ReferenceEquals( const Object& lhs, const Object& rhs )
+	{
+		return ( &lhs == &rhs );
+	}
 
 	// 
 	// Gets
@@ -66,32 +81,6 @@ public:
 	Object( );
 	virtual ~Object( ) = 0;
 };
-
-
-inline bool Object::operator==( const Object& rhs ) const
-{
-	return this->Equals( rhs );
-}
-
-inline bool Object::operator!=( const Object& rhs ) const
-{
-	return !( *this == rhs );
-}
-
-inline bool Object::Equals( const Object& lhs, const Object& rhs )
-{
-	return lhs.Equals( rhs );
-}
-
-inline bool Object::Equals( const Object& rhs ) const
-{
-	return ( this->GetHashCode( ) == rhs.GetHashCode( ));
-}
-
-inline bool Object::ReferenceEquals( const Object& lhs, const Object& rhs )
-{
-	return ( &lhs == &rhs );
-}
 
 
 } /* namespace tgon */

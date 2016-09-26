@@ -7,22 +7,6 @@
 namespace tgon {
 
 
-GameApplication::~GameApplication( )
-{
-}
-
-void GameApplication::OnUpdate( )
-{
-	
-}
-
-void GameApplication::OnRender( )
-{
-}
-
-void GameApplication::OnDestroy( )
-{
-}
 
 
 }

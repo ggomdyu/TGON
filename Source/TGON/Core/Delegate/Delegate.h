@@ -16,7 +16,6 @@
 */
 #define TGON_MAKE_DELEGATE( type, function, instance ) Delegate<type>::Bind<tgon::function_traits<decltype( function )>::class_type, function>( instance )
 
-
 template <typename Ty>
 class Delegate;
 
@@ -79,3 +78,4 @@ private:
 	StubTy m_stub;
 	void* m_receiver;
 };
+

@@ -10,6 +10,7 @@
 #include <Core/Math/TMath.h>
 #include <Core/Object/Object.h>
 
+#include <Windows.h>
 
 
 using namespace tgon;
@@ -30,20 +31,14 @@ void foo( const char( &str )[N] )
 	std::cout << N;
 }
 
-#include <Windows.h>
 
 int main( int argc, char* argv[] )
 {
-	class A {};
-	class B : public A {};
-	const char* n = "A";
+	const char* a;
+	const char* b;
 
+	std::cout << GetType<decltype( a )>( ).GetName( );
 
-	B b;
-	A a = b;
-
-
-	std::cout << GetType<A >( ).GetName( );
 
 
 	/*for ( int r = 0; r < 10; ++r )

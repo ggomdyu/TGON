@@ -36,7 +36,7 @@ struct TypeInfo
 	// Enumerators
 	//
 protected:
-	enum { MAX_BITSET_COUNT = 32, };
+	enum { MAX_BITSET_COUNT = 16, };
 	enum BitsetIndex {
 		isClass,
 		isAbstract,
@@ -62,6 +62,7 @@ public:
 	bool IsPointer( ) const		{ return m_bits[isPointer]; }
 	bool IsConst( ) const		{ return m_bits[isConst]; }
 	bool IsVolatile( ) const	{ return m_bits[isVolatile]; }
+	//
 	bool IsMemberFunctionPointer( ) const { return m_bits[isMemberFunctionPointer]; }
 	bool IsPOD( ) const			{ return m_bits[isPOD]; }
 

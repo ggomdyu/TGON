@@ -23,10 +23,18 @@ namespace tgon
 {
 
 
-
+class AGameApplicationEventHandler
+{
+public:
+	/* @note Update the frame */
+	virtual void OnUpdate( ) {};
+	virtual void OnRender( ) {};
+	virtual void OnDestroy( ) {};
+};
 
 class TGON_API GameApplication :
-	public ModuleContext
+	public ModuleContext,
+	public AGameApplicationEventHandler
 {
 	// 
 	// Generator
@@ -44,19 +52,7 @@ public:
 		m_rootWindow( window )
 	{
 	}
-
-	GameApplication( ) = default;
-	
-	virtual ~GameApplication( );
-
-	// 
-	// Commands
-	// 
-public:
-	/* @note Update the frame */
-	virtual void OnUpdate( );
-	virtual void OnRender( );
-	virtual void OnDestroy( );
+	virtual ~GameApplication( ) = default;
 
 	// 
 	// Sets
