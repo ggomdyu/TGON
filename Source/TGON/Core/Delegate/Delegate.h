@@ -40,7 +40,7 @@ public:
 	//
 	// Operators
 	//
-	RetTy operator()( Args&&... args );
+	RetTy operator()( Args... args );
 
 	//
 	// Commands
@@ -82,9 +82,9 @@ inline Delegate<RetTy( Args... )>::Delegate( void* receiver, StubTy stub ) noexc
 
 template<typename RetTy, typename... Args>
 inline RetTy Delegate<RetTy( Args... )>::operator()( 
-	Args&&... args )
+	Args... args )
 {
-	return m_stub( m_receiver, std::forward<Args>( args )... );
+	return m_stub( m_receiver, args... );
 }
 
 template<typename RetTy, typename ...Args>
