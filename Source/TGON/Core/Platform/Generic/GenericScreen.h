@@ -19,45 +19,33 @@ namespace tgon
 template <typename DerivedTy>
 class TGON_API GenericScreen
 {
-public:
-	// 
+	//
 	// Gets
-	// 
+	//
+public:
+	/*
+	* @note	Toggle the full-screen.
+	* @return	Return true on success.
+	*/
+	static bool ToggleFullScreen( const class GenericWindowFrame& window ) {}
+
 	/* @note	Get monitor's count. */
-	static int32_t GetMonitorCount( );
+	static int32_t GetMonitorCount( ) { return 0; }
 
 	/* @note	Get main monitor's screen width. */
-	static int32_t GetMainWidth( );
+	static int32_t GetMainWidth( ) { return 0; }
 
 	/* @note	Get main monitor's screen height. */
-	static int32_t GetMainHeight( );
+	static int32_t GetMainHeight( ) { return 0; }
 	
-public:
 	// 
 	// Ctor/Dtor
 	// 
+public:
 	GenericScreen( ) = delete;
 	~GenericScreen( ) = delete;
 
 };
 
-
-template <typename DerivedTy>
-inline int32_t GenericScreen<DerivedTy>::GetMonitorCount( )
-{
-	return 0;
-}
-
-template <typename DerivedTy>
-inline int32_t GenericScreen<DerivedTy>::GetMainWidth( )
-{
-	return 0;
-}
-
-template <typename DerivedTy>
-inline int32_t GenericScreen<DerivedTy>::GetMainHeight( )
-{
-	return 0;
-}
 
 }

@@ -114,17 +114,17 @@ class TGON_API GenericWindowFrame :
 	public WindowEventHandler,
 	private boost::noncopyable
 {
-public:
 	// 
 	// Ctor/Dtor
 	// 
+public:
 	GenericWindowFrame( );
 	virtual ~GenericWindowFrame( ) = 0;
 
-public:
 	// 
 	// Commands
 	// 
+public:
 	virtual bool PumpEvent( );
 	virtual void Show( ) {}
 	virtual void Hide( ) {}
@@ -133,7 +133,6 @@ public:
 	virtual void Minimize( ) {}
 	virtual void BringToFront( ) {}
 	virtual void Flash( ) {}
-	virtual void EnableGlobalMouseFocus( bool isEnable );
 
 	// 
 	// Sets
@@ -148,15 +147,13 @@ public:
 	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const {}
 	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const {}
 	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const {}
-	bool IsEnabledGlobalInputFocus( ) const;
 	bool IsClosed( ) const;
 
-protected:
 	//
 	// Protected variables
 	//
+protected:
 	bool m_closed;
-	bool m_enabledGlobalMouseFocus;
 	uint32_t m_backgroundColor;
 };
 

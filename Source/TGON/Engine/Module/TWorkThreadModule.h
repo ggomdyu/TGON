@@ -40,7 +40,6 @@ public:
 	// @param numThread Number of thread you want to use
 	//
 	explicit TWorkThreadModule( std::size_t numThread = std::thread::hardware_concurrency( ));
-	
 	virtual ~TWorkThreadModule( );
 
 

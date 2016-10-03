@@ -17,7 +17,18 @@
 #pragma comment( linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"" )
 
 
-namespace {
+namespace 
+{
+
+void EnableFloatingException( )
+{
+	unsigned int currStat;
+	_controlfp_s( &currStat, 0, 0 );
+
+	unsigned int newStat = currStat;
+	newStat &= ~( EM_ZERODIVIDE );
+	_controlfp_s( &currStat, newStat, MCW_EM );
+}
 
 bool RegisterWindowClass( )
 {
@@ -50,10 +61,13 @@ int WINAPI WinMain(
 #endif
 
 	//
-	// Platform-specific initialization is here
+	// Platform-independent initialization is here
 	//
 	{
-		// TODO: Insert mini-dump setting code here or call
+		EnableFloatingException( );
+
+		// TODO: Insert mini-dump setting code here
+
 		RegisterWindowClass( );
 	}
 

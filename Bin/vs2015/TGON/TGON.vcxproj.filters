@@ -141,6 +141,9 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.cpp">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\XML\TXMLReader.h">
@@ -301,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericSystem.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,11 +25,12 @@ class AutoCastProxy final :
 	// Ctor/Dtor
 	//
 public:
-	explicit AutoCastProxy( FromTy&& rhs ) :
+	explicit AutoCastProxy( FromTy&& rhs ) noexcept :
 		CastModel( rhs )
 	{
 	}
 };
+
 /* Policy classes */
 template <typename FromTy>
 class SafeCast
@@ -38,7 +39,7 @@ class SafeCast
 	// Ctor/Dtor
 	//
 public:
-	explicit SafeCast( FromTy&& rhs ) :
+	explicit SafeCast( FromTy&& rhs ) noexcept :
 		m_fromPtr( std::forward<FromTy>( rhs ))
 	{
 	}
@@ -49,7 +50,7 @@ public:
 public:
 	/* @note	Convert FromTy to ToTy */
 	template <typename ToTy>
-	operator ToTy( )
+	operator ToTy( ) noexcept
 	{
 		return static_cast<ToTy>( std::forward<FromTy>( m_fromPtr ));
 	}
@@ -67,7 +68,7 @@ class UnsafeCast
 	// Ctor/Dtor
 	//
 public:
-	explicit UnsafeCast( FromTy&& rhs ) :
+	explicit UnsafeCast( FromTy&& rhs ) noexcept:
 		m_fromPtr( std::forward<FromTy>( rhs ))
 	{
 	}
@@ -78,7 +79,7 @@ public:
 public:
 	/* @note	Convert FromTy to ToTy */
 	template <typename ToTy>
-	operator ToTy( )
+	operator ToTy( ) noexcept
 	{
 		return reinterpret_cast<ToTy>( std::forward<FromTy>( m_fromPtr ));
 	}
@@ -93,7 +94,7 @@ private:
 
 
 template <typename FromTy>
-detail::AutoCastProxy<FromTy, detail::SafeCast<FromTy>> auto_cast( FromTy&& rhs )
+detail::AutoCastProxy<FromTy, detail::SafeCast<FromTy>> auto_cast( FromTy&& rhs ) noexcept
 {
 	return detail::AutoCastProxy<FromTy, detail::SafeCast<FromTy>>( 
 		std::forward<FromTy>( rhs )
@@ -101,7 +102,7 @@ detail::AutoCastProxy<FromTy, detail::SafeCast<FromTy>> auto_cast( FromTy&& rhs 
 }
 
 template <typename FromTy>
-detail::AutoCastProxy<FromTy, detail::UnsafeCast<FromTy>> force_auto_cast( FromTy&& rhs )
+detail::AutoCastProxy<FromTy, detail::UnsafeCast<FromTy>> force_auto_cast( FromTy&& rhs ) noexcept
 {
 	return detail::AutoCastProxy<FromTy, detail::UnsafeCast<FromTy>>( 
 		std::forward<FromTy>( rhs )

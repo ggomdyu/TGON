@@ -28,20 +28,24 @@
 
 namespace
 {
-	uint32_t state_i = 0;
-	uint32_t STATE[R];
 
-	struct WELLRNGHelper
+
+uint32_t state_i = 0;
+uint32_t STATE[R];
+
+struct WELLRNGHelper
+{
+	WELLRNGHelper( )
 	{
-		WELLRNGHelper( )
-		{
-			state_i = 0;
-			uint32_t init[R];
-			for ( int32_t j = 0; j < R; j++ )
-				STATE[j] = init[j];
-		}
-	} g_wi;
-}
+		state_i = 0;
+		uint32_t init[R];
+		for ( int32_t j = 0; j < R; j++ )
+			STATE[j] = init[j];
+	}
+} g_wi;
+
+
+} /* namespace { */
 
 
 namespace tgon
@@ -64,6 +68,7 @@ float Random::WELLRNG512a( )
 
 int Random::Range( int min, int max )
 {
+	// TODO: 코드가 약간 이상함
 	return min + ( static_cast<int>( WELLRNG512a( ))*( max-min ));
 }
 

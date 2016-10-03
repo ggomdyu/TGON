@@ -43,7 +43,8 @@ public:
 	*/
 	virtual bool Equals( const Object& rhs ) const;
 
-	/* @note Compare two instance.
+	/* 
+	 * @note Compare two instance.
 	 * @param lhs Left handling side
 	 * @param rhs Right handling side
 	 * @return Return true if both refer to the same object.

@@ -97,19 +97,9 @@ bool GenericWindowFrame::PumpEvent( )
 	return false;
 }
 
-bool GenericWindowFrame::IsEnabledGlobalInputFocus( ) const
-{
-	return m_enabledGlobalMouseFocus;
-}
-
 bool GenericWindowFrame::IsClosed( ) const
 {
 	return m_closed;
-}
-
-void GenericWindowFrame::EnableGlobalMouseFocus( bool isEnable )
-{
-	m_enabledGlobalMouseFocus = isEnable;
 }
 
 

@@ -9,8 +9,6 @@
 #pragma once
 #include "../Generic/GenericScreen.h"
 
-#include <Windows.h>
-
 
 namespace tgon
 {
@@ -19,10 +17,16 @@ namespace tgon
 class TGON_API WindowsScreen : 
 	public GenericScreen<WindowsScreen>
 {
-public:
 	// 
 	// Commands
 	// 
+public:	
+	/*
+	 * @note	Toggle the full-screen.
+	 * @return	Return true on success.
+	*/
+	static bool ToggleFullScreen( const class GenericWindowFrame& window );
+
 	/* @return Return monitor's count. Return 0 on Win95/NT. */
 	static int32_t GetMonitorCount( );
 
@@ -38,10 +42,10 @@ public:
 	*/
 	static int32_t GetMainHeight( );
 
-public:
 	// 
 	// Ctor/Dtor
 	// 
+public:
 	WindowsScreen( ) = delete;
 	~WindowsScreen( ) = delete;
 

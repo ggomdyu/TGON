@@ -61,21 +61,20 @@ public:
 	// 
 	// Sets
 	// 
-	virtual void EnableGlobalMouseFocus( bool isEnable ) override;
 	virtual void SetPosition( int32_t x, int32_t y ) override;
 	virtual void SetScale( int32_t width, int32_t height ) override;
 	virtual void SetCaption( /*In*/ const wchar_t* caption ) override;
+	void EnableGlobalMouseFocus( bool isEnable );
 
 	// 
 	// Gets
 	// 
 	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const override;
-	/* @return			Return window size that contains non-client area */
 	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const override;
-	/* @param	caption	Destination of caption text */
 	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const override;
-	/* @return			Return handle of window */
 	HWND GetWindowHandle( ) const;
+	bool IsEnabledGlobalInputFocus( ) const;
+
 
 	// 
 	// Internal works
@@ -87,8 +86,14 @@ private:
 	// Private variables
 	// 
 private:
-	const HWND m_wndHandle;
+	/* @note com reference count */
 	uint32_t m_refCount;
+
+	/* @note com reference count */
+	const HWND m_wndHandle;
+
+	/* @note com reference count */
+	bool m_enabledGlobalMouseFocus;
 };
 
 using TWindowFrame = WindowsWindowFrame;

@@ -73,10 +73,14 @@ void Do2( )
 	}
 }
 
+template <typename... Args>
+void foo( Args&&... args )
+{
+	std::cout << "1";
+}
+
 int main( int argc, char* argv[] )
 {
-	
-
 	//
 	//std::cout << a.IsAbstract( ) << std::endl;
 	//std::cout << a.IsArray( ) << std::endl;

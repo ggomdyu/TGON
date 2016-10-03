@@ -19,9 +19,8 @@ namespace tgon
 
 
 WindowsWindowFrame::WindowsWindowFrame( _In_ const WindowStyle& wndStyle ) :
-	m_wndHandle( CreateWindowForm( wndStyle, 
-	   WindowsApplication::AppClassName, 
-	   WindowsApplication::InstanceHandle ))
+	m_enabledGlobalMouseFocus( false ),
+	m_wndHandle( CreateWindowForm( wndStyle, WindowsApplication::AppClassName, WindowsApplication::InstanceHandle ))
 {
 	DragAcceptFiles( m_wndHandle, true );
 
@@ -57,6 +56,7 @@ void WindowsWindowFrame::BringToFront( )
 {
 	// After Windows 98/Me: The system restricts which processes can set the foreground window.
 	// So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
+	
 	DWORD currProcessId = GetWindowThreadProcessId( m_wndHandle, nullptr );
 	DWORD foregroundProcessId = GetWindowThreadProcessId( GetForegroundWindow( ), nullptr );
 	
@@ -81,9 +81,16 @@ void WindowsWindowFrame::Flash( )
 	FlashWindowEx( &fwi );
 }
 
+bool WindowsWindowFrame::IsEnabledGlobalInputFocus( ) const
+{
+	return m_enabledGlobalMouseFocus;
+}
+
 void WindowsWindowFrame::EnableGlobalMouseFocus( bool isEnable )
 {
-	assert( m_wndHandle && 
+	m_enabledGlobalMouseFocus = isEnable;
+
+	/*assert( m_wndHandle && 
 			"tgon::WindowsPlatformWindow::EnableGlobalMouseFocus must be invoked after window created!" );
 
 	m_enabledGlobalMouseFocus = isEnable;
@@ -115,7 +122,7 @@ void WindowsWindowFrame::EnableGlobalMouseFocus( bool isEnable )
 			L"WARNINIG!",
 			MB_OK 
 		);
-	}
+	}*/
 }
 
 void WindowsWindowFrame::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
@@ -343,7 +350,7 @@ LRESULT WindowsWindowFrame::OnMessageHandled(
 				return 0;
 			}
 		}
-		// or, keep process
+		// or, keep destroying
 		break;
 				
 	case WM_DESTROY:

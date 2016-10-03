@@ -3,17 +3,20 @@
 * Date : 05/24/2016
 * Latest author :
 * Latest date :
+* Description : Extension of type_traits header
 */
 
 
 #pragma once
 
-/* Extension of type_traits header */
 
 namespace tgon
 {
 
-/* For Functions */
+
+/* 
+ *	function_traits 
+*/
 template <typename>
 struct function_traits;
 

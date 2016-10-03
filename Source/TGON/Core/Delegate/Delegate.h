@@ -10,6 +10,7 @@
 
 #include "Core/Template/TypeTraits.h"
 
+
 /* 
  * @note			Make and bind Delegate easily
  *						(ex): auto d = TGON_MAKE_DELEGATE( int(float), &FooClass::Foo, &fc );
@@ -18,6 +19,10 @@
  * @param instance	Interrupt receiver( Also it needs for member value capture )
 */
 #define TGON_MAKE_DELEGATE( type, function, instance ) Delegate<type>::Bind<tgon::function_traits<decltype( function )>::class_type, function>( instance )
+
+
+namespace tgon
+{
 
 
 template <typename Ty>
@@ -45,6 +50,7 @@ public:
 	//
 	// Commands
 	//
+public:
 	template <typename ReceiverTy,
 		RetTy( ReceiverTy::*Handler )( Args... ),
 		typename = typename std::enable_if<std::is_class<ReceiverTy>::value>::type
@@ -65,6 +71,7 @@ private:
 	StubTy m_stub;
 	void* m_receiver;
 };
+
 
 template<typename RetTy, typename ...Args>
 inline Delegate<RetTy( Args... )>::Delegate( ) noexcept :
@@ -102,4 +109,7 @@ inline RetTy Delegate<RetTy( Args... )>::MakeStub(
 	Args... args ) noexcept
 {
 	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
+}
+
+
 }
