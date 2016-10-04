@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TVector3.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Matrix4x4.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Vector3.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObject.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObserver.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp" />

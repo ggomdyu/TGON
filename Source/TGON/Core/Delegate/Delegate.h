@@ -103,7 +103,7 @@ inline Delegate<RetTy( Args... )> Delegate<RetTy( Args... )>::Bind( ReceiverTy *
 
 template<typename RetTy, typename ...Args>
 template<typename ReceiverTy, 
-	RetTy( ReceiverTy::* Handler )( Args... )>
+		 RetTy( ReceiverTy::* Handler )( Args... )>
 inline RetTy Delegate<RetTy( Args... )>::MakeStub( 
 	void* receiver, 
 	Args... args ) noexcept

@@ -15,8 +15,9 @@
 
 
 /*
- * @note			Generate event type.
- * @param	eventName	e.g. E_DESTROY, E_UPDATE, etc
+ * @note				Generate event type.
+ * @param	eventName	( e.g. E_DESTROY, E_UPDATE, etc )
+ * @param	...			Argument of event
 */
 #define TGON_GENERATE_EVENT( eventName, ... )\
 struct eventName : public tgon::Object\
@@ -162,7 +163,8 @@ private:
 
 
 template<typename EventTy, typename ReceiverTy, typename... HandlerFuncArgs>
-inline void EventObject::SubscribeEvent( HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
+inline void EventObject::SubscribeEvent( 
+	HandlerFunction<ReceiverTy, HandlerFuncArgs...> handlerFunc )
 {
 	// If event handler is not generated, then this code will output compile error.
 	// This code will be deleted in compile time.
@@ -191,7 +193,9 @@ inline void EventObject::NotifyEvent( HandlerFuncArgs... eventArgs )
 }
 
 template<typename ReceiverTy, typename... HandlerFuncArgs>
-inline void EventObject::NotifyEventImpl( uint32_t eventHash, HandlerFuncArgs... eventArgs )
+inline void EventObject::NotifyEventImpl(
+	uint32_t eventHash,
+	HandlerFuncArgs... eventArgs )
 {
 	// Does exist subscriber?
 	auto iter = ms_globalEventListenerRepo.find( eventHash );
@@ -200,7 +204,8 @@ inline void EventObject::NotifyEventImpl( uint32_t eventHash, HandlerFuncArgs...
 		// Then, iterate the repository and notify event to them
 		for ( auto& listener : iter->second )
 		{
-			static_cast<EventObserverImpl<Dummy>*>( listener.second )->Notify<HandlerFuncArgs...>( eventArgs... );
+			static_cast<EventObserverImpl<Dummy>*>( listener.second )->
+				Notify<HandlerFuncArgs...>( eventArgs... );
 		}
 	}
 }

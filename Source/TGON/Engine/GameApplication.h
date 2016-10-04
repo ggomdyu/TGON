@@ -23,7 +23,7 @@ namespace tgon
 {
 
 
-class AGameApplicationEventHandler
+class GameApplicationEventHandler
 {
 public:
 	/* @note Update the frame */
@@ -34,7 +34,7 @@ public:
 
 class TGON_API GameApplication :
 	public ModuleContext,
-	public AGameApplicationEventHandler
+	public GameApplicationEventHandler
 {
 	// 
 	// Generator

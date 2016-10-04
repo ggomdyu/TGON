@@ -78,18 +78,6 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp">
       <Filter>Sources\Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TVector3.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TQuaternion.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix4x4.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp">
       <Filter>Sources\Engine</Filter>
     </ClCompile>
@@ -143,6 +131,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Matrix4x4.cpp">
+      <Filter>Sources\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Vector3.cpp">
+      <Filter>Sources\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Quaternion.cpp">
+      <Filter>Sources\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.cpp">
+      <Filter>Sources\Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
