@@ -65,16 +65,15 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConfig.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConsole.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformFwd.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformInclude.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformMath.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformScreen.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformTime.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformWindow.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\TMain.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformFwd.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformInclude.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformMath.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformWindow.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\shared_comptr.h" />
@@ -103,6 +102,7 @@
     <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TimeModule.h" />
     <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
     <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Typedef\KeyCode.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Engine\TMain.h" />
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,10 +115,6 @@
     <ProjectReference Include="..\..\..\Source\Thirdparty\tinyxml2\tinyxml2\tinyxml2.vcxproj">
       <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.inl" />
-    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>

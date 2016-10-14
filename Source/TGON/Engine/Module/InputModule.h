@@ -18,7 +18,7 @@
 #include <OISJoyStick.h>
 #include <OISEvents.h>
 
-#include "../../Core/Platform//PlatformWindow.h"
+#include "../../Core/Platform/OSAL/PlatformWindow.h"
 
 
 namespace tgon
@@ -45,84 +45,65 @@ class TGON_API InputModule :
 	public OIS::JoyStickListener
 {
 	/*
-		Generator
+	 * Generator
 	*/
 public:
 	TGON_GENERATE_OBJECT_INTERFACE( InputModule, IModule )
 
-
 	/*
-		Ctor/Dtor
+	 * Ctor/Dtor
 	*/
 public:
-	//
-	// @note Initialize input system using OIS.
-	// @param inputAcceptWindow The window which you want to receive input message
-	// @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
-	//
-	InputModule( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
-
+	/*
+	 * @note Initialize input system using OIS.
+	 * @param inputAcceptWindow The window which you want to receive input message
+	 * @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
+	*/
+	InputModule( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 	virtual ~InputModule( );
 
-
 	/*
-		Commands
+	 * Commands
 	*/
 public:
 	//
 	virtual void Update( );
 
-
 	/*
-		Gets
+	 * Gets
 	*/
-	//
-	// @return
-	//
+public:
+	/* @return	*/
 	uint32_t GetKeyboardNum( ) const;
 	
-	//
-	// @return
-	//
+	/* @return	*/
 	uint32_t GetMouseNum( ) const;
 
-	//
-	// @return
-	//
+	/* @return	*/
 	uint32_t GetJoyStickNum( ) const;
 
-	//
-	// Returns true while the user holds down the key identified by name.
-	//
+	/* @return	true while the user holds down the key identified by name */
 	bool GetKey( KeyCode keyCode ) const
 	{
 		return false;
 	}
 
-	//
-	// Returns true during the frame the user releases the key identified by name.
-	//
+	/* @return	true during the frame the user releases the key identified by name. */
 	bool GetKeyUp( KeyCode keyCode ) const
 	{
 		return false;
 	}
 
-	//
-	// Returns true during the frame the user starts pressing down the key identified by name.
-	//
+	/* @return	true during the frame the user starts pressing down the key identified by name. */
 	bool GetKeyDown( KeyCode keyCode ) const
 	{
 		return false;
 	}
 
-
-
-
 	/*
-		Event handlers
+	 * Event handlers
 	*/
 private:
-	
 	// Keyboards
 	virtual bool keyPressed( const OIS::KeyEvent& arg ) override
 	{
@@ -224,7 +205,7 @@ private:
 		Internal works
 	*/
 private:
-	void InitializeInputManager( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
+	void InitializeInputManager( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 
 	void SetupInputDevice( uint32_t supportInputFlag );
 

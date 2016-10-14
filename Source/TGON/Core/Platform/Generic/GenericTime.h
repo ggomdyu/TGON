@@ -7,9 +7,10 @@
 
 
 #pragma once
-#include "../PlatformInclude.h"
+#include "../OSAL/PlatformInclude.h"
 
 #include <cstdint>
+#include <boost/config/suffix.hpp>
 
 
 namespace tgon
@@ -41,44 +42,37 @@ struct LocalTime
 template <typename DerivedTy>
 class TGON_API GenericTime
 {
-	//
-	//	Commands
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
-	/* @return Return execution time of OS as millisecond */
-	static uint32_t GetBootTime( ) {}
-	
+	GenericTime( ) = delete;
+	~GenericTime( ) = delete;
+
+	/*
+	 * Commands
+	*/
+public:
 	/* @return Return this process's execution time as millisecond */
 	static uint32_t GetAppExecutionTime( );
 
-	/* @return Return execution time of OS as millisecond */
-	static uint64_t GetBootTime64( ) {}
-
-	/* @return Return current system time */
-	static LocalTime GetLocalTime( ) {}
-
 	/*
-	 * @note Put to sleep which caller thread of this function while passed millisecond
-	 * @param milliSec Caller thread's sleep time
+	* Variables
 	*/
-	static void Sleep( unsigned int milliSec ) {}
-
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	GenericTime( ) = delete;
-	virtual ~GenericTime( ) = delete;
-
-	//
-	// Private variables
-	//
 private:
 	static const uint32_t ms_oldTime;
 };
 
 
+template <class DerivedTy>
+const uint32_t GenericTime<DerivedTy>::ms_oldTime = DerivedTy::GetBootTime( );
+
+
+template<typename DerivedTy>
+BOOST_FORCEINLINE uint32_t GenericTime<DerivedTy>::GetAppExecutionTime( )
+{
+	return DerivedTy::GetBootTime( ) - ms_oldTime;
+}
+
+
 } /*namespace tgon*/
-
-
-#include "GenericTime.inl"

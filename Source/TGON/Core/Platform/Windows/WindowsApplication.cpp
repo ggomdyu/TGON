@@ -60,5 +60,15 @@ void WindowsApplication::ShowCursor( bool enableShow )
 	::ShowCursor(( enableShow ) ? TRUE : FALSE );
 }
 
+void WindowsApplication::EnableFloatingException( unsigned int stat )
+{
+	unsigned int currStat;
+	_controlfp_s( &currStat, 0, 0 );
+
+	unsigned int newStat = currStat;
+	newStat &= ~stat;
+	_controlfp_s( &currStat, newStat, MCW_EM );
+}
+
 
 } /*namespace tgon*/

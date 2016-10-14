@@ -1,8 +1,8 @@
 /*
-* Author : Cha Jnho
-* Date : 07/23/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Jnho
+ * Date : 07/23/2016
+ * Latest author :
+ * Latest date :
 */
 
 
@@ -20,25 +20,27 @@ namespace tgon
 {
 
 
-/* Static method class */
-class ModuleContext :
+/* 
+ * Static method class 
+*/
+class GlobalModuleContext :
 	public EventObject
 {
-	// 
-	// Commands
-	// 
+	/*
+	 * Generator
+	*/
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( ModuleContext, EventObject )
-
+	TGON_GENERATE_OBJECT_INTERFACE( GlobalModuleContext, EventObject )
+	
+	/* 
+	 * Commands
+	*/ 
+public:
 	static void AddModule( const std::shared_ptr<IModule>& module );
 
-	// 
-	// Sets
-	// 
-
-	// 
-	// Gets
-	// 
+	/* 
+	 * Gets
+	*/ 
 	/*
 	 * @param	ModuleTy	Module type that inherited by IModule
 	 * @return				Return registered module
@@ -46,9 +48,9 @@ public:
 	template <typename ModuleTy>
 	static const std::shared_ptr<ModuleTy>& GetModule( );
 
-	// 
-	// Private variables
-	// 
+	/* 
+	 * Variables
+	*/ 
 private:
 	/* @note Use on find module */
 	static std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
@@ -56,9 +58,9 @@ private:
 
 
 template<typename ModuleTy>
-inline const std::shared_ptr<ModuleTy>& ModuleContext::GetModule( )
+inline const std::shared_ptr<ModuleTy>& GlobalModuleContext::GetModule( )
 {
-	static_assert( std::is_convertible<ModuleTy*, IModule*>::value,
+	static_assert( std::is_convertible<ModuleTy*, IModule*>::value, 
 		"ModuleTy must be intherited by IModule." );
 
 	auto iter = m_modules.find( ModuleTy::GetHashCode( ));

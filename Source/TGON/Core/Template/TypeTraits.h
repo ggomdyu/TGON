@@ -1,9 +1,9 @@
 /*
-* Author : Cha Junho
-* Date : 05/24/2016
-* Latest author :
-* Latest date :
-* Description : Extension of type_traits header
+ * Author : Cha Junho
+ * Date : 05/24/2016
+ * Latest author :
+ * Latest date :
+ * Description : Extension of type_traits header
 */
 
 
@@ -15,7 +15,7 @@ namespace tgon
 
 
 /* 
- *	function_traits 
+ * For function_traits 
 */
 template <typename>
 struct function_traits;

@@ -1,5 +1,5 @@
 #include "PrecompiledHeader.h"
-#include "../Core/Platform/TMain.h"
+#include "TMain.h"
 
 #include "../Engine/Engine.h"
 

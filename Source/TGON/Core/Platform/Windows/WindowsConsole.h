@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 01/24/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 01/24/2016
+ * Latest author :
+ * Latest date :
 */
 
 #pragma once
@@ -23,9 +23,16 @@ class TGON_API WindowsConsole :
 {
 	friend GenericConsole<WindowsConsole>;
 
-	// 
-	// Internal works
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
+public:
+	WindowsConsole( ) = delete;
+	~WindowsConsole( ) = delete;
+	
+	/* 
+	 * Internal works
+	*/ 
 private:
 	/*
 	 * @note			Write string to console.
@@ -33,17 +40,10 @@ private:
 	*/
 	static void WriteImpl( /*In*/ const char* str ) /*override*/;
 	static void WriteImpl( /*In*/ const wchar_t* str ) /*override*/;
-
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	WindowsConsole( ) = delete;
-	virtual ~WindowsConsole( ) = delete;
 };
 
 
-using TPlatformConsole = WindowsConsole;
+using Console = WindowsConsole;
 
 
 } /*namespace tgon*/

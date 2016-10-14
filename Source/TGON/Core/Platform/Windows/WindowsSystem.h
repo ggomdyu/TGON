@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 03/20/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 03/20/2016
+ * Latest author :
+ * Latest date :
 */
 
 
@@ -17,22 +17,22 @@ namespace tgon
 class TGON_API WindowsSystem :
 	public GenericSystem<WindowsSystem>
 {
-	//
-	// Commands
-	//
-public:
-	static BatteryProperty GetPowerInfo( );
-	
-	// 
-	// Ctor/Dtor
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
 	WindowsSystem( ) = delete;
 	~WindowsSystem( ) = delete;
 
+	/*
+	 * Commands
+	*/
+public:
+	static BatteryProperty GetPowerInfo( );	
 };
 
-using TSystem = WindowsSystem;
+
+using System = WindowsSystem;
 
 
 } /*namespace tgon*/

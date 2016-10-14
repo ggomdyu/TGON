@@ -49,9 +49,9 @@ public:
 private:
 	void RecursiveLoadImpl( tinyxml2::XMLNode* );
 
-	// 
-	// Private variables
-	// 
+	/* 
+	 * Variables
+	*/ 
 private:
 	bool m_isFailed;
 	tinyxml2::XMLDocument m_xmlDocument;

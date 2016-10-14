@@ -3,7 +3,7 @@
 
 #include "WindowsWindowUtility.h"
 #include "WindowsInclude.h"
-#include "../PlatformApplication.h"
+#include "../OSAL/PlatformApplication.h"
 
 #include <Windows.h>
 #include <cassert>
@@ -19,7 +19,7 @@ namespace tgon
 
 
 WindowsWindowFrame::WindowsWindowFrame( _In_ const WindowStyle& wndStyle ) :
-	m_enabledGlobalMouseFocus( false ),
+	m_enabledGlobalInputHook( false ),
 	m_wndHandle( CreateWindowForm( wndStyle, WindowsApplication::AppClassName, WindowsApplication::InstanceHandle ))
 {
 	DragAcceptFiles( m_wndHandle, true );
@@ -75,60 +75,21 @@ void WindowsWindowFrame::Flash( )
 	fwi.cbSize = sizeof( FLASHWINFO );
 	fwi.dwFlags = FLASHW_CAPTION;
 	fwi.dwTimeout = 0;
-	fwi.hwnd = this->GetWindowHandle( );
+	fwi.hwnd = m_wndHandle;
 	fwi.uCount = 1;
 
 	FlashWindowEx( &fwi );
 }
 
-bool WindowsWindowFrame::IsEnabledGlobalInputFocus( ) const
+bool WindowsWindowFrame::IsEnabledGlobalInputHook( ) const
 {
-	return m_enabledGlobalMouseFocus;
-}
-
-void WindowsWindowFrame::EnableGlobalMouseFocus( bool isEnable )
-{
-	m_enabledGlobalMouseFocus = isEnable;
-
-	/*assert( m_wndHandle && 
-			"tgon::WindowsPlatformWindow::EnableGlobalMouseFocus must be invoked after window created!" );
-
-	m_enabledGlobalMouseFocus = isEnable;
-
-
-	enum class RawInputDeviceType : USHORT
-	{
-		kPointer = 0x01,
-		kMouse = 0x02,
-		kJoyStick = 0x04,
-		kGamePad = 0x05,
-		kKeyboard = 0x06,
-		kKeyPad = 0x07,
-	};
-
-	RAWINPUTDEVICE rid {0};
-
-	rid.usUsagePage = 0x01;
-	rid.usUsage = static_cast<USHORT>( RawInputDeviceType::kMouse );
-	rid.dwFlags = ( isEnable ) ? RIDEV_INPUTSINK : RIDEV_REMOVE;
-	rid.hwndTarget = this->GetWindowHandle( );
-	
-
-	if ( ::RegisterRawInputDevices( &rid, 1, sizeof( RAWINPUTDEVICE )) == FALSE )
-	{
-		MessageBoxW( 
-			this->GetWindowHandle( ),
-			L"Failed to initialize global input focus.",
-			L"WARNINIG!",
-			MB_OK 
-		);
-	}*/
+	return m_enabledGlobalInputHook;
 }
 
 void WindowsWindowFrame::GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const
 {
 	RECT rt;
-	GetWindowRect( this->GetWindowHandle( ), &rt );
+	GetWindowRect( m_wndHandle, &rt );
 
 	*x = rt.left;
 	*y = rt.top;
@@ -176,17 +137,17 @@ STDMETHODIMP WindowsWindowFrame::QueryInterface(
 
 STDMETHODIMP_( ULONG ) WindowsWindowFrame::AddRef( )
 {
-	return ++m_refCount;
+	return ++m_comRefCount;
 }
 
 STDMETHODIMP_( ULONG ) WindowsWindowFrame::Release( )
 {
-	if ( --m_refCount == 0 )
+	if ( --m_comRefCount == 0 )
 	{
 		delete this;
 		return 0;
 	}
-	return m_refCount;
+	return m_comRefCount;
 }
 
 STDMETHODIMP WindowsWindowFrame::DragEnter( 
@@ -251,6 +212,37 @@ void WindowsWindowFrame::SetCaption(
 	SetWindowTextW( m_wndHandle, caption );
 }
 
+DWORD WindowsWindowFrame::EnableGlobalInputHook( bool isEnable, RawInputType inputFlag )
+{
+	m_enabledGlobalInputHook = isEnable;
+
+	assert( false && "DO NOT INVOKE EnableGlobalInputHook" );
+
+
+	RAWINPUTDEVICE rawInputDeviceInfo {};
+	rawInputDeviceInfo.usUsagePage = 0x01;
+	rawInputDeviceInfo.usUsage = inputFlag;
+	rawInputDeviceInfo.dwFlags = ( isEnable ) ? RIDEV_INPUTSINK : RIDEV_REMOVE;
+	rawInputDeviceInfo.hwndTarget = m_wndHandle;
+
+	const BOOL succeed = ::RegisterRawInputDevices( &rawInputDeviceInfo, 1, sizeof( RAWINPUTDEVICE ));
+	if ( succeed == FALSE )
+	{
+		DWORD lastError = GetLastError( );
+
+		MessageBoxW( 
+			m_wndHandle,
+			L"Failed to invoke ::RegisterRawInputDevices.",
+			L"WARNINIG!",
+			MB_OK 
+		);
+
+		return lastError;
+	}
+
+	return 0;
+}
+
 HRESULT WindowsWindowFrame::DragLeave( )
 {
 	return S_OK;
@@ -304,6 +296,10 @@ LRESULT WindowsWindowFrame::OnMessageHandled(
 {
 	switch ( msg )
 	{
+	case WM_CREATE:
+		/* DO NOT HANDLE THIS MESSAGE */
+		break;
+
 	case WM_SETFOCUS:
 		{
 			if ( !this->OnGetFocus( ))

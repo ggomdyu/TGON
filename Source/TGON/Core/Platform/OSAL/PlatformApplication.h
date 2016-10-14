@@ -1,6 +1,6 @@
 /*
 * Author : Cha Junho
-* Date : 05/15/2016
+* Date : 04/01/2016
 * Latest author :
 * Latest date :
 */
@@ -9,5 +9,5 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Windows/WindowsTime.h"
+#	include "../Windows/WindowsApplication.h"
 #endif

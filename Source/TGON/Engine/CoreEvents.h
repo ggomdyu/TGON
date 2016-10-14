@@ -9,4 +9,4 @@
 #include "../Core/Object/EventObject.h"
 
 
-TGON_GENERATE_EVENT( E_DESTROY )
+//TGON_GENERATE_EVENT( E_DESTROY )

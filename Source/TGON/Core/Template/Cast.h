@@ -16,14 +16,16 @@ namespace tgon
 
 namespace detail
 {
-/* Host class */
+/* 
+	Host class 
+*/
 template <typename FromTy, typename CastModel>
 class AutoCastProxy final :
 	public CastModel
 {
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
 	explicit AutoCastProxy( FromTy&& rhs ) noexcept :
 		CastModel( rhs )
@@ -31,22 +33,24 @@ public:
 	}
 };
 
-/* Policy classes */
+/* 
+	Policy classes 
+*/
 template <typename FromTy>
 class SafeCast
 {
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
 	explicit SafeCast( FromTy&& rhs ) noexcept :
 		m_fromPtr( std::forward<FromTy>( rhs ))
 	{
 	}
 
-	//
-	// Operators
-	//
+	/*
+	 * Operators
+	*/
 public:
 	/* @note	Convert FromTy to ToTy */
 	template <typename ToTy>
@@ -55,27 +59,27 @@ public:
 		return static_cast<ToTy>( std::forward<FromTy>( m_fromPtr ));
 	}
 
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	FromTy&& m_fromPtr;
 };
 template <typename FromTy>
 class UnsafeCast
 {
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
 	explicit UnsafeCast( FromTy&& rhs ) noexcept:
 		m_fromPtr( std::forward<FromTy>( rhs ))
 	{
 	}
 
-	//
-	// Operators
-	//
+	/*
+	 * Operators
+	*/
 public:
 	/* @note	Convert FromTy to ToTy */
 	template <typename ToTy>
@@ -84,9 +88,9 @@ public:
 		return reinterpret_cast<ToTy>( std::forward<FromTy>( m_fromPtr ));
 	}
 
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	FromTy&& m_fromPtr;
 };

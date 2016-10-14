@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../Platform/PlatformInclude.h"
+#include "../Platform/OSAL/PlatformInclude.h"
 #include "Vector3.h"
 
 #include <cmath>
@@ -19,102 +19,102 @@ namespace tgon
 {
 
 
-class TGON_API TMath
+class TGON_API Math
 {
-	// 
-	// Static variables
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
-	static constexpr float PI = 3.141592654f;
-	static constexpr float EPSILON = 0.0001f;
-	static constexpr float Deg2Rad = PI/180;
-	static constexpr float Rad2Deg = 180/PI;
+	Math( ) = delete;
+	~Math( ) = delete;
 
-	// 
-	// Commands
-	// 
+	/* 
+	 * Commands
+	*/ 
 public:
 	static float Round( float val );
 	static int32_t RoundToInt( float val );
+
+	/* @return	Discarded fractional parts */
 	static float Floor( float val );
+
+	/* @return	Discarded fractional parts */
 	static int32_t FloorToInt( float val );
 
-	/* @return Return root of value */
+	/* @return	Square root value */
 	static float Sqrt( float value );
 
-	/* @return	Return maximum value between first and second */
+	/* @return	Maximum value between first and second */
 	template <class Ty>
 	static constexpr Ty Max( Ty first, Ty second );
 
-	/* @return	Return minimum value between first and second */
+	/* @return	Minimum value between first and second */
 	template <class Ty>
 	static constexpr Ty Min( Ty first, Ty second );
 
-	/* @return	Return absolute value of 'value' */
+	/* @return	Absolute value */
 	template <class Ty>
 	static constexpr Ty Abs( Ty value );
 
-	/* @return if value is over 0, then return 1, else it's below, then return -1, else return 0 */
+	/* @return	If value is over 0, then 1, else it's below, then -1, else 0 */
 	template<class Ty>
 	static constexpr Ty Sign( Ty value );
 
-	/* @return	Return clamped value between min and max */
+	/* @return	Clamped value between min and max */
 	template <class Ty>
 	static constexpr Ty Clamp( Ty value, Ty min, Ty max );
 
 	/* 
-	 * @return			Return x65599 hash key, Length is passed in compile-time.
-	 * @param	str		Undecayed string ( like "Text", not const char* = "Text" )
+	 * @param	str		Undecayed string ( e.g. "Text" )
+	 * @return			x65599 Hash value
 	*/
 	template <std::size_t N>
 	static uint32_t StringToHash( const char( &str )[N] );
 	
 	/* 
-	 * @return			Return x65599 hash key, Length is passed in run-time.
-	 * @param	str		Decayed string ( like const char* = "Text", not "Text" )
+	 * @param	str		Decayed string ( e.g. const char* = "Text"; )
+	 * @return			x65599 x65599 Hash value
 	*/
 	static uint32_t StringToHash( const char* str, std::size_t length );
 
 	/* 
-	 * @return			Return smoothly interpolated value 
 	 * @param	from	Interpolation start value
 	 * @param	to		Interpolation end value
 	 * @param	t		Elapsed time
+	 * @return			Smoothly interpolated value 
 	*/
 	static constexpr float Lerp( float from, float to, float t );
 	static float Smoothstep( float from, float to, float t );
 	
 	/* 
-	 * @return			Return smoothly interpolated value between three vector
 	 * @param	a/b/c	Interpolate target
 	 * @param	t		Elapsed time
+	 * @return			Smoothly interpolated value between three vector
 	*/
 	static Vector3 Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t );
 
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	TMath( ) = delete;
-	virtual ~TMath( ) = delete;
-
-	//
-	//  Private variables
-	//
+	/*
+	 *  Variables
+	*/
 private:
-	/* TODO: Do Collision check */
+	/* TODO: Pls Do Collision check!! */
 	static uint32_t x65599Hash( const char* str, std::size_t length );
+public:
+	static constexpr float PI = 3.141592654f;
+	static constexpr float EPSILON = 0.0001f;
+	static constexpr float Deg2Rad = PI / 180;
+	static constexpr float Rad2Deg = 180 / PI;
 };
 
 
 
-BOOST_FORCEINLINE float TMath::Round( 
+BOOST_FORCEINLINE float Math::Round( 
 	float val )
 {
 	return static_cast<float>( RoundToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t TMath::RoundToInt(
+BOOST_FORCEINLINE int32_t Math::RoundToInt(
 	float val )
 {
 //#if TGON_SUPPORT_SSE2
@@ -124,13 +124,13 @@ BOOST_FORCEINLINE int32_t TMath::RoundToInt(
 //#endif
 }
 
-BOOST_FORCEINLINE float TMath::Floor( 
+BOOST_FORCEINLINE float Math::Floor( 
 	float val )
 {
 	return static_cast<float>( FloorToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t TMath::FloorToInt( 
+BOOST_FORCEINLINE int32_t Math::FloorToInt( 
 	float val )
 {
 //#if TGON_SUPPORT_SSE2
@@ -140,14 +140,14 @@ BOOST_FORCEINLINE int32_t TMath::FloorToInt(
 //#endif
 }
 
-BOOST_FORCEINLINE float TMath::Sqrt( 
+BOOST_FORCEINLINE float Math::Sqrt( 
 	float val )
 {
 	return std::sqrt( val );
 }
 
 template <class Ty>
-constexpr Ty TMath::Max(
+constexpr Ty Math::Max(
 	Ty first, 
 	Ty second )
 {
@@ -155,7 +155,7 @@ constexpr Ty TMath::Max(
 }
 
 template <class Ty>
-constexpr Ty TMath::Min( 
+constexpr Ty Math::Min( 
 	Ty first, 
 	Ty second )
 {
@@ -163,43 +163,43 @@ constexpr Ty TMath::Min(
 }
 
 template <class Ty>
-constexpr Ty TMath::Abs( 
+constexpr Ty Math::Abs( 
 	Ty value )
 {
 	return ( value < (Ty)(0)) ? -value : value;
 }
 
 template<class Ty>
-constexpr Ty TMath::Sign( 
+constexpr Ty Math::Sign( 
 	Ty value )
 {
 	return ( value > (Ty)(0)) ? (Ty)(1) : ( value < (Ty)(0)) ? (Ty)(-1) : (Ty)(0);
 }
 
 template <class Ty>
-constexpr Ty TMath::Clamp( 
+constexpr Ty Math::Clamp( 
 	Ty value, 
 	Ty min, 
 	Ty max )
 {
-	return TMath::Max( TMath::Min( value, max ), min );
+	return Math::Max( Math::Min( value, max ), min );
 }
 
 template<std::size_t N>
-BOOST_FORCEINLINE uint32_t TMath::StringToHash( 
+BOOST_FORCEINLINE uint32_t Math::StringToHash( 
 	/*IN*/ const char( &str )[N] )
 {
 	return x65599Hash( str, N );
 }
 
-BOOST_FORCEINLINE uint32_t TMath::StringToHash( 
+BOOST_FORCEINLINE uint32_t Math::StringToHash( 
 	/*IN*/ const char* str, 
 	std::size_t length )
 {
 	return x65599Hash( str, length );
 }
 
-constexpr float TMath::Lerp( 
+constexpr float Math::Lerp( 
 	float from, 
 	float to, 
 	float t )
@@ -207,16 +207,16 @@ constexpr float TMath::Lerp(
 	return from + (( to-from )*t );
 }
 
-inline float TMath::Smoothstep( 
+inline float Math::Smoothstep( 
 	float from, 
 	float to, 
 	float t )
 {
-	t = TMath::Clamp(( t-from )/( to-from ), 0.f, 1.f );
+	t = Math::Clamp(( t-from )/( to-from ), 0.f, 1.f );
 	return t*t*( 3.f-( 2.f*t ));
 }
 
-inline Vector3 TMath::Bezier( 
+inline Vector3 Math::Bezier( 
 	/*IN*/ const Vector3& a,
 	/*IN*/ const Vector3& b,
 	/*IN*/ const Vector3& c, 
@@ -226,7 +226,7 @@ inline Vector3 TMath::Bezier(
 	return {( inv*inv*a ) + ( 2*t*inv*b ) + ( t*t*c )};
 }
 
-BOOST_FORCEINLINE uint32_t TMath::x65599Hash( 
+BOOST_FORCEINLINE uint32_t Math::x65599Hash( 
 	/*IN*/ const char* str, 
 	std::size_t length )
 {

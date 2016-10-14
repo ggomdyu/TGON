@@ -1,21 +1,15 @@
 /*
-* Author : Cha Junho
-* Date : 04/24/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 04/24/2016
+ * Latest author :
+ * Latest date :
 */
 
 
 #pragma once
-#include <boost/predef/os.h>
-
-
-#if !BOOST_OS_WINDOWS
-#   error "WindowsPlatformConfig.h included but BOOST_WINDOWS is not defined"
-#endif
 
 /*
-	Dynamic-link library
+ * Dynamic-link library
 */
 #ifndef TGON_STATIC_BUILD
 #	ifdef TGON_API_EXPORT
@@ -25,7 +19,7 @@
 #	endif
 #else
 /*
-	Staic library
+ * Staic library
 */
 #	define TGON_API
 #endif

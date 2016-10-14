@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 03/20/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 03/20/2016
+ * Latest author :
+ * Latest date :
 */
 
 
@@ -26,34 +26,34 @@ namespace tgon
 class TGON_API WindowsApplication :
 	public GenericApplication<WindowsApplication>
 {
-	// 
-	// Static variables
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
-	static const HINSTANCE InstanceHandle;
-	static const wchar_t* AppClassName;
+	WindowsApplication( ) = delete;
+	~WindowsApplication( ) = delete;
 
-	//
-	// Commands
-	//
+	/*
+	 * Commands
+	*/
 public:
 	/*
-	 * @note	Update all of message queue.
-	 * @return	Return false if there is no event to pump out
+	 * @note	Update windows' message queue.
+	 * @return	False if there is no event to pull out
 	*/
 	static bool PumpEvent( );
-
+	
 	/*
-	 * @note	Exit thread by force. This function is not recommended.
-	 * @param	exitCode Pass exit code.
-	*/
-	static void ExitThread( int32_t exitCode );
-
-	/*
-	 * @note				Quit application with passing exit code.
-	 * @param	exitCode	Pass exit code.
+	 * @note				Post quit message to its queue.
+	 * @param	exitCode	Exit code
 	*/
 	static void Quit( int32_t exitCode );
+
+	/*
+	 * @note				Terminate thread by force. Not recommended.
+	 * @param	exitCode	Exit code
+	*/
+	static void ExitThread( int32_t exitCode );
 
 	/*
 	 * @note				Enable show cursor mode: Hide or Show
@@ -61,26 +61,29 @@ public:
 	*/
 	static void ShowCursor( bool enableShow );
 
+	/* @note	Enable float calculate exception ( like devide 0, underflow, overflow, etc ) */
+	static void EnableFloatingException( unsigned int newStat );
+
 	/**/
 	//static void DisableTaskSwitching( );
 
-	//
-	// Event handler
-	//
+	/*
+	 * Event handlers
+	*/
 public:
 	/* @note	Message procedure */
 	static LRESULT WINAPI OnMessageHandled( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
-	// 
-	// Ctor/Dtor
-	// 
+	/*
+	 * Variables
+	*/
 public:
-	WindowsApplication( ) = delete;
-	~WindowsApplication( ) = delete;
-
+	static const HINSTANCE InstanceHandle;
+	static const wchar_t* AppClassName;
 };
 
-using TApplication = WindowsApplication;
+
+using Application = WindowsApplication;
 
 
 } /*namespace tgon*/

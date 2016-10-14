@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "../Platform/PlatformInclude.h"
+#include "../Platform/OSAL/PlatformInclude.h"
 #include "Type.h"
 
 #include <cstdint>

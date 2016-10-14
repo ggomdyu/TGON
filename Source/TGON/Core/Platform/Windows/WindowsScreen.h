@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 03/20/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 03/20/2016
+ * Latest author :
+ * Latest date :
 */
 
 
@@ -17,9 +17,16 @@ namespace tgon
 class TGON_API WindowsScreen : 
 	public GenericScreen<WindowsScreen>
 {
-	// 
-	// Commands
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
+public:
+	WindowsScreen( ) = delete;
+	~WindowsScreen( ) = delete;
+
+	/* 
+	 * Commands
+	*/ 
 public:	
 	/*
 	 * @note	Toggle the full-screen.
@@ -41,19 +48,10 @@ public:
 	 * @return Return main monitor's screen height.
 	*/
 	static int32_t GetMainHeight( );
-
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	WindowsScreen( ) = delete;
-	~WindowsScreen( ) = delete;
-
 };
 
 
-using TPlatformScreen = WindowsScreen;
-
+using Screen = WindowsScreen;
 
 
 } /*namespace tgon*/

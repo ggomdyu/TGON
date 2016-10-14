@@ -9,8 +9,8 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Windows/WindowsInclude.h"
-#	include "Windows/WindowsConfig.h"
+#	include "../Windows/WindowsInclude.h"
+#	include "../Windows/WindowsConfig.h"
 #endif
 
 #ifndef TGON_SUPPORT_SSE2

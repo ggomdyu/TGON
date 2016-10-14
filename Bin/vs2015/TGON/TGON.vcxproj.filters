@@ -58,6 +58,9 @@
     <Filter Include="Sources\Core\Platform\Generic">
       <UniqueIdentifier>{91df2c55-5c28-4197-b8a3-b81fd9d38606}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Core\Platform\OSAL">
+      <UniqueIdentifier>{2c6cfb2f-b81d-47f7-b80c-4f2c240decd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\XML\TXMLReader.cpp">
@@ -108,9 +111,6 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
@@ -144,6 +144,9 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Math\Matrix3x3.cpp">
       <Filter>Sources\Core\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
+      <Filter>Sources\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\XML\TXMLReader.h">
@@ -160,36 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Random\Random.h">
       <Filter>Sources\Core\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConfig.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformConsole.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformFwd.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformInclude.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformMath.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformScreen.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformTime.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformWindow.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\TMain.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\PlatformApplication.h">
-      <Filter>Sources\Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
@@ -311,18 +284,40 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformFwd.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformInclude.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformMath.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformScreen.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformTime.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformWindow.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformApplication.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformConfig.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\OSAL\PlatformConsole.h">
+      <Filter>Sources\Core\Platform\OSAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\TMain.h">
+      <Filter>Sources\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">
       <Filter>Sources\Core\Math</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.inl">
-      <Filter>Sources\Core\Platform\Generic</Filter>
-    </None>
-    <None Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.inl">
-      <Filter>Sources\Core\Platform\Generic</Filter>
-    </None>
   </ItemGroup>
 </Project>

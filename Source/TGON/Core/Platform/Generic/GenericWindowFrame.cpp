@@ -12,8 +12,6 @@ namespace tgon
 {
 
 
-decltype( WindowStyle::DefaultStyle ) WindowStyle::DefaultStyle;
-
 WindowStyle WindowStyle::LoadFromXML( const char* xmlPath )
 {
 	/*using boost::property_tree::ptree;
@@ -80,26 +78,6 @@ WindowStyle WindowStyle::LoadFromXML( const char* xmlPath )
 	}
 
 	return parsedWndStyle;
-}
-
-GenericWindowFrame::GenericWindowFrame( ) :
-	m_closed( false )
-{
-}
-
-GenericWindowFrame::~GenericWindowFrame( )
-{
-	m_closed = true;
-}
-
-bool GenericWindowFrame::PumpEvent( )
-{
-	return false;
-}
-
-bool GenericWindowFrame::IsClosed( ) const
-{
-	return m_closed;
 }
 
 

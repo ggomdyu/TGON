@@ -2,7 +2,7 @@
 #include "Engine.h"
 
 #include "GameApplication.h"
-#include "../Core/Platform/PlatformApplication.h"
+#include "../Core/Platform/OSAL/PlatformApplication.h"
 #include "Module/InputModule.h"
 #include "CoreEvents.h"
 
@@ -31,7 +31,7 @@ void Engine::AddDefaultModulesToRepo( )
 
 int32_t Engine::Execute( int argc, char** argv )
 {
-	const std::shared_ptr<TWindowFrame>& window = m_gameApplication->GetRootWindow( );
+	const std::shared_ptr<WindowFrame>& window = m_gameApplication->GetRootWindow( );
 	if ( window.get( ) )
 	{
 		// Loop for window event( =messsage )
@@ -52,7 +52,7 @@ int32_t Engine::Execute( int argc, char** argv )
 	}
 	
 
-	this->NotifyEvent<E_DESTROY>( );
+//	this->NotifyEvent<E_DESTROY>( );
 	return 0;
 }
 

@@ -19,9 +19,16 @@ namespace tgon
 class TGON_API WindowsTime :
 	public GenericTime<WindowsTime>
 {
-	// 
-	// Commands
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
+public:
+	WindowsTime( ) = delete;
+	~WindowsTime( ) = delete;
+
+	/* 
+	 * Commands
+	*/
 public:
 	/* @return Return execution time of OS as millisecond */
 	static uint32_t GetBootTime( );
@@ -37,17 +44,10 @@ public:
 	 * @param milliSec Caller thread's sleep time
 	*/
 	static void Sleep( unsigned int milliSec );
-
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	WindowsTime( ) = delete;
-	virtual ~WindowsTime( ) = delete;
 };
 
 
-using TPlatformTime = WindowsTime;
+using Time = WindowsTime;
 
 
 } /*namespace tgon*/

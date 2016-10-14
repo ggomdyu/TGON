@@ -8,7 +8,7 @@
 
 
 #pragma once
-#include "../Platform/PlatformInclude.h"
+#include "../Platform/OSAL/PlatformInclude.h"
 
 
 namespace tgon

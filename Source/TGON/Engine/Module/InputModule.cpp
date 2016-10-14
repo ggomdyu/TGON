@@ -1,14 +1,14 @@
 #include "PrecompiledHeader.h"
 #include "InputModule.h"
 
-#include "../../Core/Platform/PlatformWindow.h"
+#include "../../Core/Platform/OSAL/PlatformWindow.h"
 #include <string>
 
 
 namespace tgon {
 
 
-InputModule::InputModule( TWindowFrame* inputAcceptTargets, uint32_t supportInputFlag ) :
+InputModule::InputModule( WindowFrame* inputAcceptTargets, uint32_t supportInputFlag ) :
 	m_inputManager( nullptr ),
 	m_keyboardDevice( nullptr ),
 	m_mouseDeivece( nullptr ),
@@ -49,7 +49,7 @@ void InputModule::Update( )
 	//}
 }
 
-void InputModule::InitializeInputManager( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag )
+void InputModule::InitializeInputManager( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag )
 {
 	// Insert OS Specific Info here
 	OIS::ParamList paramList;

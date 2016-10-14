@@ -7,9 +7,9 @@ namespace {
 
 class WindowsPlatformConsoleHelper final
 {
-	//
-	// Gets
-	//
+	/*
+	 * Gets
+	*/
 public:
 	static WindowsPlatformConsoleHelper& Get( )
 	{
@@ -22,17 +22,17 @@ public:
 		return m_outputHandle;
 	}
 
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 private:
 	WindowsPlatformConsoleHelper( );
 public:
 	~WindowsPlatformConsoleHelper( );
 
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	HANDLE m_outputHandle;
 };

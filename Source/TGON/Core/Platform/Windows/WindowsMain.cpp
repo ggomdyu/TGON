@@ -1,10 +1,9 @@
 #include "PrecompiledHeader.h"
-#include "../TMain.h"
 
 #include <cstdint>
-
 #include <crtdbg.h>
 #include <Windows.h>
+
 #include "WindowsApplication.h"
 
 
@@ -17,18 +16,16 @@
 #pragma comment( linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"" )
 
 
+namespace tgon
+{
+	/* @note defined in TMain.h or cpp */
+	extern int main( int argc, char** argv );
+}
+
+
 namespace 
 {
 
-void EnableFloatingException( )
-{
-	unsigned int currStat;
-	_controlfp_s( &currStat, 0, 0 );
-
-	unsigned int newStat = currStat;
-	newStat &= ~( EM_ZERODIVIDE );
-	_controlfp_s( &currStat, newStat, MCW_EM );
-}
 
 bool RegisterWindowClass( )
 {
@@ -60,11 +57,9 @@ int WINAPI WinMain(
 	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 
-	//
 	// Platform-independent initialization is here
-	//
 	{
-		EnableFloatingException( );
+		tgon::WindowsApplication::EnableFloatingException( EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE );
 
 		// TODO: Insert mini-dump setting code here
 

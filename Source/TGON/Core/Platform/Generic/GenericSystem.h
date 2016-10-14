@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../PlatformInclude.h"
+#include "../OSAL/PlatformInclude.h"
 
 #include <cstdint>
 
@@ -31,19 +31,9 @@ struct BatteryProperty
 template <typename DerivedTy>
 class TGON_API GenericSystem
 {
-	// 
-	// Gets
-	//
-public:
 	/*
-	 * @note Get the system power information. Desktop does not apply.
-	 * @return Return the property that described about system power.
+	 * Ctor/Dtor
 	*/
-	static BatteryProperty GetPowerInfo( ) { return BatteryProperty{ false, 0 }; }
-
-	// 
-	// Ctor/Dtor
-	// 
 public:
 	GenericSystem( ) = delete;
 	~GenericSystem( ) = delete;

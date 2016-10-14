@@ -8,7 +8,7 @@
 #pragma once
 #include <type_traits>
 
-#include "Core/Template/TypeTraits.h"
+#include "../Template/TypeTraits.h"
 
 
 /* 
@@ -33,40 +33,41 @@ class Delegate<RetTy( Args... )> final
 {
 	using StubTy = RetTy(*)( void*, Args... );
 
-	//
-	// Con/Dtor
-	//
+	/*
+	 * Con/Dtor
+	*/
 public:
 	Delegate( ) noexcept;
 	Delegate( void* receiver, StubTy stub ) noexcept;
 	Delegate( const Delegate& ) noexcept = default;
+	Delegate( Delegate&& ) noexcept = default;
 	~Delegate( ) noexcept = default;
 
-	//
-	// Operators
-	//
+	/*
+	 * Operators
+	*/
 	RetTy operator()( Args... args );
+	Delegate& operator=( Delegate&& ) noexcept = default;
 
-	//
-	// Commands
-	//
+	/*
+	 * Commands
+	*/
 public:
 	template <typename ReceiverTy,
 		RetTy( ReceiverTy::*Handler )( Args... ),
-		typename = typename std::enable_if<std::is_class<ReceiverTy>::value>::type
-	>
+		typename = typename std::enable_if<std::is_class<ReceiverTy>::value>::type>
 	static Delegate Bind( ReceiverTy* receiver ) noexcept;
 
-	//
-	// Internal works
-	//
+	/*
+	 * Internal works
+	*/
 private:
 	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
 	static RetTy MakeStub( void* receiver, Args... args ) noexcept;
 	
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	StubTy m_stub;
 	void* m_receiver;

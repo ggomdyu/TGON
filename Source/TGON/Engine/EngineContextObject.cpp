@@ -2,7 +2,7 @@
 #include "EngineContextObject.h"
 
 
-void tgon::ModuleContext::AddModule( const std::shared_ptr<IModule>& module )
+void tgon::GlobalModuleContext::AddModule( const std::shared_ptr<IModule>& module )
 {
 	//std::lock_guard<std::mutex>( this->GetSystemMutex( ));
 

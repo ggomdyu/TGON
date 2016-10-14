@@ -8,7 +8,7 @@
 
 #pragma once
 #include "../Engine/EngineContextObject.h"
-#include "../Core/Platform/PlatformWindow.h"
+#include "../Core/Platform/OSAL/PlatformWindow.h"
 
 
 #define TGON_GENERATE_GAMEAPP( className )\
@@ -23,57 +23,53 @@ namespace tgon
 {
 
 
-class GameApplicationEventHandler
+class IGameApplicationEventHandler
 {
 public:
-	/* @note Update the frame */
-	virtual void OnUpdate( ) {};
-	virtual void OnRender( ) {};
-	virtual void OnDestroy( ) {};
+	virtual ~IGameApplicationEventHandler( ) = default;
+
+	virtual void OnUpdate( ) = 0;
+	virtual void OnRender( ) = 0;
 };
 
 class TGON_API GameApplication :
-	public ModuleContext,
-	public GameApplicationEventHandler
+	public GlobalModuleContext,
+	public IGameApplicationEventHandler
 {
-	// 
-	// Generator
-	// 
+	/* 
+	 * Generator
+	*/ 
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( GameApplication, ModuleContext )
+	TGON_GENERATE_OBJECT_INTERFACE( GameApplication, GlobalModuleContext )
 
-	// 
-	// Ctor/Dtor
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
 	/* note Create default window, no custom event handler, by WindowStyle */
-	explicit GameApplication( const std::shared_ptr<TWindowFrame>& window ) :
-		m_paused( false ),
-		m_rootWindow( window )
-	{
-	}
+	explicit GameApplication( const std::shared_ptr<WindowFrame>& window );
 	virtual ~GameApplication( ) = default;
 
-	// 
-	// Sets
-	// 
+	/* 
+	 * Sets
+	*/ 
 	/* @note Play the game application's frame update ( Use on paused ) */
 	void Play( );
 	/* @note Pause the game application's frame update */
 	void Pause( );
 
-	// 
-	// Gets
-	// 
-	const std::shared_ptr<TWindowFrame>& GetRootWindow( ) const;
+	/* 
+	 * Gets
+	*/ 
+	const std::shared_ptr<WindowFrame>& GetRootWindow( ) const;
 	bool IsPaused( ) const;
 
-	// 
-	// Private variables
-	// 
+	/*
+	 * Variables
+	*/ 
 private:
 	bool m_paused;
-	std::shared_ptr<TWindowFrame> m_rootWindow;
+	std::shared_ptr<WindowFrame> m_rootWindow;
 };
 
 
@@ -87,7 +83,7 @@ inline void tgon::GameApplication::Pause( )
 	m_paused = true;
 }
 
-inline const std::shared_ptr<TWindowFrame>& GameApplication::GetRootWindow( ) const
+inline const std::shared_ptr<WindowFrame>& GameApplication::GetRootWindow( ) const
 {
 	return m_rootWindow;
 }

@@ -1,7 +1,9 @@
-//---------------------------------------------------------------------------------
-// Author : Cha Junho
-// Date : 04/19/2016
-//---------------------------------------------------------------------------------
+/*
+ * Author : Cha Junho
+ * Date : 04/19/2016
+ * Latest author :
+ * Latest date :
+*/
 
 #pragma once
 #include <string>
@@ -29,12 +31,14 @@ inline const TypeInfo& GetType( )
 	return type;
 }
 
-/* RTTI */
+/* 
+	RTTI 
+*/
 struct TypeInfo
 {
-	//
-	// Enumerators
-	//
+	/*
+	 * Enumerators
+	*/
 protected:
 	enum { MAX_BITSET_COUNT = 16, };
 	enum BitsetIndex {
@@ -50,9 +54,9 @@ protected:
 		isPOD,
 	};
 
-	//
-	// Commands
-	//
+	/*
+	 * Commands
+	*/
 public:
 	bool IsClass( ) const		{ return m_bits[isClass]; }
 	bool IsAbstract( ) const	{ return m_bits[isAbstract]; }
@@ -66,9 +70,9 @@ public:
 	bool IsMemberFunctionPointer( ) const { return m_bits[isMemberFunctionPointer]; }
 	bool IsPOD( ) const			{ return m_bits[isPOD]; }
 
-	//
-	// Gets
-	//
+	/*
+	 * Gets
+	*/
 	/* @return	Return stored hase code */
 	uint32_t GetHashCode( ) const
 	{
@@ -81,14 +85,14 @@ public:
 		return m_name;
 	}
 
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 protected:
 	explicit TypeInfo( /*IN*/ const char* name,
 					   /*IN*/ const std::size_t length,
 					   /*IN*/ const std::bitset<MAX_BITSET_COUNT>& bits ) noexcept :
-		m_hashCode( TMath::StringToHash( name, length )),
+		m_hashCode( Math::StringToHash( name, length )),
 		m_name( name ),
 		m_bits( bits )
 	{
@@ -97,9 +101,9 @@ protected:
 public:
 	~TypeInfo( ) = default;
 
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	/* @note	Type name as string value */
 	const std::string m_name;
@@ -118,9 +122,9 @@ template <typename Ty>
 struct TypeInfoImpl final :
 	public TypeInfo
 {
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
 	TypeInfoImpl( ) noexcept :
 		TypeInfoImpl( typeid( Ty ))
@@ -138,9 +142,9 @@ protected:
 public:
 	~TypeInfoImpl( ) = default;
 
-	//
-	// Internal works
-	//
+	/*
+	 * Internal works
+	*/
 private:
 	const std::bitset<MAX_BITSET_COUNT> MakeBitSet( ) const noexcept
 	{

@@ -18,38 +18,48 @@ namespace tgon
 {
 
 
+enum RawInputType : USHORT
+{
+	kPointer = 0x01,
+	kMouse = 0x02,
+	kJoyStick = 0x04,
+	kGamePad = 0x05,
+	kKeyboard = 0x06,
+	kKeyPad = 0x07,
+};
+
 class TGON_API WindowsWindowFrame : 
-	public GenericWindowFrame,
+	public GenericWindowFrame<WindowsWindowFrame>,
 	public IDropTarget
 {
-	// 
-	// Ctor/Dtor
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
 	explicit WindowsWindowFrame( _In_ const WindowStyle& wndStyle );
 	virtual ~WindowsWindowFrame( );
 
+	/* 
+	 * Commands
+	*/ 
 public:
-	// 
-	// Commands
-	// 
-	virtual bool PumpEvent( ) override;
-	virtual void Show( ) override;
-	virtual void Hide( ) override;
-	virtual void Quit( ) override;
-	virtual void Maximize( ) override;
-	virtual void Minimize( ) override;
-	virtual void BringToFront( ) override;
-	virtual void Flash( ) override;
+	bool PumpEvent( );
+	void Show( );
+	void Hide( );
+	void Quit( );
+	void Maximize( );
+	void Minimize( );
+	void BringToFront( );
+	void Flash( );
 	
-	//
-	// Event handlers
-	//
+	/*
+	 * Event handlers
+	*/
 	virtual LRESULT OnMessageHandled( HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam );
 
-	//
-	// COM Interfaces
-	//
+	/*
+	 * COM Interfaces
+	*/
 	STDMETHODIMP QueryInterface( REFIID riid, void** ppvObject ) override;
 	STDMETHODIMP_( ULONG ) AddRef( ) override;
 	STDMETHODIMP_( ULONG ) Release( ) override;
@@ -58,45 +68,48 @@ public:
 	STDMETHODIMP DragLeave( ) override;
 	STDMETHODIMP Drop( LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect ) override;
 
-	// 
-	// Sets
-	// 
-	virtual void SetPosition( int32_t x, int32_t y ) override;
-	virtual void SetScale( int32_t width, int32_t height ) override;
-	virtual void SetCaption( /*In*/ const wchar_t* caption ) override;
-	void EnableGlobalMouseFocus( bool isEnable );
+	/* 
+	 * Sets
+	*/ 
+public:
+	void SetPosition( int32_t x, int32_t y );
+	void SetScale( int32_t width, int32_t height );
+	void SetCaption( /*In*/ const wchar_t* caption );
+	
+	/* 
+		@note				Enable global input hook
+		@param	isEnable	Enable or Disable
+		@param	inputFlag	OR input flag
+		@return				If failed, then GetLastError code, 0 otherwise.
+	*/
+	DWORD EnableGlobalInputHook( bool isEnable, RawInputType inputFlag );
 
-	// 
-	// Gets
-	// 
-	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const override;
-	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const override;
-	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const override;
+	/* 
+	 * Gets
+	*/ 
+	void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const;
+	void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const;
+	void GetCaptionText( /*Out*/ wchar_t* caption ) const;
 	HWND GetWindowHandle( ) const;
-	bool IsEnabledGlobalInputFocus( ) const;
+	bool IsEnabledGlobalInputHook( ) const;
 
-
-	// 
-	// Internal works
-	// 
+	/* 
+	 * Internal works
+	*/ 
 private:
 	void AdditionalInit( /*In*/ const WindowStyle& );
 
-	// 
-	// Private variables
-	// 
+	/* 
+	 * Variables
+	*/ 
 private:
-	/* @note com reference count */
-	uint32_t m_refCount;
-
-	/* @note com reference count */
+	uint32_t m_comRefCount;
 	const HWND m_wndHandle;
-
-	/* @note com reference count */
-	bool m_enabledGlobalMouseFocus;
+	bool m_enabledGlobalInputHook;
 };
 
-using TWindowFrame = WindowsWindowFrame;
+
+using WindowFrame = WindowsWindowFrame;
 
 
 } /*namespace tgon*/

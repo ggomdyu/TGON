@@ -7,7 +7,7 @@
 
 
 #pragma once
-#include "../PlatformInclude.h"
+#include "../OSAL/PlatformInclude.h"
 
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -26,11 +26,55 @@ enum class MouseType
 	Right,
 };
 
-class WindowEventHandler
+struct WindowStyle
 {
-	//
-	// Event handlers
-	//
+	/* 
+	 * Commands
+	*/ 
+public:
+	/*
+	 * @param	xmlPath	Full path of XML file
+	 * @return	Return	WindowStyle which read from xml 
+	*/
+	static WindowStyle LoadFromXML( const char* xmlPath );
+	
+	/* 
+	 * Variables
+	*/ 
+public:
+	std::string title = "TGON-Default"; /* Caption text of window */
+	int32_t x = 100; /* Window transform */
+	int32_t y = 100; /* Window transform */
+	int32_t width = 500; /* Window transform */
+	int32_t height = 500; /* Window transform */
+
+	bool popup = false; /* If true, then do not make window frame. */
+	bool fullScreen = false; /* If true, then show window as full-screen when it was created. */
+	bool supportWindowTransparency = false; /* If true, then enable window surface's transparency. */
+	bool supportPerPixelTransparency = false; /* If true, then enable the window surface's perpixel transparency. */
+	bool showTopOnCreated = false; /* Add comment */ 
+	bool resizeable = true; /* If true, then make resizable frame to window. */
+	bool topMost = false; /* Show window always top. This can cause race each other top-most window. */
+	bool maximized = false; /* If true, then set window maximized when it was created. */
+	bool minimized = false; /* If true, then set window minimized when it was created. */
+	bool showMiddle = true; /* If true, then set window position to middle of screen when it was created. */
+	bool showImmediately = true; /* If true, then show window immediately when it was created, else */
+};
+
+template <typename DerivedTy>
+class TGON_API GenericWindowFrame :
+	private boost::noncopyable
+{
+	/* 
+	 * Ctor/Dtor
+	*/ 
+public:
+	GenericWindowFrame( );
+	virtual ~GenericWindowFrame( ) = 0;
+
+	/*
+	 * Event handlers
+	*/
 public:
 	virtual void OnMove( int32_t x, int32_t y ) {}
 	virtual void OnResize( int32_t width, int32_t height ) {}
@@ -50,112 +94,37 @@ public:
 	*/
 	virtual bool OnDestroy( ) { return true; }
 
-};
-
-struct WindowStyle
-{
-	// 
-	// Static variables
-	// 
-public:
-	static const WindowStyle DefaultStyle;
-
-	// 
-	// Commands
-	// 
-public:
 	/*
-	 * @param	xmlPath	Full path of XML file
-	 * @return	Return	WindowStyle which read from xml 
+	 * Gets
 	*/
-	static WindowStyle LoadFromXML( const char* xmlPath );
-
-	//
-	// Public variables
-	//
 public:
-	/* @note	Set caption text of the window */
-	std::string title = "TGON-Default";
-	/* @note	Window transform */
-	int32_t x = 100;
-	int32_t y = 100;
-	int32_t width = 500;
-	int32_t height = 500;
-
-	/* @note	If true, then do not make window frame. */
-	bool popup = false;
-	/* @note	If true, then show window as full-screen when it was created. */
-	bool fullScreen = false;
-	/* @note	If true, then enable window surface's transparency. */
-	bool supportWindowTransparency = false;
-	/* @note	If true, then enable the window surface's perpixel transparency. */
-	bool supportPerPixelTransparency = false;
-	/* @todo	Add comment */ 
-	bool showTopOnCreated = false;
-	/* @note	If true, then make resizable frame to window. */
-	bool resizeable = true;
-	
-	/*
-	 * @note	Show window always top.
-	 * @warn	This can cause race each other top-most window.
-	*/
-	bool topMost = false;
-	/* @note	If true, then set window maximized when it was created. */
-	bool maximized = false;
-	/* @note	If true, then set window minimized when it was created. */
-	bool minimized = false;
-	/* @note	If true, then set window position to middle of screen when it was created. */
-	bool showMiddle = true;
-	/* @note	If true, then show window immediately when it was created, else */
-	bool showImmediately = true;
-};
-
-class TGON_API GenericWindowFrame : 
-	public WindowEventHandler,
-	private boost::noncopyable
-{
-	// 
-	// Ctor/Dtor
-	// 
-public:
-	GenericWindowFrame( );
-	virtual ~GenericWindowFrame( ) = 0;
-
-	// 
-	// Commands
-	// 
-public:
-	virtual bool PumpEvent( );
-	virtual void Show( ) {}
-	virtual void Hide( ) {}
-	virtual void Quit( ) {}
-	virtual void Maximize( ) {}
-	virtual void Minimize( ) {}
-	virtual void BringToFront( ) {}
-	virtual void Flash( ) {}
-
-	// 
-	// Sets
-	// 
-	virtual void SetPosition( int32_t x, int32_t y ) {}
-	virtual void SetScale( int32_t width, int32_t height ) {}
-	virtual void SetCaption( /*In*/ const wchar_t* src ) {}
-
-	// 
-	// Gets
-	// 
-	virtual void GetPosition( /*Out*/ int32_t* x, /*Out*/ int32_t* y ) const {}
-	virtual void GetSize( /*Out*/ int32_t* width, /*Out*/ int32_t* height ) const {}
-	virtual void GetCaptionText( /*Out*/ wchar_t* caption ) const {}
 	bool IsClosed( ) const;
 
-	//
-	// Protected variables
-	//
+	/*
+	 * Variables
+	*/
 protected:
 	bool m_closed;
-	uint32_t m_backgroundColor;
 };
+
+
+template<typename DerivedTy>
+GenericWindowFrame<DerivedTy>::GenericWindowFrame( ) :
+	m_closed( false )
+{
+}
+
+template<typename DerivedTy>
+GenericWindowFrame<DerivedTy>::~GenericWindowFrame( )
+{
+	m_closed = true;
+}
+
+template<typename DerivedTy>
+bool GenericWindowFrame<DerivedTy>::IsClosed( ) const
+{
+	return m_closed;
+}
 
 
 } /*namespace tgon*/

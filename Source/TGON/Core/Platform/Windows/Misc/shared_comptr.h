@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 05/17/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 05/17/2016
+ * Latest author :
+ * Latest date :
 */
 
 
@@ -16,10 +16,10 @@ namespace tgon
 template <typename RawPtrTy>
 class shared_comptr
 {
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
-	// 
-	// Ctor/Dtor
-	// 
 	shared_comptr( ) noexcept;
 	shared_comptr( const shared_comptr& rhs );
 	explicit shared_comptr( RawPtrTy* rhs );
@@ -28,9 +28,9 @@ public:
 	/* @note	Swap the pointer. */
 	shared_comptr( shared_comptr&& rhs );
 
-	// 
-	// Operators
-	// 
+	/* 
+	 * Operators
+	*/ 
 	/* @note	Copy and Add reference count of pointer */
 	shared_comptr& operator=( const shared_comptr& rhs );
 
@@ -56,10 +56,10 @@ public:
 	/* @note	Cast to raw pointer type */
 	operator RawPtrTy*( ) const;
 
+	/* 
+	 * Commands
+	*/ 
 public:
-	// 
-	// Commands
-	// 
 	/*
 	 * @note			Set the pointer without increasing the reference count.
 	 * @param	rawPtr	Raw pointer which you want to attach
@@ -78,10 +78,10 @@ public:
 	/* @note	Relese the pointer */
 	void Release( );
 
+	/* 
+	 * Variables
+	*/ 
 private:
-	// 
-	// Private variables
-	// 
 	RawPtrTy* m_rawPtr;
 };
 

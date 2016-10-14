@@ -1,8 +1,8 @@
 /*
-* Author : Cha Junho
-* Date : 07/10/2016
-* Latest author :
-* Latest date :
+ * Author : Cha Junho
+ * Date : 07/10/2016
+ * Latest author :
+ * Latest date :
 */
 
 #pragma once
@@ -16,9 +16,9 @@ namespace tgon
 class EventObject;
 class EventObserver
 {
-	//
-	// Ctor/Dtor
-	//
+	/*
+	 * Ctor/Dtor
+	*/
 public:
 	/*
 	 * @note	This class will notify to receiver when event handled.
@@ -27,15 +27,15 @@ public:
 	explicit EventObserver( EventObject* receiver );
 	virtual ~EventObserver( ) = 0;
 
-	//
-	// Gets
-	//
+	/*
+	 * Gets
+	*/
 public:
 	EventObject* GetObserver( );
 
-	//
-	// Private variables
-	//
+	/*
+	 * Variables
+	*/
 private:
 	EventObject* m_receiver;
 };
@@ -48,23 +48,23 @@ class TGON_API EventObserverImpl :
 	template <typename... HandlerFuncArgs>
 	using HandlerFunction = void( ReceiverTy::* )( HandlerFuncArgs... );
 
-	// 
-	// Ctor/Dtor
-	// 
+	/* 
+	 * Ctor/Dtor
+	*/ 
 public:
 	EventObserverImpl( EventObject* receiver, HandlerFunction<> eventHandlerFunc );
 	virtual ~EventObserverImpl( ) = default;
 
-	// 
-	// Commands
-	// 
+	/* 
+	 * Commands
+	*/ 
 public:
 	template <typename... HandlerFuncArgs>
 	void Notify( HandlerFuncArgs... args );
 
-	// 
-	// Private variables
-	// 
+	/* 
+	 * Variables
+	*/ 
 private:
 	HandlerFunction<> m_eventHandlerFunc;
 };
