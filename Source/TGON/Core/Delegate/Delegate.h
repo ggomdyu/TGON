@@ -11,14 +11,12 @@
 #include "../Template/TypeTraits.h"
 
 
-/* 
- * @note			Make and bind Delegate easily
- *						(ex): auto d = TGON_MAKE_DELEGATE( int(float), &FooClass::Foo, &fc );
- * @param type		Type of delegate ( e.g. int(), int(int), etc )
- * @param function	Original form of function ( e.g. &FooClass::foo )
- * @param instance	Interrupt receiver( Also it needs for member value capture )
-*/
-#define TGON_MAKE_DELEGATE( type, function, instance ) Delegate<type>::Bind<tgon::function_traits<decltype( function )>::class_type, function>( instance )
+/**
+ * @note			Make delegate binding easy (ex: auto d = TGON_MAKE_DELEGATE( &FooClass::Foo, &fc ); )
+ * @param function	Form of function ( e.g. &FooClass::foo )
+ * @param instance	Event receiver
+ */
+#define TGON_MAKE_DELEGATE( function, instance ) Delegate<tgon::function_traits<decltype( function )>::function_type>::Bind<tgon::function_traits<decltype( function )>::class_type, function>( instance )
 
 
 namespace tgon
@@ -33,9 +31,9 @@ class Delegate<RetTy( Args... )> final
 {
 	using StubTy = RetTy(*)( void*, Args... );
 
-	/*
-	 * Con/Dtor
-	*/
+	/**
+	 * Ctor/Dtor
+	 */
 public:
 	Delegate( ) noexcept;
 	Delegate( void* receiver, StubTy stub ) noexcept;
@@ -43,31 +41,31 @@ public:
 	Delegate( Delegate&& ) noexcept = default;
 	~Delegate( ) noexcept = default;
 
-	/*
+	/**
 	 * Operators
-	*/
+	 */
 	RetTy operator()( Args... args );
 	Delegate& operator=( Delegate&& ) noexcept = default;
 
-	/*
+	/**
 	 * Commands
-	*/
+	 */
 public:
 	template <typename ReceiverTy,
 		RetTy( ReceiverTy::*Handler )( Args... ),
 		typename = typename std::enable_if<std::is_class<ReceiverTy>::value>::type>
 	static Delegate Bind( ReceiverTy* receiver ) noexcept;
 
-	/*
-	 * Internal works
-	*/
+	/**
+	 * Private methods
+	 */
 private:
 	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
 	static RetTy MakeStub( void* receiver, Args... args ) noexcept;
 	
-	/*
+	/**
 	 * Variables
-	*/
+	 */
 private:
 	StubTy m_stub;
 	void* m_receiver;

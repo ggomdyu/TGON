@@ -45,6 +45,7 @@ struct function_traits<RetTy( ClassTy::* )( Args... )> :
 	public function_traits<RetTy( Args... )>
 {
 	using class_type = ClassTy;
+	using function_type = RetTy( Args... );
 };
 
 
