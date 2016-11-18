@@ -3,7 +3,6 @@
  * Date : 05/24/2016
  * Latest author :
  * Latest date :
- * Description : Extension of type_traits header
 */
 
 
@@ -14,9 +13,6 @@ namespace tgon
 {
 
 
-/* 
- * For function_traits 
-*/
 template <typename>
 struct function_traits;
 
@@ -25,10 +21,9 @@ struct function_traits<RetTy( Args... )>
 {
 public:
 	using return_type = RetTy;
-	enum
-	{
-		argument_count = sizeof...( Args ),
-	};
+	using function_type = RetTy( Args... );
+
+	enum { argument_count = sizeof...( Args ), };
 
 public:
 	function_traits<RetTy( Args... )>( ) = delete;
@@ -45,8 +40,28 @@ struct function_traits<RetTy( ClassTy::* )( Args... )> :
 	public function_traits<RetTy( Args... )>
 {
 	using class_type = ClassTy;
-	using function_type = RetTy( Args... );
 };
 
+template <typename RetTy, typename ClassTy, typename... Args>
+struct function_traits<RetTy( ClassTy::* )( Args... ) const> :
+	public function_traits<RetTy( Args... )>
+{
+	using class_type = ClassTy;
+};
+
+
+template <typename RetTy, typename ClassTy, typename... Args>
+struct function_traits<RetTy( ClassTy::* )( Args... ) volatile> :
+	public function_traits<RetTy( Args... )>
+{
+	using class_type = ClassTy;
+};
+
+template <typename RetTy, typename ClassTy, typename... Args>
+struct function_traits<RetTy( ClassTy::* )( Args... ) const volatile> :
+    public function_traits<RetTy( Args... )>
+{
+    using class_type = ClassTy;
+};
 
 } /*namespace tgon*/
