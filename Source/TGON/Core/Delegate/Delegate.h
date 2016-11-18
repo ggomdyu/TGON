@@ -71,6 +71,12 @@ public:
 	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
 	static Delegate Bind( ReceiverTy* receiver ) noexcept;
 
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) volatile>
+    static Delegate Bind( ReceiverTy* receiver ) noexcept;
+
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const volatile>
+    static Delegate Bind( ReceiverTy* receiver ) noexcept;
+
 	/**
 	 * Private methods
 	 */
@@ -83,6 +89,12 @@ private:
 	
 	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
 	static RetTy MakeStub( void* receiver, Args... args );
+
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) volatile>
+    static RetTy MakeStub( void* receiver, Args... args );
+
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const volatile>
+    static RetTy MakeStub( void* receiver, Args... args );
 
 	/**
 	 * Variables
@@ -136,6 +148,20 @@ inline Delegate<RetTy( Args... )> Delegate<RetTy( Args... )>::Bind( ReceiverTy* 
 }
 
 template<typename RetTy, typename ...Args>
+template<typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) volatile>
+inline Delegate<RetTy( Args... )> Delegate<RetTy( Args... )>::Bind( ReceiverTy* receiver ) noexcept
+{
+	return Delegate( receiver, &MakeStub<ReceiverTy, Handler> );
+}
+
+template<typename RetTy, typename ...Args>
+template<typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const volatile>
+inline Delegate<RetTy( Args... )> Delegate<RetTy( Args... )>::Bind( ReceiverTy* receiver ) noexcept
+{
+	return Delegate( receiver, &MakeStub<ReceiverTy, Handler> );
+}
+
+template<typename RetTy, typename ...Args>
 template<RetTy( *Handler )( Args... )>
 inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args )
 {
@@ -153,6 +179,22 @@ inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args 
 template<typename RetTy, typename ...Args>
 template<typename ReceiverTy, 
 		 RetTy( ReceiverTy::* Handler )( Args... ) const>
+inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args )
+{
+	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
+}
+
+template<typename RetTy, typename ...Args>
+template<typename ReceiverTy, 
+		 RetTy( ReceiverTy::* Handler )( Args... ) volatile>
+inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args )
+{
+	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
+}
+
+template<typename RetTy, typename ...Args>
+template<typename ReceiverTy, 
+		 RetTy( ReceiverTy::* Handler )( Args... ) const volatile>
 inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args )
 {
 	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
