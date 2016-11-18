@@ -44,7 +44,7 @@ public:
 	static bool PumpEvent( );
 	
 	/**
-	 * @note			Post quit message to its queue.
+	 * @note			Post quit message to message queue.
 	 * @param	exitCode	Exit code
 	 */
 	static void Quit( int32_t exitCode );
