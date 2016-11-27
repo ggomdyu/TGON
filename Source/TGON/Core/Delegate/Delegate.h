@@ -1,9 +1,9 @@
-/*
-* Author : Cha Junho
-* Date : 09/25/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * Author : Cha Junho
+ * Date : 09/25/2016
+ * Latest author :
+ * Latest date :
+ */
 
 #pragma once
 #include <type_traits>
@@ -11,7 +11,6 @@
 #include <boost/preprocessor/facilities/overload.hpp>
 
 #include "../Template/TypeTraits.h"
-
 
 /**
  * @note                Enable macro overloading
@@ -32,10 +31,8 @@
  */
 #define TGON_MAKE_DELEGATE_2( function, instance ) tgon::Delegate<tgon::function_traits<decltype( function )>::function_type>::Bind<tgon::function_traits<decltype( function )>::class_type, function>( instance )
 
-
 namespace tgon
 {
-
 
 template <typename Ty>
 class Delegate;
@@ -45,65 +42,64 @@ class Delegate<RetTy( Args... )> final
 {
 	using StubTy = RetTy(*)( void*, Args... );
 
-	/**
-	 * Ctor/Dtor
-	 */
+/**
+ * Ctor/Dtor
+ */
 public:
 	Delegate( ) noexcept;
 	Delegate( void* receiver, StubTy stub ) noexcept;
 	~Delegate( ) noexcept = default;
 
-	/**
-	 * Operators
-	 */
+/**
+ * Operators
+ */
 	RetTy operator()( Args... args );
 
-	/**
-	 * Commands
-	 */
+/**
+ * Commands
+ */
 public:
-	template <RetTy( *Handler )( Args... )>
-	static Delegate Bind( ) noexcept;
-
-	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
-	static Delegate Bind( ReceiverTy* receiver ) noexcept;
-
-	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
-	static Delegate Bind( ReceiverTy* receiver ) noexcept;
-
+    template <RetTy( *Handler )( Args... )>
+    static Delegate Bind( ) noexcept;
+    
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
+    static Delegate Bind( ReceiverTy* receiver ) noexcept;
+    
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
+    static Delegate Bind( ReceiverTy* receiver ) noexcept;
+    
     template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) volatile>
     static Delegate Bind( ReceiverTy* receiver ) noexcept;
-
+    
     template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const volatile>
     static Delegate Bind( ReceiverTy* receiver ) noexcept;
 
-	/**
-	 * Private methods
-	 */
+/**
+ * Private methods
+ */
 private:
-	template <RetTy( *Handler )( Args... )>
-	static RetTy MakeStub( void* receiver, Args... args );
-
-	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
-	static RetTy MakeStub( void* receiver, Args... args );
-	
-	template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
-	static RetTy MakeStub( void* receiver, Args... args );
-
+    template <RetTy( *Handler )( Args... )>
+    static RetTy MakeStub( void* receiver, Args... args );
+    
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... )>
+    static RetTy MakeStub( void* receiver, Args... args );
+    
+    template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const>
+    static RetTy MakeStub( void* receiver, Args... args );
+    
     template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) volatile>
     static RetTy MakeStub( void* receiver, Args... args );
-
+    
     template <typename ReceiverTy, RetTy( ReceiverTy::*Handler )( Args... ) const volatile>
     static RetTy MakeStub( void* receiver, Args... args );
 
-	/**
-	 * Variables
-	 */
+/**
+ * Private variables
+ */
 private:
 	StubTy m_stub;
 	void* m_receiver;
 };
-
 
 template<typename RetTy, typename ...Args>
 inline Delegate<RetTy( Args... )>::Delegate( ) noexcept :
@@ -200,5 +196,4 @@ inline RetTy Delegate<RetTy( Args... )>::MakeStub( void* receiver, Args... args 
 	return ( reinterpret_cast<ReceiverTy*>( receiver )->*Handler )( args... );
 }
 
-
-}
+} /* namespace tgon */

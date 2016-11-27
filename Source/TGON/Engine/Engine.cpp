@@ -2,10 +2,9 @@
 #include "Engine.h"
 
 #include "GameApplication.h"
-#include "../Core/Platform/OSAL/PlatformApplication.h"
-#include "Module/InputModule.h"
-#include "CoreEvents.h"
 
+#include "Module/InputModule.h"
+#include "Module/TimeModule.h"
 
 namespace tgon
 {
@@ -15,19 +14,17 @@ std::shared_ptr<GameApplication> GenerateGameApplication( );
 Engine::Engine( ) :
 	m_gameApplication( GenerateGameApplication( ))
 {
-	//this->SubscribeEvent<E_MODULEADDED>( &This::OnModuleAdded );
-
-	this->AddDefaultModulesToRepo( );
+	this->AddEssentialModules( );
 }
 
-
-void Engine::AddDefaultModulesToRepo( )
+void Engine::AddEssentialModules( )
 {
-	//AddModule( std::make_shared<TInputModule>( this->GetWindow( ), 
+    This::AddModule<TimeModule>( );
+
+	//This::AddModule( std::make_shared<TInputModule>( this->GetWindow( ), 
 	//	TInputModule::kMouse | TInputModule::kKeyboard )
 	//);
 }
-
 
 int32_t Engine::Execute( int argc, char** argv )
 {
@@ -43,9 +40,12 @@ int32_t Engine::Execute( int argc, char** argv )
 			//	continue;
 			//}
 
+            ModuleContext::GetModule<TimeModule>( )->Update( );
+
 			if ( !window->PumpEvent( ))
 			{
 				this->UpdateModules( );
+
 				m_gameApplication->OnUpdate( );
 			}
 		}
@@ -56,10 +56,12 @@ int32_t Engine::Execute( int argc, char** argv )
 	return 0;
 }
 
-void tgon::Engine::OnModuleAdded( IModule* module )
+void Engine::UpdateModules( )
 {
-	m_modulesForFastIter.push_back( module );
+    for ( auto module : m_modulesForFastIter )
+    {
+        module->Update( );
+    }
 }
-
 
 } /*namespace tgon*/

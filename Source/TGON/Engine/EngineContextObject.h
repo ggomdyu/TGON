@@ -1,72 +1,97 @@
-/*
- * Author : Cha Jnho
+/**
+ * Author : Cha Junho
  * Date : 07/23/2016
  * Latest author :
  * Latest date :
-*/
+ */
 
 
 #pragma once
-#include "../Core/Object/EventObject.h"
-#include "../Engine/Module/Interface/IModule.h"
-
 #include <memory>
-#include <algorithm>
 #include <map>
-#include <boost/variant.hpp>
 
+#include "Module/Interface/IModule.h"
+#include "Module/TimeModule.h"
 
 namespace tgon
 {
 
-
-/* 
- * Static method class 
-*/
-class GlobalModuleContext :
-	public EventObject
+class ModuleContext :
+	public Object
 {
-	/*
-	 * Generator
-	*/
+/**
+ * Generator
+*/
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( GlobalModuleContext, EventObject )
+	TGON_GENERATE_OBJECT_INTERFACE( ModuleContext )
 	
-	/* 
-	 * Commands
-	*/ 
+/**
+ * Commands
+ */ 
 public:
-	static void AddModule( const std::shared_ptr<IModule>& module );
+    template <typename ModuleTy,
+		      typename = typename std::enable_if<std::is_convertible<ModuleTy*, IModule*>::value>::type>
+	static void AddModule( );
 
-	/* 
-	 * Gets
-	*/ 
-	/*
+/**
+ * Gets
+ */ 
+	/**
 	 * @param	ModuleTy	Module type that inherited by IModule
 	 * @return				Return registered module
-	*/
-	template <typename ModuleTy>
+	 */
+	template <typename ModuleTy,
+		      typename = typename std::enable_if<std::is_convertible<ModuleTy*, IModule*>::value>::type>
 	static const std::shared_ptr<ModuleTy>& GetModule( );
 
-	/* 
-	 * Variables
-	*/ 
+/**
+ * Private variables
+ */ 
 private:
-	/* @note Use on find module */
 	static std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;
+
+    static std::shared_ptr<TimeModule> m_timeModule;
 };
 
-
-template<typename ModuleTy>
-inline const std::shared_ptr<ModuleTy>& GlobalModuleContext::GetModule( )
+template <typename ModuleTy, typename>
+inline static void tgon::ModuleContext::AddModule( )
 {
-	static_assert( std::is_convertible<ModuleTy*, IModule*>::value, 
-		"ModuleTy must be intherited by IModule." );
+    //std::lock_guard<std::mutex>( this->GetSystemMutex( ));
+    
+    auto newModule = std::make_shared<ModuleTy>( );
 
-	auto iter = m_modules.find( ModuleTy::GetHashCode( ));
-	if ( m_modules.end != iter )
+	// Check duplication of module.
+	auto iter = m_modules.find( newModule->GetHashCode( ));
+	if ( iter == m_modules.end( ))
 	{
-		return iter->second;
+		// If the map has no module, then add it.
+		m_modules.insert({ newModule->GetHashCode( ), newModule });
+	}
+	else
+	{
+		// If module does exist, call assert.
+		assert( false && "Module duplication occured!" );
+	}
+}
+
+template <>
+inline static void ModuleContext::AddModule<TimeModule>( )
+{
+    if ( m_timeModule.get( ))
+    {
+        assert( false && "m_timeModule already has module you added." );
+    }
+
+    m_timeModule = std::make_shared<TimeModule>( );
+}
+
+template<typename ModuleTy, typename>
+inline const std::shared_ptr<ModuleTy>& ModuleContext::GetModule( )
+{
+	auto iter = m_modules.find( ModuleTy::GetTypeInfo( ).GetHashCode( ));
+	if ( m_modules.end() != iter )
+	{
+		return std::static_pointer_cast<ModuleTy>( iter->second );
 	}
 	else
 	{
@@ -74,5 +99,10 @@ inline const std::shared_ptr<ModuleTy>& GlobalModuleContext::GetModule( )
 	}
 }
 
+template<>
+inline const std::shared_ptr<TimeModule>& ModuleContext::GetModule<TimeModule>( )
+{
+    return m_timeModule;
+}
 
-};
+} /* namespace tgon */

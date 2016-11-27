@@ -147,6 +147,7 @@
     <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
       <Filter>Sources\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Type.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\XML\TXMLReader.h">

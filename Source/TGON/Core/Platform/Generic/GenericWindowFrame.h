@@ -1,9 +1,9 @@
-/*
-* Author : Cha Junho
-* Date : 01/09/2016
-* Latest author : 
-* Latest date :
-*/
+/**
+ * Author : Cha Junho
+ * Date : 01/09/2016
+ * Latest author : 
+ * Latest date :
+ */
 
 
 #pragma once
@@ -18,7 +18,7 @@
 namespace tgon
 {
 
-
+// TODO: Move to other header
 enum class MouseType
 {
 	Left,
@@ -28,31 +28,31 @@ enum class MouseType
 
 struct WindowStyle
 {
-	/* 
-	 * Commands
-	*/ 
+/**
+ * Commands
+ */ 
 public:
-	/*
-	 * @param	xmlPath	Full path of XML file
-	 * @return	Return	WindowStyle which read from xml 
-	*/
+	/**
+	 * @param	xmlPath     Full path of XML
+	 * @return              Window-style data parsed from xml
+	 */
 	static WindowStyle LoadFromXML( const char* xmlPath );
 	
-	/* 
-	 * Variables
-	*/ 
+/**
+ * Public variables
+ */ 
 public:
-	std::string title = "TGON-Default"; /* Caption text of window */
+	std::string title = "Hello World!"; /* Caption text of window */
 	int32_t x = 100; /* Window transform */
 	int32_t y = 100; /* Window transform */
 	int32_t width = 500; /* Window transform */
 	int32_t height = 500; /* Window transform */
 
 	bool popup = false; /* If true, then do not make window frame. */
-	bool fullScreen = false; /* If true, then show window as full-screen when it was created. */
+	bool fullScreen = false; /* If true, then show window as full screen when it was created. */
 	bool supportWindowTransparency = false; /* If true, then enable window surface's transparency. */
 	bool supportPerPixelTransparency = false; /* If true, then enable the window surface's perpixel transparency. */
-	bool showTopOnCreated = false; /* Add comment */ 
+	bool showTopOnCreated = false; /* TODO: Not implemented / add comment */ 
 	bool resizeable = true; /* If true, then make resizable frame to window. */
 	bool topMost = false; /* Show window always top. This can cause race each other top-most window. */
 	bool maximized = false; /* If true, then set window maximized when it was created. */
@@ -65,16 +65,16 @@ template <typename DerivedTy>
 class TGON_API GenericWindowFrame :
 	private boost::noncopyable
 {
-	/* 
-	 * Ctor/Dtor
-	*/ 
+/**
+ * Ctor/Dtor
+ */
 public:
 	GenericWindowFrame( );
 	virtual ~GenericWindowFrame( ) = 0;
 
-	/*
-	 * Event handlers
-	*/
+/**
+ * Event handlers
+ */
 public:
 	virtual void OnMove( int32_t x, int32_t y ) {}
 	virtual void OnResize( int32_t width, int32_t height ) {}
@@ -88,34 +88,34 @@ public:
 	virtual bool OnGetFocus( ) { return true; }
 	virtual bool OnLoseFocus( ) { return true; }
 
-	/*
+	/**
 	 * @note	Called when window has begun closing.
 	 * @return	Return true if you want to keep close.
-	*/
+	 */
 	virtual bool OnDestroy( ) { return true; }
 
-	/*
-	 * Gets
-	*/
+/**
+ * Gets
+ */
 public:
 	bool IsClosed( ) const;
 
-	/*
-	 * Variables
-	*/
+/**
+ * Private variables
+ */
 protected:
 	bool m_closed;
 };
 
 
 template<typename DerivedTy>
-GenericWindowFrame<DerivedTy>::GenericWindowFrame( ) :
+inline GenericWindowFrame<DerivedTy>::GenericWindowFrame( ) :
 	m_closed( false )
 {
 }
 
 template<typename DerivedTy>
-GenericWindowFrame<DerivedTy>::~GenericWindowFrame( )
+inline GenericWindowFrame<DerivedTy>::~GenericWindowFrame( )
 {
 	m_closed = true;
 }

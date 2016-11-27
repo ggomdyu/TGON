@@ -17,7 +17,7 @@ namespace tgon
 
 template <typename WindowTy, 
 		  typename = typename std::enable_if<std::is_convertible<WindowTy*, WindowFrame*>::value>::type>
-std::shared_ptr<WindowFrame> MakeWindow( 
+std::shared_ptr<WindowTy> MakeWindow(
 	const WindowStyle& wndStyle )
 {
 	return std::make_shared<WindowTy>( wndStyle );

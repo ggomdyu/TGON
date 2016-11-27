@@ -11,54 +11,6 @@
 
 using namespace tgon;
 
-struct E_TEST { enum { value = 231, }; };
-
-struct EventObjectListener
-{
-public:
-	EventObjectListener( ) :
-		m_receiver( nullptr )
-	{
-
-	}
-
-	void Notify( )
-	{
-
-	}
-
-private:
-	EventObject* m_receiver;
-};
-
-
-namespace detail
-{
-
-template <typename Ty>
-std::map<uint32_t, Delegate<Ty>>& GetEventListener( )
-{
-	static std::map<uint32_t, Delegate<void( )>> instance;
-	return instance;
-}
-
-}
-
-template <typename ReceiverTy, void( ReceiverTy::*Handler )( /*Args*/ )>
-inline void SubscribeEvent( E_TEST, ReceiverTy* receiver )
-{
-	// Make delegate
-	auto d = Delegate<void(/*Args*/)>::Bind<ReceiverTy, Handler>( receiver );
-	
-	// Then push to lister repo
-	detail::GetEventListener<void()>()[E_TEST::value] = d;
-}
-
-template <typename EventTy, typename... Args>
-inline void NotifyEvent( Args... args )
-{
-	GetEventListener<void( Args... )>()[EventTy::value]( args... );
-}
 
 class MyCustomWindow :
 	public WindowFrame
@@ -71,11 +23,6 @@ public:
 	{
 	}
 
-	virtual void OnRawMouseDown( int32_t x, int32_t y, MouseType mouseType ) override
-	{
-		tgon::Console::Write( L"%d, %d\n", x, y );
-	}
-	
 	virtual bool OnDestroy( ) override
 	{
 		return MessageBox( NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO ) == IDYES;
@@ -97,14 +44,16 @@ class TGONSample :
 	public GameApplication
 {
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( TGONSample, GameApplication )
+	TGON_GENERATE_OBJECT_INTERFACE( TGONSample )
+
+private:
+    std::shared_ptr<MyCustomWindow> m_myWindow;
 
 public:
 	TGONSample( ) :
 		GameApplication( MakeWindow<MyCustomWindow>( WindowStyle{} ) )
 	{
-		this->GetRootWindow( )->EnableGlobalInputHook( 
-			true, RawInputType::kMouse );
+        m_myWindow = std::static_pointer_cast<MyCustomWindow>( Super::GetRootWindow( ));
 	};
 
 public:
@@ -120,6 +69,16 @@ public:
 
 	virtual void OnUpdate( ) override
 	{
-		//⚾ -> baseball
+        HDC hdc = GetDC( m_myWindow->GetWindowHandle( ) );
+
+        auto timeModule = ModuleContext::GetModule<TimeModule>( );
+
+        static float e = 0.0f;
+        e += timeModule->GetElapsedTime( );
+        auto str = std::to_wstring( e );
+
+        TextOut( hdc, 0, 0, str.c_str( ), str.length( ) );
+
+        ReleaseDC( m_myWindow->GetWindowHandle( ), hdc );
 	}
 };

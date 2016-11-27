@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObject.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\EventObserver.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Object\Object.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Object\Type.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFrame.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />

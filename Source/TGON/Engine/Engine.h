@@ -1,9 +1,9 @@
-/*
-* Author : Cha Jnho
-* Date : 07/23/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * Author : Cha Jnho
+ * Date : 07/23/2016
+ * Latest author :
+ * Latest date :
+ */
 
 
 #pragma once
@@ -17,57 +17,43 @@ namespace tgon
 class GameApplication;
 
 class TGON_API Engine :
-	public GlobalModuleContext
+	public ModuleContext
 {
-	/* 
-	 * Ctor/Dtor
-	*/ 
+/**
+ * Generator
+ */ 
+public:
+	TGON_GENERATE_OBJECT_INTERFACE( Engine )
+
+/**
+ * Ctor/Dtor
+ */ 
 public:
 	Engine( );
 	virtual ~Engine( ) = default;
 
-	/* 
-	 * Generator
-	*/ 
-public:
-	TGON_GENERATE_OBJECT_INTERFACE( Engine, GlobalModuleContext )
-
-	/* 
-	 * Commands
-	*/ 
+/**
+ * Commands
+ */ 
 public:
 	int32_t Execute( int argc, char** argv );
 
-	/* 
-	 * Event handlers
-	*/ 
+/**
+ * Private methods
+ */ 
 private:
-	void OnModuleAdded( IModule* module );
+	void AddEssentialModules( );
 
-	/* 
-	 * Internal works
-	*/ 
-private:
-	/* @note Create and add modules to m_modules */
-	void AddDefaultModulesToRepo( );
 	void UpdateModules( );
 
-	/* 
-	 * Variables
-	*/ 
+/** 
+ * Private variables
+ */ 
 private:
 	std::shared_ptr<GameApplication> m_gameApplication;
-	std::vector<IModule*> m_modulesForFastIter;
+	
+    std::vector<IModule*> m_modulesForFastIter;
+
 };
-
-
-inline void tgon::Engine::UpdateModules( )
-{
-	for ( auto module : m_modulesForFastIter )
-	{
-		module->Update( );
-	}
-}
-
 
 } /*namespace tgon*/

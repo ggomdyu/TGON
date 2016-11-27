@@ -1,24 +1,10 @@
 #include "PrecompiledHeader.h"
 #include "EngineContextObject.h"
 
-
-void tgon::GlobalModuleContext::AddModule( const std::shared_ptr<IModule>& module )
+namespace tgon
 {
-	//std::lock_guard<std::mutex>( this->GetSystemMutex( ));
 
-	// Check duplication of module.
-	auto iter = m_modules.find( module->GetHashCode( ));
-	if ( iter == m_modules.end( ))
-	{
-		// If module does not exist in map, then insert to it.
-		m_modules.insert({ module->GetHashCode( ), module });
+decltype( ModuleContext::m_modules ) ModuleContext::m_modules;
+decltype( ModuleContext::m_timeModule ) ModuleContext::m_timeModule;
 
-		// Notify module added event to all subscriber.
-		//EventObject::NotifyEvent<E_MODULEADDED, IModule*>( module.get( ));
-	}
-	else
-	{
-		// If module does exist, call assert.
-		assert( false && "m_modules already has module you added." );
-	}
-}
+} /* namespace tgon */

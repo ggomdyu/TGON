@@ -1,10 +1,9 @@
-
-/*
-* Author : Cha Junho
-* Date : 07/24/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * Author : Cha Junho
+ * Date : 07/24/2016
+ * Latest author :
+ * Latest date :
+ */
 
 #pragma once
 #include "Interface/IModule.h"
@@ -44,34 +43,34 @@ class TGON_API InputModule :
 	public OIS::MouseListener,
 	public OIS::JoyStickListener
 {
-	/*
-	 * Generator
-	*/
+/**
+ * Generator
+ */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( InputModule, IModule )
+	TGON_GENERATE_OBJECT_INTERFACE( InputModule )
 
-	/*
-	 * Ctor/Dtor
-	*/
+/**
+ * Ctor/Dtor
+ */
 public:
-	/*
+	/**
 	 * @note Initialize input system using OIS.
 	 * @param inputAcceptWindow The window which you want to receive input message
 	 * @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
-	*/
+	 */
 	InputModule( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 	virtual ~InputModule( );
 
-	/*
-	 * Commands
-	*/
+/**
+ * Commands
+ */
 public:
 	//
 	virtual void Update( );
 
-	/*
-	 * Gets
-	*/
+/**
+ * Gets
+ */
 public:
 	/* @return	*/
 	uint32_t GetKeyboardNum( ) const;
@@ -100,9 +99,9 @@ public:
 		return false;
 	}
 
-	/*
-	 * Event handlers
-	*/
+/**
+ * Event handlers
+ */
 private:
 	// Keyboards
 	virtual bool keyPressed( const OIS::KeyEvent& arg ) override

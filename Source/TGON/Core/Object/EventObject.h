@@ -1,9 +1,9 @@
-/*
-* Author : Cha Junho
-* Date : 07/10/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * Author : Cha Junho
+ * Date : 07/10/2016
+ * Latest author :
+ * Latest date :
+ */
 
 
 #pragma once
@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-
+// TODO : DELETE IT!!
 class TGON_API EventObject :
 	public Object
 {
@@ -22,7 +22,7 @@ class TGON_API EventObject :
 	// Generator
 	// 
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( EventObject, Object )
+	TGON_GENERATE_OBJECT_INTERFACE( EventObject )
 
 	// 
 	// Ctor/Dtor

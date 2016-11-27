@@ -33,42 +33,43 @@ public:
 };
 
 class TGON_API GameApplication :
-	public GlobalModuleContext,
+	public Object,
 	public IGameApplicationEventHandler
 {
-	/* 
-	 * Generator
-	*/ 
+/**
+ * Generator
+ */ 
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( GameApplication, GlobalModuleContext )
+	TGON_GENERATE_OBJECT_INTERFACE( GameApplication )
 
-	/* 
-	 * Ctor/Dtor
-	*/ 
+/**
+ * Ctor/Dtor
+ */ 
 public:
 	/* note Create default window, no custom event handler, by WindowStyle */
 	explicit GameApplication( const std::shared_ptr<WindowFrame>& window );
 	virtual ~GameApplication( ) = default;
 
-	/* 
-	 * Sets
-	*/ 
+/**
+ * Sets
+ */ 
 	/* @note Play the game application's frame update ( Use on paused ) */
 	void Play( );
 	/* @note Pause the game application's frame update */
 	void Pause( );
 
-	/* 
-	 * Gets
-	*/ 
+/**
+ * Gets
+ */ 
 	const std::shared_ptr<WindowFrame>& GetRootWindow( ) const;
 	bool IsPaused( ) const;
 
-	/*
-	 * Variables
-	*/ 
+/**
+ * Private variables
+ */ 
 private:
 	bool m_paused;
+
 	std::shared_ptr<WindowFrame> m_rootWindow;
 };
 

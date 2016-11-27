@@ -12,25 +12,32 @@
 
 #include <cmath>
 #include <cstdint>
-#include <boost/config/suffix.hpp>
 
 
 namespace tgon
 {
 
-
 class TGON_API Math
 {
-	/* 
-	 * Ctor/Dtor
-	*/ 
+/** 
+ * Ctor/Dtor
+ */ 
 public:
 	Math( ) = delete;
 	~Math( ) = delete;
 
-	/* 
-	 * Commands
-	*/ 
+/** 
+ * Static variables
+ */ 
+public:
+    static constexpr float PI = 3.141592654f;
+    static constexpr float EPSILON = 0.0001f;
+    static constexpr float Deg2Rad = PI / 180;
+    static constexpr float Rad2Deg = 180 / PI;
+
+/**
+ * Commands
+ */ 
 public:
 	static float Round( float val );
 	static int32_t RoundToInt( float val );
@@ -64,58 +71,48 @@ public:
 	template <class Ty>
 	static constexpr Ty Clamp( Ty value, Ty min, Ty max );
 
-	/* 
+	/**
 	 * @param	str		Undecayed string ( e.g. "Text" )
 	 * @return			x65599 Hash value
-	*/
+	 */
 	template <std::size_t N>
 	static uint32_t StringToHash( const char( &str )[N] );
 	
-	/* 
+	/**
 	 * @param	str		Decayed string ( e.g. const char* = "Text"; )
 	 * @return			x65599 x65599 Hash value
-	*/
+	 */
 	static uint32_t StringToHash( const char* str, std::size_t length );
 
-	/* 
+	/**
 	 * @param	from	Interpolation start value
 	 * @param	to		Interpolation end value
 	 * @param	t		Elapsed time
-	 * @return			Smoothly interpolated value 
-	*/
+	 * @return			Interpolated value 
+	 */
 	static constexpr float Lerp( float from, float to, float t );
 	static float Smoothstep( float from, float to, float t );
 	
-	/* 
+	/**
 	 * @param	a/b/c	Interpolate target
 	 * @param	t		Elapsed time
-	 * @return			Smoothly interpolated value between three vector
-	*/
+	 * @return			Interpolated value
+	 */
 	static Vector3 Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t );
 
-	/*
-	 *  Variables
-	*/
+/**
+ *  Private variables
+ */
 private:
-	/* TODO: Pls Do Collision check!! */
 	static uint32_t x65599Hash( const char* str, std::size_t length );
-public:
-	static constexpr float PI = 3.141592654f;
-	static constexpr float EPSILON = 0.0001f;
-	static constexpr float Deg2Rad = PI / 180;
-	static constexpr float Rad2Deg = 180 / PI;
 };
 
-
-
-BOOST_FORCEINLINE float Math::Round( 
-	float val )
+inline float Math::Round( float val )
 {
 	return static_cast<float>( RoundToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t Math::RoundToInt(
-	float val )
+inline int32_t Math::RoundToInt( float val )
 {
 //#if TGON_SUPPORT_SSE2
 //	return _mm_cvt_ss2si( _mm_set_ss( val+val+0.5f )) >> 1;
@@ -124,13 +121,12 @@ BOOST_FORCEINLINE int32_t Math::RoundToInt(
 //#endif
 }
 
-BOOST_FORCEINLINE float Math::Floor( 
-	float val )
+inline float Math::Floor( float val )
 {
 	return static_cast<float>( FloorToInt( val ));
 }
 
-BOOST_FORCEINLINE int32_t Math::FloorToInt( 
+inline int32_t Math::FloorToInt(
 	float val )
 {
 //#if TGON_SUPPORT_SSE2
@@ -140,96 +136,91 @@ BOOST_FORCEINLINE int32_t Math::FloorToInt(
 //#endif
 }
 
-BOOST_FORCEINLINE float Math::Sqrt( 
-	float val )
+inline float Math::Sqrt( float val )
 {
 	return std::sqrt( val );
 }
 
 template <class Ty>
-constexpr Ty Math::Max(
-	Ty first, 
-	Ty second )
+constexpr Ty Math::Max( Ty first, Ty second )
 {
 	return ( first >= second ) ? first : second;
 }
 
 template <class Ty>
-constexpr Ty Math::Min( 
-	Ty first, 
-	Ty second )
+constexpr Ty Math::Min( Ty first, Ty second )
 {
 	return ( first <= second ) ? first : second;
 }
 
 template <class Ty>
-constexpr Ty Math::Abs( 
-	Ty value )
+constexpr Ty Math::Abs( Ty value )
 {
 	return ( value < (Ty)(0)) ? -value : value;
 }
 
 template<class Ty>
-constexpr Ty Math::Sign( 
-	Ty value )
+constexpr Ty Math::Sign( Ty value )
 {
 	return ( value > (Ty)(0)) ? (Ty)(1) : ( value < (Ty)(0)) ? (Ty)(-1) : (Ty)(0);
 }
 
 template <class Ty>
-constexpr Ty Math::Clamp( 
-	Ty value, 
-	Ty min, 
-	Ty max )
+constexpr Ty Math::Clamp( Ty value, Ty min, Ty max )
 {
 	return Math::Max( Math::Min( value, max ), min );
 }
 
 template<std::size_t N>
-BOOST_FORCEINLINE uint32_t Math::StringToHash( 
-	/*IN*/ const char( &str )[N] )
+inline uint32_t Math::StringToHash( const char( &str )[N] )
 {
 	return x65599Hash( str, N );
 }
 
-BOOST_FORCEINLINE uint32_t Math::StringToHash( 
-	/*IN*/ const char* str, 
-	std::size_t length )
+inline uint32_t Math::StringToHash( const char* str, std::size_t length )
 {
 	return x65599Hash( str, length );
 }
 
-constexpr float Math::Lerp( 
-	float from, 
-	float to, 
-	float t )
+constexpr float Math::Lerp( float from, float to, float t )
 {
 	return from + (( to-from )*t );
 }
 
-inline float Math::Smoothstep( 
-	float from, 
-	float to, 
-	float t )
+inline float Math::Smoothstep( float from, float to, float t )
 {
-	t = Math::Clamp(( t-from )/( to-from ), 0.f, 1.f );
-	return t*t*( 3.f-( 2.f*t ));
+	t = Math::Clamp(( t-from )/( to-from ), 0.0f, 1.0f );
+	return t*t*( 3.0f-( 2.0f*t ));
 }
 
-inline Vector3 Math::Bezier( 
-	/*IN*/ const Vector3& a,
-	/*IN*/ const Vector3& b,
-	/*IN*/ const Vector3& c, 
-	float t )
+inline Vector3 Math::Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t )
 {
-	const float inv = 1.f - t;
-	return {( inv*inv*a ) + ( 2*t*inv*b ) + ( t*t*c )};
+	const float inv = 1.0f-t;
+	return {( inv*inv*a )+( 2.0f*t*inv*b )+( t*t*c )};
 }
 
-BOOST_FORCEINLINE uint32_t Math::x65599Hash( 
-	/*IN*/ const char* str, 
-	std::size_t length )
+inline uint32_t Math::x65599Hash( const char* str, std::size_t length )
 {
+    // Check for hash collisions.
+#if defined( _DEBUG ) || defined( DEBUG )
+    static std::map<std::string, std::size_t> hashCollisionChecker;
+
+    auto iter = hashCollisionChecker.find( str );
+    if ( iter != hashCollisionChecker.end( ))
+    {
+        // Has a collision occurred?
+        if ( std::strcmp( iter->first.c_str( ), str ))
+        {
+            // TODO: USE Boost logger or Google log!!
+            assert( false && "DANGEROUS WARNING! :: Hash collision occured!!!" );
+        }
+    }
+    else
+    {
+        hashCollisionChecker.insert({ str, length });
+    }
+#endif
+
 	uint32_t hash = 0;
 	for ( uint32_t i = 0; i < length; ++i )
 	{
