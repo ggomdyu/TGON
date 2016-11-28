@@ -79,8 +79,8 @@ public:
 	{\
 		return classType::GetTypeInfo( ).GetName( );\
 	}\
-    static const TypeInfo& GetTypeInfo( )\
-    {\
-        static TypeInfo typeInfo( #classType );\
-        return typeInfo;\
-    }
+	static const TypeInfo& GetTypeInfo( )\
+	{\
+		static TypeInfo typeInfo( #classType );\
+		return typeInfo;\
+	}
