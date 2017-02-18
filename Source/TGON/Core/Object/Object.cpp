@@ -1,41 +1,19 @@
 #include "PrecompiledHeader.h"
 #include "Object.h"
 
-
 namespace tgon
 {
 
-Object::Object( )
-{
-}
+Object::~Object() = default;
 
-Object::~Object( )
-{
-}
+//std::shared_ptr<Object> Object::Clone()
+//{
+//    return std::make_shared<Object>(this);
+//}
 
-bool Object::operator==( const Object& rhs ) const
+bool Object::Equals(const Object& rhs) const noexcept
 {
-	return this->Equals( rhs );
-}
-
-bool Object::operator!=( const Object& rhs ) const
-{
-	return !this->Equals( rhs );
-}
-
-bool Object::Equals( const Object& lhs, const Object& rhs )
-{
-	return lhs.Equals( rhs );
-}
-
-bool Object::Equals( const Object& rhs ) const
-{
-	return ( this == &rhs );
-}
-
-bool Object::ReferenceEquals( const Object& lhs, const Object& rhs )
-{
-	return ( &lhs == &rhs );
+    return rhs.GetHashCode() == this->GetHashCode();
 }
 
 } /*namespace tgon*/

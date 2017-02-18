@@ -1,10 +1,8 @@
 /**
+ * filename Engine.h
  * Author : Cha Jnho
- * Date : 07/23/2016
- * Latest author :
- * Latest date :
+ * since    07/23/2016
  */
-
 
 #pragma once
 #include "EngineContextObject.h"
@@ -12,7 +10,6 @@
 
 namespace tgon
 {
-
 
 class GameApplication;
 

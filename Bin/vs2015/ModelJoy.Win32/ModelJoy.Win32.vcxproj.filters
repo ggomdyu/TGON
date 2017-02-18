@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{1356cfec-f375-4b4c-8816-0fc08e1eeb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\cpp">
+      <UniqueIdentifier>{60ad9011-daf2-4bd7-83b8-c5d036dd6c8c}</UniqueIdentifier>
+      <Extensions>c;cpp;</Extensions>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{cfe78ff0-6b6f-4ceb-a476-f941168b399a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine">
+      <UniqueIdentifier>{4d97cbbc-03e3-4a3b-98ce-00d98248dd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Module">
+      <UniqueIdentifier>{7dd95b5d-2022-4f5c-b21f-0e8259d03c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Interface">
+      <UniqueIdentifier>{7e0b5f67-a246-44c9-880a-daa36c1d6397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Engine\Typedef">
+      <UniqueIdentifier>{0d0fbb62-d083-48f2-a397-77ca2da2bc9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\TgonModelJoyForm.cpp">
+      <Filter>Sources\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp">
+      <Filter>Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\EngineContextObject.cpp">
+      <Filter>Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\GameApplication.cpp">
+      <Filter>Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp">
+      <Filter>Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\InputModule.cpp">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TimeModule.cpp">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.cpp">
+      <Filter>Sources\Engine\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\TgonModelJoyForm.h">
+      <Filter>Sources\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Engine.h">
+      <Filter>Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\EngineContextObject.h">
+      <Filter>Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\GameApplication.h">
+      <Filter>Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\TMain.h">
+      <Filter>Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\InputModule.h">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TimeModule.h">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.h">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.h">
+      <Filter>Sources\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Typedef\KeyCode.h">
+      <Filter>Sources\Engine\Typedef</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="GraphicsStyle.xml" />
+    <Xml Include="WindowStyle.xml" />
+  </ItemGroup>
+</Project>

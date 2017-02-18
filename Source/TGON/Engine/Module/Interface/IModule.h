@@ -1,9 +1,8 @@
-/*
-* Author : Cha Junho
-* Date : 07/13/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * filename IModule.h
+ * author   ggomdyu
+ * since    07/13/2016
+ */
 
 #pragma once
 #include "../../../Core/Object/Object.h"

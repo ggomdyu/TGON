@@ -1,9 +1,8 @@
-/*
-* Author : Cha Junho
-* Date : 04/01/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * filename PlatformWindow.h
+ * author   ggomdyu
+ * since    04/01/2016
+ */
 
 #pragma once
 #include <boost/predef/os.h>
@@ -17,10 +16,9 @@ namespace tgon
 
 template <typename WindowTy, 
 		  typename = typename std::enable_if<std::is_convertible<WindowTy*, WindowFrame*>::value>::type>
-std::shared_ptr<WindowTy> MakeWindow(
-	const WindowStyle& wndStyle )
+std::shared_ptr<WindowTy> MakeWindow(const WindowStyle& wndStyle)
 {
-	return std::make_shared<WindowTy>( wndStyle );
+	return std::make_shared<WindowTy>(wndStyle);
 }
 
 }

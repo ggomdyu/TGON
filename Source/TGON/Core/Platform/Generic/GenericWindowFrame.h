@@ -1,10 +1,8 @@
 /**
- * Author : Cha Junho
- * Date : 01/09/2016
- * Latest author : 
- * Latest date :
+ * filename GenericWindowFrame.h
+ * author   ggomdyu
+ * since    01/09/2016
  */
-
 
 #pragma once
 #include "../OSAL/PlatformInclude.h"
@@ -14,11 +12,9 @@
 #include <string>
 #include <cstdint>
 
-
 namespace tgon
 {
 
-// TODO: Move to other header
 enum class MouseType
 {
 	Left,
@@ -29,36 +25,42 @@ enum class MouseType
 struct WindowStyle
 {
 /**
- * Commands
- */ 
+ * @section Public variables
+ */
 public:
-	/**
-	 * @param	xmlPath     Full path of XML
-	 * @return              Window-style data parsed from xml
-	 */
-	static WindowStyle LoadFromXML( const char* xmlPath );
-	
-/**
- * Public variables
- */ 
-public:
-	std::string title = "Hello World!"; /* Caption text of window */
-	int32_t x = 100; /* Window transform */
-	int32_t y = 100; /* Window transform */
-	int32_t width = 500; /* Window transform */
-	int32_t height = 500; /* Window transform */
+    /* @brief   The caption text of window */
+	std::string title = "Hello World!";
 
-	bool popup = false; /* If true, then do not make window frame. */
-	bool fullScreen = false; /* If true, then show window as full screen when it was created. */
-	bool supportWindowTransparency = false; /* If true, then enable window surface's transparency. */
-	bool supportPerPixelTransparency = false; /* If true, then enable the window surface's perpixel transparency. */
-	bool showTopOnCreated = false; /* TODO: Not implemented / add comment */ 
-	bool resizeable = true; /* If true, then make resizable frame to window. */
-	bool topMost = false; /* Show window always top. This can cause race each other top-most window. */
-	bool maximized = false; /* If true, then set window maximized when it was created. */
-	bool minimized = false; /* If true, then set window minimized when it was created. */
-	bool showMiddle = true; /* If true, then set window position to middle of screen when it was created. */
-	bool showImmediately = true; /* If true, then show window immediately when it was created, else */
+    /* @brief   The transform of window */
+	int32_t x = 100;
+	int32_t y = 100;
+	int32_t width = 500;
+	int32_t height = 500;
+
+	bool popup = false;                         /* If true, then do not make window frame. */
+	bool fullScreen = false;                    /* If true, then show window as full screen when it was created. */
+	bool supportWindowTransparency = false;     /* If true, then enable window surface's transparency. */
+	bool supportPerPixelTransparency = false;   /* If true, then enable the window surface's perpixel transparency. */
+	bool showTopOnCreated = false;              /* TODO: Not implemented / add comment */ 
+	bool resizeable = true;                     /* If true, then make resizable frame to window. */
+
+    /**
+     * @brief   If true, the window is always showing on the top.
+     * @warn    This can cause race each other top-most window.
+     */
+    bool topMost = false;
+
+    /* @brief   If true, shows window maximized when it was created. */
+    bool maximized = false;
+
+    /* @brief   If true, then set window minimized when it was created. */
+	bool minimized = false;
+	
+    /* @brief   If true, sets the position of the window to the center of screen when it was created. */
+    bool showMiddle = true;
+	
+    /* @brief   If true, shows window immediately when it was created, else */
+    bool showImmediately = true;
 };
 
 template <typename DerivedTy>
@@ -66,14 +68,14 @@ class TGON_API GenericWindowFrame :
 	private boost::noncopyable
 {
 /**
- * Ctor/Dtor
+ * @section Ctor/Dtor
  */
 public:
 	GenericWindowFrame( );
 	virtual ~GenericWindowFrame( ) = 0;
 
 /**
- * Event handlers
+ * @section Event handlers
  */
 public:
 	virtual void OnMove( int32_t x, int32_t y ) {}
@@ -90,18 +92,18 @@ public:
 
 	/**
 	 * @note	Called when window has begun closing.
-	 * @return	Return true if you want to keep close.
+	 * @return	True if you want to keep close.
 	 */
 	virtual bool OnDestroy( ) { return true; }
 
 /**
- * Gets
+ * @section Gets
  */
 public:
 	bool IsClosed( ) const;
 
 /**
- * Private variables
+ * @section Private variables
  */
 protected:
 	bool m_closed;

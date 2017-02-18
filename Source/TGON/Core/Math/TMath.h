@@ -1,10 +1,9 @@
-/*
-* Author : Cha Junho
-* Date : 03/14/2016
-* Latest author :
-* Latest date :
-*/
-
+/**
+ * filename TMath.h
+ * author   ggomdyu
+ * since    03/14/2016
+ * see      
+ */
 
 #pragma once
 #include "../Platform/OSAL/PlatformInclude.h"

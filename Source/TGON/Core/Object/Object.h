@@ -1,8 +1,7 @@
 /**
- * Author : Cha Junho
- * Date : 03/22/2016
- * Latest author :
- * Latest date :
+ * filename Object.h
+ * author   ggomdyu
+ * since    03/22/2016
  */
 
 #pragma once
@@ -22,65 +21,73 @@ public:
 	using Super = void;
 
 /**
- * Ctor/Dtor
+ * @section Ctor/Dtor
  */
 public:
-	Object( );
-	virtual ~Object( ) = 0;
-
+	Object() = default;
+	virtual ~Object();
+    
 /**
- * Opeators
- */
-	bool operator==( const Object& ) const;
-	bool operator!=( const Object& ) const;
-
-/**
- * Commands
+ * @section Gets
  */
 public:
-	static bool Equals( const Object&, const Object& );
-	
+    /* @brief   */
+    //virtual std::shared_ptr<Object> Clone();
+
 	/**
-	 * @note    Compares two instance. This can be overridden.
-	 * @return  True if both refer to the same object.
-	 */
-	virtual bool Equals( const Object& rhs ) const;
+     * @brief   Compares dynamic bound type of two instance.
+     * @return  True if both type of dynamic bound is same.
+     */
+	bool Equals(const Object& rhs) const noexcept;
 
-	/** 
-	 * @note            Compares two instance.
-	 * @param   lhs     Left handling side
-	 * @param   rhs     Right handling side
-	 * @return          True if both refer to the same object.
-	 */
-	static bool ReferenceEquals( const Object& lhs, const Object& rhs );
+    template <typename CastToTy>
+    bool IsCastable() noexcept;
 
-/**
- * Gets
- */
+    template <typename CastToTy>
+    bool CastTo() noexcept;
+
 	/* @return	Hash value of the type name. */
-	virtual uint32_t GetHashCode( ) const = 0;
+	virtual uint32_t GetHashCode() const noexcept = 0;
 	
     /* @return	The type name */
-    virtual const std::string& GetName( ) const = 0;
+    virtual const std::string& GetName() const noexcept = 0;
 };
+
+template<typename CastToTy>
+inline bool Object::IsCastable() noexcept
+{
+#if TGON_RTTI_ENABLED
+    // ToDo : Implement RTTI
+    while()
+#endif
+    return dynamic_cast<CastToTy>(this);
+}
+
+template<typename CastToTy>
+inline bool Object::CastTo() noexcept
+{
+#if TGON_RTTI_ENABLED
+    // ToDo : Implement RTTI
+#endif
+    return dynamic_cast<CastToTy>(this) ? reinterpret_cast<CastToTy>(this) : nullptr;
+}
 
 } /* namespace tgon */
 
-
-#define TGON_GENERATE_OBJECT_INTERFACE( classType )\
+#define TGON_GENERATE_OBJECT_INTERFACE(classType)\
 	using Super = This;\
 	using This = classType;\
 	\
-	virtual uint32_t GetHashCode( ) const override\
+	virtual uint32_t GetHashCode() const noexcept override\
 	{\
-		return classType::GetTypeInfo( ).GetHashCode( );\
+		return classType::GetTypeInfo().GetHashCode();\
 	}\
-	virtual const std::string& GetName( ) const override\
+	virtual const std::string& GetName() const noexcept override\
 	{\
-		return classType::GetTypeInfo( ).GetName( );\
+		return classType::GetTypeInfo().GetName();\
 	}\
-	static const TypeInfo& GetTypeInfo( )\
+	static const TypeInfo& GetTypeInfo()\
 	{\
-		static TypeInfo typeInfo( #classType );\
+		static TypeInfo typeInfo(#classType);\
 		return typeInfo;\
 	}

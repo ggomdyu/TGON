@@ -1,8 +1,8 @@
 /**
- * Author : Cha Junho
- * Date : 07/24/2016
- * Latest author :
- * Latest date :
+ * author   ggomdyu
+ * since    07/24/2016
+
+
  */
 
 #pragma once

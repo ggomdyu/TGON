@@ -6,8 +6,8 @@
     <_PropertySheetDisplayName>TGON.Common</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>$(DXSDK_DIR)\Include;$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_61_0;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
