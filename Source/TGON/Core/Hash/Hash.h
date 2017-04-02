@@ -88,7 +88,7 @@ inline std::size_t Hash::x65599Hash(const char* str, std::size_t length)
 
     if (Hash::CheckHashCollision<hash_x65599>(hash, str))
     {
-        // TODO: USE Boost logger or Google log!!
+        // TODO: How about USE logger?
         assert(false && "DANGEROUS WARNING! :: Hash collision occured!!!");
     }
 #endif
