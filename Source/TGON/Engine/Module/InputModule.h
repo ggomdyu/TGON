@@ -1,8 +1,7 @@
 /**
+ * filename InputModule.h
  * author   ggomdyu
  * since    07/24/2016
-
-
  */
 
 #pragma once
@@ -17,7 +16,7 @@
 #include <OISJoyStick.h>
 #include <OISEvents.h>
 
-#include "../../Core/Platform/OSAL/PlatformWindow.h"
+#include "../../Core/Platform/TWindow.h"
 
 
 namespace tgon
@@ -47,7 +46,7 @@ class TGON_API InputModule :
  * Generator
  */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( InputModule )
+	TGON_MAKE_OBJECT_INTERFACE( InputModule )
 
 /**
  * Ctor/Dtor
@@ -58,7 +57,7 @@ public:
 	 * @param inputAcceptWindow The window which you want to receive input message
 	 * @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
 	 */
-	InputModule( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
+	InputModule( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 	virtual ~InputModule( );
 
 /**
@@ -204,7 +203,7 @@ private:
 		Internal works
 	*/
 private:
-	void InitializeInputManager( WindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
+	void InitializeInputManager( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
 
 	void SetupInputDevice( uint32_t supportInputFlag );
 
@@ -238,4 +237,4 @@ inline uint32_t InputModule::GetJoyStickNum( ) const
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

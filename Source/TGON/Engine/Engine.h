@@ -20,7 +20,7 @@ class TGON_API Engine :
  * Generator
  */ 
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( Engine )
+	TGON_MAKE_OBJECT_INTERFACE( Engine )
 
 /**
  * Ctor/Dtor
@@ -53,4 +53,4 @@ private:
 
 };
 
-} /*namespace tgon*/
+} /* namespace tgon */

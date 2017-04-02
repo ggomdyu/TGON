@@ -75,4 +75,4 @@ bool HasSystemMenu( const class WindowsWindowFrame& window );
 bool IsWindowSizable( const class WindowsWindowFrame& window );
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

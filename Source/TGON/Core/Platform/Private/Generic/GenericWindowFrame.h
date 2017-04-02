@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../OSAL/PlatformInclude.h"
+#include "../../TConfig.h"
 
 #include <boost/noncopyable.hpp>
 #include <memory>
@@ -78,29 +78,29 @@ public:
  * @section Event handlers
  */
 public:
-	virtual void OnMove( int32_t x, int32_t y ) {}
-	virtual void OnResize( int32_t width, int32_t height ) {}
-	virtual void OnMouseMove( int32_t x, int32_t y ) {}
-	virtual void OnMouseDown( int32_t x, int32_t y, MouseType mouseType ) {}
-	virtual void OnMouseUp( int32_t x, int32_t y, MouseType mouseType ) {}
-	virtual void OnMouseDoubleClick( int32_t x, int32_t y, MouseType mouseType ) {}
-	virtual void OnRawMouseMove( int32_t x, int32_t y ) {}
-	virtual void OnRawMouseDown( int32_t x, int32_t y, MouseType mouseType ) {}
-	virtual void OnRawMouseUp( int32_t x, int32_t y, MouseType mouseType ) {}
-	virtual bool OnGetFocus( ) { return true; }
-	virtual bool OnLoseFocus( ) { return true; }
+    virtual void OnMove(int32_t x, int32_t y) {}
+    virtual void OnResize(int32_t width, int32_t height) {}
+    virtual void OnMouseMove(int32_t x, int32_t y) {}
+    virtual void OnMouseDown(int32_t x, int32_t y, MouseType mouseType) {}
+    virtual void OnMouseUp(int32_t x, int32_t y, MouseType mouseType) {}
+    virtual void OnMouseDoubleClick(int32_t x, int32_t y, MouseType mouseType) {}
+    virtual void OnRawMouseMove(int32_t x, int32_t y) {}
+    virtual void OnRawMouseDown(int32_t x, int32_t y, MouseType mouseType) {}
+    virtual void OnRawMouseUp(int32_t x, int32_t y, MouseType mouseType) {}
+    virtual bool OnGetFocus() { return true; }
+    virtual bool OnLoseFocus() { return true; }
 
 	/**
 	 * @note	Called when window has begun closing.
 	 * @return	True if you want to keep close.
 	 */
-	virtual bool OnDestroy( ) { return true; }
+    virtual bool OnDestroy() { return true; }
 
 /**
  * @section Gets
  */
 public:
-	bool IsClosed( ) const;
+    bool IsClosed() const;
 
 /**
  * @section Private variables
@@ -109,24 +109,22 @@ protected:
 	bool m_closed;
 };
 
-
 template<typename DerivedTy>
-inline GenericWindowFrame<DerivedTy>::GenericWindowFrame( ) :
-	m_closed( false )
+inline GenericWindowFrame<DerivedTy>::GenericWindowFrame() :
+    m_closed(false)
 {
 }
 
 template<typename DerivedTy>
-inline GenericWindowFrame<DerivedTy>::~GenericWindowFrame( )
+inline GenericWindowFrame<DerivedTy>::~GenericWindowFrame()
 {
-	m_closed = true;
+    m_closed = true;
 }
 
 template<typename DerivedTy>
-bool GenericWindowFrame<DerivedTy>::IsClosed( ) const
+bool GenericWindowFrame<DerivedTy>::IsClosed() const
 {
-	return m_closed;
+    return m_closed;
 }
-
 
 } /*namespace tgon*/

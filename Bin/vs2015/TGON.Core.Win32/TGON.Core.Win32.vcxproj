@@ -24,30 +24,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\HDCGuard.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\shared_comptr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\unique_comptr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsInclude.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsScreen.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsSystem.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\shared_comptr.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\unique_comptr.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsInclude.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFrame.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsMain.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsSystem.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>

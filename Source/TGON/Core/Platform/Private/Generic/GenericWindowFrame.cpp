@@ -80,4 +80,4 @@ namespace tgon
 //}
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

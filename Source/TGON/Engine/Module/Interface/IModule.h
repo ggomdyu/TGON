@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../../../Core/Object/Object.h"
+#include "../../../Core/Object/TObject.h"
 
 #include <boost/noncopyable.hpp>
 
@@ -14,27 +14,24 @@ namespace tgon
 {
 
 class TGON_API IModule :
-	public Object,
+	public TObject,
 	private boost::noncopyable
 {
-/**
- * Generator
- */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( IModule )
+    TGON_MAKE_OBJECT_INTERFACE(IModule)
 
 /**
- * Ctor/Dtor
+ * @section Ctor/Dtor
  */
 public:
-	IModule( );
-	virtual ~IModule( ) = 0;
+    IModule();
+    virtual ~IModule() = 0;
 
 /**
- * Commands
+ * @section Public methods
  */
 public:
-	virtual void Update( ) = 0;
+    virtual void Update() = 0;
 };
 
 }

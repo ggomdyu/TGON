@@ -6,7 +6,7 @@
 
 #pragma once
 #include "../Engine/EngineContextObject.h"
-#include "../Core/Platform/OSAL/PlatformWindow.h"
+#include "../Core/Platform/TWindow.h"
 
 
 #define TGON_GENERATE_GAMEAPP( className )\
@@ -21,16 +21,16 @@ namespace tgon
 {
 
 class TGON_API GameApplication :
-	public Object
+	public TObject
 {
 public:
-	TGON_GENERATE_OBJECT_INTERFACE(GameApplication)
+	TGON_MAKE_OBJECT_INTERFACE(GameApplication)
 
 /**
  * @section Ctor/Dtor
  */ 
 public:
-    GameApplication(const std::shared_ptr<WindowFrame>& window /*= MakeWindow(WindowStyle{})*/);
+    GameApplication(const std::shared_ptr<TWindowFrame>& window /*= MakeWindow(WindowStyle{})*/);
 
 /**
  * @section Public methods
@@ -56,14 +56,14 @@ public:
 public:
     bool IsPaused( ) const noexcept;
 
-	const std::shared_ptr<WindowFrame>& GetRootWindow( ) const noexcept;
+	const std::shared_ptr<TWindowFrame>& GetRootWindow( ) const noexcept;
 
 /**
  * @section Private variables
  */ 
 private:
 	bool m_paused;
-	std::shared_ptr<WindowFrame> m_rootWindow;
+	std::shared_ptr<TWindowFrame> m_rootWindow;
 };
 
 }

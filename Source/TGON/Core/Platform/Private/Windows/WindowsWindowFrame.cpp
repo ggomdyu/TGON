@@ -3,7 +3,7 @@
 
 #include "WindowsWindowUtility.h"
 #include "WindowsInclude.h"
-#include "../OSAL/PlatformApplication.h"
+#include "WindowsApplication.h"
 
 #include <Windows.h>
 #include <cassert>
@@ -113,7 +113,7 @@ void WindowsWindowFrame::GetCaptionText(
 	GetWindowTextW( m_wndHandle, dest, length );
 }
 
-HWND WindowsWindowFrame::GetWindowHandle( ) const
+HWND WindowsWindowFrame::GetWindowHandle() const
 {
 	return m_wndHandle;
 }
@@ -493,4 +493,4 @@ LRESULT WindowsWindowFrame::OnMessageHandled(
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

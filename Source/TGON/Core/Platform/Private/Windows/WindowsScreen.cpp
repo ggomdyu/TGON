@@ -46,4 +46,4 @@ int32_t WindowsScreen::GetMainHeight( )
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

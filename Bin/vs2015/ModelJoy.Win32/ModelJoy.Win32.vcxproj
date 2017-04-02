@@ -97,29 +97,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Engine\Engine.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\EngineContextObject.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\GameApplication.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\InputModule.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TimeModule.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Engine\TMain.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp" />
     <ClCompile Include="Source\TgonModelJoyForm.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Engine.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\EngineContextObject.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\GameApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\InputModule.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TimeModule.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\Module\Typedef\KeyCode.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Engine\TMain.h" />
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="Source\TgonModelJoyForm.h" />
   </ItemGroup>
@@ -131,9 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON.Core.Win32\TGON.Core.Win32.vcxproj">
-      <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TGON\TGON.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -231,4 +231,4 @@ bool IsWindowSizable( _In_ const WindowsWindowFrame& window )
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

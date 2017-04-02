@@ -22,4 +22,4 @@ BatteryProperty WindowsSystem::GetPowerInfo( )
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

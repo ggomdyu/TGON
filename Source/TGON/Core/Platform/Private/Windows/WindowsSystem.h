@@ -35,4 +35,4 @@ public:
 using System = WindowsSystem;
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

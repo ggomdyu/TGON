@@ -23,4 +23,4 @@ namespace tgon
 extern int main( int argc, char** argv );
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

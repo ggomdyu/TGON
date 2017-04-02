@@ -3,10 +3,8 @@
 
 #include "../Engine/Engine.h"
 
-
 namespace tgon
 {
-
 
 int main( int argc, char** argv )
 {
@@ -29,5 +27,4 @@ int main( int argc, char** argv )
 	}
 }
 
-
-} /*namespace tgon*/
+} /* namespace tgon */

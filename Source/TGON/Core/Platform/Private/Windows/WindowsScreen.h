@@ -54,4 +54,4 @@ public:
 using Screen = WindowsScreen;
 
 
-} /*namespace tgon*/
+} /* namespace tgon */

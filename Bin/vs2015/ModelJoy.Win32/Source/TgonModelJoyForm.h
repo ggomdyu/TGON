@@ -1,46 +1,49 @@
 ﻿#pragma once
-#include <Core/Platform/OSAL/PlatformApplication.h>
-#include <Core/Platform/OSAL/PlatformTime.h>
-#include <Core/Platform/OSAL/PlatformConsole.h>
-#include <Core/Template/Cast.h>
-#include <Core/Object/Type.h>
-#include <Core/Delegate/Delegate.h>
+#include <Core/Platform/TApplication.h>
+#include <Core/Platform/TTime.h>
+#include <Core/Platform/TConsole.h>
+#include <Core/Template/TCast.h>
+#include <Core/Template/TArray.h>
+#include <Core/Template/TEnumerator.h>
+#include <Core/Template/TFunctionTraits.h>
+#include <Core/Math/TRandom.h>
+#include <Core/Math/TMath.h>
+#include <Core/Math/TRect.h>
+#include <Core/Math/TPoint.h>
+#include <Core/Delegate/TDelegate.h>
+#include <Core/Object/TObject.h>
 #include <Engine/GameApplication.h>
 
 using namespace tgon;
 
 class MyCustomWindow :
-	public WindowFrame
+    public TWindowFrame
 {
 public:
-	using WindowFrame::WindowFrame;
+    using TWindowFrame::TWindowFrame;
 
 public:
-	virtual void OnMouseDown(int32_t x, int32_t y, MouseType mouseType) override
-	{
-	}
+    virtual void OnMouseDown(int32_t x, int32_t y, MouseType mouseType) override
+    {
+    }
 
-	virtual bool OnDestroy() override
-	{
-		return MessageBox(NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO) == IDYES;
-	}
+    virtual bool OnDestroy() override
+    {
+        return MessageBox(NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO) == IDYES;
+    }
 };
 
 class TGONSample :
-	public GameApplication
+    public GameApplication
 {
 public:
-	TGON_GENERATE_OBJECT_INTERFACE(TGONSample)
-
-private:
-    std::shared_ptr<MyCustomWindow> m_myWindow;
+    TGON_MAKE_OBJECT_INTERFACE(TGONSample)
 
 public:
-	TGONSample( ) :
-		GameApplication(MakeWindow<MyCustomWindow>(WindowStyle{})),
-        m_myWindow(std::static_pointer_cast<MyCustomWindow>(This::GetRootWindow()))
-	{
-	};
+    TGONSample() :
+        GameApplication(MakeWindow<TWindowFrame>())
+    {
+	}
 
 public:
 	virtual ~TGONSample( )
@@ -50,21 +53,9 @@ public:
 public:
 	virtual void OnRender( ) override
 	{
-
 	}
 
 	virtual void OnUpdate( ) override
 	{
-        HDC hdc = GetDC( m_myWindow->GetWindowHandle( ) );
-
-        auto timeModule = ModuleContext::GetModule<TimeModule>( );
-
-        static float e = 0.0f;
-        e += timeModule->GetElapsedTime( );
-        auto str = std::to_wstring( e );
-
-        TextOut( hdc, 0, 0, str.c_str( ), str.length( ) );
-
-        ReleaseDC( m_myWindow->GetWindowHandle( ), hdc );
 	}
 };

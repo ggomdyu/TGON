@@ -15,28 +15,28 @@ class TGON_API TimeModule :
 	public IModule
 {
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( TimeModule )
+    TGON_MAKE_OBJECT_INTERFACE(TimeModule)
 
 /**
- * Ctor/Dtor
+ * @section Ctor/Dtor
  */
 public:
-	TimeModule( );
-	virtual ~TimeModule( ) = default;
+    TimeModule();
+    virtual ~TimeModule() = default;
 
 /**
- * Commands
+ * @section Public methods
  */
 public:
-	virtual void Update( );
+    virtual void Update();
 
 /**
- * Gets
+ * @section Gets
  */
-	float GetElapsedTime( ) const;
+    float GetElapsedTime() const;
 
 /**
- * Private variables
+ * @section Private variables
  */
 private:
     uint32_t m_oldTime;

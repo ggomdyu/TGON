@@ -1,10 +1,8 @@
 /**
+ * filename EngineContextObject.h
  * author   ggomdyu
  * since    07/23/2016
-
-
  */
-
 
 #pragma once
 #include <memory>
@@ -17,13 +15,13 @@ namespace tgon
 {
 
 class ModuleContext :
-	public Object
+	public TObject
 {
 /**
  * Generator
 */
 public:
-	TGON_GENERATE_OBJECT_INTERFACE( ModuleContext )
+	TGON_MAKE_OBJECT_INTERFACE( ModuleContext )
 	
 /**
  * Commands

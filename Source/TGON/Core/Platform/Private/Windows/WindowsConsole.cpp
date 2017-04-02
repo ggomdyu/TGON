@@ -68,7 +68,7 @@ WindowsPlatformConsoleHelper::~WindowsPlatformConsoleHelper( )
 
 
 } /*namespace*/
-} /*namespace tgon*/
+} /* namespace tgon */
 
 
 namespace tgon
@@ -102,4 +102,4 @@ void WindowsConsole::WriteImpl( /*IN*/ const wchar_t* str )
 }
 
 
-} /*namespace tgon*/
+} /* namespace tgon */
