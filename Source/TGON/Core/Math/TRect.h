@@ -181,7 +181,7 @@ inline bool TRect<Ty>::operator==(const TRect& rhs) const noexcept
 template <typename Ty>
 inline bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
 {
-    return (bottom != rhs.bottom && top != rhs.top && width != rhs.width && height != rhs.height);
+    return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }
 
 } /* namespace tgon */

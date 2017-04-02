@@ -161,7 +161,7 @@ inline bool TPoint<Ty>::operator==(const TPoint& rhs) const noexcept
 template <typename Ty>
 inline bool TPoint<Ty>::operator!=(const TPoint& rhs) const noexcept
 {
-    return (x != rhs.x && y != rhs.y);
+    return (x != rhs.x || y != rhs.y);
 }
 
 } /* namespace tgon */
