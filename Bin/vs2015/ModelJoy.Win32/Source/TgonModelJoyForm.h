@@ -46,16 +46,16 @@ public:
 	}
 
 public:
-	virtual ~TGONSample( )
-	{
+    virtual ~TGONSample()
+    {
 	}
 
 public:
-	virtual void OnRender( ) override
-	{
+    virtual void OnRender() override
+    {
 	}
 
-	virtual void OnUpdate( ) override
-	{
+    virtual void OnUpdate() override
+    {
 	}
 };

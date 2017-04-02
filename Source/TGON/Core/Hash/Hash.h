@@ -34,7 +34,7 @@ namespace tgon
 class TGON_API Hash
 {
 /**
- * @section Public methods
+ * @section Public command methods
  */ 
 public:
 	/* @return	The value that hashed by x65599 algorithm */
@@ -45,7 +45,7 @@ public:
     static std::size_t StringToHash(const char* str, std::size_t length);
 
 /**
- * @section Private methods
+ * @section Private command methods
  */
 private:
 	static std::size_t x65599Hash(const char* str, std::size_t length);

@@ -36,7 +36,7 @@ public:
 	int32_t Execute( int argc, char** argv );
 
 /**
- * Private methods
+ * Private command methods
  */ 
 private:
 	void AddEssentialModules( );

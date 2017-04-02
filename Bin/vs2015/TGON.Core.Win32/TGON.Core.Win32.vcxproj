@@ -37,6 +37,8 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.h" />
+    <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.cpp" />
@@ -48,6 +50,8 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DEBB112-5404-4EF7-A76E-FC863778EFF9}</ProjectGuid>
@@ -107,12 +111,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>

@@ -53,7 +53,7 @@ public:
     const float* operator[](std::size_t index) const;
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     static TMatrix4x4 Scale(float x, float y, float z);

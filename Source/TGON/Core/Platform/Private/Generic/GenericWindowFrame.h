@@ -97,7 +97,7 @@ public:
     virtual bool OnDestroy() { return true; }
 
 /**
- * @section Gets
+ * @section Get methods
  */
 public:
     bool IsClosed() const;

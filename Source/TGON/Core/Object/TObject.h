@@ -28,14 +28,14 @@ public:
 	virtual ~TObject();
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     template <typename CastTy>
     bool CastTo() noexcept;
     
 /**
- * @section Gets
+ * @section Get methods
  */
 public:
     /* @brief   */

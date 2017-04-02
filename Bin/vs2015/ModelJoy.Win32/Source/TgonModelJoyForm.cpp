@@ -4,4 +4,4 @@
 #include <Engine/Engine.h>
 
 
-TGON_GENERATE_GAMEAPP( TGONSample );
+TGON_GENERATE_GAMEAPP(TGONSample);

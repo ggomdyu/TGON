@@ -25,7 +25,7 @@ public:
     TTypeInfo(const std::string& name) noexcept;
 
 /**
- * @section Gets
+ * @section Get methods
  */
 public:
 	/* @return	Hash value of the type name. */

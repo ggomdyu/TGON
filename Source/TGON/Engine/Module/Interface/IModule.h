@@ -28,7 +28,7 @@ public:
     virtual ~IModule() = 0;
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     virtual void Update() = 0;

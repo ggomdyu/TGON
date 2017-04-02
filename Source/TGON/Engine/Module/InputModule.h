@@ -68,7 +68,7 @@ public:
 	virtual void Update( );
 
 /**
- * Gets
+ * Get methods
  */
 public:
 	/* @return	*/

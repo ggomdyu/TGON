@@ -33,30 +33,28 @@ public:
     GameApplication(const std::shared_ptr<TWindowFrame>& window /*= MakeWindow(WindowStyle{})*/);
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     virtual void OnUpdate() = 0;
-
     virtual void OnRender() = 0;
 
 /**
- * @section Sets
+ * @section Set methods
  */ 
 public:
     /* @brief   Resume the frame update */
-	void ResumeUpdate( ) noexcept;
+    void ResumeUpdate() noexcept;
 
 	/* @brief   Pause the frame update */
-	void PauseUpdate( ) noexcept;
+    void PauseUpdate() noexcept;
 
 /**
- * @section Gets
+ * @section Get methods
  */ 
 public:
-    bool IsPaused( ) const noexcept;
-
-	const std::shared_ptr<TWindowFrame>& GetRootWindow( ) const noexcept;
+    bool IsPaused() const noexcept;
+    const std::shared_ptr<TWindowFrame>& GetRootWindow() const noexcept;
 
 /**
  * @section Private variables

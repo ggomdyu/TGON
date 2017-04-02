@@ -19,6 +19,18 @@
     <Filter Include="Sources\Core\Platform\Private\Windows\Misc">
       <UniqueIdentifier>{3b85ab3c-e754-4fef-9b9c-9ac15b1e8592}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\RenderCore">
+      <UniqueIdentifier>{4ec28eb0-e331-43b6-8e22-f6d12036137f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderCore\Device">
+      <UniqueIdentifier>{ca3ec809-3017-49ee-80d9-5743623472a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderCore\Device\Private">
+      <UniqueIdentifier>{7f90b8c4-4585-4b0f-b042-e9dd968cc56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderCore\Device\Private\Direct3D9">
+      <UniqueIdentifier>{067bff68-72bb-4c46-90ce-1d70930a9102}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConfig.h">
@@ -60,6 +72,12 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.h">
       <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.h">
+      <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.h">
+      <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.cpp">
@@ -88,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.cpp">
       <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.cpp">
+      <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.cpp">
+      <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

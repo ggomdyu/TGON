@@ -13,7 +13,7 @@ namespace tgon
 class TGON_API Random
 {
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     /* @return	Return random value between min~max as int */
@@ -23,7 +23,7 @@ public:
     static float Range(float min, float max);
 
 /**
- * @section Private methods
+ * @section Private command methods
  */
 private:
 	/**

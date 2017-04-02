@@ -25,13 +25,13 @@ public:
     virtual ~TimeModule() = default;
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     virtual void Update();
 
 /**
- * @section Gets
+ * @section Get methods
  */
     float GetElapsedTime() const;
 

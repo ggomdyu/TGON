@@ -38,7 +38,7 @@ template <typename PlatformTimeTy>
 class TGON_API GenericTime
 {
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
 	/**
@@ -48,7 +48,7 @@ public:
 	static void Sleep(unsigned int milliSec);
 
 /**
- * @section Gets
+ * @section Get methods
  */
 public:
     /*@return  Start time of process as millisecond*/

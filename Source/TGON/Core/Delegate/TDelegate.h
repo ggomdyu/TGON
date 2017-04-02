@@ -73,7 +73,7 @@ public:
     ReturnTy operator()(Args&&... args);
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     template <typename FunctionTy>
@@ -95,7 +95,7 @@ public:
     static TDelegate MakeDelegate(ClassTy* receiver) noexcept;
 
 /**
- * @section Private methods
+ * @section Private command methods
  */
 private:
     template <typename FunctionTy>

@@ -37,7 +37,7 @@ public:
 	virtual ~WindowsWindowFrame();
 
 /** 
- * @section Public methods
+ * @section Public command methods
  */ 
 public:
     bool PumpEvent();
@@ -91,7 +91,7 @@ public:
     bool IsEnabledGlobalInputHook() const;
 
 /** 
- * @section Private methods
+ * @section Private command methods
  */ 
 private:
 	void AdditionalInit( /*In*/ const WindowStyle& );

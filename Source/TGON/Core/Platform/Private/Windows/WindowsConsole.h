@@ -28,7 +28,7 @@ public:
     ~WindowsConsole() = delete;
 
 /** 
- * @section Private methods
+ * @section Private command methods
  */ 
 private:
 	/*

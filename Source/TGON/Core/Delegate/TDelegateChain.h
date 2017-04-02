@@ -58,7 +58,7 @@ public:
     TDelegateChain operator+(TDelegateChain&& rhs) const;
 
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     using SuperTy::insert;

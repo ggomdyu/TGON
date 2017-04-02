@@ -16,7 +16,7 @@ class TGON_API WindowsTime :
 	public GenericTime<WindowsTime>
 {
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
 	/* @return  Execution time of OS as millisecond */

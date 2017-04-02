@@ -22,14 +22,20 @@
     <Filter Include="Sources\Core\XML">
       <UniqueIdentifier>{d92b6582-fc44-4cc1-b655-6e0c6a962fa8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Delegate">
-      <UniqueIdentifier>{112a1290-9775-4694-8bab-a6ee1547a2a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\PrecompiledHeader">
       <UniqueIdentifier>{95ffb460-4852-466f-b6eb-4ae4eca3c6ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Core\Log">
       <UniqueIdentifier>{83402c76-8909-470a-a7f4-ddf8789f38cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Hash">
+      <UniqueIdentifier>{11ead1b2-c7a0-4dd2-9d30-73fba45d9f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform\Private">
+      <UniqueIdentifier>{fd839156-bcfa-43b7-983b-a34270baa3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform\Private\Generic">
+      <UniqueIdentifier>{4463e7ed-c778-490a-a377-4aceeee0e6f2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Engine">
       <UniqueIdentifier>{a7537a8e-b74b-4796-9fbc-0871d3e9fece}</UniqueIdentifier>
@@ -43,14 +49,20 @@
     <Filter Include="Sources\Engine\Typedef">
       <UniqueIdentifier>{cdb7b4da-691a-4aec-8646-325056c13fab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Hash">
-      <UniqueIdentifier>{11ead1b2-c7a0-4dd2-9d30-73fba45d9f75}</UniqueIdentifier>
+    <Filter Include="Sources\Core\Delegate">
+      <UniqueIdentifier>{112a1290-9775-4694-8bab-a6ee1547a2a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Private">
-      <UniqueIdentifier>{fd839156-bcfa-43b7-983b-a34270baa3d9}</UniqueIdentifier>
+    <Filter Include="Sources\RenderCore">
+      <UniqueIdentifier>{e6c9b88f-63cb-40c6-a7f7-add22d9894c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Private\Generic">
-      <UniqueIdentifier>{4463e7ed-c778-490a-a377-4aceeee0e6f2}</UniqueIdentifier>
+    <Filter Include="Sources\RenderCore\Device">
+      <UniqueIdentifier>{247019ef-c770-4f3d-9cb4-bfeaf4202791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderCore\Device\Private">
+      <UniqueIdentifier>{a616939c-58f1-40f4-88a1-63715df37083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderCore\Device\Private\Interface">
+      <UniqueIdentifier>{058628d4-c591-4c32-8fe8-ed07f3d0e414}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
       <Filter>Sources\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.cpp">
+      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.cpp">
+      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TPoint.h">
       <Filter>Sources\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.h">
+      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.h">
+      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

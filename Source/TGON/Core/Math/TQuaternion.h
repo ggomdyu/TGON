@@ -42,7 +42,7 @@ public:
     float operator[](std::size_t) const;
 	
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     struct TMatrix4x4 RotateMatrix() const;

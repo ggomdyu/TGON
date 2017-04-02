@@ -45,7 +45,7 @@ public:
     float operator[](std::size_t) const noexcept;
 	
 /**
- * @section Public methods
+ * @section Public command methods
  */
 public:
     static float Dot(const TVector3& a, const TVector3& b) noexcept;
