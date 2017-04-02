@@ -1,16 +1,18 @@
-/*
-* Author : Cha Junho
-* Date : 04/01/2016
-* Latest author :
-* Latest date :
-*/
+/**
+ * filename TConfig.h
+ * author   ggomdyu
+ * since    04/01/2016
+ */
 
 #pragma once
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "../Windows/WindowsInclude.h"
-#	include "../Windows/WindowsConfig.h"
+#	include "Private/Windows/WindowsConfig.h"
+#elif BOOST_OS_ANDROID
+#	include "Private/Android/AndroidConfig.h"
+#elif BOOST_OS_IOS
+#	include "Private/iOS/iOSConfig.h"
 #endif
 
 #ifndef TGON_SUPPORT_SSE2

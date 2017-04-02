@@ -1,5 +1,5 @@
 /**
- * filename Type.h
+ * filename TTypeInfo.h
  * author   ggomdyu
  * since    03/14/2016
  */
@@ -11,18 +11,18 @@
 namespace tgon
 {
 
-struct TypeInfo
+struct TTypeInfo
 {
 /**
  * @section Ctor/Dtor
  */
 public:
     template <std::size_t N>
-    TypeInfo(const char(&)[N]) noexcept;
+    TTypeInfo(const char(&)[N]) noexcept;
 
-    TypeInfo(const char* name, int length) noexcept;
+    TTypeInfo(const char* name, int length) noexcept;
 
-    TypeInfo(const std::string& name) noexcept;
+    TTypeInfo(const std::string& name) noexcept;
 
 /**
  * @section Gets
@@ -43,9 +43,9 @@ private:
 };
 
 template<std::size_t N>
-inline tgon::TypeInfo::TypeInfo(const char(&name)[N]) noexcept :
-    TypeInfo(name, N)
+inline tgon::TTypeInfo::TTypeInfo(const char(&name)[N]) noexcept :
+    TTypeInfo(name, N)
 {
 }
 
-} /*namespace tgon*/
+} /* namespace tgon */

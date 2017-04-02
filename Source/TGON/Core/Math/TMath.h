@@ -2,86 +2,63 @@
  * filename TMath.h
  * author   ggomdyu
  * since    03/14/2016
- * see      
  */
 
 #pragma once
-#include "../Platform/OSAL/PlatformInclude.h"
-#include "Vector3.h"
+#include "../Platform/TConfig.h"
+#include "TVector3.h"
 
 #include <cmath>
 #include <cstdint>
 
-
 namespace tgon
 {
 
-class TGON_API Math
+class TGON_API TMath
 {
 /** 
- * Ctor/Dtor
+ * @section Static variables
  */ 
 public:
-	Math( ) = delete;
-	~Math( ) = delete;
-
-/** 
- * Static variables
- */ 
-public:
-    static constexpr float PI = 3.141592654f;
+    static constexpr float PI = 3.14159265358f;
     static constexpr float EPSILON = 0.0001f;
     static constexpr float Deg2Rad = PI / 180;
     static constexpr float Rad2Deg = 180 / PI;
 
 /**
- * Commands
+ * @section Commands
  */ 
 public:
-	static float Round( float val );
-	static int32_t RoundToInt( float val );
+    template <typename Ty>
+	static Ty Round(Ty value) noexcept;
 
-	/* @return	Discarded fractional parts */
-	static float Floor( float val );
-
-	/* @return	Discarded fractional parts */
-	static int32_t FloorToInt( float val );
+	/* @return	The value which fractional parts is discarded */
+    template <typename Ty>
+	static Ty Floor(Ty value) noexcept;
 
 	/* @return	Square root value */
-	static float Sqrt( float value );
+    template <typename Ty>
+	static Ty Sqrt(Ty value) noexcept;
 
 	/* @return	Maximum value between first and second */
 	template <class Ty>
-	static constexpr Ty Max( Ty first, Ty second );
+	static constexpr Ty Max(Ty first, Ty second) noexcept;
 
 	/* @return	Minimum value between first and second */
 	template <class Ty>
-	static constexpr Ty Min( Ty first, Ty second );
+	static constexpr Ty Min(Ty first, Ty second) noexcept;
 
 	/* @return	Absolute value */
 	template <class Ty>
-	static constexpr Ty Abs( Ty value );
+	static constexpr Ty Abs(Ty value) noexcept;
 
-	/* @return	If value is over 0, then 1, else it's below, then -1, else 0 */
+	/* @return  The sign of value as it's owned type. */
 	template<class Ty>
-	static constexpr Ty Sign( Ty value );
+	static constexpr Ty Sign(Ty value) noexcept;
 
 	/* @return	Clamped value between min and max */
 	template <class Ty>
-	static constexpr Ty Clamp( Ty value, Ty min, Ty max );
-
-	/**
-	 * @param	str		Undecayed string ( e.g. "Text" )
-	 * @return			x65599 Hash value
-	 */
-	template <std::size_t N>
-	static uint32_t StringToHash( const char( &str )[N] );
-	
-	/**
-	 * @param	str		Decayed string ( e.g. const char* = "Text"; )
-	 * @return			x65599 x65599 Hash value
-	 */
-	static uint32_t StringToHash( const char* str, std::size_t length );
+	static constexpr Ty Clamp(Ty value, Ty min, Ty max) noexcept;
 
 	/**
 	 * @param	from	Interpolation start value
@@ -89,144 +66,97 @@ public:
 	 * @param	t		Elapsed time
 	 * @return			Interpolated value 
 	 */
-	static constexpr float Lerp( float from, float to, float t );
-	static float Smoothstep( float from, float to, float t );
+	static constexpr float Lerp(float from, float to, float t) noexcept;
+
+	static float Smoothstep(float from, float to, float t) noexcept;
 	
 	/**
 	 * @param	a/b/c	Interpolate target
 	 * @param	t		Elapsed time
 	 * @return			Interpolated value
 	 */
-	static Vector3 Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t );
+	static const TVector3 Bezier(const TVector3& a, const TVector3& b, const TVector3& c, float t) noexcept;
 
-/**
- *  Private variables
- */
-private:
-	static uint32_t x65599Hash( const char* str, std::size_t length );
+/** 
+ * @section Ctor/Dtor
+ */ 
+public:
+    TMath() = delete;
+    ~TMath() = delete;
 };
 
-inline float Math::Round( float val )
+template <typename Ty>
+inline Ty TMath::Round(Ty value) noexcept
 {
-	return static_cast<float>( RoundToInt( val ));
+    return std::round(value);
 }
 
-inline int32_t Math::RoundToInt( float val )
+template <typename Ty>
+inline Ty TMath::Floor(Ty value) noexcept
 {
+	return std::floor(value);
+}
+
+//inline std::size_t Math::FloorToInt(float value)
+//{
 //#if TGON_SUPPORT_SSE2
-//	return _mm_cvt_ss2si( _mm_set_ss( val+val+0.5f )) >> 1;
+//	return ( _mm_cvt_ss2si( _mm_set_ss(value +vvalueal-0.5f )) >> 1 );
 //#else
-	return static_cast<int32_t>( std::round( val ));
+////return static_cast<std::size_t>(std::floor(value));
 //#endif
-}
+//}
 
-inline float Math::Floor( float val )
+template <class Ty>
+inline Ty TMath::Sqrt(Ty value) noexcept
 {
-	return static_cast<float>( FloorToInt( val ));
-}
-
-inline int32_t Math::FloorToInt(
-	float val )
-{
-//#if TGON_SUPPORT_SSE2
-//	return ( _mm_cvt_ss2si( _mm_set_ss( val+val-0.5f )) >> 1 );
-//#else
-	return static_cast<int32_t>( std::floor( val ));
-//#endif
-}
-
-inline float Math::Sqrt( float val )
-{
-	return std::sqrt( val );
+	return std::sqrt(value);
 }
 
 template <class Ty>
-constexpr Ty Math::Max( Ty first, Ty second )
+constexpr Ty TMath::Max(Ty first, Ty second) noexcept
 {
-	return ( first >= second ) ? first : second;
+	return (first >= second) ? first : second;
 }
 
 template <class Ty>
-constexpr Ty Math::Min( Ty first, Ty second )
+constexpr Ty TMath::Min(Ty first, Ty second) noexcept
 {
-	return ( first <= second ) ? first : second;
+	return (first <= second) ? first : second;
 }
 
 template <class Ty>
-constexpr Ty Math::Abs( Ty value )
+constexpr Ty TMath::Abs(Ty value) noexcept
 {
-	return ( value < (Ty)(0)) ? -value : value;
+	return (value < static_cast<Ty>(0)) ? -value : value;
 }
 
 template<class Ty>
-constexpr Ty Math::Sign( Ty value )
+constexpr Ty TMath::Sign(Ty value) noexcept
 {
-	return ( value > (Ty)(0)) ? (Ty)(1) : ( value < (Ty)(0)) ? (Ty)(-1) : (Ty)(0);
+	return (value > static_cast<Ty>(0)) ? static_cast<Ty>(1) : (value < static_cast<Ty>(0)) ? static_cast<Ty>(-1) : static_cast<Ty>(0);
 }
 
 template <class Ty>
-constexpr Ty Math::Clamp( Ty value, Ty min, Ty max )
+constexpr Ty TMath::Clamp(Ty value, Ty min, Ty max) noexcept
 {
-	return Math::Max( Math::Min( value, max ), min );
+	return TMath::Max(TMath::Min(value, max), min);
 }
 
-template<std::size_t N>
-inline uint32_t Math::StringToHash( const char( &str )[N] )
+constexpr float TMath::Lerp(float from, float to, float t) noexcept
 {
-	return x65599Hash( str, N );
+	return from + (to - from) * t;
 }
 
-inline uint32_t Math::StringToHash( const char* str, std::size_t length )
+inline float TMath::Smoothstep(float from, float to, float t) noexcept
 {
-	return x65599Hash( str, length );
+	t = TMath::Clamp((t - from) / (to - from), 0.0f, 1.0f);
+	return t * t * (3.0f - (2.0f * t));
 }
 
-constexpr float Math::Lerp( float from, float to, float t )
+inline const TVector3 TMath::Bezier(const TVector3& a, const TVector3& b, const TVector3& c, float t) noexcept
 {
-	return from + (( to-from )*t );
-}
-
-inline float Math::Smoothstep( float from, float to, float t )
-{
-	t = Math::Clamp(( t-from )/( to-from ), 0.0f, 1.0f );
-	return t*t*( 3.0f-( 2.0f*t ));
-}
-
-inline Vector3 Math::Bezier( const Vector3& a, const Vector3& b, const Vector3& c, float t )
-{
-	const float inv = 1.0f-t;
-	return {( inv*inv*a )+( 2.0f*t*inv*b )+( t*t*c )};
-}
-
-inline uint32_t Math::x65599Hash( const char* str, std::size_t length )
-{
-    // Check for hash collisions.
-#if defined( _DEBUG ) || defined( DEBUG )
-    static std::map<std::string, std::size_t> hashCollisionChecker;
-
-    auto iter = hashCollisionChecker.find( str );
-    if ( iter != hashCollisionChecker.end( ))
-    {
-        // Has a collision occurred?
-        if ( std::strcmp( iter->first.c_str( ), str ))
-        {
-            // TODO: USE Boost logger or Google log!!
-            assert( false && "DANGEROUS WARNING! :: Hash collision occured!!!" );
-        }
-    }
-    else
-    {
-        hashCollisionChecker.insert({ str, length });
-    }
-#endif
-
-	uint32_t hash = 0;
-	for ( uint32_t i = 0; i < length; ++i )
-	{
-		hash = 65599*hash + str[i];
-	}
-
-	return hash^( hash >> 16 );
+	float inv = 1.0f - t;
+	return {(inv * inv * a) + (2.0f * t * inv * b) + (t * t * c)};
 }
 
 } /* namespace tgon */
