@@ -27,6 +27,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\EngineContextObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GameApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\InputModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\Interface\IModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\TimeModule.cpp" />
@@ -51,6 +52,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TTypeInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericApplicationFwd.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericCensor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericConsole.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericScreen.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericTime.h" />
@@ -68,6 +71,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\EngineContextObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GameApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\InputModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\Interface\IModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\TimeModule.h" />
@@ -77,6 +81,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsInstance.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt" />

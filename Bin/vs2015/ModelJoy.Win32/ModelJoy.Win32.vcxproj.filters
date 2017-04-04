@@ -13,19 +13,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\TgonModelJoyForm.cpp">
-      <Filter>Sources\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TgonModelJoyForm.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\TgonModelJoyForm.h">
-      <Filter>Sources\cpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TgonModelJoyForm.h">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

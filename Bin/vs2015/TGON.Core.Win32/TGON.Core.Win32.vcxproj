@@ -26,9 +26,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\HDCGuard.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\shared_comptr.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\unique_comptr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\SharedComPtr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\UniqueComPtr.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplicationFwd.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsInclude.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.h" />
     <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.h" />
   </ItemGroup>
@@ -50,6 +52,7 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.cpp" />
   </ItemGroup>
@@ -113,10 +116,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(DXSDK_DIR)\Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
     <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>..\include\freetype;$(IncludePath)</IncludePath>

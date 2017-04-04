@@ -31,6 +31,9 @@
     <Filter Include="Sources\RenderCore\Device\Private\Direct3D9">
       <UniqueIdentifier>{067bff68-72bb-4c46-90ce-1d70930a9102}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{0ad7582e-e2b2-4387-ae16-6592214c95de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConfig.h">
@@ -60,12 +63,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.h">
       <Filter>Sources\Core\Platform\Private\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\shared_comptr.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\unique_comptr.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\HDCGuard.h">
       <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
     </ClInclude>
@@ -77,6 +74,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.h">
       <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\SharedComPtr.h">
+      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\UniqueComPtr.h">
+      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplicationFwd.h">
+      <Filter>Sources\Core\Platform\Private\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.cpp">
       <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

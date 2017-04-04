@@ -22,9 +22,6 @@
     <Filter Include="Sources\Core\XML">
       <UniqueIdentifier>{d92b6582-fc44-4cc1-b655-6e0c6a962fa8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\PrecompiledHeader">
-      <UniqueIdentifier>{95ffb460-4852-466f-b6eb-4ae4eca3c6ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\Log">
       <UniqueIdentifier>{83402c76-8909-470a-a7f4-ddf8789f38cc}</UniqueIdentifier>
     </Filter>
@@ -66,9 +63,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.cpp">
-      <Filter>Sources\PrecompiledHeader</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.cpp">
       <Filter>Sources\Engine</Filter>
     </ClCompile>
@@ -126,13 +120,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.cpp">
       <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.cpp">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMath.h">
       <Filter>Sources\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
-      <Filter>Sources\PrecompiledHeader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.h">
       <Filter>Sources\Engine</Filter>
@@ -248,6 +243,22 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.h">
       <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.h">
+      <Filter>Sources\Engine\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsDevice.h">
+      <Filter>Sources\RenderCore\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsInstance.h">
+      <Filter>Sources\RenderCore\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericApplicationFwd.h">
+      <Filter>Sources\Core\Platform\Private\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Private\Generic\GenericCensor.h">
+      <Filter>Sources\Core\Platform\Private\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">
