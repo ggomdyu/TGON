@@ -57,9 +57,10 @@ class TDelegate<ReturnTy(Args...)> final
  */
 public:
     TDelegate() noexcept;
+    TDelegate(std::nullptr_t) noexcept;
     TDelegate(void* receiver, StubTy stub) noexcept;
     TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept;
-    TDelegate(const TDelegate& rhs) noexcept;
+    TDelegate(const TDelegate& rhs);
     TDelegate(TDelegate&& rhs) noexcept;
     ~TDelegate();
 
@@ -69,6 +70,8 @@ public:
 public:
     TDelegate& operator=(const TDelegate& rhs);
     TDelegate& operator=(TDelegate&& rhs);
+    bool operator==(std::nullptr_t) const noexcept;
+    bool operator!=(std::nullptr_t) const noexcept;
 
     ReturnTy operator()(Args&&... args);
 
@@ -117,9 +120,9 @@ private:
     static ReturnTy MakeStub(void* receiver, Args... args);
 
     /**
-     * @brief           The function deletes stored function in m_ptr
-     * @param   ptr     Delete target
-     * @return          The size to delete, or deleted
+     * @brief               The function deletes stored function in m_ptr
+     * @param [in]  ptr     Delete target
+     * @return              The size to delete, or deleted
      */
     template <typename FunctionTy>
     static std::size_t MakeDeleter(void* ptr);
@@ -143,6 +146,12 @@ inline TDelegate<ReturnTy(Args...)>::TDelegate() noexcept :
 {
 }
 
+template<typename ReturnTy, typename ...Args>
+inline TDelegate<ReturnTy(Args...)>::TDelegate(std::nullptr_t) noexcept :
+    TDelegate()
+{
+}
+
 template<typename ReturnTy, typename... Args>
 inline TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub) noexcept :
 	m_ptr(receiver),
@@ -160,7 +169,7 @@ inline TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub, Dele
 }
 
 template<typename ReturnTy, typename ...Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(const TDelegate& rhs) noexcept :
+inline TDelegate<ReturnTy(Args...)>::TDelegate(const TDelegate& rhs) :
     m_deleter(rhs.m_deleter),
     m_stub(rhs.m_stub)
 {
@@ -216,9 +225,9 @@ inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(con
     m_deleter = rhs.m_deleter;
     m_stub = rhs.m_stub;
 
-    if (m_deleter)
+    if (rhs.m_deleter)
     {
-        int allocationSize = GetStoredFunctionSize(m_deleter);
+        int allocationSize = GetStoredFunctionSize(rhs.m_deleter);
 
         m_ptr = operator new(allocationSize);
         std::memcpy(m_ptr, rhs.m_ptr, allocationSize);
@@ -253,6 +262,18 @@ inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(TDe
     rhs.m_stub = nullptr;
     
     return *this;
+}
+
+template<typename ReturnTy, typename ...Args>
+inline bool TDelegate<ReturnTy(Args...)>::operator==(std::nullptr_t) const noexcept
+{
+    return m_stub == nullptr;
+}
+
+template<typename ReturnTy, typename ...Args>
+inline bool TDelegate<ReturnTy(Args...)>::operator!=(std::nullptr_t) const noexcept
+{
+    return m_stub != nullptr;
 }
 
 template<typename ReturnTy, typename... Args>

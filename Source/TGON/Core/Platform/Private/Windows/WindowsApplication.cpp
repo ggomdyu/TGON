@@ -19,7 +19,7 @@ bool WindowsApplication::PullMessage(_In_ const WindowsWindowFrame* window, _Out
     return PeekMessageW(message, window->GetWindowHandle(), 0, 0, PM_REMOVE) == TRUE;
 }
 
-bool WindowsApplication::PumpMessage(_Out_ MSG* message)
+bool WindowsApplication::PumpMessage(MSG* message)
 {
     // Get the message from queue.
 	if (PeekMessageW(message, nullptr, 0, 0, PM_REMOVE) == TRUE)
@@ -37,15 +37,50 @@ bool WindowsApplication::PumpMessage(_Out_ MSG* message)
 	}
 }
 
-void WindowsApplication::ShowMessageBox(const char* message, const char* caption)
+void WindowsApplication::ShowYesNoPopup(const char* message, const char* caption, OnPopupEventHandle onMessageBoxEventHandled)
 {
-    MessageBoxA(nullptr, message, caption, MB_OK);
+    auto clickedBtnType = MessageBoxA(nullptr, message, caption, MB_YESNO);
+
+    if (onMessageBoxEventHandled != nullptr)
+    {
+        onMessageBoxEventHandled(static_cast<TPopupEvent>(clickedBtnType));
+    }
 }
 
-void WindowsApplication::ShowMessageBox(const wchar_t* message, const wchar_t* caption)
+void WindowsApplication::ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, OnPopupEventHandle onMessageBoxEventHandled)
 {
-    MessageBoxW(nullptr, message, caption, MB_OK);
+    auto clickedBtnType = MessageBoxW(nullptr, message, caption, MB_YESNO);
+
+    if (onMessageBoxEventHandled != nullptr)
+    {
+        onMessageBoxEventHandled(static_cast<TPopupEvent>(clickedBtnType));
+    }
 }
+
+void WindowsApplication::ShowOkPopup(const char* message, const char* caption, OnPopupEventHandle onMessageBoxEventHandled)
+{
+    auto clickedBtnType = MessageBoxA(nullptr, message, caption, MB_OK);
+
+    if (onMessageBoxEventHandled != nullptr)
+    {
+        onMessageBoxEventHandled(static_cast<TPopupEvent>(clickedBtnType));
+    }
+}
+
+void WindowsApplication::ShowOkPopup(const wchar_t* message, const wchar_t* caption, OnPopupEventHandle onMessageBoxEventHandled)
+{
+    auto clickedBtnType = MessageBoxW(nullptr, message, caption, MB_OK);
+
+    if (onMessageBoxEventHandled != nullptr)
+    {
+        onMessageBoxEventHandled(static_cast<TPopupEvent>(clickedBtnType));
+    }
+}
+
+//void WindowsApplication::ShowYesNoMessageBox(const char* message, const char* caption)
+//{
+//    MessageBoxA(nullptr, message, caption, MB_OK);
+//}
 
 LRESULT WINAPI WindowsApplication::OnMessageHandled(_In_ HWND wndHandle, _In_ UINT msg, _In_ WPARAM wParam, _In_ LPARAM lParam )
 {

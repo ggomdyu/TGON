@@ -1,13 +1,13 @@
 /**
- * filename WindowsApplication.h
+ * filename AndroidApplication.h
  * author   ggomdyu
- * since    03/20/2016
+ * since    04/05/2017
  */
 
 #pragma once
 #include "../Generic/GenericApplication.h"
 
-#include "WindowsApplicationFwd.h"
+//#include "AndroidApplicationFwd.h"
 #include <cstdint>
 
 namespace tgon
@@ -45,11 +45,14 @@ public:
 	 * @return                  False if there is no message to pull out
 	 */
 	static bool PumpMessage(MSG* message);
+
+	static bool EnableScreenpdate(bool enable);
+
     /**
 	 * @brief                   Show the Message box which has buttons: Yes, No
-     * @param [in] message      Message box description
-     * @param [in] caption      Message box title
-     * @param [in] handler      Message box event handler when called button clicked
+     * @param [out] message     Message box description
+     * @param [out] caption     Message box title
+     * @param [out] handler     Message box event handler when called button clicked
 	 * @return                  False if there is no message to pull out
 	 */ 
     static void ShowYesNoPopup(const char* message, const char* caption, OnPopupEventHandle handler);
@@ -69,34 +72,11 @@ public:
 	 */
 	static void ExitThread(int32_t exitCode);
 
-	/**
-	 * @brief               Enable show cursor mode: Hide or Show
-	 * @param   enableShow	Pass true to show, false otherwise.
-	 */
-	static void ShowCursor(bool enableShow);
-
-	/**
-	 * @brief   Enable float calculate exception like: devide by zero, underflow, overflow, etc 
-	 */
-	static void EnableFloatingException(unsigned int newStat);
-
-	/**/
-	//static void DisableTaskSwitching();
-
-/**
- * @section Event handlers
- */
-public:
-	static LRESULT CALLBACK OnMessageHandled(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-
 /**
  * @section Public variables
  */
-public:
-	static const HINSTANCE InstanceHandle;
-	static const wchar_t* AppClassName;
 };
 
-using TApplication = GenericApplication<WindowsApplication>;
+using TApplication = GenericApplication<AndroidApplication>;
 
 } /* namespace tgon */

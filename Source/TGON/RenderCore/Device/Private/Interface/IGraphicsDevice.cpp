@@ -1,12 +1,9 @@
 #include "PrecompiledHeader.h"
 #include "IGraphicsDevice.h"
 
-
-IRenderer::IRenderer()
+namespace tgon
 {
-}
 
 
-IRenderer::~IRenderer()
-{
-}
+
+} /* namespace tgon */

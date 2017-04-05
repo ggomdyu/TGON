@@ -176,7 +176,7 @@ inline const ComPtrTy* SharedComPtr<ComPtrTy>::operator->() const noexcept
 }
 
 template<typename ComPtrTy>
-inline const ComPtrTy* SharedComPtr<ComPtrTy>::operator->() noexcept
+inline ComPtrTy* SharedComPtr<ComPtrTy>::operator->() noexcept
 {
     return m_ptr;
 }

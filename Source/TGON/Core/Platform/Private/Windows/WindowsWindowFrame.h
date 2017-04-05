@@ -26,8 +26,7 @@ enum RawInputType : USHORT
 };
 
 class TGON_API WindowsWindowFrame : 
-	public GenericWindowFrame<WindowsWindowFrame>,
-	public IDropTarget
+	public GenericWindowFrame<WindowsWindowFrame>
 {
 /** 
  * @section Ctor/Dtor
@@ -53,17 +52,6 @@ public:
  * @section Event handlers
  */
     virtual LRESULT OnMessageHandled(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-
-/**
- * @section COM Interfaces
- */
-    STDMETHODIMP QueryInterface(REFIID riid, void** ppvObject) override;
-    STDMETHODIMP_(ULONG) AddRef() override;
-    STDMETHODIMP_(ULONG) Release() override;
-    STDMETHODIMP DragEnter(LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect) override;
-    STDMETHODIMP DragOver(DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect) override;
-    STDMETHODIMP DragLeave() override;
-    STDMETHODIMP Drop(LPDATAOBJECT pDataObj, DWORD grfKeyState, POINTL pt, LPDWORD pdwEffect) override;
 
 /**
  * @section Sets

@@ -10,6 +10,13 @@
 namespace tgon
 {
 
+enum class EGraphicsInstanceState
+{
+    Unknown,
+    Succeed,
+    FailedToCreate,
+};
+
 class IGraphicsInstance :
     private boost::noncopyable
 {
@@ -17,7 +24,10 @@ public:
     IGraphicsInstance();
     virtual ~IGraphicsInstance();
 
-private:
+    EGraphicsInstanceState GetInstanceState() const noexcept;
+
+protected:
+    EGraphicsInstanceState m_state;
 };
 
 }

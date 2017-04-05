@@ -137,7 +137,7 @@ inline const ComPtrTy** UniqueComPtr<ComPtrTy>::operator&() const noexcept
 template<typename ComPtrTy>
 inline ComPtrTy** UniqueComPtr<ComPtrTy>::operator&() noexcept
 {
-    return m_ptr;
+    return &m_ptr;
 }
 
 template<typename ComPtrTy>

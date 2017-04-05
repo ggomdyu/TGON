@@ -13,4 +13,9 @@ IGraphicsInstance::~IGraphicsInstance()
 {
 }
 
+EGraphicsInstanceState IGraphicsInstance::GetInstanceState() const noexcept
+{
+    return m_state;
+}
+
 } /* namespace tgon */

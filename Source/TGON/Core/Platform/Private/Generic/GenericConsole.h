@@ -27,15 +27,15 @@ protected:
  */ 
 public:
 	/**
-	 * @brief           Write string to console.
-	 * @param   str     String which you want to write to console
+	 * @brief               Write string to console.
+	 * @param [in]  str     String which you want to write to console
 	 */
     static void Write(const char* str, ...);
     static void Write(const wchar_t* str, ...);
 
 	/**
-	 * @brief           Write string to console and jump to next line.
-	 * @param   str     String which you want to write to console
+	 * @brief               Write string to console and jump to next line.
+	 * @param [in]  str     String which you want to write to console
 	 */
     static void WriteLine(const char* str, ...);
     static void WriteLine(const wchar_t* str, ...);

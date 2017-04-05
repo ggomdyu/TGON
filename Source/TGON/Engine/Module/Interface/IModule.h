@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../../../Core/Object/TObject.h"
+#include "./Core/Object/TObject.h"
 
 #include <boost/noncopyable.hpp>
 

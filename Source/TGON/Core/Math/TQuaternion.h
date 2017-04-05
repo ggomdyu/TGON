@@ -27,7 +27,7 @@ public:
     TQuaternion(const TVector3& v, float w);
 
     TQuaternion(const TQuaternion&);
-
+    
 /**
  * @section Operators
  */
