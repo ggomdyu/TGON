@@ -7,6 +7,8 @@
 
 #pragma once
 #include <type_traits>
+#include <cstring>
+#include <cstdint>
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
 
