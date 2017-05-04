@@ -1,7 +1,7 @@
 /**
- * filename Matrix4x4.h
- * author   ggomdyu
- * since    03/14/2016
+ * @filename    TMatrix4x4.h
+ * @author      ggomdyu
+ * @since       03/14/2016
  */
 
 #pragma once
@@ -14,8 +14,8 @@
 //TODO: Delete this
 #undef TGON_SUPPORT_SSE
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 struct TGON_API TMatrix4x4
 {
@@ -37,7 +37,7 @@ public:
     TMatrix4x4(const struct TMatrix3x3&);
 
 /**
- * @section Operators
+ * @section Operator
  */
 public:
     TMatrix4x4 operator+(const TMatrix4x4&) const;
@@ -53,7 +53,7 @@ public:
     const float* operator[](std::size_t index) const;
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     static TMatrix4x4 Scale(float x, float y, float z);
@@ -207,4 +207,5 @@ inline TMatrix4x4 TMatrix4x4::Scale(float x, float y, float z)
     };
 }
 
+} /* namespace math */
 } /* namespace tgon */

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{9c6b941e-9579-4bff-be83-e3d829e7e124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Device">
+      <UniqueIdentifier>{51eb8988-52cc-403e-8033-dc59c3df6a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Device\Private">
+      <UniqueIdentifier>{5176ce58-2e45-46f4-bf1b-33054b07b97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Device\Private\Interface">
+      <UniqueIdentifier>{4f253810-617f-47f5-8660-04d0f9fff0b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsDevice.h">
+      <Filter>Sources\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsInstance.h">
+      <Filter>Sources\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.h">
+      <Filter>Sources\Device\Private\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.h">
+      <Filter>Sources\Device\Private\Interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.cpp">
+      <Filter>Sources\Device\Private\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.cpp">
+      <Filter>Sources\Device\Private\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,15 +1,15 @@
 /**
- * filename D3D9GraphicsDevice.h
- * author   ggomdyu
+ * @filename    D3D9GraphicsDevice.h
+ * @author   ggomdyu
  * since    04/02/2017
  */
 
 #pragma once
 #include "../Interface/IGraphicsDevice.h"
 
-#include "./Core/Platform/Private/Windows/Misc/UniqueComPtr.h"
-#include "./Core/Platform/Private/Windows/Misc/SharedComPtr.h"
-#include "./RenderCore/Device/Private/Direct3D9/D3D9GraphicsInstance.h"
+#include "Core/Platform/Windows/Misc/UniqueComPtr.h"
+#include "Core/Platform/Windows/Misc/SharedComPtr.h"
+#include "RenderCore/Device/Private/Direct3D9/D3D9GraphicsInstance.h"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -45,12 +45,12 @@ public:
     void OnWindowResized();
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
 
 /**
- * @section Get methods
+ * @section Get method
  */
 private:
     UniqueComPtr<IDirect3DDevice9Ex> m_d3dDevice;

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="android_native_app_glue.c" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="android_native_app_glue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{5641ada0-47c3-41dd-9cd0-162a5759235f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Platform">
+      <UniqueIdentifier>{da2c5790-0bcd-44c6-b805-0abfd2f9198d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Platform\Private">
+      <UniqueIdentifier>{16645e91-bf2d-4cd4-92ff-0c87c6c70beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Platform\Private\Android">
+      <UniqueIdentifier>{f31e187f-f95a-4c41-aaa8-30bd98ca34d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{f7f7f70f-dce9-4c0d-ba75-fc8d8e3ae763}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,21 +1,20 @@
 /**
- * filename TRect.h
- * author   ggomdyu
- * since    04/02/2017
+ * @filename    TRect.h
+ * @author      ggomdyu
+ * @since       04/02/2017
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
-
 #include <type_traits>
 #include <cassert>
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 template <typename Ty>
-struct TGON_API TRect
+struct TRect
 {
+private:
     using DevideTy = std::conditional_t<std::is_floating_point<Ty>::value, Ty, float>;
 
 /**
@@ -29,7 +28,7 @@ public:
     constexpr TRect(Ty bottom, Ty top, Ty width, Ty height) noexcept;
 
 /**
- * @section Operators
+ * @section Operator
  */
 public:
     const TRect operator+(const TRect&) const noexcept;
@@ -104,12 +103,12 @@ inline const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
 {
     assert(rhs != Ty(0) && "TRect elements can't be divided by zero.");
 
-    const DevideTy inverse = 1.0f / rhs;
+    DevideTy inverse = 1.0f / rhs;
 
-    return TRect((Ty)((float)bottom * inverse), 
-                 (Ty)((float)top * inverse),
-                 (Ty)((float)width * inverse),
-                 (Ty)((float)height * inverse));
+    return TRect((Ty)((DevideTy)bottom * inverse), 
+                 (Ty)((DevideTy)top * inverse),
+                 (Ty)((DevideTy)width * inverse),
+                 (Ty)((DevideTy)height * inverse));
 }
 
 template <typename Ty>
@@ -162,12 +161,12 @@ inline TRect<Ty>& TRect<Ty>::operator/=(DevideTy rhs)
 {
     assert(rhs != (Ty)0 && "TRect elements can't be divided by zero.");
 
-	const DevideTy inverse = 1.0f / rhs;
+	DevideTy inverse = 1.0f / rhs;
 
-    bottom = (Ty)((float)bottom * inverse);
-    top = (Ty)((float)top * inverse);
-    width = (Ty)((float)width * inverse);
-    height = (Ty)((float)height * inverse);
+    bottom = (Ty)((DevideTy)bottom * inverse);
+    top = (Ty)((DevideTy)top * inverse);
+    width = (Ty)((DevideTy)width * inverse);
+    height = (Ty)((DevideTy)height * inverse);
 
 	return *this;
 }
@@ -184,4 +183,5 @@ inline bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
     return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }
 
+} /* namespace math */
 } /* namespace tgon */

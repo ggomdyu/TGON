@@ -43,8 +43,8 @@ struct WELLRNGHelper
 
 } /* namespace { */
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 float Random::WELLRNG512a()
 {
@@ -70,7 +70,8 @@ int Random::Range(int min, int max)
 
 float Random::Range(float min, float max)
 {
-    return min + (WELLRNG512a()*(max - min));
+    return min + (WELLRNG512a() * (max - min));
 }
 
+} /* namespace math */
 } /* namespace tgon */

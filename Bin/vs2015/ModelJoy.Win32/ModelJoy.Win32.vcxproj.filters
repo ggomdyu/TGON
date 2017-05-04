@@ -8,22 +8,13 @@
       <UniqueIdentifier>{60ad9011-daf2-4bd7-83b8-c5d036dd6c8c}</UniqueIdentifier>
       <Extensions>c;cpp;</Extensions>
     </Filter>
-    <Filter Include="Sources\PrecompiledHeader">
-      <UniqueIdentifier>{cfe78ff0-6b6f-4ceb-a476-f941168b399a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
-      <Filter>Sources\PrecompiledHeader</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TgonModelJoyForm.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
-      <Filter>Sources\PrecompiledHeader</Filter>
-    </ClInclude>
     <ClInclude Include="Source\TgonModelJoyForm.h">
       <Filter>Sources</Filter>
     </ClInclude>

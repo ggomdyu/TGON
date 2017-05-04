@@ -1,18 +1,18 @@
 /**
- * filename Object.h
- * author   ggomdyu
- * since    03/22/2016
+ * @filename    TObject.h
+ * @author      ggomdyu
+ * @since       03/22/2016
  */
 
 #pragma once
 #include <cstdint>
 #include <string>
 
-#include "../Platform/TConfig.h"
+#include "Core/Platform/TConfig.h"
 #include "TTypeInfo.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace object {
 
 class TGON_API TObject 
 {
@@ -25,27 +25,26 @@ public:
  */
 public:
 	TObject() = default;
-	virtual ~TObject();
+	virtual ~TObject() = default;
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
+    virtual std::shared_ptr<TObject> Clone() const;
+
     template <typename CastTy>
     bool CastTo() noexcept;
-    
-/**
- * @section Get methods
- */
-public:
-    /* @brief   */
-    virtual std::shared_ptr<TObject> Clone() const;
 
     template <typename CastTy>
     bool IsCastable() noexcept;
 
+/**
+ * @section Get method
+ */
+public:
 	/* @return	Hash value of the type name. */
-	virtual uint32_t GetHashCode() const noexcept = 0;
+	virtual std::size_t GetHashCode() const noexcept = 0;
 	
     /* @return	The type name */
     virtual const std::string& GetName() const noexcept = 0;
@@ -57,8 +56,9 @@ inline bool TObject::IsCastable() noexcept
 #if TGON_RTTI_ENABLED
     // ToDo : Implement RTTI
     while()
-#endif
+#else
     return dynamic_cast<CastTy>(this);
+#endif
 }
 
 template<typename CastTy>
@@ -66,17 +66,19 @@ inline bool TObject::CastTo() noexcept
 {
 #if TGON_RTTI_ENABLED
     // ToDo : Implement RTTI
+#else
+    return dynamic_cast<CastTy>(this);
 #endif
-    return dynamic_cast<CastTy>(this) ? reinterpret_cast<CastTy>(this) : nullptr;
 }
 
+} /* namespace object */
 } /* namespace tgon */
 
 #define TGON_MAKE_OBJECT_INTERFACE(classType)\
     using Super = This;\
 	using This = classType;\
 	\
-	virtual uint32_t GetHashCode() const noexcept override\
+	virtual std::size_t GetHashCode() const noexcept override\
 	{\
 		return classType::GetTypeInfo().GetHashCode();\
 	}\
@@ -84,8 +86,8 @@ inline bool TObject::CastTo() noexcept
     {\
         return classType::GetTypeInfo().GetName();\
     }\
-    static const TTypeInfo& GetTypeInfo() noexcept\
+    static const object::TTypeInfo& GetTypeInfo() noexcept\
     {\
-        static TTypeInfo typeInfo(#classType);\
+        static object::TTypeInfo typeInfo(#classType);\
         return typeInfo;\
     }

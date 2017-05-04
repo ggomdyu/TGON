@@ -1,6 +1,6 @@
 /**
- * filename TEnumerator.h
- * author   ggomdyu
+ * @filename    TEnumerator.h
+ * @author   ggomdyu
  * since    06/20/2016
  */
 

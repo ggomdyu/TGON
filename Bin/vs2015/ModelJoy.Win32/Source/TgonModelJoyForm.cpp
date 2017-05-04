@@ -3,5 +3,4 @@
 
 #include <Engine/Engine.h>
 
-
-TGON_GENERATE_GAMEAPP(TGONSample);
+TGON_MAKE_GAME_APPLICATION(TGONSample);

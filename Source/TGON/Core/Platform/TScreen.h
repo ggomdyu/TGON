@@ -1,5 +1,5 @@
 /*
-* Author : Cha Junho
+* @author : Cha Junho
 * Date : 07/05/2016
 * Latest author :
 * Latest date :
@@ -10,5 +10,5 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Windows/WindowsPlatformScreen.h"
+#	include "Windows/WindowsScreen.h"
 #endif

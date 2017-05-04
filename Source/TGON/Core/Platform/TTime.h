@@ -1,6 +1,6 @@
 /**
- * filename TTime.h
- * author   ggomdyu
+ * @filename    TTime.h
+ * @author   ggomdyu
  * since    05/15/2016
  */
 
@@ -8,9 +8,9 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Private/Windows/WindowsTime.h"
+#	include "Windows/WindowsTime.h"
 #elif BOOST_OS_ANDROID
-#	include "Private/Android/AndroidTime.h"
+#	include "Android/AndroidTime.h"
 #elif BOOST_OS_IOS
-#	include "Private/iOS/iOSTime.h"
+#	include "iOS/iOSTime.h"
 #endif

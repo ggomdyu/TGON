@@ -1,6 +1,6 @@
 /**
- * filename TGraphicsDevice.h
- * author   ggomdyu
+ * @filename    TGraphicsDevice.h
+ * @author   ggomdyu
  * since    04/03/2016
  */
 

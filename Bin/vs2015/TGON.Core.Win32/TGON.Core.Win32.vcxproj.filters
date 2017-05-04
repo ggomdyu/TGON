@@ -10,15 +10,6 @@
     <Filter Include="Sources\Core\Platform">
       <UniqueIdentifier>{cc63f18a-b01c-46f1-a6c3-6942f9c3b86d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Private">
-      <UniqueIdentifier>{ccb05962-6e4b-45b7-adc5-2a58f9c71ba1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Core\Platform\Private\Windows">
-      <UniqueIdentifier>{01b5331c-27bd-48e4-abf1-802c9a0497da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Core\Platform\Private\Windows\Misc">
-      <UniqueIdentifier>{3b85ab3c-e754-4fef-9b9c-9ac15b1e8592}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\RenderCore">
       <UniqueIdentifier>{4ec28eb0-e331-43b6-8e22-f6d12036137f}</UniqueIdentifier>
     </Filter>
@@ -34,88 +25,64 @@
     <Filter Include="Sources\PrecompiledHeader">
       <UniqueIdentifier>{0ad7582e-e2b2-4387-ae16-6592214c95de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Core\Platform\Windows">
+      <UniqueIdentifier>{a6fcd645-df02-423f-9a50-4290e401bcea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform\Windows\Misc">
+      <UniqueIdentifier>{6a7dd27d-c351-4b80-b8e9-d73e8474ae14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConfig.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsInclude.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsScreen.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsSystem.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\HDCGuard.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsDevice.h">
       <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.h">
       <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\SharedComPtr.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\UniqueComPtr.h">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplicationFwd.h">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Sources\PrecompiledHeader</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\SharedComPtr.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\UniqueComPtr.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsConsole.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsMain.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsScreen.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsSystem.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsTime.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowFrame.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsWindowUtility.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\WindowsApplication.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Private\Windows\Misc\MiniDump.cpp">
-      <Filter>Sources\Core\Platform\Private\Windows\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\RenderCore\Device\Private\Direct3D9\D3D9GraphicsInstance.cpp">
       <Filter>Sources\RenderCore\Device\Private\Direct3D9</Filter>
     </ClCompile>
@@ -124,6 +91,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\PrecompiledHeader.cpp">
       <Filter>Sources\PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConsole.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

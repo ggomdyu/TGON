@@ -1,15 +1,15 @@
 /**
- * filename TTypeInfo.h
- * author   ggomdyu
- * since    03/14/2016
+ * @filename    TTypeInfo.h
+ * @author      ggomdyu
+ * since        03/14/2016
  */
 
 #pragma once
 #include <string>
 #include <cstdint>
 
-namespace tgon
-{
+namespace tgon {
+namespace object {
 
 struct TTypeInfo
 {
@@ -19,33 +19,32 @@ struct TTypeInfo
 public:
     template <std::size_t N>
     TTypeInfo(const char(&)[N]) noexcept;
-
-    TTypeInfo(const char* name, int length) noexcept;
-
+    TTypeInfo(const char* name, std::size_t length) noexcept;
     TTypeInfo(const std::string& name) noexcept;
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
-	/* @return	Hash value of the type name. */
-    uint32_t GetHashCode() const noexcept;
+	/* @return  The hash value of the type name. */
+    std::size_t GetHashCode() const noexcept;
 	
-    /* @return	The type name */
+    /* @return  The name of type */
     const std::string& GetName() const noexcept;
 
 /**
- * @section Private variables
+ * @section Private variable
  */
 private:
 	const std::string m_name;
-    const uint32_t m_hashCode;
+    const std::size_t m_hashCode;
 };
 
 template<std::size_t N>
-inline tgon::TTypeInfo::TTypeInfo(const char(&name)[N]) noexcept :
+inline TTypeInfo::TTypeInfo(const char(&name)[N]) noexcept :
     TTypeInfo(name, N)
 {
 }
 
+} /* namespace object */
 } /* namespace tgon */

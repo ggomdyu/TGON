@@ -1,6 +1,6 @@
 /**
- * filename IGraphicsInstance.h
- * author   ggomdyu
+ * @filename    IGraphicsInstance.h
+ * @author   ggomdyu
  * since    04/02/2017
  */
 

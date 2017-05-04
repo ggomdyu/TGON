@@ -1,19 +1,26 @@
 /**
- * filename TRandom.h
- * author   ggomdyu
- * since    03/14/2016
+ * @filename    TRandom.h
+ * @author      ggomdyu
+ * @since       03/14/2016
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
+#include "Core/Platform/TConfig.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 class TGON_API Random
 {
 /**
- * @section Public command methods
+ * @section Ctor/Dtor
+ */
+private:
+    Random() = delete;
+    ~Random() = delete;
+
+/**
+ * @section Public command method
  */
 public:
     /* @return	Return random value between min~max as int */
@@ -23,21 +30,16 @@ public:
     static float Range(float min, float max);
 
 /**
- * @section Private command methods
+ * @section Private command method
  */
 private:
 	/**
-	 * @brief   Random number generator which faster than the mersenne-Twister above 40%
+	 * @brief   Random number generate algorithm that faster than the Mersenne Twister above 40%
 	 * @see     http://www.iro.umontreal.ca/~panneton/WELLRNG.html
 	 * @return  Return random value between 0.0 ~ 1.0
 	 */
     static float WELLRNG512a();
-
-/**
- * @section Ctor/Dtor
- */
-private:
-    Random() = delete;
 };
 
+} /* namespace math */
 } /* namespace tgon */

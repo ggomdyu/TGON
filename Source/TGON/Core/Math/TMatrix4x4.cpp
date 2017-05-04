@@ -4,9 +4,8 @@
 #include "TMatrix3x3.h"
 #include "TVector3.h"
 
-
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 const TMatrix4x4 TMatrix4x4::Identity(
     1.f, 0.f, 0.f, 0.f,
@@ -152,4 +151,5 @@ TMatrix4x4 TMatrix4x4::Transpose(const TMatrix4x4& rhs)
     };
 }
 
+} /* namespace math */
 } /* namespace tgon */

@@ -1,56 +1,35 @@
 /**
- * filename Engine.h
- * Author : Cha Jnho
+ * @filename    TEngine.h
+ * @author   ggomdyu
  * since    07/23/2016
  */
 
 #pragma once
 #include "EngineContextObject.h"
 
+namespace tgon {
+//namespace engine {
 
-namespace tgon
-{
-
-class GameApplication;
-
-class TGON_API Engine :
+class TGON_API TEngine :
 	public ModuleContext
 {
-/**
- * Generator
- */ 
 public:
-	TGON_MAKE_OBJECT_INTERFACE( Engine )
+	TGON_MAKE_OBJECT_INTERFACE(TEngine)
 
-/**
- * Ctor/Dtor
- */ 
 public:
-	Engine( );
-	virtual ~Engine( ) = default;
+    TEngine();
+    virtual ~TEngine() = default;
 
-/**
- * Commands
- */ 
 public:
-	int32_t Execute( int argc, char** argv );
+    int32_t Execute(int argc, char** argv);
 
-/**
- * Private command methods
- */ 
 private:
-	void AddEssentialModules( );
+    void AddEssentialModules();
+    void UpdateModules();
 
-	void UpdateModules( );
-
-/** 
- * Private variables
- */ 
 private:
-	std::shared_ptr<GameApplication> m_gameApplication;
-	
+	std::shared_ptr<class GameApplication> m_gameApplication;
     std::vector<IModule*> m_modulesForFastIter;
-
 };
 
 } /* namespace tgon */

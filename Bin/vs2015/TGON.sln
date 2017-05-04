@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{DDAF0962-0A46-45C0-9B16-BD3BCE3A2D11}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "ModelJoy.Android", "ModelJoy.Android\ModelJoy.Android.androidproj", "{E879242C-0E09-4D21-BEA2-B74238DC6F39}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Core.Android", "TGON.Core.Android\TGON.Core.Android.vcxproj", "{4EF65E6B-871E-491E-B4F0-03A22CE6D2F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{6B6A8762-1929-4A2C-8B19-A0BFF1139FDD}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -126,5 +128,6 @@ Global
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {5EB1B247-4CC9-4C9B-93DB-6F55891142AC}
 		{E879242C-0E09-4D21-BEA2-B74238DC6F39} = {DDAF0962-0A46-45C0-9B16-BD3BCE3A2D11}
 		{4EF65E6B-871E-491E-B4F0-03A22CE6D2F6} = {5EB1B247-4CC9-4C9B-93DB-6F55891142AC}
+		{6B6A8762-1929-4A2C-8B19-A0BFF1139FDD} = {68FAB0F5-909A-42C6-926A-ADC6869BCE7F}
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 /**
- * filename EngineContextObject.h
- * author   ggomdyu
+ * @filename    EngineContextObject.h
+ * @author   ggomdyu
  * since    07/23/2016
  */
 
@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class ModuleContext :
-	public TObject
+    public object::TObject
 {
 /**
  * @section Generator
@@ -24,7 +24,7 @@ public:
     TGON_MAKE_OBJECT_INTERFACE(ModuleContext)
 
 /**
- * @section Public command methods
+ * @section Public command method
  */ 
 public:
     template <typename ModuleTy,
@@ -32,7 +32,7 @@ public:
     static void AddModule();
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
 	/**
@@ -44,7 +44,7 @@ public:
     static const std::shared_ptr<ModuleTy>& GetModule();
 
 /**
- * @section Private variables
+ * @section Private variable
  */ 
 private:
 	static std::map<uintptr_t, std::shared_ptr<IModule>> m_modules;

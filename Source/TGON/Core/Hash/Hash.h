@@ -1,6 +1,6 @@
 /**
- * filename Hash.h
- * author   ggomdyu
+ * @filename    Hash.h
+ * @author   ggomdyu
  * since    03/04/2017
  */
 
@@ -34,18 +34,16 @@ namespace tgon
 class TGON_API Hash
 {
 /**
- * @section Public command methods
+ * @section Public command method
  */ 
 public:
 	/* @return	The value that hashed by x65599 algorithm */
 	template <std::size_t N>
 	static std::size_t StringToHash(const char(&str)[N]);
-	
-    /* @return	The value that hashed by x65599 algorithm */
     static std::size_t StringToHash(const char* str, std::size_t length);
 
 /**
- * @section Private command methods
+ * @section Private command method
  */
 private:
 	static std::size_t x65599Hash(const char* str, std::size_t length);

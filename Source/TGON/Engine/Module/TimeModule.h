@@ -1,5 +1,5 @@
 /**
- * author   ggomdyu
+ * @author   ggomdyu
  * since    07/24/2016
 
 
@@ -25,18 +25,18 @@ public:
     virtual ~TimeModule() = default;
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     virtual void Update();
 
 /**
- * @section Get methods
+ * @section Get method
  */
     float GetElapsedTime() const;
 
 /**
- * @section Private variables
+ * @section Private variable
  */
 private:
     uint32_t m_oldTime;

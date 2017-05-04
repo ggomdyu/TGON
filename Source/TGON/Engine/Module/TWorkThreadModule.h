@@ -1,5 +1,5 @@
 /*
-* Author : Junho-Cha
+* @author : Junho-Cha
 * Date : 02/08/2016
 * Latest author :
 * Latest date :
@@ -72,7 +72,7 @@ private:
 
 
 /*
-	Private variables
+	Private variable
 */
 private:
 	bool m_isDestroying;

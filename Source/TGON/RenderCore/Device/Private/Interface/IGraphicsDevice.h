@@ -1,6 +1,6 @@
 /**
- * filename IGraphicsDevice.h
- * author   ggomdyu
+ * @filename    IGraphicsDevice.h
+ * @author   ggomdyu
  * since    04/02/2017
  */
 
@@ -28,7 +28,7 @@ public:
     ~GenericRenderer();
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     virtual void Clear() = 0;
@@ -36,40 +36,40 @@ public:
     virtual void EndScene() = 0;
     virtual void Present() = 0;
     
-    void PushScissorRect(const TIntRect& scissorRect);
+    void PushScissorRect(const math::TIntRect& scissorRect);
     void PopScissorRect();
 
 /**
- * @section Set methods
+ * @section Set method
  */
 public:
     void SetClearColor(uint32_t packedColor) noexcept;
-    void SetWorldMatrix(const TMatrix4x4& worldMat) noexcept;
-    void SetViewMatrix(const TMatrix4x4& viewMat) noexcept;
-    void SetProjectionMatrix(const TMatrix4x4& projMat) noexcept;
-    void SetViewProjectionMatrix(const TMatrix4x4& viewProjMat) noexcept;
-    void SetScissorRect(const TIntRect& scissorRect) noexcept;
+    void SetWorldMatrix(const math::TMatrix4x4& worldMat) noexcept;
+    void SetViewMatrix(const math::TMatrix4x4& viewMat) noexcept;
+    void SetProjectionMatrix(const math::TMatrix4x4& projMat) noexcept;
+    void SetViewProjectionMatrix(const math::TMatrix4x4& viewProjMat) noexcept;
+    void SetScissorRect(const math::TIntRect& scissorRect) noexcept;
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
     uint32_t GetClearColor() const noexcept;
 
 /**
- * @section Private variables
+ * @section Private variable
  */
 protected:
     std::shared_ptr<IGraphicsInstance> m_sdkInstance;
 
     uint32_t m_clearColor;
 
-    TMatrix4x4 m_worldMat;
-    TMatrix4x4 m_viewMat;
-    TMatrix4x4 m_projMat;
-    TMatrix4x4 m_viewProjMat;
+    math::TMatrix4x4 m_worldMat;
+    math::TMatrix4x4 m_viewMat;
+    math::TMatrix4x4 m_projMat;
+    math::TMatrix4x4 m_viewProjMat;
 
-    std::vector<TIntRect> m_scissorRectStack;
+    std::vector<math::TIntRect> m_scissorRectStack;
 };
 
 template <typename GraphicsSDKTy>
@@ -84,7 +84,7 @@ inline GenericRenderer<GraphicsSDKTy>::~GenericRenderer()
 }
 
 template <typename GraphicsSDKTy>
-inline void GenericRenderer<GraphicsSDKTy>::PushScissorRect(const TIntRect& scissorRect)
+inline void GenericRenderer<GraphicsSDKTy>::PushScissorRect(const math::TIntRect& scissorRect)
 {
     m_scissorRectStack.push_back(scissorRect);
 }
@@ -102,25 +102,25 @@ inline void GenericRenderer<GraphicsSDKTy>::SetClearColor(uint32_t packedColor) 
 }
 
 template <typename GraphicsSDKTy>
-inline void GenericRenderer<GraphicsSDKTy>::SetWorldMatrix(const TMatrix4x4& worldMat) noexcept
+inline void GenericRenderer<GraphicsSDKTy>::SetWorldMatrix(const math::TMatrix4x4& worldMat) noexcept
 {
     m_worldMat = worldMat;
 }
 
 template <typename GraphicsSDKTy>
-inline void GenericRenderer<GraphicsSDKTy>::SetViewMatrix(const TMatrix4x4& viewMat) noexcept
+inline void GenericRenderer<GraphicsSDKTy>::SetViewMatrix(const math::TMatrix4x4& viewMat) noexcept
 {
     m_viewMat = viewMat;
 }
 
 template <typename GraphicsSDKTy>
-inline void GenericRenderer<GraphicsSDKTy>::SetProjectionMatrix(const TMatrix4x4& projMat) noexcept
+inline void GenericRenderer<GraphicsSDKTy>::SetProjectionMatrix(const math::TMatrix4x4& projMat) noexcept
 {
     m_projMat = projMat;
 }
 
 template <typename GraphicsSDKTy>
-inline void GenericRenderer<GraphicsSDKTy>::SetViewProjectionMatrix(const TMatrix4x4& viewProjMat) noexcept
+inline void GenericRenderer<GraphicsSDKTy>::SetViewProjectionMatrix(const math::TMatrix4x4& viewProjMat) noexcept
 {
 }
 

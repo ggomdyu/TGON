@@ -26,6 +26,29 @@
 #include <android/looper.h>
 #include <android/native_activity.h>
 
+class AndroidApplication
+{
+public:
+    static void SetActivityState(struct android_app* android_app, int8_t cmd);
+    static void SetInputQueue(struct android_app* android_app, AInputQueue* inputQueue);
+
+    static void OnStart(ANativeActivity* activity);
+    static void OnDestroy(ANativeActivity* activity);
+    static void OnResume(ANativeActivity* activity);
+    static void* OnSaveInstanceState(ANativeActivity* activity, size_t* outLen);
+    static void OnPause(ANativeActivity* activity);
+    static void OnStop(ANativeActivity* activity);
+    static void OnConfigurationChanged(ANativeActivity* activity);
+    static void OnLowMemory(ANativeActivity* activity);
+    static void OnWindowFocusChanged(ANativeActivity* activity, int focused);
+    static void OnNativeWindowCreated(ANativeActivity* activity, ANativeWindow* window);
+    static void OnNativeWindowDestroyed(ANativeActivity* activity, ANativeWindow* window);
+    static void OnInputQueueCreated(ANativeActivity* activity, AInputQueue* queue);
+    static void OnInputQueueDestroyed(ANativeActivity* activity, AInputQueue* queue);
+
+private:
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif

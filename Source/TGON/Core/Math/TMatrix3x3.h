@@ -1,14 +1,14 @@
 /**
- * filename Matrix3x3.h
- * author   ggomdyu
- * since    03/14/2016
+ * @filename    TMatrix3x3.h
+ * @author      ggomdyu
+ * @since       03/14/2016
  */
 
 #pragma once
 #include "../Platform/TConfig.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 struct TGON_API TMatrix3x3
 {
@@ -115,4 +115,5 @@ inline TMatrix3x3 TMatrix3x3::Scale(float x, float y, float z)
     };
 }
 
+} /* namespace math */
 } /* namespace tgon */

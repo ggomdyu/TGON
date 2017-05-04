@@ -1,6 +1,6 @@
 /**
- * filename GraphicsModule.h
- * author   ggomdyu
+ * @filename    GraphicsModule.h
+ * @author   ggomdyu
  * since    04/03/2017
  */
 
@@ -24,13 +24,13 @@ public:
 	virtual ~GraphicsModule( );
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
 	virtual void Update( );
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
 };

@@ -1,6 +1,6 @@
 /**
- * filename TCast.h
- * author   ggomdyu
+ * @filename    TCast.h
+ * @author   ggomdyu
  * since    05/24/2016
  */
 
@@ -10,97 +10,115 @@
 namespace tgon
 {
 
-namespace auto_cast_detail
+namespace detail
 {
 
-// Host class 
-template <typename FromTy, typename CastModel>
-class AutoCastProxy final :
-	public CastModel
-{
-/**
- * Ctor/Dtor
- */
-public:
-	explicit AutoCastProxy(FromTy&& rhs) noexcept :
-		CastModel(rhs)
-	{
-	}
-};
-
-// Policy classes 
-template <typename FromTy>
-class SafeCast
+template <typename CastFromTy, typename CastPolicy>
+class AutoCastHost final :
+	public CastPolicy
 {
 /**
  * @section Ctor/Dtor
  */
 public:
-	explicit SafeCast(FromTy&& rhs) noexcept :
-		m_fromPtr(std::forward<FromTy>(rhs))
-	{
-	}
-
-/**
- * @section Operators
- */
-public:
-	/* @note	Convert FromTy to ToTy */
-	template <typename ToTy>
-	operator ToTy() noexcept
-	{
-		return static_cast<ToTy>(std::forward<FromTy>(m_fromPtr));
-	}
-
-/**
- * Private variables
- */
-private:
-	FromTy&& m_fromPtr;
+    explicit AutoCastHost(CastFromTy&& rhs) noexcept;
+    ~AutoCastHost() = default;
 };
-template <typename FromTy>
-class UnsafeCast
+
+template<typename CastFromTy, typename CastPolicy>
+inline AutoCastHost<CastFromTy, CastPolicy>::AutoCastHost(CastFromTy&& rhs) noexcept :
+    CastPolicy(rhs)
+{
+}
+
+template <typename CastFromTy>
+class SafeCastPolicy
 {
 /**
  * @section Ctor/Dtor
  */
-public:
-	explicit UnsafeCast(FromTy&& rhs) noexcept:
-		m_fromPtr(std::forward<FromTy>(rhs))
-	{
-	}
+protected:
+    explicit SafeCastPolicy(CastFromTy&& rhs) noexcept;
+    ~SafeCastPolicy() = default;
 
 /**
- * @section Operators
+ * @section Operator
  */
 public:
-	/* @brief   Convert FromTy to ToTy */
-	template <typename ToTy>
-	operator ToTy() noexcept
-	{
-		return reinterpret_cast<ToTy>(std::forward<FromTy>(m_fromPtr));
-	}
+	/* @note    Convert FromTy to ToTy */
+	template <typename CastToTy>
+    operator CastToTy() noexcept;
 
 /**
  * @section Private variable
  */
 private:
-	FromTy&& m_fromPtr;
+	CastFromTy&& m_fromPtr;
 };
+
+template<typename CastFromTy>
+inline SafeCastPolicy<CastFromTy>::SafeCastPolicy(CastFromTy && rhs) noexcept :
+    m_fromPtr(std::forward<CastFromTy>(rhs))
+{
+}
+
+template<typename CastFromTy>
+template<typename CastToTy>
+inline SafeCastPolicy<CastFromTy>::operator CastToTy() noexcept
+{
+	return static_cast<CastToTy>(std::forward<CastFromTy>(m_fromPtr));
+}
+
+template <typename CastFromTy>
+class ForceCastPolicy
+{
+/**
+ * @section Ctor/Dtor
+ */
+protected:
+    explicit ForceCastPolicy(CastFromTy&& rhs) noexcept;
+    ~ForceCastPolicy() = default;
+
+/**
+ * @section Operator
+ */
+public:
+	/* @brief   Convert FromTy to ToTy */
+	template <typename CastToTy>
+    operator CastToTy() noexcept;
+
+/**
+ * @section Private variable
+ */
+private:
+	CastFromTy&& m_fromPtr;
+};
+
+template<typename CastFromTy>
+inline ForceCastPolicy<CastFromTy>::ForceCastPolicy(CastFromTy && rhs) noexcept :
+	m_fromPtr(std::forward<CastFromTy>(rhs))
+{
+}
+
+template<typename CastFromTy>
+template<typename CastToTy>
+inline ForceCastPolicy<CastFromTy>::operator CastToTy() noexcept
+{
+	return reinterpret_cast<CastToTy>(std::forward<CastFromTy>(m_fromPtr));
+}
 
 } /*namespace detail*/
 
-template <typename FromTy>
-auto_cast_detail::AutoCastProxy<FromTy, auto_cast_detail::SafeCast<FromTy>> auto_cast(FromTy&& rhs) noexcept
+template <typename CastFromTy>
+inline detail::AutoCastHost<CastFromTy, detail::SafeCastPolicy<CastFromTy>> AutoCast(CastFromTy&& rhs) noexcept
 {
-    // TODO: Not uniform?
-	return auto_cast_detail::AutoCastProxy<FromTy, auto_cast_detail::SafeCast<FromTy>>(std::forward<FromTy>(rhs));
+	return detail::AutoCastHost<CastFromTy, detail::SafeCastPolicy<CastFromTy>>(std::forward<CastFromTy>(rhs));
 }
 
-template <typename FromTy>
-auto_cast_detail::AutoCastProxy<FromTy, auto_cast_detail::UnsafeCast<FromTy>> force_auto_cast(FromTy&& rhs) noexcept
+template <typename CastFromTy>
+inline detail::AutoCastHost<CastFromTy, detail::ForceCastPolicy<CastFromTy>> ForceAutoCast(CastFromTy&& rhs) noexcept
 {
-	return auto_cast_detail::AutoCastProxy<FromTy, auto_cast_detail::UnsafeCast<FromTy>>(std::forward<FromTy>(rhs));
+	return detail::AutoCastHost<CastFromTy, detail::ForceCastPolicy<CastFromTy>>(std::forward<CastFromTy>(rhs));
 }
 
 } /* namespace tgon */

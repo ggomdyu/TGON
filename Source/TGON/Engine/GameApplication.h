@@ -1,6 +1,6 @@
 /**
- * filename GameApplication.h
- * author   ggomdyu
+ * @filename    GameApplication.h
+ * @author   ggomdyu
  * since    07/23/2016
  */
 
@@ -9,19 +9,20 @@
 #include "../Core/Platform/TWindow.h"
 
 
-#define TGON_GENERATE_GAMEAPP( className )\
-namespace tgon {\
-	std::shared_ptr<tgon::GameApplication> GenerateGameApplication( )\
-	{\
-		return std::make_shared<className>( );\
-	}\
+#define TGON_MAKE_GAME_APPLICATION(className)\
+namespace tgon\
+{\
+std::shared_ptr<tgon::GameApplication> MakeGameApplication()\
+{\
+	return std::make_shared<className>();\
+}\
 }
 
 namespace tgon
 {
 
 class TGON_API GameApplication :
-	public TObject
+    public object::TObject
 {
 public:
 	TGON_MAKE_OBJECT_INTERFACE(GameApplication)
@@ -30,17 +31,17 @@ public:
  * @section Ctor/Dtor
  */ 
 public:
-    GameApplication(const std::shared_ptr<TWindowFrame>& window /*= MakeWindow(WindowStyle{})*/);
+    GameApplication(const std::shared_ptr<window::TWindow>& window /*= MakeWindow(WindowStyle{})*/);
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     virtual void OnUpdate() = 0;
     virtual void OnRender() = 0;
 
 /**
- * @section Set methods
+ * @section Set method
  */ 
 public:
     /* @brief   Resume the frame update */
@@ -50,18 +51,18 @@ public:
     void PauseUpdate() noexcept;
 
 /**
- * @section Get methods
+ * @section Get method
  */ 
 public:
     bool IsPaused() const noexcept;
-    const std::shared_ptr<TWindowFrame>& GetRootWindow() const noexcept;
+    const std::shared_ptr<window::TWindow>& GetRootWindow() const noexcept;
 
 /**
- * @section Private variables
+ * @section Private variable
  */ 
 private:
 	bool m_paused;
-	std::shared_ptr<TWindowFrame> m_rootWindow;
+	std::shared_ptr<window::TWindow> m_rootWindow;
 };
 
 }

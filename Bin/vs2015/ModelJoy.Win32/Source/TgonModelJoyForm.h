@@ -1,4 +1,6 @@
 ﻿#pragma once
+#define TGON_ENABLE_CONSOLE
+
 #include <Core/Platform/TApplication.h>
 #include <Core/Platform/TTime.h>
 #include <Core/Platform/TConsole.h>
@@ -10,28 +12,13 @@
 #include <Core/Math/TMath.h>
 #include <Core/Math/TRect.h>
 #include <Core/Math/TPoint.h>
-#include <Core/Delegate/TDelegate.h>
+#include <Core/Object/TDelegate.h>
 #include <Core/Object/TObject.h>
+#include <Core/String/TFixedString.h>
+#include <Core/String/TEncoding.h>
 #include <Engine/GameApplication.h>
 
 using namespace tgon;
-
-class MyCustomWindow :
-    public TWindowFrame
-{
-public:
-    using TWindowFrame::TWindowFrame;
-
-public:
-    virtual void OnMouseDown(int32_t x, int32_t y, MouseType mouseType) override
-    {
-    }
-
-    virtual bool OnDestroy() override
-    {
-        return MessageBox(NULL, L"Are you sure you want to quit?", L"WARNING!", MB_YESNO) == IDYES;
-    }
-};
 
 class TGONSample :
     public GameApplication
@@ -41,11 +28,10 @@ public:
 
 public:
     TGONSample() :
-        GameApplication(MakeWindow<TWindowFrame>())
+        GameApplication(MakeWindow<tgon::window::TWindow>())
     {
 	}
 
-public:
     virtual ~TGONSample()
     {
 	}

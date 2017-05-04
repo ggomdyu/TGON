@@ -1,6 +1,6 @@
 /**
- * filename IModule.h
- * author   ggomdyu
+ * @filename    IModule.h
+ * @author   ggomdyu
  * since    07/13/2016
  */
 
@@ -14,7 +14,7 @@ namespace tgon
 {
 
 class TGON_API IModule :
-	public TObject,
+    public object::TObject,
 	private boost::noncopyable
 {
 public:
@@ -28,7 +28,7 @@ public:
     virtual ~IModule() = 0;
 
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     virtual void Update() = 0;

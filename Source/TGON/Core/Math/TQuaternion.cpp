@@ -3,9 +3,8 @@
 
 #include "TMatrix4x4.h"
 
-
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 const TQuaternion TQuaternion::Zero;
 const TQuaternion TQuaternion::Identity( 0.f, 0.f, 0.f, 1.f );
@@ -35,4 +34,5 @@ TMatrix4x4 TQuaternion::RotateMatrix() const
     );
 }
 
+} /* namespace math */
 } /* namespace tgon */

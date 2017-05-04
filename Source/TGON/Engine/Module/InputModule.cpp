@@ -1,17 +1,19 @@
 #include "PrecompiledHeader.h"
 #include "InputModule.h"
 
-#include "../../Core/Platform/TWindow.h"
 #include <string>
+#include <boost/predef/os.h>
+
+#include "Core/Platform/TWindow.h"
 
 namespace tgon
 {
 
-InputModule::InputModule(TWindowFrame* inputAcceptTargets, uint32_t supportInputFlag) :
+InputModule::InputModule(window::TWindow* inputAcceptTargets, uint32_t supportInputFlag) :
     m_inputManager(nullptr),
     m_keyboardDevice(nullptr),
     m_mouseDeivece(nullptr),
-    m_joyStickDevice{ 0 }
+    m_joyStickDevice{0}
 {
     this->InitializeInputManager(inputAcceptTargets, supportInputFlag);
 }
@@ -48,19 +50,20 @@ void InputModule::Update()
     //}
 }
 
-void InputModule::InitializeInputManager(TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag)
+void InputModule::InitializeInputManager(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag)
 {
-    // Insert OS Specific Info here
+    // OS dependent codes are here
     OIS::ParamList paramList;
     {
-        const std::string wndHandleStr = std::to_string(reinterpret_cast<size_t>(
-            inputAcceptWindow->GetWindowHandle()));
+#if BOOST_PLATFORM_WINDOWS
+        std::string wndHandleStr = std::to_string(reinterpret_cast<size_t>(inputAcceptWindow->GetWindowHandle()));
 
         paramList.insert({ "WINDOW", wndHandleStr.c_str() });
         paramList.insert({ "w32_mouse", "DISCL_FOREGROUND" });
         paramList.insert({ "w32_mouse", "DISCL_NONEXCLUSIVE" });
         paramList.insert({ "w32_keyboard", "DISCL_FOREGROUND" });
         paramList.insert({ "w32_keyboard", "DISCL_NONEXCLUSIVE" });
+#endif
     }
 
     try

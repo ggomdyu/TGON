@@ -1,7 +1,7 @@
 /**
- * filename TPoint.h
- * author   ggomdyu
- * since    04/02/2017
+ * @filename    TPoint.h
+ * @author      ggomdyu
+ * @since       04/02/2017
  */
 
 #pragma once
@@ -9,13 +9,15 @@
 
 #include <type_traits>
 #include <cassert>
+#include <cstdint>
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 template <typename Ty>
-struct TGON_API TPoint
+struct TPoint
 {
+private:
     using DevideTy = std::conditional_t<std::is_floating_point<Ty>::value, Ty, float>;
 
 /**
@@ -29,7 +31,7 @@ public:
     constexpr TPoint(Ty x, Ty y) noexcept;
 
 /**
- * @section Operators
+ * @section Operator
  */
 public:
     const TPoint operator+(const TPoint&) const noexcept;
@@ -42,8 +44,8 @@ public:
     TPoint& operator-=(const TPoint&) noexcept;
     TPoint& operator*=(Ty) noexcept;
     TPoint& operator/=(DevideTy);
-    bool operator==(const TPoint&) const noexcept;
-    bool operator!=(const TPoint&) const noexcept;
+    constexpr bool operator==(const TPoint&) const noexcept;
+    constexpr bool operator!=(const TPoint&) const noexcept;
 
 /**
  * @section Public variables
@@ -153,15 +155,16 @@ inline TPoint<Ty>& TPoint<Ty>::operator/=(DevideTy rhs)
 }
 
 template <typename Ty>
-inline bool TPoint<Ty>::operator==(const TPoint& rhs) const noexcept
+inline constexpr bool TPoint<Ty>::operator==(const TPoint& rhs) const noexcept
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
 template <typename Ty>
-inline bool TPoint<Ty>::operator!=(const TPoint& rhs) const noexcept
+inline constexpr bool TPoint<Ty>::operator!=(const TPoint& rhs) const noexcept
 {
     return (x != rhs.x || y != rhs.y);
 }
 
+} /* namespace math */
 } /* namespace tgon */

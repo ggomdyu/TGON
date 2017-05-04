@@ -1,6 +1,6 @@
 /**
- * filename TArray.h
- * author   ggomdyu
+ * @filename    TArray.h
+ * @author   ggomdyu
  * since    06/20/2016
  */
 

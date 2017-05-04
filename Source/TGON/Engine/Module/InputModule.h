@@ -1,6 +1,6 @@
 /**
- * filename InputModule.h
- * author   ggomdyu
+ * @filename    InputModule.h
+ * @author   ggomdyu
  * since    07/24/2016
  */
 
@@ -46,65 +46,64 @@ class TGON_API InputModule :
  * Generator
  */
 public:
-	TGON_MAKE_OBJECT_INTERFACE( InputModule )
+    TGON_MAKE_OBJECT_INTERFACE(InputModule)
 
 /**
- * Ctor/Dtor
+ * @section Ctor/Dtor
  */
 public:
 	/**
-	 * @note Initialize input system using OIS.
-	 * @param inputAcceptWindow The window which you want to receive input message
-	 * @param supportInputBits Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
+	 * @brief                           Initialize input system using OIS.
+	 * @param [in] inputAcceptWindow    The window which you want to receive input message
+	 * @param [in] supportInputBits     Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
 	 */
-	InputModule( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
-	virtual ~InputModule( );
+    InputModule(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
+    virtual ~InputModule();
 
 /**
- * Commands
+ * @section Public command method
  */
 public:
 	//
-	virtual void Update( );
+    virtual void Update();
 
 /**
- * Get methods
+ * @section Get method
  */
 public:
 	/* @return	*/
-	uint32_t GetKeyboardNum( ) const;
-	
-	/* @return	*/
-	uint32_t GetMouseNum( ) const;
+    uint32_t GetKeyboardNum() const;
 
 	/* @return	*/
-	uint32_t GetJoyStickNum( ) const;
+    uint32_t GetMouseNum() const;
+
+	/* @return	*/
+    uint32_t GetJoyStickNum() const;
 
 	/* @return	true while the user holds down the key identified by name */
-	bool GetKey( KeyCode keyCode ) const
-	{
+    bool GetKey(KeyCode keyCode) const
+    {
 		return false;
 	}
 
 	/* @return	true during the frame the user releases the key identified by name. */
-	bool GetKeyUp( KeyCode keyCode ) const
-	{
+    bool GetKeyUp(KeyCode keyCode) const
+    {
 		return false;
 	}
 
 	/* @return	true during the frame the user starts pressing down the key identified by name. */
-	bool GetKeyDown( KeyCode keyCode ) const
-	{
+    bool GetKeyDown(KeyCode keyCode) const
+    {
 		return false;
 	}
 
 /**
- * Event handlers
+ * @section Event handler
  */
 private:
-	// Keyboards
-	virtual bool keyPressed( const OIS::KeyEvent& arg ) override
-	{
+    virtual bool keyPressed(const OIS::KeyEvent& arg) override
+    {
 		//TPlatformConsole::Get( ).WriteLine( "keyPressed" );
 
 		//std::cout << " KeyPressed {" << arg.key
@@ -113,8 +112,8 @@ private:
 		return true;
 	}
 
-	virtual bool keyReleased( const OIS::KeyEvent& arg ) override
-	{
+    virtual bool keyReleased(const OIS::KeyEvent& arg) override
+    {
 		//TPlatformConsole::Get( ).WriteLine( "keyReleased" );
 		//if( arg.key == KC_ESCAPE || arg.key == KC_Q )
 		//	appRunning = false;
@@ -123,8 +122,8 @@ private:
 	}
 
 	// Mouses
-	virtual bool mouseMoved( const OIS::MouseEvent& arg ) override
-	{
+    virtual bool mouseMoved(const OIS::MouseEvent& arg) override
+    {
 		//TPlatformConsole::Get( ).WriteLine( "mouseMoved" );
 		//const OIS::MouseState& s = arg.state;
 		//std::cout << "\nMouseMoved: Abs("
@@ -133,8 +132,8 @@ private:
 		return true;
 	}
 	
-	virtual bool mousePressed( const OIS::MouseEvent& arg, OIS::MouseButtonID id ) override
-	{
+    virtual bool mousePressed(const OIS::MouseEvent& arg, OIS::MouseButtonID id) override
+    {
 		//TPlatformConsole::Get( ).WriteLine( "mousePressed" );
 		//const OIS::MouseState& s = arg.state;
 		//std::cout << "\nMouse button #" << id << " pressed. Abs("
@@ -143,8 +142,8 @@ private:
 		return true;
 	}
 	
-	virtual bool mouseReleased( const OIS::MouseEvent& arg, OIS::MouseButtonID id ) override
-	{
+    virtual bool mouseReleased(const OIS::MouseEvent& arg, OIS::MouseButtonID id) override
+    {
 		//TPlatformConsole::Get( ).WriteLine( "mouseReleased" );
 		//const OIS::MouseState& s = arg.state;
 		//std::cout << "\nMouse button #" << id << " released. Abs("
@@ -154,28 +153,28 @@ private:
 	}
 
 	// JoySticks
-	virtual bool buttonPressed( const OIS::JoyStickEvent& arg, int button ) override
-	{
+    virtual bool buttonPressed(const OIS::JoyStickEvent& arg, int button) override
+    {
 	//	std::cout << std::endl << arg.device->vendor() << ". Button Pressed # " << button;
 		return true;
 	}
 	
-	virtual bool buttonReleased( const OIS::JoyStickEvent& arg, int button ) override
-	{
+    virtual bool buttonReleased(const OIS::JoyStickEvent& arg, int button) override
+    {
 	//	std::cout << std::endl << arg.device->vendor() << ". Button Released # " << button;
 		return true;
 	}
 	
-	virtual bool axisMoved( const OIS::JoyStickEvent& arg, int axis ) override
-	{
+    virtual bool axisMoved(const OIS::JoyStickEvent& arg, int axis) override
+    {
 	//	//Provide a little dead zone
 	//	if( arg.state.mAxes[axis].abs > 2500 || arg.state.mAxes[axis].abs < -2500 )
 	//		std::cout << std::endl << arg.device->vendor() << ". Axis # " << axis << " Value: " << arg.state.mAxes[axis].abs;
 		return true;
 	}
 
-	virtual bool povMoved( const OIS::JoyStickEvent& arg, int pov ) override
-	{
+    virtual bool povMoved(const OIS::JoyStickEvent& arg, int pov) override
+    {
 	//	std::cout << std::endl << arg.device->vendor() << ". POV" << pov << " ";
 	//
 	//	if( arg.state.mPOV[pov].direction & Pov::North ) //Going up
@@ -203,13 +202,13 @@ private:
 		Internal works
 	*/
 private:
-	void InitializeInputManager( TWindowFrame* inputAcceptWindow, uint32_t supportInputFlag );
+    void InitializeInputManager(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
 
-	void SetupInputDevice( uint32_t supportInputFlag );
+    void SetupInputDevice(uint32_t supportInputFlag);
 
 
 	/*
-		Private variables
+		Private variable
 	*/
 private:
 	OIS::InputManager* m_inputManager;

@@ -167,3 +167,4 @@ $RECYCLE.BIN/
 *.db
 *.opendb
 *.exp
+/Source/ThirdParty

@@ -1,6 +1,6 @@
 /**
- * filename TConsole.h
- * author   ggomdyu
+ * @filename    TConsole.h
+ * @author   ggomdyu
  * since    07/06/2016
  */
 
@@ -8,5 +8,5 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Private/Windows/WindowsConsole.h"
+#	include "Windows/WindowsConsole.h"
 #endif

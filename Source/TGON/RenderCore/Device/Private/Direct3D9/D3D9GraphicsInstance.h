@@ -1,13 +1,13 @@
 /**
- * filename D3D9GraphicsInstance.h
- * author   ggomdyu
+ * @filename    D3D9GraphicsInstance.h
+ * @author   ggomdyu
  * since    04/02/2017
  */
 
 #pragma once
-#include "../Interface/IGraphicsInstance.h"
+#include "../Interface/IGraphicsDevice.h"
 
-#include "./Core/Platform/Private/Windows/Misc/UniqueComPtr.h"
+#include "Core/Platform/Windows/Misc/UniqueComPtr.h"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -26,7 +26,7 @@ public:
     virtual ~D3D9GraphicsInstance();
 
 /**
- * @section Get methods
+ * @section Get method
  */
 public:
     UniqueComPtr<IDirect3D9Ex>& GetD3D();

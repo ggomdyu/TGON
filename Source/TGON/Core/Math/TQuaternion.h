@@ -1,7 +1,7 @@
 /**
- * filename Quaternion.h
- * author   ggomdyu
- * since    03/14/2016
+ * @filename    TQuaternion.h
+ * @author      ggomdyu
+ * @since       03/14/2016
  */
 
 #pragma once
@@ -9,8 +9,8 @@
 
 #include "../Math/TVector3.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 struct TGON_API TQuaternion
 {
@@ -29,7 +29,7 @@ public:
     TQuaternion(const TQuaternion&);
     
 /**
- * @section Operators
+ * @section Operator
  */
 public:
     TQuaternion operator*(const TQuaternion&) const;
@@ -42,7 +42,7 @@ public:
     float operator[](std::size_t) const;
 	
 /**
- * @section Public command methods
+ * @section Public command method
  */
 public:
     struct TMatrix4x4 RotateMatrix() const;
@@ -128,4 +128,5 @@ inline float TQuaternion::operator[](std::size_t index) const
     return *(&x + index);
 }
 
+} /* namespace math */
 } /* namespace tgon */

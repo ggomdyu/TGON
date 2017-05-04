@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <SOLibPaths />
+  <AndroidLibPaths />
+  <OObjPaths />
+  <Configuration />
+  <Platform />
+  <AndroidArchitecture />
+  <!--links to other recipe files-->
+  <RecipeFiles>C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\\TGON.Core.Android\bin\arm\Debug\libTGON_Core.so.recipe</RecipeFiles>
+</project>
