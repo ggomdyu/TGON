@@ -9,10 +9,11 @@
 #include <type_traits>
 #include <cstring>
 #include <cstdint>
+#include <utility>
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
 
-#include "../Template/TFunctionTraits.h"
+#include "../Utility/TFunctionTraits.h"
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
@@ -58,31 +59,34 @@ class TDelegate<ReturnTy(Args...)> final
  * @section Ctor/Dtor
  */
 public:
-    TDelegate() noexcept;
-    TDelegate(std::nullptr_t) noexcept;
-    TDelegate(void* receiver, StubTy stub) noexcept;
-    TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept;
+    constexpr TDelegate() noexcept;
+    constexpr TDelegate(std::nullptr_t) noexcept;
+    constexpr TDelegate(void* receiver, StubTy stub) noexcept;
+    constexpr TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept;
+    template <typename FunctionTy>
+    TDelegate(FunctionTy&&);
+    
     TDelegate(const TDelegate& rhs);
-    TDelegate(TDelegate&& rhs) noexcept;
+    constexpr TDelegate(TDelegate&&) noexcept;
     ~TDelegate();
 
 /**
  * @section Operator
  */
 public:
-    TDelegate& operator=(const TDelegate& rhs);
-    TDelegate& operator=(TDelegate&& rhs);
+    TDelegate& operator=(const TDelegate&);
+    TDelegate& operator=(TDelegate&&);
     constexpr bool operator==(std::nullptr_t) const noexcept;
     constexpr bool operator!=(std::nullptr_t) const noexcept;
 
-    ReturnTy operator()(Args&&... args);
+    ReturnTy operator()(Args&&...) const;
 
 /**
  * @section Public command method
  */
 public:
     template <typename FunctionTy>
-    static TDelegate MakeDelegate(FunctionTy&& func);
+    static TDelegate MakeDelegate(FunctionTy&&);
 
     template <ReturnTy(*Handler)(Args...)>
     static TDelegate MakeDelegate() noexcept;
@@ -141,7 +145,7 @@ private:
 };
 
 template<typename ReturnTy, typename... Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate() noexcept :
+constexpr TDelegate<ReturnTy(Args...)>::TDelegate() noexcept :
     m_ptr(nullptr),
     m_deleter(nullptr),
     m_stub(nullptr)
@@ -149,28 +153,41 @@ inline TDelegate<ReturnTy(Args...)>::TDelegate() noexcept :
 }
 
 template<typename ReturnTy, typename ...Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(std::nullptr_t) noexcept :
+constexpr TDelegate<ReturnTy(Args...)>::TDelegate(std::nullptr_t) noexcept :
+#ifdef _MSC_VER
+    m_ptr(nullptr),
+    m_deleter(nullptr),
+    m_stub(nullptr)
+#else
     TDelegate()
+#endif
 {
 }
 
 template<typename ReturnTy, typename... Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub) noexcept :
+constexpr TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub) noexcept :
 	m_ptr(receiver),
     m_deleter(nullptr),
 	m_stub(stub)
 {
 }
 
-template<typename ReturnTy, typename ...Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept :
+template<typename ReturnTy, typename... Args>
+constexpr TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept :
 	m_ptr(receiver),
     m_deleter(deleter),
 	m_stub(stub)
 {
 }
 
-template<typename ReturnTy, typename ...Args>
+template <typename ReturnTy, typename... Args>
+template <typename FunctionTy>
+inline TDelegate<ReturnTy(Args...)>::TDelegate(FunctionTy&& func)
+{
+    *this = MakeDelegate(func);
+}
+
+template<typename ReturnTy, typename... Args>
 inline TDelegate<ReturnTy(Args...)>::TDelegate(const TDelegate& rhs) :
     m_deleter(rhs.m_deleter),
     m_stub(rhs.m_stub)
@@ -188,8 +205,8 @@ inline TDelegate<ReturnTy(Args...)>::TDelegate(const TDelegate& rhs) :
     }
 }
 
-template<typename ReturnTy, typename ...Args>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(TDelegate&& rhs) noexcept :
+template<typename ReturnTy, typename... Args>
+constexpr TDelegate<ReturnTy(Args...)>::TDelegate(TDelegate&& rhs) noexcept :
     m_ptr(rhs.m_ptr),
     m_deleter(rhs.m_deleter),
     m_stub(rhs.m_stub)
@@ -199,7 +216,7 @@ inline TDelegate<ReturnTy(Args...)>::TDelegate(TDelegate&& rhs) noexcept :
     rhs.m_stub = nullptr;
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline TDelegate<ReturnTy(Args...)>::~TDelegate()
 {
     if (m_deleter)
@@ -211,7 +228,7 @@ inline TDelegate<ReturnTy(Args...)>::~TDelegate()
     }
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(const TDelegate& rhs)
 {
     if (this == &rhs)
@@ -242,7 +259,7 @@ inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(con
     return *this;
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(TDelegate&& rhs)
 {
     if (this == &rhs)
@@ -266,25 +283,25 @@ inline TDelegate<ReturnTy(Args...)>& TDelegate<ReturnTy(Args...)>::operator=(TDe
     return *this;
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline constexpr bool TDelegate<ReturnTy(Args...)>::operator==(std::nullptr_t) const noexcept
 {
     return m_stub == nullptr;
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline constexpr bool TDelegate<ReturnTy(Args...)>::operator!=(std::nullptr_t) const noexcept
 {
     return m_stub != nullptr;
 }
 
 template<typename ReturnTy, typename... Args>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::operator()(Args&&... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::operator()(Args&&... args) const
 {
     return m_stub(m_ptr, std::forward<Args>(args)...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename FunctionTy>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy&& func)
 {
@@ -296,84 +313,84 @@ inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(F
     return TDelegate(ptr, &MakeStub<DecayFunctionTy>, &MakeDeleter<DecayFunctionTy>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<ReturnTy(*Handler)(Args...)>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate() noexcept
 {
     return TDelegate(nullptr, &MakeStub<Handler>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...)>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(ClassTy* receiver) noexcept
 {
     return TDelegate(receiver, &MakeStub<ClassTy, Handler>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) const>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(ClassTy* receiver) noexcept
 {
     return TDelegate(receiver, &MakeStub<ClassTy, Handler>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) volatile>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(ClassTy* receiver) noexcept
 {
     return TDelegate(receiver, &MakeStub<ClassTy, Handler>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) const volatile>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(ClassTy* receiver) noexcept
 {
     return TDelegate(receiver, &MakeStub<ClassTy, Handler>);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template <typename FunctionTy>
-inline static ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return (*reinterpret_cast<FunctionTy*>(receiver))(std::forward<Args>(args)...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<ReturnTy(*Handler)(Args...)>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return Handler(args...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...)>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) const>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) volatile>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) const volatile>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 template<typename FunctionTy>
 inline std::size_t TDelegate<ReturnTy(Args...)>::MakeDeleter(void* ptr)
 {
@@ -381,7 +398,7 @@ inline std::size_t TDelegate<ReturnTy(Args...)>::MakeDeleter(void* ptr)
     return sizeof(FunctionTy);
 }
 
-template<typename ReturnTy, typename ...Args>
+template<typename ReturnTy, typename... Args>
 inline std::size_t TDelegate<ReturnTy(Args...)>::GetStoredFunctionSize(Deleter deleter)
 {
     return (deleter != nullptr) ? deleter(nullptr) : 0;
