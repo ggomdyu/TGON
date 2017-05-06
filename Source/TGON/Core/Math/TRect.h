@@ -31,18 +31,18 @@ public:
  * @section Operator
  */
 public:
-    const TRect operator+(const TRect&) const noexcept;
-    const TRect operator-(const TRect&) const noexcept;
-    const TRect operator*(Ty) const noexcept;
-    const TRect operator/(DevideTy) const;
-    const TRect operator+() const noexcept;
-    const TRect operator-() const noexcept;
+    constexpr const TRect operator+(const TRect&) const noexcept;
+    constexpr const TRect operator-(const TRect&) const noexcept;
+    constexpr const TRect operator*(Ty) const noexcept;
+    constexpr const TRect operator/(DevideTy) const;
+    constexpr const TRect operator+() const noexcept;
+    constexpr const TRect operator-() const noexcept;
     TRect& operator+=(const TRect&) noexcept;
     TRect& operator-=(const TRect&) noexcept;
     TRect& operator*=(Ty) noexcept;
     TRect& operator/=(DevideTy);
-    bool operator==(const TRect&) const noexcept;
-    bool operator!=(const TRect&) const noexcept;
+    constexpr bool operator==(const TRect&) const noexcept;
+    constexpr bool operator!=(const TRect&) const noexcept;
 
 /**
  * @section Public variables
@@ -57,6 +57,12 @@ public:
 	static const TRect Zero;	    // 1, 1, 1, 1
 	static const TRect MinusOne;	// -1, -1, -1, -1
 };
+
+template <typename Ty>
+constexpr TRect<Ty> MakeRect(Ty bottom, Ty top, Ty width, Ty height) noexcept
+{
+    return {bottom, top, width, height};
+}
 
 using TIntRect = TRect<int>;
 using TFloatRect = TRect<float>;
@@ -81,25 +87,25 @@ constexpr TRect<Ty>::TRect(Ty _bottom, Ty _top, Ty _width, Ty _height) noexcept 
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator+(const TRect& rhs) const noexcept
+constexpr const TRect<Ty> TRect<Ty>::operator+(const TRect& rhs) const noexcept
 {
     return TRect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator-(const TRect& rhs) const noexcept
+constexpr const TRect<Ty> TRect<Ty>::operator-(const TRect& rhs) const noexcept
 {
     return TRect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator*(Ty rhs) const noexcept
+constexpr const TRect<Ty> TRect<Ty>::operator*(Ty rhs) const noexcept
 {
     return TRect(bottom * rhs, top * rhs, width * rhs, height * rhs);
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
+constexpr const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
 {
     assert(rhs != Ty(0) && "TRect elements can't be divided by zero.");
 
@@ -112,13 +118,13 @@ inline const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator+() const noexcept
+constexpr const TRect<Ty> TRect<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-inline const TRect<Ty> TRect<Ty>::operator-() const noexcept
+constexpr const TRect<Ty> TRect<Ty>::operator-() const noexcept
 {
 	return TRect(-bottom, -top, -width, -height);
 }
@@ -172,13 +178,13 @@ inline TRect<Ty>& TRect<Ty>::operator/=(DevideTy rhs)
 }
 
 template <typename Ty>
-inline bool TRect<Ty>::operator==(const TRect& rhs) const noexcept
+constexpr bool TRect<Ty>::operator==(const TRect& rhs) const noexcept
 {
 	return (bottom == rhs.bottom && top == rhs.top && width == rhs.width && height == rhs.height);
 }
 
 template <typename Ty>
-inline bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
+constexpr bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
 {
     return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }

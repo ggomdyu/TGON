@@ -34,12 +34,12 @@ public:
  * @section Operator
  */
 public:
-    const TPoint operator+(const TPoint&) const noexcept;
-    const TPoint operator-(const TPoint&) const noexcept;
-    const TPoint operator*(Ty) const noexcept;
-    const TPoint operator/(DevideTy) const;
-    const TPoint operator+() const noexcept;
-    const TPoint operator-() const noexcept;
+    constexpr const TPoint operator+(const TPoint&) const noexcept;
+    constexpr const TPoint operator-(const TPoint&) const noexcept;
+    constexpr const TPoint operator*(Ty) const noexcept;
+    constexpr const TPoint operator/(DevideTy) const;
+    constexpr const TPoint operator+() const noexcept;
+    constexpr const TPoint operator-() const noexcept;
     TPoint& operator+=(const TPoint&) noexcept;
     TPoint& operator-=(const TPoint&) noexcept;
     TPoint& operator*=(Ty) noexcept;
@@ -58,6 +58,12 @@ public:
 	static const TPoint Zero;	    // 0, 0
 	static const TPoint MinusOne;	// -1, -1
 };
+
+template <typename Ty>
+constexpr TPoint<Ty> MakePoint(Ty x, Ty y) noexcept
+{
+    return {x, y};
+}
 
 using TIntPoint = TPoint<int>;
 using TFloatPoint = TPoint<float>;
@@ -78,25 +84,25 @@ constexpr TPoint<Ty>::TPoint(Ty _x, Ty _y) noexcept :
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator+(const TPoint& rhs) const noexcept
+constexpr const TPoint<Ty> TPoint<Ty>::operator+(const TPoint& rhs) const noexcept
 {
     return TPoint(x + rhs.x, y + rhs.y);
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator-(const TPoint& rhs) const noexcept
+constexpr const TPoint<Ty> TPoint<Ty>::operator-(const TPoint& rhs) const noexcept
 {
-    return TPoint(X - rhs.x, y - rhs.y);
+    return TPoint(x - rhs.x, y - rhs.y);
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator*(Ty rhs) const noexcept
+constexpr const TPoint<Ty> TPoint<Ty>::operator*(Ty rhs) const noexcept
 {
     return TPoint(x * rhs, y * rhs);
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator/(DevideTy rhs) const
+constexpr const TPoint<Ty> TPoint<Ty>::operator/(DevideTy rhs) const
 {
     assert(rhs != Ty(0) && "TPoint elements can't be divided by zero.");
 
@@ -105,13 +111,13 @@ inline const TPoint<Ty> TPoint<Ty>::operator/(DevideTy rhs) const
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator+() const noexcept
+constexpr const TPoint<Ty> TPoint<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-inline const TPoint<Ty> TPoint<Ty>::operator-() const noexcept
+constexpr const TPoint<Ty> TPoint<Ty>::operator-() const noexcept
 {
 	return TPoint(-x, -y);
 }

@@ -1,11 +1,11 @@
 /**
  * @filename    TExtent.h
- * @author   ggomdyu
- * since    04/02/2017
+ * @author      ggomdyu
+ * @since       04/02/2017
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
+#include "Core/Platform/TConfig.h"
 
 #include <type_traits>
 #include <cassert>
@@ -28,18 +28,18 @@ public:
     constexpr TExtent() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr TExtent(Ty x, Ty y) noexcept;
+    constexpr TExtent(Ty width, Ty height) noexcept;
 
 /**
  * @section Operator
  */
 public:
-    const TExtent operator+(const TExtent&) const noexcept;
-    const TExtent operator-(const TExtent&) const noexcept;
-    const TExtent operator*(Ty) const noexcept;
-    const TExtent operator/(DevideTy) const;
-    const TExtent operator+() const noexcept;
-    const TExtent operator-() const noexcept;
+    constexpr const TExtent operator+(const TExtent&) const noexcept;
+    constexpr const TExtent operator-(const TExtent&) const noexcept;
+    constexpr const TExtent operator*(Ty) const noexcept;
+    constexpr const TExtent operator/(DevideTy) const;
+    constexpr const TExtent operator+() const noexcept;
+    constexpr const TExtent operator-() const noexcept;
     TExtent& operator+=(const TExtent&) noexcept;
     TExtent& operator-=(const TExtent&) noexcept;
     TExtent& operator*=(Ty) noexcept;
@@ -59,6 +59,12 @@ public:
 	static const TExtent MinusOne;	// -1, -1
 };
 
+template <typename Ty>
+constexpr TExtent<Ty> MakeExtent(Ty width, Ty height) noexcept
+{
+    return {width, height};
+}
+
 using TIntExtent = TExtent<int>;
 using TFloatExtent = TExtent<float>;
 using TDoubleExtent = TExtent<double>;
@@ -71,32 +77,32 @@ constexpr TExtent<Ty>::TExtent() noexcept :
 }
 
 template <typename Ty>
-constexpr TExtent<Ty>::TExtent(Ty _x, Ty _y) noexcept :
-    width(_x),
-    height(_y)
+constexpr TExtent<Ty>::TExtent(Ty _width, Ty _height) noexcept :
+    width(_width),
+    height(_height)
 {
 }
 
-template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator+(const TExtent& rhs) const noexcept
+template<typename Ty>
+constexpr const TExtent<Ty> TExtent<Ty>::operator+(const TExtent& rhs) const noexcept
 {
     return TExtent(width + rhs.width, height + rhs.height);
 }
 
 template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator-(const TExtent& rhs) const noexcept
+constexpr const TExtent<Ty> TExtent<Ty>::operator-(const TExtent& rhs) const noexcept
 {
-    return TExtent(X - rhs.width, height - rhs.height);
+    return TExtent(width - rhs.width, height - rhs.height);
 }
 
 template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator*(Ty rhs) const noexcept
+constexpr const TExtent<Ty> TExtent<Ty>::operator*(Ty rhs) const noexcept
 {
     return TExtent(width * rhs, height * rhs);
 }
 
 template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator/(DevideTy rhs) const
+constexpr const TExtent<Ty> TExtent<Ty>::operator/(DevideTy rhs) const
 {
     assert(rhs != Ty(0) && "TExtent elements can't be divided by zero.");
 
@@ -105,13 +111,13 @@ inline const TExtent<Ty> TExtent<Ty>::operator/(DevideTy rhs) const
 }
 
 template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator+() const noexcept
+constexpr const TExtent<Ty> TExtent<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-inline const TExtent<Ty> TExtent<Ty>::operator-() const noexcept
+constexpr const TExtent<Ty> TExtent<Ty>::operator-() const noexcept
 {
 	return TExtent(-width, -height);
 }
