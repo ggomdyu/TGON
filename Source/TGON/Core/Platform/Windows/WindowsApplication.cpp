@@ -3,10 +3,11 @@
 #include "WindowsApplication.h"
 #include "WindowsWindow.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace platform {
+namespace windows {
 
-void GenericApplication::ShowOkPopup(const char* message, const char* caption, OkPopupEventHandler onMessageBoxEventHandled)
+TGON_API void ShowOkPopup(const char* message, const char* caption, OkPopupEventHandler onMessageBoxEventHandled)
 {
     MessageBoxA(nullptr, message, caption, MB_OK);
 
@@ -16,7 +17,7 @@ void GenericApplication::ShowOkPopup(const char* message, const char* caption, O
     }
 }
 
-void GenericApplication::ShowYesNoPopup(const char* message, const char* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
+TGON_API void ShowYesNoPopup(const char* message, const char* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
 {
     auto clickedBtnType = MessageBoxA(nullptr, message, caption, MB_YESNO);
 
@@ -26,7 +27,7 @@ void GenericApplication::ShowYesNoPopup(const char* message, const char* caption
     }
 }
 
-void WindowsApplication::ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
+TGON_API void ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
 {
     auto clickedBtnType = MessageBoxW(nullptr, message, caption, MB_YESNO);
 
@@ -36,7 +37,7 @@ void WindowsApplication::ShowYesNoPopup(const wchar_t* message, const wchar_t* c
     }
 }
 
-void WindowsApplication::ShowOkPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
+TGON_API void ShowOkPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
 {
     auto clickedBtnType = MessageBoxW(nullptr, message, caption, MB_OK);
 
@@ -46,7 +47,7 @@ void WindowsApplication::ShowOkPopup(const wchar_t* message, const wchar_t* capt
     }
 }
 
-void WindowsApplication::EnableFloatException(unsigned int flag)
+TGON_API void EnableFloatException(unsigned int flag)
 {
     unsigned int currentFlag;
     _controlfp_s(&currentFlag, 0, 0);
@@ -56,10 +57,12 @@ void WindowsApplication::EnableFloatException(unsigned int flag)
     _controlfp_s(&currentFlag, newFlag, MCW_EM);
 }
 
-HINSTANCE WindowsApplication::GetInstanceHandle()
+TGON_API HINSTANCE GetInstanceHandle()
 {
     static HINSTANCE instanceHandle = GetModuleHandle(nullptr);
     return instanceHandle;
 }
     
+} /* namespace windows */
+} /* namespace platform */
 } /* namespace tgon */

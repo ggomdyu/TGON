@@ -8,7 +8,7 @@
 #include "../Generic/GenericScreen.h"
 
 namespace tgon {
-namespace screen {
+namespace platform {
 
 class TGON_API WindowsScreen : 
 	public GenericScreen
@@ -44,5 +44,5 @@ public:
 
 using Screen = WindowsScreen;
 
-} /* namespace screen */
+} /* namespace platform */
 } /* namespace tgon */

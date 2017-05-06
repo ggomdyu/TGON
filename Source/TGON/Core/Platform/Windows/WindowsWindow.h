@@ -1,7 +1,7 @@
 /**
  * @filename    WindowsWindow.h
- * @author   ggomdyu
- * since    11/12/2015
+ * @author      ggomdyu
+ * @since       11/12/2015
  */
 
 #pragma once
@@ -13,7 +13,7 @@
 #include <Windows.h>
 
 namespace tgon {
-namespace window {
+namespace platform {
 
 class TGON_API WindowsWindow :
     public GenericWindow
@@ -45,8 +45,8 @@ public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
 /**
-　* @section Set method
-　*/
+ * @section Set method
+ */
 public:
     virtual void SetPosition(const math::TIntPoint& position) override;
     virtual void SetExtent(const math::TIntExtent& extent) override;
@@ -56,8 +56,8 @@ public:
     void SetPerPixelTransparent(float);
 
 /** 
-　* @section Get method
-　*/ 
+ * @section Get method
+ */ 
 public:
     virtual const math::TIntPoint GetPosition() const override;
     virtual const math::TIntExtent GetExtent() const override;
@@ -77,5 +77,5 @@ private:
 
 using TWindow = WindowsWindow;
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */

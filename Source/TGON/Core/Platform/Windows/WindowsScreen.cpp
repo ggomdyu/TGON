@@ -5,7 +5,7 @@
 #include "WindowsWindow.h"
 
 namespace tgon {
-namespace screen {
+namespace platform {
 
 bool WindowsScreen::SetFullScreen(bool setFullScreen, const WindowsWindow& window)
 {
@@ -44,5 +44,5 @@ int32_t WindowsScreen::GetResolutionHeight()
     return GetSystemMetrics(SM_CYSCREEN);
 }
 
-} /* namespace screen */
+} /* namespace platform */
 } /* namespace tgon */

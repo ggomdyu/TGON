@@ -21,7 +21,7 @@ namespace
 
 LRESULT CALLBACK OnWindowMessageHandled(HWND wndHandle, UINT wndMsg, WPARAM wParam, LPARAM lParam)
 {
-    tgon::window::WindowsWindow* extraMemAsWindow = reinterpret_cast<tgon::window::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+    auto extraMemAsWindow = reinterpret_cast<tgon::platform::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (extraMemAsWindow)
     {
         return extraMemAsWindow->OnHandleMessage(wndHandle, wndMsg, wParam, lParam);
@@ -40,7 +40,7 @@ bool RegisterWindowClass()
     wcex.hbrBackground = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH));
     wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
-    wcex.hInstance = tgon::TApplication::GetInstanceHandle();
+    wcex.hInstance = tgon::platform::windows::GetInstanceHandle();
     wcex.lpfnWndProc = OnWindowMessageHandled;
 
     return RegisterClassExW(&wcex) != 0;
@@ -54,7 +54,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    tgon::TApplication::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
+    tgon::platform::windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
 
 	// TODO: Insert mini-dump setting code here
     RegisterWindowClass();

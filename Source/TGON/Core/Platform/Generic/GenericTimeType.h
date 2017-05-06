@@ -8,7 +8,7 @@
 #include <cstdint>
 
 namespace tgon {
-namespace time {
+namespace platform {
 
 enum class DayOfWeek
 {
@@ -32,5 +32,5 @@ struct LocalTime
     DayOfWeek dayOfWeek;
 };
 
-} /* namespace time */
+} /* namespace platform */
 } /* namespace tgon */

@@ -1,7 +1,7 @@
 /**
  * @filename    WindowsApplicationType.h
- * @author   ggomdyu
- * since    04/04/2017
+ * @author      ggomdyu
+ * @since       04/04/2017
  */
 
 #pragma once
@@ -15,8 +15,8 @@
 #endif
 #include <Windows.h>
 
-namespace tgon
-{
+namespace tgon {
+namespace platform {
 
 enum class YesNoPopupEvent
 {
@@ -24,4 +24,5 @@ enum class YesNoPopupEvent
     No = IDNO,
 };
 
+} /* namespace platform */
 } /* namespace tgon */

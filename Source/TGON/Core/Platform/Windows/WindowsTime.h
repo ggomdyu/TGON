@@ -8,10 +8,10 @@
 #include "../Generic/GenericTime.h"
 
 namespace tgon {
-namespace time {
+namespace platform {
 namespace windows {
 
 
 } /* namespace windows */
-} /* namespace time */
+} /* namespace platform */
 } /* namespace tgon */

@@ -1,7 +1,7 @@
 /**
  * @filename    WindowsWindowUtility.h
- * @author   ggomdyu
- * since    11/12/2015
+ * @author      ggomdyu
+ * @since       11/12/2015
  */
 
 #pragma once
@@ -11,7 +11,7 @@
 #include <windows.h>
 
 namespace tgon {
-namespace window {
+namespace platform {
 
 /**
     * @note                        Convert WindowStyle to DWORD.
@@ -39,5 +39,5 @@ void ReshapeWindowForm(const class WindowsWindow& from, const class WindowsWindo
 // Todo: 윈도우클래스로 옮기자. 최소단위의 기능이기에 객체지향을 해치지 않는다고 예상됨.
 bool HasSystemMenu(const class WindowsWindow& window);
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */

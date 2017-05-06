@@ -2,7 +2,7 @@
 #include "GenericWindow.h"
 
 namespace tgon {
-namespace window {
+namespace platform {
 
 GenericWindow::GenericWindow() :
     m_isClosed(false)
@@ -19,5 +19,5 @@ bool GenericWindow::IsClosed() const noexcept
     return m_isClosed;
 }
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */

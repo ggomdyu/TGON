@@ -8,7 +8,7 @@
 #include "Core/String/TEncoding.h"
 
 namespace tgon {
-namespace window {
+namespace platform {
     
 void ConvertWindowStyleToDword(const WindowStyle& wndStyle, DWORD* exWndStyle, DWORD* normalWndStyle)
 {
@@ -64,7 +64,11 @@ HWND CreateWindowForm(const WindowStyle& wndStyle, const wchar_t* className, HIN
     ConvertWindowStyleToDword(wndStyle, &exStyle, &normalStyle);
 
     wchar_t utf16Title[256] {};
-    TEncoding::Convert(TEncoding::UTF8{}, TEncoding::UTF16LE{}, wndStyle.caption.c_str(), reinterpret_cast<char*>(utf16Title));
+    bool succeedToConvert = string::ConvertUTF8ToUTF16(wndStyle.caption.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
+    if (!succeedToConvert)
+    {
+        return nullptr;
+    }
 
 	HWND wndHandle = CreateWindowExW(
 		exStyle,
@@ -113,5 +117,5 @@ bool HasSystemMenu(const WindowsWindow& window)
     return (dwStyle & WS_CAPTION) != 0 && (dwStyle & WS_SYSMENU) != 0;
 }
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */

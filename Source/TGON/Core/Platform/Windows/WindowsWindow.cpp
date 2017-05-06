@@ -14,11 +14,13 @@
 #endif
 
 namespace tgon {
-namespace window {
+namespace platform {
 
 WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
-    m_wndHandle(CreateWindowForm(wndStyle, L"TGON", TApplication::GetInstanceHandle()))
+    m_wndHandle(CreateWindowForm(wndStyle, L"TGON", platform::windows::GetInstanceHandle()))
 {
+    assert(m_wndHandle != nullptr && "Failed to create window.");
+
     // Save this instance's pointer to storage of window.
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 }
@@ -102,6 +104,8 @@ HWND WindowsWindow::GetWindowHandle() const noexcept
 
 bool WindowsWindow::HasThickframe() const
 {
+    // Todo: 테스트 필요
+
     DWORD style = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
     DWORD extendedStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
 
@@ -146,9 +150,12 @@ void WindowsWindow::SetExtent(const math::TIntExtent& extent)
 void WindowsWindow::SetCaption(const char* caption)
 {
     wchar_t utf16Caption[256] {};
-    TEncoding::UTF8::Convert<TEncoding::UTF16LE>(caption, reinterpret_cast<char*>(utf16Caption));
-    
-    ::SetWindowTextW(m_wndHandle, utf16Caption);
+
+    bool succeed = string::ConvertUTF8ToUTF16(caption, reinterpret_cast<char*>(utf16Caption)) != -1;
+    if (succeed)
+    {
+        ::SetWindowTextW(m_wndHandle, utf16Caption);
+    }
 }
 
 void WindowsWindow::SetTopMost(bool setTopMost)
@@ -281,5 +288,5 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
     return DefWindowProc(wndHandle, msg, wParam, lParam);
 }
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */

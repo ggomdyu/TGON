@@ -10,7 +10,7 @@
 #include <cstdint>
 
 namespace tgon {
-namespace screen {
+namespace platform {
 
 class TGON_API GenericScreen
 {
@@ -22,5 +22,5 @@ public:
     ~GenericScreen() = delete;
 };
 
-} /* namespace screen */
+} /* namespace platform */
 } /* namespace tgon */

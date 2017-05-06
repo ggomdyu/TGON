@@ -1,7 +1,7 @@
 /**
  * @filename    WindowsApplication.h
- * @author   ggomdyu
- * since    03/20/2016
+ * @author      ggomdyu
+ * @since       03/20/2016
  */
 
 #pragma once
@@ -9,52 +9,34 @@
 
 #include "WindowsApplicationType.h"
 
-namespace tgon
-{
-
-class WindowsApplication :
-    public GenericApplication
-{
-/**
- * @section Ctor/Dtor
- */
-public:
-    WindowsApplication() = delete;
-    ~WindowsApplication() = delete;
+namespace tgon {
+namespace platform {
+namespace windows {
 
 /**
- * @section Public command method
- */
-public:
-    /**
-     * @brief                   Shows the Message box which has buttons: Yes, No
-     * @param [in] message      Message box description
-     * @param [in] caption      Message box title
-     * @param [in] handler      Button click event handler
-     */ 
-    static void ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
-
-    /**
-     * @brief                   Show the Message box which has Ok button
-     * @param [in] message      Message box description
-     * @param [in] caption      Message box title
-     * @param [in] handler      Button click event handler
-     */ 
-    static void ShowOkPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
-
-    /**
-     * @brief                   Enables floating operation exception.
-     * @param [in] flag         Flag you want to enable: EM_OVERFLOW, EM_UNDERFLOW, EM_ZERODIVIDE, etc
-     */
-    static void EnableFloatException(unsigned int flag);
+ * @brief                   Shows the Message box which has buttons: Yes, No
+ * @param [in] message      Message box description
+ * @param [in] caption      Message box title
+ * @param [in] handler      Button click event handler
+ */ 
+TGON_API void ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
 
 /**
- * @section Get method
+ * @brief                   Show the Message box which has Ok button
+ * @param [in] message      Message box description
+ * @param [in] caption      Message box title
+ * @param [in] handler      Button click event handler
+ */ 
+TGON_API void ShowOkPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
+
+/**
+ * @brief                   Enables floating operation exception.
+ * @param [in] flag         Flag you want to enable: EM_OVERFLOW, EM_UNDERFLOW, EM_ZERODIVIDE, etc
  */
-public:
-    static HINSTANCE GetInstanceHandle();
-};
+TGON_API void EnableFloatException(unsigned int flag);
 
-using TApplication = WindowsApplication;
+TGON_API HINSTANCE GetInstanceHandle();
 
+} /* namespace windows */
+} /* namespace platform */
 } /* namespace tgon */

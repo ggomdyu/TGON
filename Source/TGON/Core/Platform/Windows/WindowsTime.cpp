@@ -7,14 +7,14 @@
 #include <Windows.h>
 
 namespace tgon {
-namespace time {
+namespace platform {
 
-std::size_t tgon::time::GetOSExecutionTime()
+std::size_t GetOSExecutionTime()
 {
     return GetTickCount();
 }
 
-LocalTime tgon::time::GetLocalTime()
+LocalTime GetLocalTime()
 {
     SYSTEMTIME prevSysTime;
     ::GetLocalTime(&prevSysTime);
@@ -31,5 +31,5 @@ LocalTime tgon::time::GetLocalTime()
     return sysTime;
 }
 
-} /* namespace time */
+} /* namespace platform */
 } /* namespace tgon */

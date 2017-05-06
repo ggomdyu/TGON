@@ -1,7 +1,7 @@
 /**
  * @filename    GenericWindow.h
- * @author   ggomdyu
- * since    01/09/2016
+ * @author      ggomdyu
+ * @since       01/09/2016
  */
 
 #pragma once
@@ -13,41 +13,10 @@
 #include "Core/Math/TPoint.h"
 #include "Core/Math/TExtent.h"
 #include "Core/Math/TRect.h"
+#include "GenericWindowType.h"
 
 namespace tgon {
-namespace window {
-
-enum class MouseType
-{
-	Left,
-	Middle,
-	Right,
-};
-
-struct WindowStyle
-{
-/**
- * @section Public variable
- */
-public:
-	std::string caption = u8"Hello World!";
-
-	std::size_t x = 100;
-	std::size_t y = 100;
-	std::size_t width = 500;
-	std::size_t height = 500;
-
-	bool popup = false;
-	bool fullScreen = false;
-	bool supportWindowTransparency = false;
-	bool supportPerPixelTransparency = false;
-	bool resizeable = true;
-    bool topMost = false;
-    bool maximized = false;
-	bool minimized = false;
-    bool showMiddle = true;
-    bool showImmediately = true;
-};
+namespace platform {
 
 class TGON_API GenericWindow
 {
@@ -108,5 +77,5 @@ protected:
     bool m_isClosed;
 };
 
-} /* namespace window */
+} /* namespace platform */
 } /* namespace tgon */
