@@ -1,7 +1,7 @@
 /**
  * @filename    TTypeInfo.h
  * @author      ggomdyu
- * since        03/14/2016
+ * @since       03/14/2016
  */
 
 #pragma once
