@@ -13,7 +13,7 @@
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
 
-#include "../Utility/TFunctionTraits.h"
+#include "Core/Utility/TTypeTraits.h"
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
@@ -33,7 +33,7 @@
     [&]()\
     {\
         auto instantiatedLambda = function;\
-        return tgon::TDelegate<tgon::TFunctionTraits<decltype(instantiatedLambda)>::FunctionTy>::MakeDelegate(function);\
+        return tgon::object::TDelegate<tgon::utility::TFunctionTraits<decltype(instantiatedLambda)>::FunctionTy>::MakeDelegate(function);\
     }()
 
 /**
@@ -41,7 +41,7 @@
  * @param [in] function     A Reference of class member function (e.g. &ClassName::functionName)
  * @param [in] instance     A Instance which handles the event
  */
-#define TGON_MAKE_DELEGATE_2(function, instance) tgon::TDelegate<tgon::TFunctionTraits<decltype(function)>::FunctionTy>::MakeDelegate<tgon::TFunctionTraits<decltype(function)>::ClassTy, function>(instance)
+#define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::TDelegate<tgon::utility::TFunctionTraits<decltype(function)>::FunctionTy>::MakeDelegate<tgon::utility::TFunctionTraits<decltype(function)>::ClassTy, function>(instance)
 
 namespace tgon {
 namespace object {
@@ -64,8 +64,7 @@ public:
     constexpr TDelegate(void* receiver, StubTy stub) noexcept;
     constexpr TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept;
     template <typename FunctionTy>
-    TDelegate(FunctionTy&&);
-    
+    TDelegate(FunctionTy&& function);
     TDelegate(const TDelegate& rhs);
     constexpr TDelegate(TDelegate&&) noexcept;
     ~TDelegate();
@@ -86,7 +85,7 @@ public:
  */
 public:
     template <typename FunctionTy>
-    static TDelegate MakeDelegate(FunctionTy&&);
+    static TDelegate MakeDelegate(FunctionTy&& function);
 
     template <ReturnTy(*Handler)(Args...)>
     static TDelegate MakeDelegate() noexcept;
@@ -108,22 +107,22 @@ public:
  */
 private:
     template <typename FunctionTy>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
     
     template <ReturnTy(*Handler)(Args...)>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
     
     template <typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...)>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
     
     template <typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) const>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
     
     template <typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) volatile>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
     
     template <typename ClassTy, ReturnTy(ClassTy::*Handler)(Args...) const volatile>
-    static ReturnTy MakeStub(void* receiver, Args... args);
+    static ReturnTy MakeStub(void* receiver, Args&&... args);
 
     /**
      * @brief               The function deletes stored function in m_ptr
@@ -182,9 +181,9 @@ constexpr TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub, D
 
 template <typename ReturnTy, typename... Args>
 template <typename FunctionTy>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(FunctionTy&& func)
+inline TDelegate<ReturnTy(Args...)>::TDelegate(FunctionTy&& function)
 {
-    *this = MakeDelegate(func);
+    *this = MakeDelegate(function);
 }
 
 template<typename ReturnTy, typename... Args>
@@ -303,12 +302,12 @@ inline ReturnTy TDelegate<ReturnTy(Args...)>::operator()(Args&&... args) const
 
 template<typename ReturnTy, typename... Args>
 template<typename FunctionTy>
-inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy&& func)
+inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy&& function)
 {
     using DecayFunctionTy = std::decay_t<FunctionTy>;
 
     void* ptr = operator new(sizeof(FunctionTy));
-    new (ptr) DecayFunctionTy(std::forward<FunctionTy>(func));
+    new (ptr) DecayFunctionTy(std::forward<FunctionTy>(function));
     
     return TDelegate(ptr, &MakeStub<DecayFunctionTy>, &MakeDeleter<DecayFunctionTy>);
 }
@@ -350,44 +349,44 @@ inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(C
 
 template<typename ReturnTy, typename... Args>
 template <typename FunctionTy>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
     return (*reinterpret_cast<FunctionTy*>(receiver))(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<ReturnTy(*Handler)(Args...)>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
     return Handler(args...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...)>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) const>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) volatile>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
     return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) const volatile>
-inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args... args)
+inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
-    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
+    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
