@@ -53,7 +53,7 @@ template <typename ReturnTy, typename... Args>
 class TDelegate<ReturnTy(Args...)> final
 {
     using Deleter = std::size_t(*)(void*);
-    using StubTy = ReturnTy(*)(void*, Args...);
+    using StubTy = ReturnTy(*)(void*, Args&&...);
 
 /**
  * @section Ctor/Dtor
@@ -85,7 +85,7 @@ public:
  */
 public:
     template <typename FunctionTy>
-    static TDelegate MakeDelegate(FunctionTy&& function);
+    static TDelegate MakeDelegate(FunctionTy function);
 
     template <ReturnTy(*Handler)(Args...)>
     static TDelegate MakeDelegate() noexcept;
@@ -302,7 +302,7 @@ inline ReturnTy TDelegate<ReturnTy(Args...)>::operator()(Args&&... args) const
 
 template<typename ReturnTy, typename... Args>
 template<typename FunctionTy>
-inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy&& function)
+inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy function)
 {
     using DecayFunctionTy = std::decay_t<FunctionTy>;
 
@@ -358,28 +358,28 @@ template<typename ReturnTy, typename... Args>
 template<ReturnTy(*Handler)(Args...)>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
-    return Handler(args...);
+    return Handler(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...)>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
-    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
+    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) const>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
-    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
+    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
 template<typename ClassTy, ReturnTy(ClassTy::* Handler)(Args...) volatile>
 inline ReturnTy TDelegate<ReturnTy(Args...)>::MakeStub(void* receiver, Args&&... args)
 {
-    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(args...);
+    return (reinterpret_cast<ClassTy*>(receiver)->*Handler)(std::forward<Args>(args)...);
 }
 
 template<typename ReturnTy, typename... Args>
