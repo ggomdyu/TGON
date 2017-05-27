@@ -1,7 +1,7 @@
 /**
  * @filename    Hash.h
- * @author   ggomdyu
- * since    03/04/2017
+ * @author      ggomdyu
+ * @since       03/04/2017
  */
 
 #pragma once

@@ -10,10 +10,8 @@
 namespace tgon {
 namespace platform {
 
-enum class YesNoPopupEvent;
-
 using OkPopupEventHandler = object::TDelegate<void()>;
-using YesNoPopupEventHandler = object::TDelegate<void(YesNoPopupEvent)>;
+using YesNoPopupEventHandler = object::TDelegate<void(enum class YesNoPopupEvent)>;
 
 } /* namespace platform */
 } /* namespace tgon */

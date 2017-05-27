@@ -11,14 +11,14 @@
 namespace tgon {
 namespace platform {
 
-enum class MouseType
+enum class TMouseType
 {
 	Left,
 	Middle,
 	Right,
 };
 
-struct WindowStyle
+struct TWindowStyle
 {
 public:
 	std::string caption = u8"Hello World!";
@@ -28,8 +28,7 @@ public:
 	std::size_t width = 500;
 	std::size_t height = 500;
 
-	bool popup = false;
-	bool fullScreen = false;
+	bool enableFullScreen = false;
 	bool supportWindowTransparency = false;
 	bool supportPerPixelTransparency = false;
 	bool resizeable = true;
@@ -37,7 +36,7 @@ public:
     bool maximized = false;
 	bool minimized = false;
     bool showMiddle = true;
-    bool showImmediately = true;
+    bool setFocusOnCreated = true;
 };
 
 } /* namespace platform */

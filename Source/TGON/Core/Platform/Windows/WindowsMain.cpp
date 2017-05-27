@@ -16,32 +16,30 @@
 // Use common control v6.0
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-namespace
-{
+using namespace tgon::platform;
 
-LRESULT CALLBACK OnWindowMessageHandled(HWND wndHandle, UINT wndMsg, WPARAM wParam, LPARAM lParam)
-{
-    auto extraMemAsWindow = reinterpret_cast<tgon::platform::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
-    if (extraMemAsWindow)
-    {
-        return extraMemAsWindow->OnHandleMessage(wndHandle, wndMsg, wParam, lParam);
-    }
-        
-    return DefWindowProc(wndHandle, wndMsg, wParam, lParam);
-}
+namespace {
 
 bool RegisterWindowClass()
 {
-    WNDCLASSEXW wcex{};
-
+    WNDCLASSEXW wcex {};
     wcex.cbSize = sizeof(wcex);
     wcex.lpszClassName = L"TGON";
     wcex.style = CS_DBLCLKS;
-    wcex.hbrBackground = static_cast<HBRUSH>(GetStockObject(WHITE_BRUSH));
-    wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-    wcex.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
-    wcex.hInstance = tgon::platform::windows::GetInstanceHandle();
-    wcex.lpfnWndProc = OnWindowMessageHandled;
+    wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
+    wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
+    wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
+    wcex.hInstance = windows::GetInstanceHandle();
+	wcex.lpfnWndProc = [](HWND wndHandle, UINT wndMsg, WPARAM wParam, LPARAM lParam)
+	{
+		auto extraMemAsWindow = reinterpret_cast<windows::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+		if (extraMemAsWindow)
+		{
+			return extraMemAsWindow->OnHandleMessage(wndHandle, wndMsg, wParam, lParam);
+		}
+
+		return DefWindowProc(wndHandle, wndMsg, wParam, lParam);
+	};
 
     return RegisterClassExW(&wcex) != 0;
 }
@@ -54,7 +52,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    tgon::platform::windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
+	windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
 
 	// TODO: Insert mini-dump setting code here
     RegisterWindowClass();

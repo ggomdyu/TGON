@@ -1,7 +1,7 @@
 /**
  * @filename    GraphicsModule.h
- * @author   ggomdyu
- * since    04/03/2017
+ * @author      ggomdyu
+ * @since       04/03/2017
  */
 
 #pragma once

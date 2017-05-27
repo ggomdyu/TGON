@@ -6,7 +6,6 @@
 
 #pragma once
 #include "../Generic/GenericApplication.h"
-
 #include "WindowsApplicationType.h"
 
 namespace tgon {

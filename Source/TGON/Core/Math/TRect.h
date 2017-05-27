@@ -6,13 +6,20 @@
 
 #pragma once
 #include <type_traits>
-#include <cassert>
+#include <cstdint>
+#include <string>
+
+#include "Core/Utility/TTypeTraits.h"
 
 namespace tgon {
 namespace math {
 
+template <typename Ty,
+          typename = utility::EnableIfArithmetic<Ty>>
+struct TRect;
+
 template <typename Ty>
-struct TRect
+struct TRect<Ty>
 {
 private:
     using DevideTy = std::conditional_t<std::is_floating_point<Ty>::value, Ty, float>;
@@ -45,6 +52,29 @@ public:
     constexpr bool operator!=(const TRect&) const noexcept;
 
 /**
+ * @section Public command method
+ */
+public:
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @return                      The length of string converted.
+     */
+    template <std::size_t N>
+    int32_t ToString(char(&destBuffer)[N]) const;
+
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [in] bufferSize       The size of destBuffer.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    
+    /* @return  The string converted. */
+    std::string ToString() const;
+
+/**
  * @section Public variables
  */
 public:
@@ -64,7 +94,7 @@ constexpr TRect<Ty> MakeRect(Ty bottom, Ty top, Ty width, Ty height) noexcept
     return {bottom, top, width, height};
 }
 
-using TIntRect = TRect<int>;
+using TIntRect = TRect<int32_t>;
 using TFloatRect = TRect<float>;
 using TDoubleRect = TRect<double>;
 
@@ -107,8 +137,6 @@ constexpr const TRect<Ty> TRect<Ty>::operator*(Ty rhs) const noexcept
 template <typename Ty>
 constexpr const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
 {
-    assert(rhs != Ty(0) && "TRect elements can't be divided by zero.");
-
     DevideTy inverse = 1.0f / rhs;
 
     return TRect((Ty)((DevideTy)bottom * inverse), 
@@ -165,8 +193,6 @@ inline TRect<Ty>& TRect<Ty>::operator*=(Ty rhs) noexcept
 template <typename Ty>
 inline TRect<Ty>& TRect<Ty>::operator/=(DevideTy rhs)
 {
-    assert(rhs != (Ty)0 && "TRect elements can't be divided by zero.");
-
 	DevideTy inverse = 1.0f / rhs;
 
     bottom = (Ty)((DevideTy)bottom * inverse);
@@ -187,6 +213,36 @@ template <typename Ty>
 constexpr bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
 {
     return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
+}
+
+template<typename Ty>
+template<std::size_t N>
+inline int32_t TRect<Ty>::ToString(char(&destBuffer)[N]) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, "%d %d %d %d", bottom, top, width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
+#endif
+}
+
+template<typename Ty>
+inline int32_t TRect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
+#endif
+}
+
+template<typename Ty>
+inline std::string TRect<Ty>::ToString() const
+{
+    char buffer[128]{};
+    this->ToString(buffer);
+
+    return buffer;
 }
 
 } /* namespace math */

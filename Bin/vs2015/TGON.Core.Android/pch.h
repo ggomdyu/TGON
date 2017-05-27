@@ -1,10 +1,10 @@
 //
 // pch.h
-// 표준 시스템 포함 파일의 헤더입니다.
+// Header for standard system include files.
 //
-// 빌드 시스템에서 미리 컴파일된 헤더를 생성할 때 사용합니다.
-// pch.cpp가 필요하지 않으며, pch.h는 프로젝트의 일부인 모든 cpp 파일에
-// 자동으로 포함됩니다.
+// Used by the build system to generate the precompiled header. Note that no
+// pch.cpp is needed and the pch.h is automatically included in all cpp files
+// that are part of the project
 //
 
 #include <jni.h>

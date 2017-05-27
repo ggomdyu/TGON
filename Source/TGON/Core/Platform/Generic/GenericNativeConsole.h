@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Platform/TConfig.h"
+#include "Core/Platform/TSuffix.h"
 
 namespace tgon {
 namespace platform {

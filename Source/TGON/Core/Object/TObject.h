@@ -8,8 +8,8 @@
 #include <cstdint>
 #include <string>
 
-#include "Core/Platform/TConfig.h"
 #include "TTypeInfo.h"
+#include "Core/Platform/TConfig.h"
 
 namespace tgon {
 namespace object {
@@ -33,10 +33,10 @@ public:
 public:
     virtual std::shared_ptr<TObject> Clone() const;
 
-    template <typename CastTy>
-    bool CastTo() noexcept;
+    template <typename CastToTy>
+    CastToTy* CastTo() noexcept;
 
-    template <typename CastTy>
+    template <typename CastToTy>
     bool IsCastable() noexcept;
 
 /**
@@ -47,27 +47,27 @@ public:
 	virtual std::size_t GetHashCode() const noexcept = 0;
 	
     /* @return	The type name */
-    virtual const std::string& GetName() const noexcept = 0;
+    virtual const std::string& GetTypeName() const noexcept = 0;
 };
 
-template<typename CastTy>
+template<typename CastToTy>
 inline bool TObject::IsCastable() noexcept
 {
 #if TGON_RTTI_ENABLED
     // ToDo : Implement RTTI
     while()
 #else
-    return dynamic_cast<CastTy>(this);
+    return dynamic_cast<CastToTy>(this);
 #endif
 }
 
-template<typename CastTy>
-inline bool TObject::CastTo() noexcept
+template<typename CastToTy>
+inline CastToTy* TObject::CastTo() noexcept
 {
 #if TGON_RTTI_ENABLED
     // ToDo : Implement RTTI
 #else
-    return dynamic_cast<CastTy>(this);
+    return dynamic_cast<CastToTy>(this);
 #endif
 }
 
@@ -82,9 +82,9 @@ inline bool TObject::CastTo() noexcept
 	{\
 		return classType::GetTypeInfo().GetHashCode();\
 	}\
-	virtual const std::string& GetName() const noexcept override\
+	virtual const std::string& GetTypeName() const noexcept override\
     {\
-        return classType::GetTypeInfo().GetName();\
+        return classType::GetTypeInfo().GetTypeName();\
     }\
     static const object::TTypeInfo& GetTypeInfo() noexcept\
     {\

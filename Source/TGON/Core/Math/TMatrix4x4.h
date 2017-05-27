@@ -23,7 +23,7 @@ struct TGON_API TMatrix4x4
  * @section Ctor/Dtor
  */ 
 public:
-    /* @brief   Constructor that initializes members to 0 */
+    /* @brief   Constructor that initializes to Identity matrix */
     TMatrix4x4();
 
     /* @brief   Constructor that initializes the member with the specified value */

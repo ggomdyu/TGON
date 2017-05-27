@@ -64,7 +64,7 @@ public:
     constexpr TDelegate(void* receiver, StubTy stub) noexcept;
     constexpr TDelegate(void* receiver, StubTy stub, Deleter deleter) noexcept;
     template <typename FunctionTy>
-    TDelegate(FunctionTy&& function);
+    TDelegate(FunctionTy function);
     TDelegate(const TDelegate& rhs);
     constexpr TDelegate(TDelegate&&) noexcept;
     ~TDelegate();
@@ -77,7 +77,6 @@ public:
     TDelegate& operator=(TDelegate&&);
     constexpr bool operator==(std::nullptr_t) const noexcept;
     constexpr bool operator!=(std::nullptr_t) const noexcept;
-
     ReturnTy operator()(Args&&...) const;
 
 /**
@@ -181,9 +180,12 @@ constexpr TDelegate<ReturnTy(Args...)>::TDelegate(void* receiver, StubTy stub, D
 
 template <typename ReturnTy, typename... Args>
 template <typename FunctionTy>
-inline TDelegate<ReturnTy(Args...)>::TDelegate(FunctionTy&& function)
+inline TDelegate<ReturnTy(Args...)>::TDelegate(FunctionTy function) :
+	m_ptr(operator new(sizeof(FunctionTy))),
+	m_stub(&MakeStub<std::decay_t<FunctionTy>>),
+	m_deleter(&MakeDeleter<std::decay_t<FunctionTy>>)
 {
-    *this = MakeDelegate(function);
+	new (m_ptr) std::decay_t<FunctionTy>(function);
 }
 
 template<typename ReturnTy, typename... Args>
@@ -304,12 +306,7 @@ template<typename ReturnTy, typename... Args>
 template<typename FunctionTy>
 inline TDelegate<ReturnTy(Args...)> TDelegate<ReturnTy(Args...)>::MakeDelegate(FunctionTy function)
 {
-    using DecayFunctionTy = std::decay_t<FunctionTy>;
-
-    void* ptr = operator new(sizeof(FunctionTy));
-    new (ptr) DecayFunctionTy(std::forward<FunctionTy>(function));
-    
-    return TDelegate(ptr, &MakeStub<DecayFunctionTy>, &MakeDeleter<DecayFunctionTy>);
+    return TDelegate(function);
 }
 
 template<typename ReturnTy, typename... Args>

@@ -9,26 +9,14 @@
 namespace tgon {
 namespace platform {
 
-std::size_t GetOSExecutionTime()
+uint32_t GetOSExecutionTime()
 {
     return GetTickCount();
 }
 
-LocalTime GetLocalTime()
+uint64_t GetOSExecutionTime64()
 {
-    SYSTEMTIME prevSysTime;
-    ::GetLocalTime(&prevSysTime);
-    
-    LocalTime sysTime;
-    sysTime.month = prevSysTime.wMonth;
-    sysTime.day = prevSysTime.wDay;
-    sysTime.year = prevSysTime.wYear;
-    sysTime.dayOfWeek = static_cast<DayOfWeek>(prevSysTime.wDayOfWeek);
-    sysTime.hour = prevSysTime.wHour;
-    sysTime.minute = prevSysTime.wMinute;
-    sysTime.second = prevSysTime.wSecond;
-    
-    return sysTime;
+    return GetTickCount64();
 }
 
 } /* namespace platform */

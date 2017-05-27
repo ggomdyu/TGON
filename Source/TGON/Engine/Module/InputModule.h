@@ -1,7 +1,7 @@
 /**
  * @filename    InputModule.h
- * @author   ggomdyu
- * since    07/24/2016
+ * @author      ggomdyu
+ * @since       07/24/2016
  */
 
 #pragma once
@@ -57,7 +57,7 @@ public:
 	 * @param [in] inputAcceptWindow    The window which you want to receive input message
 	 * @param [in] supportInputBits     Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
 	 */
-    InputModule(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
+    InputModule(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
     virtual ~InputModule();
 
 /**
@@ -202,7 +202,7 @@ private:
 		Internal works
 	*/
 private:
-    void InitializeInputManager(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
+    void InitializeInputManager(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
 
     void SetupInputDevice(uint32_t supportInputFlag);
 

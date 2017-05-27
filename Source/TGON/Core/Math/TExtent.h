@@ -5,17 +5,21 @@
  */
 
 #pragma once
-#include "Core/Platform/TConfig.h"
-
 #include <type_traits>
-#include <cassert>
 #include <cstdint>
+#include <string>
+
+#include "Core/Utility/TTypeTraits.h"
 
 namespace tgon {
 namespace math {
 
+template <typename Ty,
+          typename = utility::EnableIfArithmetic<Ty>>
+struct TExtent2D;
+
 template <typename Ty>
-struct TExtent
+struct TExtent2D<Ty>
 {
 private:
     using DevideTy = std::conditional_t<std::is_floating_point<Ty>::value, Ty, float>;
@@ -25,27 +29,53 @@ private:
  */
 public:
     /* @brief   Constructor that initializes members to 0 */
-    constexpr TExtent() noexcept;
+    constexpr TExtent2D() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr TExtent(Ty width, Ty height) noexcept;
+    constexpr TExtent2D(Ty width, Ty height) noexcept;
 
 /**
  * @section Operator
  */
 public:
-    constexpr const TExtent operator+(const TExtent&) const noexcept;
-    constexpr const TExtent operator-(const TExtent&) const noexcept;
-    constexpr const TExtent operator*(Ty) const noexcept;
-    constexpr const TExtent operator/(DevideTy) const;
-    constexpr const TExtent operator+() const noexcept;
-    constexpr const TExtent operator-() const noexcept;
-    TExtent& operator+=(const TExtent&) noexcept;
-    TExtent& operator-=(const TExtent&) noexcept;
-    TExtent& operator*=(Ty) noexcept;
-    TExtent& operator/=(DevideTy);
-    constexpr bool operator==(const TExtent&) const noexcept;
-    constexpr bool operator!=(const TExtent&) const noexcept;
+    constexpr const TExtent2D operator+(const TExtent2D&) const noexcept;
+    constexpr const TExtent2D operator-(const TExtent2D&) const noexcept;
+    constexpr const TExtent2D operator*(Ty) const noexcept;
+    constexpr const TExtent2D operator/(DevideTy) const;
+    constexpr const TExtent2D operator+() const noexcept;
+    constexpr const TExtent2D operator-() const noexcept;
+    TExtent2D& operator+=(const TExtent2D&) noexcept;
+    TExtent2D& operator-=(const TExtent2D&) noexcept;
+    TExtent2D& operator*=(Ty) noexcept;
+    TExtent2D& operator/=(DevideTy);
+    constexpr bool operator==(const TExtent2D&) const noexcept;
+    constexpr bool operator!=(const TExtent2D&) const noexcept;
+
+    template <typename CastToTy>
+    constexpr operator TExtent2D<CastToTy>() const noexcept;
+
+/**
+ * @section Public command method
+ */
+public:
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @return                      The length of string converted.
+     */
+    template <std::size_t N>
+    int32_t ToString(char(&destBuffer)[N]) const;
+
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [in] bufferSize       The size of destBuffer.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    
+    /* @return  The string converted. */
+    std::string ToString() const;
 
 /**
  * @section Public variables
@@ -54,76 +84,74 @@ public:
     Ty width;
     Ty height;
 
-	static const TExtent One;		// 1, 1
-	static const TExtent Zero;	    // 0, 0
-	static const TExtent MinusOne;	// -1, -1
+	static const TExtent2D One;		// 1, 1
+	static const TExtent2D Zero;	    // 0, 0
+	static const TExtent2D MinusOne;	// -1, -1
 };
 
 template <typename Ty>
-constexpr TExtent<Ty> MakeExtent(Ty width, Ty height) noexcept
+constexpr TExtent2D<Ty> MakeExtent(Ty width, Ty height) noexcept
 {
     return {width, height};
 }
 
-using TIntExtent = TExtent<int>;
-using TFloatExtent = TExtent<float>;
-using TDoubleExtent = TExtent<double>;
+using TIntExtent2D = TExtent2D<int32_t>;
+using TFloatExtent2D = TExtent2D<float>;
+using TDoubleExtent2D = TExtent2D<double>;
 
-template <typename Ty>
-constexpr TExtent<Ty>::TExtent() noexcept :
+template<typename Ty>
+constexpr TExtent2D<Ty>::TExtent2D() noexcept :
     width{},
     height{}
 {
 }
 
 template <typename Ty>
-constexpr TExtent<Ty>::TExtent(Ty _width, Ty _height) noexcept :
-    width(_width),
-    height(_height)
+constexpr TExtent2D<Ty>::TExtent2D(Ty width, Ty height) noexcept :
+    width(width),
+    height(height)
 {
 }
 
 template<typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator+(const TExtent& rhs) const noexcept
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator+(const TExtent2D& rhs) const noexcept
 {
     return TExtent(width + rhs.width, height + rhs.height);
 }
 
 template <typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator-(const TExtent& rhs) const noexcept
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator-(const TExtent2D& rhs) const noexcept
 {
     return TExtent(width - rhs.width, height - rhs.height);
 }
 
 template <typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator*(Ty rhs) const noexcept
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator*(Ty rhs) const noexcept
 {
     return TExtent(width * rhs, height * rhs);
 }
 
 template <typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator/(DevideTy rhs) const
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator/(DevideTy rhs) const
 {
-    assert(rhs != Ty(0) && "TExtent elements can't be divided by zero.");
-
     return TExtent((Ty)((DevideTy)width / (DevideTy)rhs),
                   (Ty)((DevideTy)height / (DevideTy)rhs));
 }
 
 template <typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator+() const noexcept
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-constexpr const TExtent<Ty> TExtent<Ty>::operator-() const noexcept
+constexpr const TExtent2D<Ty> TExtent2D<Ty>::operator-() const noexcept
 {
 	return TExtent(-width, -height);
 }
 
 template <typename Ty>
-inline TExtent<Ty>& TExtent<Ty>::operator+=(const TExtent& rhs) noexcept
+inline TExtent2D<Ty>& TExtent2D<Ty>::operator+=(const TExtent2D& rhs) noexcept
 {
     width += rhs.width;
     height += rhs.height;
@@ -132,7 +160,7 @@ inline TExtent<Ty>& TExtent<Ty>::operator+=(const TExtent& rhs) noexcept
 }
 
 template <typename Ty>
-inline TExtent<Ty>& TExtent<Ty>::operator-=(const TExtent& rhs) noexcept
+inline TExtent2D<Ty>& TExtent2D<Ty>::operator-=(const TExtent2D& rhs) noexcept
 {
     width -= rhs.width;
     height -= rhs.height;
@@ -141,7 +169,7 @@ inline TExtent<Ty>& TExtent<Ty>::operator-=(const TExtent& rhs) noexcept
 }
 
 template <typename Ty>
-inline TExtent<Ty>& TExtent<Ty>::operator*=(Ty rhs) noexcept
+inline TExtent2D<Ty>& TExtent2D<Ty>::operator*=(Ty rhs) noexcept
 {
     width *= rhs;
     height *= rhs;
@@ -150,10 +178,8 @@ inline TExtent<Ty>& TExtent<Ty>::operator*=(Ty rhs) noexcept
 }
 
 template <typename Ty>
-inline TExtent<Ty>& TExtent<Ty>::operator/=(DevideTy rhs)
+inline TExtent2D<Ty>& TExtent2D<Ty>::operator/=(DevideTy rhs)
 {
-    assert(rhs != (Ty)0 && "TExtent elements can't be divided by zero.");
-
     width = (Ty)((DevideTy)width / rhs);
     height = (Ty)((DevideTy)height / rhs);
 
@@ -161,15 +187,52 @@ inline TExtent<Ty>& TExtent<Ty>::operator/=(DevideTy rhs)
 }
 
 template <typename Ty>
-inline constexpr bool TExtent<Ty>::operator==(const TExtent& rhs) const noexcept
+inline constexpr bool TExtent2D<Ty>::operator==(const TExtent2D& rhs) const noexcept
 {
 	return (width == rhs.width && height == rhs.height);
 }
 
 template <typename Ty>
-inline constexpr bool TExtent<Ty>::operator!=(const TExtent& rhs) const noexcept
+inline constexpr bool TExtent2D<Ty>::operator!=(const TExtent2D& rhs) const noexcept
 {
     return (width != rhs.width || height != rhs.height);
+}
+
+template<typename Ty>
+template<typename CastToTy>
+constexpr TExtent2D<Ty>::operator TExtent2D<CastToTy>() const noexcept
+{
+    return TExtent2D<CastToTy>((CastToTy)width, (CastToTy)height);
+}
+
+template<typename Ty>
+template<std::size_t N>
+inline int32_t TExtent2D<Ty>::ToString(char(&destBuffer)[N]) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, "%d %d", width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
+#endif
+}
+
+template<typename Ty>
+inline int32_t TExtent2D<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
+#endif
+}
+
+template<typename Ty>
+inline std::string TExtent2D<Ty>::ToString() const
+{
+    char buffer[128]{};
+    this->ToString(buffer);
+
+    return buffer;
 }
 
 } /* namespace math */

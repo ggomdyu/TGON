@@ -16,9 +16,6 @@
     <Filter Include="Sources\Core\Platform">
       <UniqueIdentifier>{a69add80-f4d6-44d5-8180-bd4a49c68348}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Template">
-      <UniqueIdentifier>{074372cb-1c29-42e0-a004-a75e48a44d89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\XML">
       <UniqueIdentifier>{d92b6582-fc44-4cc1-b655-6e0c6a962fa8}</UniqueIdentifier>
     </Filter>
@@ -40,18 +37,6 @@
     <Filter Include="Sources\Engine\Typedef">
       <UniqueIdentifier>{cdb7b4da-691a-4aec-8646-325056c13fab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\RenderCore">
-      <UniqueIdentifier>{e6c9b88f-63cb-40c6-a7f7-add22d9894c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\RenderCore\Device">
-      <UniqueIdentifier>{247019ef-c770-4f3d-9cb4-bfeaf4202791}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\RenderCore\Device\Private">
-      <UniqueIdentifier>{a616939c-58f1-40f4-88a1-63715df37083}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\RenderCore\Device\Private\Interface">
-      <UniqueIdentifier>{058628d4-c591-4c32-8fe8-ed07f3d0e414}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\String">
       <UniqueIdentifier>{763b9ef7-894d-47e8-b509-dc2221127fde}</UniqueIdentifier>
     </Filter>
@@ -60,6 +45,15 @@
     </Filter>
     <Filter Include="Sources\Core\Platform\Generic">
       <UniqueIdentifier>{4463e7ed-c778-490a-a377-4aceeee0e6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Random">
+      <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Utility">
+      <UniqueIdentifier>{074372cb-1c29-42e0-a004-a75e48a44d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PrecompiledHeader">
+      <UniqueIdentifier>{432b783f-6dd9-4989-a43f-5db92a23a2fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +84,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.cpp">
       <Filter>Sources\Core\Hash</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TRandom.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TTypeInfo.cpp">
       <Filter>Sources\Core\Object</Filter>
     </ClCompile>
@@ -111,30 +102,29 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
       <Filter>Sources\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.cpp">
-      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.cpp">
-      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.cpp">
       <Filter>Sources\Engine\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.cpp" />
-    <ClCompile Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.cpp">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.cpp">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.cpp">
-      <Filter>Sources\Core\Platform\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\TEncoding.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TEncoding.cpp">
       <Filter>Sources\Core\String</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\TTime.cpp">
-      <Filter>Sources\Core\Platform</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELLRNG.cpp">
+      <Filter>Sources\Core\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTimeType.cpp">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.cpp">
+      <Filter>Sources\Core\Platform\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.cpp">
+      <Filter>Sources\PrecompiledHeader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,13 +161,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
       <Filter>Sources\Core\Hash</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TApplication.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TConsole.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TScreen.h">
       <Filter>Sources\Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TTime.h">
@@ -185,12 +169,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TWindow.h">
       <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Template\TFunctionTraits.h">
-      <Filter>Sources\Core\Template</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TRandom.h">
-      <Filter>Sources\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TTypeInfo.h">
       <Filter>Sources\Core\Object</Filter>
@@ -210,88 +188,103 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Template\TCast.h">
-      <Filter>Sources\Core\Template</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Template\TArray.h">
-      <Filter>Sources\Core\Template</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Template\TEnumerator.h">
-      <Filter>Sources\Core\Template</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TRect.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TPoint.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsInstance.h">
-      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\Private\Interface\IGraphicsDevice.h">
-      <Filter>Sources\RenderCore\Device\Private\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\GraphicsModule.h">
       <Filter>Sources\Engine\Module</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsDevice.h">
-      <Filter>Sources\RenderCore\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\RenderCore\Device\TGraphicsInstance.h">
-      <Filter>Sources\RenderCore\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\File\FileSystem.h">
-      <Filter>Sources\Core\File</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowType.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericApplicationType.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericCensor.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplicationType.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericConsole.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericCensor.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericScreen.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericNativeConsole.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericScreen.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.h">
       <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Object\TDelegate.h">
-      <Filter>Sources\Core\Object</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTimeType.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Object\TDelegateChain.h">
-      <Filter>Sources\Core\Object</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.h">
+      <Filter>Sources\Core\Platform\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\TEncoding.h">
-      <Filter>Sources\Core\String</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\TConfig.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TApplication.h">
       <Filter>Sources\Core\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Math\TExtent.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TArray.h">
+      <Filter>Sources\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TColor.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Math\TColor.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TDelegateChain.h">
+      <Filter>Sources\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TDelegate.h">
+      <Filter>Sources\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TExtent.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\TFixedStringUtility.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TEncoding.h">
       <Filter>Sources\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\TFixedString.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TFixedStringUtility.h">
       <Filter>Sources\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ggomd\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Generic\GenericTimeType.h">
-      <Filter>Sources\Core\Platform\Generic</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TFixedString.h">
+      <Filter>Sources\Core\String</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\TRandom.h">
+      <Filter>Sources\Core\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELLRNG.h">
+      <Filter>Sources\Core\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TScreen.h">
+      <Filter>Sources\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TConfig.h">
+      <Filter>Sources\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TEnumerator.h">
+      <Filter>Sources\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Sources\PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TAutoCast.h">
+      <Filter>Sources\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\TFileSystem.h">
+      <Filter>Sources\Core\File</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\TPath.h">
+      <Filter>Sources\Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TPreprocessor.h">
+      <Filter>Sources\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TTypeTraits.h">
+      <Filter>Sources\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TSuffix.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">

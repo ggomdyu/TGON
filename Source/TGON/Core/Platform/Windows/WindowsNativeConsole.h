@@ -36,7 +36,7 @@ public:
  * @section Get method
  */
 public:
-    static WindowsNativeConsole* Get();
+    static WindowsNativeConsole* Get() noexcept;
 };
 
 using TNativeConsole = WindowsNativeConsole;

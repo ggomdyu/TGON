@@ -7,13 +7,13 @@ namespace tgon
 {
 
 TimeModule::TimeModule() :
-    m_oldTime(time::GetProcessExecutionTime())
+    m_oldTime(platform::GetProcessExecutionTime())
 {
 }
 
 void TimeModule::Update()
 {
-    std::size_t currTime = time::GetProcessExecutionTime();
+    std::size_t currTime = platform::GetProcessExecutionTime();
 
     m_elapsedTime = static_cast<float>(currTime - m_oldTime) * 0.001f;
     m_oldTime = currTime;

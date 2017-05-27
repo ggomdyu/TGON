@@ -143,7 +143,7 @@ TMatrix4x4 TMatrix4x4::Viewport(float x, float y, float width, float height, flo
 
 TMatrix4x4 TMatrix4x4::Transpose(const TMatrix4x4& rhs)
 {
-    return{
+    return {
         rhs._00, rhs._10, rhs._20, rhs._30,
         rhs._01, rhs._11, rhs._21, rhs._31,
         rhs._02, rhs._12, rhs._22, rhs._32,

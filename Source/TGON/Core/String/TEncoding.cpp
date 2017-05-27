@@ -1,10 +1,10 @@
 ﻿#include "PrecompiledHeader.h"
 #include "TEncoding.h"
 
-namespace tgon
-{
+namespace tgon {
+namespace string {
 
-bool TEncoding::Convert(UTF8, UTF16LE, const char* src, char* dest)
+TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest)
 {
     enum BitTable
     {
@@ -19,39 +19,43 @@ bool TEncoding::Convert(UTF8, UTF16LE, const char* src, char* dest)
     std::size_t destIndex = 0;
     char16_t* castedDest = reinterpret_cast<char16_t*>(dest);
 
-    for (std::size_t i = 0; src[i] != '\0'; ++i)
+    std::size_t i = 0;
+    while (src[i] != u8'\0')
     {
-        // 000000 ~ 00007F: America
+        // 000000 ~ 00007F: ASCII compatible area
         if ((src[i] & _10000000) == _00000000)
         {
             castedDest[destIndex++] = src[i];
+            ++i;
         }
-        // 000080 ~ 0007FF: Europe
-        else if ((src[i] & _11100000) == _11000000 && 
-                 (src[i + 1] & _11000000) == _10000000)
+        // 000080 ~ 0007FF: European
+        else if ((src[i] & _11100000) == _11000000 &&
+                (src[i + 1] & _11000000) == _10000000)
         {
-            castedDest[destIndex++] = ((src[i] & _00011111) << 6) + 
+            castedDest[destIndex++] = ((src[i] & _00011111) << 6) +
                                       (src[i + 1] & _00111111);
-            i += 1;
-        }
-        // 000800 ~ 00FFFF: Asia
-        else if ((src[i] & _11100000) == _11100000 && 
-                 (src[i + 1] & _11000000) == _10000000 && 
-                 (src[i + 2] & _11000000) == _10000000)
-        {
-            castedDest[destIndex++] = (src[i] << 12) + 
-                                      ((src[i + 1] & _00111111) << 6) + 
-                                      (src[i + 2] & _00111111);
             i += 2;
+        }
+        // 000800 ~ 00FFFF: Asian
+        else if ((src[i] & _11100000) == _11100000 &&
+                (src[i + 1] & _11000000) == _10000000 &&
+                (src[i + 2] & _11000000) == _10000000)
+        {
+            castedDest[destIndex++] = (src[i] << 12) +
+                                      ((src[i + 1] & _00111111) << 6) +
+                                      (src[i + 2] & _00111111);
+            i += 3;
         }
         else
         {
-            return false;
+            return -1;
         }
     }
 
-    castedDest[destIndex] = '\0';
-    return false;
+    castedDest[destIndex] = u8'\0';
+
+    return destIndex * sizeof(char16_t);
 }
 
-}
+} /* namespace string */
+} /* namespace tgon */

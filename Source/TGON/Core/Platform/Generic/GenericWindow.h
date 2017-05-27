@@ -9,11 +9,12 @@
 #include <string>
 #include <cstdint>
 
+#include "GenericWindowType.h"
+
 #include "Core/Platform/TConfig.h"
 #include "Core/Math/TPoint.h"
 #include "Core/Math/TExtent.h"
 #include "Core/Math/TRect.h"
-#include "GenericWindowType.h"
 
 namespace tgon {
 namespace platform {
@@ -32,11 +33,11 @@ public:
  */
 public:
     virtual void OnMove(const math::TIntPoint& position) {}
-    virtual void OnResizeExtent(const math::TIntExtent& extent) {}
+    virtual void OnResizeExtent(const math::TIntExtent2D& extent) {}
     virtual void OnMouseMove(const math::TIntPoint& position) {}
-    virtual void OnMouseDown(const math::TIntPoint& position, MouseType mouseType) {}
-    virtual void OnMouseUp(const math::TIntPoint& position, MouseType mouseType) {}
-    virtual void OnMouseDoubleClick(const math::TIntPoint& position, MouseType mouseType) {}
+    virtual void OnMouseDown(const math::TIntPoint& position, TMouseType mouseType) {}
+    virtual void OnMouseUp(const math::TIntPoint& position, TMouseType mouseType) {}
+    virtual void OnMouseDoubleClick(const math::TIntPoint& position, TMouseType mouseType) {}
     virtual void OnGetFocus() {}
     virtual void OnLoseFocus() {}
     virtual void OnDestroy() { m_isClosed = true; }
@@ -57,7 +58,7 @@ public:
  */
 public:
     virtual void SetPosition(const math::TIntPoint& position) = 0;
-    virtual void SetExtent(const math::TIntExtent& extent) = 0;
+    virtual void SetExtent(const math::TIntExtent2D& extent) = 0;
     virtual void SetCaption(const char* caption) = 0;
 
 /** 
@@ -65,9 +66,13 @@ public:
  */ 
 public:
     virtual const math::TIntPoint GetPosition() const = 0;
-    virtual const math::TIntExtent GetExtent() const = 0;
+    virtual const math::TIntExtent2D GetExtent() const = 0;
     virtual void GetCaptionText(char* caption) const = 0;
-
+    virtual bool HasCaption() const = 0;
+    virtual bool IsResizable() const = 0;
+    virtual bool IsTopMost() const = 0;
+    virtual bool IsMaximized() const = 0;
+    virtual bool IsMinimized() const = 0;
     bool IsClosed() const noexcept;
 
 /** 

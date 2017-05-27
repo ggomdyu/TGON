@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WindowStyle>
+<TWindowStyle>
 
     <Title>TGON_ModelJoy가나다라みみひ</Title>
     
@@ -30,4 +30,4 @@
         SupportPerPixelTransparency="0">
     </Function>
 
-</WindowStyle>
+</TWindowStyle>

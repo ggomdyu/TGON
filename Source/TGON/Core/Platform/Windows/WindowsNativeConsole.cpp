@@ -166,7 +166,7 @@ void WindowsNativeConsole::WriteLine(const wchar_t* format, ...)
 #endif
 }
 
-WindowsNativeConsole* WindowsNativeConsole::Get()
+WindowsNativeConsole* WindowsNativeConsole::Get() noexcept
 {
     static WindowsNativeConsole instance;
     return &instance;

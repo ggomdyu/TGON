@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-InputModule::InputModule(window::TWindow* inputAcceptTargets, uint32_t supportInputFlag) :
+InputModule::InputModule(platform::TWindow* inputAcceptTargets, uint32_t supportInputFlag) :
     m_inputManager(nullptr),
     m_keyboardDevice(nullptr),
     m_mouseDeivece(nullptr),
@@ -50,7 +50,7 @@ void InputModule::Update()
     //}
 }
 
-void InputModule::InitializeInputManager(window::TWindow* inputAcceptWindow, uint32_t supportInputFlag)
+void InputModule::InitializeInputManager(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag)
 {
     // OS dependent codes are here
     OIS::ParamList paramList;

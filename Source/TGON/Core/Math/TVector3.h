@@ -103,12 +103,12 @@ constexpr const TVector3 TVector3::operator-(const TVector3& rhs) const noexcept
 
 constexpr const TVector3 TVector3::operator*(const TVector3& rhs) const noexcept
 {
-    return TVector3(x*rhs.x, y*rhs.y, z*rhs.z);
+    return TVector3(x * rhs.x, y * rhs.y, z * rhs.z);
 }
 
-constexpr const TVector3 TVector3::operator*(float rhs) const noexcept
+constexpr const TVector3 TVector3::operator*(float scalar) const noexcept
 {
-    return TVector3(x*rhs, y*rhs, z*rhs);
+    return TVector3(x * scalar, y * scalar, z * scalar);
 }
 
 constexpr const TVector3 operator*(float lhs, const TVector3& rhs) noexcept
@@ -118,8 +118,6 @@ constexpr const TVector3 operator*(float lhs, const TVector3& rhs) noexcept
 
 inline const TVector3 TVector3::operator/(float value) const
 {
-    assert(value != 0.0f && "Vector elements can't be divided by zero.");
-
     float inverse = 1.0f / value;
     return TVector3(x * inverse, y * inverse, z * inverse);
 }
@@ -161,18 +159,18 @@ inline TVector3& TVector3::operator*=(const TVector3& rhs) noexcept
 	return *this;
 }
 
-inline TVector3& TVector3::operator*=(float rhs) noexcept
+inline TVector3& TVector3::operator*=(float scalar) noexcept
 {
-	x *= rhs;
-	y *= rhs;
-	z *= rhs;
+	x *= scalar;
+	y *= scalar;
+	z *= scalar;
 
 	return *this;
 }
 
-inline TVector3& TVector3::operator/=(float value)
+inline TVector3& TVector3::operator/=(float scalar)
 {
-	const float inverse = 1.0f / value;
+	float inverse = 1.0f / scalar;
 
 	x *= inverse;
 	y *= inverse;

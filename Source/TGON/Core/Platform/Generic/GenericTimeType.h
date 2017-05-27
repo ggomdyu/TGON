@@ -6,9 +6,13 @@
 
 #pragma once
 #include <cstdint>
+#include <ctime>
+#include <type_traits>
 
 namespace tgon {
 namespace platform {
+
+using UnixTimeTy = std::conditional_t<sizeof(time_t) == sizeof(uint64_t), uint64_t, uint32_t>;
 
 enum class DayOfWeek
 {
@@ -21,14 +25,16 @@ enum class DayOfWeek
     Saturday,
 };
 
-struct LocalTime
+struct DateTime
 {
-    std::size_t month;
-    std::size_t day;
-    std::size_t year;
-    std::size_t hour;
-    std::size_t minute;
-    std::size_t second;
+    DateTime(const std::tm& rawTime) noexcept;
+    
+    uint16_t month;
+    uint16_t day;
+    uint16_t year;
+    uint16_t hour;
+    uint16_t minute;
+    uint16_t second;
     DayOfWeek dayOfWeek;
 };
 

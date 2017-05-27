@@ -4,7 +4,7 @@
 namespace tgon
 {
 
-GameApplication::GameApplication(const std::shared_ptr<window::TWindow>& window) :
+GameApplication::GameApplication(const std::shared_ptr<platform::TWindow>& window) :
 	m_paused(false),
 	m_rootWindow(window)
 {
@@ -20,7 +20,7 @@ void tgon::GameApplication::PauseUpdate() noexcept
     m_paused = true;
 }
 
-const std::shared_ptr<window::TWindow>& GameApplication::GetRootWindow() const noexcept
+const std::shared_ptr<platform::TWindow>& GameApplication::GetRootWindow() const noexcept
 {
     return m_rootWindow;
 }

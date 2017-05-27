@@ -1,9 +1,8 @@
 /**
  * @filename    SharedComPtr.h
- * @author   ggomdyu
- * since    05/17/2016
- * desc     Manages reference count of COM object.
- * todo     Need test
+ * @author      ggomdyu
+ * @since       05/17/2016
+ * @desc        Manages reference count of COM object.
  */
 
 #pragma once

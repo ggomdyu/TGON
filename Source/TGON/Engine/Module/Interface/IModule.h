@@ -1,7 +1,7 @@
 /**
  * @filename    IModule.h
- * @author   ggomdyu
- * since    07/13/2016
+ * @author      ggomdyu
+ * @since       07/13/2016
  */
 
 #pragma once

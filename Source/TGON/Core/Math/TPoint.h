@@ -5,17 +5,21 @@
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
-
 #include <type_traits>
-#include <cassert>
 #include <cstdint>
+#include <string>
+
+#include "Core/Utility/TTypeTraits.h"
 
 namespace tgon {
 namespace math {
 
+template <typename Ty,
+          typename = utility::EnableIfArithmetic<Ty>>
+struct TPoint;
+
 template <typename Ty>
-struct TPoint
+struct TPoint<Ty>
 {
 private:
     using DevideTy = std::conditional_t<std::is_floating_point<Ty>::value, Ty, float>;
@@ -47,6 +51,32 @@ public:
     constexpr bool operator==(const TPoint&) const noexcept;
     constexpr bool operator!=(const TPoint&) const noexcept;
 
+    template <typename CastToTy>
+    constexpr operator TPoint<CastToTy>() const noexcept;
+
+/**
+ * @section Public command method
+ */
+public:
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @return                      The length of string converted.
+     */
+    template <std::size_t N>
+    int32_t ToString(char(&destBuffer)[N]) const;
+
+    /**
+     * @brief                       Converts to string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [in] bufferSize       The size of destBuffer.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    
+    /* @return  The string converted. */
+    std::string ToString() const;
+
 /**
  * @section Public variables
  */
@@ -65,7 +95,7 @@ constexpr TPoint<Ty> MakePoint(Ty x, Ty y) noexcept
     return {x, y};
 }
 
-using TIntPoint = TPoint<int>;
+using TIntPoint = TPoint<int32_t>;
 using TFloatPoint = TPoint<float>;
 using TDoublePoint = TPoint<double>;
 
@@ -77,9 +107,9 @@ constexpr TPoint<Ty>::TPoint() noexcept :
 }
 
 template <typename Ty>
-constexpr TPoint<Ty>::TPoint(Ty _x, Ty _y) noexcept :
-    x(_x),
-    y(_y)
+constexpr TPoint<Ty>::TPoint(Ty x, Ty y) noexcept :
+    x(x),
+    y(y)
 {
 }
 
@@ -104,8 +134,6 @@ constexpr const TPoint<Ty> TPoint<Ty>::operator*(Ty rhs) const noexcept
 template <typename Ty>
 constexpr const TPoint<Ty> TPoint<Ty>::operator/(DevideTy rhs) const
 {
-    assert(rhs != Ty(0) && "TPoint elements can't be divided by zero.");
-
     return TPoint((Ty)((DevideTy)x / (DevideTy)rhs),
                   (Ty)((DevideTy)y / (DevideTy)rhs));
 }
@@ -152,8 +180,6 @@ inline TPoint<Ty>& TPoint<Ty>::operator*=(Ty rhs) noexcept
 template <typename Ty>
 inline TPoint<Ty>& TPoint<Ty>::operator/=(DevideTy rhs)
 {
-    assert(rhs != (Ty)0 && "TPoint elements can't be divided by zero.");
-
     x = (Ty)((DevideTy)x / rhs);
     y = (Ty)((DevideTy)y / rhs);
 
@@ -170,6 +196,43 @@ template <typename Ty>
 inline constexpr bool TPoint<Ty>::operator!=(const TPoint& rhs) const noexcept
 {
     return (x != rhs.x || y != rhs.y);
+}
+
+template<typename Ty>
+template<typename CastToTy>
+constexpr TPoint<Ty>::operator TPoint<CastToTy>() const noexcept
+{
+    return TPoint<CastToTy>((CastToTy)x, (CastToTy)y);
+}
+
+template<typename Ty>
+template<std::size_t N>
+inline int32_t TPoint<Ty>::ToString(char(&destBuffer)[N]) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, "%d %d", x, y);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
+#endif
+}
+
+template<typename Ty>
+inline int32_t TPoint<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
+#endif
+}
+
+template<typename Ty>
+inline std::string TPoint<Ty>::ToString() const
+{
+    char buffer[128]{};
+    this->ToString(buffer);
+
+    return buffer;
 }
 
 } /* namespace math */

@@ -12,19 +12,28 @@ namespace tgon {
 namespace platform {
 
 /**
- * @brief                   Make the caller thread to sleep for a given millisecond time.
+ * @brief                   Sleep caller thread for a given millisecond time.
  * @param [in] milliSecond  Sleep time
  */
 [[deprecated("Use the standard sleep_for either")]]
-TGON_API void Sleep(std::size_t milliSecond);
+TGON_API void Sleep(uint32_t milliSecond);
 
 /* @return  Execution time of OS as millisecond */
-TGON_API std::size_t GetOSExecutionTime();
-    
-/* @return  Execution time of process as millisecond */
-TGON_API std::size_t GetProcessExecutionTime();
+TGON_API uint32_t GetOSExecutionTime();
+TGON_API uint64_t GetOSExecutionTime64();
 
-TGON_API LocalTime GetLocalTime();
+/* @return  Execution time of process as millisecond */
+TGON_API uint32_t GetProcessExecutionTime();
+TGON_API uint64_t GetProcessExecutionTime64();
+
+/* @return  Execution time of OS as millisecond */
+TGON_API UnixTimeTy GetUnixTime();
+
+/* @return  The DateTime in UTC time */
+TGON_API DateTime GetSystemTime();
+
+/* @return  The DateTime in Local time */
+TGON_API DateTime GetLocalTime();
 
 } /* namespace platform */
 } /* namespace tgon */

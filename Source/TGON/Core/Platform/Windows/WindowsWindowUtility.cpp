@@ -1,65 +1,58 @@
 #include "PrecompiledHeader.h"
 #include "WindowsWindowUtility.h"
 
-#include <codecvt>
 #include <cassert>
-#include "WindowsWindow.h"
 
+#include "WindowsWindow.h"
 #include "Core/String/TEncoding.h"
 
 namespace tgon {
 namespace platform {
+namespace windows {
     
-void ConvertWindowStyleToDword(const WindowStyle& wndStyle, DWORD* exWndStyle, DWORD* normalWndStyle)
+void ConvertWindowStyleToDword(const TWindowStyle& wndStyle, DWORD* extendedStyle, DWORD* normalStyle)
 {
-	*exWndStyle = 0;
-	*normalWndStyle = 0;
-
-	/* Extended style */
-    if (wndStyle.topMost)
-    {
-		*exWndStyle |= WS_EX_TOPMOST;
-	}
-
-    if (wndStyle.supportPerPixelTransparency)
-    {
-		*exWndStyle |= WS_EX_LAYERED;
-	}
+	*extendedStyle = 0;
+	*normalStyle = 0;
 
 	/* Normal style */
+    *normalStyle |= WS_VISIBLE;
+    
     if (wndStyle.maximized)
     {
-		*normalWndStyle |= WS_MAXIMIZE;
+		*normalStyle |= WS_MAXIMIZE;
         assert(!wndStyle.minimized && "Can't be selected both Maximized and Minimized.");
     }
     else if (wndStyle.minimized)
     {
-		*normalWndStyle |= WS_MINIMIZE;
+		*normalStyle |= WS_MINIMIZE;
 	}
 
     if (wndStyle.resizeable)
     {
-		*normalWndStyle |= WS_THICKFRAME;
-        assert(!wndStyle.popup && "Can't be selected both Resizeable and Popup.");
+		*normalStyle |= WS_THICKFRAME;
     }
-    else if (wndStyle.popup)
-    {
-		*normalWndStyle |= WS_POPUP;
-	}
 
-    if (wndStyle.showImmediately)
-    {
-		*normalWndStyle |= WS_VISIBLE;
-	}
     if (wndStyle.supportWindowTransparency)
     {
-		*normalWndStyle |= WS_EX_LAYERED;
+		*normalStyle |= WS_EX_LAYERED;
 	}
+
+    /* Extended style */
+    if (wndStyle.topMost)
+    {
+        *extendedStyle |= WS_EX_TOPMOST;
+    }
+
+    if (wndStyle.supportPerPixelTransparency)
+    {
+        *extendedStyle |= WS_EX_LAYERED;
+    }
 }
 
-HWND CreateWindowForm(const WindowStyle& wndStyle, const wchar_t* className, HINSTANCE instanceHandle, void* extraParam)
+HWND CreateWindowForm(const TWindowStyle& wndStyle, const wchar_t* className, HINSTANCE instanceHandle, void* extraParam)
 {
-	// Converts WindowStyle to platform dependent style.
+	// Converts TWindowStyle to platform dependent style.
 	DWORD exStyle, normalStyle;
     ConvertWindowStyleToDword(wndStyle, &exStyle, &normalStyle);
 
@@ -84,6 +77,12 @@ HWND CreateWindowForm(const WindowStyle& wndStyle, const wchar_t* className, HIN
 		instanceHandle,
 		extraParam	// Extra parameter (pass this pointer when need to handling WM_CREATE)
 	);
+
+    if (wndHandle != nullptr)
+    {
+        ::SetForegroundWindow(wndHandle);
+        ::SetFocus(wndHandle);
+    }
 
 	return wndHandle;
 }
@@ -111,11 +110,6 @@ void ReshapeWindowForm(const WindowsWindow& from, const WindowsWindow& to)
     }
 }
 
-bool HasSystemMenu(const WindowsWindow& window)
-{
-    DWORD dwStyle = ::GetWindowLongPtrW(window.GetWindowHandle(), GWL_STYLE);
-    return (dwStyle & WS_CAPTION) != 0 && (dwStyle & WS_SYSMENU) != 0;
-}
-
+} /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */

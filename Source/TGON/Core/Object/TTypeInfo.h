@@ -30,13 +30,13 @@ public:
     std::size_t GetHashCode() const noexcept;
 	
     /* @return  The name of type */
-    const std::string& GetName() const noexcept;
+    const std::string& GetTypeName() const noexcept;
 
 /**
  * @section Private variable
  */
 private:
-	const std::string m_name;
+	const std::string m_typeName;
     const std::size_t m_hashCode;
 };
 

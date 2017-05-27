@@ -1,64 +1,67 @@
 #include "PrecompiledHeader.h"
 #include "WELLRNG.h"
 
+#include <cstdlib>
+#include <ctime>
+
 #define W 32
-#define R 16
-#define P 0
-#define M1 13
-#define M2 9
-#define M3 5
+#define R 32
+#define M1 3
+#define M2 24
+#define M3 10
 
-#define MAT0NEG(t, v) (v ^ (v << (-(t))))
 #define MAT0POS(t, v) (v ^ (v >> t))
-#define MAT3NEG(t, v) (v << (-(t)))
-#define MAT4NEG(t, b, v) (v ^ ((v << (-(t))) & b))
+#define MAT0NEG(t, v) (v ^ (v << (-(t))))
+#define Identity(v) (v)
 
-#define V0 helper.STATE[helper.state_i]
-#define VM1 helper.STATE[(helper.state_i + M1) & 0x0000000fU]
-#define VM2 helper.STATE[(helper.state_i + M2) & 0x0000000fU]
-#define VM3 helper.STATE[(helper.state_i + M3) & 0x0000000fU]
-#define VRm1 helper.STATE[(helper.state_i + 15) & 0x0000000fU]
-#define VRm2 helper.STATE[(helper.state_i + 14) & 0x0000000fU]
-#define newV0 helper.STATE[(helper.state_i + 15) & 0x0000000fU]
-#define newV1 helper.STATE[helper.state_i]
-#define newVRm1 helper.STATE[(helper.state_i + 14) & 0x0000000fU]
+#define V0 STATE[state_i]
+#define VM1 STATE[(state_i + M1) & 0x0000001fU]
+#define VM2 STATE[(state_i + M2) & 0x0000001fU]
+#define VM3 STATE[(state_i + M3) & 0x0000001fU]
+#define VRm1 STATE[(state_i + 31) & 0x0000001fU]
+#define newV0 STATE[(state_i + 31) & 0x0000001fU]
+#define newV1 STATE[state_i]
 
 #define FACT 2.32830643653869628906e-10
 
+namespace tgon {
+namespace random {
 namespace {
 
-struct TGON_API WELLRNGHelper
-{
-    uint32_t state_i;
-    uint32_t STATE[R];
+thread_local unsigned int state_i;
+thread_local unsigned int STATE[R];
+thread_local unsigned int z0, z1, z2;
 
-    WELLRNGHelper() :
-        state_i(0)
-    {
-        uint32_t init[R];
-        std::memmove(STATE, init, sizeof(uint32_t) * R);
-    }
+class WELLRNG1024aHelper
+{
+public:
+    WELLRNG1024aHelper();
 };
+
+inline WELLRNG1024aHelper::WELLRNG1024aHelper()
+{
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    for (int i = 0; i < R; ++i)
+    {
+        STATE[i] = std::rand();
+    }
+}
 
 } /* namespace */
 
-namespace tgon {
-namespace random {
-
-TGON_API float WELLRNG512a()
+TGON_API double WELLRNG1024a()
 {
-    thread_local WELLRNGHelper helper;
-
-	uint32_t z0, z1, z2;
-
+    thread_local WELLRNG1024aHelper helper;
+    
     z0 = VRm1;
-    z1 = MAT0NEG(-16, V0) ^ MAT0NEG(-15, VM1);
-    z2 = MAT0POS(11, VM2);
+    z1 = Identity(V0) ^ MAT0POS(8, VM1);
+    z2 = MAT0NEG(-19, VM2) ^ MAT0NEG(-14, VM3);
     newV1 = z1 ^ z2;
-    newV0 = MAT0NEG(-2, z0) ^ MAT0NEG(-18, z1) ^ MAT3NEG(-28, z2) ^ MAT4NEG(-5, 0xda442d24U, newV1);
-    helper.state_i = (helper.state_i + 15) & 0x0000000fU;
+    newV0 = MAT0NEG(-11, z0) ^ MAT0NEG(-7, z1) ^ MAT0NEG(-13, z2);
+    state_i = (state_i + 31) & 0x0000001fU;
 
-    return static_cast<float>(helper.STATE[helper.state_i] * FACT);
+    return static_cast<double>(STATE[state_i]) * FACT;
 }
 
 } /* namespace random */

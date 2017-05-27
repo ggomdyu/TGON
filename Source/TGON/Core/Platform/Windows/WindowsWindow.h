@@ -14,6 +14,7 @@
 
 namespace tgon {
 namespace platform {
+namespace windows {
 
 class TGON_API WindowsWindow :
     public GenericWindow
@@ -22,7 +23,7 @@ class TGON_API WindowsWindow :
  * @section Ctor/Dtor
  */ 
 public:
-	explicit WindowsWindow(const WindowStyle& wndStyle);
+	explicit WindowsWindow(const TWindowStyle& wndStyle);
 	virtual ~WindowsWindow();
 
 /** 
@@ -49,7 +50,7 @@ public:
  */
 public:
     virtual void SetPosition(const math::TIntPoint& position) override;
-    virtual void SetExtent(const math::TIntExtent& extent) override;
+    virtual void SetExtent(const math::TIntExtent2D& extent) override;
     virtual void SetCaption(const char* caption) override;
     void SetTopMost(bool setTopMost);
     void SetTransparent(float);
@@ -60,13 +61,16 @@ public:
  */ 
 public:
     virtual const math::TIntPoint GetPosition() const override;
-    virtual const math::TIntExtent GetExtent() const override;
+    virtual const math::TIntExtent2D GetExtent() const override;
     virtual void GetCaptionText(char* caption) const override;
-    bool IsTopMost() const;
+    virtual bool HasCaption() const override;
     //bool GetTransparent() const;
     //bool GetPerPixelTransparent() const;
+    virtual bool IsResizable() const override;
+    virtual bool IsMaximized() const override;
+    virtual bool IsMinimized() const override;
+    virtual bool IsTopMost() const override;
     HWND GetWindowHandle() const noexcept;
-    bool HasThickframe() const;
 
 /** 
  * @section Private variable
@@ -75,7 +79,9 @@ private:
 	HWND m_wndHandle;
 };
 
-using TWindow = WindowsWindow;
+} /* namespace windows */
+
+using TWindow = windows::WindowsWindow;
 
 } /* namespace platform */
 } /* namespace tgon */

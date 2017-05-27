@@ -5,7 +5,6 @@
 
 namespace tgon {
 namespace platform {
-namespace windows {
 
 TGON_API void ShowOkPopup(const char* message, const char* caption, OkPopupEventHandler onMessageBoxEventHandled)
 {
@@ -26,6 +25,8 @@ TGON_API void ShowYesNoPopup(const char* message, const char* caption, YesNoPopu
         onMessageBoxEventHandled(static_cast<YesNoPopupEvent>(clickedBtnType));
     }
 }
+
+namespace windows {
 
 TGON_API void ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler onMessageBoxEventHandled)
 {

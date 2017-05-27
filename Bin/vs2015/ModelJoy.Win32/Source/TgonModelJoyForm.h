@@ -1,14 +1,17 @@
 ﻿#pragma once
-#define TGON_ENABLE_CONSOLE
 
+#if NDEBUG
+#   define TGON_DISABLE_CONSOLE
+#endif
+
+#include <Core/Platform/TWindow.h>
 #include <Core/Platform/TApplication.h>
 #include <Core/Platform/TTime.h>
 #include <Core/Platform/TConsole.h>
-#include <Core/Template/TCast.h>
-#include <Core/Template/TArray.h>
-#include <Core/Template/TEnumerator.h>
-#include <Core/Template/TFunctionTraits.h>
-#include <Core/Math/TRandom.h>
+#include <Core/Utility/TAutoCast.h>
+#include <Core/Utility/TArray.h>
+#include <Core/Utility/TEnumerator.h>
+#include <Core/Random/TRandom.h>
 #include <Core/Math/TMath.h>
 #include <Core/Math/TRect.h>
 #include <Core/Math/TPoint.h>
@@ -16,9 +19,26 @@
 #include <Core/Object/TObject.h>
 #include <Core/String/TFixedString.h>
 #include <Core/String/TEncoding.h>
+
 #include <Engine/GameApplication.h>
 
 using namespace tgon;
+
+#define LOGC(msg, p1) platform::TNativeConsole::Get()->WriteLine(msg, p1);
+
+class CustomWindow :
+    public platform::TWindow
+{
+public:
+    CustomWindow() :
+        platform::TWindow(platform::TWindowStyle{})
+    {
+    }
+
+    virtual void OnMouseDown(const math::TIntPoint& position, platform::TMouseType mouseType) override
+    {
+    }
+};
 
 class TGONSample :
     public GameApplication
@@ -28,8 +48,9 @@ public:
 
 public:
     TGONSample() :
-        GameApplication(MakeWindow<tgon::window::TWindow>())
+        GameApplication(platform::MakeWindow<CustomWindow>())
     {
+		LOGC("%d", sizeof(*GetRootWindow().get()));
 	}
 
     virtual ~TGONSample()

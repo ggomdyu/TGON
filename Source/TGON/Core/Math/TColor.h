@@ -1,7 +1,7 @@
 /**
  * @filename    TColor.h
- * @author   ggomdyu
- * since    05/03/2017
+ * @author      ggomdyu
+ * @since       05/03/2017
  */
 
 #pragma once
@@ -9,8 +9,8 @@
 
 #include <cstdint>
 
-namespace tgon
-{
+namespace tgon {
+namespace math {
 
 /* @brief Store color in ARGB order. */
 struct TColor4b
@@ -45,22 +45,22 @@ public:
     };
 };
 
-constexpr tgon::TColor4b::TColor4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept :
+constexpr TColor4b::TColor4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept :
     a(a), r(r), g(g), b(b)
 {
 }
 
-constexpr tgon::TColor4b::TColor4b(uint32_t packedColor) :
+constexpr TColor4b::TColor4b(uint32_t packedColor) :
     packedColor(packedColor)
 {
 }
 
-constexpr uint32_t tgon::TColor4b::ToRGBA() const noexcept
+constexpr uint32_t TColor4b::ToRGBA() const noexcept
 {
     return (r) | (g << 8) | (b << 16) | (a << 24);
 }
 
-constexpr tgon::TColor4b::operator uint32_t() const noexcept
+constexpr TColor4b::operator uint32_t() const noexcept
 {
     return (r) | (g << 8) | (b << 16) | (a << 24);
 }
@@ -69,5 +69,5 @@ struct TColor4f
 {
 };
 
-
+} /* namespace math */
 } /* namespace tgon */

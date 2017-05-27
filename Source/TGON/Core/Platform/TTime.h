@@ -1,7 +1,7 @@
 /**
  * @filename    TTime.h
- * @author   ggomdyu
- * since    05/15/2016
+ * @author      ggomdyu
+ * @since       05/15/2016
  */
 
 #pragma once

@@ -1,11 +1,14 @@
 /**
- * @filename PlatformWindow.h
- * @author   ggomdyu
- * since    04/01/2016
+ * @filename    PlatformWindow.h
+ * @author      ggomdyu
+ * @since       04/01/2016
  */
 
 #pragma once
 #include <boost/predef/os.h>
+#include <memory>
+
+#include "Core/Utility/TTypeTraits.h"
 
 #if BOOST_OS_WINDOWS
 #	include "Windows/WindowsWindow.h"
@@ -13,14 +16,16 @@
 #	include "Android/AndroidWindow.h"
 #endif
 
-namespace tgon
-{
+namespace tgon {
+namespace platform {
 
-template <typename WindowTy, 
-		  typename = typename std::enable_if<std::is_convertible<WindowTy*, window::TWindow*>::value>::type>
-std::shared_ptr<WindowTy> MakeWindow(const window::WindowStyle& wndStyle = window::WindowStyle{})
+template <typename WindowTy, typename... Args, typename = utility::EnableIfConvertible<WindowTy*, TWindow*>>
+std::shared_ptr<WindowTy> MakeWindow(Args&&... args)
 {
-	return std::make_shared<WindowTy>(wndStyle);
+    return std::make_shared<WindowTy>(std::forward<Args>(args)...);
 }
 
-}
+using TSharedWindow = std::shared_ptr<platform::TWindow>;
+
+} /* namespace platform */
+} /* namespace tgon */
