@@ -1,0 +1,558 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD4933001EED549700496036 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4932FF1EED549700496036 /* main.m */; };
+		FD4933091EED549700496036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4933071EED549700496036 /* Main.storyboard */; };
+		FD49330B1EED549700496036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD49330A1EED549700496036 /* Assets.xcassets */; };
+		FD49330E1EED549700496036 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD49330C1EED549700496036 /* LaunchScreen.storyboard */; };
+		FD4933191EED549700496036 /* ModelJoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4933181EED549700496036 /* ModelJoyTests.m */; };
+		FD4933241EED549700496036 /* ModelJoyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4933231EED549700496036 /* ModelJoyUITests.m */; };
+		FDDB27D31EF2B823005516AF /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */; };
+		FDDB28361EF2E28B005516AF /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDDB28341EF2E28B005516AF /* ViewController.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FD4933151EED549700496036 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD4932F31EED549700496036 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD4932FA1EED549700496036;
+			remoteInfo = ModelJoy;
+		};
+		FD4933201EED549700496036 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD4932F31EED549700496036 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD4932FA1EED549700496036;
+			remoteInfo = ModelJoy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FD4932FB1EED549700496036 /* ModelJoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelJoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD4932FF1EED549700496036 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FD4933081EED549700496036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FD49330A1EED549700496036 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD49330D1EED549700496036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FD49330F1EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD4933141EED549700496036 /* ModelJoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD4933181EED549700496036 /* ModelJoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyTests.m; sourceTree = "<group>"; };
+		FD49331A1EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD49331F1EED549700496036 /* ModelJoyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD4933231EED549700496036 /* ModelJoyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyUITests.m; sourceTree = "<group>"; };
+		FD4933251EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.iOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug-iphonesimulator/libTGON.Core.iOS.a"; sourceTree = "<group>"; };
+		FDDB28331EF2E28B005516AF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/ViewController.h; sourceTree = "<absolute>"; };
+		FDDB28341EF2E28B005516AF /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/ViewController.mm; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD4932F81EED549700496036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDDB27D31EF2B823005516AF /* libTGON.Core.iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD4933111EED549700496036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD49331C1EED549700496036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD4932F21EED549700496036 = {
+			isa = PBXGroup;
+			children = (
+				FD4932FD1EED549700496036 /* ModelJoy */,
+				FD4933171EED549700496036 /* ModelJoyTests */,
+				FD4933221EED549700496036 /* ModelJoyUITests */,
+				FD4932FC1EED549700496036 /* Products */,
+				FDA6BDFB1EEEE34B000222A3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FD4932FC1EED549700496036 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD4932FB1EED549700496036 /* ModelJoy.app */,
+				FD4933141EED549700496036 /* ModelJoyTests.xctest */,
+				FD49331F1EED549700496036 /* ModelJoyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD4932FD1EED549700496036 /* ModelJoy */ = {
+			isa = PBXGroup;
+			children = (
+				FDDB28331EF2E28B005516AF /* ViewController.h */,
+				FDDB28341EF2E28B005516AF /* ViewController.mm */,
+				FD4933071EED549700496036 /* Main.storyboard */,
+				FD49330A1EED549700496036 /* Assets.xcassets */,
+				FD49330C1EED549700496036 /* LaunchScreen.storyboard */,
+				FD49330F1EED549700496036 /* Info.plist */,
+				FD4932FE1EED549700496036 /* Supporting Files */,
+			);
+			path = ModelJoy;
+			sourceTree = "<group>";
+		};
+		FD4932FE1EED549700496036 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FD4932FF1EED549700496036 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FD4933171EED549700496036 /* ModelJoyTests */ = {
+			isa = PBXGroup;
+			children = (
+				FD4933181EED549700496036 /* ModelJoyTests.m */,
+				FD49331A1EED549700496036 /* Info.plist */,
+			);
+			path = ModelJoyTests;
+			sourceTree = "<group>";
+		};
+		FD4933221EED549700496036 /* ModelJoyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FD4933231EED549700496036 /* ModelJoyUITests.m */,
+				FD4933251EED549700496036 /* Info.plist */,
+			);
+			path = ModelJoyUITests;
+			sourceTree = "<group>";
+		};
+		FDA6BDFB1EEEE34B000222A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FD4932FA1EED549700496036 /* ModelJoy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD4933281EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoy" */;
+			buildPhases = (
+				FD4932F71EED549700496036 /* Sources */,
+				FD4932F81EED549700496036 /* Frameworks */,
+				FD4932F91EED549700496036 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ModelJoy;
+			productName = ModelJoy;
+			productReference = FD4932FB1EED549700496036 /* ModelJoy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FD4933131EED549700496036 /* ModelJoyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD49332B1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */;
+			buildPhases = (
+				FD4933101EED549700496036 /* Sources */,
+				FD4933111EED549700496036 /* Frameworks */,
+				FD4933121EED549700496036 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD4933161EED549700496036 /* PBXTargetDependency */,
+			);
+			name = ModelJoyTests;
+			productName = ModelJoyTests;
+			productReference = FD4933141EED549700496036 /* ModelJoyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FD49331E1EED549700496036 /* ModelJoyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD49332E1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */;
+			buildPhases = (
+				FD49331B1EED549700496036 /* Sources */,
+				FD49331C1EED549700496036 /* Frameworks */,
+				FD49331D1EED549700496036 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD4933211EED549700496036 /* PBXTargetDependency */,
+			);
+			name = ModelJoyUITests;
+			productName = ModelJoyUITests;
+			productReference = FD49331F1EED549700496036 /* ModelJoyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FD4932F31EED549700496036 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = ggomdyu;
+				TargetAttributes = {
+					FD4932FA1EED549700496036 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = WU734J36XA;
+						ProvisioningStyle = Automatic;
+					};
+					FD4933131EED549700496036 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = WU734J36XA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FD4932FA1EED549700496036;
+					};
+					FD49331E1EED549700496036 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = WU734J36XA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FD4932FA1EED549700496036;
+					};
+				};
+			};
+			buildConfigurationList = FD4932F61EED549700496036 /* Build configuration list for PBXProject "ModelJoy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FD4932F21EED549700496036;
+			productRefGroup = FD4932FC1EED549700496036 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD4932FA1EED549700496036 /* ModelJoy */,
+				FD4933131EED549700496036 /* ModelJoyTests */,
+				FD49331E1EED549700496036 /* ModelJoyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FD4932F91EED549700496036 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD49330E1EED549700496036 /* LaunchScreen.storyboard in Resources */,
+				FD49330B1EED549700496036 /* Assets.xcassets in Resources */,
+				FD4933091EED549700496036 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD4933121EED549700496036 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD49331D1EED549700496036 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD4932F71EED549700496036 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4933001EED549700496036 /* main.m in Sources */,
+				FDDB28361EF2E28B005516AF /* ViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD4933101EED549700496036 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4933191EED549700496036 /* ModelJoyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD49331B1EED549700496036 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4933241EED549700496036 /* ModelJoyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FD4933161EED549700496036 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD4932FA1EED549700496036 /* ModelJoy */;
+			targetProxy = FD4933151EED549700496036 /* PBXContainerItemProxy */;
+		};
+		FD4933211EED549700496036 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD4932FA1EED549700496036 /* ModelJoy */;
+			targetProxy = FD4933201EED549700496036 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FD4933071EED549700496036 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD4933081EED549700496036 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FD49330C1EED549700496036 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD49330D1EED549700496036 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FD4933261EED549700496036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FD4933271EED549700496036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FD4933291EED549700496036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WU734J36XA;
+				HEADER_SEARCH_PATHS = (
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+				);
+				INFOPLIST_FILE = ModelJoy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FD49332A1EED549700496036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WU734J36XA;
+				HEADER_SEARCH_PATHS = (
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+				);
+				INFOPLIST_FILE = ModelJoy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FD49332C1EED549700496036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = WU734J36XA;
+				INFOPLIST_FILE = ModelJoyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModelJoy.app/ModelJoy";
+			};
+			name = Debug;
+		};
+		FD49332D1EED549700496036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = WU734J36XA;
+				INFOPLIST_FILE = ModelJoyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ModelJoy.app/ModelJoy";
+			};
+			name = Release;
+		};
+		FD49332F1EED549700496036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = WU734J36XA;
+				INFOPLIST_FILE = ModelJoyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ModelJoy;
+			};
+			name = Debug;
+		};
+		FD4933301EED549700496036 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = WU734J36XA;
+				INFOPLIST_FILE = ModelJoyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ModelJoy;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FD4932F61EED549700496036 /* Build configuration list for PBXProject "ModelJoy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD4933261EED549700496036 /* Debug */,
+				FD4933271EED549700496036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD4933281EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD4933291EED549700496036 /* Debug */,
+				FD49332A1EED549700496036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD49332B1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD49332C1EED549700496036 /* Debug */,
+				FD49332D1EED549700496036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD49332E1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD49332F1EED549700496036 /* Debug */,
+				FD4933301EED549700496036 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FD4932F31EED549700496036 /* Project object */;
+}

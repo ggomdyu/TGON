@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
+#include "Core/Platform/Config.h"
 
 #include <cassert>
 #include <cmath>

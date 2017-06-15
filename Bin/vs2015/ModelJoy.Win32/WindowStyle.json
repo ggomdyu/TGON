@@ -1,0 +1,21 @@
+{
+  "Title": "GutenTag!",
+  "Transform": {
+    "X": 0,
+    "Y": 0,
+    "Width": 0,
+    "Height": 0
+  },
+  "Style": {
+    "Maximized": false,
+    "Minimized": false,
+    "FullScreen": false,
+    "Popup": false,
+    "Resizeable": true,
+    "ShowImmediately": true,
+    "ShowMiddle": true,
+    "SupportPerPixelTransparency": false,
+    "SupportWindowTransparency": false,
+    "TopMost": false
+  }
+}

@@ -7,28 +7,25 @@
 
 #include <Windows.h>
 #include <cassert>
-#include <mutex>
 
 #ifdef TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
-namespace
+namespace tgon
 {
-	std::mutex g_systemMutex;
-} /* namespace */
+namespace platform
+{
+namespace windows
+{
 
-namespace tgon {
-namespace platform {
-namespace windows {
-
-WindowsWindow::WindowsWindow(const TWindowStyle& wndStyle) :
-    m_wndHandle(CreateWindowForm(wndStyle, L"TGON", GetInstanceHandle()))
+WindowsWindow::WindowsWindow(const TWindowStyle& wndStyle, HINSTANCE instanceHandle) :
+    m_wndHandle(CreateWindowForm(wndStyle, L"TGON", instanceHandle))
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
 
-    // Save this instance's pointer to storage of window.
+    // Store this instance's pointer into window's user data storage.
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 }
 
@@ -80,20 +77,22 @@ void WindowsWindow::Flash()
     FlashWindowEx(&fwi);
 }
 
-const math::TIntPoint WindowsWindow::GetPosition() const
+void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 {
     RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
 
-    return {rt.left, rt.top};
+    *x = rt.left;
+    *y = rt.top;
 }
 
-const math::TIntExtent2D WindowsWindow::GetExtent() const
+void WindowsWindow::GetExtent(int32_t* width, int32_t* height) const
 {
     RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
 
-    return {rt.right, rt.bottom};
+    *width = rt.right;
+    *height = rt.bottom;
 }
 
 void WindowsWindow::GetCaptionText(char* dest) const
@@ -124,19 +123,19 @@ bool WindowsWindow::HasCaption() const
 
 bool WindowsWindow::IsMaximized() const
 {
-    // todo : 구현
+    // todo : impl
     return false;
 }
 
 bool WindowsWindow::IsMinimized() const
 {
-    // todo : 구현
+    // todo : impl
     return false;
 }
 
 bool WindowsWindow::IsTopMost() const
 {
-    // todo : 구현
+    // todo : impl
     return false;
 }
 
@@ -170,14 +169,14 @@ void WindowsWindow::Quit()
     ::PostQuitMessage(0);
 }
 
-void WindowsWindow::SetPosition(const math::TIntPoint& position)
+void WindowsWindow::SetPosition(int32_t x, int32_t y)
 {
-    ::SetWindowPos(m_wndHandle, nullptr, position.x, position.y, 0, 0, SWP_NOSIZE);
+    ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE);
 }
 
-void WindowsWindow::SetExtent(const math::TIntExtent2D& extent)
+void WindowsWindow::SetExtent(int32_t width, int32_t height)
 {
-    ::SetWindowPos(m_wndHandle, nullptr, 0, 0, extent.width, extent.height, SWP_NOMOVE);
+    ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
 }
 
 void WindowsWindow::SetCaption(const char* caption)
@@ -217,116 +216,108 @@ void WindowsWindow::SetTopMost(bool setTopMost)
 //    }
 //#endif
 //}
-
-LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	//
-	// Issue: 비큐 메시지가 프로시저로 들어오는 상황이 있습니다. 이 시점은 비동기적 상황이므로 동기화를 위해 
-	// 아래 코드를 통한 lock 처리가 필요할 듯 합니다.
-	// Issue: 큐 메시지가 dispatch될 때 호출되는 프로시저도 비동기시점에 호출된것인지 확인 필요.
-	// Code: std::unique_lock<std::mutex> lockGuard(g_systemMutex);
-	//
-
-    switch (msg)
-    {
-    case WM_CREATE:
-        /* WARN: DO NOT HANDLE THIS MESSAGE */
-        break;
-
-    case WM_SETFOCUS:
-        {
-            this->OnGetFocus();
-        }
-        break;
-
-    case WM_KILLFOCUS:
-        {
-            this->OnLoseFocus();
-        }
-        break;
-
-    case WM_MOVE:
-        {
-            this->OnMove({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)});
-        }
-        break;
-
-    case WM_SIZE:
-        {
-			this->OnResizeExtent({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)});
-        }
-        break;
-
-    case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-            m_isClosed = true;
-        }
-        break;
-
-    case WM_LBUTTONDOWN:
-        {
-            this->OnMouseDown({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Left);
-        }
-        break;
-
-    case WM_LBUTTONUP:
-        {
-            this->OnMouseUp({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Left);
-        }
-        break;
-
-    case WM_RBUTTONDOWN:
-        {
-            this->OnMouseDown({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Right);
-        }
-        break;
-
-    case WM_RBUTTONUP:
-        {
-            this->OnMouseUp({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Right);
-        }
-        break;
-
-    case WM_MBUTTONDOWN:
-        {
-            this->OnMouseDown({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Middle);
-        }
-        break;
-
-    case WM_MBUTTONUP:
-        {
-            this->OnMouseUp({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Middle);
-        }
-        break;
-
-    case WM_LBUTTONDBLCLK:
-        {
-            this->OnMouseDoubleClick({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Left);
-        }
-        break;
-
-    case WM_RBUTTONDBLCLK:
-        {
-            this->OnMouseDoubleClick({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Right);
-        }
-        break;
-
-    case WM_MBUTTONDBLCLK:
-        {
-            this->OnMouseDoubleClick({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)}, TMouseType::Middle);
-        }
-        break;
-
-    case WM_MOUSEMOVE:
-        {
-            this->OnMouseMove({(std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam)});
-        }
-        break;
-    }
-
-    return DefWindowProc(wndHandle, msg, wParam, lParam);
-}
+//LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+//{
+//    switch (msg)
+//    {
+//    case WM_CREATE:
+//        /* WARN: DO NOT HANDLE THIS MESSAGE */
+//        break;
+//
+//    case WM_SETFOCUS:
+//        {
+//            this->OnGetFocus();
+//        }
+//        break;
+//
+//    case WM_KILLFOCUS:
+//        {
+//            this->OnLoseFocus();
+//        }
+//        break;
+//
+//    case WM_MOVE:
+//        {
+//            this->OnMove((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
+//        }
+//        break;
+//
+//    case WM_SIZE:
+//        {
+//			this->OnResizeExtent((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
+//        }
+//        break;
+//
+//    case WM_DESTROY:
+//        {
+//            PostQuitMessage(0);
+//            m_isClosed = true;
+//        }
+//        break;
+//
+//    case WM_LBUTTONDOWN:
+//        {
+//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
+//        }
+//        break;
+//
+//    case WM_LBUTTONUP:
+//        {
+//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
+//        }
+//        break;
+//
+//    case WM_RBUTTONDOWN:
+//        {
+//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
+//        }
+//        break;
+//
+//    case WM_RBUTTONUP:
+//        {
+//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
+//        }
+//        break;
+//
+//    case WM_MBUTTONDOWN:
+//        {
+//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
+//        }
+//        break;
+//
+//    case WM_MBUTTONUP:
+//        {
+//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
+//        }
+//        break;
+//
+//    case WM_LBUTTONDBLCLK:
+//        {
+//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
+//        }
+//        break;
+//
+//    case WM_RBUTTONDBLCLK:
+//        {
+//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
+//        }
+//        break;
+//
+//    case WM_MBUTTONDBLCLK:
+//        {
+//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
+//        }
+//        break;
+//
+//    case WM_MOUSEMOVE:
+//        {
+//            this->OnMouseMove((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
+//        }
+//        break;
+//    }
+//
+//    return DefWindowProc(wndHandle, msg, wParam, lParam);
+//}
 
 } /* namespace windows */
 } /* namespace platform */

@@ -8,6 +8,9 @@
       <UniqueIdentifier>{60ad9011-daf2-4bd7-83b8-c5d036dd6c8c}</UniqueIdentifier>
       <Extensions>c;cpp;</Extensions>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{3acb5376-e16d-4103-8052-115e41b0eef5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\TgonModelJoyForm.cpp">
@@ -18,9 +21,17 @@
     <ClInclude Include="Source\TgonModelJoyForm.h">
       <Filter>Sources</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="GraphicsStyle.xml" />
-    <Xml Include="WindowStyle.xml" />
+    <Xml Include="GraphicsStyle.json" />
+    <Xml Include="WindowStyle.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

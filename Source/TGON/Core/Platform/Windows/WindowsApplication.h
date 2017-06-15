@@ -8,33 +8,57 @@
 #include "../Generic/GenericApplication.h"
 #include "WindowsApplicationType.h"
 
-namespace tgon {
-namespace platform {
-namespace windows {
+namespace tgon
+{
+namespace platform
+{
+namespace windows
+{
+
+class TGON_API WindowsApplication :
+    public GenericApplication
+{
+public:
+    TGON_MAKE_OBJECT_INTERFACE(tgon::platform::windows::WindowsApplication)
+
+
+protected:
+    WindowsApplication() = default;
+    explicit WindowsApplication(HINSTANCE instanceHandle);
+public:
+    virtual ~WindowsApplication() = default;
+
+
+public:
+    using GenericApplication::GetLanguage;
+
+
+public:
+    void Initialize(HINSTANCE instanceHandle);
+    
+    bool RegisterWindowClass();
+
+public:
+    /** @brief  Get the pointer of singleton instance. */
+    static WindowsApplication* Get();
+
+    /** @brief  Return unique handle of this process. */
+    HINSTANCE GetInstanceHandle() const noexcept;
+
+    virtual void GetLanguage(char* destBuffer, std::size_t bufferLength) override;
 
 /**
- * @brief                   Shows the Message box which has buttons: Yes, No
- * @param [in] message      Message box description
- * @param [in] caption      Message box title
- * @param [in] handler      Button click event handler
- */ 
-TGON_API void ShowYesNoPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
-
-/**
- * @brief                   Show the Message box which has Ok button
- * @param [in] message      Message box description
- * @param [in] caption      Message box title
- * @param [in] handler      Button click event handler
- */ 
-TGON_API void ShowOkPopup(const wchar_t* message, const wchar_t* caption, YesNoPopupEventHandler handler);
-
-/**
- * @brief                   Enables floating operation exception.
- * @param [in] flag         Flag you want to enable: EM_OVERFLOW, EM_UNDERFLOW, EM_ZERODIVIDE, etc
+ * @section Private method
  */
-TGON_API void EnableFloatException(unsigned int flag);
+private:
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
-TGON_API HINSTANCE GetInstanceHandle();
+/**
+ * @section Private variable
+ */
+private:
+    HINSTANCE m_instanceHandle;
+};
 
 } /* namespace windows */
 } /* namespace platform */

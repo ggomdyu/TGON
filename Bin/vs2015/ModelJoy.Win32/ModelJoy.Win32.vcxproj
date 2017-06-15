@@ -14,15 +14,16 @@
     <ProjectGuid>{CB29A8D6-B2E8-40C9-BDAE-0C1B6058AFDF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ModelJoy</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>ModelJoy.Win32</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -68,6 +69,7 @@
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,11 +107,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\TgonModelJoyForm.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="GraphicsStyle.xml" />
-    <Xml Include="WindowStyle.xml">
+    <Xml Include="GraphicsStyle.json" />
+    <Xml Include="WindowStyle.json">
       <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>
@@ -117,6 +120,9 @@
     <ProjectReference Include="..\TGON.Core.Win32\TGON.Core.Win32.vcxproj">
       <Project>{1debb112-5404-4ef7-a76e-fc863778eff9}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

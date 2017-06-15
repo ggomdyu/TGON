@@ -5,22 +5,19 @@
  */
 
 #pragma once
-#include "Core/Platform/TConfig.h"
+#include "Core/Platform/Config.h"
 
 #include <cstdint>
 
-namespace tgon {
-namespace platform {
-
-class TGON_API GenericScreen
+namespace tgon
 {
-/**
- * @section Ctor/Dtor
- */
-public:
-    GenericScreen() = delete;
-    ~GenericScreen() = delete;
-};
+namespace platform
+{
+    
+TGON_API int32_t GetMonitorCount();
+
+TGON_API void GetScreenResolution(int32_t* width, int32_t* height);
+
 
 } /* namespace platform */
 } /* namespace tgon */

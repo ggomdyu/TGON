@@ -1,5 +1,0 @@
-D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.apk.recipe
-D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.apk.recipe.merged
-D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\FileStringReplace.incremental
-D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.apk
-D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.lastsuccessfuldeploy

@@ -24,9 +24,12 @@
 
 #define FACT 2.32830643653869628906e-10
 
-namespace tgon {
-namespace random {
-namespace {
+namespace tgon
+{
+namespace random
+{
+namespace
+{
 
 thread_local unsigned int state_i;
 thread_local unsigned int STATE[R];

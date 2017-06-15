@@ -1,71 +1,39 @@
 /**
  * @filename    GenericApplication.h
  * @author      ggomdyu
- * @since       03/20/2016
+ * since        03/20/2016
  */
 
 #pragma once
 #include "GenericApplicationType.h"
-#include "Core/Platform/TConfig.h"
+#include "Core/Object/Object.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
-/**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- */
-TGON_API void ShowOkPopup(const char* message);
-
-/**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowOkPopup(const char* message, OkPopupEventHandler handler);
+class TGON_API GenericApplication :
+    public object::TObject
+{
+public:
+    TGON_MAKE_OBJECT_INTERFACE(tgon::platform::GenericApplication)
 
 /**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
+ * @section Ctor/Dtor
  */
-TGON_API void ShowOkPopup(const char* message, const char* caption);
+protected:
+    GenericApplication() = default;
+public:
+    virtual ~GenericApplication() = default;
 
 /**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- * @param [in] handler      Button click event handler
+ * @section Public method
  */
-TGON_API void ShowOkPopup(const char* message, const char* caption, OkPopupEventHandler handler);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- */
-TGON_API void ShowYesNoPopup(const char* message);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowYesNoPopup(const char* message, YesNoPopupEventHandler handler);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- */
-TGON_API void ShowYesNoPopup(const char* message, const char* caption);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowYesNoPopup(const char* message, const char* caption, YesNoPopupEventHandler handler);
+public:
+    virtual void ShowTopStatusBar() = 0;
+    virtual void HideTopStatusBar() = 0;
+};
 
 } /* namespace platform */
 } /* namespace tgon */

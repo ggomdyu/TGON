@@ -1,8 +1,10 @@
 #include "PrecompiledHeader.h"
 #include "GenericGraphicsDevice.h"
 
-namespace tgon {
-namespace graphics {
+namespace tgon
+{
+namespace graphics
+{
 
 GenericGraphicsDevice::GenericGraphicsDevice(const platform::TSharedWindow& surfaceWindow) :
     m_surfaceWindow(surfaceWindow)

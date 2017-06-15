@@ -8,15 +8,10 @@
 #include <string>
 #include <cstdint>
 
-namespace tgon {
-namespace platform {
-
-enum class TMouseType
+namespace tgon
 {
-	Left,
-	Middle,
-	Right,
-};
+namespace platform
+{
 
 struct TWindowStyle
 {

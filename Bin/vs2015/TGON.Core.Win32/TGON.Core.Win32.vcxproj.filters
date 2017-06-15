@@ -77,9 +77,6 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
