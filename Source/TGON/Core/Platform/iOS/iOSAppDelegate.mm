@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication*)uiApplication didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
     //[self InitializeRootViewController];
-    // [self InitializeWindow:m_rootViewController];
+    //[self InitializeWindow:m_rootViewController];
     
     return YES;
 }

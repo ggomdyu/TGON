@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD1503DC1EF50A7A0043FAA5 /* iOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */; };
 		FD4932EB1EED4F1500496036 /* Array.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E61EED4E9600496036 /* Array.h */; };
 		FD4932EC1EED4F1500496036 /* AutoCast.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E71EED4E9600496036 /* AutoCast.h */; };
 		FD4932ED1EED4F1500496036 /* Enumerator.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E81EED4E9600496036 /* Enumerator.h */; };
@@ -53,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSMain.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSMain.mm; sourceTree = "<group>"; };
 		FD4932E61EED4E9600496036 /* Array.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Array.h; path = ../../../Source/TGON/Core/Utility/Array.h; sourceTree = "<group>"; };
 		FD4932E71EED4E9600496036 /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = AutoCast.h; path = ../../../Source/TGON/Core/Utility/AutoCast.h; sourceTree = "<group>"; };
 		FD4932E81EED4E9600496036 /* Enumerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Enumerator.h; path = ../../../Source/TGON/Core/Utility/Enumerator.h; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		FD4933321EED563700496036 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */,
 				FDC127EC1EF433D6004BF5CF /* iOSRootViewController.h */,
 				FDC127ED1EF433D6004BF5CF /* iOSRootViewController.mm */,
 				FDDB28371EF2E2C1005516AF /* iOSAppDelegate.h */,
@@ -298,6 +301,7 @@
 			files = (
 				FDA6BDB71EEEBFA8000222A3 /* GenericWindow.h in Sources */,
 				FDC127EE1EF433D6004BF5CF /* iOSRootViewController.mm in Sources */,
+				FD1503DC1EF50A7A0043FAA5 /* iOSMain.mm in Sources */,
 				FDA6BDB81EEEBFA8000222A3 /* iOSWindow.h in Sources */,
 				FDA6BDAF1EEDCC73000222A3 /* GenericScreen.h in Sources */,
 				FDA6BDAC1EEDC878000222A3 /* iOSScreen.h in Sources */,
