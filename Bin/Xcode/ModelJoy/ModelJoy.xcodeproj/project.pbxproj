@@ -7,68 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD4933001EED549700496036 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4932FF1EED549700496036 /* main.m */; };
-		FD4933091EED549700496036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4933071EED549700496036 /* Main.storyboard */; };
-		FD49330B1EED549700496036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD49330A1EED549700496036 /* Assets.xcassets */; };
-		FD49330E1EED549700496036 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD49330C1EED549700496036 /* LaunchScreen.storyboard */; };
-		FD4933191EED549700496036 /* ModelJoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4933181EED549700496036 /* ModelJoyTests.m */; };
-		FD4933241EED549700496036 /* ModelJoyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4933231EED549700496036 /* ModelJoyUITests.m */; };
-		FDDB27D31EF2B823005516AF /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */; };
-		FDDB28361EF2E28B005516AF /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDDB28341EF2E28B005516AF /* ViewController.mm */; };
+		FD1503A41EF5002B0043FAA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503A31EF5002B0043FAA5 /* main.m */; };
+		FD1503AD1EF5002B0043FAA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1503AB1EF5002B0043FAA5 /* Main.storyboard */; };
+		FD1503AF1EF5002B0043FAA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */; };
+		FD1503B21EF5002B0043FAA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */; };
+		FD1503BD1EF5002C0043FAA5 /* ModelJoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503BC1EF5002C0043FAA5 /* ModelJoyTests.m */; };
+		FD1503C81EF5002C0043FAA5 /* ModelJoyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */; };
+		FD1503D71EF500B80043FAA5 /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FD4933151EED549700496036 /* PBXContainerItemProxy */ = {
+		FD1503B91EF5002C0043FAA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FD4932F31EED549700496036 /* Project object */;
+			containerPortal = FD1503971EF5002B0043FAA5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FD4932FA1EED549700496036;
+			remoteGlobalIDString = FD15039E1EF5002B0043FAA5;
 			remoteInfo = ModelJoy;
 		};
-		FD4933201EED549700496036 /* PBXContainerItemProxy */ = {
+		FD1503C41EF5002C0043FAA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FD4932F31EED549700496036 /* Project object */;
+			containerPortal = FD1503971EF5002B0043FAA5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FD4932FA1EED549700496036;
+			remoteGlobalIDString = FD15039E1EF5002B0043FAA5;
 			remoteInfo = ModelJoy;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FD4932FB1EED549700496036 /* ModelJoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelJoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD4932FF1EED549700496036 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FD4933081EED549700496036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FD49330A1EED549700496036 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FD49330D1EED549700496036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FD49330F1EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD4933141EED549700496036 /* ModelJoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD4933181EED549700496036 /* ModelJoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyTests.m; sourceTree = "<group>"; };
-		FD49331A1EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD49331F1EED549700496036 /* ModelJoyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD4933231EED549700496036 /* ModelJoyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyUITests.m; sourceTree = "<group>"; };
-		FD4933251EED549700496036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.iOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug-iphonesimulator/libTGON.Core.iOS.a"; sourceTree = "<group>"; };
-		FDDB28331EF2E28B005516AF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/ViewController.h; sourceTree = "<absolute>"; };
-		FDDB28341EF2E28B005516AF /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/ViewController.mm; sourceTree = "<absolute>"; };
+		FD15039F1EF5002B0043FAA5 /* ModelJoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelJoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1503A31EF5002B0043FAA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FD1503AC1EF5002B0043FAA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD1503B11EF5002B0043FAA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FD1503B31EF5002B0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD1503B81EF5002C0043FAA5 /* ModelJoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1503BC1EF5002C0043FAA5 /* ModelJoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyTests.m; sourceTree = "<group>"; };
+		FD1503BE1EF5002C0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD1503C31EF5002C0043FAA5 /* ModelJoyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelJoyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyUITests.m; sourceTree = "<group>"; };
+		FD1503C91EF5002C0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.iOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug-iphonesimulator/libTGON.Core.iOS.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FD4932F81EED549700496036 /* Frameworks */ = {
+		FD15039C1EF5002B0043FAA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDDB27D31EF2B823005516AF /* libTGON.Core.iOS.a in Frameworks */,
+				FD1503D71EF500B80043FAA5 /* libTGON.Core.iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD4933111EED549700496036 /* Frameworks */ = {
+		FD1503B51EF5002C0043FAA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD49331C1EED549700496036 /* Frameworks */ = {
+		FD1503C01EF5002C0043FAA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -78,71 +75,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD4932F21EED549700496036 = {
+		FD1503961EF5002B0043FAA5 = {
 			isa = PBXGroup;
 			children = (
-				FD4932FD1EED549700496036 /* ModelJoy */,
-				FD4933171EED549700496036 /* ModelJoyTests */,
-				FD4933221EED549700496036 /* ModelJoyUITests */,
-				FD4932FC1EED549700496036 /* Products */,
-				FDA6BDFB1EEEE34B000222A3 /* Frameworks */,
+				FD1503A11EF5002B0043FAA5 /* ModelJoy */,
+				FD1503BB1EF5002C0043FAA5 /* ModelJoyTests */,
+				FD1503C61EF5002C0043FAA5 /* ModelJoyUITests */,
+				FD1503A01EF5002B0043FAA5 /* Products */,
+				FD1503D51EF500B80043FAA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		FD4932FC1EED549700496036 /* Products */ = {
+		FD1503A01EF5002B0043FAA5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD4932FB1EED549700496036 /* ModelJoy.app */,
-				FD4933141EED549700496036 /* ModelJoyTests.xctest */,
-				FD49331F1EED549700496036 /* ModelJoyUITests.xctest */,
+				FD15039F1EF5002B0043FAA5 /* ModelJoy.app */,
+				FD1503B81EF5002C0043FAA5 /* ModelJoyTests.xctest */,
+				FD1503C31EF5002C0043FAA5 /* ModelJoyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FD4932FD1EED549700496036 /* ModelJoy */ = {
+		FD1503A11EF5002B0043FAA5 /* ModelJoy */ = {
 			isa = PBXGroup;
 			children = (
-				FDDB28331EF2E28B005516AF /* ViewController.h */,
-				FDDB28341EF2E28B005516AF /* ViewController.mm */,
-				FD4933071EED549700496036 /* Main.storyboard */,
-				FD49330A1EED549700496036 /* Assets.xcassets */,
-				FD49330C1EED549700496036 /* LaunchScreen.storyboard */,
-				FD49330F1EED549700496036 /* Info.plist */,
-				FD4932FE1EED549700496036 /* Supporting Files */,
+				FD1503AB1EF5002B0043FAA5 /* Main.storyboard */,
+				FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */,
+				FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */,
+				FD1503B31EF5002B0043FAA5 /* Info.plist */,
+				FD1503A21EF5002B0043FAA5 /* Supporting Files */,
 			);
 			path = ModelJoy;
 			sourceTree = "<group>";
 		};
-		FD4932FE1EED549700496036 /* Supporting Files */ = {
+		FD1503A21EF5002B0043FAA5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FD4932FF1EED549700496036 /* main.m */,
+				FD1503A31EF5002B0043FAA5 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FD4933171EED549700496036 /* ModelJoyTests */ = {
+		FD1503BB1EF5002C0043FAA5 /* ModelJoyTests */ = {
 			isa = PBXGroup;
 			children = (
-				FD4933181EED549700496036 /* ModelJoyTests.m */,
-				FD49331A1EED549700496036 /* Info.plist */,
+				FD1503BC1EF5002C0043FAA5 /* ModelJoyTests.m */,
+				FD1503BE1EF5002C0043FAA5 /* Info.plist */,
 			);
 			path = ModelJoyTests;
 			sourceTree = "<group>";
 		};
-		FD4933221EED549700496036 /* ModelJoyUITests */ = {
+		FD1503C61EF5002C0043FAA5 /* ModelJoyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				FD4933231EED549700496036 /* ModelJoyUITests.m */,
-				FD4933251EED549700496036 /* Info.plist */,
+				FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */,
+				FD1503C91EF5002C0043FAA5 /* Info.plist */,
 			);
 			path = ModelJoyUITests;
 			sourceTree = "<group>";
 		};
-		FDA6BDFB1EEEE34B000222A3 /* Frameworks */ = {
+		FD1503D51EF500B80043FAA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FDA6BDFC1EEEE34B000222A3 /* libTGON.Core.iOS.a */,
+				FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,13 +145,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FD4932FA1EED549700496036 /* ModelJoy */ = {
+		FD15039E1EF5002B0043FAA5 /* ModelJoy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD4933281EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoy" */;
+			buildConfigurationList = FD1503CC1EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoy" */;
 			buildPhases = (
-				FD4932F71EED549700496036 /* Sources */,
-				FD4932F81EED549700496036 /* Frameworks */,
-				FD4932F91EED549700496036 /* Resources */,
+				FD15039B1EF5002B0043FAA5 /* Sources */,
+				FD15039C1EF5002B0043FAA5 /* Frameworks */,
+				FD15039D1EF5002B0043FAA5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -164,74 +159,74 @@
 			);
 			name = ModelJoy;
 			productName = ModelJoy;
-			productReference = FD4932FB1EED549700496036 /* ModelJoy.app */;
+			productReference = FD15039F1EF5002B0043FAA5 /* ModelJoy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FD4933131EED549700496036 /* ModelJoyTests */ = {
+		FD1503B71EF5002C0043FAA5 /* ModelJoyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD49332B1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */;
+			buildConfigurationList = FD1503CF1EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */;
 			buildPhases = (
-				FD4933101EED549700496036 /* Sources */,
-				FD4933111EED549700496036 /* Frameworks */,
-				FD4933121EED549700496036 /* Resources */,
+				FD1503B41EF5002C0043FAA5 /* Sources */,
+				FD1503B51EF5002C0043FAA5 /* Frameworks */,
+				FD1503B61EF5002C0043FAA5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FD4933161EED549700496036 /* PBXTargetDependency */,
+				FD1503BA1EF5002C0043FAA5 /* PBXTargetDependency */,
 			);
 			name = ModelJoyTests;
 			productName = ModelJoyTests;
-			productReference = FD4933141EED549700496036 /* ModelJoyTests.xctest */;
+			productReference = FD1503B81EF5002C0043FAA5 /* ModelJoyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FD49331E1EED549700496036 /* ModelJoyUITests */ = {
+		FD1503C21EF5002C0043FAA5 /* ModelJoyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD49332E1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */;
+			buildConfigurationList = FD1503D21EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */;
 			buildPhases = (
-				FD49331B1EED549700496036 /* Sources */,
-				FD49331C1EED549700496036 /* Frameworks */,
-				FD49331D1EED549700496036 /* Resources */,
+				FD1503BF1EF5002C0043FAA5 /* Sources */,
+				FD1503C01EF5002C0043FAA5 /* Frameworks */,
+				FD1503C11EF5002C0043FAA5 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FD4933211EED549700496036 /* PBXTargetDependency */,
+				FD1503C51EF5002C0043FAA5 /* PBXTargetDependency */,
 			);
 			name = ModelJoyUITests;
 			productName = ModelJoyUITests;
-			productReference = FD49331F1EED549700496036 /* ModelJoyUITests.xctest */;
+			productReference = FD1503C31EF5002C0043FAA5 /* ModelJoyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FD4932F31EED549700496036 /* Project object */ = {
+		FD1503971EF5002B0043FAA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = ggomdyu;
 				TargetAttributes = {
-					FD4932FA1EED549700496036 = {
+					FD15039E1EF5002B0043FAA5 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = WU734J36XA;
 						ProvisioningStyle = Automatic;
 					};
-					FD4933131EED549700496036 = {
+					FD1503B71EF5002C0043FAA5 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = WU734J36XA;
 						ProvisioningStyle = Automatic;
-						TestTargetID = FD4932FA1EED549700496036;
+						TestTargetID = FD15039E1EF5002B0043FAA5;
 					};
-					FD49331E1EED549700496036 = {
+					FD1503C21EF5002C0043FAA5 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = WU734J36XA;
 						ProvisioningStyle = Automatic;
-						TestTargetID = FD4932FA1EED549700496036;
+						TestTargetID = FD15039E1EF5002B0043FAA5;
 					};
 				};
 			};
-			buildConfigurationList = FD4932F61EED549700496036 /* Build configuration list for PBXProject "ModelJoy" */;
+			buildConfigurationList = FD15039A1EF5002B0043FAA5 /* Build configuration list for PBXProject "ModelJoy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -239,37 +234,37 @@
 				en,
 				Base,
 			);
-			mainGroup = FD4932F21EED549700496036;
-			productRefGroup = FD4932FC1EED549700496036 /* Products */;
+			mainGroup = FD1503961EF5002B0043FAA5;
+			productRefGroup = FD1503A01EF5002B0043FAA5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD4932FA1EED549700496036 /* ModelJoy */,
-				FD4933131EED549700496036 /* ModelJoyTests */,
-				FD49331E1EED549700496036 /* ModelJoyUITests */,
+				FD15039E1EF5002B0043FAA5 /* ModelJoy */,
+				FD1503B71EF5002C0043FAA5 /* ModelJoyTests */,
+				FD1503C21EF5002C0043FAA5 /* ModelJoyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FD4932F91EED549700496036 /* Resources */ = {
+		FD15039D1EF5002B0043FAA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD49330E1EED549700496036 /* LaunchScreen.storyboard in Resources */,
-				FD49330B1EED549700496036 /* Assets.xcassets in Resources */,
-				FD4933091EED549700496036 /* Main.storyboard in Resources */,
+				FD1503B21EF5002B0043FAA5 /* LaunchScreen.storyboard in Resources */,
+				FD1503AF1EF5002B0043FAA5 /* Assets.xcassets in Resources */,
+				FD1503AD1EF5002B0043FAA5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD4933121EED549700496036 /* Resources */ = {
+		FD1503B61EF5002C0043FAA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD49331D1EED549700496036 /* Resources */ = {
+		FD1503C11EF5002C0043FAA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,59 +274,58 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FD4932F71EED549700496036 /* Sources */ = {
+		FD15039B1EF5002B0043FAA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4933001EED549700496036 /* main.m in Sources */,
-				FDDB28361EF2E28B005516AF /* ViewController.mm in Sources */,
+				FD1503A41EF5002B0043FAA5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD4933101EED549700496036 /* Sources */ = {
+		FD1503B41EF5002C0043FAA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4933191EED549700496036 /* ModelJoyTests.m in Sources */,
+				FD1503BD1EF5002C0043FAA5 /* ModelJoyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD49331B1EED549700496036 /* Sources */ = {
+		FD1503BF1EF5002C0043FAA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD4933241EED549700496036 /* ModelJoyUITests.m in Sources */,
+				FD1503C81EF5002C0043FAA5 /* ModelJoyUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FD4933161EED549700496036 /* PBXTargetDependency */ = {
+		FD1503BA1EF5002C0043FAA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FD4932FA1EED549700496036 /* ModelJoy */;
-			targetProxy = FD4933151EED549700496036 /* PBXContainerItemProxy */;
+			target = FD15039E1EF5002B0043FAA5 /* ModelJoy */;
+			targetProxy = FD1503B91EF5002C0043FAA5 /* PBXContainerItemProxy */;
 		};
-		FD4933211EED549700496036 /* PBXTargetDependency */ = {
+		FD1503C51EF5002C0043FAA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FD4932FA1EED549700496036 /* ModelJoy */;
-			targetProxy = FD4933201EED549700496036 /* PBXContainerItemProxy */;
+			target = FD15039E1EF5002B0043FAA5 /* ModelJoy */;
+			targetProxy = FD1503C41EF5002C0043FAA5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FD4933071EED549700496036 /* Main.storyboard */ = {
+		FD1503AB1EF5002B0043FAA5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FD4933081EED549700496036 /* Base */,
+				FD1503AC1EF5002B0043FAA5 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		FD49330C1EED549700496036 /* LaunchScreen.storyboard */ = {
+		FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FD49330D1EED549700496036 /* Base */,
+				FD1503B11EF5002B0043FAA5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -339,7 +333,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		FD4933261EED549700496036 /* Debug */ = {
+		FD1503CA1EF5002C0043FAA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -388,7 +382,7 @@
 			};
 			name = Debug;
 		};
-		FD4933271EED549700496036 /* Release */ = {
+		FD1503CB1EF5002C0043FAA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -431,15 +425,12 @@
 			};
 			name = Release;
 		};
-		FD4933291EED549700496036 /* Debug */ = {
+		FD1503CD1EF5002C0043FAA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WU734J36XA;
-				HEADER_SEARCH_PATHS = (
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
-				);
+				HEADER_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON;
 				INFOPLIST_FILE = ModelJoy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;
@@ -447,15 +438,12 @@
 			};
 			name = Debug;
 		};
-		FD49332A1EED549700496036 /* Release */ = {
+		FD1503CE1EF5002C0043FAA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WU734J36XA;
-				HEADER_SEARCH_PATHS = (
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
-				);
+				HEADER_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON;
 				INFOPLIST_FILE = ModelJoy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;
@@ -463,7 +451,7 @@
 			};
 			name = Release;
 		};
-		FD49332C1EED549700496036 /* Debug */ = {
+		FD1503D01EF5002C0043FAA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -476,7 +464,7 @@
 			};
 			name = Debug;
 		};
-		FD49332D1EED549700496036 /* Release */ = {
+		FD1503D11EF5002C0043FAA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -489,7 +477,7 @@
 			};
 			name = Release;
 		};
-		FD49332F1EED549700496036 /* Debug */ = {
+		FD1503D31EF5002C0043FAA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = WU734J36XA;
@@ -501,7 +489,7 @@
 			};
 			name = Debug;
 		};
-		FD4933301EED549700496036 /* Release */ = {
+		FD1503D41EF5002C0043FAA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = WU734J36XA;
@@ -516,43 +504,40 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FD4932F61EED549700496036 /* Build configuration list for PBXProject "ModelJoy" */ = {
+		FD15039A1EF5002B0043FAA5 /* Build configuration list for PBXProject "ModelJoy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD4933261EED549700496036 /* Debug */,
-				FD4933271EED549700496036 /* Release */,
+				FD1503CA1EF5002C0043FAA5 /* Debug */,
+				FD1503CB1EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD4933281EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoy" */ = {
+		FD1503CC1EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD4933291EED549700496036 /* Debug */,
-				FD49332A1EED549700496036 /* Release */,
+				FD1503CD1EF5002C0043FAA5 /* Debug */,
+				FD1503CE1EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		FD49332B1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */ = {
+		FD1503CF1EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD49332C1EED549700496036 /* Debug */,
-				FD49332D1EED549700496036 /* Release */,
+				FD1503D01EF5002C0043FAA5 /* Debug */,
+				FD1503D11EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		FD49332E1EED549700496036 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */ = {
+		FD1503D21EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD49332F1EED549700496036 /* Debug */,
-				FD4933301EED549700496036 /* Release */,
+				FD1503D31EF5002C0043FAA5 /* Debug */,
+				FD1503D41EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FD4932F31EED549700496036 /* Project object */;
+	rootObject = FD1503971EF5002B0043FAA5 /* Project object */;
 }

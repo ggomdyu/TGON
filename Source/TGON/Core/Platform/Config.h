@@ -1,5 +1,5 @@
 /**
- * @filename    TConfig.h
+ * @filename    Config.h
  * @author      ggomdyu
  * @since       04/01/2016
  */

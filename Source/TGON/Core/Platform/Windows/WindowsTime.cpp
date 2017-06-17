@@ -6,8 +6,10 @@
 #endif
 #include <Windows.h>
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 uint32_t GetOSExecutionTime()
 {

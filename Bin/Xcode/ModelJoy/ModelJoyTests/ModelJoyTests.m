@@ -2,7 +2,7 @@
 //  ModelJoyTests.m
 //  ModelJoyTests
 //
-//  Created by 차준호 on 2017. 6. 11..
+//  Created by 차준호 on 2017. 6. 17..
 //  Copyright © 2017년 ggomdyu. All rights reserved.
 //
 

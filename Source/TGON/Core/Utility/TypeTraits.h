@@ -14,25 +14,25 @@ namespace utility
 {
 
 template <typename>
-struct TFunctionTraits;
+struct FunctionTraits;
 
 /* @brief   Trait for lambda */
 template <typename Ty>
-struct TFunctionTraits : 
-	public TFunctionTraits<decltype(&Ty::operator())>
+struct FunctionTraits : 
+	public FunctionTraits<decltype(&Ty::operator())>
 {
 public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
+    FunctionTraits() = delete;
+    ~FunctionTraits() = delete;
 };
 
 /* @brief   Trait for global function */
 template <typename _ReturnTy, typename... Args>
-struct TFunctionTraits<_ReturnTy(Args...)>
+struct FunctionTraits<_ReturnTy(Args...)>
 {
 public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
+    FunctionTraits() = delete;
+    ~FunctionTraits() = delete;
 
 public:
 	enum { ArgumentCount = sizeof...(Args), };
@@ -43,59 +43,40 @@ public:
 };
 
 template <typename ReturnTy, typename... Args>
-struct TFunctionTraits<ReturnTy(*)(Args...)> :
-	public TFunctionTraits<ReturnTy(Args...)>
+struct FunctionTraits<ReturnTy(*)(Args...)> :
+	public FunctionTraits<ReturnTy(Args...)>
 {
-public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
 };
 
 /* @brief   Trait for class member function */
 template <typename ReturnTy, typename _ClassTy, typename... Args>
-struct TFunctionTraits<ReturnTy(_ClassTy::*)(Args...)> :
-	public TFunctionTraits<ReturnTy(Args...)>
+struct FunctionTraits<ReturnTy(_ClassTy::*)(Args...)> :
+	public FunctionTraits<ReturnTy(Args...)>
 {
-public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
-
 public:
 	using ClassTy = _ClassTy;
 };
 
 template <typename ReturnTy, typename _ClassTy, typename... Args>
-struct TFunctionTraits<ReturnTy(_ClassTy::*)(Args...) const> :
-	public TFunctionTraits<ReturnTy(Args...)>
+struct FunctionTraits<ReturnTy(_ClassTy::*)(Args...) const> :
+	public FunctionTraits<ReturnTy(Args...)>
 {
-public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
-
 public:
 	using ClassTy = _ClassTy;
 };
 
 template <typename ReturnTy, typename _ClassTy, typename... Args>
-struct TFunctionTraits<ReturnTy(_ClassTy::*)(Args...) volatile> :
-	public TFunctionTraits<ReturnTy(Args...)>
+struct FunctionTraits<ReturnTy(_ClassTy::*)(Args...) volatile> :
+	public FunctionTraits<ReturnTy(Args...)>
 {
-public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
-
 public:
 	using ClassTy = _ClassTy;
 };
 
 template <typename ReturnTy, typename _ClassTy, typename... Args>
-struct TFunctionTraits<ReturnTy(_ClassTy::*)(Args...) const volatile> :
-    public TFunctionTraits<ReturnTy(Args...)>
+struct FunctionTraits<ReturnTy(_ClassTy::*)(Args...) const volatile> :
+    public FunctionTraits<ReturnTy(Args...)>
 {
-public:
-    TFunctionTraits() = delete;
-    ~TFunctionTraits() = delete;
-
 public:
     using ClassTy = _ClassTy;
 };

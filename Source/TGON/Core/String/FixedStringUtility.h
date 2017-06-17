@@ -16,7 +16,7 @@ namespace string
 {
 
 template <typename CharTy, std::size_t N>
-    inline constexpr auto MakeFixedString(CharTy(&str)[N]) -> TBasicFixedString<typename std::remove_const<CharTy>::type, N>
+constexpr auto MakeFixedString(CharTy(&str)[N]) -> BasicFixedString<typename std::remove_const<CharTy>::type, N>
 {
     return {str, N - 1};
 }

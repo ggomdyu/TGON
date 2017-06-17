@@ -1,5 +1,5 @@
 /**
- * @filename    TPoint.h
+ * @filename    Point.h
  * @author      ggomdyu
  * @since       04/02/2017
  */
@@ -18,10 +18,10 @@ namespace math
 
 template <typename Ty,
           typename = utility::EnableIfArithmetic<Ty>>
-struct TPoint;
+struct Point;
 
 template <typename Ty>
-struct TPoint<Ty>
+struct Point<Ty>
 {
 private:
     using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
@@ -31,30 +31,30 @@ private:
  */
 public:
     /* @brief   Constructor that initializes members to 0 */
-    constexpr TPoint() noexcept;
+    constexpr Point() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr TPoint(Ty x, Ty y) noexcept;
+    constexpr Point(Ty x, Ty y) noexcept;
 
 /**
  * @section Operator
  */
 public:
-    constexpr const TPoint operator+(const TPoint&) const noexcept;
-    constexpr const TPoint operator-(const TPoint&) const noexcept;
-    constexpr const TPoint operator*(Ty) const noexcept;
-    constexpr const TPoint operator/(DevideTy) const;
-    constexpr const TPoint operator+() const noexcept;
-    constexpr const TPoint operator-() const noexcept;
-    TPoint& operator+=(const TPoint&) noexcept;
-    TPoint& operator-=(const TPoint&) noexcept;
-    TPoint& operator*=(Ty) noexcept;
-    TPoint& operator/=(DevideTy);
-    constexpr bool operator==(const TPoint&) const noexcept;
-    constexpr bool operator!=(const TPoint&) const noexcept;
+    constexpr const Point operator+(const Point&) const noexcept;
+    constexpr const Point operator-(const Point&) const noexcept;
+    constexpr const Point operator*(Ty) const noexcept;
+    constexpr const Point operator/(DevideTy) const;
+    constexpr const Point operator+() const noexcept;
+    constexpr const Point operator-() const noexcept;
+    Point& operator+=(const Point&) noexcept;
+    Point& operator-=(const Point&) noexcept;
+    Point& operator*=(Ty) noexcept;
+    Point& operator/=(DevideTy);
+    constexpr bool operator==(const Point&) const noexcept;
+    constexpr bool operator!=(const Point&) const noexcept;
 
     template <typename CastToTy>
-    constexpr operator TPoint<CastToTy>() const noexcept;
+    constexpr operator Point<CastToTy>() const noexcept;
 
 /**
  * @section Public method
@@ -86,74 +86,74 @@ public:
     Ty x;
     Ty y;
 
-	static const TPoint One;		// 1, 1
-	static const TPoint Zero;	    // 0, 0
-	static const TPoint MinusOne;	// -1, -1
+	static const Point One;		// 1, 1
+	static const Point Zero;	    // 0, 0
+	static const Point MinusOne;	// -1, -1
 };
 
 template <typename Ty>
-constexpr TPoint<Ty> MakePoint(Ty x, Ty y) noexcept
+constexpr Point<Ty> MakePoint(Ty x, Ty y) noexcept
 {
     return {x, y};
 }
 
-using TIntPoint = TPoint<int32_t>;
-using TFloatPoint = TPoint<float>;
-using TDoublePoint = TPoint<double>;
+using IntPoint = Point<int32_t>;
+using FloatPoint = Point<float>;
+using DoublePoint = Point<double>;
 
 template <typename Ty>
-constexpr TPoint<Ty>::TPoint() noexcept :
+constexpr Point<Ty>::Point() noexcept :
     x{},
     y{}
 {
 }
 
 template <typename Ty>
-constexpr TPoint<Ty>::TPoint(Ty x, Ty y) noexcept :
+constexpr Point<Ty>::Point(Ty x, Ty y) noexcept :
     x(x),
     y(y)
 {
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator+(const TPoint& rhs) const noexcept
+constexpr const Point<Ty> Point<Ty>::operator+(const Point& rhs) const noexcept
 {
-    return TPoint(x + rhs.x, y + rhs.y);
+    return Point(x + rhs.x, y + rhs.y);
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator-(const TPoint& rhs) const noexcept
+constexpr const Point<Ty> Point<Ty>::operator-(const Point& rhs) const noexcept
 {
-    return TPoint(x - rhs.x, y - rhs.y);
+    return Point(x - rhs.x, y - rhs.y);
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator*(Ty rhs) const noexcept
+constexpr const Point<Ty> Point<Ty>::operator*(Ty rhs) const noexcept
 {
-    return TPoint(x * rhs, y * rhs);
+    return Point(x * rhs, y * rhs);
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator/(DevideTy rhs) const
+constexpr const Point<Ty> Point<Ty>::operator/(DevideTy rhs) const
 {
-    return TPoint((Ty)((DevideTy)x / (DevideTy)rhs),
+    return Point((Ty)((DevideTy)x / (DevideTy)rhs),
                   (Ty)((DevideTy)y / (DevideTy)rhs));
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator+() const noexcept
+constexpr const Point<Ty> Point<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-constexpr const TPoint<Ty> TPoint<Ty>::operator-() const noexcept
+constexpr const Point<Ty> Point<Ty>::operator-() const noexcept
 {
-	return TPoint(-x, -y);
+	return Point(-x, -y);
 }
 
 template <typename Ty>
-inline TPoint<Ty>& TPoint<Ty>::operator+=(const TPoint& rhs) noexcept
+inline Point<Ty>& Point<Ty>::operator+=(const Point& rhs) noexcept
 {
     x += rhs.x;
     y += rhs.y;
@@ -162,7 +162,7 @@ inline TPoint<Ty>& TPoint<Ty>::operator+=(const TPoint& rhs) noexcept
 }
 
 template <typename Ty>
-inline TPoint<Ty>& TPoint<Ty>::operator-=(const TPoint& rhs) noexcept
+inline Point<Ty>& Point<Ty>::operator-=(const Point& rhs) noexcept
 {
     x -= rhs.x;
     y -= rhs.y;
@@ -171,7 +171,7 @@ inline TPoint<Ty>& TPoint<Ty>::operator-=(const TPoint& rhs) noexcept
 }
 
 template <typename Ty>
-inline TPoint<Ty>& TPoint<Ty>::operator*=(Ty rhs) noexcept
+inline Point<Ty>& Point<Ty>::operator*=(Ty rhs) noexcept
 {
     x *= rhs;
     y *= rhs;
@@ -180,7 +180,7 @@ inline TPoint<Ty>& TPoint<Ty>::operator*=(Ty rhs) noexcept
 }
 
 template <typename Ty>
-inline TPoint<Ty>& TPoint<Ty>::operator/=(DevideTy rhs)
+inline Point<Ty>& Point<Ty>::operator/=(DevideTy rhs)
 {
     x = (Ty)((DevideTy)x / rhs);
     y = (Ty)((DevideTy)y / rhs);
@@ -189,27 +189,27 @@ inline TPoint<Ty>& TPoint<Ty>::operator/=(DevideTy rhs)
 }
 
 template <typename Ty>
-inline constexpr bool TPoint<Ty>::operator==(const TPoint& rhs) const noexcept
+inline constexpr bool Point<Ty>::operator==(const Point& rhs) const noexcept
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
 template <typename Ty>
-inline constexpr bool TPoint<Ty>::operator!=(const TPoint& rhs) const noexcept
+inline constexpr bool Point<Ty>::operator!=(const Point& rhs) const noexcept
 {
     return (x != rhs.x || y != rhs.y);
 }
 
 template<typename Ty>
 template<typename CastToTy>
-constexpr TPoint<Ty>::operator TPoint<CastToTy>() const noexcept
+constexpr Point<Ty>::operator Point<CastToTy>() const noexcept
 {
-    return TPoint<CastToTy>((CastToTy)x, (CastToTy)y);
+    return Point<CastToTy>((CastToTy)x, (CastToTy)y);
 }
 
 template<typename Ty>
 template<std::size_t N>
-inline int32_t TPoint<Ty>::ToString(char(&destBuffer)[N]) const
+inline int32_t Point<Ty>::ToString(char(&destBuffer)[N]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d", x, y);
@@ -219,7 +219,7 @@ inline int32_t TPoint<Ty>::ToString(char(&destBuffer)[N]) const
 }
 
 template<typename Ty>
-inline int32_t TPoint<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t Point<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
@@ -229,7 +229,7 @@ inline int32_t TPoint<Ty>::ToString(char* destBuffer, std::size_t bufferSize) co
 }
 
 template<typename Ty>
-inline std::string TPoint<Ty>::ToString() const
+inline std::string Point<Ty>::ToString() const
 {
     char buffer[128]{};
     this->ToString(buffer);

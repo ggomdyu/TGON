@@ -7,9 +7,12 @@
 #pragma once
 #include "../Generic/GenericTime.h"
 
-namespace tgon {
-namespace platform {
-namespace windows {
+namespace tgon
+{
+namespace platform
+{
+namespace windows
+{
 
 
 } /* namespace windows */

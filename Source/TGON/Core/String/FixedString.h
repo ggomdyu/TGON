@@ -16,9 +16,9 @@ namespace string
 {
 
 template <typename CharTy, std::size_t N>
-class TBasicFixedString
+class BasicFixedString
 {
-    static_assert(N > 0, "The array size of TBasicFixedString must be over than 0.");
+    static_assert(N > 0, "The array size of BasicFixedString must be over than 0.");
 
 /**
  * @section Type definition
@@ -30,31 +30,31 @@ private:
  * @section Ctor/Dtor
  */
 public:
-    constexpr TBasicFixedString() noexcept = default;
+    constexpr BasicFixedString() noexcept = default;
     template <std::size_t N2>
-	TBasicFixedString(const CharTy(&str)[N2]);
-	TBasicFixedString(const CharTy* str, std::size_t length);
-	TBasicFixedString(std::size_t length, CharTy ch);
+	BasicFixedString(const CharTy(&str)[N2]);
+	BasicFixedString(const CharTy* str, std::size_t length);
+	BasicFixedString(std::size_t length, CharTy ch);
     template <std::size_t N2>
-    TBasicFixedString(const TBasicFixedString<CharTy, N2>& rhs);
+    BasicFixedString(const BasicFixedString<CharTy, N2>& rhs);
 
 /**
  * @section Operator
  */
 public:
     template <std::size_t N2>
-	TBasicFixedString& operator=(const TBasicFixedString<CharTy, N2>& rhs);
-    TBasicFixedString& operator=(const TBasicFixedString& rhs) = default;
+	BasicFixedString& operator=(const BasicFixedString<CharTy, N2>& rhs);
+    BasicFixedString& operator=(const BasicFixedString& rhs) = default;
     template <std::size_t N2>
-	TBasicFixedString operator+(const TBasicFixedString<CharTy, N2>& rhs) const;
-	TBasicFixedString operator+(const TBasicFixedString& rhs) const;
-	TBasicFixedString operator+(CharTy ch) const;
+	BasicFixedString operator+(const BasicFixedString<CharTy, N2>& rhs) const;
+	BasicFixedString operator+(const BasicFixedString& rhs) const;
+	BasicFixedString operator+(CharTy ch) const;
     template <std::size_t N2>
-	TBasicFixedString& operator+=(const TBasicFixedString<CharTy, N2>& rhs);
-	TBasicFixedString& operator+=(const TBasicFixedString& rhs);
-    TBasicFixedString& operator+=(CharTy ch);
+	BasicFixedString& operator+=(const BasicFixedString<CharTy, N2>& rhs);
+	BasicFixedString& operator+=(const BasicFixedString& rhs);
+    BasicFixedString& operator+=(CharTy ch);
     template <std::size_t N2>
-	bool operator==(const TBasicFixedString<CharTy, N2>& rhs) const;
+	bool operator==(const BasicFixedString<CharTy, N2>& rhs) const;
 	CharTy operator[](std::size_t index) const;
 	CharTy& operator[](std::size_t index);
 
@@ -63,16 +63,16 @@ public:
  */
 public:
     template <std::size_t N2>
-	TBasicFixedString<CharTy, N + N2> Extend(const TBasicFixedString<CharTy, N2>& rhs) const;
+	BasicFixedString<CharTy, N + N2> Extend(const BasicFixedString<CharTy, N2>& rhs) const;
     template <std::size_t N2>
 	void Assign(const CharTy(&str)[N2]);
 	void Assign(const CharTy* str, std::size_t length);
 	void Assign(std::size_t length, CharTy ch);
     template <std::size_t N2>
-	int32_t Compare(const TBasicFixedString<CharTy, N2>& rhs) const;
+	int32_t Compare(const BasicFixedString<CharTy, N2>& rhs) const;
 	int32_t Find(CharTy ch, std::size_t offset = 0) const;
 	int32_t Find(const CharTy* ch, std::size_t offset, std::size_t count) const;
-	void Swap(TBasicFixedString& rhs);
+	void Swap(BasicFixedString& rhs);
 	const CharTy* CStr() const noexcept;
 	std::size_t Length() const noexcept;
 	constexpr std::size_t Capacity() const noexcept;
@@ -83,6 +83,7 @@ public:
  * @section Public variable
  */
 public:
+    
     static const std::size_t NPos = -1;
 
 /**
@@ -94,42 +95,42 @@ private:
     std::array<CharTy, N> m_str;
 };
 
-using TFixedString = TBasicFixedString<char, 32>;
-using TFixedWString = TBasicFixedString<wchar_t, 32>;
+using TFixedString = BasicFixedString<char, 32>;
+using TFixedWString = BasicFixedString<wchar_t, 32>;
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N>::TBasicFixedString(const CharTy(&str)[N2])
+inline BasicFixedString<CharTy, N>::BasicFixedString(const CharTy(&str)[N2])
 {
 	this->Assign(str);
 }
 
 template<typename CharTy, std::size_t N>
-inline TBasicFixedString<CharTy, N>::TBasicFixedString(const CharTy* str, std::size_t length)
+inline BasicFixedString<CharTy, N>::BasicFixedString(const CharTy* str, std::size_t length)
 {
 	this->Assign(str, length);
 }
 
 template<typename CharTy, std::size_t N>
-inline TBasicFixedString<CharTy, N>::TBasicFixedString(std::size_t length, CharTy ch)
+inline BasicFixedString<CharTy, N>::BasicFixedString(std::size_t length, CharTy ch)
 {
 	this->Assign(length, ch);
 }
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N>::TBasicFixedString(const TBasicFixedString<CharTy, N2>& rhs)
+inline BasicFixedString<CharTy, N>::BasicFixedString(const BasicFixedString<CharTy, N2>& rhs)
 {
-	assert(N > rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > rhs.Length() && "BasicFixedString buffer overflowed");
 
 	this->Assign(rhs.CStr(), rhs.Length());
 }
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator=(const TBasicFixedString<CharTy, N2>& rhs)
+inline BasicFixedString<CharTy, N>& BasicFixedString<CharTy, N>::operator=(const BasicFixedString<CharTy, N2>& rhs)
 {
-	assert(N > rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > rhs.Length() && "BasicFixedString buffer overflowed");
 
 	this->Assign(rhs.CStr(), rhs.Length());
 
@@ -138,29 +139,29 @@ inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator=(con
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N> TBasicFixedString<CharTy, N>::operator+(const TBasicFixedString<CharTy, N2>& rhs) const
+inline BasicFixedString<CharTy, N> BasicFixedString<CharTy, N>::operator+(const BasicFixedString<CharTy, N2>& rhs) const
 {
-	assert(N > m_length + rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > m_length + rhs.Length() && "BasicFixedString buffer overflowed");
 
-	TBasicFixedString<CharTy, N> ret = *this;
+	BasicFixedString<CharTy, N> ret = *this;
 	ret += rhs;
 
 	return ret;
 }
 
 template<typename CharTy, std::size_t N>
-inline TBasicFixedString<CharTy, N> TBasicFixedString<CharTy, N>::operator+(const TBasicFixedString& rhs) const
+inline BasicFixedString<CharTy, N> BasicFixedString<CharTy, N>::operator+(const BasicFixedString& rhs) const
 {
-	assert(N > m_length + rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > m_length + rhs.Length() && "BasicFixedString buffer overflowed");
 
-	TBasicFixedString<CharTy, N> ret = *this;
+	BasicFixedString<CharTy, N> ret = *this;
 	ret += rhs;
 
 	return ret;
 }
 
 template<typename CharTy, std::size_t N>
-inline TBasicFixedString<CharTy, N> TBasicFixedString<CharTy, N>::operator+(CharTy ch) const
+inline BasicFixedString<CharTy, N> BasicFixedString<CharTy, N>::operator+(CharTy ch) const
 {
 	m_str[m_length] = ch;
 	m_str[++m_length] = static_cast<CharTy>(0);
@@ -170,9 +171,9 @@ inline TBasicFixedString<CharTy, N> TBasicFixedString<CharTy, N>::operator+(Char
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator+=(const TBasicFixedString<CharTy, N2>& rhs)
+inline BasicFixedString<CharTy, N>& BasicFixedString<CharTy, N>::operator+=(const BasicFixedString<CharTy, N2>& rhs)
 {
-	assert(N > m_length + rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > m_length + rhs.Length() && "BasicFixedString buffer overflowed");
 
 	std::memcpy(&m_str[m_length], rhs.CStr(), sizeof(CharTy) * (rhs.Length() + 1));
 
@@ -182,9 +183,9 @@ inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator+=(co
 }
 
 template<typename CharTy, std::size_t N>
-inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator+=(const TBasicFixedString& rhs)
+inline BasicFixedString<CharTy, N>& BasicFixedString<CharTy, N>::operator+=(const BasicFixedString& rhs)
 {
-	assert(N > m_length + rhs.Length() && "TBasicFixedString buffer overflowed");
+	assert(N > m_length + rhs.Length() && "BasicFixedString buffer overflowed");
 
 	std::memcpy(&m_str[m_length], rhs.m_str.data(), sizeof(CharTy) * (rhs.m_length + 1));
 
@@ -195,28 +196,28 @@ inline TBasicFixedString<CharTy, N>& TBasicFixedString<CharTy, N>::operator+=(co
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline bool TBasicFixedString<CharTy, N>::operator==(const TBasicFixedString<CharTy, N2>& rhs) const
+inline bool BasicFixedString<CharTy, N>::operator==(const BasicFixedString<CharTy, N2>& rhs) const
 {
 	return this->Compare(rhs) == 0;
 }
 
 template<typename CharTy, std::size_t N>
-inline CharTy TBasicFixedString<CharTy, N>::operator[](std::size_t index) const
+inline CharTy BasicFixedString<CharTy, N>::operator[](std::size_t index) const
 {
 	return m_str[index];
 }
 
 template<typename CharTy, std::size_t N>
-inline CharTy& TBasicFixedString<CharTy, N>::operator[](std::size_t index)
+inline CharTy& BasicFixedString<CharTy, N>::operator[](std::size_t index)
 {
 	return m_str[index];
 }
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline TBasicFixedString<CharTy, N + N2> TBasicFixedString<CharTy, N>::Extend(const TBasicFixedString<CharTy, N2>& rhs) const
+inline BasicFixedString<CharTy, N + N2> BasicFixedString<CharTy, N>::Extend(const BasicFixedString<CharTy, N2>& rhs) const
 {
-	TBasicFixedString<CharTy, N + N2> ret = *this;
+	BasicFixedString<CharTy, N + N2> ret = *this;
 	ret += rhs;
 
 	return ret;
@@ -224,7 +225,7 @@ inline TBasicFixedString<CharTy, N + N2> TBasicFixedString<CharTy, N>::Extend(co
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline void TBasicFixedString<CharTy, N>::Assign(const CharTy(&str)[N2])
+inline void BasicFixedString<CharTy, N>::Assign(const CharTy(&str)[N2])
 {
 	std::memcpy(m_str.data(), str, sizeof(CharTy) * N2);
 
@@ -232,7 +233,7 @@ inline void TBasicFixedString<CharTy, N>::Assign(const CharTy(&str)[N2])
 }
 
 template<typename CharTy, std::size_t N>
-inline void TBasicFixedString<CharTy, N>::Assign(const CharTy * str, std::size_t length)
+inline void BasicFixedString<CharTy, N>::Assign(const CharTy * str, std::size_t length)
 {
 	std::memcpy(m_str.data(), str, sizeof(CharTy) * (length + 1));
 
@@ -240,7 +241,7 @@ inline void TBasicFixedString<CharTy, N>::Assign(const CharTy * str, std::size_t
 }
 
 template<typename CharTy, std::size_t N>
-inline void TBasicFixedString<CharTy, N>::Assign(std::size_t length, CharTy ch)
+inline void BasicFixedString<CharTy, N>::Assign(std::size_t length, CharTy ch)
 {
 	std::size_t i = 0;
 	while (i < length)
@@ -254,7 +255,7 @@ inline void TBasicFixedString<CharTy, N>::Assign(std::size_t length, CharTy ch)
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
-inline int32_t TBasicFixedString<CharTy, N>::Compare(const TBasicFixedString<CharTy, N2>& rhs) const
+inline int32_t BasicFixedString<CharTy, N>::Compare(const BasicFixedString<CharTy, N2>& rhs) const
 {
 	auto minSize = m_length < rhs.Length() ? m_length : rhs.Length();
 
@@ -277,15 +278,15 @@ inline int32_t TBasicFixedString<CharTy, N>::Compare(const TBasicFixedString<Cha
 }
 
 template<typename CharTy, std::size_t N>
-inline int32_t TBasicFixedString<CharTy, N>::Find(CharTy ch, std::size_t offset) const
+inline int32_t BasicFixedString<CharTy, N>::Find(CharTy ch, std::size_t offset) const
 {
 	return this->Find(&ch, offset, 1);
 }
 
 template<typename CharTy, std::size_t N>
-inline int32_t TBasicFixedString<CharTy, N>::Find(const CharTy* ch, std::size_t offset, std::size_t count) const
+inline int32_t BasicFixedString<CharTy, N>::Find(const CharTy* ch, std::size_t offset, std::size_t count) const
 {
-	// TODO: �׽�Ʈ �ʿ�
+	// TODO: ≈◊Ω∫∆Æ « ø‰
 	for (auto i = offset;; ++i)
 	{
 		auto ans = TraitsTy::compare(&m_str.data()[offset], ch, count);
@@ -299,7 +300,7 @@ inline int32_t TBasicFixedString<CharTy, N>::Find(const CharTy* ch, std::size_t 
 }
 
 template<typename CharTy, std::size_t N>
-inline void TBasicFixedString<CharTy, N>::Swap(TBasicFixedString& rhs)
+inline void BasicFixedString<CharTy, N>::Swap(BasicFixedString& rhs)
 {
 	if (rhs != this)
 	{
@@ -309,35 +310,35 @@ inline void TBasicFixedString<CharTy, N>::Swap(TBasicFixedString& rhs)
 }
 
 template<typename CharTy, std::size_t N>
-inline const CharTy* TBasicFixedString<CharTy, N>::CStr() const noexcept
+inline const CharTy* BasicFixedString<CharTy, N>::CStr() const noexcept
 {
 	return m_str.data();
 }
 
 template<typename CharTy, std::size_t N>
-inline std::size_t string::TBasicFixedString<CharTy, N>::Length() const noexcept
+inline std::size_t string::BasicFixedString<CharTy, N>::Length() const noexcept
 {
 	return m_length;
 }
 
 template<typename CharTy, std::size_t N>
-inline constexpr std::size_t tgon::string::TBasicFixedString<CharTy, N>::Capacity() const noexcept
+inline constexpr std::size_t tgon::string::BasicFixedString<CharTy, N>::Capacity() const noexcept
 {
 	return N;
 }
 
 template<typename CharTy, std::size_t N>
-inline CharTy& tgon::string::TBasicFixedString<CharTy, N>::At(std::size_t index)
+inline CharTy& tgon::string::BasicFixedString<CharTy, N>::At(std::size_t index)
 {
-	assert(index <= m_length && "TBasicFixedString index out of range");
+	assert(index <= m_length && "BasicFixedString index out of range");
 
 	return m_str[index];
 }
 
 template<typename CharTy, std::size_t N>
-inline CharTy TBasicFixedString<CharTy, N>::At(std::size_t index) const
+inline CharTy BasicFixedString<CharTy, N>::At(std::size_t index) const
 {
-	assert(index <= m_length && "TBasicFixedString index out of range");
+	assert(index <= m_length && "BasicFixedString index out of range");
 
 	return m_str[index];
 }

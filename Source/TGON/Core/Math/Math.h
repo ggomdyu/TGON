@@ -5,12 +5,13 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "Core/Utility/TypeTraits.h"
-#include "Vector3.h"
-
 #include <cmath>
 #include <cstdint>
+
+#include "Core/Platform/Config.h"
+#include "Core/Utility/TypeTraits.h"
+
+#include "Vector3.h"
 
 namespace tgon
 {

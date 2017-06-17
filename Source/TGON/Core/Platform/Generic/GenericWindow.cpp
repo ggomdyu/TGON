@@ -1,8 +1,10 @@
 #include "PrecompiledHeader.h"
 #include "GenericWindow.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 GenericWindow::GenericWindow() :
     m_isClosed(false)

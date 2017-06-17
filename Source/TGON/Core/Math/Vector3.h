@@ -1,5 +1,5 @@
 /**
- * @filename    TVector3.h
+ * @filename    Vector3.h
  * @author      ggomdyu
  * @since       03/14/2016
  */

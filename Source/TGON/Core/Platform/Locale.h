@@ -1,5 +1,5 @@
 /**
- * @filename    TLocale.h
+ * @filename    Locale.h
  * @author      ggomdyu
  * @since       06/14/2017
  */

@@ -1,5 +1,5 @@
 /**
- * @filename    TRect.h
+ * @filename    Rect.h
  * @author      ggomdyu
  * @since       04/02/2017
  */
@@ -18,10 +18,10 @@ namespace math
 
 template <typename Ty,
           typename = utility::EnableIfArithmetic<Ty>>
-struct TRect;
+struct Rect;
 
 template <typename Ty>
-struct TRect<Ty>
+struct Rect<Ty>
 {
 private:
     using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
@@ -31,27 +31,27 @@ private:
  */
 public:
     /* @brief   Constructor that initializes members to 0 */
-    constexpr TRect() noexcept;
+    constexpr Rect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr TRect(Ty bottom, Ty top, Ty width, Ty height) noexcept;
+    constexpr Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept;
 
 /**
  * @section Operator
  */
 public:
-    constexpr const TRect operator+(const TRect&) const noexcept;
-    constexpr const TRect operator-(const TRect&) const noexcept;
-    constexpr const TRect operator*(Ty) const noexcept;
-    constexpr const TRect operator/(DevideTy) const;
-    constexpr const TRect operator+() const noexcept;
-    constexpr const TRect operator-() const noexcept;
-    TRect& operator+=(const TRect&) noexcept;
-    TRect& operator-=(const TRect&) noexcept;
-    TRect& operator*=(Ty) noexcept;
-    TRect& operator/=(DevideTy);
-    constexpr bool operator==(const TRect&) const noexcept;
-    constexpr bool operator!=(const TRect&) const noexcept;
+    constexpr const Rect operator+(const Rect&) const noexcept;
+    constexpr const Rect operator-(const Rect&) const noexcept;
+    constexpr const Rect operator*(Ty) const noexcept;
+    constexpr const Rect operator/(DevideTy) const;
+    constexpr const Rect operator+() const noexcept;
+    constexpr const Rect operator-() const noexcept;
+    Rect& operator+=(const Rect&) noexcept;
+    Rect& operator-=(const Rect&) noexcept;
+    Rect& operator*=(Ty) noexcept;
+    Rect& operator/=(DevideTy);
+    constexpr bool operator==(const Rect&) const noexcept;
+    constexpr bool operator!=(const Rect&) const noexcept;
 
 /**
  * @section Public method
@@ -85,23 +85,23 @@ public:
     Ty width;
     Ty height;
 
-	static const TRect One;		    // 0, 0, 0, 0
-	static const TRect Zero;	    // 1, 1, 1, 1
-	static const TRect MinusOne;	// -1, -1, -1, -1
+	static const Rect One;		    // 0, 0, 0, 0
+	static const Rect Zero;	    // 1, 1, 1, 1
+	static const Rect MinusOne;	// -1, -1, -1, -1
 };
 
 template <typename Ty>
-constexpr TRect<Ty> MakeRect(Ty bottom, Ty top, Ty width, Ty height) noexcept
+constexpr Rect<Ty> MakeRect(Ty bottom, Ty top, Ty width, Ty height) noexcept
 {
     return {bottom, top, width, height};
 }
 
-using TIntRect = TRect<int32_t>;
-using TFloatRect = TRect<float>;
-using TDoubleRect = TRect<double>;
+using IntRect = Rect<int32_t>;
+using FloatRect = Rect<float>;
+using DoubleRect = Rect<double>;
 
 template <typename Ty>
-constexpr TRect<Ty>::TRect() noexcept :
+constexpr Rect<Ty>::Rect() noexcept :
     bottom{},
     top{},
     width{},
@@ -110,7 +110,7 @@ constexpr TRect<Ty>::TRect() noexcept :
 }
 
 template <typename Ty>
-constexpr TRect<Ty>::TRect(Ty bottom, Ty top, Ty width, Ty height) noexcept :
+constexpr Rect<Ty>::Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept :
     bottom( bottom),
     top(top),
     width(width),
@@ -119,48 +119,48 @@ constexpr TRect<Ty>::TRect(Ty bottom, Ty top, Ty width, Ty height) noexcept :
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator+(const TRect& rhs) const noexcept
+constexpr const Rect<Ty> Rect<Ty>::operator+(const Rect& rhs) const noexcept
 {
-    return TRect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
+    return Rect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator-(const TRect& rhs) const noexcept
+constexpr const Rect<Ty> Rect<Ty>::operator-(const Rect& rhs) const noexcept
 {
-    return TRect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
+    return Rect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator*(Ty rhs) const noexcept
+constexpr const Rect<Ty> Rect<Ty>::operator*(Ty rhs) const noexcept
 {
-    return TRect(bottom * rhs, top * rhs, width * rhs, height * rhs);
+    return Rect(bottom * rhs, top * rhs, width * rhs, height * rhs);
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator/(DevideTy rhs) const
+constexpr const Rect<Ty> Rect<Ty>::operator/(DevideTy rhs) const
 {
     DevideTy inverse = 1.0f / rhs;
 
-    return TRect((Ty)((DevideTy)bottom * inverse), 
+    return Rect((Ty)((DevideTy)bottom * inverse), 
                  (Ty)((DevideTy)top * inverse),
                  (Ty)((DevideTy)width * inverse),
                  (Ty)((DevideTy)height * inverse));
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator+() const noexcept
+constexpr const Rect<Ty> Rect<Ty>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename Ty>
-constexpr const TRect<Ty> TRect<Ty>::operator-() const noexcept
+constexpr const Rect<Ty> Rect<Ty>::operator-() const noexcept
 {
-	return TRect(-bottom, -top, -width, -height);
+	return Rect(-bottom, -top, -width, -height);
 }
 
 template <typename Ty>
-inline TRect<Ty>& TRect<Ty>::operator+=(const TRect& rhs) noexcept
+inline Rect<Ty>& Rect<Ty>::operator+=(const Rect& rhs) noexcept
 {
 	bottom += rhs.bottom;
     top += rhs.top;
@@ -171,7 +171,7 @@ inline TRect<Ty>& TRect<Ty>::operator+=(const TRect& rhs) noexcept
 }
 
 template <typename Ty>
-inline TRect<Ty>& TRect<Ty>::operator-=(const TRect& rhs) noexcept
+inline Rect<Ty>& Rect<Ty>::operator-=(const Rect& rhs) noexcept
 {
     bottom -= rhs.bottom;
     top -= rhs.top;
@@ -182,7 +182,7 @@ inline TRect<Ty>& TRect<Ty>::operator-=(const TRect& rhs) noexcept
 }
 
 template <typename Ty>
-inline TRect<Ty>& TRect<Ty>::operator*=(Ty rhs) noexcept
+inline Rect<Ty>& Rect<Ty>::operator*=(Ty rhs) noexcept
 {
     bottom *= rhs;
     top *= rhs;
@@ -193,7 +193,7 @@ inline TRect<Ty>& TRect<Ty>::operator*=(Ty rhs) noexcept
 }
 
 template <typename Ty>
-inline TRect<Ty>& TRect<Ty>::operator/=(DevideTy rhs)
+inline Rect<Ty>& Rect<Ty>::operator/=(DevideTy rhs)
 {
 	DevideTy inverse = 1.0f / rhs;
 
@@ -206,20 +206,20 @@ inline TRect<Ty>& TRect<Ty>::operator/=(DevideTy rhs)
 }
 
 template <typename Ty>
-constexpr bool TRect<Ty>::operator==(const TRect& rhs) const noexcept
+constexpr bool Rect<Ty>::operator==(const Rect& rhs) const noexcept
 {
 	return (bottom == rhs.bottom && top == rhs.top && width == rhs.width && height == rhs.height);
 }
 
 template <typename Ty>
-constexpr bool TRect<Ty>::operator!=(const TRect& rhs) const noexcept
+constexpr bool Rect<Ty>::operator!=(const Rect& rhs) const noexcept
 {
     return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }
 
 template<typename Ty>
 template<std::size_t N>
-inline int32_t TRect<Ty>::ToString(char(&destBuffer)[N]) const
+inline int32_t Rect<Ty>::ToString(char(&destBuffer)[N]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d %d %d", bottom, top, width, height);
@@ -229,7 +229,7 @@ inline int32_t TRect<Ty>::ToString(char(&destBuffer)[N]) const
 }
 
 template<typename Ty>
-inline int32_t TRect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t Rect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
@@ -239,7 +239,7 @@ inline int32_t TRect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) con
 }
 
 template<typename Ty>
-inline std::string TRect<Ty>::ToString() const
+inline std::string Rect<Ty>::ToString() const
 {
     char buffer[128]{};
     this->ToString(buffer);

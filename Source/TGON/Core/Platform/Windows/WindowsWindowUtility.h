@@ -10,12 +10,15 @@
 #endif
 #include <windows.h>
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 struct TWindowStyle;
 
-namespace windows {
+namespace windows
+{
 
 /**
  * @brief                       Convert TWindowStyle to DWORD.

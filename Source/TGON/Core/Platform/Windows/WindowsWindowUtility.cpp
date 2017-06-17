@@ -6,9 +6,12 @@
 #include "WindowsWindow.h"
 #include "Core/String/TEncoding.h"
 
-namespace tgon {
-namespace platform {
-namespace windows {
+namespace tgon
+{
+namespace platform
+{
+namespace windows
+{
     
 void ConvertWindowStyleToDword(const TWindowStyle& wndStyle, DWORD* extendedStyle, DWORD* normalStyle)
 {

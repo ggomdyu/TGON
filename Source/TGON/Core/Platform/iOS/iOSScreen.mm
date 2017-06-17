@@ -19,6 +19,11 @@ TGON_API void GetScreenResolution(int32_t* width, int32_t* height)
     *width = screenResolution.width;
     *height = screenResolution.height;
 }
+    
+TGON_API float GetScaleFactor()
+{
+    return [[UIScreen mainScreen] scale];
+}
 
 } /* namespace platform */
 } /* namespace tgon */
