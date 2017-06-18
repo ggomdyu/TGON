@@ -4,13 +4,9 @@
 
 @interface iOSAppDelegate : UIResponder <UIApplicationDelegate>
 {
-    iOSRootViewController* m_rootViewController;
-}
-
-@property (strong, nonatomic) UIWindow *window;
+    iOSRootViewController* m_rootViewController;}
 
 - (void)InitializeRootViewController;
-- (void)InitializeWindow:(UIViewController*)rootViewController;
 
 @end
 

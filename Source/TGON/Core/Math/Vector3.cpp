@@ -9,16 +9,16 @@ namespace tgon
 namespace math
 {
 
-TGON_API const TVector3 TVector3::Forward(0.f, 0.f, 1.f);
-TGON_API const TVector3 TVector3::Back(0.f, 0.f, -1.f);
-TGON_API const TVector3 TVector3::Up(0.f, 1.f, 0.f);
-TGON_API const TVector3 TVector3::Down(0.f, -1.f, 0.f);
-TGON_API const TVector3 TVector3::Left(-1.f, 0.f, 0.f);
-TGON_API const TVector3 TVector3::Right(1.f, 0.f, 0.f);
-TGON_API const TVector3 TVector3::One(0.f, 0.f, 0.f);
-TGON_API const TVector3 TVector3::Zero(0.f, 0.f, 0.f);
+TGON_API const Vector3 Vector3::Forward(0.f, 0.f, 1.f);
+TGON_API const Vector3 Vector3::Back(0.f, 0.f, -1.f);
+TGON_API const Vector3 Vector3::Up(0.f, 1.f, 0.f);
+TGON_API const Vector3 Vector3::Down(0.f, -1.f, 0.f);
+TGON_API const Vector3 Vector3::Left(-1.f, 0.f, 0.f);
+TGON_API const Vector3 Vector3::Right(1.f, 0.f, 0.f);
+TGON_API const Vector3 Vector3::One(0.f, 0.f, 0.f);
+TGON_API const Vector3 Vector3::Zero(0.f, 0.f, 0.f);
 
-void TVector3::TransformCoord(const TMatrix4x4& rhs) noexcept
+void Vector3::TransformCoord(const TMatrix4x4& rhs) noexcept
 {
 	// Vector3's w element is '1'
 
@@ -44,7 +44,7 @@ void TVector3::TransformCoord(const TMatrix4x4& rhs) noexcept
 #endif
 }
 
-void TVector3::TransformNormal(const TMatrix4x4& rhs) noexcept
+void Vector3::TransformNormal(const TMatrix4x4& rhs) noexcept
 {
 #if TGON_SUPPORT_SSE
 #else

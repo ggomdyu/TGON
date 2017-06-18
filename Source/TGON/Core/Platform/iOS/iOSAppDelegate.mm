@@ -2,26 +2,77 @@
 #import "iOSAppDelegate.h"
 
 #import <memory>
+#import "Core/String/FixedStringUtility.h"
+
+//#import "iOSApplication.h"
+
+#import "Core/Utility/Expression.h"
+
+using namespace tgon::utility;
+
+class Vec
+{
+public:
+    Vec() noexcept
+    {
+        for (int i = 0; i < std::extent<decltype(m)>::value; ++i)
+        {
+            m[i] = 0;
+        }
+    }
+
+    Vec(int a, int b, int c, int d)
+    {
+        m[0] = a;
+        m[1] = b;
+        m[2] = c;
+        m[3] = d;
+    }
+
+    template <typename ExpressionTy>
+    Vec(ExpressionTy expression) noexcept
+    {
+        for (int i = 0; i < std::extent<decltype(m)>::value; ++i)
+        {
+            m[i] = expression[i];
+        }
+    }
+
+    int operator[](int index) const
+    {
+        return m[index];
+    }
+
+    PlusExpression<Vec, Vec> operator+(const Vec& rhs)
+    {
+        return {*this, rhs};
+    }
+
+    int m[4];
+};
+
+
 
 @implementation iOSAppDelegate
 
 - (void)InitializeRootViewController
 {
-    //m_rootViewController = [[iOSRootViewController alloc] initWithNibName:nil bundle:nil];
-}
+    using namespace tgon::string;
+    
+    Vec v{1,2,3,4};
+    Vec v1{5,6,7,8};
 
-- (void)InitializeWindow:(UIViewController*)rootViewController
-{
-//    auto mainScreen = UIScreen.mainScreen;
-//    m_uiWindow = [[UIWindow alloc] initWithFrame:mainScreen.bounds];
-//    
-//    m_uiWindow.rootViewController = rootViewController;
+    Vec v2 = v + v1 + v1 + v + v1 + v;
+
+    NSLog(@"%d %d %d %d", v2[0], v2[1], v2[2], v[3]);
+    
+    m_rootViewController = [[iOSRootViewController alloc] init];
+    [m_rootViewController presentViewController:m_rootViewController animated:TRUE completion:nil];
 }
 
 - (BOOL)application:(UIApplication*)uiApplication didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    //[self InitializeRootViewController];
-    //[self InitializeWindow:m_rootViewController];
+    [self InitializeRootViewController];
     
     return YES;
 }

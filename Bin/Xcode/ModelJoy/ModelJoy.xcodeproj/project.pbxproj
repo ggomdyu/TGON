@@ -12,7 +12,8 @@
 		FD1503B21EF5002B0043FAA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */; };
 		FD1503BD1EF5002C0043FAA5 /* ModelJoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503BC1EF5002C0043FAA5 /* ModelJoyTests.m */; };
 		FD1503C81EF5002C0043FAA5 /* ModelJoyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */; };
-		FD1503D71EF500B80043FAA5 /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */; };
+		FD6F133E1EF56B1A00BAB303 /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */; };
+		FD6F134A1EF5709D00BAB303 /* iOSRootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyUITests.m; sourceTree = "<group>"; };
 		FD1503C91EF5002C0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.iOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug-iphonesimulator/libTGON.Core.iOS.a"; sourceTree = "<group>"; };
+		FD6F13461EF5709D00BAB303 /* iOSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSRootViewController.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.h; sourceTree = "<absolute>"; };
+		FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSRootViewController.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.mm; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD1503D71EF500B80043FAA5 /* libTGON.Core.iOS.a in Frameworks */,
+				FD6F133E1EF56B1A00BAB303 /* libTGON.Core.iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +100,8 @@
 		FD1503A11EF5002B0043FAA5 /* ModelJoy */ = {
 			isa = PBXGroup;
 			children = (
+				FD6F13461EF5709D00BAB303 /* iOSRootViewController.h */,
+				FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */,
 				FD1503AB1EF5002B0043FAA5 /* Main.storyboard */,
 				FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */,
 				FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */,
@@ -267,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6F134A1EF5709D00BAB303 /* iOSRootViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +514,7 @@
 				FD1503CE1EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD1503CF1EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyTests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +523,7 @@
 				FD1503D11EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD1503D21EF5002C0043FAA5 /* Build configuration list for PBXNativeTarget "ModelJoyUITests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +532,7 @@
 				FD1503D41EF5002C0043FAA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

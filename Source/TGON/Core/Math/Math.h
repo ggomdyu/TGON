@@ -103,7 +103,7 @@ inline float Smoothstep(float from, float to, float t) noexcept
  * @param [in] t        Elapsed time
  * @return              Interpolated value
  */
-inline const TVector3 Bezier(const TVector3& a, const TVector3& b, const TVector3& c, float t) noexcept
+inline const Vector3 Bezier(const Vector3& a, const Vector3& b, const Vector3& c, float t) noexcept
 {
 	float inverse = 1.0f - t;
 	return {(inverse * inverse * a) + (2.0f * t * inverse * b) + (t * t * c)};

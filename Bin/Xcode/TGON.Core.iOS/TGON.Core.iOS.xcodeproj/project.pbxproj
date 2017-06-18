@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD1503DC1EF50A7A0043FAA5 /* iOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */; };
 		FD4932EB1EED4F1500496036 /* Array.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E61EED4E9600496036 /* Array.h */; };
 		FD4932EC1EED4F1500496036 /* AutoCast.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E71EED4E9600496036 /* AutoCast.h */; };
 		FD4932ED1EED4F1500496036 /* Enumerator.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E81EED4E9600496036 /* Enumerator.h */; };
 		FD4932EF1EED4F1500496036 /* TypeTraits.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932EA1EED4E9600496036 /* TypeTraits.h */; };
 		FD4932F01EED4F1500496036 /* Random.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984C81EED49B40037EB2A /* Random.h */; };
 		FD4932F11EED4F1500496036 /* WELLRNG.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984CA1EED49B40037EB2A /* WELLRNG.h */; };
+		FD6F134E1EF5714100BAB303 /* iOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD6F134D1EF5714100BAB303 /* iOSAppDelegate.mm */; };
+		FD6F13501EF61E7000BAB303 /* GenericLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE131EF03BB9000222A3 /* GenericLocale.h */; };
+		FD6F13511EF61E7000BAB303 /* iOSAppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6F134C1EF5714100BAB303 /* iOSAppDelegate.h */; };
+		FD6F13521EF61E7000BAB303 /* iOSLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE101EF023C9000222A3 /* iOSLocale.h */; };
+		FD6F13531EF61E7000BAB303 /* Application.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDFE1EEEF6D3000222A3 /* Application.h */; };
+		FD6F13541EF61E7000BAB303 /* Config.h in Sources */ = {isa = PBXBuildFile; fileRef = FDDB283A1EF2E5D5005516AF /* Config.h */; };
+		FD6F13551EF61E7000BAB303 /* Locale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE6D1EF0406C000222A3 /* Locale.h */; };
+		FD6F13561EF61E7000BAB303 /* Expression.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6F134F1EF61D0B00BAB303 /* Expression.h */; };
+		FD6F13581EF6465C00BAB303 /* iOSMain.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6F13571EF6465C00BAB303 /* iOSMain.m */; };
 		FD6FC4ED1EED42DC00A58E98 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4E91EED42DC00A58E98 /* Object.cpp */; };
 		FD6FC4EE1EED42DC00A58E98 /* TypeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4EB1EED42DC00A58E98 /* TypeInfo.cpp */; };
 		FD6FC4EF1EED435200A58E98 /* Delegate.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4E81EED42DC00A58E98 /* Delegate.h */; };
@@ -28,7 +36,6 @@
 		FDA6BDB81EEEBFA8000222A3 /* iOSWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB11EEE1849000222A3 /* iOSWindow.h */; };
 		FDA6BE111EF023C9000222A3 /* iOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE0F1EF023C9000222A3 /* iOSLocale.mm */; };
 		FDA6BE141EF03BB9000222A3 /* GenericLocale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE121EF03BB9000222A3 /* GenericLocale.cpp */; };
-		FDC127EE1EF433D6004BF5CF /* iOSRootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC127ED1EF433D6004BF5CF /* iOSRootViewController.mm */; };
 		FDD984C01EED479C0037EB2A /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BE1EED479C0037EB2A /* Vector3.cpp */; };
 		FDD984C11EED47BB0037EB2A /* Extent.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BA1EED479C0037EB2A /* Extent.h */; };
 		FDD984C21EED47BB0037EB2A /* Math.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BB1EED479C0037EB2A /* Math.h */; };
@@ -38,7 +45,6 @@
 		FDD984C61EED47BB0037EB2A /* FixedString.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984B81EED47570037EB2A /* FixedString.h */; };
 		FDD984C71EED47BB0037EB2A /* FixedStringUtility.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984B91EED47570037EB2A /* FixedStringUtility.h */; };
 		FDD984CB1EED49B40037EB2A /* WELLRNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD984C91EED49B40037EB2A /* WELLRNG.cpp */; };
-		FDDB28391EF2E2C1005516AF /* iOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDDB28381EF2E2C1005516AF /* iOSAppDelegate.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,11 +60,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSMain.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSMain.mm; sourceTree = "<group>"; };
 		FD4932E61EED4E9600496036 /* Array.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Array.h; path = ../../../Source/TGON/Core/Utility/Array.h; sourceTree = "<group>"; };
 		FD4932E71EED4E9600496036 /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = AutoCast.h; path = ../../../Source/TGON/Core/Utility/AutoCast.h; sourceTree = "<group>"; };
 		FD4932E81EED4E9600496036 /* Enumerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Enumerator.h; path = ../../../Source/TGON/Core/Utility/Enumerator.h; sourceTree = "<group>"; };
 		FD4932EA1EED4E9600496036 /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = TypeTraits.h; path = ../../../Source/TGON/Core/Utility/TypeTraits.h; sourceTree = "<group>"; };
+		FD6F134C1EF5714100BAB303 /* iOSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSAppDelegate.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.h; sourceTree = "<absolute>"; };
+		FD6F134D1EF5714100BAB303 /* iOSAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSAppDelegate.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm; sourceTree = "<absolute>"; };
+		FD6F134F1EF61D0B00BAB303 /* Expression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = Expression.h; path = ../../../Source/TGON/Core/Utility/Expression.h; sourceTree = "<group>"; };
+		FD6F13571EF6465C00BAB303 /* iOSMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSMain.m; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSMain.m; sourceTree = "<absolute>"; };
 		FD6FC4D21EED425300A58E98 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.Core.iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6FC4E81EED42DC00A58E98 /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Delegate.h; path = ../../../Source/TGON/Core/Object/Delegate.h; sourceTree = "<group>"; };
 		FD6FC4E91EED42DC00A58E98 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Object.cpp; path = ../../../Source/TGON/Core/Object/Object.cpp; sourceTree = "<group>"; };
@@ -78,8 +87,6 @@
 		FDA6BE121EF03BB9000222A3 /* GenericLocale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericLocale.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericLocale.cpp; sourceTree = "<group>"; };
 		FDA6BE131EF03BB9000222A3 /* GenericLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericLocale.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericLocale.h; sourceTree = "<group>"; };
 		FDA6BE6D1EF0406C000222A3 /* Locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Locale.h; path = ../../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
-		FDC127EC1EF433D6004BF5CF /* iOSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSRootViewController.h; path = ../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.h; sourceTree = "<group>"; };
-		FDC127ED1EF433D6004BF5CF /* iOSRootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSRootViewController.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.mm; sourceTree = "<group>"; };
 		FDD984B81EED47570037EB2A /* FixedString.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = FixedString.h; path = ../../../Source/TGON/Core/String/FixedString.h; sourceTree = "<group>"; };
 		FDD984B91EED47570037EB2A /* FixedStringUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = FixedStringUtility.h; path = ../../../Source/TGON/Core/String/FixedStringUtility.h; sourceTree = "<group>"; };
 		FDD984BA1EED479C0037EB2A /* Extent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Extent.h; path = ../../../Source/TGON/Core/Math/Extent.h; sourceTree = "<group>"; };
@@ -91,8 +98,6 @@
 		FDD984C81EED49B40037EB2A /* Random.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Random.h; path = ../../../Source/TGON/Core/Random/Random.h; sourceTree = "<group>"; };
 		FDD984C91EED49B40037EB2A /* WELLRNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WELLRNG.cpp; path = ../../../Source/TGON/Core/Random/WELLRNG.cpp; sourceTree = "<group>"; };
 		FDD984CA1EED49B40037EB2A /* WELLRNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WELLRNG.h; path = ../../../Source/TGON/Core/Random/WELLRNG.h; sourceTree = "<group>"; };
-		FDDB28371EF2E2C1005516AF /* iOSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSAppDelegate.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.h; sourceTree = "<absolute>"; };
-		FDDB28381EF2E2C1005516AF /* iOSAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSAppDelegate.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm; sourceTree = "<absolute>"; };
 		FDDB283A1EF2E5D5005516AF /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,11 +127,9 @@
 		FD4933321EED563700496036 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				FD1503DB1EF50A7A0043FAA5 /* iOSMain.mm */,
-				FDC127EC1EF433D6004BF5CF /* iOSRootViewController.h */,
-				FDC127ED1EF433D6004BF5CF /* iOSRootViewController.mm */,
-				FDDB28371EF2E2C1005516AF /* iOSAppDelegate.h */,
-				FDDB28381EF2E2C1005516AF /* iOSAppDelegate.mm */,
+				FD6F13571EF6465C00BAB303 /* iOSMain.m */,
+				FD6F134C1EF5714100BAB303 /* iOSAppDelegate.h */,
+				FD6F134D1EF5714100BAB303 /* iOSAppDelegate.mm */,
 				FDA6BDA91EEDC7BA000222A3 /* iOSScreen.mm */,
 				FDA6BDAB1EEDC7FE000222A3 /* iOSScreen.h */,
 				FDA6BDB21EEE1870000222A3 /* iOSWindow.mm */,
@@ -233,6 +236,7 @@
 		FDD984B71EED47350037EB2A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FD6F134F1EF61D0B00BAB303 /* Expression.h */,
 				FD4932E61EED4E9600496036 /* Array.h */,
 				FD4932E71EED4E9600496036 /* AutoCast.h */,
 				FD4932E81EED4E9600496036 /* Enumerator.h */,
@@ -299,9 +303,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD6F13501EF61E7000BAB303 /* GenericLocale.h in Sources */,
+				FD6F13511EF61E7000BAB303 /* iOSAppDelegate.h in Sources */,
+				FD6F13521EF61E7000BAB303 /* iOSLocale.h in Sources */,
+				FD6F13531EF61E7000BAB303 /* Application.h in Sources */,
+				FD6F13541EF61E7000BAB303 /* Config.h in Sources */,
+				FD6F13551EF61E7000BAB303 /* Locale.h in Sources */,
+				FD6F13561EF61E7000BAB303 /* Expression.h in Sources */,
+				FD6F134E1EF5714100BAB303 /* iOSAppDelegate.mm in Sources */,
+				FD6F13581EF6465C00BAB303 /* iOSMain.m in Sources */,
 				FDA6BDB71EEEBFA8000222A3 /* GenericWindow.h in Sources */,
-				FDC127EE1EF433D6004BF5CF /* iOSRootViewController.mm in Sources */,
-				FD1503DC1EF50A7A0043FAA5 /* iOSMain.mm in Sources */,
 				FDA6BDB81EEEBFA8000222A3 /* iOSWindow.h in Sources */,
 				FDA6BDAF1EEDCC73000222A3 /* GenericScreen.h in Sources */,
 				FDA6BDAC1EEDC878000222A3 /* iOSScreen.h in Sources */,
@@ -318,7 +329,6 @@
 				FDA6BDAA1EEDC7BA000222A3 /* iOSScreen.mm in Sources */,
 				FDD984C41EED47BB0037EB2A /* Rect.h in Sources */,
 				FDD984C51EED47BB0037EB2A /* Vector3.h in Sources */,
-				FDDB28391EF2E2C1005516AF /* iOSAppDelegate.mm in Sources */,
 				FDA6BE141EF03BB9000222A3 /* GenericLocale.cpp in Sources */,
 				FDD984CB1EED49B40037EB2A /* WELLRNG.cpp in Sources */,
 				FDD984C61EED47BB0037EB2A /* FixedString.h in Sources */,

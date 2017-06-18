@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FD6FC4D11EED425300A58E98"
+               BuildableName = "libTGON.Core.iOS.a"
+               BlueprintName = "TGON.Core.iOS"
+               ReferencedContainer = "container:../TGON.Core.iOS/TGON.Core.iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD15039E1EF5002B0043FAA5"
                BuildableName = "ModelJoy.app"
                BlueprintName = "ModelJoy"

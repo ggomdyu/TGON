@@ -27,7 +27,7 @@
       location = "container:"
       name = "4. Content">
       <FileRef
-         location = "group:ModelJoy/ModelJoy.xcodeproj">
+         location = "group:/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>
