@@ -22,73 +22,70 @@ template <template <typename, typename> class ExpressionTy, typename FirstOperan
 struct BaseExpression<ExpressionTy<FirstOperandTy, SecondOperandTy>>
 {
 /**
- * @section Type definition
+ * @section Private variable
  */
-public:
-    using ResultTy = int;//decltype(FirstOperandTy{}[0] + SecondOperandTy{}[0]);
+private:
+    const FirstOperandTy& m_firstOperand;
+    const SecondOperandTy& m_secondOperand;
 
 /**
  * @section Ctor/Dtor
  */
 public:
-    constexpr BaseExpression() = default;
+    constexpr BaseExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept;
 
-    constexpr BaseExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept :
-        m_firstOperand(firstOperand),
-        m_secondOperand(secondOperand)
-    {
-    }
+/**
+ * @section Type definition
+ */
+public:
+    using ResultTy = decltype(m_firstOperand[0] + m_secondOperand[0]);
 
-    template <typename Ty>
-    ExpressionTy<BaseExpression, Ty> operator+(const Ty& rhs)
-    {
-        return {*this, rhs  };
-    }
-
-    constexpr const FirstOperandTy& GetFirstOperand() const noexcept
-    {
-        return m_firstOperand;
-    }
-
-    constexpr const SecondOperandTy& GetSecondOperand() const noexcept
-    {
-        return m_secondOperand;
-    }
-
-    ResultTy operator[](std::size_t index) const
-    {
-        return (*(ExpressionTy<FirstOperandTy, SecondOperandTy>*)(this))[index];
-    }
-
-private:
-    const FirstOperandTy& m_firstOperand;
-    const SecondOperandTy& m_secondOperand;
+/**
+ * @section Operator
+ */
+public:
+    ResultTy operator[](std::size_t index) const;
 };
+
+template <template <typename, typename> class ExpressionTy, typename FirstOperandTy, typename SecondOperandTy>
+constexpr BaseExpression<ExpressionTy<FirstOperandTy, SecondOperandTy>>::BaseExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept :
+    m_firstOperand(firstOperand),
+    m_secondOperand(secondOperand)
+{
+}
+
+template <template <typename, typename> class ExpressionTy, typename FirstOperandTy, typename SecondOperandTy>
+typename BaseExpression<ExpressionTy<FirstOperandTy, SecondOperandTy>>::ResultTy BaseExpression<ExpressionTy<FirstOperandTy, SecondOperandTy>>::operator[](std::size_t index) const
+{
+    return m_firstOperand[index] + m_secondOperand[index];
+}
 
 template <typename FirstOperandTy, typename SecondOperandTy>
 struct PlusExpression :
     public BaseExpression<PlusExpression<FirstOperandTy, SecondOperandTy>>
 {
 /**
- * @section Type definition
- */
-public:
-    using ResultTy = int;//decltype(FirstOperandTy{}[0] + SecondOperandTy{}[0]);
-
-/**
  * @section Ctor/Dtor
  */
 public:
-    constexpr PlusExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept :
-        BaseExpression<PlusExpression<FirstOperandTy, SecondOperandTy>>(firstOperand, secondOperand)
+    constexpr PlusExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept;
+
+/**
+ * @section Operator
+ */
+public:
+    template <typename Ty>
+    constexpr PlusExpression<PlusExpression, Ty> operator+(const Ty& rhs) noexcept
     {
-    }
-    
-    ResultTy operator[](std::size_t index) const
-    {
-        return this->GetFirstOperand()[index] + this->GetSecondOperand()[index];
+        return {*this, rhs};
     }
 };
+
+template <typename FirstOperandTy, typename SecondOperandTy>
+constexpr PlusExpression<FirstOperandTy, SecondOperandTy>::PlusExpression(const FirstOperandTy& firstOperand, const SecondOperandTy& secondOperand) noexcept :
+    BaseExpression<PlusExpression<FirstOperandTy, SecondOperandTy>>(firstOperand, secondOperand)
+{
+}
 
 } /* namespace utility */
 } /* namespace tgon */

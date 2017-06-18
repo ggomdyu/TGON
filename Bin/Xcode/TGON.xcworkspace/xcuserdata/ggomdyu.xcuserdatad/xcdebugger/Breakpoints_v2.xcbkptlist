@@ -9,14 +9,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/Core/Utility/Expression.h"
-            timestampString = "519465969.560671"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "operator[](std::size_t index)"
-            landmarkType = "9">
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-InitializeRootViewController"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-InitializeRootViewController"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +42,125 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
-            timestampString = "519466225.936202"
+            timestampString = "519472893.687621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "-InitializeRootViewController"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "class Vec"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "class Vec"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "class Vec"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vec::Vec&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;Vec, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt; &gt;(tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;Vec, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;)"
+                  moduleName = "ModelJoy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+                  timestampString = "519472122.754715"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "37">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vec::Vec&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;Vec, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt; &gt;(tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;tgon::utility::PlusExpression&lt;Vec, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;, Vec&gt;)"
+                  moduleName = "ModelJoy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+                  timestampString = "519472122.758714"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "98">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-InitializeRootViewController"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
+            timestampString = "519472893.687621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "class Vec"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,30 +169,26 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
-            timestampString = "519466226.55282"
+            filePath = "../../Source/TGON/Core/Platform/iOS/iOSMain.m"
+            timestampString = "519472120.570754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-InitializeRootViewController"
-            landmarkType = "7">
+            startingLineNumber = "12"
+            endingLineNumber = "12">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/Core/Platform/iOS/iOSAppDelegate.mm"
-            timestampString = "519466242.269631"
+            filePath = "../../Source/TGON/Core/Utility/Expression.h"
+            timestampString = "519475531.599818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "-InitializeRootViewController"
-            landmarkType = "7">
+            startingLineNumber = "82"
+            endingLineNumber = "82">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -13,13 +13,7 @@ using namespace tgon::utility;
 class Vec
 {
 public:
-    Vec() noexcept
-    {
-        for (int i = 0; i < std::extent<decltype(m)>::value; ++i)
-        {
-            m[i] = 0;
-        }
-    }
+    Vec() = default;
 
     Vec(int a, int b, int c, int d)
     {
@@ -29,8 +23,8 @@ public:
         m[3] = d;
     }
 
-    template <typename ExpressionTy>
-    Vec(ExpressionTy expression) noexcept
+    template <template <typename, typename> class ExpressionTy, typename FirstOperandTy, typename SecondOperandTy>
+    Vec(ExpressionTy<FirstOperandTy, SecondOperandTy> expression) noexcept
     {
         for (int i = 0; i < std::extent<decltype(m)>::value; ++i)
         {
