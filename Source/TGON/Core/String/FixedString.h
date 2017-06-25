@@ -23,13 +23,10 @@ class BasicFixedString
 /**
  * @section Type definition
  */
-private:
+public:
     using TraitsTy = std::char_traits<CharTy>;
     
-    enum : std::size_t
-    {
-        NPos = static_cast<std::size_t>(-1),
-    };
+    enum : std::size_t { NPos = static_cast<std::size_t>(-1) };
     
 /**
  * @section Ctor/Dtor
@@ -91,7 +88,6 @@ public:
 	const CharTy* CStr() const noexcept;
     
 	std::size_t Length() const noexcept;
-    
 	constexpr std::size_t Capacity() const noexcept;
     
 	CharTy& At(std::size_t index);
@@ -106,31 +102,42 @@ private:
     std::array<CharTy, N> m_str;
 };
 
-using FixedString = BasicFixedString<char, 32>;
-using FixedWString = BasicFixedString<wchar_t, 32>;
+using FixedString32 = BasicFixedString<char, 32>;
+using FixedWString32 = BasicFixedString<wchar_t, 32>;
+
+using FixedString64 = BasicFixedString<char, 64>;
+using FixedWString64 = BasicFixedString<wchar_t, 64>;
+
+using FixedString128 = BasicFixedString<char, 128>;
+using FixedWString128 = BasicFixedString<wchar_t, 128>;
 
 template<typename CharTy, std::size_t N>
 template<std::size_t N2>
 inline BasicFixedString<CharTy, N>::BasicFixedString(const CharTy(&str)[N2]) :
-    m_length(N2 - 1)
+    BasicFixedString(str, N2 - 1)
 {
-    std::memcpy(m_str.data(), str, sizeof(CharTy) * N2);
 }
 
 template<typename CharTy, std::size_t N>
 inline BasicFixedString<CharTy, N>::BasicFixedString(const CharTy* str, std::size_t length) :
     m_length(length)
 {
-    // todo: 이하 코드 잘 작동하는지 확인 필요
-    assert(N < length && "BasicFixedString buffer overflowed");
+    assert(N > length && "BasicFixedString buffer overflowed");
     
     std::memcpy(m_str.data(), str, sizeof(CharTy) * (length + 1));
 }
 
 template<typename CharTy, std::size_t N>
-inline BasicFixedString<CharTy, N>::BasicFixedString(std::size_t length, CharTy ch)
+inline BasicFixedString<CharTy, N>::BasicFixedString(std::size_t length, CharTy ch) :
+    m_length(length)
 {
-	this->Assign(length, ch);
+    std::size_t i = 0;
+    while (i < length)
+    {
+        m_str[i++] = ch;
+    }
+
+    m_str[i] = static_cast<CharTy>(0);
 }
 
 template<typename CharTy, std::size_t N>
@@ -252,14 +259,7 @@ inline void BasicFixedString<CharTy, N>::Assign(const CharTy* str, std::size_t l
 template<typename CharTy, std::size_t N>
 inline void BasicFixedString<CharTy, N>::Assign(std::size_t length, CharTy ch)
 {
-	std::size_t i = 0;
-	while (i < length)
-	{
-		m_str[i++] = ch;
-	}
-
-	m_str[i] = static_cast<CharTy>(0);
-	m_length = length;
+    new (this) BasicFixedString(length, ch);
 }
 
 template<typename CharTy, std::size_t N>

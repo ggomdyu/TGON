@@ -5,12 +5,14 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "TypeInfo.h"
-
 #include <cstdint>
 #include <memory>
 #include <string>
+
+#include "Core/Platform/Config.h"
+#include "Core/Utility/Array.h"
+
+#include "TypeInfo.h"
 
 namespace tgon
 {
@@ -37,9 +39,9 @@ public:
  * @section Public method
  */
 public:
-	virtual std::size_t GetHashCode() const noexcept = 0;
+	virtual std::size_t GetHashCode() const = 0;
     
-    virtual const std::string& GetTypeName() const noexcept = 0;
+    virtual const char* GetTypeName() const noexcept = 0;
 };
 
 } /* namespace object */
@@ -49,17 +51,17 @@ public:
     using Super = This;\
 	using This = classType;\
 	\
-	virtual std::size_t GetHashCode() const noexcept override\
-	{\
-		return classType::GetTypeInfo().GetHashCode();\
-	}\
-	virtual const std::string& GetTypeName() const noexcept override\
+    virtual std::size_t GetHashCode() const noexcept override\
     {\
-        return classType::GetTypeInfo().GetTypeName();\
+        return Foo::GetTypeInfo().GetHashCode();\
     }\
-    static const object::TypeInfo& GetTypeInfo() noexcept\
+    virtual const char* GetTypeName() const noexcept override\
     {\
-        static object::TypeInfo typeInfo(#classType);\
+        return Foo::GetTypeInfo().GetTypeName().CStr();\
+    }\
+    static const tgon::object::TypeInfo<GetArraySize(#classType)>& GetTypeInfo() noexcept\
+    {\
+        tgon::object::TypeInfo<GetArraySize(#classType)> typeInfo(#classType);\
         return typeInfo;\
     }
 

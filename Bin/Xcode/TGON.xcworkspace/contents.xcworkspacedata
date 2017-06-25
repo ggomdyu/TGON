@@ -13,21 +13,13 @@
    </Group>
    <Group
       location = "container:"
-      name = "1. RenderCore">
-   </Group>
-   <Group
-      location = "container:"
-      name = "2. GameCore">
-   </Group>
-   <Group
-      location = "container:"
       name = "3. Engine">
    </Group>
    <Group
       location = "container:"
       name = "4. Content">
       <FileRef
-         location = "group:/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy.xcodeproj">
+         location = "group:ModelJoy/ModelJoy.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

@@ -14,6 +14,8 @@ namespace utility
 namespace detail
 {
 
+// CRTP 적용하는게 더 좋아보임.
+
 template <typename CastFromTy, typename CastPolicy>
 class AutoCastHost final :
     public CastPolicy

@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD1503AD1EF5002B0043FAA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1503AB1EF5002B0043FAA5 /* Main.storyboard */; };
 		FD1503AF1EF5002B0043FAA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */; };
 		FD1503B21EF5002B0043FAA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */; };
 		FD1503BD1EF5002C0043FAA5 /* ModelJoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503BC1EF5002C0043FAA5 /* ModelJoyTests.m */; };
 		FD1503C81EF5002C0043FAA5 /* ModelJoyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */; };
+		FD1DDB821EFF5FFF0066F030 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1DDB811EFF5FFF0066F030 /* Main.storyboard */; };
+		FD1DDB8E1EFF72510066F030 /* iOSMain.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB8A1EFF72510066F030 /* iOSMain.m */; };
+		FD1DDB9A1EFF89570066F030 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB971EFF89570066F030 /* AppDelegate.mm */; };
+		FD1DDB9B1EFF89570066F030 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB991EFF89570066F030 /* ViewController.m */; };
 		FD6F133E1EF56B1A00BAB303 /* libTGON.Core.iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */; };
-		FD6F134A1EF5709D00BAB303 /* iOSRootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		FD15039F1EF5002B0043FAA5 /* ModelJoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelJoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD1503AC1EF5002B0043FAA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD1503B11EF5002B0043FAA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD1503B31EF5002B0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,8 +47,12 @@
 		FD1503C71EF5002C0043FAA5 /* ModelJoyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelJoyUITests.m; sourceTree = "<group>"; };
 		FD1503C91EF5002C0043FAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD1503D61EF500B80043FAA5 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.iOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug-iphonesimulator/libTGON.Core.iOS.a"; sourceTree = "<group>"; };
-		FD6F13461EF5709D00BAB303 /* iOSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSRootViewController.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.h; sourceTree = "<absolute>"; };
-		FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSRootViewController.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/TGON.Core.iOS/../../../Source/TGON/Core/Platform/iOS/iOSRootViewController.mm; sourceTree = "<absolute>"; };
+		FD1DDB801EFF5FFF0066F030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FD1DDB8A1EFF72510066F030 /* iOSMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSMain.m; sourceTree = "<group>"; };
+		FD1DDB961EFF89570066F030 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../../../Source/TGON/Core/Platform/iOS/AppDelegate.h; sourceTree = "<group>"; };
+		FD1DDB971EFF89570066F030 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ../../../../Source/TGON/Core/Platform/iOS/AppDelegate.mm; sourceTree = "<group>"; };
+		FD1DDB981EFF89570066F030 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../../../../Source/TGON/Core/Platform/iOS/ViewController.h; sourceTree = "<group>"; };
+		FD1DDB991EFF89570066F030 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../../../../Source/TGON/Core/Platform/iOS/ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +105,12 @@
 		FD1503A11EF5002B0043FAA5 /* ModelJoy */ = {
 			isa = PBXGroup;
 			children = (
-				FD6F13461EF5709D00BAB303 /* iOSRootViewController.h */,
-				FD6F13471EF5709D00BAB303 /* iOSRootViewController.mm */,
-				FD1503AB1EF5002B0043FAA5 /* Main.storyboard */,
+				FD1DDB8A1EFF72510066F030 /* iOSMain.m */,
+				FD1DDB961EFF89570066F030 /* AppDelegate.h */,
+				FD1DDB971EFF89570066F030 /* AppDelegate.mm */,
+				FD1DDB981EFF89570066F030 /* ViewController.h */,
+				FD1DDB991EFF89570066F030 /* ViewController.m */,
+				FD1DDB811EFF5FFF0066F030 /* Main.storyboard */,
 				FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */,
 				FD1503AE1EF5002B0043FAA5 /* Assets.xcassets */,
 				FD1503B31EF5002B0043FAA5 /* Info.plist */,
@@ -245,9 +253,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1DDB821EFF5FFF0066F030 /* Main.storyboard in Resources */,
 				FD1503B21EF5002B0043FAA5 /* LaunchScreen.storyboard in Resources */,
 				FD1503AF1EF5002B0043FAA5 /* Assets.xcassets in Resources */,
-				FD1503AD1EF5002B0043FAA5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +280,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD6F134A1EF5709D00BAB303 /* iOSRootViewController.mm in Sources */,
+				FD1DDB9B1EFF89570066F030 /* ViewController.m in Sources */,
+				FD1DDB9A1EFF89570066F030 /* AppDelegate.mm in Sources */,
+				FD1DDB8E1EFF72510066F030 /* iOSMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,20 +318,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FD1503AB1EF5002B0043FAA5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FD1503AC1EF5002B0043FAA5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FD1503B01EF5002B0043FAA5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FD1503B11EF5002B0043FAA5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FD1DDB811EFF5FFF0066F030 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD1DDB801EFF5FFF0066F030 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -424,7 +434,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WU734J36XA;
-				HEADER_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON;
+				HEADER_SEARCH_PATHS = (
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+				);
 				INFOPLIST_FILE = ModelJoy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;
@@ -437,7 +450,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WU734J36XA;
-				HEADER_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON;
+				HEADER_SEARCH_PATHS = (
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
+					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+				);
 				INFOPLIST_FILE = ModelJoy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ggomdyu.ModelJoy;

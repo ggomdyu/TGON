@@ -23,6 +23,6 @@ inline void GetLanguage(char(&destBuffer)[N])
 {
     GetLanguage(destBuffer, N);
 }
-    
+
 } /* namespace tgon */
 } /* namespace tgon */

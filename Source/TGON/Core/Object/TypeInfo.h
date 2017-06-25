@@ -5,48 +5,70 @@
  */
 
 #pragma once
-#include <string>
 #include <cstdint>
+
+#include "Core/String/FixedString.h"
+#include "Core/Hash/Hash.h"
 
 namespace tgon
 {
 namespace object
 {
 
+template <std::size_t N>
 struct TypeInfo
 {
 /**
  * @section Ctor/Dtor
  */
 public:
-    template <std::size_t N>
-    TypeInfo(const char(&)[N]) noexcept;
-    TypeInfo(const char* name, std::size_t length) noexcept;
-    TypeInfo(const std::string& name) noexcept;
+    TypeInfo(const char(&typeName)[N]);
+    TypeInfo(const char* typeName, std::size_t length);
+
+/**
+ * @section Private variable
+ */
+private:
+    string::BasicFixedString<char, N> m_typeName;
 
 /**
  * @section Public method
  */
 public:
-    /* @return  The hash value of the type name. */
-    std::size_t GetHashCode() const noexcept;
-    
-    /* @return  The name of type */
-    const std::string& GetTypeName() const noexcept;
-    
-/**
- * @section Private variable
- */
-private:
-    const std::string m_typeName;
-    const std::size_t m_hashCode;
+    constexpr std::size_t GetHashCode() const
+    {
+        return hash::x65599Hash(m_typeName.CStr());
+    }
+
+    constexpr const decltype(m_typeName)& GetTypeName() const noexcept
+    {
+        return m_typeName;
+    }
 };
 
-template<std::size_t N>
-inline TypeInfo::TypeInfo(const char(&name)[N]) noexcept :
-    TypeInfo(name, N)
+template <std::size_t N>
+inline TypeInfo<N>::TypeInfo(const char(&typeName)[N]) :
+    m_typeName(typeName)
 {
 }
+
+template <std::size_t N>
+inline TypeInfo<N>::TypeInfo(const char* typeName, std::size_t length) :
+    m_typeName(typeName, length)
+{
+}
+
+//template <std::size_t N>
+//constexpr std::size_t TypeInfoTest<N>::GetHashCode() const
+//{
+//    return 0;//hash::StringToHash(m_typeName);
+//}
+//`
+//template <std::size_t N>
+//constexpr const decltype(TypeInfoTest<N>::m_typeName)& TypeInfoTest<N>::GetTypeName() const noexcept
+//{
+//    return m_typeName;
+//}
 
 } /* namespace object */
 } /* namespace tgon */
