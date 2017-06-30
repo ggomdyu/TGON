@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <type_traits>
-
 namespace tgon
 {
 namespace utility
@@ -15,97 +13,108 @@ namespace utility
 namespace detail
 {
 
-enum StaticIfCondition
+enum class StaticIfCondition
 {
     kFalse = 0,
     kTrue = 1,
-    kConditional = 2,
+    kEndOfContext = 2,
 };
 
-template <int Condition>
+template <StaticIfCondition Condition>
 struct StaticIfProxy;
 
 template <>
-struct StaticIfProxy<2>
+struct StaticIfProxy<StaticIfCondition::kEndOfContext>
 {
 public:
     template <typename FunctionTy>
-    const StaticIfProxy<2> StaticThen(FunctionTy&& function)
-    {
-    };
+    constexpr const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticThen(FunctionTy&& function) const noexcept;
 
-    template <int Condition2, typename FunctionTy>
-    const StaticIfProxy<2> StaticElseIf(FunctionTy&& function)
-    {
-    };
-
-    template <typename FunctionTy>
-    void StaticElse(FunctionTy&& function) const noexcept
-    {
-    };
-};
-
-template <>
-struct StaticIfProxy<1>
-{
-public:
-    template <typename FunctionTy>
-    const StaticIfProxy<2> StaticThen(FunctionTy&& function) const;
-
-    template <int Condition2, typename FunctionTy>
-    const StaticIfProxy<2> StaticElseIf(FunctionTy&& function) const;
+    template <int Condition, typename FunctionTy>
+    constexpr const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticElseIf(FunctionTy&& function) const noexcept;
 
     template <typename FunctionTy>
     void StaticElse(FunctionTy&& function) const noexcept;
 };
 
 template <typename FunctionTy>
-inline const StaticIfProxy<2> StaticIfProxy<1>::StaticThen(FunctionTy&& function) const
+constexpr const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticIfProxy<StaticIfCondition::kEndOfContext>::StaticThen(FunctionTy&& function) const noexcept
 {
-    function();
-    return StaticIfProxy<2>{};
-}
+    return {};
+};
+
+template <int Condition, typename FunctionTy>
+constexpr const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticIfProxy<StaticIfCondition::kEndOfContext>::StaticElseIf(FunctionTy&& function) const noexcept
+{
+    return {};
+};
+
+template <typename FunctionTy>
+inline void StaticIfProxy<StaticIfCondition::kEndOfContext>::StaticElse(FunctionTy&& function) const noexcept
+{
+};
 
 template <>
-struct StaticIfProxy<0>
+struct StaticIfProxy<StaticIfCondition::kTrue>
 {
 public:
     template <typename FunctionTy>
-    constexpr const StaticIfProxy<0> StaticThen(FunctionTy&& function) const noexcept;
+    const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticThen(FunctionTy&& function) const;
 
-    template <int Condition2, typename FunctionTy>
-    const StaticIfProxy<Condition2 == 1 ? 2 : 0> StaticElseIf(FunctionTy&& function) const;
+    template <int Condition, typename FunctionTy>
+    const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticElseIf(FunctionTy&& function) const;
+
+    template <typename FunctionTy>
+    void StaticElse(FunctionTy&& function) const noexcept;
+};
+
+template <typename FunctionTy>
+inline const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticIfProxy<StaticIfCondition::kTrue>::StaticThen(FunctionTy&& function) const
+{
+    function();
+    return StaticIfProxy<StaticIfCondition::kEndOfContext>{};
+}
+
+template <>
+struct StaticIfProxy<StaticIfCondition::kFalse>
+{
+public:
+    template <typename FunctionTy>
+    constexpr const StaticIfProxy<StaticIfCondition::kFalse> StaticThen(FunctionTy&& function) const noexcept;
+
+    template <int Condition, typename FunctionTy>
+    const StaticIfProxy<static_cast<StaticIfCondition>(Condition) == StaticIfCondition::kTrue ? StaticIfCondition::kEndOfContext : StaticIfCondition::kFalse> StaticElseIf(FunctionTy&& function) const;
 
     template <typename FunctionTy>
     void StaticElse(FunctionTy&& function) const;
 };
 
-template <int Condition2, typename FunctionTy>
-inline const StaticIfProxy<2> StaticIfProxy<1>::StaticElseIf(FunctionTy&& function) const
+template <int Condition, typename FunctionTy>
+inline const StaticIfProxy<StaticIfCondition::kEndOfContext> StaticIfProxy<StaticIfCondition::kTrue>::StaticElseIf(FunctionTy&& function) const
 {
     return {};
 }
 
 template <typename FunctionTy>
-void StaticIfProxy<1>::StaticElse(FunctionTy&& function) const noexcept
+inline void StaticIfProxy<StaticIfCondition::kTrue>::StaticElse(FunctionTy&& function) const noexcept
 {
 }
 
 template <typename FunctionTy>
-constexpr const StaticIfProxy<0> StaticIfProxy<0>::StaticThen(FunctionTy&& function) const noexcept
+constexpr const StaticIfProxy<StaticIfCondition::kFalse> StaticIfProxy<StaticIfCondition::kFalse>::StaticThen(FunctionTy&& function) const noexcept
 {
     return {};
 }
 
-template <int Condition2, typename FunctionTy>
-const StaticIfProxy<Condition2 == 1 ? 2 : 0> StaticIfProxy<0>::StaticElseIf(FunctionTy&& function) const
+template <int Condition, typename FunctionTy>
+const StaticIfProxy<static_cast<StaticIfCondition>(Condition) == StaticIfCondition::kTrue ? StaticIfCondition::kEndOfContext : StaticIfCondition::kFalse> StaticIfProxy<StaticIfCondition::kFalse>::StaticElseIf(FunctionTy&& function) const
 {
-    StaticIfProxy<Condition2>{}.StaticThen(function);
+    StaticIfProxy<static_cast<StaticIfCondition>(Condition)>{}.StaticThen(function);
     return {};
 }
 
 template <typename FunctionTy>
-inline void StaticIfProxy<0>::StaticElse(FunctionTy&& function) const
+inline void StaticIfProxy<StaticIfCondition::kFalse>::StaticElse(FunctionTy&& function) const
 {
     function();
 }
@@ -113,9 +122,9 @@ inline void StaticIfProxy<0>::StaticElse(FunctionTy&& function) const
 } /* namespace detail */
 
 template <int Condition, typename FunctionTy>
-detail::StaticIfProxy<Condition> StaticIf(FunctionTy&& function)
+constexpr detail::StaticIfProxy<static_cast<detail::StaticIfCondition>(Condition)> StaticIf(FunctionTy&& function)
 {
-    detail::StaticIfProxy<Condition>{}.StaticThen(function);
+    detail::StaticIfProxy<static_cast<detail::StaticIfCondition>(Condition)>{}.StaticThen(function);
     return {};
 }
 
