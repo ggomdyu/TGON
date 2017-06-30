@@ -429,7 +429,7 @@ constexpr std::size_t tgon::string::BasicFixedString<CharTy, N>::Capacity() cons
 template <typename CharTy, std::size_t N>
 inline typename tgon::string::BasicFixedString<CharTy, N>::IteratorTy tgon::string::BasicFixedString<CharTy, N>::begin() noexcept
 {
-    return m_str.begin();
+    return &m_str[0];
 }
 
 template <typename CharTy, std::size_t N>
@@ -441,7 +441,7 @@ inline typename tgon::string::BasicFixedString<CharTy, N>::IteratorTy tgon::stri
 template <typename CharTy, std::size_t N>
 inline typename tgon::string::BasicFixedString<CharTy, N>::ConstIteratorTy tgon::string::BasicFixedString<CharTy, N>::cbegin() const noexcept
 {
-    return m_str.cbegin();
+    return &m_str[0];
 }
 
 template <typename CharTy, std::size_t N>
