@@ -26,9 +26,7 @@ struct Point<Ty>
 private:
     using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Point() noexcept;
@@ -36,9 +34,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Point(Ty x, Ty y) noexcept;
 
-/**
- * @section Operator
- */
+/* @section Operator */
 public:
     constexpr const Point operator+(const Point&) const noexcept;
     constexpr const Point operator-(const Point&) const noexcept;
@@ -56,9 +52,7 @@ public:
     template <typename CastToTy>
     constexpr operator Point<CastToTy>() const noexcept;
 
-/**
- * @section Public method
- */
+/* @section Public method */
 public:
     /**
      * @brief                       Converts to string.
@@ -76,12 +70,10 @@ public:
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
     
-    /* @return  The string converted. */
+    /* @return  A string converted. */
     std::string ToString() const;
 
-/**
- * @section Public variable
- */
+/* @section Public variable */
 public:
     Ty x;
     Ty y;

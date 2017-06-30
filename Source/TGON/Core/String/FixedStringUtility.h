@@ -18,7 +18,7 @@ namespace string
 // todo: 파라미터가 const reference가 되어야하는 것 아닌지?
 
 template <typename CharTy, std::size_t N>
-constexpr auto MakeFixedString(CharTy(&str)[N]) -> BasicFixedString<typename std::remove_const<CharTy>::type, N>
+constexpr auto MakeFixedString(const CharTy(&str)[N]) -> BasicFixedString<typename std::remove_const<CharTy>::type, N>
 {
     return {str, N - 1};
 }

@@ -18,9 +18,7 @@ namespace math
 
 struct TGON_API Vector3
 {
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Vector3() noexcept;
@@ -28,9 +26,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
-/**
- * @section Operator
- */
+/* @section Operator */
 public:
     constexpr const Vector3 operator+(const Vector3&) const noexcept;
     constexpr const Vector3 operator-(const Vector3&) const noexcept;
@@ -50,9 +46,7 @@ public:
     float& operator[](std::size_t) noexcept;
     float operator[](std::size_t) const noexcept;
 	
-/**
- * @section Public method
- */
+/* @section Public method */
 public:
     static constexpr float Dot(const Vector3& a, const Vector3& b) noexcept;
     static constexpr Vector3 Cross(const Vector3& a, const Vector3& b) noexcept;
@@ -67,20 +61,18 @@ public:
     void TransformCoord(const struct TMatrix4x4&) noexcept;
     void TransformNormal(const struct TMatrix4x4&) noexcept;
 
-/**
- * @section Public variable
- */
+/* @section Public variable */
 public:
 	float x, y, z;
 
-    static const Vector3 Forward;	// 0, 0, 1
-	static const Vector3 Back;		// 0, 0, -1
-	static const Vector3 Up;		// 0, 1, 0
-	static const Vector3 Down;		// 0, -1, 0
-	static const Vector3 Left;		// -1, 0, 0
-	static const Vector3 Right;	// 1, 0, 0
+    static const Vector3 Forward;   // 0, 0, 1
+	static const Vector3 Back;      // 0, 0, -1
+	static const Vector3 Up;        // 0, 1, 0
+	static const Vector3 Down;      // 0, -1, 0
+	static const Vector3 Left;      // -1, 0, 0
+	static const Vector3 Right;     // 1, 0, 0
 	static const Vector3 One;		// 0, 0, 0
-	static const Vector3 Zero;		// 1, 1, 1
+	static const Vector3 Zero;      // 1, 1, 1
 };
 
 constexpr Vector3::Vector3() noexcept :

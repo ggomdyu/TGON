@@ -20,9 +20,7 @@ template <typename CastFromTy, typename CastPolicy>
 class AutoCastHost final :
     public CastPolicy
 {
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     constexpr explicit AutoCastHost(CastFromTy&& rhs) noexcept;
 };

@@ -40,7 +40,7 @@ public:
  */
 public:
 	virtual std::size_t GetHashCode() const = 0;
-    
+
     virtual const char* GetTypeName() const noexcept = 0;
 };
 

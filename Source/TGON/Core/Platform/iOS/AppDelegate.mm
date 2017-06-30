@@ -1,4 +1,4 @@
-//
+   //
 //  AppDelegate.m
 //  ModelJoy
 //
@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+
+#import <iostream>
+#import <string>
+#import "Core/String/FixedString.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    using namespace tgon::string;
+
+    FixedString128 fs = "Powerful";
+    auto f1 = fs.CStr();
+    auto f2 = fs.Find('e');
+    auto f3 = fs.Find('m');
+    auto f4 = fs.Find("fu");
+    auto f5 = fs.Find("fow");
+
+    for (auto ch : fs)
+    {
+
+    }
+
+    int n = 3;
+    {
+        std::string str = "Powerful";
+        auto f1 = str.find("str");
+    }
+
     return YES;
 }
 

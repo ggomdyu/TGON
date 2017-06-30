@@ -9,14 +9,14 @@ namespace tgon
 namespace math
 {
 
-TGON_API const Vector3 Vector3::Forward(0.f, 0.f, 1.f);
-TGON_API const Vector3 Vector3::Back(0.f, 0.f, -1.f);
-TGON_API const Vector3 Vector3::Up(0.f, 1.f, 0.f);
-TGON_API const Vector3 Vector3::Down(0.f, -1.f, 0.f);
-TGON_API const Vector3 Vector3::Left(-1.f, 0.f, 0.f);
-TGON_API const Vector3 Vector3::Right(1.f, 0.f, 0.f);
-TGON_API const Vector3 Vector3::One(0.f, 0.f, 0.f);
-TGON_API const Vector3 Vector3::Zero(0.f, 0.f, 0.f);
+TGON_API const Vector3 Vector3::Forward(0.0f, 0.0f, 1.0f);
+TGON_API const Vector3 Vector3::Back(0.0f, 0.0f, -1.0f);
+TGON_API const Vector3 Vector3::Up(0.0f, 1.0f, 0.0f);
+TGON_API const Vector3 Vector3::Down(0.0f, -1.0f, 0.0f);
+TGON_API const Vector3 Vector3::Left(-1.0f, 0.0f, 0.0f);
+TGON_API const Vector3 Vector3::Right(1.0f, 0.0f, 0.0f);
+TGON_API const Vector3 Vector3::One(0.0f, 0.0f, 0.0f);
+TGON_API const Vector3 Vector3::Zero(0.0f, 0.0f, 0.0f);
 
 void Vector3::TransformCoord(const TMatrix4x4& rhs) noexcept
 {

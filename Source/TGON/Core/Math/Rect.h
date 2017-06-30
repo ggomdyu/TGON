@@ -26,9 +26,7 @@ struct Rect<Ty>
 private:
     using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Rect() noexcept;
@@ -36,9 +34,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept;
 
-/**
- * @section Operator
- */
+/* @section Operator */
 public:
     constexpr const Rect operator+(const Rect&) const noexcept;
     constexpr const Rect operator-(const Rect&) const noexcept;
@@ -53,9 +49,7 @@ public:
     constexpr bool operator==(const Rect&) const noexcept;
     constexpr bool operator!=(const Rect&) const noexcept;
 
-/**
- * @section Public method
- */
+/* @section Public method */
 public:
     /**
      * @brief                       Converts to string.
@@ -73,12 +67,10 @@ public:
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
     
-    /* @return  The string converted. */
+    /* @return  A string converted. */
     std::string ToString() const;
 
-/**
- * @section Public variable
- */
+/* @section Public variable */
 public:
     Ty bottom;
     Ty top;

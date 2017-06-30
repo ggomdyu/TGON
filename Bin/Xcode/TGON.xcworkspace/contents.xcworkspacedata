@@ -19,6 +19,9 @@
       location = "container:"
       name = "4. Content">
       <FileRef
+         location = "group:TGON.Console/TGON.Console.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:ModelJoy/ModelJoy.xcodeproj">
       </FileRef>
    </Group>

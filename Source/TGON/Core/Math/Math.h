@@ -44,36 +44,36 @@ inline Ty Floor(Ty value) noexcept
 //    return std::sqrt(value);
 //}
 
-/* @return	The maximum value between first and second */
-template <class Ty, typename = utility::EnableIfArithmetic<Ty>>
+/* @return	Returns the maximum value of the given parameters. */
+template <typename Ty, typename = utility::EnableIfArithmetic<Ty>>
 constexpr Ty Max(Ty first, Ty second) noexcept
 {
     return (first >= second) ? first : second;
 }
 
-/* @return	The minimum value between first and second */
-template <class Ty, typename = utility::EnableIfArithmetic<Ty>>
+/* @return	Returns the minimum value of the given parameters. */
+template <typename Ty, typename = utility::EnableIfArithmetic<Ty>>
 constexpr Ty Min(Ty first, Ty second) noexcept
 {
     return (first <= second) ? first : second;
 }
 
-/* @return	The absolute value of parameter value */
-template <class Ty, typename = utility::EnableIfArithmetic<Ty>>
+/* @return	Returns the absolute value. */
+template <typename Ty, typename = utility::EnableIfArithmetic<Ty>>
 constexpr Ty Abs(Ty value) noexcept
 {
     return (value < static_cast<Ty>(0)) ? -value : value;
 }
 
-/* @return  A sign of value as it's owned type. */
-template<class Ty, typename = utility::EnableIfArithmetic<Ty>>
+/* @return  Returns the sign of value which represented as 1, -1 or 0 */
+template<typename Ty, typename = utility::EnableIfArithmetic<Ty>>
 constexpr Ty Sign(Ty value) noexcept
 {
     return (value > static_cast<Ty>(0)) ? static_cast<Ty>(1) : (value < static_cast<Ty>(0)) ? static_cast<Ty>(-1) : static_cast<Ty>(0);
 }
 
-/* @return	A clamped value between min and max */
-template <class Ty, typename = utility::EnableIfArithmetic<Ty>>
+/* @return	Returns clamped value to min and max range */
+template <typename Ty, typename = utility::EnableIfArithmetic<Ty>>
 constexpr Ty Clamp(Ty value, Ty min, Ty max) noexcept
 {
     return Max(Min(value, max), min);

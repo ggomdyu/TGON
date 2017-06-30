@@ -26,9 +26,7 @@ struct Extent2D<Ty>
 private:
     using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Extent2D() noexcept;
@@ -36,9 +34,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Extent2D(Ty width, Ty height) noexcept;
 
-/**
- * @section Operator
- */
+/* @section Operator */
 public:
     constexpr const Extent2D operator+(const Extent2D&) const noexcept;
     constexpr const Extent2D operator-(const Extent2D&) const noexcept;
@@ -56,9 +52,7 @@ public:
     template <typename CastToTy>
     constexpr operator Extent2D<CastToTy>() const noexcept;
 
-/**
- * @section Public method
- */
+/* @section Public method */
 public:
     /**
      * @brief                       Converts to string.
@@ -75,13 +69,11 @@ public:
      * @return                      The length of string converted.
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
-    
-    /* @return  The string converted. */
+
+    /* @brief                       Converts to string. */
     std::string ToString() const;
 
-/**
- * @section Public variable
- */
+/* @section Public variable */
 public:
     Ty width;
     Ty height;

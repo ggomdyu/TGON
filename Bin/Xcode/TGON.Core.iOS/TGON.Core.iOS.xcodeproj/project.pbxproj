@@ -66,10 +66,12 @@
 		FD1DDB791EFEC9220066F030 /* Hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hash.cpp; path = ../../../Source/TGON/Core/Hash/Hash.cpp; sourceTree = "<group>"; };
 		FD1DDB7A1EFEC9220066F030 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hash.h; path = ../../../Source/TGON/Core/Hash/Hash.h; sourceTree = "<group>"; };
 		FD1DDB7F1EFF4B320066F030 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Time.h; path = ../../../Source/TGON/Core/Platform/Time.h; sourceTree = "<group>"; };
+		FD449FC41F06AF1900CCEB2A /* Conditional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Conditional.h; path = ../../../Source/TGON/Core/Utility/Conditional.h; sourceTree = "<group>"; };
 		FD4932E61EED4E9600496036 /* Array.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Array.h; path = ../../../Source/TGON/Core/Utility/Array.h; sourceTree = "<group>"; };
 		FD4932E71EED4E9600496036 /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = AutoCast.h; path = ../../../Source/TGON/Core/Utility/AutoCast.h; sourceTree = "<group>"; };
 		FD4932E81EED4E9600496036 /* Enumerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Enumerator.h; path = ../../../Source/TGON/Core/Utility/Enumerator.h; sourceTree = "<group>"; };
 		FD4932EA1EED4E9600496036 /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = TypeTraits.h; path = ../../../Source/TGON/Core/Utility/TypeTraits.h; sourceTree = "<group>"; };
+		FD4A8FCA1EFFF08300865B76 /* Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Suffix.h; path = ../../../Source/TGON/Core/Platform/Suffix.h; sourceTree = "<group>"; };
 		FD6F134F1EF61D0B00BAB303 /* Expression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = Expression.h; path = ../../../Source/TGON/Core/Utility/Expression.h; sourceTree = "<group>"; };
 		FD6FC4D21EED425300A58E98 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.Core.iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6FC4E81EED42DC00A58E98 /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Delegate.h; path = ../../../Source/TGON/Core/Object/Delegate.h; sourceTree = "<group>"; };
@@ -250,10 +252,12 @@
 		FDD984B71EED47350037EB2A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				FD6F134F1EF61D0B00BAB303 /* Expression.h */,
 				FD4932E61EED4E9600496036 /* Array.h */,
 				FD4932E71EED4E9600496036 /* AutoCast.h */,
+				FD449FC41F06AF1900CCEB2A /* Conditional.h */,
+				FD6F134F1EF61D0B00BAB303 /* Expression.h */,
 				FD4932E81EED4E9600496036 /* Enumerator.h */,
+				FD4A8FCA1EFFF08300865B76 /* Suffix.h */,
 				FD4932EA1EED4E9600496036 /* TypeTraits.h */,
 			);
 			name = Utility;

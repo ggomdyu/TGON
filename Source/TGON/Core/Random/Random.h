@@ -28,7 +28,7 @@ inline int32_t Range(int32_t min, int32_t max)
     return static_cast<int32_t>(Range(static_cast<float>(min), static_cast<float>(max + 1)));
 }
 
-/* @brief   Choices random element from container and return it as iterator. */
+/* @brief   Choice random element from container and return it as iterator. */
 template <typename ContainerTy>
 inline auto Choice(ContainerTy& container) -> typename ContainerTy::iterator
 {
@@ -38,7 +38,7 @@ inline auto Choice(ContainerTy& container) -> typename ContainerTy::iterator
     return iter;
 }
 
-/* @todo    Shuffles the given container. */
+/* @todo    Shuffle the given container. */
 template <typename ContainerTy>
 inline void Shuffle(ContainerTy& container)
 {
