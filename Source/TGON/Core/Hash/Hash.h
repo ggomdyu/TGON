@@ -6,7 +6,6 @@
 
 #pragma once
 #include <cstddef>
-#include <boost/predef/compiler.h>
 
 #include "Core/Platform/Config.h"
 
@@ -15,8 +14,18 @@ namespace tgon
 namespace hash
 {
 
+using HashValue = uint32_t;
+
+namespace detail
+{
+constexpr HashValue x65599HashImpl(const char* str, HashValue prevHashValue)
+{
+    return (str[0] != '\0') ? 65599 * x65599HashImpl(&str[1], 0) + str[0] : prevHashValue ^ (prevHashValue >> 16);
+}
+} /* namespace detail */
+
 #if (__cplusplus == 201402L)
-constexpr int32_t Hash::x65599Hash(const char* str)
+constexpr HashValue Hash::x65599Hash(const char* str)
 {
     HashValue hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
@@ -27,10 +36,9 @@ constexpr int32_t Hash::x65599Hash(const char* str)
     return hashValue ^ (hashValue >> 16);
 }
 #elif (__cplusplus == 201103L)
-// @brief   Generate x65599 hash by recursive.
-constexpr int32_t x65599Hash(const char* str, int prevHashValue = 0)
+constexpr HashValue x65599Hash(const char* str)
 {
-    return (str[0] != '\0') ? 65599 * x65599Hash(&str[1]) + str[0] : prevHashValue ^ (prevHashValue >> 16);
+    return detail::x65599HashImpl(str, 0);
 }
 #endif
 
