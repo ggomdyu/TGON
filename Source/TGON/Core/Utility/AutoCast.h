@@ -2,6 +2,7 @@
  * @filename    AutoCast.h
  * @author      ggomdyu
  * @since       05/24/2016
+ * @desc        Automatic type caster with no casting type specifier
  */
 
 #pragma once
@@ -14,109 +15,77 @@ namespace utility
 namespace detail
 {
 
-// CRTP 적용하는게 더 좋아보임.
-
-template <typename CastFromTy, typename CastPolicy>
-class AutoCastHost final :
-    public CastPolicy
+template <typename _CastFromType, typename _CastPolicyType>
+class AutoCastProxy final :
+    public _CastPolicyType
 {
 /* @section Ctor/Dtor */
 public:
-    constexpr explicit AutoCastHost(CastFromTy&& rhs) noexcept;
+    constexpr explicit AutoCastProxy(_CastFromType&& rhs) noexcept;
+
+/* @section Operator */
+public:
+    template <typename _CastToType>
+    constexpr operator _CastToType() noexcept;
+
+/* @section Private variable */
+private:
+    _CastFromType m_castFromPtr;
 };
 
-template<typename CastFromTy, typename CastPolicy>
-constexpr AutoCastHost<CastFromTy, CastPolicy>::AutoCastHost(CastFromTy&& rhs) noexcept :
-    CastPolicy(rhs)
+template <typename _CastFromType, typename _CastPolicyType>
+template <typename _CastToType>
+constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::operator _CastToType() noexcept
+{
+    return _CastPolicyType::template Cast<_CastFromType, _CastToType>(m_castFromPtr);
+}
+
+template<typename _CastFromType, typename _CastPolicyType>
+constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::AutoCastProxy(_CastFromType&& castFromPtr) noexcept :
+    m_castFromPtr(castFromPtr)
 {
 }
 
-template <typename CastFromTy>
 class SafeCastPolicy
 {
-/**
- * @section Ctor/Dtor
- */
+/* @section Operator */
 protected:
-    constexpr explicit SafeCastPolicy(CastFromTy&& rhs) noexcept;
-
-/**
- * @section Operator
- */
-public:
-	/* @note    Convert FromTy to ToTy */
-	template <typename CastToTy>
-    constexpr operator CastToTy() noexcept;
-
-/**
- * @section Private variable
- */
-private:
-	CastFromTy m_castFromPtr;
+	template <typename _CastFromType, typename _CastToType>
+    constexpr _CastToType Cast(_CastFromType&& castFromPtr) noexcept;
 };
 
-template<typename CastFromTy>
-constexpr SafeCastPolicy<CastFromTy>::SafeCastPolicy(CastFromTy&& rhs) noexcept :
-    m_castFromPtr(std::forward<CastFromTy>(rhs))
+template <typename _CastFromType, typename _CastToType>
+    constexpr _CastToType SafeCastPolicy::Cast(_CastFromType&& castFromPtr) noexcept
 {
+    return static_cast<_CastToType>(std::forward<_CastFromType>(castFromPtr));
 }
 
-template<typename CastFromTy>
-template<typename CastToTy>
-constexpr SafeCastPolicy<CastFromTy>::operator CastToTy() noexcept
-{
-	return static_cast<CastToTy>(std::forward<CastFromTy>(m_castFromPtr));
-}
-
-template <typename CastFromTy>
 class ForceCastPolicy
 {
-/**
- * @section Ctor/Dtor
- */
+/* @section Operator */
 protected:
-    constexpr explicit ForceCastPolicy(CastFromTy&& rhs) noexcept;
-
-/**
- * @section Operator
- */
-public:
-	/* @brief   Convert FromTy to ToTy */
-	template <typename CastToTy>
-    constexpr operator CastToTy() noexcept;
-
-/**
- * @section Private variable
- */
-private:
-	CastFromTy m_castFromPtr;
+    template <typename _CastFromType, typename _CastToType>
+    constexpr _CastToType Cast(_CastFromType&& castFromPtr) noexcept;
 };
 
-template<typename CastFromTy>
-constexpr ForceCastPolicy<CastFromTy>::ForceCastPolicy(CastFromTy&& rhs) noexcept :
-	m_castFromPtr(std::forward<CastFromTy>(rhs))
+template <typename _CastFromType, typename _CastToType>
+constexpr _CastToType ForceCastPolicy::Cast(_CastFromType&& castFromPtr) noexcept
 {
-}
-
-template<typename CastFromTy>
-template<typename CastToTy>
-constexpr ForceCastPolicy<CastFromTy>::operator CastToTy() noexcept
-{
-	return reinterpret_cast<CastToTy>(std::forward<CastFromTy>(m_castFromPtr));
+    return reinterpret_cast<_CastToType>(std::forward<_CastFromType>(castFromPtr));
 }
 
 } /*namespace detail*/
 
-template <typename CastFromTy>
-constexpr auto AutoCast(CastFromTy&& rhs) noexcept -> detail::AutoCastHost<CastFromTy, detail::SafeCastPolicy<CastFromTy>>
+template <typename _CastFromType>
+constexpr detail::AutoCastProxy<_CastFromType, detail::SafeCastPolicy> AutoCast(_CastFromType&& rhs) noexcept
 {
-	return detail::AutoCastHost<CastFromTy, detail::SafeCastPolicy<CastFromTy>>(std::forward<CastFromTy>(rhs));
+	return detail::AutoCastProxy<_CastFromType, detail::SafeCastPolicy>(std::forward<_CastFromType>(rhs));
 }
 
-template <typename CastFromTy>
-constexpr auto ForceAutoCast(CastFromTy&& rhs) noexcept -> detail::AutoCastHost<CastFromTy, detail::ForceCastPolicy<CastFromTy>>
+template <typename _CastFromType>
+constexpr detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy> ForceAutoCast(_CastFromType&& rhs) noexcept
 {
-	return detail::AutoCastHost<CastFromTy, detail::SafeCastPolicy<CastFromTy>>(std::forward<CastFromTy>(rhs));
+	return detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy>(std::forward<_CastFromType>(rhs));
 }
 
 } /* namespace utility */
