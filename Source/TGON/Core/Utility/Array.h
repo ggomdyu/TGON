@@ -12,10 +12,10 @@ namespace tgon
 namespace utility
 {
 
-template <typename ArrayTy, std::size_t ArrayLength>
-constexpr std::size_t GetArraySize(const ArrayTy(&)[ArrayLength]) noexcept
+template <typename _ArrayType, std::size_t _ArraySize>
+constexpr std::size_t GetArraySize(const _ArrayType(&)[_ArraySize]) noexcept
 {
-	return ArrayLength;
+	return _ArraySize;
 }
 
 } /* namespace utility */

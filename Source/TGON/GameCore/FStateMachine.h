@@ -13,7 +13,7 @@ namespace tgon
 
 
 template <typename StateTy>
-class FStateMachine
+class StateMachine
 {
 	/**
 	 * Ctor/Dtor

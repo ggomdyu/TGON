@@ -9,22 +9,18 @@
 #include <cstdint>
 #include <string>
 
-#include "Core/Utility/TypeTraits.h"
-
 namespace tgon
 {
 namespace math
 {
 
-template <typename Ty,
-          typename = utility::EnableIfArithmetic<Ty>>
-struct Rect;
-
-template <typename Ty>
-struct Rect<Ty>
+template <typename _ValueType>
+struct Rect
 {
-private:
-    using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
+/* @section Type definition */
+public:
+    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
+    using ValueType = _ValueType;
 
 /* @section Ctor/Dtor */
 public:
@@ -32,27 +28,27 @@ public:
     constexpr Rect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept;
+    constexpr Rect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept;
 
 /* @section Operator */
 public:
     constexpr const Rect operator+(const Rect&) const noexcept;
     constexpr const Rect operator-(const Rect&) const noexcept;
-    constexpr const Rect operator*(Ty) const noexcept;
-    constexpr const Rect operator/(DevideTy) const;
+    constexpr const Rect operator*(_ValueType) const noexcept;
+    constexpr const Rect operator/(DevideType) const;
     constexpr const Rect operator+() const noexcept;
     constexpr const Rect operator-() const noexcept;
     Rect& operator+=(const Rect&) noexcept;
     Rect& operator-=(const Rect&) noexcept;
-    Rect& operator*=(Ty) noexcept;
-    Rect& operator/=(DevideTy);
+    Rect& operator*=(_ValueType) noexcept;
+    Rect& operator/=(DevideType);
     constexpr bool operator==(const Rect&) const noexcept;
     constexpr bool operator!=(const Rect&) const noexcept;
 
 /* @section Public method */
 public:
     /**
-     * @brief                       Converts to string.
+     * @brief                       Converts value to a string.
      * @param [out] destBuffer      The destination of the string to be written.
      * @return                      The length of string converted.
      */
@@ -60,30 +56,30 @@ public:
     int32_t ToString(char(&destBuffer)[N]) const;
 
     /**
-     * @brief                       Converts to string.
+     * @brief                       Converts value to a string.
      * @param [out] destBuffer      The destination of the string to be written.
      * @param [in] bufferSize       The size of destBuffer.
      * @return                      The length of string converted.
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
     
-    /* @return  A string converted. */
+    /* @return  Converts value to a string. */
     std::string ToString() const;
 
 /* @section Public variable */
 public:
-    Ty bottom;
-    Ty top;
-    Ty width;
-    Ty height;
+    _ValueType bottom;
+    _ValueType top;
+    _ValueType width;
+    _ValueType height;
 
 	static const Rect One;		    // 0, 0, 0, 0
 	static const Rect Zero;	    // 1, 1, 1, 1
 	static const Rect MinusOne;	// -1, -1, -1, -1
 };
 
-template <typename Ty>
-constexpr Rect<Ty> MakeRect(Ty bottom, Ty top, Ty width, Ty height) noexcept
+template <typename _ValueType>
+constexpr Rect<_ValueType> MakeRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept
 {
     return {bottom, top, width, height};
 }
@@ -92,8 +88,8 @@ using IntRect = Rect<int32_t>;
 using FloatRect = Rect<float>;
 using DoubleRect = Rect<double>;
 
-template <typename Ty>
-constexpr Rect<Ty>::Rect() noexcept :
+template <typename _ValueType>
+constexpr Rect<_ValueType>::Rect() noexcept :
     bottom{},
     top{},
     width{},
@@ -101,8 +97,8 @@ constexpr Rect<Ty>::Rect() noexcept :
 {
 }
 
-template <typename Ty>
-constexpr Rect<Ty>::Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept :
+template <typename _ValueType>
+constexpr Rect<_ValueType>::Rect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept :
     bottom( bottom),
     top(top),
     width(width),
@@ -110,49 +106,49 @@ constexpr Rect<Ty>::Rect(Ty bottom, Ty top, Ty width, Ty height) noexcept :
 {
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator+(const Rect& rhs) const noexcept
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator+(const Rect& rhs) const noexcept
 {
     return Rect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator-(const Rect& rhs) const noexcept
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator-(const Rect& rhs) const noexcept
 {
     return Rect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator*(Ty rhs) const noexcept
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
     return Rect(bottom * rhs, top * rhs, width * rhs, height * rhs);
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator/(DevideTy rhs) const
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator/(DevideType rhs) const
 {
-    DevideTy inverse = 1.0f / rhs;
+    DevideType inverse = 1.0f / rhs;
 
-    return Rect((Ty)((DevideTy)bottom * inverse), 
-                 (Ty)((DevideTy)top * inverse),
-                 (Ty)((DevideTy)width * inverse),
-                 (Ty)((DevideTy)height * inverse));
+    return Rect((_ValueType)((DevideType)bottom * inverse),
+                 (_ValueType)((DevideType)top * inverse),
+                 (_ValueType)((DevideType)width * inverse),
+                 (_ValueType)((DevideType)height * inverse));
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator+() const noexcept
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator+() const noexcept
 {
 	return *this;
 }
 
-template <typename Ty>
-constexpr const Rect<Ty> Rect<Ty>::operator-() const noexcept
+template <typename _ValueType>
+constexpr const Rect<_ValueType> Rect<_ValueType>::operator-() const noexcept
 {
 	return Rect(-bottom, -top, -width, -height);
 }
 
-template <typename Ty>
-inline Rect<Ty>& Rect<Ty>::operator+=(const Rect& rhs) noexcept
+template <typename _ValueType>
+inline Rect<_ValueType>& Rect<_ValueType>::operator+=(const Rect& rhs) noexcept
 {
 	bottom += rhs.bottom;
     top += rhs.top;
@@ -162,8 +158,8 @@ inline Rect<Ty>& Rect<Ty>::operator+=(const Rect& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Rect<Ty>& Rect<Ty>::operator-=(const Rect& rhs) noexcept
+template <typename _ValueType>
+inline Rect<_ValueType>& Rect<_ValueType>::operator-=(const Rect& rhs) noexcept
 {
     bottom -= rhs.bottom;
     top -= rhs.top;
@@ -173,8 +169,8 @@ inline Rect<Ty>& Rect<Ty>::operator-=(const Rect& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Rect<Ty>& Rect<Ty>::operator*=(Ty rhs) noexcept
+template <typename _ValueType>
+inline Rect<_ValueType>& Rect<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
     bottom *= rhs;
     top *= rhs;
@@ -184,34 +180,34 @@ inline Rect<Ty>& Rect<Ty>::operator*=(Ty rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Rect<Ty>& Rect<Ty>::operator/=(DevideTy rhs)
+template <typename _ValueType>
+inline Rect<_ValueType>& Rect<_ValueType>::operator/=(DevideType rhs)
 {
-	DevideTy inverse = 1.0f / rhs;
+	DevideType inverse = 1.0f / rhs;
 
-    bottom = (Ty)((DevideTy)bottom * inverse);
-    top = (Ty)((DevideTy)top * inverse);
-    width = (Ty)((DevideTy)width * inverse);
-    height = (Ty)((DevideTy)height * inverse);
+    bottom = (_ValueType)((DevideType)bottom * inverse);
+    top = (_ValueType)((DevideType)top * inverse);
+    width = (_ValueType)((DevideType)width * inverse);
+    height = (_ValueType)((DevideType)height * inverse);
 
 	return *this;
 }
 
-template <typename Ty>
-constexpr bool Rect<Ty>::operator==(const Rect& rhs) const noexcept
+template <typename _ValueType>
+constexpr bool Rect<_ValueType>::operator==(const Rect& rhs) const noexcept
 {
 	return (bottom == rhs.bottom && top == rhs.top && width == rhs.width && height == rhs.height);
 }
 
-template <typename Ty>
-constexpr bool Rect<Ty>::operator!=(const Rect& rhs) const noexcept
+template <typename _ValueType>
+constexpr bool Rect<_ValueType>::operator!=(const Rect& rhs) const noexcept
 {
-    return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
+    return (bottom != rhs.bottom && top != rhs.top && width != rhs.width && height != rhs.height);
 }
 
-template<typename Ty>
+template<typename _ValueType>
 template<std::size_t N>
-inline int32_t Rect<Ty>::ToString(char(&destBuffer)[N]) const
+inline int32_t Rect<_ValueType>::ToString(char(&destBuffer)[N]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d %d %d", bottom, top, width, height);
@@ -220,8 +216,8 @@ inline int32_t Rect<Ty>::ToString(char(&destBuffer)[N]) const
 #endif
 }
 
-template<typename Ty>
-inline int32_t Rect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+template<typename _ValueType>
+inline int32_t Rect<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
@@ -230,8 +226,8 @@ inline int32_t Rect<Ty>::ToString(char* destBuffer, std::size_t bufferSize) cons
 #endif
 }
 
-template<typename Ty>
-inline std::string Rect<Ty>::ToString() const
+template<typename _ValueTy>
+inline std::string Rect<_ValueTy>::ToString() const
 {
     char buffer[128]{};
     this->ToString(buffer);

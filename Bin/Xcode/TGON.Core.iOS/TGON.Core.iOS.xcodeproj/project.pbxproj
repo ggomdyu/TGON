@@ -8,34 +8,43 @@
 
 /* Begin PBXBuildFile section */
 		FD1DDB731EFEB51E0066F030 /* GenericTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB711EFEB51E0066F030 /* GenericTime.cpp */; };
-		FD1DDB751EFEB6A10066F030 /* iOSTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB741EFEB6A10066F030 /* iOSTime.cpp */; };
+		FD1DDB751EFEB6A10066F030 /* IOSTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB741EFEB6A10066F030 /* IOSTime.cpp */; };
 		FD1DDB7B1EFEC9220066F030 /* Hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB791EFEC9220066F030 /* Hash.cpp */; };
+		FD38F2591F0BF26900343FBB /* StaticIf.h in Sources */ = {isa = PBXBuildFile; fileRef = FD449FC41F06AF1900CCEB2A /* StaticIf.h */; };
+		FD38F25A1F0BF26900343FBB /* Prefix.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4A8FCA1EFFF08300865B76 /* Prefix.h */; };
+		FD38F25B1F0BF26F00343FBB /* Hash.h in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB7A1EFEC9220066F030 /* Hash.h */; };
+		FD38F25C1F0BF26F00343FBB /* GenericTime.h in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB721EFEB51E0066F030 /* GenericTime.h */; };
+		FD38F25D1F0BF26F00343FBB /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = FD449FC91F07818100CCEB2A /* AppDelegate.h */; };
+		FD38F25E1F0BF26F00343FBB /* ViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = FD449FCB1F07818100CCEB2A /* ViewController.h */; };
+		FD38F25F1F0BF26F00343FBB /* IOSApplication.h in Sources */ = {isa = PBXBuildFile; fileRef = FD449FC71F07810100CCEB2A /* IOSApplication.h */; };
+		FD38F2601F0BF26F00343FBB /* IOSTime.h in Sources */ = {isa = PBXBuildFile; fileRef = FD449FC51F074BDA00CCEB2A /* IOSTime.h */; };
+		FD38F2611F0BF26F00343FBB /* Time.h in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDB7F1EFF4B320066F030 /* Time.h */; };
+		FD38F2621F0BF2AF00343FBB /* Algorithm.h in Sources */ = {isa = PBXBuildFile; fileRef = FD38F1D91F0BF0D900343FBB /* Algorithm.h */; };
+		FD449FC81F07810100CCEB2A /* IOSApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD449FC61F07810100CCEB2A /* IOSApplication.cpp */; };
+		FD449FCD1F07818100CCEB2A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD449FCA1F07818100CCEB2A /* AppDelegate.mm */; };
+		FD449FCE1F07818100CCEB2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD449FCC1F07818100CCEB2A /* ViewController.m */; };
 		FD4932EB1EED4F1500496036 /* Array.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E61EED4E9600496036 /* Array.h */; };
 		FD4932EC1EED4F1500496036 /* AutoCast.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E71EED4E9600496036 /* AutoCast.h */; };
 		FD4932ED1EED4F1500496036 /* Enumerator.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932E81EED4E9600496036 /* Enumerator.h */; };
 		FD4932EF1EED4F1500496036 /* TypeTraits.h in Sources */ = {isa = PBXBuildFile; fileRef = FD4932EA1EED4E9600496036 /* TypeTraits.h */; };
 		FD4932F01EED4F1500496036 /* Random.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984C81EED49B40037EB2A /* Random.h */; };
 		FD4932F11EED4F1500496036 /* WELLRNG.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984CA1EED49B40037EB2A /* WELLRNG.h */; };
-		FD6F13501EF61E7000BAB303 /* GenericLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE131EF03BB9000222A3 /* GenericLocale.h */; };
-		FD6F13521EF61E7000BAB303 /* iOSLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE101EF023C9000222A3 /* iOSLocale.h */; };
+		FD68450C1F10F81F00E9182F /* ExpressionTemplate.h in Sources */ = {isa = PBXBuildFile; fileRef = FD68450B1F10F60700E9182F /* ExpressionTemplate.h */; };
+		FD6F13521EF61E7000BAB303 /* IOSLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE101EF023C9000222A3 /* IOSLocale.h */; };
 		FD6F13531EF61E7000BAB303 /* Application.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDFE1EEEF6D3000222A3 /* Application.h */; };
 		FD6F13541EF61E7000BAB303 /* Config.h in Sources */ = {isa = PBXBuildFile; fileRef = FDDB283A1EF2E5D5005516AF /* Config.h */; };
 		FD6F13551EF61E7000BAB303 /* Locale.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE6D1EF0406C000222A3 /* Locale.h */; };
-		FD6F13561EF61E7000BAB303 /* Expression.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6F134F1EF61D0B00BAB303 /* Expression.h */; };
 		FD6FC4ED1EED42DC00A58E98 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4E91EED42DC00A58E98 /* Object.cpp */; };
 		FD6FC4EE1EED42DC00A58E98 /* TypeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4EB1EED42DC00A58E98 /* TypeInfo.cpp */; };
-		FD6FC4EF1EED435200A58E98 /* Delegate.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4E81EED42DC00A58E98 /* Delegate.h */; };
 		FD6FC4F01EED435200A58E98 /* Object.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4EA1EED42DC00A58E98 /* Object.h */; };
 		FD6FC4F11EED435200A58E98 /* TypeInfo.h in Sources */ = {isa = PBXBuildFile; fileRef = FD6FC4EC1EED42DC00A58E98 /* TypeInfo.h */; };
-		FDA6BDAA1EEDC7BA000222A3 /* iOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDA91EEDC7BA000222A3 /* iOSScreen.mm */; };
-		FDA6BDAC1EEDC878000222A3 /* iOSScreen.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDAB1EEDC7FE000222A3 /* iOSScreen.h */; };
-		FDA6BDAF1EEDCC73000222A3 /* GenericScreen.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDAE1EEDCB2B000222A3 /* GenericScreen.h */; };
-		FDA6BDB31EEE1870000222A3 /* iOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB21EEE1870000222A3 /* iOSWindow.mm */; };
+		FDA6BDAA1EEDC7BA000222A3 /* IOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDA91EEDC7BA000222A3 /* IOSScreen.mm */; };
+		FDA6BDAC1EEDC878000222A3 /* IOSScreen.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDAB1EEDC7FE000222A3 /* IOSScreen.h */; };
+		FDA6BDB31EEE1870000222A3 /* IOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB21EEE1870000222A3 /* IOSWindow.mm */; };
 		FDA6BDB61EEE18A8000222A3 /* GenericWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB41EEE18A8000222A3 /* GenericWindow.cpp */; };
 		FDA6BDB71EEEBFA8000222A3 /* GenericWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB51EEE18A8000222A3 /* GenericWindow.h */; };
-		FDA6BDB81EEEBFA8000222A3 /* iOSWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB11EEE1849000222A3 /* iOSWindow.h */; };
-		FDA6BE111EF023C9000222A3 /* iOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE0F1EF023C9000222A3 /* iOSLocale.mm */; };
-		FDA6BE141EF03BB9000222A3 /* GenericLocale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE121EF03BB9000222A3 /* GenericLocale.cpp */; };
+		FDA6BDB81EEEBFA8000222A3 /* IOSWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BDB11EEE1849000222A3 /* IOSWindow.h */; };
+		FDA6BE111EF023C9000222A3 /* IOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA6BE0F1EF023C9000222A3 /* IOSLocale.mm */; };
 		FDD984C01EED479C0037EB2A /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BE1EED479C0037EB2A /* Vector3.cpp */; };
 		FDD984C11EED47BB0037EB2A /* Extent.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BA1EED479C0037EB2A /* Extent.h */; };
 		FDD984C21EED47BB0037EB2A /* Math.h in Sources */ = {isa = PBXBuildFile; fileRef = FDD984BB1EED479C0037EB2A /* Math.h */; };
@@ -60,38 +69,47 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FD051F161F124A1100C85259 /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Screen.h; path = ../../../Source/TGON/Core/Platform/Screen.h; sourceTree = "<group>"; };
 		FD1DDB711EFEB51E0066F030 /* GenericTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericTime.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.cpp; sourceTree = "<group>"; };
 		FD1DDB721EFEB51E0066F030 /* GenericTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericTime.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.h; sourceTree = "<group>"; };
-		FD1DDB741EFEB6A10066F030 /* iOSTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iOSTime.cpp; path = ../../../Source/TGON/Core/Platform/iOS/iOSTime.cpp; sourceTree = "<group>"; };
+		FD1DDB741EFEB6A10066F030 /* IOSTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOSTime.cpp; path = ../../../Source/TGON/Core/Platform/iOS/IOSTime.cpp; sourceTree = "<group>"; };
 		FD1DDB791EFEC9220066F030 /* Hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hash.cpp; path = ../../../Source/TGON/Core/Hash/Hash.cpp; sourceTree = "<group>"; };
 		FD1DDB7A1EFEC9220066F030 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hash.h; path = ../../../Source/TGON/Core/Hash/Hash.h; sourceTree = "<group>"; };
-		FD1DDB7F1EFF4B320066F030 /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Time.h; path = ../../../Source/TGON/Core/Platform/Time.h; sourceTree = "<group>"; };
-		FD449FC41F06AF1900CCEB2A /* Conditional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Conditional.h; path = ../../../Source/TGON/Core/Utility/Conditional.h; sourceTree = "<group>"; };
+		FD1DDB7F1EFF4B320066F030 /* Time.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Time.h; path = ../../../Source/TGON/Core/Platform/Time.h; sourceTree = "<group>"; };
+		FD38F1D91F0BF0D900343FBB /* Algorithm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Algorithm.h; path = ../../../Source/TGON/Core/Utility/Algorithm.h; sourceTree = "<group>"; };
+		FD449FC41F06AF1900CCEB2A /* StaticIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticIf.h; path = ../../../Source/TGON/Core/Utility/StaticIf.h; sourceTree = "<group>"; };
+		FD449FC51F074BDA00CCEB2A /* IOSTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOSTime.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSTime.h; sourceTree = "<group>"; };
+		FD449FC61F07810100CCEB2A /* IOSApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOSApplication.cpp; path = ../../../Source/TGON/Core/Platform/iOS/IOSApplication.cpp; sourceTree = "<group>"; };
+		FD449FC71F07810100CCEB2A /* IOSApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOSApplication.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSApplication.h; sourceTree = "<group>"; };
+		FD449FC91F07818100CCEB2A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy/../../../../Source/TGON/Core/Platform/iOS/AppDelegate.h; sourceTree = "<absolute>"; };
+		FD449FCA1F07818100CCEB2A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy/../../../../Source/TGON/Core/Platform/iOS/AppDelegate.mm; sourceTree = "<absolute>"; };
+		FD449FCB1F07818100CCEB2A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy/../../../../Source/TGON/Core/Platform/iOS/ViewController.h; sourceTree = "<absolute>"; };
+		FD449FCC1F07818100CCEB2A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Bin/Xcode/ModelJoy/ModelJoy/../../../../Source/TGON/Core/Platform/iOS/ViewController.m; sourceTree = "<absolute>"; };
 		FD4932E61EED4E9600496036 /* Array.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Array.h; path = ../../../Source/TGON/Core/Utility/Array.h; sourceTree = "<group>"; };
 		FD4932E71EED4E9600496036 /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = AutoCast.h; path = ../../../Source/TGON/Core/Utility/AutoCast.h; sourceTree = "<group>"; };
 		FD4932E81EED4E9600496036 /* Enumerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Enumerator.h; path = ../../../Source/TGON/Core/Utility/Enumerator.h; sourceTree = "<group>"; };
 		FD4932EA1EED4E9600496036 /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = TypeTraits.h; path = ../../../Source/TGON/Core/Utility/TypeTraits.h; sourceTree = "<group>"; };
-		FD4A8FCA1EFFF08300865B76 /* Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Suffix.h; path = ../../../Source/TGON/Core/Platform/Suffix.h; sourceTree = "<group>"; };
-		FD6F134F1EF61D0B00BAB303 /* Expression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = Expression.h; path = ../../../Source/TGON/Core/Utility/Expression.h; sourceTree = "<group>"; };
+		FD4A8FCA1EFFF08300865B76 /* Prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.h; path = ../../../Source/TGON/Core/Platform/Prefix.h; sourceTree = "<group>"; };
+		FD51C1961F20F788003F08B6 /* Delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Delegate.h; path = ../../../Source/TGON/Core/Utility/Delegate.h; sourceTree = "<group>"; };
+		FD68450B1F10F60700E9182F /* ExpressionTemplate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = ExpressionTemplate.h; path = ../../../Source/TGON/Core/Utility/ExpressionTemplate.h; sourceTree = "<group>"; };
 		FD6FC4D21EED425300A58E98 /* libTGON.Core.iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.Core.iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD6FC4E81EED42DC00A58E98 /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Delegate.h; path = ../../../Source/TGON/Core/Object/Delegate.h; sourceTree = "<group>"; };
 		FD6FC4E91EED42DC00A58E98 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Object.cpp; path = ../../../Source/TGON/Core/Object/Object.cpp; sourceTree = "<group>"; };
 		FD6FC4EA1EED42DC00A58E98 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = ../../../Source/TGON/Core/Object/Object.h; sourceTree = "<group>"; };
 		FD6FC4EB1EED42DC00A58E98 /* TypeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TypeInfo.cpp; path = ../../../Source/TGON/Core/Object/TypeInfo.cpp; sourceTree = "<group>"; };
 		FD6FC4EC1EED42DC00A58E98 /* TypeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeInfo.h; path = ../../../Source/TGON/Core/Object/TypeInfo.h; sourceTree = "<group>"; };
-		FDA6BDA91EEDC7BA000222A3 /* iOSScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSScreen.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSScreen.mm; sourceTree = "<group>"; };
-		FDA6BDAB1EEDC7FE000222A3 /* iOSScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSScreen.h; path = ../../../Source/TGON/Core/Platform/iOS/iOSScreen.h; sourceTree = "<group>"; };
-		FDA6BDAE1EEDCB2B000222A3 /* GenericScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericScreen.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericScreen.h; sourceTree = "<group>"; };
-		FDA6BDB11EEE1849000222A3 /* iOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSWindow.h; path = ../../../Source/TGON/Core/Platform/iOS/iOSWindow.h; sourceTree = "<group>"; };
-		FDA6BDB21EEE1870000222A3 /* iOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSWindow.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSWindow.mm; sourceTree = "<group>"; };
+		FD7DF7691F1EF6ED002F65CA /* GenericLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericLocale.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericLocale.h; sourceTree = "<group>"; };
+		FD89E4F81F1B4710007376E8 /* IOSConfig.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = IOSConfig.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSConfig.h; sourceTree = "<group>"; };
+		FD89E5251F1B6007007376E8 /* PrecompiledHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrecompiledHeader.pch; path = /Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON/PrecompiledHeader.pch; sourceTree = "<absolute>"; };
+		FDA6BDA91EEDC7BA000222A3 /* IOSScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IOSScreen.mm; path = ../../../Source/TGON/Core/Platform/iOS/IOSScreen.mm; sourceTree = "<group>"; };
+		FDA6BDAB1EEDC7FE000222A3 /* IOSScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOSScreen.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSScreen.h; sourceTree = "<group>"; };
+		FDA6BDB11EEE1849000222A3 /* IOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOSWindow.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSWindow.h; sourceTree = "<group>"; };
+		FDA6BDB21EEE1870000222A3 /* IOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IOSWindow.mm; path = ../../../Source/TGON/Core/Platform/iOS/IOSWindow.mm; sourceTree = "<group>"; };
 		FDA6BDB41EEE18A8000222A3 /* GenericWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericWindow.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericWindow.cpp; sourceTree = "<group>"; };
 		FDA6BDB51EEE18A8000222A3 /* GenericWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericWindow.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericWindow.h; sourceTree = "<group>"; };
-		FDA6BDFE1EEEF6D3000222A3 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../../Source/TGON/Core/Platform/Application.h; sourceTree = "<group>"; };
-		FDA6BE0F1EF023C9000222A3 /* iOSLocale.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSLocale.mm; path = ../../../Source/TGON/Core/Platform/iOS/iOSLocale.mm; sourceTree = "<group>"; };
-		FDA6BE101EF023C9000222A3 /* iOSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSLocale.h; path = ../../../Source/TGON/Core/Platform/iOS/iOSLocale.h; sourceTree = "<group>"; };
-		FDA6BE121EF03BB9000222A3 /* GenericLocale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericLocale.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericLocale.cpp; sourceTree = "<group>"; };
-		FDA6BE131EF03BB9000222A3 /* GenericLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericLocale.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericLocale.h; sourceTree = "<group>"; };
-		FDA6BE6D1EF0406C000222A3 /* Locale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Locale.h; path = ../../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
+		FDA6BDFE1EEEF6D3000222A3 /* Application.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Application.h; path = ../../../Source/TGON/Core/Platform/Application.h; sourceTree = "<group>"; };
+		FDA6BE0F1EF023C9000222A3 /* IOSLocale.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IOSLocale.mm; path = ../../../Source/TGON/Core/Platform/iOS/IOSLocale.mm; sourceTree = "<group>"; };
+		FDA6BE101EF023C9000222A3 /* IOSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOSLocale.h; path = ../../../Source/TGON/Core/Platform/iOS/IOSLocale.h; sourceTree = "<group>"; };
+		FDA6BE6D1EF0406C000222A3 /* Locale.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = Locale.h; path = ../../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
 		FDD984B81EED47570037EB2A /* FixedString.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = FixedString.h; path = ../../../Source/TGON/Core/String/FixedString.h; sourceTree = "<group>"; };
 		FDD984B91EED47570037EB2A /* FixedStringUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = FixedStringUtility.h; path = ../../../Source/TGON/Core/String/FixedStringUtility.h; sourceTree = "<group>"; };
 		FDD984BA1EED479C0037EB2A /* Extent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Extent.h; path = ../../../Source/TGON/Core/Math/Extent.h; sourceTree = "<group>"; };
@@ -103,7 +121,7 @@
 		FDD984C81EED49B40037EB2A /* Random.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Random.h; path = ../../../Source/TGON/Core/Random/Random.h; sourceTree = "<group>"; };
 		FDD984C91EED49B40037EB2A /* WELLRNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WELLRNG.cpp; path = ../../../Source/TGON/Core/Random/WELLRNG.cpp; sourceTree = "<group>"; };
 		FDD984CA1EED49B40037EB2A /* WELLRNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WELLRNG.h; path = ../../../Source/TGON/Core/Random/WELLRNG.h; sourceTree = "<group>"; };
-		FDDB283A1EF2E5D5005516AF /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
+		FDDB283A1EF2E5D5005516AF /* Config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Config.h; path = ../../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +152,7 @@
 				FDA6BDFE1EEEF6D3000222A3 /* Application.h */,
 				FDDB283A1EF2E5D5005516AF /* Config.h */,
 				FDA6BE6D1EF0406C000222A3 /* Locale.h */,
+				FD051F161F124A1100C85259 /* Screen.h */,
 				FD1DDB7F1EFF4B320066F030 /* Time.h */,
 			);
 			name = Platform;
@@ -142,13 +161,21 @@
 		FD4933321EED563700496036 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				FD1DDB741EFEB6A10066F030 /* iOSTime.cpp */,
-				FDA6BDA91EEDC7BA000222A3 /* iOSScreen.mm */,
-				FDA6BDAB1EEDC7FE000222A3 /* iOSScreen.h */,
-				FDA6BDB21EEE1870000222A3 /* iOSWindow.mm */,
-				FDA6BDB11EEE1849000222A3 /* iOSWindow.h */,
-				FDA6BE0F1EF023C9000222A3 /* iOSLocale.mm */,
-				FDA6BE101EF023C9000222A3 /* iOSLocale.h */,
+				FD449FC91F07818100CCEB2A /* AppDelegate.h */,
+				FD449FCA1F07818100CCEB2A /* AppDelegate.mm */,
+				FD449FCB1F07818100CCEB2A /* ViewController.h */,
+				FD449FCC1F07818100CCEB2A /* ViewController.m */,
+				FD449FC71F07810100CCEB2A /* IOSApplication.h */,
+				FD449FC61F07810100CCEB2A /* IOSApplication.cpp */,
+				FD89E4F81F1B4710007376E8 /* IOSConfig.h */,
+				FD449FC51F074BDA00CCEB2A /* IOSTime.h */,
+				FD1DDB741EFEB6A10066F030 /* IOSTime.cpp */,
+				FDA6BDA91EEDC7BA000222A3 /* IOSScreen.mm */,
+				FDA6BDAB1EEDC7FE000222A3 /* IOSScreen.h */,
+				FDA6BDB21EEE1870000222A3 /* IOSWindow.mm */,
+				FDA6BDB11EEE1849000222A3 /* IOSWindow.h */,
+				FDA6BE0F1EF023C9000222A3 /* IOSLocale.mm */,
+				FDA6BE101EF023C9000222A3 /* IOSLocale.h */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -173,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				FD6FC4E61EED428A00A58E98 /* Core */,
+				FD89E5251F1B6007007376E8 /* PrecompiledHeader.pch */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -194,7 +222,6 @@
 		FD6FC4E71EED428A00A58E98 /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				FD6FC4E81EED42DC00A58E98 /* Delegate.h */,
 				FD6FC4E91EED42DC00A58E98 /* Object.cpp */,
 				FD6FC4EA1EED42DC00A58E98 /* Object.h */,
 				FD6FC4EB1EED42DC00A58E98 /* TypeInfo.cpp */,
@@ -206,13 +233,11 @@
 		FDA6BDAD1EEDCB0F000222A3 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				FD7DF7691F1EF6ED002F65CA /* GenericLocale.h */,
 				FD1DDB711EFEB51E0066F030 /* GenericTime.cpp */,
 				FD1DDB721EFEB51E0066F030 /* GenericTime.h */,
 				FDA6BDB41EEE18A8000222A3 /* GenericWindow.cpp */,
 				FDA6BDB51EEE18A8000222A3 /* GenericWindow.h */,
-				FDA6BDAE1EEDCB2B000222A3 /* GenericScreen.h */,
-				FDA6BE121EF03BB9000222A3 /* GenericLocale.cpp */,
-				FDA6BE131EF03BB9000222A3 /* GenericLocale.h */,
 			);
 			name = Generic;
 			sourceTree = "<group>";
@@ -252,12 +277,14 @@
 		FDD984B71EED47350037EB2A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FD38F1D91F0BF0D900343FBB /* Algorithm.h */,
 				FD4932E61EED4E9600496036 /* Array.h */,
 				FD4932E71EED4E9600496036 /* AutoCast.h */,
-				FD449FC41F06AF1900CCEB2A /* Conditional.h */,
-				FD6F134F1EF61D0B00BAB303 /* Expression.h */,
+				FD51C1961F20F788003F08B6 /* Delegate.h */,
 				FD4932E81EED4E9600496036 /* Enumerator.h */,
-				FD4A8FCA1EFFF08300865B76 /* Suffix.h */,
+				FD68450B1F10F60700E9182F /* ExpressionTemplate.h */,
+				FD4A8FCA1EFFF08300865B76 /* Prefix.h */,
+				FD449FC41F06AF1900CCEB2A /* StaticIf.h */,
 				FD4932EA1EED4E9600496036 /* TypeTraits.h */,
 			);
 			name = Utility;
@@ -321,44 +348,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD6F13501EF61E7000BAB303 /* GenericLocale.h in Sources */,
-				FD6F13521EF61E7000BAB303 /* iOSLocale.h in Sources */,
+				FD68450C1F10F81F00E9182F /* ExpressionTemplate.h in Sources */,
+				FD38F25B1F0BF26F00343FBB /* Hash.h in Sources */,
+				FD38F25C1F0BF26F00343FBB /* GenericTime.h in Sources */,
+				FD38F25D1F0BF26F00343FBB /* AppDelegate.h in Sources */,
+				FD38F25E1F0BF26F00343FBB /* ViewController.h in Sources */,
+				FD38F25F1F0BF26F00343FBB /* IOSApplication.h in Sources */,
+				FD38F2601F0BF26F00343FBB /* IOSTime.h in Sources */,
+				FD38F2611F0BF26F00343FBB /* Time.h in Sources */,
+				FD38F2621F0BF2AF00343FBB /* Algorithm.h in Sources */,
+				FD38F2591F0BF26900343FBB /* StaticIf.h in Sources */,
+				FD38F25A1F0BF26900343FBB /* Prefix.h in Sources */,
+				FD449FCE1F07818100CCEB2A /* ViewController.m in Sources */,
+				FD6F13521EF61E7000BAB303 /* IOSLocale.h in Sources */,
 				FD1DDB7B1EFEC9220066F030 /* Hash.cpp in Sources */,
 				FD6F13531EF61E7000BAB303 /* Application.h in Sources */,
 				FD6F13541EF61E7000BAB303 /* Config.h in Sources */,
 				FD6F13551EF61E7000BAB303 /* Locale.h in Sources */,
-				FD1DDB751EFEB6A10066F030 /* iOSTime.cpp in Sources */,
-				FD6F13561EF61E7000BAB303 /* Expression.h in Sources */,
+				FD1DDB751EFEB6A10066F030 /* IOSTime.cpp in Sources */,
+				FD449FC81F07810100CCEB2A /* IOSApplication.cpp in Sources */,
 				FDA6BDB71EEEBFA8000222A3 /* GenericWindow.h in Sources */,
-				FDA6BDB81EEEBFA8000222A3 /* iOSWindow.h in Sources */,
-				FDA6BDAF1EEDCC73000222A3 /* GenericScreen.h in Sources */,
-				FDA6BDAC1EEDC878000222A3 /* iOSScreen.h in Sources */,
+				FDA6BDB81EEEBFA8000222A3 /* IOSWindow.h in Sources */,
+				FDA6BDAC1EEDC878000222A3 /* IOSScreen.h in Sources */,
 				FD4932EB1EED4F1500496036 /* Array.h in Sources */,
 				FD4932EC1EED4F1500496036 /* AutoCast.h in Sources */,
 				FD4932ED1EED4F1500496036 /* Enumerator.h in Sources */,
 				FD4932EF1EED4F1500496036 /* TypeTraits.h in Sources */,
 				FD4932F01EED4F1500496036 /* Random.h in Sources */,
+				FD449FCD1F07818100CCEB2A /* AppDelegate.mm in Sources */,
 				FD4932F11EED4F1500496036 /* WELLRNG.h in Sources */,
 				FDD984C11EED47BB0037EB2A /* Extent.h in Sources */,
 				FDD984C21EED47BB0037EB2A /* Math.h in Sources */,
 				FDD984C31EED47BB0037EB2A /* Point.h in Sources */,
 				FDA6BDB61EEE18A8000222A3 /* GenericWindow.cpp in Sources */,
-				FDA6BDAA1EEDC7BA000222A3 /* iOSScreen.mm in Sources */,
+				FDA6BDAA1EEDC7BA000222A3 /* IOSScreen.mm in Sources */,
 				FDD984C41EED47BB0037EB2A /* Rect.h in Sources */,
 				FDD984C51EED47BB0037EB2A /* Vector3.h in Sources */,
-				FDA6BE141EF03BB9000222A3 /* GenericLocale.cpp in Sources */,
 				FD1DDB731EFEB51E0066F030 /* GenericTime.cpp in Sources */,
 				FDD984CB1EED49B40037EB2A /* WELLRNG.cpp in Sources */,
 				FDD984C61EED47BB0037EB2A /* FixedString.h in Sources */,
 				FDD984C71EED47BB0037EB2A /* FixedStringUtility.h in Sources */,
-				FD6FC4EF1EED435200A58E98 /* Delegate.h in Sources */,
 				FD6FC4F01EED435200A58E98 /* Object.h in Sources */,
-				FDA6BE111EF023C9000222A3 /* iOSLocale.mm in Sources */,
+				FDA6BE111EF023C9000222A3 /* IOSLocale.mm in Sources */,
 				FD6FC4F11EED435200A58E98 /* TypeInfo.h in Sources */,
 				FD6FC4EE1EED42DC00A58E98 /* TypeInfo.cpp in Sources */,
 				FD6FC4ED1EED42DC00A58E98 /* Object.cpp in Sources */,
 				FDD984C01EED479C0037EB2A /* Vector3.cpp in Sources */,
-				FDA6BDB31EEE1870000222A3 /* iOSWindow.mm in Sources */,
+				FDA6BDB31EEE1870000222A3 /* IOSWindow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,10 +494,13 @@
 		FD6FC4DC1EED425300A58E98 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../Source/TGON/PrecompiledHeader.pch";
 				HEADER_SEARCH_PATHS = (
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+					"$(PROJECT_DIR)/../../../Source/TGON",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,10 +511,13 @@
 		FD6FC4DD1EED425300A58E98 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../Source/TGON/PrecompiledHeader.pch";
 				HEADER_SEARCH_PATHS = (
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/TGON,
-					/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/boost_1_63_0,
+					"$(PROJECT_DIR)/../../../Source/TGON",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

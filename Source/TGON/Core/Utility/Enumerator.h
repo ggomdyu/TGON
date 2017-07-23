@@ -12,10 +12,10 @@ namespace tgon
 namespace utility
 {
 
-template <typename EnumTy>
-constexpr typename std::underlying_type<EnumTy>::type Underlying(EnumTy value)
+template <typename _EnumType>
+constexpr typename std::underlying_type<_EnumType>::type Underlying(_EnumType value)
 {
-    return static_cast<typename std::underlying_type<EnumTy>::type>(value);
+    return static_cast<typename std::underlying_type<_EnumType>::type>(value);
 }
 
 } /* namespace utility */

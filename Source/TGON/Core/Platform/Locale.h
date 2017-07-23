@@ -9,8 +9,10 @@
 
 #if BOOST_OS_WINDOWS
 #	include "Windows/WindowsLocale.h"
+#elif BOOST_OS_MACOS
+#	import "MacOS/MacOSLocale.h"
 #elif BOOST_OS_ANDROID
 #	include "Android/AndroidLocale.h"
 #elif BOOST_OS_IOS
-#	import "iOS/iOSLocale.h"
+#	import "IOS/IOSLocale.h"
 #endif

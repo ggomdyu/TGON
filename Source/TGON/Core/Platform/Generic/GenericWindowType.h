@@ -13,7 +13,7 @@ namespace tgon
 namespace platform
 {
 
-struct TWindowStyle
+struct WindowStyle
 {
 public:
 	std::string caption = u8"Hello World!";
@@ -23,6 +23,8 @@ public:
 	std::size_t width = 500;
 	std::size_t height = 500;
 
+    bool borderless = false;
+    bool enableSystemButton = true;
 	bool enableFullScreen = false;
 	bool supportWindowTransparency = false;
 	bool supportPerPixelTransparency = false;
@@ -30,7 +32,7 @@ public:
     bool topMost = false;
     bool maximized = false;
 	bool minimized = false;
-    bool showMiddle = true;
+    bool showMiddle = false;
     bool setFocusOnCreated = true;
 };
 

@@ -49,7 +49,7 @@ public:
 /* @section Public method */
 public:
     static constexpr float Dot(const Vector3& a, const Vector3& b) noexcept;
-    static constexpr Vector3 Cross(const Vector3& a, const Vector3& b) noexcept;
+    static constexpr const Vector3 Cross(const Vector3& a, const Vector3& b) noexcept;
     static float Angle(const Vector3& a, const Vector3& b) noexcept;
     static float Distance(const Vector3& a, const Vector3& b) noexcept;
     float& At(std::size_t index);
@@ -184,7 +184,7 @@ constexpr bool Vector3::operator==(const Vector3& rhs) const noexcept
 
 constexpr bool Vector3::operator!=(const Vector3& rhs) const noexcept
 {
-    return (x != rhs.x || y != rhs.y || z != rhs.z);
+    return (x != rhs.x && y != rhs.y && z != rhs.z);
 }
 
 inline float& Vector3::operator[](std::size_t index) noexcept
@@ -216,7 +216,7 @@ constexpr float Vector3::Dot(const Vector3& a, const Vector3& b) noexcept
     return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
-constexpr Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexcept
+constexpr const Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexcept
 {
     return {(a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)};
 }

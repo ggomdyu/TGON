@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "WELLRNG.h"
 
 #include <cstdlib>
@@ -24,10 +24,6 @@
 
 #define FACT 2.32830643653869628906e-10
 
-namespace tgon
-{
-namespace random
-{
 namespace
 {
 
@@ -43,7 +39,7 @@ public:
 
 inline WELLRNG1024aHelper::WELLRNG1024aHelper()
 {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     for (int i = 0; i < R; ++i)
     {
@@ -52,6 +48,11 @@ inline WELLRNG1024aHelper::WELLRNG1024aHelper()
 }
 
 } /* namespace */
+
+namespace tgon
+{
+namespace random
+{
 
 TGON_API double WELLRNG1024a()
 {

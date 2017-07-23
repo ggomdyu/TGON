@@ -16,13 +16,6 @@ namespace utility
 template <typename>
 struct FunctionTraits;
 
-/* @brief   Traits for lambda */
-template <typename _FunctionType>
-struct FunctionTraits : 
-	public FunctionTraits<decltype(&_FunctionType::operator())>
-{
-};
-
 /* @brief   Traits for global function */
 template <typename _ReturnType, typename... _Args>
 struct FunctionTraits<_ReturnType(_Args...)>
@@ -64,6 +57,13 @@ struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...) volatile> :
 template <typename _ReturnType, typename _ClassType, typename... _Args>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...) const volatile> :
     public FunctionTraits<_ReturnType(_ClassType::*)(_Args...)>
+{
+};
+
+/* @brief   Traits for lambda */
+template <typename _FunctionType>
+struct FunctionTraits :
+    public FunctionTraits<decltype(&_FunctionType::operator())>
 {
 };
 

@@ -9,22 +9,17 @@
 #include <cstdint>
 #include <string>
 
-#include "Core/Utility/TypeTraits.h"
-
 namespace tgon
 {
 namespace math
 {
 
-template <typename Ty,
-          typename = utility::EnableIfArithmetic<Ty>>
-struct Extent2D;
-
-template <typename Ty>
-struct Extent2D<Ty>
+template <typename _ValueType>
+struct Extent2D
 {
-private:
-    using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
+public:
+    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
+    using ValueType = _ValueType;
 
 /* @section Ctor/Dtor */
 public:
@@ -32,25 +27,25 @@ public:
     constexpr Extent2D() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr Extent2D(Ty width, Ty height) noexcept;
+    constexpr Extent2D(_ValueType width, _ValueType height) noexcept;
 
 /* @section Operator */
 public:
     constexpr const Extent2D operator+(const Extent2D&) const noexcept;
     constexpr const Extent2D operator-(const Extent2D&) const noexcept;
-    constexpr const Extent2D operator*(Ty) const noexcept;
-    constexpr const Extent2D operator/(DevideTy) const;
+    constexpr const Extent2D operator*(_ValueType) const noexcept;
+    constexpr const Extent2D operator/(DevideType) const;
     constexpr const Extent2D operator+() const noexcept;
     constexpr const Extent2D operator-() const noexcept;
     Extent2D& operator+=(const Extent2D&) noexcept;
     Extent2D& operator-=(const Extent2D&) noexcept;
-    Extent2D& operator*=(Ty) noexcept;
-    Extent2D& operator/=(DevideTy);
+    Extent2D& operator*=(_ValueType) noexcept;
+    Extent2D& operator/=(DevideType);
     constexpr bool operator==(const Extent2D&) const noexcept;
     constexpr bool operator!=(const Extent2D&) const noexcept;
 
-    template <typename CastToTy>
-    constexpr operator Extent2D<CastToTy>() const noexcept;
+    template <typename _CastToType>
+    constexpr operator Extent2D<_CastToType>() const noexcept;
 
 /* @section Public method */
 public:
@@ -59,8 +54,8 @@ public:
      * @param [out] destBuffer      The destination of the string to be written.
      * @return                      The length of string converted.
      */
-    template <std::size_t N>
-    int32_t ToString(char(&destBuffer)[N]) const;
+    template <std::size_t _BufferSize>
+    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
 
     /**
      * @brief                       Converts to string.
@@ -75,16 +70,16 @@ public:
 
 /* @section Public variable */
 public:
-    Ty width;
-    Ty height;
+    _ValueType width;
+    _ValueType height;
 
 	static const Extent2D One;		// 1, 1
 	static const Extent2D Zero;	    // 0, 0
 	static const Extent2D MinusOne;	// -1, -1
 };
 
-template <typename Ty>
-constexpr Extent2D<Ty> MakeExtent(Ty width, Ty height) noexcept
+template <typename _ValueType>
+constexpr Extent2D<_ValueType> MakeExtent(_ValueType width, _ValueType height) noexcept
 {
     return {width, height};
 }
@@ -92,59 +87,59 @@ constexpr Extent2D<Ty> MakeExtent(Ty width, Ty height) noexcept
 using IntExtent2D = Extent2D<int32_t>;
 using FloatExtent2D = Extent2D<float>;
 
-template<typename Ty>
-constexpr Extent2D<Ty>::Extent2D() noexcept :
+template<typename _ValueType>
+constexpr Extent2D<_ValueType>::Extent2D() noexcept :
     width{},
     height{}
 {
 }
 
-template <typename Ty>
-constexpr Extent2D<Ty>::Extent2D(Ty width, Ty height) noexcept :
+template <typename _ValueType>
+constexpr Extent2D<_ValueType>::Extent2D(_ValueType width, _ValueType height) noexcept :
     width(width),
     height(height)
 {
 }
 
-template<typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator+(const Extent2D& rhs) const noexcept
+template<typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator+(const Extent2D& rhs) const noexcept
 {
     return TExtent(width + rhs.width, height + rhs.height);
 }
 
-template <typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator-(const Extent2D& rhs) const noexcept
+template <typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator-(const Extent2D& rhs) const noexcept
 {
     return TExtent(width - rhs.width, height - rhs.height);
 }
 
-template <typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator*(Ty rhs) const noexcept
+template <typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
     return TExtent(width * rhs, height * rhs);
 }
 
-template <typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator/(DevideTy rhs) const
+template <typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator/(DevideType rhs) const
 {
-    return TExtent((Ty)((DevideTy)width / (DevideTy)rhs),
-                  (Ty)((DevideTy)height / (DevideTy)rhs));
+    return TExtent((_ValueType)((DevideType)width / (DevideType)rhs),
+                  (_ValueType)((DevideType)height / (DevideType)rhs));
 }
 
-template <typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator+() const noexcept
+template <typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator+() const noexcept
 {
 	return *this;
 }
 
-template <typename Ty>
-constexpr const Extent2D<Ty> Extent2D<Ty>::operator-() const noexcept
+template <typename _ValueType>
+constexpr const Extent2D<_ValueType> Extent2D<_ValueType>::operator-() const noexcept
 {
 	return TExtent(-width, -height);
 }
 
-template <typename Ty>
-inline Extent2D<Ty>& Extent2D<Ty>::operator+=(const Extent2D& rhs) noexcept
+template <typename _ValueType>
+inline Extent2D<_ValueType>& Extent2D<_ValueType>::operator+=(const Extent2D& rhs) noexcept
 {
     width += rhs.width;
     height += rhs.height;
@@ -152,8 +147,8 @@ inline Extent2D<Ty>& Extent2D<Ty>::operator+=(const Extent2D& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Extent2D<Ty>& Extent2D<Ty>::operator-=(const Extent2D& rhs) noexcept
+template <typename _ValueType>
+inline Extent2D<_ValueType>& Extent2D<_ValueType>::operator-=(const Extent2D& rhs) noexcept
 {
     width -= rhs.width;
     height -= rhs.height;
@@ -161,8 +156,8 @@ inline Extent2D<Ty>& Extent2D<Ty>::operator-=(const Extent2D& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Extent2D<Ty>& Extent2D<Ty>::operator*=(Ty rhs) noexcept
+template <typename _ValueType>
+inline Extent2D<_ValueType>& Extent2D<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
     width *= rhs;
     height *= rhs;
@@ -170,47 +165,47 @@ inline Extent2D<Ty>& Extent2D<Ty>::operator*=(Ty rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Extent2D<Ty>& Extent2D<Ty>::operator/=(DevideTy rhs)
+template <typename _ValueType>
+inline Extent2D<_ValueType>& Extent2D<_ValueType>::operator/=(DevideType rhs)
 {
-    width = (Ty)((DevideTy)width / rhs);
-    height = (Ty)((DevideTy)height / rhs);
+    width = (_ValueType)((DevideType)width / rhs);
+    height = (_ValueType)((DevideType)height / rhs);
 
 	return *this;
 }
 
-template <typename Ty>
-inline constexpr bool Extent2D<Ty>::operator==(const Extent2D& rhs) const noexcept
+template <typename _ValueType>
+inline constexpr bool Extent2D<_ValueType>::operator==(const Extent2D& rhs) const noexcept
 {
 	return (width == rhs.width && height == rhs.height);
 }
 
-template <typename Ty>
-inline constexpr bool Extent2D<Ty>::operator!=(const Extent2D& rhs) const noexcept
+template <typename _ValueType>
+inline constexpr bool Extent2D<_ValueType>::operator!=(const Extent2D& rhs) const noexcept
 {
-    return (width != rhs.width || height != rhs.height);
+    return (width != rhs.width && height != rhs.height);
 }
 
-template<typename Ty>
-template<typename CastToTy>
-constexpr Extent2D<Ty>::operator Extent2D<CastToTy>() const noexcept
+template<typename _ValueType>
+template<typename _CastToType>
+constexpr Extent2D<_ValueType>::operator Extent2D<_CastToType>() const noexcept
 {
-    return Extent2D<CastToTy>((CastToTy)width, (CastToTy)height);
+    return Extent2D<_CastToType>((_CastToType)width, (_CastToType)height);
 }
 
-template<typename Ty>
-template<std::size_t N>
-inline int32_t Extent2D<Ty>::ToString(char(&destBuffer)[N]) const
+template<typename _ValueType>
+template<std::size_t _BufferSize>
+inline int32_t Extent2D<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d", width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * N, "%d %d", width, height);
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%d %d", width, height);
 #endif
 }
 
-template<typename Ty>
-inline int32_t Extent2D<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+template<typename _ValueType>
+inline int32_t Extent2D<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
@@ -219,8 +214,8 @@ inline int32_t Extent2D<Ty>::ToString(char* destBuffer, std::size_t bufferSize) 
 #endif
 }
 
-template<typename Ty>
-inline std::string Extent2D<Ty>::ToString() const
+template<typename _ValueType>
+inline std::string Extent2D<_ValueType>::ToString() const
 {
     char buffer[128]{};
     this->ToString(buffer);

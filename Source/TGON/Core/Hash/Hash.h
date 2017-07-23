@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <cstdint>
 #include <cstddef>
 
 #include "Core/Platform/Config.h"
@@ -25,7 +26,7 @@ constexpr HashValue x65599HashImpl(const char* str, HashValue prevHashValue)
 } /* namespace detail */
 
 #if (__cplusplus == 201402L)
-constexpr HashValue Hash::x65599Hash(const char* str)
+constexpr HashValue x65599Hash(const char* str)
 {
     HashValue hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)

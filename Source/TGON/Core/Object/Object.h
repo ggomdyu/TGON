@@ -39,7 +39,7 @@ public:
  * @section Public method
  */
 public:
-	virtual std::size_t GetHashCode() const = 0;
+	virtual std::size_t GetTypeHashCode() const = 0;
 
     virtual const char* GetTypeName() const noexcept = 0;
 };
@@ -51,7 +51,7 @@ public:
     using Super = This;\
 	using This = classType;\
 	\
-    virtual std::size_t GetHashCode() const noexcept override\
+    virtual std::size_t GetTypeHashCode() const noexcept override\
     {\
         return Foo::GetTypeInfo().GetHashCode();\
     }\

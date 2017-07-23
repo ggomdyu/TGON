@@ -1,10 +1,14 @@
 /**
- * @filename    GenericLocale.h
+ * @filename    GenericTime.h
  * @author      ggomdyu
- * @since       06/14/2017
+ * @since       05/15/2016
+ * @desc        Set of Platform agnostic interface.
  */
 
+#pragma once
 #include <cstddef>
+
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
@@ -26,3 +30,4 @@ inline void GetLanguage(char(&destBuffer)[N])
 
 } /* namespace tgon */
 } /* namespace tgon */
+

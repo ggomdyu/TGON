@@ -9,22 +9,18 @@
 #include <cstdint>
 #include <string>
 
-#include "Core/Utility/TypeTraits.h"
-
 namespace tgon
 {
 namespace math
 {
 
-template <typename Ty,
-          typename = utility::EnableIfArithmetic<Ty>>
-struct Point;
-
-template <typename Ty>
-struct Point<Ty>
+template <typename _ValueType>
+struct Point
 {
-private:
-    using DevideTy = typename std::conditional<std::is_floating_point<Ty>::value, Ty, float>::type;
+/* @section Type definition */
+public:
+    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
+    using ValueType = _ValueType;
 
 /* @section Ctor/Dtor */
 public:
@@ -32,59 +28,59 @@ public:
     constexpr Point() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr Point(Ty x, Ty y) noexcept;
+    constexpr Point(_ValueType x, _ValueType y) noexcept;
 
 /* @section Operator */
 public:
     constexpr const Point operator+(const Point&) const noexcept;
     constexpr const Point operator-(const Point&) const noexcept;
-    constexpr const Point operator*(Ty) const noexcept;
-    constexpr const Point operator/(DevideTy) const;
+    constexpr const Point operator*(_ValueType) const noexcept;
+    constexpr const Point operator/(DevideType) const;
     constexpr const Point operator+() const noexcept;
     constexpr const Point operator-() const noexcept;
     Point& operator+=(const Point&) noexcept;
     Point& operator-=(const Point&) noexcept;
-    Point& operator*=(Ty) noexcept;
-    Point& operator/=(DevideTy);
+    Point& operator*=(_ValueType) noexcept;
+    Point& operator/=(DevideType);
     constexpr bool operator==(const Point&) const noexcept;
     constexpr bool operator!=(const Point&) const noexcept;
 
-    template <typename CastToTy>
-    constexpr operator Point<CastToTy>() const noexcept;
+    template <typename _CastToTy>
+    constexpr operator Point<_CastToTy>() const noexcept;
 
 /* @section Public method */
 public:
     /**
-     * @brief                       Converts to string.
+     * @brief                       Converts value to a string.
      * @param [out] destBuffer      The destination of the string to be written.
      * @return                      The length of string converted.
      */
-    template <std::size_t N>
-    int32_t ToString(char(&destBuffer)[N]) const;
+    template <std::size_t _BufferSize>
+    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
 
     /**
-     * @brief                       Converts to string.
+     * @brief                       Converts value to a string.
      * @param [out] destBuffer      The destination of the string to be written.
      * @param [in] bufferSize       The size of destBuffer.
      * @return                      The length of string converted.
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
     
-    /* @return  A string converted. */
+    /* @return  Converts value to a string. */
     std::string ToString() const;
 
 /* @section Public variable */
 public:
-    Ty x;
-    Ty y;
+    _ValueType x;
+    _ValueType y;
 
-	static const Point One;		// 1, 1
-	static const Point Zero;	    // 0, 0
-	static const Point MinusOne;	// -1, -1
+	static const Point One;         // 1, 1
+    static const Point Zero;        // 0, 0
+	static const Point MinusOne;    // -1, -1
 };
 
-template <typename Ty>
-constexpr Point<Ty> MakePoint(Ty x, Ty y) noexcept
+template <typename _ValueType>
+constexpr Point<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
 {
     return {x, y};
 }
@@ -93,59 +89,59 @@ using IntPoint = Point<int32_t>;
 using FloatPoint = Point<float>;
 using DoublePoint = Point<double>;
 
-template <typename Ty>
-constexpr Point<Ty>::Point() noexcept :
+template <typename _ValueType>
+constexpr Point<_ValueType>::Point() noexcept :
     x{},
     y{}
 {
 }
 
-template <typename Ty>
-constexpr Point<Ty>::Point(Ty x, Ty y) noexcept :
+template <typename _ValueType>
+constexpr Point<_ValueType>::Point(_ValueType x, _ValueType y) noexcept :
     x(x),
     y(y)
 {
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator+(const Point& rhs) const noexcept
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator+(const Point& rhs) const noexcept
 {
     return Point(x + rhs.x, y + rhs.y);
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator-(const Point& rhs) const noexcept
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator-(const Point& rhs) const noexcept
 {
     return Point(x - rhs.x, y - rhs.y);
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator*(Ty rhs) const noexcept
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
     return Point(x * rhs, y * rhs);
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator/(DevideTy rhs) const
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator/(DevideType rhs) const
 {
-    return Point((Ty)((DevideTy)x / (DevideTy)rhs),
-                  (Ty)((DevideTy)y / (DevideTy)rhs));
+    return Point((_ValueType)((DevideType)x / (DevideType)rhs),
+                 (_ValueType)((DevideType)y / (DevideType)rhs));
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator+() const noexcept
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator+() const noexcept
 {
 	return *this;
 }
 
-template <typename Ty>
-constexpr const Point<Ty> Point<Ty>::operator-() const noexcept
+template <typename _ValueType>
+constexpr const Point<_ValueType> Point<_ValueType>::operator-() const noexcept
 {
 	return Point(-x, -y);
 }
 
-template <typename Ty>
-inline Point<Ty>& Point<Ty>::operator+=(const Point& rhs) noexcept
+template <typename _ValueType>
+inline Point<_ValueType>& Point<_ValueType>::operator+=(const Point& rhs) noexcept
 {
     x += rhs.x;
     y += rhs.y;
@@ -153,8 +149,8 @@ inline Point<Ty>& Point<Ty>::operator+=(const Point& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Point<Ty>& Point<Ty>::operator-=(const Point& rhs) noexcept
+template <typename _ValueType>
+inline Point<_ValueType>& Point<_ValueType>::operator-=(const Point& rhs) noexcept
 {
     x -= rhs.x;
     y -= rhs.y;
@@ -162,8 +158,8 @@ inline Point<Ty>& Point<Ty>::operator-=(const Point& rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Point<Ty>& Point<Ty>::operator*=(Ty rhs) noexcept
+template <typename _ValueType>
+inline Point<_ValueType>& Point<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
     x *= rhs;
     y *= rhs;
@@ -171,47 +167,47 @@ inline Point<Ty>& Point<Ty>::operator*=(Ty rhs) noexcept
 	return *this;
 }
 
-template <typename Ty>
-inline Point<Ty>& Point<Ty>::operator/=(DevideTy rhs)
+template <typename _ValueType>
+inline Point<_ValueType>& Point<_ValueType>::operator/=(DevideType rhs)
 {
-    x = (Ty)((DevideTy)x / rhs);
-    y = (Ty)((DevideTy)y / rhs);
+    x = (_ValueType)((DevideType)x / rhs);
+    y = (_ValueType)((DevideType)y / rhs);
 
 	return *this;
 }
 
-template <typename Ty>
-inline constexpr bool Point<Ty>::operator==(const Point& rhs) const noexcept
+template <typename _ValueType>
+inline constexpr bool Point<_ValueType>::operator==(const Point& rhs) const noexcept
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
-template <typename Ty>
-inline constexpr bool Point<Ty>::operator!=(const Point& rhs) const noexcept
+template <typename _ValueType>
+inline constexpr bool Point<_ValueType>::operator!=(const Point& rhs) const noexcept
 {
-    return (x != rhs.x || y != rhs.y);
+    return (x != rhs.x && y != rhs.y);
 }
 
-template<typename Ty>
-template<typename CastToTy>
-constexpr Point<Ty>::operator Point<CastToTy>() const noexcept
+template<typename _ValueType>
+template<typename _CastToTy>
+constexpr Point<_ValueType>::operator Point<_CastToTy>() const noexcept
 {
-    return Point<CastToTy>((CastToTy)x, (CastToTy)y);
+    return Point<_CastToTy>((_CastToTy)x, (_CastToTy)y);
 }
 
-template<typename Ty>
-template<std::size_t N>
-inline int32_t Point<Ty>::ToString(char(&destBuffer)[N]) const
+template<typename _ValueType>
+template<std::size_t _BufferSize>
+inline int32_t Point<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d", x, y);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * N, "%d %d", x, y);
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%d %d", x, y);
 #endif
 }
 
-template<typename Ty>
-inline int32_t Point<Ty>::ToString(char* destBuffer, std::size_t bufferSize) const
+template<typename _ValueType>
+inline int32_t Point<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
@@ -220,8 +216,8 @@ inline int32_t Point<Ty>::ToString(char* destBuffer, std::size_t bufferSize) con
 #endif
 }
 
-template<typename Ty>
-inline std::string Point<Ty>::ToString() const
+template<typename _ValueType>
+inline std::string Point<_ValueType>::ToString() const
 {
     char buffer[128]{};
     this->ToString(buffer);

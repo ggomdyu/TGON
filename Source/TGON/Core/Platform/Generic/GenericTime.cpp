@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "GenericTime.h"
 
 #include <chrono>
@@ -12,7 +12,6 @@ namespace
 {
 
 const uint32_t g_oldOSExecutionTime = GetOSExecutionTime();
-const uint64_t g_oldOSExecutionTime64 = GetOSExecutionTime64();
 
 } /* namespace */
 
@@ -21,14 +20,9 @@ TGON_API uint32_t GetProcessExecutionTime()
     return GetOSExecutionTime() - g_oldOSExecutionTime;
 }
 
-TGON_API uint64_t GetProcessExecutionTime64()
+TGON_API time_t GetUnixTime()
 {
-    return GetOSExecutionTime64() - g_oldOSExecutionTime64;
-}
-
-TGON_API UnixTimeTy GetUnixTime()
-{
-    return static_cast<UnixTimeTy>(std::time(nullptr));
+    return static_cast<time_t>(std::time(nullptr));
 }
 
 } /* namespace platform */
