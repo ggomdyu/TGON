@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "00. Core">
+      <FileRef
+         location = "group:TGON.Core.macOS/TGON.Core.macOS.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:TGON.Core.iOS/TGON.Core.iOS.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "01. GraphicsCore">
+      <FileRef
+         location = "group:TGON.GraphicsCore.OpenGL/TGON.GraphicsCore.OpenGL.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "02. GameCore">
+   </Group>
+   <Group
+      location = "container:"
+      name = "03. Content">
+      <FileRef
+         location = "group:ModelJoy.macOS/ModelJoy.macOS.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>

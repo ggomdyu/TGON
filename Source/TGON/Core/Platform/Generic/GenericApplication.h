@@ -6,7 +6,7 @@
 
 #pragma once
 #include "GenericApplicationType.h"
-#include "Core/Object/TObject.h"
+#include "Core/Object/Object.h"
 
 namespace tgon
 {
@@ -17,7 +17,7 @@ class TGON_API GenericApplication :
     public object::TObject
 {
 public:
-    TGON_CREATE_OBJECT_INTERFACE(tgon::platform::GenericApplication)
+    TGON_MAKE_OBJECT_INTERFACE(tgon::platform::GenericApplication)
 
 /**
  * @section Ctor/Dtor
@@ -31,27 +31,9 @@ public:
  * @section Public method
  */
 public:
-    /**
-     * @brief                       Get the current language of OS.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @param [in] bufferLength     The length of buffer
-     */
-    virtual void GetLanguage(char* destBuffer, std::size_t bufferLength) = 0;
-
-    /**
-     * @brief                       Get the current language of OS.
-     * @tparam N                    The length of buffer
-     * @param [out] destBuffer      The destination of the string to be written.
-     */
-    template <std::size_t N>
-    void GetLanguage(char(&destBuffer)[N]);
+    virtual void ShowTopStatusBar() = 0;
+    virtual void HideTopStatusBar() = 0;
 };
-
-template<std::size_t N>
-inline void GenericApplication::GetLanguage(char(&destBuffer)[N])
-{
-    this->GetLanguage(destBuffer, bufferLength);
-}
 
 } /* namespace platform */
 } /* namespace tgon */

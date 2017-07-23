@@ -8,10 +8,13 @@
 
 #include "Core/String/TEncoding.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
-namespace {
+namespace
+{
 
 class WindowsConsoleHelper final
 {

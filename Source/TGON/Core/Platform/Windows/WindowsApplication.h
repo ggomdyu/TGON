@@ -19,7 +19,7 @@ class TGON_API WindowsApplication :
     public GenericApplication
 {
 public:
-    TGON_CREATE_OBJECT_INTERFACE(tgon::platform::windows::WindowsApplication)
+    TGON_MAKE_OBJECT_INTERFACE(tgon::platform::windows::WindowsApplication)
 
 
 protected:

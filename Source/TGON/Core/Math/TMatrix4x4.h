@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
+#include "Core/Platform/Config.h"
 
 #include <cstdint>
 #include <cassert>
@@ -14,8 +14,10 @@
 //TODO: Delete this
 #undef TGON_SUPPORT_SSE
 
-namespace tgon {
-namespace math {
+namespace tgon
+{
+namespace math
+{
 
 struct TGON_API TMatrix4x4
 {

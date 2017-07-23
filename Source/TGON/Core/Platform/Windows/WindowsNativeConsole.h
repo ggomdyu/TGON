@@ -7,8 +7,10 @@
 #pragma once
 #include "../Generic/GenericNativeConsole.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 class TGON_API WindowsNativeConsole final :
     public GenericNativeConsole

@@ -7,8 +7,10 @@
 #pragma once
 #include "../Generic/GenericScreen.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 class TGON_API WindowsScreen : 
 	public GenericScreen

@@ -20,8 +20,8 @@ namespace platform
 namespace windows
 {
 
-WindowsWindow::WindowsWindow(const TWindowStyle& wndStyle, HINSTANCE instanceHandle) :
-    m_wndHandle(CreateWindowForm(wndStyle, L"TGON", instanceHandle))
+WindowsWindow::WindowsWindow(const WindowStyle& wndStyle, HINSTANCE instanceHandle) :
+    m_wndHandle(CreateNativeWindow(wndStyle, L"TGON", instanceHandle))
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
 
@@ -86,7 +86,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void WindowsWindow::GetExtent(int32_t* width, int32_t* height) const
+void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
 {
     RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
@@ -174,16 +174,16 @@ void WindowsWindow::SetPosition(int32_t x, int32_t y)
     ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE);
 }
 
-void WindowsWindow::SetExtent(int32_t width, int32_t height)
+void WindowsWindow::SetSize(int32_t width, int32_t height)
 {
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
 }
 
-void WindowsWindow::SetCaption(const char* caption)
+void WindowsWindow::SetCaption(const char* captionTitle)
 {
     wchar_t utf16Caption[256] {};
 
-    bool succeed = string::ConvertUTF8ToUTF16(caption, reinterpret_cast<char*>(utf16Caption)) != -1;
+    bool succeed = string::ConvertUTF8ToUTF16(captionTitle, reinterpret_cast<char*>(utf16Caption)) != -1;
     if (succeed)
     {
         ::SetWindowTextW(m_wndHandle, utf16Caption);

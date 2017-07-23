@@ -9,10 +9,10 @@
 #include <ctime>
 #include <type_traits>
 
-namespace tgon {
-namespace platform {
-
-using UnixTimeTy = std::conditional_t<sizeof(time_t) == sizeof(uint64_t), uint64_t, uint32_t>;
+namespace tgon
+{
+namespace platform
+{
 
 enum class DayOfWeek
 {

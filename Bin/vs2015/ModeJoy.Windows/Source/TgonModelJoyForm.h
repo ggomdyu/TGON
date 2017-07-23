@@ -42,16 +42,12 @@ class TGONSample :
     public GameApplication
 {
 public:
-    TGON_CREATE_OBJECT_INTERFACE(TGONSample)
+    TGON_MAKE_OBJECT_INTERFACE(TGONSample)
 
 public:
     TGONSample() :
         GameApplication(platform::MakeWindow<CustomWindow>())
     {
-		auto ptr = operator new(sizeof(int));
-
-
-		operator delete(ptr);
 	}
 
     virtual ~TGONSample()

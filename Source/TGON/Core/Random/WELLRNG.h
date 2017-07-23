@@ -7,10 +7,12 @@
  */
 
 #pragma once
-#include "Core/Platform/TConfig.h"
+#include "Core/Platform/Config.h"
 
-namespace tgon {
-namespace random {
+namespace tgon
+{
+namespace random
+{
 
 /* @return  Return random value between 0.0 ~ 1.0 */
 TGON_API double WELLRNG1024a();
