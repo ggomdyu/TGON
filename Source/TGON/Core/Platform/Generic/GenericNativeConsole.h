@@ -5,8 +5,8 @@
  */
 
 #pragma once
-#include "Core/Platform/TConfig.h"
-#include "Core/Platform/TSuffix.h"
+#include "Core/Platform/Config.h"
+#include "Core/Platform/Prefix.h"
 
 namespace tgon {
 namespace platform {

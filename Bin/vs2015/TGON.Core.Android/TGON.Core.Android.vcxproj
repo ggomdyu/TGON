@@ -218,13 +218,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AndroidApplication.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="AndroidMain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AndroidApplication.cpp" />
-    <ClCompile Include="AndroidMain.c" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

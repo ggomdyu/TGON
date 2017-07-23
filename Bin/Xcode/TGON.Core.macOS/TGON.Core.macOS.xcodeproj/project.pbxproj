@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD024ACE1F24424700C369DB /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = FD024ACC1F24424700C369DB /* Color.h */; };
 		FD51C1A11F21078D003F08B6 /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C19F1F21078D003F08B6 /* MacOSWindow.h */; };
 		FD51C1A21F21078D003F08B6 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */; };
 		FD51C1A41F210803003F08B6 /* MacOSWindowUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD024ACC1F24424700C369DB /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../../../Source/TGON/Core/Math/Color.h; sourceTree = "<group>"; };
 		FD51C19F1F21078D003F08B6 /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindow.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.h; sourceTree = "<group>"; };
 		FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindow.mm; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.mm; sourceTree = "<group>"; };
 		FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtility.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.h; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		FD89E4471F1B42B9007376E8 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				FD024ACC1F24424700C369DB /* Color.h */,
 				FD89E4411F1B42B9007376E8 /* Extent.h */,
 				FD89E4421F1B42B9007376E8 /* Math.h */,
 				FD89E4431F1B42B9007376E8 /* Point.h */,
@@ -271,6 +274,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD024ACE1F24424700C369DB /* Color.h in Headers */,
 				FD89E4FD1F1B4F7C007376E8 /* MacOSConfig.h in Headers */,
 				FD7DF7681F1EE1AD002F65CA /* Delegate.h in Headers */,
 				FD89E5051F1B5330007376E8 /* MacOSLocale.h in Headers */,

@@ -25,7 +25,7 @@ constexpr HashValue x65599HashImpl(const char* str, HashValue prevHashValue)
 }
 } /* namespace detail */
 
-#if (__cplusplus == 201402L)
+#if (__cplusplus == 201402L || _MSC_VER >= 1910)
 constexpr HashValue x65599Hash(const char* str)
 {
     HashValue hashValue = 0;
@@ -36,7 +36,7 @@ constexpr HashValue x65599Hash(const char* str)
 
     return hashValue ^ (hashValue >> 16);
 }
-#elif (__cplusplus == 201103L)
+#elif (__cplusplus == 201103L || _MSC_VER < 1910)
 constexpr HashValue x65599Hash(const char* str)
 {
     return detail::x65599HashImpl(str, 0);

@@ -1,8 +1,8 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "TMatrix4x4.h"
 
 #include "TMatrix3x3.h"
-#include "TVector3.h"
+#include "Vector3.h"
 
 namespace tgon {
 namespace math {
@@ -95,23 +95,23 @@ const TMatrix4x4& TMatrix4x4::operator-=(const TMatrix4x4& rhs)
     return *this;
 }
 
-TMatrix4x4 TMatrix4x4::View(const TVector3& eyePt, const TVector3& lookAt, const TVector3& up)
+TMatrix4x4 TMatrix4x4::View(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
 {
     // Eye ¡æ LookAt = Look direction
-    TVector3 l = lookAt - eyePt;
+    Vector3 l = lookAt - eyePt;
     l.Normalize();
 
-    TVector3 r = TVector3::Cross(up, l);
+    Vector3 r = Vector3::Cross(up, l);
     r.Normalize();
 
-    TVector3 u = TVector3::Cross(l, r);
+    Vector3 u = Vector3::Cross(l, r);
     u.Normalize();
 
     return{
         r.x, u.x, l.x, 0.f,
         r.y, u.y, l.y, 0.f,
         r.z, u.z, l.z, 0.f,
-        -TVector3::Dot(r, eyePt), -TVector3::Dot(u, eyePt), -TVector3::Dot(l, eyePt), 1.f
+        -Vector3::Dot(r, eyePt), -Vector3::Dot(u, eyePt), -Vector3::Dot(l, eyePt), 1.f
     };
 }
 

@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "TQuaternion.h"
 
 #include "TMatrix4x4.h"
@@ -6,10 +6,10 @@
 namespace tgon {
 namespace math {
 
-const TQuaternion TQuaternion::Zero;
-const TQuaternion TQuaternion::Identity( 0.f, 0.f, 0.f, 1.f );
+const Quaternion Quaternion::Zero;
+const Quaternion Quaternion::Identity( 0.f, 0.f, 0.f, 1.f );
 
-TMatrix4x4 TQuaternion::RotateMatrix() const
+TMatrix4x4 Quaternion::RotateMatrix() const
 {
 	return TMatrix4x4(
         1.f - 2.0f*y*y -2.f*z*z,

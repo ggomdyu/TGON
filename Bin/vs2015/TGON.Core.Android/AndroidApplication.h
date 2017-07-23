@@ -3,12 +3,31 @@
 #include <memory>
 #include <thread>
 
+struct AndroidPollSource
+{
+private:
+	using HandlerFunctionType = void(*)(AndroidApplication*);
+
+public:
+	/* @brief	The identifier of this source.  May be LOOPER_ID_MAIN or LOOPER_ID_INPUT. */
+	int32_t id;
+
+	/* @brief	Function to call to perform the standard processing of data from this source. */
+	HandlerFunctionType handler;
+};
+
+
 class AndroidApplication
 {
 /**
- * @seciton Nested class
+ * @section	Type definition
  */
 private:
+	using CommandType = std::int8_t;
+	using InputEventType = std::int32_t;
+
+	enum class EInputEventHandled : std::int32_t { kNo = 0, kYes = 1, };
+
     enum
     {
         /**
@@ -21,46 +40,53 @@ private:
         ALOOPER_PREPARE_ALLOW_NON_CALLBACKS = 1 << 0
     };
 
-    struct PollSource
-    {
-        /* @brief   Function to call to perform the standard processing of data from this source */
-        void(*process)(AndroidApplication* app, PollSource* source);
-
-        /* @brief   The identifier of this source. May be LOOPER_ID_MAIN or LOOPER_ID_INPUT. */
-        int32_t id;
-
-        /* @brief   The AndroidApplication this ident is associated with. */
-        AndroidApplication* application;
-    };
-
-/**
- * @seciton Ctor/Dtor
- */
+	
+/* @seciton Ctor/Dtor */
 public:
-    AndroidApplication();
-    virtual ~AndroidApplication() = default;
+    AndroidApplication(ANativeActivity* nativeActivity, void* saveState, std::size_t savedStateSize);
+    virtual ~AndroidApplication();
 
-    /**
-     * @brief   Called when after ....
-     */
-    void Initialize(ANativeActivity* nativeActivity, void* saveState, std::size_t savedStateSize);
+/* @seciton Public method */
+public:
+    static AndroidApplication* Get();
 
-/**
- * @seciton Private method
- */
+/* @seciton Private method */
 private:
+    void InitializeCallback();
+
+    /** @brief  Create pipe to send message into background thread */
     void InitializeMessagePipe();
-    void InitializeConfig();
+    void InitializeConfigurationn();
     void InitializePollSource();
     void InitializeLooper();
     void InitializeSensor();
 
-    static void ProcessCommand(AndroidApplication* application, PollSource* source);
-    static void ProcessInput(AndroidApplication* application, PollSource* source);
+	void RunLooper();
+	void OnHandleCommand(CommandType commandType);
+	EInputEventHandled OnHandleInput(AInputEvent* inputEvent);
 
-/**
- * @seciton Private variable
- */
+    void WriteCommand(CommandType commandType);
+	CommandType ReadCommand() const;
+
+	void SetActivityState(CommandType commandType);
+	void SetNativeWindow(ANativeWindow* nativeWindow);
+    void SetInputQueue(AInputQueue* inputQueue);
+
+    static void OnDestroy(ANativeActivity* nativeActivity);
+    static void OnStart(ANativeActivity* nativeActivity);
+    static void OnResume(ANativeActivity* nativeActivity);
+    static void* OnSaveInstanceState(ANativeActivity* nativeActivity, size_t* outLen);
+    static void OnPause(ANativeActivity* nativeActivity);
+    static void OnStop(ANativeActivity* nativeActivity);
+    static void OnConfigurationChanged(ANativeActivity* nativeActivity);
+    static void OnLowMemory(ANativeActivity* nativeActivity);
+    static void OnWindowFocusChanged(ANativeActivity* nativeActivity, int focused);
+    static void OnNativeWindowCreated(ANativeActivity* nativeActivity, ANativeWindow* window);
+    static void OnNativeWindowDestroyed(ANativeActivity* nativeActivity, ANativeWindow* window);
+    static void OnInputQueueCreated(ANativeActivity* nativeActivity, AInputQueue* queue);
+    static void OnInputQueueDestroyed(ANativeActivity* nativeActivity, AInputQueue* queue);
+
+/* @seciton Private variable */
 private:
     ANativeActivity* m_nativeActivity;
     
@@ -73,12 +99,25 @@ private:
     std::thread m_backgroundThread;
     
     AConfiguration* m_config;
-    PollSource m_cmdPollSource;
-    PollSource m_inputPollSource;
+	AndroidPollSource m_cmdPollSource;
+	AndroidPollSource m_inputPollSource;
     ALooper* m_looper;
     ASensorManager* m_sensorManager;
     const ASensor* m_accelerometerSensor;
     ASensorEventQueue* m_sensorEventQueue;
 
-    bool m_isRunning;
+    ////////////////////////////////////
+    // 이하부터 멤버이니셜라이저를 통한 초기화가 되지 않았음
+
+    AInputQueue* m_pendingInputQueue = nullptr;
+    AInputQueue* m_inputQueue = nullptr;
+    ANativeWindow* m_pendingNativeWindow = nullptr;
+    ANativeWindow* m_nativeWindow = nullptr;
+
+	//void* m_savedState = nullptr;
+	//int m_savedStateSize = 0;
+	int m_activityState = 0;
+	//int m_stateSaved = 0;
+	bool m_destroyRequested = false;
+	bool m_isDestroyed = false;
 };

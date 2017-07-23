@@ -4,20 +4,20 @@
 #   define TGON_DISABLE_CONSOLE
 #endif
 
-#include <Core/Platform/TWindow.h>
-#include <Core/Platform/TApplication.h>
-#include <Core/Platform/TTime.h>
+#include <Core/Platform/Window.h>
+#include <Core/Platform/Application.h>
+#include <Core/Platform/Time.h>
 #include <Core/Platform/TNativeConsole.h>
-#include <Core/Utility/TAutoCast.h>
-#include <Core/Utility/TArray.h>
-#include <Core/Utility/TEnumerator.h>
-#include <Core/Random/TRandom.h>
-#include <Core/Math/TMath.h>
-#include <Core/Math/TRect.h>
-#include <Core/Math/TPoint.h>
-#include <Core/Object/TDelegate.h>
-#include <Core/Object/TObject.h>
-#include <Core/String/TFixedString.h>
+#include <Core/Utility/AutoCast.h>
+#include <Core/Utility/Array.h>
+#include <Core/Utility/Enumerator.h>
+#include <Core/Utility/Delegate.h>
+#include <Core/Random/Random.h>
+#include <Core/Math/Math.h>
+#include <Core/Math/Rect.h>
+#include <Core/Math/Point.h>
+#include <Core/Object/Object.h>
+#include <Core/String/FixedString.h>
 #include <Core/String/TEncoding.h>
 
 #include <Engine/GameApplication.h>
@@ -29,11 +29,11 @@ using namespace tgon;
 
 
 class CustomWindow :
-    public platform::TWindow
+    public platform::Window
 {
 public:
     CustomWindow() :
-        platform::TWindow(platform::TWindowStyle{}, GetModuleHandle(nullptr))
+        platform::Window(platform::WindowStyle{})
     {
     }
 };
@@ -46,7 +46,7 @@ public:
 
 public:
     TGONSample() :
-        GameApplication(platform::MakeWindow<CustomWindow>())
+        GameApplication(platform::MakeWindow<platform::Window>(platform::WindowStyle{}))
     {
 	}
 

@@ -17,12 +17,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TCOLOR.CPP" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix4x4.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TQuaternion.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TVector3.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TTypeInfo.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Object.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TypeInfo.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTimeType.cpp" />
@@ -41,48 +42,49 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\TFileSystem.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\TPath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Extent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Math.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Point.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Rect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TColor.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TExtent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix4x4.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TQuaternion.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMath.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TRect.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TVector3.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TDelegate.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TDelegateChain.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TTypeInfo.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Object.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\TypeInfo.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Config.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplicationType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericCensor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericLocale.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericNativeConsole.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericScreen.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\genericsystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericTimeType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowType.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TConfig.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TNativeConsole.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TScreen.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TSuffix.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TTime.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\TWindow.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\TRandom.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Locale.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Prefix.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Screen.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Time.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\Random.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELLRNG.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TFixedString.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TFixedStringUtility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedString.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TEncoding.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TArray.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TAutoCast.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TEnumerator.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TTypeTraits.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TPreprocessor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Algorithm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Array.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\AutoCast.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Delegate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Enumerator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ExpressionTemplate.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Preprocessor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\StaticIf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TypeTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\EngineContextObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GameApplication.h" />
@@ -93,7 +95,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\TWorkThreadModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Module\Typedef\KeyCode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\TMain.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt" />

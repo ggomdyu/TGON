@@ -1,7 +1,7 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "TimeModule.h"
 
-#include "../../Core/Platform/TTime.h"
+#include "Core/Platform/Time.h"
 
 namespace tgon
 {

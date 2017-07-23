@@ -16,7 +16,7 @@
 #include <OISJoyStick.h>
 #include <OISEvents.h>
 
-#include "../../Core/Platform/TWindow.h"
+#include "Core/Platform/Window.h"
 
 
 namespace tgon
@@ -57,7 +57,7 @@ public:
 	 * @param [in] inputAcceptWindow    The window which you want to receive input message
 	 * @param [in] supportInputBits     Alert input system to use ( ex: InputSupport::Keyboard | InputSupport::Mouse )
 	 */
-    InputModule(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
+    InputModule(platform::Window* inputAcceptWindow, uint32_t supportInputFlag);
     virtual ~InputModule();
 
 /**
@@ -202,7 +202,7 @@ private:
 		Internal works
 	*/
 private:
-    void InitializeInputManager(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag);
+    void InitializeInputManager(platform::Window* inputAcceptWindow, uint32_t supportInputFlag);
 
     void SetupInputDevice(uint32_t supportInputFlag);
 

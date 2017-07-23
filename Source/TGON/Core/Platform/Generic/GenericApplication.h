@@ -5,8 +5,9 @@
  */
 
 #pragma once
-#include "GenericApplicationType.h"
 #include "Core/Object/Object.h"
+
+#include "GenericApplicationType.h"
 
 namespace tgon
 {
@@ -14,7 +15,7 @@ namespace platform
 {
 
 class TGON_API GenericApplication :
-    public object::TObject
+    public object::Object
 {
 public:
     TGON_MAKE_OBJECT_INTERFACE(tgon::platform::GenericApplication)
@@ -31,8 +32,8 @@ public:
  * @section Public method
  */
 public:
-    virtual void ShowTopStatusBar() = 0;
-    virtual void HideTopStatusBar() = 0;
+    virtual void ShowTopStatusBar() {};
+    virtual void HideTopStatusBar() {};
 };
 
 } /* namespace platform */

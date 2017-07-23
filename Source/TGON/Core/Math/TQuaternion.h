@@ -1,43 +1,43 @@
 /**
- * @filename    TQuaternion.h
+ * @filename    Quaternion.h
  * @author      ggomdyu
  * @since       03/14/2016
  */
 
 #pragma once
-#include "../Platform/TConfig.h"
+#include "Core/Platform/Config.h"
 
-#include "../Math/TVector3.h"
+#include "Vector3.h"
 
 namespace tgon {
 namespace math {
 
-struct TGON_API TQuaternion
+struct TGON_API Quaternion
 {
 /**
  * @section Ctor/Dtor
  */
 public:
-    TQuaternion();
+    Quaternion();
 
     // In Quaternion, x, y, z means a Axis. w is angle scalar.
-    TQuaternion(float x, float y, float z, float w);
+    Quaternion(float x, float y, float z, float w);
 
     // Pass axis as Vector3. w is angle scalar.
-    TQuaternion(const TVector3& v, float w);
+    Quaternion(const Vector3& v, float w);
 
-    TQuaternion(const TQuaternion&);
+    Quaternion(const Quaternion&);
     
 /**
  * @section Operator
  */
 public:
-    TQuaternion operator*(const TQuaternion&) const;
-    TQuaternion operator+() const;
-    TQuaternion operator-() const;
-    TQuaternion& operator*=(const TQuaternion&);
-    bool operator==(const TQuaternion&) const;
-    bool operator!=(const TQuaternion&) const;
+    Quaternion operator*(const Quaternion&) const;
+    Quaternion operator+() const;
+    Quaternion operator-() const;
+    Quaternion& operator*=(const Quaternion&);
+    bool operator==(const Quaternion&) const;
+    bool operator!=(const Quaternion&) const;
     float& operator[](std::size_t);
     float operator[](std::size_t) const;
 	
@@ -53,11 +53,11 @@ public:
 public:
 	float x, y, z, w;
 
-    static const TQuaternion Zero;
-    static const TQuaternion Identity;
+    static const Quaternion Zero;
+    static const Quaternion Identity;
 };
 
-inline TQuaternion::TQuaternion() :
+inline Quaternion::Quaternion() :
     x(0.f),
     y(0.f),
     z(0.f),
@@ -65,7 +65,7 @@ inline TQuaternion::TQuaternion() :
 {
 }
 
-inline TQuaternion::TQuaternion(float x, float y, float z, float w) :
+inline Quaternion::Quaternion(float x, float y, float z, float w) :
     x(x),
     y(y),
     z(z),
@@ -73,7 +73,7 @@ inline TQuaternion::TQuaternion(float x, float y, float z, float w) :
 {
 }
 
-inline TQuaternion::TQuaternion(const TQuaternion& rhs) :
+inline Quaternion::Quaternion(const Quaternion& rhs) :
     x(rhs.x),
     y(rhs.y),
     z(rhs.z),
@@ -81,22 +81,22 @@ inline TQuaternion::TQuaternion(const TQuaternion& rhs) :
 {
 }
 
-inline TQuaternion TQuaternion::operator*(const TQuaternion& rhs) const
+inline Quaternion Quaternion::operator*(const Quaternion& rhs) const
 {
-    return TQuaternion(x*rhs.x, y*rhs.y, z*rhs.z, w*rhs.w);
+    return Quaternion(x*rhs.x, y*rhs.y, z*rhs.z, w*rhs.w);
 }
 
-inline TQuaternion TQuaternion::operator+() const
+inline Quaternion Quaternion::operator+() const
 {
     return *this;
 }
 
-inline TQuaternion TQuaternion::operator-() const
+inline Quaternion Quaternion::operator-() const
 {
-    return TQuaternion(-x, -y, -z, -w);
+    return Quaternion(-x, -y, -z, -w);
 }
 
-inline TQuaternion& TQuaternion::operator*=(const TQuaternion& rhs)
+inline Quaternion& Quaternion::operator*=(const Quaternion& rhs)
 {
     x *= rhs.x;
     y *= rhs.y;
@@ -106,25 +106,25 @@ inline TQuaternion& TQuaternion::operator*=(const TQuaternion& rhs)
     return *this;
 }
 
-inline bool TQuaternion::operator==(const TQuaternion& rhs) const
+inline bool Quaternion::operator==(const Quaternion& rhs) const
 {
     return (x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w);
 }
 
-inline bool TQuaternion::operator!=(const TQuaternion& rhs) const
+inline bool Quaternion::operator!=(const Quaternion& rhs) const
 {
     return !(this->operator==(rhs));
 }
 
-inline float& TQuaternion::operator[](std::size_t index)
+inline float& Quaternion::operator[](std::size_t index)
 {
-    assert((index < 4 && index > -1) && "TQuaternion index out of range");
+    assert((index < 4 && index > -1) && "Quaternion index out of range");
     return *(&x + index);
 }
 
-inline float TQuaternion::operator[](std::size_t index) const
+inline float Quaternion::operator[](std::size_t index) const
 {
-    assert((index < 4 && index > -1) && "TQuaternion index out of range");
+    assert((index < 4 && index > -1) && "Quaternion index out of range");
     return *(&x + index);
 }
 
