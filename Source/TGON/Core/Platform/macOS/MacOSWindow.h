@@ -1,7 +1,7 @@
 /**
- * @filename    IOSScreen.h
+ * @filename    MacOSWindow.h
  * @author      ggomdyu
- * @since       06/10/2017
+ * @since       07/21/2017
  * @brief
  */
 
