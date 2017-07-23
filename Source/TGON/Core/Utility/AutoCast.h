@@ -16,7 +16,7 @@ namespace detail
 {
 
 template <typename _CastFromType, typename _CastPolicyType>
-class AutoCastProxy final :
+struct AutoCastProxy final :
     public _CastPolicyType
 {
 /* @section Ctor/Dtor */
@@ -26,7 +26,7 @@ public:
 /* @section Operator */
 public:
     template <typename _CastToType>
-    constexpr operator _CastToType() noexcept;
+    constexpr operator _CastToType() const noexcept;
 
 /* @section Private variable */
 private:
@@ -35,7 +35,7 @@ private:
 
 template <typename _CastFromType, typename _CastPolicyType>
 template <typename _CastToType>
-constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::operator _CastToType() noexcept
+constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::operator _CastToType() const noexcept
 {
     return _CastPolicyType::template Cast<_CastFromType, _CastToType>(m_castFromPtr);
 }
@@ -46,35 +46,35 @@ constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::AutoCastProxy(_CastFrom
 {
 }
 
-class SafeCastPolicy
+struct SafeCastPolicy
 {
-/* @section Operator */
+/* @section Public method */
 protected:
-	template <typename _CastFromType, typename _CastToType>
-    constexpr _CastToType Cast(_CastFromType&& castFromPtr) noexcept;
+    template <typename _CastFromType, typename _CastToType>
+    constexpr _CastToType Cast(_CastFromType&& castFromPtr) const noexcept;
 };
 
 template <typename _CastFromType, typename _CastToType>
-    constexpr _CastToType SafeCastPolicy::Cast(_CastFromType&& castFromPtr) noexcept
+constexpr _CastToType SafeCastPolicy::Cast(_CastFromType&& castFromPtr) const noexcept
 {
     return static_cast<_CastToType>(std::forward<_CastFromType>(castFromPtr));
 }
 
-class ForceCastPolicy
+struct ForceCastPolicy
 {
-/* @section Operator */
+/* @section Public method */
 protected:
     template <typename _CastFromType, typename _CastToType>
-    constexpr _CastToType Cast(_CastFromType&& castFromPtr) noexcept;
+    constexpr _CastToType Cast(_CastFromType&& castFromPtr) const noexcept;
 };
 
 template <typename _CastFromType, typename _CastToType>
-constexpr _CastToType ForceCastPolicy::Cast(_CastFromType&& castFromPtr) noexcept
+constexpr _CastToType ForceCastPolicy::Cast(_CastFromType&& castFromPtr) const noexcept
 {
     return reinterpret_cast<_CastToType>(std::forward<_CastFromType>(castFromPtr));
 }
 
-} /*namespace detail*/
+} /* namespace detail */
 
 template <typename _CastFromType>
 constexpr detail::AutoCastProxy<_CastFromType, detail::SafeCastPolicy> AutoCast(_CastFromType&& rhs) noexcept
