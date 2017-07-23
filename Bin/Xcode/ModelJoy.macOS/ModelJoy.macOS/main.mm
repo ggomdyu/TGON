@@ -37,6 +37,7 @@ public:
 #include "Core/Platform/Window.h"
 #include "Core/Utility/Delegate.h"
 #include "Core/Utility/StaticIf.h"
+#include "Core/Math/Color.h"
 #include <boost/type_traits.hpp>
 #include <iostream>
 
@@ -81,21 +82,10 @@ int main(int argc, char* argv[])
         windowStyle.y = 20;
         windowStyle.width = 300;
         windowStyle.height = 300;
-        //windowStyle.showMiddle = true;
+
+        tgon::math::Color4b color(255, 0, 255, 255);
 
         platform::Window window(windowStyle);
-
-        char caption[256] {};
-        window.GetCaptionTitle(caption);
-
-        auto d1 = TGON_MAKE_DELEGATE(&foo);
-        auto d2 = TGON_MAKE_DELEGATE([](){});
-        auto d3 = TGON_MAKE_DELEGATE(&SomeClass::foo, nullptr);
-
-        
-
-
-
 
         [NSApp activateIgnoringOtherApps:YES];
         [NSApp run];

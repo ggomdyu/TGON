@@ -1,5 +1,5 @@
 /**
- * @filename    PlatformWindow.h
+ * @filename    Window.h
  * @author      ggomdyu
  * @since       04/01/2016
  */
@@ -15,6 +15,8 @@
 #	include "Android/AndroidWindow.h"
 #elif BOOST_OS_MACOS
 #	include "MacOS/MacOSWindow.h"
+#elif BOOST_OS_IOS
+#	import "IOS/IOSWindow.h"
 #endif
 
 namespace tgon
