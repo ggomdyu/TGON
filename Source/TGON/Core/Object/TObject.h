@@ -6,13 +6,16 @@
 
 #pragma once
 #include <cstdint>
+#include <memory>
 #include <string>
 
 #include "TTypeInfo.h"
 #include "Core/Platform/TConfig.h"
 
-namespace tgon {
-namespace object {
+namespace tgon
+{
+namespace object
+{
 
 class TGON_API TObject 
 {
@@ -28,7 +31,7 @@ public:
 	virtual ~TObject() = default;
 
 /**
- * @section Public command method
+ * @section Public method
  */
 public:
     virtual std::shared_ptr<TObject> Clone() const;
@@ -39,9 +42,6 @@ public:
     template <typename CastToTy>
     bool IsCastable() noexcept;
 
-/**
- * @section Get method
- */
 public:
 	/* @return	Hash value of the type name. */
 	virtual std::size_t GetHashCode() const noexcept = 0;
@@ -74,7 +74,7 @@ inline CastToTy* TObject::CastTo() noexcept
 } /* namespace object */
 } /* namespace tgon */
 
-#define TGON_MAKE_OBJECT_INTERFACE(classType)\
+#define TGON_CREATE_OBJECT_INTERFACE(classType)\
     using Super = This;\
 	using This = classType;\
 	\

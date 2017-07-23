@@ -2,22 +2,35 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Sources">
-      <UniqueIdentifier>{4b4ce89b-9c9d-4bb2-b2f0-cfafb243add3}</UniqueIdentifier>
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Sources\Core">
-      <UniqueIdentifier>{ddf1c77a-2e8d-4aba-ac89-269f9d7e6b0b}</UniqueIdentifier>
+      <UniqueIdentifier>{dfd54907-db71-48ea-9189-2a99ffb70a40}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Core\Platform">
-      <UniqueIdentifier>{6aae91e0-58e6-4b50-bf99-9b4ffec57c52}</UniqueIdentifier>
+      <UniqueIdentifier>{24872bcc-f7ad-4fbf-9d64-d70e19da79b0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Core\Platform\Windows">
-      <UniqueIdentifier>{776f53c9-c237-4a8d-bdaf-b0c95883b030}</UniqueIdentifier>
+      <UniqueIdentifier>{1c4a5872-78c6-4bd6-819a-ca2106f15855}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Core\Platform\Windows\Misc">
-      <UniqueIdentifier>{53759d5c-32ae-475c-a36f-8247767438f3}</UniqueIdentifier>
+      <UniqueIdentifier>{03e6c863-5c50-4883-8cb3-3f9288171283}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
@@ -36,14 +49,8 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\SharedComPtr.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
@@ -54,11 +61,14 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
@@ -75,12 +85,6 @@
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project>
-  <SOLibPaths>D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Android\bin\x86\Debug\libTGON_Core_Android.so;C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r13b\prebuilt\android-x86\gdbserver\gdbserver;C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r13b\sources\cxx-stl\gnu-libstdc++\4.9\libs\x86\libgnustl_static.a</SOLibPaths>
+  <SOLibPaths>D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Android\bin\x86\Debug\libTGON_Core_Android.so;C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\prebuilt\android-x86\gdbserver\gdbserver;C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\sources\cxx-stl\gnu-libstdc++\4.9\libs\x86\libgnustl_static.a</SOLibPaths>
   <AndroidLibPaths></AndroidLibPaths>
   <OObjPaths>D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\TGON.Core.Android\obj\x86\Debug</OObjPaths>
   <Configuration>Debug</Configuration>

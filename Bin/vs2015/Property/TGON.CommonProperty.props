@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_PropertySheetDisplayName>TGON Common Property</_PropertySheetDisplayName>
+    <_PropertySheetDisplayName>TGON.CommonProperty</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\TGON;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>

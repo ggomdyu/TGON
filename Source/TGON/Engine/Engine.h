@@ -14,7 +14,7 @@ class TGON_API TEngine :
 	public ModuleContext
 {
 public:
-	TGON_MAKE_OBJECT_INTERFACE(TEngine)
+	TGON_CREATE_OBJECT_INTERFACE(TEngine)
 
 public:
     TEngine();

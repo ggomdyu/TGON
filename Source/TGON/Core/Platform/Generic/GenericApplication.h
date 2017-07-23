@@ -1,71 +1,57 @@
 /**
  * @filename    GenericApplication.h
  * @author      ggomdyu
- * @since       03/20/2016
+ * since        03/20/2016
  */
 
 #pragma once
 #include "GenericApplicationType.h"
-#include "Core/Platform/TConfig.h"
+#include "Core/Object/TObject.h"
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
-/**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- */
-TGON_API void ShowOkPopup(const char* message);
-
-/**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowOkPopup(const char* message, OkPopupEventHandler handler);
+class TGON_API GenericApplication :
+    public object::TObject
+{
+public:
+    TGON_CREATE_OBJECT_INTERFACE(tgon::platform::GenericApplication)
 
 /**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
+ * @section Ctor/Dtor
  */
-TGON_API void ShowOkPopup(const char* message, const char* caption);
+protected:
+    GenericApplication() = default;
+public:
+    virtual ~GenericApplication() = default;
 
 /**
- * @brief                   Show a popup with Ok button
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- * @param [in] handler      Button click event handler
+ * @section Public method
  */
-TGON_API void ShowOkPopup(const char* message, const char* caption, OkPopupEventHandler handler);
+public:
+    /**
+     * @brief                       Get the current language of OS.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [in] bufferLength     The length of buffer
+     */
+    virtual void GetLanguage(char* destBuffer, std::size_t bufferLength) = 0;
 
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- */
-TGON_API void ShowYesNoPopup(const char* message);
+    /**
+     * @brief                       Get the current language of OS.
+     * @tparam N                    The length of buffer
+     * @param [out] destBuffer      The destination of the string to be written.
+     */
+    template <std::size_t N>
+    void GetLanguage(char(&destBuffer)[N]);
+};
 
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowYesNoPopup(const char* message, YesNoPopupEventHandler handler);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- */
-TGON_API void ShowYesNoPopup(const char* message, const char* caption);
-
-/**
- * @brief                   Show a popup with buttons: Yes, No
- * @param [in] message      Popup description text
- * @param [in] caption      Popup title text
- * @param [in] handler      Button click event handler
- */
-TGON_API void ShowYesNoPopup(const char* message, const char* caption, YesNoPopupEventHandler handler);
+template<std::size_t N>
+inline void GenericApplication::GetLanguage(char(&destBuffer)[N])
+{
+    this->GetLanguage(destBuffer, bufferLength);
+}
 
 } /* namespace platform */
 } /* namespace tgon */

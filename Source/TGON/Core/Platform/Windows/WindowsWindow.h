@@ -12,10 +12,13 @@
 #endif
 #include <Windows.h>
 
-namespace tgon {
-namespace platform {
-namespace windows {
-
+namespace tgon
+{
+namespace platform
+{
+namespace windows
+{
+    
 class TGON_API WindowsWindow :
     public GenericWindow
 {
@@ -23,12 +26,9 @@ class TGON_API WindowsWindow :
  * @section Ctor/Dtor
  */ 
 public:
-	explicit WindowsWindow(const TWindowStyle& wndStyle);
+	explicit WindowsWindow(const TWindowStyle& wndStyle, HINSTANCE instanceHandle);
 	virtual ~WindowsWindow();
 
-/** 
- * @section Public command method
- */ 
 public:
     bool PumpEvent();
     virtual void Show() override;
@@ -39,30 +39,19 @@ public:
     virtual void BringToFront() override;
     void Flash();
 
-/**
- * @section Event handler
- */
 public:
-    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-
-/**
- * @section Set method
- */
-public:
-    virtual void SetPosition(const math::TIntPoint& position) override;
-    virtual void SetExtent(const math::TIntExtent2D& extent) override;
-    virtual void SetCaption(const char* caption) override;
+    virtual void SetPosition(int32_t x, int32_t y) override;
+    virtual void SetExtent(int32_t width, int32_t height) override;
+    virtual void SetCaption(/*IN*/ const char* caption) override;
     void SetTopMost(bool setTopMost);
-    void SetTransparent(float);
-    void SetPerPixelTransparent(float);
+    void SetTransparent(float opacity);
+    void SetPerPixelTransparent(float opacity);
+    void SetColorMask(/*maskColor*/);
 
-/** 
- * @section Get method
- */ 
 public:
-    virtual const math::TIntPoint GetPosition() const override;
-    virtual const math::TIntExtent2D GetExtent() const override;
-    virtual void GetCaptionText(char* caption) const override;
+    virtual void GetPosition(/*OUT*/ int32_t* x, /*OUT*/ int32_t* y) const override;
+    virtual void GetExtent(/*OUT*/ int32_t* width, /*OUT*/ int32_t* height) const override;
+    virtual void GetCaptionText(/*OUT*/ char* caption) const override;
     virtual bool HasCaption() const override;
     //bool GetTransparent() const;
     //bool GetPerPixelTransparent() const;
@@ -72,9 +61,6 @@ public:
     virtual bool IsTopMost() const override;
     HWND GetWindowHandle() const noexcept;
 
-/** 
- * @section Private variable
- */ 
 private:
 	HWND m_wndHandle;
 };

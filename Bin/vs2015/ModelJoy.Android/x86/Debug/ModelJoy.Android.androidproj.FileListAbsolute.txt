@@ -3,3 +3,4 @@ D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\De
 D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\FileStringReplace.incremental
 D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.apk
 D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\TGON_Core_Android.lastsuccessfuldeploy
+D:\Users\ggomdyu\Desktop\Projects\GitHub\TGON\Bin\vs2015\ModelJoy.Android\x86\Debug\Package\libs\x86\libTGON_Core_Android.so

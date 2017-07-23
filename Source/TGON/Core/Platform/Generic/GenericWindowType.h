@@ -8,8 +8,10 @@
 #include <string>
 #include <cstdint>
 
-namespace tgon {
-namespace platform {
+namespace tgon
+{
+namespace platform
+{
 
 enum class TMouseType
 {

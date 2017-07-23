@@ -8,8 +8,10 @@
 #include <string>
 #include <cstdint>
 
-namespace tgon {
-namespace object {
+namespace tgon
+{
+namespace object
+{
 
 struct TTypeInfo
 {
@@ -23,7 +25,7 @@ public:
     TTypeInfo(const std::string& name) noexcept;
 
 /**
- * @section Get method
+ * @section Public method
  */
 public:
 	/* @return  The hash value of the type name. */

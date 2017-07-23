@@ -7,7 +7,7 @@
 #include <Core/Platform/TWindow.h>
 #include <Core/Platform/TApplication.h>
 #include <Core/Platform/TTime.h>
-#include <Core/Platform/TConsole.h>
+#include <Core/Platform/TNativeConsole.h>
 #include <Core/Utility/TAutoCast.h>
 #include <Core/Utility/TArray.h>
 #include <Core/Utility/TEnumerator.h>
@@ -26,16 +26,14 @@ using namespace tgon;
 
 #define LOGC(msg, p1) platform::TNativeConsole::Get()->WriteLine(msg, p1);
 
+
+
 class CustomWindow :
     public platform::TWindow
 {
 public:
     CustomWindow() :
-        platform::TWindow(platform::TWindowStyle{})
-    {
-    }
-
-    virtual void OnMouseDown(const math::TIntPoint& position, platform::TMouseType mouseType) override
+        platform::TWindow(platform::TWindowStyle{}, GetModuleHandle(nullptr))
     {
     }
 };
@@ -44,13 +42,16 @@ class TGONSample :
     public GameApplication
 {
 public:
-    TGON_MAKE_OBJECT_INTERFACE(TGONSample)
+    TGON_CREATE_OBJECT_INTERFACE(TGONSample)
 
 public:
     TGONSample() :
         GameApplication(platform::MakeWindow<CustomWindow>())
     {
-		LOGC("%d", sizeof(*GetRootWindow().get()));
+		auto ptr = operator new(sizeof(int));
+
+
+		operator delete(ptr);
 	}
 
     virtual ~TGONSample()

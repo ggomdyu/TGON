@@ -18,7 +18,7 @@ class TGON_API IModule :
 	private boost::noncopyable
 {
 public:
-    TGON_MAKE_OBJECT_INTERFACE(IModule)
+    TGON_CREATE_OBJECT_INTERFACE(IModule)
 
 /**
  * @section Ctor/Dtor
