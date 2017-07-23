@@ -24,7 +24,7 @@ class TGON_API WindowsWindow :
 {
 /* @section Ctor/Dtor */
 public:
-	explicit WindowsWindow(const WindowStyle& wndStyle, HINSTANCE instanceHandle);
+	explicit WindowsWindow(const WindowStyle& wndStyle);
 	virtual ~WindowsWindow();
 
 /* @section Public method */
@@ -48,14 +48,14 @@ public:
 
     virtual void GetPosition(int32_t* x, int32_t* y) const override;
     virtual void GetSize(int32_t* width, int32_t* height) const override;
-    virtual void GetCaptionText(char* destCaptionTitle) const override;
+    virtual void GetCaptionTitle(char* destCaptionTitle) const override;
     virtual bool HasCaption() const override;
     //bool GetTransparent() const;
     //bool GetPerPixelTransparent() const;
     virtual bool IsResizable() const override;
     virtual bool IsMaximized() const override;
-    virtual bool IsMinimized() const override;
-    virtual bool IsTopMost() const override;
+    virtual bool IsHidden() const override;
+    bool IsTopMost() const;
 
     HWND GetWindowHandle() const noexcept;
 

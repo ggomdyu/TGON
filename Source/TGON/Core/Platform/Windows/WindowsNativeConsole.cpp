@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "WindowsNativeConsole.h"
 
 #ifndef NOMINMAX

@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "WindowsWindowUtility.h"
 
 #include <cassert>
@@ -55,9 +55,9 @@ void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, DWORD* extendedS
 
 HWND CreateNativeWindow(const WindowStyle& windowStyle, const wchar_t* className, HINSTANCE instanceHandle, void* extraParam)
 {
-	// Converts TWindowStyle to platform dependent style.
+	// Converts WindowStyle to platform dependent style.
 	DWORD exStyle, normalStyle;
-    ConvertWindowStyleToDword(windowStyle, &exStyle, &normalStyle);
+    ConvertToNativeWindowStyle(windowStyle, &exStyle, &normalStyle);
 
     wchar_t utf16Title[256] {};
     bool succeedToConvert = string::ConvertUTF8ToUTF16(windowStyle.caption.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
@@ -70,7 +70,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, const wchar_t* className
 		exStyle,
 		className,
 		utf16Title,
-		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
+		normalStyle /*| WS_CLIPSIBLINGS | WS_CLIPCHILDREN*/, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
         windowStyle.x,
         windowStyle.y,
 		windowStyle.width, 

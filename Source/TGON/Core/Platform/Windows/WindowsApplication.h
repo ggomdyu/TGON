@@ -30,14 +30,12 @@ public:
 
 
 public:
-    using GenericApplication::GetLanguage;
+    //using GenericApplication::GetLanguage;
 
 
 public:
     void Initialize(HINSTANCE instanceHandle);
     
-    bool RegisterWindowClass();
-
 public:
     /** @brief  Get the pointer of singleton instance. */
     static WindowsApplication* Get();
@@ -45,13 +43,13 @@ public:
     /** @brief  Return unique handle of this process. */
     HINSTANCE GetInstanceHandle() const noexcept;
 
-    virtual void GetLanguage(char* destBuffer, std::size_t bufferLength) override;
+    //virtual void GetLanguage(char* destBuffer, std::size_t bufferLength) override;
 
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 /**
  * @section Private method
  */
-private:
-    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
+public:
 
 /**
  * @section Private variable

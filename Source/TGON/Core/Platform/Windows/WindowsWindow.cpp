@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "WindowsWindow.h"
 
 #include "WindowsWindowUtility.h"
@@ -20,8 +20,8 @@ namespace platform
 namespace windows
 {
 
-WindowsWindow::WindowsWindow(const WindowStyle& wndStyle, HINSTANCE instanceHandle) :
-    m_wndHandle(CreateNativeWindow(wndStyle, L"TGON", instanceHandle))
+WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
+    m_wndHandle(CreateNativeWindow(wndStyle, L"TGON", GetModuleHandle(nullptr)))
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
 
@@ -95,7 +95,7 @@ void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetCaptionText(char* dest) const
+void WindowsWindow::GetCaptionTitle(char* dest) const
 {
     //virtual void GetCaptionText(char* caption) const override;
     //std::size_t captionTextLength = GetWindowTextLengthW(m_wndHandle);
@@ -127,7 +127,7 @@ bool WindowsWindow::IsMaximized() const
     return false;
 }
 
-bool WindowsWindow::IsMinimized() const
+bool WindowsWindow::IsHidden() const
 {
     // todo : impl
     return false;
@@ -179,7 +179,7 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
 }
 
-void WindowsWindow::SetCaption(const char* captionTitle)
+void WindowsWindow::SetCaptionTitle(const char* captionTitle)
 {
     wchar_t utf16Caption[256] {};
 
@@ -195,7 +195,7 @@ void WindowsWindow::SetTopMost(bool setTopMost)
     ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
-//void WindowsWindow::AdditionalInit(const TWindowStyle& wndStyle)
+//void WindowsWindow::AdditionalInit(const WindowStyle& wndStyle)
 //{
 //    if (wndStyle.supportWindowTransparency)
 //    {

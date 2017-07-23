@@ -5,20 +5,19 @@
  */
 
 #pragma once
-#include "./Core/Object/TObject.h"
-
 #include <boost/noncopyable.hpp>
 
+#include "Core/Object/Object.h"
 
 namespace tgon
 {
 
 class TGON_API IModule :
-    public object::TObject,
+    public object::Object,
 	private boost::noncopyable
 {
 public:
-    TGON_CREATE_OBJECT_INTERFACE(IModule)
+    TGON_MAKE_OBJECT_INTERFACE(tgon::IModule)
 
 /**
  * @section Ctor/Dtor

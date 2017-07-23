@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "Engine.h"
 
 #include "GameApplication.h"
@@ -28,7 +28,7 @@ void TEngine::AddEssentialModules( )
 
 int32_t TEngine::Execute( int argc, char** argv )
 {
-	const std::shared_ptr<platform::TWindow>& window = m_gameApplication->GetRootWindow( );
+	const std::shared_ptr<platform::Window>& window = m_gameApplication->GetRootWindow( );
 	if ( window.get( ) )
 	{
 		// Loop for window event( =messsage )

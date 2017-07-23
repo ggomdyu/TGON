@@ -1,8 +1,6 @@
 /**
  * @author   ggomdyu
  * @since    07/24/2016
-
-
  */
 
 #pragma once
@@ -15,11 +13,9 @@ class TGON_API TimeModule :
 	public IModule
 {
 public:
-    TGON_CREATE_OBJECT_INTERFACE(TimeModule)
+    TGON_MAKE_OBJECT_INTERFACE(TimeModule)
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     TimeModule();
     virtual ~TimeModule() = default;

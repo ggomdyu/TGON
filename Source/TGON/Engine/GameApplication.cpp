@@ -1,10 +1,10 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "GameApplication.h"
 
 namespace tgon
 {
 
-GameApplication::GameApplication(const std::shared_ptr<platform::TWindow>& window) :
+GameApplication::GameApplication(const std::shared_ptr<platform::Window>& window) :
 	m_paused(false),
 	m_rootWindow(window)
 {
@@ -20,7 +20,7 @@ void tgon::GameApplication::PauseUpdate() noexcept
     m_paused = true;
 }
 
-const std::shared_ptr<platform::TWindow>& GameApplication::GetRootWindow() const noexcept
+const std::shared_ptr<platform::Window>& GameApplication::GetRootWindow() const noexcept
 {
     return m_rootWindow;
 }

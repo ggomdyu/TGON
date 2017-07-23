@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#include "Core/Platform/TConfig.h"
-
 #include <cstdint>
+
+#include "Core/Platform/Config.h"
 
 namespace tgon 
 {

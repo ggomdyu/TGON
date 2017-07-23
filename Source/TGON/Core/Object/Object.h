@@ -53,15 +53,15 @@ public:
 	\
     virtual std::size_t GetTypeHashCode() const noexcept override\
     {\
-        return Foo::GetTypeInfo().GetHashCode();\
+        return classType::GetTypeInfo().GetHashCode();\
     }\
     virtual const char* GetTypeName() const noexcept override\
     {\
-        return Foo::GetTypeInfo().GetTypeName().CStr();\
+        return classType::GetTypeInfo().GetTypeName().CStr();\
     }\
-    static const tgon::object::TypeInfo<GetArraySize(#classType)>& GetTypeInfo() noexcept\
+    static const tgon::object::TypeInfo<tgon::utility::GetArraySize(#classType)>& GetTypeInfo() noexcept\
     {\
-        tgon::object::TypeInfo<GetArraySize(#classType)> typeInfo(#classType);\
+        tgon::object::TypeInfo<tgon::utility::GetArraySize(#classType)> typeInfo(#classType);\
         return typeInfo;\
     }
 

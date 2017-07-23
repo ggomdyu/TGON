@@ -63,7 +63,7 @@ public:
     static TMatrix4x4 RotateY(float theta);
     static TMatrix4x4 RotateZ(float theta);
     static TMatrix4x4 Translate(float x, float y, float z);
-    static TMatrix4x4 View(const struct TVector3& eyePt, const struct TVector3& lookAt, const struct TVector3& up);
+    static TMatrix4x4 View(const struct Vector3& eyePt, const struct Vector3& lookAt, const struct Vector3& up);
     static TMatrix4x4 PerspectiveFovLH(float fovY, float aspect, float nearZ, float farZ);
     static TMatrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
     static TMatrix4x4 Transpose(const TMatrix4x4& rhs);

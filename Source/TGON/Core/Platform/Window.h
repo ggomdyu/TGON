@@ -22,8 +22,10 @@ namespace tgon
 namespace platform
 {
 
+using SharedWindow = std::shared_ptr<platform::Window>;
+
 template <typename _WindowType, typename... _Args, typename = typename std::enable_if<std::is_convertible<_WindowType*, Window*>::value>::type>
-std::shared_ptr<platform::Window> MakeWindow(_Args&&... args)
+SharedWindow MakeWindow(_Args&&... args)
 {
     return std::make_shared<_WindowType>(std::forward<_Args>(args)...);
 }

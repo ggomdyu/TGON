@@ -1,15 +1,15 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "InputModule.h"
 
 #include <string>
 #include <boost/predef/os.h>
 
-#include "Core/Platform/TWindow.h"
+#include "Core/Platform/Window.h"
 
 namespace tgon
 {
 
-InputModule::InputModule(platform::TWindow* inputAcceptTargets, uint32_t supportInputFlag) :
+InputModule::InputModule(platform::Window* inputAcceptTargets, uint32_t supportInputFlag) :
     m_inputManager(nullptr),
     m_keyboardDevice(nullptr),
     m_mouseDeivece(nullptr),
@@ -50,7 +50,7 @@ void InputModule::Update()
     //}
 }
 
-void InputModule::InitializeInputManager(platform::TWindow* inputAcceptWindow, uint32_t supportInputFlag)
+void InputModule::InitializeInputManager(platform::Window* inputAcceptWindow, uint32_t supportInputFlag)
 {
     // OS dependent codes are here
     OIS::ParamList paramList;

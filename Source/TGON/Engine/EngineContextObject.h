@@ -15,13 +15,13 @@ namespace tgon
 {
 
 class ModuleContext :
-    public object::TObject
+    public object::Object
 {
 /**
  * @section Generator
  */
 public:
-    TGON_CREATE_OBJECT_INTERFACE(ModuleContext)
+    TGON_MAKE_OBJECT_INTERFACE(tgon::ModuleContext)
 
 /**
  * @section Public command method

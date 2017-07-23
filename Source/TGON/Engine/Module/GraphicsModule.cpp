@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.pch"
 #include "GraphicsModule.h"
 
 tgon::GraphicsModule::~GraphicsModule()

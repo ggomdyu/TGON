@@ -31,6 +31,9 @@ public:
     virtual void Show() = 0;
     virtual void Hide() = 0;
     virtual void Quit() = 0;
+	virtual void Maximize() = 0;
+	virtual void Minimize() = 0;
+	virtual void BringToFront() = 0;
 
     virtual void SetPosition(int32_t x, int32_t y) = 0;
     virtual void SetSize(int32_t width, int32_t height) = 0;
@@ -41,7 +44,8 @@ public:
     virtual void GetCaptionTitle(char* destCaptionTitle) const = 0;
     virtual bool HasCaption() const = 0;
     virtual bool IsResizable() const = 0;
-    virtual bool IsHidden() const = 0;
+	virtual bool IsMaximized() const = 0;
+	virtual bool IsHidden() const = 0;
     bool IsClosed() const noexcept;
 
 /* @section Protected variable */

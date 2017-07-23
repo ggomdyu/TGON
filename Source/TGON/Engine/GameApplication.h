@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Engine/EngineContextObject.h"
-#include "Core/Platform/TWindow.h"
+#include "Core/Platform/Window.h"
 
 #ifdef FindWindow
 #   undef FindWindow
@@ -24,16 +24,16 @@ namespace tgon
 {
 
 class TGON_API GameApplication :
-    public object::TObject
+    public object::Object
 {
 public:
-	TGON_CREATE_OBJECT_INTERFACE(GameApplication)
+	TGON_MAKE_OBJECT_INTERFACE(tgon::GameApplication)
 
 /**
  * @section Ctor/Dtor
  */ 
 public:
-    GameApplication(const platform::TSharedWindow& window /*= MakeWindow(TWindowStyle{})*/);
+    GameApplication(const platform::SharedWindow& window /*= MakeWindow(WindowStyle{})*/);
 
 /**
  * @section Public command method
@@ -56,7 +56,7 @@ public:
  * @section Get method
  */ 
 public:
-    const platform::TSharedWindow& GetRootWindow() const noexcept;
+    const platform::SharedWindow& GetRootWindow() const noexcept;
     
     bool IsPaused() const noexcept;
 
@@ -64,7 +64,7 @@ public:
  * @section Private variable
  */ 
 private:
-    platform::TSharedWindow m_rootWindow;
+    platform::SharedWindow m_rootWindow;
 	
     bool m_paused;
 };
