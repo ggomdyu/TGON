@@ -1,5 +1,5 @@
 /**
- * @filename    FixedStringUtil.h
+ * @filename    FixedStringUtility.h
  * @author      ggomdyu
  * @date        03/16/2017
  */
@@ -15,12 +15,10 @@ namespace tgon
 namespace string
 {
 
-// todo: 파라미터가 const reference가 되어야하는 것 아닌지?
-
-template <typename CharTy, std::size_t N>
-constexpr auto MakeFixedString(const CharTy(&str)[N]) -> BasicFixedString<typename std::remove_const<CharTy>::type, N>
+template <typename _CharType, std::size_t _BufferSize>
+constexpr auto MakeFixedString(const _CharType(&str)[_BufferSize]) -> BasicFixedString<typename std::decay<_CharType>::type, _BufferSize>
 {
-    return {str, N - 1};
+    return {str, _BufferSize - 1};
 }
 
 } /* namespace string */
