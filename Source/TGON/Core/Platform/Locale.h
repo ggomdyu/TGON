@@ -17,24 +17,3 @@
 #elif BOOST_OS_IOS
 #	import "IOS/IOSLocale.h"
 #endif
-
-namespace tgon
-{
-namespace platform
-{
-
-/**
- * @brief                       Get the current language of OS.
- * @param [out] destBuffer      The destination of the string to be written.
- * @param [in] bufferLength     The length of buffer
- */
-void GetLanguage(char* destBuffer, std::size_t bufferLength);
-
-template <std::size_t N>
-inline void GetLanguage(char(&destBuffer)[N])
-{
-    GetLanguage(destBuffer, N);
-}
-
-} /* namespace platform */
-} /* namespace tgon */

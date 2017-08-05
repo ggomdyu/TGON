@@ -2,7 +2,7 @@
  * @filename    BaseWindow.h
  * @author      ggomdyu
  * @since       01/09/2016
- * @desc        Set of Platform agnostic interface.
+ * @desc        Set of Platform-agnostic Window interface.
  */
 
 #pragma once

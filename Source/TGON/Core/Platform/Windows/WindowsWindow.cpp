@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsWindow.h"
 
 #include <Windows.h>
 #include <cassert>
 
+#include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
 
 #include "Core/String/TEncoding.h"

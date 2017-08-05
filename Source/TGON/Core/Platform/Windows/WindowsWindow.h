@@ -5,12 +5,12 @@
  */
 
 #pragma once
+#include <Windows.h>
 #ifndef NOMINMAX
 #	define NOMINMAX
 #endif
-#include <Windows.h>
 
-#include "Core/Platform/Base/BaseWindow.h"
+#include "../Base/BaseWindow.h"
 
 namespace tgon
 {

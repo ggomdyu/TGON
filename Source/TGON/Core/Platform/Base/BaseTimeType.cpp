@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.pch"
+
 #include "BaseTimeType.h"
 
 namespace tgon {

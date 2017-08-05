@@ -5,6 +5,7 @@
 #endif
 
 #include <Core/Platform/Window.h>
+#include <Core/Platform/Screen.h>
 #include <Core/Platform/Application.h>
 #include <Core/Platform/Time.h>
 #include <Core/Utility/AutoCast.h>

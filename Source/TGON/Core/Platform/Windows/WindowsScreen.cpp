@@ -1,11 +1,13 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsScreen.h"
 
 #include <Windows.h>
-#include "WindowsWindow.h"
 
-namespace tgon {
-namespace platform {
+#include "WindowsScreen.h"
+
+namespace tgon
+{
+namespace platform
+{
 
 //bool WindowsScreen::SetFullScreen(bool setFullScreen, const WindowsWindow& window)
 //{
@@ -28,21 +30,17 @@ namespace platform {
 //	//
 //	//return ( ChangeDisplaySettingsEx( &dmScreenSettings, CDS_FULLSCREEN ) == DISP_CHANGE_SUCCESSFUL ) ? true : false;
 //}
-//
-//int32_t WindowsScreen::GetMonitorCount()
-//{
-//    return GetSystemMetrics(SM_CMONITORS);
-//}
-//
-//int32_t WindowsScreen::GetResolutionWidth()
-//{
-//    return GetSystemMetrics(SM_CXSCREEN);
-//}
-//
-//int32_t WindowsScreen::GetResolutionHeight()
-//{
-//    return GetSystemMetrics(SM_CYSCREEN);
-//}
+
+int32_t GetMonitorCount()
+{
+    return GetSystemMetrics(SM_CMONITORS);
+}
+
+TGON_API void GetScreenResolution(int32_t* width, int32_t* height)
+{
+	*width = static_cast<int32_t>(GetSystemMetrics(SM_CXSCREEN));
+	*height = static_cast<int32_t>(GetSystemMetrics(SM_CYSCREEN));
+}
 
 } /* namespace platform */
 } /* namespace tgon */

@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.pch"
 #include "BaseTime.h"
 
-#include <chrono>
 #include <ctime>
+#include <chrono>
 
 namespace tgon
 {

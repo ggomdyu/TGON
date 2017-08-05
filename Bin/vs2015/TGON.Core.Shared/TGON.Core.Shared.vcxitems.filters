@@ -273,6 +273,9 @@
     <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Math\Color.h">
       <Filter>Sources\Core\Math</Filter>
     </ClInclude>
+    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseScreen.h">
+      <Filter>Sources\Core\Platform\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">

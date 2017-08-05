@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-#include "Core/Platform/Locale.h"
+#include "../Base/BaseLocale.h"
 
 namespace tgon
 {
