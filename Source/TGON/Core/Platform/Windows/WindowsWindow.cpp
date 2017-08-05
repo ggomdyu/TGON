@@ -1,12 +1,12 @@
 #include "PrecompiledHeader.pch"
 #include "WindowsWindow.h"
 
-#include "WindowsWindowUtility.h"
-#include "WindowsApplication.h"
-#include "Core/String/TEncoding.h"
-
 #include <Windows.h>
 #include <cassert>
+
+#include "WindowsWindowUtility.h"
+
+#include "Core/String/TEncoding.h"
 
 #ifdef TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
@@ -21,7 +21,7 @@ namespace windows
 {
 
 WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
-    m_wndHandle(CreateNativeWindow(wndStyle, L"TGON", GetModuleHandle(nullptr)))
+    m_wndHandle(CreateNativeWindow(wndStyle, GetModuleHandle(nullptr), L"TGON"))
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
 
@@ -50,36 +50,26 @@ bool WindowsWindow::PumpEvent()
 
 void WindowsWindow::BringToFront()
 {
-    // After Windows 98/Me: The system restricts which processes can set the foreground window.
-    // So, you can't switch the focus freely by only SetFocus or SetForegroundWindow.
-
-    DWORD currProcessId = GetWindowThreadProcessId(m_wndHandle, nullptr);
-    DWORD foregroundProcessId = GetWindowThreadProcessId(GetForegroundWindow(), nullptr);
-
-    if (AttachThreadInput(currProcessId, foregroundProcessId, TRUE))
-    {
-        SetForegroundWindow(m_wndHandle);
-        BringWindowToTop(m_wndHandle);
-
-        AttachThreadInput(currProcessId, foregroundProcessId, TRUE);
-    }
+	// 테스트 필요
+    ::SetForegroundWindow(m_wndHandle);
+    ::BringWindowToTop(m_wndHandle);
 }
 
 void WindowsWindow::Flash()
 {
-    FLASHWINFO fwi{ 0 };
-    fwi.cbSize = sizeof(FLASHWINFO);
+    ::FLASHWINFO fwi{ 0 };
+    fwi.cbSize = sizeof(::FLASHWINFO);
     fwi.dwFlags = FLASHW_CAPTION;
     fwi.dwTimeout = 0;
     fwi.hwnd = m_wndHandle;
     fwi.uCount = 1;
 
-    FlashWindowEx(&fwi);
+    ::FlashWindowEx(&fwi);
 }
 
 void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 {
-    RECT rt;
+    ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
 
     *x = rt.left;
@@ -88,7 +78,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 
 void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
 {
-    RECT rt;
+    ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
 
     *width = rt.right;
@@ -107,8 +97,8 @@ bool WindowsWindow::IsResizable() const
 {
     // Todo: WS_EX_DLGMODALFRAME에 대해서 테스트 필요
 
-    DWORD style = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
-    DWORD extendedStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
+    ::DWORD style = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
+	::DWORD extendedStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
 
     return ((style & WS_THICKFRAME) != 0) || ((extendedStyle & WS_EX_DLGMODALFRAME) != 0);
 }
@@ -216,108 +206,48 @@ void WindowsWindow::SetTopMost(bool setTopMost)
 //    }
 //#endif
 //}
-//LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
-//{
-//    switch (msg)
-//    {
-//    case WM_CREATE:
-//        /* WARN: DO NOT HANDLE THIS MESSAGE */
-//        break;
-//
-//    case WM_SETFOCUS:
-//        {
-//            this->OnGetFocus();
-//        }
-//        break;
-//
-//    case WM_KILLFOCUS:
-//        {
-//            this->OnLoseFocus();
-//        }
-//        break;
-//
-//    case WM_MOVE:
-//        {
-//            this->OnMove((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
-//        }
-//        break;
-//
-//    case WM_SIZE:
-//        {
-//			this->OnResizeExtent((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
-//        }
-//        break;
-//
-//    case WM_DESTROY:
-//        {
-//            PostQuitMessage(0);
-//            m_isClosed = true;
-//        }
-//        break;
-//
-//    case WM_LBUTTONDOWN:
-//        {
-//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
-//        }
-//        break;
-//
-//    case WM_LBUTTONUP:
-//        {
-//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
-//        }
-//        break;
-//
-//    case WM_RBUTTONDOWN:
-//        {
-//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
-//        }
-//        break;
-//
-//    case WM_RBUTTONUP:
-//        {
-//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
-//        }
-//        break;
-//
-//    case WM_MBUTTONDOWN:
-//        {
-//            this->OnMouseDown((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
-//        }
-//        break;
-//
-//    case WM_MBUTTONUP:
-//        {
-//            this->OnMouseUp((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
-//        }
-//        break;
-//
-//    case WM_LBUTTONDBLCLK:
-//        {
-//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Left);
-//        }
-//        break;
-//
-//    case WM_RBUTTONDBLCLK:
-//        {
-//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Right);
-//        }
-//        break;
-//
-//    case WM_MBUTTONDBLCLK:
-//        {
-//            this->OnMouseDoubleClick((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam), TMouseType::Middle);
-//        }
-//        break;
-//
-//    case WM_MOUSEMOVE:
-//        {
-//            this->OnMouseMove((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
-//        }
-//        break;
-//    }
-//
-//    return DefWindowProc(wndHandle, msg, wParam, lParam);
-//}
+LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    switch (msg)
+    {
+    case WM_CREATE:
+        /* WARN: DO NOT HANDLE THIS MESSAGE */
+        break;
+
+    case WM_SETFOCUS:
+        {
+            this->OnGetFocus();
+        }
+        break;
+
+    case WM_KILLFOCUS:
+        {
+            this->OnLoseFocus();
+        }
+        break;
+
+    case WM_MOVE:
+        {
+            this->OnMove((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
+        }
+        break;
+
+    case WM_SIZE:
+        {
+			this->OnResize((std::size_t)LOWORD(lParam), (std::size_t)HIWORD(lParam));
+        }
+        break;
+
+    case WM_DESTROY:
+        {
+            ::PostQuitMessage(0);
+            m_isClosed = true;
+        }
+        break;
+    }
+
+    return DefWindowProc(wndHandle, msg, wParam, lParam);
+}
 
 } /* namespace windows */
 } /* namespace platform */

@@ -22,7 +22,7 @@ class BasicFixedStringImpl
 {
 /* @section Type definition */
 public:
-    using TraitsType = std::char_traits<_CharType>;
+    using CharTraits = std::char_traits<_CharType>;
 
 /* @section Public variable */
 public:
@@ -34,7 +34,7 @@ protected:
 
     static int32_t CompareImpl(const _CharType* lhsStr, std::size_t lhsStrLength, const _CharType* rhsStr, std::size_t rhsStrLength);
 
-    static void AssignImpl(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chAssignCount);
+    static void AssignImpl(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount);
 };
 
 template <typename _CharType>
@@ -50,7 +50,7 @@ inline std::size_t BasicFixedStringImpl<_CharType>::FindImpl(const _CharType* sr
         return offset;
     }
 
-    const _CharType* foundStr = std::__search(srcStr + offset, srcStr + srcStrLength, srcFindStr, srcFindStr + srcFindStrLength, TraitsType::eq, std::random_access_iterator_tag(), std::random_access_iterator_tag());
+    const _CharType* foundStr = std::__search(srcStr + offset, srcStr + srcStrLength, srcFindStr, srcFindStr + srcFindStrLength, CharTraits::eq, std::random_access_iterator_tag(), std::random_access_iterator_tag());
     if (foundStr == srcStr + srcStrLength)
     {
         return NPos;
@@ -83,17 +83,17 @@ inline int32_t BasicFixedStringImpl<_CharType>::CompareImpl(const _CharType* lhs
 }
 
 template <typename _CharType>
-inline void BasicFixedStringImpl<_CharType>::AssignImpl(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chAssignCount)
+inline void BasicFixedStringImpl<_CharType>::AssignImpl(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount)
 {
-    assert(destStrBufferSize > chAssignCount && "BasicFixedString buffer overflowed");
+    assert(destBufferSize > chCount && "BasicFixedString buffer overflowed");
 
     std::size_t i = 0;
-    while (i < chAssignCount)
+    while (i < chCount)
     {
-        destStr[i++] = ch;
+		destBuffer[i++] = ch;
     }
 
-    destStr[i] = static_cast<_CharType>(0);
+	destBuffer[i] = static_cast<_CharType>(0);
 }
 
 } /* namespace detail */
@@ -106,7 +106,7 @@ class BasicFixedString :
 
 /* @section Type definition */
 public:
-    using TraitsType = std::char_traits<_CharType>;
+    using CharTraits = std::char_traits<_CharType>;
 
     using SizeType = decltype(_Capacity);
 

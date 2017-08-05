@@ -1,5 +1,5 @@
 /**
- * @filename    GenericTimeType.h
+ * @filename    BaseTimeType.h
  * @author      ggomdyu
  * @since       04/23/2017
  */

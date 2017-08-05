@@ -7,8 +7,10 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-namespace tgon {
-namespace math {
+namespace tgon
+{
+namespace math
+{
 
 struct TGON_API TMatrix3x3
 {

@@ -17,46 +17,46 @@ template <typename>
 struct FunctionTraits;
 
 /* @brief   Traits for global function */
-template <typename _ReturnType, typename... _Args>
-struct FunctionTraits<_ReturnType(_Args...)>
+template <typename _ReturnType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-	enum { ArgumentCount = sizeof...(_Args), };
+	enum { ArgumentCount = sizeof...(_ArgTypes), };
 
 	using ReturnType = _ReturnType;
 
-    using FunctionType = _ReturnType(_Args...);
-    using FunctionPtrType = _ReturnType(*)(_Args...);
+    using FunctionType = _ReturnType(_ArgTypes...);
+    using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
 };
 
-template <typename _ReturnType, typename... _Args>
-struct FunctionTraits<_ReturnType(*)(_Args...)> :
-	public FunctionTraits<_ReturnType(_Args...)>
+template <typename _ReturnType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> :
+	public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 };
 
 /* @brief   Traits for class member function */
-template <typename _ReturnType, typename _ClassType, typename... _Args>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...)> :
-	public FunctionTraits<_ReturnType(_Args...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
+	public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 	using ClassType = _ClassType;
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Args>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...) const> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_Args...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> :
+	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Args>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...) volatile> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_Args...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> :
+	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Args>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Args...) const volatile> :
-    public FunctionTraits<_ReturnType(_ClassType::*)(_Args...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
+    public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 

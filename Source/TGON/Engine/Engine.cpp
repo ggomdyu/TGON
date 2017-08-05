@@ -11,13 +11,13 @@ namespace tgon
 
 std::shared_ptr<GameApplication> MakeGameApplication( );
 
-TEngine::TEngine( ) :
+Engine::Engine( ) :
 	m_gameApplication( MakeGameApplication( ))
 {
 	this->AddEssentialModules( );
 }
 
-void TEngine::AddEssentialModules( )
+void Engine::AddEssentialModules( )
 {
     This::AddModule<TimeModule>( );
 
@@ -26,7 +26,7 @@ void TEngine::AddEssentialModules( )
 	//);
 }
 
-int32_t TEngine::Execute( int argc, char** argv )
+int32_t Engine::Execute( int argc, char** argv )
 {
 	const std::shared_ptr<platform::Window>& window = m_gameApplication->GetRootWindow( );
 	if ( window.get( ) )
@@ -45,18 +45,15 @@ int32_t TEngine::Execute( int argc, char** argv )
 			if ( !window->PumpEvent( ))
 			{
 				this->UpdateModules( );
-
 				m_gameApplication->OnUpdate( );
 			}
 		}
 	}
-	
 
-//	this->NotifyEvent<E_DESTROY>( );
 	return 0;
 }
 
-void TEngine::UpdateModules( )
+void Engine::UpdateModules( )
 {
     for ( auto module : m_modulesForFastIter )
     {

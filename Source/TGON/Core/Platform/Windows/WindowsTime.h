@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../Generic/GenericTime.h"
+#include "../Base/BaseTime.h"
 
 namespace tgon
 {

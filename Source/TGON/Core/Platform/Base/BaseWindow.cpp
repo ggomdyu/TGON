@@ -1,22 +1,22 @@
 #include "PrecompiledHeader.pch"
-#include "GenericWindow.h"
+#include "BaseWindow.h"
 
 namespace tgon
 {
 namespace platform
 {
 
-GenericWindow::GenericWindow() :
+BaseWindow::BaseWindow() :
     m_isClosed(false)
 {
 }
 
-GenericWindow::~GenericWindow()
+BaseWindow::~BaseWindow()
 {
     m_isClosed = true;
 }
 
-bool GenericWindow::IsClosed() const noexcept
+bool BaseWindow::IsClosed() const noexcept
 {
     return m_isClosed;
 }
