@@ -67,8 +67,6 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     NSRect currentWindowFrameRect = [window frame];
     [window setFrameOrigin:NSMakePoint(windowPosition.x,(mainScreenFrameRect.origin.y + mainScreenFrameRect.size.height - currentWindowFrameRect.size.height) - windowPosition.y)];
 
-    [window setOpaque:TRUE];
-
     return window;
 }
 

@@ -9,10 +9,11 @@
 #include <memory>
 #include <string>
 
-#include "Core/Platform/Config.h"
-#include "Core/Utility/Array.h"
-
 #include "TypeInfo.h"
+
+#include "Core/Hash/Hash.h"
+#include "Core/Utility/Array.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {

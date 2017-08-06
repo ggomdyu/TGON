@@ -5,8 +5,8 @@
  */
 
 #pragma once
-#include <type_traits>
 #include <memory>
+#include <type_traits>
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS

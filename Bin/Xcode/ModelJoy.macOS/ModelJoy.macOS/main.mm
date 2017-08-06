@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#import <boost/type_traits.hpp>
+#import <iostream>
+#import <OpenGL/gl.h>
+#import <OpenGL/glu.h>
+#import <GLUT/glut.h>
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
-
-#include "Core/Platform/Window.h"
-#include "Core/Utility/Delegate.h"
-#include "Core/Utility/StaticIf.h"
-#include "Core/Math/Color.h"
-#include <boost/type_traits.hpp>
-#include <iostream>
+#import "Core/Platform/Window.h"
+#import "Core/Utility/Delegate.h"
+#import "Core/Utility/StaticIf.h"
+#import "Core/Math/Color.h"
+#import "Core/Object/Object.h"
 
 void OnDraw()
 {
@@ -26,12 +26,6 @@ void OnDraw()
     glFlush();
 }
 
-void OnHandleInput(unsigned char key, int x, int y)
-{
-}
-
-#include "Core/Object/Object.h"
-
 class NewObject :
     public tgon::object::Object
 {
@@ -39,82 +33,15 @@ public:
     TGON_MAKE_OBJECT_INTERFACE(NewObject);
 };
 
-template <typename _CharType>
-struct TypeTraits
-{
-public:
-    using CharType = _CharType;
-
-
-};
-
-
-template <class _CharType>
-struct _LIBCPP_TYPE_VIS_ONLY ConstexprCharTraits
-{
-/* @section Ctor/Dtor */
-public:
-    using CharType = _CharType;
-
-/* @section Public method */
-public:
-    constexpr static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLength, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLength)
-    {
-        if ((srcStrOffset > srcStrLength) || ((srcStrLength - srcStrOffset) < srcFindSubStrLength))
-        {
-            return NPos;
-        }
-
-        if (srcFindSubStrLength == 0)
-        {
-            return srcStrOffset;
-        }
-
-        const _CharType* foundStr = std::search(srcStr + srcStrOffset, srcStr + srcStrLength, srcFindSubStr, srcFindSubStr + srcFindSubStrLength);
-        if (foundStr == srcStr + srcStrLength)
-        {
-            return NPos;
-        }
-
-        return static_cast<std::size_t>(foundStr - srcStr);
-    }
-
-    template <typename _CharType>
-    constexpr int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLength, const _CharType* rhsStr, std::size_t rhsStrLength)
-    {
-        auto minSize = lhsStrLength < rhsStrLength ? lhsStrLength : rhsStrLength;
-
-        auto ans = std::char_traits<_CharType>::compare(lhsStr, rhsStr, minSize);
-        if (ans != 0)
-        {
-            return ans;
-        }
-
-        if (lhsStrLength < rhsStrLength)
-        {
-            return -1;
-        }
-        if (lhsStrLength > rhsStrLength)
-        {
-            return 1;
-        }
-        
-        return 0;
-    }
-
-};
-
-
 int main(int argc, char* argv[])
 {
-    std::char_traits<char> trait;
-
     @autoreleasepool
     {
         using namespace tgon;
 
-        //constexpr string::FixedString32 fs = "23423f";
-        auto hashV = hash::x65599Hash("123345");
+        string::FixedString64 fs = "2342";
+        fs.Find("223");
+
 
         //id sharedApplica.rtion = [NSApplication sharedApplication];
         [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];

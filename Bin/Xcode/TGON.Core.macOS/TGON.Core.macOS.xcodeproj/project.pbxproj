@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		FD024ACE1F24424700C369DB /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = FD024ACC1F24424700C369DB /* Color.h */; };
+		FD11ADC61F36C2EB00123D83 /* BaseLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADBD1F36C2EB00123D83 /* BaseLocale.h */; };
+		FD11ADC71F36C2EB00123D83 /* BaseScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADBE1F36C2EB00123D83 /* BaseScreen.h */; };
+		FD11ADC81F36C2EB00123D83 /* BaseTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD11ADBF1F36C2EB00123D83 /* BaseTime.cpp */; };
+		FD11ADC91F36C2EB00123D83 /* BaseTime.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC01F36C2EB00123D83 /* BaseTime.h */; };
+		FD11ADCA1F36C2EB00123D83 /* BaseTimeType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD11ADC11F36C2EB00123D83 /* BaseTimeType.cpp */; };
+		FD11ADCB1F36C2EB00123D83 /* BaseTimeType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC21F36C2EB00123D83 /* BaseTimeType.h */; };
+		FD11ADCC1F36C2EB00123D83 /* BaseWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD11ADC31F36C2EB00123D83 /* BaseWindow.cpp */; };
+		FD11ADCD1F36C2EB00123D83 /* BaseWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC41F36C2EB00123D83 /* BaseWindow.h */; };
+		FD11ADCE1F36C2EB00123D83 /* BaseWindowType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC51F36C2EB00123D83 /* BaseWindowType.h */; };
+		FD11ADD01F37155B00123D83 /* StringTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADCF1F37155B00123D83 /* StringTraits.h */; };
 		FD51C1A11F21078D003F08B6 /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C19F1F21078D003F08B6 /* MacOSWindow.h */; };
 		FD51C1A21F21078D003F08B6 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */; };
 		FD51C1A41F210803003F08B6 /* MacOSWindowUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */; };
@@ -16,10 +26,6 @@
 		FD7DF7681F1EE1AD002F65CA /* Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DF7671F1EE1AD002F65CA /* Delegate.h */; };
 		FD89E4561F1B42B9007376E8 /* Hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD89E41B1F1B42B9007376E8 /* Hash.cpp */; };
 		FD89E4571F1B42B9007376E8 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89E41C1F1B42B9007376E8 /* Hash.h */; };
-		FD89E4581F1B42B9007376E8 /* GenericTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD89E41E1F1B42B9007376E8 /* GenericTime.cpp */; };
-		FD89E4591F1B42B9007376E8 /* GenericTime.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89E41F1F1B42B9007376E8 /* GenericTime.h */; };
-		FD89E45A1F1B42B9007376E8 /* GenericWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4201F1B42B9007376E8 /* GenericWindow.cpp */; };
-		FD89E45B1F1B42B9007376E8 /* GenericWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89E4211F1B42B9007376E8 /* GenericWindow.h */; };
 		FD89E46B1F1B42B9007376E8 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89E4331F1B42B9007376E8 /* Config.h */; };
 		FD89E46F1F1B42B9007376E8 /* Algorithm.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4381F1B42B9007376E8 /* Algorithm.h */; };
 		FD89E4701F1B42B9007376E8 /* Array.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4391F1B42B9007376E8 /* Array.h */; };
@@ -45,8 +51,6 @@
 		FD89E4851F1B42B9007376E8 /* TypeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4521F1B42B9007376E8 /* TypeInfo.cpp */; };
 		FD89E4861F1B42B9007376E8 /* TypeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89E4531F1B42B9007376E8 /* TypeInfo.h */; };
 		FD89E4E31F1B46C0007376E8 /* Hash.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E41C1F1B42B9007376E8 /* Hash.h */; };
-		FD89E4E41F1B46C0007376E8 /* GenericTime.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E41F1F1B42B9007376E8 /* GenericTime.h */; };
-		FD89E4E51F1B46C0007376E8 /* GenericWindow.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4211F1B42B9007376E8 /* GenericWindow.h */; };
 		FD89E4EE1F1B46C0007376E8 /* Config.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4331F1B42B9007376E8 /* Config.h */; };
 		FD89E4F21F1B46C0007376E8 /* StaticIf.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E43B1F1B42B9007376E8 /* StaticIf.h */; };
 		FD89E4F31F1B46C0007376E8 /* Prefix.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E43E1F1B42B9007376E8 /* Prefix.h */; };
@@ -67,6 +71,16 @@
 
 /* Begin PBXFileReference section */
 		FD024ACC1F24424700C369DB /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../../../Source/TGON/Core/Math/Color.h; sourceTree = "<group>"; };
+		FD11ADBD1F36C2EB00123D83 /* BaseLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseLocale.h; path = ../../../Source/TGON/Core/Platform/Base/BaseLocale.h; sourceTree = "<group>"; };
+		FD11ADBE1F36C2EB00123D83 /* BaseScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseScreen.h; path = ../../../Source/TGON/Core/Platform/Base/BaseScreen.h; sourceTree = "<group>"; };
+		FD11ADBF1F36C2EB00123D83 /* BaseTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseTime.cpp; path = ../../../Source/TGON/Core/Platform/Base/BaseTime.cpp; sourceTree = "<group>"; };
+		FD11ADC01F36C2EB00123D83 /* BaseTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTime.h; path = ../../../Source/TGON/Core/Platform/Base/BaseTime.h; sourceTree = "<group>"; };
+		FD11ADC11F36C2EB00123D83 /* BaseTimeType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseTimeType.cpp; path = ../../../Source/TGON/Core/Platform/Base/BaseTimeType.cpp; sourceTree = "<group>"; };
+		FD11ADC21F36C2EB00123D83 /* BaseTimeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTimeType.h; path = ../../../Source/TGON/Core/Platform/Base/BaseTimeType.h; sourceTree = "<group>"; };
+		FD11ADC31F36C2EB00123D83 /* BaseWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseWindow.cpp; path = ../../../Source/TGON/Core/Platform/Base/BaseWindow.cpp; sourceTree = "<group>"; };
+		FD11ADC41F36C2EB00123D83 /* BaseWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseWindow.h; path = ../../../Source/TGON/Core/Platform/Base/BaseWindow.h; sourceTree = "<group>"; };
+		FD11ADC51F36C2EB00123D83 /* BaseWindowType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseWindowType.h; path = ../../../Source/TGON/Core/Platform/Base/BaseWindowType.h; sourceTree = "<group>"; };
+		FD11ADCF1F37155B00123D83 /* StringTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringTraits.h; path = ../../../Source/TGON/Core/String/StringTraits.h; sourceTree = "<group>"; };
 		FD51C19F1F21078D003F08B6 /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindow.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.h; sourceTree = "<group>"; };
 		FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindow.mm; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.mm; sourceTree = "<group>"; };
 		FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtility.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.h; sourceTree = "<group>"; };
@@ -75,10 +89,6 @@
 		FD7DF7671F1EE1AD002F65CA /* Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Delegate.h; path = ../../../Source/TGON/Core/Utility/Delegate.h; sourceTree = "<group>"; };
 		FD89E41B1F1B42B9007376E8 /* Hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hash.cpp; path = ../../../Source/TGON/Core/Hash/Hash.cpp; sourceTree = "<group>"; };
 		FD89E41C1F1B42B9007376E8 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hash.h; path = ../../../Source/TGON/Core/Hash/Hash.h; sourceTree = "<group>"; };
-		FD89E41E1F1B42B9007376E8 /* GenericTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericTime.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.cpp; sourceTree = "<group>"; };
-		FD89E41F1F1B42B9007376E8 /* GenericTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericTime.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.h; sourceTree = "<group>"; };
-		FD89E4201F1B42B9007376E8 /* GenericWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericWindow.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericWindow.cpp; sourceTree = "<group>"; };
-		FD89E4211F1B42B9007376E8 /* GenericWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericWindow.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericWindow.h; sourceTree = "<group>"; };
 		FD89E4331F1B42B9007376E8 /* Config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Config.h; path = ../../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
 		FD89E4381F1B42B9007376E8 /* Algorithm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Algorithm.h; path = ../../../Source/TGON/Core/Utility/Algorithm.h; sourceTree = "<group>"; };
 		FD89E4391F1B42B9007376E8 /* Array.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Array.h; path = ../../../Source/TGON/Core/Utility/Array.h; sourceTree = "<group>"; };
@@ -141,21 +151,26 @@
 			name = Hash;
 			sourceTree = "<group>";
 		};
-		FD89E4221F1B42B9007376E8 /* Generic */ = {
+		FD89E4221F1B42B9007376E8 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FD89E41E1F1B42B9007376E8 /* GenericTime.cpp */,
-				FD89E41F1F1B42B9007376E8 /* GenericTime.h */,
-				FD89E4201F1B42B9007376E8 /* GenericWindow.cpp */,
-				FD89E4211F1B42B9007376E8 /* GenericWindow.h */,
+				FD11ADBD1F36C2EB00123D83 /* BaseLocale.h */,
+				FD11ADBE1F36C2EB00123D83 /* BaseScreen.h */,
+				FD11ADBF1F36C2EB00123D83 /* BaseTime.cpp */,
+				FD11ADC01F36C2EB00123D83 /* BaseTime.h */,
+				FD11ADC11F36C2EB00123D83 /* BaseTimeType.cpp */,
+				FD11ADC21F36C2EB00123D83 /* BaseTimeType.h */,
+				FD11ADC31F36C2EB00123D83 /* BaseWindow.cpp */,
+				FD11ADC41F36C2EB00123D83 /* BaseWindow.h */,
+				FD11ADC51F36C2EB00123D83 /* BaseWindowType.h */,
 			);
-			name = Generic;
+			name = Base;
 			sourceTree = "<group>";
 		};
 		FD89E4371F1B42B9007376E8 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				FD89E4221F1B42B9007376E8 /* Generic */,
+				FD89E4221F1B42B9007376E8 /* Base */,
 				FD89E4FB1F1B4E8D007376E8 /* MacOS */,
 				FD89E4331F1B42B9007376E8 /* Config.h */,
 				FD89E5021F1B5300007376E8 /* Locale.h */,
@@ -198,6 +213,7 @@
 		FD89E44A1F1B42B9007376E8 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				FD11ADCF1F37155B00123D83 /* StringTraits.h */,
 				FD89E4481F1B42B9007376E8 /* FixedString.h */,
 				FD89E4491F1B42B9007376E8 /* FixedStringUtility.h */,
 			);
@@ -277,22 +293,27 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD11ADCD1F36C2EB00123D83 /* BaseWindow.h in Headers */,
+				FD11ADCB1F36C2EB00123D83 /* BaseTimeType.h in Headers */,
 				FD024ACE1F24424700C369DB /* Color.h in Headers */,
+				FD11ADD01F37155B00123D83 /* StringTraits.h in Headers */,
 				FD89E4FD1F1B4F7C007376E8 /* MacOSConfig.h in Headers */,
 				FD7DF7681F1EE1AD002F65CA /* Delegate.h in Headers */,
 				FD89E5051F1B5330007376E8 /* MacOSLocale.h in Headers */,
 				FD89E4811F1B42B9007376E8 /* WELLRNG.h in Headers */,
 				FD89E46B1F1B42B9007376E8 /* Config.h in Headers */,
-				FD89E45B1F1B42B9007376E8 /* GenericWindow.h in Headers */,
 				FD89E4861F1B42B9007376E8 /* TypeInfo.h in Headers */,
 				FD89E5241F1B5FD5007376E8 /* PrecompiledHeader.pch in Headers */,
 				FD51C1A81F217E0E003F08B6 /* Window.h in Headers */,
+				FD11ADCE1F36C2EB00123D83 /* BaseWindowType.h in Headers */,
+				FD11ADC71F36C2EB00123D83 /* BaseScreen.h in Headers */,
 				FD89E5031F1B5300007376E8 /* Locale.h in Headers */,
 				FD89E4571F1B42B9007376E8 /* Hash.h in Headers */,
-				FD89E4591F1B42B9007376E8 /* GenericTime.h in Headers */,
 				FD89E4721F1B42B9007376E8 /* StaticIf.h in Headers */,
+				FD11ADC61F36C2EB00123D83 /* BaseLocale.h in Headers */,
 				FD89E47C1F1B42B9007376E8 /* Vector3.h in Headers */,
 				FD89E4841F1B42B9007376E8 /* Object.h in Headers */,
+				FD11ADC91F36C2EB00123D83 /* BaseTime.h in Headers */,
 				FD51C1A41F210803003F08B6 /* MacOSWindowUtility.h in Headers */,
 				FD51C1A11F21078D003F08B6 /* MacOSWindow.h in Headers */,
 				FD89E4751F1B42B9007376E8 /* Prefix.h in Headers */,
@@ -361,27 +382,26 @@
 				FD89E5261F1B6ACF007376E8 /* MacOSConfig.h in Sources */,
 				FD89E5271F1B6ACF007376E8 /* MacOSLocale.h in Sources */,
 				FD89E5281F1B6ACF007376E8 /* Locale.h in Sources */,
+				FD11ADC81F36C2EB00123D83 /* BaseTime.cpp in Sources */,
 				FD89E4E31F1B46C0007376E8 /* Hash.h in Sources */,
-				FD89E4E41F1B46C0007376E8 /* GenericTime.h in Sources */,
-				FD89E4E51F1B46C0007376E8 /* GenericWindow.h in Sources */,
 				FD89E4EE1F1B46C0007376E8 /* Config.h in Sources */,
 				FD89E4F21F1B46C0007376E8 /* StaticIf.h in Sources */,
 				FD51C1A61F210819003F08B6 /* MacOSWindowUtility.mm in Sources */,
 				FD89E4F31F1B46C0007376E8 /* Prefix.h in Sources */,
 				FD89E4F41F1B46C0007376E8 /* Vector3.h in Sources */,
+				FD11ADCC1F36C2EB00123D83 /* BaseWindow.cpp in Sources */,
 				FD89E4F51F1B46C0007376E8 /* WELLRNG.h in Sources */,
 				FD51C1A21F21078D003F08B6 /* MacOSWindow.mm in Sources */,
 				FD89E4F61F1B46C0007376E8 /* Object.h in Sources */,
 				FD89E4F71F1B46C0007376E8 /* TypeInfo.h in Sources */,
 				FD89E47D1F1B42B9007376E8 /* FixedString.h in Sources */,
 				FD89E4701F1B42B9007376E8 /* Array.h in Sources */,
-				FD89E45A1F1B42B9007376E8 /* GenericWindow.cpp in Sources */,
 				FD89E4741F1B42B9007376E8 /* Enumerator.h in Sources */,
-				FD89E4581F1B42B9007376E8 /* GenericTime.cpp in Sources */,
 				FD89E4801F1B42B9007376E8 /* WELLRNG.cpp in Sources */,
 				FD89E47B1F1B42B9007376E8 /* Vector3.cpp in Sources */,
 				FD89E47E1F1B42B9007376E8 /* FixedStringUtility.h in Sources */,
 				FD89E4791F1B42B9007376E8 /* Point.h in Sources */,
+				FD11ADCA1F36C2EB00123D83 /* BaseTimeType.cpp in Sources */,
 				FD89E4781F1B42B9007376E8 /* Math.h in Sources */,
 				FD89E4561F1B42B9007376E8 /* Hash.cpp in Sources */,
 				FD89E47A1F1B42B9007376E8 /* Rect.h in Sources */,
@@ -492,7 +512,7 @@
 		FDC8CB581F07EA5B00E59C64 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -508,7 +528,7 @@
 		FDC8CB591F07EA5B00E59C64 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

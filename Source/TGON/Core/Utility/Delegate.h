@@ -27,20 +27,20 @@
 #endif
 
 /**
- * @brief                   Binds delegate with global function or lambda
- * @param [in] function     Insert lambda or reference of global function(e.g. &functionName)
+ * @brief                   Binds delegate with lambda or global function
+ * @param [in] function     Lambda or Reference of global function(e.g. &functionName)
  */
 #define TGON_MAKE_DELEGATE_1(function)\
     [&]()\
     {\
-        auto lValueFunction = function;\
-        return tgon::utility::Delegate<tgon::utility::FunctionTraits<decltype(lValueFunction)>::FunctionType>::MakeDelegate(function);\
+        auto function = _function;\
+        return tgon::utility::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
     }()
 
 /**
  * @brief                   Binds delegate with class member function
  * @param [in] function     A Reference of class member function(e.g. &ClassName::functionName)
- * @param [in] instance     A Instance which handles the event
+ * @param [in] instance     A Instance which handles event
  */
 #define TGON_MAKE_DELEGATE_2(function, instance) tgon::utility::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::utility::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
@@ -175,7 +175,7 @@ template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType&& function) :
 	m_ptr(operator new(sizeof(_FunctionType))),
-    m_stub(&Stub<typename std::decay<_FunctionType>::type>),
+    m_stub(&MakeStub<typename std::decay<_FunctionType>::type>),
     m_deleter(&Deleter<typename std::decay<_FunctionType>::type>)
 {
     new (m_ptr) typename std::decay<_FunctionType>::type(std::forward<_FunctionType>(function));
@@ -306,35 +306,35 @@ template<typename _ReturnType, typename... _ArgTypes>
 template<_ReturnType(*Handler)(_ArgTypes...)>
 inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate() noexcept
 {
-    return Delegate(nullptr, &Stub<Handler>);
+    return Delegate(nullptr, &MakeStub<Handler>);
 }
 
 template<typename _ReturnType, typename... _ArgTypes>
 template<typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
 inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
 {
-    return Delegate(receiver, &Stub<_ClassType, Handler>);
+    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
 }
 
 template<typename _ReturnType, typename... _ArgTypes>
 template<typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
 inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
 {
-    return Delegate(receiver, &Stub<_ClassType, Handler>);
+    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
 }
 
 template<typename _ReturnType, typename... _ArgTypes>
 template<typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
 inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
 {
-    return Delegate(receiver, &Stub<_ClassType, Handler>);
+    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
 }
 
 template<typename _ReturnType, typename... _ArgTypes>
 template<typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
 inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
 {
-    return Delegate(receiver, &Stub<_ClassType, Handler>);
+    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
 }
 
 template<typename _ReturnType, typename... _ArgTypes>
