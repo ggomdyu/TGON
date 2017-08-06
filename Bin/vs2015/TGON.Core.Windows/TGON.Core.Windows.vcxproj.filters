@@ -25,19 +25,10 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.h">
@@ -61,18 +52,15 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsNativeConsole.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsSystem.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsTime.cpp">
@@ -89,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

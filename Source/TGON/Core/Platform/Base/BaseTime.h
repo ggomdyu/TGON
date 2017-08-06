@@ -1,14 +1,14 @@
 /**
- * @filename    GenericTime.h
+ * @filename    BaseTime.h
  * @author      ggomdyu
  * @since       05/15/2016
- * @desc        Set of Platform agnostic interface.
+ * @desc        Set of Platform-agnostic Time interface.
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
+#include "BaseTimeType.h"
 
-#include "GenericTimeType.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {

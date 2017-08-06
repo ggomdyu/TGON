@@ -23,7 +23,7 @@ class BasicFixedStringImpl
 {
 /* @section Type definition */
 public:
-    using TraitsType = std::char_traits<_CharType>;
+    using CharTraits = std::char_traits<_CharType>;
 
 public:
     constexpr BasicFixedStringImpl() noexcept = default;
@@ -39,6 +39,8 @@ protected:
     static std::size_t FindImpl(const _CharType* srcStr, std::size_t srcStrLength, const _CharType* srcFindStr, std::size_t offset, std::size_t srcFindStrLength);
 
     static int32_t CompareImpl(const _CharType* lhsStr, std::size_t lhsStrLength, const _CharType* rhsStr, std::size_t rhsStrLength);
+
+    static void AssignImpl(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount);
 };
 
 template <typename _CharType>
@@ -115,6 +117,19 @@ inline int32_t BasicFixedStringImpl<_CharType>::CompareImpl(const _CharType* lhs
     return 0;
 }
 
+template <typename _CharType>
+inline void BasicFixedStringImpl<_CharType>::AssignImpl(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount)
+{
+    assert(destBufferSize > chCount && "BasicFixedString buffer overflowed");
+
+    std::size_t i = 0;
+    while (i < chCount)
+    {
+		destBuffer[i++] = ch;
+    }
+
+	destBuffer[i] = static_cast<_CharType>(0);
+}
 } /* namespace detail */
 
 template <typename _CharType, std::size_t _Capacity>
@@ -125,7 +140,7 @@ class BasicFixedString :
 
 /* @section Type definition */
 public:
-    using TraitsType = std::char_traits<_CharType>;
+    using CharTraits = std::char_traits<_CharType>;
 
     using SizeType = decltype(_Capacity);
 

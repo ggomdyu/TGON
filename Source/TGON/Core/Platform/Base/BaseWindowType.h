@@ -1,5 +1,5 @@
 /**
- * @filename    GenericWindowType.h
+ * @filename    BaseWindowType.h
  * @author      ggomdyu
  * @since       05/05/2017
  */
@@ -22,6 +22,8 @@ public:
 	std::size_t y = 100;
 	std::size_t width = 500;
 	std::size_t height = 500;
+
+	uint32_t backgroundColor;
 
     bool borderless = false;
     bool enableSystemButton = true;

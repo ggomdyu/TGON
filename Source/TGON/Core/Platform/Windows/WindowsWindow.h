@@ -5,12 +5,12 @@
  */
 
 #pragma once
-#include "../Generic/GenericWindow.h"
-
+#include <Windows.h>
 #ifndef NOMINMAX
 #	define NOMINMAX
 #endif
-#include <Windows.h>
+
+#include "../Base/BaseWindow.h"
 
 namespace tgon
 {
@@ -20,7 +20,7 @@ namespace windows
 {
     
 class TGON_API WindowsWindow :
-    public GenericWindow
+    public BaseWindow
 {
 /* @section Ctor/Dtor */
 public:
@@ -45,7 +45,6 @@ public:
     void SetTransparent(float opacity);
     void SetPerPixelTransparent(float opacity);
     //void SetColorMask(/*maskColor*/);
-
     virtual void GetPosition(int32_t* x, int32_t* y) const override;
     virtual void GetSize(int32_t* width, int32_t* height) const override;
     virtual void GetCaptionTitle(char* destCaptionTitle) const override;
@@ -56,8 +55,13 @@ public:
     virtual bool IsMaximized() const override;
     virtual bool IsHidden() const override;
     bool IsTopMost() const;
-
     HWND GetWindowHandle() const noexcept;
+
+	LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam); 
+	virtual void OnGetFocus() {}
+	virtual void OnLoseFocus() {}
+	virtual void OnMove(std::size_t x, std::size_t y) {}
+	virtual void OnResize(std::size_t width, std::size_t height) {}
 
 private:
 	HWND m_wndHandle;

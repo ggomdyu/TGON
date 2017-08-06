@@ -5,9 +5,9 @@
 #endif
 
 #include <Core/Platform/Window.h>
+#include <Core/Platform/Screen.h>
 #include <Core/Platform/Application.h>
 #include <Core/Platform/Time.h>
-#include <Core/Platform/TNativeConsole.h>
 #include <Core/Utility/AutoCast.h>
 #include <Core/Utility/Array.h>
 #include <Core/Utility/Enumerator.h>

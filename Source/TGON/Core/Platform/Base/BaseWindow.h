@@ -1,8 +1,8 @@
 /**
- * @filename    GenericWindow.h
+ * @filename    BaseWindow.h
  * @author      ggomdyu
  * @since       01/09/2016
- * @desc        Set of Platform agnostic interface.
+ * @desc        Set of Platform-agnostic Window interface.
  */
 
 #pragma once
@@ -10,21 +10,21 @@
 #include <cstdint>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
+#include "BaseWindowType.h"
 
-#include "GenericWindowType.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
 namespace platform
 {
 
-class TGON_API GenericWindow
+class TGON_API BaseWindow
 {
 /* @section Ctor/Dtor */
 public:
-    GenericWindow();
-    virtual ~GenericWindow();
+    BaseWindow();
+    virtual ~BaseWindow();
     
 /* @section Public method */
 public:

@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.pch"
-#include "GenericTimeType.h"
+
+#include "BaseTimeType.h"
 
 namespace tgon {
 namespace platform {

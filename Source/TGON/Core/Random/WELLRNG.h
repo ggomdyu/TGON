@@ -14,7 +14,7 @@ namespace tgon
 namespace random
 {
 
-/* @return  Return random value between 0.0 ~ 1.0 */
+/* @brief	Get random value between 0.0 ~ 1.0 */
 TGON_API double WELLRNG1024a();
 
 } /* namespace random */

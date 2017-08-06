@@ -17,48 +17,46 @@ namespace utility
 template <typename>
 struct FunctionTraits;
 
-/* @brief   Traits for global function */
-template <typename _ReturnType, typename... _Params>
-struct FunctionTraits<_ReturnType(_Params...)>
+template <typename _ReturnType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
+	enum { ArgumentCount = sizeof...(_ArgTypes), };
+
 	using ReturnType = _ReturnType;
 
-    using FunctionType = _ReturnType(_Params...);
-    using FunctionPtrType = _ReturnType(*)(_Params...);
-
-    enum { ParameterCount = sizeof...(_Params), };
-    using ParameterPackType = std::tuple<_Params...>;
+    using FunctionType = _ReturnType(_ArgTypes...);
+    using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
 };
 
-template <typename _ReturnType, typename... _Params>
-struct FunctionTraits<_ReturnType(*)(_Params...)> :
-	public FunctionTraits<_ReturnType(_Params...)>
+template <typename _ReturnType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> :
+	public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 };
 
 /* @brief   Traits for class member function */
-template <typename _ReturnType, typename _ClassType, typename... _Params>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Params...)> :
-	public FunctionTraits<_ReturnType(_Params...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
+	public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 	using ClassType = _ClassType;
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Params>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Params...) const> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_Params...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> :
+	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Params>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Params...) volatile> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_Params...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> :
+	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
-template <typename _ReturnType, typename _ClassType, typename... _Params>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_Params...) const volatile> :
-    public FunctionTraits<_ReturnType(_ClassType::*)(_Params...)>
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
+    public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 

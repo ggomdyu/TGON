@@ -10,15 +10,15 @@
 namespace tgon {
 //namespace engine {
 
-class TGON_API TEngine :
+class TGON_API Engine :
 	public ModuleContext
 {
 public:
-	TGON_MAKE_OBJECT_INTERFACE(TEngine)
+	TGON_MAKE_OBJECT_INTERFACE(Engine)
 
 public:
-    TEngine();
-    virtual ~TEngine() = default;
+    Engine();
+    virtual ~Engine() = default;
 
 public:
     int32_t Execute(int argc, char** argv);

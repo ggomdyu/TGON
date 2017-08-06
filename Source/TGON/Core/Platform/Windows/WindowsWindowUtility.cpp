@@ -1,9 +1,10 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsWindowUtility.h"
 
 #include <cassert>
 
+#include "WindowsWindowUtility.h"
 #include "WindowsWindow.h"
+
 #include "Core/String/TEncoding.h"
 
 namespace tgon
@@ -53,7 +54,7 @@ void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, DWORD* extendedS
     }
 }
 
-HWND CreateNativeWindow(const WindowStyle& windowStyle, const wchar_t* className, HINSTANCE instanceHandle, void* extraParam)
+HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
 	// Converts WindowStyle to platform dependent style.
 	DWORD exStyle, normalStyle;
@@ -83,14 +84,14 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, const wchar_t* className
 
     if (wndHandle != nullptr)
     {
-        ::SetForegroundWindow(wndHandle);
-        ::SetFocus(wndHandle);
+        //::SetForegroundWindow(wndHandle);
+        //::SetFocus(wndHandle);
     }
 
 	return wndHandle;
 }
 
-void ReshapeWindowForm(const WindowsWindow& from, const WindowsWindow& to)
+void CopyAndPasteWindowShape(const WindowsWindow& from, const WindowsWindow& to)
 {
     // Change placement of the Window.
     {
