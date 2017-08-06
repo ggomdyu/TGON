@@ -114,15 +114,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TEncoding.cpp">
       <Filter>Sources\Core\String</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseTime.cpp">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseTimeType.cpp">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseWindow.cpp">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseTimeType.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\Engine.h">
@@ -172,12 +166,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Extent.h">
       <Filter>Sources\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedString.h">
-      <Filter>Sources\Core\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringUtility.h">
-      <Filter>Sources\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ExpressionTemplate.h">
       <Filter>Sources\Core\Utility</Filter>
@@ -252,30 +240,18 @@
       <Filter>Sources\Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch" />
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\ApplicationType.h">
-      <Filter>Sources\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseTime.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseWindow.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseWindowType.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseLocale.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseTimeType.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Math\Color.h">
-      <Filter>Sources\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Platform\Base\BaseScreen.h">
-      <Filter>Sources\Core\Platform\Base</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Color.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseLocale.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseScreen.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseTimeType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseWindow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseWindowType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\ApplicationType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\BuiltinReadOnlyString.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedString.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringUtility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringTraits.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">

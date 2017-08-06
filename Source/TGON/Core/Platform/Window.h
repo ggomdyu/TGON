@@ -27,7 +27,7 @@ namespace platform
 using SharedWindow = std::shared_ptr<platform::Window>;
 
 template <typename _WindowType, typename... _ArgTypes, typename = typename std::enable_if<std::is_convertible<_WindowType*, Window*>::value>::type>
-SharedWindow MakeWindow(_ArgTypes&&... args)
+inline SharedWindow MakeWindow(_ArgTypes&&... args)
 {
     return std::make_shared<_WindowType>(std::forward<_ArgTypes>(args)...);
 }

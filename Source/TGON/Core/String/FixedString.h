@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <array>
 #include <memory>
 #include <cstdint>
 #include <cassert>
@@ -42,8 +41,8 @@ public:
     using StringTraits<_CharType>::StringTraits;
 
     constexpr BasicFixedString() noexcept = default;
-    template <std::size_t _BufferSize>
-    constexpr BasicFixedString(const _CharType(&str)[_BufferSize]);
+    template <std::size_t _CharArraySize2>
+    constexpr BasicFixedString(const _CharType(&str)[_CharArraySize2]);
     constexpr BasicFixedString(const _CharType* str, std::size_t length);
     constexpr BasicFixedString(std::size_t length, _CharType ch);
 
@@ -76,8 +75,8 @@ public:
     template <std::size_t _CharArraySize2>
     BasicFixedString<_CharType, _CharArraySize + _CharArraySize2> Extend(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const;
 
-    template <std::size_t _BufferSize>
-    void Assign(const _CharType(&str)[_BufferSize]);
+    template <std::size_t _CharArraySize2>
+    void Assign(const _CharType(&str)[_CharArraySize2]);
     void Assign(const _CharType* str, std::size_t length);
     void Assign(std::size_t length, _CharType ch);
 
@@ -88,17 +87,17 @@ public:
     std::size_t Find(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const;
     std::size_t Find(const BasicFixedString& rhs) const;
     std::size_t Find(_CharType ch, std::size_t offset = 0) const;
-    template <std::size_t _BufferSize>
-    std::size_t Find(const _CharType(&str)[_BufferSize], std::size_t offset = 0) const;
+    template <std::size_t _CharArraySize2>
+    std::size_t Find(const _CharType(&str)[_CharArraySize2], std::size_t offset = 0) const;
     std::size_t Find(const _CharType* str, std::size_t offset, std::size_t strLen) const;
 
-    // Rfind 함수는 테스트 필요
+    // Todo: need test
     template <std::size_t _CharArraySize2>
     std::size_t Rfind(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const;
     std::size_t Rfind(const BasicFixedString& rhs) const;
     std::size_t Rfind(_CharType ch, std::size_t offset = 0) const;
-    template <std::size_t _BufferSize>
-    std::size_t Rfind(const _CharType(&str)[_BufferSize], std::size_t offset = 0) const;
+    template <std::size_t _CharArraySize2>
+    std::size_t Rfind(const _CharType(&str)[_CharArraySize2], std::size_t offset = 0) const;
     std::size_t Rfind(const _CharType* str, std::size_t offset, std::size_t count) const;
 
     _CharType& At(std::size_t index);
@@ -141,9 +140,9 @@ using FixedString128 = BasicFixedString<char, 128>;
 using FixedWString128 = BasicFixedString<wchar_t, 128>;
 
 template <typename _CharType, std::size_t _CharArraySize>
-template <std::size_t _BufferSize>
-constexpr BasicFixedString<_CharType, _CharArraySize>::BasicFixedString(const _CharType(&str)[_BufferSize]) :
-    BasicFixedString(str, _BufferSize - 1)
+template <std::size_t _CharArraySize2>
+constexpr BasicFixedString<_CharType, _CharArraySize>::BasicFixedString(const _CharType(&str)[_CharArraySize2]) :
+    BasicFixedString(str, _CharArraySize2 - 1)
 {
 }
 
@@ -173,7 +172,7 @@ template <typename _CharType, std::size_t _CharArraySize>
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize>& BasicFixedString<_CharType, _CharArraySize>::operator=(const BasicFixedString<_CharType, _CharArraySize2>& rhs)
 {
-    this->Assign(rhs.CStr(), rhs.Length());
+    StringTraits<_CharType>::Assign(rhs.CStr(), rhs.Length());
 
     return *this;
 }
@@ -218,9 +217,9 @@ inline BasicFixedString<_CharType, _CharArraySize>& BasicFixedString<_CharType, 
 template <typename _CharType, std::size_t _CharArraySize>
 inline BasicFixedString<_CharType, _CharArraySize>& BasicFixedString<_CharType, _CharArraySize>::operator+=(const BasicFixedString& rhs)
 {
-	assert(_CharArraySize > m_length + rhs.Length() && "BasicFixedString buffer overflowed");
+	assert(_CharArraySize > m_length + rhs.m_length && "BasicFixedString buffer overflowed");
 
-	std::memcpy(&m_str[m_length], rhs.m_str.data(), sizeof(_CharType) * (rhs.m_length + 1));
+	std::memcpy(&m_str[m_length], rhs.m_str, sizeof(_CharType) * (rhs.m_length + 1));
 
 	m_length += rhs.m_length;
 
@@ -242,7 +241,7 @@ template <typename _CharType, std::size_t _CharArraySize>
 template <std::size_t _CharArraySize2>
 inline bool BasicFixedString<_CharType, _CharArraySize>::operator==(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const
 {
-	return this->CompareImpl(m_str.data(), m_length, rhs.CStr(), rhs.Length()) == 0;
+	return StringTraits<_CharType>::Compare(m_str, m_length, rhs.CStr(), rhs.Length()) == 0;
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
@@ -268,8 +267,8 @@ inline BasicFixedString<_CharType, _CharArraySize + _CharArraySize2> BasicFixedS
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
-template <std::size_t _BufferSize>
-inline void BasicFixedString<_CharType, _CharArraySize>::Assign(const _CharType(&str)[_BufferSize])
+template <std::size_t _CharArraySize2>
+inline void BasicFixedString<_CharType, _CharArraySize>::Assign(const _CharType(&str)[_CharArraySize2])
 {
     new (this) BasicFixedString(str);
 }
@@ -290,58 +289,58 @@ template <typename _CharType, std::size_t _CharArraySize>
 template <std::size_t _CharArraySize2>
 inline int32_t BasicFixedString<_CharType, _CharArraySize>::Compare(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const
 {
-    return this->Compare(m_str.data(), m_str.Length(), rhs.data(), rhs.Length());
+    return StringTraits<_CharType>::Compare(m_str, m_length, rhs.CStr(), rhs.Length());
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
 template <std::size_t _CharArraySize2>
 inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(const BasicFixedString<_CharType, _CharArraySize2>& rhs) const
 {
-    return this->Find(m_str.data(), m_length, rhs.CStr(), 0, rhs.Length());
+    return StringTraits<_CharType>::Find(m_str, m_length, rhs.CStr(), 0, rhs.Length());
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
 inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(const BasicFixedString& rhs) const
 {
-    return this->Find(m_str.data(), m_length, rhs.CStr(), 0, rhs.Length());
+    return StringTraits<_CharType>::Find(m_str, m_length, rhs.CStr(), 0, rhs.Length());
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
 inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(_CharType ch, std::size_t offset) const
 {
-	return this->Find(m_str.data(), m_length, &ch, offset, 1);
+	return StringTraits<_CharType>::Find(m_str, m_length, &ch, offset, 1);
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
-template <std::size_t _BufferSize>
-inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(const _CharType(&str)[_BufferSize], std::size_t offset) const
+template <std::size_t _CharArraySize2>
+inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(const _CharType(&str)[_CharArraySize2], std::size_t offset) const
 {
-    return StringTraits<_CharType>::Find(m_str.data(), m_length, str, offset, _BufferSize - 1);
+    return StringTraits<_CharType>::Find(m_str, m_length, str, offset, _CharArraySize2 - 1);
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
 inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Find(const _CharType* str, std::size_t offset, std::size_t count) const
 {
-    return this->Find(m_str.data(), m_length, str, offset, count);
+    return StringTraits<_CharType>::Find(m_str, m_length, str, offset, count);
 }
 
 template <typename _CharType, std::size_t _CharArraySize>
-template <std::size_t _BufferSize>
-inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Rfind(const _CharType(&str)[_BufferSize], std::size_t offset) const
+template <std::size_t _CharArraySize2>
+inline std::size_t BasicFixedString<_CharType, _CharArraySize>::Rfind(const _CharType(&str)[_CharArraySize2], std::size_t offset) const
 {
-    if ((offset > m_length) || ((m_length - offset) < _BufferSize - 1))
+    if ((offset > m_length) || ((m_length - offset) < _CharArraySize2 - 1))
     {
         return NPos;
     }
 
-    if (_BufferSize == 0)
+    if (_CharArraySize2 == 0)
     {
         return offset;
     }
 
     // error!!
-    const _CharType* foundStr = std::find_end(m_str.data() + offset, m_str.data() + m_length, str, str + _BufferSize - 1);
-    if (foundStr == m_str.data() + m_length)
+    const _CharType* foundStr = std::find_end(m_str + offset, m_str.CStr() + m_length, str, str + _CharArraySize2 - 1);
+    if (foundStr == m_str + m_length)
     {
         return NPos;
     }

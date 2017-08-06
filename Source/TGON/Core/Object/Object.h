@@ -45,14 +45,18 @@ public:
     using Super = This;\
 	using This = classType;\
 	\
-    virtual std::size_t GetHashCode() const override\
+    virtual std::size_t GetHashCode() const noexcept override\
     {\
-        return tgon::hash::x65599Hash(#classType);\
+        return hash::x65599Hash(GetTypeInfo().CStr());\
     }\
     virtual const char* GetTypeName() const noexcept override\
     {\
-        static constexpr const char* typeName = #classType;\
-        return typeName;\
+        return GetTypeInfo().CStr();\
+    }\
+    static const decltype(tgon::string::MakeBuiltinReadOnlyString(#classType))& GetTypeInfo() noexcept\
+    {\
+        static auto typeInfo = tgon::string::MakeBuiltinReadOnlyString(#classType);\
+        return typeInfo;\
     }
 
 // Todo: Implement interface's below

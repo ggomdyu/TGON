@@ -17,16 +17,15 @@
 #include <Core/Math/Rect.h>
 #include <Core/Math/Point.h>
 #include <Core/Object/Object.h>
-#include <Core/String/FixedString.h>
+#include <Core/String/FixedStringUtility.h>
+#include <Core/String/BuiltinReadOnlyStringUtility.h>
 #include <Core/String/TEncoding.h>
 
 #include <Engine/GameApplication.h>
 
+#include <iostream>
+
 using namespace tgon;
-
-#define LOGC(msg, p1) platform::TNativeConsole::Get()->WriteLine(msg, p1);
-
-
 
 class CustomWindow :
     public platform::Window
@@ -48,6 +47,9 @@ public:
     TGONSample() :
         GameApplication(platform::MakeWindow<platform::Window>(platform::WindowStyle{}))
     {
+        auto hashCode = this->GetHashCode();
+
+        int n = 3;
 	}
 
     virtual ~TGONSample()

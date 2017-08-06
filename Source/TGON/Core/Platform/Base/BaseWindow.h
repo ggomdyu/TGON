@@ -60,10 +60,9 @@ inline BaseWindow<_DerivedType>::BaseWindow() :
 }
 
 template <typename _DerivedType>
-inline BaseWindow<_DerivedType>::~BaseWindow()
+inline BaseWindow<_DerivedType>::~BaseWindow() 
 {
     m_isClosed = true;
-    static_cast<_DerivedType*>(this)->~_DerivedType();
 }
 
 template <typename _DerivedType>
@@ -165,7 +164,7 @@ inline bool BaseWindow<_DerivedType>::IsMinimized() const
 template <typename _DerivedType>
 inline bool BaseWindow<_DerivedType>::IsClosed() const noexcept
 {
-    return static_cast<_DerivedType*>(this)->IsClosed();
+	return static_cast<_DerivedType*>(this)->IsClosed();
 }
 
 } /* namespace platform */

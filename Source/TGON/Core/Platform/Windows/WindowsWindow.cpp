@@ -129,6 +129,11 @@ bool WindowsWindow::IsTopMost() const
     return false;
 }
 
+bool WindowsWindow::IsClosed() const noexcept
+{
+    return m_isClosed;
+}
+
 HWND WindowsWindow::GetWindowHandle() const noexcept
 {
     return m_wndHandle;
