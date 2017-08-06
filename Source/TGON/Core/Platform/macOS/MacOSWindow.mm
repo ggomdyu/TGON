@@ -69,17 +69,23 @@ void MacOSWindow::GetCaptionTitle(char* destCaptionTitle) const
 
 bool MacOSWindow::HasCaption() const
 {
-    return [m_nsWindow hasTitleBar];
+    return static_cast<bool>([m_nsWindow hasTitleBar]);
 }
 
 bool MacOSWindow::IsResizable() const
 {
-    return [m_nsWindow isResizable];
+    return static_cast<bool>([m_nsWindow isResizable]);
 }
 
-bool MacOSWindow::IsHidden() const
+bool MacOSWindow::IsMaximized() const
 {
-    return [m_nsWindow isMiniaturized];
+    // todo: 잘 되는지 확인 필요
+    return static_cast<bool>([m_nsWindow isZoomed]);
+}
+
+bool MacOSWindow::IsMinimized() const
+{
+    return static_cast<bool>([m_nsWindow isMiniaturized]);
 }
 
 } /* namespace macos */

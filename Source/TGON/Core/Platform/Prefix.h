@@ -17,8 +17,10 @@
 #		else
 #			define TGON_THREAD_LOCAL static __declspec(thread)
 #		endif
-#	else
+#   elif (__cplusplus >= 201103L)
 #		define TGON_THREAD_LOCAL thread_local
+#   else
+#       define TGON_THREAD_LOCAL
 #	endif
 #endif
 

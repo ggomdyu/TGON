@@ -52,8 +52,8 @@ public:
      * @param [out] destBuffer      The destination of the string to be written.
      * @return                      The length of string converted.
      */
-    template <std::size_t N>
-    int32_t ToString(char(&destBuffer)[N]) const;
+    template <std::size_t _BufferSize>
+    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
@@ -73,7 +73,7 @@ public:
     _ValueType width;
     _ValueType height;
 
-	static const Rect One;		    // 0, 0, 0, 0
+	static const Rect One;		// 0, 0, 0, 0
 	static const Rect Zero;	    // 1, 1, 1, 1
 	static const Rect MinusOne;	// -1, -1, -1, -1
 };
@@ -206,13 +206,13 @@ constexpr bool Rect<_ValueType>::operator!=(const Rect& rhs) const noexcept
 }
 
 template<typename _ValueType>
-template<std::size_t N>
-inline int32_t Rect<_ValueType>::ToString(char(&destBuffer)[N]) const
+template<std::size_t _BufferSize>
+inline int32_t Rect<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, "%d %d %d %d", bottom, top, width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * N, "%d %d %d %d", bottom, top, width, height);
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%d %d %d %d", bottom, top, width, height);
 #endif
 }
 

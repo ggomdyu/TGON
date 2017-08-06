@@ -48,7 +48,7 @@ constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::AutoCastProxy(_CastFrom
 
 struct SafeCastPolicy
 {
-/* @section Public method */
+/* @section Protected method */
 protected:
     template <typename _CastFromType, typename _CastToType>
     constexpr _CastToType Cast(_CastFromType&& castFromPtr) const noexcept;
@@ -62,7 +62,7 @@ constexpr _CastToType SafeCastPolicy::Cast(_CastFromType&& castFromPtr) const no
 
 struct ForceCastPolicy
 {
-/* @section Public method */
+/* @section Protected method */
 protected:
     template <typename _CastFromType, typename _CastToType>
     constexpr _CastToType Cast(_CastFromType&& castFromPtr) const noexcept;

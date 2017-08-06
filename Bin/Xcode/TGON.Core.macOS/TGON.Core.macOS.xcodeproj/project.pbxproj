@@ -62,6 +62,7 @@
 		FD89E5261F1B6ACF007376E8 /* MacOSConfig.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4FC1F1B4F7C007376E8 /* MacOSConfig.h */; };
 		FD89E5271F1B6ACF007376E8 /* MacOSLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E5041F1B5330007376E8 /* MacOSLocale.h */; };
 		FD89E5281F1B6ACF007376E8 /* Locale.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E5021F1B5300007376E8 /* Locale.h */; };
+		FDBF5A111F2C7F89001A9222 /* ForEach.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBF5A101F2C7F89001A9222 /* ForEach.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,7 @@
 		FD89E5021F1B5300007376E8 /* Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Locale.h; path = ../../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
 		FD89E5041F1B5330007376E8 /* MacOSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSLocale.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSLocale.h; sourceTree = "<group>"; };
 		FD89E5231F1B5FD5007376E8 /* PrecompiledHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrecompiledHeader.pch; path = ../../../Source/TGON/PrecompiledHeader.pch; sourceTree = "<group>"; };
+		FDBF5A101F2C7F89001A9222 /* ForEach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForEach.h; path = ../../../Source/TGON/Core/Utility/ForEach.h; sourceTree = "<group>"; };
 		FDC8CB531F07EA5B00E59C64 /* libTGON.Core.macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.Core.macOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -171,6 +173,7 @@
 				FD7DF7671F1EE1AD002F65CA /* Delegate.h */,
 				FD89E43D1F1B42B9007376E8 /* Enumerator.h */,
 				FD89E43C1F1B42B9007376E8 /* ExpressionTemplate.h */,
+				FDBF5A101F2C7F89001A9222 /* ForEach.h */,
 				FD89E43E1F1B42B9007376E8 /* Prefix.h */,
 				FD89E43B1F1B42B9007376E8 /* StaticIf.h */,
 				FD89E43F1F1B42B9007376E8 /* TypeTraits.h */,
@@ -293,6 +296,7 @@
 				FD51C1A41F210803003F08B6 /* MacOSWindowUtility.h in Headers */,
 				FD51C1A11F21078D003F08B6 /* MacOSWindow.h in Headers */,
 				FD89E4751F1B42B9007376E8 /* Prefix.h in Headers */,
+				FDBF5A111F2C7F89001A9222 /* ForEach.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +492,7 @@
 		FDC8CB581F07EA5B00E59C64 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -503,6 +508,7 @@
 		FDC8CB591F07EA5B00E59C64 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -45,8 +45,8 @@ public:
     constexpr bool operator==(const Point&) const noexcept;
     constexpr bool operator!=(const Point&) const noexcept;
 
-    template <typename _CastToTy>
-    constexpr operator Point<_CastToTy>() const noexcept;
+    template <typename _CastToType>
+    constexpr operator Point<_CastToType>() const noexcept;
 
 /* @section Public method */
 public:
@@ -189,10 +189,10 @@ inline constexpr bool Point<_ValueType>::operator!=(const Point& rhs) const noex
 }
 
 template<typename _ValueType>
-template<typename _CastToTy>
-constexpr Point<_ValueType>::operator Point<_CastToTy>() const noexcept
+template<typename _CastToType>
+constexpr Point<_ValueType>::operator Point<_CastToType>() const noexcept
 {
-    return Point<_CastToTy>((_CastToTy)x, (_CastToTy)y);
+    return Point<_CastToType>((_CastToType)x, (_CastToType)y);
 }
 
 template<typename _ValueType>
@@ -219,7 +219,7 @@ inline int32_t Point<_ValueType>::ToString(char* destBuffer, std::size_t bufferS
 template<typename _ValueType>
 inline std::string Point<_ValueType>::ToString() const
 {
-    char buffer[128]{};
+    char buffer[128] {};
     this->ToString(buffer);
 
     return buffer;

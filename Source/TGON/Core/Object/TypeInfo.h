@@ -15,51 +15,43 @@ namespace tgon
 namespace object
 {
 
-template <std::size_t TypeNameLength>
+template <typename _TypeNameCharType, std::size_t _TypeNameLength>
 struct TypeInfo
 {
 /* @section Ctor/Dtor */
 public:
-    explicit TypeInfo(const char(&typeName)[TypeNameLength]);
-    TypeInfo(const char* typeName, std::size_t length);
-
-/* @section Private variable */
-private:
-    string::BasicFixedString<char, TypeNameLength> m_typeName;
+    constexpr explicit TypeInfo(const char(&typeName)[_TypeNameLength]);
 
 /* @section Public method */
 public:
     constexpr std::size_t GetHashCode() const;
+    constexpr const string::BasicFixedString<char, _TypeNameLength>& GetTypeName() const noexcept;
 
-    constexpr const decltype(m_typeName)& GetTypeName() const noexcept
-    {
-        return m_typeName;
-    }
+/* @section Private variable */
+private:
+    char m_typeName[_TypeNameLength];
 };
 
-template <std::size_t TypeNameLength>
-inline TypeInfo<TypeNameLength>::TypeInfo(const char(&typeName)[TypeNameLength]) :
-    m_typeName(typeName)
+template <typename _TypeNameCharType, std::size_t _TypeNameLength>
+constexpr TypeInfo<_TypeNameCharType, _TypeNameLength>::TypeInfo(const char(&typeName)[_TypeNameLength])
 {
+    for (std::size_t i = 0; i < _TypeNameLength; ++i)
+    {
+        m_typeName[i] = typeName[i];
+    }
 }
 
-template <std::size_t TypeNameLength>
-inline TypeInfo<TypeNameLength>::TypeInfo(const char* typeName, std::size_t length) :
-    m_typeName(typeName, length)
+template <typename _TypeNameCharType, std::size_t _TypeNameLength>
+constexpr std::size_t TypeInfo<_TypeNameCharType, _TypeNameLength>::GetHashCode() const
 {
+    return hash::x65599Hash("");
 }
 
-template <std::size_t TypeNameLength>
-constexpr std::size_t TypeInfo<TypeNameLength>::GetHashCode() const
+template <typename _TypeNameCharType, std::size_t _TypeNameLength>
+constexpr const string::BasicFixedString<char, _TypeNameLength>& TypeInfo<_TypeNameCharType, _TypeNameLength>::GetTypeName() const noexcept
 {
-    return hash::x65599Hash(m_typeName.CStr());
+    return "";
 }
-
-//template <std::size_t N>
-//constexpr const decltype(TypeInfoTest<N>::m_typeName)& TypeInfoTest<N>::GetTypeName() const noexcept
-//{
-//    return m_typeName;
-//}
 
 } /* namespace object */
 } /* namespace tgon */

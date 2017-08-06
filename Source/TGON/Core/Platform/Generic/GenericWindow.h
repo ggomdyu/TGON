@@ -45,7 +45,7 @@ public:
     virtual bool HasCaption() const = 0;
     virtual bool IsResizable() const = 0;
 	virtual bool IsMaximized() const = 0;
-	virtual bool IsHidden() const = 0;
+	virtual bool IsMinimized() const = 0;
     bool IsClosed() const noexcept;
 
 /* @section Protected variable */

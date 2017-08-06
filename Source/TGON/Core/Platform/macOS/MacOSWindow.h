@@ -29,6 +29,9 @@ public:
     virtual void Show() override {}
     virtual void Hide() override {}
     virtual void Quit() override {}
+    virtual void Maximize() override {}
+    virtual void Minimize() override {}
+    virtual void BringToFront() override {}
     
     virtual void SetPosition(int32_t x, int32_t y) override;
     virtual void SetSize(int32_t width, int32_t height) override;
@@ -39,7 +42,8 @@ public:
     virtual void GetCaptionTitle(char* destCaptionTitle) const override;
     virtual bool HasCaption() const override;
     virtual bool IsResizable() const override;
-    virtual bool IsHidden() const override;
+    virtual bool IsMaximized() const override;
+    virtual bool IsMinimized() const override;
 
 /* @section Private variable */
 private:

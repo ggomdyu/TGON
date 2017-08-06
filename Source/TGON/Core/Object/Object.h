@@ -21,26 +21,19 @@ namespace object
 
 class TGON_API Object
 {
-/**
- * @section Type definition
- */
+/* @section Type definition */
 public:
 	using Super = void;
 	using This = Object;
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
     Object() = default;
 	virtual ~Object() = default;
 
-/**
- * @section Public method
- */
+/* @section Public method */
 public:
-	virtual std::size_t GetTypeHashCode() const = 0;
-
+	virtual std::size_t GetHashCode() const = 0;
     virtual const char* GetTypeName() const noexcept = 0;
 };
 
@@ -51,18 +44,14 @@ public:
     using Super = This;\
 	using This = classType;\
 	\
-    virtual std::size_t GetTypeHashCode() const noexcept override\
+    virtual std::size_t GetHashCode() const override\
     {\
-        return classType::GetTypeInfo().GetHashCode();\
+        return tgon::hash::x65599Hash(#classType);\
     }\
     virtual const char* GetTypeName() const noexcept override\
     {\
-        return classType::GetTypeInfo().GetTypeName().CStr();\
-    }\
-    static const tgon::object::TypeInfo<tgon::utility::GetArraySize(#classType)>& GetTypeInfo() noexcept\
-    {\
-        tgon::object::TypeInfo<tgon::utility::GetArraySize(#classType)> typeInfo(#classType);\
-        return typeInfo;\
+        static constexpr const char* typeName = #classType;\
+        return typeName;\
     }
 
 // Todo: Implement interface's below
