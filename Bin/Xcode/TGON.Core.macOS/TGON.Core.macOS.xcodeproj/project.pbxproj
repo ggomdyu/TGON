@@ -18,6 +18,7 @@
 		FD11ADCD1F36C2EB00123D83 /* BaseWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC41F36C2EB00123D83 /* BaseWindow.h */; };
 		FD11ADCE1F36C2EB00123D83 /* BaseWindowType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADC51F36C2EB00123D83 /* BaseWindowType.h */; };
 		FD11ADD01F37155B00123D83 /* StringTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADCF1F37155B00123D83 /* StringTraits.h */; };
+		FD11ADD41F37571200123D83 /* BuiltinReadOnlyString.h in Headers */ = {isa = PBXBuildFile; fileRef = FD11ADD31F37571200123D83 /* BuiltinReadOnlyString.h */; };
 		FD51C1A11F21078D003F08B6 /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C19F1F21078D003F08B6 /* MacOSWindow.h */; };
 		FD51C1A21F21078D003F08B6 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */; };
 		FD51C1A41F210803003F08B6 /* MacOSWindowUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */; };
@@ -81,6 +82,7 @@
 		FD11ADC41F36C2EB00123D83 /* BaseWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseWindow.h; path = ../../../Source/TGON/Core/Platform/Base/BaseWindow.h; sourceTree = "<group>"; };
 		FD11ADC51F36C2EB00123D83 /* BaseWindowType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseWindowType.h; path = ../../../Source/TGON/Core/Platform/Base/BaseWindowType.h; sourceTree = "<group>"; };
 		FD11ADCF1F37155B00123D83 /* StringTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringTraits.h; path = ../../../Source/TGON/Core/String/StringTraits.h; sourceTree = "<group>"; };
+		FD11ADD31F37571200123D83 /* BuiltinReadOnlyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuiltinReadOnlyString.h; path = ../../../Source/TGON/Core/String/BuiltinReadOnlyString.h; sourceTree = "<group>"; };
 		FD51C19F1F21078D003F08B6 /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindow.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.h; sourceTree = "<group>"; };
 		FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindow.mm; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindow.mm; sourceTree = "<group>"; };
 		FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtility.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.h; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		FD89E44A1F1B42B9007376E8 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				FD11ADD31F37571200123D83 /* BuiltinReadOnlyString.h */,
 				FD11ADCF1F37155B00123D83 /* StringTraits.h */,
 				FD89E4481F1B42B9007376E8 /* FixedString.h */,
 				FD89E4491F1B42B9007376E8 /* FixedStringUtility.h */,
@@ -306,6 +309,7 @@
 				FD89E5241F1B5FD5007376E8 /* PrecompiledHeader.pch in Headers */,
 				FD51C1A81F217E0E003F08B6 /* Window.h in Headers */,
 				FD11ADCE1F36C2EB00123D83 /* BaseWindowType.h in Headers */,
+				FD11ADD41F37571200123D83 /* BuiltinReadOnlyString.h in Headers */,
 				FD11ADC71F36C2EB00123D83 /* BaseScreen.h in Headers */,
 				FD89E5031F1B5300007376E8 /* Locale.h in Headers */,
 				FD89E4571F1B42B9007376E8 /* Hash.h in Headers */,

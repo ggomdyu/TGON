@@ -16,7 +16,7 @@ namespace string
 {
 
 template <typename _CharType, std::size_t _BufferSize>
-constexpr auto MakeFixedString(const _CharType(&str)[_BufferSize]) -> BasicFixedString<typename std::decay<_CharType>::type, _BufferSize>
+constexpr BasicFixedString<typename std::decay<_CharType>::type, _BufferSize> MakeFixedString(const _CharType(&str)[_BufferSize])
 {
     return {str, _BufferSize - 1};
 }
