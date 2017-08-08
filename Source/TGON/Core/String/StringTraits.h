@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <algorithm>
+#include <cassert>
 
 namespace tgon
 {
@@ -14,7 +16,7 @@ namespace string
 template <typename _CharType>
 class StringTraits
 {
-/* @section Type definition */
+/* @section Public type */
 public:
     using CharTraits = std::char_traits<_CharType>;
 
@@ -27,7 +29,7 @@ public:
 public:
     static constexpr std::size_t NPos = static_cast<std::size_t>(-1);
 
-/* @section Public method */
+/* @section Protected method */
 protected:
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLength, const _CharType* srcFindStr, std::size_t offset, std::size_t srcFindStrLength);
 

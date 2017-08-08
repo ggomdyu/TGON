@@ -70,6 +70,9 @@
 
 /* Begin PBXFileReference section */
 		FD051F161F124A1100C85259 /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = Screen.h; path = ../../../Source/TGON/Core/Platform/Screen.h; sourceTree = "<group>"; };
+		FD0B81FC1F3A148100946BB8 /* BuiltinReadOnlyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuiltinReadOnlyString.h; path = ../../../Source/TGON/Core/String/BuiltinReadOnlyString.h; sourceTree = "<group>"; };
+		FD0B81FD1F3A148100946BB8 /* BuiltinReadOnlyStringUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuiltinReadOnlyStringUtility.h; path = ../../../Source/TGON/Core/String/BuiltinReadOnlyStringUtility.h; sourceTree = "<group>"; };
+		FD0B81FE1F3A149100946BB8 /* StringTraits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringTraits.h; path = ../../../Source/TGON/Core/String/StringTraits.h; sourceTree = "<group>"; };
 		FD1DDB711EFEB51E0066F030 /* GenericTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericTime.cpp; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.cpp; sourceTree = "<group>"; };
 		FD1DDB721EFEB51E0066F030 /* GenericTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericTime.h; path = ../../../Source/TGON/Core/Platform/Generic/GenericTime.h; sourceTree = "<group>"; };
 		FD1DDB741EFEB6A10066F030 /* IOSTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOSTime.cpp; path = ../../../Source/TGON/Core/Platform/iOS/IOSTime.cpp; sourceTree = "<group>"; };
@@ -255,8 +258,11 @@
 		FDD984B51EED472D0037EB2A /* String */ = {
 			isa = PBXGroup;
 			children = (
+				FD0B81FC1F3A148100946BB8 /* BuiltinReadOnlyString.h */,
+				FD0B81FD1F3A148100946BB8 /* BuiltinReadOnlyStringUtility.h */,
 				FDD984B81EED47570037EB2A /* FixedString.h */,
 				FDD984B91EED47570037EB2A /* FixedStringUtility.h */,
+				FD0B81FE1F3A149100946BB8 /* StringTraits.h */,
 			);
 			name = String;
 			sourceTree = "<group>";

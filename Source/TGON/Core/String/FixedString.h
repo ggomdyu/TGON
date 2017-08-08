@@ -22,7 +22,7 @@ class BasicFixedString :
 {
     static_assert(_CharArraySize > 0, "The array size of BasicFixedString must be over than 0.");
 
-/* @section Type definition */
+/* @section Public type */
 public:
     using SizeType = decltype(_CharArraySize);
 

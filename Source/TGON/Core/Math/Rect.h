@@ -17,7 +17,7 @@ namespace math
 template <typename _ValueType>
 struct Rect
 {
-/* @section Type definition */
+/* @section Public type */
 public:
     using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;

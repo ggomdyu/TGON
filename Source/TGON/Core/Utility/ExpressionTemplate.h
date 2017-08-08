@@ -17,7 +17,7 @@ namespace utility
 template <typename _FirstOperandType, typename _SecondOperandType>
 struct ArithmeticOperationBase
 {
-/* @section Type definition */
+/* @section Public type */
 public:
     using FirstOperandType = _FirstOperandType;
     using SecondOperandType = _SecondOperandType;
@@ -133,7 +133,7 @@ template <typename _ExpressionPolicyType>
 struct ExpressionTemplate :
     public _ExpressionPolicyType
 {
-/* @section Type definition */
+/* @section Public type */
 public:
     using _ExpressionPolicyType::_ExpressionPolicyType;
 

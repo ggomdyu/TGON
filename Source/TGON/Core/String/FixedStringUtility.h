@@ -15,10 +15,10 @@ namespace tgon
 namespace string
 {
 
-template <typename _CharType, std::size_t _BufferSize>
-constexpr BasicFixedString<typename std::decay<_CharType>::type, _BufferSize> MakeFixedString(const _CharType(&str)[_BufferSize])
+template <typename _CharType, std::size_t _CharArraySize>
+constexpr BasicFixedString<typename std::decay<_CharType>::type, _CharArraySize> MakeFixedString(const _CharType(&str)[_CharArraySize])
 {
-    return {str, _BufferSize - 1};
+    return {str, _CharArraySize - 1};
 }
 
 } /* namespace string */

@@ -13,7 +13,7 @@ namespace tgon
 namespace utility
 {
 
-#if (__cplusplus == 201402L)
+#if (__cplusplus >= 201402L)
 template <typename _CharType>
 constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
 {
