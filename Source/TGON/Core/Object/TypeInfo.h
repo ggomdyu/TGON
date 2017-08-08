@@ -6,44 +6,44 @@
 
 #pragma once
 #include <cstdint>
-#include "Core/String/BuiltinReadOnlyString.h"
+
+#include "Core/Hash/Hash.h"
 
 namespace tgon
 {
 namespace object
 {
 
-template <std::size_t _TypeNameLength>
 struct TypeInfo
 {
 /* @section Ctor/Dtor */
 public:
-    constexpr explicit TypeInfo(const char(&typeName)[_TypeNameLength]);
+    template <std::size_t _CharArraySize>
+    constexpr explicit TypeInfo(const char(&typeName)[_CharArraySize]) noexcept;
 
 /* @section Public method */
 public:
     constexpr std::size_t GetHashCode() const;
-    constexpr const string::BuiltinReadOnlyString<char, _TypeNameLength>& GetTypeName() const noexcept;
+
+    constexpr const char* GetName() const noexcept;
 
 /* @section Private variable */
 private:
-    string::BuiltinReadOnlyString<char, _TypeNameLength> m_typeName;
+    const char* m_typeName;
 };
 
-template<std::size_t _TypeNameLength>
-constexpr TypeInfo<_TypeNameLength>::TypeInfo(const char(&typeName)[_TypeNameLength]) :
-    m_typeName(m_typeName)
+template <std::size_t _CharArraySize>
+constexpr TypeInfo::TypeInfo(const char(&typeName)[_CharArraySize]) noexcept :
+    m_typeName(typeName)
 {
 }
 
-template<std::size_t _TypeNameLength>
-constexpr std::size_t TypeInfo<_TypeNameLength>::GetHashCode() const
+constexpr std::size_t TypeInfo::GetHashCode() const
 {
-    return hash::x65599Hash(m_typeName.CStr());
+    return hash::x65599Hash(m_typeName);
 }
 
-template<std::size_t _TypeNameLength>
-constexpr const string::BuiltinReadOnlyString<char, _TypeNameLength>& TypeInfo<_TypeNameLength>::GetTypeName() const noexcept
+constexpr const char* TypeInfo::GetName() const noexcept
 {
     return m_typeName;
 }

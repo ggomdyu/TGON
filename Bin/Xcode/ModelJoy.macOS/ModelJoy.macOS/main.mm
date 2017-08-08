@@ -9,6 +9,7 @@
 #import "Core/Platform/Window.h"
 #import "Core/Utility/Delegate.h"
 #import "Core/Utility/StaticIf.h"
+#import "Core/String/FixedString.h"
 #import "Core/Math/Color.h"
 #import "Core/Object/Object.h"
 
@@ -30,7 +31,14 @@ class NewObject :
     public tgon::object::Object
 {
 public:
-    TGON_MAKE_OBJECT_INTERFACE(NewObject);
+    TGON_OBJECT(NewObject);
+};
+
+class NewObject2 :
+    public tgon::object::Object
+{
+public:
+    TGON_OBJECT(NewObject2);
 };
 
 int main(int argc, char* argv[])
@@ -39,9 +47,12 @@ int main(int argc, char* argv[])
     {
         using namespace tgon;
 
-        string::FixedString64 fs = "2342";
-        fs.Find("223");
-
+        object::Object* obj = new NewObject();
+        std::cout << obj->GetTypeHashCode() << std::endl;
+        std::cout << obj->GetTypeName() << std::endl;
+        object::Object* obj2 = new NewObject2();
+        std::cout << obj2->GetTypeHashCode() << std::endl;
+        std::cout << obj2->GetTypeName() << std::endl;
 
         //id sharedApplica.rtion = [NSApplication sharedApplication];
         [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];

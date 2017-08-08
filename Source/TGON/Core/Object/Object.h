@@ -6,13 +6,10 @@
 
 #pragma once
 #include <cstdint>
-#include <memory>
-#include <string>
+#include <cstddef>
 
 #include "TypeInfo.h"
 
-#include "Core/Hash/Hash.h"
-#include "Core/Utility/Array.h"
 #include "Core/Platform/Config.h"
 
 namespace tgon
@@ -22,7 +19,7 @@ namespace object
 
 class TGON_API Object
 {
-/* @section Type definition */
+/* @section Public type */
 public:
 	using Super = void;
 	using This = Object;
@@ -34,28 +31,29 @@ public:
 
 /* @section Public method */
 public:
-	virtual std::size_t GetHashCode() const = 0;
+	virtual std::size_t GetTypeHashCode() const = 0;
+    
     virtual const char* GetTypeName() const noexcept = 0;
 };
 
 } /* namespace object */
 } /* namespace tgon */
 
-#define TGON_MAKE_OBJECT_INTERFACE(classType)\
+#define TGON_OBJECT(classType)\
     using Super = This;\
-	using This = classType;\
-	\
-    virtual std::size_t GetHashCode() const noexcept override\
+    using This = classType;\
+    \
+    virtual std::size_t GetTypeHashCode() const noexcept override\
     {\
-        return hash::x65599Hash(GetTypeInfo().CStr());\
+        return GetTypeInfo().GetHashCode();\
     }\
     virtual const char* GetTypeName() const noexcept override\
     {\
-        return GetTypeInfo().CStr();\
+        return GetTypeInfo().GetName();\
     }\
-    static const decltype(tgon::string::MakeBuiltinReadOnlyString(#classType))& GetTypeInfo() noexcept\
+    static const tgon::object::TypeInfo& GetTypeInfo() noexcept\
     {\
-        static auto typeInfo = tgon::string::MakeBuiltinReadOnlyString(#classType);\
+        static tgon::object::TypeInfo typeInfo(#classType);\
         return typeInfo;\
     }
 
