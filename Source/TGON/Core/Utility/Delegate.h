@@ -30,7 +30,7 @@
  * @brief                   Binds delegate with lambda or global function
  * @param [in] function     Lambda or Reference of global function(e.g. &functionName)
  */
-#define TGON_MAKE_DELEGATE_1(function)\
+#define TGON_MAKE_DELEGATE_1(_function)\
     [&]()\
     {\
         auto function = _function;\
@@ -124,7 +124,7 @@ private:
      * @return              The size to delete, or deleted
      */
     template <typename _FunctionType>
-    static std::size_t Deleter(void* ptr);
+    static std::size_t MakeDeleter(void* ptr);
 
     static std::size_t GetStoredFunctionSize(DeleterType deleter);
 
@@ -174,9 +174,9 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType&& function) :
-	m_ptr(operator new(sizeof(_FunctionType))),
+	m_ptr(operator new(sizeof(typename std::decay<_FunctionType>::type))),
     m_stub(&MakeStub<typename std::decay<_FunctionType>::type>),
-    m_deleter(&Deleter<typename std::decay<_FunctionType>::type>)
+    m_deleter(&MakeDeleter<typename std::decay<_FunctionType>::type>)
 {
     new (m_ptr) typename std::decay<_FunctionType>::type(std::forward<_FunctionType>(function));
 }
@@ -381,7 +381,7 @@ inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver,
 
 template<typename _ReturnType, typename... _ArgTypes>
 template<typename _FunctionType>
-inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::Deleter(void* ptr)
+inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
 {
     operator delete(ptr);
     return sizeof(_FunctionType);
