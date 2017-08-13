@@ -1,5 +1,5 @@
 /**
- * @filename    TMath.h
+ * @filename    Math.h
  * @author      ggomdyu
  * @since       03/14/2016
  */
@@ -21,14 +21,14 @@ constexpr float Deg2Rad = PI / 180;
 constexpr float Rad2Deg = 180 / PI;
 
 template <typename _ValueType, typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
-inline _ValueType Round(_ValueType value) noexcept
+inline _ValueType Round(const _ValueType& value) noexcept
 {
     return std::round(value);
 }
 
 /* @return	Value which fractional part is discarded */
 template <typename _ValueType, typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
-constexpr _ValueType Floor(_ValueType value) noexcept
+constexpr _ValueType Floor(const _ValueType& value) noexcept
 {
     using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
                          typename std::conditional<sizeof(_ValueType) == sizeof(int16_t), int16_t,
@@ -40,42 +40,56 @@ constexpr _ValueType Floor(_ValueType value) noexcept
 
 /* @return	Returns Square root value. */
 template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-inline _ValueType Sqrt(_ValueType value) noexcept
+inline _ValueType Sqrt(const _ValueType& value) noexcept
 {
     return std::sqrt(value);
 }
 
 /* @return	Returns largest value of the given parameters. */
 template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Max(_ValueType first, _ValueType second) noexcept
-{
-    return (first >= second) ? first : second;
-}
-
-/* @return	Returns largest value of the given parameters. */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Min(_ValueType first, _ValueType second) noexcept
+constexpr _ValueType Min(const _ValueType& first, const _ValueType& second) noexcept
 {
     return (first <= second) ? first : second;
 }
 
+template <typename _ValueType, typename ..._ArgTypes, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+constexpr _ValueType Min(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
+{
+    using tgon::math::Min;
+    return (first <= second) ? Min(first, args...) : Min(second, args...);
+}
+
+/* @return	Returns largest value of the given parameters. */
+template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+constexpr _ValueType Max(const _ValueType& first, const _ValueType& second) noexcept
+{
+    return (first >= second) ? first : second;
+}
+
+template <typename _ValueType, typename ..._ArgTypes, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+constexpr _ValueType Max(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
+{
+    using tgon::math::Max;
+    return (first >= second) ? Max(first, args...) : Max(second, args...);
+}
+
 /* @return	Returns the absolute value. */
 template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Abs(_ValueType value) noexcept
+constexpr _ValueType Abs(const _ValueType& value) noexcept
 {
     return (value < static_cast<_ValueType>(0)) ? -value : value;
 }
 
 /* @return  Returns the sign of value which represented as 1, -1 or 0 */
 template<typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Sign(_ValueType value) noexcept
+constexpr _ValueType Sign(const _ValueType& value) noexcept
 {
     return (value > static_cast<_ValueType>(0)) ? static_cast<_ValueType>(1) : (value < static_cast<_ValueType>(0)) ? static_cast<_ValueType>(-1) : static_cast<_ValueType>(0);
 }
 
 /* @return	Returns clamped value to min and max range */
 template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Clamp(_ValueType value, _ValueType min, _ValueType max) noexcept
+constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const _ValueType& max) noexcept
 {
     return Max(Min(value, max), min);
 }
