@@ -11,12 +11,7 @@ namespace tgon
 namespace platform
 {
 
-TGON_API uint32_t GetOSExecutionTime()
-{
-    return GetTickCount();
-}
-
-TGON_API uint64_t GetOSExecutionTime64()
+TGON_API uint64_t GetOSExecutionTime()
 {
     return GetTickCount64();
 }

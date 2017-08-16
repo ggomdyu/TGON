@@ -13,7 +13,7 @@ class TGON_API TimeModule :
 	public IModule
 {
 public:
-    TGON_MAKE_OBJECT_INTERFACE(TimeModule)
+    TGON_OBJECT(TimeModule)
 
 /* @section Ctor/Dtor */
 public:

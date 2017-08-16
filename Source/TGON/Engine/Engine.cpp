@@ -19,7 +19,7 @@ Engine::Engine( ) :
 
 void Engine::AddEssentialModules( )
 {
-    This::AddModule<TimeModule>( );
+    Engine::AddModule<TimeModule>( );
 
 	//This::AddModule( std::make_shared<TInputModule>( this->GetWindow( ), 
 	//	TInputModule::kMouse | TInputModule::kKeyboard )

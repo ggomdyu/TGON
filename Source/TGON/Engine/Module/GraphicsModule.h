@@ -14,7 +14,7 @@ class TGON_API GraphicsModule :
 	public IModule
 {
 public:
-    TGON_MAKE_OBJECT_INTERFACE(GraphicsModule)
+    TGON_OBJECT(GraphicsModule)
 
 /**
  * @section Ctor/Dtor

@@ -27,7 +27,7 @@ class TGON_API GameApplication :
     public object::Object
 {
 public:
-	TGON_MAKE_OBJECT_INTERFACE(tgon::GameApplication)
+	TGON_OBJECT(tgon::GameApplication)
 
 /**
  * @section Ctor/Dtor

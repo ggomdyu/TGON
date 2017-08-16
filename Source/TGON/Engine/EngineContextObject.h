@@ -21,7 +21,7 @@ class ModuleContext :
  * @section Generator
  */
 public:
-    TGON_MAKE_OBJECT_INTERFACE(tgon::ModuleContext)
+    TGON_OBJECT(tgon::ModuleContext)
 
 /**
  * @section Public command method

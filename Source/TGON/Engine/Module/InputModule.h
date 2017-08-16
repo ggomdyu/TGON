@@ -46,7 +46,7 @@ class TGON_API InputModule :
  * Generator
  */
 public:
-    TGON_MAKE_OBJECT_INTERFACE(InputModule)
+    TGON_OBJECT(InputModule)
 
 /**
  * @section Ctor/Dtor

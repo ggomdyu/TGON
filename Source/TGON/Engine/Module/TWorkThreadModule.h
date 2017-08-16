@@ -27,7 +27,7 @@ class TGON_API TWorkThreadModule :
 	Generator
 */
 public:
-	TGON_MAKE_OBJECT_INTERFACE( TWorkThreadModule )
+	TGON_OBJECT( TWorkThreadModule )
 
 /*
 	Cons/Destructor

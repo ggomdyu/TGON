@@ -18,7 +18,6 @@ namespace object
 template <typename _CastToType>
 inline _CastToType* DynamicCast(Object* object)
 {
-#if TGON_DISABLE_RTTI
     using CastToType = typename std::remove_reference<typename std::remove_pointer<_CastToType>::type>::type;
 
     static_assert(std::is_convertible<CastToType*, Object*>::value, "The given cast type is not base of Object!");
@@ -35,9 +34,6 @@ inline _CastToType* DynamicCast(Object* object)
     }
     
     return nullptr;
-#else
-    return dynamic_cast<_CastToType*>(object);
-#endif
 }
 
 } /* namespace object */

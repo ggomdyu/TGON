@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.pch"
 #include "TQuaternion.h"
 
-#include "TMatrix4x4.h"
+#include "Matrix4x4.h"
 
 namespace tgon {
 namespace math {

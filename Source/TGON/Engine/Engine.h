@@ -14,7 +14,7 @@ class TGON_API Engine :
 	public ModuleContext
 {
 public:
-	TGON_MAKE_OBJECT_INTERFACE(Engine)
+	TGON_OBJECT(Engine)
 
 public:
     Engine();
