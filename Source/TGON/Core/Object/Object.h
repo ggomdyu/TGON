@@ -21,47 +21,38 @@ class TGON_API Object
 {
 /* @section Public type */
 public:
-	using Super = void;
-	using This = Object;
+    using SuperType = void;
+    using ThisType = Object;
 
 /* @section Ctor/Dtor */
 public:
-    Object() = default;
-	virtual ~Object() = default;
+    virtual ~Object() = default;
 
 /* @section Public method */
 public:
-	virtual std::size_t GetTypeHashCode() const = 0;
-    
-    virtual const char* GetTypeName() const noexcept = 0;
+    /* @brief   Copy this object. */
+    virtual std::shared_ptr<Object> Clone() const;
+
+    /* @brief   Get dynamic bound type information. */
+    virtual const TypeInfo& GetDynamicType() const noexcept = 0;
+
+    /* @brief   Get static bound type information. */
+    static const TypeInfo& GetStaticType() noexcept;
 };
 
 } /* namespace object */
 } /* namespace tgon */
 
 #define TGON_OBJECT(classType)\
-    using Super = This;\
-    using This = classType;\
+    using SuperType = ThisType;\
+    using ThisType = classType;\
     \
-    virtual std::size_t GetTypeHashCode() const noexcept override\
+    virtual const tgon::object::TypeInfo& GetDynamicType() const noexcept override\
     {\
-        return GetTypeInfo().GetHashCode();\
+        return classType::GetStaticType();\
     }\
-    virtual const char* GetTypeName() const noexcept override\
+    static const tgon::object::TypeInfo& GetStaticType() noexcept\
     {\
-        return GetTypeInfo().GetName();\
-    }\
-    static const tgon::object::TypeInfo& GetTypeInfo() noexcept\
-    {\
-        static tgon::object::TypeInfo typeInfo(#classType);\
+        static const tgon::object::TypeInfo typeInfo(#classType, &SuperType::GetStaticType());\
         return typeInfo;\
     }
-
-// Todo: Implement interface's below
-//    virtual std::shared_ptr<TObject> Clone() const;
-//
-//    template <typename CastToTy>
-//    CastToTy* CastTo() noexcept;
-//
-//    template <typename CastToTy>
-//    bool IsCastable() noexcept;
