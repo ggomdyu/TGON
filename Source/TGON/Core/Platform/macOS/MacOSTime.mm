@@ -11,7 +11,6 @@ namespace platform
 
 TGON_API uint64_t GetOSExecutionTime()
 {
-    // todo: Need test
     return mach_absolute_time() * 0.000001f;
 }
 
