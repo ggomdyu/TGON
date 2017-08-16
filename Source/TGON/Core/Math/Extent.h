@@ -73,9 +73,9 @@ public:
     _ValueType width;
     _ValueType height;
 
-	static const Extent2D One;		// 1, 1
-	static const Extent2D Zero;	    // 0, 0
-	static const Extent2D MinusOne;	// -1, -1
+    static const Extent2D One;      // 1, 1
+    static const Extent2D Zero;     // 0, 0
+    static const Extent2D MinusOne; // -1, -1
 };
 
 template <typename _ValueType>

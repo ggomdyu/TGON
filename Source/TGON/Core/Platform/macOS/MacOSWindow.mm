@@ -19,6 +19,16 @@ MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
 {
 }
 
+void MacOSWindow::Maximize()
+{
+    [m_nsWindow zoom:nil];
+}
+
+void MacOSWindow::Minimize()
+{
+    [m_nsWindow miniaturize:nil];
+}
+
 void MacOSWindow::SetPosition(int32_t x, int32_t y)
 {
     NSRect visibleFrame = [[NSScreen mainScreen] visibleFrame];

@@ -20,7 +20,8 @@ class StringTraits
 public:
     using CharTraits = std::char_traits<_CharType>;
 
-public:
+/* @section Ctor/Dtor */
+protected:
     constexpr StringTraits() noexcept = default;
     constexpr StringTraits(const _CharType* copySrcStr, _CharType* copyDestStr, std::size_t copySrcStrLength);
     constexpr StringTraits(_CharType* destStr, _CharType ch, std::size_t chAssignCount);

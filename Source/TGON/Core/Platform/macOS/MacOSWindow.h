@@ -26,11 +26,9 @@ public:
 
 /* @section Public method */
 public:
-    void Show() {}
-    void Hide() {}
     void Quit() {}
-    void Maximize() {}
-    void Minimize() {}
+    void Maximize();
+    void Minimize();
     void BringToFront() {}
     
     void SetPosition(int32_t x, int32_t y);
@@ -43,6 +41,10 @@ public:
     bool IsResizable() const;
     bool IsMaximized() const;
     bool IsMinimized() const;
+
+    void foo()
+    {
+    }
 
 /* @section Private variable */
 private:

@@ -15,20 +15,18 @@ namespace tgon
 namespace hash
 {
 
-using HashValue = uint32_t;
-
 namespace detail
 {
-constexpr HashValue x65599HashImpl(const char* str, HashValue prevHashValue)
+constexpr uint32_t x65599HashImpl(const char* str, uint32_t prevHashValue)
 {
     return (str[0] != '\0') ? 65599 * x65599HashImpl(&str[1], 0) + str[0] : prevHashValue ^ (prevHashValue >> 16);
 }
 } /* namespace detail */
 
 #if (__cplusplus == 201402L || _MSC_VER >= 1910)
-constexpr HashValue x65599Hash(const char* str)
+constexpr uint32_t x65599Hash(const char* str)
 {
-    HashValue hashValue = 0;
+    uint32_t hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
     {
         hashValue = 65599 * hashValue + str[i];
@@ -37,7 +35,7 @@ constexpr HashValue x65599Hash(const char* str)
     return hashValue ^ (hashValue >> 16);
 }
 #elif (__cplusplus == 201103L || _MSC_VER < 1910)
-constexpr HashValue x65599Hash(const char* str)
+constexpr uint32_t x65599Hash(const char* str)
 {
     return detail::x65599HashImpl(str, 0);
 }

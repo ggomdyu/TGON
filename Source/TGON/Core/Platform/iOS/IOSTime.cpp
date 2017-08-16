@@ -3,7 +3,6 @@
 
 #import "Core/Platform/Generic/GenericTime.h"
 
-
 namespace tgon
 {
 namespace platform

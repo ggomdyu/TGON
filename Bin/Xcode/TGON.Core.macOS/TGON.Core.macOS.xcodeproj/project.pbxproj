@@ -66,6 +66,10 @@
 		FD89E5261F1B6ACF007376E8 /* MacOSConfig.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E4FC1F1B4F7C007376E8 /* MacOSConfig.h */; };
 		FD89E5271F1B6ACF007376E8 /* MacOSLocale.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E5041F1B5330007376E8 /* MacOSLocale.h */; };
 		FD89E5281F1B6ACF007376E8 /* Locale.h in Sources */ = {isa = PBXBuildFile; fileRef = FD89E5021F1B5300007376E8 /* Locale.h */; };
+		FDA00FB91F42DCE2006832B5 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDA00FB71F42DCE2006832B5 /* MacOSTime.mm */; };
+		FDA00FBA1F42DCE2006832B5 /* MacOSTime.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA00FB81F42DCE2006832B5 /* MacOSTime.h */; };
+		FDA00FBD1F44A1AB006832B5 /* ObjectUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA00FBB1F44A1AB006832B5 /* ObjectUtility.cpp */; };
+		FDA00FBE1F44A1AB006832B5 /* ObjectUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA00FBC1F44A1AB006832B5 /* ObjectUtility.h */; };
 		FDBF5A111F2C7F89001A9222 /* ForEach.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBF5A101F2C7F89001A9222 /* ForEach.h */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +122,10 @@
 		FD89E5021F1B5300007376E8 /* Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Locale.h; path = ../../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
 		FD89E5041F1B5330007376E8 /* MacOSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSLocale.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSLocale.h; sourceTree = "<group>"; };
 		FD89E5231F1B5FD5007376E8 /* PrecompiledHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrecompiledHeader.pch; path = ../../../Source/TGON/PrecompiledHeader.pch; sourceTree = "<group>"; };
+		FDA00FB71F42DCE2006832B5 /* MacOSTime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSTime.mm; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSTime.mm; sourceTree = "<group>"; };
+		FDA00FB81F42DCE2006832B5 /* MacOSTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSTime.h; path = ../../../Source/TGON/Core/Platform/MacOS/MacOSTime.h; sourceTree = "<group>"; };
+		FDA00FBB1F44A1AB006832B5 /* ObjectUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjectUtility.cpp; path = ../../../Source/TGON/Core/Object/ObjectUtility.cpp; sourceTree = "<group>"; };
+		FDA00FBC1F44A1AB006832B5 /* ObjectUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectUtility.h; path = ../../../Source/TGON/Core/Object/ObjectUtility.h; sourceTree = "<group>"; };
 		FDBF5A101F2C7F89001A9222 /* ForEach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForEach.h; path = ../../../Source/TGON/Core/Utility/ForEach.h; sourceTree = "<group>"; };
 		FDC8CB531F07EA5B00E59C64 /* libTGON.Core.macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.Core.macOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -235,6 +243,8 @@
 			children = (
 				FD89E4501F1B42B9007376E8 /* Object.cpp */,
 				FD89E4511F1B42B9007376E8 /* Object.h */,
+				FDA00FBB1F44A1AB006832B5 /* ObjectUtility.cpp */,
+				FDA00FBC1F44A1AB006832B5 /* ObjectUtility.h */,
 				FD89E4521F1B42B9007376E8 /* TypeInfo.cpp */,
 				FD89E4531F1B42B9007376E8 /* TypeInfo.h */,
 			);
@@ -259,11 +269,13 @@
 		FD89E4FB1F1B4E8D007376E8 /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
-				FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */,
-				FD51C19F1F21078D003F08B6 /* MacOSWindow.h */,
-				FD51C1A51F210819003F08B6 /* MacOSWindowUtility.mm */,
-				FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */,
 				FD89E4FC1F1B4F7C007376E8 /* MacOSConfig.h */,
+				FD51C19F1F21078D003F08B6 /* MacOSWindow.h */,
+				FD51C1A01F21078D003F08B6 /* MacOSWindow.mm */,
+				FDA00FB81F42DCE2006832B5 /* MacOSTime.h */,
+				FDA00FB71F42DCE2006832B5 /* MacOSTime.mm */,
+				FD51C1A31F210803003F08B6 /* MacOSWindowUtility.h */,
+				FD51C1A51F210819003F08B6 /* MacOSWindowUtility.mm */,
 				FD89E4FF1F1B52C7007376E8 /* MacOSLocale.mm */,
 				FD89E5041F1B5330007376E8 /* MacOSLocale.h */,
 			);
@@ -300,6 +312,8 @@
 				FD89E4FD1F1B4F7C007376E8 /* MacOSConfig.h in Headers */,
 				FD7DF7681F1EE1AD002F65CA /* Delegate.h in Headers */,
 				FD89E5051F1B5330007376E8 /* MacOSLocale.h in Headers */,
+				FDA00FBE1F44A1AB006832B5 /* ObjectUtility.h in Headers */,
+				FDA00FBA1F42DCE2006832B5 /* MacOSTime.h in Headers */,
 				FD89E4811F1B42B9007376E8 /* WELLRNG.h in Headers */,
 				FD89E46B1F1B42B9007376E8 /* Config.h in Headers */,
 				FD89E4861F1B42B9007376E8 /* TypeInfo.h in Headers */,
@@ -386,7 +400,9 @@
 				FD89E4E31F1B46C0007376E8 /* Hash.h in Sources */,
 				FD89E4EE1F1B46C0007376E8 /* Config.h in Sources */,
 				FD89E4F21F1B46C0007376E8 /* StaticIf.h in Sources */,
+				FDA00FBD1F44A1AB006832B5 /* ObjectUtility.cpp in Sources */,
 				FD51C1A61F210819003F08B6 /* MacOSWindowUtility.mm in Sources */,
+				FDA00FB91F42DCE2006832B5 /* MacOSTime.mm in Sources */,
 				FD89E4F31F1B46C0007376E8 /* Prefix.h in Sources */,
 				FD89E4F41F1B46C0007376E8 /* Vector3.h in Sources */,
 				FD11ADCC1F36C2EB00123D83 /* BaseWindow.cpp in Sources */,

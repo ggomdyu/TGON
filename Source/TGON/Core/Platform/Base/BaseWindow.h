@@ -29,8 +29,6 @@ public:
     
 /* @section Public method */
 public:
-    void Show();
-    void Hide();
     void Quit();
     void Maximize();
     void Minimize();
@@ -63,18 +61,6 @@ template <typename _DerivedType>
 inline BaseWindow<_DerivedType>::~BaseWindow() 
 {
     m_isClosed = true;
-}
-
-template <typename _DerivedType>
-inline void BaseWindow<_DerivedType>::Show()
-{
-    static_cast<_DerivedType*>(this)->Show();
-}
-
-template <typename _DerivedType>
-inline void BaseWindow<_DerivedType>::Hide()
-{
-    static_cast<_DerivedType*>(this)->Hide();
 }
 
 template <typename _DerivedType>

@@ -5,11 +5,11 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-
 #include <cassert>
 #include <cstddef>
 #include <cmath>
+
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {

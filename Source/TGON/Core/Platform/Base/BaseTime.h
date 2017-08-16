@@ -15,7 +15,7 @@ namespace tgon
 namespace platform
 {
 
-TGON_API uint32_t GetOSExecutionTime();
+TGON_API uint64_t GetOSExecutionTime();
     
 TGON_API uint32_t GetProcessExecutionTime();
 

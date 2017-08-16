@@ -10,7 +10,7 @@
 #if BOOST_OS_WINDOWS
 #	include "Windows/WindowsTime.h"
 #elif BOOST_OS_MACOS
-//#	import "MacOS/MacOSTime.h"
+#	import "MacOS/MacOSTime.h"
 #elif BOOST_OS_ANDROID
 #	include "Android/AndroidTime.h"
 #elif BOOST_OS_IOS
