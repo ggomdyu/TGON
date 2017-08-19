@@ -34,11 +34,22 @@ public:
     virtual std::shared_ptr<Object> Clone() const;
 
     /* @brief   Get dynamic bound type information. */
-    virtual const TypeInfo& GetDynamicType() const noexcept = 0;
+    virtual const TypeInfo& GetDynamicTypeInfo() const noexcept = 0;
 
     /* @brief   Get static bound type information. */
-    static const TypeInfo& GetStaticType() noexcept;
+    static const TypeInfo& GetStaticTypeInfo() noexcept;
 };
+
+inline std::shared_ptr<Object> Object::Clone() const
+{
+    return nullptr;
+}
+
+inline const TypeInfo& Object::GetStaticTypeInfo() noexcept
+{
+    static const TypeInfo typeInfo("tgon::object::Object", nullptr);
+    return typeInfo;
+}
 
 } /* namespace object */
 } /* namespace tgon */
@@ -47,12 +58,12 @@ public:
     using SuperType = ThisType;\
     using ThisType = classType;\
     \
-    virtual const tgon::object::TypeInfo& GetDynamicType() const noexcept override\
+    virtual const tgon::object::TypeInfo& GetDynamicTypeInfo() const noexcept override\
     {\
-        return classType::GetStaticType();\
+        return classType::GetStaticTypeInfo();\
     }\
-    static const tgon::object::TypeInfo& GetStaticType() noexcept\
+    static const tgon::object::TypeInfo& GetStaticTypeInfo() noexcept\
     {\
-        static const tgon::object::TypeInfo typeInfo(#classType, &SuperType::GetStaticType());\
+        static const tgon::object::TypeInfo typeInfo(#classType, &SuperType::GetStaticTypeInfo());\
         return typeInfo;\
     }
