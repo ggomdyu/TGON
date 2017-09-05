@@ -1,11 +1,13 @@
 #import "PrecompiledHeader.pch"
+#import "MacOSWindow.h"
 
+#import <Cocoa/Cocoa.h>
 #import <memory>
 #import <cstdint>
 #import <cstring>
 
-#import "MacOSWindow.h"
 #import "MacOSWindowUtility.h"
+#import "MacOSWindowDelegate.h"
 
 namespace tgon
 {
@@ -15,7 +17,14 @@ namespace macos
 {
 
 MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
-    m_nsWindow(CreateNativeWindow(windowStyle))
+    m_nsWindow(CreateNativeWindow(windowStyle)),
+    m_windowDelegate([[MacOSWindowDelegate alloc] initWithWindow:this])
+{
+    m_nsWindow.delegate = m_windowDelegate;
+}
+
+MacOSWindow::MacOSWindow(NSWindow* nsWindow) noexcept :
+    m_nsWindow(nsWindow)
 {
 }
 
@@ -47,9 +56,15 @@ void MacOSWindow::SetSize(int32_t width, int32_t height)
     [m_nsWindow setFrame:currentFrameSize display:YES animate:NO];
 }
 
-void MacOSWindow::SetCaptionTitle(const char* captionTitle)
+void MacOSWindow::SetTitle(const char* title)
 {
-    [m_nsWindow setTitle:[NSString stringWithUTF8String:captionTitle]];
+    [m_nsWindow setTitle:[NSString stringWithUTF8String:title]];
+}
+
+void MacOSWindow::SetFullScreen(bool isFullScreen)
+{
+    // todo: 구현
+//    [m_nsWindow toggleFullScreen:nil];
 }
 
 void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const
@@ -75,6 +90,11 @@ void MacOSWindow::GetCaptionTitle(char* destCaptionTitle) const
     std::size_t utf8StrLen = strlen(utf8Str) + 1;
 
     std::memcpy(destCaptionTitle, utf8Str, utf8StrLen + 1);
+}
+
+NSWindow* MacOSWindow::GetNativeWindow() noexcept
+{
+    return m_nsWindow;
 }
 
 bool MacOSWindow::HasCaption() const

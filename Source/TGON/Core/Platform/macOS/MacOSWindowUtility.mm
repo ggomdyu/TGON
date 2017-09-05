@@ -14,6 +14,20 @@ void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, NSPoint* destWin
 {
     *destWindowStyleMask = static_cast<NSWindowStyleMask>(0);
 
+    NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
+
+    // Set window position
+    if (windowStyle.showMiddle == true)
+    {
+        float newWindowXPos = (mainScreenRect.size.width * 0.5f) - (static_cast<CGFloat>(windowStyle.width) * 0.5f);
+        float newWindowYPos = (mainScreenRect.size.height * 0.5f) - (static_cast<CGFloat>(windowStyle.height) * 0.5f);
+        *destWindowPosition = NSMakePoint(newWindowXPos, newWindowYPos);
+    }
+    else
+    {
+        *destWindowPosition = NSMakePoint(windowStyle.x, windowStyle.y);
+    }
+
     if (windowStyle.borderless == false)
     {
         *destWindowStyleMask |= NSWindowStyleMaskTitled;
@@ -27,19 +41,6 @@ void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, NSPoint* destWin
     if (windowStyle.resizeable == true)
     {
         *destWindowStyleMask |= NSWindowStyleMaskResizable;
-    }
-
-    if (windowStyle.showMiddle == true)
-    {
-        NSRect mainScreenFrameRect = [[NSScreen mainScreen] visibleFrame];
-
-        float newWindowXPos = (mainScreenFrameRect.size.width * 0.5f) - (static_cast<CGFloat>(windowStyle.width) * 0.5f);
-        float newWindowYPos = (mainScreenFrameRect.size.height * 0.5f) - (static_cast<CGFloat>(windowStyle.height) * 0.5f);
-        *destWindowPosition = NSMakePoint(newWindowXPos, newWindowYPos);
-    }
-    else
-    {
-        *destWindowPosition = NSMakePoint(windowStyle.x, windowStyle.y);
     }
 }
 
@@ -61,12 +62,12 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     [window makeKeyAndOrderFront:nil];
     [window setTitle:[NSString stringWithUTF8String:windowStyle.caption.c_str()]];
     [window setBackgroundColor:[NSColor whiteColor]];
-    [window setLevel:NSMainMenuWindowLevel];
+    [window setLevel:NSMainMenuWindowLevel + 1];
 
-    NSRect mainScreenFrameRect = [mainScreen visibleFrame];
+    NSRect mainScreenRect = [mainScreen visibleFrame];
     NSRect currentWindowFrameRect = [window frame];
-    [window setFrameOrigin:NSMakePoint(windowPosition.x,(mainScreenFrameRect.origin.y + mainScreenFrameRect.size.height - currentWindowFrameRect.size.height) - windowPosition.y)];
-
+    [window setFrameOrigin:NSMakePoint(windowPosition.x,(mainScreenRect.origin.y + mainScreenRect.size.height - currentWindowFrameRect.size.height) - windowPosition.y)];
+    
     return window;
 }
 

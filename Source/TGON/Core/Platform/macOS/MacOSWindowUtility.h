@@ -5,6 +5,7 @@
  * @brief
  */
 
+#pragma once
 #include <Cocoa/Cocoa.h>
 
 namespace tgon

@@ -5,9 +5,11 @@
  * @brief
  */
 
-#import <Cocoa/Cocoa.h>
+#pragma once
+#import "Core/Platform/Base/BaseWindow.h"
 
-#import "../Base/BaseWindow.h"
+@class NSWindow;
+@class MacOSWindowDelegate;
 
 namespace tgon
 {
@@ -17,38 +19,41 @@ namespace macos
 {
     
 class TGON_API MacOSWindow :
-    public BaseWindow<MacOSWindow>
+    public BaseWindow
 {
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
-    explicit MacOSWindow(const WindowStyle& windowStyle);
-    ~MacOSWindow() = default;
+    explicit MacOSWindow(const WindowStyle& windowStyle = WindowStyle{});
+    explicit MacOSWindow(NSWindow* nsWindow) noexcept;
+
+/* @section Public destructor */
+public:
+    virtual ~MacOSWindow() = default;
 
 /* @section Public method */
 public:
-    void Quit() {}
-    void Maximize();
-    void Minimize();
-    void BringToFront() {}
+    virtual void Quit() override {}
+    virtual void Maximize() override;
+    virtual void Minimize() override;
+    virtual void BringToFront() override {}
     
-    void SetPosition(int32_t x, int32_t y);
-    void SetSize(int32_t width, int32_t height);
-    void SetCaptionTitle(const char* captionTitle);
-    void GetPosition(int32_t* x, int32_t* y) const;
-    void GetSize(int32_t* width, int32_t* height) const;
-    void GetCaptionTitle(char* destCaptionTitle) const;
-    bool HasCaption() const;
-    bool IsResizable() const;
-    bool IsMaximized() const;
-    bool IsMinimized() const;
-
-    void foo()
-    {
-    }
+    virtual void SetPosition(int32_t x, int32_t y) override;
+    virtual void SetSize(int32_t width, int32_t height) override;
+    virtual void SetTitle(const char* title) override;
+    virtual void SetFullScreen(bool isFullScreen) override;
+    virtual void GetPosition(int32_t* x, int32_t* y) const override;
+    virtual void GetSize(int32_t* width, int32_t* height) const override;
+    virtual void GetCaptionTitle(char* destCaptionTitle) const override;
+    NSWindow* GetNativeWindow() noexcept;
+    virtual bool HasCaption() const override;
+    virtual bool IsResizable() const override;
+    virtual bool IsMaximized() const override;
+    virtual bool IsMinimized() const override;
 
 /* @section Private variable */
 private:
     NSWindow* m_nsWindow;
+    MacOSWindowDelegate* m_windowDelegate;
 };
     
 } /* namespace macos */
