@@ -2,13 +2,12 @@
  * @filename    Object.h
  * @author      ggomdyu
  * @since       03/22/2016
+ * @brief       Define class which becomes the base of all objects.
  */
 
 #pragma once
-#include <cstdint>
-#include <cstddef>
-
-#include "TypeInfo.h"
+#include <memory>
+#include <typeinfo>
 
 #include "Core/Platform/Config.h"
 
@@ -16,6 +15,25 @@ namespace tgon
 {
 namespace object
 {
+
+struct TGON_API TypeInfo final
+{
+    /* @section Ctor/Dtor */
+public:
+    TypeInfo(const std::type_info& rawTypeInfo, const TypeInfo* superTypeInfo) noexcept;
+
+    /* @section Public method */
+public:
+    std::size_t GetHashCode() const noexcept;
+    const char* GetName() const noexcept;
+
+    const TypeInfo* GetSuperTypeInfo() const noexcept;
+
+    /* @section Private variable */
+private:
+    const std::type_info& m_rawTypeInfo;
+    const TypeInfo* m_superTypeInfo;
+};
 
 class TGON_API Object
 {
@@ -33,22 +51,25 @@ public:
     /* @brief   Copy this object. */
     virtual std::shared_ptr<Object> Clone() const;
 
-    /* @brief   Get dynamic bound type information. */
-    virtual const TypeInfo& GetDynamicTypeInfo() const noexcept = 0;
-
     /* @brief   Get static bound type information. */
-    static const TypeInfo& GetStaticTypeInfo() noexcept;
+    template <typename _Type>
+    friend const TypeInfo* GetTypeInfo();
+    
+    /* @brief   Get dynamic bound type information. */
+    virtual const TypeInfo* GetTypeInfo() const noexcept = 0;
 };
 
-inline std::shared_ptr<Object> Object::Clone() const
+template <typename _Type>
+const TypeInfo* GetTypeInfo()
 {
-    return nullptr;
+    static const TypeInfo typeInfo(typeid(_Type), GetTypeInfo<typename _Type::SuperType>());
+    return &typeInfo;
 }
 
-inline const TypeInfo& Object::GetStaticTypeInfo() noexcept
+template <>
+inline const TypeInfo* GetTypeInfo<void>()
 {
-    static const TypeInfo typeInfo("tgon::object::Object", nullptr);
-    return typeInfo;
+    return nullptr;
 }
 
 } /* namespace object */
@@ -58,12 +79,7 @@ inline const TypeInfo& Object::GetStaticTypeInfo() noexcept
     using SuperType = ThisType;\
     using ThisType = classType;\
     \
-    virtual const tgon::object::TypeInfo& GetDynamicTypeInfo() const noexcept override\
+    virtual const tgon::object::TypeInfo* GetTypeInfo() const noexcept override\
     {\
-        return classType::GetStaticTypeInfo();\
-    }\
-    static const tgon::object::TypeInfo& GetStaticTypeInfo() noexcept\
-    {\
-        static const tgon::object::TypeInfo typeInfo(#classType, &SuperType::GetStaticTypeInfo());\
-        return typeInfo;\
+        return tgon::object::GetTypeInfo<classType>();\
     }

@@ -5,16 +5,17 @@
  */
 
 #pragma once
-#include <cstdint>
-#include <type_traits>
 #include <cassert>
+#include <type_traits>
 
 #include "Object.h"
+
 
 namespace tgon
 {
 namespace object
 {
+
 namespace detail
 {
 
@@ -30,21 +31,15 @@ struct DynamicCastHelper<_CastToType, _CastFromType, false>
 template <typename _CastToType, typename _CastFromType>
 inline _CastToType DynamicCastHelper<_CastToType, _CastFromType, false>::DynamicCast(_CastFromType object)
 {
-    static_assert(std::is_convertible<_CastToType, Object*>::value, "DynamicCast _CastToType is not base of Object.");
-    static_assert(std::is_convertible<_CastFromType, Object*>::value, "DynamicCast _CastFromType is not base of Object.");
-
-    assert(object != nullptr && "DynamicCast cast target can't be nullptr.");
-
-    const TypeInfo* typeInfo = &object->GetDynamicTypeInfo();
+    const TypeInfo* typeInfo = object->GetTypeInfo();
     while (typeInfo != nullptr)
     {
-        using CastToType = typename std::remove_pointer<_CastToType>::type;
-        if (typeInfo == &CastToType::GetStaticTypeInfo())
+        if (typeInfo == GetTypeInfo<typename std::remove_pointer<_CastToType>::type>())
         {
             return reinterpret_cast<_CastToType>(object);
         }
 
-        typeInfo = &typeInfo->GetSuperTypeInfo();
+        typeInfo = typeInfo->GetSuperTypeInfo();
     }
     
     return nullptr;
@@ -65,7 +60,7 @@ inline _CastToType DynamicCastHelper<_CastToType, _CastFromType, true>::DynamicC
 
 } /* namespace detail */
 
-template <typename _CastToType, typename _CastFromType>
+template <typename _CastToType, typename _CastFromType, typename = std::enable_if_t<std::is_convertible<_CastToType, Object*>::value && std::is_convertible<_CastFromType, Object*>::value>>
 inline _CastToType DynamicCast(_CastFromType object)
 {
     return detail::DynamicCastHelper<_CastToType, _CastFromType>::DynamicCast(object);
