@@ -65,9 +65,6 @@ public:
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
 
-    /* @brief                       Converts to string. */
-    std::string ToString() const;
-
 /* @section Public variable */
 public:
     _ValueType width;
