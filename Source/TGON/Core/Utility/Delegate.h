@@ -18,7 +18,7 @@
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
- * @brief   Overloaded delegate macros
+ * @brief   Enable macro overloading for TGON_MAKE_DELEGATE.
  */
 #if BOOST_PP_VARIADICS_MSVC
 #   define TGON_MAKE_DELEGATE(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(TGON_MAKE_DELEGATE_, __VA_ARGS__)(__VA_ARGS__), BOOST_PP_EMPTY())
@@ -58,7 +58,7 @@ class Delegate<_ReturnType(_ArgTypes...)> final
     using DeleterType = std::size_t(*)(void*);
     using StubType = _ReturnType(*)(void*, _ArgTypes&&...);
 
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     constexpr Delegate() noexcept;
     constexpr Delegate(std::nullptr_t) noexcept;
@@ -68,9 +68,12 @@ public:
     Delegate(_FunctionType&& function);
     Delegate(const Delegate& rhs);
     constexpr Delegate(Delegate&&) noexcept;
+
+/* @section Public destructor */
+public:
     ~Delegate();
 
-/* @section Operator */
+/* @section Public operator */
 public:
     Delegate& operator=(const Delegate&);
     Delegate& operator=(Delegate&&);

@@ -2,7 +2,7 @@
  * @filename    BaseTime.h
  * @author      ggomdyu
  * @since       05/15/2016
- * @desc        Set of Platform-agnostic Time interface.
+ * @brief       Set of Platform-agnostic Time interface.
  */
 
 #pragma once
@@ -17,7 +17,7 @@ namespace platform
 
 TGON_API uint64_t GetOSExecutionTime();
     
-TGON_API uint32_t GetProcessExecutionTime();
+TGON_API uint64_t GetProcessExecutionTime();
 
 TGON_API time_t GetUnixTime();
 

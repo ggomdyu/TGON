@@ -5,6 +5,7 @@
  * @brief
  */
 
+#pragma once
 #import <cstddef>
 
 namespace tgon

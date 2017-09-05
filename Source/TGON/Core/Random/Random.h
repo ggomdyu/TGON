@@ -29,8 +29,8 @@ inline int32_t Range(int32_t min, int32_t max)
 }
 
 /* @brief   Choice random element from container and return it as a iterator. */
-template <typename ContainerTy>
-inline auto Choice(ContainerTy& container) -> typename ContainerTy::iterator
+template <typename _ContainerType>
+inline auto Choice(_ContainerType& container) -> typename _ContainerType::iterator
 {
     auto iter = container.begin();
     std::advance(iter, Range(0, container.size() - 1));
@@ -39,8 +39,8 @@ inline auto Choice(ContainerTy& container) -> typename ContainerTy::iterator
 }
 
 /* @todo    Shuffle the given container. */
-template <typename ContainerTy>
-inline void Shuffle(ContainerTy& container)
+template <typename _ContainerType>
+inline void Shuffle(_ContainerType& container)
 {
     auto randomSeed = static_cast<unsigned int>(std::time(nullptr));
     std::shuffle(container.begin(), container.end(), std::default_random_engine(randomSeed));

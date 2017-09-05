@@ -6,6 +6,7 @@
 
 #pragma once
 #include <cmath>
+#include <type_traits>
 #include <cstdint>
 
 #include "Vector3.h"
@@ -20,14 +21,16 @@ constexpr float EPSILON = 0.0001f;
 constexpr float Deg2Rad = PI / 180;
 constexpr float Rad2Deg = 180 / PI;
 
-template <typename _ValueType, typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 inline _ValueType Round(const _ValueType& value) noexcept
 {
-    return std::round(value);
+    return round(value);
 }
 
 /* @return	Value which fractional part is discarded */
-template <typename _ValueType, typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr _ValueType Floor(const _ValueType& value) noexcept
 {
     using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
@@ -39,20 +42,24 @@ constexpr _ValueType Floor(const _ValueType& value) noexcept
 }
 
 /* @return	Returns Square root value. */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 inline _ValueType Sqrt(const _ValueType& value) noexcept
 {
-    return std::sqrt(value);
+    return sqrt(value);
 }
 
 /* @return	Returns largest value of the given parameters. */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Min(const _ValueType& first, const _ValueType& second) noexcept
 {
     return (first <= second) ? first : second;
 }
 
-template <typename _ValueType, typename ..._ArgTypes, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename ..._ArgTypes,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Min(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {
     using tgon::math::Min;
@@ -60,13 +67,16 @@ constexpr _ValueType Min(const _ValueType& first, const _ValueType& second, cons
 }
 
 /* @return	Returns largest value of the given parameters. */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Max(const _ValueType& first, const _ValueType& second) noexcept
 {
     return (first >= second) ? first : second;
 }
 
-template <typename _ValueType, typename ..._ArgTypes, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename ..._ArgTypes,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Max(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {
     using tgon::math::Max;
@@ -74,31 +84,29 @@ constexpr _ValueType Max(const _ValueType& first, const _ValueType& second, cons
 }
 
 /* @return	Returns the absolute value. */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Abs(const _ValueType& value) noexcept
 {
     return (value < static_cast<_ValueType>(0)) ? -value : value;
 }
 
 /* @return  Returns the sign of value which represented as 1, -1 or 0 */
-template<typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template<typename _ValueType,
+         typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Sign(const _ValueType& value) noexcept
 {
     return (value > static_cast<_ValueType>(0)) ? static_cast<_ValueType>(1) : (value < static_cast<_ValueType>(0)) ? static_cast<_ValueType>(-1) : static_cast<_ValueType>(0);
 }
 
 /* @return	Returns clamped value to min and max range */
-template <typename _ValueType, typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const _ValueType& max) noexcept
 {
     return Max(Min(value, max), min);
 }
 
-#if (__cplusplus == 201402L)
-constexpr
-#elif (__cplusplus == 201103L)
-inline
-#endif
 /**
  * @brief                   Perform Linear interpolation.
  * @param [in] from         Interpolation start value
@@ -106,7 +114,7 @@ inline
  * @param [in] timeRatio    Elapsed time ratio between 0.0 ~ 1.0
  * @return                  Returns Interpolated value
  */
-const Vector3 Lerp(const Vector3& from, const Vector3& to, float timeRatio) noexcept
+constexpr const Vector3 Lerp(const Vector3& from, const Vector3& to, float timeRatio) noexcept
 {
     return from + ((from - to) * timeRatio);
 }
@@ -127,11 +135,11 @@ float Smoothstep(float from, float to, float timeRatio) noexcept
 	return timeRatio * timeRatio * (3.0f - (2.0f * timeRatio));
 }
 
-#if (__cplusplus == 201402L)
-constexpr
-#elif (__cplusplus == 201103L)
-inline
-#endif
+//#if (__cplusplus == 201402L)
+//constexpr
+//#elif (__cplusplus == 201103L)
+//inline
+//#endif
 /**
  * @brief                   Two-dimensional bezier curve
  * @param [in] a            The first vertex
@@ -140,11 +148,11 @@ inline
  * @param [in] timeRatio    Elapsed time ratio between 0.0 ~ 1.0
  * @return                  Returns Interpolated vertex.
  */
-const Vector3 QuadraticBezier(const Vector3& a, const Vector3& b, const Vector3& c, float timeRatio) noexcept
-{
-	float inversedTime = 1.0f - timeRatio;
-	return {(inversedTime * inversedTime * a) + (2.0f * timeRatio * inversedTime * b) + (timeRatio * inversedTime * c)};
-}
+//const Vector3 QuadraticBezier(const Vector3& a, const Vector3& b, const Vector3& c, float timeRatio) noexcept
+//{
+//	float inversedTime = 1.0f - timeRatio;
+//	return {(inversedTime * inversedTime * a) + (2.0f * timeRatio * inversedTime * b) + (timeRatio * inversedTime * c)};
+//}
 
 } /* namespace math */
 } /* namespace tgon */

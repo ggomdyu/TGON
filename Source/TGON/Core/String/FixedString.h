@@ -36,7 +36,7 @@ public:
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     using StringTraits<_CharType>::StringTraits;
 
@@ -49,7 +49,7 @@ public:
     template <std::size_t _CharArraySize2>
     BasicFixedString(const BasicFixedString<_CharType, _CharArraySize2>& rhs);
 
-/* @section Operator */
+/* @section Public operator */
 public:
     template <std::size_t _CharArraySize2>
     BasicFixedString& operator=(const BasicFixedString<_CharType, _CharArraySize2>& rhs);

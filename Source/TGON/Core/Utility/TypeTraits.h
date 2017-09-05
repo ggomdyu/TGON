@@ -2,7 +2,7 @@
  * @filename    TypeTraits.h
  * @author      ggomdyu
  * @since       05/24/2016
- * @desc        The traits for function provides information about given type in compile time.
+ * @brief       The traits for function provides information about given type in compile time.
  */
 
 #pragma once

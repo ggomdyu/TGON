@@ -11,11 +11,11 @@ namespace platform
 namespace
 {
 
-const uint32_t g_oldOSExecutionTime = GetOSExecutionTime();
+const auto g_oldOSExecutionTime = GetOSExecutionTime();
 
 } /* namespace */
 
-TGON_API uint32_t GetProcessExecutionTime()
+TGON_API uint64_t GetProcessExecutionTime()
 {
     return GetOSExecutionTime() - g_oldOSExecutionTime;
 }

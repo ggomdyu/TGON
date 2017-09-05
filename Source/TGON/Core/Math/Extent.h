@@ -7,7 +7,6 @@
 #pragma once
 #include <type_traits>
 #include <cstdint>
-#include <string>
 
 namespace tgon
 {
@@ -17,11 +16,12 @@ namespace math
 template <typename _ValueType>
 struct Extent2D
 {
+/* @section Public type */
 public:
     using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Extent2D() noexcept;
@@ -29,7 +29,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Extent2D(_ValueType width, _ValueType height) noexcept;
 
-/* @section Operator */
+/* @section Public operator */
 public:
     constexpr const Extent2D operator+(const Extent2D&) const noexcept;
     constexpr const Extent2D operator-(const Extent2D&) const noexcept;
@@ -175,13 +175,13 @@ inline Extent2D<_ValueType>& Extent2D<_ValueType>::operator/=(DevideType rhs)
 }
 
 template <typename _ValueType>
-inline constexpr bool Extent2D<_ValueType>::operator==(const Extent2D& rhs) const noexcept
+constexpr bool Extent2D<_ValueType>::operator==(const Extent2D& rhs) const noexcept
 {
 	return (width == rhs.width && height == rhs.height);
 }
 
 template <typename _ValueType>
-inline constexpr bool Extent2D<_ValueType>::operator!=(const Extent2D& rhs) const noexcept
+constexpr bool Extent2D<_ValueType>::operator!=(const Extent2D& rhs) const noexcept
 {
     return (width != rhs.width && height != rhs.height);
 }
@@ -212,15 +212,6 @@ inline int32_t Extent2D<_ValueType>::ToString(char* destBuffer, std::size_t buff
 #else
     return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
 #endif
-}
-
-template<typename _ValueType>
-inline std::string Extent2D<_ValueType>::ToString() const
-{
-    char buffer[128]{};
-    this->ToString(buffer);
-
-    return buffer;
 }
 
 } /* namespace math */

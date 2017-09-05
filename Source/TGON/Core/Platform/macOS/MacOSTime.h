@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../Base/BaseTime.h"
+#include "Core/Platform/Base/BaseTime.h"
 
 namespace tgon
 {

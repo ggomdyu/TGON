@@ -6,7 +6,7 @@
 
 #pragma once
 #include <cassert>
-#include <cstddef>
+#include <cstdint>
 #include <cmath>
 
 #include "Core/Platform/Config.h"
@@ -18,7 +18,7 @@ namespace math
 
 struct TGON_API Vector3
 {
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Vector3() noexcept;
@@ -26,7 +26,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
-/* @section Operator */
+/* @section Public perator */
 public:
     constexpr const Vector3 operator+(const Vector3&) const noexcept;
     constexpr const Vector3 operator-(const Vector3&) const noexcept;
@@ -43,9 +43,9 @@ public:
     Vector3& operator/=(float);
     constexpr bool operator==(const Vector3&) const noexcept;
     constexpr bool operator!=(const Vector3&) const noexcept;
-    float& operator[](std::size_t) noexcept;
-    float operator[](std::size_t) const noexcept;
-	
+    float& operator[](std::size_t index) noexcept;
+    float operator[](std::size_t index) const noexcept;
+    
 /* @section Public method */
 public:
     static constexpr float Dot(const Vector3& a, const Vector3& b) noexcept;
@@ -60,6 +60,22 @@ public:
     const Vector3 Normalized() const;
     void TransformCoord(const struct TMatrix4x4&) noexcept;
     void TransformNormal(const struct TMatrix4x4&) noexcept;
+
+    /**
+     * @brief                       Converts value to a string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @return                      The length of string converted.
+     */
+    template <std::size_t _BufferSize>
+    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
+
+    /**
+     * @brief                       Converts value to a string.
+     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [in] bufferSize       The size of destBuffer.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
 
 /* @section Public variable */
 public:

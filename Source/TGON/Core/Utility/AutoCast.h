@@ -2,7 +2,7 @@
  * @filename    AutoCast.h
  * @author      ggomdyu
  * @since       05/24/2016
- * @desc        Automatic type caster with no casting type specifier
+ * @brief       Automatic type caster with no casting type specifier
  */
 
 #pragma once

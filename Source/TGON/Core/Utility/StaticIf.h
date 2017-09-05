@@ -2,7 +2,8 @@
  * @filename    StaticIf.h
  * @author      ggomdyu
  * @since       07/01/2017
- * @desc        static-if implementation for C++11/14.
+ * @brief       static-if implementation for C++11/14.
+ * @seealso     https://github.com/CppCon/CppCon2016/blob/master/Tutorials/Implementing%20static%20control%20flow%20in%20C%2B%2B14/Implementing%20static%20control%20flow%20in%20C%2B%2B14%20-%20Vittorio%20Romeo%20-%20CppCon%202016.pdf
  */
 
 #pragma once

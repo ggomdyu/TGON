@@ -17,12 +17,12 @@ namespace math
 /* @brief Color structure in ARGB order. */
 struct Color4b
 {
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     constexpr Color4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept;
     constexpr Color4b(uint32_t packedColor) noexcept;
 
-/* @section Operator */
+/* @section Public operator */
 public:
     constexpr operator uint32_t() const noexcept;
 
@@ -45,7 +45,10 @@ public:
 };
 
 constexpr Color4b::Color4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept :
-    a(a), r(r), g(g), b(b)
+    a(a),
+    r(r),
+    g(g),
+    b(b)
 {
 }
 

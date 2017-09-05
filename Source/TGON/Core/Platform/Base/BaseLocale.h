@@ -2,7 +2,7 @@
  * @filename    BaseTime.h
  * @author      ggomdyu
  * @since       05/15/2016
- * @desc        Set of Platform-agnostic Locale interface.
+ * @brief       Set of Platform-agnostic Locale interface.
  */
 
 #pragma once

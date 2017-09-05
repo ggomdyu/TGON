@@ -7,7 +7,6 @@
 #pragma once
 #include <type_traits>
 #include <cstdint>
-#include <string>
 
 namespace tgon
 {
@@ -22,7 +21,7 @@ public:
     using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Rect() noexcept;
@@ -30,7 +29,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Rect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept;
 
-/* @section Operator */
+/* @section Public operator */
 public:
     constexpr const Rect operator+(const Rect&) const noexcept;
     constexpr const Rect operator-(const Rect&) const noexcept;
@@ -62,9 +61,6 @@ public:
      * @return                      The length of string converted.
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
-    
-    /* @return  Converts value to a string. */
-    std::string ToString() const;
 
 /* @section Public variable */
 public:
@@ -202,7 +198,7 @@ constexpr bool Rect<_ValueType>::operator==(const Rect& rhs) const noexcept
 template <typename _ValueType>
 constexpr bool Rect<_ValueType>::operator!=(const Rect& rhs) const noexcept
 {
-    return (bottom != rhs.bottom && top != rhs.top && width != rhs.width && height != rhs.height);
+    return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }
 
 template<typename _ValueType>
@@ -224,15 +220,6 @@ inline int32_t Rect<_ValueType>::ToString(char* destBuffer, std::size_t bufferSi
 #else
     return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
 #endif
-}
-
-template<typename _ValueTy>
-inline std::string Rect<_ValueTy>::ToString() const
-{
-    char buffer[128]{};
-    this->ToString(buffer);
-
-    return buffer;
 }
 
 } /* namespace math */

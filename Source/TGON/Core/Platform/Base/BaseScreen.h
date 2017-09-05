@@ -2,7 +2,7 @@
  * @filename    BaseScreen.h
  * @author      ggomdyu
  * @since       08/06/2017
- * @desc        Set of Plaform-agnostic Screen interface.
+ * @brief       Set of Plaform-agnostic Screen interface.
  */
 
 #pragma once

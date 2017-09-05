@@ -2,7 +2,7 @@
  * @filename    WELLRNG.h
  * @author      ggomdyu
  * @since       05/05/2017
- * @desc        Random number generate algorithm that faster than the Mersenne Twister above 40%
+ * @brief       Random number generate algorithm that faster than the Mersenne Twister above 40%
  * @see         http://www.iro.umontreal.ca/~panneton/WELLRNG.html
  */
 

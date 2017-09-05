@@ -7,7 +7,6 @@
 #pragma once
 #include <type_traits>
 #include <cstdint>
-#include <string>
 
 namespace tgon
 {
@@ -22,7 +21,7 @@ public:
     using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
     constexpr Point() noexcept;
@@ -30,7 +29,7 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Point(_ValueType x, _ValueType y) noexcept;
 
-/* @section Operator */
+/* @section Public operator */
 public:
     constexpr const Point operator+(const Point&) const noexcept;
     constexpr const Point operator-(const Point&) const noexcept;
@@ -65,9 +64,6 @@ public:
      * @return                      The length of string converted.
      */
     int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
-    
-    /* @return  Converts value to a string. */
-    std::string ToString() const;
 
 /* @section Public variable */
 public:
@@ -177,15 +173,15 @@ inline Point<_ValueType>& Point<_ValueType>::operator/=(DevideType rhs)
 }
 
 template <typename _ValueType>
-inline constexpr bool Point<_ValueType>::operator==(const Point& rhs) const noexcept
+constexpr bool Point<_ValueType>::operator==(const Point& rhs) const noexcept
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
 template <typename _ValueType>
-inline constexpr bool Point<_ValueType>::operator!=(const Point& rhs) const noexcept
+constexpr bool Point<_ValueType>::operator!=(const Point& rhs) const noexcept
 {
-    return (x != rhs.x && y != rhs.y);
+    return (x != rhs.x || y != rhs.y);
 }
 
 template<typename _ValueType>
@@ -214,15 +210,6 @@ inline int32_t Point<_ValueType>::ToString(char* destBuffer, std::size_t bufferS
 #else
     return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
 #endif
-}
-
-template<typename _ValueType>
-inline std::string Point<_ValueType>::ToString() const
-{
-    char buffer[128] {};
-    this->ToString(buffer);
-
-    return buffer;
 }
 
 } /* namespace math */

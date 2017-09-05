@@ -26,7 +26,7 @@ enum class DayOfWeek
 
 struct DateTime
 {
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     constexpr explicit DateTime(const std::tm& rawTime) noexcept;
 
