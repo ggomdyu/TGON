@@ -18,18 +18,18 @@ namespace object
 
 struct TGON_API TypeInfo final
 {
-    /* @section Ctor/Dtor */
+/* @section Ctor/Dtor */
 public:
     TypeInfo(const std::type_info& rawTypeInfo, const TypeInfo* superTypeInfo) noexcept;
 
-    /* @section Public method */
+/* @section Public method */
 public:
     std::size_t GetHashCode() const noexcept;
     const char* GetName() const noexcept;
 
     const TypeInfo* GetSuperTypeInfo() const noexcept;
 
-    /* @section Private variable */
+/* @section Private variable */
 private:
     const std::type_info& m_rawTypeInfo;
     const TypeInfo* m_superTypeInfo;

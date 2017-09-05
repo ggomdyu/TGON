@@ -13,14 +13,11 @@
    </Group>
    <Group
       location = "container:"
-      name = "01. GraphicsCore">
-      <FileRef
-         location = "group:TGON.GraphicsCore.OpenGL/TGON.GraphicsCore.OpenGL.xcodeproj">
-      </FileRef>
+      name = "01. Graphics">
    </Group>
    <Group
       location = "container:"
-      name = "02. GameCore">
+      name = "02. Game">
    </Group>
    <Group
       location = "container:"

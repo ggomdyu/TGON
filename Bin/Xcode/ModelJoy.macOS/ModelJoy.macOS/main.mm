@@ -37,6 +37,21 @@ int main(int argc, char* argv[])
         using namespace tgon;
         using namespace tgon::object;
 
+
+        auto b = platform::GetProcessExecutionTime();
+        {
+            for (int i = 0; i< 10000000; ++i)
+            {
+                if(&typeid(int) == &typeid(Window))
+                {
+                    int n = 3;
+                }
+            }
+        }
+        auto e = platform::GetProcessExecutionTime();
+
+        std::cout << e - b << std::endl;
+
         id sharedApplication = [NSApplication sharedApplication];
 
         [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];

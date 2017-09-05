@@ -14,7 +14,7 @@
 #elif BOOST_OS_ANDROID
 #	include "Android/AndroidWindow.h"
 #elif BOOST_OS_MACOS
-#	include "MacOS/MacOSWindow.h"
+#	import "MacOS/MacOSWindow.h"
 #elif BOOST_OS_IOS
 #	import "IOS/IOSWindow.h"
 #endif

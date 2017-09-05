@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <cstdint>
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
