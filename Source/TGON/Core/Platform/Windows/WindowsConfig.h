@@ -5,6 +5,12 @@
  */
 
 #pragma once
+
+#ifndef NOMINMAX
+#	define NOMINMAX
+#endif
+
+#define TGON_PLATFORM_WINDOWS
 #define TGON_USING_LITTLE_ENDIAN
 
 #define TGON_SUPPORT_SSE2
