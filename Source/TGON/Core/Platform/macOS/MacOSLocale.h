@@ -8,6 +8,8 @@
 #pragma once
 #import <cstddef>
 
+#import "Core/Platform/Base/BaseLocale.h"
+
 namespace tgon
 {
 namespace platform
