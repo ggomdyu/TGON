@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD51C1951F20F64A003F08B6 /* libTGON.Core.macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD51C1941F20F64A003F08B6 /* libTGON.Core.macOS.a */; };
-		FD51C1981F20F80B003F08B6 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD51C1971F20F80B003F08B6 /* main.mm */; };
-		FD51C19B1F20F978003F08B6 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD51C1991F20F978003F08B6 /* GLUT.framework */; };
-		FD51C19C1F20F978003F08B6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD51C19A1F20F978003F08B6 /* OpenGL.framework */; };
-		FD51C19E1F20FDD4003F08B6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD51C19D1F20FDD4003F08B6 /* Cocoa.framework */; };
+		FDD7C8CB1F654342000EB7C8 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDD7C8CA1F654342000EB7C8 /* main.mm */; };
+		FDD7C8F01F6586D5000EB7C8 /* libTGON.Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */; };
+		FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9171F68458C000EB7C8 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FD51C1871F20F634003F08B6 /* CopyFiles */ = {
+		FDD7C8C51F654342000EB7C8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -27,61 +25,57 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FD51C1891F20F634003F08B6 /* ModelJoy.macOS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ModelJoy.macOS; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD51C1941F20F64A003F08B6 /* libTGON.Core.macOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.macOS.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.Core.macOS.a"; sourceTree = "<group>"; };
-		FD51C1971F20F80B003F08B6 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		FD51C1991F20F978003F08B6 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		FD51C19A1F20F978003F08B6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		FD51C19D1F20FDD4003F08B6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDD7C8CA1F654342000EB7C8 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.Core.a"; sourceTree = "<group>"; };
+		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FD51C1861F20F634003F08B6 /* Frameworks */ = {
+		FDD7C8C41F654342000EB7C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD51C19E1F20FDD4003F08B6 /* Cocoa.framework in Frameworks */,
-				FD51C19B1F20F978003F08B6 /* GLUT.framework in Frameworks */,
-				FD51C19C1F20F978003F08B6 /* OpenGL.framework in Frameworks */,
-				FD51C1951F20F64A003F08B6 /* libTGON.Core.macOS.a in Frameworks */,
+				FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */,
+				FDD7C8F01F6586D5000EB7C8 /* libTGON.Core.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD51C1801F20F634003F08B6 = {
+		FDD7C8BE1F654342000EB7C8 = {
 			isa = PBXGroup;
 			children = (
-				FD51C18B1F20F634003F08B6 /* ModelJoy.macOS */,
-				FD51C18A1F20F634003F08B6 /* Products */,
-				FD51C1931F20F64A003F08B6 /* Frameworks */,
+				FDD7C8C91F654342000EB7C8 /* ThousandParty */,
+				FDD7C8C81F654342000EB7C8 /* Products */,
+				FDD7C8EE1F6586D5000EB7C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		FD51C18A1F20F634003F08B6 /* Products */ = {
+		FDD7C8C81F654342000EB7C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD51C1891F20F634003F08B6 /* ModelJoy.macOS */,
+				FDD7C8C71F654342000EB7C8 /* ThousandParty */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FD51C18B1F20F634003F08B6 /* ModelJoy.macOS */ = {
+		FDD7C8C91F654342000EB7C8 /* ThousandParty */ = {
 			isa = PBXGroup;
 			children = (
-				FD51C1971F20F80B003F08B6 /* main.mm */,
+				FDD7C8CA1F654342000EB7C8 /* main.mm */,
 			);
-			path = ModelJoy.macOS;
+			path = ThousandParty;
 			sourceTree = "<group>";
 		};
-		FD51C1931F20F64A003F08B6 /* Frameworks */ = {
+		FDD7C8EE1F6586D5000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD51C19D1F20FDD4003F08B6 /* Cocoa.framework */,
-				FD51C1991F20F978003F08B6 /* GLUT.framework */,
-				FD51C19A1F20F978003F08B6 /* OpenGL.framework */,
-				FD51C1941F20F64A003F08B6 /* libTGON.Core.macOS.a */,
+				FDD7C9191F684593000EB7C8 /* Foundation.framework */,
+				FDD7C9171F68458C000EB7C8 /* Cocoa.framework */,
+				FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -89,69 +83,69 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FD51C1881F20F634003F08B6 /* ModelJoy.macOS */ = {
+		FDD7C8C61F654342000EB7C8 /* ThousandParty */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD51C1901F20F634003F08B6 /* Build configuration list for PBXNativeTarget "ModelJoy.macOS" */;
+			buildConfigurationList = FDD7C8CE1F654342000EB7C8 /* Build configuration list for PBXNativeTarget "ThousandParty" */;
 			buildPhases = (
-				FD51C1851F20F634003F08B6 /* Sources */,
-				FD51C1861F20F634003F08B6 /* Frameworks */,
-				FD51C1871F20F634003F08B6 /* CopyFiles */,
+				FDD7C8C31F654342000EB7C8 /* Sources */,
+				FDD7C8C41F654342000EB7C8 /* Frameworks */,
+				FDD7C8C51F654342000EB7C8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ModelJoy.macOS;
-			productName = ModelJoy.macOS;
-			productReference = FD51C1891F20F634003F08B6 /* ModelJoy.macOS */;
+			name = ThousandParty;
+			productName = ThousandParty;
+			productReference = FDD7C8C71F654342000EB7C8 /* ThousandParty */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FD51C1811F20F634003F08B6 /* Project object */ = {
+		FDD7C8BF1F654342000EB7C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = ggomdyu;
 				TargetAttributes = {
-					FD51C1881F20F634003F08B6 = {
+					FDD7C8C61F654342000EB7C8 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = WU734J36XA;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = FD51C1841F20F634003F08B6 /* Build configuration list for PBXProject "ModelJoy.macOS" */;
+			buildConfigurationList = FDD7C8C21F654342000EB7C8 /* Build configuration list for PBXProject "ThousandParty" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = FD51C1801F20F634003F08B6;
-			productRefGroup = FD51C18A1F20F634003F08B6 /* Products */;
+			mainGroup = FDD7C8BE1F654342000EB7C8;
+			productRefGroup = FDD7C8C81F654342000EB7C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD51C1881F20F634003F08B6 /* ModelJoy.macOS */,
+				FDD7C8C61F654342000EB7C8 /* ThousandParty */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FD51C1851F20F634003F08B6 /* Sources */ = {
+		FDD7C8C31F654342000EB7C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD51C1981F20F80B003F08B6 /* main.mm in Sources */,
+				FDD7C8CB1F654342000EB7C8 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		FD51C18E1F20F634003F08B6 /* Debug */ = {
+		FDD7C8CC1F654342000EB7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -199,7 +193,7 @@
 			};
 			name = Debug;
 		};
-		FD51C18F1F20F634003F08B6 /* Release */ = {
+		FDD7C8CD1F654342000EB7C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -240,31 +234,27 @@
 			};
 			name = Release;
 		};
-		FD51C1911F20F634003F08B6 /* Debug */ = {
+		FDD7C8CF1F654342000EB7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../Source/TGON/PrecompiledHeader.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 					"$(PROJECT_DIR)/../../../Source/TGON",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		FD51C1921F20F634003F08B6 /* Release */ = {
+		FDD7C8D01F654342000EB7C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DEVELOPMENT_TEAM = WU734J36XA;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../Source/TGON/PrecompiledHeader.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 					"$(PROJECT_DIR)/../../../Source/TGON",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -273,25 +263,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FD51C1841F20F634003F08B6 /* Build configuration list for PBXProject "ModelJoy.macOS" */ = {
+		FDD7C8C21F654342000EB7C8 /* Build configuration list for PBXProject "ThousandParty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD51C18E1F20F634003F08B6 /* Debug */,
-				FD51C18F1F20F634003F08B6 /* Release */,
+				FDD7C8CC1F654342000EB7C8 /* Debug */,
+				FDD7C8CD1F654342000EB7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD51C1901F20F634003F08B6 /* Build configuration list for PBXNativeTarget "ModelJoy.macOS" */ = {
+		FDD7C8CE1F654342000EB7C8 /* Build configuration list for PBXNativeTarget "ThousandParty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD51C1911F20F634003F08B6 /* Debug */,
-				FD51C1921F20F634003F08B6 /* Release */,
+				FDD7C8CF1F654342000EB7C8 /* Debug */,
+				FDD7C8D01F654342000EB7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FD51C1811F20F634003F08B6 /* Project object */;
+	rootObject = FDD7C8BF1F654342000EB7C8 /* Project object */;
 }

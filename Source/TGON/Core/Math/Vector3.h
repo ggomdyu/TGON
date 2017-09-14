@@ -8,6 +8,7 @@
 #include <cassert>
 #include <cstdint>
 #include <cmath>
+#include <cstdio>
 
 #include "Core/Platform/Config.h"
 
@@ -58,8 +59,8 @@ public:
     constexpr float LengthSq() const noexcept;
     void Normalize();
     const Vector3 Normalized() const;
-    void TransformCoord(const struct TMatrix4x4&) noexcept;
-    void TransformNormal(const struct TMatrix4x4&) noexcept;
+//    void TransformCoord(const struct Matrix4x4&) noexcept;
+//    void TransformNormal(const struct Matrix4x4&) noexcept;
 
     /**
      * @brief                       Converts value to a string.
@@ -266,6 +267,25 @@ inline const Vector3 Vector3::Normalized() const
     float inverse = 1.0f / std::sqrtf(x*x + y*y + z*z);
 
     return Vector3(x * inverse, y * inverse, z * inverse);
+}
+
+template<std::size_t _BufferSize>
+inline int32_t Vector3::ToString(char(&destBuffer)[_BufferSize]) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, "%f %f %f", x, y, z);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%f %f %f", x, y, z);
+#endif
+}
+
+inline int32_t Vector3::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f", x, y, z);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f", x, y, z);
+#endif
 }
 
 } /* namespace math */

@@ -7,6 +7,7 @@
 #pragma once
 #include <type_traits>
 #include <cstdint>
+#include <cstdio>
 
 namespace tgon
 {
@@ -14,7 +15,7 @@ namespace math
 {
 
 template <typename _ValueType>
-struct Rect
+struct BasicRect
 {
 /* @section Public type */
 public:
@@ -24,25 +25,25 @@ public:
 /* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
-    constexpr Rect() noexcept;
+    constexpr BasicRect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr Rect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept;
+    constexpr BasicRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept;
 
 /* @section Public operator */
 public:
-    constexpr const Rect operator+(const Rect&) const noexcept;
-    constexpr const Rect operator-(const Rect&) const noexcept;
-    constexpr const Rect operator*(_ValueType) const noexcept;
-    constexpr const Rect operator/(DevideType) const;
-    constexpr const Rect operator+() const noexcept;
-    constexpr const Rect operator-() const noexcept;
-    Rect& operator+=(const Rect&) noexcept;
-    Rect& operator-=(const Rect&) noexcept;
-    Rect& operator*=(_ValueType) noexcept;
-    Rect& operator/=(DevideType);
-    constexpr bool operator==(const Rect&) const noexcept;
-    constexpr bool operator!=(const Rect&) const noexcept;
+    constexpr const BasicRect operator+(const BasicRect&) const noexcept;
+    constexpr const BasicRect operator-(const BasicRect&) const noexcept;
+    constexpr const BasicRect operator*(_ValueType) const noexcept;
+    constexpr const BasicRect operator/(DevideType) const;
+    constexpr const BasicRect operator+() const noexcept;
+    constexpr const BasicRect operator-() const noexcept;
+    BasicRect& operator+=(const BasicRect&) noexcept;
+    BasicRect& operator-=(const BasicRect&) noexcept;
+    BasicRect& operator*=(_ValueType) noexcept;
+    BasicRect& operator/=(DevideType);
+    constexpr bool operator==(const BasicRect&) const noexcept;
+    constexpr bool operator!=(const BasicRect&) const noexcept;
 
 /* @section Public method */
 public:
@@ -69,23 +70,22 @@ public:
     _ValueType width;
     _ValueType height;
 
-	static const Rect One;		// 0, 0, 0, 0
-	static const Rect Zero;	    // 1, 1, 1, 1
-	static const Rect MinusOne;	// -1, -1, -1, -1
+	static const BasicRect One;		// 0, 0, 0, 0
+	static const BasicRect Zero;	    // 1, 1, 1, 1
+	static const BasicRect MinusOne;	// -1, -1, -1, -1
 };
 
 template <typename _ValueType>
-constexpr Rect<_ValueType> MakeRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept
+constexpr BasicRect<_ValueType> MakeRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept
 {
     return {bottom, top, width, height};
 }
 
-using IntRect = Rect<int32_t>;
-using FloatRect = Rect<float>;
-using DoubleRect = Rect<double>;
+using Rect = BasicRect<int32_t>;
+using FRect = BasicRect<float>;
 
 template <typename _ValueType>
-constexpr Rect<_ValueType>::Rect() noexcept :
+constexpr BasicRect<_ValueType>::BasicRect() noexcept :
     bottom{},
     top{},
     width{},
@@ -94,7 +94,7 @@ constexpr Rect<_ValueType>::Rect() noexcept :
 }
 
 template <typename _ValueType>
-constexpr Rect<_ValueType>::Rect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept :
+constexpr BasicRect<_ValueType>::BasicRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept :
     bottom( bottom),
     top(top),
     width(width),
@@ -103,48 +103,48 @@ constexpr Rect<_ValueType>::Rect(_ValueType bottom, _ValueType top, _ValueType w
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator+(const Rect& rhs) const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+(const BasicRect& rhs) const noexcept
 {
-    return Rect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
+    return BasicRect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator-(const Rect& rhs) const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-(const BasicRect& rhs) const noexcept
 {
-    return Rect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
+    return BasicRect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator*(_ValueType rhs) const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
-    return Rect(bottom * rhs, top * rhs, width * rhs, height * rhs);
+    return BasicRect(bottom * rhs, top * rhs, width * rhs, height * rhs);
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator/(DevideType rhs) const
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(DevideType rhs) const
 {
     DevideType inverse = 1.0f / rhs;
 
-    return Rect((_ValueType)((DevideType)bottom * inverse),
-                 (_ValueType)((DevideType)top * inverse),
-                 (_ValueType)((DevideType)width * inverse),
-                 (_ValueType)((DevideType)height * inverse));
+    return BasicRect((_ValueType)((DevideType)bottom * inverse),
+                     (_ValueType)((DevideType)top * inverse),
+                     (_ValueType)((DevideType)width * inverse),
+                     (_ValueType)((DevideType)height * inverse));
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator+() const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename _ValueType>
-constexpr const Rect<_ValueType> Rect<_ValueType>::operator-() const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-() const noexcept
 {
-	return Rect(-bottom, -top, -width, -height);
+	return BasicRect(-bottom, -top, -width, -height);
 }
 
 template <typename _ValueType>
-inline Rect<_ValueType>& Rect<_ValueType>::operator+=(const Rect& rhs) noexcept
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect& rhs) noexcept
 {
 	bottom += rhs.bottom;
     top += rhs.top;
@@ -155,7 +155,7 @@ inline Rect<_ValueType>& Rect<_ValueType>::operator+=(const Rect& rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Rect<_ValueType>& Rect<_ValueType>::operator-=(const Rect& rhs) noexcept
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect& rhs) noexcept
 {
     bottom -= rhs.bottom;
     top -= rhs.top;
@@ -166,7 +166,7 @@ inline Rect<_ValueType>& Rect<_ValueType>::operator-=(const Rect& rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Rect<_ValueType>& Rect<_ValueType>::operator*=(_ValueType rhs) noexcept
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
     bottom *= rhs;
     top *= rhs;
@@ -177,7 +177,7 @@ inline Rect<_ValueType>& Rect<_ValueType>::operator*=(_ValueType rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Rect<_ValueType>& Rect<_ValueType>::operator/=(DevideType rhs)
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(DevideType rhs)
 {
 	DevideType inverse = 1.0f / rhs;
 
@@ -190,35 +190,51 @@ inline Rect<_ValueType>& Rect<_ValueType>::operator/=(DevideType rhs)
 }
 
 template <typename _ValueType>
-constexpr bool Rect<_ValueType>::operator==(const Rect& rhs) const noexcept
+constexpr bool BasicRect<_ValueType>::operator==(const BasicRect& rhs) const noexcept
 {
 	return (bottom == rhs.bottom && top == rhs.top && width == rhs.width && height == rhs.height);
 }
 
 template <typename _ValueType>
-constexpr bool Rect<_ValueType>::operator!=(const Rect& rhs) const noexcept
+constexpr bool BasicRect<_ValueType>::operator!=(const BasicRect& rhs) const noexcept
 {
     return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
 }
 
-template<typename _ValueType>
-template<std::size_t _BufferSize>
-inline int32_t Rect<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
+template <typename _ValueType>
+template <std::size_t _BufferSize>
+inline int32_t BasicRect<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
 {
-#if _MSC_VER
-    return sprintf_s(destBuffer, "%d %d %d %d", bottom, top, width, height);
-#else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%d %d %d %d", bottom, top, width, height);
-#endif
+    return this->ToString(destBuffer, _BufferSize);
 }
 
-template<typename _ValueType>
-inline int32_t Rect<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
+template <typename _ValueType>
+inline int32_t BasicRect<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%d %d %d %d", bottom, top, width, height);
+#endif
+}
+
+template <>
+inline int32_t BasicRect<float>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f %f", bottom, top, width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%f %f %f %f", bottom, top, width, height);
+#endif
+}
+
+template <>
+inline int32_t BasicRect<double>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
 #endif
 }
 

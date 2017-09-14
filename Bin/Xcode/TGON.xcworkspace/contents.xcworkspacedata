@@ -3,27 +3,16 @@
    version = "1.0">
    <Group
       location = "container:"
-      name = "00. Core">
+      name = "01. TGON">
       <FileRef
-         location = "group:TGON.Core.macOS/TGON.Core.macOS.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:TGON.Core.iOS/TGON.Core.iOS.xcodeproj">
+         location = "group:TGON.Core/TGON.Core.xcodeproj">
       </FileRef>
    </Group>
    <Group
       location = "container:"
-      name = "01. Graphics">
-   </Group>
-   <Group
-      location = "container:"
-      name = "02. Game">
-   </Group>
-   <Group
-      location = "container:"
-      name = "03. Content">
+      name = "02. Contents">
       <FileRef
-         location = "group:ModelJoy.macOS/ModelJoy.macOS.xcodeproj">
+         location = "group:ThousandParty/ThousandParty.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

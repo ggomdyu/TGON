@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FD51C1881F20F634003F08B6"
-               BuildableName = "ModelJoy.macOS"
-               BlueprintName = "ModelJoy.macOS"
-               ReferencedContainer = "container:ModelJoy.macOS.xcodeproj">
+               BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
+               BuildableName = "libTGON.Core.a"
+               BlueprintName = "TGON.Core"
+               ReferencedContainer = "container:TGON.Core.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,20 +29,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD51C1881F20F634003F08B6"
-            BuildableName = "ModelJoy.macOS"
-            BlueprintName = "ModelJoy.macOS"
-            ReferencedContainer = "container:ModelJoy.macOS.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD51C1881F20F634003F08B6"
-            BuildableName = "ModelJoy.macOS"
-            BlueprintName = "ModelJoy.macOS"
-            ReferencedContainer = "container:ModelJoy.macOS.xcodeproj">
+            BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
+            BuildableName = "libTGON.Core.a"
+            BlueprintName = "TGON.Core"
+            ReferencedContainer = "container:TGON.Core.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD51C1881F20F634003F08B6"
-            BuildableName = "ModelJoy.macOS"
-            BlueprintName = "ModelJoy.macOS"
-            ReferencedContainer = "container:ModelJoy.macOS.xcodeproj">
+            BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
+            BuildableName = "libTGON.Core.a"
+            BlueprintName = "TGON.Core"
+            ReferencedContainer = "container:TGON.Core.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

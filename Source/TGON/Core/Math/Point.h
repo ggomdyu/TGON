@@ -7,6 +7,9 @@
 #pragma once
 #include <type_traits>
 #include <cstdint>
+#include <cstdio>
+
+#include "Core/Utility/StaticIf.h"
 
 namespace tgon
 {
@@ -14,7 +17,7 @@ namespace math
 {
 
 template <typename _ValueType>
-struct Point
+struct BasicPoint
 {
 /* @section Public type */
 public:
@@ -24,28 +27,28 @@ public:
 /* @section Public constructor */
 public:
     /* @brief   Constructor that initializes members to 0 */
-    constexpr Point() noexcept;
+    constexpr BasicPoint() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr Point(_ValueType x, _ValueType y) noexcept;
+    constexpr BasicPoint(_ValueType x, _ValueType y) noexcept;
 
 /* @section Public operator */
 public:
-    constexpr const Point operator+(const Point&) const noexcept;
-    constexpr const Point operator-(const Point&) const noexcept;
-    constexpr const Point operator*(_ValueType) const noexcept;
-    constexpr const Point operator/(DevideType) const;
-    constexpr const Point operator+() const noexcept;
-    constexpr const Point operator-() const noexcept;
-    Point& operator+=(const Point&) noexcept;
-    Point& operator-=(const Point&) noexcept;
-    Point& operator*=(_ValueType) noexcept;
-    Point& operator/=(DevideType);
-    constexpr bool operator==(const Point&) const noexcept;
-    constexpr bool operator!=(const Point&) const noexcept;
+    constexpr const BasicPoint operator+(const BasicPoint&) const noexcept;
+    constexpr const BasicPoint operator-(const BasicPoint&) const noexcept;
+    constexpr const BasicPoint operator*(_ValueType) const noexcept;
+    constexpr const BasicPoint operator/(DevideType) const;
+    constexpr const BasicPoint operator+() const noexcept;
+    constexpr const BasicPoint operator-() const noexcept;
+    BasicPoint& operator+=(const BasicPoint&) noexcept;
+    BasicPoint& operator-=(const BasicPoint&) noexcept;
+    BasicPoint& operator*=(_ValueType) noexcept;
+    BasicPoint& operator/=(DevideType);
+    constexpr bool operator==(const BasicPoint&) const noexcept;
+    constexpr bool operator!=(const BasicPoint&) const noexcept;
 
     template <typename _CastToType>
-    constexpr operator Point<_CastToType>() const noexcept;
+    constexpr operator BasicPoint<_CastToType>() const noexcept;
 
 /* @section Public method */
 public:
@@ -70,74 +73,73 @@ public:
     _ValueType x;
     _ValueType y;
 
-	static const Point One;         // 1, 1
-    static const Point Zero;        // 0, 0
-	static const Point MinusOne;    // -1, -1
+	static const BasicPoint One;         // 1, 1
+    static const BasicPoint Zero;        // 0, 0
+	static const BasicPoint MinusOne;    // -1, -1
 };
 
 template <typename _ValueType>
-constexpr Point<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
+constexpr BasicPoint<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
 {
     return {x, y};
 }
 
-using IntPoint = Point<int32_t>;
-using FloatPoint = Point<float>;
-using DoublePoint = Point<double>;
+using Point = BasicPoint<int32_t>;
+using FPoint = BasicPoint<float>;
 
 template <typename _ValueType>
-constexpr Point<_ValueType>::Point() noexcept :
+constexpr BasicPoint<_ValueType>::BasicPoint() noexcept :
     x{},
     y{}
 {
 }
 
 template <typename _ValueType>
-constexpr Point<_ValueType>::Point(_ValueType x, _ValueType y) noexcept :
+constexpr BasicPoint<_ValueType>::BasicPoint(_ValueType x, _ValueType y) noexcept :
     x(x),
     y(y)
 {
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator+(const Point& rhs) const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator+(const BasicPoint& rhs) const noexcept
 {
-    return Point(x + rhs.x, y + rhs.y);
+    return BasicPoint(x + rhs.x, y + rhs.y);
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator-(const Point& rhs) const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator-(const BasicPoint& rhs) const noexcept
 {
-    return Point(x - rhs.x, y - rhs.y);
+    return BasicPoint(x - rhs.x, y - rhs.y);
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator*(_ValueType rhs) const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
-    return Point(x * rhs, y * rhs);
+    return BasicPoint(x * rhs, y * rhs);
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator/(DevideType rhs) const
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(DevideType rhs) const
 {
-    return Point((_ValueType)((DevideType)x / (DevideType)rhs),
+    return BasicPoint((_ValueType)((DevideType)x / (DevideType)rhs),
                  (_ValueType)((DevideType)y / (DevideType)rhs));
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator+() const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator+() const noexcept
 {
 	return *this;
 }
 
 template <typename _ValueType>
-constexpr const Point<_ValueType> Point<_ValueType>::operator-() const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator-() const noexcept
 {
-	return Point(-x, -y);
+	return BasicPoint(-x, -y);
 }
 
 template <typename _ValueType>
-inline Point<_ValueType>& Point<_ValueType>::operator+=(const Point& rhs) noexcept
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator+=(const BasicPoint& rhs) noexcept
 {
     x += rhs.x;
     y += rhs.y;
@@ -146,7 +148,7 @@ inline Point<_ValueType>& Point<_ValueType>::operator+=(const Point& rhs) noexce
 }
 
 template <typename _ValueType>
-inline Point<_ValueType>& Point<_ValueType>::operator-=(const Point& rhs) noexcept
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator-=(const BasicPoint& rhs) noexcept
 {
     x -= rhs.x;
     y -= rhs.y;
@@ -155,7 +157,7 @@ inline Point<_ValueType>& Point<_ValueType>::operator-=(const Point& rhs) noexce
 }
 
 template <typename _ValueType>
-inline Point<_ValueType>& Point<_ValueType>::operator*=(_ValueType rhs) noexcept
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
     x *= rhs;
     y *= rhs;
@@ -164,7 +166,7 @@ inline Point<_ValueType>& Point<_ValueType>::operator*=(_ValueType rhs) noexcept
 }
 
 template <typename _ValueType>
-inline Point<_ValueType>& Point<_ValueType>::operator/=(DevideType rhs)
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator/=(DevideType rhs)
 {
     x = (_ValueType)((DevideType)x / rhs);
     y = (_ValueType)((DevideType)y / rhs);
@@ -173,42 +175,58 @@ inline Point<_ValueType>& Point<_ValueType>::operator/=(DevideType rhs)
 }
 
 template <typename _ValueType>
-constexpr bool Point<_ValueType>::operator==(const Point& rhs) const noexcept
+constexpr bool BasicPoint<_ValueType>::operator==(const BasicPoint& rhs) const noexcept
 {
 	return (x == rhs.x && y == rhs.y);
 }
 
 template <typename _ValueType>
-constexpr bool Point<_ValueType>::operator!=(const Point& rhs) const noexcept
+constexpr bool BasicPoint<_ValueType>::operator!=(const BasicPoint& rhs) const noexcept
 {
     return (x != rhs.x || y != rhs.y);
 }
 
-template<typename _ValueType>
-template<typename _CastToType>
-constexpr Point<_ValueType>::operator Point<_CastToType>() const noexcept
+template <typename _ValueType>
+template <typename _CastToType>
+constexpr BasicPoint<_ValueType>::operator BasicPoint<_CastToType>() const noexcept
 {
-    return Point<_CastToType>((_CastToType)x, (_CastToType)y);
+    return BasicPoint<_CastToType>(static_cast<_CastToType>(x), static_cast<_CastToType>(y));
 }
 
-template<typename _ValueType>
-template<std::size_t _BufferSize>
-inline int32_t Point<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
+template <typename _ValueType>
+template <std::size_t _BufferSize>
+inline int32_t BasicPoint<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
 {
-#if _MSC_VER
-    return sprintf_s(destBuffer, "%d %d", x, y);
-#else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%d %d", x, y);
-#endif
+    return this->ToString(destBuffer, _BufferSize);
 }
 
-template<typename _ValueType>
-inline int32_t Point<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
+template <typename _ValueType>
+inline int32_t BasicPoint<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
 {
 #if _MSC_VER
     return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%d %d", x, y);
+#endif
+}
+
+template <>
+inline int32_t BasicPoint<float>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", x, y);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", x, y);
+#endif
+}
+
+template <>
+inline int32_t BasicPoint<double>::ToString(char* destBuffer, std::size_t bufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", x, y);
+#else
+    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", x, y);
 #endif
 }
 

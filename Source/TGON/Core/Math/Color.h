@@ -6,6 +6,7 @@
 
 #pragma once
 #include <cstdint>
+#include <cstdio>
 
 #include "Core/Platform/Config.h"
 
@@ -29,6 +30,8 @@ public:
 /* @section Public method */
 public:
     constexpr uint32_t ToRGBA() const noexcept;
+
+    // Todo: Implement ToString
 
 /* @section Public variable */
 public:

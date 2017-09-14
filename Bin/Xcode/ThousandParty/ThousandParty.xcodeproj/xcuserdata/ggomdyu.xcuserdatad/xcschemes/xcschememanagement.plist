@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ModelJoy.MacOS.xcscheme</key>
+		<key>ThousandParty.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>FD51C1881F20F634003F08B6</key>
+		<key>FDD7C8C61F654342000EB7C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

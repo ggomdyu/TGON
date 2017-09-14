@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>TGON.Core.MacOS.xcscheme</key>
+		<key>TGON.Core.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>FDC8CB521F07EA5B00E59C64</key>
+		<key>FDD7C8B61F65430C000EB7C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
