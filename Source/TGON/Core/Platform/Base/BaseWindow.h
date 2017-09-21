@@ -8,7 +8,6 @@
 #pragma once
 #include <string>
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
 

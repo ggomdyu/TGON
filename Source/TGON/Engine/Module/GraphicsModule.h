@@ -16,23 +16,14 @@ class TGON_API GraphicsModule :
 public:
     TGON_OBJECT(GraphicsModule)
 
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
 	GraphicsModule();
-	virtual ~GraphicsModule( );
+	virtual ~GraphicsModule();
 
-/**
- * @section Public command method
- */
+/* @section Public method */
 public:
-	virtual void Update( );
-
-/**
- * @section Get method
- */
-public:
+	virtual void Update();
 };
 
 } /* namespace tgon */

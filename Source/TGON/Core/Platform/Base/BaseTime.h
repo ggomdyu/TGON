@@ -15,11 +15,7 @@ namespace tgon
 namespace platform
 {
 
-TGON_API uint64_t GetOSExecutionTime();
-    
-TGON_API uint64_t GetProcessExecutionTime();
-
-TGON_API time_t GetUnixTime();
+TGON_API int64_t GetTickCount();
 
 /* @return  The DateTime in UTC time */
 TGON_API DateTime GetSystemTime();

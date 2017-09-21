@@ -5,7 +5,7 @@
       location = "container:"
       name = "01. TGON">
       <FileRef
-         location = "group:TGON.Core/TGON.Core.xcodeproj">
+         location = "group:TGON.xcodeproj">
       </FileRef>
    </Group>
    <Group

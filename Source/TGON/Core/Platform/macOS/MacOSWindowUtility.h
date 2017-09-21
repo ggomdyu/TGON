@@ -6,7 +6,8 @@
  */
 
 #pragma once
-#include <Cocoa/Cocoa.h>
+
+@class NSWindow;
 
 namespace tgon
 {
@@ -17,14 +18,6 @@ struct WindowStyle;
 
 namespace macos
 {
-
-/**
- * @brief                               Converts WindowStyle to Native-window-style.
- * @param [in] windowStyle              Window style information
- * @param [out] destWindowPosition      Destination of window position
- * @param [out] destWindowStyleMask     Destination of NSWindowStyleMask
- */
-void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, NSPoint* destWindowPosition, NSWindowStyleMask* destWindowStyleMask);
 
 /**
  * @brief                       Create window via given arguments.

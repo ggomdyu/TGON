@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
-               BuildableName = "libTGON.Core.a"
-               BlueprintName = "TGON.Core"
-               ReferencedContainer = "container:TGON.Core.xcodeproj">
+               BuildableName = "libTGON.a"
+               BlueprintName = "TGON"
+               ReferencedContainer = "container:TGON.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
-            BuildableName = "libTGON.Core.a"
-            BlueprintName = "TGON.Core"
-            ReferencedContainer = "container:TGON.Core.xcodeproj">
+            BuildableName = "libTGON.a"
+            BlueprintName = "TGON"
+            ReferencedContainer = "container:TGON.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
-            BuildableName = "libTGON.Core.a"
-            BlueprintName = "TGON.Core"
-            ReferencedContainer = "container:TGON.Core.xcodeproj">
+            BuildableName = "libTGON.a"
+            BlueprintName = "TGON"
+            ReferencedContainer = "container:TGON.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

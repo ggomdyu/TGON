@@ -9,6 +9,8 @@
 
 #if BOOST_OS_WINDOWS
 #	include "Windows/WindowsApplication.h"
+#elif BOOST_OS_MACOS
+#	import "MacOS/MacOSApplication.h"
 #elif BOOST_OS_ANDROID
 #	include "Android/AndroidApplication.h"
 #elif BOOST_OS_IOS

@@ -114,10 +114,10 @@ constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const
  * @param [in] timeRatio    Elapsed time ratio between 0.0 ~ 1.0
  * @return                  Returns Interpolated value
  */
-constexpr const Vector3 Lerp(const Vector3& from, const Vector3& to, float timeRatio) noexcept
-{
-    return from + ((from - to) * timeRatio);
-}
+//constexpr const Vector3 Lerp(const Vector3& from, const Vector3& to, float timeRatio) noexcept
+//{
+//    return from + ((from - to) * timeRatio);
+//}
 
 constexpr float Lerp(float from, float to, float timeRatio) noexcept
 {

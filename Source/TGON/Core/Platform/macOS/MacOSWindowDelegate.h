@@ -1,5 +1,5 @@
 /**
- * @filename    MacOSWindowController.h
+ * @filename    MacOSWindowDelegate.h
  * @author      ggomdyu
  * @since       08/31/2017
  * @brief

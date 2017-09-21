@@ -5,7 +5,7 @@
 
 @implementation MacOSWindowDelegate
 
--(id)initWithWindow:(tgon::platform::macos::MacOSWindow*)window
+- (id)initWithWindow:(tgon::platform::macos::MacOSWindow*)window
 {
     self = [super init];
     if (self)

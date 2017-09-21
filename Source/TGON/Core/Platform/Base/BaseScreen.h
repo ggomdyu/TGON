@@ -8,19 +8,22 @@
 #pragma once
 #include <cstddef>
 #include <cstdint>
+#include <vector>
 
 #include "Core/Platform/Config.h"
+
+#include "BaseScreenType.h"
 
 namespace tgon
 {
 namespace platform
 {
 
-TGON_API int32_t GetMonitorCount();
+/* @brief   Return main screen currently. */
+Screen GetMainScreen();
 
-TGON_API void GetScreenResolution(int32_t* width, int32_t* height);
-
-TGON_API float GetScaleFactor();
+/* @brief   Return all connected screen. */
+std::vector<Screen> GetAllScreen();
 
 } /* namespace platform */
 } /* namespace tgon */

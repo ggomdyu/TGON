@@ -85,7 +85,7 @@ constexpr BasicPoint<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
 }
 
 using Point = BasicPoint<int32_t>;
-using FPoint = BasicPoint<float>;
+using Pointf = BasicPoint<float>;
 
 template <typename _ValueType>
 constexpr BasicPoint<_ValueType>::BasicPoint() noexcept :
