@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */; };
-		FDD7C8CB1F654342000EB7C8 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDD7C8CA1F654342000EB7C8 /* main.mm */; };
+		FDD7C8CB1F654342000EB7C8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD7C8CA1F654342000EB7C8 /* main.cpp */; };
 		FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9171F68458C000EB7C8 /* Cocoa.framework */; };
+		FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB801F757DDE007AC1AB /* OpenGL.framework */; };
+		FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,10 +29,12 @@
 /* Begin PBXFileReference section */
 		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
 		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDD7C8CA1F654342000EB7C8 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		FDD7C8CA1F654342000EB7C8 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = main.cpp; sourceTree = "<group>"; };
 		FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.Core.a"; sourceTree = "<group>"; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FDFECB801F757DDE007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */,
+				FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */,
 				FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */,
 				FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */,
 			);
@@ -66,7 +72,7 @@
 		FDD7C8C91F654342000EB7C8 /* ThousandParty */ = {
 			isa = PBXGroup;
 			children = (
-				FDD7C8CA1F654342000EB7C8 /* main.mm */,
+				FDD7C8CA1F654342000EB7C8 /* main.cpp */,
 			);
 			path = ThousandParty;
 			sourceTree = "<group>";
@@ -74,6 +80,8 @@
 		FDD7C8EE1F6586D5000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */,
+				FDFECB801F757DDE007AC1AB /* OpenGL.framework */,
 				FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */,
 				FDD7C9191F684593000EB7C8 /* Foundation.framework */,
 				FDD7C9171F68458C000EB7C8 /* Cocoa.framework */,
@@ -140,7 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDD7C8CB1F654342000EB7C8 /* main.mm in Sources */,
+				FDD7C8CB1F654342000EB7C8 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

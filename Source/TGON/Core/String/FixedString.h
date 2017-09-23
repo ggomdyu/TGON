@@ -131,12 +131,11 @@ private:
 };
 
 using FixedString32 = BasicFixedString<char, 32>;
-using FixedWString32 = BasicFixedString<wchar_t, 32>;
-
 using FixedString64 = BasicFixedString<char, 64>;
-using FixedWString64 = BasicFixedString<wchar_t, 64>;
-
 using FixedString128 = BasicFixedString<char, 128>;
+
+using FixedWString32 = BasicFixedString<wchar_t, 32>;
+using FixedWString64 = BasicFixedString<wchar_t, 64>;
 using FixedWString128 = BasicFixedString<wchar_t, 128>;
 
 template <typename _CharType, std::size_t _CharArraySize>

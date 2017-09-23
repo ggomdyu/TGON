@@ -7,12 +7,11 @@
 #import <AppKit/NSApplication.h>
 #import <objc/NSObject.h>
 
-@class CVDisplayLink;
-@class NSTimer;
+@class NSOpenGLContext;
 
 @interface MacOSAppDelegate : NSObject<NSApplicationDelegate>
 {
 @private
-    NSTimer* _updateTimer;
+    struct __CVDisplayLink* _displayLink;
 }
 @end

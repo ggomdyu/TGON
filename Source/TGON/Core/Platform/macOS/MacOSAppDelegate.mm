@@ -1,8 +1,11 @@
 #import "PrecompiledHeader.pch"
 #import "MacOSAppDelegate.h"
 
-#import "Core/Platform/Base/BaseApplication.h"
-#import "Core/Platform/Window.h"
+#import <memory>
+#import <AppKit/NSOpenGLView.h>
+#import <QuartzCore/CVDisplayLink.h>
+
+#import "Core/Platform/MacOS/MacOSApplication.h"
 
 namespace tgon
 {
@@ -17,43 +20,63 @@ extern std::shared_ptr<BaseApplication> MakeApplication();
 namespace
 {
 
-static std::shared_ptr<tgon::platform::BaseApplication> g_application;
+std::shared_ptr<tgon::platform::macos::MacOSApplication> g_application;
+
+CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* now, const CVTimeStamp* outputTime, CVOptionFlags flagsIn, CVOptionFlags* flagsOut, void* displayLinkContext)
+{
+    // There is no autorelease pool when this method is called
+    // because it will be called from a background thread.
+    // It's important to create one or app can leak objects.
+    @autoreleasepool
+    {
+        g_application->OnUpdate();
+        g_application->OnDraw();
+    }
+    return kCVReturnSuccess;
+}
 
 } /* namespace */
 
 @implementation MacOSAppDelegate
-- (void)InitializeUpdateTimer
+- (void)InitializeDisplayLink
 {
-    constexpr float maxFrame = 60.0f;
-    constexpr float frameTimeInterval = 1.0f / maxFrame;
+    // Create a display link capable of being used with all active displays
+    CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
 
-    _updateTimer = [NSTimer scheduledTimerWithTimeInterval:frameTimeInterval
-                                                    target:self
-                                                  selector:@selector(OnUpdate)
-                                                  userInfo:nil
-                                                   repeats:YES];
+    // Set the update callback function
+    CVDisplayLinkSetOutputCallback(_displayLink, &DisplayLinkCallback, (__bridge void*)self);
+}
+
+- (void)StartDisplayLink
+{
+    CVDisplayLinkStart(_displayLink);
+}
+
+- (void)StopDisplayLink
+{
+    CVDisplayLinkStop(_displayLink);
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
     using namespace tgon::platform;
 
-    if (g_application == nullptr)
-    {
-        g_application = MakeApplication();
-    }
-    g_application->OnLaunch();
+    g_application = std::static_pointer_cast<macos::MacOSApplication>(MakeApplication());
 
-    [self InitializeUpdateTimer];
+    [self InitializeDisplayLink];
+    [self StartDisplayLink];
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
     g_application->OnTerminate();
-}
 
-- (void)OnUpdate
-{
-    g_application->OnUpdate();
+    [self StopDisplayLink];
 }
+//
+//- (void)OnUpdate
+//{
+//    g_application->OnUpdate();
+//    g_application->OnDraw();
+//}
 @end

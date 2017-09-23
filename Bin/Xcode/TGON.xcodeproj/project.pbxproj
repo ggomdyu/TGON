@@ -67,6 +67,8 @@
 		FDFECB7A1F72C7BB007AC1AB /* GameApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDFECB781F72C7BB007AC1AB /* GameApplication.cpp */; };
 		FDFECB7B1F72C7BB007AC1AB /* GameApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFECB791F72C7BB007AC1AB /* GameApplication.h */; };
 		FDFECB7D1F742E2E007AC1AB /* MacOSApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFECB7C1F742E2E007AC1AB /* MacOSApplication.h */; };
+		FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */; };
+		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +133,9 @@
 		FDFECB781F72C7BB007AC1AB /* GameApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameApplication.cpp; path = ../../Source/TGON/Engine/Framework/GameApplication.cpp; sourceTree = "<group>"; };
 		FDFECB791F72C7BB007AC1AB /* GameApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameApplication.h; path = ../../Source/TGON/Engine/Framework/GameApplication.h; sourceTree = "<group>"; };
 		FDFECB7C1F742E2E007AC1AB /* MacOSApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSApplication.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.h; sourceTree = "<group>"; };
+		FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		FDFECB821F7585B4007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FDFECB841F75FBAF007AC1AB /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */,
+				FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */,
 				FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */,
 				FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */,
 			);
@@ -325,6 +332,9 @@
 		FDD7C92E1F684911000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDFECB841F75FBAF007AC1AB /* Quartz.framework */,
+				FDFECB821F7585B4007AC1AB /* QuartzCore.framework */,
+				FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */,
 				FDD7C9311F6849FC000EB7C8 /* Foundation.framework */,
 				FDD7C92F1F684911000EB7C8 /* Cocoa.framework */,
 			);

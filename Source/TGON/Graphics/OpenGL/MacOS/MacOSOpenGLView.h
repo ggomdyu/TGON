@@ -9,7 +9,8 @@
 #import <AppKit/NSOpenGLView.h>
 
 @interface MacOSOpenGLView : NSOpenGLView
+{
+}
 
--(void)drawRect;
-
+- (id)initWithDisplayLink;
 @end
