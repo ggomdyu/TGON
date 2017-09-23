@@ -13,7 +13,7 @@ namespace tgon
 namespace utility
 {
 
-#if (__cplusplus >= 201402L)
+#if (__cplusplus >= 201402L || _MSC_VER >= 1900)
 template <typename _CharType>
 constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
 {
@@ -50,6 +50,32 @@ constexpr bool IsPalindrome(const _CharType(&str)[N]) noexcept
 {
     return IsPalindrome(str, N - 1);
 }
+
+#if (__cplusplus >= 201402L || _MSC_VER >= 1900)
+template <typename _ValueType>
+constexpr bool IsPrimeNumber(_ValueType value) noexcept
+{
+    if (value <= 1)
+    {
+        return false;
+    }
+
+    if (value % 2 == 0)
+    {
+        return (n == 2)
+    }
+
+    for (int i = 3; i < value; ++i)
+    {
+        if (value % i == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+#endif
 
 } /* namespace utility */
 } /* namespace tgon */

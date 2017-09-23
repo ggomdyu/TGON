@@ -143,15 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\TgonModelJoyForm.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\TgonModelJoyForm.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TGON.Core.Windows\TGON.Core.Windows.vcxproj">
       <Project>{13d1e164-c18a-4767-b01f-3e4350922ea9}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

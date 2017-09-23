@@ -35,6 +35,8 @@ public:
 
 /* @section Public method */
 public:
+    virtual void Show() {}
+    virtual void Hide() {}
     virtual void Quit() {}
     virtual void Maximize() {}
     virtual void Minimize() {}
@@ -59,9 +61,11 @@ public:
     virtual void OnMinimize() {}
     virtual void OnEnterFullScreen() {}
     virtual void OnExitFullScreen() {}
+    virtual void OnGetFocus() {}
+    virtual void OnLoseFocus() {}
 
 /* @section Protected variable */
-private:
+protected:
     bool m_isClosed;
 };
 

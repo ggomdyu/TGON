@@ -5,12 +5,6 @@
 #include "WindowsApplication.h"
 #include "WindowsWindow.h"
 
-#include "Engine/Engine.h"
-
-#ifdef RegisterClass
-#	undef RegisterClass
-#endif
-
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
 #   define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
@@ -23,38 +17,18 @@ namespace tgon
 {
 namespace platform
 {
-namespace windows
-{
 
-LRESULT CALLBACK OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    auto extraMemAsWindow = reinterpret_cast<windows::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
-    if (extraMemAsWindow)
-    {
-        return extraMemAsWindow->OnHandleMessage(wndHandle, message, wParam, lParam);
-    }
+extern std::shared_ptr<BaseApplication> MakeApplication();
 
-    return DefWindowProc(wndHandle, message, wParam, lParam);
-}
-
-bool RegisterClass(HINSTANCE instanceHandle)
-{
-	WNDCLASSEXW wcex{};
-	wcex.cbSize = sizeof(wcex);
-	wcex.lpszClassName = L"TGON";
-	wcex.style = CS_DBLCLKS;
-	wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
-	wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
-	wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
-	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = OnMessageHandled;
-
-	return RegisterClassExW(&wcex) != 0;
-}
-
-} /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */
+
+namespace
+{
+
+std::shared_ptr<tgon::platform::windows::WindowsApplication> g_application;
+
+} /* namespace */
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
 {
@@ -64,13 +38,12 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 
     using namespace tgon::platform;
 
-	windows::RegisterClass(instanceHandle);
-	
     // 이건 WindowsMisc에 넣읍시다
 	//windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
 
-	// TODO: Insert mini-dump setting code here
-    
-    tgon::Engine engine;
-    return engine.Execute(__argc, __argv);
+    g_application = std::static_pointer_cast<windows::WindowsApplication>(MakeApplication());
+    if (g_application != nullptr)
+    {
+        g_application->MessageLoop();
+    }
 }

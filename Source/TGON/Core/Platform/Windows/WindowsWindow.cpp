@@ -3,10 +3,10 @@
 #include <Windows.h>
 #include <cassert>
 
+#include "Core/String/TEncoding.h"
+
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
-
-#include "Core/String/TEncoding.h"
 
 #ifdef TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
@@ -117,12 +117,6 @@ bool WindowsWindow::IsMaximized() const
     return false;
 }
 
-bool WindowsWindow::IsHidden() const
-{
-    // todo : impl
-    return false;
-}
-
 bool WindowsWindow::IsTopMost() const
 {
     // todo : impl
@@ -174,7 +168,7 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
 }
 
-void WindowsWindow::SetCaptionTitle(const char* captionTitle)
+void WindowsWindow::SetTitle(const char* captionTitle)
 {
     wchar_t utf16Caption[256] {};
 

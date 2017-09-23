@@ -6,12 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\TgonModelJoyForm.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\TgonModelJoyForm.cpp">
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

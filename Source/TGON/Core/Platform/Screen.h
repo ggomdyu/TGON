@@ -9,7 +9,7 @@
 
 #if BOOST_OS_WINDOWS
 #	include "Windows/WindowsScreen.h"
-#if BOOST_OS_MACOS
+#elif BOOST_OS_MACOS
 #   import "MacOS/MacOSScreen.h"
 #elif BOOST_OS_ANDROID
 #	include "Android/AndroidScreen.h"

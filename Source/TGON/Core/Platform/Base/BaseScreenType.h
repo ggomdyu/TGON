@@ -5,6 +5,9 @@
  */
 
 #pragma once
+#include <string>
+#include <type_traits>
+
 #include "Core/Platform/Config.h"
 
 namespace tgon
@@ -31,18 +34,23 @@ enum class ColorSpace
 struct Screen
 {
 public:
-    constexpr Screen(int32_t width, int32_t height, int16_t bitsPerPixel) noexcept;
+    Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation);
 
 public:
     int32_t width;
     int32_t height;
     int16_t bitsPerPixel;
+    int16_t refreshRate;
+    ScreenOrientation orientation; // reserved
+    bool isPrimary; // reserved
 };
 
-constexpr Screen::Screen(int32_t width, int32_t height, int16_t bitsPerPixel) noexcept :
+inline Screen::Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation) :
     width(width),
     height(height),
-    bitsPerPixel(bitsPerPixel)
+    bitsPerPixel(bitsPerPixel),
+    refreshRate(refreshRate),
+    orientation(orientation)
 {
 }
 

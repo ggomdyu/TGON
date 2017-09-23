@@ -66,14 +66,5 @@ struct FunctionTraits :
 {
 };
 
-template <typename _ConvertFromType, typename _ConvertToType>
-using EnableIfConvertible = typename std::enable_if<std::is_convertible<_ConvertFromType, _ConvertToType>::value>::type;
-
-template <typename _ValueType>
-using EnableIfFloatingPoint = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type;
-
-template <typename _ValueType>
-using EnableIfArithmetic = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type;
-
 } /* namespace utility */
 } /* namespace tgon */

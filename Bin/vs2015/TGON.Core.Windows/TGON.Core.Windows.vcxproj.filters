@@ -19,9 +19,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
@@ -49,11 +46,11 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\UniqueComPtr.h">
       <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\AutoReleaseDC.h">
+      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

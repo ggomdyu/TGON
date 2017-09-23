@@ -1,6 +1,5 @@
-#import "PrecompiledHeader.pch"
-
-#import "BaseWindow.h"
+#include "PrecompiledHeader.pch"
+#include "BaseWindow.h"
 
 namespace tgon
 {

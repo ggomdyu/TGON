@@ -1,13 +1,27 @@
 #include "PrecompiledHeader.pch"
+#include "WindowsScreen.h"
 
 #include <Windows.h>
-
-#include "WindowsScreen.h"
 
 namespace tgon
 {
 namespace platform
 {
+namespace
+{
+
+ScreenOrientation ConvertNativeToScreenOrientation(const DEVMODE& dm)
+{
+    constexpr ScreenOrientation screenConversionTable[4]
+    {
+        ScreenOrientation::Landscape, // 0
+        ScreenOrientation::Portrait, // 1
+    };
+
+    return screenConversionTable[dm.dmDisplayOrientation];
+}
+
+}
 
 //bool WindowsScreen::SetFullScreen(bool setFullScreen, const WindowsWindow& window)
 //{
@@ -36,11 +50,61 @@ int32_t GetMonitorCount()
     return GetSystemMetrics(SM_CMONITORS);
 }
 
-TGON_API void GetScreenResolution(int32_t* width, int32_t* height)
+TGON_API Screen GetMainScreen()
 {
-	*width = static_cast<int32_t>(GetSystemMetrics(SM_CXSCREEN));
-	*height = static_cast<int32_t>(GetSystemMetrics(SM_CYSCREEN));
+    DEVMODE dm {};
+    dm.dmSize = sizeof(DEVMODE);
+
+    EnumDisplaySettingsW(NULL, ENUM_CURRENT_SETTINGS, &dm);
+    
+    return Screen(
+        dm.dmPelsWidth,
+        dm.dmPelsHeight,
+        dm.dmBitsPerPel,
+        dm.dmDisplayFrequency,
+        ConvertNativeToScreenOrientation(dm)
+    );
 }
+
+//std::vector<Screen> GetAllScreen()
+//{
+//    std::vector<Screen> screens;
+//
+//    DISPLAY_DEVICE displayDevice {};
+//    displayDevice.cb = sizeof(DISPLAY_DEVICE);
+//
+//    DWORD deviceIndex = 0;
+//    while (EnumDisplayDevices(NULL, deviceIndex++, &displayDevice, 0) == TRUE)
+//    {
+//        DISPLAY_DEVICE displayMonitorDevice {};
+//        displayMonitorDevice.cb = sizeof(DISPLAY_DEVICE);
+//
+//        // Iterate all monitor devices.
+//        DWORD monitorDeviceIndex = 0;
+//        while (EnumDisplayDevices(displayDevice.DeviceName, monitorDeviceIndex++, &displayMonitorDevice, 0) == TRUE)
+//        {
+//            if ((displayMonitorDevice.StateFlags & DISPLAY_DEVICE_ACTIVE) == false)
+//            {
+//                continue;
+//            }
+//
+//            DEVMODE dm{};
+//            dm.dmSize = sizeof(DEVMODE);
+//
+//            EnumDisplaySettingsW(displayMonitorDevice.DeviceName, ENUM_CURRENT_SETTINGS, &dm);
+//
+//            screens.emplace_back(
+//                dm.dmPelsWidth,
+//                dm.dmPelsHeight,
+//                dm.dmBitsPerPel,
+//                dm.dmDisplayFrequency,
+//                ConvertNativeToScreenOrientation(dm)
+//            );
+//        }
+//    }
+//
+//    return screens;
+//}
 
 } /* namespace platform */
 } /* namespace tgon */

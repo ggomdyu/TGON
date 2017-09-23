@@ -7,6 +7,8 @@
 
 #pragma once
 #include <type_traits>
+#include <memory>
+#include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
 
@@ -28,7 +30,8 @@ namespace tgon
 namespace platform
 {
 
-class TGON_API BaseApplication
+class TGON_API BaseApplication :
+    private boost::noncopyable
 {
 public:
     virtual void OnTerminate() {}

@@ -21,15 +21,6 @@ namespace windows
 {
 
 /**
- * @brief							Converts WindowStyle to Native-window-style.
- * @param [in] windowStyle			Window style information
- * @param [out] extendedStyle		Extended window style (ex: WS_EX_...)
- * @param [out] normalStyle			Normal window style (ex: WS_...)
- * @param [out] backgroundColor		Background color of window
- */
-void ConvertToNativeWindowStyle(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle);
-
-/**
  * @brief                       Create window via given arguments.
  * @param [in] windowStyle		The Style information
  * @param [in] className		The class-name which registered via RegisterClass

@@ -1,11 +1,11 @@
 #include "PrecompiledHeader.pch"
+#include "WindowsWindow.h"
 
 #include <cassert>
 
-#include "WindowsWindowUtility.h"
-#include "WindowsWindow.h"
-
 #include "Core/String/TEncoding.h"
+
+#include "WindowsWindowUtility.h"
 
 namespace tgon
 {

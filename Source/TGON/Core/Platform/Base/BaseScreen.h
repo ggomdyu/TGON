@@ -19,11 +19,17 @@ namespace tgon
 namespace platform
 {
 
-/* @brief   Return main screen currently. */
-Screen GetMainScreen();
+/**
+ * @brief   Return main screen currently. 
+ * @warning This function assembles many information as far as possible. 
+ */
+TGON_API Screen GetMainScreen();
 
-/* @brief   Return all connected screen. */
-std::vector<Screen> GetAllScreen();
+/**
+ * @brief   Return all connected screen
+ * @warning This function assembles many information as far as possible.
+ */
+TGON_API std::vector<Screen> GetAllScreen();
 
 } /* namespace platform */
 } /* namespace tgon */

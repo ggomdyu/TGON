@@ -133,10 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\HDCGuard.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\AutoReleaseDC.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\SharedComPtr.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\UniqueComPtr.h" />

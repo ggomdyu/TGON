@@ -5,4 +5,4 @@
  */
 
 #pragma once
-#include "../Base/BaseScreen.h"
+#include "Core/Platform/Base/BaseScreen.h"
