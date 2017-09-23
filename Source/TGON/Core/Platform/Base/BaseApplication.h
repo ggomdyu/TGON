@@ -10,7 +10,6 @@
 
 #include "Core/Platform/Config.h"
 
-// static_assert(std::is_convertible<className*, BaseApplication*>::value)
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
     {\
@@ -18,6 +17,7 @@
     {\
     std::shared_ptr<class BaseApplication> MakeApplication()\
     {\
+        static_assert(std::is_convertible<className*, BaseApplication*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from BaseApplication.");\
         return std::make_shared<className>();\
     }\
     } /* namespace platform */\
@@ -31,7 +31,6 @@ namespace platform
 class TGON_API BaseApplication
 {
 public:
-    virtual void OnLaunch() {}
     virtual void OnTerminate() {}
     virtual void OnUpdate() {}
     virtual void OnDraw() {}
