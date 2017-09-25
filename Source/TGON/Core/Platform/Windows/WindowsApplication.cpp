@@ -9,6 +9,7 @@ namespace platform
 {
 namespace windows
 {
+
 WindowsApplication::WindowsApplication()
 {
     this->RegisterWindowClass(GetModuleHandleW(nullptr));

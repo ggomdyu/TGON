@@ -20,13 +20,13 @@ namespace platform
 {
 
 /**
- * @brief   Return main screen currently. 
+ * @brief   Return primary screen currently.
  * @warning This function assembles many information as far as possible. 
  */
-TGON_API Screen GetMainScreen();
+TGON_API Screen GetPrimaryScreen();
 
 /**
- * @brief   Return all connected screen
+ * @brief   Return all detected screen.
  * @warning This function assembles many information as far as possible.
  */
 TGON_API std::vector<Screen> GetAllScreen();

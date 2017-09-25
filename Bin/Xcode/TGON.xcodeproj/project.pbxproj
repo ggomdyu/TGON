@@ -60,6 +60,7 @@
 		FD753C771F6C317500CD35F4 /* BaseScreenType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C761F6C317400CD35F4 /* BaseScreenType.h */; };
 		FD753C791F6C332100CD35F4 /* MacOSScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C781F6C332100CD35F4 /* MacOSScreen.h */; };
 		FD753C7B1F6C363700CD35F4 /* PrecompiledHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = FD753C7A1F6C363700CD35F4 /* PrecompiledHeader.pch */; };
+		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDFECB751F6EDD3C007AC1AB /* MacOSOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDFECB731F6EDD3C007AC1AB /* MacOSOpenGLView.mm */; };
@@ -125,6 +126,7 @@
 		FD753C761F6C317400CD35F4 /* BaseScreenType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseScreenType.h; path = ../../Source/TGON/Core/Platform/Base/BaseScreenType.h; sourceTree = "<group>"; };
 		FD753C781F6C332100CD35F4 /* MacOSScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSScreen.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSScreen.h; sourceTree = "<group>"; };
 		FD753C7A1F6C363700CD35F4 /* PrecompiledHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrecompiledHeader.pch; path = ../../Source/TGON/PrecompiledHeader.pch; sourceTree = "<group>"; };
+		FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../Source/TGON/Core/Utility/InstantiateCounter.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDFECB701F6ED898007AC1AB /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 				FD753C301F6B4B0C00CD35F4 /* Enumerator.h */,
 				FD753C311F6B4B0C00CD35F4 /* ExpressionTemplate.h */,
 				FD753C321F6B4B0C00CD35F4 /* ForEach.h */,
+				FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */,
 				FD753C331F6B4B0C00CD35F4 /* Preprocessor.h */,
 				FD753C341F6B4B0C00CD35F4 /* StaticIf.h */,
 				FD753C351F6B4B0C00CD35F4 /* TypeTraits.h */,
@@ -414,6 +417,7 @@
 				FD753C3D1F6B4B0C00CD35F4 /* Preprocessor.h in Headers */,
 				FD753C021F6B4AAF00CD35F4 /* Object.h in Headers */,
 				FD753C3A1F6B4B0C00CD35F4 /* Enumerator.h in Headers */,
+				FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */,
 				FD753C3F1F6B4B0C00CD35F4 /* TypeTraits.h in Headers */,
 				FD753C3B1F6B4B0C00CD35F4 /* ExpressionTemplate.h in Headers */,
 				FD753C541F6B4B3800CD35F4 /* BaseWindow.h in Headers */,

@@ -13,17 +13,21 @@ namespace platform
 {
 namespace
 {
+
 Screen ConvertNSScreenToScreen(NSScreen* nativeScreen)
 {
     return Screen(
         nativeScreen.frame.size.width, // width
         nativeScreen.frame.size.height, // height
         [[[nativeScreen deviceDescription] objectForKey:@"NSDeviceBitsPerSample"] integerValue] // bitsPerPixel
+        ,0,
+        ScreenOrientation::Landscape
     );
 }
+
 }
 
-Screen GetMainScreen()
+Screen GetPrimaryScreen()
 {
     return ConvertNSScreenToScreen([NSScreen mainScreen]);
 }

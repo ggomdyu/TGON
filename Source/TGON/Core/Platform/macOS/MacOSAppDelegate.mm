@@ -49,12 +49,12 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
 
 - (void)StartDisplayLink
 {
-    CVDisplayLinkStart(_displayLink);
+    ::CVDisplayLinkStart(_displayLink);
 }
 
 - (void)StopDisplayLink
 {
-    CVDisplayLinkStop(_displayLink);
+    ::CVDisplayLinkStop(_displayLink);
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
@@ -73,10 +73,5 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
 
     [self StopDisplayLink];
 }
-//
-//- (void)OnUpdate
-//{
-//    g_application->OnUpdate();
-//    g_application->OnDraw();
-//}
+
 @end
