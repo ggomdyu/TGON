@@ -10,15 +10,21 @@ namespace platform
 namespace
 {
 
-ScreenOrientation ConvertNativeToScreenOrientation(const DEVMODE& dm)
+Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
 {
-    constexpr ScreenOrientation screenConversionTable[4]
+    /*static*/ constexpr ScreenOrientation nativeDisplayOrientationConversionTable[4]
     {
         ScreenOrientation::Landscape, // 0
         ScreenOrientation::Portrait, // 1
     };
 
-    return screenConversionTable[dm.dmDisplayOrientation];
+    return Screen(
+        dm.dmPelsWidth,
+        dm.dmPelsHeight,
+        dm.dmBitsPerPel,
+        dm.dmDisplayFrequency,
+        nativeDisplayOrientationConversionTable[dm.dmDisplayOrientation]
+    );
 }
 
 }
@@ -56,14 +62,8 @@ TGON_API Screen GetMainScreen()
     dm.dmSize = sizeof(DEVMODE);
 
     EnumDisplaySettingsW(NULL, ENUM_CURRENT_SETTINGS, &dm);
-    
-    return Screen(
-        dm.dmPelsWidth,
-        dm.dmPelsHeight,
-        dm.dmBitsPerPel,
-        dm.dmDisplayFrequency,
-        ConvertNativeToScreenOrientation(dm)
-    );
+
+    return ConvertDEVMODEToScreen(dm);
 }
 
 //std::vector<Screen> GetAllScreen()
