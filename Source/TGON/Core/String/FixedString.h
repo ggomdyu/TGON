@@ -163,7 +163,7 @@ inline BasicFixedString<_CharType, _CharArraySize, StringTraits>::BasicFixedStri
 template <typename _CharType, std::size_t _CharArraySize, typename StringTraits>
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, StringTraits>::BasicFixedString(const BasicFixedString<_CharType, _CharArraySize2, StringTraits>& rhs) :
-    BasicFixedString(rhs.CStr(), _CharArraySize2 - 1)
+    BasicFixedString(rhs.CStr(), rhs.Length())
 {
 }
 
