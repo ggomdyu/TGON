@@ -26,6 +26,7 @@ public:
     virtual ~MacOSApplication() = default;
 
 public:
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) override;
 };
 
 } /* namespace windows */
