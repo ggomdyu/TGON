@@ -20,47 +20,60 @@ class StringTraits
 public:
     using CharTraits = std::char_traits<_CharType>;
 
-/* @section Ctor/Dtor */
+/* @section Protected constructor */
 protected:
     constexpr StringTraits() noexcept = default;
-    constexpr StringTraits(const _CharType* copySrcStr, _CharType* copyDestStr, std::size_t copySrcStrLength);
-    constexpr StringTraits(_CharType* destStr, _CharType ch, std::size_t chAssignCount);
+
+    /**
+     * @brief                   Copy string from source to destination.
+     * @param [in] srcStrLen    The string to copy.
+     * @param [in] srcStrLen    The length of string to copy.
+     * @param [in] destStr      The destination of string to copy.
+     */
+    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
+
+    /**
+     * @brief                   Assigns a number of character to string.
+     * @param [out] destStr     The destination of assign
+     * @param [in] ch           The character to assign to the string
+     * @param [in] chCount      The character count to assign to the string
+     */
+    StringTraits(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount);
 
 /* @section Public variable */
 public:
+    /**
+     * @brief   This is special magic number which means string not exists.
+     *          The function series of Find will return this variable when searching sub-string does not exists.
+     */
     static constexpr std::size_t NPos = static_cast<std::size_t>(-1);
 
 /* @section Protected method */
 protected:
-    static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLength, const _CharType* srcFindStr, std::size_t offset, std::size_t srcFindStrLength);
+    static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
-    static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLength, const _CharType* rhsStr, std::size_t rhsStrLength);
+    static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
+
+    static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
 
     static void Assign(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount);
 };
 
 template <typename _CharType>
-constexpr StringTraits<_CharType>::StringTraits(const _CharType* copySrcStr, _CharType* copyDestStr, std::size_t copySrcStrLength)
+inline StringTraits<_CharType>::StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize)
 {
-    //assert(destStrBufferSize > chAssignCount && "BasicFixedString buffer overflowed");
+    assert(destStrBufferSize > srcStrLen && "BasicFixedString buffer overflowed");
 
-    std::size_t i = 0;
-    while (i < copySrcStrLength)
-    {
-        copyDestStr[i] = copySrcStr[i];
-        ++i;
-    }
-
-    copyDestStr[++i] = static_cast<_CharType>(0);
+    memcpy(destStr, srcStr, srcStrLen + 1);
 }
 
 template <typename _CharType>
-constexpr StringTraits<_CharType>::StringTraits(_CharType* destStr, _CharType ch, std::size_t chAssignCount)
+inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount)
 {
-    //assert(destStrBufferSize > chAssignCount && "BasicFixedString buffer overflowed");
+    assert(destStrBufferSize > chCount && "BasicFixedString buffer overflowed");
 
     std::size_t i = 0;
-    while (i < chAssignCount)
+    while (i < chCount)
     {
         destStr[i++] = ch;
     }
@@ -69,20 +82,20 @@ constexpr StringTraits<_CharType>::StringTraits(_CharType* destStr, _CharType ch
 }
 
 template <typename _CharType>
-inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::size_t srcStrLength, const _CharType* srcFindSubStr, std::size_t srcStrOffset, std::size_t srcFindSubStrLength)
+inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen)
 {
-    if ((srcStrOffset > srcStrLength) || ((srcStrLength - srcStrOffset) < srcFindSubStrLength))
+    if ((srcStrOffset > srcStrLen) || ((srcStrLen - srcStrOffset) < srcFindSubStrLen))
     {
         return NPos;
     }
 
-    if (srcFindSubStrLength == 0)
+    if (srcFindSubStrLen == 0)
     {
         return srcStrOffset;
     }
 
-    const _CharType* foundStr = std::search(srcStr + srcStrOffset, srcStr + srcStrLength, srcFindSubStr, srcFindSubStr + srcFindSubStrLength);
-    if (foundStr == srcStr + srcStrLength)
+    const _CharType* foundStr = std::search(srcStr + srcStrOffset, srcStr + srcStrLen, srcFindSubStr, srcFindSubStr + srcFindSubStrLen);
+    if (foundStr == srcStr + srcStrLen)
     {
         return NPos;
     }
@@ -91,9 +104,9 @@ inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::s
 }
 
 template <typename _CharType>
-inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::size_t lhsStrLength, const _CharType* rhsStr, std::size_t rhsStrLength)
+inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen)
 {
-    auto minSize = lhsStrLength < rhsStrLength ? lhsStrLength : rhsStrLength;
+    auto minSize = lhsStrLen < rhsStrLen ? lhsStrLen : rhsStrLen;
 
     auto ans = std::char_traits<_CharType>::compare(lhsStr, rhsStr, minSize);
     if (ans != 0)
@@ -101,11 +114,11 @@ inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::si
         return ans;
     }
 
-    if (lhsStrLength < rhsStrLength)
+    if (lhsStrLen < rhsStrLen)
     {
         return -1;
     }
-    if (lhsStrLength > rhsStrLength)
+    if (lhsStrLen > rhsStrLen)
     {
         return 1;
     }
