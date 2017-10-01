@@ -12,6 +12,8 @@
 
 #include "Core/Platform/Config.h"
 
+#include "BaseApplicationType.h"
+
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
     {\
@@ -34,6 +36,8 @@ class TGON_API BaseApplication :
     private boost::noncopyable
 {
 public:
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
+
     virtual void OnTerminate() {}
     virtual void OnUpdate() {}
     virtual void OnDraw() {}
