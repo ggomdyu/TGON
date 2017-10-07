@@ -48,7 +48,8 @@ public:
     virtual void SetFullScreen(bool isFullScreen) {}
     virtual void GetPosition(int32_t* x, int32_t* y) const {}
     virtual void GetSize(int32_t* width, int32_t* height) const {}
-    virtual void GetCaptionTitle(char* destCaptionTitle) const {}
+    virtual void GetTitle(char* destCaptionTitle) const {}
+    virtual void* GetNativeWindow() noexcept = 0;
     virtual bool HasCaption() const;
     virtual bool IsResizable() const;
     virtual bool IsMaximized() const;

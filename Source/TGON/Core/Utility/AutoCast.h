@@ -19,11 +19,11 @@ template <typename _CastFromType, typename _CastPolicyType>
 struct AutoCastProxy final :
     public _CastPolicyType
 {
-/* @section Ctor/Dtor */
+/* @section Public constructor */
 public:
     constexpr explicit AutoCastProxy(_CastFromType&& rhs) noexcept;
 
-/* @section Operator */
+/* @section Public operator */
 public:
     template <typename _CastToType>
     constexpr operator _CastToType() const noexcept;

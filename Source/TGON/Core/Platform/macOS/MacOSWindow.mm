@@ -84,7 +84,7 @@ void MacOSWindow::GetSize(int32_t* destWidth, int32_t* destHeight) const
     *destHeight = static_cast<int32_t>(currentFrameSize.size.height);
 }
 
-void MacOSWindow::GetCaptionTitle(char* destCaptionTitle) const
+void MacOSWindow::GetTitle(char* destCaptionTitle) const
 {
     const char* utf8Str = [[m_nsWindow title] UTF8String];
     std::size_t utf8StrLen = strlen(utf8Str) + 1;
@@ -92,9 +92,9 @@ void MacOSWindow::GetCaptionTitle(char* destCaptionTitle) const
     std::memcpy(destCaptionTitle, utf8Str, utf8StrLen + 1);
 }
 
-NSWindow* MacOSWindow::GetNativeWindow() noexcept
+void* MacOSWindow::GetNativeWindow() noexcept
 {
-    return m_nsWindow;
+    return (__bridge void*)(m_nsWindow);
 }
 
 bool MacOSWindow::HasCaption() const

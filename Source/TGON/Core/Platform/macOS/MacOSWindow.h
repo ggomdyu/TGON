@@ -43,8 +43,8 @@ public:
     virtual void SetFullScreen(bool isFullScreen) override;
     virtual void GetPosition(int32_t* x, int32_t* y) const override;
     virtual void GetSize(int32_t* width, int32_t* height) const override;
-    virtual void GetCaptionTitle(char* destCaptionTitle) const override;
-    NSWindow* GetNativeWindow() noexcept;
+    virtual void GetTitle(char* destCaptionTitle) const override;
+    virtual void* GetNativeWindow() noexcept override;
     virtual bool HasCaption() const override;
     virtual bool IsResizable() const override;
     virtual bool IsMaximized() const override;

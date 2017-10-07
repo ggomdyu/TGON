@@ -12,5 +12,4 @@
 {
 }
 
-- (id)initWithDisplayLink;
 @end

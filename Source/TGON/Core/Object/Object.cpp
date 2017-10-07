@@ -1,5 +1,4 @@
 #include "PrecompiledHeader.pch"
-
 #include "Object.h"
 
 namespace tgon

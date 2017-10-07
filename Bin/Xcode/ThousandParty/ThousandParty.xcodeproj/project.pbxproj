@@ -30,7 +30,6 @@
 		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
 		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD7C8CA1F654342000EB7C8 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = main.cpp; sourceTree = "<group>"; };
-		FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.Core.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.Core.a"; sourceTree = "<group>"; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDFECB801F757DDE007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -85,7 +84,6 @@
 				FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */,
 				FDD7C9191F684593000EB7C8 /* Foundation.framework */,
 				FDD7C9171F68458C000EB7C8 /* Cocoa.framework */,
-				FDD7C8EF1F6586D5000EB7C8 /* libTGON.Core.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

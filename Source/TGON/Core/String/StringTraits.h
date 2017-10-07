@@ -22,8 +22,6 @@ public:
 
 /* @section Protected constructor */
 protected:
-    constexpr StringTraits() noexcept = default;
-
     /**
      * @brief                   Copy string from source to destination.
      * @param [in] srcStrLen    The string to copy.
@@ -43,8 +41,8 @@ protected:
 /* @section Public variable */
 public:
     /**
-     * @brief   This is special magic number which means string not exists.
-     *          The function series of Find will return this variable when searching sub-string does not exists.
+     * @brief   This is the special magic number which means string not exists.
+     *          The function series of Find will return this variable when searching sub-string does not exist.
      */
     static constexpr std::size_t NPos = static_cast<std::size_t>(-1);
 
@@ -55,6 +53,8 @@ protected:
     static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
     static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
+
+    static void Append(_CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
 
     static void Assign(_CharType* destBuffer, std::size_t destBufferSize, _CharType ch, std::size_t chCount);
 };
@@ -124,6 +124,12 @@ inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::si
     }
     
     return 0;
+}
+
+template <typename _CharType>
+inline void StringTraits<_CharType>::Append(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen)
+{
+    
 }
 
 template <typename _CharType>

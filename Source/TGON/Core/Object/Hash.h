@@ -42,7 +42,7 @@ public:
     using SuperType = void;
     using ThisType = Object;
 
-/* @section Public destructor */
+/* @section Ctor/Dtor */
 public:
     virtual ~Object() = default;
 

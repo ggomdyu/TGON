@@ -34,7 +34,7 @@ enum class ColorSpace
 struct Screen
 {
 public:
-    Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation);
+    Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation) noexcept;
 
 public:
     int32_t width;
@@ -45,7 +45,7 @@ public:
     bool isPrimary; // reserved
 };
 
-inline Screen::Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation) :
+inline Screen::Screen(int32_t width, int32_t height, int16_t bitsPerPixel, int16_t refreshRate, ScreenOrientation orientation) noexcept :
     width(width),
     height(height),
     bitsPerPixel(bitsPerPixel),

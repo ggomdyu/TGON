@@ -13,7 +13,6 @@ namespace tgon
 namespace utility
 {
 
-#if (__cplusplus >= 201402L || _MSC_VER >= 1900)
 template <typename _CharType>
 constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
 {
@@ -28,30 +27,7 @@ constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
     }
     return true;
 }
-#elif (__cplusplus == 201103L)
-namespace detail
-{
-template <typename _CharType>
-constexpr bool IsPalindromeImpl(const _CharType* str, std::size_t length, std::size_t offset)
-{
-    return (offset < length / 2) ? (str[offset] == str[length - offset - 1]) ? IsPalindromeImpl(str, length, offset + 1) : false : true;
-}
-} /* namespace detail */
 
-template <typename _CharType>
-constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
-{
-    return detail::IsPalindromeImpl(str, length, 0);
-}
-#endif
-
-template <typename _CharType, std::size_t N>
-constexpr bool IsPalindrome(const _CharType(&str)[N]) noexcept
-{
-    return IsPalindrome(str, N - 1);
-}
-
-#if (__cplusplus >= 201402L || _MSC_VER >= 1900)
 template <typename _ValueType>
 constexpr bool IsPrimeNumber(_ValueType value) noexcept
 {
@@ -75,7 +51,6 @@ constexpr bool IsPrimeNumber(_ValueType value) noexcept
 
     return true;
 }
-#endif
 
 } /* namespace utility */
 } /* namespace tgon */

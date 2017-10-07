@@ -15,7 +15,10 @@ namespace tgon
 namespace math
 {
 
-/* @brief Color structure in ARGB order. */
+/**
+ * @class   Color4b
+ * @brief   Color structure in ARGB order.
+ */
 struct Color4b
 {
 /* @section Public constructor */

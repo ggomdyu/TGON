@@ -78,14 +78,14 @@ public:
 	static const BasicPoint MinusOne;    // -1, -1
 };
 
+using Point = BasicPoint<int32_t>;
+using FPoint = BasicPoint<float>;
+
 template <typename _ValueType>
 constexpr BasicPoint<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
 {
     return {x, y};
 }
-
-using Point = BasicPoint<int32_t>;
-using Pointf = BasicPoint<float>;
 
 template <typename _ValueType>
 constexpr BasicPoint<_ValueType>::BasicPoint() noexcept :

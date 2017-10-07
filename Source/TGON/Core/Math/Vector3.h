@@ -34,7 +34,7 @@ public:
     constexpr const Vector3 operator*(const Vector3&) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
-    const Vector3 operator/(float) const;
+    constexpr const Vector3 operator/(float) const;
     constexpr const Vector3 operator+() const noexcept;
     constexpr const Vector3 operator-() const noexcept;
     Vector3& operator+=(const Vector3&) noexcept;
@@ -131,7 +131,7 @@ constexpr const Vector3 operator*(float lhs, const Vector3& rhs) noexcept
 	return rhs * lhs;
 }
 
-inline const Vector3 Vector3::operator/(float value) const
+constexpr const Vector3 Vector3::operator/(float value) const
 {
     float inverse = 1.0f / value;
     return Vector3(x * inverse, y * inverse, z * inverse);

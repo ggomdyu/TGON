@@ -4,7 +4,7 @@
 
 #import "Core/Platform/MacOS/MacOSAppDelegate.h"
 
-int main(int argc, const char * argv[])
+int main(int argc, const char* argv[])
 {
     @autoreleasepool
     {

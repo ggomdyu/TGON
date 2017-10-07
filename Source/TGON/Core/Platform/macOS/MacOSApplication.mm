@@ -12,7 +12,7 @@ namespace macos
 
 void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType)
 {
-    static constexpr const NSAlertStyle nativeNSAlertStyleArray[3] =
+    static constexpr const NSAlertStyle nativeNSAlertStyleArray[2] =
     {
         NSAlertStyleInformational,
         NSAlertStyleCritical,

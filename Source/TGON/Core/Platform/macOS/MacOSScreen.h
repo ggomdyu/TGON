@@ -16,6 +16,5 @@ namespace macos
 {
 }
 
-
 } /* namespace platform */
 } /* namespace tgon */

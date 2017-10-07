@@ -41,20 +41,22 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
 - (void)InitializeDisplayLink
 {
     // Create a display link capable of being used with all active displays
-    CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+    ::CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
 
     // Set the update callback function
-    CVDisplayLinkSetOutputCallback(_displayLink, &DisplayLinkCallback, (__bridge void*)self);
-}
+    ::CVDisplayLinkSetOutputCallback(_displayLink, &DisplayLinkCallback, (__bridge void*)self);
 
-- (void)StartDisplayLink
-{
     ::CVDisplayLinkStart(_displayLink);
 }
 
-- (void)StopDisplayLink
+- (void)ReleaseDisplayLink
 {
+    // Stop the display link BEFORE releasing anything in the view
+    // otherwise the display link thread may call into the view and crash
+    // when it encounters something that has been release
     ::CVDisplayLinkStop(_displayLink);
+
+    ::CVDisplayLinkRelease(_displayLink);
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
@@ -64,14 +66,12 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
     g_application = std::static_pointer_cast<macos::MacOSApplication>(MakeApplication());
 
     [self InitializeDisplayLink];
-    [self StartDisplayLink];
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
     g_application->OnTerminate();
 
-    [self StopDisplayLink];
+    [self ReleaseDisplayLink];
 }
-
 @end

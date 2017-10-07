@@ -13,7 +13,7 @@ namespace tgon
 namespace platform
 {
 
-struct WindowStyle
+struct WindowStyle final
 {
 /* @section Public variable */
 public:
@@ -28,15 +28,14 @@ public:
 
     bool borderless = false;
     bool enableSystemButton = true;
-    bool enableFullScreen = false;
-    bool supportWindowTransparency = false;
-    bool supportPerPixelTransparency = false;
+    bool enableFullScreenButton = false; // reserved
+    bool supportWindowTransparency = false; // reserved
+    bool supportPerPixelTransparency = false; // reserved
     bool resizeable = true;
     bool topMost = false;
     bool maximized = false;
     bool minimized = false;
     bool showMiddle = false;
-    bool setFocusOnCreated = true;
     bool setFullScreen = false;
 };
 

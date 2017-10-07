@@ -19,12 +19,13 @@ class TGON_API MacOSApplication :
 {
 /* @section public constructor */
 public:
-    MacOSApplication() = default;
+    using BaseApplication::BaseApplication;
 
 /* @section public destructor */
 public:
     virtual ~MacOSApplication() = default;
 
+/* @section public method */
 public:
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) override;
 };

@@ -20,7 +20,7 @@ namespace macos
 {
 
 /**
- * @brief                       Create window via given arguments.
+ * @brief                       Create window through given arguments.
  * @param [in] windowStyle      Window style information
  */
 NSWindow* CreateNativeWindow(const WindowStyle& windowStyle);
