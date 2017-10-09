@@ -15,8 +15,8 @@ namespace tgon
 namespace string
 {
 
-template <typename _CharType, std::size_t _CharArraySize>
-constexpr auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<typename std::decay<_CharType>::type, _CharArraySize>
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
+constexpr auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<typename std::decay<_CharType>::type, _CharArraySize, _StringTraitsType>
 {
     return {str, _CharArraySize - 1};
 }
