@@ -72,7 +72,7 @@
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDD81A441F880FAB004CC182 /* OpenGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD81A421F880FAB004CC182 /* OpenGLContext.h */; };
 		FDD81A451F880FAB004CC182 /* OpenGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDD81A431F880FAB004CC182 /* OpenGLContext.mm */; };
-		FDF6EAD31F8368E700A37840 /* Math.h in Headers */ = {isa = PBXBuildFile; fileRef = FDF6EAD21F8368E700A37840 /* Math.h */; };
+		FDF6EAD31F8368E700A37840 /* Mathematics.h in Headers */ = {isa = PBXBuildFile; fileRef = FDF6EAD21F8368E700A37840 /* Mathematics.h */; };
 		FDFECB751F6EDD3C007AC1AB /* MacOSOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDFECB731F6EDD3C007AC1AB /* MacOSOpenGLView.mm */; };
 		FDFECB761F6EDD3C007AC1AB /* MacOSOpenGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFECB741F6EDD3C007AC1AB /* MacOSOpenGLView.h */; };
 		FDFECB7A1F72C7BB007AC1AB /* GameApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDFECB781F72C7BB007AC1AB /* GameApplication.cpp */; };
@@ -148,7 +148,7 @@
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDD81A421F880FAB004CC182 /* OpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLContext.h; path = ../../Source/TGON/Graphics/OpenGL/MacOS/OpenGLContext.h; sourceTree = "<group>"; };
 		FDD81A431F880FAB004CC182 /* OpenGLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OpenGLContext.mm; path = ../../Source/TGON/Graphics/OpenGL/MacOS/OpenGLContext.mm; sourceTree = "<group>"; };
-		FDF6EAD21F8368E700A37840 /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Math.h; path = ../../Source/TGON/Core/Math/Math.h; sourceTree = "<group>"; };
+		FDF6EAD21F8368E700A37840 /* Mathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mathematics.h; path = ../../Source/TGON/Core/Math/Mathematics.h; sourceTree = "<group>"; };
 		FDFECB701F6ED898007AC1AB /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDFECB731F6EDD3C007AC1AB /* MacOSOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSOpenGLView.mm; path = ../../Source/TGON/Graphics/OpenGL/MacOS/MacOSOpenGLView.mm; sourceTree = "<group>"; };
 		FDFECB741F6EDD3C007AC1AB /* MacOSOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSOpenGLView.h; path = ../../Source/TGON/Graphics/OpenGL/MacOS/MacOSOpenGLView.h; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 			children = (
 				FD2C7F651F84C9F500D4555B /* Vector3.cpp */,
 				FD2C7F661F84C9F500D4555B /* Vector3.h */,
-				FDF6EAD21F8368E700A37840 /* Math.h */,
+				FDF6EAD21F8368E700A37840 /* Mathematics.h */,
 				FD753C1A1F6B4AFC00CD35F4 /* Color.h */,
 				FD753C1B1F6B4AFC00CD35F4 /* Extent.h */,
 				FD753C1F1F6B4AFC00CD35F4 /* Point.h */,
@@ -458,7 +458,7 @@
 				FD753C791F6C332100CD35F4 /* MacOSScreen.h in Headers */,
 				FD753C361F6B4B0C00CD35F4 /* Algorithm.h in Headers */,
 				FD753C641F6B4B4B00CD35F4 /* MacOSAppDelegate.h in Headers */,
-				FDF6EAD31F8368E700A37840 /* Math.h in Headers */,
+				FDF6EAD31F8368E700A37840 /* Mathematics.h in Headers */,
 				FD753C7B1F6C363700CD35F4 /* PrecompiledHeader.pch in Headers */,
 				FD904D381F80D18C0041EB60 /* BaseApplicationType.h in Headers */,
 				FD753C3E1F6B4B0C00CD35F4 /* StaticIf.h in Headers */,

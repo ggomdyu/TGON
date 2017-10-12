@@ -2,7 +2,7 @@
 
 #include "Vector3.h"
 
-#include "Math.h"
+#include "math.h"
 #include "Matrix4x4.h"
 
 namespace tgon

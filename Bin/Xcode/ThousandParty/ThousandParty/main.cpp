@@ -7,8 +7,10 @@
 #include "Core/Platform/Window.h"
 #include "Core/Platform/Screen.h"
 #include "Core/String/FixedString.h"
+#include "Core/String/FixedStringUtility.h"
 #include "Core/Utility/InstantiateCounter.h"
-#include "Core/Math/Math.h"
+#include "Core/Math/Mathematics.h"
+#include "Core/Math/Vector3.h"
 ////
 
 #include <OpenGL/OpenGL.h>
@@ -16,11 +18,40 @@
 #include <AppKit/NSOpenGL.h>
 #include <AppKit/NSOpenGLView.h>
 #include <AppKit/NSWindow.h>
-
-#include "Graphics/OpenGL/MacOS/MacOSOpenGLView.h"
+//
+//#include "Graphics/OpenGL/MacOS/MacOSOpenGLView.h"
 
 using namespace tgon;
 using namespace tgon::platform;
+
+//#define ENABLE_IF(...) \
+//typename std::enable_if<__VA_ARGS__::value>::type* = nullptr
+//
+//template <typename _CharType, std::size_t N>
+//typename std::enable_if<!std::is_pointer<typename std::remove_reference<_CharType>::type>::value, bool>::type fooImpl(const _CharType(&str)[N])
+//{
+//    int n = 3;
+//}
+//
+//template <typename _CharType>
+//typename std::enable_if<std::is_pointer<typename std::remove_reference<_CharType>::type>::value, bool>::type fooImpl(const _CharType* str)
+//{
+//    int n = 3;
+//}
+
+//template <typename _Type>
+//void foo(_Type&& str)
+//{
+//    std::cout << typeid(_Type).name() << std::endl;
+//
+//    std::cout << std::is_reference<_Type>::value << std::endl;
+//    std::cout << std::is_array<_Type>::value << std::endl;
+//    std::cout << std::is_reference<std::remove_pointer_t<_Type>>::value << std::endl;
+//    std::cout << std::is_array<std::remove_pointer_t<_Type>>::value << std::endl;
+//    std::cout << std::is_pointer<typename std::remove_reference<_Type>::type>::value << std::endl;
+//
+//    fooImpl(std::forward<_Type>(str));
+//}
 
 class TGON_API ModelJoy :
     public platform::Application
@@ -32,32 +63,27 @@ public:
     ModelJoy() :
         platform::Application(MakeSharedWindow<Window>(WindowStyle{}))
     {
-        string::FixedString32 str = "zzzzzzzzzzzzzzzzzzzzzzzzzzzz";
-        str.Assign("wefiojwef");
-
-
-
         NSWindow* nativeWindow = (__bridge NSWindow*)GetMainWindow()->GetNativeWindow();
         view = [[MacOSOpenGLView alloc] init];
         [nativeWindow setContentView:view];
 
-        CGLLockContext([[view openGLContext] CGLContextObj]);
-        {
-            GLuint VertexArrayID;
-            glGenVertexArrays(1, &VertexArrayID);
-            glBindVertexArray(VertexArrayID);
-
-            static const GLfloat g_vertex_buffer_data[] = {
-                -1.0f, -1.0f, 0.0f,
-                1.0f, -1.0f, 0.0f,
-                0.0f,  1.0f, 0.0f,
-            };
-
-            glGenBuffers(1, &m_vertexBuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-        }
-        CGLUnlockContext([[view openGLContext] CGLContextObj]);
+//        CGLLockContext([[view openGLContext] CGLContextObj]);
+//        {
+//            GLuint VertexArrayID;
+//            glGenVertexArrays(1, &VertexArrayID);
+//            glBindVertexArray(VertexArrayID);
+//
+//            static const GLfloat g_vertex_buffer_data[] = {
+//                -1.0f, -1.0f, 0.0f,
+//                1.0f, -1.0f, 0.0f,
+//                0.0f,  1.0f, 0.0f,
+//            };
+//
+//            glGenBuffers(1, &m_vertexBuffer);
+//            glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+//            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+//        }
+//        CGLUnlockContext([[view openGLContext] CGLContextObj]);
     }
 
     virtual void OnTerminate() override

@@ -53,20 +53,20 @@ public:
 /* @section Public method */
 public:
     /**
-     * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @return                      The length of string converted.
+     * @brief                   Converts value to a string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
      */
-    template <std::size_t _BufferSize>
-    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @param [in] bufferSize       The size of destBuffer.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The size of destStr.
      * @return                      The length of string converted.
      */
-    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /* @section Public variable */
 public:
@@ -194,39 +194,39 @@ constexpr BasicPoint<_ValueType>::operator BasicPoint<_CastToType>() const noexc
 }
 
 template <typename _ValueType>
-template <std::size_t _BufferSize>
-inline int32_t BasicPoint<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
+template <std::size_t _StrBufferSize>
+inline int32_t BasicPoint<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destBuffer, _BufferSize);
+    return this->ToString(destStr, _StrBufferSize);
 }
 
 template <typename _ValueType>
-inline int32_t BasicPoint<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicPoint<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", x, y);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", x, y);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%d %d", x, y);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d", x, y);
 #endif
 }
 
 template <>
-inline int32_t BasicPoint<float>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicPoint<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", x, y);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", x, y);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", x, y);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", x, y);
 #endif
 }
 
 template <>
-inline int32_t BasicPoint<double>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", x, y);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", x, y);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", x, y);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", x, y);
 #endif
 }
 

@@ -11,6 +11,7 @@
 #include <cstdio>
 
 #include "Core/Platform/Config.h"
+#include "Core/Utility/ExpressionTemplate.h"
 
 namespace tgon
 {
@@ -27,11 +28,14 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
+    template <typename _ExpressionType>
+    constexpr Vector3(const utility::ExpressionTemplate<_ExpressionType>& expression);
+
 /* @section Public perator */
 public:
-    constexpr const Vector3 operator+(const Vector3&) const noexcept;
-    constexpr const Vector3 operator-(const Vector3&) const noexcept;
-    constexpr const Vector3 operator*(const Vector3&) const noexcept;
+    constexpr const utility::ExpressionTemplate<utility::Addition<Vector3, Vector3>> operator+(const Vector3&) const noexcept;
+    constexpr const utility::ExpressionTemplate<utility::Subtraction<Vector3, Vector3>> operator-(const Vector3&) const noexcept;
+    constexpr const utility::ExpressionTemplate<utility::Multiplication<Vector3, Vector3>> operator*(const Vector3&) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
@@ -67,16 +71,16 @@ public:
      * @param [out] destBuffer      The destination of the string to be written.
      * @return                      The length of string converted.
      */
-    template <std::size_t _BufferSize>
-    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
      * @param [out] destBuffer      The destination of the string to be written.
-     * @param [in] bufferSize       The size of destBuffer.
+     * @param [in] strBufferSize    The size of destBuffer.
      * @return                      The length of string converted.
      */
-    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /* @section Public variable */
 public:
@@ -106,19 +110,27 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 {
 }
 
-constexpr const Vector3 Vector3::operator+(const Vector3& rhs) const noexcept
+template <typename _ExpressionType>
+constexpr Vector3::Vector3(const utility::ExpressionTemplate<_ExpressionType>& expression) :
+    x(expression[0]),
+    y(expression[1]),
+    z(expression[2])
 {
-    return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
 }
 
-constexpr const Vector3 Vector3::operator-(const Vector3& rhs) const noexcept
+constexpr const utility::ExpressionTemplate<utility::Addition<Vector3, Vector3>> Vector3::operator+(const Vector3& rhs) const noexcept
 {
-    return Vector3(x - rhs.x, y - rhs.y, z - rhs.z);
+    return {*this, rhs};
 }
 
-constexpr const Vector3 Vector3::operator*(const Vector3& rhs) const noexcept
+constexpr const utility::ExpressionTemplate<utility::Subtraction<Vector3, Vector3>> Vector3::operator-(const Vector3& rhs) const noexcept
 {
-    return Vector3(x * rhs.x, y * rhs.y, z * rhs.z);
+    return {*this, rhs};
+}
+
+constexpr const utility::ExpressionTemplate<utility::Multiplication<Vector3, Vector3>> Vector3::operator*(const Vector3& rhs) const noexcept
+{
+    return {*this, rhs};
 }
 
 constexpr const Vector3 Vector3::operator*(float scalar) const noexcept
@@ -201,7 +213,7 @@ constexpr bool Vector3::operator==(const Vector3& rhs) const noexcept
 
 constexpr bool Vector3::operator!=(const Vector3& rhs) const noexcept
 {
-    return (x != rhs.x && y != rhs.y && z != rhs.z);
+    return (x != rhs.x || y != rhs.y || z != rhs.z);
 }
 
 inline float& Vector3::operator[](std::size_t index) noexcept
@@ -240,7 +252,7 @@ constexpr const Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexc
 
 inline float Vector3::Distance(const Vector3& a, const Vector3& b) noexcept
 {
-    return (a - b).Length();
+    return Vector3(a - b).Length();
 }
 
 inline float Vector3::Length() const noexcept
@@ -269,22 +281,22 @@ inline const Vector3 Vector3::Normalized() const
     return Vector3(x * inverse, y * inverse, z * inverse);
 }
 
-template<std::size_t _BufferSize>
-inline int32_t Vector3::ToString(char(&destBuffer)[_BufferSize]) const
+template<std::size_t _StrBufferSize>
+inline int32_t Vector3::ToString(char(&destStr)[_StrBufferSize]) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, "%f %f %f", x, y, z);
+    return sprintf_s(destStr, "%f %f %f", x, y, z);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * _BufferSize, "%f %f %f", x, y, z);
+    return snprintf(destStr, sizeof(destStr[0]) * _StrBufferSize, "%f %f %f", x, y, z);
 #endif
 }
 
-inline int32_t Vector3::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t Vector3::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f", x, y, z);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", x, y, z);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f", x, y, z);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", x, y, z);
 #endif
 }
 

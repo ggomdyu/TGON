@@ -48,20 +48,20 @@ public:
 /* @section Public method */
 public:
     /**
-     * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @return                      The length of string converted.
+     * @brief                   Converts value to a string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
      */
     template <std::size_t _BufferSize>
-    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
+    int32_t ToString(char(&destStr)[_BufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @param [in] bufferSize       The size of destBuffer.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The size of destStr.
      * @return                      The length of string converted.
      */
-    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /* @section Public variable */
 public:
@@ -203,38 +203,38 @@ constexpr bool BasicRect<_ValueType>::operator!=(const BasicRect& rhs) const noe
 
 template <typename _ValueType>
 template <std::size_t _BufferSize>
-inline int32_t BasicRect<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
+inline int32_t BasicRect<_ValueType>::ToString(char(&destStr)[_BufferSize]) const
 {
-    return this->ToString(destBuffer, _BufferSize);
+    return this->ToString(destStr, _BufferSize);
 }
 
 template <typename _ValueType>
-inline int32_t BasicRect<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicRect<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d %d %d", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", bottom, top, width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%d %d %d %d", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d %d %d", bottom, top, width, height);
 #endif
 }
 
 template <>
-inline int32_t BasicRect<float>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicRect<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f %f %f", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", bottom, top, width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%f %f %f %f", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%f %f %f %f", bottom, top, width, height);
 #endif
 }
 
 template <>
-inline int32_t BasicRect<double>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
 #endif
 }
 

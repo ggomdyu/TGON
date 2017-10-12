@@ -51,20 +51,20 @@ public:
 /* @section Public method */
 public:
     /**
-     * @brief                       Converts to string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @return                      The length of string converted.
+     * @brief                   Converts to string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
      */
-    template <std::size_t _BufferSize>
-    int32_t ToString(char(&destBuffer)[_BufferSize]) const;
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
      * @brief                       Converts to string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @param [in] bufferSize       The size of destBuffer.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The size of destStr.
      * @return                      The length of string converted.
      */
-    int32_t ToString(char* destBuffer, std::size_t bufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /* @section Public variable */
 public:
@@ -192,39 +192,39 @@ constexpr BasicExtent2D<_ValueType>::operator BasicExtent2D<_CastToType>() const
 }
 
 template <typename _ValueType>
-template <std::size_t _BufferSize>
-inline int32_t BasicExtent2D<_ValueType>::ToString(char(&destBuffer)[_BufferSize]) const
+template <std::size_t _StrBufferSize>
+inline int32_t BasicExtent2D<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destBuffer, _BufferSize);
+    return this->ToString(destStr, _StrBufferSize);
 }
 
 template <typename _ValueType>
-inline int32_t BasicExtent2D<_ValueType>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%d %d", width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize , "%d %d", width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d", width, height);
 #endif
 }
 
 template <>
-inline int32_t BasicExtent2D<float>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicExtent2D<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%f %f", width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
 #endif
 }
 
 template <>
-inline int32_t BasicExtent2D<double>::ToString(char* destBuffer, std::size_t bufferSize) const
+inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
 #else
-    return snprintf(destBuffer, sizeof(destBuffer[0]) * bufferSize, "%lf %lf", width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
 #endif
 }
 
