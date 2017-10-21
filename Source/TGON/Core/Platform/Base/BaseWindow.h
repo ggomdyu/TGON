@@ -35,6 +35,8 @@ public:
 
 /* @section Public method */
 public:
+    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) = 0;
+
     virtual void Show() {}
     virtual void Hide() {}
     virtual void Quit() {}
