@@ -473,17 +473,17 @@ inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index)
 {
-    assert(index <= m_strLen && "BasicFixedString index out of range");
+    assert(index <= m_strLen && "BasicFixedString index out of range!");
 
-    return m_str[index];
+    return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline const _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
 {
-    assert(index <= m_strLen && "BasicFixedString index out of range");
+    assert(index <= m_strLen && "BasicFixedString index out of range!");
 
-    return m_str[index];
+    return _StringTraitsType::At(m_str, index);
 }
 
 } /* namespace string */
