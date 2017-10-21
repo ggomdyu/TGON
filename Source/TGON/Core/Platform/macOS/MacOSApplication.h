@@ -17,20 +17,19 @@ namespace macos
 class TGON_API MacOSApplication :
     public BaseApplication
 {
-/* @section public constructor */
-public:
-    using BaseApplication::BaseApplication;
-
 /* @section public destructor */
 public:
     virtual ~MacOSApplication() = default;
 
 /* @section public method */
 public:
+    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) override;
+
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) override;
+    virtual void Terminate() override;
 };
 
-} /* namespace windows */
+} /* namespace macos */
 
 using Application = macos::MacOSApplication;
 

@@ -12,8 +12,6 @@
 
 #include "Core/Platform/Config.h"
 
-#include "BaseApplicationType.h"
-
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
     {\
@@ -32,29 +30,38 @@ namespace tgon
 namespace platform
 {
 
+struct WindowStyle;
+class BaseWindow;
+enum class MessageBoxType;
+
 class TGON_API BaseApplication :
     private boost::noncopyable
 {
-/* @section Public constructor */
-public:
-    BaseApplication(const std::shared_ptr<class BaseWindow>& mainWindow);
-
 /* @section Public destructor */
 public:
     virtual ~BaseApplication() = default;
 
 /* @section Public method */
 public:
+    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) = 0;
+    virtual void InitWithWindow(const std::shared_ptr<BaseWindow>& window);
+
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
+    virtual void Terminate() = 0;
 
-    const std::shared_ptr<class BaseWindow>& GetMainWindow() const;
+    const std::shared_ptr<BaseWindow>& GetMainWindow() const;
 
-    virtual void OnTerminate() {}
+    virtual void OnWillLaunch() {}
+    virtual void OnDidLaunch() {}
+    virtual void OnWillTerminate() {}
+    virtual void OnDidTerminate() {}
+    virtual void OnWillCloseWindow(const std::shared_ptr<BaseWindow>&) {}
+    virtual void OnDidCloseWindow(const std::shared_ptr<BaseWindow>&) {}
     virtual void OnUpdate() {}
     virtual void OnDraw() {}
 
-private:
-    std::shared_ptr<class BaseWindow> m_mainWindow;
+protected:
+    std::shared_ptr<BaseWindow> m_mainWindow;
 };
 
 } /* namespace platform */
