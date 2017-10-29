@@ -2,12 +2,11 @@
  * @filename    FixedString.h
  * @author      ggomdyu
  * @date        03/16/2017
+ * @brief       String class that uses only stack memory and has fixed buffer size.
  */
 
 #pragma once
-#include <memory>
 #include <cstdint>
-#include <cassert>
 
 #include "StringTraits.h"
 
@@ -68,7 +67,7 @@ public:
     template <std::size_t _CharArraySize2>
     bool operator==(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
 
-    _CharType operator[](std::size_t index) const;
+    const _CharType operator[](std::size_t index) const;
     _CharType& operator[](std::size_t index);
 
 /* @section Public method */
@@ -92,7 +91,7 @@ public:
     int32_t Compare(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& str) const;
     template <std::size_t _CharArraySize2>
     int32_t Compare(const _CharType(&str)[_CharArraySize2]) const;
-    int32_t Compare(const _CharType* str, std::size_t length) const;
+    int32_t Compare(const _CharType* str, std::size_t strLen) const;
 
     template <std::size_t _CharArraySize2>
     std::size_t Find(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
@@ -116,18 +115,19 @@ public:
     void Swap(BasicFixedString& rhs);
 
     const _CharType* CStr() const noexcept;
+    const _CharType* Data() const noexcept;
 
     std::size_t Length() const noexcept;
     constexpr std::size_t Capacity() const noexcept;
 
     IteratorType begin() noexcept;
-    IteratorType end();
+    IteratorType end() noexcept;
     ConstIteratorType cbegin() const noexcept;
-    ConstIteratorType cend() const;
-    ReverseIteratorType rbegin();
+    ConstIteratorType cend() const noexcept;
+    ReverseIteratorType rbegin() noexcept;
     ReverseIteratorType rend() noexcept;
-    ConstReverseIteratorType rbegin() const;
-    ConstReverseIteratorType rend() const noexcept;
+    ConstReverseIteratorType crbegin() const noexcept;
+    ConstReverseIteratorType crend() const noexcept;
 
 /* @section Private variable */
 private:
@@ -245,7 +245,7 @@ inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::oper
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
+inline const _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
 {
 	return m_str[index];
 }
@@ -325,9 +325,9 @@ inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::C
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharType* str, std::size_t length) const
+inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharType* str, std::size_t strLen) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, str, length);
+    return _StringTraitsType::Compare(m_str, m_strLen, str, strLen);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -411,6 +411,12 @@ inline const _CharType* BasicFixedString<_CharType, _CharArraySize, _StringTrait
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+inline const _CharType* BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Data() const noexcept
+{
+    return m_str;
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Length() const noexcept
 {
     return m_strLen;
@@ -429,7 +435,7 @@ inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::end()
+inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::end() noexcept
 {
     return &m_str[m_strLen];
 }
@@ -441,13 +447,13 @@ inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::cend() const
+inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::cend() const noexcept
 {
     return &m_str[m_strLen];
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rbegin()
+inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rbegin() noexcept
 {
     return {this->end()};
 }
@@ -459,13 +465,13 @@ inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rbegin() const
+inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::crbegin() const noexcept
 {
     return {this->end()};
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rend() const noexcept
+inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ConstReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::crend() const noexcept
 {
     return {this->begin()};
 }
