@@ -47,6 +47,8 @@ public:
 
 /* @section Public method */
 public:
+    constexpr bool Intersect(const BasicRect& rhs) const;
+
     /**
      * @brief                   Converts value to a string.
      * @param [out] destStr     The destination of the string to be written.
@@ -198,7 +200,13 @@ constexpr bool BasicRect<_ValueType>::operator==(const BasicRect& rhs) const noe
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::operator!=(const BasicRect& rhs) const noexcept
 {
-    return (bottom != rhs.bottom || top != rhs.top || width != rhs.width || height != rhs.height);
+    return !(*this == rhs);
+}
+
+template <typename _ValueType>
+constexpr bool BasicRect<_ValueType>::Intersect(const BasicRect& rhs) const
+{
+    return (left < rhs.right && top < rhs.bottom && right > left && bottom > rhs.top);
 }
 
 template <typename _ValueType>
