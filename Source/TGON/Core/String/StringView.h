@@ -251,16 +251,12 @@ constexpr const char* BasicStringView<_CharType, _StringTraitsType>::Data() cons
 template <typename _CharType, typename _StringTraitsType>
 constexpr _CharType& BasicStringView<_CharType, _StringTraitsType>::At(std::size_t index)
 {
-    assert(index <= m_strLen && "BasicStringView index out of range!");
-    
     return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr const _CharType BasicStringView<_CharType, _StringTraitsType>::At(std::size_t index) const
 {
-    assert(index <= m_strLen && "BasicStringView index out of range!");
-
     return _StringTraitsType::At(m_str, index);
 }
 
