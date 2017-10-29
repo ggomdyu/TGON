@@ -16,16 +16,16 @@ namespace platform
 {
 
 /**
- * @brief                       Get the current language of OS.
- * @param [out] destBuffer      The destination of the string to be written.
- * @param [in] bufferLength     The length of buffer
+ * @brief                           Get the current language of OS.
+ * @param [out] destStr             The destination of the string to be written.
+ * @param [in] destStrBufferSize    The length of buffer
  */
-TGON_API void GetLanguage(char* destBuffer, std::size_t bufferLength);
+TGON_API void GetLanguage(char* destStr, std::size_t destStrBufferSize);
 
 template <std::size_t N>
-inline void GetLanguage(char(&destBuffer)[N])
+inline void GetLanguage(char(&destStr)[N])
 {
-    GetLanguage(destBuffer, N);
+    GetLanguage(destStr, N);
 }
 
 } /* namespace platform */

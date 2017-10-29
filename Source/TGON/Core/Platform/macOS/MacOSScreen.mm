@@ -21,7 +21,7 @@ Screen ConvertNSScreenToScreen(NSScreen* nativeScreen)
         nativeScreen.frame.size.height, // height
         [[[nativeScreen deviceDescription] objectForKey:@"NSDeviceBitsPerSample"] integerValue] // bitsPerPixel
         ,0,
-        ScreenOrientation::Landscape
+        ScreenOrientation::Landscape // orientation
     );
 }
 

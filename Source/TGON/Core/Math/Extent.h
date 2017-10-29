@@ -181,7 +181,7 @@ constexpr bool BasicExtent2D<_ValueType>::operator==(const BasicExtent2D& rhs) c
 template <typename _ValueType>
 constexpr bool BasicExtent2D<_ValueType>::operator!=(const BasicExtent2D& rhs) const noexcept
 {
-    return (width != rhs.width && height != rhs.height);
+    return !(*this == rhs);
 }
 
 template<typename _ValueType>

@@ -64,14 +64,20 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
     using namespace tgon::platform;
 
     g_application = std::static_pointer_cast<macos::MacOSApplication>(MakeApplication());
-
-    [self InitializeDisplayLink];
+    g_application->OnWillLaunch();
+    {
+        [self InitializeDisplayLink];
+    }
+    g_application->OnDidLaunch();
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    g_application->OnTerminate();
-
-    [self ReleaseDisplayLink];
+    g_application->OnWillTerminate();
+    {
+        [self ReleaseDisplayLink];
+    }
+    g_application->OnDidTerminate();
+    g_application.reset();
 }
 @end

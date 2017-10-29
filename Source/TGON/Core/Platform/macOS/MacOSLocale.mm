@@ -10,14 +10,12 @@ namespace tgon
 namespace platform
 {
 
-void GetLanguage(char* destBuffer, std::size_t bufferLength)
+void GetLanguage(char* destStr, std::size_t destStrBufferSize)
 {
-    NSLocale* currentLocale = [NSLocale currentLocale];
-    NSString* currentLanguageCode = [currentLocale objectForKey:NSLocaleLanguageCode];
-    
+    NSString* currentLanguageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     [currentLanguageCode cStringUsingEncoding:NSUTF8StringEncoding];
     
-    std::strncpy(destBuffer, currentLanguageCode.UTF8String, currentLanguageCode.length);
+    std::strncpy(destStr, currentLanguageCode.UTF8String, currentLanguageCode.length);
 }
 
 } /* namespace platform */

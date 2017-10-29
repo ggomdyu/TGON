@@ -34,7 +34,7 @@
     [&]()\
     {\
         auto function = _function;\
-        return tgon::utility::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
+        return tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
     }()
 
 /**
@@ -42,11 +42,11 @@
  * @param [in] function     A Reference of class member function(e.g. &ClassName::functionName)
  * @param [in] instance     A Instance which handles event
  */
-#define TGON_MAKE_DELEGATE_2(function, instance) tgon::utility::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::utility::FunctionTraits<decltype(function)>::ClassType, function>(instance)
+#define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::utility::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
 namespace tgon
 {
-namespace utility
+namespace object
 {
 
 template <typename>

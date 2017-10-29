@@ -67,16 +67,16 @@ public:
 //    void TransformNormal(const struct Matrix4x4&) noexcept;
 
     /**
-     * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
-     * @return                      The length of string converted.
+     * @brief                   Converts value to a string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
      */
     template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
-     * @param [out] destBuffer      The destination of the string to be written.
+     * @param [out] destStr         The destination of the string to be written.
      * @param [in] strBufferSize    The size of destBuffer.
      * @return                      The length of string converted.
      */
@@ -213,7 +213,7 @@ constexpr bool Vector3::operator==(const Vector3& rhs) const noexcept
 
 constexpr bool Vector3::operator!=(const Vector3& rhs) const noexcept
 {
-    return (x != rhs.x || y != rhs.y || z != rhs.z);
+    return !(*this == rhs);
 }
 
 inline float& Vector3::operator[](std::size_t index) noexcept

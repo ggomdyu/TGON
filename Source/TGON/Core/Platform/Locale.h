@@ -8,11 +8,11 @@
 #include <boost/predef/os.h>
 
 #if BOOST_OS_WINDOWS
-#	include "Windows/WindowsLocale.h"
+#   include "Windows/WindowsLocale.h"
 #elif BOOST_OS_MACOS
-#	import "MacOS/MacOSLocale.h"
+#   import "MacOS/MacOSLocale.h"
 #elif BOOST_OS_ANDROID
-#	include "Android/AndroidLocale.h"
+#   include "Android/AndroidLocale.h"
 #elif BOOST_OS_IOS
-#	import "IOS/IOSLocale.h"
+#   import "IOS/IOSLocale.h"
 #endif

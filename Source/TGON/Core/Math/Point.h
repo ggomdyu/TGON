@@ -183,7 +183,7 @@ constexpr bool BasicPoint<_ValueType>::operator==(const BasicPoint& rhs) const n
 template <typename _ValueType>
 constexpr bool BasicPoint<_ValueType>::operator!=(const BasicPoint& rhs) const noexcept
 {
-    return (x != rhs.x || y != rhs.y);
+    return !(*this == rhs);
 }
 
 template <typename _ValueType>

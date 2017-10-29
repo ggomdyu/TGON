@@ -18,10 +18,12 @@ class StringTraits
 {
 /* @section Public type */
 public:
-    using CharTraits = std::char_traits<_CharType>;
+    using CharTraitsType = std::char_traits<_CharType>;
 
 /* @section Protected constructor */
 protected:
+    constexpr StringTraits() noexcept = default;
+
     /**
      * @brief                   Copy string from source to destination.
      * @param [in] srcStr       The string to copy.
@@ -42,7 +44,7 @@ protected:
 public:
     /**
      * @brief   This is the special magic number which means string not exists.
-     *          The function series of Find will return this variable when searching sub-string does not exist.
+     *          The function series of Find will return this variable when searching sub-string failed.
      */
     static constexpr std::size_t NPos = static_cast<std::size_t>(-1);
 
@@ -76,6 +78,7 @@ protected:
 
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
+    // So slow algorithm speed, need to fix it.
     static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
     static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
@@ -159,7 +162,7 @@ inline std::size_t StringTraits<_CharType>::RFind(const _CharType* srcStr, std::
     const _CharType* foundStr = &srcStr[min(srcStrOffset, srcStrLen - srcFindSubStrLen)];
     while (true)
     {
-        auto ans = CharTraits::compare(foundStr, srcFindSubStr, srcFindSubStrLen);
+        auto ans = CharTraitsType::compare(foundStr, srcFindSubStr, srcFindSubStrLen);
         if (ans == 0)
         {
             return static_cast<std::size_t>(foundStr - srcStr);
@@ -181,9 +184,7 @@ inline std::size_t StringTraits<_CharType>::RFind(const _CharType* srcStr, std::
 template <typename _CharType>
 inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen)
 {
-    auto minSize = lhsStrLen < rhsStrLen ? lhsStrLen : rhsStrLen;
-
-    auto ans = CharTraits::compare(lhsStr, rhsStr, minSize);
+    auto ans = CharTraitsType::compare(lhsStr, rhsStr, std::min(lhsStrLen, rhsStrLen));
     if (ans != 0)
     {
         return ans;
