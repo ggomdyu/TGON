@@ -3,6 +3,7 @@
 
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSScreen.h>
+#import <AppKit/NSButton.h>
 #import <AppKit/NSColor.h>
 
 #import "Core/Platform/Base/BaseWindowType.h"
@@ -16,71 +17,82 @@ namespace macos
 namespace
 {
 
-void ConvertWindowStyleToNative(const WindowStyle& windowStyle, NSPoint* destWindowPosition, NSWindowStyleMask* destWindowStyleMask)
+void PostApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWindow)
 {
-    *destWindowStyleMask = static_cast<NSWindowStyleMask>(0);
-
-    // Set window position
+    if (windowStyle.enableSystemButton == false)
     {
-        NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
-
-        if (windowStyle.showMiddle == true)
-        {
-            float newWindowXPos = (mainScreenRect.size.width * 0.5f) - (static_cast<CGFloat>(windowStyle.width) * 0.5f);
-            float newWindowYPos = (mainScreenRect.size.height * 0.5f) - (static_cast<CGFloat>(windowStyle.height) * 0.5f);
-            *destWindowPosition = NSMakePoint(newWindowXPos, newWindowYPos);
-        }
-        else
-        {
-            *destWindowPosition = NSMakePoint(windowStyle.x, windowStyle.y);
-        }
+        [[applyTargetWindow standardWindowButton:NSWindowZoomButton] setEnabled:NO];
     }
+}
+
+void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWindow)
+{
+    NSWindowStyleMask nativeWindowStyleMask = static_cast<NSWindowStyleMask>(0);
 
     // Set window style
     {
         if (windowStyle.borderless == false)
         {
-            *destWindowStyleMask |= NSWindowStyleMaskTitled;
-
-            if (windowStyle.enableSystemButton == true)
-            {
-                *destWindowStyleMask |= NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable;
-            }
+            nativeWindowStyleMask |= NSWindowStyleMaskTitled;
+        }
+        else
+        {
+            nativeWindowStyleMask = NSWindowStyleMaskBorderless;
         }
 
         if (windowStyle.resizeable == true)
         {
-            *destWindowStyleMask |= NSWindowStyleMaskResizable;
+            nativeWindowStyleMask |= NSWindowStyleMaskResizable;
+        }
+
+        if (windowStyle.enableSystemButton == true)
+        {
+            nativeWindowStyleMask |= NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable;
         }
     }
+
+    // Set window rect
+    {
+        NSScreen* mainScreen = [NSScreen mainScreen];
+        NSRect mainScreenRect = [mainScreen visibleFrame];
+        
+        NSPoint newWindowPosition = (windowStyle.showMiddle == true) ? NSMakePoint(
+            (mainScreenRect.size.width * 0.5f) - (static_cast<CGFloat>(windowStyle.width) * 0.5f),
+            (mainScreenRect.size.height * 0.5f) - (static_cast<CGFloat>(windowStyle.height) * 0.5f)) :
+        NSMakePoint(windowStyle.x, windowStyle.y);
+        
+        NSRect currentWindowFrameRect = [applyTargetWindow frame];
+        [applyTargetWindow setFrameOrigin:NSMakePoint(newWindowPosition.x,(mainScreenRect.origin.y + mainScreenRect.size.height - currentWindowFrameRect.size.height) - newWindowPosition.y)];
+    }
+
+    // Set window title
+    {
+        [applyTargetWindow setTitle:[NSString stringWithUTF8String:windowStyle.caption.c_str()]];
+    }
+
+    [applyTargetWindow setStyleMask:nativeWindowStyleMask];
 }
 
 } /* namespace */
 
 NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
 {
-    NSWindowStyleMask windowStyleMask;
-    NSPoint windowPosition;
-    ConvertWindowStyleToNative(windowStyle, &windowPosition, &windowStyleMask);
-
     NSScreen* mainScreen = [NSScreen mainScreen];
 
-    NSWindow* window = [NSWindow alloc];
-    [window initWithContentRect:NSMakeRect(0, 0, static_cast<CGFloat>(windowStyle.width), static_cast<CGFloat>(windowStyle.height))
-                      styleMask:windowStyleMask
-                        backing:NSBackingStoreBuffered
-                          defer:NO
-                         screen:mainScreen];
+    NSWindow* window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, static_cast<CGFloat>(windowStyle.width), static_cast<CGFloat>(windowStyle.height))
+                                                   styleMask:NSWindowStyleMaskTitled
+                                                     backing:NSBackingStoreBuffered
+                                                       defer:NO
+                                                      screen:mainScreen];
     [window setAcceptsMouseMovedEvents:YES];
-    [window makeKeyAndOrderFront:nil];
-    [window setTitle:[NSString stringWithUTF8String:windowStyle.caption.c_str()]];
+    [window makeKeyAndOrderFront:[NSApplication sharedApplication]];
     [window setBackgroundColor:[NSColor whiteColor]];
+    [window setReleasedWhenClosed:YES];
     [window setLevel:NSMainMenuWindowLevel + 1];
 
-    NSRect mainScreenRect = [mainScreen visibleFrame];
-    NSRect currentWindowFrameRect = [window frame];
-    [window setFrameOrigin:NSMakePoint(windowPosition.x,(mainScreenRect.origin.y + mainScreenRect.size.height - currentWindowFrameRect.size.height) - windowPosition.y)];
-    
+    PreApplyWindowStyle(windowStyle, window);
+    PostApplyWindowStyle(windowStyle, window);
+
     return window;
 }
 

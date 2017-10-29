@@ -28,9 +28,8 @@ public:
 
     bool borderless = false;
     bool enableSystemButton = true;
-    bool enableFullScreenButton = false; // reserved
-    bool supportWindowTransparency = false; // reserved
-    bool supportPerPixelTransparency = false; // reserved
+    bool supportWindowTransparency = false;
+    bool supportPerPixelTransparency = false;
     bool resizeable = true;
     bool topMost = false;
     bool maximized = false;

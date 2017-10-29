@@ -23,20 +23,30 @@ class TGON_API MacOSWindow :
 {
 /* @section Public constructor */
 public:
-    explicit MacOSWindow(const WindowStyle& windowStyle = WindowStyle{});
+    MacOSWindow() = default;
+    explicit MacOSWindow(const WindowStyle& windowStyle);
     explicit MacOSWindow(NSWindow* nsWindow) noexcept;
+    MacOSWindow(MacOSWindow&& window);
 
 /* @section Public destructor */
 public:
-    virtual ~MacOSWindow() = default;
+    virtual ~MacOSWindow();
+
+/* @section Public operator */
+public:
+    MacOSWindow& operator=(MacOSWindow&& rhs);
 
 /* @section Public method */
 public:
-    virtual void Quit() override {}
+    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) override;
+
+    virtual void Show() override;
+    virtual void Hide() override;
+    virtual void Close() override {}
     virtual void Maximize() override;
     virtual void Minimize() override;
     virtual void BringToFront() override {}
-    
+
     virtual void SetPosition(int32_t x, int32_t y) override;
     virtual void SetSize(int32_t width, int32_t height) override;
     virtual void SetTitle(const char* title) override;

@@ -3,20 +3,12 @@
 
 #import <AppKit/NSAlert.h>
 
-#import "Core/Platform/MacOS/MacOSWindow.h"
-#import "Core/Platform/Base/BaseWindowType.h"
-
 namespace tgon
 {
 namespace platform
 {
 namespace macos
 {
-
-void MacOSApplication::InitWithWindowStyle(const WindowStyle& windowStyle)
-{
-    m_mainWindow = std::make_shared<MacOSWindow>(windowStyle);
-}
 
 void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType)
 {

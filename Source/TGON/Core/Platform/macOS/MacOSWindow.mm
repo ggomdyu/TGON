@@ -28,6 +28,45 @@ MacOSWindow::MacOSWindow(NSWindow* nsWindow) noexcept :
 {
 }
 
+MacOSWindow::MacOSWindow(MacOSWindow&& window) :
+    m_nsWindow(window.m_nsWindow),
+    m_windowDelegate(window.m_windowDelegate)
+{
+    window.m_nsWindow = nil;
+    window.m_windowDelegate = nil;
+}
+
+MacOSWindow::~MacOSWindow()
+{
+    m_nsWindow = nil;
+    m_windowDelegate = nil;
+}
+
+MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs)
+{
+    m_nsWindow = rhs.m_nsWindow;
+    m_windowDelegate = rhs.m_windowDelegate;
+
+    rhs.m_nsWindow = nil;
+    rhs.m_windowDelegate = nil;
+
+    return *this;
+}
+
+void MacOSWindow::InitWithWindowStyle(const WindowStyle& windowStyle)
+{
+    new (this) MacOSWindow(windowStyle);
+}
+
+void MacOSWindow::Show()
+{
+//    [m_nsWindow display];
+}
+
+void MacOSWindow::Hide()
+{
+}
+
 void MacOSWindow::Maximize()
 {
     [m_nsWindow zoom:nil];
@@ -63,8 +102,7 @@ void MacOSWindow::SetTitle(const char* title)
 
 void MacOSWindow::SetFullScreen(bool isFullScreen)
 {
-    // todo: 구현
-//    [m_nsWindow toggleFullScreen:nil];
+    [m_nsWindow toggleFullScreen:nil];
 }
 
 void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const

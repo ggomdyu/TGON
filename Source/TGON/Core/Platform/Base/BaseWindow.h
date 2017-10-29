@@ -39,7 +39,7 @@ public:
 
     virtual void Show() {}
     virtual void Hide() {}
-    virtual void Quit() {}
+    virtual void Close() {}
     virtual void Maximize() {}
     virtual void Minimize() {}
     virtual void BringToFront() {}

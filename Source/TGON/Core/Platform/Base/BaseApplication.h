@@ -43,7 +43,6 @@ public:
 
 /* @section Public method */
 public:
-    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) = 0;
     virtual void InitWithWindow(const std::shared_ptr<BaseWindow>& window);
 
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
