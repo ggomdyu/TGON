@@ -16,9 +16,9 @@ namespace object
 {
 
 template <typename _CastToType, typename _CastFromType, typename std::enable_if< std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
-constexpr _CastToType DynamicCast(_CastFromType ptr)
+inline _CastToType DynamicCast(_CastFromType ptr)
 {
-    return static_cast<_CastToType>(ptr);
+    return ptr;
 }
 
 template <typename _CastToType, typename _CastFromType, typename std::enable_if< !std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
