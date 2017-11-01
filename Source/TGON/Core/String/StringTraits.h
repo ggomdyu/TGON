@@ -157,25 +157,10 @@ inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::s
 template<typename _CharType>
 inline std::size_t StringTraits<_CharType>::RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen)
 {
-    using std::min;
-
-    const _CharType* foundStr = &srcStr[min(srcStrOffset, srcStrLen - srcFindSubStrLen)];
-    while (true)
+    const _CharType* foundStr = std::find_end(srcStr + srcStrOffset, srcStr + srcStrLen, srcFindSubStr, srcFindSubStr + srcFindSubStrLen);
+    if (foundStr != srcStr + srcStrLen)
     {
-        auto ans = CharTraitsType::compare(foundStr, srcFindSubStr, srcFindSubStrLen);
-        if (ans == 0)
-        {
-            return static_cast<std::size_t>(foundStr - srcStr);
-        }
-        else
-        {
-            if (foundStr == srcStr)
-            {
-                break;
-            }
-
-            --foundStr;
-        }
+        return static_cast<std::size_t>(foundStr - srcStr);
     }
 
     return NPos;
