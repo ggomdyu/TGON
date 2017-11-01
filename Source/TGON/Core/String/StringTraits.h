@@ -103,7 +103,7 @@ inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t
 {
     assert(destStrBufferSize > srcStrLen && "String buffer overflowed!");
 
-    memcpy(destStr, srcStr, srcStrLen + 1);
+    memcpy(destStr, srcStr, sizeof(_CharType) * (srcStrLen + 1));
 }
 
 template <typename _CharType>
@@ -125,7 +125,7 @@ inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t
 {
     assert(destStrBufferSize > srcStrLen + destStrLen && "String buffer overflowed!");
 
-    memcpy(&destStr[destStrLen], srcStr, srcStrLen + 1);
+    memcpy(&destStr[destStrLen], srcStr, sizeof(_CharType) * (srcStrLen + 1));
 }
 
 template<typename _CharType>
@@ -146,12 +146,12 @@ template <typename _CharType>
 inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen)
 {
     const _CharType* foundStr = std::search(srcStr + srcStrOffset, srcStr + srcStrLen, srcFindSubStr, srcFindSubStr + srcFindSubStrLen);
-    if (foundStr == srcStr + srcStrLen)
+    if (foundStr != srcStr + srcStrLen)
     {
-        return NPos;
+        return static_cast<std::size_t>(foundStr - srcStr);
     }
 
-    return static_cast<std::size_t>(foundStr - srcStr);
+    return NPos;
 }
 
 template<typename _CharType>

@@ -65,6 +65,8 @@ public:
     BasicFixedString& operator+=(_CharType ch);
 
     template <std::size_t _CharArraySize2>
+    bool operator==(const _CharType(&rhs)[_CharArraySize2]) const;
+    template <std::size_t _CharArraySize2>
     bool operator==(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
 
     const _CharType operator[](std::size_t index) const;
@@ -235,6 +237,13 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixe
 {
     this->Append(1, ch);
     return *this;
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <std::size_t _CharArraySize2>
+inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const _CharType(&rhs)[_CharArraySize2]) const
+{
+    return _StringTraitsType::Compare(m_str, m_strLen, rhs, _CharArraySize2 - 1) == 0;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
