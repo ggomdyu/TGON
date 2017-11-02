@@ -78,12 +78,13 @@ protected:
 
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
-    // So slow algorithm speed, need to fix it.
     static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
     static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
 
     static _CharType& At(const _CharType* srcStr, std::size_t index);
+
+    static std::size_t Length(const _CharType* srcStr);
 };
 
 template <typename _CharType>
@@ -191,6 +192,12 @@ template<typename _CharType>
 inline _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t index)
 {
     return srcStr[index];
+}
+
+template<typename _CharType>
+inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
+{
+    return CharTraitsType::length(srcStr);
 }
 
 } /* namespace string */
