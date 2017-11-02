@@ -39,6 +39,8 @@ public:
     template <std::size_t _CharArraySize2>
     BasicFixedString(const _CharType(&str)[_CharArraySize2]);
     BasicFixedString(const _CharType* str, std::size_t strLen);
+    template <typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    BasicFixedString(const _CharPointerType str);
     BasicFixedString(std::size_t chCount, _CharType ch);
 
     template <std::size_t _CharArraySize2>
@@ -51,6 +53,8 @@ public:
     BasicFixedString& operator=(const BasicFixedString& rhs) = default;
     template <std::size_t _CharArraySize2>
     BasicFixedString& operator=(const _CharType(&rhs)[_CharArraySize2]);
+    template <typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    BasicFixedString& operator=(const _CharPointerType rhs);
 
     template <std::size_t _CharArraySize2>
     BasicFixedString operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
@@ -64,6 +68,8 @@ public:
     BasicFixedString& operator+=(const _CharType(&rhs)[_CharArraySize2]);
     BasicFixedString& operator+=(_CharType ch);
 
+    template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    bool operator==(const _CharPointerType rhs) const;
     template <std::size_t _CharArraySize2>
     bool operator==(const _CharType(&rhs)[_CharArraySize2]) const;
     template <std::size_t _CharArraySize2>
@@ -94,6 +100,8 @@ public:
     template <std::size_t _CharArraySize2>
     int32_t Compare(const _CharType(&str)[_CharArraySize2]) const;
     int32_t Compare(const _CharType* str, std::size_t strLen) const;
+    template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    int32_t Compare(const _CharPointerType str) const;
 
     template <std::size_t _CharArraySize2>
     std::size_t Find(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
@@ -160,6 +168,13 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixe
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const _CharPointerType str) :
+    BasicFixedString(str, _StringTraitsType::Length(str))
+{
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const _CharType* str, std::size_t strLen) :
     _StringTraitsType(str, strLen, m_str, _CharArraySize),
     m_strLen(strLen)
@@ -184,7 +199,7 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs)
 {
-    this->Assign(rhs.CStr(), rhs.Length());
+    this->Assign(m_str, m_strLen, rhs.CStr(), rhs.Length());
     return *this;
 }
 
@@ -193,6 +208,14 @@ template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator=(const _CharType(&rhs)[_CharArraySize2])
 {
     this->Assign(rhs, _CharArraySize2 - 1);
+    return *this;
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator=(const _CharPointerType rhs)
+{
+    this->Assign(rhs, _StringTraitsType::Length(rhs));
     return *this;
 }
 
@@ -240,6 +263,13 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixe
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const _CharPointerType rhs) const
+{
+    return _StringTraitsType::Compare(m_str, m_strLen, rhs, _StringTraitsType::Length(rhs)) == 0;
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template <std::size_t _CharArraySize2>
 inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const _CharType(&rhs)[_CharArraySize2]) const
 {
@@ -250,7 +280,7 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 template <std::size_t _CharArraySize2>
 inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const
 {
-	return _StringTraitsType::Compare(m_str, m_strLen, rhs.CStr(), rhs.Length()) == 0;
+    return _StringTraitsType::Compare(m_str, m_strLen, rhs.CStr(), rhs.Length()) == 0;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -337,6 +367,13 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharType* str, std::size_t strLen) const
 {
     return _StringTraitsType::Compare(m_str, m_strLen, str, strLen);
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharPointerType str) const
+{
+    return _StringTraitsType::Compare(m_str, m_strLen, str, _StringTraitsType::Length(str));
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
