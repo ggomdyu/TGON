@@ -82,9 +82,11 @@ protected:
 
     static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
 
-    static _CharType& At(const _CharType* srcStr, std::size_t index);
+    static _CharType& At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index);
 
     static std::size_t Length(const _CharType* srcStr);
+
+    static void Swap(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
 };
 
 template <typename _CharType>
@@ -189,8 +191,10 @@ inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::si
 }
 
 template<typename _CharType>
-inline _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t index)
+inline _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index)
 {
+    assert(index <= m_strLen && "String index out of range!");
+
     return srcStr[index];
 }
 
@@ -198,6 +202,12 @@ template<typename _CharType>
 inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
 {
     return CharTraitsType::length(srcStr);
+}
+
+template<typename _CharType>
+inline void StringTraits<_CharType>::Swap(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize)
+{
+    std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }
 
 } /* namespace string */
