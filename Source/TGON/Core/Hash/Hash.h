@@ -13,7 +13,7 @@ namespace tgon
 namespace hash
 {
 
-constexpr uint32_t x65599Hash(const char* str)
+constexpr uint32_t X65599Hash(const char* str)
 {
     uint32_t hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
