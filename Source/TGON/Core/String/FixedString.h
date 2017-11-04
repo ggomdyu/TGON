@@ -57,12 +57,12 @@ public:
     BasicFixedString& operator=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs);
 
     template <std::size_t _CharArraySize2>
-    BasicFixedString operator+(const _CharType(&rhs)[_CharArraySize2]);
+    const BasicFixedString operator+(const _CharType(&rhs)[_CharArraySize2]);
     template <typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
-    BasicFixedString operator+(const _CharPointerType rhs) const;
+    const BasicFixedString operator+(const _CharPointerType rhs) const;
     template <std::size_t _CharArraySize2>
-    BasicFixedString operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
-    BasicFixedString operator+(_CharType ch) const;
+    const BasicFixedString operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
+    const BasicFixedString operator+(_CharType ch) const;
 
     template <std::size_t _CharArraySize2>
     BasicFixedString& operator+=(const _CharType(&rhs)[_CharArraySize2]);
@@ -237,27 +237,27 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixe
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template <std::size_t _CharArraySize2>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const
+inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const
 {
     return (BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>(*this) += rhs);
 }
 
 template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template<std::size_t _CharArraySize2>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const _CharType(&rhs)[_CharArraySize2])
+inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const _CharType(&rhs)[_CharArraySize2])
 {
     return (BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>(*this) += rhs);
 }
 
 template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template<typename _CharPointerType, typename std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const _CharPointerType rhs) const
+inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const _CharPointerType rhs) const
 {
     return (BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>(*this) += rhs);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(_CharType ch) const
+inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(_CharType ch) const
 {
     return (BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>(*this) += ch);
 }
@@ -266,7 +266,7 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs)
 {
-    this->Append(rhs);
+    this->Append(rhs.CStr(), rhs.Length());
     return *this;
 }
 
@@ -317,13 +317,13 @@ inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::oper
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline const _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
 {
-	return m_str[index];
+	return _StringTraitsType::At(m_str, m_strLen, index);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index)
 {
-	return m_str[index];
+	return _StringTraitsType::At(m_str, m_strLen, index);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -502,10 +502,7 @@ inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Swap(BasicFixedString& rhs)
 {
-    if (&rhs != this)
-    {
-        _StringTraitsType::Swap(m_str, m_strLen, _CharArraySize, &rhs[0], rhs.Length(), rhs.Capacity());
-    }
+    _StringTraitsType::Swap(&m_str[0], m_strLen, _CharArraySize, &rhs[0], rhs.Length(), rhs.Capacity());
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -559,13 +556,13 @@ inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rbegin() noexcept
 {
-    return  ConstReverseIteratorType(m_str + m_strLen);
+    return ConstReverseIteratorType(m_str + m_strLen);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::ReverseIteratorType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::rend() noexcept
 {
-    return  ConstReverseIteratorType(m_str);
+    return ConstReverseIteratorType(m_str);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>

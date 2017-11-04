@@ -12,6 +12,8 @@
 
 #include "Core/Platform/Config.h"
 
+#include "BaseApplicationFwd.h"
+
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
     {\
@@ -30,10 +32,6 @@ namespace tgon
 namespace platform
 {
 
-struct WindowStyle;
-class BaseWindow;
-enum class MessageBoxType;
-
 class TGON_API BaseApplication :
     private boost::noncopyable
 {
@@ -43,7 +41,7 @@ public:
 
 /* @section Public method */
 public:
-    virtual void InitWithWindow(const std::shared_ptr<BaseWindow>& window);
+    void InitWithWindow(const std::shared_ptr<BaseWindow>& window);
 
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
     virtual void Terminate() = 0;

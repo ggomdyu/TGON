@@ -8,8 +8,7 @@
 #pragma once
 #import "Core/Platform/Base/BaseWindow.h"
 
-@class NSWindow;
-@class MacOSWindowDelegate;
+#import "MacOSWindowFwd.h"
 
 namespace tgon
 {

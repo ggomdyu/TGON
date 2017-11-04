@@ -5,7 +5,7 @@
 #import <AppKit/NSScreen.h>
 #import <vector>
 
-#include "Core/Platform/Window.h"
+#import "Core/Platform/Window.h"
 
 namespace tgon
 {

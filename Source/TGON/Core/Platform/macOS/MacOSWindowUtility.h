@@ -6,16 +6,12 @@
  */
 
 #pragma once
-
-@class NSWindow;
+#import "MacOSWindowUtilityFwd.h"
 
 namespace tgon
 {
 namespace platform
 {
-
-struct WindowStyle;
-
 namespace macos
 {
 

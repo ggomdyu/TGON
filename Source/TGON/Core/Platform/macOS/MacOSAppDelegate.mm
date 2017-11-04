@@ -5,7 +5,7 @@
 #import <AppKit/NSOpenGLView.h>
 #import <QuartzCore/CVDisplayLink.h>
 
-#import "Core/Platform/MacOS/MacOSApplication.h"
+#import "MacOSApplication.h"
 
 namespace tgon
 {

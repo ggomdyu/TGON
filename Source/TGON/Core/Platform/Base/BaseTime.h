@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include "BaseTimeType.h"
-
 #include "Core/Platform/Config.h"
+
+#include "BaseTimeType.h"
 
 namespace tgon
 {

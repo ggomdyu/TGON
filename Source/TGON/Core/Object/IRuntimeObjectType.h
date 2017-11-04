@@ -17,7 +17,7 @@ struct RTTI final
 {
 /* @section Public constructor */
 public:
-    RTTI(const std::type_info& rawRTTI, const RTTI* superRTTI) noexcept;
+    RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept;
 
 /* @section Public method */
 public:
@@ -28,24 +28,24 @@ public:
 
 /* @section Private variable */
 private:
-    const std::type_info& m_rawRTTI;
+    const std::type_info& m_typeInfo;
     const RTTI* m_superRTTI;
 };
 
-inline RTTI::RTTI(const std::type_info& rawRTTI, const RTTI* superRTTI) noexcept :
-    m_rawRTTI(rawRTTI),
+inline RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept :
+    m_typeInfo(typeInfo),
     m_superRTTI(superRTTI)
 {
 }
 
 inline std::size_t RTTI::GetHashCode() const noexcept
 {
-    return m_rawRTTI.hash_code();
+    return m_typeInfo.hash_code();
 }
 
 inline const char* RTTI::GetName() const noexcept
 {
-    return m_rawRTTI.name();
+    return m_typeInfo.name();
 }
 
 inline const RTTI* RTTI::GetSuperRTTI() const noexcept

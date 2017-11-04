@@ -2,7 +2,7 @@
 
 #import <AppKit/NSApplication.h>
 
-#import "Core/Platform/MacOS/MacOSAppDelegate.h"
+#import "MacOSAppDelegate.h"
 
 int main(int argc, const char* argv[])
 {
