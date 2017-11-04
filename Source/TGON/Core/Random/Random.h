@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <random>
 
-#include "Core/Random/WELLRNG.h"
+#include "Core/Random/WELL1024a.h"
 
 namespace tgon
 {
