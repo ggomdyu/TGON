@@ -17,9 +17,6 @@ class GameApplication
 {
 /* @section Public method */
 public:
-    virtual void OnDraw() {};
-    virtual void OnUpdate(float deltaTime) {};
-
 /* @section Private variable */
 private:
     bool m_isPaused;

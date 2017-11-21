@@ -8,23 +8,19 @@
 #include <cstdint>
 #include <cstdio>
 
-#include "Core/Platform/Config.h"
-
 namespace tgon
 {
 namespace math
 {
 
-/**
- * @class   Color4b
- * @brief   Color structure in ARGB order.
- */
 struct Color4b
 {
 /* @section Public constructor */
 public:
-    constexpr Color4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept;
-    constexpr Color4b(uint32_t packedColor) noexcept;
+    constexpr Color4b(uint8_t r, uint8_t g, uint8_t b, uint8_t a) noexcept;
+
+    /* @brief   Assigns packed color in RGBA order. */
+    constexpr Color4b(uint32_t color) noexcept;
 
 /* @section Public operator */
 public:
@@ -32,50 +28,119 @@ public:
 
 /* @section Public method */
 public:
-    constexpr uint32_t ToRGBA() const noexcept;
+    /**
+     * @brief                   Converts color to a string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
+     */
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
-    // Todo: Implement ToString
+    /**
+     * @brief                       Converts color to a string.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The size of destStr.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /* @section Public variable */
 public:
     union
     {
-#ifdef TGON_USING_LITTLE_ENDIAN
-        uint32_t packedColor;
-        struct { uint8_t a, r, g, b; };
-#else
-        uint32_t packedColor;
-        struct { uint8_t b, g, r, a; };
-#endif
+        uint32_t color;
+        struct { uint8_t r, g, b, a; };
     };
 };
 
-constexpr Color4b::Color4b(uint8_t a, uint8_t r, uint8_t g, uint8_t b) noexcept :
-    a(a),
+constexpr Color4b::Color4b(uint8_t r, uint8_t g, uint8_t b, uint8_t a) noexcept :
     r(r),
     g(g),
-    b(b)
+    b(b),
+    a(a)
 {
 }
 
-constexpr Color4b::Color4b(uint32_t packedColor) noexcept :
-    packedColor(packedColor)
+constexpr Color4b::Color4b(uint32_t color) noexcept :
+    color(color)
 {
 }
 
 constexpr Color4b::operator uint32_t() const noexcept
 {
-    return packedColor;
+    return color;
 }
 
-constexpr uint32_t Color4b::ToRGBA() const noexcept
+template <typename _ValueType>
+template <std::size_t _StrBufferSize>
+inline int32_t Color4b::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return (r) | (g << 8) | (b << 16) | (a << 24);
+    return this->ToString(destStr, _StrBufferSize);
+}
+
+template <typename _ValueType>
+inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
+#else
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d %d %d", r, g, b, a);
+#endif
 }
 
 struct Color4f
 {
+/* @section Public constructor */
+public:
+    constexpr Color4f(float r, float g, float b, float a) noexcept;
+
+/* @section Public method */
+public:
+    /**
+     * @brief                   Converts color to a string.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return                  The length of string converted.
+     */
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+
+    /**
+     * @brief                       Converts color to a string.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The size of destStr.
+     * @return                      The length of string converted.
+     */
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+
+    /* @section Public variable */
+public:
+    float r, g, b, a;
 };
+
+constexpr Color4f::Color4f(float r, float g, float b,float a) noexcept :
+    r(r),
+    g(g),
+    b(b),
+    a(a)
+{
+}
+
+template <typename _ValueType>
+template <std::size_t _StrBufferSize>
+inline int32_t Color4f::ToString(char(&destStr)[_StrBufferSize]) const
+{
+    return this->ToString(destStr, _StrBufferSize);
+}
+
+template <typename _ValueType>
+inline int32_t Color4f::ToString(char* destStr, std::size_t strBufferSize) const
+{
+#if _MSC_VER
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
+#else
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
+#endif
+}
 
 } /* namespace math */
 } /* namespace tgon */

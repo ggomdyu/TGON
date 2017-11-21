@@ -34,7 +34,7 @@ void WindowsApplication::MessageLoop()
     this->OnTerminate();
 }
 
-LRESULT CALLBACK WindowsApplication::OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
     auto extraMemAsWindow = reinterpret_cast<windows::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (extraMemAsWindow)
@@ -55,7 +55,7 @@ bool WindowsApplication::RegisterWindowClass(HINSTANCE instanceHandle)
 	wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
 	wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
 	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = WindowsApplication::OnMessageHandled;
+	wcex.lpfnWndProc = WindowsApplication::OnHandleMessage;
 
 	return RegisterClassExW(&wcex) != 0;
 }

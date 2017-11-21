@@ -35,14 +35,17 @@ namespace platform
 class TGON_API BaseApplication :
     private boost::noncopyable
 {
+/* @section Public constructor */
+public:
+    BaseApplication() = default;
+    explicit BaseApplication(const WindowStyle& windowStyle);
+
 /* @section Public destructor */
 public:
     virtual ~BaseApplication() = default;
 
 /* @section Public method */
 public:
-    void InitWithWindow(const std::shared_ptr<BaseWindow>& window);
-
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
     virtual void Terminate() = 0;
 

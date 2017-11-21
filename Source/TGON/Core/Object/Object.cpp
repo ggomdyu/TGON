@@ -6,10 +6,7 @@ namespace tgon
 namespace object
 {
 
-std::shared_ptr<ICloneable> Object::Clone() const
-{
-    return std::make_shared<Object>();
-}
+Object::~Object() = default;
 
 } /* namespace object */
 } /* namespace tgon */

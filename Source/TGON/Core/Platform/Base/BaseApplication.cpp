@@ -1,14 +1,16 @@
 #include "PrecompiledHeader.pch"
 #include "BaseApplication.h"
 
+#include "Core/Platform/Window.h"
+
 namespace tgon
 {
 namespace platform
 {
 
-void BaseApplication::InitWithWindow(const std::shared_ptr<BaseWindow>& window)
+BaseApplication::BaseApplication(const WindowStyle& windowStyle) :
+    m_mainWindow(std::make_shared<Window>(windowStyle))
 {
-    m_mainWindow = window;
 }
 
 const std::shared_ptr<BaseWindow>& BaseApplication::GetMainWindow() const

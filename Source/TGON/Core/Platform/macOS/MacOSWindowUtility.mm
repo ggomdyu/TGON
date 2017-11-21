@@ -75,7 +75,7 @@ void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWi
 
 } /* namespace */
 
-NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
+NSWindow* MakeNativeWindow(const WindowStyle& windowStyle)
 {
     NSScreen* mainScreen = [NSScreen mainScreen];
 

@@ -3,98 +3,85 @@
 #include <cmath>
 #include <string>
 
-#include "Core/Platform/Application.h"
+#include "Graphics/Platform/GraphicsApplication.h"
+#include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Core/Platform/Window.h"
+#include "Core/Object/Object.h"
+#include "Core/Platform/Time.h"
 #include "Core/Platform/Screen.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
+#include "Core/String/StringView.h"
 #include "Core/Utility/InstantiateCounter.h"
+#include "Core/Utility/AutoCast.h"
 #include "Core/Math/Mathematics.h"
 #include "Core/Math/Vector3.h"
-////
 
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl3.h>
+#include <vector>
 #include <AppKit/NSOpenGL.h>
 #include <AppKit/NSOpenGLView.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/gl3.h>
 #include <AppKit/NSWindow.h>
+#include <limits>
+
+void RotateZ(tgon::math::Vector3& v, float radian)
+{
+//    const float radCos = cosf(theta);
+//    const float radSin = sinf(theta);
 //
-//#include "Graphics/OpenGL/MacOS/MacOSOpenGLView.h"
+//    v.x *= radCos;
+//    v.y *= -radSin;
+}
 
 using namespace tgon;
-using namespace tgon::platform;
 
-//#define ENABLE_IF(...) \
-//typename std::enable_if<__VA_ARGS__::value>::type* = nullptr
-//
-//template <typename _CharType, std::size_t N>
-//typename std::enable_if<!std::is_pointer<typename std::remove_reference<_CharType>::type>::value, bool>::type fooImpl(const _CharType(&str)[N])
-//{
-//    int n = 3;
-//}
-//
-//template <typename _CharType>
-//typename std::enable_if<std::is_pointer<typename std::remove_reference<_CharType>::type>::value, bool>::type fooImpl(const _CharType* str)
-//{
-//    int n = 3;
-//}
-
-//template <typename _Type>
-//void foo(_Type&& str)
-//{
-//    std::cout << typeid(_Type).name() << std::endl;
-//
-//    std::cout << std::is_reference<_Type>::value << std::endl;
-//    std::cout << std::is_array<_Type>::value << std::endl;
-//    std::cout << std::is_reference<std::remove_pointer_t<_Type>>::value << std::endl;
-//    std::cout << std::is_array<std::remove_pointer_t<_Type>>::value << std::endl;
-//    std::cout << std::is_pointer<typename std::remove_reference<_Type>::type>::value << std::endl;
-//
-//    fooImpl(std::forward<_Type>(str));
-//}
-
-class TGON_API ModelJoy :
-    public platform::Application
+class TGON_API ThousandParty :
+    public platform::GraphicsApplication
 {
-private:
-    MacOSOpenGLView* view;
-
 public:
-    ModelJoy() :
-        platform::Application(MakeSharedWindow<Window>(WindowStyle{}))
+    ThousandParty() :
+        platform::GraphicsApplication([&]()
+        {
+            tgon::platform::WindowStyle wndStyle;
+            {
+                wndStyle.caption = u8"dfsfs";
+                wndStyle.resizeable = false;
+            }
+            return wndStyle;
+        }(),
+        [&]()
+        {
+            rhi::VideoMode videoMode;
+            {
+                videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL;
+                videoMode.viewWidth = 1000;
+                videoMode.viewHeight = 600;
+            }
+            return videoMode;
+        }())
     {
-        NSWindow* nativeWindow = (__bridge NSWindow*)GetMainWindow()->GetNativeWindow();
-        view = [[MacOSOpenGLView alloc] init];
-        [nativeWindow setContentView:view];
-
-//        CGLLockContext([[view openGLContext] CGLContextObj]);
-//        {
-//            GLuint VertexArrayID;
-//            glGenVertexArrays(1, &VertexArrayID);
-//            glBindVertexArray(VertexArrayID);
-//
-//            static const GLfloat g_vertex_buffer_data[] = {
-//                -1.0f, -1.0f, 0.0f,
-//                1.0f, -1.0f, 0.0f,
-//                0.0f,  1.0f, 0.0f,
-//            };
-//
-//            glGenBuffers(1, &m_vertexBuffer);
-//            glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-//            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-//        }
-//        CGLUnlockContext([[view openGLContext] CGLContextObj]);
     }
 
-    virtual void OnTerminate() override
+    virtual void OnWillLaunch() override
+    {
+        NSWindow* nativeWindow = (__bridge NSWindow*)GetMainWindow()->GetNativeWindow();
+        view = [[NSOpenGLView alloc] init];
+        [nativeWindow setContentView:view];
+
+
+        [[view openGLContext] makeCurrentContext];
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    }
+
+    virtual void OnDidLaunch() override
     {
     }
 
     virtual void OnUpdate() override
     {
     }
-
-    GLuint m_vertexBuffer;
 
     virtual void OnDraw() override
     {
@@ -105,27 +92,50 @@ public:
         // thread. Add a mutex around to avoid the threads accessing the context
         // simultaneously when resizing
         CGLLockContext([[view openGLContext] CGLContextObj]);
+
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        GetRHI()->BeginScene(rhi::PrimitiveType::TriangleList);
         {
-            // 버퍼의 첫번째 속성값(attribute) : 버텍스들
-            glEnableVertexAttribArray(0);
-            glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-            glVertexAttribPointer(
-                                  0,                  // 0번째 속성(attribute). 0 이 될 특별한 이유는 없지만, 쉐이더의 레이아웃(layout)와 반드시 맞추어야 합니다.
-                                  3,                  // 크기(size)
-                                  GL_FLOAT,           // 타입(type)
-                                  GL_FALSE,           // 정규화(normalized)?
-                                  0,                  // 다음 요소 까지 간격(stride)
-                                  (void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
-                                  );
-            // 삼각형 그리기!
-            glDrawArrays(GL_TRIANGLES, 0, 3); // 버텍스 0에서 시작해서; 총 3개의 버텍스로 -> 하나의 삼각형
-            glDisableVertexAttribArray(0);
+            glColor3f(1.0f, 0.0f, 0.0f);
+            glVertex3f(-0.5, -0.5, -0.5);
+            glColor3f(0.0f, 1.0f, 0.0f);
+            glVertex3f(0.0, 0.5, -0.5);
+            glColor3f(0.0f, 0.0f, 1.0f);
+            glVertex3f(0.5, -0.5, -0.5);
         }
-        glClearColor(0.0f,0.0f,0.0f,0.0f);
+        {
+            glColor3f(0.0f, 0.0f, 1.0f);
+            glVertex3f(-0.5, -0.5, -0.5);
+            glColor3f(1.0f, 0.0f, 0.0f);
+            glVertex3f(0.0, 0.0, 0.5);
+            glColor3f(0.0f, 1.0f, 0.0f);
+            glVertex3f(0.5, -0.5, -0.5);
+        }
+        {
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            static float alpha = 0.0f;
+            glColor4f(1.0f, 0.0f, 0.0f, alpha);
+            glVertex3f(0.0, 0.0, 0.5);
+            glColor4f(0.0f, 1.0f, 0.0f, alpha);
+            glVertex3f(0.5, -0.5, -0.5);
+            glColor4f(0.0f, 0.0f, 1.0f, alpha);
+            glVertex3f(0.0, 0.5, 0.5);
+
+            alpha += 0.005f;
+        }
+
+        GetRHI()->EndScene();
+        GetRHI()->Flush();
 
         CGLFlushDrawable([[view openGLContext] CGLContextObj]);
         CGLUnlockContext([[view openGLContext] CGLContextObj]);
     }
+
+private:
+    NSOpenGLView* view;
 };
 
-TGON_DECLARE_APPLICATION(ModelJoy)
+TGON_DECLARE_APPLICATION(ThousandParty)

@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include <string>
+
 #include "Core/Platform/Config.h"
 
 #include "IRuntimeObject.h"
@@ -26,10 +28,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Object() = default;
-
-public:
-    virtual std::shared_ptr<ICloneable> Clone() const override;
+    virtual ~Object() = 0;
 };
 
 } /* namespace object */

@@ -54,8 +54,8 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return                  The length of string converted.
      */
-    template <std::size_t _BufferSize>
-    int32_t ToString(char(&destStr)[_BufferSize]) const;
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
      * @brief                       Converts value to a string.
@@ -67,10 +67,10 @@ public:
 
 /* @section Public variable */
 public:
-    _ValueType bottom;
+    _ValueType left;
     _ValueType top;
-    _ValueType width;
-    _ValueType height;
+    _ValueType right;
+    _ValueType bottom;
 
 	static const BasicRect One;		// 0, 0, 0, 0
 	static const BasicRect Zero;	    // 1, 1, 1, 1
@@ -78,9 +78,9 @@ public:
 };
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType> MakeRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept
+constexpr BasicRect<_ValueType> MakeRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept
 {
-    return {bottom, top, width, height};
+    return {left, top, right, bottom};
 }
 
 using Rect = BasicRect<int32_t>;
@@ -88,38 +88,38 @@ using FRect = BasicRect<float>;
 
 template <typename _ValueType>
 constexpr BasicRect<_ValueType>::BasicRect() noexcept :
-    bottom{},
+    left{},
     top{},
-    width{},
-    height{}
+    right{},
+    bottom{}
 {
 }
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType>::BasicRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept :
-    bottom( bottom),
+constexpr BasicRect<_ValueType>::BasicRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept :
+    left(left),
     top(top),
-    width(width),
-    height(height)
+    right(right),
+    bottom(bottom)
 {
 }
 
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+(const BasicRect& rhs) const noexcept
 {
-    return BasicRect(bottom + rhs.bottom, top + rhs.top, width + rhs.width, height + rhs.height);
+    return BasicRect(left + rhs.left, top + rhs.top, right + rhs.right, bottom + rhs.bottom);
 }
 
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-(const BasicRect& rhs) const noexcept
 {
-    return BasicRect(bottom - rhs.bottom, top - rhs.top, width - rhs.width, height - rhs.height);
+    return BasicRect(left + rhs.left, top - rhs.top, right - rhs.right, bottom - rhs.bottom);
 }
 
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
-    return BasicRect(bottom * rhs, top * rhs, width * rhs, height * rhs);
+    return BasicRect(left * rhs, top * rhs, right * rhs, bottom * rhs);
 }
 
 template <typename _ValueType>
@@ -127,10 +127,10 @@ constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(DevideTyp
 {
     DevideType inverse = 1.0f / rhs;
 
-    return BasicRect((_ValueType)((DevideType)bottom * inverse),
+    return BasicRect((_ValueType)((DevideType)left * inverse),
                      (_ValueType)((DevideType)top * inverse),
-                     (_ValueType)((DevideType)width * inverse),
-                     (_ValueType)((DevideType)height * inverse));
+                     (_ValueType)((DevideType)right * inverse),
+                     (_ValueType)((DevideType)bottom * inverse));
 }
 
 template <typename _ValueType>
@@ -142,16 +142,16 @@ constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+() const n
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-() const noexcept
 {
-	return BasicRect(-bottom, -top, -width, -height);
+	return BasicRect(-left, -top, -right, -bottom);
 }
 
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect& rhs) noexcept
 {
-	bottom += rhs.bottom;
+	left += rhs.left;
     top += rhs.top;
-	width += rhs.width;
-    height += rhs.height;
+	right += rhs.right;
+    bottom += rhs.bottom;
 
 	return *this;
 }
@@ -159,10 +159,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect&
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect& rhs) noexcept
 {
-    bottom -= rhs.bottom;
+    left -= rhs.left;
     top -= rhs.top;
-    width -= rhs.width;
-    height -= rhs.height;
+    right -= rhs.right;
+    bottom -= rhs.bottom;
 
 	return *this;
 }
@@ -170,10 +170,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect&
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(_ValueType rhs) noexcept
 {
-    bottom *= rhs;
+    left *= rhs;
     top *= rhs;
-    width *= rhs;
-    height *= rhs;
+    right *= rhs;
+    bottom *= rhs;
 
 	return *this;
 }
@@ -183,10 +183,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(DevideType rhs)
 {
 	DevideType inverse = 1.0f / rhs;
 
-    bottom = (_ValueType)((DevideType)bottom * inverse);
+    left = (_ValueType)((DevideType)left * inverse);
     top = (_ValueType)((DevideType)top * inverse);
-    width = (_ValueType)((DevideType)width * inverse);
-    height = (_ValueType)((DevideType)height * inverse);
+    right = (_ValueType)((DevideType)right * inverse);
+    bottom = (_ValueType)((DevideType)bottom * inverse);
 
 	return *this;
 }
@@ -194,7 +194,7 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(DevideType rhs)
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::operator==(const BasicRect& rhs) const noexcept
 {
-	return (bottom == rhs.bottom && top == rhs.top && width == rhs.width && height == rhs.height);
+	return (left == rhs.left && top == rhs.top && right == rhs.right && bottom == rhs.bottom);
 }
 
 template <typename _ValueType>
@@ -206,23 +206,23 @@ constexpr bool BasicRect<_ValueType>::operator!=(const BasicRect& rhs) const noe
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::Intersect(const BasicRect& rhs) const
 {
-    return (left < rhs.right && top < rhs.bottom && right > left && bottom > rhs.top);
+    return (left <= rhs.right && top <= rhs.bottom && right >= left && bottom >= rhs.top);
 }
 
 template <typename _ValueType>
-template <std::size_t _BufferSize>
-inline int32_t BasicRect<_ValueType>::ToString(char(&destStr)[_BufferSize]) const
+template <std::size_t _StrBufferSize>
+inline int32_t BasicRect<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destStr, _BufferSize);
+    return this->ToString(destStr, _StrBufferSize);
 }
 
 template <typename _ValueType>
 inline int32_t BasicRect<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, top, right, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d %d %d", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, top, right, bottom);
 #endif
 }
 
@@ -230,9 +230,9 @@ template <>
 inline int32_t BasicRect<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, top, right, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%f %f %f %f", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, top, right, bottom);
 #endif
 }
 
@@ -240,9 +240,9 @@ template <>
 inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, top, right, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", bottom, top, width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, top, right, bottom);
 #endif
 }
 

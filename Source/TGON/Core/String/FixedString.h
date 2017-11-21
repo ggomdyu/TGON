@@ -151,6 +151,10 @@ public:
     ConstReverseIteratorType crbegin() const noexcept;
     ConstReverseIteratorType crend() const noexcept;
 
+/* @section Public variable */
+public:
+    using _StringTraitsType::NPos;
+
 /* @section Private variable */
 private:
     _CharType m_str[_CharArraySize];

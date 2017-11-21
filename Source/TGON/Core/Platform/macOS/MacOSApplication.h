@@ -17,6 +17,10 @@ namespace macos
 class TGON_API MacOSApplication :
     public BaseApplication
 {
+/* @section public constructor */
+public:
+    using BaseApplication::BaseApplication;
+
 /* @section public destructor */
 public:
     virtual ~MacOSApplication() = default;

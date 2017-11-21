@@ -32,7 +32,7 @@ public:
 /* @section Private method */
 private:
     /* @brief   Main Message procedure of application. */
-    static LRESULT CALLBACK OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
     
     /* @brief   Register WNDCLASS which has Default window property given by engine. */
     bool RegisterWindowClass(HINSTANCE instanceHandle);

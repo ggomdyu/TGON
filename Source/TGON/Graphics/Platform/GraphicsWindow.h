@@ -1,5 +1,5 @@
 /**
- * @filename    RenderWindow.hpp
+ * @filename    GraphicsWindow.h
  * @author      ggomdyu
  * @since       09/28/2017
  * @brief
@@ -10,19 +10,19 @@
 
 namespace tgon
 {
-namespace graphics
+namespace platform
 {
 
 class TGON_API GraphicsWindow :
-    public platform::Window
+    public Window
 {
 /* @section Public constructor */
 public:
-    GraphicsWindow();
-    virtual ~GraphicsWindow() = default;
+    using Window::Window;
 
-/* @section Private variable */
-private:
+/* @section Public destructor */
+public:
+    virtual ~GraphicsWindow() = default;
 };
 
 } /* namespace platform */

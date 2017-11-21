@@ -37,6 +37,7 @@ public:
     constexpr BasicStringView(const _CharType* str, std::size_t strLen) noexcept;
 
 /* @section Public operator */
+public:
     bool operator==(const BasicStringView& rhs) const;
     
     constexpr const _CharType operator[](std::size_t index) const;
@@ -197,49 +198,49 @@ constexpr std::size_t BasicStringView<_CharType, _StringTraitsType>::Length() co
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::IteratorType BasicStringView<_CharType, _StringTraitsType>::begin() noexcept
 {
-    return &m_str[0];
+    return m_str;
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::IteratorType BasicStringView<_CharType, _StringTraitsType>::end() noexcept
 {
-    return &m_str[m_strLen];
+    return m_str + m_strLen;
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstIteratorType BasicStringView<_CharType, _StringTraitsType>::cbegin() const noexcept
 {
-    return &m_str[0];
+    return m_str;
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstIteratorType BasicStringView<_CharType, _StringTraitsType>::cend() const noexcept
 {
-    return &m_str[m_strLen];
+    return m_str + m_strLen;
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::rbegin() noexcept
 {
-    return {this->end()};
+    return ReverseIteratorType(this->end());
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::rend() noexcept
 {
-    return {this->begin()};
+    return ReverseIteratorType(this->begin());
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::crbegin() const noexcept
 {
-    return {this->end()};
+    return ReverseIteratorType(this->cend());
 }
 
 template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::crend() const noexcept
 {
-    return {this->begin()};
+    return ReverseIteratorType(this->cbegin());
 }
 
 template <typename _CharType, typename _StringTraitsType>

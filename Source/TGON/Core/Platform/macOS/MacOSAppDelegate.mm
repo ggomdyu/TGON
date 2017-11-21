@@ -1,9 +1,9 @@
 #import "PrecompiledHeader.pch"
 #import "MacOSAppDelegate.h"
 
-#import <memory>
-#import <AppKit/NSOpenGLView.h>
 #import <QuartzCore/CVDisplayLink.h>
+#import <AppKit/NSOpenGLView.h>
+#import <memory>
 
 #import "MacOSApplication.h"
 
@@ -29,7 +29,6 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
     // It's important to create one or app can leak objects.
     @autoreleasepool
     {
-        g_application->OnUpdate();
         g_application->OnDraw();
     }
     return kCVReturnSuccess;
@@ -69,6 +68,8 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
         [self InitializeDisplayLink];
     }
     g_application->OnDidLaunch();
+
+    [self EventLoop];
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
@@ -79,5 +80,32 @@ CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* no
     }
     g_application->OnDidTerminate();
     g_application.reset();
+}
+
+- (void)EventLoop
+{
+    while (true)
+    {
+        while (NSEvent* event = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                                   untilDate:nil
+                                                      inMode:NSDefaultRunLoopMode
+                                                     dequeue:YES])
+        {
+            [self OnHandleEvent:event];
+        }
+
+        g_application->OnUpdate();
+    }
+}
+
+- (void)OnHandleEvent:(NSEvent*)event
+{
+    NSEventType eventType = [event type];
+    switch (eventType)
+    {
+    default:
+        [NSApp sendEvent: event];
+        break;
+    }
 }
 @end
