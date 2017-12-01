@@ -107,6 +107,8 @@ inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t
     assert(destStrBufferSize > srcStrLen && "String buffer overflowed!");
 
     memcpy(destStr, srcStr, sizeof(_CharType) * (srcStrLen + 1));
+
+    destStr[srcStrLen] = _CharType();
 }
 
 template <typename _CharType>
@@ -120,7 +122,7 @@ inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t dest
         destStr[i++] = ch;
     }
 
-    destStr[i] = static_cast<_CharType>(0);
+    destStr[i] = _CharType();
 }
 
 template <typename _CharType>
@@ -129,6 +131,8 @@ inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t
     assert(destStrBufferSize > srcStrLen + destStrLen && "String buffer overflowed!");
 
     memcpy(&destStr[destStrLen], srcStr, sizeof(_CharType) * (srcStrLen + 1));
+
+    destStr[srcStrLen + destStrLen] = _CharType();
 }
 
 template<typename _CharType>
@@ -142,7 +146,7 @@ inline void StringTraits<_CharType>::Append(_CharType* destStr, std::size_t dest
         destStr[destStrLen++] = ch;
     }
 
-    destStr[destStrLen] = static_cast<_CharType>(0);
+    destStr[destStrLen] = _CharType();
 }
 
 template <typename _CharType>
