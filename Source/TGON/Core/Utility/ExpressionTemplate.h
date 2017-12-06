@@ -167,7 +167,11 @@ public:
 
 /* @section Public operator */
 public:
+#ifndef _MSC_VER
     constexpr auto operator[](std::size_t index) const -> decltype(_ExpressionPolicyType::operator[](index));
+#else
+    constexpr auto operator[](std::size_t index) const;
+#endif
 
     template <typename _SecondOperandType2>
     constexpr const ExpressionTemplate<Addition<_ExpressionPolicyType, typename _ExpressionPolicyType::SecondOperandType>> operator+(const _SecondOperandType2& rhs) const noexcept;
@@ -179,11 +183,19 @@ public:
     constexpr const ExpressionTemplate<Multiplication<_ExpressionPolicyType, typename _ExpressionPolicyType::SecondOperandType>> operator*(const _SecondOperandType2& rhs) const noexcept;
 };
 
+#ifndef _MSC_VER
 template <typename _ExpressionPolicyType>
 constexpr auto ExpressionTemplate<_ExpressionPolicyType>::operator[](std::size_t index) const -> decltype(_ExpressionPolicyType::operator[](index))
 {
     return _ExpressionPolicyType::operator[](index);
 }
+#else
+template <typename _ExpressionPolicyType>
+constexpr auto ExpressionTemplate<_ExpressionPolicyType>::operator[](std::size_t index) const
+{
+    return _ExpressionPolicyType::operator[](index);
+}
+#endif
 
 template <typename _ExpressionPolicyType>
 template <typename _SecondOperandType2>
