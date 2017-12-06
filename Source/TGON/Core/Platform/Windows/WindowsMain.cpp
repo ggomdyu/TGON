@@ -28,6 +28,24 @@ namespace
 
 std::shared_ptr<tgon::platform::windows::WindowsApplication> g_application;
 
+/* @brief   Register WNDCLASS which has Default window property given by engine. */
+bool RegisterWindowClass(HINSTANCE instanceHandle)
+{
+    using tgon::platform::windows::WindowsApplication;
+
+    WNDCLASSEXW wcex{};
+    wcex.cbSize = sizeof(wcex);
+    wcex.lpszClassName = L"TGON";
+    wcex.style = CS_DBLCLKS;
+    wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
+    wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
+    wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
+    wcex.hInstance = instanceHandle;
+    wcex.lpfnWndProc = tgon::platform::windows::WindowsApplication::OnMessageHandled;
+
+    return RegisterClassExW(&wcex) != 0;
+}
+
 } /* namespace */
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
@@ -40,6 +58,8 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 
     // 이건 WindowsMisc에 넣읍시다
 	//windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
+
+    RegisterWindowClass(instanceHandle);
 
     g_application = std::static_pointer_cast<windows::WindowsApplication>(MakeApplication());
     if (g_application != nullptr)

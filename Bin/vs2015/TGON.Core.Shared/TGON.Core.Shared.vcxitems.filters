@@ -51,15 +51,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
       <Filter>Sources\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TQuaternion.cpp">
-      <Filter>Sources\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELLRNG.cpp">
-      <Filter>Sources\Core\Random</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\TEncoding.cpp">
       <Filter>Sources\Core\String</Filter>
     </ClCompile>
@@ -68,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Matrix4x4.cpp">
       <Filter>Sources\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Random\WELL1024a.cpp">
+      <Filter>Sources\Core\Random</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,12 +88,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Object.h">
       <Filter>Sources\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TMatrix3x3.h">
-      <Filter>Sources\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\TQuaternion.h">
-      <Filter>Sources\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Point.h">
       <Filter>Sources\Core\Math</Filter>
@@ -129,9 +117,6 @@
       <Filter>Sources\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\Random.h">
-      <Filter>Sources\Core\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELLRNG.h">
       <Filter>Sources\Core\Random</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.h">
@@ -189,8 +174,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringTraits.h">
       <Filter>Sources\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Utility\TypeTraits.h">
-      <Filter>Sources\Core\Utility</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TypeTraits.h" />
+    <ClInclude Include="D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\Random\WELL1024a.h">
+      <Filter>Sources\Core\Random</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,9 +10,9 @@ namespace platform
 namespace windows
 {
 
-WindowsApplication::WindowsApplication()
+WindowsApplication::WindowsApplication(const std::shared_ptr<BaseWindow>& mainWindow) :
+    BaseApplication(mainWindow)
 {
-    this->RegisterWindowClass(GetModuleHandleW(nullptr));
 }
 
 void WindowsApplication::MessageLoop()
@@ -31,7 +31,20 @@ void WindowsApplication::MessageLoop()
         }
     }
 
-    this->OnTerminate();
+    this->OnWillTerminate();
+}
+
+void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType)
+{
+    static constexpr const LONG nativeMessageBoxTypeArray[2] =
+    {
+        MB_ICONQUESTION,
+        MB_ICONEXCLAMATION,
+    };
+
+    // todo: 나중에 파라미터로 utf8을 받게한 뒤 utf16으로 변환해서, MessageBoxW함수로 처리하도록 해야할 듯.
+    // 일단 icu 라이브러리 붙이는게 시급함.
+    MessageBoxA(nullptr, message, title, nativeMessageBoxTypeArray[static_cast<int>(messageBoxType)] | MB_OK);
 }
 
 LRESULT CALLBACK WindowsApplication::OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
@@ -43,21 +56,6 @@ LRESULT CALLBACK WindowsApplication::OnMessageHandled(HWND wndHandle, UINT messa
     }
 
     return DefWindowProc(wndHandle, message, wParam, lParam);
-}
-
-bool WindowsApplication::RegisterWindowClass(HINSTANCE instanceHandle)
-{
-	WNDCLASSEXW wcex{};
-	wcex.cbSize = sizeof(wcex);
-	wcex.lpszClassName = L"TGON";
-	wcex.style = CS_DBLCLKS;
-	wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
-	wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
-	wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
-	wcex.hInstance = instanceHandle;
-	wcex.lpfnWndProc = WindowsApplication::OnMessageHandled;
-
-	return RegisterClassExW(&wcex) != 0;
 }
 
 //BatteryProperty WindowsSystem::GetPowerInfo()

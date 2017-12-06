@@ -34,12 +34,11 @@ WindowsWindow::~WindowsWindow()
     DestroyWindow(m_wndHandle);
 }
 
-bool WindowsWindow::PumpEvent()
+bool WindowsWindow::PumpMessage(MSG* message)
 {
-    MSG msg {0};
-    if (PeekMessageW(&msg, m_wndHandle, 0, 0, PM_REMOVE) == TRUE)
+    if (PeekMessageW(message, m_wndHandle, 0, 0, PM_REMOVE) == TRUE)
     {
-        ::DispatchMessageW(&msg);
+        ::DispatchMessageW(message);
         return true;
     }
     else
@@ -85,12 +84,12 @@ void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetCaptionTitle(char* dest) const
+void WindowsWindow::GetTitle(char* destStr) const
 {
-    //virtual void GetCaptionText(char* caption) const override;
     //std::size_t captionTextLength = GetWindowTextLengthW(m_wndHandle);
     
-    //::GetWindowTextW(m_wndHandle, dest, captionTextLength);
+    //::GetWindowTextW(m_wndHandle, destStr, captionTextLength);
+    // utf16 -> utf8;
 }
 
 bool WindowsWindow::IsResizable() const
@@ -128,7 +127,7 @@ bool WindowsWindow::IsClosed() const noexcept
     return m_isClosed;
 }
 
-HWND WindowsWindow::GetWindowHandle() const noexcept
+void* WindowsWindow::GetNativeWindow() noexcept
 {
     return m_wndHandle;
 }
@@ -153,9 +152,10 @@ void WindowsWindow::Minimize()
     ::ShowWindow(m_wndHandle, SW_MINIMIZE);
 }
 
-void WindowsWindow::Quit()
+void WindowsWindow::Close()
 {
     ::PostQuitMessage(0);
+    m_isClosed = true;
 }
 
 void WindowsWindow::SetPosition(int32_t x, int32_t y)
@@ -210,7 +210,6 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
     switch (msg)
     {
     case WM_CREATE:
-        /* WARN: DO NOT HANDLE THIS MESSAGE */
         break;
 
     case WM_SETFOCUS:
@@ -239,8 +238,7 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
     case WM_DESTROY:
         {
-            ::PostQuitMessage(0);
-            m_isClosed = true;
+            this->Close();
         }
         break;
     }

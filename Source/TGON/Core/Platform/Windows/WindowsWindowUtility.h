@@ -29,13 +29,6 @@ namespace windows
  */
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-/**
- * @note                Copy and paste window placement information ( e.g. Position, Size, Window style )
- * @param [in] from     Paste target
- * @param [in] to       Destination of copied target
- */
-void CopyAndPasteWindowShape(const class WindowsWindow& from, const class WindowsWindow& to);
-
 } /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */
