@@ -63,8 +63,6 @@ public:
     constexpr float LengthSq() const noexcept;
     void Normalize();
     const Vector3 Normalized() const;
-//    void TransformCoord(const struct Matrix4x4&) noexcept;
-//    void TransformNormal(const struct Matrix4x4&) noexcept;
 
     /**
      * @brief                   Converts value to a string.

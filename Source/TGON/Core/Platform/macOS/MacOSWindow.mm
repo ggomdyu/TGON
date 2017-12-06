@@ -17,7 +17,7 @@ namespace macos
 {
 
 MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
-    m_nsWindow(CreateNativeWindow(windowStyle)),
+    m_nsWindow(MakeNativeWindow(windowStyle)),
     m_windowDelegate([[MacOSWindowDelegate alloc] initWithWindow:this])
 {
     m_nsWindow.delegate = m_windowDelegate;

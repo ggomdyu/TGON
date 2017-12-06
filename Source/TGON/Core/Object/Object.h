@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include <string>
+
 #include "Core/Platform/Config.h"
 
 #include "IRuntimeObject.h"
@@ -24,12 +26,13 @@ class TGON_API Object :
 public:
     TGON_RUNTIME_OBJECT(Object);
 
+/* @section Public constructor */
+public:
+    Object() = default;
+
 /* @section Public destructor */
 public:
-    virtual ~Object() = default;
-
-public:
-    virtual std::shared_ptr<ICloneable> Clone() const override;
+    virtual ~Object() = 0;
 };
 
 } /* namespace object */

@@ -72,5 +72,8 @@ protected:
     bool m_isClosed;
 };
 
+using SharedWindow = std::shared_ptr<BaseWindow>;
+using UniqueWindow = std::unique_ptr<BaseWindow>;
+
 } /* namespace platform */
 } /* namespace tgon */

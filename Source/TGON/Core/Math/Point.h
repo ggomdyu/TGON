@@ -206,7 +206,7 @@ inline int32_t BasicPoint<_ValueType>::ToString(char* destStr, std::size_t strBu
 #if _MSC_VER
     return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", x, y);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d", x, y);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", x, y);
 #endif
 }
 

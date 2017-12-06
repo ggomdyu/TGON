@@ -21,7 +21,7 @@ TGON_API const Vector3 Vector3::Zero(0.0f, 0.0f, 0.0f);
 
 //void Vector3::TransformCoord(const Matrix4x4& rhs) noexcept
 //{
-//	// Vector3's w element is '1'
+//	// Vector3's w element is '1ㅎ
 //
 //#if TGON_SUPPORT_SSE
 //#else

@@ -37,10 +37,17 @@ public:
     void MessageLoop();
 
     /* @brief   Main Message procedure of application. */
+<<<<<<< HEAD
     static LRESULT CALLBACK OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
 /* @section Private method */
 private:
+=======
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
+    
+    /* @brief   Register WNDCLASS which has Default window property given by engine. */
+    bool RegisterWindowClass(HINSTANCE instanceHandle);
+>>>>>>> 9e432bd77dd28cb655802278389d8517d3e18c16
 };
 
 } /* namespace windows */

@@ -47,7 +47,7 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
     MessageBoxA(nullptr, message, title, nativeMessageBoxTypeArray[static_cast<int>(messageBoxType)] | MB_OK);
 }
 
-LRESULT CALLBACK WindowsApplication::OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
     auto extraMemAsWindow = reinterpret_cast<windows::WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (extraMemAsWindow)
@@ -58,6 +58,24 @@ LRESULT CALLBACK WindowsApplication::OnMessageHandled(HWND wndHandle, UINT messa
     return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
+<<<<<<< HEAD
+=======
+bool WindowsApplication::RegisterWindowClass(HINSTANCE instanceHandle)
+{
+	WNDCLASSEXW wcex{};
+	wcex.cbSize = sizeof(wcex);
+	wcex.lpszClassName = L"TGON";
+	wcex.style = CS_DBLCLKS;
+	wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
+	wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
+	wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
+	wcex.hInstance = instanceHandle;
+	wcex.lpfnWndProc = WindowsApplication::OnHandleMessage;
+
+	return RegisterClassExW(&wcex) != 0;
+}
+
+>>>>>>> 9e432bd77dd28cb655802278389d8517d3e18c16
 //BatteryProperty WindowsSystem::GetPowerInfo()
 //{
 //	SYSTEM_POWER_STATUS sps;

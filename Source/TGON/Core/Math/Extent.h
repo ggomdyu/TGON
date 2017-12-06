@@ -204,7 +204,7 @@ inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, std::size_t st
 #if _MSC_VER
     return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d", width, height);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
 #endif
 }
 
