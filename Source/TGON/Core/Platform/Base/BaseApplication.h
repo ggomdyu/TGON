@@ -46,6 +46,8 @@ public:
 
 /* @section Public method */
 public:
+    virtual void MessageLoop() {}
+    
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
     virtual void Terminate() = 0;
 
@@ -54,11 +56,9 @@ public:
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}
-    virtual void OnDidTerminate() {}
     virtual void OnWillCloseWindow(const std::shared_ptr<BaseWindow>&) {}
     virtual void OnDidCloseWindow(const std::shared_ptr<BaseWindow>&) {}
     virtual void OnUpdate() {}
-    virtual void OnDraw() {}
 
 protected:
     std::shared_ptr<BaseWindow> m_mainWindow;

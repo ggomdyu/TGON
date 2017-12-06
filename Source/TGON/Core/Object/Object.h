@@ -26,6 +26,10 @@ class TGON_API Object :
 public:
     TGON_RUNTIME_OBJECT(Object);
 
+/* @section Public constructor */
+public:
+    Object() = default;
+
 /* @section Public destructor */
 public:
     virtual ~Object() = 0;

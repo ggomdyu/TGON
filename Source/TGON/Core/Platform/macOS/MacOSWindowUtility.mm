@@ -17,14 +17,6 @@ namespace macos
 namespace
 {
 
-void PostApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWindow)
-{
-    if (windowStyle.enableSystemButton == false)
-    {
-        [[applyTargetWindow standardWindowButton:NSWindowZoomButton] setEnabled:NO];
-    }
-}
-
 void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWindow)
 {
     NSWindowStyleMask nativeWindowStyleMask = static_cast<NSWindowStyleMask>(0);
@@ -71,6 +63,14 @@ void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWi
     }
 
     [applyTargetWindow setStyleMask:nativeWindowStyleMask];
+}
+
+void PostApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWindow)
+{
+    if (windowStyle.enableSystemButton == false)
+    {
+        [[applyTargetWindow standardWindowButton:NSWindowZoomButton] setEnabled:NO];
+    }
 }
 
 } /* namespace */

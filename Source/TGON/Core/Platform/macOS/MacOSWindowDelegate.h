@@ -6,20 +6,9 @@
  */
 
 #pragma once
-#include <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 
-namespace tgon
-{
-namespace platform
-{
-namespace macos
-{
-
-class MacOSWindow;
-
-} /* namespace macos */
-} /* namespace platform */
-} /* namespace tgon */
+#import "MacOSWindowDelegateFwd.h"
 
 @interface MacOSWindowDelegate : NSObject<NSWindowDelegate>
 {

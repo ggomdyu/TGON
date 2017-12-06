@@ -8,6 +8,8 @@
 #pragma once
 #include "Core/Platform/Config.h"
 #include "Core/Math/Rect.h"
+#include "Core/Math/Vector3.h"
+#include "Core/Math/Color.h"
 
 #include "BaseRHIFwd.h"
 #include "BaseRHIType.h"
@@ -25,11 +27,9 @@ public:
 
 /* @section Public method */
 public:
-    virtual void SetClearColor(uint32_t color) {}
-    virtual void SetWorldMatrix(const math::Matrix4x4& matrix) {}
-    virtual void SetViewMatrix(const math::Matrix4x4& matrix) {}
-    virtual void SetProjectionMatrix(const math::Matrix4x4& matrix) {}
-    virtual void SetViewProjectionMatrix(const math::Matrix4x4& matrix) {}
+    virtual void SetClearColor(const math::Color4f& color) {}
+    virtual void SetFillMode(FillMode fillMode) {}
+    virtual void SetCullMode(CullMode cullMode) {}
     virtual void SetScissorRect(const math::FRect& rect) {}
 
     virtual void BeginScene(PrimitiveType primitiveType) {}

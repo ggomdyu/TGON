@@ -176,5 +176,14 @@ constexpr const _VectorType QuadraticBezier(const _VectorType& a, const _VectorT
 	return {(inversedTime * inversedTime * a) + (2.0f * time * inversedTime * b) + (time * inversedTime * c)};
 }
 
+//float Sqrt()
+//{
+//    _mm_set_ps1(0.0f);
+//    return 0.0f;
+////#ifdef TGON_SUPPORT_SSE
+////    return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ps1(0.0f)));
+////#endif
+//}
+
 } /* namespace math */
 } /* namespace tgon */

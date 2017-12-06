@@ -27,6 +27,10 @@ public:
 
 /* @section Public method */
 public:
+    virtual void SetClearColor(const math::Color4f& color) override;
+    virtual void SetFillMode(FillMode fillMode) override;
+    virtual void SetCullMode(CullMode cullMode) override;
+
     virtual void BeginScene(PrimitiveType primitiveType) override;
     virtual void EndScene() override;
     virtual void Flush() override;

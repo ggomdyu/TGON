@@ -15,8 +15,6 @@ namespace platform
 
 struct WindowStyle final
 {
-/* @section Public variable */
-public:
     std::string caption = u8"Hello World!";
 
     uint16_t x = 100;

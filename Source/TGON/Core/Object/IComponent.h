@@ -24,6 +24,10 @@ public:
 public:
 	explicit IComponent(ComponentObject* owner) noexcept;
 
+/* @section Public destructor */
+public:
+    virtual ~IComponent() = default;
+
 /* @section Public method */
 public:
     /* @brief   Updates this component. */

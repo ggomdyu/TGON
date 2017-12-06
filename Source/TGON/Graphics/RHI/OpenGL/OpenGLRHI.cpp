@@ -19,6 +19,21 @@ OpenGLRHI::OpenGLRHI(const rhi::VideoMode& videoMode) :
 {
 }
 
+void OpenGLRHI::SetClearColor(const math::Color4f& color)
+{
+    glClearColor(color.r, color.g, color.b, color.a);
+}
+
+void OpenGLRHI::SetFillMode(FillMode fillMode)
+{
+    glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode));
+}
+
+void OpenGLRHI::SetCullMode(CullMode cullMode)
+{
+    glFrontFace(ConvertCullModeToNative(cullMode));
+}
+
 void OpenGLRHI::BeginScene(PrimitiveType primitiveType)
 {
     glBegin(ConvertPrimitiveTypeToNative(primitiveType));

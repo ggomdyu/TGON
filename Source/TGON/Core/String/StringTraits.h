@@ -33,7 +33,7 @@ protected:
     StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Assigns a number of character to string.
+     * @brief                   Assigns the number of character to string.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string
@@ -59,7 +59,7 @@ protected:
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Assigns a number of character to string.
+     * @brief                   Assigns the number of character to string.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string

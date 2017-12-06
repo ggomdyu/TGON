@@ -45,14 +45,29 @@ enum class FillMode
 
 enum class CullMode
 {
-    None = 0,
-    CW,
+    CW = 0,
     CCW,
 };
 
-enum class TextureFormat
+enum class ImageFormat
+{
+    BMP,
+    JPG,
+    PNG,
+    TIFF,
+    GIF,
+    WEBP,
+};
+
+enum class PixelFormat
 {
     R8G8B8A8_UNORM = 0,
+    R8G8B8A8_UNORM_SRGB = 0,
+    R8G8B8A8_UINT = 0,
+    R8G8B8_UNORM,
+    R8G8B8_UINT,
+    PVRTC2,
+    PVRTC4,
 };
 
 struct VideoMode final
@@ -71,8 +86,8 @@ public:
     uint16_t depthBits;
     uint16_t stencilBits;
 
-    uint16_t viewWidth = 600;
-    uint16_t viewHeight = 600;
+    uint16_t surfaceWidth = 600;
+    uint16_t surfaceHeight = 600;
 };
 
 } /* namespace rhi */

@@ -1,5 +1,5 @@
 /**
- * @filename    GraphicsApplicationFwd.h
+ * @filename    GameApplication.h
  * @author      ggomdyu
  * @since       11/06/2017
  * @brief
@@ -9,6 +9,13 @@
 
 namespace tgon
 {
+namespace platform
+{
+
+struct WindowStyle;
+
+} /* namespace platform */
+
 namespace rhi
 {
 

@@ -48,7 +48,6 @@ inline GLenum ConvertCullModeToNative(CullMode cullMode)
     static GLenum nativeCullModeTable[] =
     {
         GL_CW,
-        GL_CW,
         GL_CCW
     };
 
