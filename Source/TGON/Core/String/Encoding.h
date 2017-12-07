@@ -1,5 +1,5 @@
 /**
-* @filename    TEncoding.h
+* @filename    Encoding.h
 * @author      ggomdyu
 * @since       04/09/2017
 */
@@ -10,8 +10,10 @@
 
 #include "Core/Platform/Config.h"
 
-namespace tgon {
-namespace string {
+namespace tgon
+{
+namespace string
+{
 
 /**
  * @brief               Converts UTF8 string to UTF16.
