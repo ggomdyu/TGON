@@ -1,11 +1,20 @@
 /**
- * @filename    OpenGLRHIFwd.h
+ * @filename    OpenGLRHIUtility.h
  * @author      ggomdyu
  * @since       11/08/2017
  */
 
 #pragma once
-#include <OpenGL/gl.h>
+#ifdef _MSC_VER
+#   ifdef WIN32_LEAN_AND_MEAN
+#       define WIN32_LEAN_AND_MEAN
+#   endif
+#   include <windows.h>
+#   include <gl/GL.h>
+#else
+#   include <OpenGL/OpenGL.h>
+#   include <OpenGL/gl.h>
+#endif
 
 #include "Graphics/RHI/Base/BaseRHIType.h"
 

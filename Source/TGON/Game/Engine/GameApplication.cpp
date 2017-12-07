@@ -3,7 +3,7 @@
 
 #include "Graphics/RHI/Base/BaseRHI.h"
 #include "Graphics/RHI/Base/BaseRHIType.h"
-#include "Graphics/RHI/RHIUtility.h"
+#include "Graphics/RHI/RHI.h"
 
 namespace tgon
 {
@@ -17,7 +17,7 @@ GameApplication::GameApplication(const platform::WindowStyle& windowStyle) :
 
 GameApplication::GameApplication(const platform::WindowStyle& windowStyle, const rhi::VideoMode& videoMode) :
     platform::Application(windowStyle),
-    m_rhi(rhi::MakeRHI(videoMode))
+    m_rhi(rhi::MakeRHI(this->GetMainWindow(), videoMode))
 {
 }
 

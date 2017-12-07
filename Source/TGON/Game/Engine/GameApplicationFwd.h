@@ -19,7 +19,7 @@ struct WindowStyle;
 namespace rhi
 {
 
-class VideoMode;
+struct VideoMode;
 class BaseRHI;
 
 } /* namespace rhi */

@@ -1,8 +1,10 @@
 ﻿#include "PrecompiledHeader.pch"
-#include "TEncoding.h"
+#include "Encoding.h"
 
-namespace tgon {
-namespace string {
+namespace tgon
+{
+namespace string
+{
 
 TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest)
 {

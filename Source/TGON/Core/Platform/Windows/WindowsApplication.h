@@ -24,7 +24,7 @@ class TGON_API WindowsApplication :
 {
 /* @section Public constructor */
 public:
-    explicit WindowsApplication(const std::shared_ptr<BaseWindow>& mainWindow);
+    explicit WindowsApplication(const WindowStyle& windowStyle);
 
 /* @section Public destructor */
 public:
@@ -32,22 +32,17 @@ public:
 
 /* @section Public method */
 public:
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) override;
+    virtual void MessageLoop() override;
 
-    void MessageLoop();
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const override;
+    virtual void Terminate() override;
 
-    /* @brief   Main Message procedure of application. */
-<<<<<<< HEAD
-    static LRESULT CALLBACK OnMessageHandled(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
 /* @section Private method */
 private:
-=======
-    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
-    
     /* @brief   Register WNDCLASS which has Default window property given by engine. */
     bool RegisterWindowClass(HINSTANCE instanceHandle);
->>>>>>> 9e432bd77dd28cb655802278389d8517d3e18c16
 };
 
 } /* namespace windows */

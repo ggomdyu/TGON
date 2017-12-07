@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <random>
 
-#include "Core/Random/WELL1024a.h"
+#include "WELL1024a.h"
 
 namespace tgon
 {
@@ -19,7 +19,7 @@ namespace random
 /* @return  Random value between min to max */
 inline float Range(float min, float max)
 {
-    return min + (static_cast<float>(WELLRNG1024a()) * (max - min));
+    return min + (static_cast<float>(WELL1024a()) * (max - min));
 }
 
 /* @return  Random value between min to max */

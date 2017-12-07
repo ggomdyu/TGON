@@ -42,6 +42,11 @@ public:
     template <typename _ModuleType>
     const std::unique_ptr<_ModuleType>& FindModule() const;
 
+    const std::unique_ptr<rhi::BaseRHI>& GetRHI() const
+    {
+        return m_rhi;
+    }
+
 /* @section Private method */
 private:
 
@@ -49,7 +54,7 @@ private:
 private:
     std::unique_ptr<rhi::BaseRHI> m_rhi;
 
-    //    std::vector<IModule> m_modules;
+//    std::vector<IModule> m_modules;
 //    std::unique_ptr<graphics::render::Renderer> m_renderer;
 //    std::unique_ptr<gui::module::GUIModule> m_guiModule;
 //    std::unique_ptr<game::scene::SceneModule> m_sceneModule;;

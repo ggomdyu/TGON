@@ -62,8 +62,8 @@ enum class ImageFormat
 enum class PixelFormat
 {
     R8G8B8A8_UNORM = 0,
-    R8G8B8A8_UNORM_SRGB = 0,
-    R8G8B8A8_UINT = 0,
+    R8G8B8A8_UNORM_SRGB,
+    R8G8B8A8_UINT,
     R8G8B8_UNORM,
     R8G8B8_UINT,
     PVRTC2,
@@ -85,9 +85,6 @@ public:
     uint16_t colorBits = 32;
     uint16_t depthBits;
     uint16_t stencilBits;
-
-    uint16_t surfaceWidth = 600;
-    uint16_t surfaceHeight = 600;
 };
 
 } /* namespace rhi */

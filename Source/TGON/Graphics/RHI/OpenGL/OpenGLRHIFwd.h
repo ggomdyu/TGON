@@ -1,17 +1,27 @@
 /**
  * @filename    OpenGLRHIFwd.h
  * @author      ggomdyu
- * @since       10/24/2017
+ * @since       10/22/2017
  */
 
 #pragma once
 
 namespace tgon
 {
-namespace rhi
+namespace platform
 {
 
-struct OpenGLContext;
+class BaseWindow;
 
+} /* namespace platform */
+
+namespace rhi
+{
+namespace gl
+{
+
+class OpenGLContext;
+
+} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */

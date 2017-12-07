@@ -12,6 +12,7 @@
 
 #include "Core/Platform/Config.h"
 
+#include "BaseApplicationType.h"
 #include "BaseApplicationFwd.h"
 
 #define TGON_DECLARE_APPLICATION(className)\
@@ -46,9 +47,11 @@ public:
 
 /* @section Public method */
 public:
-    virtual void MessageLoop() {}
+    virtual void MessageLoop() = 0;
     
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) = 0;
+    void ShowMessageBox(const char* message) const;
+    void ShowMessageBox(const char* message, MessageBoxIconType messageBoxType) const;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType = MessageBoxIconType::Informational) const = 0;
     virtual void Terminate() = 0;
 
     const std::shared_ptr<BaseWindow>& GetMainWindow() const;

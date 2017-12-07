@@ -13,6 +13,16 @@ BaseApplication::BaseApplication(const WindowStyle& windowStyle) :
 {
 }
 
+void BaseApplication::ShowMessageBox(const char* message) const
+{
+    this->ShowMessageBox("", message);
+}
+
+void BaseApplication::ShowMessageBox(const char* message, MessageBoxIconType messageBoxType) const
+{
+    this->ShowMessageBox("", message, messageBoxType);
+}
+
 const std::shared_ptr<BaseWindow>& BaseApplication::GetMainWindow() const
 {
     return m_mainWindow;

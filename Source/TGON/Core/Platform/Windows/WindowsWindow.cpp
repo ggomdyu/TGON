@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <cassert>
 
-#include "Core/String/TEncoding.h"
+#include "Core/String/Encoding.h"
 
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
@@ -32,6 +32,11 @@ WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
 WindowsWindow::~WindowsWindow()
 {
     DestroyWindow(m_wndHandle);
+}
+
+void WindowsWindow::InitWithWindowStyle(const WindowStyle& windowStyle)
+{
+    new (this) WindowsWindow(windowStyle);
 }
 
 bool WindowsWindow::PumpMessage(MSG* message)

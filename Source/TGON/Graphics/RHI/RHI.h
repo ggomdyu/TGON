@@ -6,6 +6,16 @@
  */
 
 #pragma once
-#include <boost/predef/os.h>
+#include <memory>
 
-#include "OpenGL/OpenGLRHI.h"
+#include "RHIFwd.h"
+
+namespace tgon
+{
+namespace rhi
+{
+
+std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::BaseWindow>& window, const VideoMode& videoMode);
+
+} /* namespace rhi */
+} /* namespace tgon */

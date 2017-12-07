@@ -11,7 +11,6 @@
 #include <cstdio>
 
 #include "Core/Platform/Config.h"
-#include "Core/Utility/ExpressionTemplate.h"
 
 namespace tgon
 {
@@ -28,14 +27,11 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
-    template <typename _ExpressionType>
-    constexpr Vector3(const utility::ExpressionTemplate<_ExpressionType>& expression);
-
 /* @section Public perator */
 public:
-    constexpr const utility::ExpressionTemplate<utility::Addition<Vector3, Vector3>> operator+(const Vector3&) const noexcept;
-    constexpr const utility::ExpressionTemplate<utility::Subtraction<Vector3, Vector3>> operator-(const Vector3&) const noexcept;
-    constexpr const utility::ExpressionTemplate<utility::Multiplication<Vector3, Vector3>> operator*(const Vector3&) const noexcept;
+    constexpr const Vector3 operator+(const Vector3&) const noexcept;
+    constexpr const Vector3 operator-(const Vector3&) const noexcept;
+    constexpr const Vector3 operator*(const Vector3&) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
@@ -108,27 +104,19 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 {
 }
 
-template <typename _ExpressionType>
-constexpr Vector3::Vector3(const utility::ExpressionTemplate<_ExpressionType>& expression) :
-    x(expression[0]),
-    y(expression[1]),
-    z(expression[2])
+constexpr const Vector3 Vector3::operator+(const Vector3& rhs) const noexcept
 {
+    return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
 }
 
-constexpr const utility::ExpressionTemplate<utility::Addition<Vector3, Vector3>> Vector3::operator+(const Vector3& rhs) const noexcept
+constexpr const Vector3 Vector3::operator-(const Vector3& rhs) const noexcept
 {
-    return {*this, rhs};
+    return Vector3(x - rhs.x, y - rhs.y, z - rhs.z);
 }
 
-constexpr const utility::ExpressionTemplate<utility::Subtraction<Vector3, Vector3>> Vector3::operator-(const Vector3& rhs) const noexcept
+constexpr const Vector3 Vector3::operator*(const Vector3& rhs) const noexcept
 {
-    return {*this, rhs};
-}
-
-constexpr const utility::ExpressionTemplate<utility::Multiplication<Vector3, Vector3>> Vector3::operator*(const Vector3& rhs) const noexcept
-{
-    return {*this, rhs};
+    return Vector3(x * rhs.x, y * rhs.y, z * rhs.z);
 }
 
 constexpr const Vector3 Vector3::operator*(float scalar) const noexcept
@@ -211,7 +199,7 @@ constexpr bool Vector3::operator==(const Vector3& rhs) const noexcept
 
 constexpr bool Vector3::operator!=(const Vector3& rhs) const noexcept
 {
-    return !(*this == rhs);
+    return (x != rhs.x && y != rhs.y && z != rhs.z);
 }
 
 inline float& Vector3::operator[](std::size_t index) noexcept
@@ -250,7 +238,7 @@ constexpr const Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexc
 
 inline float Vector3::Distance(const Vector3& a, const Vector3& b) noexcept
 {
-    return Vector3(a - b).Length();
+    return (a - b).Length();
 }
 
 inline float Vector3::Length() const noexcept

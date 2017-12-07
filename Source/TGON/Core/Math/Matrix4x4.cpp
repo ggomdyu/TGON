@@ -1,4 +1,4 @@
-//#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.pch"
 //#include "Matrix4x4.h"
 //
 //#include "Vector3.h"

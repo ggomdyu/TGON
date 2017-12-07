@@ -12,7 +12,7 @@ namespace tgon
 namespace platform
 {
 
-enum class MessageBoxType
+enum class MessageBoxIconType
 {
     Informational = 0,
     Warning = 1,

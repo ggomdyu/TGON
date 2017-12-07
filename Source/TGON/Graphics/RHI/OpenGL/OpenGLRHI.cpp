@@ -1,11 +1,19 @@
 #include "PrecompiledHeader.pch"
 #include "OpenGLRHI.h"
 
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
+#ifdef _MSC_VER
+#   ifdef WIN32_LEAN_AND_MEAN
+#       define WIN32_LEAN_AND_MEAN
+#   endif
+#   include <windows.h>
+#   include <gl/GL.h>
+#else
+#   include <OpenGL/OpenGL.h>
+#   include <OpenGL/gl.h>
+#endif
 
-#include "OpenGLContext.h"
 #include "OpenGLRHIUtility.h"
+#include "OpenGLContext.h"
 
 namespace tgon
 {
@@ -14,8 +22,8 @@ namespace rhi
 namespace gl
 {
 
-OpenGLRHI::OpenGLRHI(const rhi::VideoMode& videoMode) :
-    m_context(this->MakeContext(videoMode))
+OpenGLRHI::OpenGLRHI(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode) :
+    m_context(window, videoMode)
 {
 }
 

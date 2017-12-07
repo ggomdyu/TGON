@@ -12,9 +12,20 @@ namespace tgon
 namespace math
 {
 
-class Vector2;
-class Vector3;
-class Matrix4x4;
+struct Color4f;
+struct Vector2;
+struct Vector3;
+struct Matrix4x4;
+using FRect = BasicRect<float>;
 
 } /* namespace math */
+
+namespace rhi
+{
+
+enum class FillMode;
+enum class CullMode;
+enum class PrimitiveType;
+
+} /* namespace rhi */
 } /* namespace tgon */

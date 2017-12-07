@@ -48,9 +48,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
       <Filter>Source\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Matrix4x4.cpp">
-      <Filter>Source\Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ComponentObject.cpp">
       <Filter>Source\Core\Object</Filter>
     </ClCompile>
@@ -66,9 +63,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseApplication.cpp">
       <Filter>Source\Core\Platform\Base</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\Encoding.cpp">
-      <Filter>Source\Core\String</Filter>
-    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -98,9 +93,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Point.h">
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Math.h">
-      <Filter>Source\Core\Math</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Rect.h">
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
@@ -118,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Color.h">
-      <Filter>Source\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Matrix4x4.h">
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedString.h">
@@ -213,13 +202,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseWindowType.h">
       <Filter>Source\Core\Platform\Base</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\vs2015\TGON.Core.Shared\..\..\..\Source\TGON\Core\String\Encoding.h">
-      <Filter>Source\Core\String</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\MyNewVector2D.txt">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Mathematics.h">
       <Filter>Source\Core\Math</Filter>
-    </Text>
+    </ClInclude>
   </ItemGroup>
 </Project>

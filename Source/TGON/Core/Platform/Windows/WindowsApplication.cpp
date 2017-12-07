@@ -10,8 +10,8 @@ namespace platform
 namespace windows
 {
 
-WindowsApplication::WindowsApplication(const std::shared_ptr<BaseWindow>& mainWindow) :
-    BaseApplication(mainWindow)
+WindowsApplication::WindowsApplication(const WindowStyle& windowStyle) :
+    BaseApplication(windowStyle)
 {
 }
 
@@ -24,17 +24,14 @@ void WindowsApplication::MessageLoop()
         {
             ::DispatchMessageW(&msg);
         }
-        else
-        {
-            this->OnUpdate();
-            this->OnDraw();
-        }
+
+        this->OnUpdate();
     }
 
     this->OnWillTerminate();
 }
 
-void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType)
+void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
 {
     static constexpr const LONG nativeMessageBoxTypeArray[2] =
     {
@@ -44,7 +41,12 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
 
     // todo: 나중에 파라미터로 utf8을 받게한 뒤 utf16으로 변환해서, MessageBoxW함수로 처리하도록 해야할 듯.
     // 일단 icu 라이브러리 붙이는게 시급함.
-    MessageBoxA(nullptr, message, title, nativeMessageBoxTypeArray[static_cast<int>(messageBoxType)] | MB_OK);
+    ::MessageBoxA(nullptr, message, title, nativeMessageBoxTypeArray[static_cast<int>(messageBoxType)] | MB_OK);
+}
+
+void WindowsApplication::Terminate()
+{
+    ::PostQuitMessage(0);
 }
 
 LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
@@ -58,8 +60,6 @@ LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT messag
     return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
-<<<<<<< HEAD
-=======
 bool WindowsApplication::RegisterWindowClass(HINSTANCE instanceHandle)
 {
 	WNDCLASSEXW wcex{};
@@ -75,7 +75,6 @@ bool WindowsApplication::RegisterWindowClass(HINSTANCE instanceHandle)
 	return RegisterClassExW(&wcex) != 0;
 }
 
->>>>>>> 9e432bd77dd28cb655802278389d8517d3e18c16
 //BatteryProperty WindowsSystem::GetPowerInfo()
 //{
 //	SYSTEM_POWER_STATUS sps;

@@ -3,7 +3,7 @@
 
 #include <cassert>
 
-#include "Core/String/TEncoding.h"
+#include "Core/String/Encoding.h"
 
 #include "WindowsWindowUtility.h"
 
@@ -13,7 +13,7 @@ namespace platform
 {
 namespace windows
 {
-    
+
 void ConverWindowStyletToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
 {
 	*extendedStyle = 0;
@@ -71,13 +71,22 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         return nullptr;
     }
 
+    // Set window position to middle of screen if required.
+    int newWindowX = windowStyle.x;
+    int newWindowY = windowStyle.y;
+    if (windowStyle.showMiddle)
+    {
+        newWindowX = (GetSystemMetrics(SM_CXSCREEN) / 2) - (windowStyle.width / 2);
+        newWindowY = (GetSystemMetrics(SM_CYSCREEN) / 2) - (windowStyle.height / 2);
+    }
+
 	HWND wndHandle = CreateWindowExW(
 		exStyle,
 		className,
 		utf16Title,
 		normalStyle /*| WS_CLIPSIBLINGS | WS_CLIPCHILDREN*/, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
-        windowStyle.x,
-        windowStyle.y,
+        newWindowX,
+        newWindowY,
 		windowStyle.width, 
 		windowStyle.height,
 		nullptr,

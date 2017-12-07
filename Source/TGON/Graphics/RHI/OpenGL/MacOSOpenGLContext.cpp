@@ -1,10 +1,5 @@
 #import "PrecompiledHeader.pch"
-#import "OpenGLRHI.h"
-
-#import <AppKit/NSOpenGL.h>
-#import <type_traits>
-
-#import "OpenGLContext.h"
+#import "../OpenGLRHIUtility.h"
 
 namespace tgon
 {
@@ -57,23 +52,23 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-std::shared_ptr<OpenGLContext> OpenGLRHI::MakeContext(const rhi::VideoMode& videoMode) const
+std::shared_ptr<OpenGLContext> MakeContext(const rhi::VideoMode& videoMode)
 {
     auto context = std::make_shared<OpenGLContext>();
-
-    NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
     {
-        ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
+        NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
+        {
+            ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
+        }
+
+        context->pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
+        if (context->pixelFormat == nullptr)
+        {
+            NSLog(@"No OpenGL pixel format.");
+        }
+
+        context->context = [[NSOpenGLContext alloc] initWithFormat:context->pixelFormat shareContext:nil];
     }
-
-    context->pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
-    if (context->pixelFormat == nullptr)
-    {
-        NSLog(@"No OpenGL pixel format.");
-    }
-
-    context->context = [[NSOpenGLContext alloc] initWithFormat:context->pixelFormat shareContext:nil];
-
     return context;
 }
 

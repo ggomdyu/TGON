@@ -9,7 +9,7 @@
 
 #include "Graphics/RHI/Base/BaseRHI.h"
 
-#include "OpenGLRHIFwd.h"
+#include "OpenGLContext.h"
 
 namespace tgon
 {
@@ -23,7 +23,7 @@ class OpenGLRHI :
 {
 /* @section Public constructor */
 public:
-    explicit OpenGLRHI(const VideoMode& videoMode);
+    explicit OpenGLRHI(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode);
 
 /* @section Public method */
 public:
@@ -35,13 +35,9 @@ public:
     virtual void EndScene() override;
     virtual void Flush() override;
 
-/* @section Private method */
-private:
-    std::shared_ptr<OpenGLContext> MakeContext(const VideoMode& videoMode) const;
-
 /* @section Private variable */
 private:
-    std::shared_ptr<OpenGLContext> m_context;
+    OpenGLContext m_context;
 };
 
 } /* namespace gl */

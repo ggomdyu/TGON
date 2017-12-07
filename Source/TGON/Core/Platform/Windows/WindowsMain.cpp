@@ -41,7 +41,7 @@ bool RegisterWindowClass(HINSTANCE instanceHandle)
     wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
     wcex.hInstance = instanceHandle;
-    wcex.lpfnWndProc = tgon::platform::windows::WindowsApplication::OnMessageHandled;
+    wcex.lpfnWndProc = tgon::platform::windows::WindowsApplication::OnHandleMessage;
 
     return RegisterClassExW(&wcex) != 0;
 }
@@ -62,8 +62,10 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     RegisterWindowClass(instanceHandle);
 
     g_application = std::static_pointer_cast<windows::WindowsApplication>(MakeApplication());
-    if (g_application != nullptr)
+    g_application->OnWillLaunch();
     {
-        g_application->MessageLoop();
+
     }
+    g_application->OnDidLaunch();
+    g_application->MessageLoop();
 }

@@ -21,8 +21,8 @@ Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
     return Screen(
         dm.dmPelsWidth,
         dm.dmPelsHeight,
-        dm.dmBitsPerPel,
-        dm.dmDisplayFrequency,
+        static_cast<int16_t>(dm.dmBitsPerPel),
+        static_cast<int16_t>(dm.dmDisplayFrequency),
         nativeDisplayOrientationConversionTable[dm.dmDisplayOrientation]
     );
 }

@@ -7,18 +7,21 @@
     <Filter Include="Source\Game">
       <UniqueIdentifier>{104bf8df-6922-4b07-98fe-ac7148a5aaf9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game\Engine">
+      <UniqueIdentifier>{affd041a-7483-4ae0-bc8d-8bcad0685f91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameApplication.h">
-      <Filter>Source\Game</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameApplicationFwd.h">
-      <Filter>Source\Game</Filter>
+      <Filter>Source\Game\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameApplication.h">
+      <Filter>Source\Game\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameApplication.cpp">
-      <Filter>Source\Game</Filter>
+      <Filter>Source\Game\Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

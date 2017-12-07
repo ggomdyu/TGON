@@ -5,34 +5,49 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
+#include <boost/predef/os.h>
+#include <memory>
 
 #include "OpenGLContextFwd.h"
+
+#if BOOST_OS_WINDOWS
+#   ifndef WIN32_LEAN_AND_MEAN
+#       define WIN32_LEAN_AND_MEAN
+#       include <Windows.h>
+#   endif
+#elif BOOST_OS_MACOS
+    @class NSOpenGLPixelFormat;
+    @class NSOpenGLContext;
+#elif BOOST_OS_ANDROID
+#elif BOOST_OS_IOS
+#endif
 
 namespace tgon
 {
 namespace rhi
 {
-
-struct TGON_API OpenGLContext
+namespace gl
 {
-/* @section Public type */
+
+class OpenGLContext
+{
 public:
-    using OnDrawCallback = void(*)(const std::shared_ptr<OpenGLContext>&);
+    OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode);
+    ~OpenGLContext();
 
 /* @section Public variable */
 public:
+    HGLRC context;
 #if BOOST_OS_WINDOWS
+    //HDC dcHandle;
 #elif BOOST_OS_MACOS
     NSOpenGLPixelFormat* pixelFormat;
     NSOpenGLContext* context;
 #elif BOOST_OS_ANDROID
 #elif BOOST_OS_IOS
 #endif
-
-    OnDrawCallback onDrawCallback;
 };
 
+} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */
-

@@ -12,20 +12,18 @@
 #include "Core/Math/Color.h"
 
 #include "BaseRHIFwd.h"
-#include "BaseRHIType.h"
 
 namespace tgon
 {
 namespace rhi
 {
-
 class TGON_API BaseRHI
 {
-/* @section Public constructor */
+    /* @section Public constructor */
 public:
     BaseRHI() = default;
 
-/* @section Public method */
+    /* @section Public method */
 public:
     virtual void SetClearColor(const math::Color4f& color) {}
     virtual void SetFillMode(FillMode fillMode) {}

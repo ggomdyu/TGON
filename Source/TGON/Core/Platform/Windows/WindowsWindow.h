@@ -24,6 +24,7 @@ class TGON_API WindowsWindow :
 {
 /* @section Public constructor */
 public:
+    WindowsWindow() = default;
 	explicit WindowsWindow(const WindowStyle& wndStyle);
 
 /* @section Public destructor */
@@ -32,6 +33,8 @@ public:
 
 /* @section Public method */
 public:
+    virtual void InitWithWindowStyle(const WindowStyle& windowStyle) override;
+
     virtual void Show() override;
     virtual void Hide() override;
     virtual void Close() override;

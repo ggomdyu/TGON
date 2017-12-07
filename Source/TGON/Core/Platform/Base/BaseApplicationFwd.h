@@ -13,7 +13,6 @@ namespace platform
 
 struct WindowStyle;
 class BaseWindow;
-enum class MessageBoxType;
 
 } /* namespace platform */
 } /* namespace tgon */
