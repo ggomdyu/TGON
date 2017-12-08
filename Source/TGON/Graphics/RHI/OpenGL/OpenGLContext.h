@@ -33,6 +33,9 @@ public:
 public:
 #if BOOST_OS_WINDOWS
     HGLRC context;
+    HDC dcHandle;
+    HWND windowHandle;
+    int pixelFormat;
 #elif BOOST_OS_MACOS
     NSOpenGLPixelFormat* pixelFormat;
     NSOpenGLContext* context;

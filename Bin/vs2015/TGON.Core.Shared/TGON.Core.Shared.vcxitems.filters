@@ -63,7 +63,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseApplication.cpp">
       <Filter>Source\Core\Platform\Base</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp">
+      <Filter>Source\Core\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -202,9 +204,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Base\BaseWindowType.h">
       <Filter>Source\Core\Platform\Base</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Mathematics.h">
       <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.h">
+      <Filter>Source\Core\String</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
+#include <gl/GL.h>
 
 using namespace tgon;
 using namespace tgon::string;
@@ -63,8 +64,19 @@ public:
 
     virtual void OnUpdate() override
     {
-        GetRHI()->ClearColorBuffer();
-        GetRHI()->Flush();
+        static float x = 0.0f;
+        static float y = 0.0f;
+
+        float newX = std::sin(x += 0.0001);
+        float newY = std::sin(y += 0.0001);
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_TRIANGLES);
+        glVertex2f(0.0 + newX, 0.5 + newY);
+        glVertex2f(-0.5 + newX, -0.5 + newY);
+        glVertex2f(0.5 + newX, -0.5 + newY);
+        glEnd();
+        glFinish();
     }
 };
 

@@ -56,7 +56,7 @@ TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest)
 
     castedDest[destIndex] = u8'\0';
 
-    return destIndex * sizeof(char16_t);
+    return destIndex;
 }
 
 } /* namespace string */

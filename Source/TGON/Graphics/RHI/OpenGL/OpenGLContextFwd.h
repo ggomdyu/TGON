@@ -15,7 +15,6 @@
 #elif BOOST_OS_IOS
 #endif
 
-
 namespace tgon
 {
 namespace platform

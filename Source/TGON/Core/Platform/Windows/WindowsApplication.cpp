@@ -2,6 +2,7 @@
 #include "WindowsApplication.h"
 
 #include "WindowsWindow.h"
+#include <iostream>
 
 namespace tgon
 {
@@ -9,11 +10,6 @@ namespace platform
 {
 namespace windows
 {
-
-WindowsApplication::WindowsApplication(const WindowStyle& windowStyle) :
-    BaseApplication(windowStyle)
-{
-}
 
 void WindowsApplication::MessageLoop()
 {
@@ -24,7 +20,7 @@ void WindowsApplication::MessageLoop()
         {
             ::DispatchMessageW(&msg);
         }
-
+        
         this->OnUpdate();
     }
 

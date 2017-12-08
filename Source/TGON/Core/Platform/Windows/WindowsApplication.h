@@ -24,7 +24,7 @@ class TGON_API WindowsApplication :
 {
 /* @section Public constructor */
 public:
-    explicit WindowsApplication(const WindowStyle& windowStyle);
+    using BaseApplication::BaseApplication;
 
 /* @section Public destructor */
 public:

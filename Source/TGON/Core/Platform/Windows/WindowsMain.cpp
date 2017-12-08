@@ -20,9 +20,6 @@ namespace platform
 
 extern std::shared_ptr<BaseApplication> MakeApplication();
 
-} /* namespace platform */
-} /* namespace tgon */
-
 namespace
 {
 
@@ -31,8 +28,6 @@ std::shared_ptr<tgon::platform::windows::WindowsApplication> g_application;
 /* @brief   Register WNDCLASS which has Default window property given by engine. */
 bool RegisterWindowClass(HINSTANCE instanceHandle)
 {
-    using tgon::platform::windows::WindowsApplication;
-
     WNDCLASSEXW wcex{};
     wcex.cbSize = sizeof(wcex);
     wcex.lpszClassName = L"TGON";
@@ -41,31 +36,34 @@ bool RegisterWindowClass(HINSTANCE instanceHandle)
     wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
     wcex.hInstance = instanceHandle;
-    wcex.lpfnWndProc = tgon::platform::windows::WindowsApplication::OnHandleMessage;
+    wcex.lpfnWndProc = windows::WindowsApplication::OnHandleMessage;
 
     return RegisterClassExW(&wcex) != 0;
 }
 
 } /* namespace */
+} /* namespace platform */
+} /* namespace tgon */
+
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
 {
 #ifndef NDEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-
+   
     using namespace tgon::platform;
-
-    // 이건 WindowsMisc에 넣읍시다
-	//windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
 
     RegisterWindowClass(instanceHandle);
 
     g_application = std::static_pointer_cast<windows::WindowsApplication>(MakeApplication());
     g_application->OnWillLaunch();
     {
-
+        // 이건 WindowsMisc에 넣읍시다
+	    //windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
     }
     g_application->OnDidLaunch();
+
     g_application->MessageLoop();
+    return 0;
 }
