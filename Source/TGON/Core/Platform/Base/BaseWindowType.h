@@ -15,7 +15,7 @@ namespace platform
 
 struct WindowStyle final
 {
-    std::string caption = u8"Hello World!";
+    std::string title = u8"Hello World!";
 
     uint16_t x = 100;
     uint16_t y = 100;

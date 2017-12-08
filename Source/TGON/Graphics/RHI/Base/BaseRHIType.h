@@ -79,9 +79,12 @@ public:
     /* @brief   If false, the application will perform software rendering. */
     bool enableHardwareAccelerate = true;
     bool enableDoubleBuffer = true;
-    bool enableMultiSampling = true;
-    
+    bool enableTripleBuffer = false;
+    bool enableVerticalSync = false;
+
+    bool enableMultiSampling = false;
     uint16_t sampleCount = 16;
+
     uint16_t colorBits = 32;
     uint16_t depthBits;
     uint16_t stencilBits;

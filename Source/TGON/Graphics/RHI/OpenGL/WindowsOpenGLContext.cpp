@@ -20,6 +20,11 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window
         pixelFormatDesc.nSize = sizeof(decltype(pixelFormatDesc));
         pixelFormatDesc.nVersion = 1;
         pixelFormatDesc.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL;
+        if (videoMode.enableDoubleBuffer)
+        {
+            pixelFormatDesc.dwFlags |= PFD_DOUBLEBUFFER;
+        }
+
         pixelFormatDesc.iPixelType = PFD_TYPE_RGBA;
         pixelFormatDesc.cColorBits = 32;
         pixelFormatDesc.cDepthBits = 24;
@@ -28,7 +33,7 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window
 
     windowHandle = reinterpret_cast<::HWND>(window->GetNativeWindow());
     {
-        HDC dcHandle = ::GetDC(windowHandle);
+        dcHandle = ::GetDC(windowHandle);
         
         // Find a suitable pixel format, and make DC select it.
         pixelFormat = ::ChoosePixelFormat(dcHandle, &pixelFormatDesc);

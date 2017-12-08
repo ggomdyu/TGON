@@ -35,7 +35,7 @@ public:
     virtual void EndScene() override;
     virtual void ClearColorBuffer() override;
     virtual void ClearColorDepthBuffer() override;
-    virtual void Flush() override;
+    virtual void SwapBuffer() override;
 
 /* @section Private variable */
 private:

@@ -20,8 +20,10 @@ void WindowsApplication::MessageLoop()
         {
             ::DispatchMessageW(&msg);
         }
-        
-        this->OnUpdate();
+        else
+        {
+            this->OnUpdate();
+        }
     }
 
     this->OnWillTerminate();

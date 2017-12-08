@@ -34,7 +34,7 @@ public:
     virtual void EndScene() {}
     virtual void ClearColorBuffer() {}
     virtual void ClearColorDepthBuffer() {}
-    virtual void Flush() {}
+    virtual void SwapBuffer() {}
 
     virtual void DrawPoint(const math::Vector2&) {}
     virtual void DrawLine(const math::Vector2&, const math::Vector2&) {}

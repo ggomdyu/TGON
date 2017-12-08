@@ -35,7 +35,8 @@ public:
                 windowStyle.width = 1000;
                 windowStyle.height = 1000;
                 windowStyle.showMiddle = true;
-                windowStyle.caption = u8"Caption";
+                windowStyle.title = u8"¾È³ç?/Hallo/";
+                windowStyle.enableSystemButton = true;
             }
             return windowStyle;
         }(),
@@ -55,7 +56,7 @@ public:
 
     virtual void OnWillLaunch() override
     {
-        GetRHI()->SetClearColor(math::Color4f(1.0f, 0.0f, 0.0f, 0.0f));
+        GetRHI()->SetClearColor(math::Color4f(1.0f, 0.0f, 0.0f, 1.0f));
     }
 
     virtual void OnDidLaunch() override
@@ -77,6 +78,8 @@ public:
         glVertex2f(0.5 + newX, -0.5 + newY);
         glEnd();
         glFinish();
+
+        GetRHI()->SwapBuffer();
     }
 };
 
