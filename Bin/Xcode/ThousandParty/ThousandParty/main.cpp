@@ -17,6 +17,8 @@
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
 
+#include <OpenGL/gl.h>
+
 using namespace tgon;
 using namespace tgon::string;
 using namespace tgon::platform;
@@ -54,7 +56,7 @@ public:
 
     virtual void OnWillLaunch() override
     {
-        GetRHI()->SetClearColor(math::Color4f(0.0f, 0.0f, 0.0f, 0.0f));
+        GetRHI()->SetClearColor(math::Color4f(1.0f, 0.0f, 0.0f, 0.0f));
     }
 
     virtual void OnDidLaunch() override
@@ -63,7 +65,7 @@ public:
 
     virtual void OnUpdate() override
     {
-        GetRHI()->Clear();
+        GetRHI()->ClearColorBuffer();
         GetRHI()->Flush();
     }
 };

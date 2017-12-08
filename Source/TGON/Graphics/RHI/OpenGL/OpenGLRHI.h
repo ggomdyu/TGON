@@ -33,6 +33,8 @@ public:
 
     virtual void BeginScene(PrimitiveType primitiveType) override;
     virtual void EndScene() override;
+    virtual void ClearColorBuffer() override;
+    virtual void ClearColorDepthBuffer() override;
     virtual void Flush() override;
 
 /* @section Private variable */

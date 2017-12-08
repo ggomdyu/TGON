@@ -5,6 +5,8 @@
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
+#include "Core/Platform/Base/BaseApplicationType.h"
+
 namespace tgon
 {
 namespace platform
@@ -17,19 +19,28 @@ void MacOSApplication::MessageLoop()
     NSEvent* message = nil;
     while (true)
     {
-        while (message = [NSApp nextEventMatchingMask:NSEventMaskAny
-                                            untilDate:nil
-                                               inMode:NSDefaultRunLoopMode
-                                              dequeue:YES])
+        do
         {
-            this->OnHandleMessage(message);
+            message = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                         untilDate:nil
+                                            inMode:NSDefaultRunLoopMode
+                                           dequeue:YES];
+            if (message != nil)
+            {
+                this->OnHandleMessage(message);
+            }
+            else
+            {
+                break;
+            }
         }
+        while(true);
 
         this->OnUpdate();
     }
 }
 
-void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType)
+void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
 {
     static constexpr const NSAlertStyle nativeNSAlertStyleArray[2] =
     {

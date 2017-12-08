@@ -31,7 +31,7 @@ public:
 public:
     virtual void MessageLoop() override;
 
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxType messageBoxType) override;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const override;
     virtual void Terminate() override;
 
 private:

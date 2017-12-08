@@ -1,5 +1,12 @@
 #import "PrecompiledHeader.pch"
-#import "../OpenGLRHIUtility.h"
+#import "OpenGLContext.h"
+
+#import <AppKit/NSOpenGL.h>
+#import <AppKit/NSOpenGLView.h>
+#import <AppKit/NSWindow.h>
+
+#import "Core/Platform/Base/BaseWindow.h"
+#import "Graphics/RHI/Base/BaseRHIType.h"
 
 namespace tgon
 {
@@ -52,25 +59,38 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-std::shared_ptr<OpenGLContext> MakeContext(const rhi::VideoMode& videoMode)
+OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode)
 {
-    auto context = std::make_shared<OpenGLContext>();
+    // Find a suitable pixel format.
     {
         NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
         {
             ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
         }
 
-        context->pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
-        if (context->pixelFormat == nullptr)
+        pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
+        if (pixelFormat == nullptr)
         {
             NSLog(@"No OpenGL pixel format.");
         }
-
-        context->context = [[NSOpenGLContext alloc] initWithFormat:context->pixelFormat shareContext:nil];
     }
-    return context;
+
+    // Create a GL context through the selected pixel format.
+    {
+        context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
+    }
+
+    // Create a GL View and attach it to target window.
+    NSWindow* nativeWindow = (__bridge NSWindow*)window->GetNativeWindow();
+    {
+        NSOpenGLView *openGLView = [[NSOpenGLView alloc] init];
+        [nativeWindow setContentView:openGLView];
+
+        [[openGLView openGLContext] makeCurrentContext];
+    }
 }
+
+OpenGLContext::~OpenGLContext() = default;
 
 } /* namespace gl */
 } /* namespace rhi */

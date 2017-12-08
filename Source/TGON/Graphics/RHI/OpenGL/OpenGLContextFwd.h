@@ -5,7 +5,16 @@
  */
 
 #pragma once
-#include <memory>
+#include <boost/predef/os.h>
+
+#if BOOST_OS_WINDOWS
+#elif BOOST_OS_MACOS
+@class NSOpenGLPixelFormat;
+@class NSOpenGLContext;
+#elif BOOST_OS_ANDROID
+#elif BOOST_OS_IOS
+#endif
+
 
 namespace tgon
 {

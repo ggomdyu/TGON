@@ -32,7 +32,8 @@ public:
 
     virtual void BeginScene(PrimitiveType primitiveType) {}
     virtual void EndScene() {}
-    virtual void Clear() {}
+    virtual void ClearColorBuffer() {}
+    virtual void ClearColorDepthBuffer() {}
     virtual void Flush() {}
 
     virtual void DrawPoint(const math::Vector2&) {}

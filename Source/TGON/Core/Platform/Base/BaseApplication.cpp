@@ -3,6 +3,8 @@
 
 #include "Core/Platform/Window.h"
 
+#include "BaseApplicationType.h"
+
 namespace tgon
 {
 namespace platform
@@ -21,6 +23,11 @@ void BaseApplication::ShowMessageBox(const char* message) const
 void BaseApplication::ShowMessageBox(const char* message, MessageBoxIconType messageBoxType) const
 {
     this->ShowMessageBox("", message, messageBoxType);
+}
+
+void BaseApplication::ShowMessageBox(const char* title, const char* message) const
+{
+    this->ShowMessageBox(title, message, MessageBoxIconType::Informational);
 }
 
 const std::shared_ptr<BaseWindow>& BaseApplication::GetMainWindow() const
