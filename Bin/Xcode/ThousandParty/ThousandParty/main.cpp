@@ -17,8 +17,6 @@
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
 
-#include <OpenGL/gl.h>
-
 using namespace tgon;
 using namespace tgon::string;
 using namespace tgon::platform;
