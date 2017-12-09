@@ -59,7 +59,7 @@ void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWi
 
     // Set window title
     {
-        [applyTargetWindow setTitle:[NSString stringWithUTF8String:windowStyle.caption.c_str()]];
+        [applyTargetWindow setTitle:[NSString stringWithUTF8String:windowStyle.title.c_str()]];
     }
 
     [applyTargetWindow setStyleMask:nativeWindowStyleMask];

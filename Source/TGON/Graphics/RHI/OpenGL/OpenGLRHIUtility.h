@@ -5,6 +5,7 @@
  */
 
 #pragma once
+
 #ifdef _MSC_VER
 #   ifdef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN

@@ -90,6 +90,7 @@
 		FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1F91FA23A1200817B92 /* StringView.h */; };
 		FD904D361F80CE770041EB60 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD904D351F80CE770041EB60 /* MacOSApplication.mm */; };
 		FD904D381F80D18C0041EB60 /* BaseApplicationType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD904D371F80D18C0041EB60 /* BaseApplicationType.h */; };
+		FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF3651F9A56ED0065F284 /* MacOSTime.mm */; };
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDC0A7481F85F76D003F2FE4 /* BaseApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC0A7471F85F76D003F2FE4 /* BaseApplication.cpp */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
@@ -191,6 +192,11 @@
 		FD89A1FB1FA39A0000817B92 /* ICloneable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICloneable.h; path = ../../Source/TGON/Core/Object/ICloneable.h; sourceTree = "<group>"; };
 		FD904D351F80CE770041EB60 /* MacOSApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSApplication.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.mm; sourceTree = "<group>"; };
 		FD904D371F80D18C0041EB60 /* BaseApplicationType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseApplicationType.h; path = ../../Source/TGON/Core/Platform/Base/BaseApplicationType.h; sourceTree = "<group>"; };
+		FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = ../../Source/TGON/Graphics/Render/Sprite.h; sourceTree = "<group>"; };
+		FDAAEBDC1FDB8BA10036BFD5 /* Texture2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture2D.h; path = ../../Source/TGON/Graphics/Render/Texture2D.h; sourceTree = "<group>"; };
+		FDAAEBDD1FDB941C0036BFD5 /* Texture2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture2D.cpp; path = ../../Source/TGON/Graphics/Render/Texture2D.cpp; sourceTree = "<group>"; };
+		FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../../Source/TGON/Graphics/Render/Material.h; sourceTree = "<group>"; };
+		FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = ../../Source/TGON/Graphics/Render/Material.cpp; sourceTree = "<group>"; };
 		FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../Source/TGON/Core/Utility/InstantiateCounter.h; sourceTree = "<group>"; };
 		FDBD61121FA56904007439A7 /* IRuntimeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObject.h; path = ../../Source/TGON/Core/Object/IRuntimeObject.h; sourceTree = "<group>"; };
 		FDBD61131FA56F97007439A7 /* IRuntimeObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObjectType.h; path = ../../Source/TGON/Core/Object/IRuntimeObjectType.h; sourceTree = "<group>"; };
@@ -329,6 +335,11 @@
 		FD89A1C61F9BC88900817B92 /* Render */ = {
 			isa = PBXGroup;
 			children = (
+				FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */,
+				FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */,
+				FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */,
+				FDAAEBDC1FDB8BA10036BFD5 /* Texture2D.h */,
+				FDAAEBDD1FDB941C0036BFD5 /* Texture2D.cpp */,
 			);
 			name = Render;
 			sourceTree = "<group>";
@@ -664,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */,
 				FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */,
 				FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */,
 				FD54B0CB1FB8981900484529 /* IComponent.cpp in Sources */,
