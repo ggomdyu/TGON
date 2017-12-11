@@ -2,6 +2,7 @@
 
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
+#include "Core/Platform/ApplicationType.h"
 #include "Core/Platform/Window.h"
 #include "Core/Platform/WindowType.h"
 #include "Core/Platform/Time.h"

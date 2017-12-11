@@ -97,8 +97,9 @@ const BatteryState Application::GetBatteryState() const
 	::GetSystemPowerStatus(&sps);
 
     return BatteryState(
-        sps.BatteryFlag == 128 ? false : true,
-        sps.BatteryLifePercent
+        sps.BatteryFlag == 128 ? false : true, // hasBattery
+        sps.BatteryFlag == 1 ? true : false, // isCharging
+        sps.BatteryLifePercent // batteryPercentage
     );
 }
 
