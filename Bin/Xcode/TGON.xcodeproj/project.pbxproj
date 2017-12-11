@@ -90,7 +90,12 @@
 		FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1F91FA23A1200817B92 /* StringView.h */; };
 		FD904D361F80CE770041EB60 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD904D351F80CE770041EB60 /* MacOSApplication.mm */; };
 		FD904D381F80D18C0041EB60 /* BaseApplicationType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD904D371F80D18C0041EB60 /* BaseApplicationType.h */; };
+		FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */; };
+		FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */; };
+		FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */; };
+		FD9AED1E1FDBF46A007AE839 /* TextureUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */; };
 		FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF3651F9A56ED0065F284 /* MacOSTime.mm */; };
+		FDAAEBE01FDBA2C30036BFD5 /* libpng16d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */; };
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDC0A7481F85F76D003F2FE4 /* BaseApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC0A7471F85F76D003F2FE4 /* BaseApplication.cpp */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
@@ -192,11 +197,17 @@
 		FD89A1FB1FA39A0000817B92 /* ICloneable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICloneable.h; path = ../../Source/TGON/Core/Object/ICloneable.h; sourceTree = "<group>"; };
 		FD904D351F80CE770041EB60 /* MacOSApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSApplication.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.mm; sourceTree = "<group>"; };
 		FD904D371F80D18C0041EB60 /* BaseApplicationType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseApplicationType.h; path = ../../Source/TGON/Core/Platform/Base/BaseApplicationType.h; sourceTree = "<group>"; };
+		FD9AED201FDC43AB007AE839 /* FileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FileSystem.h; path = ../../Source/TGON/Core/File/FileSystem.h; sourceTree = "<group>"; };
+		FD9AED211FDC43BC007AE839 /* File.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = File.h; path = ../../Source/TGON/Core/File/File.h; sourceTree = "<group>"; };
+		FD9AED221FDC468F007AE839 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../../Source/TGON/Core/File/File.cpp; sourceTree = "<group>"; };
 		FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = ../../Source/TGON/Graphics/Render/Sprite.h; sourceTree = "<group>"; };
-		FDAAEBDC1FDB8BA10036BFD5 /* Texture2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture2D.h; path = ../../Source/TGON/Graphics/Render/Texture2D.h; sourceTree = "<group>"; };
-		FDAAEBDD1FDB941C0036BFD5 /* Texture2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture2D.cpp; path = ../../Source/TGON/Graphics/Render/Texture2D.cpp; sourceTree = "<group>"; };
+		FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = ../../Source/TGON/Graphics/Render/Texture.h; sourceTree = "<group>"; };
 		FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../../Source/TGON/Graphics/Render/Material.h; sourceTree = "<group>"; };
 		FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = ../../Source/TGON/Graphics/Render/Material.cpp; sourceTree = "<group>"; };
+		FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libpng16d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = TextureUtility.cpp; path = ../../Source/TGON/Graphics/Render/TextureUtility.cpp; sourceTree = "<group>"; };
+		FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = TextureUtility.h; path = ../../Source/TGON/Graphics/Render/TextureUtility.h; sourceTree = "<group>"; };
+		FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../Source/TGON/Graphics/Render/Texture.cpp; sourceTree = "<group>"; };
 		FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../Source/TGON/Core/Utility/InstantiateCounter.h; sourceTree = "<group>"; };
 		FDBD61121FA56904007439A7 /* IRuntimeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObject.h; path = ../../Source/TGON/Core/Object/IRuntimeObject.h; sourceTree = "<group>"; };
 		FDBD61131FA56F97007439A7 /* IRuntimeObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObjectType.h; path = ../../Source/TGON/Core/Object/IRuntimeObjectType.h; sourceTree = "<group>"; };
@@ -220,6 +231,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAAEBE01FDBA2C30036BFD5 /* libpng16d.a in Frameworks */,
 				FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */,
 				FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */,
 				FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */,
@@ -258,6 +270,7 @@
 		FD753BD21F6B495700CD35F4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FD9AED1F1FDC41E9007AE839 /* File */,
 				FD2C7F641F84B53700D4555B /* Localize */,
 				FDD7C8D91F654416000EB7C8 /* String */,
 				FDD7C8D81F65440F000EB7C8 /* Object */,
@@ -338,10 +351,22 @@
 				FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */,
 				FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */,
 				FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */,
-				FDAAEBDC1FDB8BA10036BFD5 /* Texture2D.h */,
-				FDAAEBDD1FDB941C0036BFD5 /* Texture2D.cpp */,
+				FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */,
+				FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */,
+				FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */,
+				FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */,
 			);
 			name = Render;
+			sourceTree = "<group>";
+		};
+		FD9AED1F1FDC41E9007AE839 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				FD9AED211FDC43BC007AE839 /* File.h */,
+				FD9AED221FDC468F007AE839 /* File.cpp */,
+				FD9AED201FDC43AB007AE839 /* FileSystem.h */,
+			);
+			name = File;
 			sourceTree = "<group>";
 		};
 		FDD7C8AE1F65430C000EB7C8 = {
@@ -522,6 +547,7 @@
 		FDD7C92E1F684911000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */,
 				FDFECB841F75FBAF007AC1AB /* Quartz.framework */,
 				FDFECB821F7585B4007AC1AB /* QuartzCore.framework */,
 				FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */,
@@ -547,6 +573,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */,
+				FD9AED1E1FDBF46A007AE839 /* TextureUtility.h in Headers */,
 				FD0E7A9C1FD72C2800A3B562 /* GameApplication.cpp in Headers */,
 				FD0E7A9D1FD72C2800A3B562 /* GameApplication.h in Headers */,
 				FD0E7A9E1FD72C2800A3B562 /* GameApplicationFwd.h in Headers */,
@@ -675,6 +703,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */,
+				FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */,
 				FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */,
 				FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */,
 				FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */,
@@ -814,6 +844,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Source/TGON",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_63_0",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -829,6 +861,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Source/TGON",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_63_0",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

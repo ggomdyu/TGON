@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.pch"
-#include "Texture2D.h"
+#include "Texture.h"
+
+#include "TextureUtility.h"
 
 namespace tgon
 {

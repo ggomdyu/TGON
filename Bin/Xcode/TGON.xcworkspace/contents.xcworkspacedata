@@ -4,6 +4,9 @@
    <Group
       location = "container:"
       name = "00. ThirdParty">
+      <FileRef
+         location = "group:../../Source/ThirdParty/libpng16/bin/libpng.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "container:"
