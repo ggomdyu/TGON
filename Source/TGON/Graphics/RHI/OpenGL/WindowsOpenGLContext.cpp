@@ -13,7 +13,8 @@ namespace rhi
 namespace gl
 {
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode)
+OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode) :
+    window(window)
 {
     ::PIXELFORMATDESCRIPTOR pixelFormatDesc {};
     {
@@ -31,28 +32,25 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window
         pixelFormatDesc.iLayerType = PFD_MAIN_PLANE;
     }
 
-    windowHandle = reinterpret_cast<::HWND>(window->GetNativeWindow());
-    {
-        dcHandle = ::GetDC(windowHandle);
+    dcHandle = ::GetDC(reinterpret_cast<HWND>(window->GetNativeWindow()));
         
-        // Find a suitable pixel format, and make DC select it.
-        pixelFormat = ::ChoosePixelFormat(dcHandle, &pixelFormatDesc);
-        ::SetPixelFormat(dcHandle, pixelFormat, &pixelFormatDesc);
+    // Find a suitable pixel format, and make DC select it.
+    pixelFormat = ::ChoosePixelFormat(dcHandle, &pixelFormatDesc);
+    ::SetPixelFormat(dcHandle, pixelFormat, &pixelFormatDesc);
 
-        // Create Platform-specfic GL context.
-        context = ::wglCreateContext(dcHandle);
+    // Create Platform-specfic GL context.
+    context = ::wglCreateContext(dcHandle);
 
-        // Activates current context.
-        // We can draw something after this code.
-        ::wglMakeCurrent(dcHandle, context);
-    }
+    // Activates current context.
+    // We can draw something after this code.
+    ::wglMakeCurrent(dcHandle, context);
 }
 
 OpenGLContext::~OpenGLContext()
 {
     ::wglMakeCurrent(dcHandle, nullptr);
     ::wglDeleteContext(context);
-    ::ReleaseDC(windowHandle, dcHandle);
+    ::ReleaseDC(reinterpret_cast<HWND>(window->GetNativeWindow()), dcHandle);
 }
 
 } /* namespace gl */
