@@ -64,7 +64,7 @@ void OpenGLRHI::ClearColorDepthBuffer()
 
 void OpenGLRHI::SwapBuffer()
 {
-//    ::SwapBuffers(m_context.dcHandle);
+    ::SwapBuffers(m_context.dcHandle);
 }
 
 } /* namespace gl */
