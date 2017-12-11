@@ -2,6 +2,7 @@
  * @filename    Drawing.h
  * @author      ggomdyu
  * @since       11/26/2017
+ * @brief       Low level Platform-Specific drawing interface.
  */
 
 #pragma once

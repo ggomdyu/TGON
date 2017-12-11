@@ -44,7 +44,7 @@ public:
         {
             rhi::VideoMode videoMode;
             {
-                videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL;
+                videoMode.graphicsSDK = rhi::GraphicsSDK::Direct3D9;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
                 videoMode.enableDoubleBuffer = true;
@@ -52,6 +52,7 @@ public:
             return videoMode;
         }())
     {
+
     };
 
     virtual void OnWillLaunch() override

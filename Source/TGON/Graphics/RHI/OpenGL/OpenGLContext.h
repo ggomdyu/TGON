@@ -31,10 +31,11 @@ public:
 
 /* @section Public variable */
 public:
+    std::shared_ptr<platform::BaseWindow> window;
+
 #if BOOST_OS_WINDOWS
     HGLRC context;
     HDC dcHandle;
-    HWND windowHandle;
     int pixelFormat;
 #elif BOOST_OS_MACOS
     NSOpenGLPixelFormat* pixelFormat;
