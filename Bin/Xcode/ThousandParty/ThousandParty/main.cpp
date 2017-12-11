@@ -16,7 +16,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <gl/GL.h>
+#include <opengl/GL.h>
 
 using namespace tgon;
 using namespace tgon::string;
@@ -32,10 +32,10 @@ public:
         {
             platform::WindowStyle windowStyle;
             {
-                windowStyle.width = 1000;
-                windowStyle.height = 1000;
+                windowStyle.width = 500;
+                windowStyle.height = 500;
                 windowStyle.showMiddle = true;
-                windowStyle.title = u8"¾È³ç?/Hallo/";
+                windowStyle.title = u8"Hallo?";
                 windowStyle.enableSystemButton = true;
             }
             return windowStyle;
@@ -57,7 +57,7 @@ public:
 
     virtual void OnWillLaunch() override
     {
-        GetRHI()->SetClearColor(math::Color4f(1.0f, 0.0f, 0.0f, 1.0f));
+        GetRHI()->SetClearColor(math::Color4f(0.3f, 0.4f, 0.6f, 1.0f));
     }
 
     virtual void OnDidLaunch() override

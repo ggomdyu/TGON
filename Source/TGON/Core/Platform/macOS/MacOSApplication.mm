@@ -19,22 +19,13 @@ void MacOSApplication::MessageLoop()
     NSEvent* message = nil;
     while (true)
     {
-        do
+        while((message = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                            untilDate:nil
+                                               inMode:NSDefaultRunLoopMode
+                                              dequeue:YES]) != nil)
         {
-            message = [NSApp nextEventMatchingMask:NSEventMaskAny
-                                         untilDate:nil
-                                            inMode:NSDefaultRunLoopMode
-                                           dequeue:YES];
-            if (message != nil)
-            {
-                this->OnHandleMessage(message);
-            }
-            else
-            {
-                break;
-            }
+            this->OnHandleMessage(message);
         }
-        while(true);
 
         this->OnUpdate();
     }
@@ -66,7 +57,7 @@ void MacOSApplication::OnHandleMessage(NSEvent* message)
     switch (messageType)
     {
     default:
-        [NSApp sendEvent: message];
+        [NSApp sendEvent:message];
         break;
     }
 }
