@@ -4,14 +4,14 @@
 #import <QuartzCore/CVDisplayLink.h>
 #import <AppKit/NSOpenGLView.h>
 
-#import "MacOSApplication.h"
+#import "../Application.h"
 
 namespace tgon
 {
 namespace platform
 {
 
-extern std::shared_ptr<BaseApplication> MakeApplication();
+extern std::shared_ptr<Application> MakeApplication();
 
 } /* namespace platform */
 } /* namespace tgon */
@@ -19,16 +19,16 @@ extern std::shared_ptr<BaseApplication> MakeApplication();
 namespace
 {
 
-std::shared_ptr<tgon::platform::macos::MacOSApplication> g_application;
+std::shared_ptr<tgon::platform::Application> g_application;
 
 } /* namespace */
 
-@implementation MacOSAppDelegate
+@implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
     using namespace tgon::platform;
 
-    g_application = std::static_pointer_cast<macos::MacOSApplication>(MakeApplication());
+    g_application = std::static_pointer_cast<Application>(MakeApplication());
     g_application->OnWillLaunch();
 }
 

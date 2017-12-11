@@ -7,11 +7,9 @@
 #import <AppKit/NSApplication.h>
 #import <objc/NSObject.h>
 
-#import "MacOSAppDelegateFwd.h"
-
-@interface MacOSAppDelegate : NSObject<NSApplicationDelegate>
+@interface AppDelegate : NSObject<NSApplicationDelegate>
 {
 @private
-    __CVDisplayLink* _displayLink;
+    struct __CVDisplayLink* _displayLink;
 }
 @end

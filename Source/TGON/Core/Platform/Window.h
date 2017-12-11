@@ -6,23 +6,26 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <boost/predef/os.h>
+#include <boost/noncopyable.hpp>
 #include <string>
 #include <cstdint>
 
-#ifdef BOOST_OS_WINDOWS
+#if BOOST_OS_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN
 #   endif
 #   include <Windows.h>
-#elif BOOST_OS_MACOS
-#   include <AppKit/NSWindow.h>
 #elif BOOST_OS_ANDROID
 #elif BOOST_OS_IOS
 #endif
 
 #include "Core/Platform/Config.h"
+
+#if BOOST_OS_MACOS
+@class NSWindow;
+@class WindowDelegate;
+#endif
 
 namespace tgon
 {
@@ -36,6 +39,11 @@ class TGON_API Window :
 public:
     Window() = default;
     explicit Window(const struct WindowStyle& windowStyle);
+    Window(Window&& rhs);
+
+/* @section Public operator */
+public:
+    Window& operator=(Window&& rhs);
 
 /* @section Public destructor */
 public:
@@ -69,10 +77,7 @@ public:
     bool IsTopMost() const;
     bool IsClosed() const noexcept;
 
-#ifdef BOOST_OS_WINDOWS
-    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-#endif
-
+    void OnHandleMessage(const struct AppMessage* appMsg);
     virtual void OnMove(int32_t x, int32_t y) {}
     virtual void OnResize(int32_t width, int32_t height) {}
     virtual void OnMaximize() {}
@@ -86,10 +91,11 @@ public:
 protected:
     bool m_isClosed;
 
-#ifdef BOOST_OS_WINDOWS
+#if BOOST_OS_WINDOWS
     HWND m_wndHandle;
 #elif BOOST_OS_MACOS
     NSWindow* m_nsWindow;
+    WindowDelegate* m_windowDelegate;
 #elif BOOST_OS_ANDROID
 #elif BOOST_OS_IOS
 #endif

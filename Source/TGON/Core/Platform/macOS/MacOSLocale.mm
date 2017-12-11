@@ -1,5 +1,5 @@
 #import "PrecompiledHeader.pch"
-#import "MacOSLocale.h"
+#import "../Locale.h"
 
 #import <Foundation/NSString.h>
 #import <Foundation/NSLocale.h>

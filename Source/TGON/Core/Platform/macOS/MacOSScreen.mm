@@ -1,5 +1,5 @@
 #import "PrecompiledHeader.pch"
-#import "MacOSScreen.h"
+#import "../Screen.h"
 
 #import <Foundation/NSArray.h>
 #import <AppKit/NSScreen.h>

@@ -15,8 +15,6 @@
 		FD1562DB1FDA396E0057C54E /* RHI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1562DA1FDA396E0057C54E /* RHI.cpp */; };
 		FD2C7F671F84C9F500D4555B /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2C7F651F84C9F500D4555B /* Vector3.cpp */; };
 		FD2C7F681F84C9F500D4555B /* Vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2C7F661F84C9F500D4555B /* Vector3.h */; };
-		FD3099C61F6ECC5300D5B02E /* BaseTime.h in Headers */ = {isa = PBXBuildFile; fileRef = FD3099C41F6ECC5300D5B02E /* BaseTime.h */; };
-		FD3099C71F6ECC5300D5B02E /* BaseTimeType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD3099C51F6ECC5300D5B02E /* BaseTimeType.h */; };
 		FD54B0CA1FB8981900484529 /* ComponentObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD54B0C71FB8981800484529 /* ComponentObject.cpp */; };
 		FD54B0CB1FB8981900484529 /* IComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD54B0C91FB8981800484529 /* IComponent.cpp */; };
 		FD753C021F6B4AAF00CD35F4 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753BFF1F6B4AAF00CD35F4 /* Object.h */; };
@@ -42,31 +40,6 @@
 		FD753C3D1F6B4B0C00CD35F4 /* Preprocessor.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C331F6B4B0C00CD35F4 /* Preprocessor.h */; };
 		FD753C3E1F6B4B0C00CD35F4 /* StaticIf.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C341F6B4B0C00CD35F4 /* StaticIf.h */; };
 		FD753C3F1F6B4B0C00CD35F4 /* TypeTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C351F6B4B0C00CD35F4 /* TypeTraits.h */; };
-		FD753C431F6B4B1F00CD35F4 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C401F6B4B1F00CD35F4 /* Config.h */; };
-		FD753C441F6B4B1F00CD35F4 /* Locale.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C411F6B4B1F00CD35F4 /* Locale.h */; };
-		FD753C451F6B4B1F00CD35F4 /* Window.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C421F6B4B1F00CD35F4 /* Window.h */; };
-		FD753C4E1F6B4B3800CD35F4 /* BaseApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C461F6B4B3800CD35F4 /* BaseApplication.h */; };
-		FD753C4F1F6B4B3800CD35F4 /* BaseLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C471F6B4B3800CD35F4 /* BaseLocale.h */; };
-		FD753C501F6B4B3800CD35F4 /* BaseScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C481F6B4B3800CD35F4 /* BaseScreen.h */; };
-		FD753C531F6B4B3800CD35F4 /* BaseWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD753C4B1F6B4B3800CD35F4 /* BaseWindow.cpp */; };
-		FD753C541F6B4B3800CD35F4 /* BaseWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C4C1F6B4B3800CD35F4 /* BaseWindow.h */; };
-		FD753C551F6B4B3800CD35F4 /* BaseWindowType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C4D1F6B4B3800CD35F4 /* BaseWindowType.h */; };
-		FD753C641F6B4B4B00CD35F4 /* MacOSAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C561F6B4B4B00CD35F4 /* MacOSAppDelegate.h */; };
-		FD753C651F6B4B4B00CD35F4 /* MacOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C571F6B4B4B00CD35F4 /* MacOSAppDelegate.mm */; };
-		FD753C661F6B4B4B00CD35F4 /* MacOSConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C581F6B4B4B00CD35F4 /* MacOSConfig.h */; };
-		FD753C671F6B4B4B00CD35F4 /* MacOSLocale.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C591F6B4B4B00CD35F4 /* MacOSLocale.h */; };
-		FD753C681F6B4B4B00CD35F4 /* MacOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C5A1F6B4B4B00CD35F4 /* MacOSLocale.mm */; };
-		FD753C691F6B4B4B00CD35F4 /* MacOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C5B1F6B4B4B00CD35F4 /* MacOSMain.mm */; };
-		FD753C6C1F6B4B4B00CD35F4 /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C5E1F6B4B4B00CD35F4 /* MacOSWindow.h */; };
-		FD753C6D1F6B4B4B00CD35F4 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C5F1F6B4B4B00CD35F4 /* MacOSWindow.mm */; };
-		FD753C6E1F6B4B4B00CD35F4 /* MacOSWindowDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C601F6B4B4B00CD35F4 /* MacOSWindowDelegate.h */; };
-		FD753C6F1F6B4B4B00CD35F4 /* MacOSWindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C611F6B4B4B00CD35F4 /* MacOSWindowDelegate.mm */; };
-		FD753C701F6B4B4B00CD35F4 /* MacOSWindowUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C621F6B4B4B00CD35F4 /* MacOSWindowUtility.h */; };
-		FD753C711F6B4B4B00CD35F4 /* MacOSWindowUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C631F6B4B4B00CD35F4 /* MacOSWindowUtility.mm */; };
-		FD753C731F6C2EB100CD35F4 /* Screen.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C721F6C2EB100CD35F4 /* Screen.h */; };
-		FD753C751F6C2F4B00CD35F4 /* MacOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD753C741F6C2F4B00CD35F4 /* MacOSScreen.mm */; };
-		FD753C771F6C317500CD35F4 /* BaseScreenType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C761F6C317400CD35F4 /* BaseScreenType.h */; };
-		FD753C791F6C332100CD35F4 /* MacOSScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C781F6C332100CD35F4 /* MacOSScreen.h */; };
 		FD753C7B1F6C363700CD35F4 /* PrecompiledHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = FD753C7A1F6C363700CD35F4 /* PrecompiledHeader.pch */; };
 		FD7EA5181FAEE4DC008DF72F /* Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBD61161FA5B3B2007439A7 /* Delegate.h */; };
 		FD7EA5191FAEE4DC008DF72F /* ICloneable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1FB1FA39A0000817B92 /* ICloneable.h */; };
@@ -74,10 +47,6 @@
 		FD7EA51B1FAEE4DC008DF72F /* IRuntimeObjectType.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBD61131FA56F97007439A7 /* IRuntimeObjectType.h */; };
 		FD7EA51C1FAEE4DC008DF72F /* UUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BD21FAE067D0050CCE6 /* UUID.h */; };
 		FD7EA51D1FAEE4DC008DF72F /* FStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6E11B21FA8BC8C00C5A5E7 /* FStateMachine.h */; };
-		FD7EA51E1FAEE4DC008DF72F /* BaseApplicationFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BD11FAE02920050CCE6 /* BaseApplicationFwd.h */; };
-		FD7EA51F1FAEE4DC008DF72F /* MacOSAppDelegateFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BD01FADFFC90050CCE6 /* MacOSAppDelegateFwd.h */; };
-		FD7EA5201FAEE4DC008DF72F /* MacOSWindowFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BCE1FADFC660050CCE6 /* MacOSWindowFwd.h */; };
-		FD7EA5211FAEE4DC008DF72F /* MacOSWindowUtilityFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BCF1FADFCE90050CCE6 /* MacOSWindowUtilityFwd.h */; };
 		FD7EA5231FAEE4DC008DF72F /* BaseRHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BBE1FACC3DE0050CCE6 /* BaseRHI.h */; };
 		FD7EA5241FAEE4DC008DF72F /* BaseRHIType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC61FACC5BC0050CCE6 /* BaseRHIType.h */; };
 		FD7EA5261FAEE4DC008DF72F /* OpenGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */; };
@@ -86,43 +55,42 @@
 		FD7EA5291FAEE4DC008DF72F /* RHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC41FACC3DE0050CCE6 /* RHI.h */; };
 		FD7EA5321FAF6D86008DF72F /* OpenGLRHI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */; };
 		FD7EA5351FB20537008DF72F /* OpenGLRHIUtility.h in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */; };
-		FD89A1D81F9BD34100817B92 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1C71F9BC94B00817B92 /* Application.h */; };
 		FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1F91FA23A1200817B92 /* StringView.h */; };
-		FD904D361F80CE770041EB60 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD904D351F80CE770041EB60 /* MacOSApplication.mm */; };
-		FD904D381F80D18C0041EB60 /* BaseApplicationType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD904D371F80D18C0041EB60 /* BaseApplicationType.h */; };
 		FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */; };
 		FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */; };
 		FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */; };
 		FD9AED1E1FDBF46A007AE839 /* TextureUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */; };
-		FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD0BF3651F9A56ED0065F284 /* MacOSTime.mm */; };
 		FDAAEBE01FDBA2C30036BFD5 /* libpng16d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */; };
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
-		FDC0A7481F85F76D003F2FE4 /* BaseApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC0A7471F85F76D003F2FE4 /* BaseApplication.cpp */; };
+		FDC3799D1FDF1007007DE331 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC379821FDEF86C007DE331 /* Application.cpp */; };
+		FDC3799E1FDF1007007DE331 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC3797D1FDEF86B007DE331 /* Window.cpp */; };
+		FDC379A21FDF167F007DE331 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379911FDEF882007DE331 /* MacOSApplication.mm */; };
+		FDC379A31FDF167F007DE331 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC3799B1FDEF883007DE331 /* MacOSWindow.mm */; };
+		FDC379A41FDF1691007DE331 /* MacOSWindowUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379861FDEF881007DE331 /* MacOSWindowUtility.mm */; };
+		FDC379A51FDF16AD007DE331 /* MacOSWindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC3798D1FDEF881007DE331 /* MacOSWindowDelegate.mm */; };
+		FDC379A61FDF16B8007DE331 /* MacOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379891FDEF881007DE331 /* MacOSAppDelegate.mm */; };
+		FDC379A71FDF16B8007DE331 /* MacOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379881FDEF881007DE331 /* MacOSLocale.mm */; };
+		FDC379A81FDF16B8007DE331 /* MacOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379991FDEF883007DE331 /* MacOSMain.mm */; };
+		FDC379A91FDF16B8007DE331 /* MacOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC3799A1FDEF883007DE331 /* MacOSScreen.mm */; };
+		FDC379AA1FDF16B8007DE331 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC379951FDEF882007DE331 /* MacOSTime.mm */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDF483CD1FC49776003BCAF6 /* Matrix4x4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF483CB1FC49776003BCAF6 /* Matrix4x4.cpp */; };
 		FDF6EAD31F8368E700A37840 /* Mathematics.h in Headers */ = {isa = PBXBuildFile; fileRef = FDF6EAD21F8368E700A37840 /* Mathematics.h */; };
-		FDFECB7D1F742E2E007AC1AB /* MacOSApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFECB7C1F742E2E007AC1AB /* MacOSApplication.h */; };
 		FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */; };
 		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD0BF3631F9A56BC0065F284 /* Time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Time.h; path = ../../Source/TGON/Core/Platform/Time.h; sourceTree = "<group>"; };
-		FD0BF3651F9A56ED0065F284 /* MacOSTime.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSTime.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSTime.mm; sourceTree = "<group>"; };
 		FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GameApplication.cpp; sourceTree = "<group>"; };
 		FD0E7A981FD64F7A00A3B562 /* GameApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplication.h; sourceTree = "<group>"; };
 		FD0E7A991FD64F7A00A3B562 /* GameApplicationFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplicationFwd.h; sourceTree = "<group>"; };
-		FD0E7A9B1FD70BBD00A3B562 /* MacOSWindowDelegateFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSWindowDelegateFwd.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowDelegateFwd.h; sourceTree = "<group>"; };
-		FD108AA51FD83ED6005F1AC3 /* MacOSApplicationFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSApplicationFwd.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplicationFwd.h; sourceTree = "<group>"; };
 		FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.cpp; sourceTree = "<group>"; };
 		FD1562D81FDA39600057C54E /* OpenGLRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIFwd.h; sourceTree = "<group>"; };
 		FD1562D91FDA396E0057C54E /* RHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RHIFwd.h; sourceTree = "<group>"; };
 		FD1562DA1FDA396E0057C54E /* RHI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RHI.cpp; sourceTree = "<group>"; };
 		FD2C7F651F84C9F500D4555B /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../Source/TGON/Core/Math/Vector3.cpp; sourceTree = "<group>"; };
 		FD2C7F661F84C9F500D4555B /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../Source/TGON/Core/Math/Vector3.h; sourceTree = "<group>"; };
-		FD3099C41F6ECC5300D5B02E /* BaseTime.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseTime.h; path = ../../Source/TGON/Core/Platform/Base/BaseTime.h; sourceTree = "<group>"; };
-		FD3099C51F6ECC5300D5B02E /* BaseTimeType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseTimeType.h; path = ../../Source/TGON/Core/Platform/Base/BaseTimeType.h; sourceTree = "<group>"; };
 		FD54B0C61FB8981800484529 /* IComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IComponent.h; path = ../../Source/TGON/Core/Object/IComponent.h; sourceTree = "<group>"; };
 		FD54B0C71FB8981800484529 /* ComponentObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ComponentObject.cpp; path = ../../Source/TGON/Core/Object/ComponentObject.cpp; sourceTree = "<group>"; };
 		FD54B0C81FB8981800484529 /* ComponentObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComponentObject.h; path = ../../Source/TGON/Core/Object/ComponentObject.h; sourceTree = "<group>"; };
@@ -151,31 +119,6 @@
 		FD753C331F6B4B0C00CD35F4 /* Preprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preprocessor.h; path = ../../Source/TGON/Core/Utility/Preprocessor.h; sourceTree = "<group>"; };
 		FD753C341F6B4B0C00CD35F4 /* StaticIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticIf.h; path = ../../Source/TGON/Core/Utility/StaticIf.h; sourceTree = "<group>"; };
 		FD753C351F6B4B0C00CD35F4 /* TypeTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeTraits.h; path = ../../Source/TGON/Core/Utility/TypeTraits.h; sourceTree = "<group>"; };
-		FD753C401F6B4B1F00CD35F4 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
-		FD753C411F6B4B1F00CD35F4 /* Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Locale.h; path = ../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
-		FD753C421F6B4B1F00CD35F4 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = ../../Source/TGON/Core/Platform/Window.h; sourceTree = "<group>"; };
-		FD753C461F6B4B3800CD35F4 /* BaseApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseApplication.h; path = ../../Source/TGON/Core/Platform/Base/BaseApplication.h; sourceTree = "<group>"; };
-		FD753C471F6B4B3800CD35F4 /* BaseLocale.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseLocale.h; path = ../../Source/TGON/Core/Platform/Base/BaseLocale.h; sourceTree = "<group>"; };
-		FD753C481F6B4B3800CD35F4 /* BaseScreen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseScreen.h; path = ../../Source/TGON/Core/Platform/Base/BaseScreen.h; sourceTree = "<group>"; };
-		FD753C4B1F6B4B3800CD35F4 /* BaseWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = BaseWindow.cpp; path = ../../Source/TGON/Core/Platform/Base/BaseWindow.cpp; sourceTree = "<group>"; };
-		FD753C4C1F6B4B3800CD35F4 /* BaseWindow.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseWindow.h; path = ../../Source/TGON/Core/Platform/Base/BaseWindow.h; sourceTree = "<group>"; };
-		FD753C4D1F6B4B3800CD35F4 /* BaseWindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseWindowType.h; path = ../../Source/TGON/Core/Platform/Base/BaseWindowType.h; sourceTree = "<group>"; };
-		FD753C561F6B4B4B00CD35F4 /* MacOSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSAppDelegate.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSAppDelegate.h; sourceTree = "<group>"; };
-		FD753C571F6B4B4B00CD35F4 /* MacOSAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSAppDelegate.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSAppDelegate.mm; sourceTree = "<group>"; };
-		FD753C581F6B4B4B00CD35F4 /* MacOSConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSConfig.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSConfig.h; sourceTree = "<group>"; };
-		FD753C591F6B4B4B00CD35F4 /* MacOSLocale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSLocale.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSLocale.h; sourceTree = "<group>"; };
-		FD753C5A1F6B4B4B00CD35F4 /* MacOSLocale.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSLocale.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSLocale.mm; sourceTree = "<group>"; };
-		FD753C5B1F6B4B4B00CD35F4 /* MacOSMain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSMain.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSMain.mm; sourceTree = "<group>"; };
-		FD753C5E1F6B4B4B00CD35F4 /* MacOSWindow.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSWindow.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindow.h; sourceTree = "<group>"; };
-		FD753C5F1F6B4B4B00CD35F4 /* MacOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindow.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindow.mm; sourceTree = "<group>"; };
-		FD753C601F6B4B4B00CD35F4 /* MacOSWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindowDelegate.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowDelegate.h; sourceTree = "<group>"; };
-		FD753C611F6B4B4B00CD35F4 /* MacOSWindowDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindowDelegate.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowDelegate.mm; sourceTree = "<group>"; };
-		FD753C621F6B4B4B00CD35F4 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtility.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.h; sourceTree = "<group>"; };
-		FD753C631F6B4B4B00CD35F4 /* MacOSWindowUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindowUtility.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.mm; sourceTree = "<group>"; };
-		FD753C721F6C2EB100CD35F4 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Screen.h; path = ../../Source/TGON/Core/Platform/Screen.h; sourceTree = "<group>"; };
-		FD753C741F6C2F4B00CD35F4 /* MacOSScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSScreen.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSScreen.mm; sourceTree = "<group>"; };
-		FD753C761F6C317400CD35F4 /* BaseScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseScreenType.h; path = ../../Source/TGON/Core/Platform/Base/BaseScreenType.h; sourceTree = "<group>"; };
-		FD753C781F6C332100CD35F4 /* MacOSScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSScreen.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSScreen.h; sourceTree = "<group>"; };
 		FD753C7A1F6C363700CD35F4 /* PrecompiledHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrecompiledHeader.pch; path = ../../Source/TGON/PrecompiledHeader.pch; sourceTree = "<group>"; };
 		FD772BBE1FACC3DE0050CCE6 /* BaseRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseRHI.h; sourceTree = "<group>"; };
 		FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContext.h; sourceTree = "<group>"; };
@@ -183,20 +126,13 @@
 		FD772BC61FACC5BC0050CCE6 /* BaseRHIType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseRHIType.h; sourceTree = "<group>"; };
 		FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHI.h; sourceTree = "<group>"; };
 		FD772BCD1FADFBA40050CCE6 /* OpenGLContextFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContextFwd.h; sourceTree = "<group>"; };
-		FD772BCE1FADFC660050CCE6 /* MacOSWindowFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSWindowFwd.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowFwd.h; sourceTree = "<group>"; };
-		FD772BCF1FADFCE90050CCE6 /* MacOSWindowUtilityFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtilityFwd.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtilityFwd.h; sourceTree = "<group>"; };
-		FD772BD01FADFFC90050CCE6 /* MacOSAppDelegateFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSAppDelegateFwd.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSAppDelegateFwd.h; sourceTree = "<group>"; };
-		FD772BD11FAE02920050CCE6 /* BaseApplicationFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseApplicationFwd.h; path = ../../Source/TGON/Core/Platform/Base/BaseApplicationFwd.h; sourceTree = "<group>"; };
 		FD772BD21FAE067D0050CCE6 /* UUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UUID.h; path = ../../Source/TGON/Core/Hash/UUID.h; sourceTree = "<group>"; };
 		FD7EA52B1FAEF62F008DF72F /* OpenGLRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIFwd.h; sourceTree = "<group>"; };
 		FD7EA52C1FAF403B008DF72F /* BaseRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseRHIFwd.h; sourceTree = "<group>"; };
 		FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLRHI.cpp; sourceTree = "<group>"; };
 		FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIUtility.h; sourceTree = "<group>"; };
-		FD89A1C71F9BC94B00817B92 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../Source/TGON/Core/Platform/Application.h; sourceTree = "<group>"; };
 		FD89A1F91FA23A1200817B92 /* StringView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = StringView.h; path = ../../Source/TGON/Core/String/StringView.h; sourceTree = "<group>"; };
 		FD89A1FB1FA39A0000817B92 /* ICloneable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICloneable.h; path = ../../Source/TGON/Core/Object/ICloneable.h; sourceTree = "<group>"; };
-		FD904D351F80CE770041EB60 /* MacOSApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSApplication.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.mm; sourceTree = "<group>"; };
-		FD904D371F80D18C0041EB60 /* BaseApplicationType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = BaseApplicationType.h; path = ../../Source/TGON/Core/Platform/Base/BaseApplicationType.h; sourceTree = "<group>"; };
 		FD9AED201FDC43AB007AE839 /* FileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FileSystem.h; path = ../../Source/TGON/Core/File/FileSystem.h; sourceTree = "<group>"; };
 		FD9AED211FDC43BC007AE839 /* File.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = File.h; path = ../../Source/TGON/Core/File/File.h; sourceTree = "<group>"; };
 		FD9AED221FDC468F007AE839 /* File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../../Source/TGON/Core/File/File.cpp; sourceTree = "<group>"; };
@@ -212,15 +148,39 @@
 		FDBD61121FA56904007439A7 /* IRuntimeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObject.h; path = ../../Source/TGON/Core/Object/IRuntimeObject.h; sourceTree = "<group>"; };
 		FDBD61131FA56F97007439A7 /* IRuntimeObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObjectType.h; path = ../../Source/TGON/Core/Object/IRuntimeObjectType.h; sourceTree = "<group>"; };
 		FDBD61161FA5B3B2007439A7 /* Delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Delegate.h; path = ../../Source/TGON/Core/Object/Delegate.h; sourceTree = "<group>"; };
-		FDC0A7471F85F76D003F2FE4 /* BaseApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = BaseApplication.cpp; path = ../../Source/TGON/Core/Platform/Base/BaseApplication.cpp; sourceTree = "<group>"; };
-		FDD6AD4E1FCAFF6A0043721A /* Drawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Drawing.h; path = ../../Source/TGON/Core/Platform/Drawing.h; sourceTree = "<group>"; };
+		FDC379781FDEF86B007DE331 /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Screen.h; path = ../../Source/TGON/Core/Platform/Screen.h; sourceTree = "<group>"; };
+		FDC379791FDEF86B007DE331 /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Prefix.h; path = ../../Source/TGON/Core/Platform/Prefix.h; sourceTree = "<group>"; };
+		FDC3797A1FDEF86B007DE331 /* Config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Config.h; path = ../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
+		FDC3797B1FDEF86B007DE331 /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = WindowType.h; path = ../../Source/TGON/Core/Platform/WindowType.h; sourceTree = "<group>"; };
+		FDC3797C1FDEF86B007DE331 /* Drawing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Drawing.h; path = ../../Source/TGON/Core/Platform/Drawing.h; sourceTree = "<group>"; };
+		FDC3797D1FDEF86B007DE331 /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = Window.cpp; path = ../../Source/TGON/Core/Platform/Window.cpp; sourceTree = "<group>"; };
+		FDC3797E1FDEF86B007DE331 /* Application.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Application.h; path = ../../Source/TGON/Core/Platform/Application.h; sourceTree = "<group>"; };
+		FDC3797F1FDEF86B007DE331 /* ScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = ScreenType.h; path = ../../Source/TGON/Core/Platform/ScreenType.h; sourceTree = "<group>"; };
+		FDC379801FDEF86C007DE331 /* Time.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Time.h; path = ../../Source/TGON/Core/Platform/Time.h; sourceTree = "<group>"; };
+		FDC379811FDEF86C007DE331 /* TimeType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = TimeType.h; path = ../../Source/TGON/Core/Platform/TimeType.h; sourceTree = "<group>"; };
+		FDC379821FDEF86C007DE331 /* Application.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = Application.cpp; path = ../../Source/TGON/Core/Platform/Application.cpp; sourceTree = "<group>"; };
+		FDC379831FDEF86C007DE331 /* ApplicationType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = ApplicationType.h; path = ../../Source/TGON/Core/Platform/ApplicationType.h; sourceTree = "<group>"; };
+		FDC379841FDEF86C007DE331 /* Window.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Window.h; path = ../../Source/TGON/Core/Platform/Window.h; sourceTree = "<group>"; };
+		FDC379851FDEF86C007DE331 /* Locale.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Locale.h; path = ../../Source/TGON/Core/Platform/Locale.h; sourceTree = "<group>"; };
+		FDC379861FDEF881007DE331 /* MacOSWindowUtility.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindowUtility.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.mm; sourceTree = "<group>"; };
+		FDC379881FDEF881007DE331 /* MacOSLocale.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSLocale.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSLocale.mm; sourceTree = "<group>"; };
+		FDC379891FDEF881007DE331 /* MacOSAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSAppDelegate.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSAppDelegate.mm; sourceTree = "<group>"; };
+		FDC3798B1FDEF881007DE331 /* MacOSConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSConfig.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSConfig.h; sourceTree = "<group>"; };
+		FDC3798C1FDEF881007DE331 /* MacOSWindowDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSWindowDelegate.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowDelegate.h; sourceTree = "<group>"; };
+		FDC3798D1FDEF881007DE331 /* MacOSWindowDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindowDelegate.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowDelegate.mm; sourceTree = "<group>"; };
+		FDC379911FDEF882007DE331 /* MacOSApplication.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSApplication.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.mm; sourceTree = "<group>"; };
+		FDC379951FDEF882007DE331 /* MacOSTime.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSTime.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSTime.mm; sourceTree = "<group>"; };
+		FDC379981FDEF883007DE331 /* MacOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSAppDelegate.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSAppDelegate.h; sourceTree = "<group>"; };
+		FDC379991FDEF883007DE331 /* MacOSMain.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSMain.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSMain.mm; sourceTree = "<group>"; };
+		FDC3799A1FDEF883007DE331 /* MacOSScreen.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSScreen.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSScreen.mm; sourceTree = "<group>"; };
+		FDC3799B1FDEF883007DE331 /* MacOSWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSWindow.mm; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindow.mm; sourceTree = "<group>"; };
+		FDC3799C1FDEF883007DE331 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MacOSWindowUtility.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSWindowUtility.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDF483CB1FC49776003BCAF6 /* Matrix4x4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix4x4.cpp; path = ../../Source/TGON/Core/Math/Matrix4x4.cpp; sourceTree = "<group>"; };
 		FDF483CC1FC49776003BCAF6 /* Matrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Matrix4x4.h; path = ../../Source/TGON/Core/Math/Matrix4x4.h; sourceTree = "<group>"; };
 		FDF6EAD21F8368E700A37840 /* Mathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mathematics.h; path = ../../Source/TGON/Core/Math/Mathematics.h; sourceTree = "<group>"; };
 		FDFECB701F6ED898007AC1AB /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDFECB7C1F742E2E007AC1AB /* MacOSApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSApplication.h; path = ../../Source/TGON/Core/Platform/MacOS/MacOSApplication.h; sourceTree = "<group>"; };
 		FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		FDFECB821F7585B4007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDFECB841F75FBAF007AC1AB /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -394,15 +354,21 @@
 		FDD7C8D21F6543D9000EB7C8 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				FDD7C8DB1F65442A000EB7C8 /* Base */,
 				FDD7C8DA1F654425000EB7C8 /* MacOS */,
-				FD89A1C71F9BC94B00817B92 /* Application.h */,
-				FD753C401F6B4B1F00CD35F4 /* Config.h */,
-				FDD6AD4E1FCAFF6A0043721A /* Drawing.h */,
-				FD753C411F6B4B1F00CD35F4 /* Locale.h */,
-				FD753C721F6C2EB100CD35F4 /* Screen.h */,
-				FD0BF3631F9A56BC0065F284 /* Time.h */,
-				FD753C421F6B4B1F00CD35F4 /* Window.h */,
+				FDC379821FDEF86C007DE331 /* Application.cpp */,
+				FDC3797E1FDEF86B007DE331 /* Application.h */,
+				FDC379831FDEF86C007DE331 /* ApplicationType.h */,
+				FDC3797A1FDEF86B007DE331 /* Config.h */,
+				FDC3797C1FDEF86B007DE331 /* Drawing.h */,
+				FDC379851FDEF86C007DE331 /* Locale.h */,
+				FDC379791FDEF86B007DE331 /* Prefix.h */,
+				FDC379781FDEF86B007DE331 /* Screen.h */,
+				FDC3797F1FDEF86B007DE331 /* ScreenType.h */,
+				FDC379801FDEF86C007DE331 /* Time.h */,
+				FDC379811FDEF86C007DE331 /* TimeType.h */,
+				FDC3797D1FDEF86B007DE331 /* Window.cpp */,
+				FDC379841FDEF86C007DE331 /* Window.h */,
+				FDC3797B1FDEF86B007DE331 /* WindowType.h */,
 			);
 			name = Platform;
 			sourceTree = "<group>";
@@ -499,49 +465,21 @@
 		FDD7C8DA1F654425000EB7C8 /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
-				FD753C561F6B4B4B00CD35F4 /* MacOSAppDelegate.h */,
-				FD753C571F6B4B4B00CD35F4 /* MacOSAppDelegate.mm */,
-				FD772BD01FADFFC90050CCE6 /* MacOSAppDelegateFwd.h */,
-				FDFECB7C1F742E2E007AC1AB /* MacOSApplication.h */,
-				FD904D351F80CE770041EB60 /* MacOSApplication.mm */,
-				FD108AA51FD83ED6005F1AC3 /* MacOSApplicationFwd.h */,
-				FD753C581F6B4B4B00CD35F4 /* MacOSConfig.h */,
-				FD753C591F6B4B4B00CD35F4 /* MacOSLocale.h */,
-				FD753C5A1F6B4B4B00CD35F4 /* MacOSLocale.mm */,
-				FD753C5B1F6B4B4B00CD35F4 /* MacOSMain.mm */,
-				FD753C781F6C332100CD35F4 /* MacOSScreen.h */,
-				FD753C741F6C2F4B00CD35F4 /* MacOSScreen.mm */,
-				FD0BF3651F9A56ED0065F284 /* MacOSTime.mm */,
-				FD753C5E1F6B4B4B00CD35F4 /* MacOSWindow.h */,
-				FD772BCE1FADFC660050CCE6 /* MacOSWindowFwd.h */,
-				FD753C5F1F6B4B4B00CD35F4 /* MacOSWindow.mm */,
-				FD753C601F6B4B4B00CD35F4 /* MacOSWindowDelegate.h */,
-				FD753C611F6B4B4B00CD35F4 /* MacOSWindowDelegate.mm */,
-				FD0E7A9B1FD70BBD00A3B562 /* MacOSWindowDelegateFwd.h */,
-				FD753C621F6B4B4B00CD35F4 /* MacOSWindowUtility.h */,
-				FD772BCF1FADFCE90050CCE6 /* MacOSWindowUtilityFwd.h */,
-				FD753C631F6B4B4B00CD35F4 /* MacOSWindowUtility.mm */,
+				FDC379981FDEF883007DE331 /* MacOSAppDelegate.h */,
+				FDC379891FDEF881007DE331 /* MacOSAppDelegate.mm */,
+				FDC379911FDEF882007DE331 /* MacOSApplication.mm */,
+				FDC3798B1FDEF881007DE331 /* MacOSConfig.h */,
+				FDC379881FDEF881007DE331 /* MacOSLocale.mm */,
+				FDC379991FDEF883007DE331 /* MacOSMain.mm */,
+				FDC3799A1FDEF883007DE331 /* MacOSScreen.mm */,
+				FDC379951FDEF882007DE331 /* MacOSTime.mm */,
+				FDC3799B1FDEF883007DE331 /* MacOSWindow.mm */,
+				FDC3798C1FDEF881007DE331 /* MacOSWindowDelegate.h */,
+				FDC3798D1FDEF881007DE331 /* MacOSWindowDelegate.mm */,
+				FDC3799C1FDEF883007DE331 /* MacOSWindowUtility.h */,
+				FDC379861FDEF881007DE331 /* MacOSWindowUtility.mm */,
 			);
 			name = MacOS;
-			sourceTree = "<group>";
-		};
-		FDD7C8DB1F65442A000EB7C8 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				FD753C461F6B4B3800CD35F4 /* BaseApplication.h */,
-				FDC0A7471F85F76D003F2FE4 /* BaseApplication.cpp */,
-				FD772BD11FAE02920050CCE6 /* BaseApplicationFwd.h */,
-				FD904D371F80D18C0041EB60 /* BaseApplicationType.h */,
-				FD753C471F6B4B3800CD35F4 /* BaseLocale.h */,
-				FD753C481F6B4B3800CD35F4 /* BaseScreen.h */,
-				FD753C761F6C317400CD35F4 /* BaseScreenType.h */,
-				FD3099C41F6ECC5300D5B02E /* BaseTime.h */,
-				FD3099C51F6ECC5300D5B02E /* BaseTimeType.h */,
-				FD753C4B1F6B4B3800CD35F4 /* BaseWindow.cpp */,
-				FD753C4C1F6B4B3800CD35F4 /* BaseWindow.h */,
-				FD753C4D1F6B4B3800CD35F4 /* BaseWindowType.h */,
-			);
-			name = Base;
 			sourceTree = "<group>";
 		};
 		FDD7C92E1F684911000EB7C8 /* Frameworks */ = {
@@ -584,10 +522,6 @@
 				FD7EA51B1FAEE4DC008DF72F /* IRuntimeObjectType.h in Headers */,
 				FD7EA51C1FAEE4DC008DF72F /* UUID.h in Headers */,
 				FD7EA51D1FAEE4DC008DF72F /* FStateMachine.h in Headers */,
-				FD7EA51E1FAEE4DC008DF72F /* BaseApplicationFwd.h in Headers */,
-				FD7EA51F1FAEE4DC008DF72F /* MacOSAppDelegateFwd.h in Headers */,
-				FD7EA5201FAEE4DC008DF72F /* MacOSWindowFwd.h in Headers */,
-				FD7EA5211FAEE4DC008DF72F /* MacOSWindowUtilityFwd.h in Headers */,
 				FD7EA5231FAEE4DC008DF72F /* BaseRHI.h in Headers */,
 				FD7EA5241FAEE4DC008DF72F /* BaseRHIType.h in Headers */,
 				FD7EA5261FAEE4DC008DF72F /* OpenGLContext.h in Headers */,
@@ -595,35 +529,17 @@
 				FD7EA5281FAEE4DC008DF72F /* OpenGLRHI.h in Headers */,
 				FD7EA5291FAEE4DC008DF72F /* RHI.h in Headers */,
 				FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */,
-				FD89A1D81F9BD34100817B92 /* Application.h in Headers */,
 				FD753C371F6B4B0C00CD35F4 /* Array.h in Headers */,
-				FD753C671F6B4B4B00CD35F4 /* MacOSLocale.h in Headers */,
 				FD753C0D1F6B4ACE00CD35F4 /* Hash.h in Headers */,
-				FD753C441F6B4B1F00CD35F4 /* Locale.h in Headers */,
 				FD753C091F6B4ABD00CD35F4 /* StringTraits.h in Headers */,
-				FD753C451F6B4B1F00CD35F4 /* Window.h in Headers */,
-				FD753C661F6B4B4B00CD35F4 /* MacOSConfig.h in Headers */,
-				FD753C701F6B4B4B00CD35F4 /* MacOSWindowUtility.h in Headers */,
-				FDFECB7D1F742E2E007AC1AB /* MacOSApplication.h in Headers */,
 				FD753C3C1F6B4B0C00CD35F4 /* ForEach.h in Headers */,
-				FD753C731F6C2EB100CD35F4 /* Screen.h in Headers */,
-				FD753C501F6B4B3800CD35F4 /* BaseScreen.h in Headers */,
-				FD753C6E1F6B4B4B00CD35F4 /* MacOSWindowDelegate.h in Headers */,
-				FD3099C71F6ECC5300D5B02E /* BaseTimeType.h in Headers */,
 				FD753C381F6B4B0C00CD35F4 /* AutoCast.h in Headers */,
 				FD753C171F6B4AE600CD35F4 /* Random.h in Headers */,
-				FD753C6C1F6B4B4B00CD35F4 /* MacOSWindow.h in Headers */,
-				FD3099C61F6ECC5300D5B02E /* BaseTime.h in Headers */,
-				FD753C431F6B4B1F00CD35F4 /* Config.h in Headers */,
 				FD753C081F6B4ABD00CD35F4 /* FixedStringUtility.h in Headers */,
-				FD753C771F6C317500CD35F4 /* BaseScreenType.h in Headers */,
 				FD753C281F6B4AFC00CD35F4 /* Point.h in Headers */,
-				FD753C791F6C332100CD35F4 /* MacOSScreen.h in Headers */,
 				FD753C361F6B4B0C00CD35F4 /* Algorithm.h in Headers */,
-				FD753C641F6B4B4B00CD35F4 /* MacOSAppDelegate.h in Headers */,
 				FDF6EAD31F8368E700A37840 /* Mathematics.h in Headers */,
 				FD753C7B1F6C363700CD35F4 /* PrecompiledHeader.pch in Headers */,
-				FD904D381F80D18C0041EB60 /* BaseApplicationType.h in Headers */,
 				FD753C3E1F6B4B0C00CD35F4 /* StaticIf.h in Headers */,
 				FD753C3D1F6B4B0C00CD35F4 /* Preprocessor.h in Headers */,
 				FD753C021F6B4AAF00CD35F4 /* Object.h in Headers */,
@@ -631,16 +547,12 @@
 				FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */,
 				FD753C3F1F6B4B0C00CD35F4 /* TypeTraits.h in Headers */,
 				FD753C3B1F6B4B0C00CD35F4 /* ExpressionTemplate.h in Headers */,
-				FD753C541F6B4B3800CD35F4 /* BaseWindow.h in Headers */,
 				FD753C241F6B4AFC00CD35F4 /* Extent.h in Headers */,
-				FD753C4F1F6B4B3800CD35F4 /* BaseLocale.h in Headers */,
 				FD753C191F6B4AE600CD35F4 /* WELL1024a.h in Headers */,
-				FD753C4E1F6B4B3800CD35F4 /* BaseApplication.h in Headers */,
 				FD753C071F6B4ABD00CD35F4 /* FixedString.h in Headers */,
 				FD753C231F6B4AFC00CD35F4 /* Color.h in Headers */,
 				FD753C291F6B4AFC00CD35F4 /* Rect.h in Headers */,
 				FD753C031F6B4AAF00CD35F4 /* IRuntimeObjectUtility.h in Headers */,
-				FD753C551F6B4B3800CD35F4 /* BaseWindowType.h in Headers */,
 				FD2C7F681F84C9F500D4555B /* Vector3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -703,29 +615,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC379A61FDF16B8007DE331 /* MacOSAppDelegate.mm in Sources */,
+				FDC379A71FDF16B8007DE331 /* MacOSLocale.mm in Sources */,
+				FDC379A81FDF16B8007DE331 /* MacOSMain.mm in Sources */,
+				FDC379A91FDF16B8007DE331 /* MacOSScreen.mm in Sources */,
+				FDC379AA1FDF16B8007DE331 /* MacOSTime.mm in Sources */,
+				FDC379A51FDF16AD007DE331 /* MacOSWindowDelegate.mm in Sources */,
+				FDC379A41FDF1691007DE331 /* MacOSWindowUtility.mm in Sources */,
+				FDC379A21FDF167F007DE331 /* MacOSApplication.mm in Sources */,
+				FDC379A31FDF167F007DE331 /* MacOSWindow.mm in Sources */,
+				FDC3799D1FDF1007007DE331 /* Application.cpp in Sources */,
+				FDC3799E1FDF1007007DE331 /* Window.cpp in Sources */,
 				FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */,
 				FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */,
-				FDAAEBD81FDAD8670036BFD5 /* MacOSTime.mm in Sources */,
 				FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */,
 				FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */,
 				FD54B0CB1FB8981900484529 /* IComponent.cpp in Sources */,
 				FD7EA5351FB20537008DF72F /* OpenGLRHIUtility.h in Sources */,
-				FDC0A7481F85F76D003F2FE4 /* BaseApplication.cpp in Sources */,
-				FD753C6F1F6B4B4B00CD35F4 /* MacOSWindowDelegate.mm in Sources */,
 				FD2C7F671F84C9F500D4555B /* Vector3.cpp in Sources */,
-				FD753C6D1F6B4B4B00CD35F4 /* MacOSWindow.mm in Sources */,
-				FD753C531F6B4B3800CD35F4 /* BaseWindow.cpp in Sources */,
 				FD1562DB1FDA396E0057C54E /* RHI.cpp in Sources */,
 				FD753C181F6B4AE600CD35F4 /* WELL1024a.cpp in Sources */,
-				FD753C751F6C2F4B00CD35F4 /* MacOSScreen.mm in Sources */,
-				FD753C681F6B4B4B00CD35F4 /* MacOSLocale.mm in Sources */,
-				FD753C691F6B4B4B00CD35F4 /* MacOSMain.mm in Sources */,
 				FD54B0CA1FB8981900484529 /* ComponentObject.cpp in Sources */,
-				FD753C711F6B4B4B00CD35F4 /* MacOSWindowUtility.mm in Sources */,
-				FD753C651F6B4B4B00CD35F4 /* MacOSAppDelegate.mm in Sources */,
 				FD753C0C1F6B4ACE00CD35F4 /* Hash.cpp in Sources */,
 				FDF483CD1FC49776003BCAF6 /* Matrix4x4.cpp in Sources */,
-				FD904D361F80CE770041EB60 /* MacOSApplication.mm in Sources */,
 				FD7EA5321FAF6D86008DF72F /* OpenGLRHI.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,21 +6,19 @@
  */
 
 #pragma once
-#import "MacOSWindowUtilityFwd.h"
+
+@class NSWindow;
 
 namespace tgon
 {
 namespace platform
-{
-namespace macos
 {
 
 /**
  * @brief                       Create window through given arguments.
  * @param [in] windowStyle      Window style information
  */
-NSWindow* MakeNativeWindow(const WindowStyle& windowStyle);
+NSWindow* MakeNativeWindow(const struct WindowStyle& windowStyle);
 
-} /* namespace macos */
 } /* namespace platform */
 } /* namespace tgon */

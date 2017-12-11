@@ -30,6 +30,8 @@ namespace tgon
 namespace platform
 {
 
+enum class MessageBoxIconType;
+
 class TGON_API Application :
     private boost::noncopyable
 {
@@ -49,10 +51,11 @@ public:
     void MessageLoop();
     void Terminate();
     void ShowMessageBox(const char* message) const;
-    void ShowMessageBox(const char* message, enum class MessageBoxIconType messageBoxType) const;
+    void ShowMessageBox(const char* message, MessageBoxIconType iconType) const;
     void ShowMessageBox(const char* title, const char* message) const;
-    void ShowMessageBox(const char* title, const char* message, enum class MessageBoxIconType messageBoxType) const;
+    void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const;
 
+    void OnHandleMessage(const struct AppMessage& appMsg);
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}

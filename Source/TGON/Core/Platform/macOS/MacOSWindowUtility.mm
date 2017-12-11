@@ -6,13 +6,11 @@
 #import <AppKit/NSButton.h>
 #import <AppKit/NSColor.h>
 
-#import "Core/Platform/Base/BaseWindowType.h"
+#import "../WindowType.h"
 
 namespace tgon
 {
 namespace platform
-{
-namespace macos
 {
 namespace
 {
@@ -96,6 +94,5 @@ NSWindow* MakeNativeWindow(const WindowStyle& windowStyle)
     return window;
 }
 
-} /* namespace macos */
 } /* namespace platform */
 } /* namespace tgon */

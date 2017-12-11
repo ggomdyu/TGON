@@ -11,7 +11,7 @@ int main(int argc, const char* argv[])
         // Initialize NSApp.
         id sharedApplication = [NSApplication sharedApplication];
 
-        id appDelegate = [MacOSAppDelegate alloc];
+        id appDelegate = [AppDelegate alloc];
         [sharedApplication setDelegate:appDelegate];
         [sharedApplication setActivationPolicy:NSApplicationActivationPolicyRegular];
         [sharedApplication activateIgnoringOtherApps:YES];

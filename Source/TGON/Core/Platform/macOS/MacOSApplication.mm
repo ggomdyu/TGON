@@ -1,20 +1,29 @@
 #import "PrecompiledHeader.pch"
-#import "MacOSApplication.h"
+#import "../Application.h"
+#import "../ApplicationType.h"
 
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
-#include "Core/Platform/Base/BaseApplicationType.h"
+#include "../Window.h"
 
 namespace tgon
 {
 namespace platform
 {
-namespace macos
-{
 
-void MacOSApplication::MessageLoop()
+Application::Application(const WindowStyle& windowStyle) :
+    m_mainWindow(std::make_shared<Window>(windowStyle))
+{
+}
+
+void Application::Initialize(const WindowStyle& windowStyle)
+{
+    new (this) Application(windowStyle);
+}
+
+void Application::MessageLoop()
 {
     NSEvent* message = nil;
     while (true)
@@ -24,14 +33,14 @@ void MacOSApplication::MessageLoop()
                                                inMode:NSDefaultRunLoopMode
                                               dequeue:YES]) != nil)
         {
-            this->OnHandleMessage(message);
+            this->OnHandleMessage(AppMessage((__bridge void*)message));
         }
 
         this->OnUpdate();
     }
 }
 
-void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
+void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const
 {
     static constexpr const NSAlertStyle nativeNSAlertStyleArray[2] =
     {
@@ -42,26 +51,27 @@ void MacOSApplication::ShowMessageBox(const char* title, const char* message, Me
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:[NSString stringWithUTF8String:title]];
     [alert setInformativeText:[NSString stringWithUTF8String:message]];
-    [alert setAlertStyle:nativeNSAlertStyleArray[static_cast<int32_t>(messageBoxType)]];
+    [alert setAlertStyle:nativeNSAlertStyleArray[static_cast<int32_t>(iconType)]];
     [alert runModal];
 }
 
-void MacOSApplication::Terminate()
+void Application::Terminate()
 {
     [NSApp terminate:nil];
 }
 
-void MacOSApplication::OnHandleMessage(NSEvent* message)
+void Application::OnHandleMessage(const AppMessage& appMsg)
 {
+    NSEvent* message = (__bridge NSEvent*)appMsg.rawMsg;
+
     NSEventType messageType = [message type];
     switch (messageType)
     {
-    default:
-        [NSApp sendEvent:message];
-        break;
+        default:
+            [NSApp sendEvent:message];
+            break;
     }
 }
 
-} /* namespace macos */
 } /* namespace platform */
 } /* namespace tgon */
