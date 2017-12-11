@@ -1,10 +1,11 @@
 /**
- * @filename    BaseWindowType.h
+ * @filename    WindowType.h
  * @author      ggomdyu
  * @since       05/05/2017
  */
 
 #pragma once
+#include <boost/predef/os.h>
 #include <string>
 #include <cstdint>
 

@@ -1,5 +1,5 @@
 /**
- * @filename    BaseTimeType.h
+ * @filename    TimeType.h
  * @author      ggomdyu
  * @since       04/23/2017
  */

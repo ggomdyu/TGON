@@ -11,7 +11,7 @@ namespace tgon
 namespace platform
 {
 
-class BaseWindow;
+class Window;
 
 } /* namespace platform */
 

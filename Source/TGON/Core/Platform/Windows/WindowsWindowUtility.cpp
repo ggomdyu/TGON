@@ -1,17 +1,14 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsWindow.h"
+#include "WindowsWindowUtility.h"
 
 #include <cassert>
 
+#include "Core/Platform/WindowType.h"
 #include "Core/String/Encoding.h"
-
-#include "WindowsWindowUtility.h"
 
 namespace tgon
 {
 namespace platform
-{
-namespace windows
 {
 
 void ConverWindowStyletToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
@@ -116,6 +113,5 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 	return wndHandle;
 }
 
-} /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */

@@ -14,7 +14,7 @@ namespace tgon
 namespace rhi
 {
 
-std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::BaseWindow>& window, const VideoMode& videoMode)
+std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode)
 {
     switch (videoMode.graphicsSDK)
     {

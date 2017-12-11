@@ -1,18 +1,32 @@
 /**
  * @filename    Locale.h
  * @author      ggomdyu
- * @since       06/14/2017
+ * @since       05/15/2016
+ * @brief       Set of Platform-agnostic Locale interface.
  */
 
 #pragma once
-#include <boost/predef/os.h>
+#include <cstddef>
 
-#if BOOST_OS_WINDOWS
-#   include "Windows/WindowsLocale.h"
-#elif BOOST_OS_MACOS
-#   import "MacOS/MacOSLocale.h"
-#elif BOOST_OS_ANDROID
-#   include "Android/AndroidLocale.h"
-#elif BOOST_OS_IOS
-#   import "IOS/IOSLocale.h"
-#endif
+#include "Core/Platform/Config.h"
+
+namespace tgon
+{
+namespace platform
+{
+
+/**
+ * @brief                           Get the current language of OS.
+ * @param [out] destStr             The destination of the string to be written.
+ * @param [in] destStrBufferSize    The length of buffer
+ */
+TGON_API void GetLanguage(char* destStr, std::size_t destStrBufferSize);
+
+template <std::size_t N>
+inline void GetLanguage(char(&destStr)[N])
+{
+    GetLanguage(destStr, N);
+}
+
+} /* namespace platform */
+} /* namespace tgon */

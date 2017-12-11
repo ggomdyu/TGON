@@ -2,18 +2,22 @@
  * @filename    Drawing.h
  * @author      ggomdyu
  * @since       11/26/2017
- * @brief       Low level Platform-Specific drawing interface.
+ * @brief       Set of Low level Plaform-agnostic Drawing interface.
  */
 
 #pragma once
-#include <boost/predef/os.h>
+#include "Core/Math/Point.h"
 
-#if BOOST_OS_WINDOWS
-#   include "Windows/WindowsDrawing.h"
-#elif BOOST_OS_MACOS
-#   import "MacOS/MacOSDrawing.h"
-#elif BOOST_OS_ANDROID
-#   include "Android/AndroidDrawing.h"
-#elif BOOST_OS_IOS
-#   import "iOS/iOSDrawing.h"
-#endif
+namespace tgon
+{
+namespace platform
+{
+
+void DrawPoint(const math::Point& p);
+
+void DrawLine(const math::Point& p1, const math::Point& p2);
+
+void DrawPolygon(const math::Point& p1, const math::Point& p2, const math::Point& p3);
+
+} /* namespace platform */
+} /* namespace tgon */

@@ -22,7 +22,7 @@ namespace rhi
 namespace gl
 {
 
-OpenGLRHI::OpenGLRHI(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode) :
+OpenGLRHI::OpenGLRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
     m_context(window, videoMode)
 {
 }

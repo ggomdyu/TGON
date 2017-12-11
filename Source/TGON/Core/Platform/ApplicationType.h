@@ -1,7 +1,7 @@
 /**
- * filename TimeType.h
- * author   ggomdyu
- * since    03/20/2016
+ * @filename    ApplicationType.h
+ * @author      ggomdyu
+ * @since       03/20/2016
  */
 
 #pragma once
@@ -9,26 +9,35 @@
 
 namespace tgon 
 {
-namespace utility
+namespace platform
 {
 
-struct BatteryStatus
+enum class MessageBoxIconType
 {
-/* @section	Ctor/Dtor */
+    Informational = 0,
+    Warning = 1,
+};
+
+struct BatteryState
+{
+/* @section Public constructor */
 public:
-	constexpr BatteryStatus(bool _hasBattery, uint16_t _batteryLifePercent) noexcept;
+	constexpr BatteryState(bool hasBattery, uint16_t batteryLifePercent) noexcept;
 
 /* @section	Public variable */
 public:
+    /* @brief   Records whether the current device has baterry. */
 	const bool hasBattery;
-	const uint16_t batteryLifePercent; // 0% ~ 100%
+
+    /* @brief   Records the battery percentage between 0 and 100. */
+	const uint16_t batteryPercentage;
 };
 
-constexpr BatteryStatus::BatteryStatus(bool _hasBattery, uint16_t _batteryLifePercent) noexcept :
-	hasBattery(_hasBattery),
-	batteryLifePercent(_batteryLifePercent)
+constexpr BatteryState::BatteryState(bool hasBattery, uint16_t batteryPercentage) noexcept :
+	hasBattery(hasBattery),
+    batteryPercentage(batteryPercentage)
 {
 }
 
-} /* namespace utility */
+} /* namespace platform */
 } /* namespace tgon */

@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 
-#include "Core/Platform/Base/BaseWindow.h"
+#include "Core/Platform/Window.h"
 #include "Graphics/RHI/Base/BaseRHIType.h"
 
 namespace tgon
@@ -13,7 +13,7 @@ namespace rhi
 namespace gl
 {
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode) :
+OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
     window(window)
 {
     ::PIXELFORMATDESCRIPTOR pixelFormatDesc {};
