@@ -3,6 +3,7 @@
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
 #include "Core/Platform/Window.h"
+#include "Core/Platform/WindowType.h"
 #include "Core/Platform/Time.h"
 #include "Core/Platform/Screen.h"
 #include "Core/String/FixedString.h"
@@ -44,7 +45,7 @@ public:
         {
             rhi::VideoMode videoMode;
             {
-                videoMode.graphicsSDK = rhi::GraphicsSDK::Direct3D9;
+                videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
                 videoMode.enableDoubleBuffer = true;

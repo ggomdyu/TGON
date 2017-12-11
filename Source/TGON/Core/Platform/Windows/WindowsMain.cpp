@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
 
 #include <crtdbg.h>
+#include <Windows.h>
 
-#include "WindowsApplication.h"
-#include "WindowsWindow.h"
+#include "../Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
@@ -18,33 +18,16 @@ namespace tgon
 namespace platform
 {
 
-extern std::shared_ptr<BaseApplication> MakeApplication();
+extern std::shared_ptr<Application> MakeApplication();
 
 namespace
 {
 
-std::shared_ptr<tgon::platform::windows::WindowsApplication> g_application;
-
-/* @brief   Register WNDCLASS which has Default window property given by engine. */
-bool RegisterWindowClass(HINSTANCE instanceHandle)
-{
-    WNDCLASSEXW wcex{};
-    wcex.cbSize = sizeof(wcex);
-    wcex.lpszClassName = L"TGON";
-    wcex.style = CS_DBLCLKS;
-    wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
-    wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
-    wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
-    wcex.hInstance = instanceHandle;
-    wcex.lpfnWndProc = windows::WindowsApplication::OnHandleMessage;
-
-    return RegisterClassExW(&wcex) != 0;
-}
+std::shared_ptr<Application> g_application;
 
 } /* namespace */
 } /* namespace platform */
 } /* namespace tgon */
-
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
 {
@@ -54,9 +37,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
    
     using namespace tgon::platform;
 
-    RegisterWindowClass(instanceHandle);
-
-    g_application = std::static_pointer_cast<windows::WindowsApplication>(MakeApplication());
+    g_application = MakeApplication();
     g_application->OnWillLaunch();
     {
         // 이건 WindowsMisc에 넣읍시다

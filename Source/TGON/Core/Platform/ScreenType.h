@@ -1,5 +1,5 @@
 /**
- * @filename    BaseScreenType.h
+ * @filename    ScreenType.h
  * @author      ggomdyu
  * @since       09/16/2017
  */

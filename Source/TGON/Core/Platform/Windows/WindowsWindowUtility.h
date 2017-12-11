@@ -5,6 +5,9 @@
  */
 
 #pragma once
+#ifndef WIN32_LEAN_AND_MEAN
+#   define WIN32_LEAN_AND_MEAN
+#endif
 #ifndef NOMINMAX
 #	define NOMINMAX
 #endif
@@ -15,11 +18,6 @@ namespace tgon
 namespace platform
 {
 
-struct WindowStyle;
-
-namespace windows
-{
-
 /**
  * @brief                       Create window via given arguments.
  * @param [in] windowStyle		The Style information
@@ -27,8 +25,7 @@ namespace windows
  * @param [in] instanceHandle	Process identifier ( You can forward defaultly WindowsPlatformApplication::InstanceHandle )
  * @param [in] extraParam		Extra data for window
  */
-HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
+HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-} /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */

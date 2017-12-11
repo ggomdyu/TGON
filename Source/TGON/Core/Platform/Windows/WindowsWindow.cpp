@@ -1,26 +1,24 @@
 #include "PrecompiledHeader.pch"
+#include "../Window.h"
+#include "../WindowType.h"
 
 #include <Windows.h>
 #include <cassert>
-
-#include "Core/String/Encoding.h"
-
-#include "WindowsWindow.h"
-#include "WindowsWindowUtility.h"
-
 #ifdef TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
+#include "Core/String/Encoding.h"
+
+#include "WindowsWindowUtility.h"
+
 namespace tgon
 {
 namespace platform
 {
-namespace windows
-{
 
-WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
+Window::Window(const WindowStyle& wndStyle) :
     m_wndHandle(CreateNativeWindow(wndStyle, GetModuleHandle(nullptr), L"TGON"))
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
@@ -29,37 +27,24 @@ WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 }
 
-WindowsWindow::~WindowsWindow()
+Window::~Window()
 {
     DestroyWindow(m_wndHandle);
 }
 
-void WindowsWindow::InitWithWindowStyle(const WindowStyle& windowStyle)
+void Window::Initialize(const WindowStyle& windowStyle)
 {
-    new (this) WindowsWindow(windowStyle);
+    new (this) Window(windowStyle);
 }
 
-bool WindowsWindow::PumpMessage(MSG* message)
-{
-    if (PeekMessageW(message, m_wndHandle, 0, 0, PM_REMOVE) == TRUE)
-    {
-        ::DispatchMessageW(message);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void WindowsWindow::BringToFront()
+void Window::BringToFront()
 {
 	// 테스트 필요
     ::SetForegroundWindow(m_wndHandle);
     ::BringWindowToTop(m_wndHandle);
 }
 
-void WindowsWindow::Flash()
+void Window::Flash()
 {
     ::FLASHWINFO fwi{ 0 };
     fwi.cbSize = sizeof(::FLASHWINFO);
@@ -71,7 +56,7 @@ void WindowsWindow::Flash()
     ::FlashWindowEx(&fwi);
 }
 
-void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
+void Window::GetPosition(int32_t* x, int32_t* y) const
 {
     ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
@@ -80,7 +65,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
+void Window::GetSize(int32_t* width, int32_t* height) const
 {
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
@@ -89,7 +74,7 @@ void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetTitle(char* destStr) const
+void Window::GetTitle(char* destStr) const
 {
     //std::size_t captionTextLength = GetWindowTextLengthW(m_wndHandle);
     
@@ -97,7 +82,7 @@ void WindowsWindow::GetTitle(char* destStr) const
     // utf16 -> utf8;
 }
 
-bool WindowsWindow::IsResizable() const
+bool Window::IsResizable() const
 {
     // Todo: WS_EX_DLGMODALFRAME에 대해서 테스트 필요
 
@@ -107,7 +92,7 @@ bool WindowsWindow::IsResizable() const
     return ((style & WS_THICKFRAME) != 0) || ((extendedStyle & WS_EX_DLGMODALFRAME) != 0);
 }
 
-bool WindowsWindow::HasCaption() const
+bool Window::HasCaption() const
 {
     // 테스트 필요
     DWORD style = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
@@ -115,65 +100,64 @@ bool WindowsWindow::HasCaption() const
 }
 
 
-bool WindowsWindow::IsMaximized() const
+bool Window::IsMaximized() const
 {
     // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsTopMost() const
+bool Window::IsTopMost() const
 {
-    // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsClosed() const noexcept
+bool Window::IsClosed() const noexcept
 {
     return m_isClosed;
 }
 
-void* WindowsWindow::GetNativeWindow() noexcept
+void* Window::GetNativeWindow() noexcept
 {
     return m_wndHandle;
 }
 
-void WindowsWindow::Show()
+void Window::Show()
 {
     ::ShowWindow(m_wndHandle, SW_NORMAL);
 }
 
-void WindowsWindow::Hide()
+void Window::Hide()
 {
     ::ShowWindow(m_wndHandle, SW_HIDE);
 }
 
-void WindowsWindow::Maximize()
+void Window::Maximize()
 {
     ::ShowWindow(m_wndHandle, SW_MAXIMIZE);
 }
 
-void WindowsWindow::Minimize()
+void Window::Minimize()
 {
     ::ShowWindow(m_wndHandle, SW_MINIMIZE);
 }
 
-void WindowsWindow::Close()
+void Window::Close()
 {
     ::PostQuitMessage(0);
     m_isClosed = true;
 }
 
-void WindowsWindow::SetPosition(int32_t x, int32_t y)
+void Window::SetPosition(int32_t x, int32_t y)
 {
     ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE);
 }
 
-void WindowsWindow::SetSize(int32_t width, int32_t height)
+void Window::SetSize(int32_t width, int32_t height)
 {
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
 }
 
-void WindowsWindow::SetTitle(const char* captionTitle)
+void Window::SetTitle(const char* captionTitle)
 {
     wchar_t utf16Caption[256] {};
 
@@ -184,12 +168,12 @@ void WindowsWindow::SetTitle(const char* captionTitle)
     }
 }
 
-void WindowsWindow::SetTopMost(bool setTopMost)
+void Window::SetTopMost(bool setTopMost)
 {
     ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
-//void WindowsWindow::AdditionalInit(const WindowStyle& wndStyle)
+//void Window::AdditionalInit(const WindowStyle& wndStyle)
 //{
 //    if (wndStyle.supportWindowTransparency)
 //    {
@@ -210,7 +194,7 @@ void WindowsWindow::SetTopMost(bool setTopMost)
 //    }
 //#endif
 //}
-LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT Window::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
@@ -251,6 +235,5 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
     return DefWindowProc(wndHandle, msg, wParam, lParam);
 }
 
-} /* namespace windows */
 } /* namespace platform */
 } /* namespace tgon */

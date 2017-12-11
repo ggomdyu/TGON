@@ -1,6 +1,9 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsScreen.h"
+#include "../Screen.h"
 
+#ifndef NOMINMAX
+#   define NOMINMAX
+#endif
 #include <Windows.h>
 
 namespace tgon

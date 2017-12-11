@@ -26,12 +26,12 @@ namespace gl
 struct OpenGLContext
 {
 public:
-    OpenGLContext(const std::shared_ptr<platform::BaseWindow>& window, const rhi::VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
     ~OpenGLContext();
 
 /* @section Public variable */
 public:
-    std::shared_ptr<platform::BaseWindow> window;
+    std::shared_ptr<platform::Window> window;
 
 #if BOOST_OS_WINDOWS
     HGLRC context;

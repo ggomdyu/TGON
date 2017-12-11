@@ -9,8 +9,6 @@
 #include <cstdint>
 #include <cstdio>
 
-#include "Core/Utility/StaticIf.h"
-
 namespace tgon
 {
 namespace math
