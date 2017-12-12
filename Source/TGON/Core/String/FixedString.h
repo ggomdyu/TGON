@@ -79,7 +79,7 @@ public:
     template <std::size_t _CharArraySize2>
     bool operator==(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
 
-    const _CharType operator[](std::size_t index) const;
+    const _CharType& operator[](std::size_t index) const;
     _CharType& operator[](std::size_t index);
 
 /* @section Public method */
@@ -132,7 +132,7 @@ public:
     std::size_t RFind(_CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
 
     _CharType& At(std::size_t index);
-    const _CharType At(std::size_t index) const;
+    const _CharType& At(std::size_t index) const;
 
     void Swap(BasicFixedString& rhs);
 
@@ -319,7 +319,7 @@ inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::oper
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline const _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
+inline const _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
 {
 	return _StringTraitsType::At(m_str, m_strLen, index);
 }
