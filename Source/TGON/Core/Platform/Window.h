@@ -77,7 +77,11 @@ public:
     bool IsTopMost() const;
     bool IsClosed() const noexcept;
 
-    void OnHandleMessage(const struct AppMessage* appMsg);
+#if BOOST_OS_WINDOWS
+    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
+#elif BOOST_OS_MACOS
+#endif
+
     virtual void OnMove(int32_t x, int32_t y) {}
     virtual void OnResize(int32_t width, int32_t height) {}
     virtual void OnMaximize() {}
