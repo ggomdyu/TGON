@@ -39,9 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.cpp">
-      <Filter>Source\Core\Hash</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
       <Filter>Source\Core\Math</Filter>
     </ClCompile>
@@ -185,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Prefix.h">
       <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\UUID.h">
+      <Filter>Source\Core\Hash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

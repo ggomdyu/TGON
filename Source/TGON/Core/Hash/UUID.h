@@ -17,15 +17,16 @@
 #   pragma comment(lib, "Rpcrt4.lib")
 #endif
 
-//#include "Core/String/StringTraits.h"
-#include "StringTraits.h"
+#include "Core/String/StringTraits.h"
 
 namespace tgon
 {
 namespace hash
 {
 
-struct UUID
+template <typename _StringTraitsType = string::StringTraits<char>>
+struct BasicUUID :
+    private _StringTraitsType
 {
 /* @section Public type */
 public:
@@ -41,52 +42,48 @@ public:
 
 /* section  Private constructor */
 private:
-    constexpr UUID() noexcept;
+    constexpr BasicUUID() noexcept;
+
+/* @section Public operator */
+public:
+    template <std::size_t _CharArraySize2>
+    bool operator==(const CharType(&rhs)[_CharArraySize2]) const;
+    template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    bool operator==(const _CharPointerType rhs) const;
+
+    const CharType& operator[](std::size_t index) const;
 
 /* section  Public method */
 public:
-    static UUID NewUUID();
-    static constexpr UUID Empty();
+    static BasicUUID NewUUID();
 
     int32_t Compare(const CharType* str, std::size_t strLen) const;
     template <std::size_t _CharArraySize2>
     int32_t Compare(const CharType(&str)[_CharArraySize2]) const;
     template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
     int32_t Compare(const _CharPointerType str) const;
-    template <std::size_t _CharArraySize2>
-    int32_t Compare(const UUID<CharType, _CharArraySize2, _StringTraitsType>& str) const;
-
+    
     template <std::size_t _CharArraySize2>
     std::size_t Find(const CharType(&str)[_CharArraySize2], std::size_t strOffset = 0) const;
     std::size_t Find(const CharType* str, std::size_t strOffset, std::size_t strLen) const;
-    std::size_t Find(const UUID& rhs) const;
-    template <std::size_t _CharArraySize2>
-    std::size_t Find(const UUID<CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
+    std::size_t Find(const BasicUUID& rhs) const;
     std::size_t Find(CharType ch, std::size_t strOffset = 0) const;
-
+    
     std::size_t RFind(const CharType* str, std::size_t strOffset, std::size_t strLen) const;
     template <std::size_t _CharArraySize2>
     std::size_t RFind(const CharType(&str)[_CharArraySize2], std::size_t strOffset = _StringTraitsType::NPos) const;
-    std::size_t RFind(const UUID& rhs) const;
-    template <std::size_t _CharArraySize2>
-    std::size_t RFind(const UUID<CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
+    std::size_t RFind(const BasicUUID& rhs) const;
     std::size_t RFind(CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
-
-    CharType& At(std::size_t index);
+    
     const CharType& At(std::size_t index) const;
-
+    
     const CharType* CStr() const noexcept;
     const CharType* Data() const noexcept;
-
-    std::size_t Length() const noexcept;
-    constexpr std::size_t Capacity() const noexcept;
-
-    IteratorType begin() noexcept;
-    IteratorType end() noexcept;
+    
+    constexpr std::size_t Length() const noexcept;
+    
     ConstIteratorType cbegin() const noexcept;
     ConstIteratorType cend() const noexcept;
-    ReverseIteratorType rbegin() noexcept;
-    ReverseIteratorType rend() noexcept;
     ConstReverseIteratorType crbegin() const noexcept;
     ConstReverseIteratorType crend() const noexcept;
 
@@ -95,12 +92,16 @@ private:
     CharType m_uuid[37];
 };
 
-constexpr UUID::UUID() noexcept :
+using UUID = BasicUUID<string::StringTraits<char>>;
+
+template <typename _StringTraitsType>
+constexpr BasicUUID<_StringTraitsType>::BasicUUID() noexcept :
     m_uuid{}
 {
 }
 
-inline UUID UUID::NewUUID()
+template <typename _StringTraitsType>
+inline BasicUUID<_StringTraitsType> BasicUUID<_StringTraitsType>::NewUUID()
 {
 #ifdef _MSC_VER
     ::UUID rawUUID;
@@ -109,7 +110,7 @@ inline UUID UUID::NewUUID()
     RPC_CSTR rawUUIDStr;
     UuidToStringA(&rawUUID, &rawUUIDStr);
     
-    UUID retUUID;
+    BasicUUID retUUID;
     memcpy(retUUID.m_uuid, rawUUIDStr, sizeof(decltype(m_uuid[0])) * std::extent<decltype(m_uuid)>::value);
     RpcStringFreeA(&rawUUIDStr);
 
@@ -118,15 +119,148 @@ inline UUID UUID::NewUUID()
     uuid_t uuid;
     uuid_generate_random(uuid);
 
-    UUID ret;
+    BasicUUID ret;
     uuid_unparse(uuid, ret.m_uuid);
     return ret;
 #endif
 }
 
-constexpr UUID UUID::Empty()
+template <typename _StringTraitsType>
+template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline bool BasicUUID<_StringTraitsType>::operator==(const _CharPointerType rhs) const
 {
-    return UUID();
+    return _StringTraitsType::Compare(m_uuid, std::extent<decltype(m_uuid)>::value, rhs, _StringTraitsType::Length(rhs)) == 0;
+}
+
+template <typename _StringTraitsType>
+template <std::size_t _CharArraySize2>
+inline bool BasicUUID<_StringTraitsType>::operator==(const CharType(&rhs)[_CharArraySize2]) const
+{
+    return _StringTraitsType::Compare(m_uuid, std::extent<decltype(m_uuid)>::value, rhs, _CharArraySize2 - 1) == 0;
+}
+
+template <typename _StringTraitsType>
+inline const typename BasicUUID<_StringTraitsType>::CharType& BasicUUID<_StringTraitsType>::operator[](std::size_t index) const
+{
+	return _StringTraitsType::At(m_uuid, std::extent<decltype(m_uuid)>::value, index);
+}
+
+template <typename _StringTraitsType>
+template <std::size_t _CharArraySize2>
+inline int32_t BasicUUID<_StringTraitsType>::Compare(const CharType(&str)[_CharArraySize2]) const
+{
+    return _StringTraitsType::Compare(m_uuid, std::extent<decltype(m_uuid)>::value, str, _CharArraySize2 - 1);
+}
+
+template <typename _StringTraitsType>
+inline int32_t BasicUUID<_StringTraitsType>::Compare(const CharType* str, std::size_t strLen) const
+{
+    return _StringTraitsType::Compare(m_uuid, std::extent<decltype(m_uuid)>::value, str, strLen);
+}
+
+template <typename _StringTraitsType>
+template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>*>
+inline int32_t BasicUUID<_StringTraitsType>::Compare(const _CharPointerType str) const
+{
+    return _StringTraitsType::Compare(m_uuid, std::extent<decltype(m_uuid)>::value, str, _StringTraitsType::Length(str));
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::Find(const BasicUUID& rhs) const
+{
+    return _StringTraitsType::Find(m_uuid, std::extent<decltype(m_uuid)>::value, 0, rhs.CStr(), rhs.Length());
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::Find(CharType ch, std::size_t strOffset) const
+{
+	return _StringTraitsType::Find(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, &ch, 1);
+}
+
+template <typename _StringTraitsType>
+template <std::size_t _CharArraySize2>
+inline std::size_t BasicUUID<_StringTraitsType>::Find(const CharType(&str)[_CharArraySize2], std::size_t strOffset) const
+{
+    return _StringTraitsType::Find(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, str, _CharArraySize2 - 1);
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::Find(const CharType* str, std::size_t strOffset, std::size_t strLen) const
+{
+    return _StringTraitsType::Find(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, str, strLen);
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::RFind(const BasicUUID& rhs) const
+{
+    return _StringTraitsType::RFind(m_uuid, std::extent<decltype(m_uuid)>::value, 0, rhs.CStr(), rhs.Length());
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::RFind(CharType ch, std::size_t strOffset) const
+{
+    return _StringTraitsType::RFind(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, &ch, 1);
+}
+
+template <typename _StringTraitsType>
+template <std::size_t _CharArraySize2>
+inline std::size_t BasicUUID<_StringTraitsType>::RFind(const CharType(&str)[_CharArraySize2], std::size_t strOffset) const
+{
+    return _StringTraitsType::RFind(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, str, _CharArraySize2 - 1);
+}
+
+template <typename _StringTraitsType>
+inline std::size_t BasicUUID<_StringTraitsType>::RFind(const CharType* str, std::size_t strOffset, std::size_t strLen) const
+{
+    return _StringTraitsType::RFind(m_uuid, std::extent<decltype(m_uuid)>::value, strOffset, str, strLen);
+}
+
+template <typename _StringTraitsType>
+inline const typename BasicUUID<_StringTraitsType>::CharType* BasicUUID<_StringTraitsType>::CStr() const noexcept
+{
+    return m_uuid;
+}
+
+template <typename _StringTraitsType>
+inline const typename BasicUUID<_StringTraitsType>::CharType* BasicUUID<_StringTraitsType>::Data() const noexcept
+{
+    return m_uuid;
+}
+
+template <typename _StringTraitsType>
+constexpr std::size_t BasicUUID<_StringTraitsType>::Length() const noexcept
+{
+    return std::extent<decltype(m_uuid)>::value;
+}
+
+template <typename _StringTraitsType>
+inline typename BasicUUID<_StringTraitsType>::ConstIteratorType BasicUUID<_StringTraitsType>::cbegin() const noexcept
+{
+    return m_uuid;
+}
+
+template <typename _StringTraitsType>
+inline typename BasicUUID<_StringTraitsType>::ConstIteratorType BasicUUID<_StringTraitsType>::cend() const noexcept
+{
+    return m_uuid + std::extent<decltype(m_uuid)>::value;
+}
+
+template <typename _StringTraitsType>
+inline typename BasicUUID<_StringTraitsType>::ConstReverseIteratorType BasicUUID<_StringTraitsType>::crbegin() const noexcept
+{
+    return ConstReverseIteratorType(m_uuid + std::extent<decltype(m_uuid)>::value);
+}
+
+template <typename _StringTraitsType>
+inline typename BasicUUID<_StringTraitsType>::ConstReverseIteratorType BasicUUID<_StringTraitsType>::crend() const noexcept
+{
+    return ConstReverseIteratorType(m_uuid);
+}
+
+template <typename _StringTraitsType>
+inline const typename BasicUUID<_StringTraitsType>::CharType& BasicUUID<_StringTraitsType>::At(std::size_t index) const
+{
+    return _StringTraitsType::At(m_uuid, std::extent<decltype(m_uuid)>::value, index);
 }
 
 } /* namespace hash */
