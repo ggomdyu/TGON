@@ -15,7 +15,7 @@ namespace
 
 Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
 {
-    /*static*/ constexpr ScreenOrientation nativeDisplayOrientationConversionTable[4]
+    static constexpr const ScreenOrientation nativeDisplayOrientationConversionTable[4]
     {
         ScreenOrientation::Landscape, // 0
         ScreenOrientation::Portrait, // 1
@@ -26,7 +26,8 @@ Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
         dm.dmPelsHeight,
         static_cast<int16_t>(dm.dmBitsPerPel),
         static_cast<int16_t>(dm.dmDisplayFrequency),
-        nativeDisplayOrientationConversionTable[dm.dmDisplayOrientation]
+        nativeDisplayOrientationConversionTable[dm.dmDisplayOrientation],
+        false
     );
 }
 
