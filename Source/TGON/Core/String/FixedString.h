@@ -588,7 +588,7 @@ inline _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline const _CharType BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
+inline const _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
 {
     return _StringTraitsType::At(m_str, m_strLen, index);
 }
