@@ -83,6 +83,8 @@ protected:
     static int32_t Compare(const _CharType* lhsStr, std::size_t lhsStrLen, const _CharType* rhsStr, std::size_t rhsStrLen);
 
     static _CharType& At(_CharType* srcStr, std::size_t srcStrLen, std::size_t index);
+    
+    static const _CharType& At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index);
 
     static std::size_t Length(const _CharType* srcStr);
 
@@ -202,6 +204,14 @@ inline _CharType& StringTraits<_CharType>::At(_CharType* srcStr, std::size_t src
     return srcStr[index];
 }
 
+template<typename _CharType>
+inline const _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index)
+{
+    assert(index <= srcStrLen && "String index out of range!");
+
+    return srcStr[index];
+}
+    
 template<typename _CharType>
 inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
 {
