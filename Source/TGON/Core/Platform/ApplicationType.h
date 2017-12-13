@@ -13,40 +13,6 @@ namespace tgon
 namespace platform
 {
 
-struct AppMessage
-{
-public:
-    constexpr AppMessage(void* rawMsg) noexcept;
-    constexpr AppMessage(void* rawMsg, void* param1) noexcept;
-    constexpr AppMessage(void* rawMsg, void* param1, void* param2) noexcept;
-
-public:
-    void* rawMsg;
-    void* param1;
-    void* param2;
-};
-
-constexpr AppMessage::AppMessage(void* rawMsg) noexcept :
-    rawMsg(rawMsg),
-    param1(nullptr),
-    param2(nullptr)
-{
-}
-
-constexpr AppMessage::AppMessage(void* rawMsg, void* param1) noexcept :
-    rawMsg(rawMsg),
-    param1(param1),
-    param2(nullptr)
-{
-}
-
-constexpr AppMessage::AppMessage(void* rawMsg, void* param1, void* param2) noexcept :
-    rawMsg(rawMsg),
-    param1(param1),
-    param2(param2)
-{
-}
-
 enum class MessageBoxIconType
 {
     Informational = 0,
