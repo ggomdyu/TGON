@@ -22,6 +22,7 @@ class TGON_API BaseRHI
     /* @section Public constructor */
 public:
     BaseRHI() = default;
+    virtual ~BaseRHI() = default;
 
     /* @section Public method */
 public:

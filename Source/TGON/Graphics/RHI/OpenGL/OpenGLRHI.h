@@ -24,6 +24,7 @@ class OpenGLRHI :
 /* @section Public constructor */
 public:
     explicit OpenGLRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
+    virtual ~OpenGLRHI() = default;
 
 /* @section Public method */
 public:
