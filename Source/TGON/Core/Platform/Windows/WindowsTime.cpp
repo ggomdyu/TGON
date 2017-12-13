@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.pch"
 #include "../Time.h"
+#include "../TimeType.h"
 
 #ifndef NOMINMAX
 #   define NOMINMAX
