@@ -8,8 +8,6 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "TimeType.h"
-
 namespace tgon
 {
 namespace platform
@@ -18,10 +16,10 @@ namespace platform
 TGON_API int64_t GetTickCount();
 
 /* @return  The DateTime in UTC time */
-TGON_API DateTime GetSystemTime();
+TGON_API struct DateTime GetSystemTime();
 
 /* @return  The DateTime in Local time */
-TGON_API DateTime GetLocalTime();
+TGON_API struct DateTime GetLocalTime();
 
 } /* namespace platform */
 } /* namespace tgon */
