@@ -27,6 +27,5 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLContext.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLRHIUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHI.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHIFwd.h" />
   </ItemGroup>
 </Project>

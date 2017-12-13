@@ -63,5 +63,8 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsDebug.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

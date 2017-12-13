@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <boost/predef/os.h>
 #include <cstdint>
 
 namespace tgon 

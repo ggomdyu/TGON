@@ -2,16 +2,13 @@
  * @filename    Screen.h
  * @author      ggomdyu
  * @since       08/06/2017
- * @brief       Set of Plaform-agnostic Screen interface.
+ * @brief       Set of Plaform-agnostic Screen interfaces.
  */
 
 #pragma once
-#include <cstddef>
-#include <cstdint>
 #include <vector>
 
-#include "Core/Platform/Config.h"
-
+#include "Config.h"
 #include "ScreenType.h"
 
 namespace tgon
@@ -26,7 +23,7 @@ namespace platform
 TGON_API Screen GetPrimaryScreen();
 
 /* @brief   Returns all detected screen informations.*/
-TGON_API std::vector<Screen> GetAllScreen();
+TGON_API std::vector<Screen> GetAllScreens();
 
 } /* namespace platform */
 } /* namespace tgon */

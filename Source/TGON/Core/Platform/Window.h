@@ -2,7 +2,7 @@
  * @filename    Window.h
  * @author      ggomdyu
  * @since       01/09/2016
- * @brief       Set of Platform-agnostic Window interface.
+ * @brief       The platform-agnostic Window class.
  */
 
 #pragma once
@@ -20,7 +20,7 @@
 #elif BOOST_OS_IOS
 #endif
 
-#include "Core/Platform/Config.h"
+#include "Config.h"
 
 #if BOOST_OS_MACOS
 @class NSWindow;

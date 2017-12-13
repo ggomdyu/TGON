@@ -5,10 +5,7 @@
  */
 
 #pragma once
-#include <string>
-#include <type_traits>
-
-#include "Core/Platform/Config.h"
+#include <cstdint>
 
 namespace tgon
 {

@@ -13,12 +13,12 @@ namespace platform
 namespace
 {
 
-Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
+Screen ConvertDEVMODEToScreen(const DEVMODE& dm) noexcept
 {
-    static constexpr const ScreenOrientation nativeDisplayOrientationConversionTable[4]
+    static constexpr const ScreenOrientation nativeScreenOrientationTable[4]
     {
-        ScreenOrientation::Landscape, // 0
-        ScreenOrientation::Portrait, // 1
+        ScreenOrientation::Landscape, // DMDO_DEFAULT
+        ScreenOrientation::Portrait,
     };
 
     return Screen(
@@ -26,12 +26,12 @@ Screen ConvertDEVMODEToScreen(const DEVMODE& dm)
         dm.dmPelsHeight,
         static_cast<int16_t>(dm.dmBitsPerPel),
         static_cast<int16_t>(dm.dmDisplayFrequency),
-        nativeDisplayOrientationConversionTable[dm.dmDisplayOrientation],
+        nativeScreenOrientationTable[dm.dmDisplayOrientation],
         false
     );
 }
 
-}
+} /* namespace */
 
 //bool WindowsScreen::SetFullScreen(bool setFullScreen, const WindowsWindow& window)
 //{
@@ -60,55 +60,47 @@ int32_t GetMonitorCount()
     return GetSystemMetrics(SM_CMONITORS);
 }
 
-TGON_API Screen GetMainScreen()
+TGON_API Screen GetPrimaryScreen()
 {
-    DEVMODE dm {};
-    dm.dmSize = sizeof(DEVMODE);
+    DEVMODE deviceMode {};
+    deviceMode.dmSize = sizeof(DEVMODE);
+    EnumDisplaySettingsW(nullptr, ENUM_CURRENT_SETTINGS, &deviceMode);
 
-    EnumDisplaySettingsW(NULL, ENUM_CURRENT_SETTINGS, &dm);
-
-    return ConvertDEVMODEToScreen(dm);
+    return ConvertDEVMODEToScreen(deviceMode);
 }
 
-//std::vector<Screen> GetAllScreen()
-//{
-//    std::vector<Screen> screens;
-//
-//    DISPLAY_DEVICE displayDevice {};
-//    displayDevice.cb = sizeof(DISPLAY_DEVICE);
-//
-//    DWORD deviceIndex = 0;
-//    while (EnumDisplayDevices(NULL, deviceIndex++, &displayDevice, 0) == TRUE)
-//    {
-//        DISPLAY_DEVICE displayMonitorDevice {};
-//        displayMonitorDevice.cb = sizeof(DISPLAY_DEVICE);
-//
-//        // Iterate all monitor devices.
-//        DWORD monitorDeviceIndex = 0;
-//        while (EnumDisplayDevices(displayDevice.DeviceName, monitorDeviceIndex++, &displayMonitorDevice, 0) == TRUE)
-//        {
-//            if ((displayMonitorDevice.StateFlags & DISPLAY_DEVICE_ACTIVE) == false)
-//            {
-//                continue;
-//            }
-//
-//            DEVMODE dm{};
-//            dm.dmSize = sizeof(DEVMODE);
-//
-//            EnumDisplaySettingsW(displayMonitorDevice.DeviceName, ENUM_CURRENT_SETTINGS, &dm);
-//
-//            screens.emplace_back(
-//                dm.dmPelsWidth,
-//                dm.dmPelsHeight,
-//                dm.dmBitsPerPel,
-//                dm.dmDisplayFrequency,
-//                ConvertNativeToScreenOrientation(dm)
-//            );
-//        }
-//    }
-//
-//    return screens;
-//}
+std::vector<Screen> GetAllScreen()
+{
+    std::vector<Screen> screens;
+
+    DWORD deviceIndex = 0;
+
+    DISPLAY_DEVICE dd {};
+    dd.cb = sizeof(DISPLAY_DEVICE);
+    while (EnumDisplayDevices(NULL, deviceIndex++, &dd, 0) == TRUE)
+    {
+        DISPLAY_DEVICE displayMonitorDevice {};
+        displayMonitorDevice.cb = sizeof(DISPLAY_DEVICE);
+
+        // Iterate all monitor devices.
+        DWORD monitorDeviceIndex = 0;
+        while (EnumDisplayDevices(dd.DeviceName, monitorDeviceIndex++, &displayMonitorDevice, 0) == TRUE)
+        {
+            if ((displayMonitorDevice.StateFlags & DISPLAY_DEVICE_ACTIVE) == false)
+            {
+                continue;
+            }
+
+            DEVMODE dm {};
+            dm.dmSize = sizeof(DEVMODE);
+            EnumDisplaySettingsW(displayMonitorDevice.DeviceName, ENUM_CURRENT_SETTINGS, &dm);
+
+            screens.push_back(ConvertDEVMODEToScreen(dm));
+        }
+    }
+
+    return screens;
+}
 
 } /* namespace platform */
 } /* namespace tgon */

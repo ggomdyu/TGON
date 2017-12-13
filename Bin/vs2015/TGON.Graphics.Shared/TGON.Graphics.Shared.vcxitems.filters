@@ -44,9 +44,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLRHIUtility.h">
       <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHIFwd.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLContext.h">
       <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClInclude>

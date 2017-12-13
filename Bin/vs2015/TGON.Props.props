@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_PropertySheetDisplayName>TGON.BasicProperty</_PropertySheetDisplayName>
+    <_PropertySheetDisplayName>TGON.Props</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\TGON;$(DXSDK_DIR)\Include;D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Source\ThirdParty\icu4c-59_1-src\icu\source\common;$(IncludePath)</IncludePath>

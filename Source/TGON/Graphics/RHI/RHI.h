@@ -7,14 +7,19 @@
 #pragma once
 #include <memory>
 
-#include "RHIFwd.h"
-
 namespace tgon
 {
+namespace platform
+{
+
+class Window;
+
+} /* namespace platform */
+
 namespace rhi
 {
 
-std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode);
+std::unique_ptr<class BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const struct VideoMode& videoMode);
 
 } /* namespace rhi */
 } /* namespace tgon */

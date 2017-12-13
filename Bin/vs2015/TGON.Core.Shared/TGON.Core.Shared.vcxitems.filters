@@ -16,9 +16,6 @@
     <Filter Include="Source\Core\Platform">
       <UniqueIdentifier>{a69add80-f4d6-44d5-8180-bd4a49c68348}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\XML">
-      <UniqueIdentifier>{d92b6582-fc44-4cc1-b655-6e0c6a962fa8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Log">
       <UniqueIdentifier>{83402c76-8909-470a-a7f4-ddf8789f38cc}</UniqueIdentifier>
     </Filter>
@@ -59,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp">
       <Filter>Source\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.cpp">
+      <Filter>Source\Core\File</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\UUID.h">
       <Filter>Source\Core\Hash</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Debug.h">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.h">
+      <Filter>Source\Core\File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,11 +2,11 @@
  * @filename    Time.h
  * @author      ggomdyu
  * @since       05/15/2016
- * @brief       Set of Platform-agnostic Time interface.
+ * @brief       Set of Platform-agnostic Time interfaces.
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
+#include "Config.h"
 
 namespace tgon
 {

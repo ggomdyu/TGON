@@ -13,13 +13,6 @@ namespace tgon
 namespace platform
 {
 
-struct AppMessage
-{
-    void* rawMsg;
-    void* param1;
-    void* param2;
-};
-
 enum class MessageBoxIconType
 {
     Informational = 0,

@@ -10,7 +10,7 @@
 #include <memory>
 #include <type_traits>
 
-#include "Core/Platform/Config.h"
+#include "Config.h"
 
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\

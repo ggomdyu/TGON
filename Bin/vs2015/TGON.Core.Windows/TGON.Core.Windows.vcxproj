@@ -60,19 +60,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON.BasicProperty.props" />
+    <Import Project="..\TGON.Props.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON.BasicProperty.props" />
+    <Import Project="..\TGON.Props.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON.BasicProperty.props" />
+    <Import Project="..\TGON.Props.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\TGON.BasicProperty.props" />
+    <Import Project="..\TGON.Props.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsDebug.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp" />
