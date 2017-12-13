@@ -2,7 +2,7 @@
  * @filename    Application.h
  * @author      ggomdyu
  * @since       04/01/2016
- * @brief       Set of Plaform-agnostic Application interface.
+ * @brief       The abstracted application class which is Plaform-agnostic.
  */
 
 #pragma once
