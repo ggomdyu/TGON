@@ -23,22 +23,22 @@ struct BatteryState
 {
 /* @section Public constructor */
 public:
-	constexpr BatteryState(bool hasBattery, bool isCharging, int16_t batteryLifePercent) noexcept;
+    constexpr BatteryState(bool hasBattery, bool isCharging, int16_t batteryLifePercent) noexcept;
 
 /* @section	Public variable */
 public:
-    /* @brief   Records whether the current device has baterry. */
-	const bool hasBattery;
+    /* @brief   Records whether the current device has battery. */
+    const bool hasBattery;
 
-    /* @brief   Records whether the baterry is charging. */
+    /* @brief   Records whether the battery is charging. */
     const bool isCharging;
 
     /* @brief   Records the battery percentage between 0 and 100. or -1 if status is unknown. */
-	const int16_t batteryPercentage;
+    const int16_t batteryPercentage;
 };
 
 constexpr BatteryState::BatteryState(bool hasBattery, bool isCharging, int16_t batteryPercentage) noexcept :
-	hasBattery(hasBattery),
+    hasBattery(hasBattery),
     isCharging(isCharging),
     batteryPercentage(hasBattery ? batteryPercentage : -1)
 {
