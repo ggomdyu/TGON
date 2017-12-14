@@ -20,7 +20,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <opengl/GL.h>
+#include <gl/GL.h>
 
 using namespace tgon;
 using namespace tgon::string;
@@ -56,11 +56,11 @@ public:
             return videoMode;
         }())
     {
-    };
+    }
 
     virtual void OnWillLaunch() override
     {
-        //GetRHI()->SetClearColor(math::Color4f(0.3f, 0.4f, 0.6f, 1.0f));
+        GetRHI()->SetClearColor(math::Color4f(0.3f, 0.4f, 0.6f, 1.0f));
     }
 
     virtual void OnDidLaunch() override
@@ -69,7 +69,6 @@ public:
     
     virtual void OnUpdate() override
     {
-/*
         static float x = 0.0f;
         static float y = 0.0f;
 
@@ -84,7 +83,7 @@ public:
         glEnd();
         glFinish();
 
-        GetRHI()->SwapBuffer();*/
+        GetRHI()->SwapBuffer();
     }
 };
 

@@ -39,11 +39,11 @@ class TGON_API Window :
 public:
     Window() = default;
     explicit Window(const struct WindowStyle& windowStyle);
-    Window(Window&& rhs);
+    Window(Window&& rhs) noexcept;
 
 /* @section Public operator */
 public:
-    Window& operator=(Window&& rhs);
+    Window& operator=(Window&& rhs) noexcept;
 
 /* @section Public destructor */
 public:
