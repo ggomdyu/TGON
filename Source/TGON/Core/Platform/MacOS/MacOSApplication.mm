@@ -33,7 +33,7 @@ void Application::MessageLoop()
                                                inMode:NSDefaultRunLoopMode
                                               dequeue:YES]) != nil)
         {
-            this->OnHandleMessage(AppMessage((__bridge void*)message));
+            this->OnHandleMessage(message);
         }
 
         this->OnUpdate();
@@ -60,10 +60,8 @@ void Application::Terminate()
     [NSApp terminate:nil];
 }
 
-void Application::OnHandleMessage(const AppMessage& appMsg)
+void Application::OnHandleMessage(NSEvent* message)
 {
-    NSEvent* message = (__bridge NSEvent*)appMsg.rawMsg;
-
     NSEventType messageType = [message type];
     switch (messageType)
     {

@@ -6,7 +6,14 @@
  */
 
 #pragma once
+#if BOOST_OS_WINDOWS
+#   ifndef WIN32_LEAN_AND_MEAN
+#       define WIN32_LEAN_AND_MEAN
+#   endif
+#   include <Windows.h>
+#endif
 #include <boost/noncopyable.hpp>
+#include <boost/predef/os.h>
 #include <memory>
 #include <type_traits>
 
@@ -24,6 +31,10 @@
     }\
     } /* namespace platform */\
     } /* namespace tgon */
+
+#if BOOST_OS_MACOS
+@class NSEvent;
+#endif
 
 namespace tgon
 {
@@ -55,7 +66,11 @@ public:
     void ShowMessageBox(const char* title, const char* message) const;
     void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const;
 
-    void OnHandleMessage(const struct AppMessage& appMsg);
+#if BOOST_OS_WINDOWS
+    static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
+#elif BOOST_OS_MACOS
+    void OnHandleMessage(NSEvent* message);
+#endif
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}

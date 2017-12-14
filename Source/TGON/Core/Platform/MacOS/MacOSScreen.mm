@@ -17,15 +17,16 @@ namespace
 Screen ConvertNSScreenToScreen(NSScreen* nativeScreen)
 {
     return Screen(
-        nativeScreen.frame.size.width, // width
-        nativeScreen.frame.size.height, // height
-        [[[nativeScreen deviceDescription] objectForKey:@"NSDeviceBitsPerSample"] integerValue] // bitsPerPixel
-        ,0,
-        ScreenOrientation::Landscape // orientation
+        nativeScreen.frame.size.width,
+        nativeScreen.frame.size.height,
+        [[[nativeScreen deviceDescription] objectForKey:@"NSDeviceBitsPerSample"] integerValue],
+        0,
+        ScreenOrientation::Landscape,
+        false
     );
 }
 
-}
+} /* namespace */
 
 Screen GetPrimaryScreen()
 {

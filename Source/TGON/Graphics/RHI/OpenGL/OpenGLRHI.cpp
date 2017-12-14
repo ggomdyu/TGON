@@ -13,13 +13,10 @@
 #endif
 
 #include "OpenGLRHIUtility.h"
-#include "OpenGLContext.h"
 
 namespace tgon
 {
 namespace rhi
-{
-namespace gl
 {
 
 OpenGLRHI::OpenGLRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
@@ -64,9 +61,8 @@ void OpenGLRHI::ClearColorDepthBuffer()
 
 void OpenGLRHI::SwapBuffer()
 {
-    ::SwapBuffers(m_context.dcHandle);
+//    ::SwapBuffers(m_context.dcHandle);
 }
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */

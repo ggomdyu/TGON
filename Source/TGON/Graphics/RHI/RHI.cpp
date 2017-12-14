@@ -19,7 +19,7 @@ std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window
     switch (videoMode.graphicsSDK)
     {
     case GraphicsSDK::OpenGL:
-        return std::make_unique<gl::OpenGLRHI>(window, videoMode);
+        return std::make_unique<OpenGLRHI>(window, videoMode);
 
     case GraphicsSDK::Metal:
         return nullptr;

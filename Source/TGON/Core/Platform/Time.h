@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include <cstdint>
+
 #include "Config.h"
 
 namespace tgon

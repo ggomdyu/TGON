@@ -12,8 +12,6 @@ namespace tgon
 {
 namespace rhi
 {
-namespace gl
-{
 namespace
 {
 
@@ -59,7 +57,7 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode)
+OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode)
 {
     // Find a suitable pixel format.
     {
@@ -92,6 +90,5 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, co
 
 OpenGLContext::~OpenGLContext() = default;
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */

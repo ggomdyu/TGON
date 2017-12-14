@@ -14,17 +14,6 @@ namespace platform
 namespace
 {
 
-LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    auto extraMemAsWindow = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
-    if (extraMemAsWindow)
-    {
-        return extraMemAsWindow->OnHandleMessage(wndHandle, message, wParam, lParam);
-    }
-
-    return DefWindowProc(wndHandle, message, wParam, lParam);
-}
-
 /* @brief   Register WNDCLASS which has Default window property given by engine. */
 bool RegisterWindowClass()
 {
@@ -84,6 +73,18 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     // todo: 나중에 파라미터로 utf8을 받게한 뒤 utf16으로 변환해서, MessageBoxW함수로 처리하도록 해야할 듯.
     // 일단 icu 라이브러리 붙이는게 시급함.
     ::MessageBoxA(nullptr, message, title, nativeMessageBoxTypeArray[static_cast<int>(messageBoxType)] | MB_OK);
+}
+
+
+LRESULT CALLBACK Application::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    auto extraMemAsWindow = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+    if (extraMemAsWindow)
+    {
+        return extraMemAsWindow->OnHandleMessage(wndHandle, message, wParam, lParam);
+    }
+
+    return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
 void Application::Terminate()

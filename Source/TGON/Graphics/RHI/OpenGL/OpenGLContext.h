@@ -6,6 +6,7 @@
 
 #pragma once
 #include <memory>
+#include <boost/predef/os.h>
 
 #ifdef _MSC_VER
 #   ifndef WIN32_LEAN_AND_MEAN
@@ -14,24 +15,35 @@
 #   endif
 #endif
 
-#include "OpenGLContextFwd.h"
+#if BOOST_OS_WINDOWS
+#elif BOOST_OS_MACOS
+@class NSOpenGLPixelFormat;
+@class NSOpenGLContext;
+#elif BOOST_OS_ANDROID
+#elif BOOST_OS_IOS
+#endif
 
 namespace tgon
 {
-namespace rhi
+namespace platform
 {
-namespace gl
+
+class Window;
+
+} /* namespace platform */
+
+namespace rhi
 {
 
 struct OpenGLContext
 {
 public:
-    OpenGLContext(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<class platform::Window>& window, const struct VideoMode& videoMode);
     ~OpenGLContext();
 
 /* @section Public variable */
 public:
-    std::shared_ptr<platform::Window> window;
+    std::shared_ptr<class platform::Window> window;
 
 #if BOOST_OS_WINDOWS
     HGLRC context;
@@ -45,6 +57,5 @@ public:
 #endif
 };
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */

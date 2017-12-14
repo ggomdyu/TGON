@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.pch"
 #include "../Time.h"
+#include "../TimeType.h"
 
 #include <mach/mach_time.h>
 #include <ctime>

@@ -23,8 +23,6 @@ namespace tgon
 {
 namespace rhi
 {
-namespace gl
-{
 
 inline GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType)
 {
@@ -64,6 +62,5 @@ inline GLenum ConvertCullModeToNative(CullMode cullMode)
     return nativeCullModeTable[static_cast<GLenum>(cullMode)];
 }
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */

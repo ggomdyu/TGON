@@ -7,10 +7,23 @@
 #pragma once
 #include "Core/Platform/Application.h"
 
-#include "GameApplicationFwd.h"
-
 namespace tgon
 {
+namespace platform
+{
+
+struct WindowStyle;
+
+} /* namespace platform */
+
+namespace rhi
+{
+
+struct VideoMode;
+class BaseRHI;
+
+} /* namespace rhi */
+
 namespace engine
 {
 

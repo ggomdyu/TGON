@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FD0E7A9C1FD72C2800A3B562 /* GameApplication.cpp in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */; };
 		FD0E7A9D1FD72C2800A3B562 /* GameApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7A981FD64F7A00A3B562 /* GameApplication.h */; };
-		FD0E7A9E1FD72C2800A3B562 /* GameApplicationFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7A991FD64F7A00A3B562 /* GameApplicationFwd.h */; };
 		FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */; };
 		FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */; };
 		FD1562DB1FDA396E0057C54E /* RHI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1562DA1FDA396E0057C54E /* RHI.cpp */; };
@@ -50,7 +49,6 @@
 		FD7EA5231FAEE4DC008DF72F /* BaseRHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BBE1FACC3DE0050CCE6 /* BaseRHI.h */; };
 		FD7EA5241FAEE4DC008DF72F /* BaseRHIType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC61FACC5BC0050CCE6 /* BaseRHIType.h */; };
 		FD7EA5261FAEE4DC008DF72F /* OpenGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */; };
-		FD7EA5271FAEE4DC008DF72F /* OpenGLContextFwd.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BCD1FADFBA40050CCE6 /* OpenGLContextFwd.h */; };
 		FD7EA5281FAEE4DC008DF72F /* OpenGLRHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */; };
 		FD7EA5291FAEE4DC008DF72F /* RHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC41FACC3DE0050CCE6 /* RHI.h */; };
 		FD7EA5321FAF6D86008DF72F /* OpenGLRHI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */; };
@@ -84,10 +82,7 @@
 /* Begin PBXFileReference section */
 		FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GameApplication.cpp; sourceTree = "<group>"; };
 		FD0E7A981FD64F7A00A3B562 /* GameApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplication.h; sourceTree = "<group>"; };
-		FD0E7A991FD64F7A00A3B562 /* GameApplicationFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplicationFwd.h; sourceTree = "<group>"; };
 		FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.cpp; sourceTree = "<group>"; };
-		FD1562D81FDA39600057C54E /* OpenGLRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIFwd.h; sourceTree = "<group>"; };
-		FD1562D91FDA396E0057C54E /* RHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RHIFwd.h; sourceTree = "<group>"; };
 		FD1562DA1FDA396E0057C54E /* RHI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RHI.cpp; sourceTree = "<group>"; };
 		FD2C7F651F84C9F500D4555B /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../Source/TGON/Core/Math/Vector3.cpp; sourceTree = "<group>"; };
 		FD2C7F661F84C9F500D4555B /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../Source/TGON/Core/Math/Vector3.h; sourceTree = "<group>"; };
@@ -125,9 +120,7 @@
 		FD772BC41FACC3DE0050CCE6 /* RHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RHI.h; sourceTree = "<group>"; };
 		FD772BC61FACC5BC0050CCE6 /* BaseRHIType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseRHIType.h; sourceTree = "<group>"; };
 		FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHI.h; sourceTree = "<group>"; };
-		FD772BCD1FADFBA40050CCE6 /* OpenGLContextFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContextFwd.h; sourceTree = "<group>"; };
 		FD772BD21FAE067D0050CCE6 /* UUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UUID.h; path = ../../Source/TGON/Core/Hash/UUID.h; sourceTree = "<group>"; };
-		FD7EA52B1FAEF62F008DF72F /* OpenGLRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIFwd.h; sourceTree = "<group>"; };
 		FD7EA52C1FAF403B008DF72F /* BaseRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseRHIFwd.h; sourceTree = "<group>"; };
 		FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLRHI.cpp; sourceTree = "<group>"; };
 		FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIUtility.h; sourceTree = "<group>"; };
@@ -214,7 +207,6 @@
 			children = (
 				FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */,
 				FD0E7A981FD64F7A00A3B562 /* GameApplication.h */,
-				FD0E7A991FD64F7A00A3B562 /* GameApplicationFwd.h */,
 			);
 			name = Engine;
 			path = ../../Source/TGON/Game/Engine;
@@ -259,7 +251,6 @@
 				FD772BC01FACC3DE0050CCE6 /* OpenGL */,
 				FD772BC41FACC3DE0050CCE6 /* RHI.h */,
 				FD1562DA1FDA396E0057C54E /* RHI.cpp */,
-				FD1562D91FDA396E0057C54E /* RHIFwd.h */,
 			);
 			name = RHI;
 			path = ../../Source/TGON/Graphics/RHI;
@@ -280,12 +271,9 @@
 			children = (
 				FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */,
 				FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */,
-				FD772BCD1FADFBA40050CCE6 /* OpenGLContextFwd.h */,
 				FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */,
 				FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */,
-				FD1562D81FDA39600057C54E /* OpenGLRHIFwd.h */,
 				FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */,
-				FD7EA52B1FAEF62F008DF72F /* OpenGLRHIFwd.h */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -515,7 +503,6 @@
 				FD9AED1E1FDBF46A007AE839 /* TextureUtility.h in Headers */,
 				FD0E7A9C1FD72C2800A3B562 /* GameApplication.cpp in Headers */,
 				FD0E7A9D1FD72C2800A3B562 /* GameApplication.h in Headers */,
-				FD0E7A9E1FD72C2800A3B562 /* GameApplicationFwd.h in Headers */,
 				FD7EA5181FAEE4DC008DF72F /* Delegate.h in Headers */,
 				FD7EA5191FAEE4DC008DF72F /* ICloneable.h in Headers */,
 				FD7EA51A1FAEE4DC008DF72F /* IRuntimeObject.h in Headers */,
@@ -525,7 +512,6 @@
 				FD7EA5231FAEE4DC008DF72F /* BaseRHI.h in Headers */,
 				FD7EA5241FAEE4DC008DF72F /* BaseRHIType.h in Headers */,
 				FD7EA5261FAEE4DC008DF72F /* OpenGLContext.h in Headers */,
-				FD7EA5271FAEE4DC008DF72F /* OpenGLContextFwd.h in Headers */,
 				FD7EA5281FAEE4DC008DF72F /* OpenGLRHI.h in Headers */,
 				FD7EA5291FAEE4DC008DF72F /* RHI.h in Headers */,
 				FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */,

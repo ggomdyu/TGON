@@ -15,8 +15,6 @@ namespace tgon
 {
 namespace rhi
 {
-namespace gl
-{
 
 class OpenGLRHI :
     public BaseRHI
@@ -43,6 +41,5 @@ private:
     OpenGLContext m_context;
 };
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */
