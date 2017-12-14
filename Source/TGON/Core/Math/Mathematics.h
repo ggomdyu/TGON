@@ -141,6 +141,12 @@ constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const
 {
     return Max(Min(value, max), min);
 }
+	
+template <typename _ValueType>
+constexpr bool IsPowerOf2(const _ValueType& value) noexcept
+{
+    return value > 0 && !(value & (value - 1));
+}
 
 /**
  * @brief               Perform Linear interpolation.
