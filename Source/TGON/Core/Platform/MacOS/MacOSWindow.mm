@@ -1,5 +1,6 @@
 #import "PrecompiledHeader.pch"
-#import "Window.h"
+#include "../Window.h"
+#include "../WindowType.h"
 
 #import <AppKit/NSWindow.h>
 #import <Cocoa/Cocoa.h>
@@ -22,7 +23,7 @@ Window::Window(const WindowStyle& windowStyle) :
     m_nsWindow.delegate = m_windowDelegate;
 }
 
-Window::Window(Window&& rhs) :
+Window::Window(Window&& rhs) noexcept :
     m_nsWindow(rhs.m_nsWindow),
     m_windowDelegate(rhs.m_windowDelegate)
 {

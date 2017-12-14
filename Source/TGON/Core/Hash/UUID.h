@@ -110,11 +110,12 @@ inline BasicUUID<_StringTraitsType> BasicUUID<_StringTraitsType>::NewUUID()
     RPC_CSTR rawUUIDStr;
     UuidToStringA(&rawUUID, &rawUUIDStr);
     
-    BasicUUID retUUID;
-    memcpy(retUUID.m_uuid, rawUUIDStr, sizeof(decltype(m_uuid[0])) * std::extent<decltype(m_uuid)>::value);
+    BasicUUID ret;
+    memcpy(ret.m_uuid, rawUUIDStr, sizeof(decltype(m_uuid[0])) * std::extent<decltype(m_uuid)>::value);
+
     RpcStringFreeA(&rawUUIDStr);
 
-    return retUUID;
+    return ret;
 #else
     uuid_t uuid;
     uuid_generate_random(uuid);

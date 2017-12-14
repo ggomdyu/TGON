@@ -19,12 +19,30 @@ namespace platform
 {
 
 Window::Window(const WindowStyle& wndStyle) :
-    m_wndHandle(CreateNativeWindow(wndStyle, GetModuleHandle(nullptr), L"TGON"))
+    m_wndHandle(CreateNativeWindow(wndStyle, GetModuleHandle(nullptr), L"TGON")),
+    m_isClosed(false)
 {
     assert(m_wndHandle != nullptr && "Failed to create window.");
 
     // Store this instance's pointer into window's user data storage.
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
+}
+
+Window::Window(Window&& rhs) noexcept :
+    m_wndHandle(rhs.m_wndHandle),
+    m_isClosed(rhs.m_isClosed)
+{
+    rhs.m_wndHandle = nullptr;
+}
+
+Window& Window::operator=(Window&& rhs) noexcept
+{
+    m_wndHandle = rhs.m_wndHandle;
+    m_isClosed = rhs.m_isClosed;
+
+    rhs.m_wndHandle = nullptr;
+
+    return *this;
 }
 
 Window::~Window()
@@ -109,11 +127,6 @@ bool Window::IsMaximized() const
 bool Window::IsTopMost() const
 {
     return false;
-}
-
-bool Window::IsClosed() const noexcept
-{
-    return m_isClosed;
 }
 
 void* Window::GetNativeWindow() noexcept

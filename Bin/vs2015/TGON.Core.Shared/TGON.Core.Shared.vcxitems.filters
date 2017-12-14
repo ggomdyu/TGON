@@ -16,9 +16,6 @@
     <Filter Include="Source\Core\Platform">
       <UniqueIdentifier>{a69add80-f4d6-44d5-8180-bd4a49c68348}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Log">
-      <UniqueIdentifier>{83402c76-8909-470a-a7f4-ddf8789f38cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Hash">
       <UniqueIdentifier>{11ead1b2-c7a0-4dd2-9d30-73fba45d9f75}</UniqueIdentifier>
     </Filter>

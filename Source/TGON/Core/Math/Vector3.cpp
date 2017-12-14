@@ -1,8 +1,6 @@
 #include "PrecompiledHeader.pch"
-
 #include "Vector3.h"
 
-#include "math.h"
 #include "Matrix4x4.h"
 
 namespace tgon
@@ -19,9 +17,10 @@ TGON_API const Vector3 Vector3::Right(1.0f, 0.0f, 0.0f);
 TGON_API const Vector3 Vector3::One(0.0f, 0.0f, 0.0f);
 TGON_API const Vector3 Vector3::Zero(0.0f, 0.0f, 0.0f);
 
+
 //void Vector3::TransformCoord(const Matrix4x4& rhs) noexcept
 //{
-//	// Vector3's w element is '1ㅎ
+//	// Vector3's w element is '1
 //
 //#if TGON_SUPPORT_SSE
 //#else
