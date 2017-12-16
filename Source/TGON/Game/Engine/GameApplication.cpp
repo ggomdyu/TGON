@@ -3,7 +3,7 @@
 
 #include "Graphics/RHI/Base/BaseRHI.h"
 #include "Graphics/RHI/Base/BaseRHIType.h"
-#include "Graphics/RHI/RHI.h"
+#include "Graphics/RHI/RHIUtility.h"
 
 namespace tgon
 {

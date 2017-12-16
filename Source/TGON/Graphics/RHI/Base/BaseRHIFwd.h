@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include "Core/Math/Rect.h"
 
 namespace tgon
 {
@@ -16,7 +17,6 @@ struct Color4f;
 struct Vector2;
 struct Vector3;
 struct Matrix4x4;
-using FRect = BasicRect<float>;
 
 } /* namespace math */
 

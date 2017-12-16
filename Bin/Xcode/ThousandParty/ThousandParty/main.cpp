@@ -20,7 +20,47 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <gl/GL.h>
+#include <opengl/GL.h>
+#include "Graphics/Render/OpenGL/Shader.h"
+#include "Core/Utility/ExpressionTemplate.h"
+
+class V
+{
+public:
+    V(int a, int b, int c)
+    {
+        p[0] = a;
+        p[1] = b;
+        p[2] = c;
+    }
+
+    template <typename F, typename S>
+    V(const tgon::utility::BaseExpression<F, S>& expr)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            p[i] = expr[i];
+        }
+    }
+
+    int& operator[](int index)
+    {
+        return p[index];
+    }
+
+    const int& operator[](int index) const
+    {
+        return p[index];
+    }
+
+    tgon::utility::PlusExpression<V, V> operator+(const V& rhs)
+    {
+        return {*this, rhs};
+    }
+
+private:
+    int p[3];
+};
 
 using namespace tgon;
 using namespace tgon::string;
@@ -56,6 +96,15 @@ public:
             return videoMode;
         }())
     {
+        V v(1, 5 ,6);
+        V v2(1, 53 ,6);
+
+        auto v3 = v + v2 + v2;
+        auto v4 = v3 + v3;
+
+        V v5 = v4;
+
+        int n = 3;
     }
 
     virtual void OnWillLaunch() override

@@ -24,30 +24,58 @@ class Material
 /* @section Public method */
 public:
     virtual void BeginScene() = 0;
-    virtual void Draw(rhi::BaseRHI* rhi) = 0;
-}
+    virtual void Draw(const std::unique_ptr<rhi::BaseRHI>& rhi) = 0;
+};
 
-class TexturedMaterial :
+class ColorMaterial :
     public Material
 {
 public:
-    virtual void BeginScene() override;
-    virtual void Draw(rhi::BaseRHI* rhi) override;
-
-    virtual void SetTexture(const std::shared_ptr<Texture2D>& texture);
-    const std::shared_ptr<Texture2D>& GetTexture() const;
-
-private:
-    std::shared_ptr<Texture2D> m_texture;
+    virtual void BeginScene() override {}
+    virtual void Draw(const std::unique_ptr<rhi::BaseRHI>& rhi) override {}
 };
 
-class AlphaTexturedMaterial :
-    public TexturedMaterial
+class TextureMaterial :
+    public Material
 {
 public:
     virtual void BeginScene() override {}
-    virtual void Draw(rhi::BaseRHI* rhi) override {}
+    virtual void Draw(const std::unique_ptr<rhi::BaseRHI>& rhi) override {}
+
+    virtual void SetTexture(const std::unique_ptr<Texture2D>& texture);
+    const std::unique_ptr<Texture2D>& GetTexture() const;
+
+protected:
+    std::unique_ptr<Texture2D> m_texture;
 };
+
+class DiffuseMaterial :
+    public TextureMaterial
+{
+
+};
+
+//class TexturedMaterial :
+//    public Material
+//{
+//public:
+//    virtual void BeginScene() override;
+//    virtual void Draw(rhi::BaseRHI* rhi) override;
+//
+//    virtual void SetTexture(const std::shared_ptr<Texture2D>& texture);
+//    const std::shared_ptr<Texture2D>& GetTexture() const;
+//
+//private:
+//    std::shared_ptr<Texture2D> m_texture;
+//};
+//
+//class AlphaTexturedMaterial :
+//    public TexturedMaterial
+//{
+//public:
+//    virtual void BeginScene() override {}
+//    virtual void Draw(rhi::BaseRHI* rhi) override {}
+//};
 
 } /* namespace render */
 } /* namespace tgon */

@@ -5,14 +5,16 @@
 // */
 //
 //#pragma once
-//#define TGON_SUPPORT_SSE 1
 //
 //#include <cstdint>
 //#include <cassert>
 //#include <cmath>
 ////#ifdef TGON_SUPPORT_SSE
-//#include <x86intrin.h>
+////#   include <x86intrin.h>
 ////#endif
+//
+//#define TGON_ENABLE_EXPRESSION_TEMPLATE
+//#define TGON_ENABLE_SIMD
 //
 //#include "Core/Platform/Config.h"
 //
@@ -28,13 +30,13 @@
 ///* @section Public constructor */
 //public:
 //    /* @brief   Initializes to Identity matrix. */
-//    Matrix4x4();
+//    constexpr Matrix4x4() noexcept;
 //
 //    /* @brief   Initializes matrix with the specified value. */
-//    Matrix4x4(float m00, float m01, float m02, float m03,
+//    constexpr Matrix4x4(float m00, float m01, float m02, float m03,
 //                        float m10, float m11, float m12, float m13,
 //                        float m20, float m21, float m22, float m23,
-//                        float m30, float m31, float m32, float m33);
+//                        float m30, float m31, float m32, float m33) noexcept;
 //
 ///* @section Public operator */
 //public:
@@ -52,16 +54,18 @@
 //
 ///* @section Public method */
 //public:
-//    static Matrix4x4 Scale(float x, float y, float z);
-//    static Matrix4x4 RotateX(float theta);
-//    static Matrix4x4 RotateY(float theta);
-//    static Matrix4x4 RotateZ(float theta);
-//    static Matrix4x4 Translate(float x, float y, float z);
+//    void Scale(float x, float y, float z) noexcept;
+//    void Translate(float x, float y, float z) noexcept;
+//    void RotateX(float theta);
+//    void RotateY(float theta);
+//    void RotateZ(float theta);
+//    void Rotate(float x, float y, float z);
+//    void Transpose();
+//    void Inverse();
+//
 //    static Matrix4x4 View(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
 //    static Matrix4x4 PerspectiveFovLH(float fovY, float aspect, float nearZ, float farZ);
 //    static Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
-//    static Matrix4x4 Transpose(const Matrix4x4& rhs);
-//    //static Matrix4x4 Inverse(const Matrix4x4& rhs);
 //
 ///* @section Public variable */
 //public:
@@ -75,9 +79,9 @@
 //};
 //
 //Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
-//                               float m10, float m11, float m12, float m13,
-//                               float m20, float m21, float m22, float m23,
-//                               float m30, float m31, float m32, float m33) :
+//                     float m10, float m11, float m12, float m13,
+//                     float m20, float m21, float m22, float m23,
+//                     float m30, float m31, float m32, float m33) :
 //    m00(m00), m01(m01), m02(m02), m03(m03),
 //    m10(m10), m11(m11), m12(m12), m13(m13),
 //    m20(m20), m21(m21), m22(m22), m23(m23),
@@ -174,36 +178,36 @@
 //
 //Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
 //{
-//    const float halfWidth = width * 0.5f;
-//    const float halfHeight = height * 0.5f;
+//    float halfWidth = width * 0.5f;
+//    float halfHeight = height * 0.5f;
 //
 //    return Matrix4x4(
-//                      halfWidth,      0.f,            0.f,            0.f,
-//                      0.f,            -halfHeight,    0.f,            0.f,
-//                      0.f,            0.f,            maxZ - minZ,    0.f,
-//                      x + halfWidth,  y + halfHeight, minZ,           1.f
-//                      );
+//        halfWidth,      0.f,            0.f,            0.f,
+//        0.f,            -halfHeight,    0.f,            0.f,
+//        0.f,            0.f,            maxZ - minZ,    0.f,
+//        x + halfWidth,  y + halfHeight, minZ,           1.f
+//    );
 //}
 //
 //Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& rhs)
 //{
-//    return {
+//    return Matrix4x4(
 //        rhs.m00, rhs.m10, rhs.m20, rhs.m30,
 //        rhs.m01, rhs.m11, rhs.m21, rhs.m31,
 //        rhs.m02, rhs.m12, rhs.m22, rhs.m32,
 //        rhs.m03, rhs.m13, rhs.m23, rhs.m33
-//    };
+//    );
 //}
 //
 //
 ////#if TGON_SUPPORT_SSE 1
-//inline Matrix4x4::Matrix4x4()
-//{
-//    _mm_storeu_ps(&m00, _mm_set_ps(0.0f, 0.0f, 0.0f, 1.0f));
-//    _mm_storeu_ps(&m10, _mm_set_ps(0.0f, 0.0f, 1.0f, 0.0f));
-//    _mm_storeu_ps(&m20, _mm_set_ps(0.0f, 1.0f, 0.0f, 0.0f));
-//    _mm_storeu_ps(&m30, _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f));
-//}
+////inline Matrix4x4::Matrix4x4()
+////{
+////    _mm_storeu_ps(&m00, _mm_set_ps(0.0f, 0.0f, 0.0f, 1.0f));
+////    _mm_storeu_ps(&m10, _mm_set_ps(0.0f, 0.0f, 1.0f, 0.0f));
+////    _mm_storeu_ps(&m20, _mm_set_ps(0.0f, 1.0f, 0.0f, 0.0f));
+////    _mm_storeu_ps(&m30, _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f));
+////}
 ////#else
 ////inline Matrix4x4::Matrix4x4() :
 ////    m00(1.0f), m01(0.0f), m02(0.0f), m03(0.0f),
@@ -315,14 +319,14 @@
 //    };
 //}
 //
-//inline Matrix4x4 Matrix4x4::Scale(float x, float y, float z)
+//constexpr Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
 //{
-//    return{
-//        x,   0.f, 0.f, 0.f,
-//        0.f, y,      0.f, 0.f,
-//        0.f, 0.f, z,   0.f,
-//        0.f, 0.f, 0.f, 1.f
-//    };
+//    return Matrix4x4(
+//        x,      0.f,    0.f,    0.f,
+//        0.f,    y,      0.f,    0.f,
+//        0.f,    0.f,    z,      0.f,
+//        0.f,    0.f,    0.f,    1.f
+//    );
 //}
 //
 //} /* namespace math */

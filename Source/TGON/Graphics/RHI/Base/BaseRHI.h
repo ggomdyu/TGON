@@ -7,9 +7,6 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
-#include "Core/Math/Rect.h"
-#include "Core/Math/Vector3.h"
-#include "Core/Math/Color.h"
 
 #include "BaseRHIFwd.h"
 

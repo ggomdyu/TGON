@@ -2,4 +2,38 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThousandParty/ThousandParty/main.cpp"
+            timestampString = "535059309.538043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "engine::GameApplication([&amp;]() { platform::WindowStyle windowStyle; { windowStyle.width = 500; windowStyle.height = 500; windowStyle.showMiddle = true; windowStyle.title = u8&quot;Hallo?&quot;; windowStyle.enableSystemButton = true; } return windowStyle; }(), [&amp;]() { rhi::VideoMode videoMode; { videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL; videoMode.enableHardwareAccelerate = true; videoMode.enableMultiSampling = true; videoMode.enableDoubleBuffer = true; } return videoMode; }())"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThousandParty/ThousandParty/main.cpp"
+            timestampString = "535059309.540194"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "engine::GameApplication([&amp;]() { platform::WindowStyle windowStyle; { windowStyle.width = 500; windowStyle.height = 500; windowStyle.showMiddle = true; windowStyle.title = u8&quot;Hallo?&quot;; windowStyle.enableSystemButton = true; } return windowStyle; }(), [&amp;]() { rhi::VideoMode videoMode; { videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL; videoMode.enableHardwareAccelerate = true; videoMode.enableMultiSampling = true; videoMode.enableDoubleBuffer = true; } return videoMode; }())"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

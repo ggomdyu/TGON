@@ -1,5 +1,5 @@
 /**
- * @filename    Math.h
+ * @filename    Mathematics.h
  * @author      ggomdyu
  * @since       03/14/2016
  */
@@ -14,9 +14,10 @@ namespace tgon
 namespace math
 {
 
-constexpr float Pi = 3.14159265358f;
-constexpr float Deg2Rad = Pi / 180;
-constexpr float Rad2Deg = 180 / Pi;
+constexpr const float Pi = 3.14159265358f;
+
+constexpr const float Deg2Rad = Pi / 180;
+constexpr const float Rad2Deg = 180 / Pi;
 
 /**
  * @brief   Get the greatest common divisor using Euclidean algorithm.
@@ -148,6 +149,30 @@ constexpr bool IsPowerOf2(const _ValueType& value) noexcept
     return value > 0 && !(value & (value - 1));
 }
 
+template <typename _ValueType>
+constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
+{
+    if (value <= 1)
+    {
+        return false;
+    }
+
+    if (value % 2 == 0)
+    {
+        return (value == 2);
+    }
+
+    for (int i = 3; i < value; ++i)
+    {
+        if (value % i == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 /**
  * @brief               Perform Linear interpolation.
  * @param [in] from     Interpolation start value
@@ -161,11 +186,11 @@ constexpr const _ValueType Lerp(const _ValueType& from, const _ValueType& to, fl
     return from + ((to - from) * time);
 }
 
-//constexpr float Smoothstep(float from, float to, float time) noexcept
-//{
-//    time = Clamp((time - from) / (to - from), 0.0f, 1.0f);
-//	return time * time * (3.0f - (2.0f * time));
-//}
+constexpr float Smoothstep(float from, float to, float time) noexcept
+{
+    float t = Clamp((time - from) / (to - from), 0.0f, 1.0f);
+    return t * t * (3.0f - (2.0f * t));
+}
 
 /**
  * @brief               Two-dimensional bezier curve

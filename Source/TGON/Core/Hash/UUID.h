@@ -31,13 +31,9 @@ struct BasicUUID :
 /* @section Public type */
 public:
     using CharType = char;
-    using ReferenceType = CharType&;
     using ConstReferenceType = const CharType&;
-    using IteratorType = CharType*;
     using ConstIteratorType = const CharType*;
-    using PointerType = CharType*;
     using ConstPointerType = const CharType*;
-    using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
 /* section  Private constructor */

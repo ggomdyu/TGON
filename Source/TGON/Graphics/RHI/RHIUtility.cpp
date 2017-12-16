@@ -1,7 +1,9 @@
 #include "PrecompiledHeader.pch"
-#include "RHI.h"
-
+#include "RHIUtility.h"
 #include "Base/BaseRHIType.h"
+
+#include <boost/predef/os.h>
+
 #include "OpenGL/OpenGLRHI.h"
 //#include "OpenGL3_0/OpenGL3_0RHI.h"
 //#include "Vulkan/VulkanRHI.h"
@@ -21,13 +23,22 @@ std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window
     case GraphicsSDK::OpenGL:
         return std::make_unique<OpenGLRHI>(window, videoMode);
 
+#if BOOST_OS_MACOS
     case GraphicsSDK::Metal:
         return nullptr;
+#endif
 
+#if BOOST_OS_WINDOWS
     case GraphicsSDK::Direct3D9:
+        return std::make_unique<Direct3D9RHI>(window, videoMode);
+
+    case GraphicsSDK::Direct3D11:
+        return std::make_unique<Direct3D11RHI>(window, videoMode);
+#endif
+
+    default:
         return nullptr;
     }
-    return nullptr;
 }
 
 } /* namespace rhi */

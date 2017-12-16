@@ -33,11 +33,14 @@ Window::Window(Window&& rhs) noexcept :
 
 Window::~Window()
 {
+    [m_nsWindow close];
+
+    m_isClosed = true;
     m_nsWindow = nil;
     m_windowDelegate = nil;
 }
 
-Window& Window::operator=(Window&& rhs)
+Window& Window::operator=(Window&& rhs) noexcept
 {
     m_nsWindow = rhs.m_nsWindow;
     m_windowDelegate = rhs.m_windowDelegate;

@@ -1,5 +1,5 @@
 /**
- * @filename    RHI.h
+ * @filename    RHIUtility.h
  * @author      ggomdyu
  * @since       10/22/2017
  */
