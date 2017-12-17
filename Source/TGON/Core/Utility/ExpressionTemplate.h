@@ -15,39 +15,35 @@ namespace tgon
 namespace utility
 {
 
-template <typename _FirstOperandType, typename _SecondOperandType>
+template <typename _DerivedExpressionType>
 struct BaseExpression
 {
 public:
-    constexpr BaseExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
+    constexpr const auto& GetFirstOperand() const noexcept
+    {
+        return reinterpret_cast<const _DerivedExpressionType&>(*this).GetFirstOperand();
+    }
 
-private:
-    const _FirstOperandType& m_firstOperand;
-    const _SecondOperandType& m_secondOperand;
-
-public:
-    auto operator[](std::size_t index) const;
+    constexpr const auto& GetSecondOperand() const noexcept
+    {
+        return reinterpret_cast<const _DerivedExpressionType&>(*this).GetSecondOperand();
+    }
 };
 
 template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr BaseExpression<_FirstOperandType, _SecondOperandType>::BaseExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    m_firstOperand(firstOperand),
-    m_secondOperand(secondOperand)
-{
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-auto BaseExpression<_FirstOperandType, _SecondOperandType>::operator[](std::size_t index) const
-{
-    return m_firstOperand[index] + m_secondOperand[index];
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
 struct PlusExpression :
-    public BaseExpression<_FirstOperandType, _SecondOperandType>
+    public BaseExpression<PlusExpression<_FirstOperandType, _SecondOperandType>>
 {
 public:
+    using FirstOperandType = _FirstOperandType;
+    using SecondOperandType = _SecondOperandType;
+
+public:
     constexpr PlusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
+
+private:
+    _FirstOperandType m_firstOperand;
+    _SecondOperandType m_secondOperand;
 
 public:
     template <typename Ty>
@@ -55,14 +51,24 @@ public:
     {
         return {*this, rhs};
     }
+
+    constexpr const _FirstOperandType& GetFirstOperand() const noexcept
+    {
+        return m_firstOperand;
+    }
+
+    constexpr const _SecondOperandType& GetSecondOperand() const noexcept
+    {
+        return m_secondOperand;
+    }
 };
 
 template <typename _FirstOperandType, typename _SecondOperandType>
 constexpr PlusExpression<_FirstOperandType, _SecondOperandType>::PlusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    BaseExpression<_FirstOperandType, _SecondOperandType>(firstOperand, secondOperand)
+    m_firstOperand(firstOperand),
+    m_secondOperand(secondOperand)
 {
 }
 
 } /* namespace utility */
 } /* namespace tgon */
-

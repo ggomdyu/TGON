@@ -20,7 +20,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <opengl/GL.h>
+#include <gl/GL.h>
 #include "Graphics/Render/OpenGL/Shader.h"
 #include "Core/Utility/ExpressionTemplate.h"
 
@@ -34,12 +34,15 @@ public:
         p[2] = c;
     }
 
-    template <typename F, typename S>
-    V(const tgon::utility::BaseExpression<F, S>& expr)
+    template <typename F>
+    V(const tgon::utility::BaseExpression<F>& expr)
     {
         for (int i = 0; i < 3; ++i)
         {
-            p[i] = expr[i];
+            int n = expr.GetFirstOperand()[i] + expr.GetSecondOperand()[i];
+            //expr[i];
+
+            int n2 = 3;
         }
     }
 
@@ -99,10 +102,7 @@ public:
         V v(1, 5 ,6);
         V v2(1, 53 ,6);
 
-        auto v3 = v + v2 + v2;
-        auto v4 = v3 + v3;
-
-        V v5 = v4;
+        V v5 = v + v2;
 
         int n = 3;
     }
