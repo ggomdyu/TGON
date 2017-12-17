@@ -19,6 +19,12 @@ template <typename _DerivedExpressionType>
 struct BaseExpression
 {
 public:
+    constexpr const auto operator[](std::size_t index) const
+    {
+        return reinterpret_cast<const _DerivedExpressionType&>(*this).operator[](index);
+    }
+
+public:
     constexpr const auto& GetFirstOperand() const noexcept
     {
         return reinterpret_cast<const _DerivedExpressionType&>(*this).GetFirstOperand();
@@ -41,9 +47,11 @@ public:
 public:
     constexpr PlusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
 
-private:
-    _FirstOperandType m_firstOperand;
-    _SecondOperandType m_secondOperand;
+    constexpr const auto operator[](std::size_t index) const
+    {
+        return m_firstOperand[index] + m_secondOperand[index];
+    }
+
 
 public:
     template <typename Ty>
@@ -52,6 +60,7 @@ public:
         return {*this, rhs};
     }
 
+public:
     constexpr const _FirstOperandType& GetFirstOperand() const noexcept
     {
         return m_firstOperand;
@@ -61,6 +70,10 @@ public:
     {
         return m_secondOperand;
     }
+
+private:
+    _FirstOperandType m_firstOperand;
+    _SecondOperandType m_secondOperand;
 };
 
 template <typename _FirstOperandType, typename _SecondOperandType>

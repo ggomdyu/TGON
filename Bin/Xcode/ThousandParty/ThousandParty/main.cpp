@@ -20,7 +20,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <gl/GL.h>
+#include <opengl/GL.h>
 #include "Graphics/Render/OpenGL/Shader.h"
 #include "Core/Utility/ExpressionTemplate.h"
 
@@ -39,10 +39,7 @@ public:
     {
         for (int i = 0; i < 3; ++i)
         {
-            int n = expr.GetFirstOperand()[i] + expr.GetSecondOperand()[i];
-            //expr[i];
-
-            int n2 = 3;
+            p[i] = expr[i];
         }
     }
 
@@ -102,7 +99,8 @@ public:
         V v(1, 5 ,6);
         V v2(1, 53 ,6);
 
-        V v5 = v + v2;
+        auto t = v + v2 + v2 + v2 + v + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2;
+        V v5 = t;
 
         int n = 3;
     }
