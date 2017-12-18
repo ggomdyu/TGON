@@ -20,7 +20,7 @@
 #include "Graphics/RHI/Base/BaseRHIType.h"
 #include "Graphics/RHI/OpenGL/OpenGLRHI.h"
 #include "Game/Engine/GameApplication.h"
-#include <opengl/GL.h>
+#include <gl/GL.h>
 #include "Graphics/Render/OpenGL/Shader.h"
 #include "Core/Utility/ExpressionTemplate.h"
 
@@ -41,6 +41,9 @@ public:
         {
             p[i] = expr[i];
         }
+
+        int n = expr.GetFirstOperand()[0];
+        n = 3;
     }
 
     int& operator[](int index)
@@ -51,11 +54,6 @@ public:
     const int& operator[](int index) const
     {
         return p[index];
-    }
-
-    tgon::utility::PlusExpression<V, V> operator+(const V& rhs)
-    {
-        return {*this, rhs};
     }
 
 private:
@@ -99,8 +97,8 @@ public:
         V v(1, 5 ,6);
         V v2(1, 53 ,6);
 
-        auto t = v + v2 + v2 + v2 + v + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2 + v + v2 + v2 + v2;
-        V v5 = t;
+        V v5 = (v - v2) + (v2 + v2) - (v - v);
+        V v8 = V(v - v2) + V(v2 + v2) - V(v - v);
 
         int n = 3;
     }
