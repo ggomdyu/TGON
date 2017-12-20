@@ -37,4 +37,3 @@ public:
 
 } /* namespace object */
 } /* namespace tgon */
-

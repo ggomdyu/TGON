@@ -29,11 +29,11 @@ std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window
 #endif
 
 #if BOOST_OS_WINDOWS
-    case GraphicsSDK::Direct3D9:
+    /*case GraphicsSDK::Direct3D9:
         return std::make_unique<Direct3D9RHI>(window, videoMode);
 
     case GraphicsSDK::Direct3D11:
-        return std::make_unique<Direct3D11RHI>(window, videoMode);
+        return std::make_unique<Direct3D11RHI>(window, videoMode);*/
 #endif
 
     default:

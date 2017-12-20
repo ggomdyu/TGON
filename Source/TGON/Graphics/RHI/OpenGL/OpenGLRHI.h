@@ -27,10 +27,12 @@ public:
 /* @section Public method */
 public:
     virtual void SetClearColor(const math::Color4f& color) override;
-    virtual void SetFillMode(FillMode fillMode) override;
-    virtual void SetCullMode(CullMode cullMode) override;
+    virtual void SetFillMode(enum class FillMode fillMode) override;
+    virtual void SetCullMode(enum class CullMode cullMode) override;
+    virtual void EnalbleDepthTest() override;
+    virtual void DisableDepthTest() override;
 
-    virtual void BeginScene(PrimitiveType primitiveType) override;
+    virtual void BeginScene(enum class PrimitiveType primitiveType) override;
     virtual void EndScene() override;
     virtual void ClearColorBuffer() override;
     virtual void ClearColorDepthBuffer() override;

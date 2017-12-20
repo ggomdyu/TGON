@@ -117,7 +117,6 @@ bool Window::HasCaption() const
     return (style & WS_CAPTION) != 0;
 }
 
-
 bool Window::IsMaximized() const
 {
     // todo : impl

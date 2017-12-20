@@ -16,22 +16,29 @@
     <Filter Include="Source\Graphics\RHI\Base">
       <UniqueIdentifier>{1d70c5c0-5408-4f74-9caf-cf7f68f82319}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Graphics\RHI\OpenGL\Windows">
+      <UniqueIdentifier>{debf39e8-eee1-46f7-9843-5ac3c05d840b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Render">
+      <UniqueIdentifier>{6bb9733a-729b-4071-b76b-2aac78d2bebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Render\OpenGL">
+      <UniqueIdentifier>{18734ea8-5466-43a4-b78d-543b330ccbce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLRHI.cpp">
       <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHI.cpp">
-      <Filter>Source\Graphics</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHIUtility.cpp">
+      <Filter>Source\Graphics\RHI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\WindowsOpenGLContext.cpp">
-      <Filter>Source\Graphics\RHI\OpenGL</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\Windows\WindowsOpenGLContext.cpp">
+      <Filter>Source\Graphics\RHI\OpenGL\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\OpenGL\OpenGLUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHI.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\Base\BaseRHIType.h">
       <Filter>Source\Graphics\RHI\Base</Filter>
     </ClInclude>
@@ -41,17 +48,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLRHI.h">
       <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLRHIUtility.h">
-      <Filter>Source\Graphics\RHI\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLContext.h">
       <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\Base\BaseRHIFwd.h">
-      <Filter>Source\Graphics\RHI\Base</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\RHIUtility.h">
+      <Filter>Source\Graphics\RHI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLContextFwd.h">
-      <Filter>Source\Graphics\RHI\OpenGL</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\OpenGL\PositionColorFrag.h">
+      <Filter>Source\Graphics\Render\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\OpenGL\PositionColorVert.h">
+      <Filter>Source\Graphics\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\OpenGL\OpenGLShader.h">
+      <Filter>Source\Graphics\Render\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\OpenGL\OpenGLUtility.h" />
   </ItemGroup>
 </Project>

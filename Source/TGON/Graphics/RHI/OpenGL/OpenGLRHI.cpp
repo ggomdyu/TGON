@@ -1,19 +1,10 @@
 #include "PrecompiledHeader.pch"
 #include "OpenGLRHI.h"
-#include "OpenGLRHIUtility.h"
 
-#ifdef _MSC_VER
-#   ifndef WIN32_LEAN_AND_MEAN
-#       define WIN32_LEAN_AND_MEAN
-#   endif
-#   include <windows.h>
-#   include <gl/GL.h>
-#else
-#   include <OpenGL/OpenGL.h>
-#   include <OpenGL/gl.h>
-#endif
+#include <GL/glew.h>
 
 #include "Core/Math/Color.h"
+#include "Graphics/RHI/Base/BaseRHIType.h"
 
 namespace tgon
 {
@@ -32,17 +23,50 @@ void OpenGLRHI::SetClearColor(const math::Color4f& color)
 
 void OpenGLRHI::SetFillMode(FillMode fillMode)
 {
-    glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode));
+    static GLenum nativeFillModeTable[] =
+    {
+        GL_POINT,
+        GL_LINE,
+        GL_FILL
+    };
+
+    glPolygonMode(GL_FRONT_AND_BACK, nativeFillModeTable[static_cast<GLenum>(fillMode)]);
 }
 
 void OpenGLRHI::SetCullMode(CullMode cullMode)
 {
-    glFrontFace(ConvertCullModeToNative(cullMode));
+    static GLenum nativeCullModeTable[] =
+    {
+        GL_CW,
+        GL_CCW
+    };
+
+    glFrontFace(nativeCullModeTable[static_cast<GLenum>(cullMode)]);
+}
+
+void OpenGLRHI::EnalbleDepthTest()
+{
+    glEnable(GL_DEPTH_TEST);
+}
+
+void OpenGLRHI::DisableDepthTest()
+{
+    glDisable(GL_DEPTH_TEST);
 }
 
 void OpenGLRHI::BeginScene(PrimitiveType primitiveType)
 {
-    glBegin(ConvertPrimitiveTypeToNative(primitiveType));
+    static GLenum nativePrimitiveTable[] =
+    {
+        GL_POINTS,
+        GL_LINES,
+        GL_LINE_STRIP,
+        GL_TRIANGLES,
+        GL_TRIANGLE_STRIP,
+        GL_TRIANGLE_FAN,
+    };
+
+    glBegin(nativePrimitiveTable[static_cast<GLenum>(primitiveType)]);
 }
 
 void OpenGLRHI::EndScene()
@@ -62,7 +86,7 @@ void OpenGLRHI::ClearColorDepthBuffer()
 
 void OpenGLRHI::SwapBuffer()
 {
-//    ::SwapBuffers(m_context.dcHandle);
+    ::SwapBuffers(m_context.dcHandle);
 }
 
 } /* namespace rhi */

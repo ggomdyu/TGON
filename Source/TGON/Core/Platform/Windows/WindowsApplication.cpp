@@ -25,7 +25,7 @@ bool RegisterWindowClass()
     wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
     wcex.hInstance = GetModuleHandle(nullptr);
-    wcex.lpfnWndProc = OnHandleMessage;
+    wcex.lpfnWndProc = Application::OnHandleMessage;
 
     return RegisterClassExW(&wcex) != 0;
 }

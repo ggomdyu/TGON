@@ -6,8 +6,8 @@
     <_PropertySheetDisplayName>TGON.Props</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\TGON;$(DXSDK_DIR)\Include;D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Source\ThirdParty\icu4c-59_1-src\icu\source\common;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\$(PlatformTarget);$(SolutionDir)..\..\Source\Thirdparty\icu4c-59_1-src\icu\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\ThirdParty\glew-2.1.0\include;$(SolutionDir)..\..\Source\TGON;$(DXSDK_DIR)\Include;D:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Source\ThirdParty\icu4c-59_1-src\icu\source\common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\$(PlatformTarget);$(SolutionDir)..\..\Source\Thirdparty\icu4c-59_1-src\icu\lib;$(SolutionDir)..\..\Source\ThirdParty\Bin\$(Configuration)\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -15,6 +15,9 @@
       <PreprocessorDefinitions>TGON_STATIC_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

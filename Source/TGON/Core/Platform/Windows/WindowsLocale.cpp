@@ -10,7 +10,7 @@ namespace platform
 
 void GetLanguage(char* destBuffer, std::size_t bufferLength)
 {
-    ::GetLocaleInfoA(LOCALE_NAME_USER_DEFAULT, LOCALE_SISO639LANGNAME, destBuffer, bufferLength);
+    ::GetLocaleInfoA(LOCALE_NAME_USER_DEFAULT, LOCALE_SISO639LANGNAME, destBuffer, static_cast<int>(bufferLength));
 }
 
 } /* namespace platform */

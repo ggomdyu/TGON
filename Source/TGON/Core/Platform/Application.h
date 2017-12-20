@@ -6,16 +6,16 @@
  */
 
 #pragma once
+#include <boost/predef/os.h>
+#include <boost/noncopyable.hpp>
+#include <memory>
+#include <type_traits>
 #if BOOST_OS_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN
 #   endif
 #   include <Windows.h>
 #endif
-#include <boost/noncopyable.hpp>
-#include <boost/predef/os.h>
-#include <memory>
-#include <type_traits>
 
 #include "Config.h"
 
@@ -41,8 +41,6 @@ namespace tgon
 namespace platform
 {
 
-enum class MessageBoxIconType;
-
 class TGON_API Application :
     private boost::noncopyable
 {
@@ -62,9 +60,9 @@ public:
     void MessageLoop();
     void Terminate();
     void ShowMessageBox(const char* message) const;
-    void ShowMessageBox(const char* message, MessageBoxIconType iconType) const;
+    void ShowMessageBox(const char* message, enum class MessageBoxIconType iconType) const;
     void ShowMessageBox(const char* title, const char* message) const;
-    void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const;
+    void ShowMessageBox(const char* title, const char* message, enum class MessageBoxIconType iconType) const;
 
 #if BOOST_OS_WINDOWS
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);

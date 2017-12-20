@@ -8,10 +8,20 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "BaseRHIFwd.h"
+#include "Core/Math/Rect.h"
 
 namespace tgon
 {
+namespace math
+{
+
+struct Color4f;
+struct Vector2;
+struct Vector3;
+struct Matrix4x4;
+
+} /* namespace math */
+
 namespace rhi
 {
 class TGON_API BaseRHI
@@ -24,11 +34,13 @@ public:
     /* @section Public method */
 public:
     virtual void SetClearColor(const math::Color4f& color) {}
-    virtual void SetFillMode(FillMode fillMode) {}
-    virtual void SetCullMode(CullMode cullMode) {}
+    virtual void SetFillMode(enum class FillMode) {}
+    virtual void SetCullMode(enum class CullMode cullMode) {}
     virtual void SetScissorRect(const math::FRect& rect) {}
+    virtual void EnalbleDepthTest() {}
+    virtual void DisableDepthTest() {}
 
-    virtual void BeginScene(PrimitiveType primitiveType) {}
+    virtual void BeginScene(enum class PrimitiveType primitiveType) {}
     virtual void EndScene() {}
     virtual void ClearColorBuffer() {}
     virtual void ClearColorDepthBuffer() {}

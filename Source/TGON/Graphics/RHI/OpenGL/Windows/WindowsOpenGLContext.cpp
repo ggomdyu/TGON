@@ -1,5 +1,5 @@
 #include "PrecompiledHeader.pch"
-#include "OpenGLContext.h"
+#include "../OpenGLContext.h"
 
 #include <Windows.h>
 
@@ -9,8 +9,6 @@
 namespace tgon
 {
 namespace rhi
-{
-namespace gl
 {
 
 OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
@@ -53,6 +51,5 @@ OpenGLContext::~OpenGLContext()
     ::ReleaseDC(reinterpret_cast<HWND>(window->GetNativeWindow()), dcHandle);
 }
 
-} /* namespace gl */
 } /* namespace rhi */
 } /* namespace tgon */
