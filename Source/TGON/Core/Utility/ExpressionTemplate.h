@@ -259,25 +259,25 @@ constexpr const _SecondOperandType& DivideExpression<_FirstOperandType, _SecondO
 } /* namespace tgon */
 
 template <typename _FirstExpressionType, typename _SecondExpressionType>
-tgon::utility::PlusExpression<_FirstExpressionType, _SecondExpressionType> operator+(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs)
+constexpr const tgon::utility::PlusExpression<_FirstExpressionType, _SecondExpressionType> operator+(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
 {
     return {lhs, rhs};
 }
 
 template <typename _FirstExpressionType, typename _SecondExpressionType>
-tgon::utility::MinusExpression<_FirstExpressionType, _SecondExpressionType> operator-(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs)
+constexpr const tgon::utility::MinusExpression<_FirstExpressionType, _SecondExpressionType> operator-(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
 {
     return {lhs, rhs};
 }
 
 template <typename _FirstExpressionType, typename _SecondExpressionType>
-tgon::utility::MultiplyExpression<_FirstExpressionType, _SecondExpressionType> operator*(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs)
+constexpr const tgon::utility::MultiplyExpression<_FirstExpressionType, _SecondExpressionType> operator*(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
 {
     return {lhs, rhs};
 }
 
 template <typename _FirstExpressionType, typename _SecondExpressionType>
-tgon::utility::DivideExpression<_FirstExpressionType, _SecondExpressionType> operator/(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs)
+constexpr const tgon::utility::DivideExpression<_FirstExpressionType, _SecondExpressionType> operator/(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
 {
     return {lhs, rhs};
 }

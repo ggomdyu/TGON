@@ -11,6 +11,7 @@
 #include <cstdio>
 
 #include "Core/Platform/Config.h"
+#include "Core/Utility/ExpressionTemplate.h"
 
 namespace tgon
 {
@@ -27,11 +28,11 @@ public:
     /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
+    template <typename _DerivedExpressionType>
+    constexpr Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression);
+
 /* @section Public perator */
 public:
-    constexpr const Vector3 operator+(const Vector3&) const noexcept;
-    constexpr const Vector3 operator-(const Vector3&) const noexcept;
-    constexpr const Vector3 operator*(const Vector3&) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
@@ -104,19 +105,13 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 {
 }
 
-constexpr const Vector3 Vector3::operator+(const Vector3& rhs) const noexcept
+template<typename _DerivedExpressionType>
+constexpr tgon::math::Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression)
 {
-    return Vector3(x + rhs.x, y + rhs.y, z + rhs.z);
-}
-
-constexpr const Vector3 Vector3::operator-(const Vector3& rhs) const noexcept
-{
-    return Vector3(x - rhs.x, y - rhs.y, z - rhs.z);
-}
-
-constexpr const Vector3 Vector3::operator*(const Vector3& rhs) const noexcept
-{
-    return Vector3(x * rhs.x, y * rhs.y, z * rhs.z);
+    for (int i = 0; i < 3; ++i)
+    {
+        *(&x + i) = expression[i];
+    }
 }
 
 constexpr const Vector3 Vector3::operator*(float scalar) const noexcept
@@ -238,7 +233,7 @@ constexpr const Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexc
 
 inline float Vector3::Distance(const Vector3& a, const Vector3& b) noexcept
 {
-    return (a - b).Length();
+    return Vector3(a - b).Length();
 }
 
 inline float Vector3::Length() const noexcept
