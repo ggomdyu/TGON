@@ -32,7 +32,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Object() = 0;
+    virtual ~Object() = default;
 };
 
 } /* namespace object */
