@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.pch"
 #include "OpenGLRHI.h"
 
+#include <atomic>
 #include <GL/glew.h>
 
 #include "Core/Math/Color.h"
@@ -52,6 +53,17 @@ void OpenGLRHI::EnalbleDepthTest()
 void OpenGLRHI::DisableDepthTest()
 {
     glDisable(GL_DEPTH_TEST);
+}
+
+VideoBuffer OpenGLRHI::CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize)
+{
+return nullptr;
+    /*static std::atomic<int> bufferIndex;
+
+    GLuint videoBuffer;
+    glCreateBuffers(bufferIndex++, &videoBuffer);
+
+    return reinterpret_cast<VideoBuffer>(videoBuffer);*/
 }
 
 void OpenGLRHI::BeginScene(PrimitiveType primitiveType)

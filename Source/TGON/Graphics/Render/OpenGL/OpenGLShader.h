@@ -1,5 +1,5 @@
 /**
- * @filename    OpenGLShaderUtility.h
+ * @filename    OpenGLShader.h
  * @author      ggomdyu
  * @since       12/19/2017
  */

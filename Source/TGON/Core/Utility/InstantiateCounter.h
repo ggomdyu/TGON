@@ -2,7 +2,7 @@
  * @filename    InstantiateCounter.h
  * @author      ggomdyu
  * @since       09/24/2017
- * @brief       The set of function to manage/limit the count of object instantiation.
+ * @brief       Set of functions to manage/limit the count of object instantiation.
  */
 
 #pragma once

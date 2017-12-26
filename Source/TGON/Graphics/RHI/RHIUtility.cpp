@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.pch"
 #include "RHIUtility.h"
-#include "Base/BaseRHIType.h"
 
 #include <boost/predef/os.h>
 
@@ -26,9 +25,7 @@ std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window
 #if BOOST_OS_MACOS
     case GraphicsSDK::Metal:
         return nullptr;
-#endif
-
-#if BOOST_OS_WINDOWS
+#elif BOOST_OS_WINDOWS
     /*case GraphicsSDK::Direct3D9:
         return std::make_unique<Direct3D9RHI>(window, videoMode);
 

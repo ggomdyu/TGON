@@ -11,7 +11,9 @@ class GLProgram
 {
 public:
     bool Initialize(const char* vertexShaderStr, const char* fragmentShaderStr);
-    bool Initialize(GLuint vertexShader, GLuint fragmentShader);
+    bool Initialize(GLuint vertexShaderHandle, GLuint fragmentShaderHandle);
+
+    GLuint GetProgramHandle() const;
 
 private:
     GLuint CreateVertexShader(const char* vertexShaderStr) const;
@@ -43,59 +45,64 @@ bool GLProgram::Initialize(const char* vertexShaderStr, const char* fragmentShad
     }
 }
 
-bool GLProgram::Initialize(GLuint vertexShader, GLuint fragmentShader)
+bool GLProgram::Initialize(GLuint vertexShaderHandle, GLuint fragmentShaderHandle)
 {
     // Creates shader program object.
-    GL_ERROR_CHECK(m_shaderProgram = glCreateProgram());
+    //m_shaderProgram = glCreateProgram();
     if (m_shaderProgram == 0)
     {
         return false;
     }
 
     // Attachs shaders to program.
-    GL_ERROR_CHECK(glAttachShader(m_shaderProgram, vertexShader));
-    GL_ERROR_CHECK(glAttachShader(m_shaderProgram, fragmentShader));
+    /*GL_ERROR_CHECK(glAttachShader(m_shaderProgram, vertexShaderHandle));
+    GL_ERROR_CHECK(glAttachShader(m_shaderProgram, fragmentShaderHandle));
     {
         GL_ERROR_CHECK(glLinkProgram(m_shaderProgram));
     }
-    GL_ERROR_CHECK(glDetachShader(m_shaderProgram, vertexShader));
-    GL_ERROR_CHECK(glDetachShader(m_shaderProgram, fragmentShader));
+    GL_ERROR_CHECK(glDetachShader(m_shaderProgram, vertexShaderHandle));
+    GL_ERROR_CHECK(glDetachShader(m_shaderProgram, fragmentShaderHandle));
 
-    GL_ERROR_CHECK(glDeleteShader(vertexShader));
-    GL_ERROR_CHECK(glDeleteShader(fragmentShader));
+    GL_ERROR_CHECK(glDeleteShader(vertexShaderHandle));
+    GL_ERROR_CHECK(glDeleteShader(fragmentShaderHandle));*/
     return false;
+}
+
+GLuint GLProgram::GetProgramHandle() const
+{
+    return m_shaderProgram;
 }
 
 GLuint GLProgram::CreateVertexShader(const char* vertexShaderStr) const
 {
-    GLuint vertexShader;
-    GL_ERROR_CHECK(vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderStr));
+    GLuint vertexShader=0;
+    //GL_ERROR_CHECK(vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderStr));
 
     return vertexShader;
 }
 
 GLuint GLProgram::CreateFragmentShader(const char* fragmentShaderStr) const
 {
-    GLuint fragmentShader;
-    GL_ERROR_CHECK(fragmentShader = CreateShader(GL_VERTEX_SHADER, fragmentShaderStr));
+    GLuint fragmentShader=0;
+    //GL_ERROR_CHECK(fragmentShader = CreateShader(GL_VERTEX_SHADER, fragmentShaderStr));
 
     return fragmentShader;
 }
 
 GLuint CreateShader(GLenum shaderType, const char* shaderStr)
 {
-    GLuint shader;
-    GL_ERROR_CHECK(shader = glCreateShader(shaderType));
+    GLuint shader=0;
+    //GL_ERROR_CHECK(shader = glCreateShader(shaderType));
 
-    // Set source of shader.
-    glShaderSource(shader, 1, &shaderStr, nullptr);
+    //// Set source of shader.
+    //glShaderSource(shader, 1, &shaderStr, nullptr);
 
-    // Then, compile it.
-    glCompileShader(shader);
+    //// Then, compile it.
+    //glCompileShader(shader);
 
-    // Lastly, Check wheter compile is succeed.
-    // If compile was failed, then record detail log.
-    GL_ERROR_CHECK(shader);
+    //// Lastly, Check wheter compile is succeed.
+    //// If compile was failed, then record detail log.
+    //GL_ERROR_CHECK(shader);
 
     return shader;
 }
