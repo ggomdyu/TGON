@@ -9,6 +9,8 @@
 #include <type_traits>
 #include <cstdint>
 
+#include "Vector3.h"
+
 namespace tgon
 {
 namespace math
@@ -20,7 +22,7 @@ constexpr const float Deg2Rad = Pi / 180;
 constexpr const float Rad2Deg = 180 / Pi;
 
 /**
- * @brief   Get the greatest common divisor using Euclidean algorithm.
+ * @brief   Returns the greatest common divisor using Euclidean algorithm.
  @ @see     https://en.wikipedia.org/wiki/Euclidean_algorithm
  */
 template <typename _ValueType,
@@ -39,7 +41,7 @@ constexpr const _ValueType Gcd(_ValueType first, _ValueType second)
     return first;
 }
 
-/* @brief   Get the least common multiple. */
+/* @brief   Returns the least common multiple. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType Lcm(const _ValueType& first, const _ValueType& second)
@@ -60,7 +62,6 @@ constexpr const _ValueType Floor(const _ValueType& value) noexcept
     IntergerType flooredValue = static_cast<IntergerType>(value);
     return value < flooredValue ? flooredValue - static_cast<_ValueType>(1.0) : flooredValue;
 }
-
 
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
@@ -143,13 +144,15 @@ constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const
     return Max(Min(value, max), min);
 }
 	
-template <typename _ValueType>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_integral<_ValueType>::value>::type>
 constexpr bool IsPowerOf2(const _ValueType& value) noexcept
 {
     return value > 0 && !(value & (value - 1));
 }
 
-template <typename _ValueType>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_integral<_ValueType>::value>::type>
 constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
 {
     if (value <= 1)
@@ -174,7 +177,7 @@ constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
 }
 
 /**
- * @brief               Perform Linear interpolation.
+ * @brief               Performs Linear interpolation.
  * @param [in] from     Interpolation start value
  * @param [in] to       Interpolation end value
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
@@ -193,18 +196,17 @@ constexpr float Smoothstep(float from, float to, float time) noexcept
 }
 
 /**
- * @brief               Two-dimensional bezier curve
+ * @brief               Calculates Two-dimensional bezier curve.
  * @param [in] a        The first vertex
  * @param [in] b        The second vertex
  * @param [in] c        The third vertex
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
  * @return              Returns Interpolated vertex.
  */
-template <typename _VectorType>
-constexpr const _VectorType QuadraticBezier(const _VectorType& a, const _VectorType& b, const _VectorType& c, float time) noexcept
+constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {
-	float inversedTime = 1.0f - time;
-	return {(inversedTime * inversedTime * a) + (2.0f * time * inversedTime * b) + (time * inversedTime * c)};
+	float invTime = 1.0f - time;
+	return {};//{(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 
 //float Sqrt()

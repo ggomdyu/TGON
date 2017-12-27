@@ -80,15 +80,6 @@ public:
 /* @section Public variable */
 public:
 	float x, y, z;
-
-    static const Vector3 Forward;   // 0, 0, 1
-	static const Vector3 Back;      // 0, 0, -1
-	static const Vector3 Up;        // 0, 1, 0
-	static const Vector3 Down;      // 0, -1, 0
-	static const Vector3 Left;      // -1, 0, 0
-	static const Vector3 Right;     // 1, 0, 0
-	static const Vector3 One;		// 0, 0, 0
-	static const Vector3 Zero;      // 1, 1, 1
 };
 
 constexpr Vector3::Vector3() noexcept :
@@ -124,15 +115,9 @@ constexpr const Vector3 operator*(float lhs, const Vector3& rhs) noexcept
 	return rhs * lhs;
 }
 
-constexpr const Vector3 Vector3::operator/(float value) const
+constexpr const Vector3 Vector3::operator/(float rhs) const
 {
-    float inverse = 1.0f / value;
-    return Vector3(x * inverse, y * inverse, z * inverse);
-}
-
-constexpr const Vector3 Vector3::operator+() const noexcept
-{
-	return *this;
+    return Vector3(x / rhs, y / rhs, z * rhs);
 }
 
 constexpr const Vector3 Vector3::operator-() const noexcept
@@ -167,22 +152,20 @@ inline Vector3& Vector3::operator*=(const Vector3& rhs) noexcept
 	return *this;
 }
 
-inline Vector3& Vector3::operator*=(float scalar) noexcept
+inline Vector3& Vector3::operator*=(float rhs) noexcept
 {
-	x *= scalar;
-	y *= scalar;
-	z *= scalar;
+	x *= rhs;
+	y *= rhs;
+	z *= rhs;
 
 	return *this;
 }
 
-inline Vector3& Vector3::operator/=(float scalar)
+inline Vector3& Vector3::operator/=(float rhs)
 {
-	float inverse = 1.0f / scalar;
-
-	x *= inverse;
-	y *= inverse;
-	z *= inverse;
+	x /= rhs;
+	y /= rhs;
+	z /= rhs;
 
 	return *this;
 }
@@ -194,7 +177,7 @@ constexpr bool Vector3::operator==(const Vector3& rhs) const noexcept
 
 constexpr bool Vector3::operator!=(const Vector3& rhs) const noexcept
 {
-    return (x != rhs.x && y != rhs.y && z != rhs.z);
+    return !(*this == rhs);
 }
 
 inline float& Vector3::operator[](std::size_t index) noexcept
@@ -221,19 +204,19 @@ inline float Vector3::At(std::size_t index) const
     return *(&x + index);
 }
 
-constexpr float Vector3::Dot(const Vector3& a, const Vector3& b) noexcept
+constexpr float Vector3::Dot(const Vector3& v1, const Vector3& v2) noexcept
 {
-    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
+    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
 }
 
-constexpr const Vector3 Vector3::Cross(const Vector3& a, const Vector3& b) noexcept
+constexpr const Vector3 Vector3::Cross(const Vector3& v1, const Vector3& v2) noexcept
 {
-    return {(a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x)};
+    return {(v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x)};
 }
 
-inline float Vector3::Distance(const Vector3& a, const Vector3& b) noexcept
+inline float Vector3::Distance(const Vector3& v1, const Vector3& v2) noexcept
 {
-    return Vector3(a - b).Length();
+    return 0.0f;//Vector3(v1 - v2).Length();
 }
 
 inline float Vector3::Length() const noexcept
@@ -248,18 +231,11 @@ constexpr float Vector3::LengthSq() const noexcept
 
 inline void Vector3::Normalize()
 {
-    float inverse = 1.0f / std::sqrtf(x*x + y*y + z*z);
+    float length = std::sqrtf(x*x + y*y + z*z);
 
-	x *= inverse;
-	y *= inverse;
-	z *= inverse;
-}
-
-inline const Vector3 Vector3::Normalized() const
-{
-    float inverse = 1.0f / std::sqrtf(x*x + y*y + z*z);
-
-    return Vector3(x * inverse, y * inverse, z * inverse);
+	x /= length;
+	y /= length;
+	z /= length;
 }
 
 template<std::size_t _StrBufferSize>
