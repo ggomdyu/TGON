@@ -8,13 +8,16 @@
 #pragma once
 #include <vector>
 
+#include "ScreenFwd.h"
 #include "Config.h"
-#include "ScreenType.h"
 
 namespace tgon
 {
 namespace platform
 {
+
+/* @brief   Returns count of detected monitors. */
+int32_t GetScreenCount();
 
 /**
  * @brief   Returns current primary screen information.

@@ -10,13 +10,8 @@
 #include <boost/noncopyable.hpp>
 #include <memory>
 #include <type_traits>
-#if BOOST_OS_WINDOWS
-#   ifndef WIN32_LEAN_AND_MEAN
-#       define WIN32_LEAN_AND_MEAN
-#   endif
-#   include <Windows.h>
-#endif
 
+#include "ApplicationFwd.h"
 #include "Config.h"
 
 #define TGON_DECLARE_APPLICATION(className)\
@@ -24,17 +19,13 @@
     {\
     namespace platform\
     {\
-    std::shared_ptr<class Application> MakeApplication()\
+    std::shared_ptr<Application> MakeApplication()\
     {\
-        static_assert(std::is_convertible<className*, class Application*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from Application.");\
+        static_assert(std::is_convertible<className*, Application*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from Application.");\
         return std::make_shared<className>();\
     }\
     } /* namespace platform */\
     } /* namespace tgon */
-
-#if BOOST_OS_MACOS
-@class NSEvent;
-#endif
 
 namespace tgon
 {
@@ -47,7 +38,7 @@ class TGON_API Application :
 /* @section Public constructor */
 public:
     Application() = default;
-    explicit Application(const struct WindowStyle& windowStyle);
+    explicit Application(const WindowStyle& windowStyle);
 
 /* @section Public destructor */
 public:
@@ -55,14 +46,14 @@ public:
 
 /* @section Public method */
 public:
-    void Initialize(const struct WindowStyle& windowStyle);
+    void Initialize(const WindowStyle& windowStyle);
 
     void MessageLoop();
     void Terminate();
     void ShowMessageBox(const char* message) const;
-    void ShowMessageBox(const char* message, enum class MessageBoxIconType iconType) const;
+    void ShowMessageBox(const char* message, MessageBoxIconType iconType) const;
     void ShowMessageBox(const char* title, const char* message) const;
-    void ShowMessageBox(const char* title, const char* message, enum class MessageBoxIconType iconType) const;
+    void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const;
 
 #if BOOST_OS_WINDOWS
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
@@ -72,15 +63,15 @@ public:
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}
-    virtual void OnWillCloseWindow(const std::shared_ptr<class Window>&) {}
-    virtual void OnDidCloseWindow(const std::shared_ptr<class Window>&) {}
+    virtual void OnWillCloseWindow(const std::shared_ptr<Window>&) {}
+    virtual void OnDidCloseWindow(const std::shared_ptr<Window>&) {}
     virtual void OnUpdate() {}
 
     const struct BatteryState GetBatteryState() const;
-    const std::shared_ptr<class Window>& GetMainWindow() const noexcept;
+    const std::shared_ptr<Window>& GetMainWindow() const noexcept;
 
 protected:
-    std::shared_ptr<class Window> m_mainWindow;
+    std::shared_ptr<Window> m_mainWindow;
 };
 
 } /* namespace platform */

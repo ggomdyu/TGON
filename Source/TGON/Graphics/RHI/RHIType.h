@@ -36,7 +36,6 @@ enum class VideoBufferType
 enum class PrimitiveType
 {
     PointList = 0,
-    LineList,
     LineStrip,
     TriangleList,
     TriangleStrip,
@@ -98,6 +97,7 @@ public:
 };
 
 using VideoBuffer = void*;
+using Shader = void*;
 
 } /* namespace rhi */
 } /* namespace tgon */

@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.pch"
+
 #include "Application.h"
 #include "ApplicationType.h"
 

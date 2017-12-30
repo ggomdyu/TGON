@@ -20,7 +20,7 @@ namespace rhi
 {
 
 struct VideoMode;
-class BaseRHI;
+class IDynamicRHI;
 
 } /* namespace rhi */
 
@@ -55,7 +55,7 @@ public:
     template <typename _ModuleType>
     const std::unique_ptr<_ModuleType>& FindModule() const;
 
-    const std::unique_ptr<rhi::BaseRHI>& GetRHI() const
+    const std::unique_ptr<rhi::IDynamicRHI>& GetRHI() const
     {
         return m_rhi;
     }
@@ -65,7 +65,7 @@ private:
 
 /* @section Private variable */
 private:
-    std::unique_ptr<rhi::BaseRHI> m_rhi;
+    std::unique_ptr<rhi::IDynamicRHI> m_rhi;
 
 //    std::vector<IModule> m_modules;
 //    std::unique_ptr<graphics::render::Renderer> m_renderer;

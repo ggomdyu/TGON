@@ -7,7 +7,7 @@
 #pragma once
 
 constexpr const char g_positionColorVert[] =
-#include "PositionColorVert.h";
+#include "PositionColorVert.h"
 
 constexpr const char g_positionColorFrag[] =
-#include "PositionColorFrag.h";
+#include "PositionColorFrag.h"

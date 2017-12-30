@@ -11,21 +11,8 @@
 #include <string>
 #include <cstdint>
 
-#if BOOST_OS_WINDOWS
-#   ifndef WIN32_LEAN_AND_MEAN
-#       define WIN32_LEAN_AND_MEAN
-#   endif
-#   include <Windows.h>
-#elif BOOST_OS_ANDROID
-#elif BOOST_OS_IOS
-#endif
-
+#include "WindowFwd.h"
 #include "Config.h"
-
-#if BOOST_OS_MACOS
-@class NSWindow;
-@class WindowDelegate;
-#endif
 
 namespace tgon
 {
@@ -38,7 +25,7 @@ class TGON_API Window :
 /* @section Public constructor */
 public:
     Window() = default;
-    explicit Window(const struct WindowStyle& windowStyle);
+    explicit Window(const WindowStyle& windowStyle);
     Window(Window&& rhs) noexcept;
 
 /* @section Public operator */
@@ -51,7 +38,7 @@ public:
 
 /* @section Public method */
 public:
-    void Initialize(const struct WindowStyle& windowStyle);
+    void Initialize(const WindowStyle& windowStyle);
 
     void Show();
     void Hide();

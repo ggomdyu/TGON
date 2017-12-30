@@ -8,8 +8,6 @@
 #include <cassert>
 #include <type_traits>
 
-#include "IRuntimeObject.h"
-
 namespace tgon
 {
 namespace object

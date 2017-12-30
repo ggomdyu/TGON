@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.pch"
+
 #include "Path.h"
 
 namespace tgon

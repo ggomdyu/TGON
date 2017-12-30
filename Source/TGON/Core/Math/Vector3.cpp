@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.pch"
-#include "Vector3.h"
 
+#include "Vector3.h"
 #include "Matrix4x4.h"
 
 namespace tgon

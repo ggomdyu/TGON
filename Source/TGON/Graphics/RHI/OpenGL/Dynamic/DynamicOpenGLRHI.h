@@ -7,9 +7,9 @@
 #pragma once
 #include <memory>
 
-#include "Graphics/RHI/Base/BaseRHI.h"
+#include "../OpenGLContext.h"
 
-#include "OpenGLContext.h"
+#include "IDynamicRHI.h"
 
 namespace tgon
 {
@@ -17,7 +17,7 @@ namespace rhi
 {
 
 class OpenGLRHI :
-    public BaseRHI
+    public IDynamicRHI
 {
 /* @section Public constructor */
 public:
@@ -32,6 +32,7 @@ public:
     virtual void EnalbleDepthTest() override;
     virtual void DisableDepthTest() override;
 
+    virtual Shader CreateShader(const char* shaderCode);
     virtual VideoBuffer CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize);
 
     virtual void BeginScene(PrimitiveType primitiveType) override;

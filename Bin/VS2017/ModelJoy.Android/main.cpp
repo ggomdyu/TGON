@@ -23,8 +23,8 @@
 
 #include <GL/glew.h>
 
+//#include "Graphics/Render/OpenGL/Shader.h"
 #include "Core/Utility/ExpressionTemplate.h"
-#pragma comment(lib, "glew32.lib")
 
 using namespace tgon;
 using namespace tgon::string;
