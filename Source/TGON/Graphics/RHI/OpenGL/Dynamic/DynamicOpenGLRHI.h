@@ -7,9 +7,9 @@
 #pragma once
 #include <memory>
 
-#include "Graphics/RHI/Base/BaseRHI.h"
+#include "../OpenGLContext.h"
 
-#include "OpenGLContext.h"
+#include "IDynamicRHI.h"
 
 namespace tgon
 {
@@ -17,7 +17,7 @@ namespace rhi
 {
 
 class OpenGLRHI :
-    public BaseRHI
+    public IDynamicRHI
 {
 /* @section Public constructor */
 public:
@@ -27,12 +27,15 @@ public:
 /* @section Public method */
 public:
     virtual void SetClearColor(const math::Color4f& color) override;
-    virtual void SetFillMode(enum class FillMode fillMode) override;
-    virtual void SetCullMode(enum class CullMode cullMode) override;
+    virtual void SetFillMode(FillMode fillMode) override;
+    virtual void SetCullMode(CullMode cullMode) override;
     virtual void EnalbleDepthTest() override;
     virtual void DisableDepthTest() override;
 
-    virtual void BeginScene(enum class PrimitiveType primitiveType) override;
+    virtual Shader CreateShader(const char* shaderCode);
+    virtual VideoBuffer CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize);
+
+    virtual void BeginScene(PrimitiveType primitiveType) override;
     virtual void EndScene() override;
     virtual void ClearColorBuffer() override;
     virtual void ClearColorDepthBuffer() override;

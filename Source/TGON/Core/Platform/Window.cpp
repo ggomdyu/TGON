@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.pch"
+
 #include "Window.h"
 
 namespace tgon

@@ -10,11 +10,10 @@
 		FD0E7A9C1FD72C2800A3B562 /* GameApplication.cpp in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */; };
 		FD0E7A9D1FD72C2800A3B562 /* GameApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = FD0E7A981FD64F7A00A3B562 /* GameApplication.h */; };
 		FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */; };
-		FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */; };
 		FD2C7F671F84C9F500D4555B /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2C7F651F84C9F500D4555B /* Vector3.cpp */; };
 		FD2C7F681F84C9F500D4555B /* Vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2C7F661F84C9F500D4555B /* Vector3.h */; };
-		FD54B0CA1FB8981900484529 /* ComponentObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD54B0C71FB8981800484529 /* ComponentObject.cpp */; };
-		FD54B0CB1FB8981900484529 /* IComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD54B0C91FB8981800484529 /* IComponent.cpp */; };
+		FD47177E1FEB60A400466798 /* MacOSOpenGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD47177D1FEB60A400466798 /* MacOSOpenGLContext.cpp */; };
+		FD64D5AC1FEEC58300BFB698 /* MacOSDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD64D5AB1FEEC58300BFB698 /* MacOSDebug.cpp */; };
 		FD753C021F6B4AAF00CD35F4 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753BFF1F6B4AAF00CD35F4 /* Object.h */; };
 		FD753C031F6B4AAF00CD35F4 /* IRuntimeObjectUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C001F6B4AAF00CD35F4 /* IRuntimeObjectUtility.h */; };
 		FD753C071F6B4ABD00CD35F4 /* FixedString.h in Headers */ = {isa = PBXBuildFile; fileRef = FD753C041F6B4ABD00CD35F4 /* FixedString.h */; };
@@ -48,13 +47,11 @@
 		FD7EA5261FAEE4DC008DF72F /* OpenGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */; };
 		FD7EA5281FAEE4DC008DF72F /* OpenGLRHI.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */; };
 		FD7EA5321FAF6D86008DF72F /* OpenGLRHI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */; };
-		FD7EA5351FB20537008DF72F /* OpenGLRHIUtility.h in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */; };
 		FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1F91FA23A1200817B92 /* StringView.h */; };
 		FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */; };
 		FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */; };
 		FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */; };
 		FD9AED1E1FDBF46A007AE839 /* TextureUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */; };
-		FDAAEBE01FDBA2C30036BFD5 /* libpng16d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */; };
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDC3799D1FDF1007007DE331 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC379821FDEF86C007DE331 /* Application.cpp */; };
 		FDC3799E1FDF1007007DE331 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC3797D1FDEF86B007DE331 /* Window.cpp */; };
@@ -76,16 +73,61 @@
 		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FD0BD43B1FEB5C0F002C6F4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD0BD4371FEB5C0F002C6F4A /* ThousandParty.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FDD7C8C71F654342000EB7C8;
+			remoteInfo = ThousandParty;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		FD0BD4081FEB5C0F002C6F4A /* ModeJoy.Windows.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ModeJoy.Windows.vcxproj; sourceTree = "<group>"; };
+		FD0BD4091FEB5C0F002C6F4A /* ModeJoy.Windows.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ModeJoy.Windows.vcxproj.filters; sourceTree = "<group>"; };
+		FD0BD40B1FEB5C0F002C6F4A /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AndroidManifest.xml; sourceTree = "<group>"; };
+		FD0BD40C1FEB5C0F002C6F4A /* build.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = build.xml; sourceTree = "<group>"; };
+		FD0BD40D1FEB5C0F002C6F4A /* ModelJoy.Android.androidproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ModelJoy.Android.androidproj; sourceTree = "<group>"; };
+		FD0BD40E1FEB5C0F002C6F4A /* project.properties */ = {isa = PBXFileReference; lastKnownFileType = text; path = project.properties; sourceTree = "<group>"; };
+		FD0BD4111FEB5C0F002C6F4A /* strings.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = strings.xml; sourceTree = "<group>"; };
+		FD0BD4131FEB5C0F002C6F4A /* AndroidApplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AndroidApplication.cpp; sourceTree = "<group>"; };
+		FD0BD4141FEB5C0F002C6F4A /* AndroidApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AndroidApplication.h; sourceTree = "<group>"; };
+		FD0BD4151FEB5C0F002C6F4A /* AndroidMain.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AndroidMain.c; sourceTree = "<group>"; };
+		FD0BD4161FEB5C0F002C6F4A /* AndroidMain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AndroidMain.h; sourceTree = "<group>"; };
+		FD0BD4171FEB5C0F002C6F4A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD0BD4181FEB5C0F002C6F4A /* pch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
+		FD0BD4191FEB5C0F002C6F4A /* TGON.Core.Android.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Android.vcxproj; sourceTree = "<group>"; };
+		FD0BD41A1FEB5C0F002C6F4A /* TGON.Core.Android.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Android.vcxproj.filters; sourceTree = "<group>"; };
+		FD0BD41C1FEB5C0F002C6F4A /* TGON.Core.Shared.vcxitems */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Shared.vcxitems; sourceTree = "<group>"; };
+		FD0BD41D1FEB5C0F002C6F4A /* TGON.Core.Shared.vcxitems.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Shared.vcxitems.filters; sourceTree = "<group>"; };
+		FD0BD41F1FEB5C0F002C6F4A /* TGON.Core.Windows.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Windows.vcxproj; sourceTree = "<group>"; };
+		FD0BD4201FEB5C0F002C6F4A /* TGON.Core.Windows.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Core.Windows.vcxproj.filters; sourceTree = "<group>"; };
+		FD0BD4221FEB5C0F002C6F4A /* TGON.Game.Shared.vcxitems */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Game.Shared.vcxitems; sourceTree = "<group>"; };
+		FD0BD4231FEB5C0F002C6F4A /* TGON.Game.Shared.vcxitems.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Game.Shared.vcxitems.filters; sourceTree = "<group>"; };
+		FD0BD4251FEB5C0F002C6F4A /* TGON.Game.Windows.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Game.Windows.vcxproj; sourceTree = "<group>"; };
+		FD0BD4261FEB5C0F002C6F4A /* TGON.Game.Windows.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Game.Windows.vcxproj.filters; sourceTree = "<group>"; };
+		FD0BD4281FEB5C0F002C6F4A /* TGON.Graphics.Shared.vcxitems */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Graphics.Shared.vcxitems; sourceTree = "<group>"; };
+		FD0BD4291FEB5C0F002C6F4A /* TGON.Graphics.Shared.vcxitems.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Graphics.Shared.vcxitems.filters; sourceTree = "<group>"; };
+		FD0BD42B1FEB5C0F002C6F4A /* TGON.Graphics.Windows.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Graphics.Windows.vcxproj; sourceTree = "<group>"; };
+		FD0BD42C1FEB5C0F002C6F4A /* TGON.Graphics.Windows.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Graphics.Windows.vcxproj.filters; sourceTree = "<group>"; };
+		FD0BD42D1FEB5C0F002C6F4A /* TGON.Props.props */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TGON.Props.props; sourceTree = "<group>"; };
+		FD0BD42E1FEB5C0F002C6F4A /* TGON.sln */ = {isa = PBXFileReference; lastKnownFileType = text; path = TGON.sln; sourceTree = "<group>"; };
+		FD0BD4301FEB5C0F002C6F4A /* TGON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TGON.xcodeproj; sourceTree = "<group>"; };
+		FD0BD4331FEB5C0F002C6F4A /* TGON.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = TGON.xcworkspace; sourceTree = "<group>"; };
+		FD0BD4361FEB5C0F002C6F4A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD0BD4371FEB5C0F002C6F4A /* ThousandParty.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThousandParty.xcodeproj; sourceTree = "<group>"; };
 		FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GameApplication.cpp; sourceTree = "<group>"; };
 		FD0E7A981FD64F7A00A3B562 /* GameApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplication.h; sourceTree = "<group>"; };
-		FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.cpp; sourceTree = "<group>"; };
 		FD2C7F651F84C9F500D4555B /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector3.cpp; path = ../../Source/TGON/Core/Math/Vector3.cpp; sourceTree = "<group>"; };
 		FD2C7F661F84C9F500D4555B /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../../Source/TGON/Core/Math/Vector3.h; sourceTree = "<group>"; };
-		FD54B0C61FB8981800484529 /* IComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IComponent.h; path = ../../Source/TGON/Core/Object/IComponent.h; sourceTree = "<group>"; };
-		FD54B0C71FB8981800484529 /* ComponentObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ComponentObject.cpp; path = ../../Source/TGON/Core/Object/ComponentObject.cpp; sourceTree = "<group>"; };
-		FD54B0C81FB8981800484529 /* ComponentObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComponentObject.h; path = ../../Source/TGON/Core/Object/ComponentObject.h; sourceTree = "<group>"; };
-		FD54B0C91FB8981800484529 /* IComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = IComponent.cpp; path = ../../Source/TGON/Core/Object/IComponent.cpp; sourceTree = "<group>"; };
+		FD4717731FEB5CCA00466798 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../Source/ThirdParty/Bin/Debug/x86_64/libGLEW.a; sourceTree = "<group>"; };
+		FD4717761FEB5D2900466798 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../Source/ThirdParty/Bin/Release/x86_64/libGLEW.a; sourceTree = "<group>"; };
+		FD47177B1FEB608900466798 /* BaseRHIType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseRHIType.h; path = ../Base/BaseRHIType.h; sourceTree = "<group>"; };
+		FD47177C1FEB608900466798 /* BaseRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseRHI.h; path = ../Base/BaseRHI.h; sourceTree = "<group>"; };
+		FD47177D1FEB60A400466798 /* MacOSOpenGLContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.cpp; sourceTree = "<group>"; };
+		FD64D5AA1FEEC56400BFB698 /* Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = ../../Source/TGON/Core/Platform/Debug.h; sourceTree = "<group>"; };
+		FD64D5AB1FEEC58300BFB698 /* MacOSDebug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MacOSDebug.cpp; path = ../../Source/TGON/Core/Platform/MacOS/MacOSDebug.cpp; sourceTree = "<group>"; };
 		FD6E11B21FA8BC8C00C5A5E7 /* FStateMachine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FStateMachine.h; path = ../../Source/TGON/Core/Utility/FStateMachine.h; sourceTree = "<group>"; };
 		FD753BFF1F6B4AAF00CD35F4 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object.h; path = ../../Source/TGON/Core/Object/Object.h; sourceTree = "<group>"; };
 		FD753C001F6B4AAF00CD35F4 /* IRuntimeObjectUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRuntimeObjectUtility.h; path = ../../Source/TGON/Core/Object/IRuntimeObjectUtility.h; sourceTree = "<group>"; };
@@ -115,7 +157,6 @@
 		FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHI.h; sourceTree = "<group>"; };
 		FD772BD21FAE067D0050CCE6 /* UUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UUID.h; path = ../../Source/TGON/Core/Hash/UUID.h; sourceTree = "<group>"; };
 		FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLRHI.cpp; sourceTree = "<group>"; };
-		FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLRHIUtility.h; sourceTree = "<group>"; };
 		FD89A1F91FA23A1200817B92 /* StringView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = StringView.h; path = ../../Source/TGON/Core/String/StringView.h; sourceTree = "<group>"; };
 		FD89A1FB1FA39A0000817B92 /* ICloneable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICloneable.h; path = ../../Source/TGON/Core/Object/ICloneable.h; sourceTree = "<group>"; };
 		FD9AED201FDC43AB007AE839 /* FileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FileSystem.h; path = ../../Source/TGON/Core/File/FileSystem.h; sourceTree = "<group>"; };
@@ -125,7 +166,6 @@
 		FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = ../../Source/TGON/Graphics/Render/Texture.h; sourceTree = "<group>"; };
 		FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../../Source/TGON/Graphics/Render/Material.h; sourceTree = "<group>"; };
 		FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = ../../Source/TGON/Graphics/Render/Material.cpp; sourceTree = "<group>"; };
-		FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libpng16d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAEBE21FDBF14C0036BFD5 /* TextureUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = TextureUtility.cpp; path = ../../Source/TGON/Graphics/Render/TextureUtility.cpp; sourceTree = "<group>"; };
 		FDAAEBE31FDBF14C0036BFD5 /* TextureUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = TextureUtility.h; path = ../../Source/TGON/Graphics/Render/TextureUtility.h; sourceTree = "<group>"; };
 		FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../Source/TGON/Graphics/Render/Texture.cpp; sourceTree = "<group>"; };
@@ -164,9 +204,6 @@
 		FDC379B11FE2D750007DE331 /* Shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = ../../Source/TGON/Graphics/Render/OpenGL/Shader.h; sourceTree = "<group>"; };
 		FDC379B31FE2E1FE007DE331 /* RHIUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RHIUtility.h; sourceTree = "<group>"; };
 		FDC379B51FE2E1FE007DE331 /* RHIUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RHIUtility.cpp; sourceTree = "<group>"; };
-		FDC379B81FE2E439007DE331 /* BaseRHIFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseRHIFwd.h; path = ../Base/BaseRHIFwd.h; sourceTree = "<group>"; };
-		FDC379B91FE2E439007DE331 /* BaseRHIType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseRHIType.h; path = ../Base/BaseRHIType.h; sourceTree = "<group>"; };
-		FDC379BA1FE2E43A007DE331 /* BaseRHI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = BaseRHI.h; path = ../Base/BaseRHI.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDF483CB1FC49776003BCAF6 /* Matrix4x4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix4x4.cpp; path = ../../Source/TGON/Core/Math/Matrix4x4.cpp; sourceTree = "<group>"; };
@@ -183,7 +220,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDAAEBE01FDBA2C30036BFD5 /* libpng16d.a in Frameworks */,
 				FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */,
 				FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */,
 				FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */,
@@ -194,11 +230,178 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD0E7A951FD5830200A3B562 /* GUI */ = {
+		FD0BD4051FEB5C0F002C6F4A /* Bin */ = {
 			isa = PBXGroup;
 			children = (
+				FD0BD4061FEB5C0F002C6F4A /* VS2017 */,
+				FD0BD42F1FEB5C0F002C6F4A /* Xcode */,
 			);
-			name = GUI;
+			name = Bin;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		FD0BD4061FEB5C0F002C6F4A /* VS2017 */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4071FEB5C0F002C6F4A /* ModeJoy.Windows */,
+				FD0BD40A1FEB5C0F002C6F4A /* ModelJoy.Android */,
+				FD0BD4121FEB5C0F002C6F4A /* TGON.Core.Android */,
+				FD0BD41B1FEB5C0F002C6F4A /* TGON.Core.Shared */,
+				FD0BD41E1FEB5C0F002C6F4A /* TGON.Core.Windows */,
+				FD0BD4211FEB5C0F002C6F4A /* TGON.Game.Shared */,
+				FD0BD4241FEB5C0F002C6F4A /* TGON.Game.Windows */,
+				FD0BD4271FEB5C0F002C6F4A /* TGON.Graphics.Shared */,
+				FD0BD42A1FEB5C0F002C6F4A /* TGON.Graphics.Windows */,
+				FD0BD42D1FEB5C0F002C6F4A /* TGON.Props.props */,
+				FD0BD42E1FEB5C0F002C6F4A /* TGON.sln */,
+			);
+			path = VS2017;
+			sourceTree = "<group>";
+		};
+		FD0BD4071FEB5C0F002C6F4A /* ModeJoy.Windows */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4081FEB5C0F002C6F4A /* ModeJoy.Windows.vcxproj */,
+				FD0BD4091FEB5C0F002C6F4A /* ModeJoy.Windows.vcxproj.filters */,
+			);
+			path = ModeJoy.Windows;
+			sourceTree = "<group>";
+		};
+		FD0BD40A1FEB5C0F002C6F4A /* ModelJoy.Android */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD40B1FEB5C0F002C6F4A /* AndroidManifest.xml */,
+				FD0BD40C1FEB5C0F002C6F4A /* build.xml */,
+				FD0BD40D1FEB5C0F002C6F4A /* ModelJoy.Android.androidproj */,
+				FD0BD40E1FEB5C0F002C6F4A /* project.properties */,
+				FD0BD40F1FEB5C0F002C6F4A /* res */,
+			);
+			path = ModelJoy.Android;
+			sourceTree = "<group>";
+		};
+		FD0BD40F1FEB5C0F002C6F4A /* res */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4101FEB5C0F002C6F4A /* values */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		FD0BD4101FEB5C0F002C6F4A /* values */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4111FEB5C0F002C6F4A /* strings.xml */,
+			);
+			path = values;
+			sourceTree = "<group>";
+		};
+		FD0BD4121FEB5C0F002C6F4A /* TGON.Core.Android */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4131FEB5C0F002C6F4A /* AndroidApplication.cpp */,
+				FD0BD4141FEB5C0F002C6F4A /* AndroidApplication.h */,
+				FD0BD4151FEB5C0F002C6F4A /* AndroidMain.c */,
+				FD0BD4161FEB5C0F002C6F4A /* AndroidMain.h */,
+				FD0BD4171FEB5C0F002C6F4A /* main.cpp */,
+				FD0BD4181FEB5C0F002C6F4A /* pch.h */,
+				FD0BD4191FEB5C0F002C6F4A /* TGON.Core.Android.vcxproj */,
+				FD0BD41A1FEB5C0F002C6F4A /* TGON.Core.Android.vcxproj.filters */,
+			);
+			path = TGON.Core.Android;
+			sourceTree = "<group>";
+		};
+		FD0BD41B1FEB5C0F002C6F4A /* TGON.Core.Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD41C1FEB5C0F002C6F4A /* TGON.Core.Shared.vcxitems */,
+				FD0BD41D1FEB5C0F002C6F4A /* TGON.Core.Shared.vcxitems.filters */,
+			);
+			path = TGON.Core.Shared;
+			sourceTree = "<group>";
+		};
+		FD0BD41E1FEB5C0F002C6F4A /* TGON.Core.Windows */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD41F1FEB5C0F002C6F4A /* TGON.Core.Windows.vcxproj */,
+				FD0BD4201FEB5C0F002C6F4A /* TGON.Core.Windows.vcxproj.filters */,
+			);
+			path = TGON.Core.Windows;
+			sourceTree = "<group>";
+		};
+		FD0BD4211FEB5C0F002C6F4A /* TGON.Game.Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4221FEB5C0F002C6F4A /* TGON.Game.Shared.vcxitems */,
+				FD0BD4231FEB5C0F002C6F4A /* TGON.Game.Shared.vcxitems.filters */,
+			);
+			path = TGON.Game.Shared;
+			sourceTree = "<group>";
+		};
+		FD0BD4241FEB5C0F002C6F4A /* TGON.Game.Windows */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4251FEB5C0F002C6F4A /* TGON.Game.Windows.vcxproj */,
+				FD0BD4261FEB5C0F002C6F4A /* TGON.Game.Windows.vcxproj.filters */,
+			);
+			path = TGON.Game.Windows;
+			sourceTree = "<group>";
+		};
+		FD0BD4271FEB5C0F002C6F4A /* TGON.Graphics.Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4281FEB5C0F002C6F4A /* TGON.Graphics.Shared.vcxitems */,
+				FD0BD4291FEB5C0F002C6F4A /* TGON.Graphics.Shared.vcxitems.filters */,
+			);
+			path = TGON.Graphics.Shared;
+			sourceTree = "<group>";
+		};
+		FD0BD42A1FEB5C0F002C6F4A /* TGON.Graphics.Windows */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD42B1FEB5C0F002C6F4A /* TGON.Graphics.Windows.vcxproj */,
+				FD0BD42C1FEB5C0F002C6F4A /* TGON.Graphics.Windows.vcxproj.filters */,
+			);
+			path = TGON.Graphics.Windows;
+			sourceTree = "<group>";
+		};
+		FD0BD42F1FEB5C0F002C6F4A /* Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4301FEB5C0F002C6F4A /* TGON.xcodeproj */,
+				FD0BD4331FEB5C0F002C6F4A /* TGON.xcworkspace */,
+				FD0BD4341FEB5C0F002C6F4A /* ThousandParty */,
+			);
+			path = Xcode;
+			sourceTree = "<group>";
+		};
+		FD0BD4311FEB5C0F002C6F4A /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD0BD4341FEB5C0F002C6F4A /* ThousandParty */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4351FEB5C0F002C6F4A /* ThousandParty */,
+				FD0BD4371FEB5C0F002C6F4A /* ThousandParty.xcodeproj */,
+			);
+			path = ThousandParty;
+			sourceTree = "<group>";
+		};
+		FD0BD4351FEB5C0F002C6F4A /* ThousandParty */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD4361FEB5C0F002C6F4A /* main.cpp */,
+			);
+			path = ThousandParty;
+			sourceTree = "<group>";
+		};
+		FD0BD4381FEB5C0F002C6F4A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD0BD43C1FEB5C0F002C6F4A /* ThousandParty */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		FD0E7A961FD64F7A00A3B562 /* Engine */ = {
@@ -216,6 +419,25 @@
 			children = (
 			);
 			name = Localize;
+			sourceTree = "<group>";
+		};
+		FD47177A1FEB607E00466798 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				FD47177C1FEB608900466798 /* BaseRHI.h */,
+				FD47177B1FEB608900466798 /* BaseRHIType.h */,
+			);
+			name = Base;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		FD47177F1FEB60A800466798 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				FD47177D1FEB60A400466798 /* MacOSOpenGLContext.cpp */,
+			);
+			name = MacOS;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		FD753BD21F6B495700CD35F4 /* Core */ = {
@@ -236,17 +458,10 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		FD753BD31F6B496600CD35F4 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
 		FD772BBC1FACC3DE0050CCE6 /* RHI */ = {
 			isa = PBXGroup;
 			children = (
-				FDC379B71FE2E416007DE331 /* Base */,
+				FD47177A1FEB607E00466798 /* Base */,
 				FD772BC01FACC3DE0050CCE6 /* OpenGL */,
 				FDC379B51FE2E1FE007DE331 /* RHIUtility.cpp */,
 				FDC379B31FE2E1FE007DE331 /* RHIUtility.h */,
@@ -258,11 +473,10 @@
 		FD772BC01FACC3DE0050CCE6 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				FD1562D61FDA39570057C54E /* MacOSOpenGLContext.cpp */,
+				FD47177F1FEB60A800466798 /* MacOS */,
 				FD772BC31FACC3DE0050CCE6 /* OpenGLContext.h */,
 				FD772BCB1FAD88EC0050CCE6 /* OpenGLRHI.h */,
 				FD7EA5311FAF6D85008DF72F /* OpenGLRHI.cpp */,
-				FD7EA5341FB20537008DF72F /* OpenGLRHIUtility.h */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -316,17 +530,6 @@
 			name = OpenGL;
 			sourceTree = "<group>";
 		};
-		FDC379B71FE2E416007DE331 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				FDC379BA1FE2E43A007DE331 /* BaseRHI.h */,
-				FDC379B81FE2E439007DE331 /* BaseRHIFwd.h */,
-				FDC379B91FE2E439007DE331 /* BaseRHIType.h */,
-			);
-			name = Base;
-			path = "New Group1";
-			sourceTree = "<group>";
-		};
 		FDD7C8AE1F65430C000EB7C8 = {
 			isa = PBXGroup;
 			children = (
@@ -341,9 +544,7 @@
 			children = (
 				FD753BD21F6B495700CD35F4 /* Core */,
 				FDFECB671F6ED7A1007AC1AB /* Graphics */,
-				FD0E7A951FD5830200A3B562 /* GUI */,
 				FD7EA52D1FAF6BCF008DF72F /* Game */,
-				FD753BD31F6B496600CD35F4 /* UI */,
 				FD753C7A1F6C363700CD35F4 /* PrecompiledHeader.pch */,
 			);
 			name = Sources;
@@ -357,6 +558,7 @@
 				FDC3797E1FDEF86B007DE331 /* Application.h */,
 				FDC379831FDEF86C007DE331 /* ApplicationType.h */,
 				FDC3797A1FDEF86B007DE331 /* Config.h */,
+				FD64D5AA1FEEC56400BFB698 /* Debug.h */,
 				FDC3797C1FDEF86B007DE331 /* Drawing.h */,
 				FDC379851FDEF86C007DE331 /* Locale.h */,
 				FDC379791FDEF86B007DE331 /* Prefix.h */,
@@ -441,10 +643,6 @@
 				FDBD61131FA56F97007439A7 /* IRuntimeObjectType.h */,
 				FD753C001F6B4AAF00CD35F4 /* IRuntimeObjectUtility.h */,
 				FD753BFF1F6B4AAF00CD35F4 /* Object.h */,
-				FD54B0C71FB8981800484529 /* ComponentObject.cpp */,
-				FD54B0C81FB8981800484529 /* ComponentObject.h */,
-				FD54B0C61FB8981800484529 /* IComponent.h */,
-				FD54B0C91FB8981800484529 /* IComponent.cpp */,
 			);
 			name = Object;
 			sourceTree = "<group>";
@@ -467,6 +665,7 @@
 				FDC379891FDEF881007DE331 /* MacOSAppDelegate.mm */,
 				FDC379911FDEF882007DE331 /* MacOSApplication.mm */,
 				FDC3798B1FDEF881007DE331 /* MacOSConfig.h */,
+				FD64D5AB1FEEC58300BFB698 /* MacOSDebug.cpp */,
 				FDC379881FDEF881007DE331 /* MacOSLocale.mm */,
 				FDC379991FDEF883007DE331 /* MacOSMain.mm */,
 				FDC3799A1FDEF883007DE331 /* MacOSScreen.mm */,
@@ -483,7 +682,9 @@
 		FDD7C92E1F684911000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FDAAEBE11FDBA2C30036BFD5 /* libpng16d.a */,
+				FD4717731FEB5CCA00466798 /* libGLEW.a */,
+				FD4717761FEB5D2900466798 /* libGLEW.a */,
+				FD0BD4051FEB5C0F002C6F4A /* Bin */,
 				FDFECB841F75FBAF007AC1AB /* Quartz.framework */,
 				FDFECB821F7585B4007AC1AB /* QuartzCore.framework */,
 				FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */,
@@ -596,6 +797,16 @@
 			mainGroup = FDD7C8AE1F65430C000EB7C8;
 			productRefGroup = FDD7C8AE1F65430C000EB7C8;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FD0BD4311FEB5C0F002C6F4A /* Products */;
+					ProjectRef = FD0BD4301FEB5C0F002C6F4A /* TGON.xcodeproj */;
+				},
+				{
+					ProductGroup = FD0BD4381FEB5C0F002C6F4A /* Products */;
+					ProjectRef = FD0BD4371FEB5C0F002C6F4A /* ThousandParty.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FDD7C8B61F65430C000EB7C8 /* TGON */,
@@ -603,12 +814,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		FD0BD43C1FEB5C0F002C6F4A /* ThousandParty */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = ThousandParty;
+			remoteRef = FD0BD43B1FEB5C0F002C6F4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDD7C8B31F65430C000EB7C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FDC379BB1FE2E4F4007DE331 /* RHIUtility.cpp in Sources */,
+				FD64D5AC1FEEC58300BFB698 /* MacOSDebug.cpp in Sources */,
 				FDC379A61FDF16B8007DE331 /* MacOSAppDelegate.mm in Sources */,
 				FDC379A71FDF16B8007DE331 /* MacOSLocale.mm in Sources */,
 				FDC379A81FDF16B8007DE331 /* MacOSMain.mm in Sources */,
@@ -622,13 +844,10 @@
 				FDC3799E1FDF1007007DE331 /* Window.cpp in Sources */,
 				FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */,
 				FD9AED1C1FDBF45A007AE839 /* TextureUtility.cpp in Sources */,
-				FD1562D71FDA39580057C54E /* MacOSOpenGLContext.cpp in Sources */,
 				FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */,
-				FD54B0CB1FB8981900484529 /* IComponent.cpp in Sources */,
-				FD7EA5351FB20537008DF72F /* OpenGLRHIUtility.h in Sources */,
 				FD2C7F671F84C9F500D4555B /* Vector3.cpp in Sources */,
 				FD753C181F6B4AE600CD35F4 /* WELL1024a.cpp in Sources */,
-				FD54B0CA1FB8981900484529 /* ComponentObject.cpp in Sources */,
+				FD47177E1FEB60A400466798 /* MacOSOpenGLContext.cpp in Sources */,
 				FD753C0C1F6B4ACE00CD35F4 /* Hash.cpp in Sources */,
 				FDF483CD1FC49776003BCAF6 /* Matrix4x4.cpp in Sources */,
 				FD7EA5321FAF6D86008DF72F /* OpenGLRHI.cpp in Sources */,
@@ -743,6 +962,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -751,7 +971,9 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_63_0",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
+					"/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/glew-2.1.0/include",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Source/ThirdParty/$(CONFIGURATION)/$(NATIVE_ARCH_ACTUAL)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -760,6 +982,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -768,7 +991,9 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_63_0",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
+					"/Users/ggomdyu/Desktop/Programming/git/GitHub/TGON/Source/ThirdParty/glew-2.1.0/include",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Source/ThirdParty/$(CONFIGURATION)/$(NATIVE_ARCH_ACTUAL)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -1,10 +1,11 @@
 #include "PrecompiledHeader.pch"
-#include "RHIUtility.h"
-#include "Base/BaseRHIType.h"
 
 #include <boost/predef/os.h>
 
-#include "OpenGL/OpenGLRHI.h"
+#include "OpenGL/Dynamic/DynamicOpenGLRHI.h"
+
+#include "RHI.h"
+#include "RHIType.h"
 //#include "OpenGL3_0/OpenGL3_0RHI.h"
 //#include "Vulkan/VulkanRHI.h"
 //#include "Direct3D9/Direct3D9RHI.h"
@@ -16,7 +17,7 @@ namespace tgon
 namespace rhi
 {
 
-std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode)
+std::unique_ptr<IDynamicRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode)
 {
     switch (videoMode.graphicsSDK)
     {
@@ -26,9 +27,7 @@ std::unique_ptr<BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window
 #if BOOST_OS_MACOS
     case GraphicsSDK::Metal:
         return nullptr;
-#endif
-
-#if BOOST_OS_WINDOWS
+#elif BOOST_OS_WINDOWS
     /*case GraphicsSDK::Direct3D9:
         return std::make_unique<Direct3D9RHI>(window, videoMode);
 

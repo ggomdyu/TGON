@@ -11,7 +11,7 @@ namespace tgon
 namespace platform
 {
 
-void ConverWindowStyletToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
+void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
 {
 	*extendedStyle = 0;
 	*normalStyle = 0;
@@ -71,7 +71,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 {
 	// Converts WindowStyle to platform dependent style.
 	DWORD exStyle, normalStyle;
-    ConverWindowStyletToNative(windowStyle, &exStyle, &normalStyle);
+    ConverWindowStyleToNative(windowStyle, &exStyle, &normalStyle);
 
     wchar_t utf16Title[256] {};
     bool succeedToConvert = string::ConvertUTF8ToUTF16(windowStyle.title.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
@@ -93,22 +93,16 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 		exStyle,
 		className,
 		utf16Title,
-		normalStyle /*| WS_CLIPSIBLINGS | WS_CLIPCHILDREN*/, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
-        newWindowX, /*CW_USEDEFAULT*/
+		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
+        newWindowX,
         newWindowY,
 		windowStyle.width,
 		windowStyle.height,
 		nullptr,
 		nullptr,
 		instanceHandle,
-		extraParam	// Extra parameter (pass this pointer when need to handling WM_CREATE)
+		extraParam
 	);
-
-    if (wndHandle != nullptr)
-    {
-        //::SetForegroundWindow(wndHandle);
-        //::SetFocus(wndHandle);
-    }
 
 	return wndHandle;
 }

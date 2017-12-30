@@ -19,7 +19,6 @@ struct BasicExtent2D
 {
 /* @section Public type */
 public:
-    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
 /* @section Public constructor */
@@ -32,18 +31,17 @@ public:
 
 /* @section Public operator */
 public:
-    constexpr const BasicExtent2D operator+(const BasicExtent2D&) const noexcept;
-    constexpr const BasicExtent2D operator-(const BasicExtent2D&) const noexcept;
-    constexpr const BasicExtent2D operator*(_ValueType) const noexcept;
-    constexpr const BasicExtent2D operator/(DevideType) const;
-    constexpr const BasicExtent2D operator+() const noexcept;
+    constexpr const BasicExtent2D operator+(const BasicExtent2D& rhs) const noexcept;
+    constexpr const BasicExtent2D operator-(const BasicExtent2D& rhs) const noexcept;
+    constexpr const BasicExtent2D operator*(_ValueType rhs) const noexcept;
+    constexpr const BasicExtent2D operator/(_ValueType rhs) const;
     constexpr const BasicExtent2D operator-() const noexcept;
-    BasicExtent2D& operator+=(const BasicExtent2D&) noexcept;
-    BasicExtent2D& operator-=(const BasicExtent2D&) noexcept;
-    BasicExtent2D& operator*=(_ValueType) noexcept;
-    BasicExtent2D& operator/=(DevideType);
-    constexpr bool operator==(const BasicExtent2D&) const noexcept;
-    constexpr bool operator!=(const BasicExtent2D&) const noexcept;
+    BasicExtent2D& operator+=(const BasicExtent2D& rhs) noexcept;
+    BasicExtent2D& operator-=(const BasicExtent2D& rhs) noexcept;
+    BasicExtent2D& operator*=(_ValueType rhs) noexcept;
+    BasicExtent2D& operator/=(_ValueType rhs);
+    constexpr bool operator==(const BasicExtent2D& rhs) const noexcept;
+    constexpr bool operator!=(const BasicExtent2D& rhs) const noexcept;
 
     template <typename _CastToType>
     constexpr operator BasicExtent2D<_CastToType>() const noexcept;
@@ -70,10 +68,6 @@ public:
 public:
     _ValueType width;
     _ValueType height;
-
-    static const BasicExtent2D One;      // 1, 1
-    static const BasicExtent2D Zero;     // 0, 0
-    static const BasicExtent2D MinusOne; // -1, -1
 };
 
 template <typename _ValueType>
@@ -102,38 +96,31 @@ constexpr BasicExtent2D<_ValueType>::BasicExtent2D(_ValueType width, _ValueType 
 template<typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator+(const BasicExtent2D& rhs) const noexcept
 {
-    return TExtent(width + rhs.width, height + rhs.height);
+    return BasicExtent2D(width + rhs.width, height + rhs.height);
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator-(const BasicExtent2D& rhs) const noexcept
 {
-    return TExtent(width - rhs.width, height - rhs.height);
+    return BasicExtent2D(width - rhs.width, height - rhs.height);
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
-    return TExtent(width * rhs, height * rhs);
+    return BasicExtent2D(width * rhs, height * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator/(DevideType rhs) const
+constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator/(_ValueType rhs) const
 {
-    return TExtent((_ValueType)((DevideType)width / (DevideType)rhs),
-                  (_ValueType)((DevideType)height / (DevideType)rhs));
-}
-
-template <typename _ValueType>
-constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator+() const noexcept
-{
-	return *this;
+    return BasicExtent2D(width / rhs, height / rhs);
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator-() const noexcept
 {
-	return TExtent(-width, -height);
+	return BasicExtent2D(-width, -height);
 }
 
 template <typename _ValueType>
@@ -164,10 +151,10 @@ inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator*=(_ValueTy
 }
 
 template <typename _ValueType>
-inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator/=(DevideType rhs)
+inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator/=(_ValueType rhs)
 {
-    width = (_ValueType)((DevideType)width / rhs);
-    height = (_ValueType)((DevideType)height / rhs);
+    width /= rhs;
+    height /= rhs;
 
 	return *this;
 }

@@ -1,10 +1,9 @@
 #include "PrecompiledHeader.pch"
-#include "../Screen.h"
 
-#ifndef NOMINMAX
-#   define NOMINMAX
-#endif
 #include <Windows.h>
+
+#include "../Screen.h"
+#include "../ScreenType.h"
 
 namespace tgon
 {
@@ -55,7 +54,7 @@ Screen ConvertDEVMODEToScreen(const DEVMODE& dm) noexcept
 //	//return ( ChangeDisplaySettingsEx( &dmScreenSettings, CDS_FULLSCREEN ) == DISP_CHANGE_SUCCESSFUL ) ? true : false;
 //}
 
-int32_t GetMonitorCount()
+int32_t GetScreenCount()
 {
     return GetSystemMetrics(SM_CMONITORS);
 }

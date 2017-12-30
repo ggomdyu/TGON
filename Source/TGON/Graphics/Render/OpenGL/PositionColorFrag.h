@@ -5,4 +5,4 @@ void main()                     \n\
 {                               \n\
     gl_FragColor = g_vColor;    \n\
 }                               \n\
-"
+";

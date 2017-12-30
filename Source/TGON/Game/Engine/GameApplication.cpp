@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
-#include "GameApplication.h"
 
-#include "Graphics/RHI/Base/BaseRHI.h"
-#include "Graphics/RHI/Base/BaseRHIType.h"
-#include "Graphics/RHI/RHIUtility.h"
+#include "Graphics/RHI/RHI.h"
+#include "Graphics/RHI/RHIType.h"
+
+#include "GameApplication.h"
 
 namespace tgon
 {

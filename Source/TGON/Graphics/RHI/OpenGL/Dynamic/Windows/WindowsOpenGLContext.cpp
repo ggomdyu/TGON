@@ -1,10 +1,11 @@
 #include "PrecompiledHeader.pch"
-#include "../OpenGLContext.h"
 
 #include <Windows.h>
 
 #include "Core/Platform/Window.h"
-#include "Graphics/RHI/Base/BaseRHIType.h"
+
+#include "../../OpenGLContext.h"
+#include "../../../RHIType.h"
 
 namespace tgon
 {

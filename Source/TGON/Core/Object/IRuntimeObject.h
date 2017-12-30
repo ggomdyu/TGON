@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "IRuntimeObjectType.h"
+#include "RTTI.h"
 
 namespace tgon
 {

@@ -10,4 +10,4 @@ void main()                                 \n\
     gl_Position = g_uWVP * g_aPosition;     \n\
     g_vColor = g_uColor;                    \n\
 }                                           \n\
-"
+";

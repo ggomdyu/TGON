@@ -13,13 +13,16 @@ namespace platform
 {
 
 class Window;
+struct VideoMode;
 
 } /* namespace platform */
 
 namespace rhi
 {
 
-std::unique_ptr<class BaseRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const struct VideoMode& videoMode);
+class IDynamicRHI;
+
+std::unique_ptr<IDynamicRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode);
 
 } /* namespace rhi */
 } /* namespace tgon */

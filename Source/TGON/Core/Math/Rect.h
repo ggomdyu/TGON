@@ -19,7 +19,6 @@ struct BasicRect
 {
 /* @section Public type */
 public:
-    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
 /* @section Public constructor */
@@ -28,20 +27,17 @@ public:
     constexpr BasicRect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr BasicRect(_ValueType bottom, _ValueType top, _ValueType width, _ValueType height) noexcept;
+    constexpr BasicRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept;
 
 /* @section Public operator */
 public:
-    constexpr const BasicRect operator+(const BasicRect&) const noexcept;
-    constexpr const BasicRect operator-(const BasicRect&) const noexcept;
     constexpr const BasicRect operator*(_ValueType) const noexcept;
-    constexpr const BasicRect operator/(DevideType) const;
-    constexpr const BasicRect operator+() const noexcept;
+    constexpr const BasicRect operator/(_ValueType) const;
     constexpr const BasicRect operator-() const noexcept;
     BasicRect& operator+=(const BasicRect&) noexcept;
     BasicRect& operator-=(const BasicRect&) noexcept;
     BasicRect& operator*=(_ValueType) noexcept;
-    BasicRect& operator/=(DevideType);
+    BasicRect& operator/=(_ValueType);
     constexpr bool operator==(const BasicRect&) const noexcept;
     constexpr bool operator!=(const BasicRect&) const noexcept;
 
@@ -71,10 +67,6 @@ public:
     _ValueType top;
     _ValueType right;
     _ValueType bottom;
-
-	static const BasicRect One;		// 0, 0, 0, 0
-	static const BasicRect Zero;	    // 1, 1, 1, 1
-	static const BasicRect MinusOne;	// -1, -1, -1, -1
 };
 
 template <typename _ValueType>
@@ -105,38 +97,15 @@ constexpr BasicRect<_ValueType>::BasicRect(_ValueType left, _ValueType top, _Val
 }
 
 template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+(const BasicRect& rhs) const noexcept
-{
-    return BasicRect(left + rhs.left, top + rhs.top, right + rhs.right, bottom + rhs.bottom);
-}
-
-template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-(const BasicRect& rhs) const noexcept
-{
-    return BasicRect(left + rhs.left, top - rhs.top, right - rhs.right, bottom - rhs.bottom);
-}
-
-template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator*(_ValueType rhs) const noexcept
 {
     return BasicRect(left * rhs, top * rhs, right * rhs, bottom * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(DevideType rhs) const
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(_ValueType rhs) const
 {
-    DevideType inverse = 1.0f / rhs;
-
-    return BasicRect((_ValueType)((DevideType)left * inverse),
-                     (_ValueType)((DevideType)top * inverse),
-                     (_ValueType)((DevideType)right * inverse),
-                     (_ValueType)((DevideType)bottom * inverse));
-}
-
-template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+() const noexcept
-{
-	return *this;
+    return BasicRect(left / rhs, top / rhs, right / rhs, bottom / rhs);
 }
 
 template <typename _ValueType>
@@ -179,14 +148,12 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(_ValueType rhs) 
 }
 
 template <typename _ValueType>
-inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(DevideType rhs)
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(_ValueType rhs)
 {
-	DevideType inverse = 1.0f / rhs;
-
-    left = (_ValueType)((DevideType)left * inverse);
-    top = (_ValueType)((DevideType)top * inverse);
-    right = (_ValueType)((DevideType)right * inverse);
-    bottom = (_ValueType)((DevideType)bottom * inverse);
+    left /= rhs;
+    top /= rhs;
+    right /= rhs;
+    bottom /= rhs;
 
 	return *this;
 }

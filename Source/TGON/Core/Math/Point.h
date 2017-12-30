@@ -19,7 +19,6 @@ struct BasicPoint
 {
 /* @section Public type */
 public:
-    using DevideType = typename std::conditional<std::is_floating_point<_ValueType>::value, _ValueType, float>::type;
     using ValueType = _ValueType;
 
 /* @section Public constructor */
@@ -35,13 +34,12 @@ public:
     constexpr const BasicPoint operator+(const BasicPoint&) const noexcept;
     constexpr const BasicPoint operator-(const BasicPoint&) const noexcept;
     constexpr const BasicPoint operator*(_ValueType) const noexcept;
-    constexpr const BasicPoint operator/(DevideType) const;
-    constexpr const BasicPoint operator+() const noexcept;
+    constexpr const BasicPoint operator/(_ValueType) const;
     constexpr const BasicPoint operator-() const noexcept;
     BasicPoint& operator+=(const BasicPoint&) noexcept;
     BasicPoint& operator-=(const BasicPoint&) noexcept;
     BasicPoint& operator*=(_ValueType) noexcept;
-    BasicPoint& operator/=(DevideType);
+    BasicPoint& operator/=(_ValueType);
     constexpr bool operator==(const BasicPoint&) const noexcept;
     constexpr bool operator!=(const BasicPoint&) const noexcept;
 
@@ -70,10 +68,6 @@ public:
 public:
     _ValueType x;
     _ValueType y;
-
-	static const BasicPoint One;         // 1, 1
-    static const BasicPoint Zero;        // 0, 0
-	static const BasicPoint MinusOne;    // -1, -1
 };
 
 using Point = BasicPoint<int32_t>;
@@ -118,16 +112,9 @@ constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator*(_ValueT
 }
 
 template <typename _ValueType>
-constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(DevideType rhs) const
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(_ValueType rhs) const
 {
-    return BasicPoint((_ValueType)((DevideType)x / (DevideType)rhs),
-                 (_ValueType)((DevideType)y / (DevideType)rhs));
-}
-
-template <typename _ValueType>
-constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator+() const noexcept
-{
-	return *this;
+    return BasicPoint(x / rhs, y / rhs);
 }
 
 template <typename _ValueType>
@@ -164,10 +151,10 @@ inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator*=(_ValueType rhs
 }
 
 template <typename _ValueType>
-inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator/=(DevideType rhs)
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator/=(_ValueType rhs)
 {
-    x = (_ValueType)((DevideType)x / rhs);
-    y = (_ValueType)((DevideType)y / rhs);
+    x /= rhs;
+    y /= rhs;
 
 	return *this;
 }

@@ -1,5 +1,5 @@
 /**
- * @filename    IRuntimeObjectType.h
+ * @filename    RTTI.h
  * @author      ggomdyu
  * @since       10/29/2017
  */

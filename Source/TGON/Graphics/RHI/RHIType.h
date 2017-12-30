@@ -27,10 +27,15 @@ enum class GraphicsSDK
     Vulkan,
 };
 
+enum class VideoBufferType
+{
+    Vertex,
+    Index,
+};
+
 enum class PrimitiveType
 {
     PointList = 0,
-    LineList,
     LineStrip,
     TriangleList,
     TriangleStrip,
@@ -90,6 +95,9 @@ public:
     uint16_t depthBits;
     uint16_t stencilBits;
 };
+
+using VideoBuffer = void*;
+using Shader = void*;
 
 } /* namespace rhi */
 } /* namespace tgon */

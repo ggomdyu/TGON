@@ -3,26 +3,19 @@
    version = "1.0">
    <Group
       location = "container:"
-      name = "00. ThirdParty">
-      <FileRef
-         location = "group:../../Source/ThirdParty/libpng16/bin/libpng.xcodeproj">
-      </FileRef>
+      name = "00. Core">
    </Group>
    <Group
       location = "container:"
-      name = "01. Core">
+      name = "01. Graphics">
    </Group>
    <Group
       location = "container:"
-      name = "02. Graphics">
+      name = "02. Game">
    </Group>
    <Group
       location = "container:"
-      name = "03. Game">
-   </Group>
-   <Group
-      location = "container:"
-      name = "01. TGON">
+      name = "03. TGON">
       <FileRef
          location = "group:TGON.xcodeproj">
       </FileRef>

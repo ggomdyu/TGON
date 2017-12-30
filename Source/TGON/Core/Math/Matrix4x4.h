@@ -54,17 +54,16 @@
 //
 ///* @section Public method */
 //public:
-//    void Scale(float x, float y, float z) noexcept;
-//    void Translate(float x, float y, float z) noexcept;
-//    void RotateX(float theta);
-//    void RotateY(float theta);
-//    void RotateZ(float theta);
-//    void Rotate(float x, float y, float z);
-//    void Transpose();
-//    void Inverse();
-//
+//    static constexpr const Matrix4x4 Translate(float x, float y, float z) noexcept;
+//    static const Matrix4x4 RotateX(float radian);
+//    static const Matrix4x4 RotateY(float radian);
+//    static const Matrix4x4 RotateZ(float radian);
+//    static constexpr const Matrix4x4 Scale(float x, float y, float z) noexcept;
+//    static constexpr const Matrix4x4 Transpose(const Matrix4x4& matrix) noexcept;
+//    static constexpr const Matrix4x4 Inverse();
 //    static Matrix4x4 View(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
 //    static Matrix4x4 PerspectiveFovLH(float fovY, float aspect, float nearZ, float farZ);
+//    static Matrix4x4 PerspectiveFovRH(float fovY, float aspect, float nearZ, float farZ);
 //    static Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 //
 ///* @section Public variable */
@@ -78,10 +77,18 @@
 //          m30, m31, m32, m33;
 //};
 //
-//Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
-//                     float m10, float m11, float m12, float m13,
-//                     float m20, float m21, float m22, float m23,
-//                     float m30, float m31, float m32, float m33) :
+//constexpr Matrix4x4::Matrix4x4() noexcept :
+//    m00(1.0f), m01(0.0f), m02(0.0f), m03(0.0f),
+//    m10(0.0f), m11(1.0f), m12(0.0f), m13(0.0f),
+//    m20(0.0f), m21(0.0f), m22(1.0f), m23(0.0f),
+//    m30(0.0f), m31(0.0f), m32(0.0f), m33(1.0f)
+//{
+//}
+//
+//constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
+//                               float m10, float m11, float m12, float m13,
+//                               float m20, float m21, float m22, float m23,
+//                               float m30, float m31, float m32, float m33) noexcept :
 //    m00(m00), m01(m01), m02(m02), m03(m03),
 //    m10(m10), m11(m11), m12(m12), m13(m13),
 //    m20(m20), m21(m21), m22(m22), m23(m23),
@@ -176,6 +183,11 @@
 //    );
 //}
 //
+//inline Matrix4x4 Matrix4x4::PerspectiveFovRH(float fovY, float aspect, float nearZ, float farZ)
+//{
+//    return Matrix4x4();
+//}
+//
 //Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
 //{
 //    float halfWidth = width * 0.5f;
@@ -189,13 +201,13 @@
 //    );
 //}
 //
-//Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& rhs)
+//constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
 //{
 //    return Matrix4x4(
-//        rhs.m00, rhs.m10, rhs.m20, rhs.m30,
-//        rhs.m01, rhs.m11, rhs.m21, rhs.m31,
-//        rhs.m02, rhs.m12, rhs.m22, rhs.m32,
-//        rhs.m03, rhs.m13, rhs.m23, rhs.m33
+//        matrix.m00, matrix.m10, matrix.m20, matrix.m30,
+//        matrix.m01, matrix.m11, matrix.m21, matrix.m31,
+//        matrix.m02, matrix.m12, matrix.m22, matrix.m32,
+//        matrix.m03, matrix.m13, matrix.m23, matrix.m33
 //    );
 //}
 //
@@ -260,52 +272,54 @@
 //inline float* Matrix4x4::operator[](std::size_t index)
 //{
 //    assert((index < 4 || index > -1) && "Matrix4x4 index out of range");
-//    return (&m00 + index * 4);
+//
+//    return &m00 + (index * 4);
 //}
 //
 //inline const float* Matrix4x4::operator[](std::size_t index) const
 //{
 //    assert((index < 4 || index > -1) && "Matrix4x4 index out of range");
-//    return (&m00 + index * 4);
+//
+//    return &m00 + (index * 4);
 //}
 //
-//inline Matrix4x4 Matrix4x4::Translate(float x, float y, float z)
+//constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexcept
 //{
-//    return{
-//        1.f, 0.f, 0.f, 0.f,
-//        0.f, 1.f, 0.f, 0.f,
-//        0.f, 0.f, 1.f, 0.f,
-//        x,     y,      z,   1.f
-//    };
+//    return Matrix4x4(
+//        1.f,    0.f,    0.f,    0.f,
+//        0.f,    1.f,    0.f,    0.f,
+//        0.f,    0.f,    1.f,    0.f,
+//        x,      y,      z,      1.f
+//    );
 //}
 //
-//inline Matrix4x4 Matrix4x4::RotateX(float theta)
+//inline const Matrix4x4 Matrix4x4::RotateX(float radian)
+//{
+//    const float cosValue = cosf(radian);
+//    const float sinValue = sinf(radian);
+//
+//    return Matrix4x4(
+//        1.f,    0.f,        0.f,        0.f,
+//        0.f,    cosValue,   sinValue,   0.f,
+//        0.f,    -sinValue,  cosValue,   0.f,
+//        0.f,    0.f,        0.f,        1.f
+//    );
+//}
+//
+//inline const Matrix4x4 Matrix4x4::RotateY(float theta)
 //{
 //    const float radCos = cosf(theta);
 //    const float radSin = sinf(theta);
 //
-//    return{
-//        1.f, 0.f,     0.f,    0.f,
-//        0.f, radCos,  radSin, 0.f,
-//        0.f, -radSin, radCos, 0.f,
-//        0.f, 0.f,     0.f,    1.f
-//    };
+//    return Matrix4x4(
+//        radCos,     0.f,    -radSin,    0.f,
+//        0.f,    1.f,    0.f,        0.f,
+//        radSin, 0.f,    radCos,     0.f,
+//        0.f,    0.f,    0.f,        1.f
+//    );
 //}
 //
-//inline Matrix4x4 Matrix4x4::RotateY(float theta)
-//{
-//    const float radCos = cosf(theta);
-//    const float radSin = sinf(theta);
-//
-//    return{
-//        radCos, 0.f, -radSin, 0.f,
-//        0.f,    1.f, 0.f,     0.f,
-//        radSin, 0.f, radCos,  0.f,
-//        0.f,    0.f, 0.f,     1.f
-//    };
-//}
-//
-//inline Matrix4x4 Matrix4x4::RotateZ(float theta)
+//inline const Matrix4x4 Matrix4x4::RotateZ(float theta)
 //{
 //    const float radCos = cosf(theta);
 //    const float radSin = sinf(theta);
@@ -319,7 +333,7 @@
 //    };
 //}
 //
-//constexpr Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
+//constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
 //{
 //    return Matrix4x4(
 //        x,      0.f,    0.f,    0.f,
@@ -331,4 +345,3 @@
 //
 //} /* namespace math */
 //} /* namespace tgon */
-
