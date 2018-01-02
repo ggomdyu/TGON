@@ -1,5 +1,5 @@
 /**
- * @filename    Expression.h
+ * @filename    ExpressionTemplate.h
  * @author      ggomdyu
  * @since       06/20/2017
  * @brief       Utility support for Expression template.
@@ -15,6 +15,18 @@ namespace tgon
 namespace utility
 {
 
+template <typename _FirstOperandType, typename _SecondOperandType>
+struct PlusExpression;
+
+template <typename _FirstOperandType, typename _SecondOperandType>
+struct MinusExpression;
+
+template <typename _FirstOperandType, typename _SecondOperandType>
+struct MultiplyExpression;
+
+template <typename _FirstOperandType, typename _SecondOperandType>
+struct DivideExpression;
+
 template <typename _DerivedExpressionType>
 struct BaseExpression
 {
@@ -24,6 +36,18 @@ public:
     {
         return reinterpret_cast<const _DerivedExpressionType&>(*this).operator[](index);
     }
+
+    template <typename _SecondOperandType>
+    constexpr const PlusExpression<_DerivedExpressionType, _SecondOperandType> operator+(const _SecondOperandType& rhs) const noexcept;
+
+    template <typename _SecondOperandType>
+    constexpr const MinusExpression<_DerivedExpressionType, _SecondOperandType> operator-(const _SecondOperandType& rhs) const noexcept;
+
+    template <typename _SecondOperandType>
+    constexpr const MultiplyExpression<_DerivedExpressionType, _SecondOperandType> operator*(const _SecondOperandType& rhs) const noexcept;
+
+    template <typename _SecondOperandType>
+    constexpr const DivideExpression<_DerivedExpressionType, _SecondOperandType> operator/(const _SecondOperandType& rhs) const noexcept;
     
 /* @section Public method */
 public:
@@ -255,29 +279,33 @@ constexpr const _SecondOperandType& DivideExpression<_FirstOperandType, _SecondO
     return m_secondOperand;
 }
 
+template <typename _DerivedExpressionType>
+template <typename _SecondOperandType>
+constexpr const PlusExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator+(const _SecondOperandType& rhs) const noexcept
+{
+    return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
+}
+
+template <typename _DerivedExpressionType>
+template <typename _SecondOperandType>
+constexpr const MinusExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator-(const _SecondOperandType& rhs) const noexcept
+{
+    return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
+}
+
+template <typename _DerivedExpressionType>
+template <typename _SecondOperandType>
+constexpr const MultiplyExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator*(const _SecondOperandType& rhs) const noexcept
+{
+    return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
+}
+
+template <typename _DerivedExpressionType>
+template <typename _SecondOperandType>
+constexpr const DivideExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator/(const _SecondOperandType& rhs) const noexcept
+{
+    return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
+}
+
 } /* namespace utility */
 } /* namespace tgon */
-
-template <typename _FirstExpressionType, typename _SecondExpressionType>
-constexpr const tgon::utility::PlusExpression<_FirstExpressionType, _SecondExpressionType> operator+(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
-{
-    return {lhs, rhs};
-}
-
-template <typename _FirstExpressionType, typename _SecondExpressionType>
-constexpr const tgon::utility::MinusExpression<_FirstExpressionType, _SecondExpressionType> operator-(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
-{
-    return {lhs, rhs};
-}
-
-template <typename _FirstExpressionType, typename _SecondExpressionType>
-constexpr const tgon::utility::MultiplyExpression<_FirstExpressionType, _SecondExpressionType> operator*(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
-{
-    return {lhs, rhs};
-}
-
-template <typename _FirstExpressionType, typename _SecondExpressionType>
-constexpr const tgon::utility::DivideExpression<_FirstExpressionType, _SecondExpressionType> operator/(const _FirstExpressionType& lhs, const _SecondExpressionType& rhs) noexcept
-{
-    return {lhs, rhs};
-}

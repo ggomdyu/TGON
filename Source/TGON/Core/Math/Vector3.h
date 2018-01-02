@@ -33,6 +33,8 @@ public:
 
 /* @section Public perator */
 public:
+    constexpr const utility::PlusExpression<Vector3, Vector3> operator+(const Vector3& rhs) const noexcept;
+    constexpr const utility::MinusExpression<Vector3, Vector3> operator-(const Vector3& rhs) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
@@ -97,7 +99,7 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 }
 
 template<typename _DerivedExpressionType>
-constexpr tgon::math::Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression)
+constexpr Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression)
 {
     for (int i = 0; i < 3; ++i)
     {
@@ -105,9 +107,19 @@ constexpr tgon::math::Vector3::Vector3(const utility::BaseExpression<_DerivedExp
     }
 }
 
-constexpr const Vector3 Vector3::operator*(float scalar) const noexcept
+constexpr const utility::PlusExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept
 {
-    return Vector3(x * scalar, y * scalar, z * scalar);
+    return {*this, rhs};
+}
+
+constexpr const utility::MinusExpression<Vector3, Vector3> Vector3::operator-(const Vector3& rhs) const noexcept
+{
+    return {*this, rhs};
+}
+
+constexpr const Vector3 Vector3::operator*(float rhs) const noexcept
+{
+    return Vector3(x * rhs, y * rhs, z * rhs);
 }
 
 constexpr const Vector3 operator*(float lhs, const Vector3& rhs) noexcept
@@ -216,7 +228,7 @@ constexpr const Vector3 Vector3::Cross(const Vector3& v1, const Vector3& v2) noe
 
 inline float Vector3::Distance(const Vector3& v1, const Vector3& v2) noexcept
 {
-    return 0.0f;//Vector3(v1 - v2).Length();
+    return Vector3(v1 - v2).Length();
 }
 
 inline float Vector3::Length() const noexcept
