@@ -21,6 +21,13 @@
 
 namespace tgon
 {
+namespace math
+{
+
+struct Color4f;
+
+} /* namespace math */
+
 namespace platform
 {
 

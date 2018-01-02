@@ -5,10 +5,32 @@
 */
 
 #pragma once
+#include "Core/Platform/Config.h"
+
+class ASCII;
+class EUC_KR;
+class EUC_JP;
+class EUC_CN;
+class UTF7;
+class UTF8;
+class UTF16LE;
+class UTF16BE;
+class UTF32;
+
+class Encoding
+{
+public:
+    template <typename _SrcEncodingType, typename _DestEncodingType>
+    static void Convert(char* srcStr)
+    {
+
+    }
+};
+
+
+
 #include <string>
 #include <cstdint>
-
-#include "Core/Platform/Config.h"
 
 namespace tgon
 {

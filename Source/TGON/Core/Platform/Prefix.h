@@ -56,3 +56,11 @@
 #      define TGON_CDECL __attribute__((__cdecl__))
 #   endif
 #endif
+
+#ifndef TGON_RESTRICT
+#   if BOOST_COMP_MSVC_DETECTION
+#       define TGON_RESTRICT __restrict
+#   else
+#       define TGON_RESTRICT restrict
+#   endif
+#endif

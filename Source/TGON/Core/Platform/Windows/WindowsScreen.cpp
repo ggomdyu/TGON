@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
 
-#include <Windows.h>
-
 #include "../Screen.h"
 #include "../ScreenType.h"
+
+#include <Windows.h>
 
 namespace tgon
 {

@@ -5,11 +5,11 @@
  */
 
 #pragma once
+#include "WELL1024a.h"
+
 #include <cstddef>
 #include <algorithm>
 #include <random>
-
-#include "WELL1024a.h"
 
 namespace tgon
 {

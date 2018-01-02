@@ -18,7 +18,7 @@
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
- * @brief   Enable macro overloading for TGON_MAKE_DELEGATE.
+ * @brief   Enables overloading of TGON_MAKE_DELEGATE macro.
  */
 #if BOOST_PP_VARIADICS_MSVC
 #   define TGON_MAKE_DELEGATE(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(TGON_MAKE_DELEGATE_, __VA_ARGS__)(__VA_ARGS__), BOOST_PP_EMPTY())
@@ -28,19 +28,19 @@
 
 /**
  * @brief                   Binds delegate with lambda or global function
- * @param [in] function     Lambda or Reference of global function(e.g. &functionName)
+ * @param [in] function     A lambda object or Reference to global function(e.g. &functionName)
  */
 #define TGON_MAKE_DELEGATE_1(_function)\
     [&]()\
     {\
         auto function = _function;\
         return tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
-    }()
+    } ()
 
 /**
  * @brief                   Binds delegate with class member function
- * @param [in] function     A Reference of class member function(e.g. &ClassName::functionName)
- * @param [in] instance     A Instance which handles event
+ * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
+ * @param [in] instance     An instance which handles event
  */
 #define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::utility::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
@@ -148,13 +148,7 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate() noexcept :
 
 template<typename _ReturnType, typename... _ArgTypes>
 constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept :
-#ifdef _MSC_VER
-    m_ptr(nullptr),
-    m_deleter(nullptr),
-    m_stub(nullptr)
-#else
     Delegate()
-#endif
 {
 }
 

@@ -6,13 +6,15 @@
  */
 
 #pragma once
+#include "WindowFwd.h"
+#include "Config.h"
+
+#include "Core/Object/Delegate.h"
+
 #include <boost/predef/os.h>
 #include <boost/noncopyable.hpp>
 #include <string>
 #include <cstdint>
-
-#include "WindowFwd.h"
-#include "Config.h"
 
 namespace tgon
 {
@@ -53,6 +55,8 @@ public:
     void SetTitle(const char* title);
     void SetFullScreen(bool isFullScreen);
     void SetTopMost(bool setTopMost);
+    void SetWindowTransparency(float opacity);
+    //void SetWindowTransparencyPerPixel(const math::Color4f& pixel, float opacity);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetSize(int32_t* width, int32_t* height) const;
     void GetTitle(char* destCaptionTitle) const;
@@ -69,14 +73,25 @@ public:
 #elif BOOST_OS_MACOS
 #endif
 
-    virtual void OnMove(int32_t x, int32_t y) {}
-    virtual void OnResize(int32_t width, int32_t height) {}
-    virtual void OnMaximize() {}
-    virtual void OnMinimize() {}
-    virtual void OnEnterFullScreen() {}
-    virtual void OnExitFullScreen() {}
-    virtual void OnGetFocus() {}
-    virtual void OnLoseFocus() {}
+    object::Delegate<void(int32_t, int32_t)> OnWindowMove;
+    object::Delegate<void(int32_t, int32_t)> OnWindowResize;
+    object::Delegate<void()> OnWindowMaximize;
+    object::Delegate<void()> OnWindowMinimize;
+    object::Delegate<void()> OnWindowEnterFullScreen;
+    object::Delegate<void()> OnWindowExitFullScreen;
+    object::Delegate<void()> OnWindowWillClose;
+    object::Delegate<void()> OnWindowDidClose;
+    object::Delegate<void()> OnWindowGetFocus;
+    object::Delegate<void()> OnWindowLoseFocus;
+
+/* @section Private method */
+public:
+#if BOOST_OS_WINDOWS
+    void SetUserData(void* data);
+#elif BOOST_OS_MACOS
+#elif BOOST_OS_ANDROID
+#elif BOOST_OS_IOS
+#endif
 
 /* @section Protected variable */
 protected:
@@ -84,6 +99,7 @@ protected:
 
 #if BOOST_OS_WINDOWS
     HWND m_wndHandle;
+    bool m_isDwmCompositionEnabled;
 #elif BOOST_OS_MACOS
     NSWindow* m_nsWindow;
     WindowDelegate* m_windowDelegate;

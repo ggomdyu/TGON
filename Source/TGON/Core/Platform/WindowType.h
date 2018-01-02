@@ -25,7 +25,7 @@ struct WindowStyle final
 
     uint32_t backgroundColor;
 
-    bool borderless = false;
+    bool hasCaption = true;
     bool enableSystemButton = true;
     bool supportWindowTransparency = false;
     bool supportPerPixelTransparency = false;

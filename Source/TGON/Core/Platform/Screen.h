@@ -6,10 +6,10 @@
  */
 
 #pragma once
-#include <vector>
-
 #include "ScreenFwd.h"
 #include "Config.h"
+
+#include <vector>
 
 namespace tgon
 {

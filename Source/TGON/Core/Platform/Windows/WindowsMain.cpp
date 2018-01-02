@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
 
+#include "../Application.h"
+
 #include <crtdbg.h>
 #include <Windows.h>
-
-#include "../Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC

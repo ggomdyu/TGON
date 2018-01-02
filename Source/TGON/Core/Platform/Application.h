@@ -6,13 +6,13 @@
  */
 
 #pragma once
+#include "Config.h"
+#include "ApplicationFwd.h"
+
 #include <boost/predef/os.h>
 #include <boost/noncopyable.hpp>
 #include <memory>
 #include <type_traits>
-
-#include "ApplicationFwd.h"
-#include "Config.h"
 
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
@@ -67,7 +67,6 @@ public:
     virtual void OnDidCloseWindow(const std::shared_ptr<Window>&) {}
     virtual void OnUpdate() {}
 
-    const struct BatteryState GetBatteryState() const;
     const std::shared_ptr<Window>& GetMainWindow() const noexcept;
 
 protected:

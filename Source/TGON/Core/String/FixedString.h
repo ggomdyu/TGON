@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include <cstdint>
-
 #include "StringTraits.h"
+
+#include <cstdint>
 
 namespace tgon
 {

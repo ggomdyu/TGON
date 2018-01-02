@@ -15,6 +15,7 @@
 #define TGON_USING_IEEE_754 1
 #define TGON_SUPPORT_SSE2 1
 #define TGON_SUPPORT_SIMD 1
+#define TGON_USING_SIMD 1
 #include <intrin.h>
 
 #if (WINVER >= _WIN32_WINNT_VISTA)

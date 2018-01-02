@@ -44,7 +44,7 @@ protected:
 public:
     /**
      * @brief   This is the special magic number which means string not exists.
-     *          The function series of Find will return this variable when searching sub-string failed.
+     *          The function series of Find will return this variable when searching substring failed.
      */
     static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
 
@@ -76,6 +76,14 @@ protected:
      */
     static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount = 1);
 
+    /**
+     * @brief                       Search match substring.
+     * @param [in] srcStr           The search source string
+     * @param [in] srcStrLen        The length of source string
+     * @param [in] srcStrOffset     Starting point of source string
+     * @param [in] srcFindSubStr    String to find
+     * @param [in] srcFindSubStr    The length of string to find
+     */
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
     static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);

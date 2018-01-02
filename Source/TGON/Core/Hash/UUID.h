@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include "Core/String/StringTraits.h"
+
 #include <cstring>
 #ifdef _MSC_VER
 #   include <rpc.h>
@@ -16,8 +18,6 @@
 #ifdef _MSC_VER
 #   pragma comment(lib, "Rpcrt4.lib")
 #endif
-
-#include "Core/String/StringTraits.h"
 
 namespace tgon
 {

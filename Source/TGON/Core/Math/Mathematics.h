@@ -5,11 +5,11 @@
  */
 
 #pragma once
+#include "Vector3.h"
+
 #include <cmath>
 #include <type_traits>
 #include <cstdint>
-
-#include "Vector3.h"
 
 namespace tgon
 {

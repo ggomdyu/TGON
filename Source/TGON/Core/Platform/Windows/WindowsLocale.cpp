@@ -1,4 +1,5 @@
 #include "PrecompiledHeader.pch"
+
 #include "../Locale.h"
 
 #include <Windows.h>

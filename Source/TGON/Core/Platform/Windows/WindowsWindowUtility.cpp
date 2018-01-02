@@ -1,10 +1,11 @@
 #include "PrecompiledHeader.pch"
-#include "WindowsWindowUtility.h"
 
-#include <cassert>
+#include "WindowsWindowUtility.h"
 
 #include "Core/Platform/WindowType.h"
 #include "Core/String/Encoding.h"
+
+#include <cassert>
 
 namespace tgon
 {
@@ -35,7 +36,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedSt
 	    	*normalStyle |= WS_THICKFRAME;
         }
 
-        if (windowStyle.borderless)
+        if (!windowStyle.hasCaption)
         {
             *normalStyle |= WS_POPUP;
         }

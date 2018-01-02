@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include <cstdarg>
-
 #include "Config.h"
+
+#include <cstdarg>
 
 namespace tgon
 {
