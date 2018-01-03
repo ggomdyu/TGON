@@ -66,13 +66,13 @@ private:
 	ComPtrTy* m_ptr;
 };
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::UniqueComPtr() noexcept :
     m_ptr(nullptr)
 {
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::UniqueComPtr(ComPtrTy* rhs) :
     m_ptr(rhs)
 {
@@ -83,7 +83,7 @@ inline UniqueComPtr<ComPtrTy>::UniqueComPtr(ComPtrTy* rhs) :
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::UniqueComPtr(UniqueComPtr&& rhs)
 {
     if (m_ptr == rhs.m_ptr)
@@ -100,7 +100,7 @@ inline UniqueComPtr<ComPtrTy>::UniqueComPtr(UniqueComPtr&& rhs)
     rhs.m_ptr = nullptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::~UniqueComPtr()
 {
     if (m_ptr)
@@ -110,7 +110,7 @@ inline UniqueComPtr<ComPtrTy>::~UniqueComPtr()
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>& UniqueComPtr<ComPtrTy>::operator=(UniqueComPtr&& rhs)
 {
     if (m_ptr == rhs.m_ptr)
@@ -129,55 +129,55 @@ inline UniqueComPtr<ComPtrTy>& UniqueComPtr<ComPtrTy>::operator=(UniqueComPtr&& 
     return *this;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy** UniqueComPtr<ComPtrTy>::operator&() const noexcept
 {
     return &m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy** UniqueComPtr<ComPtrTy>::operator&() noexcept
 {
     return &m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy* UniqueComPtr<ComPtrTy>::operator->() const noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy* UniqueComPtr<ComPtrTy>::operator->() noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::operator const ComPtrTy*() const noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline UniqueComPtr<ComPtrTy>::operator ComPtrTy*() noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline bool UniqueComPtr<ComPtrTy>::operator==(const UniqueComPtr& rhs) const noexcept
 {
     return m_ptr == rhs.m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline bool UniqueComPtr<ComPtrTy>::operator!=(const UniqueComPtr& rhs) const noexcept
 {
     return m_ptr != rhs.m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline void UniqueComPtr<ComPtrTy>::Reset(ComPtrTy* ptr)
 {
     if (m_ptr)
@@ -193,7 +193,7 @@ inline void UniqueComPtr<ComPtrTy>::Reset(ComPtrTy* ptr)
     m_ptr = ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline void UniqueComPtr<ComPtrTy>::Release()
 {
     if (m_ptr)
@@ -203,13 +203,13 @@ inline void UniqueComPtr<ComPtrTy>::Release()
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy* UniqueComPtr<ComPtrTy>::Get() const noexcept
 {
 	return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy* UniqueComPtr<ComPtrTy>::Get() noexcept
 {
     return m_ptr;

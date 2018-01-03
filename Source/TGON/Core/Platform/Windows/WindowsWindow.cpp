@@ -109,14 +109,12 @@ void Window::GetTitle(char* destStr) const
     wchar_t title[256] {};
     int titleLen = ::GetWindowTextW(m_wndHandle, title, 256);
 
-#if 1
     icu::UnicodeString unicodeStr(title);
 
     std::string str;
     unicodeStr.toUTF8String(str);
 
     memcpy(destStr, str.data(), str.length() + 1);
-#endif
 }
 
 bool Window::IsResizable() const

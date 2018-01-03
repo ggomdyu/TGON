@@ -111,7 +111,7 @@ inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t des
     StringTraits::Assign(destStr, destStrBufferSize, ch, chCount);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize)
 {
     assert(destStrBufferSize > srcStrLen && "String buffer overflowed!");
@@ -145,7 +145,7 @@ inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t
     destStr[srcStrLen + destStrLen] = _CharType();
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount)
 {
     assert(destStrBufferSize > chCount + destStrLen && "String buffer overflowed!");
@@ -171,7 +171,7 @@ inline std::size_t StringTraits<_CharType>::Find(const _CharType* srcStr, std::s
     return NPos;
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline std::size_t StringTraits<_CharType>::RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen)
 {
     const _CharType* foundStr = std::find_end(srcStr + srcStrOffset, srcStr + srcStrLen, srcFindSubStr, srcFindSubStr + srcFindSubStrLen);
@@ -204,7 +204,7 @@ inline int32_t StringTraits<_CharType>::Compare(const _CharType* lhsStr, std::si
     return 0;
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline _CharType& StringTraits<_CharType>::At(_CharType* srcStr, std::size_t srcStrLen, std::size_t index)
 {
     assert(index <= srcStrLen && "String index out of range!");
@@ -212,7 +212,7 @@ inline _CharType& StringTraits<_CharType>::At(_CharType* srcStr, std::size_t src
     return srcStr[index];
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline const _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index)
 {
     assert(index <= srcStrLen && "String index out of range!");
@@ -220,13 +220,13 @@ inline const _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std
     return srcStr[index];
 }
     
-template<typename _CharType>
+template <typename _CharType>
 inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
 {
     return CharTraitsType::length(srcStr);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize)
 {
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);

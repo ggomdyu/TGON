@@ -44,7 +44,7 @@ private:
 public:
     template <std::size_t _CharArraySize2>
     bool operator==(const CharType(&rhs)[_CharArraySize2]) const;
-    template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
     bool operator==(const _CharPointerType rhs) const;
 
     const CharType& operator[](std::size_t index) const;
@@ -56,7 +56,7 @@ public:
     int32_t Compare(const CharType* str, std::size_t strLen) const;
     template <std::size_t _CharArraySize2>
     int32_t Compare(const CharType(&str)[_CharArraySize2]) const;
-    template<typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
+    template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
     int32_t Compare(const _CharPointerType str) const;
     
     template <std::size_t _CharArraySize2>

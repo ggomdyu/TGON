@@ -98,7 +98,7 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 {
 }
 
-template<typename _DerivedExpressionType>
+template <typename _DerivedExpressionType>
 constexpr Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression)
 {
     for (int i = 0; i < 3; ++i)
@@ -250,7 +250,7 @@ inline void Vector3::Normalize()
 	z /= length;
 }
 
-template<std::size_t _StrBufferSize>
+template <std::size_t _StrBufferSize>
 inline int32_t Vector3::ToString(char(&destStr)[_StrBufferSize]) const
 {
 #if _MSC_VER

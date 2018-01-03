@@ -79,7 +79,7 @@ constexpr BasicExtent2D<_ValueType> MakeExtent(_ValueType width, _ValueType heig
 using Extent2D = BasicExtent2D<int32_t>;
 using FExtent2D = BasicExtent2D<float>;
 
-template<typename _ValueType>
+template <typename _ValueType>
 constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :
     width{},
     height{}
@@ -93,7 +93,7 @@ constexpr BasicExtent2D<_ValueType>::BasicExtent2D(_ValueType width, _ValueType 
 {
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator+(const BasicExtent2D& rhs) const noexcept
 {
     return BasicExtent2D(width + rhs.width, height + rhs.height);
@@ -171,8 +171,8 @@ constexpr bool BasicExtent2D<_ValueType>::operator!=(const BasicExtent2D& rhs) c
     return !(*this == rhs);
 }
 
-template<typename _ValueType>
-template<typename _CastToType>
+template <typename _ValueType>
+template <typename _CastToType>
 constexpr BasicExtent2D<_ValueType>::operator BasicExtent2D<_CastToType>() const noexcept
 {
     return BasicExtent2D<_CastToType>((_CastToType)width, (_CastToType)height);

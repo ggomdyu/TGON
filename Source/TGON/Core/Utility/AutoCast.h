@@ -40,7 +40,7 @@ constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::operator _CastToType() 
     return _CastPolicyType::template Cast<_CastFromType, _CastToType>(m_castFromPtr);
 }
 
-template<typename _CastFromType, typename _CastPolicyType>
+template <typename _CastFromType, typename _CastPolicyType>
 constexpr AutoCastProxy<_CastFromType, _CastPolicyType>::AutoCastProxy(_CastFromType&& castFromPtr) noexcept :
     m_castFromPtr(castFromPtr)
 {

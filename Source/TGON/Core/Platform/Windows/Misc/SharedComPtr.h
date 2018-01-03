@@ -66,13 +66,13 @@ private:
     ComPtrTy* m_ptr;
 };
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::SharedComPtr() noexcept :
     m_ptr(nullptr)
 {
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::SharedComPtr(ComPtrTy* rhs) :
     m_ptr(rhs)
 {
@@ -82,7 +82,7 @@ inline SharedComPtr<ComPtrTy>::SharedComPtr(ComPtrTy* rhs) :
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::~SharedComPtr()
 {   
     if (m_ptr)
@@ -92,7 +92,7 @@ inline SharedComPtr<ComPtrTy>::~SharedComPtr()
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::SharedComPtr(const SharedComPtr& rhs) :
     m_ptr(rhs.m_ptr)
 {
@@ -102,7 +102,7 @@ inline SharedComPtr<ComPtrTy>::SharedComPtr(const SharedComPtr& rhs) :
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::SharedComPtr(SharedComPtr&& rhs)
 {
     if (m_ptr == rhs.m_ptr)
@@ -119,7 +119,7 @@ inline SharedComPtr<ComPtrTy>::SharedComPtr(SharedComPtr&& rhs)
     rhs.m_ptr = nullptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>& SharedComPtr<ComPtrTy>::operator=(const SharedComPtr& rhs)
 {
     if (m_ptr == rhs.m_ptr)
@@ -138,7 +138,7 @@ inline SharedComPtr<ComPtrTy>& SharedComPtr<ComPtrTy>::operator=(const SharedCom
     return *this;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>& SharedComPtr<ComPtrTy>::operator=(SharedComPtr&& rhs)
 {
     if (m_ptr == rhs.m_ptr)
@@ -157,55 +157,55 @@ inline SharedComPtr<ComPtrTy>& SharedComPtr<ComPtrTy>::operator=(SharedComPtr&& 
     return *this;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy** SharedComPtr<ComPtrTy>::operator&() const noexcept
 {
     return &m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy** SharedComPtr<ComPtrTy>::operator&() noexcept
 {
     return &m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy* SharedComPtr<ComPtrTy>::operator->() const noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy* SharedComPtr<ComPtrTy>::operator->() noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::operator const ComPtrTy*() const noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline SharedComPtr<ComPtrTy>::operator ComPtrTy*() noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline bool SharedComPtr<ComPtrTy>::operator==(const SharedComPtr& rhs) const noexcept
 {
     return m_ptr == rhs.m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline bool SharedComPtr<ComPtrTy>::operator!=(const SharedComPtr& rhs) const noexcept
 {
     return m_ptr != rhs.m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline void SharedComPtr<ComPtrTy>::Reset(ComPtrTy* ptr)
 {
     if (m_ptr)
@@ -221,7 +221,7 @@ inline void SharedComPtr<ComPtrTy>::Reset(ComPtrTy* ptr)
     m_ptr = ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline void SharedComPtr<ComPtrTy>::Release()
 {
     if (m_ptr)
@@ -231,13 +231,13 @@ inline void SharedComPtr<ComPtrTy>::Release()
     }
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline const ComPtrTy* SharedComPtr<ComPtrTy>::Get() const noexcept
 {
     return m_ptr;
 }
 
-template<typename ComPtrTy>
+template <typename ComPtrTy>
 inline ComPtrTy* SharedComPtr<ComPtrTy>::Get() noexcept
 {
     return m_ptr;

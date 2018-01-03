@@ -129,8 +129,8 @@ constexpr _ValueType Abs(const _ValueType& value) noexcept
 }
 
 /* @brief  Get the sign of value represented as 1, -1 or 0 */
-template<typename _ValueType,
-         typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+template <typename _ValueType,
+          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Sign(const _ValueType& value) noexcept
 {
     return (value > static_cast<_ValueType>(0)) ? static_cast<_ValueType>(1) : (value < static_cast<_ValueType>(0)) ? static_cast<_ValueType>(-1) : static_cast<_ValueType>(0);
