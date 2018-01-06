@@ -183,5 +183,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
       <Filter>Source\Core\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Circle.h">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

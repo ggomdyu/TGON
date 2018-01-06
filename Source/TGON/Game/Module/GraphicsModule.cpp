@@ -14,7 +14,7 @@ namespace game
 GraphicsModule::GraphicsModule(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode) :
     m_rhi(MakeRHI(window, videoMode))
 {
-    m_rhi->SetClearColor({1.0f, 0.0f, 1.0f, 1.0f});
+    m_rhi->SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
 }
 
 void GraphicsModule::Update()

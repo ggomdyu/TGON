@@ -38,7 +38,6 @@ public:
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
-    constexpr const Vector3 operator+() const noexcept;
     constexpr const Vector3 operator-() const noexcept;
     Vector3& operator+=(const Vector3&) noexcept;
     Vector3& operator-=(const Vector3&) noexcept;
@@ -61,7 +60,7 @@ public:
     float Length() const noexcept;
     constexpr float LengthSq() const noexcept;
     void Normalize();
-    const Vector3 Normalized() const;
+    constexpr const Vector3 Normalized() const;
 
     /**
      * @brief                   Converts value to a string.
@@ -243,12 +242,18 @@ constexpr float Vector3::LengthSq() const noexcept
 
 inline void Vector3::Normalize()
 {
-    float length = std::sqrtf(x*x + y*y + z*z);
+    float length = std::sqrtf((x * x) + (y * y) + (z * z));
 
 	x /= length;
 	y /= length;
 	z /= length;
 }
+
+//constexpr const Vector3 Vector3::Normalized() const
+//{
+//    float length = core::Sqrt((x * x) + (y * y) + (z * z));
+//    return Vector3(x / length, y / length, z / length);
+//}
 
 template <std::size_t _StrBufferSize>
 inline int32_t Vector3::ToString(char(&destStr)[_StrBufferSize]) const

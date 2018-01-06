@@ -4,6 +4,7 @@
 
 #include "Graphics/RHI/RHIType.h"
 #include "Game/Module/TimeModule.h"
+#include "Game/Module/GraphicsModule.h"
 
 namespace tgon
 {
@@ -22,11 +23,6 @@ GameApplication::GameApplication(const core::WindowStyle& windowStyle, const gra
     m_graphicsModule(std::make_shared<GraphicsModule>(GetMainWindow(), videoMode))
 {
 }
-
-//const std::unique_ptr<render::Renderer>& GameApplication::GetRenderer() const
-//{
-//    return m_renderer;
-//}
 
 void GameApplication::OnUpdate()
 {

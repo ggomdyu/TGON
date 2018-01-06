@@ -209,14 +209,15 @@ constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, co
 	return {};//{(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 
-//float Sqrt()
-//{
-//    _mm_set_ps1(0.0f);
-//    return 0.0f;
-////#ifdef TGON_SUPPORT_SSE
-////    return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ps1(0.0f)));
-////#endif
-//}
+double Sqrt(double number)
+{
+    return std::sqrt(number);
+}
+
+float Sqrt(float number)
+{
+    return std::sqrtf(number);
+}
 
 } /* namespace core */
 } /* namespace tgon */

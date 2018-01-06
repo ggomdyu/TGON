@@ -18,6 +18,7 @@
 #include "Core/Math/Mathematics.h"
 #include "Core/Math/Vector3.h"
 #include "Core/Math/Color.h"
+#include "Core/Math/Extent.h"
 #include "Core/Hash/UUID.h"
 #include "Graphics/RHI/RHIType.h"
 #include "Graphics/RHI/IDynamicRHI.h"
@@ -43,10 +44,10 @@ public:
                 windowStyle.width = 500;
                 windowStyle.height = 500;
                 windowStyle.showMiddle = true;
-                windowStyle.title = u8"Hallo안녕こんにちは你好नमस्ते";
+                windowStyle.title = u8"こんにちはHallo你好안녕नमस्ते";
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
-                windowStyle.resizeable = false;
+                windowStyle.resizeable = true;
             }
             return windowStyle;
         }(),
@@ -72,6 +73,9 @@ public:
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
     
     virtual void OnUpdate() override
@@ -88,11 +92,12 @@ public:
         glBegin(GL_TRIANGLES);
         glVertex2f(0.0 + newX, 0.5 + newY);
         glVertex2f(-0.5 + newX, -0.5 + newY);
+
         glVertex2f(0.5 + newX, -0.5 + newY);
         glEnd();
         glFinish();
 
-        //FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
+        FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
     }
 };
 

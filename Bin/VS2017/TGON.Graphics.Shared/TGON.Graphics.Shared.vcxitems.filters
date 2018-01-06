@@ -45,6 +45,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\IDynamicRHIFwd.h">
       <Filter>Source\Graphics\RHI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLShader.h">
+      <Filter>Source\Graphics\RHI\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLShaderCode.h">
+      <Filter>Source\Graphics\RHI\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\VertexBuffer.cpp">
@@ -55,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\Windows\WindowsOpenGLContext.cpp">
       <Filter>Source\Graphics\RHI\OpenGL\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RHI\OpenGL\OpenGLShader.cpp">
+      <Filter>Source\Graphics\RHI\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

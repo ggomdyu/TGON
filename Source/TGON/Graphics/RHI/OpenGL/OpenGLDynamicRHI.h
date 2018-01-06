@@ -10,7 +10,6 @@
 #include "../IDynamicRHI.h"
 
 #include <memory>
-#include "OpenGLContext.h"
 
 namespace tgon
 {
@@ -23,14 +22,16 @@ class OpenGLDynamicRHI :
 /* @section Public constructor */
 public:
     OpenGLDynamicRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-    virtual ~OpenGLDynamicRHI() = default;
+    virtual ~OpenGLDynamicRHI();
 
 /* @section Public method */
 public:
     virtual void SetClearColor(const core::Color4f& color) override;
     virtual void SetFillMode(FillMode fillMode) override;
     virtual void SetCullMode(CullMode cullMode) override;
-    virtual void EnalbleDepthTest() override;
+    virtual void EnableBlend() override;
+    virtual void EnableDepthTest() override;
+    virtual void DisableBlend() override;
     virtual void DisableDepthTest() override;
 
     virtual void BeginScene(PrimitiveType primitiveType) override;

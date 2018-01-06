@@ -28,7 +28,9 @@ public:
     virtual void SetFillMode(FillMode) {}
     virtual void SetCullMode(CullMode cullMode) {}
     virtual void SetScissorRect(const core::FRect& rect) {}
-    virtual void EnalbleDepthTest() {}
+    virtual void EnableBlend() {}
+    virtual void EnableDepthTest() {}
+    virtual void DisableBlend() {}
     virtual void DisableDepthTest() {}
 
     virtual void BeginScene(PrimitiveType primitiveType) {}

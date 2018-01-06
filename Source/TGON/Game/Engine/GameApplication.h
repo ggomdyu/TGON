@@ -1,41 +1,21 @@
 /**
- * @filename    Engine.h
+ * @filename    GameApplication.h
  * @author      ggomdyu
  * @since       10/21/2017
  */
 
 #pragma once
-#include "Core/Platform/Application.h"
+#include "GameApplicationFwd.h"
 
-#include "Core/Object/Object.h"
-//#include "Game/Module/TimeModule.h"
-#include "Game/Module/GraphicsModule.h"
+#include "Core/Platform/Application.h"
 
 #include <vector>
 #include <unordered_map>
 
 namespace tgon
 {
-namespace core
-{
-
-struct WindowStyle;
-
-} /* namespace core */
-
-namespace graphics
-{
-
-struct VideoMode;
-class IDynamicRHI;
-
-} /* namespace graphics */
-
 namespace game
 {
-
-class IModule;
-class TimeModule;
 
 class TGON_API GameApplication :
     public core::Application
@@ -67,8 +47,6 @@ public:
      */
     template <typename _ModuleType>
     const std::shared_ptr<_ModuleType>& FindModule() const;
-
-    //const std::unique_ptr<render::Renderer>& GetRenderer() const;
 
 /* @section Private method */
 private:

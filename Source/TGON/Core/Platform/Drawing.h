@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include "Config.h"
+
 #include "Core/Math/Point.h"
 
 namespace tgon
@@ -13,11 +15,11 @@ namespace tgon
 namespace core
 {
 
-void DrawPoint(const core::Point& p);
+TGON_API void DrawPoint(const core::Point& p);
 
-void DrawLine(const core::Point& p1, const core::Point& p2);
+TGON_API void DrawLine(const core::Point& p1, const core::Point& p2);
 
-void DrawPolygon(const core::Point& p1, const core::Point& p2, const core::Point& p3);
+TGON_API void DrawPolygon(const core::Point& p1, const core::Point& p2, const core::Point& p3);
 
 } /* namespace core */
 } /* namespace tgon */

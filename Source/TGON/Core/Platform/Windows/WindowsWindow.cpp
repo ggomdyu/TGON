@@ -84,6 +84,9 @@ void Window::Flash()
 
 void Window::GetPosition(int32_t* x, int32_t* y) const
 {
+    assert(x != nullptr);
+    assert(y != nullptr);
+
     ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
 
@@ -93,6 +96,9 @@ void Window::GetPosition(int32_t* x, int32_t* y) const
 
 void Window::GetSize(int32_t* width, int32_t* height) const
 {
+    assert(width != nullptr);
+    assert(height != nullptr);
+
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
 
@@ -191,6 +197,8 @@ void Window::SetSize(int32_t width, int32_t height)
 
 void Window::SetTitle(const char* captionTitle)
 {
+    assert(captionTitle != nullptr);
+
     wchar_t utf16Caption[512] {};
 
     bool succeed = ConvertUTF8ToUTF16(captionTitle, reinterpret_cast<char*>(utf16Caption)) != -1;
