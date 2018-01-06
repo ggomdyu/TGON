@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 enum class DayOfWeek
@@ -52,5 +52,5 @@ constexpr DateTime::DateTime(const std::tm& rawTime) noexcept :
 {
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
@@ -261,5 +261,5 @@ constexpr const _CharType BasicStringView<_CharType, _StringTraitsType>::At(std:
     return _StringTraitsType::At(m_str, index);
 }
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

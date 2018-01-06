@@ -17,6 +17,12 @@
     <Filter Include="Sources\Core\Platform\Windows\Misc">
       <UniqueIdentifier>{03e6c863-5c50-4883-8cb3-3f9288171283}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Core\Debug">
+      <UniqueIdentifier>{fa95a123-10cc-45b0-a852-44279c2b4632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Debug\Windows">
+      <UniqueIdentifier>{41499009-5464-42a7-8399-08de994cb7e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
@@ -63,8 +69,8 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsDebug.cpp">
-      <Filter>Sources\Core\Platform\Windows</Filter>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
+      <Filter>Sources\Core\Debug\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

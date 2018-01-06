@@ -10,14 +10,14 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
-void DrawPoint(const math::Point& p);
+void DrawPoint(const core::Point& p);
 
-void DrawLine(const math::Point& p1, const math::Point& p2);
+void DrawLine(const core::Point& p1, const core::Point& p2);
 
-void DrawPolygon(const math::Point& p1, const math::Point& p2, const math::Point& p3);
+void DrawPolygon(const core::Point& p1, const core::Point& p2, const core::Point& p3);
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace hash
+namespace core
 {
 
 constexpr uint32_t X65599Hash(const char* str)
@@ -24,5 +24,5 @@ constexpr uint32_t X65599Hash(const char* str)
     return hashValue ^ (hashValue >> 16);
 }
 
-} /* namespace hash */
+} /* namespace core */
 } /* namespace tgon */

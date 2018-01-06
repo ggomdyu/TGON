@@ -1,4 +1,6 @@
-#include "PrecompiledHeader.pch"
+﻿#include "PrecompiledHeader.pch"
+
+#include "Game/Engine/GameApplication.h"
 
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
@@ -17,42 +19,42 @@
 #include "Core/Math/Vector3.h"
 #include "Core/Math/Color.h"
 #include "Core/Hash/UUID.h"
-#include "Graphics/RHI/Base/BaseRHIType.h"
-#include "Graphics/RHI/OpenGL/OpenGLRHI.h"
-#include "Game/Engine/GameApplication.h"
-
+#include "Graphics/RHI/RHIType.h"
+#include "Graphics/RHI/IDynamicRHI.h"
+#include "Graphics/Render/Renderer.h"
+#include "Game/Module/GraphicsModule.h"
+#include "Game/Module/TimeModule.h"
 #include <GL/glew.h>
 
-#include "Core/Utility/ExpressionTemplate.h"
-#pragma comment(lib, "glew32.lib")
-
 using namespace tgon;
-using namespace tgon::string;
-using namespace tgon::platform;
-using namespace tgon::engine;
 
 class TGON_API ThousandParty :
-    public engine::GameApplication
+    public game::GameApplication
 {
 public:
+    TGON_RUNTIME_OBJECT(ThousandParty)
+
+public:
     ThousandParty() :
-        engine::GameApplication([&]()
+        game::GameApplication([&]()
         {
-            platform::WindowStyle windowStyle;
+            core::WindowStyle windowStyle;
             {
                 windowStyle.width = 500;
                 windowStyle.height = 500;
                 windowStyle.showMiddle = true;
-                windowStyle.title = u8"Hallo?";
+                windowStyle.title = u8"Hallo안녕こんにちは你好नमस्ते";
                 windowStyle.enableSystemButton = true;
+                windowStyle.hasCaption = true;
+                windowStyle.resizeable = false;
             }
             return windowStyle;
         }(),
         [&]()
         {
-            rhi::VideoMode videoMode;
+            graphics::VideoMode videoMode;
             {
-                videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL;
+                videoMode.graphicsSDK = graphics::GraphicsSDK::OpenGL4_0;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
                 videoMode.enableDoubleBuffer = true;
@@ -64,15 +66,18 @@ public:
 
     virtual void OnWillLaunch() override
     {
-        GetRHI()->SetClearColor(math::Color4f(0.3f, 0.4f, 0.6f, 1.0f));
+        SuperType::OnWillLaunch();
     }
 
     virtual void OnDidLaunch() override
     {
+        SuperType::OnDidLaunch();
     }
     
     virtual void OnUpdate() override
     {
+        SuperType::OnUpdate();
+
         static float x = 0.0f;
         static float y = 0.0f;
 
@@ -87,7 +92,7 @@ public:
         glEnd();
         glFinish();
 
-        GetRHI()->SwapBuffer();
+        //FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
     }
 };
 

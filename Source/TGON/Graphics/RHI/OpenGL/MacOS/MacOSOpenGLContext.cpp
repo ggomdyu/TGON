@@ -17,42 +17,42 @@ namespace
 
 void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAttribute* attributes, std::size_t attributesBufferSize)
 {
-    int attributeCount = 0;
+    int attributeIndex = 0;
 
     if (videoMode.enableHardwareAccelerate)
     {
-        attributes[attributeCount++] = NSOpenGLPFAAccelerated;
+        attributes[attributeIndex++] = NSOpenGLPFAAccelerated;
     }
 
     if (videoMode.enableDoubleBuffer)
     {
-        attributes[attributeCount++] = NSOpenGLPFADoubleBuffer;
+        attributes[attributeIndex++] = NSOpenGLPFADoubleBuffer;
     }
 
     if (videoMode.enableMultiSampling)
     {
-        attributes[attributeCount++] = NSOpenGLPFASampleBuffers;
-        attributes[attributeCount++] = 1;
-        attributes[attributeCount++] = NSOpenGLPFASamples;
-        attributes[attributeCount++] = videoMode.sampleCount;
+        attributes[attributeIndex++] = NSOpenGLPFASampleBuffers;
+        attributes[attributeIndex++] = 1;
+        attributes[attributeIndex++] = NSOpenGLPFASamples;
+        attributes[attributeIndex++] = videoMode.sampleCount;
     }
 
-    attributes[attributeCount++] = NSOpenGLPFAColorSize;
-    attributes[attributeCount++] = 32;
+    attributes[attributeIndex++] = NSOpenGLPFAColorSize;
+    attributes[attributeIndex++] = 32;
 
-    attributes[attributeCount++] = NSOpenGLPFADepthSize;
-    attributes[attributeCount++] = 24;
+    attributes[attributeIndex++] = NSOpenGLPFADepthSize;
+    attributes[attributeIndex++] = 24;
 
-    attributes[attributeCount++] = NSOpenGLPFAAlphaSize;
-    attributes[attributeCount++] = 8;
+    attributes[attributeIndex++] = NSOpenGLPFAAlphaSize;
+    attributes[attributeIndex++] = 8;
 
 #if CGL_VERSION_1_3
-    attributes[attributeCount++] = NSOpenGLPFAOpenGLProfile;
-    attributes[attributeCount++] = NSOpenGLProfileVersion3_2Core;
+    attributes[attributeIndex++] = NSOpenGLPFAOpenGLProfile;
+    attributes[attributeIndex++] = NSOpenGLProfileVersion3_2Core;
 #endif
 
     // Mark end of attribute.
-    attributes[attributeCount++] = 0;
+    attributes[attributeIndex++] = 0;
 }
 
 } /* namespace */

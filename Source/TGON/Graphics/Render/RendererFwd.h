@@ -1,11 +1,10 @@
 /**
- * @filename    RHIUtility.h
+ * @filename    RendererFwd.h
  * @author      ggomdyu
- * @since       10/22/2017
+ * @since       12/31/2017
  */
 
 #pragma once
-#include <memory>
 
 namespace tgon
 {
@@ -13,7 +12,6 @@ namespace platform
 {
 
 class Window;
-struct VideoMode;
 
 } /* namespace platform */
 
@@ -21,8 +19,7 @@ namespace rhi
 {
 
 class IDynamicRHI;
-
-std::unique_ptr<IDynamicRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode);
+struct VideoMode;
 
 } /* namespace rhi */
 } /* namespace tgon */

@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 template <typename _CharType>
@@ -232,5 +232,5 @@ inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrL
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

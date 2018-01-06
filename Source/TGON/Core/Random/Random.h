@@ -13,7 +13,7 @@
 
 namespace tgon
 {
-namespace random
+namespace core
 {
 
 /* @return  Random value between min to max */
@@ -46,5 +46,5 @@ inline void Shuffle(_ContainerType& container)
     std::shuffle(container.begin(), container.end(), std::default_random_engine(randomSeed));
 };
 
-} /* namespace random */
+} /* namespace core */
 } /* namespace tgon */

@@ -141,9 +141,9 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsDebug.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp" />

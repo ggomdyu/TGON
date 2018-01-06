@@ -23,22 +23,14 @@
 
 #include <GL/glew.h>
 
-//#include "Graphics/Render/OpenGL/Shader.h"
-#include "Core/Utility/ExpressionTemplate.h"
-
-using namespace tgon;
-using namespace tgon::string;
-using namespace tgon::platform;
-using namespace tgon::engine;
-
 class TGON_API ThousandParty :
-    public engine::GameApplication
+    public core::GameApplication
 {
 public:
     ThousandParty() :
-        engine::GameApplication([&]()
+        core::GameApplication([&]()
         {
-            platform::WindowStyle windowStyle;
+            core::WindowStyle windowStyle;
             {
                 windowStyle.width = 500;
                 windowStyle.height = 500;
@@ -50,9 +42,9 @@ public:
         }(),
         [&]()
         {
-            rhi::VideoMode videoMode;
+            graphics::VideoMode videoMode;
             {
-                videoMode.graphicsSDK = rhi::GraphicsSDK::OpenGL;
+                videoMode.graphicsSDK = graphics::GraphicsSDK::OpenGL;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
                 videoMode.enableDoubleBuffer = true;
@@ -64,7 +56,6 @@ public:
 
     virtual void OnWillLaunch() override
     {
-        GetRHI()->SetClearColor(math::Color4f(0.3f, 0.4f, 0.6f, 1.0f));
     }
 
     virtual void OnDidLaunch() override

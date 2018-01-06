@@ -1,39 +1,37 @@
 /**
- * @filename    OpenGLContext.h
+ * @filename    OpenGLDynamicRHI.h
  * @author      ggomdyu
  * @since       10/22/2017
  */
 
 #pragma once
+#include "OpenGLDynamicRHIFwd.h"
+
+#include "../IDynamicRHI.h"
+
 #include <memory>
-
-#include "../OpenGLContext.h"
-
-#include "IDynamicRHI.h"
+#include "OpenGLContext.h"
 
 namespace tgon
 {
-namespace rhi
+namespace graphics
 {
 
-class OpenGLRHI :
+class OpenGLDynamicRHI :
     public IDynamicRHI
 {
 /* @section Public constructor */
 public:
-    explicit OpenGLRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
-    virtual ~OpenGLRHI() = default;
+    OpenGLDynamicRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    virtual ~OpenGLDynamicRHI() = default;
 
 /* @section Public method */
 public:
-    virtual void SetClearColor(const math::Color4f& color) override;
+    virtual void SetClearColor(const core::Color4f& color) override;
     virtual void SetFillMode(FillMode fillMode) override;
     virtual void SetCullMode(CullMode cullMode) override;
     virtual void EnalbleDepthTest() override;
     virtual void DisableDepthTest() override;
-
-    virtual Shader CreateShader(const char* shaderCode);
-    virtual VideoBuffer CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize);
 
     virtual void BeginScene(PrimitiveType primitiveType) override;
     virtual void EndScene() override;
@@ -43,8 +41,8 @@ public:
 
 /* @section Private variable */
 private:
-    OpenGLContext m_context;
+    std::unique_ptr<OpenGLContext> m_context;
 };
 
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

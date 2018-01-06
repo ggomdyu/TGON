@@ -9,7 +9,7 @@
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
@@ -18,5 +18,5 @@ auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<
     return MakeFixedString(str, _CharArraySize - 1);
 }
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

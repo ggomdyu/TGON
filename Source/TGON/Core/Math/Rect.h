@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 template <typename _ValueType>
@@ -27,17 +27,17 @@ public:
     constexpr BasicRect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr BasicRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept;
+    constexpr BasicRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept;
 
 /* @section Public operator */
 public:
-    constexpr const BasicRect operator*(_ValueType) const noexcept;
-    constexpr const BasicRect operator/(_ValueType) const;
+    constexpr const BasicRect operator*(const _ValueType&) const noexcept;
+    constexpr const BasicRect operator/(const _ValueType&) const;
     constexpr const BasicRect operator-() const noexcept;
     BasicRect& operator+=(const BasicRect&) noexcept;
     BasicRect& operator-=(const BasicRect&) noexcept;
-    BasicRect& operator*=(_ValueType) noexcept;
-    BasicRect& operator/=(_ValueType);
+    BasicRect& operator*=(const _ValueType&) noexcept;
+    BasicRect& operator/=(const _ValueType&);
     constexpr bool operator==(const BasicRect&) const noexcept;
     constexpr bool operator!=(const BasicRect&) const noexcept;
 
@@ -70,7 +70,7 @@ public:
 };
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType> MakeRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept
+constexpr BasicRect<_ValueType> MakeRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept
 {
     return {left, top, right, bottom};
 }
@@ -88,7 +88,7 @@ constexpr BasicRect<_ValueType>::BasicRect() noexcept :
 }
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType>::BasicRect(_ValueType left, _ValueType top, _ValueType right, _ValueType bottom) noexcept :
+constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept :
     left(left),
     top(top),
     right(right),
@@ -97,13 +97,13 @@ constexpr BasicRect<_ValueType>::BasicRect(_ValueType left, _ValueType top, _Val
 }
 
 template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator*(_ValueType rhs) const noexcept
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
     return BasicRect(left * rhs, top * rhs, right * rhs, bottom * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(_ValueType rhs) const
+constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(const _ValueType& rhs) const
 {
     return BasicRect(left / rhs, top / rhs, right / rhs, bottom / rhs);
 }
@@ -137,7 +137,7 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect&
 }
 
 template <typename _ValueType>
-inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(_ValueType rhs) noexcept
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
     left *= rhs;
     top *= rhs;
@@ -148,7 +148,7 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(_ValueType rhs) 
 }
 
 template <typename _ValueType>
-inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(_ValueType rhs)
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(const _ValueType& rhs)
 {
     left /= rhs;
     top /= rhs;
@@ -213,5 +213,5 @@ inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferS
 #endif
 }
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

@@ -9,7 +9,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
@@ -75,7 +75,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     ConverWindowStyleToNative(windowStyle, &exStyle, &normalStyle);
 
     wchar_t utf16Title[256] {};
-    bool succeedToConvert = string::ConvertUTF8ToUTF16(windowStyle.title.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
+    bool succeedToConvert = ConvertUTF8ToUTF16(windowStyle.title.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
     if (!succeedToConvert)
     {
         return nullptr;
@@ -108,5 +108,5 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 	return wndHandle;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

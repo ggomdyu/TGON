@@ -9,7 +9,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 template <typename _ArrayElementType, std::size_t _ArraySize>
@@ -18,5 +18,5 @@ constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexc
 	return _ArraySize;
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

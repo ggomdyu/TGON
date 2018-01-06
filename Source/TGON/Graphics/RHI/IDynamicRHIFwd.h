@@ -8,7 +8,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 struct Color4f;
@@ -22,5 +22,17 @@ struct BasicRect;
 
 using FRect = BasicRect<float>;
 
-} /* namespace math */
+} /* namespace core */
+
+namespace graphics
+{
+
+enum class FillMode;
+enum class CullMode;
+enum class PrimitiveType;
+
+enum class VideoBufferType;
+using VideoBuffer = void*;
+
+} /* namespace graphics */
 } /* namespace tgon */

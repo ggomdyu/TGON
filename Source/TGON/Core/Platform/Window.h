@@ -18,7 +18,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 class TGON_API Window :
@@ -56,7 +56,7 @@ public:
     void SetFullScreen(bool isFullScreen);
     void SetTopMost(bool setTopMost);
     void SetWindowTransparency(float opacity);
-    //void SetWindowTransparencyPerPixel(const math::Color4f& pixel, float opacity);
+    //void SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetSize(int32_t* width, int32_t* height) const;
     void GetTitle(char* destCaptionTitle) const;
@@ -73,16 +73,16 @@ public:
 #elif BOOST_OS_MACOS
 #endif
 
-    object::Delegate<void(int32_t, int32_t)> OnWindowMove;
-    object::Delegate<void(int32_t, int32_t)> OnWindowResize;
-    object::Delegate<void()> OnWindowMaximize;
-    object::Delegate<void()> OnWindowMinimize;
-    object::Delegate<void()> OnWindowEnterFullScreen;
-    object::Delegate<void()> OnWindowExitFullScreen;
-    object::Delegate<void()> OnWindowWillClose;
-    object::Delegate<void()> OnWindowDidClose;
-    object::Delegate<void()> OnWindowGetFocus;
-    object::Delegate<void()> OnWindowLoseFocus;
+    Delegate<void(int32_t, int32_t)> OnWindowMove;
+    Delegate<void(int32_t, int32_t)> OnWindowResize;
+    Delegate<void()> OnWindowMaximize;
+    Delegate<void()> OnWindowMinimize;
+    Delegate<void()> OnWindowEnterFullScreen;
+    Delegate<void()> OnWindowExitFullScreen;
+    Delegate<void()> OnWindowWillClose;
+    Delegate<void()> OnWindowDidClose;
+    Delegate<void()> OnWindowGetFocus;
+    Delegate<void()> OnWindowLoseFocus;
 
 /* @section Private method */
 public:
@@ -108,5 +108,5 @@ protected:
 #endif
 };
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

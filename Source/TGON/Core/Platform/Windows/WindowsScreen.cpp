@@ -7,7 +7,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 namespace
 {
@@ -101,5 +101,5 @@ std::vector<Screen> GetAllScreen()
     return screens;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

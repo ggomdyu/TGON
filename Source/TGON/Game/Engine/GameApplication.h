@@ -7,71 +7,115 @@
 #pragma once
 #include "Core/Platform/Application.h"
 
+#include "Core/Object/Object.h"
+//#include "Game/Module/TimeModule.h"
+#include "Game/Module/GraphicsModule.h"
+
+#include <vector>
+#include <unordered_map>
+
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 struct WindowStyle;
 
-} /* namespace platform */
+} /* namespace core */
 
-namespace rhi
+namespace graphics
 {
 
 struct VideoMode;
 class IDynamicRHI;
 
-} /* namespace rhi */
+} /* namespace graphics */
 
-namespace engine
+namespace game
 {
+
+class IModule;
+class TimeModule;
 
 class TGON_API GameApplication :
-    public platform::Application
+    public core::Application
 {
+public:
+    TGON_RUNTIME_OBJECT(GameApplication)
+
 /* @section Public constructor */
 public:
-    GameApplication(const platform::WindowStyle& windowStyle);
-    GameApplication(const platform::WindowStyle& windowStyle, const rhi::VideoMode& videoMode);
+    GameApplication(const core::WindowStyle& windowStyle);
+    GameApplication(const core::WindowStyle& windowStyle, const graphics::VideoMode& videoMode);
     virtual ~GameApplication() = default;
 
 /* @section Public method */
 public:
-    void Update();
+    virtual void OnUpdate() override;
 
     /**
      * @brief   Adds a module to engine.
-     *          Added module will be updated automatically by engine.
+     * @detail  Added module will be updated automatically by engine.
      */
     template <typename _ModuleType>
-    void AddModule(std::unique_ptr<_ModuleType>&& module);
+    void AddModule(const std::shared_ptr<_ModuleType>& module);
 
     /**
      * @brief                   Finds a module.
-     * @tparam  _ModuleType     Type of module to find
-     * @return                  Returns unique-pointer of module if succeeded, nullptr otherwise.
+     * @tparam  _ModuleType     The type of module to find
+     * @return                  Returns module if succeeded, nullptr otherwise.
      */
     template <typename _ModuleType>
-    const std::unique_ptr<_ModuleType>& FindModule() const;
+    const std::shared_ptr<_ModuleType>& FindModule() const;
 
-    const std::unique_ptr<rhi::IDynamicRHI>& GetRHI() const
-    {
-        return m_rhi;
-    }
+    //const std::unique_ptr<render::Renderer>& GetRenderer() const;
 
 /* @section Private method */
 private:
 
 /* @section Private variable */
 private:
-    std::unique_ptr<rhi::IDynamicRHI> m_rhi;
+    std::vector<std::shared_ptr<IModule>> m_modulesToIterate;
+    std::unordered_map<uint32_t, std::shared_ptr<IModule>> m_modulesToFind;
 
-//    std::vector<IModule> m_modules;
-//    std::unique_ptr<graphics::render::Renderer> m_renderer;
-//    std::unique_ptr<gui::module::GUIModule> m_guiModule;
-//    std::unique_ptr<game::scene::SceneModule> m_sceneModule;;
+    //std::shared_ptr<SceneModule> m_sceneModule;
+    //std::shared_ptr<UIModule> m_uiModule;
+    //std::shared_ptr<SoundModule> m_soundModule;
+    //std::shared_ptr<InputModule> m_inputModule;
+    std::shared_ptr<TimeModule> m_timeModule;
+    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
-} /* namespace engine */
+template<typename _ModuleType>
+inline void GameApplication::AddModule(const std::shared_ptr<_ModuleType>& module)
+{
+    m_modulesToIterate.push_back(module);
+    m_modulesToFind.insert({module->GetRTTI()->GetHashCode(), module});
+}
+
+template<typename _ModuleType>
+inline const std::shared_ptr<_ModuleType>& GameApplication::FindModule() const
+{
+    auto iter = m_modulesToFind.find(core::GetRTTI<_ModuleType>()->GetHashCode());
+    if (iter != m_modulesToFind.end())
+    {
+        return *iter;
+    }
+
+    return nullptr;
+}
+
+template<>
+inline const std::shared_ptr<TimeModule>& GameApplication::FindModule<TimeModule>() const
+{
+    return m_timeModule;
+}
+
+template<>
+inline const std::shared_ptr<GraphicsModule>& GameApplication::FindModule<GraphicsModule>() const
+{
+    return m_graphicsModule;
+}
+
+} /* namespace game */
 } /* namespace tgon */

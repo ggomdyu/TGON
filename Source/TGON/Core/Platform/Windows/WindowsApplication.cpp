@@ -9,7 +9,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 namespace
 {
@@ -92,5 +92,5 @@ void Application::Terminate()
     ::PostQuitMessage(0);
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

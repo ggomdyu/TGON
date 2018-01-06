@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 namespace detail
 {
@@ -88,5 +88,5 @@ constexpr detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy> ForceAut
 	return detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy>(std::forward<_CastFromType>(rhs));
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

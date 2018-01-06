@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 template <typename _ValueType>
@@ -27,19 +27,19 @@ public:
     constexpr BasicPoint() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr BasicPoint(_ValueType x, _ValueType y) noexcept;
+    constexpr BasicPoint(const _ValueType& x, const _ValueType& y) noexcept;
 
 /* @section Public operator */
 public:
     constexpr const BasicPoint operator+(const BasicPoint&) const noexcept;
     constexpr const BasicPoint operator-(const BasicPoint&) const noexcept;
-    constexpr const BasicPoint operator*(_ValueType) const noexcept;
-    constexpr const BasicPoint operator/(_ValueType) const;
+    constexpr const BasicPoint operator*(const _ValueType&) const noexcept;
+    constexpr const BasicPoint operator/(const _ValueType&) const;
     constexpr const BasicPoint operator-() const noexcept;
     BasicPoint& operator+=(const BasicPoint&) noexcept;
     BasicPoint& operator-=(const BasicPoint&) noexcept;
-    BasicPoint& operator*=(_ValueType) noexcept;
-    BasicPoint& operator/=(_ValueType);
+    BasicPoint& operator*=(const _ValueType&) noexcept;
+    BasicPoint& operator/=(const _ValueType&);
     constexpr bool operator==(const BasicPoint&) const noexcept;
     constexpr bool operator!=(const BasicPoint&) const noexcept;
 
@@ -74,7 +74,7 @@ using Point = BasicPoint<int32_t>;
 using FPoint = BasicPoint<float>;
 
 template <typename _ValueType>
-constexpr BasicPoint<_ValueType> MakePoint(_ValueType x, _ValueType y) noexcept
+constexpr BasicPoint<_ValueType> MakePoint(const _ValueType& x, const _ValueType& y) noexcept
 {
     return {x, y};
 }
@@ -87,7 +87,7 @@ constexpr BasicPoint<_ValueType>::BasicPoint() noexcept :
 }
 
 template <typename _ValueType>
-constexpr BasicPoint<_ValueType>::BasicPoint(_ValueType x, _ValueType y) noexcept :
+constexpr BasicPoint<_ValueType>::BasicPoint(const _ValueType& x, const _ValueType& y) noexcept :
     x(x),
     y(y)
 {
@@ -106,13 +106,13 @@ constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator-(const B
 }
 
 template <typename _ValueType>
-constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator*(_ValueType rhs) const noexcept
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
     return BasicPoint(x * rhs, y * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(_ValueType rhs) const
+constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(const _ValueType& rhs) const
 {
     return BasicPoint(x / rhs, y / rhs);
 }
@@ -142,7 +142,7 @@ inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator-=(const BasicPoi
 }
 
 template <typename _ValueType>
-inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator*=(_ValueType rhs) noexcept
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
     x *= rhs;
     y *= rhs;
@@ -151,7 +151,7 @@ inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator*=(_ValueType rhs
 }
 
 template <typename _ValueType>
-inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator/=(_ValueType rhs)
+inline BasicPoint<_ValueType>& BasicPoint<_ValueType>::operator/=(const _ValueType& rhs)
 {
     x /= rhs;
     y /= rhs;
@@ -215,5 +215,5 @@ inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t strBuffer
 #endif
 }
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

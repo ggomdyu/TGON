@@ -15,7 +15,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 extern std::shared_ptr<Application> MakeApplication();
@@ -26,7 +26,7 @@ namespace
 std::shared_ptr<Application> g_application;
 
 } /* namespace */
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
    
-    using namespace tgon::platform;
+    using namespace tgon::core;
 
     g_application = MakeApplication();
     g_application->OnWillLaunch();

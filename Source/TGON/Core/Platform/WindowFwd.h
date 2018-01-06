@@ -21,18 +21,18 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 struct Color4f;
 
-} /* namespace math */
+} /* namespace core */
 
-namespace platform
+namespace core
 {
 
 struct WindowStyle;
 
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

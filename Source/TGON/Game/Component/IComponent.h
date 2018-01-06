@@ -5,24 +5,24 @@
  */
 
 #pragma once
-#include "Object.h"
+#include "Core/Object/Object.h"
 
 namespace tgon
 {
-namespace object
+namespace game
 {
 
-class ComponentObject;
+class GameObject;
 
 class TGON_API IComponent :
-	public Object
+	public core::Object
 {
 public:
 	TGON_RUNTIME_OBJECT(IComponent)
 
 /* @section Public constructor */
 public:
-	explicit IComponent(ComponentObject* owner) noexcept;
+	explicit IComponent(GameObject* owner) noexcept;
 
 /* @section Public destructor */
 public:
@@ -34,15 +34,15 @@ public:
 	virtual void Update() = 0;
 
     /* @brief   Sets the owner of this component. */
-	void SetOwner(ComponentObject* owner) noexcept;
+	void SetOwner(GameObject* owner) noexcept;
 
     /* @brief   Returns owner of this component. */
-	ComponentObject* GetOwner() noexcept;
+    GameObject* GetOwner() noexcept;
 
 /* @section Private variable */
 private:
-	ComponentObject* m_owner;
+    GameObject* m_owner;
 };
 
-} /* namespace object */
+} /* namespace game */
 } /* namespace tgon */

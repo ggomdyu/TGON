@@ -9,7 +9,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 template <typename _EnumType>
@@ -18,5 +18,5 @@ constexpr typename std::underlying_type<_EnumType>::type Underlying(_EnumType va
     return static_cast<typename std::underlying_type<_EnumType>::type>(value);
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

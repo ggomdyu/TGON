@@ -14,17 +14,13 @@
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
-
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>
-#pragma comment(lib, "icudt.lib")
-#pragma comment(lib, "icutud.lib")
-#pragma comment(lib, "icuind.lib")
 #pragma comment(lib, "icuucd.lib")
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 Window::Window(const WindowStyle& wndStyle) :
@@ -197,7 +193,7 @@ void Window::SetTitle(const char* captionTitle)
 {
     wchar_t utf16Caption[512] {};
 
-    bool succeed = string::ConvertUTF8ToUTF16(captionTitle, reinterpret_cast<char*>(utf16Caption)) != -1;
+    bool succeed = ConvertUTF8ToUTF16(captionTitle, reinterpret_cast<char*>(utf16Caption)) != -1;
     if (succeed)
     {
         ::SetWindowTextW(m_wndHandle, utf16Caption);
@@ -214,7 +210,7 @@ void Window::SetWindowTransparency(float opacity)
     ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(opacity * 255.0f), LWA_ALPHA);
 }
 
-//void Window::SetWindowTransparencyPerPixel(const math::Color4f& pixel, float opacity)
+//void Window::SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity)
 //{
 //    BOOL isCompoEnabled = FALSE;
 //    DwmIsCompositionEnabled(&isCompoEnabled);
@@ -325,5 +321,5 @@ void Window::SetUserData(void* data)
     SetWindowLongPtr(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG>(data));
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

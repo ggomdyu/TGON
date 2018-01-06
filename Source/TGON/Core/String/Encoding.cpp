@@ -4,7 +4,7 @@
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest)
@@ -60,5 +60,5 @@ TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest)
     return destIndex;
 }
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

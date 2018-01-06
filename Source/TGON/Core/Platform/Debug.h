@@ -12,10 +12,10 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 TGON_API void Log(const char* formatStr, ...);
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

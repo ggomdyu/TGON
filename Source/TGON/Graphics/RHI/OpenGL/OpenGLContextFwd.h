@@ -21,17 +21,17 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 class Window;
 
-} /* namespace platform */
+} /* namespace core */
 
-namespace rhi
+namespace graphics
 {
 
 struct VideoMode;
 
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

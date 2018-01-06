@@ -5,7 +5,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 //void Vector3::TransformCoord(const Matrix4x4& rhs) noexcept
@@ -23,7 +23,7 @@ namespace math
 //	y = transY;
 //	z = transZ;
 //
-//    if (std::abs(transW - 1.0f) >= math::EPSILON)
+//    if (std::abs(transW - 1.0f) >= core::EPSILON)
 //    {
 //		float inv = 1.f / transW;
 //
@@ -50,5 +50,5 @@ namespace math
 //#endif
 //}
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

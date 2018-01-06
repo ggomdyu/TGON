@@ -20,7 +20,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 class Application;
@@ -29,5 +29,5 @@ enum class MessageBoxIconType;
 class Window;
 struct BatteryState;
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

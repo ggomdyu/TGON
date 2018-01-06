@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 Application::Application(const WindowStyle& windowStyle) :
@@ -71,5 +71,5 @@ void Application::OnHandleMessage(NSEvent* message)
     }
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

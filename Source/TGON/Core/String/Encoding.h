@@ -34,7 +34,7 @@ public:
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 /**
@@ -45,5 +45,5 @@ namespace string
  */
 TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest);
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

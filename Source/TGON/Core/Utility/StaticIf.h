@@ -12,7 +12,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 namespace detail
 {
@@ -132,5 +132,5 @@ constexpr detail::StaticIfProxy<static_cast<detail::StaticIfCondition>(_Conditio
     return {};
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

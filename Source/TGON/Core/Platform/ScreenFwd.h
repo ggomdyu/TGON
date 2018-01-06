@@ -8,10 +8,10 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 struct Screen;
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

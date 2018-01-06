@@ -5,17 +5,17 @@
  */
 
 #pragma once
+#include "Core/Platform/Config.h"
+#include "Core/Utility/ExpressionTemplate.h"
+
 #include <cassert>
 #include <cstdint>
 #include <cmath>
 #include <cstdio>
 
-#include "Core/Platform/Config.h"
-#include "Core/Utility/ExpressionTemplate.h"
-
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 struct TGON_API Vector3
@@ -29,12 +29,12 @@ public:
     constexpr Vector3(float x, float y, float z) noexcept;
 
     template <typename _DerivedExpressionType>
-    constexpr Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression);
+    constexpr Vector3(const BaseExpression<_DerivedExpressionType>& expression);
 
 /* @section Public perator */
 public:
-    constexpr const utility::PlusExpression<Vector3, Vector3> operator+(const Vector3& rhs) const noexcept;
-    constexpr const utility::MinusExpression<Vector3, Vector3> operator-(const Vector3& rhs) const noexcept;
+    constexpr const PlusExpression<Vector3, Vector3> operator+(const Vector3& rhs) const noexcept;
+    constexpr const MinusExpression<Vector3, Vector3> operator-(const Vector3& rhs) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
     constexpr const Vector3 operator/(float) const;
@@ -99,7 +99,7 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 }
 
 template <typename _DerivedExpressionType>
-constexpr Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>& expression)
+constexpr Vector3::Vector3(const BaseExpression<_DerivedExpressionType>& expression)
 {
     for (int i = 0; i < 3; ++i)
     {
@@ -107,12 +107,12 @@ constexpr Vector3::Vector3(const utility::BaseExpression<_DerivedExpressionType>
     }
 }
 
-constexpr const utility::PlusExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept
+constexpr const PlusExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr const utility::MinusExpression<Vector3, Vector3> Vector3::operator-(const Vector3& rhs) const noexcept
+constexpr const MinusExpression<Vector3, Vector3> Vector3::operator-(const Vector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
@@ -269,5 +269,5 @@ inline int32_t Vector3::ToString(char* destStr, std::size_t strBufferSize) const
 #endif
 }
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

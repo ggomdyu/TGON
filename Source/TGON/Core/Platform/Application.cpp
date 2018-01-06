@@ -5,7 +5,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 void Application::ShowMessageBox(const char* message) const
@@ -28,5 +28,5 @@ const std::shared_ptr<class Window>& Application::GetMainWindow() const noexcept
     return m_mainWindow;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

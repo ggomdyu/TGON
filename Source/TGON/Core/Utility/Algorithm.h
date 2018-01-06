@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 template <typename _CharType>
@@ -28,5 +28,5 @@ constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
     return true;
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

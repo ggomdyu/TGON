@@ -6,13 +6,13 @@
  */
 
 #pragma once
-#include <cstddef>
-
 #include "Core/Platform/Config.h"
+
+#include <cstddef>
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 /**
@@ -28,5 +28,5 @@ inline void GetLanguage(char(&destStr)[N])
     GetLanguage(destStr, N);
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

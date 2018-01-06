@@ -1,5 +1,5 @@
 /**
- * @filename    BaseRHIType.h
+ * @filename    RHIType.h
  * @author      ggomdyu
  * @since       10/22/2017
  * @brief
@@ -10,13 +10,14 @@
 
 namespace tgon
 {
-namespace rhi
+namespace graphics
 {
 
 enum class GraphicsSDK
 {
-    OpenGL = 0,
+    OpenGL2_1 = 0,
     OpenGL3_0,
+    OpenGL4_0,
     OpenGL4_6,
     OpenGLES,
     Direct3D9,
@@ -80,7 +81,7 @@ struct VideoMode final
 {
 /* @section Public variable */
 public:
-    GraphicsSDK graphicsSDK = GraphicsSDK::OpenGL;
+    GraphicsSDK graphicsSDK = GraphicsSDK::OpenGL4_0;
 
     /* @brief   If false, the application will perform software rendering. */
     bool enableHardwareAccelerate = true;
@@ -96,8 +97,5 @@ public:
     uint16_t stencilBits;
 };
 
-using VideoBuffer = void*;
-using Shader = void*;
-
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

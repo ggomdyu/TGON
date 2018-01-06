@@ -5,13 +5,12 @@
  */
 
 #pragma once
-#include <boost/predef/os.h>
 #include <string>
 #include <cstdint>
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 struct WindowStyle final
@@ -37,5 +36,5 @@ struct WindowStyle final
     bool setFullScreen = false;
 };
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

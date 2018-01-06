@@ -15,7 +15,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 /**
@@ -27,5 +27,5 @@ namespace platform
  */
 HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

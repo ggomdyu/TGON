@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 struct Color4b
@@ -169,5 +169,5 @@ inline int32_t Color4f::ToString(char* destStr, std::size_t strBufferSize) const
 #endif
 }
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

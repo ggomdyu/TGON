@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 template <typename _ValueType>
@@ -27,19 +27,19 @@ public:
     constexpr BasicExtent2D() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr BasicExtent2D(_ValueType width, _ValueType height) noexcept;
+    constexpr BasicExtent2D(const _ValueType& width, const _ValueType& height) noexcept;
 
 /* @section Public operator */
 public:
     constexpr const BasicExtent2D operator+(const BasicExtent2D& rhs) const noexcept;
     constexpr const BasicExtent2D operator-(const BasicExtent2D& rhs) const noexcept;
-    constexpr const BasicExtent2D operator*(_ValueType rhs) const noexcept;
-    constexpr const BasicExtent2D operator/(_ValueType rhs) const;
+    constexpr const BasicExtent2D operator*(const _ValueType& rhs) const noexcept;
+    constexpr const BasicExtent2D operator/(const _ValueType& rhs) const;
     constexpr const BasicExtent2D operator-() const noexcept;
     BasicExtent2D& operator+=(const BasicExtent2D& rhs) noexcept;
     BasicExtent2D& operator-=(const BasicExtent2D& rhs) noexcept;
-    BasicExtent2D& operator*=(_ValueType rhs) noexcept;
-    BasicExtent2D& operator/=(_ValueType rhs);
+    BasicExtent2D& operator*=(const _ValueType& rhs) noexcept;
+    BasicExtent2D& operator/=(const _ValueType& rhs);
     constexpr bool operator==(const BasicExtent2D& rhs) const noexcept;
     constexpr bool operator!=(const BasicExtent2D& rhs) const noexcept;
 
@@ -71,7 +71,7 @@ public:
 };
 
 template <typename _ValueType>
-constexpr BasicExtent2D<_ValueType> MakeExtent(_ValueType width, _ValueType height) noexcept
+constexpr BasicExtent2D<_ValueType> MakeExtent(const _ValueType& width, const _ValueType& height) noexcept
 {
     return {width, height};
 }
@@ -87,7 +87,7 @@ constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :
 }
 
 template <typename _ValueType>
-constexpr BasicExtent2D<_ValueType>::BasicExtent2D(_ValueType width, _ValueType height) noexcept :
+constexpr BasicExtent2D<_ValueType>::BasicExtent2D(const _ValueType& width, const _ValueType& height) noexcept :
     width(width),
     height(height)
 {
@@ -106,13 +106,13 @@ constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator-(c
 }
 
 template <typename _ValueType>
-constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator*(_ValueType rhs) const noexcept
+constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
     return BasicExtent2D(width * rhs, height * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator/(_ValueType rhs) const
+constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator/(const _ValueType& rhs) const
 {
     return BasicExtent2D(width / rhs, height / rhs);
 }
@@ -142,7 +142,7 @@ inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator-=(const Ba
 }
 
 template <typename _ValueType>
-inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator*=(_ValueType rhs) noexcept
+inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
     width *= rhs;
     height *= rhs;
@@ -151,7 +151,7 @@ inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator*=(_ValueTy
 }
 
 template <typename _ValueType>
-inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator/=(_ValueType rhs)
+inline BasicExtent2D<_ValueType>& BasicExtent2D<_ValueType>::operator/=(const _ValueType& rhs)
 {
     width /= rhs;
     height /= rhs;
@@ -215,5 +215,5 @@ inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t strBuf
 #endif
 }
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

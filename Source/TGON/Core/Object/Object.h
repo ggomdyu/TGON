@@ -6,17 +6,17 @@
  */
 
 #pragma once
-#include <string>
-
-#include "Core/Platform/Config.h"
-
 #include "IRuntimeObject.h"
 #include "IRuntimeObjectUtility.h"
 #include "ICloneable.h"
 
+#include "Core/Platform/Config.h"
+
+#include <string>
+
 namespace tgon
 {
-namespace object
+namespace core
 {
 
 class TGON_API Object :
@@ -35,5 +35,5 @@ public:
     virtual ~Object() = default;
 };
 
-} /* namespace object */
+} /* namespace core */
 } /* namespace tgon */

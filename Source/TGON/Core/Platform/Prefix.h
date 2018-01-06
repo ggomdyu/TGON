@@ -9,7 +9,6 @@
 #pragma once
 #include <boost/predef/compiler.h>
 
-/* @brief   Prefix for TLS */
 #ifndef TGON_THREAD_LOCAL
 #	if BOOST_COMP_MSVC_DETECTION
 #		if (_MSC_VER >= 1900)
@@ -24,7 +23,6 @@
 #	endif
 #endif
 
-/* @brief   Prefix for novtable */
 #ifndef TGON_NOVTABLE
 #   ifdef BOOST_COMP_MSVC_DETECTION
 #   	define TGON_NOVTABLE __declspec(novtable)
@@ -33,7 +31,6 @@
 #   endif
 #endif
 
-/* @brief   Prefix for deprecated */
 #ifndef TGON_DEPRECATED
 #   if __cplusplus > 199711L
 #		define TGON_DEPRECATED(message) [[deprecated(#message)]]
@@ -48,7 +45,6 @@
 #   endif
 #endif
 
-/* @brief   Prefix for cdecl */
 #ifndef TGON_CDECL
 #   if BOOST_COMP_MSVC_DETECTION
 #      define TGON_CDECL __cdecl

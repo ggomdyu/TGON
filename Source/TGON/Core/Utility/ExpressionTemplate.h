@@ -12,7 +12,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 template <typename _FirstOperandType, typename _SecondOperandType>
@@ -307,5 +307,5 @@ constexpr const DivideExpression<_DerivedExpressionType, _SecondOperandType> Bas
     return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

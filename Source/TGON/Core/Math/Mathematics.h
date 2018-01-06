@@ -13,7 +13,7 @@
 
 namespace tgon
 {
-namespace math
+namespace core
 {
 
 constexpr const float Pi = 3.14159265358f;
@@ -27,7 +27,7 @@ constexpr const float Rad2Deg = 180 / Pi;
  */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr const _ValueType Gcd(_ValueType first, _ValueType second)
+constexpr const _ValueType Gcd(const _ValueType& first, const _ValueType& second)
 {
     _ValueType mod;
     while (second != 0)
@@ -79,7 +79,7 @@ constexpr _ValueType Ceil(const _ValueType& value) noexcept
 /* @brief   Round off the given floating point value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
-constexpr const _ValueType Round(_ValueType value) noexcept
+constexpr const _ValueType Round(const _ValueType& value) noexcept
 {
     using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
                          typename std::conditional<sizeof(_ValueType) == sizeof(int16_t), int16_t,
@@ -218,5 +218,5 @@ constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, co
 ////#endif
 //}
 
-} /* namespace math */
+} /* namespace core */
 } /* namespace tgon */

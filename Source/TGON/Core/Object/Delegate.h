@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include "Core/Utility/TypeTraits.h"
+
 #include <type_traits>
 #include <cstring>
 #include <cstdint>
@@ -13,8 +15,6 @@
 #include <new>
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
-
-#include "Core/Utility/TypeTraits.h"
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
@@ -34,7 +34,7 @@
     [&]()\
     {\
         auto function = _function;\
-        return tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
+        return tgon::object::Delegate<tgon::core::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
     } ()
 
 /**
@@ -42,11 +42,11 @@
  * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
  * @param [in] instance     An instance which handles event
  */
-#define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::Delegate<tgon::utility::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::utility::FunctionTraits<decltype(function)>::ClassType, function>(instance)
+#define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::Delegate<tgon::core::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::core::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
 namespace tgon
 {
-namespace object
+namespace core
 {
 
 template <typename>

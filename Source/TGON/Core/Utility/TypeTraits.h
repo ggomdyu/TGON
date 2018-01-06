@@ -19,7 +19,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 template <typename>
@@ -75,5 +75,5 @@ struct FunctionTraits :
 {
 };
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */

@@ -12,7 +12,7 @@
 
 namespace tgon
 {
-namespace string
+namespace core
 {
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
@@ -593,5 +593,5 @@ inline const _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTrait
     return _StringTraitsType::At(m_str, m_strLen, index);
 }
 
-} /* namespace string */
+} /* namespace core */
 } /* namespace tgon */

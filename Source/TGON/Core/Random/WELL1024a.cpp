@@ -27,7 +27,7 @@
 
 namespace tgon
 {
-namespace random
+namespace core
 {
 namespace
 {
@@ -60,5 +60,5 @@ TGON_API double WELL1024a()
     return static_cast<double>(STATE[state_i]) * FACT;
 }
 
-} /* namespace random */
+} /* namespace core */
 } /* namespace tgon */

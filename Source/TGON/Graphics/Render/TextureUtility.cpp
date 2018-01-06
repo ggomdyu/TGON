@@ -4,7 +4,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <cstdint>
 #include <stdio.h>
-#include <png.h>
+//#include <png.h>
 
 namespace tgon
 {

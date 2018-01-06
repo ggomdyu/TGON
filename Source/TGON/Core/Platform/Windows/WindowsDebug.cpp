@@ -8,7 +8,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 TGON_API void Log(const char* formatStr, ...)
@@ -25,5 +25,5 @@ TGON_API void Log(const char* formatStr, ...)
 #endif
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

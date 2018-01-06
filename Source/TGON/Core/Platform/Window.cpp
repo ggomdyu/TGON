@@ -4,7 +4,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 bool Window::IsClosed() const noexcept
@@ -12,5 +12,5 @@ bool Window::IsClosed() const noexcept
     return m_isClosed;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

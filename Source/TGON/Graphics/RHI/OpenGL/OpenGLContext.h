@@ -5,25 +5,26 @@
  */
 
 #pragma once
-#include <memory>
-
 #include "OpenGLContextFwd.h"
+
+#include <boost/predef/os.h>
+#include <memory>
 
 namespace tgon
 {
-namespace rhi
+namespace graphics
 {
 
 struct OpenGLContext
 {
 /* @section Public constructor */
 public:
-    OpenGLContext(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
     ~OpenGLContext();
 
 /* @section Public variable */
 public:
-    std::shared_ptr<platform::Window> window;
+    std::shared_ptr<core::Window> window;
 
 #if BOOST_OS_WINDOWS
     HGLRC context;
@@ -37,5 +38,5 @@ public:
 #endif
 };
 
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

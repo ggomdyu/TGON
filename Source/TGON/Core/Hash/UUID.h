@@ -21,10 +21,10 @@
 
 namespace tgon
 {
-namespace hash
+namespace core
 {
 
-template <typename _StringTraitsType = string::StringTraits<char>>
+template <typename _StringTraitsType = StringTraits<char>>
 struct BasicUUID :
     private _StringTraitsType
 {
@@ -88,7 +88,7 @@ private:
     CharType m_uuid[37];
 };
 
-using UUID = BasicUUID<string::StringTraits<char>>;
+using UUID = BasicUUID<StringTraits<char>>;
 
 template <typename _StringTraitsType>
 constexpr BasicUUID<_StringTraitsType>::BasicUUID() noexcept :
@@ -260,5 +260,5 @@ inline const typename BasicUUID<_StringTraitsType>::CharType& BasicUUID<_StringT
     return _StringTraitsType::At(m_uuid, std::extent<decltype(m_uuid)>::value, index);
 }
 
-} /* namespace hash */
+} /* namespace core */
 } /* namespace tgon */

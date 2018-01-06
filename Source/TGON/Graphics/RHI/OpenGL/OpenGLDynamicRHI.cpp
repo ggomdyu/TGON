@@ -1,14 +1,15 @@
 #include "PrecompiledHeader.pch"
 
-#include <atomic>
-#include <GL/glew.h>
+#include "OpenGLDynamicRHI.h"
+
+#include "../RHIType.h"
 
 #include "Core/Math/Color.h"
 #include "Core/Platform/Debug.h"
-
-#include "../../RHIType.h"
-
-#include "DynamicOpenGLRHI.h"
+#include "Graphics/RHI/RHIType.h"
+ 
+#include <atomic>
+#include <GL/glew.h>
 
 #if _DEBUG
 #   define GL_ERROR_CHECK(expression)\
@@ -17,7 +18,7 @@
         GLenum errorCode = glGetError();\
         if (errorCode != GL_NO_ERROR)\
         {\
-            platform::Log("OpenGL error occured. (Code: %d, File:%s, Function:%s, Line:%d)", errorCode, __FILE__, __FUNCTION__, __LINE__);\
+            core::Log("OpenGL error occured. (Code: %d, File:%s, Function:%s, Line:%d)", errorCode, __FILE__, __FUNCTION__, __LINE__);\
         }\
     }
 #else
@@ -27,7 +28,7 @@
 
 namespace tgon
 {
-namespace rhi
+namespace graphics
 {
 
 class GLProgram
@@ -66,6 +67,8 @@ bool GLProgram::Initialize(const char* vertexShaderStr, const char* fragmentShad
     {
         return false;
     }
+
+    return true;
 }
 
 bool GLProgram::Initialize(GLuint vertexShaderHandle, GLuint fragmentShaderHandle)
@@ -99,7 +102,7 @@ GLuint GLProgram::GetProgramHandle() const
 GLuint GLProgram::CreateVertexShader(const char* vertexShaderStr) const
 {
     GLuint vertexShader=0;
-    GL_ERROR_CHECK(vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderStr));
+    //GL_ERROR_CHECK(vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderStr));
 
     return vertexShader;
 }
@@ -107,7 +110,7 @@ GLuint GLProgram::CreateVertexShader(const char* vertexShaderStr) const
 GLuint GLProgram::CreateFragmentShader(const char* fragmentShaderStr) const
 {
     GLuint fragmentShader=0;
-    GL_ERROR_CHECK(fragmentShader = CreateShader(GL_VERTEX_SHADER, fragmentShaderStr));
+    /*GL_ERROR_CHECK(fragmentShader = CreateShader(GL_VERTEX_SHADER, fragmentShaderStr));*/
 
     return fragmentShader;
 }
@@ -130,17 +133,17 @@ GLuint CreateShader(GLenum shaderType, const char* shaderStr)
     return shader;
 }
 
-OpenGLRHI::OpenGLRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
-    m_context(window, videoMode)
+OpenGLDynamicRHI::OpenGLDynamicRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
+    m_context(std::make_unique<OpenGLContext>(window, videoMode))
 {
 }
 
-void OpenGLRHI::SetClearColor(const math::Color4f& color)
+void OpenGLDynamicRHI::SetClearColor(const core::Color4f& color)
 {
     glClearColor(color.r, color.g, color.b, color.a);
 }
 
-void OpenGLRHI::SetFillMode(FillMode fillMode)
+void OpenGLDynamicRHI::SetFillMode(FillMode fillMode)
 {
     static GLenum nativeFillModeTable[] =
     {
@@ -152,7 +155,7 @@ void OpenGLRHI::SetFillMode(FillMode fillMode)
     glPolygonMode(GL_FRONT_AND_BACK, nativeFillModeTable[static_cast<GLenum>(fillMode)]);
 }
 
-void OpenGLRHI::SetCullMode(CullMode cullMode)
+void OpenGLDynamicRHI::SetCullMode(CullMode cullMode)
 {
     static GLenum nativeCullModeTable[] =
     {
@@ -163,32 +166,27 @@ void OpenGLRHI::SetCullMode(CullMode cullMode)
     glFrontFace(nativeCullModeTable[static_cast<GLenum>(cullMode)]);
 }
 
-void OpenGLRHI::EnalbleDepthTest()
+void OpenGLDynamicRHI::EnalbleDepthTest()
 {
     glEnable(GL_DEPTH_TEST);
 }
 
-void OpenGLRHI::DisableDepthTest()
+void OpenGLDynamicRHI::DisableDepthTest()
 {
     glDisable(GL_DEPTH_TEST);
 }
 
-Shader OpenGLRHI::CreateShader(const char* shaderCode)
-{
-    return nullptr;
-}
+//VideoBuffer OpenGLDynamicRHI::CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize)
+//{
+//    static std::atomic<int> bufferIndex;
+//
+//    GLuint videoBuffer;
+//    glCreateBuffers(bufferIndex++, &videoBuffer);
+//
+//    return reinterpret_cast<VideoBuffer>(videoBuffer);
+//}
 
-VideoBuffer OpenGLRHI::CreateVideoBuffer(VideoBufferType videoBufferType, std::size_t bufferSize)
-{
-    static std::atomic<int> bufferIndex;
-
-    GLuint videoBuffer;
-    glCreateBuffers(bufferIndex++, &videoBuffer);
-
-    return reinterpret_cast<VideoBuffer>(videoBuffer);
-}
-
-void OpenGLRHI::BeginScene(PrimitiveType primitiveType)
+void OpenGLDynamicRHI::BeginScene(PrimitiveType primitiveType)
 {
     static GLenum nativePrimitiveTable[] =
     {
@@ -203,25 +201,25 @@ void OpenGLRHI::BeginScene(PrimitiveType primitiveType)
     glBegin(nativePrimitiveTable[static_cast<GLenum>(primitiveType)]);
 }
 
-void OpenGLRHI::EndScene()
+void OpenGLDynamicRHI::EndScene()
 {
     glEnd();
 }
 
-void OpenGLRHI::ClearColorBuffer()
+void OpenGLDynamicRHI::ClearColorBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OpenGLRHI::ClearColorDepthBuffer()
+void OpenGLDynamicRHI::ClearColorDepthBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLRHI::SwapBuffer()
+void OpenGLDynamicRHI::SwapBuffer()
 {
-    ::SwapBuffers(m_context.dcHandle);
+    ::SwapBuffers(m_context->dcHandle);
 }
 
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

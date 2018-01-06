@@ -6,13 +6,13 @@
  */
 
 #pragma once
-#include <cstdint>
-
 #include "Config.h"
+
+#include <cstdint>
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 TGON_API int64_t GetTickCount();
@@ -23,5 +23,5 @@ TGON_API struct DateTime GetSystemTime();
 /* @return  The DateTime in Local time */
 TGON_API struct DateTime GetLocalTime();
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */
