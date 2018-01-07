@@ -1,15 +1,16 @@
 #import "PrecompiledHeader.pch"
+
 #import "../Screen.h"
+#import "../ScreenType.h"
+#import "../Window.h"
 
 #import <Foundation/NSArray.h>
 #import <AppKit/NSScreen.h>
 #import <vector>
 
-#import "Core/Platform/Window.h"
-
 namespace tgon
 {
-namespace platform
+namespace core
 {
 namespace
 {
@@ -47,5 +48,5 @@ std::vector<Screen> GetAllScreen()
     return screens;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

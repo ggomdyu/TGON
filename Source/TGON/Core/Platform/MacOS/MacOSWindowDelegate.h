@@ -10,20 +10,20 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 class Window;
 
-} /*　namespace platform */
+} /*　namespace core */
 } /*　namespace tgon */
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
 {
 }
 
-@property (readonly, assign) tgon::platform::Window* window;
+@property (readonly, assign) tgon::core::Window* window;
 
-- (id)initWithWindow:(tgon::platform::Window*)window;
+- (id)initWithWindow:(tgon::core::Window*)window;
 
 @end

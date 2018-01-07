@@ -7,7 +7,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 TGON_API int64_t GetTickCount()
@@ -36,5 +36,5 @@ TGON_API DateTime GetLocalTime()
     return DateTime(rawLocalTime);
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

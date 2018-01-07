@@ -7,7 +7,7 @@
 #pragma once
 #include <boost/predef/os.h>
 
-#ifdef BOOST_OS_WINDOWS
+#if BOOST_OS_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN
 #       include <Windows.h>

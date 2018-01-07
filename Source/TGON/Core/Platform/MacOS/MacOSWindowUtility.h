@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 /**
@@ -20,5 +20,5 @@ namespace platform
  */
 NSWindow* MakeNativeWindow(const struct WindowStyle& windowStyle);
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

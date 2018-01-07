@@ -17,6 +17,8 @@ GraphicsModule::GraphicsModule(const std::shared_ptr<core::Window>& window, cons
     m_rhi->SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
 }
 
+GraphicsModule::~GraphicsModule() = default;
+
 void GraphicsModule::Update()
 {
 }

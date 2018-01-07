@@ -1,11 +1,11 @@
 #import "PrecompiledHeader.pch"
-#import "MacOSWindowDelegate.h"
 
+#import "MacOSWindowDelegate.h"
 #import "Window.h"
 
 @implementation WindowDelegate
 
-- (id)initWithWindow:(tgon::platform::Window*)window
+- (id)initWithWindow:(tgon::core::Window*)window
 {
     self = [super init];
     if (self)
@@ -18,36 +18,55 @@
 
 - (void)windowDidResize:(NSNotification*)notification
 {
-    int32_t width, height;
-    _window->GetSize(&width, &height);
+    if (_window->OnWindowResize != nullptr)
+    {
+        int32_t width, height;
+        _window->GetSize(&width, &height);
 
-    _window->OnResize(width, height);
+        _window->OnWindowResize(width, height);
+    }
 }
 
-- (void)windowDidMove:(NSNotification*)notification                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
-    int32_t x, y;
-    _window->GetPosition(&x, &y);
-
-    _window->OnMove(x, y);
+- (void)windowDidMove:(NSNotification*)notification
+{
+    if (_window->OnWindowMove != nullptr)
+    {
+        int32_t x, y;
+        _window->GetPosition(&x, &y);
+        
+        _window->OnWindowMove(x, y);
+    }
 }
 
 - (void)windowWillMiniaturize:(NSNotification*)notification
 {
-    _window->OnMinimize();
+    if (_window->OnWindowMinimize != nullptr)
+    {
+        _window->OnWindowMinimize();
+    }
 }
 
 - (void)windowDidDeminiaturize:(NSNotification*)notification
 {
-    _window->OnMaximize();
+    if (_window->OnWindowMaximize != nullptr)
+    {
+        _window->OnWindowMaximize();
+    }
 }
 
 - (void)windowDidEnterFullScreen:(NSNotification *)notification
 {
-    _window->OnEnterFullScreen();
+    if (_window->OnWindowEnterFullScreen != nullptr)
+    {
+        _window->OnWindowEnterFullScreen();
+    }
 }
 
 - (void)windowDidExitFullScreen:(NSNotification *)notification
 {
-    _window->OnExitFullScreen();
+    if (_window->OnWindowExitFullScreen != nullptr)
+    {
+        _window->OnWindowExitFullScreen();
+    }
 }
 @end

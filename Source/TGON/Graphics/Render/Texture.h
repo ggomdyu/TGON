@@ -6,10 +6,11 @@
 
 #pragma once
 #include <cstdlib>
+#include <string>
 
 namespace tgon
 {
-namespace render
+namespace graphics
 {
 
 enum class TextureAddressMode
@@ -42,5 +43,5 @@ private:
     uint32_t m_height;
 };
 
-} /* namespace render */
+} /* namespace graphics */
 } /* namespace tgon */

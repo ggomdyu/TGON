@@ -1,5 +1,5 @@
 /**
- * @filename    IModule.h
+ * @filename    GraphicsModule.h
  * @author      ggomdyu
  * @since       07/24/2016
  */
@@ -33,7 +33,7 @@ public:
 /* @section Public constructor */
 public:
     GraphicsModule(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode);
-    virtual ~GraphicsModule() = default;
+    virtual ~GraphicsModule();
 
 /* @section Public method */
 public:

@@ -55,12 +55,13 @@ public:
     void SetTitle(const char* title);
     void SetFullScreen(bool isFullScreen);
     void SetTopMost(bool setTopMost);
-    void SetWindowTransparency(float opacity);
-    //void SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity);
+    void SetTransparency(float opacity);
+    //void SetTransparencyPerPixel(const core::Color4f& pixel, float opacity);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetSize(int32_t* width, int32_t* height) const;
     void GetTitle(char* destCaptionTitle) const;
-    void* GetNativeWindow() noexcept;
+    float GetTransparency() const;
+    void* GetNativeWindow();
     bool HasCaption() const;
     bool IsResizable() const;
     bool IsMaximized() const;

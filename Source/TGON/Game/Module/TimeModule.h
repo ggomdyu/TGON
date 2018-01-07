@@ -31,7 +31,6 @@ public:
 
     float GetTimeScale() const;
     float GetDeltaTime() const;
-    float GetFrameRate() const;
 
 /* @section Private variable */
 private:

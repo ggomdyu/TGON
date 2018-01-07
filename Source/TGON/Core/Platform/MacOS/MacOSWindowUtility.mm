@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 namespace
 {
@@ -21,7 +21,7 @@ void PreApplyWindowStyle(const WindowStyle& windowStyle, NSWindow* applyTargetWi
 
     // Set window style
     {
-        if (windowStyle.borderless == false)
+        if (windowStyle.hasCaption == true)
         {
             nativeWindowStyleMask |= NSWindowStyleMaskTitled;
         }
@@ -94,5 +94,5 @@ NSWindow* MakeNativeWindow(const WindowStyle& windowStyle)
     return window;
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */

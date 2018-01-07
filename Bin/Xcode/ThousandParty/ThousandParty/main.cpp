@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.pch"
 
 #include "Game/Engine/GameApplication.h"
 
@@ -25,7 +25,6 @@
 #include "Graphics/Render/Renderer.h"
 #include "Game/Module/GraphicsModule.h"
 #include "Game/Module/TimeModule.h"
-#include <GL/glew.h>
 
 using namespace tgon;
 
@@ -44,10 +43,10 @@ public:
                 windowStyle.width = 500;
                 windowStyle.height = 500;
                 windowStyle.showMiddle = true;
-                windowStyle.title = u8"こんにちはHallo你好안녕नमस्ते";
+                windowStyle.title = u8"こんにちはHallo你好안녕하세요नमस्ते";
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
-                windowStyle.resizeable = true;
+                windowStyle.resizeable = false;
             }
             return windowStyle;
         }(),
@@ -73,31 +72,11 @@ public:
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
-
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
     
     virtual void OnUpdate() override
     {
         SuperType::OnUpdate();
-
-        static float x = 0.0f;
-        static float y = 0.0f;
-
-        float newX = std::sin(x += 0.01);
-        float newY = std::sin(y += 0.01);
-
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBegin(GL_TRIANGLES);
-        glVertex2f(0.0 + newX, 0.5 + newY);
-        glVertex2f(-0.5 + newX, -0.5 + newY);
-
-        glVertex2f(0.5 + newX, -0.5 + newY);
-        glEnd();
-        glFinish();
-
-        FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
     }
 };
 

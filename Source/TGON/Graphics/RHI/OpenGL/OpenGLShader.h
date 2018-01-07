@@ -31,11 +31,11 @@ public:
     void SetParameter2f(const char* name, GLfloat f1, GLfloat f2);
     void SetParameter3f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3);
     void SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4);
-    void SetParameter1f(std::size_t location, GLfloat f);
-    void SetParameter2f(std::size_t location, GLfloat f1, GLfloat f2);
-    void SetParameter3f(std::size_t location, GLfloat f1, GLfloat f2, GLfloat f3);
-    void SetParameter4f(std::size_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4);
-    void SetParameterSampler(std::size_t location, int textureSlot, std::size_t sampler);
+    void SetParameter1f(int32_t location, GLfloat f);
+    void SetParameter2f(int32_t location, GLfloat f1, GLfloat f2);
+    void SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3);
+    void SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4);
+    void SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler);
 
 private:
     /* @brief   Links shders to the program object. */

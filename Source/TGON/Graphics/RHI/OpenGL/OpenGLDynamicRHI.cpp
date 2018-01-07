@@ -114,7 +114,7 @@ void OpenGLDynamicRHI::ClearColorDepthBuffer()
 
 void OpenGLDynamicRHI::SwapBuffer()
 {
-    ::SwapBuffers(m_context->dcHandle);
+//    ::SwapBuffers(m_context->dcHandle);
 }
 
 } /* namespace graphics */

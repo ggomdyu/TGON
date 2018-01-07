@@ -43,6 +43,8 @@ bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragm
     }
     
     this->Link(vertexShader, fragmentShader);
+
+    return true;
 }
 
 void OpenGLShader::BeginScene()
@@ -85,27 +87,27 @@ void OpenGLShader::SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfl
     this->SetParameter4f(this->GetUniformLocation(name), f1, f2, f3, f4);
 }
 
-void OpenGLShader::SetParameter1f(std::size_t location, GLfloat f)
+void OpenGLShader::SetParameter1f(int32_t location, GLfloat f)
 {
     glUniform1f(location, f);
 }
 
-void OpenGLShader::SetParameter2f(std::size_t location, GLfloat f1, GLfloat f2)
+void OpenGLShader::SetParameter2f(int32_t location, GLfloat f1, GLfloat f2)
 {
     glUniform2f(location, f1, f2);
 }
 
-void OpenGLShader::SetParameter3f(std::size_t location, GLfloat f1, GLfloat f2, GLfloat f3)
+void OpenGLShader::SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3)
 {
     glUniform3f(location, f1, f2, f3);
 }
 
-void OpenGLShader::SetParameter4f(std::size_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
+void OpenGLShader::SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
 {
     glUniform4f(location, f1, f2, f3, f4);
 }
 
-void OpenGLShader::SetParameterSampler(std::size_t location, int textureSlot, std::size_t sampler)
+void OpenGLShader::SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler)
 {
     glActiveTexture(GL_TEXTURE0 + textureSlot);
 

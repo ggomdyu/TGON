@@ -1,16 +1,17 @@
 #import "PrecompiledHeader.pch"
+
 #import "OpenGLContext.h"
+
+#import "Core/Platform/Window.h"
+#import "Graphics/RHI/RHIType.h"
 
 #import <AppKit/NSOpenGL.h>
 #import <AppKit/NSOpenGLView.h>
 #import <AppKit/NSWindow.h>
 
-#import "Core/Platform/Window.h"
-#import "Graphics/RHI/Base/BaseRHIType.h"
-
 namespace tgon
 {
-namespace rhi
+namespace graphics
 {
 namespace
 {
@@ -57,7 +58,7 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, const VideoMode& videoMode)
+OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
 {
     // Find a suitable pixel format.
     {
@@ -90,5 +91,5 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<platform::Window>& window, co
 
 OpenGLContext::~OpenGLContext() = default;
 
-} /* namespace rhi */
+} /* namespace graphics */
 } /* namespace tgon */

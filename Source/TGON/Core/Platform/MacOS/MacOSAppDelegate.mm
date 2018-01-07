@@ -8,25 +8,25 @@
 
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 extern std::shared_ptr<Application> MakeApplication();
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */
 
 namespace
 {
 
-std::shared_ptr<tgon::platform::Application> g_application;
+std::shared_ptr<tgon::core::Application> g_application;
 
 } /* namespace */
 
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    using namespace tgon::platform;
+    using namespace tgon::core;
 
     g_application = std::static_pointer_cast<Application>(MakeApplication());
     g_application->OnWillLaunch();

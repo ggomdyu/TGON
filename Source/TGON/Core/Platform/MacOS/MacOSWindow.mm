@@ -1,6 +1,10 @@
 #import "PrecompiledHeader.pch"
-#include "../Window.h"
-#include "../WindowType.h"
+
+#import "../Window.h"
+#import "../WindowType.h"
+
+#import "MacOSWindowUtility.h"
+#import "MacOSWindowDelegate.h"
 
 #import <AppKit/NSWindow.h>
 #import <Cocoa/Cocoa.h>
@@ -8,12 +12,9 @@
 #import <cstdint>
 #import <cstring>
 
-#import "MacOSWindowUtility.h"
-#import "MacOSWindowDelegate.h"
-
 namespace tgon
 {
-namespace platform
+namespace core
 {
 
 Window::Window(const WindowStyle& windowStyle) :
@@ -103,6 +104,11 @@ void Window::SetFullScreen(bool isFullScreen)
     [m_nsWindow toggleFullScreen:nil];
 }
 
+void Window::SetTransparency(float opacity)
+{
+    [m_nsWindow setAlphaValue:opacity];
+}
+
 void Window::GetPosition(int32_t* destX, int32_t* destY) const
 {
     NSRect visibleMainScreenFrameRect = [[NSScreen mainScreen] visibleFrame];
@@ -128,9 +134,14 @@ void Window::GetTitle(char* destCaptionTitle) const
     std::memcpy(destCaptionTitle, utf8Str, utf8StrLen + 1);
 }
 
-void* Window::GetNativeWindow() noexcept
+void* Window::GetNativeWindow()
 {
     return (__bridge void*)(m_nsWindow);
+}
+
+float Window::GetTransparency() const
+{
+    return static_cast<float>([m_nsWindow alphaValue]);
 }
 
 bool Window::HasCaption() const
@@ -145,7 +156,6 @@ bool Window::IsResizable() const
 
 bool Window::IsMaximized() const
 {
-    // todo: 잘 되는지 확인 필요
     return static_cast<bool>([m_nsWindow isZoomed]);
 }
 
@@ -154,5 +164,5 @@ bool Window::IsMinimized() const
     return static_cast<bool>([m_nsWindow isMiniaturized]);
 }
 
-} /* namespace platform */
+} /* namespace core */
 } /* namespace tgon */
