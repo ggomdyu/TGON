@@ -55,7 +55,7 @@ public:
     void SetTitle(const char* title);
     void SetFullScreen(bool isFullScreen);
     void SetTopMost(bool setTopMost);
-    void SetTransparency(float opacity);
+    void SetTransparency(float transparency);
     //void SetTransparencyPerPixel(const core::Color4f& pixel, float opacity);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetSize(int32_t* width, int32_t* height) const;

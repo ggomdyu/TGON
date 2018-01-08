@@ -61,7 +61,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedSt
             *extendedStyle |= WS_EX_LAYERED;
         }
 
-        if (windowStyle.supportWindowTransparency)
+        if (windowStyle.supportTransparency)
         {
             *extendedStyle |= WS_EX_LAYERED;
         }

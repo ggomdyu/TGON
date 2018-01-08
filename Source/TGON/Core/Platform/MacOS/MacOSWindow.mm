@@ -104,9 +104,9 @@ void Window::SetFullScreen(bool isFullScreen)
     [m_nsWindow toggleFullScreen:nil];
 }
 
-void Window::SetTransparency(float opacity)
+void Window::SetTransparency(float transparency)
 {
-    [m_nsWindow setAlphaValue:opacity];
+    [m_nsWindow setAlphaValue:transparency];
 }
 
 void Window::GetPosition(int32_t* destX, int32_t* destY) const
