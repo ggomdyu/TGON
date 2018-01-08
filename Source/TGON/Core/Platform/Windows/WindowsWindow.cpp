@@ -14,9 +14,6 @@
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
-#include <unicode/unistr.h>
-#include <unicode/ucnv.h>
-#pragma comment(lib, "icuucd.lib")
 
 namespace tgon
 {
@@ -108,15 +105,10 @@ void Window::GetSize(int32_t* width, int32_t* height) const
 
 void Window::GetTitle(char* destStr) const
 {
-    wchar_t title[256] {};
-    int titleLen = ::GetWindowTextW(m_wndHandle, title, 256);
+    wchar_t utf16Title[256] {};
+    int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
 
-    icu::UnicodeString unicodeStr(title);
-
-    std::string str;
-    unicodeStr.toUTF8String(str);
-
-    memcpy(destStr, str.data(), str.length() + 1);
+    UTF16LE::Convert<UTF8>(reinterpret_cast<const char*>(utf16Title), utf16TitleLen, destStr, 256);
 }
 
 bool Window::IsResizable() const
@@ -154,7 +146,7 @@ bool Window::IsTopMost() const
     return (extendedStyle & WS_EX_TOPMOST) != 0;
 }
 
-void* Window::GetNativeWindow() noexcept
+void* Window::GetNativeWindow()
 {
     return m_wndHandle;
 }
@@ -199,12 +191,11 @@ void Window::SetTitle(const char* captionTitle)
 {
     assert(captionTitle != nullptr);
 
-    wchar_t utf16Caption[512] {};
-
-    bool succeed = ConvertUTF8ToUTF16(captionTitle, reinterpret_cast<char*>(utf16Caption)) != -1;
+    char utf16Caption[512] {};
+    bool succeed = UTF8::Convert<UTF16LE>(reinterpret_cast<const char*>(captionTitle), std::strlen(captionTitle), utf16Caption, 512) != -1;
     if (succeed)
     {
-        ::SetWindowTextW(m_wndHandle, utf16Caption);
+        ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Caption));
     }
 }
 
@@ -213,9 +204,17 @@ void Window::SetTopMost(bool setTopMost)
     ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
-void Window::SetWindowTransparency(float opacity)
+void Window::SetTransparency(float transparency)
 {
-    ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(opacity * 255.0f), LWA_ALPHA);
+    ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);
+}
+
+float Window::GetTransparency() const
+{
+    BYTE transparency;
+    ::GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
+
+    return transparency / 255.0f;
 }
 
 //void Window::SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity)
