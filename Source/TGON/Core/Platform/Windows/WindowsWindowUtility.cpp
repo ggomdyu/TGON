@@ -74,12 +74,13 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 	DWORD exStyle, normalStyle;
     ConverWindowStyleToNative(windowStyle, &exStyle, &normalStyle);
 
-    wchar_t utf16Title[256] {};
-    bool succeedToConvert = ConvertUTF8ToUTF16(windowStyle.title.c_str(), reinterpret_cast<char*>(utf16Title)) != -1;
-    if (!succeedToConvert)
+    wchar_t utf16Title[512] {};
+    bool succeed = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), reinterpret_cast<char*>(utf16Title), 512) != -1;
+    if (succeed == false)
     {
         return nullptr;
     }
+
 
     // Set window position to middle of screen if required.
     int newWindowX = windowStyle.x;

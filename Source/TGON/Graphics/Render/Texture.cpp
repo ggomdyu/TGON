@@ -18,7 +18,7 @@ Texture2D::Texture2D(std::string&& filePath) :
 {
 }
 
-const std::string & Texture2D::GetFilePath() const noexcept
+const std::string& Texture2D::GetFilePath() const noexcept
 {
     return m_filePath;
 }

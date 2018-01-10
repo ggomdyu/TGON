@@ -25,14 +25,7 @@ namespace core
 {
 
 struct Color4f;
-
-} /* namespace core */
-
-namespace core
-{
-
 struct WindowStyle;
-
 
 } /* namespace core */
 } /* namespace tgon */

@@ -62,7 +62,7 @@ void Window::BringToFront()
 {
     // SetForegroundWindow, BringWindowToTop APIs are not working exactly.
     // The codes below are the hack way to reach it.
-    bool isTopMost = IsTopMost();
+    bool isTopMost = this->IsTopMost();
     this->SetTopMost(true);
     this->SetTopMost(isTopMost);
 }
@@ -191,11 +191,11 @@ void Window::SetTitle(const char* captionTitle)
 {
     assert(captionTitle != nullptr);
 
-    char utf16Caption[512] {};
-    bool succeed = UTF8::Convert<UTF16LE>(reinterpret_cast<const char*>(captionTitle), std::strlen(captionTitle), utf16Caption, 512) != -1;
+    char utf16Title[512] {};
+    bool succeed = UTF8::Convert<UTF16LE>(reinterpret_cast<const char*>(captionTitle), std::strlen(captionTitle), utf16Title, 512) != -1;
     if (succeed)
     {
-        ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Caption));
+        ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));
     }
 }
 

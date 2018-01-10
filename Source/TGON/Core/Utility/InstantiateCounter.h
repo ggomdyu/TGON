@@ -11,7 +11,7 @@
 
 namespace tgon
 {
-namespace utility
+namespace core
 {
 
 /**
@@ -95,5 +95,5 @@ inline InstanceCountLimiter<_ClassType, _MaxInstanceCount>::~InstanceCountLimite
     --InstantiateCounter<_ClassType>::ms_instantiatedCount;
 }
 
-} /* namespace utility */
+} /* namespace core */
 } /* namespace tgon */
