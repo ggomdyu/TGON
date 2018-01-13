@@ -43,18 +43,12 @@ bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragm
     }
     
     this->Link(vertexShader, fragmentShader);
-
     return true;
 }
 
-void OpenGLShader::BeginScene()
+void OpenGLShader::Use()
 {
     glUseProgram(m_program);
-}
-
-void OpenGLShader::EndScene()
-{
-    glUseProgram(0);
 }
 
 void OpenGLShader::BindAttributeLocation(const char* name, std::size_t index)
