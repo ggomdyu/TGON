@@ -19,98 +19,122 @@ namespace core
 
 class ASCII;
 class EUC_KR;
-class EUC_JP;
-class EUC_CN;
-class UTF7;
 class UTF8;
 class UTF16LE;
-class UTF16BE;
-class UTF32;
+template <typename _DerivedEncodingType>
+class EUCEncoding;
+template <typename _DerivedEncodingType>
+class UnicodeEncoding;
 
+template <typename _EncodingType>
+constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
+template <typename _EncodingType>
+constexpr bool IsEUCEncoding = std::is_base_of<EUCEncoding<_EncodingType>, _EncodingType>::value;
+
+template <typename _DerivedEncodingType>
 class Encoding
 {
 public:
-    template <typename _FromEncodingType, typename _ToEncodingType>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize)
-    {
-        return _FromEncodingType::Convert<_ToEncodingType>(srcStr, srcStrLen, destStr, destStrBufferSize);
-    }
-
-    template <typename _FromEncodingType, typename _ToEncodingType, std::size_t _DestStrBufferSize>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char(&destStr)[_DestStrBufferSize])
-    {
-        return _FromEncodingType::Convert<_ToEncodingType>(srcStr, srcStrLen, destStr, _DestStrBufferSize);
-    }
-
-    template <typename _FromEncodingType, typename _ToEncodingType, std::size_t _SrcStrBufferSize, std::size_t _DestStrBufferSize>
-    static int32_t Convert(const char(&srcStr)[_SrcStrBufferSize], char(&destStr)[_DestStrBufferSize])
-    {
-        return _FromEncodingType::Convert<_ToEncodingType>(srcStr, _SrcStrBufferSize - 1, destStr, _DestStrBufferSize);
-    }
-};
-class UTF8
-{
-public:
-    template <typename _ToEncodingType>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize);
+    static int32_t GetCharCount(const char* srcStr);
 };
 
-template <>
-inline int32_t UTF8::Convert<UTF16LE>(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize)
+template <typename _DerivedEncodingType>
+int32_t Encoding<_DerivedEncodingType>::GetCharCount(const char* srcStr)
 {
-    UErrorCode errorCode;
-    UConverter* conv = ucnv_open("UTF8", &errorCode);
-    if (U_FAILURE(errorCode))
-    {
-        return false;
-    }
-
-    int32_t length = ucnv_toUChars(conv, reinterpret_cast<UChar*>(destStr), destStrBufferSize, srcStr, srcStrLen, &errorCode);
-    if (U_FAILURE(errorCode))
-    {
-        return false;
-    }
-    
-    ucnv_close(conv);
-    return length;
+    return _DerivedEncodingType::GetCharCount(srcStr);
 }
 
+template <typename _DerivedEncodingType>
+class UnicodeEncoding :
+    public Encoding<_DerivedEncodingType>
+{
+};
 
-class UTF16LE
+class UTF8 :
+    public UnicodeEncoding<UTF8>
 {
 public:
+    static constexpr const char EncodingName[] = "UTF-8";
+
+public:
     template <typename _ToEncodingType>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize);
+    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize) = delete;
 };
 
 template <>
-inline int32_t UTF16LE::Convert<UTF8>(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize)
+inline int32_t UTF8::Convert<UTF16LE>(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize)
 {
     UErrorCode errorCode;
     UConverter* conv = ucnv_open("UTF8", &errorCode);
     if (U_FAILURE(errorCode))
     {
-        return false;
+        return -1;
     }
- 
-    int32_t length = ucnv_fromUChars(conv, destStr, destStrBufferSize, reinterpret_cast<const UChar*>(srcStr), srcStrLen, &errorCode);
+
+    int32_t length = ucnv_toUChars(conv, reinterpret_cast<UChar*>(destStr), destStrBufferSize, srcStr, srcStrBytes, &errorCode);
     if (U_FAILURE(errorCode))
     {
-        return false;
+        return -1;
     }
 
     ucnv_close(conv);
     return length;
 }
 
+class UTF16LE :
+    public UnicodeEncoding<UTF16LE>
+{
+public:
+    static constexpr const char EncodingName[] = "UTF16-LE";
 
-/**
- * @brief               Converts UTF8 string to UTF16.
- * @param [in] src      The UTF8 string
- * @param [out] dest    A pointer of character array to be stored UTF16 string
- * @return              The length of converted string, or -1 on failure. 
- */
-TGON_API int32_t ConvertUTF8ToUTF16(const char* src, char* dest);
+public:
+    template <typename _ToEncodingType>
+    static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
+};
+
+template <>
+inline int32_t UTF16LE::Convert<UTF8>(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize)
+{
+    UErrorCode errorCode = UErrorCode::U_ZERO_ERROR;
+    UConverter* conv = ucnv_open("UTF8", &errorCode);
+    if (U_FAILURE(errorCode))
+    {
+        return -1;
+    }
+
+    errorCode = UErrorCode::U_ZERO_ERROR;
+    int32_t bytes = ucnv_fromUChars(conv, destStr, destStrBufferSize, reinterpret_cast<const UChar*>(srcStr), srcStrBytes, &errorCode);
+    if (U_FAILURE(errorCode))
+    {
+        return -1;
+    }
+
+    ucnv_close(conv);
+    return bytes;
+}
+
+template <typename _DerivedEncodingType>
+class EUCEncoding :
+    public Encoding<_DerivedEncodingType>
+{
+public:
+    template <typename _ToEncodingType>
+    static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
+};
+
+class EUC_KR :
+    public EUCEncoding<EUC_KR>
+{
+public:
+    static constexpr const char EncodingName[] = "EUC-KR";
+};
+
+class EUC_JP :
+    public EUCEncoding<EUC_JP>
+{
+public:
+    static constexpr const char EncodingName[] = "EUC-JP";
+};
 
 } /* namespace core */
 } /* namespace tgon */
