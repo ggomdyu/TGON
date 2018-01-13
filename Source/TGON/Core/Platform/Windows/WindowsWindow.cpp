@@ -25,7 +25,7 @@ Window::Window(const WindowStyle& wndStyle) :
     m_isClosed(false),
     m_isDwmCompositionEnabled(false)
 {
-    assert(m_wndHandle != nullptr && "Failed to create window.");
+    assert(m_wndHandle != nullptr);
     
     // Store pointer to the window to Window local extra memory.
     // It will be used to notify that the message event occured. 

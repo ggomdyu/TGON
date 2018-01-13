@@ -2,6 +2,7 @@
 
 #include "WindowsWindowUtility.h"
 
+#include "Core/Debug/Log.h"
 #include "Core/Platform/WindowType.h"
 #include "Core/String/Encoding.h"
 
@@ -12,7 +13,7 @@ namespace tgon
 namespace core
 {
 
-void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedStyle, DWORD* normalStyle)
+void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle)
 {
 	*extendedStyle = 0;
 	*normalStyle = 0;
@@ -71,16 +72,15 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* extendedSt
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
 	// Converts WindowStyle to platform dependent style.
-	DWORD exStyle, normalStyle;
-    ConverWindowStyleToNative(windowStyle, &exStyle, &normalStyle);
+	DWORD normalStyle, extendedStyle;
+    ConverWindowStyleToNative(windowStyle, &normalStyle, &extendedStyle);
 
     wchar_t utf16Title[512] {};
-    bool succeed = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), reinterpret_cast<char*>(utf16Title), 512) != -1;
-    if (succeed == false)
+    bool succeeded = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), reinterpret_cast<char*>(utf16Title), 512) != -1;
+    if (succeeded == false)
     {
         return nullptr;
     }
-
 
     // Set window position to middle of screen if required.
     int newWindowX = windowStyle.x;
@@ -92,9 +92,9 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     }
 
 	HWND wndHandle = CreateWindowExW(
-		exStyle,
+		extendedStyle,
 		className,
-		utf16Title,
+        utf16Title,
 		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
         newWindowX,
         newWindowY,
@@ -105,6 +105,10 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 		instanceHandle,
 		extraParam
 	);
+    if (wndHandle == nullptr)
+    {
+        core::Log("Failed to invoke CreateWindowExW. (%d)", GetLastError());
+    }
 
 	return wndHandle;
 }
