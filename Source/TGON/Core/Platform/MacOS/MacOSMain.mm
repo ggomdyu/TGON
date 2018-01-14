@@ -1,8 +1,8 @@
 #import "PrecompiledHeader.pch"
 
-#import <AppKit/NSApplication.h>
-
 #import "MacOSAppDelegate.h"
+
+#import <AppKit/NSApplication.h>
 
 int main(int argc, const char* argv[])
 {

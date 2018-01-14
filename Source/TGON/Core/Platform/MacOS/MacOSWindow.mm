@@ -1,16 +1,16 @@
 #import "PrecompiledHeader.pch"
 
-#import "../Window.h"
-#import "../WindowType.h"
-
 #import "MacOSWindowUtility.h"
 #import "MacOSWindowDelegate.h"
 
-#import <AppKit/NSWindow.h>
-#import <Cocoa/Cocoa.h>
+#import "../Window.h"
+#import "../WindowType.h"
+
 #import <memory>
 #import <cstdint>
 #import <cstring>
+#import <AppKit/NSWindow.h>
+#import <Cocoa/Cocoa.h>
 
 namespace tgon
 {

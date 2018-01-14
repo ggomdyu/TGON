@@ -4,9 +4,9 @@
 #import "../ScreenType.h"
 #import "../Window.h"
 
+#import <vector>
 #import <Foundation/NSArray.h>
 #import <AppKit/NSScreen.h>
-#import <vector>
 
 namespace tgon
 {

@@ -1,7 +1,7 @@
 #import "PrecompiledHeader.pch"
 
-#import "MacOSWindowDelegate.h"
 #import "Window.h"
+#import "MacOSWindowDelegate.h"
 
 @implementation WindowDelegate
 
