@@ -40,21 +40,44 @@ uint32_t InstantiateCounter<_ClassType>::ms_instantiatedCount = 0;
 template <typename _ClassType>
 inline InstantiateCounter<_ClassType>::InstantiateCounter() noexcept
 {
-    static_assert(std::is_base_of<InstantiateCounter, _ClassType>::value && !std::is_convertible<InstantiateCounter, _ClassType>::value, "_ClassType is not private inherited from InstantiateCounter.");
-
     ++ms_instantiatedCount;
 }
 
 template <typename _ClassType>
 inline uint32_t InstantiateCounter<_ClassType>::GetInstantiatedCount() noexcept
 {
-    static_assert(std::is_base_of<InstantiateCounter, _ClassType>::value && !std::is_convertible<InstantiateCounter, _ClassType>::value, "_ClassType is not private inherited from InstantiateCounter.");
-
     return ms_instantiatedCount;
 }
 
 /**
- * @class   InstantiateCountRestricter
+ * @class   InstanceCounter
+ * @brief   Counts the number of specified type's instance.
+ */
+template <typename _ClassType>
+class InstanceCounter :
+    private InstantiateCounter<_ClassType>
+{
+public:
+    ~InstanceCounter();
+
+public:
+    static uint32_t GetInstanceCount() noexcept;
+};
+
+template<typename _ClassType>
+inline InstanceCounter<_ClassType>::~InstanceCounter()
+{
+    --ms_instantiatedCount;
+}
+
+template<typename _ClassType>
+inline uint32_t InstanceCounter<_ClassType>::GetInstanceCount() noexcept
+{
+    return ms_instantiatedCount;
+}
+
+/**
+ * @class   InstantiateCountLimiter
  * @brief   Restricts the instantiation count of the specified type.
  */
 template <typename _ClassType, uint32_t _MaxInstantiationCount>
@@ -92,7 +115,7 @@ public:
 template <typename _ClassType, uint32_t _MaxInstanceCount>
 inline InstanceCountLimiter<_ClassType, _MaxInstanceCount>::~InstanceCountLimiter()
 {
-    --InstantiateCounter<_ClassType>::ms_instantiatedCount;
+    --ms_instantiatedCount;
 }
 
 } /* namespace core */
