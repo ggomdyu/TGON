@@ -32,11 +32,11 @@ public:
 template <typename _Type>
 inline const RTTI* GetRTTI()
 {
-    using PureType = std::remove_pointer_t<std::decay_t<_Type>>;
+    using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
 
-    static_assert(std::is_convertible<PureType*, IRuntimeObject*>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
+    static_assert(std::is_convertible<ClassType*, IRuntimeObject*>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
 
-    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
+    static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
     return &rtti;
 }
 
