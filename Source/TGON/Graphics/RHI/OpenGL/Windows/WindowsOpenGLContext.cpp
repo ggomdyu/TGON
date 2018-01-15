@@ -81,6 +81,9 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window, const 
             return;
         }
 
+        context = oldGLContext;
+        return;
+
         int attributeIndex = 0;
 
         int attributes[64] {};

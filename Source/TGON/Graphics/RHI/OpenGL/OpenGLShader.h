@@ -21,7 +21,8 @@ class OpenGLShader
 public:
     bool Initialize(const char* vertexShaderCodeStr, const char* fragmentShaderCodeStr);
 
-    void Use();
+    void BeginScene();
+    void EndScene();
     
     void BindAttributeLocation(const char* name, std::size_t location);
     int GetUniformLocation(const char* name) const;
