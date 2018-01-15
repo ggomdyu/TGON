@@ -25,7 +25,7 @@ constexpr const char g_positionColorVert[] =
 "                                               \n\
 #version 330 core                               \n\
                                                 \n\
-layout(location = 0) in vec4 g_inPosition;      \n\
+layout(location = 0) in vec3 g_inPosition;      \n\
                                                 \n\
 void main()                                     \n\
 {                                               \n\
@@ -35,13 +35,13 @@ void main()                                     \n\
 ";
 
 constexpr const char g_positionColorFrag[] =
-"                                           \n\
-#version 330 core                           \n\
-                                            \n\
-out vec3 color;                           \n\
-                                            \n\
-void main()                                 \n\
-{                                           \n\
-    color = vec3(1, 0, 0);                \n\
-}                                           \n\
+"                                               \n\
+#version 330 core                               \n\
+                                                \n\
+out vec3 color;                                 \n\
+                                                \n\
+void main()                                     \n\
+{                                               \n\
+    color = vec3(1, 1, 1);                      \n\
+}                                               \n\
 ";

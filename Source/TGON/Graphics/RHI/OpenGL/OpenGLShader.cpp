@@ -42,13 +42,17 @@ bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragm
         return false;
     }
     
-    this->Link(vertexShader, fragmentShader);
-    return true;
+    return this->Link(vertexShader, fragmentShader);
 }
 
 void OpenGLShader::BeginScene()
 {
+    auto b = glGetError();
+
     glUseProgram(m_program);
+
+    b = glGetError();
+
 }
 
 void OpenGLShader::EndScene()
@@ -136,7 +140,7 @@ bool OpenGLShader::Link(GLuint vertexShader, GLuint fragmentShader)
     V(glDeleteShader(vertexShader));
     V(glDeleteShader(fragmentShader));
     
-    return false;
+    return true;
 }
 
 GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr) const
@@ -154,6 +158,7 @@ GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr)
     if (this->IsCompileSucceed(shader) == false)
     {
         core::Log("Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shader).c_str());
+        return 0;
     }
 
     return shader;

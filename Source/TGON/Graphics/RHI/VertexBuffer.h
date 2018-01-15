@@ -76,7 +76,7 @@ class VertexBuffer
 {
 public:
     std::size_t GetBufferSize() const;
-private:
+public:
     GLuint m_vertexArray = 0;
     GLuint m_vertexBufferID = 0;
     std::vector<VertexInputDesc> m_vertexInputDesc;
@@ -93,7 +93,7 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferID);
         glBufferData(GL_ARRAY_BUFFER, bufferSize, data, m_isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
     }
-
+    
     ~VertexBuffer()
     {
         glDeleteBuffers(1, &m_vertexBufferID);
@@ -120,8 +120,6 @@ public:
                 reinterpret_cast<const void*>(vertexInputAttrDesc.offset)
             );
         }
-
-        glDrawArrays(GL_TRIANGLES, 0, 3);
     }
     
     void EndScene()

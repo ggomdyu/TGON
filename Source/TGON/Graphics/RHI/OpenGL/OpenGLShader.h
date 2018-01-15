@@ -57,7 +57,7 @@ private:
 
     std::string GetShaderInfoLog(GLuint shader) const;
 
-private:
+public:
     GLuint m_program;
 };
 
