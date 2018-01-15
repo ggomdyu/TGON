@@ -1,12 +1,12 @@
 #import "PrecompiledHeader.pch"
 
+#import "../Window.h"
+#import "../Application.h"
+#import "../ApplicationType.h"
+
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
-
-#import "../Application.h"
-#import "../ApplicationType.h"
-#include "../Window.h"
 
 namespace tgon
 {

@@ -1,10 +1,11 @@
 #import "PrecompiledHeader.pch"
+
 #import "MacOSAppDelegate.h"
 
-#import <QuartzCore/CVDisplayLink.h>
-#import <AppKit/NSOpenGLView.h>
-
 #import "../Application.h"
+
+#import <AppKit/NSOpenGLView.h>
+#import <QuartzCore/CVDisplayLink.h>
 
 namespace tgon
 {

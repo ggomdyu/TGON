@@ -4,8 +4,9 @@
  * @since       09/05/2017
  */
 
-#import <AppKit/NSApplication.h>
+#pragma once
 #import <objc/NSObject.h>
+#import <AppKit/NSApplication.h>
 
 @interface AppDelegate : NSObject<NSApplicationDelegate>
 {
