@@ -47,12 +47,7 @@ bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragm
 
 void OpenGLShader::BeginScene()
 {
-    auto b = glGetError();
-
     glUseProgram(m_program);
-
-    b = glGetError();
-
 }
 
 void OpenGLShader::EndScene()
@@ -90,6 +85,11 @@ void OpenGLShader::SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfl
     this->SetParameter4f(this->GetUniformLocation(name), f1, f2, f3, f4);
 }
 
+void OpenGLShader::SetParameterMatrix4fv(const char* name, const GLfloat* f)
+{
+    this->SetParameterMatrix4fv(this->GetUniformLocation(name), f);
+}
+
 void OpenGLShader::SetParameter1f(int32_t location, GLfloat f)
 {
     glUniform1f(location, f);
@@ -108,6 +108,11 @@ void OpenGLShader::SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfl
 void OpenGLShader::SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
 {
     glUniform4f(location, f1, f2, f3, f4);
+}
+
+void OpenGLShader::SetParameterMatrix4fv(int32_t location, const GLfloat* f)
+{
+    glUniformMatrix4fv(location, 1, GL_FALSE, f);
 }
 
 void OpenGLShader::SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler)
