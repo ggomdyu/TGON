@@ -28,9 +28,9 @@ struct FunctionTraits;
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-	enum { ArgumentCount = sizeof...(_ArgTypes), };
+    enum { ArgumentCount = sizeof...(_ArgTypes), };
 
-	using ReturnType = _ReturnType;
+    using ReturnType = _ReturnType;
 
     using FunctionType = _ReturnType(_ArgTypes...);
     using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
@@ -38,27 +38,27 @@ struct FunctionTraits<_ReturnType(_ArgTypes...)>
 
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> :
-	public FunctionTraits<_ReturnType(_ArgTypes...)>
+    public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 };
 
 /* @brief   Traits for class member function */
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
-	public FunctionTraits<_ReturnType(_ArgTypes...)>
+    public FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-	using ClassType = _ClassType;
+    using ClassType = _ClassType;
 };
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
+    public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> :
-	public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
+    public FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
 {
 };
 
