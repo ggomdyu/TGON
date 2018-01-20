@@ -59,7 +59,7 @@ protected:
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Assigns the number of character to string.
+     * @brief                   Assigns chCount characters to the string.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string
@@ -69,7 +69,7 @@ protected:
     static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Appends a number of character to string.
+     * @brief                   Assigns chCount characters to the string.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string
@@ -77,12 +77,12 @@ protected:
     static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount = 1);
 
     /**
-     * @brief                       Search match substring.
-     * @param [in] srcStr           The search source string
-     * @param [in] srcStrLen        The length of source string
-     * @param [in] srcStrOffset     Starting point of source string
-     * @param [in] srcFindSubStr    String to find
-     * @param [in] srcFindSubStr    The length of string to find
+     * @brief                       Search for a matching substring.
+     * @param [in] srcStr           The string source
+     * @param [in] srcStrLen        The length of string source
+     * @param [in] srcStrOffset     The starting point of string source
+     * @param [in] srcFindSubStr    The substring source
+     * @param [in] srcFindSubStrLen The length of substring source
      */
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcFindSubStr, std::size_t srcFindSubStrLen);
 
