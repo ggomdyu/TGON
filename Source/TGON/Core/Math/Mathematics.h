@@ -197,16 +197,16 @@ constexpr float Smoothstep(float from, float to, float time) noexcept
 
 /**
  * @brief               Calculates Two-dimensional bezier curve.
- * @param [in] a        The first vertex
- * @param [in] b        The second vertex
- * @param [in] c        The third vertex
+ * @param [in] v1       The first vertex
+ * @param [in] v2       The second vertex
+ * @param [in] v3       The third vertex
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
  * @return              Returns Interpolated vertex.
  */
 constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {
 	float invTime = 1.0f - time;
-	return {};//{(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
+	return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 
 double Sqrt(double number)
