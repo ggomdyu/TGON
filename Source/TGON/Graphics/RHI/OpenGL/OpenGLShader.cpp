@@ -25,18 +25,18 @@ namespace tgon
 namespace graphics
 {
 
-bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragmentShaderCodeStr)
+bool OpenGLShader::Initialize(const char* vsCodeStr, const char* fsCodeStr)
 {
-    assert(vertexShaderCodeStr != nullptr);
-    assert(fragmentShaderCodeStr != nullptr);
+    assert(vsCodeStr != nullptr);
+    assert(fsCodeStr != nullptr);
 
-    GLuint vertexShader = this->CompileShader(GL_VERTEX_SHADER, vertexShaderCodeStr);
+    GLuint vertexShader = this->CompileShader(GL_VERTEX_SHADER, vsCodeStr);
     if (vertexShader == 0)
     {
         return false;
     }
 
-    GLuint fragmentShader = this->CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCodeStr);
+    GLuint fragmentShader = this->CompileShader(GL_FRAGMENT_SHADER, fsCodeStr);
     if (fragmentShader == 0)
     {
         return false;

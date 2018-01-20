@@ -22,8 +22,6 @@ struct WindowStyle final
     uint16_t width = 500;
     uint16_t height = 500;
 
-    uint32_t backgroundColor;
-
     bool hasCaption = true;
     bool enableSystemButton = true;
     bool supportTransparency = false;

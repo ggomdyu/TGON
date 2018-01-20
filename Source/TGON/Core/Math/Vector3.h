@@ -26,6 +26,9 @@ public:
     constexpr Vector3() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
+    constexpr Vector3(float scalar) noexcept;
+
+    /* @brief   Constructor that initializes the member with the specified value */
     constexpr Vector3(float x, float y, float z) noexcept;
 
     template <typename _DerivedExpressionType>
@@ -90,6 +93,13 @@ constexpr Vector3::Vector3() noexcept :
 {
 }
 
+constexpr tgon::core::Vector3::Vector3(float scalar) noexcept :
+    x(scalar),
+    y(scalar),
+    z(scalar)
+{
+}
+
 constexpr Vector3::Vector3(float x, float y, float z) noexcept :
     x(x),
 	y(y), 
@@ -98,12 +108,11 @@ constexpr Vector3::Vector3(float x, float y, float z) noexcept :
 }
 
 template <typename _DerivedExpressionType>
-constexpr Vector3::Vector3(const BaseExpression<_DerivedExpressionType>& expression)
+constexpr Vector3::Vector3(const BaseExpression<_DerivedExpressionType>& expression) :
+    x(expression[0]),
+    y(expression[1]),
+    z(expression[2])
 {
-    for (int i = 0; i < 3; ++i)
-    {
-        *(&x + i) = expression[i];
-    }
 }
 
 constexpr const PlusExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept

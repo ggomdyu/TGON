@@ -62,6 +62,7 @@ public:
     void GetTitle(char* destStr) const;
     float GetTransparency() const;
     void* GetNativeWindow();
+    const void* GetNativeWindow() const;
     bool HasCaption() const;
     bool IsResizable() const;
     bool IsMaximized() const;
@@ -86,7 +87,7 @@ public:
     Delegate<void()> OnWindowLoseFocus;
 
 /* @section Private method */
-public:
+private:
 #if BOOST_OS_WINDOWS
     void SetUserData(void* data);
 #elif BOOST_OS_MACOS

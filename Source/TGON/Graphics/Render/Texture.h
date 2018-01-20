@@ -31,14 +31,16 @@ public:
 /* @section Public method */
 public:
     const std::string& GetFilePath() const noexcept;
-    uint8_t* GetTextureBits() noexcept;
+
+    uint8_t* GetBits() noexcept;
     uint32_t GetHeight() const noexcept;
     uint32_t GetWidth() const noexcept;
 
 /* @section Private variable */
 private:
     std::string m_filePath;
-    uint8_t* m_textureBits;
+
+    uint8_t* m_bits;
     uint32_t m_width;
     uint32_t m_height;
 };

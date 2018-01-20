@@ -151,6 +151,11 @@ void* Window::GetNativeWindow()
     return m_wndHandle;
 }
 
+const void* Window::GetNativeWindow() const
+{
+    return m_wndHandle;
+}
+
 void Window::Show()
 {
     ::ShowWindow(m_wndHandle, SW_NORMAL);
