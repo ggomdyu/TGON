@@ -6,7 +6,7 @@
 #include "../RHIType.h"
 
 #include "Core/Math/Color.h"
-#include "Core/Platform/Debug.h"
+#include "Core/Debug/Log.h"
 #include "Graphics/RHI/RHIType.h"
  
 #include <atomic>

@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-namespace render
+namespace graphics
 {
 
 bool LoadPNG(const char* filePath, std::vector<uint8_t>* destBuffer, std::size_t* width, std::size_t* height);
@@ -19,5 +19,5 @@ bool LoadJPG(const char* filePath, std::vector<uint8_t>* destBuffer, std::size_t
 
 bool LoadWebP(const char* filePath, std::vector<uint8_t>* destBuffer, std::size_t* width, std::size_t* height);
 
-} /* namespace render */
+} /* namespace graphics */
 } /* namespace tgon */

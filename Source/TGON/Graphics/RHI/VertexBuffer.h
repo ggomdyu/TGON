@@ -40,7 +40,7 @@ enum class VertexType
     UnsignedInt,
 };
 
-struct VertexInputDesc
+struct VertexInputAttributeDescription
 {
     VertexAttributeType attribute;
     std::size_t dimension;
@@ -72,26 +72,39 @@ inline int32_t ConvertVertexTypeToNative(VertexType vertexType)
 
 } /* namespace */
 
-class VertexBuffer
+class Buffer
+{
+public:
+    
+};
+
+class VertexBuffer :
+    public Buffer
 {
 public:
     std::size_t GetBufferSize() const;
 public:
     GLuint m_vertexArray = 0;
     GLuint m_vertexBufferID = 0;
-    std::vector<VertexInputDesc> m_vertexInputDesc;
+    std::vector<VertexInputAttributeDescription> m_vertexInputDesc;
 
 public:
-    VertexBuffer(std::size_t bufferSize, void* data, const std::initializer_list<VertexInputDesc>& vertexInputAttrDescs)
+    template <typename _VertexArrayType, std::size_t _VertexArraySize>
+    VertexBuffer(const _VertexArrayType(&rawData)[_VertexArraySize], const std::initializer_list<VertexInputAttributeDescription>& descs) :
+        VertexBuffer(rawData, sizeof(rawData), descs)
+    {
+    }
+
+    VertexBuffer(const void* rawData, std::size_t rawDataBytes, const std::initializer_list<VertexInputAttributeDescription>& descs)
     {
         glGenVertexArrays(1, &m_vertexArray);
         glBindVertexArray(m_vertexArray);
 
-        m_vertexInputDesc.assign(vertexInputAttrDescs);
+        m_vertexInputDesc.assign(descs);
 
         glGenBuffers(1, &m_vertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, bufferSize, data, m_isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, rawDataBytes, rawData, m_isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
     }
     
     ~VertexBuffer()
@@ -108,7 +121,7 @@ public:
 
         for (int i = 0; i < m_vertexInputDesc.size(); ++i)
         {
-            const VertexInputDesc& vertexInputAttrDesc = m_vertexInputDesc[i];
+            const VertexInputAttributeDescription& vertexInputAttrDesc = m_vertexInputDesc[i];
 
             glEnableVertexAttribArray(i);
             glVertexAttribPointer(

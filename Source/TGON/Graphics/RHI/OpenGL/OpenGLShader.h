@@ -19,7 +19,7 @@ namespace graphics
 class OpenGLShader
 {
 public:
-    bool Initialize(const char* vertexShaderCodeStr, const char* fragmentShaderCodeStr);
+    bool Initialize(const char* vsCodeStr, const char* fsCodeStr);
 
     void BeginScene();
     void EndScene();

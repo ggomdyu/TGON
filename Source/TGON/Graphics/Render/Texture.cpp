@@ -23,9 +23,9 @@ const std::string& Texture2D::GetFilePath() const noexcept
     return m_filePath;
 }
 
-uint8_t* Texture2D::GetTextureBits() noexcept
+uint8_t* Texture2D::GetBits() noexcept
 {
-    return m_textureBits;
+    return m_bits;
 }
 
 uint32_t Texture2D::GetWidth() const noexcept
