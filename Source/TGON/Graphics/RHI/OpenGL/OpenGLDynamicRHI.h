@@ -10,6 +10,7 @@
 #include "../IDynamicRHI.h"
 
 #include <memory>
+#include <GL/glew.h>
 
 namespace tgon
 {
@@ -43,6 +44,8 @@ public:
 /* @section Private variable */
 private:
     std::unique_ptr<OpenGLContext> m_context;
+
+    GLuint m_vertexArray;
 };
 
 } /* namespace graphics */

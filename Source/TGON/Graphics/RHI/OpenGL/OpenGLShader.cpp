@@ -42,13 +42,17 @@ bool OpenGLShader::Initialize(const char* vertexShaderCodeStr, const char* fragm
         return false;
     }
     
-    this->Link(vertexShader, fragmentShader);
-    return true;
+    return this->Link(vertexShader, fragmentShader);
 }
 
-void OpenGLShader::Use()
+void OpenGLShader::BeginScene()
 {
     glUseProgram(m_program);
+}
+
+void OpenGLShader::EndScene()
+{
+    glUseProgram(0);
 }
 
 void OpenGLShader::BindAttributeLocation(const char* name, std::size_t index)
@@ -81,6 +85,11 @@ void OpenGLShader::SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfl
     this->SetParameter4f(this->GetUniformLocation(name), f1, f2, f3, f4);
 }
 
+void OpenGLShader::SetParameterMatrix4fv(const char* name, const GLfloat* f)
+{
+    this->SetParameterMatrix4fv(this->GetUniformLocation(name), f);
+}
+
 void OpenGLShader::SetParameter1f(int32_t location, GLfloat f)
 {
     glUniform1f(location, f);
@@ -99,6 +108,11 @@ void OpenGLShader::SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfl
 void OpenGLShader::SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
 {
     glUniform4f(location, f1, f2, f3, f4);
+}
+
+void OpenGLShader::SetParameterMatrix4fv(int32_t location, const GLfloat* f)
+{
+    glUniformMatrix4fv(location, 1, GL_FALSE, f);
 }
 
 void OpenGLShader::SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler)
@@ -131,7 +145,7 @@ bool OpenGLShader::Link(GLuint vertexShader, GLuint fragmentShader)
     V(glDeleteShader(vertexShader));
     V(glDeleteShader(fragmentShader));
     
-    return false;
+    return true;
 }
 
 GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr) const
@@ -149,6 +163,7 @@ GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr)
     if (this->IsCompileSucceed(shader) == false)
     {
         core::Log("Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shader).c_str());
+        return 0;
     }
 
     return shader;

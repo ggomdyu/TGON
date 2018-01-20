@@ -20,9 +20,15 @@ namespace graphics
 OpenGLDynamicRHI::OpenGLDynamicRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
     m_context(std::make_unique<OpenGLContext>(window, videoMode))
 {
+    glGenVertexArrays(1, &m_vertexArray);
+    glBindVertexArray(m_vertexArray);
 }
 
-OpenGLDynamicRHI::~OpenGLDynamicRHI() = default;
+OpenGLDynamicRHI::~OpenGLDynamicRHI()
+{
+    glBindVertexArray(0);
+    glDeleteVertexArrays(1, &m_vertexArray);
+}
 
 void OpenGLDynamicRHI::SetClearColor(const core::Color4f& color)
 {
@@ -114,7 +120,7 @@ void OpenGLDynamicRHI::ClearColorDepthBuffer()
 
 void OpenGLDynamicRHI::SwapBuffer()
 {
-//    ::SwapBuffers(m_context->dcHandle);
+    ::SwapBuffers(m_context->dcHandle);
 }
 
 } /* namespace graphics */

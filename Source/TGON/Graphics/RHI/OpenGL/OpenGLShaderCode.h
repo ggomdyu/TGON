@@ -22,26 +22,27 @@
  */
 
 constexpr const char g_positionColorVert[] =
-"                                           \n\
-uniform mat4 g_uMVP;                        \n\
-uniform vec4 g_uColor;                      \n\
-                                            \n\
-in vec4 g_inPosition;                       \n\
-out vec4 g_outColor;                        \n\
-                                            \n\
-void main()                                 \n\
-{                                           \n\
-    gl_Position = g_uMVP * g_aPosition;     \n\
-    g_vColor = g_uColor;                    \n\
-}                                           \n\
+"                                                           \n\
+#version 330 core                                           \n\
+                                                            \n\
+layout(location = 0) in vec3 g_inPosition;                  \n\
+                                                            \n\
+uniform mat4 g_uMVP;                                        \n\
+                                                            \n\
+void main()                                                 \n\
+{                                                           \n\
+    gl_Position = g_uMVP * vec4(g_inPosition, 1.0);         \n\
+}                                                           \n\
 ";
 
 constexpr const char g_positionColorFrag[] =
-"                                           \n\
-in vec4 g_vColor;                           \n\
-                                            \n\
-void main()                                 \n\
-{                                           \n\
-    gl_FragColor = g_vColor;                \n\
-}                                           \n\
+"                                                           \n\
+#version 330 core                                           \n\
+                                                            \n\
+out vec3 color;                                             \n\
+                                                            \n\
+void main()                                                 \n\
+{                                                           \n\
+    color = vec3(1, 1, 1);                                  \n\
+}                                                           \n\
 ";
