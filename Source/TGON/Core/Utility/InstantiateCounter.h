@@ -67,13 +67,13 @@ public:
 template<typename _ClassType>
 inline InstanceCounter<_ClassType>::~InstanceCounter()
 {
-    --ms_instantiatedCount;
+    --InstantiateCounter<_ClassType>::ms_instantiatedCount;
 }
 
 template<typename _ClassType>
 inline uint32_t InstanceCounter<_ClassType>::GetInstanceCount() noexcept
 {
-    return ms_instantiatedCount;
+    return InstantiateCounter<_ClassType>::ms_instantiatedCount;
 }
 
 /**
@@ -115,7 +115,7 @@ public:
 template <typename _ClassType, uint32_t _MaxInstanceCount>
 inline InstanceCountLimiter<_ClassType, _MaxInstanceCount>::~InstanceCountLimiter()
 {
-    --ms_instantiatedCount;
+    --InstantiateCounter<_ClassType>::ms_instantiatedCount;
 }
 
 } /* namespace core */
