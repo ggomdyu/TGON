@@ -71,5 +71,33 @@ inline void ForEach(const _ContainerType& container, const _CallbackType& callba
     ForEach(container.cbegin(), container.cend(), callback);
 }
 
+template <typename _ContainerType, typename _PredicateType>
+inline void EraseAll(_ContainerType& container, const _PredicateType& predicate)
+{
+    for (auto iter = container.begin(); iter != container.end();)
+    {
+        if (predicate(*iter) == true)
+        {
+            iter = container.erase(iter);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+}
+
+template <typename _ContainerType, typename _PredicateType, typename _CallbackType>
+inline void FindAll(_ContainerType& container, const _PredicateType& predicate, const _CallbackType& callback)
+{
+    for (auto iter = container.begin(); iter != container.end(); ++iter)
+    {
+        if (predicate(*iter) == true)
+        {
+            callback(*iter);
+        }
+    }
+}
+
 } /* namespace core */
 } /* namespace tgon */
