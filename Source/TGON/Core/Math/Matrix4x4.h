@@ -47,6 +47,8 @@ public:
 
 /* @section Public method */
 public:
+    static constexpr const Matrix4x4 Identity();
+    static constexpr const Matrix4x4 Zero();
     static constexpr const Matrix4x4 Translate(float x, float y, float z) noexcept;
     static const Matrix4x4 RotateX(float radian);
     static const Matrix4x4 RotateY(float radian);
@@ -62,9 +64,6 @@ public:
 
 /* @section Public variable */
 public:
-    static const Matrix4x4 Zero;
-    static const Matrix4x4 Identity;
-
     float m00, m01, m02, m03,
           m10, m11, m12, m13,
           m20, m21, m22, m23,
@@ -311,6 +310,26 @@ constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexce
         0.0f,   1.0f,   0.0f,   0.0f,
         0.0f,   0.0f,   1.0f,   0.0f,
         x,      y,      z,      1.0f
+    );
+}
+
+constexpr const Matrix4x4 Matrix4x4::Identity()
+{
+    return Matrix4x4(
+        1.f, 0.f, 0.f, 0.f,
+        0.f, 1.f, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f,
+        0.f, 0.f, 0.f, 1.f
+    );
+}
+
+constexpr const Matrix4x4 Matrix4x4::Zero()
+{
+    return Matrix4x4(
+        0.f, 0.f, 0.f, 0.f,
+        0.f, 0.f, 0.f, 0.f,
+        0.f, 0.f, 0.f, 0.f,
+        0.f, 0.f, 0.f, 0.f
     );
 }
 
