@@ -85,7 +85,6 @@ public:
 
     /* @brief   If false, the application will perform software rendering. */
     bool enableHardwareAccelerate = true;
-    bool enableDoubleBuffer = true;
     bool enableTripleBuffer = false;
     bool enableVerticalSync = false;
 
