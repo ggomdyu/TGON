@@ -89,7 +89,7 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const
+inline Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const
 {
     return Matrix4x4(
         m00 - rhs.m00, m01 - rhs.m01, m02 - rhs.m02, m03 - rhs.m03,
@@ -99,7 +99,7 @@ Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const
     );
 }
 
-Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
+inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
 {
     return Matrix4x4(
         (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
@@ -124,7 +124,7 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
     );
 }
 
-const Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs)
+inline const Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs)
 {
     m00 += rhs.m00; m01 += rhs.m01; m02 += rhs.m02; m03 += rhs.m03;
     m10 += rhs.m10; m11 += rhs.m11; m12 += rhs.m12; m13 += rhs.m13;
@@ -134,7 +134,7 @@ const Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs)
     return *this;
 }
 
-const Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs)
+inline const Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs)
 {
     m00 -= rhs.m00; m01 -= rhs.m01; m02 -= rhs.m02; m03 -= rhs.m03;
     m10 -= rhs.m10; m11 -= rhs.m11; m12 -= rhs.m12; m13 -= rhs.m13;
@@ -144,7 +144,7 @@ const Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs)
     return *this;
 }
 
-Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
+inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
 {
     Vector3 l = lookAt - eyePt;
     l.Normalize();
@@ -163,7 +163,7 @@ Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const
     );
 }
 
-Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
+inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
 {
     Vector3 l = lookAt - eyePt;
     l.Normalize();
@@ -182,7 +182,7 @@ Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const
     );
 }
 
-Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ)
+inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ)
 {
     float scaleY = 1.0f / std::tan(fovy * 0.5f);
     float scaleX = scaleY / aspect;
@@ -208,7 +208,7 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
 
-Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
+inline Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
 {
     float halfWidth = width * 0.5f;
     float halfHeight = height * 0.5f;
@@ -252,28 +252,28 @@ constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
 
 inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const
 {
-#if TGON_SUPPORT_SSE
-    Matrix4x4 ret;
-
-    _mm_storeu_ps(&ret.m00, _mm_add_ps(_mm_loadu_ps(&m00), _mm_loadu_ps(&rhs.m00)));
-    _mm_storeu_ps(&ret.m10, _mm_add_ps(_mm_loadu_ps(&m10), _mm_loadu_ps(&rhs.m10)));
-    _mm_storeu_ps(&ret.m20, _mm_add_ps(_mm_loadu_ps(&m20), _mm_loadu_ps(&rhs.m20)));
-    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_loadu_ps(&m30), _mm_loadu_ps(&rhs.m30)));
-
-    return ret;
-#else
+//#if TGON_SUPPORT_SSE
+//    Matrix4x4 ret;
+//
+//    _mm_storeu_ps(&ret.m00, _mm_add_ps(_mm_loadu_ps(&m00), _mm_loadu_ps(&rhs.m00)));
+//    _mm_storeu_ps(&ret.m10, _mm_add_ps(_mm_loadu_ps(&m10), _mm_loadu_ps(&rhs.m10)));
+//    _mm_storeu_ps(&ret.m20, _mm_add_ps(_mm_loadu_ps(&m20), _mm_loadu_ps(&rhs.m20)));
+//    _mm_storeu_ps(&ret.m30, _mm_add_ps(_mm_loadu_ps(&m30), _mm_loadu_ps(&rhs.m30)));
+//
+//    return ret;
+//#else
     return Matrix4x4(
         m00 + rhs.m00, m01 + rhs.m01, m02 + rhs.m02, m03 + rhs.m03,
         m10 + rhs.m10, m11 + rhs.m11, m12 + rhs.m12, m13 + rhs.m13,
         m20 + rhs.m20, m21 + rhs.m21, m22 + rhs.m22, m23 + rhs.m23,
         m30 + rhs.m30, m31 + rhs.m31, m32 + rhs.m32, m33 + rhs.m33
     );
-#endif
+//#endif
 }
 
 inline const Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs)
 {
-    *this = (*this)*rhs;
+    *this = (*this) * rhs;
     return *this;
 }
 

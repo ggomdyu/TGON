@@ -31,11 +31,11 @@
 
 #include "Graphics/RHI/VertexBuffer.h"
 
-#include <glm/glm/matrix.hpp>
-#include <glm/glm/common.hpp>
-#include <d3d9.h>
-#include <glm/glm/gtx/transform.hpp>
-#include <DirectXMath.h>
+//#include <glm/glm/matrix.hpp>
+//#include <glm/glm/common.hpp>
+//#include <d3d9.h>
+//#include <glm/glm/gtx/transform.hpp>
+//#include <DirectXMath.h>
 
 template <typename T>
 void PrintMat(const T& matA)

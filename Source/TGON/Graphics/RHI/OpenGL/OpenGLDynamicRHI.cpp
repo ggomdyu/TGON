@@ -6,7 +6,6 @@
 #include "../RHIType.h"
 
 #include "Core/Math/Color.h"
-#include "Core/Debug/Log.h"
 #include "Graphics/RHI/RHIType.h"
  
 #include <atomic>
@@ -120,7 +119,7 @@ void OpenGLDynamicRHI::ClearColorDepthBuffer()
 
 void OpenGLDynamicRHI::SwapBuffer()
 {
-    ::SwapBuffers(m_context->dcHandle);
+//    ::SwapBuffers(m_context->dcHandle);
 }
 
 } /* namespace graphics */
