@@ -77,7 +77,6 @@ public:
                 videoMode.graphicsSDK = graphics::GraphicsSDK::OpenGL4_0;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
-                videoMode.enableDoubleBuffer = true;
             }
             return videoMode;
         }())
@@ -93,11 +92,17 @@ public:
             {core::Vector3(1.0f, -1.0f, 0.0f)},
             {core::Vector3(0.0f, 1.0f, 0.0f)},
         };
+        V3F_C4B i[] =
+        {
+            {core::Vector3(-1.0f, -1.0f, 0.0f)},
+            {core::Vector3(1.0f, -1.0f, 0.0f)},
+            {core::Vector3(0.0f, 1.0f, 0.0f)},
+        };
         size_t vertexSize = sizeof(v);
 
-        std::initializer_list<graphics::VertexInputDesc> viad =
+        std::initializer_list<graphics::VertexInputAttributeDescription> viad =
         {
-            graphics::VertexInputDesc
+            graphics::VertexInputAttributeDescription
             {
                 graphics::VertexAttributeType::Position,
                 3,
@@ -108,8 +113,12 @@ public:
             }
         };
 
-        vb = new graphics::VertexBuffer(sizeof(v), v, viad);
-        
+        vb = new graphics::VertexBuffer(v, viad);
+
+        glBindVertexArray(vb->m_vertexArray);
+        vb->BeginScene();
+        glBindVertexArray(0);
+
         shader = new graphics::OpenGLShader();
         bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
         if (ss)
@@ -148,29 +157,38 @@ public:
         auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = core::Matrix4x4::PerspectiveRH(3.14159268f / 8.0f, 500.0f / 500.0f, 0.1f, 1000.0f);
         x += 0.005f;
-
+        
         MVP = M2 * V2 * P2;
+        
 
-        FindModule<game::GraphicsModule>()->GetRHI()->ClearColorDepthBuffer();
-
+        glClear(GL_COLOR_BUFFER_BIT);
         shader->BeginScene();
         {
             shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
-            auto e = glGetError();
 
-            vb->BeginScene();
-            {
-                glDrawArrays(GL_TRIANGLES, 0, 3);
-                glFlush();
-            }
-            vb->EndScene();
+            glBindVertexArray(vb->m_vertexArray);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glBindVertexArray(0);
         }
         shader->EndScene();
 
+        /*
+        static float x = 0.0f;
+        static float y = 0.0f;
+
+        float newX = std::sin(x += 0.01);
+        float newY = std::sin(y += 0.01);
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_TRIANGLES);
+        glVertex2f(0.0 + newX, 0.5 + newY);
+        glVertex2f(-0.5 + newX, -0.5 + newY);
+        glVertex2f(0.5 + newX, -0.5 + newY);
+        glEnd();
+        glFinish();
+        */
+
         FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
-
-        return;
-
     }
 };
 TGON_DECLARE_APPLICATION(ThousandParty)

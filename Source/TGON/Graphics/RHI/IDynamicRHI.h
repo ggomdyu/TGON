@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-
 #include "IDynamicRHIFwd.h"
+
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
