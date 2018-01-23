@@ -84,7 +84,6 @@ class VertexBuffer :
 public:
     std::size_t GetBufferSize() const;
 public:
-    GLuint m_vertexArray = 0;
     GLuint m_vertexBufferID = 0;
     std::vector<VertexInputAttributeDescription> m_vertexInputDesc;
 
@@ -97,9 +96,6 @@ public:
 
     VertexBuffer(const void* rawData, std::size_t rawDataBytes, const std::initializer_list<VertexInputAttributeDescription>& descs)
     {
-        glGenVertexArrays(1, &m_vertexArray);
-        glBindVertexArray(m_vertexArray);
-
         m_vertexInputDesc.assign(descs);
 
         glGenBuffers(1, &m_vertexBufferID);
@@ -110,9 +106,6 @@ public:
     ~VertexBuffer()
     {
         glDeleteBuffers(1, &m_vertexBufferID);
-
-        glBindVertexArray(0);
-        glDeleteVertexArrays(1, &m_vertexArray);
     }
 
     void BeginScene()
@@ -137,8 +130,6 @@ public:
     
     void EndScene()
     {
-        glBindVertexArray(0);
-
         for (int i = 0; i < m_vertexInputDesc.size(); ++i)
         {
             glDisableVertexAttribArray(i);

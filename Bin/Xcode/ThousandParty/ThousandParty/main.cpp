@@ -54,6 +54,9 @@ class TGON_API ThousandParty :
 public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
+    GLuint m_indexBuffer;
+    GLuint m_vertexArray = 0;
+
 public:
     ThousandParty() :
         game::GameApplication([&]()
@@ -89,17 +92,14 @@ public:
         V3F_C4B v[] =
         {
             {core::Vector3(-1.0f, -1.0f, 0.0f)},
+            {core::Vector3(-1.0f, 1.0f, 0.0f)},
+            {core::Vector3(1.0f, 1.0f, 0.0f)},
             {core::Vector3(1.0f, -1.0f, 0.0f)},
-            {core::Vector3(0.0f, 1.0f, 0.0f)},
         };
-        V3F_C4B i[] =
+        unsigned int i[] =
         {
-            {core::Vector3(-1.0f, -1.0f, 0.0f)},
-            {core::Vector3(1.0f, -1.0f, 0.0f)},
-            {core::Vector3(0.0f, 1.0f, 0.0f)},
+            0,1,2,0,2,3
         };
-        size_t vertexSize = sizeof(v);
-
         std::initializer_list<graphics::VertexInputAttributeDescription> viad =
         {
             graphics::VertexInputAttributeDescription
@@ -114,9 +114,19 @@ public:
         };
 
         vb = new graphics::VertexBuffer(v, viad);
+        
+        // Create INDEX BUFFER
+        glGenBuffers(1, &m_indexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(i), i, GL_STATIC_DRAW);
 
-        glBindVertexArray(vb->m_vertexArray);
-        vb->BeginScene();
+        // Create VAO
+        glGenVertexArrays(1, &m_vertexArray);
+        glBindVertexArray(m_vertexArray);
+        {
+            vb->BeginScene();
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        }
         glBindVertexArray(0);
 
         shader = new graphics::OpenGLShader();
@@ -131,6 +141,10 @@ public:
 
     ~ThousandParty()
     {
+        // Release VAO
+        glBindVertexArray(0);
+        glDeleteVertexArrays(1, &m_vertexArray);
+
         delete vb;
     }
 
@@ -166,8 +180,8 @@ public:
         {
             shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
 
-            glBindVertexArray(vb->m_vertexArray);
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glBindVertexArray(m_vertexArray);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
             glBindVertexArray(0);
         }
         shader->EndScene();
