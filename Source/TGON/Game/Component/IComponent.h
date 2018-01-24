@@ -26,7 +26,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~IComponent() = default;
+    virtual ~IComponent() override = default;
 
 /* @section Public method */
 public:

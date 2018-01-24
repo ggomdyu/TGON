@@ -30,7 +30,7 @@ public:
 public:
     explicit GameObject(const std::shared_ptr<GameContext>& context);
     GameObject(const GameObject&) = delete;
-    virtual ~GameObject();
+    virtual ~GameObject() override;
 
 /* @section Public operator */
 public:
