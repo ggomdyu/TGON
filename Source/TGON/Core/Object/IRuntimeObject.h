@@ -19,6 +19,10 @@ public:
     using SuperType = void;
     using ThisType = IRuntimeObject;
 
+/* @section Public destructor */
+public:
+    virtual ~IRuntimeObject() = 0;
+
 /* @section Public method */
 public:
     /* @brief   Get static bound type information. */
@@ -28,6 +32,8 @@ public:
     /* @brief   Get dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
 };
+
+inline IRuntimeObject::~IRuntimeObject() = default;
 
 template <typename _Type>
 inline const RTTI* GetRTTI()

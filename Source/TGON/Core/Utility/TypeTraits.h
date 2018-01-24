@@ -10,7 +10,7 @@
 
 #define TGON_ENABLE_IF(value) typename std::enable_if<value>::type* = nullptr
 
-#define TGON_IS_SAME(firstType, secondType) std::is_same<firstType, secondType>::value
+#define TGON_IS_SAME(type1, type2) std::is_same<type1, type2>::value
 #define TGON_IS_POINTER(type) std::is_pointer<type>::value
 #define TGON_IS_REFERENCE(type) std::is_reference<type>::value
 #define TGON_IS_CONST(type) std::is_const<type>::value

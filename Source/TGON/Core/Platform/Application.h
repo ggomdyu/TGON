@@ -48,7 +48,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Application() = default;
+    virtual ~Application() override = default;
 
 /* @section Public method */
 public:

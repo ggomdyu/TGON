@@ -30,5 +30,7 @@ public:
     virtual void Update() = 0;
 };
 
+inline IModule::~IModule() = default;
+
 } /* namespace game */
 } /* namespace tgon */

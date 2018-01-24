@@ -23,7 +23,7 @@ class OpenGLDynamicRHI :
 /* @section Public constructor */
 public:
     OpenGLDynamicRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-    virtual ~OpenGLDynamicRHI();
+    virtual ~OpenGLDynamicRHI() override;
 
 /* @section Public method */
 public:

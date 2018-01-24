@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
+#include <vector>
 #include <cstdint>
 
 namespace tgon
@@ -21,7 +22,14 @@ enum class ImageFormat
 class Bitmap
 {
 public:
-    explicit Bitmap(const uint8_t* bits, ImageFormat);
+    explicit Bitmap(const std::string& filePath);
+    explicit Bitmap(const std::string& filePat h);
+
+private:
+    std::vector<uint8_t> m_bits;
+    int32_t m_width;
+    int32_t m_height;
+    std::string m_filePath;
 };
 
 } /* namespace core */

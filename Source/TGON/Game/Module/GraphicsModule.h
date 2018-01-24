@@ -33,7 +33,7 @@ public:
 /* @section Public constructor */
 public:
     GraphicsModule(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode);
-    virtual ~GraphicsModule();
+    virtual ~GraphicsModule() override;
 
 /* @section Public method */
 public:

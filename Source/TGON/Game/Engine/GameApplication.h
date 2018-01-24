@@ -27,7 +27,7 @@ public:
 public:
     GameApplication(const core::WindowStyle& windowStyle);
     GameApplication(const core::WindowStyle& windowStyle, const graphics::VideoMode& videoMode);
-    virtual ~GameApplication() = default;
+    virtual ~GameApplication() override = default;
 
 /* @section Public method */
 public:

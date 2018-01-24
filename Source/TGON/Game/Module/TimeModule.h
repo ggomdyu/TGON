@@ -21,7 +21,7 @@ public:
 /* @section Public constructor */
 public:
     TimeModule();
-    virtual ~TimeModule() = default;
+    virtual ~TimeModule() override = default;
 
 /* @section Public method */
 public:
