@@ -17,7 +17,7 @@ namespace core
 {
 
 /* @brief   Returns count of detected monitors. */
-int32_t GetScreenCount();
+TGON_API int32_t GetScreenCount();
 
 /**
  * @brief   Returns current primary screen information.
