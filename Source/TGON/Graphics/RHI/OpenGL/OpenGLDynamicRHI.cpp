@@ -7,9 +7,15 @@
 
 #include "Core/Math/Color.h"
 #include "Graphics/RHI/RHIType.h"
- 
-#include <atomic>
+
 #include <GL/glew.h>
+#if BOOST_OS_WINDOWS
+#elif BOOST_OS_MACOS
+#   import <AppKit/NSOpenGL.h>
+#   import <AppKit/NSOpenGLView.h>
+#   import <AppKit/NSWindow.h>
+#   import <OpenGL/OpenGL.h>
+#endif
 
 namespace tgon
 {
@@ -36,7 +42,7 @@ void OpenGLDynamicRHI::SetClearColor(const core::Color4f& color)
 
 void OpenGLDynamicRHI::SetFillMode(FillMode fillMode)
 {
-    static GLenum nativeFillModeTable[] =
+    static constexpr GLenum nativeFillModeTable[] =
     {
         GL_POINT,
         GL_LINE,
@@ -48,7 +54,7 @@ void OpenGLDynamicRHI::SetFillMode(FillMode fillMode)
 
 void OpenGLDynamicRHI::SetCullMode(CullMode cullMode)
 {
-    static GLenum nativeCullModeTable[] =
+    static constexpr GLenum nativeCullModeTable[] =
     {
         GL_CW,
         GL_CCW
@@ -89,7 +95,7 @@ void OpenGLDynamicRHI::DisableDepthTest()
 
 void OpenGLDynamicRHI::BeginScene(PrimitiveType primitiveType)
 {
-    static GLenum nativePrimitiveTable[] =
+    static constexpr GLenum nativePrimitiveTable[] =
     {
         GL_POINTS,
         GL_LINES,
@@ -119,7 +125,11 @@ void OpenGLDynamicRHI::ClearColorDepthBuffer()
 
 void OpenGLDynamicRHI::SwapBuffer()
 {
+#if BOOST_OS_WINDOWS
     ::SwapBuffers(m_context->dcHandle);
+#else
+    CGLFlushDrawable([m_context->context CGLContextObj]);
+#endif
 }
 
 } /* namespace graphics */

@@ -5,6 +5,7 @@
 #import "Core/Platform/Window.h"
 #import "Graphics/RHI/RHIType.h"
 
+#import <GL/glew.h>
 #import <AppKit/NSOpenGL.h>
 #import <AppKit/NSOpenGLView.h>
 #import <AppKit/NSWindow.h>
@@ -25,15 +26,13 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
         attributes[attributeIndex++] = NSOpenGLPFAAccelerated;
     }
 
-    if (videoMode.enableDoubleBuffer)
-    {
-        attributes[attributeIndex++] = NSOpenGLPFADoubleBuffer;
-    }
+    attributes[attributeIndex++] = NSOpenGLPFADoubleBuffer;
 
     if (videoMode.enableMultiSampling)
     {
         attributes[attributeIndex++] = NSOpenGLPFASampleBuffers;
         attributes[attributeIndex++] = 1;
+        
         attributes[attributeIndex++] = NSOpenGLPFASamples;
         attributes[attributeIndex++] = videoMode.sampleCount;
     }
@@ -47,10 +46,8 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
     attributes[attributeIndex++] = NSOpenGLPFAAlphaSize;
     attributes[attributeIndex++] = 8;
 
-#if CGL_VERSION_1_3
     attributes[attributeIndex++] = NSOpenGLPFAOpenGLProfile;
     attributes[attributeIndex++] = NSOpenGLProfileVersion3_2Core;
-#endif
 
     // Mark end of attribute.
     attributes[attributeIndex++] = 0;
@@ -83,10 +80,15 @@ OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window, const 
     NSWindow* nativeWindow = (__bridge NSWindow*)window->GetNativeWindow();
     {
         NSOpenGLView *openGLView = [[NSOpenGLView alloc] init];
-        [nativeWindow setContentView:openGLView];
+        [openGLView setOpenGLContext:context];
 
+        // Now, we will use this context.
         [[openGLView openGLContext] makeCurrentContext];
+
+        [nativeWindow setContentView:openGLView];
     }
+
+    glewInit();
 }
 
 OpenGLContext::~OpenGLContext() = default;
