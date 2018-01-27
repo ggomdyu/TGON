@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <string>
 
 namespace tgon
 {
@@ -23,7 +24,12 @@ class Bitmap
 {
 public:
     explicit Bitmap(const std::string& filePath);
-    explicit Bitmap(const std::string& filePat h);
+
+public:
+    const std::vector<uint8_t>& GetBits() const;
+    int32_t GetWidth() const;
+    int32_t GetHeight() const;
+    const std::string& GetFilePath() const;
 
 private:
     std::vector<uint8_t> m_bits;
