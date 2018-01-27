@@ -28,7 +28,6 @@
 #include "Graphics/Render/Renderer.h"
 #include "Game/Module/GraphicsModule.h"
 #include "Game/Module/TimeModule.h"
-
 #include "Graphics/RHI/VertexBuffer.h"
 
 //#include <glm/glm/matrix.hpp>
@@ -36,6 +35,8 @@
 //#include <d3d9.h>
 //#include <glm/glm/gtx/transform.hpp>
 //#include <DirectXMath.h>
+
+using namespace tgon;
 
 template <typename T>
 void PrintMat(const T& matA)
@@ -47,13 +48,13 @@ void PrintMat(const T& matA)
         matA[3][0], matA[3][1], matA[3][2], matA[3][3]);
 }
 
-using namespace tgon;
 class TGON_API ThousandParty :
     public game::GameApplication
 {
 public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
+    GLuint m_colorBuffer;
     GLuint m_indexBuffer;
     GLuint m_vertexArray = 0;
 
@@ -87,15 +88,17 @@ public:
         struct V3F_C4B
         {
             core::Vector3 position;
+            core::Color4f color;
         };
 
         V3F_C4B v[] =
         {
-            {core::Vector3(-1.0f, -1.0f, 0.0f)},
-            {core::Vector3(-1.0f, 1.0f, 0.0f)},
-            {core::Vector3(1.0f, 1.0f, 0.0f)},
-            {core::Vector3(1.0f, -1.0f, 0.0f)},
+            {core::Vector3(-1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 0.0f, 0.0f, 1.0f)},
+            {core::Vector3(-1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 1.0f, 0.0f, 1.0f)},
+            {core::Vector3(1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 0.0f, 1.0f, 1.0f)},
+            {core::Vector3(1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 1.0f, 0.0f, 1.0f)},
         };
+
         unsigned int i[] =
         {
             0,1,2,0,2,3
@@ -108,17 +111,28 @@ public:
                 3,
                 graphics::VertexType::Float,
                 false,
-                0,
+                sizeof(V3F_C4B),
                 offsetof(V3F_C4B, position),
-            }
+            },
+            graphics::VertexInputAttributeDescription
+            {
+                graphics::VertexAttributeType::Color,
+                4,
+                graphics::VertexType::Float,
+                true,
+                sizeof(V3F_C4B),
+                offsetof(V3F_C4B, color),
+            },
         };
 
         vb = new graphics::VertexBuffer(v, viad);
-        
+
+
         // Create INDEX BUFFER
         glGenBuffers(1, &m_indexBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(i), i, GL_STATIC_DRAW);
+
 
         // Create VAO
         glGenVertexArrays(1, &m_vertexArray);

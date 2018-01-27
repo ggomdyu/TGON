@@ -44,10 +44,10 @@ private:
     bool Link(GLuint vertexShader, GLuint fragmentShader);
 
     /**
-     * @brief                   Compiles shader and return the handle of it.
-     * @param [in]  shaderType  The type of shader: GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc
-     * @param [in]  shaderStr   The source code of shader.
-     * @return                  If the function fails, the return value is zero.
+     * @brief                       Compiles shader and return the handle of it.
+     * @param [in]  shaderType      The type of shader: GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc
+     * @param [in]  shaderCodeStr   The source code of shader.
+     * @return                      If the function fails, the return value is zero.
      */
     GLuint CompileShader(GLenum shaderType, const char* shaderCodeStr) const;
 

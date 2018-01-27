@@ -25,13 +25,17 @@ constexpr const char g_positionColorVert[] =
 "                                                           \n\
 #version 330 core                                           \n\
                                                             \n\
-layout(location = 0) in vec3 g_inPosition;                  \n\
+layout(location = 0) in vec3 g_vPosition;                   \n\
+layout(location = 1) in vec4 g_vColor;                      \n\
+                                                            \n\
+out vec4 g_fColor;                                          \n\
                                                             \n\
 uniform mat4 g_uMVP;                                        \n\
                                                             \n\
 void main()                                                 \n\
 {                                                           \n\
-    gl_Position = g_uMVP * vec4(g_inPosition, 1.0);         \n\
+    gl_Position = g_uMVP * vec4(g_vPosition, 1.0);          \n\
+    g_fColor = g_vColor;                                    \n\
 }                                                           \n\
 ";
 
@@ -39,10 +43,11 @@ constexpr const char g_positionColorFrag[] =
 "                                                           \n\
 #version 330 core                                           \n\
                                                             \n\
-out vec3 color;                                             \n\
+in vec4 g_fColor;                                           \n\
+out vec4 g_outColor;                                        \n\
                                                             \n\
 void main()                                                 \n\
 {                                                           \n\
-    color = vec3(1, 1, 1);                                  \n\
+    g_outColor = g_fColor;                                  \n\
 }                                                           \n\
 ";
