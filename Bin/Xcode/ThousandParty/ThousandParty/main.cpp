@@ -8,6 +8,7 @@
 #include "Core/Platform/Window.h"
 #include "Core/Platform/WindowType.h"
 #include "Core/Platform/Time.h"
+#include "Core/Drawing/Bitmap.h"
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Screen.h"
 #include "Core/String/FixedString.h"
@@ -64,8 +65,8 @@ public:
         {
             core::WindowStyle windowStyle;
             {
-                windowStyle.width = 500;
-                windowStyle.height = 500;
+                windowStyle.width = 1200;
+                windowStyle.height = 1200;
                 windowStyle.showMiddle = true;
                 windowStyle.title = u8"ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
                 windowStyle.enableSystemButton = true;
@@ -83,74 +84,76 @@ public:
                 videoMode.enableMultiSampling = true;
             }
             return videoMode;
-        }())
+        }()),
+        bitmap("E:/Users/ggomdyu/Desktop/image.png")
     {
-        struct V3F_C4B
-        {
-            core::Vector3 position;
-            core::Color4f color;
-        };
+        //struct V3F_C4B
+        //{
+        //    core::Vector3 position;
+        //    core::Color4f color;
+        //};
 
-        V3F_C4B v[] =
-        {
-            {core::Vector3(-1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 0.0f, 0.0f, 1.0f)},
-            {core::Vector3(-1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 1.0f, 0.0f, 1.0f)},
-            {core::Vector3(1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 0.0f, 1.0f, 1.0f)},
-            {core::Vector3(1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 1.0f, 0.0f, 1.0f)},
-        };
+        //V3F_C4B v[] =
+        //{
+        //    {core::Vector3(-1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 0.0f, 0.0f, 1.0f)},
+        //    {core::Vector3(-1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 1.0f, 0.0f, 1.0f)},
+        //    {core::Vector3(1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 0.0f, 1.0f, 1.0f)},
+        //    {core::Vector3(1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 1.0f, 0.0f, 1.0f)},
+        //};
 
-        unsigned int i[] =
-        {
-            0,1,2,0,2,3
-        };
-        std::initializer_list<graphics::VertexInputAttributeDescription> viad =
-        {
-            graphics::VertexInputAttributeDescription
-            {
-                graphics::VertexAttributeType::Position,
-                3,
-                graphics::VertexType::Float,
-                false,
-                sizeof(V3F_C4B),
-                offsetof(V3F_C4B, position),
-            },
-            graphics::VertexInputAttributeDescription
-            {
-                graphics::VertexAttributeType::Color,
-                4,
-                graphics::VertexType::Float,
-                true,
-                sizeof(V3F_C4B),
-                offsetof(V3F_C4B, color),
-            },
-        };
+        //unsigned int i[] =
+        //{
+        //    0,1,2,0,2,3
+        //};
 
-        vb = new graphics::VertexBuffer(v, viad);
+        //std::initializer_list<graphics::VertexInputAttributeDescription> viad =
+        //{
+        //    graphics::VertexInputAttributeDescription
+        //    {
+        //        graphics::VertexAttributeType::Position,
+        //        3,
+        //        graphics::VertexType::Float,
+        //        false,
+        //        sizeof(V3F_C4B),
+        //        offsetof(V3F_C4B, position),
+        //    },
+        //    graphics::VertexInputAttributeDescription
+        //    {
+        //        graphics::VertexAttributeType::Color,
+        //        4,
+        //        graphics::VertexType::Float,
+        //        true,
+        //        sizeof(V3F_C4B),
+        //        offsetof(V3F_C4B, color),
+        //    },
+        //};
 
-
-        // Create INDEX BUFFER
-        glGenBuffers(1, &m_indexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(i), i, GL_STATIC_DRAW);
+        //vb = new graphics::VertexBuffer(v, viad);
 
 
-        // Create VAO
-        glGenVertexArrays(1, &m_vertexArray);
-        glBindVertexArray(m_vertexArray);
-        {
-            vb->BeginScene();
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-        }
-        glBindVertexArray(0);
+        //// Create INDEX BUFFER
+        //glGenBuffers(1, &m_indexBuffer);
+        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(i), i, GL_STATIC_DRAW);
 
-        shader = new graphics::OpenGLShader();
-        bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
-        if (ss)
-        {
-            int n = 3;
-        }
 
-        auto e = glGetError();
+        //// Create VAO
+        //glGenVertexArrays(1, &m_vertexArray);
+        //glBindVertexArray(m_vertexArray);
+        //{
+        //    vb->BeginScene();
+        //    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        //}
+        //glBindVertexArray(0);
+
+        //shader = new graphics::OpenGLShader();
+        //bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
+        //if (ss)
+        //{
+        //    int n = 3;
+        //}
+
+        //auto e = glGetError();
     }
 
     ~ThousandParty()
@@ -176,9 +179,29 @@ public:
         SuperType::OnDidLaunch();
     }
     
+    core::Bitmap bitmap;
+
     virtual void OnUpdate() override
     {
         SuperType::OnUpdate();
+
+        HDC hdc = GetDC((HWND)GetMainWindow()->GetNativeWindow());
+        int index = 0;
+        for (int y = 0; y < bitmap.GetHeight(); ++y)
+        {
+            for (int x = 0; x < bitmap.GetWidth(); ++x)
+            {
+                const auto& bit = bitmap.GetBits();
+                index = (y* bitmap.GetWidth() + x)*4;
+                auto r = bit[index];
+                auto g = bit[index+1];
+                auto b = bit[index+2];
+                SetPixel(hdc, x, y, RGB(r,g,b));
+            }
+        }
+        ReleaseDC((HWND)GetMainWindow()->GetNativeWindow(), hdc);
+
+        return;
 
         static float x = 0.0f;
         auto M2 = core::Matrix4x4::Translate(x, 0.0f, 0.0f);

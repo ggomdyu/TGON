@@ -27,12 +27,14 @@ public:
 
 public:
     const std::vector<uint8_t>& GetBits() const;
+    int32_t GetBitsPerPixel() const;
     int32_t GetWidth() const;
     int32_t GetHeight() const;
     const std::string& GetFilePath() const;
 
 private:
     std::vector<uint8_t> m_bits;
+    int32_t m_bitsPerPixel;
     int32_t m_width;
     int32_t m_height;
     std::string m_filePath;
