@@ -4,7 +4,6 @@
 
 //#include <boost/filesystem/fstream.hpp>
 #include <cstdint>
-#include <algorithm>
 #include <png.h>
 #include <windows.h>
 
@@ -15,24 +14,18 @@ namespace core
 namespace
 {
 
-bool DecodePNG(const uint8_t* srcData, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel)
+bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
 {
-    FILE* file = nullptr;
-    fopen_s(&file, "E:/Users/ggomdyu/Desktop/image.png", "rb");
-    if (file == nullptr)
-    {
-        return false;
-    }
-
     // Read the first 8 bytes of the file and make sure they match the PNG signature bytes.
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
     if (isPNGFormat == false)
     {
-        // If image is not PNG, there is no need to waste time setting up libpng.
         return false;
     }
 
-    // We will pass pointers to error handling functions, and a pointer to a data struct for use by the error functions, if necessary (the pointer and functions can be NULL if the default error handlers are to be used).
+    // Allocate and initialize a png_struct structure.
+    // You can pass pointers to error handling functions, and a pointer to a data struct 
+    // for use by the error functions, if necessary (the pointer and functions can be NULL if the default error handlers are to be used).
     png_structp pngStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
     if (pngStruct == nullptr)
     {
@@ -46,7 +39,27 @@ bool DecodePNG(const uint8_t* srcData, std::vector<uint8_t>* destData, int32_t* 
         return false;
     }
 
-    png_init_io(pngStruct, file);
+    // We can change the method of I/O. libPNG supplies callbacks that you can set through the function png_set_read_fn() at run time.
+    // We will use it for reading PNG Images from memory.
+    {
+        struct ImageSource
+        {
+            uint8_t* data;
+            int size;
+            int offset;
+        } imageSource{(unsigned char*)srcData, srcDataLen, 0};
+        
+        png_set_read_fn(pngStruct, &imageSource, [](png_structp pngStruct, png_bytep data, png_size_t dataLen)
+        {
+            ImageSource* imageSource = reinterpret_cast<ImageSource*>(png_get_io_ptr(pngStruct));
+
+            if (static_cast<decltype(imageSource->size)>(imageSource->offset + dataLen) <= imageSource->size)
+            {
+                memcpy(data, imageSource->data + imageSource->offset, dataLen);
+                imageSource->offset += dataLen;
+            }
+        });
+    }
 
     // Set error handling with setjmp.
     // Unless if you set up your own error handlers in the png_create_read_struct earlier.
@@ -61,7 +74,9 @@ bool DecodePNG(const uint8_t* srcData, std::vector<uint8_t>* destData, int32_t* 
 
     *width = png_get_image_width(pngStruct, pngInfo);
     *height = png_get_image_height(pngStruct, pngInfo);
-    *bitsPerPixel = png_get_bit_depth(pngStruct, pngInfo);
+    *bitsPerPixel = png_get_bit_depth(pngStruct, pngInfo) * 4;
+
+
 
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)
@@ -97,89 +112,51 @@ bool DecodePNG(const uint8_t* srcData, std::vector<uint8_t>* destData, int32_t* 
 
     png_read_update_info(pngStruct, pngInfo);
 
-    png_size_t rowBytes = png_get_rowbytes(pngStruct, pngInfo);
-    std::size_t destDataLen = sizeof(png_byte*) * (*height) * rowBytes;
-    destData->resize(destDataLen);
-
-    std::unique_ptr<png_byte*> rowPointer(reinterpret_cast<png_byte**>(operator new(sizeof(png_byte*) * (*height))));
-    for (std::size_t i = 0; i < *height; ++i)
+    // Start reading the image.
     {
-        rowPointer.get()[i] = destData->data() + i * rowBytes;
+        png_size_t rowBytes = png_get_rowbytes(pngStruct, pngInfo);
+        std::size_t destDataLen = sizeof(png_byte*) * (*height) * rowBytes;
+        destData->resize(destDataLen);
+
+        // TODO: More Effective way is using Memory Pool!
+        std::unique_ptr<png_byte*> rowPointer(reinterpret_cast<png_byte**>(operator new(sizeof(png_byte*) * (*height))));
+        for (std::size_t i = 0; i < *height; ++i)
+        {
+            rowPointer.get()[i] = destData->data() + i * rowBytes;
+        }
+
+        png_read_image(pngStruct, rowPointer.get());
+
+        png_read_end(pngStruct, nullptr);
     }
-
-    png_read_image(pngStruct, rowPointer.get());
-
-    png_read_end(pngStruct, nullptr);
         
     png_destroy_read_struct(&pngStruct, &pngInfo, nullptr);
 
     return true;
 }
-    
-bool DecodeJPG(const char* filePath, std::vector<uint8_t>* bits, int32_t* width, int32_t* height, int32_t* bitsPerPixel)
+
+bool DecodePNG(const std::vector<uint8_t>& srcData, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
+{
+    return DecodePNG(srcData.data(), srcData.size(), destData, width, height, bitsPerPixel, pixelFormat);
+}
+
+bool DecodeJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
 {
     return true;
 }
 
 // Currently support windows format, not os2
-bool DecodeBMP(const uint8_t* srcData, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel)
-{   
-    constexpr std::size_t headerSize = 54;
-
-    // Verify that srcData has bmp data.
-    int16_t signiture = *reinterpret_cast<const int16_t*>(&srcData[0]);
-    if (signiture != 0x4D42)
-    {
-        return false;
-    }
-
-    *width = *reinterpret_cast<const int32_t*>(&srcData[18]);
-    *height = *reinterpret_cast<const int32_t*>(&srcData[22]);
-    *bitsPerPixel = *reinterpret_cast<const int32_t*>(&srcData[28]);
-
-    if (*bitsPerPixel == 24)
-    {
-        std::size_t destDataLen = (*width) * (*height) * 3;
-        destData->resize(destDataLen);
-
-        const uint8_t* srcDataIter = srcData + headerSize;
-        int accumulatedIndex = 0;
-        for (int y = 0; y < *height; ++y)
-        {
-            for (int x = 0; x < *width; ++x)
-            {
-                (*destData)[accumulatedIndex++] = srcDataIter[2];
-                (*destData)[accumulatedIndex++] = srcDataIter[1];
-                (*destData)[accumulatedIndex++] = srcDataIter[0];
-
-                srcDataIter += 3;
-            }
-        }
-    }
-    else if (*bitsPerPixel == 16)
-    {
-
-    }
-    else if (*bitsPerPixel == 8)
-    {
-
-    }
-    else if (*bitsPerPixel == 1)
-    {
-
-    }
-
-    return false;
+bool DecodeBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
+{
+    return true;
 }
 
-}
+} /* namespace */
 
 Bitmap::Bitmap(const std::string& filePath) :
-    m_filePath(filePath),
-    m_bitsPerPixel(0),
-    m_width(0),
-    m_height(0)
+    m_filePath(filePath)
 {
+    // TODO: Implement Engine file loader
     FILE* file = nullptr;
     fopen_s(&file, filePath.c_str(), "rb");
     if (file == nullptr)
@@ -196,26 +173,45 @@ Bitmap::Bitmap(const std::string& filePath) :
 
     fread(imageData.data(), 1, fileSize, file);
 
+    std::size_t extensionOffset = filePath.rfind('.') + 1;
+    new (this) Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
+}
 
-    const auto extension = filePath.cbegin() + filePath.rfind('.') + 1;
+Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes) :
+    m_bitsPerPixel(0),
+    m_width(0),
+    m_height(0)
+{
+    switch (imageFormat)
+    {
+    case ImageFormat::BMP:
+        DecodeBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
+        break;
 
-    char lowercaseExtension[5] {};
-    std::transform(extension, filePath.end(), lowercaseExtension, ::tolower);
+    case ImageFormat::JPG:
+        DecodeJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
+        break;
 
-    if (std::strcmp(lowercaseExtension, "png") == 0)
-    {
-        DecodePNG(imageData.data(), &m_bits, &m_width, &m_height, &m_bitsPerPixel);
+    case ImageFormat::PNG:
+        DecodePNG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
+        break;
     }
-    else if (std::strcmp(lowercaseExtension, "jpg") == 0 ||
-             std::strcmp(lowercaseExtension, "jpeg") == 0)
-    {
-        //DecodeJPG(filePath.c_str(), &m_bits, &m_width, &m_height, &m_bitsPerPixel);
-    }
-    else if (std::strcmp(lowercaseExtension, "bmp") == 0)
-    {
-        DecodeBMP(imageData.data(), &m_bits, &m_width, &m_height, &m_bitsPerPixel);
-    }
-}                   
+}
+
+uint8_t& Bitmap::operator[](std::size_t index)
+{
+    return m_bits[index];
+}
+
+const uint8_t& Bitmap::operator[](std::size_t index) const
+{
+    return m_bits[index];
+}
+
+std::vector<uint8_t>& Bitmap::GetBits()
+{
+    return m_bits;
+}
 
 const std::vector<uint8_t>& Bitmap::GetBits() const
 {
@@ -225,6 +221,11 @@ const std::vector<uint8_t>& Bitmap::GetBits() const
 int32_t Bitmap::GetBitsPerPixel() const
 {
     return m_bitsPerPixel;
+}
+
+PixelFormat Bitmap::GetPixelFormat() const
+{
+    return m_pixelFormat;
 }
 
 int32_t Bitmap::GetWidth() const
