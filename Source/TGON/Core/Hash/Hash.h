@@ -13,9 +13,9 @@ namespace tgon
 namespace core
 {
 
-constexpr uint32_t X65599Hash(const char* str)
+constexpr std::size_t X65599Hash(const char* str)
 {
-    uint32_t hashValue = 0;
+    std::size_t hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
     {
         hashValue = 65599 * hashValue + str[i];

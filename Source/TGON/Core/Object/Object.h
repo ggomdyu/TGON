@@ -32,7 +32,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Object() = default;
+    virtual ~Object() override = default;
 };
 
 } /* namespace core */

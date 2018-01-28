@@ -64,13 +64,13 @@ public:
     static uint32_t GetInstanceCount() noexcept;
 };
 
-template<typename _ClassType>
+template <typename _ClassType>
 inline InstanceCounter<_ClassType>::~InstanceCounter()
 {
     --InstantiateCounter<_ClassType>::ms_instantiatedCount;
 }
 
-template<typename _ClassType>
+template <typename _ClassType>
 inline uint32_t InstanceCounter<_ClassType>::GetInstanceCount() noexcept
 {
     return InstantiateCounter<_ClassType>::ms_instantiatedCount;

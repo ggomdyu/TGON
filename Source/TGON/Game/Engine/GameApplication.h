@@ -61,17 +61,18 @@ private:
     //std::shared_ptr<SoundModule> m_soundModule;
     //std::shared_ptr<InputModule> m_inputModule;
     std::shared_ptr<TimeModule> m_timeModule;
+    //std::shared_ptr<TaskModule> m_taskModule;
     std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
-template<typename _ModuleType>
+template <typename _ModuleType>
 inline void GameApplication::AddModule(const std::shared_ptr<_ModuleType>& module)
 {
     m_modulesToIterate.push_back(module);
     m_modulesToFind.insert({module->GetRTTI()->GetHashCode(), module});
 }
 
-template<typename _ModuleType>
+template <typename _ModuleType>
 inline const std::shared_ptr<_ModuleType>& GameApplication::FindModule() const
 {
     auto iter = m_modulesToFind.find(core::GetRTTI<_ModuleType>()->GetHashCode());
@@ -83,13 +84,13 @@ inline const std::shared_ptr<_ModuleType>& GameApplication::FindModule() const
     return nullptr;
 }
 
-template<>
+template <>
 inline const std::shared_ptr<TimeModule>& GameApplication::FindModule<TimeModule>() const
 {
     return m_timeModule;
 }
 
-template<>
+template <>
 inline const std::shared_ptr<GraphicsModule>& GameApplication::FindModule<GraphicsModule>() const
 {
     return m_graphicsModule;

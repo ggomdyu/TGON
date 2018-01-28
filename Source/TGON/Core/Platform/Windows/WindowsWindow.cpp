@@ -224,6 +224,7 @@ float Window::GetTransparency() const
 
 //void Window::SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity)
 //{
+//#if TGON_USING_DWMAPI
 //    BOOL isCompoEnabled = FALSE;
 //    DwmIsCompositionEnabled(&isCompoEnabled);
 //    
@@ -232,6 +233,7 @@ float Window::GetTransparency() const
 //        MARGINS margins {-1, -1, -1, -1};
 //        DwmExtendFrameIntoClientArea(m_wndHandle, &margins);
 //    }
+//#endif
 //}
 
 LRESULT Window::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)

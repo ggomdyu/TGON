@@ -56,27 +56,6 @@ enum class CullMode
     CCW,
 };
 
-enum class ImageFormat
-{
-    BMP,
-    JPG,
-    PNG,
-    TIFF,
-    GIF,
-    WEBP,
-};
-
-enum class PixelFormat
-{
-    R8G8B8A8_UNORM = 0,
-    R8G8B8A8_UNORM_SRGB,
-    R8G8B8A8_UINT,
-    R8G8B8_UNORM,
-    R8G8B8_UINT,
-    PVRTC2,
-    PVRTC4,
-};
-
 struct VideoMode final
 {
 /* @section Public variable */
