@@ -14,29 +14,29 @@
 
 namespace tgon
 {
-namespace render
+namespace graphics
 {
 
 class Renderer
 {
 /* @section Public constructor */
 public:
-    Renderer(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
+    Renderer(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
 
 /* @section Public method */
 public:
     void SetMaterial(const Material& material);
 
-    const std::unique_ptr<rhi::IDynamicRHI>& GetRHI() const noexcept;
+    const std::unique_ptr<IDynamicRHI>& GetRHI() const noexcept;
 
 /* @section Private method */
 private:
-    std::unique_ptr<rhi::IDynamicRHI> MakeRHI(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode);
+    std::unique_ptr<IDynamicRHI> MakeRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
 
 /* @section Private variable */
 public:
-    std::unique_ptr<rhi::IDynamicRHI> m_rhi;
+    std::unique_ptr<IDynamicRHI> m_rhi;
 };
 
-} /* namespace render */
+} /* namespace graphics */
 } /* namespace tgon */

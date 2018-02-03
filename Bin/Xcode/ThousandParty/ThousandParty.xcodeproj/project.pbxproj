@@ -264,6 +264,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../Source/TGON",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/glew-2.1.0/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -277,6 +278,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../Source/TGON",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_63_0",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/glew-2.1.0/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

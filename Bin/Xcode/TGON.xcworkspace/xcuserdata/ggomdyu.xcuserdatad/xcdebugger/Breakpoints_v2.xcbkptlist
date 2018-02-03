@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ThousandParty/ThousandParty/main.cpp"
-            timestampString = "538160118.998623"
+            filePath = "../../Source/TGON/Graphics/RHI/OpenGL/OpenGLShaderCode.h"
+            timestampString = "538723881.832116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "foo(const Type&amp; r)"
-            landmarkType = "9">
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

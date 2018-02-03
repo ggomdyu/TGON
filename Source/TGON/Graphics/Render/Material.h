@@ -2,7 +2,7 @@
 
 namespace tgon
 {
-namespace render
+namespace graphics
 {
 
 class Material
@@ -11,5 +11,5 @@ class Material
 public:
 };
 
-} /* namespace render */
+} /* namespace graphics */
 } /* namespace tgon */
