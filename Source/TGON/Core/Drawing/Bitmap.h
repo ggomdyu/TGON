@@ -87,42 +87,69 @@ constexpr const char* ConvertImageFormatToString(ImageFormat imageFormat)
     return imageFormatStringTable[(std::size_t)imageFormat];
 }
 
-class Bitmap final
+class Bitmap
 {
+/* @section Public constructor */
 public:
     /**
-     * @brief                   Read a image data from the given path specified by 'filePath'.
+     * @brief                   Reads a image data from the given path specified by 'filePath'.
      * @param [in] filePath     The path of image file
      */
     explicit Bitmap(const std::string& filePath);
 
     /**
-     * @brief                   Read a image data from memory.
+     * @brief                   Reads a image data from memory.
      * @param [in] imageFormat  The format of image
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataLen   The bytes of image data
      */
     explicit Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes);
 
+/* @section Public operator */
 public:
+    /* @brief   Get the raw pointer of image. */
     uint8_t& operator[](std::size_t index);
+
+    /* @brief   Get the raw pointer of image. */
     const uint8_t& operator[](std::size_t index) const;
 
+/* @section Public method */
 public:
-    std::vector<uint8_t>& GetBits();
-    const std::vector<uint8_t>& GetBits() const;
-    int32_t GetBitsPerPixel() const;
-    PixelFormat GetPixelFormat() const;
-    int32_t GetWidth() const;
-    int32_t GetHeight() const;
-    const std::string& GetFilePath() const;
+    /* @brief   Checks the image file was loaded successfully. */
+    bool IsValid() const noexcept;
 
+    /* @brief   Get the raw pointer of image. */
+    std::vector<uint8_t>& GetBits() noexcept;
+
+    /* @brief   Get the raw pointer of image. */
+    const std::vector<uint8_t>& GetBits() const noexcept;
+    
+    /* @brief   Get the width of image. */
+    int32_t GetWidth() const noexcept;
+
+    /* @brief   Get the height of image. */
+    int32_t GetHeight() const noexcept;
+
+    int32_t GetChannels() const noexcept;
+
+    int32_t GetColorDepth() const noexcept;
+
+    int32_t GetBitsPerPixel() const noexcept;
+
+    /* @brief   Get the pixel format of image. */
+    PixelFormat GetPixelFormat() const noexcept;
+
+    /* @brief   Get the file path saved at loading time. */
+    const std::string& GetFilePath() const noexcept;
+
+/* @section Private variable */
 private:
     std::vector<uint8_t> m_bits;
-    int32_t m_bitsPerPixel;
-    PixelFormat m_pixelFormat;
     int32_t m_width;
     int32_t m_height;
+    int32_t m_channels;
+    int32_t m_colorDepth;
+    PixelFormat m_pixelFormat;
     std::string m_filePath;
 };
 

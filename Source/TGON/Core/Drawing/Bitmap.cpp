@@ -14,7 +14,8 @@ namespace core
 namespace
 {
 
-bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
+template <typename _AllocatorType>
+bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     // Read the first 8 bytes of the file and make sure they match the PNG signature bytes.
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
@@ -74,16 +75,16 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
 
     *width = png_get_image_width(pngStruct, pngInfo);
     *height = png_get_image_height(pngStruct, pngInfo);
-    *bitsPerPixel = png_get_bit_depth(pngStruct, pngInfo) * 4;
-
-
-
+    *colorDepth = png_get_bit_depth(pngStruct, pngInfo);
+    *channels = png_get_channels(pngStruct, pngInfo);
+    
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)
     {
         png_set_palette_to_rgb(pngStruct);
     }
-    else if (colorType == PNG_COLOR_TYPE_GRAY && *bitsPerPixel < 8)
+    
+    else if (colorType == PNG_COLOR_TYPE_GRAY && *colorDepth < 8)
     {
         png_set_expand_gray_1_2_4_to_8(pngStruct);
     }
@@ -94,7 +95,7 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
         png_set_tRNS_to_alpha(pngStruct);
     }
 
-    if (*bitsPerPixel == 16)
+    if (*colorDepth == 16)
     {
         png_set_strip_16(pngStruct);
     }
@@ -118,14 +119,15 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
         std::size_t destDataLen = sizeof(png_byte*) * (*height) * rowBytes;
         destData->resize(destDataLen);
 
-        // TODO: More Effective way is using Memory Pool!
-        std::unique_ptr<png_byte*> rowPointer(reinterpret_cast<png_byte**>(operator new(sizeof(png_byte*) * (*height))));
+        thread_local static std::vector<png_byte*> rowPointer;
+        rowPointer.resize(*height);
+
         for (std::size_t i = 0; i < *height; ++i)
         {
-            rowPointer.get()[i] = destData->data() + i * rowBytes;
+            rowPointer[i] = destData->data() + i * rowBytes;
         }
 
-        png_read_image(pngStruct, rowPointer.get());
+        png_read_image(pngStruct, rowPointer.data());
 
         png_read_end(pngStruct, nullptr);
     }
@@ -135,18 +137,15 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
     return true;
 }
 
-bool DecodePNG(const std::vector<uint8_t>& srcData, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
-{
-    return DecodePNG(srcData.data(), srcData.size(), destData, width, height, bitsPerPixel, pixelFormat);
-}
-
-bool DecodeJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
+template <typename _AllocatorType>
+bool DecodeJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     return true;
 }
 
 // Currently support windows format, not os2
-bool DecodeBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t>* destData, int32_t* width, int32_t* height, int32_t* bitsPerPixel, PixelFormat* pixelFormat)
+template <typename _AllocatorType>
+bool DecodeBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     return true;
 }
@@ -177,23 +176,24 @@ Bitmap::Bitmap(const std::string& filePath) :
     new (this) Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
 }
 
-Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes) :
-    m_bitsPerPixel(0),
-    m_width(0),
-    m_height(0)
+Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     switch (imageFormat)
     {
-    case ImageFormat::BMP:
-        DecodeBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
-        break;
+    //case ImageFormat::BMP:
+        //DecodeBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
+        //break;
 
-    case ImageFormat::JPG:
-        DecodeJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
-        break;
+    //case ImageFormat::JPG:
+        //DecodeJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
+        //break;
 
     case ImageFormat::PNG:
-        DecodePNG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_bitsPerPixel, &m_pixelFormat);
+        DecodePNG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
+        break;
+
+    default:
+        assert(false && "Not supported image format.");
         break;
     }
 }
@@ -208,37 +208,52 @@ const uint8_t& Bitmap::operator[](std::size_t index) const
     return m_bits[index];
 }
 
-std::vector<uint8_t>& Bitmap::GetBits()
+bool Bitmap::IsValid() const noexcept
+{
+    return m_bits.size() > 0;
+}
+
+std::vector<uint8_t>& Bitmap::GetBits() noexcept
 {
     return m_bits;
 }
 
-const std::vector<uint8_t>& Bitmap::GetBits() const
+const std::vector<uint8_t>& Bitmap::GetBits() const noexcept
 {
     return m_bits;
 }
 
-int32_t Bitmap::GetBitsPerPixel() const
+int32_t Bitmap::GetBitsPerPixel() const noexcept
 {
-    return m_bitsPerPixel;
+    return m_colorDepth / sizeof(int8_t) * m_channels;
 }
 
-PixelFormat Bitmap::GetPixelFormat() const
-{
-    return m_pixelFormat;
-}
-
-int32_t Bitmap::GetWidth() const
+int32_t Bitmap::GetWidth() const noexcept
 {
     return m_width;
 }
 
-int32_t Bitmap::GetHeight() const
+int32_t Bitmap::GetHeight() const noexcept
 {
     return m_height;
 }
 
-const std::string& Bitmap::GetFilePath() const
+int32_t Bitmap::GetChannels() const noexcept
+{
+    return m_channels;
+}
+
+int32_t Bitmap::GetColorDepth() const noexcept
+{
+    return m_colorDepth;
+}
+
+PixelFormat Bitmap::GetPixelFormat() const noexcept
+{
+    return m_pixelFormat;
+}
+
+const std::string& Bitmap::GetFilePath() const noexcept
 {
     return m_filePath;
 }
