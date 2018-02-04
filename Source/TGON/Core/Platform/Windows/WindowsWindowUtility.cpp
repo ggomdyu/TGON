@@ -71,7 +71,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyl
 
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
-	// Converts WindowStyle to platform dependent style.
+	// Convert WindowStyle to native window style.
 	DWORD normalStyle, extendedStyle;
     ConverWindowStyleToNative(windowStyle, &normalStyle, &extendedStyle);
 
@@ -82,13 +82,12 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         return nullptr;
     }
 
-    // Set window position to middle of screen if required.
-    int newWindowX = windowStyle.x;
-    int newWindowY = windowStyle.y;
+    POINT windowPos {windowStyle.x, windowStyle.y};
     if (windowStyle.showMiddle)
     {
-        newWindowX = (GetSystemMetrics(SM_CXSCREEN) / 2) - (windowStyle.width / 2);
-        newWindowY = (GetSystemMetrics(SM_CYSCREEN) / 2) - (windowStyle.height / 2);
+        // Set window position to middle of screen.
+        windowPos.x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (windowStyle.width / 2);
+        windowPos.y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (windowStyle.height / 2);
     }
 
 	HWND wndHandle = CreateWindowExW(
@@ -96,8 +95,8 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 		className,
         utf16Title,
 		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
-        newWindowX,
-        newWindowY,
+        windowPos.x,
+        windowPos.y,
 		windowStyle.width,
 		windowStyle.height,
 		nullptr,
