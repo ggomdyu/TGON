@@ -2,7 +2,7 @@
 
 #include "GameApplication.h"
 
-#include "Graphics/RHI/RHIType.h"
+#include "Graphics/RHI/GraphicsType.h"
 #include "Game/Module/TimeModule.h"
 #include "Game/Module/GraphicsModule.h"
 

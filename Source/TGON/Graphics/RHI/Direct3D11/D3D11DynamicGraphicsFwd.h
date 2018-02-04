@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLDynamicRHIFwd.h
+ * @filename    Direct3D11DynamicGraphicsFwd.h
  * @author      ggomdyu
- * @since       10/22/2017
+ * @since       02/23/2018
  */
 
 #pragma once
@@ -18,7 +18,6 @@ class Window;
 namespace graphics
 {
 
-struct OpenGLContext;
 struct VideoMode;
 
 } /* namespace graphics */

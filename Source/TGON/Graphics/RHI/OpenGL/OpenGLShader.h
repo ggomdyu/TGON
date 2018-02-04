@@ -21,12 +21,10 @@ class OpenGLShader
 public:
     bool Initialize(const char* vsCodeStr, const char* fsCodeStr);
 
-    void BeginScene();
-    void EndScene();
+    void Use();
     
     void BindAttributeLocation(const char* name, std::size_t location);
     int GetUniformLocation(const char* name) const;
-
     void SetParameter1f(const char* name, GLfloat f);
     void SetParameter2f(const char* name, GLfloat f1, GLfloat f2);
     void SetParameter3f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3);
@@ -41,7 +39,7 @@ public:
 
 private:
     /* @brief   Links shders to the program object. */
-    bool Link(GLuint vertexShader, GLuint fragmentShader);
+    bool LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader);
 
     /**
      * @brief                       Compiles shader and return the handle of it.
@@ -55,7 +53,7 @@ private:
      * @brief   Checks shader was compiled successfully.
      * @return  Returns true if the compile was succeeded, false otherwise.
      */
-    bool IsCompileSucceed(GLuint shader) const;
+    bool IsShaderCompileSucceed(GLuint shader) const;
 
     std::string GetShaderInfoLog(GLuint shader) const;
 

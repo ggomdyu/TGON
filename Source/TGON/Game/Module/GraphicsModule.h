@@ -17,7 +17,7 @@ class Window;
 }
 namespace graphics
 {
-class IDynamicRHI;
+class IDynamicGraphics;
 struct VideoMode;
 }
 
@@ -39,14 +39,14 @@ public:
 public:
     virtual void Update() override;
 
-    const std::unique_ptr<graphics::IDynamicRHI>& GetRHI() const;
+    const std::unique_ptr<graphics::IDynamicGraphics>& GetGraphics() const;
 
 private:
-    std::unique_ptr<graphics::IDynamicRHI> MakeRHI(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode) const;
+    std::unique_ptr<graphics::IDynamicGraphics> MakeGraphics(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode) const;
 
 /* @section Private variable */
 private:
-    std::unique_ptr<graphics::IDynamicRHI> m_rhi;
+    std::unique_ptr<graphics::IDynamicGraphics> m_graphics;
 };
 
 } /* namespace game */

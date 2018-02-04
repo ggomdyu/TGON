@@ -1,11 +1,13 @@
 /**
- * @filename    RHIType.h
+ * @filename    GraphicsType.h
  * @author      ggomdyu
  * @since       10/22/2017
  * @brief
  */
 
 #pragma once
+#include "Core/Math/Color.h"
+
 #include <cstdint>
 
 namespace tgon
@@ -28,17 +30,12 @@ enum class GraphicsSDK
     Vulkan,
 };
 
-enum class VideoBufferType
-{
-    Vertex,
-    Index,
-};
-
 enum class PrimitiveType
 {
-    PointList = 0,
+    Points = 0,
+    Lines,
     LineStrip,
-    TriangleList,
+    Triangles,
     TriangleStrip,
     TriangleFan,
 };
@@ -62,14 +59,12 @@ struct VideoMode final
 public:
     GraphicsSDK graphicsSDK = GraphicsSDK::OpenGL4_0;
 
-    /* @brief   If false, the application will perform software rendering. */
+    core::Color4f clearColor = core::Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
     bool enableHardwareAccelerate = true;
     bool enableTripleBuffer = false;
     bool enableVerticalSync = false;
-
     bool enableMultiSampling = false;
     uint16_t sampleCount = 16;
-
     uint16_t colorBits = 32;
     uint16_t depthBits;
     uint16_t stencilBits;

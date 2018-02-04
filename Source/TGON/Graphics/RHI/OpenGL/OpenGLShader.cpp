@@ -42,17 +42,12 @@ bool OpenGLShader::Initialize(const char* vsCodeStr, const char* fsCodeStr)
         return false;
     }
     
-    return this->Link(vertexShader, fragmentShader);
+    return this->LinkShadersToProgram(vertexShader, fragmentShader);
 }
 
-void OpenGLShader::BeginScene()
+void OpenGLShader::Use()
 {
     glUseProgram(m_program);
-}
-
-void OpenGLShader::EndScene()
-{
-    glUseProgram(0);
 }
 
 void OpenGLShader::BindAttributeLocation(const char* name, std::size_t index)
@@ -123,7 +118,7 @@ void OpenGLShader::SetParameterSampler(int32_t location, int textureSlot, std::s
     glUniform1i(location, sampler);
 }
 
-bool OpenGLShader::Link(GLuint vertexShader, GLuint fragmentShader)
+bool OpenGLShader::LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader)
 {
     // Creates an empty program object.
     m_program = glCreateProgram();
@@ -160,7 +155,7 @@ GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr)
 
     // Compiles the source code strings that have been stored in the shader object.
     glCompileShader(shader);
-    if (this->IsCompileSucceed(shader) == false)
+    if (this->IsShaderCompileSucceed(shader) == false)
     {
         core::Log("Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shader).c_str());
         return 0;
@@ -169,7 +164,7 @@ GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr)
     return shader;
 }
 
-bool OpenGLShader::IsCompileSucceed(GLuint shader) const
+bool OpenGLShader::IsShaderCompileSucceed(GLuint shader) const
 {
     GLint shaderCompileStatus;
     

@@ -19,14 +19,17 @@ struct OpenGLContext
 {
 /* @section Public constructor */
 public:
-    OpenGLContext(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<core::Window>& window);
     ~OpenGLContext();
+
+/* @section Public method */
+public:
+    void MakeCurrent();
 
 /* @section Public variable */
 public:
-    std::shared_ptr<core::Window> window;
-
 #if BOOST_OS_WINDOWS
+    HWND wndHandle;
     HGLRC context;
     HDC dcHandle;
     int pixelFormat;

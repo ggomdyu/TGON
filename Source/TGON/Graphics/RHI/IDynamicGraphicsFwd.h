@@ -1,5 +1,5 @@
 /**
- * @filename    IDynamicRHIFwd.h
+ * @filename    IDynamicGraphicsFwd.h
  * @author      ggomdyu
  * @since       12/29/2017
  */
@@ -30,9 +30,6 @@ namespace graphics
 enum class FillMode;
 enum class CullMode;
 enum class PrimitiveType;
-
-enum class VideoBufferType;
-using VideoBuffer = void*;
 
 } /* namespace graphics */
 } /* namespace tgon */

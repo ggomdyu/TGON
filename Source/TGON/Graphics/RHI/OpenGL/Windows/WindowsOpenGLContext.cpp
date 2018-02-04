@@ -4,7 +4,7 @@
 
 #include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
-#include "Graphics/RHI/RHIType.h"
+#include "Graphics/RHI/GraphicsType.h"
 
 #include <Windows.h>
 #include <GL/glew.h>
@@ -107,12 +107,11 @@ HGLRC MakeNewGLRC(HDC dcHandle)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode) :
-    window(window),
-    dcHandle(GetDC(reinterpret_cast<HWND>(window->GetNativeWindow())))
+OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window) :
+    wndHandle(reinterpret_cast<HWND>(window->GetNativeWindow())),
+    dcHandle(GetDC(wndHandle))
 {
-    assert(window != nullptr);
-    assert(window->GetNativeWindow() != nullptr);
+    assert(wndHandle != nullptr);
     assert(dcHandle != nullptr);
 
     // Makes a old OpenGL rendering context that used temporary to make newer version of context.
@@ -164,10 +163,15 @@ OpenGLContext::~OpenGLContext()
     ::wglMakeCurrent(nullptr, nullptr);
     ::wglDeleteContext(context);
     
-    ::ReleaseDC(reinterpret_cast<HWND>(window->GetNativeWindow()), dcHandle);
+    ::ReleaseDC(wndHandle, dcHandle);
 
     context = nullptr;
     dcHandle = nullptr;
+}
+
+void OpenGLContext::MakeCurrent()
+{
+    ::wglMakeCurrent(dcHandle, context);
 }
     
 } /* namespace graphics */
