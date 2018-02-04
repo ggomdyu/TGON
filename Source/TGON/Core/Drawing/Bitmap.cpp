@@ -2,10 +2,10 @@
 
 #include "Bitmap.h"
 
-//#include <boost/filesystem/fstream.hpp>
+#include "Core/Debug/Log.h"
+
 #include <cstdint>
 #include <png.h>
-#include <windows.h>
 
 namespace tgon
 {
@@ -15,7 +15,7 @@ namespace
 {
 
 template <typename _AllocatorType>
-bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
+bool ResolvePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     // Read the first 8 bytes of the file and make sure they match the PNG signature bytes.
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
@@ -77,6 +77,7 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
     *height = png_get_image_height(pngStruct, pngInfo);
     *colorDepth = png_get_bit_depth(pngStruct, pngInfo);
     *channels = png_get_channels(pngStruct, pngInfo);
+    *pixelFormat = PixelFormat::R8G8B8A8_UNORM;
     
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)
@@ -138,14 +139,14 @@ bool DecodePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
 }
 
 template <typename _AllocatorType>
-bool DecodeJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
+bool ResolveJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     return true;
 }
 
 // Currently support windows format, not os2
 template <typename _AllocatorType>
-bool DecodeBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
+bool ResolveBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
     return true;
 }
@@ -153,49 +154,100 @@ bool DecodeBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8
 } /* namespace */
 
 Bitmap::Bitmap(const std::string& filePath) :
-    m_filePath(filePath)
+    m_width(0),
+    m_height(0),
+    m_channels(0),
+    m_colorDepth(0),
+    m_pixelFormat(PixelFormat::Unknown)
 {
     // TODO: Implement Engine file loader
     FILE* file = nullptr;
     fopen_s(&file, filePath.c_str(), "rb");
-    if (file == nullptr)
     {
-        return;
+        if (file == nullptr)
+        {
+            return;
+        }
+
+        // Resize the vector by file size.
+        std::vector<uint8_t> imageData;
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        imageData.resize(fileSize + 1);
+        fseek(file, 0, SEEK_SET);
+
+        fread(imageData.data(), 1, fileSize, file);
+
+        std::size_t extensionOffset = filePath.rfind('.') + 1;
+        *this = Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
     }
-
-    std::vector<uint8_t> imageData;
-    // Resize the vector by file size.
-    fseek(file, 0, SEEK_END);
-    long fileSize = ftell(file);
-    imageData.resize(fileSize + 1);
-    fseek(file, 0, SEEK_SET);
-
-    fread(imageData.data(), 1, fileSize, file);
-
-    std::size_t extensionOffset = filePath.rfind('.') + 1;
-    new (this) Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
+    fclose(file);
 }
 
-Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes)
+Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes) :
+    m_width(0),
+    m_height(0),
+    m_channels(0),
+    m_colorDepth(0),
+    m_pixelFormat(PixelFormat::Unknown)
 {
     switch (imageFormat)
     {
     //case ImageFormat::BMP:
-        //DecodeBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
+        //ResolveBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
         //break;
 
     //case ImageFormat::JPG:
-        //DecodeJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
+        //ResolveJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
+        //break;
+
+    //case ImageFormat::WEBP:
+        //ResolveWEBP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
         //break;
 
     case ImageFormat::PNG:
-        DecodePNG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
+        ResolvePNG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
         break;
 
     default:
-        assert(false && "Not supported image format.");
+        core::Log("%s image format isn't currently supported.", ConvertImageFormatToString(imageFormat));
         break;
     }
+}
+
+Bitmap::Bitmap(Bitmap&& rhs) :
+    m_bits(std::move(rhs.m_bits)),
+    m_width(rhs.m_width),
+    m_height(rhs.m_height),
+    m_channels(rhs.m_channels),
+    m_colorDepth(rhs.m_colorDepth),
+    m_pixelFormat(rhs.m_pixelFormat),
+    m_filePath(std::move(rhs.m_filePath))
+{
+    rhs.m_width = 0;
+    rhs.m_height = 0;
+    rhs.m_channels = 0;
+    rhs.m_colorDepth = 0;
+    rhs.m_pixelFormat = PixelFormat::Unknown;
+}
+
+Bitmap& Bitmap::operator=(Bitmap&& rhs)
+{
+    m_bits = std::move(rhs.m_bits);
+    m_width = rhs.m_width;
+    m_height = rhs.m_height;
+    m_channels = rhs.m_channels;
+    m_colorDepth = rhs.m_colorDepth;
+    m_pixelFormat = rhs.m_pixelFormat;
+    m_filePath = std::move(rhs.m_filePath);
+
+    rhs.m_width = 0;
+    rhs.m_height = 0;
+    rhs.m_channels = 0;
+    rhs.m_colorDepth = 0;
+    rhs.m_pixelFormat = PixelFormat::Unknown;
+
+    return *this;
 }
 
 uint8_t& Bitmap::operator[](std::size_t index)

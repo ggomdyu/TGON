@@ -103,10 +103,16 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataLen   The bytes of image data
      */
-    explicit Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes);
+    Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes);
+    
+    Bitmap(const Bitmap& rhs) = default;
+    Bitmap(Bitmap&& rhs);
 
 /* @section Public operator */
 public:
+    Bitmap & operator=(const Bitmap& rhs) = default;
+    Bitmap& operator=(Bitmap&& rhs);
+
     /* @brief   Get the raw pointer of image. */
     uint8_t& operator[](std::size_t index);
 
@@ -115,6 +121,8 @@ public:
 
 /* @section Public method */
 public:
+    void Save(const char* filePath, ImageFormat imageFormat);
+
     /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
@@ -154,4 +162,4 @@ private:
 };
 
 } /* namespace core */
-} /* namespace tgon */
+} /* namespace tgon */  
