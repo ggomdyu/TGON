@@ -10,6 +10,7 @@
 #include "Config.h"
 
 #include "Core/Object/Delegate.h"
+#include "Core/Math/Extent.h"
 
 #include <boost/predef/os.h>
 #include <boost/noncopyable.hpp>
@@ -59,6 +60,7 @@ public:
     //void SetTransparencyPerPixel(const core::Color4f& pixel, float opacity);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetSize(int32_t* width, int32_t* height) const;
+    I32Extent2D GetSize() const;
     void GetTitle(char* destStr) const;
     float GetTransparency() const;
     void* GetNativeWindow();

@@ -81,7 +81,20 @@ public:
 
 /* @section Private method */
 private:
+    bool Initialize(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
     bool InitializeD3D(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    
+    bool CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAdapter** dxgiAdapter, IDXGIOutput** dxgiAdapterOutput);
+    bool EnumerateDisplayModes(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT enumFormat, std::vector<DXGI_MODE_DESC>* displayModes);
+    bool FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT requiredFormat, DXGI_MODE_DESC* suitDisplayMode);
+    bool CreateDeviceAndSwapChain(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode, const DXGI_MODE_DESC& suitDispalyMode, ID3D11Device** device, ID3D11DeviceContext** deviceContext, IDXGISwapChain** m_swapChain);
+    bool CreateRenderTargetView(ID3D11Device* device, IDXGISwapChain* swapChain, ID3D11RenderTargetView** renderTargetView);
+    bool CreateDepthStencilBuffer(ID3D11Device* device, ID3D11Texture2D** depthStencilBuffer);
+    bool CreateDepthStencilState(ID3D11Device* device, ID3D11DepthStencilState** depthStencilState);
+    bool CreateDepthStencilView(ID3D11Device* device, ID3D11Texture2D* depthStencilBuffer, ID3D11DepthStencilView** depthStencilView);
+    bool CreateRasterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerState);
+    
+    void SetViewport(ID3D11DeviceContext* deviceContext, int32_t width, int32_t height, float minDepth, float maxDepth, float topLeftX, float topLeftY);
 
 /* @section Private variable */
 private:
@@ -95,7 +108,7 @@ private:
     core::COMPtr<ID3D11RasterizerState> m_rasterizerState;
 
     FLOAT m_clearColor[4];
-    UINT m_swapChainSyncInterval;
+    UINT m_presentSyncInterval;
 };
 
 } /* namespace graphics */

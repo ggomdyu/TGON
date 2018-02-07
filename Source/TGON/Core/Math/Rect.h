@@ -75,7 +75,9 @@ constexpr BasicRect<_ValueType> MakeRect(const _ValueType& left, const _ValueTyp
     return {left, top, right, bottom};
 }
 
-using Rect = BasicRect<int32_t>;
+using Rect = BasicRect<int>;
+using I32Rect = BasicRect<int32_t>;
+using I64Rect = BasicRect<int64_t>;
 using FRect = BasicRect<float>;
 
 template <typename _ValueType>

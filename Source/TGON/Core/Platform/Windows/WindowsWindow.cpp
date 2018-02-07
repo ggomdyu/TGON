@@ -103,6 +103,14 @@ void Window::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
+I32Extent2D Window::GetSize() const
+{
+    int32_t width, height;
+    this->GetSize(&width, &height);
+
+    return I32Extent2D(width, height);
+}
+
 void Window::GetTitle(char* destStr) const
 {
     wchar_t utf16Title[256] {};
@@ -321,7 +329,7 @@ LRESULT Window::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM 
                 OnWindowDidClose();
             }
 
-            // Destroy the message queue and quit loop.
+            // Destroy the message queue and quit message loop.
             ::PostQuitMessage(0);
         }
         break;

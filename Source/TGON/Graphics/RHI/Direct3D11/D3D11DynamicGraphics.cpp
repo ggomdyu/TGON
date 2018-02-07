@@ -18,12 +18,10 @@ namespace graphics
 {
 
 D3D11DynamicGraphics::D3D11DynamicGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
-    m_swapChainSyncInterval(videoMode.enableVerticalSync ? 1 : 0),
+    m_presentSyncInterval(videoMode.enableVerticalSync ? 1 : 0),
     m_clearColor{videoMode.clearColor.r, videoMode.clearColor.g, videoMode.clearColor.b, videoMode.clearColor.a}
 {
-    this->InitializeD3D(window, videoMode);
-
-    this->SetClearColor(videoMode.clearColor);
+    this->Initialize(window, videoMode);
 }
 
 D3D11DynamicGraphics::~D3D11DynamicGraphics()
@@ -35,71 +33,175 @@ D3D11DynamicGraphics::~D3D11DynamicGraphics()
     }*/
 }
 
+bool D3D11DynamicGraphics::Initialize(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
+{
+    if (this->InitializeD3D(window, videoMode) == false)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
 {
-    // Create a DXGI factory that you can use to generate other DXGI objects.
     core::COMPtr<IDXGIFactory> dxgiFactory;
-    if (FAILED(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&dxgiFactory))))
+    core::COMPtr<IDXGIAdapter> dxgiAdapter;
+    core::COMPtr<IDXGIOutput> dxgiAdapterOutput;
+    if (this->CreateDXGIObjects(&dxgiFactory, &dxgiAdapter, &dxgiAdapterOutput) == false)
+    {
+        return false;
+    }
+
+    // Create a device and swap chain
+    {
+        DXGI_MODE_DESC suitDisplayMode;
+        if (this->FindSuitDisplayMode(dxgiAdapterOutput, DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM, &suitDisplayMode) == false)
+        {
+            return false;
+        }
+
+        this->CreateDeviceAndSwapChain(window, videoMode, suitDisplayMode, &m_device, &m_deviceContext, &m_swapChain);
+    }
+
+    // Create a render-target view for accessing resource data.
+    if (this->CreateRenderTargetView(m_device, m_swapChain, &m_renderTargetView) == false)
+    {
+        return false;
+    }
+
+    // Register a depth stencil state to the context.
+    {
+        if (this->CreateDepthStencilBuffer(m_device, &m_depthStencilBuffer) == false)
+        {
+            return false;
+        }
+        
+        if (this->CreateDepthStencilState(m_device, &m_depthStencilState) == false)
+        {
+            return false;
+        }
+
+        m_deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
+    }
+
+    // Now we will make depth stencil view. We must create it because Direct3D appreciate the depth stencil buffer is texture after do this.
+    {
+        if (this->CreateDepthStencilView(m_device, m_depthStencilBuffer, &m_depthStencilView) == false)
+        {
+            return false;
+        }
+
+        m_deviceContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
+    }
+
+    // Register a rasterizer state to the context.
+    {
+        if (this->CreateRasterizerState(m_device, &m_rasterizerState) == false)
+        {
+            return false;
+        }
+
+        m_deviceContext->RSSetState(m_rasterizerState);
+    }
+
+    // Finally, Set the viewport.
+    {
+        int32_t windowWidth, windowHeight;
+        window->GetSize(&windowWidth, &windowHeight);
+        this->SetViewport(m_deviceContext, windowWidth, windowHeight, 0.0f, 1.0f, 0.0f, 0.0f);
+    }
+}
+
+bool D3D11DynamicGraphics::CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAdapter** dxgiAdapter, IDXGIOutput** dxgiAdapterOutput)
+{
+    // Create a DXGI factory that you can use to generate other DXGI objects.
+    if (FAILED(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(dxgiFactory))))
     {
         core::Log("Failed to invoke CreateDXGIFactory.");
         return false;
     }
 
     // Enumerate the video cards.
-    core::COMPtr<IDXGIAdapter> dxgiAdapter;
-    if (FAILED(dxgiFactory->EnumAdapters(0, &dxgiAdapter)))
+    if (FAILED((*dxgiFactory)->EnumAdapters(0, dxgiAdapter)))
     {
         core::Log("Failed to invoke IDXGIFactory::EnumAdapters.");
         return false;
     }
 
     // Enumerate adapter outputs.
-    core::COMPtr<IDXGIOutput> dxgiAdapterOutput;
-    if (FAILED(dxgiAdapter->EnumOutputs(0, &dxgiAdapterOutput)))
+    if (FAILED((*dxgiAdapter)->EnumOutputs(0, dxgiAdapterOutput)))
     {
         core::Log("Failed to invoke IDXGIAdapter::EnumOutputs.");
         return false;
     }
 
-    //// Find suitable Display Mode
+    return true;
+}
+
+bool D3D11DynamicGraphics::EnumerateDisplayModes(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT enumFormat, std::vector<DXGI_MODE_DESC>* displayModes)
+{
     // Get the number of display modes which suitable for R8G8B8A8 format.
-    UINT numModes;
-    if (FAILED(dxgiAdapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, nullptr)))
+    UINT numDisplayModes;
+    if (FAILED(dxgiAdapterOutput->GetDisplayModeList(enumFormat, DXGI_ENUM_MODES_INTERLACED, &numDisplayModes, nullptr)))
     {
         core::Log("Failed to invoke IDXGIOutput::GetDisplayModeList.");
         return false;
     }
 
-    // Then, list those display modes to displayModes.
-    std::vector<DXGI_MODE_DESC> displayModes(numModes);
-    if (FAILED(dxgiAdapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModes.data())))
+    if (numDisplayModes > 0)
     {
-        core::Log("Failed to invoke IDXGIOutput::GetDisplayModeList.");
-        return false;
-    }
-
-    int32_t windowWidth, windowHeight;
-    window->GetSize(&windowWidth, &windowHeight);
-
-    DXGI_MODE_DESC suitDisplayMode;
-    for (const auto& displayMode : displayModes)
-    {
-        if (displayMode.Width == static_cast<UINT>(windowWidth) &&
-            displayMode.Height == static_cast<UINT>(windowHeight))
+        // Then, list those display modes to displayModes.
+        displayModes->resize(numDisplayModes);
+        if (FAILED(dxgiAdapterOutput->GetDisplayModeList(enumFormat, DXGI_ENUM_MODES_INTERLACED, &numDisplayModes, displayModes->data())))
         {
-            suitDisplayMode = displayMode;
-            break;
+            core::Log("Failed to invoke IDXGIOutput::GetDisplayModeList.");
+            return false;
         }
     }
 
-    //// Creation of Swap Chain
+    return true;
+}
+
+bool D3D11DynamicGraphics::FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT requiredFormat, DXGI_MODE_DESC* suitDisplayMode)
+{
+    std::vector<DXGI_MODE_DESC> displayModes;
+    if (this->EnumerateDisplayModes(dxgiAdapterOutput, requiredFormat, &displayModes) == false)
+    {
+        return false;
+    }
+    else if (displayModes.size() <= 0)
+    {
+        return false;
+    }
+
+    for (const auto& displayMode : displayModes)
+    {
+        *suitDisplayMode = displayMode;
+        break;
+        //// 적절한 DisplayMode를 찾는 정책을 정해야 함
+        //if (displayMode.Width == static_cast<UINT>(windowWidth) &&
+        //    displayMode.Height == static_cast<UINT>(windowHeight))
+        //{
+        //    suitDisplayMode = displayMode;
+        //    break;
+        //}
+    }
+
+    return true;
+}
+
+bool D3D11DynamicGraphics::CreateDeviceAndSwapChain(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode, const DXGI_MODE_DESC& suitDisplayMode, ID3D11Device** device, ID3D11DeviceContext** deviceContext, IDXGISwapChain** swapChain)
+{
+    auto windowSize = window->GetSize();
+
     DXGI_SWAP_CHAIN_DESC swapChainDesc {};
     swapChainDesc.OutputWindow = reinterpret_cast<HWND>(window->GetNativeWindow());
     swapChainDesc.Windowed = true;
-    swapChainDesc.BufferCount = 1; // Back buffer count is 1
+    swapChainDesc.BufferCount = 1;
     swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    swapChainDesc.BufferDesc.Width = windowWidth;
-    swapChainDesc.BufferDesc.Height = windowHeight;
+    swapChainDesc.BufferDesc.Width = windowSize.width;
+    swapChainDesc.BufferDesc.Height = windowSize.height;
     swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
     swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
@@ -131,30 +233,40 @@ bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& wi
     // We're going to use DirectX version 11.
     D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0;
     D3D_DRIVER_TYPE driverType = (videoMode.enableHardwareAccelerate) ? D3D_DRIVER_TYPE_HARDWARE : D3D_DRIVER_TYPE_SOFTWARE;
-    if (FAILED(D3D11CreateDeviceAndSwapChain(nullptr, driverType, nullptr, 0, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, &m_swapChain, &m_device, nullptr, &m_deviceContext)))
+    if (FAILED(D3D11CreateDeviceAndSwapChain(nullptr, driverType, nullptr, 0, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, swapChain, device, nullptr, deviceContext)))
     {
         core::Log("Failed to invoke D3D11CreateDeviceAndSwapChain.");
         return false;
     }
 
-    //// Create a Back buffer and Connect it to swap chain
+    return true;
+}
+
+bool D3D11DynamicGraphics::CreateRenderTargetView(ID3D11Device* device, IDXGISwapChain* swapChain, ID3D11RenderTargetView** renderTargetView)
+{
+    // Access the swap-chain's back buffer.
     core::COMPtr<ID3D11Texture2D> backBuffer;
-    if (FAILED(m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer))))
+    if (FAILED(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer))))
     {
         core::Log("Failed to invoke IDXGISwapChain::GetBuffer.");
         return false;
     }
 
-    if (FAILED(m_device->CreateRenderTargetView(backBuffer, nullptr, &m_renderTargetView)))
+    // Create a render-target view for accessing resource data.
+    if (FAILED(device->CreateRenderTargetView(backBuffer, nullptr, renderTargetView)))
     {
         core::Log("Failed to invoke ID3D11Device::CreateRenderTargetView.");
         return false;
     }
 
-    //// Create a Depth buffer
+    return true;
+}
+
+bool D3D11DynamicGraphics::CreateDepthStencilBuffer(ID3D11Device* device, ID3D11Texture2D** depthStencilBuffer)
+{
     D3D11_TEXTURE2D_DESC depthBufferDesc {};
-    depthBufferDesc.Width = windowWidth;
-    depthBufferDesc.Height = windowHeight;
+    depthBufferDesc.Width = 600;
+    depthBufferDesc.Height = 600;
     depthBufferDesc.MipLevels = 1;
     depthBufferDesc.ArraySize = 1;
     depthBufferDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -165,12 +277,17 @@ bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& wi
     depthBufferDesc.CPUAccessFlags = 0;
     depthBufferDesc.MiscFlags = 0;
 
-    if (FAILED(m_device->CreateTexture2D(&depthBufferDesc, nullptr, &m_depthStencilBuffer)))
+    if (FAILED(device->CreateTexture2D(&depthBufferDesc, nullptr, depthStencilBuffer)))
     {
         core::Log("Failed to invoke ID3D11Device::CreateTexture2D.");
         return false;
     }
 
+    return true;
+}
+
+bool D3D11DynamicGraphics::CreateDepthStencilState(ID3D11Device* device, ID3D11DepthStencilState** depthStencilState)
+{
     D3D11_DEPTH_STENCIL_DESC depthStencilDesc {};
     depthStencilDesc.DepthEnable = true;
     depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -183,36 +300,40 @@ bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& wi
     depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
     depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
     depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-    
+
     // Stencil operations if pixel is back-facing.
     depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
     depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
     depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
     depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-    if (FAILED(m_device->CreateDepthStencilState(&depthStencilDesc, &m_depthStencilState)))
+    if (FAILED(device->CreateDepthStencilState(&depthStencilDesc, depthStencilState)))
     {
         core::Log("Failed to invoke ID3D11Device::CreateTexture2D.");
         return false;
     }
 
-    // Register created depth stencil state to DeviceContext.
-    m_deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
+    return true;
+}
 
-    // Now we will make depth stencil view. We must create it because Direct3D appreciate the depth stencil buffer is texture after do this.
+bool D3D11DynamicGraphics::CreateDepthStencilView(ID3D11Device* device, ID3D11Texture2D* depthStencilBuffer, ID3D11DepthStencilView** depthStencilView)
+{
     D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc {};
     depthStencilViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
     depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
     depthStencilViewDesc.Texture2D.MipSlice = 0;
 
-    if (FAILED(m_device->CreateDepthStencilView(m_depthStencilBuffer, &depthStencilViewDesc, &m_depthStencilView)))
+    if (FAILED(m_device->CreateDepthStencilView(depthStencilBuffer, &depthStencilViewDesc, depthStencilView)))
     {
         core::Log("Failed to invoke ID3D11Device::CreateDepthStencilView.");
         return false;
     }
 
-    m_deviceContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
+    return true;
+}
 
+bool D3D11DynamicGraphics::CreateRasterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerState)
+{
     D3D11_RASTERIZER_DESC rasterizerDesc {};
     rasterizerDesc.AntialiasedLineEnable = false;
     rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
@@ -225,30 +346,34 @@ bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& wi
     rasterizerDesc.ScissorEnable = false;
     rasterizerDesc.SlopeScaledDepthBias = 0.0;
 
-    if (FAILED(m_device->CreateRasterizerState(&rasterizerDesc, &m_rasterizerState)))
+    if (FAILED(m_device->CreateRasterizerState(&rasterizerDesc, rasterizerState)))
     {
         core::Log("Failed to invoke ID3D11Device::CreateRasterizerState.");
         return false;
     }
 
-    m_deviceContext->RSSetState(m_rasterizerState);
+    return true;
+}
 
-    D3D11_VIEWPORT viewportDesc{};
-    viewportDesc.Width = windowWidth;
-    viewportDesc.Height = windowHeight;
-    viewportDesc.MinDepth = 0.0f;
-    viewportDesc.MaxDepth = 1.0f;
-    viewportDesc.TopLeftX = 0.0f;
-    viewportDesc.TopLeftY = 0.0f;
+void D3D11DynamicGraphics::SetViewport(ID3D11DeviceContext* deviceContext, int32_t width, int32_t height, float minDepth, float maxDepth, float topLeftX, float topLeftY)
+{
+    D3D11_VIEWPORT viewportDesc {};
+    viewportDesc.Width = width;
+    viewportDesc.Height = height;
+    viewportDesc.MinDepth = minDepth;
+    viewportDesc.MaxDepth = maxDepth;
+    viewportDesc.TopLeftX = topLeftX;
+    viewportDesc.TopLeftY = topLeftY;
 
-    m_deviceContext->RSSetViewports(1, &viewportDesc);
-
-    float fieldOfView, screenAspect;
-
+    deviceContext->RSSetViewports(1, &viewportDesc);
 }
 
 void D3D11DynamicGraphics::SetClearColor(const core::Color4f& color)
 {
+    m_clearColor[0] = color.r;
+    m_clearColor[1] = color.g;
+    m_clearColor[2] = color.b;
+    m_clearColor[3] = color.a;
 }
 
 void D3D11DynamicGraphics::SetFillMode(FillMode fillMode)
@@ -288,7 +413,7 @@ void D3D11DynamicGraphics::ClearColorDepthBuffer()
 
 void D3D11DynamicGraphics::SwapBuffer()
 {
-    m_swapChain->Present(0, 0);
+    m_swapChain->Present(m_presentSyncInterval, 0);
 }
 
 } /* namespace graphics */

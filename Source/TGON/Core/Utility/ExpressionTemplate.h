@@ -16,10 +16,10 @@ namespace core
 {
 
 template <typename _FirstOperandType, typename _SecondOperandType>
-struct PlusExpression;
+struct AddExpression;
 
 template <typename _FirstOperandType, typename _SecondOperandType>
-struct MinusExpression;
+struct SubtractExpression;
 
 template <typename _FirstOperandType, typename _SecondOperandType>
 struct MultiplyExpression;
@@ -38,10 +38,10 @@ public:
     }
 
     template <typename _SecondOperandType>
-    constexpr const PlusExpression<_DerivedExpressionType, _SecondOperandType> operator+(const _SecondOperandType& rhs) const noexcept;
+    constexpr const AddExpression<_DerivedExpressionType, _SecondOperandType> operator+(const _SecondOperandType& rhs) const noexcept;
 
     template <typename _SecondOperandType>
-    constexpr const MinusExpression<_DerivedExpressionType, _SecondOperandType> operator-(const _SecondOperandType& rhs) const noexcept;
+    constexpr const SubtractExpression<_DerivedExpressionType, _SecondOperandType> operator-(const _SecondOperandType& rhs) const noexcept;
 
     template <typename _SecondOperandType>
     constexpr const MultiplyExpression<_DerivedExpressionType, _SecondOperandType> operator*(const _SecondOperandType& rhs) const noexcept;
@@ -51,25 +51,20 @@ public:
     
 /* @section Public method */
 public:
-    constexpr const auto& GetFirstOperand() const noexcept;
-    constexpr const auto& GetSecondOperand() const noexcept;
+    constexpr const auto& GetFirstOperand() const noexcept
+    {
+        return reinterpret_cast<const _DerivedExpressionType&>(*this).GetFirstOperand();
+    }
+
+    constexpr const auto& GetSecondOperand() const noexcept
+    {
+        return reinterpret_cast<const _DerivedExpressionType&>(*this).GetSecondOperand();
+    }
 };
 
-template <typename _DerivedExpressionType>
-constexpr const auto& BaseExpression<_DerivedExpressionType>::GetFirstOperand() const noexcept
-{
-    return reinterpret_cast<const _DerivedExpressionType&>(*this).GetFirstOperand();
-}
-
-template <typename _DerivedExpressionType>
-constexpr const auto& BaseExpression<_DerivedExpressionType>::GetSecondOperand() const noexcept
-{
-    return reinterpret_cast<const _DerivedExpressionType&>(*this).GetSecondOperand();
-}
-
 template <typename _FirstOperandType, typename _SecondOperandType>
-struct PlusExpression :
-    public BaseExpression<PlusExpression<_FirstOperandType, _SecondOperandType>>
+struct AddExpression :
+    public BaseExpression<AddExpression<_FirstOperandType, _SecondOperandType>>
 {
 /* @section Public type */
 public:
@@ -78,51 +73,41 @@ public:
 
 /* @section Public constructor */
 public:
-    constexpr PlusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
-
-/* @section Public operator */
-public:
-    constexpr const auto operator[](std::size_t index) const;
+    constexpr AddExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
+        m_firstOperand(firstOperand),
+        m_secondOperand(secondOperand)
+    {
+    }
 
 /* @section Public method */
 public:
-    constexpr const _FirstOperandType& GetFirstOperand() const noexcept;
-    constexpr const _SecondOperandType& GetSecondOperand() const noexcept;
+    constexpr const _FirstOperandType& GetFirstOperand() const noexcept
+    {
+        return m_firstOperand;
+    }
+
+    constexpr const _SecondOperandType& GetSecondOperand() const noexcept
+    {
+        return m_secondOperand;
+    }
 
 /* @section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
+
+
+/* @section Public operator */
+public:
+    constexpr auto operator[](std::size_t index) const
+    {
+        return m_firstOperand[index] + m_secondOperand[index];
+    }
 };
 
 template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr PlusExpression<_FirstOperandType, _SecondOperandType>::PlusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    m_firstOperand(firstOperand),
-    m_secondOperand(secondOperand)
-{
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const auto PlusExpression<_FirstOperandType, _SecondOperandType>::operator[](std::size_t index) const
-{
-    return m_firstOperand[index] + m_secondOperand[index];
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _FirstOperandType& PlusExpression<_FirstOperandType, _SecondOperandType>::GetFirstOperand() const noexcept
-{
-    return m_firstOperand;
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _SecondOperandType& PlusExpression<_FirstOperandType, _SecondOperandType>::GetSecondOperand() const noexcept
-{
-    return m_secondOperand;
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-struct MinusExpression :
-    public BaseExpression<MinusExpression<_FirstOperandType, _SecondOperandType>>
+struct SubtractExpression :
+    public BaseExpression<SubtractExpression<_FirstOperandType, _SecondOperandType>>
 {
 /* @section Public type */
 public:
@@ -131,47 +116,36 @@ public:
 
 /* @section Public constructor */
 public:
-    constexpr MinusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
+    constexpr SubtractExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
+        m_firstOperand(firstOperand),
+        m_secondOperand(secondOperand)
+    {
+    }
 
 /* @section Public operator */
 public:
-    constexpr const auto operator[](std::size_t index) const;
+    constexpr const auto operator[](std::size_t index) const
+    {
+        return m_firstOperand[index] - m_secondOperand[index];
+    }
 
 /* @section Public method */
 public:
-    constexpr const _FirstOperandType& GetFirstOperand() const noexcept;
-    constexpr const _SecondOperandType& GetSecondOperand() const noexcept;
+    constexpr const _FirstOperandType& GetFirstOperand() const noexcept
+    {
+        return m_firstOperand;
+    }
+
+    constexpr const _SecondOperandType& GetSecondOperand() const noexcept
+    {
+        return m_secondOperand;
+    }
 
 /* @section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
 };
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const auto MinusExpression<_FirstOperandType, _SecondOperandType>::operator[](std::size_t index) const
-{
-    return m_firstOperand[index] - m_secondOperand[index];
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr MinusExpression<_FirstOperandType, _SecondOperandType>::MinusExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    m_firstOperand(firstOperand),
-    m_secondOperand(secondOperand)
-{
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _FirstOperandType& MinusExpression<_FirstOperandType, _SecondOperandType>::GetFirstOperand() const noexcept
-{
-    return m_firstOperand;
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _SecondOperandType& MinusExpression<_FirstOperandType, _SecondOperandType>::GetSecondOperand() const noexcept
-{
-    return m_secondOperand;
-}
 
 template <typename _FirstOperandType, typename _SecondOperandType>
 struct MultiplyExpression :
@@ -184,47 +158,36 @@ public:
 
 /* @section Public constructor */
 public:
-    constexpr MultiplyExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
+    constexpr MultiplyExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
+        m_firstOperand(firstOperand),
+        m_secondOperand(secondOperand)
+    {
+    }
 
 /* @section Public operator */
 public:
-    constexpr const auto operator[](std::size_t index) const;
+    constexpr const auto operator[](std::size_t index) const
+    {
+        return m_firstOperand[index] * m_secondOperand[index];
+    }
 
 /* @section Public method */
 public:
-    constexpr const _FirstOperandType& GetFirstOperand() const noexcept;
-    constexpr const _SecondOperandType& GetSecondOperand() const noexcept;
+    constexpr const _FirstOperandType& GetFirstOperand() const noexcept
+    {
+        return m_firstOperand;
+    }
+
+    constexpr const _SecondOperandType& GetSecondOperand() const noexcept
+    {
+        return m_secondOperand;
+    }
 
 /* @section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
 };
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr MultiplyExpression<_FirstOperandType, _SecondOperandType>::MultiplyExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    m_firstOperand(firstOperand),
-    m_secondOperand(secondOperand)
-{
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const auto MultiplyExpression<_FirstOperandType, _SecondOperandType>::operator[](std::size_t index) const
-{
-    return m_firstOperand[index] * m_secondOperand[index];
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _FirstOperandType& MultiplyExpression<_FirstOperandType, _SecondOperandType>::GetFirstOperand() const noexcept
-{
-    return m_firstOperand;
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _SecondOperandType& MultiplyExpression<_FirstOperandType, _SecondOperandType>::GetSecondOperand() const noexcept
-{
-    return m_secondOperand;
-}
 
 template <typename _FirstOperandType, typename _SecondOperandType>
 struct DivideExpression :
@@ -237,16 +200,30 @@ public:
 
 /* @section Public constructor */
 public:
-    constexpr DivideExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept;
+    constexpr DivideExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
+        m_firstOperand(firstOperand),
+        m_secondOperand(secondOperand)
+    {
+    }
 
 /* @section Public operator */
 public:
-    constexpr const auto operator[](std::size_t index) const;
+    constexpr const auto operator[](std::size_t index) const
+    {
+        return m_firstOperand[index] / m_secondOperand[index];
+    }
 
 /* @section Public method */
 public:
-    constexpr const _FirstOperandType& GetFirstOperand() const noexcept;
-    constexpr const _SecondOperandType& GetSecondOperand() const noexcept;
+    constexpr const _FirstOperandType& GetFirstOperand() const noexcept
+    {
+        return m_firstOperand;
+    }
+
+    constexpr const _SecondOperandType& GetSecondOperand() const noexcept
+    {
+        return m_secondOperand;
+    }
 
 /* @section Private variable */
 private:
@@ -254,41 +231,16 @@ private:
     _SecondOperandType m_secondOperand;
 };
 
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr DivideExpression<_FirstOperandType, _SecondOperandType>::DivideExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
-    m_firstOperand(firstOperand),
-    m_secondOperand(secondOperand)
-{
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const auto DivideExpression<_FirstOperandType, _SecondOperandType>::operator[](std::size_t index) const
-{
-    return m_firstOperand[index] / m_secondOperand[index];
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _FirstOperandType& DivideExpression<_FirstOperandType, _SecondOperandType>::GetFirstOperand() const noexcept
-{
-    return m_firstOperand;
-}
-
-template <typename _FirstOperandType, typename _SecondOperandType>
-constexpr const _SecondOperandType& DivideExpression<_FirstOperandType, _SecondOperandType>::GetSecondOperand() const noexcept
-{
-    return m_secondOperand;
-}
-
 template <typename _DerivedExpressionType>
 template <typename _SecondOperandType>
-constexpr const PlusExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator+(const _SecondOperandType& rhs) const noexcept
+constexpr const AddExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator+(const _SecondOperandType& rhs) const noexcept
 {
     return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
 }
 
 template <typename _DerivedExpressionType>
 template <typename _SecondOperandType>
-constexpr const MinusExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator-(const _SecondOperandType& rhs) const noexcept
+constexpr const SubtractExpression<_DerivedExpressionType, _SecondOperandType> BaseExpression<_DerivedExpressionType>::operator-(const _SecondOperandType& rhs) const noexcept
 {
     return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
 }

@@ -70,7 +70,9 @@ public:
     _ValueType y;
 };
 
-using Point = BasicPoint<int32_t>;
+using Point = BasicPoint<int>;
+using I64Point = BasicPoint<int64_t>;
+using I32Point = BasicPoint<int32_t>;
 using FPoint = BasicPoint<float>;
 
 template <typename _ValueType>

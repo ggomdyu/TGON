@@ -110,7 +110,7 @@ public:
 
 /* @section Public operator */
 public:
-    Bitmap & operator=(const Bitmap& rhs) = default;
+    Bitmap& operator=(const Bitmap& rhs) = default;
     Bitmap& operator=(Bitmap&& rhs);
 
     /* @brief   Get the raw pointer of image. */

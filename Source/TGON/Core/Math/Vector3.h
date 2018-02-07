@@ -36,10 +36,12 @@ public:
 
 /* @section Public perator */
 public:
-    constexpr const PlusExpression<Vector3, Vector3> operator+(const Vector3& rhs) const noexcept;
-    constexpr const MinusExpression<Vector3, Vector3> operator-(const Vector3& rhs) const noexcept;
+    constexpr const AddExpression<Vector3, Vector3> operator+(const Vector3& rhs) const noexcept;
+    constexpr const SubtractExpression<Vector3, Vector3> operator-(const Vector3& rhs) const noexcept;
     friend constexpr const Vector3 operator*(float, const Vector3& rhs) noexcept;
     constexpr const Vector3 operator*(float) const noexcept;
+    constexpr const Vector3 operator-(float) const;
+    constexpr const Vector3 operator+(float) const;
     constexpr const Vector3 operator/(float) const;
     constexpr const Vector3 operator-() const noexcept;
     Vector3& operator+=(const Vector3&) noexcept;
@@ -115,12 +117,12 @@ constexpr Vector3::Vector3(const BaseExpression<_DerivedExpressionType>& express
 {
 }
 
-constexpr const PlusExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept
+constexpr const AddExpression<Vector3, Vector3> Vector3::operator+(const Vector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
 
-constexpr const MinusExpression<Vector3, Vector3> Vector3::operator-(const Vector3& rhs) const noexcept
+constexpr const SubtractExpression<Vector3, Vector3> Vector3::operator-(const Vector3& rhs) const noexcept
 {
     return {*this, rhs};
 }
@@ -135,9 +137,19 @@ constexpr const Vector3 operator*(float lhs, const Vector3& rhs) noexcept
 	return rhs * lhs;
 }
 
+constexpr const Vector3 Vector3::operator+(float rhs) const
+{
+    return Vector3(x + rhs, y + rhs, z + rhs);
+}
+
+constexpr const Vector3 Vector3::operator-(float rhs) const
+{
+    return Vector3(x - rhs, y - rhs, z - rhs);
+}
+
 constexpr const Vector3 Vector3::operator/(float rhs) const
 {
-    return Vector3(x / rhs, y / rhs, z * rhs);
+    return Vector3(x / rhs, y / rhs, z / rhs);
 }
 
 constexpr const Vector3 Vector3::operator-() const noexcept
