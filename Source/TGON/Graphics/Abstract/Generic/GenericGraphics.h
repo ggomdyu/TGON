@@ -1,26 +1,28 @@
 /**
- * @filename    IDynamicGraphics.h
+ * @filename    GenericGraphics.h
  * @author      ggomdyu
  * @since       10/22/2017
  * @brief       Set of Low level rendering interfaces.
  */
 
 #pragma once
-#include "IDynamicGraphicsFwd.h"
+#include "GenericGraphicsFwd.h"
 
 #include "Core/Platform/Config.h"
+
+#include <initializer_list>
 
 namespace tgon
 {
 namespace graphics
 {
 
-class TGON_API IDynamicGraphics
+class TGON_API GenericGraphics
 {
 /* @section Public constructor */
 public:
-    IDynamicGraphics() = default;
-    virtual ~IDynamicGraphics() = default;
+    GenericGraphics() = default;
+    virtual ~GenericGraphics() = default;
 
 /* @section Public method */
 public:
@@ -35,6 +37,7 @@ public:
     virtual void ClearColorBuffer() {}
     virtual void ClearColorDepthBuffer() {}
     virtual void SwapBuffer() {}
+    virtual std::shared_ptr<VertexBuffer> CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) = 0;
 
     /*virtual void DrawPoint(const core::Vector3&) {};
     virtual void DrawLine(const core::Vector3&, const core::Vector3&) {};

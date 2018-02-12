@@ -1,5 +1,5 @@
 /**
- * @filename    Direct3D11DynamicGraphicsFwd.h
+ * @filename    D3D11GraphicsFwd.h
  * @author      ggomdyu
  * @since       02/23/2018
  */
@@ -19,6 +19,7 @@ namespace graphics
 {
 
 struct VideoMode;
+class VertexBuffer;
 
 } /* namespace graphics */
 } /* namespace tgon */

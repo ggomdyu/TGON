@@ -1,5 +1,5 @@
 /**
- * @filename    OpenGLDynamicGraphics.h
+ * @filename    OpenGLGraphics.h
  * @author      ggomdyu
  * @since       10/22/2017
  */
@@ -7,10 +7,10 @@
 #pragma once
 #include "OpenGLContext.h"
 
-#include "../IDynamicGraphics.h"
+#include "../Generic/GenericGraphics.h"
 
-#include <memory>
 #include <GL/glew.h>
+#include <memory>
 
 namespace tgon
 {
@@ -55,13 +55,13 @@ constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexc
     return nativePrimitiveTypeTable[static_cast<std::size_t>(primitiveType)];
 }
 
-class OpenGLDynamicGraphics :
-    public IDynamicGraphics
+class OpenGLGraphics :
+    public GenericGraphics
 {
 /* @section Public constructor */
 public:
-    OpenGLDynamicGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-    virtual ~OpenGLDynamicGraphics() override;
+    OpenGLGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    virtual ~OpenGLGraphics() override;
 
 /* @section Public method */
 public:
@@ -75,6 +75,7 @@ public:
     virtual void ClearColorBuffer() final override;
     virtual void ClearColorDepthBuffer() final override;
     virtual void SwapBuffer() final override;
+    virtual std::shared_ptr<VertexBuffer> CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) final override;
 
 /* @section Private variable */
 private:

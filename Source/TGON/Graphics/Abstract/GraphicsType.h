@@ -7,6 +7,7 @@
 
 #pragma once
 #include "Core/Math/Color.h"
+#include "Core/Math/Vector3.h"
 
 #include <cstdint>
 

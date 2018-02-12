@@ -5,8 +5,7 @@
  */
 
 #pragma once
-#include <cstdlib>
-#include <string>
+#include "Core/Drawing/Bitmap.h"
 
 namespace tgon
 {
@@ -21,28 +20,43 @@ enum class TextureAddressMode
     Mirror,
 };
 
-class Texture2D
+class Texture2D :
+    private core::Bitmap
 {
 /* @section Public constructor */
 public:
-    explicit Texture2D(const std::string& filePath);
-    explicit Texture2D(std::string&& filePath);
+    using core::Bitmap::Bitmap;
+
+/* @section Public operator */
+public:
+    using core::Bitmap::operator=;
+    using core::Bitmap::operator[];
 
 /* @section Public method */
 public:
-    const std::string& GetFilePath() const noexcept;
+    using core::Bitmap::Save;
 
-    uint8_t* GetBits() noexcept;
-    uint32_t GetHeight() const noexcept;
-    uint32_t GetWidth() const noexcept;
+    /* @brief   Checks the image file was loaded successfully. */
+    using core::Bitmap::IsValid;
 
-/* @section Private variable */
-private:
-    std::string m_filePath;
+    /* @brief   Get the raw pointer of image. */
+    using core::Bitmap::GetBits;
 
-    uint8_t* m_bits;
-    uint32_t m_width;
-    uint32_t m_height;
+    /* @brief   Get the width of image. */
+    using core::Bitmap::GetWidth;
+
+    /* @brief   Get the height of image. */
+    using core::Bitmap::GetHeight;
+
+    using core::Bitmap::GetColorDepth;
+
+    using core::Bitmap::GetBitsPerPixel;
+    
+    /* @brief   Get the pixel format of image. */
+    using core::Bitmap::GetPixelFormat;
+
+    /* @brief   Get the file path saved at loading time. */
+    using core::Bitmap::GetFilePath;
 };
 
 } /* namespace graphics */

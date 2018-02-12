@@ -1,5 +1,5 @@
 /**
- * @filename    IDynamicGraphicsFwd.h
+ * @filename    GenericGraphicsFwd.h
  * @author      ggomdyu
  * @since       12/29/2017
  */
@@ -30,6 +30,8 @@ namespace graphics
 enum class FillMode;
 enum class CullMode;
 enum class PrimitiveType;
+class VertexBuffer;
+struct VertexBufferDesc;
 
 } /* namespace graphics */
 } /* namespace tgon */

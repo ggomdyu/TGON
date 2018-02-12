@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.pch"
 
-#include "../OpenGLContext.h"
+#include "OpenGLContext.h"
 
 #include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
-#include "Graphics/RHI/GraphicsType.h"
+#include "Graphics/Abstract/GraphicsType.h"
 
 #include <Windows.h>
 #include <GL/glew.h>

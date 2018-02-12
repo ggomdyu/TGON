@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.pch"
 
-#include "D3D11DynamicGraphics.h"
+#include "D3D11Graphics.h"
 
 #include "../GraphicsType.h"
 
@@ -17,14 +17,14 @@ namespace tgon
 namespace graphics
 {
 
-D3D11DynamicGraphics::D3D11DynamicGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
+D3D11Graphics::D3D11Graphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
     m_presentSyncInterval(videoMode.enableVerticalSync ? 1 : 0),
     m_clearColor{videoMode.clearColor.r, videoMode.clearColor.g, videoMode.clearColor.b, videoMode.clearColor.a}
 {
     this->Initialize(window, videoMode);
 }
 
-D3D11DynamicGraphics::~D3D11DynamicGraphics()
+D3D11Graphics::~D3D11Graphics()
 {
     // 종료하기 전에 이렇게 윈도우 모드로 바꾸지 않으면 스왑체인을 할당 해제할 때 예외가 발생합니다.
     /*if (m_swapChain)
@@ -33,7 +33,7 @@ D3D11DynamicGraphics::~D3D11DynamicGraphics()
     }*/
 }
 
-bool D3D11DynamicGraphics::Initialize(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
+bool D3D11Graphics::Initialize(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
 {
     if (this->InitializeD3D(window, videoMode) == false)
     {
@@ -43,7 +43,7 @@ bool D3D11DynamicGraphics::Initialize(const std::shared_ptr<core::Window>& windo
     return true;
 }
 
-bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
+bool D3D11Graphics::InitializeD3D(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
 {
     core::COMPtr<IDXGIFactory> dxgiFactory;
     core::COMPtr<IDXGIAdapter> dxgiAdapter;
@@ -113,7 +113,7 @@ bool D3D11DynamicGraphics::InitializeD3D(const std::shared_ptr<core::Window>& wi
     }
 }
 
-bool D3D11DynamicGraphics::CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAdapter** dxgiAdapter, IDXGIOutput** dxgiAdapterOutput)
+bool D3D11Graphics::CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAdapter** dxgiAdapter, IDXGIOutput** dxgiAdapterOutput)
 {
     // Create a DXGI factory that you can use to generate other DXGI objects.
     if (FAILED(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(dxgiFactory))))
@@ -139,7 +139,7 @@ bool D3D11DynamicGraphics::CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAd
     return true;
 }
 
-bool D3D11DynamicGraphics::EnumerateDisplayModes(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT enumFormat, std::vector<DXGI_MODE_DESC>* displayModes)
+bool D3D11Graphics::EnumerateDisplayModes(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT enumFormat, std::vector<DXGI_MODE_DESC>* displayModes)
 {
     // Get the number of display modes which suitable for R8G8B8A8 format.
     UINT numDisplayModes;
@@ -163,7 +163,7 @@ bool D3D11DynamicGraphics::EnumerateDisplayModes(IDXGIOutput* dxgiAdapterOutput,
     return true;
 }
 
-bool D3D11DynamicGraphics::FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT requiredFormat, DXGI_MODE_DESC* suitDisplayMode)
+bool D3D11Graphics::FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, DXGI_FORMAT requiredFormat, DXGI_MODE_DESC* suitDisplayMode)
 {
     std::vector<DXGI_MODE_DESC> displayModes;
     if (this->EnumerateDisplayModes(dxgiAdapterOutput, requiredFormat, &displayModes) == false)
@@ -191,7 +191,7 @@ bool D3D11DynamicGraphics::FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, D
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateDeviceAndSwapChain(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode, const DXGI_MODE_DESC& suitDisplayMode, ID3D11Device** device, ID3D11DeviceContext** deviceContext, IDXGISwapChain** swapChain)
+bool D3D11Graphics::CreateDeviceAndSwapChain(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode, const DXGI_MODE_DESC& suitDisplayMode, ID3D11Device** device, ID3D11DeviceContext** deviceContext, IDXGISwapChain** swapChain)
 {
     auto windowSize = window->GetSize();
 
@@ -242,7 +242,7 @@ bool D3D11DynamicGraphics::CreateDeviceAndSwapChain(const std::shared_ptr<core::
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateRenderTargetView(ID3D11Device* device, IDXGISwapChain* swapChain, ID3D11RenderTargetView** renderTargetView)
+bool D3D11Graphics::CreateRenderTargetView(ID3D11Device* device, IDXGISwapChain* swapChain, ID3D11RenderTargetView** renderTargetView)
 {
     // Access the swap-chain's back buffer.
     core::COMPtr<ID3D11Texture2D> backBuffer;
@@ -262,7 +262,7 @@ bool D3D11DynamicGraphics::CreateRenderTargetView(ID3D11Device* device, IDXGISwa
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateDepthStencilBuffer(ID3D11Device* device, ID3D11Texture2D** depthStencilBuffer)
+bool D3D11Graphics::CreateDepthStencilBuffer(ID3D11Device* device, ID3D11Texture2D** depthStencilBuffer)
 {
     D3D11_TEXTURE2D_DESC depthBufferDesc {};
     depthBufferDesc.Width = 600;
@@ -286,7 +286,7 @@ bool D3D11DynamicGraphics::CreateDepthStencilBuffer(ID3D11Device* device, ID3D11
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateDepthStencilState(ID3D11Device* device, ID3D11DepthStencilState** depthStencilState)
+bool D3D11Graphics::CreateDepthStencilState(ID3D11Device* device, ID3D11DepthStencilState** depthStencilState)
 {
     D3D11_DEPTH_STENCIL_DESC depthStencilDesc {};
     depthStencilDesc.DepthEnable = true;
@@ -316,7 +316,7 @@ bool D3D11DynamicGraphics::CreateDepthStencilState(ID3D11Device* device, ID3D11D
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateDepthStencilView(ID3D11Device* device, ID3D11Texture2D* depthStencilBuffer, ID3D11DepthStencilView** depthStencilView)
+bool D3D11Graphics::CreateDepthStencilView(ID3D11Device* device, ID3D11Texture2D* depthStencilBuffer, ID3D11DepthStencilView** depthStencilView)
 {
     D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc {};
     depthStencilViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -332,7 +332,7 @@ bool D3D11DynamicGraphics::CreateDepthStencilView(ID3D11Device* device, ID3D11Te
     return true;
 }
 
-bool D3D11DynamicGraphics::CreateRasterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerState)
+bool D3D11Graphics::CreateRasterizerState(ID3D11Device* device, ID3D11RasterizerState** rasterizerState)
 {
     D3D11_RASTERIZER_DESC rasterizerDesc {};
     rasterizerDesc.AntialiasedLineEnable = false;
@@ -355,7 +355,7 @@ bool D3D11DynamicGraphics::CreateRasterizerState(ID3D11Device* device, ID3D11Ras
     return true;
 }
 
-void D3D11DynamicGraphics::SetViewport(ID3D11DeviceContext* deviceContext, int32_t width, int32_t height, float minDepth, float maxDepth, float topLeftX, float topLeftY)
+void D3D11Graphics::SetViewport(ID3D11DeviceContext* deviceContext, int32_t width, int32_t height, float minDepth, float maxDepth, float topLeftX, float topLeftY)
 {
     D3D11_VIEWPORT viewportDesc {};
     viewportDesc.Width = width;
@@ -368,7 +368,7 @@ void D3D11DynamicGraphics::SetViewport(ID3D11DeviceContext* deviceContext, int32
     deviceContext->RSSetViewports(1, &viewportDesc);
 }
 
-void D3D11DynamicGraphics::SetClearColor(const core::Color4f& color)
+void D3D11Graphics::SetClearColor(const core::Color4f& color)
 {
     m_clearColor[0] = color.r;
     m_clearColor[1] = color.g;
@@ -376,45 +376,50 @@ void D3D11DynamicGraphics::SetClearColor(const core::Color4f& color)
     m_clearColor[3] = color.a;
 }
 
-void D3D11DynamicGraphics::SetFillMode(FillMode fillMode)
+void D3D11Graphics::SetFillMode(FillMode fillMode)
 {
 }
 
-void D3D11DynamicGraphics::SetCullMode(CullMode cullMode)
+void D3D11Graphics::SetCullMode(CullMode cullMode)
 {
 }
 
-void D3D11DynamicGraphics::EnableBlend()
+void D3D11Graphics::EnableBlend()
 {
 }
 
-void D3D11DynamicGraphics::EnableDepthTest()
+void D3D11Graphics::EnableDepthTest()
 {
 }
 
-void D3D11DynamicGraphics::DisableBlend()
+void D3D11Graphics::DisableBlend()
 {
 }
 
-void D3D11DynamicGraphics::DisableDepthTest()
+void D3D11Graphics::DisableDepthTest()
 {
 }
 
-void D3D11DynamicGraphics::ClearColorBuffer()
+void D3D11Graphics::ClearColorBuffer()
 {
     m_deviceContext->ClearRenderTargetView(m_renderTargetView, m_clearColor);
 }
 
-void D3D11DynamicGraphics::ClearColorDepthBuffer()
+void D3D11Graphics::ClearColorDepthBuffer()
 {
     m_deviceContext->ClearRenderTargetView(m_renderTargetView, m_clearColor);
     m_deviceContext->ClearDepthStencilView(m_depthStencilView, D3D10_CLEAR_DEPTH, 1.0f, 0);
 }
 
-void D3D11DynamicGraphics::SwapBuffer()
+void D3D11Graphics::SwapBuffer()
 {
     m_swapChain->Present(m_presentSyncInterval, 0);
 }
+
+//VertexBuffer D3D11Graphics::CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+//{
+//    return VertexBuffer();
+//}
 
 } /* namespace graphics */
 } /* namespace tgon */

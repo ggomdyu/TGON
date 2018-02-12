@@ -113,7 +113,7 @@ inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
 #if _MSC_VER
     return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize , "%d %d %d %d", r, g, b, a);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
 #endif
 }
 

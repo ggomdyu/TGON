@@ -1,5 +1,5 @@
 /**
- * @filename    OpenGLDynamicGraphicsFwd.h
+ * @filename    OpenGLGraphicsFwd.h
  * @author      ggomdyu
  * @since       10/22/2017
  */

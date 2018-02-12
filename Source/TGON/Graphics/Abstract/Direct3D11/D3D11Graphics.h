@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#include "D3D11DynamicGraphicsFwd.h"
+#include "D3D11GraphicsFwd.h"
 
-#include "../IDynamicGraphics.h"
+#include "../Generic/GenericGraphics.h"
 
 #include "Core/Utility/Windows/COMPtr.h"
 
@@ -57,13 +57,13 @@ namespace graphics
 //    return nativePrimitiveTypeTable[static_cast<std::size_t>(primitiveType)];
 //}
 
-class D3D11DynamicGraphics :
-    public IDynamicGraphics
+class D3D11Graphics :
+    public GenericGraphics
 {
 /* @section Public constructor */
 public:
-    D3D11DynamicGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-    virtual ~D3D11DynamicGraphics() override;
+    D3D11Graphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    virtual ~D3D11Graphics() override;
 
 /* @section Public method */
 public:
@@ -78,6 +78,7 @@ public:
     virtual void ClearColorBuffer() final override;
     virtual void ClearColorDepthBuffer() final override;
     virtual void SwapBuffer() final override;
+    //virtual VertexBuffer CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) final override;
 
 /* @section Private method */
 private:

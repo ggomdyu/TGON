@@ -18,13 +18,15 @@ namespace graphics
 
 class OpenGLShader
 {
+/* @section Public constructor */
 public:
-    bool Initialize(const char* vsCodeStr, const char* fsCodeStr);
+    OpenGLShader(const char* vertexShaderCode, const char* fragmentShaderCode);
 
+/* @section Public method */
+public:
     void Use();
+    void Unuse();
     
-    void BindAttributeLocation(const char* name, std::size_t location);
-    int GetUniformLocation(const char* name) const;
     void SetParameter1f(const char* name, GLfloat f);
     void SetParameter2f(const char* name, GLfloat f1, GLfloat f2);
     void SetParameter3f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3);
@@ -37,6 +39,13 @@ public:
     void SetParameterMatrix4fv(int32_t location, const GLfloat* f);
     void SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler);
 
+    void BindAttributeLocation(const char* name, std::size_t location);
+    int GetUniformLocation(const char* name) const;
+
+    /* @brief   Checks the shader was loaded successfully. */
+    bool IsValid() const noexcept;
+
+/* @section Private method */
 private:
     /* @brief   Links shders to the program object. */
     bool LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader);
@@ -57,6 +66,7 @@ private:
 
     std::string GetShaderInfoLog(GLuint shader) const;
 
+/* @section Private variable */
 public:
     GLuint m_program;
 };

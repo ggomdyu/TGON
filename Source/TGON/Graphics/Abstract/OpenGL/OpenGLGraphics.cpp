@@ -1,13 +1,15 @@
 #include "PrecompiledHeader.pch"
 
-#include "OpenGLDynamicGraphics.h"
+#include "OpenGLGraphics.h"
 #include "OpenGLContext.h"
 
 #include "../GraphicsType.h"
+#include "../VertexBuffer.h"
+#include "../Generic/GenericVertexBuffer.h"
 
 #include "Core/Math/Color.h"
-#include "Graphics/RHI/GraphicsType.h"
 
+#include <cassert>
 #include <GL/glew.h>
 #if BOOST_OS_WINDOWS
 #elif BOOST_OS_MACOS
@@ -22,68 +24,73 @@ namespace tgon
 namespace graphics
 {
 
-OpenGLDynamicGraphics::OpenGLDynamicGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
+OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
     m_context(window)
 {
     this->SetClearColor(videoMode.clearColor);
 }
 
-OpenGLDynamicGraphics::~OpenGLDynamicGraphics()
+OpenGLGraphics::~OpenGLGraphics()
 {
 }
 
-void OpenGLDynamicGraphics::SetClearColor(const core::Color4f& color)
+void OpenGLGraphics::SetClearColor(const core::Color4f& color)
 {
     glClearColor(color.r, color.g, color.b, color.a);
 }
 
-void OpenGLDynamicGraphics::SetFillMode(FillMode fillMode)
+void OpenGLGraphics::SetFillMode(FillMode fillMode)
 {
     glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode));
 }
 
-void OpenGLDynamicGraphics::SetCullMode(CullMode cullMode)
+void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
     glFrontFace(ConvertCullModeToNative(cullMode));
 }
 
-void OpenGLDynamicGraphics::EnableBlend()
+void OpenGLGraphics::EnableBlend()
 {
     glEnable(GL_BLEND);
 }
 
-void OpenGLDynamicGraphics::EnableDepthTest()
+void OpenGLGraphics::EnableDepthTest()
 {
     glEnable(GL_DEPTH_TEST);
 }
 
-void OpenGLDynamicGraphics::DisableBlend()
+void OpenGLGraphics::DisableBlend()
 {
     glDisable(GL_BLEND);
 }
 
-void OpenGLDynamicGraphics::DisableDepthTest()
+void OpenGLGraphics::DisableDepthTest()
 {
     glDisable(GL_DEPTH_TEST);
 }
 
-void OpenGLDynamicGraphics::ClearColorBuffer()
+void OpenGLGraphics::ClearColorBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OpenGLDynamicGraphics::ClearColorDepthBuffer()
+void OpenGLGraphics::ClearColorDepthBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLDynamicGraphics::SwapBuffer()
+void OpenGLGraphics::SwapBuffer()
 {
 #if BOOST_OS_WINDOWS
     ::SwapBuffers(m_context.dcHandle);
 #else
     CGLFlushDrawable([m_context->context CGLContextObj]);
 #endif
+}
+
+std::shared_ptr<VertexBuffer> OpenGLGraphics::CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+{
+    return std::make_shared<VertexBuffer>(data, dataBytes, isDynamicUsage, vertexBufferDescs);
 }
 
 } /* namespace graphics */
