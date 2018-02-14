@@ -24,7 +24,7 @@ class TGON_API Object :
     public ICloneable
 {
 public:
-    TGON_RUNTIME_OBJECT(Object);
+    TGON_RUNTIME_OBJECT(Object)
 
 /* @section Public constructor */
 public:

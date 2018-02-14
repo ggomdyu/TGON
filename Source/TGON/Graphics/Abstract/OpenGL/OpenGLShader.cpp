@@ -124,6 +124,11 @@ void OpenGLShader::SetParameterSampler(int32_t location, int textureSlot, std::s
     glUniform1i(location, sampler);
 }
 
+bool OpenGLShader::IsValid() const noexcept
+{
+    return m_program;
+}
+
 bool OpenGLShader::LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader)
 {
     // Creates an empty program object.

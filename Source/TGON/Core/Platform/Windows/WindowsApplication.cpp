@@ -1,9 +1,10 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Application.h"
-#include "../ApplicationType.h"
+#include "WindowsApplication.h"
+
 #include "../Window.h"
 #include "../WindowType.h"
+#include "../Generic/GenericApplicationType.h"
 
 #include <Windows.h>
 
@@ -26,26 +27,21 @@ bool RegisterWindowClass()
     wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
     wcex.hInstance = GetModuleHandle(nullptr);
-    wcex.lpfnWndProc = Application::OnHandleMessage;
+    wcex.lpfnWndProc = WindowsApplication::OnHandleMessage;
 
     return RegisterClassExW(&wcex) != 0;
 }
 
 } /* namespace*/
 
-Application::Application(const WindowStyle& windowStyle)
+WindowsApplication::WindowsApplication(const WindowStyle& windowStyle)
 {
     RegisterWindowClass();
 
-    this->Initialize(windowStyle);
-}
-
-void Application::Initialize(const WindowStyle& windowStyle)
-{
     m_mainWindow = std::make_shared<Window>(windowStyle);
 }
 
-void Application::MessageLoop()
+void WindowsApplication::MessageLoop()
 {
     MSG msg {};
     while (msg.message != WM_QUIT)
@@ -63,7 +59,7 @@ void Application::MessageLoop()
     this->OnWillTerminate();
 }
 
-void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
+void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
 {
     static constexpr const LONG nativeMessageBoxIconTypeTable[2] =
     {
@@ -76,7 +72,7 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     ::MessageBoxA(nullptr, message, title, nativeMessageBoxIconTypeTable[static_cast<int>(messageBoxType)] | MB_OK);
 }
 
-LRESULT CALLBACK Application::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
     Window* window = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (window)
@@ -87,7 +83,7 @@ LRESULT CALLBACK Application::OnHandleMessage(HWND wndHandle, UINT message, WPAR
     return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
-void Application::Terminate()
+void WindowsApplication::Terminate()
 {
     ::PostQuitMessage(0);
 }

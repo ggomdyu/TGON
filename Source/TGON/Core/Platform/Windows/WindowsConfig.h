@@ -10,6 +10,7 @@
 #   define NOMINMAX
 #endif
 
+#define TGON_PLATFORM_NAME Windows
 #define TGON_PLATFORM_WINDOWS 1
 #define TGON_USING_LITTLE_ENDIAN 1
 #define TGON_USING_IEEE_754 1

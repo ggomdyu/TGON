@@ -30,7 +30,14 @@ void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool i
     int index = 0;
     for (auto& vertexBufferDesc : vertexBufferDescs)
     {
-        m_vertexBufferDesc[index++] = ConvertVertexBufferDescToNative(vertexBufferDesc);
+        m_vertexBufferDesc[index++] = OpenGLVertexBufferDesc{
+            static_cast<GLint>(vertexBufferDesc.attribute),
+            static_cast<GLint>(vertexBufferDesc.dimension),
+            static_cast<GLenum>(vertexBufferDesc.type),
+            static_cast<GLboolean>(vertexBufferDesc.normalized),
+            static_cast<GLsizei>(vertexBufferDesc.stride),
+            reinterpret_cast<const void*>(vertexBufferDesc.offset)
+        };//ConvertVertexBufferDescToNative(vertexBufferDesc);
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
@@ -40,12 +47,14 @@ void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool i
 void OpenGLVertexBuffer::Use()
 {
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
+    auto err = glGetError();
 
     for (int i = 0; i < m_vertexBufferDesc.size(); ++i)
     {
         const auto& vertexBufferDesc = m_vertexBufferDesc[i];
 
         glEnableVertexAttribArray(i);
+        err = glGetError();
         glVertexAttribPointer(
             vertexBufferDesc.attribute,
             vertexBufferDesc.dimension,
@@ -54,6 +63,7 @@ void OpenGLVertexBuffer::Use()
             vertexBufferDesc.stride,
             vertexBufferDesc.offset
         );
+        err = glGetError();
     }
 }
 

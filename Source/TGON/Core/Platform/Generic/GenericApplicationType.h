@@ -1,5 +1,5 @@
 /**
- * @filename    ApplicationType.h
+ * @filename    GenericApplicationType.h
  * @author      ggomdyu
  * @since       03/20/2016
  */

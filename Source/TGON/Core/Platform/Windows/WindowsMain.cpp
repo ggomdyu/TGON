@@ -18,12 +18,12 @@ namespace tgon
 namespace core
 {
 
-extern std::shared_ptr<Application> MakeApplication();
+extern std::shared_ptr<GenericApplication> MakeApplication();
 
 namespace
 {
 
-std::shared_ptr<Application> g_application;
+std::shared_ptr<GenericApplication> g_application;
 
 } /* namespace */
 } /* namespace core */
