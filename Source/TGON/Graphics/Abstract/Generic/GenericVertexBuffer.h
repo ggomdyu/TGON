@@ -32,6 +32,7 @@ public:
     virtual void Use() = 0;
     virtual void Unuse() = 0;
 
+    virtual bool IsValid() const noexcept = 0;
     bool IsDynamicUsage() const noexcept;
 
 /* @section Protected variable */

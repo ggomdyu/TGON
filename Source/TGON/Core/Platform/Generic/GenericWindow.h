@@ -25,7 +25,6 @@ namespace core
 {
 
 class TGON_API GenericWindow :
-    private boost::noncopyable,
     public Object
 {
 public:
@@ -34,10 +33,17 @@ public:
 /* @section Public constructor */
 public:
     GenericWindow() noexcept;
+    GenericWindow(const GenericWindow&) = default;
+    GenericWindow(GenericWindow&&) = default;
 
 /* @section Public destructor */
 public:
     virtual ~GenericWindow() = 0;
+
+/* @section Public operator */
+public:
+    GenericWindow& operator=(const GenericWindow&) = default;
+    GenericWindow& operator=(GenericWindow&&) = default;
 
 /* @section Public method */
 public:
@@ -62,18 +68,13 @@ public:
     virtual void GetTitle(char* destStr) const = 0;
     virtual float GetTransparency() const = 0;
     virtual const void* GetNativeWindow() const = 0;
-    virtual void* GetNativeWindow();
+    void* GetNativeWindow();
     virtual bool HasCaption() const = 0;
     virtual bool IsResizable() const = 0;
     virtual bool IsMaximized() const = 0;
     virtual bool IsMinimized() const = 0;
     virtual bool IsTopMost() const = 0;
     bool IsClosed() const noexcept;
-
-#if BOOST_OS_WINDOWS
-    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-#elif BOOST_OS_MACOS
-#endif
 
     Delegate<void(int32_t, int32_t)> OnWindowMove;
     Delegate<void(int32_t, int32_t)> OnWindowResize;
@@ -86,20 +87,9 @@ public:
     Delegate<void()> OnWindowGetFocus;
     Delegate<void()> OnWindowLoseFocus;
 
-/* @section Private method */
-private:
-#if BOOST_OS_WINDOWS
-    void SetUserData(void* data);
-#endif
-
 /* @section Protected variable */
 protected:
     bool m_isClosed;
-
-#if BOOST_OS_WINDOWS
-    HWND m_wndHandle;
-    bool m_isDwmCompositionEnabled;
-#endif
 };
 
 } /* namespace core */

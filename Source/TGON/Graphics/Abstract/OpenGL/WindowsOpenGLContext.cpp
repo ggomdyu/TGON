@@ -107,7 +107,7 @@ HGLRC MakeNewGLRC(HDC dcHandle)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window) :
+OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window) :
     wndHandle(reinterpret_cast<HWND>(window->GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {

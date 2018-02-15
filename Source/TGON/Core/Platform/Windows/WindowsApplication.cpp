@@ -3,7 +3,7 @@
 #include "WindowsApplication.h"
 
 #include "../Window.h"
-#include "../WindowType.h"
+#include "../Generic/GenericWindowType.h"
 #include "../Generic/GenericApplicationType.h"
 
 #include <Windows.h>
@@ -38,7 +38,7 @@ WindowsApplication::WindowsApplication(const WindowStyle& windowStyle)
 {
     RegisterWindowClass();
 
-    m_mainWindow = std::make_shared<Window>(windowStyle);
+    m_rootWindow = std::make_shared<Window>(windowStyle);
 }
 
 void WindowsApplication::MessageLoop()

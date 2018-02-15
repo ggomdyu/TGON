@@ -33,6 +33,8 @@ public:
     virtual void Use() final override;    
     virtual void Unuse() final override;
 
+    virtual bool IsValid() const noexcept final override;
+
 /* @section Private method */
 private:
     GLuint GenerateBuffer() const;

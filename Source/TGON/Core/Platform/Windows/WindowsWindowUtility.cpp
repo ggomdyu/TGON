@@ -3,7 +3,7 @@
 #include "WindowsWindowUtility.h"
 
 #include "Core/Debug/Log.h"
-#include "Core/Platform/WindowType.h"
+#include "Core/Platform/Generic/GenericWindowType.h"
 #include "Core/String/Encoding.h"
 
 #include <cassert>

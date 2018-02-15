@@ -1,12 +1,12 @@
 /**
- * @filename    MacOSWindow.h
+ * @filename    WindowsWindowWindow.h
  * @author      ggomdyu
  * @since       01/09/2016
  * @brief       The platform specific window class implementation.
  */
 
 #pragma once
-#include "MacOSWindowFwd.h"
+#include "WindowsWindowFwd.h"
 
 #include "../Generic/GenericWindow.h"
 
@@ -15,25 +15,25 @@ namespace tgon
 namespace core
 {
 
-class TGON_API MacOSWindow :
+class TGON_API WindowsWindow :
     public GenericWindow
 {
 public:
-    TGON_RUNTIME_OBJECT(MacOSWindow)
+    TGON_RUNTIME_OBJECT(WindowsWindow)
 
 /* @section Public constructor */
 public:
-    MacOSWindow() = default;
-    explicit MacOSWindow(const WindowStyle& windowStyle);
-    MacOSWindow(MacOSWindow&& rhs) noexcept;
+    WindowsWindow() = default;
+    explicit WindowsWindow(const WindowStyle& windowStyle);
+    WindowsWindow(WindowsWindow&& rhs) noexcept;
 
 /* @section Public operator */
 public:
-    MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
+    WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
 
 /* @section Public destructor */
 public:
-    virtual ~MacOSWindow() override;
+    virtual ~WindowsWindow() override;
 
 /* @section Public method */
 public:
@@ -42,11 +42,12 @@ public:
     virtual void Close() final override;
     virtual void Maximize() final override;
     virtual void Minimize() final override;
+    virtual void BringToFront() final override;
+    void Flash();
 
     virtual void SetPosition(int32_t x, int32_t y) final override;
     virtual void SetSize(int32_t width, int32_t height) final override;
     virtual void SetTitle(const char* title) final override;
-    virtual void SetFullScreen(bool isFullScreen) final override;
     virtual void SetTopMost(bool setTopMost) final override;
     virtual void SetTransparency(float transparency) final override;
     virtual void GetPosition(int32_t* x, int32_t* y) const final override;
@@ -60,14 +61,20 @@ public:
     virtual bool IsMinimized() const final override;
     virtual bool IsTopMost() const final override;
 
+    LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
+    
     using GenericWindow::GetPosition;
     using GenericWindow::GetSize;
     using GenericWindow::GetNativeWindow;
 
+/* @section Private method */
+private:
+    void SetUserData(void* data);
+
 /* @section Protected variable */
 protected:
-    NSWindow* m_nsWindow;
-    WindowDelegate* m_windowDelegate;
+    HWND m_wndHandle;
+    bool m_isDwmCompositionEnabled;
 };
 
 } /* namespace core */

@@ -64,6 +64,7 @@ void MacOSWindow::Close()
 
     m_nsWindow = nullptr;
     m_windowDelegate = nullptr;
+    m_isClosed = true;
 }
 
 void MacOSWindow::Maximize()

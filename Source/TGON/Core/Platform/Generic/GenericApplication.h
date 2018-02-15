@@ -36,8 +36,8 @@ namespace core
 {
 
 class TGON_API GenericApplication :
-    public Object,
-    private boost::noncopyable
+    private boost::noncopyable,
+    public Object
 {
 public:
     TGON_RUNTIME_OBJECT(GenericApplication)

@@ -7,6 +7,8 @@
 #pragma once
 #include "../Generic/GenericApplication.h"
 
+#include "WindowsApplicationFwd.h"
+
 namespace tgon
 {
 namespace core

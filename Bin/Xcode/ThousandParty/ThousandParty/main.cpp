@@ -5,7 +5,7 @@
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
 #include "Core/Platform/Window.h"
-#include "Core/Platform/WindowType.h"
+#include "Core/Platform/Generic/GenericWindowType.h"
 #include "Core/Platform/Time.h"
 #include "Core/Drawing/Bitmap.h"
 #include "Core/Debug/Log.h"
@@ -131,7 +131,10 @@ public:
         };
 
         vb = new graphics::VertexBuffer(v, true, viad);
-
+        if (vb->IsValid() == false)
+        {
+            return;
+        }
 
         // Create INDEX BUFFER
         glGenBuffers(1, &m_indexBuffer);
@@ -143,19 +146,16 @@ public:
         glGenVertexArrays(1, &m_vertexArray);
         glBindVertexArray(m_vertexArray);
         {
-//            vb->BeginScene();
+            vb->Use();
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
         }
         glBindVertexArray(0);
-//
-//        shader = new graphics::OpenGLShader();
-//        bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
-//        if (ss)
-//        {
-//            int n = 3;
-//        }
 
-        //auto e = glGetError();
+        shader = new graphics::OpenGLShader(g_positionColorVert, g_positionColorFrag);
+        if (shader->IsValid() == false)
+        {
+            return;
+        }
     }
 
     ~ThousandParty()
@@ -164,8 +164,7 @@ public:
         glBindVertexArray(0);
         glDeleteVertexArrays(1, &m_vertexArray);
 
-        delete shader;
-//        delete vb;
+        delete vb;
     }
 
     graphics::VertexBuffer* vb;
@@ -194,17 +193,16 @@ public:
         
         MVP = M2 * V2 * P2;
         
+        glClear(GL_COLOR_BUFFER_BIT);
+        shader->Use();
+        {
+            shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
 
-//        glClear(GL_COLOR_BUFFER_BIT);
-//        shader->BeginScene();
-//        {
-//            shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
-//
-//            glBindVertexArray(m_vertexArray);
-//            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-//            glBindVertexArray(0);
-//        }
-//        shader->EndScene();
+            glBindVertexArray(m_vertexArray);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            glBindVertexArray(0);
+        }
+        shader->Unuse();
 
         FindModule<game::GraphicsModule>()->GetGraphics()->SwapBuffer();
     }

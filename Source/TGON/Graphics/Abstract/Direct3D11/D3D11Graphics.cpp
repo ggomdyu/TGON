@@ -2,7 +2,7 @@
 
 #include "D3D11Graphics.h"
 
-#include "../GraphicsType.h"
+#include "../Generic/GenericGraphicsType.h"
 
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Window.h"
