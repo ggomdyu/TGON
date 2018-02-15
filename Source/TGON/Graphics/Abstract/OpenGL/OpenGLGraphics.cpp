@@ -3,8 +3,8 @@
 #include "OpenGLGraphics.h"
 #include "OpenGLContext.h"
 
-#include "../GraphicsType.h"
 #include "../VertexBuffer.h"
+#include "../Generic/GenericGraphicsType.h"
 #include "../Generic/GenericVertexBuffer.h"
 
 #include "Core/Math/Color.h"
@@ -24,8 +24,8 @@ namespace tgon
 namespace graphics
 {
 
-OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode) :
-    m_context(window)
+OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window) :
+    m_context(videoMode, window)
 {
     this->SetClearColor(videoMode.clearColor);
 }
@@ -84,7 +84,7 @@ void OpenGLGraphics::SwapBuffer()
 #if BOOST_OS_WINDOWS
     ::SwapBuffers(m_context.dcHandle);
 #else
-    CGLFlushDrawable([m_context->context CGLContextObj]);
+    CGLFlushDrawable([m_context.context CGLContextObj]);
 #endif
 }
 

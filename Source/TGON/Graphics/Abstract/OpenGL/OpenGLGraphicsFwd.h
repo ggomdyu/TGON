@@ -11,7 +11,7 @@ namespace tgon
 namespace core
 {
 
-class Window;
+class GenericWindow;
 
 } /* namespace core */
 

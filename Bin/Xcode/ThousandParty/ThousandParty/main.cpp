@@ -4,7 +4,6 @@
 
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
-#include "Core/Platform/ApplicationType.h"
 #include "Core/Platform/Window.h"
 #include "Core/Platform/WindowType.h"
 #include "Core/Platform/Time.h"
@@ -15,27 +14,31 @@
 #include "Core/String/FixedStringUtility.h"
 #include "Core/String/StringView.h"
 #include "Core/Utility/InstantiateCounter.h"
-#include "Core/Utility/AutoCast.h"
+#include "Core/Utility/Cast.h"
 #include "Core/Math/Mathematics.h"
 #include "Core/Math/Vector3.h"
 #include "Core/Math/Color.h"
 #include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Extent.h"
 #include "Core/Hash/UUID.h"
-#include "Graphics/RHI/RHIType.h"
-#include "Graphics/RHI/IDynamicRHI.h"
-#include "Graphics/RHI/OpenGL/OpenGLShader.h"
-#include "Graphics/RHI/OpenGL/OpenGLShaderCode.h"
+#include "Graphics/Abstract/Generic/GenericGraphicsType.h"
+#include "Graphics/Abstract/Generic/GenericGraphics.h"
+#include "Graphics/Abstract/OpenGL/OpenGLShader.h"
+#include "Graphics/Abstract/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/Renderer.h"
 #include "Game/Module/GraphicsModule.h"
 #include "Game/Module/TimeModule.h"
-#include "Graphics/RHI/VertexBuffer.h"
+#include "Graphics/Abstract/VertexBuffer.h"
 
 //#include <glm/glm/matrix.hpp>
 //#include <glm/glm/common.hpp>
 //#include <d3d9.h>
 //#include <glm/glm/gtx/transform.hpp>
 //#include <DirectXMath.h>
+
+#define CONCAT(a, b) a##b
+#define STRING_2(a) #a
+#define STRING(a) STRING_2(a)
 
 using namespace tgon;
 
@@ -84,8 +87,7 @@ public:
                 videoMode.enableMultiSampling = true;
             }
             return videoMode;
-        }()),
-        bitmap("E:/Users/ggomdyu/Desktop/image.png")
+        }())
     {
         struct V3F_C4B
         {
@@ -106,29 +108,29 @@ public:
             0,1,2,0,2,3
         };
 
-        std::initializer_list<graphics::VertexInputAttributeDescription> viad =
+        std::initializer_list<graphics::VertexBufferDesc> viad =
         {
-            graphics::VertexInputAttributeDescription
+            graphics::VertexBufferDesc
             {
-                graphics::VertexAttributeType::Position,
+                graphics::VertexAttributeIndex::Position,
                 3,
-                graphics::VertexType::Float,
+                graphics::VertexFormatType::Float,
                 false,
                 sizeof(V3F_C4B),
                 offsetof(V3F_C4B, position),
             },
-            graphics::VertexInputAttributeDescription
+            graphics::VertexBufferDesc
             {
-                graphics::VertexAttributeType::Color,
+                graphics::VertexAttributeIndex::Color,
                 4,
-                graphics::VertexType::Float,
+                graphics::VertexFormatType::Float,
                 true,
                 sizeof(V3F_C4B),
                 offsetof(V3F_C4B, color),
             },
         };
 
-        vb = new graphics::VertexBuffer(v, viad);
+        vb = new graphics::VertexBuffer(v, true, viad);
 
 
         // Create INDEX BUFFER
@@ -141,17 +143,17 @@ public:
         glGenVertexArrays(1, &m_vertexArray);
         glBindVertexArray(m_vertexArray);
         {
-            vb->BeginScene();
+//            vb->BeginScene();
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
         }
         glBindVertexArray(0);
-
-        shader = new graphics::OpenGLShader();
-        bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
-        if (ss)
-        {
-            int n = 3;
-        }
+//
+//        shader = new graphics::OpenGLShader();
+//        bool ss  = shader->Initialize(g_positionColorVert, g_positionColorFrag);
+//        if (ss)
+//        {
+//            int n = 3;
+//        }
 
         //auto e = glGetError();
     }
@@ -163,7 +165,7 @@ public:
         glDeleteVertexArrays(1, &m_vertexArray);
 
         delete shader;
-        delete vb;
+//        delete vb;
     }
 
     graphics::VertexBuffer* vb;
@@ -179,30 +181,10 @@ public:
     {
         SuperType::OnDidLaunch();
     }
-    
-    core::Bitmap bitmap;
 
     virtual void OnUpdate() override
     {
         SuperType::OnUpdate();
-
-        HDC hdc = GetDC((HWND)GetMainWindow()->GetNativeWindow());
-        int index = 0;
-        for (int y = 0; y < bitmap.GetHeight(); ++y)
-        {
-            for (int x = 0; x < bitmap.GetWidth(); ++x)
-            {
-                const auto& bit = bitmap.GetBits();
-                index = (y* bitmap.GetWidth() + x)*4;
-                auto r = bit[index];
-                auto g = bit[index+1];
-                auto b = bit[index+2];
-                SetPixel(hdc, x, y, RGB(r,g,b));
-            }
-        }
-        ReleaseDC((HWND)GetMainWindow()->GetNativeWindow(), hdc);
-
-        return;
 
         static float x = 0.0f;
         auto M2 = core::Matrix4x4::Translate(x, 0.0f, 0.0f);
@@ -213,34 +195,18 @@ public:
         MVP = M2 * V2 * P2;
         
 
-        glClear(GL_COLOR_BUFFER_BIT);
-        shader->BeginScene();
-        {
-            shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
+//        glClear(GL_COLOR_BUFFER_BIT);
+//        shader->BeginScene();
+//        {
+//            shader->SetParameterMatrix4fv("g_uMVP", &MVP[0][0]);
+//
+//            glBindVertexArray(m_vertexArray);
+//            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+//            glBindVertexArray(0);
+//        }
+//        shader->EndScene();
 
-            glBindVertexArray(m_vertexArray);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-            glBindVertexArray(0);
-        }
-        shader->EndScene();
-
-        /*
-        static float x = 0.0f;
-        static float y = 0.0f;
-
-        float newX = std::sin(x += 0.01);
-        float newY = std::sin(y += 0.01);
-
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBegin(GL_TRIANGLES);
-        glVertex2f(0.0 + newX, 0.5 + newY);
-        glVertex2f(-0.5 + newX, -0.5 + newY);
-        glVertex2f(0.5 + newX, -0.5 + newY);
-        glEnd();
-        glFinish();
-        */
-
-        FindModule<game::GraphicsModule>()->GetRHI()->SwapBuffer();
+        FindModule<game::GraphicsModule>()->GetGraphics()->SwapBuffer();
     }
 };
 TGON_DECLARE_APPLICATION(ThousandParty)

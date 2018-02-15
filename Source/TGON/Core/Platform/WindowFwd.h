@@ -14,11 +14,6 @@
 #   include <Windows.h>
 #endif
 
-#if BOOST_OS_MACOS
-@class NSWindow;
-@class WindowDelegate;
-#endif
-
 namespace tgon
 {
 namespace core

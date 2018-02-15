@@ -60,7 +60,7 @@ class OpenGLGraphics :
 {
 /* @section Public constructor */
 public:
-    OpenGLGraphics(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window);
     virtual ~OpenGLGraphics() override;
 
 /* @section Public method */

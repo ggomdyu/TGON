@@ -13,7 +13,7 @@ namespace tgon
 namespace core
 {
 
-class Window;
+class GenericWindow;
 
 } /*　namespace core */
 } /*　namespace tgon */
@@ -22,8 +22,8 @@ class Window;
 {
 }
 
-@property (readonly, assign) tgon::core::Window* window;
+@property (readonly, assign) tgon::core::GenericWindow* window;
 
-- (id)initWithWindow:(tgon::core::Window*)window;
+- (id)initWithWindow:(tgon::core::GenericWindow*)window;
 
 @end

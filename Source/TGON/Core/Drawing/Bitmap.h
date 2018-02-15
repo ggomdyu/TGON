@@ -101,7 +101,7 @@ public:
      * @brief                   Reads a image data from memory.
      * @param [in] imageFormat  The format of image
      * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataLen   The bytes of image data
+     * @param [in] srcDataBytes The bytes of image data
      */
     Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes);
     

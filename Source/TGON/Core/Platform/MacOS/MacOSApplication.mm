@@ -1,8 +1,9 @@
 #import "PrecompiledHeader.pch"
 
-#import "../Window.h"
-#import "../Application.h"
-#import "../ApplicationType.h"
+#import "MacOSWindow.h"
+#import "MacOSApplication.h"
+
+#import "../Generic/GenericApplicationType.h"
 
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSEvent.h>
@@ -13,17 +14,12 @@ namespace tgon
 namespace core
 {
 
-Application::Application(const WindowStyle& windowStyle) :
-    m_mainWindow(std::make_shared<Window>(windowStyle))
+MacOSApplication::MacOSApplication(const WindowStyle& windowStyle) :
+    GenericApplication(std::make_shared<MacOSWindow>(windowStyle))
 {
 }
 
-void Application::Initialize(const WindowStyle& windowStyle)
-{
-    new (this) Application(windowStyle);
-}
-
-void Application::MessageLoop()
+void MacOSApplication::MessageLoop()
 {
     NSEvent* message = nil;
     while (true)
@@ -40,7 +36,7 @@ void Application::MessageLoop()
     }
 }
 
-void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const
+void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const
 {
     static constexpr const NSAlertStyle nativeNSAlertStyleArray[2] =
     {
@@ -55,12 +51,12 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     [alert runModal];
 }
 
-void Application::Terminate()
+void MacOSApplication::Terminate()
 {
     [NSApp terminate:nil];
 }
 
-void Application::OnHandleMessage(NSEvent* message)
+void MacOSApplication::OnHandleMessage(NSEvent* message)
 {
     NSEventType messageType = [message type];
     switch (messageType)

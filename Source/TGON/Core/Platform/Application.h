@@ -7,10 +7,17 @@
 #pragma once
 #include "Config.h"
 
-#include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/stringize.hpp>
+#if BOOST_OS_WINDOWS
+#   include "Windows/WindowsApplication.h"
+#elif BOOST_OS_MACOS
+#   import "MacOS/MacOSApplication.h"
+#elif BOOST_OS_ANDROID
+#   include "Android/AndroidApplication.h"
+#elif BOOST_OS_IOS
+#   import "IOS/IOSApplication.h"
+#endif
 
-#include BOOST_PP_STRINGIZE(BOOST_PP_CAT(TGON_PLATFORM_NAME, BOOST_PP_CAT(/, BOOST_PP_CAT(TGON_PLATFORM_NAME, Application.h))))
+#include <boost/preprocessor/cat.hpp>
 
 namespace tgon
 {

@@ -4,7 +4,7 @@
 
 #include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
-#include "Graphics/Abstract/GraphicsType.h"
+#include "Graphics/Abstract/Generic/GenericGraphicsType.h"
 
 #include <Windows.h>
 #include <GL/glew.h>

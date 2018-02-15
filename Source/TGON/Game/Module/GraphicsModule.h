@@ -13,13 +13,18 @@ namespace tgon
 {
 namespace core
 {
-class Window;
-}
+
+class GenericWindow;
+
+} /* namespace core */
+
 namespace graphics
 {
+
 class GenericGraphics;
 struct VideoMode;
-}
+
+} /* namespace graphics */
 
 namespace game
 {
@@ -32,7 +37,7 @@ public:
 
 /* @section Public constructor */
 public:
-    GraphicsModule(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode);
+    GraphicsModule(const graphics::VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window);
     virtual ~GraphicsModule() override;
 
 /* @section Public method */
@@ -42,7 +47,7 @@ public:
     const std::unique_ptr<graphics::GenericGraphics>& GetGraphics() const;
 
 private:
-    std::unique_ptr<graphics::GenericGraphics> MakeGraphics(const std::shared_ptr<core::Window>& window, const graphics::VideoMode& videoMode) const;
+    std::unique_ptr<graphics::GenericGraphics> MakeGraphics(const graphics::VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window) const;
 
 /* @section Private variable */
 private:

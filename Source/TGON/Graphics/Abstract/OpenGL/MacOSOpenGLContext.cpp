@@ -3,7 +3,7 @@
 #import "OpenGLContext.h"
 
 #import "Core/Platform/Window.h"
-#import "Graphics/RHI/RHIType.h"
+#import "Graphics/Abstract/Generic/GenericGraphicsType.h"
 
 #import <GL/glew.h>
 #import <AppKit/NSOpenGL.h>
@@ -55,7 +55,7 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<core::Window>& window)
+OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window)
 {
     // Find a suitable pixel format.
     {

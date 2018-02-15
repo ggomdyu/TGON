@@ -16,7 +16,7 @@ namespace tgon
 namespace graphics
 {
 
-constexpr OpenGLVertexBufferDesc ConvertVertexBufferDescToNative(VertexBufferDesc vertexBufferDesc)
+inline OpenGLVertexBufferDesc ConvertVertexBufferDescToNative(VertexBufferDesc vertexBufferDesc)
 {
     return OpenGLVertexBufferDesc{
         static_cast<GLint>(vertexBufferDesc.attribute), 

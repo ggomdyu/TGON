@@ -32,6 +32,8 @@
 		FDD7C8CA1F654342000EB7C8 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = main.cpp; sourceTree = "<group>"; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FDEA01C920356DB800135040 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../../Source/ThirdParty/Bin/Debug/x86_64/libz.a; sourceTree = "<group>"; };
+		FDEA01CB20356DC800135040 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../../Source/ThirdParty/Bin/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
 		FDFECB801F757DDE007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -79,6 +81,8 @@
 		FDD7C8EE1F6586D5000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDEA01CB20356DC800135040 /* libpng16.a */,
+				FDEA01C920356DB800135040 /* libz.a */,
 				FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */,
 				FDFECB801F757DDE007AC1AB /* OpenGL.framework */,
 				FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */,

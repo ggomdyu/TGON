@@ -15,8 +15,8 @@
 #endif
 
 #if BOOST_OS_MACOS
-    @class NSOpenGLPixelFormat;
-    @class NSOpenGLContext;
+@class NSOpenGLPixelFormat;
+@class NSOpenGLContext;
 #endif
 
 namespace tgon
@@ -24,7 +24,7 @@ namespace tgon
 namespace core
 {
 
-class Window;
+class GenericWindow;
 
 } /* namespace core */
 

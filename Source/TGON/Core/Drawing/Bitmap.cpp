@@ -45,10 +45,10 @@ bool ResolvePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint
     {
         struct ImageSource
         {
-            uint8_t* data;
             int size;
+            const uint8_t* data;
             int offset;
-        } imageSource{(unsigned char*)srcData, srcDataLen, 0};
+        } imageSource{static_cast<int>(srcDataLen), (const uint8_t*)srcData, 0};
         
         png_set_read_fn(pngStruct, &imageSource, [](png_structp pngStruct, png_bytep data, png_size_t dataLen)
         {
@@ -161,8 +161,7 @@ Bitmap::Bitmap(const std::string& filePath) :
     m_pixelFormat(PixelFormat::Unknown)
 {
     // TODO: Implement Engine file loader
-    FILE* file = nullptr;
-    fopen_s(&file, filePath.c_str(), "rb");
+    FILE* file = fopen(filePath.c_str(), "rb");
     {
         if (file == nullptr)
         {

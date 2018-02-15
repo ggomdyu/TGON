@@ -8,6 +8,8 @@
 #pragma once
 #include "GenericVertexBufferType.h"
 
+#include <initializer_list>
+
 namespace tgon
 {
 namespace graphics

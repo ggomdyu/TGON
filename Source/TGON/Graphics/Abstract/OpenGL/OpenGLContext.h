@@ -19,7 +19,7 @@ struct OpenGLContext
 {
 /* @section Public constructor */
 public:
-    OpenGLContext(const std::shared_ptr<core::Window>& window);
+    OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window);
     ~OpenGLContext();
 
 /* @section Public method */

@@ -45,6 +45,7 @@ public:
 /* @section Public constructor */
 public:
     GenericApplication() = default;
+    GenericApplication(const std::shared_ptr<GenericWindow>& window);
 
 /* @section Public destructor */
 public:
@@ -59,20 +60,17 @@ public:
     virtual void ShowMessageBox(const char* title, const char* message) const;
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const = 0;
 
-#if BOOST_OS_MACOS
-    void OnHandleMessage(NSEvent* message);
-#endif
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}
-    virtual void OnWillCloseWindow(const std::shared_ptr<Window>&) {}
-    virtual void OnDidCloseWindow(const std::shared_ptr<Window>&) {}
+    virtual void OnWillCloseWindow(const std::shared_ptr<GenericWindow>&) {}
+    virtual void OnDidCloseWindow(const std::shared_ptr<GenericWindow>&) {}
     virtual void OnUpdate() {}
 
-    const std::shared_ptr<Window>& GetMainWindow() const noexcept;
+    const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
 
 protected:
-    std::shared_ptr<Window> m_mainWindow;
+    std::shared_ptr<GenericWindow> m_rootWindow;
 };
 
 } /* namespace core */

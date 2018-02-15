@@ -8,6 +8,11 @@ namespace tgon
 namespace core
 {
 
+GenericApplication::GenericApplication(const std::shared_ptr<GenericWindow>& rootWindow) :
+    m_rootWindow(rootWindow)
+{
+}
+
 void GenericApplication::ShowMessageBox(const char* message) const
 {
     this->ShowMessageBox("", message);
@@ -23,9 +28,9 @@ void GenericApplication::ShowMessageBox(const char* title, const char* message) 
     this->ShowMessageBox(title, message, MessageBoxIconType::Informational);
 }
 
-const std::shared_ptr<class Window>& GenericApplication::GetMainWindow() const noexcept
+const std::shared_ptr<GenericWindow>& GenericApplication::GetRootWindow() const noexcept
 {
-    return m_mainWindow;
+    return m_rootWindow;
 }
 
 } /* namespace core */

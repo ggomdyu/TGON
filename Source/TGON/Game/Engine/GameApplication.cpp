@@ -2,7 +2,7 @@
 
 #include "GameApplication.h"
 
-#include "Graphics/Abstract/GraphicsType.h"
+#include "Graphics/Abstract/Generic/GenericGraphicsType.h"
 #include "Game/Module/TimeModule.h"
 #include "Game/Module/GraphicsModule.h"
 
@@ -20,7 +20,7 @@ GameApplication::GameApplication(const core::WindowStyle& windowStyle) :
 GameApplication::GameApplication(const core::WindowStyle& windowStyle, const graphics::VideoMode& videoMode) :
     core::Application(windowStyle),
     m_timeModule(std::make_shared<TimeModule>()),
-    m_graphicsModule(std::make_shared<GraphicsModule>(GetMainWindow(), videoMode))
+    m_graphicsModule(std::make_shared<GraphicsModule>(videoMode, GetRootWindow()))
 {
 }
 

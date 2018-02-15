@@ -87,7 +87,7 @@ NSWindow* MakeNativeWindow(const WindowStyle& windowStyle)
     [window makeKeyAndOrderFront:[NSApplication sharedApplication]];
     [window setBackgroundColor:[NSColor whiteColor]];
     [window setReleasedWhenClosed:YES];
-    [window setLevel:NSMainMenuWindowLevel + 1];
+    [window setLevel:NSMainMenuWindowLevel];
 
     PreApplyWindowStyle(windowStyle, window);
     PostApplyWindowStyle(windowStyle, window);
