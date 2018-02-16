@@ -4,7 +4,7 @@
 #import "MacOSWindowUtility.h"
 #import "MacOSWindowDelegate.h"
 
-#import "../WindowType.h"
+#import "../Generic/GenericWindowType.h"
 
 #import <memory>
 #import <cstdint>

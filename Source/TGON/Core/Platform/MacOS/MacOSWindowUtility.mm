@@ -2,7 +2,7 @@
 
 #import "MacOSWindowUtility.h"
 
-#import "../WindowType.h"
+#import "../Generic/GenericWindowType.h"
 
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSScreen.h>

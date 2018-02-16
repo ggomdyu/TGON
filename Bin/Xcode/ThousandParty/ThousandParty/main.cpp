@@ -10,6 +10,7 @@
 #include "Core/Drawing/Bitmap.h"
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Screen.h"
+#include "Core/Platform/ScreenType.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
 #include "Core/String/StringView.h"
@@ -68,9 +69,13 @@ public:
         {
             core::WindowStyle windowStyle;
             {
-                windowStyle.width = 1200;
-                windowStyle.height = 1200;
-                windowStyle.showMiddle = true;
+                auto primaryScreen = core::GetPrimaryScreen();
+
+                float aspectRatio = (float)primaryScreen.width / (float)primaryScreen.height;
+
+                windowStyle.width = 350 * aspectRatio;
+                windowStyle.height = 350 * aspectRatio;
+                windowStyle.showMiddle = false;
                 windowStyle.title = u8"ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
