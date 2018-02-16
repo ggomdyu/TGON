@@ -39,11 +39,12 @@ MacOSWindow::~MacOSWindow()
 
 MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
 {
-    m_nsWindow = rhs.m_nsWindow;
-    m_windowDelegate = rhs.m_windowDelegate;
+	if (this == &rhs)
+	{
+		return *this;
+	}
 
-    rhs.m_nsWindow = nullptr;
-    rhs.m_windowDelegate = nullptr;
+    new (this) MacOSWindow(std::move(rhs));
 
     return *this;
 }

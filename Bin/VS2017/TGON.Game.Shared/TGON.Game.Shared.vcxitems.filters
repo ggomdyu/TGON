@@ -54,9 +54,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Module\TimeModule.cpp">
       <Filter>Source\Game\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Module\IModule.cpp">
-      <Filter>Source\Game\Module</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Module\GraphicsModule.cpp" />
   </ItemGroup>
 </Project>

@@ -16,18 +16,6 @@ namespace tgon
 namespace graphics
 {
 
-inline OpenGLVertexBufferDesc ConvertVertexBufferDescToNative(VertexBufferDesc vertexBufferDesc)
-{
-    return OpenGLVertexBufferDesc{
-        static_cast<GLint>(vertexBufferDesc.attribute), 
-        static_cast<GLint>(vertexBufferDesc.dimension), 
-        static_cast<GLenum>(vertexBufferDesc.type),
-        static_cast<GLboolean>(vertexBufferDesc.normalized),
-        static_cast<GLsizei>(vertexBufferDesc.stride),
-        reinterpret_cast<const void*>(vertexBufferDesc.offset)
-    };
-}
-
 constexpr GLenum ConvertVertexFormatTypeToNative(VertexFormatType vertexFormatType)
 {
     constexpr GLenum nativeVertexFormatTypeTable[] =
@@ -43,6 +31,18 @@ constexpr GLenum ConvertVertexFormatTypeToNative(VertexFormatType vertexFormatTy
     };
 
     return nativeVertexFormatTypeTable[static_cast<std::size_t>(vertexFormatType)];
+}
+
+inline OpenGLVertexBufferDesc ConvertVertexBufferDescToNative(VertexBufferDesc vertexBufferDesc)
+{
+    return OpenGLVertexBufferDesc{
+        static_cast<GLuint>(vertexBufferDesc.attribute), 
+        static_cast<GLint>(vertexBufferDesc.dimension), 
+        ConvertVertexFormatTypeToNative(vertexBufferDesc.type),
+        static_cast<GLboolean>(vertexBufferDesc.normalized),
+        static_cast<GLsizei>(vertexBufferDesc.stride),
+        reinterpret_cast<const void*>(vertexBufferDesc.offset)
+    };
 }
 
 } /* namespace graphics */

@@ -14,9 +14,6 @@
     <Filter Include="Sources\Core\Platform\Windows">
       <UniqueIdentifier>{1c4a5872-78c6-4bd6-819a-ca2106f15855}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Platform\Windows\Misc">
-      <UniqueIdentifier>{03e6c863-5c50-4883-8cb3-3f9288171283}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Core\Debug">
       <UniqueIdentifier>{fa95a123-10cc-45b0-a852-44279c2b4632}</UniqueIdentifier>
     </Filter>
@@ -31,17 +28,14 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\SharedComPtr.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\UniqueComPtr.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\AutoReleaseDC.h">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +56,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\Misc\MiniDump.cpp">
-      <Filter>Sources\Core\Platform\Windows\Misc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>

@@ -41,6 +41,11 @@ WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
 
 WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
 {
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
     new (this) WindowsWindow(std::move(rhs));
 
     return *this;
@@ -74,9 +79,6 @@ void WindowsWindow::Flash()
 
 void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 {
-    assert(x != nullptr);
-    assert(y != nullptr);
-
     ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
 
@@ -86,9 +88,6 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 
 void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
 {
-    assert(width != nullptr);
-    assert(height != nullptr);
-
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
 

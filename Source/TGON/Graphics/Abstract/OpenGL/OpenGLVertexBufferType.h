@@ -14,7 +14,7 @@ namespace graphics
 
 struct OpenGLVertexBufferDesc
 {
-    GLint attribute;
+    GLuint attribute;
     GLint dimension;
     GLenum type;
     GLboolean normalized;
