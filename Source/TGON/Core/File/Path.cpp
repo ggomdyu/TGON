@@ -61,8 +61,15 @@ TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destSt
 
     while (true)
     {
-        if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
-            srcStr[iterIndex] == DirectorySeparatorChar)
+        if (iterIndex <= 0)
+        {
+            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * srcStrLen);
+            destStr[srcStrLen] = '\0';
+
+            return srcStrLen;
+        }
+        else if (srcStr[iterIndex] == AltDirectorySeparatorChar || 
+                 srcStr[iterIndex] == DirectorySeparatorChar)
         {
             int32_t destStrLen = srcStrLen - (++iterIndex);
 
@@ -70,13 +77,6 @@ TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destSt
             destStr[destStrLen] = '\0';
 
             return destStrLen;
-        }
-        else if (iterIndex <= 0)
-        {
-            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * srcStrLen);
-            destStr[srcStrLen] = '\0';
-
-            return srcStrLen;
         }
         else
         {
@@ -103,19 +103,19 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrL
 
     while (true)
     {
-        if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
-            srcStr[iterIndex] == DirectorySeparatorChar)
+        if (iterIndex <= 0)
         {
-            int32_t destStrLen = (srcStrLen - (++iterIndex)) - extensionStrLen;
+            int32_t destStrLen = (srcStrLen - iterIndex) - extensionStrLen;
 
             memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * destStrLen);
             destStr[destStrLen] = '\0';
 
             return destStrLen;
         }
-        else if (iterIndex <= 0)
+        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcStr[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = (srcStrLen - iterIndex) - extensionStrLen;
+            int32_t destStrLen = (srcStrLen - (++iterIndex)) - extensionStrLen;
 
             memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * destStrLen);
             destStr[destStrLen] = '\0';
@@ -127,8 +127,6 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrL
             --iterIndex;
         }
     }
-
-    return 0;
 }
 
 TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, char* destStr)

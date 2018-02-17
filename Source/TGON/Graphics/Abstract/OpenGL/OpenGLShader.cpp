@@ -66,52 +66,52 @@ int OpenGLShader::GetUniformLocation(const char* name) const
     return glGetUniformLocation(m_program, name);
 }
 
-void OpenGLShader::SetParameter1f(const char* name, GLfloat f)
+void OpenGLShader::SetParameter1f(const char* name, float f)
 {
     this->SetParameter1f(this->GetUniformLocation(name), f);
 }
 
-void OpenGLShader::SetParameter2f(const char* name, GLfloat f1, GLfloat f2)
+void OpenGLShader::SetParameter2f(const char* name, float f1, float f2)
 {
     this->SetParameter2f(this->GetUniformLocation(name), f1, f2);
 }
 
-void OpenGLShader::SetParameter3f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3)
+void OpenGLShader::SetParameter3f(const char* name, float f1, float f2, float f3)
 {
     this->SetParameter3f(this->GetUniformLocation(name), f1, f2, f3);
 }
 
-void OpenGLShader::SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
+void OpenGLShader::SetParameter4f(const char* name, float f1, float f2, float f3, float f4)
 {
     this->SetParameter4f(this->GetUniformLocation(name), f1, f2, f3, f4);
 }
 
-void OpenGLShader::SetParameterMatrix4fv(const char* name, const GLfloat* f)
+void OpenGLShader::SetParameterMatrix4fv(const char* name, const float* f)
 {
     this->SetParameterMatrix4fv(this->GetUniformLocation(name), f);
 }
 
-void OpenGLShader::SetParameter1f(int32_t location, GLfloat f)
+void OpenGLShader::SetParameter1f(int32_t location, float f)
 {
     glUniform1f(location, f);
 }
 
-void OpenGLShader::SetParameter2f(int32_t location, GLfloat f1, GLfloat f2)
+void OpenGLShader::SetParameter2f(int32_t location, float f1, float f2)
 {
     glUniform2f(location, f1, f2);
 }
 
-void OpenGLShader::SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3)
+void OpenGLShader::SetParameter3f(int32_t location, float f1, float f2, GLfloat f3)
 {
     glUniform3f(location, f1, f2, f3);
 }
 
-void OpenGLShader::SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4)
+void OpenGLShader::SetParameter4f(int32_t location, float f1, float f2, float f3, float f4)
 {
     glUniform4f(location, f1, f2, f3, f4);
 }
 
-void OpenGLShader::SetParameterMatrix4fv(int32_t location, const GLfloat* f)
+void OpenGLShader::SetParameterMatrix4fv(int32_t location, const float* f)
 {
     glUniformMatrix4fv(location, 1, GL_FALSE, f);
 }

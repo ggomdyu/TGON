@@ -148,6 +148,25 @@ bool ResolveJPG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint
 template <typename _AllocatorType>
 bool ResolveBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
+    if (srcData[0] != 'B' || srcData[1] != 'M')
+    {
+        return false;
+    }
+
+    *width = *(int*)&(srcData[0x12]);
+    *height = *(int*)&(srcData[0x16]);
+
+    int imageSize = *(int*)&(srcData[0x22]);
+    destData->resize(imageSize);
+
+    int dataStartPos = *(int*)&(srcData[0x0A]);
+    if (dataStartPos == 0)
+    {
+        dataStartPos = 54;
+    }
+
+    memcpy(destData->data(), srcData + dataStartPos, imageSize);
+
     return true;
 }
 
@@ -192,9 +211,9 @@ Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcD
 {
     switch (imageFormat)
     {
-    //case ImageFormat::BMP:
-        //ResolveBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
-        //break;
+    case ImageFormat::BMP:
+        ResolveBMP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
+        break;
 
     //case ImageFormat::JPG:
         //ResolveJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);

@@ -19,6 +19,7 @@
 #include "Core/Utility/Cast.h"
 #include "Core/Math/Mathematics.h"
 #include "Core/Math/Vector3.h"
+#include "Core/Math/Vector2.h"
 #include "Core/Math/Color.h"
 #include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Extent.h"
@@ -31,6 +32,7 @@
 #include "Game/Module/GraphicsModule.h"
 #include "Game/Module/TimeModule.h"
 #include "Graphics/Abstract/VertexBuffer.h"
+#include "Graphics/Abstract/IndexBuffer.h"
 
 //#include <glm/glm/matrix.hpp>
 //#include <glm/glm/common.hpp>
@@ -56,9 +58,8 @@ class TGON_API ThousandParty :
 public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
-    GLuint m_colorBuffer;
-    GLuint m_indexBuffer;
     GLuint m_vertexArray = 0;
+    core::Bitmap m_bitmap;
 
 public:
     ThousandParty() :
@@ -89,20 +90,21 @@ public:
                 videoMode.enableMultiSampling = true;
             }
             return videoMode;
-        }())
+        }()),
+        m_bitmap("E:\\Users\\ggomdyu\\Desktop\\printTestImage.bmp")
     {
         struct V3F_C4B
         {
             core::Vector3 position;
-            core::Color4f color;
+            core::Vector2 uv;
         };
 
         V3F_C4B v[] =
         {
-            {core::Vector3(-1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 0.0f, 0.0f, 1.0f)},
-            {core::Vector3(-1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 1.0f, 0.0f, 1.0f)},
-            {core::Vector3(1.0f, 1.0f, 0.0f), core::Color4f(0.0f, 0.0f, 1.0f, 1.0f)},
-            {core::Vector3(1.0f, -1.0f, 0.0f), core::Color4f(1.0f, 1.0f, 0.0f, 1.0f)},
+            {core::Vector3(-1.0f, -1.0f, 0.0f), core::Vector2(0.0f, 0.0f)},
+            {core::Vector3(-1.0f, 1.0f, 0.0f), core::Vector2(0.0f, 1.0f)},
+            {core::Vector3(1.0f, 1.0f, 0.0f), core::Vector2(1.0f, 1.0f)},
+            {core::Vector3(1.0f, -1.0f, 0.0f), core::Vector2(1.0f, 0.0f)},
         };
 
         unsigned int i[] =
@@ -123,40 +125,59 @@ public:
             },
             graphics::VertexBufferDesc
             {
-                graphics::VertexAttributeIndex::Color,
-                4,
+                graphics::VertexAttributeIndex::UV,
+                2,
                 graphics::VertexFormatType::Float,
                 true,
                 sizeof(V3F_C4B),
-                offsetof(V3F_C4B, color),
+                offsetof(V3F_C4B, uv),
             },
         };
 
-        vb = new graphics::VertexBuffer(v, true, viad);
-        if (vb->IsValid() == false)
-        {
-            return;
-        }
-
-        // Create INDEX BUFFER
-        glGenBuffers(1, &m_indexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(i), i, GL_STATIC_DRAW);
-
+        m_vb = std::make_unique<graphics::VertexBuffer>(v, false, viad);
+        m_ib = std::make_unique<graphics::IndexBuffer>(i, false);
 
         // Create VAO
         glGenVertexArrays(1, &m_vertexArray);
         glBindVertexArray(m_vertexArray);
         {
-            vb->Use();
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+            m_vb->Use();
+            m_ib->Use();
         }
         glBindVertexArray(0);
 
-        shader = new graphics::OpenGLShader(g_positionColorVert, g_positionColorFrag);
-        if (shader->IsValid() == false)
+        shader = std::make_unique<graphics::Shader>(g_positionUVVert, g_positionUVFrag);
+        
+        GLuint texture;
+        glGenTextures(1, &texture);
+        auto err = glGetError();
+        if (err != 0)
         {
-            return;
+            int n(3);
+        }
+        glBindTexture(GL_TEXTURE_2D, texture);
+        err = glGetError();
+        if (err != 0)
+        {
+            int n(3);
+        }
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
+        err = glGetError();
+        if (err != 0)
+        {
+            int n(3);
+        }
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        err = glGetError();
+        if (err != 0)
+        {
+            int n(3);
+        }
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        err = glGetError();
+        if (err != 0)
+        {
+            int n(3);
         }
     }
 
@@ -165,12 +186,11 @@ public:
         // Release VAO
         glBindVertexArray(0);
         glDeleteVertexArrays(1, &m_vertexArray);
-
-        delete vb;
     }
 
-    graphics::VertexBuffer* vb;
-    graphics::OpenGLShader* shader;
+    std::unique_ptr<graphics::VertexBuffer> m_vb;
+    std::unique_ptr<graphics::IndexBuffer> m_ib;
+    std::unique_ptr<graphics::Shader> shader;
     core::Matrix4x4 MVP;
 
     virtual void OnWillLaunch() override
@@ -188,8 +208,8 @@ public:
         SuperType::OnUpdate();
 
         static float x = 0.0f;
-        auto M2 = core::Matrix4x4::Translate(x, 0.0f, 0.0f);
-        auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
+        auto M2 = core::Matrix4x4::Translate(0.0f, 0.0f, 0.0f);
+        auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, 5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = core::Matrix4x4::PerspectiveRH(3.14159268f / 8.0f, 500.0f / 500.0f, 0.1f, 1000.0f);
         x += 0.005f;
         
@@ -209,4 +229,5 @@ public:
         FindModule<game::GraphicsModule>()->GetGraphics()->SwapBuffer();
     }
 };
+
 TGON_DECLARE_APPLICATION(ThousandParty)

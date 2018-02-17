@@ -25,9 +25,9 @@ enum class BufferType
 
 enum class VertexAttributeIndex
 {
-    Position,
-    Color,
-    TexCoord,
+    Position = 0,
+    Color = 1,
+    UV = 1,
 };
 
 enum class VertexFormatType

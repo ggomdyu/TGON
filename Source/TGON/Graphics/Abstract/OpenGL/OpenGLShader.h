@@ -5,10 +5,9 @@
  */
 
 #pragma once
-#include "OpenGLShader.h"
+#include "../Generic/GenericShader.h"
 
 #include <string>
-#include <cstdint>
 #include <GL/glew.h>
 
 namespace tgon
@@ -16,7 +15,8 @@ namespace tgon
 namespace graphics
 {
 
-class OpenGLShader
+class OpenGLShader :
+    public GenericShader
 {
 /* @section Public constructor */
 public:
@@ -24,26 +24,26 @@ public:
 
 /* @section Public method */
 public:
-    void Use();
-    void Unuse();
+    virtual void Use() final override;
+    virtual void Unuse() final override;
     
-    void SetParameter1f(const char* name, GLfloat f);
-    void SetParameter2f(const char* name, GLfloat f1, GLfloat f2);
-    void SetParameter3f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3);
-    void SetParameter4f(const char* name, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4);
-    void SetParameterMatrix4fv(const char* name, const GLfloat* f);
-    void SetParameter1f(int32_t location, GLfloat f);
-    void SetParameter2f(int32_t location, GLfloat f1, GLfloat f2);
-    void SetParameter3f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3);
-    void SetParameter4f(int32_t location, GLfloat f1, GLfloat f2, GLfloat f3, GLfloat f4);
-    void SetParameterMatrix4fv(int32_t location, const GLfloat* f);
-    void SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler);
-
-    void BindAttributeLocation(const char* name, std::size_t location);
-    int GetUniformLocation(const char* name) const;
-
+    virtual void SetParameter1f(const char* name, float f) final override;
+    virtual void SetParameter2f(const char* name, float f1, float f2) final override;
+    virtual void SetParameter3f(const char* name, float f1, float f2, float f3) final override;
+    virtual void SetParameter4f(const char* name, float f1, float f2, float f3, float f4) final override;
+    virtual void SetParameterMatrix4fv(const char* name, const float* f) final override;
+    virtual void SetParameter1f(int32_t location, float f) final override;
+    virtual void SetParameter2f(int32_t location, float f1, float f2) final override;
+    virtual void SetParameter3f(int32_t location, float f1, float f2, float f3) final override;
+    virtual void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4) final override;
+    virtual void SetParameterMatrix4fv(int32_t location, const float* f) final override;
+    virtual void SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler) final override;
+    
+    virtual void BindAttributeLocation(const char* name, std::size_t location) final override;
+    virtual int GetUniformLocation(const char* name) const final override;
+    
     /* @brief   Checks the shader was loaded successfully. */
-    bool IsValid() const noexcept;
+    virtual bool IsValid() const noexcept final override;
 
 /* @section Private method */
 private:
@@ -69,6 +69,13 @@ private:
 /* @section Private variable */
 public:
     GLuint m_program;
+};
+
+class Shader : public OpenGLShader
+{
+    /* @section Public constructor */
+public:
+    using OpenGLShader::OpenGLShader;
 };
 
 } /* namespace graphics */

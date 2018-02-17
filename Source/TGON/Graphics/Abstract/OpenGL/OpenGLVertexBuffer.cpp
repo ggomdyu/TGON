@@ -40,14 +40,12 @@ void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool i
 void OpenGLVertexBuffer::Use()
 {
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-    auto err = glGetError();
 
     for (int i = 0; i < m_vertexBufferDesc.size(); ++i)
     {
         const auto& vertexBufferDesc = m_vertexBufferDesc[i];
 
         glEnableVertexAttribArray(i);
-        err = glGetError();
         glVertexAttribPointer(
             vertexBufferDesc.attribute,
             vertexBufferDesc.dimension,
@@ -56,7 +54,6 @@ void OpenGLVertexBuffer::Use()
             vertexBufferDesc.stride,
             vertexBufferDesc.offset
         );
-        err = glGetError();
     }
 }
 
