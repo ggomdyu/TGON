@@ -14,6 +14,7 @@
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
 #include "Core/String/StringView.h"
+#include "Core/File/Path.h"
 #include "Core/Utility/InstantiateCounter.h"
 #include "Core/Utility/Cast.h"
 #include "Core/Math/Mathematics.h"
@@ -36,10 +37,6 @@
 //#include <d3d9.h>
 //#include <glm/glm/gtx/transform.hpp>
 //#include <DirectXMath.h>
-
-#define CONCAT(a, b) a##b
-#define STRING_2(a) #a
-#define STRING(a) STRING_2(a)
 
 using namespace tgon;
 
@@ -75,11 +72,11 @@ public:
 
                 windowStyle.width = 350 * aspectRatio;
                 windowStyle.height = 350 * aspectRatio;
-                windowStyle.showMiddle = false;
+                windowStyle.showMiddle = true;
                 windowStyle.title = u8"ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
-                windowStyle.resizeable = false;
+                windowStyle.resizeable = true;
             }
             return windowStyle;
         }(),

@@ -70,6 +70,7 @@
 		FDEA01F92035E58900135040 /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEA01E42035812A00135040 /* OpenGLGraphics.cpp */; };
 		FDEA01FA2035E58900135040 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEA01E72035812A00135040 /* OpenGLShader.cpp */; };
 		FDEA01FB2035E58900135040 /* OpenGLVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEA01EA2035812A00135040 /* OpenGLVertexBuffer.cpp */; };
+		FDEA0201203747F600135040 /* Path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEA02002037375C00135040 /* Path.cpp */; };
 		FDF6EAD31F8368E700A37840 /* Mathematics.h in Headers */ = {isa = PBXBuildFile; fileRef = FDF6EAD21F8368E700A37840 /* Mathematics.h */; };
 		FDFECB7F1F757DCF007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */; };
 		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
@@ -89,7 +90,6 @@
 		FD08C4F320352BE200355346 /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Screen.h; path = ../../Source/TGON/Core/Platform/Screen.h; sourceTree = "<group>"; };
 		FD08C4F420352BE200355346 /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Prefix.h; path = ../../Source/TGON/Core/Platform/Prefix.h; sourceTree = "<group>"; };
 		FD08C4F920352BE300355346 /* Config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Config.h; path = ../../Source/TGON/Core/Platform/Config.h; sourceTree = "<group>"; };
-		FD08C4FA20352BE300355346 /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = WindowType.h; path = ../../Source/TGON/Core/Platform/WindowType.h; sourceTree = "<group>"; };
 		FD08C4FB20352BE300355346 /* Drawing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Drawing.h; path = ../../Source/TGON/Core/Platform/Drawing.h; sourceTree = "<group>"; };
 		FD08C4FD20352BE300355346 /* Application.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Application.h; path = ../../Source/TGON/Core/Platform/Application.h; sourceTree = "<group>"; };
 		FD08C4FF20352BE300355346 /* GenericApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericApplication.cpp; sourceTree = "<group>"; };
@@ -233,6 +233,8 @@
 		FDEA01F420359C8A00135040 /* GenericWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GenericWindow.cpp; sourceTree = "<group>"; };
 		FDEA01F620359D5C00135040 /* GenericWindowFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericWindowFwd.h; sourceTree = "<group>"; };
 		FDEA01FD2035E67D00135040 /* OpenGLGraphicsUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLGraphicsUtility.h; sourceTree = "<group>"; };
+		FDEA01FF2037375C00135040 /* Path.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Path.h; path = ../../Source/TGON/Core/File/Path.h; sourceTree = "<group>"; };
+		FDEA02002037375C00135040 /* Path.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Path.cpp; path = ../../Source/TGON/Core/File/Path.cpp; sourceTree = "<group>"; };
 		FDF483CC1FC49776003BCAF6 /* Matrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Matrix4x4.h; path = ../../Source/TGON/Core/Math/Matrix4x4.h; sourceTree = "<group>"; };
 		FDF6EAD21F8368E700A37840 /* Mathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mathematics.h; path = ../../Source/TGON/Core/Math/Mathematics.h; sourceTree = "<group>"; };
 		FDFECB7E1F757DCF007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -524,26 +526,18 @@
 		FD753BD21F6B495700CD35F4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FDEA01FE2037373C00135040 /* File */,
 				FD2C7F641F84B53700D4555B /* Debug */,
 				FD2BF579201BA54800228FFF /* Drawing */,
 				FDD7C8D91F654416000EB7C8 /* String */,
 				FDD7C8D81F65440F000EB7C8 /* Object */,
 				FDD7C8D71F654404000EB7C8 /* Hash */,
-				FDD7C8D61F6543FD000EB7C8 /* Hardware */,
 				FDD7C8D51F6543F2000EB7C8 /* Random */,
 				FDD7C8D41F6543E7000EB7C8 /* Math */,
 				FDD7C8D31F6543DF000EB7C8 /* Utility */,
 				FDD7C8D21F6543D9000EB7C8 /* Platform */,
-				FD772BC71FACC6320050CCE6 /* Network */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		FD772BC71FACC6320050CCE6 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 		FD7EA52D1FAF6BCF008DF72F /* Game */ = {
@@ -612,7 +606,6 @@
 				FD08C51520352BE400355346 /* Time.h */,
 				FD08C51620352BE400355346 /* TimeType.h */,
 				FD08C51720352BE400355346 /* Window.h */,
-				FD08C4FA20352BE300355346 /* WindowType.h */,
 			);
 			name = Platform;
 			sourceTree = "<group>";
@@ -657,13 +650,6 @@
 				FD753C161F6B4AE600CD35F4 /* WELL1024a.h */,
 			);
 			name = Random;
-			sourceTree = "<group>";
-		};
-		FDD7C8D61F6543FD000EB7C8 /* Hardware */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Hardware;
 			sourceTree = "<group>";
 		};
 		FDD7C8D71F654404000EB7C8 /* Hash */ = {
@@ -769,6 +755,15 @@
 			children = (
 			);
 			path = Vulkan;
+			sourceTree = "<group>";
+		};
+		FDEA01FE2037373C00135040 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				FDEA02002037375C00135040 /* Path.cpp */,
+				FDEA01FF2037375C00135040 /* Path.h */,
+			);
+			name = File;
 			sourceTree = "<group>";
 		};
 		FDFECB671F6ED7A1007AC1AB /* Graphics */ = {
@@ -903,6 +898,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDEA0201203747F600135040 /* Path.cpp in Sources */,
 				FDEA01F72035E58900135040 /* GenericVertexBuffer.cpp in Sources */,
 				FDEA01F82035E58900135040 /* MacOSOpenGLContext.cpp in Sources */,
 				FDEA01F92035E58900135040 /* OpenGLGraphics.cpp in Sources */,

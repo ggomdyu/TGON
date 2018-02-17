@@ -13,7 +13,7 @@ namespace core
 {
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
-auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
+constexpr auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
 {
     return MakeFixedString(str, _CharArraySize - 1);
 }
