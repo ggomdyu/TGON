@@ -251,6 +251,11 @@ Bitmap::Bitmap(Bitmap&& rhs) :
 
 Bitmap& Bitmap::operator=(Bitmap&& rhs)
 {
+    if (this == &rhs)
+    {
+        return *this;
+    }
+    
     m_bits = std::move(rhs.m_bits);
     m_width = rhs.m_width;
     m_height = rhs.m_height;
