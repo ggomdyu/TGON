@@ -7,6 +7,33 @@ namespace tgon
 namespace core
 {
 
+TGON_API std::string GetExtension(const char* srcStr, int32_t srcStrLen)
+{
+    int32_t iterIndex = srcStrLen - 1;
+
+    while (true)
+    {
+        if (iterIndex < 0)
+        {
+            return std::string();
+        }
+
+        if (srcStr[iterIndex] == '.')
+        {
+            return &srcStr[iterIndex];
+        }
+        else
+        {
+            --iterIndex;
+        }
+    }
+}
+
+TGON_API std::string GetExtension(const char* srcStr)
+{
+    return GetExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+}
+
 TGON_API int32_t GetExtension(const char* srcStr, int32_t srcStrLen, const char** destStr)
 {
     int32_t iterIndex = srcStrLen - 1;
@@ -55,6 +82,39 @@ TGON_API int32_t GetExtension(const char* srcStr, char* destStr)
     return GetExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
 }
 
+TGON_API std::string GetFileName(const char* srcStr, int32_t srcStrLen)
+{
+    std::string ret;
+
+    int32_t iterIndex = srcStrLen - 1;
+
+    while (true)
+    {
+        if (iterIndex <= 0)
+        {
+            ret.assign(&srcStr[iterIndex], srcStrLen);
+            return ret;
+        }
+        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcStr[iterIndex] == DirectorySeparatorChar)
+        {
+            int32_t destStrLen = srcStrLen - (++iterIndex);
+
+            ret.assign(&srcStr[iterIndex], destStrLen);
+            return ret;
+        }
+        else
+        {
+            --iterIndex;
+        }
+    }
+}
+
+TGON_API std::string GetFileName(const char* srcStr)
+{
+    return GetFileName(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+}
+
 TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destStr)
 {
     int32_t iterIndex = srcStrLen - 1;
@@ -88,6 +148,48 @@ TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destSt
 TGON_API int32_t GetFileName(const char* srcStr, char* destStr)
 {
     return GetFileName(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
+}
+
+TGON_API std::string GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrLen)
+{
+    const char* extensionStr = nullptr;
+    int32_t extensionStrLen = GetExtension(srcStr, srcStrLen, &extensionStr);
+    if (extensionStrLen == -1)
+    {
+        return std::string();
+    }
+
+    std::string ret;
+
+    int32_t iterIndex = (srcStrLen - extensionStrLen) - 1;
+
+    while (true)
+    {
+        if (iterIndex <= 0)
+        {
+            int32_t destStrLen = (srcStrLen - iterIndex) - extensionStrLen;
+
+            ret.assign(&srcStr[iterIndex], destStrLen);
+            return ret;
+        }
+        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcStr[iterIndex] == DirectorySeparatorChar)
+        {
+            int32_t destStrLen = (srcStrLen - (++iterIndex)) - extensionStrLen;
+
+            ret.assign(&srcStr[iterIndex], destStrLen);
+            return ret;
+        }
+        else
+        {
+            --iterIndex;
+        }
+    }
+}
+
+TGON_API std::string GetFileNameWithoutExtension(const char* srcStr)
+{
+    return GetFileNameWithoutExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
 }
 
 TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrLen, char* destStr)

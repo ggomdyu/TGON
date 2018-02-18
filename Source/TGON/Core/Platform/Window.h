@@ -30,7 +30,7 @@ class Window :
 public:
     TGON_RUNTIME_OBJECT(Window)
 
-    /* @section Public constructor */
+/* @section Public constructor */
 public:
     using SuperType::SuperType;
 };

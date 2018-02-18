@@ -62,6 +62,11 @@
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
+		FDE573A5203921AB00C3D57E /* GenericIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE573A1203921AB00C3D57E /* GenericIndexBuffer.cpp */; };
+		FDE573A82039221000C3D57E /* OpenGLIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE573A62039220C00C3D57E /* OpenGLIndexBuffer.cpp */; };
+		FDE573A92039223600C3D57E /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE573972039214200C3D57E /* Bitmap.cpp */; };
+		FDE573AB2039E57700C3D57E /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE573AA2039E4CA00C3D57E /* Application.cpp */; };
+		FDE573AF2039ED1A00C3D57E /* MacOSPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE573AE2039ECF100C3D57E /* MacOSPath.mm */; };
 		FDEA01C820356D9000135040 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDEA01C720356D9000135040 /* libz.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		FDEA01CE20356EB600135040 /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB34204201E37860014A38D /* libpng16.a */; };
 		FDEA01F520359C8A00135040 /* GenericWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEA01F420359C8A00135040 /* GenericWindow.cpp */; };
@@ -204,6 +209,18 @@
 		FDC379B01FE2D750007DE331 /* PositionColorVert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PositionColorVert.h; path = ../../Source/TGON/Graphics/Render/OpenGL/PositionColorVert.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FDE573952039214200C3D57E /* Bitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
+		FDE573972039214200C3D57E /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		FDE573982039215D00C3D57E /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IndexBuffer.h; sourceTree = "<group>"; };
+		FDE573992039215D00C3D57E /* Shader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Shader.h; sourceTree = "<group>"; };
+		FDE5739A2039215D00C3D57E /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = VertexBuffer.h; sourceTree = "<group>"; };
+		FDE5739D203921AB00C3D57E /* GenericShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericShader.h; sourceTree = "<group>"; };
+		FDE573A1203921AB00C3D57E /* GenericIndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericIndexBuffer.cpp; sourceTree = "<group>"; };
+		FDE573A2203921AB00C3D57E /* GenericIndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericIndexBuffer.h; sourceTree = "<group>"; };
+		FDE573A62039220C00C3D57E /* OpenGLIndexBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLIndexBuffer.cpp; sourceTree = "<group>"; };
+		FDE573A72039220C00C3D57E /* OpenGLIndexBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLIndexBuffer.h; sourceTree = "<group>"; };
+		FDE573AA2039E4CA00C3D57E /* Application.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = Application.cpp; path = ../../Source/TGON/Core/Platform/Application.cpp; sourceTree = "<group>"; };
+		FDE573AE2039ECF100C3D57E /* MacOSPath.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSPath.mm; sourceTree = "<group>"; };
 		FDEA01C720356D9000135040 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../Source/ThirdParty/Bin/Debug/x86_64/libz.a; sourceTree = "<group>"; };
 		FDEA01D82035812A00135040 /* GenericGraphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericGraphics.h; sourceTree = "<group>"; };
 		FDEA01D92035812A00135040 /* GenericGraphicsFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericGraphicsFwd.h; sourceTree = "<group>"; };
@@ -211,28 +228,25 @@
 		FDEA01DB2035812A00135040 /* GenericVertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericVertexBuffer.cpp; sourceTree = "<group>"; };
 		FDEA01DC2035812A00135040 /* GenericVertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericVertexBuffer.h; sourceTree = "<group>"; };
 		FDEA01DD2035812A00135040 /* GenericVertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericVertexBufferType.h; sourceTree = "<group>"; };
-		FDEA01DE2035812A00135040 /* GraphicsConfig.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsConfig.h; sourceTree = "<group>"; };
-		FDEA01DF2035812A00135040 /* GraphicsCotext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsCotext.h; sourceTree = "<group>"; };
 		FDEA01E12035812A00135040 /* MacOSOpenGLContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.cpp; sourceTree = "<group>"; };
 		FDEA01E22035812A00135040 /* OpenGLContext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContext.h; sourceTree = "<group>"; };
 		FDEA01E32035812A00135040 /* OpenGLContextFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContextFwd.h; sourceTree = "<group>"; };
 		FDEA01E42035812A00135040 /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		FDEA01E52035812A00135040 /* OpenGLGraphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLGraphics.h; sourceTree = "<group>"; };
 		FDEA01E62035812A00135040 /* OpenGLGraphicsFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLGraphicsFwd.h; sourceTree = "<group>"; };
-		FDEA01E72035812A00135040 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
+		FDEA01E72035812A00135040 /* OpenGLShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
 		FDEA01E82035812A00135040 /* OpenGLShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLShader.h; sourceTree = "<group>"; };
 		FDEA01E92035812A00135040 /* OpenGLShaderCode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLShaderCode.h; sourceTree = "<group>"; };
 		FDEA01EA2035812A00135040 /* OpenGLVertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLVertexBuffer.cpp; sourceTree = "<group>"; };
 		FDEA01EB2035812A00135040 /* OpenGLVertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLVertexBuffer.h; sourceTree = "<group>"; };
 		FDEA01EC2035812A00135040 /* OpenGLVertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLVertexBufferType.h; sourceTree = "<group>"; };
 		FDEA01ED2035812A00135040 /* OpenGLVertexBufferUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLVertexBufferUtility.h; sourceTree = "<group>"; };
-		FDEA01EF2035812A00135040 /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = VertexBuffer.h; sourceTree = "<group>"; };
 		FDEA01F12035916E00135040 /* MacOSWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacOSWindow.h; sourceTree = "<group>"; };
 		FDEA01F22035918F00135040 /* GenericWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericWindow.h; sourceTree = "<group>"; };
 		FDEA01F320359A1F00135040 /* MacOSWindowFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacOSWindowFwd.h; sourceTree = "<group>"; };
 		FDEA01F420359C8A00135040 /* GenericWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GenericWindow.cpp; sourceTree = "<group>"; };
 		FDEA01F620359D5C00135040 /* GenericWindowFwd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericWindowFwd.h; sourceTree = "<group>"; };
-		FDEA01FD2035E67D00135040 /* OpenGLGraphicsUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLGraphicsUtility.h; sourceTree = "<group>"; };
+		FDEA01FD2035E67D00135040 /* OpenGLGraphicsUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLGraphicsUtility.h; sourceTree = "<group>"; };
 		FDEA01FF2037375C00135040 /* Path.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Path.h; path = ../../Source/TGON/Core/File/Path.h; sourceTree = "<group>"; };
 		FDEA02002037375C00135040 /* Path.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Path.cpp; path = ../../Source/TGON/Core/File/Path.cpp; sourceTree = "<group>"; };
 		FDF483CC1FC49776003BCAF6 /* Matrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Matrix4x4.h; path = ../../Source/TGON/Core/Math/Matrix4x4.h; sourceTree = "<group>"; };
@@ -508,6 +522,8 @@
 		FD2BF579201BA54800228FFF /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				FDE573972039214200C3D57E /* Bitmap.cpp */,
+				FDE573952039214200C3D57E /* Bitmap.h */,
 				FD2BF57C201BA54800228FFF /* Drawing.h */,
 			);
 			name = Drawing;
@@ -596,6 +612,7 @@
 				FD08C4FE20352BE300355346 /* Generic */,
 				FD08C51920352C0100355346 /* MacOS */,
 				FD08C4FD20352BE300355346 /* Application.h */,
+				FDE573AA2039E4CA00C3D57E /* Application.cpp */,
 				FD08C4F920352BE300355346 /* Config.h */,
 				FD08C4FB20352BE300355346 /* Drawing.h */,
 				FD08C51820352BE400355346 /* Locale.h */,
@@ -702,14 +719,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FDE573AD2039ECF100C3D57E /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				FDE573AE2039ECF100C3D57E /* MacOSPath.mm */,
+			);
+			name = MacOS;
+			path = ../../Source/TGON/Core/File/MacOS;
+			sourceTree = "<group>";
+		};
 		FDEA01D02035812A00135040 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
 				FDEA01D72035812A00135040 /* Generic */,
 				FDEA01E02035812A00135040 /* OpenGL */,
-				FDEA01DE2035812A00135040 /* GraphicsConfig.h */,
-				FDEA01DF2035812A00135040 /* GraphicsCotext.h */,
-				FDEA01EF2035812A00135040 /* VertexBuffer.h */,
+				FDE5739A2039215D00C3D57E /* VertexBuffer.h */,
+				FDE573982039215D00C3D57E /* IndexBuffer.h */,
+				FDE573992039215D00C3D57E /* Shader.h */,
 				FDEA01F02035812A00135040 /* Vulkan */,
 			);
 			name = Abstract;
@@ -725,6 +751,9 @@
 				FDEA01DB2035812A00135040 /* GenericVertexBuffer.cpp */,
 				FDEA01DC2035812A00135040 /* GenericVertexBuffer.h */,
 				FDEA01DD2035812A00135040 /* GenericVertexBufferType.h */,
+				FDE573A1203921AB00C3D57E /* GenericIndexBuffer.cpp */,
+				FDE573A2203921AB00C3D57E /* GenericIndexBuffer.h */,
+				FDE5739D203921AB00C3D57E /* GenericShader.h */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -746,6 +775,8 @@
 				FDEA01EB2035812A00135040 /* OpenGLVertexBuffer.h */,
 				FDEA01EC2035812A00135040 /* OpenGLVertexBufferType.h */,
 				FDEA01ED2035812A00135040 /* OpenGLVertexBufferUtility.h */,
+				FDE573A62039220C00C3D57E /* OpenGLIndexBuffer.cpp */,
+				FDE573A72039220C00C3D57E /* OpenGLIndexBuffer.h */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -760,6 +791,7 @@
 		FDEA01FE2037373C00135040 /* File */ = {
 			isa = PBXGroup;
 			children = (
+				FDE573AD2039ECF100C3D57E /* MacOS */,
 				FDEA02002037375C00135040 /* Path.cpp */,
 				FDEA01FF2037375C00135040 /* Path.h */,
 			);
@@ -898,14 +930,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE573AF2039ED1A00C3D57E /* MacOSPath.mm in Sources */,
+				FDE573AB2039E57700C3D57E /* Application.cpp in Sources */,
+				FDE573A92039223600C3D57E /* Bitmap.cpp in Sources */,
 				FDEA0201203747F600135040 /* Path.cpp in Sources */,
 				FDEA01F72035E58900135040 /* GenericVertexBuffer.cpp in Sources */,
 				FDEA01F82035E58900135040 /* MacOSOpenGLContext.cpp in Sources */,
 				FDEA01F92035E58900135040 /* OpenGLGraphics.cpp in Sources */,
 				FDEA01FA2035E58900135040 /* OpenGLShader.cpp in Sources */,
+				FDE573A5203921AB00C3D57E /* GenericIndexBuffer.cpp in Sources */,
 				FDEA01FB2035E58900135040 /* OpenGLVertexBuffer.cpp in Sources */,
 				FD08C53120353EB300355346 /* MacOSAppDelegate.mm in Sources */,
 				FD08C53220353EB300355346 /* MacOSApplication.mm in Sources */,
+				FDE573A82039221000C3D57E /* OpenGLIndexBuffer.cpp in Sources */,
 				FD08C53320353EB300355346 /* MacOSLocale.mm in Sources */,
 				FDEA01F520359C8A00135040 /* GenericWindow.cpp in Sources */,
 				FD08C53420353EB300355346 /* MacOSMain.mm in Sources */,

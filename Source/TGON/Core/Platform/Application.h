@@ -32,7 +32,12 @@ public:
 
 /* @section Public constructor */
 public:
-    using SuperType::SuperType;
+    Application();
+    Application(const WindowStyle& windowStyle);
+
+/* @section Public method */
+public:
+    static Application* GetInstance();
 };
 
 } /* namespace core */
