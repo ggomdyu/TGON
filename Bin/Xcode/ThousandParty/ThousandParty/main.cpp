@@ -161,24 +161,26 @@ public:
         {
             int n(3);
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
         err = glGetError();
         if (err != 0)
         {
             int n(3);
         }
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         err = glGetError();
         if (err != 0)
         {
             int n(3);
         }
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         err = glGetError();
         if (err != 0)
         {
             int n(3);
         }
+
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
 
     ~ThousandParty()
@@ -208,10 +210,10 @@ public:
         SuperType::OnUpdate();
 
         static float x = 0.0f;
-        auto M2 = core::Matrix4x4::Translate(0.0f, 0.0f, 0.0f);
+        auto M2 = core::Matrix4x4::Translate(0.0f, 0, x);
         auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, 5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = core::Matrix4x4::PerspectiveRH(3.14159268f / 8.0f, 500.0f / 500.0f, 0.1f, 1000.0f);
-        x += 0.005f;
+        x -= 0.05f;
         
         MVP = M2 * V2 * P2;
         
