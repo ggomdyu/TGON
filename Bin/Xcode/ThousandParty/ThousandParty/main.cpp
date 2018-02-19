@@ -6,6 +6,7 @@
 #include "Core/Object/Object.h"
 #include "Core/Platform/Window.h"
 #include "Core/Platform/Generic/GenericWindowType.h"
+#include "Core/File/Path.h"
 #include "Core/Platform/Time.h"
 #include "Core/Drawing/Bitmap.h"
 #include "Core/Debug/Log.h"
@@ -74,7 +75,6 @@ public:
                 windowStyle.width = 350 * aspectRatio;
                 windowStyle.height = 350 * aspectRatio;
                 windowStyle.showMiddle = false;
-                windowStyle.title = u8"ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ";
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
                 windowStyle.resizeable = true;
@@ -182,8 +182,8 @@ public:
 
         glGenerateMipmap(GL_TEXTURE_2D);
 
-        Application::GetInstance()->ShowMessageBox(core::GetCurrentDirectoryPath().c_str());
         Application::GetInstance()->ShowMessageBox(core::GetDesktopDirectoryPath().c_str());
+        Application::GetInstance()->ShowMessageBox(core::GetUserDirectoryPath().c_str());
     }
 
     ~ThousandParty()

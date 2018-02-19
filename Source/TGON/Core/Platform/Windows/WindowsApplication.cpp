@@ -15,7 +15,7 @@ namespace core
 namespace
 {
 
-/* @brief   Register WNDCLASS which has Default window property given by engine. */
+/* @brief   Register default WNDCLASS to window class table. */
 bool RegisterWindowClass()
 {
     WNDCLASSEXW wcex{};
@@ -34,11 +34,13 @@ bool RegisterWindowClass()
 
 } /* namespace*/
 
-WindowsApplication::WindowsApplication(const WindowStyle& windowStyle)
+WindowsApplication::WindowsApplication(const WindowStyle& windowStyle) :
+    GenericApplication([&]()
+    {
+        RegisterWindowClass();
+        return std::make_shared<Window>(windowStyle);
+    } ())
 {
-    RegisterWindowClass();
-
-    m_rootWindow = std::make_shared<Window>(windowStyle);
 }
 
 void WindowsApplication::MessageLoop()

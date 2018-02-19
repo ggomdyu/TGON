@@ -22,8 +22,7 @@ public:
 
 /* @section Public constructor */
 public:
-    using GenericApplication::GenericApplication;
-
+    WindowsApplication() = default;
     explicit WindowsApplication(const WindowStyle& windowStyle);
 
 /* @section Public destructor */
