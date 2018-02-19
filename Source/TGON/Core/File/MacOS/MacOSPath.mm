@@ -1,6 +1,6 @@
 #import "PrecompiledHeader.pch"
 
-#import "Path.h"
+#import "../Path.h"
 
 #import <Foundation/Foundation.h>
 
