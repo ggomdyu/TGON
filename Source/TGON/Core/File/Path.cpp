@@ -7,9 +7,9 @@ namespace tgon
 namespace core
 {
 
-TGON_API std::string GetExtension(const char* srcStr, int32_t srcStrLen)
+TGON_API std::string GetExtension(const char* srcPathStr, int32_t srcPathStrLen)
 {
-    int32_t iterIndex = srcStrLen - 1;
+    int32_t iterIndex = srcPathStrLen - 1;
 
     while (true)
     {
@@ -18,9 +18,9 @@ TGON_API std::string GetExtension(const char* srcStr, int32_t srcStrLen)
             return std::string();
         }
 
-        if (srcStr[iterIndex] == '.')
+        if (srcPathStr[iterIndex] == '.')
         {
-            return &srcStr[iterIndex];
+            return &srcPathStr[iterIndex];
         }
         else
         {
@@ -29,14 +29,14 @@ TGON_API std::string GetExtension(const char* srcStr, int32_t srcStrLen)
     }
 }
 
-TGON_API std::string GetExtension(const char* srcStr)
+TGON_API std::string GetExtension(const char* srcPathStr)
 {
-    return GetExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
 }
 
-TGON_API int32_t GetExtension(const char* srcStr, int32_t srcStrLen, const char** destStr)
+TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, const char** destPathStr)
 {
-    int32_t iterIndex = srcStrLen - 1;
+    int32_t iterIndex = srcPathStrLen - 1;
 
     while (true)
     {
@@ -45,10 +45,10 @@ TGON_API int32_t GetExtension(const char* srcStr, int32_t srcStrLen, const char*
             return -1;
         }
 
-        if (srcStr[iterIndex] == '.')
+        if (srcPathStr[iterIndex] == '.')
         {
-            *destStr = &srcStr[iterIndex];
-            return srcStrLen - iterIndex;
+            *destPathStr = &srcPathStr[iterIndex];
+            return srcPathStrLen - iterIndex;
         }
         else
         {
@@ -57,50 +57,50 @@ TGON_API int32_t GetExtension(const char* srcStr, int32_t srcStrLen, const char*
     }
 }
 
-TGON_API int32_t GetExtension(const char* srcStr, const char** destStr)
+TGON_API int32_t GetExtension(const char* srcPathStr, const char** destPathStr)
 {
-    return GetExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
+    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
 }
 
-TGON_API int32_t GetExtension(const char* srcStr, int32_t srcStrLen, char* destStr)
+TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
 {
     const char* extensionStr = nullptr;
-    int32_t destStrLen = GetExtension(srcStr, srcStrLen, &extensionStr);
-    if (destStrLen == -1)
+    int32_t destPathStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
+    if (destPathStrLen == -1)
     {
         return -1;
     }
 
-    memcpy(destStr, extensionStr, sizeof(srcStr[0]) * destStrLen);
-    destStr[destStrLen] = '\0';
+    memcpy(destPathStr, extensionStr, sizeof(srcPathStr[0]) * destPathStrLen);
+    destPathStr[destPathStrLen] = '\0';
 
-    return destStrLen;
+    return destPathStrLen;
 }
 
-TGON_API int32_t GetExtension(const char* srcStr, char* destStr)
+TGON_API int32_t GetExtension(const char* srcPathStr, char* destPathStr)
 {
-    return GetExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
+    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
 }
 
-TGON_API std::string GetFileName(const char* srcStr, int32_t srcStrLen)
+TGON_API std::string GetFileName(const char* srcPathStr, int32_t srcPathStrLen)
 {
     std::string ret;
 
-    int32_t iterIndex = srcStrLen - 1;
+    int32_t iterIndex = srcPathStrLen - 1;
 
     while (true)
     {
         if (iterIndex <= 0)
         {
-            ret.assign(&srcStr[iterIndex], srcStrLen);
+            ret.assign(&srcPathStr[iterIndex], srcPathStrLen);
             return ret;
         }
-        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
-                 srcStr[iterIndex] == DirectorySeparatorChar)
+        else if (srcPathStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcPathStr[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = srcStrLen - (++iterIndex);
+            int32_t destPathStrLen = srcPathStrLen - (++iterIndex);
 
-            ret.assign(&srcStr[iterIndex], destStrLen);
+            ret.assign(&srcPathStr[iterIndex], destPathStrLen);
             return ret;
         }
         else
@@ -110,33 +110,33 @@ TGON_API std::string GetFileName(const char* srcStr, int32_t srcStrLen)
     }
 }
 
-TGON_API std::string GetFileName(const char* srcStr)
+TGON_API std::string GetFileName(const char* srcPathStr)
 {
-    return GetFileName(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+    return GetFileName(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
 }
 
-TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destStr)
+TGON_API int32_t GetFileName(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
 {
-    int32_t iterIndex = srcStrLen - 1;
+    int32_t iterIndex = srcPathStrLen - 1;
 
     while (true)
     {
         if (iterIndex <= 0)
         {
-            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * srcStrLen);
-            destStr[srcStrLen] = '\0';
+            memcpy(destPathStr, &srcPathStr[iterIndex], sizeof(srcPathStr[0]) * srcPathStrLen);
+            destPathStr[srcPathStrLen] = '\0';
 
-            return srcStrLen;
+            return srcPathStrLen;
         }
-        else if (srcStr[iterIndex] == AltDirectorySeparatorChar || 
-                 srcStr[iterIndex] == DirectorySeparatorChar)
+        else if (srcPathStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcPathStr[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = srcStrLen - (++iterIndex);
+            int32_t destPathStrLen = srcPathStrLen - (++iterIndex);
 
-            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * destStrLen);
-            destStr[destStrLen] = '\0';
+            memcpy(destPathStr, &srcPathStr[iterIndex], sizeof(srcPathStr[0]) * destPathStrLen);
+            destPathStr[destPathStrLen] = '\0';
 
-            return destStrLen;
+            return destPathStrLen;
         }
         else
         {
@@ -145,15 +145,15 @@ TGON_API int32_t GetFileName(const char* srcStr, int32_t srcStrLen, char* destSt
     }
 }
 
-TGON_API int32_t GetFileName(const char* srcStr, char* destStr)
+TGON_API int32_t GetFileName(const char* srcPathStr, char* destPathStr)
 {
-    return GetFileName(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
+    return GetFileName(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
 }
 
-TGON_API std::string GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrLen)
+TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr, int32_t srcPathStrLen)
 {
     const char* extensionStr = nullptr;
-    int32_t extensionStrLen = GetExtension(srcStr, srcStrLen, &extensionStr);
+    int32_t extensionStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
     if (extensionStrLen == -1)
     {
         return std::string();
@@ -161,23 +161,23 @@ TGON_API std::string GetFileNameWithoutExtension(const char* srcStr, int32_t src
 
     std::string ret;
 
-    int32_t iterIndex = (srcStrLen - extensionStrLen) - 1;
+    int32_t iterIndex = (srcPathStrLen - extensionStrLen) - 1;
 
     while (true)
     {
         if (iterIndex <= 0)
         {
-            int32_t destStrLen = (srcStrLen - iterIndex) - extensionStrLen;
+            int32_t destPathStrLen = (srcPathStrLen - iterIndex) - extensionStrLen;
 
-            ret.assign(&srcStr[iterIndex], destStrLen);
+            ret.assign(&srcPathStr[iterIndex], destPathStrLen);
             return ret;
         }
-        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
-                 srcStr[iterIndex] == DirectorySeparatorChar)
+        else if (srcPathStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcPathStr[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = (srcStrLen - (++iterIndex)) - extensionStrLen;
+            int32_t destPathStrLen = (srcPathStrLen - (++iterIndex)) - extensionStrLen;
 
-            ret.assign(&srcStr[iterIndex], destStrLen);
+            ret.assign(&srcPathStr[iterIndex], destPathStrLen);
             return ret;
         }
         else
@@ -187,42 +187,42 @@ TGON_API std::string GetFileNameWithoutExtension(const char* srcStr, int32_t src
     }
 }
 
-TGON_API std::string GetFileNameWithoutExtension(const char* srcStr)
+TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr)
 {
-    return GetFileNameWithoutExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
 }
 
-TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrLen, char* destStr)
+TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
 {
     const char* extensionStr = nullptr;
-    int32_t extensionStrLen = GetExtension(srcStr, srcStrLen, &extensionStr);
+    int32_t extensionStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
     if (extensionStrLen == -1)
     {
         return -1;
     }
 
-    int32_t iterIndex = (srcStrLen - extensionStrLen) - 1;
+    int32_t iterIndex = (srcPathStrLen - extensionStrLen) - 1;
 
     while (true)
     {
         if (iterIndex <= 0)
         {
-            int32_t destStrLen = (srcStrLen - iterIndex) - extensionStrLen;
+            int32_t destPathStrLen = (srcPathStrLen - iterIndex) - extensionStrLen;
 
-            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * destStrLen);
-            destStr[destStrLen] = '\0';
+            memcpy(destPathStr, &srcPathStr[iterIndex], sizeof(srcPathStr[0]) * destPathStrLen);
+            destPathStr[destPathStrLen] = '\0';
 
-            return destStrLen;
+            return destPathStrLen;
         }
-        else if (srcStr[iterIndex] == AltDirectorySeparatorChar ||
-                 srcStr[iterIndex] == DirectorySeparatorChar)
+        else if (srcPathStr[iterIndex] == AltDirectorySeparatorChar ||
+                 srcPathStr[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = (srcStrLen - (++iterIndex)) - extensionStrLen;
+            int32_t destPathStrLen = (srcPathStrLen - (++iterIndex)) - extensionStrLen;
 
-            memcpy(destStr, &srcStr[iterIndex], sizeof(srcStr[0]) * destStrLen);
-            destStr[destStrLen] = '\0';
+            memcpy(destPathStr, &srcPathStr[iterIndex], sizeof(srcPathStr[0]) * destPathStrLen);
+            destPathStr[destPathStrLen] = '\0';
 
-            return destStrLen;
+            return destPathStrLen;
         }
         else
         {
@@ -231,14 +231,14 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, int32_t srcStrL
     }
 }
 
-TGON_API int32_t GetFileNameWithoutExtension(const char* srcStr, char* destStr)
+TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, char* destPathStr)
 {
-    return GetFileNameWithoutExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)), destStr);
+    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
 }
 
-TGON_API bool HasExtension(const char* srcStr, int32_t srcStrLen)
+TGON_API bool HasExtension(const char* srcPathStr, int32_t srcPathStrLen)
 {
-    int iterIndex = srcStrLen - 1;
+    int iterIndex = srcPathStrLen - 1;
 
     while (true)
     {
@@ -248,9 +248,9 @@ TGON_API bool HasExtension(const char* srcStr, int32_t srcStrLen)
         }
         else
         {
-            if (srcStr[iterIndex] == '.')
+            if (srcPathStr[iterIndex] == '.')
             {
-                auto extensionWithoutPeriodLen = srcStrLen - (iterIndex + 1);
+                auto extensionWithoutPeriodLen = srcPathStrLen - (iterIndex + 1);
                 return extensionWithoutPeriodLen > 0;
             }
             else
@@ -261,9 +261,21 @@ TGON_API bool HasExtension(const char* srcStr, int32_t srcStrLen)
     }
 }
 
-TGON_API bool HasExtension(const char* srcStr)
+TGON_API bool HasExtension(const char* srcPathStr)
 {
-    return HasExtension(srcStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcStr)>::type>::type>::length(srcStr)));
+    return HasExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
+}
+
+TGON_API int32_t ChangeExtension(char* srcPathStr, int32_t srcPathStrLen, const char* extensionName)
+{
+    const char* extensionStr = nullptr;
+    int32_t destPathStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
+    if (destPathStrLen == -1)
+    {
+        return -1;
+    }
+
+
 }
 
 } /* namespace core */

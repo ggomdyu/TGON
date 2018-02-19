@@ -44,7 +44,7 @@ protected:
 public:
     /**
      * @brief   This is the special magic number which means string not exists.
-     *          The function series of Find will return this variable when searching substring failed.
+     *          The series of find function will return this variable when searching substring failed.
      */
     static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
 

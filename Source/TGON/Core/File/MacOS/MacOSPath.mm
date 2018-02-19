@@ -9,25 +9,25 @@ namespace tgon
 namespace core
 {
 
-TGON_API std::string GetCurrentDirectoryPath()
+TGON_API std::string GetCurrentDirectory()
 {
     NSString* path = [[NSFileManager defaultManager] currentDirectoryPath];
     return [path UTF8String];
 }
 
-TGON_API std::string GetUserDirectoryPath()
+TGON_API std::string GetUserDirectory()
 {
     NSString* path = NSHomeDirectory();
     return [path UTF8String];
 }
 
-TGON_API std::string GetDesktopDirectoryPath()
+TGON_API std::string GetDesktopDirectory()
 {
     NSArray<NSString*>* paths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES);
 
     if ([paths count] <= 0)
     {
-        return "";
+        return std::string();
     }
     else
     {
