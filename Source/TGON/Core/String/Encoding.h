@@ -18,16 +18,76 @@ namespace core
 {
 
 template <typename _EncodingType>
-constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
+constexpr bool IsASCIIEncoding = std::is_same<_EncodingType, >::value;
 
 template <typename _EncodingType>
-constexpr bool IsEUCEncoding = std::is_base_of<EUCEncoding<_EncodingType>, _EncodingType>::value;
+constexpr bool IsANSIEncoding = std::is_base_of<EUCEncoding<_EncodingType>, _EncodingType>::value;
+
+template <typename _EncodingType>
+constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
+
 
 template <typename _DerivedEncodingType>
 class Encoding
 {
+/* @section Public method */
+public:
+    /* @brief   Returns the length of string specified by srcStr. */
+    static int32_t GetCharCount(const char* srcStr);
+    
+    /* @brief   Returns the minimum bytes per characters in codepage. */
+    static constexpr int32_t GetMinCharSize() noexcept;
+
+    /* @brief   Returns the maximum bytes per characters in codepage. */
+    static constexpr int32_t GetMaxCharSize() noexcept;
+};
+
+class ASCII :
+    public Encoding<ASCII>
+{
+/* @section Public variable */
+public:
+    static constexpr const char EncodingName[] = "ASCII";
+
+/* @section Public method */
 public:
     static int32_t GetCharCount(const char* srcStr);
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
+};
+
+template <typename _DerivedEncodingType>
+class ANSIEncoding :
+    public Encoding<_DerivedEncodingType>
+{
+public:
+    template <typename _ToEncodingType>
+    static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
+};
+
+class EUC_KR :
+    public ANSIEncoding<EUC_KR>
+{
+/* @section Public variable */
+public:
+    static constexpr const char EncodingName[] = "EUC-KR";
+
+/* @section Public method */
+public:
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
+};
+
+class EUC_JP :
+    public ANSIEncoding<EUC_JP>
+{
+/* @section Public variable */
+public:
+    static constexpr const char EncodingName[] = "EUC-JP";
+
+public:
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
 };
 
 template <typename _DerivedEncodingType>
@@ -39,48 +99,49 @@ class UnicodeEncoding :
 class UTF8 :
     public UnicodeEncoding<UTF8>
 {
+/* @section Public variable */
 public:
     static constexpr const char EncodingName[] = "UTF-8";
 
+/* @section Public method */
 public:
     template <typename _ToEncodingType>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize) = delete;
+    static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
     static int32_t GetCharCount(const char* srcStr);
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
 };
 
 class UTF16LE :
     public UnicodeEncoding<UTF16LE>
 {
+/* @section Public variable */
 public:
     static constexpr const char EncodingName[] = "UTF16-LE";
 
-public:
-    template <typename _ToEncodingType>
-    static int32_t Convert(const char* srcStr, std::size_t srcStrLen, char* destStr, std::size_t destStrBufferSize) = delete;
-    static int32_t GetCharCount(const char* srcStr);
-};
-
-template <typename _DerivedEncodingType>
-class EUCEncoding :
-    public Encoding<_DerivedEncodingType>
-{
+/* @section Public method */
 public:
     template <typename _ToEncodingType>
     static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
+    static int32_t GetCharCount(const char* srcStr);
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
 };
 
-class EUC_KR :
-    public EUCEncoding<EUC_KR>
+class UTF32 :
+    public UnicodeEncoding<UTF32>
 {
+/* @section Public variable */
 public:
-    static constexpr const char EncodingName[] = "EUC-KR";
-};
+    static constexpr const char EncodingName[] = "UTF-32";
 
-class EUC_JP :
-    public EUCEncoding<EUC_JP>
-{
+/* @section Public method */
 public:
-    static constexpr const char EncodingName[] = "EUC-JP";
+    template <typename _ToEncodingType>
+    static int32_t Convert(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize) = delete;
+    static int32_t GetCharCount(const char* srcStr);
+    static constexpr int32_t GetMinCharSize() noexcept;
+    static constexpr int32_t GetMaxCharSize() noexcept;
 };
 
 } /* namespace core */

@@ -15,8 +15,9 @@ class ASCII;
 class EUC_KR;
 class UTF8;
 class UTF16LE;
+class UTF32;
 template <typename _DerivedEncodingType>
-class EUCEncoding;
+class ANSIEncoding;
 template <typename _DerivedEncodingType>
 class UnicodeEncoding;
 

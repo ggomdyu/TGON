@@ -7,15 +7,19 @@
 #include <Windows.h>
 #include <shlobj.h>
 
+#ifdef GetCurrentDirectory
+#   undef GetCurrentDirectory
+#endif
+
 namespace tgon
 {
 namespace core
 {
 
-TGON_API std::string GetCurrentDirectoryPath()
+TGON_API std::string GetCurrentDirectory()
 {
-    wchar_t utf16Path[MAX_PATH + 1] {};
-    DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH + 1, utf16Path);
+    wchar_t utf16Path[MAX_PATH] {};
+    DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH, utf16Path);
 
     char utf8Path[MAX_PATH + 1] {};
     UTF16LE::Convert<UTF8>((const char*)utf16Path, utf16PathLen, &utf8Path[0], sizeof(utf8Path));
@@ -23,7 +27,7 @@ TGON_API std::string GetCurrentDirectoryPath()
     return utf8Path;
 }
 
-TGON_API std::string GetUserDirectoryPath()
+TGON_API std::string GetUserDirectory()
 {
     wchar_t utf16Path[MAX_PATH + 1];
 
@@ -40,7 +44,7 @@ TGON_API std::string GetUserDirectoryPath()
     }
 }
 
-TGON_API std::string GetDesktopDirectoryPath()
+TGON_API std::string GetDesktopDirectory()
 {
     wchar_t utf16Path[MAX_PATH + 1];
 

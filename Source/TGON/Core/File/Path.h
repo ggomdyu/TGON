@@ -10,6 +10,10 @@
 #include <cstdint>
 #include <string>
 
+#ifdef GetCurrentDirectory
+#   undef GetCurrentDirectory
+#endif
+
 namespace tgon
 {
 namespace core
