@@ -44,7 +44,7 @@ MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
         return *this;
     }
 
-    ~MacOSWindow();
+    this->~MacOSWindow();
     new (this) MacOSWindow(std::move(rhs));
 
     return *this;
