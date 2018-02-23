@@ -46,6 +46,7 @@ WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
         return *this;
     }
 
+    this->~WindowsWindow();
     new (this) WindowsWindow(std::move(rhs));
 
     return *this;
