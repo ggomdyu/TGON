@@ -1,8 +1,7 @@
 /**
- * @filename    GenericApplication.h
+ * @filename    MacOSApplication.h
  * @author      ggomdyu
- * @since       04/01/2016
- * @brief       The abstracted application class which is Plaform-agnostic.
+ * @since       07/21/2017
  */
 
 #pragma once

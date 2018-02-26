@@ -12,7 +12,6 @@
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Screen.h"
 #include "Core/Platform/ScreenType.h"
-#include "Core/String/Encoding.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
 #include "Core/String/StringView.h"
@@ -28,6 +27,7 @@
 #include "Core/Hash/UUID.h"
 #include "Graphics/Abstract/Generic/GenericGraphicsType.h"
 #include "Graphics/Abstract/Generic/GenericGraphics.h"
+#include "Graphics/Abstract/Texture.h"
 #include "Graphics/Abstract/OpenGL/OpenGLShader.h"
 #include "Graphics/Abstract/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/Renderer.h"
@@ -35,6 +35,8 @@
 #include "Game/Module/TimeModule.h"
 #include "Graphics/Abstract/VertexBuffer.h"
 #include "Graphics/Abstract/IndexBuffer.h"
+
+#include <Foundation/Foundation.h>
 
 //#include <glm/glm/matrix.hpp>
 //#include <glm/glm/common.hpp>
@@ -61,7 +63,7 @@ public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
     GLuint m_vertexArray = 0;
-    core::Bitmap m_bitmap;
+    graphics::Texture m_texture;
 
 public:
     ThousandParty() :
@@ -75,7 +77,6 @@ public:
 
                 windowStyle.width = 350 * aspectRatio;
                 windowStyle.height = 350 * aspectRatio;
-                windowStyle.title = std::string("안녕!!HI!!");
                 windowStyle.showMiddle = false;
                 windowStyle.enableSystemButton = true;
                 windowStyle.hasCaption = true;
@@ -93,7 +94,7 @@ public:
             }
             return videoMode;
         }()),
-        m_bitmap(core::GetDesktopDirectory() + "/printTestImage.png")
+        m_texture(core::GetDesktopDirectory() + "/printTestImage.png")
     {
         struct V3F_C4B
         {
@@ -149,73 +150,33 @@ public:
         glBindVertexArray(0);
 
         shader = std::make_unique<graphics::Shader>(g_positionUVVert, g_positionUVFrag);
-        
-        GLuint texture;
-        glGenTextures(1, &texture);
-        auto err = glGetError();
-        if (err != 0)
-        {
-            int n(3);
-        }
-        glBindTexture(GL_TEXTURE_2D, texture);
-        err = glGetError();
-        if (err != 0)
-        {
-            int n(3);
-        }
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
-        err = glGetError();
-        if (err != 0)
-        {
-            int n(3);
-        }
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        err = glGetError();
-        if (err != 0)
-        {
-            int n(3);
-        }
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        err = glGetError();
-        if (err != 0)
-        {
-            int n(3);
-        }
+
+        m_texture.Use();
+//        GLuint texture;
+//        glGenTextures(1, &texture);
+//        glBindTexture(GL_TEXTURE_2D, texture);
+//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
        /* glGenerateMipmap(GL_TEXTURE_2D);
 */
         
         {
-            const char * utf8_strings = u8"ABab가나";
-
-            // 
-            char buf[256];
-            auto wow = core::UTF8::Convert<core::UTF16LE>(utf8_strings, strlen(utf8_strings), buf, 256);
-
-            char buf2[256];
-            auto a = core::UTF16LE::GetMaxCharSize() * wow;
-            auto wow2 = core::UTF16LE::Convert<core::UTF8>(buf, a, buf2, 256);
-
-            char buf3[256];
-            auto wow3 = core::UTF8::Convert<core::UTF16LE>(buf2, strlen(buf2), buf3, 256);
-
-            MessageBoxW(nullptr, (const wchar_t*)buf3, L"", 0);
-
-
-            // Iterating
-            UErrorCode err;
-            UConverter* conv = ucnv_open("UTF-8", &err);
-            size_t len = strlen(utf8_strings);
-            size_t acclen = 0;
-            const char* curr = utf8_strings;
-            do {
-                const char* prev = curr;
-                auto ch = ucnv_getNextUChar(conv, &curr, curr + len, &err);
-                ++acclen;
-            } while (curr < utf8_strings + len);
-            ucnv_close(conv);
-
-            core::Log("%d", acclen);
+//            const char * utf8_strings = u8"ABab가나";
+//
+//            // 
+//            char buf[256];
+//            auto wow = core::UTF8::Convert<core::UTF16LE>(utf8_strings, strlen(utf8_strings), buf, 256);
+//
+//            char buf2[256];
+//            auto a = core::UTF16LE::GetMaxCharSize() * wow;
+//            auto wow2 = core::UTF16LE::Convert<core::UTF8>(buf, a, buf2, 256);
+//
+//            char buf3[256];
+//            auto wow3 = core::UTF8::Convert<core::UTF16LE>(buf2, strlen(buf2), buf3, 256);
+//
+//            MessageBoxW(nullptr, (const wchar_t*)buf3, L"", 0);
         }
     }
 

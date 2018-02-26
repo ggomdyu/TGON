@@ -2,6 +2,8 @@
 
 #include "GameApplication.h"
 
+#include "Core/Platform/Window.h"
+#include "Graphics/Abstract/Generic/GenericGraphics.h"
 #include "Graphics/Abstract/Generic/GenericGraphicsType.h"
 #include "Game/Module/TimeModule.h"
 #include "Game/Module/GraphicsModule.h"

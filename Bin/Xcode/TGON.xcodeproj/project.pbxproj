@@ -11,7 +11,6 @@
 		FD08C53020353EAC00355346 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52120352C0100355346 /* MacOSTime.mm */; };
 		FD08C53120353EB300355346 /* MacOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C51B20352C0100355346 /* MacOSAppDelegate.mm */; };
 		FD08C53220353EB300355346 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C51C20352C0100355346 /* MacOSApplication.mm */; };
-		FD08C53320353EB300355346 /* MacOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C51E20352C0100355346 /* MacOSLocale.mm */; };
 		FD08C53420353EB300355346 /* MacOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C51F20352C0100355346 /* MacOSMain.mm */; };
 		FD08C53520353EB300355346 /* MacOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52020352C0100355346 /* MacOSScreen.mm */; };
 		FD08C53620353EB300355346 /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52220352C0100355346 /* MacOSWindow.mm */; };
@@ -57,8 +56,9 @@
 		FD7EA51C1FAEE4DC008DF72F /* UUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FD772BD21FAE067D0050CCE6 /* UUID.h */; };
 		FD7EA51D1FAEE4DC008DF72F /* FStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = FD6E11B21FA8BC8C00C5A5E7 /* FStateMachine.h */; };
 		FD89A1FA1FA23AFE00817B92 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FD89A1F91FA23A1200817B92 /* StringView.h */; };
-		FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */; };
-		FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */; };
+		FDA52F94203BD71E0077A21F /* GenericTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA52F93203BD71E0077A21F /* GenericTexture.cpp */; };
+		FDA52F98203BD75C0077A21F /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDA52F97203BD75C0077A21F /* OpenGLTexture.cpp */; };
+		FDA52F99203C89480077A21F /* MacOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C51E20352C0100355346 /* MacOSLocale.mm */; };
 		FDAD6BAA1F777809003B9B11 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
@@ -153,10 +153,12 @@
 		FD0BD42E1FEB5C0F002C6F4A /* TGON.sln */ = {isa = PBXFileReference; lastKnownFileType = text; path = TGON.sln; sourceTree = "<group>"; };
 		FD0BD4301FEB5C0F002C6F4A /* TGON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TGON.xcodeproj; sourceTree = "<group>"; };
 		FD0BD4331FEB5C0F002C6F4A /* TGON.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = TGON.xcworkspace; sourceTree = "<group>"; };
-		FD0BD4361FEB5C0F002C6F4A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FD0BD4361FEB5C0F002C6F4A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FD0BD4371FEB5C0F002C6F4A /* ThousandParty.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ThousandParty.xcodeproj; sourceTree = "<group>"; };
 		FD0E7A971FD64F7A00A3B562 /* GameApplication.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GameApplication.cpp; sourceTree = "<group>"; };
 		FD0E7A981FD64F7A00A3B562 /* GameApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameApplication.h; sourceTree = "<group>"; };
+		FD1F5650203EFF5B005B1F09 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		FD1F5653203F089A005B1F09 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../../../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
 		FD2BF5402012ECAB00228FFF /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Log.h; path = ../../Source/TGON/Core/Debug/Log.h; sourceTree = "<group>"; };
 		FD2BF5422012ECBE00228FFF /* MacOSLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MacOSLog.cpp; path = ../../Source/TGON/Core/Debug/MacOS/MacOSLog.cpp; sourceTree = "<group>"; };
 		FD2BF5722018F7C400228FFF /* GraphicsModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GraphicsModule.cpp; sourceTree = "<group>"; };
@@ -197,11 +199,15 @@
 		FD772BD21FAE067D0050CCE6 /* UUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UUID.h; path = ../../Source/TGON/Core/Hash/UUID.h; sourceTree = "<group>"; };
 		FD89A1F91FA23A1200817B92 /* StringView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; name = StringView.h; path = ../../Source/TGON/Core/String/StringView.h; sourceTree = "<group>"; };
 		FD89A1FB1FA39A0000817B92 /* ICloneable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICloneable.h; path = ../../Source/TGON/Core/Object/ICloneable.h; sourceTree = "<group>"; };
+		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		FDA52F91203BD71E0077A21F /* GenericTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericTexture.h; sourceTree = "<group>"; };
+		FDA52F93203BD71E0077A21F /* GenericTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GenericTexture.cpp; sourceTree = "<group>"; };
+		FDA52F95203BD7270077A21F /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		FDA52F96203BD75C0077A21F /* OpenGLTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLTexture.h; sourceTree = "<group>"; };
+		FDA52F97203BD75C0077A21F /* OpenGLTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
 		FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = ../../Source/TGON/Graphics/Render/Sprite.h; sourceTree = "<group>"; };
-		FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = ../../Source/TGON/Graphics/Render/Texture.h; sourceTree = "<group>"; };
 		FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../../Source/TGON/Graphics/Render/Material.h; sourceTree = "<group>"; };
 		FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = ../../Source/TGON/Graphics/Render/Material.cpp; sourceTree = "<group>"; };
-		FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../Source/TGON/Graphics/Render/Texture.cpp; sourceTree = "<group>"; };
 		FDAD6BA91F777809003B9B11 /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../Source/TGON/Core/Utility/InstantiateCounter.h; sourceTree = "<group>"; };
 		FDB34204201E37860014A38D /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../Source/ThirdParty/Bin/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
 		FDBD61121FA56904007439A7 /* IRuntimeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IRuntimeObject.h; path = ../../Source/TGON/Core/Object/IRuntimeObject.h; sourceTree = "<group>"; };
@@ -572,8 +578,6 @@
 				FDAAEBDE1FDB9D1C0036BFD5 /* Material.h */,
 				FDAAEBDF1FDB9F860036BFD5 /* Material.cpp */,
 				FDAAEBDA1FDB8BA10036BFD5 /* Sprite.h */,
-				FDAAEBDC1FDB8BA10036BFD5 /* Texture.h */,
-				FDAAEBE41FDBF17E0036BFD5 /* Texture.cpp */,
 			);
 			name = Render;
 			sourceTree = "<group>";
@@ -705,6 +709,9 @@
 		FDD7C92E1F684911000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */,
+				FD1F5653203F089A005B1F09 /* libiconv.2.dylib */,
+				FD1F5650203EFF5B005B1F09 /* libiconv.tbd */,
 				FDEA01C720356D9000135040 /* libz.a */,
 				FDB34204201E37860014A38D /* libpng16.a */,
 				FD4717731FEB5CCA00466798 /* libGLEW.a */,
@@ -735,6 +742,7 @@
 				FDEA01E02035812A00135040 /* OpenGL */,
 				FDE5739A2039215D00C3D57E /* VertexBuffer.h */,
 				FDE573982039215D00C3D57E /* IndexBuffer.h */,
+				FDA52F95203BD7270077A21F /* Texture.h */,
 				FDE573992039215D00C3D57E /* Shader.h */,
 				FDEA01F02035812A00135040 /* Vulkan */,
 			);
@@ -745,6 +753,8 @@
 		FDEA01D72035812A00135040 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				FDA52F93203BD71E0077A21F /* GenericTexture.cpp */,
+				FDA52F91203BD71E0077A21F /* GenericTexture.h */,
 				FDEA01D82035812A00135040 /* GenericGraphics.h */,
 				FDEA01D92035812A00135040 /* GenericGraphicsFwd.h */,
 				FDEA01DA2035812A00135040 /* GenericGraphicsType.h */,
@@ -777,6 +787,8 @@
 				FDEA01ED2035812A00135040 /* OpenGLVertexBufferUtility.h */,
 				FDE573A62039220C00C3D57E /* OpenGLIndexBuffer.cpp */,
 				FDE573A72039220C00C3D57E /* OpenGLIndexBuffer.h */,
+				FDA52F97203BD75C0077A21F /* OpenGLTexture.cpp */,
+				FDA52F96203BD75C0077A21F /* OpenGLTexture.h */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -818,7 +830,6 @@
 				FD2BF55F20138F0500228FFF /* PositionColorVert.h in Headers */,
 				FD2BF56020138F0500228FFF /* Material.h in Headers */,
 				FD2BF56120138F0500228FFF /* Sprite.h in Headers */,
-				FD9AED1D1FDBF46A007AE839 /* Texture.h in Headers */,
 				FD0E7A9D1FD72C2800A3B562 /* GameApplication.h in Headers */,
 				FD7EA5181FAEE4DC008DF72F /* Delegate.h in Headers */,
 				FD7EA5191FAEE4DC008DF72F /* ICloneable.h in Headers */,
@@ -933,6 +944,7 @@
 				FDE573AF2039ED1A00C3D57E /* MacOSPath.mm in Sources */,
 				FDE573AB2039E57700C3D57E /* Application.cpp in Sources */,
 				FDE573A92039223600C3D57E /* Bitmap.cpp in Sources */,
+				FDA52F99203C89480077A21F /* MacOSLocale.mm in Sources */,
 				FDEA0201203747F600135040 /* Path.cpp in Sources */,
 				FDEA01F72035E58900135040 /* GenericVertexBuffer.cpp in Sources */,
 				FDEA01F82035E58900135040 /* MacOSOpenGLContext.cpp in Sources */,
@@ -943,19 +955,19 @@
 				FD08C53120353EB300355346 /* MacOSAppDelegate.mm in Sources */,
 				FD08C53220353EB300355346 /* MacOSApplication.mm in Sources */,
 				FDE573A82039221000C3D57E /* OpenGLIndexBuffer.cpp in Sources */,
-				FD08C53320353EB300355346 /* MacOSLocale.mm in Sources */,
 				FDEA01F520359C8A00135040 /* GenericWindow.cpp in Sources */,
 				FD08C53420353EB300355346 /* MacOSMain.mm in Sources */,
 				FD08C53520353EB300355346 /* MacOSScreen.mm in Sources */,
+				FDA52F94203BD71E0077A21F /* GenericTexture.cpp in Sources */,
 				FD08C53620353EB300355346 /* MacOSWindow.mm in Sources */,
 				FD08C53720353EB300355346 /* MacOSWindowDelegate.mm in Sources */,
 				FD08C53820353EB300355346 /* MacOSWindowUtility.mm in Sources */,
+				FDA52F98203BD75C0077A21F /* OpenGLTexture.cpp in Sources */,
 				FD08C53020353EAC00355346 /* MacOSTime.mm in Sources */,
 				FD08C5282035326800355346 /* GenericApplication.cpp in Sources */,
 				FD2BF5772018FC2A00228FFF /* GraphicsModule.cpp in Sources */,
 				FD2BF5782018FC2A00228FFF /* TimeModule.cpp in Sources */,
 				FD2BF56620138F2600228FFF /* MacOSLog.cpp in Sources */,
-				FD9AED1B1FDBF45A007AE839 /* Texture.cpp in Sources */,
 				FD108AA41FD837D2005F1AC3 /* GameApplication.cpp in Sources */,
 				FD2C7F671F84C9F500D4555B /* Vector3.cpp in Sources */,
 				FD753C181F6B4AE600CD35F4 /* WELL1024a.cpp in Sources */,
@@ -1082,6 +1094,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/glew-2.1.0/include",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/zlib-1.2.11",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libiconv-1.15/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Source/ThirdParty/$(CONFIGURATION)/$(NATIVE_ARCH_ACTUAL)",
@@ -1106,6 +1119,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16/bin",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/glew-2.1.0/include",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/zlib-1.2.11",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/libiconv-1.15/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Source/ThirdParty/$(CONFIGURATION)/$(NATIVE_ARCH_ACTUAL)",

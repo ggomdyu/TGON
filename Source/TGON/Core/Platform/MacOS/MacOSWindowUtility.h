@@ -15,7 +15,7 @@ namespace core
 {
 
 /**
- * @brief                       Create window through given arguments.
+ * @brief                       Creates a window via given WindowStyle.
  * @param [in] windowStyle      Window style information
  */
 NSWindow* MakeNativeWindow(const struct WindowStyle& windowStyle);

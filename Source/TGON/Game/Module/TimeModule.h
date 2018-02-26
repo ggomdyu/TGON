@@ -28,7 +28,6 @@ public:
     virtual void Update() override;
 
     void SetTimeScale(float timeScale);
-
     float GetTimeScale() const;
     float GetDeltaTime() const;
 

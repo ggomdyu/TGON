@@ -266,17 +266,17 @@ TGON_API bool HasExtension(const char* srcPathStr)
     return HasExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
 }
 
-TGON_API int32_t ChangeExtension(char* srcPathStr, int32_t srcPathStrLen, const char* extensionName)
-{
-    const char* extensionStr = nullptr;
-    int32_t destPathStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
-    if (destPathStrLen == -1)
-    {
-        return -1;
-    }
-
-
-}
+//TGON_API int32_t ChangeExtension(char* srcPathStr, int32_t srcPathStrLen, const char* extensionName)
+//{
+//    const char* extensionStr = nullptr;
+//    int32_t destPathStrLen = GetExtension(srcPathStr, srcPathStrLen, &extensionStr);
+//    if (destPathStrLen == -1)
+//    {
+//        return -1;
+//    }
+//
+//
+//}
 
 } /* namespace core */
 } /* namespace tgon */

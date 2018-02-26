@@ -30,7 +30,7 @@ namespace graphics
 enum class FillMode;
 enum class CullMode;
 enum class PrimitiveType;
-class VertexBuffer;
+class GenericVertexBuffer;
 struct VertexBufferDesc;
 
 } /* namespace graphics */

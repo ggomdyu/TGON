@@ -160,9 +160,33 @@ TGON_API std::string ChangeExtension(const char* srcPathStr);
 
 TGON_API int32_t ChangeExtension(char* srcPathStr, const char* srcExtensionStr);
 
+TGON_API int32_t GetCurrentDirectory(char* destPathStr, int32_t destPathStrBufferSize);
+
+template <std::size_t _DestPathStrBufferSize>
+inline int32_t GetCurrentDirectory(char(&destPathStr)[_DestPathStrBufferSize])
+{
+    return GetCurrentDirectory(destPathStr, _DestPathStrBufferSize);
+}
+
 TGON_API std::string GetCurrentDirectory();
 
+TGON_API int32_t GetUserDirectory(char* destPathStr, int32_t destPathStrBufferSize);
+
+template <std::size_t _DestPathStrBufferSize>
+inline int32_t GetUserDirectory(char(&destPathStr)[_DestPathStrBufferSize])
+{
+    return GetUserDirectory(destPathStr, _DestPathStrBufferSize);
+}
+
 TGON_API std::string GetUserDirectory();
+
+TGON_API int32_t GetDesktopDirectory(char* destPathStr, int32_t destPathStrBufferSize);
+
+template <std::size_t _DestPathStrBufferSize>
+inline int32_t GetDesktopDirectory(char(&destPathStr)[_DestPathStrBufferSize])
+{
+    return GetDesktopDirectory(destPathStr, _DestPathStrBufferSize);
+}
 
 TGON_API std::string GetDesktopDirectory();
 

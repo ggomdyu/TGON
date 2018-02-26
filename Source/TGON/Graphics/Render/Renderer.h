@@ -10,7 +10,6 @@
 #include "RendererFwd.h"
 
 #include "Material.h"
-#include "Texture.h"
 
 namespace tgon
 {

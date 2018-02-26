@@ -58,26 +58,20 @@ public:
     int32_t Compare(const CharType(&str)[_CharArraySize2]) const;
     template <typename _CharPointerType, std::enable_if_t<std::is_pointer<_CharPointerType>::value>* = nullptr>
     int32_t Compare(const _CharPointerType str) const;
-    
     template <std::size_t _CharArraySize2>
     std::size_t Find(const CharType(&str)[_CharArraySize2], std::size_t strOffset = 0) const;
     std::size_t Find(const CharType* str, std::size_t strOffset, std::size_t strLen) const;
     std::size_t Find(const BasicUUID& rhs) const;
     std::size_t Find(CharType ch, std::size_t strOffset = 0) const;
-    
     std::size_t RFind(const CharType* str, std::size_t strOffset, std::size_t strLen) const;
     template <std::size_t _CharArraySize2>
     std::size_t RFind(const CharType(&str)[_CharArraySize2], std::size_t strOffset = _StringTraitsType::NPos) const;
     std::size_t RFind(const BasicUUID& rhs) const;
     std::size_t RFind(CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
-    
     const CharType& At(std::size_t index) const;
-    
     const CharType* CStr() const noexcept;
     const CharType* Data() const noexcept;
-    
     constexpr std::size_t Length() const noexcept;
-    
     ConstIteratorType cbegin() const noexcept;
     ConstIteratorType cend() const noexcept;
     ConstReverseIteratorType crbegin() const noexcept;

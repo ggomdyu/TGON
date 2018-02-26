@@ -1,7 +1,7 @@
 /**
  * @filename    MacOSWindow.h
  * @author      ggomdyu
- * @since       01/09/2016
+ * @since       07/16/2017
  * @brief       The platform specific window class implementation.
  */
 

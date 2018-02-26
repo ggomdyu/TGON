@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.pch"
 
 #include "OpenGLGraphics.h"
+#include "OpenGLGraphicsUtility.h"
 #include "OpenGLContext.h"
 
 #include "../VertexBuffer.h"
@@ -14,8 +15,6 @@
 #if BOOST_OS_WINDOWS
 #elif BOOST_OS_MACOS
 #   import <AppKit/NSOpenGL.h>
-#   import <AppKit/NSOpenGLView.h>
-#   import <AppKit/NSWindow.h>
 #   import <OpenGL/OpenGL.h>
 #endif
 
@@ -47,6 +46,11 @@ void OpenGLGraphics::SetFillMode(FillMode fillMode)
 void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
     glFrontFace(ConvertCullModeToNative(cullMode));
+}
+
+void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
+{
+    glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height));
 }
 
 void OpenGLGraphics::EnableBlend()
@@ -88,7 +92,7 @@ void OpenGLGraphics::SwapBuffer()
 #endif
 }
 
-std::shared_ptr<VertexBuffer> OpenGLGraphics::CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+std::shared_ptr<GenericVertexBuffer> OpenGLGraphics::CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
 {
     return std::make_shared<VertexBuffer>(data, dataBytes, isDynamicUsage, vertexBufferDescs);
 }

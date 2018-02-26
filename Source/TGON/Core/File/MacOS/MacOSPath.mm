@@ -15,6 +15,12 @@ TGON_API std::string GetCurrentDirectory()
     return [path UTF8String];
 }
 
+//TGON_API int32_t GetCurrentDirectory(char* destPathStr, int32_t destPathStrBufferSize)
+//{
+//    NSString* path = [[NSFileManager defaultManager] currentDirectoryPath];
+//    path.length
+//}
+
 TGON_API std::string GetUserDirectory()
 {
     NSString* path = NSHomeDirectory();
@@ -25,13 +31,13 @@ TGON_API std::string GetDesktopDirectory()
 {
     NSArray<NSString*>* paths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES);
 
-    if ([paths count] <= 0)
+    if ([paths count] > 0)
     {
-        return std::string();
+        return [[paths objectAtIndex: 0] UTF8String];
     }
     else
     {
-        return [[paths objectAtIndex: 0] UTF8String];
+        return std::string();
     }
 }
 
