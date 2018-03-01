@@ -6,6 +6,8 @@
 #include "../Generic/GenericWindowType.h"
 #include "../Generic/GenericApplicationType.h"
 
+#include "Core/String/Encoding.h"
+
 #include <Windows.h>
 
 namespace tgon
@@ -69,9 +71,13 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
         MB_ICONEXCLAMATION,
     };
 
-    // todo: 나중에 파라미터로 utf8을 받게한 뒤 utf16으로 변환해서, MessageBoxW함수로 처리하도록 해야할 듯.
-    // 일단 icu 라이브러리 붙이는게 시급함.
-    ::MessageBoxA(nullptr, message, title, nativeMessageBoxIconTypeTable[static_cast<int>(messageBoxType)] | MB_OK);
+    wchar_t utf16Message[256];
+    core::UTF8::Convert<core::UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
+
+    wchar_t utf16Title[256];
+    core::UTF8::Convert<core::UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
+
+    ::MessageBoxW(nullptr, utf16Message, utf16Title, nativeMessageBoxIconTypeTable[static_cast<int>(messageBoxType)] | MB_OK);
 }
 
 LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
