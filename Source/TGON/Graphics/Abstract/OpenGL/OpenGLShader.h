@@ -37,9 +37,9 @@ public:
     virtual void SetParameter3f(int32_t location, float f1, float f2, float f3) final override;
     virtual void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4) final override;
     virtual void SetParameterMatrix4fv(int32_t location, const float* f) final override;
-    virtual void SetParameterSampler(int32_t location, int textureSlot, std::size_t sampler) final override;
+    virtual void SetParameterSampler(int32_t location, uint32_t textureSlot, uint32_t sampler) final override;
     
-    virtual void BindAttributeLocation(const char* name, std::size_t location) final override;
+    virtual void BindAttributeLocation(const char* name, uint32_t location) final override;
     virtual int GetUniformLocation(const char* name) const final override;
     
     /* @brief   Checks the shader was loaded successfully. */

@@ -31,6 +31,9 @@ enum class FillMode;
 enum class CullMode;
 enum class PrimitiveType;
 class GenericVertexBuffer;
+class GenericIndexBuffer;
+class GenericTexture;
+class GenericShader;
 struct VertexBufferDesc;
 
 } /* namespace graphics */

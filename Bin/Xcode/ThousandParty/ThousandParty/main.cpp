@@ -161,23 +161,6 @@ public:
 
        /* glGenerateMipmap(GL_TEXTURE_2D);
 */
-        
-        {
-//            const char * utf8_strings = u8"ABab°¡³ª";
-//
-//            // 
-//            char buf[256];
-//            auto wow = core::UTF8::Convert<core::UTF16LE>(utf8_strings, strlen(utf8_strings), buf, 256);
-//
-//            char buf2[256];
-//            auto a = core::UTF16LE::GetMaxCharSize() * wow;
-//            auto wow2 = core::UTF16LE::Convert<core::UTF8>(buf, a, buf2, 256);
-//
-//            char buf3[256];
-//            auto wow3 = core::UTF8::Convert<core::UTF16LE>(buf2, strlen(buf2), buf3, 256);
-//
-//            MessageBoxW(nullptr, (const wchar_t*)buf3, L"", 0);
-        }
     }
 
     ~ThousandParty()

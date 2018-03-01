@@ -76,7 +76,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<c
         context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
     }
 
-    // Create a GL View and attach it to target window.
+    // Create a GL View and attach it to thes target window.
     NSWindow* nativeWindow = (__bridge NSWindow*)window->GetNativeWindow();
     {
         NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
