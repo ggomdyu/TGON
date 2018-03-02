@@ -177,7 +177,8 @@ Bitmap::Bitmap(const std::string& filePath) :
     m_height(0),
     m_channels(0),
     m_colorDepth(0),
-    m_pixelFormat(PixelFormat::Unknown)
+    m_pixelFormat(PixelFormat::Unknown),
+    m_filePath(filePath)
 {
     // TODO: Implement Engine file loader
     FILE* file = fopen(filePath.c_str(), "rb");
