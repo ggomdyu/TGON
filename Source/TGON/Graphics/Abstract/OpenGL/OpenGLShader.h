@@ -47,7 +47,7 @@ public:
 
 /* @section Private method */
 private:
-    /* @brief   Links shders to the program object. */
+    /* @brief   Links shaders to the program object. */
     bool LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader);
 
     /**

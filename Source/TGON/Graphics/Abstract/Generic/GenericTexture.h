@@ -16,13 +16,12 @@ namespace graphics
 enum class TextureFilterMode
 {
     Point = 0,
-    Linear,
+    Bilinear,
 };
 
-enum class TextureAddressMode
+enum class TextureWrapMode
 {
-    Wrap,
-    Border,
+    Repeat,
     Clamp,
     Mirror,
 };
@@ -45,12 +44,13 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Use() = 0;
-    virtual void Unuse() = 0;
+    virtual void TransferToVideo() = 0;
+    virtual void UpdateParemeters() = 0;
+
     virtual void SetFilterMode(TextureFilterMode filterMode) = 0;
-    virtual void SetAddressMode(TextureAddressMode addressMode) = 0;
-    TextureFilterMode GetFilterMode() const noexcept;
-    TextureAddressMode GetAddressMode() const noexcept;
+    virtual void SetWrapMode(TextureWrapMode addressMode) = 0;
+    virtual TextureFilterMode GetFilterMode() const noexcept = 0;
+    virtual TextureWrapMode GetWrapMode() const noexcept = 0;
     
     using core::Bitmap::Save;
     using core::Bitmap::IsValid;
@@ -62,11 +62,6 @@ public:
     using core::Bitmap::GetBitsPerPixel;
     using core::Bitmap::GetPixelFormat;
     using core::Bitmap::GetFilePath;
-
-/* @section Protected variable */
-protected:
-    TextureFilterMode m_filterMode;
-    TextureAddressMode m_addressMode;
 };
 
 inline GenericTexture::~GenericTexture() = default;

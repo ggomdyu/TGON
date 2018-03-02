@@ -8,7 +8,9 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include <cstddef>
+#include <cstdlib>
+#include <cstdint>
+#include <string>
 
 namespace tgon
 {
@@ -16,17 +18,24 @@ namespace core
 {
 
 /**
- * @brief                           Get the current language of OS.
+ * @brief                           Returns the current system language.
  * @param [out] destStr             The destination of the string to be written.
- * @param [in] destStrBufferSize    The length of buffer
+ * @param [in] destStrBufferBytes   The bytes length of buffer
  */
-TGON_API void GetLanguage(char* destStr, std::size_t destStrBufferSize);
+int32_t GetLanguage(char* destStr, std::size_t destStrBufferBytes);
 
+/**
+ * @brief                   Returns the current system language.
+ * @param [out] destStr     The destination of the string to be written.
+ */
 template <std::size_t N>
-inline void GetLanguage(char(&destStr)[N])
+inline int32_t GetLanguage(char(&destStr)[N])
 {
-    GetLanguage(destStr, N);
+    return GetLanguage(destStr, N);
 }
+
+/* @brief   Returns the current system language. */
+std::string GetLanguage();
 
 } /* namespace core */
 } /* namespace tgon */

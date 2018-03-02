@@ -12,7 +12,6 @@
 
 #include "Core/Object/Object.h"
 
-#include <boost/predef/os.h>
 #include <boost/noncopyable.hpp>
 #include <memory>
 #include <type_traits>

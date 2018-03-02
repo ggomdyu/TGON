@@ -7,6 +7,8 @@
 #pragma once
 #include "../Generic/GenericGraphics.h"
 
+#include "Core/Utility/Enumerator.h"
+
 namespace tgon
 {
 namespace graphics
@@ -21,7 +23,7 @@ constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
         GL_FILL
     };
 
-    return nativeFillModeTable[static_cast<std::size_t>(fillMode)];
+    return nativeFillModeTable[core::ToUnderlying(fillMode)];
 }
 
 constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
@@ -32,7 +34,7 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
         GL_CCW
     };
 
-    return nativeCullModeTable[static_cast<std::size_t>(cullMode)];
+    return nativeCullModeTable[core::ToUnderlying(cullMode)];
 }
 
 constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
@@ -47,7 +49,7 @@ constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexc
         GL_TRIANGLE_FAN,
     };
 
-    return nativePrimitiveTypeTable[static_cast<std::size_t>(primitiveType)];
+    return nativePrimitiveTypeTable[core::ToUnderlying(primitiveType)];
 }
 
 } /* namespace graphics */

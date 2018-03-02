@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.pch"
 
+#define TGON_USING_OPENGL 1
 #include "Game/Engine/GameApplication.h"
 
 #include "Core/Random/Random.h"
@@ -11,6 +12,7 @@
 #include "Core/Drawing/Bitmap.h"
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Screen.h"
+#include "Core/Platform/Locale.h"
 #include "Core/Platform/ScreenType.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
@@ -35,8 +37,6 @@
 #include "Game/Module/TimeModule.h"
 #include "Graphics/Abstract/VertexBuffer.h"
 #include "Graphics/Abstract/IndexBuffer.h"
-
-#include <Foundation/Foundation.h>
 
 //#include <glm/glm/matrix.hpp>
 //#include <glm/glm/common.hpp>
@@ -137,6 +137,9 @@ public:
             },
         };
 
+        std::string language = core::GetLanguage().c_str();
+        ShowMessageBox(language.c_str());
+
         m_vb = std::make_unique<graphics::VertexBuffer>(v, false, viad);
         m_ib = std::make_unique<graphics::IndexBuffer>(i, false);
 
@@ -151,16 +154,9 @@ public:
 
         shader = std::make_unique<graphics::Shader>(g_positionUVVert, g_positionUVFrag);
 
-        m_texture.Use();
-//        GLuint texture;
-//        glGenTextures(1, &texture);
-//        glBindTexture(GL_TEXTURE_2D, texture);
-//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_bitmap.GetWidth(), m_bitmap.GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_bitmap.GetBits().data());
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-       /* glGenerateMipmap(GL_TEXTURE_2D);
-*/
+        m_texture.SetWrapMode(graphics::TextureWrapMode::Clamp);
+        m_texture.TransferToVideo();
+        m_texture.UpdateParemeters();
     }
 
     ~ThousandParty()
@@ -190,10 +186,10 @@ public:
         SuperType::OnUpdate();
 
         static float x = 0.0f;
-        auto M2 = core::Matrix4x4::Translate(0.0f, 0, -x);
-        auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
+        auto M2 = core::Matrix4x4::Translate(0.0f, 0, x);
+        auto V2 = core::Matrix4x4::LookAtRH({ 0.0f, 0.0f, 5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = core::Matrix4x4::PerspectiveRH(3.14159268f / 8.0f, 500.0f / 500.0f, 0.1f, 1000.0f);
-        x -= 0.05f;
+        x += 0.05f;
         
         MVP = M2 * V2 * P2;
         

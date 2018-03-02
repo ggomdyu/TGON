@@ -4,7 +4,7 @@
 
 #include "Core/Math/Color.h"
 #include "Graphics/Abstract/Generic/GenericGraphicsType.h"
-#if BOOST_OS_WINDOWS
+#if TGON_PLATFORM_WINDOWS
 //#   include "Graphics/Abstract/Direct3D11/D3D11Graphics.h"
 #else
 #endif

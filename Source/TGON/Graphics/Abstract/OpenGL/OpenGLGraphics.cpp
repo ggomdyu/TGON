@@ -4,16 +4,17 @@
 #include "OpenGLGraphicsUtility.h"
 #include "OpenGLContext.h"
 
-#include "../VertexBuffer.h"
 #include "../Generic/GenericGraphicsType.h"
-#include "../Generic/GenericVertexBuffer.h"
+#include "../OpenGL/OpenGLVertexBuffer.h"
+#include "../OpenGL/OpenGLIndexBuffer.h"
+#include "../OpenGL/OpenGLTexture.h"
 
 #include "Core/Math/Color.h"
 
 #include <cassert>
 #include <GL/glew.h>
-#if BOOST_OS_WINDOWS
-#elif BOOST_OS_MACOS
+#if TGON_PLATFORM_WINDOWS
+#elif TGON_PLATFORM_MACOS
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
 #endif
@@ -26,6 +27,7 @@ namespace graphics
 OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window) :
     m_context(videoMode, window)
 {
+    this->SetCullMode(CullMode::CW);
     this->SetClearColor(videoMode.clearColor);
 }
 
@@ -85,16 +87,21 @@ void OpenGLGraphics::ClearColorDepthBuffer()
 
 void OpenGLGraphics::SwapBuffer()
 {
-#if BOOST_OS_WINDOWS
+#if TGON_PLATFORM_WINDOWS
     ::SwapBuffers(m_context.dcHandle);
-#else
+#elif TGON_PLATFORM_MACOS
     CGLFlushDrawable([m_context.context CGLContextObj]);
 #endif
 }
 
 std::shared_ptr<GenericVertexBuffer> OpenGLGraphics::CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
 {
-    return std::make_shared<VertexBuffer>(data, dataBytes, isDynamicUsage, vertexBufferDescs);
+    return std::make_shared<OpenGLVertexBuffer>(data, dataBytes, isDynamicUsage, vertexBufferDescs);
+}
+
+std::shared_ptr<GenericIndexBuffer> OpenGLGraphics::CreateIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage)
+{
+    return std::make_shared<OpenGLIndexBuffer>(data, dataBytes, isDynamicUsage);
 }
 
 } /* namespace graphics */

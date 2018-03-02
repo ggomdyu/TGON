@@ -39,6 +39,7 @@ public:
     virtual void ClearColorDepthBuffer() final override;
     virtual void SwapBuffer() final override;
     virtual std::shared_ptr<GenericVertexBuffer> CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) final override;
+    virtual std::shared_ptr<GenericIndexBuffer> CreateIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage) final override;
 
 /* @section Private variable */
 private:

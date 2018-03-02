@@ -7,8 +7,8 @@
 
 #pragma once
 
-#   include "OpenGL/OpenGLIndexBuffer.h"
 #if TGON_USING_OPENGL
+#   include "OpenGL/OpenGLIndexBuffer.h"
 #elif TGON_USING_DIRECT3D11
 #   include "Direct3D11/D3D11IndexBuffer.h"
 #elif TGON_USING_DIRECT3D12

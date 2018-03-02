@@ -7,6 +7,7 @@
 #include "../Generic/GenericApplicationType.h"
 
 #include "Core/String/Encoding.h"
+#include "Core/Utility/Enumerator.h"
 
 #include <Windows.h>
 
@@ -16,6 +17,17 @@ namespace core
 {
 namespace
 {
+
+UINT ConvertMessageBoxIconTypeToNative(MessageBoxIconType messageBoxIconType) noexcept
+{
+    static constexpr const UINT nativeMessageBoxIconTypeTable[] =
+    {
+        MB_ICONQUESTION,
+        MB_ICONEXCLAMATION,
+    };
+
+    return nativeMessageBoxIconTypeTable[core::ToUnderlying(messageBoxIconType)];
+}
 
 /* @brief   Register default WNDCLASS to window class table. */
 bool RegisterWindowClass()
@@ -65,19 +77,13 @@ void WindowsApplication::MessageLoop()
 
 void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
 {
-    static constexpr const LONG nativeMessageBoxIconTypeTable[2] =
-    {
-        MB_ICONQUESTION,
-        MB_ICONEXCLAMATION,
-    };
-
-    wchar_t utf16Message[256];
+    wchar_t utf16Message[1024];
     core::UTF8::Convert<core::UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
 
     wchar_t utf16Title[256];
     core::UTF8::Convert<core::UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
 
-    ::MessageBoxW(nullptr, utf16Message, utf16Title, nativeMessageBoxIconTypeTable[static_cast<int>(messageBoxType)] | MB_OK);
+    ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertMessageBoxIconTypeToNative(messageBoxType) | MB_OK);
 }
 
 LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)

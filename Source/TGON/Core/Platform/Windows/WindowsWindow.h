@@ -63,9 +63,9 @@ public:
 
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
     
-    using GenericWindow::GetPosition;
-    using GenericWindow::GetSize;
-    using GenericWindow::GetNativeWindow;
+    using SuperType::GetPosition;
+    using SuperType::GetSize;
+    using SuperType::GetNativeWindow;
 
 /* @section Private method */
 private:

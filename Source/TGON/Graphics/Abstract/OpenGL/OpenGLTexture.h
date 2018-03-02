@@ -24,20 +24,26 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLTexture() override = default;
+    virtual ~OpenGLTexture() override;
 
 /* @section Public method */
 public:
-    virtual void Use() final override;
-    virtual void Unuse() final override;
+    virtual void TransferToVideo() final override;
+    virtual void UpdateParemeters() final override;
+
     virtual void SetFilterMode(TextureFilterMode filterMode) final override;
-    virtual void SetAddressMode(TextureAddressMode addressMode) final override;
+    virtual void SetWrapMode(TextureWrapMode addressMode) final override;
+    virtual TextureFilterMode GetFilterMode() const noexcept final override;
+    virtual TextureWrapMode GetWrapMode() const noexcept final override;
 
 private:
-    GLuint m_rawTextureHandle;
+    GLuint GenerateTexture() const;
 
-    GLint m_rawAddressMode;
-    GLint m_rawFilterMode;
+private:
+    GLuint m_textureHandle;
+
+    GLint m_addressMode;
+    GLint m_filterMode;
 };
 
 class Texture :
@@ -46,6 +52,10 @@ class Texture :
 /* @section Public constructor */
 public:
     using OpenGLTexture::OpenGLTexture;
+
+/* @section Public destructor */
+public:
+    virtual ~Texture() final override = default;
 };
 
 } /* namespace graphics */

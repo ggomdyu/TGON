@@ -39,6 +39,7 @@ public:
     virtual void ClearColorDepthBuffer() {}
     virtual void SwapBuffer() {}
     virtual std::shared_ptr<GenericVertexBuffer> CreateVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) = 0;
+    virtual std::shared_ptr<GenericIndexBuffer> CreateIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage) = 0;
 
     /*virtual void DrawPoint(const core::Vector3&) {};
     virtual void DrawLine(const core::Vector3&, const core::Vector3&) {};

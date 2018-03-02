@@ -13,7 +13,7 @@ namespace core
 {
 
 template <typename _EnumType>
-constexpr typename std::underlying_type<_EnumType>::type Underlying(_EnumType value)
+constexpr typename std::underlying_type<_EnumType>::type ToUnderlying(_EnumType value) noexcept
 {
     return static_cast<typename std::underlying_type<_EnumType>::type>(value);
 }

@@ -179,7 +179,7 @@ bool D3D11Graphics::FindSuitDisplayMode(IDXGIOutput* dxgiAdapterOutput, DXGI_FOR
     {
         *suitDisplayMode = displayMode;
         break;
-        //// 적절한 DisplayMode를 찾는 정책을 정해야 함
+        //// TODO: 적절한 DisplayMode를 찾는 정책을 정해야 함
         //if (displayMode.Width == static_cast<UINT>(windowWidth) &&
         //    displayMode.Height == static_cast<UINT>(windowHeight))
         //{
@@ -295,6 +295,7 @@ bool D3D11Graphics::CreateDepthStencilState(ID3D11Device* device, ID3D11DepthSte
     depthStencilDesc.StencilEnable = true;
     depthStencilDesc.StencilReadMask = 0xff;
     depthStencilDesc.StencilWriteMask = 0xff;
+
     // Stencil operations if pixel is front-facing.
     depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
     depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;

@@ -7,8 +7,8 @@
 
 #pragma once
 
-#   include "OpenGL/OpenGLTexture.h"
 #if TGON_USING_OPENGL
+#   include "OpenGL/OpenGLTexture.h"
 #elif TGON_USING_DIRECT3D11
 #   include "Direct3D11/D3D11Texture.h"
 #elif TGON_USING_DIRECT3D12
