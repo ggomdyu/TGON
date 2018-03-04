@@ -7,8 +7,6 @@
 #pragma once
 #include "EncodingFwd.h"
 
-#include "Core/Platform/Config.h"
-
 #include <string>
 #include <cstdint>
 

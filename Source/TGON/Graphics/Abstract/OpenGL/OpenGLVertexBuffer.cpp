@@ -20,9 +20,33 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, std::size_t dataBytes, 
     this->SetData(data, dataBytes, isDynamicUsage, vertexBufferDescs);
 }
 
+OpenGLVertexBuffer::OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) :
+    GenericVertexBuffer(std::move(rhs)),
+    m_vertexBufferHandle(rhs.m_vertexBufferHandle),
+    m_vertexBufferDesc(std::move(rhs.m_vertexBufferDesc))
+{
+    rhs.m_vertexBufferHandle = 0;
+}
+
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
     glDeleteBuffers(1, &m_vertexBufferHandle);
+}
+
+OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs)
+{
+    if (&rhs == this)
+    {
+        return *this;
+    }
+
+    this->~OpenGLVertexBuffer();
+
+    GenericVertexBuffer::operator=(std::move(rhs));
+    
+    new (this) OpenGLVertexBuffer(std::move(rhs));
+
+    return *this;
 }
 
 void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)

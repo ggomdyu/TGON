@@ -19,9 +19,32 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bo
     this->SetData(data, dataBytes, isDynamicUsage);
 }
 
+OpenGLIndexBuffer::OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) :
+    GenericIndexBuffer(std::move(rhs)),
+    m_indexBufferHandle(rhs.m_indexBufferHandle)
+{
+    rhs.m_indexBufferHandle = 0;
+}
+
 OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
     glDeleteBuffers(1, &m_indexBufferHandle);
+}
+
+OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs)
+{
+    if (&rhs == this)
+    {
+        return *this;
+    }
+
+    this->~OpenGLIndexBuffer();
+
+    OpenGLIndexBuffer::operator=(std::move(rhs));
+
+    new (this) OpenGLIndexBuffer(std::move(rhs));
+
+    return *this;
 }
 
 void OpenGLIndexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)

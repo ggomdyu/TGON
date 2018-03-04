@@ -22,7 +22,17 @@ public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     OpenGLIndexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
     OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
+    OpenGLIndexBuffer(const OpenGLIndexBuffer&) = delete;
+    OpenGLIndexBuffer(OpenGLIndexBuffer&&);
+
+/* @section Public destructor */
+public:
     virtual ~OpenGLIndexBuffer();
+
+/* @section Public operator */
+public:
+    OpenGLIndexBuffer& operator=(const OpenGLIndexBuffer&) = delete;
+    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&&);
 
 /* @section Public method */
 public:

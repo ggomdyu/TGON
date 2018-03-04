@@ -13,6 +13,30 @@ GenericVertexBuffer::GenericVertexBuffer(std::size_t dataBytes, bool isDynamicUs
 {
 }
 
+GenericVertexBuffer::GenericVertexBuffer(GenericVertexBuffer&& rhs) :
+    m_dataBytes(rhs.m_dataBytes),
+    m_isDynamicUsage(rhs.m_isDynamicUsage)
+{
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+}
+
+GenericVertexBuffer& GenericVertexBuffer::operator=(GenericVertexBuffer&& rhs)
+{
+    if (&rhs == this)
+    {
+        return *this;
+    }
+
+    m_dataBytes = rhs.m_dataBytes;
+    m_isDynamicUsage = rhs.m_isDynamicUsage;
+ 
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+
+    return *this;
+}
+
 std::size_t GenericVertexBuffer::GetDataBytes() const noexcept
 {
     return m_dataBytes;

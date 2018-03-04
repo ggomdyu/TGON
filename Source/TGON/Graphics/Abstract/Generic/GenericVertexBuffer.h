@@ -20,7 +20,17 @@ class GenericVertexBuffer
 /* @section Public constructor */
 public:
     GenericVertexBuffer(std::size_t dataBytes, bool isDynamicUsage);
+    GenericVertexBuffer(const GenericVertexBuffer&) = delete;
+    GenericVertexBuffer(GenericVertexBuffer&&);
+
+/* @section Public destructor */
+public:
     virtual ~GenericVertexBuffer() = default;
+
+/* @section Public operator */
+public:
+    GenericVertexBuffer& operator=(const GenericVertexBuffer&) = delete;
+    GenericVertexBuffer& operator=(GenericVertexBuffer&&);
 
 /* @section Public method */
 public:

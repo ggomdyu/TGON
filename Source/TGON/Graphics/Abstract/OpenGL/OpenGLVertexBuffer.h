@@ -24,7 +24,17 @@ public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     OpenGLVertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
     OpenGLVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    OpenGLVertexBuffer(const OpenGLVertexBuffer&) = delete;
+    OpenGLVertexBuffer(OpenGLVertexBuffer&&);
+
+/* @section Public destructor */
+public:
     virtual ~OpenGLVertexBuffer();
+
+/* @section Public operator */
+public:
+    OpenGLVertexBuffer& operator=(const OpenGLVertexBuffer&) = delete;
+    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&&);
 
 /* @section Public method */
 public:

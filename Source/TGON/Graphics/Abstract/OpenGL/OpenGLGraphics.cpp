@@ -14,6 +14,7 @@
 #include <cassert>
 #include <GL/glew.h>
 #if TGON_PLATFORM_WINDOWS
+#   pragma comment(lib, "glew32.lib")
 #elif TGON_PLATFORM_MACOS
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>

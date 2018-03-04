@@ -13,6 +13,30 @@ GenericIndexBuffer::GenericIndexBuffer(std::size_t dataBytes, bool isDynamicUsag
 {
 }
 
+GenericIndexBuffer::GenericIndexBuffer(GenericIndexBuffer&& rhs) :
+    m_dataBytes(rhs.m_dataBytes),
+    m_isDynamicUsage(rhs.m_isDynamicUsage)
+{
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+}
+
+GenericIndexBuffer& GenericIndexBuffer::operator=(GenericIndexBuffer&& rhs)
+{
+    if (&rhs == this)
+    {
+        return *this;
+    }
+
+    m_dataBytes = rhs.m_dataBytes;
+    m_isDynamicUsage = rhs.m_isDynamicUsage;
+
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+
+    return *this;
+}
+
 std::size_t GenericIndexBuffer::GetDataBytes() const noexcept
 {
     return m_dataBytes;

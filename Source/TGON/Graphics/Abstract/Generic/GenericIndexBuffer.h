@@ -19,7 +19,17 @@ class GenericIndexBuffer
 /* @section Public constructor */
 public:
     GenericIndexBuffer(std::size_t dataBytes, bool isDynamicUsage);
+    GenericIndexBuffer(const GenericIndexBuffer&) = delete;
+    GenericIndexBuffer(GenericIndexBuffer&&);
+
+/* @section Public destructor */
+public:
     virtual ~GenericIndexBuffer() = default;
+
+/* @section Public operator */
+public:
+    GenericIndexBuffer& operator=(const GenericIndexBuffer&) = delete;
+    GenericIndexBuffer& operator=(GenericIndexBuffer&&);
 
 /* @section Public method */
 public:

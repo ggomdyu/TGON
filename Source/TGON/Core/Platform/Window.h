@@ -33,6 +33,10 @@ public:
 /* @section Public constructor */
 public:
     using SuperType::SuperType;
+
+/* @section Public destructor */
+public:
+    virtual ~Window() final override = default;
 };
 
 } /* namespace core */

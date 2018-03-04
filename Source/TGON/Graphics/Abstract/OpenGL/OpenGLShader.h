@@ -22,6 +22,10 @@ class OpenGLShader :
 public:
     OpenGLShader(const char* vertexShaderCode, const char* fragmentShaderCode);
 
+/* @section Public destructor */
+public:
+    virtual ~OpenGLShader() override = default;
+
 /* @section Public method */
 public:
     virtual void Use() final override;
@@ -73,9 +77,13 @@ public:
 
 class Shader : public OpenGLShader
 {
-    /* @section Public constructor */
+/* @section Public constructor */
 public:
     using OpenGLShader::OpenGLShader;
+    
+/* @section Public destructor */
+public:
+    virtual ~Shader() final override = default;
 };
 
 } /* namespace graphics */

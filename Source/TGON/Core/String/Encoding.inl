@@ -4,8 +4,14 @@
  * @since       02/20/2018
  */
 
+#include "Core/Platform/Config.h"
+
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>
+
+#if TGON_PLATFORM_WINDOWS
+#   pragma comment(lib, "icuucd.lib")
+#endif
 
 namespace tgon
 {
