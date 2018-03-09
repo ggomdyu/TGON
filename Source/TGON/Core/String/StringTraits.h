@@ -51,7 +51,7 @@ public:
 /* @section Protected method */
 protected:
     /**
-     * @brief                   Copy string from source to destination.
+     * @brief                   Copies string from source to destination.
      * @param [in] srcStr       The string to copy.
      * @param [in] srcStrLen    The length of string to copy.
      * @param [in] destStr      The destination of string to copy.
