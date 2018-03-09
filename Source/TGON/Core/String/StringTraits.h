@@ -25,7 +25,7 @@ protected:
     constexpr StringTraits() noexcept = default;
 
     /**
-     * @brief                   Copy string from source to destination.
+     * @brief                   Copies string from source to destination.
      * @param [in] srcStr       The string to copy.
      * @param [in] srcStrLen    The length of string to copy.
      * @param [in] destStr      The destination of string to copy.
@@ -43,8 +43,8 @@ protected:
 /* @section Public variable */
 public:
     /**
-     * @brief   This is the special magic number which means string not exists.
-     *          The series of find function will return this variable when searching substring failed.
+     * @brief   This is a special magic number which means string not exists.
+     *          The series of find function will return this variable when substring searching fails.
      */
     static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
 
@@ -59,7 +59,7 @@ protected:
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Assigns chCount characters to the string.
+     * @brief                   Appends characters as much as given count specified by chCount.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string
@@ -69,7 +69,7 @@ protected:
     static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
 
     /**
-     * @brief                   Assigns chCount characters to the string.
+     * @brief                   Appends characters as much as given count specified by chCount.
      * @param [out] destStr     The destination of assign
      * @param [in] ch           The character to assign to the string
      * @param [in] chCount      The character count to assign to the string
@@ -77,7 +77,7 @@ protected:
     static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount = 1);
 
     /**
-     * @brief                       Search for a matching substring.
+     * @brief                       Searches a matching substring.
      * @param [in] srcStr           The string source
      * @param [in] srcStrLen        The length of string source
      * @param [in] srcStrOffset     The starting point of string source
