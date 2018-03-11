@@ -49,7 +49,7 @@ inline void HandleGuard::Release()
     if (m_resource != TraitsType::GetNullValue())
     {
         CloseHandle(m_resource);
-        m_resource = nullptr;
+        m_resource = TraitsType::GetNullValue();
     }
 }
 
