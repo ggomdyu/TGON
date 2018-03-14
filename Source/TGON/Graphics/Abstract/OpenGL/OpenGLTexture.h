@@ -20,7 +20,7 @@ class OpenGLTexture :
 {
 /* @section Public constructor */
 public:
-    explicit OpenGLTexture(const std::string& filePath);
+    explicit OpenGLTexture(const std::string& filePath, const TextureCreateDesc& textureCreateDesc = {});
 
 /* @section Public destructor */
 public:
@@ -38,12 +38,12 @@ public:
 
 private:
     GLuint GenerateTexture() const;
+    void GenerateMipmap() const;
 
 private:
     GLuint m_textureHandle;
-
-    GLint m_addressMode;
     GLint m_filterMode;
+    GLint m_wrapMode;
 };
 
 class Texture :

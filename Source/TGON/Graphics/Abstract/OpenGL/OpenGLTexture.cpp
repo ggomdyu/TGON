@@ -69,13 +69,18 @@ constexpr TextureWrapMode ConvertNativeToTextureWrapMode(GLint wrapMode) noexcep
     }
 }
 
-OpenGLTexture::OpenGLTexture(const std::string& filePath) :
-    GenericTexture(filePath),
+OpenGLTexture::OpenGLTexture(const std::string& filePath, const TextureCreateDesc& textureCreateDesc) :
+    GenericTexture(filePath, textureCreateDesc),
     m_textureHandle(GenerateTexture()),
-    m_filterMode(GL_LINEAR),
-    m_addressMode(GL_REPEAT)
+    m_filterMode(ConvertTextureFilterModeToNative(textureCreateDesc.filterMode)),
+    m_wrapMode(ConvertTextureWrapModeToNative(textureCreateDesc.wrapMode))
 {
     assert(m_textureHandle != 0);
+
+    if (textureCreateDesc.isUseMipmap == true)
+    {
+        this->GenerateMipmap();
+    }
 }
 
 OpenGLTexture::~OpenGLTexture()
@@ -92,12 +97,20 @@ void OpenGLTexture::TransferToVideo()
 void OpenGLTexture::UpdateParemeters()
 {
     // Update texture filter
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_filterMode);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    if (m_isUseMipmap)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_filterMode);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    }
+    else
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    }
 
     // Update texture wrap mode
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_addressMode);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_addressMode);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrapMode);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrapMode);
 }
 
 void OpenGLTexture::SetFilterMode(TextureFilterMode filterMode)
@@ -107,7 +120,7 @@ void OpenGLTexture::SetFilterMode(TextureFilterMode filterMode)
 
 void OpenGLTexture::SetWrapMode(TextureWrapMode addressMode)
 {
-    m_addressMode = ConvertTextureWrapModeToNative(addressMode);
+    m_wrapMode = ConvertTextureWrapModeToNative(addressMode);
 }
 
 GLuint OpenGLTexture::GenerateTexture() const
@@ -125,7 +138,12 @@ TextureFilterMode OpenGLTexture::GetFilterMode() const noexcept
 
 TextureWrapMode OpenGLTexture::GetWrapMode() const noexcept
 {
-    return ConvertNativeToTextureWrapMode(m_addressMode);
+    return ConvertNativeToTextureWrapMode(m_wrapMode);
+}
+
+void OpenGLTexture::GenerateMipmap() const
+{
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 } /* namespace graphics */
