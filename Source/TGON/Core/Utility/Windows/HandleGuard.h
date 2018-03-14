@@ -7,6 +7,7 @@
 #pragma once
 #include "../RAII.h"
 
+#include <boost/noncopyable.hpp>
 #include <Windows.h>
 
 namespace tgon
@@ -19,7 +20,8 @@ namespace core
  * @brief   RAII object that manages the reference count of windows handle automatically.
  */
 class HandleGuard final :
-    public RAII<HANDLE, HandleGuard>
+    public RAII<HANDLE, HandleGuard>,
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -46,7 +48,7 @@ inline void HandleGuard::Release()
     }
 }
 
-inline HANDLE tgon::core::HandleGuard::GetNullValue() const noexcept
+inline HANDLE HandleGuard::GetNullValue() const noexcept
 {
     return INVALID_HANDLE_VALUE;
 }

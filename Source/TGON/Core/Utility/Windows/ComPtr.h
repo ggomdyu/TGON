@@ -28,7 +28,11 @@ public:
 public:
     using ComPtr::ComPtr;
 
-/* @section Public constructor */
+/* @section Public operator */
+public:
+    operator bool() noexcept;
+
+/* @section Public method */
 public:
     /* @brief   Adds the reference count of managed resource. */
     void AddRef();
@@ -39,9 +43,9 @@ public:
     /* @brief   Returns special value which indicates resource is null. */
     _PointerType GetNullValue() const noexcept;
 
-/* @section Public operator */
-public:
-    operator bool() noexcept;
+/* @section Protected variable */
+protected:
+    using RAII<_PointerType, ComPtr<_PointerType>>::m_resource;
 };
 
 template<typename _PointerType>

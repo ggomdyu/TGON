@@ -15,16 +15,16 @@ namespace detail
 {
 
 /**
- * @class   AutoCaster
+ * @class   AutoCastProxy
  * @brief   Automatic type casting helper
  */
 template <typename _CastFromType, typename _CastPolicyType>
-struct AutoCaster final :
+struct AutoCastProxy final :
     public _CastPolicyType
 {
 /* @section Public constructor */
 public:
-    constexpr explicit AutoCaster(_CastFromType&& castFromPtr) noexcept :
+    constexpr explicit AutoCastProxy(_CastFromType&& castFromPtr) noexcept :
         m_castFromPtr(castFromPtr)
     {
     }
@@ -41,7 +41,6 @@ public:
 private:
     _CastFromType m_castFromPtr;
 };
-
 
 struct SafeCastPolicy
 {
@@ -68,15 +67,15 @@ protected:
 } /* namespace detail */
 
 template <typename _CastFromType>
-constexpr detail::AutoCaster<_CastFromType, detail::SafeCastPolicy> AutoCast(_CastFromType&& rhs) noexcept
+constexpr detail::AutoCastProxy<_CastFromType, detail::SafeCastPolicy> AutoCast(_CastFromType&& rhs) noexcept
 {
-	return detail::AutoCaster<_CastFromType, detail::SafeCastPolicy>(std::forward<_CastFromType>(rhs));
+	return detail::AutoCastProxy<_CastFromType, detail::SafeCastPolicy>(std::forward<_CastFromType>(rhs));
 }
 
 template <typename _CastFromType>
-constexpr detail::AutoCaster<_CastFromType, detail::ForceCastPolicy> ForceAutoCast(_CastFromType&& rhs) noexcept
+constexpr detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy> ForceAutoCast(_CastFromType&& rhs) noexcept
 {
-	return detail::AutoCaster<_CastFromType, detail::ForceCastPolicy>(std::forward<_CastFromType>(rhs));
+	return detail::AutoCastProxy<_CastFromType, detail::ForceCastPolicy>(std::forward<_CastFromType>(rhs));
 }
 
 } /* namespace core */

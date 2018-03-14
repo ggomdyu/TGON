@@ -88,7 +88,6 @@ template <typename _ResourceType, typename _DerivedType>
 constexpr RAII<_ResourceType, _DerivedType>::RAII(const _ResourceType& rhs) :
     m_resource(rhs)
 {
-    this->AddRef();
 }
 
 template <typename _ResourceType, typename _DerivedType>
@@ -105,9 +104,9 @@ inline RAII<_ResourceType, _DerivedType>::RAII(const RAII& rhs) :
 }
 
 template <typename _ResourceType, typename _DerivedType>
-inline RAII<_ResourceType, _DerivedType>::RAII(RAII&& rhs)
+inline RAII<_ResourceType, _DerivedType>::RAII(RAII&& rhs) :
+    m_resource(std::move(rhs.m_resource))
 {
-    m_resource = std::move(rhs.m_resource);
     rhs.m_resource = this->GetNullValue();
 }
 
@@ -258,7 +257,7 @@ inline _ResourceType& RAII<_ResourceType, _DerivedType>::Get() noexcept
 template<typename _ResourceType, typename _DerivedType>
 inline _ResourceType RAII<_ResourceType, _DerivedType>::GetNullValue() const noexcept
 {
-    return reinterpret_cast<_DerivedType*>(this)->GetNullValue();
+    return nullptr;//reinterpret_cast<_DerivedType*>(this)->GetNullValue();
 }
 
 } /* namespace core */
