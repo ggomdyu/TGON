@@ -45,9 +45,9 @@ bool D3D11Graphics::Initialize(const std::shared_ptr<core::Window>& window, cons
 
 bool D3D11Graphics::InitializeD3D(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode)
 {
-    core::COMPtr<IDXGIFactory> dxgiFactory;
-    core::COMPtr<IDXGIAdapter> dxgiAdapter;
-    core::COMPtr<IDXGIOutput> dxgiAdapterOutput;
+    core::ComPtr<IDXGIFactory*> dxgiFactory;
+    core::ComPtr<IDXGIAdapter*> dxgiAdapter;
+    core::ComPtr<IDXGIOutput*> dxgiAdapterOutput;
     if (this->CreateDXGIObjects(&dxgiFactory, &dxgiAdapter, &dxgiAdapterOutput) == false)
     {
         return false;
@@ -111,6 +111,8 @@ bool D3D11Graphics::InitializeD3D(const std::shared_ptr<core::Window>& window, c
         window->GetSize(&windowWidth, &windowHeight);
         this->SetViewport(m_deviceContext, windowWidth, windowHeight, 0.0f, 1.0f, 0.0f, 0.0f);
     }
+
+    return true;
 }
 
 bool D3D11Graphics::CreateDXGIObjects(IDXGIFactory** dxgiFactory, IDXGIAdapter** dxgiAdapter, IDXGIOutput** dxgiAdapterOutput)
@@ -245,7 +247,7 @@ bool D3D11Graphics::CreateDeviceAndSwapChain(const std::shared_ptr<core::Window>
 bool D3D11Graphics::CreateRenderTargetView(ID3D11Device* device, IDXGISwapChain* swapChain, ID3D11RenderTargetView** renderTargetView)
 {
     // Access the swap-chain's back buffer.
-    core::COMPtr<ID3D11Texture2D> backBuffer;
+    core::ComPtr<ID3D11Texture2D*> backBuffer;
     if (FAILED(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer))))
     {
         core::Log("Failed to invoke IDXGISwapChain::GetBuffer.");

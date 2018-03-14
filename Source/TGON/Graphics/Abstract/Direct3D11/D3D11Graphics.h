@@ -9,9 +9,10 @@
 
 #include "../Generic/GenericGraphics.h"
 
-#include "Core/Utility/Windows/COMPtr.h"
+#include "Core/Utility/Windows/ComPtr.h"
 
 #include <memory>
+#include <vector>
 #include <d3d11.h>
 
 namespace tgon
@@ -61,14 +62,14 @@ private:
 
 /* @section Private variable */
 private:
-    core::COMPtr<ID3D11Device> m_device;
-    core::COMPtr<ID3D11DeviceContext> m_deviceContext;
-    core::COMPtr<ID3D11RenderTargetView> m_renderTargetView;
-    core::COMPtr<IDXGISwapChain> m_swapChain;
-    core::COMPtr<ID3D11DepthStencilState> m_depthStencilState;
-    core::COMPtr<ID3D11Texture2D> m_depthStencilBuffer;
-    core::COMPtr<ID3D11DepthStencilView> m_depthStencilView;
-    core::COMPtr<ID3D11RasterizerState> m_rasterizerState;
+    core::ComPtr<ID3D11Device*> m_device;
+    core::ComPtr<ID3D11DeviceContext*> m_deviceContext;
+    core::ComPtr<ID3D11RenderTargetView*> m_renderTargetView;
+    core::ComPtr<IDXGISwapChain*> m_swapChain;
+    core::ComPtr<ID3D11DepthStencilState*> m_depthStencilState;
+    core::ComPtr<ID3D11Texture2D*> m_depthStencilBuffer;
+    core::ComPtr<ID3D11DepthStencilView*> m_depthStencilView;
+    core::ComPtr<ID3D11RasterizerState*> m_rasterizerState;
 
     FLOAT m_clearColor[4];
     UINT m_presentSyncInterval;

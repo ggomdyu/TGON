@@ -6,6 +6,22 @@
 
 #include <cassert>
 
+#if _DEBUG
+#   define V(expression)\
+    {\
+        expression;\
+        GLenum errorCode = glGetError();\
+        if (errorCode != GL_NO_ERROR)\
+        {\
+            core::Log("Failed to invoke OpenGL function. (Code: %d, File:%s, Function:%s, Line:%d)", errorCode, __FILE__, __FUNCTION__, __LINE__);\
+            assert(false);\
+        }\
+    }
+#else
+#   define V(expression) expression;
+#endif
+
+
 namespace tgon
 {
 namespace graphics
@@ -34,17 +50,17 @@ OpenGLShader::OpenGLShader(const char* vertexShaderCode, const char* fragmentSha
 
 void OpenGLShader::Use()
 {
-    glUseProgram(m_program);
+    V(glUseProgram(m_program));
 }
 
 void OpenGLShader::Unuse()
 {
-    glUseProgram(0);
+    V(glUseProgram(0));
 }
 
 void OpenGLShader::BindAttributeLocation(const char* name, uint32_t index)
 {
-    glBindAttribLocation(m_program, index, name);
+    V(glBindAttribLocation(m_program, index, name));
 }
 
 int OpenGLShader::GetUniformLocation(const char* name) const
@@ -127,28 +143,28 @@ bool OpenGLShader::LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShad
     // In order to create a complete shader program, there must be a way to specify the list of things that will be linked together.
     // Shaders that are to be linked together in a program object must first be attached to that program object.
     // glAttachShader attaches the shader object to the program object.
-    glAttachShader(m_program, vertexShader);
-    glAttachShader(m_program, fragmentShader);
-    glLinkProgram(m_program);
-    
-    glDetachShader(m_program, vertexShader);
-    glDetachShader(m_program, fragmentShader);
+    V(glAttachShader(m_program, vertexShader));
+    V(glAttachShader(m_program, fragmentShader));
+    V(glLinkProgram(m_program));
 
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    V(glDetachShader(m_program, vertexShader));
+    V(glDetachShader(m_program, fragmentShader));
+
+    V(glDeleteShader(vertexShader));
+    V(glDeleteShader(fragmentShader));
     
     return true;
 }
 
-GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCodeStr) const
+GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCode) const
 {
     // Creates an empty shader object.
     // A shader object is used to maintain the source code strings that define a shader.
     GLuint shader = 0;
-    shader = glCreateShader(shaderType);
+    V(shader = glCreateShader(shaderType));
 
     // Replaces the source code in a shader object.
-    glShaderSource(shader, 1, &shaderCodeStr, nullptr);
+    V(glShaderSource(shader, 1, &shaderCode, nullptr));
 
     // Compiles the source code strings that have been stored in the shader object.
     glCompileShader(shader);

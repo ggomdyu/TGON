@@ -27,7 +27,7 @@ enum class VertexAttributeIndex
 {
     Position = 0,
     Normal = 1,
-    UV = 1,
+    UV = 2,
 };
 
 enum class VertexFormatType

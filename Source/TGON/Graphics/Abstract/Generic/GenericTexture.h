@@ -8,6 +8,8 @@
 #pragma once
 #include "Core/Drawing/Bitmap.h"
 
+#include <boost/noncopyable.hpp>
+
 namespace tgon
 {
 namespace graphics
@@ -26,12 +28,20 @@ enum class TextureWrapMode
     Mirror,
 };
 
+struct TextureCreateDesc
+{
+    TextureFilterMode filterMode = TextureFilterMode::Bilinear;
+    TextureWrapMode wrapMode = TextureWrapMode::Repeat;
+    bool isUseMipmap = true;
+};
+
 class GenericTexture :
-    private core::Bitmap
+    private core::Bitmap,
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    using core::Bitmap::Bitmap;
+    GenericTexture(const std::string& imagePath, const TextureCreateDesc& textureCreateDesc);
 
 /* @section Public destructor */
 public:
@@ -51,6 +61,7 @@ public:
     virtual void SetWrapMode(TextureWrapMode addressMode) = 0;
     virtual TextureFilterMode GetFilterMode() const noexcept = 0;
     virtual TextureWrapMode GetWrapMode() const noexcept = 0;
+    virtual bool IsUseMipmap() const noexcept;
     
     using core::Bitmap::Save;
     using core::Bitmap::IsValid;
@@ -62,6 +73,10 @@ public:
     using core::Bitmap::GetBitsPerPixel;
     using core::Bitmap::GetPixelFormat;
     using core::Bitmap::GetFilePath;
+
+/* Protected variable */
+protected:
+    bool m_isUseMipmap;
 };
 
 inline GenericTexture::~GenericTexture() = default;
