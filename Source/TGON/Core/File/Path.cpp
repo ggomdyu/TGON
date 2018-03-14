@@ -236,6 +236,36 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, char* destP
     return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
 }
 
+TGON_API int32_t GetDirectoryName(const char* srcPathStr, char* destPathStr)
+{
+    return GetDirectoryName(srcPathStr, strlen(srcPathStr), destPathStr);
+}
+
+TGON_API int32_t GetDirectoryName(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
+{
+    int iterIndex = srcPathStrLen - 1;
+
+    while (true)
+    {
+        if (iterIndex < 0)
+        {
+            break;
+        }
+
+        if (srcPathStr[iterIndex] == AltDirectorySeparatorChar)
+        {
+            memcpy(destPathStr, srcPathStr, sizeof(srcPathStr[0]) * iterIndex);
+            destPathStr[iterIndex] = '\0';
+
+            return iterIndex;
+        }
+        else
+        {
+            --iterIndex;
+        }
+    }
+}
+
 TGON_API bool HasExtension(const char* srcPathStr, int32_t srcPathStrLen)
 {
     int iterIndex = srcPathStrLen - 1;

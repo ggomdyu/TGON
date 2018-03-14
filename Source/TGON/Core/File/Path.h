@@ -137,6 +137,23 @@ TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr);
 TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, char* destPathStr);
 
 /**
+ * @brief                       Gets the path of file.
+ * @param [in] srcPathStr       The full file path from which to get path without file name.
+ * @param [out] destPathStr     The destination of file path.
+ * @return                      Returns the length of destPathStr if successful, -1 otherwise.
+ */
+TGON_API int32_t GetDirectoryName(const char* srcPathStr, char* destPathStr);
+
+/**
+ * @brief                       Gets the path of file.
+ * @param [in] srcPathStr       The full file path from which to get path without file name.
+ * @param [in] srcPathStrLen    The length of srcPathStr.
+ * @param [out] destPathStr     The destination of file path.
+ * @return                      Returns the length of destPathStr if successful, -1 otherwise.
+ */
+TGON_API int32_t GetDirectoryName(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr);
+
+/**
  * @brief                       Checks whether the specified string has an extension.
  * @param [in] srcPathStr       The string to check for the existence of the extension.
  * @param [in] srcPathStrLen    The length of srcPathStr.
@@ -196,7 +213,6 @@ TGON_API std::string GetDirectory(SpecialDirectoryType specialDirectoryType);
 //public static string Combine(string path1, string path2);
 //public static string Combine(string path1, string path2, string path3);
 //public static string Combine(string path1, string path2, string path3, string path4);
-//public static string GetDirectoryName(string path);
 //public static string GetFullPath(string path);
 //public static string GetPathRoot(string path);
 //public static string GetTempFileName();
