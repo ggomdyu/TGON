@@ -28,12 +28,18 @@ namespace graphics
 OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<core::GenericWindow>& window) :
     m_context(videoMode, window)
 {
-    this->SetCullMode(CullMode::CW);
+    glGenVertexArrays(1, &m_vertexArrayHandle);
+    glBindVertexArray(m_vertexArrayHandle);
+
     this->SetClearColor(videoMode.clearColor);
+    this->SetCullMode(CullMode::CW);
+    this->EnableDepthTest();
 }
 
 OpenGLGraphics::~OpenGLGraphics()
 {
+    glBindVertexArray(m_vertexArrayHandle);
+    glDeleteVertexArrays(1, &m_vertexArrayHandle);
 }
 
 void OpenGLGraphics::SetClearColor(const core::Color4f& color)

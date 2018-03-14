@@ -44,6 +44,8 @@ public:
 /* @section Private variable */
 private:
     OpenGLContext m_context;
+
+    GLuint m_vertexArrayHandle;
 };
 
 } /* namespace graphics */
