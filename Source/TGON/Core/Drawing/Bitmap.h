@@ -39,54 +39,6 @@ enum class PixelFormat
     PVRTC4,
 };
 
-inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::size_t imageFormatStrLen)
-{
-    char lowercaseString[32] {};
-    std::transform(imageFormatStr, imageFormatStr + imageFormatStrLen + 1, lowercaseString, ::tolower);
-
-    switch (X65599Hash(lowercaseString))
-    {
-    case X65599Hash("bmp"):
-        return ImageFormat::BMP;
-    case X65599Hash("jpg"):
-        return ImageFormat::JPG;
-    case X65599Hash("jpeg"):
-        return ImageFormat::JPEG;
-    case X65599Hash("png"):
-        return ImageFormat::PNG;
-    case X65599Hash("tiff"):
-        return ImageFormat::TIFF;
-    case X65599Hash("gif"):
-        return ImageFormat::GIF;
-    case X65599Hash("webp"):
-        return ImageFormat::WEBP;
-    }
-
-    return ImageFormat::Unknown;
-}
-
-template <std::size_t ImageFormatStrLen>
-inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[ImageFormatStrLen])
-{
-    return ConvertStringToImageFormat(imageFormatStr, ImageFormatStrLen - 1);
-}
-
-constexpr const char* ConvertImageFormatToString(ImageFormat imageFormat)
-{
-    constexpr const char* imageFormatStringTable[] =
-    {
-        "bmp",
-        "jpg",
-        "jpeg",
-        "png",
-        "tiff",
-        "gif",
-        "webp",
-    };
-
-    return imageFormatStringTable[(std::size_t)imageFormat];
-}
-
 class Bitmap
 {
 /* @section Public constructor */

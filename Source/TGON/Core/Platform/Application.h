@@ -7,13 +7,13 @@
 #pragma once
 #include "Config.h"
 
-#if BOOST_OS_WINDOWS
+#if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
-#elif BOOST_OS_MACOS
+#elif TGON_PLATFORM_MACOS
 #   import "MacOS/MacOSApplication.h"
-#elif BOOST_OS_ANDROID
+#elif TGON_PLATFORM_ANDROID
 #   include "Android/AndroidApplication.h"
-#elif BOOST_OS_IOS
+#elif TGON_PLATFORM_IOS
 #   import "IOS/IOSApplication.h"
 #endif
 

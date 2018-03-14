@@ -19,6 +19,55 @@ namespace core
 namespace
 {
 
+inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::size_t imageFormatStrLen)
+{
+    char lowercaseStr[32] {};
+    std::transform(imageFormatStr, imageFormatStr + imageFormatStrLen + 1, lowercaseStr, ::tolower);
+
+    switch (X65599Hash(lowercaseStr))
+    {
+    case X65599Hash("bmp"):
+        return ImageFormat::BMP;
+    case X65599Hash("jpg"):
+        return ImageFormat::JPG;
+    case X65599Hash("jpeg"):
+        return ImageFormat::JPEG;
+    case X65599Hash("png"):
+        return ImageFormat::PNG;
+    case X65599Hash("tiff"):
+        return ImageFormat::TIFF;
+    case X65599Hash("gif"):
+        return ImageFormat::GIF;
+    case X65599Hash("webp"):
+        return ImageFormat::WEBP;
+    }
+
+    return ImageFormat::Unknown;
+}
+
+template <std::size_t ImageFormatStrLen>
+inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[ImageFormatStrLen])
+{
+    return ConvertStringToImageFormat(imageFormatStr, ImageFormatStrLen - 1);
+}
+
+constexpr const char* ConvertImageFormatToString(ImageFormat imageFormat)
+{
+    constexpr const char* imageFormatStringTable[] =
+    {
+        "bmp",
+        "jpg",
+        "jpeg",
+        "png",
+        "tiff",
+        "gif",
+        "webp",
+    };
+
+    return imageFormatStringTable[(std::size_t)imageFormat];
+}
+
+
 template <typename _AllocatorType>
 bool ResolvePNG(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
 {
@@ -262,19 +311,7 @@ Bitmap& Bitmap::operator=(Bitmap&& rhs)
         return *this;
     }
     
-    m_bits = std::move(rhs.m_bits);
-    m_width = rhs.m_width;
-    m_height = rhs.m_height;
-    m_channels = rhs.m_channels;
-    m_colorDepth = rhs.m_colorDepth;
-    m_pixelFormat = rhs.m_pixelFormat;
-    m_filePath = std::move(rhs.m_filePath);
-
-    rhs.m_width = 0;
-    rhs.m_height = 0;
-    rhs.m_channels = 0;
-    rhs.m_colorDepth = 0;
-    rhs.m_pixelFormat = PixelFormat::Unknown;
+    new (this) Bitmap(std::move(rhs));
 
     return *this;
 }
