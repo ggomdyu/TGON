@@ -10,8 +10,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 using StringHash = std::size_t;
 
@@ -26,5 +24,4 @@ constexpr StringHash X65599Hash(const char* str)
     return hashValue ^ (hashValue >> 16);
 }
 
-} /* namespace core */
 } /* namespace tgon */

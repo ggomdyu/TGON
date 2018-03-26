@@ -5,17 +5,15 @@
  */
 
 #pragma once
-#include "Vector3.h"
-
-#include "Core/Platform/Config.h"
-
 #include <cstdint>
 #include <cassert>
 #include <cmath>
 
+#include "Core/Platform/Config.h"
+
+#include "Vector3.h"
+
 namespace tgon
-{
-namespace core
 {
 
 struct TGON_API Matrix4x4
@@ -383,5 +381,4 @@ constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-} /* namespace core */
 } /* namespace tgon */

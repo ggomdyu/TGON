@@ -9,13 +9,11 @@
 
 namespace tgon
 {
-namespace game
-{
 
 class GameObject;
 
 class TGON_API IComponent :
-	public core::Object
+	public Object
 {
 public:
 	TGON_RUNTIME_OBJECT(IComponent)
@@ -44,5 +42,4 @@ private:
     GameObject* m_owner;
 };
 
-} /* namespace game */
 } /* namespace tgon */

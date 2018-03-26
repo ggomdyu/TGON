@@ -9,22 +9,42 @@
 
 namespace tgon
 {
-namespace core
+
+template <typename _ResourceType>
+class DefaultRAIITraits
 {
+public:
+    /* @brief   Adds the reference count of managed resource. */
+    void AddRef(_ResourceType& resource)
+    {
+    }
+
+    /* @brief   Releases the managed resource. */
+    void Release(_ResourceType& resource)
+    {
+        resource = nullptr;
+    }
+
+    constexpr const _ResourceType GetNullValue() noexcept
+    {
+        return nullptr;
+    }
+};
 
 /**
  * @class   RAII
  * @brief   RAII object that manages the lifecycle of object.
  */
-template <typename _ResourceType, typename _DerivedType>
-class RAII
+template <typename _ResourceType, typename _TraitsType = DefaultRAIITraits<_ResourceType>>
+class RAII :
+    private _TraitsType
 {
 /* @section Public type */
 public:
     using ResourceType = _ResourceType;
 
 /* @section Public constructor */
-public:
+protected:
     constexpr RAII() noexcept;
     constexpr explicit RAII(const _ResourceType& rhs);
     RAII(const RAII& rhs);
@@ -207,7 +227,7 @@ inline bool RAII<_ResourceType, _DerivedType>::operator!=(const RAII& rhs) const
 template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::AddRef()
 {
-    reinterpret_cast<_DerivedType*>(this)->AddRef();
+    _TraitsType::AddRef(m_resource);
 }
 
 template <typename _ResourceType, typename _DerivedType>
@@ -239,7 +259,7 @@ inline void RAII<_ResourceType, _DerivedType>::Reset(_ResourceType&& resource)
 template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::Release()
 {
-    reinterpret_cast<_DerivedType*>(this)->Release();
+    _TraitsType::Release(m_resource);
 }
 
 template <typename _ResourceType, typename _DerivedType>
@@ -257,8 +277,7 @@ inline _ResourceType& RAII<_ResourceType, _DerivedType>::Get() noexcept
 template<typename _ResourceType, typename _DerivedType>
 inline _ResourceType RAII<_ResourceType, _DerivedType>::GetNullValue() const noexcept
 {
-    return nullptr;//reinterpret_cast<_DerivedType*>(this)->GetNullValue();
+    return _TraitsType::GetNullValue();
 }
 
-} /* namespace core */
 } /* namespace tgon */

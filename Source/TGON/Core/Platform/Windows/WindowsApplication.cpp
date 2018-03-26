@@ -1,19 +1,17 @@
 #include "PrecompiledHeader.pch"
 
-#include "WindowsApplication.h"
+#include <Windows.h>
+
+#include "Core/String/Encoding.h"
+#include "Core/Utility/Algorithm.h"
 
 #include "../Window.h"
 #include "../Generic/GenericWindowType.h"
 #include "../Generic/GenericApplicationType.h"
 
-#include "Core/String/Encoding.h"
-#include "Core/Utility/Enumerator.h"
-
-#include <Windows.h>
+#include "WindowsApplication.h"
 
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -26,7 +24,7 @@ UINT ConvertMessageBoxIconTypeToNative(MessageBoxIconType messageBoxIconType) no
         MB_ICONEXCLAMATION,
     };
 
-    return nativeMessageBoxIconTypeTable[core::ToUnderlying(messageBoxIconType)];
+    return nativeMessageBoxIconTypeTable[ToUnderlying(messageBoxIconType)];
 }
 
 /* @brief   Register default WNDCLASS to window class table. */
@@ -78,10 +76,10 @@ void WindowsApplication::MessageLoop()
 void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
 {
     wchar_t utf16Message[1024];
-    core::UTF8::Convert<core::UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
+    UTF8::Convert<UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
 
     wchar_t utf16Title[256];
-    core::UTF8::Convert<core::UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
+    UTF8::Convert<UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
 
     ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertMessageBoxIconTypeToNative(messageBoxType) | MB_OK);
 }
@@ -102,5 +100,4 @@ void WindowsApplication::Terminate()
     ::PostQuitMessage(0);
 }
 
-} /* namespace core */
 } /* namespace tgon */

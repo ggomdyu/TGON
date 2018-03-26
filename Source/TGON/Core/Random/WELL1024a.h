@@ -11,13 +11,10 @@
 
 namespace tgon
 {
-namespace core
-{
 
 TGON_API void SrandWELL1024a();
 
 /* @brief	Get random value between 0.0 ~ 1.0 */
 TGON_API double WELL1024a();
 
-} /* namespace core */
 } /* namespace tgon */

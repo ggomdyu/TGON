@@ -4,8 +4,6 @@
 
 namespace tgon
 {
-namespace core
-{
 namespace
 {
 
@@ -30,5 +28,4 @@ Application* Application::GetInstance()
     return g_application;
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -11,7 +11,7 @@
 //
 //namespace tgon
 //{
-//namespace core
+//
 //{
 //
 //template <typename _ValueType>
@@ -215,5 +215,5 @@
 //#endif
 //}
 //
-//} /* namespace core */
+//
 //} /* namespace tgon */

@@ -1,16 +1,14 @@
 #include "PrecompiledHeader.pch"
 
-#include "WindowsWindowUtility.h"
+#include <cassert>
 
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Generic/GenericWindowType.h"
 #include "Core/String/Encoding.h"
 
-#include <cassert>
+#include "WindowsWindowUtility.h"
 
 namespace tgon
-{
-namespace core
 {
 
 void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle)
@@ -106,11 +104,10 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 	);
     if (wndHandle == nullptr)
     {
-        core::Log("Failed to invoke CreateWindowExW. (%d)", GetLastError());
+        Log("Failed to invoke CreateWindowExW. (%d)", GetLastError());
     }
 
 	return wndHandle;
 }
 
-} /* namespace core */
 } /* namespace tgon */

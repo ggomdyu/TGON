@@ -15,8 +15,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 /**
  * @brief                       Create window via given arguments.
@@ -27,5 +25,4 @@ namespace core
  */
 HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-} /* namespace core */
 } /* namespace tgon */

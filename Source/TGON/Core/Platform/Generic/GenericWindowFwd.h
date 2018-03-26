@@ -8,11 +8,8 @@
 
 namespace tgon
 {
-namespace core
-{
 
 struct Color4f;
 struct WindowStyle;
 
-} /* namespace core */
 } /* namespace tgon */

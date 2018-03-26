@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class TGON_API WindowsApplication :
     public GenericApplication
@@ -40,5 +38,4 @@ public:
     using GenericApplication::ShowMessageBox;
 };
 
-} /* namespace core */
 } /* namespace tgon */

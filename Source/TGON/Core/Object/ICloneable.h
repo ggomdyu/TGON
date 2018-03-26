@@ -10,22 +10,13 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class ICloneable
 {
-/* @section Public destructor */
-public:
-    virtual ~ICloneable() = 0;
-
 /* @section Public method */
 public:
     /* @brief   Returns copied one from this instance. */
     virtual std::shared_ptr<ICloneable> Clone() const { return nullptr; }
 };
 
-inline ICloneable::~ICloneable() = default;
-
-} /* namespace core */
 } /* namespace tgon */

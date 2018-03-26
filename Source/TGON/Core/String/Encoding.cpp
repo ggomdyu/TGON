@@ -4,8 +4,5 @@
 
 namespace tgon
 {
-namespace core
-{
 
-} /* namespace core */
 } /* namespace tgon */

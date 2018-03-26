@@ -8,8 +8,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class Application;
 struct WindowStyle;
@@ -17,5 +15,4 @@ enum class MessageBoxIconType;
 class GenericWindow;
 struct BatteryState;
 
-} /* namespace core */
 } /* namespace tgon */

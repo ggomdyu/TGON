@@ -8,8 +8,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class ASCII;
 class EUC_KR;
@@ -21,5 +19,4 @@ class ANSIEncoding;
 template <typename _DerivedEncodingType>
 class UnicodeEncoding;
 
-} /* namespace core */
 } /* namespace tgon */

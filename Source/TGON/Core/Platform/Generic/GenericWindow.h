@@ -6,22 +6,20 @@
  */
 
 #pragma once
-#include "GenericWindowFwd.h"
-
-#include "../Config.h"
+#include <string>
+#include <cstdint>
+#include <boost/noncopyable.hpp>
 
 #include "Core/Object/Object.h"
 #include "Core/Object/Delegate.h"
 #include "Core/Math/Extent.h"
 #include "Core/Math/Point.h"
 
-#include <boost/noncopyable.hpp>
-#include <string>
-#include <cstdint>
+#include "../Config.h"
+
+#include "GenericWindowFwd.h"
 
 namespace tgon
-{
-namespace core
 {
 
 class TGON_API GenericWindow :
@@ -41,7 +39,6 @@ public:
     virtual ~GenericWindow() = 0;
 
 /* @section Public operator */
-public:
     GenericWindow& operator=(const GenericWindow&) = default;
     GenericWindow& operator=(GenericWindow&&) = default;
 
@@ -60,7 +57,7 @@ public:
     virtual void SetFullScreen(bool isFullScreen) {}
     virtual void SetTopMost(bool setTopMost) = 0;
     virtual void SetTransparency(float transparency) = 0;
-    //void SetTransparencyPerPixel(const core::Color4f& pixel, float opacity);
+    //void SetTransparencyPerPixel(const Color4f& pixel, float opacity);
     virtual void GetPosition(int32_t* x, int32_t* y) const = 0;
     I32Point GetPosition() const;
     virtual void GetSize(int32_t* width, int32_t* height) const = 0;
@@ -76,6 +73,8 @@ public:
     virtual bool IsTopMost() const = 0;
     bool IsClosed() const noexcept;
 
+/* @section Public variable */
+public:
     Delegate<void(int32_t, int32_t)> OnWindowMove;
     Delegate<void(int32_t, int32_t)> OnWindowResize;
     Delegate<void()> OnWindowMaximize;
@@ -92,5 +91,4 @@ protected:
     bool m_isClosed;
 };
 
-} /* namespace core */
 } /* namespace tgon */

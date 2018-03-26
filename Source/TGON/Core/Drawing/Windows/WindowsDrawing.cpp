@@ -8,10 +8,8 @@
 
 namespace tgon
 {
-namespace core
-{
 
-void DrawPoint(Window& window, const core::Point& p)
+void DrawPoint(Window& window, const Point& p)
 {
     HWND wndHandle = reinterpret_cast<HWND>(window.GetNativeWindow());
     HDC dcHandle = ::GetDC(wndHandle);
@@ -21,7 +19,7 @@ void DrawPoint(Window& window, const core::Point& p)
     ::ReleaseDC(wndHandle, dcHandle);
 }
 
-void DrawLine(Window& window, const core::Point& p1, const core::Point& p2)
+void DrawLine(Window& window, const Point& p1, const Point& p2)
 {
     HWND wndHandle = reinterpret_cast<HWND>(window.GetNativeWindow());
     HDC dcHandle = ::GetDC(wndHandle);
@@ -32,7 +30,7 @@ void DrawLine(Window& window, const core::Point& p1, const core::Point& p2)
     ::ReleaseDC(wndHandle, dcHandle);
 }
 
-void DrawPolygon(Window& window, const core::Point& p1, const core::Point& p2, const core::Point& p3)
+void DrawPolygon(Window& window, const Point& p1, const Point& p2, const Point& p3)
 {
     const POINT ptTable[3] =
     {
@@ -49,5 +47,4 @@ void DrawPolygon(Window& window, const core::Point& p1, const core::Point& p2, c
     ::ReleaseDC(wndHandle, dcHandle);
 }
 
-} /* namespace platform */
 } /* namespace tgon */

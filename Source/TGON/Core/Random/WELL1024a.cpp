@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
 
-#include "WELL1024a.h"
-
 #include <cstdlib>
 #include <ctime>
+
+#include "WELL1024a.h"
 
 #define W 32
 #define R 32
@@ -26,8 +26,6 @@
 #define FACT 2.32830643653869628906e-10
 
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -60,5 +58,4 @@ TGON_API double WELL1024a()
     return static_cast<double>(STATE[state_i]) * FACT;
 }
 
-} /* namespace core */
 } /* namespace tgon */

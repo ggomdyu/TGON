@@ -9,8 +9,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class IRuntimeObject
 {
@@ -52,14 +50,13 @@ inline const RTTI* GetRTTI<void>()
     return nullptr;
 }
 
-} /* namespace core */
 } /* namespace tgon */
 
 #define TGON_RUNTIME_OBJECT(classType)\
     using SuperType = ThisType;\
     using ThisType = classType;\
     \
-    virtual const tgon::core::RTTI* GetRTTI() const override\
+    virtual const tgon::RTTI* GetRTTI() const override\
     {\
-        return tgon::core::GetRTTI<classType>();\
+        return tgon::GetRTTI<classType>();\
     }

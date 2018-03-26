@@ -5,17 +5,15 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "Core/Utility/ExpressionTemplate.h"
-
 #include <cassert>
 #include <cstdint>
 #include <cmath>
 #include <cstdio>
 
+#include "Core/Platform/Config.h"
+#include "Core/Utility/ExpressionTemplate.h"
+
 namespace tgon
-{
-namespace core
 {
 
 struct TGON_API Vector2
@@ -93,7 +91,7 @@ constexpr Vector2::Vector2() noexcept :
 {
 }
 
-constexpr tgon::core::Vector2::Vector2(float scalar) noexcept :
+constexpr tgon::Vector2::Vector2(float scalar) noexcept :
     x(scalar),
     y(scalar)
 {
@@ -273,5 +271,4 @@ inline int32_t Vector2::ToString(char* destStr, std::size_t strBufferSize) const
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

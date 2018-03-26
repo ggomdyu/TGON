@@ -5,15 +5,13 @@
  */
 
 #pragma once
-#include "Vector3.h"
-
 #include <cmath>
 #include <type_traits>
 #include <cstdint>
 
+#include "Vector3.h"
+
 namespace tgon
-{
-namespace core
 {
 
 constexpr const float Pi = 3.14159265358f;
@@ -205,8 +203,8 @@ constexpr float Smoothstep(float from, float to, float time) noexcept
  */
 constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {
-	float invTime = 1.0f - time;
-	return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
+    float invTime = 1.0f - time;
+    return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 
 double Sqrt(double number)
@@ -219,5 +217,4 @@ float Sqrt(float number)
     return std::sqrtf(number);
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -1,16 +1,17 @@
 #include "PrecompiledHeader.pch"
 
+#include "Core/Random/Random.h"
+
 #include "GenericApplication.h"
 #include "GenericApplicationType.h"
 
 namespace tgon
 {
-namespace core
-{
 
 GenericApplication::GenericApplication(const std::shared_ptr<GenericWindow>& rootWindow) :
     m_rootWindow(rootWindow)
 {
+    SrandWELL1024a();
 }
 
 void GenericApplication::ShowMessageBox(const char* message) const
@@ -33,5 +34,4 @@ const std::shared_ptr<GenericWindow>& GenericApplication::GetRootWindow() const 
     return m_rootWindow;
 }
 
-} /* namespace core */
 } /* namespace tgon */

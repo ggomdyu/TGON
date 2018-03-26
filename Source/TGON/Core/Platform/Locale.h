@@ -14,15 +14,13 @@
 
 namespace tgon
 {
-namespace core
-{
 
 /**
  * @brief                           Returns the current system language.
  * @param [out] destStr             The destination of the string to be written.
- * @param [in] destStrBufferBytes   The bytes length of buffer
+ * @param [in] destStrBufferSize    The bytes length of buffer
  */
-int32_t GetLanguage(char* destStr, std::size_t destStrBufferBytes);
+int32_t GetLanguage(char* destStr, std::size_t destStrBufferSize);
 
 /**
  * @brief                   Returns the current system language.
@@ -37,5 +35,4 @@ inline int32_t GetLanguage(char(&destStr)[N])
 /* @brief   Returns the current system language. */
 std::string GetLanguage();
 
-} /* namespace core */
 } /* namespace tgon */

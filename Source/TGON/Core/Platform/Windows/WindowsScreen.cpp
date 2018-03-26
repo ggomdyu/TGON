@@ -1,13 +1,11 @@
 #include "PrecompiledHeader.pch"
 
+#include <Windows.h>
+
 #include "../Screen.h"
 #include "../ScreenType.h"
 
-#include <Windows.h>
-
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -101,5 +99,4 @@ std::vector<Screen> GetAllScreen()
     return screens;
 }
 
-} /* namespace core */
 } /* namespace tgon */

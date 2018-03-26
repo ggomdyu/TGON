@@ -10,8 +10,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename>
 struct FunctionTraits;
@@ -66,5 +64,4 @@ struct FunctionTraits :
 {
 };
 
-} /* namespace core */
 } /* namespace tgon */

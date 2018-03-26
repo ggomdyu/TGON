@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Application.h"
-
 #include <crtdbg.h>
 #include <Windows.h>
+
+#include "../Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
@@ -15,8 +15,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 extern std::shared_ptr<GenericApplication> MakeApplication();
 
@@ -26,7 +24,7 @@ namespace
 std::shared_ptr<GenericApplication> g_application;
 
 } /* namespace */
-} /* namespace core */
+
 } /* namespace tgon */
 
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
@@ -35,7 +33,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
    
-    using namespace tgon::core;
+    using namespace tgon;
 
     g_application = MakeApplication();
     g_application->OnWillLaunch();

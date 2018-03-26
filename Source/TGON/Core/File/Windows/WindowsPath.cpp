@@ -13,8 +13,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 TGON_API std::string GetCurrentDirectory()
 {
@@ -61,5 +59,4 @@ TGON_API std::string GetDesktopDirectory()
     }
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -12,14 +12,11 @@
 
 namespace tgon
 {
-namespace core
-{
 
-TGON_API void DrawPoint(Window& window, const core::Point& p);
+TGON_API void DrawPoint(Window& window, const Point& p);
 
-TGON_API void DrawLine(Window& window, const core::Point& p1, const core::Point& p2);
+TGON_API void DrawLine(Window& window, const Point& p1, const Point& p2);
 
-TGON_API void DrawPolygon(Window& window, const core::Point& p1, const core::Point& p2, const core::Point& p3);
+TGON_API void DrawPolygon(Window& window, const Point& p1, const Point& p2, const Point& p3);
 
-} /* namespace core */
 } /* namespace tgon */

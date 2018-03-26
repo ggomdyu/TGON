@@ -6,8 +6,6 @@
  */
 
 #pragma once
-#include "Core/String/FixedString.h"
-
 #include <cstring>
 #ifdef _MSC_VER
 #   include <rpc.h>
@@ -15,13 +13,13 @@
 #   include <uuid/uuid.h>
 #endif
 
+#include "Core/String/FixedString.h"
+
 #ifdef _MSC_VER
 #   pragma comment(lib, "Rpcrt4.lib")
 #endif
 
 namespace tgon
-{
-namespace core
 {
 
 template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
@@ -36,7 +34,7 @@ public:
     using ConstPointerType = const CharType*;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
-/* section  Private constructor */
+/* @section Private constructor */
 private:
     constexpr BasicUUID() noexcept;
 
@@ -45,7 +43,7 @@ public:
     using BasicFixedString::operator=;
     using BasicFixedString::operator[];
 
-/* section  Public method */
+/* @section Public method */
 public:
     static BasicUUID NewUUID();
 
@@ -88,5 +86,4 @@ inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTrait
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

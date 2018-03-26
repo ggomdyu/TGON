@@ -1,11 +1,12 @@
 #include "PrecompiledHeader.pch"
 
-#include "Bitmap.h"
-
-#include "Core/Debug/Log.h"
-
 #include <cstdint>
 #include <png.h>
+
+#include "Core/Debug/Log.h"
+#include "Core/String/StringTraits.h"
+
+#include "Bitmap.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   pragma comment(lib, "libpngd.lib")
@@ -14,15 +15,13 @@
 
 namespace tgon
 {
-namespace core
-{
 namespace
 {
 
 inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::size_t imageFormatStrLen)
 {
     char lowercaseStr[32] {};
-    std::transform(imageFormatStr, imageFormatStr + imageFormatStrLen + 1, lowercaseStr, ::tolower);
+    StringTraits<char>::ToLower(imageFormatStr, lowercaseStr);
 
     switch (X65599Hash(lowercaseStr))
     {
@@ -227,34 +226,30 @@ bool ResolveBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint
 } /* namespace */
 
 Bitmap::Bitmap(const std::string& filePath) :
-    m_width(0),
-    m_height(0),
-    m_channels(0),
-    m_colorDepth(0),
-    m_pixelFormat(PixelFormat::Unknown),
-    m_filePath(filePath)
-{
-    // TODO: Implement Engine file loader
-    FILE* file = fopen(filePath.c_str(), "rb");
+    Bitmap([&]() -> Bitmap
     {
+        FILE* file = fopen(filePath.c_str(), "rb");
         if (file == nullptr)
         {
-            return;
+            return {};
         }
 
-        // Resize the vector by file size.
+        // Read the image data from file.
         std::vector<uint8_t> imageData;
-        fseek(file, 0, SEEK_END);
-        long fileSize = ftell(file);
-        imageData.resize(fileSize + 1);
-        fseek(file, 0, SEEK_SET);
+        {
+            fseek(file, 0, SEEK_END);
+            long fileSize = ftell(file);
+            fseek(file, 0, SEEK_SET);
 
-        fread(imageData.data(), 1, fileSize, file);
+            imageData.resize(fileSize + 1);
+            fread(imageData.data(), 1, fileSize, file);
+        };
+        fclose(file);
 
         std::size_t extensionOffset = filePath.rfind('.') + 1;
-        *this = Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
-    }
-    fclose(file);
+        return Bitmap(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
+    } ())
+{
 }
 
 Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes) :
@@ -283,7 +278,7 @@ Bitmap::Bitmap(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcD
         break;
 
     default:
-        core::Log("%s image format isn't currently supported.", ConvertImageFormatToString(imageFormat));
+        Log("%s image format isn't currently supported.", ConvertImageFormatToString(imageFormat));
         break;
     }
 }
@@ -311,7 +306,19 @@ Bitmap& Bitmap::operator=(Bitmap&& rhs)
         return *this;
     }
     
-    new (this) Bitmap(std::move(rhs));
+    m_bits = std::move(rhs.m_bits);
+    m_width = rhs.m_width;
+    m_height = rhs.m_height;
+    m_channels = rhs.m_channels;
+    m_colorDepth = rhs.m_colorDepth;
+    m_pixelFormat = rhs.m_pixelFormat;
+    m_filePath = std::move(rhs.m_filePath);
+
+    rhs.m_width = 0;
+    rhs.m_height = 0;
+    rhs.m_channels = 0;
+    rhs.m_colorDepth = 0;
+    rhs.m_pixelFormat = PixelFormat::Unknown;
 
     return *this;
 }
@@ -376,5 +383,4 @@ const std::string& Bitmap::GetFilePath() const noexcept
     return m_filePath;
 }
 
-} /* namespace core */
 } /* namespace tgon */

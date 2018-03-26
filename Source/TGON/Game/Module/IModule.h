@@ -11,11 +11,9 @@
 
 namespace tgon
 {
-namespace game
-{
 
 class TGON_API IModule :
-    public core::Object
+    public Object
 {
 public:
     TGON_RUNTIME_OBJECT(IModule)
@@ -32,5 +30,4 @@ public:
 
 inline IModule::~IModule() = default;
 
-} /* namespace game */
 } /* namespace tgon */

@@ -5,7 +5,9 @@
  */
 
 #pragma once
-#include "Config.h"
+#include <boost/preprocessor/cat.hpp>
+
+#include "Core/Platform/Config.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -17,11 +19,7 @@
 #   import "IOS/IOSApplication.h"
 #endif
 
-#include <boost/preprocessor/cat.hpp>
-
 namespace tgon
-{
-namespace core
 {
 
 class Application :
@@ -40,5 +38,4 @@ public:
     static Application* GetInstance();
 };
 
-} /* namespace core */
 } /* namespace tgon */

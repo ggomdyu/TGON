@@ -10,8 +10,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename _CastToType, typename _CastFromType, typename std::enable_if<std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
 inline _CastToType DynamicCast(_CastFromType ptr)
@@ -38,5 +36,4 @@ inline _CastToType DynamicCast(_CastFromType ptr)
     return nullptr;
 }
 
-} /* namespace core */
 } /* namespace tgon */

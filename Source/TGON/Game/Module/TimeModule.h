@@ -9,8 +9,6 @@
 
 namespace tgon
 {
-namespace game
-{
 
 class TGON_API TimeModule :
 	public IModule
@@ -39,5 +37,4 @@ private:
     float m_deltaTime;
 };
 
-} /* namespace game */
 } /* namespace tgon */

@@ -5,17 +5,15 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "Core/Utility/ExpressionTemplate.h"
-
 #include <cassert>
 #include <cstdint>
 #include <cmath>
 #include <cstdio>
 
+#include "Core/Platform/Config.h"
+#include "Core/Utility/ExpressionTemplate.h"
+
 namespace tgon
-{
-namespace core
 {
 
 struct TGON_API Vector3
@@ -95,7 +93,7 @@ constexpr Vector3::Vector3() noexcept :
 {
 }
 
-constexpr tgon::core::Vector3::Vector3(float scalar) noexcept :
+constexpr tgon::Vector3::Vector3(float scalar) noexcept :
     x(scalar),
     y(scalar),
     z(scalar)
@@ -272,7 +270,7 @@ inline void Vector3::Normalize()
 
 //constexpr const Vector3 Vector3::Normalized() const
 //{
-//    float length = core::Sqrt((x * x) + (y * y) + (z * z));
+//    float length = Sqrt((x * x) + (y * y) + (z * z));
 //    return Vector3(x / length, y / length, z / length);
 //}
 
@@ -295,5 +293,4 @@ inline int32_t Vector3::ToString(char* destStr, std::size_t strBufferSize) const
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

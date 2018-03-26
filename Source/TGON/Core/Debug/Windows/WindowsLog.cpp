@@ -1,15 +1,13 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Log.h"
-
 #include <Windows.h>
 #include <cstdarg>
 #include <memory>
 #include <mutex>
 
+#include "../Log.h"
+
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -34,5 +32,4 @@ TGON_API void Log(const char* formatStr, ...)
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

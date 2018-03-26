@@ -4,8 +4,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 GenericWindow::GenericWindow() noexcept :
     m_isClosed(false)
@@ -43,5 +41,4 @@ I32Extent2D GenericWindow::GetSize() const
     return I32Extent2D{width, height};
 }
 
-} /* namespace core */
 } /* namespace tgon */

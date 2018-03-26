@@ -5,8 +5,6 @@
 
 namespace tgon
 {
-namespace game
-{
 
 GameObject::GameObject(const std::shared_ptr<GameContext>& context) :
     m_context(context)
@@ -25,5 +23,4 @@ void GameObject::Update()
     }
 }
 
-} /*namespace game*/
 } /*namespace tgon*/

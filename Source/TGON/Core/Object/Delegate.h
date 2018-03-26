@@ -6,8 +6,6 @@
  */
 
 #pragma once
-#include "Core/Utility/TypeTraits.h"
-
 #include <type_traits>
 #include <cstring>
 #include <cstdint>
@@ -15,6 +13,8 @@
 #include <new>
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
+
+#include "Core/Utility/TypeTraits.h"
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
@@ -30,11 +30,11 @@
  * @brief                   Binds delegate with lambda or global function
  * @param [in] function     A lambda object or Reference to global function(e.g. &functionName)
  */
-#define TGON_MAKE_DELEGATE_1(_function)\
+#define TGON_MAKE_DELEGATE_1(function)\
     [&]()\
     {\
-        auto function = _function;\
-        return tgon::object::Delegate<tgon::core::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate(_function);\
+        auto functionInstance = function;\
+        return tgon::Delegate<tgon::FunctionTraits<decltype(functionInstance)>::FunctionType>::MakeDelegate(functionInstance);\
     } ()
 
 /**
@@ -42,11 +42,9 @@
  * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
  * @param [in] instance     An instance which handles event
  */
-#define TGON_MAKE_DELEGATE_2(function, instance) tgon::object::Delegate<tgon::core::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::core::FunctionTraits<decltype(function)>::ClassType, function>(instance)
+#define TGON_MAKE_DELEGATE_2(function, instance) tgon::Delegate<tgon::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
 namespace tgon
-{
-namespace core
 {
 
 template <typename>
@@ -384,5 +382,4 @@ inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
     return sizeof(_FunctionType);
 }
 
-} /* namespace utility */
 } /* namespace tgon */

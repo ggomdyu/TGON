@@ -1,14 +1,13 @@
 #include "PrecompiledHeader.pch"
-#include "Hash.h"
 
 #include <cassert>
 #include <cmath>
 #include <string>
 #include <map>
 
+#include "Hash.h"
+
 namespace tgon
-{
-namespace hash
 {
 
 //    class HashCollisionChecker
@@ -65,5 +64,4 @@ namespace hash
 //}
 //
 
-} /* namespace hash */
 } /* namespace tgon */

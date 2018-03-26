@@ -14,14 +14,12 @@
 
 namespace tgon
 {
-namespace game
-{
 
 class IComponent;
 struct GameContext;
 
 class TGON_API GameObject :
-	public core::Object
+	public Object
 {
 public:
     TGON_RUNTIME_OBJECT(GameObject)
@@ -48,5 +46,4 @@ private:
     std::vector<std::shared_ptr<GameObject>> m_childs;
 };
 
-} /* namespace game */
 } /* namespace tgon */

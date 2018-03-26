@@ -4,18 +4,16 @@
  * @since       02/20/2018
  */
 
-#include "Core/Platform/Config.h"
-
 #include <unicode/unistr.h>
 #include <unicode/ucnv.h>
+
+#include "Core/Platform/Config.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   pragma comment(lib, "icuucd.lib")
 #endif
 
 namespace tgon
-{
-namespace core
 {
 
 template <typename _DerivedEncodingType>
@@ -151,5 +149,4 @@ constexpr int32_t EUC_JP::GetMaxCharSize() noexcept
     return 3;
 }
 
-} /* namespace core */
 } /* namespace tgon */

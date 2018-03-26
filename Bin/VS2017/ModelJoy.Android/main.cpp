@@ -24,13 +24,13 @@
 #include <GL/glew.h>
 
 class TGON_API ThousandParty :
-    public core::GameApplication
+    public GameApplication
 {
 public:
     ThousandParty() :
-        core::GameApplication([&]()
+        GameApplication([&]()
         {
-            core::WindowStyle windowStyle;
+            WindowStyle windowStyle;
             {
                 windowStyle.width = 500;
                 windowStyle.height = 500;
@@ -42,9 +42,9 @@ public:
         }(),
         [&]()
         {
-            graphics::VideoMode videoMode;
+            VideoMode videoMode;
             {
-                videoMode.graphicsSDK = graphics::GraphicsSDK::OpenGL;
+                videoMode.graphicsSDK = GraphicsSDK::OpenGL;
                 videoMode.enableHardwareAccelerate = true;
                 videoMode.enableMultiSampling = true;
                 videoMode.enableDoubleBuffer = true;

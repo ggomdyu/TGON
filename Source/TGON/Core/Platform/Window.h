@@ -5,23 +5,21 @@
  */
 
 #pragma once
-#include "Config.h"
+#include <boost/preprocessor/cat.hpp>
 
-#if BOOST_OS_WINDOWS
+#include "Core/Platform/Config.h"
+
+#if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsWindow.h"
-#elif BOOST_OS_MACOS
+#elif TGON_PLATFORM_MACOS
 #   import "MacOS/MacOSWindow.h"
-#elif BOOST_OS_ANDROID
+#elif TGON_PLATFORM_ANDROID
 #   include "Android/AndroidWindow.h"
 #elif BOOST_OS_IOS
 #   import "IOS/IOSWindow.h"
 #endif
 
-#include <boost/preprocessor/cat.hpp>
-
 namespace tgon
-{
-namespace core
 {
 
 class Window :
@@ -39,5 +37,4 @@ public:
     virtual ~Window() final override = default;
 };
 
-} /* namespace core */
 } /* namespace tgon */

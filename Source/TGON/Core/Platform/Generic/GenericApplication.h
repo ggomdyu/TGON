@@ -6,32 +6,27 @@
  */
 
 #pragma once
-#include "GenericApplicationFwd.h"
-
-#include "../Config.h"
-
-#include "Core/Object/Object.h"
-
 #include <boost/noncopyable.hpp>
 #include <memory>
 #include <type_traits>
 
+#include "Core/Object/Object.h"
+
+#include "../Config.h"
+
+#include "GenericApplicationFwd.h"
+
 #define TGON_DECLARE_APPLICATION(className)\
     namespace tgon\
-    {\
-    namespace core\
     {\
     std::shared_ptr<GenericApplication> MakeApplication()\
     {\
         static_assert(std::is_convertible<className*, GenericApplication*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from GenericApplication.");\
         return std::make_shared<className>();\
     }\
-    } /* namespace core */\
     } /* namespace tgon */
 
 namespace tgon
-{
-namespace core
 {
 
 class TGON_API GenericApplication :
@@ -59,6 +54,10 @@ public:
     virtual void ShowMessageBox(const char* title, const char* message) const;
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const = 0;
 
+    const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
+
+/* @section Public event handler */
+public:
     virtual void OnWillLaunch() {}
     virtual void OnDidLaunch() {}
     virtual void OnWillTerminate() {}
@@ -66,11 +65,9 @@ public:
     virtual void OnDidCloseWindow(const std::shared_ptr<GenericWindow>&) {}
     virtual void OnUpdate() {}
 
-    const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
-
+/* @section Protected variable */
 protected:
     std::shared_ptr<GenericWindow> m_rootWindow;
 };
 
-} /* namespace core */
 } /* namespace tgon */

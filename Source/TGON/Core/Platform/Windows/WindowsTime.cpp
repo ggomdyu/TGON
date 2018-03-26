@@ -1,16 +1,14 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Time.h"
-#include "../TimeType.h"
-
 #ifndef NOMINMAX
 #   define NOMINMAX
 #endif
 #include <Windows.h>
 
+#include "../Time.h"
+#include "../TimeType.h"
+
 namespace tgon
-{
-namespace core
 {
 
 TGON_API int64_t GetTickCount()
@@ -39,5 +37,4 @@ TGON_API DateTime GetLocalTime()
     return DateTime(rawLocalTime);
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -12,8 +12,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename _FirstOperandType, typename _SecondOperandType>
 struct AddExpression;
@@ -259,5 +257,4 @@ constexpr const DivideExpression<_DerivedExpressionType, _SecondOperandType> Bas
     return {reinterpret_cast<const _DerivedExpressionType&>(*this), rhs};
 }
 
-} /* namespace core */
 } /* namespace tgon */

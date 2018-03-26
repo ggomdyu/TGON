@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename _ValueType>
 struct BasicExtent2D
@@ -80,6 +78,8 @@ using Extent2D = BasicExtent2D<int>;
 using I32Extent2D = BasicExtent2D<int32_t>;
 using I64Extent2D = BasicExtent2D<int64_t>;
 using FExtent2D = BasicExtent2D<float>;
+using DExtent2D = BasicExtent2D<double>;
+using LExtent2D = BasicExtent2D<long>;
 
 template <typename _ValueType>
 constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :
@@ -98,25 +98,25 @@ constexpr BasicExtent2D<_ValueType>::BasicExtent2D(const _ValueType& width, cons
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator+(const BasicExtent2D& rhs) const noexcept
 {
-    return BasicExtent2D(width + rhs.width, height + rhs.height);
+    return BasicExtent2D(*this) += rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator-(const BasicExtent2D& rhs) const noexcept
 {
-    return BasicExtent2D(width - rhs.width, height - rhs.height);
+    return BasicExtent2D(*this) -= rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
-    return BasicExtent2D(width * rhs, height * rhs);
+    return BasicExtent2D(*this) *= rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicExtent2D<_ValueType> BasicExtent2D<_ValueType>::operator/(const _ValueType& rhs) const
 {
-    return BasicExtent2D(width / rhs, height / rhs);
+    return BasicExtent2D(*this) /= rhs;
 }
 
 template <typename _ValueType>
@@ -217,5 +217,4 @@ inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t strBuf
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename _ValueType>
 struct BasicPoint
@@ -98,25 +96,25 @@ constexpr BasicPoint<_ValueType>::BasicPoint(const _ValueType& x, const _ValueTy
 template <typename _ValueType>
 constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator+(const BasicPoint& rhs) const noexcept
 {
-    return BasicPoint(x + rhs.x, y + rhs.y);
+    return BasicPoint(*this) += rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator-(const BasicPoint& rhs) const noexcept
 {
-    return BasicPoint(x - rhs.x, y - rhs.y);
+    return BasicPoint(*this) -= rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
-    return BasicPoint(x * rhs, y * rhs);
+    return BasicPoint(*this) *= rhs;
 }
 
 template <typename _ValueType>
 constexpr const BasicPoint<_ValueType> BasicPoint<_ValueType>::operator/(const _ValueType& rhs) const
 {
-    return BasicPoint(x / rhs, y / rhs);
+    return BasicPoint(*this) /= rhs;
 }
 
 template <typename _ValueType>
@@ -217,5 +215,4 @@ inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t strBuffer
 #endif
 }
 
-} /* namespace core */
 } /* namespace tgon */

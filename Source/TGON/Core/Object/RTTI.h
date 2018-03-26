@@ -10,8 +10,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 struct RTTI final
 {
@@ -53,5 +51,4 @@ inline const RTTI* RTTI::GetSuperRTTI() const noexcept
     return m_superRTTI;
 }
 
-} /* namespace core */
 } /* namespace tgon */

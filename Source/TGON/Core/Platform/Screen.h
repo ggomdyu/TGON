@@ -6,14 +6,12 @@
  */
 
 #pragma once
+#include <vector>
+
 #include "ScreenFwd.h"
 #include "Config.h"
 
-#include <vector>
-
 namespace tgon
-{
-namespace core
 {
 
 /* @brief   Returns count of detected monitors. */
@@ -28,5 +26,4 @@ TGON_API Screen GetPrimaryScreen();
 /* @brief   Returns all detected screen informations.*/
 TGON_API std::vector<Screen> GetAllScreens();
 
-} /* namespace core */
 } /* namespace tgon */

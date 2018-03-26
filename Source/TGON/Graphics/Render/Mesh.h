@@ -1,17 +1,54 @@
 /**
- * @filename    Texture.h
+ * @filename    Mesh.h
  * @author      ggomdyu
- * @since       12/09/2017
+ * @since       01/06/2018
  */
 
 #pragma once
-#include <cstdlib>
+#include "../LowLevelRender/VertexBuffer.h"
+#include "../LowLevelRender/IndexBuffer.h"
+
+#include "GraphicsResource.h"
+#include "Material.h"
 
 namespace tgon
 {
-namespace graphics
+
+class Mesh :
+    public GraphicsResource
 {
+/* @section Public constructor */
+public:
+    template <typename _VertexBufferType, typename _IndexBufferType>
+    explicit Mesh(const SharedGraphicsContext& context, _VertexBufferType&& vertexBuffer, _IndexBufferType&& indexBuffer);
 
+/* @section Public method */
+public:
+    VertexBuffer& GetVertexBuffer() noexcept;
+    IndexBuffer& GetIndexBuffer() noexcept;
 
-} /* namespace graphics */
+/* @section Protected variable */
+protected:
+    VertexBuffer m_vertexBuffer;
+    IndexBuffer m_indexBuffer;
+};
+
+template<typename _VertexBufferType, typename _IndexBufferType>
+inline Mesh::Mesh(const SharedGraphicsContext& context, _VertexBufferType&& vertexBuffer, _IndexBufferType&& indexBuffer) :
+    GraphicsResource(context),
+    m_vertexBuffer(std::forward<_VertexBufferType>(vertexBuffer)),
+    m_indexBuffer(std::forward<_IndexBufferType>(indexBuffer))
+{
+}
+
+inline VertexBuffer& Mesh::GetVertexBuffer() noexcept
+{
+    return m_vertexBuffer;
+}
+
+inline IndexBuffer& Mesh::GetIndexBuffer() noexcept
+{
+    return m_indexBuffer;
+}
+
 } /* namespace tgon */

@@ -6,13 +6,11 @@
  */
 
 #pragma once
-#include "WindowsWindowFwd.h"
-
 #include "../Generic/GenericWindow.h"
 
+#include "WindowsWindowFwd.h"
+
 namespace tgon
-{
-namespace core
 {
 
 class TGON_API WindowsWindow :
@@ -44,7 +42,6 @@ public:
     virtual void Minimize() final override;
     virtual void BringToFront() final override;
     void Flash();
-
     virtual void SetPosition(int32_t x, int32_t y) final override;
     virtual void SetSize(int32_t width, int32_t height) final override;
     virtual void SetTitle(const char* title) final override;
@@ -77,5 +74,4 @@ protected:
     bool m_isDwmCompositionEnabled;
 };
 
-} /* namespace core */
 } /* namespace tgon */

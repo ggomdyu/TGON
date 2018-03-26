@@ -14,19 +14,17 @@
 
 namespace tgon
 {
-namespace game
-{
 
 class TGON_API GameApplication :
-    public core::Application
+    public Application
 {
 public:
     TGON_RUNTIME_OBJECT(GameApplication)
 
 /* @section Public constructor */
 public:
-    GameApplication(const core::WindowStyle& windowStyle);
-    GameApplication(const core::WindowStyle& windowStyle, const graphics::VideoMode& videoMode);
+    GameApplication(const WindowStyle& windowStyle);
+    GameApplication(const WindowStyle& windowStyle, const VideoMode& videoMode);
     virtual ~GameApplication() override = default;
 
 /* @section Public method */
@@ -75,7 +73,7 @@ inline void GameApplication::AddModule(const std::shared_ptr<_ModuleType>& modul
 template <typename _ModuleType>
 inline const std::shared_ptr<_ModuleType>& GameApplication::FindModule() const
 {
-    auto iter = m_modulesToFind.find(core::GetRTTI<_ModuleType>()->GetHashCode());
+    auto iter = m_modulesToFind.find(GetRTTI<_ModuleType>()->GetHashCode());
     if (iter != m_modulesToFind.end())
     {
         return *iter;
@@ -96,5 +94,4 @@ inline const std::shared_ptr<GraphicsModule>& GameApplication::FindModule<Graphi
     return m_graphicsModule;
 }
 
-} /* namespace game */
 } /* namespace tgon */

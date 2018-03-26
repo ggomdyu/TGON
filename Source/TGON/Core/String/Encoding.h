@@ -5,14 +5,12 @@
  */
 
 #pragma once
-#include "EncodingFwd.h"
-
 #include <string>
 #include <cstdint>
 
+#include "EncodingFwd.h"
+
 namespace tgon
-{
-namespace core
 {
 
 template <typename _EncodingType>
@@ -142,7 +140,6 @@ public:
     static constexpr int32_t GetMaxCharSize() noexcept;
 };
 
-} /* namespace core */
 } /* namespace tgon */
 
 #include "Encoding.inl"

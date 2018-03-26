@@ -6,11 +6,9 @@
 
 namespace tgon
 {
-namespace game
-{
 
 TimeModule::TimeModule() :
-    m_prevTime(core::GetTickCount()),
+    m_prevTime(GetTickCount()),
     m_timeScale(1.0f),
     m_deltaTime(0.0f)
 {
@@ -18,7 +16,7 @@ TimeModule::TimeModule() :
 
 void TimeModule::Update()
 {
-    auto currTime = core::GetTickCount();
+    auto currTime = GetTickCount();
 
     m_deltaTime = (static_cast<float>(currTime - m_prevTime) * 0.001f) * m_timeScale;
     m_prevTime = currTime;
@@ -39,5 +37,4 @@ float TimeModule::GetDeltaTime() const
     return m_deltaTime;
 }
 
-} /* namespace game */
 } /* namespace tgon */

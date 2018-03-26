@@ -9,8 +9,6 @@
 
 namespace tgon 
 {
-namespace core
-{
 
 enum class MessageBoxIconType
 {
@@ -43,5 +41,4 @@ constexpr BatteryState::BatteryState(bool hasBattery, bool isCharging, int16_t b
 {
 }
 
-} /* namespace core */
 } /* namespace tgon */

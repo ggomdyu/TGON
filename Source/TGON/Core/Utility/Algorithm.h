@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 template <typename _CharType>
 constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
@@ -99,5 +97,24 @@ inline void FindAll(_ContainerType& container, const _PredicateType& predicate, 
     }
 }
 
-} /* namespace core */
+template <typename _ArrayElementType, std::size_t _ArraySize>
+constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexcept
+{
+    return _ArraySize;
+}
+
+template <typename _EnumType>
+constexpr std::underlying_type_t<_EnumType> ToUnderlying(_EnumType value) noexcept
+{
+    return static_cast<std::underlying_type_t<_EnumType>>(value);
+}
+
+template <typename _Type>
+void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible_v<_Type> && std::is_nothrow_move_assignable_v<_Type>)
+{
+    _Type temp = std::move(lhs);
+    lhs = std::move(rhs);
+    rhs = std::move(temp);
+}
+
 } /* namespace tgon */

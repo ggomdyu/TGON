@@ -10,8 +10,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 struct WindowStyle final
 {
@@ -34,5 +32,4 @@ struct WindowStyle final
     bool setFullScreen = false;
 };
 
-} /* namespace core */
 } /* namespace tgon */

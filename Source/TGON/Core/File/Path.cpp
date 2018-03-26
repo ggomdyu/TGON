@@ -4,8 +4,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 TGON_API std::string GetExtension(const char* srcPathStr, int32_t srcPathStrLen)
 {
@@ -308,5 +306,4 @@ TGON_API bool HasExtension(const char* srcPathStr)
 //
 //}
 
-} /* namespace core */
 } /* namespace tgon */

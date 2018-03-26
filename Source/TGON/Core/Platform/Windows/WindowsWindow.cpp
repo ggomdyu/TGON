@@ -1,23 +1,21 @@
 ﻿#include "PrecompiledHeader.pch"
 
-#include "WindowsWindow.h"
-#include "WindowsWindowUtility.h"
-
-#include "../Config.h"
-#include "../Generic/GenericWindowType.h"
-
-#include "Core/String/Encoding.h"
-
-#include <Windows.h>
 #include <cassert>
+#include <Windows.h>
 #if TGON_SUPPORT_DWMAPI && TGON_USING_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
+#include "Core/String/Encoding.h"
+
+#include "../Config.h"
+#include "../Generic/GenericWindowType.h"
+
+#include "WindowsWindow.h"
+#include "WindowsWindowUtility.h"
+
 namespace tgon
-{
-namespace core
 {
 
 WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
@@ -46,8 +44,14 @@ WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
         return *this;
     }
 
-    this->~WindowsWindow();
-    new (this) WindowsWindow(std::move(rhs));
+    this->Close();
+
+    GenericWindow::operator=(std::move(rhs));
+    m_wndHandle = rhs.m_wndHandle;
+    m_isDwmCompositionEnabled = rhs.m_isDwmCompositionEnabled;
+    
+    rhs.m_wndHandle = nullptr;
+    rhs.m_isDwmCompositionEnabled = false;
 
     return *this;
 }
@@ -216,7 +220,7 @@ float WindowsWindow::GetTransparency() const
     return transparency / 255.0f;
 }
 
-//void WindowsWindow::SetWindowTransparencyPerPixel(const core::Color4f& pixel, float opacity)
+//void WindowsWindow::SetWindowTransparencyPerPixel(const Color4f& pixel, float opacity)
 //{
 //#if TGON_USING_DWMAPI
 //    BOOL isCompoEnabled = FALSE;
@@ -329,5 +333,4 @@ void WindowsWindow::SetUserData(void* data)
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG>(data));
 }
 
-} /* namespace core */
 } /* namespace tgon */

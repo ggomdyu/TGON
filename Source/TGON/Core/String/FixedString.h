@@ -6,13 +6,11 @@
  */
 
 #pragma once
-#include "StringTraits.h"
-
 #include <cstdint>
 
+#include "StringTraits.h"
+
 namespace tgon
-{
-namespace core
 {
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
@@ -23,13 +21,15 @@ class BasicFixedString :
 
 /* @section Public type */
 public:
-    using CharType = _CharType;
-    using ReferenceType = CharType&;
-    using ConstReferenceType = const CharType&;
-    using IteratorType = CharType*;
-    using ConstIteratorType = const CharType*;
-    using PointerType = CharType*;
-    using ConstPointerType = const CharType*;
+    using StringTraitsType = _StringTraitsType;
+    using SizeType = std::size_t;
+    using ValueType = _CharType;
+    using ReferenceType = ValueType&;
+    using ConstReferenceType = const ValueType&;
+    using IteratorType = ValueType*;
+    using ConstIteratorType = const ValueType*;
+    using PointerType = ValueType*;
+    using ConstPointerType = const ValueType*;
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
@@ -125,6 +125,7 @@ public:
     void Swap(BasicFixedString& rhs);
     const _CharType* CStr() const noexcept;
     const _CharType* Data() const noexcept;
+    std::size_t Size() const noexcept;
     std::size_t Length() const noexcept;
     constexpr std::size_t Capacity() const noexcept;
 
@@ -508,9 +509,15 @@ inline const _CharType* BasicFixedString<_CharType, _CharArraySize, _StringTrait
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Length() const noexcept
+inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Size() const noexcept
 {
     return m_strLen;
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Length() const noexcept
+{
+    return this->Size();
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -579,5 +586,4 @@ inline const _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTrait
     return _StringTraitsType::At(m_str, m_strLen, index);
 }
 
-} /* namespace core */
 } /* namespace tgon */

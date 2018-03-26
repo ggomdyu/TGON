@@ -13,8 +13,6 @@
 
 namespace tgon
 {
-namespace graphics
-{
 
 class Renderer
 {
@@ -24,8 +22,6 @@ public:
 
 /* @section Public method */
 public:
-    void SetMaterial(const Material& material);
-
     const std::unique_ptr<IDynamicRHI>& GetRHI() const noexcept;
 
 /* @section Private method */
@@ -37,5 +33,4 @@ public:
     std::unique_ptr<IDynamicRHI> m_rhi;
 };
 
-} /* namespace graphics */
 } /* namespace tgon */

@@ -19,10 +19,7 @@
 //#include "Direct3D11/Direct3D11RHI.h"
 //#include "Direct3D12/Direct3D12RHI.h"
 
-
 namespace tgon
-{
-namespace render
 {
 
 Renderer::Renderer(const std::shared_ptr<platform::Window>& window, const rhi::VideoMode& videoMode) :
@@ -62,5 +59,4 @@ std::unique_ptr<rhi::IDynamicRHI> Renderer::MakeRHI(const std::shared_ptr<platfo
     }
 }
 
-} /* namespace render */
 } /* namespace tgon */

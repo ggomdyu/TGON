@@ -5,17 +5,15 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "Core/Hash/Hash.h"
-
 #include <vector>
 #include <cstdint>
 #include <algorithm>
 #include <string>
 
+#include "Core/Platform/Config.h"
+#include "Core/Hash/Hash.h"
+
 namespace tgon
-{
-namespace core
 {
 
 enum class ImageFormat
@@ -43,6 +41,8 @@ class Bitmap
 {
 /* @section Public constructor */
 public:
+    Bitmap() = default;
+
     /**
      * @brief                   Reads a image data from the given path specified by 'filePath'.
      * @param [in] filePath     The path of image file
@@ -102,6 +102,8 @@ public:
     /* @brief   Get the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
 
+    void Swap(Bitmap& rhs) noexcept(std::is_nothrow_move_constructible_v<Bitmap>);
+
 /* @section Private variable */
 private:
     std::vector<uint8_t> m_bits;
@@ -113,5 +115,4 @@ private:
     std::string m_filePath;
 };
 
-} /* namespace core */
 } /* namespace tgon */  

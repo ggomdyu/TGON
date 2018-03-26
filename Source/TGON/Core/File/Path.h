@@ -5,18 +5,16 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-
 #include <cstdint>
 #include <string>
+
+#include "Core/Platform/Config.h"
 
 #ifdef GetCurrentDirectory
 #   undef GetCurrentDirectory
 #endif
 
 namespace tgon
-{
-namespace core
 {
 
 enum class SpecialDirectoryType
@@ -218,5 +216,4 @@ TGON_API std::string GetDirectory(SpecialDirectoryType specialDirectoryType);
 //public static string GetTempFileName();
 //public static string GetTempPath();
 
-} /* namespace core */
 } /* namespace tgon */

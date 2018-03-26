@@ -6,16 +6,13 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-
 #include <cstdarg>
 
+#include "Core/Platform/Config.h"
+
 namespace tgon
-{
-namespace core
 {
 
 TGON_API void Log(const char* formatStr, ...);
 
-} /* namespace core */
 } /* namespace tgon */
