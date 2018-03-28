@@ -36,7 +36,7 @@ public:
 
 /* @section Private constructor */
 private:
-    constexpr BasicUUID() noexcept;
+    using BasicFixedString::BasicFixedString;
 
 /* @section Public operator */
 public:
@@ -58,9 +58,9 @@ public:
     using BasicFixedString::crbegin;
 };
 
-using UUID = BasicUUID<StringTraits<char>>;
+using UUID = BasicUUID<char, StringTraits<char>>;
 
-template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
+template <typename _CharType, typename _StringTraitsType>
 inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTraitsType>::NewUUID()
 {
 #ifdef _MSC_VER
@@ -70,8 +70,7 @@ inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTrait
     RPC_CSTR rawUUIDStr;
     UuidToStringA(&rawUUID, &rawUUIDStr);
     
-    BasicUUID ret;
-    memcpy(ret.m_str, rawUUIDStr, sizeof(decltype(m_str[0])) * std::extent<decltype(m_str)>::value);
+    BasicUUID ret(reinterpret_cast<const char*>(rawUUIDStr), 36);
 
     RpcStringFreeA(&rawUUIDStr);
 
