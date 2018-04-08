@@ -38,7 +38,7 @@ public:
 
 /* @section Public constructor */
 public:
-    GenericApplication() = default;
+    GenericApplication();
     GenericApplication(const std::shared_ptr<GenericWindow>& window);
 
 /* @section Public destructor */

@@ -13,12 +13,13 @@
 namespace tgon
 {
 
+/* @brief   Returns OS excution elapsed time. */
 TGON_API int64_t GetTickCount();
 
-/* @return  The DateTime in UTC time */
+/* @brief   Returns current time information in UTC time. */
 TGON_API struct DateTime GetSystemTime();
 
-/* @return  The DateTime in Local time */
+/* @brief   Returns current time information in Local time. */
 TGON_API struct DateTime GetLocalTime();
 
 } /* namespace tgon */

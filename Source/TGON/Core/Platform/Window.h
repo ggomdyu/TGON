@@ -35,6 +35,11 @@ public:
 /* @section Public destructor */
 public:
     virtual ~Window() final override = default;
+
+/* @section Public operator */
+public:
+    Window& operator=(Window&&) = default;
+    Window& operator=(const Window&) = default;
 };
 
 } /* namespace tgon */

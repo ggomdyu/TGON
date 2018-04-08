@@ -104,7 +104,7 @@ constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexc
 }
 
 template <typename _EnumType>
-constexpr std::underlying_type_t<_EnumType> ToUnderlying(_EnumType value) noexcept
+constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noexcept
 {
     return static_cast<std::underlying_type_t<_EnumType>>(value);
 }

@@ -18,8 +18,7 @@ namespace tgon
 {
 
 class TGON_API Object :
-    public IRuntimeObject,
-    public ICloneable
+    public IRuntimeObject
 {
 public:
     TGON_RUNTIME_OBJECT(Object)

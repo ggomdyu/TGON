@@ -47,6 +47,7 @@ WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
     this->Close();
 
     GenericWindow::operator=(std::move(rhs));
+
     m_wndHandle = rhs.m_wndHandle;
     m_isDwmCompositionEnabled = rhs.m_isDwmCompositionEnabled;
     

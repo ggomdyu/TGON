@@ -26,7 +26,7 @@ public:
     WindowsWindow(WindowsWindow&& rhs) noexcept;
 
 /* @section Public operator */
-public:
+protected:
     WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
 
 /* @section Public destructor */

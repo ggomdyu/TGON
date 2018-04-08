@@ -19,9 +19,13 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Returns unique hash code for each type. */
     std::size_t GetHashCode() const noexcept;
+    
+    /* @brief   Returns the type name of RTTI owner. */
     const char* GetName() const noexcept;
 
+    /* @brief   Returns the parent type's RTTI. */
     const RTTI* GetSuperRTTI() const noexcept;
 
 /* @section Private variable */

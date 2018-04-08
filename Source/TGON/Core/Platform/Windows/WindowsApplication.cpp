@@ -24,7 +24,7 @@ UINT ConvertMessageBoxIconTypeToNative(MessageBoxIconType messageBoxIconType) no
         MB_ICONEXCLAMATION,
     };
 
-    return nativeMessageBoxIconTypeTable[ToUnderlying(messageBoxIconType)];
+    return nativeMessageBoxIconTypeTable[UnderlyingCast(messageBoxIconType)];
 }
 
 /* @brief   Register default WNDCLASS to window class table. */

@@ -16,7 +16,7 @@ class ICloneable
 /* @section Public method */
 public:
     /* @brief   Returns copied one from this instance. */
-    virtual std::shared_ptr<ICloneable> Clone() const { return nullptr; }
+    virtual std::shared_ptr<ICloneable> Clone() const = 0;
 };
 
 } /* namespace tgon */

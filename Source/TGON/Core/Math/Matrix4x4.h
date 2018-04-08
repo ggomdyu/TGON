@@ -38,8 +38,8 @@ public:
     const Matrix4x4& operator+=(const Matrix4x4&);
     const Matrix4x4& operator-=(const Matrix4x4&);
     const Matrix4x4& operator*=(const Matrix4x4&);
-    bool operator==(const Matrix4x4&) const;
-    bool operator!=(const Matrix4x4&) const;
+    constexpr bool operator==(const Matrix4x4&) const;
+    constexpr bool operator!=(const Matrix4x4&) const;
     float* operator[](std::size_t index);
     const float* operator[](std::size_t index) const;
 
@@ -48,6 +48,7 @@ public:
     static constexpr const Matrix4x4 Identity();
     static constexpr const Matrix4x4 Zero();
     static constexpr const Matrix4x4 Translate(float x, float y, float z) noexcept;
+    static const Matrix4x4 Rotate(float yaw, float pitch, float roll);
     static const Matrix4x4 RotateX(float radian);
     static const Matrix4x4 RotateY(float radian);
     static const Matrix4x4 RotateZ(float radian);
@@ -58,7 +59,7 @@ public:
     static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
     static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ);
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
-    static Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
+    static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 
 /* @section Public variable */
 public:
@@ -146,7 +147,7 @@ inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt
 {
     Vector3 l = lookAt - eyePt;
     l.Normalize();
-
+    
     Vector3 r = Vector3::Cross(up, l);
     r.Normalize();
 
@@ -206,7 +207,7 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
 
-inline Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
+constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
 {
     float halfWidth = width * 0.5f;
     float halfHeight = height * 0.5f;
@@ -229,7 +230,6 @@ constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
     );
 }
 
-
 //#if TGON_SUPPORT_SSE 1
 //inline Matrix4x4::Matrix4x4()
 //{
@@ -246,7 +246,6 @@ constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
 //    m30(0.0f), m31(0.0f), m32(0.0f), m33(1.0f)
 //{
 //}
-
 
 inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const
 {
@@ -275,7 +274,7 @@ inline const Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs)
     return *this;
 }
 
-inline bool Matrix4x4::operator==(const Matrix4x4& rhs) const
+constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const
 {
     for (int i = 0; i < 16; ++i)
     {
@@ -287,17 +286,20 @@ inline bool Matrix4x4::operator==(const Matrix4x4& rhs) const
     return true;
 }
 
+constexpr bool Matrix4x4::operator!=(const Matrix4x4& rhs) const
+{
+    return !this->operator==(rhs);
+}
+
 inline float* Matrix4x4::operator[](std::size_t index)
 {
     assert((index < 4 || index > -1) && "Matrix4x4 index out of range");
-
     return &m00 + (index * 4);
 }
 
 inline const float* Matrix4x4::operator[](std::size_t index) const
 {
     assert((index < 4 || index > -1) && "Matrix4x4 index out of range");
-
     return &m00 + (index * 4);
 }
 
@@ -314,21 +316,30 @@ constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexce
 constexpr const Matrix4x4 Matrix4x4::Identity()
 {
     return Matrix4x4(
-        1.f, 0.f, 0.f, 0.f,
-        0.f, 1.f, 0.f, 0.f,
-        0.f, 0.f, 1.f, 0.f,
-        0.f, 0.f, 0.f, 1.f
+        1.f,    0.f,    0.f,    0.f,
+        0.f,    1.f,    0.f,    0.f,
+        0.f,    0.f,    1.f,    0.f,
+        0.f,    0.f,    0.f,    1.f
     );
 }
 
 constexpr const Matrix4x4 Matrix4x4::Zero()
 {
     return Matrix4x4(
-        0.f, 0.f, 0.f, 0.f,
-        0.f, 0.f, 0.f, 0.f,
-        0.f, 0.f, 0.f, 0.f,
-        0.f, 0.f, 0.f, 0.f
+        0.f,    0.f,    0.f,    0.f,
+        0.f,    0.f,    0.f,    0.f,
+        0.f,    0.f,    0.f,    0.f,
+        0.f,    0.f,    0.f,    0.f
     );
+}
+
+inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll)
+{
+    auto ret = Matrix4x4::RotateZ(roll);
+    ret *= Matrix4x4::RotateX(pitch);
+    ret *= Matrix4x4::RotateY(yaw);
+
+    return ret;
 }
 
 inline const Matrix4x4 Matrix4x4::RotateX(float radian)
@@ -344,10 +355,10 @@ inline const Matrix4x4 Matrix4x4::RotateX(float radian)
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateY(float theta)
+inline const Matrix4x4 Matrix4x4::RotateY(float radian)
 {
-    const float cosValue = cosf(theta);
-    const float sinValue = sinf(theta);
+    const float cosValue = cosf(radian);
+    const float sinValue = sinf(radian);
 
     return Matrix4x4(
         cosValue,   0.0f,    -sinValue, 0.0f,
@@ -357,10 +368,10 @@ inline const Matrix4x4 Matrix4x4::RotateY(float theta)
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateZ(float theta)
+inline const Matrix4x4 Matrix4x4::RotateZ(float radian)
 {
-    const float cosValue = cosf(theta);
-    const float sinValue = sinf(theta);
+    const float cosValue = cosf(radian);
+    const float sinValue = sinf(radian);
 
     return
     {

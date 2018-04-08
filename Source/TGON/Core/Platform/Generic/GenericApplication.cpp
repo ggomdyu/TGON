@@ -8,10 +8,14 @@
 namespace tgon
 {
 
+GenericApplication::GenericApplication() :
+    GenericApplication(nullptr)
+{
+}
+
 GenericApplication::GenericApplication(const std::shared_ptr<GenericWindow>& rootWindow) :
     m_rootWindow(rootWindow)
 {
-    SrandWELL1024a();
 }
 
 void GenericApplication::ShowMessageBox(const char* message) const

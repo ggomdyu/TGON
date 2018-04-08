@@ -8,11 +8,6 @@
 
 #include "Bitmap.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   pragma comment(lib, "libpngd.lib")
-#   pragma comment(lib, "zlibstaticd.lib")
-#endif
-
 namespace tgon
 {
 namespace
