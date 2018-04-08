@@ -1,6 +1,8 @@
 #include "PrecompiledHeader.pch"
 
-#include <crtdbg.h>
+#ifndef NDEBUG
+#   include <crtdbg.h>
+#endif
 #include <Windows.h>
 
 #include "../Application.h"
