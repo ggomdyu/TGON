@@ -188,9 +188,9 @@ public:
 
     static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
 
-    static void ToLower(const _CharType* srcStr, const _CharType* srcStrLen, _CharType* destStr);
+    static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
     static void ToLower(const _CharType* srcStr, _CharType* destStr);
-    static void ToUpper(const _CharType* srcStr, const _CharType* srcStrLen, _CharType* destStr);
+    static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
     static void ToUpper(const _CharType* srcStr, _CharType* destStr);
 
 /* @section Public variable */
@@ -336,7 +336,7 @@ inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrL
 }
 
 template<typename _CharType>
-inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, const _CharType* srcStrLen, _CharType* destStr)
+inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
 {
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
@@ -344,11 +344,11 @@ inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, const _Cha
 template<typename _CharType>
 inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr)
 {
-    std::transform(srcStr, srcStr + std::strlen(srcStr) + 1, destStr, ::tolower);
+    ToLower(srcStr, std::strlen(srcStr), destStr);
 }
 
 template<typename _CharType>
-inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, const _CharType* srcStrLen, _CharType* destStr)
+inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
 {
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
@@ -356,7 +356,7 @@ inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, const _Cha
 template<typename _CharType>
 inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr)
 {
-    std::transform(srcStr, srcStr + std::strlen(srcStr) + 1, destStr, ::toupper);
+    ToUpper(srcStr, std::strlen(srcStr), destStr);
 }
 
 } /* namespace tgon */
