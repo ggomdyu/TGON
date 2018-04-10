@@ -5,7 +5,7 @@
 
 @implementation WindowDelegate
 
-- (id)initWithWindow:(tgon::core::GenericWindow*)window
+- (id)initWithWindow:(tgon::GenericWindow*)window
 {
     self = [super init];
     if (self)
