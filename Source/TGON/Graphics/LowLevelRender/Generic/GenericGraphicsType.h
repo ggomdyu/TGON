@@ -6,10 +6,10 @@
  */
 
 #pragma once
+#include <cstdint>
+
 #include "Core/Math/Color.h"
 #include "Core/Math/Vector3.h"
-
-#include <cstdint>
 
 namespace tgon
 {

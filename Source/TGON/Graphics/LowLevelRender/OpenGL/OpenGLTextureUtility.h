@@ -8,6 +8,7 @@
 #include <GL/glew.h>
 
 #include "Core/Utility/Algorithm.h"
+
 #include "../Generic/GenericTextureType.h"
 
 namespace tgon

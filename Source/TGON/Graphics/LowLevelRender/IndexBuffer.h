@@ -6,7 +6,6 @@
  */
 
 #pragma once
-
 #if TGON_USING_OPENGL
 #   include "OpenGL/OpenGLIndexBuffer.h"
 #elif TGON_USING_DIRECT3D11

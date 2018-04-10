@@ -5,10 +5,10 @@
  */
 
 #pragma once
-#include "../Generic/GenericShader.h"
-
 #include <string>
 #include <GL/glew.h>
+
+#include "../Generic/GenericShader.h"
 
 namespace tgon
 {

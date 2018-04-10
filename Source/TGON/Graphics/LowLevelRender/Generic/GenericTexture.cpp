@@ -1,4 +1,3 @@
-
 #include "PrecompiledHeader.pch"
 
 #include "GenericTexture.h"

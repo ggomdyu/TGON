@@ -5,7 +5,6 @@
  * @brief
  */
 
-
 #pragma once
 #include <memory>
 

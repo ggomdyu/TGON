@@ -1,11 +1,11 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Path.h"
+#include <Windows.h>
+#include <shlobj.h>
 
 #include "Core/String/Encoding.h"
 
-#include <Windows.h>
-#include <shlobj.h>
+#include "../Path.h"
 
 #ifdef GetCurrentDirectory
 #   undef GetCurrentDirectory

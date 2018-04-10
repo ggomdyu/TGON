@@ -421,6 +421,10 @@ public:
 
         FILE* file = fopen("E:/Users/ggomdyu/Desktop/SmallExplosion.wav", "rb");
         
+        Log("%s%d%s", u8"³ª´Â", 5, u8"¶ó´ÂNumberª¬û¿ª­ªÇª¹¡£");
+        Log<LogLevel::Warning>("%s%d%s", u8"³ª´Â", 5, u8"¶ó´ÂNumberª¬û¿ª­ªÇª¹¡£");
+        Log<LogLevel::Warning>("Hello!");
+
         /*char type[4];
         fread(type, sizeof(char), 4, file);
         if (strcmp(type, "RIFF"))

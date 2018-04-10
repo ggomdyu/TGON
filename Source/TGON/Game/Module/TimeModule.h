@@ -32,7 +32,6 @@ public:
 /* @section Private variable */
 private:
     uint64_t m_prevTime;
-
     float m_timeScale;
     float m_deltaTime;
 };

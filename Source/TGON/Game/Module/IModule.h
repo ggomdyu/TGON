@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#include "Core/Object/Object.h"
-
 #include <boost/noncopyable.hpp>
+
+#include "Core/Object/Object.h"
 
 namespace tgon
 {

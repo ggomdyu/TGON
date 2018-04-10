@@ -16,10 +16,13 @@ namespace tgon
 class GraphicsResource :
     private boost::noncopyable
 {
-/* @section Public destructor */
+/* @section Public constructor */
 public:
     explicit GraphicsResource(const SharedGraphicsContext& context);
-    virtual ~GraphicsResource() = 0;;
+
+/* @section Public destructor */
+public:
+    virtual ~GraphicsResource() = 0;
 
 /* @section Public method */
 public:

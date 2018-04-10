@@ -16,7 +16,7 @@ class Material
 public:
     virtual void Use() = 0;
     virtual void Unuse() = 0;
-    virtual bool CanBatch(Material* rhs) = 0;
+    virtual bool CanBatch(const Material& rhs) = 0;
 
 private:
 };

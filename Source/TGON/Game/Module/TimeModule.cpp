@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.pch"
 
-#include "TimeModule.h"
-
 #include "Core/Platform/Time.h"
+
+#include "TimeModule.h"
 
 namespace tgon
 {

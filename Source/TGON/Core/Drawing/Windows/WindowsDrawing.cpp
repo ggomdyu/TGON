@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.pch"
 
-#include "../Drawing.h"
+#include <Windows.h>
 
 #include "Core/Platform/Window.h"
 
-#include <Windows.h>
+#include "../Drawing.h"
 
 namespace tgon
 {
