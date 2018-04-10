@@ -13,6 +13,7 @@ namespace tgon
 class IComparable
 {
 /* @section Public method */
+public:
     /**
      * @brief   Compares this instance with another instance of the same type.
      * @return  A value that indicates whether this instance precedes.
