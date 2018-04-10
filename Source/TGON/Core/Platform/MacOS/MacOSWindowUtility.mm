@@ -1,17 +1,15 @@
 #import "PrecompiledHeader.pch"
 
-#import "MacOSWindowUtility.h"
-
-#import "../Generic/GenericWindowType.h"
-
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSScreen.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSColor.h>
 
+#import "../Generic/GenericWindowType.h"
+
+#import "MacOSWindowUtility.h"
+
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -95,5 +93,4 @@ NSWindow* MakeNativeWindow(const WindowStyle& windowStyle)
     return window;
 }
 
-} /* namespace core */
 } /* namespace tgon */
