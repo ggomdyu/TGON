@@ -2,7 +2,7 @@
  * @filename    GenericWindow.h
  * @author      ggomdyu
  * @since       01/09/2016
- * @brief       The platform-agnostic Window interface.
+ * @brief       The platform-agnostic window interface.
  */
 
 #pragma once
