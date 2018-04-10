@@ -59,9 +59,9 @@ void MacOSApplication::OnHandleMessage(NSEvent* message)
     NSEventType messageType = [message type];
     switch (messageType)
     {
-        default:
-            [NSApp sendEvent:message];
-            break;
+    default:
+        [NSApp sendEvent:message];
+        break;
     }
 }
 
