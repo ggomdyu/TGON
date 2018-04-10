@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 /**
  * @brief                       Creates a window via given WindowStyle.
@@ -20,5 +18,4 @@ namespace core
  */
 NSWindow* MakeNativeWindow(const struct WindowStyle& windowStyle);
 
-} /* namespace core */
 } /* namespace tgon */
