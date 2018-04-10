@@ -21,6 +21,6 @@ class GenericWindow;
 
 @property (readonly, assign) tgon::core::GenericWindow* window;
 
-- (id)initWithWindow:(tgon::core::GenericWindow*)window;
+- (id)initWithWindow:(tgon::GenericWindow*)window;
 
 @end
