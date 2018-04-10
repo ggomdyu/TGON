@@ -43,6 +43,12 @@
     <Filter Include="Source\Core\Platform\Generic">
       <UniqueIdentifier>{964cf725-f3cc-4dc1-a529-4d0a9801f954}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\File">
+      <UniqueIdentifier>{f9293845-54b7-4c21-bb43-2bf656d9fa66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\File\Windows">
+      <UniqueIdentifier>{27d1e18c-8d81-412d-b903-ed1f43b0a688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
@@ -57,14 +63,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp">
       <Filter>Source\Core\Drawing\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Bitmap.cpp">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.cpp">
       <Filter>Source\Core\Platform\Generic</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.cpp">
       <Filter>Source\Core\Platform\Generic</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.cpp">
+      <Filter>Source\Core\File</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp">
+      <Filter>Source\Core\File\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\PNGImageProcessor.cpp">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Image.cpp">
+      <Filter>Source\Core\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +90,6 @@
       <Filter>Source\Core\Hash</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Algorithm.h">
-      <Filter>Source\Core\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Array.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Extent.h">
@@ -180,23 +195,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\InstantiateCounter.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Bitmap.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Matrix4x4.h">
       <Filter>Source\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\AutoReleaseDC.h">
-      <Filter>Source\Core\Utility\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\COMPtr.h">
-      <Filter>Source\Core\Utility\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Cast.h">
-      <Filter>Source\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplication.h">
       <Filter>Source\Core\Platform\Generic</Filter>
@@ -219,5 +219,52 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFwd.h">
       <Filter>Source\Core\Platform\Generic</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.h">
+      <Filter>Source\Core\File</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector2.h">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\EncodingFwd.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\RAII.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\ComPtr.h">
+      <Filter>Source\Core\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\HandleGuard.h">
+      <Filter>Source\Core\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\AutoCast.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Macro.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Stopwatch.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageType.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageUtility.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\PNGImageProcessor.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Image.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.inl">
+      <Filter>Source\Core\String</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.pch"
 
+#define TGON_ENABLE_LOG_ON_RELEASE 1
 #define TGON_USING_OPENGL 1
 #include "Game/Engine/GameApplication.h"
 
@@ -11,7 +12,7 @@
 #include "Core/File/Path.h"
 #include "Core/Platform/Time.h"
 #include "Core/Random/Random.h"
-#include "Core/Drawing/Bitmap.h"
+#include "Core/Drawing/Image.h"
 #include "Core/Debug/Log.h"
 #include "Core/Platform/Screen.h"
 #include "Core/Platform/Locale.h"
@@ -28,29 +29,38 @@
 #include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Extent.h"
 #include "Core/Hash/UUID.h"
+#include "Core/Hash/Hash.h"
 #include "Core/Random/Random.h"
 #include "Core/Utility/RAII.h"
 #include "Core/File/Path.h"
 #include "Core/Utility/Windows/HandleGuard.h"
+#include "Core/Utility/Stopwatch.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphics.h"
 #include "Graphics/LowLevelRender/Texture.h"
 #include "Graphics/LowLevelRender/OpenGL/OpenGLShader.h"
 #include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/Renderer.h"
-#include "Graphics/Render/Quad.h"
+#include "Graphics/Render/MeshUtility.h"
 #include "Game/Module/GraphicsModule.h"
 #include "Game/Module/TimeModule.h"
 #include "Graphics/LowLevelRender/VertexBuffer.h"
 #include "Graphics/LowLevelRender/IndexBuffer.h"
 #include "Graphics/LowLevelRender/Texture.h"
+#include "Graphics/Render/FVF.h"
 #include "Game/Module/GraphicsModule.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <d3d9.h>
+#include <d3dx9.h>
+#include <al.h>
+#include <alc.h>
 
-#pragma comment(lib, "assimp-vc140-mtd.lib")
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "assimp-vc140-mt.lib")
 #pragma comment(lib, "IrrXML.lib")
 
 using namespace tgon;
@@ -101,73 +111,36 @@ std::shared_ptr<Texture>& AssetManager::LoadAsset<Texture>(const char* assetPath
 
 }
 
-struct V3F_N4F_C2B
+class MeshRenderer
 {
+public:
+    MeshRenderer(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material) :
+        m_material(material)
+    {
+    }
+
+public:
+    void Draw()
+    {
+        m_mesh->GetVertexBuffer().Use();
+        m_mesh->GetIndexBuffer().Use();
+
+        for (size_t i = 0; i < m_textures.size(); ++i)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+
+            //shader.GetUniformLocation("diffuse");
+        }
+
+        //glDrawElements(GL_TRIANGLES, m_indexBuffer.GetDataBytes() / 4, GL_UNSIGNED_INT, nullptr);
+    }
+
+private:
+    std::shared_ptr<Mesh> m_mesh;
+    std::shared_ptr<Material> m_material;
+    std::vector<std::shared_ptr<Texture>> m_textures;
 };
 
-
-//class Mesh
-//{
-//public:
-//    template <typename _StringType, typename _VertexBufferType, typename _IndexBufferType, typename _TextureContainerType>
-//    Mesh(_StringType&& name, _VertexBufferType&& vertexBuffer, _IndexBufferType&& indexBuffer, _TextureContainerType&& textureContainerType) :
-//        m_name(std::forward<_StringType>(name)),
-//        m_vertexBuffer(std::forward<_VertexBufferType>(vertexBuffer)),
-//        m_indexBuffer(std::forward<_IndexBufferType>(indexBuffer)),
-//        m_textures(std::forward<_TextureContainerType>(textureContainerType))
-//    {
-//    }
-//
-//public:
-//    void Draw(Shader& shader)
-//    {
-//        m_vertexBuffer.Use();
-//        m_indexBuffer.Use();
-//
-//
-//        for (auto i = 0; i < m_textures.size(); ++i)
-//        {
-//            glActiveTexture(GL_TEXTURE0 + i);
-//
-//            shader.GetUniformLocation("diffuse");
-//        }
-//
-//        glDrawElements(GL_TRIANGLES, m_indexBuffer.GetDataBytes() / 4, GL_UNSIGNED_INT, nullptr);
-//    }
-//
-//    const VertexBuffer& GetVertexBuffer() const
-//    {
-//        return m_vertexBuffer;
-//    }
-//
-//    const IndexBuffer& GetIndexBuffer() const
-//    {
-//        return m_indexBuffer;
-//    }
-//
-//private:
-//    std::string m_name;
-//    VertexBuffer m_vertexBuffer;
-//    IndexBuffer m_indexBuffer;
-//    std::vector<std::shared_ptr<Texture>> m_textures;
-//};
-//
-//class Material
-//{
-//public:
-//
-//};
-//
-//class Light
-//{
-//};
-//
-//class DirectionalLight :
-//    public Light
-//{
-//public:
-//};
-//
 //class Model
 //{
 //public:
@@ -182,7 +155,7 @@ struct V3F_N4F_C2B
 //    {
 //        for (auto& mesh : m_meshes)
 //        {
-//            mesh.Draw(shader);
+//            //mesh.Draw(shader);
 //        }
 //    }
 //
@@ -227,7 +200,7 @@ struct V3F_N4F_C2B
 //
 //    Mesh ProcessMesh(const aiMesh* mesh, const aiScene* scene)
 //    {
-//        std::vector<P3F_N3F_U2F> vertices;
+//        std::vector<V3F_N3F_T2F> vertices;
 //        {
 //            vertices.reserve(mesh->mNumVertices);
 //
@@ -371,48 +344,60 @@ shader->Unuse();
 
 */
 
-class A
+class WAVImporter
 {
+    using _AllocatorType = std::allocator<uint8_t>;
+
 public:
-    A& operator=(const A& rhs)
+    explicit WAVImporter(const char* srcFilePath) : 
+        m_buffer(nullptr),
+        m_formatType(0),
+        m_channels(0),
+        m_sampleRate(0),
+        m_isValid(false)
     {
-        if (this == &rhs)
+    }
+
+    explicit WAVImporter(const uint8_t* srcData) :
+        m_isValid(VerifyFormat(srcData))
+    {
+    }
+
+public:
+    
+    bool IsValid()
+    {
+        return false;
+    }
+
+private:
+    /* @brief   Verifies the importing file is exactly WAV. */
+    bool VerifyFormat(const uint8_t* srcData) const
+    {
+        if (strcmp(reinterpret_cast<const char*>(&srcData[0]), "RIFF") == true)
         {
-            return *this;
+            return false;
         }
 
-        return *this->Clone();
-    }
-
-    virtual A* Clone() const
-    {
-        A* temp = new A;
-        temp->a = a;
-        return temp;
-    }
-
-    int a;
-};
-
-class B :
-    public A
-{
-public:
-    B& operator=(const B& rhs)
-    {
-        if (this == &rhs)
+        if (strcmp(reinterpret_cast<const char*>(&srcData[8]), "WAVE") == true)
         {
-            return *this;
+            return false;
         }
 
-        A::operator=(rhs);
+        if (strcmp(reinterpret_cast<const char*>(&srcData[12]), "fmt ") == true)
+        {
+            return false;
+        }
 
-        b = rhs.b;
-
-        return *this;
+        return true;
     }
 
-    int b;
+private:
+    uint8_t* m_buffer;
+    short m_formatType;
+    short m_channels;
+    uint32_t m_sampleRate;
+    bool m_isValid;
 };
 
 class TGON_API ThousandParty :
@@ -422,42 +407,99 @@ public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
     Texture m_texture;
-    Quad m_quad;
+    Cube m_quad;
 
 public:
     ThousandParty() :
-        GameApplication([&]()
-    {
-        WindowStyle windowStyle;
-        {
-            auto primaryScreen = GetPrimaryScreen();
-
-            float aspectRatio = (float)primaryScreen.width / (float)primaryScreen.height;
-
-            windowStyle.width = 350 * aspectRatio;
-            windowStyle.height = 350 * aspectRatio;
-            windowStyle.showMiddle = false;
-            windowStyle.enableSystemButton = true;
-            windowStyle.hasCaption = true;
-            windowStyle.resizeable = true;
-        }
-        return windowStyle;
-    }(),
-        [&]()
-    {
-        VideoMode videoMode;
-        {
-            videoMode.graphicsSDK = GraphicsSDK::OpenGL4_0;
-            videoMode.enableHardwareAccelerate = true;
-            videoMode.enableMultiSampling = true;
-        }
-        return videoMode;
-    }()),
+        GameApplication(WindowStyle(), VideoMode()),
         m_texture(GetDesktopDirectory() + "/printTestImage.png"),
         m_quad(FindModule<GraphicsModule>()->GetGraphics()),
-        m_shader(g_positionColorVert, g_positionColorFrag)
+        m_shader(g_positionUVVert, g_positionUVFrag)
     {
+        m_texture.TransferToVideo();
+        m_texture.UpdateParemeters();
 
+        FILE* file = fopen("E:/Users/ggomdyu/Desktop/SmallExplosion.wav", "rb");
+        
+        /*char type[4];
+        fread(type, sizeof(char), 4, file);
+        if (strcmp(type, "RIFF"))
+        {
+            assert(false);
+        }
+        */
+        //DWORD size, chunkSize;
+        //fread(&size, sizeof(DWORD), 1, file);
+        //fread(&chunkSize, sizeof(char), 4, file);
+
+
+        //short formatType, channels;
+        //DWORD sampleRate, avgBytesPerSec;
+        //short bytesPerSample, bitsPerSample;
+        //DWORD dataSize;
+
+        //
+        //fclose(file);
+
+        //ALuint alBuffer;
+        //alGenBuffers(1, &alBuffer);
+        //auto err = alGetError();
+        //if (err != AL_NO_ERROR)
+        //{
+        //int n = 3;
+        //}
+
+        //alBufferData(alBuffer, AL_FORMAT_STEREO16, soundData.data(), soundData.size(), 705);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alListener3f(AL_POSITION, 0, 0, 0);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alListener3f(AL_VELOCITY, 0,0,0);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        ////
+
+        //ALuint alSource;
+        //alGenSources(1, &alSource);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alSourcef(alSource, AL_GAIN, 1);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alSourcef(alSource, AL_PITCH, 1);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alSource3f(alSource, AL_POSITION, 0, 0, 0);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+
+        //alSourcei(alSource, AL_BUFFER, alBuffer);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+        //alSourcePlay(alSource);
+        //if (err != AL_NO_ERROR)
+        //{
+        //    int n = 3;
+        //}
+
+        int n  =3 ;
     }
 
     ~ThousandParty()
@@ -465,6 +507,7 @@ public:
 
     }
 
+    Stopwatch m_stopWatch;
     Shader m_shader;
     Matrix4x4 MVP;
 
@@ -482,10 +525,19 @@ public:
     {
         SuperType::OnUpdate();
         
+        /*m_stopWatch.Start();
+        for (volatile int i = 0; i < 10000000; ++i)
+        {
+            auto v = m_stopWatch.GetElapsedNanoseconds();
+        }
+        auto b = m_stopWatch.GetElapsedMilliseconds();
+        Log("%d\n", b);*/
+
         decltype(auto) extent = GetRootWindow()->GetSize();
 
         static float x = 0.0f;
         auto M2 = Matrix4x4::RotateX(x);
+        M2 *= Matrix4x4::RotateX(x);
         M2 *= Matrix4x4::RotateY(x);
         auto V2 = Matrix4x4::LookAtRH({ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
@@ -498,11 +550,11 @@ public:
         m_shader.Use();
         {
             m_shader.SetParameterMatrix4fv("g_uMVP", MVP[0]);
-
+            
             m_quad.GetVertexBuffer().Use();
             m_quad.GetIndexBuffer().Use();
 
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
         }
         m_shader.Unuse();
 
