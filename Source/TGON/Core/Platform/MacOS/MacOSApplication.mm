@@ -1,17 +1,15 @@
 #import "PrecompiledHeader.pch"
 
-#import "MacOSWindow.h"
-#import "MacOSApplication.h"
-
-#import "../Generic/GenericApplicationType.h"
-
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
+#import "../Generic/GenericApplicationType.h"
+
+#import "MacOSWindow.h"
+#import "MacOSApplication.h"
+
 namespace tgon
-{
-namespace core
 {
 
 MacOSApplication::MacOSApplication(const WindowStyle& windowStyle) :
@@ -67,5 +65,4 @@ void MacOSApplication::OnHandleMessage(NSEvent* message)
     }
 }
 
-} /* namespace core */
 } /* namespace tgon */
