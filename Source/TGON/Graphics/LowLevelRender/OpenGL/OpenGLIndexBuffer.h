@@ -52,14 +52,4 @@ inline OpenGLIndexBuffer::OpenGLIndexBuffer(const _DataArrayType(&data)[_DataArr
 {
 }
 
-class IndexBuffer : public OpenGLIndexBuffer
-{
-/* @section Public constructor */
-public:
-    using OpenGLIndexBuffer::OpenGLIndexBuffer;
-};
-
-using SharedIndexBuffer = std::shared_ptr<IndexBuffer>;
-using UniqueIndexBuffer = std::unique_ptr<IndexBuffer>;
-
 } /* namespace tgon */

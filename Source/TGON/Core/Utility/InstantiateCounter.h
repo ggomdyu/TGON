@@ -2,7 +2,7 @@
  * @filename    InstantiateCounter.h
  * @author      ggomdyu
  * @since       09/24/2017
- * @brief       Set of functions to manage/limit the count of object instantiation.
+ * @brief       Set of functions to manage the count of object instantiation.
  */
 
 #pragma once
@@ -10,8 +10,6 @@
 #include <cassert>
 
 namespace tgon
-{
-namespace core
 {
 
 /**
@@ -27,26 +25,26 @@ protected:
 
 /* @section Public method */
 public:
-    static uint32_t GetInstantiatedCount() noexcept;
+    static uint32_t GetInstantiateCount() noexcept;
 
 /* @section Protected variable */
 protected:
-    static uint32_t ms_instantiatedCount;
+    static uint32_t ms_instantiateCount;
 };
 
 template <typename _ClassType>
-uint32_t InstantiateCounter<_ClassType>::ms_instantiatedCount = 0;
+uint32_t InstantiateCounter<_ClassType>::ms_instantiateCount = 0;
 
 template <typename _ClassType>
 inline InstantiateCounter<_ClassType>::InstantiateCounter() noexcept
 {
-    ++ms_instantiatedCount;
+    ++ms_instantiateCount;
 }
 
 template <typename _ClassType>
-inline uint32_t InstantiateCounter<_ClassType>::GetInstantiatedCount() noexcept
+inline uint32_t InstantiateCounter<_ClassType>::GetInstantiateCount() noexcept
 {
-    return ms_instantiatedCount;
+    return ms_instantiateCount;
 }
 
 /**
@@ -67,20 +65,20 @@ public:
 template <typename _ClassType>
 inline InstanceCounter<_ClassType>::~InstanceCounter()
 {
-    --InstantiateCounter<_ClassType>::ms_instantiatedCount;
+    --InstantiateCounter<_ClassType>::ms_instantiateCount;
 }
 
 template <typename _ClassType>
 inline uint32_t InstanceCounter<_ClassType>::GetInstanceCount() noexcept
 {
-    return InstantiateCounter<_ClassType>::ms_instantiatedCount;
+    return InstantiateCounter<_ClassType>::ms_instantiateCount;
 }
 
 /**
  * @class   InstantiateCountLimiter
  * @brief   Restricts the instantiation count of the specified type.
  */
-template <typename _ClassType, uint32_t _MaxInstantiationCount>
+template <typename _ClassType, uint32_t _MaxInstantiateCount>
 class InstantiateCountLimiter :
     private InstantiateCounter<_ClassType>
 {
@@ -89,10 +87,10 @@ protected:
     InstantiateCountLimiter();
 };
 
-template <typename _ClassType, uint32_t _MaxInstantiationCount>
-inline InstantiateCountLimiter<_ClassType, _MaxInstantiationCount>::InstantiateCountLimiter()
+template <typename _ClassType, uint32_t _MaxInstantiateCount>
+inline InstantiateCountLimiter<_ClassType, _MaxInstantiateCount>::InstantiateCountLimiter()
 {
-    assert(InstantiateCounter<_ClassType>::GetInstantiatedCount() <= _MaxInstantiationCount && "The object has been instantiated more than the specified number.");
+    assert(InstantiateCounter<_ClassType>::GetInstantiateCount() <= _MaxInstantiateCount && "The object has been instantiated more than the specified count.");
 }
 
 /**
@@ -115,8 +113,7 @@ public:
 template <typename _ClassType, uint32_t _MaxInstanceCount>
 inline InstanceCountLimiter<_ClassType, _MaxInstanceCount>::~InstanceCountLimiter()
 {
-    --InstantiateCounter<_ClassType>::ms_instantiatedCount;
+    --InstantiateCounter<_ClassType>::ms_instantiateCount;
 }
 
-} /* namespace core */
 } /* namespace tgon */

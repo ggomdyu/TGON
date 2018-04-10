@@ -29,7 +29,8 @@ TGON_API std::string GetExtension(const char* srcPathStr, int32_t srcPathStrLen)
 
 TGON_API std::string GetExtension(const char* srcPathStr)
 {
-    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen));
 }
 
 TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, const char** destPathStr)
@@ -57,7 +58,8 @@ TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, con
 
 TGON_API int32_t GetExtension(const char* srcPathStr, const char** destPathStr)
 {
-    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen), destPathStr);
 }
 
 TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
@@ -77,7 +79,8 @@ TGON_API int32_t GetExtension(const char* srcPathStr, int32_t srcPathStrLen, cha
 
 TGON_API int32_t GetExtension(const char* srcPathStr, char* destPathStr)
 {
-    return GetExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen), destPathStr);
 }
 
 TGON_API std::string GetFileName(const char* srcPathStr, int32_t srcPathStrLen)
@@ -110,7 +113,8 @@ TGON_API std::string GetFileName(const char* srcPathStr, int32_t srcPathStrLen)
 
 TGON_API std::string GetFileName(const char* srcPathStr)
 {
-    return GetFileName(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetFileName(srcPathStr, static_cast<int32_t>(srcPathStrLen));
 }
 
 TGON_API int32_t GetFileName(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
@@ -145,7 +149,8 @@ TGON_API int32_t GetFileName(const char* srcPathStr, int32_t srcPathStrLen, char
 
 TGON_API int32_t GetFileName(const char* srcPathStr, char* destPathStr)
 {
-    return GetFileName(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetFileName(srcPathStr, static_cast<int32_t>(srcPathStrLen), destPathStr);
 }
 
 TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr, int32_t srcPathStrLen)
@@ -187,7 +192,8 @@ TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr, int32_t
 
 TGON_API std::string GetFileNameWithoutExtension(const char* srcPathStr)
 {
-    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen));
 }
 
 TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)
@@ -231,7 +237,8 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, int32_t src
 
 TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, char* destPathStr)
 {
-    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)), destPathStr);
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return GetFileNameWithoutExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen), destPathStr);
 }
 
 TGON_API int32_t GetDirectoryName(const char* srcPathStr, char* destPathStr)
@@ -247,7 +254,7 @@ TGON_API int32_t GetDirectoryName(const char* srcPathStr, int32_t srcPathStrLen,
     {
         if (iterIndex < 0)
         {
-            break;
+            return -1;
         }
 
         if (srcPathStr[iterIndex] == AltDirectorySeparatorChar)
@@ -291,7 +298,8 @@ TGON_API bool HasExtension(const char* srcPathStr, int32_t srcPathStrLen)
 
 TGON_API bool HasExtension(const char* srcPathStr)
 {
-    return HasExtension(srcPathStr, static_cast<int32_t>(std::char_traits<typename std::remove_pointer<typename std::remove_const<decltype(srcPathStr)>::type>::type>::length(srcPathStr)));
+    auto srcPathStrLen = std::char_traits<std::remove_pointer_t<std::remove_const_t<decltype(srcPathStr)>>>::length(srcPathStr);
+    return HasExtension(srcPathStr, static_cast<int32_t>(srcPathStrLen));
 }
 
 //TGON_API int32_t ChangeExtension(char* srcPathStr, int32_t srcPathStrLen, const char* extensionName)

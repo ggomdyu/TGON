@@ -23,7 +23,7 @@ constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
         GL_FILL
     };
 
-    return nativeFillModeTable[ToUnderlying(fillMode)];
+    return nativeFillModeTable[UnderlyingCast(fillMode)];
 }
 
 constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
@@ -34,7 +34,7 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
         GL_CCW
     };
 
-    return nativeCullModeTable[ToUnderlying(cullMode)];
+    return nativeCullModeTable[UnderlyingCast(cullMode)];
 }
 
 constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
@@ -49,7 +49,7 @@ constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexc
         GL_TRIANGLE_FAN,
     };
 
-    return nativePrimitiveTypeTable[ToUnderlying(primitiveType)];
+    return nativePrimitiveTypeTable[UnderlyingCast(primitiveType)];
 }
 
 } /* namespace tgon */

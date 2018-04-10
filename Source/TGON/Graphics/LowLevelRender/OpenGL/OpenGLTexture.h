@@ -28,7 +28,6 @@ public:
 public:
     virtual void TransferToVideo() final override;
     virtual void UpdateParemeters() final override;
-
     virtual void SetFilterMode(TextureFilterMode filterMode) final override;
     virtual void SetWrapMode(TextureWrapMode addressMode) final override;
     virtual TextureFilterMode GetFilterMode() const noexcept final override;

@@ -14,9 +14,6 @@ namespace tgon
 {
 
 template <typename _EncodingType>
-constexpr bool IsASCIIEncoding = std::is_same<_EncodingType, >::value;
-
-template <typename _EncodingType>
 constexpr bool IsANSIEncoding = std::is_base_of<EUCEncoding<_EncodingType>, _EncodingType>::value;
 
 template <typename _EncodingType>

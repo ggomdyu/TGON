@@ -4,6 +4,7 @@
 
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLVertexBufferUtility.h"
+#include "OpenGLUtility.h"
 
 namespace tgon
 {
@@ -27,7 +28,7 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) :
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
-    glDeleteBuffers(1, &m_vertexBufferHandle);
+    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
 }
 
 OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs)
@@ -40,6 +41,7 @@ OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs)
     glDeleteBuffers(1, &m_vertexBufferHandle);
 
     GenericVertexBuffer::operator=(std::move(rhs));
+
     m_vertexBufferHandle = rhs.m_vertexBufferHandle;
     m_vertexBufferDescs = std::move(rhs.m_vertexBufferDescs);
     
@@ -50,41 +52,44 @@ OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs)
 
 void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
 {
+    m_vertexBufferDescs.clear();
+    m_vertexBufferDescs.resize(vertexBufferDescs.size());
+
     int index = 0;
     for (auto& vertexBufferDesc : vertexBufferDescs)
     {
         m_vertexBufferDescs[index++] = ConvertVertexBufferDescToNative(vertexBufferDesc);
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-    glBufferData(GL_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+    TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
+    TGON_GL_ERROR_CHECK(glBufferData(GL_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 }
 
 void OpenGLVertexBuffer::Use()
 {
-    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
+    TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
 
-    for (int i = 0; i < m_vertexBufferDescs.size(); ++i)
+    for (std::size_t i = 0; i < m_vertexBufferDescs.size(); ++i)
     {
         const auto& vertexBufferDesc = m_vertexBufferDescs[i];
 
-        glEnableVertexAttribArray(i);
-        glVertexAttribPointer(
+        TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(i));
+        TGON_GL_ERROR_CHECK(glVertexAttribPointer(
             vertexBufferDesc.attribute,
             vertexBufferDesc.dimension,
             vertexBufferDesc.type,
             vertexBufferDesc.normalized,
             vertexBufferDesc.stride,
             vertexBufferDesc.offset
-        );
+        ));
     }
 }
 
 void OpenGLVertexBuffer::Unuse()
 {
-    for (int i = 0; i < m_vertexBufferDescs.size(); ++i)
+    for (std::size_t i = 0; i < m_vertexBufferDescs.size(); ++i)
     {
-        glDisableVertexAttribArray(i);
+        TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(i));
     }
 }
 
@@ -96,7 +101,7 @@ bool OpenGLVertexBuffer::IsValid() const noexcept
 GLuint OpenGLVertexBuffer::GenerateBuffer() const
 {
     GLuint vertexBufferHandle;
-    glGenBuffers(1, &vertexBufferHandle);
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
 
     return vertexBufferHandle;
 }

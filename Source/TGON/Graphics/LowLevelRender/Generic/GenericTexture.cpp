@@ -7,7 +7,7 @@ namespace tgon
 {
 
 GenericTexture::GenericTexture(const std::string& imagePath, const TextureCreateDesc& textureCreateDesc) :
-    Bitmap(imagePath),
+    Image(imagePath),
     m_isUseMipmap(textureCreateDesc.isUseMipmap)
 {
 }

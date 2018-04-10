@@ -83,3 +83,34 @@ void main()                                                 \n\
     g_outColor = texture(textureSampler, g_fragUV);         \n\
 }                                                           \n\
 ";
+
+constexpr const char g_positionUVVert[] =
+"                                                           \n\
+#version 330 core                                           \n\
+                                                            \n\
+layout(location = 0) in vec3 g_vertPosition;                \n\
+layout(location = 1) in vec2 g_vertUV;                      \n\
+out vec2 g_fragUV;                                          \n\
+uniform mat4 g_uMVP;                                        \n\
+                                                            \n\
+void main()                                                 \n\
+{                                                           \n\
+    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);       \n\
+    g_fragUV = g_vertUV;                                    \n\
+}                                                           \n\
+";
+
+constexpr const char g_positionUVFrag[] =
+"                                                           \n\
+#version 330 core                                           \n\
+                                                            \n\
+in vec2 g_fragUV;                                           \n\
+out vec4 g_outColor;                                        \n\
+                                                            \n\
+uniform sampler2D textureSampler;                           \n\
+                                                            \n\
+void main()                                                 \n\
+{                                                           \n\
+    g_outColor = texture(textureSampler, g_fragUV);         \n\
+}                                                           \n\
+";

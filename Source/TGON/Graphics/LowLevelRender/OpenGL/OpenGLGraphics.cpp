@@ -17,6 +17,7 @@
 #include "OpenGLGraphics.h"
 #include "OpenGLGraphicsUtility.h"
 #include "OpenGLContext.h"
+#include "OpenGLUtility.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   pragma comment(lib, "glew32.lib")
@@ -28,8 +29,8 @@ namespace tgon
 OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window) :
     m_context(videoMode, window)
 {
-    glGenVertexArrays(1, &m_vertexArrayHandle);
-    glBindVertexArray(m_vertexArrayHandle);
+    TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
+    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 
     this->SetClearColor(videoMode.clearColor);
     this->SetCullMode(CullMode::CW);
@@ -38,58 +39,58 @@ OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr
 
 OpenGLGraphics::~OpenGLGraphics()
 {
-    glBindVertexArray(m_vertexArrayHandle);
-    glDeleteVertexArrays(1, &m_vertexArrayHandle);
+    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+    TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
 }
 
 void OpenGLGraphics::SetClearColor(const Color4f& color)
 {
-    glClearColor(color.r, color.g, color.b, color.a);
+    TGON_GL_ERROR_CHECK(glClearColor(color.r, color.g, color.b, color.a));
 }
 
 void OpenGLGraphics::SetFillMode(FillMode fillMode)
 {
-    glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode));
+    TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode)));
 }
 
 void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
-    glFrontFace(ConvertCullModeToNative(cullMode));
+    TGON_GL_ERROR_CHECK(glFrontFace(ConvertCullModeToNative(cullMode)));
 }
 
 void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
 {
-    glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height));
+    TGON_GL_ERROR_CHECK(glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 }
 
 void OpenGLGraphics::EnableBlend()
 {
-    glEnable(GL_BLEND);
+    TGON_GL_ERROR_CHECK(glEnable(GL_BLEND));
 }
 
 void OpenGLGraphics::EnableDepthTest()
 {
-    glEnable(GL_DEPTH_TEST);
+    TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
 }
 
 void OpenGLGraphics::DisableBlend()
 {
-    glDisable(GL_BLEND);
+    TGON_GL_ERROR_CHECK(glDisable(GL_BLEND));
 }
 
 void OpenGLGraphics::DisableDepthTest()
 {
-    glDisable(GL_DEPTH_TEST);
+    TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
 }
 
 void OpenGLGraphics::ClearColorBuffer()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT));
 }
 
 void OpenGLGraphics::ClearColorDepthBuffer()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 
 void OpenGLGraphics::SwapBuffer()

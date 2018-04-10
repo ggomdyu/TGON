@@ -184,6 +184,7 @@ inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     }
 
     png_destroy_read_struct(&pngStruct, &pngInfo, nullptr);
+    return true;
 }
 
 template<typename _AllocatorType>

@@ -49,8 +49,6 @@ public:
 
 /* @section Public static method */
 public:
-    static bool IsHighResoultion();
-
     static int64_t GetFrequency();
 
 /* @section Private variable */
@@ -98,16 +96,6 @@ inline int64_t Stopwatch::GetElapsedNanoseconds() const
 {
     assert(this->IsRunning() == true && "StopWatch is not running but you tried to get elapsed time.");
     return std::chrono::steady_clock::now().time_since_epoch().count() - m_oldTime;
-}
-    
-inline bool Stopwatch::IsHighResoultion()
-{
-
-#if _MSC_VER < 1900
-    return false;
-#else
-    return std::chrono::steady_clock::is_steady;
-#endif
 }
     
 inline bool Stopwatch::IsRunning() const noexcept
