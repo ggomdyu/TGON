@@ -10,12 +10,9 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class GenericWindow;
 
-} /*　namespace core */
 } /*　namespace tgon */
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
