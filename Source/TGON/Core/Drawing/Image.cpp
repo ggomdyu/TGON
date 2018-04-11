@@ -80,7 +80,7 @@ Image::Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDat
     switch (imageFormat)
     {
     case ImageFormat::BMP:
-        ResolveBMP(srcData, srcDataBytes, &m_imageBits, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
+        ResolveBMP(srcData, srcDataBytes, &m_imageData, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
         break;
 
     //case ImageFormat::JPG:
@@ -96,7 +96,7 @@ Image::Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDat
             PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
-                m_imageBits = imageProcessor.GetImageBits();
+                m_imageData = imageProcessor.GetImageData();
                 m_width = imageProcessor.GetWidth();
                 m_height = imageProcessor.GetHeight();
                 m_channels = imageProcessor.GetChannels();
@@ -113,7 +113,7 @@ Image::Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDat
 }
 
 Image::Image(Image&& rhs) :
-    m_imageBits(std::move(rhs.m_imageBits)),
+    m_imageData(std::move(rhs.m_imageData)),
     m_width(rhs.m_width),
     m_height(rhs.m_height),
     m_channels(rhs.m_channels),
@@ -144,7 +144,7 @@ Image& Image::operator=(Image&& rhs)
         return *this;
     }
     
-    m_imageBits = std::move(rhs.m_imageBits);
+    m_imageData = std::move(rhs.m_imageData);
     m_width = rhs.m_width;
     m_height = rhs.m_height;
     m_channels = rhs.m_channels;
@@ -163,27 +163,27 @@ Image& Image::operator=(Image&& rhs)
 
 uint8_t& Image::operator[](std::size_t index)
 {
-    return m_imageBits[index];
+    return m_imageData[index];
 }
 
 const uint8_t& Image::operator[](std::size_t index) const
 {
-    return m_imageBits[index];
+    return m_imageData[index];
 }
 
 bool Image::IsValid() const noexcept
 {
-    return m_imageBits.size() > 0;
+    return m_imageData.size() > 0;
 }
 
-std::vector<uint8_t>& Image::GetBits() noexcept
+std::vector<uint8_t>& Image::GetImageData() noexcept
 {
-    return m_imageBits;
+    return m_imageData;
 }
 
-const std::vector<uint8_t>& Image::GetBits() const noexcept
+const std::vector<uint8_t>& Image::GetImageData() const noexcept
 {
-    return m_imageBits;
+    return m_imageData;
 }
 
 int32_t Image::GetWidth() const noexcept

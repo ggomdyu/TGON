@@ -97,11 +97,11 @@ public:
     static void Assign(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount);
     
     /**
-    * @brief                            Assigns the chCount copies of ch to destStr.
-    * @param [out] destStr              The destination of assign.
-    * @param [in] ch                    The character to assign to destStr.
-    * @param [in] chCount               The count of ch to assign to destStr.
-    */
+     * @brief                            Assigns the chCount copies of ch to destStr.
+     * @param [out] destStr              The destination of assign.
+     * @param [in] ch                    The character to assign to destStr.
+     * @param [in] chCount               The count of ch to assign to destStr.
+     */
     template <std::size_t _DestStrBufferSize>
     static void Assign(_CharType(&destStr)[_DestStrBufferSize], _CharType ch, std::size_t chCount)
     {
@@ -190,6 +190,7 @@ public:
 
     static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
     static void ToLower(const _CharType* srcStr, _CharType* destStr);
+
     static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
     static void ToUpper(const _CharType* srcStr, _CharType* destStr);
 

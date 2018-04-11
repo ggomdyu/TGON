@@ -15,13 +15,18 @@ inline void Log<LogLevel::Debug>(const char* formatStr, ...)
     std::lock_guard<std::mutex> lockGuard(g_mutex);
     {
         constexpr const std::size_t strBufferSize = 1024 * 10;
-        static std::unique_ptr<char[]> strBuffer(new char[strBufferSize] {});
-        
+        static std::unique_ptr<char[]> utf8StrBuffer(new char[strBufferSize] {});
+        static std::unique_ptr<wchar_t[]> utf16StrBuffer(new wchar_t[strBufferSize] {});
+
         va_list vaList;
         va_start(vaList, formatStr);
-        vsprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
+        int utf8StrLen = vsprintf_s(utf8StrBuffer.get(), strBufferSize, formatStr, vaList);
 
-        OutputDebugStringA(strBuffer.get());
+        bool isConvertSucceed = UTF8::Convert<UTF16LE>(utf8StrBuffer.get(), utf8StrLen, reinterpret_cast<char*>(&utf16StrBuffer[0]), strBufferSize);
+        if (isConvertSucceed)
+        {
+            OutputDebugStringW(utf16StrBuffer.get());
+        }
     }
 }
 

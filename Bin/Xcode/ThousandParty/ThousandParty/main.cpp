@@ -30,6 +30,7 @@
 #include "Core/Math/Extent.h"
 #include "Core/Hash/UUID.h"
 #include "Core/Hash/Hash.h"
+#include "Core/Audio/WAVImporter.h"
 #include "Core/Random/Random.h"
 #include "Core/Utility/RAII.h"
 #include "Core/File/Path.h"
@@ -344,61 +345,11 @@ shader->Unuse();
 
 */
 
-class WAVImporter
+class Audio3D
 {
-    using _AllocatorType = std::allocator<uint8_t>;
 
-public:
-    explicit WAVImporter(const char* srcFilePath) : 
-        m_buffer(nullptr),
-        m_formatType(0),
-        m_channels(0),
-        m_sampleRate(0),
-        m_isValid(false)
-    {
-    }
-
-    explicit WAVImporter(const uint8_t* srcData) :
-        m_isValid(VerifyFormat(srcData))
-    {
-    }
-
-public:
-    
-    bool IsValid()
-    {
-        return false;
-    }
-
-private:
-    /* @brief   Verifies the importing file is exactly WAV. */
-    bool VerifyFormat(const uint8_t* srcData) const
-    {
-        if (strcmp(reinterpret_cast<const char*>(&srcData[0]), "RIFF") == true)
-        {
-            return false;
-        }
-
-        if (strcmp(reinterpret_cast<const char*>(&srcData[8]), "WAVE") == true)
-        {
-            return false;
-        }
-
-        if (strcmp(reinterpret_cast<const char*>(&srcData[12]), "fmt ") == true)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-private:
-    uint8_t* m_buffer;
-    short m_formatType;
-    short m_channels;
-    uint32_t m_sampleRate;
-    bool m_isValid;
 };
+
 
 class TGON_API ThousandParty :
     public GameApplication
@@ -408,6 +359,7 @@ public:
 
     Texture m_texture;
     Cube m_quad;
+    ALuint alSource;
 
 public:
     ThousandParty() :
@@ -420,88 +372,93 @@ public:
         m_texture.UpdateParemeters();
 
         FILE* file = fopen("E:/Users/ggomdyu/Desktop/SmallExplosion.wav", "rb");
-        
-        Log("%s%d%s", u8"³ª´Â", 5, u8"¶ó´ÂNumberª¬û¿ª­ªÇª¹¡£");
-        Log<LogLevel::Warning>("%s%d%s", u8"³ª´Â", 5, u8"¶ó´ÂNumberª¬û¿ª­ªÇª¹¡£");
-        Log<LogLevel::Warning>("Hello!");
+       
+        // Read the image data from file.
+        std::vector<uint8_t> fileData;
+        {
+            fseek(file, 0, SEEK_END);
+            long fileSize = ftell(file);
+            fseek(file, 0, SEEK_SET);
 
-        /*char type[4];
-        fread(type, sizeof(char), 4, file);
-        if (strcmp(type, "RIFF"))
+            fileData.resize(fileSize + 1);
+            fread(fileData.data(), 1, fileSize, file);
+        };
+        fclose(file);
+
+        WAVImporter<> importer(fileData.data(), fileData.size());
+        
+
+        ALCdevice* device = alcOpenDevice(nullptr);
+        if (device == nullptr)
         {
             assert(false);
         }
-        */
-        //DWORD size, chunkSize;
-        //fread(&size, sizeof(DWORD), 1, file);
-        //fread(&chunkSize, sizeof(char), 4, file);
 
+        ALCcontext* context = alcCreateContext(device, nullptr);
+        if (context == nullptr)
+        {
+            assert(false);
+        }
 
-        //short formatType, channels;
-        //DWORD sampleRate, avgBytesPerSec;
-        //short bytesPerSample, bitsPerSample;
-        //DWORD dataSize;
+        alcMakeContextCurrent(context);
 
+        ALuint alBuffer;
+        alGenBuffers(1, &alBuffer);
+        auto err = alGetError();
+        if (err != AL_NO_ERROR)
+        {
+            assert(false);
+        }
+
+        alBufferData(alBuffer, AL_FORMAT_MONO16, importer.GetSoundData().data(), importer.GetSoundData().size(), importer.GetSamplingRate());
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alListener3f(AL_POSITION, 0, 0, 0);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alListener3f(AL_VELOCITY, 0,0,0);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
         //
-        //fclose(file);
 
-        //ALuint alBuffer;
-        //alGenBuffers(1, &alBuffer);
-        //auto err = alGetError();
-        //if (err != AL_NO_ERROR)
-        //{
-        //int n = 3;
-        //}
+        alGenSources(1, &alSource);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alSourcef(alSource, AL_GAIN, 1);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alSourcef(alSource, AL_PITCH, 1);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alSource3f(alSource, AL_POSITION, 0, 0, 0);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
 
-        //alBufferData(alBuffer, AL_FORMAT_STEREO16, soundData.data(), soundData.size(), 705);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alListener3f(AL_POSITION, 0, 0, 0);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alListener3f(AL_VELOCITY, 0,0,0);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        ////
+        alSourcei(alSource, AL_BUFFER, alBuffer);
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
+        alSourcePlay(alSource);
 
-        //ALuint alSource;
-        //alGenSources(1, &alSource);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alSourcef(alSource, AL_GAIN, 1);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alSourcef(alSource, AL_PITCH, 1);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alSource3f(alSource, AL_POSITION, 0, 0, 0);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-
-        //alSourcei(alSource, AL_BUFFER, alBuffer);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
-        //alSourcePlay(alSource);
-        //if (err != AL_NO_ERROR)
-        //{
-        //    int n = 3;
-        //}
+        if (err != AL_NO_ERROR)
+        {
+            int n = 3;
+        }
 
         int n  =3 ;
     }
@@ -523,19 +480,25 @@ public:
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
+        m_stopWatch.Start();
     }
 
     virtual void OnUpdate() override
     {
         SuperType::OnUpdate();
         
-        /*m_stopWatch.Start();
-        for (volatile int i = 0; i < 10000000; ++i)
+        /*for (volatile int i = 0; i < 10000000; ++i)
         {
             auto v = m_stopWatch.GetElapsedNanoseconds();
         }
         auto b = m_stopWatch.GetElapsedMilliseconds();
         Log("%d\n", b);*/
+
+        if (m_stopWatch.GetElapsedMilliseconds() > 200)
+        {
+            alSourcePlay(alSource);
+            m_stopWatch.Start();
+        }
 
         decltype(auto) extent = GetRootWindow()->GetSize();
 

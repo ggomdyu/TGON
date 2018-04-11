@@ -1,5 +1,5 @@
 /**
- * @filename    Bitmap.h
+ * @filename    PNGImageProcessor.h
  * @author      ggomdyu
  * @since       01/20/2018
  */
@@ -27,9 +27,9 @@ public:
 /* @section Public method */
 public:
     bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
-    std::vector<uint8_t, _AllocatorType>& GetImageBits() noexcept;
-    const std::vector<uint8_t, _AllocatorType>& GetImageBits() const noexcept;
     bool IsValid() const noexcept;
+    std::vector<uint8_t, _AllocatorType>& GetImageData() noexcept;
+    const std::vector<uint8_t, _AllocatorType>& GetImageData() const noexcept;
     int32_t GetWidth() const noexcept;
     int32_t GetHeight() const noexcept;
     int32_t GetColorDepth() const noexcept;
@@ -41,8 +41,9 @@ private:
     /* @brief   Verifies the importing file is exactly PNG. */
     bool VerifyFormat(const uint8_t* srcData) const;
 
+/* @section Private variable */
 private:
-    std::vector<uint8_t, _AllocatorType> m_imageBits;
+    std::vector<uint8_t, _AllocatorType> m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_colorDepth;
@@ -168,15 +169,15 @@ inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     // Start reading the image.
     {
         png_size_t rowBytes = png_get_rowbytes(pngStruct, pngInfo);
-        std::size_t imageBitsLen = sizeof(png_byte*) * (m_height) * rowBytes;
-        m_imageBits.resize(imageBitsLen);
+        std::size_t imageDataBytes = sizeof(png_byte*) * (m_height) * rowBytes;
+        m_imageData.resize(imageDataBytes);
 
         thread_local static std::vector<png_byte*> rowPointer;
         rowPointer.resize(m_height);
 
         for (std::size_t i = 0; i < m_height; ++i)
         {
-            rowPointer[i] = m_imageBits.data() + i * rowBytes;
+            rowPointer[i] = m_imageData.data() + i * rowBytes;
         }
 
         png_read_image(pngStruct, rowPointer.data());
@@ -188,21 +189,21 @@ inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
 }
 
 template<typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& PNGImageProcessor<_AllocatorType>::GetImageBits() noexcept
+inline std::vector<uint8_t, _AllocatorType>& PNGImageProcessor<_AllocatorType>::GetImageData() noexcept
 {
-    return m_imageBits;
+    return m_imageData;
 }
 
 template<typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& PNGImageProcessor<_AllocatorType>::GetImageBits() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& PNGImageProcessor<_AllocatorType>::GetImageData() const noexcept
 {
-    return m_imageBits;
+    return m_imageData;
 }
 
 template <typename _AllocatorType>
 inline bool PNGImageProcessor<_AllocatorType>::IsValid() const noexcept
 {
-    return m_imageBits.size() > 0;
+    return m_imageData.size() > 0;
 }
 
 template <typename _AllocatorType>

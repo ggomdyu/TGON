@@ -43,7 +43,7 @@ public:
     virtual bool IsUseMipmap() const noexcept;
     
     using Image::IsValid;
-    using Image::GetBits;
+    using Image::GetImageData;
     using Image::GetWidth;
     using Image::GetHeight;
     using Image::GetChannels;

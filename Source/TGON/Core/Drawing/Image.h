@@ -59,10 +59,10 @@ public:
     bool IsValid() const noexcept;
 
     /* @brief   Returns the raw pointer of image. */
-    std::vector<uint8_t>& GetBits() noexcept;
+    std::vector<uint8_t>& GetImageData() noexcept;
 
     /* @brief   Returns the raw pointer of image. */
-    const std::vector<uint8_t>& GetBits() const noexcept;
+    const std::vector<uint8_t>& GetImageData() const noexcept;
     
     /* @brief   Returns the width of image. */
     int32_t GetWidth() const noexcept;
@@ -83,7 +83,7 @@ public:
 
 /* @section Private variable */
 private:
-    std::vector<uint8_t> m_imageBits;
+    std::vector<uint8_t> m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
