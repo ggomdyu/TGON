@@ -49,6 +49,9 @@
     <Filter Include="Source\Core\File\Windows">
       <UniqueIdentifier>{27d1e18c-8d81-412d-b903-ed1f43b0a688}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\Audio">
+      <UniqueIdentifier>{12d5873f-9f48-46bf-817e-7182a19de10b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
@@ -77,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp">
       <Filter>Source\Core\File\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\PNGImageProcessor.cpp">
-      <Filter>Source\Core\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Image.cpp">
       <Filter>Source\Core\Drawing</Filter>
@@ -263,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IComparable.h">
       <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\WAVImporter.h">
+      <Filter>Source\Core\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
