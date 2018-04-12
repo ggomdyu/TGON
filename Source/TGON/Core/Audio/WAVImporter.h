@@ -1,5 +1,5 @@
 /**
- * @filename    PNGImageProcessor.h
+ * @filename    WAVImporter.h
  * @author      ggomdyu
  * @since       01/20/2018
  */
