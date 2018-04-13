@@ -13,13 +13,13 @@ namespace tgon
 {
 
 template <typename _CharType>
-constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
+constexpr bool IsPalindrome(const _CharType* str, std::size_t strLen)
 {
-    std::size_t halfStrLength = length / 2;
+    std::size_t halfStrLen = strLen / 2;
 
-    for (std::size_t i = 0; i < halfStrLength; ++i)
+    for (std::size_t i = 0; i < halfStrLen; ++i)
     {
-        if (str[i] != str[length - i])
+        if (str[i] != str[strLen - i])
         {
             return false;
         }
@@ -27,16 +27,16 @@ constexpr bool IsPalindrome(const _CharType* str, std::size_t length)
     return true;
 }
 
-template <std::size_t _Index = 0,  typename _CallbackType, typename... _ArgTypes>
-inline typename std::enable_if<_Index == sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
+template <std::size_t _TupleIndex = 0,  typename _CallbackType, typename... _ArgTypes>
+inline typename std::enable_if<_TupleIndex == sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
 {
 }
 
-template <std::size_t _Index = 0,  typename _CallbackType, typename... _ArgTypes>
-inline typename std::enable_if<_Index < sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
+template <std::size_t _TupleIndex = 0,  typename _CallbackType, typename... _ArgTypes>
+inline typename std::enable_if<_TupleIndex < sizeof...(_ArgTypes)>::type ForEach(std::tuple<_ArgTypes...>& tuple, const _CallbackType& callback) noexcept
 {
-    callback(std::get<_Index>(tuple));
-    ForEach<_Index + 1, _CallbackType, _ArgTypes...>(tuple, callback);
+    callback(std::get<_TupleIndex>(tuple));
+    ForEach<_TupleIndex + 1, _CallbackType, _ArgTypes...>(tuple, callback);
 }
 
 template <typename... _ArgTypes, typename _CallbackType>
