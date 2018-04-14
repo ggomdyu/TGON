@@ -19,10 +19,25 @@ enum class LogLevel
     Warning,
 };
 
+namespace detail
+{
+
+template <LogLevel _LogLevel>
+void Log(const char* formatStr, va_list vaList);
+
+} /* namespace detail */
+
 template <LogLevel _LogLevel = LogLevel::Debug>
 inline void Log(const char* formatStr, ...)
 {
-    this->Log(formatStr);
+    static std::mutex g_mutex;
+
+    std::lock_guard<std::mutex> lockGuard(g_mutex);
+    {
+        va_list vaList;
+        va_start(vaList, formatStr);
+        detail::Log<_LogLevel>(formatStr, vaList);
+    }
 }
 
 } /* namespace tgon */
