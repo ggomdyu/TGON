@@ -97,16 +97,16 @@ inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     {
         struct ImageSource
         {
-            int size; // TODO: uint32_t로 바꾸기
+            png_size_t size;
             const uint8_t* data;
-            int offset;
+            png_size_t offset;
         } imageSource{static_cast<int>(srcDataBytes), (const uint8_t*)srcData, 0};
 
         png_set_read_fn(pngStruct, &imageSource, [](png_structp pngStruct, png_bytep data, png_size_t dataLen)
         {
             ImageSource* imageSource = reinterpret_cast<ImageSource*>(png_get_io_ptr(pngStruct));
 
-            if (static_cast<decltype(imageSource->size)>(imageSource->offset + dataLen) <= imageSource->size)
+            if ((imageSource->offset + dataLen) <= imageSource->size)
             {
                 memcpy(data, imageSource->data + imageSource->offset, dataLen);
                 imageSource->offset += dataLen;
