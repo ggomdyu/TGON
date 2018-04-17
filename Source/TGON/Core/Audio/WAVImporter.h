@@ -44,16 +44,6 @@ protected:
 
     struct FmtChunk
     {
-    /* @section Public method */
-    public:
-        /* @brief   Returns overall chunk size. */
-        int32_t GetChunkSize() const noexcept
-        {
-            return (sizeof(decltype(*this)) - sizeof(int32_t)) + chunkDataSize;
-        }
-
-    /* @section Public variable */
-    public:
         char chunkID[4];            // Contains "fmt "
         int32_t chunkDataSize;
         WAVAudioFormat wavAudioFormat;
@@ -66,22 +56,6 @@ protected:
 
     struct ListChunk
     {
-    /* @section Public method */
-    public:
-        /* @brief   Returns overall chunk size. */
-        int32_t GetChunkSize() const noexcept
-        {
-            return (sizeof(decltype(*this)) - sizeof(int32_t)) + chunkDataSize;
-        }
-
-        /* @brief   Returns list data. */
-        const uint8_t* GetChunkData() const noexcept
-        {
-            return reinterpret_cast<const uint8_t*>(this) + sizeof(decltype(*this));
-        }
-
-    /* @section Public variable */
-    public:
         char chunkID[4];            // Contains "list"
         int32_t chunkDataSize;
         char typeID[4];             // Contains "adtl"
@@ -89,32 +63,8 @@ protected:
 
     struct DataChunk
     {
-    /* @section Public method */
-    public:
-        /* @brief   Returns overall chunk size. */
-        int32_t GetChunkSize() const noexcept
-        {
-            return (sizeof(decltype(*this)) - sizeof(int32_t)) + chunkDataSize;
-        }
-
-        /* @brief   Returns overall chunk size. */
-        const uint8_t* GetChunkData() const noexcept
-        {
-            return reinterpret_cast<const uint8_t*>(this) + sizeof(decltype(*this));
-        }
-
-    /* @section Public variable */
-    public:
         char chunkID[4];            // Contains "list"
         int32_t chunkDataSize;
-        uint8_t chunkData;
-    };
-
-    struct WAVHeader
-    {
-        RIFFChunk riffChunk;
-        FmtChunk fmtChunk;
-        void* chunks;
     };
 
 /* @section Protected constructor */
@@ -156,7 +106,7 @@ private:
     std::vector<uint8_t, _AllocatorType> m_soundData;
     int32_t m_bitsPerSample;
     int32_t m_channels;
-    int32_t m_sampleRate;
+    int32_t m_samplingRate;
 };
 
 template <typename _AllocatorType>
@@ -170,7 +120,7 @@ template <typename _AllocatorType>
 WAVImporter<_AllocatorType>::WAVImporter() noexcept :
     m_bitsPerSample(0),
     m_channels(0),
-    m_sampleRate(0)
+    m_samplingRate(0)
 {
 }
 
@@ -182,27 +132,35 @@ bool WAVImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t src
         return false;
     }
 
-    const WAVHeader* header = reinterpret_cast<const WAVHeader*>(srcData);
+    const RIFFChunk* riffChunk = reinterpret_cast<const RIFFChunk*>(srcData);
     
-    m_channels = static_cast<decltype(m_channels)>(header->fmtChunk.channels);
-    m_sampleRate = header->fmtChunk.samplingRate;
-    m_bitsPerSample = header->fmtChunk.bitsPerSample;
-    
-    const char* chunks = reinterpret_cast<const char*>(&header->chunks);
+    const char* chunks = reinterpret_cast<const char*>(riffChunk) + sizeof(*riffChunk);
     while (true)
     {
+        if (strstr(chunks, "fmt ") != nullptr || strstr(chunks, "FMT ") != nullptr)
+        {
+            const FmtChunk* fmtChunk = reinterpret_cast<const FmtChunk*>(chunks);
+
+            m_channels = static_cast<decltype(m_channels)>(fmtChunk->channels);
+            m_samplingRate = fmtChunk->samplingRate;
+            m_bitsPerSample = fmtChunk->bitsPerSample;
+
+            chunks += sizeof(FmtChunk);
+        }
+
         if (strstr(chunks, "list") != nullptr || strstr(chunks, "LIST") != nullptr)
         {
             auto listChunk = reinterpret_cast<const ListChunk*>(chunks);
-            chunks += listChunk->GetChunkSize();
+
+            chunks += listChunk->chunkDataSize + 8;
         }
         
         if (strstr(chunks, "data") != nullptr || strstr(chunks, "DATA") != nullptr)
         {
             auto dataChunk = reinterpret_cast<const DataChunk*>(chunks);
-;
+
             m_soundData.resize(dataChunk->chunkDataSize);
-            memcpy(&m_soundData[0], dataChunk->GetChunkData(), dataChunk->chunkDataSize);
+            memcpy(&m_soundData[0], reinterpret_cast<const uint8_t*>(dataChunk) + sizeof(DataChunk), dataChunk->chunkDataSize);
 
             break;
         }
@@ -266,7 +224,7 @@ inline int32_t WAVImporter<_AllocatorType>::GetChannels() const noexcept
 template <typename _AllocatorType>
 inline int32_t WAVImporter<_AllocatorType>::GetSamplingRate() const noexcept
 {
-    return m_sampleRate;
+    return m_samplingRate;
 }
 
-} /* namespace tgon */  
+} /* namespace tgon */
