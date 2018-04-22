@@ -18,7 +18,7 @@ enum class ImageFormat
     PNG,
     TIFF,
     GIF,
-    WEBP,
+    WebP,
 };
 
 enum class PixelFormat

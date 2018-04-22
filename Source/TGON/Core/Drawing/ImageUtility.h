@@ -35,7 +35,7 @@ inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::s
     case X65599Hash("gif"):
         return ImageFormat::GIF;
     case X65599Hash("webp"):
-        return ImageFormat::WEBP;
+        return ImageFormat::WebP;
     }
 
     return ImageFormat::Unknown;

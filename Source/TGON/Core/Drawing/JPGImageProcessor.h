@@ -135,4 +135,4 @@ inline bool JPGImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcDa
     return (srcData[0] == 0xFF && srcData[1] == 0xD8);
 }
 
-} /* namespace tgon */  
+} /* namespace tgon */

@@ -120,7 +120,7 @@ inline PixelFormat WebPImageProcessor<_AllocatorType>::GetPixelFormat() const no
 }
 
 template <typename _AllocatorType>
-inline bool WebPImageProcessor<_AllocatorType>::VerifyPNGFormat(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool WebPImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
 {
     if (srcDataBytes < 12)
     {

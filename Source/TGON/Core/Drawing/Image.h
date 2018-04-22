@@ -29,12 +29,20 @@ public:
 
     /**
      * @brief                   Reads a image data from memory.
+     * @param [in] srcData      The pointer to image data
+     * @param [in] srcDataBytes The bytes of image data
      * @param [in] imageFormat  The format of image
+     */
+    Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
+    
+    /**
+     * @brief                   Reads a image data from memory.
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes);
+    Image(const uint8_t* srcData, std::size_t srcDataBytes);
     
+
     Image(const Image& rhs) = default;
     Image(Image&& rhs);
     

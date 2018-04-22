@@ -10,42 +10,12 @@
 #include "Image.h"
 #include "ImageUtility.h"
 #include "PNGImageProcessor.h"
-//#include "JPGImageProcessor.h"
-//#include "BMPImageProcessor.h"
-//#include "WebPImageProcessor.h"
+#include "JPGImageProcessor.h"
+#include "BMPImageProcessor.h"
+#include "WebPImageProcessor.h"
 
 namespace tgon
 {
-namespace
-{
-
-// Currently support windows format, not os2
-template <typename _AllocatorType>
-bool ResolveBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
-{
-    if (srcData[0] != 'B' || srcData[1] != 'M')
-    {
-        return false;
-    }
-
-    *width = *(int*)&(srcData[0x12]);
-    *height = *(int*)&(srcData[0x16]);
-
-    int imageSize = *(int*)&(srcData[0x22]);
-    destData->resize(imageSize);
-
-    int dataStartPos = *(int*)&(srcData[0x0A]);
-    if (dataStartPos == 0)
-    {
-        dataStartPos = 54;
-    }
-
-    memcpy(destData->data(), srcData + dataStartPos, imageSize);
-
-    return true;
-}
-
-} /* namespace */
 
 Image::Image(const std::string& filePath) :
     Image([&]() -> Image
@@ -69,31 +39,64 @@ Image::Image(const std::string& filePath) :
         fclose(file);
 
         std::size_t extensionOffset = filePath.rfind('.') + 1;
-        return Image(ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset), imageData.data(), imageData.size());
+        return Image(imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
     } ())
 {
 }
 
-Image::Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDataBytes) :
+Image::Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
     Image()
 {
     switch (imageFormat)
     {
-    case ImageFormat::BMP:
-        ResolveBMP(srcData, srcDataBytes, &m_imageData, &m_width, &m_height, &m_channels, &m_colorDepth, &m_pixelFormat);
-        break;
-
-    //case ImageFormat::JPG:
-        //ResolveJPG(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
-        //break;
-
-    //case ImageFormat::WEBP:
-        //ResolveWEBP(srcData, srcDataBytes, &m_bits, &m_width, &m_height, &m_channels, nullptr, &m_depth, &m_pixelFormat);
-        //break;
-
     case ImageFormat::PNG:
         {
             PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = imageProcessor.GetImageData();
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+            }
+        }
+        break;
+
+    case ImageFormat::JPG:
+        {
+            JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = imageProcessor.GetImageData();
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+            }
+        }
+        break;
+
+    case ImageFormat::WebP:
+        {
+            WebPImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = imageProcessor.GetImageData();
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+            }
+        }
+        break;
+
+    case ImageFormat::BMP:
+        {
+            BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = imageProcessor.GetImageData();
@@ -110,6 +113,31 @@ Image::Image(ImageFormat imageFormat, const uint8_t* srcData, std::size_t srcDat
         Log("%s image format isn't currently supported.", ConvertImageFormatToString(imageFormat));
         break;
     }
+}
+
+Image::Image(const uint8_t* srcData, std::size_t srcDataBytes) :
+    Image(srcData, srcDataBytes, [&]() -> ImageFormat
+    {
+        if (PNGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+        {
+            return ImageFormat::PNG;
+        }
+        else if (JPGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+        {
+            return ImageFormat::JPG;
+        }
+        else if (WebPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+        {
+            return ImageFormat::WebP;
+        }
+        else if (BMPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+        {
+            return ImageFormat::BMP;
+        }
+        
+        return ImageFormat::Unknown;
+    } ())
+{
 }
 
 Image::Image(Image&& rhs) :
