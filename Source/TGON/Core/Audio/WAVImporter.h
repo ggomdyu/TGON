@@ -15,11 +15,11 @@ namespace tgon
 namespace detail
 {
 
-class BasicWAVImporter
+class BaseWAVImporter
 {
 /* @section Protected enum */
 protected:
-    enum class WAVAudioFormat : short
+    enum class AudioFormat : short
     {
         PCM = 0x0001,
         IEEE_Float = 0x0003,
@@ -27,7 +27,7 @@ protected:
         MuLaw = 0x0007,
     };
 
-    enum class WAVAudioChannel : short
+    enum class AudioChannel : short
     {
         Mono = 1,
         Stereo = 2,
@@ -46,8 +46,8 @@ protected:
     {
         char chunkID[4];            // Contains "fmt "
         int32_t chunkDataSize;
-        WAVAudioFormat wavAudioFormat;
-        WAVAudioChannel channels;
+        AudioFormat audioFormat;
+        AudioChannel channels;
         int32_t samplingRate;
         int32_t avgBytesPerSec;     // sampleRate * channels * bitsPerSample / 8
         int16_t blockAlign;         // channels * bitsPerSample / 8
@@ -69,14 +69,14 @@ protected:
 
 /* @section Protected constructor */
 protected:
-    BasicWAVImporter() {}
+    BaseWAVImporter() {}
 };
 
 } /* namespace detail */
 
 template <typename _AllocatorType = std::allocator<uint8_t>>
 class WAVImporter :
-    private detail::BasicWAVImporter
+    private detail::BaseWAVImporter
 {
 /* @section Public constructor */
 public:
@@ -88,6 +88,8 @@ private:
 
 /* @section Public method */
 public:
+    /* @brief   Verifies the importing file is exactly WAV. */
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;
     std::vector<uint8_t, _AllocatorType>& GetSoundData() noexcept;
@@ -95,11 +97,6 @@ public:
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
-
-/* @section Private method */
-private:
-    /* @brief   Verifies the importing file is exactly WAV. */
-    bool VerifyFormat(const uint8_t* srcData) const;
 
 /* @section Private variable */
 private:
@@ -127,7 +124,7 @@ WAVImporter<_AllocatorType>::WAVImporter() noexcept :
 template <typename _AllocatorType>
 bool WAVImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
-    if (this->VerifyFormat(srcData) == false)
+    if (VerifyFormat(srcData) == false)
     {
         return false;
     }
@@ -176,8 +173,13 @@ bool WAVImporter<_AllocatorType>::IsValid() const noexcept
 }
 
 template <typename _AllocatorType>
-bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData) const
+bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
+    if (srcDataBytes < 16)
+    {
+        return false;
+    }
+
     if (strstr(reinterpret_cast<const char*>(&srcData[0]), "RIFF") == nullptr)
     {
         return false;
@@ -192,7 +194,6 @@ bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData) const
     {
         return false;
     }
-
 
     return true;
 }

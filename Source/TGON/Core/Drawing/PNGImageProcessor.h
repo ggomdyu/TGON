@@ -26,6 +26,8 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Verifies the importing file is exactly PNG. */
+    static bool VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes);
     bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
     bool IsValid() const noexcept;
     std::vector<uint8_t, _AllocatorType>& GetImageData() noexcept;
@@ -35,11 +37,6 @@ public:
     int32_t GetColorDepth() const noexcept;
     int32_t GetChannels() const noexcept;
     PixelFormat GetPixelFormat() const noexcept;
-
-/* @section Private method */
-private:
-    /* @brief   Verifies the importing file is exactly PNG. */
-    bool VerifyFormat(const uint8_t* srcData) const;
 
 /* @section Private variable */
 private:
@@ -71,7 +68,7 @@ inline PNGImageProcessor<_AllocatorType>::PNGImageProcessor(const uint8_t* srcDa
 template <typename _AllocatorType>
 inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
 {
-    if (this->VerifyFormat(srcData) == false)
+    if (VerifyFormat(srcData) == false)
     {
         return false;
     }
@@ -237,9 +234,13 @@ inline PixelFormat PNGImageProcessor<_AllocatorType>::GetPixelFormat() const noe
 }
 
 template <typename _AllocatorType>
-inline bool PNGImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData) const
+inline bool PNGImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
 {
-    // Read the first 8 bytes of the file and make sure they match the PNG signature bytes.
+    if (srcDataBytes < 8)
+    {
+        return false;
+    }
+
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
     return isPNGFormat;
 }
