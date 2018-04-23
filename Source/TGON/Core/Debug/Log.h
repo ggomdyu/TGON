@@ -23,7 +23,7 @@ namespace detail
 {
 
 template <LogLevel _LogLevel>
-void Log(const char* formatStr, va_list vaList);
+inline void Log(const char* formatStr, va_list vaList);
 
 } /* namespace detail */
 
