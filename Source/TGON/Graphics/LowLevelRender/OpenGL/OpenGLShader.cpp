@@ -153,7 +153,7 @@ GLuint OpenGLShader::CompileShader(GLenum shaderType, const char* shaderCode) co
     TGON_GL_ERROR_CHECK(glCompileShader(shader));
     if (this->IsShaderCompileSucceed(shader) == false)
     {
-        Log("Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shader).c_str());
+        Log(LogLevel::Warning, "Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shader).c_str());
         return 0;
     }
 

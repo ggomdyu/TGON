@@ -34,14 +34,14 @@ HGLRC MakeOldGLRC(HDC dcHandle)
     int pixelFormat = ::ChoosePixelFormat(dcHandle, &pixelFormatDesc);
     if (pixelFormat == -1)
     {
-        Log("Failed to invoke ChoosePixelFormat. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke ChoosePixelFormat. (Code: %d)", GetLastError());
         return nullptr;
     }
 
     // Sets the pixel format of the specified device context to the format specified by the pixelFormat index.
     if (::SetPixelFormat(dcHandle, pixelFormat, &pixelFormatDesc) == FALSE)
     {
-        Log("Failed to invoke SetPixelFormat. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke SetPixelFormat. (Code: %d)", GetLastError());
         return nullptr;
     }
 
@@ -49,7 +49,7 @@ HGLRC MakeOldGLRC(HDC dcHandle)
     HGLRC context = ::wglCreateContext(dcHandle);
     if (context == nullptr)
     {
-        Log("Failed to invoke wglCreateContext. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke wglCreateContext. (Code: %d)", GetLastError());
         return nullptr;
     }
 
@@ -73,14 +73,14 @@ HGLRC MakeNewGLRC(HDC dcHandle)
     UINT formatCount = 0;
     if (wglChoosePixelFormatARB(dcHandle, pixelFormatAttributes, nullptr, 1, &pixelFormat, &formatCount) == FALSE)
     {
-        Log("Failed to invoke wglChoosePixelFormatARB. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke wglChoosePixelFormatARB. (Code: %d)", GetLastError());
     }
 
     // Sets the pixel format of the specified device context to the format specified by the pixelFormat index.
     PIXELFORMATDESCRIPTOR pfd;
     if (::SetPixelFormat(dcHandle, pixelFormat, &pfd) == FALSE)
     {
-        Log("Failed to invoke SetPixelFormat. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke SetPixelFormat. (Code: %d)", GetLastError());
     }
 
     int contextAttributes[64] =
@@ -95,7 +95,7 @@ HGLRC MakeNewGLRC(HDC dcHandle)
     HGLRC context = wglCreateContextAttribsARB(dcHandle, nullptr, contextAttributes);
     if (context == nullptr)
     {
-        Log("Failed to invoke wglCreateContextAttribsARB. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke wglCreateContextAttribsARB. (Code: %d)", GetLastError());
         return nullptr;
     }
 
@@ -117,7 +117,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
     {
         if (::wglMakeCurrent(dcHandle, oldGLRC) == FALSE)
         {
-            Log("Failed to invoke wglMakeCurrent. (%d)", GetLastError());
+            Log(LogLevel::Warning, "Failed to invoke wglMakeCurrent. (Code: %d)", GetLastError());
             return;
         }
     }
@@ -128,7 +128,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
 
     if (glewInit() != GLEW_OK)
     {
-        Log("Failed to invoke glewInit. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke glewInit. (Code: %d)", GetLastError());
         return;
     }
 
@@ -142,7 +142,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
         // Makes a old OpenGL rendering context that used temporary to make newer version of context.
         if (::wglMakeCurrent(dcHandle, context) == FALSE)
         {
-            Log("Failed to invoke wglMakeCurrent. (%d)", GetLastError());
+            Log(LogLevel::Warning, "Failed to invoke wglMakeCurrent. (Code: %d)", GetLastError());
             return;
         }
     }
