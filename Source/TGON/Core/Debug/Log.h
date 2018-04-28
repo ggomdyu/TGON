@@ -19,31 +19,9 @@ enum class LogLevel
     Warning,
 };
 
-namespace detail
-{
+void Log(LogLevel logLevel, const char* formatStr, ...);
 
-template <LogLevel _LogLevel>
-void Log(const char* formatStr, va_list vaList);
-
-} /* namespace detail */
-
-template <LogLevel _LogLevel = LogLevel::Debug>
-inline void Log(const char* formatStr, ...)
-{
-    static std::mutex g_mutex;
-
-    std::lock_guard<std::mutex> lockGuard(g_mutex);
-    {
-        va_list vaList;
-        va_start(vaList, formatStr);
-        detail::Log<_LogLevel>(formatStr, vaList);
-    }
-}
+void Assert(bool condition);
+void Assert(bool condition, const char* formatStr, ...);
 
 } /* namespace tgon */
-
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsLog.inl"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSLog.inl"
-#endif
