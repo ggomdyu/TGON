@@ -25,12 +25,6 @@ public:
     /* @brief   Stops measuring elapsed time for an interval. */
     void Stop() noexcept;
 
-    /* @brief   Stops time interval measurement and resets the elapsed time to zero. */
-    void Reset() noexcept;
-
-    /* @brief   Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time. */
-    void Restart();
-
     /**
      * @brief   Gets a value indicating whether the timer is running.
      * @return  True if the instance is currently running and measuring elapsed time for an interval; otherwise, false.
@@ -67,17 +61,7 @@ inline void Stopwatch::Start()
 
 inline void Stopwatch::Stop() noexcept
 {
-}
-
-inline void Stopwatch::Restart()
-{
-    this->Start();
-}
-
-inline void Stopwatch::Reset() noexcept
-{
-    this->Stop();
-    m_oldTime = {};
+    m_oldTime = 0;
 }
 
 inline int64_t Stopwatch::GetElapsedSeconds() const
@@ -90,10 +74,8 @@ inline int64_t Stopwatch::GetElapsedMilliseconds() const
     return static_cast<int64_t>(this->GetElapsedNanoseconds() * 0.000001f);
 }
 
-/* @brief   Gets the total elapsed time measured by the current instance, in timer ticks. */
 inline int64_t Stopwatch::GetElapsedNanoseconds() const
 {
-    assert(this->IsRunning() == true && "StopWatch is not running but you tried to get elapsed time.");
     return std::chrono::steady_clock::now().time_since_epoch().count() - m_oldTime;
 }
     
