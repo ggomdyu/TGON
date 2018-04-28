@@ -8,6 +8,7 @@
 #pragma once
 #include <cstddef>
 #include <tuple>
+#include <array>
 
 namespace tgon
 {
@@ -101,6 +102,12 @@ template <typename _ArrayElementType, std::size_t _ArraySize>
 constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexcept
 {
     return _ArraySize;
+}
+
+template <typename... _Args>
+constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args)> MakeArray(_Args&&... rhs) noexcept
+{
+    return { std::forward<_Args>(rhs)... };
 }
 
 template <typename _EnumType>
