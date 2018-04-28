@@ -23,24 +23,26 @@ class Image
 public:
     /**
      * @brief                   Reads a image data from the given path specified by filePath.
-     * @param [in] filePath     The path of image file
+     * @param [in] filePath     The file path of image
      */
     explicit Image(const std::string& filePath);
 
     /**
-     * @brief                   Reads a image data from memory.
+     * @brief                   Reads a image file data from memory.
+     * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      * @param [in] imageFormat  The format of image
      */
-    Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
+    Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
     
     /**
-     * @brief                   Reads a image data from memory.
+     * @brief                   Reads a image file data from memory.
+     * @param [in] filePath     The file path of image source
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    Image(const uint8_t* srcData, std::size_t srcDataBytes);
+    Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
     
 
     Image(const Image& rhs) = default;

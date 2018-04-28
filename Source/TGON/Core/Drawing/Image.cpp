@@ -39,17 +39,17 @@ Image::Image(const std::string& filePath) :
         fclose(file);
 
         std::size_t extensionOffset = filePath.rfind('.') + 1;
-        return Image(imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+        return Image(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
     } ())
 {
 }
 
-Image::Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
+Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
     Image()
 {
     switch (imageFormat)
     {
-    case ImageFormat::PNG:
+    case ImageFormat::Png:
         {
             PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
@@ -64,7 +64,7 @@ Image::Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat image
         }
         break;
 
-    case ImageFormat::JPG:
+    case ImageFormat::Jpg:
         {
             JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
@@ -94,7 +94,7 @@ Image::Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat image
         }
         break;
 
-    case ImageFormat::BMP:
+    case ImageFormat::Bmp:
         {
             BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
@@ -110,21 +110,20 @@ Image::Image(const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat image
         break;
 
     default:
-        Log("%s image format isn't currently supported.", ConvertImageFormatToString(imageFormat));
         break;
     }
 }
 
-Image::Image(const uint8_t* srcData, std::size_t srcDataBytes) :
-    Image(srcData, srcDataBytes, [&]() -> ImageFormat
+Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
+    Image(filePath, srcData, srcDataBytes, [&]() -> ImageFormat
     {
         if (PNGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
         {
-            return ImageFormat::PNG;
+            return ImageFormat::Png;
         }
         else if (JPGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
         {
-            return ImageFormat::JPG;
+            return ImageFormat::Jpg;
         }
         else if (WebPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
         {
@@ -132,7 +131,7 @@ Image::Image(const uint8_t* srcData, std::size_t srcDataBytes) :
         }
         else if (BMPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
         {
-            return ImageFormat::BMP;
+            return ImageFormat::Bmp;
         }
         
         return ImageFormat::Unknown;

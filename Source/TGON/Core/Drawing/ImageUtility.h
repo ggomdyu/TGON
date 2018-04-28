@@ -23,17 +23,17 @@ inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::s
     switch (X65599Hash(lowercaseStr))
     {
     case X65599Hash("bmp"):
-        return ImageFormat::BMP;
+        return ImageFormat::Bmp;
     case X65599Hash("jpg"):
-        return ImageFormat::JPG;
+        return ImageFormat::Jpg;
     case X65599Hash("jpeg"):
-        return ImageFormat::JPEG;
+        return ImageFormat::Jpeg;
     case X65599Hash("png"):
-        return ImageFormat::PNG;
+        return ImageFormat::Png;
     case X65599Hash("tiff"):
-        return ImageFormat::TIFF;
+        return ImageFormat::Tiff;
     case X65599Hash("gif"):
-        return ImageFormat::GIF;
+        return ImageFormat::Gif;
     case X65599Hash("webp"):
         return ImageFormat::WebP;
     }
