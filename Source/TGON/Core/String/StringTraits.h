@@ -194,6 +194,8 @@ public:
     static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
     static void ToUpper(const _CharType* srcStr, _CharType* destStr);
 
+    static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
+
 /* @section Public variable */
 public:
     /**
@@ -336,28 +338,44 @@ inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrL
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
 {
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr)
 {
     ToLower(srcStr, std::strlen(srcStr), destStr);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
 {
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr)
 {
     ToUpper(srcStr, std::strlen(srcStr), destStr);
+}
+
+template <typename _CharType>
+inline bool StringTraits<_CharType>::IsNullOrEmpty(const _CharType* srcStr) noexcept
+{   
+    if (srcStr == nullptr)
+    {
+        return true;
+    }
+
+    if (srcStr[0] == 0)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 } /* namespace tgon */
