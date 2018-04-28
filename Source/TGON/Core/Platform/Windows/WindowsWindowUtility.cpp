@@ -104,7 +104,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 	);
     if (wndHandle == nullptr)
     {
-        Log("Failed to invoke CreateWindowExW. (%d)", GetLastError());
+        Log(LogLevel::Warning, "Failed to invoke CreateWindowExW. (Code: %d)", GetLastError());
     }
 
 	return wndHandle;

@@ -4,6 +4,7 @@
 #define TGON_USING_OPENGL 1
 #include "Game/Engine/GameApplication.h"
 
+#include "Core/Audio/OggVorbisImporter.h"
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
 #include "Core/Object/IRuntimeObjectUtility.h"
@@ -36,6 +37,7 @@
 #include "Core/File/Path.h"
 #include "Core/Utility/Windows/HandleGuard.h"
 #include "Core/Utility/Stopwatch.h"
+#include "Core/Utility/Algorithm.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphics.h"
 #include "Graphics/LowLevelRender/Texture.h"
@@ -350,6 +352,189 @@ class Audio3D
 
 };
 
+using tgon::UnderlyingCast;
+
+// see: https://www.media.mit.edu/pia/Research/deepview/exif.html
+
+class ExifHeader
+{
+    /* @section Public enum */
+public:
+    enum class TagID : uint16_t
+    {
+        ImageWidth = 0x0100,
+        ImageHeight = 0x0101,
+        DateTimeOriginal = 0x9003,
+    };
+
+public:
+    
+};
+
+class JPGImageProcessor
+{
+/* @section Private class */
+private:
+    
+
+/* @section Private enum */
+private:
+    enum class MarkerType : uint16_t
+    {
+        SOI = 0xD8FF,
+        APP0 = 0xE0FF,
+        APP1 = 0xE1FF,
+        APP2 = 0xE2FF,
+        APP3 = 0xE3FF,
+        APP4 = 0xE4FF,
+        APP5 = 0xE5FF,
+        APP6 = 0xE6FF,
+        APP7 = 0xE7FF,
+        APP8 = 0xE8FF,
+        APP9 = 0xE9FF,
+        APP10 = 0xEAFF,
+        APP11 = 0xEBFF,
+        APP12 = 0xECFF,
+        APP13 = 0xEDFF,
+        APP14 = 0xEEFF,
+        APP15 = 0xEFFF,
+        DQT = 0xDBFF,
+        SOF0 = 0xC0FF,
+        SOF1 = 0xC1FF,
+        SOF2 = 0xC2FF,
+        SOF3 = 0xC3FF,
+        SOF4 = 0xC4FF,
+        SOF5 = 0xC5FF,
+        SOF6 = 0xC6FF,
+        SOF7 = 0xC7FF,
+        SOF8 = 0xC8FF,
+        SOF9 = 0xC9FF,
+        SOF10 = 0xCAFF,
+        SOF11 = 0xCBFF,
+        SOF12 = 0xCCFF,
+        SOF13 = 0xCDFF,
+        SOF14 = 0xCEFF,
+        SOF15 = 0xCFFF,
+        DHT = 0xC4FF,
+        SOS = 0xDAFF,
+        DRI = 0xDDFF,
+        RST0 = 0xD0FF,
+        RST1 = 0xD1FF,
+        RST2 = 0xD2FF,
+        RST3 = 0xD3FF,
+        RST4 = 0xD4FF,
+        RST5 = 0xD5FF,
+        RST6 = 0xD6FF,
+        RST7 = 0xD7FF,
+        RST8 = 0xD8FF,
+        RST9 = 0xD9FF,
+        RST10 = 0xDAFF,
+        RST11 = 0xDBFF,
+        RST12 = 0xDCFF,
+        RST13 = 0xDDFF,
+        RST14 = 0xDEFF,
+        RST15 = 0xDFFF,
+        DNL = 0xDCFF,
+        EOI = 0xD9FF,
+        COM = 0xFEFF,
+    };
+
+/* @section Public method */
+public:
+    void Import(const uint8_t* srcFile)
+    {
+        const uint8_t* iter = srcFile;
+        while (true)
+        {
+            MarkerType markerType = static_cast<MarkerType>(*reinterpret_cast<const uint16_t*>(iter));
+            iter += sizeof(markerType);
+
+            switch (markerType)
+            {
+            case MarkerType::SOI:
+                {
+                    int n = 3;
+                }
+                break;
+
+            case MarkerType::APP1:
+                {
+                    char chunkSizeStr[2] = {*(iter + 1), *iter};
+                    uint16_t chunkSize = *reinterpret_cast<const uint16_t*>(chunkSizeStr);
+
+                    const uint8_t* exifIter = iter;
+                    while (true)
+                    {
+                        // Byte align
+                        exifIter += 8;
+                        bool isMotorolaAlign = (*reinterpret_cast<const uint16_t*>(exifIter)) == 0x4D4D;
+
+                        // TAG Mark
+                        exifIter += 2;
+                        auto tagMark = Parse<uint16_t>(exifIter, isMotorolaAlign);
+
+                        // TAG Mark
+                        exifIter += 2;
+                        uint32_t offsetToFirstIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
+
+                        exifIter += 4;
+                        uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
+                        
+                        // IFD
+                        while (true)
+                        {
+                            exifIter += (12 * dirEntryCount) + 2; // We will jump IFD.
+                            uint32_t offsetToNextIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
+                            if (offsetToNextIFD == 0)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                exifIter += offsetToNextIFD;
+                            }
+                        }
+
+                        //uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
+
+
+                        int n = 3;
+                    }
+
+                    iter += chunkSize;
+
+                    break;
+                }
+
+            case MarkerType::EOI:    
+                return;
+            }
+        }
+
+    }
+
+    template <typename _ParseValueType>
+    _ParseValueType Parse(const uint8_t* srcData, bool isMotorolaAlign)
+    {
+        if (isMotorolaAlign)
+        {
+            uint8_t temp[sizeof(_ParseValueType)] {};
+            for (int i = 0; i < sizeof(_ParseValueType); ++i)
+            {
+                temp[i] = *((srcData + sizeof(_ParseValueType) - 1) - i);
+            }
+
+            return *reinterpret_cast<const _ParseValueType*>(temp);
+        }
+        else
+        {
+            return *reinterpret_cast<const _ParseValueType*>(srcData);
+        }
+    }
+
+private:
+    ExifHeader m_exifHeader;
+};
 
 class TGON_API ThousandParty :
     public GameApplication
@@ -368,10 +553,25 @@ public:
         m_quad(FindModule<GraphicsModule>()->GetGraphics()),
         m_shader(g_positionUVVert, g_positionUVFrag)
     {
+        FILE* file2 = fopen("E:/Users/ggomdyu/Desktop/64174066_p0.jpg", "rb");
+        std::vector<uint8_t> fileData2;
+        {
+            fseek(file2, 0, SEEK_END);
+            long fileSize = ftell(file2);
+            fseek(file2, 0, SEEK_SET);
+
+            fileData2.resize(fileSize + 1);
+            fread(fileData2.data(), 1, fileSize, file2);
+        };
+        fclose(file2);
+        /*JPGImageProcessor imageProcessor;
+        imageProcessor.Import(fileData2.data());*/
+
+
         m_texture.TransferToVideo();
         m_texture.UpdateParemeters();
 
-        FILE* file = fopen("E:/Users/ggomdyu/Desktop/SmallExplosion.wav", "rb");
+        FILE* file = fopen("E:/Users/ggomdyu/Desktop/Sulk.ogg", "rb");
        
         // Read the image data from file.
         std::vector<uint8_t> fileData;
@@ -385,9 +585,8 @@ public:
         };
         fclose(file);
 
-        WAVImporter<> importer(fileData.data(), fileData.size());
+        OggVorbisImporter importer(fileData.data(), fileData.size());
         
-
         ALCdevice* device = alcOpenDevice(nullptr);
         if (device == nullptr)
         {
@@ -410,7 +609,7 @@ public:
             assert(false);
         }
 
-        alBufferData(alBuffer, AL_FORMAT_MONO16, importer.GetSoundData().data(), importer.GetSoundData().size(), importer.GetSamplingRate());
+        alBufferData(alBuffer, AL_FORMAT_STEREO16, importer.GetSoundData().data(), importer.GetSoundData().size(), importer.GetSamplingRate());
         if (err != AL_NO_ERROR)
         {
             int n = 3;
@@ -459,8 +658,6 @@ public:
         {
             int n = 3;
         }
-
-        int n  =3 ;
     }
 
     ~ThousandParty()
@@ -494,12 +691,12 @@ public:
         auto b = m_stopWatch.GetElapsedMilliseconds();
         Log("%d\n", b);*/
 
-        if (m_stopWatch.GetElapsedMilliseconds() > 200)
+        /*if (m_stopWatch.GetElapsedMilliseconds() > 4000)
         {
             alSourcePlay(alSource);
             m_stopWatch.Start();
         }
-
+*/
         decltype(auto) extent = GetRootWindow()->GetSize();
 
         static float x = 0.0f;

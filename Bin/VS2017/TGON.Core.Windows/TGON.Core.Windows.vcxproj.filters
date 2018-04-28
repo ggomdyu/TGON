@@ -37,9 +37,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.inl">
-      <Filter>Sources\Core\Debug\Windows</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
@@ -62,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
       <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
+      <Filter>Sources\Core\Debug\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

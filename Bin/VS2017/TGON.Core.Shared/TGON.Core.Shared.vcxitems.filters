@@ -22,9 +22,6 @@
     <Filter Include="Source\Core\String">
       <UniqueIdentifier>{763b9ef7-894d-47e8-b509-dc2221127fde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Random">
-      <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Utility">
       <UniqueIdentifier>{074372cb-1c29-42e0-a004-a75e48a44d89}</UniqueIdentifier>
     </Filter>
@@ -52,13 +49,16 @@
     <Filter Include="Source\Core\Audio">
       <UniqueIdentifier>{12d5873f-9f48-46bf-817e-7182a19de10b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Random">
+      <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
       <Filter>Source\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.cpp">
-      <Filter>Source\Core\Random</Filter>
+      <Filter>Random</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp">
       <Filter>Source\Core\String</Filter>
@@ -111,7 +111,7 @@
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\Random.h">
-      <Filter>Source\Core\Random</Filter>
+      <Filter>Random</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Color.h">
@@ -139,7 +139,7 @@
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.h">
-      <Filter>Source\Core\Random</Filter>
+      <Filter>Random</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Mathematics.h">
       <Filter>Source\Core\Math</Filter>
@@ -185,9 +185,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Delegate.h">
       <Filter>Source\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
-      <Filter>Source\Core\Debug</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Circle.h">
       <Filter>Source\Core\Math</Filter>
@@ -264,7 +261,28 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IComparable.h">
       <Filter>Source\Core\Object</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\JPGImageProcessor.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\WebPImageProcessor.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\BMPImageProcessor.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\WAVImporter.h">
+      <Filter>Source\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
+      <Filter>Source\Core\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Core.Shared\..\..\..\Source\TGON\Core\Audio\OggVorbisImporter.h">
+      <Filter>Source\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Sound.h">
+      <Filter>Source\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\SoundType.h">
       <Filter>Source\Core\Audio</Filter>
     </ClInclude>
   </ItemGroup>

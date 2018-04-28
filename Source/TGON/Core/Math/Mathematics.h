@@ -90,7 +90,7 @@ constexpr const _ValueType Round(const _ValueType& value) noexcept
 /* @return	Returns largest value of the given parameters. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Min(const _ValueType& first, const _ValueType& second) noexcept
+constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& second) noexcept
 {
     return (first <= second) ? first : second;
 }
@@ -98,14 +98,14 @@ constexpr _ValueType Min(const _ValueType& first, const _ValueType& second) noex
 template <typename _ValueType,
           typename ..._ArgTypes,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Min(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
+constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {
     return (first <= second) ? Min(first, args...) : Min(second, args...);
 }
 
 template <typename _ValueType,
-          typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Max(const _ValueType& first, const _ValueType& second) noexcept
+          typen¤»ame = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
+constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& second) noexcept
 {
     return (first >= second) ? first : second;
 }
@@ -113,7 +113,7 @@ constexpr _ValueType Max(const _ValueType& first, const _ValueType& second) noex
 template <typename _ValueType,
           typename ..._ArgTypes,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr _ValueType Max(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
+constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {
     return (first >= second) ? Max(first, args...) : Max(second, args...);
 }
