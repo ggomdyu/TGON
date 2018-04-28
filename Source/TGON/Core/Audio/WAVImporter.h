@@ -107,14 +107,14 @@ private:
 };
 
 template <typename _AllocatorType>
-WAVImporter<_AllocatorType>::WAVImporter(const uint8_t * srcData, std::size_t srcDataBytes) :
+inline WAVImporter<_AllocatorType>::WAVImporter(const uint8_t * srcData, std::size_t srcDataBytes) :
     WAVImporter()
 {
     this->Import(srcData, srcDataBytes);
 }
 
 template <typename _AllocatorType>
-WAVImporter<_AllocatorType>::WAVImporter() noexcept :
+inline WAVImporter<_AllocatorType>::WAVImporter() noexcept :
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0)
@@ -122,9 +122,9 @@ WAVImporter<_AllocatorType>::WAVImporter() noexcept :
 }
 
 template <typename _AllocatorType>
-bool WAVImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WAVImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
-    if (VerifyFormat(srcData) == false)
+    if (VerifyFormat(srcData, srcDataBytes) == false)
     {
         return false;
     }
@@ -167,13 +167,13 @@ bool WAVImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t src
 }
 
 template <typename _AllocatorType>
-bool WAVImporter<_AllocatorType>::IsValid() const noexcept
+inline bool WAVImporter<_AllocatorType>::IsValid() const noexcept
 {
     return m_soundData.size() > 0;
 }
 
 template <typename _AllocatorType>
-bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 16)
     {
@@ -199,19 +199,19 @@ bool WAVImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size
 }
 
 template <typename _AllocatorType>
-std::vector<uint8_t, _AllocatorType>& WAVImporter<_AllocatorType>::GetSoundData() noexcept
+inline std::vector<uint8_t, _AllocatorType>& WAVImporter<_AllocatorType>::GetSoundData() noexcept
 {
     return m_soundData;
 }
 
 template <typename _AllocatorType>
-const std::vector<uint8_t, _AllocatorType>& WAVImporter<_AllocatorType>::GetSoundData() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& WAVImporter<_AllocatorType>::GetSoundData() const noexcept
 {
     return m_soundData;
 }
 
 template <typename _AllocatorType>
-int32_t WAVImporter<_AllocatorType>::GetBitsPerSample() const noexcept
+inline int32_t WAVImporter<_AllocatorType>::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;
 }
