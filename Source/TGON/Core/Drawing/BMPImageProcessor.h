@@ -128,7 +128,7 @@ inline bool BMPImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcDa
     }
 
     const char* header = reinterpret_cast<const char*>(&srcData[0]);
-    return (header[0] = 'B' && header[1] = 'M');
+    return (header[0] == 'B' && header[1] == 'M');
 }
 
 } /* namespace tgon */  

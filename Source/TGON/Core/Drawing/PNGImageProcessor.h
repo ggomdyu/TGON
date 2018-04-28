@@ -68,7 +68,7 @@ inline PNGImageProcessor<_AllocatorType>::PNGImageProcessor(const uint8_t* srcDa
 template <typename _AllocatorType>
 inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
 {
-    if (VerifyFormat(srcData) == false)
+    if (VerifyFormat(srcData, srcDataBytes) == false)
     {
         return false;
     }
@@ -126,7 +126,7 @@ inline bool PNGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     m_height = png_get_image_height(pngStruct, pngInfo);
     m_colorDepth = png_get_bit_depth(pngStruct, pngInfo);
     m_channels = png_get_channels(pngStruct, pngInfo);
-    m_pixelFormat = PixelFormat::R8G8B8A8_UNORM;
+    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
 
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)

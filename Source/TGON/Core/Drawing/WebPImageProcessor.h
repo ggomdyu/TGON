@@ -128,7 +128,7 @@ inline bool WebPImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcD
     }
 
     const char* header = reinterpret_cast<const char*>(&srcData[8]);
-    return (header[0] = 'W' && header[1] = 'E' && header[2] = 'B' && header[3] = 'P');
+    return (header[0] == 'W' && header[1] == 'E' && header[2] == 'B' && header[3] == 'P');
 }
 
 } /* namespace tgon */  

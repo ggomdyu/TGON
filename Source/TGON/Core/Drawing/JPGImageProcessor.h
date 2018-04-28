@@ -68,7 +68,7 @@ inline JPGImageProcessor<_AllocatorType>::JPGImageProcessor(const uint8_t* srcDa
 template <typename _AllocatorType>
 inline bool JPGImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
 {
-    if (VerifyFormat(srcData) == false)
+    if (VerifyFormat(srcData, srcDataBytes) == false)
     {
         return false;
     }
