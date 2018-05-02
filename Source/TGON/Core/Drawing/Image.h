@@ -22,7 +22,7 @@ class Image
 /* @section Public constructor */
 public:
     /**
-     * @brief                   Reads a image data from the given path specified by filePath.
+     * @brief                   Reads a image data from the path specified by filePath.
      * @param [in] filePath     The file path of image
      */
     explicit Image(const std::string& filePath);
@@ -91,6 +91,10 @@ public:
     /* @brief   Returns the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
 
+    void SaveAsPng(const char* saveFilePath);
+    void SaveAsJpg(const char* saveFilePath);
+    void SaveAsWebP(const char* saveFilePath);
+
 /* @section Private variable */
 private:
     std::vector<uint8_t> m_imageData;
@@ -100,6 +104,10 @@ private:
     int32_t m_colorDepth;
     PixelFormat m_pixelFormat;
     std::string m_filePath;
+};
+
+class AnimatedImage
+{
 };
 
 } /* namespace tgon */  

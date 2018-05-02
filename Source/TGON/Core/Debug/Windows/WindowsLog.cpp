@@ -1,4 +1,3 @@
-#include "..\Log.h"
 #include "PrecompiledHeader.pch"
 
 #include <Windows.h>

@@ -8,12 +8,12 @@
 #include <cstdint>
 
 #include "Core/String/StringTraits.h"
+#include "Core/Hash/Hash.h"
 
 #include "ImageType.h"
 
 namespace tgon
 {
-
 
 inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::size_t imageFormatStrLen)
 {
@@ -41,16 +41,17 @@ inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::s
     return ImageFormat::Unknown;
 }
 
-template <std::size_t ImageFormatStrLen>
-inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[ImageFormatStrLen])
+template <std::size_t _ImageFormatStrLen>
+inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[_ImageFormatStrLen])
 {
-    return ConvertStringToImageFormat(imageFormatStr, ImageFormatStrLen - 1);
+    return ConvertStringToImageFormat(imageFormatStr, _ImageFormatStrLen - 1);
 }
 
 constexpr const char* ConvertImageFormatToString(ImageFormat imageFormat)
 {
     constexpr const char* imageFormatStringTable[] =
     {
+        "",
         "bmp",
         "jpg",
         "jpeg",
@@ -62,6 +63,5 @@ constexpr const char* ConvertImageFormatToString(ImageFormat imageFormat)
 
     return imageFormatStringTable[(std::size_t)imageFormat];
 }
-
 
 } /* namespace tgon */  
