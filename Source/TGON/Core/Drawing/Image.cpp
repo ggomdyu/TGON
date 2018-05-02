@@ -54,7 +54,7 @@ Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t sr
             PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
-                m_imageData = imageProcessor.GetImageData();
+                m_imageData = std::move(imageProcessor.GetImageData());
                 m_width = imageProcessor.GetWidth();
                 m_height = imageProcessor.GetHeight();
                 m_channels = imageProcessor.GetChannels();
@@ -69,7 +69,7 @@ Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t sr
             JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
-                m_imageData = imageProcessor.GetImageData();
+                m_imageData = std::move(imageProcessor.GetImageData());
                 m_width = imageProcessor.GetWidth();
                 m_height = imageProcessor.GetHeight();
                 m_channels = imageProcessor.GetChannels();
@@ -84,7 +84,7 @@ Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t sr
             WebPImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
-                m_imageData = imageProcessor.GetImageData();
+                m_imageData = std::move(imageProcessor.GetImageData());
                 m_width = imageProcessor.GetWidth();
                 m_height = imageProcessor.GetHeight();
                 m_channels = imageProcessor.GetChannels();
@@ -99,7 +99,7 @@ Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t sr
             BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
-                m_imageData = imageProcessor.GetImageData();
+                m_imageData = std::move(imageProcessor.GetImageData());
                 m_width = imageProcessor.GetWidth();
                 m_height = imageProcessor.GetHeight();
                 m_channels = imageProcessor.GetChannels();
