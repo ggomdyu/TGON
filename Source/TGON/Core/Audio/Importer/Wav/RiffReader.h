@@ -14,20 +14,32 @@ class RiffReader
 {
 /* @section Public struct */
 public:
-    enum ChunkID : uint32_t
+    enum ChunkId : uint32_t
     {
         Riff = 'FFIR',
         Wave = 'EVAW',
-        Xwma = 'AMWX',
-        List = 'tsil',
+        Cue = ' euc',
+        Fact = 'tcaf',
+        Plst = 'tslp',
         Data = 'atad',
         Fmt = ' tmf',
+        List = 'tsil',
+        Label = 'lbal',
+        Ltxt = 'txtl',
+        Note = 'eton',
         Smpl = 'lpms',
+        Inst = 'tsni',
     };
 
     struct ChunkHeader
     {
-        ChunkID chunkId;
+    /* @section Public constructor */
+    public:
+        ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept;
+
+    /* @section Public variable */
+    public:
+        ChunkId chunkId;
         uint32_t chunkDataSize;
         const uint8_t* chunkData;
     };
@@ -77,7 +89,7 @@ public:
 /* @section Public method */
 public:
     bool ReadNext();
-    ChunkHeader GetChunk() const;
+    ChunkHeader GetChunkHeader() const;
 
 /* @section Private variable */
 private:
@@ -85,6 +97,11 @@ private:
     const uint8_t* m_srcDataIter;
     uint32_t m_srcDataBytes;
 };
+
+inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept :
+    chunkId(chunkId), chunkDataSize(chunkDataSize), chunkData(chunkData)
+{
+}
 
 inline RiffReader::RiffReader(const uint8_t* srcData, uint32_t srcDataBytes) noexcept :
     m_srcData(srcData),
@@ -95,10 +112,10 @@ inline RiffReader::RiffReader(const uint8_t* srcData, uint32_t srcDataBytes) noe
 
 inline bool RiffReader::ReadNext()
 {
-    ChunkHeader currChunk = GetChunk();
+    ChunkHeader currChunk = GetChunkHeader();
 
     auto moveOffset = sizeof(ChunkHeader);
-    if (currChunk.chunkId != ChunkID::Riff)
+    if (currChunk.chunkId != ChunkId::Riff)
     {
         moveOffset -= sizeof(currChunk.chunkData) - currChunk.chunkDataSize;
     }
@@ -112,13 +129,9 @@ inline bool RiffReader::ReadNext()
     return true;
 }
 
-inline RiffReader::ChunkHeader RiffReader::GetChunk() const
+inline RiffReader::ChunkHeader RiffReader::GetChunkHeader() const
 {
-    return ChunkHeader{
-        static_cast<ChunkID>(*reinterpret_cast<const uint32_t*>(&m_srcDataIter[0])),
-        *reinterpret_cast<const uint32_t*>(&m_srcDataIter[4]),
-        &m_srcDataIter[8]
-    };
+    return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_srcDataIter[0])), *reinterpret_cast<const uint32_t*>(&m_srcDataIter[4]), &m_srcDataIter[8]);
 }
 
 } /* namespace tgon */
