@@ -23,7 +23,7 @@ public:
         Plst = 'tslp',
         Data = 'atad',
         Fmt = ' tmf',
-        List = 'tsil',
+        List = 'TSIL',
         Label = 'lbal',
         Ltxt = 'txtl',
         Note = 'eton',

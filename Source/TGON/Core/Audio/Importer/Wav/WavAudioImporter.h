@@ -43,13 +43,13 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
     RiffReader riffReader(srcData, srcDataBytes);
     do
     {
-        RiffReader::ChunkHeader chunkHeader = riffReader.GetChunk();
+        RiffReader::ChunkHeader chunkHeader = riffReader.GetChunkHeader();
         switch (chunkHeader.chunkId)
         {
-        case RiffReader::ChunkID::Riff:
+        case RiffReader::ChunkId::Riff:
             break;
 
-        case RiffReader::ChunkID::Fmt:
+        case RiffReader::ChunkId::Fmt:
             {
                 auto chunkData = reinterpret_cast<const RiffReader::FmtChunkData*>(chunkHeader.chunkData);
                 
@@ -59,10 +59,10 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
             }
             break;
 
-        case RiffReader::ChunkID::List:
+        case RiffReader::ChunkId::List:
             break;
 
-        case RiffReader::ChunkID::Data:
+        case RiffReader::ChunkId::Data:
             {
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
@@ -85,17 +85,17 @@ inline bool WavAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcDat
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[0]) != RiffReader::ChunkID::Riff)
+    if (*reinterpret_cast<const uint32_t*>(&srcData[0]) != RiffReader::ChunkId::Riff)
     {
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[8]) != RiffReader::ChunkID::Wave)
+    if (*reinterpret_cast<const uint32_t*>(&srcData[8]) != RiffReader::ChunkId::Wave)
     {
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[12]) != RiffReader::ChunkID::Fmt)
+    if (*reinterpret_cast<const uint32_t*>(&srcData[12]) != RiffReader::ChunkId::Fmt)
     {
         return false;
     }
