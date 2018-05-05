@@ -27,9 +27,9 @@ protected:
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      */
-    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
+    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Assigns srcStr to destStr.
@@ -37,20 +37,20 @@ protected:
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
      */
-    template <std::size_t _DestStrBufferSize>
-    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize]) :
-        StringTraits(srcStr, srcStrLen, destStr, _DestStrBufferSize)
+    template <std::size_t _DestStrBufferLen>
+    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]) :
+        StringTraits(srcStr, srcStrLen, destStr, _DestStrBufferLen)
     {
     }
 
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @param [in] ch                   The character to assign to the string.
      * @param [in] chCount              The count of ch to assign to the string.
      */
-    StringTraits(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount = 1);
+    StringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
 
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
@@ -58,9 +58,9 @@ protected:
      * @param [in] ch                   The character to assign to the string.
      * @param [in] chCount              The count of ch to assign to the string.
      */
-    template <std::size_t _DestStrBufferSize>
-    StringTraits(_CharType(&destStr)[_DestStrBufferSize], _CharType ch, std::size_t chCount = 1) :
-        StringTraits(destStr, _DestStrBufferSize, ch, chCount)
+    template <std::size_t _DestStrBufferLen>
+    StringTraits(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount = 1) :
+        StringTraits(destStr, _DestStrBufferLen, ch, chCount)
     {
     }
     
@@ -71,9 +71,9 @@ public:
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      */
-    static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize);
+    static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Assigns srcStr to destStr.
@@ -81,31 +81,31 @@ public:
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
      */
-    template <std::size_t _DestStrBufferSize>
+    template <std::size_t _DestStrBufferLen>
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
     {
-        Assign(srcStr, srcStrLen, destStr, _DestStrBufferSize);
+        Assign(srcStr, srcStrLen, destStr, _DestStrBufferLen);
     }
 
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @param [in] ch                   The character to assign to destStr.
      * @param [in] chCount              The count of ch to assign to destStr.
      */
-    static void Assign(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount);
+    static void Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount);
     
     /**
-     * @brief                            Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr              The destination of assign.
-     * @param [in] ch                    The character to assign to destStr.
-     * @param [in] chCount               The count of ch to assign to destStr.
+     * @brief                           Assigns the chCount copies of ch to destStr.
+     * @param [out] destStr             The destination of assign.
+     * @param [in] ch                   The character to assign to destStr.
+     * @param [in] chCount              The count of ch to assign to destStr.
      */
-    template <std::size_t _DestStrBufferSize>
-    static void Assign(_CharType(&destStr)[_DestStrBufferSize], _CharType ch, std::size_t chCount)
+    template <std::size_t _DestStrBufferLen>
+    static void Assign(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount)
     {
-        Assign(destStr, _DestStrBufferSize, ch, chCount);
+        Assign(destStr, _DestStrBufferLen, ch, chCount);
     }
 
     /**
@@ -114,9 +114,9 @@ public:
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      */
-    static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
+    static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Appends srcStr to destStr.
@@ -125,21 +125,21 @@ public:
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
      */
-    template <std::size_t _DestStrBufferSize>
-    static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize], std::size_t destStrLen)
+    template <std::size_t _DestStrBufferLen>
+    static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen)
     {
-        Append(srcStr, srcStrLen, destStr, destStrLen, _DestStrBufferSize);
+        Append(srcStr, srcStrLen, destStr, destStrLen, _DestStrBufferLen);
     }
 
     /**
      * @brief                           Appends the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferSize    The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @param [in] ch                   The character to append to destStr.
      * @param [in] chCount              The count of ch to append to destStr.
      */
-    static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount = 1);
+    static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
 
     /**
      * @brief                           Appends the chCount copies of ch to destStr.
@@ -148,10 +148,10 @@ public:
      * @param [in] ch                   The character to append to destStr.
      * @param [in] chCount              The count of ch to append to destStr.
      */
-    template <std::size_t _DestStrBufferSize>
-    static void Append(_CharType(&destStr)[_DestStrBufferSize], std::size_t destStrLen, _CharType ch, std::size_t chCount = 1)
+    template <std::size_t _DestStrBufferLen>
+    static void Append(_CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen, _CharType ch, std::size_t chCount = 1)
     {
-        Append(destStr, destStrLen, _DestStrBufferSize, ch, chCount);
+        Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
     }
 
     /**
@@ -186,13 +186,13 @@ public:
      */
     static std::size_t Length(const _CharType* srcStr);
 
-    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize);
+    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
-    static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
-    static void ToLower(const _CharType* srcStr, _CharType* destStr);
+    static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
+    static void ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
-    static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr);
-    static void ToUpper(const _CharType* srcStr, _CharType* destStr);
+    static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
+    static void ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
     static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
 
@@ -206,21 +206,21 @@ public:
 };
 
 template <typename _CharType>
-inline StringTraits<_CharType>::StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize)
+inline StringTraits<_CharType>::StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    StringTraits::Assign(srcStr, srcStrLen, destStr, destStrBufferSize);
+    StringTraits::Assign(srcStr, srcStrLen, destStr, destStrBufferLen);
 }
 
 template <typename _CharType>
-inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount)
+inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
-    StringTraits::Assign(destStr, destStrBufferSize, ch, chCount);
+    StringTraits::Assign(destStr, destStrBufferLen, ch, chCount);
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferSize)
+inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferSize > srcStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
 
     memcpy(destStr, srcStr, sizeof(_CharType) * (srcStrLen + 1));
 
@@ -228,9 +228,9 @@ inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount)
+inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
-    assert(destStrBufferSize > chCount && "String buffer overflowed.");
+    assert(destStrBufferLen > chCount && "String buffer overflowed.");
 
     std::size_t i = 0;
     while (i < chCount)
@@ -242,19 +242,17 @@ inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t dest
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize)
+inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferSize > srcStrLen + destStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen + destStrLen && "String buffer overflowed.");
 
     memcpy(&destStr[destStrLen], srcStr, sizeof(_CharType) * (srcStrLen + 1));
-
-    destStr[srcStrLen + destStrLen] = _CharType();
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize, _CharType ch, std::size_t chCount)
+inline void StringTraits<_CharType>::Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
-    assert(destStrBufferSize > chCount + destStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed.");
 
     chCount += destStrLen;
     while (destStrLen < chCount)
@@ -333,33 +331,37 @@ inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferSize)
+inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
 {
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
+inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
+
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr)
+inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    ToLower(srcStr, std::strlen(srcStr), destStr);
+    ToLower(srcStr, std::strlen(srcStr), destStr, destStrBufferLen);
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
+inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
+
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr)
+inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    ToUpper(srcStr, std::strlen(srcStr), destStr);
+    ToUpper(srcStr, std::strlen(srcStr), destStr, destStrBufferLen);
 }
 
 template <typename _CharType>
