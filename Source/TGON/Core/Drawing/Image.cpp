@@ -17,126 +17,31 @@
 namespace tgon
 {
 
-Image::Image(const std::string& filePath) :
-    Image([&]() -> Image
-    {
-        FILE* file = fopen(filePath.c_str(), "rb");
-        if (file == nullptr)
-        {
-            return {};
-        }
-
-        // Read the image data from file.
-        std::vector<uint8_t> imageData;
-        {
-            fseek(file, 0, SEEK_END);
-            long fileSize = ftell(file);
-            fseek(file, 0, SEEK_SET);
-
-            imageData.resize(fileSize + 1);
-            fread(imageData.data(), 1, fileSize, file);
-        };
-        fclose(file);
-
-        std::size_t extensionOffset = filePath.rfind('.') + 1;
-        return Image(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
-    } ())
+Image::Image() :
+    m_width(0),
+    m_height(0),
+    m_channels(0),
+    m_colorDepth(0),
+    m_pixelFormat(PixelFormat::Unknown)
 {
+}
+
+Image::Image(const std::string& filePath) :
+    Image()
+{
+    this->Import(filePath);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
     Image()
 {
-    switch (imageFormat)
-    {
-    case ImageFormat::Png:
-        {
-            PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-            }
-        }
-        break;
-
-    case ImageFormat::Jpg:
-        {
-            JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-            }
-        }
-        break;
-
-    case ImageFormat::WebP:
-        {
-            WebPImageProcessor<> imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-            }
-        }
-        break;
-
-    case ImageFormat::Bmp:
-        {
-            BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-            }
-        }
-        break;
-
-    default:
-        break;
-    }
+    this->Import(filePath, srcData, srcDataBytes, imageFormat);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
-    Image(filePath, srcData, srcDataBytes, [&]() -> ImageFormat
-    {
-        if (PNGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
-        {
-            return ImageFormat::Png;
-        }
-        else if (JPGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
-        {
-            return ImageFormat::Jpg;
-        }
-        else if (WebPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
-        {
-            return ImageFormat::WebP;
-        }
-        else if (BMPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
-        {
-            return ImageFormat::Bmp;
-        }
-        
-        return ImageFormat::Unknown;
-    } ())
+    Image()
 {
+    this->Import(filePath, srcData, srcDataBytes);
 }
 
 Image::Image(Image&& rhs) :
@@ -153,15 +58,6 @@ Image::Image(Image&& rhs) :
     rhs.m_channels = 0;
     rhs.m_colorDepth = 0;
     rhs.m_pixelFormat = PixelFormat::Unknown;
-}
-
-Image::Image() :
-    m_width(0),
-    m_height(0),
-    m_channels(0),
-    m_colorDepth(0),
-    m_pixelFormat(PixelFormat::Unknown)
-{
 }
 
 Image& Image::operator=(Image&& rhs)
@@ -196,6 +92,128 @@ uint8_t& Image::operator[](std::size_t index)
 const uint8_t& Image::operator[](std::size_t index) const
 {
     return m_imageData[index];
+}
+
+bool Image::Import(const std::string& filePath)
+{
+    FILE* file = fopen(filePath.c_str(), "rb");
+    if (file == nullptr)
+    {
+        return false;
+    }
+
+    // Read the image data from file.
+    std::vector<uint8_t> imageData;
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        imageData.resize(fileSize);
+        fread(imageData.data(), 1, fileSize, file);
+    };
+    fclose(file);
+
+    std::size_t extensionOffset = filePath.rfind('.') + 1;
+    this->Import(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+}
+
+bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat)
+{
+    m_filePath = filePath;
+
+    switch (imageFormat)
+    {
+    case ImageFormat::Png:
+        {
+            PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = std::move(imageProcessor.GetImageData());
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+                return true;
+            }
+        }
+        return false;
+
+    case ImageFormat::Jpg:
+        {
+            JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = std::move(imageProcessor.GetImageData());
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+                return true;
+            }
+        }
+        return false;
+
+    case ImageFormat::WebP:
+        {
+            WebPImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = std::move(imageProcessor.GetImageData());
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+                return true;
+            }
+        }
+        return false;
+
+    case ImageFormat::Bmp:
+        {
+            BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            if (imageProcessor.IsValid())
+            {
+                m_imageData = std::move(imageProcessor.GetImageData());
+                m_width = imageProcessor.GetWidth();
+                m_height = imageProcessor.GetHeight();
+                m_channels = imageProcessor.GetChannels();
+                m_colorDepth = imageProcessor.GetColorDepth();
+                m_pixelFormat = imageProcessor.GetPixelFormat();
+                return true;
+            }
+        }
+        return false;
+
+    default:
+        return false;
+    }
+}
+
+bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
+{
+    ImageFormat imageFormat = ImageFormat::Unknown;
+    if (PNGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    {
+        imageFormat = ImageFormat::Png;
+    }
+    else if (JPGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    {
+        imageFormat = ImageFormat::Jpg;
+    }
+    else if (WebPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    {
+        imageFormat = ImageFormat::WebP;
+    }
+    else if (BMPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    {
+        imageFormat = ImageFormat::Bmp;
+    }
+
+    return this->Import(filePath, srcData, srcDataBytes, imageFormat);
 }
 
 bool Image::IsValid() const noexcept

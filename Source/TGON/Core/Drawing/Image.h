@@ -21,6 +21,8 @@ class Image
 {
 /* @section Public constructor */
 public:
+    Image();
+
     /**
      * @brief                   Reads a image data from the path specified by filePath.
      * @param [in] filePath     The file path of image
@@ -44,51 +46,69 @@ public:
      */
     Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
     
-
     Image(const Image& rhs) = default;
     Image(Image&& rhs);
     
-/* @section Private constructor */
-private:
-    Image();
-
 /* @section Public operator */
 public:
     Image& operator=(const Image& rhs) = default;
     Image& operator=(Image&& rhs);
 
-    /* @brief   Returns the raw pointer of image. */
+    /* @brief   Gets the raw pointer of image. */
     uint8_t& operator[](std::size_t index);
 
-    /* @brief   Returns the raw pointer of image. */
+    /* @brief   Gets the raw pointer of image. */
     const uint8_t& operator[](std::size_t index) const;
 
 /* @section Public method */
 public:
+    /**
+     * @brief                   Reads a image data from the path specified by filePath.
+     * @param [in] filePath     The file path of image
+     */
+    bool Import(const std::string& filePath);
+
+    /**
+     * @brief                   Reads a image file data from memory.
+     * @param [in] filePath     The file path of image file
+     * @param [in] srcData      The pointer to image data
+     * @param [in] srcDataBytes The bytes of image data
+     * @param [in] imageFormat  The format of image
+     */
+    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
+    
+    /**
+     * @brief                   Reads a image file data from memory.
+     * @param [in] filePath     The file path of image source
+     * @param [in] srcData      The pointer to image data
+     * @param [in] srcDataBytes The bytes of image data
+     */
+    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
+    
     /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
-    /* @brief   Returns the raw pointer of image. */
+    /* @brief   Gets the raw data of image. */
     std::vector<uint8_t>& GetImageData() noexcept;
 
-    /* @brief   Returns the raw pointer of image. */
+    /* @brief   Gets the raw data of image. */
     const std::vector<uint8_t>& GetImageData() const noexcept;
     
-    /* @brief   Returns the width of image. */
+    /* @brief   Gets the width of image. */
     int32_t GetWidth() const noexcept;
 
-    /* @brief   Returns the height of image. */
+    /* @brief   Gets the height of image. */
     int32_t GetHeight() const noexcept;
 
-    /* @brief   Returns the count of color channel. */
+    /* @brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
 
     int32_t GetColorDepth() const noexcept;
 
-    /* @brief   Returns the pixel format of image. */
+    /* @brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
 
-    /* @brief   Returns the file path saved at loading time. */
+    /* @brief   Gets the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
 
     void SaveAsPng(const char* saveFilePath);
