@@ -11,7 +11,7 @@
 #include "Core/Hash/Hash.h"
 #include "Core/Utility/Algorithm.h"
 
-#include "AudioType.h"
+#include "AudioBufferType.h"
 
 namespace tgon
 {
@@ -33,8 +33,6 @@ inline AudioFormat ConvertStringToAudioFormat(const char* audioFormatStr, std::s
         return AudioFormat::Flac;
     case X65599Hash("m4a"):
         return AudioFormat::M4a;
-    case X65599Hash("aac"):
-        return AudioFormat::Aac;
     case X65599Hash("opus"):
         return AudioFormat::Opus;
     }
@@ -58,7 +56,6 @@ constexpr const char* ConvertAudioFormatToString(AudioFormat AudioFormat)
         "mp3",
         "flac",
         "m4a",
-        "aac",
         "opus",
     };
 

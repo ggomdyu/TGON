@@ -20,7 +20,6 @@ enum class AudioFormat
     Mp3,
     Flac,
     M4a,
-    Aac,
     Opus,
 };
 
