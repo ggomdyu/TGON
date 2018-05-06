@@ -19,10 +19,13 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Starts, or resumes, measuring elapsed time for an interval. */
+    /* @brief   Starts measuring elapsed time. */
     void Start();
     
-    /* @brief   Stops measuring elapsed time for an interval. */
+    /* @brief   Resets elapsed time. */
+    void Reset();
+
+    /* @brief   Stops measuring elapsed time. */
     void Stop() noexcept;
 
     /**
@@ -40,10 +43,6 @@ public:
     /* @brief   Gets the total elapsed time measured by the current instance in nanoseconds. */
     int64_t GetElapsedNanoseconds() const;
 
-/* @section Public static method */
-public:
-    static int64_t GetFrequency();
-
 /* @section Private variable */
 private:
     int64_t m_oldTime;
@@ -59,9 +58,19 @@ inline void Stopwatch::Start()
     m_oldTime = std::chrono::steady_clock::now().time_since_epoch().count();
 }
 
+inline void Stopwatch::Reset()
+{
+    m_oldTime = std::chrono::steady_clock::now().time_since_epoch().count();
+}
+
 inline void Stopwatch::Stop() noexcept
 {
     m_oldTime = 0;
+}
+
+inline bool Stopwatch::IsRunning() const noexcept
+{
+    return m_oldTime > 0;
 }
 
 inline int64_t Stopwatch::GetElapsedSeconds() const
@@ -77,11 +86,6 @@ inline int64_t Stopwatch::GetElapsedMilliseconds() const
 inline int64_t Stopwatch::GetElapsedNanoseconds() const
 {
     return std::chrono::steady_clock::now().time_since_epoch().count() - m_oldTime;
-}
-    
-inline bool Stopwatch::IsRunning() const noexcept
-{
-    return m_oldTime > 0;
 }
 
 } /* namespace tgon */
