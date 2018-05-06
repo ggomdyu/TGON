@@ -30,7 +30,7 @@ public:
 
     /**
      * @brief   Gets a value indicating whether the timer is running.
-     * @return  True if the instance is currently running and measuring elapsed time for an interval; otherwise, false.
+     * @return  True if the instance is currently running and measuring elapsed time; otherwise, false.
      */
     bool IsRunning() const noexcept;
 
