@@ -51,7 +51,7 @@ public:
 
     struct FmtChunkData
     {
-        enum class AudioFormat : short
+        enum class AudioFormat : int16_t
         {
             PCM = 0x0001,
             IEEEFloat = 0x0003,
@@ -59,7 +59,7 @@ public:
             MuLaw = 0x0007,
         };
 
-        enum class AudioChannel : short
+        enum class AudioChannel : int16_t
         {
             Mono = 1,
             Stereo = 2,
