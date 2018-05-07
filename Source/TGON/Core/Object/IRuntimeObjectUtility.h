@@ -8,22 +8,24 @@
 #include <cassert>
 #include <type_traits>
 
+#include "IRuntimeObject.h"
+
 namespace tgon
 {
 
-template <typename _CastToType, typename _CastFromType, std::enable_if<std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
+template <typename _CastToType, typename _CastFromType, typename std::enable_if<std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
 inline _CastToType DynamicCast(_CastFromType ptr)
 {
     return ptr;
 }
 
-template <typename _CastToType, typename _CastFromType, std::enable_if_t<!std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
+template <typename _CastToType, typename _CastFromType, typename std::enable_if<!std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
 inline _CastToType DynamicCast(_CastFromType ptr)
 {
     const RTTI* rtti = ptr->GetRTTI();
     while (rtti != nullptr)
     {
-        if (rtti == GetRTTI<std::remove_pointer_t<_CastToType>::type>())
+        if (rtti == GetRTTI<std::remove_pointer_t<_CastToType>>())
         {
             return reinterpret_cast<_CastToType>(ptr);
         }
