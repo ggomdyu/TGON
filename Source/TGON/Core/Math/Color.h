@@ -40,6 +40,9 @@ public:
     Color4b& operator/=(const Color4b&) const;
     Color4b& operator/=(float) const;
 
+    constexpr bool operator==(const Color4b& rhs) const noexcept;
+    constexpr bool operator!=(const Color4b& rhs) const noexcept;
+
     constexpr operator uint32_t() const noexcept;
 
 /* @section Public method */
@@ -95,6 +98,16 @@ constexpr const Color4b Color4b::operator+(const Color4b& rhs) const noexcept
     return Color4b(r + rhs.r, g + rhs.g, b + rhs.b, a + rhs.a);
 }
 
+constexpr bool Color4b::operator==(const Color4b& rhs) const noexcept
+{
+    return r == rhs.r && g == rhs.g && b == rhs.b && a == rhs.a;
+}
+
+constexpr bool Color4b::operator!=(const Color4b& rhs) const noexcept
+{
+    return !this->operator==(rhs);
+}
+
 constexpr Color4b::operator uint32_t() const noexcept
 {
     return color;
@@ -120,6 +133,11 @@ struct Color4f
 /* @section Public constructor */
 public:
     constexpr Color4f(float r, float g, float b, float a) noexcept;
+
+/* @section Public operator */
+public:
+    constexpr bool operator==(const Color4f& rhs) const noexcept;
+    constexpr bool operator!=(const Color4f& rhs) const noexcept;
 
 /* @section Public method */
 public:
@@ -150,6 +168,16 @@ constexpr Color4f::Color4f(float r, float g, float b,float a) noexcept :
     b(b),
     a(a)
 {
+}
+
+constexpr bool Color4f::operator==(const Color4f& rhs) const noexcept
+{
+    return r == rhs.r && g == rhs.g && b == rhs.b && a == rhs.a;
+}
+
+constexpr bool Color4f::operator!=(const Color4f& rhs) const noexcept
+{
+    return !this->operator==(rhs);
 }
 
 template <std::size_t _StrBufferSize>
