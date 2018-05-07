@@ -27,15 +27,15 @@ public:
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;
-    std::vector<uint8_t, _AllocatorType>& GetSoundData() noexcept;
-    const std::vector<uint8_t, _AllocatorType>& GetSoundData() const noexcept;
+    std::vector<uint8_t, _AllocatorType>& GetAudioData() noexcept;
+    const std::vector<uint8_t, _AllocatorType>& GetAudioData() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
 
 /* @section Protected variable */
 protected:
-    std::vector<uint8_t, _AllocatorType> m_soundData;
+    std::vector<uint8_t, _AllocatorType> m_audioData;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;
@@ -65,7 +65,7 @@ inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::Import(const uin
 template <typename _DerivedType, typename _AllocatorType>
 inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::IsValid() const noexcept
 {
-    return m_soundData.size() > 0;
+    return m_audioData.size() > 0;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
@@ -75,15 +75,15 @@ inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::VerifyFormat(con
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetSoundData() noexcept
+inline std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() noexcept
 {
-    return m_soundData;
+    return m_audioData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetSoundData() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() const noexcept
 {
-    return m_soundData;
+    return m_audioData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>

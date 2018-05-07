@@ -66,8 +66,8 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
             {
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
-                m_soundData.resize(chunkHeader.chunkDataSize);
-                memcpy(&m_soundData[0], chunkData, chunkHeader.chunkDataSize);
+                m_audioData.resize(chunkHeader.chunkDataSize);
+                memcpy(&m_audioData[0], chunkData, chunkHeader.chunkDataSize);
             }
             return true;
         }

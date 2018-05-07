@@ -15,8 +15,6 @@
 
 namespace tgon
 {
-namespace detail
-{
 
 struct OggVorbisFileStream final
 {
@@ -38,12 +36,9 @@ public:
     size_t srcDataBytes;
 };
 
-} /* namespace detail */
-
 template <typename _AllocatorType = std::allocator<uint8_t>>
 class OggVorbisAudioImporter
 {
-
 /* @section Public constructor */
 public:
     OggVorbisAudioImporter() noexcept;
@@ -55,8 +50,8 @@ public:
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;
-    std::vector<uint8_t, _AllocatorType>& GetSoundData() noexcept;
-    const std::vector<uint8_t, _AllocatorType>& GetSoundData() const noexcept;
+    std::vector<uint8_t, _AllocatorType>& GetAudioData() noexcept;
+    const std::vector<uint8_t, _AllocatorType>& GetAudioData() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
@@ -74,14 +69,14 @@ private:
     int32_t m_samplingRate;
 };
 
-inline detail::OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
+inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
     srcData(srcData),
     srcDataIter(srcData),
     srcDataBytes(srcDataBytes)
 {
 }
 
-inline size_t detail::OggVorbisFileStream::Read(void* buffer, size_t elementSize, size_t elementCount, void* stream)
+inline size_t OggVorbisFileStream::Read(void* buffer, size_t elementSize, size_t elementCount, void* stream)
 {
     OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
     
@@ -97,7 +92,7 @@ inline size_t detail::OggVorbisFileStream::Read(void* buffer, size_t elementSize
     return bytes;
 }
 
-inline int detail::OggVorbisFileStream::Seek(void* stream, ogg_int64_t offset, int origin)
+inline int OggVorbisFileStream::Seek(void* stream, ogg_int64_t offset, int origin)
 {
     OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
 
@@ -133,12 +128,12 @@ inline int detail::OggVorbisFileStream::Seek(void* stream, ogg_int64_t offset, i
     return 0;
 }
 
-inline int detail::OggVorbisFileStream::Close(void* stream)
+inline int OggVorbisFileStream::Close(void* stream)
 {
     return 0;
 }
 
-inline long detail::OggVorbisFileStream::Tell(void* stream)
+inline long OggVorbisFileStream::Tell(void* stream)
 {
     const OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
     return castedStream->srcDataIter - castedStream->srcData;
@@ -167,7 +162,7 @@ inline bool OggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* srcDat
         return false;
     }
 
-    detail::OggVorbisFileStream fileStream(srcData, srcDataBytes);
+    OggVorbisFileStream fileStream(srcData, srcDataBytes);
     ov_callbacks ovCallbacks = this->MakeCustomIOCallback();
 
     OggVorbis_File oggVorbisFile;
@@ -179,17 +174,20 @@ inline bool OggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* srcDat
     }
 
     const vorbis_info* vorbisInfo = ov_info(&oggVorbisFile, -1);
-    if (vorbisInfo != nullptr)
+    if (vorbisInfo == nullptr)
     {
-        m_samplingRate = vorbisInfo->rate;
-        m_channels = vorbisInfo->channels;
-        m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
-
-        int32_t bufferSize = static_cast<int32_t>(ov_pcm_total(&oggVorbisFile, -1)) * 2 * static_cast<int64_t>(m_channels);
-        m_soundData.resize(bufferSize);
-        DecodeOggVorbis(&oggVorbisFile, &m_soundData[0], bufferSize, vorbisInfo->channels);
+        Log(LogLevel::Warning, "Failed to invoke ov_info.");
+        return false;
     }
 
+    m_samplingRate = vorbisInfo->rate;
+    m_channels = vorbisInfo->channels;
+    m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
+
+    int32_t bufferSize = static_cast<int32_t>(ov_pcm_total(&oggVorbisFile, -1)) * 2 * static_cast<int64_t>(m_channels);
+    m_soundData.resize(bufferSize);
+    DecodeOggVorbis(&oggVorbisFile, &m_soundData[0], bufferSize, vorbisInfo->channels);
+    
     return true;
 }
 
@@ -211,13 +209,13 @@ inline bool OggVorbisAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* 
 }
 
 template <typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetSoundData() noexcept
+inline std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetAudioData() noexcept
 {
     return m_soundData;
 }
 
 template <typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetSoundData() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetAudioData() const noexcept
 {
     return m_soundData;
 }
@@ -245,10 +243,10 @@ inline ov_callbacks OggVorbisAudioImporter<_AllocatorType>::MakeCustomIOCallback
 {
     ov_callbacks ovCallbacks;
 
-    ovCallbacks.read_func = detail::OggVorbisFileStream::Read;
-    ovCallbacks.seek_func = detail::OggVorbisFileStream::Seek;
-    ovCallbacks.close_func = detail::OggVorbisFileStream::Close;
-    ovCallbacks.tell_func = detail::OggVorbisFileStream::Tell;
+    ovCallbacks.read_func = OggVorbisFileStream::Read;
+    ovCallbacks.seek_func = OggVorbisFileStream::Seek;
+    ovCallbacks.close_func = OggVorbisFileStream::Close;
+    ovCallbacks.tell_func = OggVorbisFileStream::Tell;
 
     return ovCallbacks;
 }
@@ -256,42 +254,42 @@ inline ov_callbacks OggVorbisAudioImporter<_AllocatorType>::MakeCustomIOCallback
 template <typename _AllocatorType>
 inline unsigned long OggVorbisAudioImporter<_AllocatorType>::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, unsigned long bufferSize, unsigned long channels)
 {
-	int current_section;
+    int currentSection;
 
-	unsigned long bytesDone = 0;
-	while (true)
-	{
-        long decodeSize = ov_read(oggVorbisFile, reinterpret_cast<char*>(destDecodeBuffer + bytesDone), bufferSize - bytesDone, 0, 2, 1, &current_section);
-		if (decodeSize > 0)
-		{
-			bytesDone += decodeSize;
+    unsigned long bytesDone = 0;
+    while (true)
+    {
+        long decodeSize = ov_read(oggVorbisFile, reinterpret_cast<char*>(destDecodeBuffer + bytesDone), bufferSize - bytesDone, 0, 2, 1, &currentSection);
+        if (decodeSize > 0)
+        {
+            bytesDone += decodeSize;
             if (bytesDone >= bufferSize)
             {
-				break;
+	            break;
             }
-		}
-		else
-		{
-			break;
-		}
-	}
+        }
+        else
+        {
+            break;
+        }
+    }
 
-	// Mono, Stereo and 4-Channel files decode into the same channel order as WAVEFORMATEXTENSIBLE,
-	// however 6-Channels files need to be re-ordered
-	if (channels == 6)
-	{		
-        uint16_t* samples = (uint16_t*)destDecodeBuffer;
-		for (unsigned long ulSamples = 0; ulSamples < (bufferSize >> 1); ulSamples += 6)
-		{
-			// WAVEFORMATEXTENSIBLE Order : FL, FR, FC, LFE, RL, RR
-			// OggVorbis Order            : FL, FC, FR,  RL, RR, LFE
-			std::swap(samples[ulSamples+1], samples[ulSamples+2]);
-			std::swap(samples[ulSamples+3], samples[ulSamples+5]);
-			std::swap(samples[ulSamples+4], samples[ulSamples+5]);
-		}
-	}
+    // Mono, Stereo and 4-Channel files decode into the same channel order as WAVEFORMATEXTENSIBLE,
+    // however 6-Channels files need to be re-ordered
+    if (channels == 6)
+    {		
+        uint16_t* samples = reinterpret_cast<uint16_t*>(destDecodeBuffer);
+        for (unsigned long ulSamples = 0; ulSamples < (bufferSize >> 1); ulSamples += 6)
+        {
+            // WAVEFORMATEXTENSIBLE Order : FL, FR, FC, LFE, RL, RR
+            // OggVorbis Order            : FL, FC, FR,  RL, RR, LFE
+            std::swap(samples[ulSamples+1], samples[ulSamples+2]);
+            std::swap(samples[ulSamples+3], samples[ulSamples+5]);
+            std::swap(samples[ulSamples+4], samples[ulSamples+5]);
+        }
+    }
 
-	return bytesDone;
+    return bytesDone;
 }
 
 } /* namespace tgon */
