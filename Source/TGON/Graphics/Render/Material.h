@@ -16,7 +16,7 @@ class Material :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(Material);
+    TGON_RUNTIME_OBJECT(Material)
 
 /* @section Public constructor */
 public:
@@ -43,7 +43,7 @@ class ColorMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(ColorMaterial);
+    TGON_RUNTIME_OBJECT(ColorMaterial)
 
 /* @section Public constructor */
 public:
@@ -59,6 +59,7 @@ public:
     virtual void Unuse();
     virtual bool CanBatch(const Material& rhs) const;
     void SetColor(const Color4f& color);
+    const Color4f& GetColor() const noexcept;
 
 /* @section Private variable */
 private:
@@ -69,16 +70,26 @@ class TextureMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(TextureMaterial);
+    TGON_RUNTIME_OBJECT(TextureMaterial)
+
+/* @section Public constructor */
+public:
+    TextureMaterial();
 
 /* @section Public method */
 public:
+    virtual void Use();
+    virtual void Unuse();
+    virtual bool CanBatch(const Material& rhs) const;
     void SetTexture(const std::shared_ptr<Texture>& texture);
     const std::shared_ptr<Texture>& GetTexture() const;
+    void SetBlendColor(const Color4f& blendColor);
+    const Color4f& GetBlendColor() const noexcept;
 
 /* @section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
+    Color4f m_blendColor;
 };
 
 //class GrayTextureMaterial :
@@ -92,7 +103,7 @@ class UberMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(UberMaterial);
+    TGON_RUNTIME_OBJECT(UberMaterial)
 };
 
 } /* namespace tgon */

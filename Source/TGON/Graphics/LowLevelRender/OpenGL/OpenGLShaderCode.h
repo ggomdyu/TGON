@@ -23,95 +23,99 @@
  */
 
 constexpr const char g_positionColorVert[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-layout(location = 0) in vec3 g_vertPosition;                \n\
-layout(location = 1) in vec3 g_vertColor;                   \n\
-                                                            \n\
-uniform mat4 g_uMVP;                                        \n\
-uniform vec4 g_uColor;                                      \n\
-out vec4 g_fragColor;                                       \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);       \n\
-    g_fragColor = g_uColor;                                 \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+layout(location = 0) in vec3 g_vertPosition;                                \n\
+layout(location = 1) in vec3 g_vertColor;                                   \n\
+                                                                            \n\
+uniform mat4 g_uMVP;                                                        \n\
+uniform vec4 g_uColor;                                                      \n\
+out vec4 g_fragColor;                                                       \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                       \n\
+    g_fragColor = g_uColor;                                                 \n\
+}                                                                           \n\
 ";
 
 constexpr const char g_positionColorFrag[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-in vec4 g_fragColor;                                        \n\
-out vec4 g_outColor;                                        \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    g_outColor = g_fragColor;                               \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+in vec4 g_fragColor;                                                        \n\
+out vec4 g_outColor;                                                        \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    g_outColor = g_fragColor;                                               \n\
+}                                                                           \n\
 ";
 
 constexpr const char g_positionNormalUVVert[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-layout(location = 0) in vec3 g_vertPosition;                \n\
-layout(location = 1) in vec3 g_vertNormal;                  \n\
-layout(location = 2) in vec2 g_vertUV;                      \n\
-out vec2 g_fragUV;                                          \n\
-uniform mat4 g_uMVP;                                        \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);       \n\
-    g_fragUV = g_vertUV;                                    \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+layout(location = 0) in vec3 g_vertPosition;                                \n\
+layout(location = 1) in vec3 g_vertNormal;                                  \n\
+layout(location = 2) in vec2 g_vertUV;                                      \n\
+out vec2 g_fragUV;                                                          \n\
+uniform mat4 g_uMVP;                                                        \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                       \n\
+    g_fragUV = g_vertUV;                                                    \n\
+}                                                                           \n\
 ";
 
 constexpr const char g_positionNormalUVFrag[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-in vec2 g_fragUV;                                           \n\
-out vec4 g_outColor;                                        \n\
-                                                            \n\
-uniform sampler2D textureSampler;                           \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    g_outColor = texture(textureSampler, g_fragUV);         \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+in vec2 g_fragUV;                                                           \n\
+out vec4 g_outColor;                                                        \n\
+                                                                            \n\
+uniform sampler2D textureSampler;                                           \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    g_outColor = texture(textureSampler, g_fragUV);                         \n\
+}                                                                           \n\
 ";
 
 constexpr const char g_positionUVVert[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-layout(location = 0) in vec3 g_vertPosition;                \n\
-layout(location = 1) in vec2 g_vertUV;                      \n\
-out vec2 g_fragUV;                                          \n\
-uniform mat4 g_uMVP;                                        \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);       \n\
-    g_fragUV = g_vertUV;                                    \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+layout(location = 0) in vec3 g_vertPosition;                                \n\
+layout(location = 1) in vec2 g_vertUV;                                      \n\
+uniform mat4 g_uMVP;                                                        \n\
+uniform vec4 g_uBlendColor;                                                 \n\
+out vec2 g_fragUV;                                                          \n\
+out vec4 g_fragBlendColor;                                                  \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                       \n\
+    g_fragUV = g_vertUV;                                                    \n\
+    g_fragBlendColor = g_uBlendColor;                                       \n\
+}                                                                           \n\
 ";
 
 constexpr const char g_positionUVFrag[] =
-"                                                           \n\
-#version 330 core                                           \n\
-                                                            \n\
-in vec2 g_fragUV;                                           \n\
-out vec4 g_outColor;                                        \n\
-                                                            \n\
-uniform sampler2D textureSampler;                           \n\
-                                                            \n\
-void main()                                                 \n\
-{                                                           \n\
-    g_outColor = texture(textureSampler, g_fragUV);         \n\
-}                                                           \n\
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+in vec2 g_fragUV;                                                           \n\
+in vec4 g_fragBlendColor;                                                   \n\
+out vec4 g_outColor;                                                        \n\
+                                                                            \n\
+uniform sampler2D textureSampler;                                           \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    g_outColor = texture(textureSampler, g_fragUV) * g_fragBlendColor;      \n\
+}                                                                           \n\
 ";

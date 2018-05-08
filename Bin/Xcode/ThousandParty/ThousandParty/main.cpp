@@ -4,7 +4,9 @@
 #define TGON_USING_OPENGL 1
 #include "Game/Engine/GameApplication.h"
 
-#include "Core/Audio/OggVorbisImporter.h"
+#include "Core/Utility/StaticInvoke.h"
+#include "Core/Audio/AudioBuffer.h"
+#include "Core/Audio/AudioPlayer.h"
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
 #include "Core/Object/IRuntimeObjectUtility.h"
@@ -31,7 +33,8 @@
 #include "Core/Math/Extent.h"
 #include "Core/Hash/UUID.h"
 #include "Core/Hash/Hash.h"
-#include "Core/Audio/WAVImporter.h"
+#include "Core/Audio/Importer/Wav/WavAudioImporter.h"
+#include "Core/Audio/Importer/OggVorbis/OggVorbisAudioImporter.h"
 #include "Core/Random/Random.h"
 #include "Core/Utility/RAII.h"
 #include "Core/File/Path.h"
@@ -49,7 +52,6 @@
 #include "Game/Module/TimeModule.h"
 #include "Graphics/LowLevelRender/VertexBuffer.h"
 #include "Graphics/LowLevelRender/IndexBuffer.h"
-#include "Graphics/LowLevelRender/Texture.h"
 #include "Graphics/Render/FVF.h"
 #include "Game/Module/GraphicsModule.h"
 
@@ -125,8 +127,8 @@ public:
 public:
     void Draw()
     {
-        m_mesh->GetVertexBuffer().Use();
-        m_mesh->GetIndexBuffer().Use();
+        m_mesh->GetVertexBuffer()->Use();
+        m_mesh->GetIndexBuffer()->Use();
 
         for (size_t i = 0; i < m_textures.size(); ++i)
         {
@@ -347,11 +349,6 @@ shader->Unuse();
 
 */
 
-class Audio3D
-{
-
-};
-
 using tgon::UnderlyingCast;
 
 // see: https://www.media.mit.edu/pia/Research/deepview/exif.html
@@ -536,133 +533,52 @@ private:
     ExifHeader m_exifHeader;
 };
 
+template <typename _CastToType, typename _CastFromType, std::enable_if<std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
+inline _CastToType DynamicCast2(_CastFromType ptr)
+{
+    return nullptr;
+}
+
+template <typename _CastToType, typename _CastFromType, std::enable_if_t<!std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
+inline _CastToType DynamicCast2(_CastFromType ptr)
+{
+    return nullptr;
+}
+
 class TGON_API ThousandParty :
     public GameApplication
 {
 public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
-    Texture m_texture;
-    Cube m_quad;
-    ALuint alSource;
+    std::shared_ptr<Texture> m_texture;
+    std::shared_ptr<Mesh> m_quad;
+
+    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>("E:/Users/ggomdyu/Desktop/Sulk.wav");
+    AudioPlayer audioPlayer;
 
 public:
     ThousandParty() :
         GameApplication(WindowStyle(), VideoMode()),
-        m_texture(GetDesktopDirectory() + "/printTestImage.png"),
-        m_quad(FindModule<GraphicsModule>()->GetGraphics()),
-        m_shader(g_positionUVVert, g_positionUVFrag)
+        m_texture(std::make_shared<Texture>(GetDesktopDirectory() + "/printTestImage.png")),
+        m_quad(MakeQuad(FindModule<GraphicsModule>()->GetGraphics(), std::make_shared<TextureMaterial>())),
+        m_shader(g_positionColorVert, g_positionColorFrag)
     {
-        FILE* file2 = fopen("E:/Users/ggomdyu/Desktop/64174066_p0.jpg", "rb");
-        std::vector<uint8_t> fileData2;
-        {
-            fseek(file2, 0, SEEK_END);
-            long fileSize = ftell(file2);
-            fseek(file2, 0, SEEK_SET);
+        SrandWELL1024a();
 
-            fileData2.resize(fileSize + 1);
-            fread(fileData2.data(), 1, fileSize, file2);
-        };
-        fclose(file2);
-        /*JPGImageProcessor imageProcessor;
-        imageProcessor.Import(fileData2.data());*/
+        audioPlayer.SetAudioBuffer(audioBuffer);
+        audioPlayer.SetListenerPosition({ 0, 0, 0 });
+        audioPlayer.SetListenerVelocity({ 0, 0, 0 });
+        audioPlayer.SetPosition({ 0, 0, 0 });
+        audioPlayer.SetPitch(1.0f);
+        audioPlayer.Play(1.0f, true);
 
+        std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
 
-        m_texture.TransferToVideo();
-        m_texture.UpdateParemeters();
-
-        FILE* file = fopen("E:/Users/ggomdyu/Desktop/Sulk.ogg", "rb");
-       
-        // Read the image data from file.
-        std::vector<uint8_t> fileData;
-        {
-            fseek(file, 0, SEEK_END);
-            long fileSize = ftell(file);
-            fseek(file, 0, SEEK_SET);
-
-            fileData.resize(fileSize + 1);
-            fread(fileData.data(), 1, fileSize, file);
-        };
-        fclose(file);
-
-        OggVorbisImporter importer(fileData.data(), fileData.size());
-        
-        ALCdevice* device = alcOpenDevice(nullptr);
-        if (device == nullptr)
-        {
-            assert(false);
-        }
-
-        ALCcontext* context = alcCreateContext(device, nullptr);
-        if (context == nullptr)
-        {
-            assert(false);
-        }
-
-        alcMakeContextCurrent(context);
-
-        ALuint alBuffer;
-        alGenBuffers(1, &alBuffer);
-        auto err = alGetError();
-        if (err != AL_NO_ERROR)
-        {
-            assert(false);
-        }
-
-        alBufferData(alBuffer, AL_FORMAT_STEREO16, importer.GetSoundData().data(), importer.GetSoundData().size(), importer.GetSamplingRate());
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alListener3f(AL_POSITION, 0, 0, 0);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alListener3f(AL_VELOCITY, 0,0,0);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        //
-
-        alGenSources(1, &alSource);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alSourcef(alSource, AL_GAIN, 1);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alSourcef(alSource, AL_PITCH, 1);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alSource3f(alSource, AL_POSITION, 0, 0, 0);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-
-        alSourcei(alSource, AL_BUFFER, alBuffer);
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
-        alSourcePlay(alSource);
-
-        if (err != AL_NO_ERROR)
-        {
-            int n = 3;
-        }
     }
 
     ~ThousandParty()
     {
-
     }
 
     Stopwatch m_stopWatch;
@@ -682,45 +598,42 @@ public:
 
     virtual void OnUpdate() override
     {
+
         SuperType::OnUpdate();
-        
-        /*for (volatile int i = 0; i < 10000000; ++i)
-        {
-            auto v = m_stopWatch.GetElapsedNanoseconds();
-        }
-        auto b = m_stopWatch.GetElapsedMilliseconds();
-        Log("%d\n", b);*/
 
-        /*if (m_stopWatch.GetElapsedMilliseconds() > 4000)
-        {
-            alSourcePlay(alSource);
-            m_stopWatch.Start();
-        }
-*/
         decltype(auto) extent = GetRootWindow()->GetSize();
-
-        static float x = 0.0f;
+        
+        static float x = 5.0f;
         auto M2 = Matrix4x4::RotateX(x);
         M2 *= Matrix4x4::RotateX(x);
         M2 *= Matrix4x4::RotateY(x);
         auto V2 = Matrix4x4::LookAtRH({ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
-        x -= 0.005f;
+        x -= 0.1f;
         
         MVP = M2 * V2 * P2;
 
+        audioPlayer.SetPosition({x, 0,0});
+
+        auto& mtrl = m_quad->GetMaterial();
+        if (m_stopWatch.GetElapsedSeconds() > 0.5f)
+        {
+            std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial())->SetBlendColor(Color4f(WELL1024a(), WELL1024a(), WELL1024a(), WELL1024a()));
+            m_stopWatch.Reset();
+        }
+
         this->FindModule<GraphicsModule>()->GetGraphics()->ClearColorDepthBuffer();
 
-        m_shader.Use();
+        mtrl->Use();
         {
-            m_shader.SetParameterMatrix4fv("g_uMVP", MVP[0]);
+            mtrl->GetShader()->SetParameterMatrix4fv("g_uMVP", MVP[0]);
             
-            m_quad.GetVertexBuffer().Use();
-            m_quad.GetIndexBuffer().Use();
+            m_quad->GetVertexBuffer()->Use();
+            m_quad->GetIndexBuffer()->Use();
 
             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
         }
-        m_shader.Unuse();
+        mtrl->Unuse();
 
         FindModule<GraphicsModule>()->GetGraphics()->SwapBuffer();
     }
