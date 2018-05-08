@@ -1,35 +1,65 @@
 #include "PrecompiledHeader.pch"
+
+#if TGON_USING_OPENGL
+#   include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"
+#endif
+
 #include "Material.h"
 
 namespace tgon
 {
-namespace render
+
+Material::Material(const std::shared_ptr<Shader>& shader) :
+    m_shader(shader)
 {
-//
-//void TexturedMaterial::BeginScene() override
-//{
-//    // TODO:
-//    // 셰이더를 고르고,
-//    // 셰이더 유니폼 변수 세팅해주고,
-//    // 등등...
-//}
-//
-//void TexturedMaterial::Draw(rhi::BaseRHI* rhi) override
-//{
-//    // TODO: 모델에 대한 Draw를 Material에서 할 지,
-//    // Material을 들고있는 오브젝트가 할지에 대한 결정이 필요함
-//}
-//
-//void TexturedMaterial::SetTexture(const std::shared_ptr<Texture2D>& texture)
-//{
-//    m_texture = texture;
-//}
-//
-//const std::shared_ptr<Texture2D>& TexturedMaterial::GetTexture() const
-//{
-//    return m_texture;
-//}
+}
 
+ColorMaterial::ColorMaterial() :
+    Material(std::make_shared<Shader>(g_positionColorVert, g_positionColorFrag)),
+    m_color(1.0f, 1.0f, 1.0f, 1.0f)
+{
+}
 
-} /* namespace render */
+void ColorMaterial::Use()
+{
+    m_shader->Use();
+    m_shader->SetParameter4f("g_uColor", m_color.r, m_color.g, m_color.b, m_color.a);
+}
+
+void ColorMaterial::Unuse()
+{
+    m_shader->Unuse();
+}
+
+bool ColorMaterial::CanBatch(const Material& rhs) const
+{
+    const ColorMaterial* material = DynamicCast<const ColorMaterial*>(&rhs);
+    if (material != nullptr)
+    {
+        return m_color == material->m_color;
+    }
+
+    return false;
+}
+
+const std::shared_ptr<Shader>& Material::GetShader() noexcept
+{
+    return m_shader;
+}
+
+void ColorMaterial::SetColor(const Color4f& color)
+{
+    m_color = color;
+}
+
+void TextureMaterial::SetTexture(const std::shared_ptr<Texture>& texture)
+{
+    m_texture = texture;
+}
+
+const std::shared_ptr<Texture>& TextureMaterial::GetTexture() const
+{
+    return m_texture;
+}
+
 } /* namespace tgon */

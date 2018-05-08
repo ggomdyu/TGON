@@ -84,7 +84,7 @@ constexpr TextureWrapMode ConvertNativeToTextureWrapMode(GLint wrapMode) noexcep
 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, const TextureCreateDesc& textureCreateDesc) :
     GenericTexture(filePath, textureCreateDesc),
-    m_textureHandle(GenerateTexture()),
+    m_textureHandle(CreateTexture()),
     m_filterMode(ConvertTextureFilterModeToNative(textureCreateDesc.filterMode, textureCreateDesc.isUseMipmap)),
     m_wrapMode(ConvertTextureWrapModeToNative(textureCreateDesc.wrapMode))
 {
@@ -96,6 +96,12 @@ OpenGLTexture::~OpenGLTexture()
     TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
 }
 
+void OpenGLTexture::Use()
+{
+    this->TransferToVideo();
+    this->UpdateParemeters();
+}
+
 void OpenGLTexture::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
@@ -103,7 +109,7 @@ void OpenGLTexture::TransferToVideo()
 
     if (m_isUseMipmap == true)
     {
-        this->GenerateMipmap();
+        this->CreateMipmap();
     }
 }
 
@@ -128,7 +134,7 @@ void OpenGLTexture::SetWrapMode(TextureWrapMode addressMode)
     m_wrapMode = ConvertTextureWrapModeToNative(addressMode);
 }
 
-GLuint OpenGLTexture::GenerateTexture() const
+GLuint OpenGLTexture::CreateTexture() const
 {
     GLuint textureHandle;
     TGON_GL_ERROR_CHECK(glGenTextures(1, &textureHandle));
@@ -146,7 +152,7 @@ TextureWrapMode OpenGLTexture::GetWrapMode() const noexcept
     return ConvertNativeToTextureWrapMode(m_wrapMode);
 }
 
-void OpenGLTexture::GenerateMipmap() const
+void OpenGLTexture::CreateMipmap() const
 {
     TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
 }

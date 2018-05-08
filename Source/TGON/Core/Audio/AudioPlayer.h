@@ -20,6 +20,7 @@ public:
     AudioPlayer();
     AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
+/* @section Public destructor */
 public:
     ~AudioPlayer();
 
@@ -33,6 +34,7 @@ public:
     void Resume();
     void SetVolume(float volume);
     void SetPosition(const Vector3& position);
+    void SetVelocity(const Vector3& velocity);
     static void SetListenerPosition(const Vector3& position);
     static void SetListenerVelocity(const Vector3& velocity);
     float GetVolume() const;

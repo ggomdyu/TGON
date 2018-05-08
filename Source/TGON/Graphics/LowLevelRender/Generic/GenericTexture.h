@@ -34,8 +34,7 @@ public:
 
 /* @section Public method */
 public:
-    virtual void TransferToVideo() = 0;
-    virtual void UpdateParemeters() = 0;
+    virtual void Use() = 0;
     virtual void SetFilterMode(TextureFilterMode filterMode) = 0;
     virtual void SetWrapMode(TextureWrapMode addressMode) = 0;
     virtual TextureFilterMode GetFilterMode() const noexcept = 0;

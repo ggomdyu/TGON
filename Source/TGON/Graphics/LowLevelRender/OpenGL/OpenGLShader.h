@@ -19,10 +19,15 @@ class OpenGLShader :
 /* @section Public constructor */
 public:
     OpenGLShader(const char* vertexShaderCode, const char* fragmentShaderCode);
+    OpenGLShader(OpenGLShader&& rhs);
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLShader() override = default;
+    virtual ~OpenGLShader() override;
+
+/* @section Public operator */
+public:
+    OpenGLShader& operator=(OpenGLShader&& rhs);
 
 /* @section Public method */
 public:
@@ -50,7 +55,7 @@ public:
 /* @section Private method */
 private:
     /* @brief   Links shaders to the program object. */
-    bool LinkShadersToProgram(GLuint vertexShader, GLuint fragmentShader);
+    bool LinkShadersToProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
 
     /**
      * @brief                   Compiles shader and return the handle of it.
@@ -64,13 +69,15 @@ private:
      * @brief   Checks shader was compiled successfully.
      * @return  Returns true if the compile was succeeded, false otherwise.
      */
-    bool IsShaderCompileSucceed(GLuint shader) const;
+    bool IsShaderCompileSucceed(GLuint shaderId) const;
 
-    std::string GetShaderInfoLog(GLuint shader) const;
+    std::string GetShaderInfoLog(GLuint shaderId) const;
+
+    void Release();
 
 /* @section Private variable */
 public:
-    GLuint m_program;
+    GLuint m_programId;
 };
 
 class Shader : public OpenGLShader

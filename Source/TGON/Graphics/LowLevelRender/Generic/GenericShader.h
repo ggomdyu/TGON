@@ -7,11 +7,13 @@
 #pragma once
 #include <cstdlib>
 #include <cstdint>
+#include <boost/noncopyable.hpp>
 
 namespace tgon
 {
 
-class GenericShader
+class GenericShader :
+    private boost::noncopyable
 {
 /* @section Public destructor */
 public:

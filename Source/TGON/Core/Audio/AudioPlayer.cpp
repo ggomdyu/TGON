@@ -72,6 +72,11 @@ void AudioPlayer::SetPosition(const Vector3& position)
     alSource3f(m_alSource, AL_POSITION, position.x, position.y, position.z);
 }
 
+void AudioPlayer::SetVelocity(const Vector3& velocity)
+{
+    alSource3f(m_alSource, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
+}
+
 void AudioPlayer::SetListenerPosition(const Vector3& position)
 {
     alListener3f(AL_POSITION, position.x, position.y, position.z);
@@ -107,7 +112,7 @@ float AudioPlayer::GetPitch() const
 
 void AudioPlayer::SetLooping(bool isLooping)
 {
-    //alSourcei(m_alSource, AL_LOOPING, isLooping ? AL_TRUE : AL_FALSE);
+    alSourcei(m_alSource, AL_LOOPING, isLooping ? AL_TRUE : AL_FALSE);
 }
 
 bool AudioPlayer::IsLooping() const

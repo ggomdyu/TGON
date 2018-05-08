@@ -85,7 +85,14 @@ inline int64_t Stopwatch::GetElapsedMilliseconds() const
 
 inline int64_t Stopwatch::GetElapsedNanoseconds() const
 {
-    return std::chrono::steady_clock::now().time_since_epoch().count() - m_oldTime;
+    if (this->IsRunning())
+    {
+        return std::chrono::steady_clock::now().time_since_epoch().count() - m_oldTime;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 } /* namespace tgon */

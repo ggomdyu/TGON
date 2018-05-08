@@ -13,29 +13,10 @@
 namespace tgon
 {
 
-class Triangle :
-    public Mesh
-{
-/* @section Public constructor */
-public:
-    explicit Triangle(const SharedGraphicsContext& context);
-};
+std::shared_ptr<Mesh> MakeTriangle(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material);
 
-class Cube :
-    public Mesh
-{
-    /* @section Public constructor */
-public:
-    explicit Cube(const SharedGraphicsContext& context);
-};
+std::shared_ptr<Mesh> MakeCube(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material);
 
-class Quad :
-    public Mesh
-{
-/* @section Public constructor */
-public:
-    explicit Quad(const SharedGraphicsContext& context);
-};
-
+std::shared_ptr<Mesh> MakeQuad(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material);
 
 } /* namespace tgon */

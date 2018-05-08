@@ -19,36 +19,22 @@ class Mesh :
 {
 /* @section Public constructor */
 public:
-    template <typename _VertexBufferType, typename _IndexBufferType>
-    explicit Mesh(const SharedGraphicsContext& context, _VertexBufferType&& vertexBuffer, _IndexBufferType&& indexBuffer);
+    explicit Mesh(const SharedGraphicsContext& context, const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material);
 
 /* @section Public method */
 public:
-    VertexBuffer& GetVertexBuffer() noexcept;
-    IndexBuffer& GetIndexBuffer() noexcept;
+    void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
+    void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
+    void SetMaterial(const std::shared_ptr<Material>& material);
+    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() noexcept;
+    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() noexcept;
+    const std::shared_ptr<Material>& GetMaterial() noexcept;
 
 /* @section Protected variable */
 protected:
-    VertexBuffer m_vertexBuffer;
-    IndexBuffer m_indexBuffer;
+    std::shared_ptr<VertexBuffer> m_vertexBuffer;
+    std::shared_ptr<IndexBuffer> m_indexBuffer;
+    std::shared_ptr<Material> m_material;
 };
-
-template<typename _VertexBufferType, typename _IndexBufferType>
-inline Mesh::Mesh(const SharedGraphicsContext& context, _VertexBufferType&& vertexBuffer, _IndexBufferType&& indexBuffer) :
-    GraphicsResource(context),
-    m_vertexBuffer(std::forward<_VertexBufferType>(vertexBuffer)),
-    m_indexBuffer(std::forward<_IndexBufferType>(indexBuffer))
-{
-}
-
-inline VertexBuffer& Mesh::GetVertexBuffer() noexcept
-{
-    return m_vertexBuffer;
-}
-
-inline IndexBuffer& Mesh::GetIndexBuffer() noexcept
-{
-    return m_indexBuffer;
-}
 
 } /* namespace tgon */

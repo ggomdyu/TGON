@@ -107,13 +107,11 @@ public:
 /* @section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
-    ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample) const;
-    ALuint CreateALBuffer(const std::vector<uint8_t>& m_soundData, ALenum alFormat, int32_t samplingRate) const;
 
 /* @section Private variable */
 private:
     std::string m_filePath;
-    std::shared_ptr<std::vector<uint8_t>> m_soundData; // todo: 이름이 모순적임. 변경 필요
+    std::shared_ptr<std::vector<uint8_t>> m_audioData;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;

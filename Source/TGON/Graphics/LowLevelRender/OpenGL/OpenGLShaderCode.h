@@ -30,12 +30,13 @@ layout(location = 0) in vec3 g_vertPosition;                \n\
 layout(location = 1) in vec3 g_vertColor;                   \n\
                                                             \n\
 uniform mat4 g_uMVP;                                        \n\
+uniform vec4 g_uColor;                                      \n\
 out vec4 g_fragColor;                                       \n\
                                                             \n\
 void main()                                                 \n\
 {                                                           \n\
     gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);       \n\
-    g_fragColor = vec4(g_vertColor, 1.0);                   \n\
+    g_fragColor = g_uColor;                                 \n\
 }                                                           \n\
 ";
 

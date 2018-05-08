@@ -6,6 +6,7 @@
 
 #pragma once
 #include <cstdint>
+#include <al.h>
 
 #include "Core/String/StringTraits.h"
 #include "Core/Hash/Hash.h"
@@ -62,5 +63,58 @@ constexpr const char* ConvertAudioFormatToString(AudioFormat AudioFormat)
     return audioFormatStringTable[UnderlyingCast(AudioFormat)];
 }
 
+inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
+{
+    if (channels == 1)
+    {
+        if (bitsPerSample == 8)
+        {
+            return AL_FORMAT_MONO8;
+        }
+        else if (bitsPerSample == 16)
+        {
+            return AL_FORMAT_MONO16;
+        }
+    }
+    else if (channels == 2)
+    {
+        if (bitsPerSample == 8)
+        {
+            return AL_FORMAT_STEREO8;
+        }
+        else if (bitsPerSample == 16)
+        {
+            return AL_FORMAT_STEREO16;
+        }
+    }
+    else if (channels == 4)
+    {
+        return alGetEnumValue("AL_FORMAT_QUAD16");
+    }
+    else if (channels == 6)
+    {
+        return alGetEnumValue("AL_FORMAT_51CHN16");
+    }
+
+    return 0;
+}
+
+inline ALuint CreateALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
+{
+    ALuint alBuffer = 0;
+    alGenBuffers(1, &alBuffer);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        return 0;
+    }
+
+    alBufferData(alBuffer, alFormat, audioData.data(), audioData.size(), samplingRate);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        return 0;
+    }
+
+    return alBuffer;
+}
 
 } /* namespace tgon */  
