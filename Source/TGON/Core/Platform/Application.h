@@ -19,6 +19,16 @@
 #   import "IOS/IOSApplication.h"
 #endif
 
+#define TGON_DECLARE_APPLICATION(className)\
+    namespace tgon\
+    {\
+    std::shared_ptr<Application> MakeApplication()\
+    {\
+        static_assert(std::is_convertible<className*, Application*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from Application.");\
+        return std::make_shared<className>();\
+    }\
+    } /* namespace tgon */
+
 namespace tgon
 {
 
@@ -30,12 +40,11 @@ public:
 
 /* @section Public constructor */
 public:
-    Application();
-    Application(const WindowStyle& windowStyle);
+    using SuperType::SuperType;
 
 /* @section Public method */
 public:
-    static Application* GetInstance();
+    static const std::shared_ptr<Application>& GetInstance();
 };
 
 } /* namespace tgon */

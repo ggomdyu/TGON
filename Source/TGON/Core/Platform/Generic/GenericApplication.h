@@ -11,20 +11,9 @@
 #include <type_traits>
 
 #include "Core/Object/Object.h"
-
 #include "../Config.h"
 
 #include "GenericApplicationFwd.h"
-
-#define TGON_DECLARE_APPLICATION(className)\
-    namespace tgon\
-    {\
-    std::shared_ptr<GenericApplication> MakeApplication()\
-    {\
-        static_assert(std::is_convertible<className*, GenericApplication*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from GenericApplication.");\
-        return std::make_shared<className>();\
-    }\
-    } /* namespace tgon */
 
 namespace tgon
 {
