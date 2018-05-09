@@ -17,15 +17,19 @@
 
 namespace tgon
 {
-
-extern std::shared_ptr<GenericApplication> MakeApplication();
-
 namespace
 {
 
-std::shared_ptr<GenericApplication> g_application;
+std::shared_ptr<Application> g_application;
 
 } /* namespace */
+
+extern std::shared_ptr<Application> MakeApplication();
+
+const std::shared_ptr<Application>& Application::GetInstance()
+{
+    return g_application;
+}
 
 } /* namespace tgon */
 

@@ -23,7 +23,8 @@ namespace tgon
 {
 
 class TGON_API GenericWindow :
-    public Object
+    public Object,
+    private boost::noncopyable
 {
 public:
     TGON_RUNTIME_OBJECT(GenericWindow)
@@ -31,16 +32,15 @@ public:
 /* @section Public constructor */
 public:
     GenericWindow() noexcept;
-    GenericWindow(const GenericWindow&) = default;
-    GenericWindow(GenericWindow&&) = default;
+    GenericWindow(GenericWindow&& rhs);
 
 /* @section Public destructor */
 public:
     virtual ~GenericWindow() = 0;
 
 /* @section Public operator */
-    GenericWindow& operator=(const GenericWindow&) = default;
-    GenericWindow& operator=(GenericWindow&&) = default;
+protected:
+    GenericWindow& operator=(GenericWindow&& rhs);
 
 /* @section Public method */
 public:

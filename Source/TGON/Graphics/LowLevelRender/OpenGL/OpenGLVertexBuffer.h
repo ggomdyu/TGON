@@ -28,7 +28,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLVertexBuffer();
+    virtual ~OpenGLVertexBuffer() override;
 
 /* @section Public operator */
 public:

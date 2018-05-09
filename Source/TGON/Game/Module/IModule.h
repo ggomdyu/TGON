@@ -21,7 +21,7 @@ public:
 /* @section Public constructor */
 public:
     IModule() = default;
-    virtual ~IModule() = 0;
+    virtual ~IModule() override = 0;
 
 /* @section Public method */
 public:

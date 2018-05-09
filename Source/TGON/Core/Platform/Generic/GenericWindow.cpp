@@ -10,9 +10,29 @@ GenericWindow::GenericWindow() noexcept :
 {
 }
 
+GenericWindow::GenericWindow(GenericWindow&& rhs) : 
+    m_isClosed(rhs.m_isClosed)
+{
+    rhs.m_isClosed = false;
+}
+
 GenericWindow::~GenericWindow()
 {
     m_isClosed = true;
+}
+
+GenericWindow& GenericWindow::operator=(GenericWindow&& rhs)
+{
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
+    m_isClosed = rhs.m_isClosed;
+
+    rhs.m_isClosed = false;
+
+    return *this;
 }
 
 bool GenericWindow::IsClosed() const noexcept

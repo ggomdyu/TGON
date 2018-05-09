@@ -34,7 +34,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Window() final override = default;
+    virtual ~Window() override = default;
 
 /* @section Public operator */
 public:

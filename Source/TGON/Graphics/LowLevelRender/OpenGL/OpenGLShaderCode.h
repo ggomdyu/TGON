@@ -119,3 +119,19 @@ void main()                                                                 \n\
     g_outColor = texture(textureSampler, g_fragUV) * g_fragBlendColor;      \n\
 }                                                                           \n\
 ";
+
+constexpr const char g_maskImageFrag[] =
+"                                                                           \n\
+#version 330 core                                                           \n\
+                                                                            \n\
+in vec2 g_fragUV;                                                           \n\
+in vec4 g_fragBlendColor;                                                   \n\
+out vec4 g_outColor;                                                        \n\
+                                                                            \n\
+uniform sampler2D textureSampler;                                           \n\
+                                                                            \n\
+void main()                                                                 \n\
+{                                                                           \n\
+    g_outColor = texture(textureSampler, g_fragUV) * g_fragBlendColor;      \n\
+}                                                                           \n\
+";

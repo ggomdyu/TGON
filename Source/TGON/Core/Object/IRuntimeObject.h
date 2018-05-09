@@ -23,32 +23,11 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Get static bound type information. */
-    template <typename _Type>
-    friend const RTTI* GetRTTI();
-
     /* @brief   Get dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
 };
 
 inline IRuntimeObject::~IRuntimeObject() = default;
-
-template <typename _Type>
-inline const RTTI* GetRTTI()
-{
-    using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
-
-    static_assert(std::is_convertible<ClassType*, IRuntimeObject*>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
-
-    static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
-    return &rtti;
-}
-
-template <>
-inline const RTTI* GetRTTI<void>()
-{
-    return nullptr;
-}
 
 } /* namespace tgon */
 

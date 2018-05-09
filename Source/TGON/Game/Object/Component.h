@@ -1,5 +1,5 @@
 /**
- * @filename    IComponent.h
+ * @filename    Component.h
  * @author      ggomdyu
  * @since       04/26/2015
  */
@@ -7,35 +7,38 @@
 #pragma once
 #include "Core/Object/Object.h"
 
+#include "ComponentFwd.h"
+
 namespace tgon
 {
 
-class GameObject;
-
-class TGON_API IComponent :
+class TGON_API Component :
 	public Object
 {
 public:
-	TGON_RUNTIME_OBJECT(IComponent)
+	TGON_RUNTIME_OBJECT(Component)
 
 /* @section Public constructor */
 public:
-	explicit IComponent(GameObject* owner) noexcept;
+	explicit Component(GameObject* owner) noexcept;
 
 /* @section Public destructor */
 public:
-    virtual ~IComponent() override = default;
+    virtual ~Component() override = 0;
 
 /* @section Public method */
 public:
     /* @brief   Updates this component. */
 	virtual void Update() = 0;
 
-    /* @brief   Sets the owner of this component. */
+    /* @brief   Sets the owner of component. */
 	void SetOwner(GameObject* owner) noexcept;
 
-    /* @brief   Returns owner of this component. */
+    /* @brief   Gets the owner of component. */
     GameObject* GetOwner() noexcept;
+
+    /* @brief   Gets the owner of component. */
+    const GameObject* GetOwner() const noexcept;
 
 /* @section Private variable */
 private:

@@ -6,7 +6,7 @@
 namespace tgon
 {
 
-std::shared_ptr<Mesh> MakeTriangle(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material)
 {
     // Make VertexBuffer
     V3F_T2F vertices[] =
@@ -27,10 +27,10 @@ std::shared_ptr<Mesh> MakeTriangle(const SharedGraphicsContext& context, const s
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
     // Make Mesh
-    return std::make_shared<Mesh>(context, vertexBuffer, indexBuffer, material);
+    return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
-std::shared_ptr<Mesh> MakeCube(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
 {
     // Make VertexBuffer
     V3F_T2F vertices[] =
@@ -81,10 +81,10 @@ std::shared_ptr<Mesh> MakeCube(const SharedGraphicsContext& context, const std::
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
     // Make Mesh
-    return std::make_shared<Mesh>(context, vertexBuffer, indexBuffer, material);
+    return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
-std::shared_ptr<Mesh> MakeQuad(const SharedGraphicsContext& context, const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeQuad(const std::shared_ptr<Material>& material)
 {
     // Make VertexBuffer
     V3F_T2F vertices[] =
@@ -106,7 +106,7 @@ std::shared_ptr<Mesh> MakeQuad(const SharedGraphicsContext& context, const std::
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
     // Make Mesh
-    return std::make_shared<Mesh>(context, vertexBuffer, indexBuffer, material);
+    return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
 } /* namespace tgon */

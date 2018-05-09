@@ -9,6 +9,7 @@
 #include <initializer_list>
 #include <boost/noncopyable.hpp>
 
+#include "Core/Object/Object.h"
 #include "Core/Platform/Config.h"
 
 #include "GenericGraphicsFwd.h"
@@ -17,8 +18,12 @@ namespace tgon
 {
 
 class TGON_API GenericGraphics :
+    public Object,
     private boost::noncopyable
 {
+public:
+    TGON_RUNTIME_OBJECT(GenericGraphics)
+
 /* @section Public constructor */
 public:
     GenericGraphics() = default;

@@ -100,4 +100,27 @@ const Color4f& TextureMaterial::GetBlendColor() const noexcept
     return m_blendColor;
 }
 
+void MaskTextureMaterial::Use()
+{
+}
+
+void MaskTextureMaterial::Unuse()
+{
+}
+
+bool MaskTextureMaterial::CanBatch(const Material & rhs) const
+{
+    return false;
+}
+
+void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTexture)
+{
+    m_maskTexture = maskTexture;
+}
+
+const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const
+{
+    return m_maskTexture;
+}
+
 } /* namespace tgon */

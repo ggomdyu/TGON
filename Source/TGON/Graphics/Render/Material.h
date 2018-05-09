@@ -31,7 +31,6 @@ public:
     virtual void Use() = 0;
     virtual void Unuse() = 0;
     virtual bool CanBatch(const Material& rhs) const = 0;
-
     const std::shared_ptr<Shader>& GetShader() noexcept;
 
 /* @section Protected variable */
@@ -51,7 +50,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~ColorMaterial() = default;
+    virtual ~ColorMaterial() override = default;
 
 /* @section Public method */
 public:
@@ -76,6 +75,10 @@ public:
 public:
     TextureMaterial();
 
+/* @section Public destructor */
+public:
+    virtual ~TextureMaterial() override = default;
+
 /* @section Public method */
 public:
     virtual void Use();
@@ -90,6 +93,32 @@ public:
 private:
     std::shared_ptr<Texture> m_texture;
     Color4f m_blendColor;
+};
+
+class MaskTextureMaterial :
+    public TextureMaterial
+{
+public:
+    TGON_RUNTIME_OBJECT(MaskTextureMaterial)
+
+/* @section Public constructor */
+public:
+    MaskTextureMaterial() = default;
+
+    /* @section Public destructor */
+public:
+    virtual ~MaskTextureMaterial() override = default;
+
+/* @section Public method */
+public:
+    virtual void Use();
+    virtual void Unuse();
+    virtual bool CanBatch(const Material& rhs) const;
+    void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
+    const std::shared_ptr<Texture>& GetMaskTexture() const;
+
+private:
+    std::shared_ptr<Texture> m_maskTexture;
 };
 
 //class GrayTextureMaterial :

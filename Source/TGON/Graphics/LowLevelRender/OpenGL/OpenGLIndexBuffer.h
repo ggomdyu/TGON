@@ -24,7 +24,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLIndexBuffer();
+    virtual ~OpenGLIndexBuffer() override;
 
 /* @section Public operator */
 public:

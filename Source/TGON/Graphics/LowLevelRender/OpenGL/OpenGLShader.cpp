@@ -44,14 +44,16 @@ OpenGLShader::~OpenGLShader()
 
 OpenGLShader& tgon::OpenGLShader::operator=(OpenGLShader&& rhs)
 {
-    if (&rhs != this)
+    if (&rhs == this)
     {
-        this->Release();
-
-        m_programId = rhs.m_programId;
-        rhs.m_programId = 0;
+        return *this;
     }
 
+    this->Release();
+
+    m_programId = rhs.m_programId;
+    rhs.m_programId = 0;
+    
     return *this;
 }
 

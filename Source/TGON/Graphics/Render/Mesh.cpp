@@ -5,8 +5,7 @@
 namespace tgon
 {
 
-Mesh::Mesh(const SharedGraphicsContext& context, const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material) :
-    GraphicsResource(context),
+Mesh::Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material) :
     m_vertexBuffer(vertexBuffer),
     m_indexBuffer(indexBuffer),
     m_material(material)

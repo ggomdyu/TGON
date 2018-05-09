@@ -18,6 +18,9 @@ namespace tgon
 class OpenGLGraphics :
     public GenericGraphics
 {
+public:
+    TGON_RUNTIME_OBJECT(OpenGLGraphics)
+
 /* @section Public constructor */
 public:
     OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);
@@ -25,7 +28,7 @@ public:
 
 /* @section Public method */
 public:
-    virtual void SetClearColor(const Color4f& color) override;
+    virtual void SetClearColor(const Color4f& color) final override;
     virtual void SetFillMode(FillMode fillMode) final override;
     virtual void SetCullMode(CullMode cullMode) final override;
     virtual void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height) final override;

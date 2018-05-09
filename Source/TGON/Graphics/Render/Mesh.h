@@ -8,18 +8,16 @@
 #include "../LowLevelRender/VertexBuffer.h"
 #include "../LowLevelRender/IndexBuffer.h"
 
-#include "GraphicsResource.h"
 #include "Material.h"
 
 namespace tgon
 {
 
-class Mesh :
-    public GraphicsResource
+class Mesh
 {
 /* @section Public constructor */
 public:
-    explicit Mesh(const SharedGraphicsContext& context, const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material);
+    explicit Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material);
 
 /* @section Public method */
 public:
