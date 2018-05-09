@@ -63,6 +63,12 @@ TextureMaterial::TextureMaterial() :
 {
 }
 
+TextureMaterial::TextureMaterial(const std::shared_ptr<Shader>& shader) :
+    Material(shader),
+    m_blendColor(1.0f, 1.0f, 1.0f, 1.0f)
+{
+}
+
 void TextureMaterial::Use()
 {
     m_shader->Use();
@@ -121,6 +127,25 @@ void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTex
 const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const
 {
     return m_maskTexture;
+}
+
+GrayscaleTextureMaterial::GrayscaleTextureMaterial() :
+    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_grayScaleTextureFrag))
+{
+}
+
+void GrayscaleTextureMaterial::Use()
+{
+    SuperType::Use();
+}
+
+void GrayscaleTextureMaterial::Unuse()
+{
+}
+
+bool GrayscaleTextureMaterial::CanBatch(const Material & rhs) const
+{
+    return false;
 }
 
 } /* namespace tgon */

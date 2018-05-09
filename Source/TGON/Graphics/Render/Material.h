@@ -54,9 +54,9 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Use();
-    virtual void Unuse();
-    virtual bool CanBatch(const Material& rhs) const;
+    virtual void Use() override;
+    virtual void Unuse() override;
+    virtual bool CanBatch(const Material& rhs) const override;
     void SetColor(const Color4f& color);
     const Color4f& GetColor() const noexcept;
 
@@ -75,15 +75,19 @@ public:
 public:
     TextureMaterial();
 
+/* @section Protected constructor */
+protected:
+    TextureMaterial(const std::shared_ptr<Shader>& shader);
+
 /* @section Public destructor */
 public:
     virtual ~TextureMaterial() override = default;
 
 /* @section Public method */
 public:
-    virtual void Use();
-    virtual void Unuse();
-    virtual bool CanBatch(const Material& rhs) const;
+    virtual void Use() override;
+    virtual void Unuse() override;
+    virtual bool CanBatch(const Material& rhs) const override;
     void SetTexture(const std::shared_ptr<Texture>& texture);
     const std::shared_ptr<Texture>& GetTexture() const;
     void SetBlendColor(const Color4f& blendColor);
@@ -93,6 +97,27 @@ public:
 private:
     std::shared_ptr<Texture> m_texture;
     Color4f m_blendColor;
+};
+
+class GrayscaleTextureMaterial :
+    public TextureMaterial
+{
+public:
+    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial)
+
+/* @section Public constructor */
+public:
+    GrayscaleTextureMaterial();
+
+    /* @section Public destructor */
+public:
+    virtual ~GrayscaleTextureMaterial() override = default;
+
+    /* @section Public method */
+public:
+    virtual void Use() override;
+    virtual void Unuse() override;
+    virtual bool CanBatch(const Material& rhs) const override;
 };
 
 class MaskTextureMaterial :
@@ -111,9 +136,9 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Use();
-    virtual void Unuse();
-    virtual bool CanBatch(const Material& rhs) const;
+    virtual void Use() override;
+    virtual void Unuse() override;
+    virtual bool CanBatch(const Material& rhs) const override;
     void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
     const std::shared_ptr<Texture>& GetMaskTexture() const;
 

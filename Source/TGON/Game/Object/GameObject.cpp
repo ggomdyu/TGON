@@ -22,22 +22,22 @@ void GameObject::Update()
     }
 }
 
-void GameObject::AddComponent(std::unique_ptr<Component>&& component)
+void GameObject::AddComponent(const std::shared_ptr<Component>& component)
 {
     m_components.emplace(component->GetRTTI()->GetHashCode(), std::move(component));
 }
 
-void GameObject::AddChild(std::unique_ptr<GameObject>&& child)
+void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
 {
     m_children.push_back(std::move(child));
 }
 
-std::vector<std::unique_ptr<GameObject>>& GameObject::GetChildren() noexcept
+std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() noexcept
 {
     return m_children;
 }
 
-const std::vector<std::unique_ptr<GameObject>>& GameObject::GetChildren() const noexcept
+const std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() const noexcept
 {
     return m_children;
 }

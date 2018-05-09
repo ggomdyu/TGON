@@ -9,6 +9,8 @@
 #include "Core/Audio/AudioPlayer.h"
 #include "Core/Random/Random.h"
 #include "Core/Object/Object.h"
+#include "Game/Object/GameObject.h"
+#include "Game/Object/Component.h"
 #include "Core/Object/IRuntimeObjectUtility.h"
 #include "Core/Platform/Window.h"
 #include "Core/Platform/Generic/GenericWindowType.h"
@@ -545,7 +547,17 @@ inline _CastToType DynamicCast2(_CastFromType ptr)
     return nullptr;
 }
 
-class TGON_API ThousandParty :
+class CC : public Component
+{
+public:
+    TGON_RUNTIME_OBJECT(CC)
+    CC(GameObject* owner) :Component(owner) {};
+    virtual ~CC() override {}
+    virtual void Update() override {}
+};
+
+
+class TGON_API ThousandParty final :
     public GameApplication
 {
 public:
@@ -561,7 +573,7 @@ public:
     ThousandParty() :
         GameApplication(WindowStyle(), VideoMode()),
         m_texture(std::make_shared<Texture>(GetDesktopDirectory() + "/printTestImage.png")),
-        m_quad(MakeQuad(FindModule<GraphicsModule>()->GetGraphics(), std::make_shared<TextureMaterial>())),
+        m_quad(MakeQuad(std::make_shared<GrayscaleTextureMaterial>())),
         m_shader(g_positionColorVert, g_positionColorFrag)
     {
         SrandWELL1024a();
@@ -573,8 +585,12 @@ public:
         audioPlayer.SetPitch(1.0f);
         audioPlayer.Play(1.0f, true);
 
-        std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
+        std::static_pointer_cast<GrayscaleTextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
 
+        GameObject* a = new GameObject;
+        a->AddComponent<CC>(a);
+        auto& ptr = a->GetComponent<CC>();
+        int n = 3;
     }
 
     ~ThousandParty()
