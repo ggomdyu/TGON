@@ -8,8 +8,6 @@
 #include <vector>
 #include <cstdint>
 
-#include "Core/Debug/Log.h"
-
 namespace tgon
 {
 
@@ -23,7 +21,6 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Verifies the importing file is exactly WAV. */
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;

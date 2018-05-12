@@ -12,43 +12,45 @@
 
 namespace tgon
 {
-namespace detail
-{
-
-class HandleGuardTraits :
-    public DefaultRAIITraits<HANDLE>
-{
-public:
-    /* @brief   Releases the managed resource. */
-    void Release(HANDLE& resource)
-    {
-        if (resource != GetNullValue())
-        {
-            CloseHandle(resource);
-            resource = GetNullValue();
-        }
-    }
-
-    /* @brief   Returns special value which indicates resource is null. */
-    HANDLE GetNullValue() const noexcept
-    {
-        return INVALID_HANDLE_VALUE;
-    }
-};
-
-} /* namespace detail */
 
 /**
  * @class   HandleGuard
  * @brief   RAII object that manages the reference count of windows handle automatically.
  */
 class HandleGuard final :
-    public RAII<HANDLE, detail::HandleGuardTraits>,
+    public RAII<HANDLE, HandleGuard>,
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    using RAII::RAII;
+    /* @brief   Adds the reference count of managed resource. */
+    void AddRef();
+
+    /* @brief   Releases the managed resource. */
+    void Release(HANDLE& resource);
+
+/* @section Protected method */
+protected:
+    /* @brief   Returns special value which indicates resource is null. */
+    HANDLE GetNullValue() const noexcept;
 };
+
+inline void HandleGuard::AddRef()
+{
+}
+
+inline void HandleGuard::Release(HANDLE& resource)
+{
+    if (resource != GetNullValue())
+    {
+        CloseHandle(resource);
+        resource = GetNullValue();
+    }
+}
+
+inline HANDLE HandleGuard::GetNullValue() const noexcept
+{
+    return INVALID_HANDLE_VALUE;
+}
 
 } /* namespace tgon */

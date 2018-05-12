@@ -8,35 +8,73 @@ namespace tgon
 {
 
 AudioPlayer::AudioPlayer() :
-    m_alSource(this->CreateALSource())
+    m_alSource(0)
 {
 }
 
 AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
-    m_alSource(this->CreateALSource())
+    AudioPlayer()
 {
     this->SetAudioBuffer(audioBuffer);
 }
 
+AudioPlayer::AudioPlayer(AudioPlayer&& rhs) :
+    m_alSource(rhs.m_alSource),
+    m_audioBuffer(std::move(rhs.m_audioBuffer))
+{
+    rhs.m_alSource = 0;
+}
+
 AudioPlayer::~AudioPlayer()
 {
-    this->Stop();
-    alDeleteSources(1, &m_alSource);
+    this->Release();
+}
+
+AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs)
+{
+    if (&rhs == this)
+    {
+        return *this;
+    }
+
+    this->Release();
+
+    m_alSource = rhs.m_alSource;
+    m_audioBuffer = std::move(rhs.m_audioBuffer);
+
+    rhs.m_alSource = 0;
+    rhs.m_audioBuffer = nullptr;
+    
+    return *this;
 }
 
 void AudioPlayer::SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer)
 {
+    if (m_audioBuffer != nullptr)
+    {
+        this->Stop();
+    }
+    else if (m_alSource == 0)
+    {
+        m_alSource = this->CreateALSource();
+    }
+
     m_audioBuffer = audioBuffer;
 
-    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetALBufferId());
+    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetALBufferID());
+}
+
+void AudioPlayer::Play()
+{
+    this->SetProgressInSeconds(0.0f);
+    alSourcePlay(m_alSource);
 }
 
 void AudioPlayer::Play(float volume, bool isLooping)
 {
     this->SetVolume(volume);
     this->SetLooping(isLooping);
-
-    alSourcePlay(m_alSource);
+    this->Play();
 }
 
 bool AudioPlayer::IsPlaying() const
@@ -89,12 +127,28 @@ void AudioPlayer::SetListenerVelocity(const Vector3& velocity)
 
 float AudioPlayer::GetVolume() const
 {
-    return 0.0f;
+    float volume = 0.0f;
+    alGetSourcef(m_alSource, AL_GAIN, &volume);
+
+    return volume;
 }
 
-float AudioPlayer::GetProgress() const
+void AudioPlayer::SetProgressInSeconds(float seconds)
 {
-    return 0.0f;
+    alSourcef(m_alSource, AL_SEC_OFFSET, seconds);
+}
+
+float AudioPlayer::GetProgressInSeconds() const
+{
+    float seconds = 0;
+    alGetSourcef(m_alSource, AL_SEC_OFFSET, &seconds);
+
+    return seconds;
+}
+
+float AudioPlayer::GetTotalProgressInSeconds() const
+{
+    return static_cast<float>(m_audioBuffer->GetSoundData().size()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
 }
 
 void AudioPlayer::SetPitch(float pitch)
@@ -129,6 +183,15 @@ ALuint AudioPlayer::CreateALSource() const
     alGenSources(1, &alSource);
 
     return alSource;
+}
+
+void AudioPlayer::Release()
+{
+    if (m_alSource != 0)
+    {
+        this->Stop();
+        alDeleteSources(1, &m_alSource);
+    }
 }
 
 } /* namespace tgon */

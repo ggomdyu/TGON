@@ -25,9 +25,6 @@
     <Filter Include="Source\Core\Utility">
       <UniqueIdentifier>{074372cb-1c29-42e0-a004-a75e48a44d89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Debug">
-      <UniqueIdentifier>{e29f5c84-7736-4cf0-be05-ac7c2c54a897}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Drawing">
       <UniqueIdentifier>{ffbfe801-e450-4ed5-9a8b-ecf9e4ecb8f1}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,27 @@
     </Filter>
     <Filter Include="Source\Core\Audio\Importer\Wav">
       <UniqueIdentifier>{49f18b5e-1681-4643-a505-958caca21ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor">
+      <UniqueIdentifier>{7aa049dd-aa38-4fc8-9ccc-9b25d93eb660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor\Generic">
+      <UniqueIdentifier>{db5932f6-9ced-4c27-8638-f54e7474fd30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor\Bmp">
+      <UniqueIdentifier>{6fadbc9e-53f3-4227-8604-c6d38e39ddde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor\Png">
+      <UniqueIdentifier>{d9679adc-a429-4be9-b85a-73e753631cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor\Jpg">
+      <UniqueIdentifier>{0495e670-c02c-4989-b69b-1941c06b5b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Drawing\ImageProcessor\WebP">
+      <UniqueIdentifier>{c96ee40e-7909-4c21-992b-7848e6002501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Debug">
+      <UniqueIdentifier>{e29f5c84-7736-4cf0-be05-ac7c2c54a897}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,26 +282,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageUtility.h">
       <Filter>Source\Core\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\PNGImageProcessor.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Image.h">
       <Filter>Source\Core\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IComparable.h">
       <Filter>Source\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\JPGImageProcessor.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\WebPImageProcessor.h">
-      <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\BMPImageProcessor.h">
-      <Filter>Source\Core\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
       <Filter>Source\Core\Debug</Filter>
@@ -313,7 +316,25 @@
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\Wav\WavAudioImporter.h">
-      <Filter>Source\Core\Audio</Filter>
+      <Filter>Source\Core\Audio\Importer\Wav</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
+      <Filter>Source\Core\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Bmp\BmpImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor\Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Jpg\JpgImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor\Jpg</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Png\PngImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\WebP\WebPImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor\WebP</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Generic\GenericImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor\Generic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

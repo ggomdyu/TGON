@@ -24,7 +24,6 @@
 #include "Core/Platform/ScreenType.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
-#include "Core/String/StringView.h"
 #include "Core/File/Path.h"
 #include "Core/Utility/InstantiateCounter.h"
 #include "Core/Math/Mathematics.h"
@@ -573,31 +572,24 @@ public:
     ThousandParty() :
         GameApplication(WindowStyle(), VideoMode()),
         m_texture(std::make_shared<Texture>(GetDesktopDirectory() + "/printTestImage.png")),
-        m_quad(MakeQuad(std::make_shared<GrayscaleTextureMaterial>())),
+        m_quad(MakeCube(std::make_shared<GrayscaleTextureMaterial>())),
         m_shader(g_positionColorVert, g_positionColorFrag)
     {
-        SrandWELL1024a();
-
         audioPlayer.SetAudioBuffer(audioBuffer);
         audioPlayer.SetListenerPosition({ 0, 0, 0 });
         audioPlayer.SetListenerVelocity({ 0, 0, 0 });
         audioPlayer.SetPosition({ 0, 0, 0 });
         audioPlayer.SetPitch(1.0f);
-        audioPlayer.Play(1.0f, true);
+        audioPlayer.SetVolume(0.2f);
+        audioPlayer.Play();
 
         std::static_pointer_cast<GrayscaleTextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
-
-        GameObject* a = new GameObject;
-        a->AddComponent<CC>(a);
-        auto& ptr = a->GetComponent<CC>();
-        int n = 3;
     }
 
     ~ThousandParty()
     {
     }
 
-    Stopwatch m_stopWatch;
     Shader m_shader;
     Matrix4x4 MVP;
 
@@ -609,12 +601,10 @@ public:
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
-        m_stopWatch.Start();
     }
 
     virtual void OnUpdate() override
     {
-
         SuperType::OnUpdate();
 
         decltype(auto) extent = GetRootWindow()->GetSize();
@@ -626,18 +616,26 @@ public:
         auto V2 = Matrix4x4::LookAtRH({ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
         x -= 0.1f;
+
+        bool a2 = false;
+        if (a2)
+        {
+            audioPlayer.Pause();
+        }
         
+        bool b = false;
+        if (b)
+        {
+            audioPlayer.Resume();
+        }
+
         MVP = M2 * V2 * P2;
 
+        float a = audioPlayer.GetTotalProgressInSeconds();
         audioPlayer.SetPosition({x, 0,0});
 
         auto& mtrl = m_quad->GetMaterial();
-        if (m_stopWatch.GetElapsedSeconds() > 0.5f)
-        {
-            std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial())->SetBlendColor(Color4f(WELL1024a(), WELL1024a(), WELL1024a(), WELL1024a()));
-            m_stopWatch.Reset();
-        }
-
+ 
         this->FindModule<GraphicsModule>()->GetGraphics()->ClearColorDepthBuffer();
 
         mtrl->Use();

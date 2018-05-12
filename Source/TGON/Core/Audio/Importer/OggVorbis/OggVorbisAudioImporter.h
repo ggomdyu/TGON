@@ -37,36 +37,23 @@ public:
 };
 
 template <typename _AllocatorType = std::allocator<uint8_t>>
-class OggVorbisAudioImporter
+class OggVorbisAudioImporter :
+    public GenericAudioImporter<OggVorbisAudioImporter<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    OggVorbisAudioImporter() noexcept;
-    OggVorbisAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes);
+    using GenericAudioImporter::GenericAudioImporter;
 
 /* @section Public method */
 public:
     /* @brief   Verifies the importing file is exactly WAV. */
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool IsValid() const noexcept;
-    std::vector<uint8_t, _AllocatorType>& GetAudioData() noexcept;
-    const std::vector<uint8_t, _AllocatorType>& GetAudioData() const noexcept;
-    int32_t GetBitsPerSample() const noexcept;
-    int32_t GetChannels() const noexcept;
-    int32_t GetSamplingRate() const noexcept;
 
 /* @section Private method */
 private:
     ov_callbacks MakeCustomIOCallback() const noexcept;
     unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, unsigned long bufferSize, unsigned long channels);
-
-/* @section Private variable */
-private:
-    std::vector<uint8_t, _AllocatorType> m_soundData;
-    int32_t m_bitsPerSample;
-    int32_t m_channels;
-    int32_t m_samplingRate;
 };
 
 inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
@@ -140,21 +127,6 @@ inline long OggVorbisFileStream::Tell(void* stream)
 }
 
 template <typename _AllocatorType>
-inline OggVorbisAudioImporter<_AllocatorType>::OggVorbisAudioImporter() noexcept :
-    m_bitsPerSample(0),
-    m_channels(0),
-    m_samplingRate(0)
-{
-}
-
-template <typename _AllocatorType>
-inline OggVorbisAudioImporter<_AllocatorType>::OggVorbisAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
-    OggVorbisAudioImporter()
-{
-    this->Import(srcData, srcDataBytes);
-}
-
-template <typename _AllocatorType>
 inline bool OggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
@@ -185,16 +157,10 @@ inline bool OggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* srcDat
     m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
 
     int32_t bufferSize = static_cast<int32_t>(ov_pcm_total(&oggVorbisFile, -1)) * 2 * static_cast<int64_t>(m_channels);
-    m_soundData.resize(bufferSize);
-    DecodeOggVorbis(&oggVorbisFile, &m_soundData[0], bufferSize, vorbisInfo->channels);
+    m_audioData.resize(bufferSize);
+    DecodeOggVorbis(&oggVorbisFile, &m_audioData[0], bufferSize, vorbisInfo->channels);
     
     return true;
-}
-
-template <typename _AllocatorType>
-inline bool OggVorbisAudioImporter<_AllocatorType>::IsValid() const noexcept
-{
-    return m_soundData.size() > 0;
 }
 
 template <typename _AllocatorType>
@@ -206,36 +172,6 @@ inline bool OggVorbisAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* 
     }
 
     return true;
-}
-
-template <typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetAudioData() noexcept
-{
-    return m_soundData;
-}
-
-template <typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& OggVorbisAudioImporter<_AllocatorType>::GetAudioData() const noexcept
-{
-    return m_soundData;
-}
-
-template <typename _AllocatorType>
-inline int32_t OggVorbisAudioImporter<_AllocatorType>::GetBitsPerSample() const noexcept
-{
-    return m_bitsPerSample;
-}
-
-template <typename _AllocatorType>
-inline int32_t OggVorbisAudioImporter<_AllocatorType>::GetChannels() const noexcept
-{
-    return m_channels;
-}
-
-template <typename _AllocatorType>
-inline int32_t OggVorbisAudioImporter<_AllocatorType>::GetSamplingRate() const noexcept
-{
-    return m_samplingRate;
 }
 
 template <typename _AllocatorType>

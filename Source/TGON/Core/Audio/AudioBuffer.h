@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class AudioBuffer
+class AudioBuffer final
 {
 /* @section Public constructor */
 public:
@@ -85,7 +85,7 @@ public:
     bool IsValid() const noexcept;
 
     /* @brief   Gets the raw data of sound. */
-    const std::shared_ptr<std::vector<uint8_t>>& GetSoundData() const noexcept;
+    const std::vector<uint8_t>& GetSoundData() const noexcept;
 
     /* @brief   Gets bits per sample. */
     int32_t GetBitsPerSample() const noexcept;
@@ -99,7 +99,7 @@ public:
     ALenum GetALFormat() const noexcept;
 
     /* @brief   Gets the id of ALBuffer that stores sound data. */
-    ALuint GetALBufferId() const noexcept;
+    ALuint GetALBufferID() const noexcept;
     
     /* @brief   Gets the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
@@ -107,16 +107,17 @@ public:
 /* @section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
+    bool RefreshALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
 
 /* @section Private variable */
 private:
     std::string m_filePath;
-    std::shared_ptr<std::vector<uint8_t>> m_audioData;
+    std::vector<uint8_t> m_audioData;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;
     ALenum m_alFormat;
-    ALuint m_alBufferId;
+    ALuint m_alBufferID;
 };
 
 } /* namespace tgon */

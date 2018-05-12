@@ -16,7 +16,7 @@ AudioBuffer::AudioBuffer() :
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0),
-    m_alBufferId(0),
+    m_alBufferID(0),
     m_alFormat(0)
 {
     TGON_STATIC_INVOKE([]()
@@ -57,7 +57,7 @@ AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, st
 
 AudioBuffer::~AudioBuffer()
 {
-    alDeleteBuffers(1, &m_alBufferId);
+    alDeleteBuffers(1, &m_alBufferID);
 }
 
 bool AudioBuffer::Import(const std::string& filePath)
@@ -97,8 +97,7 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
         return false;
     }
 
-    m_alBufferId = CreateALBuffer(*m_audioData, m_alFormat, m_samplingRate);
-    if (m_alBufferId == 0)
+    if (this->RefreshALBuffer(m_audioData, m_alFormat, m_samplingRate) == false)
     {
         return false;
     }
@@ -123,7 +122,7 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
 
 bool AudioBuffer::IsValid() const noexcept
 {
-    return m_audioData->size() > 0;
+    return m_audioData.size() > 0;
 }
 
 const std::string& AudioBuffer::GetFilePath() const noexcept
@@ -131,7 +130,7 @@ const std::string& AudioBuffer::GetFilePath() const noexcept
     return m_filePath;
 }
 
-const std::shared_ptr<std::vector<uint8_t>>& AudioBuffer::GetSoundData() const noexcept
+const std::vector<uint8_t>& AudioBuffer::GetSoundData() const noexcept
 {
     return m_audioData;
 }
@@ -156,9 +155,9 @@ ALenum AudioBuffer::GetALFormat() const noexcept
     return m_alFormat;
 }
 
-ALuint AudioBuffer::GetALBufferId() const noexcept
+ALuint AudioBuffer::GetALBufferID() const noexcept
 {
-    return m_alBufferId;
+    return m_alBufferID;
 }
 
 bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
@@ -170,7 +169,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
             WavAudioImporter<> importer(srcData, srcDataBytes);
             if (importer.IsValid())
             {
-                m_audioData = std::make_shared<decltype(m_audioData)::element_type>(std::move(importer.GetAudioData()));
+                m_audioData = std::move(importer.GetAudioData());
                 m_bitsPerSample = importer.GetBitsPerSample();
                 m_channels = importer.GetChannels();
                 m_samplingRate = importer.GetSamplingRate();
@@ -185,7 +184,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
             OggVorbisAudioImporter<> importer(srcData, srcDataBytes);
             if (importer.IsValid())
             {
-                m_audioData = std::make_shared<decltype(m_audioData)::element_type>(std::move(importer.GetAudioData()));
+                m_audioData = std::move(importer.GetAudioData());
                 m_bitsPerSample = importer.GetBitsPerSample();
                 m_channels = importer.GetChannels();
                 m_samplingRate = importer.GetSamplingRate();
@@ -197,6 +196,26 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
     }
 
     return false;
+}
+
+bool AudioBuffer::RefreshALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
+{
+    if (m_alBufferID == 0)
+    {
+        alGenBuffers(1, &m_alBufferID);
+        if (alGetError() != AL_NO_ERROR)
+        {
+            return false;
+        }
+    }
+
+    alBufferData(m_alBufferID, alFormat, audioData.data(), audioData.size(), samplingRate);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        return false;
+    }
+
+    return true;
 }
 
 } /* namespace tgon */

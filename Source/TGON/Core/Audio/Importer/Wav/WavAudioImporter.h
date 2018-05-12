@@ -27,8 +27,9 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Verifies the importing file is exactly WAV. */
+    /* @brief   Verifies the importing file is exactly Wav. */
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 

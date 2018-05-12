@@ -9,10 +9,10 @@
 
 #include "Image.h"
 #include "ImageUtility.h"
-#include "PNGImageProcessor.h"
-#include "JPGImageProcessor.h"
-#include "BMPImageProcessor.h"
-#include "WebPImageProcessor.h"
+#include "ImageProcessor/Png/PngImageProcessor.h"
+#include "ImageProcessor/Jpg/JpgImageProcessor.h"
+#include "ImageProcessor/Bmp/BmpImageProcessor.h"
+#include "ImageProcessor/WebP/WebPImageProcessor.h"
 
 namespace tgon
 {
@@ -126,7 +126,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
     {
     case ImageFormat::Png:
         {
-            PNGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            PngImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -142,7 +142,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
 
     case ImageFormat::Jpg:
         {
-            JPGImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            JpgImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -174,7 +174,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
 
     case ImageFormat::Bmp:
         {
-            BMPImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            BmpImageProcessor<> imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -196,11 +196,11 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
 bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     ImageFormat imageFormat = ImageFormat::Unknown;
-    if (PNGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    if (PngImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Png;
     }
-    else if (JPGImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    else if (JpgImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Jpg;
     }
@@ -208,7 +208,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
     {
         imageFormat = ImageFormat::WebP;
     }
-    else if (BMPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    else if (BmpImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Bmp;
     }

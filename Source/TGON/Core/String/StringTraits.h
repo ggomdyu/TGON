@@ -27,7 +27,7 @@ protected:
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      */
     StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
@@ -46,7 +46,7 @@ protected:
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      * @param [in] ch                   The character to assign to the string.
      * @param [in] chCount              The count of ch to assign to the string.
      */
@@ -71,7 +71,7 @@ public:
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      */
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
@@ -90,7 +90,7 @@ public:
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      * @param [in] ch                   The character to assign to destStr.
      * @param [in] chCount              The count of ch to assign to destStr.
      */
@@ -114,7 +114,7 @@ public:
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      */
     static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
@@ -135,7 +135,7 @@ public:
      * @brief                           Appends the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      * @param [in] ch                   The character to append to destStr.
      * @param [in] chCount              The count of ch to append to destStr.
      */
@@ -176,24 +176,80 @@ public:
 
     static int32_t Compare(const _CharType* srcLhsStr, std::size_t srcLhsStrLen, const _CharType* srcRhsStr, std::size_t srcRhsStrLen);
 
+    /**
+     * @brief                           Returns a reference to the character specified by index.
+     * @return                          The reference to the character.
+     * @param [in] srcStr               The source or string to index.
+     * @param [in] srcStrLen            The length of srcStr.
+     * @param [in] index                The index which indicates position of character within string.
+     */
     static _CharType& At(_CharType* srcStr, std::size_t srcStrLen, std::size_t index);
     
+    /**
+     * @brief                           Returns a reference to the character specified by index.
+     * @return                          The reference to the character.
+     * @param [in] srcStr               The source or string to index.
+     * @param [in] srcStrLen            The length of srcStr.
+     * @param [in] index                The index which indicates position of character within string.
+     */
     static const _CharType& At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index);
 
     /**
-     * @brief               Returns the length of srcStr.
-     * @param [in] srcStr   The string to get length.
+     * @brief                           Returns the length of srcStr.
+     * @return                          The length of srcStr.
+     * @param [in] srcStr               The source of string.
      */
     static std::size_t Length(const _CharType* srcStr);
 
+    /**
+     * @brief                           Swaps the contents of strings.
+     * @param [in] srcStr               The string to be swapped with destStr.
+     * @param [in] srcStrLen            The length of srcStr.
+     * @param [in] srcStrBufferSize     The buffer length of srcStr.
+     * @param [in] destStr              The string to be swapped with srcStr.
+     * @param [in] destStrLen           The length of destStr.
+     * @param [in] destStrBufferSize    The buffer length of destStr.
+     */
     static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
+    /**
+     * @brief                           Converts the content of string to lowercase.
+     * @param [in] srcStr               The source or string to convert.
+     * @param [in] srcStrLen            The length of srcStr
+     * @param [in] destStr              The destination of convert.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
+     */
     static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
+
+    /**
+     * @brief                           Converts the content of string to lowercase.
+     * @param [in] srcStr               The source or string to convert.
+     * @param [in] destStr              The destination of convert.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
+     */
     static void ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
+    /**
+     * @brief                           Converts the content of string to uppercase.
+     * @param [in] srcStr               The source or string to convert.
+     * @param [in] srcStrLen            The length of srcStr
+     * @param [in] destStr              The destination of convert.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
+     */
     static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
+
+    /**
+     * @brief                           Converts the content of string to uppercase.
+     * @param [in] srcStr               The source or string to convert.
+     * @param [in] destStr              The destination of convert.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
+     */
     static void ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
+    /**
+     * @brief                           Checks the string is null or empty.
+     * @return                          True if the string is null or empty, false otherwise.
+     */
     static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
 
 /* @section Public variable */
@@ -220,7 +276,7 @@ inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t des
 template <typename _CharType>
 inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed!");
 
     memcpy(destStr, srcStr, sizeof(_CharType) * (srcStrLen + 1));
 
@@ -230,7 +286,7 @@ inline void StringTraits<_CharType>::Assign(const _CharType* srcStr, std::size_t
 template <typename _CharType>
 inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
-    assert(destStrBufferLen > chCount && "String buffer overflowed.");
+    assert(destStrBufferLen > chCount && "String buffer overflowed!");
 
     std::size_t i = 0;
     while (i < chCount)
@@ -244,7 +300,7 @@ inline void StringTraits<_CharType>::Assign(_CharType* destStr, std::size_t dest
 template <typename _CharType>
 inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferLen > srcStrLen + destStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen + destStrLen && "String buffer overflowed!");
 
     memcpy(&destStr[destStrLen], srcStr, sizeof(_CharType) * (srcStrLen + 1));
 }
@@ -252,7 +308,7 @@ inline void StringTraits<_CharType>::Append(const _CharType* srcStr, std::size_t
 template <typename _CharType>
 inline void StringTraits<_CharType>::Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
-    assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed!");
 
     chCount += destStrLen;
     while (destStrLen < chCount)
@@ -311,7 +367,7 @@ inline int32_t StringTraits<_CharType>::Compare(const _CharType* srcLhsStr, std:
 template <typename _CharType>
 inline _CharType& StringTraits<_CharType>::At(_CharType* srcStr, std::size_t srcStrLen, std::size_t index)
 {
-    assert(index <= srcStrLen && "String index out of range.");
+    assert(index <= srcStrLen && "String index out of range!");
 
     return srcStr[index];
 }
@@ -319,7 +375,7 @@ inline _CharType& StringTraits<_CharType>::At(_CharType* srcStr, std::size_t src
 template <typename _CharType>
 inline const _CharType& StringTraits<_CharType>::At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index)
 {
-    assert(index <= srcStrLen && "String index out of range.");
+    assert(index <= srcStrLen && "String index out of range!");
 
     return srcStr[index];
 }
@@ -339,7 +395,7 @@ inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrL
 template <typename _CharType>
 inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed!");
 
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }
@@ -353,7 +409,7 @@ inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType*
 template <typename _CharType>
 inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    assert(destStrBufferLen > srcStrLen && "String buffer overflowed.");
+    assert(destStrBufferLen > srcStrLen && "String buffer overflowed!");
 
     std::transform(srcStr, srcStr + srcStrLen + 1, destStr, ::tolower);
 }

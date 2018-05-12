@@ -99,22 +99,4 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
-inline ALuint CreateALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
-{
-    ALuint alBuffer = 0;
-    alGenBuffers(1, &alBuffer);
-    if (alGetError() != AL_NO_ERROR)
-    {
-        return 0;
-    }
-
-    alBufferData(alBuffer, alFormat, audioData.data(), audioData.size(), samplingRate);
-    if (alGetError() != AL_NO_ERROR)
-    {
-        return 0;
-    }
-
-    return alBuffer;
-}
-
 } /* namespace tgon */  
