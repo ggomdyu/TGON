@@ -107,7 +107,7 @@ public:
 /* @section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
-    bool RefreshALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
+    bool InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
 
 /* @section Private variable */
 private:

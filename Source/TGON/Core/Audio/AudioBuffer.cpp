@@ -97,7 +97,7 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
         return false;
     }
 
-    if (this->RefreshALBuffer(m_audioData, m_alFormat, m_samplingRate) == false)
+    if (this->InitializeALBuffer(m_audioData, m_alFormat, m_samplingRate) == false)
     {
         return false;
     }
@@ -202,7 +202,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
     return false;
 }
 
-bool AudioBuffer::RefreshALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
+bool AudioBuffer::InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
 {
     if (m_alBufferID == 0)
     {
