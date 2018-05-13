@@ -183,12 +183,29 @@ void WindowsWindow::Close()
 
 void WindowsWindow::SetPosition(int32_t x, int32_t y)
 {
-    ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE);
+    ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void WindowsWindow::SetSize(int32_t width, int32_t height)
 {
-    ::SetWindowPos(m_wndHandle, nullptr, 0, 0, width, height, SWP_NOMOVE);
+    ::RECT rt{0, 0, width, height};
+
+    ::DWORD normalStyle = GetWindowLong(m_wndHandle, GWL_STYLE);
+    ::DWORD extendedStyle = GetWindowLong(m_wndHandle, GWL_EXSTYLE);
+
+    ::AdjustWindowRectEx(&rt, normalStyle, ::GetMenu(m_wndHandle) != nullptr, extendedStyle);
+
+    if (normalStyle & WS_VSCROLL)
+    {
+        rt.right += GetSystemMetrics(SM_CXVSCROLL);
+    }
+
+    if (normalStyle & WS_HSCROLL)
+    {
+        rt.bottom += GetSystemMetrics(SM_CYVSCROLL);
+    }
+
+    ::SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
 void WindowsWindow::SetTitle(const char* captionTitle)
