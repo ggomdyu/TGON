@@ -29,8 +29,6 @@ public:
     /* @brief   Releases the managed resource. */
     void Release(HANDLE& resource);
 
-/* @section Protected method */
-protected:
     /* @brief   Returns special value which indicates resource is null. */
     HANDLE GetNullValue() const noexcept;
 };

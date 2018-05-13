@@ -195,7 +195,7 @@ inline void RAII<_ResourceType, _DerivedType>::Reset(_ResourceType&& resource)
 template<typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::Release()
 {
-    reinterpret_cast<_DerivedType*>(this)->Release();
+    reinterpret_cast<_DerivedType*>(this)->Release(m_resource);
 }
 
 template<typename _ResourceType, typename _DerivedType>
@@ -213,7 +213,7 @@ inline _ResourceType& RAII<_ResourceType, _DerivedType>::Get() noexcept
 template<typename _ResourceType, typename _DerivedType>
 inline _ResourceType RAII<_ResourceType, _DerivedType>::GetNullValue() const noexcept
 {
-    reinterpret_cast<_DerivedType*>(this)->GetNullValue();
+    return reinterpret_cast<const _DerivedType*>(this)->GetNullValue();
 }
 
 } /* namespace tgon */
