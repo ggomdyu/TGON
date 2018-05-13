@@ -116,6 +116,10 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
     {
         audioFormat = AudioFormat::OggVorbis;
     }
+    else
+    {
+        return false;
+    }
 
     return this->Import(filePath, srcData, srcDataBytes, audioFormat);
 }

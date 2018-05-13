@@ -212,6 +212,10 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
     {
         imageFormat = ImageFormat::Bmp;
     }
+    else
+    {
+        return false;
+    }
 
     return this->Import(filePath, srcData, srcDataBytes, imageFormat);
 }
