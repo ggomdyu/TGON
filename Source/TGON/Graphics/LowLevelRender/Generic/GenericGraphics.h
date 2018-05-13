@@ -6,13 +6,13 @@
  */
 
 #pragma once
-#include <initializer_list>
 #include <boost/noncopyable.hpp>
 
 #include "Core/Object/Object.h"
-#include "Core/Platform/Config.h"
+#include "Core/Math/Color.h"
+#include "Core/Math/Rect.h"
 
-#include "GenericGraphicsFwd.h"
+#include "GenericGraphicsType.h"
 
 namespace tgon
 {

@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <vector>
-#include <cstdint>
 #include <al.h>
 
 namespace tgon

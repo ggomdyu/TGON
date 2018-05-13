@@ -39,8 +39,11 @@ OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr
 
 OpenGLGraphics::~OpenGLGraphics()
 {
-    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
-    TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
+    if (m_vertexArrayHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+        TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
+    }
 }
 
 void OpenGLGraphics::SetClearColor(const Color4f& color)

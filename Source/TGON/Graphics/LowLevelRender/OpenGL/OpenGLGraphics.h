@@ -5,8 +5,8 @@
  */
 
 #pragma once
-#include <GL/glew.h>
 #include <memory>
+#include <GL/glew.h>
 
 #include "../Generic/GenericGraphics.h"
 
@@ -24,6 +24,9 @@ public:
 /* @section Public constructor */
 public:
     OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);
+    
+/* @section Public destructor */
+public:
     virtual ~OpenGLGraphics() override;
 
 /* @section Public method */

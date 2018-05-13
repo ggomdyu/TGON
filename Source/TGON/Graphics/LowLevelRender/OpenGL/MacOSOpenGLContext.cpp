@@ -89,7 +89,31 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<c
     glewInit();
 }
 
+OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
+    pixelFormat(rhs.pixelFormat),
+    context(rhs.context)
+{
+    rhs.pixelFormat = nil;
+    rhs.context = nil;
+}
+
 OpenGLContext::~OpenGLContext() = default;
+
+OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
+{
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
+    pixelFormat = rhs.pixelFormat;
+    context = rhs.context;
+
+    rhs.pixelFormat = nil;
+    rhs.context = nil;
+
+    return *this;
+}
 
 void OpenGLContext::MakeCurrent()
 {

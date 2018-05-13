@@ -152,18 +152,53 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
     }
 }
 
+OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
+    wndHandle(rhs.wndHandle),
+    context(rhs.context),
+    dcHandle(rhs.dcHandle),
+    pixelFormat(rhs.pixelFormat)
+{
+    rhs.wndHandle = nullptr;
+    rhs.context = nullptr;
+    rhs.dcHandle = nullptr;
+    rhs.pixelFormat = 0;
+}
+
 OpenGLContext::~OpenGLContext()
 {
-    assert(context != nullptr);
-    assert(dcHandle != nullptr);
+    if (context != nullptr)
+    {
+        ::wglMakeCurrent(nullptr, nullptr);
+        ::wglDeleteContext(context);
+    }
+        
+    if (wndHandle != nullptr && dcHandle != nullptr)
+    {
+        ::ReleaseDC(wndHandle, dcHandle);
 
-    ::wglMakeCurrent(nullptr, nullptr);
-    ::wglDeleteContext(context);
+        context = nullptr;
+        dcHandle = nullptr;
+    }
+}
+
+OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
+{
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
+    wndHandle = rhs.wndHandle;
+    context = rhs.context;
+    dcHandle = rhs.dcHandle;
+    pixelFormat = rhs.pixelFormat;
     
-    ::ReleaseDC(wndHandle, dcHandle);
+    rhs.wndHandle = nullptr;
+    rhs.context = nullptr;
+    rhs.dcHandle = nullptr;
+    rhs.pixelFormat = 0;
 
-    context = nullptr;
-    dcHandle = nullptr;
+    return *this;
 }
 
 void OpenGLContext::MakeCurrent()

@@ -7,10 +7,7 @@
  */
 
 #pragma once
-#include <vector>
-#include <cstdint>
-
-#include "Core/Audio/Importer/Generic/GenericAudioImporter.h"
+#include "../Generic/GenericAudioImporter.h"
 
 #include "RiffReader.h"
 

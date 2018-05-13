@@ -7,7 +7,6 @@
 
 #pragma once
 #include "Core/Math/Vector3.h"
-#include "Core/Object/Delegate.h"
 
 #include "AudioBuffer.h"
 

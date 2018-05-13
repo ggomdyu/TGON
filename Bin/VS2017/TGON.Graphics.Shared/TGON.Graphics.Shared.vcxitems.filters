@@ -84,9 +84,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericVertexBufferType.h">
       <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericGraphicsFwd.h">
-      <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericGraphicsType.h">
       <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
     </ClInclude>

@@ -5,13 +5,12 @@
  */
 
 #pragma once
-#include <vector>
-#include <cstdint>
-
 #include <vorbis/vorbisfile.h>
 #include <ogg/ogg.h>
 
 #include "Core/Debug/Log.h"
+
+#include "../Generic/GenericAudioImporter.h"
 
 namespace tgon
 {

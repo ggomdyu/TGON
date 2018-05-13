@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <memory>
 
 #include "OpenGLContextFwd.h"
@@ -12,12 +13,21 @@
 namespace tgon
 {
 
-struct OpenGLContext
+struct OpenGLContext final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
     OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);
+    OpenGLContext(OpenGLContext&& rhs);
+
+/* @section Public destructor */
+public:
     ~OpenGLContext();
+
+/* @section Public operator */
+public:
+    OpenGLContext& operator=(OpenGLContext&& rhs);
 
 /* @section Public method */
 public:

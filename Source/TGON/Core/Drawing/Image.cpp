@@ -1,11 +1,6 @@
 #include "PrecompiledHeader.pch"
 
-#include <cstdint>
-#include <png.h>
-
 #include "Core/Debug/Log.h"
-#include "Core/Hash/Hash.h"
-#include "Core/String/StringTraits.h"
 
 #include "Image.h"
 #include "ImageUtility.h"

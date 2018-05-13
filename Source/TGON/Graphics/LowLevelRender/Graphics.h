@@ -24,6 +24,10 @@ class Graphics :
 public:
     TGON_RUNTIME_OBJECT(Graphics)
 
+/* @section Public constructor */
+public:
+    using SuperType::SuperType;
+
 /* @section Public method */
 public:
     static const std::shared_ptr<Graphics>& GetInstance();

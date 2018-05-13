@@ -1,39 +1,41 @@
 /**
- * @filename    IModule.h
+ * @filename    TimeSystem.h
  * @author      ggomdyu
  * @since       07/24/2016
  */
 
 #pragma once
-#include "IModule.h"
+#include "ISystem.h"
 
 namespace tgon
 {
 
-class TGON_API TimeModule :
-	public IModule
+class TGON_API TimeSystem :
+	public ISystem
 {
 public:
-    TGON_RUNTIME_OBJECT(TimeModule)
+    TGON_RUNTIME_OBJECT(TimeSystem)
 
 /* @section Public constructor */
 public:
-    TimeModule();
-    virtual ~TimeModule() override = default;
+    TimeSystem();
+
+/* @section Public destructor */
+public:
+    virtual ~TimeSystem() override = default;
 
 /* @section Public method */
 public:
     virtual void Update() override;
-
     void SetTimeScale(float timeScale);
     float GetTimeScale() const;
-    float GetDeltaTime() const;
+    float GetTickTime() const;
 
 /* @section Private variable */
 private:
     uint64_t m_prevTime;
     float m_timeScale;
-    float m_deltaTime;
+    float m_tickTime;
 };
 
 } /* namespace tgon */

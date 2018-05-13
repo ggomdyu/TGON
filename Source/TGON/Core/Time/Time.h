@@ -8,7 +8,7 @@
 #pragma once
 #include <cstdint>
 
-#include "Config.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
