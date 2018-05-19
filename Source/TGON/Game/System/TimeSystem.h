@@ -13,9 +13,6 @@ namespace tgon
 class TGON_API TimeSystem :
 	public ISystem
 {
-public:
-    TGON_RUNTIME_OBJECT(TimeSystem)
-
 /* @section Public constructor */
 public:
     TimeSystem();

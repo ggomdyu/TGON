@@ -15,9 +15,6 @@ namespace tgon
 class TGON_API GraphicsSystem final :
 	public ISystem
 {
-public:
-    TGON_RUNTIME_OBJECT(GraphicsSystem)
-
 /* @section Public constructor */
 public:
     GraphicsSystem(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);

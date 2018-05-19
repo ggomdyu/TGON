@@ -10,7 +10,7 @@
 namespace tgon 
 {
 
-enum class MessageBoxIconType
+enum class MessageBoxIcon
 {
     Informational = 0,
     Warning = 1,

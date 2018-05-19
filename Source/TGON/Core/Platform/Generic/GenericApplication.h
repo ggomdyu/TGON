@@ -39,9 +39,9 @@ public:
     virtual void MessageLoop() = 0;
     virtual void Terminate() = 0;
     virtual void ShowMessageBox(const char* message) const;
-    virtual void ShowMessageBox(const char* message, MessageBoxIconType iconType) const;
+    virtual void ShowMessageBox(const char* message, MessageBoxIcon iconType) const;
     virtual void ShowMessageBox(const char* title, const char* message) const;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const = 0;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const = 0;
 
     const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
 

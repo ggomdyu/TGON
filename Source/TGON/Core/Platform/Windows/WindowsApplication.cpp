@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <Windows.h>
 
@@ -41,7 +41,7 @@ void WindowsApplication::MessageLoop()
     this->OnWillTerminate();
 }
 
-void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType messageBoxType) const
+void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxType) const
 {
     wchar_t utf16Message[1024];
     UTF8::Convert<UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);

@@ -31,7 +31,7 @@ public:
 public:
     virtual void MessageLoop() final override;
     virtual void Terminate() final override;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const final override;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const final override;
 
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 

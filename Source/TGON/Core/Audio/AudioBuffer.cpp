@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <alc.h>
 
@@ -16,7 +16,7 @@ AudioBuffer::AudioBuffer() :
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0),
-    m_alBufferID(0),
+    m_alBufferId(0),
     m_alFormat(0)
 {
     TGON_STATIC_INVOKE([]()
@@ -40,27 +40,27 @@ AudioBuffer::AudioBuffer() :
 AudioBuffer::AudioBuffer(const std::string& filePath) :
     AudioBuffer()
 {
-    this->Import(filePath);
+    this->Initialize(filePath);
 }
 
 AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat) :
     AudioBuffer()
 {
-    this->Import(filePath, srcData, srcDataBytes, audioFormat);
+    this->Initialize(filePath, srcData, srcDataBytes, audioFormat);
 }
 
 AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
     AudioBuffer()
 {
-    this->Import(filePath, srcData, srcDataBytes);
+    this->Initialize(filePath, srcData, srcDataBytes);
 }
 
 AudioBuffer::~AudioBuffer()
 {
-    alDeleteBuffers(1, &m_alBufferID);
+    alDeleteBuffers(1, &m_alBufferId);
 }
 
-bool AudioBuffer::Import(const std::string& filePath)
+bool AudioBuffer::Initialize(const std::string& filePath)
 {
     FILE* file = fopen(filePath.c_str(), "rb");
     if (file == nullptr)
@@ -81,10 +81,10 @@ bool AudioBuffer::Import(const std::string& filePath)
     fclose(file);
 
     std::size_t extensionOffset = filePath.rfind('.') + 1;
-    return this->Import(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+    return this->Initialize(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
 }
 
-bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
 {
     if (this->ParseData(srcData, srcDataBytes, audioFormat) == false)
     {
@@ -105,7 +105,7 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
     return true;
 }
 
-bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
+bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioImporter<>::VerifyFormat(srcData, srcDataBytes))
@@ -121,7 +121,7 @@ bool AudioBuffer::Import(const std::string& filePath, const uint8_t* srcData, st
         return false;
     }
 
-    return this->Import(filePath, srcData, srcDataBytes, audioFormat);
+    return this->Initialize(filePath, srcData, srcDataBytes, audioFormat);
 }
 
 bool AudioBuffer::IsValid() const noexcept
@@ -159,9 +159,9 @@ ALenum AudioBuffer::GetALFormat() const noexcept
     return m_alFormat;
 }
 
-ALuint AudioBuffer::GetALBufferID() const noexcept
+ALuint AudioBuffer::GetALBufferId() const noexcept
 {
-    return m_alBufferID;
+    return m_alBufferId;
 }
 
 bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
@@ -204,16 +204,16 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
 
 bool AudioBuffer::InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
 {
-    if (m_alBufferID == 0)
+    if (m_alBufferId == 0)
     {
-        alGenBuffers(1, &m_alBufferID);
+        alGenBuffers(1, &m_alBufferId);
         if (alGetError() != AL_NO_ERROR)
         {
             return false;
         }
     }
 
-    alBufferData(m_alBufferID, alFormat, audioData.data(), audioData.size(), samplingRate);
+    alBufferData(m_alBufferId, alFormat, audioData.data(), audioData.size(), samplingRate);
     if (alGetError() != AL_NO_ERROR)
     {
         return false;

@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <alc.h>
 
@@ -15,7 +15,7 @@ AudioPlayer::AudioPlayer() :
 AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
     AudioPlayer()
 {
-    this->SetAudioBuffer(audioBuffer);
+    this->Initialize(audioBuffer);
 }
 
 AudioPlayer::AudioPlayer(AudioPlayer&& rhs) :
@@ -48,7 +48,7 @@ AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs)
     return *this;
 }
 
-void AudioPlayer::SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer)
+void AudioPlayer::Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer)
 {
     if (m_audioBuffer != nullptr)
     {
@@ -61,7 +61,7 @@ void AudioPlayer::SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer
 
     m_audioBuffer = audioBuffer;
 
-    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetALBufferID());
+    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetALBufferId());
 }
 
 void AudioPlayer::Play()

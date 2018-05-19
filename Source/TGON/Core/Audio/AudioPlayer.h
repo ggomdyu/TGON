@@ -33,7 +33,7 @@ public:
 
 /* @section Public method */
 public:
-    void SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer);
+    void Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer);
     void Play();
     void Play(float volume, bool isLooping);
     bool IsPlaying() const;

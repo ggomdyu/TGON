@@ -8,17 +8,8 @@
 #include <string>
 #include <cstdint>
 
-#include "EncodingFwd.h"
-
 namespace tgon
 {
-
-template <typename _EncodingType>
-constexpr bool IsANSIEncoding = std::is_base_of<EUCEncoding<_EncodingType>, _EncodingType>::value;
-
-template <typename _EncodingType>
-constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
-
 
 template <typename _DerivedEncodingType>
 class Encoding
@@ -136,6 +127,13 @@ public:
     static constexpr int32_t GetMinCharSize() noexcept;
     static constexpr int32_t GetMaxCharSize() noexcept;
 };
+
+template <typename _EncodingType>
+constexpr bool IsANSIEncoding = std::is_base_of<ANSIEncoding<_EncodingType>, _EncodingType>::value;
+
+template <typename _EncodingType>
+constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
+
 
 } /* namespace tgon */
 
