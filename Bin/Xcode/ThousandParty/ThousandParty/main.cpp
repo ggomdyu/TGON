@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #define TGON_ENABLE_LOG_ON_RELEASE 1
 #define TGON_USING_OPENGL 1

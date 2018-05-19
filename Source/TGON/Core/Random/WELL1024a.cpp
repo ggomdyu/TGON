@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <cstdlib>
 #include <ctime>

@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #if TGON_USING_OPENGL
 #   include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"

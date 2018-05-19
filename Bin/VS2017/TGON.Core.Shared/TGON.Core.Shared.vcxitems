@@ -110,9 +110,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TypeTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\ComPtr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Windows\HandleGuard.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch">
-      <FileType>Document</FileType>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.inl" />

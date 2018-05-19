@@ -167,7 +167,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\Random.h">
       <Filter>Random</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.pch" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Color.h">
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
@@ -374,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericInputManager.h">
       <Filter>Source\Core\Hardware\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

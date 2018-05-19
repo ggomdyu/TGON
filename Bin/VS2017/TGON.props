@@ -14,6 +14,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\Source\TGON;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <PreprocessorDefinitions>GLEW_STATIC;TGON_USING_OPENGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libpng.lib;zlibstatic.lib;OpenAL32.lib;EFX-Util.lib;libvorbis.lib;libogg.lib;libvorbisfile.lib;OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>

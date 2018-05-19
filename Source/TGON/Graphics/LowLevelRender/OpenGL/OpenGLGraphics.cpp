@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <cassert>
 #include <GL/glew.h>
