@@ -66,7 +66,7 @@ public:
      * @brief                   Reads a image data from the path specified by filePath.
      * @param [in] filePath     The file path of image
      */
-    bool Import(const std::string& filePath);
+    bool Initialize(const std::string& filePath);
 
     /**
      * @brief                   Reads a image file data from memory.
@@ -75,7 +75,7 @@ public:
      * @param [in] srcDataBytes The bytes of image data
      * @param [in] imageFormat  The format of image
      */
-    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
+    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
     
     /**
      * @brief                   Reads a image file data from memory.
@@ -83,7 +83,7 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
     
     /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;

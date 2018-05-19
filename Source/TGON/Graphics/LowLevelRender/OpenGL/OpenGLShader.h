@@ -77,7 +77,7 @@ private:
 
 /* @section Private variable */
 public:
-    GLuint m_programID;
+    GLuint m_programId;
 };
 
 class Shader : public OpenGLShader

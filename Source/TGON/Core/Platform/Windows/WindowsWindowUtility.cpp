@@ -16,7 +16,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyl
 	*extendedStyle = 0;
 	*normalStyle = 0;
 
-	// Set Normal style
+	// Assemble normal window style
     {
         *normalStyle |= WS_VISIBLE;
         
@@ -48,7 +48,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyl
         }
     }
 
-    // Set Extended style
+    // Assemble extended window style
     {
         if (windowStyle.topMost)
         {

@@ -45,6 +45,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\GraphicsSystem.h">
       <Filter>Source\Game\System</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\InputSystem.h">
+      <Filter>Source\Game\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameApplication.cpp">
@@ -62,5 +65,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\GraphicsSystem.cpp">
       <Filter>Source\Game\System</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\ISystem.cpp">
+      <Filter>Source\Game\System</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\InputSystem.cpp" />
   </ItemGroup>
 </Project>

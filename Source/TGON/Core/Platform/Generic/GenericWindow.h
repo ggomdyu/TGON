@@ -57,7 +57,6 @@ public:
     virtual void SetFullScreen(bool isFullScreen) {}
     virtual void SetTopMost(bool setTopMost) = 0;
     virtual void SetTransparency(float transparency) = 0;
-    //void SetTransparencyPerPixel(const Color4f& pixel, float opacity);
     virtual void GetPosition(int32_t* x, int32_t* y) const = 0;
     I32Point GetPosition() const;
     virtual void GetSize(int32_t* width, int32_t* height) const = 0;

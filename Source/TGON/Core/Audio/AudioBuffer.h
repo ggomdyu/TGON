@@ -63,7 +63,7 @@ public:
      * @brief                   Reads a sound data from the path specified by filePath.
      * @param [in] filePath     The file path of image
      */
-    bool Import(const std::string& filePath);
+    bool Initialize(const std::string& filePath);
 
     /**
      * @brief                   Reads a sound file data from memory.
@@ -72,7 +72,7 @@ public:
      * @param [in] srcDataBytes The bytes of image data
      * @param [in] imageFormat  The format of image
      */
-    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
+    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
     
     /**
      * @brief                   Reads a sound file data from memory.
@@ -80,7 +80,7 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    bool Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 
     bool IsValid() const noexcept;
 
@@ -99,7 +99,7 @@ public:
     ALenum GetALFormat() const noexcept;
 
     /* @brief   Gets the id of ALBuffer that stores sound data. */
-    ALuint GetALBufferID() const noexcept;
+    ALuint GetALBufferId() const noexcept;
     
     /* @brief   Gets the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
@@ -117,7 +117,7 @@ private:
     int32_t m_channels;
     int32_t m_samplingRate;
     ALenum m_alFormat;
-    ALuint m_alBufferID;
+    ALuint m_alBufferId;
 };
 
 } /* namespace tgon */

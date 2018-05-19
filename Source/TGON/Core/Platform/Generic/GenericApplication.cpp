@@ -23,14 +23,14 @@ void GenericApplication::ShowMessageBox(const char* message) const
     this->ShowMessageBox("", message);
 }
 
-void GenericApplication::ShowMessageBox(const char* message, MessageBoxIconType messageBoxType) const
+void GenericApplication::ShowMessageBox(const char* message, MessageBoxIcon messageBoxType) const
 {
     this->ShowMessageBox("", message, messageBoxType);
 }
 
 void GenericApplication::ShowMessageBox(const char* title, const char* message) const
 {
-    this->ShowMessageBox(title, message, MessageBoxIconType::Informational);
+    this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }
 
 const std::shared_ptr<GenericWindow>& GenericApplication::GetRootWindow() const noexcept

@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-inline UINT ConvertMessageBoxIconTypeToNative(MessageBoxIconType messageBoxIconType) noexcept
+inline UINT ConvertMessageBoxIconTypeToNative(MessageBoxIcon messageBoxIconType) noexcept
 {
     static constexpr const UINT nativeMessageBoxIconTypeTable[] =
     {

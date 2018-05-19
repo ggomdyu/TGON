@@ -158,8 +158,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericIndexBuffer.cpp">
       <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\MeshUtility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Mesh.cpp">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\MeshUtility.cpp">
       <Filter>Source\Graphics\Render</Filter>
     </ClCompile>
   </ItemGroup>

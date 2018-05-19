@@ -24,19 +24,19 @@ Image::Image() :
 Image::Image(const std::string& filePath) :
     Image()
 {
-    this->Import(filePath);
+    this->Initialize(filePath);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
     Image()
 {
-    this->Import(filePath, srcData, srcDataBytes, imageFormat);
+    this->Initialize(filePath, srcData, srcDataBytes, imageFormat);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
     Image()
 {
-    this->Import(filePath, srcData, srcDataBytes);
+    this->Initialize(filePath, srcData, srcDataBytes);
 }
 
 Image::Image(Image&& rhs) :
@@ -89,7 +89,7 @@ const uint8_t& Image::operator[](std::size_t index) const
     return m_imageData[index];
 }
 
-bool Image::Import(const std::string& filePath)
+bool Image::Initialize(const std::string& filePath)
 {
     FILE* file = fopen(filePath.c_str(), "rb");
     if (file == nullptr)
@@ -110,10 +110,10 @@ bool Image::Import(const std::string& filePath)
     fclose(file);
 
     std::size_t extensionOffset = filePath.rfind('.') + 1;
-    this->Import(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+    this->Initialize(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
 }
 
-bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat)
+bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat)
 {
     m_filePath = filePath;
 
@@ -188,7 +188,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
     }
 }
 
-bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
+bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     ImageFormat imageFormat = ImageFormat::Unknown;
     if (PngImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
@@ -212,7 +212,7 @@ bool Image::Import(const std::string& filePath, const uint8_t* srcData, std::siz
         return false;
     }
 
-    return this->Import(filePath, srcData, srcDataBytes, imageFormat);
+    return this->Initialize(filePath, srcData, srcDataBytes, imageFormat);
 }
 
 bool Image::IsValid() const noexcept

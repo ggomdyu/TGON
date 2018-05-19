@@ -5,12 +5,11 @@
  */
 
 #pragma once
-#include "GameApplicationFwd.h"
-
 #include "Core/Platform/Application.h"
 
-#include <vector>
-#include <unordered_map>
+#include "../System/TimeSystem.h"
+#include "../System/GraphicsSystem.h"
+#include "../System/InputSystem.h"
 
 namespace tgon
 {
@@ -23,75 +22,33 @@ public:
 
 /* @section Public constructor */
 public:
-    GameApplication(const WindowStyle& windowStyle);
     GameApplication(const WindowStyle& windowStyle, const VideoMode& videoMode);
+
+/* @section Public destructor */
+public:
     virtual ~GameApplication() override = default;
 
 /* @section Public method */
 public:
     virtual void OnUpdate() override;
 
-    /**
-     * @brief   Adds a module to engine.
-     * @detail  Added module will be updated automatically by engine.
-     */
-    template <typename _ModuleType>
-    void AddModule(const std::shared_ptr<_ModuleType>& module);
+    TimeSystem& GetTimeSystem();
+    InputSystem& GetInputSystem();
+    GraphicsSystem& GetGraphicsSystem();
 
-    /**
-     * @brief                   Finds a module.
-     * @tparam  _ModuleType     The type of module to find
-     * @return                  Returns module if succeeded, nullptr otherwise.
-     */
-    template <typename _ModuleType>
-    const std::shared_ptr<_ModuleType>& FindModule() const;
-
-/* @section Private method */
-private:
+    const TimeSystem& GetTimeSystem() const;
+    const InputSystem& GetInputSystem() const;
+    const GraphicsSystem& GetGraphicsSystem() const;
 
 /* @section Private variable */
 private:
-    std::vector<std::shared_ptr<IModule>> m_modulesToIterate;
-    std::unordered_map<uint32_t, std::shared_ptr<IModule>> m_modulesToFind;
-
-    //std::shared_ptr<SceneModule> m_sceneModule;
-    //std::shared_ptr<UIModule> m_uiModule;
-    //std::shared_ptr<SoundModule> m_soundModule;
-    //std::shared_ptr<InputModule> m_inputModule;
-    std::shared_ptr<TimeModule> m_timeModule;
-    //std::shared_ptr<TaskModule> m_taskModule;
-    std::shared_ptr<GraphicsModule> m_graphicsModule;
+    TimeSystem m_timeSystem;
+    InputSystem m_inputSystem;
+    GraphicsSystem m_graphicsSystem;
+    //std::shared_ptr<SceneSystem> m_sceneSystem;
+    //std::shared_ptr<UISystem> m_uiSystem;
+    //std::shared_ptr<SoundSystem> m_soundSystem;
+    //std::shared_ptr<TaskSystem> m_taskSystem;
 };
-
-template <typename _ModuleType>
-inline void GameApplication::AddModule(const std::shared_ptr<_ModuleType>& module)
-{
-    m_modulesToIterate.push_back(module);
-    m_modulesToFind.insert({module->GetRTTI()->GetHashCode(), module});
-}
-
-template <typename _ModuleType>
-inline const std::shared_ptr<_ModuleType>& GameApplication::FindModule() const
-{
-    auto iter = m_modulesToFind.find(GetRTTI<_ModuleType>()->GetHashCode());
-    if (iter != m_modulesToFind.end())
-    {
-        return *iter;
-    }
-
-    return nullptr;
-}
-
-template <>
-inline const std::shared_ptr<TimeModule>& GameApplication::FindModule<TimeModule>() const
-{
-    return m_timeModule;
-}
-
-template <>
-inline const std::shared_ptr<GraphicsModule>& GameApplication::FindModule<GraphicsModule>() const
-{
-    return m_graphicsModule;
-}
 
 } /* namespace tgon */

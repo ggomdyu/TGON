@@ -11,7 +11,7 @@ namespace tgon
 
 class Application;
 struct WindowStyle;
-enum class MessageBoxIconType;
+enum class MessageBoxIcon;
 class GenericWindow;
 struct BatteryState;
 

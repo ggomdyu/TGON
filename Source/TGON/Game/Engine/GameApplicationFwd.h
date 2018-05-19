@@ -11,9 +11,8 @@ namespace tgon
 
 struct WindowStyle;
 struct VideoMode;
-class IDynamicRHI;
 class IModule;
-class TimeModule;
-class GraphicsModule;
+class Time;
+class Graphics;
 
 } /* namespace tgon */
