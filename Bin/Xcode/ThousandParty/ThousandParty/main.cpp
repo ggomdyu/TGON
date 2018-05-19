@@ -49,12 +49,12 @@
 #include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/Renderer.h"
 #include "Graphics/Render/MeshUtility.h"
-#include "Game/Module/GraphicsModule.h"
-#include "Game/Module/TimeModule.h"
+#include "Game/System/GraphicsSystem.h"
+#include "Game/System/TimeSystem.h"
 #include "Graphics/LowLevelRender/VertexBuffer.h"
 #include "Graphics/LowLevelRender/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
-#include "Game/Module/GraphicsModule.h"
+#include "Core/Hardware/InputManager.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -439,7 +439,7 @@ private:
 
 /* @section Public method */
 public:
-    void Import(const uint8_t* srcFile)
+    void Initialize(const uint8_t* srcFile)
     {
         const uint8_t* iter = srcFile;
         while (true)
@@ -534,28 +534,6 @@ private:
     ExifHeader m_exifHeader;
 };
 
-template <typename _CastToType, typename _CastFromType, std::enable_if<std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
-inline _CastToType DynamicCast2(_CastFromType ptr)
-{
-    return nullptr;
-}
-
-template <typename _CastToType, typename _CastFromType, std::enable_if_t<!std::is_convertible_v<_CastFromType, _CastToType>>* = nullptr>
-inline _CastToType DynamicCast2(_CastFromType ptr)
-{
-    return nullptr;
-}
-
-class CC : public Component
-{
-public:
-    TGON_RUNTIME_OBJECT(CC)
-    CC(GameObject* owner) :Component(owner) {};
-    virtual ~CC() override {}
-    virtual void Update() override {}
-};
-
-
 class TGON_API ThousandParty final :
     public GameApplication
 {
@@ -575,7 +553,7 @@ public:
         m_quad(MakeCube(std::make_shared<GrayscaleTextureMaterial>())),
         m_shader(g_positionColorVert, g_positionColorFrag)
     {
-        audioPlayer.SetAudioBuffer(audioBuffer);
+        audioPlayer.Initialize(audioBuffer);
         audioPlayer.SetListenerPosition({ 0, 0, 0 });
         audioPlayer.SetListenerVelocity({ 0, 0, 0 });
         audioPlayer.SetPosition({ 0, 0, 0 });
@@ -592,15 +570,21 @@ public:
 
     Shader m_shader;
     Matrix4x4 MVP;
+    Stopwatch m_stopwatch;
 
     virtual void OnWillLaunch() override
     {
         SuperType::OnWillLaunch();
+        m_stopwatch.Start();
     }
+
+    I32Extent2D m_extent;
 
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
+    
+        m_extent = GetRootWindow()->GetSize();
     }
 
     virtual void OnUpdate() override
@@ -616,6 +600,10 @@ public:
         auto V2 = Matrix4x4::LookAtRH({ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
         auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
         x -= 0.1f;
+
+        float aff = m_stopwatch.GetElapsedMilliseconds() * 0.001f;
+        auto bc = Lerp(m_extent.width, 1000, Clamp(std::sin(aff), 0.0f, 1.0f));
+        GetRootWindow()->SetSize(bc,extent.height);
 
         bool a2 = false;
         if (a2)
@@ -636,7 +624,7 @@ public:
 
         auto& mtrl = m_quad->GetMaterial();
  
-        this->FindModule<GraphicsModule>()->GetGraphics()->ClearColorDepthBuffer();
+        GetGraphicsSystem().GetGraphics().ClearColorDepthBuffer();
 
         mtrl->Use();
         {
@@ -649,7 +637,7 @@ public:
         }
         mtrl->Unuse();
 
-        FindModule<GraphicsModule>()->GetGraphics()->SwapBuffer();
+        GetGraphicsSystem().GetGraphics().SwapBuffer();
     }
 };
 
