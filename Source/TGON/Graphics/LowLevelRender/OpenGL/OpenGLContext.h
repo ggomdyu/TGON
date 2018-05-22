@@ -32,6 +32,8 @@ public:
 /* @section Public method */
 public:
     void MakeCurrent();
+    
+    /* @brief   Displays the rendered image to the screen. */
     void SwapBuffer();
 
 /* @section Public variable */

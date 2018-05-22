@@ -120,8 +120,7 @@ void OpenGLContext::MakeCurrent()
 
 void OpenGLContext::SwapBuffer()
 {
-    CGL
-    CGLFlushDrawable([context CGLContextObj]);
+    [context flushBuffer];
 }
 
 } /* namespace tgon */
