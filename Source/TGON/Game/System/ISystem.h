@@ -27,5 +27,7 @@ public:
 public:
     virtual void Update() = 0;
 };
+    
+inline ISystem::~ISystem() = default;
 
 } /* namespace tgon */

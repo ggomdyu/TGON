@@ -5,7 +5,11 @@
  */
 
 #pragma once
-#include <al.h>
+#if TGON_PLATFORM_MACOS
+#   import <OpenAL/al.h>
+#else
+#   include <al.h>
+#endif
 
 namespace tgon
 {

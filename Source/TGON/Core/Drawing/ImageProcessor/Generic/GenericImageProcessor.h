@@ -20,12 +20,12 @@ class GenericImageProcessor
 /* @section Public constructor */
 public:
     GenericImageProcessor() noexcept;
-    GenericImageProcessor(const uint8_t* srcData, uint32_t srcDataBytes);
+    GenericImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes);
 
 /* @section Public method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes);
-    bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;
     std::vector<uint8_t, _AllocatorType>& GetImageData() noexcept;
     const std::vector<uint8_t, _AllocatorType>& GetImageData() const noexcept;
@@ -56,14 +56,14 @@ inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcesso
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcessor(const uint8_t* srcData, uint32_t srcDataBytes) :
+inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes) :
     GenericImageProcessor()
 {
     this->Import(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
 }
@@ -117,9 +117,9 @@ inline PixelFormat GenericImageProcessor<_DerivedType, _AllocatorType>::GetPixel
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
-    return static_cast<_DerivedType*>(this)->VerifyFormat(srcData, srcDataBytes);
+    return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
 
 } /* namespace tgon */  

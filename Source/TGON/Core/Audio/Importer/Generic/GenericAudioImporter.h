@@ -68,7 +68,7 @@ inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::IsValid() const 
 template <typename _DerivedType, typename _AllocatorType>
 inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
-    return static_cast<_DerivedType*>(this)->VerifyFormat(srcData, srcDataBytes);
+    return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>

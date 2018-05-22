@@ -13,4 +13,5 @@
             function();\
             return nullptr;\
         } ();\
+        dummy = nullptr;\
     }

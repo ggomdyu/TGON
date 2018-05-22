@@ -34,28 +34,31 @@ public:
     using ConstPointerType = const CharType*;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
+/* @section Private type */
+private:
+    using SuperType = BasicFixedString<_CharType, 37, _StringTraitsType>;
+    
 /* @section Private constructor */
 private:
-    using BasicFixedString::BasicFixedString;
+    using SuperType::SuperType;
 
 /* @section Public operator */
 public:
-    using BasicFixedString::operator=;
-    using BasicFixedString::operator[];
+    using SuperType::operator=;
+    using SuperType::operator[];
 
 /* @section Public method */
 public:
     static BasicUUID NewUUID();
-
-    using BasicFixedString::Compare;
-    using BasicFixedString::Find;
-    using BasicFixedString::RFind;
-    using BasicFixedString::At;
-    using BasicFixedString::CStr;
-    using BasicFixedString::Data;
-    using BasicFixedString::Length;
-    using BasicFixedString::cbegin;
-    using BasicFixedString::crbegin;
+    using SuperType::Compare;
+    using SuperType::Find;
+    using SuperType::RFind;
+    using SuperType::At;
+    using SuperType::CStr;
+    using SuperType::Data;
+    using SuperType::Length;
+    using SuperType::cbegin;
+    using SuperType::crbegin;
 };
 
 using UUID = BasicUUID<char, StringTraits<char>>;

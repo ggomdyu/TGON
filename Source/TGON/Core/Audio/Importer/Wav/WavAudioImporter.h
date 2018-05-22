@@ -14,13 +14,13 @@
 namespace tgon
 {
 
-template <typename _AllocatorType = std::allocator<uint8_t>>
-class WavAudioImporter final :
-    public GenericAudioImporter<WavAudioImporter<_AllocatorType>, _AllocatorType>
+template <typename _AllocatorType>
+class BasicWavAudioImporter final :
+    public GenericAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericAudioImporter::GenericAudioImporter;
+    using GenericAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>::GenericAudioImporter;
 
 /* @section Public method */
 public:
@@ -31,7 +31,7 @@ public:
 };
 
 template <typename _AllocatorType>
-inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BasicWavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -51,9 +51,9 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
             {
                 auto chunkData = reinterpret_cast<const RiffReader::FmtChunkData*>(chunkHeader.chunkData);
                 
-                m_channels = static_cast<decltype(m_channels)>(chunkData->channels);
-                m_samplingRate = chunkData->samplingRate;
-                m_bitsPerSample = chunkData->bitsPerSample;
+                this->m_channels = static_cast<decltype(this->m_channels)>(chunkData->channels);
+                this->m_samplingRate = chunkData->samplingRate;
+                this->m_bitsPerSample = chunkData->bitsPerSample;
             }
             break;
 
@@ -64,10 +64,13 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
             {
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
-                m_audioData.resize(chunkHeader.chunkDataSize);
-                memcpy(&m_audioData[0], chunkData, chunkHeader.chunkDataSize);
+                this->m_audioData.resize(chunkHeader.chunkDataSize);
+                memcpy(&this->m_audioData[0], chunkData, chunkHeader.chunkDataSize);
             }
             return true;
+                
+        default:
+            break;
         }
     }
     while (riffReader.ReadNext());
@@ -76,7 +79,7 @@ inline bool WavAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std
 }
 
 template <typename _AllocatorType>
-inline bool WavAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BasicWavAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 16)
     {
@@ -100,5 +103,7 @@ inline bool WavAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcDat
 
     return true;
 }
+    
+using WavAudioImporter = BasicWavAudioImporter<std::allocator<uint8_t>>;
 
 } /* namespace tgon */

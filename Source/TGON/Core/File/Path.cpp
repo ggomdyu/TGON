@@ -236,7 +236,7 @@ TGON_API int32_t GetFileNameWithoutExtension(const char* srcPathStr, char* destP
 
 TGON_API int32_t GetDirectoryName(const char* srcPathStr, char* destPathStr)
 {
-    return GetDirectoryName(srcPathStr, strlen(srcPathStr), destPathStr);
+    return GetDirectoryName(srcPathStr, static_cast<int32_t>(strlen(srcPathStr)), destPathStr);
 }
 
 TGON_API int32_t GetDirectoryName(const char* srcPathStr, int32_t srcPathStrLen, char* destPathStr)

@@ -12,8 +12,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class TGON_API MacOSWindow :
     public GenericWindow
@@ -70,5 +68,4 @@ protected:
     WindowDelegate* m_windowDelegate;
 };
 
-} /* namespace core */
 } /* namespace tgon */

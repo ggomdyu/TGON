@@ -10,28 +10,28 @@
 namespace tgon
 {
 
-template <typename _AllocatorType = std::allocator<uint8_t>>
-class BmpImageProcessor :
-    public GenericImageProcessor<BmpImageProcessor<_AllocatorType>, _AllocatorType>
+template <typename _AllocatorType>
+class BasicBmpImageProcessor :
+    public GenericImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericImageProcessor::GenericImageProcessor;
+    using GenericImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>::GenericImageProcessor;
 
 /* @section Public method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes);
-    bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
 template <typename _AllocatorType>
-inline bool BmpImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicBmpImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return false;
 }
 
 template <typename _AllocatorType>
-inline bool BmpImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicBmpImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 2)
     {
@@ -42,6 +42,8 @@ inline bool BmpImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcDa
     return (header[0] == 'B' && header[1] == 'M');
 }
 
+using BmpImageProcessor = BasicBmpImageProcessor<std::allocator<uint8_t>>;
+    
 } /* namespace tgon */  
 
 //namespace

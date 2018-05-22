@@ -10,23 +10,23 @@
 namespace tgon
 {
 
-template <typename _AllocatorType = std::allocator<uint8_t>>
-class JpgImageProcessor :
-    public GenericImageProcessor<JpgImageProcessor<_AllocatorType>, _AllocatorType>
+template <typename _AllocatorType>
+class BasicJpgImageProcessor :
+    public GenericImageProcessor<BasicJpgImageProcessor<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericImageProcessor::GenericImageProcessor;
+    using GenericImageProcessor<BasicJpgImageProcessor<_AllocatorType>, _AllocatorType>::GenericImageProcessor;
 
 /* @section Public method */
 public:
     /* @brief   Verifies the importing file is exactly PNG. */
-    static bool VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes);
-    bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
 template <typename _AllocatorType>
-inline bool JpgImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicJpgImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -37,7 +37,7 @@ inline bool JpgImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
 }
 
 template <typename _AllocatorType>
-inline bool JpgImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicJpgImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 2)
     {
@@ -46,5 +46,7 @@ inline bool JpgImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcDa
 
     return (srcData[0] == 0xFF && srcData[1] == 0xD8);
 }
+
+using JpgImageProcessor = BasicJpgImageProcessor<std::allocator<uint8_t>>;
 
 } /* namespace tgon */

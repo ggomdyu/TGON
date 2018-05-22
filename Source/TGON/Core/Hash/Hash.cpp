@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.pch"
+#include "PrecompiledHeader.h"
 
 #include <cassert>
 #include <cmath>
@@ -9,6 +9,14 @@
 
 namespace tgon
 {
+    
+//class HashCollisionChecker
+//{
+//public:
+//    
+//private:
+//    std::map<uint32_t, std::string> m_hashStringTable;
+//}
 
 //    class HashCollisionChecker
 //    {

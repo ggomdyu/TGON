@@ -1,12 +1,10 @@
-#import "PrecompiledHeader.pch"
+#import "PrecompiledHeader.h"
 
 #import "../Path.h"
 
 #import <Foundation/Foundation.h>
 
 namespace tgon
-{
-namespace core
 {
 
 TGON_API std::string GetCurrentDirectory()
@@ -41,5 +39,4 @@ TGON_API std::string GetDesktopDirectory()
     }
 }
 
-} /* namespace core */
 } /* namespace tgon */

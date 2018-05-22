@@ -15,7 +15,6 @@
 #include "Core/Platform/Window.h"
 #include "Core/Platform/Generic/GenericWindowType.h"
 #include "Core/File/Path.h"
-#include "Core/Platform/Time.h"
 #include "Core/Random/Random.h"
 #include "Core/Drawing/Image.h"
 #include "Core/Debug/Log.h"
@@ -39,7 +38,6 @@
 #include "Core/Random/Random.h"
 #include "Core/Utility/RAII.h"
 #include "Core/File/Path.h"
-#include "Core/Utility/Windows/HandleGuard.h"
 #include "Core/Utility/Stopwatch.h"
 #include "Core/Utility/Algorithm.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
@@ -54,20 +52,14 @@
 #include "Graphics/LowLevelRender/VertexBuffer.h"
 #include "Graphics/LowLevelRender/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
-#include "Core/Hardware/InputManager.h"
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <al.h>
-#include <alc.h>
-
-#pragma comment(lib, "d3d9.lib")
-#pragma comment(lib, "d3dx9.lib")
-#pragma comment(lib, "assimp-vc140-mt.lib")
-#pragma comment(lib, "IrrXML.lib")
+//#include <assimp/Importer.hpp>
+//#include <assimp/scene.h>
+//#include <assimp/postprocess.h>
+//#pragma comment(lib, "d3d9.lib")
+//#pragma comment(lib, "d3dx9.lib")
+//#pragma comment(lib, "assimp-vc140-mt.lib")
+//#pragma comment(lib, "IrrXML.lib")
 
 using namespace tgon;
 
@@ -447,66 +439,66 @@ public:
             MarkerType markerType = static_cast<MarkerType>(*reinterpret_cast<const uint16_t*>(iter));
             iter += sizeof(markerType);
 
-            switch (markerType)
-            {
-            case MarkerType::SOI:
-                {
-                    int n = 3;
-                }
-                break;
-
-            case MarkerType::APP1:
-                {
-                    char chunkSizeStr[2] = {*(iter + 1), *iter};
-                    uint16_t chunkSize = *reinterpret_cast<const uint16_t*>(chunkSizeStr);
-
-                    const uint8_t* exifIter = iter;
-                    while (true)
-                    {
-                        // Byte align
-                        exifIter += 8;
-                        bool isMotorolaAlign = (*reinterpret_cast<const uint16_t*>(exifIter)) == 0x4D4D;
-
-                        // TAG Mark
-                        exifIter += 2;
-                        auto tagMark = Parse<uint16_t>(exifIter, isMotorolaAlign);
-
-                        // TAG Mark
-                        exifIter += 2;
-                        uint32_t offsetToFirstIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
-
-                        exifIter += 4;
-                        uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
-                        
-                        // IFD
-                        while (true)
-                        {
-                            exifIter += (12 * dirEntryCount) + 2; // We will jump IFD.
-                            uint32_t offsetToNextIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
-                            if (offsetToNextIFD == 0)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                exifIter += offsetToNextIFD;
-                            }
-                        }
-
-                        //uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
-
-
-                        int n = 3;
-                    }
-
-                    iter += chunkSize;
-
-                    break;
-                }
-
-            case MarkerType::EOI:    
-                return;
-            }
+//            switch (markerType)
+//            {
+//            case MarkerType::SOI:
+//                {
+//                    int n = 3;
+//                }
+//                break;
+//
+//            case MarkerType::APP1:
+//                {
+//                    char chunkSizeStr[2] = {*(iter + 1), *iter};
+//                    uint16_t chunkSize = *reinterpret_cast<const uint16_t*>(chunkSizeStr);
+//
+//                    const uint8_t* exifIter = iter;
+//                    while (true)
+//                    {
+//                        // Byte align
+//                        exifIter += 8;
+//                        bool isMotorolaAlign = (*reinterpret_cast<const uint16_t*>(exifIter)) == 0x4D4D;
+//
+//                        // TAG Mark
+//                        exifIter += 2;
+//                        auto tagMark = Parse<uint16_t>(exifIter, isMotorolaAlign);
+//
+//                        // TAG Mark
+//                        exifIter += 2;
+//                        uint32_t offsetToFirstIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
+//
+//                        exifIter += 4;
+//                        uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
+//                        
+//                        // IFD
+//                        while (true)
+//                        {
+//                            exifIter += (12 * dirEntryCount) + 2; // We will jump IFD.
+//                            uint32_t offsetToNextIFD = Parse<uint32_t>(exifIter, isMotorolaAlign);
+//                            if (offsetToNextIFD == 0)
+//                            {
+//                                break;
+//                            }
+//                            else
+//                            {
+//                                exifIter += offsetToNextIFD;
+//                            }
+//                        }
+//
+//                        //uint16_t dirEntryCount = Parse<uint16_t>(exifIter, isMotorolaAlign);
+//
+//
+//                        int n = 3;
+//                    }
+//
+//                    iter += chunkSize;
+//
+//                    break;
+//                }
+//
+//            case MarkerType::EOI:    
+//                return;
+//            }
         }
 
     }

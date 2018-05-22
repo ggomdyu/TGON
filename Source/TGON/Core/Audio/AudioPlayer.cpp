@@ -1,6 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <alc.h>
+#if TGON_PLATFORM_MACOS
+#   include <OpenAL/alc.h>
+#else
+#   include <alc.h>
+#endif
 
 #include "AudioPlayer.h"
 

@@ -3,26 +3,14 @@
    version = "1.0">
    <Group
       location = "container:"
-      name = "00. Core">
-   </Group>
-   <Group
-      location = "container:"
-      name = "01. Graphics">
-   </Group>
-   <Group
-      location = "container:"
-      name = "02. Game">
-   </Group>
-   <Group
-      location = "container:"
-      name = "03. TGON">
+      name = "TGON">
       <FileRef
          location = "group:TGON.xcodeproj">
       </FileRef>
    </Group>
    <Group
       location = "container:"
-      name = "04. Contents">
+      name = "Contents">
       <FileRef
          location = "group:ThousandParty/ThousandParty.xcodeproj">
       </FileRef>

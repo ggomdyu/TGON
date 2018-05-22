@@ -84,7 +84,7 @@ public:
 
 /* @section Public type */
 public:
-    RiffReader(const uint8_t* srcData, uint32_t srcDataBytes) noexcept;
+    RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept;
     
 /* @section Public method */
 public:
@@ -95,15 +95,17 @@ public:
 private:
     const uint8_t* m_srcData;
     const uint8_t* m_srcDataIter;
-    uint32_t m_srcDataBytes;
+    std::size_t m_srcDataBytes;
 };
 
 inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept :
-    chunkId(chunkId), chunkDataSize(chunkDataSize), chunkData(chunkData)
+    chunkId(chunkId),
+    chunkDataSize(chunkDataSize),
+    chunkData(chunkData)
 {
 }
 
-inline RiffReader::RiffReader(const uint8_t* srcData, uint32_t srcDataBytes) noexcept :
+inline RiffReader::RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept :
     m_srcData(srcData),
     m_srcDataIter(srcData),
     m_srcDataBytes(srcDataBytes)

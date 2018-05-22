@@ -12,23 +12,23 @@
 namespace tgon
 {
 
-template <typename _AllocatorType = std::allocator<uint8_t>>
-class PngImageProcessor :
-    public GenericImageProcessor<PngImageProcessor<_AllocatorType>, _AllocatorType>
+template <typename _AllocatorType>
+class BasicPngImageProcessor :
+    public GenericImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericImageProcessor::GenericImageProcessor;
+    using GenericImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>::GenericImageProcessor;
 
 /* @section Public method */
 public:
     /* @brief   Verifies the importing file is exactly PNG. */
-    static bool VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes);
-    bool Import(const uint8_t* srcData, uint32_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
 template <typename _AllocatorType>
-inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicPngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -59,7 +59,7 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
             png_size_t size;
             const uint8_t* data;
             png_size_t offset;
-        } imageSource{static_cast<int>(srcDataBytes), (const uint8_t*)srcData, 0};
+        } imageSource{static_cast<png_size_t>(srcDataBytes), reinterpret_cast<const uint8_t*>(srcData), 0};
 
         png_set_read_fn(pngStruct, &imageSource, [](png_structp pngStruct, png_bytep data, png_size_t dataLen)
         {
@@ -84,11 +84,11 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     // Read the PNG file information.
     png_read_info(pngStruct, pngInfo);
 
-    m_width = png_get_image_width(pngStruct, pngInfo);
-    m_height = png_get_image_height(pngStruct, pngInfo);
-    m_colorDepth = png_get_bit_depth(pngStruct, pngInfo);
-    m_channels = png_get_channels(pngStruct, pngInfo);
-    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
+    this->m_width = png_get_image_width(pngStruct, pngInfo);
+    this->m_height = png_get_image_height(pngStruct, pngInfo);
+    this->m_colorDepth = png_get_bit_depth(pngStruct, pngInfo);
+    this->m_channels = png_get_channels(pngStruct, pngInfo);
+    this->m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
 
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)
@@ -96,7 +96,7 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
         png_set_palette_to_rgb(pngStruct);
     }
 
-    else if (colorType == PNG_COLOR_TYPE_GRAY && m_colorDepth < 8)
+    else if (colorType == PNG_COLOR_TYPE_GRAY && this->m_colorDepth < 8)
     {
         png_set_expand_gray_1_2_4_to_8(pngStruct);
     }
@@ -107,13 +107,13 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
         png_set_tRNS_to_alpha(pngStruct);
     }
 
-    if (m_colorDepth == 16)
+    if (this->m_colorDepth == 16)
     {
         png_set_strip_16(pngStruct);
     }
 
     // If color type has no alpha channel, then fill it with 0xff.
-    if (colorType = PNG_COLOR_TYPE_RGB || colorType == PNG_COLOR_TYPE_GRAY || colorType == PNG_COLOR_TYPE_PALETTE)
+    if (colorType == PNG_COLOR_TYPE_RGB || colorType == PNG_COLOR_TYPE_GRAY || colorType == PNG_COLOR_TYPE_PALETTE)
     {
         png_set_filler(pngStruct, 0xff, PNG_FILLER_AFTER);
     }
@@ -128,15 +128,15 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
     // Start reading the image.
     {
         png_size_t rowBytes = png_get_rowbytes(pngStruct, pngInfo);
-        std::size_t imageDataBytes = sizeof(png_byte*) * (m_height) * rowBytes;
-        m_imageData.resize(imageDataBytes);
+        std::size_t imageDataBytes = sizeof(png_byte*) * (this->m_height) * rowBytes;
+        this->m_imageData.resize(imageDataBytes);
 
         thread_local static std::vector<png_byte*> rowPointer;
-        rowPointer.resize(m_height);
+        rowPointer.resize(this->m_height);
 
-        for (std::size_t i = 0; i < m_height; ++i)
+        for (std::size_t i = 0; i < this->m_height; ++i)
         {
-            rowPointer[i] = m_imageData.data() + i * rowBytes;
+            rowPointer[i] = this->m_imageData.data() + i * rowBytes;
         }
 
         png_read_image(pngStruct, rowPointer.data());
@@ -148,7 +148,7 @@ inline bool PngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, ui
 }
 
 template <typename _AllocatorType>
-inline bool PngImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, uint32_t srcDataBytes)
+inline bool BasicPngImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 8)
     {
@@ -158,5 +158,7 @@ inline bool PngImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcDa
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
     return isPNGFormat;
 }
+    
+using PngImageProcessor = BasicPngImageProcessor<std::allocator<uint8_t>>;
 
 } /* namespace tgon */  

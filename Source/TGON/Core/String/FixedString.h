@@ -128,7 +128,6 @@ public:
     std::size_t Size() const noexcept;
     std::size_t Length() const noexcept;
     constexpr std::size_t Capacity() const noexcept;
-
     IteratorType begin() noexcept;
     IteratorType end() noexcept;
     ConstIteratorType cbegin() const noexcept;

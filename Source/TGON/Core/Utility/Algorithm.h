@@ -8,6 +8,7 @@
 #pragma once
 #include <cstddef>
 #include <tuple>
+#include <type_traits>
 #include <array>
 
 namespace tgon
@@ -117,7 +118,7 @@ constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noex
 }
 
 template <typename _Type>
-void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible_v<_Type> && std::is_nothrow_move_assignable_v<_Type>)
+    void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
 {
     _Type temp = std::move(lhs);
     lhs = std::move(rhs);

@@ -11,8 +11,6 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class TGON_API MacOSApplication :
     public GenericApplication
@@ -34,12 +32,11 @@ public:
 public:
     virtual void MessageLoop() final override;
     virtual void Terminate() final override;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const final override;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const final override;
 
     void OnHandleMessage(NSEvent* message);
 
     using GenericApplication::ShowMessageBox;
 };
 
-} /* namespace core */
 } /* namespace tgon */

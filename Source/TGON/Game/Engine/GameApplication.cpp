@@ -38,11 +38,6 @@ const TimeSystem& GameApplication::GetTimeSystem() const noexcept
     return m_timeSystem;
 }
 
-const InputSystem& GameApplication::GetInputSystem() const
-{
-    return m_inputSystem;
-}
-
 GraphicsSystem& GameApplication::GetGraphicsSystem() noexcept
 {
     return m_graphicsSystem;

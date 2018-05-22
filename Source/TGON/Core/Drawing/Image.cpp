@@ -110,7 +110,7 @@ bool Image::Initialize(const std::string& filePath)
     fclose(file);
 
     std::size_t extensionOffset = filePath.rfind('.') + 1;
-    this->Initialize(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+    return this->Initialize(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
 }
 
 bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat)
@@ -121,7 +121,7 @@ bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std:
     {
     case ImageFormat::Png:
         {
-            PngImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            PngImageProcessor imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -137,7 +137,7 @@ bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std:
 
     case ImageFormat::Jpg:
         {
-            JpgImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            JpgImageProcessor imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -153,7 +153,7 @@ bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std:
 
     case ImageFormat::WebP:
         {
-            WebPImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            WebPImageProcessor imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -169,7 +169,7 @@ bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std:
 
     case ImageFormat::Bmp:
         {
-            BmpImageProcessor<> imageProcessor(srcData, srcDataBytes);
+            BmpImageProcessor imageProcessor(srcData, srcDataBytes);
             if (imageProcessor.IsValid())
             {
                 m_imageData = std::move(imageProcessor.GetImageData());
@@ -191,19 +191,19 @@ bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std:
 bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     ImageFormat imageFormat = ImageFormat::Unknown;
-    if (PngImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    if (PngImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Png;
     }
-    else if (JpgImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    else if (JpgImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Jpg;
     }
-    else if (WebPImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    else if (WebPImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::WebP;
     }
-    else if (BmpImageProcessor<>::VerifyFormat(srcData, srcDataBytes))
+    else if (BmpImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
         imageFormat = ImageFormat::Bmp;
     }

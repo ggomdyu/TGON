@@ -1,4 +1,4 @@
-#import "PrecompiledHeader.pch"
+#import "PrecompiledHeader.h"
 
 #import "../Screen.h"
 #import "../ScreenType.h"
@@ -9,8 +9,6 @@
 #import <AppKit/NSScreen.h>
 
 namespace tgon
-{
-namespace core
 {
 namespace
 {
@@ -48,5 +46,4 @@ std::vector<Screen> GetAllScreen()
     return screens;
 }
 
-} /* namespace core */
 } /* namespace tgon */

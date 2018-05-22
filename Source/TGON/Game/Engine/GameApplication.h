@@ -9,7 +9,6 @@
 
 #include "../System/TimeSystem.h"
 #include "../System/GraphicsSystem.h"
-#include "../System/InputSystem.h"
 
 namespace tgon
 {
@@ -32,18 +31,18 @@ public:
 public:
     virtual void OnUpdate() override;
 
-    TimeSystem& GetTimeSystem();
-    InputSystem& GetInputSystem();
-    GraphicsSystem& GetGraphicsSystem();
+    TimeSystem& GetTimeSystem() noexcept;
+//    InputSystem& GetInputSystem();
+    GraphicsSystem& GetGraphicsSystem() noexcept;
 
-    const TimeSystem& GetTimeSystem() const;
-    const InputSystem& GetInputSystem() const;
-    const GraphicsSystem& GetGraphicsSystem() const;
+    const TimeSystem& GetTimeSystem() const noexcept;
+//    const InputSystem& GetInputSystem() const;
+    const GraphicsSystem& GetGraphicsSystem() const noexcept;
 
 /* @section Private variable */
 private:
     TimeSystem m_timeSystem;
-    InputSystem m_inputSystem;
+//    InputSystem m_inputSystem;
     GraphicsSystem m_graphicsSystem;
     //std::shared_ptr<SceneSystem> m_sceneSystem;
     //std::shared_ptr<UISystem> m_uiSystem;

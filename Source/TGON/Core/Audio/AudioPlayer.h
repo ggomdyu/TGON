@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
+
 #include "Core/Math/Vector3.h"
 
 #include "AudioBuffer.h"
@@ -13,12 +15,12 @@
 namespace tgon
 {
 
-class AudioPlayer final
+class AudioPlayer final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
     AudioPlayer();
-    AudioPlayer(const AudioPlayer& rhs) = delete;
     AudioPlayer(AudioPlayer&& rhs);
     explicit AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
@@ -28,7 +30,6 @@ public:
 
 /* @section Public destructor */
 public:
-    AudioPlayer& operator=(const AudioPlayer& rhs) = delete;
     AudioPlayer& operator=(AudioPlayer&& rhs);
 
 /* @section Public method */

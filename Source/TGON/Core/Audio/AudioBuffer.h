@@ -9,7 +9,11 @@
 #include <vector>
 #include <cstdint>
 #include <memory>
-#include <al.h>
+#if TGON_PLATFORM_MACOS
+#   import <OpenAL/al.h>
+#else
+#   include <al.h>
+#endif
 
 #include "AudioBufferType.h"
 
@@ -23,25 +27,25 @@ public:
     AudioBuffer();
 
     /**
-     * @brief                   Reads a sound data from the path specified by filePath.
-     * @param [in] filePath     The file path of image
+     * @brief                   Reads a audio data from the path specified by filePath.
+     * @param [in] filePath     The file path of audio
      */
     explicit AudioBuffer(const std::string& filePath);
 
     /**
-     * @brief                   Reads a sound file data from memory.
-     * @param [in] filePath     The file path of image file
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
-     * @param [in] imageFormat  The format of image
+     * @brief                   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of audio file
+     * @param [in] srcData      The pointer to audio data
+     * @param [in] srcDataBytes The bytes of audio data
+     * @param [in] audioFormat  The format of audio
      */
     AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
     
     /**
-     * @brief                   Reads a sound file data from memory.
-     * @param [in] filePath     The file path of image source
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
+     * @brief                   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of audio source
+     * @param [in] srcData      The pointer to audio data
+     * @param [in] srcDataBytes The bytes of audio data
      */
     AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 
@@ -61,24 +65,24 @@ public:
 public:
     /**
      * @brief                   Reads a sound data from the path specified by filePath.
-     * @param [in] filePath     The file path of image
+     * @param [in] filePath     The file path of audio
      */
     bool Initialize(const std::string& filePath);
 
     /**
-     * @brief                   Reads a sound file data from memory.
-     * @param [in] filePath     The file path of image file
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
-     * @param [in] imageFormat  The format of image
+     * @brief                   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of audio file
+     * @param [in] srcData      The pointer to audio data
+     * @param [in] srcDataBytes The bytes of audio data
+     * @param [in] audioFormat  The format of audio
      */
     bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
     
     /**
-     * @brief                   Reads a sound file data from memory.
-     * @param [in] filePath     The file path of image source
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
+     * @brief                   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of audio source
+     * @param [in] srcData      The pointer to audio data
+     * @param [in] srcDataBytes The bytes of audio data
      */
     bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 

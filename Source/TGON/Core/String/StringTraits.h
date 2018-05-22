@@ -205,12 +205,12 @@ public:
      * @brief                           Swaps the contents of strings.
      * @param [in] srcStr               The string to be swapped with destStr.
      * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] srcStrBufferSize     The buffer length of srcStr.
+     * @param [in] srcStrBufferLen      The buffer length of srcStr.
      * @param [in] destStr              The string to be swapped with srcStr.
      * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferSize    The buffer length of destStr.
+     * @param [in] destStrBufferLen     The buffer length of destStr.
      */
-    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
+    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Converts the content of string to lowercase.
@@ -251,6 +251,12 @@ public:
      * @return                          True if the string is null or empty, false otherwise.
      */
     static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
+    
+    /**
+     * @brief                           Replaces each format item to text.
+     * @return                          The length of format string.
+     */
+//    static int32_t Fotmat(const _CharType* formatStr, ...);
 
 /* @section Public variable */
 public:
@@ -387,7 +393,7 @@ inline std::size_t StringTraits<_CharType>::Length(const _CharType* srcStr)
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferSize, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
+inline void StringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
 {
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }

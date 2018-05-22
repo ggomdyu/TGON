@@ -1,4 +1,4 @@
-#import "PrecompiledHeader.pch"
+#import "PrecompiledHeader.h"
 
 #import "MacOSWindow.h"
 #import "MacOSWindowUtility.h"
@@ -13,8 +13,6 @@
 #import <Cocoa/Cocoa.h>
 
 namespace tgon
-{
-namespace core
 {
 
 MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
@@ -178,5 +176,4 @@ bool MacOSWindow::IsMinimized() const
     return static_cast<bool>([m_nsWindow isMiniaturized]);
 }
 
-} /* namespace core */
 } /* namespace tgon */

@@ -1,4 +1,4 @@
-#import "PrecompiledHeader.pch"
+#import "PrecompiledHeader.h"
 
 #import <AppKit/NSAlert.h>
 #import <AppKit/NSEvent.h>
@@ -34,7 +34,7 @@ void MacOSApplication::MessageLoop()
     }
 }
 
-void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIconType iconType) const
+void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const
 {
     static constexpr const NSAlertStyle nativeNSAlertStyleArray[2] =
     {

@@ -1,4 +1,4 @@
-#import "PrecompiledHeader.pch"
+#import "PrecompiledHeader.h"
 
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSScreen.h>

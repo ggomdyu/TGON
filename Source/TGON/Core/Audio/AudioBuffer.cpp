@@ -1,6 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <alc.h>
+#if TGON_PLATFORM_MACOS
+#   include <OpenAL/alc.h>
+#else
+#   include <alc.h>
+#endif
 
 #include "Core/Utility/StaticInvoke.h"
 
@@ -26,7 +30,7 @@ AudioBuffer::AudioBuffer() :
         {
             return;
         }
-
+        
         ALCcontext* context = alcCreateContext(device, nullptr);
         if (context == nullptr)
         {
@@ -108,11 +112,11 @@ bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData
 bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
-    if (WavAudioImporter<>::VerifyFormat(srcData, srcDataBytes))
+    if (WavAudioImporter::VerifyFormat(srcData, srcDataBytes))
     {
         audioFormat = AudioFormat::Wav;
     }
-    else if (OggVorbisAudioImporter<>::VerifyFormat(srcData, srcDataBytes))
+    else if (OggVorbisAudioImporter::VerifyFormat(srcData, srcDataBytes))
     {
         audioFormat = AudioFormat::OggVorbis;
     }
@@ -170,32 +174,39 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
     {
     case AudioFormat::Wav:
         {
-            WavAudioImporter<> importer(srcData, srcDataBytes);
+            WavAudioImporter importer(srcData, srcDataBytes);
             if (importer.IsValid())
             {
                 m_audioData = std::move(importer.GetAudioData());
                 m_bitsPerSample = importer.GetBitsPerSample();
                 m_channels = importer.GetChannels();
                 m_samplingRate = importer.GetSamplingRate();
-
+                
+                return true;
+            }
+        }
+        break;
+        
+    case AudioFormat::OggVorbis:
+        {
+            OggVorbisAudioImporter importer(srcData, srcDataBytes);
+            if (importer.IsValid())
+            {
+                m_audioData = std::move(importer.GetAudioData());
+                m_bitsPerSample = importer.GetBitsPerSample();
+                m_channels = importer.GetChannels();
+                m_samplingRate = importer.GetSamplingRate();
+                
                 return true;
             }
         }
         break;
 
-    case AudioFormat::OggVorbis:
-        {
-            OggVorbisAudioImporter<> importer(srcData, srcDataBytes);
-            if (importer.IsValid())
-            {
-                m_audioData = std::move(importer.GetAudioData());
-                m_bitsPerSample = importer.GetBitsPerSample();
-                m_channels = importer.GetChannels();
-                m_samplingRate = importer.GetSamplingRate();
-
-                return true;
-            }
-        }
+    case AudioFormat::Mp3:
+    case AudioFormat::Flac:
+    case AudioFormat::M4a:
+    case AudioFormat::Opus:
+    case AudioFormat::Unknown:
         break;
     }
 
@@ -213,7 +224,7 @@ bool AudioBuffer::InitializeALBuffer(const std::vector<uint8_t>& audioData, ALen
         }
     }
 
-    alBufferData(m_alBufferId, alFormat, audioData.data(), audioData.size(), samplingRate);
+    alBufferData(m_alBufferId, alFormat, audioData.data(), static_cast<ALsizei>(audioData.size()), samplingRate);
     if (alGetError() != AL_NO_ERROR)
     {
         return false;
