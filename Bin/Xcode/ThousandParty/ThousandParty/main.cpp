@@ -553,6 +553,7 @@ public:
         audioPlayer.SetVolume(0.2f);
         audioPlayer.Play();
 
+        auto b = alGetError();
         std::static_pointer_cast<GrayscaleTextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
     }
 
@@ -590,12 +591,12 @@ public:
         M2 *= Matrix4x4::RotateX(x);
         M2 *= Matrix4x4::RotateY(x);
         auto V2 = Matrix4x4::LookAtRH({ 0.0f, 0.0f, 50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
-        auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
+        auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, (float)extent.width / (float)extent.height, 0.1f, 1000.0f);
         x -= 0.1f;
 
-//        float aff = m_stopwatch.GetElapsedMilliseconds() * 0.001f;
-//        auto bc = Lerp(m_extent.width, 1000, Clamp(std::sin(aff), 0.0f, 1.0f));
-//        GetRootWindow()->SetSize(bc,extent.height);
+        float aff = m_stopwatch.GetElapsedMilliseconds() * 0.001f;
+        auto bc = Lerp(m_extent.width, 1000, Clamp(std::sin(aff), 0.0f, 1.0f));
+        GetRootWindow()->SetSize(bc,extent.height);
 
         MVP = M2 * V2 * P2;
 //

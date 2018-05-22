@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD515BDE20B46FAD0002F5C3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD06734B20B42CAA00BEA737 /* OpenAL.framework */; };
 		FD7EA6E720B09D2800A76C69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA6E620B09D2700A76C69 /* main.cpp */; };
 		FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */; };
-		FDACD2EE20B4537900C62C24 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD06734B20B42CAA00BEA737 /* OpenAL.framework */; };
 		FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9171F68458C000EB7C8 /* Cocoa.framework */; };
 		FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB801F757DDE007AC1AB /* OpenGL.framework */; };
 		FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */; };
@@ -50,11 +50,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDACD2EE20B4537900C62C24 /* OpenAL.framework in Frameworks */,
+				FD515BDE20B46FAD0002F5C3 /* OpenAL.framework in Frameworks */,
 				FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */,
-				FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */,
 				FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */,
 				FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */,
+				FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
