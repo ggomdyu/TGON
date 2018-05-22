@@ -10,7 +10,5 @@
 
 @interface AppDelegate : NSObject<NSApplicationDelegate>
 {
-@private
-    struct __CVDisplayLink* _displayLink;
 }
 @end

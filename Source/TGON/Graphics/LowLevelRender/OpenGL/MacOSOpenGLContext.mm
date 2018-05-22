@@ -66,6 +66,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
         if (pixelFormat == nullptr)
         {
             NSLog(@"No OpenGL pixel format.");
+            return;
         }
     }
 
