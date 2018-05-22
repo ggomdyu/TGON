@@ -535,7 +535,7 @@ public:
     std::shared_ptr<Texture> m_texture;
     std::shared_ptr<Mesh> m_quad;
 
-    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>("E:/Users/ggomdyu/Desktop/Sulk.wav");
+    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>(GetDesktopDirectory() + "/Sulk.ogg");
     AudioPlayer audioPlayer;
 
 public:
@@ -593,26 +593,14 @@ public:
         auto P2 = Matrix4x4::PerspectiveRH(Pi / 8.0f, extent.width / extent.height, 0.1f, 1000.0f);
         x -= 0.1f;
 
-        float aff = m_stopwatch.GetElapsedMilliseconds() * 0.001f;
-        auto bc = Lerp(m_extent.width, 1000, Clamp(std::sin(aff), 0.0f, 1.0f));
-        GetRootWindow()->SetSize(bc,extent.height);
-
-        bool a2 = false;
-        if (a2)
-        {
-            audioPlayer.Pause();
-        }
-        
-        bool b = false;
-        if (b)
-        {
-            audioPlayer.Resume();
-        }
+//        float aff = m_stopwatch.GetElapsedMilliseconds() * 0.001f;
+//        auto bc = Lerp(m_extent.width, 1000, Clamp(std::sin(aff), 0.0f, 1.0f));
+//        GetRootWindow()->SetSize(bc,extent.height);
 
         MVP = M2 * V2 * P2;
-
-        float a = audioPlayer.GetTotalProgressInSeconds();
-        audioPlayer.SetPosition({x, 0,0});
+//
+//        float a = audioPlayer.GetTotalProgressInSeconds();
+//        audioPlayer.SetPosition({x, 0,0});
 
         auto& mtrl = m_quad->GetMaterial();
  
