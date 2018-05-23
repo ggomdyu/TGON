@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include "MacOSWindowFwd.h"
-
 #include "../Generic/GenericWindow.h"
+
+#include "MacOSWindowFwd.h"
 
 namespace tgon
 {
@@ -40,7 +40,6 @@ public:
     virtual void Close() final override;
     virtual void Maximize() final override;
     virtual void Minimize() final override;
-
     virtual void SetPosition(int32_t x, int32_t y) final override;
     virtual void SetSize(int32_t width, int32_t height) final override;
     virtual void SetTitle(const char* title) final override;
@@ -57,7 +56,6 @@ public:
     virtual bool IsMaximized() const final override;
     virtual bool IsMinimized() const final override;
     virtual bool IsTopMost() const final override;
-
     using GenericWindow::GetPosition;
     using GenericWindow::GetSize;
     using GenericWindow::GetNativeWindow;

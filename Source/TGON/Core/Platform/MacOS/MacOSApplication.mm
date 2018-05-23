@@ -19,15 +19,15 @@ MacOSApplication::MacOSApplication(const WindowStyle& windowStyle) :
 
 void MacOSApplication::MessageLoop()
 {
-    NSEvent* message = nil;
+    NSEvent* event = nil;
     while (true)
     {
-        while((message = [NSApp nextEventMatchingMask:NSEventMaskAny
+        while((event = [NSApp nextEventMatchingMask:NSEventMaskAny
                                             untilDate:nil
                                                inMode:NSDefaultRunLoopMode
                                               dequeue:YES]) != nil)
         {
-            this->OnHandleMessage(message);
+            this->OnHandleMessage(event);
         }
 
         this->OnUpdate();

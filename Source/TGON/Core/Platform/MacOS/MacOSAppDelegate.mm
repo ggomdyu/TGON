@@ -1,11 +1,10 @@
 #import "PrecompiledHeader.h"
 
-#import "MacOSAppDelegate.h"
+#import <AppKit/NSOpenGLView.h>
 
 #import "../Application.h"
 
-#import <AppKit/NSOpenGLView.h>
-#import <QuartzCore/CVDisplayLink.h>
+#import "MacOSAppDelegate.h"
 
 namespace tgon
 {
@@ -34,7 +33,7 @@ std::shared_ptr<tgon::Application> g_application;
 {
     g_application->OnDidLaunch();
 
-    // If launch is over, then start the message loop.
+    // If launch has been completed, then start the message loop.
     g_application->MessageLoop();
 }
 
@@ -42,5 +41,10 @@ std::shared_ptr<tgon::Application> g_application;
 {
     g_application->OnWillTerminate();
     g_application.reset();
+}
+
+- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
+{
+    return YES;
 }
 @end

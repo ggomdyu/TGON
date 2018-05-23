@@ -535,7 +535,7 @@ public:
     std::shared_ptr<Texture> m_texture;
     std::shared_ptr<Mesh> m_quad;
 
-    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>("E:/Users/ggomdyu/Desktop/Sulk.wav");
+    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>(GetDesktopDirectory() + "/Sulk.wav");
     AudioPlayer audioPlayer;
 
 public:
@@ -552,9 +552,10 @@ public:
         audioPlayer.SetPitch(1.0f);
         audioPlayer.SetVolume(0.2f);
         audioPlayer.Play();
+        
+        int  * a =  new int[50000];
 
         auto b = alGetError();
-        std::static_pointer_cast<GrayscaleTextureMaterial>(m_quad->GetMaterial())->SetTexture(m_texture);
     }
 
     ~ThousandParty()
@@ -607,9 +608,9 @@ public:
  
         GetGraphicsModule().GetGraphics().ClearColorDepthBuffer();
 
-        mtrl->Use();
+//        mtrl->Use();
         {
-            mtrl->GetShader()->SetParameterMatrix4fv("g_uMVP", MVP[0]);
+//            mtrl->GetShader()->SetParameterMatrix4fv("g_uMVP", MVP[0]);
             
             m_quad->GetVertexBuffer()->Use();
             m_quad->GetIndexBuffer()->Use();

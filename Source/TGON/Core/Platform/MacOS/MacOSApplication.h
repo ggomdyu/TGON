@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#include "MacOSApplicationFwd.h"
-
 #include "../Generic/GenericApplication.h"
+
+#include "MacOSApplicationFwd.h"
 
 namespace tgon
 {
