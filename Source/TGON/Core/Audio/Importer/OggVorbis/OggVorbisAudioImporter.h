@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "/Users/ggomdyu/Desktop/Programming/GitHub/TGON/Source/ThirdParty/libvorbis-1.3.6/include/vorbis/vorbisfile.h"
 #include <vorbis/vorbisfile.h>
 #include <ogg/ogg.h>
 
