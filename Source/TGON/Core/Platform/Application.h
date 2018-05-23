@@ -6,6 +6,7 @@
 
 #pragma once
 #include <boost/preprocessor/cat.hpp>
+#include <vector>
 
 #include "Core/Platform/Config.h"
 

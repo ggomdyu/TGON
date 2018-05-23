@@ -1,5 +1,5 @@
 /**
- * @filename    InputSystem.h
+ * @filename    InputModule.h
  * @author      ggomdyu
  * @since       05/15/2018
  */
@@ -9,32 +9,32 @@
 
 #include "Core/Math/Extent.h"
 
-#include "ISystem.h"
+#include "Core/Object/IModule.h"
 
 namespace tgon
 {
 
-struct InputSystemProperty
+struct InputModuleProperty
 {
     bool isUseKeyboard = false;
     bool isUseMouse = false;
     bool isUseGamepad = false;
 };
 
-class TGON_API InputSystem :
-    public ISystem
+class TGON_API InputModule :
+    public IModule
 {
 /* @section Public constructor */
 public:
-    InputSystem();
+    InputModule();
 
 /* @section Public destructor */
 public:
-    virtual ~InputSystem() override;
+    virtual ~InputModule() override;
 
 /* @section Public method */
 public:
-    void Initialize(const I32Extent2D& displaySize, const InputSystemProperty& inputSystemProperty);
+    void Initialize(const I32Extent2D& displaySize, const InputModuleProperty& InputModuleProperty);
 
     virtual void Update() override;
 

@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "GraphicsSystem.h"
+#include "GraphicsModule.h"
 
 #include "Core/Math/Color.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
@@ -9,28 +9,28 @@
 #else
 #endif
 #include "Graphics/LowLevelRender/OpenGL/OpenGLGraphics.h"
-#include "GraphicsSystem.h"
+#include "GraphicsModule.h"
 
 namespace tgon
 {
 
-GraphicsSystem::GraphicsSystem(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window) :
+GraphicsModule::GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window) :
     m_graphics(videoMode, window)
 {
 }
 
-GraphicsSystem::~GraphicsSystem() = default;
+GraphicsModule::~GraphicsModule() = default;
 
-void GraphicsSystem::Update()
+void GraphicsModule::Update()
 {
 }
 
-Graphics& GraphicsSystem::GetGraphics()
+Graphics& GraphicsModule::GetGraphics()
 {
     return m_graphics;
 }
 
-const Graphics& GraphicsSystem::GetGraphics() const
+const Graphics& GraphicsModule::GetGraphics() const
 {
     return m_graphics;
 }

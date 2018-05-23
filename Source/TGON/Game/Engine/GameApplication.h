@@ -7,8 +7,8 @@
 #pragma once
 #include "Core/Platform/Application.h"
 
-#include "../System/TimeSystem.h"
-#include "../System/GraphicsSystem.h"
+#include "../Object/Module/TimeModule.h"
+#include "../Object/Module/GraphicsModule.h"
 
 namespace tgon
 {
@@ -31,23 +31,23 @@ public:
 public:
     virtual void OnUpdate() override;
 
-    TimeSystem& GetTimeSystem() noexcept;
-//    InputSystem& GetInputSystem();
-    GraphicsSystem& GetGraphicsSystem() noexcept;
+    TimeModule& GetTimeModule() noexcept;
+//    InputModule& GetInputModule();
+    GraphicsModule& GetGraphicsModule() noexcept;
 
-    const TimeSystem& GetTimeSystem() const noexcept;
-//    const InputSystem& GetInputSystem() const;
-    const GraphicsSystem& GetGraphicsSystem() const noexcept;
+    const TimeModule& GetTimeModule() const noexcept;
+//    const InputModule& GetInputModule() const;
+    const GraphicsModule& GetGraphicsModule() const noexcept;
 
 /* @section Private variable */
 private:
-    TimeSystem m_timeSystem;
-//    InputSystem m_inputSystem;
-    GraphicsSystem m_graphicsSystem;
-    //std::shared_ptr<SceneSystem> m_sceneSystem;
-    //std::shared_ptr<UISystem> m_uiSystem;
-    //std::shared_ptr<SoundSystem> m_soundSystem;
-    //std::shared_ptr<TaskSystem> m_taskSystem;
+    TimeModule m_timeModule;
+//    InputModule m_inputModule;
+    GraphicsModule m_graphicsModule;
+    //std::shared_ptr<SceneModule> m_sceneModule;
+    //std::shared_ptr<UIModule> m_uiModule;
+    //std::shared_ptr<SoundModule> m_soundModule;
+    //std::shared_ptr<TaskModule> m_taskModule;
 };
 
 } /* namespace tgon */

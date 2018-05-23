@@ -1,3 +1,4 @@
+#include "..\Application.h"
 #include "PrecompiledHeader.h"
 
 #ifndef NDEBUG
@@ -43,10 +44,6 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 
     g_application = MakeApplication();
     g_application->OnWillLaunch();
-    {
-        // 이건 WindowsMisc에 넣읍시다
-	    //windows::EnableFloatException(EM_OVERFLOW | EM_UNDERFLOW | EM_ZERODIVIDE);
-    }
     g_application->OnDidLaunch();
 
     g_application->MessageLoop();

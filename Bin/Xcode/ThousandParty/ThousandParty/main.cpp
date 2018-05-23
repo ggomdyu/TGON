@@ -47,8 +47,8 @@
 #include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/Renderer.h"
 #include "Graphics/Render/MeshUtility.h"
-#include "Game/System/GraphicsSystem.h"
-#include "Game/System/TimeSystem.h"
+#include "Game/Object/Module/GraphicsModule.h"
+#include "Game/Object/Module/TimeModule.h"
 #include "Graphics/LowLevelRender/VertexBuffer.h"
 #include "Graphics/LowLevelRender/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
@@ -535,7 +535,7 @@ public:
     std::shared_ptr<Texture> m_texture;
     std::shared_ptr<Mesh> m_quad;
 
-    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>(GetDesktopDirectory() + "/Sulk.ogg");
+    std::shared_ptr<AudioBuffer> audioBuffer = std::make_shared<AudioBuffer>("E:/Users/ggomdyu/Desktop/Sulk.wav");
     AudioPlayer audioPlayer;
 
 public:
@@ -605,7 +605,7 @@ public:
 
         auto& mtrl = m_quad->GetMaterial();
  
-        GetGraphicsSystem().GetGraphics().ClearColorDepthBuffer();
+        GetGraphicsModule().GetGraphics().ClearColorDepthBuffer();
 
         mtrl->Use();
         {
@@ -618,7 +618,7 @@ public:
         }
         mtrl->Unuse();
 
-        GetGraphicsSystem().GetGraphics().SwapBuffer();
+        GetGraphicsModule().GetGraphics().SwapBuffer();
     }
 };
 

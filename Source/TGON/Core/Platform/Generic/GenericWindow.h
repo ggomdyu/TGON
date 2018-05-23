@@ -38,7 +38,7 @@ public:
 public:
     virtual ~GenericWindow() = 0;
 
-/* @section Public operator */
+/* @section Protected operator */
 protected:
     GenericWindow& operator=(GenericWindow&& rhs);
 
@@ -50,7 +50,6 @@ public:
     virtual void Maximize() = 0;
     virtual void Minimize() = 0;
     virtual void BringToFront() {}
-
     virtual void SetPosition(int32_t x, int32_t y) = 0;
     virtual void SetSize(int32_t width, int32_t height) = 0;
     virtual void SetTitle(const char* title) = 0;

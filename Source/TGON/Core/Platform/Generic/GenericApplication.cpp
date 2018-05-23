@@ -38,4 +38,27 @@ const std::shared_ptr<GenericWindow>& GenericApplication::GetRootWindow() const 
     return m_rootWindow;
 }
 
+void GenericApplication::OnUpdate()
+{
+    for (auto& module : m_modules)
+    {
+        module->Update();
+    }
+}
+
+void GenericApplication::AddModule(const std::shared_ptr<IModule>& module)
+{
+    m_modules.push_back(module);
+}
+
+void GenericApplication::AddModule(std::initializer_list<const std::shared_ptr<IModule>&> modules)
+{
+    m_modules.reserve(modules.size());
+
+    for (auto& module : m_modules)
+    {
+        m_modules.push_back(module);
+    }
+}
+
 } /* namespace tgon */

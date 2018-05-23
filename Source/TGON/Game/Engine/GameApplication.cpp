@@ -11,41 +11,41 @@ namespace tgon
 
 GameApplication::GameApplication(const WindowStyle& windowStyle, const VideoMode& videoMode) :
     Application(windowStyle),
-    m_graphicsSystem(videoMode, GetRootWindow())
+    m_graphicsModule(videoMode, GetRootWindow())
 {
     if (m_rootWindow != nullptr)
     {
         m_rootWindow->OnWindowResize = [&](int32_t width, int32_t height)
         {
-            m_graphicsSystem.GetGraphics().SetViewport(0, 0, width, height);
+            m_graphicsModule.GetGraphics().SetViewport(0, 0, width, height);
         };
     }
 }
 
 void GameApplication::OnUpdate()
 {
-    m_timeSystem.Update();
-    m_graphicsSystem.Update();
+    m_timeModule.Update();
+    m_graphicsModule.Update();
 }
 
-TimeSystem& GameApplication::GetTimeSystem() noexcept
+TimeModule& GameApplication::GetTimeModule() noexcept
 {
-    return m_timeSystem;
+    return m_timeModule;
 }
 
-const TimeSystem& GameApplication::GetTimeSystem() const noexcept
+const TimeModule& GameApplication::GetTimeModule() const noexcept
 {
-    return m_timeSystem;
+    return m_timeModule;
 }
 
-GraphicsSystem& GameApplication::GetGraphicsSystem() noexcept
+GraphicsModule& GameApplication::GetGraphicsModule() noexcept
 {
-    return m_graphicsSystem;
+    return m_graphicsModule;
 }
 
-const GraphicsSystem& GameApplication::GetGraphicsSystem() const noexcept
+const GraphicsModule& GameApplication::GetGraphicsModule() const noexcept
 {
-    return m_graphicsSystem;
+    return m_graphicsModule;
 }
 
 } /* namespace tgon */

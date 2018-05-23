@@ -13,8 +13,8 @@
     <Filter Include="Source\Game\Object">
       <UniqueIdentifier>{9aa25fa1-4a7b-432b-993f-16c29445688c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Game\System">
-      <UniqueIdentifier>{adbb5358-a5e0-48f4-9b3e-701800a96528}</UniqueIdentifier>
+    <Filter Include="Source\Game\Object\Module">
+      <UniqueIdentifier>{4774005f-f36c-4fe8-b273-71e253c104c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,20 +33,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\ComponentFwd.h">
       <Filter>Source\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\ISystem.h">
-      <Filter>Source\Game\System</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\InputModule.h">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\TimeSystem.h">
-      <Filter>Source\Game\System</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\TimeModule.h">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Component.h">
-      <Filter>Source\Game\System</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\GraphicsSystem.h">
-      <Filter>Source\Game\System</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\InputSystem.h">
-      <Filter>Source\Game\System</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\GraphicsModule.h">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,18 +50,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.cpp">
       <Filter>Source\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\TimeSystem.cpp">
-      <Filter>Source\Game\System</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\InputSystem.cpp">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Component.cpp">
-      <Filter>Source\Game\System</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\TimeModule.cpp">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\GraphicsSystem.cpp">
-      <Filter>Source\Game\System</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Module\GraphicsModule.cpp">
+      <Filter>Source\Game\Object\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\ISystem.cpp">
-      <Filter>Source\Game\System</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\System\InputSystem.cpp" />
   </ItemGroup>
 </Project>

@@ -1,25 +1,25 @@
 /**
- * @filename    TimeSystem.h
+ * @filename    TimeModule.h
  * @author      ggomdyu
  * @since       07/24/2016
  */
 
 #pragma once
-#include "ISystem.h"
+#include "Core/Object/IModule.h"
 
 namespace tgon
 {
 
-class TGON_API TimeSystem :
-	public ISystem
+class TGON_API TimeModule :
+	public IModule
 {
 /* @section Public constructor */
 public:
-    TimeSystem();
+    TimeModule();
 
 /* @section Public destructor */
 public:
-    virtual ~TimeSystem() override = default;
+    virtual ~TimeModule() override = default;
 
 /* @section Public method */
 public:

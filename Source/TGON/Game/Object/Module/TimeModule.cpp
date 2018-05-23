@@ -2,19 +2,19 @@
 
 #include "Core/Time/Time.h"
 
-#include "TimeSystem.h"
+#include "TimeModule.h"
 
 namespace tgon
 {
 
-TimeSystem::TimeSystem() :
+TimeModule::TimeModule() :
     m_prevTime(GetTickCount()),
     m_timeScale(1.0f),
     m_tickTime(0.0f)
 {
 }
 
-void TimeSystem::Update()
+void TimeModule::Update()
 {
     auto currTime = GetTickCount();
 
@@ -22,17 +22,17 @@ void TimeSystem::Update()
     m_prevTime = currTime;
 }
 
-void TimeSystem::SetTimeScale(float timeScale)
+void TimeModule::SetTimeScale(float timeScale)
 {
     m_timeScale = timeScale;
 }
 
-float TimeSystem::GetTimeScale() const
+float TimeModule::GetTimeScale() const
 {
     return m_timeScale;
 }
 
-float TimeSystem::GetTickTime() const
+float TimeModule::GetTickTime() const
 {
     return m_tickTime;
 }

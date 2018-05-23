@@ -1,27 +1,27 @@
 /**
- * @filename    GraphicsSystem.h
+ * @filename    GraphicsModule.h
  * @author      ggomdyu
  * @since       07/24/2016
  */
 
 #pragma once
-#include "ISystem.h"
+#include "Core/Object/IModule.h"
 
 #include "Graphics/LowLevelRender/Graphics.h"
 
 namespace tgon
 {
 
-class TGON_API GraphicsSystem final :
-	public ISystem
+class TGON_API GraphicsModule final :
+	public IModule
 {
 /* @section Public constructor */
 public:
-    GraphicsSystem(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);
+    GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window);
 
 /* @section Public destructor */
 public:
-    virtual ~GraphicsSystem() final override;
+    virtual ~GraphicsModule() final override;
 
 /* @section Public method */
 public:

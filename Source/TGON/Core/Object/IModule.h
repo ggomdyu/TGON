@@ -1,5 +1,5 @@
 /**
- * @filename    ISystem.h
+ * @filename    IModule.h
  * @author      ggomdyu
  * @since       07/13/2016
  */
@@ -8,26 +8,31 @@
 #include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
+#include "Core/Object/Object.h"
 
 namespace tgon
 {
 
-class TGON_API ISystem :
+class TGON_API IModule :
+    public Object,
     private boost::noncopyable
 {
+public:
+    TGON_RUNTIME_OBJECT(IModule);
+
 /* @section Public constructor */
 public:
-    ISystem() = default;
+    IModule() = default;
 
 /* @section Public destructor */
 public:
-    virtual ~ISystem() = 0;
+    virtual ~IModule() = 0;
 
 /* @section Public method */
 public:
     virtual void Update() = 0;
 };
     
-inline ISystem::~ISystem() = default;
+inline IModule::~IModule() = default;
 
 } /* namespace tgon */
