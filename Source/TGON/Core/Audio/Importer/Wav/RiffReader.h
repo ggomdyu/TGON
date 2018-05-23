@@ -16,6 +16,7 @@ class RiffReader
 public:
     enum ChunkId : uint32_t
     {
+//#if TGON_USING_LITTLE_ENDIAN
         Riff = 'FFIR',
         Wave = 'EVAW',
         Cue = ' euc',
@@ -29,6 +30,8 @@ public:
         Note = 'eton',
         Smpl = 'lpms',
         Inst = 'tsni',
+//#else
+//#endif
     };
 
     struct ChunkHeader
@@ -36,7 +39,11 @@ public:
     /* @section Public constructor */
     public:
         ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept;
-
+        
+    /* @section Public method */
+    public:
+        std::size_t GetSize() const noexcept;
+        
     /* @section Public variable */
     public:
         ChunkId chunkId;
@@ -104,6 +111,17 @@ inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataS
     chunkData(chunkData)
 {
 }
+    
+inline std::size_t RiffReader::ChunkHeader::GetSize() const noexcept
+{
+    auto chunkSize = sizeof(chunkId) + sizeof(chunkDataSize) + sizeof(uint32_t);
+    if (chunkId != ChunkId::Riff)
+    {
+        chunkSize -= sizeof(uint32_t) - chunkDataSize;
+    }
+    
+    return chunkSize;
+}
 
 inline RiffReader::RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept :
     m_srcData(srcData),
@@ -116,13 +134,7 @@ inline bool RiffReader::ReadNext()
 {
     ChunkHeader currChunk = GetChunkHeader();
 
-    auto moveOffset = sizeof(ChunkHeader);
-    if (currChunk.chunkId != ChunkId::Riff)
-    {
-        moveOffset -= sizeof(currChunk.chunkData) - currChunk.chunkDataSize;
-    }
-        
-    m_srcDataIter += moveOffset;
+    m_srcDataIter += currChunk.GetSize();
     if (m_srcDataIter >= m_srcData + m_srcDataBytes) // This not works fine. Should be fixed!
     {
         return false;

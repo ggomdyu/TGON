@@ -34,6 +34,8 @@
 		FD0672D220B4240500BEA737 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../../ThirdParty/Debug/x86_64/libvorbis.a; sourceTree = "<group>"; };
 		FD0672D320B4240500BEA737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../ThirdParty/Debug/x86_64/libz.a; sourceTree = "<group>"; };
 		FD06734B20B42CAA00BEA737 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		FD515BE020B470C00002F5C3 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../../ThirdParty/Debug/x86_64/libvorbisenc.a; sourceTree = "<group>"; };
+		FD515BE120B470C00002F5C3 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
 		FD7EA6E620B09D2700A76C69 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
 		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,8 @@
 		FDD7C8EE1F6586D5000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD515BE020B470C00002F5C3 /* libvorbisenc.a */,
+				FD515BE120B470C00002F5C3 /* libvorbisfile.a */,
 				FD06734B20B42CAA00BEA737 /* OpenAL.framework */,
 				FDEA01CB20356DC800135040 /* libpng16.a */,
 				FDEA01C920356DB800135040 /* libz.a */,
@@ -133,7 +137,7 @@
 		FDD7C8BF1F654342000EB7C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = ggomdyu;
 				TargetAttributes = {
 					FDD7C8C61F654342000EB7C8 = {
@@ -185,6 +189,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -192,6 +197,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -240,6 +246,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -247,6 +254,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -279,6 +287,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../Source/TGON",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_67_0",
