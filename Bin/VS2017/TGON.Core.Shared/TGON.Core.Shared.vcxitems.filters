@@ -46,9 +46,6 @@
     <Filter Include="Source\Core\Audio">
       <UniqueIdentifier>{12d5873f-9f48-46bf-817e-7182a19de10b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Random">
-      <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Audio\Importer">
       <UniqueIdentifier>{269adcf9-c8e9-4e38-8d98-8728a1b5f13d}</UniqueIdentifier>
     </Filter>
@@ -94,13 +91,19 @@
     <Filter Include="Source\Core\Hardware\Generic">
       <UniqueIdentifier>{90d2731a-bbe8-4812-865d-7a043ca7f815}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\Object\Module">
+      <UniqueIdentifier>{f93e5d4f-7cf2-408b-b20f-cc5c2b111d9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Random">
+      <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
       <Filter>Source\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.cpp">
-      <Filter>Random</Filter>
+      <Filter>Source\Core\Random</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp">
       <Filter>Source\Core\String</Filter>
@@ -165,7 +168,7 @@
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\Random.h">
-      <Filter>Random</Filter>
+      <Filter>Source\Core\Random</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Color.h">
       <Filter>Source\Core\Math</Filter>
@@ -189,7 +192,7 @@
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.h">
-      <Filter>Random</Filter>
+      <Filter>Source\Core\Random</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Mathematics.h">
       <Filter>Source\Core\Math</Filter>
@@ -377,8 +380,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IModule.h">
-      <Filter>Source\Core\Object</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\IModule.h">
+      <Filter>Source\Core\Object\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TaskModule.h">
+      <Filter>Source\Core\Object\Module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

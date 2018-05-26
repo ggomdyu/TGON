@@ -8,13 +8,14 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 #include <memory>
-#include <type_traits>
+#include <map>
+#include <vector>
 
 #include "Core/Object/Object.h"
-#include "Core/Object/IModule.h"
-#include "../Config.h"
+#include "Core/Object/Module/IModule.h"
 
-#include "GenericApplicationFwd.h"
+#include "GenericWindow.h"
+#include "GenericApplicationType.h"
 
 namespace tgon
 {
@@ -29,7 +30,7 @@ public:
 /* @section Public constructor */
 public:
     GenericApplication();
-    GenericApplication(const std::shared_ptr<GenericWindow>& window);
+    GenericApplication(const std::shared_ptr<GenericWindow>& rootWindow);
 
 /* @section Public destructor */
 public:
@@ -40,16 +41,15 @@ public:
     virtual void MessageLoop() = 0;
     virtual void Terminate() = 0;
     virtual void ShowMessageBox(const char* message) const;
-    virtual void ShowMessageBox(const char* message, MessageBoxIcon iconType) const;
+    virtual void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     virtual void ShowMessageBox(const char* title, const char* message) const;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const = 0;
+    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const = 0;
     const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
     template <typename _ModuleType, typename... _Args>
     void AddModule(_Args&&... args);
     void AddModule(const std::shared_ptr<IModule>& module);
-    void AddModule(std::initializer_list<const std::shared_ptr<IModule>&> modules);
     template <typename _ModuleType>
-    void GetModule();
+    IModule* GetModule();
 
 /* @section Public event handler */
 public:
@@ -63,13 +63,30 @@ public:
 /* @section Protected variable */
 protected:
     std::shared_ptr<GenericWindow> m_rootWindow;
+
+    std::map<size_t, std::shared_ptr<IModule>> m_modulesToFind;
     std::vector<std::shared_ptr<IModule>> m_modules;
 };
 
 template<typename _ModuleType, typename ..._Args>
-inline void GenericApplication::AddModule(_Args&&... args)
+inline void GenericApplication::AddModule(_Args&& ...args)
 {
-    m_modules.push_back(std::make_shared<_ModuleType>(std::forward<_Args>(args)...));
+    auto module = std::make_shared<_ModuleType>(std::forward<_Args>(args)...);
+
+    m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
+    m_modules.push_back(module);
+}
+
+template<typename _ModuleType>
+inline IModule* GenericApplication::GetModule()
+{
+    auto iter = m_modulesToFind.find(tgon::GetRTTI<_ModuleType>()->GetHashCode());
+    if (iter == m_modulesToFind.end())
+    {
+        return nullptr;
+    }
+
+    return std::static_pointer_cast<_ModuleType>(iter->second);
 }
 
 } /* namespace tgon */

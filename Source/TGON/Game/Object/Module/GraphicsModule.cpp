@@ -14,8 +14,8 @@
 namespace tgon
 {
 
-GraphicsModule::GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window) :
-    m_graphics(videoMode, window)
+GraphicsModule::GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& displayTargetWindow) :
+    m_graphics(videoMode, displayTargetWindow)
 {
 }
 
@@ -23,6 +23,16 @@ GraphicsModule::~GraphicsModule() = default;
 
 void GraphicsModule::Update()
 {
+    this->Draw();
+}
+
+void GraphicsModule::Draw()
+{
+    m_graphics.ClearColorDepthBuffer();
+    {
+        /* Add batch render */
+    }
+    m_graphics.SwapBuffer();
 }
 
 Graphics& GraphicsModule::GetGraphics()

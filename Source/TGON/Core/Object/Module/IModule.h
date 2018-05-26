@@ -18,7 +18,7 @@ class TGON_API IModule :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(IModule);
+    TGON_RUNTIME_OBJECT(IModule)
 
 /* @section Public constructor */
 public:

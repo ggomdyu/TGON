@@ -14,6 +14,12 @@
 namespace tgon
 {
 
+WindowsApplication::WindowsApplication() :
+    GenericApplication()
+{
+    RegisterWindowClass();
+}
+
 WindowsApplication::WindowsApplication(const WindowStyle& windowStyle) :
     GenericApplication([&]()
     {

@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Random/Random.h"
-
 #include "GenericApplication.h"
 #include "GenericApplicationType.h"
 
@@ -23,9 +21,9 @@ void GenericApplication::ShowMessageBox(const char* message) const
     this->ShowMessageBox("", message);
 }
 
-void GenericApplication::ShowMessageBox(const char* message, MessageBoxIcon messageBoxType) const
+void GenericApplication::ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const
 {
-    this->ShowMessageBox("", message, messageBoxType);
+    this->ShowMessageBox("", message, messageBoxIcon);
 }
 
 void GenericApplication::ShowMessageBox(const char* title, const char* message) const
@@ -38,26 +36,17 @@ const std::shared_ptr<GenericWindow>& GenericApplication::GetRootWindow() const 
     return m_rootWindow;
 }
 
+void GenericApplication::AddModule(const std::shared_ptr<IModule>& module)
+{
+    m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
+    m_modules.push_back(module);
+}
+
 void GenericApplication::OnUpdate()
 {
     for (auto& module : m_modules)
     {
         module->Update();
-    }
-}
-
-void GenericApplication::AddModule(const std::shared_ptr<IModule>& module)
-{
-    m_modules.push_back(module);
-}
-
-void GenericApplication::AddModule(std::initializer_list<const std::shared_ptr<IModule>&> modules)
-{
-    m_modules.reserve(modules.size());
-
-    for (auto& module : m_modules)
-    {
-        m_modules.push_back(module);
     }
 }
 

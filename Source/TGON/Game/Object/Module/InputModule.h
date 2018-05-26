@@ -9,7 +9,7 @@
 
 #include "Core/Math/Extent.h"
 
-#include "Core/Object/IModule.h"
+#include "Core/Object/Module/IModule.h"
 
 namespace tgon
 {

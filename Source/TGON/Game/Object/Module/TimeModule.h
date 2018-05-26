@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/Object/IModule.h"
+#include "Core/Object/Module/IModule.h"
 
 namespace tgon
 {
@@ -13,6 +13,9 @@ namespace tgon
 class TGON_API TimeModule :
 	public IModule
 {
+public:
+    TGON_RUNTIME_OBJECT(TimeModule)
+
 /* @section Public constructor */
 public:
     TimeModule();

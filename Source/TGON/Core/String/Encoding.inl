@@ -53,7 +53,8 @@ template <>
 inline int32_t UTF8::Convert<UTF16LE>(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize)
 {
     // UNIT_TEST: Is srcStr encoded by UTF-8?
-
+    return 0;
+/*
     UErrorCode errorCode = UErrorCode::U_ZERO_ERROR;
     UConverter* conv = ucnv_open("UTF8", &errorCode);
     if (U_FAILURE(errorCode))
@@ -68,7 +69,7 @@ inline int32_t UTF8::Convert<UTF16LE>(const char* srcStr, std::size_t srcStrByte
     }
 
     ucnv_close(conv);
-    return length;
+    return length;*/
 }
 
 constexpr int32_t UTF8::GetMinCharSize() noexcept
@@ -90,8 +91,8 @@ template <>
 inline int32_t UTF16LE::Convert<UTF8>(const char* srcStr, std::size_t srcStrBytes, char* destStr, std::size_t destStrBufferSize)
 {
     // UNIT_TEST: Is srcStr encoded by UTF16LE?
-
-    UErrorCode errorCode = UErrorCode::U_ZERO_ERROR;
+    return 0;
+   /* UErrorCode errorCode = UErrorCode::U_ZERO_ERROR;
     UConverter* conv = ucnv_open("UTF8", &errorCode);
     if (U_FAILURE(errorCode))
     {
@@ -106,7 +107,7 @@ inline int32_t UTF16LE::Convert<UTF8>(const char* srcStr, std::size_t srcStrByte
     }
 
     ucnv_close(conv);
-    return bytes;
+    return bytes;*/
 }
 
 constexpr int32_t UTF16LE::GetMinCharSize() noexcept

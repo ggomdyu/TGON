@@ -20,8 +20,8 @@ public:
 
 /* @section Public constructor */
 public:
-    WindowsApplication() = default;
-    explicit WindowsApplication(const WindowStyle& windowStyle);
+    WindowsApplication();
+    WindowsApplication(const WindowStyle& windowStyle);
 
 /* @section Public destructor */
 public:
