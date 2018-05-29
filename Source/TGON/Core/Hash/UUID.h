@@ -45,7 +45,7 @@ private:
 /* @section Public operator */
 public:
     using SuperType::operator=;
-    using SuperType::operator[];
+    const _CharType& operator[](std::size_t index) const;
 
 /* @section Public method */
 public:
@@ -86,6 +86,12 @@ inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTrait
     uuid_unparse(uuid, ret.m_str);
     return ret;
 #endif
+}
+   
+template <typename _CharType, typename _StringTraitsType>
+inline const _CharType& BasicUUID<_CharType, _StringTraitsType>::operator[](std::size_t index) const
+{
+    return SuperType::operator[](index);
 }
 
 } /* namespace tgon */
