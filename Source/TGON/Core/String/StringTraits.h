@@ -6,7 +6,9 @@
 
 #pragma once
 #include <algorithm>
+#include <cstdarg>
 #include <cassert>
+#include <cstdint>
 
 namespace tgon
 {
@@ -38,10 +40,7 @@ protected:
      * @param [out] destStr             The destination of assign.
      */
     template <std::size_t _DestStrBufferLen>
-    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]) :
-        StringTraits(srcStr, srcStrLen, destStr, _DestStrBufferLen)
-    {
-    }
+    StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]);
 
     /**
      * @brief                           Assigns the chCount copies of ch to destStr.
@@ -227,7 +226,7 @@ public:
      * @param [in] destStr              The destination of convert.
      * @param [in] destStrBufferLen     The buffer length of destStr.
      */
-    static void ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
+    static std::size_t ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Converts the content of string to uppercase.
@@ -244,7 +243,7 @@ public:
      * @param [in] destStr              The destination of convert.
      * @param [in] destStrBufferLen     The buffer length of destStr.
      */
-    static void ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
+    static std::size_t ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
      * @brief                           Checks the string is null or empty.
@@ -254,9 +253,17 @@ public:
     
     /**
      * @brief                           Replaces each format item to text.
-     * @return                          The length of format string.
+     * @param [in] formatStr            The format string.
+     * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
-//    static int32_t Fotmat(const _CharType* formatStr, ...);
+    static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, ...);
+    
+    /**
+     * @brief                           Replaces each format item to text.
+     * @param [in] formatStr            The format string.
+     * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
+     */
+    static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, std::va_list vaList);
 
 /* @section Public variable */
 public:
@@ -273,6 +280,13 @@ inline StringTraits<_CharType>::StringTraits(const _CharType* srcStr, std::size_
     StringTraits::Assign(srcStr, srcStrLen, destStr, destStrBufferLen);
 }
 
+template <typename _CharType>
+template <std::size_t _DestStrBufferLen>
+inline StringTraits<_CharType>::StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]) :
+    StringTraits(srcStr, srcStrLen, destStr, _DestStrBufferLen)
+{
+}
+    
 template <typename _CharType>
 inline StringTraits<_CharType>::StringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
 {
@@ -407,9 +421,12 @@ inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, std::size_
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
+inline std::size_t StringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    ToLower(srcStr, std::strlen(srcStr), destStr, destStrBufferLen);
+    std::size_t srcStrLen = std::strlen(srcStr);
+    ToLower(srcStr, srcStrLen, destStr, destStrBufferLen);
+    
+    return srcStrLen;
 }
 
 template <typename _CharType>
@@ -421,25 +438,51 @@ inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, std::size_
 }
 
 template <typename _CharType>
-inline void StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
+inline std::size_t StringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
 {
-    ToUpper(srcStr, std::strlen(srcStr), destStr, destStrBufferLen);
+    std::size_t srcStrLen = std::strlen(srcStr);
+    ToUpper(srcStr, srcStrLen, destStr, destStrBufferLen);
+    
+    return srcStrLen;
 }
 
 template <typename _CharType>
 inline bool StringTraits<_CharType>::IsNullOrEmpty(const _CharType* srcStr) noexcept
 {   
-    if (srcStr == nullptr)
-    {
-        return true;
-    }
-
-    if (srcStr[0] == 0)
+    if (srcStr == nullptr || srcStr[0] == _CharType(0))
     {
         return true;
     }
 
     return false;
+}
+    
+template <typename _CharType>
+inline std::pair<const _CharType*, std::size_t> StringTraits<_CharType>::Format(const _CharType* formatStr, ...)
+{
+    std::va_list vaList;
+    va_start(vaList, formatStr);
+    return Format(formatStr, vaList);
+}
+    
+template <>
+inline std::pair<const char*, std::size_t> StringTraits<char>::Format(const char* formatStr, std::va_list vaList)
+{
+    constexpr std::size_t strBufferLen = 1024 * 8;
+    thread_local std::unique_ptr<char[]> strBuffer(new char[strBufferLen] {});
+
+    int strLen = vsprintf(strBuffer.get(), formatStr, vaList);
+    return {strBuffer.get(), strLen};
+}
+    
+template <>
+inline std::pair<const wchar_t*, std::size_t> StringTraits<wchar_t>::Format(const wchar_t* formatStr, std::va_list vaList)
+{
+    constexpr std::size_t strBufferLen = 1024 * 8;
+    thread_local std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferLen] {});
+    
+    int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
+    return {strBuffer.get(), strLen};
 }
 
 } /* namespace tgon */
