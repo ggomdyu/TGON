@@ -1,11 +1,13 @@
 #include "PrecompiledHeader.h"
 
-#include "../Log.h"
-
 #include <string>
 #include <cstdarg>
 #include <mutex>
 #include <AppKit/NSAlert.h>
+
+#include "Core/Utility/Algorithm.h"
+#include "Core/String/StringTraits.h"
+#include "../Log.h"
 
 namespace tgon
 {
@@ -18,29 +20,70 @@ std::mutex g_mutex;
 
 } /* namespace */
 
+TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
+{
+#if defined(_DEBUG) || !defined(NDEBUG)
+    const char* logStrBuffer = StringTraits<char>::Format(formatStr, vaList).first;
+    
+    std::lock_guard<std::mutex> lockGuard(g_mutex);
+    {
+        if (logLevel == LogLevel::Debug)
+        {
+            NSLog(@"%s", logStrBuffer);
+        }
+        else if (logLevel == LogLevel::Warning)
+        {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@""];
+            [alert setInformativeText:[NSString stringWithUTF8String:logStrBuffer]];
+            [alert setAlertStyle:NSAlertStyleCritical];
+            [alert runModal];
+        }
+    }
+#endif
+}
+    
 TGON_API void Log(LogLevel logLevel, const char* formatStr, ...)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    std::lock_guard<std::mutex> lockGuard(g_mutex);
-
-    va_list vaList;
+    std::va_list vaList;
     va_start(vaList, formatStr);
-    
-    vprintf(formatStr, vaList);
-    
+    Log(logLevel, formatStr, vaList);
+#endif
+}
 
-//    if (logLevel == LogLevel::Warning)
-//    {
-//        
-//    }
-//    else
-//    {
-//        NSAlert *alert = [[NSAlert alloc] init];
-//        [alert setMessageText:[NSString stringWithUTF8String:title]];
-//        [alert setInformativeText:[NSString stringWithUTF8String:message]];
-//        [alert setAlertStyle:nativeNSAlertStyleArray[static_cast<int32_t>(iconType)]];
-//        [alert runModal];
-//    }
+void Assert(bool condition)
+{
+#if defined(_DEBUG) || ! defined(NDEBUG)
+    if (condition == false)
+    {
+        Log(LogLevel::Warning, "Assertion Failed!");
+        std::abort();
+    }
+#endif
+}
+
+void Assert(bool condition, const char* formatStr, ...)
+{
+#if defined(_DEBUG) || ! defined(NDEBUG)
+    if (condition == false)
+    {
+        if (StringTraits<char>::IsNullOrEmpty(formatStr) == true)
+        {
+            Assert(condition);
+            return;
+        }
+
+        thread_local static std::string formatStr2;
+        formatStr2 = "Assertion Failed: ";
+        formatStr2 += formatStr;
+        
+        std::va_list vaList;
+        va_start(vaList, formatStr);
+        Log(LogLevel::Warning, formatStr2.c_str(), vaList);
+
+        std::abort();
+    }
 #endif
 }
 

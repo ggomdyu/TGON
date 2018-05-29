@@ -5,6 +5,11 @@
  */
 
 #pragma once
+#include <vector>
+#include <deque>
+#include <cstdint>
+#include <thread>
+
 #include "Core/Object/Delegate.h"
 
 #include "IModule.h"
@@ -32,7 +37,7 @@ public:
 
 /* @section Public constructor */
 public:
-    TaskModule() = default;
+    explicit TaskModule(int32_t taskThreadCount = 2);
 
 /* @section Public destructor */
 public:
@@ -40,9 +45,23 @@ public:
 
 /* @section Public method */
 public:
-    template <typename _TaskType, typename _TaskCompleteHandlerType>
-    void AddTask(_TaskType&& task, _TaskCompleteHandlerType&& onTaskComplete);
-    virtual void Update();
+    virtual void Update() override;
+    
+    template <typename _Type1, typename _Type2>
+    void AddTask(_Type1&& task, _Type2&& onTaskComplete);
+//    void RemoveTask();
+    
+private:
+    
+private:
+    std::vector<std::thread> m_taskThreads;
+    std::deque<std::pair<Delegate<void()>, Delegate<void()>>> m_tasks;
 };
+
+template <typename _Type1, typename _Type2>
+inline void TaskModule::AddTask(_Type1&& task, _Type2&& onTaskComplete)
+{
+    m_tasks.push_back({std::forward<_Type1>(task), std::forward<_Type2>(onTaskComplete)});
+}
     
 } /* namespace tgon */

@@ -46,10 +46,10 @@ public:
     virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const = 0;
     const std::shared_ptr<GenericWindow>& GetRootWindow() const noexcept;
     template <typename _ModuleType, typename... _Args>
-    void AddModule(_Args&&... args);
+    std::shared_ptr<_ModuleType> AddModule(_Args&&... args);
     void AddModule(const std::shared_ptr<IModule>& module);
     template <typename _ModuleType>
-    IModule* GetModule();
+    std::shared_ptr<_ModuleType> GetModule() const;
 
 /* @section Public event handler */
 public:
@@ -69,16 +69,25 @@ protected:
 };
 
 template<typename _ModuleType, typename ..._Args>
-inline void GenericApplication::AddModule(_Args&& ...args)
+inline std::shared_ptr<_ModuleType> GenericApplication::AddModule(_Args&& ...args)
 {
     auto module = std::make_shared<_ModuleType>(std::forward<_Args>(args)...);
 
-    m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
-    m_modules.push_back(module);
+    auto pair = m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
+    if (pair.second == true)
+    {
+        m_modules.push_back(module);
+    }
+    else
+    {
+        assert(false && "The module is already been added!");
+    }
+    
+    return module;
 }
 
 template<typename _ModuleType>
-inline IModule* GenericApplication::GetModule()
+inline std::shared_ptr<_ModuleType> GenericApplication::GetModule() const
 {
     auto iter = m_modulesToFind.find(tgon::GetRTTI<_ModuleType>()->GetHashCode());
     if (iter == m_modulesToFind.end())
