@@ -11,9 +11,7 @@
 namespace tgon
 {
 
-using StringHash = std::size_t;
-
-constexpr StringHash X65599Hash(const char* str)
+constexpr size_t X65599Hash(const char* str)
 {
     std::size_t hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
