@@ -18,8 +18,8 @@ namespace
 
 #if defined(_DEBUG) || !defined(NDEBUG)
 constexpr std::size_t g_strBufferSize = 1024 * 8;
-std::unique_ptr<char[]> g_utf8StrBuffer(new char[1024 * 8] {});
-std::unique_ptr<wchar_t[]> g_utf16StrBuffer(new wchar_t[1024 * 8] {});
+std::unique_ptr<char[]> g_utf8StrBuffer(new char[g_strBufferSize] {});
+std::unique_ptr<wchar_t[]> g_utf16StrBuffer(new wchar_t[g_strBufferSize] {});
 std::mutex g_mutex;
 #endif
 

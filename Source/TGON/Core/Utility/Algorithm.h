@@ -111,7 +111,7 @@ constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args
     return { std::forward<_Args>(rhs)... };
 }
 
-template <typename _EnumType>
+template <typename _EnumType, std::enable_if_t<std::is_enum<_EnumType>::value>* = nullptr>
 constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noexcept
 {
     return static_cast<std::underlying_type_t<_EnumType>>(value);

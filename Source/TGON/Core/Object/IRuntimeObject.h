@@ -23,7 +23,7 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Get dynamic bound type information. */
+    /* @brief   Gets dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
 };
 

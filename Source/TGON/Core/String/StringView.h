@@ -7,11 +7,7 @@
 #pragma once
 #include "StringTraits.h"
 
-#include <cstdint>
-
 namespace tgon
-{
-namespace core
 {
 
 template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
@@ -39,7 +35,6 @@ public:
 /* @section Public operator */
 public:
     bool operator==(const BasicStringView& rhs) const;
-    
     constexpr const _CharType operator[](std::size_t index) const;
     constexpr _CharType& operator[](std::size_t index);
     
@@ -49,26 +44,20 @@ public:
     int32_t Compare(const _CharType(&str)[_CharArraySize2]) const;
     int32_t Compare(const _CharType* str, std::size_t strLen) const;
     int32_t Compare(const BasicStringView& strView) const;
-
     std::size_t Find(const BasicStringView& rhs) const;
     std::size_t Find(_CharType ch, std::size_t strOffset = 0) const;
     template <std::size_t _CharArraySize2>
     std::size_t Find(const _CharType(&str)[_CharArraySize2], std::size_t strOffset = 0) const;
     std::size_t Find(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
-
     std::size_t RFind(const BasicStringView& rhs) const;
     std::size_t RFind(_CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
     template <std::size_t _CharArraySize2>
     std::size_t RFind(const _CharType(&str)[_CharArraySize2], std::size_t strOffset = _StringTraitsType::NPos) const;
     std::size_t RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
-
-    constexpr const char* Data() const noexcept;
-
+    constexpr const _CharType* Data() const noexcept;
     constexpr _CharType& At(std::size_t index);
     constexpr const _CharType At(std::size_t index) const;
-    
     constexpr std::size_t Length() const noexcept;
-    
     constexpr IteratorType begin() noexcept;
     constexpr IteratorType end() noexcept;
     constexpr ConstIteratorType cbegin() const noexcept;
@@ -80,7 +69,7 @@ public:
     
 /* @section Private variable */
 private:
-    const char* m_str;
+    const _CharType* m_str;
     std::size_t m_strLen;
 };
 
@@ -244,7 +233,7 @@ constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstReverseIt
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr const char* BasicStringView<_CharType, _StringTraitsType>::Data() const noexcept
+constexpr const _CharType* BasicStringView<_CharType, _StringTraitsType>::Data() const noexcept
 {
     return m_str;
 }
@@ -261,5 +250,4 @@ constexpr const _CharType BasicStringView<_CharType, _StringTraitsType>::At(std:
     return _StringTraitsType::At(m_str, index);
 }
 
-} /* namespace core */
 } /* namespace tgon */

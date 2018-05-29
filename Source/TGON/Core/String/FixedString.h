@@ -6,8 +6,6 @@
  */
 
 #pragma once
-#include <cstdint>
-
 #include "StringTraits.h"
 
 namespace tgon
