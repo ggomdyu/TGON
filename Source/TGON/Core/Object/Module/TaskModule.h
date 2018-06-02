@@ -17,18 +17,6 @@
 namespace tgon
 {
 
-template <typename... _Args>
-struct AsyncHandler final : 
-    public Delegate<_Args...>
-{
-};
-
-template <typename... _Args>
-struct SyncHandler final :
-    public Delegate<_Args...>
-{
-};
-
 class TGON_API TaskModule :
     public IModule
 {
@@ -41,27 +29,30 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~TaskModule() final override = default;
+    virtual ~TaskModule() final override;
 
 /* @section Public method */
 public:
     virtual void Update() override;
     
-    template <typename _Type1, typename _Type2>
-    void AddTask(_Type1&& task, _Type2&& onTaskComplete);
-//    void RemoveTask();
+    template <typename _TaskType, typename _TaskCompleteHandlerType>
+    void AddTask(_TaskType&& task, _TaskCompleteHandlerType&& taskCompleteHandler);
     
-private:
+private:    
+    std::mutex m_threadPoolMutex;
+    std::condition_variable m_threadPoolCv;
+    std::vector<std::thread> m_threadPool;
     
-private:
-    std::vector<std::thread> m_taskThreads;
-    std::deque<std::pair<Delegate<void()>, Delegate<void()>>> m_tasks;
+    std::deque<std::pair<Delegate<void()>, Delegate<void()>>> m_taskQueue;
+    
+    std::mutex m_taskCompleteHandlerQueueMutex;
+    std::deque<Delegate<void()>> m_taskCompleteHandlerQueue;
 };
 
-template <typename _Type1, typename _Type2>
-inline void TaskModule::AddTask(_Type1&& task, _Type2&& onTaskComplete)
+template <typename _TaskType, typename _TaskCompleteHandlerType>
+inline void TaskModule::AddTask(_TaskType&& task, _TaskCompleteHandlerType&& onTaskComplete)
 {
-    m_tasks.push_back({std::forward<_Type1>(task), std::forward<_Type2>(onTaskComplete)});
+    m_taskQueue.push_back({std::forward<_TaskType>(task), std::forward<_TaskCompleteHandlerType>(onTaskComplete)});
 }
     
 } /* namespace tgon */

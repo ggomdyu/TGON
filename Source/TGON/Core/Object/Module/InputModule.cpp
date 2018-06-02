@@ -5,33 +5,36 @@
 namespace tgon
 {
 
-InputModule::InputModule()
+InputModule::InputModule(const InputMode& inputMode)
 {
-}
-
-InputModule::~InputModule() = default;
-
-void InputModule::Initialize(const I32Extent2D& displaySize, const InputModuleProperty& InputModuleProperty)
-{
-    m_inputManager.SetDisplaySize(displaySize.width, displaySize.height);
-
-    if (InputModuleProperty.isUseKeyboard)
+    if (inputMode.isUseKeyboard)
     {
-        
+        m_keyboard = m_inputManager.CreateKeyboard();
     }
-
-    if (InputModuleProperty.isUseMouse)
+    
+    if (inputMode.isUseMouse)
     {
+        m_mouse = m_inputManager.CreateMouse();
     }
-
-    if (InputModuleProperty.isUseGamepad)
+    
+    if (inputMode.isUseGamepad)
     {
     }
 }
-
+    
 void InputModule::Update()
 {
     m_inputManager.Update();
 }
 
+const std::unique_ptr<Keyboard>& InputModule::GetKeyboard() const
+{
+    return m_keyboard;
 }
+
+const std::unique_ptr<Mouse>& InputModule::GetMouse() const
+{
+    return m_mouse;
+}
+
+} /* namespace tgon */

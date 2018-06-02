@@ -20,10 +20,6 @@ class TGON_API IModule :
 public:
     TGON_RUNTIME_OBJECT(IModule)
 
-/* @section Public constructor */
-public:
-    IModule() = default;
-
 /* @section Public destructor */
 public:
     virtual ~IModule() = 0;

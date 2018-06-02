@@ -469,7 +469,7 @@ template <>
 inline std::pair<const char*, std::size_t> StringTraits<char>::Format(const char* formatStr, std::va_list vaList)
 {
     constexpr std::size_t strBufferLen = 1024 * 8;
-    thread_local std::unique_ptr<char[]> strBuffer(new char[strBufferLen] {});
+    thread_local static std::unique_ptr<char[]> strBuffer(new char[strBufferLen] {});
 
     int strLen = vsprintf(strBuffer.get(), formatStr, vaList);
     return {strBuffer.get(), strLen};
@@ -479,7 +479,7 @@ template <>
 inline std::pair<const wchar_t*, std::size_t> StringTraits<wchar_t>::Format(const wchar_t* formatStr, std::va_list vaList)
 {
     constexpr std::size_t strBufferLen = 1024 * 8;
-    thread_local std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferLen] {});
+    thread_local static std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferLen] {});
     
     int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
     return {strBuffer.get(), strLen};
