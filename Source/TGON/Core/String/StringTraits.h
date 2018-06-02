@@ -252,14 +252,14 @@ public:
     static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
     
     /**
-     * @brief                           Replaces each format item to text.
+     * @brief                           Replaces each format item in formatStr to text.
      * @param [in] formatStr            The format string.
      * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
     static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, ...);
     
     /**
-     * @brief                           Replaces each format item to text.
+     * @brief                           Replaces each format item in formatStr to text.
      * @param [in] formatStr            The format string.
      * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
