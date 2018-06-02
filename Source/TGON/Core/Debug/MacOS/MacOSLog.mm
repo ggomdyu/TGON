@@ -24,6 +24,10 @@ TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
     const char* logStrBuffer = StringTraits<char>::Format(formatStr, vaList).first;
+    if (logStrBuffer == nullptr)
+    {
+        return;
+    }
     
     std::lock_guard<std::mutex> lockGuard(g_mutex);
     {

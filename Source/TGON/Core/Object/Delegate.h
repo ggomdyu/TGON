@@ -182,7 +182,7 @@ inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
 {
     if (m_deleter)
     {
-        int allocationSize = m_deleter(nullptr);
+        std::size_t allocationSize = m_deleter(nullptr);
 
         m_ptr = operator new(allocationSize);
         std::memcpy(m_ptr, rhs.m_ptr, allocationSize);
@@ -234,7 +234,7 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 
     if (rhs.m_deleter)
     {
-        int allocationSize = m_deleter(nullptr);
+        std::size_t allocationSize = m_deleter(nullptr);
 
         m_ptr = operator new(allocationSize);
         std::memcpy(m_ptr, rhs.m_ptr, allocationSize);
