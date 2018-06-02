@@ -8,42 +8,71 @@
 
 namespace tgon
 {
-namespace
-{
-    
-std::mutex g_mutex;
-    
-} /* namespace */
     
 TaskModule::TaskModule(int32_t taskThreadCount) :
-    m_taskThreads(taskThreadCount)
+    m_threadPool(taskThreadCount)
 {
     for (auto i = 0; i < taskThreadCount; ++i)
     {
-        m_taskThreads[i] = std::thread([&]
+        m_threadPool[i] = std::thread([&]
         {
-//            Log(LogLevel::Warning, "1");
-            std::unique_lock<std::mutex> lockGuard(g_mutex);
-            
-            std::condition_variable cv;
-            cv.wait(lockGuard, [&]()
+            while (true)
             {
-                return !m_tasks.empty();
-            });
-//            Log(LogLevel::Warning, "2");
-            auto& taskPair = m_tasks.front();
-            Delegate<void()> task = std::move(taskPair.first);
-            Delegate<void()> onTaskComplete = std::move(taskPair.second);
-            m_tasks.pop_front();
-            
-//            Log(LogLevel::Warning, "3");
-            lockGuard.unlock();
+                std::pair<Delegate<void()>, Delegate<void()>> taskPair;
+                
+                std::unique_lock<std::mutex> lockGuard(m_threadPoolMutex);
+
+                // Wait until main thread notify to wake up.
+                m_threadPoolCv.wait(lockGuard);
+                {
+                    // If thread woke up, then pop a task from queue.
+                    taskPair = std::move(m_taskQueue.front());
+                    m_taskQueue.pop_front();
+                }
+                // And unlock the mutex for other thread which wait for task.
+                lockGuard.unlock();
+
+                // Execute the task.
+                taskPair.first();
+                
+                std::lock_guard<std::mutex> lockGuard2(m_taskCompleteHandlerQueueMutex);
+                {
+                    m_taskCompleteHandlerQueue.push_back(taskPair.second);
+                }
+            }
         });
+    }
+}
+    
+TaskModule::~TaskModule()
+{
+    for (auto& thread : m_threadPool)
+    {
+        if (thread.joinable())
+        {
+            thread.join();
+        }
     }
 }
 
 void TaskModule::Update()
 {
+    if (!m_taskQueue.empty())
+    {
+        m_threadPoolCv.notify_one();
+    }
+    
+    if (!m_taskCompleteHandlerQueue.empty())
+    {
+        std::lock_guard<std::mutex> lockGuard(m_taskCompleteHandlerQueueMutex);
+        {
+            for (auto& taskCompleteHandler : m_taskCompleteHandlerQueue)
+            {
+                taskCompleteHandler();
+            }
+            m_taskCompleteHandlerQueue.clear();
+        }
+    }
 }
 
 } /* namespace tgon */

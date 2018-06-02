@@ -5,18 +5,17 @@
  */
 
 #pragma once
-#include <gainput/gainput.h>
-
-#include "Core/Math/Extent.h"
+#include <memory>
 
 #include "Core/Object/Module/IModule.h"
+#include "Core/Hardware/InputManager.h"
 
 namespace tgon
 {
 
-struct InputModuleProperty
+struct InputMode
 {
-    bool isUseKeyboard = false;
+    bool isUseKeyboard = true;
     bool isUseMouse = false;
     bool isUseGamepad = false;
 };
@@ -24,23 +23,26 @@ struct InputModuleProperty
 class TGON_API InputModule :
     public IModule
 {
+public:
+    TGON_RUNTIME_OBJECT(InputModule);
+    
 /* @section Public constructor */
 public:
-    InputModule();
-
-/* @section Public destructor */
-public:
-    virtual ~InputModule() override;
+    explicit InputModule(const InputMode& inputMode);
 
 /* @section Public method */
 public:
-    void Initialize(const I32Extent2D& displaySize, const InputModuleProperty& InputModuleProperty);
-
     virtual void Update() override;
+    
+    const std::unique_ptr<Mouse>& GetMouse() const;
+    const std::unique_ptr<Keyboard>& GetKeyboard() const;
 
 /* @section Private variable */
 public:
-    gainput::InputManager m_inputManager;
+    InputManager m_inputManager;
+    
+    std::unique_ptr<Keyboard> m_keyboard;
+    std::unique_ptr<Mouse> m_mouse;
 };
 
 } /* namespace tgon */
