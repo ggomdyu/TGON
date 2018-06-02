@@ -21,9 +21,9 @@ public:
         {
             InputMode inputMode;
             inputMode.isUseKeyboard = true;
-            inputMode.isUseMouse = true;
+            inputMode.isUseMouse = false;
             return inputMode;
-        } ());
+        } (), this->GetRootWindow());
     }
 
 /* @section Public destructor */
@@ -53,14 +53,14 @@ public:
         decltype(auto) keyboard = inputModule->GetKeyboard();
         if (keyboard->IsKeyDown(Keyboard::KeyCode::Space))
         {
-            Log(LogLevel::Debug, "Space Down");
+            Log(LogLevel::Debug, "1");
         }
         else if (keyboard->IsKeyUp(Keyboard::KeyCode::Space))
         {
-            Log(LogLevel::Debug, "Space Up");
+            Log(LogLevel::Debug, "2");
         }
         
-        decltype(auto) mouse = inputModule->GetMouse();
+        /*decltype(auto) mouse = inputModule->GetMouse();
         if (mouse->IsMouseDown(Mouse::MouseCode::Right))
         {
             Log(LogLevel::Debug, "LeftMouse Down");
@@ -68,7 +68,7 @@ public:
         else if (mouse->IsMouseUp(Mouse::MouseCode::Left))
         {
             Log(LogLevel::Debug, "LeftMouse Up");
-        }
+        }*/
     }
 };
 

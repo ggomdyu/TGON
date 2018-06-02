@@ -21,7 +21,7 @@ class TGON_API Object :
     public IRuntimeObject
 {
 public:
-    TGON_RUNTIME_OBJECT(Object)
+    TGON_RUNTIME_OBJECT(Object);
 
 /* @section Public constructor */
 public:

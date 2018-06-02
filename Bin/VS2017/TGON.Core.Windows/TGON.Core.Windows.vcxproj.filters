@@ -29,9 +29,6 @@
     <Filter Include="Sources\Core\Hardware">
       <UniqueIdentifier>{f948608a-9342-4a10-a75f-d54d9d0d656f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Core\Hardware\Windows">
-      <UniqueIdentifier>{e2d5c68d-20a7-4451-9a1f-603a7fad9a71}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
@@ -51,9 +48,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationUtility.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h">
-      <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsDateTime.cpp">
       <Filter>Sources\Core\Time\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.cpp">
-      <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

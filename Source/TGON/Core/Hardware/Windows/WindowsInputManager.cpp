@@ -1,37 +1,45 @@
 #include "PrecompiledHeader.h"
 
-#include <sstream>
+#include "Core/Platform/Config.h"
 
 #include "WindowsInputManager.h"
 
 namespace tgon
 {
+   
+WindowsInputManager::WindowsInputManager(const std::shared_ptr<GenericWindow>& window) :
+    m_inputManager(OIS::InputManager::createInputSystem(QueryParamList(window)))
+{
+    m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
+}
 
-WindowsInputManager::WindowsInputManager() :
-    m_nativeInputManager(nullptr)
+void* WindowsInputManager::CreateKeyboard() const
+{
+    return m_inputManager->createInputObject(OIS::OISKeyboard, true);
+}
+
+void* WindowsInputManager::CreateMouse() const
+{
+    return m_inputManager->createInputObject(OIS::OISMouse, true);
+}
+
+void* WindowsInputManager::CreateGamepad() const
+{
+    return m_inputManager->createInputObject(OIS::OISJoyStick, true);
+}
+
+void WindowsInputManager::Update()
 {
 }
 
-WindowsInputManager::WindowsInputManager(const Window& window)
+OIS::ParamList WindowsInputManager::QueryParamList(const std::shared_ptr<GenericWindow>& window) const
 {
-    this->Initialize(window);
-}
+    OIS::ParamList paramList
+    {
+        {"WINDOW", std::to_string(reinterpret_cast<size_t>(window->GetNativeWindow()))}
+    };
 
-WindowsInputManager::~WindowsInputManager()
-{
-}
-
-void WindowsInputManager::Initialize(const Window& window)
-{
-    m_nativeInputManager = OIS::InputManager::createInputSystem(QueryParamList(window));
-}
-
-OIS::ParamList WindowsInputManager::QueryParamList(const Window& window)
-{
-    std::ostringstream os;
-    os << reinterpret_cast<std::size_t>(window.GetNativeWindow());
-
-    return {{"WINDOW", os.str()}};
+    return paramList;
 }
 
 } /* namespace tgon */

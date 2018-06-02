@@ -27,7 +27,7 @@ class TGON_API GenericWindow :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(GenericWindow)
+    TGON_RUNTIME_OBJECT(GenericWindow);
 
 /* @section Public constructor */
 public:

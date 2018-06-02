@@ -1,14 +1,13 @@
 /**
  * @filename    WindowsInputManager.h
  * @author      ggomdyu
- * @since       05/18/2018
+ * @since       05/15/2018
  */
 
 #pragma once
 #include <OIS.h>
 
-#include "Core/Platform/Window.h"
-
+#include "Core/Platform/Windows/WindowsWindow.h"
 #include "../Generic/GenericInputManager.h"
 
 namespace tgon
@@ -22,23 +21,29 @@ public:
 
 /* @section Public constructor */
 public:
-    WindowsInputManager();
-    WindowsInputManager(const Window& window);
-
+    WindowsInputManager(const std::shared_ptr<GenericWindow>& window);
+    
 /* @section Public destructor */
 public:
-    virtual ~WindowsInputManager();
+    virtual ~WindowsInputManager() override = default;
 
 /* @section Public method */
 public:
-    void Initialize(const Window& window);
+    virtual void* CreateKeyboard() const override;
+    virtual void* CreateMouse() const override;
+    virtual void* CreateGamepad() const override;
 
-private:
-    OIS::ParamList QueryParamList(const Window& window);
+    void Update();
+
+/* @section Private method */
+public:
+    OIS::ParamList QueryParamList(const std::shared_ptr<GenericWindow>& window) const;
     
 /* @section Private variable */
 private:
-    OIS::InputManager* m_nativeInputManager;
+    OIS::InputManager* m_inputManager;
 };
+
+using InputManager = WindowsInputManager;
 
 } /* namespace tgon */

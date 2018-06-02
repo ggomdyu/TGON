@@ -52,7 +52,7 @@ public:
 /* @section Private method */
 private:
     ov_callbacks MakeCustomIOCallback() const noexcept;
-    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, unsigned long bufferSize, unsigned long channels);
+    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
 };
 
 inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
@@ -154,9 +154,9 @@ inline bool BasicOggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* s
     this->m_samplingRate = static_cast<int32_t>(vorbisInfo->rate);
     this->m_channels = vorbisInfo->channels;
     this->m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
-
-    auto bufferSize = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
-    this->m_audioData.resize(bufferSize);
+    
+    ogg_int64_t bufferSize = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
+    this->m_audioData.resize(static_cast<decltype(m_audioData)::size_type>(bufferSize));
     DecodeOggVorbis(&oggVorbisFile, &this->m_audioData[0], bufferSize, vorbisInfo->channels);
     
     return true;
@@ -187,7 +187,7 @@ inline ov_callbacks BasicOggVorbisAudioImporter<_AllocatorType>::MakeCustomIOCal
 }
 
 template <typename _AllocatorType>
-inline unsigned long BasicOggVorbisAudioImporter<_AllocatorType>::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, unsigned long bufferSize, unsigned long channels)
+inline unsigned long BasicOggVorbisAudioImporter<_AllocatorType>::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels)
 {
     int currentSection;
 

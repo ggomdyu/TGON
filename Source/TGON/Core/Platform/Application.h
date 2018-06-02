@@ -43,6 +43,10 @@ public:
 public:
     using SuperType::SuperType;
 
+/* @section Public destructor */
+public:
+    virtual ~Application() override = default;
+
 /* @section Public method */
 public:
     static const std::shared_ptr<Application>& GetInstance();

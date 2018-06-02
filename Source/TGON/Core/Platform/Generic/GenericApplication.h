@@ -25,7 +25,7 @@ class TGON_API GenericApplication :
     public Object
 {
 public:
-    TGON_RUNTIME_OBJECT(GenericApplication)
+    TGON_RUNTIME_OBJECT(GenericApplication);
 
 /* @section Public constructor */
 public:

@@ -1,35 +1,14 @@
 /**
  * @filename    InputManager.h
  * @author      ggomdyu
- * @since       05/15/2018
+ * @since       06/02/2018
  */
 
 #pragma once
-#include <memory>
+#include "Core/Platform/Config.h"
 
-#include "Mouse.h"
-#include "Keyboard.h"
-
-namespace tgon
-{
-
-class InputManager final :
-    private boost::noncopyable
-{
-/* @section Public constructor */
-public:
-    InputManager();
-    
-/* @section Public method */
-public:
-    void Update();
-    
-    std::unique_ptr<Mouse> CreateMouse() const;
-    std::unique_ptr<Keyboard> CreateKeyboard() const;
-//    Gamepad     CreateGamepad();
-    
-private:
-    std::unique_ptr<gainput::InputManager> m_inputManager;
-};
-
-} /* namespace tgon */
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsInputManager.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSInputManager.h"
+#endif

@@ -2,9 +2,11 @@
 
 #include "Core/Utility/Algorithm.h"
 
-#include "Keyboard.h"
+#include "GenericKeyboard.h"
 
 namespace tgon
 {
+    
+GenericKeyboard::~GenericKeyboard() = default;
 
 } /* namespace tgon */

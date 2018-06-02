@@ -8,7 +8,10 @@
 #include <memory>
 
 #include "Core/Object/Module/IModule.h"
+
 #include "Core/Hardware/InputManager.h"
+#include "Core/Hardware/Keyboard.h"
+#include "Core/Hardware/Mouse.h"
 
 namespace tgon
 {
@@ -28,7 +31,7 @@ public:
     
 /* @section Public constructor */
 public:
-    explicit InputModule(const InputMode& inputMode);
+    InputModule(const InputMode& inputMode, const std::shared_ptr<GenericWindow>& inputTargetWindow);
 
 /* @section Public method */
 public:
@@ -36,6 +39,7 @@ public:
     
     const std::unique_ptr<Mouse>& GetMouse() const;
     const std::unique_ptr<Keyboard>& GetKeyboard() const;
+    //const std::unique_ptr<Gamepad>& GetGamepad() const;
 
 /* @section Private variable */
 public:
@@ -43,6 +47,7 @@ public:
     
     std::unique_ptr<Keyboard> m_keyboard;
     std::unique_ptr<Mouse> m_mouse;
+    //std::unique_ptr<Gamepad> m_gamepad;
 };
 
 } /* namespace tgon */

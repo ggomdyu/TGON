@@ -471,7 +471,11 @@ inline std::pair<const char*, std::size_t> StringTraits<char>::Format(const char
     constexpr std::size_t strBufferLen = 1024 * 8;
     thread_local static std::unique_ptr<char[]> strBuffer(new char[strBufferLen] {});
 
+#ifdef _MSC_VER
+    int strLen = vsprintf_s(strBuffer.get(), strBufferLen, formatStr, vaList);
+#else
     int strLen = vsprintf(strBuffer.get(), formatStr, vaList);
+#endif
     return {strBuffer.get(), strLen};
 }
     
@@ -481,7 +485,11 @@ inline std::pair<const wchar_t*, std::size_t> StringTraits<wchar_t>::Format(cons
     constexpr std::size_t strBufferLen = 1024 * 8;
     thread_local static std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferLen] {});
     
-    int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
+#ifdef _MSC_VER
+    int strLen = vswprintf_s(strBuffer.get(), strBufferLen, formatStr, vaList);
+#else
+    int strLen = vswprintf(strBuffer.get(), formatStr, vaList);
+#endif
     return {strBuffer.get(), strLen};
 }
 
