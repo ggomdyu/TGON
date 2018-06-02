@@ -5,33 +5,42 @@
 namespace tgon
 {
 
-EventModule::EventModule()
-{
-}
-
 void EventModule::Update()
 {
 }
 
-void EventModule::SubscribeEvent(const StringHash& eventType, const EventHandler& handler)
+void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const EventHandler& handler)
 {
-    m_eventHandlerMap[eventType.GetHashCode()].push_back(handler);
+    m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = handler;
 }
     
-void EventModule::SubscribeEvent(const StringHash& eventType, EventHandler&& handler)
+void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, EventHandler&& handler)
 {
-    m_eventHandlerMap[eventType.GetHashCode()].push_back(std::move(handler));
+    m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = std::move(handler);
+}
+    
+void EventModule::UnsubscribeEvent(const StringHash& eventType, const StringHash& observerName)
+{
+    auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
+    if (iter == m_eventHandlerMap.end())
+    {
+        return;
+    }
+    
+    iter->second.erase(observerName.GetHashCode());
 }
     
 void EventModule::NotifyEvent(const StringHash& eventType)
 {
     auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
-    if (iter != m_eventHandlerMap.end())
+    if (iter == m_eventHandlerMap.end())
     {
-        for (auto& handler : iter->second)
-        {
-            handler();
-        }
+        return;
+    }
+    
+    for (auto& handler : iter->second)
+    {
+        handler.second();
     }
 }
     

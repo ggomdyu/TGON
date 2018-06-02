@@ -15,22 +15,6 @@
 namespace tgon
 {
 
-class TGON_API EventObserver
-{
-/* @section Public type */
-public:
-    using EventHandler = Delegate<void()>;
-    
-/* @section Public constructor */
-public:
-    EventObserver(const StringHash& observerName, const EventHandler& handler);
-    EventObserver(const StringHash& observerName, EventHandler&& handler);
-    
-private:
-    size_t m_observerNameHash;
-    EventHandler m_eventHandler;
-}
-    
 class TGON_API EventModule :
 	public IModule
 {
@@ -38,13 +22,9 @@ public:
     TGON_RUNTIME_OBJECT(EventModule)
 
 /* @section Public type */
-private:
+public:
     using EventHandler = Delegate<void()>;
     
-/* @section Public constructor */
-public:
-    EventModule();
-
 /* @section Public destructor */
 public:
     virtual ~EventModule() override = default;
@@ -52,13 +32,14 @@ public:
 /* @section Public method */
 public:
     virtual void Update() override;
-    void SubscribeEvent(const StringHash& eventType, const EventObserver& handler);
-    void SubscribeEvent(const StringHash& eventType, EventObserver&& handler);
+    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const EventHandler& handler);
+    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, EventHandler&& handler);
+    void UnsubscribeEvent(const StringHash& eventType, const StringHash& observerName);
     void NotifyEvent(const StringHash& eventType);
     
 /* @section Private variable */
 private:
-    std::map<size_t, std::vector<EventObserver>> m_eventHandlerMap;
+    std::map<size_t, std::map<size_t, EventHandler>> m_eventHandlerMap;
 };
 
 } /* namespace tgon */
