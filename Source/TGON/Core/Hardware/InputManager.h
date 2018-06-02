@@ -1,36 +1,35 @@
 /**
  * @filename    InputManager.h
  * @author      ggomdyu
- * @since       05/17/2017
+ * @since       05/15/2018
  */
 
 #pragma once
-#include <boost/preprocessor/cat.hpp>
+#include <memory>
 
-#include "Core/Platform/Config.h"
-
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsInputManager.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSInputManager..h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidInputManager..h"
-#elif TGON_PLATFORM_IOS
-#   import "IOS/IOSInputManager..h"
-#endif
+#include "Mouse.h"
+#include "Keyboard.h"
 
 namespace tgon
 {
 
-class InputManager :
-    public BOOST_PP_CAT(TGON_PLATFORM_NAME, InputManager)
+class InputManager final :
+    private boost::noncopyable
 {
-public:
-    TGON_RUNTIME_OBJECT(InputManager)
-
 /* @section Public constructor */
 public:
-    using SuperType::SuperType;
+    InputManager();
+    
+/* @section Public method */
+public:
+    void Update();
+    
+    std::unique_ptr<Mouse> CreateMouse() const;
+    std::unique_ptr<Keyboard> CreateKeyboard() const;
+//    Gamepad     CreateGamepad();
+    
+private:
+    std::unique_ptr<gainput::InputManager> m_inputManager;
 };
 
 } /* namespace tgon */

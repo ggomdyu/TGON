@@ -5,31 +5,208 @@
  */
 
 #pragma once
+#include <type_traits>
 #include <boost/noncopyable.hpp>
-
-#include "InputManager.h"
+#include <gainput/gainput.h>
 
 namespace tgon
 {
+    
+class Keyboard final :
+    private boost::noncopyable
+{
+/* @section Public enum */
+public:
+    enum class KeyCode : std::underlying_type_t<gainput::Key>
+    {
+        Escape              = gainput::KeyEscape,
+        F1                  = gainput::KeyF1,
+        F2                  = gainput::KeyF2,
+        F3                  = gainput::KeyF3,
+        F4                  = gainput::KeyF4,
+        F5                  = gainput::KeyF5,
+        F6                  = gainput::KeyF6,
+        F7                  = gainput::KeyF7,
+        F8                  = gainput::KeyF8,
+        F9                  = gainput::KeyF9,
+        F10                 = gainput::KeyF10,
+        F11                 = gainput::KeyF11,
+        F12                 = gainput::KeyF12,
+        F13                 = gainput::KeyF13,
+        F14                 = gainput::KeyF14,
+        F15                 = gainput::KeyF15,
+        F16                 = gainput::KeyF16,
+        F17                 = gainput::KeyF17,
+        F18                 = gainput::KeyF18,
+        F19                 = gainput::KeyF19,
+        Print               = gainput::KeyPrint,
+        ScrollLock          = gainput::KeyScrollLock,
+        Break               = gainput::KeyBreak,
+        Space               = gainput::KeySpace,
+        Apostrophe          = gainput::KeyApostrophe,
+        Comma               = gainput::KeyComma,
+        Minus               = gainput::KeyMinus,
+        Period              = gainput::KeyPeriod,
+        Slash               = gainput::KeySlash,
+        Alpha0              = gainput::Key0,
+        Alpha1              = gainput::Key1,
+        Alpha2              = gainput::Key2,
+        Alpha3              = gainput::Key3,
+        Alpha4              = gainput::Key4,
+        Alpha5              = gainput::Key5,
+        Alpha6              = gainput::Key6,
+        Alpha7              = gainput::Key7,
+        Alpha8              = gainput::Key8,
+        Alpha9              = gainput::Key9,
+        Semicolon           = gainput::KeySemicolon,
+        Less                = gainput::KeyLess,
+        Equal               = gainput::KeyEqual,
+        A                   = gainput::KeyA,
+        B                   = gainput::KeyB,
+        C                   = gainput::KeyC,
+        D                   = gainput::KeyD,
+        E                   = gainput::KeyE,
+        F                   = gainput::KeyF,
+        G                   = gainput::KeyG,
+        H                   = gainput::KeyH,
+        I                   = gainput::KeyI,
+        J                   = gainput::KeyJ,
+        K                   = gainput::KeyK,
+        L                   = gainput::KeyL,
+        M                   = gainput::KeyM,
+        N                   = gainput::KeyN,
+        O                   = gainput::KeyO,
+        P                   = gainput::KeyP,
+        Q                   = gainput::KeyQ,
+        R                   = gainput::KeyR,
+        S                   = gainput::KeyS,
+        T                   = gainput::KeyT,
+        U                   = gainput::KeyU,
+        V                   = gainput::KeyV,
+        W                   = gainput::KeyW,
+        X                   = gainput::KeyX,
+        Y                   = gainput::KeyY,
+        Z                   = gainput::KeyZ,
+        LeftBracket         = gainput::KeyBracketLeft,
+        Backslash           = gainput::KeyBackslash,
+        RightBracket        = gainput::KeyBracketRight,
+        Grave               = gainput::KeyGrave,
+        LeftArrow           = gainput::KeyLeft,
+        RightArrow          = gainput::KeyRight,
+        UpArrow             = gainput::KeyUp,
+        DownArrow           = gainput::KeyDown,
+        Insert              = gainput::KeyInsert,
+        Home                = gainput::KeyHome,
+        Delete              = gainput::KeyDelete,
+        End                 = gainput::KeyEnd,
+        PageUp              = gainput::KeyPageUp,
+        PageDown            = gainput::KeyPageDown,
+        NumLock             = gainput::KeyNumLock,
+        KeypadEquals        = gainput::KeyKpEqual,
+        KeypadDivide        = gainput::KeyKpDivide,
+        KeypadMultiply      = gainput::KeyKpMultiply,
+        KeypadSubtract      = gainput::KeyKpSubtract,
+        KeypadAdd           = gainput::KeyKpAdd,
+        KeypadEnter         = gainput::KeyKpEnter,
+        KeypadInsert        = gainput::KeyKpInsert,
+        KeypadEnd           = gainput::KeyKpEnd,
+        KeypadDown          = gainput::KeyKpDown,
+        KeypadPageDown      = gainput::KeyKpPageDown,
+        KeypadLeft          = gainput::KeyKpLeft,
+        KeypadBegin         = gainput::KeyKpBegin,
+        KeypadRight         = gainput::KeyKpRight,
+        KeypadHome          = gainput::KeyKpHome,
+        KeypadUp            = gainput::KeyKpUp,
+        KeypadPageUp        = gainput::KeyKpPageUp,
+        KeypadDelete        = gainput::KeyKpDelete,
+        BackSpace           = gainput::KeyBackSpace,
+        Tab                 = gainput::KeyTab,
+        Return              = gainput::KeyReturn,
+        CapsLock            = gainput::KeyCapsLock,
+        LeftShift           = gainput::KeyShiftL,
+        RightShift          = gainput::KeyShiftR,
+        LeftControl         = gainput::KeyCtrlL,
+        RightControl        = gainput::KeyCtrlR,
+        LeftWindows         = gainput::KeySuperL,
+        RightWindows        = gainput::KeySuperR,
+        LeftAlt             = gainput::KeyAltL,
+        RightAlt            = gainput::KeyAltR,
+        Menu                = gainput::KeyMenu,
+        Back                = gainput::KeyBack,
+        LeftSoft            = gainput::KeySoftLeft,
+        RightSoft           = gainput::KeySoftRight,
+        Call                = gainput::KeyCall,
+        Endcall             = gainput::KeyEndcall,
+        Star                = gainput::KeyStar,
+        Pound               = gainput::KeyPound,
+        DpadCenter          = gainput::KeyDpadCenter,
+        VolumeUp            = gainput::KeyVolumeUp,
+        VolumeDown          = gainput::KeyVolumeDown,
+        Power               = gainput::KeyPower,
+        Camera              = gainput::KeyCamera,
+        Clear               = gainput::KeyClear,
+        Symbol              = gainput::KeySymbol,
+        Explorer            = gainput::KeyExplorer,
+        Envelope            = gainput::KeyEnvelope,
+        Equals              = gainput::KeyEquals,
+        At                  = gainput::KeyAt,
+        Headsethook         = gainput::KeyHeadsethook,
+        Focus               = gainput::KeyFocus,
+        Plus                = gainput::KeyPlus,
+        Notification        = gainput::KeyNotification,
+        Search              = gainput::KeySearch,
+        MediaPlayPause      = gainput::KeyMediaPlayPause,
+        MediaStop           = gainput::KeyMediaStop,
+        MediaNext           = gainput::KeyMediaNext,
+        MediaPrevious       = gainput::KeyMediaPrevious,
+        MediaRewind         = gainput::KeyMediaRewind,
+        MediaFastForward    = gainput::KeyMediaFastForward,
+        Mute                = gainput::KeyMute,
+        Pictsymbols         = gainput::KeyPictsymbols,
+        SwitchCharset       = gainput::KeySwitchCharset,
+        Forward             = gainput::KeyForward,
+        Extra1              = gainput::KeyExtra1,
+        Extra2              = gainput::KeyExtra2,
+        Extra3              = gainput::KeyExtra3,
+        Extra4              = gainput::KeyExtra4,
+        Extra5              = gainput::KeyExtra5,
+        Extra6              = gainput::KeyExtra6,
+        Fn                  = gainput::KeyFn,
+        Circumflex          = gainput::KeyCircumflex,
+        Ssharp              = gainput::KeySsharp,
+        Acute               = gainput::KeyAcute,
+        AltGr               = gainput::KeyAltGr,
+        Numbersign          = gainput::KeyNumbersign,
+        Udiaeresis          = gainput::KeyUdiaeresis,
+        Adiaeresis          = gainput::KeyAdiaeresis,
+        Odiaeresis          = gainput::KeyOdiaeresis,
+        Section             = gainput::KeySection,
+        Aring               = gainput::KeyAring,
+        Diaeresis           = gainput::KeyDiaeresis,
+        Twosuperior         = gainput::KeyTwosuperior,
+        RightParenthesis    = gainput::KeyRightParenthesis,
+        Dollar              = gainput::KeyDollar,
+        Ugrave              = gainput::KeyUgrave,
+        Asterisk            = gainput::KeyAsterisk,
+        Colon               = gainput::KeyColon,
+        Exclam              = gainput::KeyExclam,
+        LeftBrace           = gainput::KeyBraceLeft,
+        RightBrace          = gainput::KeyBraceRight,
+        SysRq               = gainput::KeySysRq,
+    };
+    
+/* @section Public constructor */
+public:
+    explicit Keyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept;
 
-//class Keyboard final :
-//    private boost::noncopyable
-//{
-///* @section Public constructor */
-//public:
-//    explicit Keyboard(InputManager* inputManager);
-//    Keyboard(Keyboard&& rhs) noexcept;
-//
-///* @section Public operator */
-//public:
-//    Keyboard& operator==(Keyboard&& rhs) noexcept;
-//    
-///* @section Public method */
-//public:
-//
-///* @section Private variable */
-//private:
-//    gainput::DeviceId m_deviceId;
-//};
+/* @section Public method */
+public:
+    bool IsKeyDown(KeyCode keyCode) const;
+    bool IsKeyUp(KeyCode keyCode) const;
+
+/* @section Private variable */
+private:
+    gainput::InputDeviceKeyboard* m_keyboardDevice;
+};
 
 } /* namespace tgon */

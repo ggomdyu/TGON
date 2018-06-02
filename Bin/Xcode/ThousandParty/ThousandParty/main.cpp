@@ -2,26 +2,28 @@
 
 #include "TGON.h"
 
+using namespace tgon;
+
 class TGON_API ThousandParty final :
-    public tgon::Application
+    public Application
 {
 public:
     TGON_RUNTIME_OBJECT(ThousandParty)
 
-/* @section Public constructor */
 public:
     ThousandParty() :
-        Application(tgon::WindowStyle())
+        Application(WindowStyle())
     {
-        this->AddModule<tgon::TimeModule>();
-        this->AddModule<tgon::TaskModule>();
-        this->AddModule<tgon::GraphicsModule>(tgon::VideoMode(), this->GetRootWindow());
-        
-        auto eventModule = this->AddModule<tgon::EventModule>();
-        eventModule->SubscribeEvent(u8"PrintLogIsMYLOVE0", [&]()
+        this->AddModule<TimeModule>();
+        this->AddModule<EventModule>();
+        this->AddModule<GraphicsModule>(VideoMode(), this->GetRootWindow());
+        this->AddModule<InputModule>([]()
         {
-            tgon::Log(tgon::LogLevel::Debug, "Debug");
-        });
+            InputMode inputMode;
+            inputMode.isUseKeyboard = true;
+            inputMode.isUseMouse = true;
+            return inputMode;
+        } ());
     }
 
 /* @section Public destructor */
@@ -46,7 +48,27 @@ public:
     {
         SuperType::OnUpdate();
         
-        this->GetModule<tgon::EventModule>()->NotifyEvent("PrintLogIsMYLOVE0");
+        decltype(auto) inputModule = GetModule<InputModule>();
+        
+        decltype(auto) keyboard = inputModule->GetKeyboard();
+        if (keyboard->IsKeyDown(Keyboard::KeyCode::Space))
+        {
+            Log(LogLevel::Debug, "Space Down");
+        }
+        else if (keyboard->IsKeyUp(Keyboard::KeyCode::Space))
+        {
+            Log(LogLevel::Debug, "Space Up");
+        }
+        
+        decltype(auto) mouse = inputModule->GetMouse();
+        if (mouse->IsMouseDown(Mouse::MouseCode::Right))
+        {
+            Log(LogLevel::Debug, "LeftMouse Down");
+        }
+        else if (mouse->IsMouseUp(Mouse::MouseCode::Left))
+        {
+            Log(LogLevel::Debug, "LeftMouse Up");
+        }
     }
 };
 
