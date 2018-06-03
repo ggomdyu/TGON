@@ -2,18 +2,22 @@
 
 #include "Core/Utility/Algorithm.h"
 
-#include "Keyboard.h"
+#include "MacOSKeyboard.h"
 
 namespace tgon
 {
     
-Keyboard::Keyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept :
-    m_keyboardDevice(keyboardDevice)
+MacOSKeyboard::MacOSKeyboard(void* keyboardDevice) noexcept :
+    m_keyboardDevice(reinterpret_cast<gainput::InputDeviceKeyboard*>(keyboardDevice))
 {
     assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
 }
     
-bool Keyboard::IsKeyDown(KeyCode keyCode) const
+void MacOSKeyboard::Update()
+{
+}
+    
+bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) == false &&
@@ -27,7 +31,21 @@ bool Keyboard::IsKeyDown(KeyCode keyCode) const
     }
 }
     
-bool Keyboard::IsKeyUp(KeyCode keyCode) const
+bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
+{
+    auto castedKeyCode = UnderlyingCast(keyCode);
+    if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&
+        m_keyboardDevice->GetBool(castedKeyCode))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+    
+bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&

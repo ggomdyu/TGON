@@ -1,7 +1,7 @@
 /**
- * @filename    GenericInputManager.h
+ * @filename    GenericGamepad.h
  * @author      ggomdyu
- * @since       06/02/2018
+ * @since       06/03/2018
  */
 
 #pragma once
@@ -10,20 +10,19 @@
 namespace tgon
 {
 
-class GenericInputManager :
+class GenericGamepad :
     private boost::noncopyable
 {
+/* @section Public type */
+public:
 /* @section Public destructor */
 public:
-    virtual ~GenericInputManager() = 0;
+    virtual ~GenericGamepad() = 0;
 
 /* @section Public method */
 public:
-    virtual void* CreateKeyboard() = 0;
-    virtual void* CreateMouse() = 0;
-    virtual void* CreateGamepad() = 0;
-
     virtual void Update() = 0;
+    virtual void Vibrate(float leftMotor, float rightMotor) = 0;
 };
 
 } /* namespace tgon */

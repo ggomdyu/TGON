@@ -5,31 +5,11 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <gainput/gainput.h>
 
-namespace tgon
-{
+#include "Core/Platform/Config.h"
 
-class Gamepad final :
-    private boost::noncopyable
-{
-/* @section Public constructor */
-public:
-    explicit Gamepad(gainput::InputDevicePad* nativeGamepad) noexcept;
-    Gamepad(Gamepad&& rhs) noexcept;
-
-/* @section Public operator */
-public:
-    Gamepad& operator==(Gamepad&& rhs) noexcept;
-
-/* @section Public method */
-public:
-    void Vibrate(float leftMotor, float rightMotor);
-
-/* @section Private variable */
-private:
-    gainput::InputDevicePad* m_nativeGamepad;
-};
-
-} /* namespace tgon */
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsGamepad.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSGamepad.h"
+#endif

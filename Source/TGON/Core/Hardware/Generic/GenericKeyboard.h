@@ -13,7 +13,7 @@ namespace tgon
 class GenericKeyboard :
     private boost::noncopyable
 {
-/* @section Public enum */
+/* @section Public type */
 public:
     enum class KeyCode;
 
@@ -25,6 +25,7 @@ public:
 public:
     virtual void Update() = 0;
     virtual bool IsKeyDown(KeyCode keyCode) const = 0;
+    virtual bool IsKeyHold(KeyCode keyCode) const = 0;
     virtual bool IsKeyUp(KeyCode keyCode) const = 0;
 };
 

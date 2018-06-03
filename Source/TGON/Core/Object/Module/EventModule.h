@@ -21,10 +21,6 @@ class TGON_API EventModule :
 public:
     TGON_RUNTIME_OBJECT(EventModule)
 
-/* @section Public type */
-public:
-    using EventHandler = Delegate<void()>;
-    
 /* @section Public destructor */
 public:
     virtual ~EventModule() override = default;
@@ -32,14 +28,14 @@ public:
 /* @section Public method */
 public:
     virtual void Update() override;
-    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const EventHandler& handler);
-    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, EventHandler&& handler);
+    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const Delegate<void()>& handler);
+    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, Delegate<void()>&& handler);
     void UnsubscribeEvent(const StringHash& eventType, const StringHash& observerName);
     void NotifyEvent(const StringHash& eventType);
     
 /* @section Private variable */
 private:
-    std::map<size_t, std::map<size_t, EventHandler>> m_eventHandlerMap;
+    std::map<size_t, std::map<size_t, Delegate<void()>>> m_eventHandlerMap;
 };
 
 } /* namespace tgon */

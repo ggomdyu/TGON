@@ -12,6 +12,7 @@
 #include "Core/Hardware/InputManager.h"
 #include "Core/Hardware/Keyboard.h"
 #include "Core/Hardware/Mouse.h"
+#include "Core/Hardware/Gamepad.h"
 
 namespace tgon
 {
@@ -39,7 +40,7 @@ public:
     
     const std::unique_ptr<Mouse>& GetMouse() const;
     const std::unique_ptr<Keyboard>& GetKeyboard() const;
-    //const std::unique_ptr<Gamepad>& GetGamepad() const;
+    const std::unique_ptr<Gamepad>& GetGamepad() const;
 
 /* @section Private variable */
 public:
@@ -47,7 +48,7 @@ public:
     
     std::unique_ptr<Keyboard> m_keyboard;
     std::unique_ptr<Mouse> m_mouse;
-    //std::unique_ptr<Gamepad> m_gamepad;
+    std::unique_ptr<Gamepad> m_gamepad;
 };
 
 } /* namespace tgon */

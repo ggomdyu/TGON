@@ -33,8 +33,6 @@
 		FD08C53720353EB300355346 /* MacOSWindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52420352C0100355346 /* MacOSWindowDelegate.mm */; };
 		FD08C53820353EB300355346 /* MacOSWindowUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52620352C0100355346 /* MacOSWindowUtility.mm */; };
 		FD099A2F20BC52F8003E0746 /* EventModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD099A2E20BC52F7003E0746 /* EventModule.cpp */; };
-		FD10725920C195B90098E76D /* GraphicsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD10725720C195B80098E76D /* GraphicsModule.h */; };
-		FD10725A20C195B90098E76D /* GraphicsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD10725820C195B90098E76D /* GraphicsModule.cpp */; };
 		FD10725C20C19E0C0098E76D /* libgainputstatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD10725B20C19E0C0098E76D /* libgainputstatic.a */; };
 		FD2108B320B93286009FC8F1 /* UUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108B020B93286009FC8F1 /* UUID.h */; };
 		FD2108B420B93286009FC8F1 /* Hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2108B120B93286009FC8F1 /* Hash.cpp */; };
@@ -59,14 +57,32 @@
 		FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DD20B094CA00A76C69 /* Drawing.h */; };
 		FD7EA6E320B094CA00A76C69 /* ImageType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DE20B094CA00A76C69 /* ImageType.h */; };
 		FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DF20B094CA00A76C69 /* ImageUtility.h */; };
-		FD851FFA20C26CB900C749BC /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD851FF620C26CB900C749BC /* InputManager.cpp */; };
 		FD851FFB20C26CB900C749BC /* Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = FD851FF720C26CB900C749BC /* Keyboard.h */; };
 		FD851FFC20C26CB900C749BC /* InputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FD851FF820C26CB900C749BC /* InputManager.h */; };
-		FD851FFD20C26CB900C749BC /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD851FF920C26CB900C749BC /* Keyboard.cpp */; };
 		FD85200220C2797B00C749BC /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200020C2797A00C749BC /* InputModule.cpp */; };
 		FD85200320C2797B00C749BC /* InputModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200120C2797A00C749BC /* InputModule.h */; };
-		FD85200620C2ABC400C749BC /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200420C2ABC300C749BC /* Mouse.cpp */; };
 		FD85200720C2ABC400C749BC /* Mouse.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200520C2ABC300C749BC /* Mouse.h */; };
+		FD85201120C31F2B00C749BC /* MacOSKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200920C31F2B00C749BC /* MacOSKeyboard.cpp */; };
+		FD85201220C31F2B00C749BC /* MacOSKeyboardType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200A20C31F2B00C749BC /* MacOSKeyboardType.h */; };
+		FD85201320C31F2B00C749BC /* MacOSInputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200B20C31F2B00C749BC /* MacOSInputManager.h */; };
+		FD85201420C31F2B00C749BC /* MacOSMouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200C20C31F2B00C749BC /* MacOSMouse.cpp */; };
+		FD85201520C31F2B00C749BC /* MacOSMouse.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200D20C31F2B00C749BC /* MacOSMouse.h */; };
+		FD85201620C31F2B00C749BC /* MacOSKeyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200E20C31F2B00C749BC /* MacOSKeyboard.h */; };
+		FD85201720C31F2B00C749BC /* MacOSInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200F20C31F2B00C749BC /* MacOSInputManager.cpp */; };
+		FD85201820C31F2B00C749BC /* MacOSMouseType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85201020C31F2B00C749BC /* MacOSMouseType.h */; };
+		FD85202020C324C300C749BC /* GenericInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85201D20C31F3300C749BC /* GenericInputManager.cpp */; };
+		FD85202120C324C300C749BC /* GenericKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85201E20C31F3300C749BC /* GenericKeyboard.cpp */; };
+		FD85202220C324C300C749BC /* GenericMouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85201F20C31F3300C749BC /* GenericMouse.cpp */; };
+		FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202520C3FAFA00C749BC /* MacOSGamepad.h */; };
+		FD85202920C3FAFB00C749BC /* MacOSGamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85202620C3FAFB00C749BC /* MacOSGamepad.cpp */; };
+		FD85202A20C3FAFB00C749BC /* MacOSGamepadType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202720C3FAFB00C749BC /* MacOSGamepadType.h */; };
+		FD85202D20C3FB5A00C749BC /* GenericGamepad.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202B20C3FB5900C749BC /* GenericGamepad.h */; };
+		FD85202E20C3FB5A00C749BC /* GenericGamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85202C20C3FB5900C749BC /* GenericGamepad.cpp */; };
+		FD85203020C3FCA400C749BC /* Gamepad.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202F20C3FCA400C749BC /* Gamepad.h */; };
+		FD85203620C40D3900C749BC /* SpriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85203520C40D3900C749BC /* SpriteBatch.h */; };
+		FD85203820C40D4300C749BC /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85203720C40D4300C749BC /* SpriteBatch.cpp */; };
+		FD85203B20C40FE300C749BC /* GraphicsModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85203920C40FE300C749BC /* GraphicsModule.h */; };
+		FD85203C20C40FE300C749BC /* GraphicsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85203A20C40FE300C749BC /* GraphicsModule.cpp */; };
 		FD8E691A20AFA83B00791E10 /* GenericVertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E690F20AFA83A00791E10 /* GenericVertexBuffer.h */; };
 		FD8E691B20AFA83B00791E10 /* GenericVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E691020AFA83A00791E10 /* GenericVertexBuffer.cpp */; };
 		FD8E691C20AFA83B00791E10 /* GenericGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E691120AFA83B00791E10 /* GenericGraphics.h */; };
@@ -196,8 +212,6 @@
 		FD08C52720352C7200355346 /* MacOSApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSApplication.h; sourceTree = "<group>"; };
 		FD08C53920353F6F00355346 /* MacOSApplicationFwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSApplicationFwd.h; sourceTree = "<group>"; };
 		FD099A2E20BC52F7003E0746 /* EventModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventModule.cpp; sourceTree = "<group>"; };
-		FD10725720C195B80098E76D /* GraphicsModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GraphicsModule.h; path = ../../../../Source/TGON/Graphics/Object/Module/GraphicsModule.h; sourceTree = "<group>"; };
-		FD10725820C195B90098E76D /* GraphicsModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GraphicsModule.cpp; path = ../../../../Source/TGON/Graphics/Object/Module/GraphicsModule.cpp; sourceTree = "<group>"; };
 		FD10725B20C19E0C0098E76D /* libgainputstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgainputstatic.a; path = ../ThirdParty/Debug/x86_64/libgainputstatic.a; sourceTree = "<group>"; };
 		FD1F5650203EFF5B005B1F09 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		FD1F5653203F089A005B1F09 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../../../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -229,14 +243,35 @@
 		FD7EA6DD20B094CA00A76C69 /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawing.h; path = ../../Source/TGON/Core/Drawing/Drawing.h; sourceTree = "<group>"; };
 		FD7EA6DE20B094CA00A76C69 /* ImageType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageType.h; path = ../../Source/TGON/Core/Drawing/ImageType.h; sourceTree = "<group>"; };
 		FD7EA6DF20B094CA00A76C69 /* ImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageUtility.h; path = ../../Source/TGON/Core/Drawing/ImageUtility.h; sourceTree = "<group>"; };
-		FD851FF620C26CB900C749BC /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InputManager.cpp; path = ../../Source/TGON/Core/Hardware/InputManager.cpp; sourceTree = "<group>"; };
-		FD851FF720C26CB900C749BC /* Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Keyboard.h; path = ../../Source/TGON/Core/Hardware/Keyboard.h; sourceTree = "<group>"; };
-		FD851FF820C26CB900C749BC /* InputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputManager.h; path = ../../Source/TGON/Core/Hardware/InputManager.h; sourceTree = "<group>"; };
-		FD851FF920C26CB900C749BC /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Keyboard.cpp; path = ../../Source/TGON/Core/Hardware/Keyboard.cpp; sourceTree = "<group>"; };
-		FD85200020C2797A00C749BC /* InputModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputModule.cpp; sourceTree = "<group>"; };
-		FD85200120C2797A00C749BC /* InputModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputModule.h; sourceTree = "<group>"; };
-		FD85200420C2ABC300C749BC /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mouse.cpp; path = ../../Source/TGON/Core/Hardware/Mouse.cpp; sourceTree = "<group>"; };
-		FD85200520C2ABC300C749BC /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mouse.h; path = ../../Source/TGON/Core/Hardware/Mouse.h; sourceTree = "<group>"; };
+		FD851FF720C26CB900C749BC /* Keyboard.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Keyboard.h; path = ../../Source/TGON/Core/Hardware/Keyboard.h; sourceTree = "<group>"; };
+		FD851FF820C26CB900C749BC /* InputManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = InputManager.h; path = ../../Source/TGON/Core/Hardware/InputManager.h; sourceTree = "<group>"; };
+		FD85200020C2797A00C749BC /* InputModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = InputModule.cpp; sourceTree = "<group>"; };
+		FD85200120C2797A00C749BC /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = InputModule.h; sourceTree = "<group>"; };
+		FD85200520C2ABC300C749BC /* Mouse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Mouse.h; path = ../../Source/TGON/Core/Hardware/Mouse.h; sourceTree = "<group>"; };
+		FD85200920C31F2B00C749BC /* MacOSKeyboard.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSKeyboard.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSKeyboard.cpp; sourceTree = "<group>"; };
+		FD85200A20C31F2B00C749BC /* MacOSKeyboardType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSKeyboardType.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSKeyboardType.h; sourceTree = "<group>"; };
+		FD85200B20C31F2B00C749BC /* MacOSInputManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSInputManager.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSInputManager.h; sourceTree = "<group>"; };
+		FD85200C20C31F2B00C749BC /* MacOSMouse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSMouse.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSMouse.cpp; sourceTree = "<group>"; };
+		FD85200D20C31F2B00C749BC /* MacOSMouse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSMouse.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSMouse.h; sourceTree = "<group>"; };
+		FD85200E20C31F2B00C749BC /* MacOSKeyboard.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSKeyboard.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSKeyboard.h; sourceTree = "<group>"; };
+		FD85200F20C31F2B00C749BC /* MacOSInputManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSInputManager.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSInputManager.cpp; sourceTree = "<group>"; };
+		FD85201020C31F2B00C749BC /* MacOSMouseType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSMouseType.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSMouseType.h; sourceTree = "<group>"; };
+		FD85201A20C31F3300C749BC /* GenericMouse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericMouse.h; sourceTree = "<group>"; };
+		FD85201B20C31F3300C749BC /* GenericKeyboard.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericKeyboard.h; sourceTree = "<group>"; };
+		FD85201C20C31F3300C749BC /* GenericInputManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GenericInputManager.h; sourceTree = "<group>"; };
+		FD85201D20C31F3300C749BC /* GenericInputManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericInputManager.cpp; sourceTree = "<group>"; };
+		FD85201E20C31F3300C749BC /* GenericKeyboard.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericKeyboard.cpp; sourceTree = "<group>"; };
+		FD85201F20C31F3300C749BC /* GenericMouse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GenericMouse.cpp; sourceTree = "<group>"; };
+		FD85202520C3FAFA00C749BC /* MacOSGamepad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSGamepad.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSGamepad.h; sourceTree = "<group>"; };
+		FD85202620C3FAFB00C749BC /* MacOSGamepad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSGamepad.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSGamepad.cpp; sourceTree = "<group>"; };
+		FD85202720C3FAFB00C749BC /* MacOSGamepadType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSGamepadType.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSGamepadType.h; sourceTree = "<group>"; };
+		FD85202B20C3FB5900C749BC /* GenericGamepad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GenericGamepad.h; sourceTree = "<group>"; };
+		FD85202C20C3FB5900C749BC /* GenericGamepad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GenericGamepad.cpp; sourceTree = "<group>"; };
+		FD85202F20C3FCA400C749BC /* Gamepad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gamepad.h; path = ../../Source/TGON/Core/Hardware/Gamepad.h; sourceTree = "<group>"; };
+		FD85203520C40D3900C749BC /* SpriteBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteBatch.h; path = ../../Source/TGON/Graphics/Render/SpriteBatch.h; sourceTree = "<group>"; };
+		FD85203720C40D4300C749BC /* SpriteBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpriteBatch.cpp; path = ../../Source/TGON/Graphics/Render/SpriteBatch.cpp; sourceTree = "<group>"; };
+		FD85203920C40FE300C749BC /* GraphicsModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GraphicsModule.h; sourceTree = "<group>"; };
+		FD85203A20C40FE300C749BC /* GraphicsModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GraphicsModule.cpp; sourceTree = "<group>"; };
 		FD8E690F20AFA83A00791E10 /* GenericVertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GenericVertexBuffer.h; sourceTree = "<group>"; };
 		FD8E691020AFA83A00791E10 /* GenericVertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GenericVertexBuffer.cpp; sourceTree = "<group>"; };
 		FD8E691120AFA83B00791E10 /* GenericGraphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GenericGraphics.h; sourceTree = "<group>"; };
@@ -513,23 +548,6 @@
 			path = ../../Source/TGON/Core/Platform/MacOS;
 			sourceTree = "<group>";
 		};
-		FD10725520C194BE0098E76D /* Object */ = {
-			isa = PBXGroup;
-			children = (
-				FD10725620C194C30098E76D /* Module */,
-			);
-			path = Object;
-			sourceTree = "<group>";
-		};
-		FD10725620C194C30098E76D /* Module */ = {
-			isa = PBXGroup;
-			children = (
-				FD10725820C195B90098E76D /* GraphicsModule.cpp */,
-				FD10725720C195B80098E76D /* GraphicsModule.h */,
-			);
-			path = Module;
-			sourceTree = "<group>";
-		};
 		FD2108AF20B9327B009FC8F1 /* Hash */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,19 +634,73 @@
 		FD851FF520C26C9D00C749BC /* Hardware */ = {
 			isa = PBXGroup;
 			children = (
-				FD851FF620C26CB900C749BC /* InputManager.cpp */,
+				FD85201920C31F3300C749BC /* Generic */,
+				FD85200820C31F1F00C749BC /* MacOS */,
 				FD851FF820C26CB900C749BC /* InputManager.h */,
-				FD851FF920C26CB900C749BC /* Keyboard.cpp */,
 				FD851FF720C26CB900C749BC /* Keyboard.h */,
-				FD85200420C2ABC300C749BC /* Mouse.cpp */,
 				FD85200520C2ABC300C749BC /* Mouse.h */,
+				FD85202F20C3FCA400C749BC /* Gamepad.h */,
 			);
 			name = Hardware;
+			sourceTree = "<group>";
+		};
+		FD85200820C31F1F00C749BC /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				FD85202620C3FAFB00C749BC /* MacOSGamepad.cpp */,
+				FD85202520C3FAFA00C749BC /* MacOSGamepad.h */,
+				FD85202720C3FAFB00C749BC /* MacOSGamepadType.h */,
+				FD85200F20C31F2B00C749BC /* MacOSInputManager.cpp */,
+				FD85200B20C31F2B00C749BC /* MacOSInputManager.h */,
+				FD85200920C31F2B00C749BC /* MacOSKeyboard.cpp */,
+				FD85200E20C31F2B00C749BC /* MacOSKeyboard.h */,
+				FD85200A20C31F2B00C749BC /* MacOSKeyboardType.h */,
+				FD85200C20C31F2B00C749BC /* MacOSMouse.cpp */,
+				FD85200D20C31F2B00C749BC /* MacOSMouse.h */,
+				FD85201020C31F2B00C749BC /* MacOSMouseType.h */,
+			);
+			name = MacOS;
+			sourceTree = "<group>";
+		};
+		FD85201920C31F3300C749BC /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				FD85202C20C3FB5900C749BC /* GenericGamepad.cpp */,
+				FD85202B20C3FB5900C749BC /* GenericGamepad.h */,
+				FD85201A20C31F3300C749BC /* GenericMouse.h */,
+				FD85201B20C31F3300C749BC /* GenericKeyboard.h */,
+				FD85201C20C31F3300C749BC /* GenericInputManager.h */,
+				FD85201D20C31F3300C749BC /* GenericInputManager.cpp */,
+				FD85201E20C31F3300C749BC /* GenericKeyboard.cpp */,
+				FD85201F20C31F3300C749BC /* GenericMouse.cpp */,
+			);
+			name = Generic;
+			path = ../../Source/TGON/Core/Hardware/Generic;
+			sourceTree = "<group>";
+		};
+		FD85203120C40B3800C749BC /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				FD85203220C40B4900C749BC /* Module */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		FD85203220C40B4900C749BC /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				FD85203A20C40FE300C749BC /* GraphicsModule.cpp */,
+				FD85203920C40FE300C749BC /* GraphicsModule.h */,
+			);
+			name = Module;
+			path = ../../../Source/TGON/Graphics/Object/Module;
 			sourceTree = "<group>";
 		};
 		FD89A1C61F9BC88900817B92 /* Render */ = {
 			isa = PBXGroup;
 			children = (
+				FD85203720C40D4300C749BC /* SpriteBatch.cpp */,
+				FD85203520C40D3900C749BC /* SpriteBatch.h */,
 				FD8E696520AFA8D000791E10 /* FVF.h */,
 				FD8E695E20AFA8CC00791E10 /* Mesh.cpp */,
 				FD8E695F20AFA8CD00791E10 /* Mesh.h */,
@@ -811,7 +883,7 @@
 		FDFECB671F6ED7A1007AC1AB /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				FD10725520C194BE0098E76D /* Object */,
+				FD85203120C40B3800C749BC /* Object */,
 				FDEA01D02035812A00135040 /* LowLevelRender */,
 				FD89A1C61F9BC88900817B92 /* Render */,
 			);
@@ -826,6 +898,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD2108B520B93286009FC8F1 /* Hash.h in Headers */,
+				FD85201820C31F2B00C749BC /* MacOSMouseType.h in Headers */,
 				FD0672FE20B4256700BEA737 /* AudioBufferUtility.h in Headers */,
 				FD0672FA20B4256700BEA737 /* WavAudioImporter.h in Headers */,
 				FD8E695920AFA85900791E10 /* VertexBuffer.h in Headers */,
@@ -836,6 +909,7 @@
 				FD8E692420AFA83B00791E10 /* GenericTextureType.h in Headers */,
 				FD8E693B20AFA84600791E10 /* OpenGLVertexBufferType.h in Headers */,
 				FD8E694B20AFA84600791E10 /* OpenGLGraphicsFwd.h in Headers */,
+				FD85203620C40D3900C749BC /* SpriteBatch.h in Headers */,
 				FD851FFC20C26CB900C749BC /* InputManager.h in Headers */,
 				FD2BF56020138F0500228FFF /* Material.h in Headers */,
 				FD8E691C20AFA83B00791E10 /* GenericGraphics.h in Headers */,
@@ -846,16 +920,21 @@
 				FD8E694920AFA84600791E10 /* OpenGLGraphicsConfig.h in Headers */,
 				FD0672FB20B4256700BEA737 /* RiffReader.h in Headers */,
 				FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */,
+				FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
 				FD55ADA220AFB6C7006FADAA /* GenericWindow.h in Headers */,
 				FD0672F920B4256700BEA737 /* AudioBufferType.h in Headers */,
 				FD0672FC20B4256700BEA737 /* OggVorbisAudioImporter.h in Headers */,
+				FD85201520C31F2B00C749BC /* MacOSMouse.h in Headers */,
 				FD8E694320AFA84600791E10 /* OpenGLContextFwd.h in Headers */,
 				FD8E695B20AFA85900791E10 /* GraphicsConfig.h in Headers */,
 				FD8E694820AFA84600791E10 /* OpenGLUtility.h in Headers */,
+				FD85201220C31F2B00C749BC /* MacOSKeyboardType.h in Headers */,
 				FD8E696620AFA8D000791E10 /* FVF.h in Headers */,
 				FD55ADA320AFB6C7006FADAA /* GenericApplicationType.h in Headers */,
+				FD85202D20C3FB5A00C749BC /* GenericGamepad.h in Headers */,
 				FD8E692020AFA83B00791E10 /* GenericTexture.h in Headers */,
+				FD85203B20C40FE300C749BC /* GraphicsModule.h in Headers */,
 				FD0672F520B4256700BEA737 /* AudioPlayer.h in Headers */,
 				FD8E695020AFA84600791E10 /* OpenGLTexture.h in Headers */,
 				FD55ADA520AFB6C7006FADAA /* GenericWindowFwd.h in Headers */,
@@ -863,15 +942,19 @@
 				FD8E693D20AFA84600791E10 /* OpenGLShaderCode.h in Headers */,
 				FD8E692220AFA83B00791E10 /* GenericIndexBuffer.h in Headers */,
 				FD7EA6E020B094CA00A76C69 /* Image.h in Headers */,
+				FD85201320C31F2B00C749BC /* MacOSInputManager.h in Headers */,
 				FD85200720C2ABC400C749BC /* Mouse.h in Headers */,
 				FD2108B320B93286009FC8F1 /* UUID.h in Headers */,
+				FD85201620C31F2B00C749BC /* MacOSKeyboard.h in Headers */,
 				FD7EA6E320B094CA00A76C69 /* ImageType.h in Headers */,
 				FD8E695820AFA85900791E10 /* Texture.h in Headers */,
 				FD8E696420AFA8CD00791E10 /* MeshUtility.h in Headers */,
 				FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */,
 				FD8E695A20AFA85900791E10 /* Graphics.h in Headers */,
+				FD85202A20C3FAFB00C749BC /* MacOSGamepadType.h in Headers */,
 				FD8E691A20AFA83B00791E10 /* GenericVertexBuffer.h in Headers */,
 				FD8E691E20AFA83B00791E10 /* GenericShader.h in Headers */,
+				FD85203020C3FCA400C749BC /* Gamepad.h in Headers */,
 				FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */,
 				FD55AD9F20AFB6C7006FADAA /* GenericWindowType.h in Headers */,
 				FD8E695720AFA85900791E10 /* Shader.h in Headers */,
@@ -882,7 +965,6 @@
 				FD8E694C20AFA84600791E10 /* OpenGLIndexBuffer.h in Headers */,
 				FD8E696320AFA8CD00791E10 /* Mesh.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
-				FD10725920C195B90098E76D /* GraphicsModule.h in Headers */,
 				FD55ADA020AFB6C7006FADAA /* GenericApplicationFwd.h in Headers */,
 				FD0672FD20B4256700BEA737 /* GenericAudioImporter.h in Headers */,
 				FD8E694620AFA84600791E10 /* OpenGLGraphics.h in Headers */,
@@ -948,26 +1030,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD10725A20C195B90098E76D /* GraphicsModule.cpp in Sources */,
+				FD85202020C324C300C749BC /* GenericInputManager.cpp in Sources */,
+				FD85202120C324C300C749BC /* GenericKeyboard.cpp in Sources */,
+				FD85202920C3FAFB00C749BC /* MacOSGamepad.cpp in Sources */,
+				FD85202220C324C300C749BC /* GenericMouse.cpp in Sources */,
+				FD85201720C31F2B00C749BC /* MacOSInputManager.cpp in Sources */,
 				FD6A9EEB20BC4EF80078513F /* TimeModule.cpp in Sources */,
+				FD85203C20C40FE300C749BC /* GraphicsModule.cpp in Sources */,
 				FD6A9EEC20BC4EF80078513F /* TaskModule.cpp in Sources */,
 				FD06734420B42A1F00BEA737 /* Vector3.cpp in Sources */,
 				FD06734520B42A1F00BEA737 /* WELL1024a.cpp in Sources */,
 				FD06734720B42A1F00BEA737 /* MacOSDateTime.cpp in Sources */,
 				FDEA237520AFCAEA000885AC /* Material.cpp in Sources */,
 				FD8E694D20AFA84600791E10 /* OpenGLTexture.cpp in Sources */,
+				FD85202E20C3FB5A00C749BC /* GenericGamepad.cpp in Sources */,
 				FD8E696120AFA8CD00791E10 /* MeshUtility.cpp in Sources */,
 				FD8E694120AFA84600791E10 /* OpenGLShader.cpp in Sources */,
 				FDE573AF2039ED1A00C3D57E /* MacOSPath.mm in Sources */,
 				FDA52F99203C89480077A21F /* MacOSLocale.mm in Sources */,
+				FD85201420C31F2B00C749BC /* MacOSMouse.cpp in Sources */,
 				FD2108B420B93286009FC8F1 /* Hash.cpp in Sources */,
 				FD8E691B20AFA83B00791E10 /* GenericVertexBuffer.cpp in Sources */,
+				FD85201120C31F2B00C749BC /* MacOSKeyboard.cpp in Sources */,
 				FD0672F620B4256700BEA737 /* AudioPlayer.cpp in Sources */,
 				FDEA0201203747F600135040 /* Path.cpp in Sources */,
 				FD099A2F20BC52F8003E0746 /* EventModule.cpp in Sources */,
 				FD8E692320AFA83B00791E10 /* GenericTexture.cpp in Sources */,
+				FD85203820C40D4300C749BC /* SpriteBatch.cpp in Sources */,
 				FD08C53120353EB300355346 /* MacOSAppDelegate.mm in Sources */,
-				FD85200620C2ABC400C749BC /* Mouse.cpp in Sources */,
 				FD8E694E20AFA84600791E10 /* MacOSOpenGLContext.mm in Sources */,
 				FD08C53220353EB300355346 /* MacOSApplication.mm in Sources */,
 				FD8E694220AFA84600791E10 /* OpenGLVertexBuffer.cpp in Sources */,
@@ -977,8 +1067,6 @@
 				FD08C53620353EB300355346 /* MacOSWindow.mm in Sources */,
 				FD08C53720353EB300355346 /* MacOSWindowDelegate.mm in Sources */,
 				FD08C53820353EB300355346 /* MacOSWindowUtility.mm in Sources */,
-				FD851FFA20C26CB900C749BC /* InputManager.cpp in Sources */,
-				FD851FFD20C26CB900C749BC /* Keyboard.cpp in Sources */,
 				FD8E694A20AFA84600791E10 /* OpenGLIndexBuffer.cpp in Sources */,
 				FD06734E20B42D6C00BEA737 /* MacOSTime.mm in Sources */,
 				FD8E696220AFA8CD00791E10 /* Mesh.cpp in Sources */,

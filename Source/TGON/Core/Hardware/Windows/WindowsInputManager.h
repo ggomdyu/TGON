@@ -7,8 +7,8 @@
 #pragma once
 #include <OIS.h>
 
-#include "Core/Platform/Windows/WindowsWindow.h"
-#include "../Generic/GenericInputManager.h"
+#include "Core/Platform/Window.h"
+#include "Core/Hardware/Generic/GenericInputManager.h"
 
 namespace tgon
 {
@@ -16,12 +16,9 @@ namespace tgon
 class WindowsInputManager :
     public GenericInputManager
 {
-public:
-    TGON_RUNTIME_OBJECT(WindowsInputManager);
-
 /* @section Public constructor */
 public:
-    WindowsInputManager(const std::shared_ptr<GenericWindow>& window);
+    explicit WindowsInputManager(const std::shared_ptr<GenericWindow>& window);
     
 /* @section Public destructor */
 public:
@@ -33,7 +30,7 @@ public:
     virtual void* CreateMouse() const override;
     virtual void* CreateGamepad() const override;
 
-    void Update();
+    virtual void Update() override;
 
 /* @section Private method */
 public:

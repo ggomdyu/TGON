@@ -1,35 +1,42 @@
 /**
- * @filename    InputManager.h
+ * @filename    MacOSInputManager.h
  * @author      ggomdyu
  * @since       06/02/2018
  */
 
 #pragma once
-#include <memory>
+#include <gainput/gainput.h>
 
-#include "Mouse.h"
-#include "Keyboard.h"
+#include "Core/Platform/Window.h"
+#include "Core/Hardware/Generic/GenericInputManager.h"
 
 namespace tgon
 {
-
-class InputManager final :
-    private boost::noncopyable
+    
+class MacOSInputManager :
+    public GenericInputManager
 {
 /* @section Public constructor */
 public:
-    InputManager();
+    explicit MacOSInputManager(const std::shared_ptr<GenericWindow>& window);
+    
+/* @section Public destructor */
+public:
+    virtual ~MacOSInputManager() override = default;
     
 /* @section Public method */
 public:
-    void Update();
+    virtual void* CreateKeyboard() override;
+    virtual void* CreateMouse() override;
+    virtual void* CreateGamepad() override;
     
-    std::unique_ptr<Mouse> CreateMouse() const;
-    std::unique_ptr<Keyboard> CreateKeyboard() const;
-//    Gamepad     CreateGamepad();
+    virtual void Update() override;
     
+/* @section Private variable */
 private:
-    std::unique_ptr<gainput::InputManager> m_inputManager;
+    gainput::InputManager m_inputManager;
 };
-
+    
+using InputManager = MacOSInputManager;
+    
 } /* namespace tgon */

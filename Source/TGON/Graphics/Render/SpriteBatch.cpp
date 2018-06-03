@@ -1,8 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
-#include "InputManager.h"
+#include "SpriteBatch.h"
 
 namespace tgon
 {

@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <type_traits>
 #include <OIS.h>
 
 #include "../Generic/GenericMouse.h"
@@ -13,7 +12,7 @@
 namespace tgon
 {
 
-enum class GenericMouse::MouseCode : std::underlying_type_t<OIS::MouseButtonID>
+enum class GenericMouse::MouseCode
 {
     Mouse0  = OIS::MB_Left,
     Mouse1  = OIS::MB_Right,

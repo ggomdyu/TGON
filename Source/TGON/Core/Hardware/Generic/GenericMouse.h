@@ -1,7 +1,7 @@
 /**
  * @filename    GenericMouse.h
  * @author      ggomdyu
- * @since       05/15/2018
+ * @since       06/02/2018
  */
 
 #pragma once
@@ -29,6 +29,7 @@ public:
     virtual void GetPosition(int32_t* x, int32_t* y) const = 0;
     I32Point GetPosition() const;
     virtual bool IsMouseDown(MouseCode mouseCode) const = 0;
+    virtual bool IsMouseHold(MouseCode mouseCode) const = 0;
     virtual bool IsMouseUp(MouseCode mouseCode) const = 0;
 //    float GetAxisX() const;
 //    float GetAxisY() const; 

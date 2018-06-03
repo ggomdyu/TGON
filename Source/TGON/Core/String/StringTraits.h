@@ -488,7 +488,7 @@ inline std::pair<const wchar_t*, std::size_t> StringTraits<wchar_t>::Format(cons
 #ifdef _MSC_VER
     int strLen = vswprintf_s(strBuffer.get(), strBufferLen, formatStr, vaList);
 #else
-    int strLen = vswprintf(strBuffer.get(), formatStr, vaList);
+    int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
 #endif
     return {strBuffer.get(), strLen};
 }

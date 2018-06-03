@@ -156,7 +156,7 @@ inline bool BasicOggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* s
     this->m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
     
     ogg_int64_t bufferSize = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
-    this->m_audioData.resize(static_cast<decltype(m_audioData)::size_type>(bufferSize));
+    this->m_audioData.resize(static_cast<typename decltype(this->m_audioData)::size_type>(bufferSize));
     DecodeOggVorbis(&oggVorbisFile, &this->m_audioData[0], bufferSize, vorbisInfo->channels);
     
     return true;

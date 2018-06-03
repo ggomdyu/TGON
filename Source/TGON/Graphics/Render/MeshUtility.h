@@ -1,10 +1,8 @@
 /**
- * @filename    Texture.h
+ * @filename    MeshUtility.h
  * @author      ggomdyu
- * @since       11/12/2017
- * @brief
+ * @since       01/06/2018
  */
-
 
 #pragma once
 #include "Mesh.h"

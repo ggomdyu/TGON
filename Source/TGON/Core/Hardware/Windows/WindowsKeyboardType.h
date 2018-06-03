@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <type_traits>
 #include <OIS.h>
 
 #include "../Generic/GenericKeyboard.h"
@@ -13,7 +12,7 @@
 namespace tgon
 {
 
-enum class GenericKeyboard::KeyCode : std::underlying_type_t<OIS::KeyCode>
+enum class GenericKeyboard::KeyCode
 {
     Escape              = OIS::KeyCode::KC_ESCAPE,
     F1                  = OIS::KeyCode::KC_F1,

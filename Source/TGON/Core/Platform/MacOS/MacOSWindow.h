@@ -6,9 +6,9 @@
  */
 
 #pragma once
-#include "../Generic/GenericWindow.h"
+#import "../Generic/GenericWindow.h"
 
-#include "MacOSWindowFwd.h"
+#import "MacOSWindowFwd.h"
 
 namespace tgon
 {

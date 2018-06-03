@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <OIS.h>
-
 #include "WindowsKeyboardType.h"
 
 namespace tgon

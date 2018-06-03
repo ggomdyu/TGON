@@ -9,12 +9,12 @@ void EventModule::Update()
 {
 }
 
-void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const EventHandler& handler)
+void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const Delegate<void()>& handler)
 {
     m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = handler;
 }
     
-void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, EventHandler&& handler)
+void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, Delegate<void()>&& handler)
 {
     m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = std::move(handler);
 }

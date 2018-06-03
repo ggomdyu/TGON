@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Utility/Algorithm.h"
-
-#include "Keyboard.h"
+#include "GenericGamepad.h"
 
 namespace tgon
 {
+
+GenericGamepad::~GenericGamepad() = default;
 
 } /* namespace tgon */
