@@ -135,6 +135,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboardType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseType.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationUtility.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
@@ -146,6 +153,10 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
       <FileType>Document</FileType>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />

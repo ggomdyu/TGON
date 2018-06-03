@@ -10,9 +10,9 @@
 #include "Core/String/Encoding.h"
 
 #include "../Config.h"
+#include "../Window.h"
 #include "../Generic/GenericWindowType.h"
 
-#include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
 
 namespace tgon

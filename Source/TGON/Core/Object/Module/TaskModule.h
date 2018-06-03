@@ -9,6 +9,7 @@
 #include <deque>
 #include <cstdint>
 #include <thread>
+#include <mutex>
 
 #include "Core/Object/Delegate.h"
 

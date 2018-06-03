@@ -16,31 +16,28 @@ namespace tgon
 class WindowsInputManager :
     public GenericInputManager
 {
+public:
+    TGON_RUNTIME_OBJECT(WindowsInputManager);
+
 /* @section Public constructor */
 public:
     explicit WindowsInputManager(const std::shared_ptr<GenericWindow>& window);
     
 /* @section Public destructor */
 public:
-    virtual ~WindowsInputManager() override = default;
+    virtual ~WindowsInputManager() override;
 
 /* @section Public method */
 public:
-    virtual void* CreateKeyboard() const override;
-    virtual void* CreateMouse() const override;
-    virtual void* CreateGamepad() const override;
-
     virtual void Update() override;
 
 /* @section Private method */
 public:
     OIS::ParamList QueryParamList(const std::shared_ptr<GenericWindow>& window) const;
     
-/* @section Private variable */
-private:
+/* @section Protected variable */
+protected:
     OIS::InputManager* m_inputManager;
 };
-
-using InputManager = WindowsInputManager;
 
 } /* namespace tgon */

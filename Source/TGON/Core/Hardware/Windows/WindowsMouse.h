@@ -26,6 +26,7 @@ public:
     virtual void Update() override;
     virtual void GetPosition(int32_t* x, int32_t* y) const override;
     virtual bool IsMouseDown(MouseCode mouseCode) const override;
+    virtual bool IsMouseHold(MouseCode mouseCode) const override;
     virtual bool IsMouseUp(MouseCode mouseCode) const override;
 //    float GetAxisX() const;
 //    float GetAxisY() const;
@@ -33,6 +34,7 @@ public:
 /* @section Private variable */
 private:
     OIS::Mouse* m_mouseDevice;
+    OIS::MouseState m_prevMouseState;
 };
 
 using Mouse = WindowsMouse;

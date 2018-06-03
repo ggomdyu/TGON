@@ -45,7 +45,7 @@ public:
 /* @section Private variable */
 public:
     InputManager m_inputManager;
-    
+
     std::unique_ptr<Keyboard> m_keyboard;
     std::unique_ptr<Mouse> m_mouse;
     std::unique_ptr<Gamepad> m_gamepad;

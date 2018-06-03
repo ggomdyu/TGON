@@ -4,11 +4,11 @@
 
 #include "Core/String/Encoding.h"
 
+#include "../Application.h"
 #include "../Window.h"
 #include "../Generic/GenericWindowType.h"
 #include "../Generic/GenericApplicationType.h"
 
-#include "WindowsApplication.h"
 #include "WindowsApplicationUtility.h"
 
 namespace tgon

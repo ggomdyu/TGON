@@ -22,7 +22,7 @@ public:
             InputMode inputMode;
             inputMode.isUseKeyboard = true;
             inputMode.isUseMouse = true;
-            inputMode.isUseGamepad = true;
+            inputMode.isUseGamepad = false;
             return inputMode;
         } (), this->GetRootWindow());
     }
@@ -66,23 +66,21 @@ public:
         }
         
         decltype(auto) mouse = inputModule->GetMouse();
-        auto position = mouse->GetPosition();
-        Log(LogLevel::Debug, "x:%d, y:%d", position.x, position.y);
-        
-        
         if (mouse->IsMouseDown(Mouse::MouseCode::Left))
         {
-            inputModule->GetGamepad()->Vibrate(1.0f, 0.0f);
-            Log(LogLevel::Debug, "LeftMouse Down");
+            Log(LogLevel::Debug, "1");
         }
         else if (mouse->IsMouseHold(Mouse::MouseCode::Left))
         {
-            Log(LogLevel::Debug, "LeftMouse Hold");
+            Log(LogLevel::Debug, "2");
         }
         else if (mouse->IsMouseUp(Mouse::MouseCode::Left))
         {
-            Log(LogLevel::Debug, "LeftMouse Up");
+            Log(LogLevel::Debug, "3");
         }
+
+        /*decltype(auto) gamepad = inputModule->GetGamepad();
+        gamepad->Vibrate(0.0f, 0.0f);*/
     }
 };
 

@@ -23,6 +23,9 @@ public:
 public:
     virtual void Update() = 0;
     virtual void Vibrate(float leftMotor, float rightMotor) = 0;
+    virtual bool IsButtonDown(int32_t buttonNumber) const = 0;
+    virtual bool IsButtonHold(int32_t buttonNumber) const = 0;
+    virtual bool IsButtonUp(int32_t buttonNumber) const = 0;
 };
 
 } /* namespace tgon */

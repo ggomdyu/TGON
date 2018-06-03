@@ -1,8 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
-#include "WindowsInputManager.h"
+#include "../InputManager.h"
 
 namespace tgon
 {
@@ -13,19 +11,9 @@ WindowsInputManager::WindowsInputManager(const std::shared_ptr<GenericWindow>& w
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
 }
 
-void* WindowsInputManager::CreateKeyboard() const
+WindowsInputManager::~WindowsInputManager()
 {
-    return m_inputManager->createInputObject(OIS::OISKeyboard, true);
-}
-
-void* WindowsInputManager::CreateMouse() const
-{
-    return m_inputManager->createInputObject(OIS::OISMouse, true);
-}
-
-void* WindowsInputManager::CreateGamepad() const
-{
-    return m_inputManager->createInputObject(OIS::OISJoyStick, true);
+    OIS::InputManager::destroyInputSystem(m_inputManager);
 }
 
 void WindowsInputManager::Update()
@@ -40,6 +28,21 @@ OIS::ParamList WindowsInputManager::QueryParamList(const std::shared_ptr<Generic
     };
 
     return paramList;
+}
+
+std::unique_ptr<Keyboard> InputManager::CreateKeyboard()
+{
+    return std::make_unique<Keyboard>(static_cast<OIS::Keyboard*>(m_inputManager->createInputObject(OIS::OISKeyboard, true)));
+}
+
+std::unique_ptr<Mouse> InputManager::CreateMouse()
+{
+    return std::make_unique<Mouse>(static_cast<OIS::Mouse*>(m_inputManager->createInputObject(OIS::OISMouse, true)));
+}
+
+std::unique_ptr<Gamepad> InputManager::CreateGamepad()
+{
+    return std::make_unique<Gamepad>(static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true)));
 }
 
 } /* namespace tgon */

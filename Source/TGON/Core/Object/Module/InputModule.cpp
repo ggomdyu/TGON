@@ -10,17 +10,17 @@ InputModule::InputModule(const InputMode& inputMode, const std::shared_ptr<Gener
 {
     if (inputMode.isUseKeyboard)
     {
-        m_keyboard = std::make_unique<Keyboard>(m_inputManager.CreateKeyboard());
+        m_keyboard = m_inputManager.CreateKeyboard();
     }
     
     if (inputMode.isUseMouse)
     {
-        m_mouse = std::make_unique<Mouse>(m_inputManager.CreateMouse());
+        m_mouse = m_inputManager.CreateMouse();
     }
 
     if (inputMode.isUseGamepad)
     {
-        m_gamepad = std::make_unique<Gamepad>(m_inputManager.CreateGamepad());
+        m_gamepad = m_inputManager.CreateGamepad();
     }
 }
     
@@ -31,6 +31,16 @@ void InputModule::Update()
     if (m_keyboard != nullptr)
     {
         m_keyboard->Update();
+    }
+
+    if (m_mouse != nullptr)
+    {
+        m_mouse->Update();
+    }
+
+    if (m_gamepad != nullptr)
+    {
+        m_gamepad->Update();
     }
 }
 

@@ -1,5 +1,5 @@
 /**
- * @filename    WindowsWindowWindow.h
+ * @filename    WindowsWindow.h
  * @author      ggomdyu
  * @since       01/09/2016
  * @brief       The platform specific window class implementation.

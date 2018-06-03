@@ -25,11 +25,13 @@ public:
 public:
     virtual void Update() override;
     virtual bool IsKeyDown(KeyCode keyCode) const override;
+    virtual bool IsKeyHold(KeyCode keyCode) const override;
     virtual bool IsKeyUp(KeyCode keyCode) const override;
 
 /* @section Private variable */
 private:
     OIS::Keyboard* m_keyboardDevice;
+    char m_prevKeyStates[256];
 };
 
 using Keyboard = WindowsKeyboard;
