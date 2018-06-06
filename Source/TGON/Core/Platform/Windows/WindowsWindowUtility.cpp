@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#include <type_traits>
 #include <cassert>
 
 #include "Core/Debug/Log.h"
@@ -74,8 +75,8 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     ConverWindowStyleToNative(windowStyle, &normalStyle, &extendedStyle);
 
     wchar_t utf16Title[512] {};
-    bool succeeded = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), reinterpret_cast<char*>(utf16Title), 512) != -1;
-    if (succeeded == false)
+    bool isConverSucceeded = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), utf16Title, std::extent_v<decltype(utf16Title)>);
+    if (isConverSucceeded == false)
     {
         return nullptr;
     }

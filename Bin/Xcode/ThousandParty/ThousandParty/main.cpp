@@ -2,7 +2,22 @@
 
 #include "TGON.h"
 
+#include <iconv.h>
+
 using namespace tgon;
+
+class ResourceGuard
+{
+public:
+    ~ResourceGuard()
+    {
+    }
+
+private:
+};
+
+std::string Convert(const char* srcStr);
+std::string Convert(const char* srcStr, std::size_t srcStrLen);
 
 class TGON_API ThousandParty final :
     public Application
@@ -21,10 +36,14 @@ public:
         {
             InputMode inputMode;
             inputMode.isUseKeyboard = true;
-            inputMode.isUseMouse = true;
+            inputMode.isUseMouse = false;
             inputMode.isUseGamepad = false;
             return inputMode;
         } (), this->GetRootWindow());
+
+        auto directory = tgon::GetCurrentDirectory();
+
+        Log(LogLevel::Debug, u8"ÇÑ±¹¾îMy NAME\n");
     }
 
 /* @section Public destructor */
@@ -65,7 +84,7 @@ public:
             Log(LogLevel::Debug, "3");
         }
         
-        decltype(auto) mouse = inputModule->GetMouse();
+        /*decltype(auto) mouse = inputModule->GetMouse();
         if (mouse->IsMouseDown(Mouse::MouseCode::Left))
         {
             Log(LogLevel::Debug, "1");
@@ -78,7 +97,7 @@ public:
         {
             Log(LogLevel::Debug, "3");
         }
-
+*/
         /*decltype(auto) gamepad = inputModule->GetGamepad();
         gamepad->Vibrate(0.0f, 0.0f);*/
     }

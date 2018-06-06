@@ -1,5 +1,6 @@
 ﻿#include "PrecompiledHeader.h"
 
+#include <type_traits>
 #include <cassert>
 #include <Windows.h>
 #if TGON_SUPPORT_DWMAPI && TGON_USING_DWMAPI
@@ -106,7 +107,7 @@ void WindowsWindow::GetTitle(char* destStr) const
     wchar_t utf16Title[256] {};
     int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
 
-    UTF16LE::Convert<UTF8>(reinterpret_cast<const char*>(utf16Title), utf16TitleLen, destStr, 256);
+    UTF16LE::Convert<UTF8>(utf16Title, utf16TitleLen, destStr, 256);
 }
 
 bool WindowsWindow::IsResizable() const
@@ -213,8 +214,8 @@ void WindowsWindow::SetTitle(const char* captionTitle)
     assert(captionTitle != nullptr);
 
     char utf16Title[512] {};
-    bool succeed = UTF8::Convert<UTF16LE>(reinterpret_cast<const char*>(captionTitle), std::strlen(captionTitle), utf16Title, 512) != -1;
-    if (succeed)
+    bool isConvertSucceed = UTF8::Convert<UTF16LE>(captionTitle, std::strlen(captionTitle), utf16Title, std::extent_v<decltype(utf16Title)>);
+    if (isConvertSucceed)
     {
         ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));
     }

@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <shlobj.h>
+#include <type_traits>
 
 #include "Core/String/Encoding.h"
 
@@ -20,9 +21,15 @@ TGON_API std::string GetCurrentDirectory()
     DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH, utf16Path);
 
     char utf8Path[MAX_PATH + 1] {};
-    UTF16LE::Convert<UTF8>((const char*)utf16Path, utf16PathLen, &utf8Path[0], sizeof(utf8Path));
-
-    return utf8Path;
+    bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, &utf8Path[0], std::extent_v<decltype(utf8Path)>);
+    if (isConvertSucceed)
+    {
+        return utf8Path;
+    }
+    else
+    {
+        return std::string();
+    }
 }
 
 TGON_API std::string GetUserDirectory()
@@ -32,9 +39,13 @@ TGON_API std::string GetUserDirectory()
     if (SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, utf16Path) == S_OK)
     {
         char utf8Path[MAX_PATH]{};
-        UTF16LE::Convert<UTF8>((const char*)utf16Path, std::wcslen(utf16Path), &utf8Path[0], sizeof(utf8Path));
+        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, std::wcslen(utf16Path), &utf8Path[0], std::extent_v<decltype(utf8Path)>);
+        if (isConvertSucceed)
+        {
+            return utf8Path;
+        }
 
-        return utf8Path;
+        return std::string();
     }
     else
     {
@@ -46,12 +57,16 @@ TGON_API std::string GetDesktopDirectory()
 {
     wchar_t utf16Path[MAX_PATH + 1];
 
-    if (SHGetFolderPathW(NULL, CSIDL_DESKTOP, NULL, 0, utf16Path) == S_OK)
+    if (SHGetFolderPathW(nullptr, CSIDL_DESKTOP, nullptr, 0, utf16Path) == S_OK)
     {
         char utf8Path[MAX_PATH] {};
-        UTF16LE::Convert<UTF8>((const char*)utf16Path, std::wcslen(utf16Path), &utf8Path[0], sizeof(utf8Path));
+        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, std::wcslen(utf16Path), &utf8Path[0], std::extent_v<decltype(utf8Path)>);
+        if (isConvertSucceed)
+        {
+            return utf8Path;
+        }
 
-        return utf8Path;
+        return std::string();
     }
     else
     {
