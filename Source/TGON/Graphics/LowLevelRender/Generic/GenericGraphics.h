@@ -22,7 +22,7 @@ class TGON_API GenericGraphics :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(GenericGraphics)
+    TGON_RUNTIME_OBJECT(GenericGraphics);
 
 /* @section Public constructor */
 public:

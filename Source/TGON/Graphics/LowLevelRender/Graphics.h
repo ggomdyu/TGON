@@ -22,7 +22,7 @@ class Graphics :
     public BOOST_PP_CAT(TGON_GRAPHICS_NAME, Graphics)
 {
 public:
-    TGON_RUNTIME_OBJECT(Graphics)
+    TGON_RUNTIME_OBJECT(Graphics);
 
 /* @section Public constructor */
 public:

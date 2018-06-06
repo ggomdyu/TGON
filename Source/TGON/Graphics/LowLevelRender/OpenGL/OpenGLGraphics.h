@@ -19,7 +19,7 @@ class OpenGLGraphics :
     public GenericGraphics
 {
 public:
-    TGON_RUNTIME_OBJECT(OpenGLGraphics)
+    TGON_RUNTIME_OBJECT(OpenGLGraphics);
 
 /* @section Public constructor */
 public:

@@ -8,7 +8,7 @@ namespace tgon
 
 std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material)
 {
-    // Make VertexBuffer
+    // Create a VertexBuffer
     V3F_T2F vertices[] =
     {
         V3F_T2F{Vector3(-1.0f, -1.0f, 0.0f), Vector2(0.0f, 0.0f)},
@@ -22,17 +22,17 @@ std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material)
     };
     auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
 
-    // Make IndexBuffer
+    // Create a IndexBuffer
     unsigned int indices[] = { 0, 1, 2 };
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
-    // Make Mesh
+    // Create a Mesh
     return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
 std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
 {
-    // Make VertexBuffer
+    // Create a VertexBuffer
     V3F_T2F vertices[] =
     {
         V3F_T2F{Vector3(-1.0f, -1.0f, -1.0f), Vector2(0.0f, 0.0f)},
@@ -51,7 +51,7 @@ std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
     };
     auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
 
-    // Make IndexBuffer
+    // Create a IndexBuffer
     unsigned int indices[] =
     {
         // Front face
@@ -80,13 +80,13 @@ std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
     };
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
-    // Make Mesh
+    // Create a Mesh
     return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
 std::shared_ptr<Mesh> MakeQuad(const std::shared_ptr<Material>& material)
 {
-    // Make VertexBuffer
+    // Create a VertexBuffer
     V3F_T2F vertices[] =
     {
         V3F_T2F{Vector3(-1.0f, -1.0f, 0.0f), Vector2(0.0f, 0.0f)},
@@ -101,11 +101,11 @@ std::shared_ptr<Mesh> MakeQuad(const std::shared_ptr<Material>& material)
     };
     auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
 
-    // Make IndexBuffer
+    // Create a IndexBuffer
     unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
     auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
-    // Make Mesh
+    // Create a Mesh
     return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 

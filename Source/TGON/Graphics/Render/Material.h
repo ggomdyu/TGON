@@ -16,7 +16,7 @@ class Material :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(Material)
+    TGON_RUNTIME_OBJECT(Material);
 
 /* @section Public constructor */
 public:
@@ -42,7 +42,7 @@ class ColorMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(ColorMaterial)
+    TGON_RUNTIME_OBJECT(ColorMaterial);
 
 /* @section Public constructor */
 public:
@@ -69,7 +69,7 @@ class TextureMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(TextureMaterial)
+    TGON_RUNTIME_OBJECT(TextureMaterial);
 
 /* @section Public constructor */
 public:
@@ -103,7 +103,7 @@ class GrayscaleTextureMaterial :
     public TextureMaterial
 {
 public:
-    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial)
+    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial);
 
 /* @section Public constructor */
 public:
@@ -124,7 +124,7 @@ class MaskTextureMaterial :
     public TextureMaterial
 {
 public:
-    TGON_RUNTIME_OBJECT(MaskTextureMaterial)
+    TGON_RUNTIME_OBJECT(MaskTextureMaterial);
 
 /* @section Public constructor */
 public:
@@ -157,7 +157,7 @@ class UberMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(UberMaterial)
+    TGON_RUNTIME_OBJECT(UberMaterial);
 };
 
 } /* namespace tgon */
