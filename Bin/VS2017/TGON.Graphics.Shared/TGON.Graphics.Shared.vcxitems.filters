@@ -72,9 +72,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLGraphics.h">
       <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLGraphicsFwd.h">
-      <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericIndexBuffer.h">
       <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
     </ClInclude>
@@ -93,16 +90,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\Generic\GenericGraphicsType.h">
       <Filter>Source\Graphics\LowLevelRender\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLGraphicsUtility.h">
-      <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\FVF.h">
-      <Filter>Source\Graphics\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\GraphicsContext.h">
-      <Filter>Source\Graphics\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\GraphicsResource.h">
       <Filter>Source\Graphics\Render</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Mesh.h">
@@ -135,6 +123,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Module\GraphicsModule.h">
       <Filter>Source\Graphics\Object\Module</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.h">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.h">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Graphics.Shared\..\..\..\Source\TGON\Graphics\Render\GraphicsResource.h">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLGraphicsType.h">
+      <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Material.cpp">
@@ -150,9 +150,6 @@
       <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLVertexBuffer.cpp">
-      <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\WindowsOpenGLContext.cpp">
       <Filter>Source\Graphics\LowLevelRender\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\OpenGLGraphics.cpp">
@@ -175,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Module\GraphicsModule.cpp">
       <Filter>Source\Graphics\Object\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.cpp">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.cpp">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Graphics.Shared\..\..\..\Source\TGON\Graphics\Render\GraphicsResource.cpp">
+      <Filter>Source\Graphics\Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

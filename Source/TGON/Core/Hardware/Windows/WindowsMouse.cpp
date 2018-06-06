@@ -36,7 +36,7 @@ void WindowsMouse::GetPosition(int32_t* x, int32_t* y) const
 
 bool WindowsMouse::IsMouseDown(MouseCode mouseCode) const
 {
-    const OIS::MouseState& currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
     
     if (m_prevMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
@@ -51,7 +51,7 @@ bool WindowsMouse::IsMouseDown(MouseCode mouseCode) const
 
 bool WindowsMouse::IsMouseHold(MouseCode mouseCode) const
 {
-    const OIS::MouseState& currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
 
     if (m_prevMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
@@ -66,7 +66,7 @@ bool WindowsMouse::IsMouseHold(MouseCode mouseCode) const
 
 bool WindowsMouse::IsMouseUp(MouseCode mouseCode) const
 {
-    const OIS::MouseState& currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
 
     if (m_prevMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false)

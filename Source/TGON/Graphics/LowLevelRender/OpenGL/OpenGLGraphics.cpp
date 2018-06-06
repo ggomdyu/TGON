@@ -8,14 +8,13 @@
 #endif
 
 #include "Core/Math/Color.h"
+#include "Core/Utility/Algorithm.h"
 
-#include "../Generic/GenericGraphicsType.h"
 #include "../OpenGL/OpenGLVertexBuffer.h"
 #include "../OpenGL/OpenGLIndexBuffer.h"
 #include "../OpenGL/OpenGLTexture.h"
 
 #include "OpenGLGraphics.h"
-#include "OpenGLGraphicsUtility.h"
 #include "OpenGLContext.h"
 #include "OpenGLUtility.h"
 
@@ -53,12 +52,12 @@ void OpenGLGraphics::SetClearColor(const Color4f& color)
 
 void OpenGLGraphics::SetFillMode(FillMode fillMode)
 {
-    TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode)));
+    TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, static_cast<GLenum>(fillMode)));
 }
 
 void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
-    TGON_GL_ERROR_CHECK(glFrontFace(ConvertCullModeToNative(cullMode)));
+    TGON_GL_ERROR_CHECK(glFrontFace(static_cast<GLenum>(cullMode)));
 }
 
 void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
@@ -99,6 +98,25 @@ void OpenGLGraphics::ClearColorDepthBuffer()
 void OpenGLGraphics::SwapBuffer()
 {
     m_context.SwapBuffer();
+}
+
+void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount)
+{
+    int32_t vertexCountPerPrimitive = 0;
+    if (primitiveType == PrimitiveType::Triangles)
+    {
+        vertexCountPerPrimitive = primitiveCount * 3;
+    }
+    else if (primitiveType == PrimitiveType::Lines)
+    {
+        vertexCountPerPrimitive = primitiveCount * 2;
+    }
+    else if (primitiveType == PrimitiveType::Points)
+    {
+        vertexCountPerPrimitive = primitiveCount;
+    }
+
+    glDrawElements(GL_TRIANGLES, vertexCountPerPrimitive, GL_UNSIGNED_INT, nullptr);
 }
 
 } /* namespace tgon */

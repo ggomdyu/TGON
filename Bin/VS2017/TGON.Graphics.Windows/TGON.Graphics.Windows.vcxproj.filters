@@ -1,2 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{77fe7b2d-317f-4497-a691-5bfce0de740c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{a19128b5-1d9c-4f8f-971a-9236d1f08cc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\OpenGL">
+      <UniqueIdentifier>{b80eadc5-d316-4fec-ae8e-74c12f14e6ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\WindowsOpenGLContext.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

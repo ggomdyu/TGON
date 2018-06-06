@@ -36,9 +36,9 @@ inline ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::s
         return ImageFormat::Gif;
     case X65599Hash("webp"):
         return ImageFormat::WebP;
+    default:
+        return ImageFormat::Unknown;
     }
-
-    return ImageFormat::Unknown;
 }
 
 template <std::size_t _ImageFormatStrLen>

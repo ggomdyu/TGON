@@ -2,22 +2,9 @@
 
 #include "TGON.h"
 
-#include <iconv.h>
+#include "Graphics/Render/Sprite.h"
 
 using namespace tgon;
-
-class ResourceGuard
-{
-public:
-    ~ResourceGuard()
-    {
-    }
-
-private:
-};
-
-std::string Convert(const char* srcStr);
-std::string Convert(const char* srcStr, std::size_t srcStrLen);
 
 class TGON_API ThousandParty final :
     public Application
@@ -32,19 +19,25 @@ public:
         this->AddModule<TimeModule>();
         this->AddModule<EventModule>();
         this->AddModule<GraphicsModule>(VideoMode(), this->GetRootWindow());
-        this->AddModule<InputModule>([]()
+
+        InputMode inputMode;
         {
-            InputMode inputMode;
             inputMode.isUseKeyboard = true;
             inputMode.isUseMouse = false;
             inputMode.isUseGamepad = false;
-            return inputMode;
-        } (), this->GetRootWindow());
+        }
+        this->AddModule<InputModule>(inputMode, this->GetRootWindow());
 
-        auto directory = tgon::GetCurrentDirectory();
+        m_sprite = new Sprite();
+        m_sprite->SetTexture(std::shared_ptr<Texture>(new Texture("E:/Users/ggomdyu/Desktop/printTestImage.png")));
 
-        Log(LogLevel::Debug, u8"ÇÑ±¹¾îMy NAME\n");
+        auto graphicsModule = GetModule<GraphicsModule>();
+        m_graphicsContext = new GraphicsContext(graphicsModule->GetGraphics());
     }
+
+    
+    GraphicsContext* m_graphicsContext;
+    Sprite* m_sprite;
 
 /* @section Public destructor */
 public:
@@ -62,7 +55,10 @@ public:
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
+        m_stopwatch.Start();
     }
+
+    Stopwatch m_stopwatch;
 
     virtual void OnUpdate() override
     {
@@ -83,6 +79,29 @@ public:
         {
             Log(LogLevel::Debug, "3");
         }
+
+        auto extent = GetRootWindow()->GetSize();
+        
+        static float zAxis = Pi;
+        auto matWorld  = Matrix4x4::Scale(1.0f, 1.0f, 1.0f);
+        matWorld *= Matrix4x4::RotateZ(zAxis);;
+        auto matView = Matrix4x4::LookAtRH({ 0.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
+        auto matProj = Matrix4x4::PerspectiveRH(Pi / 8.0f, (float)extent.width / (float)extent.height, 0.1f, 1000.0f);
+
+
+        Matrix4x4 matWVP = matWorld;
+        matWVP *= matView;
+        matWVP *= matProj;
+
+        m_sprite->SetWorldViewProjectionMatrix(matWVP);
+
+        auto& graphics = GetModule<GraphicsModule>()->GetGraphics();
+        graphics.ClearColorDepthBuffer();
+        {
+            /* Add batch render */
+            m_sprite->Draw(*m_graphicsContext);
+        }
+        graphics.SwapBuffer();
         
         /*decltype(auto) mouse = inputModule->GetMouse();
         if (mouse->IsMouseDown(Mouse::MouseCode::Left))

@@ -6,7 +6,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <cassert>
 #include <cstdint>
 
