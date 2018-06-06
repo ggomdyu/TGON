@@ -105,9 +105,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.cpp">
       <Filter>Source\Core\Random</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.cpp">
-      <Filter>Source\Core\String</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp">
       <Filter>Source\Core\Drawing\Windows</Filter>
     </ClCompile>
@@ -211,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Mathematics.h">
       <Filter>Source\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.h">
-      <Filter>Source\Core\String</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Screen.h">
       <Filter>Source\Core\Platform</Filter>
@@ -419,10 +413,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericGamepad.h">
       <Filter>Source\Core\Hardware\Generic</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.inl">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\InstanceCounter.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringHash.h">
       <Filter>Source\Core\String</Filter>
-    </None>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringView.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\Encoding.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

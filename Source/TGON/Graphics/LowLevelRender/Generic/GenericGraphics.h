@@ -13,6 +13,7 @@
 #include "Core/Math/Rect.h"
 
 #include "GenericGraphicsType.h"
+#include "GenericGraphicsFwd.h"
 
 namespace tgon
 {

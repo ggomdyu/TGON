@@ -45,6 +45,7 @@
 #include "Core/Utility/Stopwatch.h"
 #include "Core/Utility/Algorithm.h"
 #include "Core/Utility/AutoCast.h"
+#include "Core/Utility/InstanceCounter.h"
 #include "Core/Utility/InstantiateCounter.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
 #include "Graphics/LowLevelRender/Generic/GenericGraphics.h"

@@ -28,11 +28,7 @@ void GraphicsModule::Update()
 
 void GraphicsModule::Draw()
 {
-    m_graphics.ClearColorDepthBuffer();
-    {
-        /* Add batch render */
-    }
-    m_graphics.SwapBuffer();
+   
 }
 
 Graphics& GraphicsModule::GetGraphics()

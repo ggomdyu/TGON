@@ -42,6 +42,7 @@ public:
 /* @section Private variable */
 private:
     OIS::JoyStick* m_gamepadDevice;
+    OIS::JoyStickState m_prevGamepadState;
 };
 
 using Gamepad = WindowsGamepad;

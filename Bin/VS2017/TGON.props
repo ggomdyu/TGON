@@ -6,7 +6,7 @@
     <_PropertySheetDisplayName>TGON.Props</_PropertySheetDisplayName>
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\..\Source\TGON;$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS-1.4\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\ThirdParty\glew-2.1.0\include;$(SolutionDir)..\..\Source\ThirdParty\icu4c-59_1-src\icu\include\;$(SolutionDir)..\..\Source\ThirdParty\libpng16;$(SolutionDir)..\..\Source\ThirdParty\assimp-4.1.0\include;$(SolutionDir)..\..\Source\ThirdParty\OpenAL;$(SolutionDir)..\..\Source\ThirdParty\;$(SolutionDir)..\..\Source\ThirdParty\libvorbis-1.3.6\include;$(SolutionDir)..\..\Source\ThirdParty\libogg-1.3.3\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\Source\TGON;$(SolutionDir)..\..\Source\Thirdparty\tinyxml2;$(SolutionDir)..\..\Source\Thirdparty\OIS-1.4\includes;$(SolutionDir)..\..\Source\Thirdparty\boost_1_63_0;$(SolutionDir)..\..\Source\ThirdParty\glew-2.1.0\include;$(SolutionDir)..\..\Source\ThirdParty\icu4c-59_1-src\icu\include\;$(SolutionDir)..\..\Source\ThirdParty\libpng16;$(SolutionDir)..\..\Source\ThirdParty\assimp-4.1.0\include;$(SolutionDir)..\..\Source\ThirdParty\OpenAL;$(SolutionDir)..\..\Source\ThirdParty\;$(SolutionDir)..\..\Source\ThirdParty\libvorbis-1.3.6\include;$(SolutionDir)..\..\Source\ThirdParty\libogg-1.3.3\include;$(SolutionDir)..\..\Source\ThirdParty\libiconv-1.9.2\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Lib\$(PlatformTarget);$(SolutionDir)..\..\Source\Thirdparty\icu4c-59_1-src\icu\lib;$(SolutionDir)..\ThirdParty\$(Configuration)\x86;$(SolutionDir)..\ThirdParty\$(Configuration)\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -18,7 +18,7 @@
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libpng.lib;zlibstatic.lib;OpenAL32.lib;EFX-Util.lib;libvorbis.lib;libogg.lib;libvorbisfile.lib;OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpng.lib;zlibstatic.lib;OpenAL32.lib;EFX-Util.lib;libvorbis.lib;libogg.lib;libvorbisfile.lib;OIS.lib;libcharset.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>

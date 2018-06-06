@@ -10,6 +10,7 @@
 
 #include "../Generic/GenericGraphics.h"
 
+#include "OpenGLGraphicsType.h"
 #include "OpenGLContext.h"
 
 namespace tgon
@@ -42,7 +43,7 @@ public:
     virtual void ClearColorBuffer() final override;
     virtual void ClearColorDepthBuffer() final override;
     virtual void SwapBuffer() final override;
-//    virtual void DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount) final override;
+    virtual void DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount) final override;
 //    virtual void DrawIndexedPrimitives(int32_t primitiveCount) final override;
 
 /* @section Private variable */

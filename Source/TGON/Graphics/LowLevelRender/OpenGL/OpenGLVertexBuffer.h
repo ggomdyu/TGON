@@ -24,7 +24,6 @@ public:
     OpenGLVertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
     OpenGLVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
     OpenGLVertexBuffer(OpenGLVertexBuffer&&);
-    OpenGLVertexBuffer(const OpenGLVertexBuffer&);
 
 /* @section Public destructor */
 public:
@@ -33,7 +32,6 @@ public:
 /* @section Public operator */
 public:
     OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&&);
-    OpenGLVertexBuffer& operator=(const OpenGLVertexBuffer&);
 
 /* @section Public method */
 public:
@@ -58,14 +56,6 @@ inline OpenGLVertexBuffer::OpenGLVertexBuffer(const _DataArrayType(&data)[_DataA
 {
 }
 
-class VertexBuffer : public OpenGLVertexBuffer
-{
-/* @section Public constructor */
-public:
-    using OpenGLVertexBuffer::OpenGLVertexBuffer;
-};
-
-using SharedVertexBuffer = std::shared_ptr<VertexBuffer>;
-using UniqueVertexBuffer = std::unique_ptr<VertexBuffer>;
+using VertexBuffer = OpenGLVertexBuffer;
 
 } /* namespace tgon */

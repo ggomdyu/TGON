@@ -29,29 +29,6 @@ enum class GraphicsSDK
     Vulkan,
 };
 
-enum class PrimitiveType
-{
-    Points = 0,
-    Lines,
-    LineStrip,
-    Triangles,
-    TriangleStrip,
-    TriangleFan,
-};
-
-enum class FillMode
-{
-    Point = 0,
-    WireFrame,
-    Solid,
-};
-
-enum class CullMode
-{
-    CW = 0,
-    CCW,
-};
-
 struct VideoMode final
 {
 /* @section Public variable */

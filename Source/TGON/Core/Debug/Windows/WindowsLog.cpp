@@ -17,9 +17,9 @@ namespace
 {
 
 #if defined(_DEBUG) || !defined(NDEBUG)
-constexpr std::size_t g_strBufferSize = 1024 * 8;
-std::unique_ptr<char[]> g_utf8StrBuffer(new char[g_strBufferSize] {});
-std::unique_ptr<wchar_t[]> g_utf16StrBuffer(new wchar_t[g_strBufferSize] {});
+constexpr std::size_t g_strBufferLen = 1024 * 8;
+std::unique_ptr<char[]> g_utf8StrBuffer(new char[g_strBufferLen] {});
+std::unique_ptr<wchar_t[]> g_utf16StrBuffer(new wchar_t[g_strBufferLen] {});
 std::mutex g_mutex;
 #endif
 
@@ -32,9 +32,9 @@ void Log(LogLevel logLevel, const char* formatStr, ...)
     {   
         va_list vaList;
         va_start(vaList, formatStr);
-        int utf8StrBytes = vsprintf_s(g_utf8StrBuffer.get(), g_strBufferSize, formatStr, vaList);
-
-        bool isConvertSucceed = UTF8::Convert<UTF16LE>(g_utf8StrBuffer.get(), utf8StrBytes, reinterpret_cast<char*>(&g_utf16StrBuffer[0]), g_strBufferSize);
+        int utf8StrLen = vsprintf_s(g_utf8StrBuffer.get(), g_strBufferLen, formatStr, vaList);
+        
+        bool isConvertSucceed = UTF8::Convert<UTF16LE>(g_utf8StrBuffer.get(), utf8StrLen, g_utf16StrBuffer.get(), g_strBufferLen);
         if (isConvertSucceed)
         {
             if (logLevel == LogLevel::Debug)
@@ -79,9 +79,9 @@ void Assert(bool condition, const char* formatStr, ...)
             
             va_list vaList;
             va_start(vaList, formatStr);
-            int utf8StrBytes = vsprintf_s(g_utf8StrBuffer.get(), g_strBufferSize, formatStr, vaList);
+            int utf8StrBytes = vsprintf_s(g_utf8StrBuffer.get(), g_strBufferLen, formatStr, vaList);
 
-            bool isConvertSucceed = UTF8::Convert<UTF16LE>(g_utf8StrBuffer.get(), utf8StrBytes, reinterpret_cast<char*>(&g_utf16StrBuffer[0]), g_strBufferSize);
+            bool isConvertSucceed = UTF8::Convert<UTF16LE>(g_utf8StrBuffer.get(), utf8StrBytes, &g_utf16StrBuffer[0], g_strBufferLen);
             if (isConvertSucceed)
             {
                 const wchar_t(assertTitleMessage)[19] = L"Assertion Failed: ";
