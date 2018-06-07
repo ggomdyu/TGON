@@ -38,8 +38,10 @@ bool ColorMaterial::CanBatch(const Material& rhs) const
     {
         return m_color == material->m_color;
     }
-
-    return false;
+    else
+    {
+        return false;
+    }
 }
 
 const std::shared_ptr<Shader>& Material::GetShader() noexcept
@@ -81,26 +83,45 @@ void TextureMaterial::Unuse()
 {
 }
 
-bool TextureMaterial::CanBatch(const Material & rhs) const
+bool TextureMaterial::CanBatch(const Material& rhs) const
 {
-    return false;
+    const TextureMaterial* material = DynamicCast<const TextureMaterial*>(&rhs);
+    if (material != nullptr)
+    {
+        return m_blendColor == material->m_blendColor &&
+               m_texture->GetFilePath() == material->m_texture->GetFilePath();
+    }
+    else
+    {
+        return false;
+    }
 }
 
-void TextureMaterial::SetTexture(const std::shared_ptr<Texture>& texture)
+void TextureMaterial::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
 }
 
-const std::shared_ptr<Texture>& TextureMaterial::GetTexture() const
+std::shared_ptr<Texture>& TextureMaterial::GetTexture() noexcept
+{
+    return m_texture;
+}
+    
+const std::shared_ptr<Texture>& TextureMaterial::GetTexture() const noexcept
 {
     return m_texture;
 }
 
-void TextureMaterial::SetBlendColor(const Color4f& blendColor)
+void TextureMaterial::SetBlendColor(const Color4f& blendColor) noexcept
 {
     m_blendColor = blendColor;
 }
 
+Color4f& TextureMaterial::GetBlendColor() noexcept
+{
+    return m_blendColor;
+}
+    
 const Color4f& TextureMaterial::GetBlendColor() const noexcept
 {
     return m_blendColor;

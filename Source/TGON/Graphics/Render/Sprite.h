@@ -23,13 +23,17 @@ public:
 
 /* @section Public method */
 public:
+    void SetTexture(const std::shared_ptr<Texture>& texture);
     void SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept;
+    std::shared_ptr<Texture>& GetTexture() noexcept;
+    const std::shared_ptr<Texture>& GetTexture() const noexcept;
+    std::shared_ptr<Material>& GetMaterial() noexcept;
+    const std::shared_ptr<Material>& GetMaterial() const noexcept;
     Matrix4x4& GetWorldViewProjectionMatrix() noexcept;
     const Matrix4x4& GetWorldViewProjectionMatrix() const noexcept;
-    void SetTexture(const std::shared_ptr<Texture>& texture);
-    const std::shared_ptr<Texture>& GetTexture() const noexcept;
-    std::shared_ptr<TextureMaterial> GetMaterial() noexcept;
-    std::shared_ptr<TextureMaterial> GetMaterial() const noexcept;
+    std::shared_ptr<Mesh>& GetMesh() noexcept;
+    const std::shared_ptr<Mesh>& GetMesh() const noexcept;
+    bool CanBatch(Material* material) const;
     void Draw(GraphicsContext& context);
 
 /* @section Private variable */

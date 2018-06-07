@@ -26,18 +26,33 @@ void Mesh::SetMaterial(const std::shared_ptr<Material>& material)
 {
     m_material = material;
 }
-
-const std::shared_ptr<VertexBuffer>& Mesh::GetVertexBuffer() noexcept
+    
+std::shared_ptr<VertexBuffer>& Mesh::GetVertexBuffer() noexcept
 {
     return m_vertexBuffer;
 }
 
-const std::shared_ptr<IndexBuffer>& Mesh::GetIndexBuffer() noexcept
+const std::shared_ptr<VertexBuffer>& Mesh::GetVertexBuffer() const noexcept
+{
+    return m_vertexBuffer;
+}
+
+std::shared_ptr<IndexBuffer>& Mesh::GetIndexBuffer() noexcept
+{
+    return m_indexBuffer;
+}
+    
+const std::shared_ptr<IndexBuffer>& Mesh::GetIndexBuffer() const noexcept
 {
     return m_indexBuffer;
 }
 
-const std::shared_ptr<Material>& Mesh::GetMaterial() noexcept
+std::shared_ptr<Material>& Mesh::GetMaterial() noexcept
+{
+    return m_material;
+}
+    
+const std::shared_ptr<Material>& Mesh::GetMaterial() const noexcept
 {
     return m_material;
 }

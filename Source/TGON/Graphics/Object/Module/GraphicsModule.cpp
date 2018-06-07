@@ -28,7 +28,6 @@ void GraphicsModule::Update()
 
 void GraphicsModule::Draw()
 {
-   
 }
 
 Graphics& GraphicsModule::GetGraphics()

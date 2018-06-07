@@ -24,9 +24,12 @@ public:
     void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
     void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
     void SetMaterial(const std::shared_ptr<Material>& material);
-    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() noexcept;
-    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() noexcept;
-    const std::shared_ptr<Material>& GetMaterial() noexcept;
+    std::shared_ptr<VertexBuffer>& GetVertexBuffer() noexcept;
+    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const noexcept;
+    std::shared_ptr<IndexBuffer>& GetIndexBuffer() noexcept;
+    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
+    std::shared_ptr<Material>& GetMaterial() noexcept;
+    const std::shared_ptr<Material>& GetMaterial() const noexcept;
 
 /* @section Protected variable */
 protected:

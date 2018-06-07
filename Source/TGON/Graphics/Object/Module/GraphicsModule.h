@@ -15,7 +15,7 @@ class TGON_API GraphicsModule final :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(GraphicsModule)
+    TGON_RUNTIME_OBJECT(GraphicsModule);
 
 /* @section Public constructor */
 public:
@@ -28,9 +28,11 @@ public:
 /* @section Public method */
 public:
     virtual void Update() final override;
-//    void AddBatch(/*Batch* batch*/);
-//    void AddSpriteBatch();
     void Draw();
+//    void AddBatch(const Batch& batch);
+//    void AddBatch(Batch&& batch);
+//    void AddSpriteBatch(const SpriteBatch& spriteBatch);
+//    void AddSpriteBatch(SpriteBatch&& spriteBatch);
     Graphics& GetGraphics();
     const Graphics& GetGraphics() const;
 
@@ -40,6 +42,9 @@ private:
 /* @section Private variable */
 private:
     Graphics m_graphics;
+    
+//    std::vector<Batch> m_batches;
+//    std::vector<SpriteBatch> m_spriteBatches;
 };
 
 } /* namespace tgon */

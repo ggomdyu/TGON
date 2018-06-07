@@ -88,9 +88,12 @@ public:
     virtual void Use() override;
     virtual void Unuse() override;
     virtual bool CanBatch(const Material& rhs) const override;
-    void SetTexture(const std::shared_ptr<Texture>& texture);
-    const std::shared_ptr<Texture>& GetTexture() const;
-    void SetBlendColor(const Color4f& blendColor);
+    
+    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+    void SetBlendColor(const Color4f& blendColor) noexcept;
+    std::shared_ptr<Texture>& GetTexture() noexcept;
+    const std::shared_ptr<Texture>& GetTexture() const noexcept;
+    Color4f& GetBlendColor() noexcept;
     const Color4f& GetBlendColor() const noexcept;
 
 /* @section Private variable */
