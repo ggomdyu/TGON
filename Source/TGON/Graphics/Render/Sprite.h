@@ -25,7 +25,6 @@ public:
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture);
     void SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept;
-    std::shared_ptr<Texture>& GetTexture() noexcept;
     const std::shared_ptr<Texture>& GetTexture() const noexcept;
     std::shared_ptr<Material>& GetMaterial() noexcept;
     const std::shared_ptr<Material>& GetMaterial() const noexcept;

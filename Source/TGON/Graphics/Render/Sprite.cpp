@@ -22,6 +22,28 @@ Sprite::Sprite(const std::shared_ptr<TextureMaterial>& material) noexcept :
     assert(material != nullptr && "material can't be nullptr.");
 }
 
+void Sprite::SetTexture(const std::shared_ptr<Texture>& texture)
+{
+    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
+    material->SetTexture(texture);
+}
+    
+const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
+{
+    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
+    return material->GetTexture();
+}
+
+std::shared_ptr<Material>& Sprite::GetMaterial() noexcept
+{
+    return m_quad->GetMaterial();
+}
+
+const std::shared_ptr<Material>& Sprite::GetMaterial() const noexcept
+{
+    return m_quad->GetMaterial();
+}
+    
 void Sprite::SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept
 {
     m_matWVP = matWVP;
@@ -36,29 +58,22 @@ const Matrix4x4& Sprite::GetWorldViewProjectionMatrix() const noexcept
 {
     return m_matWVP;
 }
-
-void Sprite::SetTexture(const std::shared_ptr<Texture>& texture)
+    
+std::shared_ptr<Mesh>& Sprite::GetMesh() noexcept
 {
-    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
-    material->SetTexture(texture);
+    return m_quad;
+}
+    
+const std::shared_ptr<Mesh>& Sprite::GetMesh() const noexcept
+{
+    return m_quad;
 }
 
-const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
+bool Sprite::CanBatch(Material* material) const
 {
-    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
-    return material->GetTexture();
+    return m_quad->GetMaterial()->CanBatch(*material);
 }
-
-std::shared_ptr<TextureMaterial> Sprite::GetMaterial() noexcept
-{
-    return std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial());
-}
-
-std::shared_ptr<TextureMaterial> Sprite::GetMaterial() const noexcept
-{
-    return std::static_pointer_cast<TextureMaterial>(m_quad->GetMaterial());
-}
-
+    
 void Sprite::Draw(GraphicsContext& context)
 {
     TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
