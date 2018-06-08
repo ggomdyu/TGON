@@ -29,8 +29,6 @@ public:
     virtual bool IsMouseDown(MouseCode mouseCode) const override;
     virtual bool IsMouseHold(MouseCode mouseCode) const override;
     virtual bool IsMouseUp(MouseCode mouseCode) const override;
-//    float GetAxisX() const;
-//    float GetAxisY() const;
 
 /* @section Private variable */
 private:
