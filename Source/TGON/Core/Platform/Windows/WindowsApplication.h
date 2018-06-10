@@ -5,37 +5,49 @@
  */
 
 #pragma once
-#include "../Generic/GenericApplication.h"
-
-#include "WindowsApplicationFwd.h"
+#include "WindowsApplicationType.h"
 
 namespace tgon
 {
 
-class TGON_API WindowsApplication :
-    public GenericApplication
+class TGON_API ApplicationImpl final
 {
-public:
-    TGON_RUNTIME_OBJECT(WindowsApplication)
-
 /* @section Public constructor */
 public:
-    WindowsApplication();
-    WindowsApplication(const WindowStyle& windowStyle);
-
-/* @section Public destructor */
-public:
-    virtual ~WindowsApplication() override = default;
+    ApplicationImpl();
 
 /* @section Public method */
 public:
-    virtual void MessageLoop() final override;
-    virtual void Terminate() final override;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const final override;
+    template <typename _FunctionType>
+    void MessageLoop(_FunctionType& onUpdate);
+    void Terminate();
+    void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
 
+/* @section Private event handler */
+private:
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
-    using GenericApplication::ShowMessageBox;
+/* @section Public method */
+private:
+    /* @brief   Register default WNDCLASS to window class table. */
+    bool RegisterWindowClass();
 };
 
-} /* namespace tgon */
+template <typename _FunctionType>
+inline void ApplicationImpl::MessageLoop(_FunctionType& onUpdate)
+{
+    MSG msg {};
+    while (msg.message != WM_QUIT)
+    {
+        if (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE) == TRUE)
+        {
+            ::DispatchMessageW(&msg);
+        }
+        else
+        {
+            onUpdate();
+        }
+    }
+}
+
+} /* namespace tgon */                               

@@ -12,7 +12,6 @@
 
 #include "../Config.h"
 #include "../Window.h"
-#include "../Generic/GenericWindowType.h"
 
 #include "WindowsWindowUtility.h"
 

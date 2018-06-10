@@ -143,7 +143,7 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseType.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h" />

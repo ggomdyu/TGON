@@ -4,8 +4,9 @@
 #include <cassert>
 
 #include "Core/Debug/Log.h"
-#include "Core/Platform/Generic/GenericWindowType.h"
 #include "Core/String/Encoding.h"
+
+#include "../WindowType.h"
 
 #include "WindowsWindowUtility.h"
 

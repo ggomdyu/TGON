@@ -20,7 +20,7 @@
 namespace tgon
 {
 
-class GenericWindow;
+class Window;
 struct VideoMode;
 
 } /* namespace tgon */

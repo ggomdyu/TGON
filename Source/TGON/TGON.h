@@ -8,7 +8,7 @@
 
 #define TGON_USING_OPENGL 1
 #include "Core/Platform/Window.h"
-#include "Core/Platform/Generic/GenericWindowType.h"
+#include "Core/Platform/WindowType.h"
 #include "Core/Platform/Application.h"
 #include "Core/Platform/Screen.h"
 #include "Core/Platform/Locale.h"

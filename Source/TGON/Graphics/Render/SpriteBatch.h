@@ -12,9 +12,11 @@ namespace tgon
 
 class SpriteBatch
 {
+/* @section Private type */
 private:
     using BatchedSprites = std::vector<std::shared_ptr<Sprite>>;
     
+/* @section Public method */
 public:
     void AddSprite(const std::shared_ptr<Sprite>& sprite);
     void FlushBatch(GraphicsContext& context);

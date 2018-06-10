@@ -4,15 +4,32 @@
 
 #include "Graphics/Render/GraphicsResource.h"
 #include "Graphics/Render/SpriteBatch.h"
+#include "Core/Debug/Log.h"
+
+class A
+{
+public:
+    virtual void foo()
+    {
+        tgon::Log(tgon::LogLevel::Debug, "WOW!");
+    }
+};
+
+class B :
+    public A
+{
+public:
+    virtual void foo() override
+    {
+        tgon::Log(tgon::LogLevel::Debug, "WOW2!");
+    }
+};
 
 using namespace tgon;
 
 class TGON_API ThousandParty final :
     public Application
 {
-public:
-    TGON_RUNTIME_OBJECT(ThousandParty);
-
 public:
     ThousandParty() :
         Application(WindowStyle())
@@ -21,41 +38,13 @@ public:
         this->AddModule<EventModule>();
         this->AddModule<GraphicsModule>(VideoMode(), this->GetRootWindow());
 
-        InputMode inputMode;
+       /* InputMode inputMode;
         {
             inputMode.isUseKeyboard = true;
             inputMode.isUseMouse = false;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, this->GetRootWindow());
-
-        
-        auto extent = GetRootWindow()->GetSize();
-        
-        auto matViewProj = Matrix4x4::LookAtRH({ 0.0f, 0.0f, -50.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
-        matViewProj *= Matrix4x4::PerspectiveRH(Pi / 8.0f, (float)extent.width / (float)extent.height, 0.1f, 1000.0f);
-    
-        auto spriteMatWVP  = Matrix4x4::Translate(-4.0f, 0.0f, 0.0f) * matViewProj;
-        auto sprite = std::make_shared<Sprite>();
-        sprite->SetTexture(std::make_shared<Texture>(GetDesktopDirectory() + "/printTestImage.png"));
-        sprite->SetWorldViewProjectionMatrix(spriteMatWVP);
-        m_sprites.push_back(sprite);
-
-        spriteMatWVP  = Matrix4x4::Translate(0.0f, 0.0f, 0.0f) * matViewProj;
-        sprite = std::make_shared<Sprite>();
-        sprite->SetTexture(std::shared_ptr<Texture>(new Texture(GetDesktopDirectory() + "/printTestImage.png")));
-        sprite->SetWorldViewProjectionMatrix(spriteMatWVP);
-        m_sprites.push_back(sprite);
-
-        spriteMatWVP  = Matrix4x4::Translate(4.0f, 0.0f, 0.0f) * matViewProj;
-        sprite = std::make_shared<Sprite>();
-        sprite->SetTexture(std::shared_ptr<Texture>(new Texture(GetDesktopDirectory() + "/test.png")));
-        sprite->SetWorldViewProjectionMatrix(spriteMatWVP);
-        m_sprites.push_back(sprite);
-
-
-        auto graphicsModule = GetModule<GraphicsModule>();
-        m_graphicsContext = new GraphicsContext(graphicsModule->GetGraphics());
+        this->AddModule<InputModule>(inputMode, this->GetRootWindow());*/
     }
 
     SpriteBatch m_spriteBatch;
@@ -70,23 +59,18 @@ public:
 
 /* @section Public event handler */
 public:
-    virtual void OnWillLaunch() override
+    virtual void OnLaunch() override
     {
-        SuperType::OnWillLaunch();
-    }
-
-    virtual void OnDidLaunch() override
-    {
-        SuperType::OnDidLaunch();
+        //SuperType::OnWillLaunch();
     }
 
     virtual void OnUpdate() override
     {
-        SuperType::OnUpdate();
+        //SuperType::OnUpdate();
         
         decltype(auto) inputModule = GetModule<InputModule>();
         
-        decltype(auto) keyboard = inputModule->GetKeyboard();
+        /*decltype(auto) keyboard = inputModule->GetKeyboard();
         if (keyboard->IsKeyDown(Keyboard::KeyCode::Space))
         {
             Log(LogLevel::Debug, "1");
@@ -98,11 +82,11 @@ public:
         else if (keyboard->IsKeyUp(Keyboard::KeyCode::Space))
         {
             Log(LogLevel::Debug, "3");
-        }
+        }*/
 
-        m_spriteBatch.AddSprite(m_sprites[0]);
+       /* m_spriteBatch.AddSprite(m_sprites[0]);
         m_spriteBatch.AddSprite(m_sprites[1]);
-        m_spriteBatch.AddSprite(m_sprites[2]);
+        m_spriteBatch.AddSprite(m_sprites[2]);*/
         
         auto& graphics = GetModule<GraphicsModule>()->GetGraphics();
         graphics.ClearColorDepthBuffer();

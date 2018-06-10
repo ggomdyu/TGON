@@ -10,12 +10,6 @@
 namespace tgon 
 {
 
-enum class MessageBoxIcon
-{
-    Informational = 0,
-    Warning = 1,
-};
-
 struct BatteryState
 {
 /* @section Public constructor */

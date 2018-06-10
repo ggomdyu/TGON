@@ -19,7 +19,7 @@ public:
 
 /* @section Public constructor */
 public:
-    GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& displayTargetWindow);
+    GraphicsModule(const VideoMode& videoMode, Window& displayTargetWindow);
 
 /* @section Public destructor */
 public:

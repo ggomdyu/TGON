@@ -49,9 +49,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationUtility.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
@@ -72,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,53 +1,20 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
-
 #include "Core/String/Encoding.h"
 
-#include "../Application.h"
 #include "../Window.h"
-#include "../Generic/GenericWindowType.h"
-#include "../Generic/GenericApplicationType.h"
 
-#include "WindowsApplicationUtility.h"
+#include "WindowsApplication.h"
 
 namespace tgon
 {
 
-WindowsApplication::WindowsApplication() :
-    GenericApplication()
+ApplicationImpl::ApplicationImpl()
 {
     RegisterWindowClass();
 }
 
-WindowsApplication::WindowsApplication(const WindowStyle& windowStyle) :
-    GenericApplication([&]()
-    {
-        RegisterWindowClass();
-        return std::make_shared<Window>(windowStyle);
-    } ())
-{
-}
-
-void WindowsApplication::MessageLoop()
-{
-    MSG msg {};
-    while (msg.message != WM_QUIT)
-    {
-        if (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE) == TRUE)
-        {
-            ::DispatchMessageW(&msg);
-        }
-        else
-        {
-            this->OnUpdate();
-        }
-    }
-
-    this->OnWillTerminate();
-}
-
-void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxType) const
+void ApplicationImpl::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
 {
     wchar_t utf16Message[1024] {};
     UTF8::Convert<UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
@@ -55,10 +22,10 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
     wchar_t utf16Title[256] {};
     UTF8::Convert<UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
 
-    ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertMessageBoxIconTypeToNative(messageBoxType) | MB_OK);
+    ::MessageBoxW(nullptr, utf16Message, utf16Title, static_cast<UINT>(messageBoxIcon) | MB_OK);
 }
 
-LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK ApplicationImpl::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
     Window* window = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (window)
@@ -69,9 +36,25 @@ LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT messag
     return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
-void WindowsApplication::Terminate()
+void ApplicationImpl::Terminate()
 {
     ::PostQuitMessage(0);
+}
+
+bool ApplicationImpl::RegisterWindowClass()
+{
+    WNDCLASSEXW wcex{};
+    wcex.cbSize = sizeof(wcex);
+    wcex.cbWndExtra = sizeof(void*);
+    wcex.lpszClassName = L"TGON";
+    wcex.style = CS_DBLCLKS;
+    wcex.hbrBackground = static_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
+    wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
+    wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
+    wcex.hInstance = GetModuleHandle(nullptr);
+    wcex.lpfnWndProc = ApplicationImpl::OnHandleMessage;
+
+    return RegisterClassExW(&wcex) != 0;
 }
 
 } /* namespace tgon */

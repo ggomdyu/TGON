@@ -1,4 +1,7 @@
 #include "..\Application.h"
+#include "..\Application.h"
+#include "..\Application.h"
+#include "..\Application.h"
 #include "PrecompiledHeader.h"
 
 #ifndef NDEBUG
@@ -27,6 +30,11 @@ std::shared_ptr<Application> g_application;
 
 extern std::shared_ptr<Application> MakeApplication();
 
+Application::Application(const WindowStyle& windowStyle) :
+    m_rootWindow(windowStyle)
+{
+}
+
 const std::shared_ptr<Application>& Application::GetInstance()
 {
     return g_application;
@@ -43,9 +51,9 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     using namespace tgon;
 
     g_application = MakeApplication();
-    g_application->OnWillLaunch();
-    g_application->OnDidLaunch();
+    g_application->OnLaunch();
 
     g_application->MessageLoop();
+    g_application->OnTerminate();
     return 0;
 }

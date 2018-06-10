@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-GraphicsModule::GraphicsModule(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& displayTargetWindow) :
+GraphicsModule::GraphicsModule(const VideoMode& videoMode, Window& displayTargetWindow) :
     m_graphics(videoMode, displayTargetWindow)
 {
 }
