@@ -15,7 +15,6 @@
 
 #include "ApplicationFwd.h"
 
-
 namespace tgon
 {
 
@@ -40,7 +39,7 @@ public:
     /* @brief                       Returns the global instance of this class. */
     static const std::shared_ptr<Application>& GetInstance();
 
-    /* @brief                       Loops the message queue and handle it, or update the application. */
+    /* @brief                       Loops the message queue and handle the message. */
     void MessageLoop();
     
     /* @brief                       Terminates the program forcibly. */

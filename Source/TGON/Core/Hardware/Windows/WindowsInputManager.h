@@ -21,7 +21,7 @@ public:
 
 /* @section Public constructor */
 public:
-    explicit WindowsInputManager(const std::shared_ptr<GenericWindow>& window);
+    explicit WindowsInputManager(const Window& window);
     
 /* @section Public destructor */
 public:
@@ -33,7 +33,7 @@ public:
 
 /* @section Private method */
 public:
-    OIS::ParamList QueryParamList(const std::shared_ptr<GenericWindow>& window) const;
+    OIS::ParamList QueryParamList(const Window& window) const;
     
 /* @section Protected variable */
 protected:

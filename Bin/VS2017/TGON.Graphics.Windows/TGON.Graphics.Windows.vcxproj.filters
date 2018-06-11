@@ -7,13 +7,16 @@
     <Filter Include="Source\Graphics">
       <UniqueIdentifier>{a19128b5-1d9c-4f8f-971a-9236d1f08cc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Graphics\OpenGL">
+    <Filter Include="Source\Graphics\LowLevel">
+      <UniqueIdentifier>{4fea2261-cd6c-4513-9445-93a9d9ec0e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\LowLevel\OpenGL">
       <UniqueIdentifier>{b80eadc5-d316-4fec-ae8e-74c12f14e6ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevelRender\OpenGL\WindowsOpenGLContext.cpp">
-      <Filter>Source\Graphics\OpenGL</Filter>
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\WindowsOpenGLContext.cpp">
+      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

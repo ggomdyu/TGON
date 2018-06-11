@@ -5,36 +5,69 @@
  */
 
 #pragma once
-#include <boost/preprocessor/cat.hpp>
+#include <boost/noncopyable.hpp>
 
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
 #include "Core/Platform/Config.h"
+#include "Core/Object/Delegate.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsWindow.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSWindow.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidWindow.h"
-#elif BOOST_OS_IOS
-#   import "IOS/IOSWindow.h"
-#endif
+#include "WindowFwd.h"
 
 namespace tgon
 {
 
-class Window :
-    public BOOST_PP_CAT(TGON_PLATFORM_NAME, Window)
+class TGON_API Window final :
+    private boost::noncopyable
 {
-public:
-    TGON_RUNTIME_OBJECT(Window)
-
 /* @section Public constructor */
 public:
-    using SuperType::SuperType;
+    Window();
+    Window(const WindowStyle& windowStyle);
+    Window(Window&& rhs) noexcept;
 
-/* @section Public destructor */
+/* @section Public method */
 public:
-    virtual ~Window() override = default;
+    void Show();
+    void Hide();
+    void Close();
+    void Maximize();
+    void Minimize();
+    void BringToFront();
+    void SetPosition(int32_t x, int32_t y);
+    void SetSize(int32_t width, int32_t height);
+    void SetTitle(const char* title);
+    void SetTopMost(bool setTopMost);
+    void SetTransparency(float transparency);
+    void GetPosition(int32_t* x, int32_t* y) const;
+    void GetSize(int32_t* width, int32_t* height) const;
+    void GetTitle(char* destStr) const;
+    I32Point GetPosition() const;
+    I32Extent2D GetSize() const;
+    float GetTransparency() const;
+    void* GetNativeWindow();
+    const void* GetNativeWindow() const;
+    bool HasCaption() const;
+    bool IsResizable() const;
+    bool IsMaximized() const;
+    bool IsMinimized() const;
+    bool IsTopMost() const;
+
+/* @section Public event handler */
+public:
+    Delegate<void(int32_t x, int32_t)> OnWindowMove;
+    Delegate<void(int32_t, int32_t)> OnWindowResize;
+    Delegate<void()> OnWindowMaximize;
+    Delegate<void()> OnWindowMinimize;
+    Delegate<void()> OnWindowEnterFullScreen;
+    Delegate<void()> OnWindowExitFullScreen;
+    Delegate<void()> OnWindowWillClose;
+    Delegate<void()> OnWindowDidClose;
+    Delegate<void()> OnWindowGetFocus;
+    Delegate<void()> OnWindowLoseFocus;
+
+public:
+    std::shared_ptr<WindowImpl> m_impl;
 };
 
 } /* namespace tgon */

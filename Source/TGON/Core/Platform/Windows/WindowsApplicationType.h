@@ -15,6 +15,7 @@ namespace tgon
 
 enum class MessageBoxIcon
 {
+    No = -1,
     Informational = MB_ICONQUESTION,
     Warning = MB_ICONEXCLAMATION,
 };

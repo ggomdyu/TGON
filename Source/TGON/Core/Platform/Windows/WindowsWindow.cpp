@@ -10,34 +10,43 @@
 
 #include "Core/String/Encoding.h"
 
-#include "../Config.h"
 #include "../Window.h"
+#include "../WindowType.h"
 
+#include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
 
 namespace tgon
 {
 
-WindowsWindow::WindowsWindow(const WindowStyle& wndStyle) :
-    m_wndHandle(CreateNativeWindow(wndStyle, GetModuleHandle(nullptr), L"TGON")),
-    m_isDwmCompositionEnabled(false)
+WindowImpl::WindowImpl(Window* owner) :
+    m_owner(owner)
+{
+}
+
+WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
+    m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
+    m_isDwmCompositionEnabled(false),
+    m_owner(owner)
 {
     assert(m_wndHandle != nullptr);
-    
-    // Store pointer to the window to WindowsWindow local extra memory.
+
+    // Store pointer to the window to extra memory.
     // It will be used to notify that the message event occured. 
     this->SetUserData(this);
 }
 
-WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
+WindowImpl::WindowImpl(WindowImpl&& rhs) noexcept :
     m_wndHandle(rhs.m_wndHandle),
-    m_isDwmCompositionEnabled(rhs.m_isDwmCompositionEnabled)
+    m_isDwmCompositionEnabled(rhs.m_isDwmCompositionEnabled),
+    m_owner(rhs.m_owner)
 {
     rhs.m_wndHandle = nullptr;
     rhs.m_isDwmCompositionEnabled = false;
+    rhs.m_owner = nullptr;
 }
 
-WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
+WindowImpl& WindowImpl::operator=(WindowImpl&& rhs) noexcept
 {
     if (this == &rhs)
     {
@@ -45,8 +54,6 @@ WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
     }
 
     this->Close();
-
-    GenericWindow::operator=(std::move(rhs));
 
     m_wndHandle = rhs.m_wndHandle;
     m_isDwmCompositionEnabled = rhs.m_isDwmCompositionEnabled;
@@ -57,12 +64,7 @@ WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
     return *this;
 }
 
-WindowsWindow::~WindowsWindow()
-{
-    this->Close();
-}
-
-void WindowsWindow::BringToFront()
+void WindowImpl::BringToFront()
 {
     // SetForegroundWindow, BringWindowToTop APIs are not working exactly.
     // The codes below are the hack way to reach it.
@@ -71,7 +73,7 @@ void WindowsWindow::BringToFront()
     this->SetTopMost(isTopMost);
 }
 
-void WindowsWindow::Flash()
+void WindowImpl::Flash()
 {
     FLASHWINFO fwi {0};
     fwi.cbSize = sizeof(FLASHWINFO);
@@ -83,7 +85,7 @@ void WindowsWindow::Flash()
     ::FlashWindowEx(&fwi);
 }
 
-void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
+void WindowImpl::GetPosition(int32_t* x, int32_t* y) const
 {
     ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
@@ -92,7 +94,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
+void WindowImpl::GetSize(int32_t* width, int32_t* height) const
 {
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
@@ -101,7 +103,7 @@ void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetTitle(char* destStr) const
+void WindowImpl::GetTitle(char* destStr) const
 {
     wchar_t utf16Title[256] {};
     int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
@@ -109,7 +111,7 @@ void WindowsWindow::GetTitle(char* destStr) const
     UTF16LE::Convert<UTF8>(utf16Title, utf16TitleLen, destStr, 256);
 }
 
-bool WindowsWindow::IsResizable() const
+bool WindowImpl::IsResizable() const
 {
     DWORD normalStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
     if ((normalStyle & WS_THICKFRAME) != 0)
@@ -126,67 +128,66 @@ bool WindowsWindow::IsResizable() const
     return false;
 }
 
-bool WindowsWindow::HasCaption() const
+bool WindowImpl::HasCaption() const
 {
     DWORD normalStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
     return (normalStyle & WS_CAPTION) != 0;
 }
 
-bool WindowsWindow::IsMaximized() const
+bool WindowImpl::IsMaximized() const
 {
     // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsMinimized() const
+bool WindowImpl::IsMinimized() const
 {
     // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsTopMost() const
+bool WindowImpl::IsTopMost() const
 {
     DWORD extendedStyle = GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
     return (extendedStyle & WS_EX_TOPMOST) != 0;
 }
 
-const void* WindowsWindow::GetNativeWindow() const
+void* WindowImpl::GetNativeWindow()
 {
     return m_wndHandle;
 }
 
-void WindowsWindow::Show()
+void WindowImpl::Show()
 {
     ::ShowWindow(m_wndHandle, SW_NORMAL);
 }
 
-void WindowsWindow::Hide()
+void WindowImpl::Hide()
 {
     ::ShowWindow(m_wndHandle, SW_HIDE);
 }
 
-void WindowsWindow::Maximize()
+void WindowImpl::Maximize()
 {
     ::ShowWindow(m_wndHandle, SW_MAXIMIZE);
 }
 
-void WindowsWindow::Minimize()
+void WindowImpl::Minimize()
 {
     ::ShowWindow(m_wndHandle, SW_MINIMIZE);
 }
 
-void WindowsWindow::Close()
+void WindowImpl::Close()
 {
     ::DestroyWindow(m_wndHandle);
-    m_isClosed = true;
 }
 
-void WindowsWindow::SetPosition(int32_t x, int32_t y)
+void WindowImpl::SetPosition(int32_t x, int32_t y)
 {
     ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetSize(int32_t width, int32_t height)
+void WindowImpl::SetSize(int32_t width, int32_t height)
 {
     ::RECT rt{0, 0, width, height};
 
@@ -208,7 +209,7 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetTitle(const char* captionTitle)
+void WindowImpl::SetTitle(const char* captionTitle)
 {
     assert(captionTitle != nullptr);
 
@@ -220,17 +221,17 @@ void WindowsWindow::SetTitle(const char* captionTitle)
     }
 }
 
-void WindowsWindow::SetTopMost(bool setTopMost)
+void WindowImpl::SetTopMost(bool setTopMost)
 {
     ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
-void WindowsWindow::SetTransparency(float transparency)
+void WindowImpl::SetTransparency(float transparency)
 {
     ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);
 }
 
-float WindowsWindow::GetTransparency() const
+float WindowImpl::GetTransparency() const
 {
     BYTE transparency;
     ::GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
@@ -238,7 +239,7 @@ float WindowsWindow::GetTransparency() const
     return transparency / 255.0f;
 }
 
-//void WindowsWindow::SetWindowTransparencyPerPixel(const Color4f& pixel, float opacity)
+//void WindowImpl::SetWindowTransparencyPerPixel(const Color4f& pixel, float opacity)
 //{
 //#if TGON_USING_DWMAPI
 //    BOOL isCompoEnabled = FALSE;
@@ -252,7 +253,7 @@ float WindowsWindow::GetTransparency() const
 //#endif
 //}
 
-LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT WindowImpl::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
@@ -265,17 +266,17 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
             {
             case SC_MINIMIZE:
                 {
-                    if (OnWindowMinimize != nullptr)
+                    if (m_owner->OnWindowMinimize != nullptr)
                     {
-                        OnWindowMinimize();
+                        m_owner->OnWindowMinimize();
                     }
                 }
                 break;
             case SC_MAXIMIZE:
                 {
-                    if (OnWindowMaximize != nullptr)
+                    if (m_owner->OnWindowMaximize != nullptr)
                     {
-                        OnWindowMaximize();
+                        m_owner->OnWindowMaximize();
                     }
                 }
                 break;
@@ -285,54 +286,54 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
     case WM_SETFOCUS:
         {
-            if (OnWindowGetFocus != nullptr)
+            if (m_owner->OnWindowGetFocus != nullptr)
             {
-                OnWindowGetFocus();
+                m_owner->OnWindowGetFocus();
             }
         }
         break;
 
     case WM_KILLFOCUS:
         {
-            if (OnWindowLoseFocus != nullptr)
+            if (m_owner->OnWindowLoseFocus != nullptr)
             {
-                OnWindowLoseFocus();
+                m_owner->OnWindowLoseFocus();
             }
         }
         break;
 
     case WM_MOVE:
         {
-            if (OnWindowMove != nullptr)
+            if (m_owner->OnWindowMove != nullptr)
             {
-                OnWindowMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                m_owner->OnWindowMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }
         }
         break;
 
     case WM_SIZE:
         {
-            if (OnWindowResize != nullptr)
+            if (m_owner->OnWindowResize != nullptr)
             {
-                OnWindowResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                m_owner->OnWindowResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }   
         }
         break;
 
     case WM_CLOSE:
         {
-            if (OnWindowWillClose != nullptr)
+            if (m_owner->OnWindowWillClose != nullptr)
             {
-                OnWindowWillClose();
+                m_owner->OnWindowWillClose();
             }
         }
         break;
 
     case WM_DESTROY:
         {
-            if (OnWindowDidClose != nullptr)
+            if (m_owner->OnWindowDidClose != nullptr)
             {
-                OnWindowDidClose();
+                m_owner->OnWindowDidClose();
             }
 
             this->Close();
@@ -346,7 +347,7 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
     return DefWindowProcW(wndHandle, msg, wParam, lParam);
 }
 
-void WindowsWindow::SetUserData(void* data)
+void WindowImpl::SetUserData(void* data)
 {
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG>(data));
 }

@@ -1,8 +1,17 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/Platform/Config.h"
 #include "Core/String/Encoding.h"
 
-#include "../Window.h"
+#if TGON_PLATFORM_WINDOWS
+#   include "WindowsWindow.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOSWindow.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "AndroidWindow.h"
+#elif BOOST_OS_IOS
+#   import "IOSWindow.h"
+#endif
 
 #include "WindowsApplication.h"
 
@@ -27,10 +36,10 @@ void ApplicationImpl::ShowMessageBox(const char* title, const char* message, Mes
 
 LRESULT CALLBACK ApplicationImpl::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    Window* window = reinterpret_cast<Window*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
-    if (window)
+    WindowImpl* windowImpl = reinterpret_cast<WindowImpl*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+    if (windowImpl)
     {
-        return window->OnHandleMessage(wndHandle, message, wParam, lParam);
+        return windowImpl->OnHandleMessage(wndHandle, message, wParam, lParam);
     }
 
     return DefWindowProc(wndHandle, message, wParam, lParam);

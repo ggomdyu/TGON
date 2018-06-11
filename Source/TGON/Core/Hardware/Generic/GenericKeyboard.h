@@ -27,6 +27,10 @@ public:
 public:
     virtual ~GenericKeyboard() = 0;
 
+    virtual void Update() = 0;
+    virtual bool IsKeyDown(KeyCode keyCode) const = 0;
+    virtual bool IsKeyHold(KeyCode keyCode) const = 0;
+    virtual bool IsKeyUp(KeyCode keyCode) const = 0;
 };
 
 } /* namespace tgon */

@@ -13,6 +13,9 @@ namespace tgon
 class WindowsKeyboard :
     public GenericKeyboard
 {
+public:
+    TGON_RUNTIME_OBJECT(WindowsKeyboard);
+
 /* @section Public constructor */
 public:
     explicit WindowsKeyboard(OIS::Keyboard* keyboardDevice) noexcept;

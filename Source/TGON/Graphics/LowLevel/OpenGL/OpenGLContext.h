@@ -8,7 +8,6 @@
 #include <boost/noncopyable.hpp>
 #include <memory>
 
-#include "Core/Platform/Window.h"
 #include "Graphics/LowLevel/Generic/GenericGraphicsType.h"
 
 #include "OpenGLContextFwd.h"
@@ -16,12 +15,12 @@
 namespace tgon
 {
 
-struct OpenGLContext final :
+struct TGON_API OpenGLContext final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    OpenGLContext(const VideoMode& videoMode, const Window& window);
+    OpenGLContext(const VideoMode& videoMode, Window& window);
     OpenGLContext(OpenGLContext&& rhs);
 
 /* @section Public destructor */

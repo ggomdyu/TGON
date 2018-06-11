@@ -24,7 +24,7 @@ public:
 
 /* @section Public constructor */
 public:
-    OpenGLGraphics(const VideoMode& videoMode, const Window& displayTargetWindow);
+    OpenGLGraphics(const VideoMode& videoMode, Window& displayTargetWindow);
     
 /* @section Public destructor */
 public:

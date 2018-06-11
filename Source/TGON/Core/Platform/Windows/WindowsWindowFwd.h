@@ -10,3 +10,11 @@
 #    define WIN32_LEAN_AND_MEAN
 #endif
 #include <Windows.h>
+
+namespace tgon
+{
+
+class Window;
+struct WindowStyle;
+
+} /* namespace tgon */

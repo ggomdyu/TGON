@@ -18,9 +18,19 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief                       Loops the message queue and handle the message. */
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
+
+    /* @brief                       Terminates the program forcibly. */
     void Terminate();
+
+    /**
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] title            The message what you want to show in title area.
+     * @param [in] message          The message what you want to show in description area.
+     * @param [in] messageBoxIcon   The type of icon in message box.
+     */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
 
 /* @section Private event handler */

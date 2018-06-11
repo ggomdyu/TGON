@@ -5,7 +5,7 @@
 namespace tgon
 {
    
-WindowsInputManager::WindowsInputManager(const std::shared_ptr<GenericWindow>& window) :
+WindowsInputManager::WindowsInputManager(const Window& window) :
     m_inputManager(OIS::InputManager::createInputSystem(QueryParamList(window)))
 {
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
@@ -20,11 +20,11 @@ void WindowsInputManager::Update()
 {
 }
 
-OIS::ParamList WindowsInputManager::QueryParamList(const std::shared_ptr<GenericWindow>& window) const
+OIS::ParamList WindowsInputManager::QueryParamList(const Window& window) const
 {
     OIS::ParamList paramList
     {
-        {"WINDOW", std::to_string(reinterpret_cast<size_t>(window->GetNativeWindow()))}
+        {"WINDOW", std::to_string(reinterpret_cast<size_t>(window.GetNativeWindow()))}
     };
 
     return paramList;

@@ -72,7 +72,7 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     
 void Application::SetRootWindow(Window&& window) noexcept
 {
-//    m_rootWindow = std::move(window);
+    //m_rootWindow = std::move(window);
 }
     
 Window& Application::GetRootWindow() noexcept

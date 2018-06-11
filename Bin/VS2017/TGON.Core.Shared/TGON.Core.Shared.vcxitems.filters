@@ -34,9 +34,6 @@
     <Filter Include="Source\Core\Utility\Windows">
       <UniqueIdentifier>{d48c9e6e-f500-45d1-9b31-41bdd435e5fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Platform\Generic">
-      <UniqueIdentifier>{964cf725-f3cc-4dc1-a529-4d0a9801f954}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\File">
       <UniqueIdentifier>{f9293845-54b7-4c21-bb43-2bf656d9fa66}</UniqueIdentifier>
     </Filter>
@@ -108,9 +105,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp">
       <Filter>Source\Core\Drawing\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.cpp">
-      <Filter>Source\Core\Platform\Generic</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.cpp">
       <Filter>Source\Core\File</Filter>
     </ClCompile>
@@ -151,6 +145,12 @@
       <Filter>Source\Core\Hardware\Generic</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp">
+      <Filter>Source\Core\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.cpp">
       <Filter>Source\Core\Platform</Filter>
     </ClCompile>
   </ItemGroup>
@@ -257,20 +257,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Matrix4x4.h">
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplicationFwd.h">
-      <Filter>Source\Core\Platform\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericApplicationType.h">
-      <Filter>Source\Core\Platform\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.h">
       <Filter>Source\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindow.h">
-      <Filter>Source\Core\Platform\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Generic\GenericWindowFwd.h">
-      <Filter>Source\Core\Platform\Generic</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.h">
       <Filter>Source\Core\File</Filter>
@@ -420,6 +408,15 @@
       <Filter>Source\Core\String</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\WindowType.h">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.h">
+      <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\EngineFwd.h">
+      <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\WindowFwd.h">
       <Filter>Source\Core\Platform</Filter>
     </ClInclude>
   </ItemGroup>

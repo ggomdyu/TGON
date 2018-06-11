@@ -6,72 +6,65 @@
  */
 
 #pragma once
-#include "../Generic/GenericWindow.h"
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
+#include "Core/Platform/Config.h"
 
 #include "WindowsWindowFwd.h"
 
 namespace tgon
 {
 
-class TGON_API WindowsWindow :
-    public GenericWindow
+class WindowImpl final
 {
-public:
-    TGON_RUNTIME_OBJECT(WindowsWindow)
-
 /* @section Public constructor */
 public:
-    WindowsWindow() = default;
-    explicit WindowsWindow(const WindowStyle& windowStyle);
-    WindowsWindow(WindowsWindow&& rhs) noexcept;
+    WindowImpl(Window* owner);
+    WindowImpl(Window* owner, const WindowStyle& windowStyle);
+    WindowImpl(WindowImpl&& rhs) noexcept;
 
 /* @section Public operator */
 protected:
-    WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
-
-/* @section Public destructor */
-public:
-    virtual ~WindowsWindow() override;
+    WindowImpl& operator=(WindowImpl&& rhs) noexcept;
 
 /* @section Public method */
 public:
-    virtual void Show() final override;
-    virtual void Hide() final override;
-    virtual void Close() final override;
-    virtual void Maximize() final override;
-    virtual void Minimize() final override;
-    virtual void BringToFront() final override;
+    void Show();
+    void Hide();
+    void Close();
+    void Maximize();
+    void Minimize();
+    void BringToFront();
     void Flash();
-    virtual void SetPosition(int32_t x, int32_t y) final override;
-    virtual void SetSize(int32_t width, int32_t height) final override;
-    virtual void SetTitle(const char* title) final override;
-    virtual void SetTopMost(bool setTopMost) final override;
-    virtual void SetTransparency(float transparency) final override;
-    virtual void GetPosition(int32_t* x, int32_t* y) const final override;
-    virtual void GetSize(int32_t* width, int32_t* height) const final override;
-    virtual void GetTitle(char* destStr) const final override;
-    virtual float GetTransparency() const final override;
-    virtual const void* GetNativeWindow() const final override;
-    virtual bool HasCaption() const final override;
-    virtual bool IsResizable() const final override;
-    virtual bool IsMaximized() const final override;
-    virtual bool IsMinimized() const final override;
-    virtual bool IsTopMost() const final override;
+    void SetPosition(int32_t x, int32_t y);
+    void SetSize(int32_t width, int32_t height);
+    void SetTitle(const char* title);
+    void SetTopMost(bool setTopMost);
+    void SetTransparency(float transparency);
+    void GetPosition(int32_t* x, int32_t* y) const;
+    void GetSize(int32_t* width, int32_t* height) const;
+    void GetTitle(char* destStr) const;
+    float GetTransparency() const;
+    void* GetNativeWindow();
+    bool HasCaption() const;
+    bool IsResizable() const;
+    bool IsMaximized() const;
+    bool IsMinimized() const;
+    bool IsTopMost() const;
 
+/* @section Public event handler */
+public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
-    
-    using SuperType::GetPosition;
-    using SuperType::GetSize;
-    using SuperType::GetNativeWindow;
 
 /* @section Private method */
 private:
     void SetUserData(void* data);
 
-/* @section Protected variable */
-protected:
+/* @section Private variable */
+private:
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;
+    Window* m_owner;
 };
 
 } /* namespace tgon */
