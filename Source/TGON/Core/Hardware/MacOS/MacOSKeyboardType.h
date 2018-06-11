@@ -7,12 +7,10 @@
 #pragma once
 #include <gainput/gainput.h>
 
-#include "../Generic/GenericKeyboard.h"
-
 namespace tgon
 {
 
-enum class GenericKeyboard::KeyCode
+enum class KeyCode
 {
     Escape              = gainput::KeyEscape,
     F1                  = gainput::KeyF1,

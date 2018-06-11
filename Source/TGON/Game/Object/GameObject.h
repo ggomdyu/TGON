@@ -6,7 +6,9 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
+#include <initializer_list>
 #include <vector>
+#include <algorithm>
 
 #include "Core/Object/Object.h"
 
@@ -22,10 +24,6 @@ class TGON_API GameObject :
 public:
     TGON_RUNTIME_OBJECT(GameObject);
 
-/* @section Public constructor */
-public:
-    GameObject();
-
 /* @section Public destructor */
 public:
     virtual ~GameObject() override;
@@ -34,38 +32,42 @@ public:
 public:
     void Update();
 
+    void AddComponent(std::initializer_list<std::unique_ptr<Component>> components);
     template <typename _ComponentType, typename... _ArgTypes>
     void AddComponent(_ArgTypes&&... args);
-    void AddComponent(const std::shared_ptr<Component>& component);
+    void AddComponent(std::unique_ptr<Component> component);
     template <typename _ComponentType>
-    std::shared_ptr<_ComponentType> GetComponent() const;
-
-    void AddChild(const std::shared_ptr<GameObject>& child);
-    std::vector<std::shared_ptr<GameObject>>& GetChildren() noexcept;
-    const std::vector<std::shared_ptr<GameObject>>& GetChildren() const noexcept;
+    const _ComponentType* GetComponent() const;
+    template <typename _ComponentType>
+    _ComponentType* GetComponent();
 
 /* @section Private variable */
 private:
-    std::map<std::size_t, std::shared_ptr<Component>> m_components;
-    std::vector<std::shared_ptr<GameObject>> m_children;
+    std::vector<std::unique_ptr<Component>> m_components;
 };
 
 template<typename _ComponentType, typename... _ArgTypes>
 inline void GameObject::AddComponent(_ArgTypes&& ...args)
 {
-    m_components.emplace(tgon::GetRTTI<GameObject>()->GetHashCode(), std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...));
+    this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));
 }
 
 template<typename _ComponentType>
-inline std::shared_ptr<_ComponentType> GameObject::GetComponent() const
+inline const _ComponentType* GameObject::GetComponent() const
 {
-    auto iter = m_components.find(tgon::GetRTTI<GameObject>()->GetHashCode());
-    if (iter == m_components.end())
-    {
-        return nullptr;
-    }
-
-    return std::static_pointer_cast<_ComponentType>(iter->second);
+    return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
+}
+    
+template<typename _ComponentType>
+inline _ComponentType* GameObject::GetComponent()
+{
+//    m_components.find_if(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& component)
+//    {
+//        return component->GetRTTI()->GetHashCode() == GetRTTI<_ComponentType>()->GetHashCode();
+//    });
+//
+//    return static_cast<_ComponentType*>(iter->second);
+    return nullptr;
 }
 
 } /* namespace tgon */

@@ -19,7 +19,7 @@ private:
 /* @section Public method */
 public:
     void AddSprite(const std::shared_ptr<Sprite>& sprite);
-    void FlushBatch(GraphicsContext& context);
+    void FlushBatch(Graphics& graphics);
     
 /* @section Private variable */
 private:

@@ -15,56 +15,62 @@
 namespace tgon
 {
 
-MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
-    m_nsWindow(MakeNativeWindow(windowStyle)),
-    m_windowDelegate([[WindowDelegate alloc] initWithWindow:this])
+WindowImpl::WindowImpl(Window* owner)
 {
-    m_nsWindow.delegate = m_windowDelegate;
+}
+    
+WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
+    m_nsWindow(MakeNativeWindow(windowStyle))
+{
+    WindowDelegate* windowDelegate = [[WindowDelegate alloc] initWithWindow:owner];
+    m_nsWindow.delegate = windowDelegate;
 }
 
-MacOSWindow::MacOSWindow(MacOSWindow&& rhs) noexcept :
-    m_nsWindow(rhs.m_nsWindow),
-    m_windowDelegate(rhs.m_windowDelegate)
+WindowImpl::WindowImpl(WindowImpl&& rhs) noexcept :
+    m_nsWindow(rhs.m_nsWindow)
 {
     rhs.m_nsWindow = nullptr;
-    rhs.m_windowDelegate = nullptr;
 }
 
-MacOSWindow::~MacOSWindow()
+WindowImpl::~WindowImpl()
 {
     this->Close();
 }
 
-void MacOSWindow::Show()
+void WindowImpl::Show()
 {
     [m_nsWindow display];
 }
 
-void MacOSWindow::Hide()
+void WindowImpl::Hide()
 {
     [m_nsWindow miniaturize:nullptr];
 }
 
-void MacOSWindow::Close()
+void WindowImpl::Close()
 {
     [m_nsWindow close];
 
     m_nsWindow = nullptr;
-    m_windowDelegate = nullptr;
-    m_isClosed = true;
 }
 
-void MacOSWindow::Maximize()
+void WindowImpl::Maximize()
 {
     [m_nsWindow zoom:nullptr];
 }
 
-void MacOSWindow::Minimize()
+void WindowImpl::Minimize()
 {
     [m_nsWindow miniaturize:nullptr];
 }
+    
+void WindowImpl::BringToFront()
+{
+    [NSApp activateIgnoringOtherApps:YES];
+    [NSApp activateIgnoringOtherApps:NO];
+}
 
-void MacOSWindow::SetPosition(int32_t x, int32_t y)
+void WindowImpl::SetPosition(int32_t x, int32_t y)
 {
     NSRect visibleFrame = [[NSScreen mainScreen] visibleFrame];
     NSRect currentFrameSize = [m_nsWindow frame];
@@ -72,7 +78,7 @@ void MacOSWindow::SetPosition(int32_t x, int32_t y)
     [m_nsWindow setFrameOrigin:NSMakePoint(static_cast<CGFloat>(x),(visibleFrame.origin.y + visibleFrame.size.height - currentFrameSize.size.height) - y)];
 }
 
-void MacOSWindow::SetSize(int32_t width, int32_t height)
+void WindowImpl::SetSize(int32_t width, int32_t height)
 {
     NSRect currentFrameSize = [m_nsWindow frame];
     currentFrameSize.origin.y += currentFrameSize.size.height - static_cast<CGFloat>(height);
@@ -82,33 +88,33 @@ void MacOSWindow::SetSize(int32_t width, int32_t height)
     [m_nsWindow setFrame:currentFrameSize display:YES animate:NO];
 }
 
-void MacOSWindow::SetTitle(const char* title)
+void WindowImpl::SetTitle(const char* title)
 {
     [m_nsWindow setTitle:[NSString stringWithUTF8String:title]];
 }
 
-void MacOSWindow::SetFullScreen(bool isFullScreen)
+void WindowImpl::SetFullScreen(bool isFullScreen)
 {
     [m_nsWindow toggleFullScreen:nil];
 }
 
-void MacOSWindow::SetTopMost(bool setTopMost)
+void WindowImpl::SetTopMost(bool setTopMost)
 {
     NSWindowLevel windowLevel = (setTopMost) ? NSStatusWindowLevel : NSMainMenuWindowLevel;
     [m_nsWindow setLevel:windowLevel];
 }
 
-bool MacOSWindow::IsTopMost() const
+bool WindowImpl::IsTopMost() const
 {
     return [m_nsWindow level] == NSStatusWindowLevel;
 }
 
-void MacOSWindow::SetTransparency(float transparency)
+void WindowImpl::SetTransparency(float transparency)
 {
     [m_nsWindow setAlphaValue:transparency];
 }
 
-void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const
+void WindowImpl::GetPosition(int32_t* destX, int32_t* destY) const
 {
     NSRect visibleMainScreenFrameRect = [[NSScreen mainScreen] visibleFrame];
     NSRect currentWindowFrameRect = [m_nsWindow frame];
@@ -117,7 +123,7 @@ void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const
     *destY = static_cast<int32_t>((visibleMainScreenFrameRect.origin.y + visibleMainScreenFrameRect.size.height - currentWindowFrameRect.size.height) - currentWindowFrameRect.origin.y);
 }
 
-void MacOSWindow::GetSize(int32_t* destWidth, int32_t* destHeight) const
+void WindowImpl::GetSize(int32_t* destWidth, int32_t* destHeight) const
 {
     NSRect currentFrameSize = [m_nsWindow frame];
 
@@ -125,7 +131,7 @@ void MacOSWindow::GetSize(int32_t* destWidth, int32_t* destHeight) const
     *destHeight = static_cast<int32_t>(currentFrameSize.size.height);
 }
 
-void MacOSWindow::GetTitle(char* destCaptionTitle) const
+void WindowImpl::GetTitle(char* destCaptionTitle) const
 {
     const char* utf8Str = [[m_nsWindow title] UTF8String];
     std::size_t utf8StrLen = strlen(utf8Str) + 1;
@@ -133,32 +139,32 @@ void MacOSWindow::GetTitle(char* destCaptionTitle) const
     std::memcpy(destCaptionTitle, utf8Str, utf8StrLen + 1);
 }
 
-const void* MacOSWindow::GetNativeWindow() const
+void* WindowImpl::GetNativeWindow()
 {
-    return (__bridge const void*)(m_nsWindow);
+    return (__bridge void*)(m_nsWindow);
 }
 
-float MacOSWindow::GetTransparency() const
+float WindowImpl::GetTransparency() const
 {
     return static_cast<float>([m_nsWindow alphaValue]);
 }
 
-bool MacOSWindow::HasCaption() const
+bool WindowImpl::HasCaption() const
 {
     return static_cast<bool>([m_nsWindow hasTitleBar]);
 }
 
-bool MacOSWindow::IsResizable() const
+bool WindowImpl::IsResizable() const
 {
     return static_cast<bool>([m_nsWindow isResizable]);
 }
 
-bool MacOSWindow::IsMaximized() const
+bool WindowImpl::IsMaximized() const
 {
     return static_cast<bool>([m_nsWindow isZoomed]);
 }
 
-bool MacOSWindow::IsMinimized() const
+bool WindowImpl::IsMinimized() const
 {
     return static_cast<bool>([m_nsWindow isMiniaturized]);
 }

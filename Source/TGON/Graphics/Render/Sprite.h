@@ -34,7 +34,7 @@ public:
     std::shared_ptr<Mesh>& GetMesh() noexcept;
     const std::shared_ptr<Mesh>& GetMesh() const noexcept;
     bool CanBatch(Material* material) const;
-    void Draw(GraphicsContext& context);
+    void Draw(Graphics& graphics);
 
 /* @section Private variable */
 private:

@@ -29,12 +29,12 @@ public:
 /* @section Public method */
 public:
     virtual void Update() final override;
-    void Draw(GraphicsContext& graphicsContext);
-
-    SpriteBatch& GetSpriteBatch() noexcept;
+    void Draw();
+    
     const SpriteBatch& GetSpriteBatch() const noexcept;
-    Graphics& GetGraphics() noexcept;
+    SpriteBatch& GetSpriteBatch() noexcept;
     const Graphics& GetGraphics() const noexcept;
+    Graphics& GetGraphics() noexcept;
 
 /* @section Public method */
 private:
@@ -42,7 +42,7 @@ private:
 /* @section Private variable */
 private:
     Graphics m_graphics;
-    GraphicsContext m_graphicsContext;
+    
     SpriteBatch m_spriteBatch;
 };
 

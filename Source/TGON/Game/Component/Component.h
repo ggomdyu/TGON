@@ -31,8 +31,9 @@ public:
 	virtual void Update() = 0;
     
 	void SetOwner(GameObject* owner) noexcept;
-    GameObject* GetOwner() noexcept;
+    
     const GameObject* GetOwner() const noexcept;
+    GameObject* GetOwner() noexcept;
 
 /* @section Private variable */
 private:

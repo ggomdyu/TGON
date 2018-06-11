@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Component.h"
-#include "GameObject.h"
 
 namespace tgon
 {

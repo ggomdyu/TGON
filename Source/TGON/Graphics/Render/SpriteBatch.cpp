@@ -26,7 +26,7 @@ void SpriteBatch::AddSprite(const std::shared_ptr<Sprite>& newSprite)
     m_batchedSpritesSet.push_back({newSprite});
 }
     
-void SpriteBatch::FlushBatch(GraphicsContext& context)
+void SpriteBatch::FlushBatch(Graphics& graphics)
 {
     if (m_batchedSpritesSet.size() <= 0)
     {
@@ -52,7 +52,7 @@ void SpriteBatch::FlushBatch(GraphicsContext& context)
             TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprite->GetMaterial().get());
             material->GetShader()->SetParameterMatrix4fv("g_uMVP", batchedSprite->GetWorldViewProjectionMatrix()[0]);
 
-            context.GetGraphics().DrawPrimitives(PrimitiveType::Triangles, 0, 2);
+            graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 2);
         }
     }
     

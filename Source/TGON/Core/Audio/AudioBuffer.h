@@ -9,6 +9,8 @@
 #include <vector>
 #include <cstdint>
 #include <memory>
+
+#include "Core/Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   import <OpenAL/al.h>
 #else

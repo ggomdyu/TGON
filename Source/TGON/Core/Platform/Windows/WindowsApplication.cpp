@@ -3,16 +3,7 @@
 #include "Core/Platform/Config.h"
 #include "Core/String/Encoding.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "WindowsWindow.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOSWindow.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "AndroidWindow.h"
-#elif BOOST_OS_IOS
-#   import "IOSWindow.h"
-#endif
-
+#include "WindowsWindow.h"
 #include "WindowsApplication.h"
 
 namespace tgon

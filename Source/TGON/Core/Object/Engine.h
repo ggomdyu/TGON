@@ -10,8 +10,8 @@
 
 #include "Module/IModule.h"
 
-#include "Object.h"
 #include "EngineFwd.h"
+#include "Object.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
@@ -63,8 +63,8 @@ public:
     
 /* @section Private variable */
 private:
+    std::vector<std::shared_ptr<IModule>> m_modulesToIter;
     std::map<size_t, std::shared_ptr<IModule>> m_modulesToFind;
-    std::vector<std::shared_ptr<IModule>> m_modules;
 };
 
 template<typename _ModuleType, typename ..._Args>
@@ -75,7 +75,7 @@ inline std::shared_ptr<_ModuleType> Engine::AddModule(_Args&& ...args)
     auto pair = m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
     if (pair.second == true)
     {
-        m_modules.push_back(module);
+        m_modulesToIter.push_back(module);
     }
     else
     {

@@ -8,19 +8,14 @@
 #pragma once
 #import <Cocoa/Cocoa.h>
 
-namespace tgon
-{
-
-class MacOSWindow;
-
-} /*　namespace tgon */
+#include "MacOSWindowDelegateFwd.h"
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
 {
 }
 
-@property (readonly, assign) tgon::MacOSWindow* window;
+@property (readonly, assign) tgon::Window* window;
 
-- (id)initWithWindow:(tgon::MacOSWindow*)window;
+- (id)initWithWindow:(tgon::Window*)window;
 
 @end

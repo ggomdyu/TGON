@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine.h"
-
 #include "Core/Platform/WindowType.h"
+
+#include "Engine.h"
 
 namespace tgon
 {
@@ -14,13 +14,13 @@ WindowStyle Engine::GetRootWindowStyle() const noexcept
 
 void Engine::AddModule(const std::shared_ptr<IModule>& module)
 {
-    m_modules.push_back(module);
+    m_modulesToIter.push_back(module);
     m_modulesToFind.insert({module->GetRTTI()->GetHashCode(), module});
 }
     
 void Engine::Update()
 {
-    for (auto& module : m_modules)
+    for (auto& module : m_modulesToIter)
     {
         module->Update();
     }

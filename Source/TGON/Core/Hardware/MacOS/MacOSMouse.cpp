@@ -28,11 +28,11 @@ void MacOSMouse::GetPosition(int32_t* x, int32_t* y) const
     *y = static_cast<int32_t>(pt.y);
 }
 
-float MacOSMouse::GetFloat(MouseCode mouseCode) const
-{
-    auto castedMouseCode = UnderlyingCast(mouseCode);
-    return m_mouseDevice->GetFloat(castedMouseCode);
-}
+//float MacOSMouse::GetFloat(MouseCode mouseCode) const
+//{
+//    auto castedMouseCode = UnderlyingCast(mouseCode);
+//    return m_mouseDevice->GetFloat(castedMouseCode);
+//}
     
 bool MacOSMouse::IsMouseDown(MouseCode mouseCode) const
 {

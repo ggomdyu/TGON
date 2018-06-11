@@ -16,7 +16,8 @@ void MacOSInputManager::Update()
 
 std::unique_ptr<Keyboard> InputManager::CreateKeyboard()
 {
-    return std::make_unique<Keyboard>(m_inputManager.CreateAndGetDevice<gainput::InputDeviceKeyboard>());
+//    m_inputManager.CreateAndGetDevice<gainput::InputDeviceKeyboard>()
+    return std::make_unique<Keyboard>(this);
 }
 
 std::unique_ptr<Mouse> InputManager::CreateMouse()

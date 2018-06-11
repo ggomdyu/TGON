@@ -1,23 +1,23 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Utility/Algorithm.h"
+#include "Core/Hardware/Keyboard.h"
 
 #include "MacOSKeyboard.h"
 
 namespace tgon
 {
     
-MacOSKeyboard::MacOSKeyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept :
-    m_keyboardDevice(keyboardDevice)
+KeyboardImpl::KeyboardImpl(InputManager* inputManager)
 {
-    assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
+//    assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
 }
     
-void MacOSKeyboard::Update()
+void KeyboardImpl::Update()
 {
 }
     
-bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyDown(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) == false &&
@@ -31,7 +31,7 @@ bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyHold(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&
@@ -45,7 +45,7 @@ bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyUp(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&
@@ -59,22 +59,12 @@ bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
     }
 }
     
-MacOSKeyboard* MacOSKeyboard::GetPlatformService()
-{
-    return this;
-}
-
-const MacOSKeyboard* MacOSKeyboard::GetPlatformService() const
-{
-    return this;
-}
-    
-gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice()
+gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice()
 {
     return m_keyboardDevice;
 }
 
-const gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice() const
+const gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() const
 {
     return m_keyboardDevice;
 }

@@ -25,7 +25,7 @@ public:
 public:
     virtual void Update() final override;
     virtual void GetPosition(int32_t* x, int32_t* y) const final override;
-    virtual float GetFloat(MouseCode mouseCode) const final override;
+//    virtual float GetFloat(MouseCode mouseCode) const final override;
     virtual bool IsMouseDown(MouseCode mouseCode) const final override;
     virtual bool IsMouseHold(MouseCode mouseCode) const final override;
     virtual bool IsMouseUp(MouseCode mouseCode) const final override;

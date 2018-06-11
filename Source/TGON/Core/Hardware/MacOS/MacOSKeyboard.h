@@ -5,24 +5,19 @@
  */
 
 #pragma once
+#include "Core/Platform/Config.h"
+
 #include "MacOSKeyboardType.h"
+#include "MacOSKeyboardFwd.h"
 
 namespace tgon
 {
     
-class MacOSKeyboard :
-    public GenericKeyboard
+class TGON_API KeyboardImpl final
 {
-public:
-    TGON_RUNTIME_OBJECT(MacOSKeyboard);
-    
 /* @section Public constructor */
 public:
-    explicit MacOSKeyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept;
-
-/* @section Public destructor */
-public:
-    virtual ~MacOSKeyboard() override = default;
+    explicit KeyboardImpl(InputManager* inputManager);
     
 /* @section Public method */
 public:
@@ -30,11 +25,9 @@ public:
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    MacOSKeyboard* GetPlatformService();
-    const MacOSKeyboard* GetPlatformService() const;
-    gainput::InputDeviceKeyboard* GetKeyboardDevice();
     const gainput::InputDeviceKeyboard* GetKeyboardDevice() const;
-
+    gainput::InputDeviceKeyboard* GetKeyboardDevice();
+    
 /* @section Private variable */
 private:
     gainput::InputDeviceKeyboard* m_keyboardDevice;

@@ -7,40 +7,34 @@
 namespace tgon
 {
 
-GameObject::GameObject() = default;
 GameObject::~GameObject() = default;
 
 void GameObject::Update()
 {
     for (auto& component : m_components)
     {
-        component.second->Update();
+        component->Update();
     }
+}
 
-    for (auto& children : m_children)
+void GameObject::AddComponent(std::initializer_list<std::unique_ptr<Component>> components)
+{
+    m_components.insert(components.begin(), components.end());
+    
+    std::sort(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& lhs, const std::unique_ptr<Component>& rhs)
     {
-        children->Update();
-    }
+        return lhs->GetRTTI()->GetHashCode() < rhs->GetRTTI()->GetHashCode();
+    });
 }
 
-void GameObject::AddComponent(const std::shared_ptr<Component>& component)
+void GameObject::AddComponent(std::unique_ptr<Component> component)
 {
-    m_components.emplace(component->GetRTTI()->GetHashCode(), std::move(component));
-}
-
-void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
-{
-    m_children.push_back(std::move(child));
-}
-
-std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() noexcept
-{
-    return m_children;
-}
-
-const std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() const noexcept
-{
-    return m_children;
+    m_components.push_back(std::move(component));
+    
+    std::sort(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& lhs, const std::unique_ptr<Component>& rhs)
+    {
+        return lhs->GetRTTI()->GetHashCode() < rhs->GetRTTI()->GetHashCode();
+    });
 }
 
 } /*namespace tgon*/

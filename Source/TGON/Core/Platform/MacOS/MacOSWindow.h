@@ -6,64 +6,62 @@
  */
 
 #pragma once
-#import "../Generic/GenericWindow.h"
+#include <boost/noncopyable.hpp>
+
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
+#include "Core/Platform/Config.h"
 
 #import "MacOSWindowFwd.h"
 
 namespace tgon
 {
     
-class TGON_API MacOSWindow :
-    public GenericWindow
+class TGON_API WindowImpl final :
+    private boost::noncopyable
 {
+/* @section Public constructor */
 public:
-    TGON_RUNTIME_OBJECT(MacOSWindow)
+    WindowImpl(Window* owner);
+    explicit WindowImpl(Window* owner, const WindowStyle& windowStyle);
+    WindowImpl(WindowImpl&& rhs) noexcept;
     
-    /* @section Public constructor */
+/* @section Public operator */
 public:
-    MacOSWindow() = default;
-    explicit MacOSWindow(const WindowStyle& windowStyle);
-    MacOSWindow(MacOSWindow&& rhs) noexcept;
+    WindowImpl& operator=(WindowImpl&& rhs) noexcept;
     
-    /* @section Public operator */
+/* @section Public destructor */
 public:
-    MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
+    ~WindowImpl();
     
-    /* @section Public destructor */
+/* @section Public method */
 public:
-    virtual ~MacOSWindow() override;
+    void Show();
+    void Hide();
+    void Close();
+    void Maximize();
+    void Minimize();
+    void BringToFront();
+    void SetPosition(int32_t x, int32_t y);
+    void SetSize(int32_t width, int32_t height);
+    void SetTitle(const char* title);
+    void SetFullScreen(bool isFullScreen);
+    void SetTopMost(bool setTopMost);
+    void SetTransparency(float transparency);
+    void GetPosition(int32_t* x, int32_t* y) const;
+    void GetSize(int32_t* width, int32_t* height) const;
+    void GetTitle(char* destStr) const;
+    float GetTransparency() const;
+    void* GetNativeWindow();
+    bool HasCaption() const;
+    bool IsResizable() const;
+    bool IsMaximized() const;
+    bool IsMinimized() const;
+    bool IsTopMost() const;
     
-    /* @section Public method */
-public:
-    virtual void Show() final override;
-    virtual void Hide() final override;
-    virtual void Close() final override;
-    virtual void Maximize() final override;
-    virtual void Minimize() final override;
-    virtual void SetPosition(int32_t x, int32_t y) final override;
-    virtual void SetSize(int32_t width, int32_t height) final override;
-    virtual void SetTitle(const char* title) final override;
-    virtual void SetFullScreen(bool isFullScreen) final override;
-    virtual void SetTopMost(bool setTopMost) final override;
-    virtual void SetTransparency(float transparency) final override;
-    virtual void GetPosition(int32_t* x, int32_t* y) const final override;
-    virtual void GetSize(int32_t* width, int32_t* height) const final override;
-    virtual void GetTitle(char* destStr) const final override;
-    virtual float GetTransparency() const final override;
-    virtual const void* GetNativeWindow() const final override;
-    virtual bool HasCaption() const final override;
-    virtual bool IsResizable() const final override;
-    virtual bool IsMaximized() const final override;
-    virtual bool IsMinimized() const final override;
-    virtual bool IsTopMost() const final override;
-    using GenericWindow::GetPosition;
-    using GenericWindow::GetSize;
-    using GenericWindow::GetNativeWindow;
-    
-    /* @section Protected variable */
-protected:
+/* @section Private variable */
+private:
     NSWindow* m_nsWindow;
-    WindowDelegate* m_windowDelegate;
 };
 
 } /* namespace tgon */

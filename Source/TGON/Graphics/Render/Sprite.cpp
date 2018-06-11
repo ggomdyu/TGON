@@ -80,7 +80,7 @@ bool Sprite::CanBatch(Material* material) const
     return m_quad->GetMaterial()->CanBatch(*material);
 }
     
-void Sprite::Draw(GraphicsContext& context)
+void Sprite::Draw(Graphics& graphics)
 {
     TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
     material->Use();
@@ -89,7 +89,7 @@ void Sprite::Draw(GraphicsContext& context)
     m_quad->GetVertexBuffer()->Use();
     m_quad->GetIndexBuffer()->Use();
 
-    context.GetGraphics().DrawPrimitives(PrimitiveType::Triangles, 0, 2);
+    graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 2);
 }
 
 } /* namespace tgon */

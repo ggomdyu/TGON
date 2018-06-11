@@ -11,7 +11,8 @@
 
 namespace tgon
 {
-    
+
+class Window;
 struct WindowStyle;
     
 } /* namespace tgon */

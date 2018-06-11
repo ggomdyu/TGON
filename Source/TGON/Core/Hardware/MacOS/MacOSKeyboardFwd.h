@@ -1,7 +1,7 @@
 /**
- * @filename    ComponentFwd.h
+ * @filename    MacOSKeyboardFwd.h
  * @author      ggomdyu
- * @since       05/09/2018
+ * @since       06/11/2018
  */
 
 #pragma once
@@ -9,6 +9,6 @@
 namespace tgon
 {
 
-class GameObject;
-
+class InputManager;
+    
 } /* namespace tgon */

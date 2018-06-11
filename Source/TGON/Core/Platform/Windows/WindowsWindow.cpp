@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <type_traits>
 #include <cassert>
@@ -9,9 +9,8 @@
 #endif
 
 #include "Core/String/Encoding.h"
-
-#include "../Window.h"
-#include "../WindowType.h"
+#include "Core/Platform/Window.h"
+#include "Core/Platform/WindowType.h"
 
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"

@@ -8,8 +8,7 @@ namespace tgon
 {
 
 GraphicsModule::GraphicsModule(const VideoMode& videoMode, Window& displayTargetWindow) :
-    m_graphics(videoMode, displayTargetWindow),
-    m_graphicsContext(m_graphics)
+    m_graphics(videoMode, displayTargetWindow)
 {
 }
 
@@ -17,14 +16,14 @@ GraphicsModule::~GraphicsModule() = default;
 
 void GraphicsModule::Update()
 {
-    this->Draw(m_graphicsContext);
+    this->Draw();
 }
 
-void GraphicsModule::Draw(GraphicsContext& graphicsContext)
+void GraphicsModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        m_spriteBatch.FlushBatch(graphicsContext);
+        m_spriteBatch.FlushBatch(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
