@@ -5,113 +5,109 @@
  */
 
 #pragma once
-#include <boost/preprocessor/cat.hpp>
-#include <map>
-#include <vector>
+#include <boost/noncopyable.hpp>
 #include <memory>
 
-#include "Core/Platform/Config.h"
-#include "Core/Object/Module/IModule.h"
+#include "Core/Object/Object.h"
+#include "Core/Object/Delegate.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsApplication.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSApplication.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidApplication.h"
-#elif TGON_PLATFORM_IOS
-#   import "IOS/IOSApplication.h"
-#endif
-
-#include "Window.h"
-
-#define TGON_DECLARE_APPLICATION(className)\
-    namespace tgon\
-    {\
-    std::shared_ptr<Application> MakeApplication()\
-    {\
-        static_assert(std::is_convertible<className*, Application*>::value, "TGON_DECLARE_APPLICATION accepts only class that inherited from Application.");\
-        return std::make_shared<className>();\
-    }\
-    } /* namespace tgon */
+#include "ApplicationFwd.h"
 
 namespace tgon
 {
 
-class Application
+class TGON_API Application :
+    public Object,
+    private boost::noncopyable
 {
+public:
+    TGON_RUNTIME_OBJECT(Application);
+    
 /* @section Public constructor */
 public:
+    Application();
     explicit Application(const WindowStyle& windowStyle);
     
 /* @section Public destructor */
 public:
-    virtual ~Application() = default;
+    virtual ~Application();
 
 /* @section Public method */
 public:
+    /* @brief                       Returns the global instance of this class. */
     static const std::shared_ptr<Application>& GetInstance();
 
+    /* @brief                       Loops the message queue and handle it, or update the application. */
     void MessageLoop();
+    
+    /* @brief                       Terminates the program forcibly. */
     void Terminate();
+    
+    /**
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] message          The message what you want to show in description area.
+     */
     void ShowMessageBox(const char* message) const;
+    
+    /**
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] message          The message what you want to show in description area.
+     * @param [in] messageBoxIcon   The type of icon in message box.
+     */
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
+    
+    /**
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] title            The message what you want to show in title area.
+     * @param [in] message          The message what you want to show in description area.
+     */
     void ShowMessageBox(const char* title, const char* message) const;
+    
+    /**
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] title            The message what you want to show in title area.
+     * @param [in] message          The message what you want to show in description area.
+     * @param [in] messageBoxIcon   The type of icon in message box.
+     */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
+    
+    /* @brief                       Sets the root window. */
+    void SetRootWindow(const std::shared_ptr<Window>& window) noexcept;
+    
+    /* @brief                       Gets the root window. */
+    std::weak_ptr<Window> GetRootWindow() noexcept;
+    
+    /* @brief                       Gets the root window. */
+    std::weak_ptr<const Window> GetRootWindow() const noexcept;
+    
+    /* @brief                       Sets the engine. */
+    void SetEngine(const std::shared_ptr<Engine>& engine) noexcept;
+    
+    /* @brief                       Gets the engine. */
+    std::weak_ptr<Engine> GetEngine() noexcept;
 
-    Window& GetRootWindow() noexcept;
-    const Window& GetRootWindow() const noexcept;
-    template <typename _ModuleType, typename... _Args>
-    std::shared_ptr<_ModuleType> AddModule(_Args&&... args);
-    void AddModule(const std::shared_ptr<IModule>& module);
-    template <typename _ModuleType>
-    std::shared_ptr<_ModuleType> GetModule() const;
+    /* @brief                       Gets the engine. */
+    std::weak_ptr<const Engine> GetEngine() const noexcept;
 
 /* @section Public event handler */
 public:
-    virtual void OnLaunch() {}
-    virtual void OnTerminate() {}
-    virtual void OnCloseWindow(const Window&) {}
-    virtual void OnUpdate();
-
+    virtual void OnDidLaunch();
+    virtual void OnWillTerminate();
+    
+    Delegate<void(Window&)> OnWillCloseWindow;
+    Delegate<void(Window&)> OnDidCloseWindow;
+ 
+/* @section Private method */
+private:
+    /* @brief                       Updates the application. */
+    void Update();
+    
 /* @section Protected variable */
 protected:
-    ApplicationImpl m_impl;
-
-    Window m_rootWindow;
-
-    std::map<size_t, std::shared_ptr<IModule>> m_modulesToFind;
-    std::vector<std::shared_ptr<IModule>> m_modules;
+    std::shared_ptr<ApplicationImpl> m_impl;
+    std::shared_ptr<Engine> m_engine;
+    
+    std::shared_ptr<Window> m_rootWindow;
 };
-
-template<typename _ModuleType, typename ..._Args>
-inline std::shared_ptr<_ModuleType> Application::AddModule(_Args&& ...args)
-{
-    auto module = std::make_shared<_ModuleType>(std::forward<_Args>(args)...);
-
-    auto pair = m_modulesToFind.insert({ module->GetRTTI()->GetHashCode(), module });
-    if (pair.second == true)
-    {
-        m_modules.push_back(module);
-    }
-    else
-    {
-        assert(false && "The module is already been added!");
-    }
-
-    return module;
-}
-
-template<typename _ModuleType>
-inline std::shared_ptr<_ModuleType> Application::GetModule() const
-{
-    auto iter = m_modulesToFind.find(tgon::GetRTTI<_ModuleType>()->GetHashCode());
-    if (iter == m_modulesToFind.end())
-    {
-        return nullptr;
-    }
-
-    return std::static_pointer_cast<_ModuleType>(iter->second);
-}
 
 } /* namespace tgon */

@@ -8,7 +8,7 @@
 #include <map>
 
 #include "Core/Object/Delegate.h"
-#include "Core/String/StringHash.h"
+#include "Core/String/StringViewHash.h"
 
 #include "IModule.h"
 
@@ -19,7 +19,7 @@ class TGON_API EventModule :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(EventModule)
+    TGON_RUNTIME_OBJECT(EventModule);
 
 /* @section Public destructor */
 public:
@@ -28,10 +28,10 @@ public:
 /* @section Public method */
 public:
     virtual void Update() override;
-    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const Delegate<void()>& handler);
-    void SubscribeEvent(const StringHash& eventType, const StringHash& observerName, Delegate<void()>&& handler);
-    void UnsubscribeEvent(const StringHash& eventType, const StringHash& observerName);
-    void NotifyEvent(const StringHash& eventType);
+    void SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, const Delegate<void()>& handler);
+    void SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, Delegate<void()>&& handler);
+    void UnsubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName);
+    void NotifyEvent(const StringViewHash& eventType);
     
 /* @section Private variable */
 private:

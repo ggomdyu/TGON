@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Core/Object/Module/IModule.h"
-#include "Graphics/LowLevelRender/Graphics.h"
+#include "Graphics/LowLevel/Graphics.h"
 
 namespace tgon
 {

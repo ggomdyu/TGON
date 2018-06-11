@@ -1,13 +1,10 @@
 /**
- * @filename    MacOSWindowFwd.h
+ * @filename    EngineFwd.h
  * @author      ggomdyu
- * @since       02/15/2018
+ * @since       06/11/2018
  */
 
 #pragma once
-
-@class NSWindow;
-@class WindowDelegate;
 
 namespace tgon
 {

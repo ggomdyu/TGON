@@ -1,13 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Math/Color.h"
-#include "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
-#if TGON_PLATFORM_WINDOWS
-//#   include "Graphics/LowLevelRender/Direct3D11/D3D11Graphics.h"
-#   include "Graphics/LowLevelRender/OpenGL/OpenGLGraphics.h"
-#else
-#   include "Graphics/LowLevelRender/OpenGL/OpenGLGraphics.h"
-#endif
 
 #include "GraphicsModule.h"
 

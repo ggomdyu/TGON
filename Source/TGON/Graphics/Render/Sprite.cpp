@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "../LowLevelRender/Graphics.h"
+#include "../LowLevel/Graphics.h"
 
 #include "SpriteBatch.h"
 #include "Sprite.h"
@@ -10,13 +10,19 @@
 
 namespace tgon
 {
-
-Sprite::Sprite() noexcept :
+    
+Sprite::Sprite() :
     m_quad(MakeQuad(std::make_shared<TextureMaterial>()))
 {
 }
 
-Sprite::Sprite(const std::shared_ptr<TextureMaterial>& material) noexcept :
+Sprite::Sprite(const std::string& filePath) :
+    m_quad(MakeQuad(std::make_shared<TextureMaterial>()))
+{
+    this->SetTexture(std::make_shared<Texture>(filePath));
+}
+
+Sprite::Sprite(const std::shared_ptr<TextureMaterial>& material) :
     m_quad(MakeQuad(material))
 {
     assert(material != nullptr && "material can't be nullptr.");

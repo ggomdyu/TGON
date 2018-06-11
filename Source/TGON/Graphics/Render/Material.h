@@ -3,10 +3,8 @@
 
 #include "Core/Math/Color.h"
 #include "Core/Object/Object.h"
-#include "Graphics/LowLevelRender/Texture.h"
-#include "Graphics/LowLevelRender/Shader.h"
-
-#include "../LowLevelRender/Texture.h"
+#include "Graphics/LowLevel/Texture.h"
+#include "Graphics/LowLevel/Shader.h"
 
 namespace tgon
 {

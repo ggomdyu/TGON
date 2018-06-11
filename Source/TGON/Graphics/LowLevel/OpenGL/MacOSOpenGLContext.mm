@@ -5,9 +5,6 @@
 #import <AppKit/NSOpenGLView.h>
 #import <AppKit/NSWindow.h>
 
-#import "Core/Platform/Window.h"
-#import "Graphics/LowLevelRender/Generic/GenericGraphicsType.h"
-
 #import "OpenGLContext.h"
 
 namespace tgon
@@ -53,7 +50,7 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<GenericWindow>& window)
+OpenGLContext::OpenGLContext(const VideoMode& videoMode, const Window& window)
 {
     // Find a suitable pixel format.
     {
@@ -76,7 +73,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<G
     }
 
     // Create a GL View and attach it to thes target window.
-    NSWindow* nativeWindow = (__bridge NSWindow*)window->GetNativeWindow();
+    NSWindow* nativeWindow = (__bridge NSWindow*)window.GetNativeWindow();
     {
         NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
         [openGLView setOpenGLContext:context];

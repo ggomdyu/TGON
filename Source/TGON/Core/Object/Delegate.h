@@ -121,7 +121,7 @@ private:
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
 
     /**
-     * @brief               Deletes that pointer to m_ptr
+     * @brief               Deletes pointer specified by 'ptr' or Gets
      * @param [in]  ptr     Delete target
      * @return              The size to delete or deleted
      */

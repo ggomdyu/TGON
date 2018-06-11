@@ -16,7 +16,7 @@ class TGON_API Component :
 	public Object
 {
 public:
-	TGON_RUNTIME_OBJECT(Component)
+    TGON_RUNTIME_OBJECT(Component);
 
 /* @section Public constructor */
 public:
@@ -28,16 +28,10 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Updates this component. */
 	virtual void Update() = 0;
-
-    /* @brief   Sets the owner of component. */
+    
 	void SetOwner(GameObject* owner) noexcept;
-
-    /* @brief   Gets the owner of component. */
     GameObject* GetOwner() noexcept;
-
-    /* @brief   Gets the owner of component. */
     const GameObject* GetOwner() const noexcept;
 
 /* @section Private variable */

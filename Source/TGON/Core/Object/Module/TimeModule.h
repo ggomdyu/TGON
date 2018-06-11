@@ -14,7 +14,7 @@ class TGON_API TimeModule :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(TimeModule)
+    TGON_RUNTIME_OBJECT(TimeModule);
 
 /* @section Public constructor */
 public:

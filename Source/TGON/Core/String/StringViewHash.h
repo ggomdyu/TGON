@@ -1,5 +1,5 @@
 /**
- * @filename    StringHash.h
+ * @filename    StringViewHash.h
  * @author      ggomdyu
  * @date        05/30/2018
  */
@@ -13,7 +13,7 @@ namespace tgon
 {
 
 template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
-class BasicStringHash :
+class BasicStringViewHash :
     private BasicStringView<_CharType, _StringTraitsType>
 {
 /* @section Private type */
@@ -35,8 +35,8 @@ public:
 /* @section Public constructor */
 public:
     template <std::size_t _CharArraySize>
-    constexpr BasicStringHash(const _CharType(&str)[_CharArraySize]) noexcept;
-    constexpr BasicStringHash(const _CharType* str, std::size_t strLen) noexcept;
+    constexpr BasicStringViewHash(const _CharType(&str)[_CharArraySize]) noexcept;
+    constexpr BasicStringViewHash(const _CharType* str, std::size_t strLen) noexcept;
 
 /* @section Public operator */
 public:
@@ -69,19 +69,19 @@ private:
     size_t m_hashCode;
 };
 
-using StringHash = BasicStringHash<char>;
-using WStringHash = BasicStringHash<wchar_t>;
+using StringViewHash = BasicStringViewHash<char>;
+using WStringViewHash = BasicStringViewHash<wchar_t>;
 
 template <typename _CharType, typename _StringTraitsType>
 template <std::size_t _CharArraySize>
-constexpr BasicStringHash<_CharType, _StringTraitsType>::BasicStringHash(const _CharType(&str)[_CharArraySize]) noexcept :
+constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash(const _CharType(&str)[_CharArraySize]) noexcept :
     SuperType(str, _CharArraySize - 1),
     m_hashCode(X65599Hash(str))
 {
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr BasicStringHash<_CharType, _StringTraitsType>::BasicStringHash(const _CharType* str, std::size_t strLen) noexcept :
+constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash(const _CharType* str, std::size_t strLen) noexcept :
     m_str(str),
     m_strLen(strLen),
     m_hashCode(X65599Hash(str))
@@ -89,7 +89,7 @@ constexpr BasicStringHash<_CharType, _StringTraitsType>::BasicStringHash(const _
 }
     
 template <typename _CharType, typename _StringTraitsType>
-constexpr std::size_t BasicStringHash<_CharType, _StringTraitsType>::GetHashCode() const noexcept
+constexpr std::size_t BasicStringViewHash<_CharType, _StringTraitsType>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }

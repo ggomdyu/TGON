@@ -1,5 +1,5 @@
 /**
- * @filename    WindowType.h
+ * @filename    GenericWindowType.h
  * @author      ggomdyu
  * @since       05/05/2017
  */

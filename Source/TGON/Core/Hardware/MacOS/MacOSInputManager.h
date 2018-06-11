@@ -16,9 +16,12 @@ namespace tgon
 class MacOSInputManager :
     public GenericInputManager
 {
+public:
+    TGON_RUNTIME_OBJECT(MacOSInputManager);
+
 /* @section Public constructor */
 public:
-    explicit MacOSInputManager(const std::shared_ptr<GenericWindow>& window);
+    explicit MacOSInputManager(const Window& window);
     
 /* @section Public destructor */
 public:
@@ -26,17 +29,11 @@ public:
     
 /* @section Public method */
 public:
-    virtual void* CreateKeyboard() override;
-    virtual void* CreateMouse() override;
-    virtual void* CreateGamepad() override;
-    
     virtual void Update() override;
     
-/* @section Private variable */
-private:
+/* @section Protected variable */
+protected:
     gainput::InputManager m_inputManager;
 };
-    
-using InputManager = MacOSInputManager;
-    
+
 } /* namespace tgon */

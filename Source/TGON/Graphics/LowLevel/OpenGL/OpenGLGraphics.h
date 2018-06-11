@@ -8,10 +8,10 @@
 #include <memory>
 #include <GL/glew.h>
 
-#include "Graphics/LowLevel/Generic/GenericGraphics.h"
+#include "../Generic/GenericGraphics.h"
 
-#include "Graphics/LowLevel/OpenGL/OpenGLGraphicsType.h"
-#include "Graphics/LowLevel/OpenGL/OpenGLContext.h"
+#include "OpenGLGraphicsType.h"
+#include "OpenGLContext.h"
 
 namespace tgon
 {
@@ -24,7 +24,7 @@ public:
 
 /* @section Public constructor */
 public:
-    OpenGLGraphics(const VideoMode& videoMode, Window& displayTargetWindow);
+    OpenGLGraphics(const VideoMode& videoMode, const Window& displayTargetWindow);
     
 /* @section Public destructor */
 public:

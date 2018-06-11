@@ -5,8 +5,8 @@
  */
 
 #pragma once
-#include "../LowLevelRender/VertexBuffer.h"
-#include "../LowLevelRender/IndexBuffer.h"
+#include "../LowLevel/VertexBuffer.h"
+#include "../LowLevel/IndexBuffer.h"
 
 #include "Material.h"
 

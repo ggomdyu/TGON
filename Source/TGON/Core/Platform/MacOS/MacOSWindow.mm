@@ -6,7 +6,7 @@
 #import <AppKit/NSWindow.h>
 #import <Cocoa/Cocoa.h>
 
-#import "../Generic/GenericWindowType.h"
+#import "../WindowType.h"
 
 #import "MacOSWindow.h"
 #import "MacOSWindowUtility.h"
@@ -33,19 +33,6 @@ MacOSWindow::MacOSWindow(MacOSWindow&& rhs) noexcept :
 MacOSWindow::~MacOSWindow()
 {
     this->Close();
-}
-
-MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
-{
-    if (this == &rhs)
-    {
-        return *this;
-    }
-
-    this->~MacOSWindow();
-    new (this) MacOSWindow(std::move(rhs));
-
-    return *this;
 }
 
 void MacOSWindow::Show()

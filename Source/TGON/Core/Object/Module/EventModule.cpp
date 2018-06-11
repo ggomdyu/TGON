@@ -9,17 +9,17 @@ void EventModule::Update()
 {
 }
 
-void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, const Delegate<void()>& handler)
+void EventModule::SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, const Delegate<void()>& handler)
 {
     m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = handler;
 }
     
-void EventModule::SubscribeEvent(const StringHash& eventType, const StringHash& observerName, Delegate<void()>&& handler)
+void EventModule::SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, Delegate<void()>&& handler)
 {
     m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = std::move(handler);
 }
     
-void EventModule::UnsubscribeEvent(const StringHash& eventType, const StringHash& observerName)
+void EventModule::UnsubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName)
 {
     auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
     if (iter == m_eventHandlerMap.end())
@@ -30,7 +30,7 @@ void EventModule::UnsubscribeEvent(const StringHash& eventType, const StringHash
     iter->second.erase(observerName.GetHashCode());
 }
     
-void EventModule::NotifyEvent(const StringHash& eventType)
+void EventModule::NotifyEvent(const StringViewHash& eventType)
 {
     auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
     if (iter == m_eventHandlerMap.end())

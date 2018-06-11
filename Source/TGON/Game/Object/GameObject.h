@@ -20,7 +20,7 @@ class TGON_API GameObject :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(GameObject)
+    TGON_RUNTIME_OBJECT(GameObject);
 
 /* @section Public constructor */
 public:
@@ -38,7 +38,7 @@ public:
     void AddComponent(_ArgTypes&&... args);
     void AddComponent(const std::shared_ptr<Component>& component);
     template <typename _ComponentType>
-    const std::shared_ptr<_ComponentType>& GetComponent() const;
+    std::shared_ptr<_ComponentType> GetComponent() const;
 
     void AddChild(const std::shared_ptr<GameObject>& child);
     std::vector<std::shared_ptr<GameObject>>& GetChildren() noexcept;
@@ -57,7 +57,7 @@ inline void GameObject::AddComponent(_ArgTypes&& ...args)
 }
 
 template<typename _ComponentType>
-inline const std::shared_ptr<_ComponentType>& GameObject::GetComponent() const
+inline std::shared_ptr<_ComponentType> GameObject::GetComponent() const
 {
     auto iter = m_components.find(tgon::GetRTTI<GameObject>()->GetHashCode());
     if (iter == m_components.end())

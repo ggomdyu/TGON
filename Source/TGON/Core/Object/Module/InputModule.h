@@ -19,6 +19,13 @@ namespace tgon
 
 struct InputMode
 {
+/* @section Public constructor */
+public:
+    constexpr InputMode() noexcept = default;
+    constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
+    
+/* @section Public variable */
+public:
     bool isUseKeyboard = true;
     bool isUseMouse = false;
     bool isUseGamepad = false;
@@ -32,7 +39,7 @@ public:
     
 /* @section Public constructor */
 public:
-    InputModule(const InputMode& inputMode, const std::shared_ptr<GenericWindow>& inputTargetWindow);
+    InputModule(const InputMode& inputMode, const Window& inputTargetWindow);
 
 /* @section Public method */
 public:

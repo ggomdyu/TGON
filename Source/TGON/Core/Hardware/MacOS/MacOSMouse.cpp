@@ -9,8 +9,8 @@
 namespace tgon
 {
 
-MacOSMouse::MacOSMouse(void* mouseDevice) noexcept :
-    m_mouseDevice(reinterpret_cast<gainput::InputDeviceMouse*>(mouseDevice))
+MacOSMouse::MacOSMouse(gainput::InputDeviceMouse* mouseDevice) noexcept :
+    m_mouseDevice(mouseDevice)
 {
     assert(mouseDevice != nullptr && "mouseDevice can't be nullptr.");
 }
@@ -28,6 +28,12 @@ void MacOSMouse::GetPosition(int32_t* x, int32_t* y) const
     *y = static_cast<int32_t>(pt.y);
 }
 
+float MacOSMouse::GetFloat(MouseCode mouseCode) const
+{
+    auto castedMouseCode = UnderlyingCast(mouseCode);
+    return m_mouseDevice->GetFloat(castedMouseCode);
+}
+    
 bool MacOSMouse::IsMouseDown(MouseCode mouseCode) const
 {
     auto castedMouseCode = UnderlyingCast(mouseCode);

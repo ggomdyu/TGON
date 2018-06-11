@@ -19,7 +19,7 @@ inline const RTTI* GetRTTI()
 {
     using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
 
-    static_assert(std::is_convertible<ClassType*, IRuntimeObject*>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
+    static_assert(std::is_base_of<IRuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
 
     static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
     return &rtti;
@@ -44,7 +44,7 @@ inline _CastToType DynamicCast(_CastFromType ptr)
     const RTTI* rtti = ptr->GetRTTI();
     while (rtti != nullptr)
     {
-        if (rtti == GetRTTI<std::remove_pointer_t<_CastToType>>())
+        if (rtti == GetRTTI<std::remove_const_t<std::remove_pointer_t<std::decay_t<_CastToType>>>>())
         {
             return reinterpret_cast<_CastToType>(ptr);
         }

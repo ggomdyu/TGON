@@ -4,8 +4,15 @@
 
 namespace tgon
 {
+    
+constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept :
+    isUseKeyboard(isUseKeyboard),
+    isUseMouse(isUseMouse),
+    isUseGamepad(isUseGamepad)
+{
+}
 
-InputModule::InputModule(const InputMode& inputMode, const std::shared_ptr<GenericWindow>& inputTargetWindow) :
+InputModule::InputModule(const InputMode& inputMode, const Window& inputTargetWindow) :
     m_inputManager(inputTargetWindow)
 {
     if (inputMode.isUseKeyboard)

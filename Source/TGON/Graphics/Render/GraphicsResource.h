@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Math/Matrix4x4.h"
 
-#include "../LowLevelRender/Graphics.h"
+#include "../LowLevel/Graphics.h"
 
 #include "Material.h"
 #include "Mesh.h"

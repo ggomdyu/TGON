@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include <GL/glew.h>
 #include <cassert>
 
 #include "OpenGLIndexBuffer.h"

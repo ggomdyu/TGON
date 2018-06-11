@@ -19,7 +19,7 @@ public:
 /* @section Public method */
 public:
     template <typename _FunctionType>
-    void MessageLoop(_FunctionType& onUpdate);
+    void MessageLoop(const _FunctionType& onUpdate);
     void Terminate();
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
 
@@ -34,7 +34,7 @@ private:
 };
 
 template <typename _FunctionType>
-inline void ApplicationImpl::MessageLoop(_FunctionType& onUpdate)
+inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
 {
     MSG msg {};
     while (msg.message != WM_QUIT)

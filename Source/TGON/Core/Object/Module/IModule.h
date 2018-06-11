@@ -7,7 +7,6 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
 #include "Core/Object/Object.h"
 
 namespace tgon
@@ -18,7 +17,7 @@ class TGON_API IModule :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(IModule)
+    TGON_RUNTIME_OBJECT(IModule);
 
 /* @section Public destructor */
 public:

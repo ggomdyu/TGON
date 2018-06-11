@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "../LowLevelRender/Graphics.h"
+#include "../LowLevel/Graphics.h"
 
 #include "SpriteBatch.h"
 

@@ -7,8 +7,8 @@
 namespace tgon
 {
     
-MacOSKeyboard::MacOSKeyboard(void* keyboardDevice) noexcept :
-    m_keyboardDevice(reinterpret_cast<gainput::InputDeviceKeyboard*>(keyboardDevice))
+MacOSKeyboard::MacOSKeyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept :
+    m_keyboardDevice(keyboardDevice)
 {
     assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
 }
@@ -57,6 +57,26 @@ bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
     {
         return false;
     }
+}
+    
+MacOSKeyboard* MacOSKeyboard::GetPlatformService()
+{
+    return this;
+}
+
+const MacOSKeyboard* MacOSKeyboard::GetPlatformService() const
+{
+    return this;
+}
+    
+gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice()
+{
+    return m_keyboardDevice;
+}
+
+const gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice() const
+{
+    return m_keyboardDevice;
 }
 
 } /* namespace tgon */

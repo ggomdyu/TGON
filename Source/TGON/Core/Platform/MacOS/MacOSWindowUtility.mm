@@ -5,7 +5,7 @@
 #import <AppKit/NSButton.h>
 #import <AppKit/NSColor.h>
 
-#import "../Generic/GenericWindowType.h"
+#import "../WindowType.h"
 
 #import "MacOSWindowUtility.h"
 

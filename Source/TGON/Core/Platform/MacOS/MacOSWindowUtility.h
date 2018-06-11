@@ -6,8 +6,7 @@
  */
 
 #pragma once
-
-@class NSWindow;
+#include "MacOSWindowFwd.h"
 
 namespace tgon
 {
@@ -16,6 +15,6 @@ namespace tgon
  * @brief                       Creates a window via given WindowStyle.
  * @param [in] windowStyle      Window style information
  */
-NSWindow* MakeNativeWindow(const struct WindowStyle& windowStyle);
+NSWindow* MakeNativeWindow(const WindowStyle& windowStyle);
 
 } /* namespace tgon */

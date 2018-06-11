@@ -18,8 +18,9 @@ class Sprite
 {
 /* @section Public constructor */
 public:
-    Sprite() noexcept;
-    explicit Sprite(const std::shared_ptr<TextureMaterial>& material) noexcept;
+    Sprite();
+    explicit Sprite(const std::string& filePath);
+    explicit Sprite(const std::shared_ptr<TextureMaterial>& material);
 
 /* @section Public method */
 public:

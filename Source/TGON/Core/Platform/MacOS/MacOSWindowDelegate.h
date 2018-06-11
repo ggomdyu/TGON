@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-class GenericWindow;
+class MacOSWindow;
 
 } /*　namespace tgon */
 
@@ -19,8 +19,8 @@ class GenericWindow;
 {
 }
 
-@property (readonly, assign) tgon::GenericWindow* window;
+@property (readonly, assign) tgon::MacOSWindow* window;
 
-- (id)initWithWindow:(tgon::GenericWindow*)window;
+- (id)initWithWindow:(tgon::MacOSWindow*)window;
 
 @end

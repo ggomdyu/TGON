@@ -5,38 +5,47 @@
  */
 
 #pragma once
-#include "../Generic/GenericApplication.h"
+#import <AppKit/NSEvent.h>
+#import <AppKit/NSApplication.h>
 
-#include "MacOSApplicationFwd.h"
+#import "Core/Platform/Config.h"
+
+#import "MacOSApplicationType.h"
 
 namespace tgon
 {
 
-class TGON_API MacOSApplication :
-    public GenericApplication
+class TGON_API ApplicationImpl
 {
-public:
-    TGON_RUNTIME_OBJECT(MacOSApplication)
-
-/* @section Public constructor */
-public:
-    using GenericApplication::GenericApplication;
-
-    explicit MacOSApplication(const WindowStyle& windowStyle);
-
-/* @section Public destructor */
-public:
-    virtual ~MacOSApplication() override = default;
-
 /* @section Public method */
 public:
-    virtual void MessageLoop() final override;
-    virtual void Terminate() final override;
-    virtual void ShowMessageBox(const char* title, const char* message, MessageBoxIcon iconType) const final override;
-
+    template <typename _FunctionType>
+    void MessageLoop(const _FunctionType& onUpdate);
+    void Terminate();
+    void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
+    
+/* @section Public event handler */
+public:
     void OnHandleMessage(NSEvent* message);
-
-    using GenericApplication::ShowMessageBox;
 };
+    
+template <typename _FunctionType>
+inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
+{
+    NSEvent* event = nil;
+    while (true)
+    {
+        while((event = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                          untilDate:nil
+                                             inMode:NSDefaultRunLoopMode
+                                            dequeue:YES]) != nil)
+        {
+            this->OnHandleMessage(event);
+        }
+        
+        onUpdate();
+    }
+}
+
 
 } /* namespace tgon */

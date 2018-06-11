@@ -15,7 +15,7 @@ class MacOSMouse :
 {
 /* @section Public constructor */
 public:
-    explicit MacOSMouse(void* mouseDevice) noexcept;
+    explicit MacOSMouse(gainput::InputDeviceMouse* mouseDevice) noexcept;
     
 /* @section Public destructor */
 public:
@@ -23,12 +23,12 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Update() override;
-    virtual void GetPosition(int32_t* x, int32_t* y) const override;
-    using GenericMouse::GetPosition;
-    virtual bool IsMouseDown(MouseCode mouseCode) const override;
-    virtual bool IsMouseHold(MouseCode mouseCode) const override;
-    virtual bool IsMouseUp(MouseCode mouseCode) const override;
+    virtual void Update() final override;
+    virtual void GetPosition(int32_t* x, int32_t* y) const final override;
+    virtual float GetFloat(MouseCode mouseCode) const final override;
+    virtual bool IsMouseDown(MouseCode mouseCode) const final override;
+    virtual bool IsMouseHold(MouseCode mouseCode) const final override;
+    virtual bool IsMouseUp(MouseCode mouseCode) const final override;
 
 /* @section Private variable */
 private:

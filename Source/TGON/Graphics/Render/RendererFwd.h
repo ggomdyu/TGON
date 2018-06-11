@@ -8,18 +8,8 @@
 
 namespace tgon
 {
-namespace core
-{
 
 class Window;
-
-} /* namespace core */
-
-namespace graphics
-{
-
-class IDynamicRHI;
 struct VideoMode;
 
-} /* namespace graphics */
 } /* namespace tgon */

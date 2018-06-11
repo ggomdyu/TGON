@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_USING_OPENGL
-#   include "Graphics/LowLevelRender/OpenGL/OpenGLShaderCode.h"
+#   include "Graphics/LowLevel/OpenGL/OpenGLShaderCode.h"
 #endif
 
 #include "Material.h"

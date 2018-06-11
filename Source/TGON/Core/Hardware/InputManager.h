@@ -24,7 +24,7 @@ class InputManager :
     public BOOST_PP_CAT(TGON_PLATFORM_NAME, InputManager)
 {
 public:
-    TGON_RUNTIME_OBJECT(InputManager)
+    TGON_RUNTIME_OBJECT(InputManager);
 
 /* @section Public constructor */
 public:

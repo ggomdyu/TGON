@@ -12,28 +12,28 @@
 
 namespace tgon
 {
-
+    
 class TGON_API MacOSWindow :
     public GenericWindow
 {
 public:
     TGON_RUNTIME_OBJECT(MacOSWindow)
-
-/* @section Public constructor */
+    
+    /* @section Public constructor */
 public:
     MacOSWindow() = default;
     explicit MacOSWindow(const WindowStyle& windowStyle);
     MacOSWindow(MacOSWindow&& rhs) noexcept;
-
-/* @section Public operator */
+    
+    /* @section Public operator */
 public:
     MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
-
-/* @section Public destructor */
+    
+    /* @section Public destructor */
 public:
     virtual ~MacOSWindow() override;
-
-/* @section Public method */
+    
+    /* @section Public method */
 public:
     virtual void Show() final override;
     virtual void Hide() final override;
@@ -59,8 +59,8 @@ public:
     using GenericWindow::GetPosition;
     using GenericWindow::GetSize;
     using GenericWindow::GetNativeWindow;
-
-/* @section Protected variable */
+    
+    /* @section Protected variable */
 protected:
     NSWindow* m_nsWindow;
     WindowDelegate* m_windowDelegate;

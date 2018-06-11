@@ -13,9 +13,12 @@ namespace tgon
 class MacOSKeyboard :
     public GenericKeyboard
 {
+public:
+    TGON_RUNTIME_OBJECT(MacOSKeyboard);
+    
 /* @section Public constructor */
 public:
-    explicit MacOSKeyboard(void* keyboardDevice) noexcept;
+    explicit MacOSKeyboard(gainput::InputDeviceKeyboard* keyboardDevice) noexcept;
 
 /* @section Public destructor */
 public:
@@ -23,16 +26,18 @@ public:
     
 /* @section Public method */
 public:
-    virtual void Update() final override;
-    virtual bool IsKeyDown(KeyCode keyCode) const final override;
-    virtual bool IsKeyHold(KeyCode keyCode) const final override;
-    virtual bool IsKeyUp(KeyCode keyCode) const final override;
+    void Update();
+    bool IsKeyDown(KeyCode keyCode) const;
+    bool IsKeyHold(KeyCode keyCode) const;
+    bool IsKeyUp(KeyCode keyCode) const;
+    MacOSKeyboard* GetPlatformService();
+    const MacOSKeyboard* GetPlatformService() const;
+    gainput::InputDeviceKeyboard* GetKeyboardDevice();
+    const gainput::InputDeviceKeyboard* GetKeyboardDevice() const;
 
 /* @section Private variable */
 private:
     gainput::InputDeviceKeyboard* m_keyboardDevice;
 };
-    
-using Keyboard = MacOSKeyboard;
 
 } /* namespace tgon */
