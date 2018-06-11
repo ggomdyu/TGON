@@ -24,14 +24,14 @@ extern std::shared_ptr<Engine> MakeEngine();
 Application::Application() :
     m_impl(std::make_shared<ApplicationImpl>()),
     m_engine(MakeEngine()),
-    m_rootWindow(std::make_shared<Window>(m_engine->GetMainWindowStyle()))
+    m_rootWindow(m_engine->GetRootWindowStyle())
 {
 }
     
 Application::Application(const WindowStyle& windowStyle) :
     m_impl(std::make_shared<ApplicationImpl>()),
     m_engine(MakeEngine()),
-    m_rootWindow(std::make_shared<Window>(windowStyle))
+    m_rootWindow(windowStyle)
 {
 }
     
@@ -70,17 +70,17 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     m_impl->ShowMessageBox(title, message, messageBoxIcon);
 }
     
-void Application::SetRootWindow(const std::shared_ptr<Window>& window) noexcept
+void Application::SetRootWindow(Window&& window) noexcept
 {
-    m_rootWindow = window;
+//    m_rootWindow = std::move(window);
 }
     
-std::weak_ptr<Window> Application::GetRootWindow() noexcept
+Window& Application::GetRootWindow() noexcept
 {
     return m_rootWindow;
 }
 
-std::weak_ptr<const Window> Application::GetRootWindow() const noexcept
+const Window& Application::GetRootWindow() const noexcept
 {
     return m_rootWindow;
 }

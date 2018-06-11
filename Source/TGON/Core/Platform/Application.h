@@ -10,8 +10,11 @@
 
 #include "Core/Object/Object.h"
 #include "Core/Object/Delegate.h"
+#include "Core/Object/Engine.h"
+#include "Core/Platform/Window.h"
 
 #include "ApplicationFwd.h"
+
 
 namespace tgon
 {
@@ -72,13 +75,13 @@ public:
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /* @brief                       Sets the root window. */
-    void SetRootWindow(const std::shared_ptr<Window>& window) noexcept;
+    void SetRootWindow(Window&& window) noexcept;
     
     /* @brief                       Gets the root window. */
-    std::weak_ptr<Window> GetRootWindow() noexcept;
+    Window& GetRootWindow() noexcept;
     
     /* @brief                       Gets the root window. */
-    std::weak_ptr<const Window> GetRootWindow() const noexcept;
+    const Window& GetRootWindow() const noexcept;
     
     /* @brief                       Sets the engine. */
     void SetEngine(const std::shared_ptr<Engine>& engine) noexcept;
@@ -107,7 +110,7 @@ protected:
     std::shared_ptr<ApplicationImpl> m_impl;
     std::shared_ptr<Engine> m_engine;
     
-    std::shared_ptr<Window> m_rootWindow;
+    Window m_rootWindow;
 };
 
 } /* namespace tgon */

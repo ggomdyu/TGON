@@ -31,9 +31,13 @@ class TGON_API Engine :
     private boost::noncopyable
 {
 public:
+    TGON_RUNTIME_OBJECT(Engine);
+    
+/* @section Public method */
+public:
     virtual void Update();
     
-    virtual WindowStyle GetMainWindowStyle() const noexcept;
+    virtual WindowStyle GetRootWindowStyle() const noexcept;
     
     /**
      * @brief               Inserts a module to manage.

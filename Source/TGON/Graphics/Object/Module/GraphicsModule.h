@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Object/Module/IModule.h"
 #include "Graphics/LowLevel/Graphics.h"
+#include "Graphics/Render/SpriteBatch.h"
 
 namespace tgon
 {
@@ -28,13 +29,12 @@ public:
 /* @section Public method */
 public:
     virtual void Update() final override;
-    void Draw();
-//    void AddBatch(const Batch& batch);
-//    void AddBatch(Batch&& batch);
-//    void AddSpriteBatch(const SpriteBatch& spriteBatch);
-//    void AddSpriteBatch(SpriteBatch&& spriteBatch);
-    Graphics& GetGraphics();
-    const Graphics& GetGraphics() const;
+    void Draw(GraphicsContext& graphicsContext);
+
+    SpriteBatch& GetSpriteBatch() noexcept;
+    const SpriteBatch& GetSpriteBatch() const noexcept;
+    Graphics& GetGraphics() noexcept;
+    const Graphics& GetGraphics() const noexcept;
 
 /* @section Public method */
 private:
@@ -42,9 +42,8 @@ private:
 /* @section Private variable */
 private:
     Graphics m_graphics;
-    
-//    std::vector<Batch> m_batches;
-//    std::vector<SpriteBatch> m_spriteBatches;
+    GraphicsContext m_graphicsContext;
+    SpriteBatch m_spriteBatch;
 };
 
 } /* namespace tgon */

@@ -7,7 +7,7 @@
 namespace tgon
 {
 
-WindowStyle Engine::GetMainWindowStyle() const noexcept
+WindowStyle Engine::GetRootWindowStyle() const noexcept
 {
     return {};
 }

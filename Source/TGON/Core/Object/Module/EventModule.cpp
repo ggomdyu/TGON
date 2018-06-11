@@ -9,31 +9,33 @@ void EventModule::Update()
 {
 }
 
-void EventModule::SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, const Delegate<void()>& handler)
+void EventModule::SubscribeEvent(const StringViewHash& eventType, const EventHandler& eventHandler)
 {
-    m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = handler;
+    m_eventHandlers[eventType.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = eventHandler;
 }
     
-void EventModule::SubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName, Delegate<void()>&& handler)
+void EventModule::SubscribeEvent(const StringViewHash& eventType, EventHandler&& eventHandler)
 {
-    m_eventHandlerMap[eventType.GetHashCode()][observerName.GetHashCode()] = std::move(handler);
+    m_eventHandlers[eventType.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = std::move(eventHandler);
 }
     
-void EventModule::UnsubscribeEvent(const StringViewHash& eventType, const StringViewHash& observerName)
+bool EventModule::UnsubscribeEvent(const StringViewHash& eventType, const EventHandler& eventHandler)
 {
-    auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
-    if (iter == m_eventHandlerMap.end())
+    auto iter = m_eventHandlers.find(eventType.GetHashCode());
+    if (iter == m_eventHandlers.end())
     {
-        return;
+        return false;
     }
     
-    iter->second.erase(observerName.GetHashCode());
+    iter->second.erase(reinterpret_cast<uintptr_t>(&eventHandler));
+    
+    return true;
 }
     
 void EventModule::NotifyEvent(const StringViewHash& eventType)
 {
-    auto iter = m_eventHandlerMap.find(eventType.GetHashCode());
-    if (iter == m_eventHandlerMap.end())
+    auto iter = m_eventHandlers.find(eventType.GetHashCode());
+    if (iter == m_eventHandlers.end())
     {
         return;
     }
