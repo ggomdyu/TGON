@@ -6,7 +6,6 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <initializer_list>
 #include <vector>
 #include <algorithm>
 
@@ -17,13 +16,17 @@
 namespace tgon
 {
 
-class TGON_API GameObject :
+class TGON_API GameObject final :
 	public Object,
     private boost::noncopyable
 {
 public:
     TGON_RUNTIME_OBJECT(GameObject);
 
+/* @section Public constructor */
+public:
+    explicit GameObject(const std::string& name);
+    
 /* @section Public destructor */
 public:
     virtual ~GameObject() override;
@@ -32,7 +35,8 @@ public:
 public:
     void Update();
 
-    void AddComponent(std::initializer_list<std::unique_ptr<Component>> components);
+    void SetName(const std::string& name);
+    const std::string& GetString() const noexcept;
     template <typename _ComponentType, typename... _ArgTypes>
     void AddComponent(_ArgTypes&&... args);
     void AddComponent(std::unique_ptr<Component> component);
@@ -40,14 +44,22 @@ public:
     const _ComponentType* GetComponent() const;
     template <typename _ComponentType>
     _ComponentType* GetComponent();
-
+    template <typename _ComponentType>
+    bool RemoveComponent();
+    
+/* @section Private method */
+private:
+    bool RemoveComponent(size_t componentId);
+    Component* GetComponent(size_t componentId);
+    
 /* @section Private variable */
 private:
+    std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
 };
 
 template<typename _ComponentType, typename... _ArgTypes>
-inline void GameObject::AddComponent(_ArgTypes&& ...args)
+inline void GameObject::AddComponent(_ArgTypes&&... args)
 {
     this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));
 }
@@ -61,13 +73,13 @@ inline const _ComponentType* GameObject::GetComponent() const
 template<typename _ComponentType>
 inline _ComponentType* GameObject::GetComponent()
 {
-//    m_components.find_if(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& component)
-//    {
-//        return component->GetRTTI()->GetHashCode() == GetRTTI<_ComponentType>()->GetHashCode();
-//    });
-//
-//    return static_cast<_ComponentType*>(iter->second);
-    return nullptr;
+    return static_cast<_ComponentType*>(this->GetComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode()));
+}
+    
+template <typename _ComponentType>
+inline bool GameObject::RemoveComponent()
+{
+    return this->RemoveComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode());
 }
 
 } /* namespace tgon */

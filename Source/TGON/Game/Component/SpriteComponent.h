@@ -20,7 +20,10 @@ public:
 
 /* @section Public constructor */
 public:
-    using Component::Component;
+    SpriteComponent() = default;
+    SpriteComponent(const std::string& filePath);
+    SpriteComponent(const Sprite& imagePath);
+    SpriteComponent(Sprite&& imagePath);
 
 /* @section Public destructor */
 public:
@@ -28,7 +31,13 @@ public:
 
 /* @section Public method */
 public:
-	virtual void Update() override;
+    virtual void Update() override {}
+    
+    void SetSprite(const std::string& filePath);
+    void SetSprite(const Sprite& imagePath);
+    void SetSprite(Sprite&& imagePath);
+    const Sprite& GetSprite() const noexcept;
+    Sprite& GetSprite() noexcept;
     
 /* @section Private variable */
 private:

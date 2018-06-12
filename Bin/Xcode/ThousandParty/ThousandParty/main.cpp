@@ -22,10 +22,11 @@ public:
             inputMode.isUseKeyboard = true;
         }
         this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
-        
         this->AddModule<GraphicsModule>(VideoMode{}, Application::GetInstance()->GetRootWindow());
-        
         this->AddModule<TimeModule>();
+        
+        GameObject gameObject("sprite");
+        gameObject.AddComponent(std::make_unique<SpriteComponent>(&gameObject));
     }
     
     virtual void OnWillTerminate() override

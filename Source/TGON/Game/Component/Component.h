@@ -20,7 +20,7 @@ public:
 
 /* @section Public constructor */
 public:
-	explicit Component(GameObject* owner) noexcept;
+	Component() noexcept;
 
 /* @section Public destructor */
 public:
@@ -31,7 +31,6 @@ public:
 	virtual void Update() = 0;
     
 	void SetOwner(GameObject* owner) noexcept;
-    
     const GameObject* GetOwner() const noexcept;
     GameObject* GetOwner() noexcept;
 

@@ -16,25 +16,66 @@ void GameObject::Update()
         component->Update();
     }
 }
-
-void GameObject::AddComponent(std::initializer_list<std::unique_ptr<Component>> components)
-{
-    m_components.insert(components.begin(), components.end());
     
-    std::sort(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& lhs, const std::unique_ptr<Component>& rhs)
-    {
-        return lhs->GetRTTI()->GetHashCode() < rhs->GetRTTI()->GetHashCode();
-    });
+void GameObject::SetName(const std::string& name)
+{
+    m_name = name;
+}
+
+const std::string& GameObject::GetString() const noexcept
+{
+    return m_name;
 }
 
 void GameObject::AddComponent(std::unique_ptr<Component> component)
 {
-    m_components.push_back(std::move(component));
+    component->SetOwner(this);
     
-    std::sort(m_components.begin(), m_components.end(), [](const std::unique_ptr<Component>& lhs, const std::unique_ptr<Component>& rhs)
+    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
     {
-        return lhs->GetRTTI()->GetHashCode() < rhs->GetRTTI()->GetHashCode();
-    });
+        return lhs->GetRTTI()->GetHashCode() < rhs;
+    };
+    
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), component->GetRTTI()->GetHashCode(), predicate);
+
+    m_components.insert(iter, std::move(component));
+}
+    
+bool GameObject::RemoveComponent(size_t componentId)
+{
+    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
+    {
+        return lhs->GetRTTI()->GetHashCode() < rhs;
+    };
+    
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
+    if (iter != m_components.end())
+    {
+        m_components.erase(iter);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+Component* GameObject::GetComponent(size_t componentId)
+{
+    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
+    {
+        return lhs->GetRTTI()->GetHashCode() < rhs;
+    };
+    
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
+    if (iter != m_components.end())
+    {
+        return iter->get();
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 } /*namespace tgon*/

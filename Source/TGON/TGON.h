@@ -60,3 +60,4 @@
 #include "Graphics/Object/Module/GraphicsModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
+#include "Game/Component/SpriteComponent.h"

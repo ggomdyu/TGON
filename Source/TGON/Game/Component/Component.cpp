@@ -5,8 +5,8 @@
 namespace tgon
 {
 
-Component::Component(GameObject* owner) noexcept :
-	m_owner(owner)
+Component::Component() noexcept :
+	m_owner(nullptr)
 {
 }
 
