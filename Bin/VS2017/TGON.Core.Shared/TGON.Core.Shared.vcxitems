@@ -22,19 +22,19 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericGamepad.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericInputManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericKeyboard.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericMouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Keyboard.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Mouse.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\EventModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\InputModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TaskModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TimeModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\AudioBufferUtility.h" />
@@ -57,13 +57,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\File\Path.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericGamepad.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericInputManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericKeyboard.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericMouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\GamepadFwd.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManagerFwd.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Keyboard.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\KeyboardFwd.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\KeyboardType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Mouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseFwd.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\UUID.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Circle.h" />
@@ -82,7 +84,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IComparable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IRuntimeObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IRuntimeObjectUtility.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\EventModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\IModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\InputModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TaskModule.h" />
@@ -115,6 +116,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Time\DateTimeType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\Algorithm.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\AutoCast.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ExpressionTemplate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\InstanceCounter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\InstantiateCounter.h" />

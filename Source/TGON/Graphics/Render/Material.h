@@ -72,10 +72,8 @@ public:
 /* @section Public constructor */
 public:
     TextureMaterial();
-
-/* @section Protected constructor */
-protected:
-    TextureMaterial(const std::shared_ptr<Shader>& shader);
+    TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
+    explicit TextureMaterial(const std::shared_ptr<Texture>& texture);
 
 /* @section Public destructor */
 public:
@@ -100,26 +98,26 @@ private:
     Color4f m_blendColor;
 };
 
-class GrayscaleTextureMaterial :
-    public TextureMaterial
-{
-public:
-    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial);
-
-/* @section Public constructor */
-public:
-    GrayscaleTextureMaterial();
-
-    /* @section Public destructor */
-public:
-    virtual ~GrayscaleTextureMaterial() override = default;
-
-    /* @section Public method */
-public:
-    virtual void Use() override;
-    virtual void Unuse() override;
-    virtual bool CanBatch(const Material& rhs) const override;
-};
+//class GrayscaleTextureMaterial :
+//    public TextureMaterial
+//{
+//public:
+//    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial);
+//
+///* @section Public constructor */
+//public:
+//    GrayscaleTextureMaterial();
+//
+//    /* @section Public destructor */
+//public:
+//    virtual ~GrayscaleTextureMaterial() override = default;
+//
+//    /* @section Public method */
+//public:
+//    virtual void Use() override;
+//    virtual void Unuse() override;
+//    virtual bool CanBatch(const Material& rhs) const override;
+//};
 
 class MaskTextureMaterial :
     public TextureMaterial

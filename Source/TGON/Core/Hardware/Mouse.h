@@ -7,8 +7,29 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsMouse.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSMouse.h"
-#endif
+#include "MouseFwd.h"
+
+namespace tgon
+{
+    
+class TGON_API Mouse final
+{
+/* @section Public constructor */
+public:
+    explicit Mouse(InputManager* inputManager);
+    
+/* @section Public method */
+public:
+    void Update();
+    bool IsMouseDown(MouseCode mouseCode) const;
+    bool IsMouseHold(MouseCode mouseCode) const;
+    bool IsMouseUp(MouseCode mouseCode) const;
+    const MouseImpl* GetImpl() const noexcept;
+    MouseImpl* GetImpl() noexcept;
+    
+/* @section Private variable */
+private:
+    std::shared_ptr<MouseImpl> m_impl;
+};
+    
+} /* namespace tgon */

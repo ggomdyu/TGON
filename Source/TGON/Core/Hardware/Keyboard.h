@@ -24,7 +24,6 @@ public:
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    
     const KeyboardImpl* GetImpl() const noexcept;
     KeyboardImpl* GetImpl() noexcept;
     

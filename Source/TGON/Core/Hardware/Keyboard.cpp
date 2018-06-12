@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Platform/Config.h"
-#include "Core/Utility/Algorithm.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsKeyboard.h"
@@ -10,14 +9,14 @@
 #endif
 
 #include "Keyboard.h"
+#include "InputManager.h"
 
 namespace tgon
 {
     
 Keyboard::Keyboard(InputManager* inputManager) :
-    m_impl(std::make_shared<KeyboardImpl>(inputManager))
+    m_impl(std::make_shared<KeyboardImpl>(inputManager->GetImpl()))
 {
-//    assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
 }
     
 void Keyboard::Update()

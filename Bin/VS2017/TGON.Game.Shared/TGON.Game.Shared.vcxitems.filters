@@ -10,6 +10,9 @@
     <Filter Include="Source\Game\Object">
       <UniqueIdentifier>{9aa25fa1-4a7b-432b-993f-16c29445688c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game\Component">
+      <UniqueIdentifier>{0bd03a94-f65d-482c-acf1-6daed2e504e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.h">
@@ -18,13 +21,25 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObjectFwd.h">
       <Filter>Source\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\ComponentFwd.h">
-      <Filter>Source\Game\Object</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentFwd.h">
+      <Filter>Source\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteComponent.h">
+      <Filter>Source\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h">
+      <Filter>Source\Game\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.cpp">
       <Filter>Source\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteComponent.cpp">
+      <Filter>Source\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp">
+      <Filter>Source\Game\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

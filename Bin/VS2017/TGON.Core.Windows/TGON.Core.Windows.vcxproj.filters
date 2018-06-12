@@ -64,14 +64,26 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseType.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h">
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboardFwd.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseFwd.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManagerFwd.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadFwd.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -91,9 +91,6 @@
     <Filter Include="Source\Core\Random">
       <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Hardware\Generic">
-      <UniqueIdentifier>{fee6b4ca-c17f-466c-b140-429aaa036887}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
@@ -126,23 +123,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TimeModule.cpp">
       <Filter>Source\Core\Object\Module</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\EventModule.cpp">
-      <Filter>Source\Core\Object\Module</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\InputModule.cpp">
       <Filter>Source\Core\Object\Module</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericKeyboard.cpp">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericMouse.cpp">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericInputManager.cpp">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericGamepad.cpp">
-      <Filter>Source\Core\Hardware\Generic</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp">
       <Filter>Source\Core\Platform</Filter>
@@ -152,6 +134,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.cpp">
       <Filter>Source\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Keyboard.cpp">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.cpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManager.cpp">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Mouse.cpp">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.cpp">
+      <Filter>Source\Core\Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,24 +374,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TimeModule.h">
       <Filter>Source\Core\Object\Module</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\EventModule.h">
-      <Filter>Source\Core\Object\Module</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericMouse.h">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericInputManager.h">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericKeyboard.h">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.h">
-      <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Generic\GenericGamepad.h">
-      <Filter>Source\Core\Hardware\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\InstanceCounter.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
@@ -418,6 +397,30 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\WindowFwd.h">
       <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManagerFwd.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseFwd.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\GamepadFwd.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\KeyboardFwd.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\KeyboardType.h">
+      <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseType.h">
+      <Filter>Source\Core\Hardware</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

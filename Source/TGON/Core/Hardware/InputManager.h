@@ -5,40 +5,30 @@
  */
 
 #pragma once
+#include <memory>
+
 #include "Core/Platform/Config.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsInputManager.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSInputManager.h"
-#endif
-
-#include "Mouse.h"
-#include "Keyboard.h"
-#include "Gamepad.h"
+#include "InputManagerFwd.h"
 
 namespace tgon
 {
 
-class InputManager :
-    public BOOST_PP_CAT(TGON_PLATFORM_NAME, InputManager)
+class TGON_API InputManager final
 {
-public:
-    TGON_RUNTIME_OBJECT(InputManager);
-
 /* @section Public constructor */
 public:
-    using SuperType::SuperType;
-
-/* @section Public destructor */
-public:
-    virtual ~InputManager() override = default;
-
+    InputManager(const Window& inputTargetWindow);
+    
 /* @section Public method */
 public:
-    std::unique_ptr<Mouse> CreateMouse();
-    std::unique_ptr<Keyboard> CreateKeyboard();
-    std::unique_ptr<Gamepad> CreateGamepad();
+    void Update();
+    const InputManagerImpl* GetImpl() const noexcept;
+    InputManagerImpl* GetImpl() noexcept;
+    
+/* @section Private variable */
+private:
+    std::shared_ptr<InputManagerImpl> m_impl;
 };
 
 } /* namespace tgon */

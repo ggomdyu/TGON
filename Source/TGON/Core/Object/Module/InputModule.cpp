@@ -17,17 +17,17 @@ InputModule::InputModule(const InputMode& inputMode, const Window& inputTargetWi
 {
     if (inputMode.isUseKeyboard)
     {
-        m_keyboard = m_inputManager.CreateKeyboard();
+        m_keyboard = std::make_unique<Keyboard>(&m_inputManager);
     }
     
     if (inputMode.isUseMouse)
     {
-        m_mouse = m_inputManager.CreateMouse();
+        m_mouse = std::make_unique<Mouse>(&m_inputManager);
     }
 
     if (inputMode.isUseGamepad)
     {
-        m_gamepad = m_inputManager.CreateGamepad();
+        m_gamepad = std::make_unique<Gamepad>(&m_inputManager);
     }
 }
     

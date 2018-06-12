@@ -5,38 +5,32 @@
  */
 
 #pragma once
-#include "WindowsKeyboardType.h"
+#include "Core/Platform/Config.h"
+
+#include "WindowsKeyboardFwd.h"
 
 namespace tgon
 {
-    
-class WindowsKeyboard :
-    public GenericKeyboard
-{
-public:
-    TGON_RUNTIME_OBJECT(WindowsKeyboard);
 
+class TGON_API KeyboardImpl final
+{
 /* @section Public constructor */
 public:
-    explicit WindowsKeyboard(OIS::Keyboard* keyboardDevice) noexcept;
-    
-/* @section Public destructor */
-public:
-    virtual ~WindowsKeyboard() override = default;
+    explicit KeyboardImpl(InputManagerImpl* inputManagerImpl);
 
 /* @section Public method */
 public:
-    virtual void Update() override;
-    virtual bool IsKeyDown(KeyCode keyCode) const override;
-    virtual bool IsKeyHold(KeyCode keyCode) const override;
-    virtual bool IsKeyUp(KeyCode keyCode) const override;
-
+    void Update();
+    bool IsKeyDown(KeyCode keyCode) const;
+    bool IsKeyHold(KeyCode keyCode) const;
+    bool IsKeyUp(KeyCode keyCode) const;
+    const OIS::Keyboard* GetKeyboardDevice() const noexcept;
+    OIS::Keyboard* GetKeyboardDevice() noexcept;
+    
 /* @section Private variable */
 private:
     OIS::Keyboard* m_keyboardDevice;
     char m_prevKeyStates[256];
 };
-
-using Keyboard = WindowsKeyboard;
 
 } /* namespace tgon */

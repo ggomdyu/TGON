@@ -7,9 +7,17 @@
 #pragma once
 #include <OIS.h>
 
-#include "../Generic/GenericGamepad.h"
-
 namespace tgon
 {
+
+enum class GamepadPov
+{
+    Left,
+    Up,
+    Down,
+    Right,
+    LeftUp,
+    LeftDown,
+};
 
 } /* namespace tgon */

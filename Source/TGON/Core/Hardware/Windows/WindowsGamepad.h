@@ -5,46 +5,35 @@
  */
 
 #pragma once
-#include "WindowsGamepadType.h"
+#include <cstdint>
+
+#include "Core/Platform/Config.h"
+
+#include "WindowsGamepadFwd.h"
 
 namespace tgon
 {
 
-enum class GamepadPov
-{
-    Left,
-    Up,
-    Down,
-    Right,
-    LeftUp,
-    LeftDown,
-};
-
-class WindowsGamepad :
-    public GenericGamepad
+class TGON_API GamepadImpl final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsGamepad(OIS::JoyStick* gamepadDevice) noexcept;
-
-/* @section Public destructor */
-public:
-    virtual ~WindowsGamepad() override = default;
+    explicit GamepadImpl(InputManagerImpl* inputManager);
 
 /* @section Public method */
 public:
-    virtual void Update() final override;
-    virtual void Vibrate(float leftMotor, float rightMotor) final override;
-    virtual bool IsButtonDown(int32_t buttonNumber) const final;
-    virtual bool IsButtonHold(int32_t buttonNumber) const final;
-    virtual bool IsButtonUp(int32_t buttonNumber) const final;
+    void Update();
+    void Vibrate(float leftMotor, float rightMotor);
+    bool IsButtonDown(int32_t buttonNumber) const;
+    bool IsButtonHold(int32_t buttonNumber) const;
+    bool IsButtonUp(int32_t buttonNumber) const;
+    const OIS::JoyStick* GetGamepadDevice() const noexcept;
+    OIS::JoyStick* GetGamepadDevice() noexcept;
 
 /* @section Private variable */
 private:
     OIS::JoyStick* m_gamepadDevice;
-    OIS::JoyStickState m_prevGamepadState;
+    std::shared_ptr<OIS::JoyStickState> m_prevGamepadState;
 };
-
-using Gamepad = WindowsGamepad;
 
 } /* namespace tgon */

@@ -1,26 +1,45 @@
 #include "PrecompiledHeader.h"
 
-#include "../InputManager.h"
+#include <OIS.h>
+
+#include "Core/Platform/Window.h"
+
+#include "WindowsInputManager.h"
 
 namespace tgon
 {
    
-WindowsInputManager::WindowsInputManager(const Window& window) :
+InputManagerImpl::InputManagerImpl(const Window& window) :
     m_inputManager(OIS::InputManager::createInputSystem(QueryParamList(window)))
 {
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
 }
 
-WindowsInputManager::~WindowsInputManager()
+InputManagerImpl::~InputManagerImpl()
 {
     OIS::InputManager::destroyInputSystem(m_inputManager);
 }
 
-void WindowsInputManager::Update()
+void InputManagerImpl::Update()
 {
 }
 
-OIS::ParamList WindowsInputManager::QueryParamList(const Window& window) const
+OIS::Mouse* InputManagerImpl::CreateMouse()
+{
+    return static_cast<OIS::Mouse*>(m_inputManager->createInputObject(OIS::OISMouse, true));
+}
+
+OIS::Keyboard* InputManagerImpl::CreateKeyboard()
+{
+    return static_cast<OIS::Keyboard*>(m_inputManager->createInputObject(OIS::OISKeyboard, true));
+}
+
+OIS::JoyStick* InputManagerImpl::CreateGamepad()
+{
+    return static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true));
+}
+
+OIS::ParamList InputManagerImpl::QueryParamList(const Window& window) const
 {
     OIS::ParamList paramList
     {
@@ -28,21 +47,6 @@ OIS::ParamList WindowsInputManager::QueryParamList(const Window& window) const
     };
 
     return paramList;
-}
-
-std::unique_ptr<Keyboard> InputManager::CreateKeyboard()
-{
-    return std::make_unique<Keyboard>(static_cast<OIS::Keyboard*>(m_inputManager->createInputObject(OIS::OISKeyboard, true)));
-}
-
-std::unique_ptr<Mouse> InputManager::CreateMouse()
-{
-    return std::make_unique<Mouse>(static_cast<OIS::Mouse*>(m_inputManager->createInputObject(OIS::OISMouse, true)));
-}
-
-std::unique_ptr<Gamepad> InputManager::CreateGamepad()
-{
-    return std::make_unique<Gamepad>(static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true)));
 }
 
 } /* namespace tgon */

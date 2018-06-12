@@ -29,7 +29,7 @@ public:
     
 /* @section Public destructor */
 public:
-    virtual ~GameObject() override;
+    virtual ~GameObject() override = default;
 
 /* @section Public method */
 public:

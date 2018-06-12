@@ -7,12 +7,10 @@
 #pragma once
 #include <OIS.h>
 
-#include "../Generic/GenericKeyboard.h"
-
 namespace tgon
 {
 
-enum class GenericKeyboard::KeyCode
+enum class KeyCode
 {
     Escape              = OIS::KeyCode::KC_ESCAPE,
     F1                  = OIS::KeyCode::KC_F1,
@@ -99,12 +97,12 @@ enum class GenericKeyboard::KeyCode
     KeypadEnter         = OIS::KeyCode::KC_NUMPADENTER,
     KeypadInsert        = OIS::KeyCode::KC_INSERT,
     KeypadEnd           = OIS::KeyCode::KC_END,
-    KeypadDown          = OIS::KeyCode::KC_NUMPAD2,
-    KeypadPageDown      = OIS::KeyCode::KC_F15,
-    KeypadLeft          = OIS::KeyCode::KC_NUMPAD4,
-    KeypadRight         = OIS::KeyCode::KC_NUMPAD6,
+    //KeypadDown          = OIS::KeyCode::KC_NUMPAD2,
+    //KeypadPageDown      = OIS::KeyCode::KC_F15,
+    //KeypadLeft          = OIS::KeyCode::KC_NUMPAD4,
+    //KeypadRight         = OIS::KeyCode::KC_NUMPAD6,
     KeypadHome          = OIS::KeyCode::KC_HOME,
-    KeypadUp            = OIS::KeyCode::KC_NUMPAD8,
+    //KeypadUp            = OIS::KeyCode::KC_NUMPAD8,
     KeypadPageUp        = OIS::KeyCode::KC_PGUP,
     KeypadDelete        = OIS::KeyCode::KC_DELETE,
     BackSpace           = OIS::KeyCode::KC_BACK,
@@ -119,7 +117,7 @@ enum class GenericKeyboard::KeyCode
     RightWindows        = OIS::KeyCode::KC_RWIN,
     LeftAlt             = OIS::KeyCode::KC_LMENU,
     RightAlt            = OIS::KeyCode::KC_RMENU,
-    Back                = OIS::KeyCode::KC_F15,
+    //Back                = OIS::KeyCode::KC_F15,
     VolumeUp            = OIS::KeyCode::KC_VOLUMEUP,
     VolumeDown          = OIS::KeyCode::KC_VOLUMEDOWN,
     Power               = OIS::KeyCode::KC_POWER,
@@ -127,11 +125,11 @@ enum class GenericKeyboard::KeyCode
     At                  = OIS::KeyCode::KC_AT,
     Plus                = OIS::KeyCode::KC_ADD,
     MediaPlayPause      = OIS::KeyCode::KC_PLAYPAUSE,
-    MediaStop           = OIS::KeyCode::KC_STOP,
+    //MediaStop           = OIS::KeyCode::KC_STOP,
     MediaNext           = OIS::KeyCode::KC_NEXTTRACK,
     MediaPrevious       = OIS::KeyCode::KC_PREVTRACK,
     Mute                = OIS::KeyCode::KC_MUTE,
-    Fn                  = OIS::KeyCode::KC_F15,
+    //Fn                  = OIS::KeyCode::KC_F15,
     Colon               = OIS::KeyCode::KC_COLON,
     SysRq               = OIS::KeyCode::KC_SYSRQ,
 };

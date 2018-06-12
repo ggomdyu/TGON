@@ -5,36 +5,35 @@
  */
 
 #pragma once
-#include "WindowsMouseType.h"
+#include <memory>
+
+#include "Core/Platform/Config.h"
+
+#include "WindowsMouseFwd.h"
 
 namespace tgon
 {
 
-class WindowsMouse :
-    public GenericMouse
+class TGON_API MouseImpl final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsMouse(OIS::Mouse* mouseDevice) noexcept;
-
-/* @section Public destructor */
-public:
-    virtual ~WindowsMouse() override = default;
+    explicit MouseImpl(InputManagerImpl* inputManagerImpl) noexcept;
 
 /* @section Public method */
 public:
-    virtual void Update() override;
-    virtual void GetPosition(int32_t* x, int32_t* y) const override;
-    virtual bool IsMouseDown(MouseCode mouseCode) const override;
-    virtual bool IsMouseHold(MouseCode mouseCode) const override;
-    virtual bool IsMouseUp(MouseCode mouseCode) const override;
+    void Update();
+    static void GetPosition(int32_t* x, int32_t* y);
+    bool IsMouseDown(MouseCode mouseCode) const;
+    bool IsMouseHold(MouseCode mouseCode) const;
+    bool IsMouseUp(MouseCode mouseCode) const;
+    const OIS::Mouse* GetMousedDevice() const;
+    OIS::Mouse* GetMouseDevice();
 
 /* @section Private variable */
 private:
     OIS::Mouse* m_mouseDevice;
-    OIS::MouseState m_prevMouseState;
+    std::shared_ptr<OIS::MouseState> m_prevMouseState;
 };
-
-using Mouse = WindowsMouse;
 
 } /* namespace tgon */

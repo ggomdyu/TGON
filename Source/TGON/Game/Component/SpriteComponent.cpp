@@ -20,29 +20,14 @@ SpriteComponent::SpriteComponent(Sprite&& sprite) :
 {
 }
 
-void SpriteComponent::SetSprite(const std::string& filePath)
-{
-    m_sprite.se //filePath;
-}
-
-void SpriteComponent::SetSprite(const Sprite& imagePath)
-{
-    
-}
-
-void SpriteComponent::SetSprite(Sprite&& imagePath)
-{
-    
-}
-
 const Sprite& SpriteComponent::GetSprite() const noexcept
 {
-    
+    return m_sprite;
 }
 
 Sprite& SpriteComponent::GetSprite() noexcept
 {
-    
+    return m_sprite;
 }
 
 } /* namespace tgon */

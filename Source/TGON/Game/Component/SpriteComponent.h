@@ -33,9 +33,6 @@ public:
 public:
     virtual void Update() override {}
     
-    void SetSprite(const std::string& filePath);
-    void SetSprite(const Sprite& imagePath);
-    void SetSprite(Sprite&& imagePath);
     const Sprite& GetSprite() const noexcept;
     Sprite& GetSprite() noexcept;
     

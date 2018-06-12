@@ -17,9 +17,8 @@ Sprite::Sprite() :
 }
 
 Sprite::Sprite(const std::string& filePath) :
-    m_quad(MakeQuad(std::make_shared<TextureMaterial>()))
+    m_quad(MakeQuad(std::make_shared<TextureMaterial>(std::make_shared<Texture>(filePath))))
 {
-    this->SetTexture(std::make_shared<Texture>(filePath));
 }
 
 Sprite::Sprite(const std::shared_ptr<TextureMaterial>& material) :

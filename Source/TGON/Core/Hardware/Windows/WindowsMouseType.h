@@ -7,12 +7,10 @@
 #pragma once
 #include <OIS.h>
 
-#include "../Generic/GenericMouse.h"
-
 namespace tgon
 {
 
-enum class GenericMouse::MouseCode
+enum class MouseCode
 {
     Mouse0  = OIS::MB_Left,
     Mouse1  = OIS::MB_Right,

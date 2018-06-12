@@ -14,11 +14,15 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\ComponentFwd.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentFwd.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObjectFwd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.cpp" />
   </ItemGroup>
 </Project>

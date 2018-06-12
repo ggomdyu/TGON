@@ -60,14 +60,21 @@ const Color4f& ColorMaterial::GetColor() const noexcept
 }
 
 TextureMaterial::TextureMaterial() :
-    Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
-    m_blendColor(1.0f, 1.0f, 1.0f, 1.0f)
+    TextureMaterial(nullptr)
 {
 }
 
-TextureMaterial::TextureMaterial(const std::shared_ptr<Shader>& shader) :
-    Material(shader),
-    m_blendColor(1.0f, 1.0f, 1.0f, 1.0f)
+TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
+    Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
+    m_texture(texture),
+    m_blendColor(blendColor)
+{
+}
+
+TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture) :
+    Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
+    m_texture(texture),
+    m_blendColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
 {
 }
 
@@ -150,23 +157,23 @@ const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const
     return m_maskTexture;
 }
 
-GrayscaleTextureMaterial::GrayscaleTextureMaterial() :
-    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_grayScaleTextureFrag))
-{
-}
-
-void GrayscaleTextureMaterial::Use()
-{
-    SuperType::Use();
-}
-
-void GrayscaleTextureMaterial::Unuse()
-{
-}
-
-bool GrayscaleTextureMaterial::CanBatch(const Material & rhs) const
-{
-    return false;
-}
+//GrayscaleTextureMaterial::GrayscaleTextureMaterial() :
+//    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_grayScaleTextureFrag))
+//{
+//}
+//
+//void GrayscaleTextureMaterial::Use()
+//{
+//    SuperType::Use();
+//}
+//
+//void GrayscaleTextureMaterial::Unuse()
+//{
+//}
+//
+//bool GrayscaleTextureMaterial::CanBatch(const Material & rhs) const
+//{
+//    return false;
+//}
 
 } /* namespace tgon */

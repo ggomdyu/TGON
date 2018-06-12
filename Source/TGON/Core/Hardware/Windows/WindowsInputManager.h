@@ -5,34 +5,32 @@
  */
 
 #pragma once
-#include <OIS.h>
+#include "Core/Platform/Config.h"
 
-#include "Core/Platform/Window.h"
-#include "Core/Hardware/Generic/GenericInputManager.h"
+#include "WindowsInputManagerFwd.h"
 
 namespace tgon
 {
 
-class WindowsInputManager :
-    public GenericInputManager
+class TGON_API InputManagerImpl final
 {
-public:
-    TGON_RUNTIME_OBJECT(WindowsInputManager);
-
 /* @section Public constructor */
 public:
-    explicit WindowsInputManager(const Window& window);
+    explicit InputManagerImpl(const Window& window);
     
 /* @section Public destructor */
 public:
-    virtual ~WindowsInputManager() override;
+    ~InputManagerImpl();
 
 /* @section Public method */
 public:
-    virtual void Update() override;
+    void Update();
+    OIS::Mouse* CreateMouse();
+    OIS::Keyboard* CreateKeyboard();
+    OIS::JoyStick* CreateGamepad();
 
 /* @section Private method */
-public:
+private:
     OIS::ParamList QueryParamList(const Window& window) const;
     
 /* @section Protected variable */
