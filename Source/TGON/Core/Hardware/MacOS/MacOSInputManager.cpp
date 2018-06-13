@@ -1,34 +1,37 @@
 #include "PrecompiledHeader.h"
 
-#include "../InputManager.h"
+#include <gainput/gainput.h>
+
+#include "MacOSInputManager.h"
 
 namespace tgon
 {
 
-MacOSInputManager::MacOSInputManager(const Window& window)
+InputManagerImpl::InputManagerImpl(const Window& window) :
+    m_inputManager(std::make_unique<gainput::InputManager>())
 {
 }
+    
+InputManagerImpl::~InputManagerImpl() = default;
 
-void MacOSInputManager::Update()
+void InputManagerImpl::Update()
 {
-    m_inputManager.Update();
+    m_inputManager->Update();
+}
+    
+gainput::InputDeviceMouse* InputManagerImpl::CreateMouseDevice()
+{
+    return m_inputManager->CreateAndGetDevice<gainput::InputDeviceMouse>();
 }
 
-std::unique_ptr<Keyboard> InputManager::CreateKeyboard()
+gainput::InputDeviceKeyboard* InputManagerImpl::CreateKeyboardDevice()
 {
-//    m_inputManager.CreateAndGetDevice<gainput::InputDeviceKeyboard>()
-    return std::make_unique<Keyboard>(this);
+    return m_inputManager->CreateAndGetDevice<gainput::InputDeviceKeyboard>();
 }
 
-std::unique_ptr<Mouse> InputManager::CreateMouse()
+gainput::InputDevicePad* InputManagerImpl::CreateGamepadDevice()
 {
-    return std::make_unique<Mouse>(m_inputManager.CreateAndGetDevice<gainput::InputDeviceMouse>());
+    return m_inputManager->CreateAndGetDevice<gainput::InputDevicePad>();
 }
-
-std::unique_ptr<Gamepad> InputManager::CreateGamepad()
-{
-    return std::make_unique<Gamepad>(m_inputManager.CreateAndGetDevice<gainput::InputDevicePad>());
-}
-
 
 } /* namespace tgon */

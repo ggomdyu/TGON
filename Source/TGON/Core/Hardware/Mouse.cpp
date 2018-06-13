@@ -15,9 +15,11 @@ namespace tgon
 {
     
 Mouse::Mouse(InputManager* inputManager) :
-    m_impl(std::make_shared<MouseImpl>(inputManager->GetImpl()))
+    m_impl(std::make_unique<MouseImpl>(inputManager->GetImpl()))
 {
 }
+    
+Mouse::~Mouse() = default;
     
 void Mouse::Update()
 {

@@ -18,6 +18,10 @@ class TGON_API Keyboard final
 public:
     explicit Keyboard(InputManager* inputManager);
     
+/* @section Public destructor */
+public:
+    ~Keyboard();
+    
 /* @section Public method */
 public:
     void Update();
@@ -29,7 +33,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::shared_ptr<KeyboardImpl> m_impl;
+    std::unique_ptr<KeyboardImpl> m_impl;
 };
     
 } /* namespace tgon */

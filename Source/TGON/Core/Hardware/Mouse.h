@@ -18,6 +18,10 @@ class TGON_API Mouse final
 public:
     explicit Mouse(InputManager* inputManager);
     
+/* @section Public destructor */
+public:
+    ~Mouse();
+    
 /* @section Public method */
 public:
     void Update();
@@ -29,7 +33,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::shared_ptr<MouseImpl> m_impl;
+    std::unique_ptr<MouseImpl> m_impl;
 };
     
 } /* namespace tgon */

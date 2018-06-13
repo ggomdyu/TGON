@@ -25,9 +25,9 @@ public:
 /* @section Public method */
 public:
     void Update();
-    OIS::Mouse* CreateMouse();
-    OIS::Keyboard* CreateKeyboard();
-    OIS::JoyStick* CreateGamepad();
+    OIS::Mouse* CreateMouseDevice();
+    OIS::Keyboard* CreateKeyboardDevice();
+    OIS::JoyStick* CreateGamepadDevice();
 
 /* @section Private method */
 private:

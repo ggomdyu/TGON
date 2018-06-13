@@ -26,6 +26,10 @@ public:
     Window(const WindowStyle& windowStyle);
     Window(Window&& rhs) noexcept;
 
+/* @section Public constructor */
+public:
+    ~Window();
+    
 /* @section Public method */
 public:
     void Show();
@@ -67,7 +71,7 @@ public:
     Delegate<void()> OnWindowLoseFocus;
 
 public:
-    std::shared_ptr<WindowImpl> m_impl;
+    std::unique_ptr<WindowImpl> m_impl;
 };
 
 } /* namespace tgon */

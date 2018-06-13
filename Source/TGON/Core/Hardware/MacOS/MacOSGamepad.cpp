@@ -1,42 +1,51 @@
 #include "PrecompiledHeader.h"
 
-#import <AppKit/AppKit.h>
-
-#include "Core/Utility/Algorithm.h"
+#include <gainput/gainput.h>
 
 #include "MacOSGamepad.h"
+#include "MacOSGamepadType.h"
+#include "MacOSInputManager.h"
 
 namespace tgon
 {
 
-MacOSGamepad::MacOSGamepad(gainput::InputDevicePad* gamepadDevice) noexcept :
-    m_gamepadDevice(gamepadDevice)
-{
-    assert(gamepadDevice != nullptr && "gamepadDevice can't be nullptr.");
-}
-    
-void MacOSGamepad::Update()
+GamepadImpl::GamepadImpl(InputManagerImpl* inputManagerImpl) :
+    m_gamepadDevice(inputManagerImpl->CreateGamepadDevice())
 {
 }
     
-void MacOSGamepad::Vibrate(float leftMotor, float rightMotor)
+void GamepadImpl::Update()
+{
+}
+    
+void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
 {
     m_gamepadDevice->Vibrate(leftMotor, rightMotor);
 }
     
-bool MacOSGamepad::IsButtonDown(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
 {
     return false;
 }
     
-bool MacOSGamepad::IsButtonHold(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
 {
     return false;
 }
     
-bool MacOSGamepad::IsButtonUp(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
 {
     return false;
+}
+    
+const gainput::InputDevicePad* GamepadImpl::GetGamepadDevice() const noexcept
+{
+    return m_gamepadDevice;
+}
+
+gainput::InputDevicePad* GamepadImpl::GetGamepadDevice() noexcept
+{
+    return m_gamepadDevice;
 }
 
 } /* namespace tgon */

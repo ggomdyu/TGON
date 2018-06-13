@@ -1,8 +1,5 @@
 #import "PrecompiledHeader.h"
 
-#import <memory>
-
-#import "Core/Object/Engine.h"
 #import "Core/Platform/Application.h"
 
 #import "MacOSAppDelegate.h"
@@ -17,6 +14,8 @@ std::shared_ptr<tgon::Application> g_application;
 namespace tgon
 {
     
+extern Engine* MakeEngine();
+
 const std::shared_ptr<Application>& Application::GetInstance()
 {
     return g_application;
@@ -27,7 +26,7 @@ const std::shared_ptr<Application>& Application::GetInstance()
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    g_application = std::make_shared<tgon::Application>();
+    g_application = std::make_shared<tgon::Application>(tgon::MakeEngine());
     g_application->OnDidLaunch();
 }
 

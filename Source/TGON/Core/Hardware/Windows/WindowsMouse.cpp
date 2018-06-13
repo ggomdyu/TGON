@@ -11,7 +11,7 @@ namespace tgon
 {
 
 MouseImpl::MouseImpl(InputManagerImpl* inputManagerImpl) noexcept :
-    m_mouseDevice(inputManagerImpl->CreateMouse()),
+    m_mouseDevice(inputManagerImpl->CreateMouseDevice()),
     m_prevMouseState(std::make_shared<OIS::MouseState>())
 {
 }

@@ -29,7 +29,7 @@
 #include "Core/Object/Module/TaskModule.h"
 #include "Core/Object/Module/InputModule.h"
 #include "Core/Object/IRuntimeObjectUtility.h"
-#include "Core/Object/Engine.h"
+#include "Core/Object/Engine/Engine.h"
 #include "Core/File/Path.h"
 #include "Core/Random/Random.h"
 #include "Core/String/StringViewHash.h"
@@ -65,3 +65,4 @@
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
 #include "Game/Component/SpriteComponent.h"
+#include "Graphics/Render/Camera.h"

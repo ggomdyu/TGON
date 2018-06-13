@@ -1,16 +1,20 @@
 #include "PrecompiledHeader.h"
 
+#include <gainput/gainput.h>
+
 #include "Core/Utility/Algorithm.h"
 #include "Core/Hardware/Keyboard.h"
 
 #include "MacOSKeyboard.h"
+#include "MacOSKeyboardType.h"
+#include "MacOSInputManager.h"
 
 namespace tgon
 {
     
-KeyboardImpl::KeyboardImpl(InputManager* inputManager)
+KeyboardImpl::KeyboardImpl(InputManagerImpl* inputManagerImpl) :
+    m_keyboardDevice(inputManagerImpl->CreateKeyboardDevice())
 {
-//    assert(keyboardDevice != nullptr && "keyboardDevice can't be nullptr.");
 }
     
 void KeyboardImpl::Update()
@@ -59,12 +63,12 @@ bool KeyboardImpl::IsKeyUp(KeyCode keyCode) const
     }
 }
     
-gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice()
+gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() noexcept
 {
     return m_keyboardDevice;
 }
 
-const gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() const
+const gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() const noexcept
 {
     return m_keyboardDevice;
 }

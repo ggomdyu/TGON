@@ -10,10 +10,11 @@
 
 #include "Core/Object/Object.h"
 #include "Core/Object/Delegate.h"
-#include "Core/Object/Engine.h"
 #include "Core/Platform/Window.h"
 
 #include "ApplicationFwd.h"
+
+#include "MacOS/MacOSApplication.h"
 
 namespace tgon
 {
@@ -27,8 +28,7 @@ public:
     
 /* @section Public constructor */
 public:
-    Application();
-    explicit Application(const WindowStyle& windowStyle);
+    explicit Application(Engine* engine);
     
 /* @section Public destructor */
 public:
@@ -82,20 +82,16 @@ public:
     /* @brief                       Gets the root window. */
     const Window& GetRootWindow() const noexcept;
     
-    /* @brief                       Sets the engine. */
-    void SetEngine(const std::shared_ptr<Engine>& engine) noexcept;
-    
     /* @brief                       Gets the engine. */
-    std::weak_ptr<Engine> GetEngine() noexcept;
+    Engine* GetEngine() noexcept;
 
     /* @brief                       Gets the engine. */
-    std::weak_ptr<const Engine> GetEngine() const noexcept;
+    const Engine* GetEngine() const noexcept;
 
 /* @section Public event handler */
 public:
     virtual void OnDidLaunch();
     virtual void OnWillTerminate();
-    
     Delegate<void(Window&)> OnWillCloseWindow;
     Delegate<void(Window&)> OnDidCloseWindow;
  
@@ -106,7 +102,7 @@ private:
     
 /* @section Protected variable */
 protected:
-    std::shared_ptr<ApplicationImpl> m_impl;
+    std::unique_ptr<ApplicationImpl> m_impl;
     std::shared_ptr<Engine> m_engine;
     
     Window m_rootWindow;

@@ -9,7 +9,7 @@ namespace tgon
 {
 
 GamepadImpl::GamepadImpl(InputManagerImpl* inputManager) :
-    m_gamepadDevice(inputManager->CreateGamepad()),
+    m_gamepadDevice(inputManager->CreateGamepadDevice()),
     m_prevGamepadState(std::make_shared<OIS::JoyStickState>())
 {
 }

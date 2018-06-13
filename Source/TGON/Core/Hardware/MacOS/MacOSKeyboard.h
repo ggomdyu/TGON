@@ -7,7 +7,6 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "MacOSKeyboardType.h"
 #include "MacOSKeyboardFwd.h"
 
 namespace tgon
@@ -17,7 +16,7 @@ class TGON_API KeyboardImpl final
 {
 /* @section Public constructor */
 public:
-    explicit KeyboardImpl(InputManager* inputManager);
+    explicit KeyboardImpl(InputManagerImpl* inputManagerImpl);
     
 /* @section Public method */
 public:
@@ -25,8 +24,8 @@ public:
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    const gainput::InputDeviceKeyboard* GetKeyboardDevice() const;
-    gainput::InputDeviceKeyboard* GetKeyboardDevice();
+    const gainput::InputDeviceKeyboard* GetKeyboardDevice() const noexcept;
+    gainput::InputDeviceKeyboard* GetKeyboardDevice() noexcept;
     
 /* @section Private variable */
 private:

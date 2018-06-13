@@ -15,9 +15,11 @@ namespace tgon
 {
     
 Keyboard::Keyboard(InputManager* inputManager) :
-    m_impl(std::make_shared<KeyboardImpl>(inputManager->GetImpl()))
+    m_impl(std::make_unique<KeyboardImpl>(inputManager->GetImpl()))
 {
 }
+    
+Keyboard::~Keyboard() = default;
     
 void Keyboard::Update()
 {

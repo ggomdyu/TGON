@@ -7,12 +7,10 @@
 #pragma once
 #include <gainput/gainput.h>
 
-#include "../Generic/GenericMouse.h"
-
 namespace tgon
 {
 
-enum class GenericMouse::MouseCode
+enum class MouseCode
 {
     Mouse0      = gainput::MouseButton0,
     Mouse1      = gainput::MouseButton1,

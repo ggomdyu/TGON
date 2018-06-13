@@ -8,18 +8,18 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Module/IModule.h"
+#include "../Module/IModule.h"
+#include "../Object.h"
 
 #include "EngineFwd.h"
-#include "Object.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
     {\
-    std::shared_ptr<Engine> MakeEngine()\
+    std::unique_ptr<Engine> MakeEngine()\
     {\
         static_assert(std::is_base_of<Engine, className>::value, "TGON_DECLARE_ENGINE accepts only class that inherited from Engine.");\
-        return std::make_shared<className>();\
+        return std::make_unique<className>();\
     }\
     } /* namespace tgon */
 
@@ -32,7 +32,7 @@ class TGON_API Engine :
 {
 public:
     TGON_RUNTIME_OBJECT(Engine);
-    
+
 /* @section Public method */
 public:
     virtual void Update();

@@ -22,8 +22,7 @@ public:
 public:
     SpriteComponent() = default;
     SpriteComponent(const std::string& filePath);
-    SpriteComponent(const Sprite& imagePath);
-    SpriteComponent(Sprite&& imagePath);
+    SpriteComponent(const std::shared_ptr<Sprite>& sprite);
 
 /* @section Public destructor */
 public:
@@ -31,14 +30,15 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Update() override {}
-    
-    const Sprite& GetSprite() const noexcept;
-    Sprite& GetSprite() noexcept;
+    virtual void Update() override;
+    void Draw(Graphics& graphics);
+    void Draw(SpriteBatch& spriteBatch);
+    const std::shared_ptr<Sprite>& GetSprite() const noexcept;
+    std::shared_ptr<Sprite>& GetSprite() noexcept;
     
 /* @section Private variable */
 private:
-    Sprite m_sprite;
+    std::shared_ptr<Sprite> m_sprite;
 };
 
 } /* namespace tgon */

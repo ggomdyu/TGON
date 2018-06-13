@@ -7,8 +7,6 @@
 #pragma once
 #include <gainput/gainput.h>
 
-#include "../Generic/GenericGamepad.h"
-
 namespace tgon
 {
 

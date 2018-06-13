@@ -8,7 +8,7 @@ namespace tgon
 {
 
 KeyboardImpl::KeyboardImpl(InputManagerImpl* inputManagerImpl) :
-    m_keyboardDevice(inputManagerImpl->CreateKeyboard()),
+    m_keyboardDevice(inputManagerImpl->CreateKeyboardDevice()),
     m_prevKeyStates{}
 {
 }

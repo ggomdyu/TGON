@@ -5,36 +5,35 @@
  */
 
 #pragma once
-#include "MacOSMouseType.h"
+#include <cstdint>
+
+#include "Core/Platform/Config.h"
+
+#include "MacOSMouseFwd.h"
 
 namespace tgon
 {
-
-class MacOSMouse :
-    public GenericMouse
+    
+class TGON_API MouseImpl final
 {
 /* @section Public constructor */
 public:
-    explicit MacOSMouse(gainput::InputDeviceMouse* mouseDevice) noexcept;
+    explicit MouseImpl(InputManagerImpl* inputManagerImpl);
     
-/* @section Public destructor */
-public:
-    virtual ~MacOSMouse() override = default;
-
 /* @section Public method */
 public:
-    virtual void Update() final override;
-    virtual void GetPosition(int32_t* x, int32_t* y) const final override;
-//    virtual float GetFloat(MouseCode mouseCode) const final override;
-    virtual bool IsMouseDown(MouseCode mouseCode) const final override;
-    virtual bool IsMouseHold(MouseCode mouseCode) const final override;
-    virtual bool IsMouseUp(MouseCode mouseCode) const final override;
-
-/* @section Private variable */
+    void Update();
+    void GetPosition(int32_t* x, int32_t* y) const;
+    //float GetFloat(MouseCode mouseCode) const;
+    bool IsMouseDown(MouseCode mouseCode) const;
+    bool IsMouseHold(MouseCode mouseCode) const;
+    bool IsMouseUp(MouseCode mouseCode) const;
+    const gainput::InputDeviceMouse* GetMouseDevice() const noexcept;
+    gainput::InputDeviceMouse* GetMouseDevice() noexcept;
+    
+    /* @section Private variable */
 private:
     gainput::InputDeviceMouse* m_mouseDevice;
 };
-    
-using Mouse = MacOSMouse;
 
 } /* namespace tgon */

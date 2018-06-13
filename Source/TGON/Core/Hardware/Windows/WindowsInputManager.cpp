@@ -24,17 +24,17 @@ void InputManagerImpl::Update()
 {
 }
 
-OIS::Mouse* InputManagerImpl::CreateMouse()
+OIS::Mouse* InputManagerImpl::CreateMouseDevice()
 {
     return static_cast<OIS::Mouse*>(m_inputManager->createInputObject(OIS::OISMouse, true));
 }
 
-OIS::Keyboard* InputManagerImpl::CreateKeyboard()
+OIS::Keyboard* InputManagerImpl::CreateKeyboardDevice()
 {
     return static_cast<OIS::Keyboard*>(m_inputManager->createInputObject(OIS::OISKeyboard, true));
 }
 
-OIS::JoyStick* InputManagerImpl::CreateGamepad()
+OIS::JoyStick* InputManagerImpl::CreateGamepadDevice()
 {
     return static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true));
 }

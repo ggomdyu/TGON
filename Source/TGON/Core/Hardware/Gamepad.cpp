@@ -15,9 +15,11 @@ namespace tgon
 {
 
 Gamepad::Gamepad(InputManager* inputManager) :
-    m_impl(std::make_shared<GamepadImpl>(inputManager->GetImpl()))
+    m_impl(std::make_unique<GamepadImpl>(inputManager->GetImpl()))
 {
 }
+    
+Gamepad::~Gamepad() = default;
 
 void Gamepad::Update()
 {

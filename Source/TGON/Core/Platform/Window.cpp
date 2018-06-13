@@ -29,10 +29,12 @@ Window::Window(const WindowStyle& windowStyle) :
 }
 
 Window::Window(Window&& rhs) noexcept :
-    m_impl(rhs.m_impl)
+    m_impl(std::move(rhs.m_impl))
 {
     rhs.m_impl = nullptr;
 }
+    
+Window::~Window() = default;
 
 void Window::Show()
 {

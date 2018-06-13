@@ -20,15 +20,20 @@ class TGON_API InputManager final
 public:
     InputManager(const Window& inputTargetWindow);
     
+/* @section Public destructor */
+public:
+    ~InputManager();
+    
 /* @section Public method */
 public:
     void Update();
+    
     const InputManagerImpl* GetImpl() const noexcept;
     InputManagerImpl* GetImpl() noexcept;
     
 /* @section Private variable */
 private:
-    std::shared_ptr<InputManagerImpl> m_impl;
+    std::unique_ptr<InputManagerImpl> m_impl;
 };
 
 } /* namespace tgon */

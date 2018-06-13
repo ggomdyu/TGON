@@ -5,35 +5,34 @@
  */
 
 #pragma once
-#include "MacOSGamepadType.h"
+#include <cstdint>
+
+#include "Core/Platform/Config.h"
+
+#include "MacOSGamepadFwd.h"
 
 namespace tgon
 {
 
-class MacOSGamepad :
-    public GenericGamepad
+class TGON_API GamepadImpl final
 {
 /* @section Public constructor */
 public:
-    explicit MacOSGamepad(gainput::InputDevicePad* gamepadDevice) noexcept;
+    explicit GamepadImpl(InputManagerImpl* inputManagerImpl);
     
-/* @section Public destructor */
-public:
-    virtual ~MacOSGamepad() override = default;
-
 /* @section Public method */
 public:
-    virtual void Update() final override;
-    virtual void Vibrate(float leftMotor, float rightMotor) final override;
-    virtual bool IsButtonDown(int32_t buttonNumber) const override;
-    virtual bool IsButtonHold(int32_t buttonNumber) const override;
-    virtual bool IsButtonUp(int32_t buttonNumber) const override;
-
+    void Update();
+    void Vibrate(float leftMotor, float rightMotor);
+    bool IsButtonDown(int32_t buttonNumber) const;
+    bool IsButtonHold(int32_t buttonNumber) const;
+    bool IsButtonUp(int32_t buttonNumber) const;
+    const gainput::InputDevicePad* GetGamepadDevice() const noexcept;
+    gainput::InputDevicePad* GetGamepadDevice() noexcept;
+    
 /* @section Private variable */
 private:
     gainput::InputDevicePad* m_gamepadDevice;
 };
-    
-using Gamepad = MacOSGamepad;
 
 } /* namespace tgon */

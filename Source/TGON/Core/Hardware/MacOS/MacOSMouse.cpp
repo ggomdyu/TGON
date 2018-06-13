@@ -1,25 +1,27 @@
-#include "PrecompiledHeader.h"
+#import "PrecompiledHeader.h"
 
+#import <gainput/gainput.h>
 #import <AppKit/AppKit.h>
 
-#include "Core/Utility/Algorithm.h"
+#import "Core/Utility/Algorithm.h"
 
-#include "MacOSMouse.h"
+#import "MacOSMouse.h"
+#import "MacOSMouseType.h"
+#import "MacOSInputManager.h"
 
 namespace tgon
 {
 
-MacOSMouse::MacOSMouse(gainput::InputDeviceMouse* mouseDevice) noexcept :
-    m_mouseDevice(mouseDevice)
-{
-    assert(mouseDevice != nullptr && "mouseDevice can't be nullptr.");
-}
-    
-void MacOSMouse::Update()
+MouseImpl::MouseImpl(InputManagerImpl* inputManagerImpl) :
+    m_mouseDevice(inputManagerImpl->CreateMouseDevice())
 {
 }
     
-void MacOSMouse::GetPosition(int32_t* x, int32_t* y) const
+void MouseImpl::Update()
+{
+}
+    
+void MouseImpl::GetPosition(int32_t* x, int32_t* y) const
 {
     NSPoint pt = [NSEvent mouseLocation];
     pt.y = [NSScreen mainScreen].frame.size.height - pt.y;
@@ -28,13 +30,13 @@ void MacOSMouse::GetPosition(int32_t* x, int32_t* y) const
     *y = static_cast<int32_t>(pt.y);
 }
 
-//float MacOSMouse::GetFloat(MouseCode mouseCode) const
+//float MouseImpl::GetFloat(MouseCode mouseCode) const
 //{
 //    auto castedMouseCode = UnderlyingCast(mouseCode);
 //    return m_mouseDevice->GetFloat(castedMouseCode);
 //}
     
-bool MacOSMouse::IsMouseDown(MouseCode mouseCode) const
+bool MouseImpl::IsMouseDown(MouseCode mouseCode) const
 {
     auto castedMouseCode = UnderlyingCast(mouseCode);
     if (m_mouseDevice->GetBoolPrevious(castedMouseCode) == false &&
@@ -48,7 +50,7 @@ bool MacOSMouse::IsMouseDown(MouseCode mouseCode) const
     }
 }
     
-bool MacOSMouse::IsMouseHold(MouseCode mouseCode) const
+bool MouseImpl::IsMouseHold(MouseCode mouseCode) const
 {
     auto castedMouseCode = UnderlyingCast(mouseCode);
     if (m_mouseDevice->GetBoolPrevious(castedMouseCode) &&
@@ -62,7 +64,7 @@ bool MacOSMouse::IsMouseHold(MouseCode mouseCode) const
     }
 }
 
-bool MacOSMouse::IsMouseUp(MouseCode mouseCode) const
+bool MouseImpl::IsMouseUp(MouseCode mouseCode) const
 {
     auto castedMouseCode = UnderlyingCast(mouseCode);
     if (m_mouseDevice->GetBoolPrevious(castedMouseCode) &&
@@ -74,6 +76,16 @@ bool MacOSMouse::IsMouseUp(MouseCode mouseCode) const
     {
         return false;
     }
+}
+    
+const gainput::InputDeviceMouse* MouseImpl::GetMouseDevice() const noexcept
+{
+    return m_mouseDevice;
+}
+
+gainput::InputDeviceMouse* MouseImpl::GetMouseDevice() noexcept
+{
+    return m_mouseDevice;
 }
 
 } /* namespace tgon */

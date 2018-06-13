@@ -5,35 +5,34 @@
  */
 
 #pragma once
-#include <gainput/gainput.h>
+#include "Core/Platform/Config.h"
 
-#include "Core/Platform/Window.h"
-#include "Core/Hardware/Generic/GenericInputManager.h"
+#include "MacOSInputManagerFwd.h"
 
 namespace tgon
 {
-    
-class MacOSInputManager :
-    public GenericInputManager
-{
-public:
-    TGON_RUNTIME_OBJECT(MacOSInputManager);
 
+class TGON_API InputManagerImpl final
+{
 /* @section Public constructor */
 public:
-    explicit MacOSInputManager(const Window& window);
-    
+    explicit InputManagerImpl(const Window& window);
+   
 /* @section Public destructor */
 public:
-    virtual ~MacOSInputManager() override = default;
+    ~InputManagerImpl();
     
 /* @section Public method */
 public:
-    virtual void Update() override;
+    void Update();
     
-/* @section Protected variable */
-protected:
-    gainput::InputManager m_inputManager;
+    gainput::InputDeviceMouse* CreateMouseDevice();
+    gainput::InputDeviceKeyboard* CreateKeyboardDevice();
+    gainput::InputDevicePad* CreateGamepadDevice();
+
+/* @section Private variable */
+private:
+    std::unique_ptr<gainput::InputManager> m_inputManager;
 };
 
 } /* namespace tgon */

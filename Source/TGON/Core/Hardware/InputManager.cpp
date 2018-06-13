@@ -14,9 +14,11 @@ namespace tgon
 {
 
 InputManager::InputManager(const Window& inputTargetWindow) :
-    m_impl(std::make_shared<InputManagerImpl>(inputTargetWindow))
+    m_impl(std::make_unique<InputManagerImpl>(inputTargetWindow))
 {
 }
+    
+InputManager::~InputManager() = default;
 
 void InputManager::Update()
 {

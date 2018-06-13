@@ -9,6 +9,14 @@
 namespace tgon
 {
 
-class InputManager;
+enum class KeyCode;
+class InputManagerImpl;
     
 } /* namespace tgon */
+
+namespace gainput
+{
+
+class InputDeviceKeyboard;
+
+} /* namespace gainput */

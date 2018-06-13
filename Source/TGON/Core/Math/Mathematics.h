@@ -207,12 +207,12 @@ constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, co
     return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};
 }
 
-double Sqrt(double number)
+inline double Sqrt(double number)
 {
     return std::sqrt(number);
 }
 
-float Sqrt(float number)
+inline float Sqrt(float number)
 {
     return std::sqrtf(number);
 }

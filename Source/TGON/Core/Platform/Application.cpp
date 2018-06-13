@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Object/Engine.h"
+#include "Core/Object/Engine/Engine.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -18,23 +18,14 @@
 
 namespace tgon
 {
-    
-extern std::shared_ptr<Engine> MakeEngine();
 
-Application::Application() :
-    m_impl(std::make_shared<ApplicationImpl>()),
-    m_engine(MakeEngine()),
-    m_rootWindow(m_engine->GetRootWindowStyle())
+Application::Application(Engine* engine) :
+    m_impl(new ApplicationImpl),
+    m_rootWindow(engine->GetRootWindowStyle()),
+    m_engine(engine)
 {
 }
-    
-Application::Application(const WindowStyle& windowStyle) :
-    m_impl(std::make_shared<ApplicationImpl>()),
-    m_engine(MakeEngine()),
-    m_rootWindow(windowStyle)
-{
-}
-    
+
 Application::~Application() = default;
 
 void Application::MessageLoop()
@@ -85,19 +76,14 @@ const Window& Application::GetRootWindow() const noexcept
     return m_rootWindow;
 }
 
-void Application::SetEngine(const std::shared_ptr<Engine>& engine) noexcept
+Engine* Application::GetEngine() noexcept
 {
-    m_engine = engine;
+    return m_engine.get();
 }
 
-std::weak_ptr<Engine> Application::GetEngine() noexcept
+const Engine* Application::GetEngine() const noexcept
 {
-    return m_engine;
-}
-
-std::weak_ptr<const Engine> Application::GetEngine() const noexcept
-{
-    return m_engine;
+    return m_engine.get();
 }
 
 void Application::OnDidLaunch()

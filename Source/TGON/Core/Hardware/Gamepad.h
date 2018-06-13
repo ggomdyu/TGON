@@ -21,6 +21,10 @@ class TGON_API Gamepad final
 public:
     explicit Gamepad(InputManager* inputManager);
     
+/* @section Public destructor */
+public:
+    ~Gamepad();
+    
 /* @section Public method */
 public:
     void Update();
@@ -33,7 +37,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::shared_ptr<GamepadImpl> m_impl;
+    std::unique_ptr<GamepadImpl> m_impl;
 };
     
 } /* namespace tgon */
