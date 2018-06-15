@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Object/Engine/Engine.h"
+#include "Core/Object/Engine.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -21,8 +21,8 @@ namespace tgon
 
 Application::Application(Engine* engine) :
     m_impl(new ApplicationImpl),
-    m_rootWindow(engine->GetRootWindowStyle()),
-    m_engine(engine)
+    m_engine(engine),
+    m_rootWindow(engine->GetRootWindowStyle())
 {
 }
 
@@ -76,14 +76,9 @@ const Window& Application::GetRootWindow() const noexcept
     return m_rootWindow;
 }
 
-Engine* Application::GetEngine() noexcept
+const std::unique_ptr<Engine>& Application::GetEngine() const noexcept
 {
-    return m_engine.get();
-}
-
-const Engine* Application::GetEngine() const noexcept
-{
-    return m_engine.get();
+    return m_engine;
 }
 
 void Application::OnDidLaunch()

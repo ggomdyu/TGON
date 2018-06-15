@@ -47,5 +47,4 @@ inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
     }
 }
 
-
 } /* namespace tgon */

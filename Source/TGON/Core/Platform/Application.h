@@ -10,11 +10,10 @@
 
 #include "Core/Object/Object.h"
 #include "Core/Object/Delegate.h"
+#include "Core/Object/Engine.h"
 #include "Core/Platform/Window.h"
 
 #include "ApplicationFwd.h"
-
-#include "MacOS/MacOSApplication.h"
 
 namespace tgon
 {
@@ -36,18 +35,18 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                       Returns the global instance of this class. */
+    /* @brief   Returns the global instance of this class. */
     static const std::shared_ptr<Application>& GetInstance();
 
-    /* @brief                       Loops the message queue and handle the message. */
+    /* @brief   Loops the message queue and handle the message. */
     void MessageLoop();
     
-    /* @brief                       Terminates the program forcibly. */
+    /* @brief   Terminates the program forcibly. */
     void Terminate();
     
     /**
-     * @brief                       Shows a message box in front of screen.
-     * @param [in] message          The message what you want to show in description area.
+     * @brief               Shows a message box in front of screen.
+     * @param [in] message  The message what you want to show in description area.
      */
     void ShowMessageBox(const char* message) const;
     
@@ -59,9 +58,9 @@ public:
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
-     * @brief                       Shows a message box in front of screen.
-     * @param [in] title            The message what you want to show in title area.
-     * @param [in] message          The message what you want to show in description area.
+     * @brief               Shows a message box in front of screen.
+     * @param [in] title    The message what you want to show in title area.
+     * @param [in] message  The message what you want to show in description area.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
@@ -73,20 +72,17 @@ public:
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
-    /* @brief                       Sets the root window. */
+    /* @brief   Sets the root window. */
     void SetRootWindow(Window&& window) noexcept;
     
-    /* @brief                       Gets the root window. */
+    /* @brief   Gets the root window. */
     Window& GetRootWindow() noexcept;
     
-    /* @brief                       Gets the root window. */
+    /* @brief   Gets the root window. */
     const Window& GetRootWindow() const noexcept;
     
-    /* @brief                       Gets the engine. */
-    Engine* GetEngine() noexcept;
-
-    /* @brief                       Gets the engine. */
-    const Engine* GetEngine() const noexcept;
+    /* @brief   Gets the engine. */
+    const std::unique_ptr<Engine>& GetEngine() const noexcept;
 
 /* @section Public event handler */
 public:
@@ -103,7 +99,7 @@ private:
 /* @section Protected variable */
 protected:
     std::unique_ptr<ApplicationImpl> m_impl;
-    std::shared_ptr<Engine> m_engine;
+    std::unique_ptr<Engine> m_engine;
     
     Window m_rootWindow;
 };

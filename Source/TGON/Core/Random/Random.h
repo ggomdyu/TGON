@@ -18,7 +18,7 @@ namespace tgon
 
 /* @brief   Returns random value between min to max */
 template <typename _ValueType,
-    typename std::enable_if_t<std::is_floating_point<_ValueType>::value>* = nullptr>
+          std::enable_if_t<std::is_floating_point<_ValueType>::value>* = nullptr>
 inline _ValueType RandRange(_ValueType min, _ValueType max)
 {
     return min + (static_cast<_ValueType>(WELL1024a()) * (max - min));
@@ -26,7 +26,7 @@ inline _ValueType RandRange(_ValueType min, _ValueType max)
 
 /* @brief   Returns random value between min to max */
 template <typename _ValueType,
-    typename std::enable_if_t<std::is_integral<_ValueType>::value>* = nullptr>
+          std::enable_if_t<std::is_integral<_ValueType>::value>* = nullptr>
 inline _ValueType RandRange(_ValueType min, _ValueType max)
 {
     using FloatType = typename std::conditional<sizeof(_ValueType) == sizeof(float), float,

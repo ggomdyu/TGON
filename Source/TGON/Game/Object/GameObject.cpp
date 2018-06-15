@@ -32,7 +32,7 @@ const std::string& GameObject::GetString() const noexcept
     return m_name;
 }
 
-void GameObject::AddComponent(std::unique_ptr<Component> component)
+void GameObject::AddComponent(Component* component)
 {
     component->SetOwner(this);
     
@@ -43,7 +43,7 @@ void GameObject::AddComponent(std::unique_ptr<Component> component)
     
     auto iter = std::lower_bound(m_components.begin(), m_components.end(), component->GetRTTI()->GetHashCode(), predicate);
 
-    m_components.insert(iter, std::move(component));
+    m_components.emplace(iter, component);
 }
     
 bool GameObject::RemoveComponent(size_t componentId)

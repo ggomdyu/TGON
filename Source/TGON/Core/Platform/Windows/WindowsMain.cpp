@@ -5,7 +5,8 @@
 #endif
 #include <Windows.h>
 
-#include "../Application.h"
+#include "Core/Object/Engine.h"
+#include "Core/Platform/Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
@@ -15,14 +16,17 @@
 // Use common control v6.0
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-namespace tgon
-{
 namespace
 {
 
-std::shared_ptr<Application> g_application;
+std::shared_ptr<tgon::Application> g_application;
 
-} /* namespace */
+} /* namespace */    
+
+namespace tgon
+{
+
+extern Engine* MakeEngine();
 
 const std::shared_ptr<Application>& Application::GetInstance()
 {
@@ -36,10 +40,8 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 #ifndef NDEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-   
-    using namespace tgon;
 
-    g_application = std::make_shared<Application>();
+    g_application = std::make_shared<tgon::Application>(tgon::MakeEngine());
     g_application->OnDidLaunch();
 
     g_application->MessageLoop();

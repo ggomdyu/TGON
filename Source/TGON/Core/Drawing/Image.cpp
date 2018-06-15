@@ -4,10 +4,10 @@
 
 #include "Image.h"
 #include "ImageUtility.h"
-#include "ImageProcessor/Png/PngImageProcessor.h"
-#include "ImageProcessor/Jpg/JpgImageProcessor.h"
-#include "ImageProcessor/Bmp/BmpImageProcessor.h"
-#include "ImageProcessor/WebP/WebPImageProcessor.h"
+#include "ImageProcessor/PngImageProcessor.h"
+#include "ImageProcessor/JpgImageProcessor.h"
+#include "ImageProcessor/BmpImageProcessor.h"
+#include "ImageProcessor/WebPImageProcessor.h"
 
 namespace tgon
 {

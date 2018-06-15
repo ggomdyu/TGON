@@ -61,21 +61,6 @@
     <Filter Include="Source\Core\Drawing\ImageProcessor">
       <UniqueIdentifier>{7aa049dd-aa38-4fc8-9ccc-9b25d93eb660}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor\Generic">
-      <UniqueIdentifier>{db5932f6-9ced-4c27-8638-f54e7474fd30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor\Bmp">
-      <UniqueIdentifier>{6fadbc9e-53f3-4227-8604-c6d38e39ddde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor\Png">
-      <UniqueIdentifier>{d9679adc-a429-4be9-b85a-73e753631cd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor\Jpg">
-      <UniqueIdentifier>{0495e670-c02c-4989-b69b-1941c06b5b88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor\WebP">
-      <UniqueIdentifier>{c96ee40e-7909-4c21-992b-7848e6002501}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Debug">
       <UniqueIdentifier>{e29f5c84-7736-4cf0-be05-ac7c2c54a897}</UniqueIdentifier>
     </Filter>
@@ -129,9 +114,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp">
       <Filter>Source\Core\Platform</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp">
-      <Filter>Source\Core\Object</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.cpp">
       <Filter>Source\Core\Platform</Filter>
     </ClCompile>
@@ -149,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.cpp">
       <Filter>Source\Core\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp">
+      <Filter>Source\Core\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,21 +308,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
       <Filter>Source\Core\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Bmp\BmpImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor\Bmp</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Jpg\JpgImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor\Jpg</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Png\PngImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor\Png</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\WebP\WebPImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor\WebP</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\Generic\GenericImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedString.h">
       <Filter>Source\Core\String</Filter>
     </ClInclude>
@@ -389,12 +359,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\WindowType.h">
       <Filter>Source\Core\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.h">
-      <Filter>Source\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\EngineFwd.h">
-      <Filter>Source\Core\Object</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\WindowFwd.h">
       <Filter>Source\Core\Platform</Filter>
     </ClInclude>
@@ -421,6 +385,27 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseType.h">
       <Filter>Source\Core\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\BmpImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\JpgImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\PngImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\WebPImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\BaseImageProcessor.h">
+      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.h">
+      <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringHash.h">
+      <Filter>Source\Core\String</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

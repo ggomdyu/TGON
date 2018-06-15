@@ -7,18 +7,18 @@
 #pragma once
 #include <png.h>
 
-#include "../Generic/GenericImageProcessor.h"
+#include "BaseImageProcessor.h"
 
 namespace tgon
 {
 
 template <typename _AllocatorType>
 class BasicPngImageProcessor :
-    public GenericImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>
+    public BaseImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>::GenericImageProcessor;
+    using BaseImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
 
 /* @section Public method */
 public:

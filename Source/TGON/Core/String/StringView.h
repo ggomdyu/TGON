@@ -40,19 +40,16 @@ public:
     
 /* @section Public method */
 public:
-    template <std::size_t _CharArraySize2>
-    int32_t Compare(const _CharType(&str)[_CharArraySize2]) const;
+    template <std::size_t _CharArraySize>
+    void Assign(const _CharType(&str)[_CharArraySize]) noexcept;
+    void Assign(const _CharType* str, std::size_t strLen) noexcept;
     int32_t Compare(const _CharType* str, std::size_t strLen) const;
     int32_t Compare(const BasicStringView& strView) const;
     std::size_t Find(const BasicStringView& rhs) const;
     std::size_t Find(_CharType ch, std::size_t strOffset = 0) const;
-    template <std::size_t _CharArraySize2>
-    std::size_t Find(const _CharType(&str)[_CharArraySize2], std::size_t strOffset = 0) const;
     std::size_t Find(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
     std::size_t RFind(const BasicStringView& rhs) const;
     std::size_t RFind(_CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
-    template <std::size_t _CharArraySize2>
-    std::size_t RFind(const _CharType(&str)[_CharArraySize2], std::size_t strOffset = _StringTraitsType::NPos) const;
     std::size_t RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
     constexpr const _CharType* Data() const noexcept;
     constexpr _CharType& At(std::size_t index);
@@ -75,6 +72,20 @@ private:
 
 using StringView = BasicStringView<char>;
 using WStringView = BasicStringView<wchar_t>;
+
+template <typename _CharType, typename _StringTraitsType>
+template <std::size_t _CharArraySize>
+void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType(&str)[_CharArraySize]) noexcept :
+    m_str(str),
+    m_strLen(_CharArraySize - 1)
+{
+}
+
+template <typename _CharType, typename _StringTraitsType>
+void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen) noexcept
+{
+
+}
 
 template <typename _CharType, typename _StringTraitsType>
 template <std::size_t _CharArraySize>
@@ -107,13 +118,6 @@ template <typename _CharType, typename _StringTraitsType>
 constexpr _CharType& BasicStringView<_CharType, _StringTraitsType>::operator[](std::size_t index)
 {
     return m_str[index];
-}
-
-template <typename _CharType, typename _StringTraitsType>
-template <std::size_t _CharArraySize2>
-inline int32_t BasicStringView<_CharType, _StringTraitsType>::Compare(const _CharType(&str)[_CharArraySize2]) const
-{
-    return _StringTraitsType::Compare(m_str, m_strLen, str, _CharArraySize2 - 1);
 }
 
 template <typename _CharType, typename _StringTraitsType>

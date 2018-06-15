@@ -13,7 +13,7 @@ namespace tgon
 class IComparable
 {
 /* @section Public destructor */
-public
+public:
     virtual ~IComparable() = default;
 
 /* @section Public method */

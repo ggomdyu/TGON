@@ -5,18 +5,18 @@
  */
 
 #pragma once
-#include "../Generic/GenericImageProcessor.h"
+#include "BaseImageProcessor.h"
 
 namespace tgon
 {
 
 template <typename _AllocatorType>
 class BasicBmpImageProcessor :
-    public GenericImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>
+    public BaseImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>::GenericImageProcessor;
+    using BaseImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
 
 /* @section Public method */
 public:

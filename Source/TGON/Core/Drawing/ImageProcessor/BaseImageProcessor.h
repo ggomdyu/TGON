@@ -9,18 +9,18 @@
 #include <cstdint>
 #include <memory>
 
-#include "../../ImageType.h"
+#include "../ImageType.h"
 
 namespace tgon
 {
 
 template <typename _DerivedType, typename _AllocatorType = std::allocator<uint8_t>>
-class GenericImageProcessor
+class BaseImageProcessor
 {
 /* @section Public constructor */
 public:
-    GenericImageProcessor() noexcept;
-    GenericImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes);
+    BaseImageProcessor() noexcept;
+    BaseImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes);
 
 /* @section Public method */
 public:
@@ -46,7 +46,7 @@ protected:
 };
 
 template <typename _DerivedType, typename _AllocatorType>
-inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcessor() noexcept :
+inline BaseImageProcessor<_DerivedType, _AllocatorType>::BaseImageProcessor() noexcept :
     m_width(0),
     m_height(0),
     m_colorDepth(0),
@@ -56,68 +56,68 @@ inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcesso
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline GenericImageProcessor<_DerivedType, _AllocatorType>::GenericImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes) :
-    GenericImageProcessor()
+inline BaseImageProcessor<_DerivedType, _AllocatorType>::BaseImageProcessor(const uint8_t* srcData, std::size_t srcDataBytes) :
+    BaseImageProcessor()
 {
     this->Import(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseImageProcessor<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& GenericImageProcessor<_DerivedType, _AllocatorType>::GetImageData() noexcept
+inline std::vector<uint8_t, _AllocatorType>& BaseImageProcessor<_DerivedType, _AllocatorType>::GetImageData() noexcept
 {
     return m_imageData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& GenericImageProcessor<_DerivedType, _AllocatorType>::GetImageData() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& BaseImageProcessor<_DerivedType, _AllocatorType>::GetImageData() const noexcept
 {
     return m_imageData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::IsValid() const noexcept
+inline bool BaseImageProcessor<_DerivedType, _AllocatorType>::IsValid() const noexcept
 {
     return m_imageData.size() > 0;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericImageProcessor<_DerivedType, _AllocatorType>::GetWidth() const noexcept
+inline int32_t BaseImageProcessor<_DerivedType, _AllocatorType>::GetWidth() const noexcept
 {
     return m_width;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericImageProcessor<_DerivedType, _AllocatorType>::GetHeight() const noexcept
+inline int32_t BaseImageProcessor<_DerivedType, _AllocatorType>::GetHeight() const noexcept
 {
     return m_height;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericImageProcessor<_DerivedType, _AllocatorType>::GetColorDepth() const noexcept
+inline int32_t BaseImageProcessor<_DerivedType, _AllocatorType>::GetColorDepth() const noexcept
 {
     return m_colorDepth;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericImageProcessor<_DerivedType, _AllocatorType>::GetChannels() const noexcept
+inline int32_t BaseImageProcessor<_DerivedType, _AllocatorType>::GetChannels() const noexcept
 {
     return m_channels;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline PixelFormat GenericImageProcessor<_DerivedType, _AllocatorType>::GetPixelFormat() const noexcept
+inline PixelFormat BaseImageProcessor<_DerivedType, _AllocatorType>::GetPixelFormat() const noexcept
 {
     return m_pixelFormat;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericImageProcessor<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseImageProcessor<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
