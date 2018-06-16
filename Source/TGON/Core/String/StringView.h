@@ -16,13 +16,15 @@ class BasicStringView :
 {
 /* @section Public type */
 public:
-    using CharType = _CharType;
-    using ReferenceType = CharType&;
-    using ConstReferenceType = const CharType&;
-    using IteratorType = CharType*;
-    using ConstIteratorType = const CharType*;
-    using PointerType = CharType*;
-    using ConstPointerType = const CharType*;
+    using StringTraitsType = _StringTraitsType;
+    using SizeType = std::size_t;
+    using ValueType = _CharType;
+    using ReferenceType = ValueType&;
+    using ConstReferenceType = const ValueType&;
+    using IteratorType = ValueType*;
+    using ConstIteratorType = const ValueType*;
+    using PointerType = ValueType*;
+    using ConstPointerType = const ValueType*;
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
@@ -36,7 +38,6 @@ public:
 public:
     bool operator==(const BasicStringView& rhs) const;
     constexpr const _CharType operator[](std::size_t index) const;
-    constexpr _CharType& operator[](std::size_t index);
     
 /* @section Public method */
 public:
@@ -52,15 +53,12 @@ public:
     std::size_t RFind(_CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
     std::size_t RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
     constexpr const _CharType* Data() const noexcept;
-    constexpr _CharType& At(std::size_t index);
     constexpr const _CharType At(std::size_t index) const;
     constexpr std::size_t Length() const noexcept;
-    constexpr IteratorType begin() noexcept;
-    constexpr IteratorType end() noexcept;
+    constexpr ConstIteratorType begin() const noexcept;
+    constexpr ConstIteratorType end() const noexcept;
     constexpr ConstIteratorType cbegin() const noexcept;
     constexpr ConstIteratorType cend() const noexcept;
-    constexpr ReverseIteratorType rbegin() noexcept;
-    constexpr ReverseIteratorType rend() noexcept;
     constexpr ConstReverseIteratorType crbegin() const noexcept;
     constexpr ConstReverseIteratorType crend() const noexcept;
     
@@ -72,20 +70,6 @@ private:
 
 using StringView = BasicStringView<char>;
 using WStringView = BasicStringView<wchar_t>;
-
-template <typename _CharType, typename _StringTraitsType>
-template <std::size_t _CharArraySize>
-void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType(&str)[_CharArraySize]) noexcept :
-    m_str(str),
-    m_strLen(_CharArraySize - 1)
-{
-}
-
-template <typename _CharType, typename _StringTraitsType>
-void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen) noexcept
-{
-
-}
 
 template <typename _CharType, typename _StringTraitsType>
 template <std::size_t _CharArraySize>
@@ -115,10 +99,20 @@ constexpr const _CharType BasicStringView<_CharType, _StringTraitsType>::operato
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr _CharType& BasicStringView<_CharType, _StringTraitsType>::operator[](std::size_t index)
+template <std::size_t _CharArraySize>
+void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType(&str)[_CharArraySize]) noexcept
 {
-    return m_str[index];
+    m_str = str;
+    m_strLen = _CharArraySize - 1;
 }
+
+template <typename _CharType, typename _StringTraitsType>
+void BasicStringView<_CharType, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen) noexcept
+{
+    m_str = str;
+    m_strLen = strLen;
+}
+
 
 template <typename _CharType, typename _StringTraitsType>
 inline int32_t BasicStringView<_CharType, _StringTraitsType>::Compare(const _CharType* str, std::size_t strLen) const
@@ -145,13 +139,6 @@ inline std::size_t BasicStringView<_CharType, _StringTraitsType>::Find(_CharType
 }
 
 template <typename _CharType, typename _StringTraitsType>
-template <std::size_t _CharArraySize2>
-inline std::size_t BasicStringView<_CharType, _StringTraitsType>::Find(const _CharType(&str)[_CharArraySize2], std::size_t strOffset) const
-{
-    return _StringTraitsType::Find(m_str, m_strLen, strOffset, str, _CharArraySize2 - 1);
-}
-
-template <typename _CharType, typename _StringTraitsType>
 inline std::size_t BasicStringView<_CharType, _StringTraitsType>::Find(const _CharType* str, std::size_t strOffset, std::size_t strLen) const
 {
     return _StringTraitsType::Find(m_str, m_strLen, strOffset, str, strLen);
@@ -170,13 +157,6 @@ inline std::size_t BasicStringView<_CharType, _StringTraitsType>::RFind(_CharTyp
 }
 
 template <typename _CharType, typename _StringTraitsType>
-template <std::size_t _CharArraySize2>
-inline std::size_t BasicStringView<_CharType, _StringTraitsType>::RFind(const _CharType(&str)[_CharArraySize2], std::size_t strOffset) const
-{
-    return _StringTraitsType::RFind(m_str, m_strLen, strOffset, str, _CharArraySize2 - 1);
-}
-
-template <typename _CharType, typename _StringTraitsType>
 inline std::size_t BasicStringView<_CharType, _StringTraitsType>::RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const
 {
     return _StringTraitsType::RFind(m_str, m_strLen, strOffset, str, strLen);
@@ -189,13 +169,13 @@ constexpr std::size_t BasicStringView<_CharType, _StringTraitsType>::Length() co
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr typename BasicStringView<_CharType, _StringTraitsType>::IteratorType BasicStringView<_CharType, _StringTraitsType>::begin() noexcept
+constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstIteratorType BasicStringView<_CharType, _StringTraitsType>::begin() const noexcept
 {
     return m_str;
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr typename BasicStringView<_CharType, _StringTraitsType>::IteratorType BasicStringView<_CharType, _StringTraitsType>::end() noexcept
+constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstIteratorType BasicStringView<_CharType, _StringTraitsType>::end() const noexcept
 {
     return m_str + m_strLen;
 }
@@ -210,18 +190,6 @@ template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstIteratorType BasicStringView<_CharType, _StringTraitsType>::cend() const noexcept
 {
     return m_str + m_strLen;
-}
-
-template <typename _CharType, typename _StringTraitsType>
-constexpr typename BasicStringView<_CharType, _StringTraitsType>::ReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::rbegin() noexcept
-{
-    return ReverseIteratorType(this->end());
-}
-
-template <typename _CharType, typename _StringTraitsType>
-constexpr typename BasicStringView<_CharType, _StringTraitsType>::ReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::rend() noexcept
-{
-    return ReverseIteratorType(this->begin());
 }
 
 template <typename _CharType, typename _StringTraitsType>
@@ -240,12 +208,6 @@ template <typename _CharType, typename _StringTraitsType>
 constexpr const _CharType* BasicStringView<_CharType, _StringTraitsType>::Data() const noexcept
 {
     return m_str;
-}
-
-template <typename _CharType, typename _StringTraitsType>
-constexpr _CharType& BasicStringView<_CharType, _StringTraitsType>::At(std::size_t index)
-{
-    return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, typename _StringTraitsType>

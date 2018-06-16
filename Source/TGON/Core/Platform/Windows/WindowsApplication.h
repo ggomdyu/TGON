@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include "Core/Platform/Config.h"
+
 #include "WindowsApplicationType.h"
 
 namespace tgon
@@ -18,11 +20,11 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                       Loops the message queue and handle the message. */
+    /* @brief   Loops the message queue and handle the message. */
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
 
-    /* @brief                       Terminates the program forcibly. */
+    /* @brief   Terminates the program forcibly. */
     void Terminate();
 
     /**
@@ -37,7 +39,7 @@ public:
 private:
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
-/* @section Public method */
+/* @section Private method */
 private:
     /* @brief   Register default WNDCLASS to window class table. */
     bool RegisterWindowClass();

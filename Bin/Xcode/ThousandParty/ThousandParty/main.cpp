@@ -2,6 +2,8 @@
 
 #include "TGON.h"
 
+#include "Core/Utility/NonAddressable.h"
+
 using namespace tgon;
 
 class TGON_API ThousandParty final :
@@ -16,20 +18,15 @@ public:
     {
         SuperType::OnDidLaunch();
         
-        StringViewHash svh = "WOW";
-        svh[0] = 'a';
-
         InputMode inputMode;
         {
-            inputMode.isUseMouse = false;
+            inputMode.isUseMouse = true;
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule(new InputModule(inputMode, Application::GetInstance()->GetRootWindow()));
-        this->AddModule(new GraphicsModule(VideoMode{}, Application::GetInstance()->GetRootWindow()));
-        this->AddModule(new TimeModule);
-
-        m_weakInputModule = GetModule<InputModule>();
+        this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
+        this->AddModule<TimeModule>();
+        this->AddModule<SceneManagementModule>(VideoMode{}, Application::GetInstance()->GetRootWindow());
     }
     
     virtual void OnWillTerminate() override
@@ -42,21 +39,7 @@ public:
     virtual void Update() override
     {
         SuperType::Update();
-
-        auto inputModule = m_weakInputModule.lock();
-        if (inputModule != nullptr)
-        {
-            auto& keyboard = inputModule->GetKeyboard();
-            if (keyboard->IsKeyUp(KeyCode::Space))
-            {
-                Log(LogLevel::Debug, "HI!");
-            }
-        }
     }
-    
-/* @section Private variable */
-private:
-    std::weak_ptr<InputModule> m_weakInputModule;
 };
 
 TGON_DECLARE_ENGINE(ThousandParty);

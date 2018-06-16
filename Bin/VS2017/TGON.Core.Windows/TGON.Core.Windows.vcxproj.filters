@@ -46,9 +46,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h">
       <Filter>Sources\Core\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h">
-      <Filter>Sources\Core\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h">
       <Filter>Sources\Core\Hardware\Windows</Filter>
     </ClInclude>

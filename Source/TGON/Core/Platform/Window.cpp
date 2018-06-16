@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
+#include "Window.h"
+#include "WindowType.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsWindow.h"
 #elif TGON_PLATFORM_MACOS
@@ -12,29 +12,30 @@
 #   import "IOS/IOSWindow.h"
 #endif
 
-#include "Window.h"
-#include "WindowType.h"
-
 namespace tgon
 {
 
 Window::Window() :
-    m_impl(new WindowImpl(this))
+    m_impl(std::make_unique<WindowImpl>(this))
 {
 }
 
 Window::Window(const WindowStyle& windowStyle) :
-    m_impl(new WindowImpl(this, windowStyle))
+    m_impl(std::make_unique<WindowImpl>(this, windowStyle))
 {
 }
 
-Window::Window(Window&& rhs) noexcept :
-    m_impl(std::move(rhs.m_impl))
-{
-    rhs.m_impl = nullptr;
-}
-    
 Window::~Window() = default;
+
+std::shared_ptr<Window> Window::Create()
+{
+    return std::shared_ptr<Window>(new Window());
+}
+
+std::shared_ptr<Window> Window::Create(const WindowStyle& windowStyle)
+{
+    return std::shared_ptr<Window>(new Window(windowStyle));
+}
 
 void Window::Show()
 {

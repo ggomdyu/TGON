@@ -26,7 +26,7 @@ std::shared_ptr<tgon::Application> g_application;
 namespace tgon
 {
 
-extern Engine* MakeEngine();
+extern std::unique_ptr<Engine> MakeEngine();
 
 const std::shared_ptr<Application>& Application::GetInstance()
 {

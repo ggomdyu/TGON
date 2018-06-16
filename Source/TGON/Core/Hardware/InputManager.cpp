@@ -13,8 +13,8 @@
 namespace tgon
 {
 
-InputManager::InputManager(const Window& inputTargetWindow) :
-    m_impl(std::make_unique<InputManagerImpl>(inputTargetWindow))
+InputManager::InputManager(const std::shared_ptr<Window>& inputTarget) :
+    m_impl(std::make_unique<InputManagerImpl>(inputTarget))
 {
 }
     

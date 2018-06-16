@@ -27,7 +27,7 @@ public:
     
 /* @section Public constructor */
 public:
-    explicit Application(Engine* engine);
+    explicit Application(std::unique_ptr<Engine>&& engine);
     
 /* @section Public destructor */
 public:
@@ -72,17 +72,17 @@ public:
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
-    /* @brief   Sets the root window. */
-    void SetRootWindow(Window&& window) noexcept;
+    /* @brief   Gets the root window. */
+    std::shared_ptr<Window>& GetRootWindow() noexcept;
     
     /* @brief   Gets the root window. */
-    Window& GetRootWindow() noexcept;
-    
-    /* @brief   Gets the root window. */
-    const Window& GetRootWindow() const noexcept;
+    std::shared_ptr<const Window> GetRootWindow() const noexcept;
     
     /* @brief   Gets the engine. */
-    const std::unique_ptr<Engine>& GetEngine() const noexcept;
+    const Engine* GetEngine() const noexcept;
+
+    /* @brief   Gets the engine. */
+    Engine* GetEngine() noexcept;
 
 /* @section Public event handler */
 public:
@@ -93,7 +93,7 @@ public:
  
 /* @section Private method */
 private:
-    /* @brief                       Updates the application. */
+    /* @brief   Updates the application. */
     void Update();
     
 /* @section Protected variable */
@@ -101,7 +101,7 @@ protected:
     std::unique_ptr<ApplicationImpl> m_impl;
     std::unique_ptr<Engine> m_engine;
     
-    Window m_rootWindow;
+    std::shared_ptr<Window> m_rootWindow;
 };
 
 } /* namespace tgon */

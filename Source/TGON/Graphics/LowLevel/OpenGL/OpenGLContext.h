@@ -20,7 +20,7 @@ struct TGON_API OpenGLContext final :
 {
 /* @section Public constructor */
 public:
-    OpenGLContext(const VideoMode& videoMode, Window& window);
+    OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget);
     OpenGLContext(OpenGLContext&& rhs);
 
 /* @section Public destructor */

@@ -120,12 +120,18 @@ using FixedString16 = BasicFixedString<char, 16>;
 using FixedString32 = BasicFixedString<char, 32>;
 using FixedString64 = BasicFixedString<char, 64>;
 using FixedString128 = BasicFixedString<char, 128>;
+using FixedString256 = BasicFixedString<char, 256>;
+using FixedString512 = BasicFixedString<char, 512>;
+using FixedString1024 = BasicFixedString<char, 1024>;
 
 using FixedWString8 = BasicFixedString<wchar_t, 8>;
 using FixedWString16 = BasicFixedString<wchar_t, 16>;
 using FixedWString32 = BasicFixedString<wchar_t, 32>;
 using FixedWString64 = BasicFixedString<wchar_t, 64>;
 using FixedWString128 = BasicFixedString<wchar_t, 128>;
+using FixedWString256 = BasicFixedString<wchar_t, 256>;
+using FixedWString512 = BasicFixedString<wchar_t, 512>;
+using FixedWString1024 = BasicFixedString<wchar_t, 1024>;
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 constexpr BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString() noexcept :

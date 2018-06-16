@@ -25,8 +25,8 @@
 namespace tgon
 {
 
-OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, Window& displayTargetWindow) :
-    m_context(videoMode, displayTargetWindow)
+OpenGLGraphics::OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget) :
+    m_context(videoMode, displayTarget)
 {
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));

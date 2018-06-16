@@ -16,7 +16,7 @@ class TGON_API InputManagerImpl final
 {
 /* @section Public constructor */
 public:
-    explicit InputManagerImpl(const Window& window);
+    explicit InputManagerImpl(const std::shared_ptr<Window>& inputTarget);
     
 /* @section Public destructor */
 public:
@@ -31,7 +31,7 @@ public:
 
 /* @section Private method */
 private:
-    OIS::ParamList QueryParamList(const Window& window) const;
+    OIS::ParamList QueryParamList(const std::shared_ptr<Window>& inputTarget) const;
     
 /* @section Protected variable */
 protected:

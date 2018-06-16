@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <algorithm>
+
 #include "../Component/Component.h"
 
 #include "GameObject.h"
@@ -7,12 +9,17 @@
 namespace tgon
 {
 
-GameObject::GameObject(const std::string& name) :
+GameObject::GameObject(const FixedStringHash32& name) :
     m_name(name)
 {
 }
     
 GameObject::~GameObject() = default;
+
+std::shared_ptr<GameObject> GameObject::Create(const FixedStringHash32& name)
+{
+    return std::shared_ptr<GameObject>(new GameObject(name));
+}
 
 void GameObject::Update()
 {
@@ -22,14 +29,24 @@ void GameObject::Update()
     }
 }
     
-void GameObject::SetName(const std::string& name)
+void GameObject::SetName(const FixedStringHash32& name)
 {
     m_name = name;
 }
 
-const std::string& GameObject::GetString() const noexcept
+const FixedStringHash32& GameObject::GetName() const noexcept
 {
     return m_name;
+}
+
+std::weak_ptr<GameObject> GameObject::GetWeakFromThis()
+{
+    return this->weak_from_this();
+}
+
+std::weak_ptr<const GameObject> GameObject::GetWeakFromThis() const
+{
+    return this->weak_from_this();
 }
 
 void GameObject::AddComponent(Component* component)

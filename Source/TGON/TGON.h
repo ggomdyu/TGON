@@ -61,7 +61,7 @@
 #include "Graphics/LowLevel/VertexBuffer.h"
 #include "Graphics/LowLevel/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
-#include "Graphics/Object/Module/GraphicsModule.h"
+#include "Game/Object/Module/SceneManagementModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
 #include "Game/Component/SpriteComponent.h"

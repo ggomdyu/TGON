@@ -150,7 +150,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowFwd.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,4 @@
 namespace tgon
 {
 
-class WindowImpl;
-struct WindowStyle;
-
 } /* namespace tgon */

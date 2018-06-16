@@ -24,8 +24,8 @@ class TGON_API GameObject final :
 public:
     TGON_RUNTIME_OBJECT(GameObject);
 
-/* @section Private constructor */
-private:
+/* @section Public constructor */
+public:
     explicit GameObject(const FixedStringHash32& name);
     
 /* @section Public destructor */
@@ -34,8 +34,6 @@ public:
 
 /* @section Public method */
 public:
-    static std::shared_ptr<GameObject> Create(const FixedStringHash32& name);
-
     void Update();
 
     /**
@@ -48,8 +46,7 @@ public:
      * @brief                   Inserts a component to manage.
      * @param [in] component    The component what you want to insert.
      */
-    template <typename _ComponentType, typename... _ArgTypes>
-    void AddComponent(_ArgTypes&&... args);
+    void AddComponent(Component* component);
 
     /**
      * @brief   Removes the managed component.
@@ -88,12 +85,6 @@ public:
 /* @section Private method */
 private:
     /**
-     * @brief                   Inserts a component to manage.
-     * @param [in] component    The component what you want to insert.
-     */
-    void AddComponent(Component* component);
-
-    /**
      * @brief                   Removes the managed component.
      * @param [in] componentId  The unique id of Component what you want to get.
      */
@@ -122,12 +113,6 @@ template<typename _ComponentType>
 inline _ComponentType* GameObject::GetComponent()
 {
     return static_cast<_ComponentType*>(GetComponentId<_ComponentType>());
-}
-
-template<typename _ComponentType, typename... _ArgTypes>
-inline void GameObject::AddComponent(_ArgTypes&&... args)
-{
-    this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));
 }
 
 template <typename _ComponentType>

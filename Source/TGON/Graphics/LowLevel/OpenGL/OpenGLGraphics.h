@@ -24,7 +24,7 @@ public:
 
 /* @section Public constructor */
 public:
-    OpenGLGraphics(const VideoMode& videoMode, Window& displayTargetWindow);
+    OpenGLGraphics(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget);
     
 /* @section Public destructor */
 public:

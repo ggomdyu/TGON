@@ -3,8 +3,10 @@
 #include <algorithm>
 
 #include "Core/Platform/WindowType.h"
+#include "Core/Platform/Application.h"
 
 #include "Engine.h"
+#include "Module/IModule.h"
 
 namespace tgon
 {
@@ -14,7 +16,7 @@ WindowStyle Engine::GetRootWindowStyle() const noexcept
     return {};
 }
 
-void Engine::AddModule(IModule* module)
+void Engine::AddModule(const std::shared_ptr<IModule>& module)
 {
     auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
@@ -62,7 +64,7 @@ bool Engine::RemoveModule(size_t moduleId)
         return false;
     }
 }
-   
+
 void Engine::Update()
 {
     for (auto& module : m_modules)

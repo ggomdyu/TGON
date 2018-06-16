@@ -7,24 +7,25 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
+#include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
-#include "Core/Platform/Config.h"
 #include "Core/Object/Delegate.h"
-
-#include "WindowFwd.h"
 
 namespace tgon
 {
 
+class WindowImpl;
+struct WindowStyle;
+
 class TGON_API Window final :
+    private std::enable_shared_from_this<Window>,
     private boost::noncopyable
 {
-/* @section Public constructor */
-public:
+/* @section Private constructor */
+private:
     Window();
     Window(const WindowStyle& windowStyle);
-    Window(Window&& rhs) noexcept;
 
 /* @section Public constructor */
 public:
@@ -32,6 +33,8 @@ public:
     
 /* @section Public method */
 public:
+    static std::shared_ptr<Window> Create();
+    static std::shared_ptr<Window> Create(const WindowStyle& windowStyle);
     void Show();
     void Hide();
     void Close();
@@ -70,7 +73,8 @@ public:
     Delegate<void()> OnWindowGetFocus;
     Delegate<void()> OnWindowLoseFocus;
 
-public:
+/* @section Private variable */
+private:
     std::unique_ptr<WindowImpl> m_impl;
 };
 

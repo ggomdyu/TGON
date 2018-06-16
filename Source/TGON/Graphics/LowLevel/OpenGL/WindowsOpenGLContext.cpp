@@ -104,8 +104,8 @@ HGLRC MakeNewGLRC(HDC dcHandle)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const VideoMode& videoMode, Window& window) :
-    wndHandle(reinterpret_cast<HWND>(window.GetNativeWindow())),
+OpenGLContext::OpenGLContext(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget) :
+    wndHandle(reinterpret_cast<HWND>(displayTarget->GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     assert(wndHandle != nullptr);

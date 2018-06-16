@@ -1,28 +1,25 @@
 #include "PrecompiledHeader.h"
 
+#include "../Object/GameObject.h"
+
 #include "Component.h"
 
 namespace tgon
 {
 
-Component::Component() noexcept :
-	m_owner(nullptr)
-{
-}
-
 Component::~Component() = default;
 
 void Component::SetOwner(GameObject* owner) noexcept
 {
-    m_owner = owner;
+    m_owner = owner->GetWeakFromThis();
 }
 
-GameObject* Component::GetOwner() noexcept
+std::weak_ptr<GameObject> Component::GetOwner() noexcept
 {
     return m_owner;
 }
 
-const GameObject* Component::GetOwner() const noexcept
+std::weak_ptr<const GameObject> Component::GetOwner() const noexcept
 {
     return m_owner;
 }

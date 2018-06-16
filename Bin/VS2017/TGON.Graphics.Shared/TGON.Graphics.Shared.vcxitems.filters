@@ -10,12 +10,6 @@
     <Filter Include="Source\Graphics\Render">
       <UniqueIdentifier>{6bb9733a-729b-4071-b76b-2aac78d2bebf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Graphics\Object">
-      <UniqueIdentifier>{96424c25-ec0a-4347-8435-f630c2af3f0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Graphics\Object\Module">
-      <UniqueIdentifier>{6cd8ce30-a609-40ff-a619-2b8deebca90e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Graphics\LowLevel">
       <UniqueIdentifier>{a1a00ced-ed00-49dd-b22e-b6c935cbcb74}</UniqueIdentifier>
     </Filter>
@@ -38,9 +32,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\MeshUtility.h">
       <Filter>Source\Graphics\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Module\GraphicsModule.h">
-      <Filter>Source\Graphics\Object\Module</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.h">
       <Filter>Source\Graphics\Render</Filter>
@@ -146,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\MeshUtility.cpp">
       <Filter>Source\Graphics\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Module\GraphicsModule.cpp">
-      <Filter>Source\Graphics\Object\Module</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.cpp">
       <Filter>Source\Graphics\Render</Filter>

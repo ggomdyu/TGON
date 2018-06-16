@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/Hardware/InputManager.h"
+
 #include "InputModule.h"
 
 namespace tgon
@@ -12,8 +14,8 @@ constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGa
 {
 }
 
-InputModule::InputModule(const InputMode& inputMode, const Window& inputTargetWindow) :
-    m_inputManager(inputTargetWindow)
+InputModule::InputModule(const InputMode& inputMode, const std::shared_ptr<Window>& inputTarget) :
+    m_inputManager(inputTarget)
 {
     if (inputMode.isUseKeyboard)
     {

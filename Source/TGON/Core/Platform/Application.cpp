@@ -2,6 +2,9 @@
 
 #include "Core/Object/Engine.h"
 
+#include "Application.h"
+#include "Window.h"
+#include "WindowType.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
 #elif TGON_PLATFORM_MACOS
@@ -12,17 +15,13 @@
 #   import "IOS/IOSApplication.h"
 #endif
 
-#include "Application.h"
-#include "Window.h"
-#include "WindowType.h"
-
 namespace tgon
 {
 
-Application::Application(Engine* engine) :
+Application::Application(std::unique_ptr<Engine>&& engine) :
     m_impl(new ApplicationImpl),
-    m_engine(engine),
-    m_rootWindow(engine->GetRootWindowStyle())
+    m_engine(std::move(engine)),
+    m_rootWindow(Window::Create(m_engine->GetRootWindowStyle()))
 {
 }
 
@@ -60,25 +59,25 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
 {
     m_impl->ShowMessageBox(title, message, messageBoxIcon);
 }
-    
-void Application::SetRootWindow(Window&& window) noexcept
-{
-    //m_rootWindow = std::move(window);
-}
-    
-Window& Application::GetRootWindow() noexcept
+   
+std::shared_ptr<Window>& Application::GetRootWindow() noexcept
 {
     return m_rootWindow;
 }
 
-const Window& Application::GetRootWindow() const noexcept
+std::shared_ptr<const Window> Application::GetRootWindow() const noexcept
 {
     return m_rootWindow;
 }
 
-const std::unique_ptr<Engine>& Application::GetEngine() const noexcept
+const Engine* Application::GetEngine() const noexcept
 {
-    return m_engine;
+    return m_engine.get();
+}
+
+Engine* Application::GetEngine() noexcept
+{
+    return m_engine.get();
 }
 
 void Application::OnDidLaunch()

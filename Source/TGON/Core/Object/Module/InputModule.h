@@ -39,7 +39,7 @@ public:
     
 /* @section Public constructor */
 public:
-    InputModule(const InputMode& inputMode, const Window& inputTargetWindow);
+    InputModule(const InputMode& inputMode, const std::shared_ptr<Window>& inputTarget);
 
 /* @section Public method */
 public:

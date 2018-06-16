@@ -35,34 +35,6 @@ WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
     this->SetUserData(this);
 }
 
-WindowImpl::WindowImpl(WindowImpl&& rhs) noexcept :
-    m_wndHandle(rhs.m_wndHandle),
-    m_isDwmCompositionEnabled(rhs.m_isDwmCompositionEnabled),
-    m_owner(rhs.m_owner)
-{
-    rhs.m_wndHandle = nullptr;
-    rhs.m_isDwmCompositionEnabled = false;
-    rhs.m_owner = nullptr;
-}
-
-WindowImpl& WindowImpl::operator=(WindowImpl&& rhs) noexcept
-{
-    if (this == &rhs)
-    {
-        return *this;
-    }
-
-    this->Close();
-
-    m_wndHandle = rhs.m_wndHandle;
-    m_isDwmCompositionEnabled = rhs.m_isDwmCompositionEnabled;
-    
-    rhs.m_wndHandle = nullptr;
-    rhs.m_isDwmCompositionEnabled = false;
-
-    return *this;
-}
-
 void WindowImpl::BringToFront()
 {
     // SetForegroundWindow, BringWindowToTop APIs are not working exactly.

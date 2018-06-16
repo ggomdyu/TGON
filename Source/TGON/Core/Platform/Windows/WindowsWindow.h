@@ -6,26 +6,29 @@
  */
 
 #pragma once
+#ifndef WIN32_LEAN_AND_MEAN
+#    define WIN32_LEAN_AND_MEAN
+#endif
+#include <Windows.h>
+#include <boost/noncopyable.hpp>
+
+#include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
-#include "Core/Platform/Config.h"
-
-#include "WindowsWindowFwd.h"
 
 namespace tgon
 {
 
-class WindowImpl final
+class Window;
+struct WindowStyle;
+
+class WindowImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
     WindowImpl(Window* owner);
     WindowImpl(Window* owner, const WindowStyle& windowStyle);
-    WindowImpl(WindowImpl&& rhs) noexcept;
-
-/* @section Public operator */
-protected:
-    WindowImpl& operator=(WindowImpl&& rhs) noexcept;
 
 /* @section Public method */
 public:
