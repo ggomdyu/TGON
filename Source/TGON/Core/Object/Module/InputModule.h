@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-struct InputMode
+struct TGON_API InputMode
 {
 /* @section Public constructor */
 public:
@@ -39,7 +39,7 @@ public:
     
 /* @section Public constructor */
 public:
-    InputModule(const InputMode& inputMode, const std::shared_ptr<Window>& inputTarget);
+    InputModule(const InputMode& inputMode, std::shared_ptr<Window> inputTarget);
 
 /* @section Public method */
 public:

@@ -36,7 +36,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
     auto& batchedSprites = m_batchedSpritesSet.front();
 
     // The front element is guaranted to exist because the 'batchedSprites' has one sprite at least.
-    auto& mesh = batchedSprites.front()->GetMesh();
+    auto mesh = batchedSprites.front()->GetMesh();
     {
         mesh->GetVertexBuffer()->Use();
         mesh->GetIndexBuffer()->Use();

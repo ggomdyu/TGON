@@ -78,95 +78,95 @@ protected:
     _ResourceType m_resource;
 };
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 constexpr RAII<_ResourceType, _DerivedType>::RAII() noexcept :
     m_resource(this->GetNullValue())
 {
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 constexpr RAII<_ResourceType, _DerivedType>::RAII(const _ResourceType& rhs) :
     m_resource(rhs)
 {
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline RAII<_ResourceType, _DerivedType>::~RAII()
 {   
     this->Release();
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 template <std::enable_if_t<std::is_pointer<_ResourceType>::value>*>
 inline const _ResourceType& RAII<_ResourceType, _DerivedType>::operator->() const noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 template <std::enable_if_t<std::is_pointer<_ResourceType>::value>*>
 inline _ResourceType& RAII<_ResourceType, _DerivedType>::operator->() noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 template <std::enable_if_t<std::is_pointer<_ResourceType>::value>*>
 inline const _ResourceType& RAII<_ResourceType, _DerivedType>::operator*() const noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 template <std::enable_if_t<std::is_pointer<_ResourceType>::value>*>
 inline _ResourceType& RAII<_ResourceType, _DerivedType>::operator*() noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline const _ResourceType* RAII<_ResourceType, _DerivedType>::operator&() const noexcept
 {
     return &m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline _ResourceType* RAII<_ResourceType, _DerivedType>::operator&() noexcept
 {
     return &m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline RAII<_ResourceType, _DerivedType>::operator const _ResourceType() const noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline RAII<_ResourceType, _DerivedType>::operator _ResourceType() noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline bool RAII<_ResourceType, _DerivedType>::operator==(const RAII& rhs) const noexcept
 {
     return m_resource == rhs.m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline bool RAII<_ResourceType, _DerivedType>::operator!=(const RAII& rhs) const noexcept
 {
     return m_resource != rhs.m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::AddRef()
 {
     reinterpret_cast<_DerivedType*>(this)->AddRef();
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::Reset(const _ResourceType& resource)
 {
     if (m_resource == resource)
@@ -179,7 +179,7 @@ inline void RAII<_ResourceType, _DerivedType>::Reset(const _ResourceType& resour
     m_resource = resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::Reset(_ResourceType&& resource)
 {
     if (m_resource == resource)
@@ -192,25 +192,25 @@ inline void RAII<_ResourceType, _DerivedType>::Reset(_ResourceType&& resource)
     m_resource = std::move(resource);
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline void RAII<_ResourceType, _DerivedType>::Release()
 {
     reinterpret_cast<_DerivedType*>(this)->Release(m_resource);
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline const _ResourceType& RAII<_ResourceType, _DerivedType>::Get() const noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline _ResourceType& RAII<_ResourceType, _DerivedType>::Get() noexcept
 {
     return m_resource;
 }
 
-template<typename _ResourceType, typename _DerivedType>
+template <typename _ResourceType, typename _DerivedType>
 inline _ResourceType RAII<_ResourceType, _DerivedType>::GetNullValue() const noexcept
 {
     return reinterpret_cast<const _DerivedType*>(this)->GetNullValue();

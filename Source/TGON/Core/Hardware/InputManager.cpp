@@ -1,19 +1,16 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
+#include "InputManager.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsInputManager.h"
 #elif TGON_PLATFORM_MACOS
 #   include "MacOS/MacOSInputManager.h"
 #endif
 
-#include "InputManager.h"
-
 namespace tgon
 {
 
-InputManager::InputManager(const std::shared_ptr<Window>& inputTarget) :
+InputManager::InputManager(std::shared_ptr<Window> inputTarget) :
     m_impl(std::make_unique<InputManagerImpl>(inputTarget))
 {
 }

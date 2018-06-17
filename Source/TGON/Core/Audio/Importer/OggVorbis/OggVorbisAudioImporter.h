@@ -1,7 +1,7 @@
 /**
- * @filename    OggVorbisAudioImporter.h
- * @author      ggomdyu
- * @since       04/20/2018
+ * @file    OggVorbisAudioImporter.h
+ * @author  ggomdyu
+ * @since   04/20/2018
  */
 
 #pragma once

@@ -1,8 +1,8 @@
 /**
- * @filename    AudioBuffer.h
- * @author      ggomdyu
- * @since       04/30/2018
- * @see         https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf
+ * @file    AudioBuffer.h
+ * @author  ggomdyu
+ * @since   04/30/2018
+ * @see     https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf
  */
 
 #pragma once

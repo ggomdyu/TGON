@@ -1,8 +1,8 @@
 /**
- * @filename    Drawing.h
- * @author      ggomdyu
- * @since       11/26/2017
- * @brief       Set of Low level Plaform-agnostic Drawing interfaces.
+ * @file    Drawing.h
+ * @author  ggomdyu
+ * @since   11/26/2017
+ * @brief   Set of Low level Plaform-agnostic Drawing interfaces.
  */
 
 #pragma once

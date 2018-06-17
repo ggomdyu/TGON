@@ -1,8 +1,8 @@
 /**
- * @filename    Log.h
- * @author      ggomdyu
- * @since       04/01/2016
- * @brief       Supports plaform-agnostic logger.
+ * @file    Log.h
+ * @author  ggomdyu
+ * @since   04/01/2016
+ * @brief   Supports plaform-agnostic logger.
  */
 
 #pragma once

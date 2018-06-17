@@ -6,7 +6,7 @@
 namespace tgon
 {
 
-bool Scene::AddObject(const std::shared_ptr<GameObject>& object)
+bool Scene::AddObject(std::shared_ptr<GameObject> object)
 {   
     auto ret = m_objects.emplace(object->GetName().GetHashCode(), object);
     return ret.second;

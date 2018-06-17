@@ -1,8 +1,8 @@
 /**
- * @filename    UUID.h
- * @author      ggomdyu
- * @date        10/28/2017
- * @see         https://en.wikipedia.org/wiki/Universally_unique_identifier
+ * @file    UUID.h
+ * @author  ggomdyu
+ * @date    10/28/2017
+ * @see     https://en.wikipedia.org/wiki/Universally_unique_identifier
  */
 
 #pragma once

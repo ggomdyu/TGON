@@ -1,7 +1,7 @@
 /**
- * @filename    AudioType.h
- * @author      ggomdyu
- * @since       04/29/2018
+ * @file    AudioType.h
+ * @author  ggomdyu
+ * @since   04/29/2018
  */
 
 #pragma once

@@ -36,15 +36,21 @@ class TGON_API Engine :
 public:
     TGON_RUNTIME_OBJECT(Engine);
 
+/* @section Public constructor */
+public:
+    Engine();
+    
+/* @section Public destructor */
+public:
+    virtual ~Engine() = 0;
+    
 /* @section Public method */
 public:
     virtual void Update();
     
-    virtual WindowStyle GetRootWindowStyle() const noexcept;
-    
     /**
      * @brief               Inserts a module to manage.
-     * @param [in] module   The module what you want to insert.
+     * @param [in] args     Parameters of the _ModuleType constructor.
      */
     template <typename _ModuleType, typename... _ArgTypes>
     void AddModule(_ArgTypes&&... args);
@@ -58,11 +64,11 @@ public:
 
     /* @brief   Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<const _ModuleType> GetModule() const;
+    std::shared_ptr<const _ModuleType> GetModule() const noexcept;
 
     /* @brief   Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<_ModuleType> GetModule();
+    std::shared_ptr<_ModuleType> GetModule() noexcept;
     
 /* @section Public event handler */
 public:
@@ -75,7 +81,7 @@ private:
      * @brief               Inserts a module to manage.
      * @param [in] module   The module what you want to insert.
      */
-    void AddModule(const std::shared_ptr<IModule>& module);
+    void AddModule(std::shared_ptr<IModule> module);
     
     /**
      * @brief               Returns a module that managed by Application.
@@ -107,34 +113,33 @@ inline void Engine::AddModule(_ArgTypes&&... args)
 template <>
 inline void Engine::AddModule<TimeModule>()
 {
-    m_timeModule = std::make_shared<TimeModule>();
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline std::shared_ptr<const _ModuleType> Engine::GetModule() const
+inline std::shared_ptr<const _ModuleType> Engine::GetModule() const noexcept
 {
     return const_cast<Engine*>(this)->GetModule<_ModuleType>();
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline std::shared_ptr<_ModuleType> Engine::GetModule()
+inline std::shared_ptr<_ModuleType> Engine::GetModule() noexcept
 {
     return std::static_pointer_cast<_ModuleType>(this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
 }
 
 template <>
-inline std::shared_ptr<const TimeModule> Engine::GetModule<TimeModule>() const
+inline std::shared_ptr<const TimeModule> Engine::GetModule<TimeModule>() const  noexcept
 {
     return m_timeModule;
 }
 
 template <>
-inline std::shared_ptr<TimeModule> Engine::GetModule<TimeModule>()
+inline std::shared_ptr<TimeModule> Engine::GetModule<TimeModule>() noexcept
 {
     return m_timeModule;
 }
 
-template<typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
 inline bool Engine::RemoveModule()
 {
     return this->RemoveModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());

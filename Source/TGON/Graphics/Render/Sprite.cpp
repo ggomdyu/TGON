@@ -21,30 +21,30 @@ Sprite::Sprite(const std::string& filePath) :
 {
 }
 
-Sprite::Sprite(const std::shared_ptr<TextureMaterial>& material) :
+Sprite::Sprite(std::shared_ptr<TextureMaterial> material) :
     m_quad(MakeQuad(material))
 {
     assert(material != nullptr && "material can't be nullptr.");
 }
 
-void Sprite::SetTexture(const std::shared_ptr<Texture>& texture)
+void Sprite::SetTexture(std::shared_ptr<Texture> texture)
 {
     TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
     material->SetTexture(texture);
 }
     
-const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
+std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
 {
     TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
     return material->GetTexture();
 }
 
-std::shared_ptr<Material>& Sprite::GetMaterial() noexcept
+std::shared_ptr<Material> Sprite::GetMaterial() noexcept
 {
     return m_quad->GetMaterial();
 }
 
-const std::shared_ptr<Material>& Sprite::GetMaterial() const noexcept
+std::shared_ptr<const Material> Sprite::GetMaterial() const noexcept
 {
     return m_quad->GetMaterial();
 }
@@ -64,12 +64,12 @@ const Matrix4x4& Sprite::GetWorldViewProjectionMatrix() const noexcept
     return m_matWVP;
 }
     
-std::shared_ptr<Mesh>& Sprite::GetMesh() noexcept
+std::shared_ptr<Mesh> Sprite::GetMesh() noexcept
 {
     return m_quad;
 }
     
-const std::shared_ptr<Mesh>& Sprite::GetMesh() const noexcept
+std::shared_ptr<const Mesh> Sprite::GetMesh() const noexcept
 {
     return m_quad;
 }

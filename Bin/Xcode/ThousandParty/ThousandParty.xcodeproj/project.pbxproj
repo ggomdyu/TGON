@@ -39,6 +39,7 @@
 		FD515BE120B470C00002F5C3 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
 		FD7EA6E620B09D2700A76C69 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
+		FDB75AE920D5F4A500CC36C4 /* TestScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
 		FDBF76B020C1A40300A9207F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -87,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				FD7EA6E620B09D2700A76C69 /* main.cpp */,
+				FDB75AE920D5F4A500CC36C4 /* TestScene.h */,
 				FDD7C8C81F654342000EB7C8 /* Products */,
 			);
 			path = ThousandParty;

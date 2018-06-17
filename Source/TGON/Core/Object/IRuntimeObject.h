@@ -19,15 +19,13 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~IRuntimeObject() = 0;
+    virtual ~IRuntimeObject() = default;
 
 /* @section Public method */
 public:
     /* @brief   Gets dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
 };
-
-inline IRuntimeObject::~IRuntimeObject() = default;
 
 } /* namespace tgon */
 

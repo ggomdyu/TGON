@@ -7,10 +7,12 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "KeyboardFwd.h"
-
 namespace tgon
 {
+
+class InputManager;
+class KeyboardImpl;
+enum class KeyCode;
     
 class TGON_API Keyboard final
 {

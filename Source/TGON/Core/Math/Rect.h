@@ -98,13 +98,13 @@ constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& left, const _ValueT
 {
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+(const BasicRect& rhs) noexcept
 {
     return BasicRect(*this) += rhs;
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-(const BasicRect& rhs) noexcept
 {
     return BasicRect(*this) -= rhs;

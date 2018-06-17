@@ -50,7 +50,7 @@ private:
     std::vector<OpenGLVertexBufferDesc> m_vertexBufferDescs;
 };
 
-template<typename _DataArrayType, std::size_t _DataArraySize>
+template <typename _DataArrayType, std::size_t _DataArraySize>
 inline OpenGLVertexBuffer::OpenGLVertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
     OpenGLVertexBuffer(data, sizeof(data), isDynamicUsage, vertexBufferDescs)
 {

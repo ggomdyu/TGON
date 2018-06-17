@@ -1,7 +1,8 @@
 /**
- * @filename    JpgImageProcessor.h
- * @author      ggomdyu
- * @since       04/22/2018
+ * @file    JpgImageProcessor.h
+ * @author  ggomdyu
+ * @since   04/22/2018
+ @ @brief   Processes the binary JPG image file.
  */
 
 #pragma once

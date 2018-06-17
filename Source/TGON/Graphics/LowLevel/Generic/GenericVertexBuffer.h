@@ -47,7 +47,7 @@ protected:
     bool m_isDynamicUsage;
 };
 
-template<typename _DataArrayType, std::size_t _DataArraySize>
+template <typename _DataArrayType, std::size_t _DataArraySize>
 inline void GenericVertexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
 {
     this->SetData(data, sizeof(data), isDynamicUsage, vertexBufferDescs);

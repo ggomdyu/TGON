@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "../Component/Component.h"
+#include "Game/Component/Component.h"
 
 #include "GameObject.h"
 
@@ -39,19 +39,9 @@ const FixedStringHash32& GameObject::GetName() const noexcept
     return m_name;
 }
 
-std::weak_ptr<GameObject> GameObject::GetWeakFromThis()
-{
-    return this->weak_from_this();
-}
-
-std::weak_ptr<const GameObject> GameObject::GetWeakFromThis() const
-{
-    return this->weak_from_this();
-}
-
 void GameObject::AddComponent(Component* component)
 {
-    component->SetOwner(this);
+    component->SetOwner(this->shared_from_this());
     
     auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
     {

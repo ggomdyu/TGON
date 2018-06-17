@@ -11,12 +11,14 @@
 namespace tgon
 {
 
-WindowStyle Engine::GetRootWindowStyle() const noexcept
+Engine::Engine() :
+    m_timeModule(std::make_shared<TimeModule>())
 {
-    return {};
 }
 
-void Engine::AddModule(const std::shared_ptr<IModule>& module)
+Engine::~Engine() = default;
+
+void Engine::AddModule(std::shared_ptr<IModule> module)
 {
     auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
@@ -67,6 +69,8 @@ bool Engine::RemoveModule(size_t moduleId)
 
 void Engine::Update()
 {
+    m_timeModule->Update();
+    
     for (auto& module : m_modules)
     {
         module->Update();

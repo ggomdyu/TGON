@@ -2,8 +2,6 @@
 
 #include "TGON.h"
 
-#include "Core/Utility/NonAddressable.h"
-
 using namespace tgon;
 
 class TGON_API ThousandParty final :
@@ -20,13 +18,13 @@ public:
         
         InputMode inputMode;
         {
-            inputMode.isUseMouse = true;
+            inputMode.isUseMouse = false;
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
         this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
         this->AddModule<TimeModule>();
-        this->AddModule<SceneManagementModule>(VideoMode{}, Application::GetInstance()->GetRootWindow());
+//        this->AddModule<SceneManagementModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());
     }
     
     virtual void OnWillTerminate() override

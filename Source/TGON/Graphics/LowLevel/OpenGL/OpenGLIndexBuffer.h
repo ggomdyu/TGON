@@ -46,7 +46,7 @@ private:
     GLuint m_indexBufferHandle;
 };
 
-template<typename _DataArrayType, std::size_t _DataArraySize>
+template <typename _DataArrayType, std::size_t _DataArraySize>
 inline OpenGLIndexBuffer::OpenGLIndexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage) :
     OpenGLIndexBuffer(data, sizeof(data), isDynamicUsage)
 {

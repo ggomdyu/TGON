@@ -79,7 +79,7 @@ using FixedStringHash256 = BasicFixedStringHash<char, 256>;
 using FixedStringHash512 = BasicFixedStringHash<char, 512>;
 using FixedStringHash1024 = BasicFixedStringHash<char, 1024>;
 
-template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedStringHash(const _CharType* str) :
     SuperType(str),
     m_hashCode(X65599Hash(str))
@@ -93,19 +93,19 @@ inline BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Basic
 {
 }
 
-template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline void BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str)
 {
     new (this) BasicFixedStringHash(str);
 }
 
-template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline void BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen)
 {
     new (this) BasicFixedStringHash(str, strLen);
 }
 
-template<typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline const _CharType& BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
 {
     return SuperType::At(index);
@@ -120,13 +120,13 @@ inline std::size_t BasicFixedStringHash<_CharType, _CharArraySize, _StringTraits
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline typename BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::begin() const noexcept
 {
-    return m_str;
+    return this->cbegin();
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline typename BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::end() const noexcept
 {
-    return m_str + m_strLen;
+    return this->cend();
 }
 
 } /* namespace tgon */

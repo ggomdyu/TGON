@@ -1,7 +1,7 @@
 /**
- * @filename    PngImageProcessor.h
- * @author      ggomdyu
- * @since       01/20/2018
+ * @file    PngImageProcessor.h
+ * @author  ggomdyu
+ * @since   01/20/2018
  */
 
 #pragma once

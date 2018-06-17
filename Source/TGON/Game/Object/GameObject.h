@@ -10,11 +10,14 @@
 
 #include "Core/Object/Object.h"
 #include "Core/String/FixedStringHash.h"
+#include "Game/Component/Component.h"
+
+#include "Transform.h"
 
 namespace tgon
 {
 
-class Component;
+//class Component;
 
 class TGON_API GameObject final :
 	public Object,
@@ -45,34 +48,34 @@ public:
     void SetName(const FixedStringHash32& name);
 
     /**
-     * @brief                   Inserts a component to manage.
-     * @param [in] component    The component what you want to insert.
+     * @brief               Inserts a component to manage.
+     * @param [in] args     Parameters of the _ComponentType constructor.
      */
     template <typename _ComponentType, typename... _ArgTypes>
     void AddComponent(_ArgTypes&&... args);
 
     /**
-     * @brief   Removes the managed component.
-     * @tparam  The type of Component what you want to remove.
-     * @return  Returns true if successful, false otherwise.
+     * @brief                   Removes the managed component.
+     * @tparam _ComponentType   The type of Component what you want to remove.
+     * @return                  Returns true if successful, false otherwise.
      */
-    template <typename _ComponentType>
+    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     bool RemoveComponent();
 
     /**
-     * @brief   Gets a component that managed by this instance.
-     * @tparam  The type of Component what you want to get.
-     * @return  Returns the pointer to component if successful, nullptr otherwise.
+     * @brief                   Gets a component that managed by this instance.
+     * @tparam _ComponentType   The type of Component what you want to get.
+     * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
-    template <typename _ComponentType>
+    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     const _ComponentType* GetComponent() const;
 
     /**
-     * @brief   Gets a component that managed by this instance.
-     * @tparam  The type of Component what you want to get.
-     * @return  Returns the pointer to component if successful, nullptr otherwise.
+     * @brief                   Gets a component that managed by this instance.
+     * @tparam _ComponentType   The type of Component what you want to get.
+     * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
-    template <typename _ComponentType>
+    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     _ComponentType* GetComponent();
 
     /**
@@ -81,10 +84,6 @@ public:
      */
     const FixedStringHash32& GetName() const noexcept;
 
-    std::weak_ptr<GameObject> GetWeakFromThis();
-
-    std::weak_ptr<const GameObject> GetWeakFromThis() const;
-    
 /* @section Private method */
 private:
     /**
@@ -106,19 +105,26 @@ private:
      */
     Component* GetComponent(size_t componentId);
     
+    /* @brief   Returns the transform of object which has position, rotation, scale. */
+    Transform& GetTransform() noexcept;
+    
+    /* @brief   Returns the transform of object which has position, rotation, scale. */
+    const Transform& GetTransform() const noexcept;
+    
 /* @section Private variable */
 private:
     FixedStringHash32 m_name;
+    Transform m_transform;
     std::vector<std::unique_ptr<Component>> m_components;
 };
 
-template<typename _ComponentType>
+template<typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
 inline const _ComponentType* GameObject::GetComponent() const
 {
     return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
 }
     
-template<typename _ComponentType>
+template<typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
 inline _ComponentType* GameObject::GetComponent()
 {
     return static_cast<_ComponentType*>(GetComponentId<_ComponentType>());
@@ -130,7 +136,7 @@ inline void GameObject::AddComponent(_ArgTypes&&... args)
     this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));
 }
 
-template <typename _ComponentType>
+template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
 inline bool GameObject::RemoveComponent()
 {
     return this->RemoveComponent(GetComponentId<_ComponentType>());

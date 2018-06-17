@@ -150,7 +150,7 @@ inline std::size_t BasicStringView<_CharType, _StringTraitsType>::RFind(const Ba
     return _StringTraitsType::RFind(m_str, m_strLen, 0, rhs.m_str, rhs.m_strLen);
 }
 
-template<typename _CharType, typename _StringTraitsType>
+template <typename _CharType, typename _StringTraitsType>
 inline std::size_t BasicStringView<_CharType, _StringTraitsType>::RFind(_CharType ch, std::size_t strOffset) const
 {
     return _StringTraitsType::RFind(m_str, m_strLen, strOffset, &ch, 1);

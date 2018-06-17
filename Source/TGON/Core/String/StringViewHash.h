@@ -86,13 +86,13 @@ constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash
 {
 }
 
-template<typename _CharType, typename _StringTraitsType>
+template <typename _CharType, typename _StringTraitsType>
 constexpr const _CharType BasicStringViewHash<_CharType, _StringTraitsType>::operator[](std::size_t index) const
 {
     return SuperType::operator[](index);
 }
 
-template<typename _CharType, typename _StringTraitsType>
+template <typename _CharType, typename _StringTraitsType>
 inline const _CharType& tgon::BasicStringViewHash<_CharType, _StringTraitsType>::At(std::size_t index) const
 {
     return SuperType::At(index);

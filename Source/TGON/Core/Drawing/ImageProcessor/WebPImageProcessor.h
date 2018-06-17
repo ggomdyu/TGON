@@ -1,7 +1,8 @@
 /**
- * @filename    WebPImageProcessor.h
- * @author      ggomdyu
- * @since       04/22/2018
+ * @file    WebPImageProcessor.h
+ * @author  ggomdyu
+ * @since   04/22/2018
+ @ @brief   Processes the binary WebP image file.
  */
 
 #pragma once

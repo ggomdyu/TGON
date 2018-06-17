@@ -1,7 +1,7 @@
 /**
- * @filename    RiffReader.h
- * @author      ggomdyu
- * @since       05/03/2018
+ * @file    RiffReader.h
+ * @author  ggomdyu
+ * @since   05/03/2018
  */
 
 #pragma once

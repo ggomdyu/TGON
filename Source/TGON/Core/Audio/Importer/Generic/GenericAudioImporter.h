@@ -1,7 +1,7 @@
 /**
- * @filename    GenericAudioImporter.h
- * @author      ggomdyu
- * @since       05/02/2018
+ * @file    GenericAudioImporter.h
+ * @author  ggomdyu
+ * @since   05/02/2018
  */
 
 #pragma once

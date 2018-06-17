@@ -16,7 +16,7 @@ AudioPlayer::AudioPlayer() :
 {
 }
 
-AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
+AudioPlayer::AudioPlayer(std::shared_ptr<AudioBuffer> audioBuffer) :
     AudioPlayer()
 {
     this->Initialize(audioBuffer);
@@ -52,7 +52,7 @@ AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs)
     return *this;
 }
 
-void AudioPlayer::Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer)
+void AudioPlayer::Initialize(std::shared_ptr<AudioBuffer> audioBuffer)
 {
     if (m_audioBuffer != nullptr)
     {

@@ -10,10 +10,11 @@
 
 #include "Core/Platform/Config.h"
 
-#include "GamepadFwd.h"
-
 namespace tgon
 {
+
+class InputManager;
+class GamepadImpl;
     
 class TGON_API Gamepad final
 {

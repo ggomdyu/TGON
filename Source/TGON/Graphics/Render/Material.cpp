@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-Material::Material(const std::shared_ptr<Shader>& shader) :
+Material::Material(std::shared_ptr<Shader> shader) :
     m_shader(shader)
 {
 }
@@ -44,7 +44,7 @@ bool ColorMaterial::CanBatch(const Material& rhs) const
     }
 }
 
-const std::shared_ptr<Shader>& Material::GetShader() noexcept
+std::shared_ptr<Shader> Material::GetShader() noexcept
 {
     return m_shader;
 }
@@ -64,14 +64,14 @@ TextureMaterial::TextureMaterial() :
 {
 }
 
-TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
+TextureMaterial::TextureMaterial(std::shared_ptr<Texture> texture, const Color4f& blendColor) :
     Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
     m_texture(texture),
     m_blendColor(blendColor)
 {
 }
 
-TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture) :
+TextureMaterial::TextureMaterial(std::shared_ptr<Texture> texture) :
     Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
     m_texture(texture),
     m_blendColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
@@ -104,17 +104,17 @@ bool TextureMaterial::CanBatch(const Material& rhs) const
     }
 }
 
-void TextureMaterial::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
+void TextureMaterial::SetTexture(std::shared_ptr<Texture> texture) noexcept
 {
     m_texture = texture;
 }
 
-std::shared_ptr<Texture>& TextureMaterial::GetTexture() noexcept
+std::shared_ptr<Texture> TextureMaterial::GetTexture() noexcept
 {
     return m_texture;
 }
     
-const std::shared_ptr<Texture>& TextureMaterial::GetTexture() const noexcept
+std::shared_ptr<const Texture> TextureMaterial::GetTexture() const noexcept
 {
     return m_texture;
 }
@@ -152,7 +152,7 @@ void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTex
     m_maskTexture = maskTexture;
 }
 
-const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const
+std::shared_ptr<const Texture> MaskTextureMaterial::GetMaskTexture() const
 {
     return m_maskTexture;
 }

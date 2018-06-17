@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Platform/Application.h"
-#include "Core/Math/Color.h"
 #include "Core/Object/Module/TimeModule.h"
 #include "Game/Object/Scene.h"
 
@@ -10,8 +9,14 @@
 namespace tgon
 {
 
-SceneManagementModule::SceneManagementModule(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget) :
-    m_graphics(videoMode, displayTarget)
+SceneManagementModule::SceneManagementModule(std::unique_ptr<Scene> scene, const VideoMode& videoMode, std::shared_ptr<Window> displayTarget) :
+    m_graphics(videoMode, displayTarget),
+    m_currScene(std::move(scene))
+{
+}
+    
+SceneManagementModule::SceneManagementModule(const VideoMode& videoMode, std::shared_ptr<Window> displayTarget) :
+    SceneManagementModule(std::make_unique<Scene>(), videoMode, displayTarget)
 {
 }
 
@@ -38,12 +43,12 @@ void SceneManagementModule::Draw()
     m_graphics.SwapBuffer();
 }
 
-void SceneManagementModule::ChangeScene(std::unique_ptr<Scene>&& scene)
+void SceneManagementModule::ChangeScene(std::unique_ptr<Scene> scene)
 {
     m_currScene = std::move(scene);
 }
 
-void SceneManagementModule::SetDisplayTarget(const std::shared_ptr<Window>& displayTarget)
+void SceneManagementModule::SetDisplayTarget(std::shared_ptr<Window> displayTarget)
 {
     m_displayTarget = displayTarget;
 }
@@ -53,7 +58,7 @@ std::weak_ptr<const Window> SceneManagementModule::GetDisplayTarget() const noex
     return m_displayTarget;
 }
 
-std::weak_ptr<Window>& SceneManagementModule::GetDisplayTarget() noexcept
+std::weak_ptr<Window> SceneManagementModule::GetDisplayTarget() noexcept
 {
     return m_displayTarget;
 }

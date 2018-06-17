@@ -26,7 +26,7 @@ public:
     void SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler);
     bool UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
     
-    void NotifyEvent(const StringViewHash& eventName);
+    void DispatchEvent(const StringViewHash& eventName);
     
 /* @section Private variable */
 private:

@@ -1,7 +1,7 @@
 /**
- * @filename    ImageUtility.h
- * @author      ggomdyu
- * @since       04/10/2018
+ * @file    ImageUtility.h
+ * @author  ggomdyu
+ * @since   04/10/2018
  */
 
 #pragma once

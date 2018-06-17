@@ -1,14 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
+#include "Keyboard.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsKeyboard.h"
 #elif TGON_PLATFORM_MACOS
 #   include "MacOS/MacOSKeyboard.h"
 #endif
-
-#include "Keyboard.h"
 #include "InputManager.h"
 
 namespace tgon

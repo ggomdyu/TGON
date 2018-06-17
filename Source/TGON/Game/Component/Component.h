@@ -7,11 +7,11 @@
 #pragma once
 #include "Core/Object/Object.h"
 
-#include "ComponentFwd.h"
-
 namespace tgon
 {
 
+class GameObject;
+    
 class TGON_API Component :
 	public Object
 {
@@ -26,7 +26,7 @@ public:
 public:
 	virtual void Update() = 0;
     
-	void SetOwner(GameObject* owner) noexcept;
+	void SetOwner(std::weak_ptr<GameObject> owner) noexcept;
     std::weak_ptr<const GameObject> GetOwner() const noexcept;
     std::weak_ptr<GameObject> GetOwner() noexcept;
 
@@ -36,11 +36,11 @@ private:
 };
 
 /**
- * @brief   Gets the unique id of component specified by _ComponentType.
- * @tparam  The type of Component what you want to get id.
- * @return  The unique id of component.
+ * @brief                   Gets the unique id of component specified by _ComponentType.
+ * @tparam _ComponentType   The type of Component what you want to get id.
+ * @return                  The unique id of component.
  */
-template<typename _ComponentType>
+template <typename _ComponentType>
 inline std::size_t GetComponentId()
 {
     return tgon::GetRTTI<_ComponentType>()->GetHashCode();

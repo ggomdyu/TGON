@@ -7,10 +7,18 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "MacOSKeyboardFwd.h"
+namespace gainput
+{
+    
+class InputDeviceKeyboard;
+    
+} /* namespace gainput */
 
 namespace tgon
 {
+    
+enum class KeyCode;
+class InputManagerImpl;
     
 class TGON_API KeyboardImpl final
 {

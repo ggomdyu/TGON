@@ -7,10 +7,12 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "MouseFwd.h"
-
 namespace tgon
 {
+    
+class InputManager;
+class MouseImpl;
+enum class MouseCode;
     
 class TGON_API Mouse final
 {

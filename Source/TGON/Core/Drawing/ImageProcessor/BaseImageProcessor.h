@@ -1,7 +1,8 @@
 /**
- * @filename    PNGImageProcessor.h
- * @author      ggomdyu
- * @since       01/20/2018
+ * @file    BaseImageProcessor.h
+ * @author  ggomdyu
+ * @since   01/20/2018
+ * @brief   Base class of all image processor.
  */
 
 #pragma once

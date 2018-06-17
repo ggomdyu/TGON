@@ -1,7 +1,7 @@
 /**
- * @filename    Bitmap.h
- * @author      ggomdyu
- * @since       01/20/2018
+ * @file    Bitmap.h
+ * @author  ggomdyu
+ * @since   01/20/2018
  */
 
 #pragma once

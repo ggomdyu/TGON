@@ -1,7 +1,7 @@
 /**
- * @filename    TimeModule.h
- * @author      ggomdyu
- * @since       07/24/2016
+ * @file    TimeModule.h
+ * @author  ggomdyu
+ * @since   ß07/24/2016
  */
 
 #pragma once
@@ -27,13 +27,28 @@ public:
 /* @section Public method */
 public:
     virtual void Update() override;
-    void SetTimeScale(float timeScale);
-    float GetTimeScale() const;
-    float GetTickTime() const;
+    
+    /**
+     * @brief                   Sets the scale which the time passing.
+     * @param [in] timeScale    The scale of time passing.
+     */
+    void SetTimeScale(float timeScale) noexcept;
+    
+    /**
+     * @brief   Gets the scale which the time passing.
+     * @return  The scale of time passing.
+     */
+    float GetTimeScale() const noexcept;
+    
+    /**
+     * @brief   Gets the elapsed time per each frame.
+     * @return  The elapsed time per each frame.
+     */
+    float GetTickTime() const noexcept;
 
 /* @section Private variable */
 private:
-    uint64_t m_prevTime;
+    uint64_t m_lastRecordedTickTime;
     float m_timeScale;
     float m_tickTime;
 };

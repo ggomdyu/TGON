@@ -22,7 +22,8 @@ public:
 
 /* @section Public constructor */
 public:
-    SceneManagementModule(const VideoMode& videoMode, const std::shared_ptr<Window>& displayTarget);
+    SceneManagementModule(std::unique_ptr<Scene> scene, const VideoMode& videoMode, std::shared_ptr<Window> displayTarget);
+    SceneManagementModule(const VideoMode& videoMode, std::shared_ptr<Window> displayTarget);
 
 /* @section Public destructor */
 public:
@@ -30,20 +31,35 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Updates the frame of Scene. */
     virtual void Update() final override;
     
+    /* @brief   Draw the frame of Scene. */
     void Draw();
 
-    void ChangeScene(std::unique_ptr<Scene>&& scene);
+    /**/
+    void ChangeScene(std::unique_ptr<Scene> scene);
 
-    void SetDisplayTarget(const std::shared_ptr<Window>& displayTarget);
+    /**
+     * @brief                       Sets the draw target window.
+     * @param [in] displayTarget    The target window to draw.
+     */
+    void SetDisplayTarget(std::shared_ptr<Window> displayTarget);
     
     std::weak_ptr<const Window> GetDisplayTarget() const noexcept;
     
-    std::weak_ptr<Window>& GetDisplayTarget() noexcept;
+    std::weak_ptr<Window> GetDisplayTarget() noexcept;
     
+    /**
+     * @brief   Returns the current managed scene.
+     * @return  The pointer to scene.
+     */
     const Scene* GetCurrentScene() const noexcept;
     
+    /**
+     * @brief   Returns the current managed scene.
+     * @return  The pointer to scene.
+     */
     Scene* GetCurrentScene() noexcept;
     
 /* @section Public method */

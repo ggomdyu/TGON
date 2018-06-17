@@ -5,7 +5,6 @@
  */
 
 #pragma once
-
 #define TGON_USING_OPENGL 1
 #include "Core/Audio/AudioBuffer.h"
 #include "Core/Audio/AudioPlayer.h"
@@ -61,8 +60,7 @@
 #include "Graphics/LowLevel/VertexBuffer.h"
 #include "Graphics/LowLevel/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
+#include "Graphics/Render/Camera.h"
 #include "Game/Object/Module/SceneManagementModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
-#include "Game/Component/SpriteComponent.h"
-#include "Graphics/Render/Camera.h"

@@ -1,14 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
+#include "Mouse.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsMouse.h"
 #elif TGON_PLATFORM_MACOS
 #   include "MacOS/MacOSMouse.h"
 #endif
-
-#include "Mouse.h"
 #include "InputManager.h"
 
 namespace tgon

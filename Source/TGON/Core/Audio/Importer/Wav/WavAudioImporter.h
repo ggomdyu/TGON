@@ -1,8 +1,8 @@
 /**
- * @filename    WavAudioImporter.h
- * @author      ggomdyu
- * @since       04/20/2018
- * @see         https://sites.google.com/site/musicgapi/technical-documents/wav-file-format
+ * @file    WavAudioImporter.h
+ * @author  ggomdyu
+ * @since   04/20/2018
+ * @see     https://sites.google.com/site/musicgapi/technical-documents/wav-file-format
  *              http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html
  */
 

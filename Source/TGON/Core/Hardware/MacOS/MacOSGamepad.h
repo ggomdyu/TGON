@@ -1,7 +1,7 @@
 /**
- * @filename    MacOSGamepad.h
- * @author      ggomdyu
- * @since       06/03/2018
+ * @file    MacOSGamepad.h
+ * @author  ggomdyu
+ * @since   06/03/2018
  */
 
 #pragma once
@@ -9,10 +9,17 @@
 
 #include "Core/Platform/Config.h"
 
-#include "MacOSGamepadFwd.h"
+namespace gainput
+{
+    
+class InputDevicePad;
+    
+} /* namespace gainput */
 
 namespace tgon
 {
+    
+class InputManagerImpl;
 
 class TGON_API GamepadImpl final
 {

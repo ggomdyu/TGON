@@ -1,7 +1,8 @@
 /**
- * @filename    BmpImageProcessor.h
- * @author      ggomdyu
- * @since       04/22/2018
+ * @file    BmpImageProcessor.h
+ * @author  ggomdyu
+ * @since   04/22/2018
+ @ @brief   Processes the binary BMP image file.
  */
 
 #pragma once

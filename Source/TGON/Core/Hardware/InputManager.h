@@ -9,16 +9,17 @@
 
 #include "Core/Platform/Config.h"
 
-#include "InputManagerFwd.h"
-
 namespace tgon
 {
+
+class Window;
+class InputManagerImpl;
 
 class TGON_API InputManager final
 {
 /* @section Public constructor */
 public:
-    InputManager(const std::shared_ptr<Window>& inputTarget);
+    InputManager(std::shared_ptr<Window> inputTarget);
     
 /* @section Public destructor */
 public:

@@ -45,7 +45,7 @@ protected:
     bool m_isDynamicUsage;
 };
 
-template<typename _DataArrayType, std::size_t _DataArraySize>
+template <typename _DataArrayType, std::size_t _DataArraySize>
 inline void GenericIndexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage)
 {
     this->SetData(data, sizeof(data), isDynamicUsage);

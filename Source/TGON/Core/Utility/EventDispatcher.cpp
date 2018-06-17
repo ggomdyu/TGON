@@ -28,7 +28,7 @@ bool EventDispatcher::UnsubscribeEvent(const StringViewHash& eventName, const Ev
     return true;
 }
     
-void EventDispatcher::NotifyEvent(const StringViewHash& eventName)
+void EventDispatcher::DispatchEvent(const StringViewHash& eventName)
 {
     auto iter = m_eventHandlers.find(eventName.GetHashCode());
     if (iter == m_eventHandlers.end())

@@ -7,16 +7,26 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "MacOSInputManagerFwd.h"
+namespace gainput
+{
+    
+class InputDeviceMouse;
+class InputDeviceKeyboard;
+class InputDevicePad;
+class InputManager;
+
+} /* namespace gainput */
 
 namespace tgon
 {
+    
+class Window;
 
 class TGON_API InputManagerImpl final
 {
 /* @section Public constructor */
 public:
-    explicit InputManagerImpl(const Window& window);
+    explicit InputManagerImpl(std::shared_ptr<Window> window);
    
 /* @section Public destructor */
 public:

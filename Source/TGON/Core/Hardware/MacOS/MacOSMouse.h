@@ -9,10 +9,18 @@
 
 #include "Core/Platform/Config.h"
 
-#include "MacOSMouseFwd.h"
+namespace gainput
+{
+    
+class InputDeviceMouse;
+    
+} /* namespace gainput */
 
 namespace tgon
 {
+
+class InputManagerImpl;
+enum class MouseCode;
     
 class TGON_API MouseImpl final
 {

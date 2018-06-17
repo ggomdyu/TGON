@@ -1,14 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Platform/Config.h"
-
+#include "Gamepad.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsGamepad.h"
 #elif TGON_PLATFORM_MACOS
 #   include "MacOS/MacOSGamepad.h"
 #endif
-
-#include "Gamepad.h"
 #include "InputManager.h"
 
 namespace tgon
