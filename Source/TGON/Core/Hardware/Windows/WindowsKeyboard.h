@@ -7,10 +7,18 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "WindowsKeyboardFwd.h"
+namespace OIS
+{
+
+class Keyboard;
+
+} /* namespace OIS */
 
 namespace tgon
 {
+
+enum class KeyCode;
+class InputManagerImpl;
 
 class TGON_API KeyboardImpl final
 {

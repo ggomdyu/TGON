@@ -7,7 +7,7 @@
 namespace tgon
 {
     
-void SpriteBatch::AddSprite(const std::shared_ptr<Sprite>& newSprite)
+void SpriteBatch::AddSprite(std::shared_ptr<Sprite> newSprite)
 {
     for (auto& batchedSprites : m_batchedSpritesSet)
     {

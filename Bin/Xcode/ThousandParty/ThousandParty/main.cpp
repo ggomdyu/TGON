@@ -10,6 +10,10 @@ class TGON_API ThousandParty final :
 public:
     TGON_RUNTIME_OBJECT(ThousandParty);
 
+/* @section Public destructor */
+public:
+    virtual ~ThousandParty() = default;
+
 /* @section Public event handler */
 public:
     virtual void OnDidLaunch() override
@@ -24,6 +28,8 @@ public:
         }
         this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
         this->AddModule<TimeModule>();
+
+        //GameObject g;
 //        this->AddModule<SceneManagementModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());
     }
     

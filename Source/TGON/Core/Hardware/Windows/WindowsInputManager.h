@@ -7,16 +7,27 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-#include "WindowsInputManagerFwd.h"
+namespace OIS
+{
+
+class Mouse;
+class Keyboard;
+class JoyStick;
+class InputManager;
+typedef std::multimap<std::string, std::string> ParamList;
+
+} /* namespace OIS */
 
 namespace tgon
 {
+
+class Window;
 
 class TGON_API InputManagerImpl final
 {
 /* @section Public constructor */
 public:
-    explicit InputManagerImpl(const std::shared_ptr<Window>& inputTarget);
+    explicit InputManagerImpl(std::shared_ptr<Window> inputTarget);
     
 /* @section Public destructor */
 public:
@@ -31,7 +42,7 @@ public:
 
 /* @section Private method */
 private:
-    OIS::ParamList QueryParamList(const std::shared_ptr<Window>& inputTarget) const;
+    OIS::ParamList QueryParamList(std::shared_ptr<Window> inputTarget) const;
     
 /* @section Protected variable */
 protected:

@@ -18,7 +18,7 @@ private:
     
 /* @section Public method */
 public:
-    void AddSprite(const std::shared_ptr<Sprite>& sprite);
+    void AddSprite(std::shared_ptr<Sprite> sprite);
     void FlushBatch(Graphics& graphics);
     
 /* @section Private variable */

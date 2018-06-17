@@ -8,11 +8,13 @@
 #pragma once
 #include <vector>
 
-#include "ScreenFwd.h"
 #include "Config.h"
 
 namespace tgon
 {
+
+struct Screen;
+
 
 /* @brief   Returns count of detected monitors. */
 TGON_API int32_t GetScreenCount();

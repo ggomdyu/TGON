@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <memory>
+
 #include "Core/Platform/Config.h"
 
 namespace gainput

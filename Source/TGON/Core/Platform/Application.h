@@ -11,12 +11,13 @@
 #include "Core/Object/Object.h"
 #include "Core/Object/Delegate.h"
 #include "Core/Object/Engine.h"
-#include "Core/Platform/Window.h"
-
-#include "ApplicationFwd.h"
 
 namespace tgon
 {
+
+class ApplicationImpl;
+class Window;
+enum class MessageBoxIcon;
 
 class TGON_API Application :
     public Object,
@@ -27,7 +28,7 @@ public:
     
 /* @section Public constructor */
 public:
-    explicit Application(std::unique_ptr<Engine>&& engine);
+    explicit Application(std::unique_ptr<Engine> engine);
     
 /* @section Public destructor */
 public:
@@ -73,7 +74,7 @@ public:
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /* @brief   Gets the root window. */
-    std::shared_ptr<Window>& GetRootWindow() noexcept;
+    std::shared_ptr<Window> GetRootWindow() noexcept;
     
     /* @brief   Gets the root window. */
     std::shared_ptr<const Window> GetRootWindow() const noexcept;

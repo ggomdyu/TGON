@@ -9,10 +9,19 @@
 
 #include "Core/Platform/Config.h"
 
-#include "WindowsMouseFwd.h"
+namespace OIS
+{
+
+class Mouse;
+class MouseState;
+
+} /* namespace OIS */
 
 namespace tgon
 {
+
+class InputManagerImpl;
+enum class MouseCode;
 
 class TGON_API MouseImpl final
 {

@@ -9,10 +9,18 @@
 
 #include "Core/Platform/Config.h"
 
-#include "WindowsGamepadFwd.h"
+namespace OIS
+{
+
+class JoyStick;
+class JoyStickState;
+
+} /* namespace OIS */
 
 namespace tgon
 {
+
+class InputManagerImpl;
 
 class TGON_API GamepadImpl final
 {

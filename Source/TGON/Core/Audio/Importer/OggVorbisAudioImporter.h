@@ -10,7 +10,7 @@
 
 #include "Core/Debug/Log.h"
 
-#include "../Generic/GenericAudioImporter.h"
+#include "BaseAudioImporter.h"
 
 namespace tgon
 {
@@ -37,11 +37,11 @@ public:
 
 template <typename _AllocatorType>
 class BasicOggVorbisAudioImporter :
-    public GenericAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>
+    public BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>::GenericAudioImporter;
+    using BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>::BaseAudioImporter;
 
 /* @section Public method */
 public:

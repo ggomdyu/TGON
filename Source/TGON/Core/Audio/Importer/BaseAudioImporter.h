@@ -1,5 +1,5 @@
 /**
- * @file    GenericAudioImporter.h
+ * @file    BaseAudioImporter.h
  * @author  ggomdyu
  * @since   05/02/2018
  */
@@ -12,12 +12,12 @@ namespace tgon
 {
 
 template <typename _DerivedType, typename _AllocatorType = std::allocator<uint8_t>>
-class GenericAudioImporter
+class BaseAudioImporter
 {
 /* @section Public constructor */
 public:
-    GenericAudioImporter() noexcept;
-    GenericAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes);
+    BaseAudioImporter() noexcept;
+    BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes);
 
 /* @section Public method */
 public:
@@ -39,7 +39,7 @@ protected:
 };
 
 template <typename _DerivedType, typename _AllocatorType>
-inline GenericAudioImporter<_DerivedType, _AllocatorType>::GenericAudioImporter() noexcept :
+inline BaseAudioImporter<_DerivedType, _AllocatorType>::BaseAudioImporter() noexcept :
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0)
@@ -47,56 +47,56 @@ inline GenericAudioImporter<_DerivedType, _AllocatorType>::GenericAudioImporter(
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline GenericAudioImporter<_DerivedType, _AllocatorType>::GenericAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
-    GenericAudioImporter()
+inline BaseAudioImporter<_DerivedType, _AllocatorType>::BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
+    BaseAudioImporter()
 {
     this->Import(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::IsValid() const noexcept
+inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::IsValid() const noexcept
 {
     return m_audioData.size() > 0;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline bool GenericAudioImporter<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() noexcept
+inline std::vector<uint8_t, _AllocatorType>& BaseAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() noexcept
 {
     return m_audioData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& GenericAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() const noexcept
+inline const std::vector<uint8_t, _AllocatorType>& BaseAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() const noexcept
 {
     return m_audioData;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericAudioImporter<_DerivedType, _AllocatorType>::GetBitsPerSample() const noexcept
+inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericAudioImporter<_DerivedType, _AllocatorType>::GetChannels() const noexcept
+inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetChannels() const noexcept
 {
     return m_channels;
 }
 
 template <typename _DerivedType, typename _AllocatorType>
-inline int32_t GenericAudioImporter<_DerivedType, _AllocatorType>::GetSamplingRate() const noexcept
+inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetSamplingRate() const noexcept
 {
     return m_samplingRate;
 }

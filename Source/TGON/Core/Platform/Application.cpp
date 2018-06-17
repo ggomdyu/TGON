@@ -3,8 +3,6 @@
 #include "Core/Object/Engine.h"
 
 #include "Application.h"
-#include "Window.h"
-#include "WindowType.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
 #elif TGON_PLATFORM_MACOS
@@ -14,14 +12,16 @@
 #elif TGON_PLATFORM_IOS
 #   import "IOS/IOSApplication.h"
 #endif
+#include "Window.h"
+#include "WindowType.h"
 
 namespace tgon
 {
 
-Application::Application(std::unique_ptr<Engine>&& engine) :
+Application::Application(std::unique_ptr<Engine> engine) :
     m_impl(new ApplicationImpl),
     m_engine(std::move(engine)),
-    m_rootWindow(Window::Create(m_engine->GetRootWindowStyle()))
+    m_rootWindow(Window::Create(WindowStyle{}))
 {
 }
 
@@ -60,7 +60,7 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     m_impl->ShowMessageBox(title, message, messageBoxIcon);
 }
    
-std::shared_ptr<Window>& Application::GetRootWindow() noexcept
+std::shared_ptr<Window> Application::GetRootWindow() noexcept
 {
     return m_rootWindow;
 }

@@ -11,10 +11,10 @@
 namespace tgon
 {
 
-std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material);
+std::shared_ptr<Mesh> MakeTriangle(std::shared_ptr<Material> material);
 
-std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material);
+std::shared_ptr<Mesh> MakeCube(std::shared_ptr<Material> material);
 
-std::shared_ptr<Mesh> MakeQuad(const std::shared_ptr<Material>& material);
+std::shared_ptr<Mesh> MakeQuad(std::shared_ptr<Material> material);
 
 } /* namespace tgon */

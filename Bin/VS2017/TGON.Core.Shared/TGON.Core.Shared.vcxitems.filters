@@ -46,18 +46,6 @@
     <Filter Include="Source\Core\Audio\Importer">
       <UniqueIdentifier>{269adcf9-c8e9-4e38-8d98-8728a1b5f13d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Audio\Importer\Generic">
-      <UniqueIdentifier>{800a78ce-1342-48df-9185-2df5e723b31b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Audio\Importer\Mp3">
-      <UniqueIdentifier>{8dae94bb-98f8-4512-9bde-e3f71d1d829f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Audio\Importer\OggVorbis">
-      <UniqueIdentifier>{704e4650-7f25-41ef-81d4-1ecccb06ea71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Audio\Importer\Wav">
-      <UniqueIdentifier>{49f18b5e-1681-4643-a505-958caca21ff7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Drawing\ImageProcessor">
       <UniqueIdentifier>{7aa049dd-aa38-4fc8-9ccc-9b25d93eb660}</UniqueIdentifier>
     </Filter>
@@ -135,6 +123,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp">
       <Filter>Source\Core\Object</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ICloneable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -221,9 +210,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\UUID.h">
       <Filter>Source\Core\Hash</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\ScreenFwd.h">
-      <Filter>Source\Core\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\RTTI.h">
       <Filter>Source\Core\Object</Filter>
     </ClInclude>
@@ -278,15 +264,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
       <Filter>Source\Core\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\Generic\GenericAudioImporter.h">
-      <Filter>Source\Core\Audio\Importer\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\OggVorbis\OggVorbisAudioImporter.h">
-      <Filter>Source\Core\Audio\Importer\OggVorbis</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\Wav\RiffReader.h">
-      <Filter>Source\Core\Audio\Importer\Wav</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\AudioPlayer.h">
       <Filter>Source\Core\Audio</Filter>
     </ClInclude>
@@ -301,9 +278,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\StaticInvoke.h">
       <Filter>Source\Core\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\Wav\WavAudioImporter.h">
-      <Filter>Source\Core\Audio\Importer\Wav</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Drawing.h">
       <Filter>Source\Core\Drawing</Filter>
@@ -362,18 +336,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManagerFwd.h">
-      <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseFwd.h">
-      <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\GamepadFwd.h">
-      <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\KeyboardFwd.h">
-      <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Gamepad.h">
       <Filter>Source\Core\Hardware</Filter>
     </ClInclude>
@@ -404,11 +366,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringHash.h">
       <Filter>Source\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Core.Shared\..\..\..\Source\TGON\Core\Utility\NonAddressable.h">
-      <Filter>Source\Core\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ISerializable.h">
       <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\NonAddressable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\OggVorbisAudioImporter.h">
+      <Filter>Source\Core\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\RiffReader.h">
+      <Filter>Source\Core\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\WavAudioImporter.h">
+      <Filter>Source\Core\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Core.Shared\..\..\..\Source\TGON\Core\Audio\Importer\BaseAudioImporter.h">
+      <Filter>Source\Core\Audio\Importer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

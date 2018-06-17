@@ -6,7 +6,7 @@
 namespace tgon
 {
 
-std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeTriangle(std::shared_ptr<Material> material)
 {
     // Create a VertexBuffer
     V3F_T2F vertices[] =
@@ -30,7 +30,7 @@ std::shared_ptr<Mesh> MakeTriangle(const std::shared_ptr<Material>& material)
     return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
-std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeCube(std::shared_ptr<Material> material)
 {
     // Create a VertexBuffer
     V3F_T2F vertices[] =
@@ -84,7 +84,7 @@ std::shared_ptr<Mesh> MakeCube(const std::shared_ptr<Material>& material)
     return std::make_shared<Mesh>(vertexBuffer, indexBuffer, material);
 };
 
-std::shared_ptr<Mesh> MakeQuad(const std::shared_ptr<Material>& material)
+std::shared_ptr<Mesh> MakeQuad(std::shared_ptr<Material> material)
 {
     // Create a VertexBuffer
     V3F_T2F vertices[] =

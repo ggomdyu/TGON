@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else
@@ -10,8 +11,8 @@
 
 #include "AudioBuffer.h"
 #include "AudioBufferUtility.h"
-#include "Importer/Wav/WavAudioImporter.h"
-#include "Importer/OggVorbis/OggVorbisAudioImporter.h"
+#include "Importer/WavAudioImporter.h"
+#include "Importer/OggVorbisAudioImporter.h"
 
 namespace tgon
 {

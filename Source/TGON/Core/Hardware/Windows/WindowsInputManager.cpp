@@ -9,7 +9,7 @@
 namespace tgon
 {
    
-InputManagerImpl::InputManagerImpl(const std::shared_ptr<Window>& inputTarget) :
+InputManagerImpl::InputManagerImpl(std::shared_ptr<Window> inputTarget) :
     m_inputManager(OIS::InputManager::createInputSystem(QueryParamList(inputTarget)))
 {
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
@@ -39,7 +39,7 @@ OIS::JoyStick* InputManagerImpl::CreateGamepadDevice()
     return static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true));
 }
 
-OIS::ParamList InputManagerImpl::QueryParamList(const std::shared_ptr<Window>& inputTarget) const
+OIS::ParamList InputManagerImpl::QueryParamList(std::shared_ptr<Window> inputTarget) const
 {
     OIS::ParamList paramList
     {

@@ -19,8 +19,17 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Returns copied one from this instance. */
-    virtual std::shared_ptr<ICloneable> Clone() const = 0;
+    /**
+     * @brief   Returns copied one from instance.
+     * @return  The instance copied from instance.
+     */
+    std::shared_ptr<const ICloneable> Clone() const;
+
+    /**
+     * @brief   Returns copied one from instance.
+     * @return  The instance copied from instance.
+     */
+    virtual std::shared_ptr<ICloneable> Clone() = 0;
 };
 
 } /* namespace tgon */

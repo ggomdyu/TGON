@@ -138,7 +138,7 @@ public:
     virtual void Use() override;
     virtual void Unuse() override;
     virtual bool CanBatch(const Material& rhs) const override;
-    void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
+    void SetMaskTexture(std::shared_ptr<Texture> maskTexture);
     std::shared_ptr<const Texture> GetMaskTexture() const;
 
 private:

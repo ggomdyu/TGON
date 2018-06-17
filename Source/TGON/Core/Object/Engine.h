@@ -88,7 +88,7 @@ private:
      * @param [in] moduleId The unique id of Module what you want to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
-    std::shared_ptr<IModule> GetModule(size_t moduleId) const;
+    std::shared_ptr<const IModule> GetModule(size_t moduleId) const;
 
     /**
      * @brief               Returns a module that managed by Application.

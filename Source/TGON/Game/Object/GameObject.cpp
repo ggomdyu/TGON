@@ -90,4 +90,14 @@ Component* GameObject::GetComponent(size_t componentId)
     }
 }
 
+Transform& GameObject::GetTransform() noexcept
+{
+    return m_transform;
+}
+
+const Transform& GameObject::GetTransform() const noexcept
+{
+    return m_transform;
+}
+
 } /*namespace tgon*/

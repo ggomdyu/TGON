@@ -17,19 +17,20 @@ class Mesh
 {
 /* @section Public constructor */
 public:
-    explicit Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer, const std::shared_ptr<Material>& material);
+    explicit Mesh(std::shared_ptr<VertexBuffer> vertexBuffer, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<Material> material);
 
 /* @section Public method */
 public:
-    void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
-    void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
-    void SetMaterial(const std::shared_ptr<Material>& material);
-    std::shared_ptr<VertexBuffer>& GetVertexBuffer() noexcept;
-    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const noexcept;
-    std::shared_ptr<IndexBuffer>& GetIndexBuffer() noexcept;
-    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
-    std::shared_ptr<Material>& GetMaterial() noexcept;
-    const std::shared_ptr<Material>& GetMaterial() const noexcept;
+    void SetVertexBuffer(std::shared_ptr<VertexBuffer> vertexBuffer);
+    void SetIndexBuffer(std::shared_ptr<IndexBuffer> indexBuffer);
+    void SetMaterial(std::shared_ptr<Material> material);
+    
+    std::shared_ptr<VertexBuffer> GetVertexBuffer() noexcept;
+    std::shared_ptr<IndexBuffer> GetIndexBuffer() noexcept;
+    std::shared_ptr<Material> GetMaterial() noexcept;
+    std::shared_ptr<const VertexBuffer> GetVertexBuffer() const noexcept;
+    std::shared_ptr<const IndexBuffer> GetIndexBuffer() const noexcept;
+    std::shared_ptr<const Material> GetMaterial() const noexcept;
 
 /* @section Protected variable */
 protected:

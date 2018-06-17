@@ -7,8 +7,7 @@
  */
 
 #pragma once
-#include "../Generic/GenericAudioImporter.h"
-
+#include "BaseAudioImporter.h"
 #include "RiffReader.h"
 
 namespace tgon
@@ -16,11 +15,11 @@ namespace tgon
 
 template <typename _AllocatorType>
 class BasicWavAudioImporter final :
-    public GenericAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>
+    public BaseAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>
 {
 /* @section Public constructor */
 public:
-    using GenericAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>::GenericAudioImporter;
+    using BaseAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>::BaseAudioImporter;
 
 /* @section Public method */
 public:

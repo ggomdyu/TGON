@@ -28,7 +28,7 @@ namespace tgon
 
 extern std::unique_ptr<Engine> MakeEngine();
 
-const std::shared_ptr<Application>& Application::GetInstance()
+std::shared_ptr<Application> Application::GetInstance()
 {
     return g_application;
 }

@@ -147,7 +147,7 @@ bool MaskTextureMaterial::CanBatch(const Material & rhs) const
     return false;
 }
 
-void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTexture)
+void MaskTextureMaterial::SetMaskTexture(std::shared_ptr<Texture> maskTexture)
 {
     m_maskTexture = maskTexture;
 }
