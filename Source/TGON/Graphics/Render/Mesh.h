@@ -1,7 +1,7 @@
 /**
- * @filename    Mesh.h
- * @author      ggomdyu
- * @since       01/06/2018
+ * @file    Mesh.h
+ * @author  ggomdyu
+ * @since   01/06/2018
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    TaskModule.h
- * @author      ggomdyu
- * @since       05/25/2018
+ * @file    TaskModule.h
+ * @author  ggomdyu
+ * @since   05/25/2018
  */
 
 #pragma once

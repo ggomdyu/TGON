@@ -1,8 +1,7 @@
 /**
- * @filename    FVF.h
- * @author      ggomdyu
- * @since       03/15/2018
- * @brief
+ * @file    FVF.h
+ * @author  ggomdyu
+ * @since   03/15/2018
  */
 
 #pragma once

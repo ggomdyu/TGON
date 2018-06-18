@@ -1,7 +1,7 @@
 /**
- * @filename    StringView.h
- * @author      ggomdyu
- * @date        10/27/2017
+ * @file    StringView.h
+ * @author  ggomdyu
+ * @date    10/27/2017
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLTextureUtility.h
- * @author      ggomdyu
- * @since       03/22/2018
+ * @file    OpenGLTextureUtility.h
+ * @author  ggomdyu
+ * @since   03/22/2018
  */
 
 #pragma once

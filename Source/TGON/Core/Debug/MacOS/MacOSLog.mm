@@ -7,6 +7,7 @@
 
 #include "Core/Utility/Algorithm.h"
 #include "Core/String/StringTraits.h"
+
 #include "../Log.h"
 
 namespace tgon

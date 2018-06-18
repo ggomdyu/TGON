@@ -1,8 +1,7 @@
 /**
- * @filename    GraphicsType.h
- * @author      ggomdyu
- * @since       10/22/2017
- * @brief
+ * @file    GraphicsType.h
+ * @author  ggomdyu
+ * @since   10/22/2017
  */
 
 #pragma once
@@ -22,7 +21,6 @@ enum class GraphicsSDK
     OpenGL4_6,
     OpenGLES,
     Direct3D9,
-    Direct3D10,
     Direct3D11,
     Direct3D12,
     Metal,

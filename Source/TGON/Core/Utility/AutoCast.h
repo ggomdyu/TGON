@@ -1,7 +1,7 @@
 /**
- * @filename    Cast.h
- * @author      ggomdyu
- * @since       05/24/2016
+ * @file    Cast.h
+ * @author  ggomdyu
+ * @since   05/24/2016
  */
 
 #pragma once

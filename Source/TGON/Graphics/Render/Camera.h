@@ -1,7 +1,7 @@
 /**
- * @filename    Camera.h
- * @author      ggomdyu
- * @since       09/01/2017
+ * @file    Camera.h
+ * @author  ggomdyu
+ * @since   09/01/2017
  */
 
 #pragma once

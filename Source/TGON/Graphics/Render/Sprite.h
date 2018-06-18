@@ -1,7 +1,7 @@
 /**
- * @filename    Sprite.h
- * @author      ggomdyu
- * @since       06/06/2018
+ * @file    Sprite.h
+ * @author  ggomdyu
+ * @since   06/06/2018
  */
 
 #pragma once

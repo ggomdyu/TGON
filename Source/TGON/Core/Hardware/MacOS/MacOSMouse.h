@@ -1,7 +1,7 @@
 /**
- * @filename    MacOSMouse.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    MacOSMouse.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

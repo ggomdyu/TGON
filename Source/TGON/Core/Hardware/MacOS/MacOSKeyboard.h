@@ -1,7 +1,7 @@
 /**
- * @filename    MacOSKeyboard.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    MacOSKeyboard.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

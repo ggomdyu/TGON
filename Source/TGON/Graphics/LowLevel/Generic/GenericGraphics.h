@@ -1,8 +1,8 @@
 /**
- * @filename    GenericGraphics.h
- * @author      ggomdyu
- * @since       10/22/2017
- * @brief       Set of Low level rendering interfaces.
+ * @file    GenericGraphics.h
+ * @author  ggomdyu
+ * @since   10/22/2017
+ * @brief   Set of Low level rendering interfaces.
  */
 
 #pragma once

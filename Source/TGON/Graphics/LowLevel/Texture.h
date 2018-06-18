@@ -1,8 +1,7 @@
 /**
- * @filename    Texture.h
- * @author      ggomdyu
- * @since       02/20/2018
- * @brief
+ * @file    Texture.h
+ * @author  ggomdyu
+ * @since   02/20/2018
  */
 
 #pragma once

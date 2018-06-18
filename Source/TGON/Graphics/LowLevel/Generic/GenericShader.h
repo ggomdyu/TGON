@@ -1,7 +1,7 @@
 /**
- * @filename    GenericShader.h
- * @author      ggomdyu
- * @since       02/17/2018
+ * @file    GenericShader.h
+ * @author  ggomdyu
+ * @since   02/17/2018
  */
 
 #pragma once

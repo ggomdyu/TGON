@@ -1,8 +1,8 @@
 /**
- * @filename    Time.h
- * @author      ggomdyu
- * @since       05/15/2016
- * @brief       Set of Platform-agnostic Time interfaces.
+ * @file    Time.h
+ * @author  ggomdyu
+ * @since   05/15/2016
+ * @brief   Set of Platform-agnostic Time interfaces.
  */
 
 #pragma once

@@ -31,13 +31,15 @@ void SceneManagementModule::Update()
     {
         m_currScene->Update(timeModule->GetTickTime());
     }
-    m_currScene->Draw();
+    
+    this->Draw();
 }
 
 void SceneManagementModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
+        m_currScene->Draw();
         m_spriteBatch.FlushBatch(m_graphics);
     }
     m_graphics.SwapBuffer();

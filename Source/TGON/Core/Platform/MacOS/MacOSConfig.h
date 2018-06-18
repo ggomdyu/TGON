@@ -1,8 +1,8 @@
 /**
- * @filename    MacOSConfig.h
- * @author      ggomdyu
- * @since       07/16/2017
- * @brief       The set of platform specific configurations.
+ * @file    MacOSConfig.h
+ * @author  ggomdyu
+ * @since   07/16/2017
+ * @brief   The set of platform specific configurations.
  */
 
 #pragma once

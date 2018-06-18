@@ -1,7 +1,7 @@
 /**
- * @filename    Gamepad.h
- * @author      ggomdyu
- * @since       05/15/2018
+ * @file    Gamepad.h
+ * @author  ggomdyu
+ * @since   05/15/2018
  */
 
 #pragma once

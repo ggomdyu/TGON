@@ -1,7 +1,7 @@
 /**
- * @filename    RTTI.h
- * @author      ggomdyu
- * @since       10/29/2017
+ * @file    RTTI.h
+ * @author  ggomdyu
+ * @since   10/29/2017
  */
 
 #pragma once

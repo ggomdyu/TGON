@@ -1,15 +1,17 @@
 /**
- * @filename    MacOSWindowUtility.h
- * @author      ggomdyu
- * @since       07/21/2017
- * @brief
+ * @file    MacOSWindowUtility.h
+ * @author  ggomdyu
+ * @since   07/21/2017
  */
 
 #pragma once
-#include "MacOSWindowFwd.h"
+
+@class NSWindow;
 
 namespace tgon
 {
+    
+struct WindowStyle;
 
 /**
  * @brief                       Creates a window via given WindowStyle.

@@ -1,7 +1,7 @@
 ///**
-// * @filename    FStateMachine.h
-// * @author      ggomdyu
-// * @since       11/12/2016
+// * @file      FStateMachine.h
+// * @author    ggomdyu
+// * @since     11/12/2016
 // */
 //
 //#pragma once

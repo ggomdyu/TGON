@@ -1,14 +1,18 @@
 /**
- * @filename    MacOSWindowDelegate.h
- * @author      ggomdyu
- * @since       08/31/2017
- * @brief
+ * @file    MacOSWindowDelegate.h
+ * @author  ggomdyu
+ * @since   08/31/2017
  */
 
 #pragma once
 #import <Cocoa/Cocoa.h>
 
-#include "MacOSWindowDelegateFwd.h"
+namespace tgon
+{
+    
+class Window;
+    
+} /*　namespace tgon */
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
 {

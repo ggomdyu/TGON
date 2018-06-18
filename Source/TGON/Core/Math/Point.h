@@ -1,7 +1,7 @@
 /**
- * @filename    Point.h
- * @author      ggomdyu
- * @since       04/02/2017
+ * @file    Point.h
+ * @author  ggomdyu
+ * @since   04/02/2017
  */
 
 #pragma once

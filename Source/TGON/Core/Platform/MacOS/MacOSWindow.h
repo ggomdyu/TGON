@@ -1,22 +1,26 @@
 /**
- * @filename    MacOSWindow.h
- * @author      ggomdyu
- * @since       07/16/2017
- * @brief       The platform specific window class implementation.
+ * @file    MacOSWindow.h
+ * @author  ggomdyu
+ * @since   07/16/2017
+ * @brief   The platform specific window class implementation.
  */
 
 #pragma once
 #include <boost/noncopyable.hpp>
 
+#include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
-#include "Core/Platform/Config.h"
 
-#import "MacOSWindowFwd.h"
+@class NSWindow;
+@class WindowDelegate;
 
 namespace tgon
 {
     
+class Window;
+struct WindowStyle;
+
 class TGON_API WindowImpl final :
     private boost::noncopyable
 {

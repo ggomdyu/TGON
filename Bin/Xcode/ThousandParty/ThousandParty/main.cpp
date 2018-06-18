@@ -2,6 +2,8 @@
 
 #include "TGON.h"
 
+#include "TestScene.h"
+
 using namespace tgon;
 
 class TGON_API ThousandParty final :
@@ -28,9 +30,7 @@ public:
         }
         this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
         this->AddModule<TimeModule>();
-
-        //GameObject g;
-//        this->AddModule<SceneManagementModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());
+        this->AddModule<SceneManagementModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());
     }
     
     virtual void OnWillTerminate() override

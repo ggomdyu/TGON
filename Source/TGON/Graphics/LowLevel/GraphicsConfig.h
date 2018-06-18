@@ -1,7 +1,7 @@
 /**
- * @filename    GraphicsConfig.h
- * @author      ggomdyu
- * @since       05/08/2018
+ * @file    GraphicsConfig.h
+ * @author  ggomdyu
+ * @since   05/08/2018
  */
 
 #pragma once

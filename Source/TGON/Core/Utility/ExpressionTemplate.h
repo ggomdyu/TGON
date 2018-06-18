@@ -1,9 +1,9 @@
 /**
- * @filename    ExpressionTemplate.h
- * @author      ggomdyu
- * @since       06/20/2017
- * @brief       Utility support for Expression template.
- * @see         https://en.wikipedia.org/wiki/Expression_templates
+ * @file    ExpressionTemplate.h
+ * @author  ggomdyu
+ * @since   06/20/2017
+ * @brief   Utility support for Expression template.
+ * @see     https://en.wikipedia.org/wiki/Expression_templates
  */
 
 #pragma once

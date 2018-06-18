@@ -1,8 +1,8 @@
 /**
- * @filename    InstantiateCounter.h
- * @author      ggomdyu
- * @since       09/24/2017
- * @brief       Set of functions to manage the count of object instantiation.
+ * @file    InstantiateCounter.h
+ * @author  ggomdyu
+ * @since   09/24/2017
+ * @brief   Set of functions to manage the count of object instantiation.
  */
 
 #pragma once

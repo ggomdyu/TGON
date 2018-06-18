@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLVertexBufferUtility.h
- * @author      ggomdyu
- * @since       02/12/2018
+ * @file    OpenGLVertexBufferUtility.h
+ * @author  ggomdyu
+ * @since   02/12/2018
  */
 
 #pragma once

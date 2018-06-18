@@ -1,7 +1,7 @@
 /**
- * @filename    Mathematics.h
- * @author      ggomdyu
- * @since       03/14/2016
+ * @file    Mathematics.h
+ * @author  ggomdyu
+ * @since   03/14/2016
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    InputManager.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    InputManager.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

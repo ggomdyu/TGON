@@ -1,7 +1,7 @@
 /**
- * @filename    FixedStringUtility.h
- * @author      ggomdyu
- * @date        03/16/2017
+ * @file    FixedStringUtility.h
+ * @author  ggomdyu
+ * @date    03/16/2017
  */
 
 #pragma once

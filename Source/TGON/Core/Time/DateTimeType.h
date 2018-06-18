@@ -1,7 +1,7 @@
 /**
- * @filename    DateTimeType.h
- * @author      ggomdyu
- * @since       04/23/2017
+ * @file    DateTimeType.h
+ * @author  ggomdyu
+ * @since   04/23/2017
  */
 
 #pragma once

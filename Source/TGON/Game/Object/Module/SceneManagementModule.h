@@ -1,7 +1,7 @@
 /**
- * @filename    GraphicsModule.h
- * @author      ggomdyu
- * @since       07/24/2016
+ * @file    GraphicsModule.h
+ * @author  ggomdyu
+ * @since   07/24/2016
  */
 
 #pragma once
@@ -34,9 +34,6 @@ public:
     /* @brief   Updates the frame of Scene. */
     virtual void Update() final override;
     
-    /* @brief   Draw the frame of Scene. */
-    void Draw();
-
     /**/
     void ChangeScene(std::unique_ptr<Scene> scene);
 
@@ -62,9 +59,11 @@ public:
      */
     Scene* GetCurrentScene() noexcept;
     
-/* @section Public method */
+/* @section Private method */
 private:
- 
+    /* @brief   Draw the frame of Scene. */
+    void Draw();
+
 /* @section Private variable */
 private:
     Graphics m_graphics;

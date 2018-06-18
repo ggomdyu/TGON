@@ -1,7 +1,7 @@
 /**
- * @filename    Random.h
- * @author      ggomdyu
- * @since       03/14/2016
+ * @file    Random.h
+ * @author  ggomdyu
+ * @since   03/14/2016
  */
 
 #pragma once

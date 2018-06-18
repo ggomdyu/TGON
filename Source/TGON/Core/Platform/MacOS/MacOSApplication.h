@@ -1,7 +1,7 @@
 /**
- * @filename    MacOSApplication.h
- * @author      ggomdyu
- * @since       07/21/2017
+ * @file    MacOSApplication.h
+ * @author  ggomdyu
+ * @since   07/21/2017
  */
 
 #pragma once

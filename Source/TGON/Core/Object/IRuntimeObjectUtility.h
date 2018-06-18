@@ -1,7 +1,7 @@
 /**
- * @filename    IRuntimeObjectUtility.h
- * @author      ggomdyu
- * @since       08/17/2017
+ * @file    IRuntimeObjectUtility.h
+ * @author  ggomdyu
+ * @since   08/17/2017
  */
 
 #pragma once

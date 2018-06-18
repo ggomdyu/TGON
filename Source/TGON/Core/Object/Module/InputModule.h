@@ -1,7 +1,7 @@
 /**
- * @filename    InputModule.h
- * @author      ggomdyu
- * @since       05/15/2018
+ * @file    InputModule.h
+ * @author  ggomdyu
+ * @since   05/15/2018
  */
 
 #pragma once

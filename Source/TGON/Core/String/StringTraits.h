@@ -1,7 +1,7 @@
 /**
- * @filename    StringTraits.h
- * @author      ggomdyu
- * @date        08/06/2017
+ * @file    StringTraits.h
+ * @author  ggomdyu
+ * @date    08/06/2017
  */
 
 #pragma once

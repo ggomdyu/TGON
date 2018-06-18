@@ -1,7 +1,7 @@
 /**
- * @filename    GameObject.h
- * @author      ggomdyu
- * @since       03/22/2016
+ * @file    GameObject.h
+ * @author  ggomdyu
+ * @since   03/22/2016
  */
 
 #pragma once

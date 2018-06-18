@@ -1,7 +1,7 @@
 /**
- * @filename    ScreenType.h
- * @author      ggomdyu
- * @since       09/16/2017
+ * @file    ScreenType.h
+ * @author  ggomdyu
+ * @since   09/16/2017
  */
 
 #pragma once

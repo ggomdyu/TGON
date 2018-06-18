@@ -1,7 +1,7 @@
 /**
- * @filename    Rect.h
- * @author      ggomdyu
- * @since       04/02/2017
+ * @file    Rect.h
+ * @author  ggomdyu
+ * @since   04/02/2017
  */
 
 #pragma once

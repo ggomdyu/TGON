@@ -1,7 +1,7 @@
 /**
- * @filename    Color.h
- * @author      ggomdyu
- * @since       05/03/2017
+ * @file    Color.h
+ * @author  ggomdyu
+ * @since   05/03/2017
  */
 
 #pragma once

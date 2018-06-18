@@ -1,7 +1,7 @@
 /**
- * @filename    Matrix4x4.h
- * @author      ggomdyu
- * @since       03/14/2016
+ * @file    Matrix4x4.h
+ * @author  ggomdyu
+ * @since   03/14/2016
  */
 
 #pragma once

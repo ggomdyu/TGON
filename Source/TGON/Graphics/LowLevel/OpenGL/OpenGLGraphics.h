@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLGraphics.h
- * @author      ggomdyu
- * @since       10/22/2017
+ * @file    OpenGLGraphics.h
+ * @author  ggomdyu
+ * @since   10/22/2017
  */
 
 #pragma once

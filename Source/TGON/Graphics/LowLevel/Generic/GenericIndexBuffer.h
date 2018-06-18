@@ -1,8 +1,7 @@
 /**
- * @filename    GenericIndexBuffer.h
- * @author      ggomdyu
- * @since       02/17/2018
- * @brief
+ * @file    GenericIndexBuffer.h
+ * @author  ggomdyu
+ * @since   02/17/2018
  */
 
 #pragma once

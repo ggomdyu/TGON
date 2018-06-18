@@ -1,7 +1,7 @@
 /**
- * @filename    Component.h
- * @author      ggomdyu
- * @since       04/26/2015
+ * @file    Component.h
+ * @author  ggomdyu
+ * @since   04/26/2015
  */
 
 #pragma once
@@ -34,16 +34,5 @@ public:
 private:
     std::weak_ptr<GameObject> m_owner;
 };
-
-/**
- * @brief                   Gets the unique id of component specified by _ComponentType.
- * @tparam _ComponentType   The type of Component what you want to get id.
- * @return                  The unique id of component.
- */
-template <typename _ComponentType>
-inline std::size_t GetComponentId()
-{
-    return tgon::GetRTTI<_ComponentType>()->GetHashCode();
-}
 
 } /* namespace tgon */

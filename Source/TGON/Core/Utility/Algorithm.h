@@ -1,8 +1,8 @@
 /**
- * @filename    Algorithm.h
- * @author      ggomdyu
- * @since       07/05/2016
- * @brief       Utility support for algorithm.
+ * @file    Algorithm.h
+ * @author  ggomdyu
+ * @since   07/05/2016
+ * @brief   Utility support for algorithm.
  */
 
 #pragma once

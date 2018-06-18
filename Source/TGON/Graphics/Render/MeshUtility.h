@@ -1,7 +1,7 @@
 /**
- * @filename    MeshUtility.h
- * @author      ggomdyu
- * @since       01/06/2018
+ * @file    MeshUtility.h
+ * @author  ggomdyu
+ * @since   01/06/2018
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    IComparable.h
- * @author      ggomdyu
- * @since       04/07/2018
+ * @file    IComparable.h
+ * @author  ggomdyu
+ * @since   04/07/2018
  */
 
 #pragma once

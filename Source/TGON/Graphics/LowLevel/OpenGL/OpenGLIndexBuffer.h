@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLIndexBuffer.h
- * @author      ggomdyu
- * @since       01/05/2018
+ * @file    OpenGLIndexBuffer.h
+ * @author  ggomdyu
+ * @since   01/05/2018
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    StaticInvoke.h
- * @author      ggomdyu
- * @since       05/06/2018
+ * @file    StaticInvoke.h
+ * @author  ggomdyu
+ * @since   05/06/2018
  */
 
 #pragma once

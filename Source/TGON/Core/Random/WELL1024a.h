@@ -1,9 +1,9 @@
 /**
- * @filename    WELL1024a.h
- * @author      ggomdyu
- * @since       05/05/2017
- * @brief       Random number generate algorithm
- * @see         http://www.iro.umontreal.ca/~panneton/WELLRNG.html
+ * @file    WELL1024a.h
+ * @author  ggomdyu
+ * @since   05/05/2017
+ * @brief   Random number generate algorithm
+ * @see     http://www.iro.umontreal.ca/~panneton/WELLRNG.html
  */
 
 #pragma once

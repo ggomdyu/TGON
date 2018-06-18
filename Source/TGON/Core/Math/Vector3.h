@@ -1,7 +1,7 @@
 /**
- * @filename    Vector3.h
- * @author      ggomdyu
- * @since       03/14/2016
+ * @file    Vector3.h
+ * @author  ggomdyu
+ * @since   03/14/2016
  */
 
 #pragma once

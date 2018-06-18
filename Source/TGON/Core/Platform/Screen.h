@@ -1,8 +1,8 @@
 /**
- * @filename    Screen.h
- * @author      ggomdyu
- * @since       08/06/2017
- * @brief       Set of Plaform-agnostic Screen interfaces.
+ * @file    Screen.h
+ * @author  ggomdyu
+ * @since   08/06/2017
+ * @brief   Set of Plaform-agnostic Screen interfaces.
  */
 
 #pragma once

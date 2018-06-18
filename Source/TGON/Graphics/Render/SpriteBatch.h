@@ -1,7 +1,7 @@
 /**
- * @filename    SpriteBatch.h
- * @author      ggomdyu
- * @since       06/03/2018
+ * @file    SpriteBatch.h
+ * @author  ggomdyu
+ * @since   06/03/2018
  */
 
 #pragma once

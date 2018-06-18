@@ -1,8 +1,8 @@
 /**
- * @filename    Object.h
- * @author      ggomdyu
- * @since       03/22/2016
- * @brief       Define class which becomes the base of all objects.
+ * @file    Object.h
+ * @author  ggomdyu
+ * @since   03/22/2016
+ * @brief   Define class which becomes the base of all objects.
  */
 
 #pragma once

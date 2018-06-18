@@ -1,8 +1,8 @@
 /**
- * @filename    Delegate.h
- * @author      ggomdyu
- * @since       09/25/2016
- * @see         https://www.codeproject.com/articles/11015/the-impossibly-fast-c-delegates
+ * @file    Delegate.h
+ * @author  ggomdyu
+ * @since   09/25/2016
+ * @see     https://www.codeproject.com/articles/11015/the-impossibly-fast-c-delegates
  */
 
 #pragma once

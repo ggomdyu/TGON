@@ -1,7 +1,7 @@
 /**
- * @filename    MouseType.h
- * @author      ggomdyu
- * @since       06/12/2018
+ * @file    MouseType.h
+ * @author  ggomdyu
+ * @since   06/12/2018
  */
 
 #pragma once

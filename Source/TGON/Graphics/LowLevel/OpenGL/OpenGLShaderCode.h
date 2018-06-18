@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLShaderCode.h
- * @author      ggomdyu
- * @since       12/19/2017
+ * @file    OpenGLShaderCode.h
+ * @author  ggomdyu
+ * @since   12/19/2017
  */
 
 #pragma once

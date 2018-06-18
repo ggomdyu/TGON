@@ -1,7 +1,7 @@
 /**
- * @filename    Mouse.h
- * @author      ggomdyu
- * @since       05/15/2018
+ * @file    Mouse.h
+ * @author  ggomdyu
+ * @since   05/15/2018
  */
 
 #pragma once

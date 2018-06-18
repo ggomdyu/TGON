@@ -1,7 +1,7 @@
 /**
- * @filename    EventDispatcher.h
- * @author      ggomdyu
- * @since       05/19/2018
+ * @file    EventDispatcher.h
+ * @author  ggomdyu
+ * @since   05/19/2018
  */
 
 #pragma once

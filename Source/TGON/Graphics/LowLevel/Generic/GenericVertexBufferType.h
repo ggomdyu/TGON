@@ -1,8 +1,7 @@
 /**
- * @filename    GenericVertexBuffer.h
- * @author      ggomdyu
- * @since       01/05/2018
- * @brief
+ * @file    GenericVertexBuffer.h
+ * @author  ggomdyu
+ * @since   01/05/2018
  */
 
 #pragma once

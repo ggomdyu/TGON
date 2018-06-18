@@ -1,8 +1,7 @@
 /**
- * @filename    GenericTexture.h
- * @author      ggomdyu
- * @since       02/20/2018
- * @brief
+ * @file    GenericTexture.h
+ * @author  ggomdyu
+ * @since   02/20/2018
  */
 
 #pragma once

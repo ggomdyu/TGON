@@ -1,7 +1,7 @@
 /**
- * @filename    TGON.h
- * @author      ggomdyu
- * @since       05/27/2018
+ * @file    TGON.h
+ * @author  ggomdyu
+ * @since   05/27/2018
  */
 
 #pragma once

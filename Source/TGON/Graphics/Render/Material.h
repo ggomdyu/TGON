@@ -1,3 +1,9 @@
+/**
+ * @file    Material.h
+ * @author  ggomdyu
+ * @since   01/06/2018
+ */
+
 #pragma once
 #include <boost/noncopyable.hpp>
 
@@ -129,7 +135,7 @@ public:
 public:
     MaskTextureMaterial() = default;
 
-    /* @section Public destructor */
+/* @section Public destructor */
 public:
     virtual ~MaskTextureMaterial() override = default;
 

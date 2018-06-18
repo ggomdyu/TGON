@@ -1,7 +1,7 @@
 /**
- * @filename    Stopwatch.h
- * @author      ggomdyu
- * @since       04/07/2018
+ * @file    Stopwatch.h
+ * @author  ggomdyu
+ * @since   04/07/2018
  */
 
 #pragma once

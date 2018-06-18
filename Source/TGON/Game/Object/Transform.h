@@ -1,7 +1,7 @@
 /**
- * @filename    Transform.h
- * @author      ggomdyu
- * @since       06/14/2018
+ * @file    Transform.h
+ * @author  ggomdyu
+ * @since   06/14/2018
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    RAII.h
- * @author      ggomdyu
- * @since       03/11/2018
+ * @file    RAII.h
+ * @author  ggomdyu
+ * @since   03/11/2018
  */
 
 #pragma once

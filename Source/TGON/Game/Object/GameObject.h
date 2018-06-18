@@ -1,7 +1,7 @@
 /**
- * @filename    GameObject.h
- * @author      ggomdyu
- * @since       03/22/2016
+ * @file    GameObject.h
+ * @author  ggomdyu
+ * @since   03/22/2016
  */
 
 #pragma once
@@ -10,14 +10,14 @@
 
 #include "Core/Object/Object.h"
 #include "Core/String/FixedStringHash.h"
-#include "Game/Component/Component.h"
+#include "Game/Component/ComponentUtility.h"
 
 #include "Transform.h"
 
 namespace tgon
 {
 
-//class Component;
+class Component;
 
 class TGON_API GameObject final :
 	public Object,

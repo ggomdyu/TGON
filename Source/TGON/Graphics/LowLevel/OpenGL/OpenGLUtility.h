@@ -1,7 +1,7 @@
 /**
- * @filename    OpenGLUtility.h
- * @author      ggomdyu
- * @since       04/01/2018
+ * @file    OpenGLUtility.h
+ * @author  ggomdyu
+ * @since   04/01/2018
  */
 
 #pragma once

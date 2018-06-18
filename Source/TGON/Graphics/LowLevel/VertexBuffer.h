@@ -1,8 +1,7 @@
 /**
- * @filename    VertexBuffer.h
- * @author      ggomdyu
- * @since       10/22/2017
- * @brief
+ * @file    VertexBuffer.h
+ * @author  ggomdyu
+ * @since   10/22/2017
  */
 
 #pragma once
