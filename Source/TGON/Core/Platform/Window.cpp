@@ -2,26 +2,17 @@
 
 #include "Window.h"
 #include "WindowType.h"
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsWindow.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSWindow.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidWindow.h"
-#elif BOOST_OS_IOS
-#   import "IOS/IOSWindow.h"
-#endif
 
 namespace tgon
 {
 
 Window::Window() :
-    m_impl(std::make_unique<WindowImpl>(this))
+    m_platformWindow(this)
 {
 }
 
 Window::Window(const WindowStyle& windowStyle) :
-    m_impl(std::make_unique<WindowImpl>(this, windowStyle))
+    m_platformWindow(this, windowStyle)
 {
 }
 
@@ -39,78 +30,78 @@ std::shared_ptr<Window> Window::Create(const WindowStyle& windowStyle)
 
 void Window::Show()
 {
-    m_impl->Show();
+    m_platformWindow.Show();
 }
 
 void Window::Hide()
 {
-    m_impl->Hide();
+    m_platformWindow.Hide();
 }
 
 void Window::Close()
 {
-    m_impl->Close();
+    m_platformWindow.Close();
 }
 
 void Window::Maximize()
 {
-    m_impl->Maximize();
+    m_platformWindow.Maximize();
 }
 
 void Window::Minimize()
 {
-    m_impl->Minimize();
+    m_platformWindow.Minimize();
 }
 
 void Window::BringToFront()
 {
-    m_impl->BringToFront();
+    m_platformWindow.BringToFront();
 }
 
 void Window::SetPosition(int32_t x, int32_t y)
 {
-    m_impl->SetPosition(x, y);
+    m_platformWindow.SetPosition(x, y);
 }
 
 void Window::SetSize(int32_t width, int32_t height)
 {
-    m_impl->SetSize(width, height);
+    m_platformWindow.SetSize(width, height);
 }
 
 void Window::SetTitle(const char* title)
 {
-    m_impl->SetTitle(title);
+    m_platformWindow.SetTitle(title);
 }
 
 void Window::SetTopMost(bool setTopMost)
 {
-    m_impl->SetTopMost(setTopMost);
+    m_platformWindow.SetTopMost(setTopMost);
 }
 
 void Window::SetTransparency(float transparency)
 {
-    m_impl->SetTransparency(transparency);
+    m_platformWindow.SetTransparency(transparency);
 }
 
 void Window::GetPosition(int32_t* x, int32_t* y) const
 {
-    m_impl->GetPosition(x, y);
+    m_platformWindow.GetPosition(x, y);
 }
 
 void Window::GetSize(int32_t* width, int32_t* height) const
 {
-    m_impl->GetSize(width, height);
+    m_platformWindow.GetSize(width, height);
 }
 
 void Window::GetTitle(char* destStr) const
 {
-    m_impl->GetTitle(destStr);
+    m_platformWindow.GetTitle(destStr);
 }
 
 I32Point Window::GetPosition() const
 {
     I32Point::ValueType x, y;
-    m_impl->GetPosition(&x, &y);
+    m_platformWindow.GetPosition(&x, &y);
 
     return {x, y};
 }
@@ -118,49 +109,59 @@ I32Point Window::GetPosition() const
 I32Extent2D Window::GetSize() const
 {
     I32Point::ValueType width, height;
-    m_impl->GetSize(&width, &height);
+    m_platformWindow.GetSize(&width, &height);
 
     return {width, height};
 }
 
 float Window::GetTransparency() const
 {
-    return m_impl->GetTransparency();
+    return m_platformWindow.GetTransparency();
 }
 
 void* Window::GetNativeWindow()
 {
-    return m_impl->GetNativeWindow();
+    return m_platformWindow.GetNativeWindow();
 }
 
 const void* Window::GetNativeWindow() const
 {
-    return m_impl->GetNativeWindow();
+    return m_platformWindow.GetNativeWindow();
 }
 
 bool Window::HasCaption() const
 {
-    return m_impl->HasCaption();
+    return m_platformWindow.HasCaption();
 }
 
 bool Window::IsResizable() const
 {
-    return m_impl->IsResizable();
+    return m_platformWindow.IsResizable();
 }
 
 bool Window::IsMaximized() const
 {
-    return m_impl->IsMaximized();
+    return m_platformWindow.IsMaximized();
 }
 
 bool Window::IsMinimized() const
 {
-    return m_impl->IsMinimized();
+    return m_platformWindow.IsMinimized();
 }
 
 bool Window::IsTopMost() const
 {
-    return m_impl->IsTopMost();
+    return m_platformWindow.IsTopMost();
+}
+
+const PlatformWindow& Window::GetPlatformDependency() const noexcept
+{
+    return m_platformWindow;
+}
+
+PlatformWindow& Window::GetPlatformDependency() noexcept
+{
+    return m_platformWindow;
 }
 
 } /* namespace tgon */

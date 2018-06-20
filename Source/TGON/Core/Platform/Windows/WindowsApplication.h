@@ -12,11 +12,11 @@
 namespace tgon
 {
 
-class TGON_API ApplicationImpl final
+class TGON_API WindowsApplication final
 {
 /* @section Public constructor */
 public:
-    ApplicationImpl();
+    WindowsApplication();
 
 /* @section Public method */
 public:
@@ -46,7 +46,7 @@ private:
 };
 
 template <typename _FunctionType>
-inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
+inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
 {
     MSG msg {};
     while (msg.message != WM_QUIT)
@@ -61,5 +61,7 @@ inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
         }
     }
 }
+
+using PlatformApplication = WindowsApplication;
 
 } /* namespace tgon */                               

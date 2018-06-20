@@ -18,13 +18,13 @@ namespace tgon
 {
 
 enum class KeyCode;
-class InputManagerImpl;
+class WindowsInputManager;
 
-class TGON_API KeyboardImpl final
+class TGON_API WindowsKeyboard final
 {
 /* @section Public constructor */
 public:
-    explicit KeyboardImpl(InputManagerImpl* inputManagerImpl);
+    explicit WindowsKeyboard(WindowsInputManager& platformInputManager);
 
 /* @section Public method */
 public:
@@ -40,5 +40,7 @@ private:
     OIS::Keyboard* m_keyboardDevice;
     char m_prevKeyStates[256];
 };
+
+using PlatformKeyboard = WindowsKeyboard;
 
 } /* namespace tgon */

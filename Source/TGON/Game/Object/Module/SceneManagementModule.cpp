@@ -26,7 +26,7 @@ void SceneManagementModule::Update()
 {
     decltype(auto) engine = Application::GetInstance()->GetEngine();
 
-    decltype(auto) timeModule = engine->GetModule<TimeModule>();
+    decltype(auto) timeModule = engine.GetModule<TimeModule>();
     if (timeModule != nullptr)
     {
         m_currScene->Update(timeModule->GetTickTime());

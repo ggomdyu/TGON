@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/Object/Object.h"
+#include "Core/Object/CoreObject.h"
 
 namespace tgon
 {
@@ -13,7 +13,7 @@ namespace tgon
 class GameObject;
     
 class TGON_API Component :
-	public Object
+	public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(Component);

@@ -6,8 +6,8 @@
 namespace tgon
 {
     
-Keyboard::Keyboard(InputManager* inputManager) :
-    m_platformKeyboard(inputManager->GetImpl())
+Keyboard::Keyboard(InputManager& inputManager) :
+    m_platformKeyboard(inputManager.GetPlatformDependency())
 {
 }
     

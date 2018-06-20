@@ -19,13 +19,13 @@ class InputDevicePad;
 namespace tgon
 {
     
-class InputManagerImpl;
+class MacOSInputManager;
 
-class TGON_API GamepadImpl final
+class TGON_API MacOSGamepad final
 {
 /* @section Public constructor */
 public:
-    explicit GamepadImpl(InputManagerImpl* inputManagerImpl);
+    explicit MacOSGamepad(MacOSInputManager& inputManagerImpl);
     
 /* @section Public method */
 public:

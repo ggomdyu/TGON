@@ -5,11 +5,9 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Module/TimeModule.h"
 #include "Module/InputModule.h"
-#include "Object.h"
+#include "CoreObject.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
@@ -30,8 +28,7 @@ class IModule;
 struct WindowStyle;
     
 class TGON_API Engine :
-    public Object,
-    private boost::noncopyable
+    public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(Engine);

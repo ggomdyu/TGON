@@ -9,11 +9,16 @@
 
 #include "Core/Platform/Config.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsInputManager.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSInputManager.h"
+#endif
+
 namespace tgon
 {
 
 class Window;
-class InputManagerImpl;
 
 class TGON_API InputManager final
 {
@@ -29,12 +34,12 @@ public:
 public:
     void Update();
     
-    const InputManagerImpl* GetImpl() const noexcept;
-    InputManagerImpl* GetImpl() noexcept;
+    const PlatformInputManager& GetPlatformDependency() const noexcept;
+    PlatformInputManager& GetPlatformDependency() noexcept;
     
 /* @section Private variable */
 private:
-    std::unique_ptr<InputManagerImpl> m_impl;
+    PlatformInputManager m_platformInputManager;
 };
 
 } /* namespace tgon */

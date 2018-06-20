@@ -12,8 +12,8 @@
 namespace tgon
 {
     
-MacOSKeyboard::MacOSKeyboard(InputManagerImpl* inputManagerImpl) :
-    m_keyboardDevice(inputManagerImpl->CreateKeyboardDevice())
+MacOSKeyboard::MacOSKeyboard(MacOSInputManager& platformInputManager) :
+    m_keyboardDevice(platformInputManager.CreateKeyboardDevice())
 {
 }
     

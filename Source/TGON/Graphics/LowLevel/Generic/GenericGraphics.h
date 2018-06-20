@@ -6,9 +6,7 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
-#include "Core/Object/Runtime/Object.h"
+#include "Core/Object/CoreObject.h"
 #include "Core/Math/Color.h"
 #include "Core/Math/Rect.h"
 
@@ -19,8 +17,7 @@ namespace tgon
 {
 
 class TGON_API GenericGraphics :
-    public Object,
-    private boost::noncopyable
+    public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(GenericGraphics);

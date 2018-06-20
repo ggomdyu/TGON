@@ -5,16 +5,13 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
-#include "Core/Object/Runtime/CoreObject.h"
+#include "Core/Object/CoreObject.h"
 
 namespace tgon
 {
 
 class TGON_API IModule :
-    public Object,
-    private boost::noncopyable
+    public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(IModule);

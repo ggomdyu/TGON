@@ -5,23 +5,30 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <memory>
 
-#include "Core/Object/Runtime/Object.h"
+#include "Core/Object/CoreObject.h"
 #include "Core/Object/Delegate.h"
 #include "Core/Object/Engine.h"
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsApplication.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOS/MacOSApplication.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidApplication.h"
+#elif TGON_PLATFORM_IOS
+#   import "IOS/IOSApplication.h"
+#endif
 
 namespace tgon
 {
 
-class ApplicationImpl;
 class Window;
 enum class MessageBoxIcon;
 
 class TGON_API Application :
-    public Object,
-    private boost::noncopyable
+    public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(Application);
@@ -80,10 +87,14 @@ public:
     std::shared_ptr<const Window> GetRootWindow() const noexcept;
     
     /* @brief   Gets the engine. */
-    const Engine* GetEngine() const noexcept;
+    const Engine& GetEngine() const noexcept;
 
     /* @brief   Gets the engine. */
-    Engine* GetEngine() noexcept;
+    Engine& GetEngine() noexcept;
+
+    const PlatformApplication& GetPlatformDependency() const noexcept;
+
+    PlatformApplication& GetPlatformDependency() noexcept;
 
 /* @section Public event handler */
 public:
@@ -99,9 +110,9 @@ private:
     
 /* @section Protected variable */
 protected:
-    std::unique_ptr<ApplicationImpl> m_impl;
+    PlatformApplication m_platformApplication;
+
     std::unique_ptr<Engine> m_engine;
-    
     std::shared_ptr<Window> m_rootWindow;
 };
 

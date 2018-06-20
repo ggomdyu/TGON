@@ -64,6 +64,12 @@
     <Filter Include="Source\Core\Random">
       <UniqueIdentifier>{36ee04a8-6b98-408b-9310-5de86df554f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Core\Object\Interface">
+      <UniqueIdentifier>{5fbcb0e4-f2a7-4ccd-8032-a53642296a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Object\Runtime">
+      <UniqueIdentifier>{a57aa612-8014-4e75-8bc5-b8520ace11a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
@@ -123,7 +129,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.cpp">
       <Filter>Source\Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ICloneable.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Interface\ICloneable.cpp">
+      <Filter>Source\Core\Object\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -137,9 +145,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ExpressionTemplate.h">
       <Filter>Source\Core\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Object.h">
-      <Filter>Source\Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Point.h">
       <Filter>Source\Core\Math</Filter>
@@ -161,15 +166,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringTraits.h">
       <Filter>Source\Core\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IRuntimeObject.h">
-      <Filter>Source\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IRuntimeObjectUtility.h">
-      <Filter>Source\Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ICloneable.h">
-      <Filter>Source\Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TypeTraits.h">
       <Filter>Source\Core\Utility</Filter>
@@ -209,9 +205,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\UUID.h">
       <Filter>Source\Core\Hash</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\RTTI.h">
-      <Filter>Source\Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Delegate.h">
       <Filter>Source\Core\Object</Filter>
@@ -257,9 +250,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\Image.h">
       <Filter>Source\Core\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IComparable.h">
-      <Filter>Source\Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Debug\Log.h">
       <Filter>Source\Core\Debug</Filter>
@@ -366,9 +356,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedStringHash.h">
       <Filter>Source\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ISerializable.h">
-      <Filter>Source\Core\Object</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\NonAddressable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\OggVorbisAudioImporter.h">
       <Filter>Source\Core\Audio\Importer</Filter>
@@ -379,8 +366,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\WavAudioImporter.h">
       <Filter>Source\Core\Audio\Importer</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Core.Shared\..\..\..\Source\TGON\Core\Audio\Importer\BaseAudioImporter.h">
-      <Filter>Source\Core\Audio\Importer</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\Importer\BaseAudioImporter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Runtime\RuntimeObject.h">
+      <Filter>Source\Core\Object\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Runtime\RuntimeObjectUtility.h">
+      <Filter>Source\Core\Object\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Runtime\RTTI.h">
+      <Filter>Source\Core\Object\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Interface\ISerializable.h">
+      <Filter>Source\Core\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Interface\IComparable.h">
+      <Filter>Source\Core\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Interface\ICloneable.h">
+      <Filter>Source\Core\Object\Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

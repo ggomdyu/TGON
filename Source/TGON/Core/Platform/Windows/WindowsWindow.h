@@ -22,13 +22,13 @@ namespace tgon
 class Window;
 struct WindowStyle;
 
-class WindowImpl final :
+class WindowsWindow final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowImpl(Window* owner);
-    WindowImpl(Window* owner, const WindowStyle& windowStyle);
+    WindowsWindow(Window* owner);
+    WindowsWindow(Window* owner, const WindowStyle& windowStyle);
 
 /* @section Public method */
 public:
@@ -48,7 +48,7 @@ public:
     void GetSize(int32_t* width, int32_t* height) const;
     void GetTitle(char* destStr) const;
     float GetTransparency() const;
-    void* GetNativeWindow();
+    void* GetNativeWindow() const;
     bool HasCaption() const;
     bool IsResizable() const;
     bool IsMaximized() const;
@@ -69,5 +69,7 @@ private:
     bool m_isDwmCompositionEnabled;
     Window* m_owner;
 };
+
+using PlatformWindow = WindowsWindow;
 
 } /* namespace tgon */

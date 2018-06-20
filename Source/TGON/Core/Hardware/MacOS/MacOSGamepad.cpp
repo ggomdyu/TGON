@@ -9,8 +9,8 @@
 namespace tgon
 {
 
-GamepadImpl::GamepadImpl(InputManagerImpl* inputManagerImpl) :
-    m_gamepadDevice(inputManagerImpl->CreateGamepadDevice())
+GamepadImpl::GamepadImpl(MacOSInputManager& platformInputManager) :
+    m_gamepadDevice(platformInputManager.CreateGamepadDevice())
 {
 }
     

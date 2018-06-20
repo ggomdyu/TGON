@@ -23,15 +23,15 @@ namespace tgon
 
 class Window;
 
-class TGON_API InputManagerImpl final
+class TGON_API WindowsInputManager final
 {
 /* @section Public constructor */
 public:
-    explicit InputManagerImpl(std::shared_ptr<Window> inputTarget);
+    explicit WindowsInputManager(std::shared_ptr<Window> inputTarget);
     
 /* @section Public destructor */
 public:
-    ~InputManagerImpl();
+    ~WindowsInputManager();
 
 /* @section Public method */
 public:
@@ -48,5 +48,7 @@ private:
 protected:
     OIS::InputManager* m_inputManager;
 };
+
+using PlatformInputManager = WindowsInputManager;
 
 } /* namespace tgon */

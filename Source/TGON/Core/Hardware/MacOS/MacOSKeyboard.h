@@ -18,13 +18,13 @@ namespace tgon
 {
     
 enum class KeyCode;
-class InputManagerImpl;
+class MacOSInputManager;
     
 class TGON_API MacOSKeyboard final
 {
 /* @section Public constructor */
 public:
-    explicit MacOSKeyboard(InputManagerImpl* inputManagerImpl);
+    explicit MacOSKeyboard(MacOSInputManager& platformInputManager);
     
 /* @section Public method */
 public:

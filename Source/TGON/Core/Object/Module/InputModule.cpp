@@ -19,17 +19,17 @@ InputModule::InputModule(const InputMode& inputMode, std::shared_ptr<Window> inp
 {
     if (inputMode.isUseKeyboard)
     {
-        m_keyboard = std::make_unique<Keyboard>(&m_inputManager);
+        m_keyboard = std::make_unique<Keyboard>(m_inputManager);
     }
     
     if (inputMode.isUseMouse)
     {
-        m_mouse = std::make_unique<Mouse>(&m_inputManager);
+        m_mouse = std::make_unique<Mouse>(m_inputManager);
     }
 
     if (inputMode.isUseGamepad)
     {
-        m_gamepad = std::make_unique<Gamepad>(&m_inputManager);
+        m_gamepad = std::make_unique<Gamepad>(m_inputManager);
     }
 }
     

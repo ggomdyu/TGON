@@ -3,24 +3,25 @@
 #include <OIS.h>
 
 #include "WindowsGamepad.h"
+#include "WindowsGamepadType.h"
 #include "WindowsInputManager.h"
 
 namespace tgon
 {
 
-GamepadImpl::GamepadImpl(InputManagerImpl* inputManager) :
-    m_gamepadDevice(inputManager->CreateGamepadDevice()),
+WindowsGamepad::WindowsGamepad(WindowsInputManager& inputManager) :
+    m_gamepadDevice(inputManager.CreateGamepadDevice()),
     m_prevGamepadState(std::make_shared<OIS::JoyStickState>())
 {
 }
 
-void GamepadImpl::Update()
+void WindowsGamepad::Update()
 {
     *m_prevGamepadState = m_gamepadDevice->getJoyStickState();
     m_gamepadDevice->capture();
 }
 
-void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
+void WindowsGamepad::Vibrate(float leftMotor, float rightMotor)
 {
     //auto a = m_gamepadDevice->getNumberOfComponents(OIS::OIS_Axis);
     //auto b = m_gamepadDevice->getNumberOfComponents(OIS::OIS_Slider);
@@ -50,7 +51,7 @@ void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
     //int n = 3;
 }
 
-bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonDown(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
     if (currGamepadState.mButtons.size() <= buttonNumber)
@@ -69,7 +70,7 @@ bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
     }
 }
 
-bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonHold(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
     if (currGamepadState.mButtons.size() <= buttonNumber)
@@ -88,7 +89,7 @@ bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
     }
 }
 
-bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonUp(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
     if (currGamepadState.mButtons.size() <= buttonNumber)
@@ -107,12 +108,12 @@ bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
     }
 }
 
-const OIS::JoyStick* GamepadImpl::GetGamepadDevice() const noexcept
+const OIS::JoyStick* WindowsGamepad::GetGamepadDevice() const noexcept
 {
     return m_gamepadDevice;
 }
 
-OIS::JoyStick* GamepadImpl::GetGamepadDevice() noexcept
+OIS::JoyStick* WindowsGamepad::GetGamepadDevice() noexcept
 {
     return m_gamepadDevice;
 }

@@ -11,8 +11,8 @@
 namespace tgon
 {
     
-Mouse::Mouse(InputManager* inputManager) :
-    m_impl(std::make_unique<MouseImpl>(inputManager->GetImpl()))
+Mouse::Mouse(InputManager& inputManager) :
+    m_platformMouse(inputManager.GetPlatformDependency())
 {
 }
     
@@ -20,32 +20,45 @@ Mouse::~Mouse() = default;
     
 void Mouse::Update()
 {
-    m_impl->Update();
+    m_platformMouse.Update();
+}
+
+void Mouse::GetPosition(int32_t* x, int32_t* y)
+{
+    PlatformMouse::GetPosition(x, y);
+}
+
+I32Point Mouse::GetPosition()
+{
+    I32Point pt;
+    PlatformMouse::GetPosition(&pt.x, &pt.y);
+
+    return pt;
 }
     
 bool Mouse::IsMouseDown(MouseCode mouseCode) const
 {
-    return m_impl->IsMouseDown(mouseCode);
+    return m_platformMouse.IsMouseDown(mouseCode);
 }
 
 bool Mouse::IsMouseHold(MouseCode mouseCode) const
 {
-    return m_impl->IsMouseHold(mouseCode);
+    return m_platformMouse.IsMouseHold(mouseCode);
 }
 
 bool Mouse::IsMouseUp(MouseCode mouseCode) const
 {
-    return m_impl->IsMouseUp(mouseCode);
+    return m_platformMouse.IsMouseUp(mouseCode);
 }
 
-const MouseImpl* Mouse::GetImpl() const noexcept
+const PlatformMouse& Mouse::GetPlatformDependency() const noexcept
 {
-    return m_impl.get();
+    return m_platformMouse;
 }
 
-MouseImpl* Mouse::GetImpl() noexcept
+PlatformMouse& Mouse::GetPlatformDependency() noexcept
 {
-    return m_impl.get();
+    return m_platformMouse;
 }
 
 } /* namespace tgon */

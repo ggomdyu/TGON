@@ -4,6 +4,8 @@
 
 #include "TestScene.h"
 
+#include <boost/property_tree/ptree.hpp>
+
 using namespace tgon;
 
 class TGON_API ThousandParty final :

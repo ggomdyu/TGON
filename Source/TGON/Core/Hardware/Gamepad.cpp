@@ -1,18 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #include "Gamepad.h"
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsGamepad.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSGamepad.h"
-#endif
 #include "InputManager.h"
 
 namespace tgon
 {
 
-Gamepad::Gamepad(InputManager* inputManager) :
-    m_impl(std::make_unique<GamepadImpl>(inputManager->GetImpl()))
+Gamepad::Gamepad(InputManager& inputManager) :
+    m_platformGamepad(inputManager.GetPlatformDependency())
 {
 }
     
@@ -20,37 +15,37 @@ Gamepad::~Gamepad() = default;
 
 void Gamepad::Update()
 {
-    m_impl->Update();
+    m_platformGamepad.Update();
 }
 
 void Gamepad::Vibrate(float leftMotor, float rightMotor)
 {
-    m_impl->Vibrate(leftMotor, rightMotor);
+    m_platformGamepad.Vibrate(leftMotor, rightMotor);
 }
 
 bool Gamepad::IsButtonDown(int32_t buttonNumber) const
 {
-    return m_impl->IsButtonDown(buttonNumber);
+    return m_platformGamepad.IsButtonDown(buttonNumber);
 }
 
 bool Gamepad::IsButtonHold(int32_t buttonNumber) const
 {
-    return m_impl->IsButtonHold(buttonNumber);
+    return m_platformGamepad.IsButtonHold(buttonNumber);
 }
 
 bool Gamepad::IsButtonUp(int32_t buttonNumber) const
 {
-    return m_impl->IsButtonUp(buttonNumber);
+    return m_platformGamepad.IsButtonUp(buttonNumber);
 }
 
-const GamepadImpl* Gamepad::GetImpl() const noexcept
+const PlatformGamepad& Gamepad::GetPlatformDependency() const noexcept
 {
-    return m_impl.get();
+    return m_platformGamepad;
 }
 
-GamepadImpl* Gamepad::GetImpl() noexcept
+PlatformGamepad& Gamepad::GetPlatformDependency() noexcept
 {
-    return m_impl.get();
+    return m_platformGamepad;
 }
 
 } /* namespace tgon */

@@ -5,22 +5,25 @@
  */
 
 #pragma once
-#include <memory>
 #include <cstdint>
 
 #include "Core/Platform/Config.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsGamepad.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSGamepad.h"
+#endif
+#include "InputManager.h"
+
 namespace tgon
 {
-
-class InputManager;
-class GamepadImpl;
     
 class TGON_API Gamepad final
 {
 /* @section Public constructor */
 public:
-    explicit Gamepad(InputManager* inputManager);
+    explicit Gamepad(InputManager& inputManager);
     
 /* @section Public destructor */
 public:
@@ -33,12 +36,12 @@ public:
     bool IsButtonDown(int32_t buttonNumber) const;
     bool IsButtonHold(int32_t buttonNumber) const;
     bool IsButtonUp(int32_t buttonNumber) const;
-    const GamepadImpl* GetImpl() const noexcept;
-    GamepadImpl* GetImpl() noexcept;
+    const PlatformGamepad& GetPlatformDependency() const noexcept;
+    PlatformGamepad& GetPlatformDependency() noexcept;
     
 /* @section Private variable */
 private:
-    std::unique_ptr<GamepadImpl> m_impl;
+    PlatformGamepad m_platformGamepad;
 };
     
 } /* namespace tgon */

@@ -23,7 +23,7 @@ class TGON_API Keyboard final
 {
 /* @section Public constructor */
 public:
-    explicit Keyboard(InputManager* inputManager);
+    explicit Keyboard(InputManager& inputManager);
     
 /* @section Public destructor */
 public:

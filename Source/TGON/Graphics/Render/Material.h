@@ -5,10 +5,8 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Core/Math/Color.h"
-#include "Core/Object/Runtime/Object.h"
+#include "Core/Object/CoreObject.h"
 #include "Graphics/LowLevel/Texture.h"
 #include "Graphics/LowLevel/Shader.h"
 
@@ -16,8 +14,7 @@ namespace tgon
 {
 
 class Material :
-    public Object,
-    private boost::noncopyable
+    public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(Material);

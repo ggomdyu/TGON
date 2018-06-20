@@ -20,13 +20,13 @@ class JoyStickState;
 namespace tgon
 {
 
-class InputManagerImpl;
+class WindowsInputManager;
 
-class TGON_API GamepadImpl final
+class TGON_API WindowsGamepad final
 {
 /* @section Public constructor */
 public:
-    explicit GamepadImpl(InputManagerImpl* inputManager);
+    explicit WindowsGamepad(WindowsInputManager& inputManager);
 
 /* @section Public method */
 public:
@@ -43,5 +43,7 @@ private:
     OIS::JoyStick* m_gamepadDevice;
     std::shared_ptr<OIS::JoyStickState> m_prevGamepadState;
 };
+
+using PlatformGamepad = WindowsGamepad;
 
 } /* namespace tgon */

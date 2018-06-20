@@ -5,10 +5,9 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <vector>
 
-#include "Core/Object/Runtime/Object.h"
+#include "Core/Object/CoreObject.h"
 #include "Core/String/FixedStringHash.h"
 #include "Game/Component/ComponentUtility.h"
 
@@ -20,9 +19,8 @@ namespace tgon
 class Component;
 
 class TGON_API GameObject final :
-	public Object,
-    private std::enable_shared_from_this<GameObject>,
-    private boost::noncopyable
+	public CoreObject,
+    private std::enable_shared_from_this<GameObject>
 {
 public:
     TGON_RUNTIME_OBJECT(GameObject);

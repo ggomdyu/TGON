@@ -7,19 +7,19 @@
 namespace tgon
 {
 
-KeyboardImpl::KeyboardImpl(InputManagerImpl* inputManagerImpl) :
-    m_keyboardDevice(inputManagerImpl->CreateKeyboardDevice()),
+WindowsKeyboard::WindowsKeyboard(WindowsInputManager& platformInputManager) :
+    m_keyboardDevice(platformInputManager.CreateKeyboardDevice()),
     m_prevKeyStates{}
 {
 }
 
-void KeyboardImpl::Update()
+void WindowsKeyboard::Update()
 {
     m_keyboardDevice->copyKeyStates(m_prevKeyStates);
     m_keyboardDevice->capture();
 }
 
-bool KeyboardImpl::IsKeyDown(KeyCode keyCode) const
+bool WindowsKeyboard::IsKeyDown(KeyCode keyCode) const
 {
     if ((m_prevKeyStates[static_cast<char>(keyCode)] == 0) &&
         m_keyboardDevice->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
@@ -32,7 +32,7 @@ bool KeyboardImpl::IsKeyDown(KeyCode keyCode) const
     }
 }
 
-bool KeyboardImpl::IsKeyHold(KeyCode keyCode) const
+bool WindowsKeyboard::IsKeyHold(KeyCode keyCode) const
 {
     if ((m_prevKeyStates[static_cast<char>(keyCode)] == 1) &&
         m_keyboardDevice->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
@@ -45,7 +45,7 @@ bool KeyboardImpl::IsKeyHold(KeyCode keyCode) const
     }
 }
 
-bool KeyboardImpl::IsKeyUp(KeyCode keyCode) const
+bool WindowsKeyboard::IsKeyUp(KeyCode keyCode) const
 {
     if ((m_prevKeyStates[static_cast<char>(keyCode)] == 1) &&
         m_keyboardDevice->isKeyDown(static_cast<OIS::KeyCode>(keyCode)) == false)
@@ -58,12 +58,12 @@ bool KeyboardImpl::IsKeyUp(KeyCode keyCode) const
     }
 }
 
-const OIS::Keyboard* KeyboardImpl::GetKeyboardDevice() const noexcept
+const OIS::Keyboard* WindowsKeyboard::GetKeyboardDevice() const noexcept
 {
     return m_keyboardDevice;
 }
 
-OIS::Keyboard* KeyboardImpl::GetKeyboardDevice() noexcept
+OIS::Keyboard* WindowsKeyboard::GetKeyboardDevice() noexcept
 {
     return m_keyboardDevice;
 }

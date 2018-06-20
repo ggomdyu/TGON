@@ -12,8 +12,8 @@
 namespace tgon
 {
 
-MouseImpl::MouseImpl(InputManagerImpl* inputManagerImpl) :
-    m_mouseDevice(inputManagerImpl->CreateMouseDevice())
+MouseImpl::MouseImpl(MacOSInputManager& platformInputManager) :
+    m_mouseDevice(platformInputManager.CreateMouseDevice())
 {
 }
     

@@ -6,19 +6,25 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
+#include "Core/Math/Point.h"
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsMouse.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSMouse.h"
+#endif
 
 namespace tgon
 {
     
 class InputManager;
-class MouseImpl;
 enum class MouseCode;
     
 class TGON_API Mouse final
 {
 /* @section Public constructor */
 public:
-    explicit Mouse(InputManager* inputManager);
+    explicit Mouse(InputManager& inputManager);
     
 /* @section Public destructor */
 public:
@@ -27,15 +33,17 @@ public:
 /* @section Public method */
 public:
     void Update();
+    static void GetPosition(int32_t* x, int32_t* y);
+    static I32Point GetPosition();
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;
-    const MouseImpl* GetImpl() const noexcept;
-    MouseImpl* GetImpl() noexcept;
+    const PlatformMouse& GetPlatformDependency() const noexcept;
+    PlatformMouse& GetPlatformDependency() noexcept;
     
 /* @section Private variable */
 private:
-    std::unique_ptr<MouseImpl> m_impl;
+    PlatformMouse m_platformMouse;
 };
     
 } /* namespace tgon */

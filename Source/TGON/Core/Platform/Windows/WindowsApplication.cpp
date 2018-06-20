@@ -9,12 +9,12 @@
 namespace tgon
 {
 
-ApplicationImpl::ApplicationImpl()
+WindowsApplication::WindowsApplication()
 {
     RegisterWindowClass();
 }
 
-void ApplicationImpl::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
+void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
 {
     wchar_t utf16Message[1024] {};
     UTF8::Convert<UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
@@ -25,9 +25,9 @@ void ApplicationImpl::ShowMessageBox(const char* title, const char* message, Mes
     ::MessageBoxW(nullptr, utf16Message, utf16Title, static_cast<UINT>(messageBoxIcon) | MB_OK);
 }
 
-LRESULT CALLBACK ApplicationImpl::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    WindowImpl* windowImpl = reinterpret_cast<WindowImpl*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+    WindowsWindow* windowImpl = reinterpret_cast<WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
     if (windowImpl)
     {
         return windowImpl->OnHandleMessage(wndHandle, message, wParam, lParam);
@@ -36,12 +36,12 @@ LRESULT CALLBACK ApplicationImpl::OnHandleMessage(HWND wndHandle, UINT message, 
     return DefWindowProc(wndHandle, message, wParam, lParam);
 }
 
-void ApplicationImpl::Terminate()
+void WindowsApplication::Terminate()
 {
     ::PostQuitMessage(0);
 }
 
-bool ApplicationImpl::RegisterWindowClass()
+bool WindowsApplication::RegisterWindowClass()
 {
     WNDCLASSEXW wcex{};
     wcex.cbSize = sizeof(wcex);
@@ -52,7 +52,7 @@ bool ApplicationImpl::RegisterWindowClass()
     wcex.hCursor = ::LoadCursorW(nullptr, IDC_ARROW);
     wcex.hIcon = ::LoadIconW(nullptr, IDI_APPLICATION);
     wcex.hInstance = GetModuleHandle(nullptr);
-    wcex.lpfnWndProc = ApplicationImpl::OnHandleMessage;
+    wcex.lpfnWndProc = WindowsApplication::OnHandleMessage;
 
     return RegisterClassExW(&wcex) != 0;
 }

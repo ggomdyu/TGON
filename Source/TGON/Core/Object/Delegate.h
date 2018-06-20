@@ -100,6 +100,10 @@ public:
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
 
+    const StubType GetStub() const noexcept;
+
+    StubType GetStub() noexcept;
+
 /* @section Private method */
 private:
     template <typename _FunctionType>
@@ -281,6 +285,18 @@ template <typename _ReturnType, typename... _ArgTypes>
 inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t) const noexcept
 {
     return m_stub != nullptr;
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+inline const typename Delegate<_ReturnType(_ArgTypes...)>::StubType Delegate<_ReturnType(_ArgTypes...)>::GetStub() const noexcept
+{
+    return m_stub;
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+inline typename Delegate<_ReturnType(_ArgTypes...)>::StubType Delegate<_ReturnType(_ArgTypes...)>::GetStub() noexcept
+{
+    return m_stub;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>

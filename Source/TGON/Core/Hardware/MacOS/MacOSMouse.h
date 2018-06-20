@@ -13,20 +13,20 @@ namespace gainput
 {
     
 class InputDeviceMouse;
-    
+
 } /* namespace gainput */
 
 namespace tgon
 {
 
-class InputManagerImpl;
+class MacOSInputManager;
 enum class MouseCode;
     
-class TGON_API MouseImpl final
+class TGON_API MacOSMouse final
 {
 /* @section Public constructor */
 public:
-    explicit MouseImpl(InputManagerImpl* inputManagerImpl);
+    explicit MacOSMouse(MacOSInputManager& inputManagerImpl);
     
 /* @section Public method */
 public:
