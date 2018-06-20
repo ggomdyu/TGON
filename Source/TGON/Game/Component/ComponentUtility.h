@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/Object/IRuntimeObjectUtility.h"
+#include "Core/Object/Runtime/RuntimeObjectUtility.h"
 
 namespace tgon
 {

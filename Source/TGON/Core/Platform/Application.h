@@ -8,7 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <memory>
 
-#include "Core/Object/Object.h"
+#include "Core/Object/Runtime/Object.h"
 #include "Core/Object/Delegate.h"
 #include "Core/Object/Engine.h"
 

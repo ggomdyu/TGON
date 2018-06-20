@@ -1,18 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #include "Keyboard.h"
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsKeyboard.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSKeyboard.h"
-#endif
 #include "InputManager.h"
 
 namespace tgon
 {
     
 Keyboard::Keyboard(InputManager* inputManager) :
-    m_impl(std::make_unique<KeyboardImpl>(inputManager->GetImpl()))
+    m_platformKeyboard(inputManager->GetImpl())
 {
 }
     
@@ -20,32 +15,32 @@ Keyboard::~Keyboard() = default;
     
 void Keyboard::Update()
 {
-    m_impl->Update();
+    m_platformKeyboard.Update();
 }
     
 bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
-    return m_impl->IsKeyDown(keyCode);
+    return m_platformKeyboard.IsKeyDown(keyCode);
 }
     
 bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
-    return m_impl->IsKeyHold(keyCode);
+    return m_platformKeyboard.IsKeyHold(keyCode);
 }
     
 bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
-    return m_impl->IsKeyUp(keyCode);
+    return m_platformKeyboard.IsKeyUp(keyCode);
 }
     
-KeyboardImpl* Keyboard::GetImpl() noexcept
+PlatformKeyboard& Keyboard::GetPlatformDependency() noexcept
 {
-    return m_impl.get();
+    return m_platformKeyboard;
 }
 
-const KeyboardImpl* Keyboard::GetImpl() const noexcept
+const PlatformKeyboard& Keyboard::GetPlatformDependency() const noexcept
 {
-    return m_impl.get();
+    return m_platformKeyboard;
 }
 
 } /* namespace tgon */

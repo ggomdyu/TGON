@@ -27,6 +27,7 @@ public:
 	virtual void Update() = 0;
     
 	void SetOwner(std::weak_ptr<GameObject> owner) noexcept;
+    
     std::weak_ptr<const GameObject> GetOwner() const noexcept;
     std::weak_ptr<GameObject> GetOwner() noexcept;
 

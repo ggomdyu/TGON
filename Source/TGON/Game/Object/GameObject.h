@@ -8,7 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <vector>
 
-#include "Core/Object/Object.h"
+#include "Core/Object/Runtime/Object.h"
 #include "Core/String/FixedStringHash.h"
 #include "Game/Component/ComponentUtility.h"
 

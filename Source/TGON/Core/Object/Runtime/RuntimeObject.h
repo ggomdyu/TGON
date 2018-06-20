@@ -1,25 +1,27 @@
 /**
- * @file    IRuntimeObject.h
+ * @file    RuntimeObject.h
  * @author  ggomdyu
  * @since   10/29/2017
  */
 
 #pragma once
+#include "Core/Platform/Config.h"
+
 #include "RTTI.h"
 
 namespace tgon
 {
 
-class IRuntimeObject
+class TGON_API RuntimeObject
 {
 /* @section Public type */
 public:
     using SuperType = void;
-    using ThisType = IRuntimeObject;
+    using ThisType = RuntimeObject;
 
 /* @section Public destructor */
 public:
-    virtual ~IRuntimeObject() = default;
+    virtual ~RuntimeObject() = 0;
 
 /* @section Public method */
 public:

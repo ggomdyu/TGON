@@ -22,7 +22,6 @@ public:
     void SetPosition(const Vector3& position) noexcept;
     void SetRotation(const Vector3& rotation) noexcept;
     void SetScale(const Vector3& scale) noexcept;
-    
     Vector3& GetPosition() noexcept;
     const Vector3& GetPosition() const noexcept;
     Vector3& GetRotation() noexcept;

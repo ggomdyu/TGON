@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "../Object/GameObject.h"
+#include "Game/Object/GameObject.h"
 
 #include "Component.h"
 

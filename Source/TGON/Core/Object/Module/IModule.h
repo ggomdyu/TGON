@@ -7,7 +7,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/Object.h"
+#include "Core/Object/Runtime/CoreObject.h"
 
 namespace tgon
 {

@@ -8,7 +8,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/Object.h"
+#include "Core/Object/Runtime/Object.h"
 #include "Core/Math/Color.h"
 #include "Core/Math/Rect.h"
 

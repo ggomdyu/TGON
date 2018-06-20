@@ -1,5 +1,5 @@
 /**
- * @file    IRuntimeObjectUtility.h
+ * @file    RuntimeObjectUtility.h
  * @author  ggomdyu
  * @since   08/17/2017
  */
@@ -8,7 +8,7 @@
 #include <type_traits>
 #include <cassert>
 
-#include "IRuntimeObject.h"
+#include "RuntimeObject.h"
 
 namespace tgon
 {
@@ -18,9 +18,9 @@ template <typename _Type>
 inline const RTTI* GetRTTI() noexcept
 {
     using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
-
-    static_assert(std::is_base_of<IRuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
-
+    
+    static_assert(std::is_base_of<RuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
+    
     static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
     return &rtti;
 }

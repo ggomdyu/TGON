@@ -15,7 +15,11 @@ namespace tgon
 class SerializationInfo
 {
 public:
+    template <typename _ValueType>
+    void AddValue(const std::string& name, const _ValueType& value);
+    
 private:
+    std::map<std::string, std::string> m_valueTable;
 };
 
 class ISerializable

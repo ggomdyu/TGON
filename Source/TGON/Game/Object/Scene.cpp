@@ -51,4 +51,16 @@ std::shared_ptr<const GameObject> Scene::GetObject(const StringViewHash& objectN
     return iter->second;
 }
 
+void Scene::Update(float deltaTime)
+{
+    for (auto& object : m_objects)
+    {
+        object.second->Update();
+    }
+}
+    
+void Scene::Draw()
+{
+}
+    
 } /* namespace tgon */

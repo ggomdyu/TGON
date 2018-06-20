@@ -8,7 +8,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Core/Math/Color.h"
-#include "Core/Object/Object.h"
+#include "Core/Object/Runtime/Object.h"
 #include "Graphics/LowLevel/Texture.h"
 #include "Graphics/LowLevel/Shader.h"
 

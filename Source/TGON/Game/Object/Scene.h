@@ -25,17 +25,14 @@ public:
     
 /* @section Public method */
 public:
-    //bool Serialize
-    //bool Deserialize
     bool AddObject(std::shared_ptr<GameObject> object);
     bool RemoveObject(const StringViewHash& objectName);
     bool RemoveObject(GameObject* object);
     std::shared_ptr<GameObject> GetObject(const StringViewHash& objectName);
     std::shared_ptr<const GameObject> GetObject(const StringViewHash& objectName) const;
 
-    virtual void OnInitialize() {};
-    virtual void Update(float deltaTime) {};
-    virtual void Draw() {};
+    virtual void Update(float deltaTime);
+    virtual void Draw();
 
 /* @section Private variable */
 private:

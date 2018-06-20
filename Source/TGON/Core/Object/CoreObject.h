@@ -8,28 +8,24 @@
 #pragma once
 #include <string>
 
-#include "Core/Platform/Config.h"
-
-#include "ICloneable.h"
-#include "IRuntimeObject.h"
-#include "IRuntimeObjectUtility.h"
+#include "RuntimeObject.h"
 
 namespace tgon
 {
 
-class TGON_API Object :
-    public IRuntimeObject
+class TGON_API CoreObject :
+    public RuntimeObject
 {
 public:
-    TGON_RUNTIME_OBJECT(Object);
+    TGON_RUNTIME_OBJECT(CoreObject);
 
 /* @section Public constructor */
 public:
-    Object() = default;
+    CoreObject() = default;
 
 /* @section Public destructor */
 public:
-    virtual ~Object() override = default;
+    virtual ~CoreObject() override = default;
 };
 
 } /* namespace tgon */
