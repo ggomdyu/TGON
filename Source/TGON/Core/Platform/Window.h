@@ -19,7 +19,6 @@ class WindowImpl;
 struct WindowStyle;
 
 class TGON_API Window final :
-    private std::enable_shared_from_this<Window>,
     private boost::noncopyable
 {
 /* @section Private constructor */
