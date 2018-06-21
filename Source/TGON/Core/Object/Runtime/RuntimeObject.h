@@ -40,7 +40,7 @@ inline const RTTI* GetRTTI() noexcept
 {
     using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
     
-    static_assert(std::is_base_of<RuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from IRuntimeObject.");
+    static_assert(std::is_base_of<RuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from RuntimeObject.");
     
     static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
     return &rtti;
