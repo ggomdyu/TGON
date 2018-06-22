@@ -24,20 +24,20 @@ namespace tgon
     
 class Window;
 
-class TGON_API InputManagerImpl final
+class TGON_API MacOSInputManager final
 {
 /* @section Public constructor */
 public:
-    explicit InputManagerImpl(std::shared_ptr<Window> window);
+    explicit MacOSInputManager(std::shared_ptr<Window> window);
    
 /* @section Public destructor */
 public:
-    ~InputManagerImpl();
+    ~MacOSInputManager();
     
 /* @section Public method */
 public:
     void Update();
-    
+
     gainput::InputDeviceMouse* CreateMouseDevice();
     gainput::InputDeviceKeyboard* CreateKeyboardDevice();
     gainput::InputDevicePad* CreateGamepadDevice();
@@ -46,5 +46,7 @@ public:
 private:
     std::unique_ptr<gainput::InputManager> m_inputManager;
 };
+    
+using PlatformInputManager = MacOSInputManager;
 
 } /* namespace tgon */

@@ -330,7 +330,7 @@
 		FDAF475220D6D946004EC9FF /* ComponentUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentUtility.h; path = ../../../Source/TGON/Game/Component/ComponentUtility.h; sourceTree = "<group>"; };
 		FDAF475420D82763004EC9FF /* GameContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameContext.h; sourceTree = "<group>"; };
 		FDAF475520D82764004EC9FF /* GameContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameContext.cpp; sourceTree = "<group>"; };
-		FDB75AD020D5885700CC36C4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
+		FDB75AD020D5885700CC36C4 /* Engine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Engine.cpp; sourceTree = "<group>"; };
 		FDB75AD320D5886100CC36C4 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		FDB75AD720D5891200CC36C4 /* FixedStringHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedStringHash.h; sourceTree = "<group>"; };
 		FDB75AD920D5891800CC36C4 /* FixedStringUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedStringUtility.h; sourceTree = "<group>"; };

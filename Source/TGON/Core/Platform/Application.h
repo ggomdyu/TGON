@@ -5,9 +5,8 @@
  */
 
 #pragma once
-#include <memory>
+#include <boost/noncopyable.hpp>
 
-#include "Core/Object/CoreObject.h"
 #include "Core/Object/Delegate.h"
 #include "Core/Object/Engine.h"
 
@@ -28,11 +27,8 @@ class Window;
 enum class MessageBoxIcon;
 
 class TGON_API Application :
-    public CoreObject
+    private boost::noncopyable
 {
-public:
-    TGON_RUNTIME_OBJECT(Application);
-    
 /* @section Public constructor */
 public:
     explicit Application(std::unique_ptr<Engine> engine);

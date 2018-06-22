@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#import <boost/noncopyable.hpp>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
@@ -15,7 +16,8 @@
 namespace tgon
 {
 
-class TGON_API ApplicationImpl
+class TGON_API MacOSApplication final :
+    private boost::noncopyable
 {
 /* @section Public method */
 public:
@@ -29,8 +31,10 @@ public:
     void OnHandleMessage(NSEvent* message);
 };
     
+using PlatformApplication = MacOSApplication;
+    
 template <typename _FunctionType>
-inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
+inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdate)
 {
     NSEvent* event = nil;
     while (true)

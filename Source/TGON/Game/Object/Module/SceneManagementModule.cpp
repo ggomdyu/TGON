@@ -75,5 +75,4 @@ Scene* SceneManagementModule::GetCurrentScene() noexcept
     return m_currScene.get();
 }
 
-
 } /* namespace tgon */

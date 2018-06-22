@@ -5,7 +5,7 @@
 namespace tgon
 {
 
-void ApplicationImpl::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
+void MacOSApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
 {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:[NSString stringWithUTF8String:title]];
@@ -19,12 +19,12 @@ void ApplicationImpl::ShowMessageBox(const char* title, const char* message, Mes
     [alert runModal];
 }
 
-void ApplicationImpl::Terminate()
+void MacOSApplication::Terminate()
 {
     [NSApp terminate:nil];
 }
 
-void ApplicationImpl::OnHandleMessage(NSEvent* event)
+void MacOSApplication::OnHandleMessage(NSEvent* event)
 {
     NSEventType eventType = [event type];
     switch (eventType)

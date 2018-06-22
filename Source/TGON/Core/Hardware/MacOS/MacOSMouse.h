@@ -31,7 +31,7 @@ public:
 /* @section Public method */
 public:
     void Update();
-    void GetPosition(int32_t* x, int32_t* y) const;
+    static void GetPosition(int32_t* x, int32_t* y);
     //float GetFloat(MouseCode mouseCode) const;
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
@@ -43,5 +43,7 @@ public:
 private:
     gainput::InputDeviceMouse* m_mouseDevice;
 };
+    
+using PlatformMouse = MacOSMouse;
 
 } /* namespace tgon */

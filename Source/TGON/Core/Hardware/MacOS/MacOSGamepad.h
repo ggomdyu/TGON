@@ -42,4 +42,6 @@ private:
     gainput::InputDevicePad* m_gamepadDevice;
 };
 
+using PlatformGamepad = MacOSGamepad;
+
 } /* namespace tgon */

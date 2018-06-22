@@ -21,22 +21,22 @@ namespace tgon
 class Window;
 struct WindowStyle;
 
-class TGON_API WindowImpl final :
+class TGON_API MacOSWindow final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowImpl(Window* owner);
-    explicit WindowImpl(Window* owner, const WindowStyle& windowStyle);
-    WindowImpl(WindowImpl&& rhs) noexcept;
+    MacOSWindow(Window* owner);
+    explicit MacOSWindow(Window* owner, const WindowStyle& windowStyle);
+    MacOSWindow(MacOSWindow&& rhs) noexcept;
     
 /* @section Public operator */
 public:
-    WindowImpl& operator=(WindowImpl&& rhs) noexcept;
+    MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
     
 /* @section Public destructor */
 public:
-    ~WindowImpl();
+    ~MacOSWindow();
     
 /* @section Public method */
 public:
@@ -56,7 +56,7 @@ public:
     void GetSize(int32_t* width, int32_t* height) const;
     void GetTitle(char* destStr) const;
     float GetTransparency() const;
-    void* GetNativeWindow();
+    void* GetNativeWindow() const;
     bool HasCaption() const;
     bool IsResizable() const;
     bool IsMaximized() const;
@@ -67,5 +67,7 @@ public:
 private:
     NSWindow* m_nsWindow;
 };
+    
+using PlatformWindow = MacOSWindow;
 
 } /* namespace tgon */
