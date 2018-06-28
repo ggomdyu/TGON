@@ -15,14 +15,10 @@ namespace tgon
 
 struct Screen;
 
-
 /* @brief   Returns count of detected monitors. */
 TGON_API int32_t GetScreenCount();
 
-/**
- * @brief   Returns current primary screen information.
- * @warning This function assembles many information as far as possible. 
- */
+/* @brief   Returns current primary screen information.  */
 TGON_API Screen GetPrimaryScreen();
 
 /* @brief   Returns all detected screen informations.*/
