@@ -35,8 +35,8 @@ public:
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    const PlatformKeyboard& GetPlatformDependency() const noexcept;
-    PlatformKeyboard& GetPlatformDependency() noexcept;
+    const PlatformKeyboard& GetImpl() const noexcept;
+    PlatformKeyboard& GetImpl() noexcept;
     
 /* @section Private variable */
 private:

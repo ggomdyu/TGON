@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-WindowsGamepad::WindowsGamepad(WindowsInputManager& inputManager) :
+WindowsGamepad::WindowsGamepad(InputManagerImpl& inputManager) :
     m_gamepadDevice(inputManager.CreateGamepadDevice()),
     m_prevGamepadState(std::make_shared<OIS::JoyStickState>())
 {

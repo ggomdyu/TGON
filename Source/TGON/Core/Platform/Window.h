@@ -5,29 +5,24 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
-#include "Core/Object/Delegate.h"
+#include <boost/noncopyable.hpp>
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsWindow.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSWindow.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidWindow.h"
-#elif BOOST_OS_IOS
-#   import "IOS/IOSWindow.h"
-#endif
+#include "Core/Platform/Config.h"
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
+#include "Core/Object/Delegate.h"
 
 namespace tgon
 {
 
+class WindowImpl;
 struct WindowStyle;
 
 class TGON_API Window final :
     private boost::noncopyable
 {
 /* @section Private constructor */
-private:
+public:
     Window();
     Window(const WindowStyle& windowStyle);
 
@@ -37,8 +32,6 @@ public:
     
 /* @section Public method */
 public:
-    static std::shared_ptr<Window> Create();
-    static std::shared_ptr<Window> Create(const WindowStyle& windowStyle);
     void Show();
     void Hide();
     void Close();
@@ -63,12 +56,12 @@ public:
     bool IsMaximized() const;
     bool IsMinimized() const;
     bool IsTopMost() const;
-    const PlatformWindow& GetPlatformDependency() const noexcept;
-    PlatformWindow& GetPlatformDependency() noexcept;
+    const WindowImpl& GetImpl() const noexcept;
+    WindowImpl& GetImpl() noexcept;
 
 /* @section Public event handler */
 public:
-    Delegate<void(int32_t x, int32_t)> OnWindowMove;
+    Delegate<void(int32_t, int32_t)> OnWindowMove;
     Delegate<void(int32_t, int32_t)> OnWindowResize;
     Delegate<void()> OnWindowMaximize;
     Delegate<void()> OnWindowMinimize;
@@ -81,7 +74,7 @@ public:
 
 /* @section Private variable */
 private:
-    PlatformWindow m_platformWindow;
+    std::unique_ptr<WindowImpl> m_windowImpl;
 };
 
 } /* namespace tgon */

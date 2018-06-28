@@ -18,12 +18,12 @@
 namespace tgon
 {
 
-WindowsWindow::WindowsWindow(Window* owner) :
+WindowImpl::WindowImpl(Window* owner) :
     m_owner(owner)
 {
 }
 
-WindowsWindow::WindowsWindow(Window* owner, const WindowStyle& windowStyle) :
+WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
     m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
     m_isDwmCompositionEnabled(false),
     m_owner(owner)
@@ -35,7 +35,7 @@ WindowsWindow::WindowsWindow(Window* owner, const WindowStyle& windowStyle) :
     this->SetUserData(this);
 }
 
-void WindowsWindow::BringToFront()
+void WindowImpl::BringToFront()
 {
     // SetForegroundWindow, BringWindowToTop APIs are not working exactly.
     // The codes below are the hack way to reach it.
@@ -44,7 +44,7 @@ void WindowsWindow::BringToFront()
     this->SetTopMost(isTopMost);
 }
 
-void WindowsWindow::Flash()
+void WindowImpl::Flash()
 {
     FLASHWINFO fwi {0};
     fwi.cbSize = sizeof(FLASHWINFO);
@@ -56,7 +56,7 @@ void WindowsWindow::Flash()
     ::FlashWindowEx(&fwi);
 }
 
-void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
+void WindowImpl::GetPosition(int32_t* x, int32_t* y) const
 {
     ::RECT rt;
     ::GetWindowRect(m_wndHandle, &rt);
@@ -65,7 +65,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
+void WindowImpl::GetSize(int32_t* width, int32_t* height) const
 {
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);
@@ -74,7 +74,7 @@ void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetTitle(char* destStr) const
+void WindowImpl::GetTitle(char* destStr) const
 {
     wchar_t utf16Title[256] {};
     int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
@@ -82,7 +82,7 @@ void WindowsWindow::GetTitle(char* destStr) const
     UTF16LE::Convert<UTF8>(utf16Title, utf16TitleLen, destStr, 256);
 }
 
-bool WindowsWindow::IsResizable() const
+bool WindowImpl::IsResizable() const
 {
     DWORD normalStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
     if ((normalStyle & WS_THICKFRAME) != 0)
@@ -99,66 +99,66 @@ bool WindowsWindow::IsResizable() const
     return false;
 }
 
-bool WindowsWindow::HasCaption() const
+bool WindowImpl::HasCaption() const
 {
     DWORD normalStyle = ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
     return (normalStyle & WS_CAPTION) != 0;
 }
 
-bool WindowsWindow::IsMaximized() const
+bool WindowImpl::IsMaximized() const
 {
     // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsMinimized() const
+bool WindowImpl::IsMinimized() const
 {
     // todo : impl
     return false;
 }
 
-bool WindowsWindow::IsTopMost() const
+bool WindowImpl::IsTopMost() const
 {
     DWORD extendedStyle = GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
     return (extendedStyle & WS_EX_TOPMOST) != 0;
 }
 
-void* WindowsWindow::GetNativeWindow() const
+void* WindowImpl::GetNativeWindow() const
 {
     return m_wndHandle;
 }
 
-void WindowsWindow::Show()
+void WindowImpl::Show()
 {
     ::ShowWindow(m_wndHandle, SW_NORMAL);
 }
 
-void WindowsWindow::Hide()
+void WindowImpl::Hide()
 {
     ::ShowWindow(m_wndHandle, SW_HIDE);
 }
 
-void WindowsWindow::Maximize()
+void WindowImpl::Maximize()
 {
     ::ShowWindow(m_wndHandle, SW_MAXIMIZE);
 }
 
-void WindowsWindow::Minimize()
+void WindowImpl::Minimize()
 {
     ::ShowWindow(m_wndHandle, SW_MINIMIZE);
 }
 
-void WindowsWindow::Close()
+void WindowImpl::Close()
 {
     ::DestroyWindow(m_wndHandle);
 }
 
-void WindowsWindow::SetPosition(int32_t x, int32_t y)
+void WindowImpl::SetPosition(int32_t x, int32_t y)
 {
     ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetSize(int32_t width, int32_t height)
+void WindowImpl::SetSize(int32_t width, int32_t height)
 {
     ::RECT rt{0, 0, width, height};
 
@@ -180,7 +180,7 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetTitle(const char* captionTitle)
+void WindowImpl::SetTitle(const char* captionTitle)
 {
     assert(captionTitle != nullptr);
 
@@ -192,17 +192,17 @@ void WindowsWindow::SetTitle(const char* captionTitle)
     }
 }
 
-void WindowsWindow::SetTopMost(bool setTopMost)
+void WindowImpl::SetTopMost(bool setTopMost)
 {
     ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
-void WindowsWindow::SetTransparency(float transparency)
+void WindowImpl::SetTransparency(float transparency)
 {
     ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);
 }
 
-float WindowsWindow::GetTransparency() const
+float WindowImpl::GetTransparency() const
 {
     BYTE transparency;
     ::GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
@@ -224,7 +224,7 @@ float WindowsWindow::GetTransparency() const
 //#endif
 //}
 
-LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT WindowImpl::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
@@ -318,7 +318,7 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
     return DefWindowProcW(wndHandle, msg, wParam, lParam);
 }
 
-void WindowsWindow::SetUserData(void* data)
+void WindowImpl::SetUserData(void* data)
 {
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG>(data));
 }

@@ -9,41 +9,41 @@
 namespace tgon
 {
    
-WindowsInputManager::WindowsInputManager(std::shared_ptr<Window> inputTarget) :
+InputManagerImpl::InputManagerImpl(const Window& inputTarget) :
     m_inputManager(OIS::InputManager::createInputSystem(QueryParamList(inputTarget)))
 {
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
 }
 
-WindowsInputManager::~WindowsInputManager()
+InputManagerImpl::~InputManagerImpl()
 {
     OIS::InputManager::destroyInputSystem(m_inputManager);
 }
 
-void WindowsInputManager::Update()
+void InputManagerImpl::Update()
 {
 }
 
-OIS::Mouse* WindowsInputManager::CreateMouseDevice()
+OIS::Mouse* InputManagerImpl::CreateMouseDevice()
 {
     return static_cast<OIS::Mouse*>(m_inputManager->createInputObject(OIS::OISMouse, true));
 }
 
-OIS::Keyboard* WindowsInputManager::CreateKeyboardDevice()
+OIS::Keyboard* InputManagerImpl::CreateKeyboardDevice()
 {
     return static_cast<OIS::Keyboard*>(m_inputManager->createInputObject(OIS::OISKeyboard, true));
 }
 
-OIS::JoyStick* WindowsInputManager::CreateGamepadDevice()
+OIS::JoyStick* InputManagerImpl::CreateGamepadDevice()
 {
     return static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true));
 }
 
-OIS::ParamList WindowsInputManager::QueryParamList(std::shared_ptr<Window> inputTarget) const
+OIS::ParamList InputManagerImpl::QueryParamList(const Window& inputTarget) const
 {
     OIS::ParamList paramList
     {
-        {"WINDOW", std::to_string(reinterpret_cast<size_t>(inputTarget->GetNativeWindow()))}
+        {"WINDOW", std::to_string(reinterpret_cast<size_t>(inputTarget.GetNativeWindow()))}
     };
 
     return paramList;

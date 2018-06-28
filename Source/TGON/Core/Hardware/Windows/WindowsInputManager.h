@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
+
 #include "Core/Platform/Config.h"
 
 namespace OIS
@@ -23,15 +25,16 @@ namespace tgon
 
 class Window;
 
-class TGON_API WindowsInputManager final
+class TGON_API InputManagerImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    explicit WindowsInputManager(std::shared_ptr<Window> inputTarget);
+    explicit InputManagerImpl(const Window& inputTarget);
     
 /* @section Public destructor */
 public:
-    ~WindowsInputManager();
+    ~InputManagerImpl();
 
 /* @section Public method */
 public:
@@ -42,13 +45,11 @@ public:
 
 /* @section Private method */
 private:
-    OIS::ParamList QueryParamList(std::shared_ptr<Window> inputTarget) const;
+    OIS::ParamList QueryParamList(const Window& inputTarget) const;
     
 /* @section Protected variable */
 protected:
     OIS::InputManager* m_inputManager;
 };
-
-using PlatformInputManager = WindowsInputManager;
 
 } /* namespace tgon */

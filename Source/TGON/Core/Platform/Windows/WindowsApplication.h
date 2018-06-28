@@ -5,18 +5,25 @@
  */
 
 #pragma once
-#include "Core/Platform/Config.h"
+#ifndef WIN32_LEAN_AND_MEAN
+#    define WIN32_LEAN_AND_MEAN
+#endif
+#include <Windows.h>
+#include <boost/noncopyable.hpp>
 
-#include "WindowsApplicationType.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
 
-class TGON_API WindowsApplication final
+enum class MessageBoxIcon;
+
+class TGON_API ApplicationImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowsApplication();
+    ApplicationImpl();
 
 /* @section Public method */
 public:
@@ -46,7 +53,7 @@ private:
 };
 
 template <typename _FunctionType>
-inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
+inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
 {
     MSG msg {};
     while (msg.message != WM_QUIT)
@@ -61,7 +68,5 @@ inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
         }
     }
 }
-
-using PlatformApplication = WindowsApplication;
 
 } /* namespace tgon */                               

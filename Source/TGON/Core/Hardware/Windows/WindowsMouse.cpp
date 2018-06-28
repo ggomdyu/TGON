@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-WindowsMouse::WindowsMouse(WindowsInputManager& platformInputManager) noexcept :
+WindowsMouse::WindowsMouse(InputManagerImpl& platformInputManager) noexcept :
     m_mouseDevice(platformInputManager.CreateMouseDevice()),
     m_prevMouseState(std::make_shared<OIS::MouseState>())
 {

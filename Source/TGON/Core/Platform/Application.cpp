@@ -3,6 +3,16 @@
 #include "Core/Object/Engine.h"
 
 #include "Application.h"
+#include "ApplicationType.h"
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsApplication.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOS/MacOSApplication.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidApplication.h"
+#elif TGON_PLATFORM_IOS
+#   import "IOS/IOSApplication.h"
+#endif
 #include "Window.h"
 #include "WindowType.h"
 
@@ -11,7 +21,7 @@ namespace tgon
 
 Application::Application(std::unique_ptr<Engine> engine) :
     m_engine(std::move(engine)),
-    m_rootWindow(Window::Create(WindowStyle{}))
+    m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {
 }
 
@@ -19,7 +29,7 @@ Application::~Application() = default;
 
 void Application::MessageLoop()
 {
-    m_platformApplication.MessageLoop([&]()
+    m_applicationImpl->MessageLoop([&]()
     {
         this->Update();
     });
@@ -27,7 +37,7 @@ void Application::MessageLoop()
 
 void Application::Terminate()
 {
-    m_platformApplication.Terminate();
+    m_applicationImpl->Terminate();
 }
 
 void Application::ShowMessageBox(const char* message) const
@@ -47,17 +57,17 @@ void Application::ShowMessageBox(const char* title, const char* message) const
 
 void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
 {
-    m_platformApplication.ShowMessageBox(title, message, messageBoxIcon);
+    m_applicationImpl->ShowMessageBox(title, message, messageBoxIcon);
 }
    
-std::shared_ptr<Window> Application::GetRootWindow() noexcept
+Window& Application::GetRootWindow() noexcept
 {
-    return m_rootWindow;
+    return *m_rootWindow;
 }
 
-std::shared_ptr<const Window> Application::GetRootWindow() const noexcept
+const Window& Application::GetRootWindow() const noexcept
 {
-    return m_rootWindow;
+    return *m_rootWindow;
 }
 
 const Engine& Application::GetEngine() const noexcept
@@ -70,29 +80,29 @@ Engine& Application::GetEngine() noexcept
     return *m_engine;
 }
 
-const PlatformApplication& Application::GetPlatformDependency() const noexcept
+const ApplicationImpl& Application::GetImpl() const noexcept
 {
-    return m_platformApplication;
+    return *m_applicationImpl;
 }
 
-PlatformApplication& Application::GetPlatformDependency() noexcept
+ApplicationImpl& Application::GetImpl() noexcept
 {
-    return m_platformApplication;
+    return *m_applicationImpl;
+}
+    
+void Application::Update()
+{
+    m_engine->Update();
 }
 
 void Application::OnDidLaunch()
 {
     m_engine->OnDidLaunch();
 }
-    
+
 void Application::OnWillTerminate()
 {
     m_engine->OnWillTerminate();
-}
-    
-void Application::Update()
-{
-    m_engine->Update();
 }
 
 } /* namespace tgon */

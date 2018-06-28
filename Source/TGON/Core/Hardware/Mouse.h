@@ -38,8 +38,8 @@ public:
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;
-    const PlatformMouse& GetPlatformDependency() const noexcept;
-    PlatformMouse& GetPlatformDependency() noexcept;
+    const PlatformMouse& GetImpl() const noexcept;
+    PlatformMouse& GetImpl() noexcept;
     
 /* @section Private variable */
 private:

@@ -7,7 +7,7 @@ namespace tgon
 {
     
 Keyboard::Keyboard(InputManager& inputManager) :
-    m_platformKeyboard(inputManager.GetPlatformDependency())
+    m_platformKeyboard(inputManager.GetImpl())
 {
 }
     
@@ -33,12 +33,12 @@ bool Keyboard::IsKeyUp(KeyCode keyCode) const
     return m_platformKeyboard.IsKeyUp(keyCode);
 }
     
-PlatformKeyboard& Keyboard::GetPlatformDependency() noexcept
+PlatformKeyboard& Keyboard::GetImpl() noexcept
 {
     return m_platformKeyboard;
 }
 
-const PlatformKeyboard& Keyboard::GetPlatformDependency() const noexcept
+const PlatformKeyboard& Keyboard::GetImpl() const noexcept
 {
     return m_platformKeyboard;
 }

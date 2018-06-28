@@ -2,106 +2,105 @@
 
 #include "Window.h"
 #include "WindowType.h"
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsWindow.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOS/MacOSWindow.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidWindow.h"
+#elif BOOST_OS_IOS
+#   import "IOS/IOSWindow.h"
+#endif
 
 namespace tgon
 {
 
 Window::Window() :
-    m_platformWindow(this)
+    m_windowImpl(std::make_unique<WindowImpl>(this))
 {
 }
 
 Window::Window(const WindowStyle& windowStyle) :
-    m_platformWindow(this, windowStyle)
+    m_windowImpl(std::make_unique<WindowImpl>(this, windowStyle))
 {
 }
 
 Window::~Window() = default;
 
-std::shared_ptr<Window> Window::Create()
-{
-    return std::shared_ptr<Window>(new Window());
-}
-
-std::shared_ptr<Window> Window::Create(const WindowStyle& windowStyle)
-{
-    return std::shared_ptr<Window>(new Window(windowStyle));
-}
-
 void Window::Show()
 {
-    m_platformWindow.Show();
+    m_windowImpl->Show();
 }
 
 void Window::Hide()
 {
-    m_platformWindow.Hide();
+    m_windowImpl->Hide();
 }
 
 void Window::Close()
 {
-    m_platformWindow.Close();
+    m_windowImpl->Close();
 }
 
 void Window::Maximize()
 {
-    m_platformWindow.Maximize();
+    m_windowImpl->Maximize();
 }
 
 void Window::Minimize()
 {
-    m_platformWindow.Minimize();
+    m_windowImpl->Minimize();
 }
 
 void Window::BringToFront()
 {
-    m_platformWindow.BringToFront();
+    m_windowImpl->BringToFront();
 }
 
 void Window::SetPosition(int32_t x, int32_t y)
 {
-    m_platformWindow.SetPosition(x, y);
+    m_windowImpl->SetPosition(x, y);
 }
 
 void Window::SetSize(int32_t width, int32_t height)
 {
-    m_platformWindow.SetSize(width, height);
+    m_windowImpl->SetSize(width, height);
 }
 
 void Window::SetTitle(const char* title)
 {
-    m_platformWindow.SetTitle(title);
+    m_windowImpl->SetTitle(title);
 }
 
 void Window::SetTopMost(bool setTopMost)
 {
-    m_platformWindow.SetTopMost(setTopMost);
+    m_windowImpl->SetTopMost(setTopMost);
 }
 
 void Window::SetTransparency(float transparency)
 {
-    m_platformWindow.SetTransparency(transparency);
+    m_windowImpl->SetTransparency(transparency);
 }
 
 void Window::GetPosition(int32_t* x, int32_t* y) const
 {
-    m_platformWindow.GetPosition(x, y);
+    m_windowImpl->GetPosition(x, y);
 }
 
 void Window::GetSize(int32_t* width, int32_t* height) const
 {
-    m_platformWindow.GetSize(width, height);
+    m_windowImpl->GetSize(width, height);
 }
 
 void Window::GetTitle(char* destStr) const
 {
-    m_platformWindow.GetTitle(destStr);
+    m_windowImpl->GetTitle(destStr);
 }
 
 I32Point Window::GetPosition() const
 {
     I32Point::ValueType x, y;
-    m_platformWindow.GetPosition(&x, &y);
+    m_windowImpl->GetPosition(&x, &y);
 
     return {x, y};
 }
@@ -109,59 +108,59 @@ I32Point Window::GetPosition() const
 I32Extent2D Window::GetSize() const
 {
     I32Point::ValueType width, height;
-    m_platformWindow.GetSize(&width, &height);
+    m_windowImpl->GetSize(&width, &height);
 
     return {width, height};
 }
 
 float Window::GetTransparency() const
 {
-    return m_platformWindow.GetTransparency();
+    return m_windowImpl->GetTransparency();
 }
 
 void* Window::GetNativeWindow()
 {
-    return m_platformWindow.GetNativeWindow();
+    return m_windowImpl->GetNativeWindow();
 }
 
 const void* Window::GetNativeWindow() const
 {
-    return m_platformWindow.GetNativeWindow();
+    return m_windowImpl->GetNativeWindow();
 }
 
 bool Window::HasCaption() const
 {
-    return m_platformWindow.HasCaption();
+    return m_windowImpl->HasCaption();
 }
 
 bool Window::IsResizable() const
 {
-    return m_platformWindow.IsResizable();
+    return m_windowImpl->IsResizable();
 }
 
 bool Window::IsMaximized() const
 {
-    return m_platformWindow.IsMaximized();
+    return m_windowImpl->IsMaximized();
 }
 
 bool Window::IsMinimized() const
 {
-    return m_platformWindow.IsMinimized();
+    return m_windowImpl->IsMinimized();
 }
 
 bool Window::IsTopMost() const
 {
-    return m_platformWindow.IsTopMost();
+    return m_windowImpl->IsTopMost();
 }
 
-const PlatformWindow& Window::GetPlatformDependency() const noexcept
+const WindowImpl& Window::GetImpl() const noexcept
 {
-    return m_platformWindow;
+    return *m_windowImpl;
 }
 
-PlatformWindow& Window::GetPlatformDependency() noexcept
+WindowImpl& Window::GetImpl() noexcept
 {
-    return m_platformWindow;
+    return *m_windowImpl;
 }
 
 } /* namespace tgon */

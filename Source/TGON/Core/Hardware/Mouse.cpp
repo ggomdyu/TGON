@@ -12,7 +12,7 @@ namespace tgon
 {
     
 Mouse::Mouse(InputManager& inputManager) :
-    m_platformMouse(inputManager.GetPlatformDependency())
+    m_platformMouse(inputManager.GetImpl())
 {
 }
     
@@ -51,12 +51,12 @@ bool Mouse::IsMouseUp(MouseCode mouseCode) const
     return m_platformMouse.IsMouseUp(mouseCode);
 }
 
-const PlatformMouse& Mouse::GetPlatformDependency() const noexcept
+const PlatformMouse& Mouse::GetImpl() const noexcept
 {
     return m_platformMouse;
 }
 
-PlatformMouse& Mouse::GetPlatformDependency() noexcept
+PlatformMouse& Mouse::GetImpl() noexcept
 {
     return m_platformMouse;
 }

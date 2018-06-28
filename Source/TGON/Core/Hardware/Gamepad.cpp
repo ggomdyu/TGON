@@ -7,7 +7,7 @@ namespace tgon
 {
 
 Gamepad::Gamepad(InputManager& inputManager) :
-    m_platformGamepad(inputManager.GetPlatformDependency())
+    m_platformGamepad(inputManager.GetImpl())
 {
 }
     
@@ -38,12 +38,12 @@ bool Gamepad::IsButtonUp(int32_t buttonNumber) const
     return m_platformGamepad.IsButtonUp(buttonNumber);
 }
 
-const PlatformGamepad& Gamepad::GetPlatformDependency() const noexcept
+const PlatformGamepad& Gamepad::GetImpl() const noexcept
 {
     return m_platformGamepad;
 }
 
-PlatformGamepad& Gamepad::GetPlatformDependency() noexcept
+PlatformGamepad& Gamepad::GetImpl() noexcept
 {
     return m_platformGamepad;
 }

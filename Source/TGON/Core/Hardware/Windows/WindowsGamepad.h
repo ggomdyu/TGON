@@ -20,13 +20,13 @@ class JoyStickState;
 namespace tgon
 {
 
-class WindowsInputManager;
+class InputManagerImpl;
 
 class TGON_API WindowsGamepad final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsGamepad(WindowsInputManager& inputManager);
+    explicit WindowsGamepad(InputManagerImpl& inputManager);
 
 /* @section Public method */
 public:

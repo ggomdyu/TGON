@@ -14,7 +14,7 @@ constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGa
 {
 }
 
-InputModule::InputModule(const InputMode& inputMode, std::shared_ptr<Window> inputTarget) :
+InputModule::InputModule(const InputMode& inputMode, Window& inputTarget) :
     m_inputManager(inputTarget)
 {
     if (inputMode.isUseKeyboard)

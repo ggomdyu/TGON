@@ -47,6 +47,6 @@ private:
     std::unique_ptr<gainput::InputManager> m_inputManager;
 };
     
-using PlatformInputManager = MacOSInputManager;
+using InputManagerImpl = MacOSInputManager;
 
 } /* namespace tgon */

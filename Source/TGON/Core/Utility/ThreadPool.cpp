@@ -42,6 +42,8 @@ void ThreadPool::Join()
             thread.join();
         }
     }
+
+    m_taskQueue.Clear();
 }
 
 bool ThreadPool::IsJoinable() const noexcept
@@ -61,15 +63,17 @@ inline void ThreadPool::ThreadWorker::operator()()
     while (m_owner.IsJoinable())
     {
         std::unique_lock<std::mutex> uniqueLock(m_owner.m_conditionMutex);
+    
+        m_owner.m_conditionLock.wait(uniqueLock);
 
-        if (m_owner.m_taskQueue.IsEmpty())
+        if (m_owner.m_taskQueue.IsEmpty() == false)
         {
-            m_owner.m_conditionLock.wait(uniqueLock);
+            task = std::move(m_owner.m_taskQueue.Dequeue());
+            
+            uniqueLock.unlock();
+            
+            task();
         }
-
-        task = std::move(m_owner.m_taskQueue.Dequeue());
-
-        task();
     }
 }
     

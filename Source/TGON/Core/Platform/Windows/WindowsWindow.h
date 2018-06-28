@@ -13,8 +13,6 @@
 #include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
-#include "Core/Math/Point.h"
-#include "Core/Math/Extent.h"
 
 namespace tgon
 {
@@ -22,13 +20,13 @@ namespace tgon
 class Window;
 struct WindowStyle;
 
-class WindowsWindow final :
+class WindowImpl final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowsWindow(Window* owner);
-    WindowsWindow(Window* owner, const WindowStyle& windowStyle);
+    WindowImpl(Window* owner);
+    WindowImpl(Window* owner, const WindowStyle& windowStyle);
 
 /* @section Public method */
 public:
@@ -65,11 +63,10 @@ private:
 
 /* @section Private variable */
 private:
+    Window* m_owner;
+
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;
-    Window* m_owner;
 };
-
-using PlatformWindow = WindowsWindow;
 
 } /* namespace tgon */

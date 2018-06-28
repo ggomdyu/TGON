@@ -6,25 +6,22 @@
 
 #pragma once
 #include <memory>
+#include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
-
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsInputManager.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSInputManager.h"
-#endif
 
 namespace tgon
 {
 
 class Window;
+class InputManagerImpl;
 
-class TGON_API InputManager final
+class TGON_API InputManager final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    InputManager(std::shared_ptr<Window> inputTarget);
+    InputManager(const Window& inputTarget);
     
 /* @section Public destructor */
 public:
@@ -34,12 +31,12 @@ public:
 public:
     void Update();
     
-    const PlatformInputManager& GetPlatformDependency() const noexcept;
-    PlatformInputManager& GetPlatformDependency() noexcept;
+    const InputManagerImpl& GetImpl() const noexcept;
+    InputManagerImpl& GetImpl() noexcept;
     
 /* @section Private variable */
 private:
-    PlatformInputManager m_platformInputManager;
+    std::unique_ptr<InputManagerImpl> m_inputManagerImpl;
 };
 
 } /* namespace tgon */

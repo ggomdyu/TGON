@@ -7,7 +7,7 @@
 namespace tgon
 {
 
-WindowsKeyboard::WindowsKeyboard(WindowsInputManager& platformInputManager) :
+WindowsKeyboard::WindowsKeyboard(InputManagerImpl& platformInputManager) :
     m_keyboardDevice(platformInputManager.CreateKeyboardDevice()),
     m_prevKeyStates{}
 {

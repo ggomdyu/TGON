@@ -20,14 +20,14 @@ class MouseState;
 namespace tgon
 {
 
-class WindowsInputManager;
+class InputManagerImpl;
 enum class MouseCode;
 
 class TGON_API WindowsMouse final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsMouse(WindowsInputManager& platformInputManager) noexcept;
+    explicit WindowsMouse(InputManagerImpl& platformInputManager) noexcept;
 
 /* @section Public method */
 public:

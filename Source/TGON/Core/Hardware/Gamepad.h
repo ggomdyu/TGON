@@ -36,8 +36,8 @@ public:
     bool IsButtonDown(int32_t buttonNumber) const;
     bool IsButtonHold(int32_t buttonNumber) const;
     bool IsButtonUp(int32_t buttonNumber) const;
-    const PlatformGamepad& GetPlatformDependency() const noexcept;
-    PlatformGamepad& GetPlatformDependency() noexcept;
+    const PlatformGamepad& GetImpl() const noexcept;
+    PlatformGamepad& GetImpl() noexcept;
     
 /* @section Private variable */
 private:

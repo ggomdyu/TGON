@@ -10,19 +10,10 @@
 #include "Core/Object/Delegate.h"
 #include "Core/Object/Engine.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsApplication.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSApplication.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidApplication.h"
-#elif TGON_PLATFORM_IOS
-#   import "IOS/IOSApplication.h"
-#endif
-
 namespace tgon
 {
 
+class ApplicationImpl;
 class Window;
 enum class MessageBoxIcon;
 
@@ -77,10 +68,10 @@ public:
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /* @brief   Gets the root window. */
-    std::shared_ptr<Window> GetRootWindow() noexcept;
+    Window& GetRootWindow() noexcept;
     
     /* @brief   Gets the root window. */
-    std::shared_ptr<const Window> GetRootWindow() const noexcept;
+    const Window& GetRootWindow() const noexcept;
     
     /* @brief   Gets the engine. */
     const Engine& GetEngine() const noexcept;
@@ -88,28 +79,26 @@ public:
     /* @brief   Gets the engine. */
     Engine& GetEngine() noexcept;
 
-    const PlatformApplication& GetPlatformDependency() const noexcept;
+    const ApplicationImpl& GetImpl() const noexcept;
 
-    PlatformApplication& GetPlatformDependency() noexcept;
+    ApplicationImpl& GetImpl() noexcept;
 
-/* @section Public event handler */
-public:
-    virtual void OnDidLaunch();
-    virtual void OnWillTerminate();
-    Delegate<void(Window&)> OnWillCloseWindow;
-    Delegate<void(Window&)> OnDidCloseWindow;
- 
 /* @section Private method */
 private:
     /* @brief   Updates the application. */
     void Update();
+
+/* @section Public event handler */
+public:
+    void OnDidLaunch();
+    void OnWillTerminate();
     
 /* @section Protected variable */
 protected:
-    PlatformApplication m_platformApplication;
+    std::unique_ptr<ApplicationImpl> m_applicationImpl;
 
     std::unique_ptr<Engine> m_engine;
-    std::shared_ptr<Window> m_rootWindow;
+    std::unique_ptr<Window> m_rootWindow;
 };
 
 } /* namespace tgon */

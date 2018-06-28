@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <queue>
+#include <deque>
 #include <future>
 #include <thread>
 #include <mutex>
@@ -23,17 +23,21 @@ private:
 
     template <typename _ValueType>
     class ThreadWorkQueue :
-        private std::queue<_ValueType>
+        private std::deque<_ValueType>
     {
     /* @section Private type */
     private:
-        using SuperType = std::queue<_ValueType>;
+        using SuperType = std::deque<_ValueType>;
 
     /* @section Public method */
     public:
         template <typename _ValueType2>
         void Enqueue(_ValueType2&& value);
+
         _ValueType Dequeue();
+
+        void Clear();
+
         bool IsEmpty() const;
 
     /* @section Private variable */
@@ -79,7 +83,7 @@ private:
 
     /* @brief   The queue of task that used on task management. */
     std::mutex m_taskQueueMutex;
-    ThreadWorkQueue<Delegate<void()>> m_taskQueue;
+    ThreadWorkQueue<std::function<void()>> m_taskQueue;
 
     bool m_isJoinable;
 };
@@ -91,10 +95,8 @@ auto ThreadPool::AddTask(_TaskType&& task, _ArgTypes&&... args) -> std::future<d
 
     auto promise = std::make_unique<std::promise<TaskReturnType>>();
     std::future<TaskReturnType> future = promise->get_future();
-
-    auto wrappedTask = Delegate<void()>([=, promise2 = std::move(promise)]() mutable
+    std::function<void()> wrappedTask([promise2 = std::move(promise)]()
     {
-        promise2->set_value(task(std::forward<_ArgTypes>(args)...));
     });
 
     // Push the task to queue.
@@ -103,7 +105,7 @@ auto ThreadPool::AddTask(_TaskType&& task, _ArgTypes&&... args) -> std::future<d
     // Notify one thread that task exists.
     m_conditionLock.notify_one();
     
-    return future;
+    return {};
 }
 
 template<typename _ValueType>
@@ -111,7 +113,7 @@ template<typename _ValueType2>
 inline void ThreadPool::ThreadWorkQueue<_ValueType>::Enqueue(_ValueType2&& value)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
-    SuperType::push(std::forward<_ValueType2>(value));
+    SuperType::push_back(std::forward<_ValueType2>(value));
 }
 
 template<typename _ValueType>
@@ -120,9 +122,17 @@ inline _ValueType ThreadPool::ThreadWorkQueue<_ValueType>::Dequeue()
     std::lock_guard<std::mutex> lockGuard(m_mutex);
     
     _ValueType ret = std::move(SuperType::front());
-    SuperType::pop();
+    SuperType::pop_front();
 
     return std::move(ret);
+}
+
+template<typename _ValueType>
+inline void ThreadPool::ThreadWorkQueue<_ValueType>::Clear()
+{
+    std::lock_guard<std::mutex> lockGuard(m_mutex);
+
+    SuperType::clear();
 }
 
 template<typename _ValueType>
