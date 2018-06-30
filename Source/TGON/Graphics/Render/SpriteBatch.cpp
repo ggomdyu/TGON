@@ -1,15 +1,16 @@
 #include "PrecompiledHeader.h"
 
 #include "../LowLevel/Graphics.h"
+#include "../LowLevel/GraphicsType.h"
 
 #include "SpriteBatch.h"
 
 namespace tgon
 {
     
-void SpriteBatch::AddSprite(std::shared_ptr<Sprite> newSprite)
+void SpriteBatch::AddSprite(const std::shared_ptr<Sprite>& newSprite)
 {
-    for (auto& batchedSprites : m_batchedSpritesSet)
+    for (auto& batchedSprites : m_batchedSpritesLayer)
     {
         // The front element is guaranted to exist because the 'batchedSprites' has one sprite at least.
         auto& batchedSprite = batchedSprites.front();
@@ -23,17 +24,17 @@ void SpriteBatch::AddSprite(std::shared_ptr<Sprite> newSprite)
     }
     
     // If failed to insert the sprite into other sprite set, then create new one.
-    m_batchedSpritesSet.push_back({newSprite});
+    m_batchedSpritesLayer.push_back({newSprite});
 }
     
 void SpriteBatch::FlushBatch(Graphics& graphics)
 {
-    if (m_batchedSpritesSet.size() <= 0)
+    if (m_batchedSpritesLayer.size() <= 0)
     {
         return;
     }
 
-    auto& batchedSprites = m_batchedSpritesSet.front();
+    auto& batchedSprites = m_batchedSpritesLayer.front();
 
     // The front element is guaranted to exist because the 'batchedSprites' has one sprite at least.
     auto mesh = batchedSprites.front()->GetMesh();
@@ -42,7 +43,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
         mesh->GetIndexBuffer()->Use();
     }
     
-    for (auto& batchedSprites : m_batchedSpritesSet)
+    for (auto& batchedSprites : m_batchedSpritesLayer)
     {
         TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprites.front()->GetMaterial().get());
         material->Use();
@@ -56,7 +57,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
         }
     }
     
-    m_batchedSpritesSet.clear();
+    m_batchedSpritesLayer.clear();
 }
 
 } /* namespace tgon */

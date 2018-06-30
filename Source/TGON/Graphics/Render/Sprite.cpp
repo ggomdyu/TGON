@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "../LowLevel/Graphics.h"
+#include "../LowLevel/GraphicsType.h"
 #include "../LowLevel/TextureType.h"
 
 #include "SpriteBatch.h"

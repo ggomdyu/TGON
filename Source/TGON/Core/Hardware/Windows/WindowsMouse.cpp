@@ -10,19 +10,19 @@
 namespace tgon
 {
 
-WindowsMouse::WindowsMouse(InputManagerImpl& platformInputManager) noexcept :
+MouseImpl::MouseImpl(InputManagerImpl& platformInputManager) noexcept :
     m_mouseDevice(platformInputManager.CreateMouseDevice()),
     m_prevMouseState(std::make_shared<OIS::MouseState>())
 {
 }
 
-void WindowsMouse::Update()
+void MouseImpl::Update()
 {
     *m_prevMouseState = m_mouseDevice->getMouseState();
     m_mouseDevice->capture();
 }
 
-void WindowsMouse::GetPosition(int32_t* x, int32_t* y)
+void MouseImpl::GetPosition(int32_t* x, int32_t* y)
 {
     POINT pt;
     if (GetCursorPos(&pt) == TRUE)
@@ -37,7 +37,7 @@ void WindowsMouse::GetPosition(int32_t* x, int32_t* y)
     }
 }
 
-bool WindowsMouse::IsMouseDown(MouseCode mouseCode) const
+bool MouseImpl::IsMouseDown(MouseCode mouseCode) const
 {
     decltype(auto) currMouseState = m_mouseDevice->getMouseState();
 
@@ -52,7 +52,7 @@ bool WindowsMouse::IsMouseDown(MouseCode mouseCode) const
     }
 }
 
-bool WindowsMouse::IsMouseHold(MouseCode mouseCode) const
+bool MouseImpl::IsMouseHold(MouseCode mouseCode) const
 {
     decltype(auto) currMouseState = m_mouseDevice->getMouseState();
 
@@ -67,7 +67,7 @@ bool WindowsMouse::IsMouseHold(MouseCode mouseCode) const
     }
 }
 
-bool WindowsMouse::IsMouseUp(MouseCode mouseCode) const
+bool MouseImpl::IsMouseUp(MouseCode mouseCode) const
 {
     decltype(auto) currMouseState = m_mouseDevice->getMouseState();
 
@@ -82,12 +82,12 @@ bool WindowsMouse::IsMouseUp(MouseCode mouseCode) const
     }
 }
 
-const OIS::Mouse* WindowsMouse::GetMousedDevice() const
+const OIS::Mouse* MouseImpl::GetMousedDevice() const
 {
     return m_mouseDevice;
 }
 
-OIS::Mouse* WindowsMouse::GetMouseDevice()
+OIS::Mouse* MouseImpl::GetMouseDevice()
 {
     return m_mouseDevice;
 }

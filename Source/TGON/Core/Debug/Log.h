@@ -2,7 +2,7 @@
  * @file    Log.h
  * @author  ggomdyu
  * @since   04/01/2016
- * @brief   Supports plaform-agnostic logger.
+ * @brief   Set of platform agnostic Log interfaces.
  */
 
 #pragma once
@@ -13,15 +13,12 @@
 namespace tgon
 {
 
-enum class LogLevel
-{
-    Debug,
-    Warning,
-};
+enum class LogLevel;
 
 void Log(LogLevel logLevel, const char* formatStr, ...);
 
 void Assert(bool condition);
+
 void Assert(bool condition, const char* formatStr, ...);
 
 } /* namespace tgon */

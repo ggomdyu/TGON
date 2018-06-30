@@ -1,13 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <type_traits>
-#include <cassert>
-
 #include "Core/Debug/Log.h"
+#include "Core/Debug/LogType.h"
 #include "Core/String/Encoding.h"
 
 #include "../WindowType.h"
-
 #include "WindowsWindowUtility.h"
 
 namespace tgon

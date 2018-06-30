@@ -5,28 +5,52 @@
  */
 
 #pragma once
-#include <boost/preprocessor/cat.hpp>
+#include <boost/noncopyable.hpp>
+#include <cstdint>
 
-#if TGON_USING_OPENGL
-#   include "OpenGL/OpenGLGraphics.h"
-#elif TGON_USING_DIRECT3D11
-#   include "Direct3D11/Direct3D11Graphics.h"
-#endif
-
-#include "GraphicsConfig.h"
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
 
-class Graphics :
-    public BOOST_PP_CAT(TGON_GRAPHICS_NAME, Graphics)
-{
-public:
-    TGON_RUNTIME_OBJECT(Graphics);
+struct Color4f;
+class Window;
+struct VideoMode;
+enum class PrimitiveType;
+enum class FillMode;
+enum class CullMode;
+class GraphicsImpl;
 
+class Graphics :
+    private boost::noncopyable
+{
 /* @section Public constructor */
 public:
-    using SuperType::SuperType;
+    Graphics(const Window& displayTarget, const VideoMode& videoMode);
+    
+/* @section Public destructor */
+public:
+    ~Graphics();
+
+/* @section Public method */
+public:
+    void SetClearColor(const Color4f& color);
+    void SetFillMode(FillMode fillMode);
+    void SetCullMode(CullMode cullMode);
+    void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height);
+    void EnableBlend();
+    void EnableDepthTest();
+    void DisableBlend();
+    void DisableDepthTest();
+    void ClearColorBuffer();
+    void ClearColorDepthBuffer();
+    void SwapBuffer();
+    void DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount);
+    void DrawIndexedPrimitives(int32_t primitiveCount);
+
+/* @section Private variable */
+private:
+    std::unique_ptr<GraphicsImpl> m_graphicsImpl;
 };
 
 } /* namespace tgon */

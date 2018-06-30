@@ -5,51 +5,41 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <GL/glew.h>
-
-#include "../Generic/GenericIndexBuffer.h"
 
 namespace tgon
 {
 
-class OpenGLIndexBuffer :
-    public GenericIndexBuffer
+class IndexBufferImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    template <typename _DataArrayType, std::size_t _DataArraySize>
-    OpenGLIndexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
-    OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
-    OpenGLIndexBuffer(OpenGLIndexBuffer&&);
+    IndexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage);
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLIndexBuffer() override;
-
-/* @section Public operator */
-public:
-    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&&);
+    ~IndexBufferImpl();
 
 /* @section Public method */
 public:
-    virtual void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage) final override;
-    virtual void Use() final override;    
-    virtual void Unuse() final override;
-    virtual bool IsValid() const noexcept final override;
+    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
+    std::size_t GetDataBytes() const noexcept;
+    void Use();
+    void Unuse();
+    bool IsValid() const noexcept;
+    bool IsDynamicUsage() const noexcept;
 
 /* @section Private method */
 private:
-    GLuint GenerateBuffer() const;
+    GLuint CreateIndexBufferHandle() const;
 
 /* @section Private variable */
 private:
+    std::size_t m_dataBytes;
+    bool m_isDynamicUsage;
     GLuint m_indexBufferHandle;
 };
-
-template <typename _DataArrayType, std::size_t _DataArraySize>
-inline OpenGLIndexBuffer::OpenGLIndexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage) :
-    OpenGLIndexBuffer(data, sizeof(data), isDynamicUsage)
-{
-}
 
 } /* namespace tgon */

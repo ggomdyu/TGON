@@ -5,57 +5,45 @@
  */
 
 #pragma once
-#include <memory>
+#include <boost/noncopyable.hpp>
 #include <vector>
-
-#include "../Generic/GenericVertexBuffer.h"
-
-#include "OpenGLVertexBufferType.h"
+#include <GL/glew.h>
 
 namespace tgon
 {
 
-class OpenGLVertexBuffer :
-    public GenericVertexBuffer
+struct VertexBufferDesc;
+
+class VertexBufferImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    template <typename _DataArrayType, std::size_t _DataArraySize>
-    OpenGLVertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
-    OpenGLVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
-    OpenGLVertexBuffer(OpenGLVertexBuffer&&);
+    VertexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLVertexBuffer() override;
-
-/* @section Public operator */
-public:
-    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&&);
+    ~VertexBufferImpl();
 
 /* @section Public method */
 public:
-    virtual void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) final override;
-    virtual void Use() final override;    
-    virtual void Unuse() final override;
-    virtual bool IsValid() const noexcept final override;
+    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    std::size_t GetDataBytes() const noexcept;
+    void Use();
+    void Unuse();
+    bool IsValid() const noexcept;
+    bool IsDynamicUsage() const noexcept;
 
 /* @section Private method */
 private:
-    GLuint GenerateBuffer() const;
+    GLuint CreateVertexBufferHandle() const;
 
 /* @section Private variable */
 private:
+    std::size_t m_dataBytes;
+    bool m_isDynamicUsage;
     GLuint m_vertexBufferHandle;
-    std::vector<OpenGLVertexBufferDesc> m_vertexBufferDescs;
+    std::vector<VertexBufferDesc> m_vertexBufferDescs;
 };
-
-template <typename _DataArrayType, std::size_t _DataArraySize>
-inline OpenGLVertexBuffer::OpenGLVertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
-    OpenGLVertexBuffer(data, sizeof(data), isDynamicUsage, vertexBufferDescs)
-{
-}
-
-using VertexBuffer = OpenGLVertexBuffer;
 
 } /* namespace tgon */

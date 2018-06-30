@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "TGON.h"
-
 #include "TestScene.h"
 
 using namespace tgon;

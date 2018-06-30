@@ -2,70 +2,43 @@
 
 #include <cassert>
 
-#include "OpenGLVertexBuffer.h"
-#include "OpenGLVertexBufferUtility.h"
 #include "OpenGLUtility.h"
+#include "OpenGLVertexBuffer.h"
+#include "../VertexBufferType.h"
 
 namespace tgon
 {
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
-    GenericVertexBuffer(dataBytes, isDynamicUsage),
-    m_vertexBufferHandle(GenerateBuffer())
+VertexBufferImpl::VertexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
+    m_dataBytes(dataBytes),
+    m_isDynamicUsage(isDynamicUsage),
+    m_vertexBufferHandle(this->CreateVertexBufferHandle())
 {
-    assert(data != nullptr && dataBytes != 0 && vertexBufferDescs.size() > 0);
+    assert(data != nullptr && dataBytes > 0 && vertexBufferDescs.size() > 0);
 
     this->SetData(data, dataBytes, isDynamicUsage, vertexBufferDescs);
 }
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) :
-    GenericVertexBuffer(std::move(rhs)),
-    m_vertexBufferHandle(rhs.m_vertexBufferHandle),
-    m_vertexBufferDescs(std::move(rhs.m_vertexBufferDescs))
-{
-    rhs.m_vertexBufferHandle = 0;
-}
-
-OpenGLVertexBuffer::~OpenGLVertexBuffer()
+VertexBufferImpl::~VertexBufferImpl()
 {
     TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
 }
 
-OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs)
-{
-    if (&rhs == this)
-    {
-        return *this;
-    }
-
-    glDeleteBuffers(1, &m_vertexBufferHandle);
-
-    GenericVertexBuffer::operator=(std::move(rhs));
-
-    m_vertexBufferHandle = rhs.m_vertexBufferHandle;
-    m_vertexBufferDescs = std::move(rhs.m_vertexBufferDescs);
-    
-    rhs.m_vertexBufferHandle = 0;
-
-    return *this;
-}
-
-void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+void VertexBufferImpl::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
 {
     m_vertexBufferDescs.clear();
-    m_vertexBufferDescs.resize(vertexBufferDescs.size());
-
-    int index = 0;
-    for (auto& vertexBufferDesc : vertexBufferDescs)
-    {
-        m_vertexBufferDescs[index++] = ConvertVertexBufferDescToNative(vertexBufferDesc);
-    }
+    m_vertexBufferDescs = vertexBufferDescs;
 
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
     TGON_GL_ERROR_CHECK(glBufferData(GL_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 }
 
-void OpenGLVertexBuffer::Use()
+std::size_t VertexBufferImpl::GetDataBytes() const noexcept
+{
+    return m_dataBytes;
+}
+
+void VertexBufferImpl::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
 
@@ -75,17 +48,17 @@ void OpenGLVertexBuffer::Use()
 
         TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(i));
         TGON_GL_ERROR_CHECK(glVertexAttribPointer(
-            vertexBufferDesc.attribute,
+            static_cast<GLuint>(vertexBufferDesc.attribute),
             vertexBufferDesc.dimension,
-            vertexBufferDesc.type,
+            static_cast<GLenum>(vertexBufferDesc.type),
             vertexBufferDesc.normalized,
             vertexBufferDesc.stride,
-            vertexBufferDesc.offset
+            reinterpret_cast<const void*>(vertexBufferDesc.offset)
         ));
     }
 }
 
-void OpenGLVertexBuffer::Unuse()
+void VertexBufferImpl::Unuse()
 {
     for (GLint i = 0; i < m_vertexBufferDescs.size(); ++i)
     {
@@ -93,12 +66,17 @@ void OpenGLVertexBuffer::Unuse()
     }
 }
 
-bool OpenGLVertexBuffer::IsValid() const noexcept
+bool VertexBufferImpl::IsValid() const noexcept
 {
     return m_vertexBufferHandle != 0;
 }
 
-GLuint OpenGLVertexBuffer::GenerateBuffer() const
+bool VertexBufferImpl::IsDynamicUsage() const noexcept
+{
+    return m_isDynamicUsage;
+}
+
+GLuint VertexBufferImpl::CreateVertexBufferHandle() const
 {
     GLuint vertexBufferHandle;
     TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));

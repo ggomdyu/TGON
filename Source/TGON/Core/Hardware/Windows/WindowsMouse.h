@@ -23,11 +23,11 @@ namespace tgon
 class InputManagerImpl;
 enum class MouseCode;
 
-class TGON_API WindowsMouse final
+class TGON_API MouseImpl final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsMouse(InputManagerImpl& platformInputManager) noexcept;
+    explicit MouseImpl(InputManagerImpl& platformInputManager) noexcept;
 
 /* @section Public method */
 public:
@@ -45,6 +45,6 @@ private:
     std::shared_ptr<OIS::MouseState> m_prevMouseState;
 };
 
-using PlatformMouse = WindowsMouse;
+using PlatformMouse = MouseImpl;
 
 } /* namespace tgon */

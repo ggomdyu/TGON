@@ -6,10 +6,8 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <memory>
 
 #include "Core/Platform/Config.h"
-#include "Graphics/LowLevel/Generic/GenericGraphicsType.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN

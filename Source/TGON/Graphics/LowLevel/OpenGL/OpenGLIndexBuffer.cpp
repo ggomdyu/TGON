@@ -8,67 +8,53 @@
 namespace tgon
 {
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage) :
-    GenericIndexBuffer(dataBytes, isDynamicUsage),
-    m_indexBufferHandle(GenerateBuffer())
+IndexBufferImpl::IndexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage) :
+    m_dataBytes(dataBytes),
+    m_isDynamicUsage(isDynamicUsage),
+    m_indexBufferHandle(this->CreateIndexBufferHandle())
 {
     assert(data != nullptr && dataBytes != 0);
 
     this->SetData(data, dataBytes, isDynamicUsage);
 }
 
-OpenGLIndexBuffer::OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) :
-    GenericIndexBuffer(std::move(rhs)),
-    m_indexBufferHandle(rhs.m_indexBufferHandle)
-{
-    rhs.m_indexBufferHandle = 0;
-}
-
-OpenGLIndexBuffer::~OpenGLIndexBuffer()
+IndexBufferImpl::~IndexBufferImpl()
 {
     TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
 }
 
-OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs)
-{
-    if (&rhs == this)
-    {
-        return *this;
-    }
-
-    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
-
-    OpenGLIndexBuffer::operator=(std::move(rhs));
-
-    m_indexBufferHandle = rhs.m_indexBufferHandle;
-
-    rhs.m_indexBufferHandle = 0;
-
-    return *this;
-}
-
-void OpenGLIndexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)
+void IndexBufferImpl::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle));
     TGON_GL_ERROR_CHECK(glBufferData(GL_ELEMENT_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 }
 
-void OpenGLIndexBuffer::Use()
+std::size_t IndexBufferImpl::GetDataBytes() const noexcept
+{
+    return m_dataBytes;
+}
+
+void IndexBufferImpl::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle));
 }
 
-void OpenGLIndexBuffer::Unuse()
+void IndexBufferImpl::Unuse()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 }
 
-bool OpenGLIndexBuffer::IsValid() const noexcept
+bool IndexBufferImpl::IsValid() const noexcept
 {
     return m_indexBufferHandle != 0;
 }
 
-GLuint OpenGLIndexBuffer::GenerateBuffer() const
+bool IndexBufferImpl::IsDynamicUsage() const noexcept
+{
+    return m_isDynamicUsage;
+}
+
+GLuint IndexBufferImpl::CreateIndexBufferHandle() const
 {
     GLuint vertexBufferHandle;
     TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));

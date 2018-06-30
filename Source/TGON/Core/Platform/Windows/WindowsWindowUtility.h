@@ -17,11 +17,11 @@ namespace tgon
 {
 
 /**
- * @brief                       Create window via given arguments.
- * @param [in] windowStyle		The Style information
- * @param [in] className		The class-name which registered via RegisterClass
- * @param [in] instanceHandle	Process identifier ( You can forward defaultly WindowsPlatformApplication::InstanceHandle )
- * @param [in] extraParam		Extra data for window
+ * @brief                       Creates a window through given arguments.
+ * @param [in] windowStyle		The style information for the window to be created.
+ * @param [in] instanceHandle	The handle of process.
+ * @param [in] className		The class name to be used to initialize the window attributes.
+ * @param [in] extraParam		The extra data that window will have.
  */
 HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 

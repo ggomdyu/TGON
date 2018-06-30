@@ -13,9 +13,6 @@
     <Filter Include="Source\Graphics\LowLevel">
       <UniqueIdentifier>{a1a00ced-ed00-49dd-b22e-b6c935cbcb74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Graphics\LowLevel\Generic">
-      <UniqueIdentifier>{bc16db6b-2e0f-470c-a755-a98b8f979767}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Graphics\LowLevel\OpenGL">
       <UniqueIdentifier>{2155b05b-096f-4a18-89b7-b9831534a488}</UniqueIdentifier>
     </Filter>
@@ -39,38 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.h">
       <Filter>Source\Graphics\Render</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\GraphicsResource.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericGraphicsFwd.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericGraphicsType.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericIndexBuffer.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericShader.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericTexture.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericTextureType.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericVertexBuffer.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericVertexBufferType.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericGraphics.h">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Graphics.h">
-      <Filter>Source\Graphics\LowLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\GraphicsConfig.h">
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\IndexBuffer.h">
@@ -88,9 +54,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLGraphics.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLGraphicsConfig.h">
-      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLGraphicsType.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClInclude>
@@ -106,19 +69,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLTexture.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLTextureUtility.h">
-      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLUtility.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLVertexBuffer.h">
-      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLVertexBufferType.h">
-      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLVertexBufferUtility.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLContext.h">
@@ -126,6 +80,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLContextFwd.h">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\GraphicsType.h">
+      <Filter>Source\Graphics\LowLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\TextureType.h">
+      <Filter>Source\Graphics\LowLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBufferType.h">
+      <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,16 +107,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.cpp">
       <Filter>Source\Graphics\Render</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\GraphicsResource.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericIndexBuffer.cpp">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericTexture.cpp">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Generic\GenericVertexBuffer.cpp">
-      <Filter>Source\Graphics\LowLevel\Generic</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLIndexBuffer.cpp">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
     </ClCompile>
@@ -168,6 +121,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLGraphics.cpp">
       <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Texture.cpp">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Graphics.cpp">
+      <Filter>Source\Graphics\LowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBuffer.cpp">
+      <Filter>Source\Graphics\LowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\IndexBuffer.cpp">
+      <Filter>Source\Graphics\LowLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Shader.cpp">
+      <Filter>Source\Graphics\LowLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

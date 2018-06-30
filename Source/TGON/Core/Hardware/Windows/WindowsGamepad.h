@@ -6,27 +6,20 @@
 
 #pragma once
 #include <cstdint>
+#include <OIS.h>
 
 #include "Core/Platform/Config.h"
-
-namespace OIS
-{
-
-class JoyStick;
-class JoyStickState;
-
-} /* namespace OIS */
 
 namespace tgon
 {
 
 class InputManagerImpl;
 
-class TGON_API WindowsGamepad final
+class TGON_API GamepadImpl final
 {
 /* @section Public constructor */
 public:
-    explicit WindowsGamepad(InputManagerImpl& inputManager);
+    explicit GamepadImpl(InputManagerImpl& inputManager);
 
 /* @section Public method */
 public:
@@ -41,9 +34,9 @@ public:
 /* @section Private variable */
 private:
     OIS::JoyStick* m_gamepadDevice;
-    std::shared_ptr<OIS::JoyStickState> m_prevGamepadState;
+    OIS::JoyStickState m_prevGamepadState;
 };
 
-using PlatformGamepad = WindowsGamepad;
+using PlatformGamepad = GamepadImpl;
 
 } /* namespace tgon */

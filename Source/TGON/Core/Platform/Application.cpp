@@ -20,6 +20,7 @@ namespace tgon
 {
 
 Application::Application(std::unique_ptr<Engine> engine) :
+    m_applicationImpl(std::make_unique<ApplicationImpl>()),
     m_engine(std::move(engine)),
     m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {

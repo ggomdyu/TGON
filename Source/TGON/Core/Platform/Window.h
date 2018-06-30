@@ -2,6 +2,7 @@
  * @file    Window.h
  * @author  ggomdyu
  * @since   02/15/2018
+ * @brief   The platform agnostic window class implement.
  */
 
 #pragma once
@@ -49,8 +50,7 @@ public:
     I32Point GetPosition() const;
     I32Extent2D GetSize() const;
     float GetTransparency() const;
-    void* GetNativeWindow();
-    const void* GetNativeWindow() const;
+    void* GetNativeWindow() const;
     bool HasCaption() const;
     bool IsResizable() const;
     bool IsMaximized() const;

@@ -1,14 +1,18 @@
 /**
  * @file    GraphicsType.h
  * @author  ggomdyu
- * @since   10/22/2017
+ * @since   06/30/2018
  */
 
 #pragma once
 #include <cstdint>
 
 #include "Core/Math/Color.h"
-#include "Core/Math/Vector3.h"
+#include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLGraphicsType.h"
+#endif
 
 namespace tgon
 {

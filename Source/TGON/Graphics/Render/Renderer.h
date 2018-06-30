@@ -7,6 +7,10 @@
 #pragma once
 #include <memory>
 
+#include "Core/Object/Delegate.h"
+
+#include "../LowLevel/Graphics.h"
+
 namespace tgon
 {
     
@@ -18,16 +22,17 @@ class Renderer final
 {
 /* @section Public constructor */
 public:
-//    Renderer(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
+    Renderer(const Window& window, const VideoMode& videoMode);
 
 /* @section Public method */
 public:
+    Delegate<void()> OnWindowResize;
 
 /* @section Private method */
 private:
 /* @section Private variable */
 public:
-    std::unique_ptr<Graphics> m_graphics;
+    Graphics m_graphics;
 };
 
 } /* namespace tgon */

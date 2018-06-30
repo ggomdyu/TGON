@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "../LowLevel/VertexBufferType.h"
+
 #include "MeshUtility.h"
 #include "FVF.h"
 

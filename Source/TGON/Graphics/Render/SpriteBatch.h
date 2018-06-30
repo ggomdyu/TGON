@@ -18,12 +18,12 @@ private:
     
 /* @section Public method */
 public:
-    void AddSprite(std::shared_ptr<Sprite> sprite);
+    void AddSprite(const std::shared_ptr<Sprite>& sprite);
     void FlushBatch(Graphics& graphics);
     
 /* @section Private variable */
 private:
-    std::vector<BatchedSprites> m_batchedSpritesSet;
+    std::vector<BatchedSprites> m_batchedSpritesLayer;
 };
     
 } /* namespace tgon */

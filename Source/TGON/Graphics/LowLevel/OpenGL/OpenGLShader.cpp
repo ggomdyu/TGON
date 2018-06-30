@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "Core/Debug/Log.h"
+#include "Core/Debug/LogType.h"
 
 #include "OpenGLShader.h"
 #include "OpenGLUtility.h"

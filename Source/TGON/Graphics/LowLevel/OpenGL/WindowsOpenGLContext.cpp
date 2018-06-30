@@ -6,7 +6,7 @@
 
 #include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
-#include "Graphics/LowLevel/Generic/GenericGraphicsType.h"
+#include "Core/Debug/LogType.h"
 
 #include "OpenGLContext.h"
 
@@ -104,8 +104,8 @@ HGLRC MakeNewGLRC(HDC dcHandle)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const VideoMode& videoMode, std::shared_ptr<Window> displayTarget) :
-    wndHandle(reinterpret_cast<HWND>(displayTarget->GetNativeWindow())),
+OpenGLContext::OpenGLContext(const VideoMode& videoMode, const Window& displayTarget) :
+    wndHandle(reinterpret_cast<HWND>(displayTarget.GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     assert(wndHandle != nullptr);

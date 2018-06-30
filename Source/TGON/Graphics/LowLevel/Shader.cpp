@@ -7,7 +7,6 @@
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLShader.h"
 #endif
-#include "OpenGLUtility.h"
 
 namespace tgon
 {

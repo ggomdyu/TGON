@@ -118,12 +118,7 @@ float Window::GetTransparency() const
     return m_windowImpl->GetTransparency();
 }
 
-void* Window::GetNativeWindow()
-{
-    return m_windowImpl->GetNativeWindow();
-}
-
-const void* Window::GetNativeWindow() const
+void* Window::GetNativeWindow() const
 {
     return m_windowImpl->GetNativeWindow();
 }

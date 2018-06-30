@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Core/Platform/Config.h"
 
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)

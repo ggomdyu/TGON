@@ -1,14 +1,11 @@
 /**
- * @file    GenericVertexBuffer.h
+ * @file    VertexBufferType.h
  * @author  ggomdyu
  * @since   01/05/2018
  */
 
 #pragma once
 #include <cstdlib>
-
-#include "Core/Math/Color.h"
-#include "Core/Math/Vector3.h"
 
 namespace tgon
 {
