@@ -7,7 +7,7 @@ namespace tgon
 {
     
 Keyboard::Keyboard(InputManager& inputManager) :
-    m_platformKeyboard(inputManager.GetImpl())
+    m_keyboardImpl(std::make_unique<KeyboardImpl>(inputManager.GetImpl()))
 {
 }
     
@@ -15,32 +15,32 @@ Keyboard::~Keyboard() = default;
     
 void Keyboard::Update()
 {
-    m_platformKeyboard.Update();
+    m_keyboardImpl->Update();
 }
     
 bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
-    return m_platformKeyboard.IsKeyDown(keyCode);
+    return m_keyboardImpl->IsKeyDown(keyCode);
 }
     
 bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
-    return m_platformKeyboard.IsKeyHold(keyCode);
+    return m_keyboardImpl->IsKeyHold(keyCode);
 }
     
 bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
-    return m_platformKeyboard.IsKeyUp(keyCode);
+    return m_keyboardImpl->IsKeyUp(keyCode);
 }
     
-PlatformKeyboard& Keyboard::GetImpl() noexcept
+KeyboardImpl& Keyboard::GetImpl() noexcept
 {
-    return m_platformKeyboard;
+    return *m_keyboardImpl;
 }
 
-const PlatformKeyboard& Keyboard::GetImpl() const noexcept
+const KeyboardImpl& Keyboard::GetImpl() const noexcept
 {
-    return m_platformKeyboard;
+    return *m_keyboardImpl;
 }
 
 } /* namespace tgon */

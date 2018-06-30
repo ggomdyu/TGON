@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class TGON_API MacOSApplication final :
+class TGON_API ApplicationImpl final :
     private boost::noncopyable
 {
 /* @section Public method */
@@ -30,11 +30,9 @@ public:
 public:
     void OnHandleMessage(NSEvent* message);
 };
-    
-using PlatformApplication = MacOSApplication;
-    
+
 template <typename _FunctionType>
-inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdate)
+inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
 {
     NSEvent* event = nil;
     while (true)

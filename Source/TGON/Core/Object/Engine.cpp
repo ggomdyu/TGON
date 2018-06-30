@@ -18,7 +18,7 @@ Engine::Engine() :
 
 Engine::~Engine() = default;
 
-void Engine::AddModule(std::shared_ptr<IModule> module)
+void Engine::AddModule(const std::shared_ptr<IModule>& module)
 {
     auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
@@ -30,7 +30,7 @@ void Engine::AddModule(std::shared_ptr<IModule> module)
     m_modules.emplace(iter, module);
 }
 
-std::shared_ptr<const IModule> Engine::GetModule(size_t moduleId) const
+std::shared_ptr<IModule> Engine::GetModule(size_t moduleId)
 {
     auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {

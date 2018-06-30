@@ -9,41 +9,41 @@
 namespace tgon
 {
 
-MacOSGamepad::MacOSGamepad(MacOSInputManager& platformInputManager) :
-    m_gamepadDevice(platformInputManager.CreateGamepadDevice())
+GamepadImpl::GamepadImpl(InputManagerImpl& inputManagerImpl) :
+    m_gamepadDevice(inputManagerImpl.CreateGamepadDevice())
 {
 }
     
-void MacOSGamepad::Update()
+void GamepadImpl::Update()
 {
 }
     
-void MacOSGamepad::Vibrate(float leftMotor, float rightMotor)
+void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
 {
     m_gamepadDevice->Vibrate(leftMotor, rightMotor);
 }
     
-bool MacOSGamepad::IsButtonDown(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
 {
     return false;
 }
     
-bool MacOSGamepad::IsButtonHold(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
 {
     return false;
 }
     
-bool MacOSGamepad::IsButtonUp(int32_t buttonNumber) const
+bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
 {
     return false;
 }
     
-const gainput::InputDevicePad* MacOSGamepad::GetGamepadDevice() const noexcept
+const gainput::InputDevicePad* GamepadImpl::GetGamepadDevice() const noexcept
 {
     return m_gamepadDevice;
 }
 
-gainput::InputDevicePad* MacOSGamepad::GetGamepadDevice() noexcept
+gainput::InputDevicePad* GamepadImpl::GetGamepadDevice() noexcept
 {
     return m_gamepadDevice;
 }

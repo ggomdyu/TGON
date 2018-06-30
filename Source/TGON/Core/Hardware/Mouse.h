@@ -8,16 +8,11 @@
 #include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsMouse.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSMouse.h"
-#endif
-
 namespace tgon
 {
     
 class InputManager;
+class MouseImpl;
 enum class MouseCode;
     
 class TGON_API Mouse final
@@ -38,12 +33,12 @@ public:
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;
-    const PlatformMouse& GetImpl() const noexcept;
-    PlatformMouse& GetImpl() noexcept;
+    const MouseImpl& GetImpl() const noexcept;
+    MouseImpl& GetImpl() noexcept;
     
 /* @section Private variable */
 private:
-    PlatformMouse m_platformMouse;
+    std::unique_ptr<MouseImpl> m_mouseImpl;
 };
     
 } /* namespace tgon */

@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "../LowLevel/Graphics.h"
+#include "../LowLevel/TextureType.h"
 
 #include "SpriteBatch.h"
 #include "Sprite.h"
@@ -17,7 +18,7 @@ Sprite::Sprite() :
 }
 
 Sprite::Sprite(const std::string& filePath) :
-    m_quad(MakeQuad(std::make_shared<TextureMaterial>(std::make_shared<Texture>(filePath))))
+    m_quad(MakeQuad(std::make_shared<TextureMaterial>(std::make_shared<Texture>(filePath, TextureProperty{}))))
 {
 }
 

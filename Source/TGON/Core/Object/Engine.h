@@ -36,13 +36,14 @@ public:
 /* @section Public constructor */
 public:
     Engine();
-    
+
 /* @section Public destructor */
 public:
     virtual ~Engine() = 0;
     
 /* @section Public method */
 public:
+    /* @brief               Updates the Engine. */
     virtual void Update();
     
     /**
@@ -59,11 +60,13 @@ public:
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     bool RemoveModule();
 
-    /* @brief   Returns a module that managed by Application. */
+    /**
+     * @brief               Returns a module that managed by Application.
+     */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     std::shared_ptr<const _ModuleType> GetModule() const noexcept;
 
-    /* @brief   Returns a module that managed by Application. */
+    /* @brief               Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     std::shared_ptr<_ModuleType> GetModule() noexcept;
     
@@ -78,14 +81,14 @@ private:
      * @brief               Inserts a module to manage.
      * @param [in] module   The module what you want to insert.
      */
-    void AddModule(std::shared_ptr<IModule> module);
+    void AddModule(const std::shared_ptr<IModule>& module);
     
     /**
      * @brief               Returns a module that managed by Application.
      * @param [in] moduleId The unique id of Module what you want to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
-    std::shared_ptr<const IModule> GetModule(size_t moduleId) const;
+    std::shared_ptr<IModule> GetModule(size_t moduleId);
 
     /**
      * @brief               Returns a module that managed by Application.
@@ -125,7 +128,7 @@ inline std::shared_ptr<_ModuleType> Engine::GetModule() noexcept
 }
 
 template <>
-inline std::shared_ptr<const TimeModule> Engine::GetModule<TimeModule>() const  noexcept
+inline std::shared_ptr<const TimeModule> Engine::GetModule<TimeModule>() const noexcept
 {
     return m_timeModule;
 }

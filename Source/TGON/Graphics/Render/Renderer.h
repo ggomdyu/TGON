@@ -7,31 +7,27 @@
 #pragma once
 #include <memory>
 
-#include "RendererFwd.h"
-//#include "../System/GraphicsSystem.h"
-
-#include "Material.h"
-
 namespace tgon
 {
+    
+class Graphics;
+class Window;
+struct VideoMode;
 
-//class Renderer
-//{
-///* @section Public constructor */
-//public:
+class Renderer final
+{
+/* @section Public constructor */
+public:
 //    Renderer(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-//
-///* @section Public method */
-//public:
-//    const std::unique_ptr<IDynamicRHI>& GetRHI() const noexcept;
-//
-///* @section Private method */
-//private:
-//    std::unique_ptr<IDynamicRHI> MakeRHI(const std::shared_ptr<core::Window>& window, const VideoMode& videoMode);
-//
-///* @section Private variable */
-//public:
-//    std::unique_ptr<IDynamicRHI> m_rhi;
-//};
+
+/* @section Public method */
+public:
+
+/* @section Private method */
+private:
+/* @section Private variable */
+public:
+    std::unique_ptr<Graphics> m_graphics;
+};
 
 } /* namespace tgon */

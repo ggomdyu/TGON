@@ -9,10 +9,10 @@
 #include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Vector3.h"
 
-#include "CameraType.h"
-
 namespace tgon
 {
+    
+enum class ProjectionMode;
 
 class TGON_API Camera
 {

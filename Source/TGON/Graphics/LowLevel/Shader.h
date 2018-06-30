@@ -5,13 +5,52 @@
  */
 
 #pragma once
+#include <memory>
+#include <cstdint>
+#include <boost/noncopyable.hpp>
 
-#if TGON_USING_OPENGL
-#   include "OpenGL/OpenGLShader.h"
-#elif TGON_USING_DIRECT3D11
-#   include "Direct3D11/D3D11Shader.h"
-#elif TGON_USING_DIRECT3D12
-#   include "Direct3D12/D3D12Shader.h"
-#elif TGON_USING_VULKAN
-#   include "Vulkan/VulkanShader.h"
-#endif
+namespace tgon
+{
+
+class ShaderImpl;
+
+class Shader final :
+    private boost::noncopyable
+{
+/* @section Public constructor */
+public:
+    Shader(const char* vertexShaderCode, const char* fragmentShaderCode);
+    
+/* @section Public destructor */
+public:
+    ~Shader();
+    
+/* @section Public method */
+public:
+    void Use();
+    void Unuse();
+    
+    void SetParameter1f(const char* name, float f);
+    void SetParameter2f(const char* name, float f1, float f2);
+    void SetParameter3f(const char* name, float f1, float f2, float f3);
+    void SetParameter4f(const char* name, float f1, float f2, float f3, float f4);
+    void SetParameterMatrix4fv(const char* name, const float* f);
+    void SetParameter1f(int32_t location, float f);
+    void SetParameter2f(int32_t location, float f1, float f2);
+    void SetParameter3f(int32_t location, float f1, float f2, float f3);
+    void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4);
+    void SetParameterMatrix4fv(int32_t location, const float* f);
+    void SetParameterSampler(int32_t location, uint32_t textureSlot, uint32_t sampler);
+    
+    void BindAttributeLocation(const char* name, uint32_t location);
+    int GetUniformLocation(const char* name) const;
+    
+    /* @brief   Checks the shader was loaded successfully. */
+    bool IsValid() const noexcept;
+    
+/* @section Private variable */
+public:
+    std::unique_ptr<ShaderImpl> m_shaderImpl;
+};
+
+} /* namespace tgon */

@@ -7,54 +7,50 @@
 #pragma once
 #include <string>
 #include <GL/glew.h>
-
-#include "../Generic/GenericShader.h"
+#include <cstdlib>
+#include <cstdint>
+#include <boost/noncopyable.hpp>
 
 namespace tgon
 {
 
-class OpenGLShader :
-    public GenericShader
+class ShaderImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    OpenGLShader(const char* vertexShaderCode, const char* fragmentShaderCode);
-    OpenGLShader(OpenGLShader&& rhs);
+    ShaderImpl(const char* vertexShaderCode, const char* fragmentShaderCode);
 
 /* @section Public destructor */
 public:
-    virtual ~OpenGLShader() override;
-
-/* @section Public operator */
-public:
-    OpenGLShader& operator=(OpenGLShader&& rhs);
+    ~ShaderImpl();
 
 /* @section Public method */
 public:
-    virtual void Use() final override;
-    virtual void Unuse() final override;
+    void Use();
+    void Unuse();
     
-    virtual void SetParameter1f(const char* name, float f) final override;
-    virtual void SetParameter2f(const char* name, float f1, float f2) final override;
-    virtual void SetParameter3f(const char* name, float f1, float f2, float f3) final override;
-    virtual void SetParameter4f(const char* name, float f1, float f2, float f3, float f4) final override;
-    virtual void SetParameterMatrix4fv(const char* name, const float* f) final override;
-    virtual void SetParameter1f(int32_t location, float f) final override;
-    virtual void SetParameter2f(int32_t location, float f1, float f2) final override;
-    virtual void SetParameter3f(int32_t location, float f1, float f2, float f3) final override;
-    virtual void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4) final override;
-    virtual void SetParameterMatrix4fv(int32_t location, const float* f) final override;
-    virtual void SetParameterSampler(int32_t location, uint32_t textureSlot, uint32_t sampler) final override;
+    void SetParameter1f(const char* name, float f);
+    void SetParameter2f(const char* name, float f1, float f2);
+    void SetParameter3f(const char* name, float f1, float f2, float f3);
+    void SetParameter4f(const char* name, float f1, float f2, float f3, float f4);
+    void SetParameterMatrix4fv(const char* name, const float* f);
+    void SetParameter1f(int32_t location, float f);
+    void SetParameter2f(int32_t location, float f1, float f2);
+    void SetParameter3f(int32_t location, float f1, float f2, float f3);
+    void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4);
+    void SetParameterMatrix4fv(int32_t location, const float* f);
+    void SetParameterSampler(int32_t location, uint32_t textureSlot, uint32_t sampler);
     
-    virtual void BindAttributeLocation(const char* name, uint32_t location) final override;
-    virtual int GetUniformLocation(const char* name) const final override;
+    void BindAttributeLocation(const char* name, uint32_t location);
+    int GetUniformLocation(const char* name) const;
     
-    /* @brief   Checks the shader was loaded successfully. */
-    virtual bool IsValid() const noexcept final override;
+    /* @brief                   Checks the shader was loaded successfully. */
+    bool IsValid() const noexcept;
 
 /* @section Private method */
 private:
-    /* @brief   Links shaders to the program object. */
+    /* @brief                   Links shaders to the program object. */
     bool LinkShadersToProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
 
     /**
@@ -66,29 +62,16 @@ private:
     GLuint CompileShader(GLenum shaderType, const char* shaderCode) const;
 
     /**
-     * @brief   Checks shader was compiled successfully.
-     * @return  Returns true if the compile was succeeded, false otherwise.
+     * @brief                   Checks shader was compiled successfully.
+     * @return                  Returns true if the compile was succeeded, false otherwise.
      */
     bool IsShaderCompileSucceed(GLuint shaderId) const;
 
     std::string GetShaderInfoLog(GLuint shaderId) const;
 
-    void Release();
-
 /* @section Private variable */
 public:
     GLuint m_programId;
-};
-
-class Shader : public OpenGLShader
-{
-/* @section Public constructor */
-public:
-    using OpenGLShader::OpenGLShader;
-    
-/* @section Public destructor */
-public:
-    virtual ~Shader() final override = default;
 };
 
 } /* namespace tgon */

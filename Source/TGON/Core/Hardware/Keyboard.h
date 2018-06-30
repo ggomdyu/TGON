@@ -35,12 +35,12 @@ public:
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    const PlatformKeyboard& GetImpl() const noexcept;
-    PlatformKeyboard& GetImpl() noexcept;
+    const KeyboardImpl& GetImpl() const noexcept;
+    KeyboardImpl& GetImpl() noexcept;
     
 /* @section Private variable */
 private:
-    PlatformKeyboard m_platformKeyboard;
+    std::unique_ptr<KeyboardImpl> m_keyboardImpl;
 };
     
 } /* namespace tgon */

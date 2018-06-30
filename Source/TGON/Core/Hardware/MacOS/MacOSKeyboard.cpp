@@ -12,16 +12,16 @@
 namespace tgon
 {
     
-MacOSKeyboard::MacOSKeyboard(MacOSInputManager& platformInputManager) :
+KeyboardImpl::KeyboardImpl(InputManagerImpl& platformInputManager) :
     m_keyboardDevice(platformInputManager.CreateKeyboardDevice())
 {
 }
     
-void MacOSKeyboard::Update()
+void KeyboardImpl::Update()
 {
 }
     
-bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyDown(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) == false &&
@@ -35,7 +35,7 @@ bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyHold(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&
@@ -49,7 +49,7 @@ bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
+bool KeyboardImpl::IsKeyUp(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_keyboardDevice->GetBoolPrevious(castedKeyCode) &&
@@ -63,12 +63,12 @@ bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
     }
 }
     
-gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice() noexcept
+gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() noexcept
 {
     return m_keyboardDevice;
 }
 
-const gainput::InputDeviceKeyboard* MacOSKeyboard::GetKeyboardDevice() const noexcept
+const gainput::InputDeviceKeyboard* KeyboardImpl::GetKeyboardDevice() const noexcept
 {
     return m_keyboardDevice;
 }

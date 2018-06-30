@@ -88,16 +88,16 @@ public:
     /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
-    /* @brief   Gets the raw data of image. */
+    /* @brief   Gets the raw image data. */
     std::vector<uint8_t>& GetImageData() noexcept;
 
-    /* @brief   Gets the raw data of image. */
+    /* @brief   Gets the raw image data. */
     const std::vector<uint8_t>& GetImageData() const noexcept;
     
-    /* @brief   Gets the width of image. */
+    /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
 
-    /* @brief   Gets the height of image. */
+    /* @brief   Gets the image height. */
     int32_t GetHeight() const noexcept;
 
     /* @brief   Gets the count of color channel. */
@@ -108,7 +108,10 @@ public:
     /* @brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
 
-    /* @brief   Gets the file path saved at loading time. */
+    /**
+     * @brief   Gets the file path saved at loading time.
+     * @warn    This can not be correct information if the file moved somewhere after image loaded.
+     */
     const std::string& GetFilePath() const noexcept;
 
     void SaveAsPng(const char* saveFilePath);

@@ -9,15 +9,11 @@
 
 #include "Core/Platform/Config.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsGamepad.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSGamepad.h"
-#endif
-#include "InputManager.h"
-
 namespace tgon
 {
+    
+class InputManager;
+class GamepadImpl;
     
 class TGON_API Gamepad final
 {
@@ -36,12 +32,12 @@ public:
     bool IsButtonDown(int32_t buttonNumber) const;
     bool IsButtonHold(int32_t buttonNumber) const;
     bool IsButtonUp(int32_t buttonNumber) const;
-    const PlatformGamepad& GetImpl() const noexcept;
-    PlatformGamepad& GetImpl() noexcept;
+    const GamepadImpl& GetImpl() const noexcept;
+    GamepadImpl& GetImpl() noexcept;
     
 /* @section Private variable */
 private:
-    PlatformGamepad m_platformGamepad;
+    std::unique_ptr<GamepadImpl> m_gamepadImpl;
 };
     
 } /* namespace tgon */

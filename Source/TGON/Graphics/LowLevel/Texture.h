@@ -5,13 +5,77 @@
  */
 
 #pragma once
+#include <memory>
+#include <boost/noncopyable.hpp>
 
-#if TGON_USING_OPENGL
-#   include "OpenGL/OpenGLTexture.h"
-#elif TGON_USING_DIRECT3D11
-#   include "Direct3D11/D3D11Texture.h"
-#elif TGON_USING_DIRECT3D12
-#   include "Direct3D12/D3D12Texture.h"
-#elif TGON_USING_VULKAN
-#   include "Vulkan/VulkanTexture.h"
-#endif
+namespace tgon
+{
+    
+class TextureImpl;
+struct TextureProperty;
+enum class TextureFilterMode;
+enum class TextureWrapMode;
+enum class PixelFormat;
+    
+class Texture final :
+    private boost::noncopyable
+{
+/* @section Public constructor */
+public:
+    Texture(const std::string& filePath, const TextureProperty& textureProperty);
+    
+/* @section Public destructor */
+public:
+    ~Texture();
+    
+/* @section Public method */
+public:
+    void Use();
+    
+    /* @brief   Sets the texture filter mode. */
+    void SetFilterMode(TextureFilterMode filterMode);
+    
+    /* @brief   Sets the texture wrap mode. */
+    void SetWrapMode(TextureWrapMode wrapMode);
+    
+    /* @brief   Gets the texture filter mode. */
+    TextureFilterMode GetFilterMode() const noexcept;
+    
+    /* @brief   Gets the texture wrap mode. */
+    TextureWrapMode GetWrapMode() const noexcept;
+    
+    /* @brief   Checks the image file was loaded successfully. */
+    bool IsValid() const noexcept;
+    
+    /* @brief   Gets the raw image data. */
+    std::vector<uint8_t>& GetImageData() noexcept;
+    
+    /* @brief   Gets the raw image data. */
+    const std::vector<uint8_t>& GetImageData() const noexcept;
+    
+    /* @brief   Gets the image width. */
+    int32_t GetWidth() const noexcept;
+    
+    /* @brief   Gets the image height. */
+    int32_t GetHeight() const noexcept;
+    
+    /* @brief   Gets the count of color channel. */
+    int32_t GetChannels() const noexcept;
+    
+    int32_t GetColorDepth() const noexcept;
+    
+    /* @brief   Gets the pixel format of image. */
+    PixelFormat GetPixelFormat() const noexcept;
+    
+    /**
+     * @brief   Gets the file path saved at loading time.
+     * @warn    This can not be correct information if the file moved somewhere after image loaded.
+     */
+    const std::string& GetFilePath() const noexcept;
+  
+/* @section Private variable */
+public:
+    std::unique_ptr<TextureImpl> m_textureImpl;
+};
+    
+} /* namespace tgon */

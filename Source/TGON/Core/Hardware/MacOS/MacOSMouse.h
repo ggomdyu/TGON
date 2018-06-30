@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <cstdint>
 
 #include "Core/Platform/Config.h"
@@ -19,14 +20,15 @@ class InputDeviceMouse;
 namespace tgon
 {
 
-class MacOSInputManager;
+class InputManagerImpl;
 enum class MouseCode;
     
-class TGON_API MacOSMouse final
+class TGON_API MouseImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    explicit MacOSMouse(MacOSInputManager& inputManagerImpl);
+    explicit MouseImpl(InputManagerImpl& inputManagerImpl);
     
 /* @section Public method */
 public:
@@ -44,6 +46,4 @@ private:
     gainput::InputDeviceMouse* m_mouseDevice;
 };
     
-using PlatformMouse = MacOSMouse;
-
 } /* namespace tgon */

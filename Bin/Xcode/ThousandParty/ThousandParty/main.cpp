@@ -4,11 +4,7 @@
 
 #include "TestScene.h"
 
-#include <boost/property_tree/ptree.hpp>
-
 using namespace tgon;
-
-
 
 class TGON_API ThousandParty final :
     public Engine
@@ -31,8 +27,10 @@ public:
             inputMode.isUseGamepad = false;
         }
         this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
+        
         this->AddModule<TimeModule>();
-        //this->AddModule<SceneManagementModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());   
+        
+        this->AddModule<SceneModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());   
     }
 
     virtual void OnWillTerminate() override

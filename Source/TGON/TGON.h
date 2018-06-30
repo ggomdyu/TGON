@@ -60,6 +60,6 @@
 #include "Graphics/LowLevel/IndexBuffer.h"
 #include "Graphics/Render/FVF.h"
 #include "Graphics/Render/Camera.h"
-#include "Game/Object/Module/SceneManagementModule.h"
+#include "Game/Object/Module/SceneModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"

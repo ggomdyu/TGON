@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API TimeModule :
+class TGON_API TimeModule final :
 	public IModule
 {
 public:
@@ -26,6 +26,7 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief                   Updates the TimeModule. */
     virtual void Update() override;
     
     /**
@@ -41,8 +42,8 @@ public:
     float GetTimeScale() const noexcept;
     
     /**
-     * @brief   Gets the elapsed time per each frame.
-     * @return  The elapsed time per each frame.
+     * @brief   Gets the elapsed time per frame.
+     * @return  The elapsed time per frame.
      */
     float GetTickTime() const noexcept;
 

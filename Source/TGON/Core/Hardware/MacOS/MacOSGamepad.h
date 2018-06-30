@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <cstdint>
 
 #include "Core/Platform/Config.h"
@@ -19,13 +20,14 @@ class InputDevicePad;
 namespace tgon
 {
     
-class MacOSInputManager;
+class InputManagerImpl;
 
-class TGON_API MacOSGamepad final
+class TGON_API GamepadImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    explicit MacOSGamepad(MacOSInputManager& inputManagerImpl);
+    explicit GamepadImpl(InputManagerImpl& inputManagerImpl);
     
 /* @section Public method */
 public:
@@ -41,7 +43,5 @@ public:
 private:
     gainput::InputDevicePad* m_gamepadDevice;
 };
-
-using PlatformGamepad = MacOSGamepad;
 
 } /* namespace tgon */
