@@ -26,7 +26,7 @@ public:
     TGON_RUNTIME_OBJECT(GameObject);
 
 /* @section Private constructor */
-private:
+public:
     explicit GameObject(const FixedStringHash32& name);
     
 /* @section Public destructor */
@@ -35,8 +35,6 @@ public:
 
 /* @section Public method */
 public:
-    static std::shared_ptr<GameObject> Create(const FixedStringHash32& name);
-
     void Update();
 
     /**

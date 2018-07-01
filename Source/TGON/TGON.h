@@ -5,10 +5,10 @@
  */
 
 #pragma once
-#define TGON_USING_OPENGL 1
 #include "Core/Audio/AudioBuffer.h"
 #include "Core/Audio/AudioPlayer.h"
 #include "Core/Debug/Log.h"
+#include "Core/Debug/LogType.h"
 #include "Core/Drawing/Image.h"
 #include "Core/Platform/Window.h"
 #include "Core/Platform/WindowType.h"

@@ -11,7 +11,7 @@ namespace tgon
 {
 
 Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
-    m_graphicsImpl(std::make_unique<GraphicsImpl>(videoMode, displayTarget))
+    m_graphicsImpl(std::make_unique<GraphicsImpl>(displayTarget, videoMode))
 {
 }
 
@@ -72,14 +72,14 @@ void Graphics::SwapBuffer()
     m_graphicsImpl->SwapBuffer();
 }
 
-void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount)
+void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
 {
-    m_graphicsImpl->DrawPrimitives(primitiveType, startVertex, primitiveCount);
+    m_graphicsImpl->DrawPrimitives(primitiveType, primitiveCount);
 }
 
-void Graphics::DrawIndexedPrimitives(int32_t primitiveCount)
+void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
 {
-    //m_graphicsImpl->DrawIndexedPrimitives();
+    m_graphicsImpl->DrawIndexedPrimitives(primitiveType, primitiveCount);
 }
 
 } /* namespace tgon */

@@ -16,11 +16,6 @@ GameObject::GameObject(const FixedStringHash32& name) :
     
 GameObject::~GameObject() = default;
 
-std::shared_ptr<GameObject> GameObject::Create(const FixedStringHash32& name)
-{
-    return std::shared_ptr<GameObject>(new GameObject(name));
-}
-
 void GameObject::Update()
 {
     for (auto& component : m_components)

@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <vector>
 #include <cstdint>
 #include <memory>
@@ -22,7 +23,8 @@
 namespace tgon
 {
 
-class AudioBuffer final
+class AudioBuffer final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -51,12 +53,10 @@ public:
      */
     AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 
-    AudioBuffer(const AudioBuffer& rhs) = delete;
     AudioBuffer(AudioBuffer&& rhs) = default;
 
 /* @section Public operator */
 public:
-    AudioBuffer& operator=(const AudioBuffer& rhs) = delete;
     AudioBuffer& operator=(AudioBuffer&& rhs) = default;
 
 /* @section Public destructor */

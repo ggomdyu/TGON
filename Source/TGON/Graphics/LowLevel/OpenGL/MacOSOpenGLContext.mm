@@ -8,6 +8,7 @@
 #import "Core/Platform/Window.h"
 
 #import "OpenGLContext.h"
+#import "../GraphicsType.h"
 
 namespace tgon
 {

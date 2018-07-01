@@ -10,7 +10,7 @@ namespace tgon
 {
 
 SceneModule::SceneModule(std::unique_ptr<Scene> scene, const VideoMode& videoMode, const Window& displayTarget) :
-    m_graphics(videoMode, displayTarget),
+    m_graphics(displayTarget, videoMode),
     m_currentScene(std::move(scene))
 {
 }

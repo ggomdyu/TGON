@@ -30,6 +30,7 @@ public:
 
 /* @section Private method */
 private:
+    
 /* @section Private variable */
 public:
     Graphics m_graphics;

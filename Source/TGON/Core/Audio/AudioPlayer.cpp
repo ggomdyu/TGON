@@ -16,7 +16,7 @@ AudioPlayer::AudioPlayer() :
 {
 }
 
-AudioPlayer::AudioPlayer(std::shared_ptr<AudioBuffer> audioBuffer) :
+AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
     AudioPlayer()
 {
     this->Initialize(audioBuffer);
@@ -52,7 +52,7 @@ AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs)
     return *this;
 }
 
-void AudioPlayer::Initialize(std::shared_ptr<AudioBuffer> audioBuffer)
+void AudioPlayer::Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer)
 {
     if (m_audioBuffer != nullptr)
     {
@@ -60,7 +60,7 @@ void AudioPlayer::Initialize(std::shared_ptr<AudioBuffer> audioBuffer)
     }
     else if (m_alSource == 0)
     {
-        m_alSource = this->CreateALSource();
+        m_alSource = this->CreateALSourceHandle();
     }
 
     m_audioBuffer = audioBuffer;
@@ -181,7 +181,7 @@ bool AudioPlayer::IsLooping() const
     return isLooping == AL_TRUE ? true : false;
 }
 
-ALuint AudioPlayer::CreateALSource() const
+ALuint AudioPlayer::CreateALSourceHandle() const
 {
     ALuint alSource;
     alGenSources(1, &alSource);

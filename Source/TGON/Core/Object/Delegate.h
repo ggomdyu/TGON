@@ -53,8 +53,14 @@ class Delegate;
 template <typename _ReturnType, typename... _ArgTypes>
 class Delegate<_ReturnType(_ArgTypes...)> final
 {
+/* @section Private type */
+private:
     using DeleterType = std::size_t(*)(void*);
     using StubType = _ReturnType(*)(void*, _ArgTypes...);
+    
+/* @section Public type */
+public:
+    using ReturnType = _ReturnType;
 
 /* @section Public constructor */
 public:
@@ -99,10 +105,6 @@ public:
     
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-
-    const StubType GetStub() const noexcept;
-
-    StubType GetStub() noexcept;
 
 /* @section Private method */
 private:
@@ -285,18 +287,6 @@ template <typename _ReturnType, typename... _ArgTypes>
 inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t) const noexcept
 {
     return m_stub != nullptr;
-}
-
-template<typename _ReturnType, typename ..._ArgTypes>
-inline const typename Delegate<_ReturnType(_ArgTypes...)>::StubType Delegate<_ReturnType(_ArgTypes...)>::GetStub() const noexcept
-{
-    return m_stub;
-}
-
-template<typename _ReturnType, typename ..._ArgTypes>
-inline typename Delegate<_ReturnType(_ArgTypes...)>::StubType Delegate<_ReturnType(_ArgTypes...)>::GetStub() noexcept
-{
-    return m_stub;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>

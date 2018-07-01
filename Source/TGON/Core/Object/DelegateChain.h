@@ -7,6 +7,7 @@
 
 #pragma once
 #include <vector>
+#include <initializer_list>
 
 #include "Delegate.h"
 
@@ -15,61 +16,56 @@ namespace tgon
 
 template <typename>
 class DelegateChain;
-
+    
 template <typename _ReturnType, typename... _ArgTypes>
 class DelegateChain<_ReturnType(_ArgTypes...)> final
 {
 /* @section Public type */
 public:
-    using DelegateType = _ReturnType(_ArgTypes...);
+    using ValueType = Delegate<_ReturnType(_ArgTypes...)>;
+    using ReturnType = _ReturnType;
 
 /* @section Public constructor */
 public:
- 
-/* @section Public destructor */
-public:
+    explicit DelegateChain(const std::initializer_list<ValueType>& initializerList);
+    
+    template <typename _DelegateContainer>
+    explicit DelegateChain(_DelegateContainer&& delegateContainer);
 
 /* @section Public operator */
 public:
-    DelegateChain& operator+=(const DelegateType& rhs);
-    DelegateChain& operator+=(DelegateType&& rhs);
-    DelegateChain& operator-=(const DelegateType& rhs);
+    DelegateChain& operator+=(const ValueType& rhs);
+    DelegateChain& operator+=(ValueType&& rhs);
+    DelegateChain& operator-=(const ValueType& rhs);
 
 /* @section Public method */
 public:
-    
-    const std::vector<DelegateType>& GetInvocationList() const;
+    ReturnType Invoke();
+    void Append();
+    void Clear();
+    const std::vector<ValueType>& GetInvocationList() const;
 
 /* @section Private variable */
 private:
-    std::vector<DelegateType> m_invocationList;
+    std::vector<ValueType> m_invocationList;
 };
-
+    
 template <typename _ReturnType, typename... _ArgTypes>
-inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator+=(const Delegate<_ReturnType(_ArgTypes...)>& rhs)
+inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(const std::initializer_list<ValueType>& initializerList) :
+    m_invocationList(initializerList)
 {
-    m_invocationList.push_back(rhs);
-    return *this;
 }
-
+    
 template <typename _ReturnType, typename... _ArgTypes>
-inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator+=(Delegate<_ReturnType(_ArgTypes...)>&& rhs)
+template <typename _DelegateContainer>
+inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(_DelegateContainer&& delegateContainer) :
+    m_invocationList(delegateContainer)
 {
-    m_invocationList.push_back(rhs);
-    return *this;
 }
-
+    
 template <typename _ReturnType, typename... _ArgTypes>
-inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator-=(const Delegate<_ReturnType(_ArgTypes...)>& rhs)
+inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke()
 {
-    m_invocationList;
-    return *this;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline const std::vector<Delegate<_ReturnType(_ArgTypes...)>>& DelegateChain<_ReturnType(_ArgTypes...)>::GetInvocationList() const
-{
-    return m_invocationList;
 }
 
 } /* namespace tgon */

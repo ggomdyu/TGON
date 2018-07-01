@@ -22,7 +22,7 @@ class AudioPlayer final :
 public:
     AudioPlayer();
     AudioPlayer(AudioPlayer&& rhs);
-    explicit AudioPlayer(std::shared_ptr<AudioBuffer> audioBuffer);
+    explicit AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
 /* @section Public destructor */
 public:
@@ -34,7 +34,7 @@ public:
 
 /* @section Public method */
 public:
-    void Initialize(std::shared_ptr<AudioBuffer> audioBuffer);
+    void Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer);
     void Play();
     void Play(float volume, bool isLooping);
     bool IsPlaying() const;
@@ -57,7 +57,7 @@ public:
 
 /* @section Private method */
 private:
-    ALuint CreateALSource() const;
+    ALuint CreateALSourceHandle() const;
     void Release();
 
 /* @section Private variable */

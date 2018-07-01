@@ -9,6 +9,7 @@
 #include "Core/String/StringTraits.h"
 
 #include "../Log.h"
+#include "../LogType.h"
 
 namespace tgon
 {
@@ -31,19 +32,18 @@ TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
     }
     
     std::lock_guard<std::mutex> lockGuard(g_mutex);
+
+    if (logLevel == LogLevel::Debug)
     {
-        if (logLevel == LogLevel::Debug)
-        {
-            NSLog(@"%s", logStrBuffer);
-        }
-        else if (logLevel == LogLevel::Warning)
-        {
-            NSAlert *alert = [[NSAlert alloc] init];
-            [alert setMessageText:@""];
-            [alert setInformativeText:[NSString stringWithUTF8String:logStrBuffer]];
-            [alert setAlertStyle:NSAlertStyleCritical];
-            [alert runModal];
-        }
+        NSLog(@"%s", logStrBuffer);
+    }
+    else if (logLevel == LogLevel::Warning)
+    {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@""];
+        [alert setInformativeText:[NSString stringWithUTF8String:logStrBuffer]];
+        [alert setAlertStyle:NSAlertStyleCritical];
+        [alert runModal];
     }
 #endif
 }

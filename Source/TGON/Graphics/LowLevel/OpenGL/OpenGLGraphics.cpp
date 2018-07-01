@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include <array>
+#include <GL/glew.h>
 #if TGON_PLATFORM_MACOS
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
@@ -8,8 +8,8 @@
 
 #include "Core/Math/Color.h"
 
-#include "OpenGLGraphics.h"
 #include "../GraphicsType.h"
+#include "OpenGLGraphics.h"
 #include "OpenGLUtility.h"
 
 #if TGON_PLATFORM_WINDOWS
@@ -105,9 +105,14 @@ void GraphicsImpl::SwapBuffer()
     m_context.SwapBuffer();
 }
 
-void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount)
+void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
 {
-    glDrawElements(GL_TRIANGLES, GetVertexCountPerPrimitive(primitiveType), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(static_cast<GLenum>(primitiveType), GetVertexCountPerPrimitive(primitiveType), GL_UNSIGNED_INT, nullptr);
+}
+    
+void GraphicsImpl::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
+{
+    glDrawArrays(static_cast<GLenum>(primitiveType), 0, static_cast<GLsizei>(primitiveCount));
 }
 
 } /* namespace tgon */

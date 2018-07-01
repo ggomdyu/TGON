@@ -21,7 +21,7 @@ enum class FillMode;
 enum class CullMode;
 class GraphicsImpl;
 
-class Graphics :
+class Graphics final :
     private boost::noncopyable
 {
 /* @section Public constructor */
@@ -45,8 +45,8 @@ public:
     void ClearColorBuffer();
     void ClearColorDepthBuffer();
     void SwapBuffer();
-    void DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount);
-    void DrawIndexedPrimitives(int32_t primitiveCount);
+    void DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
+    void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
 
 /* @section Private variable */
 private:

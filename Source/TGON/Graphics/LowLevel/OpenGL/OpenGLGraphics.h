@@ -7,7 +7,6 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 #include <memory>
-#include <GL/glew.h>
 
 #include "OpenGLContext.h"
 
@@ -19,6 +18,7 @@ struct Color4f;
 enum class PrimitiveType;
 enum class FillMode;
 enum class CullMode;
+typedef unsigned int GLuint;
 
 class GraphicsImpl final :
     private boost::noncopyable
@@ -44,8 +44,8 @@ public:
     void ClearColorBuffer();
     void ClearColorDepthBuffer();
     void SwapBuffer();
-    void DrawPrimitives(PrimitiveType primitiveType, int32_t startVertex, int32_t primitiveCount);
-    void DrawIndexedPrimitives(int32_t primitiveCount);
+    void DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
+    void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
 
 /* @section Private variable */
 private:

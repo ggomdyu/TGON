@@ -53,7 +53,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
             TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprite->GetMaterial().get());
             material->GetShader()->SetParameterMatrix4fv("g_uMVP", batchedSprite->GetWorldViewProjectionMatrix()[0]);
 
-            graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 2);
+            graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
         }
     }
     

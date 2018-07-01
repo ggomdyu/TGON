@@ -3,6 +3,8 @@
 #include "TGON.h"
 #include "TestScene.h"
 
+#include "Core/Object/DelegateChain.h"
+
 using namespace tgon;
 
 class TGON_API ThousandParty final :
@@ -13,7 +15,22 @@ public:
 
 /* @section Public event handler */
 public:
-    ThousandParty() {}
+    ThousandParty() :
+        m_audioBuffer(std::make_shared<AudioBuffer>(GetDesktopDirectory() + "/Sulk.ogg")),
+        m_audioPlayer(m_audioBuffer)
+    {
+        m_audioPlayer.SetPitch(1.2f);
+        m_audioPlayer.Play();
+        
+        Delegate<void()> d1 = []() { Log(LogLevel::Debug, "1"); };
+        Delegate<void()> t(std::move(d1));
+        
+        Delegate<void()> d2 = []() { Log(LogLevel::Debug, "2"); };
+        Delegate<void()> d3 = []() { Log(LogLevel::Debug, "3"); };
+        auto b = {d1, d2, d3};
+        DelegateChain<void()> dc();
+        dc.Invoke();
+    }
 
     virtual void OnDidLaunch() override
     {
@@ -43,6 +60,10 @@ public:
     {
         SuperType::Update();
     }
+    
+private:
+    std::shared_ptr<AudioBuffer> m_audioBuffer;
+    AudioPlayer m_audioPlayer;
 };
 
 TGON_DECLARE_ENGINE(ThousandParty);
