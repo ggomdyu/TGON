@@ -22,36 +22,40 @@ class DelegateChain<_ReturnType(_ArgTypes...)> final
 {
 /* @section Public type */
 public:
-    using ValueType = Delegate<_ReturnType(_ArgTypes...)>;
+    using DelegateType = Delegate<_ReturnType(_ArgTypes...)>;
     using ReturnType = _ReturnType;
 
 /* @section Public constructor */
 public:
-    explicit DelegateChain(const std::initializer_list<ValueType>& initializerList);
+    DelegateChain() = default;
+
+    explicit DelegateChain(const std::initializer_list<DelegateType>& initializerList);
     
     template <typename _DelegateContainer>
     explicit DelegateChain(_DelegateContainer&& delegateContainer);
 
 /* @section Public operator */
 public:
-    DelegateChain& operator+=(const ValueType& rhs);
-    DelegateChain& operator+=(ValueType&& rhs);
-    DelegateChain& operator-=(const ValueType& rhs);
+    template <typename _DelegateType>
+    DelegateChain& operator+=(_DelegateType&& rhs);
+    DelegateChain& operator-=(const DelegateType& rhs);
 
 /* @section Public method */
 public:
     _ReturnType Invoke(_ArgTypes&&... args);
-    void Append();
-    void Clear();
-    const std::vector<ValueType>& GetInvocationList() const;
+    template <typename _DelegateType>
+    void Append(_DelegateType&& value);
+    bool Erase(const DelegateType& value);
+    void Clear() noexcept;
+    const std::vector<DelegateType>& GetInvocationList() const noexcept;
 
 /* @section Private variable */
 private:
-    std::vector<ValueType> m_invocationList;
+    std::vector<DelegateType> m_invocationList;
 };
     
 template <typename _ReturnType, typename... _ArgTypes>
-inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(const std::initializer_list<ValueType>& initializerList) :
+inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(const std::initializer_list<DelegateType>& initializerList) :
     m_invocationList(initializerList)
 {
 }
@@ -62,7 +66,22 @@ inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(_DelegateContaine
     m_invocationList(delegateContainer)
 {
 }
+
+template<typename _ReturnType, typename ..._ArgTypes>
+template<typename _DelegateType>
+inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator+=(_DelegateType&& rhs)
+{
+    this->Append(std::forward<_DelegateType>(rhs));
+    return *this;
+}
     
+template<typename _ReturnType, typename ..._ArgTypes>
+inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator-=(const DelegateType& rhs)
+{
+    this->Erase(rhs);
+    return *this;
+}
+
 template <typename _ReturnType, typename... _ArgTypes>
 inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes&&... args)
 {
@@ -78,6 +97,44 @@ inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes&&.
 
     auto iter = m_invocationList.end() - 1;
     return (*iter)(std::forward<_ArgTypes>(args)...);
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+template<typename _DelegateType>
+inline void DelegateChain<_ReturnType(_ArgTypes...)>::Append(_DelegateType&& value)
+{
+    m_invocationList.push_back(std::forward<_DelegateType>(value));
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+inline bool DelegateChain<_ReturnType(_ArgTypes...)>::Erase(const DelegateType& value)
+{
+    auto iter = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& rhs)
+    {
+        return value == rhs;
+    });
+
+    if (iter != m_invocationList.end())
+    {
+        m_invocationList.erase(iter);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+inline void DelegateChain<_ReturnType(_ArgTypes...)>::Clear() noexcept
+{
+    m_invocationList.clear();
+}
+
+template<typename _ReturnType, typename ..._ArgTypes>
+inline const std::vector<Delegate<_ReturnType(_ArgTypes...)>>& DelegateChain<_ReturnType(_ArgTypes...)>::GetInvocationList() const noexcept
+{
+    return m_invocationList;
 }
 
 } /* namespace tgon */
