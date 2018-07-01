@@ -71,7 +71,7 @@ public:
     template <typename _FunctionType>
     Delegate(_FunctionType function);
     Delegate(const Delegate& rhs);
-    constexpr Delegate(Delegate&&) noexcept;
+    constexpr Delegate(Delegate&& rhs) noexcept;
 
 /* @section Public destructor */
 public:
@@ -79,10 +79,12 @@ public:
 
 /* @section Public operator */
 public:
-    Delegate& operator=(const Delegate&);
-    Delegate& operator=(Delegate&&);
-    constexpr bool operator==(std::nullptr_t) const noexcept;
-    constexpr bool operator!=(std::nullptr_t) const noexcept;
+    Delegate& operator=(const Delegate& rhs);
+    Delegate& operator=(Delegate&& rhs);
+    constexpr bool operator==(std::nullptr_t rhs) const noexcept;
+    constexpr bool operator!=(std::nullptr_t rhs) const noexcept;
+    constexpr bool operator==(const Delegate& rhs) const noexcept;
+    constexpr bool operator!=(const Delegate& rhs) const noexcept;
     template <typename... _ArgTypes2>
     _ReturnType operator()(_ArgTypes2&&... args) const;
 
@@ -278,15 +280,27 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t) const noexcept
+inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
 {
     return m_stub == nullptr;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t) const noexcept
+inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
     return m_stub != nullptr;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(const Delegate& rhs) const noexcept
+{
+    return m_stub == rhs.m_stub;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& rhs) const noexcept
+{
+    return m_stub != rhs.m_stub;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
