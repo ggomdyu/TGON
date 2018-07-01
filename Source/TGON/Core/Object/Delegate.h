@@ -69,7 +69,7 @@ public:
     constexpr Delegate(void* receiver, StubType stub) noexcept;
     constexpr Delegate(void* receiver, StubType stub, DeleterType deleter) noexcept;
     template <typename _FunctionType>
-    Delegate(_FunctionType&& function);
+    Delegate(_FunctionType function);
     Delegate(const Delegate& rhs);
     constexpr Delegate(Delegate&&) noexcept;
 
@@ -89,7 +89,7 @@ public:
 /* @section Public method */
 public:
     template <typename _FunctionType>
-    static Delegate MakeDelegate(_FunctionType&& function);
+    static Delegate MakeDelegate(_FunctionType function);
 
     template <_ReturnType(*Handler)(_ArgTypes...)>
     static Delegate MakeDelegate() noexcept;
@@ -173,7 +173,7 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType&& function) :
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
 	m_ptr(operator new(sizeof(typename std::decay<_FunctionType>::type))),
     m_stub(&MakeStub<typename std::decay<_FunctionType>::type>),
     m_deleter(&MakeDeleter<typename std::decay<_FunctionType>::type>)
@@ -298,7 +298,7 @@ inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&.
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_FunctionType&& function)
+inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_FunctionType function)
 {
     return Delegate(std::forward<_FunctionType>(function));
 }
