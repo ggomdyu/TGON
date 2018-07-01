@@ -27,8 +27,7 @@ public:
         
         Delegate<void()> d2 = []() { Log(LogLevel::Debug, "2"); };
         Delegate<void()> d3 = []() { Log(LogLevel::Debug, "3"); };
-        auto b = {d1, d2, d3};
-        DelegateChain<void()> dc();
+        DelegateChain<void()> dc{ d1, d2, d3 };
         dc.Invoke();
     }
 

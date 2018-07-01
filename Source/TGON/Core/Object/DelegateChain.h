@@ -40,7 +40,7 @@ public:
 
 /* @section Public method */
 public:
-    ReturnType Invoke();
+    _ReturnType Invoke(_ArgTypes&&... args);
     void Append();
     void Clear();
     const std::vector<ValueType>& GetInvocationList() const;
@@ -64,8 +64,20 @@ inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(_DelegateContaine
 }
     
 template <typename _ReturnType, typename... _ArgTypes>
-inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke()
+inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes&&... args)
 {
+    if (m_invocationList.size() <= 0)
+    {
+        return _ReturnType();
+    }
+
+    for (int i = 0; i < m_invocationList.size() - 1; ++i)
+    {
+        m_invocationList[i](std::forward<_ArgTypes>(args)...);
+    }
+
+    auto iter = m_invocationList.end() - 1;
+    return (*iter)(std::forward<_ArgTypes>(args)...);
 }
 
 } /* namespace tgon */
