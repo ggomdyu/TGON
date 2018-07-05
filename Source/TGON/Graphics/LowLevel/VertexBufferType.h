@@ -51,10 +51,10 @@ public:
 
 public:
     VertexAttributeIndex attribute;
-    std::size_t dimension;
+    int32_t dimension;
     VertexFormatType type;
     bool normalized;
-    std::size_t stride;
+    int32_t stride;
     std::size_t offset;
 };
 

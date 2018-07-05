@@ -23,7 +23,7 @@ public:
 /* @section Public method */
 public:
     void Update();
-
+    
     void SetNearZ(float nearZ) noexcept;
     void SetFarZ(float farZ) noexcept;
     void SetFieldOfView(float fieldOfView) noexcept;

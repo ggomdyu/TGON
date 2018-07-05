@@ -11,7 +11,7 @@
 #include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
-#include "Core/Object/Delegate.h"
+#include "Core/Object/DelegateChain.h"
 
 namespace tgon
 {
@@ -61,16 +61,16 @@ public:
 
 /* @section Public event handler */
 public:
-    Delegate<void(int32_t, int32_t)> OnWindowMove;
-    Delegate<void(int32_t, int32_t)> OnWindowResize;
-    Delegate<void()> OnWindowMaximize;
-    Delegate<void()> OnWindowMinimize;
-    Delegate<void()> OnWindowEnterFullScreen;
-    Delegate<void()> OnWindowExitFullScreen;
-    Delegate<void()> OnWindowWillClose;
-    Delegate<void()> OnWindowDidClose;
-    Delegate<void()> OnWindowGetFocus;
-    Delegate<void()> OnWindowLoseFocus;
+    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
+    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
+    DelegateChain<void()> OnWindowMaximize;
+    DelegateChain<void()> OnWindowMinimize;
+    DelegateChain<void()> OnWindowEnterFullScreen;
+    DelegateChain<void()> OnWindowExitFullScreen;
+    DelegateChain<void()> OnWindowWillClose;
+    DelegateChain<void()> OnWindowDidClose;
+    DelegateChain<void()> OnWindowGetFocus;
+    DelegateChain<void()> OnWindowLoseFocus;
 
 /* @section Private variable */
 private:

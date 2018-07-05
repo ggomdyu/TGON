@@ -52,26 +52,14 @@ template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr const _ValueType Floor(const _ValueType& value) noexcept
 {
-    using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int16_t), int16_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int32_t), int32_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int64_t), int64_t, void>::type>::type>::type>::type;
-
-    IntergerType flooredValue = static_cast<IntergerType>(value);
-    return value < flooredValue ? flooredValue - static_cast<_ValueType>(1.0) : flooredValue;
+    return std::floor(value);
 }
 
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr _ValueType Ceil(const _ValueType& value) noexcept
 {
-    using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int16_t), int16_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int32_t), int32_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int64_t), int64_t, void>::type>::type>::type>::type;
-
-    IntergerType flooredValue = static_cast<IntergerType>(value);
-    return value > flooredValue ? flooredValue + static_cast<_ValueType>(1.0) : flooredValue;
+    return std::ceil(value);
 }
 
 /* @brief   Round off the given floating point value. */
@@ -79,12 +67,7 @@ template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr const _ValueType Round(const _ValueType& value) noexcept
 {
-    using IntergerType = typename std::conditional<sizeof(_ValueType) == sizeof(int8_t), int8_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int16_t), int16_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int32_t), int32_t,
-                         typename std::conditional<sizeof(_ValueType) == sizeof(int64_t), int64_t, void>::type>::type>::type>::type;
-
-    return static_cast<_ValueType>(static_cast<IntergerType>(value + ((value >= static_cast<_ValueType>(0.0)) ? static_cast<_ValueType>(0.5) : static_cast<_ValueType>(-0.5))));
+    return std::round(value);
 }
 
 /* @return	Returns largest value of the given parameters. */
@@ -92,7 +75,7 @@ template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& second) noexcept
 {
-    return (first <= second) ? first : second;
+    return std::max(first, second);
 }
 
 template <typename _ValueType,
@@ -107,7 +90,7 @@ template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& second) noexcept
 {
-    return (first >= second) ? first : second;
+    return std::max(first, second);
 }
 
 template <typename _ValueType,
@@ -123,7 +106,7 @@ template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Abs(const _ValueType& value) noexcept
 {
-    return (value < static_cast<_ValueType>(0)) ? -value : value;
+    return std::abs(value);
 }
 
 /* @brief  Get the sign of value represented as 1, -1 or 0 */

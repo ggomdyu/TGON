@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Core/Object/Delegate.h"
+#include "Core/Object/DelegateChain.h"
 
 #include "../LowLevel/Graphics.h"
 
@@ -22,11 +22,16 @@ class Renderer final
 {
 /* @section Public constructor */
 public:
-    Renderer(const Window& window, const VideoMode& videoMode);
+    Renderer(Window& window, const VideoMode& videoMode);
 
 /* @section Public method */
 public:
-    Delegate<void()> OnWindowResize;
+    Graphics& GetGraphics() noexcept;
+    const Graphics& GetGraphics() const noexcept;
+    
+/* @section Public event handler */
+public:
+    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
 
 /* @section Private method */
 private:

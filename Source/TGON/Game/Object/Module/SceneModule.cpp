@@ -9,14 +9,14 @@
 namespace tgon
 {
 
-SceneModule::SceneModule(std::unique_ptr<Scene> scene, const VideoMode& videoMode, const Window& displayTarget) :
-    m_graphics(displayTarget, videoMode),
+SceneModule::SceneModule(std::unique_ptr<Scene> scene, Window& displayTarget, const VideoMode& videoMode) :
+    m_renderer(displayTarget, videoMode),
     m_currentScene(std::move(scene))
 {
 }
     
-SceneModule::SceneModule(const VideoMode& videoMode, const Window& displayTarget) :
-    SceneModule(std::make_unique<Scene>(), videoMode, displayTarget)
+SceneModule::SceneModule(Window& displayTarget, const VideoMode& videoMode) :
+    SceneModule(nullptr, displayTarget, videoMode)
 {
 }
 
@@ -24,7 +24,7 @@ SceneModule::~SceneModule() = default;
 
 void SceneModule::Update()
 {
-    decltype(auto) engine = Application::GetInstance()->GetEngine();
+    decltype(auto) engine = Engine::GetInstance();
 
     decltype(auto) timeModule = engine.GetModule<TimeModule>();
     if (timeModule != nullptr)
@@ -37,12 +37,14 @@ void SceneModule::Update()
 
 void SceneModule::Draw()
 {
-    m_graphics.ClearColorDepthBuffer();
+    decltype(auto) graphics = m_renderer.GetGraphics();
+    
+    graphics.ClearColorDepthBuffer();
     {
         m_currentScene->Draw();
-        m_spriteBatch.FlushBatch(m_graphics);
+        m_spriteBatch.FlushBatch(graphics);
     }
-    m_graphics.SwapBuffer();
+    graphics.SwapBuffer();
 }
 
 void SceneModule::ChangeScene(std::unique_ptr<Scene> scene)

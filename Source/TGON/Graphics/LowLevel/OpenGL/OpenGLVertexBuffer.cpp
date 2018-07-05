@@ -41,7 +41,7 @@ std::size_t VertexBufferImpl::GetDataBytes() const noexcept
 void VertexBufferImpl::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
-
+    
     for (GLint i = 0; i < m_vertexBufferDescs.size(); ++i)
     {
         const auto& vertexBufferDesc = m_vertexBufferDescs[i];

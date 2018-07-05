@@ -18,6 +18,11 @@ Engine::Engine() :
 
 Engine::~Engine() = default;
 
+Engine& Engine::GetInstance() noexcept
+{
+    return Application::GetInstance().GetEngine();
+}
+    
 void Engine::AddModule(const std::shared_ptr<IModule>& module)
 {
     auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)

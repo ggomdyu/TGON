@@ -31,7 +31,7 @@ public:
 /* @section Public method */
 public:
     /* @brief   Returns the global instance of this class. */
-    static std::shared_ptr<Application> GetInstance();
+    static Application& GetInstance() noexcept;
 
     /* @brief   Loops the message queue and handle the message. */
     void MessageLoop();

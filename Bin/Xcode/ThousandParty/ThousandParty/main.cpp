@@ -21,19 +21,13 @@ public:
     {
         m_audioPlayer.SetPitch(1.2f);
         m_audioPlayer.Play();
-        
-        Delegate<void()> d1 = []() { Log(LogLevel::Debug, "1"); };
-        Delegate<void()> t(std::move(d1));
-        
-        Delegate<void()> d2 = []() { Log(LogLevel::Debug, "2"); };
-        Delegate<void()> d3 = []() { Log(LogLevel::Debug, "3"); };
-        DelegateChain<void()> dc{ d1, d2, d3 };
-        dc.Invoke();
     }
 
     virtual void OnDidLaunch() override
     {
         SuperType::OnDidLaunch();
+        
+//        constexpr float a = Floor(4.0f);
         
         InputMode inputMode;
         {
@@ -41,11 +35,11 @@ public:
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
+        this->AddModule<InputModule>(inputMode, Application::GetInstance().GetRootWindow());
         
         this->AddModule<TimeModule>();
         
-        this->AddModule<SceneModule>(std::make_unique<TestScene>(), VideoMode{}, Application::GetInstance()->GetRootWindow());   
+        this->AddModule<SceneModule>(std::make_unique<TestScene>(), Application::GetInstance().GetRootWindow(), VideoMode{});
     }
 
     virtual void OnWillTerminate() override

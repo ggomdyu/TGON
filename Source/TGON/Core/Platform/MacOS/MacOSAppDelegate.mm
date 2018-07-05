@@ -16,9 +16,9 @@ namespace tgon
     
 extern std::unique_ptr<Engine> MakeEngine();
 
-std::shared_ptr<Application> Application::GetInstance()
+Application& Application::GetInstance() noexcept
 {
-    return g_application;
+    return *g_application;
 }
 
 } /* namespace tgon */
@@ -26,7 +26,7 @@ std::shared_ptr<Application> Application::GetInstance()
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    g_application = std::make_shared<tgon::Application>(tgon::MakeEngine());
+    g_application = std::make_unique<tgon::Application>(tgon::MakeEngine());
     g_application->OnDidLaunch();
 }
 

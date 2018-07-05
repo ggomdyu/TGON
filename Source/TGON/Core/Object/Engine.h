@@ -43,6 +43,9 @@ public:
     
 /* @section Public method */
 public:
+    /* @brief   Returns the global instance of this class. */
+    static Engine& GetInstance() noexcept;
+    
     /* @brief               Updates the Engine. */
     virtual void Update();
     

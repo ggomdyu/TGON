@@ -159,24 +159,24 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType stub) noexcept :
-	m_ptr(receiver),
+    m_ptr(receiver),
     m_deleter(nullptr),
-	m_stub(stub)
+    m_stub(stub)
 {
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType stub, DeleterType deleter) noexcept :
-	m_ptr(receiver),
+    m_ptr(receiver),
     m_deleter(deleter),
-	m_stub(stub)
+    m_stub(stub)
 {
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
-	m_ptr(operator new(sizeof(typename std::decay<_FunctionType>::type))),
+    m_ptr(operator new(sizeof(typename std::decay<_FunctionType>::type))),
     m_stub(&MakeStub<typename std::decay<_FunctionType>::type>),
     m_deleter(&MakeDeleter<typename std::decay<_FunctionType>::type>)
 {

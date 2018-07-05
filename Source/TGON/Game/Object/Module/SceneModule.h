@@ -6,7 +6,8 @@
 
 #pragma once
 #include "Core/Object/Module/IModule.h"
-#include "Graphics/LowLevel/Graphics.h"
+#include "Graphics/Render/Renderer.h"
+#include "Graphics/Render/Camera.h"
 #include "Graphics/Render/SpriteBatch.h"
 
 namespace tgon
@@ -22,8 +23,8 @@ public:
 
 /* @section Public constructor */
 public:
-    SceneModule(std::unique_ptr<Scene> scene, const VideoMode& videoMode, const Window& displayTarget);
-    SceneModule(const VideoMode& videoMode, const Window& displayTarget);
+    SceneModule(std::unique_ptr<Scene> scene, Window& displayTarget, const VideoMode& videoMode);
+    SceneModule(Window& displayTarget, const VideoMode& videoMode);
 
 /* @section Public destructor */
 public:
@@ -34,18 +35,22 @@ public:
     /* @brief   Updates the frame of scene. */
     virtual void Update() final override;
     
+    void AddCamera(const Camera& camera);
+    
+    void RemoveCamera(const Camera& camera);
+    
     /* @brief   Changes the current scene. */
     void ChangeScene(std::unique_ptr<Scene> scene);
 
     /**
      * @brief   Returns the current managed scene.
-     * @return  The pointer to scene.
+     * @return  The reference to scene.
      */
     const Scene& GetCurrentScene() const noexcept;
     
     /**
      * @brief   Returns the current managed scene.
-     * @return  The pointer to scene.
+     * @return  The reference to scene.
      */
     Scene& GetCurrentScene() noexcept;
     
@@ -56,9 +61,11 @@ private:
 
 /* @section Private variable */
 private:
-    Graphics m_graphics;
+    Renderer m_renderer;
     SpriteBatch m_spriteBatch;
-
+    
+    std::vector<Camera> m_cameras;
+    
     std::unique_ptr<Scene> m_currentScene;
 };
 
