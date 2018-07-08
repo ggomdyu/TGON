@@ -23,6 +23,7 @@ public:
 /* @section Public method */
 public:
     void Update();
+    void Draw();
     
     void SetNearZ(float nearZ) noexcept;
     void SetFarZ(float farZ) noexcept;
@@ -35,7 +36,7 @@ public:
     float GetFarZ() const noexcept;
     float GetFieldOfView() const noexcept;
     ProjectionMode GetProjectionMode() const noexcept;
-    const Matrix4x4& GetViewProjMatrix() const noexcept;
+    const Matrix4x4& GetViewProjectionMatrix() const noexcept;
     const Vector3& GetEyePt() const noexcept;
     const Vector3& GetLookAt() const noexcept;
 

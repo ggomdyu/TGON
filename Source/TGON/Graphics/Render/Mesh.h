@@ -5,38 +5,32 @@
  */
 
 #pragma once
-#include "../LowLevel/VertexBuffer.h"
-#include "../LowLevel/IndexBuffer.h"
-
-#include "Material.h"
+#include <memory>
 
 namespace tgon
 {
+    
+class VertexBuffer;
+class IndexBuffer;
 
 class Mesh
 {
 /* @section Public constructor */
 public:
-    explicit Mesh(std::shared_ptr<VertexBuffer> vertexBuffer, std::shared_ptr<IndexBuffer> indexBuffer, std::shared_ptr<Material> material);
+    explicit Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
 
 /* @section Public method */
 public:
-    void SetVertexBuffer(std::shared_ptr<VertexBuffer> vertexBuffer);
-    void SetIndexBuffer(std::shared_ptr<IndexBuffer> indexBuffer);
-    void SetMaterial(std::shared_ptr<Material> material);
+    void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
+    void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
     
-    std::shared_ptr<VertexBuffer> GetVertexBuffer() noexcept;
-    std::shared_ptr<IndexBuffer> GetIndexBuffer() noexcept;
-    std::shared_ptr<Material> GetMaterial() noexcept;
-    std::shared_ptr<const VertexBuffer> GetVertexBuffer() const noexcept;
-    std::shared_ptr<const IndexBuffer> GetIndexBuffer() const noexcept;
-    std::shared_ptr<const Material> GetMaterial() const noexcept;
+    const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const noexcept;
+    const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
 
 /* @section Protected variable */
 protected:
     std::shared_ptr<VertexBuffer> m_vertexBuffer;
     std::shared_ptr<IndexBuffer> m_indexBuffer;
-    std::shared_ptr<Material> m_material;
 };
 
 } /* namespace tgon */

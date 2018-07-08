@@ -22,7 +22,7 @@ class Renderer final
 {
 /* @section Public constructor */
 public:
-    Renderer(Window& window, const VideoMode& videoMode);
+    Renderer(const Window& window, const VideoMode& videoMode);
 
 /* @section Public method */
 public:

@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class SpriteBatch
+class SpriteBatch final
 {
 /* @section Private type */
 private:

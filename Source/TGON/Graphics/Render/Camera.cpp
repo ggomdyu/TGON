@@ -67,7 +67,7 @@ ProjectionMode Camera::GetProjectionMode() const noexcept
     return m_projectionMode;
 }
 
-const Matrix4x4& Camera::GetViewProjMatrix() const noexcept
+const Matrix4x4& Camera::GetViewProjectionMatrix() const noexcept
 {
     return m_matViewProj;
 }
@@ -84,7 +84,6 @@ const Vector3& Camera::GetLookAt() const noexcept
 
 void Camera::Update()
 {
-    //(float)extent.width / (float)extent.height
     m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
     m_matViewProj *= Matrix4x4::PerspectiveRH(m_fieldOfView, 1, m_nearZ, m_farZ);
 }

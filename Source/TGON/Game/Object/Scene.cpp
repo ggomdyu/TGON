@@ -6,7 +6,7 @@
 namespace tgon
 {
 
-bool Scene::AddObject(std::shared_ptr<GameObject> object)
+bool Scene::AddObject(const std::shared_ptr<GameObject>& object)
 {   
     auto ret = m_objects.emplace(object->GetName().GetHashCode(), object);
     return ret.second;
@@ -24,31 +24,25 @@ bool Scene::RemoveObject(const StringViewHash& objectName)
     return true;
 }
 
-bool Scene::RemoveObject(GameObject* object)
+bool Scene::RemoveObject(const std::shared_ptr<GameObject>& object)
 {
     return this->RemoveObject(StringViewHash(object->GetName().CStr(), object->GetName().Length()));
 }
 
-std::shared_ptr<GameObject> Scene::GetObject(const StringViewHash& objectName)
+GameObject* Scene::GetObject(const StringViewHash& objectName) noexcept
 {
-    auto iter = m_objects.find(objectName.GetHashCode());
-    if (iter == m_objects.end())
-    {
-        return nullptr;
-    }
-
-    return iter->second;
+    return const_cast<Scene*>(this)->GetObject(objectName);
 }
-
-std::shared_ptr<const GameObject> Scene::GetObject(const StringViewHash& objectName) const
+    
+const GameObject* Scene::GetObject(const StringViewHash& objectName) const noexcept
 {
     auto iter = m_objects.find(objectName.GetHashCode());
     if (iter == m_objects.end())
     {
         return nullptr;
     }
-
-    return iter->second;
+    
+    return iter->second.get();
 }
 
 void Scene::Update(float deltaTime)

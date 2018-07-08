@@ -25,12 +25,12 @@ public:
     
 /* @section Public method */
 public:
-    bool AddObject(std::shared_ptr<GameObject> object);
+    bool AddObject(const std::shared_ptr<GameObject>& object);
     bool RemoveObject(const StringViewHash& objectName);
-    bool RemoveObject(GameObject* object);
-    std::shared_ptr<GameObject> GetObject(const StringViewHash& objectName);
-    std::shared_ptr<const GameObject> GetObject(const StringViewHash& objectName) const;
-
+    bool RemoveObject(const std::shared_ptr<GameObject>& object);
+    const GameObject* GetObject(const StringViewHash& objectName) const noexcept;
+    GameObject* GetObject(const StringViewHash& objectName) noexcept;
+    
     virtual void Update(float deltaTime);
     virtual void Draw();
 

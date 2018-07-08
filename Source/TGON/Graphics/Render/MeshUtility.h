@@ -5,16 +5,19 @@
  */
 
 #pragma once
-#include "Mesh.h"
-#include "Material.h"
 
 namespace tgon
 {
-
-std::shared_ptr<Mesh> MakeTriangle(std::shared_ptr<Material> material);
-
-std::shared_ptr<Mesh> MakeCube(std::shared_ptr<Material> material);
-
-std::shared_ptr<Mesh> MakeQuad(std::shared_ptr<Material> material);
+    
+class Mesh;
+          
+/* @brief   Returns the shared triangle mesh. */
+std::shared_ptr<Mesh> MakeTriangle();
+                                  
+/* @brief   Returns the shared cube mesh. */
+std::shared_ptr<Mesh> MakeCube();
+                                  
+/* @brief   Returns the shared quad mesh. */
+std::shared_ptr<Mesh> MakeQuad();
 
 } /* namespace tgon */

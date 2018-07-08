@@ -12,37 +12,37 @@
 
 namespace tgon
 {
+
+class Texture;
+class Mesh;
     
 class Sprite
 {
 /* @section Public constructor */
 public:
     Sprite();
+    Sprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Material>& material);
     explicit Sprite(const std::string& filePath);
-    explicit Sprite(std::shared_ptr<TextureMaterial> material);
 
 /* @section Public method */
 public:
     void Draw(Graphics& graphics);
     
-    void SetTexture(std::shared_ptr<Texture> texture);
+    void SetTexture(const std::shared_ptr<Texture>& texture);
     void SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept;
 
-    std::shared_ptr<const Texture> GetTexture() const noexcept;
-    std::shared_ptr<Material> GetMaterial() noexcept;
-    std::shared_ptr<const Material> GetMaterial() const noexcept;
-    std::shared_ptr<Mesh> GetMesh() noexcept;
-    std::shared_ptr<const Mesh> GetMesh() const noexcept;
-    Matrix4x4& GetWorldViewProjectionMatrix() noexcept;
+    const std::shared_ptr<Texture>& GetTexture() const noexcept;
+    const std::shared_ptr<Material>& GetMaterial() const noexcept;
+    const std::shared_ptr<Mesh>& GetMesh() const noexcept;
     const Matrix4x4& GetWorldViewProjectionMatrix() const noexcept;
-
-    bool CanBatch(Material* material) const;
 
 /* @section Private variable */
 private:
     Matrix4x4 m_matWVP;
 
     std::shared_ptr<Mesh> m_quad;
+    std::shared_ptr<Texture> m_texture;
+    std::shared_ptr<Material> m_material;
 };
     
 } /* namespace tgon */

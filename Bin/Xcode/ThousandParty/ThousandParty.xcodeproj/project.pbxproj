@@ -307,7 +307,7 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_67_0",
 				);
-				LIBRARY_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/GitHub/TGON/Bin/ThirdParty/Debug/x86_64;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Debug/x86_64";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -327,7 +327,7 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_67_0",
 				);
-				LIBRARY_SEARCH_PATHS = /Users/ggomdyu/Desktop/Programming/GitHub/TGON/Bin/ThirdParty/Debug/x86_64;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Release/x86_64";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

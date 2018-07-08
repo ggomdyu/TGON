@@ -6,9 +6,15 @@
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLTexture.h"
 #endif
+#include "TextureType.h"
 
 namespace tgon
 {
+    
+Texture::Texture(const std::string& filePath) :
+    Texture(filePath, {})
+{
+}
 
 Texture::Texture(const std::string& filePath, const TextureProperty& textureProperty) :
     m_textureImpl(std::make_unique<TextureImpl>(filePath, textureProperty))

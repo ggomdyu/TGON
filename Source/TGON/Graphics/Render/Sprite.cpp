@@ -5,6 +5,8 @@
 #include "../LowLevel/Graphics.h"
 #include "../LowLevel/GraphicsType.h"
 #include "../LowLevel/TextureType.h"
+#include "../LowLevel/VertexBuffer.h"
+#include "../LowLevel/IndexBuffer.h"
 
 #include "SpriteBatch.h"
 #include "Sprite.h"
@@ -14,41 +16,38 @@ namespace tgon
 {
     
 Sprite::Sprite() :
-    m_quad(MakeQuad(std::make_shared<TextureMaterial>()))
+    m_quad(MakeQuad())
 {
 }
 
 Sprite::Sprite(const std::string& filePath) :
-    m_quad(MakeQuad(std::make_shared<TextureMaterial>(std::make_shared<Texture>(filePath, TextureProperty{}))))
+    m_quad(MakeQuad()),
+    m_texture(std::make_shared<Texture>(filePath)),
+    m_material(std::make_shared<TextureMaterial>(m_texture))
+{
+}
+    
+Sprite::Sprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Material>& material) :
+    m_quad(MakeQuad()),
+    m_texture(texture),
+    m_material(material)
 {
 }
 
-Sprite::Sprite(std::shared_ptr<TextureMaterial> material) :
-    m_quad(MakeQuad(material))
+void Sprite::SetTexture(const std::shared_ptr<Texture>& texture)
 {
-    assert(material != nullptr && "material can't be nullptr.");
-}
-
-void Sprite::SetTexture(std::shared_ptr<Texture> texture)
-{
-    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
+    TextureMaterial* material = static_cast<TextureMaterial*>(m_material.get());
     material->SetTexture(texture);
 }
     
-std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
+const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
 {
-    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
-    return material->GetTexture();
+    return m_texture;
 }
 
-std::shared_ptr<Material> Sprite::GetMaterial() noexcept
+const std::shared_ptr<Material>& Sprite::GetMaterial() const noexcept
 {
-    return m_quad->GetMaterial();
-}
-
-std::shared_ptr<const Material> Sprite::GetMaterial() const noexcept
-{
-    return m_quad->GetMaterial();
+    return m_material;
 }
     
 void Sprite::SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept
@@ -56,34 +55,19 @@ void Sprite::SetWorldViewProjectionMatrix(const Matrix4x4& matWVP) noexcept
     m_matWVP = matWVP;
 }
 
-Matrix4x4& Sprite::GetWorldViewProjectionMatrix() noexcept
-{
-    return m_matWVP;
-}
-
 const Matrix4x4& Sprite::GetWorldViewProjectionMatrix() const noexcept
 {
     return m_matWVP;
 }
     
-std::shared_ptr<Mesh> Sprite::GetMesh() noexcept
-{
-    return m_quad;
-}
-    
-std::shared_ptr<const Mesh> Sprite::GetMesh() const noexcept
+const std::shared_ptr<Mesh>& Sprite::GetMesh() const noexcept
 {
     return m_quad;
 }
 
-bool Sprite::CanBatch(Material* material) const
-{
-    return m_quad->GetMaterial()->CanBatch(*material);
-}
-    
 void Sprite::Draw(Graphics& graphics)
 {
-    TextureMaterial* material = static_cast<TextureMaterial*>(m_quad->GetMaterial().get());
+    TextureMaterial* material = static_cast<TextureMaterial*>(m_material.get());
     material->Use();
     material->GetShader()->SetParameterMatrix4fv("g_uMVP", m_matWVP[0]);
 

@@ -22,6 +22,7 @@ class Texture final :
 {
 /* @section Public constructor */
 public:
+    Texture(const std::string& filePath);
     Texture(const std::string& filePath, const TextureProperty& textureProperty);
     
 /* @section Public destructor */

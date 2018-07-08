@@ -7,13 +7,9 @@
 namespace tgon
 {
 
-Renderer::Renderer(Window& window, const VideoMode& videoMode) :
+Renderer::Renderer(const Window& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
-    window.OnWindowResize += [&](int32_t width, int32_t height)
-    {
-        this->OnWindowResize(width, height);
-    };
 }
 
 Graphics& Renderer::GetGraphics() noexcept
