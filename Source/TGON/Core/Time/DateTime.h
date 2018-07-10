@@ -28,69 +28,23 @@ public:
     
     void AddDays(float days);
 
-    uint16_t GetMonth() const;
-    uint16_t GetDay() const;
-    uint16_t GetYear() const;
-    uint16_t GetHour() const;
-    uint16_t GetMinute() const;
-    uint16_t GetSecond() const;
+    int32_t GetMonth() const noexcept;
+    int32_t GetDay() const noexcept;
+    int32_t GetYear() const noexcept;
+    int32_t GetHour() const noexcept;
+    int32_t GetMinute() const noexcept;
+    int32_t GetSecond() const noexcept;
     DayOfWeek GetDayOfWeek() const;
 
 /* @section Public variable */
 private:
-    uint16_t m_month;
-    uint16_t m_day;
-    uint16_t m_year;
-    uint16_t m_hour;
-    uint16_t m_minute;
-    uint16_t m_second;
+    int32_t m_month;
+    int32_t m_day;
+    int32_t m_year;
+    int32_t m_hour;
+    int32_t m_minute;
+    int32_t m_second;
     DayOfWeek m_dayOfWeek;
 };
-
-constexpr DateTime::DateTime(const std::tm& rawTime) noexcept :
-    m_month(static_cast<uint16_t>(rawTime.tm_mon + 1)),
-    m_day(static_cast<uint16_t>(rawTime.tm_mday)),
-    m_year(static_cast<uint16_t>(1900 + rawTime.tm_year)),
-    m_hour(static_cast<uint16_t>(rawTime.tm_hour)),
-    m_minute(static_cast<uint16_t>(rawTime.tm_min)),
-    m_second(static_cast<uint16_t>(rawTime.tm_sec)),
-    m_dayOfWeek(static_cast<DayOfWeek>(rawTime.tm_wday))
-{
-}
-
-inline uint16_t DateTime::GetMonth() const
-{
-    return m_month;
-}
-
-inline uint16_t DateTime::GetDay() const
-{
-    return m_day;
-}
-
-inline uint16_t DateTime::GetYear() const
-{
-    return m_year;
-}
-
-inline uint16_t DateTime::GetHour() const
-{
-    return m_hour;
-}
-
-inline uint16_t DateTime::GetMinute() const
-{
-    return m_minute;
-}
-
-inline uint16_t DateTime::GetSecond() const
-{
-    return m_second;
-}
-
-inline DayOfWeek DateTime::GetDayOfWeek() const
-{
-    return m_dayOfWeek;
-}
 
 } /* namespace tgon */
