@@ -45,32 +45,32 @@ int32_t DateTime::DaysInYear(int32_t year, int32_t month) noexcept
     }
 }
 
-uint16_t DateTime::GetMonth() const noexcept
+int32_t DateTime::GetMonth() const noexcept
 {
     return m_month;
 }
 
-uint16_t DateTime::GetDay() const noexcept
+int32_t DateTime::GetDay() const noexcept
 {
     return m_day;
 }
 
-uint16_t DateTime::GetYear() const noexcept
+int32_t DateTime::GetYear() const noexcept
 {
     return m_year;
 }
 
-uint16_t DateTime::GetHour() const noexcept
+int32_t DateTime::GetHour() const noexcept
 {
     return m_hour;
 }
 
-uint16_t DateTime::GetMinute() const noexcept
+int32_t DateTime::GetMinute() const noexcept
 {
     return m_minute;
 }
 
-uint16_t DateTime::GetSecond() const noexcept
+int32_t DateTime::GetSecond() const noexcept
 {
     return m_second;
 }
