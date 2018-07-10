@@ -23,7 +23,9 @@ private:
 public:
     static DateTime Now() noexcept;
     static DateTime UtcNow() noexcept;
-
+    static bool IsLeapYear(int32_t year) noexcept;
+    static int32_t DaysInMonth(int year, int month) noexcept;
+    
     void AddDays(float days);
 
     uint16_t GetMonth() const;
