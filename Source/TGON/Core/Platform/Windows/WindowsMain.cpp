@@ -19,7 +19,7 @@
 namespace
 {
 
-std::shared_ptr<tgon::Application> g_application;
+std::unique_ptr<tgon::Application> g_application;
 
 } /* namespace */    
 
@@ -28,9 +28,9 @@ namespace tgon
 
 extern std::unique_ptr<Engine> MakeEngine();
 
-std::shared_ptr<Application> Application::GetInstance()
+Application& Application::GetInstance() noexcept
 {
-    return g_application;
+    return *g_application;
 }
 
 } /* namespace tgon */
@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    g_application = std::make_shared<tgon::Application>(tgon::MakeEngine());
+    g_application = std::make_unique<tgon::Application>(tgon::MakeEngine());
     g_application->OnDidLaunch();
 
     g_application->MessageLoop();

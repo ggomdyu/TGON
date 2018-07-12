@@ -7,6 +7,12 @@
 #pragma once
 #include <cstdlib>
 
+#include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLVertexBufferType.h"
+#endif
+
 namespace tgon
 {
 
@@ -22,18 +28,6 @@ enum class VertexAttributeIndex
     Position = 0,
     Normal = 1,
     UV = 1,
-};
-
-enum class VertexFormatType
-{
-    Float,
-    Double,
-    Byte,
-    UnsignedByte,
-    Short,
-    UnsignedShort,
-    Int,
-    UnsignedInt,
 };
 
 struct VertexBufferDesc

@@ -31,7 +31,8 @@ GLsizei GetVertexCountPerPrimitive(PrimitiveType primitiveType) noexcept
 } /* namespace */
 
 GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMode) :
-    m_context(videoMode, displayTarget)
+    m_context(videoMode, displayTarget),
+    m_vertexArrayHandle(0)
 {
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
