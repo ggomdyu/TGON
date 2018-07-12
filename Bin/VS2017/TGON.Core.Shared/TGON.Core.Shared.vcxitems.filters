@@ -96,9 +96,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\AudioBuffer.cpp">
       <Filter>Source\Core\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TaskModule.cpp">
-      <Filter>Source\Core\Object\Module</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TimeModule.cpp">
       <Filter>Source\Core\Object\Module</Filter>
     </ClCompile>
@@ -300,9 +297,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\IModule.h">
-      <Filter>Source\Core\Object\Module</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\TaskModule.h">
       <Filter>Source\Core\Object\Module</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Module\InputModule.h">
