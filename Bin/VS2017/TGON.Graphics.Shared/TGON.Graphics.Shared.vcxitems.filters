@@ -90,6 +90,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBufferType.h">
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\OpenGLVertexBufferType.h">
+      <Filter>Source\Graphics\LowLevel\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Material.cpp">
