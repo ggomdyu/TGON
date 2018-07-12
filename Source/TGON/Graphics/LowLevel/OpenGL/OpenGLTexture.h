@@ -73,6 +73,9 @@ public:
      * @warn    This can not be correct information if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
+    
+    /* @brief   Gets the handle of texture object. */
+    GLuint GetTextureHandle() const noexcept;
 
 private:
     void TransferToVideo();

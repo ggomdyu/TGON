@@ -130,4 +130,9 @@ const std::string& TextureImpl::GetFilePath() const noexcept
     return Image::GetFilePath();
 }
     
+GLuint TextureImpl::GetTextureHandle() const noexcept
+{
+    return m_textureHandle;
+}
+    
 } /* namespace tgon */
