@@ -46,9 +46,6 @@
     <Filter Include="Source\Core\Audio\Importer">
       <UniqueIdentifier>{269adcf9-c8e9-4e38-8d98-8728a1b5f13d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Drawing\ImageProcessor">
-      <UniqueIdentifier>{7aa049dd-aa38-4fc8-9ccc-9b25d93eb660}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Debug">
       <UniqueIdentifier>{e29f5c84-7736-4cf0-be05-ac7c2c54a897}</UniqueIdentifier>
     </Filter>
@@ -131,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ThreadPool.cpp">
       <Filter>Source\Core\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector2.cpp">
+      <Filter>Source\Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,21 +331,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\MouseType.h">
       <Filter>Source\Core\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\BmpImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\JpgImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\PngImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\WebPImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Drawing\ImageProcessor\BaseImageProcessor.h">
-      <Filter>Source\Core\Drawing\ImageProcessor</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\Engine.h">
       <Filter>Source\Core\Object</Filter>
