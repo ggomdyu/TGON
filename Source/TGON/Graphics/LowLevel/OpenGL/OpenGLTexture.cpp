@@ -33,7 +33,7 @@ void TextureImpl::Use()
 void TextureImpl::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData().data()));
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData().get()));
 
     if (m_isUseMipmap == true)
     {
@@ -90,12 +90,12 @@ bool TextureImpl::IsValid() const noexcept
     return Image::IsValid();
 }
     
-std::vector<uint8_t>& TextureImpl::GetImageData() noexcept
+std::unique_ptr<uint8_t[]>& TextureImpl::GetImageData() noexcept
 {
     return Image::GetImageData();
 }
     
-const std::vector<uint8_t>& TextureImpl::GetImageData() const noexcept
+const std::unique_ptr<uint8_t[]>& TextureImpl::GetImageData() const noexcept
 {
     return Image::GetImageData();
 }

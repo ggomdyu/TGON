@@ -33,7 +33,7 @@ enum class VertexAttributeIndex
 struct VertexBufferDesc
 {
 public:
-    constexpr VertexBufferDesc(VertexAttributeIndex attribute, std::size_t dimension, VertexFormatType type, bool normalized, std::size_t stride, std::size_t offset) noexcept :
+    constexpr VertexBufferDesc(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
         attribute(attribute),
         dimension(dimension),
         type(type),

@@ -70,15 +70,6 @@ public:
 
     /**
      * @brief                   Reads a image file data from memory.
-     * @param [in] filePath     The file path of image file
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
-     * @param [in] imageFormat  The format of image
-     */
-    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
-    
-    /**
-     * @brief                   Reads a image file data from memory.
      * @param [in] filePath     The file path of image source
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
@@ -89,10 +80,10 @@ public:
     bool IsValid() const noexcept;
 
     /* @brief   Gets the raw image data. */
-    std::vector<uint8_t>& GetImageData() noexcept;
+    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
 
     /* @brief   Gets the raw image data. */
-    const std::vector<uint8_t>& GetImageData() const noexcept;
+    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
     
     /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
@@ -120,7 +111,7 @@ public:
 
 /* @section Private variable */
 private:
-    std::vector<uint8_t> m_imageData;
+    std::unique_ptr<uint8_t[]> m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;

@@ -1,13 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 #include "Core/Debug/Log.h"
 
 #include "Image.h"
 #include "ImageUtility.h"
-#include "ImageProcessor/PngImageProcessor.h"
-#include "ImageProcessor/JpgImageProcessor.h"
-#include "ImageProcessor/BmpImageProcessor.h"
-#include "ImageProcessor/WebPImageProcessor.h"
 
 namespace tgon
 {
@@ -25,12 +24,6 @@ Image::Image(const std::string& filePath) :
     Image()
 {
     this->Initialize(filePath);
-}
-
-Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat) :
-    Image()
-{
-    this->Initialize(filePath, srcData, srcDataBytes, imageFormat);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
@@ -91,141 +84,47 @@ const uint8_t& Image::operator[](std::size_t index) const
 
 bool Image::Initialize(const std::string& filePath)
 {
-    FILE* file = fopen(filePath.c_str(), "rb");
-    if (file == nullptr)
-    {
-        return false;
-    }
-
-    // Read the image data from file.
-    std::vector<uint8_t> imageData;
-    {
-        fseek(file, 0, SEEK_END);
-        long fileSize = ftell(file);
-        fseek(file, 0, SEEK_SET);
-
-        imageData.resize(fileSize);
-        fread(imageData.data(), 1, fileSize, file);
-    };
-    fclose(file);
-
-    std::size_t extensionOffset = filePath.rfind('.') + 1;
-    return this->Initialize(filePath, imageData.data(), imageData.size(), ConvertStringToImageFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
-}
-
-bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat)
-{
     m_filePath = filePath;
-
-    switch (imageFormat)
+    
+    stbi_uc* imageData = stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4);
+    if (imageData == nullptr)
     {
-    case ImageFormat::Png:
-        {
-            PngImageProcessor imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-                return true;
-            }
-        }
-        return false;
-
-    case ImageFormat::Jpg:
-        {
-            JpgImageProcessor imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-                return true;
-            }
-        }
-        return false;
-
-    case ImageFormat::WebP:
-        {
-            WebPImageProcessor imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-                return true;
-            }
-        }
-        return false;
-
-    case ImageFormat::Bmp:
-        {
-            BmpImageProcessor imageProcessor(srcData, srcDataBytes);
-            if (imageProcessor.IsValid())
-            {
-                m_imageData = std::move(imageProcessor.GetImageData());
-                m_width = imageProcessor.GetWidth();
-                m_height = imageProcessor.GetHeight();
-                m_channels = imageProcessor.GetChannels();
-                m_colorDepth = imageProcessor.GetColorDepth();
-                m_pixelFormat = imageProcessor.GetPixelFormat();
-                return true;
-            }
-        }
-        return false;
-
-    default:
         return false;
     }
+    
+    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
+    m_imageData.reset(reinterpret_cast<uint8_t*>(imageData));
+    
+    return true;
 }
 
 bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
 {
-    ImageFormat imageFormat = ImageFormat::Unknown;
-    if (PngImageProcessor::VerifyFormat(srcData, srcDataBytes))
-    {
-        imageFormat = ImageFormat::Png;
-    }
-    else if (JpgImageProcessor::VerifyFormat(srcData, srcDataBytes))
-    {
-        imageFormat = ImageFormat::Jpg;
-    }
-    else if (WebPImageProcessor::VerifyFormat(srcData, srcDataBytes))
-    {
-        imageFormat = ImageFormat::WebP;
-    }
-    else if (BmpImageProcessor::VerifyFormat(srcData, srcDataBytes))
-    {
-        imageFormat = ImageFormat::Bmp;
-    }
-    else
+    m_filePath = filePath;
+
+    stbi_uc* imageData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4);
+    if (imageData == nullptr)
     {
         return false;
     }
-
-    return this->Initialize(filePath, srcData, srcDataBytes, imageFormat);
+    
+    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
+    m_imageData.reset(reinterpret_cast<uint8_t*>(imageData));
+    
+    return true;
 }
 
 bool Image::IsValid() const noexcept
 {
-    return m_imageData.size() > 0;
+    return m_imageData != nullptr;
 }
 
-std::vector<uint8_t>& Image::GetImageData() noexcept
+std::unique_ptr<uint8_t[]>& Image::GetImageData() noexcept
 {
     return m_imageData;
 }
 
-const std::vector<uint8_t>& Image::GetImageData() const noexcept
+const std::unique_ptr<uint8_t[]>& Image::GetImageData() const noexcept
 {
     return m_imageData;
 }

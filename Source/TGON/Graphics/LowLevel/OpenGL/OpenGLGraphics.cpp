@@ -5,6 +5,8 @@
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
 #endif
+//#define STB_IMAGE_IMPLEMENTATION
+//#include <stb_image.h>
 
 #include "Core/Math/Color.h"
 
@@ -34,6 +36,9 @@ GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMo
     m_context(videoMode, displayTarget),
     m_vertexArrayHandle(0)
 {
+    // It is required because OpenGL expects (0, 0) coordinates to be on the left bottom side, but images usually left top side.
+//    stbi_set_flip_vertically_on_load(true);
+    
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 
@@ -108,12 +113,12 @@ void GraphicsImpl::SwapBuffer()
 
 void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
 {
-    glDrawElements(static_cast<GLenum>(primitiveType), GetVertexCountPerPrimitive(primitiveType), GL_UNSIGNED_INT, nullptr);
+    glDrawArrays(static_cast<GLenum>(primitiveType), 0, primitiveCount);
 }
     
 void GraphicsImpl::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
 {
-    glDrawArrays(static_cast<GLenum>(primitiveType), 0, static_cast<GLsizei>(primitiveCount));
+    glDrawElements(static_cast<GLenum>(primitiveType), GetVertexCountPerPrimitive(primitiveType) * primitiveCount, GL_UNSIGNED_INT, nullptr);
 }
 
 } /* namespace tgon */

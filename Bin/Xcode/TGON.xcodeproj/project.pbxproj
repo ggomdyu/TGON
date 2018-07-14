@@ -62,7 +62,6 @@
 		FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD41922420DA853000536815 /* ICloneable.cpp */; };
 		FD5337FF20E4018500515DA4 /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD85200020C2797A00C749BC /* InputModule.cpp */; };
 		FD53380020E4018500515DA4 /* TimeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6A9EE620BC4B9F0078513F /* TimeModule.cpp */; };
-		FD53380120E4018500515DA4 /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD6A9EE720BC4B9F0078513F /* TaskModule.cpp */; };
 		FD53380220E4018500515DA4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB75AD020D5885700CC36C4 /* Engine.cpp */; };
 		FD53380320E4018500515DA4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE73F5720CAE6B60026F3D3 /* Application.cpp */; };
 		FD53380420E4018500515DA4 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC877FF20CEA1BC00C8CA9A /* Window.cpp */; };
@@ -133,6 +132,7 @@
 		FDBA3D1420F13B4F0053B7BC /* OpenGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBA3D1320F13B4F0053B7BC /* OpenGLRenderTarget.cpp */; };
 		FDBA3D1720F19CED0053B7BC /* RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBA3D1520F19CEC0053B7BC /* RenderTarget.cpp */; };
 		FDBA3D1820F19CED0053B7BC /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBA3D1620F19CEC0053B7BC /* RenderTarget.h */; };
+		FDBA3D1A20F3CFC80053B7BC /* OpenGLUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBA3D1920F3CFC80053B7BC /* OpenGLUtility.cpp */; };
 		FDBCFA3B20E7F96100CBDF0B /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA2E20E7F95F00CBDF0B /* Texture.h */; };
 		FDBCFA3C20E7F96100CBDF0B /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA2F20E7F95F00CBDF0B /* Shader.cpp */; };
 		FDBCFA3D20E7F96100CBDF0B /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA3020E7F95F00CBDF0B /* Graphics.cpp */; };
@@ -241,7 +241,6 @@
 		FD39DB3120C96C6400C07251 /* Sprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Sprite.cpp; path = ../../Source/TGON/Graphics/Render/Sprite.cpp; sourceTree = "<group>"; };
 		FD39DB3420C9703700C07251 /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameObject.h; sourceTree = "<group>"; };
 		FD39DB3520C9703700C07251 /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GameObject.cpp; sourceTree = "<group>"; };
-		FD3B367220E7236C00B07A47 /* OpenGLUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenGLUtility.h; path = ../../../../../../../../../.Trash/OpenGLUtility.h; sourceTree = "<group>"; };
 		FD41202D201E3A8200D70538 /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD41922220DA853000536815 /* IComparable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IComparable.h; sourceTree = "<group>"; };
 		FD41922320DA853000536815 /* ICloneable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICloneable.h; sourceTree = "<group>"; };
@@ -260,8 +259,6 @@
 		FD6A9EE220BC4B9F0078513F /* IModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IModule.h; sourceTree = "<group>"; };
 		FD6A9EE420BC4B9F0078513F /* TimeModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeModule.h; sourceTree = "<group>"; };
 		FD6A9EE620BC4B9F0078513F /* TimeModule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeModule.cpp; sourceTree = "<group>"; };
-		FD6A9EE720BC4B9F0078513F /* TaskModule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TaskModule.cpp; sourceTree = "<group>"; };
-		FD6A9EE820BC4B9F0078513F /* TaskModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskModule.h; sourceTree = "<group>"; };
 		FD7EA6DA20B094C900A76C69 /* ImageProcessor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageProcessor; path = ../../Source/TGON/Core/Drawing/ImageProcessor; sourceTree = "<group>"; };
 		FD7EA6DB20B094C900A76C69 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ../../Source/TGON/Core/Drawing/Image.h; sourceTree = "<group>"; };
 		FD7EA6DC20B094CA00A76C69 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image.cpp; path = ../../Source/TGON/Core/Drawing/Image.cpp; sourceTree = "<group>"; };
@@ -330,6 +327,7 @@
 		FDBA3D1320F13B4F0053B7BC /* OpenGLRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRenderTarget.cpp; sourceTree = "<group>"; };
 		FDBA3D1520F19CEC0053B7BC /* RenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderTarget.cpp; sourceTree = "<group>"; };
 		FDBA3D1620F19CEC0053B7BC /* RenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTarget.h; sourceTree = "<group>"; };
+		FDBA3D1920F3CFC80053B7BC /* OpenGLUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLUtility.cpp; sourceTree = "<group>"; };
 		FDBCFA2E20E7F95F00CBDF0B /* Texture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Texture.h; sourceTree = "<group>"; };
 		FDBCFA2F20E7F95F00CBDF0B /* Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Shader.cpp; sourceTree = "<group>"; };
 		FDBCFA3020E7F95F00CBDF0B /* Graphics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Graphics.cpp; sourceTree = "<group>"; };
@@ -622,8 +620,6 @@
 				FD85200120C2797A00C749BC /* InputModule.h */,
 				FD6A9EE420BC4B9F0078513F /* TimeModule.h */,
 				FD6A9EE620BC4B9F0078513F /* TimeModule.cpp */,
-				FD6A9EE720BC4B9F0078513F /* TaskModule.cpp */,
-				FD6A9EE820BC4B9F0078513F /* TaskModule.h */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -879,6 +875,7 @@
 				FD8E693020AFA84600791E10 /* OpenGLGraphics.h */,
 				FD052C7920E7F1D200EF3C64 /* OpenGLGraphicsType.h */,
 				FD612BA420E3CA20006FE85E /* OpenGLUtility.h */,
+				FDBA3D1920F3CFC80053B7BC /* OpenGLUtility.cpp */,
 				FD8E693420AFA84600791E10 /* OpenGLIndexBuffer.cpp */,
 				FD8E693620AFA84600791E10 /* OpenGLIndexBuffer.h */,
 				FD8E692B20AFA84500791E10 /* OpenGLShader.cpp */,
@@ -889,7 +886,6 @@
 				FD8E691920AFA83B00791E10 /* OpenGLTextureType.h */,
 				FD8E692C20AFA84500791E10 /* OpenGLVertexBuffer.cpp */,
 				FD8E692A20AFA84500791E10 /* OpenGLVertexBuffer.h */,
-				FD3B367220E7236C00B07A47 /* OpenGLUtility.h */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -1082,9 +1078,9 @@
 				FD5337FC20E4018500515DA4 /* Mouse.cpp in Sources */,
 				FD5337FD20E4018500515DA4 /* Vector3.cpp in Sources */,
 				FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */,
+				FDBA3D1A20F3CFC80053B7BC /* OpenGLUtility.cpp in Sources */,
 				FD5337FF20E4018500515DA4 /* InputModule.cpp in Sources */,
 				FD53380020E4018500515DA4 /* TimeModule.cpp in Sources */,
-				FD53380120E4018500515DA4 /* TaskModule.cpp in Sources */,
 				FD53380220E4018500515DA4 /* Engine.cpp in Sources */,
 				FD53380320E4018500515DA4 /* Application.cpp in Sources */,
 				FD53380420E4018500515DA4 /* Window.cpp in Sources */,
@@ -1265,6 +1261,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/zlib-1.2.11",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_67_0",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/stb",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Debug/x86_64";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1292,6 +1289,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/zlib-1.2.11",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/boost_1_67_0",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/stb",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Release/x86_64";
 				PRODUCT_NAME = "$(TARGET_NAME)";

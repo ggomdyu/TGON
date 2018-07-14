@@ -53,12 +53,12 @@ bool Texture::IsValid() const noexcept
     return m_textureImpl->IsValid();
 }
     
-std::vector<uint8_t>& Texture::GetImageData() noexcept
+std::unique_ptr<uint8_t[]>& Texture::GetImageData() noexcept
 {
     return m_textureImpl->GetImageData();
 }
     
-const std::vector<uint8_t>& Texture::GetImageData() const noexcept
+const std::unique_ptr<uint8_t[]>& Texture::GetImageData() const noexcept
 {
     return m_textureImpl->GetImageData();
 }

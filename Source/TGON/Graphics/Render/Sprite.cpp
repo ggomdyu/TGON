@@ -74,7 +74,7 @@ void Sprite::Draw(Graphics& graphics)
     m_quad->GetVertexBuffer()->Use();
     m_quad->GetIndexBuffer()->Use();
 
-    graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
+    graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
 }
 
 } /* namespace tgon */

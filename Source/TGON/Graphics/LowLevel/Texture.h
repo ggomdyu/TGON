@@ -49,10 +49,10 @@ public:
     bool IsValid() const noexcept;
     
     /* @brief   Gets the raw image data. */
-    std::vector<uint8_t>& GetImageData() noexcept;
+    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
     
     /* @brief   Gets the raw image data. */
-    const std::vector<uint8_t>& GetImageData() const noexcept;
+    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
     
     /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;

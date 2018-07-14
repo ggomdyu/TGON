@@ -26,18 +26,10 @@ public:
     void Use();
     void Unuse();
     
-/* @section Private method */
-public:
-    GLuint CreateRenderBuffer(GLenum format, int32_t width, int32_t height) const;
-    GLuint CreateFrameBufferHandle() const;
-    
 /* @section Private variable */
 private:
     int32_t m_width;
     int32_t m_height;
-    GLuint m_frameBufferHandle;
-    GLuint m_colorRenderBufferHandle;
-    GLuint m_depthRenderBufferHandle;
 };
 
 } /* namespace tgon */
