@@ -17,12 +17,3 @@
 #else
 #   define TGON_GL_ERROR_CHECK(expression) expression
 #endif
-
-namespace tgon
-{
-    
-GLuint CreateRenderBuffer(GLenum format, int32_t width, int32_t height);
-    
-GLuint CreateFrameBuffer();
-    
-} /* namespace tgon */

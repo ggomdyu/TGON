@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 
 #include "RenderTarget.h"
+#include "Core/Platform/Config.h"
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLRenderTarget.h"
 #endif

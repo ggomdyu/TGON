@@ -5,8 +5,7 @@
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
 #endif
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <stb_image.h>
+#include <stb/stb_image.h>
 
 #include "Core/Math/Color.h"
 
@@ -37,7 +36,7 @@ GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMo
     m_vertexArrayHandle(0)
 {
     // It is required because OpenGL expects (0, 0) coordinates to be on the left bottom side, but images usually left top side.
-//    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(true);
     
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));

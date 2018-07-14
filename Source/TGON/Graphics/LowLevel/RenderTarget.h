@@ -20,8 +20,9 @@ class RenderTarget final :
 public:
     RenderTarget(int32_t width, int32_t height, int32_t multisampleLevel);
     
+/* @section Public destructor */
 public:
-    ~RenderTarget();
+    ~RenderTarget() = default;
     
 /* @section Public method */
 public:
