@@ -5,7 +5,7 @@
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
 #endif
-#include <stb/stb_image.h>
+#include <stb_image.h>
 
 #include "Core/Math/Color.h"
 

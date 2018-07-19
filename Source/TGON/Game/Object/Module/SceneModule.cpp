@@ -17,20 +17,26 @@ namespace tgon
     
     std::shared_ptr<Mesh> m_sharedMesh;
     std::unique_ptr<Sprite> m_txt;
+    std::unique_ptr<Sprite> m_txt2;
     
 SceneModule::SceneModule(std::unique_ptr<Scene> scene, Window& displayTarget, const VideoMode& videoMode) :
     m_renderer(displayTarget, videoMode),
     m_currentScene(std::move(scene))
 {
-    m_txt.reset(new Sprite(GetDesktopDirectory() + "/1.png"));
+    m_txt.reset(new Sprite(GetDesktopDirectory() + "/62960753_p0.jpg"));
+    m_txt2.reset(new Sprite(GetDesktopDirectory() + "/1.png"));
     
     auto extent = Application::GetInstance().GetRootWindow().GetSize();
     
     auto matViewProj = Matrix4x4::LookAtRH({ 0.0f, 0.0f, -5.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
     matViewProj *= Matrix4x4::PerspectiveRH(Pi / 8.0f, (float)extent.width / (float)extent.height, 0.1f, 1000.0f);
-    auto spriteMatWVP  = Matrix4x4::Translate(0.0f, 0.0f, 0.0f) * matViewProj;
     
+    auto spriteMatWVP  = Matrix4x4::Translate(-1.0f, 0.0f, 3.0f) * matViewProj;
     m_txt->SetWorldViewProjectionMatrix(spriteMatWVP);
+    
+    auto spriteMatWVP2 = Matrix4x4::Translate(1.0f, 0.0f, 5.5f) * matViewProj;
+    m_txt2->SetWorldViewProjectionMatrix(spriteMatWVP2);
+    m_txt2->SetBlendColor({1.0f, 1.0f, 0.0f, 1.0f});
 }
     
 SceneModule::SceneModule(Window& displayTarget, const VideoMode& videoMode) :
@@ -60,6 +66,7 @@ void SceneModule::Draw()
     graphics.ClearColorDepthBuffer();
     {
         m_txt->Draw(graphics);
+        m_txt2->Draw(graphics);
 //        m_currentScene->Draw();
 //        m_spriteBatch.FlushBatch(graphics);
     }

@@ -22,6 +22,7 @@ class VertexBuffer final :
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    
     VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
     
 /* @section Public destructor */
@@ -31,10 +32,15 @@ public:
 /* @section Public method */
 public:
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    
     std::size_t GetDataBytes() const noexcept;
+    
     void Use();
+    
     void Unuse();
+    
     bool IsValid() const noexcept;
+    
     bool IsDynamicUsage() const noexcept;
 
 /* @section Private variable */

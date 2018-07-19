@@ -23,6 +23,7 @@ class TextureImpl final :
 {
 /* @section Public constructor */
 public:
+    /* @brief   Initializes texture through specified file path and texture property. */
     TextureImpl(const std::string& filePath, const TextureProperty& textureProperty);
 
 /* @section Public destructor */
@@ -31,6 +32,7 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Changes rendering pipeline state to use this texture. */
     void Use();
     
     /* @brief   Sets the texture filter mode. */
@@ -46,41 +48,39 @@ public:
     TextureWrapMode GetWrapMode() const noexcept;
     
     /* @brief   Checks the image file was loaded successfully. */
-    bool IsValid() const noexcept;
+    using Image::IsValid;
     
     /* @brief   Gets the raw image data. */
-    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
-    
-    /* @brief   Gets the raw image data. */
-    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
+    using Image::GetImageData;
     
     /* @brief   Gets the image width. */
-    int32_t GetWidth() const noexcept;
+    using Image::GetWidth;
     
     /* @brief   Gets the image height. */
-    int32_t GetHeight() const noexcept;
+    using Image::GetHeight;
     
     /* @brief   Gets the count of color channel. */
-    int32_t GetChannels() const noexcept;
-    
-    int32_t GetColorDepth() const noexcept;
+    using Image::GetChannels;
     
     /* @brief   Gets the pixel format of image. */
-    PixelFormat GetPixelFormat() const noexcept;
+    using Image::GetPixelFormat;
     
     /**
      * @brief   Gets the file path saved at loading time.
-     * @warn    This can not be correct information if the file moved somewhere after image loaded.
+     * @warn    This can be incorrect information if the file moved somewhere after image loaded.
      */
-    const std::string& GetFilePath() const noexcept;
+    using Image::GetFilePath;
     
     /* @brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
 
 private:
     void TransferToVideo();
+    
     void UpdateParemeters();
+    
     GLuint CreateTextureHandle() const;
+    
     void CreateMipmap() const;
 
 private:

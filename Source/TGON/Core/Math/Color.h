@@ -132,6 +132,8 @@ struct Color4f
 {
 /* @section Public constructor */
 public:
+    constexpr Color4f() noexcept;
+    
     constexpr Color4f(float r, float g, float b, float a) noexcept;
 
 /* @section Public operator */
@@ -162,6 +164,14 @@ public:
     float r, g, b, a;
 };
 
+constexpr Color4f::Color4f() noexcept :
+    r(0.0f),
+    g(0.0f),
+    b(0.0f),
+    a(0.0f)
+{
+}
+    
 constexpr Color4f::Color4f(float r, float g, float b,float a) noexcept :
     r(r),
     g(g),

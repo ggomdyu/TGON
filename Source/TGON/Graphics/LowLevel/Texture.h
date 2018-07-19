@@ -22,7 +22,10 @@ class Texture final :
 {
 /* @section Public constructor */
 public:
+    /* @brief   Initializes texture through specified file path. */
     Texture(const std::string& filePath);
+    
+    /* @brief   Initializes texture through specified file path and texture property. */
     Texture(const std::string& filePath, const TextureProperty& textureProperty);
     
 /* @section Public destructor */
@@ -31,6 +34,7 @@ public:
     
 /* @section Public method */
 public:
+    /* @brief   Changes rendering pipeline state to use this texture. */
     void Use();
     
     /* @brief   Sets the texture filter mode. */
@@ -49,10 +53,10 @@ public:
     bool IsValid() const noexcept;
     
     /* @brief   Gets the raw image data. */
-    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
+    uint8_t* GetImageData() noexcept;
     
     /* @brief   Gets the raw image data. */
-    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
+    const uint8_t* GetImageData() const noexcept;
     
     /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;

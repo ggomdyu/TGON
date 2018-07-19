@@ -18,8 +18,13 @@ private:
     
 /* @section Public method */
 public:
+    /* @brief   Adds a sprite to sprite batch. */
     void AddSprite(const std::shared_ptr<Sprite>& sprite);
+    
+    /* @brief   Draws all batched sprites. */
     void FlushBatch(Graphics& graphics);
+    
+    void Clear();
     
 /* @section Private variable */
 private:

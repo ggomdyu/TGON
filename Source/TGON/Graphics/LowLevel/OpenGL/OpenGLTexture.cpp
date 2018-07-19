@@ -17,6 +17,8 @@ TextureImpl::TextureImpl(const std::string& filePath, const TextureProperty& tex
     m_wrapMode(static_cast<GLint>(textureProperty.wrapMode))
 {
     assert(m_textureHandle != 0);
+    
+    this->TransferToVideo();
 }
 
 TextureImpl::~TextureImpl()
@@ -26,14 +28,15 @@ TextureImpl::~TextureImpl()
 
 void TextureImpl::Use()
 {
-    this->TransferToVideo();
+    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
+    
     this->UpdateParemeters();
 }
 
 void TextureImpl::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData().get()));
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData()));
 
     if (m_isUseMipmap == true)
     {
@@ -85,51 +88,6 @@ void TextureImpl::CreateMipmap() const
     TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
 }
 
-bool TextureImpl::IsValid() const noexcept
-{
-    return Image::IsValid();
-}
-    
-std::unique_ptr<uint8_t[]>& TextureImpl::GetImageData() noexcept
-{
-    return Image::GetImageData();
-}
-    
-const std::unique_ptr<uint8_t[]>& TextureImpl::GetImageData() const noexcept
-{
-    return Image::GetImageData();
-}
-    
-int32_t TextureImpl::GetWidth() const noexcept
-{
-    return Image::GetWidth();
-}
-    
-int32_t TextureImpl::GetHeight() const noexcept
-{
-    return Image::GetHeight();
-}
-    
-int32_t TextureImpl::GetChannels() const noexcept
-{
-    return Image::GetChannels();
-}
-    
-int32_t TextureImpl::GetColorDepth() const noexcept
-{
-    return Image::GetColorDepth();
-}
-    
-PixelFormat TextureImpl::GetPixelFormat() const noexcept
-{
-    return Image::GetPixelFormat();
-}
-    
-const std::string& TextureImpl::GetFilePath() const noexcept
-{
-    return Image::GetFilePath();
-}
-    
 GLuint TextureImpl::GetTextureHandle() const noexcept
 {
     return m_textureHandle;

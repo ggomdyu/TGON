@@ -1,8 +1,9 @@
 #include "PrecompiledHeader.h"
 
-#include "Mesh.h"
 #include "../LowLevel/VertexBuffer.h"
 #include "../LowLevel/IndexBuffer.h"
+
+#include "Mesh.h"
 
 namespace tgon
 {
@@ -22,7 +23,7 @@ void Mesh::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 {
     m_indexBuffer = indexBuffer;
 }
-
+    
 const std::shared_ptr<VertexBuffer>& Mesh::GetVertexBuffer() const noexcept
 {
     return m_vertexBuffer;

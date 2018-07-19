@@ -12,11 +12,10 @@ namespace tgon
 {
 
 Image::Image() :
+    m_imageData(nullptr),
     m_width(0),
     m_height(0),
-    m_channels(0),
-    m_colorDepth(0),
-    m_pixelFormat(PixelFormat::Unknown)
+    m_channels(0)
 {
 }
 
@@ -26,26 +25,32 @@ Image::Image(const std::string& filePath) :
     this->Initialize(filePath);
 }
 
-Image::Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
+Image::Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
     Image()
 {
     this->Initialize(filePath, srcData, srcDataBytes);
 }
 
 Image::Image(Image&& rhs) :
-    m_imageData(std::move(rhs.m_imageData)),
+    m_imageData(rhs.m_imageData),
     m_width(rhs.m_width),
     m_height(rhs.m_height),
     m_channels(rhs.m_channels),
-    m_colorDepth(rhs.m_colorDepth),
-    m_pixelFormat(rhs.m_pixelFormat),
     m_filePath(std::move(rhs.m_filePath))
 {
+    rhs.m_imageData = nullptr;
     rhs.m_width = 0;
     rhs.m_height = 0;
     rhs.m_channels = 0;
-    rhs.m_colorDepth = 0;
-    rhs.m_pixelFormat = PixelFormat::Unknown;
+}
+    
+Image::~Image()
+{
+    if (m_imageData != nullptr)
+    {
+        stbi_image_free(m_imageData);
+        m_imageData = nullptr;
+    }
 }
 
 Image& Image::operator=(Image&& rhs)
@@ -55,19 +60,16 @@ Image& Image::operator=(Image&& rhs)
         return *this;
     }
     
-    m_imageData = std::move(rhs.m_imageData);
+    m_imageData = rhs.m_imageData;
     m_width = rhs.m_width;
     m_height = rhs.m_height;
     m_channels = rhs.m_channels;
-    m_colorDepth = rhs.m_colorDepth;
-    m_pixelFormat = rhs.m_pixelFormat;
     m_filePath = std::move(rhs.m_filePath);
 
+    rhs.m_imageData = nullptr;
     rhs.m_width = 0;
     rhs.m_height = 0;
     rhs.m_channels = 0;
-    rhs.m_colorDepth = 0;
-    rhs.m_pixelFormat = PixelFormat::Unknown;
 
     return *this;
 }
@@ -77,7 +79,7 @@ uint8_t& Image::operator[](std::size_t index)
     return m_imageData[index];
 }
 
-const uint8_t& Image::operator[](std::size_t index) const
+const uint8_t Image::operator[](std::size_t index) const
 {
     return m_imageData[index];
 }
@@ -86,30 +88,24 @@ bool Image::Initialize(const std::string& filePath)
 {
     m_filePath = filePath;
     
-    stbi_uc* imageData = stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4);
-    if (imageData == nullptr)
+    m_imageData = stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4);
+    if (m_imageData == nullptr)
     {
         return false;
     }
-    
-    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
-    m_imageData.reset(reinterpret_cast<uint8_t*>(imageData));
     
     return true;
 }
 
-bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
+bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes)
 {
     m_filePath = filePath;
 
-    stbi_uc* imageData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4);
-    if (imageData == nullptr)
+    m_imageData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4);
+    if (m_imageData == nullptr)
     {
         return false;
     }
-    
-    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
-    m_imageData.reset(reinterpret_cast<uint8_t*>(imageData));
     
     return true;
 }
@@ -119,12 +115,12 @@ bool Image::IsValid() const noexcept
     return m_imageData != nullptr;
 }
 
-std::unique_ptr<uint8_t[]>& Image::GetImageData() noexcept
+uint8_t* Image::GetImageData() noexcept
 {
     return m_imageData;
 }
 
-const std::unique_ptr<uint8_t[]>& Image::GetImageData() const noexcept
+const uint8_t* Image::GetImageData() const noexcept
 {
     return m_imageData;
 }
@@ -144,14 +140,9 @@ int32_t Image::GetChannels() const noexcept
     return m_channels;
 }
 
-int32_t Image::GetColorDepth() const noexcept
-{
-    return m_colorDepth;
-}
-
 PixelFormat Image::GetPixelFormat() const noexcept
 {
-    return m_pixelFormat;
+    return PixelFormat::R8G8B8A8_Unorm;
 }
 
 const std::string& Image::GetFilePath() const noexcept

@@ -36,7 +36,7 @@ public:
      * @param [in] srcDataBytes The bytes of image data
      * @param [in] imageFormat  The format of image
      */
-    Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, ImageFormat imageFormat);
+    Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes, ImageFormat imageFormat);
     
     /**
      * @brief                   Reads a image data from memory.
@@ -44,10 +44,14 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    Image(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
+    Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     Image(const Image& rhs) = default;
     Image(Image&& rhs);
+    
+/* @section Public destructor */
+public:
+    ~Image();
     
 /* @section Public operator */
 public:
@@ -58,7 +62,7 @@ public:
     uint8_t& operator[](std::size_t index);
 
     /* @brief   Gets the raw pointer of image. */
-    const uint8_t& operator[](std::size_t index) const;
+    const uint8_t operator[](std::size_t index) const;
 
 /* @section Public method */
 public:
@@ -74,16 +78,16 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Initialize(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
     /* @brief   Gets the raw image data. */
-    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
+    uint8_t* GetImageData() noexcept;
 
     /* @brief   Gets the raw image data. */
-    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
+    const uint8_t* GetImageData() const noexcept;
     
     /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
@@ -94,14 +98,12 @@ public:
     /* @brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
 
-    int32_t GetColorDepth() const noexcept;
-
     /* @brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
 
     /**
      * @brief   Gets the file path saved at loading time.
-     * @warn    This can not be correct information if the file moved somewhere after image loaded.
+     * @warn    This can be incorrect information if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
 
@@ -111,17 +113,11 @@ public:
 
 /* @section Private variable */
 private:
-    std::unique_ptr<uint8_t[]> m_imageData;
+    uint8_t* m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
-    int32_t m_colorDepth;
-    PixelFormat m_pixelFormat;
     std::string m_filePath;
-};
-
-class AnimatedImage
-{
 };
 
 } /* namespace tgon */  

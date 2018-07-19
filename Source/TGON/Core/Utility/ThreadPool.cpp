@@ -68,7 +68,7 @@ inline void ThreadPool::ThreadWorker::operator()()
 
         if (m_owner.m_taskQueue.IsEmpty() == false)
         {
-            task = std::move(m_owner.m_taskQueue.Dequeue());
+            task = m_owner.m_taskQueue.Dequeue();
             
             uniqueLock.unlock();
             

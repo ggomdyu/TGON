@@ -13,23 +13,31 @@ namespace tgon
 class VertexBuffer;
 class IndexBuffer;
 
-class Mesh
+class Mesh final
 {
 /* @section Public constructor */
 public:
-    explicit Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
-
+    /* @brief   Initializes the mesh with vertex buffer and index buffer. */
+    Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
+    
 /* @section Public method */
 public:
+    /* @brief   Sets the vertex buffer. */
     void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
+    
+    /* @brief   Sets the index buffer. */
     void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
     
+    /* @brief   Gets the vertex buffer. */
     const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const noexcept;
+    
+    /* @brief   Gets the index buffer. */
     const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
-
+    
 /* @section Protected variable */
 protected:
     std::shared_ptr<VertexBuffer> m_vertexBuffer;
+    
     std::shared_ptr<IndexBuffer> m_indexBuffer;
 };
 

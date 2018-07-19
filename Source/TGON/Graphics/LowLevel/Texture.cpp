@@ -53,12 +53,12 @@ bool Texture::IsValid() const noexcept
     return m_textureImpl->IsValid();
 }
     
-std::unique_ptr<uint8_t[]>& Texture::GetImageData() noexcept
+uint8_t* Texture::GetImageData() noexcept
 {
     return m_textureImpl->GetImageData();
 }
     
-const std::unique_ptr<uint8_t[]>& Texture::GetImageData() const noexcept
+const uint8_t* Texture::GetImageData() const noexcept
 {
     return m_textureImpl->GetImageData();
 }
@@ -76,11 +76,6 @@ int32_t Texture::GetHeight() const noexcept
 int32_t Texture::GetChannels() const noexcept
 {
     return m_textureImpl->GetChannels();
-}
-    
-int32_t Texture::GetColorDepth() const noexcept
-{
-    return m_textureImpl->GetColorDepth();
 }
     
 PixelFormat Texture::GetPixelFormat() const noexcept

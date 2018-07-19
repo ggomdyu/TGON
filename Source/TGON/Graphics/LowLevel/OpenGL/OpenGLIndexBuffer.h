@@ -25,10 +25,15 @@ public:
 /* @section Public method */
 public:
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
+    
     std::size_t GetDataBytes() const noexcept;
+    
     void Use();
+    
     void Unuse();
+    
     bool IsValid() const noexcept;
+    
     bool IsDynamicUsage() const noexcept;
 
 /* @section Private method */

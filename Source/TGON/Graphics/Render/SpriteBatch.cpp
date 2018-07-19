@@ -39,25 +39,25 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
     auto& batchedSprites = m_batchedSpritesLayer.front();
 
     // The front element is guaranted to exist because the 'batchedSprites' has one sprite at least.
-    auto mesh = batchedSprites.front()->GetMesh();
-    {
-        mesh->GetVertexBuffer()->Use();
-        mesh->GetIndexBuffer()->Use();
-    }
-    
-    for (auto& batchedSprites : m_batchedSpritesLayer)
-    {
-        TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprites.front()->GetMaterial().get());
-        material->Use();
-
-        for (auto& batchedSprite : batchedSprites)
-        {
-            TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprite->GetMaterial().get());
-            material->GetShader()->SetParameterMatrix4fv("g_uMVP", batchedSprite->GetWorldViewProjectionMatrix()[0]);
-
-            graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
-        }
-    }
+//    auto mesh = batchedSprites.front()->GetMesh();
+//    {
+//        mesh->GetVertexBuffer()->Use();
+//        mesh->GetIndexBuffer()->Use();
+//    }
+//
+//    for (auto& batchedSprites : m_batchedSpritesLayer)
+//    {
+//        TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprites.front()->GetMaterial().get());
+//        material->Use();
+//
+//        for (auto& batchedSprite : batchedSprites)
+//        {
+//            TextureMaterial* material = static_cast<TextureMaterial*>(batchedSprite->GetMaterial().get());
+//            material->SetWVP()[0]);
+//
+//            graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
+//        }
+//    }
     
     m_batchedSpritesLayer.clear();
 }

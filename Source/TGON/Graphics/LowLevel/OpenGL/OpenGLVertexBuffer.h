@@ -28,10 +28,15 @@ public:
 /* @section Public method */
 public:
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    
     std::size_t GetDataBytes() const noexcept;
+    
     void Use();
+    
     void Unuse();
+    
     bool IsValid() const noexcept;
+    
     bool IsDynamicUsage() const noexcept;
 
 /* @section Private method */

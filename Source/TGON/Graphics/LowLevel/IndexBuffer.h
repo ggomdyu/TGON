@@ -22,6 +22,7 @@ class IndexBuffer final :
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     IndexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
+    
     IndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
 /* @section Public destructor */
@@ -32,11 +33,17 @@ public:
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     void SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
+    
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
+    
     std::size_t GetDataBytes() const noexcept;
+    
     void Use();
+    
     void Unuse();
+    
     bool IsValid() const noexcept;
+    
     bool IsDynamicUsage() const noexcept;
 
 /* @section Private variable */
