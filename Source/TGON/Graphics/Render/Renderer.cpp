@@ -16,21 +16,21 @@ void Renderer::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        m_spriteBatch.FlushBatch(m_graphics);
+        m_batchGroup.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
-    
-SpriteBatch& Renderer::GetSpriteBatch() noexcept
+
+BatchGroup& Renderer::GetBatchGroup() noexcept
 {
-    return m_spriteBatch;
-}
-    
-const SpriteBatch& Renderer::GetSpriteBatch() const noexcept
-{
-    return m_spriteBatch;
+    return m_batchGroup;
 }
 
+const BatchGroup& Renderer::GetBatchGroup() const noexcept
+{
+    return m_batchGroup;
+}
+    
 Graphics& Renderer::GetGraphics() noexcept
 {
     return m_graphics;

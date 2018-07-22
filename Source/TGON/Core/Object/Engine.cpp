@@ -10,42 +10,41 @@
 
 namespace tgon
 {
+    
+extern std::unique_ptr<Engine> MakeEngine();
 
 Engine::Engine() :
-    m_timeModule(std::make_shared<TimeModule>())
+    m_timeModule(std::make_unique<TimeModule>())
 {
 }
 
 Engine::~Engine() = default;
 
-Engine& Engine::GetInstance() noexcept
+Engine* Engine::GetInstance()
 {
-    return Application::GetInstance().GetEngine();
+    static decltype(auto) engine = MakeEngine();
+    return engine.get();
 }
     
-void Engine::AddModule(const std::shared_ptr<IModule>& module)
+void Engine::AddModule(std::unique_ptr<IModule> module)
 {
-    auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
-    };
+    });
 
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), predicate);
-
-    m_modules.emplace(iter, module);
+    m_modules.emplace(iter, std::move(module));
 }
 
-std::shared_ptr<IModule> Engine::GetModule(size_t moduleId)
+IModule* Engine::GetModule(size_t moduleId)
 {
-    auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
-    };
-
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, predicate);
+    });
     if (iter != m_modules.end())
     {
-        return *iter;
+        return (*iter).get();
     }
     else
     {
@@ -55,12 +54,10 @@ std::shared_ptr<IModule> Engine::GetModule(size_t moduleId)
 
 bool Engine::RemoveModule(size_t moduleId)
 {
-    auto predicate = [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
-    };
-
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, predicate);
+    });
     if (iter != m_modules.end())
     {
         m_modules.erase(iter);

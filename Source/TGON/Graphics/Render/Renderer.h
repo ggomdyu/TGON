@@ -10,6 +10,8 @@
 #include "Core/Object/DelegateChain.h"
 
 #include "../LowLevel/Graphics.h"
+
+#include "Batch.h"
 #include "SpriteBatch.h"
 
 namespace tgon
@@ -29,9 +31,9 @@ public:
 public:
     void Draw();
     
-    SpriteBatch& GetSpriteBatch() noexcept;
+    BatchGroup& GetBatchGroup() noexcept;
     
-    const SpriteBatch& GetSpriteBatch() const noexcept;
+    const BatchGroup& GetBatchGroup() const noexcept;
     
     Graphics& GetGraphics() noexcept;
     
@@ -46,7 +48,8 @@ private:
     
 /* @section Private variable */
 public:
-    SpriteBatch m_spriteBatch;
+    BatchGroup m_batchGroup;
+    
     Graphics m_graphics;
 };
 

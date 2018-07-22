@@ -7,8 +7,17 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/Delegate.h"
-#include "Core/Object/Engine.h"
+#include "Core/Object/DelegateChain.h"
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsApplication.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOS/MacOSApplication.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidApplication.h"
+#elif TGON_PLATFORM_IOS
+#   import "IOS/IOSApplication.h"
+#endif
 
 namespace tgon
 {
@@ -17,25 +26,22 @@ class ApplicationImpl;
 class Window;
 enum class MessageBoxIcon;
 
-class TGON_API Application :
+class TGON_API Application final :
     private boost::noncopyable
 {
-/* @section Public constructor */
-public:
-    explicit Application(std::unique_ptr<Engine> engine);
+/* @section Private constructor */
+private:
+    explicit Application();
     
-/* @section Public destructor */
-public:
-    virtual ~Application();
-
 /* @section Public method */
 public:
-    /* @brief   Returns the global instance of this class. */
-    static Application& GetInstance() noexcept;
+    /* @brief   Gets the global instance of this class. */
+    static Application* GetInstance();
 
     /* @brief   Loops the message queue and handle the message. */
-    void MessageLoop();
-    
+    template <typename _FunctionType>
+    void MessageLoop(const _FunctionType& onUpdate);
+
     /* @brief   Terminates the program forcibly. */
     void Terminate();
     
@@ -72,33 +78,23 @@ public:
     
     /* @brief   Gets the root window. */
     const Window& GetRootWindow() const noexcept;
-    
-    /* @brief   Gets the engine. */
-    const Engine& GetEngine() const noexcept;
-
-    /* @brief   Gets the engine. */
-    Engine& GetEngine() noexcept;
-
-    const ApplicationImpl& GetImpl() const noexcept;
-
-    ApplicationImpl& GetImpl() noexcept;
-
-/* @section Private method */
-private:
-    /* @brief   Updates the application. */
-    void Update();
 
 /* @section Public event handler */
 public:
-    void OnDidLaunch();
-    void OnWillTerminate();
+    DelegateChain<void()> OnDidLaunch;
+    DelegateChain<void()> OnWillTerminate;
     
 /* @section Protected variable */
 protected:
-    std::unique_ptr<ApplicationImpl> m_applicationImpl;
-
-    std::unique_ptr<Engine> m_engine;
+    ApplicationImpl m_applicationImpl;
+    
     std::unique_ptr<Window> m_rootWindow;
 };
+
+template <typename _FunctionType>
+void Application::MessageLoop(const _FunctionType& onUpdate)
+{
+    m_applicationImpl.MessageLoop(onUpdate);
+}
 
 } /* namespace tgon */

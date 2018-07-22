@@ -33,8 +33,8 @@ class TGON_API Engine :
 public:
     TGON_RUNTIME_OBJECT(Engine);
 
-/* @section Public constructor */
-public:
+/* @section Private constructor */
+private:
     Engine();
 
 /* @section Public destructor */
@@ -44,7 +44,7 @@ public:
 /* @section Public method */
 public:
     /* @brief   Returns the global instance of this class. */
-    static Engine& GetInstance() noexcept;
+    static Engine* GetInstance();
     
     /* @brief               Updates the Engine. */
     virtual void Update();
@@ -67,31 +67,26 @@ public:
      * @brief               Returns a module that managed by Application.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<const _ModuleType> GetModule() const noexcept;
+    const _ModuleType* GetModule() const noexcept;
 
     /* @brief               Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<_ModuleType> GetModule() noexcept;
-    
-/* @section Public event handler */
-public:
-    virtual void OnDidLaunch() {}
-    virtual void OnWillTerminate() {}
-    
+    _ModuleType* GetModule() noexcept;
+
 /* @section Private method */
 private:
     /**
      * @brief               Inserts a module to manage.
      * @param [in] module   The module what you want to insert.
      */
-    void AddModule(const std::shared_ptr<IModule>& module);
+    void AddModule(std::unique_ptr<IModule> module);
     
     /**
      * @brief               Returns a module that managed by Application.
      * @param [in] moduleId The unique id of Module what you want to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
-    std::shared_ptr<IModule> GetModule(size_t moduleId);
+    IModule* GetModule(size_t moduleId);
 
     /**
      * @brief               Returns a module that managed by Application.
@@ -102,9 +97,9 @@ private:
 
 /* @section Private variable */
 private:
-    std::shared_ptr<TimeModule> m_timeModule;
+    std::unique_ptr<TimeModule> m_timeModule;
 
-    std::vector<std::shared_ptr<IModule>> m_modules;
+    std::vector<std::unique_ptr<IModule>> m_modules;
 };
 
 template <typename _ModuleType, typename ..._ArgTypes>
@@ -119,27 +114,27 @@ inline void Engine::AddModule<TimeModule>()
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline std::shared_ptr<const _ModuleType> Engine::GetModule() const noexcept
+inline const _ModuleType* Engine::GetModule() const noexcept
 {
     return const_cast<Engine*>(this)->GetModule<_ModuleType>();
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline std::shared_ptr<_ModuleType> Engine::GetModule() noexcept
+inline _ModuleType* Engine::GetModule() noexcept
 {
-    return std::static_pointer_cast<_ModuleType>(this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
+    return this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
 }
 
 template <>
-inline std::shared_ptr<const TimeModule> Engine::GetModule<TimeModule>() const noexcept
+inline const TimeModule* Engine::GetModule<TimeModule>() const noexcept
 {
-    return m_timeModule;
+    return m_timeModule.get();
 }
 
 template <>
-inline std::shared_ptr<TimeModule> Engine::GetModule<TimeModule>() noexcept
+inline TimeModule* Engine::GetModule<TimeModule>() noexcept
 {
-    return m_timeModule;
+    return m_timeModule.get();
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>

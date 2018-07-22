@@ -5,7 +5,7 @@
 #include "../LowLevel/VertexBuffer.h"
 #include "../LowLevel/IndexBuffer.h"
 
-#include "Material/Material.h"
+#include "Material.h"
 #include "Mesh.h"
 #include "Batch.h"
 
@@ -17,9 +17,7 @@ Batch::Batch(const std::shared_ptr<Material>& material) :
 {
 }
 
-Batch::Batch(const MeshRenderer& meshRenderer) :
-    m_material(meshRenderer.GetMaterial()),
-    m_meshRenderers{meshRenderer}
+Batch::Batch(const MeshRenderer& meshRenderer)
 {
 }
     
@@ -59,7 +57,7 @@ void BatchGroup::AddMeshRenderer(const MeshRenderer& meshRenderer)
     {
         if (batch.CanBatch(*meshRenderer.GetMaterial()) == true)
         {
-            batch.AddMesh(meshRenderer.GetMesh());
+            batch.AddMeshRenderer(meshRenderer);
             return;
         }
     }

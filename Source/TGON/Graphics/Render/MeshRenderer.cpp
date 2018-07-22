@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Material/Material.h"
+#include "Material.h"
 #include "Mesh.h"
 #include "MeshRenderer.h"
 

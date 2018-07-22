@@ -1,44 +1,47 @@
 #import "PrecompiledHeader.h"
 
 #import "Core/Platform/Application.h"
+#import "Core/Object/Engine.h"
 
 #import "MacOSAppDelegate.h"
-
-namespace
-{
-    
-std::shared_ptr<tgon::Application> g_application;
-    
-} /* namespace */
 
 namespace tgon
 {
     
 extern std::unique_ptr<Engine> MakeEngine();
 
-Application& Application::GetInstance() noexcept
-{
-    return *g_application;
-}
-
 } /* namespace tgon */
 
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    g_application = std::make_unique<tgon::Application>(tgon::MakeEngine());
-    g_application->OnDidLaunch();
+    using namespace tgon;
+    
+    // Initialize singleton objects.
+    decltype(auto) application = Application::GetInstance();
+    decltype(auto) engine = Engine::GetInstance();
+    
+    application->OnDidLaunch();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
+    using namespace tgon;
+    
+    decltype(auto) engine = Engine::GetInstance();
+    
     // If launch has been completed, then start the message loop.
-    g_application->MessageLoop();
+    Application::GetInstance()->MessageLoop([engine]()
+    {
+        engine->Update();
+    });
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    g_application->OnWillTerminate();
+    using namespace tgon;
+    
+    Application::GetInstance()->OnWillTerminate();
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender

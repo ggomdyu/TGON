@@ -4,41 +4,26 @@
 
 #include "Application.h"
 #include "ApplicationType.h"
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsApplication.h"
-#elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSApplication.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidApplication.h"
-#elif TGON_PLATFORM_IOS
-#   import "IOS/IOSApplication.h"
-#endif
 #include "Window.h"
 #include "WindowType.h"
 
 namespace tgon
 {
 
-Application::Application(std::unique_ptr<Engine> engine) :
-    m_applicationImpl(std::make_unique<ApplicationImpl>()),
-    m_engine(std::move(engine)),
+Application::Application() :
     m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {
 }
-
-Application::~Application() = default;
-
-void Application::MessageLoop()
+    
+Application* Application::GetInstance()
 {
-    m_applicationImpl->MessageLoop([&]()
-    {
-        this->Update();
-    });
+    static Application ret;
+    return &ret;
 }
 
 void Application::Terminate()
 {
-    m_applicationImpl->Terminate();
+    m_applicationImpl.Terminate();
 }
 
 void Application::ShowMessageBox(const char* message) const
@@ -58,7 +43,7 @@ void Application::ShowMessageBox(const char* title, const char* message) const
 
 void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
 {
-    m_applicationImpl->ShowMessageBox(title, message, messageBoxIcon);
+    m_applicationImpl.ShowMessageBox(title, message, messageBoxIcon);
 }
    
 Window& Application::GetRootWindow() noexcept
@@ -69,41 +54,6 @@ Window& Application::GetRootWindow() noexcept
 const Window& Application::GetRootWindow() const noexcept
 {
     return *m_rootWindow;
-}
-
-const Engine& Application::GetEngine() const noexcept
-{
-    return *m_engine;
-}
-
-Engine& Application::GetEngine() noexcept
-{
-    return *m_engine;
-}
-
-const ApplicationImpl& Application::GetImpl() const noexcept
-{
-    return *m_applicationImpl;
-}
-
-ApplicationImpl& Application::GetImpl() noexcept
-{
-    return *m_applicationImpl;
-}
-    
-void Application::Update()
-{
-    m_engine->Update();
-}
-
-void Application::OnDidLaunch()
-{
-    m_engine->OnDidLaunch();
-}
-
-void Application::OnWillTerminate()
-{
-    m_engine->OnWillTerminate();
 }
 
 } /* namespace tgon */

@@ -156,12 +156,12 @@
 		FDDFF16620CAD05300F95359 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDDFF16120CAD05200F95359 /* Component.h */; };
 		FDDFF17120CAD7AD00F95359 /* StringViewHash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDDFF17020CAD7AC00F95359 /* StringViewHash.h */; };
 		FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEA237820AFF586000885AC /* PrecompiledHeader.h */; };
-		FDEB408E20FBAF6D000A3B98 /* TextureMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEB408C20FBAF6D000A3B98 /* TextureMaterial.h */; };
-		FDEB408F20FBAF6D000A3B98 /* TextureMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEB408D20FBAF6D000A3B98 /* TextureMaterial.cpp */; };
 		FDEB409220FF9DB4000A3B98 /* Batch.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEB409020FF9DB3000A3B98 /* Batch.h */; };
 		FDEB409320FF9DB4000A3B98 /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEB409120FF9DB4000A3B98 /* Batch.cpp */; };
 		FDEB409620FFB40E000A3B98 /* MeshRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEB409420FFB40E000A3B98 /* MeshRenderer.h */; };
 		FDEB409720FFB40E000A3B98 /* MeshRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEB409520FFB40E000A3B98 /* MeshRenderer.cpp */; };
+		FDEB409A2100FC5A000A3B98 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDEB40982100FC5A000A3B98 /* Material.cpp */; };
+		FDEB409B2100FC5A000A3B98 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEB40992100FC5A000A3B98 /* Material.h */; };
 		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -368,14 +368,12 @@
 		FDEA237A20AFF823000885AC /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../ThirdParty/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
 		FDEA237B20AFF823000885AC /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../ThirdParty/Debug/x86_64/libGLEW.a; sourceTree = "<group>"; };
 		FDEA237C20AFF823000885AC /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../ThirdParty/Debug/x86_64/libz.a; sourceTree = "<group>"; };
-		FDEB408A20FBADC3000A3B98 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
-		FDEB408B20FBADC3000A3B98 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
-		FDEB408C20FBAF6D000A3B98 /* TextureMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureMaterial.h; sourceTree = "<group>"; };
-		FDEB408D20FBAF6D000A3B98 /* TextureMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureMaterial.cpp; sourceTree = "<group>"; };
 		FDEB409020FF9DB3000A3B98 /* Batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Batch.h; path = ../../Source/TGON/Graphics/Render/Batch.h; sourceTree = "<group>"; };
 		FDEB409120FF9DB4000A3B98 /* Batch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Batch.cpp; path = ../../Source/TGON/Graphics/Render/Batch.cpp; sourceTree = "<group>"; };
 		FDEB409420FFB40E000A3B98 /* MeshRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshRenderer.h; path = ../../Source/TGON/Graphics/Render/MeshRenderer.h; sourceTree = "<group>"; };
 		FDEB409520FFB40E000A3B98 /* MeshRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshRenderer.cpp; path = ../../Source/TGON/Graphics/Render/MeshRenderer.cpp; sourceTree = "<group>"; };
+		FDEB40982100FC5A000A3B98 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = ../../Source/TGON/Graphics/Render/Material.cpp; sourceTree = "<group>"; };
+		FDEB40992100FC5A000A3B98 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../../Source/TGON/Graphics/Render/Material.h; sourceTree = "<group>"; };
 		FDFECB821F7585B4007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDFECB841F75FBAF007AC1AB /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -711,7 +709,6 @@
 		FD89A1C61F9BC88900817B92 /* Render */ = {
 			isa = PBXGroup;
 			children = (
-				FDEB408920FBADC3000A3B98 /* Material */,
 				FDD0702A20D0D1A400CB02A7 /* Camera.cpp */,
 				FDD0702B20D0D1A500CB02A7 /* Camera.h */,
 				FDD3969220D0B3B50095F1F8 /* CameraType.h */,
@@ -722,6 +719,8 @@
 				FD39DB1E20C8623800C07251 /* SpriteBatch.cpp */,
 				FD39DB1F20C8623800C07251 /* SpriteBatch.h */,
 				FD8E696520AFA8D000791E10 /* FVF.h */,
+				FDEB40982100FC5A000A3B98 /* Material.cpp */,
+				FDEB40992100FC5A000A3B98 /* Material.h */,
 				FD8E695E20AFA8CC00791E10 /* Mesh.cpp */,
 				FD8E695F20AFA8CD00791E10 /* Mesh.h */,
 				FDEB409520FFB40E000A3B98 /* MeshRenderer.cpp */,
@@ -908,18 +907,6 @@
 			name = File;
 			sourceTree = "<group>";
 		};
-		FDEB408920FBADC3000A3B98 /* Material */ = {
-			isa = PBXGroup;
-			children = (
-				FDEB408A20FBADC3000A3B98 /* Material.h */,
-				FDEB408B20FBADC3000A3B98 /* Material.cpp */,
-				FDEB408D20FBAF6D000A3B98 /* TextureMaterial.cpp */,
-				FDEB408C20FBAF6D000A3B98 /* TextureMaterial.h */,
-			);
-			name = Material;
-			path = ../../Source/TGON/Graphics/Render/Material;
-			sourceTree = "<group>";
-		};
 		FDFECB671F6ED7A1007AC1AB /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,7 +946,6 @@
 				FDD3968320D025B70095F1F8 /* MouseType.h in Headers */,
 				FDD3967A20D025B70095F1F8 /* Mouse.h in Headers */,
 				FDBCFA4420E7F96100CBDF0B /* TextureType.h in Headers */,
-				FDEB408E20FBAF6D000A3B98 /* TextureMaterial.h in Headers */,
 				FDEB409620FFB40E000A3B98 /* MeshRenderer.h in Headers */,
 				FD13BB1820E8677D001A1E15 /* DelegateChain.h in Headers */,
 				FDB75AE720D59ABD00CC36C4 /* Transform.h in Headers */,
@@ -968,6 +954,7 @@
 				FDD3967D20D025B70095F1F8 /* InputManager.h in Headers */,
 				FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */,
 				FD39DB2C20C866D800C07251 /* Sprite.h in Headers */,
+				FDEB409B2100FC5A000A3B98 /* Material.h in Headers */,
 				FDDFF17120CAD7AD00F95359 /* StringViewHash.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
 				FDBCFA3F20E7F96100CBDF0B /* VertexBuffer.h in Headers */,
@@ -1087,6 +1074,7 @@
 				FD5337F520E4018500515DA4 /* MacOSGamepad.cpp in Sources */,
 				FD5337F620E4018500515DA4 /* MacOSInputManager.cpp in Sources */,
 				FDBCFA3E20E7F96100CBDF0B /* Texture.cpp in Sources */,
+				FDEB409A2100FC5A000A3B98 /* Material.cpp in Sources */,
 				FDBCFA4720E7F96100CBDF0B /* VertexBuffer.cpp in Sources */,
 				FD5337F720E4018500515DA4 /* MacOSKeyboard.cpp in Sources */,
 				FDBCFA4520E7F96100CBDF0B /* IndexBuffer.cpp in Sources */,
@@ -1098,7 +1086,6 @@
 				FD5337F920E4018500515DA4 /* Gamepad.cpp in Sources */,
 				FD5337FA20E4018500515DA4 /* InputManager.cpp in Sources */,
 				FD5337FB20E4018500515DA4 /* Keyboard.cpp in Sources */,
-				FDEB408F20FBAF6D000A3B98 /* TextureMaterial.cpp in Sources */,
 				FD5337FC20E4018500515DA4 /* Mouse.cpp in Sources */,
 				FD5337FD20E4018500515DA4 /* Vector3.cpp in Sources */,
 				FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */,

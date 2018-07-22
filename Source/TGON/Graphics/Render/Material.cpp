@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-Material::Material(std::shared_ptr<Shader> shader) :
+Material::Material(const std::shared_ptr<Shader>& shader) :
     m_shader(shader)
 {
 }
@@ -44,11 +44,31 @@ bool ColorMaterial::CanBatch(const Material& rhs) const
     }
 }
 
-std::shared_ptr<Shader> Material::GetShader() noexcept
+void Material::SetWVP(const Matrix4x4& matWVP)
+{
+    m_matWVP = matWVP;
+}
+
+Matrix4x4& Material::GetWVP() noexcept
+{
+    return m_matWVP;
+}
+
+const Matrix4x4& Material::GetWVP() const noexcept
+{
+    return m_matWVP;
+}
+    
+std::shared_ptr<Shader>& Material::GetShader() noexcept
 {
     return m_shader;
 }
 
+const std::shared_ptr<Shader>& Material::GetShader() const noexcept
+{
+    return m_shader;
+}
+    
 void ColorMaterial::SetColor(const Color4f& color)
 {
     m_color = color;
@@ -64,14 +84,14 @@ TextureMaterial::TextureMaterial() :
 {
 }
 
-TextureMaterial::TextureMaterial(std::shared_ptr<Texture> texture, const Color4f& blendColor) :
+TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
     Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
     m_texture(texture),
     m_blendColor(blendColor)
 {
 }
 
-TextureMaterial::TextureMaterial(std::shared_ptr<Texture> texture) :
+TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture) :
     Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
     m_texture(texture),
     m_blendColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
@@ -104,17 +124,17 @@ bool TextureMaterial::CanBatch(const Material& rhs) const
     }
 }
 
-void TextureMaterial::SetTexture(std::shared_ptr<Texture> texture) noexcept
+void TextureMaterial::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
 }
 
-std::shared_ptr<Texture> TextureMaterial::GetTexture() noexcept
+std::shared_ptr<Texture>& TextureMaterial::GetTexture() noexcept
 {
     return m_texture;
 }
     
-std::shared_ptr<const Texture> TextureMaterial::GetTexture() const noexcept
+const std::shared_ptr<Texture>& TextureMaterial::GetTexture() const noexcept
 {
     return m_texture;
 }
@@ -142,17 +162,22 @@ void MaskTextureMaterial::Unuse()
 {
 }
 
-bool MaskTextureMaterial::CanBatch(const Material & rhs) const
+bool MaskTextureMaterial::CanBatch(const Material& rhs) const
 {
     return false;
 }
 
-void MaskTextureMaterial::SetMaskTexture(std::shared_ptr<Texture> maskTexture)
+void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTexture)
 {
     m_maskTexture = maskTexture;
 }
 
-std::shared_ptr<const Texture> MaskTextureMaterial::GetMaskTexture() const
+std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() noexcept
+{
+    return m_maskTexture;
+}
+    
+const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const noexcept
 {
     return m_maskTexture;
 }

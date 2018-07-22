@@ -5,8 +5,9 @@
  */
 
 #pragma once
-#include "Core/Math/Color.h"
 #include "Core/Object/CoreObject.h"
+#include "Core/Math/Color.h"
+#include "Core/Math/Matrix4x4.h"
 #include "Graphics/LowLevel/Texture.h"
 #include "Graphics/LowLevel/Shader.h"
 
@@ -21,7 +22,7 @@ public:
 
 /* @section Public constructor */
 public:
-    explicit Material(std::shared_ptr<Shader> shader);
+    explicit Material(const std::shared_ptr<Shader>& shader);
 
 /* @section Public destructor */
 public:
@@ -30,12 +31,25 @@ public:
 /* @section Public method */
 public:
     virtual void Use() = 0;
+    
     virtual void Unuse() = 0;
+    
     virtual bool CanBatch(const Material& rhs) const = 0;
-    std::shared_ptr<Shader> GetShader() noexcept;
+    
+    void SetWVP(const Matrix4x4& matWVP);
+    
+    Matrix4x4& GetWVP() noexcept;
+    
+    const Matrix4x4& GetWVP() const noexcept;
+    
+    std::shared_ptr<Shader>& GetShader() noexcept;
+    
+    const std::shared_ptr<Shader>& GetShader() const noexcept;
 
 /* @section Protected variable */
 protected:
+    Matrix4x4 m_matWVP;
+    
     std::shared_ptr<Shader> m_shader;
 };
 
@@ -56,9 +70,13 @@ public:
 /* @section Public method */
 public:
     virtual void Use() override;
+    
     virtual void Unuse() override;
+    
     virtual bool CanBatch(const Material& rhs) const override;
+    
     void SetColor(const Color4f& color);
+    
     const Color4f& GetColor() const noexcept;
 
 /* @section Private variable */
@@ -75,8 +93,10 @@ public:
 /* @section Public constructor */
 public:
     TextureMaterial();
-    TextureMaterial(std::shared_ptr<Texture> texture, const Color4f& blendColor);
-    explicit TextureMaterial(std::shared_ptr<Texture> texture);
+    
+    TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
+    
+    explicit TextureMaterial(const std::shared_ptr<Texture>& texture);
 
 /* @section Public destructor */
 public:
@@ -85,19 +105,27 @@ public:
 /* @section Public method */
 public:
     virtual void Use() override;
+    
     virtual void Unuse() override;
+    
     virtual bool CanBatch(const Material& rhs) const override;
     
-    void SetTexture(std::shared_ptr<Texture> texture) noexcept;
+    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+    
     void SetBlendColor(const Color4f& blendColor) noexcept;
-    std::shared_ptr<Texture> GetTexture() noexcept;
-    std::shared_ptr<const Texture> GetTexture() const noexcept;
+    
+    std::shared_ptr<Texture>& GetTexture() noexcept;
+    
+    const std::shared_ptr<Texture>& GetTexture() const noexcept;
+    
     Color4f& GetBlendColor() noexcept;
+    
     const Color4f& GetBlendColor() const noexcept;
 
 /* @section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
+    
     Color4f m_blendColor;
 };
 
@@ -139,11 +167,18 @@ public:
 /* @section Public method */
 public:
     virtual void Use() override;
+    
     virtual void Unuse() override;
+    
     virtual bool CanBatch(const Material& rhs) const override;
-    void SetMaskTexture(std::shared_ptr<Texture> maskTexture);
-    std::shared_ptr<const Texture> GetMaskTexture() const;
+    
+    void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
+    
+    std::shared_ptr<Texture>& GetMaskTexture() noexcept;
+    
+    const std::shared_ptr<Texture>& GetMaskTexture() const noexcept;
 
+/* @section Private variable */
 private:
     std::shared_ptr<Texture> m_maskTexture;
 };
