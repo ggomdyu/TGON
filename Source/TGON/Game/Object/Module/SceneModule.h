@@ -62,7 +62,6 @@ private:
 /* @section Private variable */
 private:
     Renderer m_renderer;
-    SpriteBatch m_spriteBatch;
     
     std::vector<Camera> m_cameras;
     

@@ -16,35 +16,26 @@
 // Use common control v6.0
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-namespace
-{
-
-std::unique_ptr<tgon::Application> g_application;
-
-} /* namespace */    
-
-namespace tgon
-{
-
-extern std::unique_ptr<Engine> MakeEngine();
-
-Application& Application::GetInstance() noexcept
-{
-    return *g_application;
-}
-
-} /* namespace tgon */
-
 int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR commandLine, int commandShow)
 {
 #ifndef NDEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    g_application = std::make_unique<tgon::Application>(tgon::MakeEngine());
-    g_application->OnDidLaunch();
+    using namespace tgon;
 
-    g_application->MessageLoop();
-    g_application->OnWillTerminate();
+    // Initialize singleton objects.
+    decltype(auto) application = Application::GetInstance();
+    decltype(auto) engine = Engine::GetInstance();
+
+    application->OnDidLaunch();
+    {
+        application->MessageLoop([engine]()
+        {
+            engine->Update();
+        });
+    }
+    application->OnWillTerminate();
+
     return 0;
 }

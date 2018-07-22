@@ -33,8 +33,8 @@ class TGON_API Engine :
 public:
     TGON_RUNTIME_OBJECT(Engine);
 
-/* @section Private constructor */
-private:
+/* @section Protected constructor */
+protected:
     Engine();
 
 /* @section Public destructor */
@@ -105,7 +105,7 @@ private:
 template <typename _ModuleType, typename ..._ArgTypes>
 inline void Engine::AddModule(_ArgTypes&&... args)
 {
-    this->AddModule(std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...));
+    this->AddModule(std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...));
 }
 
 template <>

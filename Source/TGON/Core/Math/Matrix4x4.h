@@ -335,50 +335,54 @@ constexpr const Matrix4x4 Matrix4x4::Zero()
 
 inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll)
 {
-    auto ret = Matrix4x4::RotateZ(roll);
-    ret *= Matrix4x4::RotateX(pitch);
-    ret *= Matrix4x4::RotateY(yaw);
+    float cosA = cosf(yaw);
+    float sinA = sinf(yaw);
 
-    return ret;
+    return Matrix4x4(
+        0,      0,      0,      0,
+        0,      0,      0,      0,
+        0,      0,      0,      0,
+        0,      0,      0,      1
+    );
 }
 
 inline const Matrix4x4 Matrix4x4::RotateX(float radian)
 {
-    float cosValue = cosf(radian);
-    float sinValue = sinf(radian);
+    float cosA = cosf(radian);
+    float sinA = sinf(radian);
 
     return Matrix4x4(
-        1.0f,   0.0f,       0.0f,       0.0f,
-        0.0f,   cosValue,   sinValue,   0.0f,
-        0.0f,   -sinValue,  cosValue,   0.0f,
-        0.0f,   0.0f,       0.0f,       1.0f
+        1.0f,   0.0f,   0.0f,   0.0f,
+        0.0f,   cosA,   sinA,   0.0f,
+        0.0f,   -sinA,  cosA,   0.0f,
+        0.0f,   0.0f,   0.0f,   1.0f
     );
 }
 
 inline const Matrix4x4 Matrix4x4::RotateY(float radian)
 {
-    const float cosValue = cosf(radian);
-    const float sinValue = sinf(radian);
+    const float cosA = cosf(radian);
+    const float sinA = sinf(radian);
 
     return Matrix4x4(
-        cosValue,   0.0f,    -sinValue, 0.0f,
-        0.0f,       1.0f,    0.0f,      0.0f,
-        sinValue,   0.0f,    cosValue,  0.0f,
-        0.0f,       0.0f,    0.0f,      1.0f
+        cosA,   0.0f,   -sinA,  0.0f,
+        0.0f,   1.0f,   0.0f,   0.0f,
+        sinA,   0.0f,   cosA,   0.0f,
+        0.0f,   0.0f,   0.0f,   1.0f
     );
 }
 
 inline const Matrix4x4 Matrix4x4::RotateZ(float radian)
 {
-    const float cosValue = cosf(radian);
-    const float sinValue = sinf(radian);
+    const float cosA = cosf(radian);
+    const float sinA = sinf(radian);
 
     return
     {
-        cosValue,   sinValue,   0.0f,   0.0f,
-        -sinValue,  cosValue,   0.0f,   0.0f,
-        0.0f,       0.0f,       1.0f,   0.0f,
-        0.0f,       0.0f,       0.0f,   1.0f
+        cosA,   sinA,   0.0f,   0.0f,
+        -sinA,  cosA,   0.0f,   0.0f,
+        0.0f,   0.0f,   1.0f,   0.0f,
+        0.0f,   0.0f,   0.0f,   1.0f
     };
 }
 

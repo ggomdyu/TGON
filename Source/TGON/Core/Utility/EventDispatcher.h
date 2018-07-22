@@ -23,7 +23,9 @@ public:
 /* @section Public method */
 public:
     void SubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
+
     void SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler);
+    
     bool UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
     
     void DispatchEvent(const StringViewHash& eventName);

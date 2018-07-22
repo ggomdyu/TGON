@@ -15,28 +15,26 @@ public:
 public:
     ThousandParty()
     {
+        this->Initialize();
     }
 
-/* @section Public method */
-public:
-    virtual void OnDidLaunch() override
+/* @section Private method */
+private:
+    void Initialize()
     {
-        SuperType::OnDidLaunch();
-        
         InputMode inputMode;
         {
             inputMode.isUseMouse = false;
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, Application::GetInstance().GetRootWindow());
+        this->AddModule<InputModule>(inputMode, Application::GetInstance()->GetRootWindow());
         this->AddModule<TimeModule>();
-        this->AddModule<SceneModule>(std::make_unique<TestScene>(), Application::GetInstance().GetRootWindow(), VideoMode{});
+        this->AddModule<SceneModule>(std::make_unique<TestScene>(), Application::GetInstance()->GetRootWindow(), VideoMode{});
     }
 
-    virtual void OnWillTerminate() override
+    void Terminate()
     {
-        SuperType::OnWillTerminate();
     }
     
 /* @section Public method */

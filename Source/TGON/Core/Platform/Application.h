@@ -7,6 +7,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
+#include "Core/Platform/Config.h"
 #include "Core/Object/DelegateChain.h"
 
 #if TGON_PLATFORM_WINDOWS
@@ -35,19 +36,19 @@ private:
     
 /* @section Public method */
 public:
-    /* @brief   Gets the global instance of this class. */
+    /* @brief                       Gets the global instance of this class. */
     static Application* GetInstance();
 
-    /* @brief   Loops the message queue and handle the message. */
+    /* @brief                       Loops the message queue and handle the message. */
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
 
-    /* @brief   Terminates the program forcibly. */
+    /* @brief                       Terminates the program forcibly. */
     void Terminate();
     
     /**
-     * @brief               Shows a message box in front of screen.
-     * @param [in] message  The message what you want to show in description area.
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] message          The message what you want to show in description area.
      */
     void ShowMessageBox(const char* message) const;
     
@@ -59,9 +60,9 @@ public:
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
-     * @brief               Shows a message box in front of screen.
-     * @param [in] title    The message what you want to show in title area.
-     * @param [in] message  The message what you want to show in description area.
+     * @brief                       Shows a message box in front of screen.
+     * @param [in] title            The message what you want to show in title area.
+     * @param [in] message          The message what you want to show in description area.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
@@ -89,6 +90,7 @@ protected:
     ApplicationImpl m_applicationImpl;
     
     std::unique_ptr<Window> m_rootWindow;
+
 };
 
 template <typename _FunctionType>

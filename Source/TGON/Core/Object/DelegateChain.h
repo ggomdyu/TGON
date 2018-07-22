@@ -47,12 +47,32 @@ public:
 
 /* @section Public method */
 public:
+    /**
+     * @brief               Invokes all delegates stored in list.
+     * @param [in] args     The parameters of delegate to invoke.
+     * @return              Returns the finally invoked delegate's return value.
+     */
     template <typename... _ArgTypes2>
     _ReturnType Invoke(_ArgTypes2&&... args);
+
+    /**
+     * @brief               Inserts a delegate in list.
+     * @param [in] value    The delegate to insert.
+     */
     template <typename _DelegateType>
     void Append(_DelegateType&& value);
+
+    /**
+     * @brief               Erases the delegate stored in list.
+     * @param [in] value    The delegate to erase.
+     * @details             The specified delegate's stub pointer must be matched with stored delegate in list.
+     */
     bool Erase(const DelegateType& value);
+
+    /* @brief               Erases all delegates stored in list. */
     void Clear() noexcept;
+
+    /* @brief               Gets the delegate list. */
     const std::vector<DelegateType>& GetInvocationList() const noexcept;
 
 /* @section Private variable */
@@ -123,9 +143,9 @@ inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes2&&
         return _ReturnType();
     }
 
-    for (int i = 0; i < m_invocationList.size() - 1; ++i)
+    for (auto& functor : m_invocationList)
     {
-        m_invocationList[i](std::forward<_ArgTypes2>(args)...);
+        functor(std::forward<_ArgTypes2>(args)...);
     }
 
     auto iter = m_invocationList.end() - 1;
