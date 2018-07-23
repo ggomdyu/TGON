@@ -37,7 +37,7 @@ void Batch::Draw(Graphics& graphics)
     
     for (auto& meshRenderer : m_meshRenderers)
     {
-        m_material->SetWVP(meshRenderer.GetWVP());
+        m_material->SetWVP(meshRenderer.GetMesh()->GetWVP());
         
         auto& mesh = meshRenderer.GetMesh();
         auto& vertexBuffer = mesh->GetVertexBuffer();

@@ -7,6 +7,8 @@
 #pragma once
 #include <memory>
 
+#include "Core/Math/Matrix4x4.h"
+
 namespace tgon
 {
     
@@ -33,7 +35,7 @@ public:
     
     /* @brief   Gets the index buffer. */
     const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
-    
+
 /* @section Protected variable */
 protected:
     std::shared_ptr<VertexBuffer> m_vertexBuffer;
