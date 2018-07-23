@@ -1,12 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image.h>
-
-#include "Core/Debug/Log.h"
+#include <stb_image_write.h>
 
 #include "Image.h"
 #include "ImageUtility.h"
+#include "ImageType.h"
 
 namespace tgon
 {
@@ -20,15 +21,15 @@ Image::Image() :
 }
 
 Image::Image(const std::string& filePath) :
-    Image()
+    m_filePath(filePath),
+    m_imageData(stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4))
 {
-    this->Initialize(filePath);
 }
 
 Image::Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
-    Image()
+    m_filePath(filePath),
+    m_imageData(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4))
 {
-    this->Initialize(filePath, srcData, srcDataBytes);
 }
 
 Image::Image(Image&& rhs) :
@@ -84,32 +85,6 @@ const uint8_t Image::operator[](std::size_t index) const
     return m_imageData[index];
 }
 
-bool Image::Initialize(const std::string& filePath)
-{
-    m_filePath = filePath;
-    
-    m_imageData = stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4);
-    if (m_imageData == nullptr)
-    {
-        return false;
-    }
-    
-    return true;
-}
-
-bool Image::Initialize(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes)
-{
-    m_filePath = filePath;
-
-    m_imageData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4);
-    if (m_imageData == nullptr)
-    {
-        return false;
-    }
-    
-    return true;
-}
-
 bool Image::IsValid() const noexcept
 {
     return m_imageData != nullptr;
@@ -148,6 +123,26 @@ PixelFormat Image::GetPixelFormat() const noexcept
 const std::string& Image::GetFilePath() const noexcept
 {
     return m_filePath;
+}
+
+bool Image::SaveAsPng(const char* saveFilePath)
+{
+    return stbi_write_png(saveFilePath, m_width, m_height, 4, m_imageData, m_width * 4) != 0;
+}
+
+bool Image::SaveAsJpeg(const char* saveFilePath, int32_t quality)
+{
+    return stbi_write_jpg(saveFilePath, m_width, m_height, 4, m_imageData, quality) != 0;
+}
+
+bool Image::SaveAsBmp(const char* saveFilePath)
+{
+    return stbi_write_bmp(saveFilePath, m_width, m_height, 4, m_imageData) != 0;
+}
+
+bool Image::SaveAsTga(const char* saveFilePath)
+{
+    return stbi_write_tga(saveFilePath, m_width, m_height, 4, m_imageData) != 0;
 }
 
 } /* namespace tgon */
