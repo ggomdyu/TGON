@@ -8,10 +8,14 @@
 #include <memory>
 #include <boost/noncopyable.hpp>
 
+#include "Core/Platform/Config.h"
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLTexture.h"
+#endif
+
 namespace tgon
 {
     
-class TextureImpl;
 struct TextureProperty;
 enum class TextureFilterMode;
 enum class TextureWrapMode;
@@ -67,8 +71,6 @@ public:
     /* @brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
     
-    int32_t GetColorDepth() const noexcept;
-    
     /* @brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
     
@@ -77,10 +79,14 @@ public:
      * @warn    This can not be correct information if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
+
+    TextureImpl& GetTextureImpl() noexcept;
+    
+    const TextureImpl& GetTextureImpl() const noexcept;
   
 /* @section Private variable */
 public:
-    std::unique_ptr<TextureImpl> m_textureImpl;
+    TextureImpl m_textureImpl;
 };
     
 } /* namespace tgon */
