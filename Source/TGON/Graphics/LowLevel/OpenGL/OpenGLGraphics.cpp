@@ -6,6 +6,7 @@
 #   import <OpenGL/OpenGL.h>
 #endif
 #include <stb_image.h>
+#include <stb_image_write.h>
 
 #include "Core/Math/Color.h"
 
@@ -37,6 +38,7 @@ GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMo
 {
     // It is required because OpenGL expects (0, 0) coordinates to be on the left bottom side, but images usually left top side.
     stbi_set_flip_vertically_on_load(true);
+    stbi_flip_vertically_on_write(true);
     
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
