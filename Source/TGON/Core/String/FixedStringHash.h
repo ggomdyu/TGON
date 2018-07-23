@@ -41,7 +41,7 @@ public:
 
 /* @section Public operator */
 public:
-    using SuperType::operator==;
+    bool operator==(const BasicFixedStringHash& rhs) const noexcept;
     using SuperType::operator[];
     
 /* @section Public method */
@@ -91,6 +91,12 @@ inline BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Basic
     SuperType(str, strLen),
     m_hashCode(X65599Hash(str))
 {
+}
+
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
+inline bool BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::operator==(const BasicFixedStringHash& rhs) const noexcept
+{
+    return m_hashCode == rhs.m_hashCode;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>

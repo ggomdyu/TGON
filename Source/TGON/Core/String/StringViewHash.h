@@ -38,11 +38,12 @@ public:
 public:
     template <std::size_t _CharArraySize>
     constexpr BasicStringViewHash(const _CharType(&str)[_CharArraySize]) noexcept;
+
     constexpr BasicStringViewHash(const _CharType* str, std::size_t strLen) noexcept;
 
 /* @section Public operator */
 public:
-    using SuperType::operator==;
+    constexpr bool operator==(const BasicStringViewHash& rhs) const noexcept;
     constexpr const _CharType operator[](std::size_t index) const;
     
 /* @section Public method */
@@ -84,6 +85,12 @@ constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash
     SuperType(str, strLen),
     m_hashCode(X65599Hash(str))
 {
+}
+
+template <typename _CharType, typename _StringTraitsType>
+constexpr bool BasicStringViewHash<_CharType, _StringTraitsType>::operator==(const BasicStringViewHash& rhs) const noexcept
+{
+    return m_hashCode == rhs.m_hashCode;
 }
 
 template <typename _CharType, typename _StringTraitsType>
