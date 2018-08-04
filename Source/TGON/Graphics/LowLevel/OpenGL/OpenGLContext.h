@@ -8,6 +8,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
+#include "Core/Platform/Window.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
@@ -15,15 +16,14 @@
 #   endif
 #   include <Windows.h>
 #elif TGON_PLATFORM_MACOS
-@class NSOpenGLPixelFormat;
-@class NSOpenGLContext;
+#   import <AppKit/NSOpenGL.h>
+#   import <OpenGL/OpenGL.h>
 #endif
+
+#include "../GraphicsType.h"
 
 namespace tgon
 {
-    
-class Window;
-struct VideoMode;
 
 struct TGON_API OpenGLContext final :
     private boost::noncopyable

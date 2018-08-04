@@ -13,7 +13,7 @@ IndexBufferImpl::IndexBufferImpl(const void* data, std::size_t dataBytes, bool i
     m_isDynamicUsage(isDynamicUsage),
     m_indexBufferHandle(this->CreateIndexBufferHandle())
 {
-    assert(data != nullptr && dataBytes != 0);
+    assert(data != nullptr && dataBytes != 0 && m_indexBufferHandle != 0);
 
     this->SetData(data, dataBytes, isDynamicUsage);
 }

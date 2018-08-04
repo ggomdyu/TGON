@@ -9,15 +9,17 @@ namespace tgon
 {
     
 Camera::Camera() noexcept :
-    m_eyePt(0.0f, 0.0f, 0.0f),
-    m_lookAt(0.0f, 0.0f, -50.0f),
+    m_eyePt(0.0f, 0.0f, 5.0f),
+    m_lookAt(0.0f, 0.0f, 0.0f),
     m_fov(Pi / 8),
     m_nearZ(0.1f),
     m_farZ(1000.0f),
+    m_isDirty(true),
     m_projectionMode(ProjectionMode::Perspective),
     m_fillMode(FillMode::Solid),
     m_cullMode(CullMode::CW)
 {
+    this->Update();
 }
     
 Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ, ProjectionMode projectionMode, FillMode fillMode, CullMode cullMode) noexcept :
@@ -34,23 +36,39 @@ Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nea
     
 void Camera::Update()
 {
-    m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
-    m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
+    if (m_isDirty == true)
+    {
+        m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
+        
+        if (m_projectionMode == ProjectionMode::Perspective)
+        {
+            m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
+        }
+        else //if (m_projectionMode == ProjectionMode::Orthographic)
+        {
+            m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
+        }
+        
+        m_isDirty = false;
+    }
 }
 
 void Camera::SetNearZ(float nearZ) noexcept
 {
     m_nearZ = nearZ;
+    m_isDirty = true;
 }
 
 void Camera::SetFarZ(float farZ) noexcept
 {
     m_farZ = farZ;
+    m_isDirty = true;
 }
 
 void Camera::SetFov(float fov) noexcept
 {
     m_fov = fov;
+    m_isDirty = true;
 }
 
 void Camera::SetProjectionMode(ProjectionMode projectionMode) noexcept
@@ -61,11 +79,13 @@ void Camera::SetProjectionMode(ProjectionMode projectionMode) noexcept
 void Camera::SetEyePt(const Vector3& eyePt) noexcept
 {
     m_eyePt = eyePt;
+    m_isDirty = true;
 }
 
 void Camera::SetLookAt(const Vector3& lookAt) noexcept
 {
     m_lookAt = lookAt;
+    m_isDirty = true;
 }
     
 void Camera::SetFillMode(FillMode fillMode) noexcept

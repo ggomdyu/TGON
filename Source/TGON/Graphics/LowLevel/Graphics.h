@@ -5,33 +5,22 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <cstdint>
-
 #include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLGraphics.h"
+#endif
 
 namespace tgon
 {
 
-struct Color4f;
-class Window;
-struct VideoMode;
-enum class PrimitiveType;
-enum class FillMode;
-enum class CullMode;
-class GraphicsImpl;
-
-class Graphics final :
+class TGON_API Graphics final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
     Graphics(const Window& displayTarget, const VideoMode& videoMode);
     
-/* @section Public destructor */
-public:
-    ~Graphics();
-
 /* @section Public method */
 public:
     void SetClearColor(const Color4f& color);
@@ -50,7 +39,7 @@ public:
 
 /* @section Private variable */
 private:
-    std::unique_ptr<GraphicsImpl> m_graphicsImpl;
+    GraphicsImpl m_graphicsImpl;
 };
 
 } /* namespace tgon */

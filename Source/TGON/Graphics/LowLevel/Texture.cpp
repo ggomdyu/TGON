@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Texture.h"
-#include "TextureType.h"
 
 namespace tgon
 {
@@ -15,8 +14,6 @@ Texture::Texture(const std::string& filePath, const TextureProperty& textureProp
     m_textureImpl(filePath, textureProperty)
 {
 }
-
-Texture::~Texture() = default;
 
 void Texture::Use()
 {

@@ -4,7 +4,6 @@
 
 #include "OpenGLUtility.h"
 #include "OpenGLVertexBuffer.h"
-#include "../VertexBufferType.h"
 
 namespace tgon
 {

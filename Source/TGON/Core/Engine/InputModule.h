@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Core/Object/Module/IModule.h"
+#include "IModule.h"
 
 #include "Core/Hardware/InputManager.h"
 #include "Core/Hardware/Keyboard.h"

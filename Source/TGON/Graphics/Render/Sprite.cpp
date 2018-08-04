@@ -8,10 +8,7 @@
 #include "../LowLevel/VertexBuffer.h"
 #include "../LowLevel/IndexBuffer.h"
 
-#include "SpriteBatch.h"
 #include "Sprite.h"
-#include "Mesh.h"
-#include "MeshUtility.h"
 #include "Material.h"
 
 namespace tgon
@@ -23,7 +20,6 @@ Sprite::Sprite(const std::string& filePath) :
 }
       
 Sprite::Sprite(const std::shared_ptr<Texture>& texture) :
-    m_quadMesh(MakeQuad()),
     m_texture(texture)
 {
 }    
@@ -41,31 +37,6 @@ std::shared_ptr<Texture>& Sprite::GetTexture() noexcept
 const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
 {
     return m_texture;
-}
-
-std::shared_ptr<Mesh>& Sprite::GetQuadMesh() noexcept
-{
-    return m_quadMesh;
-}
-
-const std::shared_ptr<Mesh>& Sprite::GetQuadMesh() const noexcept
-{
-    return m_quadMesh;
-}
-
-void Sprite::SetWVP(const Matrix4x4& matWVP) noexcept
-{
-    m_matWVP = matWVP;
-}
-
-Matrix4x4& Sprite::GetWVP() noexcept
-{
-    return m_matWVP;
-}
-
-const Matrix4x4& Sprite::GetWVP() const noexcept
-{
-    return m_matWVP;
 }
 
 //

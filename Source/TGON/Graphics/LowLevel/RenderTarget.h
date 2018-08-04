@@ -5,15 +5,16 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <memory>
+#include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLRenderTarget.h"
+#endif
 
 namespace tgon
 {
-    
-class RenderTargetImpl;
 
-class RenderTarget final :
+class TGON_API RenderTarget final :
     private boost::noncopyable
 {
 /* @section Public constructor */
@@ -31,7 +32,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::unique_ptr<RenderTargetImpl> m_renderTargetImpl;
+    RenderTargetImpl m_renderTargetImpl;
 };
 
 } /* namespace tgon */

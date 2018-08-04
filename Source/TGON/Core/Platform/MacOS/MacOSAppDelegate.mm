@@ -1,7 +1,7 @@
 #import "PrecompiledHeader.h"
 
 #import "Core/Platform/Application.h"
-#import "Core/Object/Engine.h"
+#import "Core/Engine/Engine.h"
 
 #import "MacOSAppDelegate.h"
 

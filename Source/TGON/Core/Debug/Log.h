@@ -10,10 +10,10 @@
 
 #include "Core/Platform/Config.h"
 
+#include "LogType.h"
+
 namespace tgon
 {
-
-enum class LogLevel;
 
 void Log(LogLevel logLevel, const char* formatStr, ...);
 

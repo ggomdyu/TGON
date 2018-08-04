@@ -6,15 +6,17 @@
 
 #pragma once
 #include <string>
-#include <GL/glew.h>
 #include <cstdlib>
-#include <cstdint>
+
+#include <GL/glew.h>
 #include <boost/noncopyable.hpp>
+
+#include "Core/Platform/Config.h"
 
 namespace tgon
 {
 
-class ShaderImpl final :
+class TGON_API ShaderImpl final :
     private boost::noncopyable
 {
 /* @section Public constructor */

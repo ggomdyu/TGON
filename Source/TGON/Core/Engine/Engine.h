@@ -5,9 +5,10 @@
  */
 
 #pragma once
-#include "Module/TimeModule.h"
-#include "Module/InputModule.h"
-#include "CoreObject.h"
+#include "Core/Object/CoreObject.h"
+
+#include "TimeModule.h"
+#include "InputModule.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\

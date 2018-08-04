@@ -10,16 +10,17 @@
 #include "Core/Math/Matrix4x4.h"
 #include "Graphics/LowLevel/Texture.h"
 #include "Graphics/LowLevel/Shader.h"
+#include "Graphics/LowLevel/GraphicsType.h"
 
 namespace tgon
 {
 
-class Material :
+class TGON_API Material :
     public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(Material);
-
+    
 /* @section Public constructor */
 public:
     explicit Material(const std::shared_ptr<Shader>& shader);
@@ -34,26 +35,40 @@ public:
     
     virtual void Unuse() = 0;
     
+    /* @brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const = 0;
     
+    /* @brief   Sets the world-view-projection matrix. */
     void SetWVP(const Matrix4x4& matWVP);
     
+    /* @brief   Gets the world-view-projection matrix. */
     Matrix4x4& GetWVP() noexcept;
     
+    /* @brief   Gets the world-view-projection matrix. */
     const Matrix4x4& GetWVP() const noexcept;
     
+    FillMode GetFillMode() const noexcept;
+    
+    CullMode GetCullMode();
+    
+    /* @brief   Gets the shader. */
     std::shared_ptr<Shader>& GetShader() noexcept;
     
+    /* @brief   Gets the shader. */
     const std::shared_ptr<Shader>& GetShader() const noexcept;
-
+    
 /* @section Protected variable */
 protected:
     Matrix4x4 m_matWVP;
     
+    CullMode m_cullMode;
+    
+    FillMode m_fillMode;
+    
     std::shared_ptr<Shader> m_shader;
 };
 
-class ColorMaterial :
+class TGON_API ColorMaterial :
     public Material
 {
 public:
@@ -84,7 +99,7 @@ private:
     Color4f m_color;
 };
 
-class TextureMaterial :
+class TGON_API TextureMaterial :
     public Material
 {
 public:
@@ -108,6 +123,7 @@ public:
     
     virtual void Unuse() override;
     
+    /* @brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
     
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;

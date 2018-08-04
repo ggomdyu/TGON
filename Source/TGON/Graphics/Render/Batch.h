@@ -8,15 +8,14 @@
 #include <vector>
 #include <memory>
 
-#include "MeshRenderer.h"
+#include "Material.h"
+#include "Mesh.h"
+
+#include "../LowLevel/Graphics.h"
 
 namespace tgon
 {
-    
-class Material;
-class MeshRenderer;
-class Graphics;
-    
+
 class Batch final
 {
 /* @section Public constructor */
@@ -24,13 +23,10 @@ public:
     /* @brief   Initializes the batch with a material. */
     explicit Batch(const std::shared_ptr<Material>& material);
 
-    /* @brief   Initializes the batch with a material and mesh renderer. */
-    explicit Batch(const MeshRenderer& meshRenderer);
-    
 /* @section Public method */
 public:
-    /* @brief   Adds a mesh renderer into the batch. */
-    void AddMeshRenderer(const MeshRenderer& meshRenderer);
+    /* @brief   Adds a mesh into the batch. */
+    void AddMesh(const std::shared_ptr<Mesh>& mesh);
     
     /* @brief   Checks whether the specified material can batched. */
     bool CanBatch(const Material& material) const;
@@ -42,18 +38,15 @@ public:
 private:
     std::shared_ptr<Material> m_material;
     
-    std::vector<MeshRenderer> m_meshRenderers;
+    std::vector<std::shared_ptr<Mesh>> m_meshes;
 };
     
 class BatchGroup final
 {
 /* @section Public method */
 public:
-    /**
-     * @brief   Adds a mesh renderer into the batch.
-     * @details
-     */
-    void AddMeshRenderer(const MeshRenderer& meshRenderer);
+    /* @brief   Adds a mesh into the batch list. */
+    void AddBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Mesh>& mesh);
     
     /* @brief   Adds a batch into the batch list. */
     void AddBatch(const Batch& batch);

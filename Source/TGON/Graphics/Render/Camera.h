@@ -11,10 +11,10 @@
 
 #include "../LowLevel/GraphicsType.h"
 
+#include "CameraType.h"
+
 namespace tgon
 {
-    
-enum class ProjectionMode;
 
 class TGON_API Camera
 {
@@ -77,6 +77,7 @@ private:
     float m_nearZ;
     float m_farZ;
     Matrix4x4 m_matViewProj;
+    bool m_isDirty;
     ProjectionMode m_projectionMode;
     FillMode m_fillMode;
     CullMode m_cullMode;

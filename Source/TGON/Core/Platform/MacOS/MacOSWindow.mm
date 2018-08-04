@@ -6,8 +6,6 @@
 #import <AppKit/NSWindow.h>
 #import <Cocoa/Cocoa.h>
 
-#import "../WindowType.h"
-
 #import "MacOSWindow.h"
 #import "MacOSWindowUtility.h"
 #import "MacOSWindowDelegate.h"
@@ -20,10 +18,10 @@ WindowImpl::WindowImpl(Window* owner)
 }
     
 WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
-    m_nsWindow(MakeNativeWindow(windowStyle))
+    m_nsWindow(MakeNativeWindow(windowStyle)),
+    m_nsWindowDelegate([[WindowDelegate alloc] initWithWindow:owner])
 {
-    WindowDelegate* windowDelegate = [[WindowDelegate alloc] initWithWindow:owner];
-    m_nsWindow.delegate = windowDelegate;
+    m_nsWindow.delegate = m_nsWindowDelegate;
 }
 
 WindowImpl::WindowImpl(WindowImpl&& rhs) noexcept :

@@ -5,17 +5,19 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <memory>
 #include <initializer_list>
+#include <memory>
+
+#include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLVertexBuffer.h"
+#endif
 
 namespace tgon
 {
 
-struct VertexBufferDesc;
-class VertexBufferImpl;
-    
-class VertexBuffer final :
+class TGON_API VertexBuffer final :
     private boost::noncopyable
 {
 /* @section Public constructor */
@@ -24,10 +26,6 @@ public:
     VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
     
     VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
-    
-/* @section Public destructor */
-public:
-    ~VertexBuffer();
     
 /* @section Public method */
 public:
@@ -45,7 +43,7 @@ public:
 
 /* @section Private variable */
 public:
-    std::unique_ptr<VertexBufferImpl> m_vertexBufferImpl;
+    VertexBufferImpl m_vertexBufferImpl;
 };
     
 template <typename _DataArrayType, std::size_t _DataArraySize>

@@ -19,7 +19,7 @@ public:
     void AddValue(const std::string& name, const _ValueType& value);
     
 private:
-    std::map<std::string, std::string> m_valueTable;
+    std::map<std::string, std::string> m_variableTable;
 };
 
 class ISerializable

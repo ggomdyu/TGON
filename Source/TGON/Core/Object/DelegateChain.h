@@ -2,7 +2,6 @@
  * @file    DelegateChain.h
  * @author  ggomdyu
  * @since   06/30/2018
- * @see     https://www.codeproject.com/articles/11015/the-impossibly-fast-c-delegates
  */
 
 #pragma once

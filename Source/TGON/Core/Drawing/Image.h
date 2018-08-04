@@ -34,7 +34,6 @@ public:
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
-     * @param [in] imageFormat  The format of image
      */
     Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     

@@ -6,18 +6,15 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <GL/glew.h>
 
 #include "Core/Drawing/Image.h"
 
+#include "../TextureType.h"
+
 namespace tgon
 {
-    
-struct TextureProperty;
-enum class TextureFilterMode;
-enum class TextureWrapMode;
-    
-class TextureImpl final :
+
+class TGON_API TextureImpl final :
     private Image,
     private boost::noncopyable
 {

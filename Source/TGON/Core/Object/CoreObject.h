@@ -10,8 +10,8 @@
 #include <boost/any.hpp>
 #include <string>
 
-#include "Runtime/RuntimeObject.h"
-#include "Runtime/RuntimeObjectUtility.h"
+#include "RuntimeObject.h"
+#include "RuntimeObjectUtility.h"
 
 namespace tgon
 {
@@ -33,6 +33,8 @@ public:
     
 /* @section Public method */
 public:
+    virtual void Update() {}
+    
     template <typename _Type>
     void SetExtraData(_Type&& extraData);
     

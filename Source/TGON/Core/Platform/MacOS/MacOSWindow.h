@@ -12,6 +12,8 @@
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
 
+#import "../WindowType.h"
+
 @class NSWindow;
 @class WindowDelegate;
 
@@ -19,7 +21,6 @@ namespace tgon
 {
     
 class Window;
-struct WindowStyle;
 
 class TGON_API WindowImpl final :
     private boost::noncopyable
@@ -66,6 +67,7 @@ public:
 /* @section Private variable */
 private:
     NSWindow* m_nsWindow;
+    WindowDelegate* m_nsWindowDelegate;
 };
 
 } /* namespace tgon */

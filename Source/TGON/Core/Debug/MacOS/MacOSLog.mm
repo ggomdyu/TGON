@@ -9,7 +9,6 @@
 #include "Core/String/StringTraits.h"
 
 #include "../Log.h"
-#include "../LogType.h"
 
 namespace tgon
 {

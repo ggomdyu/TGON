@@ -4,7 +4,6 @@
 
 #include "OpenGLTexture.h"
 #include "OpenGLUtility.h"
-#include "../TextureType.h"
 
 namespace tgon
 {

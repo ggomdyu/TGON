@@ -5,10 +5,8 @@
  */
 
 #pragma once
-#include <cstdint>
-
-#include "Core/Math/Color.h"
 #include "Core/Platform/Config.h"
+#include "Core/Math/Color.h"
 
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLGraphicsType.h"
@@ -36,7 +34,6 @@ struct VideoMode final
 /* @section Public variable */
 public:
     GraphicsSDK graphicsSDK = GraphicsSDK::OpenGL4_0;
-
     Color4f clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
     bool enableHardwareAccelerate = true;
     bool enableTripleBuffer = false;

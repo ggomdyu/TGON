@@ -5,25 +5,21 @@
  */
 
 #pragma once
-#include <memory>
-#include <cstdint>
-#include <boost/noncopyable.hpp>
+#include "Core/Platform/Config.h"
+
+#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#   include "OpenGL/OpenGLShader.h"
+#endif
 
 namespace tgon
 {
 
-class ShaderImpl;
-
-class Shader final :
+class TGON_API Shader final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
     Shader(const char* vertexShaderCode, const char* fragmentShaderCode);
-    
-/* @section Public destructor */
-public:
-    ~Shader();
     
 /* @section Public method */
 public:
@@ -50,7 +46,7 @@ public:
     
 /* @section Private variable */
 public:
-    std::unique_ptr<ShaderImpl> m_shaderImpl;
+    ShaderImpl m_shaderImpl;
 };
 
 } /* namespace tgon */

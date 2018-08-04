@@ -5,21 +5,15 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <memory>
+
+#include <GL/glew.h>
 
 #include "OpenGLContext.h"
 
 namespace tgon
 {
-
-struct VideoMode;
-struct Color4f;
-enum class PrimitiveType;
-enum class FillMode;
-enum class CullMode;
-typedef unsigned int GLuint;
-
+    
 class GraphicsImpl final :
     private boost::noncopyable
 {
@@ -37,8 +31,10 @@ public:
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);
     void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height);
+    void EnableCullFace();
     void EnableBlend();
     void EnableDepthTest();
+    void DisableCullFace();
     void DisableBlend();
     void DisableDepthTest();
     void ClearColorBuffer();
@@ -47,9 +43,14 @@ public:
     void DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
     void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
 
+/* @section Private method */
+private:
+    void SetDefaultGLRenderState();
+    
 /* @section Private variable */
 private:
     OpenGLContext m_context;
+    
     GLuint m_vertexArrayHandle;
 };
 

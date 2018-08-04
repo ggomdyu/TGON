@@ -337,12 +337,18 @@ inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll)
 {
     float cosA = cosf(yaw);
     float sinA = sinf(yaw);
+    
+    float cosB = cosf(pitch);
+    float sinB = sinf(pitch);
+    
+    float cosC = cosf(roll);
+    float sinC = sinf(roll);
 
     return Matrix4x4(
-        0,      0,      0,      0,
-        0,      0,      0,      0,
-        0,      0,      0,      0,
-        0,      0,      0,      1
+        cosA,           0,          -sinA,          0,
+        sinA * sinA,    cosA,       sinA * cosA,    0,
+        cosA * sinA,    -sinA,      cosA * cosA,    0,
+        0,              0,          0,              1
     );
 }
 

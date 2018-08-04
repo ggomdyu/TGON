@@ -5,10 +5,8 @@
  */
 
 #pragma once
-#include <memory>
-#include <boost/noncopyable.hpp>
-
 #include "Core/Platform/Config.h"
+
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLTexture.h"
 #endif
@@ -16,12 +14,7 @@
 namespace tgon
 {
     
-struct TextureProperty;
-enum class TextureFilterMode;
-enum class TextureWrapMode;
-enum class PixelFormat;
-    
-class Texture final :
+class TGON_API Texture final :
     private boost::noncopyable
 {
 /* @section Public constructor */
@@ -31,11 +24,7 @@ public:
     
     /* @brief   Initializes texture through specified file path and texture property. */
     Texture(const std::string& filePath, const TextureProperty& textureProperty);
-    
-/* @section Public destructor */
-public:
-    ~Texture();
-    
+   
 /* @section Public method */
 public:
     /* @brief   Changes rendering pipeline state to use this texture. */

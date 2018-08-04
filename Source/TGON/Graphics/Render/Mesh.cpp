@@ -1,8 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "../LowLevel/VertexBuffer.h"
-#include "../LowLevel/IndexBuffer.h"
-
 #include "Mesh.h"
 
 namespace tgon

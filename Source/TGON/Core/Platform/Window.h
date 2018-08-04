@@ -6,18 +6,22 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Core/Platform/Config.h"
-#include "Core/Math/Point.h"
-#include "Core/Math/Extent.h"
 #include "Core/Object/DelegateChain.h"
+
+#include "WindowType.h"
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsWindow.h"
+#elif TGON_PLATFORM_MACOS
+#   import "MacOS/MacOSWindow.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidWindow.h"
+#elif BOOST_OS_IOS
+#   import "IOS/IOSWindow.h"
+#endif
 
 namespace tgon
 {
-
-class WindowImpl;
-struct WindowStyle;
 
 class TGON_API Window final :
     private boost::noncopyable
@@ -74,7 +78,7 @@ public:
 
 /* @section Private variable */
 private:
-    std::unique_ptr<WindowImpl> m_windowImpl;
+    WindowImpl m_windowImpl;
 };
 
 } /* namespace tgon */

@@ -7,12 +7,7 @@
 #pragma once
 #import <Cocoa/Cocoa.h>
 
-namespace tgon
-{
-    
-class Window;
-    
-} /*　namespace tgon */
+#import "../Window.h"
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
 {

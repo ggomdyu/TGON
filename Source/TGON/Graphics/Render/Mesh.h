@@ -9,11 +9,11 @@
 
 #include "Core/Math/Matrix4x4.h"
 
+#include "../LowLevel/VertexBuffer.h"
+#include "../LowLevel/IndexBuffer.h"
+
 namespace tgon
 {
-    
-class VertexBuffer;
-class IndexBuffer;
 
 class Mesh final
 {

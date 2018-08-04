@@ -8,19 +8,20 @@
 #include <memory>
 
 #include "Core/Math/Matrix4x4.h"
+#include "Core/Platform/Config.h"
+
+#include "Material.h"
+#include "Mesh.h"
 
 namespace tgon
 {
-    
-class Mesh;
-class Material;
-    
-class MeshRenderer final
+
+class TGON_API Model final
 {
 /* @section Public constructor */
 public:
     /* @brief   Initializes the mesh renderer with mesh, material, and world-view-projection matrix. */
-    MeshRenderer(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material);
+    Model(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material);
     
 /* @section Public method */
 public:

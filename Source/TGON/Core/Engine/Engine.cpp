@@ -6,7 +6,7 @@
 #include "Core/Platform/Application.h"
 
 #include "Engine.h"
-#include "Module/IModule.h"
+#include "IModule.h"
 
 namespace tgon
 {

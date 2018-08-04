@@ -97,7 +97,7 @@ uniform sampler2D textureSampler;                                               
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    g_outColor = texture(textureSampler, g_fragUV) * g_uBlendColor;                 \n\
+    g_outColor = texture(textureSampler, g_fragUV) * g_uBlendColor;                       \n\
 }                                                                                   \n\
 ";
 

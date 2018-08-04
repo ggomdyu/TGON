@@ -7,11 +7,9 @@
 #pragma once
 #include <vector>
 
-#include "Core/Object/CoreObject.h"
+#include "Graphics/Object/GraphicsObject.h"
 #include "Core/String/FixedStringHash.h"
 #include "Game/Component/ComponentUtility.h"
-
-#include "Transform.h"
 
 namespace tgon
 {
@@ -19,7 +17,7 @@ namespace tgon
 class Component;
 
 class TGON_API GameObject final :
-	public CoreObject,
+	public GraphicsObject,
     private std::enable_shared_from_this<GameObject>
 {
 public:
@@ -100,17 +98,10 @@ private:
      * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
     Component* GetComponent(size_t componentId);
-    
-    /* @brief   Returns the transform of object which has position, rotation, scale. */
-    Transform& GetTransform() noexcept;
-    
-    /* @brief   Returns the transform of object which has position, rotation, scale. */
-    const Transform& GetTransform() const noexcept;
-    
+
 /* @section Private variable */
 private:
     FixedStringHash32 m_name;
-    Transform m_transform;
     std::vector<std::unique_ptr<Component>> m_components;
 };
 

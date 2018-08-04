@@ -7,12 +7,11 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 #include <vector>
-#include <GL/glew.h>
+
+#include "../VertexBufferType.h"
 
 namespace tgon
 {
-
-struct VertexBufferDesc;
 
 class VertexBufferImpl final :
     private boost::noncopyable
