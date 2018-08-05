@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Sources\Core">
+      <UniqueIdentifier>{dfd54907-db71-48ea-9189-2a99ffb70a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Debug">
+      <UniqueIdentifier>{fa95a123-10cc-45b0-a852-44279c2b4632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Debug\Windows">
+      <UniqueIdentifier>{41499009-5464-42a7-8399-08de994cb7e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Time">
+      <UniqueIdentifier>{3a6d0a51-fa5b-4e46-8f97-132e5572d6b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Time\Windows">
+      <UniqueIdentifier>{7626af05-3bdc-4d95-80b6-9c47633398d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Hardware">
+      <UniqueIdentifier>{f948608a-9342-4a10-a75f-d54d9d0d656f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Hardware\Windows">
+      <UniqueIdentifier>{8d5a2f1e-2f66-4bb1-9ff2-b8fb995703f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform">
+      <UniqueIdentifier>{24872bcc-f7ad-4fbf-9d64-d70e19da79b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Platform\Windows">
+      <UniqueIdentifier>{1c4a5872-78c6-4bd6-819a-ca2106f15855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics">
+      <UniqueIdentifier>{0cbdc036-dd4e-4b55-9562-01ab16f29954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\LowLevel">
+      <UniqueIdentifier>{b3f64ecd-5eef-4254-8660-e7a9448ee7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Graphics\LowLevel\OpenGL">
+      <UniqueIdentifier>{dcd437ec-3aab-4b08-8800-2519c4d80474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Drawing">
+      <UniqueIdentifier>{61c4a9e8-3d7d-4baa-a66a-2cfcc09ac7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Drawing\Windows">
+      <UniqueIdentifier>{6626f1be-b292-4ac6-914e-4686c1bc498b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\File">
+      <UniqueIdentifier>{3ddf4c51-bb26-4ba7-ab9e-841debf379f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\File\Windows">
+      <UniqueIdentifier>{57a0afac-c339-4028-a715-352a02d6169f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Utility">
+      <UniqueIdentifier>{75a9a8ca-75f9-4316-93dc-5cc218e06fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core\Utility\Windows">
+      <UniqueIdentifier>{445638a3-fda8-4a63-b132-84280c3bb287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ThirdParty">
+      <UniqueIdentifier>{88d5eac9-3239-41ca-934f-41b46fcee28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ThirdParty\OIS-1.4">
+      <UniqueIdentifier>{ea8cb9e5-6592-44cb-a99c-f503e59667f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboardType.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseType.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\ComPtr.h">
+      <Filter>Sources\Core\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\HandleGuard.h">
+      <Filter>Sources\Core\Utility\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\wiimote.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.h">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp">
+      <Filter>Sources\Core\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
+      <Filter>Sources\Core\Debug\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsTime.cpp">
+      <Filter>Sources\Core\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsDateTime.cpp">
+      <Filter>Sources\Core\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.cpp">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.cpp">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.cpp">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.cpp">
+      <Filter>Sources\Core\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\WindowsOpenGLContext.cpp">
+      <Filter>Sources\Graphics\LowLevel\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp">
+      <Filter>Sources\Core\Drawing\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp">
+      <Filter>Sources\Core\File\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\wiimote.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32ForceFeedback.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32InputManager.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32JoyStick.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32KeyBoard.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32Mouse.cpp">
+      <Filter>Sources\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

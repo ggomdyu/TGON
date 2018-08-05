@@ -12,7 +12,6 @@
 #include "../Log.h"
 #include "../LogType.h"
 
-
 namespace tgon
 {
 namespace

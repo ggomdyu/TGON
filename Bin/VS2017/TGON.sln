@@ -9,32 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Engine", "00. Engine", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Core", "00. Core", "{5EB1B247-4CC9-4C9B-93DB-6F55891142AC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Core.Shared", "TGON.Core.Shared\TGON.Core.Shared.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Shared", "TGON.Shared\TGON.Shared.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModeJoy.Windows", "ModeJoy.Windows\ModeJoy.Windows.vcxproj", "{7B22956B-0D64-4439-BF42-8EA5D7959667}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Core.Windows", "TGON.Core.Windows\TGON.Core.Windows.vcxproj", "{13D1E164-C18A-4767-B01F-3E4350922EA9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Graphics", "01. Graphics", "{D2925521-75CE-4EB0-B582-29CC1BCE3191}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Game", "02. Game", "{13610BF6-A210-4B03-9B58-B3EC0B331737}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Graphics.Windows", "TGON.Graphics.Windows\TGON.Graphics.Windows.vcxproj", "{52645405-DD7E-4AEE-B075-561EE2F368BB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Graphics.Shared", "TGON.Graphics.Shared\TGON.Graphics.Shared.vcxitems", "{718B3A31-55E7-4B37-BBDE-9F741E88299F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Game.Shared", "TGON.Game.Shared\TGON.Game.Shared.vcxitems", "{3108EB1E-47FB-4D01-B440-72BE286690E8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Game.Windows", "TGON.Game.Windows\TGON.Game.Windows.vcxproj", "{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGON.Windows", "TGON.Windows\TGON.Windows.vcxproj", "{13D1E164-C18A-4767-B01F-3E4350922EA9}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		TGON.Core.Shared\TGON.Core.Shared.vcxitems*{13d1e164-c18a-4767-b01f-3e4350922ea9}*SharedItemsImports = 4
-		TGON.Game.Shared\TGON.Game.Shared.vcxitems*{3108eb1e-47fb-4d01-b440-72be286690e8}*SharedItemsImports = 9
-		TGON.Core.Shared\TGON.Core.Shared.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
-		TGON.Game.Shared\TGON.Game.Shared.vcxitems*{45fbe860-a391-4e8e-bff2-bc3b62814b1b}*SharedItemsImports = 4
-		TGON.Graphics.Shared\TGON.Graphics.Shared.vcxitems*{52645405-dd7e-4aee-b075-561ee2f368bb}*SharedItemsImports = 4
-		TGON.Graphics.Shared\TGON.Graphics.Shared.vcxitems*{718b3a31-55e7-4b37-bbde-9f741e88299f}*SharedItemsImports = 9
+		TGON.Shared\TGON.Shared.vcxitems*{13d1e164-c18a-4767-b01f-3e4350922ea9}*SharedItemsImports = 4
+		TGON.Shared\TGON.Shared.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
+		TGON.Shared\TGON.Shared.vcxitems*{7b22956b-0d64-4439-bf42-8ea5d7959667}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -59,22 +44,6 @@ Global
 		{13D1E164-C18A-4767-B01F-3E4350922EA9}.Release|x64.Build.0 = Release|x64
 		{13D1E164-C18A-4767-B01F-3E4350922EA9}.Release|x86.ActiveCfg = Release|Win32
 		{13D1E164-C18A-4767-B01F-3E4350922EA9}.Release|x86.Build.0 = Release|Win32
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Debug|x64.ActiveCfg = Debug|x64
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Debug|x64.Build.0 = Debug|x64
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Debug|x86.ActiveCfg = Debug|Win32
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Debug|x86.Build.0 = Debug|Win32
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Release|x64.ActiveCfg = Release|x64
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Release|x64.Build.0 = Release|x64
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Release|x86.ActiveCfg = Release|Win32
-		{52645405-DD7E-4AEE-B075-561EE2F368BB}.Release|x86.Build.0 = Release|Win32
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Debug|x64.ActiveCfg = Debug|x64
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Debug|x64.Build.0 = Debug|x64
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Debug|x86.ActiveCfg = Debug|Win32
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Debug|x86.Build.0 = Debug|Win32
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Release|x64.ActiveCfg = Release|x64
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Release|x64.Build.0 = Release|x64
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Release|x86.ActiveCfg = Release|Win32
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,12 +53,6 @@ Global
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {5EB1B247-4CC9-4C9B-93DB-6F55891142AC}
 		{7B22956B-0D64-4439-BF42-8EA5D7959667} = {DDAF0962-0A46-45C0-9B16-BD3BCE3A2D11}
 		{13D1E164-C18A-4767-B01F-3E4350922EA9} = {5EB1B247-4CC9-4C9B-93DB-6F55891142AC}
-		{D2925521-75CE-4EB0-B582-29CC1BCE3191} = {68FAB0F5-909A-42C6-926A-ADC6869BCE7F}
-		{13610BF6-A210-4B03-9B58-B3EC0B331737} = {68FAB0F5-909A-42C6-926A-ADC6869BCE7F}
-		{52645405-DD7E-4AEE-B075-561EE2F368BB} = {D2925521-75CE-4EB0-B582-29CC1BCE3191}
-		{718B3A31-55E7-4B37-BBDE-9F741E88299F} = {D2925521-75CE-4EB0-B582-29CC1BCE3191}
-		{3108EB1E-47FB-4D01-B440-72BE286690E8} = {13610BF6-A210-4B03-9B58-B3EC0B331737}
-		{45FBE860-A391-4E8E-BFF2-BC3B62814B1B} = {13610BF6-A210-4B03-9B58-B3EC0B331737}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {102FBB20-D825-4CFF-B504-81E5CA1CE53C}

@@ -59,7 +59,7 @@ public:
     
     /**
      * @brief               Removes the managed module.
-     * @tparam _ModuleType  The type of module what you want to remove.
+     * @tparam _ModuleType  The type of module to remove.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     bool RemoveModule();
@@ -78,20 +78,20 @@ public:
 private:
     /**
      * @brief               Inserts a module to manage.
-     * @param [in] module   The module what you want to insert.
+     * @param [in] module   The module to insert.
      */
     void AddModule(std::unique_ptr<IModule> module);
     
     /**
      * @brief               Returns a module that managed by Application.
-     * @param [in] moduleId The unique id of Module what you want to get.
+     * @param [in] moduleId The unique id of module to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
     IModule* GetModule(size_t moduleId);
 
     /**
      * @brief               Returns a module that managed by Application.
-     * @param [in] moduleId The unique id of Module what you want to get.
+     * @param [in] moduleId The unique id of module to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
     bool RemoveModule(size_t moduleId);
@@ -123,7 +123,7 @@ inline const _ModuleType* Engine::GetModule() const noexcept
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
 inline _ModuleType* Engine::GetModule() noexcept
 {
-    return this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
+    return static_cast<_ModuleType*>(this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
 }
 
 template <>

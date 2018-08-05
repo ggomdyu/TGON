@@ -1,11 +1,10 @@
 #include "PrecompiledHeader.h"
 
 #include "Core/Engine/Engine.h"
+#include "Core/Random/WELL1024a.h"
 
 #include "Application.h"
 #include "ApplicationType.h"
-#include "Window.h"
-#include "WindowType.h"
 
 namespace tgon
 {
@@ -13,6 +12,7 @@ namespace tgon
 Application::Application() :
     m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {
+    SrandWELL1024a();
 }
     
 Application* Application::GetInstance()

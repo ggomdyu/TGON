@@ -8,8 +8,9 @@
 #pragma once
 #include "Core/Platform/Config.h"
 #include "Core/Object/DelegateChain.h"
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
 
-#include "WindowType.h"
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsWindow.h"
 #elif TGON_PLATFORM_MACOS
@@ -19,6 +20,8 @@
 #elif BOOST_OS_IOS
 #   import "IOS/IOSWindow.h"
 #endif
+
+#include "WindowType.h"
 
 namespace tgon
 {

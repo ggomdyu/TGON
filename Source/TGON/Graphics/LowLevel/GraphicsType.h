@@ -45,4 +45,15 @@ public:
     uint16_t stencilBits;
 };
 
+enum class BlendMode
+{
+    Normal,
+    Darken,
+    Multiply,
+    Divide,
+    Subtract,
+    SoftLight,
+    HardLight,
+};
+
 } /* namespace tgon */

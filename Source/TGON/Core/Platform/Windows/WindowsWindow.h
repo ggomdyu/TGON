@@ -16,6 +16,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Core/Platform/Config.h"
+#include "Core/Platform/WindowType.h"
 
 namespace tgon
 {

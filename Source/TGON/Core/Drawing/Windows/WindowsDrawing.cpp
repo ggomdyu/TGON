@@ -2,8 +2,6 @@
 
 #include <Windows.h>
 
-#include "Core/Platform/Window.h"
-
 #include "../Drawing.h"
 
 namespace tgon

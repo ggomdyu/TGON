@@ -17,6 +17,8 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics.EnableDepthTest();
     m_graphics.EnableBlend();
     
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // Normal blend
 //    glBlendFunc(GL_ONE, GL_ZERO);
 //    glBlendEquation(GL_FUNC_ADD);
@@ -44,7 +46,7 @@ void GraphicsModule::Update()
 void GraphicsModule::Draw()
 {
     static Camera camera;
-    static TextureMaterial material(std::make_shared<Texture>(GetDesktopDirectory() + "/tumblr_o9xrb5NzqA1uzwbyjo1_540.gif"));
+    static TextureMaterial material(std::make_shared<Texture>(GetDesktopDirectory() + "/grass.png"));
     static auto quad = MakeQuad();
     static float yRotation1 = 0.0f;
     std::vector<Matrix4x4> matWVP{

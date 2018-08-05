@@ -1,9 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include <OIS.h>
-
-#include "Core/Platform/Window.h"
-
 #include "WindowsInputManager.h"
 
 namespace tgon

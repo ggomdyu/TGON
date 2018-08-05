@@ -10,7 +10,6 @@
 
 #include "Core/String/Encoding.h"
 #include "Core/Platform/Window.h"
-#include "Core/Platform/WindowType.h"
 
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"

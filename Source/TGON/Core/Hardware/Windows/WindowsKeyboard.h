@@ -7,18 +7,11 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
-namespace OIS
-{
-
-class Keyboard;
-
-} /* namespace OIS */
+#include "WindowsKeyboardType.h"
+#include "WindowsInputManager.h"
 
 namespace tgon
 {
-
-enum class KeyCode;
-class InputManagerImpl;
 
 class TGON_API KeyboardImpl final
 {
@@ -40,7 +33,5 @@ private:
     OIS::Keyboard* m_keyboardDevice;
     char m_prevKeyStates[256];
 };
-
-using PlatformKeyboard = KeyboardImpl;
 
 } /* namespace tgon */

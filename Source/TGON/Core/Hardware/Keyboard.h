@@ -7,12 +7,16 @@
 #pragma once
 #include "Core/Platform/Config.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsKeyboard.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSKeyboard.h"
+#endif
+
+#include "InputManager.h"
+
 namespace tgon
 {
-
-class InputManager;
-struct KeyboardImpl;
-enum class KeyCode;
 
 class TGON_API Keyboard final
 {

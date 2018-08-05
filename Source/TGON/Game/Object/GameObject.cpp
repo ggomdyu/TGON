@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-#include "Game/Component/Component.h"
-
 #include "GameObject.h"
 
 namespace tgon
@@ -13,8 +11,6 @@ GameObject::GameObject(const FixedStringHash32& name) :
     m_name(name)
 {
 }
-    
-GameObject::~GameObject() = default;
 
 void GameObject::Update()
 {
@@ -36,8 +32,6 @@ const FixedStringHash32& GameObject::GetName() const noexcept
 
 void GameObject::AddComponent(Component* component)
 {
-    component->SetOwner(this->shared_from_this());
-    
     auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;

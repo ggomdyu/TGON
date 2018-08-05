@@ -50,6 +50,7 @@ private:
             videoMode.enableMultiSampling = false;
         };
         this->AddModule<GraphicsModule>(rootWindow, videoMode);
+
     }
     
     void Terminal()
@@ -62,6 +63,11 @@ public:
     virtual void Update() override
     {
         SuperType::Update();
+
+        //if (GetModule<InputModule>()->GetMouse()->IsMouseDown(MouseCode::Left))
+        {
+            //Log(LogLevel::Debug, "WOW!");
+        }
     }
 };
 

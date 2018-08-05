@@ -6,10 +6,6 @@
 #include "OpenGLGraphics.h"
 #include "OpenGLUtility.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   pragma comment(lib, "glew32.lib")
-#endif
-
 namespace tgon
 {
 namespace

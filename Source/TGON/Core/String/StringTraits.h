@@ -18,6 +18,8 @@ class StringTraits
 {
 /* @section Public type */
 public:
+    using ValueType = _CharType;
+
     using CharTraitsType = std::char_traits<_CharType>;
 
 /* @section Protected constructor */

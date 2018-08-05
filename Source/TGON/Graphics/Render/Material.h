@@ -16,7 +16,7 @@ namespace tgon
 {
 
 class TGON_API Material :
-    public CoreObject
+    public RuntimeObject
 {
 public:
     TGON_RUNTIME_OBJECT(Material);

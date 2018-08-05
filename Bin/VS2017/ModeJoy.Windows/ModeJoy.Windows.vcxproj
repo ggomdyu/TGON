@@ -56,6 +56,7 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
+    <Import Project="..\TGON.Shared\TGON.Shared.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -146,12 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TGON.Game.Windows\TGON.Game.Windows.vcxproj">
-      <Project>{45fbe860-a391-4e8e-bff2-bc3b62814b1b}</Project>
-    </ProjectReference>
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp" />
+    <ProjectReference Include="..\TGON.Windows\TGON.Windows.vcxproj">
+      <Project>{13d1e164-c18a-4767-b01f-3e4350922ea9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

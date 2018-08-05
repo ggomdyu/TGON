@@ -20,12 +20,11 @@
 #   import "IOS/IOSApplication.h"
 #endif
 
+#include "Window.h"
+#include "WindowType.h"
+
 namespace tgon
 {
-
-class ApplicationImpl;
-class Window;
-enum class MessageBoxIcon;
 
 class TGON_API Application final :
     private boost::noncopyable
@@ -48,28 +47,28 @@ public:
     
     /**
      * @brief                       Shows a message box in front of screen.
-     * @param [in] message          The message what you want to show in description area.
+     * @param [in] message          The message to show in description area.
      */
     void ShowMessageBox(const char* message) const;
     
     /**
      * @brief                       Shows a message box in front of screen.
-     * @param [in] message          The message what you want to show in description area.
+     * @param [in] message          The message to show in description area.
      * @param [in] messageBoxIcon   The type of icon in message box.
      */
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
      * @brief                       Shows a message box in front of screen.
-     * @param [in] title            The message what you want to show in title area.
-     * @param [in] message          The message what you want to show in description area.
+     * @param [in] title            The message to show in title area.
+     * @param [in] message          The message to show in description area.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
     /**
      * @brief                       Shows a message box in front of screen.
-     * @param [in] title            The message what you want to show in title area.
-     * @param [in] message          The message what you want to show in description area.
+     * @param [in] title            The message to show in title area.
+     * @param [in] message          The message to show in description area.
      * @param [in] messageBoxIcon   The type of icon in message box.
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
@@ -90,7 +89,6 @@ protected:
     ApplicationImpl m_applicationImpl;
     
     std::unique_ptr<Window> m_rootWindow;
-
 };
 
 template <typename _FunctionType>

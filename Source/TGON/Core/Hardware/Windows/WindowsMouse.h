@@ -6,22 +6,15 @@
 
 #pragma once
 #include <memory>
+#include <OIS.h>
 
 #include "Core/Platform/Config.h"
 
-namespace OIS
-{
-
-class Mouse;
-class MouseState;
-
-} /* namespace OIS */
+#include "WindowsMouseType.h"
+#include "WindowsInputManager.h"
 
 namespace tgon
 {
-
-class InputManagerImpl;
-enum class MouseCode;
 
 class TGON_API MouseImpl final
 {
@@ -44,7 +37,5 @@ private:
     OIS::Mouse* m_mouseDevice;
     std::shared_ptr<OIS::MouseState> m_prevMouseState;
 };
-
-using PlatformMouse = MouseImpl;
 
 } /* namespace tgon */

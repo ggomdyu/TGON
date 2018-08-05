@@ -1,11 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "InputManager.h"
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsInputManager.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSInputManager.h"
-#endif
 
 namespace tgon
 {

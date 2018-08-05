@@ -7,18 +7,16 @@
 #pragma once
 #include <vector>
 
-#include "Graphics/Object/GraphicsObject.h"
 #include "Core/String/FixedStringHash.h"
-#include "Game/Component/ComponentUtility.h"
+#include "Graphics/Object/GraphicsObject.h"
+
+#include "Component.h"
 
 namespace tgon
 {
 
-class Component;
-
 class TGON_API GameObject final :
-	public GraphicsObject,
-    private std::enable_shared_from_this<GameObject>
+	public GraphicsObject
 {
 public:
     TGON_RUNTIME_OBJECT(GameObject);
@@ -29,7 +27,7 @@ public:
     
 /* @section Public destructor */
 public:
-    virtual ~GameObject() override;
+    virtual ~GameObject() override = default;
 
 /* @section Public method */
 public:
@@ -37,7 +35,7 @@ public:
 
     /**
      * @brief               Sets the name of object.
-     * @param [in] name     The name of object what you want to set.
+     * @param [in] name     The name of object to set.
      */
     void SetName(const FixedStringHash32& name);
 
@@ -50,7 +48,7 @@ public:
 
     /**
      * @brief                   Removes the managed component.
-     * @tparam _ComponentType   The type of Component what you want to remove.
+     * @tparam _ComponentType   The type of component to remove.
      * @return                  Returns true if successful, false otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
@@ -58,7 +56,7 @@ public:
 
     /**
      * @brief                   Gets a component that managed by this instance.
-     * @tparam _ComponentType   The type of Component what you want to get.
+     * @tparam _ComponentType   The type of component to get.
      * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
@@ -66,7 +64,7 @@ public:
 
     /**
      * @brief                   Gets a component that managed by this instance.
-     * @tparam _ComponentType   The type of Component what you want to get.
+     * @tparam _ComponentType   The type of component to get.
      * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
@@ -74,7 +72,7 @@ public:
 
     /**
      * @brief   Gets the name of object.
-     * @return  The name of object what you want to set.
+     * @return  The name of object to set.
      */
     const FixedStringHash32& GetName() const noexcept;
 
@@ -82,19 +80,19 @@ public:
 private:
     /**
      * @brief                   Inserts a component to manage.
-     * @param [in] component    The component what you want to insert.
+     * @param [in] component    The component to insert.
      */
     void AddComponent(Component* component);
 
     /**
      * @brief                   Removes the managed component.
-     * @param [in] componentId  The unique id of Component what you want to get.
+     * @param [in] componentId  The unique id of component to get.
      */
     bool RemoveComponent(size_t componentId);
 
     /**
      * @brief                   Gets a component that managed by this instance.
-     * @param [in] componentId  The unique id of Component what you want to get.
+     * @param [in] componentId  The unique id of component to get.
      * @return                  Returns the pointer to component if successful, nullptr otherwise.
      */
     Component* GetComponent(size_t componentId);
@@ -102,6 +100,7 @@ private:
 /* @section Private variable */
 private:
     FixedStringHash32 m_name;
+
     std::vector<std::unique_ptr<Component>> m_components;
 };
 

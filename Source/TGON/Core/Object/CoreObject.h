@@ -1,8 +1,7 @@
 /**
- * @file    Object.h
+ * @file    CoreObject.h
  * @author  ggomdyu
  * @since   03/22/2016
- * @brief   Define class which becomes the base of all objects.
  */
 
 #pragma once

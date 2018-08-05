@@ -7,9 +7,6 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
-#include "Core/Platform/Window.h"
-
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN 1
@@ -19,6 +16,9 @@
 #   import <AppKit/NSOpenGL.h>
 #   import <OpenGL/OpenGL.h>
 #endif
+
+#include "Core/Platform/Config.h"
+#include "Core/Platform/Window.h"
 
 #include "../GraphicsType.h"
 

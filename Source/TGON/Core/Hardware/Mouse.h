@@ -8,12 +8,16 @@
 #include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsMouse.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSMouse.h"
+#endif
+
+#include "InputManager.h"
+
 namespace tgon
 {
-    
-class InputManager;
-class MouseImpl;
-enum class MouseCode;
     
 class TGON_API Mouse final
 {

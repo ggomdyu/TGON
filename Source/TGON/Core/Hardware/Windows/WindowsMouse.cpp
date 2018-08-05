@@ -4,8 +4,6 @@
 #include <OIS.h>
 
 #include "WindowsMouse.h"
-#include "WindowsMouseType.h"
-#include "WindowsInputManager.h"
 
 namespace tgon
 {

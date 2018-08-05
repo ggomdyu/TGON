@@ -7,17 +7,18 @@
 
 #pragma once
 #include <map>
-#include <boost/any.hpp>
 
 namespace tgon
 {
 
 class SerializationInfo
 {
+/* @section Public method */
 public:
     template <typename _ValueType>
     void AddValue(const std::string& name, const _ValueType& value);
     
+/* @section Private variable */
 private:
     std::map<std::string, std::string> m_variableTable;
 };
@@ -32,5 +33,11 @@ public:
 public:
     /* @brief   Returns copied one from this instance. */
 };
+
+template<typename _ValueType>
+inline void SerializationInfo::AddValue(const std::string& name, const _ValueType& value)
+{
+    m_variableTable.insert(name, value);
+}
 
 } /* namespace tgon */

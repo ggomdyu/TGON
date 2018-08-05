@@ -10,11 +10,14 @@
 
 #include "Core/Platform/Config.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsInputManager.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSInputManager.h"
+#endif
+
 namespace tgon
 {
-
-class Window;
-class InputManagerImpl;
 
 class TGON_API InputManager final :
     private boost::noncopyable

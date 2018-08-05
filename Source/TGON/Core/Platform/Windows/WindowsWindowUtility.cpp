@@ -5,6 +5,7 @@
 #include "Core/String/Encoding.h"
 
 #include "../WindowType.h"
+
 #include "WindowsWindowUtility.h"
 
 namespace tgon

@@ -13,10 +13,10 @@
 
 #include "Core/Platform/Config.h"
 
+#include "WindowsApplicationType.h"
+
 namespace tgon
 {
-
-enum class MessageBoxIcon;
 
 class TGON_API ApplicationImpl final :
     private boost::noncopyable

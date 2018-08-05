@@ -32,16 +32,5 @@ enum class CullMode
     CW = GL_CW,
     CCW = GL_CCW,
 };
-    
-enum class BlendMode
-{
-    Normal,
-    Darken,
-    Multiply,
-    Divide,
-    Subtract,
-    SoftLight,
-    HardLight,
-};
 
 } /* namespace tgon */

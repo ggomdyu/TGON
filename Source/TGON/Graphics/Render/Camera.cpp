@@ -38,6 +38,7 @@ void Camera::Update()
 {
     if (m_isDirty == true)
     {
+        // TODO: This code supposed to use OpenGL, so you should use LH function when you support DirectX.
         m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
         
         if (m_projectionMode == ProjectionMode::Perspective)

@@ -60,6 +60,5 @@
 #include "Graphics/Render/FVF.h"
 #include "Graphics/Render/Camera.h"
 #include "Graphics/Engine/GraphicsModule.h"
-#include "Game/Object/Module/SceneModule.h"
 #include "Game/Object/GameObject.h"
-#include "Game/Component/Component.h"
+#include "Game/Object/Component.h"

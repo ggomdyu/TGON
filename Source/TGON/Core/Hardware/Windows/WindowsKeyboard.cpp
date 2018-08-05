@@ -1,8 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "WindowsKeyboard.h"
-#include "WindowsKeyboardType.h"
-#include "WindowsInputManager.h"
 
 namespace tgon
 {

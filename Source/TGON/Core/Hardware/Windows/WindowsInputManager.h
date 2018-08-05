@@ -6,24 +6,12 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
+#include <OIS.h>
 
-#include "Core/Platform/Config.h"
-
-namespace OIS
-{
-
-class Mouse;
-class Keyboard;
-class JoyStick;
-class InputManager;
-typedef std::multimap<std::string, std::string> ParamList;
-
-} /* namespace OIS */
+#include "Core/Platform/Window.h"
 
 namespace tgon
 {
-
-class Window;
 
 class TGON_API InputManagerImpl final :
     private boost::noncopyable

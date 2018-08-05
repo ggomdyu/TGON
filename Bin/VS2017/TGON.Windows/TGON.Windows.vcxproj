@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TGONCoreWindows</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>TGON.Windows</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -56,7 +57,7 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\TGON.Core.Shared\TGON.Core.Shared.vcxitems" Label="Shared" />
+    <Import Project="..\TGON.Shared\TGON.Shared.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -147,11 +148,21 @@
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\ComPtr.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\HandleGuard.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.h" />
+    <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\wiimote.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
       <FileType>Document</FileType>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.cpp" />
@@ -164,6 +175,51 @@
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsDateTime.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\WindowsOpenGLContext.cpp" />
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteForceFeedback.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteRingBuffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\wiimote.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32ForceFeedback.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32InputManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32JoyStick.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32KeyBoard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32Mouse.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
