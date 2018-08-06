@@ -1,9 +1,6 @@
 #include "PrecompiledHeader.h"
 
-
 #include "WindowsGamepad.h"
-#include "WindowsGamepadType.h"
-#include "WindowsInputManager.h"
 
 namespace tgon
 {

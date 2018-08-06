@@ -26,9 +26,16 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Updates the input manager. */
     void Update();
+    
+    /* @brief   Creates a native mouse device. */
     OIS::Mouse* CreateMouseDevice();
+
+    /* @brief   Creates a native keyboard device. */
     OIS::Keyboard* CreateKeyboardDevice();
+
+    /* @brief   Creates a native gamepad device. */
     OIS::JoyStick* CreateGamepadDevice();
 
 /* @section Private method */

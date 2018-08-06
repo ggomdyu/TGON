@@ -6,6 +6,7 @@
 
 #pragma once
 #include <memory>
+#include <boost/noncopyable.hpp>
 #include <OIS.h>
 
 #include "Core/Platform/Config.h"
@@ -16,7 +17,8 @@
 namespace tgon
 {
 
-class TGON_API MouseImpl final
+class TGON_API MouseImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:

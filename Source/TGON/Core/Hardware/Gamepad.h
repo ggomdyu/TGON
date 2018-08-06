@@ -5,17 +5,21 @@
  */
 
 #pragma once
-#include <cstdint>
-
 #include "Core/Platform/Config.h"
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsGamepad.h"
+#elif TGON_PLATFORM_MACOS
+#   include "MacOS/MacOSGamepad.h"
+#endif
+
+#include "InputManager.h"
 
 namespace tgon
 {
-    
-class InputManager;
-class GamepadImpl;
-    
-class TGON_API Gamepad final
+
+class TGON_API Gamepad final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -37,7 +41,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::unique_ptr<GamepadImpl> m_gamepadImpl;
+    GamepadImpl m_gamepadImpl;
 };
     
 } /* namespace tgon */

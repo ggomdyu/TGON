@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
+
 #include "Core/Platform/Config.h"
 
 #include "WindowsKeyboardType.h"
@@ -13,7 +15,8 @@
 namespace tgon
 {
 
-class TGON_API KeyboardImpl final
+class TGON_API KeyboardImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:

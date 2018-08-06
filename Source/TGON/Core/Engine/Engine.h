@@ -25,9 +25,6 @@
 namespace tgon
 {
 
-class IModule;
-struct WindowStyle;
-    
 class TGON_API Engine :
     public CoreObject
 {
@@ -44,7 +41,7 @@ public:
     
 /* @section Public method */
 public:
-    /* @brief   Returns the global instance of this class. */
+    /* @brief   Gets the global instance of this class. */
     static Engine* GetInstance();
     
     /* @brief               Updates the Engine. */
@@ -98,6 +95,8 @@ private:
 
 /* @section Private variable */
 private:
+    //std::unique_ptr<AudioModule> m_audioModule;
+
     std::unique_ptr<TimeModule> m_timeModule;
 
     std::vector<std::unique_ptr<IModule>> m_modules;

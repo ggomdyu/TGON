@@ -19,7 +19,8 @@
 namespace tgon
 {
     
-class TGON_API Mouse final
+class TGON_API Mouse final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -42,7 +43,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::unique_ptr<MouseImpl> m_mouseImpl;
+    MouseImpl m_mouseImpl;
 };
     
 } /* namespace tgon */

@@ -5,6 +5,7 @@
 
 #include "Application.h"
 #include "ApplicationType.h"
+#include "WindowType.h"
 
 namespace tgon
 {
@@ -17,8 +18,8 @@ Application::Application() :
     
 Application* Application::GetInstance()
 {
-    static Application ret;
-    return &ret;
+    static Application instance;
+    return &instance;
 }
 
 void Application::Terminate()

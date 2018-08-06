@@ -7,12 +7,11 @@
 #   include <alc.h>
 #endif
 
-#include "Core/Utility/StaticInvoke.h"
+#include "Importer/WavAudioImporter.h"
+#include "Importer/OggVorbisAudioImporter.h"
 
 #include "AudioBuffer.h"
 #include "AudioBufferUtility.h"
-#include "Importer/WavAudioImporter.h"
-#include "Importer/OggVorbisAudioImporter.h"
 
 namespace tgon
 {
@@ -24,22 +23,6 @@ AudioBuffer::AudioBuffer() :
     m_alBufferId(0),
     m_alFormat(0)
 {
-    TGON_STATIC_INVOKE([]()
-    {
-        ALCdevice* device = alcOpenDevice(nullptr);
-        if (device == nullptr)
-        {
-            return;
-        }
-        
-        ALCcontext* context = alcCreateContext(device, nullptr);
-        if (context == nullptr)
-        {
-            return;
-        }
-
-        alcMakeContextCurrent(context);
-    });
 }
 
 AudioBuffer::AudioBuffer(const std::string& filePath) :

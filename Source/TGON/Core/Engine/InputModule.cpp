@@ -53,17 +53,17 @@ void InputModule::Update()
     }
 }
 
-const std::unique_ptr<Mouse>& InputModule::GetMouse() const
+const std::unique_ptr<Mouse>& InputModule::GetMouse() const noexcept
 {
     return m_mouse;
 }
 
-const std::unique_ptr<Keyboard>& InputModule::GetKeyboard() const
+const std::unique_ptr<Keyboard>& InputModule::GetKeyboard() const noexcept
 {
     return m_keyboard;
 }
 
-const std::unique_ptr<Gamepad>& InputModule::GetGamepad() const
+const std::unique_ptr<Gamepad>& InputModule::GetGamepad() const noexcept
 {
     return m_gamepad;
 }

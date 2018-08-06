@@ -22,6 +22,7 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Updates the module. */
     virtual void Update() = 0;
 };
     

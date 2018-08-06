@@ -21,7 +21,6 @@
 #endif
 
 #include "Window.h"
-#include "WindowType.h"
 
 namespace tgon
 {
@@ -46,30 +45,30 @@ public:
     void Terminate();
     
     /**
-     * @brief                       Shows a message box in front of screen.
+     * @brief                       Displays a message box.
      * @param [in] message          The message to show in description area.
      */
     void ShowMessageBox(const char* message) const;
     
     /**
-     * @brief                       Shows a message box in front of screen.
+     * @brief                       Displays a message box.
      * @param [in] message          The message to show in description area.
-     * @param [in] messageBoxIcon   The type of icon in message box.
+     * @param [in] messageBoxIcon   The type of icon appears in the message box.
      */
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
-     * @brief                       Shows a message box in front of screen.
+     * @brief                       Displays a message box.
      * @param [in] title            The message to show in title area.
      * @param [in] message          The message to show in description area.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
     /**
-     * @brief                       Shows a message box in front of screen.
+     * @brief                       Displays a message box.
      * @param [in] title            The message to show in title area.
      * @param [in] message          The message to show in description area.
-     * @param [in] messageBoxIcon   The type of icon in message box.
+     * @param [in] messageBoxIcon   The type of icon appears in the message box.
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     

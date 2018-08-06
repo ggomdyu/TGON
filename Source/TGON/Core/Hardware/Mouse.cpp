@@ -6,7 +6,7 @@ namespace tgon
 {
     
 Mouse::Mouse(InputManager& inputManager) :
-    m_mouseImpl(std::make_unique<MouseImpl>(inputManager.GetImpl()))
+    m_mouseImpl(inputManager.GetImpl())
 {
 }
     
@@ -14,7 +14,7 @@ Mouse::~Mouse() = default;
     
 void Mouse::Update()
 {
-    m_mouseImpl->Update();
+    m_mouseImpl.Update();
 }
 
 void Mouse::GetPosition(int32_t* x, int32_t* y)
@@ -32,27 +32,27 @@ I32Point Mouse::GetPosition()
     
 bool Mouse::IsMouseDown(MouseCode mouseCode) const
 {
-    return m_mouseImpl->IsMouseDown(mouseCode);
+    return m_mouseImpl.IsMouseDown(mouseCode);
 }
 
 bool Mouse::IsMouseHold(MouseCode mouseCode) const
 {
-    return m_mouseImpl->IsMouseHold(mouseCode);
+    return m_mouseImpl.IsMouseHold(mouseCode);
 }
 
 bool Mouse::IsMouseUp(MouseCode mouseCode) const
 {
-    return m_mouseImpl->IsMouseUp(mouseCode);
+    return m_mouseImpl.IsMouseUp(mouseCode);
 }
 
 const MouseImpl& Mouse::GetImpl() const noexcept
 {
-    return *m_mouseImpl;
+    return m_mouseImpl;
 }
 
 MouseImpl& Mouse::GetImpl() noexcept
 {
-    return *m_mouseImpl;
+    return m_mouseImpl;
 }
 
 } /* namespace tgon */

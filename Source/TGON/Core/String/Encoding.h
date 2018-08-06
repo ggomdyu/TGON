@@ -25,8 +25,8 @@ template <typename _FromEncodingType>
 template <typename _ToEncodingType, typename _CharType, typename _CharType2>
 inline bool Encoding<_FromEncodingType>::Convert(const _CharType* srcStr, std::size_t srcStrLen, _CharType2* destStr, std::size_t destStrBufferLen)
 {
-    assert(srcStr != nullptr && "srcStr can't be nullptr.");
-    assert(destStr != nullptr && "destStr can't be nullptr.");
+    assert(srcStr != nullptr);
+    assert(destStr != nullptr);
 
     iconv_t cd = iconv_open(_ToEncodingType::EncodingName, _FromEncodingType::EncodingName);
     if (cd == iconv_t(-1))

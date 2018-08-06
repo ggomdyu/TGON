@@ -1,7 +1,7 @@
 /**
  * @file    TimeModule.h
  * @author  ggomdyu
- * @since   ß07/24/2016
+ * @since   07/24/2016
  */
 
 #pragma once

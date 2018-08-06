@@ -18,7 +18,8 @@
 namespace tgon
 {
 
-class TGON_API Keyboard final
+class TGON_API Keyboard final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -39,7 +40,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::unique_ptr<KeyboardImpl> m_keyboardImpl;
+    KeyboardImpl m_keyboardImpl;
 };
     
 } /* namespace tgon */

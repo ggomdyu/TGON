@@ -6,16 +6,19 @@
 
 #pragma once
 #include <cstdint>
+#include <boost/noncopyable.hpp>
 #include <OIS.h>
 
 #include "Core/Platform/Config.h"
 
+#include "WindowsGamepadType.h"
+#include "WindowsInputManager.h"
+
 namespace tgon
 {
 
-class InputManagerImpl;
-
-class TGON_API GamepadImpl final
+class TGON_API GamepadImpl final :
+    private boost::noncopyable
 {
 /* @section Public constructor */
 public:
@@ -36,7 +39,5 @@ private:
     OIS::JoyStick* m_gamepadDevice;
     OIS::JoyStickState m_prevGamepadState;
 };
-
-using PlatformGamepad = GamepadImpl;
 
 } /* namespace tgon */

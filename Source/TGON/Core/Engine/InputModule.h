@@ -17,11 +17,14 @@
 namespace tgon
 {
 
-struct TGON_API InputMode
+struct TGON_API InputMode final
 {
 /* @section Public constructor */
 public:
+    /* @brief Initializes with default constructor. */
     constexpr InputMode() noexcept = default;
+
+    /* @brief Initializes with some flags. */
     constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
     
 /* @section Public variable */
@@ -43,11 +46,17 @@ public:
 
 /* @section Public method */
 public:
+    /* @brief   Updates the module. */
     virtual void Update() override;
     
-    const std::unique_ptr<Mouse>& GetMouse() const;
-    const std::unique_ptr<Keyboard>& GetKeyboard() const;
-    const std::unique_ptr<Gamepad>& GetGamepad() const;
+    /* @brief   Gets the mouse device. */
+    const std::unique_ptr<Mouse>& GetMouse() const noexcept;
+    
+    /* @brief   Gets the keyboard device. */
+    const std::unique_ptr<Keyboard>& GetKeyboard() const noexcept;
+
+    /* @brief   Gets the gamepad device. */
+    const std::unique_ptr<Gamepad>& GetGamepad() const noexcept;
 
 /* @section Private variable */
 public:

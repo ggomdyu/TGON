@@ -5,9 +5,6 @@
  */
 
 #pragma once
-#include <memory>
-#include <boost/noncopyable.hpp>
-
 #include "Core/Platform/Config.h"
 
 #if TGON_PLATFORM_WINDOWS
@@ -39,7 +36,7 @@ public:
     
 /* @section Private variable */
 private:
-    std::unique_ptr<InputManagerImpl> m_inputManagerImpl;
+    InputManagerImpl m_inputManagerImpl;
 };
 
 } /* namespace tgon */

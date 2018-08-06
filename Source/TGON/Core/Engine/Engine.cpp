@@ -2,11 +2,9 @@
 
 #include <algorithm>
 
-#include "Core/Platform/WindowType.h"
 #include "Core/Platform/Application.h"
 
 #include "Engine.h"
-#include "IModule.h"
 
 namespace tgon
 {
@@ -22,8 +20,8 @@ Engine::~Engine() = default;
 
 Engine* Engine::GetInstance()
 {
-    static decltype(auto) engine = MakeEngine();
-    return engine.get();
+    static decltype(auto) instance = MakeEngine();
+    return instance.get();
 }
     
 void Engine::AddModule(std::unique_ptr<IModule> module)

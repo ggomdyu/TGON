@@ -20,7 +20,7 @@ class BasicFixedString :
     static_assert(_CharArraySize > 0, "The array size of BasicFixedString must be over than 0.");
 
     static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value,
-        "_StringTraitsType's character type doesn't match with the _CharType");
+        "_StringTraitsType's character type doesn't match with the _CharType.");
 
 /* @section Public type */
 public:

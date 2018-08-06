@@ -26,6 +26,7 @@
 #include "Core/Object/CoreObject.h"
 #include "Core/Engine/TimeModule.h"
 #include "Core/Engine/InputModule.h"
+#include "Core/Engine/AudioModule.h"
 #include "Core/Engine/Engine.h"
 #include "Core/File/Path.h"
 #include "Core/Random/Random.h"
