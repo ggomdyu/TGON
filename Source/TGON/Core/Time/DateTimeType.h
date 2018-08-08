@@ -9,6 +9,13 @@
 namespace tgon
 {
 
+enum class DateTimeKind
+{
+    Unspecified,
+    Local,
+    Utc,
+};
+
 enum class DayOfWeek
 {
     Sunday = 0,

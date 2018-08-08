@@ -44,11 +44,11 @@ public:
 /* @section Public operator */
 public:
     constexpr bool operator==(const BasicStringViewHash& rhs) const noexcept;
+
     constexpr const _CharType operator[](std::size_t index) const;
     
 /* @section Public method */
 public:
-    using SuperType::Assign;
     using SuperType::Compare;
     using SuperType::Find;
     using SuperType::RFind;

@@ -17,6 +17,7 @@
 #include "Core/Platform/Locale.h"
 #include "Core/Platform/ScreenType.h"
 #include "Core/Time/Time.h"
+#include "Core/Time/DateTime.h"
 #include "Core/Utility/StaticInvoke.h"
 #include "Core/Hardware/InputManager.h"
 #include "Core/Hardware/Keyboard.h"

@@ -20,18 +20,22 @@ class TGON_API DateTime final
 {
 /* @section Public constructor */
 public:
-    constexpr explicit DateTime(const std::tm& rawTime) noexcept;
+    constexpr explicit DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept;
     constexpr explicit DateTime(int32_t year, int32_t month, int32_t day) noexcept;
     constexpr explicit DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept;
-    constexpr explicit DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek) noexcept;
+
+/* @section Private constructor */
+private:
+    constexpr explicit DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept;
 
 /* @section Public method */
 public:
-    static DateTime Now() noexcept;
-    static DateTime UtcNow() noexcept;
-    static DateTime Today() noexcept;
+    static DateTime Now();
+    static DateTime UtcNow();
+    static DateTime Today();
     static constexpr bool IsLeapYear(int32_t year) noexcept;
-    static constexpr int32_t DaysInMonth(int32_t year, int32_t month) noexcept;
+    static constexpr int32_t DaysInMonth(int32_t year, int32_t month);
+    void AddDays(int days);
     void AddDays(float days);
     constexpr int32_t GetMonth() const noexcept;
     constexpr int32_t GetDay() const noexcept;
@@ -40,8 +44,9 @@ public:
     constexpr int32_t GetMinute() const noexcept;
     constexpr int32_t GetSecond() const noexcept;
     constexpr DayOfWeek GetDayOfWeek() const noexcept;
-    static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day) noexcept;
+    static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
     constexpr int32_t GetDayOfYear() const noexcept;
+    constexpr DateTimeKind GetDateTimeKind() const noexcept;
 
 /* @section Public variable */
 private:
@@ -52,17 +57,19 @@ private:
     int32_t m_minute;
     int32_t m_second;
     DayOfWeek m_dayOfWeek;
+    DateTimeKind m_dateTimeKind;
 };
 
-constexpr DateTime::DateTime(const std::tm& rawTime) noexcept :
+constexpr DateTime::DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept :
     DateTime(
-        static_cast<int32_t>(rawTime.tm_mon + 1), 
-        static_cast<int32_t>(rawTime.tm_mday), 
-        static_cast<int32_t>(1900 + rawTime.tm_year), 
-        static_cast<int32_t>(rawTime.tm_hour), 
-        static_cast<int32_t>(rawTime.tm_min), 
-        static_cast<int32_t>(rawTime.tm_sec), 
-        static_cast<DayOfWeek>(rawTime.tm_wday)
+        static_cast<int32_t>(1900 + rawTime.tm_year),
+        static_cast<int32_t>(rawTime.tm_mon + 1),
+        static_cast<int32_t>(rawTime.tm_mday),
+        static_cast<int32_t>(rawTime.tm_hour),
+        static_cast<int32_t>(rawTime.tm_min),
+        static_cast<int32_t>(rawTime.tm_sec),
+        static_cast<DayOfWeek>(rawTime.tm_wday),
+        dateTimeKind
     )
 {
 }
@@ -73,18 +80,19 @@ constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day) noexcept 
 }
 
 constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept :
-    DateTime(year, month, day, hour, minute, second, DateTime::GetDayOfWeek(year, month, day))
+    DateTime(year, month, day, hour, minute, second, DateTime::GetDayOfWeek(year, month, day), DateTimeKind::Unspecified)
 {
 }
 
-constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek) noexcept :
+constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept :
     m_year(year),
     m_month(month),
     m_day(day),
     m_hour(hour),
     m_minute(minute),
     m_second(second),
-    m_dayOfWeek(dayOfWeek)
+    m_dayOfWeek(dayOfWeek),
+    m_dateTimeKind(dateTimeKind)
 {
 }
 
@@ -128,7 +136,7 @@ constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
     return m_dayOfWeek;
 }
 
-constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t day) noexcept
+constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t day)
 {
     constexpr int32_t termTable[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
 
@@ -149,7 +157,12 @@ constexpr int32_t DateTime::GetDayOfYear() const noexcept
     return dayOfYear + m_day;
 }
 
-constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
+inline constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
+{
+    return m_dateTimeKind;
+}
+
+constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month)
 {
     constexpr int32_t daysInYearTable[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 

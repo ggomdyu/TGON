@@ -5,7 +5,7 @@
 namespace tgon
 {
 
-DateTime DateTime::Today() noexcept
+DateTime DateTime::Today()
 {
     DateTime today = DateTime::Now();
     {
@@ -14,6 +14,11 @@ DateTime DateTime::Today() noexcept
         today.m_second = 0;
     }
     return today;
+}
+
+void DateTime::AddDays(int days)
+{
+    this->AddDays(static_cast<float>(days));
 }
 
 } /* namespace tgon */
