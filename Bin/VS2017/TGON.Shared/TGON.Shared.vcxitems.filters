@@ -270,6 +270,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Time\Time.cpp">
       <Filter>Source\Core\Time</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\AudioDevice.cpp">
+      <Filter>Source\Core\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -766,6 +769,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\OIS-1.4\includes\OISConfig.h">
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Audio\AudioDevice.h">
+      <Filter>Source\Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\WeightSelector.h">
+      <Filter>Source\Core\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
