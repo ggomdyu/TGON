@@ -108,15 +108,15 @@ auto ThreadPool::AddTask(_TaskType&& task, _ArgTypes&&... args) -> std::future<d
     return {};
 }
 
-template<typename _ValueType>
-template<typename _ValueType2>
+template <typename _ValueType>
+template <typename _ValueType2>
 inline void ThreadPool::ThreadWorkQueue<_ValueType>::Enqueue(_ValueType2&& value)
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
     SuperType::push_back(std::forward<_ValueType2>(value));
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline _ValueType ThreadPool::ThreadWorkQueue<_ValueType>::Dequeue()
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
@@ -127,7 +127,7 @@ inline _ValueType ThreadPool::ThreadWorkQueue<_ValueType>::Dequeue()
     return std::move(ret);
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline void ThreadPool::ThreadWorkQueue<_ValueType>::Clear()
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);
@@ -135,7 +135,7 @@ inline void ThreadPool::ThreadWorkQueue<_ValueType>::Clear()
     SuperType::clear();
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline bool ThreadPool::ThreadWorkQueue<_ValueType>::IsEmpty() const
 {
     std::lock_guard<std::mutex> lockGuard(m_mutex);

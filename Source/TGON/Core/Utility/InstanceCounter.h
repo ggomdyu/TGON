@@ -35,7 +35,7 @@ protected:
 template <typename _InstanceType>
 int32_t InstanceCounter<_InstanceType>::ms_instanceCount = 0;
 
-template<typename _InstanceType>
+template <typename _InstanceType>
 inline InstanceCounter<_InstanceType>::InstanceCounter() noexcept
 {
     ++ms_instanceCount;

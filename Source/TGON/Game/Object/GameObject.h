@@ -104,19 +104,19 @@ private:
     std::vector<std::unique_ptr<Component>> m_components;
 };
 
-template<typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
+template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
 inline const _ComponentType* GameObject::GetComponent() const
 {
     return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
 }
     
-template<typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
+template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
 inline _ComponentType* GameObject::GetComponent()
 {
     return static_cast<_ComponentType*>(GetComponentId<_ComponentType>());
 }
 
-template<typename _ComponentType, typename... _ArgTypes>
+template <typename _ComponentType, typename... _ArgTypes>
 inline void GameObject::AddComponent(_ArgTypes&&... args)
 {
     this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));

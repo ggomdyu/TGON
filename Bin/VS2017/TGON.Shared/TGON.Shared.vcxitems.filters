@@ -308,9 +308,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\StringTraits.h">
       <Filter>Source\Core\String</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\TypeTraits.h">
-      <Filter>Source\Core\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.h">
       <Filter>Source\Core\Random</Filter>
     </ClInclude>
@@ -774,6 +771,9 @@
       <Filter>Source\Core\Audio</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\WeightSelector.h">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Core\Utility\FunctionTraits.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
   </ItemGroup>

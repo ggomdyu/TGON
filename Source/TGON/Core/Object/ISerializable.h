@@ -34,7 +34,7 @@ public:
     /* @brief   Returns copied one from this instance. */
 };
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline void SerializationInfo::AddValue(const std::string& name, const _ValueType& value)
 {
     m_variableTable.insert(name, value);

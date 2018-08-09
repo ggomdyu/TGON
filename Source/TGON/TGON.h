@@ -51,6 +51,7 @@
 #include "Core/Utility/AutoCast.h"
 #include "Core/Utility/InstanceCounter.h"
 #include "Core/Utility/InstantiateCounter.h"
+#include "Core/Utility/WeightSelector.h"
 #include "Graphics/LowLevel/Graphics.h"
 #include "Graphics/LowLevel/GraphicsType.h"
 #include "Graphics/LowLevel/Texture.h"

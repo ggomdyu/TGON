@@ -1,5 +1,5 @@
 /**
- * @file    TypeTraits.h
+ * @file    FunctionTraits.h
  * @author  ggomdyu
  * @since   05/24/2016
  * @brief   The traits that provides information about given type in compile time.

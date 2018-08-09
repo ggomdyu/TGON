@@ -92,41 +92,41 @@ inline DelegateChain<_ReturnType(_ArgTypes...)>::DelegateChain(_DelegateContaine
 {
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
-template<typename _DelegateType>
+template <typename _ReturnType, typename... _ArgTypes>
+template <typename _DelegateType>
 inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator+=(_DelegateType&& rhs)
 {
     this->Append(std::forward<_DelegateType>(rhs));
     return *this;
 }
     
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator-=(const DelegateType& rhs)
 {
     this->Erase(rhs);
     return *this;
 }
     
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgTypes...)>::operator=(std::nullptr_t rhs) noexcept
 {
     this->Clear();
     return *this;
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
 {
     return m_invocationList.size() <= 0;
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
     return m_invocationList.size() > 0;
 }
     
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 template <typename... _ArgTypes2>
 inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&... args)
 {
@@ -151,14 +151,14 @@ inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes2&&
     return (*iter)(std::forward<_ArgTypes2>(args)...);
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
-template<typename _DelegateType>
+template <typename _ReturnType, typename... _ArgTypes>
+template <typename _DelegateType>
 inline void DelegateChain<_ReturnType(_ArgTypes...)>::Append(_DelegateType&& value)
 {
     m_invocationList.push_back(std::forward<_DelegateType>(value));
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline bool DelegateChain<_ReturnType(_ArgTypes...)>::Erase(const DelegateType& value)
 {
     auto iter = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& rhs)
@@ -177,13 +177,13 @@ inline bool DelegateChain<_ReturnType(_ArgTypes...)>::Erase(const DelegateType& 
     }
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline void DelegateChain<_ReturnType(_ArgTypes...)>::Clear() noexcept
 {
     m_invocationList.clear();
 }
 
-template<typename _ReturnType, typename... _ArgTypes>
+template <typename _ReturnType, typename... _ArgTypes>
 inline const std::vector<Delegate<_ReturnType(_ArgTypes...)>>& DelegateChain<_ReturnType(_ArgTypes...)>::GetInvocationList() const noexcept
 {
     return m_invocationList;
