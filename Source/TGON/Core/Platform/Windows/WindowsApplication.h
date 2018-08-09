@@ -13,7 +13,7 @@
 
 #include "Core/Platform/Config.h"
 
-#include "WindowsApplicationType.h"
+#include "../ApplicationType.h"
 
 namespace tgon
 {

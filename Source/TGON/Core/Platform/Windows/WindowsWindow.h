@@ -15,22 +15,20 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
+#include "Core/Object/DelegateChain.h"
 #include "Core/Platform/Config.h"
-#include "Core/Platform/WindowType.h"
+
+#include "../WindowType.h"
 
 namespace tgon
 {
-
-class Window;
-struct WindowStyle;
 
 class WindowImpl final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowImpl(Window* owner);
-    WindowImpl(Window* owner, const WindowStyle& windowStyle);
+    WindowImpl(const WindowStyle& windowStyle);
 
 /* @section Public method */
 public:
@@ -61,14 +59,23 @@ public:
 public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
+    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
+    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
+    DelegateChain<void()> OnWindowMaximize;
+    DelegateChain<void()> OnWindowMinimize;
+    DelegateChain<void()> OnWindowEnterFullScreen;
+    DelegateChain<void()> OnWindowExitFullScreen;
+    DelegateChain<void()> OnWindowWillClose;
+    DelegateChain<void()> OnWindowDidClose;
+    DelegateChain<void()> OnWindowGetFocus;
+    DelegateChain<void()> OnWindowLoseFocus;
+
 /* @section Private method */
 private:
     void SetUserData(void* data);
 
 /* @section Private variable */
 private:
-    Window* m_owner;
-
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;
 };

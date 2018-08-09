@@ -7,7 +7,6 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
-#include "Core/Object/DelegateChain.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
 
@@ -21,8 +20,6 @@
 #   import "IOS/IOSWindow.h"
 #endif
 
-#include "WindowType.h"
-
 namespace tgon
 {
 
@@ -31,8 +28,7 @@ class TGON_API Window final :
 {
 /* @section Private constructor */
 public:
-    Window();
-    Window(const WindowStyle& windowStyle);
+    Window(const WindowStyle& windowStyle = {});
 
 /* @section Public constructor */
 public:
@@ -68,16 +64,16 @@ public:
 
 /* @section Public event handler */
 public:
-    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
-    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
-    DelegateChain<void()> OnWindowMaximize;
-    DelegateChain<void()> OnWindowMinimize;
-    DelegateChain<void()> OnWindowEnterFullScreen;
-    DelegateChain<void()> OnWindowExitFullScreen;
-    DelegateChain<void()> OnWindowWillClose;
-    DelegateChain<void()> OnWindowDidClose;
-    DelegateChain<void()> OnWindowGetFocus;
-    DelegateChain<void()> OnWindowLoseFocus;
+    DelegateChain<void(int32_t, int32_t)>& OnWindowMove;
+    DelegateChain<void(int32_t, int32_t)>& OnWindowResize;
+    DelegateChain<void()>& OnWindowMaximize;
+    DelegateChain<void()>& OnWindowMinimize;
+    DelegateChain<void()>& OnWindowEnterFullScreen;
+    DelegateChain<void()>& OnWindowExitFullScreen;
+    DelegateChain<void()>& OnWindowWillClose;
+    DelegateChain<void()>& OnWindowDidClose;
+    DelegateChain<void()>& OnWindowGetFocus;
+    DelegateChain<void()>& OnWindowLoseFocus;
 
 /* @section Private variable */
 private:

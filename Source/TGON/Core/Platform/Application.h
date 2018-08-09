@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Core/Platform/Config.h"
 #include "Core/Object/DelegateChain.h"
 

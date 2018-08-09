@@ -4,8 +4,6 @@
 #include "Core/Random/WELL1024a.h"
 
 #include "Application.h"
-#include "ApplicationType.h"
-#include "WindowType.h"
 
 namespace tgon
 {

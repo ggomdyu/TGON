@@ -17,15 +17,9 @@
 namespace tgon
 {
 
-WindowImpl::WindowImpl(Window* owner) :
-    m_owner(owner)
-{
-}
-
-WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
+WindowImpl::WindowImpl(const WindowStyle& windowStyle) :
     m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
-    m_isDwmCompositionEnabled(false),
-    m_owner(owner)
+    m_isDwmCompositionEnabled(false)
 {
     assert(m_wndHandle != nullptr);
 
@@ -236,17 +230,17 @@ LRESULT WindowImpl::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPA
             {
             case SC_MINIMIZE:
                 {
-                    if (m_owner->OnWindowMinimize != nullptr)
+                    if (OnWindowMinimize != nullptr)
                     {
-                        m_owner->OnWindowMinimize();
+                        OnWindowMinimize();
                     }
                 }
                 break;
             case SC_MAXIMIZE:
                 {
-                    if (m_owner->OnWindowMaximize != nullptr)
+                    if (OnWindowMaximize != nullptr)
                     {
-                        m_owner->OnWindowMaximize();
+                        OnWindowMaximize();
                     }
                 }
                 break;
@@ -256,54 +250,54 @@ LRESULT WindowImpl::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPA
 
     case WM_SETFOCUS:
         {
-            if (m_owner->OnWindowGetFocus != nullptr)
+            if (OnWindowGetFocus != nullptr)
             {
-                m_owner->OnWindowGetFocus();
+                OnWindowGetFocus();
             }
         }
         break;
 
     case WM_KILLFOCUS:
         {
-            if (m_owner->OnWindowLoseFocus != nullptr)
+            if (OnWindowLoseFocus != nullptr)
             {
-                m_owner->OnWindowLoseFocus();
+                OnWindowLoseFocus();
             }
         }
         break;
 
     case WM_MOVE:
         {
-            if (m_owner->OnWindowMove != nullptr)
+            if (OnWindowMove != nullptr)
             {
-                m_owner->OnWindowMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                OnWindowMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }
         }
         break;
 
     case WM_SIZE:
         {
-            if (m_owner->OnWindowResize != nullptr)
+            if (OnWindowResize != nullptr)
             {
-                m_owner->OnWindowResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                OnWindowResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }   
         }
         break;
 
     case WM_CLOSE:
         {
-            if (m_owner->OnWindowWillClose != nullptr)
+            if (OnWindowWillClose != nullptr)
             {
-                m_owner->OnWindowWillClose();
+                OnWindowWillClose();
             }
         }
         break;
 
     case WM_DESTROY:
         {
-            if (m_owner->OnWindowDidClose != nullptr)
+            if (OnWindowDidClose != nullptr)
             {
-                m_owner->OnWindowDidClose();
+                OnWindowDidClose();
             }
 
             this->Close();

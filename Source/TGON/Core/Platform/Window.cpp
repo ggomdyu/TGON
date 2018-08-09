@@ -5,13 +5,18 @@
 namespace tgon
 {
 
-Window::Window() :
-    m_windowImpl(this)
-{
-}
-
 Window::Window(const WindowStyle& windowStyle) :
-    m_windowImpl(this, windowStyle)
+    m_windowImpl(windowStyle),
+    OnWindowMove(m_windowImpl.OnWindowMove),
+    OnWindowResize(m_windowImpl.OnWindowMove),
+    OnWindowMaximize(m_windowImpl.OnWindowMaximize),
+    OnWindowMinimize(m_windowImpl.OnWindowMinimize),
+    OnWindowEnterFullScreen(m_windowImpl.OnWindowEnterFullScreen),
+    OnWindowExitFullScreen(m_windowImpl.OnWindowExitFullScreen),
+    OnWindowWillClose(m_windowImpl.OnWindowWillClose),
+    OnWindowDidClose(m_windowImpl.OnWindowDidClose),
+    OnWindowGetFocus(m_windowImpl.OnWindowGetFocus),
+    OnWindowLoseFocus(m_windowImpl.OnWindowLoseFocus)
 {
 }
 
