@@ -20,13 +20,13 @@ class TGON_API DateTime final
 {
 /* @section Public constructor */
 public:
-    constexpr explicit DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept;
-    constexpr explicit DateTime(int32_t year, int32_t month, int32_t day) noexcept;
-    constexpr explicit DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept;
+    constexpr DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept;
+    constexpr DateTime(int32_t year, int32_t month, int32_t day);
+    constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second);
 
 /* @section Private constructor */
 private:
-    constexpr explicit DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept;
+    constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept;
 
 /* @section Public method */
 public:
@@ -74,12 +74,12 @@ constexpr DateTime::DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) 
 {
 }
 
-constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day) noexcept :
+constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day) :
     DateTime(year, month, day, 0, 0, 0)
 {
 }
 
-constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept :
+constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) :
     DateTime(year, month, day, hour, minute, second, DateTime::GetDayOfWeek(year, month, day), DateTimeKind::Unspecified)
 {
 }
@@ -98,7 +98,7 @@ constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t h
 
 constexpr bool DateTime::IsLeapYear(int32_t year) noexcept
 {
-    return (year % 400 == 0) || (year % 100 != 0) && (year % 4 == 0);
+    return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
 }
 
 constexpr int32_t DateTime::GetMonth() const noexcept

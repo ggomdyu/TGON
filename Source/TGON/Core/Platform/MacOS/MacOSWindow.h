@@ -6,29 +6,26 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
+#import <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
-#include "Core/Math/Point.h"
-#include "Core/Math/Extent.h"
+#import "Core/Platform/Config.h"
+#import "Core/Object/DelegateChain.h"
 
 #import "../WindowType.h"
+
 
 @class NSWindow;
 @class WindowDelegate;
 
 namespace tgon
 {
-    
-class Window;
 
 class TGON_API WindowImpl final :
     private boost::noncopyable
 {
 /* @section Public constructor */
 public:
-    WindowImpl(Window* owner);
-    explicit WindowImpl(Window* owner, const WindowStyle& windowStyle);
+    explicit WindowImpl(const WindowStyle& windowStyle);
     WindowImpl(WindowImpl&& rhs) noexcept;
     
 /* @section Public operator */
@@ -63,6 +60,19 @@ public:
     bool IsMaximized() const;
     bool IsMinimized() const;
     bool IsTopMost() const;
+    
+/* @section Public event handler */
+public:
+    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
+    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
+    DelegateChain<void()> OnWindowMaximize;
+    DelegateChain<void()> OnWindowMinimize;
+    DelegateChain<void()> OnWindowEnterFullScreen;
+    DelegateChain<void()> OnWindowExitFullScreen;
+    DelegateChain<void()> OnWindowWillClose;
+    DelegateChain<void()> OnWindowDidClose;
+    DelegateChain<void()> OnWindowGetFocus;
+    DelegateChain<void()> OnWindowLoseFocus;
     
 /* @section Private variable */
 private:

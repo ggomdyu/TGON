@@ -68,6 +68,32 @@ void GraphicsImpl::SetViewport(int32_t x, int32_t y, int32_t width, int32_t heig
 {
     TGON_GL_ERROR_CHECK(glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 }
+    
+void GraphicsImpl::SetBlendMode(BlendMode blendMode)
+{
+    switch (blendMode)
+    {
+    case BlendMode::Normal:
+        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ZERO));
+        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
+        break;
+            
+    case BlendMode::Alpha:
+        TGON_GL_ERROR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
+        break;
+            
+    case BlendMode::Additive:
+        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ONE));
+        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
+        break;
+            
+    case BlendMode::Subtractive:
+        TGON_GL_ERROR_CHECK(glBlendFunc(GL_ONE, GL_ONE));
+        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_REVERSE_SUBTRACT));
+        break;
+    }
+}
 
 void GraphicsImpl::EnableCullFace()
 {

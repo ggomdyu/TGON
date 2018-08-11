@@ -48,6 +48,9 @@ public:
 enum class BlendMode
 {
     Normal,
+    Alpha,
+    Additive,
+    Subtractive,
     Darken,
     Multiply,
     Divide,

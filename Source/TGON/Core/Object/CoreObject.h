@@ -32,7 +32,8 @@ public:
     
 /* @section Public method */
 public:
-    virtual void Update() {}
+    /* @brief   Updates the object. */
+    virtual void Update() = 0;
     
     template <typename _Type>
     void SetExtraData(_Type&& extraData);

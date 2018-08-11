@@ -1,12 +1,7 @@
 #include "PrecompiledHeader.h"
 
-#include "../LowLevel/Graphics.h"
 #include "../LowLevel/GraphicsType.h"
-#include "../LowLevel/VertexBuffer.h"
-#include "../LowLevel/IndexBuffer.h"
 
-#include "Material.h"
-#include "Mesh.h"
 #include "Batch.h"
 
 namespace tgon
@@ -17,14 +12,20 @@ Batch::Batch(const std::shared_ptr<Material>& material) :
 {
 }
 
+Batch::Batch(const std::shared_ptr<Material>& material, const std::initializer_list<std::shared_ptr<Mesh>>& meshes) :
+    m_material(material),
+    m_meshes(meshes)
+{
+}
+
 void Batch::AddMesh(const std::shared_ptr<Mesh>& mesh)
 {
     m_meshes.push_back(mesh);
 }
     
-bool Batch::CanBatch(const Material& material) const
+bool Batch::CanBatch(const std::shared_ptr<Material>& material) const
 {
-    return m_material->CanBatch(material);
+    return m_material->CanBatch(*material);
 }
     
 void Batch::Draw(Graphics& graphics)
@@ -33,8 +34,6 @@ void Batch::Draw(Graphics& graphics)
 
     for (auto& mesh : m_meshes)
     {
-//        m_material->SetWVP(mesh->GetWVP());
-
         auto& vertexBuffer = mesh->GetVertexBuffer();
         auto& indexBuffer = mesh->GetIndexBuffer();
 
@@ -45,13 +44,27 @@ void Batch::Draw(Graphics& graphics)
         graphics.DrawPrimitives(PrimitiveType::Triangles, primitiveCount);
     }
 }
+    
+void BatchGroup::AddBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Mesh>& mesh)
+{
+    for (auto& batch : m_batches)
+    {
+        if (batch.CanBatch(material))
+        {
+            batch.AddMesh(mesh);
+            return;
+        }
+    }
+    
+    m_batches.push_back(Batch(material, {mesh}));
+}
 
 void BatchGroup::AddBatch(const Batch& batch)
 {
     m_batches.push_back(batch);
 }
 
-void BatchGroup::Draw(Graphics& graphics)
+void BatchGroup::FlushBatch(Graphics& graphics)
 {
     for (auto& batch : m_batches)
     {

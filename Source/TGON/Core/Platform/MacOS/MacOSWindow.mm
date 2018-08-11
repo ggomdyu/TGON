@@ -13,13 +13,9 @@
 namespace tgon
 {
 
-WindowImpl::WindowImpl(Window* owner)
-{
-}
-    
-WindowImpl::WindowImpl(Window* owner, const WindowStyle& windowStyle) :
+WindowImpl::WindowImpl(const WindowStyle& windowStyle) :
     m_nsWindow(MakeNativeWindow(windowStyle)),
-    m_nsWindowDelegate([[WindowDelegate alloc] initWithWindow:owner])
+    m_nsWindowDelegate([[WindowDelegate alloc] initWithWindow:this])
 {
     m_nsWindow.delegate = m_nsWindowDelegate;
 }

@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <algorithm>
+#include <thread>
 
 #include "Core/Platform/Application.h"
 
@@ -75,6 +76,8 @@ void Engine::Update()
     {
         module->Update();
     }
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 }
 
 } /* namespace tgon */

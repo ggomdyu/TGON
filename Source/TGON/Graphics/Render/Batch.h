@@ -6,6 +6,7 @@
 
 #pragma once
 #include <vector>
+#include <initializer_list>
 #include <memory>
 
 #include "Material.h"
@@ -16,12 +17,15 @@
 namespace tgon
 {
 
-class Batch final
+class TGON_API Batch final
 {
 /* @section Public constructor */
 public:
     /* @brief   Initializes the batch with a material. */
     explicit Batch(const std::shared_ptr<Material>& material);
+    
+    /* @brief   Initializes the batch with a material and meshes. */
+    explicit Batch(const std::shared_ptr<Material>& material, const std::initializer_list<std::shared_ptr<Mesh>>& meshes);
 
 /* @section Public method */
 public:
@@ -29,7 +33,7 @@ public:
     void AddMesh(const std::shared_ptr<Mesh>& mesh);
     
     /* @brief   Checks whether the specified material can batched. */
-    bool CanBatch(const Material& material) const;
+    bool CanBatch(const std::shared_ptr<Material>& material) const;
     
     /* @brief   Draws all batched meshes. */
     void Draw(Graphics& graphics);
@@ -41,7 +45,7 @@ private:
     std::vector<std::shared_ptr<Mesh>> m_meshes;
 };
     
-class BatchGroup final
+class TGON_API BatchGroup final
 {
 /* @section Public method */
 public:
@@ -51,8 +55,8 @@ public:
     /* @brief   Adds a batch into the batch list. */
     void AddBatch(const Batch& batch);
     
-    /* @brief   Draws all batch list. */
-    void Draw(Graphics& graphics);
+    /* @brief   Flushes all the batch in list. */
+    void FlushBatch(Graphics& graphics);
 
 /* @section Private variable */
 private:

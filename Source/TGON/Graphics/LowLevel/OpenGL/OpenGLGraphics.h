@@ -5,11 +5,12 @@
  */
 
 #pragma once
+#include <GL/glew.h>
 #include <memory>
 
-#include <GL/glew.h>
-
 #include "OpenGLContext.h"
+
+#include "../GraphicsType.h"
 
 namespace tgon
 {
@@ -31,6 +32,7 @@ public:
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);
     void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height);
+    void SetBlendMode(BlendMode blendMode);
     void EnableCullFace();
     void EnableBlend();
     void EnableDepthTest();

@@ -20,6 +20,7 @@ public:
 
 /* @brief   Public method */
 public:
+    /* @brief   Updates the object. */
     virtual void Update() override;
     
     /* @brief   Gets the transform. */

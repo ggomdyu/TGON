@@ -5,15 +5,10 @@
  */
 
 #pragma once
-#include <vector>
-
-#include "Core/Object/DelegateChain.h"
-#include "Core/Math/Rect.h"
 #include "Core/Engine/IModule.h"
 
-#include "../Render/Camera.h"
-#include "../Render/Scene.h"
 #include "../LowLevel/Graphics.h"
+#include "../Render/RenderStage.h"
 
 namespace tgon
 {
@@ -34,35 +29,31 @@ public:
     
 /* @section Public method */
 public:
+    /* @brief   Updates the module. */
     virtual void Update() override;
     
-    void AddCamera(const Camera& camera);
-    
-    std::vector<Camera>& GetCameraList() noexcept;
-    
-    const std::vector<Camera>& GetCameraList() const noexcept;
-    
+    /* @brief   Gets the Graphics. */
     Graphics& GetGraphics() noexcept;
     
+    /* @brief   Gets the Graphics. */
     const Graphics& GetGraphics() const noexcept;
+    
+    /* @brief   Gets the RenderStage. */
+    RenderStage& GetRenderStage() noexcept;
+    
+    /* @brief   Gets the RenderStage. */
+    const RenderStage& GetRenderStage() const noexcept;
     
 /* @section Private method */
 private:
+    /* @brief   Draws the render stage. */
     void Draw();
-    
-/* @section Public event handler */
-public:
-    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
 
 /* @section Private variable */
 public:
     Graphics m_graphics;
     
-    I32Rect m_viewPort;
-    
-    std::vector<Camera> m_cameraList;
-    
-//    Scene m_scene;
+    RenderStage m_renderStage;
 };
 
 } /* namespace tgon */

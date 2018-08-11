@@ -64,4 +64,4 @@
 #include "Graphics/Render/Camera.h"
 #include "Graphics/Engine/GraphicsModule.h"
 #include "Game/Object/GameObject.h"
-#include "Game/Object/Component.h"
+#include "Game/Component/Component.h"

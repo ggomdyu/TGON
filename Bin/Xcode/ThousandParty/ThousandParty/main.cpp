@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "TGON.h"
-#include "TestScene.h"
 
 using namespace tgon;
 
@@ -36,11 +35,9 @@ public:
         };
         this->AddModule<GraphicsModule>(rootWindow, videoMode);
 
-        this->AddModule<AudioModule>();
-
         this->AddModule<TimeModule>();
-
-        this->AddModule<ResourceModule>()->Load();
+        
+        
     }
 
 /* @section Public destructor */

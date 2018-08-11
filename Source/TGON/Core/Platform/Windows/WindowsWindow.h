@@ -15,8 +15,8 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/DelegateChain.h"
 #include "Core/Platform/Config.h"
+#include "Core/Object/DelegateChain.h"
 
 #include "../WindowType.h"
 

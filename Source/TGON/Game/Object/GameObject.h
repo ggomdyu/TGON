@@ -10,7 +10,7 @@
 #include "Core/String/FixedStringHash.h"
 #include "Graphics/Object/GraphicsObject.h"
 
-#include "Component.h"
+#include "../Component/Component.h"
 
 namespace tgon
 {
@@ -31,11 +31,11 @@ public:
 
 /* @section Public method */
 public:
-    void Update();
+    virtual void Update() override;
 
     /**
      * @brief               Sets the name of object.
-     * @param [in] name     The name of object to set.
+     * @param [in] name     The name to set.
      */
     void SetName(const FixedStringHash32& name);
 

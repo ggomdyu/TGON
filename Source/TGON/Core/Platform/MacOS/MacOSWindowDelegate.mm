@@ -1,10 +1,11 @@
 #import "PrecompiledHeader.h"
 
+#import "MacOSWindow.h"
 #import "MacOSWindowDelegate.h"
 
 @implementation WindowDelegate
 
-- (id)initWithWindow:(tgon::Window*)window
+- (id)initWithWindow:(tgon::WindowImpl*)window
 {
     self = [super init];
     if (self)

@@ -29,6 +29,11 @@ void Graphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
 {
     m_graphicsImpl.SetViewport(x, y, width, height);
 }
+    
+void Graphics::SetBlendMode(BlendMode blendMode)
+{
+    m_graphicsImpl.SetBlendMode(blendMode);
+}
 
 void Graphics::EnableBlend()
 {
