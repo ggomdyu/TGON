@@ -7,7 +7,7 @@
 #pragma once
 #include <vector>
 
-#include "Core/String/FixedStringHash.h"
+#include "Core/String/FixedHashString.h"
 #include "Graphics/Object/GraphicsObject.h"
 
 #include "../Component/Component.h"
@@ -23,7 +23,7 @@ public:
 
 /* @section Private constructor */
 public:
-    explicit GameObject(const FixedStringHash32& name);
+    explicit GameObject(const FixedHashString32& name);
     
 /* @section Public destructor */
 public:
@@ -37,7 +37,7 @@ public:
      * @brief               Sets the name of object.
      * @param [in] name     The name to set.
      */
-    void SetName(const FixedStringHash32& name);
+    void SetName(const FixedHashString32& name);
 
     /**
      * @brief               Inserts a component to manage.
@@ -74,7 +74,7 @@ public:
      * @brief   Gets the name of object.
      * @return  The name of object to set.
      */
-    const FixedStringHash32& GetName() const noexcept;
+    const FixedHashString32& GetName() const noexcept;
 
 /* @section Private method */
 private:
@@ -99,7 +99,7 @@ private:
 
 /* @section Private variable */
 private:
-    FixedStringHash32 m_name;
+    FixedHashString32 m_name;
 
     std::vector<std::unique_ptr<Component>> m_components;
 };

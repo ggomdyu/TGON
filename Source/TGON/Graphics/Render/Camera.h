@@ -34,6 +34,7 @@ public:
     /* @brief   Sets the far clipping plane's Z-position. */
     void SetFarZ(float farZ) noexcept;
     
+    /* @brief   Sets the field of view. */
     void SetFov(float fov) noexcept;
     
     void SetProjectionMode(ProjectionMode projectionMode) noexcept;
@@ -48,10 +49,13 @@ public:
     
     void SetCullMode(CullMode cullMode) noexcept;
     
+    /* @brief   Gets the near clipping plane's Z-position. */
     float GetNearZ() const noexcept;
     
+    /* @brief   Gets the far clipping plane's Z-position. */
     float GetFarZ() const noexcept;
     
+    /* @brief   Gets the field of view. */
     float GetFov() const noexcept;
     
     ProjectionMode GetProjectionMode() const noexcept;

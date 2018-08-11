@@ -9,7 +9,7 @@
 
 #include "Core/Platform/Config.h"
 #include "Core/Object/Delegate.h"
-#include "Core/String/StringViewHash.h"
+#include "Core/String/HashStringView.h"
 
 namespace tgon
 {
@@ -22,13 +22,13 @@ public:
     
 /* @section Public method */
 public:
-    void SubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
+    void SubscribeEvent(const HashStringView& eventName, const EventHandler& eventHandler);
 
-    void SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler);
+    void SubscribeEvent(const HashStringView& eventName, EventHandler&& eventHandler);
     
-    bool UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
+    bool UnsubscribeEvent(const HashStringView& eventName, const EventHandler& eventHandler);
     
-    void DispatchEvent(const StringViewHash& eventName);
+    void DispatchEvent(const HashStringView& eventName);
     
 /* @section Private variable */
 private:

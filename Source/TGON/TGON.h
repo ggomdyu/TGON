@@ -31,7 +31,6 @@
 #include "Core/Engine/Engine.h"
 #include "Core/File/Path.h"
 #include "Core/Random/Random.h"
-#include "Core/String/StringViewHash.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
 #include "Core/File/Path.h"
@@ -65,3 +64,4 @@
 #include "Graphics/Engine/GraphicsModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
+#include "Game/Engine/GameSceneModule.h"

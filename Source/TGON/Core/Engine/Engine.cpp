@@ -35,7 +35,7 @@ void Engine::AddModule(std::unique_ptr<IModule> module)
     m_modules.emplace(iter, std::move(module));
 }
 
-IModule* Engine::GetModule(size_t moduleId)
+IModule* Engine::FindModule(size_t moduleId)
 {
     auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
     {

@@ -5,17 +5,17 @@
 namespace tgon
 {
 
-void EventDispatcher::SubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler)
+void EventDispatcher::SubscribeEvent(const HashStringView& eventName, const EventHandler& eventHandler)
 {
     m_eventHandlers[eventName.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = eventHandler;
 }
     
-void EventDispatcher::SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler)
+void EventDispatcher::SubscribeEvent(const HashStringView& eventName, EventHandler&& eventHandler)
 {
     m_eventHandlers[eventName.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = std::move(eventHandler);
 }
     
-bool EventDispatcher::UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler)
+bool EventDispatcher::UnsubscribeEvent(const HashStringView& eventName, const EventHandler& eventHandler)
 {
     auto iter = m_eventHandlers.find(eventName.GetHashCode());
     if (iter == m_eventHandlers.end())
@@ -28,7 +28,7 @@ bool EventDispatcher::UnsubscribeEvent(const StringViewHash& eventName, const Ev
     return true;
 }
     
-void EventDispatcher::DispatchEvent(const StringViewHash& eventName)
+void EventDispatcher::DispatchEvent(const HashStringView& eventName)
 {
     auto iter = m_eventHandlers.find(eventName.GetHashCode());
     if (iter == m_eventHandlers.end())

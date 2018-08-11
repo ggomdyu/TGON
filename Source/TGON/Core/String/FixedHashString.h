@@ -13,7 +13,7 @@ namespace tgon
 {
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = StringTraits<_CharType>>
-class BasicFixedStringHash :
+class BasicFixedHashString :
     private BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
 {
 /* @section Private type */
@@ -36,12 +36,12 @@ public:
 
 /* @section Public constructor */
 public:
-    BasicFixedStringHash(const _CharType* str);
-    BasicFixedStringHash(const _CharType* str, std::size_t strLen) noexcept;
+    BasicFixedHashString(const _CharType* str);
+    BasicFixedHashString(const _CharType* str, std::size_t strLen) noexcept;
 
 /* @section Public operator */
 public:
-    bool operator==(const BasicFixedStringHash& rhs) const noexcept;
+    bool operator==(const BasicFixedHashString& rhs) const noexcept;
     using SuperType::operator[];
     
 /* @section Public method */
@@ -70,67 +70,67 @@ private:
     size_t m_hashCode;
 };
 
-using FixedStringHash8 = BasicFixedStringHash<char, 8>;
-using FixedStringHash16 = BasicFixedStringHash<char, 16>;
-using FixedStringHash32 = BasicFixedStringHash<char, 32>;
-using FixedStringHash64 = BasicFixedStringHash<char, 64>;
-using FixedStringHash128 = BasicFixedStringHash<char, 128>;
-using FixedStringHash256 = BasicFixedStringHash<char, 256>;
-using FixedStringHash512 = BasicFixedStringHash<char, 512>;
-using FixedStringHash1024 = BasicFixedStringHash<char, 1024>;
+using FixedHashString8 = BasicFixedHashString<char, 8>;
+using FixedHashString16 = BasicFixedHashString<char, 16>;
+using FixedHashString32 = BasicFixedHashString<char, 32>;
+using FixedHashString64 = BasicFixedHashString<char, 64>;
+using FixedHashString128 = BasicFixedHashString<char, 128>;
+using FixedHashString256 = BasicFixedHashString<char, 256>;
+using FixedHashString512 = BasicFixedHashString<char, 512>;
+using FixedHashString1024 = BasicFixedHashString<char, 1024>;
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedStringHash(const _CharType* str) :
+inline BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedHashString(const _CharType* str) :
     SuperType(str),
     m_hashCode(X65599Hash(str))
 {
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedStringHash(const _CharType* str, std::size_t strLen) noexcept :
+inline BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedHashString(const _CharType* str, std::size_t strLen) noexcept :
     SuperType(str, strLen),
     m_hashCode(X65599Hash(str))
 {
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline bool BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::operator==(const BasicFixedStringHash& rhs) const noexcept
+inline bool BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const BasicFixedHashString& rhs) const noexcept
 {
     return m_hashCode == rhs.m_hashCode;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str)
+inline void BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str)
 {
-    new (this) BasicFixedStringHash(str);
+    new (this) BasicFixedHashString(str);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen)
+inline void BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen)
 {
-    new (this) BasicFixedStringHash(str, strLen);
+    new (this) BasicFixedHashString(str, strLen);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline const _CharType& BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
+inline const _CharType& BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::At(std::size_t index) const
 {
     return SuperType::At(index);
 }
     
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline std::size_t BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::GetHashCode() const noexcept
+inline std::size_t BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::begin() const noexcept
+inline typename BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::begin() const noexcept
 {
     return this->cbegin();
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline typename BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedStringHash<_CharType, _CharArraySize, _StringTraitsType>::end() const noexcept
+inline typename BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::ConstIteratorType BasicFixedHashString<_CharType, _CharArraySize, _StringTraitsType>::end() const noexcept
 {
     return this->cend();
 }

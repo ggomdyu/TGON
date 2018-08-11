@@ -65,11 +65,11 @@ public:
      * @brief               Returns a module that managed by Application.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    const _ModuleType* GetModule() const noexcept;
+    const _ModuleType* FindModule() const noexcept;
 
     /* @brief               Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    _ModuleType* GetModule() noexcept;
+    _ModuleType* FindModule() noexcept;
 
 /* @section Private method */
 private:
@@ -84,7 +84,7 @@ private:
      * @param [in] moduleId The unique id of module to get.
      * @return              Returns a pointer to module if successful, nullptr otherwise.
      */
-    IModule* GetModule(size_t moduleId);
+    IModule* FindModule(size_t moduleId);
 
     /**
      * @brief               Returns a module that managed by Application.
@@ -114,25 +114,25 @@ inline void Engine::AddModule<TimeModule>()
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline const _ModuleType* Engine::GetModule() const noexcept
+inline const _ModuleType* Engine::FindModule() const noexcept
 {
-    return const_cast<Engine*>(this)->GetModule<_ModuleType>();
+    return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
 
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
-inline _ModuleType* Engine::GetModule() noexcept
+inline _ModuleType* Engine::FindModule() noexcept
 {
-    return static_cast<_ModuleType*>(this->GetModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
+    return static_cast<_ModuleType*>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
 }
 
 template <>
-inline const TimeModule* Engine::GetModule<TimeModule>() const noexcept
+inline const TimeModule* Engine::FindModule<TimeModule>() const noexcept
 {
     return m_timeModule.get();
 }
 
 template <>
-inline TimeModule* Engine::GetModule<TimeModule>() noexcept
+inline TimeModule* Engine::FindModule<TimeModule>() noexcept
 {
     return m_timeModule.get();
 }

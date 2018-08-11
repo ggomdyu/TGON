@@ -36,8 +36,8 @@ public:
         this->AddModule<GraphicsModule>(rootWindow, videoMode);
 
         this->AddModule<TimeModule>();
-        
-        
+
+        this->AddModule<GameSceneModule>();
     }
 
 /* @section Public destructor */

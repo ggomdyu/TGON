@@ -13,7 +13,7 @@ namespace tgon
 {
 
 template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
-class BasicStringViewHash :
+class BasicHashStringView :
     private BasicStringView<_CharType, _StringTraitsType>
 {
 /* @section Private type */
@@ -37,13 +37,13 @@ public:
 /* @section Public constructor */
 public:
     template <std::size_t _CharArraySize>
-    constexpr BasicStringViewHash(const _CharType(&str)[_CharArraySize]) noexcept;
+    constexpr BasicHashStringView(const _CharType(&str)[_CharArraySize]) noexcept;
 
-    constexpr BasicStringViewHash(const _CharType* str, std::size_t strLen) noexcept;
+    constexpr BasicHashStringView(const _CharType* str, std::size_t strLen) noexcept;
 
 /* @section Public operator */
 public:
-    constexpr bool operator==(const BasicStringViewHash& rhs) const noexcept;
+    constexpr bool operator==(const BasicHashStringView& rhs) const noexcept;
 
     constexpr const _CharType operator[](std::size_t index) const;
     
@@ -70,43 +70,43 @@ private:
     size_t m_hashCode;
 };
 
-using StringViewHash = BasicStringViewHash<char>;
-using WStringViewHash = BasicStringViewHash<wchar_t>;
+using HashStringView = BasicHashStringView<char>;
+using WHashStringView = BasicHashStringView<wchar_t>;
 
 template <typename _CharType, typename _StringTraitsType>
 template <std::size_t _CharArraySize>
-constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash(const _CharType(&str)[_CharArraySize]) noexcept :
-    BasicStringViewHash(str, _CharArraySize - 1)
+constexpr BasicHashStringView<_CharType, _StringTraitsType>::BasicHashStringView(const _CharType(&str)[_CharArraySize]) noexcept :
+    BasicHashStringView(str, _CharArraySize - 1)
 {
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr BasicStringViewHash<_CharType, _StringTraitsType>::BasicStringViewHash(const _CharType* str, std::size_t strLen) noexcept :
+constexpr BasicHashStringView<_CharType, _StringTraitsType>::BasicHashStringView(const _CharType* str, std::size_t strLen) noexcept :
     SuperType(str, strLen),
     m_hashCode(X65599Hash(str))
 {
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr bool BasicStringViewHash<_CharType, _StringTraitsType>::operator==(const BasicStringViewHash& rhs) const noexcept
+constexpr bool BasicHashStringView<_CharType, _StringTraitsType>::operator==(const BasicHashStringView& rhs) const noexcept
 {
     return m_hashCode == rhs.m_hashCode;
 }
 
 template <typename _CharType, typename _StringTraitsType>
-constexpr const _CharType BasicStringViewHash<_CharType, _StringTraitsType>::operator[](std::size_t index) const
+constexpr const _CharType BasicHashStringView<_CharType, _StringTraitsType>::operator[](std::size_t index) const
 {
     return SuperType::operator[](index);
 }
 
 template <typename _CharType, typename _StringTraitsType>
-inline const _CharType& tgon::BasicStringViewHash<_CharType, _StringTraitsType>::At(std::size_t index) const
+inline const _CharType& tgon::BasicHashStringView<_CharType, _StringTraitsType>::At(std::size_t index) const
 {
     return SuperType::At(index);
 }
     
 template <typename _CharType, typename _StringTraitsType>
-constexpr std::size_t BasicStringViewHash<_CharType, _StringTraitsType>::GetHashCode() const noexcept
+constexpr std::size_t BasicHashStringView<_CharType, _StringTraitsType>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }

@@ -1,5 +1,5 @@
 /**
- * @file    Cast.h
+ * @file    AutoCast.h
  * @author  ggomdyu
  * @since   05/24/2016
  */
@@ -72,15 +72,15 @@ constexpr _CastToType ForceCastPolicy::Cast(const _CastFromType& castFromValue) 
 }
 
 template <typename _CastFromType>
-using SafeAutoCaster = AutoCaster<_CastFromType, SafeCastPolicy>;
+using StaticAutoCaster = AutoCaster<_CastFromType, SafeCastPolicy>;
 
 template <typename _CastFromType>
 using ForceAutoCaster = AutoCaster<_CastFromType, ForceCastPolicy>;
 
 template <typename _CastFromType>
-constexpr SafeAutoCaster<_CastFromType> AutoCast(_CastFromType&& value) noexcept
+constexpr StaticAutoCaster<_CastFromType> AutoCast(_CastFromType&& value) noexcept
 {
-	return SafeAutoCaster<_CastFromType>(std::forward<_CastFromType>(value));
+	return StaticAutoCaster<_CastFromType>(std::forward<_CastFromType>(value));
 }
 
 template <typename _CastFromType>
