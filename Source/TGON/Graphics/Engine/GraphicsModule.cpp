@@ -1,10 +1,8 @@
 #include "PrecompiledHeader.h"
 
 #include "GraphicsModule.h"
+
 #include "../Render/MeshUtility.h"
-#include "Core/File/Path.h"
-#include "Core/Utility/Stopwatch.h"
-#include "Core/Debug/Log.h"
 
 namespace tgon
 {
