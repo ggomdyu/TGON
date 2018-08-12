@@ -23,6 +23,14 @@
 		FD2108B320B93286009FC8F1 /* UUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108B020B93286009FC8F1 /* UUID.h */; };
 		FD2108B520B93286009FC8F1 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108B220B93286009FC8F1 /* Hash.h */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
+		FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */; };
+		FD24D8272120244000CBED64 /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */; };
+		FD24D82C2120245800CBED64 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D8282120245700CBED64 /* Sprite.cpp */; };
+		FD24D82D2120245800CBED64 /* Sprite.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D8292120245700CBED64 /* Sprite.h */; };
+		FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D82A2120245700CBED64 /* SpriteBatch.h */; };
+		FD24D82F2120245800CBED64 /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D82B2120245800CBED64 /* SpriteBatch.cpp */; };
+		FD24D832212066D200CBED64 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D830212066D100CBED64 /* CameraComponent.h */; };
+		FD24D833212066D200CBED64 /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D831212066D200CBED64 /* CameraComponent.cpp */; };
 		FD2BF54620138F0500228FFF /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2BF5402012ECAB00228FFF /* Log.h */; };
 		FD41922720DA853100536815 /* IComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD41922220DA853000536815 /* IComparable.h */; };
 		FD41922820DA853100536815 /* ICloneable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD41922320DA853000536815 /* ICloneable.h */; };
@@ -237,6 +245,14 @@
 		FD2108B120B93286009FC8F1 /* Hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hash.cpp; path = ../../Source/TGON/Core/Hash/Hash.cpp; sourceTree = "<group>"; };
 		FD2108B220B93286009FC8F1 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hash.h; path = ../../Source/TGON/Core/Hash/Hash.h; sourceTree = "<group>"; };
 		FD2108C920BAE630009FC8F1 /* TGON.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TGON.h; path = ../../Source/TGON/TGON.h; sourceTree = "<group>"; };
+		FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Game/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
+		FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteRendererComponent.cpp; path = ../../../Source/TGON/Game/Component/SpriteRendererComponent.cpp; sourceTree = "<group>"; };
+		FD24D8282120245700CBED64 /* Sprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Sprite.cpp; path = ../../Source/TGON/Graphics/Render/Sprite.cpp; sourceTree = "<group>"; };
+		FD24D8292120245700CBED64 /* Sprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Sprite.h; path = ../../Source/TGON/Graphics/Render/Sprite.h; sourceTree = "<group>"; };
+		FD24D82A2120245700CBED64 /* SpriteBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteBatch.h; path = ../../Source/TGON/Graphics/Render/SpriteBatch.h; sourceTree = "<group>"; };
+		FD24D82B2120245800CBED64 /* SpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteBatch.cpp; path = ../../Source/TGON/Graphics/Render/SpriteBatch.cpp; sourceTree = "<group>"; };
+		FD24D830212066D100CBED64 /* CameraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraComponent.h; path = ../../../Source/TGON/Game/Component/CameraComponent.h; sourceTree = "<group>"; };
+		FD24D831212066D200CBED64 /* CameraComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CameraComponent.cpp; path = ../../../Source/TGON/Game/Component/CameraComponent.cpp; sourceTree = "<group>"; };
 		FD2BF5402012ECAB00228FFF /* Log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Log.h; path = ../../Source/TGON/Core/Debug/Log.h; sourceTree = "<group>"; };
 		FD2BF5422012ECBE00228FFF /* MacOSLog.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = MacOSLog.mm; path = ../../Source/TGON/Core/Debug/MacOS/MacOSLog.mm; sourceTree = "<group>"; };
 		FD39DB3420C9703700C07251 /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GameObject.h; sourceTree = "<group>"; };
@@ -722,6 +738,10 @@
 				FD8E696020AFA8CD00791E10 /* MeshUtility.h */,
 				FDF51BF5210A42A000A81407 /* RenderStage.cpp */,
 				FDF51BF4210A42A000A81407 /* RenderStage.h */,
+				FD24D8282120245700CBED64 /* Sprite.cpp */,
+				FD24D8292120245700CBED64 /* Sprite.h */,
+				FD24D82B2120245800CBED64 /* SpriteBatch.cpp */,
+				FD24D82A2120245700CBED64 /* SpriteBatch.h */,
 			);
 			name = Render;
 			sourceTree = "<group>";
@@ -758,8 +778,12 @@
 				FDBE44D9211E78300055A968 /* Component.cpp */,
 				FDBE44DD211E78310055A968 /* Component.h */,
 				FDBE44DE211E78310055A968 /* ComponentUtility.h */,
+				FD24D831212066D200CBED64 /* CameraComponent.cpp */,
+				FD24D830212066D100CBED64 /* CameraComponent.h */,
 				FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */,
 				FDBE44DB211E78300055A968 /* MeshRendererComponent.h */,
+				FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */,
+				FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -929,6 +953,7 @@
 				FD806BB72110AB74002B9DCB /* Engine.h in Headers */,
 				FD8E693C20AFA84600791E10 /* OpenGLShader.h in Headers */,
 				FD0672F820B4256700BEA737 /* AudioBuffer.h in Headers */,
+				FD24D832212066D200CBED64 /* CameraComponent.h in Headers */,
 				FD2BF54620138F0500228FFF /* Log.h in Headers */,
 				FD8E692420AFA83B00791E10 /* OpenGLTextureType.h in Headers */,
 				FDBCFA4220E7F96100CBDF0B /* Shader.h in Headers */,
@@ -947,6 +972,7 @@
 				FD13BB1820E8677D001A1E15 /* DelegateChain.h in Headers */,
 				FDD3967D20D025B70095F1F8 /* InputManager.h in Headers */,
 				FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */,
+				FD24D82D2120245800CBED64 /* Sprite.h in Headers */,
 				FDEB409B2100FC5A000A3B98 /* Material.h in Headers */,
 				FDDFF17120CAD7AD00F95359 /* StringViewHash.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
@@ -999,9 +1025,11 @@
 				FD806BBB2110AB74002B9DCB /* IModule.h in Headers */,
 				FD41922820DA853100536815 /* ICloneable.h in Headers */,
 				FD052C7A20E7F1D200EF3C64 /* OpenGLGraphicsType.h in Headers */,
+				FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
 				FDD3968720D025B70095F1F8 /* KeyboardType.h in Headers */,
 				FDAF475120D6D136004EC9FF /* OggVorbisAudioImporter.h in Headers */,
+				FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */,
 				FDF51BF6210A42A000A81407 /* RenderStage.h in Headers */,
 				FDB75ADE20D5892900CC36C4 /* StringView.h in Headers */,
 				FD8E694620AFA84600791E10 /* OpenGLGraphics.h in Headers */,
@@ -1083,7 +1111,9 @@
 				FDBCFA3D20E7F96100CBDF0B /* Graphics.cpp in Sources */,
 				FD87773B211484630058D547 /* GraphicsObject.cpp in Sources */,
 				FDBCFA3C20E7F96100CBDF0B /* Shader.cpp in Sources */,
+				FD24D82C2120245800CBED64 /* Sprite.cpp in Sources */,
 				FD5337F820E4018500515DA4 /* MacOSMouse.cpp in Sources */,
+				FD24D82F2120245800CBED64 /* SpriteBatch.cpp in Sources */,
 				FDEB409320FF9DB4000A3B98 /* Batch.cpp in Sources */,
 				FDBA3D1420F13B4F0053B7BC /* OpenGLRenderTarget.cpp in Sources */,
 				FD5337F920E4018500515DA4 /* Gamepad.cpp in Sources */,
@@ -1111,6 +1141,7 @@
 				FD53381020E4018500515DA4 /* Camera.cpp in Sources */,
 				FD53381420E4018500515DA4 /* Mesh.cpp in Sources */,
 				FD53381520E4018500515DA4 /* MeshUtility.cpp in Sources */,
+				FD24D8272120244000CBED64 /* SpriteRendererComponent.cpp in Sources */,
 				FD53381B20E4018500515DA4 /* GameObject.cpp in Sources */,
 				FD5337E320E4017A00515DA4 /* MacOSLog.mm in Sources */,
 				FD5337E420E4017A00515DA4 /* MacOSPath.mm in Sources */,
@@ -1123,6 +1154,7 @@
 				FD5337EA20E4017A00515DA4 /* MacOSWindow.mm in Sources */,
 				FDF51BF7210A42A000A81407 /* RenderStage.cpp in Sources */,
 				FD8777402114A56A0058D547 /* Transform.cpp in Sources */,
+				FD24D833212066D200CBED64 /* CameraComponent.cpp in Sources */,
 				FD5337EB20E4017A00515DA4 /* MacOSWindowDelegate.mm in Sources */,
 				FD5337EC20E4017A00515DA4 /* MacOSWindowUtility.mm in Sources */,
 				FD5337ED20E4017A00515DA4 /* MacOSDateTime.mm in Sources */,

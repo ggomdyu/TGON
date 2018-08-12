@@ -22,6 +22,8 @@ class TGON_API Camera
 public:
     Camera() noexcept;
 
+    Camera(float left, float right, float bottom, float top, float nearZ, float farZ) noexcept;
+    
     Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ, ProjectionMode projectionMode, FillMode fillMode, CullMode cullMode) noexcept;
 
 /* @section Public method */

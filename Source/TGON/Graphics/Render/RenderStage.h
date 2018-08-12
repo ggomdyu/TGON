@@ -23,7 +23,7 @@ public:
 
 /* @section Public type */
 public:
-    using CameraHandle = int32_t;
+    using CameraHandle = size_t;
 
 /* @section Public method */
 public:

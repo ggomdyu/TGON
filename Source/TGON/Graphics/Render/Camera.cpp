@@ -15,11 +15,25 @@ Camera::Camera() noexcept :
     m_nearZ(0.1f),
     m_farZ(1000.0f),
     m_isDirty(true),
-    m_projectionMode(ProjectionMode::Perspective),
+    m_projectionMode(ProjectionMode::Orthographic),
     m_fillMode(FillMode::Solid),
     m_cullMode(CullMode::CW)
 {
     this->Update();
+}
+    
+Camera::Camera(float left, float right, float bottom, float top, float nearZ, float farZ) noexcept :
+    m_eyePt(0.0f, 0.0f, 5.0f),
+    m_lookAt(0.0f, 0.0f, 0.0f),
+    m_fov(Pi / 8),
+    m_nearZ(0.1f),
+    m_farZ(1000.0f),
+    m_isDirty(true),
+    m_projectionMode(ProjectionMode::Orthographic),
+    m_fillMode(FillMode::Solid),
+    m_cullMode(CullMode::CW)
+{
+    
 }
     
 Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ, ProjectionMode projectionMode, FillMode fillMode, CullMode cullMode) noexcept :
@@ -47,7 +61,7 @@ void Camera::Update()
         }
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
-            m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
+            m_matViewProj *= Matrix4x4::OrthographicLH(0.0f, 500.0f, 500.0f, 0.0f, m_nearZ, m_farZ);
         }
         
         m_isDirty = false;
