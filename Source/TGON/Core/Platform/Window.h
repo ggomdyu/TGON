@@ -24,8 +24,11 @@ namespace tgon
 {
 
 class TGON_API Window final :
-    private boost::noncopyable
+     public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(Window);
+
 /* @section Private constructor */
 public:
     Window(const WindowStyle& windowStyle = {});

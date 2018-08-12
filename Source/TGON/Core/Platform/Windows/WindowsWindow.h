@@ -15,7 +15,7 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
+#include "Core/Object/CoreObject.h"
 #include "Core/Object/DelegateChain.h"
 
 #include "../WindowType.h"
@@ -24,8 +24,11 @@ namespace tgon
 {
 
 class WindowImpl final :
-    private boost::noncopyable
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(WindowImpl);
+
 /* @section Public constructor */
 public:
     WindowImpl(const WindowStyle& windowStyle);

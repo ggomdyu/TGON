@@ -24,11 +24,18 @@ namespace tgon
 {
 
 class TGON_API Application final :
-    private boost::noncopyable
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(Application);
+
 /* @section Private constructor */
 private:
     explicit Application();
+
+/* @section Public destructor */
+public:
+    virtual ~Application() override = default;
     
 /* @section Public method */
 public:

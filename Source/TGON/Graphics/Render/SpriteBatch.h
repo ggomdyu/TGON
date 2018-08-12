@@ -10,6 +10,7 @@
 
 #include "Material.h"
 #include "Mesh.h"
+#include "Camera.h"
 
 #include "../LowLevel/Graphics.h"
 
@@ -45,7 +46,7 @@ public:
     bool CanBatch(const std::shared_ptr<Material>& material) const;
     
     /* @brief   Draws all batched primitives. */
-    void Draw(Graphics& graphics);
+    void Draw(Graphics& graphics, const Camera& camera);
 
 /* @section Private variable */
 private:
@@ -69,7 +70,7 @@ public:
     void AddSpriteBatch(const SpriteBatch& batch);
     
     /* @brief   Flushes all the batch in list. */
-    void FlushSpriteBatch(Graphics& graphics);
+    void FlushSpriteBatch(Graphics& graphics, const Camera& camera);
 
 /* @section Private variable */
 private:

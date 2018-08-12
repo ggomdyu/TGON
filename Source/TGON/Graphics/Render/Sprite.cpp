@@ -44,7 +44,7 @@ const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
 //{
 //    TextureMaterial* material = static_cast<TextureMaterial*>(m_material.get());
 //    material->Use();
-//    material->GetShader()->SetParameterMatrix4fv("g_uMVP", m_matWVP[0]);
+//    material->GetShader()->SetParameterMatrix4fv("g_uWVP", m_matWVP[0]);
 //    material->SetWVP()
 //    material->SetBlendColor(m_blendColor);
 //

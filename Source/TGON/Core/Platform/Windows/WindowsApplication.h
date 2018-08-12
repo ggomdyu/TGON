@@ -11,7 +11,7 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
+#include "Core/Object/CoreObject.h"
 
 #include "../ApplicationType.h"
 
@@ -19,8 +19,11 @@ namespace tgon
 {
 
 class TGON_API ApplicationImpl final :
-    private boost::noncopyable
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(ApplicationImpl);
+
 /* @section Public constructor */
 public:
     ApplicationImpl();

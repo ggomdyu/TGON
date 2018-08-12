@@ -31,7 +31,7 @@ bool Batch::CanBatch(const std::shared_ptr<Material>& material) const
     return m_material->CanBatch(*material);
 }
     
-void Batch::Draw(Graphics& graphics)
+void Batch::Draw(Graphics& graphics, const Camera& camera)
 {
     m_material->Use();
 
@@ -71,11 +71,11 @@ void BatchGroup::AddBatch(const Batch& batch)
     m_batches.push_back(batch);
 }
 
-void BatchGroup::FlushBatch(Graphics& graphics)
+void BatchGroup::FlushBatch(Graphics& graphics, const Camera& camera)
 {
     for (auto& batch : m_batches)
     {
-        batch.Draw(graphics);
+        batch.Draw(graphics, camera);
     }
 }
     

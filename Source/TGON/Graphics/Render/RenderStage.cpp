@@ -25,11 +25,33 @@ void RenderStage::AddSpriteBatch(const SpriteBatch& spriteBatch)
     m_spriteBatchGroup.AddSpriteBatch(spriteBatch);
 }
 
+RenderStage::CameraHandle RenderStage::AddCamera(const Camera& camera)
+{
+    CameraHandle cameraHandle = m_cameraList.size();
+
+    m_cameraList.push_back(camera);
+
+    return cameraHandle;
+}
+
+Camera& RenderStage::GetCamera(CameraHandle cameraHandle)
+{
+    return m_cameraList[cameraHandle];
+}
+
+const Camera& RenderStage::GetCamera(CameraHandle cameraHandle) const
+{
+    return m_cameraList[cameraHandle];
+}
+
 void RenderStage::Draw(Graphics& graphics)
 {
-    m_batchGroup.FlushBatch(graphics);
+    for (const auto& camera : m_cameraList)
+    {
+        m_batchGroup.FlushBatch(graphics, camera);
 
-    m_spriteBatchGroup.FlushSpriteBatch(graphics);
+        m_spriteBatchGroup.FlushSpriteBatch(graphics, camera);
+    }
 }
     
 } /* namespace tgon */

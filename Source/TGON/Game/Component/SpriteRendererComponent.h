@@ -27,27 +27,13 @@ public:
      * @brief                   Initializes component with specified sprite path.
      * @param [in] filePath     The file path of sprite.
      */
-    SpriteRendererComponent(const std::string& filePath);
+    explicit SpriteRendererComponent(const std::string& filePath);
 
     /**
      * @brief                   Initializes component with specified sprite path.
      * @param [in] filePath     The file path of sprite.
      */
-    SpriteRendererComponent(std::string&& filePath);
-
-    /**
-     * @brief                   Initializes component with specified sprite path.
-     * @param [in] filePath     The file path of sprite.
-     * @param [in] material     The material to use with this renderer.
-     */
-    SpriteRendererComponent(const std::string& filePath, const std::shared_ptr<Material>& material) noexcept;
-
-    /**
-     * @brief                   Initializes component with specified sprite path.
-     * @param [in] filePath     The file path of sprite.
-     * @param [in] material     The material to use with this renderer.
-     */
-    SpriteRendererComponent(std::string&& filePath, const std::shared_ptr<Material>& material) noexcept;
+    explicit SpriteRendererComponent(std::string&& filePath);
 
 /* @section Public destructor */
 public:
@@ -60,9 +46,9 @@ public:
 
 /* @section Private variable */
 private:
-    std::shared_ptr<Material> m_material;
-
     Sprite m_sprite;
+
+    std::shared_ptr<Material> m_material;
 
     GraphicsModule* m_graphicsModule;
 };

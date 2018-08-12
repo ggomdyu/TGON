@@ -32,16 +32,18 @@ bool SpriteBatch::CanBatch(const std::shared_ptr<Material>& material) const
     return m_material->CanBatch(*material);
 }
     
-void SpriteBatch::Draw(Graphics& graphics)
+void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
 {
     m_material->Use();
+
+    const Matrix4x4& matWVP = camera.GetViewProjectionMatrix();
 
     for (auto& drawPrimitives : m_drawPrimitives)
     {
         // Set the world-view-projection matrix.
-        m_material->SetWVP(*drawPrimitives.matWVP);
+        m_material->SetWVP(matWVP);
 
-        graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
+        graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
     }
 }
     
@@ -64,18 +66,18 @@ void SpriteBatchGroup::AddSpriteBatch(const std::shared_ptr<Material>& material,
     m_spriteBatches.push_back(SpriteBatch(material, {drawPrimitive}));
 }
 
-void SpriteBatchGroup::AddSpriteBatch(const SpriteBatch& batch)
+void SpriteBatchGroup::AddSpriteBatch(const SpriteBatch& spriteBatch)
 {
-    m_spriteBatches.push_back(batch);
+    m_spriteBatches.push_back(spriteBatch);
 }
 
-void SpriteBatchGroup::FlushSpriteBatch(Graphics& graphics)
+void SpriteBatchGroup::FlushSpriteBatch(Graphics& graphics, const Camera& camera)
 {
     m_quadMesh->Use();
 
-    for (auto& batch : m_spriteBatches)
+    for (auto& spriteBatch : m_spriteBatches)
     {
-        batch.Draw(graphics);
+        spriteBatch.Draw(graphics, camera);
     }
 }
     

@@ -13,13 +13,13 @@ constexpr const char g_positionColorVert[] =
 layout(location = 0) in vec3 g_vertPosition;                                        \n\
 layout(location = 1) in vec3 g_vertColor;                                           \n\
                                                                                     \n\
-uniform mat4 g_uMVP;                                                                \n\
+uniform mat4 g_uWVP;                                                                \n\
 uniform vec4 g_uColor;                                                              \n\
 out vec4 g_fragColor;                                                               \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                               \n\
+    gl_Position = g_uWVP * vec4(g_vertPosition, 1.0);                               \n\
     g_fragColor = g_uColor;                                                         \n\
 }                                                                                   \n\
 ";
@@ -45,11 +45,11 @@ layout(location = 0) in vec3 g_vertPosition;                                    
 layout(location = 1) in vec3 g_vertNormal;                                          \n\
 layout(location = 2) in vec2 g_vertUV;                                              \n\
 out vec2 g_fragUV;                                                                  \n\
-uniform mat4 g_uMVP;                                                                \n\
+uniform mat4 g_uWVP;                                                                \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                               \n\
+    gl_Position = g_uWVP * vec4(g_vertPosition, 1.0);                               \n\
     g_fragUV = g_vertUV;                                                            \n\
 }                                                                                   \n\
 ";
@@ -75,12 +75,12 @@ constexpr const char g_positionUVVert[] =
                                                                                     \n\
 layout(location = 0) in vec3 g_vertPosition;                                        \n\
 layout(location = 1) in vec2 g_vertUV;                                              \n\
-uniform mat4 g_uMVP;                                                                \n\
+uniform mat4 g_uWVP;                                                                \n\
 out vec2 g_fragUV;                                                                  \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    gl_Position = g_uMVP * vec4(g_vertPosition, 1.0);                               \n\
+    gl_Position = g_uWVP * vec4(g_vertPosition, 1.0);                               \n\
     g_fragUV = g_vertUV;                                                            \n\
 }                                                                                   \n\
 ";

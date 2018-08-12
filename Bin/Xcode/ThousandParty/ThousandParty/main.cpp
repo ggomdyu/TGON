@@ -13,6 +13,8 @@ public:
 public:
     IntroGameScene()
     {
+        Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera({});
+
         auto sprite = std::make_shared<GameObject>("sprite1");
         {
             sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/grass.png");
