@@ -17,14 +17,14 @@ void GameScene::AddObject(const std::shared_ptr<GameObject>& object)
     m_objects.insert(iter, object);
 }
 
-GameObject* GameScene::GetObject(const char* objectName)
+GameObject* GameScene::GetObject(const HashStringView& objectName)
 {
     auto predicate = [&](const std::shared_ptr<GameObject>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
 
-    auto iter = std::lower_bound(m_objects.begin(), m_objects.end(), X65599Hash(objectName), predicate);
+    auto iter = std::lower_bound(m_objects.begin(), m_objects.end(), objectName.GetHashCode(), predicate);
     if (iter != m_objects.end())
     {
         return (*iter).get();
@@ -35,9 +35,28 @@ GameObject* GameScene::GetObject(const char* objectName)
     }
 }
 
-const GameObject* GameScene::GetObject(const char* objectName) const
+const GameObject* GameScene::GetObject(const HashStringView& objectName) const
 {
     return const_cast<GameScene*>(this)->GetObject(objectName);
+}
+    
+bool GameScene::RemoveObject(const HashStringView& objectName)
+{
+    auto predicate = [&](const std::shared_ptr<GameObject>& lhs, size_t rhs)
+    {
+        return lhs->GetRTTI()->GetHashCode() < rhs;
+    };
+    
+    auto iter = std::lower_bound(m_objects.begin(), m_objects.end(), objectName.GetHashCode(), predicate);
+    if (iter != m_objects.end())
+    {
+        m_objects.erase(iter);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void GameScene::Update()

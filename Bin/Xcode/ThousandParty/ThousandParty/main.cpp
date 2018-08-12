@@ -4,6 +4,12 @@
 
 using namespace tgon;
 
+class TGON_API IntroGameScene :
+    public GameScene
+{
+public:
+};
+
 class TGON_API ThousandParty final :
     public Engine
 {
@@ -38,6 +44,8 @@ public:
         this->AddModule<TimeModule>();
 
         this->AddModule<GameSceneModule>();
+        
+//        GameSceneModule
     }
 
 /* @section Public destructor */

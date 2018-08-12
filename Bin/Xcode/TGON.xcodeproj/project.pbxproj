@@ -141,6 +141,10 @@
 		FDBE44E6211E78320055A968 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE44DD211E78310055A968 /* Component.h */; };
 		FDBE44E7211E78320055A968 /* ComponentUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE44DE211E78310055A968 /* ComponentUtility.h */; };
 		FDBE44E9211E78320055A968 /* MeshRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */; };
+		FDC546E9211F3F97000A25F8 /* GameSceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC546E5211F3F96000A25F8 /* GameSceneModule.h */; };
+		FDC546EA211F3F97000A25F8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC546E6211F3F96000A25F8 /* GameScene.cpp */; };
+		FDC546EB211F3F97000A25F8 /* GameScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC546E7211F3F96000A25F8 /* GameScene.h */; };
+		FDC546EC211F3F97000A25F8 /* GameSceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */; };
 		FDD0702D20D0D1A600CB02A7 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD0702B20D0D1A500CB02A7 /* Camera.h */; };
 		FDD3967A20D025B70095F1F8 /* Mouse.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD3966C20D025B50095F1F8 /* Mouse.h */; };
 		FDD3967B20D025B70095F1F8 /* Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD3966D20D025B50095F1F8 /* Keyboard.h */; };
@@ -329,11 +333,15 @@
 		FDBCFA3920E7F96100CBDF0B /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IndexBuffer.h; sourceTree = "<group>"; };
 		FDBCFA3A20E7F96100CBDF0B /* VertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = VertexBuffer.cpp; sourceTree = "<group>"; };
 		FDBE44D6211C9F4D0055A968 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
-		FDBE44D9211E78300055A968 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Component.cpp; path = ../../../Source/TGON/Game/Component/Component.cpp; sourceTree = "<group>"; };
-		FDBE44DB211E78300055A968 /* MeshRendererComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshRendererComponent.h; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.h; sourceTree = "<group>"; };
-		FDBE44DD211E78310055A968 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Component.h; path = ../../../Source/TGON/Game/Component/Component.h; sourceTree = "<group>"; };
-		FDBE44DE211E78310055A968 /* ComponentUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentUtility.h; path = ../../../Source/TGON/Game/Component/ComponentUtility.h; sourceTree = "<group>"; };
-		FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshRendererComponent.cpp; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.cpp; sourceTree = "<group>"; };
+		FDBE44D9211E78300055A968 /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Component.cpp; path = ../../../Source/TGON/Game/Component/Component.cpp; sourceTree = "<group>"; };
+		FDBE44DB211E78300055A968 /* MeshRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MeshRendererComponent.h; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.h; sourceTree = "<group>"; };
+		FDBE44DD211E78310055A968 /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Component.h; path = ../../../Source/TGON/Game/Component/Component.h; sourceTree = "<group>"; };
+		FDBE44DE211E78310055A968 /* ComponentUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = ComponentUtility.h; path = ../../../Source/TGON/Game/Component/ComponentUtility.h; sourceTree = "<group>"; };
+		FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MeshRendererComponent.cpp; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.cpp; sourceTree = "<group>"; };
+		FDC546E5211F3F96000A25F8 /* GameSceneModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameSceneModule.h; path = ../../../Source/TGON/Game/Engine/GameSceneModule.h; sourceTree = "<group>"; };
+		FDC546E6211F3F96000A25F8 /* GameScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameScene.cpp; path = ../../../Source/TGON/Game/Engine/GameScene.cpp; sourceTree = "<group>"; };
+		FDC546E7211F3F96000A25F8 /* GameScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameScene.h; path = ../../../Source/TGON/Game/Engine/GameScene.h; sourceTree = "<group>"; };
+		FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameSceneModule.cpp; path = ../../../Source/TGON/Game/Engine/GameSceneModule.cpp; sourceTree = "<group>"; };
 		FDC877FF20CEA1BC00C8CA9A /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Window.cpp; path = ../../Source/TGON/Core/Platform/Window.cpp; sourceTree = "<group>"; };
 		FDD0702A20D0D1A400CB02A7 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../../Source/TGON/Graphics/Render/Camera.cpp; sourceTree = "<group>"; };
 		FDD0702B20D0D1A500CB02A7 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../../Source/TGON/Graphics/Render/Camera.h; sourceTree = "<group>"; };
@@ -608,6 +616,7 @@
 		FD7EA52D1FAF6BCF008DF72F /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FDC546E4211F3F8C000A25F8 /* Engine */,
 				FDBE44D8211E78280055A968 /* Component */,
 				FD39DB3320C9703700C07251 /* Object */,
 			);
@@ -753,6 +762,17 @@
 				FDBE44DB211E78300055A968 /* MeshRendererComponent.h */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		FDC546E4211F3F8C000A25F8 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				FDC546E6211F3F96000A25F8 /* GameScene.cpp */,
+				FDC546E7211F3F96000A25F8 /* GameScene.h */,
+				FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */,
+				FDC546E5211F3F96000A25F8 /* GameSceneModule.h */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		FDD7C8AE1F65430C000EB7C8 = {
@@ -914,6 +934,7 @@
 				FDBCFA4220E7F96100CBDF0B /* Shader.h in Headers */,
 				FDBA3D1820F19CED0053B7BC /* RenderTarget.h in Headers */,
 				FDBE44E7211E78320055A968 /* ComponentUtility.h in Headers */,
+				FDC546EB211F3F97000A25F8 /* GameScene.h in Headers */,
 				FD41922A20DA853100536815 /* ISerializable.h in Headers */,
 				FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */,
 				FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */,
@@ -929,6 +950,7 @@
 				FDEB409B2100FC5A000A3B98 /* Material.h in Headers */,
 				FDDFF17120CAD7AD00F95359 /* StringViewHash.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
+				FDC546E9211F3F97000A25F8 /* GameSceneModule.h in Headers */,
 				FD806BBA2110AB74002B9DCB /* TimeModule.h in Headers */,
 				FDBCFA3F20E7F96100CBDF0B /* VertexBuffer.h in Headers */,
 				FDAF474E20D6D136004EC9FF /* BaseAudioImporter.h in Headers */,
@@ -1078,6 +1100,7 @@
 				FD53380720E4018500515DA4 /* ThreadPool.cpp in Sources */,
 				FDB0E1A12110AD96007A4593 /* GraphicsModule.cpp in Sources */,
 				FD53381F20E4027000515DA4 /* MacOSApplication.mm in Sources */,
+				FDC546EC211F3F97000A25F8 /* GameSceneModule.cpp in Sources */,
 				FD53380B20E4018500515DA4 /* OpenGLGraphics.cpp in Sources */,
 				FDBA3D1720F19CED0053B7BC /* RenderTarget.cpp in Sources */,
 				FD806BB92110AB74002B9DCB /* Engine.cpp in Sources */,
@@ -1096,6 +1119,7 @@
 				FD5337E820E4017A00515DA4 /* MacOSMain.mm in Sources */,
 				FDBE44E2211E78320055A968 /* Component.cpp in Sources */,
 				FD5337E920E4017A00515DA4 /* MacOSScreen.mm in Sources */,
+				FDC546EA211F3F97000A25F8 /* GameScene.cpp in Sources */,
 				FD5337EA20E4017A00515DA4 /* MacOSWindow.mm in Sources */,
 				FDF51BF7210A42A000A81407 /* RenderStage.cpp in Sources */,
 				FD8777402114A56A0058D547 /* Transform.cpp in Sources */,
