@@ -17,7 +17,7 @@ void GameScene::AddObject(const std::shared_ptr<GameObject>& object)
     m_objects.insert(iter, object);
 }
 
-GameObject* GameScene::GetObject(const HashStringView& objectName)
+GameObject* GameScene::FindObject(const HashStringView& objectName)
 {
     auto predicate = [&](const std::shared_ptr<GameObject>& lhs, size_t rhs)
     {
@@ -35,9 +35,9 @@ GameObject* GameScene::GetObject(const HashStringView& objectName)
     }
 }
 
-const GameObject* GameScene::GetObject(const HashStringView& objectName) const
+const GameObject* GameScene::FindObject(const HashStringView& objectName) const
 {
-    return const_cast<GameScene*>(this)->GetObject(objectName);
+    return const_cast<GameScene*>(this)->FindObject(objectName);
 }
     
 bool GameScene::RemoveObject(const HashStringView& objectName)

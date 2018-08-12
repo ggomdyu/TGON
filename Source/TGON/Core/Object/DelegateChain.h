@@ -142,9 +142,9 @@ inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes2&&
         return _ReturnType();
     }
 
-    for (auto& functor : m_invocationList)
+    for (auto i = 0; i < m_invocationList.size() - 1; ++i)
     {
-        functor(std::forward<_ArgTypes2>(args)...);
+        m_invocationList[i](std::forward<_ArgTypes2>(args)...);
     }
 
     auto iter = m_invocationList.end() - 1;

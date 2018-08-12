@@ -8,6 +8,23 @@ class TGON_API IntroGameScene :
     public GameScene
 {
 public:
+    TGON_RUNTIME_OBJECT(IntroGameScene);
+
+public:
+    IntroGameScene()
+    {
+        auto sprite = std::make_shared<GameObject>("sprite1");
+        {
+            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/grass.png");
+        }
+
+        this->AddObject(sprite);
+    }
+
+    virtual void Update() override
+    {
+        SuperType::Update();
+    }
 };
 
 class TGON_API ThousandParty final :
@@ -18,7 +35,15 @@ public:
 
 /* @section Public constructor */
 public:
-    ThousandParty()
+    ThousandParty() {}
+
+/* @section Public destructor */
+public:
+    virtual ~ThousandParty() override {}
+
+/* @section Public event handler */
+public:
+    virtual void OnDidLaunch()
     {
         Window& rootWindow = Application::GetInstance()->GetRootWindow();
 
@@ -28,8 +53,7 @@ public:
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, rootWindow);
-
+        
         VideoMode videoMode;
         {
             videoMode.graphicsSDK = GraphicsSDK::OpenGL4_0;
@@ -39,19 +63,11 @@ public:
             videoMode.enableVerticalSync = false;
             videoMode.enableMultiSampling = false;
         };
+
+        this->AddModule<InputModule>(inputMode, rootWindow);
         this->AddModule<GraphicsModule>(rootWindow, videoMode);
-
+        this->AddModule<GameSceneModule>(std::make_unique<IntroGameScene>());
         this->AddModule<TimeModule>();
-
-        this->AddModule<GameSceneModule>();
-        
-//        GameSceneModule
-    }
-
-/* @section Public destructor */
-public:
-    virtual ~ThousandParty() override
-    {
     }
     
 /* @section Private method */

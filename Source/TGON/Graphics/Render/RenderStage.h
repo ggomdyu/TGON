@@ -7,8 +7,9 @@
 #pragma once
 #include <memory>
 
-#include "Batch.h"
 #include "Camera.h"
+#include "Batch.h"
+#include "SpriteBatch.h"
 
 namespace tgon
 {
@@ -19,16 +20,24 @@ class TGON_API RenderStage final :
 /* @section Public method */
 public:
     /* @brief   Adds a mesh into the batch list. */
-    void AddBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Mesh>& mesh);
+    void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
     
     /* @brief   Adds a batch into the batch list. */
     void AddBatch(const Batch& batch);
-    
+
+    /* @brief   Adds a mesh into the batch list. */
+    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
+
+    /* @brief   Adds a batch into the batch list. */
+    void AddSpriteBatch(const SpriteBatch& batch);
+
     void Draw(Graphics& graphics);
 
 /* @section Private variable */
 private:
     BatchGroup m_batchGroup;
+
+    SpriteBatchGroup m_spriteBatchGroup;
     
     std::vector<Camera> m_cameraList;
 };

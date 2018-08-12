@@ -12,6 +12,11 @@ Component::Component(GameObject* owner) noexcept :
 {
 }
     
+void Component::SetOwner(GameObject* owner)
+{
+    m_owner = owner;
+}
+
 const GameObject* Component::GetOwner() const noexcept
 {
     return m_owner;

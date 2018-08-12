@@ -1,12 +1,13 @@
 /**
- * @file    Component.h
+ * @file    MeshRendererComponent.h
  * @author  ggomdyu
- * @since   04/26/2015
+ * @since   08/11/2018
  */
 
 #pragma once
 #include "Graphics/Render/Material.h"
 #include "Graphics/Render/Mesh.h"
+#include "Graphics/Engine/GraphicsModule.h"
 
 #include "Component.h"
 
@@ -47,6 +48,8 @@ public:
 private:
     std::shared_ptr<Mesh> m_mesh;
     std::shared_ptr<Material> m_material;
+
+    GraphicsModule* m_graphicsModule;
 };
 
 } /* namespace tgon */

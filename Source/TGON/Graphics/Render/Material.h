@@ -41,12 +41,6 @@ public:
     /* @brief   Sets the world-view-projection matrix. */
     void SetWVP(const Matrix4x4& matWVP);
     
-    /* @brief   Gets the world-view-projection matrix. */
-    Matrix4x4& GetWVP() noexcept;
-    
-    /* @brief   Gets the world-view-projection matrix. */
-    const Matrix4x4& GetWVP() const noexcept;
-    
     FillMode GetFillMode() const noexcept;
     
     CullMode GetCullMode();
@@ -59,8 +53,6 @@ public:
     
 /* @section Protected variable */
 protected:
-    Matrix4x4 m_matWVP;
-    
     CullMode m_cullMode;
     
     FillMode m_fillMode;

@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "../LowLevel/GraphicsType.h"
-
 #include "Batch.h"
 
 namespace tgon
@@ -12,15 +10,20 @@ Batch::Batch(const std::shared_ptr<Material>& material) :
 {
 }
 
-Batch::Batch(const std::shared_ptr<Material>& material, const std::initializer_list<std::shared_ptr<Mesh>>& meshes) :
+Batch::Batch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives) :
     m_material(material),
-    m_meshes(meshes)
+    m_drawPrimitives(drawPrimitives)
 {
 }
 
-void Batch::AddMesh(const std::shared_ptr<Mesh>& mesh)
+void Batch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWVP)
 {
-    m_meshes.push_back(mesh);
+    m_drawPrimitives.push_back(DrawPrimitive{mesh, matWVP});
+}
+
+void Batch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
+{
+    m_drawPrimitives.push_back(drawPrimitive);
 }
     
 bool Batch::CanBatch(const std::shared_ptr<Material>& material) const
@@ -32,8 +35,12 @@ void Batch::Draw(Graphics& graphics)
 {
     m_material->Use();
 
-    for (auto& mesh : m_meshes)
+    for (auto& drawPrimitives : m_drawPrimitives)
     {
+        // Set the world-view-projection matrix.
+        m_material->SetWVP(*drawPrimitives.matWVP);
+
+        auto& mesh = drawPrimitives.mesh;
         auto& vertexBuffer = mesh->GetVertexBuffer();
         auto& indexBuffer = mesh->GetIndexBuffer();
 
@@ -45,18 +52,18 @@ void Batch::Draw(Graphics& graphics)
     }
 }
     
-void BatchGroup::AddBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Mesh>& mesh)
+void BatchGroup::AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive)
 {
     for (auto& batch : m_batches)
     {
         if (batch.CanBatch(material))
         {
-            batch.AddMesh(mesh);
+            batch.AddDrawPrimitive(drawPrimitive);
             return;
         }
     }
     
-    m_batches.push_back(Batch(material, {mesh}));
+    m_batches.push_back(Batch(material, {drawPrimitive}));
 }
 
 void BatchGroup::AddBatch(const Batch& batch)

@@ -1,5 +1,5 @@
 /**
- * @file    Bitmap.h
+ * @file    Image.h
  * @author  ggomdyu
  * @since   01/20/2018
  */
@@ -12,10 +12,10 @@
 
 #include "Core/Platform/Config.h"
 
+#include "ImageType.h"
+
 namespace tgon
 {
-
-enum class PixelFormat;
 
 class TGON_API Image
 {
@@ -30,12 +30,26 @@ public:
     explicit Image(const std::string& filePath);
 
     /**
+     * @brief                   Reads a image data from the specified path.
+     * @param [in] filePath     The file path of image
+     */
+    explicit Image(std::string&& filePath);
+
+    /**
      * @brief                   Reads a image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
     Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
+    
+    /**
+     * @brief                   Reads a image data from memory.
+     * @param [in] filePath     The file path of image file
+     * @param [in] srcData      The pointer to image data
+     * @param [in] srcDataBytes The bytes of image data
+     */
+    Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     Image(const Image& rhs) = default;
 
@@ -82,7 +96,7 @@ public:
 
     /**
      * @brief                   Gets the file path saved at loading time.
-     * @warn                    This can be incorrect information if the file moved somewhere after image loaded.
+     * @warn                    It can be incorrect if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
 
@@ -125,4 +139,4 @@ private:
     std::string m_filePath;
 };
 
-} /* namespace tgon */  
+} /* namespace tgon */

@@ -11,13 +11,14 @@ namespace tgon
 
 MeshRendererComponent::MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material) :
     m_mesh(mesh),
-    m_material(material)
+    m_material(material),
+    m_graphicsModule(Engine::GetInstance()->FindModule<GraphicsModule>())
 {
 }
 
 void MeshRendererComponent::Update()
 {
-    
+    m_graphicsModule->GetRenderStage().AddBatch(m_material, {m_mesh, &GetOwner()->GetTransform().GetWVP()});
 }
     
 void MeshRendererComponent::SetMesh(const std::shared_ptr<Mesh>& mesh)

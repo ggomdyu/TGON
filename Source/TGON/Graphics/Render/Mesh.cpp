@@ -11,6 +11,12 @@ Mesh::Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_
 {
 }
 
+void Mesh::Use()
+{
+    m_vertexBuffer->Use();
+    m_indexBuffer->Use();
+}
+
 void Mesh::SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 {
     m_vertexBuffer = vertexBuffer;

@@ -157,7 +157,7 @@ constexpr int32_t DateTime::GetDayOfYear() const noexcept
     return dayOfYear + m_day;
 }
 
-inline constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
+constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
 {
     return m_dateTimeKind;
 }

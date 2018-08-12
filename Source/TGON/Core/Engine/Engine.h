@@ -71,6 +71,12 @@ public:
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     _ModuleType* FindModule() noexcept;
 
+/* @section Public event handler */
+public:
+    virtual void OnDidLaunch();
+
+    virtual void OnWillTerminate();
+
 /* @section Private method */
 private:
     /**

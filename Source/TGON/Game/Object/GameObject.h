@@ -119,7 +119,7 @@ inline _ComponentType* GameObject::GetComponent()
 template <typename _ComponentType, typename... _ArgTypes>
 inline void GameObject::AddComponent(_ArgTypes&&... args)
 {
-    this->AddComponent(std::make_unique<_ComponentType>(std::forward<_ArgTypes>(args)...));
+    this->AddComponent(new _ComponentType(std::forward<_ArgTypes>(args)...));
 }
 
 template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>

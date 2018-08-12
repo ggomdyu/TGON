@@ -64,4 +64,6 @@
 #include "Graphics/Engine/GraphicsModule.h"
 #include "Game/Object/GameObject.h"
 #include "Game/Component/Component.h"
+#include "Game/Component/MeshRendererComponent.h"
+#include "Game/Component/SpriteRendererComponent.h"
 #include "Game/Engine/GameSceneModule.h"

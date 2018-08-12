@@ -24,6 +24,9 @@ public:
     
 /* @section Public method */
 public:
+    /* @brief   Sets the rendering pipeline to use this mesh. */
+    void Use();
+
     /* @brief   Sets the vertex buffer. */
     void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
     

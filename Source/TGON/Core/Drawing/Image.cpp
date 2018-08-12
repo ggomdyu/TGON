@@ -7,7 +7,6 @@
 
 #include "Image.h"
 #include "ImageUtility.h"
-#include "ImageType.h"
 
 namespace tgon
 {
@@ -26,7 +25,19 @@ Image::Image(const std::string& filePath) :
 {
 }
 
+Image::Image(std::string&& filePath) :
+    m_filePath(std::move(filePath)),
+    m_imageData(stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4))
+{
+}
+
 Image::Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
+    m_filePath(filePath),
+    m_imageData(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4))
+{
+}
+
+Image::Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
     m_filePath(filePath),
     m_imageData(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4))
 {

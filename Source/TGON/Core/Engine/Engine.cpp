@@ -15,6 +15,8 @@ extern std::unique_ptr<Engine> MakeEngine();
 Engine::Engine() :
     m_timeModule(std::make_unique<TimeModule>())
 {
+    Application::GetInstance()->OnDidLaunch += [&]() { this->OnDidLaunch(); };
+    Application::GetInstance()->OnWillTerminate += [&]() { this->OnWillTerminate(); };
 }
 
 Engine::~Engine() = default;
@@ -25,6 +27,14 @@ Engine* Engine::GetInstance()
     return instance.get();
 }
     
+void Engine::OnDidLaunch()
+{
+}
+
+void Engine::OnWillTerminate()
+{
+}
+
 void Engine::AddModule(std::unique_ptr<IModule> module)
 {
     auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::unique_ptr<IModule>& lhs, size_t rhs)

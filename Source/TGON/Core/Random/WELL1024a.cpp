@@ -34,7 +34,7 @@ thread_local unsigned int state_i;
 thread_local unsigned int STATE[R];
 thread_local unsigned int z0, z1, z2;
 
-}
+} /* namespace */
 
 TGON_API void SrandWELL1024a()
 {

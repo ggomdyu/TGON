@@ -32,6 +32,8 @@ const FixedHashString32& GameObject::GetName() const noexcept
 
 void GameObject::AddComponent(Component* component)
 {
+    component->SetOwner(this);
+
     auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;

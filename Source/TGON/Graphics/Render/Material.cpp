@@ -46,19 +46,9 @@ bool ColorMaterial::CanBatch(const Material& rhs) const
 
 void Material::SetWVP(const Matrix4x4& matWVP)
 {
-    m_matWVP = matWVP;
+    m_shader->SetParameterMatrix4fv("g_uWVP", matWVP[0]);
 }
 
-Matrix4x4& Material::GetWVP() noexcept
-{
-    return m_matWVP;
-}
-
-const Matrix4x4& Material::GetWVP() const noexcept
-{
-    return m_matWVP;
-}
-    
 std::shared_ptr<Shader>& Material::GetShader() noexcept
 {
     return m_shader;

@@ -16,23 +16,22 @@
 namespace tgon
 {
 
-class TGON_API Batch final
+class TGON_API SpriteBatch final
 {
 /* @section Public struct */
 public:
     struct DrawPrimitive
     {
-        std::shared_ptr<Mesh> mesh;
         const Matrix4x4* matWVP;
     };
 
 /* @section Public constructor */
 public:
     /* @brief   Initializes the batch with a material. */
-    explicit Batch(const std::shared_ptr<Material>& material);
+    explicit SpriteBatch(const std::shared_ptr<Material>& material);
     
     /* @brief   Initializes the batch with a material and primitives. */
-    explicit Batch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
+    explicit SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
 
 /* @section Public method */
 public:
@@ -55,22 +54,28 @@ private:
     std::vector<DrawPrimitive> m_drawPrimitives;
 };
     
-class TGON_API BatchGroup final
+class TGON_API SpriteBatchGroup final
 {
+/* @section Public constructor */
+public:
+    SpriteBatchGroup();
+
 /* @section Public method */
 public:
     /* @brief   Adds a mesh into the batch list. */
-    void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
+    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
     
     /* @brief   Adds a batch into the batch list. */
-    void AddBatch(const Batch& batch);
+    void AddSpriteBatch(const SpriteBatch& batch);
     
     /* @brief   Flushes all the batch in list. */
-    void FlushBatch(Graphics& graphics);
+    void FlushSpriteBatch(Graphics& graphics);
 
 /* @section Private variable */
 private:
-    std::vector<Batch> m_batches;
+    std::shared_ptr<Mesh> m_quadMesh;
+
+    std::vector<SpriteBatch> m_spriteBatches;
 };
     
 } /* namespace tgon */

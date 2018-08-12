@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 
+#include "Core/Object/CoreObject.h"
 #include "Core/String/HashStringView.h"
 
 #include "../Object/GameObject.h"
@@ -15,8 +16,12 @@
 namespace tgon
 {
 
-class TGON_API GameScene
+class TGON_API GameScene :
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(GameScene);
+
 /* @section Public destructor */
 public:
     virtual ~GameScene() = default;
@@ -36,13 +41,13 @@ public:
      * @brief                   Find a GameObject with the specified object name.
      * @return                  Returns the found object, nullptr otherwise.
      */
-    GameObject* GetObject(const HashStringView& objectName);
+    GameObject* FindObject(const HashStringView& objectName);
 
     /**
      * @brief                   Find a GameObject with the specified object name.
      * @return                  Returns the found object, nullptr otherwise.
      */
-    const GameObject* GetObject(const HashStringView& objectName) const;
+    const GameObject* FindObject(const HashStringView& objectName) const;
     
     /**
      * @brief                   Removes the object which has specified name.

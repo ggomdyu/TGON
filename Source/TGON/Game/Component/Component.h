@@ -32,6 +32,8 @@ public:
 public:
     /* @brief   Updates the component. */
     virtual void Update() = 0;
+
+    void SetOwner(GameObject* owner);
         
     /* @brief   Gets the owner of this component. */
     const GameObject* GetOwner() const noexcept;

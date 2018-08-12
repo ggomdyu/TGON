@@ -40,6 +40,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ThreadPool.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameSceneModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.cpp" />
@@ -65,6 +66,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\MeshUtility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\RenderStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\format.cc">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -184,6 +186,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameSceneModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.h" />
@@ -221,6 +224,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\PostProcess.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\RenderStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Sprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\include\fmt\core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\include\fmt\format-inl.h" />

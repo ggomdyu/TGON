@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Engine/Engine.h"
 #include "Core/Random/WELL1024a.h"
 
 #include "Application.h"

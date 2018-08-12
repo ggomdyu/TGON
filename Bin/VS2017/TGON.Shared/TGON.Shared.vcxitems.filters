@@ -279,6 +279,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\RenderStage.cpp">
       <Filter>Source\Graphics\Render</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteRendererComponent.cpp">
+      <Filter>Source\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.cpp">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hash\Hash.h">
@@ -758,7 +764,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\WeightSelector.h">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\FunctionTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameSceneModule.h">
       <Filter>Source\Game\Engine</Filter>
     </ClInclude>
@@ -777,7 +782,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\RenderStage.h">
       <Filter>Source\Graphics\Render</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedHashString.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\HashStringView.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteRendererComponent.h">
+      <Filter>Source\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\SpriteBatch.h">
+      <Filter>Source\Graphics\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\FixedHashString.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\FunctionTraits.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\String\HashStringView.h">
+      <Filter>Source\Core\String</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

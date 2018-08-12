@@ -33,17 +33,21 @@ public:
     /* @brief   Sets the texture. */
     void SetTexture(const std::shared_ptr<Texture>& texture);
     
+    //void SetScissorRect(const I32Rect& scissorRect);
+
     /* @brief   Gets the texture. */
     std::shared_ptr<Texture>& GetTexture() noexcept;
 
     /* @brief   Gets the texture. */
     const std::shared_ptr<Texture>& GetTexture() const noexcept;
     
+    //const I32Rect& GetScissorRect() const noexcept;
+
 /* @section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
 
-    Matrix4x4 m_matWVP;
+    bool m_isUseScissor;
 };
 
 class NinePatchSprite
