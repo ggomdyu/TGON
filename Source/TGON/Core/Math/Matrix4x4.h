@@ -59,6 +59,7 @@ public:
     static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
     static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ);
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
+    static constexpr Matrix4x4 OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ);
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 
 /* @section Public variable */
@@ -204,6 +205,20 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
         0.0f,   scaleY, 0.0f,                               0.0f,
         0.0f,   0.0f,   farZ / (nearZ - farZ),              -1.0f,
         0.0f,   0.0f,   -(farZ * nearZ) / (farZ - nearZ),   0.0f
+    );
+}
+    
+constexpr Matrix4x4 Matrix4x4::OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ)
+{
+    float width = right - left;
+    float height = top - bottom;
+    float depth = farZ - nearZ;
+    
+    return Matrix4x4(
+        2 / width,  0.0f,           0.0f,               0.0f,
+        0.0f,       2 / height,     0.0f,               0.0f,
+        0.0f,       0.0f,           -2.0f / depth,      0.0f,
+        -(right + left) / width,    -(top + bottom) / height,   -(farZ + nearZ) / depth,    1.0f
     );
 }
 
