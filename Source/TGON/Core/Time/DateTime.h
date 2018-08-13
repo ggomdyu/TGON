@@ -164,15 +164,15 @@ constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
 
 constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month)
 {
-    constexpr int32_t daysInYearTable[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    constexpr int32_t daysInMonthTable[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     if (month == 2)
     {
-        return IsLeapYear(year) ? daysInYearTable[month] + 1 : daysInYearTable[month];
+        return IsLeapYear(year) ? daysInMonthTable[month] + 1 : daysInMonthTable[month];
     }
     else
     {
-        return daysInYearTable[month];
+        return daysInMonthTable[month];
     }
 }
 
