@@ -6,6 +6,7 @@
 
 #pragma once
 #include <vector>
+#include <type_traits>
 
 #include "Core/Object/Delegate.h"
 
@@ -15,6 +16,8 @@ namespace tgon
 template <typename _WeightType>
 class WeightSelector
 {
+    static_assert(std::is_arithmetic<_WeightType>::value, "_WeightType must be arithmetic type.");
+
 /* @section Public type */
 public:
     using WeightType = _WeightType;
