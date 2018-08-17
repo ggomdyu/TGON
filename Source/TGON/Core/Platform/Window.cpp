@@ -8,7 +8,7 @@ namespace tgon
 Window::Window(const WindowStyle& windowStyle) :
     m_windowImpl(windowStyle),
     OnWindowMove(m_windowImpl.OnWindowMove),
-    OnWindowResize(m_windowImpl.OnWindowMove),
+    OnWindowResize(m_windowImpl.OnWindowResize),
     OnWindowMaximize(m_windowImpl.OnWindowMaximize),
     OnWindowMinimize(m_windowImpl.OnWindowMinimize),
     OnWindowEnterFullScreen(m_windowImpl.OnWindowEnterFullScreen),
