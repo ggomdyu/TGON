@@ -40,14 +40,11 @@ public:
     void AddSpriteBatch(const SpriteBatch& batch);
 
     /* @brief   Adds a camera into the RenderStage. */
-    CameraHandle AddCamera(const Camera& camera);
+    void AddCamera(const std::shared_ptr<Camera>& camera);
 
-    /* @brief   Gets the camera with specified camera handle. */
-    Camera& GetCamera(CameraHandle cameraHandle);
-
-    /* @brief   Gets the camera with specified camera handle. */
-    const Camera& GetCamera(CameraHandle cameraHandle) const;
-
+    /* @brief   Removes the specified camera in the RenderStage. */
+    bool RemoveCamera(const std::shared_ptr<Camera>& camera);
+    
     void Draw(Graphics& graphics);
 
 /* @section Private variable */
@@ -56,7 +53,7 @@ private:
 
     SpriteBatchGroup m_spriteBatchGroup;
     
-    std::vector<Camera> m_cameraList;
+    std::vector<std::shared_ptr<Camera>> m_cameraList;
 };
 
 } /* namespace tgon */

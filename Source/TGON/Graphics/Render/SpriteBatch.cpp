@@ -36,12 +36,10 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
 {
     m_material->Use();
 
-    const Matrix4x4& matWVP = camera.GetViewProjectionMatrix();
-
-    for (auto& drawPrimitives : m_drawPrimitives)
+    for (auto& drawPrimitive : m_drawPrimitives)
     {
         // Set the world-view-projection matrix.
-        m_material->SetWVP(matWVP);
+        m_material->SetWVP(*drawPrimitive.matWorld * camera.GetViewProjectionMatrix());
 
         graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
     }

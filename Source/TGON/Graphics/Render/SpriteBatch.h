@@ -23,7 +23,7 @@ class TGON_API SpriteBatch final
 public:
     struct DrawPrimitive
     {
-        const Matrix4x4* matWVP;
+        const Matrix4x4* matWorld;
     };
 
 /* @section Public constructor */
