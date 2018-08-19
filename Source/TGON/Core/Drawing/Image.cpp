@@ -44,7 +44,7 @@ Image::Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataByte
 }
 
 Image::Image(Image&& rhs) :
-    m_imageData(rhs.m_imageData),
+    m_imageData(std::move(rhs.m_imageData)),
     m_width(rhs.m_width),
     m_height(rhs.m_height),
     m_channels(rhs.m_channels),
@@ -55,15 +55,6 @@ Image::Image(Image&& rhs) :
     rhs.m_height = 0;
     rhs.m_channels = 0;
 }
-    
-Image::~Image()
-{
-    if (m_imageData != nullptr)
-    {
-        stbi_image_free(m_imageData);
-        m_imageData = nullptr;
-    }
-}
 
 Image& Image::operator=(Image&& rhs)
 {
@@ -72,7 +63,7 @@ Image& Image::operator=(Image&& rhs)
         return *this;
     }
     
-    m_imageData = rhs.m_imageData;
+    m_imageData = std::move(rhs.m_imageData);
     m_width = rhs.m_width;
     m_height = rhs.m_height;
     m_channels = rhs.m_channels;
@@ -88,12 +79,12 @@ Image& Image::operator=(Image&& rhs)
 
 uint8_t& Image::operator[](std::size_t index)
 {
-    return m_imageData[index];
+    return m_imageData.get()[index];
 }
 
 const uint8_t Image::operator[](std::size_t index) const
 {
-    return m_imageData[index];
+    return m_imageData.get()[index];
 }
 
 bool Image::IsValid() const noexcept
@@ -103,12 +94,12 @@ bool Image::IsValid() const noexcept
 
 uint8_t* Image::GetImageData() noexcept
 {
-    return m_imageData;
+    return m_imageData.get();
 }
 
 const uint8_t* Image::GetImageData() const noexcept
 {
-    return m_imageData;
+    return m_imageData.get();
 }
 
 int32_t Image::GetWidth() const noexcept
@@ -138,22 +129,22 @@ const std::string& Image::GetFilePath() const noexcept
 
 bool Image::SaveAsPng(const char* saveFilePath)
 {
-    return stbi_write_png(saveFilePath, m_width, m_height, 4, m_imageData, m_width * 4) != 0;
+    return stbi_write_png(saveFilePath, m_width, m_height, 4, m_imageData.get(), m_width * 4) != 0;
 }
 
 bool Image::SaveAsJpeg(const char* saveFilePath, int32_t quality)
 {
-    return stbi_write_jpg(saveFilePath, m_width, m_height, 4, m_imageData, quality) != 0;
+    return stbi_write_jpg(saveFilePath, m_width, m_height, 4, m_imageData.get(), quality) != 0;
 }
 
 bool Image::SaveAsBmp(const char* saveFilePath)
 {
-    return stbi_write_bmp(saveFilePath, m_width, m_height, 4, m_imageData) != 0;
+    return stbi_write_bmp(saveFilePath, m_width, m_height, 4, m_imageData.get()) != 0;
 }
 
 bool Image::SaveAsTga(const char* saveFilePath)
 {
-    return stbi_write_tga(saveFilePath, m_width, m_height, 4, m_imageData) != 0;
+    return stbi_write_tga(saveFilePath, m_width, m_height, 4, m_imageData.get()) != 0;
 }
 
 } /* namespace tgon */
