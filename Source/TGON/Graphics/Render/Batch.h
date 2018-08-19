@@ -24,7 +24,7 @@ public:
     struct DrawPrimitive
     {
         std::shared_ptr<Mesh> mesh;
-        const Matrix4x4* matWVP;
+        const Matrix4x4* matWorld;
     };
 
 /* @section Public constructor */
@@ -38,7 +38,7 @@ public:
 /* @section Public method */
 public:
     /* @brief   Adds a draw primitive into the batch. */
-    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWVP);
+    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWorld);
     
     /* @brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);

@@ -13,7 +13,7 @@ public:
 public:
     IntroGameScene()
     {
-        Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera({});
+        Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(std::shared_ptr<Camera>(new Camera()));
 
         auto sprite = std::make_shared<GameObject>("sprite1");
         {

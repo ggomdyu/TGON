@@ -29,7 +29,7 @@ public:
 /* @section Public method */
 public:
     /* @brief                   Updates the frame of the scene. */
-    virtual void Update();
+    virtual void Update() override;
     
     /**
      * @brief                   Adds a GameObject into scene.

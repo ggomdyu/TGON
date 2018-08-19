@@ -16,9 +16,9 @@ Batch::Batch(const std::shared_ptr<Material>& material, const std::initializer_l
 {
 }
 
-void Batch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWVP)
+void Batch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWorld)
 {
-    m_drawPrimitives.push_back(DrawPrimitive{mesh, matWVP});
+    m_drawPrimitives.push_back(DrawPrimitive{mesh, matWorld});
 }
 
 void Batch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
@@ -38,7 +38,7 @@ void Batch::Draw(Graphics& graphics, const Camera& camera)
     for (auto& drawPrimitives : m_drawPrimitives)
     {
         // Set the world-view-projection matrix.
-        m_material->SetWVP(*drawPrimitives.matWVP);
+        m_material->SetWVP(*drawPrimitives.matWorld * camera.GetViewProjectionMatrix());
 
         auto& mesh = drawPrimitives.mesh;
         auto& vertexBuffer = mesh->GetVertexBuffer();

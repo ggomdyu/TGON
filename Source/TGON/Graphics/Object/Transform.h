@@ -37,14 +37,14 @@ public:
     void Update();
     
     /* @brief   Gets the world-view-projection matrix. */
-    const Matrix4x4& GetWVP() const noexcept;
+    const Matrix4x4& GetWorldMatrix() const noexcept;
     
 /* @section Private variable */
 private:
     Vector3 m_position;
     Vector3 m_rotation;
     Vector3 m_scale;
-    Matrix4x4 m_matWVP;
+    Matrix4x4 m_matWorld;
     bool m_isDirty;
 };
 
