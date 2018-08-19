@@ -54,11 +54,7 @@ public:
     Image(const Image& rhs) = default;
 
     Image(Image&& rhs);
-    
-/* @section Public destructor */
-public:
-    ~Image();
-    
+
 /* @section Public operator */
 public:
     Image& operator=(const Image& rhs) = default;
@@ -132,7 +128,7 @@ public:
 
 /* @section Private variable */
 private:
-    uint8_t* m_imageData;
+    std::unique_ptr<uint8_t> m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
