@@ -11,7 +11,6 @@ constexpr const char g_positionColorVert[] =
 #version 330 core                                                                   \n\
                                                                                     \n\
 layout(location = 0) in vec3 g_vertPosition;                                        \n\
-layout(location = 1) in vec3 g_vertColor;                                           \n\
                                                                                     \n\
 uniform mat4 g_uWVP;                                                                \n\
 uniform vec4 g_uColor;                                                              \n\

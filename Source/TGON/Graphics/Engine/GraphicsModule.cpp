@@ -4,6 +4,15 @@
 
 #include "../Render/MeshUtility.h"
 
+#include "Graphics/LowLevel/Shader.h"
+#include "Graphics/LowLevel/OpenGL/OpenGLShaderCode.h"
+#include "Graphics/Render/FVF.h"
+
+#include <glm/glm/matrix.hpp>
+#include <glm/glm/glm.hpp>
+#include <glm/glm/gtc/matrix_transform.hpp>
+#include <glm/glm/gtx/transform.hpp>
+
 namespace tgon
 {
 
@@ -29,9 +38,45 @@ void GraphicsModule::Update()
 
 void GraphicsModule::Draw()
 {
+    Vector3 position[] = {
+        Vector3(100.0f, 100.0f, 0.0f),
+        Vector3(100.0f, 200.0f, 0.0f),
+        Vector3(200.0f, 200.0f, 0.0f),
+        Vector3(200.0f, 100.0f, 0.0f),
+    };
+
+    unsigned int indices[] = {
+        0, 1, 2,
+        0, 2, 3,
+    };
+
+    std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
+    {
+        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(Vector3), 0),
+    };
+
+    VertexBuffer vb(position, false, vertexBufferLayoutDescs);
+    IndexBuffer ib(indices, false);
+    Shader shader(g_positionColorVert, g_positionColorFrag);
+    Camera camera;
+
     m_graphics.ClearColorDepthBuffer();
     {
-        m_renderStage.Draw(m_graphics);
+        vb.Use();
+        ib.Use();
+        shader.Use();
+        
+        shader.SetParameter4f("g_uColor", 1.0f, 0.0f, 0.0f, 1.0f);
+
+        //glm::mat4 result = glm::perspective<float>(3.14159265358 / 8, 540.0f / 960.0f, -1.0f, 1024.0f);
+        glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+        glm::mat4 result = proj;
+        auto mat = Matrix4x4::OrthographicLH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+        shader.SetParameterMatrix4fv("g_uWVP", &mat[0][0]);
+
+        m_graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
+
+        //m_renderStage.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }

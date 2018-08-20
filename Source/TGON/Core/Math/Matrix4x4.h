@@ -20,7 +20,7 @@ struct TGON_API Matrix4x4
 {
 /* @section Public constructor */
 public:
-    /* @brief   Initializes to Identity matrix. */
+    /* @brief   Initializes matrix as a Identity matrix. */
     constexpr Matrix4x4() noexcept;
 
     /* @brief   Initializes matrix with the specified value. */
@@ -59,7 +59,7 @@ public:
     static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
     static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ);
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
-    static constexpr Matrix4x4 OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ);
+    static inline /*constexpr*/ Matrix4x4 OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ);
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 
 /* @section Public variable */
@@ -208,9 +208,47 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
     
-constexpr Matrix4x4 Matrix4x4::OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ)
+inline Matrix4x4 Matrix4x4::OrthographicLH(float l, float r, float b, float t, float n, float f)
 {
-    float width = right - left;
+    auto a = Matrix4x4((2.0f) / (r - l), 0, 0, 0,
+        0, (2.0f) / (t - b), 0, 0,
+        0, 0, -(2.0f) / (f - n), 0,
+        -(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1);
+
+    Matrix4x4 ret;
+    float width = r - l;
+    float height = t - b;
+    float depth = f - n;
+
+    if (width < 1.0e-6)
+        width = 1.0f;
+    if (height < 1.0e-6)
+        height = 1.0f;
+    if (depth < 1.0e-6)
+        depth = 1.0f;
+
+    ret.m00 = 2.0f / width;
+    ret.m01 = 0.0f;
+    ret.m02 = 0.0f;
+    ret.m03 = 0.0f;
+
+    ret.m10 = 0.0f;
+    ret.m11 = 2.0f / height;
+    ret.m12 = 0.0f;
+    ret.m13 = 0.0f;
+
+    ret.m20 = 0.0f;
+    ret.m21 = 0.0f;
+    ret.m22 = -(2.0f) / depth;
+    ret.m23 = 0.0f;
+        
+    ret.m30 = -(r + l) / width;
+    ret.m31 = -(t + b) / height;
+    ret.m32 = -(f + n) / depth;
+    ret.m33 = 1.0f;
+    return ret;
+
+    /*float width = right - left;
     float height = top - bottom;
     float depth = farZ - nearZ;
     
@@ -219,7 +257,7 @@ constexpr Matrix4x4 Matrix4x4::OrthographicLH(float left, float right, float bot
         0.0f,       2 / height,     0.0f,               0.0f,
         0.0f,       0.0f,           -2.0f / depth,      0.0f,
         -(right + left) / width,    -(top + bottom) / height,   -(farZ + nearZ) / depth,    1.0f
-    );
+    );*/
 }
 
 constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)

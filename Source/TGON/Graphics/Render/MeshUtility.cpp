@@ -22,10 +22,10 @@ std::shared_ptr<Mesh> MakeTriangle()
             V3F_T2F{Vector3(0.0f, 1.0f, 0.0f), Vector2(0.5f, 1.0f)},
             V3F_T2F{Vector3(1.0f, -1.0f, 0.0f), Vector2(1.0f, 0.0f)},
         };
-        std::initializer_list<VertexBufferDesc> vertexBufferDescs =
+        std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferDescs =
         {
-            VertexBufferDesc(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
-            VertexBufferDesc(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
         auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
 
@@ -56,12 +56,12 @@ std::shared_ptr<Mesh> MakeCube()
             V3F_T2F{Vector3(1.0f, 1.0f, 1.0f), Vector2(1.0f, 1.0f)},
             V3F_T2F{Vector3(1.0f, -1.0f, 1.0f), Vector2(1.0f, 0.0f)},
         };
-        std::initializer_list<VertexBufferDesc> vertexBufferDescs =
+        std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
         {
-            VertexBufferDesc(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
-            VertexBufferDesc(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
+        auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferLayoutDescs);
         
         // Create a IndexBuffer
         unsigned int indices[] =
@@ -111,12 +111,12 @@ std::shared_ptr<Mesh> MakeQuad()
             V3F_T2F{Vector3(1.0f, 1.0f, 0.0f), Vector2(1.0f, 1.0f)},
             V3F_T2F{Vector3(1.0f, -1.0f, 0.0f), Vector2(1.0f, 0.0f)},
         };
-        std::initializer_list<VertexBufferDesc> vertexBufferDescs =
+        std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
         {
-            VertexBufferDesc(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
-            VertexBufferDesc(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
+            VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
+        auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferLayoutDescs);
         
         // Create a IndexBuffer
         unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };

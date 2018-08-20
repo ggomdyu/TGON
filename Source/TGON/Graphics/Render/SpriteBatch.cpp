@@ -77,6 +77,8 @@ void SpriteBatchGroup::FlushSpriteBatch(Graphics& graphics, const Camera& camera
     {
         spriteBatch.Draw(graphics, camera);
     }
+
+    m_spriteBatches.clear();
 }
     
 } /* namespace tgon */

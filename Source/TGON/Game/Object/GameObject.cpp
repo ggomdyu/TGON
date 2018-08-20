@@ -14,6 +14,8 @@ GameObject::GameObject(const FixedHashString32& name) :
 
 void GameObject::Update()
 {
+    SuperType::Update();
+
     for (auto& component : m_components)
     {
         component->Update();

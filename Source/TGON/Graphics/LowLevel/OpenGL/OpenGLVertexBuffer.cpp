@@ -8,14 +8,14 @@
 namespace tgon
 {
 
-VertexBufferImpl::VertexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
+VertexBufferImpl::VertexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs) :
     m_dataBytes(dataBytes),
     m_isDynamicUsage(isDynamicUsage),
     m_vertexBufferHandle(this->CreateVertexBufferHandle())
 {
-    assert(data != nullptr && dataBytes > 0 && vertexBufferDescs.size() > 0);
+    assert(data != nullptr && dataBytes > 0 && vertexBufferLayoutDescs.size() > 0);
 
-    this->SetData(data, dataBytes, isDynamicUsage, vertexBufferDescs);
+    this->SetData(data, dataBytes, isDynamicUsage, vertexBufferLayoutDescs);
 }
 
 VertexBufferImpl::~VertexBufferImpl()
@@ -23,10 +23,10 @@ VertexBufferImpl::~VertexBufferImpl()
     TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
 }
 
-void VertexBufferImpl::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+void VertexBufferImpl::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
 {
-    m_vertexBufferDescs.clear();
-    m_vertexBufferDescs = vertexBufferDescs;
+    m_vertexBufferLayoutDescs.clear();
+    m_vertexBufferLayoutDescs = vertexBufferLayoutDescs;
 
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
     TGON_GL_ERROR_CHECK(glBufferData(GL_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
@@ -41,9 +41,9 @@ void VertexBufferImpl::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
 
-    for (GLint i = 0; i < m_vertexBufferDescs.size(); ++i)
+    for (GLint i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
     {
-        const auto& vertexBufferDesc = m_vertexBufferDescs[i];
+        const auto& vertexBufferDesc = m_vertexBufferLayoutDescs[i];
 
         TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(i));
         TGON_GL_ERROR_CHECK(glVertexAttribPointer(
@@ -59,7 +59,7 @@ void VertexBufferImpl::Use()
 
 void VertexBufferImpl::Unuse()
 {
-    for (GLint i = 0; i < m_vertexBufferDescs.size(); ++i)
+    for (GLint i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
     {
         TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(i));
     }

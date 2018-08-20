@@ -14,7 +14,7 @@ namespace tgon
 struct V3F_C2F
 {
     Vector3 position;
-    Vector2 color;
+    Vector3 color;
 };
 
 struct V3F_T2F

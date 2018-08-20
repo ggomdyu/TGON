@@ -11,9 +11,13 @@
 namespace tgon
 {
 
+
 class TGON_API GraphicsObject :
     public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(GraphicsObject);
+
 /* @brief   Public destructor */
 public:
     virtual ~GraphicsObject() override = default;

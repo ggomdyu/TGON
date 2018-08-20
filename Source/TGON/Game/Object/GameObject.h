@@ -34,14 +34,14 @@ public:
     virtual void Update() override;
 
     /**
-     * @brief               Sets the name of object.
-     * @param [in] name     The name to set.
+     * @brief                   Sets the name of object.
+     * @param [in] name         The name to set.
      */
     void SetName(const FixedHashString32& name);
 
     /**
-     * @brief               Inserts a component to manage.
-     * @param [in] args     Parameters of the _ComponentType constructor.
+     * @brief                   Inserts a component to manage.
+     * @param [in] args         Parameters of the _ComponentType constructor.
      */
     template <typename _ComponentType, typename... _ArgTypes>
     void AddComponent(_ArgTypes&&... args);
@@ -71,8 +71,8 @@ public:
     _ComponentType* GetComponent();
 
     /**
-     * @brief   Gets the name of object.
-     * @return  The name of object to set.
+     * @brief                   Gets the name of object.
+     * @return                  The name of object to set.
      */
     const FixedHashString32& GetName() const noexcept;
 

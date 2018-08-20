@@ -23,13 +23,13 @@ class TGON_API VertexBuffer final :
 /* @section Public constructor */
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
-    VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     
-    VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     
 /* @section Public method */
 public:
-    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs);
+    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     
     std::size_t GetDataBytes() const noexcept;
     
@@ -47,8 +47,8 @@ public:
 };
     
 template <typename _DataArrayType, std::size_t _DataArraySize>
-inline VertexBuffer::VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
-    VertexBuffer(data, sizeof(data), isDynamicUsage, vertexBufferDescs)
+inline VertexBuffer::VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs) :
+    VertexBuffer(data, sizeof(data), isDynamicUsage, vertexBufferLayoutDescs)
 {
 }
 

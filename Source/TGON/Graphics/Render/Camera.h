@@ -82,6 +82,8 @@ private:
     float m_fov;
     float m_nearZ;
     float m_farZ;
+    Matrix4x4 m_matView;
+    Matrix4x4 m_matProj;
     Matrix4x4 m_matViewProj;
     bool m_isDirty;
     ProjectionMode m_projectionMode;

@@ -30,10 +30,10 @@ enum class VertexAttributeIndex
     UV = 1,
 };
 
-struct VertexBufferDesc
+struct VertexBufferLayoutDescriptor
 {
 public:
-    constexpr VertexBufferDesc(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
+    constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
         attribute(attribute),
         dimension(dimension),
         type(type),

@@ -5,14 +5,14 @@
 namespace tgon
 {
 
-VertexBuffer::VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs) :
-    m_vertexBufferImpl(data, dataBytes, isDynamicUsage, vertexBufferDescs)
+VertexBuffer::VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs) :
+    m_vertexBufferImpl(data, dataBytes, isDynamicUsage, vertexBufferLayoutDescs)
 {
 }
 
-void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferDesc>& vertexBufferDescs)
+void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
 {
-    m_vertexBufferImpl.SetData(data, dataBytes, isDynamicUsage, vertexBufferDescs);
+    m_vertexBufferImpl.SetData(data, dataBytes, isDynamicUsage, vertexBufferLayoutDescs);
 }
 
 std::size_t VertexBuffer::GetDataBytes() const noexcept

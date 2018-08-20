@@ -15,7 +15,7 @@ Camera::Camera() noexcept :
     m_nearZ(0.1f),
     m_farZ(1000.0f),
     m_isDirty(true),
-    m_projectionMode(ProjectionMode::Orthographic),
+    m_projectionMode(ProjectionMode::Perspective),
     m_fillMode(FillMode::Solid),
     m_cullMode(CullMode::CW)
 {
@@ -26,8 +26,8 @@ Camera::Camera(float left, float right, float bottom, float top, float nearZ, fl
     m_eyePt(0.0f, 0.0f, 5.0f),
     m_lookAt(0.0f, 0.0f, 0.0f),
     m_fov(Pi / 8),
-    m_nearZ(0.1f),
-    m_farZ(1000.0f),
+    m_nearZ(nearZ),
+    m_farZ(farZ),
     m_isDirty(true),
     m_projectionMode(ProjectionMode::Orthographic),
     m_fillMode(FillMode::Solid),
@@ -53,15 +53,15 @@ void Camera::Update()
     if (m_isDirty == true)
     {
         // TODO: This code supposed to use OpenGL, so you should use LH function when you support DirectX.
-        m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
         
         if (m_projectionMode == ProjectionMode::Perspective)
         {
+            m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
             m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
         }
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
-            m_matViewProj *= Matrix4x4::OrthographicLH(0.0f, 500.0f, 500.0f, 0.0f, m_nearZ, m_farZ);
+            m_matViewProj = Matrix4x4::OrthographicLH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1000.0f);
         }
         
         m_isDirty = false;
