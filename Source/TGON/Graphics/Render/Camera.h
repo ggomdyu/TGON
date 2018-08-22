@@ -8,6 +8,7 @@
 #include "Core/Platform/Config.h"
 #include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Vector3.h"
+#include "Core/Math/Rect.h"
 
 #include "../LowLevel/GraphicsType.h"
 
@@ -21,10 +22,10 @@ class TGON_API Camera
 /* @section Public constructor */
 public:
     Camera() noexcept;
-
-    Camera(float left, float right, float bottom, float top, float nearZ, float farZ) noexcept;
     
-    Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ, ProjectionMode projectionMode, FillMode fillMode, CullMode cullMode) noexcept;
+    Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept;
+
+    Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept;
 
 /* @section Public method */
 public:
@@ -36,9 +37,10 @@ public:
     /* @brief   Sets the far clipping plane's Z-position. */
     void SetFarZ(float farZ) noexcept;
     
-    /* @brief   Sets the field of view. */
+    /* @brief   Sets the Field of view. */
     void SetFov(float fov) noexcept;
     
+    /* @brief   Sets the Camera's projection mode. */
     void SetProjectionMode(ProjectionMode projectionMode) noexcept;
     
     /* @brief   Sets the position of camera. */
@@ -47,10 +49,12 @@ public:
     /* @brief   Sets the direction vector of camera. */
     void SetLookAt(const Vector3& lookAt) noexcept;
     
-    void SetFillMode(FillMode fillMode) noexcept;
-    
-    void SetCullMode(CullMode cullMode) noexcept;
-    
+    void SetOrthoPlane(const FRect& orthoPlane) noexcept;
+
+    FRect& GetOrthoPlane() noexcept;
+
+    const FRect& GetOrthoPlane() const noexcept;
+
     /* @brief   Gets the near clipping plane's Z-position. */
     float GetNearZ() const noexcept;
     
@@ -71,10 +75,6 @@ public:
     /* @brief   Gets the direction vector of camera. */
     const Vector3& GetLookAt() const noexcept;
     
-    FillMode GetFillMode() const noexcept;
-    
-    CullMode GetCullMode() const noexcept;
-
 /* @section Private variable */
 private:
     Vector3 m_eyePt;
@@ -82,13 +82,12 @@ private:
     float m_fov;
     float m_nearZ;
     float m_farZ;
+    FRect m_orthoPlane;
     Matrix4x4 m_matView;
     Matrix4x4 m_matProj;
     Matrix4x4 m_matViewProj;
     bool m_isDirty;
     ProjectionMode m_projectionMode;
-    FillMode m_fillMode;
-    CullMode m_cullMode;
 };
 
 } /* namespace tgon */

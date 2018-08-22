@@ -53,13 +53,14 @@ public:
     static const Matrix4x4 RotateY(float radian);
     static const Matrix4x4 RotateZ(float radian);
     static constexpr const Matrix4x4 Scale(float x, float y, float z) noexcept;
-    static constexpr const Matrix4x4 Transpose(const Matrix4x4& matrix) noexcept;
+    static constexpr const Matrix4x4 Transposed(const Matrix4x4& matrix) noexcept;
+    void Transpose() noexcept;
     static constexpr const Matrix4x4 Inverse();
     static Matrix4x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
     static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
     static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ);
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
-    static inline /*constexpr*/ Matrix4x4 OrthographicLH(float left, float right, float bottom, float top, float nearZ, float farZ);
+    static constexpr Matrix4x4 OrthographicRH(float left, float right, float bottom, float top, float nearZ, float farZ);
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 
 /* @section Public variable */
@@ -208,56 +209,18 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
     
-inline Matrix4x4 Matrix4x4::OrthographicLH(float l, float r, float b, float t, float n, float f)
+constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
-    auto a = Matrix4x4((2.0f) / (r - l), 0, 0, 0,
-        0, (2.0f) / (t - b), 0, 0,
-        0, 0, -(2.0f) / (f - n), 0,
-        -(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1);
-
-    Matrix4x4 ret;
-    float width = r - l;
-    float height = t - b;
-    float depth = f - n;
-
-    if (width < 1.0e-6)
-        width = 1.0f;
-    if (height < 1.0e-6)
-        height = 1.0f;
-    if (depth < 1.0e-6)
-        depth = 1.0f;
-
-    ret.m00 = 2.0f / width;
-    ret.m01 = 0.0f;
-    ret.m02 = 0.0f;
-    ret.m03 = 0.0f;
-
-    ret.m10 = 0.0f;
-    ret.m11 = 2.0f / height;
-    ret.m12 = 0.0f;
-    ret.m13 = 0.0f;
-
-    ret.m20 = 0.0f;
-    ret.m21 = 0.0f;
-    ret.m22 = -(2.0f) / depth;
-    ret.m23 = 0.0f;
-        
-    ret.m30 = -(r + l) / width;
-    ret.m31 = -(t + b) / height;
-    ret.m32 = -(f + n) / depth;
-    ret.m33 = 1.0f;
-    return ret;
-
-    /*float width = right - left;
+    float width = right - left;
     float height = top - bottom;
-    float depth = farZ - nearZ;
+    float depthZ = farZ - nearZ;
     
     return Matrix4x4(
         2 / width,  0.0f,           0.0f,               0.0f,
         0.0f,       2 / height,     0.0f,               0.0f,
-        0.0f,       0.0f,           -2.0f / depth,      0.0f,
+        0.0f,       0.0f,           -2.0f / depthZ,      0.0f,
         -(right + left) / width,    -(top + bottom) / height,   -(farZ + nearZ) / depth,    1.0f
-    );*/
+    );
 }
 
 constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
@@ -273,7 +236,7 @@ constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float hei
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
+constexpr const Matrix4x4 Matrix4x4::Transposed(const Matrix4x4& matrix) noexcept
 {
     return Matrix4x4(
         matrix.m00, matrix.m10, matrix.m20, matrix.m30,
@@ -281,6 +244,11 @@ constexpr const Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix) noexcept
         matrix.m02, matrix.m12, matrix.m22, matrix.m32,
         matrix.m03, matrix.m13, matrix.m23, matrix.m33
     );
+}
+
+inline void Matrix4x4::Transpose() noexcept
+{
+    *this = Transposed(*this);
 }
 
 //#if TGON_SUPPORT_SSE 1

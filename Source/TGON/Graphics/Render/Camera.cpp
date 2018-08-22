@@ -15,45 +15,39 @@ Camera::Camera() noexcept :
     m_nearZ(0.1f),
     m_farZ(1000.0f),
     m_isDirty(true),
-    m_projectionMode(ProjectionMode::Perspective),
-    m_fillMode(FillMode::Solid),
-    m_cullMode(CullMode::CW)
+    m_projectionMode(ProjectionMode::Perspective)
 {
     this->Update();
 }
     
-Camera::Camera(float left, float right, float bottom, float top, float nearZ, float farZ) noexcept :
+Camera::Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept :
     m_eyePt(0.0f, 0.0f, 5.0f),
     m_lookAt(0.0f, 0.0f, 0.0f),
     m_fov(Pi / 8),
+    m_orthoPlane(orthoPlane),
     m_nearZ(nearZ),
     m_farZ(farZ),
     m_isDirty(true),
-    m_projectionMode(ProjectionMode::Orthographic),
-    m_fillMode(FillMode::Solid),
-    m_cullMode(CullMode::CW)
+    m_projectionMode(ProjectionMode::Orthographic)
 {
-    
+    this->Update();
 }
     
-Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ, ProjectionMode projectionMode, FillMode fillMode, CullMode cullMode) noexcept :
+Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept :
     m_eyePt(eyePt),
     m_lookAt(lookAt),
     m_fov(fov),
     m_nearZ(nearZ),
     m_farZ(farZ),
-    m_projectionMode(projectionMode),
-    m_fillMode(fillMode),
-    m_cullMode(cullMode)
+    m_projectionMode(ProjectionMode::Perspective)
 {
+    this->Update();
 }
     
 void Camera::Update()
 {
     if (m_isDirty == true)
-    {
-        // TODO: This code supposed to use OpenGL, so you should use LH function when you support DirectX.
-        
+    {   
         if (m_projectionMode == ProjectionMode::Perspective)
         {
             m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
@@ -61,7 +55,7 @@ void Camera::Update()
         }
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
-            m_matViewProj = Matrix4x4::OrthographicLH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1000.0f);
+            m_matViewProj = Matrix4x4::OrthographicRH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f/*m_orthoPlane.left, m_orthoPlane.right, m_orthoPlane.bottom, m_orthoPlane.top, m_nearZ, m_farZ*/);
         }
         
         m_isDirty = false;
@@ -103,14 +97,19 @@ void Camera::SetLookAt(const Vector3& lookAt) noexcept
     m_isDirty = true;
 }
     
-void Camera::SetFillMode(FillMode fillMode) noexcept
+void Camera::SetOrthoPlane(const FRect& orthoPlane) noexcept
 {
-    m_fillMode = fillMode;
+    m_orthoPlane = orthoPlane;
 }
-    
-void Camera::SetCullMode(CullMode cullMode) noexcept
+
+FRect& Camera::GetOrthoPlane() noexcept
 {
-    m_cullMode = cullMode;
+    return m_orthoPlane;
+}
+
+const FRect& Camera::GetOrthoPlane() const noexcept
+{
+    return m_orthoPlane;
 }
 
 float Camera::GetNearZ() const noexcept
@@ -146,16 +145,6 @@ const Vector3& Camera::GetEyePt() const noexcept
 const Vector3& Camera::GetLookAt() const noexcept
 {
     return m_lookAt;
-}
-    
-FillMode Camera::GetFillMode() const noexcept
-{
-    return m_fillMode;
-}
-
-CullMode Camera::GetCullMode() const noexcept
-{
-    return m_cullMode;
 }
 
 } /* namespace tgon */
