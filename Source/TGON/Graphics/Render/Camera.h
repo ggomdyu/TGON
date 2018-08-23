@@ -51,8 +51,6 @@ public:
     
     void SetOrthoPlane(const FRect& orthoPlane) noexcept;
 
-    FRect& GetOrthoPlane() noexcept;
-
     const FRect& GetOrthoPlane() const noexcept;
 
     /* @brief   Gets the near clipping plane's Z-position. */
@@ -66,7 +64,10 @@ public:
     
     ProjectionMode GetProjectionMode() const noexcept;
     
-    /* @brief   Gets the view projection matrix which is updated each frame. */
+    /* @brief   Gets the projection matrix. */
+    const Matrix4x4& GetProjectionMatrix() const noexcept;
+
+    /* @brief   Gets the view projection matrix. */
     const Matrix4x4& GetViewProjectionMatrix() const noexcept;
     
     /* @brief   Gets the position of camera. */
@@ -83,7 +84,6 @@ private:
     float m_nearZ;
     float m_farZ;
     FRect m_orthoPlane;
-    Matrix4x4 m_matView;
     Matrix4x4 m_matProj;
     Matrix4x4 m_matViewProj;
     bool m_isDirty;

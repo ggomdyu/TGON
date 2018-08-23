@@ -39,6 +39,7 @@ Camera::Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nea
     m_fov(fov),
     m_nearZ(nearZ),
     m_farZ(farZ),
+    m_isDirty(true),
     m_projectionMode(ProjectionMode::Perspective)
 {
     this->Update();
@@ -50,12 +51,14 @@ void Camera::Update()
     {   
         if (m_projectionMode == ProjectionMode::Perspective)
         {
+            m_matProj = Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
             m_matViewProj = Matrix4x4::LookAtRH(m_eyePt, m_lookAt, {0.0f, 1.0f, 0.0f});
-            m_matViewProj *= Matrix4x4::PerspectiveRH(m_fov, 1, m_nearZ, m_farZ);
+            m_matViewProj *= m_matProj;
         }
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
-            m_matViewProj = Matrix4x4::OrthographicRH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f/*m_orthoPlane.left, m_orthoPlane.right, m_orthoPlane.bottom, m_orthoPlane.top, m_nearZ, m_farZ*/);
+            m_matProj = Matrix4x4::OrthographicRH(m_orthoPlane.left, m_orthoPlane.right, m_orthoPlane.top, m_orthoPlane.bottom, m_nearZ, m_farZ);
+            m_matViewProj = m_matProj;
         }
         
         m_isDirty = false;
@@ -83,6 +86,7 @@ void Camera::SetFov(float fov) noexcept
 void Camera::SetProjectionMode(ProjectionMode projectionMode) noexcept
 {
     m_projectionMode = projectionMode;
+    m_isDirty = true;
 }
 
 void Camera::SetEyePt(const Vector3& eyePt) noexcept
@@ -100,11 +104,7 @@ void Camera::SetLookAt(const Vector3& lookAt) noexcept
 void Camera::SetOrthoPlane(const FRect& orthoPlane) noexcept
 {
     m_orthoPlane = orthoPlane;
-}
-
-FRect& Camera::GetOrthoPlane() noexcept
-{
-    return m_orthoPlane;
+    m_isDirty = true;
 }
 
 const FRect& Camera::GetOrthoPlane() const noexcept
@@ -130,6 +130,11 @@ float Camera::GetFov() const noexcept
 ProjectionMode Camera::GetProjectionMode() const noexcept
 {
     return m_projectionMode;
+}
+
+const Matrix4x4& Camera::GetProjectionMatrix() const noexcept
+{
+    return m_matProj;
 }
 
 const Matrix4x4& Camera::GetViewProjectionMatrix() const noexcept

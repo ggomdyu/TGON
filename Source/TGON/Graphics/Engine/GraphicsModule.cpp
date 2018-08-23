@@ -39,10 +39,10 @@ void GraphicsModule::Update()
 void GraphicsModule::Draw()
 {
     Vector3 position[] = {
+        Vector3(-100.0f, -100.0f, 0.0f),
+        Vector3(-100.0f, 100.0f, 0.0f),
         Vector3(100.0f, 100.0f, 0.0f),
-        Vector3(100.0f, 200.0f, 0.0f),
-        Vector3(200.0f, 200.0f, 0.0f),
-        Vector3(200.0f, 100.0f, 0.0f),
+        Vector3(100.0f, -100.0f, 0.0f),
     };
 
     unsigned int indices[] = {
@@ -58,7 +58,7 @@ void GraphicsModule::Draw()
     VertexBuffer vb(position, false, vertexBufferLayoutDescs);
     IndexBuffer ib(indices, false);
     Shader shader(g_positionColorVert, g_positionColorFrag);
-    Camera camera({0.0f, 540.0f, 960.0f, 0.0f}, -1.0f, 1.0f);
+    static Camera camera({-960.0f / 2, 960.0f / 2, -540.0f / 2, 540.0f / 2}, -1.0f, 1.0f);
 
     m_graphics.ClearColorDepthBuffer();
     {
@@ -67,12 +67,7 @@ void GraphicsModule::Draw()
         shader.Use();
         
         shader.SetParameter4f("g_uColor", 1.0f, 0.0f, 0.0f, 1.0f);
-        
-        //glm::mat4 result = glm::perspective<float>(3.14159265358 / 8, 540.0f / 960.0f, -1.0f, 1024.0f);
-        glm::mat4 proj = glm::ortho(0.0f, 540.0f, 960.0f, 0.0f, -1.0f, 1.0f);
-        glm::mat4 result = proj;
-        auto mat = Matrix4x4::OrthographicRH(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-        shader.SetParameterMatrix4fv("g_uWVP", &mat[0][0]);
+        shader.SetParameterMatrix4fv("g_uWVP", &camera.GetViewProjectionMatrix()[0][0]);
 
         m_graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
 

@@ -25,7 +25,7 @@ public:
     constexpr BasicRect() noexcept;
 
     /* @brief   Constructor that initializes the member with the specified value */
-    constexpr BasicRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept;
+    constexpr BasicRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept;
 
 /* @section Public operator */
 public:
@@ -64,15 +64,15 @@ public:
 /* @section Public variable */
 public:
     _ValueType left;
-    _ValueType top;
     _ValueType right;
+    _ValueType top;
     _ValueType bottom;
 };
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType> MakeRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept
+constexpr BasicRect<_ValueType> MakeRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept
 {
-    return {left, top, right, bottom};
+    return {left, right, top, bottom};
 }
 
 using Rect = BasicRect<int>;
@@ -83,17 +83,17 @@ using FRect = BasicRect<float>;
 template <typename _ValueType>
 constexpr BasicRect<_ValueType>::BasicRect() noexcept :
     left{},
-    top{},
     right{},
+    top{},
     bottom{}
 {
 }
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& left, const _ValueType& top, const _ValueType& right, const _ValueType& bottom) noexcept :
+constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept :
     left(left),
-    top(top),
     right(right),
+    top(top),
     bottom(bottom)
 {
 }
@@ -125,15 +125,15 @@ constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(const _Va
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-() const noexcept
 {
-    return BasicRect(-left, -top, -right, -bottom);
+    return BasicRect(-left, -right, -top, -bottom);
 }
 
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect& rhs) noexcept
 {
     left += rhs.left;
-    top += rhs.top;
     right += rhs.right;
+    top += rhs.top;
     bottom += rhs.bottom;
 
     return *this;
@@ -143,8 +143,8 @@ template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect& rhs) noexcept
 {
     left -= rhs.left;
-    top -= rhs.top;
     right -= rhs.right;
+    top -= rhs.top;
     bottom -= rhs.bottom;
 
     return *this;
@@ -154,8 +154,8 @@ template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
     left *= rhs;
-    top *= rhs;
     right *= rhs;
+    top *= rhs;
     bottom *= rhs;
 
     return *this;
@@ -165,8 +165,8 @@ template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(const _ValueType& rhs)
 {
     left /= rhs;
-    top /= rhs;
     right /= rhs;
+    top /= rhs;
     bottom /= rhs;
 
     return *this;
@@ -175,7 +175,7 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(const _ValueType
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::operator==(const BasicRect& rhs) const noexcept
 {
-    return (left == rhs.left && top == rhs.top && right == rhs.right && bottom == rhs.bottom);
+    return (left == rhs.left && right == rhs.right && top == rhs.top && bottom == rhs.bottom);
 }
 
 template <typename _ValueType>
@@ -201,9 +201,9 @@ template <typename _ValueType>
 inline int32_t BasicRect<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, top, right, bottom);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, right, top, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, top, right, bottom);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, right, top, bottom);
 #endif
 }
 
@@ -211,9 +211,9 @@ template <>
 inline int32_t BasicRect<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, top, right, bottom);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, right, top, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, top, right, bottom);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, right, top, bottom);
 #endif
 }
 
@@ -221,9 +221,9 @@ template <>
 inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
 #if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, top, right, bottom);
+    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, right, top, bottom);
 #else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, top, right, bottom);
+    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, right, top, bottom);
 #endif
 }
 
