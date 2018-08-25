@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-std::shared_ptr<Mesh> MakeTriangle()
+std::shared_ptr<Mesh> MeshUtility::CreateSharedTriangle()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {
@@ -29,7 +29,7 @@ std::shared_ptr<Mesh> MakeTriangle()
         };
         auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferDescs);
 
-        // Create a IndexBuffer
+        // Create an IndexBuffer
         unsigned int indices[] = { 0, 1, 2 };
         auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
 
@@ -40,21 +40,21 @@ std::shared_ptr<Mesh> MakeTriangle()
     return sharedMesh;
 };
 
-std::shared_ptr<Mesh> MakeCube()
+std::shared_ptr<Mesh> MeshUtility::CreateSharedCube()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {
         // Create a VertexBuffer
         V3F_T2F vertices[] =
         {
-            V3F_T2F{Vector3(-1.0f, -1.0f, -1.0f), Vector2(0.0f, 0.0f)},
-            V3F_T2F{Vector3(-1.0f, 1.0f, -1.0f), Vector2(0.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, 1.0f, -1.0f), Vector2(1.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, -1.0f, -1.0f), Vector2(1.0f, 0.0f)},
-            V3F_T2F{Vector3(-1.0f, -1.0f, 1.0f), Vector2(0.0f, 0.0f)},
-            V3F_T2F{Vector3(-1.0f, 1.0f, 1.0f), Vector2(0.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, 1.0f, 1.0f), Vector2(1.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, -1.0f, 1.0f), Vector2(1.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, -0.5f, -0.5f), Vector2(0.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, 0.5f, -0.5f), Vector2(0.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, 0.5f, -0.5f), Vector2(1.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, -0.5f, -0.5f), Vector2(1.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, -0.5f, 0.5f), Vector2(0.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, 0.5f, 0.5f), Vector2(0.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, 0.5f, 0.5f), Vector2(1.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, -0.5f, 0.5f), Vector2(1.0f, 0.0f)},
         };
         std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
         {
@@ -63,7 +63,7 @@ std::shared_ptr<Mesh> MakeCube()
         };
         auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferLayoutDescs);
         
-        // Create a IndexBuffer
+        // Create an IndexBuffer
         unsigned int indices[] =
         {
             // Front face
@@ -99,17 +99,17 @@ std::shared_ptr<Mesh> MakeCube()
     return sharedMesh;
 };
 
-std::shared_ptr<Mesh> MakeQuad()
+std::shared_ptr<Mesh> MeshUtility::CreateSharedQuad()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {
         // Create a VertexBuffer
         V3F_T2F vertices[] =
         {
-            V3F_T2F{Vector3(-1.0f, -1.0f, 0.0f), Vector2(0.0f, 0.0f)},
-            V3F_T2F{Vector3(-1.0f, 1.0f, 0.0f), Vector2(0.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, 1.0f, 0.0f), Vector2(1.0f, 1.0f)},
-            V3F_T2F{Vector3(1.0f, -1.0f, 0.0f), Vector2(1.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, -0.5f, 0.0f), Vector2(0.0f, 0.0f)},
+            V3F_T2F{Vector3(-0.5f, 0.5f, 0.0f), Vector2(0.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, 0.5f, 0.0f), Vector2(1.0f, 1.0f)},
+            V3F_T2F{Vector3(0.5f, -0.5f, 0.0f), Vector2(1.0f, 0.0f)},
         };
         std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
         {
@@ -118,7 +118,7 @@ std::shared_ptr<Mesh> MakeQuad()
         };
         auto vertexBuffer = std::make_shared<VertexBuffer>(vertices, false, vertexBufferLayoutDescs);
         
-        // Create a IndexBuffer
+        // Create an IndexBuffer
         unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
         auto indexBuffer = std::make_shared<IndexBuffer>(indices, false);
         

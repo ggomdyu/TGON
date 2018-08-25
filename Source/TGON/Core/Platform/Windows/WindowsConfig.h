@@ -20,7 +20,6 @@
 
 #if (WINVER >= _WIN32_WINNT_VISTA)
 #   define TGON_SUPPORT_DWMAPI 1
-#   define TGON_USING_DWMAPI TGON_SUPPORT_DWMAPI
 #endif
 
 #ifdef _WINDLL

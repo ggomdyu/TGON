@@ -20,7 +20,7 @@ struct TGON_API Matrix4x4
 {
 /* @section Public constructor */
 public:
-    /* @brief   Initializes matrix as a Identity matrix. */
+    /* @brief   Initializes matrix as an Identity matrix. */
     constexpr Matrix4x4() noexcept;
 
     /* @brief   Initializes matrix with the specified value. */

@@ -2,14 +2,12 @@
 
 #include <type_traits>
 #include <cassert>
-#include <Windows.h>
-#if TGON_SUPPORT_DWMAPI && TGON_USING_DWMAPI
+#if TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
 #include "Core/String/Encoding.h"
-#include "Core/Platform/Window.h"
 
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"
@@ -18,7 +16,7 @@ namespace tgon
 {
 
 WindowImpl::WindowImpl(const WindowStyle& windowStyle) :
-    m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
+    m_wndHandle(WindowsWindowUtility::CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
     m_isDwmCompositionEnabled(false)
 {
     assert(m_wndHandle != nullptr);

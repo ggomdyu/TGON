@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle)
+void WindowsWindowUtility::ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle)
 {
 	*extendedStyle = 0;
 	*normalStyle = 0;
@@ -75,7 +75,7 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyl
     }
 }
 
-HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
+HWND WindowsWindowUtility::CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
 	// Convert WindowStyle to native window style.
 	DWORD normalStyle, extendedStyle;

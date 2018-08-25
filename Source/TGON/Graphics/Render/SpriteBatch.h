@@ -72,14 +72,9 @@ public:
     /* @brief   Flushes all the batch in list. */
     void FlushSpriteBatch(Graphics& graphics, const Camera& camera);
 
-/* @section Private method */
-private:
-    VertexBuffer MakeQuadVertexBuffer() const;
-
 /* @section Private variable */
 private:
     std::shared_ptr<Mesh> m_quad;
-    VertexBuffer m_quadVB;
 
     std::vector<SpriteBatch> m_spriteBatches;
 };

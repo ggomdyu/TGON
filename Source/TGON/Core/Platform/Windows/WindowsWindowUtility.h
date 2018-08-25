@@ -13,16 +13,27 @@
 #endif
 #include <windows.h>
 
+#include "Core/Platform/Config.h"
+
 namespace tgon
 {
 
-/**
- * @brief                       Creates a window through given arguments.
- * @param [in] windowStyle		The style information for the window to be created.
- * @param [in] instanceHandle	The handle of process.
- * @param [in] className		The class name to be used to initialize the window attributes.
- * @param [in] extraParam		The extra data that window will have.
- */
-HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
+class TGON_API WindowsWindowUtility
+{
+/* @section Public method */
+public:
+    /**
+     * @brief                       Creates a window through given arguments.
+     * @param [in] windowStyle		The style information for the window to be created.
+     * @param [in] instanceHandle	The handle of process.
+     * @param [in] className		The class name to be used to initialize the window attributes.
+     * @param [in] extraParam		The extra data that window will have.
+     */
+    static HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
+
+/* @section Private method */
+private:
+    static void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle);
+};
 
 } /* namespace tgon */

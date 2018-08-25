@@ -6,7 +6,6 @@
 
 #include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
-#include "Core/Debug/LogType.h"
 
 #include "OpenGLContext.h"
 

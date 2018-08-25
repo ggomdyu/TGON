@@ -35,7 +35,7 @@ inline _ValueType RandRange(_ValueType min, _ValueType max)
     return static_cast<_ValueType>(RandRange(static_cast<FloatType>(min), static_cast<FloatType>(max + 1)));
 }
 
-/* @brief   Choose a random element from the given container and return it as a iterator. */
+/* @brief   Choose a random element from the given container and return it as an iterator. */
 template <typename _ContainerType>
 inline typename _ContainerType::iterator Choice(_ContainerType& container)
 {
@@ -45,7 +45,7 @@ inline typename _ContainerType::iterator Choice(_ContainerType& container)
     return iter;
 }
 
-/* @brief   Choose a random element from the given container and return it as a iterator. */
+/* @brief   Choose a random element from the given container and return it as an iterator. */
 template <typename _ContainerType>
 inline typename _ContainerType::IteratorType Choice(_ContainerType& container)
 {

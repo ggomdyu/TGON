@@ -78,7 +78,6 @@ public:
         
         VideoMode videoMode;
         {
-            videoMode.graphicsSDK = GraphicsSDK::OpenGL4_0;
             videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
             videoMode.enableHardwareAccelerate = true;
             videoMode.enableTripleBuffer = false;

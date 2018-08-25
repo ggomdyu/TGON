@@ -24,19 +24,19 @@ public:
     Image();
 
     /**
-     * @brief                   Reads a image data from the specified path.
+     * @brief                   Reads an image data from the specified path.
      * @param [in] filePath     The file path of image
      */
     explicit Image(const std::string& filePath);
 
     /**
-     * @brief                   Reads a image data from the specified path.
+     * @brief                   Reads an image data from the specified path.
      * @param [in] filePath     The file path of image
      */
     explicit Image(std::string&& filePath);
 
     /**
-     * @brief                   Reads a image data from memory.
+     * @brief                   Reads an image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
@@ -44,7 +44,7 @@ public:
     Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     /**
-     * @brief                   Reads a image data from memory.
+     * @brief                   Reads an image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data

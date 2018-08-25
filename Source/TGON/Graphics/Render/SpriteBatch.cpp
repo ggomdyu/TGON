@@ -42,14 +42,13 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
         // Set the world-view-projection matrix.
         m_material->SetWVP(*drawPrimitive.matWorld * camera.GetViewProjectionMatrix());
 
-        graphics.DrawPrimitives(PrimitiveType::Triangles, 2);
+        graphics.DrawPrimitives(PrimitiveType::TriangleStrip, 2);
         //graphics.DrawPrimitives(PrimitiveType::TriangleFan, 2);
     }
 }
-    
+
 SpriteBatchGroup::SpriteBatchGroup() :
-    m_quad(MakeQuad()),
-    m_quadVB(this->MakeQuadVertexBuffer())
+    m_quad(MeshUtility::CreateSharedQuad())
 {
 }
 
@@ -75,7 +74,6 @@ void SpriteBatchGroup::AddSpriteBatch(const SpriteBatch& spriteBatch)
 void SpriteBatchGroup::FlushSpriteBatch(Graphics& graphics, const Camera& camera)
 {
     m_quad->Use();
-    //m_quadVB.Use();
 
     for (auto& spriteBatch : m_spriteBatches)
     {
@@ -85,22 +83,4 @@ void SpriteBatchGroup::FlushSpriteBatch(Graphics& graphics, const Camera& camera
     m_spriteBatches.clear();
 }
 
-VertexBuffer SpriteBatchGroup::MakeQuadVertexBuffer() const
-{
-    V3F_T2F_Quad vertices{
-        {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f}},
-        {{0.5f, 0.5f, 0.0f}, {1.0f, 0.0f}},
-        {{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}},
-        {{0.5f, -0.5f, 0.0f}, {1.0f, 1.0f}}
-    };
-
-    std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
-    {
-        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
-        VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
-    };
-
-    return VertexBuffer(reinterpret_cast<const void*>(&vertices), sizeof(vertices), false, vertexBufferLayoutDescs);
-}
-    
 } /* namespace tgon */
