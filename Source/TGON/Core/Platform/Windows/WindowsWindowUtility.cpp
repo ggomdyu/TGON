@@ -3,6 +3,8 @@
 #include "Core/Debug/Log.h"
 #include "Core/Debug/LogType.h"
 #include "Core/String/Encoding.h"
+#include "Core/Math/Point.h"
+#include "Core/Math/Extent.h"
 
 #include "../WindowType.h"
 
@@ -38,6 +40,12 @@ void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyl
         if (!windowStyle.hasCaption)
         {
             *normalStyle |= WS_POPUP;
+        }
+        else
+        {
+            *normalStyle |= WS_OVERLAPPED;
+            *normalStyle |= WS_CAPTION;
+            *normalStyle |= WS_THICKFRAME;
         }
 
         if (windowStyle.enableSystemButton)
@@ -80,28 +88,33 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         return nullptr;
     }
 
-    POINT windowPos {windowStyle.x, windowStyle.y};
+    I32Point windowPos {windowStyle.x, windowStyle.y};
     if (windowStyle.showMiddle)
     {
         // Set window position to middle of screen.
-        windowPos.x = (GetSystemMetrics(SM_CXSCREEN) / 2) - (windowStyle.width / 2);
-        windowPos.y = (GetSystemMetrics(SM_CYSCREEN) / 2) - (windowStyle.height / 2);
+        windowPos.x = (GetSystemMetrics(SM_CXSCREEN) * 0.5f) - (windowStyle.width * 0.5f);
+        windowPos.y = (GetSystemMetrics(SM_CYSCREEN) * 0.5f) - (windowStyle.height * 0.5f);
     }
 
+    // Convert the client size to window size.
+    RECT windowSize = {0, 0, windowStyle.width, windowStyle.height};
+    AdjustWindowRect(&windowSize, normalStyle, FALSE);
+ 
 	HWND wndHandle = CreateWindowExW(
 		extendedStyle,
 		className,
         utf16Title,
-		normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // WS_CLIPSIBLINGS, WS_CLIPCHILDREN prevent other windows from drawing over or into our window.
+        normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
-		windowStyle.width,
-		windowStyle.height,
+        windowSize.right - windowSize.left,
+        windowSize.bottom - windowSize.top,
 		nullptr,
 		nullptr,
 		instanceHandle,
 		extraParam
 	);
+
     if (wndHandle == nullptr)
     {
         Log(LogLevel::Warning, "Failed to invoke CreateWindowExW. (Code: %d)", GetLastError());
