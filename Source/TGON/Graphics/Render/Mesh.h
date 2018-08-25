@@ -19,9 +19,17 @@ class Mesh final
 {
 /* @section Public constructor */
 public:
-    /* @brief   Initializes the mesh with vertex buffer and index buffer. */
+    /* @brief   Initializes with vertex buffer and index buffer. */
     Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
+
+    /* @brief   Initializes with a r-value reference. */
+    Mesh(Mesh&& rhs) = default;
     
+/* @section Public operator */
+public:
+    /* @brief   Assigns with a r-value reference. */
+    Mesh& operator=(Mesh&& rhs) = default;
+
 /* @section Public method */
 public:
     /* @brief   Sets the rendering pipeline to use this mesh. */
