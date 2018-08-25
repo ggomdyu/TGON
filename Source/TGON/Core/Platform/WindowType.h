@@ -15,10 +15,10 @@ struct WindowStyle final
 {
     std::string title = u8"Hello World!";
 
-    uint16_t x = 100;
-    uint16_t y = 100;
-    uint16_t width = 960;
-    uint16_t height = 540;
+    int32_t x = 100;
+    int32_t y = 100;
+    int32_t width = 1200;
+    int32_t height = 600;
 
     bool hasCaption = true;
     bool enableSystemButton = true;

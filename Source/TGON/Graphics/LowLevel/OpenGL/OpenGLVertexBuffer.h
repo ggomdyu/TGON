@@ -27,6 +27,8 @@ public:
      */
     VertexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
 
+    VertexBufferImpl(VertexBufferImpl&& rhs);
+
 /* @section Public destructor */
 public:
     ~VertexBufferImpl();

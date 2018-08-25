@@ -15,21 +15,36 @@ public:
 public:
     IntroGameScene()
     {
-        Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(std::shared_ptr<Camera>(new Camera()));
+        auto camera = std::make_shared<GameObject>("camera1");
+        {
+            auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
+            float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+            float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+
+            camera->AddComponent<CameraComponent>(FRect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1.0f, 1024.0f);
+        }
+        this->AddObject(camera);
 
         auto sprite = std::make_shared<GameObject>("sprite1");
         {
-            sprite->GetTransform().SetPosition(Vector3(100, -100.0f, 1.0f));
-            sprite->GetTransform().SetScale(Vector3(100, 100.0f, 1.0f));
             sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/3243.png");
+            sprite->GetTransform().SetScale(Vector3(1178, 763, 1.0f));
+            sprite->GetTransform().SetPosition(Vector3(-0.5f, -0.5f, 1.0f));
         }
 
         this->AddObject(sprite);
+        s.Start();
     }
-
+    Stopwatch s;
     virtual void Update() override
     {
         SuperType::Update();
+
+        if (s.GetElapsedSeconds() > 3)
+        {
+            Application::GetInstance()->GetRootWindow().SetSize(1200, 600);
+            s.Stop();
+        }
     }
 };
 

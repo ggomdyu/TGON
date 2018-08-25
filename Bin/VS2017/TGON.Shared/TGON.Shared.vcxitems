@@ -38,12 +38,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Time\Time.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\EventDispatcher.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ThreadPool.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameSceneModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Transform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Engine\GraphicsModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Graphics.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\IndexBuffer.cpp" />
@@ -57,8 +59,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Texture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBuffer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\GraphicsObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Transform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Batch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Material.cpp" />
@@ -180,6 +180,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\FunctionTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\WeightSelector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Engine\GameSceneModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\Transform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Engine\GraphicsModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Graphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\GraphicsType.h" />
@@ -209,8 +211,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\TextureType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBufferType.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\GraphicsObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Object\Transform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Batch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\CameraType.h" />

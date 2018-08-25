@@ -10,6 +10,11 @@ VertexBuffer::VertexBuffer(const void* data, std::size_t dataBytes, bool isDynam
 {
 }
 
+VertexBuffer::VertexBuffer(VertexBuffer&& rhs) :
+    m_vertexBufferImpl(std::move(rhs.m_vertexBufferImpl))
+{
+}
+
 void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
 {
     m_vertexBufferImpl.SetData(data, dataBytes, isDynamicUsage, vertexBufferLayoutDescs);

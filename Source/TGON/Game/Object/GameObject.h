@@ -7,16 +7,18 @@
 #pragma once
 #include <vector>
 
+#include "Core/Object/CoreObject.h"
 #include "Core/String/FixedHashString.h"
-#include "Graphics/Object/GraphicsObject.h"
 
 #include "../Component/Component.h"
+
+#include "Transform.h"
 
 namespace tgon
 {
 
 class TGON_API GameObject final :
-	public GraphicsObject
+	public CoreObject
 {
 public:
     TGON_RUNTIME_OBJECT(GameObject);
@@ -31,7 +33,8 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Update() override;
+    /* @brief                   Updates the object. */
+    void Update();
 
     /**
      * @brief                   Sets the name of object.
@@ -76,6 +79,12 @@ public:
      */
     const FixedHashString32& GetName() const noexcept;
 
+    /* @brief                   Gets the transform. */
+    Transform& GetTransform() noexcept;
+
+    /* @brief                   Gets the transform. */
+    const Transform& GetTransform() const noexcept;
+
 /* @section Private method */
 private:
     /**
@@ -102,6 +111,8 @@ private:
     FixedHashString32 m_name;
 
     std::vector<std::unique_ptr<Component>> m_components;
+
+    Transform m_transform;
 };
 
 template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>

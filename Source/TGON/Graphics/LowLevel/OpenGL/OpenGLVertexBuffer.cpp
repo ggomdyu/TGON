@@ -18,9 +18,23 @@ VertexBufferImpl::VertexBufferImpl(const void* data, std::size_t dataBytes, bool
     this->SetData(data, dataBytes, isDynamicUsage, vertexBufferLayoutDescs);
 }
 
+VertexBufferImpl::VertexBufferImpl(VertexBufferImpl&& rhs) :
+    m_dataBytes(rhs.m_dataBytes),
+    m_isDynamicUsage(rhs.m_isDynamicUsage),
+    m_vertexBufferHandle(rhs.m_vertexBufferHandle),
+    m_vertexBufferLayoutDescs(std::move(rhs.m_vertexBufferLayoutDescs))
+{
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+    rhs.m_vertexBufferHandle = 0;
+}
+
 VertexBufferImpl::~VertexBufferImpl()
 {
-    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
+    if (m_vertexBufferHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
+    }
 }
 
 void VertexBufferImpl::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)

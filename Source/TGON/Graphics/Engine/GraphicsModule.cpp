@@ -19,6 +19,8 @@ namespace tgon
 GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
+    auto windowSize = window.GetSize();
+    m_graphics.SetViewport(0, 0, windowSize.width, windowSize.height);
     m_graphics.SetClearColor(videoMode.clearColor);
     m_graphics.SetCullMode(CullMode::CW);
     m_graphics.EnableDepthTest();
@@ -28,6 +30,14 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     window.OnWindowResize += [&](int32_t width, int32_t height)
     {
         m_graphics.SetViewport(0, 0, width, height);
+
+        auto& cameraList = m_renderStage.GetCameraList();
+        for (auto& camera : cameraList)
+        {
+            float halfWidth = static_cast<float>(width) * 0.5f;
+            float halfHeight = static_cast<float>(height) * 0.5f;
+            camera->SetOrthoPlane({ -halfWidth, halfWidth, -halfHeight, halfHeight });
+        }
     };
 }
     
@@ -38,40 +48,9 @@ void GraphicsModule::Update()
 
 void GraphicsModule::Draw()
 {
-    Vector3 position[] = {
-        Vector3(-100.0f, -100.0f, 0.0f),
-        Vector3(-100.0f, 100.0f, 0.0f),
-        Vector3(100.0f, 100.0f, 0.0f),
-        Vector3(100.0f, -100.0f, 0.0f),
-    };
-
-    unsigned int indices[] = {
-        0, 1, 2,
-        0, 2, 3,
-    };
-
-    std::initializer_list<VertexBufferLayoutDescriptor> vertexBufferLayoutDescs =
-    {
-        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(Vector3), 0),
-    };
-
-    VertexBuffer vb(position, false, vertexBufferLayoutDescs);
-    IndexBuffer ib(indices, false);
-    Shader shader(g_positionColorVert, g_positionColorFrag);
-    static Camera camera({-960.0f / 2, 960.0f / 2, -540.0f / 2, 540.0f / 2}, -1.0f, 1.0f);
-
     m_graphics.ClearColorDepthBuffer();
     {
-        vb.Use();
-        ib.Use();
-        shader.Use();
-        
-        shader.SetParameter4f("g_uColor", 1.0f, 0.0f, 0.0f, 1.0f);
-        shader.SetParameterMatrix4fv("g_uWVP", &camera.GetViewProjectionMatrix()[0][0]);
-
-        m_graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 2);
-
-        //m_renderStage.Draw(m_graphics);
+        m_renderStage.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }

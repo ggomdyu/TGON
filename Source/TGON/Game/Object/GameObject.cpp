@@ -14,7 +14,7 @@ GameObject::GameObject(const FixedHashString32& name) :
 
 void GameObject::Update()
 {
-    SuperType::Update();
+    m_transform.Update();
 
     for (auto& component : m_components)
     {
@@ -81,6 +81,16 @@ Component* GameObject::GetComponent(size_t componentId)
     {
         return nullptr;
     }
+}
+
+Transform& GameObject::GetTransform() noexcept
+{
+    return m_transform;
+}
+
+const Transform& GameObject::GetTransform() const noexcept
+{
+    return m_transform;
 }
 
 } /*namespace tgon*/

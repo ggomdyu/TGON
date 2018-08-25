@@ -24,6 +24,7 @@ public:
 /* @section Public type */
 public:
     using CameraHandle = size_t;
+    using CameraList = std::vector<std::shared_ptr<Camera>>;
 
 /* @section Public method */
 public:
@@ -42,6 +43,10 @@ public:
     /* @brief   Adds a camera into the RenderStage. */
     void AddCamera(const std::shared_ptr<Camera>& camera);
 
+    CameraList& GetCameraList() noexcept;
+
+    const CameraList& GetCameraList() const noexcept;
+
     /* @brief   Removes the specified camera in the RenderStage. */
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
@@ -53,7 +58,7 @@ private:
 
     SpriteBatchGroup m_spriteBatchGroup;
     
-    std::vector<std::shared_ptr<Camera>> m_cameraList;
+    CameraList m_cameraList;
 };
 
 } /* namespace tgon */

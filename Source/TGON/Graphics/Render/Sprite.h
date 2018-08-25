@@ -8,13 +8,11 @@
 #include <memory>
 
 #include "../LowLevel/Texture.h"
-#include "../Object/GraphicsObject.h"
 
 namespace tgon
 {
 
-class TGON_API Sprite final :
-    public GraphicsObject
+class TGON_API Sprite final
 {
 /* @section Public constructor */
 public:
@@ -26,7 +24,7 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~Sprite() override = default;
+    virtual ~Sprite() = default;
     
 /* @section Public method */
 public:

@@ -31,6 +31,16 @@ void RenderStage::AddCamera(const std::shared_ptr<Camera>& camera)
 {
     m_cameraList.push_back(camera);
 }
+
+RenderStage::CameraList& RenderStage::GetCameraList() noexcept
+{
+    return m_cameraList;
+}
+
+const RenderStage::CameraList& RenderStage::GetCameraList() const noexcept
+{
+    return m_cameraList;
+}
     
 bool RenderStage::RemoveCamera(const std::shared_ptr<Camera>& camera)
 {
