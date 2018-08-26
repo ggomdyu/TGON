@@ -22,14 +22,12 @@ struct WindowStyle final
 
     bool hasCaption = true;
     bool enableSystemButton = true;
-    bool supportTransparency = false;
-    bool supportPerPixelTransparency = false;
-    bool resizeable = true;
+    bool enableTransparency = false;
+    bool enablePerPixelTransparency = false;
+    bool enableFullScreen = false;
+    bool resizeable = false;
     bool topMost = false;
-    bool maximized = false;
-    bool minimized = false;
     bool showMiddle = false;
-    bool setFullScreen = false;
 };
 
 } /* namespace tgon */

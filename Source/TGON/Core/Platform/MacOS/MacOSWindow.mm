@@ -14,7 +14,7 @@ namespace tgon
 {
 
 WindowImpl::WindowImpl(const WindowStyle& windowStyle) :
-    m_nsWindow(MakeNativeWindow(windowStyle)),
+    m_nsWindow(MacOSWindowUtility::CreateNativeWindow(windowStyle)),
     m_nsWindowDelegate([[WindowDelegate alloc] initWithWindow:this])
 {
     m_nsWindow.delegate = m_nsWindowDelegate;
@@ -66,10 +66,10 @@ void WindowImpl::BringToFront()
 
 void WindowImpl::SetPosition(int32_t x, int32_t y)
 {
-    NSRect visibleFrame = [[NSScreen mainScreen] visibleFrame];
-    NSRect currentFrameSize = [m_nsWindow frame];
+    NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
+    NSRect windowFrameRect = [m_nsWindow frame];
 
-    [m_nsWindow setFrameOrigin:NSMakePoint(static_cast<CGFloat>(x),(visibleFrame.origin.y + visibleFrame.size.height - currentFrameSize.size.height) - y)];
+    [m_nsWindow setFrameOrigin:NSMakePoint(static_cast<CGFloat>(x),(mainScreenRect.origin.y + mainScreenRect.size.height - windowFrameRect.size.height) - y)];
 }
 
 void WindowImpl::SetSize(int32_t width, int32_t height)
