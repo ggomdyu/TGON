@@ -70,14 +70,14 @@ void Graphics::SwapBuffer()
     m_graphicsImpl.SwapBuffer();
 }
 
-void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
+void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount)
 {
-    m_graphicsImpl.DrawPrimitives(primitiveType, primitiveCount);
+    m_graphicsImpl.DrawPrimitives(primitiveType, vertexCount);
 }
 
-void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
+void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
-    m_graphicsImpl.DrawIndexedPrimitives(primitiveType, primitiveCount);
+    m_graphicsImpl.DrawIndexedPrimitives(primitiveType, indexCount);
 }
 
 } /* namespace tgon */

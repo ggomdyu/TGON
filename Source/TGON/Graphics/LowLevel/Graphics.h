@@ -35,8 +35,8 @@ public:
     void ClearColorBuffer();
     void ClearColorDepthBuffer();
     void SwapBuffer();
-    void DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
-    void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount);
+    void DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount);
+    void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount);
 
 /* @section Private variable */
 private:

@@ -8,23 +8,12 @@
 
 namespace tgon
 {
-namespace
-{
-
-GLsizei GetVertexCountPerPrimitive(PrimitiveType primitiveType) noexcept
-{
-    return (primitiveType == PrimitiveType::Triangles) ? 3 :
-           (primitiveType == PrimitiveType::Lines) ? 2 :
-           (primitiveType == PrimitiveType::Points) ? 1 : 0;
-}
-
-} /* namespace */
 
 GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMode) :
     m_context(videoMode, displayTarget),
     m_vertexArrayHandle(0)
 {
-    // It is required because OpenGL expects (0, 0) coordinates to be on the left bottom side, but images usually left top side.
+    // It is required because OpenGL expects (0, 0) coordinates to be the left bottom side, but images usually left top side.
     stbi_set_flip_vertically_on_load(true);
     stbi_flip_vertically_on_write(true);
     
@@ -140,14 +129,14 @@ void GraphicsImpl::SwapBuffer()
     m_context.SwapBuffer();
 }
 
-void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
+void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount)
 {
-    glDrawArrays(static_cast<GLenum>(primitiveType), 0, primitiveCount);
+    glDrawArrays(static_cast<GLenum>(primitiveType), 0, vertexCount);
 }
     
-void GraphicsImpl::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t primitiveCount)
+void GraphicsImpl::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
-    glDrawElements(static_cast<GLenum>(primitiveType), GetVertexCountPerPrimitive(primitiveType) * primitiveCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(static_cast<GLenum>(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
 }
 
 } /* namespace tgon */
