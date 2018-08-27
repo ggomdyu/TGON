@@ -29,6 +29,10 @@ void ApplicationImpl::OnHandleMessage(NSEvent* event)
     NSEventType eventType = [event type];
     switch (eventType)
     {
+    case NSEventTypeKeyDown:
+    case NSEventTypeKeyUp:
+        break;
+            
     default:
         [NSApp sendEvent:event];
         break;
