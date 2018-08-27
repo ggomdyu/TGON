@@ -2,8 +2,6 @@
 
 #include "TGON.h"
 
-#include <glm/glm/matrix.hpp>
-
 using namespace tgon;
 
 class TGON_API IntroGameScene :
@@ -27,9 +25,9 @@ public:
 
         auto sprite = std::make_shared<GameObject>("sprite1");
         {
-            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/3243.png");
-            sprite->GetTransform().SetScale(Vector3(1178, 763, 1.0f));
-            sprite->GetTransform().SetPosition(Vector3(-0.5f, -0.5f, 1.0f));
+            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/f47d1590fe3a8874fc5ea8f3a76fb5df.png");
+            
+//            sprite->GetTransform().SetPosition(Vector3(0.0f, 0.0f, 1.0f));
         }
 
         this->AddObject(sprite);
@@ -64,17 +62,17 @@ public:
 
 /* @section Public event handler */
 public:
-    virtual void OnDidLaunch()
+    virtual void OnDidLaunch() override
     {
         Window& rootWindow = Application::GetInstance()->GetRootWindow();
 
-        /*InputMode inputMode;
+        InputMode inputMode;
         {
             inputMode.isUseMouse = false;
-            inputMode.isUseKeyboard = false;
+            inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, rootWindow);*/
+        this->AddModule<InputModule>(inputMode, rootWindow);
         
         VideoMode videoMode;
         {
@@ -85,14 +83,9 @@ public:
             videoMode.enableMultiSampling = false;
         };
         this->AddModule<GraphicsModule>(rootWindow, videoMode);
-
         this->AddModule<GameSceneModule>(std::make_unique<IntroGameScene>());
-
         this->AddModule<TimeModule>();
     }
-    
-/* @section Private method */
-private:
 
 /* @section Public method */
 public:

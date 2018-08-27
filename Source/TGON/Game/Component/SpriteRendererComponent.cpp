@@ -25,7 +25,7 @@ SpriteRendererComponent::SpriteRendererComponent(std::string&& filePath) :
 
 void SpriteRendererComponent::Update()
 {
-    m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, {&GetOwner()->GetTransform().GetWorldMatrix()});
+    m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, {m_sprite.GetTextureSize(), GetOwner()->GetTransform().GetWorldMatrix()});
 }
 
 } /* namespace tgon */

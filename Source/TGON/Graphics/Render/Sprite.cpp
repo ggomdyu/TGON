@@ -20,7 +20,8 @@ Sprite::Sprite(const std::string& filePath) :
 }
       
 Sprite::Sprite(const std::shared_ptr<Texture>& texture) :
-    m_texture(texture)
+    m_texture(texture),
+    m_textureSize({0, texture->GetWidth(), 0, texture->GetHeight()})
 {
 }    
 
@@ -34,11 +35,26 @@ std::shared_ptr<Texture>& Sprite::GetTexture() noexcept
     return m_texture;
 }
 
-const std::shared_ptr<Texture>& Sprite::GetTexture() const noexcept
+std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
 {
     return m_texture;
 }
 
+void Sprite::SetTextureSize(const I32Rect& textureSize)
+{
+    m_textureSize = textureSize;
+}
+
+I32Rect& Sprite::GetTextureSize() noexcept
+{
+    return m_textureSize;
+}
+
+const I32Rect& Sprite::GetTextureSize() const noexcept
+{
+    return m_textureSize;
+}
+    
 //
 //void Sprite::Draw(Graphics& graphics)
 //{

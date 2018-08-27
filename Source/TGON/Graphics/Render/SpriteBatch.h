@@ -8,11 +8,13 @@
 #include <vector>
 #include <memory>
 
+#include "Core/Math/Rect.h"
+
+#include "../LowLevel/Graphics.h"
+
 #include "Material.h"
 #include "Mesh.h"
 #include "Camera.h"
-
-#include "../LowLevel/Graphics.h"
 
 namespace tgon
 {
@@ -23,7 +25,8 @@ class TGON_API SpriteBatch final
 public:
     struct DrawPrimitive
     {
-        const Matrix4x4* matWorld;
+        const I32Rect& textureSize;
+        const Matrix4x4& matWorld;
     };
 
 /* @section Public constructor */
@@ -37,7 +40,7 @@ public:
 /* @section Public method */
 public:
     /* @brief   Adds a draw primitive into the batch. */
-    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWVP);
+    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const I32Rect& textureSize, const Matrix4x4& matWVP);
     
     /* @brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);

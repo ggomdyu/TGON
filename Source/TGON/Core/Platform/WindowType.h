@@ -25,7 +25,7 @@ struct WindowStyle final
     bool enableTransparency = false;
     bool enablePerPixelTransparency = false;
     bool enableFullScreen = false;
-    bool resizeable = false;
+    bool resizeable = true;
     bool topMost = false;
     bool showMiddle = false;
 };

@@ -1,17 +1,12 @@
 #include "PrecompiledHeader.h"
 
-#include "GraphicsModule.h"
-
-#include "../Render/MeshUtility.h"
-
 #include "Graphics/LowLevel/Shader.h"
 #include "Graphics/LowLevel/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/FVF.h"
 
-#include <glm/glm/matrix.hpp>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtx/transform.hpp>
+#include "../Render/MeshUtility.h"
+
+#include "GraphicsModule.h"
 
 namespace tgon
 {
