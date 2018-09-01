@@ -68,10 +68,12 @@ public:
     _ValueType y;
 };
 
-using Point = BasicPoint<int>;
+using Point = BasicPoint<float>;
+using DPoint = BasicPoint<double>;
 using I64Point = BasicPoint<int64_t>;
 using I32Point = BasicPoint<int32_t>;
-using FPoint = BasicPoint<float>;
+using IPoint = BasicPoint<int>;
+using LLPoint = BasicPoint<long long>;
 
 template <typename _ValueType>
 constexpr BasicPoint<_ValueType> MakePoint(const _ValueType& x, const _ValueType& y) noexcept

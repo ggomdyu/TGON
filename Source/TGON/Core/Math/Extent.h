@@ -74,12 +74,12 @@ constexpr BasicExtent2D<_ValueType> MakeExtent(const _ValueType& width, const _V
     return {width, height};
 }
 
-using Extent2D = BasicExtent2D<int>;
+using Extent2D = BasicExtent2D<float>;
+using DExtent2D = BasicExtent2D<double>;
 using I32Extent2D = BasicExtent2D<int32_t>;
 using I64Extent2D = BasicExtent2D<int64_t>;
-using FExtent2D = BasicExtent2D<float>;
-using DExtent2D = BasicExtent2D<double>;
-using LExtent2D = BasicExtent2D<long>;
+using IExtent2D = BasicExtent2D<int>;
+using LLExtent2D = BasicExtent2D<long long>;
 
 template <typename _ValueType>
 constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :

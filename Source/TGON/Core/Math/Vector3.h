@@ -6,81 +6,239 @@
 
 #pragma once
 #include <cstdint>
+#include <cassert>
+#include <cstdio>
 
 #include "Core/Platform/Config.h"
 #include "Core/Utility/ExpressionTemplate.h"
 
-#include "Vector2.h"
-
 namespace tgon
 {
 
-struct Vector2;
-
-struct TGON_API Vector3
+template <typename _ValueType,
+          typename std::enable_if<std::is_floating_point<_ValueType>::value>::type* = nullptr>
+struct TGON_API BasicVector3
 {
 /* @section Public constructor */
 public:
     /* @brief   Initializes x, y, z components to 0. */
-    constexpr Vector3() noexcept;
+    constexpr BasicVector3() noexcept  :
+        x(0.0f),
+        y(0.0f),
+        z(0.0f)
+    {
+    }
+    
+    /* @brief   Initializes x, y, z components with the specified value. */
+    constexpr BasicVector3(const _ValueType& scalar) noexcept :
+        x(scalar),
+        y(scalar),
+        z(scalar)
+    {
+    }
 
     /* @brief   Initializes x, y, z components with the specified value. */
-    constexpr Vector3(float scalar) noexcept;
-
-    /* @brief   Initializes x, y, z components with the specified value. */
-    constexpr Vector3(float x, float y, float z) noexcept;
-
-    /* @brief   Initializes x, y components with the specified vector and sets z to zero. */
-    constexpr Vector3(const Vector2& v) noexcept;
+    constexpr BasicVector3(const _ValueType& x, const _ValueType& y, const _ValueType& z) noexcept :
+        x(x),
+        y(y),
+        z(z)
+    {
+    }
 
     /* @brief   Initializes x, y components with the specified value and sets z to zero. */
-    constexpr Vector3(float x, float y) noexcept;
+    constexpr BasicVector3(const _ValueType& x, const _ValueType& y) noexcept :
+        x(x),
+        y(y),
+        z(0.0f)
+    {
+    }
 
     /* @brief   Initializes x, y, z components with the specified expression template. */
     template <typename _DerivedExpressionType>
-    constexpr Vector3(const BaseExpression<_DerivedExpressionType>& expression);
+    constexpr BasicVector3(const BaseExpression<_DerivedExpressionType>& expression) :
+        x(expression[0]),
+        y(expression[1]),
+        z(expression[2])
+    {
+    }
 
 /* @section Public perator */
 public:
-    constexpr const AddExpression<Vector3, Vector3> operator+(const Vector3& v) const noexcept;
-    constexpr const SubtractExpression<Vector3, Vector3> operator-(const Vector3& v) const noexcept;
-    friend constexpr const Vector3 operator*(float scalar, const Vector3& v) noexcept;
-    constexpr const Vector3 operator*(float scalar) const noexcept;
-    constexpr const Vector3 operator-(float scalar) const;
-    constexpr const Vector3 operator+(float scalar) const;
-    constexpr const Vector3 operator/(float scalar) const;
-    constexpr const Vector3 operator-() const noexcept;
-    Vector3& operator+=(const Vector3& v) noexcept;
-    Vector3& operator-=(const Vector3& v) noexcept;
-    Vector3& operator*=(const Vector3& v) noexcept;
-    Vector3& operator*=(float scalar) noexcept;
-    Vector3& operator/=(float scalar);
-    constexpr bool operator==(const Vector3& v) const noexcept;
-    constexpr bool operator!=(const Vector3& v) const noexcept;
-    float& operator[](std::size_t index) noexcept;
-    float operator[](std::size_t index) const noexcept;
+    constexpr const AddExpression<BasicVector3, BasicVector3> operator+(const BasicVector3& v) const noexcept
+    {
+        return {*this, v};
+    }
+    
+    constexpr const SubtractExpression<BasicVector3, BasicVector3> operator-(const BasicVector3& v) const noexcept
+    {
+        return {*this, v};
+    }
+    
+    constexpr const BasicVector3 operator+(const _ValueType& scalar) const
+    {
+        return BasicVector3(x + scalar, y + scalar, z + scalar);
+    }
+    
+    constexpr const BasicVector3 operator-(const _ValueType& scalar) const
+    {
+        return BasicVector3(x - scalar, y - scalar, z - scalar);
+    }
+    
+    constexpr const BasicVector3 operator*(const _ValueType& scalar) const noexcept
+    {
+        return BasicVector3(x * scalar, y * scalar, z * scalar);
+    }
+    
+    constexpr const BasicVector3 operator/(const _ValueType& scalar) const
+    {
+        return BasicVector3(x / scalar, y / scalar, z / scalar);
+    }
+    
+    constexpr const BasicVector3 operator-() const noexcept
+    {
+        return BasicVector3(-x, -y, -z);
+    }
+    
+    friend constexpr const BasicVector3 operator*(const _ValueType& scalar, const BasicVector3& v) noexcept
+    {
+        return v * scalar;
+    }
+    
+    BasicVector3& operator+=(const BasicVector3& v) noexcept
+    {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        
+        return *this;
+    }
+    
+    BasicVector3& operator-=(const BasicVector3& v) noexcept
+    {
+        x -= v.x;
+        y -= v.y;
+        z -= v.z;
+        
+        return *this;
+    }
+    
+    BasicVector3& operator*=(const BasicVector3& v) noexcept
+    {
+        x *= v.x;
+        y *= v.y;
+        z *= v.z;
+        
+        return *this;
+    }
+    
+    BasicVector3& operator*=(const _ValueType& scalar) noexcept
+    {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        
+        return *this;
+    }
+    
+    BasicVector3& operator/=(const _ValueType& scalar)
+    {
+        x /= scalar;
+        y /= scalar;
+        z /= scalar;
+        
+        return *this;
+    }
+    
+    _ValueType& operator[](std::size_t index) noexcept
+    {
+        return *(&x + index);
+    }
+    
+    const _ValueType& operator[](std::size_t index) const noexcept
+    {
+        return *(&x + index);
+    }
+    
+    constexpr bool operator==(const BasicVector3& v) const noexcept
+    {
+        return (x == v.x && y == v.y && z == v.z);
+    }
+    
+    constexpr bool operator!=(const BasicVector3& v) const noexcept
+    {
+        return !(*this == v);
+    }
     
 /* @section Public method */
 public:
-    static constexpr const Vector3 Reflect(const Vector3& inDirection, const Vector3& inPlaneNormal) noexcept;
-    static constexpr float Dot(const Vector3& v1, const Vector3& v2) noexcept;
-    static constexpr const Vector3 Cross(const Vector3& v1, const Vector3& v2) noexcept;
-    //static float Angle(const Vector3& v1, const Vector3& v2) noexcept;
-    static float Distance(const Vector3& v1, const Vector3& v2) noexcept;
-    float& At(std::size_t index);
-    float At(std::size_t index) const;
-    float Length() const noexcept;
-    float LengthSq() const noexcept;
-    void Normalize();
-    const Vector3 Normalized() const;
-
+    static constexpr const BasicVector3 Reflect(const BasicVector3& inDirection, const BasicVector3& inPlaneNormal) noexcept
+    {
+        return inDirection + Dot(-inDirection, inPlaneNormal) * 2 * inPlaneNormal;
+    }
+    
+    static constexpr _ValueType Dot(const BasicVector3& v1, const BasicVector3& v2) noexcept
+    {
+        return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+    }
+    
+    static constexpr const BasicVector3 Cross(const BasicVector3& v1, const BasicVector3& v2) noexcept
+    {
+        return {(v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x)};
+    }
+    
+    _ValueType& At(std::size_t index)
+    {
+        assert((index < 3 && index > -1) && "BasicVector3 index out of range");
+        
+        return *(&x + index);
+    }
+    
+    const _ValueType& At(std::size_t index) const
+    {
+        assert((index < 3 && index > -1) && "BasicVector3 index out of range");
+        
+        return *(&x + index);
+    }
+    
+    //static float Angle(const BasicVector3& v1, const BasicVector3& v2) noexcept;
+    
+    static _ValueType Distance(const BasicVector3& v1, const BasicVector3& v2) noexcept
+    {
+        return BasicVector3(v1 - v2).Length();
+    }
+    
+    _ValueType Length() const noexcept
+    {
+        return std::sqrtf(this->LengthSq());
+    }
+    
+    _ValueType LengthSq() const noexcept
+    {
+        return (x * x) + (y * y) + (z * z);
+    }
+    
+    void Normalize()
+    {
+        *this = this->Normalized();
+    }
+    
+    const BasicVector3 Normalized() const
+    {
+        _ValueType length = this->Length();
+        
+        return BasicVector3(x / length, y / length, z / length);
+    }
+    
     /**
      * @brief                   Converts value to a string.
      * @param [out] destStr     The destination of the string to be written.
      * @return                  The length of string converted.
      */
     template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const
+    {
+        this->ToString(destStr, _StrBufferSize);
+    }
 
     /**
      * @brief                       Converts value to a string.
@@ -88,120 +246,21 @@ public:
      * @param [in] strBufferSize    The size of destBuffer.
      * @return                      The length of string converted.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const
+    {
+#if _MSC_VER
+        return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", x, y, z);
+#else
+        return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", x, y, z);
+#endif
+    }
 
 /* @section Public variable */
 public:
-	float x, y, z;
+	_ValueType x, y, z;
 };
-
-
-constexpr Vector3::Vector3() noexcept :
-    x(0.0f),
-    y(0.0f),
-    z(0.0f)
-{
-}
-
-constexpr Vector3::Vector3(float scalar) noexcept :
-    x(scalar),
-    y(scalar),
-    z(scalar)
-{
-}
-
-constexpr Vector3::Vector3(float x, float y, float z) noexcept :
-    x(x),
-	y(y), 
-	z(z)
-{
-}
-
-constexpr Vector3::Vector3(float x, float y) noexcept :
-    x(x),
-    y(y),
-    z(0.0f)
-{
-}
-
-constexpr Vector3::Vector3(const Vector2& v) noexcept :
-    x(v.x),
-    y(v.y),
-    z(0.0f)
-{
-}
-
-template <typename _DerivedExpressionType>
-constexpr Vector3::Vector3(const BaseExpression<_DerivedExpressionType>& expression) :
-    x(expression[0]),
-    y(expression[1]),
-    z(expression[2])
-{
-}
-
-constexpr const AddExpression<Vector3, Vector3> Vector3::operator+(const Vector3& vec) const noexcept
-{
-    return {*this, vec};
-}
-
-constexpr const SubtractExpression<Vector3, Vector3> Vector3::operator-(const Vector3& vec) const noexcept
-{
-    return {*this, vec};
-}
-
-constexpr const Vector3 Vector3::operator*(float scalar) const noexcept
-{
-    return Vector3(x * scalar, y * scalar, z * scalar);
-}
-
-constexpr const Vector3 operator*(float lhs, const Vector3& vec) noexcept
-{
-	return vec * lhs;
-}
-
-constexpr const Vector3 Vector3::operator+(float scalar) const
-{
-    return Vector3(x + scalar, y + scalar, z + scalar);
-}
-
-constexpr const Vector3 Vector3::operator-(float scalar) const
-{
-    return Vector3(x - scalar, y - scalar, z - scalar);
-}
-
-constexpr const Vector3 Vector3::operator/(float scalar) const
-{
-    return Vector3(x / scalar, y / scalar, z / scalar);
-}
-
-constexpr const Vector3 Vector3::operator-() const noexcept
-{
-	return Vector3(-x, -y, -z);
-}
-
-constexpr bool Vector3::operator==(const Vector3& vec) const noexcept
-{
-	return (x == vec.x && y == vec.y && z == vec.z);
-}
-
-constexpr bool Vector3::operator!=(const Vector3& vec) const noexcept
-{
-    return !(*this == vec);
-}
-
-constexpr const Vector3 Vector3::Reflect(const Vector3& inDirection, const Vector3& inPlaneNormal) noexcept
-{
-    return inDirection + Dot(-inDirection, inPlaneNormal) * 2 * inPlaneNormal;
-}
-
-constexpr float Vector3::Dot(const Vector3& v1, const Vector3& v2) noexcept
-{
-    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
-}
-
-constexpr const Vector3 Vector3::Cross(const Vector3& v1, const Vector3& v2) noexcept
-{
-    return {(v1.y * v2.z) - (v1.z * v2.y), (v1.z * v2.x) - (v1.x * v2.z), (v1.x * v2.y) - (v1.y * v2.x)};
-}
+    
+using Vector3 = BasicVector3<float>;
+using DVector3 = BasicVector3<double>;
 
 } /* namespace tgon */
