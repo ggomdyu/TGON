@@ -230,9 +230,9 @@ public:
     }
     
     /**
-     * @brief                   Converts value to a string.
+     * @brief   Converts value to a string.
      * @param [out] destStr     The destination of the string to be written.
-     * @return                  The length of string converted.
+     * @return  The length of string converted.
      */
     template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const
@@ -241,10 +241,10 @@ public:
     }
 
     /**
-     * @brief                       Converts value to a string.
+     * @brief   Converts value to a string.
      * @param [out] destStr         The destination of the string to be written.
      * @param [in] strBufferSize    The size of destBuffer.
-     * @return                      The length of string converted.
+     * @return  The length of string converted.
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const
     {

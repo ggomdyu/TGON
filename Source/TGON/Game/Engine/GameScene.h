@@ -28,29 +28,29 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                   Updates the frame of the scene. */
+    /* @brief   Updates the frame of the scene. */
     virtual void Update();
     
     /**
-     * @brief                   Adds a GameObject into scene.
-     * @param [in] object       The object to insert.
+     * @brief   Adds a GameObject into scene.
+     * @param [in] object   The object to insert.
      */
     void AddObject(const std::shared_ptr<GameObject>& object);
 
     /**
-     * @brief                   Find a GameObject with the specified object name.
-     * @return                  Returns the found object, nullptr otherwise.
+     * @brief   Find a GameObject with the specified object name.
+     * @return  Returns the found object, nullptr otherwise.
      */
     GameObject* FindObject(const HashStringView& objectName);
 
     /**
-     * @brief                   Find a GameObject with the specified object name.
-     * @return                  Returns the found object, nullptr otherwise.
+     * @brief   Find a GameObject with the specified object name.
+     * @return  Returns the found object, nullptr otherwise.
      */
     const GameObject* FindObject(const HashStringView& objectName) const;
     
     /**
-     * @brief                   Removes the object which has specified name.
+     * @brief   Removes the object which has specified name.
      * @param [in] objectName   The name of object to remove.
      */
     bool RemoveObject(const HashStringView& objectName);

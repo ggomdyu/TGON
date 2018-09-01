@@ -23,15 +23,15 @@
 namespace tgon
 {
 
-class WindowImpl final :
+class WindowsWindow :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(WindowImpl);
+    TGON_RUNTIME_OBJECT(WindowsWindow);
 
 /* @section Public constructor */
 public:
-    WindowImpl(const WindowStyle& windowStyle);
+    WindowsWindow(const WindowStyle& windowStyle);
 
 /* @section Public method */
 public:
@@ -57,6 +57,10 @@ public:
     bool IsMaximized() const;
     bool IsMinimized() const;
     bool IsTopMost() const;
+    void SetRawWindowStyle(DWORD rawWindowStyle);
+    void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
+    DWORD GetRawWindowStyle() const;
+    DWORD GetRawWindowStyleEx() const;
 
 /* @section Public event handler */
 public:
@@ -82,5 +86,7 @@ private:
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;
 };
+
+using PlatformWindow = WindowsWindow;
 
 } /* namespace tgon */

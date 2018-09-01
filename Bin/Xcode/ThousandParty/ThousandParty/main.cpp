@@ -27,8 +27,8 @@ public:
 
         auto sprite = std::make_shared<GameObject>("sprite1");
         {
-            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/f47d1590fe3a8874fc5ea8f3a76fb5df.png");
-            sprite->GetTransform().SetScale({5.f, 6.32f, 1.0f});
+            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/3243.png");
+            sprite->GetTransform().SetScale({11.78f, 7.63f, 1.0f});
         }
 
         this->AddObject(sprite);

@@ -6,80 +6,58 @@
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
 
-#include "../WindowType.h"
-
 #include "WindowsWindowUtility.h"
 
 namespace tgon
 {
 
-void WindowsWindowUtility::ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle)
+void WindowsWindowUtility::ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
-	*extendedStyle = 0;
-	*normalStyle = 0;
+	*rawExtendedWindowStyle = 0;
+	*rawWindowStyle = 0;
 
-	// Assemble normal window style
+	// Create a normal window style.
     {
-        *normalStyle |= WS_VISIBLE;
+        *rawWindowStyle |= WS_VISIBLE;
         
-        if (windowStyle.maximized)
-        {
-	    	*normalStyle |= WS_MAXIMIZE;
-            assert(!windowStyle.minimized && "Can't be selected both Maximized and Minimized.");
-        }
-        else if (windowStyle.minimized)
-        {
-	    	*normalStyle |= WS_MINIMIZE;
-	    }
-
         if (windowStyle.resizeable)
         {
-	    	*normalStyle |= WS_THICKFRAME;
+	    	*rawWindowStyle |= WS_THICKFRAME;
         }
 
         if (!windowStyle.hasCaption)
         {
-            *normalStyle |= WS_POPUP;
+            *rawWindowStyle |= WS_POPUP;
         }
         else
         {
-            *normalStyle |= WS_OVERLAPPED;
-            *normalStyle |= WS_CAPTION;
-            *normalStyle |= WS_THICKFRAME;
+            *rawWindowStyle |= WS_OVERLAPPED;
+            *rawWindowStyle |= WS_CAPTION;
+            *rawWindowStyle |= WS_THICKFRAME;
         }
 
         if (windowStyle.enableSystemButton)
         {
-            *normalStyle |= WS_SYSMENU;
-            *normalStyle |= WS_MINIMIZEBOX;
-            *normalStyle |= WS_MAXIMIZEBOX;
+            *rawWindowStyle |= WS_SYSMENU;
+            *rawWindowStyle |= WS_MINIMIZEBOX;
+            *rawWindowStyle |= WS_MAXIMIZEBOX;
         }
     }
 
-    // Assemble extended window style
+    // Create a extended window style.
     {
         if (windowStyle.topMost)
         {
-            *extendedStyle |= WS_EX_TOPMOST;
-        }
-
-        if (windowStyle.supportPerPixelTransparency)
-        {
-            *extendedStyle |= WS_EX_LAYERED;
-        }
-
-        if (windowStyle.supportTransparency)
-        {
-            *extendedStyle |= WS_EX_LAYERED;
+            *rawExtendedWindowStyle |= WS_EX_TOPMOST;
         }
     }
 }
 
 HWND WindowsWindowUtility::CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
-	// Convert WindowStyle to native window style.
-	DWORD normalStyle, extendedStyle;
-    ConverWindowStyleToNative(windowStyle, &normalStyle, &extendedStyle);
+	// Convert the WindowStyle to the native window style.
+	DWORD rawWindowStyle, rawExtendedWindowStyle;
+    ConverWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
     wchar_t utf16Title[512] {};
     bool isConverSucceeded = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), utf16Title, std::extent_v<decltype(utf16Title)>);
@@ -91,20 +69,20 @@ HWND WindowsWindowUtility::CreateNativeWindow(const WindowStyle& windowStyle, HI
     I32Point windowPos {windowStyle.x, windowStyle.y};
     if (windowStyle.showMiddle)
     {
-        // Set window position to middle of screen.
+        // Set the window position to middle of the screen.
         windowPos.x = (GetSystemMetrics(SM_CXSCREEN) * 0.5f) - (windowStyle.width * 0.5f);
         windowPos.y = (GetSystemMetrics(SM_CYSCREEN) * 0.5f) - (windowStyle.height * 0.5f);
     }
 
     // Convert the client size to window size.
     RECT windowSize = {0, 0, windowStyle.width, windowStyle.height};
-    AdjustWindowRect(&windowSize, normalStyle, FALSE);
+    ::AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
  
-	HWND wndHandle = CreateWindowExW(
-		extendedStyle,
+	HWND wndHandle = ::CreateWindowExW(
+		rawExtendedWindowStyle,
 		className,
         utf16Title,
-        normalStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+        rawWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
         windowSize.right - windowSize.left,

@@ -26,14 +26,10 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 
     // Initialize singleton objects.
     decltype(auto) application = Application::GetInstance();
-    decltype(auto) engine = Engine::GetInstance();
 
     application->OnDidLaunch();
     {
-        application->MessageLoop([engine]()
-        {
-            engine->Update();
-        });
+        application->MessageLoop();
     }
     application->OnWillTerminate();
 

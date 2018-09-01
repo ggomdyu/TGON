@@ -22,8 +22,6 @@ struct WindowStyle final
 
     bool hasCaption = true;
     bool enableSystemButton = true;
-    bool enableTransparency = false;
-    bool enablePerPixelTransparency = false;
     bool enableFullScreen = false;
     bool resizeable = true;
     bool topMost = false;

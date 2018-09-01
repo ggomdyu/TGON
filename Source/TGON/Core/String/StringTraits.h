@@ -27,7 +27,7 @@ protected:
     constexpr StringTraits() noexcept = default;
 
     /**
-     * @brief                           Assigns srcStr to destStr.
+     * @brief   Assigns srcStr to destStr.
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
@@ -36,16 +36,16 @@ protected:
     StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Assigns srcStr to destStr.
-     * @param [in] srcStr               The string to copy.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [out] destStr             The destination of assign.
+     * @brief   Assigns srcStr to destStr.
+     * @param [in] srcStr       The string to copy.
+     * @param [in] srcStrLen    The length of srcStr.
+     * @param [out] destStr     The destination of assign.
      */
     template <std::size_t _DestStrBufferLen>
     StringTraits(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]);
 
     /**
-     * @brief                           Assigns the chCount copies of ch to destStr.
+     * @brief   Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
      * @param [in] destStrBufferLen     The buffer length of destStr.
      * @param [in] ch                   The character to assign to the string.
@@ -54,10 +54,10 @@ protected:
     StringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
 
     /**
-     * @brief                           Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] ch                   The character to assign to the string.
-     * @param [in] chCount              The count of ch to assign to the string.
+     * @brief   Assigns the chCount copies of ch to destStr.
+     * @param [out] destStr     The destination of assign.
+     * @param [in] ch           The character to assign to the string.
+     * @param [in] chCount      The count of ch to assign to the string.
      */
     template <std::size_t _DestStrBufferLen>
     StringTraits(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount = 1) :
@@ -68,7 +68,7 @@ protected:
 /* @section Public method */
 public:
     /**
-     * @brief                           Assigns srcStr to destStr.
+     * @brief   Assigns srcStr to destStr.
      * @param [in] srcStr               The string to copy.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of assign.
@@ -77,10 +77,10 @@ public:
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Assigns srcStr to destStr.
-     * @param [in] srcStr               The string to copy.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [out] destStr             The destination of assign.
+     * @brief   Assigns srcStr to destStr.
+     * @param [in] srcStr       The string to copy.
+     * @param [in] srcStrLen    The length of srcStr.
+     * @param [out] destStr     The destination of assign.
      */
     template <std::size_t _DestStrBufferLen>
     static void Assign(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr)
@@ -89,7 +89,7 @@ public:
     }
 
     /**
-     * @brief                           Assigns the chCount copies of ch to destStr.
+     * @brief   Assigns the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of assign.
      * @param [in] destStrBufferLen     The buffer length of destStr.
      * @param [in] ch                   The character to assign to destStr.
@@ -98,10 +98,10 @@ public:
     static void Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount);
     
     /**
-     * @brief                           Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] ch                   The character to assign to destStr.
-     * @param [in] chCount              The count of ch to assign to destStr.
+     * @brief   Assigns the chCount copies of ch to destStr.
+     * @param [out] destStr     The destination of assign.
+     * @param [in] ch           The character to assign to destStr.
+     * @param [in] chCount      The count of ch to assign to destStr.
      */
     template <std::size_t _DestStrBufferLen>
     static void Assign(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount)
@@ -110,7 +110,7 @@ public:
     }
 
     /**
-     * @brief                           Appends srcStr to destStr.
+     * @brief   Appends srcStr to destStr.
      * @param [in] srcStr               The string to append.
      * @param [in] srcStrLen            The length of srcStr.
      * @param [out] destStr             The destination of append.
@@ -120,11 +120,11 @@ public:
     static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Appends srcStr to destStr.
-     * @param [in] srcStr               The string to append.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [out] destStr             The destination of append.
-     * @param [in] destStrLen           The length of destStr.
+     * @brief   Appends srcStr to destStr.
+     * @param [in] srcStr       The string to append.
+     * @param [in] srcStrLen    The length of srcStr.
+     * @param [out] destStr     The destination of append.
+     * @param [in] destStrLen   The length of destStr.
      */
     template <std::size_t _DestStrBufferLen>
     static void Append(const _CharType* srcStr, std::size_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen)
@@ -133,7 +133,7 @@ public:
     }
 
     /**
-     * @brief                           Appends the chCount copies of ch to destStr.
+     * @brief   Appends the chCount copies of ch to destStr.
      * @param [out] destStr             The destination of append.
      * @param [in] destStrLen           The length of destStr.
      * @param [in] destStrBufferLen     The buffer length of destStr.
@@ -143,11 +143,11 @@ public:
     static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
 
     /**
-     * @brief                           Appends the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of append.
-     * @param [in] destStrLen           The length of destStr.
-     * @param [in] ch                   The character to append to destStr.
-     * @param [in] chCount              The count of ch to append to destStr.
+     * @brief   Appends the chCount copies of ch to destStr.
+     * @param [out] destStr     The destination of append.
+     * @param [in] destStrLen   The length of destStr.
+     * @param [in] ch           The character to append to destStr.
+     * @param [in] chCount      The count of ch to append to destStr.
      */
     template <std::size_t _DestStrBufferLen>
     static void Append(_CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen, _CharType ch, std::size_t chCount = 1)
@@ -156,65 +156,65 @@ public:
     }
 
     /**
-     * @brief                           Searches a matching substring.
-     * @param [in] srcStr               The string to find.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] srcStrOffset         The point of srcStr which start to search.
-     * @param [in] srcSubStr            The substring to find.
-     * @param [in] srcSubStrLen         The length of srcSubStr.
+     * @brief   Searches a matching substring.
+     * @param [in] srcStr           The string to find.
+     * @param [in] srcStrLen        The length of srcStr.
+     * @param [in] srcStrOffset     The point of srcStr which start to search.
+     * @param [in] srcSubStr        The substring to find.
+     * @param [in] srcSubStrLen     The length of srcSubStr.
      */
     static std::size_t Find(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcSubStr, std::size_t srcSubStrLen);
 
     /**
-     * @brief                           Searches a last matching substring.
-     * @param [in] srcStr               The string to find.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] srcStrOffset         The point of srcStr which start to search.
-     * @param [in] srcSubStr            The substring to find.
-     * @param [in] srcSubStrLen         The length of srcSubStr.
+     * @brief   Searches a last matching substring.
+     * @param [in] srcStr           The string to find.
+     * @param [in] srcStrLen        The length of srcStr.
+     * @param [in] srcStrOffset     The point of srcStr which start to search.
+     * @param [in] srcSubStr        The substring to find.
+     * @param [in] srcSubStrLen     The length of srcSubStr.
      */
     static std::size_t RFind(const _CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrOffset, const _CharType* srcSubStr, std::size_t srcSubStrLen);
 
     static int32_t Compare(const _CharType* srcLhsStr, std::size_t srcLhsStrLen, const _CharType* srcRhsStr, std::size_t srcRhsStrLen);
 
     /**
-     * @brief                           Returns a reference to the character specified by index.
-     * @return                          The reference to the character.
-     * @param [in] srcStr               The source or string to index.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] index                The index which indicates position of character within string.
+     * @brief   Returns a reference to the character specified by index.
+     * @return                  The reference to the character.
+     * @param [in] srcStr       The source or string to index.
+     * @param [in] srcStrLen    The length of srcStr.
+     * @param [in] index        The index which indicates position of character within string.
      */
     static _CharType& At(_CharType* srcStr, std::size_t srcStrLen, std::size_t index);
     
     /**
-     * @brief                           Returns a reference to the character specified by index.
-     * @return                          The reference to the character.
-     * @param [in] srcStr               The source or string to index.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] index                The index which indicates position of character within string.
+     * @brief   Returns a reference to the character specified by index.
+     * @return                  The reference to the character.
+     * @param [in] srcStr       The source or string to index.
+     * @param [in] srcStrLen    The length of srcStr.
+     * @param [in] index        The index which indicates position of character within string.
      */
     static const _CharType& At(const _CharType* srcStr, std::size_t srcStrLen, std::size_t index);
 
     /**
-     * @brief                           Returns the length of srcStr.
-     * @return                          The length of srcStr.
-     * @param [in] srcStr               The source of string.
+     * @brief   Returns the length of srcStr.
+     * @return              The length of srcStr.
+     * @param [in] srcStr   The source of string.
      */
     static std::size_t Length(const _CharType* srcStr);
 
     /**
-     * @brief                           Swaps the contents of strings.
-     * @param [in] srcStr               The string to be swapped with destStr.
-     * @param [in] srcStrLen            The length of srcStr.
-     * @param [in] srcStrBufferLen      The buffer length of srcStr.
-     * @param [in] destStr              The string to be swapped with srcStr.
-     * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
+     * @brief   Swaps the contents of strings.
+     * @param [in] srcStr              The string to be swapped with destStr.
+     * @param [in] srcStrLen           The length of srcStr.
+     * @param [in] srcStrBufferLen     The buffer length of srcStr.
+     * @param [in] destStr             The string to be swapped with srcStr.
+     * @param [in] destStrLen          The length of destStr.
+     * @param [in] destStrBufferLen    The buffer length of destStr.
      */
-    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
+    static void Swap(_CharType* srcStr,std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Converts the content of string to lowercase.
+     * @brief   Converts the content of string to lowercase.
      * @param [in] srcStr               The source or string to convert.
      * @param [in] srcStrLen            The length of srcStr
      * @param [in] destStr              The destination of convert.
@@ -223,7 +223,7 @@ public:
     static void ToLower(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Converts the content of string to lowercase.
+     * @brief   Converts the content of string to lowercase.
      * @param [in] srcStr               The source or string to convert.
      * @param [in] destStr              The destination of convert.
      * @param [in] destStrBufferLen     The buffer length of destStr.
@@ -231,7 +231,7 @@ public:
     static std::size_t ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Converts the content of string to uppercase.
+     * @brief   Converts the content of string to uppercase.
      * @param [in] srcStr               The source or string to convert.
      * @param [in] srcStrLen            The length of srcStr
      * @param [in] destStr              The destination of convert.
@@ -240,7 +240,7 @@ public:
     static void ToUpper(const _CharType* srcStr, std::size_t srcStrLen, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Converts the content of string to uppercase.
+     * @brief   Converts the content of string to uppercase.
      * @param [in] srcStr               The source or string to convert.
      * @param [in] destStr              The destination of convert.
      * @param [in] destStrBufferLen     The buffer length of destStr.
@@ -248,22 +248,22 @@ public:
     static std::size_t ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
 
     /**
-     * @brief                           Checks the string is null or empty.
-     * @return                          True if the string is null or empty, false otherwise.
+     * @brief   Checks the string is null or empty.
+     * @return  True if the string is null or empty, false otherwise.
      */
     static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
     
     /**
-     * @brief                           Replaces each format item in formatStr to text.
-     * @param [in] formatStr            The format string.
-     * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
+     * @brief   Replaces each format item in formatStr to text.
+     * @param [in] formatStr    The format string.
+     * @return                  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
     static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, ...);
     
     /**
-     * @brief                           Replaces each format item in formatStr to text.
-     * @param [in] formatStr            The format string.
-     * @return                          Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
+     * @brief   Replaces each format item in formatStr to text.
+     * @param [in] formatStr    The format string.
+     * @return                  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
     static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, std::va_list vaList);
 

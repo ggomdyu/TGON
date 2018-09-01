@@ -15,8 +15,6 @@ extern std::unique_ptr<Engine> MakeEngine();
 Engine::Engine() :
     m_timeModule(std::make_unique<TimeModule>())
 {
-    Application::GetInstance()->OnDidLaunch += [&]() { this->OnDidLaunch(); };
-    Application::GetInstance()->OnWillTerminate += [&]() { this->OnWillTerminate(); };
 }
 
 Engine::~Engine() = default;

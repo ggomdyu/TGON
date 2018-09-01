@@ -44,30 +44,30 @@ public:
     /* @brief   Gets the global instance of this class. */
     static Engine* GetInstance();
     
-    /* @brief               Updates the Engine. */
+    /* @brief   Updates the Engine. */
     virtual void Update();
     
     /**
-     * @brief               Inserts a module to manage.
+     * @brief   Inserts a module to manage.
      * @param [in] args     Parameters of the _ModuleType constructor.
      */
     template <typename _ModuleType, typename... _ArgTypes>
     void AddModule(_ArgTypes&&... args);
     
     /**
-     * @brief               Removes the managed module.
+     * @brief   Removes the managed module.
      * @tparam _ModuleType  The type of module to remove.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     bool RemoveModule();
 
     /**
-     * @brief               Returns a module that managed by Application.
+     * @brief   Returns a module that managed by Application.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     const _ModuleType* FindModule() const noexcept;
 
-    /* @brief               Returns a module that managed by Application. */
+    /* @brief   Returns a module that managed by Application. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     _ModuleType* FindModule() noexcept;
 
@@ -80,29 +80,27 @@ public:
 /* @section Private method */
 private:
     /**
-     * @brief               Inserts a module to manage.
+     * @brief   Inserts a module to manage.
      * @param [in] module   The module to insert.
      */
     void AddModule(std::unique_ptr<IModule> module);
     
     /**
-     * @brief               Returns a module that managed by Application.
-     * @param [in] moduleId The unique id of module to get.
-     * @return              Returns a pointer to module if successful, nullptr otherwise.
+     * @brief   Returns a module that managed by Application.
+     * @param [in] moduleId     The unique id of the module to get.
+     * @return  Returns a pointer to module if successful, nullptr otherwise.
      */
     IModule* FindModule(size_t moduleId);
 
     /**
-     * @brief               Returns a module that managed by Application.
-     * @param [in] moduleId The unique id of module to get.
-     * @return              Returns a pointer to module if successful, nullptr otherwise.
+     * @brief   Returns a module that managed by Application.
+     * @param [in] moduleId     The unique id of the module to get.
+     * @return  Returns a pointer to module if successful, nullptr otherwise.
      */
     bool RemoveModule(size_t moduleId);
 
 /* @section Private variable */
 private:
-    //std::unique_ptr<AudioModule> m_audioModule;
-
     std::unique_ptr<TimeModule> m_timeModule;
 
     std::vector<std::unique_ptr<IModule>> m_modules;

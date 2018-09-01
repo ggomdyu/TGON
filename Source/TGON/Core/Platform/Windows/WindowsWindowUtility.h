@@ -15,6 +15,8 @@
 
 #include "Core/Platform/Config.h"
 
+#include "../WindowType.h"
+
 namespace tgon
 {
 
@@ -29,11 +31,11 @@ public:
      * @param [in] className		The class name to be used to initialize the window attributes.
      * @param [in] extraParam		The extra data that window will have.
      */
-    static HWND CreateNativeWindow(const struct WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
+    static HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
 /* @section Private method */
 private:
-    static void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* normalStyle, DWORD* extendedStyle);
+    static void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle);
 };
 
 } /* namespace tgon */

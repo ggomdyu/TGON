@@ -96,9 +96,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp">
-      <Filter>Source\Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Random\WELL1024a.cpp">
       <Filter>Source\Core\Random</Filter>
     </ClCompile>
@@ -137,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Utility\ThreadPool.cpp">
       <Filter>Source\Core\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector2.cpp">
-      <Filter>Source\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ICloneable.cpp">
       <Filter>Source\Core\Object</Filter>

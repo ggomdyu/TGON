@@ -2,7 +2,7 @@
  * @file    FixedString.h
  * @author  ggomdyu
  * @date    03/16/2017
- * @brief   String class that uses only stack memory and has fixed buffer size.
+ * @brief   THString class that uses only stack memory and has fixed buffer size.
  */
 
 #pragma once

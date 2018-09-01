@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Platform/Config.h"
 #include "Core/Object/DelegateChain.h"
+#include "Core/Engine/Engine.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -24,7 +25,7 @@ namespace tgon
 {
 
 class TGON_API Application final :
-    public CoreObject
+    private PlatformApplication
 {
 public:
     TGON_RUNTIME_OBJECT(Application);
@@ -33,50 +34,43 @@ public:
 private:
     explicit Application();
 
-/* @section Public destructor */
-public:
-    virtual ~Application() override = default;
-    
 /* @section Public method */
 public:
-    /* @brief                       Gets the global instance of this class. */
+    /* @brief   Loops the message queue and handle the message. */
     static Application* GetInstance();
 
-    /* @brief                       Loops the message queue and handle the message. */
-    template <typename _FunctionType>
-    void MessageLoop(const _FunctionType& onUpdate);
+    void MessageLoop();
 
-    /* @brief                       Terminates the program forcibly. */
-    void Terminate();
+    using PlatformApplication::Terminate;
     
     /**
-     * @brief                       Displays a message box.
-     * @param [in] message          The message to show in description area.
+     * @brief   Displays a message box.
+     * @param [in] message  The message to show in description area.
      */
     void ShowMessageBox(const char* message) const;
     
     /**
-     * @brief                       Displays a message box.
+     * @brief   Displays a message box.
      * @param [in] message          The message to show in description area.
      * @param [in] messageBoxIcon   The type of icon appears in the message box.
      */
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
-     * @brief                       Displays a message box.
-     * @param [in] title            The message to show in title area.
-     * @param [in] message          The message to show in description area.
+     * @brief   Displays a message box.
+     * @param [in] title    The message to show in title area.
+     * @param [in] message  The message to show in description area.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
-    /**
-     * @brief                       Displays a message box.
-     * @param [in] title            The message to show in title area.
-     * @param [in] message          The message to show in description area.
-     * @param [in] messageBoxIcon   The type of icon appears in the message box.
-     */
-    void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
-    
+    using PlatformApplication::ShowMessageBox;
+
+    /* @brief   Gets the Engine. */
+    Engine* GetEngine();
+
+    /* @brief   Gets the Engine. */
+    const Engine* GetEngine() const;
+
     /* @brief   Gets the root window. */
     Window& GetRootWindow() noexcept;
     
@@ -85,20 +79,14 @@ public:
 
 /* @section Public event handler */
 public:
-    DelegateChain<void()> OnDidLaunch;
-    DelegateChain<void()> OnWillTerminate;
+    void OnDidLaunch();
+
+    void OnWillTerminate();
     
 /* @section Protected variable */
 protected:
-    ApplicationImpl m_applicationImpl;
-    
     std::unique_ptr<Window> m_rootWindow;
+    std::unique_ptr<Engine> m_engine;
 };
-
-template <typename _FunctionType>
-void Application::MessageLoop(const _FunctionType& onUpdate)
-{
-    m_applicationImpl.MessageLoop(onUpdate);
-}
 
 } /* namespace tgon */

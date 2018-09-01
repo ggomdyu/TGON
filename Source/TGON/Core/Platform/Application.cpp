@@ -19,9 +19,11 @@ Application* Application::GetInstance()
     return &instance;
 }
 
-void Application::Terminate()
+void Application::MessageLoop()
 {
-    m_applicationImpl.Terminate();
+    PlatformApplication::MessageLoop([&]()
+    {
+    });
 }
 
 void Application::ShowMessageBox(const char* message) const
@@ -39,11 +41,16 @@ void Application::ShowMessageBox(const char* title, const char* message) const
     this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }
 
-void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
+Engine* Application::GetEngine()
 {
-    m_applicationImpl.ShowMessageBox(title, message, messageBoxIcon);
+    return m_engine.get();
 }
-   
+
+const Engine* Application::GetEngine() const
+{
+    return m_engine.get();
+}
+
 Window& Application::GetRootWindow() noexcept
 {
     return *m_rootWindow;
@@ -52,6 +59,22 @@ Window& Application::GetRootWindow() noexcept
 const Window& Application::GetRootWindow() const noexcept
 {
     return *m_rootWindow;
+}
+
+void Application::OnDidLaunch()
+{
+    if (m_engine)
+    {
+        m_engine->OnDidLaunch();
+    }
+}
+
+void Application::OnWillTerminate()
+{
+    if (m_engine)
+    {
+        m_engine->OnWillTerminate();
+    }
 }
 
 } /* namespace tgon */

@@ -33,76 +33,76 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                   Updates the object. */
+    /* @brief   Updates the object. */
     void Update();
 
     /**
-     * @brief                   Sets the name of object.
-     * @param [in] name         The name to set.
+     * @brief   Sets the name of object.
+     * @param [in] name     The name to set.
      */
     void SetName(const FixedHashString32& name);
 
     /**
-     * @brief                   Inserts a component to manage.
-     * @param [in] args         Parameters of the _ComponentType constructor.
+     * @brief   Inserts a component to manage.
+     * @param [in] args     Parameters of the _ComponentType constructor.
      */
     template <typename _ComponentType, typename... _ArgTypes>
     void AddComponent(_ArgTypes&&... args);
 
     /**
-     * @brief                   Removes the managed component.
+     * @brief   Removes the managed component.
      * @tparam _ComponentType   The type of component to remove.
-     * @return                  Returns true if successful, false otherwise.
+     * @return  Returns true if successful, false otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     bool RemoveComponent();
 
     /**
-     * @brief                   Gets a component that managed by this instance.
+     * @brief   Gets a component that managed by this instance.
      * @tparam _ComponentType   The type of component to get.
-     * @return                  Returns the pointer to component if successful, nullptr otherwise.
+     * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     const _ComponentType* GetComponent() const;
 
     /**
-     * @brief                   Gets a component that managed by this instance.
+     * @brief   Gets a component that managed by this instance.
      * @tparam _ComponentType   The type of component to get.
-     * @return                  Returns the pointer to component if successful, nullptr otherwise.
+     * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
     _ComponentType* GetComponent();
 
     /**
-     * @brief                   Gets the name of object.
-     * @return                  The name of object to set.
+     * @brief   Gets the name of object.
+     * @return  The name of object to set.
      */
     const FixedHashString32& GetName() const noexcept;
 
-    /* @brief                   Gets the transform. */
+    /* @brief   Gets the transform. */
     Transform& GetTransform() noexcept;
 
-    /* @brief                   Gets the transform. */
+    /* @brief   Gets the transform. */
     const Transform& GetTransform() const noexcept;
 
 /* @section Private method */
 private:
     /**
-     * @brief                   Inserts a component to manage.
+     * @brief   Inserts a component to manage.
      * @param [in] component    The component to insert.
      */
     void AddComponent(Component* component);
 
     /**
-     * @brief                   Removes the managed component.
+     * @brief   Removes the managed component.
      * @param [in] componentId  The unique id of component to get.
      */
     bool RemoveComponent(size_t componentId);
 
     /**
-     * @brief                   Gets a component that managed by this instance.
+     * @brief   Gets a component that managed by this instance.
      * @param [in] componentId  The unique id of component to get.
-     * @return                  Returns the pointer to component if successful, nullptr otherwise.
+     * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
     Component* GetComponent(size_t componentId);
 

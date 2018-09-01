@@ -29,8 +29,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\InputManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Keyboard.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Hardware\Mouse.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector2.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Math\Vector3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\ICloneable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Application.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Platform\Window.cpp" />

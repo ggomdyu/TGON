@@ -22,7 +22,7 @@ constexpr const float Rad2Deg = 180 / Pi;
 
 /**
  * @brief   Returns the greatest common divisor using Euclidean algorithm.
- @ @see     https://en.wikipedia.org/wiki/Euclidean_algorithm
+ * @see     https://en.wikipedia.org/wiki/Euclidean_algorithm
  */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
@@ -102,7 +102,7 @@ constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& secon
     return (first >= second) ? Max(first, args...) : Max(second, args...);
 }
 
-/* @brief   Get the absolute value. */
+/* @brief   Gets the absolute value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Abs(const _ValueType& value) noexcept
@@ -159,11 +159,11 @@ constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
 }
 
 /**
- * @brief               Performs Linear interpolation.
+ * @brief   Calculates the Linear interpolation.
  * @param [in] from     Interpolation start value
  * @param [in] to       Interpolation end value
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
- * @return              Returns Interpolated value
+ * @return  Returns Interpolated value
  */
 template <typename _ValueType>
 constexpr const _ValueType Lerp(const _ValueType& from, const _ValueType& to, float time) noexcept
@@ -178,12 +178,12 @@ constexpr float Smoothstep(float from, float to, float time) noexcept
 }
 
 /**
- * @brief               Calculates Two-dimensional bezier curve.
+ * @brief   Calculates Two-dimensional bezier curve.
  * @param [in] v1       The first vertex
  * @param [in] v2       The second vertex
  * @param [in] v3       The third vertex
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
- * @return              Returns Interpolated vertex.
+ * @return  Returns Interpolated vertex.
  */
 constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {

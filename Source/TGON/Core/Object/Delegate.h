@@ -27,7 +27,7 @@
 #endif
 
 /**
- * @brief                   Binds delegate with lambda or global function
+ * @brief   Binds delegate with lambda or global function
  * @param [in] function     A lambda object or Reference to global function(e.g. &functionName)
  */
 #define TGON_MAKE_DELEGATE_1(function)\
@@ -38,7 +38,7 @@
     } ()
 
 /**
- * @brief                   Binds delegate with class member function
+ * @brief   Binds delegate with class member function
  * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
  * @param [in] instance     An instance which handles event
  */
@@ -129,9 +129,9 @@ private:
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
 
     /**
-     * @brief               Deletes pointer specified by 'ptr' or Gets
-     * @param [in]  ptr     Delete target
-     * @return              The size to delete or deleted
+     * @brief   Deletes the pointer specified by ptr.
+     * @param [in]  ptr     The delete target pointer
+     * @return  The size to delete or deleted
      */
     template <typename _FunctionType>
     static std::size_t MakeDeleter(void* ptr);

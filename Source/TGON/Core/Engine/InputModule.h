@@ -21,10 +21,8 @@ struct TGON_API InputMode final
 {
 /* @section Public constructor */
 public:
-    /* @brief Initializes with default constructor. */
     constexpr InputMode() noexcept = default;
 
-    /* @brief Initializes with some flags. */
     constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
     
 /* @section Public variable */

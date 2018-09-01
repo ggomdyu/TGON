@@ -26,11 +26,11 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                   Updates the TimeModule. */
+    /* @brief   Updates the TimeModule. */
     virtual void Update() override;
     
     /**
-     * @brief                   Sets the scale which the time passing.
+     * @brief   Sets the scale which the time passing.
      * @param [in] timeScale    The scale of time passing.
      */
     void SetTimeScale(float timeScale) noexcept;

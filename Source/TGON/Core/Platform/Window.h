@@ -24,63 +24,53 @@ namespace tgon
 {
 
 class TGON_API Window final :
-     public CoreObject
+    private PlatformWindow
 {
 public:
     TGON_RUNTIME_OBJECT(Window);
 
 /* @section Private constructor */
 public:
-    Window(const WindowStyle& windowStyle = {});
+    using PlatformWindow::PlatformWindow;
 
-/* @section Public constructor */
-public:
-    ~Window();
-    
 /* @section Public method */
 public:
-    void Show();
-    void Hide();
-    void Close();
-    void Maximize();
-    void Minimize();
-    void BringToFront();
-    void SetPosition(int32_t x, int32_t y);
-    void SetSize(int32_t width, int32_t height);
-    void SetTitle(const char* title);
-    void SetTopMost(bool setTopMost);
-    void SetTransparency(float transparency);
-    void GetPosition(int32_t* x, int32_t* y) const;
-    void GetSize(int32_t* width, int32_t* height) const;
-    void GetTitle(char* destStr) const;
+    using PlatformWindow::Show;
+    using PlatformWindow::Hide;
+    using PlatformWindow::Close;
+    using PlatformWindow::Maximize;
+    using PlatformWindow::Minimize;
+    using PlatformWindow::BringToFront;
+    using PlatformWindow::SetPosition;
+    using PlatformWindow::SetSize;
+    using PlatformWindow::SetTitle;
+    using PlatformWindow::SetTopMost;
+    using PlatformWindow::SetTransparency;
+    using PlatformWindow::GetPosition;
+    using PlatformWindow::GetSize;
+    using PlatformWindow::GetTitle;
     I32Point GetPosition() const;
     I32Extent2D GetSize() const;
-    float GetTransparency() const;
-    void* GetNativeWindow() const;
-    bool HasCaption() const;
-    bool IsResizable() const;
-    bool IsMaximized() const;
-    bool IsMinimized() const;
-    bool IsTopMost() const;
-    const WindowImpl& GetImpl() const noexcept;
-    WindowImpl& GetImpl() noexcept;
+    using PlatformWindow::GetTransparency;
+    using PlatformWindow::GetNativeWindow;
+    using PlatformWindow::HasCaption;
+    using PlatformWindow::IsResizable;
+    using PlatformWindow::IsMaximized;
+    using PlatformWindow::IsMinimized;
+    using PlatformWindow::IsTopMost;
 
 /* @section Public event handler */
 public:
-    DelegateChain<void(int32_t, int32_t)>& OnWindowMove;
-    DelegateChain<void(int32_t, int32_t)>& OnWindowResize;
-    DelegateChain<void()>& OnWindowMaximize;
-    DelegateChain<void()>& OnWindowMinimize;
-    DelegateChain<void()>& OnWindowEnterFullScreen;
-    DelegateChain<void()>& OnWindowExitFullScreen;
-    DelegateChain<void()>& OnWindowWillClose;
-    DelegateChain<void()>& OnWindowDidClose;
-    DelegateChain<void()>& OnWindowGetFocus;
-    DelegateChain<void()>& OnWindowLoseFocus;
-
-/* @section Private variable */
-private:
-    WindowImpl m_windowImpl;
+    using PlatformWindow::OnWindowMove;
+    using PlatformWindow::OnWindowResize;
+    using PlatformWindow::OnWindowMaximize;
+    using PlatformWindow::OnWindowMinimize;
+    using PlatformWindow::OnWindowEnterFullScreen;
+    using PlatformWindow::OnWindowExitFullScreen;
+    using PlatformWindow::OnWindowWillClose;
+    using PlatformWindow::OnWindowDidClose;
+    using PlatformWindow::OnWindowGetFocus;
+    using PlatformWindow::OnWindowLoseFocus;
 };
 
 } /* namespace tgon */

@@ -47,31 +47,31 @@ public:
 /* @section Public method */
 public:
     /**
-     * @brief               Invokes all delegates stored in list.
+     * @brief   Invokes all delegates stored in list.
      * @param [in] args     The parameters of delegate to invoke.
-     * @return              Returns the finally invoked delegate's return value.
+     * @return  Returns the finally invoked delegate's return value.
      */
     template <typename... _ArgTypes2>
     _ReturnType Invoke(_ArgTypes2&&... args);
 
     /**
-     * @brief               Inserts a delegate in list.
+     * @brief   Inserts a delegate into the list.
      * @param [in] value    The delegate to insert.
      */
     template <typename _DelegateType>
     void Append(_DelegateType&& value);
 
     /**
-     * @brief               Erases the delegate stored in list.
+     * @brief   Erases the delegate stored into the list.
      * @param [in] value    The delegate to erase.
-     * @details             The specified delegate's stub pointer must be matched with stored delegate in list.
+     * @details The specified delegate's stub pointer must be matched with stored delegate in list.
      */
     bool Erase(const DelegateType& value);
 
-    /* @brief               Erases all delegates stored in list. */
+    /* @brief   Erases all delegates stored in list. */
     void Clear() noexcept;
 
-    /* @brief               Gets the delegate list. */
+    /* @brief   Gets the delegate list. */
     const std::vector<DelegateType>& GetInvocationList() const noexcept;
 
 /* @section Private variable */
