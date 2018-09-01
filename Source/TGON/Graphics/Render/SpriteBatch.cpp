@@ -18,9 +18,9 @@ SpriteBatch::SpriteBatch(const std::shared_ptr<Material>& material, const std::i
 {
 }
 
-void SpriteBatch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const I32Rect& textureSize, const Matrix4x4& matWVP)
+void SpriteBatch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4& matWVP)
 {
-    m_drawPrimitives.push_back(DrawPrimitive{textureSize, matWVP});
+    m_drawPrimitives.push_back(DrawPrimitive{matWVP});
 }
 
 void SpriteBatch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
@@ -39,13 +39,8 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
 
     for (auto& drawPrimitive : m_drawPrimitives)
     {
-        Matrix4x4 matWorldViewProj = Matrix4x4::Scale(drawPrimitive.textureSize.right, drawPrimitive.textureSize.bottom, 1.0f);
-        
-        matWorldViewProj *= drawPrimitive.matWorld;
-        matWorldViewProj *= camera.GetViewProjectionMatrix();
-        
         // Set the world-view-projection matrix.
-        m_material->SetWVP(matWorldViewProj);
+        m_material->SetWVP(drawPrimitive.matWorld * camera.GetViewProjectionMatrix());
 
         graphics.DrawPrimitives(PrimitiveType::TriangleFan, 4);
     }

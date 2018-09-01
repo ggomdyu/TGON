@@ -20,7 +20,7 @@ Camera::Camera() noexcept :
     this->Update();
 }
     
-Camera::Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept :
+Camera::Camera(const Rect& orthoPlane, float nearZ, float farZ) noexcept :
     m_eyePt(0.0f, 0.0f, 5.0f),
     m_lookAt(0.0f, 0.0f, 0.0f),
     m_fov(Pi / 8),
@@ -58,7 +58,8 @@ void Camera::Update()
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
             m_matProj = Matrix4x4::OrthographicRH(m_orthoPlane.left, m_orthoPlane.right, m_orthoPlane.top, m_orthoPlane.bottom, m_nearZ, m_farZ);
-            m_matViewProj = m_matProj;
+            m_matViewProj = Matrix4x4::Scale(100.0f, 100.0f, 1.0f);
+            m_matViewProj *= m_matProj;
         }
         
         m_isDirty = false;
@@ -101,13 +102,13 @@ void Camera::SetLookAt(const Vector3& lookAt) noexcept
     m_isDirty = true;
 }
     
-void Camera::SetOrthoPlane(const FRect& orthoPlane) noexcept
+void Camera::SetOrthoPlane(const Rect& orthoPlane) noexcept
 {
     m_orthoPlane = orthoPlane;
     m_isDirty = true;
 }
 
-const FRect& Camera::GetOrthoPlane() const noexcept
+const Rect& Camera::GetOrthoPlane() const noexcept
 {
     return m_orthoPlane;
 }

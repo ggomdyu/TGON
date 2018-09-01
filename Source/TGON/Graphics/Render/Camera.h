@@ -23,7 +23,7 @@ class TGON_API Camera
 public:
     Camera() noexcept;
     
-    Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept;
+    Camera(const Rect& orthoPlane, float nearZ, float farZ) noexcept;
 
     Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept;
 
@@ -49,9 +49,9 @@ public:
     /* @brief   Sets the direction vector of camera. */
     void SetLookAt(const Vector3& lookAt) noexcept;
     
-    void SetOrthoPlane(const FRect& orthoPlane) noexcept;
+    void SetOrthoPlane(const Rect& orthoPlane) noexcept;
 
-    const FRect& GetOrthoPlane() const noexcept;
+    const Rect& GetOrthoPlane() const noexcept;
 
     /* @brief   Gets the near clipping plane's Z-position. */
     float GetNearZ() const noexcept;
@@ -83,7 +83,7 @@ private:
     float m_fov;
     float m_nearZ;
     float m_farZ;
-    FRect m_orthoPlane;
+    Rect m_orthoPlane;
     Matrix4x4 m_matProj;
     Matrix4x4 m_matViewProj;
     bool m_isDirty;

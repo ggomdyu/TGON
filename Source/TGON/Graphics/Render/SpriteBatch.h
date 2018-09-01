@@ -25,7 +25,6 @@ class TGON_API SpriteBatch final
 public:
     struct DrawPrimitive
     {
-        const I32Rect& textureSize;
         const Matrix4x4& matWorld;
     };
 
@@ -40,7 +39,7 @@ public:
 /* @section Public method */
 public:
     /* @brief   Adds a draw primitive into the batch. */
-    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const I32Rect& textureSize, const Matrix4x4& matWVP);
+    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4& matWVP);
     
     /* @brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);

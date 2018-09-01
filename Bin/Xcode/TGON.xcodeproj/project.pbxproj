@@ -63,7 +63,6 @@
 		FD5337FA20E4018500515DA4 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD3966E20D025B50095F1F8 /* InputManager.cpp */; };
 		FD5337FB20E4018500515DA4 /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD3967020D025B50095F1F8 /* Keyboard.cpp */; };
 		FD5337FC20E4018500515DA4 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD3967120D025B50095F1F8 /* Mouse.cpp */; };
-		FD5337FD20E4018500515DA4 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD06733A20B4259D00BEA737 /* Vector3.cpp */; };
 		FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD41922420DA853000536815 /* ICloneable.cpp */; };
 		FD53380320E4018500515DA4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE73F5720CAE6B60026F3D3 /* Application.cpp */; };
 		FD53380420E4018500515DA4 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC877FF20CEA1BC00C8CA9A /* Window.cpp */; };
@@ -81,6 +80,7 @@
 		FD53381B20E4018500515DA4 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD39DB3520C9703700C07251 /* GameObject.cpp */; };
 		FD53381F20E4027000515DA4 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD53381E20E4027000515DA4 /* MacOSApplication.mm */; };
 		FD612BA820E3FFC2006FE85E /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD612BA720E3FFC2006FE85E /* MacOSWindow.h */; };
+		FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */ = {isa = PBXBuildFile; fileRef = FD64DC992138568D003B7D0A /* Rhombus.h */; };
 		FD7EA6E020B094CA00A76C69 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DB20B094C900A76C69 /* Image.h */; };
 		FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DD20B094CA00A76C69 /* Drawing.h */; };
 		FD7EA6E320B094CA00A76C69 /* ImageType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DE20B094CA00A76C69 /* ImageType.h */; };
@@ -201,7 +201,6 @@
 		FD06733020B4258C00BEA737 /* Random.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Random.h; sourceTree = "<group>"; };
 		FD06733220B4259D00BEA737 /* Delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Delegate.h; sourceTree = "<group>"; };
 		FD06733320B4259D00BEA737 /* RTTI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTTI.h; sourceTree = "<group>"; };
-		FD06733A20B4259D00BEA737 /* Vector3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
 		FD06733B20B4259D00BEA737 /* Matrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix4x4.h; sourceTree = "<group>"; };
 		FD06733C20B4259D00BEA737 /* Circle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
 		FD06733D20B4259D00BEA737 /* Vector2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
@@ -266,6 +265,7 @@
 		FD53381E20E4027000515DA4 /* MacOSApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSApplication.mm; sourceTree = "<group>"; };
 		FD612BA420E3CA20006FE85E /* OpenGLUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLUtility.h; sourceTree = "<group>"; };
 		FD612BA720E3FFC2006FE85E /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWindow.h; sourceTree = "<group>"; };
+		FD64DC992138568D003B7D0A /* Rhombus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rhombus.h; sourceTree = "<group>"; };
 		FD6A9EE120BC4B9F0078513F /* EventDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		FD7EA6DB20B094C900A76C69 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ../../Source/TGON/Core/Drawing/Image.h; sourceTree = "<group>"; };
 		FD7EA6DC20B094CA00A76C69 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image.cpp; path = ../../Source/TGON/Core/Drawing/Image.cpp; sourceTree = "<group>"; };
@@ -538,7 +538,7 @@
 				FD06734120B4259D00BEA737 /* Rect.h */,
 				FD06734220B4259D00BEA737 /* Mathematics.h */,
 				FD06734320B4259D00BEA737 /* Vector3.h */,
-				FD06733A20B4259D00BEA737 /* Vector3.cpp */,
+				FD64DC992138568D003B7D0A /* Rhombus.h */,
 			);
 			name = Math;
 			path = ../../Source/TGON/Core/Math;
@@ -1012,6 +1012,7 @@
 				FD052C7A20E7F1D200EF3C64 /* OpenGLGraphicsType.h in Headers */,
 				FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
+				FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */,
 				FDD3968720D025B70095F1F8 /* KeyboardType.h in Headers */,
 				FDAF475120D6D136004EC9FF /* OggVorbisAudioImporter.h in Headers */,
 				FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */,
@@ -1106,7 +1107,6 @@
 				FD806BB62110AB74002B9DCB /* InputModule.cpp in Sources */,
 				FD5337FB20E4018500515DA4 /* Keyboard.cpp in Sources */,
 				FD5337FC20E4018500515DA4 /* Mouse.cpp in Sources */,
-				FD5337FD20E4018500515DA4 /* Vector3.cpp in Sources */,
 				FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */,
 				FD53380320E4018500515DA4 /* Application.cpp in Sources */,
 				FD53380420E4018500515DA4 /* Window.cpp in Sources */,

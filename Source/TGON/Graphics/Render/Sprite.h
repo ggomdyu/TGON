@@ -39,20 +39,9 @@ public:
     /* @brief   Gets the texture of the sprite. */
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     
-    /* @brief   Sets the size of the texture. */
-    void SetTextureSize(const I32Rect& textureSize);
-    
-    /* @brief   Gets the size of the texture. */
-    I32Rect& GetTextureSize() noexcept;
-    
-    /* @brief   Gets the size of the texture. */
-    const I32Rect& GetTextureSize() const noexcept;
-    
 /* @section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
-    
-    I32Rect m_textureSize;
 };
 
 class NinePatchSprite

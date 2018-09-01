@@ -16,7 +16,7 @@ CameraComponent::CameraComponent() :
     Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
 }
     
-CameraComponent::CameraComponent(const FRect& orthoPlane, float nearZ, float farZ) :
+CameraComponent::CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
     m_camera(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
 {
     Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
@@ -30,7 +30,7 @@ CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, fl
 
 CameraComponent::~CameraComponent()
 {
-    Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().RemoveCamera(m_camera);
+//    Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().RemoveCamera(m_camera);
 }
 
 void CameraComponent::Update()

@@ -13,21 +13,22 @@ public:
 public:
     IntroGameScene()
     {
+        using tgon::Rect;
+        
         auto camera = std::make_shared<GameObject>("camera1");
         {
             auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
             float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
 
-            camera->AddComponent<CameraComponent>(FRect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1.0f, 1024.0f);
+            camera->AddComponent<CameraComponent>(Rect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1.0f, 1024.0f);
         }
         this->AddObject(camera);
 
         auto sprite = std::make_shared<GameObject>("sprite1");
         {
             sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/f47d1590fe3a8874fc5ea8f3a76fb5df.png");
-            
-//            sprite->GetTransform().SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+            sprite->GetTransform().SetScale({5.f, 6.32f, 1.0f});
         }
 
         this->AddObject(sprite);
