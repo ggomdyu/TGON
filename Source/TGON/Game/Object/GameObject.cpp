@@ -14,6 +14,11 @@ GameObject::GameObject(const FixedHashString32& name) :
 
 void GameObject::Update()
 {
+    if (m_isActivated == false)
+    {
+        return;
+    }
+
     m_transform.Update();
 
     for (auto& component : m_components)
@@ -91,6 +96,16 @@ Transform& GameObject::GetTransform() noexcept
 const Transform& GameObject::GetTransform() const noexcept
 {
     return m_transform;
+}
+
+void GameObject::SetActivate(bool isActivate)
+{
+    m_isActivated = isActivate;
+}
+
+bool GameObject::IsActivated() const noexcept
+{
+    return m_isActivated;
 }
 
 } /*namespace tgon*/

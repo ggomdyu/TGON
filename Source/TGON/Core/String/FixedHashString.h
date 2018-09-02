@@ -1,5 +1,5 @@
 /**
- * @file    StringViewHash.h
+ * @file    FixedHashString.h
  * @author  ggomdyu
  * @date    05/30/2018
  */

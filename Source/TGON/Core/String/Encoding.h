@@ -1,7 +1,7 @@
 /**
- * @filename    Encoding.h
- * @author      ggomdyu
- * @since       04/09/2017
+ * @file    Encoding.h
+ * @author  ggomdyu
+ * @since   04/09/2017
  */
 
 #pragma once

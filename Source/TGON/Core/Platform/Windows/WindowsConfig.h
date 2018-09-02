@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsConfig.h
- * @author      ggomdyu
- * @since       04/24/2016
+ * @file    WindowsConfig.h
+ * @author  ggomdyu
+ * @since   04/24/2016
  */
 
 #pragma once

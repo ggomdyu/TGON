@@ -31,13 +31,13 @@ public:
     AudioBuffer();
 
     /**
-     * @brief                   Reads a audio data from the path specified by filePath.
+     * @brief   Reads a audio data from the path specified by filePath.
      * @param [in] filePath     The file path of audio
      */
     explicit AudioBuffer(const std::string& filePath);
 
     /**
-     * @brief                   Reads a audio file data from memory.
+     * @brief   Reads a audio file data from memory.
      * @param [in] filePath     The file path of audio file
      * @param [in] srcData      The pointer to audio data
      * @param [in] srcDataBytes The bytes of audio data
@@ -46,7 +46,7 @@ public:
     AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
     
     /**
-     * @brief                   Reads a audio file data from memory.
+     * @brief   Reads a audio file data from memory.
      * @param [in] filePath     The file path of audio source
      * @param [in] srcData      The pointer to audio data
      * @param [in] srcDataBytes The bytes of audio data
@@ -66,40 +66,40 @@ public:
 /* @section Public method */
 public:
     /**
-     * @brief                   Reads a sound data from the path specified by filePath.
-     * @param [in] filePath     The file path of audio
+     * @brief   Reads a sound data from the path specified by filePath.
+     * @param [in] filePath     The file path of the audio file
      */
     bool Initialize(const std::string& filePath);
 
     /**
-     * @brief                   Reads a audio file data from memory.
-     * @param [in] filePath     The file path of audio file
-     * @param [in] srcData      The pointer to audio data
-     * @param [in] srcDataBytes The bytes of audio data
-     * @param [in] audioFormat  The format of audio
+     * @brief   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of the audio file
+     * @param [in] srcData      The pointer to the audio data
+     * @param [in] srcDataBytes The bytes of the audio data
+     * @param [in] audioFormat  The format of the audio
      */
     bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
     
     /**
-     * @brief                   Reads a audio file data from memory.
-     * @param [in] filePath     The file path of audio source
-     * @param [in] srcData      The pointer to audio data
-     * @param [in] srcDataBytes The bytes of audio data
+     * @brief   Reads a audio file data from memory.
+     * @param [in] filePath     The file path of the audio source
+     * @param [in] srcData      The pointer to the audio data
+     * @param [in] srcDataBytes The bytes of the audio data
      */
     bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 
     bool IsValid() const noexcept;
 
-    /* @brief   Gets the raw data of sound. */
+    /* @brief   Gets the raw data of the sound. */
     const std::vector<uint8_t>& GetSoundData() const noexcept;
 
     /* @brief   Gets bits per sample. */
     int32_t GetBitsPerSample() const noexcept;
 
-    /* @brief   Gets count of sound channel. */
+    /* @brief   Gets the count of sound channel. */
     int32_t GetChannels() const noexcept;
 
-    /* @brief   Gets sampling rate of sound. */
+    /* @brief   Gets the sampling rate of the sound. */
     int32_t GetSamplingRate() const noexcept;
 
     ALenum GetALFormat() const noexcept;
@@ -113,6 +113,7 @@ public:
 /* @section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
+
     bool InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
 
 /* @section Private variable */

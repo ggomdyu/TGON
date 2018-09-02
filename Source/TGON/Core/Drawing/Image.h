@@ -24,19 +24,19 @@ public:
     Image();
 
     /**
-     * @brief                   Reads an image data from the specified path.
+     * @brief   Reads an image data from the specified path.
      * @param [in] filePath     The file path of image
      */
     explicit Image(const std::string& filePath);
 
     /**
-     * @brief                   Reads an image data from the specified path.
+     * @brief   Reads an image data from the specified path.
      * @param [in] filePath     The file path of image
      */
     explicit Image(std::string&& filePath);
 
     /**
-     * @brief                   Reads an image data from memory.
+     * @brief   Reads an image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
@@ -44,7 +44,7 @@ public:
     Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     /**
-     * @brief                   Reads an image data from memory.
+     * @brief   Reads an image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
@@ -61,68 +61,68 @@ public:
 
     Image& operator=(Image&& rhs);
 
-    /* @brief                   Gets the raw pointer of image. */
+    /* @brief   Gets the raw pointer of image. */
     uint8_t& operator[](std::size_t index);
 
-    /* @brief                   Gets the raw pointer of image. */
+    /* @brief   Gets the raw pointer of image. */
     const uint8_t operator[](std::size_t index) const;
 
 /* @section Public method */
 public:
-    /* @brief                   Checks the image file was loaded successfully. */
+    /* @brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
-    /* @brief                   Gets the raw image data. */
+    /* @brief   Gets the raw image data. */
     uint8_t* GetImageData() noexcept;
 
-    /* @brief                   Gets the raw image data. */
+    /* @brief   Gets the raw image data. */
     const uint8_t* GetImageData() const noexcept;
     
-    /* @brief                   Gets the image width. */
+    /* @brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
 
-    /* @brief                   Gets the image height. */
+    /* @brief   Gets the image height. */
     int32_t GetHeight() const noexcept;
 
-    /* @brief                   Gets the count of color channel. */
+    /* @brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
 
-    /* @brief                   Gets the pixel format of image. */
+    /* @brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
 
     /**
-     * @brief                   Gets the file path saved at loading time.
-     * @warn                    It can be incorrect if the file moved somewhere after image loaded.
+     * @brief   Gets the file path saved at loading time.
+     * @warn    It can be incorrect if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
 
     /**
-     * @brief                   Saves the image as PNG.
+     * @brief   Saves the image as PNG.
      * @param [in] saveFilePath The path to the file where you want to save the image.  
-     * @return                  Returns true if the save was saved successfully, false otherwise.
+     * @return  Returns true if the save was saved successfully, false otherwise.
      */
     bool SaveAsPng(const char* saveFilePath);
 
     /**
-     * @brief                   Saves the image as JPEG.
+     * @brief   Saves the image as JPEG.
      * @param [in] saveFilePath The path to the file where you want to save the image.  
      * @param [in] quality      The quality of JPEG image. It has value between 1 and 100.
                                 Higher quality is looks better but the file size is also bigger.
-     * @return                  Returns true if the save was saved successfully, false otherwise.
+     * @return  Returns true if the save was saved successfully, false otherwise.
      */
     bool SaveAsJpeg(const char* saveFilePath, int32_t quality);
 
     /**
-     * @brief                   Saves the image as BMP.
+     * @brief   Saves the image as BMP.
      * @param [in] saveFilePath The path to the file where you want to save the image.  
-     * @return                  Returns true if the save was saved successfully, false otherwise.
+     * @return  Returns true if the save was saved successfully, false otherwise.
      */
     bool SaveAsBmp(const char* saveFilePath);
 
     /**
-     * @brief                   Saves the image as TGA.
+     * @brief   Saves the image as TGA.
      * @param [in] saveFilePath The path to the file where you want to save the image.  
-     * @return                  Returns true if the save was saved successfully, false otherwise.
+     * @return  Returns true if the save was saved successfully, false otherwise.
      */
     bool SaveAsTga(const char* saveFilePath);
 

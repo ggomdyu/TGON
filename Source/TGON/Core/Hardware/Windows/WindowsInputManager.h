@@ -1,21 +1,24 @@
 /**
- * @filename    WindowsInputManager.h
- * @author      ggomdyu
- * @since       05/15/2018
+ * @file    WindowsInputManager.h
+ * @author  ggomdyu
+ * @since   05/15/2018
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <OIS.h>
 
 #include "Core/Platform/Window.h"
+#include "Core/Object/CoreObject.h"
 
 namespace tgon
 {
 
 class TGON_API InputManagerImpl final :
-    private boost::noncopyable
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(InputManagerImpl);
+
 /* @section Public constructor */
 public:
     explicit InputManagerImpl(const Window& inputTarget);

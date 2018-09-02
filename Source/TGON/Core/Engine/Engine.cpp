@@ -11,7 +11,7 @@ namespace tgon
 {
 
 Engine::Engine() :
-    m_timeModule(std::make_unique<TimeModule>())
+    m_timeModule(std::make_shared<TimeModule>())
 {
 }
 
@@ -25,9 +25,9 @@ void Engine::OnWillTerminate()
 {
 }
 
-void Engine::AddModule(std::unique_ptr<IModule> module)
+void Engine::RegisterModule(IModule* module)
 {
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     });
@@ -35,15 +35,15 @@ void Engine::AddModule(std::unique_ptr<IModule> module)
     m_modules.emplace(iter, std::move(module));
 }
 
-IModule* Engine::FindModule(size_t moduleId)
+std::shared_ptr<IModule> Engine::FindModule(size_t moduleId)
 {
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     });
     if (iter != m_modules.end())
     {
-        return (*iter).get();
+        return *iter;
     }
     else
     {
@@ -51,9 +51,9 @@ IModule* Engine::FindModule(size_t moduleId)
     }
 }
 
-bool Engine::RemoveModule(size_t moduleId)
+bool Engine::UnregisterModule(size_t moduleId)
 {
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::unique_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     });

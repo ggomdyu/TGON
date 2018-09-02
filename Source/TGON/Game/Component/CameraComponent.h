@@ -1,5 +1,5 @@
 /**
- * @file    MeshRendererComponent.h
+ * @file    CameraComponent.h
  * @author  ggomdyu
  * @since   08/11/2018
  */

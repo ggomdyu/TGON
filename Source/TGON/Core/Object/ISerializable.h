@@ -1,8 +1,7 @@
 /**
- * @filename    ICloneable.h
- * @author      ggomdyu
- * @since       10/28/2017
- * @brief       Interface class for virtual copy constructor.
+ * @file    ISerializable.h
+ * @author  ggomdyu
+ * @since   10/28/2017
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsMouse.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    WindowsMouse.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

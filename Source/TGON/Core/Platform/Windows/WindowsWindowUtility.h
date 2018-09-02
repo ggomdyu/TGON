@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsWindowUtility.h
- * @author      ggomdyu
- * @since       11/12/2015
+ * @file    WindowsWindowUtility.h
+ * @author  ggomdyu
+ * @since   11/12/2015
  */
 
 #pragma once

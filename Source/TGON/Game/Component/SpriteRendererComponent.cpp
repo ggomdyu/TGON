@@ -28,4 +28,34 @@ void SpriteRendererComponent::Update()
     m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, {GetOwner()->GetTransform().GetWorldMatrix()});
 }
 
+void SpriteRendererComponent::SetBlendColor(const Color4f& blendColor)
+{
+    m_material->SetBlendColor(blendColor);
+}
+
+Color4f& SpriteRendererComponent::GetBlendColor() noexcept
+{
+    return m_material->GetBlendColor();
+}
+
+const Color4f& SpriteRendererComponent::GetBlendColor() const noexcept
+{
+    return m_material->GetBlendColor();
+}
+
+void SpriteRendererComponent::SetSprite(const Sprite& sprite)
+{
+    m_sprite = sprite;
+}
+
+Sprite& SpriteRendererComponent::GetSprite() noexcept
+{
+    return m_sprite;
+}
+
+const Sprite& SpriteRendererComponent::GetSprite() const noexcept
+{
+    return m_sprite;
+}
+
 } /* namespace tgon */

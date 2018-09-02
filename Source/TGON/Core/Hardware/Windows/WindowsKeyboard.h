@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsKeyboard.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    WindowsKeyboard.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

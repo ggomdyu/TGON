@@ -1,7 +1,7 @@
 /**
- * @filename    WindowType.h
- * @author      ggomdyu
- * @since       05/05/2017
+ * @file    WindowType.h
+ * @author  ggomdyu
+ * @since   05/05/2017
  */
 
 #pragma once

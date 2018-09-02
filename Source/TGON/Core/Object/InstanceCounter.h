@@ -1,8 +1,8 @@
 /**
- * @filename    InstanceCounter.h
- * @author      ggomdyu
- * @since       06/06/2018
- * @brief       Set of functions to manage the count of object instace.
+ * @file    InstanceCounter.h
+ * @author  ggomdyu
+ * @since   06/06/2018
+ * @brief   Set of functions to manage the count of object instace.
  */
 
 #pragma once

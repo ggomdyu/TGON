@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsGamepad.h
- * @author      ggomdyu
- * @since       06/02/2018
+ * @file    WindowsGamepad.h
+ * @author  ggomdyu
+ * @since   06/02/2018
  */
 
 #pragma once

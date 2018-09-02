@@ -1,8 +1,8 @@
 /**
- * @filename    WindowsWindow.h
- * @author      ggomdyu
- * @since       01/09/2016
- * @brief       The platform specific window class implementation.
+ * @file    WindowsWindow.h
+ * @author  ggomdyu
+ * @since   01/09/2016
+ * @brief   The platform specific window class implementation.
  */
 
 #pragma once

@@ -1,5 +1,5 @@
 /**
- * @file    Scene.h
+ * @file    RenderStage.h
  * @author  ggomdyu
  * @since   06/16/2018
  */

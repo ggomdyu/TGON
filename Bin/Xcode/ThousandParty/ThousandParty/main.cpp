@@ -11,40 +11,47 @@ public:
     TGON_RUNTIME_OBJECT(IntroGameScene);
 
 public:
-    IntroGameScene()
+    IntroGameScene() :
+        m_cameraObject(std::make_shared<GameObject>("camera1")),
+        m_introSpriteObject1(std::make_shared<GameObject>("introSprite1")),
+        m_introSpriteObject2(std::make_shared<GameObject>("introSprite2"))
     {
-        using tgon::Rect;
-        
-        auto camera = std::make_shared<GameObject>("camera1");
+        // 카메라 생성
         {
-            auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
-            float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
-            float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-
-            camera->AddComponent<CameraComponent>(Rect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1.0f, 1024.0f);
+            const I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
+            const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+            const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+            m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1.0f, 1024.0f));
         }
-        this->AddObject(camera);
+        this->AddObject(m_cameraObject);
 
-        auto sprite = std::make_shared<GameObject>("sprite1");
+        // Intro에 사용할 Sprite 생성
         {
-            sprite->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/f47d1590fe3a8874fc5ea8f3a76fb5df.png");
-            sprite->GetTransform().SetScale({11.78f, 7.63f, 1.0f});
+            auto spriteRendererComponent = new SpriteRendererComponent(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+            spriteRendererComponent->SetBlendColor({1.0f, 1.0f, 1.0f, 0.5f});
+            m_introSpriteObject1->AddComponent(spriteRendererComponent);
         }
+        this->AddObject(m_introSpriteObject1);
 
-        this->AddObject(sprite);
-        s.Start();
+        // Intro에 사용할 Sprite 생성
+        {
+            //m_introSpriteObject2->AddComponent(new SpriteRendererComponent(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png"));
+        }
+        //this->AddObject(m_introSpriteObject2);
     }
-    Stopwatch s;
+
     virtual void Update() override
     {
         SuperType::Update();
 
-        if (s.GetElapsedSeconds() > 3)
-        {
-            Application::GetInstance()->GetRootWindow().SetSize(1200, 600);
-            s.Stop();
-        }
+        
     }
+
+private:
+    Stopwatch m_stopwatch;
+    std::shared_ptr<GameObject> m_cameraObject;
+    std::shared_ptr<GameObject> m_introSpriteObject1;
+    std::shared_ptr<GameObject> m_introSpriteObject2;
 };
 
 class TGON_API ThousandParty final :
@@ -73,7 +80,7 @@ public:
             inputMode.isUseKeyboard = true;
             inputMode.isUseGamepad = false;
         }
-        this->AddModule<InputModule>(inputMode, rootWindow);
+        this->RegisterModule(new InputModule(inputMode, rootWindow));
         
         VideoMode videoMode;
         {
@@ -83,9 +90,9 @@ public:
             videoMode.enableVerticalSync = false;
             videoMode.enableMultiSampling = false;
         };
-        this->AddModule<GraphicsModule>(rootWindow, videoMode);
-        this->AddModule<GameSceneModule>(std::make_unique<IntroGameScene>());
-        this->AddModule<TimeModule>();
+        this->RegisterModule(new GraphicsModule(rootWindow, videoMode));
+        this->RegisterModule(new GameSceneModule(std::make_unique<IntroGameScene>()));
+        this->RegisterModule(new TimeModule());
     }
 
 /* @section Public method */

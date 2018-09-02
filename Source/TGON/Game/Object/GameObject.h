@@ -44,10 +44,9 @@ public:
 
     /**
      * @brief   Inserts a component to manage.
-     * @param [in] args     Parameters of the _ComponentType constructor.
+     * @param [in] component    The component to insert.
      */
-    template <typename _ComponentType, typename... _ArgTypes>
-    void AddComponent(_ArgTypes&&... args);
+    void AddComponent(Component* component);
 
     /**
      * @brief   Removes the managed component.
@@ -85,14 +84,17 @@ public:
     /* @brief   Gets the transform. */
     const Transform& GetTransform() const noexcept;
 
+    /**
+     * @brief   Sets this object activate or deactivate.
+     * @details If this object deactivated, the object will not be updated.
+     */
+    void SetActivate(bool isActivate);
+
+    /* @brief   Gets the state for whether this object has been activated or deactivated. */
+    bool IsActivated() const noexcept;
+
 /* @section Private method */
 private:
-    /**
-     * @brief   Inserts a component to manage.
-     * @param [in] component    The component to insert.
-     */
-    void AddComponent(Component* component);
-
     /**
      * @brief   Removes the managed component.
      * @param [in] componentId  The unique id of component to get.
@@ -108,6 +110,8 @@ private:
 
 /* @section Private variable */
 private:
+    bool m_isActivated;
+
     FixedHashString32 m_name;
 
     std::vector<std::unique_ptr<Component>> m_components;
@@ -125,12 +129,6 @@ template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _
 inline _ComponentType* GameObject::GetComponent()
 {
     return static_cast<_ComponentType*>(GetComponentId<_ComponentType>());
-}
-
-template <typename _ComponentType, typename... _ArgTypes>
-inline void GameObject::AddComponent(_ArgTypes&&... args)
-{
-    this->AddComponent(new _ComponentType(std::forward<_ArgTypes>(args)...));
 }
 
 template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>

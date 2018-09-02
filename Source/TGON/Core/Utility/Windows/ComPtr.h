@@ -1,7 +1,7 @@
 /**
- * @filename    ComPtr.h
- * @author      ggomdyu
- * @since       05/17/2016
+ * @file    ComPtr.h
+ * @author  ggomdyu
+ * @since   05/17/2016
  */
 
 #pragma once

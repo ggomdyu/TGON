@@ -1,7 +1,7 @@
 /**
- * @file    GraphicsModule.h
+ * @file    GameScene.h
  * @author  ggomdyu
- * @since   07/24/2016
+ * @since   08/19/2016
  */
 
 #pragma once

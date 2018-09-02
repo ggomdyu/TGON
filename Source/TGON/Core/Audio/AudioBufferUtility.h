@@ -1,5 +1,5 @@
 /**
- * @file    ImageUtility.h
+ * @file    AudioBufferUtility.h
  * @author  ggomdyu
  * @since   04/10/2018
  */

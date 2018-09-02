@@ -1,7 +1,7 @@
 /**
- * @file    OpenGLShader.h
+ * @file    OpenGLRenderTarget.h
  * @author  ggomdyu
- * @since   01/06/2018
+ * @since   07/14/2018
  * @see     https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenFramebuffers.xhtml
  *          https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glFramebufferRenderbuffer.xhtml
  *          https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glCheckFramebufferStatus.xhtml

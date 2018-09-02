@@ -1,7 +1,7 @@
 /**
- * @filename    WindowsApplication.h
- * @author      ggomdyu
- * @since       02/13/2018
+ * @file    WindowsApplication.h
+ * @author  ggomdyu
+ * @since   02/13/2018
  */
 
 #pragma once

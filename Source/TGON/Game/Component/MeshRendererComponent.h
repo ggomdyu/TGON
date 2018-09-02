@@ -48,8 +48,7 @@ public:
 private:
     std::shared_ptr<Mesh> m_mesh;
     std::shared_ptr<Material> m_material;
-
-    GraphicsModule* m_graphicsModule;
+    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

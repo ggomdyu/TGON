@@ -1,5 +1,5 @@
 /**
- * @file    SpriteBatch.h
+ * @file    Batch.h
  * @author  ggomdyu
  * @since   06/03/2018
  */
