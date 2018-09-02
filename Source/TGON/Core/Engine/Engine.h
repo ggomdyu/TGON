@@ -14,7 +14,7 @@
     namespace tgon\
     {\
     \
-    std::unique_ptr<Engine> MakeEngine()\
+    std::unique_ptr<Engine> CreateEngine()\
     {\
         static_assert(std::is_base_of<Engine, className>::value, "TGON_DECLARE_ENGINE accepts only class that inherited from Engine.");\
         return std::make_unique<className>();\
@@ -41,9 +41,6 @@ public:
     
 /* @section Public method */
 public:
-    /* @brief   Gets the global instance of this class. */
-    static Engine* GetInstance();
-    
     /* @brief   Updates the Engine. */
     virtual void Update();
     

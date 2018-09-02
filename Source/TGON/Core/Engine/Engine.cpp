@@ -9,8 +9,6 @@
 
 namespace tgon
 {
-    
-extern std::unique_ptr<Engine> MakeEngine();
 
 Engine::Engine() :
     m_timeModule(std::make_unique<TimeModule>())
@@ -19,12 +17,6 @@ Engine::Engine() :
 
 Engine::~Engine() = default;
 
-Engine* Engine::GetInstance()
-{
-    static decltype(auto) instance = MakeEngine();
-    return instance.get();
-}
-    
 void Engine::OnDidLaunch()
 {
 }

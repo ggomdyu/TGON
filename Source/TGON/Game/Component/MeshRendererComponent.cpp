@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Engine/Engine.h"
+#include "Core/Platform/Application.h"
 
 #include "MeshRendererComponent.h"
 
@@ -12,7 +12,7 @@ namespace tgon
 MeshRendererComponent::MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material) :
     m_mesh(mesh),
     m_material(material),
-    m_graphicsModule(Engine::GetInstance()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
 {
 }
 

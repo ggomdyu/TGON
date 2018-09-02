@@ -10,7 +10,7 @@
 namespace tgon
 {
  
-class WindowImpl;
+class MacOSWindow;
     
 } /* namespace tgon */
 
@@ -18,8 +18,8 @@ class WindowImpl;
 {
 }
 
-@property (readonly, assign) tgon::WindowImpl* window;
+@property (readonly, assign) tgon::MacOSWindow* window;
 
-- (id)initWithWindow:(tgon::WindowImpl*)window;
+- (id)initWithWindow:(tgon::MacOSWindow*)window;
 
 @end

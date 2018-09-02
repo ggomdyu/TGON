@@ -6,8 +6,11 @@
 
 namespace tgon
 {
+    
+extern std::unique_ptr<Engine> CreateEngine();
 
 Application::Application() :
+    m_engine(CreateEngine()),
     m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {
     SrandWELL1024a();
@@ -23,6 +26,7 @@ void Application::MessageLoop()
 {
     PlatformApplication::MessageLoop([&]()
     {
+        m_engine->Update();
     });
 }
 

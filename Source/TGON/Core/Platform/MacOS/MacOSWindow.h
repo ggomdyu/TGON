@@ -6,13 +6,10 @@
  */
 
 #pragma once
-#import <boost/noncopyable.hpp>
-
-#import "Core/Platform/Config.h"
+#import "Core/Object/CoreObject.h"
 #import "Core/Object/DelegateChain.h"
 
 #import "../WindowType.h"
-
 
 @class NSWindow;
 @class WindowDelegate;
@@ -20,21 +17,24 @@
 namespace tgon
 {
 
-class TGON_API WindowImpl final :
-    private boost::noncopyable
+class TGON_API MacOSWindow :
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(MacOSWindow);
+    
 /* @section Public constructor */
 public:
-    explicit WindowImpl(const WindowStyle& windowStyle);
-    WindowImpl(WindowImpl&& rhs) noexcept;
+    explicit MacOSWindow(const WindowStyle& windowStyle);
+    MacOSWindow(MacOSWindow&& rhs) noexcept;
     
 /* @section Public operator */
 public:
-    WindowImpl& operator=(WindowImpl&& rhs) noexcept;
+    MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
     
 /* @section Public destructor */
 public:
-    ~WindowImpl();
+    ~MacOSWindow();
     
 /* @section Public method */
 public:
@@ -79,5 +79,7 @@ private:
     NSWindow* m_nsWindow;
     WindowDelegate* m_nsWindowDelegate;
 };
+    
+using PlatformWindow = MacOSWindow;
 
 } /* namespace tgon */

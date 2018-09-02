@@ -1,16 +1,8 @@
 #import "PrecompiledHeader.h"
 
 #import "Core/Platform/Application.h"
-#import "Core/Engine/Engine.h"
 
 #import "MacOSAppDelegate.h"
-
-namespace tgon
-{
-    
-extern std::unique_ptr<Engine> MakeEngine();
-
-} /* namespace tgon */
 
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
@@ -19,8 +11,7 @@ extern std::unique_ptr<Engine> MakeEngine();
     
     // Initialize singleton objects.
     decltype(auto) application = Application::GetInstance();
-    decltype(auto) engine = Engine::GetInstance();
-    
+
     application->OnDidLaunch();
 }
 
@@ -28,13 +19,8 @@ extern std::unique_ptr<Engine> MakeEngine();
 {
     using namespace tgon;
     
-    decltype(auto) engine = Engine::GetInstance();
-    
     // If launch has been completed, then start the message loop.
-    Application::GetInstance()->MessageLoop([engine]()
-    {
-        engine->Update();
-    });
+    Application::GetInstance()->MessageLoop();
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification

@@ -5,25 +5,30 @@
  */
 
 #pragma once
-#import <boost/noncopyable.hpp>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
 #import "Core/Platform/Config.h"
+#import "Core/Object/CoreObject.h"
 
 #import "MacOSApplicationType.h"
 
 namespace tgon
 {
 
-class TGON_API ApplicationImpl final :
-    private boost::noncopyable
+class TGON_API MacOSApplication :
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(MacOSApplication);
+    
 /* @section Public method */
 public:
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
+    
     void Terminate();
+    
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
 /* @section Public event handler */
@@ -31,8 +36,10 @@ public:
     void OnHandleMessage(NSEvent* message);
 };
 
+using PlatformApplication = MacOSApplication;
+    
 template <typename _FunctionType>
-inline void ApplicationImpl::MessageLoop(const _FunctionType& onUpdate)
+inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdate)
 {
     NSEvent* event = nil;
     while (true)

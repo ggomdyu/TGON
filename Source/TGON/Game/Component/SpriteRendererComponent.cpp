@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Engine/Engine.h"
+#include "Core/Platform/Application.h"
 
 #include "SpriteRendererComponent.h"
 
@@ -12,14 +12,14 @@ namespace tgon
 SpriteRendererComponent::SpriteRendererComponent(const std::string& filePath) :
     m_sprite(filePath),
     m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-    m_graphicsModule(Engine::GetInstance()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
 {
 }
 
 SpriteRendererComponent::SpriteRendererComponent(std::string&& filePath) :
     m_sprite(std::move(filePath)),
     m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-    m_graphicsModule(Engine::GetInstance()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
 {
 }
 

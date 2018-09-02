@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Engine/Engine.h"
+#include "Core/Platform/Application.h"
 #include "Graphics/Engine/GraphicsModule.h"
 
 #include "../Object/GameObject.h"
@@ -13,19 +13,19 @@ namespace tgon
 CameraComponent::CameraComponent() :
     m_camera(std::make_shared<Camera>())
 {
-    Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
+    Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
 }
     
 CameraComponent::CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
     m_camera(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
 {
-    Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
+    Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
 }
     
 CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) :
     m_camera(std::make_shared<Camera>(eyePt, lookAt, fov, nearZ, farZ))
 {
-    Engine::GetInstance()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
+    Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(m_camera);
 }
 
 CameraComponent::~CameraComponent()
