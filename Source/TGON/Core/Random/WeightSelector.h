@@ -16,7 +16,7 @@ namespace tgon
 template <typename _WeightType>
 class WeightSelector
 {
-    static_assert(std::is_arithmetic<_WeightType>::value, "_WeightType must be arithmetic type.");
+    static_assert(std::is_scalar<_WeightType>::value, "_WeightType must be scalar type.");
 
 /* @section Public type */
 public:
