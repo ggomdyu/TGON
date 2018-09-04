@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "Core/Engine/IModule.h"
+#include "Core/debug/Log.h"
 
 #include "GameScene.h"
 
@@ -27,27 +28,38 @@ public:
 /* @section Public method */
 public:
     /* @brief   Updates the frame of scene. */
-    virtual void Update() final override;
-    
+    virtual void Update() override
+    {
+        m_currentScene->Update();
+    }
+
     /* @brief   Changes the current scene. */
-    void ChangeScene(GameScene* scene);
+    template <typename _SceneType, typename... _ArgTypes>
+    void ChangeScene(_ArgTypes&&... args)
+    {
+        m_currentScene = std::make_unique<_SceneType>(std::forward<_ArgTypes>(args)...);
+    }
 
     /**
      * @brief   Returns the current managed scene.
      * @return  The reference to scene.
      */
-    const GameScene& GetCurrentScene() const noexcept;
-    
+    const GameScene& GetCurrentScene() const noexcept
+    {
+        return *m_currentScene;
+    }
+
     /**
      * @brief   Returns the current managed scene.
      * @return  The reference to scene.
      */
-    GameScene& GetCurrentScene() noexcept;
+    GameScene& GetCurrentScene() noexcept
+    {
+        return *m_currentScene;
+    }
     
 /* @section Private method */
 private:
-    /* @brief   Draws the managed scene. */
-    void Draw();
 
 /* @section Private variable */
 private:

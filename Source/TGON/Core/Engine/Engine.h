@@ -51,7 +51,7 @@ public:
      * @brief   Registers a module to manage through this engine.
      * @param [in] args     Parameters of the _ModuleType constructor.
      */
-    template <typename _ModuleType, typename ..._ArgTypes>
+    template <typename _ModuleType, typename... _ArgTypes>
     std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args)
     {
         return std::static_pointer_cast<_ModuleType>(this->RegisterModule(new _ModuleType(std::forward<_ArgTypes>(args)...)));
