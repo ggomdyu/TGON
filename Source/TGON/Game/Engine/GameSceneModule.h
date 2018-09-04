@@ -20,10 +20,6 @@ class TGON_API GameSceneModule final :
 public:
     TGON_RUNTIME_OBJECT(GameSceneModule);
 
-public:
-    GameSceneModule();
-    GameSceneModule(std::unique_ptr<GameScene> scene);
-
 /* @section Public destructor */
 public:
     virtual ~GameSceneModule() final override = default;
@@ -34,7 +30,7 @@ public:
     virtual void Update() final override;
     
     /* @brief   Changes the current scene. */
-    void ChangeScene(std::unique_ptr<GameScene> scene);
+    void ChangeScene(GameScene* scene);
 
     /**
      * @brief   Returns the current managed scene.
@@ -50,7 +46,7 @@ public:
     
 /* @section Private method */
 private:
-    /* @brief   Draws the frame of Scene. */
+    /* @brief   Draws the managed scene. */
     void Draw();
 
 /* @section Private variable */

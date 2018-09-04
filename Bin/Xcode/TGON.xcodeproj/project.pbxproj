@@ -67,7 +67,6 @@
 		FD53380320E4018500515DA4 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE73F5720CAE6B60026F3D3 /* Application.cpp */; };
 		FD53380420E4018500515DA4 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC877FF20CEA1BC00C8CA9A /* Window.cpp */; };
 		FD53380520E4018500515DA4 /* WELL1024a.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD06732E20B4258C00BEA737 /* WELL1024a.cpp */; };
-		FD53380620E4018500515DA4 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD099A2E20BC52F7003E0746 /* EventDispatcher.cpp */; };
 		FD53380720E4018500515DA4 /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD19EBD820DDEE6D00C5EC4A /* ThreadPool.cpp */; };
 		FD53380B20E4018500515DA4 /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693920AFA84600791E10 /* OpenGLGraphics.cpp */; };
 		FD53380C20E4018500515DA4 /* OpenGLIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693420AFA84600791E10 /* OpenGLIndexBuffer.cpp */; };
@@ -79,6 +78,14 @@
 		FD53381520E4018500515DA4 /* MeshUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E695D20AFA8CC00791E10 /* MeshUtility.cpp */; };
 		FD53381B20E4018500515DA4 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD39DB3520C9703700C07251 /* GameObject.cpp */; };
 		FD53381F20E4027000515DA4 /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD53381E20E4027000515DA4 /* MacOSApplication.mm */; };
+		FD5A1483213C4EAC00175B48 /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A147E213C4EAA00175B48 /* InstantiateCounter.h */; };
+		FD5A1484213C4EAC00175B48 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD5A147F213C4EAB00175B48 /* EventDispatcher.cpp */; };
+		FD5A1485213C4EAC00175B48 /* InstanceCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A1480213C4EAB00175B48 /* InstanceCounter.h */; };
+		FD5A1486213C4EAC00175B48 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A1481213C4EAB00175B48 /* EventDispatcher.h */; };
+		FD5A1487213C4EAC00175B48 /* AutoCast.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A1482213C4EAB00175B48 /* AutoCast.h */; };
+		FD5A1489213C4EC300175B48 /* Stopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A1488213C4EC300175B48 /* Stopwatch.h */; };
+		FD5A148B213C4ED100175B48 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD5A148A213C4ED100175B48 /* Time.cpp */; };
+		FD5A148D213C4EEE00175B48 /* WeightSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A148C213C4EEE00175B48 /* WeightSelector.h */; };
 		FD612BA820E3FFC2006FE85E /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD612BA720E3FFC2006FE85E /* MacOSWindow.h */; };
 		FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */ = {isa = PBXBuildFile; fileRef = FD64DC992138568D003B7D0A /* Rhombus.h */; };
 		FD7EA6E020B094CA00A76C69 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DB20B094C900A76C69 /* Image.h */; };
@@ -184,11 +191,7 @@
 		FD06730A20B4258C00BEA737 /* FStateMachine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = FStateMachine.h; sourceTree = "<group>"; };
 		FD06730B20B4258C00BEA737 /* RAII.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RAII.h; sourceTree = "<group>"; };
 		FD06730C20B4258C00BEA737 /* Algorithm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Algorithm.h; sourceTree = "<group>"; };
-		FD06730D20B4258C00BEA737 /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TypeTraits.h; sourceTree = "<group>"; };
-		FD06730E20B4258C00BEA737 /* InstantiateCounter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InstantiateCounter.h; sourceTree = "<group>"; };
-		FD06730F20B4258C00BEA737 /* Stopwatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Stopwatch.h; sourceTree = "<group>"; };
 		FD06731020B4258C00BEA737 /* StaticIf.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = StaticIf.h; sourceTree = "<group>"; };
-		FD06731620B4258C00BEA737 /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AutoCast.h; sourceTree = "<group>"; };
 		FD06731720B4258C00BEA737 /* ExpressionTemplate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ExpressionTemplate.h; sourceTree = "<group>"; };
 		FD06731D20B4258C00BEA737 /* FixedString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixedString.h; sourceTree = "<group>"; };
 		FD06731E20B4258C00BEA737 /* StringTraits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringTraits.h; sourceTree = "<group>"; };
@@ -230,7 +233,6 @@
 		FD08C52520352C0100355346 /* MacOSWindowUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSWindowUtility.h; sourceTree = "<group>"; };
 		FD08C52620352C0100355346 /* MacOSWindowUtility.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSWindowUtility.mm; sourceTree = "<group>"; };
 		FD08C52720352C7200355346 /* MacOSApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSApplication.h; sourceTree = "<group>"; };
-		FD099A2E20BC52F7003E0746 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventDispatcher.cpp; sourceTree = "<group>"; };
 		FD10725B20C19E0C0098E76D /* libgainputstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgainputstatic.a; path = ../ThirdParty/Debug/x86_64/libgainputstatic.a; sourceTree = "<group>"; };
 		FD13BB1720E8677D001A1E15 /* DelegateChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateChain.h; sourceTree = "<group>"; };
 		FD17740F20CAFC1C00D2F893 /* MacOSApplicationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSApplicationType.h; sourceTree = "<group>"; };
@@ -263,10 +265,17 @@
 		FD41922C20DA854500536815 /* RuntimeObjectUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObjectUtility.h; sourceTree = "<group>"; };
 		FD41922F20DA854C00536815 /* CoreObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreObject.h; sourceTree = "<group>"; };
 		FD53381E20E4027000515DA4 /* MacOSApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSApplication.mm; sourceTree = "<group>"; };
+		FD5A147E213C4EAA00175B48 /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstantiateCounter.h; sourceTree = "<group>"; };
+		FD5A147F213C4EAB00175B48 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventDispatcher.cpp; sourceTree = "<group>"; };
+		FD5A1480213C4EAB00175B48 /* InstanceCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceCounter.h; sourceTree = "<group>"; };
+		FD5A1481213C4EAB00175B48 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
+		FD5A1482213C4EAB00175B48 /* AutoCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCast.h; sourceTree = "<group>"; };
+		FD5A1488213C4EC300175B48 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
+		FD5A148A213C4ED100175B48 /* Time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
+		FD5A148C213C4EEE00175B48 /* WeightSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightSelector.h; sourceTree = "<group>"; };
 		FD612BA420E3CA20006FE85E /* OpenGLUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLUtility.h; sourceTree = "<group>"; };
 		FD612BA720E3FFC2006FE85E /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWindow.h; sourceTree = "<group>"; };
 		FD64DC992138568D003B7D0A /* Rhombus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rhombus.h; sourceTree = "<group>"; };
-		FD6A9EE120BC4B9F0078513F /* EventDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		FD7EA6DB20B094C900A76C69 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image.h; path = ../../Source/TGON/Core/Drawing/Image.h; sourceTree = "<group>"; };
 		FD7EA6DC20B094CA00A76C69 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image.cpp; path = ../../Source/TGON/Core/Drawing/Image.cpp; sourceTree = "<group>"; };
 		FD7EA6DD20B094CA00A76C69 /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawing.h; path = ../../Source/TGON/Core/Drawing/Drawing.h; sourceTree = "<group>"; };
@@ -445,14 +454,8 @@
 				FD06730A20B4258C00BEA737 /* FStateMachine.h */,
 				FD06730B20B4258C00BEA737 /* RAII.h */,
 				FD06730C20B4258C00BEA737 /* Algorithm.h */,
-				FD06730D20B4258C00BEA737 /* TypeTraits.h */,
-				FD06730E20B4258C00BEA737 /* InstantiateCounter.h */,
-				FD06730F20B4258C00BEA737 /* Stopwatch.h */,
 				FD06731020B4258C00BEA737 /* StaticIf.h */,
-				FD06731620B4258C00BEA737 /* AutoCast.h */,
 				FD06731720B4258C00BEA737 /* ExpressionTemplate.h */,
-				FD6A9EE120BC4B9F0078513F /* EventDispatcher.h */,
-				FD099A2E20BC52F7003E0746 /* EventDispatcher.cpp */,
 				FD19EBD820DDEE6D00C5EC4A /* ThreadPool.cpp */,
 				FD19EBD920DDEE6D00C5EC4A /* ThreadPool.h */,
 			);
@@ -479,10 +482,12 @@
 			isa = PBXGroup;
 			children = (
 				FD06732120B4258C00BEA737 /* Time.h */,
+				FD5A148A213C4ED100175B48 /* Time.cpp */,
 				FD06732220B4258C00BEA737 /* MacOS */,
 				FD06732520B4258C00BEA737 /* DateTime.h */,
 				FDBE44D6211C9F4D0055A968 /* DateTime.cpp */,
 				FD06732920B4258C00BEA737 /* DateTimeType.h */,
+				FD5A1488213C4EC300175B48 /* Stopwatch.h */,
 			);
 			name = Time;
 			path = ../../Source/TGON/Core/Time;
@@ -503,6 +508,7 @@
 				FD06732E20B4258C00BEA737 /* WELL1024a.cpp */,
 				FD06732F20B4258C00BEA737 /* WELL1024a.h */,
 				FD06733020B4258C00BEA737 /* Random.h */,
+				FD5A148C213C4EEE00175B48 /* WeightSelector.h */,
 			);
 			name = Random;
 			path = ../../Source/TGON/Core/Random;
@@ -511,6 +517,11 @@
 		FD06733120B4259D00BEA737 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				FD5A1482213C4EAB00175B48 /* AutoCast.h */,
+				FD5A147F213C4EAB00175B48 /* EventDispatcher.cpp */,
+				FD5A1481213C4EAB00175B48 /* EventDispatcher.h */,
+				FD5A1480213C4EAB00175B48 /* InstanceCounter.h */,
+				FD5A147E213C4EAA00175B48 /* InstantiateCounter.h */,
 				FD41922420DA853000536815 /* ICloneable.cpp */,
 				FD41922320DA853000536815 /* ICloneable.h */,
 				FD41922220DA853000536815 /* IComparable.h */,
@@ -933,6 +944,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD81A8A620F122D7006FDAA0 /* OpenGLRenderTarget.h in Headers */,
+				FD5A1485213C4EAC00175B48 /* InstanceCounter.h in Headers */,
 				FD2108B520B93286009FC8F1 /* Hash.h in Headers */,
 				FD85201820C31F2B00C749BC /* MacOSMouseType.h in Headers */,
 				FD0672FE20B4256700BEA737 /* AudioBufferUtility.h in Headers */,
@@ -949,9 +961,11 @@
 				FD41922A20DA853100536815 /* ISerializable.h in Headers */,
 				FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */,
 				FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */,
+				FD5A1489213C4EC300175B48 /* Stopwatch.h in Headers */,
 				FD41922720DA853100536815 /* IComparable.h in Headers */,
 				FDB75ADA20D5891800CC36C4 /* FixedStringUtility.h in Headers */,
 				FDB75AD820D5891200CC36C4 /* FixedStringHash.h in Headers */,
+				FD5A148D213C4EEE00175B48 /* WeightSelector.h in Headers */,
 				FDD3968320D025B70095F1F8 /* MouseType.h in Headers */,
 				FDD3967A20D025B70095F1F8 /* Mouse.h in Headers */,
 				FDBCFA4420E7F96100CBDF0B /* TextureType.h in Headers */,
@@ -1005,6 +1019,7 @@
 				FD612BA820E3FFC2006FE85E /* MacOSWindow.h in Headers */,
 				FD41922D20DA854500536815 /* RuntimeObject.h in Headers */,
 				FDD3968020D025B70095F1F8 /* Gamepad.h in Headers */,
+				FD5A1487213C4EAC00175B48 /* AutoCast.h in Headers */,
 				FD8E694C20AFA84600791E10 /* OpenGLIndexBuffer.h in Headers */,
 				FD8E696320AFA8CD00791E10 /* Mesh.h in Headers */,
 				FD806BBB2110AB74002B9DCB /* IModule.h in Headers */,
@@ -1013,11 +1028,13 @@
 				FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
 				FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */,
+				FD5A1486213C4EAC00175B48 /* EventDispatcher.h in Headers */,
 				FDD3968720D025B70095F1F8 /* KeyboardType.h in Headers */,
 				FDAF475120D6D136004EC9FF /* OggVorbisAudioImporter.h in Headers */,
 				FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */,
 				FDF51BF6210A42A000A81407 /* RenderStage.h in Headers */,
 				FDB75ADE20D5892900CC36C4 /* StringView.h in Headers */,
+				FD5A1483213C4EAC00175B48 /* InstantiateCounter.h in Headers */,
 				FD8E694620AFA84600791E10 /* OpenGLGraphics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1086,6 +1103,7 @@
 				FD5337F320E4018500515DA4 /* Path.cpp in Sources */,
 				FD5337F420E4018500515DA4 /* Hash.cpp in Sources */,
 				FD5337F520E4018500515DA4 /* MacOSGamepad.cpp in Sources */,
+				FD5A148B213C4ED100175B48 /* Time.cpp in Sources */,
 				FDBE7E5B2131C81400B4874C /* Transform.cpp in Sources */,
 				FD5337F620E4018500515DA4 /* MacOSInputManager.cpp in Sources */,
 				FDBCFA3E20E7F96100CBDF0B /* Texture.cpp in Sources */,
@@ -1111,7 +1129,6 @@
 				FD53380320E4018500515DA4 /* Application.cpp in Sources */,
 				FD53380420E4018500515DA4 /* Window.cpp in Sources */,
 				FD53380520E4018500515DA4 /* WELL1024a.cpp in Sources */,
-				FD53380620E4018500515DA4 /* EventDispatcher.cpp in Sources */,
 				FD53380720E4018500515DA4 /* ThreadPool.cpp in Sources */,
 				FDB0E1A12110AD96007A4593 /* GraphicsModule.cpp in Sources */,
 				FD53381F20E4027000515DA4 /* MacOSApplication.mm in Sources */,
@@ -1125,6 +1142,7 @@
 				FD53380F20E4018500515DA4 /* OpenGLVertexBuffer.cpp in Sources */,
 				FD53381020E4018500515DA4 /* Camera.cpp in Sources */,
 				FD53381420E4018500515DA4 /* Mesh.cpp in Sources */,
+				FD5A1484213C4EAC00175B48 /* EventDispatcher.cpp in Sources */,
 				FD53381520E4018500515DA4 /* MeshUtility.cpp in Sources */,
 				FD24D8272120244000CBED64 /* SpriteRendererComponent.cpp in Sources */,
 				FD53381B20E4018500515DA4 /* GameObject.cpp in Sources */,

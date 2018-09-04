@@ -200,11 +200,7 @@ inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, std::size_t st
 template <>
 inline int32_t BasicExtent2D<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
-#endif
+    return this->ToString(destStr, strBufferSize);
 }
 
 template <>

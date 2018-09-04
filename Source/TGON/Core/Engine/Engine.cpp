@@ -25,14 +25,14 @@ void Engine::OnWillTerminate()
 {
 }
 
-void Engine::RegisterModule(IModule* module)
+const std::shared_ptr<IModule>& Engine::RegisterModule(IModule* module)
 {
     auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     });
 
-    m_modules.emplace(iter, std::move(module));
+    return *m_modules.emplace(iter, std::move(module));
 }
 
 std::shared_ptr<IModule> Engine::FindModule(size_t moduleId)

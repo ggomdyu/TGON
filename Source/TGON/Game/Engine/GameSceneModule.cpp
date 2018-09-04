@@ -7,24 +7,14 @@
 namespace tgon
 {
 
-GameSceneModule::GameSceneModule() :
-    GameSceneModule(std::make_unique<GameScene>())
-{
-}
-
-GameSceneModule::GameSceneModule(std::unique_ptr<GameScene> scene) :
-    m_currentScene(std::move(scene))
-{
-}
-
 void GameSceneModule::Update()
 {
     m_currentScene->Update();
 }
 
-void GameSceneModule::ChangeScene(std::unique_ptr<GameScene> scene)
+void GameSceneModule::ChangeScene(GameScene* scene)
 {
-    m_currentScene = std::move(scene);
+    m_currentScene.reset(scene);
 }
 
 const GameScene& GameSceneModule::GetCurrentScene() const noexcept
