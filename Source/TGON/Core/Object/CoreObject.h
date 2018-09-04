@@ -33,35 +33,26 @@ public:
 /* @section Public method */
 public:
     template <typename _Type>
-    void SetExtraData(_Type&& extraData);
+    void SetExtraData(_Type&& extraData)
+    {
+        m_extraData = std::forward<_Type>(extraData);
+    }
     
     template <typename _Type>
-    _Type* GetExtraData();
+    _Type* GetExtraData()
+    {
+        return boost::any_cast<_Type>(&m_extraData);
+    }
     
     template <typename _Type>
-    const _Type* GetExtraData() const;
+    const _Type* GetExtraData() const
+    {
+        return const_cast<CoreObject*>(this)->GetExtraData<_Type>();
+    }
     
 /* @section Private variable */
 private:
     boost::any m_extraData;
 };
-    
-template <typename _Type>
-inline void CoreObject::SetExtraData(_Type&& extraData)
-{
-    m_extraData = std::forward<_Type>(extraData);
-}
-    
-template <typename _Type>
-inline _Type* CoreObject::GetExtraData()
-{
-    return boost::any_cast<_Type>(&m_extraData);
-}
-    
-template <typename _Type>
-inline const _Type* CoreObject::GetExtraData() const
-{
-    return const_cast<CoreObject*>(this)->GetExtraData<_Type>();
-}
 
 } /* namespace tgon */
