@@ -8,7 +8,8 @@ namespace tgon
 {
 
 GameObject::GameObject(const FixedHashString32& name) :
-    m_name(name)
+    m_name(name),
+    m_isActivated(true)
 {
 }
 
@@ -26,34 +27,24 @@ void GameObject::Update()
         component->Update();
     }
 }
-    
-void GameObject::SetName(const FixedHashString32& name)
-{
-    m_name = name;
-}
 
-const FixedHashString32& GameObject::GetName() const noexcept
-{
-    return m_name;
-}
-
-void GameObject::AddComponent(Component* component)
+const std::shared_ptr<Component>& GameObject::AddComponent(Component* component)
 {
     component->SetOwner(this);
 
-    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
+    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
     
     auto iter = std::lower_bound(m_components.begin(), m_components.end(), component->GetRTTI()->GetHashCode(), predicate);
 
-    m_components.emplace(iter, component);
+    return *m_components.emplace(iter, component);
 }
     
 bool GameObject::RemoveComponent(size_t componentId)
 {
-    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
+    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
@@ -72,7 +63,7 @@ bool GameObject::RemoveComponent(size_t componentId)
 
 Component* GameObject::GetComponent(size_t componentId)
 {
-    auto predicate = [&](const std::unique_ptr<Component>& lhs, size_t rhs)
+    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
@@ -86,26 +77,6 @@ Component* GameObject::GetComponent(size_t componentId)
     {
         return nullptr;
     }
-}
-
-Transform& GameObject::GetTransform() noexcept
-{
-    return m_transform;
-}
-
-const Transform& GameObject::GetTransform() const noexcept
-{
-    return m_transform;
-}
-
-void GameObject::SetActivate(bool isActivate)
-{
-    m_isActivated = isActivate;
-}
-
-bool GameObject::IsActivated() const noexcept
-{
-    return m_isActivated;
 }
 
 } /*namespace tgon*/
