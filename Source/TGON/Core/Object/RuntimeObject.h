@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
+#include "Core/Object/TypeTraits.h"
 
 #include "RTTI.h"
 
@@ -27,27 +28,29 @@ public:
 public:
     /* @brief   Gets dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
-
-    /* @brief   Get static bound type information. */
-    template <typename _Type>
-    friend const RTTI* GetRTTI() noexcept;
 };
 
 inline RuntimeObject::~RuntimeObject() = default;
 
 template <typename _Type>
-inline const RTTI* GetRTTI() noexcept
+inline auto GetRTTI() -> typename std::enable_if<IsPureType<_Type>, const RTTI*>::type
 {
-    using ClassType = std::remove_pointer_t<std::decay_t<_Type>>;
+    using PureType = PurifyType<_Type>;
     
-    static_assert(std::is_base_of<RuntimeObject, ClassType>::value, "GetRTTI only accepts template parameter that inherited from RuntimeObject.");
-    
-    static const RTTI rtti(typeid(ClassType), GetRTTI<typename ClassType::SuperType>());
+    static_assert(std::is_base_of<RuntimeObject, PureType>::value, "GetRTTI only accepts template parameter that inherited from RuntimeObject.");
+
+    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
     return &rtti;
+}
+    
+template <typename _Type>
+inline auto GetRTTI() -> typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type
+{
+    return GetRTTI<PurifyType<_Type>>();
 }
 
 template <>
-inline const RTTI* GetRTTI<void>() noexcept
+inline const RTTI* GetRTTI<void>()
 {
     return nullptr;
 }

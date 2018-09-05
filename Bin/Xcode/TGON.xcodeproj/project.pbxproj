@@ -86,6 +86,7 @@
 		FD5A1489213C4EC300175B48 /* Stopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A1488213C4EC300175B48 /* Stopwatch.h */; };
 		FD5A148B213C4ED100175B48 /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD5A148A213C4ED100175B48 /* Time.cpp */; };
 		FD5A148D213C4EEE00175B48 /* WeightSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A148C213C4EEE00175B48 /* WeightSelector.h */; };
+		FD5A148F214057B800175B48 /* TypeTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5A148E214057B800175B48 /* TypeTraits.h */; };
 		FD612BA820E3FFC2006FE85E /* MacOSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = FD612BA720E3FFC2006FE85E /* MacOSWindow.h */; };
 		FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */ = {isa = PBXBuildFile; fileRef = FD64DC992138568D003B7D0A /* Rhombus.h */; };
 		FD7EA6E020B094CA00A76C69 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DB20B094C900A76C69 /* Image.h */; };
@@ -273,6 +274,7 @@
 		FD5A1488213C4EC300175B48 /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stopwatch.h; sourceTree = "<group>"; };
 		FD5A148A213C4ED100175B48 /* Time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
 		FD5A148C213C4EEE00175B48 /* WeightSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightSelector.h; sourceTree = "<group>"; };
+		FD5A148E214057B800175B48 /* TypeTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeTraits.h; sourceTree = "<group>"; };
 		FD612BA420E3CA20006FE85E /* OpenGLUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLUtility.h; sourceTree = "<group>"; };
 		FD612BA720E3FFC2006FE85E /* MacOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacOSWindow.h; sourceTree = "<group>"; };
 		FD64DC992138568D003B7D0A /* Rhombus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rhombus.h; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				FD41922F20DA854C00536815 /* CoreObject.h */,
 				FD06733220B4259D00BEA737 /* Delegate.h */,
 				FD13BB1720E8677D001A1E15 /* DelegateChain.h */,
+				FD5A148E214057B800175B48 /* TypeTraits.h */,
 			);
 			name = Object;
 			path = ../../Source/TGON/Core/Object;
@@ -992,6 +995,7 @@
 				FD85201220C31F2B00C749BC /* MacOSKeyboardType.h in Headers */,
 				FDD3969320D0B3B50095F1F8 /* CameraType.h in Headers */,
 				FD8E696620AFA8D000791E10 /* FVF.h in Headers */,
+				FD5A148F214057B800175B48 /* TypeTraits.h in Headers */,
 				FD806BB82110AB74002B9DCB /* InputModule.h in Headers */,
 				FD0672F520B4256700BEA737 /* AudioPlayer.h in Headers */,
 				FD8E695020AFA84600791E10 /* OpenGLTexture.h in Headers */,

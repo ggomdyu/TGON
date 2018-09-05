@@ -14,7 +14,7 @@
 #include <boost/preprocessor/facilities/overload.hpp>
 #include <boost/preprocessor/facilities/empty.hpp>
 
-#include "Core/Utility/FunctionTraits.h"
+#include "TypeTraits.h"
 
 /**
  * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
