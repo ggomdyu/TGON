@@ -212,10 +212,10 @@ public:
 
         this->OnHandleInput();
         
-        auto elapsedTime = GetTickCount() - m_beginTime;
+        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
         if (elapsedTime >= 9000)
         {
-            m_gameSceneModule->ChangeScene(new IntroScene());
+            m_gameSceneModule->ChangeScene<IntroScene>();
             return;
         }
         else if (elapsedTime >= 8000)
@@ -253,13 +253,13 @@ public:
         decltype(auto) keyboard = m_inputModule->GetKeyboard();
         if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
         {
-            if (GetTickCount() - m_beginTime <= 5000)
+            if (tgon::GetTickCount() - m_beginTime <= 5000)
             {
-                m_beginTime = GetTickCount() - 5000;
+                m_beginTime = tgon::GetTickCount() - 5000;
             }
-            else if (GetTickCount() - m_beginTime <= 9500)
+            else if (tgon::GetTickCount() - m_beginTime <= 9500)
             {
-                m_beginTime = GetTickCount() - 9500;
+                m_beginTime = tgon::GetTickCount() - 9500;
             }
         }
     }
@@ -319,7 +319,7 @@ public:
         
         this->RegisterModule<TimeModule>();
         
-        this->RegisterModule<GameSceneModule>()->ChangeScene(new LogoScene());
+        this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
     }
 
 /* @section Public method */
