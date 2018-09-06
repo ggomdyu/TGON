@@ -69,7 +69,7 @@ inline void WeightSelector<_WeightType>::Add(WeightType weight, const WeightHand
 template <typename _WeightType>
 inline void WeightSelector<_WeightType>::Add(WeightType weight, WeightHandlerType&& handler)
 {
-    assert(weight >= 0 && "weight cannot be negative.");
+    assert(weight >= 0 && "weight cannot be zero or negative.");
 
     m_totalWeight += weight;
     m_weightDescList.push_back(WeightDesc{weight, handler});
