@@ -72,7 +72,7 @@ constexpr auto IsPureType = std::integral_constant<bool,
     !std::is_pointer<_Type>::value>::value;
     
 template <typename _Type>
-using PurifyType = typename std::decay<typename std::remove_pointer<typename std::remove_volatile<_Type>::type>::type>::type;
+using PurifyType = std::decay_t<std::remove_pointer_t<std::remove_volatile_t<_Type>>>;
     
 
 } /* namespace tgon */

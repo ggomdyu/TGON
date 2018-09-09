@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
-#include "Core/Platform/Window.h"
 #include "Core/Debug/Log.h"
 
 #include "OpenGLContext.h"

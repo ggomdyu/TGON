@@ -6,7 +6,6 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN 1
@@ -17,7 +16,6 @@
 #   import <OpenGL/OpenGL.h>
 #endif
 
-#include "Core/Platform/Config.h"
 #include "Core/Platform/Window.h"
 
 #include "../GraphicsType.h"
@@ -26,8 +24,11 @@ namespace tgon
 {
 
 struct TGON_API OpenGLContext final :
-    private boost::noncopyable
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(OpenGLContext);
+
 /* @section Public constructor */
 public:
     OpenGLContext(const VideoMode& videoMode, const Window& displayTarget);

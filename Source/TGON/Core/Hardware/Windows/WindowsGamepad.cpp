@@ -68,7 +68,7 @@ bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
 bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
-    if (currGamepadState.mButtons.size() <= buttonNumber)
+    if (currGamepadState.mButtons.size() <= static_cast<size_t>(buttonNumber))
     {
         return false;
     }

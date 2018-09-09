@@ -22,23 +22,44 @@ public:
 
 /* @section Public constructor */
 public:
-    CameraComponent();
+    CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
+        CameraComponent(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
+    {
+    }
 
-    CameraComponent(const Rect& orthoPlane, float nearZ, float farZ);
+    CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) :
+        CameraComponent(std::make_shared<Camera>(eyePt, lookAt, fov, nearZ, farZ))
+    {
+    }
 
-    CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ);
+/* @section Private constructor */
+public:
+    CameraComponent(const std::shared_ptr<Camera>& camera) :
+        m_camera(camera)
+    {
+        Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(camera);
+    }
 
 /* @section Public destructor */
 public:
-    virtual ~CameraComponent() override;
+    virtual ~CameraComponent() override = default;
 
 /* @section Public method */
 public:
-	virtual void Update() override;
+	virtual void Update() override
+    {
+        m_camera->Update();
+    }
 
-    std::shared_ptr<Camera>& GetCamera() noexcept;
+    std::shared_ptr<Camera>& GetCamera() noexcept
+    {
+        return m_camera;
+    }
 
-    const std::shared_ptr<const Camera> GetCamera() const noexcept;
+    const std::shared_ptr<const Camera> GetCamera() const noexcept
+    {
+        return m_camera;
+    }
 
 /* @section Private variable */
 private:

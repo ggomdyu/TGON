@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMode) :
+OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
     m_context(videoMode, displayTarget),
     m_vertexArrayHandle(0)
 {
@@ -23,7 +23,7 @@ GraphicsImpl::GraphicsImpl(const Window& displayTarget, const VideoMode& videoMo
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 }
 
-GraphicsImpl::~GraphicsImpl()
+OpenGLGraphics::~OpenGLGraphics()
 {
     if (m_vertexArrayHandle != 0)
     {
@@ -33,32 +33,32 @@ GraphicsImpl::~GraphicsImpl()
     }
 }
     
-void GraphicsImpl::SetDefaultGLRenderState()
+void OpenGLGraphics::SetDefaultGLRenderState()
 {
     this->EnableCullFace();
 }
 
-void GraphicsImpl::SetClearColor(const Color4f& color)
+void OpenGLGraphics::SetClearColor(const Color4f& color)
 {
     TGON_GL_ERROR_CHECK(glClearColor(color.r, color.g, color.b, color.a));
 }
 
-void GraphicsImpl::SetFillMode(FillMode fillMode)
+void OpenGLGraphics::SetFillMode(FillMode fillMode)
 {
     TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, static_cast<GLenum>(fillMode)));
 }
 
-void GraphicsImpl::SetCullMode(CullMode cullMode)
+void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
     TGON_GL_ERROR_CHECK(glFrontFace(static_cast<GLenum>(cullMode)));
 }
 
-void GraphicsImpl::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
+void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
 {
     TGON_GL_ERROR_CHECK(glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 }
     
-void GraphicsImpl::SetBlendMode(BlendMode blendMode)
+void OpenGLGraphics::SetBlendMode(BlendMode blendMode)
 {
     switch (blendMode)
     {
@@ -84,57 +84,57 @@ void GraphicsImpl::SetBlendMode(BlendMode blendMode)
     }
 }
 
-void GraphicsImpl::EnableCullFace()
+void OpenGLGraphics::EnableCullFace()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_CULL_FACE));
 }
     
-void GraphicsImpl::EnableBlend()
+void OpenGLGraphics::EnableBlend()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_BLEND));
 }
 
-void GraphicsImpl::EnableDepthTest()
+void OpenGLGraphics::EnableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
 }
     
-void GraphicsImpl::DisableCullFace()
+void OpenGLGraphics::DisableCullFace()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_CULL_FACE));
 }
 
-void GraphicsImpl::DisableBlend()
+void OpenGLGraphics::DisableBlend()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_BLEND));
 }
 
-void GraphicsImpl::DisableDepthTest()
+void OpenGLGraphics::DisableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
 }
 
-void GraphicsImpl::ClearColorBuffer()
+void OpenGLGraphics::ClearColorBuffer()
 {
     TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT));
 }
 
-void GraphicsImpl::ClearColorDepthBuffer()
+void OpenGLGraphics::ClearColorDepthBuffer()
 {
     TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 
-void GraphicsImpl::SwapBuffer()
+void OpenGLGraphics::SwapBuffer()
 {
     m_context.SwapBuffer();
 }
 
-void GraphicsImpl::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount)
+void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount)
 {
     glDrawArrays(static_cast<GLenum>(primitiveType), 0, vertexCount);
 }
     
-void GraphicsImpl::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
+void OpenGLGraphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
     glDrawElements(static_cast<GLenum>(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
 }

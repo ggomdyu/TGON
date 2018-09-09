@@ -24,7 +24,7 @@ inline _CastToType DynamicCast(_CastFromType ptr) noexcept
     const RTTI* rtti = ptr->GetRTTI();
     while (rtti != nullptr)
     {
-        if (rtti == GetRTTI<std::remove_pointer_t<std::decay_t<_CastToType>>>())
+        if (rtti == GetRTTI<_CastToType>())
         {
             return reinterpret_cast<_CastToType>(ptr);
         }

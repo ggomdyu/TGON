@@ -9,44 +9,17 @@
 namespace tgon
 {
 
-TextureMaterial::TextureMaterial() :
-    TextureMaterial(nullptr)
+ColorMaterial::ColorMaterial(const Color4f& blendColor) :
+    ColorMaterial(std::make_shared<Shader>(g_positionColorVert, g_positionColorFrag), blendColor)
 {
 }
 
-TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
-    Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
-    m_texture(texture),
-    m_blendColor(blendColor)
+bool ColorMaterial::CanBatch(const Material& rhs) const
 {
-}
-
-TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture) :
-    Material(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag)),
-    m_texture(texture),
-    m_blendColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
-{
-}
-
-void TextureMaterial::Use()
-{
-    m_shader->Use();
-    m_shader->SetParameter4f("g_uBlendColor", m_blendColor.r, m_blendColor.g, m_blendColor.b, m_blendColor.a);
-    
-    m_texture->Use();
-}
-
-void TextureMaterial::Unuse()
-{
-}
-
-bool TextureMaterial::CanBatch(const Material& rhs) const
-{
-    const TextureMaterial* material = DynamicCast<const TextureMaterial*>(&rhs);
-    if (material != nullptr)
+    const ColorMaterial* rhs2 = DynamicCast<const ColorMaterial*>(&rhs);
+    if (rhs2 != nullptr)
     {
-        return m_blendColor == material->m_blendColor &&
-               m_texture->GetFilePath() == material->m_texture->GetFilePath();
+        return m_blendColor == rhs2->m_blendColor;
     }
     else
     {
@@ -54,51 +27,23 @@ bool TextureMaterial::CanBatch(const Material& rhs) const
     }
 }
 
-void MaskTextureMaterial::Use()
+TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
+    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag), texture, blendColor)
 {
 }
 
-void MaskTextureMaterial::Unuse()
+bool TextureMaterial::CanBatch(const Material& rhs) const
 {
+    const TextureMaterial* rhs2 = DynamicCast<const TextureMaterial*>(&rhs);
+    if (rhs2 != nullptr)
+    {
+        return m_blendColor == rhs2->m_blendColor &&
+               m_texture->GetFilePath() == rhs2->m_texture->GetFilePath();
+    }
+    else
+    {
+        return false;
+    }
 }
-
-bool MaskTextureMaterial::CanBatch(const Material& rhs) const
-{
-    return false;
-}
-
-void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTexture)
-{
-    m_maskTexture = maskTexture;
-}
-
-std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() noexcept
-{
-    return m_maskTexture;
-}
-    
-const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const noexcept
-{
-    return m_maskTexture;
-}
-
-//GrayscaleTextureMaterial::GrayscaleTextureMaterial() :
-//    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_grayScaleTextureFrag))
-//{
-//}
-//
-//void GrayscaleTextureMaterial::Use()
-//{
-//    SuperType::Use();
-//}
-//
-//void GrayscaleTextureMaterial::Unuse()
-//{
-//}
-//
-//bool GrayscaleTextureMaterial::CanBatch(const Material & rhs) const
-//{
-//    return false;
-//}
 
 } /* namespace tgon */

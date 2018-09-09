@@ -56,17 +56,20 @@ public:
         return Color4b(r * rhs.r, g * rhs.g, b * rhs.b, a * rhs.a);
     }
     
-    constexpr const Color4b operator*(float rhs) const noexcept
+    template <typename _ValueType>
+    constexpr const Color4b operator*(const _ValueType& rhs) const noexcept
     {
         return Color4b(r * rhs, g * rhs, b * rhs, a * rhs);
     }
 
-    friend constexpr const Color4b operator*(float lhs, const Color4b& rhs) noexcept
+    template <typename _ValueType>
+    friend constexpr const Color4b operator*(const _ValueType& lhs, const Color4b& rhs) noexcept
     {
         return Color4b(lhs * rhs.r, lhs * rhs.g, lhs * rhs.b, lhs * rhs.a);
     }
 
-    constexpr const Color4b operator/(float rhs) const noexcept
+    template <typename _ValueType>
+    constexpr const Color4b operator/(const _ValueType& rhs) const noexcept
     {
         return Color4b(r / rhs, g / rhs, b / rhs, a / rhs);
     }
@@ -101,7 +104,8 @@ public:
         return *this;
     }
 
-    Color4b& operator*=(float rhs) noexcept
+    template <typename _ValueType>
+    Color4b& operator*=(const _ValueType& rhs) noexcept
     {
         r *= rhs;
         g *= rhs;
@@ -121,7 +125,8 @@ public:
         return *this;
     }
 
-    Color4b& operator/=(float rhs) noexcept
+    template <typename _ValueType>
+    Color4b& operator/=(const _ValueType& rhs) noexcept
     {
         r /= rhs;
         g /= rhs;

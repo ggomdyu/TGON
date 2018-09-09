@@ -8,23 +8,26 @@
 #include <GL/glew.h>
 #include <memory>
 
-#include "OpenGLContext.h"
-
 #include "../GraphicsType.h"
+
+#include "OpenGLContext.h"
 
 namespace tgon
 {
     
-class GraphicsImpl final :
-    private boost::noncopyable
+class TGON_API OpenGLGraphics :
+    public CoreObject
 {
+public:
+    TGON_RUNTIME_OBJECT(OpenGLGraphics);
+
 /* @section Public constructor */
 public:
-    GraphicsImpl(const Window& displayTarget, const VideoMode& videoMode);
+    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode);
     
 /* @section Public destructor */
 public:
-    ~GraphicsImpl();
+    ~OpenGLGraphics();
 
 /* @section Public method */
 public:
@@ -55,5 +58,7 @@ private:
     
     GLuint m_vertexArrayHandle;
 };
+
+using PlatformGraphics = OpenGLGraphics;
 
 } /* namespace tgon */

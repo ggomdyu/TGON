@@ -27,7 +27,7 @@ private:
                 m_timeModule = engine->FindModule<TimeModule>();
             }
             
-            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/i15293709810.jpg");
+            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/1.png");
             
             this->Reset();
         }
@@ -42,7 +42,7 @@ private:
 //            if ( m_pTexture[0].GetPosition( ).y <= -123.0F )
 //                Reset( );
             
-            if (m_enableOpacityChange)
+           /* if (m_enableOpacityChange)
             {
                 float opacity = m_fireflySpriteComponent->GetBlendColor().a;
                 
@@ -63,19 +63,19 @@ private:
                 {
                      m_fireflySpriteComponent->GetBlendColor().a -= m_opacityChangeSpeed * m_timeModule->GetTickTime();
                 }
-            }
+            }*/
         }
         
     private:
         void Reset()
         {
-            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f, RandRange(0.4f, 1.0f)});
+            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f, 1.0f/*RandRange(0.4f, 1.0f)*/});
             
             float scale = RandRange(0.3f, 1.0f);
             this->SetScale({0.1f, 0.1f, 1.0f});
             
 //            I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
-            this->SetPosition({RandRange(-3.f, 3.f), 0.0f, 0.0f});
+            this->SetPosition({RandRange(-0.5f, 0.5f), 0.0f, -3.0f});
 //            RandRange(-rootWindowSize.width * 0.5f, rootWindowSize.width * 0.5f)
 //            -rootWindowSize.height * 0.5f
             m_enableOpacityChange = ( RandRange(0, 2) == 0 ) ? true : false;
@@ -114,7 +114,7 @@ public:
         {
             m_fadeInSpriteComponent = m_fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f, 0.4f});
-//            m_fadeInObject->GetTransform().SetScale({8.38f, 40.42f, 1.0f});
+            m_fadeInObject->GetTransform().SetPosition({0.0f, 0.0f});
         }
         this->AddObject(m_fadeInObject);
 
@@ -159,8 +159,6 @@ public:
 
         {
             m_graphicsModule = engine->FindModule<GraphicsModule>();
-            m_graphicsModule->GetGraphics().EnableBlend();
-            m_graphicsModule->GetGraphics().SetBlendMode(BlendMode::Alpha);
             m_graphicsModule->GetGraphics().SetClearColor({1.0f, 1.0f, 1.0f, 0.0f});
             
             m_inputModule = engine->FindModule<InputModule>();
@@ -173,7 +171,8 @@ public:
             const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
             const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-            m_cameraObject->AddComponent(new CameraComponent({0.0f, 0.0f, 2.0f}, {0.0f, 0.0f, -50.0f}, Pi / 8, 0.1f, 1000.0f));
+            //m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f));
+            m_cameraObject->AddComponent(new CameraComponent({0.0f, 0.0f, 50.0f}, {0.0f, 0.0f, 0.0f}, Pi / 8, 0.1f, 1000.0f));
         }
         this->AddObject(m_cameraObject);
 
@@ -252,21 +251,21 @@ public:
     {
         static float z = 2.0f;
         decltype(auto) keyboard = m_inputModule->GetKeyboard();
-        if (keyboard->IsKeyHold(KeyCode::UpArrow))
-        {
-            z += 0.01f;
-            
-            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
-            camera->SetEyePt({0.0f, 0.0f, z});
-        }
-        else if (keyboard->IsKeyHold(KeyCode::DownArrow))
+        if (keyboard->IsKeyHold(KeyCode::W))
         {
             z -= 0.01f;
             
             auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
             camera->SetEyePt({0.0f, 0.0f, z});
         }
-        else if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
+        if (keyboard->IsKeyHold(KeyCode::S))
+        {
+            z += 0.01f;
+            
+            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
+            camera->SetEyePt({0.0f, 0.0f, z});
+        }
+        if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
         {
             if (tgon::GetTickCount() - m_beginTime <= 5000)
             {

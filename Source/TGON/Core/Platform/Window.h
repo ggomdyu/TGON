@@ -6,7 +6,7 @@
  */
 
 #pragma once
-#include "Core/Object/CoreObject.h"
+#include "Core/Platform/Config.h"
 #include "Core/Math/Point.h"
 #include "Core/Math/Extent.h"
 

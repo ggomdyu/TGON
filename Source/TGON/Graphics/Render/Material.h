@@ -21,8 +21,8 @@ class TGON_API Material :
 public:
     TGON_RUNTIME_OBJECT(Material);
     
-/* @section Public constructor */
-public:
+/* @section Protected constructor */
+protected:
     explicit Material(const std::shared_ptr<Shader>& shader) :
         m_shader(shader)
     {
@@ -72,9 +72,18 @@ public:
 
 /* @section Public constructor */
 public:
+    ColorMaterial(const Color4f& blendColor);
+
     ColorMaterial() :
-        Material(std::make_shared<Shader>(g_positionColorVert, g_positionColorFrag)),
-        m_blendColor(1.0f, 1.0f, 1.0f, 1.0f)
+        ColorMaterial(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
+    {
+    }
+
+/* @section Protected constructor */
+protected:
+    ColorMaterial(const std::shared_ptr<Shader>& shader, const Color4f& blendColor) :
+        Material(shader),
+        m_blendColor(blendColor)
     {
     }
     
@@ -95,31 +104,25 @@ public:
         m_shader->Unuse();
     }
     
-    virtual bool CanBatch(const Material& rhs) const override
-    {
-        const ColorMaterial* material = DynamicCast<const ColorMaterial*>(&rhs);
-        if (material != nullptr)
-        {
-            return m_blendColor == material->m_blendColor;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    virtual bool CanBatch(const Material& rhs) const override;
     
-    void SetBlendColor(const Color4f& color)
+    void SetBlendColor(const Color4f& blendColor)
     {
-        m_blendColor = color;
+        m_blendColor = blendColor;
     }
-    
+
+    Color4f& GetBlendColor() noexcept
+    {
+        return m_blendColor;
+    }
+
     const Color4f& GetBlendColor() const noexcept
     {
         return m_blendColor;
     }
 
 /* @section Protected variable */
-protected:
+protected: 
     Color4f m_blendColor;
 };
     
@@ -131,9 +134,25 @@ public:
 
 /* @section Public constructor */
 public:
-    TextureMaterial();
     TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
-    explicit TextureMaterial(const std::shared_ptr<Texture>& texture);
+    
+    TextureMaterial() :
+        TextureMaterial(nullptr)
+    {
+    }
+
+    TextureMaterial(const std::shared_ptr<Texture>& texture) :
+        TextureMaterial(texture, Color4f(1.0f, 1.0f, 1.0f, 1.0f))
+    {
+    }
+
+/* @section Protected constructor */
+protected:
+    TextureMaterial(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
+        ColorMaterial(shader, blendColor),
+        m_texture(texture)
+    {
+    }
 
 /* @section Public destructor */
 public:
@@ -141,9 +160,17 @@ public:
 
 /* @section Public method */
 public:
-    virtual void Use() override;
+    virtual void Use() override
+    {
+        m_shader->Use();
+        m_shader->SetParameter4f("g_uBlendColor", m_blendColor.r, m_blendColor.g, m_blendColor.b, m_blendColor.a);
+
+        m_texture->Use();
+    }
     
-    virtual void Unuse() override;
+    virtual void Unuse() override
+    {
+    }
     
     /* @brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
@@ -168,11 +195,11 @@ private:
     std::shared_ptr<Texture> m_texture;
 };
 
-class AlphaTextureMaterial
+class TGON_API AlphaTextureMaterial :
+    public ColorMaterial
 {
 public:
 };
-
 
 //class GrayscaleTextureMaterial :
 //    public TextureMaterial
@@ -194,39 +221,55 @@ public:
 //    virtual void Unuse() override;
 //    virtual bool CanBatch(const Material& rhs) const override;
 //};
+//
+//class MaskTextureMaterial :
+//    public TextureMaterial
+//{
+//public:
+//    TGON_RUNTIME_OBJECT(MaskTextureMaterial);
+//
+///* @section Public constructor */
+//public:
+//    MaskTextureMaterial() = default;
+//
+///* @section Public destructor */
+//public:
+//    virtual ~MaskTextureMaterial() override = default;
+//
+///* @section Public method */
+//public:
+//    virtual void Use() override;
+//    
+//    virtual void Unuse() override;
+//    
+//    virtual bool CanBatch(const Material& rhs) const override;
+//    
+//    void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
+//    
+//    std::shared_ptr<Texture>& GetMaskTexture() noexcept;
+//    
+//    const std::shared_ptr<Texture>& GetMaskTexture() const noexcept;
 
-class MaskTextureMaterial :
-    public TextureMaterial
-{
-public:
-    TGON_RUNTIME_OBJECT(MaskTextureMaterial);
-
-/* @section Public constructor */
-public:
-    MaskTextureMaterial() = default;
-
-/* @section Public destructor */
-public:
-    virtual ~MaskTextureMaterial() override = default;
-
-/* @section Public method */
-public:
-    virtual void Use() override;
-    
-    virtual void Unuse() override;
-    
-    virtual bool CanBatch(const Material& rhs) const override;
-    
-    void SetMaskTexture(const std::shared_ptr<Texture>& maskTexture);
-    
-    std::shared_ptr<Texture>& GetMaskTexture() noexcept;
-    
-    const std::shared_ptr<Texture>& GetMaskTexture() const noexcept;
-
-/* @section Private variable */
-private:
-    std::shared_ptr<Texture> m_maskTexture;
-};
+//
+//void MaskTextureMaterial::SetMaskTexture(const std::shared_ptr<Texture>& maskTexture)
+//{
+//    m_maskTexture = maskTexture;
+//}
+//
+//std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() noexcept
+//{
+//    return m_maskTexture;
+//}
+//
+//const std::shared_ptr<Texture>& MaskTextureMaterial::GetMaskTexture() const noexcept
+//{
+//    return m_maskTexture;
+//}
+////
+///* @section Private variable */
+//private:
+//    std::shared_ptr<Texture> m_maskTexture;
+//};
 
 //class GrayTextureMaterial :
 //    public TextureMaterial
@@ -235,11 +278,25 @@ private:
 //    TGON_RUNTIME_OBJECT(GrayTextureMaterial);
 //};
 //
-class UberMaterial :
-    public Material
-{
-public:
-    TGON_RUNTIME_OBJECT(UberMaterial);
-};
+
+
+//GrayscaleTextureMaterial::GrayscaleTextureMaterial() :
+//    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_grayScaleTextureFrag))
+//{
+//}
+//
+//void GrayscaleTextureMaterial::Use()
+//{
+//    SuperType::Use();
+//}
+//
+//void GrayscaleTextureMaterial::Unuse()
+//{
+//}
+//
+//bool GrayscaleTextureMaterial::CanBatch(const Material & rhs) const
+//{
+//    return false;
+//}
 
 } /* namespace tgon */
