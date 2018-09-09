@@ -23,7 +23,10 @@ public:
     
 /* @section Public constructor */
 public:
-    explicit Material(const std::shared_ptr<Shader>& shader);
+    explicit Material(const std::shared_ptr<Shader>& shader) :
+        m_shader(shader)
+    {
+    }
 
 /* @section Public destructor */
 public:
@@ -39,24 +42,25 @@ public:
     virtual bool CanBatch(const Material& rhs) const = 0;
     
     /* @brief   Sets the world-view-projection matrix. */
-    void SetWVP(const Matrix4x4& matWVP);
-    
-    FillMode GetFillMode() const noexcept;
-    
-    CullMode GetCullMode();
-    
-    /* @brief   Gets the shader. */
-    std::shared_ptr<Shader>& GetShader() noexcept;
+    void SetWVP(const Matrix4x4& matWVP)
+    {
+        m_shader->SetParameterMatrix4fv("g_uWVP", matWVP[0]);
+    }
     
     /* @brief   Gets the shader. */
-    const std::shared_ptr<Shader>& GetShader() const noexcept;
+    std::shared_ptr<Shader>& GetShader() noexcept
+    {
+        return m_shader;
+    }
+    
+    /* @brief   Gets the shader. */
+    const std::shared_ptr<Shader>& GetShader() const noexcept
+    {
+        return m_shader;
+    }
     
 /* @section Protected variable */
 protected:
-    CullMode m_cullMode;
-    
-    FillMode m_fillMode;
-    
     std::shared_ptr<Shader> m_shader;
 };
 
@@ -68,31 +72,59 @@ public:
 
 /* @section Public constructor */
 public:
-    ColorMaterial();
-
+    ColorMaterial() :
+        Material(std::make_shared<Shader>(g_positionColorVert, g_positionColorFrag)),
+        m_blendColor(1.0f, 1.0f, 1.0f, 1.0f)
+    {
+    }
+    
 /* @section Public destructor */
 public:
     virtual ~ColorMaterial() override = default;
 
 /* @section Public method */
 public:
-    virtual void Use() override;
+    virtual void Use() override
+    {
+        m_shader->Use();
+        m_shader->SetParameter4f("g_uColor", m_blendColor.r, m_blendColor.g, m_blendColor.b, m_blendColor.a);
+    }
     
-    virtual void Unuse() override;
+    virtual void Unuse() override
+    {
+        m_shader->Unuse();
+    }
     
-    virtual bool CanBatch(const Material& rhs) const override;
+    virtual bool CanBatch(const Material& rhs) const override
+    {
+        const ColorMaterial* material = DynamicCast<const ColorMaterial*>(&rhs);
+        if (material != nullptr)
+        {
+            return m_blendColor == material->m_blendColor;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
-    void SetColor(const Color4f& color);
+    void SetBlendColor(const Color4f& color)
+    {
+        m_blendColor = color;
+    }
     
-    const Color4f& GetColor() const noexcept;
+    const Color4f& GetBlendColor() const noexcept
+    {
+        return m_blendColor;
+    }
 
-/* @section Private variable */
-private:
-    Color4f m_color;
+/* @section Protected variable */
+protected:
+    Color4f m_blendColor;
 };
-
+    
 class TGON_API TextureMaterial :
-    public Material
+    public ColorMaterial
 {
 public:
     TGON_RUNTIME_OBJECT(TextureMaterial);
@@ -100,9 +132,7 @@ public:
 /* @section Public constructor */
 public:
     TextureMaterial();
-    
     TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
-    
     explicit TextureMaterial(const std::shared_ptr<Texture>& texture);
 
 /* @section Public destructor */
@@ -118,24 +148,31 @@ public:
     /* @brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
     
-    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept
+    {
+        m_texture = texture;
+    }
     
-    void SetBlendColor(const Color4f& blendColor) noexcept;
+    const std::shared_ptr<Texture>& GetTexture() noexcept
+    {
+        return m_texture;
+    }
     
-    std::shared_ptr<Texture>& GetTexture() noexcept;
+    std::shared_ptr<const Texture> GetTexture() const noexcept
+    {
+        return m_texture;
+    }
     
-    const std::shared_ptr<Texture>& GetTexture() const noexcept;
-    
-    Color4f& GetBlendColor() noexcept;
-    
-    const Color4f& GetBlendColor() const noexcept;
-
 /* @section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
-    
-    Color4f m_blendColor;
 };
+
+class AlphaTextureMaterial
+{
+public:
+};
+
 
 //class GrayscaleTextureMaterial :
 //    public TextureMaterial

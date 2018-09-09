@@ -74,7 +74,7 @@ public:
      * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
-    const _ComponentType* GetComponent() const
+    std::shared_ptr<const _ComponentType> GetComponent() const
     {
         return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
     }
@@ -85,9 +85,9 @@ public:
      * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
     template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
-    _ComponentType* GetComponent()
+    std::shared_ptr<_ComponentType> GetComponent()
     {
-        return static_cast<_ComponentType*>(GetComponentId<_ComponentType>());
+        return std::static_pointer_cast<_ComponentType>(GetComponent(GetComponentId<_ComponentType>()));
     }
 
     /**
@@ -175,7 +175,7 @@ private:
      * @param [in] componentId  The unique id of component to get.
      * @return  Returns the pointer to component if successful, nullptr otherwise.
      */
-    Component* GetComponent(size_t componentId);
+    std::shared_ptr<Component> GetComponent(size_t componentId);
 
 /* @section Private variable */
 private:

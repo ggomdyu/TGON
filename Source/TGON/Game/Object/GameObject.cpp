@@ -61,7 +61,7 @@ bool GameObject::RemoveComponent(size_t componentId)
     }
 }
 
-Component* GameObject::GetComponent(size_t componentId)
+std::shared_ptr<Component> GameObject::GetComponent(size_t componentId)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
@@ -71,7 +71,7 @@ Component* GameObject::GetComponent(size_t componentId)
     auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
     if (iter != m_components.end())
     {
-        return iter->get();
+        return *iter;
     }
     else
     {

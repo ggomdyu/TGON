@@ -27,7 +27,7 @@ private:
                 m_timeModule = engine->FindModule<TimeModule>();
             }
             
-            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/IntroScene/firefly.png");
+            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/i15293709810.jpg");
             
             this->Reset();
         }
@@ -37,7 +37,7 @@ private:
         {
             SuperType::Update();
             
-            this->Move(Vector3(0.0f, m_speed * m_timeModule->GetTickTime(), 0.0f));
+            this->Move(Vector3(0.0f, 0.0f, m_speed * m_timeModule->GetTickTime()));
             
 //            if ( m_pTexture[0].GetPosition( ).y <= -123.0F )
 //                Reset( );
@@ -74,7 +74,7 @@ private:
             float scale = RandRange(0.3f, 1.0f);
             this->SetScale({0.1f, 0.1f, 1.0f});
             
-            I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
+//            I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
             this->SetPosition({RandRange(-3.f, 3.f), 0.0f, 0.0f});
 //            RandRange(-rootWindowSize.width * 0.5f, rootWindowSize.width * 0.5f)
 //            -rootWindowSize.height * 0.5f
@@ -114,7 +114,7 @@ public:
         {
             m_fadeInSpriteComponent = m_fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f, 0.4f});
-            m_fadeInObject->GetTransform().SetScale({8.38f, 40.42f, 1.0f});
+//            m_fadeInObject->GetTransform().SetScale({8.38f, 40.42f, 1.0f});
         }
         this->AddObject(m_fadeInObject);
 
@@ -173,7 +173,7 @@ public:
             const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
             const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-            m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{-halfWidth, halfWidth, -halfHeight, halfHeight}, -1024.0f, 1024.0f));
+            m_cameraObject->AddComponent(new CameraComponent({0.0f, 0.0f, 2.0f}, {0.0f, 0.0f, -50.0f}, Pi / 8, 0.1f, 1000.0f));
         }
         this->AddObject(m_cameraObject);
 
@@ -181,7 +181,7 @@ public:
         {
             m_introSpriteComponent1 = m_introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
             m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f, 0.0f});
-            m_introObject1->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+//            m_introObject1->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
         }
         this->AddObject(m_introObject1);
 
@@ -189,7 +189,7 @@ public:
         {
             m_introSpriteComponent2 = m_introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f, 0.0f});
-            m_introObject2->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+//            m_introObject2->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
         }
         this->AddObject(m_introObject2);
         
@@ -197,7 +197,7 @@ public:
         {
             m_fadeOutSpriteComponent = m_fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f, 0.0f});
-            m_fadeOutObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+//            m_fadeOutObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
         }
         this->AddObject(m_fadeOutObject);
         
@@ -250,8 +250,23 @@ public:
     
     void OnHandleInput()
     {
+        static float z = 2.0f;
         decltype(auto) keyboard = m_inputModule->GetKeyboard();
-        if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
+        if (keyboard->IsKeyHold(KeyCode::UpArrow))
+        {
+            z += 0.01f;
+            
+            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
+            camera->SetEyePt({0.0f, 0.0f, z});
+        }
+        else if (keyboard->IsKeyHold(KeyCode::DownArrow))
+        {
+            z -= 0.01f;
+            
+            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
+            camera->SetEyePt({0.0f, 0.0f, z});
+        }
+        else if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
         {
             if (tgon::GetTickCount() - m_beginTime <= 5000)
             {

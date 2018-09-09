@@ -32,7 +32,7 @@ public:
     virtual void Update();
     
     /**
-     * @brief   Adds a GameObject into scene.
+     * @brief   Adds a GameObject into the scene.
      * @param [in] object   The object to insert.
      */
     void AddObject(const std::shared_ptr<GameObject>& object);
@@ -54,10 +54,12 @@ public:
      * @param [in] objectName   The name of object to remove.
      */
     bool RemoveObject(const HashStringView& objectName);
-
+    
 /* @section Private variable */
 private:
     std::vector<std::shared_ptr<GameObject>> m_objects;
+    
+    static std::vector<std::shared_ptr<GameObject>> m_globalObjects;
 };
 
 } /* namespace tgon */
