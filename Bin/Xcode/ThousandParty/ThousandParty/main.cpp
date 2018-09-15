@@ -27,7 +27,7 @@ private:
                 m_timeModule = engine->FindModule<TimeModule>();
             }
             
-            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/1.png");
+            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/1536506755.png");
             
             this->Reset();
         }
@@ -69,9 +69,8 @@ private:
     private:
         void Reset()
         {
-            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f, 1.0f/*RandRange(0.4f, 1.0f)*/});
+            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f, RandRange(0.4f, 1.0f)});
             
-            float scale = RandRange(0.3f, 1.0f);
             this->SetScale({0.1f, 0.1f, 1.0f});
             
 //            I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
@@ -94,7 +93,8 @@ private:
     
 public:
     IntroScene() :
-        m_fadeInObject(std::make_shared<GameObject>("fadeIn"))
+        m_fadeInObject(std::make_shared<GameObject>("fadeIn")),
+        m_cameraObject(std::make_shared<GameObject>("camera1"))
     {
         decltype(auto) application = Application::GetInstance();
         decltype(auto) engine = application->GetEngine();
@@ -103,6 +103,13 @@ public:
             m_graphicsModule = engine->FindModule<GraphicsModule>();
             m_inputModule = engine->FindModule<InputModule>();
             m_timeModule = engine->FindModule<TimeModule>();
+        }
+        
+        {
+            const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
+            const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+            const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+            m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f));
         }
         
         for (int i = 0; i < 25; ++i)
@@ -138,6 +145,7 @@ private:
     std::shared_ptr<TimeModule> m_timeModule;
     
     std::shared_ptr<GameObject> m_fadeInObject;
+    std::shared_ptr<GameObject> m_cameraObject;
     std::shared_ptr<SpriteRendererComponent> m_fadeInSpriteComponent;
 };
 
@@ -159,8 +167,6 @@ public:
 
         {
             m_graphicsModule = engine->FindModule<GraphicsModule>();
-            m_graphicsModule->GetGraphics().SetClearColor({1.0f, 1.0f, 1.0f, 0.0f});
-            
             m_inputModule = engine->FindModule<InputModule>();
             m_timeModule = engine->FindModule<TimeModule>();
             m_gameSceneModule = engine->FindModule<GameSceneModule>();
@@ -171,7 +177,7 @@ public:
             const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
             const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-            //m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f));
+//            m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f));
             m_cameraObject->AddComponent(new CameraComponent({0.0f, 0.0f, 50.0f}, {0.0f, 0.0f, 0.0f}, Pi / 8, 0.1f, 1000.0f));
         }
         this->AddObject(m_cameraObject);
@@ -201,50 +207,43 @@ public:
         this->AddObject(m_fadeOutObject);
         
         m_beginTime = tgon::GetTickCount();
-        
+     
         SuperType::Update();
     }
-
+    
     virtual void Update() override
     {
         SuperType::Update();
 
         this->OnHandleInput();
         
-        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
-        if (elapsedTime >= 9000)
-        {
-            m_gameSceneModule->ChangeScene<IntroScene>();
-            return;
-        }
-        else if (elapsedTime >= 8000)
-        {
-            if (m_fadeOutSpriteComponent->GetBlendColor().a <= 1.0f)
-            {
-                m_fadeOutSpriteComponent->GetBlendColor().a += 2.5f * m_timeModule->GetTickTime();
-            }
-        }
-        else if (elapsedTime >= 5500)
-        {
-            if (m_introSpriteComponent2->GetBlendColor().a <= 1.0f)
-            {
-                m_introSpriteComponent2->GetBlendColor().a += 1.7f * m_timeModule->GetTickTime();
-            }
-        }
-        else if (elapsedTime >= 4000)
-        {
-            if (m_introSpriteComponent1->GetBlendColor().a >= 0.0f)
-            {
-                m_introSpriteComponent1->GetBlendColor().a -= 1.7f * m_timeModule->GetTickTime();
-            }
-        }
-        else if (elapsedTime >= 1500)
-        {
-            if (m_introSpriteComponent1->GetBlendColor().a <= 1.0f)
-            {
-                m_introSpriteComponent1->GetBlendColor().a += 1.7f * m_timeModule->GetTickTime();
-            }
-        }
+//        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
+//        if (elapsedTime >= 9000)
+//        {
+//            m_gameSceneModule->ChangeScene<IntroScene>();
+//            return;
+//        }
+//        else if (elapsedTime >= 8000)
+//        {
+//            if (m_fadeOutSpriteComponent->GetBlendColor().a <= 1.0f)
+//            {
+//                m_fadeOutSpriteComponent->GetBlendColor().a += 2.5f * m_timeModule->GetTickTime();
+//            }
+//        }
+//        else if (elapsedTime >= 5500)
+//        {
+//            if (m_introSpriteComponent2->GetBlendColor().a <= 1.0f)
+//            {
+//                m_introSpriteComponent2->GetBlendColor().a += 1.7f * m_timeModule->GetTickTime();
+//            }
+//        }
+//        else if (elapsedTime >= 4000)
+//        {
+//            if (m_introSpriteComponent1->GetBlendColor().a >= 0.0f)
+//            {
+//                m_introSpriteComponent1->GetBlendColor().a -= 1.7f * m_timeModule->GetTickTime();
+//            }
+//        }
     }
     
     void OnHandleInput()

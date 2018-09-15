@@ -42,7 +42,10 @@ public:
 
 /* @section Public destructor */
 public:
-    virtual ~CameraComponent() override = default;
+    virtual ~CameraComponent() override
+    {
+        Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().RemoveCamera(m_camera);
+    }
 
 /* @section Public method */
 public:

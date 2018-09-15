@@ -8,29 +8,16 @@
 #include <memory>
 
 #include "IModule.h"
+#include "InputMode.h"
 
 #include "Core/Hardware/InputManager.h"
-#include "Core/Hardware/Keyboard.h"
-#include "Core/Hardware/Mouse.h"
-#include "Core/Hardware/Gamepad.h"
 
 namespace tgon
 {
-
-struct TGON_API InputMode final
-{
-/* @section Public constructor */
-public:
-    constexpr InputMode() noexcept = default;
-
-    constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
     
-/* @section Public variable */
-public:
-    bool isUseKeyboard = true;
-    bool isUseMouse = false;
-    bool isUseGamepad = false;
-};
+class Keyboard;
+class Mouse;
+class Gamepad;
 
 class TGON_API InputModule :
     public IModule

@@ -52,10 +52,7 @@ public:
      * @param [in] args     Parameters of the _ModuleType constructor.
      */
     template <typename _ModuleType, typename... _ArgTypes>
-    std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args)
-    {
-        return std::static_pointer_cast<_ModuleType>(this->RegisterModule(new _ModuleType(std::forward<_ArgTypes>(args)...)));
-    }
+    std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args);
 
     /**
      * @brief   Registers a module to manage through this engine.
@@ -68,24 +65,15 @@ public:
      * @tparam _ModuleType  The type of module to remove.
      */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    bool UnregisterModule()
-    {
-        return this->UnregisterModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
-    }
+    bool UnregisterModule();
 
     /* @brief   Returns a module managed by this engine. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<_ModuleType> FindModule() noexcept
-    {
-        return std::static_pointer_cast<_ModuleType>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
-    }
+    std::shared_ptr<_ModuleType> FindModule() noexcept;
 
     /* @brief   Returns a module managed by this engine. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
-    std::shared_ptr<const _ModuleType> FindModule() const noexcept
-    {
-        return const_cast<Engine*>(this)->FindModule<_ModuleType>();
-    }
+    std::shared_ptr<const _ModuleType> FindModule() const noexcept;
     
 /* @section Public event handler */
 public:
@@ -126,6 +114,30 @@ template <>
 inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const noexcept
 {
     return m_timeModule;
+}
+    
+template <typename _ModuleType, typename... _ArgTypes>
+inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
+{
+    return std::static_pointer_cast<_ModuleType>(this->RegisterModule(new _ModuleType(std::forward<_ArgTypes>(args)...)));
+}
+    
+template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+inline bool Engine::UnregisterModule()
+{
+    return this->UnregisterModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
+}
+
+template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
+{
+    return std::static_pointer_cast<_ModuleType>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
+}
+
+template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
+{
+    return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
     
 } /* namespace tgon */

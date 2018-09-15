@@ -36,40 +36,42 @@ private:
 
 /* @section Public method */
 public:
-    /* @brief   Loops the message queue and handle the message. */
+    /* @brief   Gets the global instance of this class. */
     static Application* GetInstance();
 
+    /* @brief   Loops the message queue and handles messages. */
     void MessageLoop();
 
+    /* @brief   Terminates currently running application. */
     using PlatformApplication::Terminate;
     
     /**
-     * @brief   Displays a message box.
-     * @param [in] message  The message to show in description area.
+     * @brief   Displays a message window which presents a message to user.
+     * @param [in] message  The message appears in the message window.
      */
     void ShowMessageBox(const char* message) const;
     
     /**
-     * @brief   Displays a message box.
-     * @param [in] message          The message to show in description area.
-     * @param [in] messageBoxIcon   The type of icon appears in the message box.
+     * @brief   Displays a message window which presents a message to user.
+     * @param [in] message          The message appears in the message window.
+     * @param [in] messageBoxIcon   The type of icon appears in the message window.
      */
     void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
     
     /**
-     * @brief   Displays a message box.
-     * @param [in] title    The message to show in title area.
-     * @param [in] message  The message to show in description area.
+     * @brief   Displays a message window which presents a message to user.
+     * @param [in] message  The title appears in the message window.
+     * @param [in] message  The message appears in the message window.
      */
     void ShowMessageBox(const char* title, const char* message) const;
     
     using PlatformApplication::ShowMessageBox;
 
-    /* @brief   Gets the Engine. */
-    Engine* GetEngine();
+    /* @brief   Gets the Engine managed by application. */
+    Engine* GetEngine() noexcept;
 
-    /* @brief   Gets the Engine. */
-    const Engine* GetEngine() const;
+    /* @brief   Gets the Engine managed by application. */
+    const Engine* GetEngine() const noexcept;
 
     /* @brief   Gets the root window. */
     Window& GetRootWindow() noexcept;

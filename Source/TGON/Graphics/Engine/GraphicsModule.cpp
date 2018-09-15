@@ -18,7 +18,7 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics.SetViewport(0, 0, windowSize.width, windowSize.height);
     m_graphics.SetClearColor(videoMode.clearColor);
     m_graphics.SetCullMode(CullMode::CW);
-    //m_graphics.EnableDepthTest();
+    m_graphics.EnableDepthTest();
     m_graphics.EnableBlend();
     m_graphics.SetBlendMode(BlendMode::Alpha);
 

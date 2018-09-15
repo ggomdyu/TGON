@@ -28,26 +28,26 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief   Adds a mesh into the BatchGroup. */
+    /* @brief   Adds a mesh into BatchGroup. */
     void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
     
-    /* @brief   Adds a batch into the BatchGroup. */
+    /* @brief   Adds a batch into BatchGroup. */
     void AddBatch(const Batch& batch);
 
-    /* @brief   Adds a mesh into the SpriteBatchGroup. */
+    /* @brief   Adds a mesh into SpriteBatchGroup. */
     void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
 
-    /* @brief   Adds a batch into the SpriteBatchGroup. */
+    /* @brief   Adds a batch into SpriteBatchGroup. */
     void AddSpriteBatch(const SpriteBatch& batch);
 
-    /* @brief   Adds a camera into the RenderStage. */
+    /* @brief   Adds a camera into RenderStage. */
     void AddCamera(const std::shared_ptr<Camera>& camera);
 
     CameraList& GetCameraList() noexcept;
 
     const CameraList& GetCameraList() const noexcept;
 
-    /* @brief   Removes the specified camera in the RenderStage. */
+    /* @brief   Removes the specified camera in RenderStage. */
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
     void Draw(Graphics& graphics);

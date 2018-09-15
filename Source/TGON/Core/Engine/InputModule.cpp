@@ -1,18 +1,13 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Hardware/InputManager.h"
+#include "Core/Hardware/Keyboard.h"
+#include "Core/Hardware/Mouse.h"
+#include "Core/Hardware/Gamepad.h"
 
 #include "InputModule.h"
 
 namespace tgon
 {
-    
-constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept :
-    isUseKeyboard(isUseKeyboard),
-    isUseMouse(isUseMouse),
-    isUseGamepad(isUseGamepad)
-{
-}
 
 InputModule::InputModule(const InputMode& inputMode, Window& inputTarget) :
     m_inputManager(inputTarget)

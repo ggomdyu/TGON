@@ -24,10 +24,7 @@ Application* Application::GetInstance()
 
 void Application::MessageLoop()
 {
-    PlatformApplication::MessageLoop([&]()
-    {
-        m_engine->Update();
-    });
+    PlatformApplication::MessageLoop([&](){ m_engine->Update(); });
 }
 
 void Application::ShowMessageBox(const char* message) const
@@ -45,12 +42,12 @@ void Application::ShowMessageBox(const char* title, const char* message) const
     this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }
 
-Engine* Application::GetEngine()
+Engine* Application::GetEngine() noexcept
 {
     return m_engine.get();
 }
 
-const Engine* Application::GetEngine() const
+const Engine* Application::GetEngine() const noexcept
 {
     return m_engine.get();
 }
