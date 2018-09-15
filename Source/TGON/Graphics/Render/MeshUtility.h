@@ -12,15 +12,15 @@ namespace tgon
 
 class TGON_API MeshUtility
 {   
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Creates a triangle mesh which is global instance. */
+    /**@brief   Creates a triangle mesh which is global instance. */
     static std::shared_ptr<Mesh> CreateSharedTriangle();
                                   
-    /* @brief   Creates a shared cube mesh which is global instance. */
+    /**@brief   Creates a shared cube mesh which is global instance. */
     static std::shared_ptr<Mesh> CreateSharedCube();
                                   
-    /* @brief   Creates a shared quad mesh which is global instance. */
+    /**@brief   Creates a shared quad mesh which is global instance. */
     static std::shared_ptr<Mesh> CreateSharedQuad();
 
     //std::shared_ptr<Mesh> CreateUVSphere(int );

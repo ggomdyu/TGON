@@ -20,7 +20,7 @@ namespace tgon
 class TGON_API VertexBuffer final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
@@ -29,7 +29,7 @@ public:
 
     VertexBuffer(VertexBuffer&& rhs);
     
-/* @section Public method */
+/**@section Public method */
 public:
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     
@@ -43,7 +43,7 @@ public:
     
     bool IsDynamicUsage() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 public:
     VertexBufferImpl m_vertexBufferImpl;
 };

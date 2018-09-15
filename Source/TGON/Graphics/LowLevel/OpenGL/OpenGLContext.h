@@ -29,27 +29,27 @@ struct TGON_API OpenGLContext final :
 public:
     TGON_RUNTIME_OBJECT(OpenGLContext);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     OpenGLContext(const VideoMode& videoMode, const Window& displayTarget);
     OpenGLContext(OpenGLContext&& rhs);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~OpenGLContext();
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     OpenGLContext& operator=(OpenGLContext&& rhs);
 
-/* @section Public method */
+/**@section Public method */
 public:
     void MakeCurrent();
     
-    /* @brief   Displays the rendered image to the screen. */
+    /**@brief   Displays the rendered image to the screen. */
     void SwapBuffer();
 
-/* @section Public variable */
+/**@section Public variable */
 public:
 #if TGON_PLATFORM_WINDOWS
     HWND wndHandle;

@@ -16,17 +16,17 @@ class TGON_API TimeModule final :
 public:
     TGON_RUNTIME_OBJECT(TimeModule);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     TimeModule();
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~TimeModule() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the TimeModule. */
+    /**@brief   Updates the TimeModule. */
     virtual void Update() override;
     
     /**
@@ -47,7 +47,7 @@ public:
      */
     float GetTickTime() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     uint64_t m_lastRecordedTickTime;
     float m_timeScale;

@@ -16,13 +16,13 @@ class TGON_API IModule :
 public:
     TGON_RUNTIME_OBJECT(IModule);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~IModule() = 0;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the module. */
+    /**@brief   Updates the module. */
     virtual void Update() = 0;
 };
     

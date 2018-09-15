@@ -16,7 +16,7 @@ namespace tgon
 
 class TGON_API ImageUtilty
 {
-/* @section Public method */
+/**@section Public method */
 public:
     ImageFormat ConvertStringToImageFormat(const char* imageFormatStr, std::size_t imageFormatStrLen);
 

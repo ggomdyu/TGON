@@ -15,18 +15,18 @@ namespace tgon
 
 class TGON_API RuntimeObject
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using SuperType = void;
     using ThisType = RuntimeObject;
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~RuntimeObject() = 0;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Gets dynamic bound type information. */
+    /**@brief   Gets dynamic bound type information. */
     virtual const RTTI* GetRTTI() const = 0;
 };
 

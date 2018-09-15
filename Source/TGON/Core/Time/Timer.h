@@ -7,15 +7,16 @@
 #pragma once
 #include <cstdint>
 
+#include "Core/Object/DelegateChain.h"
+
 #include "Time.h"
-#include "DelegateChain.h"
 
 namespace tgon
 {
     
 class Timer final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Timer() noexcept;
     
@@ -23,7 +24,7 @@ public:
     
     Timer(int64_t interval, bool isAutoReset) noexcept;
     
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Stops this timer.
@@ -55,12 +56,12 @@ public:
     /**@brief   Gets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event. */
     float GetInterval() const noexcept;
     
-/* @section Public variable */
+/**@section Public variable */
 public:
     /**@brief   Occurs when the interval elapses. */
     DelegateChain<void()> OnTimeElapsed;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     int64_t m_interval;
     int64_t m_prevTime;

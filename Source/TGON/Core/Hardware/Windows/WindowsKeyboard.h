@@ -18,11 +18,11 @@ namespace tgon
 class TGON_API KeyboardImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit KeyboardImpl(InputManagerImpl& platformInputManager);
 
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     bool IsKeyDown(KeyCode keyCode) const;
@@ -31,7 +31,7 @@ public:
     const OIS::Keyboard* GetKeyboardDevice() const noexcept;
     OIS::Keyboard* GetKeyboardDevice() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     OIS::Keyboard* m_keyboardDevice;
     char m_prevKeyStates[256];

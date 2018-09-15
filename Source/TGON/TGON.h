@@ -67,3 +67,4 @@
 #include "Game/Component/MeshRendererComponent.h"
 #include "Game/Component/SpriteRendererComponent.h"
 #include "Game/Engine/GameSceneModule.h"
+#include "Game/Engine/GameScene.h"

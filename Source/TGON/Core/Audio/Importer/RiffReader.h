@@ -12,7 +12,7 @@ namespace tgon
 
 class RiffReader
 {
-/* @section Public struct */
+/**@section Public struct */
 public:
     enum ChunkId : uint32_t
     {
@@ -36,15 +36,15 @@ public:
 
     struct ChunkHeader
     {
-    /* @section Public constructor */
+    /**@section Public constructor */
     public:
         ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept;
         
-    /* @section Public method */
+    /**@section Public method */
     public:
         std::size_t GetSize() const noexcept;
         
-    /* @section Public variable */
+    /**@section Public variable */
     public:
         ChunkId chunkId;
         uint32_t chunkDataSize;
@@ -89,16 +89,16 @@ public:
     {
     };
 
-/* @section Public type */
+/**@section Public type */
 public:
     RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept;
     
-/* @section Public method */
+/**@section Public method */
 public:
     bool ReadNext();
     ChunkHeader GetChunkHeader() const;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     const uint8_t* m_srcData;
     const uint8_t* m_srcDataIter;

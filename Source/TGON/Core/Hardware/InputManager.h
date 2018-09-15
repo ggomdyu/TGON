@@ -19,22 +19,22 @@ namespace tgon
 class TGON_API InputManager final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     InputManager(const Window& inputTarget);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~InputManager();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     
     const InputManagerImpl& GetImpl() const noexcept;
     InputManagerImpl& GetImpl() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     InputManagerImpl m_inputManagerImpl;
 };

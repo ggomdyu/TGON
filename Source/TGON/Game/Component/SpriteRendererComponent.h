@@ -24,85 +24,54 @@ class TGON_API SpriteRendererComponent :
 public:
     TGON_RUNTIME_OBJECT(SpriteRendererComponent);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     /**
-     * @brief   Initializes component with specified sprite path.
+     * @brief   Initializes component with the specified sprite path.
      * @param [in] filePath     The file path of sprite.
      */
-    explicit SpriteRendererComponent(const std::string& filePath) :
-        m_sprite(filePath),
-        m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-        m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
-    {
-    }
+    explicit SpriteRendererComponent(const std::string& filePath);
 
     /**
-     * @brief   Initializes component with specified sprite path.
+     * @brief   Initializes component with the specified sprite path.
      * @param [in] filePath     The file path of sprite.
      */
-    explicit SpriteRendererComponent(std::string&& filePath) :
-        m_sprite(std::move(filePath)),
-        m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-        m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
-    {
-    }
+    explicit SpriteRendererComponent(std::string&& filePath);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~SpriteRendererComponent() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the component. */
-    virtual void Update() override
-    {
-        m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, { GetOwner()->GetTransform().GetWorldMatrix() });
-    }
+    /**@brief   Updates the component. */
+    virtual void Update() override;
 
     /**
      * @brief   Sets the sprite.
      * @param [in] sprite   The reference to the sprite.
      */
-    void SetSprite(const Sprite& sprite)
-    {
-        m_sprite = sprite;
-    }
+    void SetSprite(const Sprite& sprite);
 
-    /* @brief   Gets the sprite. */
-    Sprite& GetSprite() noexcept
-    {
-        return m_sprite;
-    }
+    /**@brief   Gets the sprite. */
+    Sprite& GetSprite() noexcept;
 
-    /* @brief   Gets the sprite. */
-    const Sprite& GetSprite() const noexcept
-    {
-        return m_sprite;
-    }
+    /**@brief   Gets the sprite. */
+    const Sprite& GetSprite() const noexcept;
 
     /**
      * @brief   Sets the color of this sprite.
      * @param [in] color    The reference to the sprite color.
      */
-    void SetBlendColor(const Color4f& blendColor)
-    {
-        m_material->SetBlendColor(blendColor);
-    }
+    void SetBlendColor(const Color4f& blendColor);
 
-    /* @brief   Gets the color of this sprite.*/
-    Color4f& GetBlendColor() noexcept
-    {
-        return m_material->GetBlendColor();
-    }
+    /**@brief   Gets the color of this sprite.*/
+    Color4f& GetBlendColor() noexcept;
 
-    /* @brief   Gets the color of this sprite. */
-    const Color4f& GetBlendColor() const noexcept
-    {
-        return m_material->GetBlendColor();
-    }
+    /**@brief   Gets the color of this sprite. */
+    const Color4f& GetBlendColor() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     Sprite m_sprite;
     std::shared_ptr<TextureMaterial> m_material;

@@ -22,15 +22,15 @@ namespace tgon
 class TGON_API Mouse final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit Mouse(InputManager& inputManager);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~Mouse();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
@@ -41,7 +41,7 @@ public:
     const MouseImpl& GetImpl() const noexcept;
     MouseImpl& GetImpl() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     MouseImpl m_mouseImpl;
 };

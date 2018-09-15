@@ -28,20 +28,66 @@ void GameObject::Update()
     }
 }
 
-const std::shared_ptr<Component>& GameObject::AddComponent(Component* component)
+void GameObject::SetName(const FixedHashString32& name)
 {
-    component->SetOwner(this);
-
-    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
-    {
-        return lhs->GetRTTI()->GetHashCode() < rhs;
-    };
-    
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), component->GetRTTI()->GetHashCode(), predicate);
-
-    return *m_components.emplace(iter, component);
+    m_name = name;
 }
-    
+
+const FixedHashString32& GameObject::GetName() const noexcept
+{
+    return m_name;
+}
+
+void GameObject::SetPosition(const Vector3& position)
+{
+    m_transform.SetPosition(position);
+}
+
+void GameObject::Move(const Vector3& position)
+{
+    m_transform.SetPosition(m_transform.GetPosition() + position);
+}
+
+void GameObject::SetRotation(const Vector3& rotation)
+{
+    m_transform.SetRotation(rotation);
+}
+
+void GameObject::Rotate(const Vector3& rotation)
+{
+    m_transform.SetRotation(m_transform.GetRotation() + rotation);
+}
+
+void GameObject::SetScale(const Vector3& scale)
+{
+    m_transform.SetScale(scale);
+}
+
+void GameObject::Scale(const Vector3& scale)
+{
+    m_transform.SetScale(m_transform.GetScale() + scale);
+}
+
+Transform& GameObject::GetTransform() noexcept
+{
+    return m_transform;
+}
+
+const Transform& GameObject::GetTransform() const noexcept
+{
+    return m_transform;
+}
+
+void GameObject::SetActivate(bool isActivate)
+{
+    m_isActivated = isActivate;
+}
+
+bool GameObject::IsActivated() const noexcept
+{
+    return m_isActivated;
+}
+
 bool GameObject::RemoveComponent(size_t componentId)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)

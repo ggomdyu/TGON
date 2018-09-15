@@ -31,7 +31,7 @@ struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> :
 {
 };
 
-/* @brief   Traits for the class member function */
+/**@brief   Traits for the class member function */
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
     public FunctionTraits<_ReturnType(_ArgTypes...)>
@@ -57,7 +57,7 @@ struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
 {
 };
 
-/* @brief   Traits for the lambda */
+/**@brief   Traits for the lambda */
 template <typename _FunctionType>
 struct FunctionTraits :
     public FunctionTraits<decltype(&_FunctionType::operator())>

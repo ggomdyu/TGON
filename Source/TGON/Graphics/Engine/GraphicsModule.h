@@ -19,37 +19,37 @@ class TGON_API GraphicsModule :
 public:
     TGON_RUNTIME_OBJECT(GraphicsModule);
     
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     GraphicsModule(Window& window, const VideoMode& videoMode);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~GraphicsModule() override = default;
     
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the module. */
+    /**@brief   Updates the module. */
     virtual void Update() override;
     
-    /* @brief   Gets the Graphics. */
+    /**@brief   Gets the Graphics. */
     Graphics& GetGraphics() noexcept;
     
-    /* @brief   Gets the Graphics. */
+    /**@brief   Gets the Graphics. */
     const Graphics& GetGraphics() const noexcept;
     
-    /* @brief   Gets the RenderStage. */
+    /**@brief   Gets the RenderStage. */
     RenderStage& GetRenderStage() noexcept;
     
-    /* @brief   Gets the RenderStage. */
+    /**@brief   Gets the RenderStage. */
     const RenderStage& GetRenderStage() const noexcept;
     
-/* @section Private method */
+/**@section Private method */
 private:
-    /* @brief   Draws the render stage. */
+    /**@brief   Draws the render stage. */
     void Draw();
 
-/* @section Private variable */
+/**@section Private variable */
 public:
     Graphics m_graphics;
     

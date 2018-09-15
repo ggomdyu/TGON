@@ -32,7 +32,7 @@ inline int32_t GetLanguage(char(&destStr)[N])
     return GetLanguage(destStr, N);
 }
 
-/* @brief   Returns the current system language. */
+/**@brief   Returns the current system language. */
 std::string GetLanguage();
 
 } /* namespace tgon */

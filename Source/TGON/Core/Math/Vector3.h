@@ -19,9 +19,9 @@ template <typename _ValueType,
           typename std::enable_if<std::is_floating_point<_ValueType>::value>::type* = nullptr>
 struct TGON_API BasicVector3
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes x, y, z components to 0. */
+    /**@brief   Initializes x, y, z components to 0. */
     constexpr BasicVector3() noexcept  :
         x(0.0f),
         y(0.0f),
@@ -29,7 +29,7 @@ public:
     {
     }
     
-    /* @brief   Initializes x, y, z components with the specified value. */
+    /**@brief   Initializes x, y, z components with the specified value. */
     constexpr BasicVector3(const _ValueType& scalar) noexcept :
         x(scalar),
         y(scalar),
@@ -37,7 +37,7 @@ public:
     {
     }
 
-    /* @brief   Initializes x, y, z components with the specified value. */
+    /**@brief   Initializes x, y, z components with the specified value. */
     constexpr BasicVector3(const _ValueType& x, const _ValueType& y, const _ValueType& z) noexcept :
         x(x),
         y(y),
@@ -45,7 +45,7 @@ public:
     {
     }
 
-    /* @brief   Initializes x, y components with the specified value and sets z to zero. */
+    /**@brief   Initializes x, y components with the specified value and sets z to zero. */
     constexpr BasicVector3(const _ValueType& x, const _ValueType& y) noexcept :
         x(x),
         y(y),
@@ -53,7 +53,7 @@ public:
     {
     }
 
-    /* @brief   Initializes x, y, z components with the specified expression template. */
+    /**@brief   Initializes x, y, z components with the specified expression template. */
     template <typename _DerivedExpressionType>
     constexpr BasicVector3(const BaseExpression<_DerivedExpressionType>& expression) :
         x(expression[0]),
@@ -62,7 +62,7 @@ public:
     {
     }
 
-/* @section Public perator */
+/**@section Public perator */
 public:
     constexpr const AddExpression<BasicVector3, BasicVector3> operator+(const BasicVector3& v) const noexcept
     {
@@ -169,7 +169,7 @@ public:
         return !(*this == v);
     }
     
-/* @section Public method */
+/**@section Public method */
 public:
     static constexpr const BasicVector3 Reflect(const BasicVector3& inDirection, const BasicVector3& inPlaneNormal) noexcept
     {
@@ -255,7 +255,7 @@ public:
 #endif
     }
 
-/* @section Public variable */
+/**@section Public variable */
 public:
 	_ValueType x, y, z;
 };

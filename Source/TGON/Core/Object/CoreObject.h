@@ -22,37 +22,46 @@ class TGON_API CoreObject :
 public:
     TGON_RUNTIME_OBJECT(CoreObject);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     CoreObject() = default;
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~CoreObject() override = default;
     
-/* @section Public method */
+/**@section Public method */
 public:
     template <typename _Type>
-    void SetExtraData(_Type&& extraData)
-    {
-        m_extraData = std::forward<_Type>(extraData);
-    }
+    void SetExtraData(_Type&& extraData);
     
     template <typename _Type>
-    _Type* GetExtraData()
-    {
-        return boost::any_cast<_Type>(&m_extraData);
-    }
+    _Type* GetExtraData();
     
     template <typename _Type>
-    const _Type* GetExtraData() const
-    {
-        return const_cast<CoreObject*>(this)->GetExtraData<_Type>();
-    }
+    const _Type* GetExtraData() const;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     boost::any m_extraData;
 };
+
+template <typename _Type>
+inline void CoreObject::SetExtraData(_Type&& extraData)
+{
+    m_extraData = std::forward<_Type>(extraData);
+}
+
+template <typename _Type>
+inline _Type* CoreObject::GetExtraData()
+{
+    return boost::any_cast<_Type>(&m_extraData);
+}
+
+template <typename _Type>
+inline const _Type* CoreObject::GetExtraData() const
+{
+    return const_cast<CoreObject*>(this)->GetExtraData<_Type>();
+}
 
 } /* namespace tgon */

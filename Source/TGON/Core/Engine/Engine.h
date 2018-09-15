@@ -31,15 +31,15 @@ class TGON_API Engine :
 public:
     TGON_RUNTIME_OBJECT(Engine);
 
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     Engine();
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~Engine() = 0;
     
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Updates the Engine.
@@ -67,21 +67,21 @@ public:
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     bool UnregisterModule();
 
-    /* @brief   Returns a module managed by this engine. */
+    /**@brief   Returns a module managed by this engine. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     std::shared_ptr<_ModuleType> FindModule() noexcept;
 
-    /* @brief   Returns a module managed by this engine. */
+    /**@brief   Returns a module managed by this engine. */
     template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
     
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     virtual void OnDidLaunch();
 
     virtual void OnWillTerminate();
 
-/* @section Private method */
+/**@section Private method */
 private:
     /**
      * @brief   Returns a module that managed by Application.
@@ -97,7 +97,7 @@ private:
      */
     bool UnregisterModule(size_t moduleId);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<TimeModule> m_timeModule;
 

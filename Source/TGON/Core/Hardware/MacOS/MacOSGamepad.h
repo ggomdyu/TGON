@@ -25,11 +25,11 @@ class InputManagerImpl;
 class TGON_API GamepadImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit GamepadImpl(InputManagerImpl& inputManagerImpl);
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     void Vibrate(float leftMotor, float rightMotor);
@@ -39,7 +39,7 @@ public:
     const gainput::InputDevicePad* GetGamepadDevice() const noexcept;
     gainput::InputDevicePad* GetGamepadDevice() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     gainput::InputDevicePad* m_gamepadDevice;
 };

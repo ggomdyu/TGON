@@ -16,30 +16,30 @@ namespace tgon
 
 class TGON_API Sprite final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes the sprite with specified file path. */
+    /**@brief   Initializes the sprite with specified file path. */
     explicit Sprite(const std::string& filePath);
     
-    /* @brief   Initializes the sprite with texture and material. */
+    /**@brief   Initializes the sprite with texture and material. */
     explicit Sprite(const std::shared_ptr<Texture>& texture);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~Sprite() = default;
     
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Sets the texture of the sprite. */
+    /**@brief   Sets the texture of the sprite. */
     void SetTexture(const std::shared_ptr<Texture>& texture);
 
-    /* @brief   Gets the texture of the sprite. */
+    /**@brief   Gets the texture of the sprite. */
     std::shared_ptr<Texture>& GetTexture() noexcept;
 
-    /* @brief   Gets the texture of the sprite. */
+    /**@brief   Gets the texture of the sprite. */
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
 };

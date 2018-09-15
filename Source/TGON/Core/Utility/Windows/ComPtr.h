@@ -15,7 +15,7 @@ class ComPtrTraits :
     public DefaultRAIITraits<_PointerType>
 {
 public:
-    /* @brief   Adds the reference count of managed resource. */
+    /**@brief   Adds the reference count of managed resource. */
     void AddRef(_PointerType& resource)
     {
         if (resource != GetNullValue())
@@ -24,7 +24,7 @@ public:
         }
     }
 
-    /* @brief   Releases the managed resource. */
+    /**@brief   Releases the managed resource. */
     void Release(_PointerType& resource)
     {
         if (resource != GetNullValue())
@@ -43,19 +43,19 @@ template <typename _PointerType>
 class ComPtr final :
     public RAII<_PointerType, ComPtr<_PointerType>>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using PointerType = _PointerType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     using ComPtr::ComPtr;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     operator bool() noexcept;
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     using RAII<_PointerType, ComPtr<_PointerType>>::m_resource;
 };

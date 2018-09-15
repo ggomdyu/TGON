@@ -7,15 +7,15 @@ namespace tgon
 
 class ThreadPool::ThreadWorker
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit ThreadWorker(ThreadPool& owner);
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     void operator()();
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     ThreadPool& m_owner;
 };

@@ -21,31 +21,31 @@ namespace tgon
 class TGON_API AudioDevice final :
     private boost::noncopyable
 {
-/* @brief   Public constructor */
+/**@section Public constructor */
 public:
     AudioDevice();
 
-/* @brief   Public destructor */
+/**@section Public destructor */
 public:
     ~AudioDevice();
 
 public:
-    /* @brief   Makes this device's context the current context. */
+    /**@brief   Makes this device's context the current context. */
     void MakeCurrent();
 
-    /* @brief   Gets the device. */
+    /**@brief   Gets the device. */
     ALCdevice* GetDevice() noexcept;
 
-    /* @brief   Gets the device. */
+    /**@brief   Gets the device. */
     const ALCdevice* GetDevice() const noexcept;
 
-    /* @brief   Gets the context. */
+    /**@brief   Gets the context. */
     ALCcontext* GetContext() noexcept;
 
-    /* @brief   Gets the context. */
+    /**@brief   Gets the context. */
     const ALCcontext* GetContext() const noexcept;
 
-/* @brief   Private variable */
+/**@brief   Private variable */
 private:
     ALCdevice* m_device;
 

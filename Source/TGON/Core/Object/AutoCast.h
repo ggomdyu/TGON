@@ -14,7 +14,7 @@ template <typename _CastFromType, typename _CastPolicyType>
 struct AutoCaster final :
     private _CastPolicyType
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     template <typename _CastFromType2>
     constexpr explicit AutoCaster(_CastFromType2&& castFromValue) noexcept :
@@ -22,7 +22,7 @@ public:
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     template <typename _CastToType>
     constexpr operator _CastToType() const noexcept
@@ -30,14 +30,14 @@ public:
         return _CastPolicyType::template Cast<_CastFromType, _CastToType>(m_castFromValue);
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     _CastFromType m_castFromValue;
 };
 
 struct SafeCastPolicy
 {
-/* @section Protected method */
+/**@section Protected method */
 protected:
     template <typename _CastFromType, typename _CastToType>
     constexpr _CastToType Cast(const _CastFromType& castFromValue) const noexcept
@@ -48,7 +48,7 @@ protected:
 
 struct ForceCastPolicy
 {
-/* @section Protected method */
+/**@section Protected method */
 protected:
     template <typename _CastFromType, typename _CastToType>
     constexpr _CastToType Cast(const _CastFromType& castFromValue) const noexcept

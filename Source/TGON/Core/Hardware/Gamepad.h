@@ -21,15 +21,15 @@ namespace tgon
 class TGON_API Gamepad final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit Gamepad(InputManager& inputManager);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~Gamepad();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     void Vibrate(float leftMotor, float rightMotor);
@@ -39,7 +39,7 @@ public:
     const GamepadImpl& GetImpl() const noexcept;
     GamepadImpl& GetImpl() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     GamepadImpl m_gamepadImpl;
 };

@@ -20,30 +20,30 @@ template <typename _ValueType,
           typename std::enable_if<std::is_floating_point<_ValueType>::value>::type* = nullptr>
 struct TGON_API BasicVector2
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes x, y components to 0. */
+    /**@brief   Initializes x, y components to 0. */
     constexpr BasicVector2() noexcept :
         x(0.0f),
         y(0.0f)
     {
     }
 
-    /* @brief   Initializes x, y components with the specified value. */
+    /**@brief   Initializes x, y components with the specified value. */
     constexpr BasicVector2(const _ValueType& scalar) noexcept :
         x(scalar),
         y(scalar)
     {
     }
 
-    /* @brief   Initializes x, y components with the specified value. */
+    /**@brief   Initializes x, y components with the specified value. */
     constexpr BasicVector2(const _ValueType& x, const _ValueType& y) noexcept :
         x(x),
         y(y)
     {
     }
 
-    /* @brief   Initializes x, y components with the specified expression template. */
+    /**@brief   Initializes x, y components with the specified expression template. */
     template <typename _DerivedExpressionType>
     constexpr BasicVector2(const BaseExpression<_DerivedExpressionType>& expression) :
         x(expression[0]),
@@ -51,7 +51,7 @@ public:
     {
     }
 
-/* @section Public perator */
+/**@section Public perator */
 public:
     constexpr const AddExpression<BasicVector2, BasicVector2> operator+(const BasicVector2& v) const noexcept
     {
@@ -153,7 +153,7 @@ public:
         return *(&x + index);
     }
     
-/* @section Public method */
+/**@section Public method */
 public:
     static constexpr const BasicVector2 Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept
     {
@@ -242,7 +242,7 @@ public:
 #endif
     }
 
-/* @section Public variable */
+/**@section Public variable */
 public:
 	_ValueType x, y;
 };

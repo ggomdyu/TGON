@@ -17,7 +17,7 @@ void GameScene::AddObject(const std::shared_ptr<GameObject>& object)
     m_objects.insert(iter, object);
 }
 
-GameObject* GameScene::FindObject(const HashStringView& objectName)
+std::shared_ptr<GameObject> GameScene::FindObject(const HashStringView& objectName)
 {
     auto predicate = [&](const std::shared_ptr<GameObject>& lhs, size_t rhs)
     {
@@ -27,7 +27,7 @@ GameObject* GameScene::FindObject(const HashStringView& objectName)
     auto iter = std::lower_bound(m_objects.begin(), m_objects.end(), objectName.GetHashCode(), predicate);
     if (iter != m_objects.end())
     {
-        return (*iter).get();
+        return *iter;
     }
     else
     {
@@ -35,7 +35,7 @@ GameObject* GameScene::FindObject(const HashStringView& objectName)
     }
 }
 
-const GameObject* GameScene::FindObject(const HashStringView& objectName) const
+const std::shared_ptr<GameObject> GameScene::FindObject(const HashStringView& objectName) const
 {
     return const_cast<GameScene*>(this)->FindObject(objectName);
 }

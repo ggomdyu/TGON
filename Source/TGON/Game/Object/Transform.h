@@ -14,7 +14,7 @@ namespace tgon
 
 class Transform
 {
-/* @section Public method */
+/**@section Public method */
 public:
     Transform() noexcept :
         m_scale({1.0f, 1.0f, 1.0f}),
@@ -22,40 +22,40 @@ public:
     {
     }
     
-    /* @brief   Sets the position. */
+    /**@brief   Sets the position. */
     void SetPosition(const Vector3& position)
     {
         m_position = position;
         m_isDirty = true;
     }
     
-    /* @brief   Sets the rotation. */
+    /**@brief   Sets the rotation. */
     void SetRotation(const Vector3& rotation)
     {
         m_rotation = rotation;
         m_isDirty = true;
     }
     
-    /* @brief   Sets the scale. */
+    /**@brief   Sets the scale. */
     void SetScale(const Vector3& scale)
     {
         m_scale = scale;
         m_isDirty = true;
     }
     
-    /* @brief   Gets the position. */
+    /**@brief   Gets the position. */
     const Vector3& GetPosition() const noexcept
     {
         return m_position;
     }
     
-    /* @brief   Gets the rotation. */
+    /**@brief   Gets the rotation. */
     const Vector3& GetRotation() const noexcept
     {
         return m_rotation;
     }
     
-    /* @brief   Gets the scale. */
+    /**@brief   Gets the scale. */
     const Vector3& GetScale() const noexcept
     {
         return m_scale;
@@ -63,13 +63,13 @@ public:
     
     void Update();
     
-    /* @brief   Gets the world-view-projection matrix. */
+    /**@brief   Gets the world-view-projection matrix. */
     const Matrix4x4& GetWorldMatrix() const noexcept
     {
         return m_matWorld;
     }
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     Vector3 m_position;
     Vector3 m_rotation;

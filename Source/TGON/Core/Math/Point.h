@@ -15,19 +15,19 @@ namespace tgon
 template <typename _ValueType>
 struct BasicPoint
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using ValueType = _ValueType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Constructor that initializes members to 0 */
+    /**@brief   Constructor that initializes members to 0 */
     constexpr BasicPoint() noexcept;
 
-    /* @brief   Constructor that initializes the member with the specified value */
+    /**@brief   Constructor that initializes the member with the specified value */
     constexpr BasicPoint(const _ValueType& x, const _ValueType& y) noexcept;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const BasicPoint operator+(const BasicPoint&) const noexcept;
     constexpr const BasicPoint operator-(const BasicPoint&) const noexcept;
@@ -44,7 +44,7 @@ public:
     template <typename _CastToType>
     constexpr operator BasicPoint<_CastToType>() const noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Converts value to a string.
@@ -62,7 +62,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/* @section Public variable */
+/**@section Public variable */
 public:
     _ValueType x;
     _ValueType y;

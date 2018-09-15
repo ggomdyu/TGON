@@ -21,38 +21,38 @@ class TGON_API RenderStage final :
 public:
     TGON_RUNTIME_OBJECT(RenderStage);
 
-/* @section Public type */
+/**@section Public type */
 public:
     using CameraHandle = size_t;
     using CameraList = std::vector<std::shared_ptr<Camera>>;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Adds a mesh into BatchGroup. */
+    /**@brief   Adds a mesh into BatchGroup. */
     void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
     
-    /* @brief   Adds a batch into BatchGroup. */
+    /**@brief   Adds a batch into BatchGroup. */
     void AddBatch(const Batch& batch);
 
-    /* @brief   Adds a mesh into SpriteBatchGroup. */
+    /**@brief   Adds a mesh into SpriteBatchGroup. */
     void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
 
-    /* @brief   Adds a batch into SpriteBatchGroup. */
+    /**@brief   Adds a batch into SpriteBatchGroup. */
     void AddSpriteBatch(const SpriteBatch& batch);
 
-    /* @brief   Adds a camera into RenderStage. */
+    /**@brief   Adds a camera into RenderStage. */
     void AddCamera(const std::shared_ptr<Camera>& camera);
 
     CameraList& GetCameraList() noexcept;
 
     const CameraList& GetCameraList() const noexcept;
 
-    /* @brief   Removes the specified camera in RenderStage. */
+    /**@brief   Removes the specified camera in RenderStage. */
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
     void Draw(Graphics& graphics);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     BatchGroup m_batchGroup;
 

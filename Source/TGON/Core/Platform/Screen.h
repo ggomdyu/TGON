@@ -9,19 +9,18 @@
 #include <vector>
 
 #include "Config.h"
+#include "ScreenType.h"
 
 namespace tgon
 {
 
-struct Screen;
-
-/* @brief   Returns count of detected monitors. */
+/**@brief   Returns count of detected monitors. */
 TGON_API int32_t GetScreenCount();
 
-/* @brief   Returns current primary screen information.  */
+/**@brief   Returns current primary screen information.  */
 TGON_API Screen GetPrimaryScreen();
 
-/* @brief   Returns all detected screen informations.*/
+/**@brief   Returns all detected screen informations.*/
 TGON_API std::vector<Screen> GetAllScreens();
 
 } /* namespace tgon */

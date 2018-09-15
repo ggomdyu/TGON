@@ -24,17 +24,17 @@ class TGON_API WindowsApplication :
 public:
     TGON_RUNTIME_OBJECT(WindowsApplication);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     WindowsApplication();
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Processes the message stacked in queue. */
+    /**@brief   Processes the message stacked in queue. */
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
 
-    /* @brief   Terminates the program forcibly. */
+    /**@brief   Terminates the program forcibly. */
     void Terminate();
 
     /**
@@ -45,13 +45,13 @@ public:
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
 
-/* @section Private event handler */
+/**@section Private event handler */
 private:
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
-/* @section Private method */
+/**@section Private method */
 private:
-    /* @brief   Register default WNDCLASS to window class table. */
+    /**@brief   Register default WNDCLASS to window class table. */
     bool RegisterWindowClass();
 };
 

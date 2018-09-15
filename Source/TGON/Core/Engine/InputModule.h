@@ -25,25 +25,25 @@ class TGON_API InputModule :
 public:
     TGON_RUNTIME_OBJECT(InputModule);
     
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     InputModule(const InputMode& inputMode, Window& inputTarget);
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the module. */
+    /**@brief   Updates the module. */
     virtual void Update() override;
     
-    /* @brief   Gets the mouse device. */
+    /**@brief   Gets the mouse device. */
     const std::unique_ptr<Mouse>& GetMouse() const noexcept;
     
-    /* @brief   Gets the keyboard device. */
+    /**@brief   Gets the keyboard device. */
     const std::unique_ptr<Keyboard>& GetKeyboard() const noexcept;
 
-    /* @brief   Gets the gamepad device. */
+    /**@brief   Gets the gamepad device. */
     const std::unique_ptr<Gamepad>& GetGamepad() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 public:
     InputManager m_inputManager;
 

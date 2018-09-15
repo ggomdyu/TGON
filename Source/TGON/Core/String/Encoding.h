@@ -15,7 +15,7 @@ namespace tgon
 template <typename _FromEncodingType>
 class Encoding
 {
-/* @section Public method */
+/**@section Public method */
 public:
     template <typename _ToEncodingType, typename _CharType, typename _CharType2>
     static bool Convert(const _CharType* srcStr, std::size_t srcStrLen, _CharType2* destStr, std::size_t destStrBufferLen);
@@ -51,13 +51,13 @@ inline bool Encoding<_FromEncodingType>::Convert(const _CharType* srcStr, std::s
 class ASCII :
     public Encoding<ASCII>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "ASCII";
     static constexpr const int32_t MinCharSize = 1;
     static constexpr const int32_t MaxCharSize = 1;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static int32_t GetCharCount(const char* srcStr);
 };
@@ -65,7 +65,7 @@ public:
 class EUC_KR :
     public Encoding<EUC_KR>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "EUC-KR";
     static constexpr const int32_t MinCharSize = 1;
@@ -75,7 +75,7 @@ public:
 class EUC_JP :
     public Encoding<EUC_JP>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "EUC-JP";
     static constexpr const int32_t MinCharSize = 1;
@@ -94,13 +94,13 @@ constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType
 class UTF8 :
     public UnicodeEncoding<UTF8>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "UTF-8";
     static constexpr const int32_t MinCharSize = 1;
     static constexpr const int32_t MaxCharSize = 3;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static int32_t GetCharCount(const char* srcStr);
 };
@@ -108,13 +108,13 @@ public:
 class UTF16LE :
     public UnicodeEncoding<UTF16LE>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "UTF-16LE";
     static constexpr const int32_t MinCharSize = 2;
     static constexpr const int32_t MaxCharSize = 2;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static int32_t GetCharCount(const char* srcStr);
 };
@@ -122,13 +122,13 @@ public:
 class UTF32 :
     public UnicodeEncoding<UTF32>
 {
-/* @section Public variable */
+/**@section Public variable */
 public:
     static constexpr const char EncodingName[] = "UTF-32";
     static constexpr const int32_t MinCharSize = 4;
     static constexpr const int32_t MaxCharSize = 4;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static int32_t GetCharCount(const char* srcStr);
 };

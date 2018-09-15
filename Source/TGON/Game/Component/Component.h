@@ -20,28 +20,29 @@ class TGON_API Component :
 public:
     TGON_RUNTIME_OBJECT(Component);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Component(GameObject* owner = nullptr) noexcept;
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~Component() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Updates the component. */
+    /**@brief   Updates the component. */
     virtual void Update() = 0;
 
+    /**@brief   Sets the owner of this component. */
     void SetOwner(GameObject* owner);
         
-    /* @brief   Gets the owner of this component. */
+    /**@brief   Gets the owner of this component. */
     const GameObject* GetOwner() const noexcept;
 
-    /* @brief   Gets the owner of this component. */
+    /**@brief   Gets the owner of this component. */
     GameObject* GetOwner() noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     GameObject* m_owner;
 };

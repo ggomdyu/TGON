@@ -20,31 +20,31 @@ class TGON_API MeshRendererComponent :
 public:
     TGON_RUNTIME_OBJECT(MeshRendererComponent);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~MeshRendererComponent() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
 	virtual void Update() override;
     
-    /* @brief   Sets the mesh. */
+    /**@brief   Sets the mesh. */
     void SetMesh(const std::shared_ptr<Mesh>& mesh);
     
-    /* @brief   Gets the mesh. */
+    /**@brief   Gets the mesh. */
     const std::shared_ptr<Mesh>& GetMesh() const noexcept;
     
-    /* @brief   Sets the material. */
+    /**@brief   Sets the material. */
     void SetMaterial(const std::shared_ptr<Material>& material);
     
-    /* @brief   Gets the material. */
+    /**@brief   Gets the material. */
     const std::shared_ptr<Material>& GetMaterial() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<Mesh> m_mesh;
     std::shared_ptr<Material> m_material;

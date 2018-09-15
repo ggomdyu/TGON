@@ -17,11 +17,11 @@ namespace tgon
 class TGON_API Graphics final :
     private PlatformGraphics
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     using PlatformGraphics::PlatformGraphics;
     
-/* @section Public method */
+/**@section Public method */
 public:
     using PlatformGraphics::SetClearColor;
     using PlatformGraphics::SetFillMode;

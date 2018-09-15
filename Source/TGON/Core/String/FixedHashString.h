@@ -16,11 +16,11 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 class BasicFixedHashString :
     private BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
 {
-/* @section Private type */
+/**@section Private type */
 private:
     using SuperType = BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>;
     
-/* @section Public type */
+/**@section Public type */
 public:
     using StringTraitsType = typename SuperType::StringTraitsType;
     using SizeType = typename SuperType::SizeType;
@@ -34,17 +34,17 @@ public:
     using ReverseIteratorType = typename SuperType::ReverseIteratorType;
     using ConstReverseIteratorType = typename SuperType::ConstReverseIteratorType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     BasicFixedHashString(const _CharType* str);
     BasicFixedHashString(const _CharType* str, std::size_t strLen) noexcept;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     bool operator==(const BasicFixedHashString& rhs) const noexcept;
     using SuperType::operator[];
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Assign(const _CharType* str, std::size_t strLen);
     void Assign(const _CharType* str);
@@ -65,7 +65,7 @@ public:
     using SuperType::crend;
     std::size_t GetHashCode() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     size_t m_hashCode;
 };

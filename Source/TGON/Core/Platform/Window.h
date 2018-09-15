@@ -29,11 +29,11 @@ class TGON_API Window final :
 public:
     TGON_RUNTIME_OBJECT(Window);
 
-/* @section Private constructor */
+/**@section Private constructor */
 public:
     using PlatformWindow::PlatformWindow;
 
-/* @section Public method */
+/**@section Public method */
 public:
     using PlatformWindow::Show;
     using PlatformWindow::Hide;
@@ -59,7 +59,7 @@ public:
     using PlatformWindow::IsMinimized;
     using PlatformWindow::IsTopMost;
 
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     using PlatformWindow::OnWindowMove;
     using PlatformWindow::OnWindowResize;

@@ -28,7 +28,7 @@ struct DivideExpression;
 template <typename _DerivedExpressionType>
 struct BaseExpression
 {
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const auto operator[](std::size_t index) const
     {
@@ -47,7 +47,7 @@ public:
     template <typename _SecondOperandType>
     constexpr const DivideExpression<_DerivedExpressionType, _SecondOperandType> operator/(const _SecondOperandType& rhs) const noexcept;
     
-/* @section Public method */
+/**@section Public method */
 public:
     constexpr const auto& GetFirstOperand() const noexcept
     {
@@ -64,12 +64,12 @@ template <typename _FirstOperandType, typename _SecondOperandType>
 struct AddExpression :
     public BaseExpression<AddExpression<_FirstOperandType, _SecondOperandType>>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using FirstOperandType = _FirstOperandType;
     using SecondOperandType = _SecondOperandType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr AddExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
         m_firstOperand(firstOperand),
@@ -77,7 +77,7 @@ public:
     {
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     constexpr const _FirstOperandType& GetFirstOperand() const noexcept
     {
@@ -89,13 +89,13 @@ public:
         return m_secondOperand;
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
 
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr auto operator[](std::size_t index) const
     {
@@ -107,12 +107,12 @@ template <typename _FirstOperandType, typename _SecondOperandType>
 struct SubtractExpression :
     public BaseExpression<SubtractExpression<_FirstOperandType, _SecondOperandType>>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using FirstOperandType = _FirstOperandType;
     using SecondOperandType = _SecondOperandType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr SubtractExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
         m_firstOperand(firstOperand),
@@ -120,14 +120,14 @@ public:
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const auto operator[](std::size_t index) const
     {
         return m_firstOperand[index] - m_secondOperand[index];
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     constexpr const _FirstOperandType& GetFirstOperand() const noexcept
     {
@@ -139,7 +139,7 @@ public:
         return m_secondOperand;
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
@@ -149,12 +149,12 @@ template <typename _FirstOperandType, typename _SecondOperandType>
 struct MultiplyExpression :
     public BaseExpression<MultiplyExpression<_FirstOperandType, _SecondOperandType>>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using FirstOperandType = _FirstOperandType;
     using SecondOperandType = _SecondOperandType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr MultiplyExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
         m_firstOperand(firstOperand),
@@ -162,14 +162,14 @@ public:
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const auto operator[](std::size_t index) const
     {
         return m_firstOperand[index] * m_secondOperand[index];
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     constexpr const _FirstOperandType& GetFirstOperand() const noexcept
     {
@@ -181,7 +181,7 @@ public:
         return m_secondOperand;
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;
@@ -191,12 +191,12 @@ template <typename _FirstOperandType, typename _SecondOperandType>
 struct DivideExpression :
     public BaseExpression<DivideExpression<_FirstOperandType, _SecondOperandType>>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using FirstOperandType = _FirstOperandType;
     using SecondOperandType = _SecondOperandType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr DivideExpression(const _FirstOperandType& firstOperand, const _SecondOperandType& secondOperand) noexcept :
         m_firstOperand(firstOperand),
@@ -204,14 +204,14 @@ public:
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const auto operator[](std::size_t index) const
     {
         return m_firstOperand[index] / m_secondOperand[index];
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     constexpr const _FirstOperandType& GetFirstOperand() const noexcept
     {
@@ -223,7 +223,7 @@ public:
         return m_secondOperand;
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     _FirstOperandType m_firstOperand;
     _SecondOperandType m_secondOperand;

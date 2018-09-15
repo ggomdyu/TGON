@@ -21,15 +21,15 @@ class TGON_API OpenGLGraphics :
 public:
     TGON_RUNTIME_OBJECT(OpenGLGraphics);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~OpenGLGraphics();
 
-/* @section Public method */
+/**@section Public method */
 public:
     void SetClearColor(const Color4f& color);
     void SetFillMode(FillMode fillMode);
@@ -48,11 +48,11 @@ public:
     void DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount);
     void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount);
 
-/* @section Private method */
+/**@section Private method */
 private:
     void SetDefaultGLRenderState();
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     OpenGLContext m_context;
     

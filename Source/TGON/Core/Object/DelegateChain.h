@@ -19,12 +19,12 @@ class DelegateChain;
 template <typename _ReturnType, typename... _ArgTypes>
 class DelegateChain<_ReturnType(_ArgTypes...)> final
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using DelegateType = Delegate<_ReturnType(_ArgTypes...)>;
     using ReturnType = _ReturnType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     DelegateChain() noexcept = default;
 
@@ -33,7 +33,7 @@ public:
     template <typename _DelegateContainer>
     explicit DelegateChain(_DelegateContainer&& delegateContainer);
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     template <typename _DelegateType>
     DelegateChain& operator+=(_DelegateType&& rhs);
@@ -44,7 +44,7 @@ public:
     template <typename... _ArgTypes2>
     _ReturnType operator()(_ArgTypes2&&... args);
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Invokes all delegates stored in list.
@@ -68,13 +68,13 @@ public:
      */
     bool Erase(const DelegateType& value);
 
-    /* @brief   Erases all delegates stored in list. */
+    /**@brief   Erases all delegates stored in list. */
     void Clear() noexcept;
 
-    /* @brief   Gets the delegate list. */
+    /**@brief   Gets the delegate list. */
     const std::vector<DelegateType>& GetInvocationList() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::vector<DelegateType> m_invocationList;
 };

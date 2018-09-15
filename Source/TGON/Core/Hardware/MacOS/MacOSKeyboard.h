@@ -22,11 +22,11 @@ class InputManagerImpl;
     
 class TGON_API KeyboardImpl final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit KeyboardImpl(InputManagerImpl& platformInputManager);
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     bool IsKeyDown(KeyCode keyCode) const;
@@ -35,7 +35,7 @@ public:
     const gainput::InputDeviceKeyboard* GetKeyboardDevice() const noexcept;
     gainput::InputDeviceKeyboard* GetKeyboardDevice() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     gainput::InputDeviceKeyboard* m_keyboardDevice;
 };

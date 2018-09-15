@@ -20,7 +20,7 @@ class TGON_API CameraComponent :
 public:
     TGON_RUNTIME_OBJECT(CameraComponent);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
         CameraComponent(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
@@ -32,7 +32,7 @@ public:
     {
     }
 
-/* @section Private constructor */
+/**@section Private constructor */
 public:
     CameraComponent(const std::shared_ptr<Camera>& camera) :
         m_camera(camera)
@@ -40,14 +40,14 @@ public:
         Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(camera);
     }
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~CameraComponent() override
     {
         Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().RemoveCamera(m_camera);
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
 	virtual void Update() override
     {
@@ -64,7 +64,7 @@ public:
         return m_camera;
     }
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<Camera> m_camera;
 };

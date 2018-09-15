@@ -16,7 +16,7 @@ namespace tgon
 class VertexBufferImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     /**
      * @brief                               Sets the vertex buffer with the specified data.
@@ -29,11 +29,11 @@ public:
 
     VertexBufferImpl(VertexBufferImpl&& rhs);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~VertexBufferImpl();
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief                               Sets the vertex buffer with the specified data.
@@ -44,13 +44,13 @@ public:
      */
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     
-    /* @brief                               Gets the byte size of the data stored in the buffer.  */
+    /**@brief                               Gets the byte size of the data stored in the buffer.  */
     std::size_t GetDataBytes() const noexcept;
     
-    /* @brief                               Sets the rendering pipeline to use this buffer. */
+    /**@brief                               Sets the rendering pipeline to use this buffer. */
     void Use();
     
-    /* @brief                               Sets the rendering pipeline does not use this buffer. */
+    /**@brief                               Sets the rendering pipeline does not use this buffer. */
     void Unuse();
     
     /**
@@ -61,11 +61,11 @@ public:
     
     bool IsDynamicUsage() const noexcept;
 
-/* @section Private method */
+/**@section Private method */
 private:
     GLuint CreateVertexBufferHandle() const;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::size_t m_dataBytes;
     bool m_isDynamicUsage;

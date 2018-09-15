@@ -11,7 +11,7 @@ namespace tgon
 
 class NonAddressable
 {
-/* @section Public operator */
+/**@section Public operator */
 public:
     double operator&() const = delete;
 };

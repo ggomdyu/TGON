@@ -26,11 +26,11 @@ enum class MouseCode;
 class TGON_API MouseImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit MouseImpl(InputManagerImpl& inputManagerImpl);
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
@@ -41,7 +41,7 @@ public:
     const gainput::InputDeviceMouse* GetMouseDevice() const noexcept;
     gainput::InputDeviceMouse* GetMouseDevice() noexcept;
     
-    /* @section Private variable */
+    /**@section Private variable */
 private:
     gainput::InputDeviceMouse* m_mouseDevice;
 };

@@ -19,7 +19,7 @@ namespace tgon
 class TGON_API IndexBuffer final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     /**
      * @brief                       Initializes the index buffer with the specified data.
@@ -37,7 +37,7 @@ public:
      */
     IndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief                       Sets the index buffer with the specified data.
@@ -55,13 +55,13 @@ public:
      */
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
-    /* @brief                       Gets the size of the stored index buffer.  */
+    /**@brief                       Gets the size of the stored index buffer.  */
     std::size_t GetDataBytes() const noexcept;
     
-    /* @brief                       Sets the rendering pipeline to choose this buffer. */
+    /**@brief                       Sets the rendering pipeline to choose this buffer. */
     void Use();
     
-    /* @brief                       Sets the rendering pipeline does not choose this buffer. */
+    /**@brief                       Sets the rendering pipeline does not choose this buffer. */
     void Unuse();
     
     /**
@@ -72,7 +72,7 @@ public:
     
     bool IsDynamicUsage() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 public:
     IndexBufferImpl m_indexBufferImpl;
 };

@@ -16,11 +16,11 @@ template <typename _CharType, typename _StringTraitsType = StringTraits<_CharTyp
 class BasicHashStringView :
     private BasicStringView<_CharType, _StringTraitsType>
 {
-/* @section Private type */
+/**@section Private type */
 private:
     using SuperType = BasicStringView<_CharType, _StringTraitsType>;
     
-/* @section Public type */
+/**@section Public type */
 public:
     using StringTraitsType = typename SuperType::StringTraitsType;
     using SizeType = typename SuperType::SizeType;
@@ -34,20 +34,20 @@ public:
     using ReverseIteratorType = typename SuperType::ReverseIteratorType;
     using ConstReverseIteratorType = typename SuperType::ConstReverseIteratorType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     template <std::size_t _CharArraySize>
     constexpr BasicHashStringView(const _CharType(&str)[_CharArraySize]) noexcept;
 
     constexpr BasicHashStringView(const _CharType* str, std::size_t strLen) noexcept;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr bool operator==(const BasicHashStringView& rhs) const noexcept;
 
     constexpr const _CharType operator[](std::size_t index) const;
     
-/* @section Public method */
+/**@section Public method */
 public:
     using SuperType::Compare;
     using SuperType::Find;
@@ -63,7 +63,7 @@ public:
     using SuperType::crend;
     constexpr std::size_t GetHashCode() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     const _CharType* m_str;
     std::size_t m_strLen;

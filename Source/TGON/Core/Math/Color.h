@@ -13,9 +13,9 @@ namespace tgon
 
 struct Color4b
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Assigns all components to zero. */
+    /**@brief   Assigns all components to zero. */
     constexpr Color4b() noexcept :
         r(0),
         g(0),
@@ -24,7 +24,7 @@ public:
     {
     }
 
-    /* @brief   Assigns color components with the specified value. */
+    /**@brief   Assigns color components with the specified value. */
     constexpr Color4b(uint8_t r, uint8_t g, uint8_t b, uint8_t a) noexcept :
         r(r),
         g(g),
@@ -33,13 +33,13 @@ public:
     {
     }
 
-    /* @brief   Assigns the packed color in RGBA order. */
+    /**@brief   Assigns the packed color in RGBA order. */
     constexpr Color4b(uint32_t color) noexcept :
         color(color)
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const Color4b operator+(const Color4b& rhs) const noexcept
     {
@@ -151,7 +151,7 @@ public:
         return color;
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Converts color to a string.
@@ -179,7 +179,7 @@ public:
 #endif
     }
 
-/* @section Public variable */
+/**@section Public variable */
 public:
     union
     {
@@ -190,7 +190,7 @@ public:
 
 struct Color4f
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr Color4f() noexcept :
         r(0.0f),
@@ -208,7 +208,7 @@ public:
     {
     }
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr bool operator==(const Color4f& rhs) const noexcept
     {
@@ -220,7 +220,7 @@ public:
         return !this->operator==(rhs);
     }
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Converts color to a string.
@@ -248,7 +248,7 @@ public:
 #endif
     }
 
-/* @section Public variable */
+/**@section Public variable */
 public:
     float r, g, b, a;
 };

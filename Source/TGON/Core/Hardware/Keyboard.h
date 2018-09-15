@@ -21,15 +21,15 @@ namespace tgon
 class TGON_API Keyboard final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit Keyboard(InputManager& inputManager);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~Keyboard();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     bool IsKeyDown(KeyCode keyCode) const;
@@ -38,7 +38,7 @@ public:
     const KeyboardImpl& GetImpl() const noexcept;
     KeyboardImpl& GetImpl() noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     KeyboardImpl m_keyboardImpl;
 };

@@ -18,25 +18,25 @@ namespace tgon
 class RenderTargetImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     RenderTargetImpl(int32_t width, int32_t height, int32_t multisampleLevel);
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~RenderTargetImpl();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Use();
     void Unuse();
 
-/* @section Private method */
+/**@section Private method */
 private:
     GLuint CreateRenderBuffer(GLenum format, int32_t width, int32_t height) const;
     GLuint CreateFrameBuffer() const;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     int32_t m_width;
     int32_t m_height;

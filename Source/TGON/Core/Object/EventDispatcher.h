@@ -16,11 +16,11 @@ namespace tgon
 
 class TGON_API EventDispatcher final
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using EventHandler = Delegate<void()>;
     
-/* @section Public method */
+/**@section Public method */
 public:
     void SubscribeEvent(const HashStringView& eventName, const EventHandler& eventHandler);
 
@@ -30,7 +30,7 @@ public:
     
     void DispatchEvent(const HashStringView& eventName);
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::map<size_t, std::map<uintptr_t, EventHandler>> m_eventHandlers;
 };

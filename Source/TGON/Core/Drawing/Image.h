@@ -19,7 +19,7 @@ namespace tgon
 
 class TGON_API Image
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Image();
 
@@ -55,39 +55,39 @@ public:
 
     Image(Image&& rhs);
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     Image& operator=(const Image& rhs) = default;
 
     Image& operator=(Image&& rhs);
 
-    /* @brief   Gets the raw pointer of image. */
+    /**@brief   Gets the raw pointer of image. */
     uint8_t& operator[](std::size_t index);
 
-    /* @brief   Gets the raw pointer of image. */
+    /**@brief   Gets the raw pointer of image. */
     const uint8_t operator[](std::size_t index) const;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Checks the image file was loaded successfully. */
+    /**@brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
 
-    /* @brief   Gets the raw image data. */
+    /**@brief   Gets the raw image data. */
     uint8_t* GetImageData() noexcept;
 
-    /* @brief   Gets the raw image data. */
+    /**@brief   Gets the raw image data. */
     const uint8_t* GetImageData() const noexcept;
     
-    /* @brief   Gets the image width. */
+    /**@brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
 
-    /* @brief   Gets the image height. */
+    /**@brief   Gets the image height. */
     int32_t GetHeight() const noexcept;
 
-    /* @brief   Gets the count of color channel. */
+    /**@brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
 
-    /* @brief   Gets the pixel format of image. */
+    /**@brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
 
     /**
@@ -126,7 +126,7 @@ public:
      */
     bool SaveAsTga(const char* saveFilePath);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::unique_ptr<uint8_t> m_imageData;
     int32_t m_width;

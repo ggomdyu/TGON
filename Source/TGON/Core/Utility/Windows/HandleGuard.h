@@ -21,15 +21,15 @@ class HandleGuard final :
     public RAII<HANDLE, HandleGuard>,
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Adds the reference count of managed resource. */
+    /**@brief   Adds the reference count of managed resource. */
     void AddRef();
 
-    /* @brief   Releases the managed resource. */
+    /**@brief   Releases the managed resource. */
     void Release(HANDLE& resource);
 
-    /* @brief   Returns special value which indicates resource is null. */
+    /**@brief   Returns special value which indicates resource is null. */
     HANDLE GetNullValue() const noexcept;
 };
 

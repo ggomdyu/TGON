@@ -49,10 +49,15 @@ bool RenderStage::RemoveCamera(const std::shared_ptr<Camera>& camera)
         return comp == camera;
     });
     
-    m_cameraList.erase(iter);
-    
-    bool succeed = iter != m_cameraList.end();
-    return succeed;
+    if (iter != m_cameraList.end())
+    {
+        m_cameraList.erase(iter);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void RenderStage::Draw(Graphics& graphics)

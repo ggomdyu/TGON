@@ -17,37 +17,37 @@ namespace tgon
 
 class Mesh final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes with vertex buffer and index buffer. */
+    /**@brief   Initializes with vertex buffer and index buffer. */
     Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
 
-    /* @brief   Initializes with a r-value reference. */
+    /**@brief   Initializes with a r-value reference. */
     Mesh(Mesh&& rhs) = default;
     
-/* @section Public operator */
+/**@section Public operator */
 public:
-    /* @brief   Assigns with a r-value reference. */
+    /**@brief   Assigns with a r-value reference. */
     Mesh& operator=(Mesh&& rhs) = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Sets the rendering pipeline to use this mesh. */
+    /**@brief   Sets the rendering pipeline to use this mesh. */
     void Use();
 
-    /* @brief   Sets the vertex buffer. */
+    /**@brief   Sets the vertex buffer. */
     void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer);
     
-    /* @brief   Sets the index buffer. */
+    /**@brief   Sets the index buffer. */
     void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer);
     
-    /* @brief   Gets the vertex buffer. */
+    /**@brief   Gets the vertex buffer. */
     const std::shared_ptr<VertexBuffer>& GetVertexBuffer() const noexcept;
     
-    /* @brief   Gets the index buffer. */
+    /**@brief   Gets the index buffer. */
     const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     std::shared_ptr<VertexBuffer> m_vertexBuffer;
     

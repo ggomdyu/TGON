@@ -15,19 +15,19 @@ namespace tgon
 template <typename _ValueType>
 struct BasicExtent2D
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using ValueType = _ValueType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Constructor that initializes members to 0 */
+    /**@brief   Constructor that initializes members to 0 */
     constexpr BasicExtent2D() noexcept;
 
-    /* @brief   Constructor that initializes the member with the specified value */
+    /**@brief   Constructor that initializes the member with the specified value */
     constexpr BasicExtent2D(const _ValueType& width, const _ValueType& height) noexcept;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     constexpr const BasicExtent2D operator+(const BasicExtent2D& rhs) const noexcept;
     constexpr const BasicExtent2D operator-(const BasicExtent2D& rhs) const noexcept;
@@ -44,7 +44,7 @@ public:
     template <typename _CastToType>
     constexpr operator BasicExtent2D<_CastToType>() const noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Converts to string.
@@ -62,7 +62,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/* @section Public variable */
+/**@section Public variable */
 public:
     _ValueType width;
     _ValueType height;

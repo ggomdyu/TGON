@@ -17,18 +17,18 @@ namespace tgon
 
 struct OggVorbisFileStream final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static size_t Read(void* buffer, size_t elementSize, size_t elementCount, void* stream);
     static int Seek(void* stream, ogg_int64_t offset, int origin);
     static int Close(void* stream);
     static long Tell(void* stream);
 
-/* @section Public variable */    
+/**@section Public variable */    
 public:
     const uint8_t* srcData;
     const uint8_t* srcDataIter;
@@ -39,17 +39,17 @@ template <typename _AllocatorType>
 class BasicOggVorbisAudioImporter :
     public BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     using BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>::BaseAudioImporter;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Verifies the importing file is exactly WAV. */
+    /**@brief   Verifies the importing file is exactly WAV. */
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 
-/* @section Private method */
+/**@section Private method */
 private:
     ov_callbacks MakeCustomIOCallback() const noexcept;
     unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);

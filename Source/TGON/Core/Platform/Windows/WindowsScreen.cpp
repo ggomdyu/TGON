@@ -3,7 +3,6 @@
 #include <Windows.h>
 
 #include "../Screen.h"
-#include "../ScreenType.h"
 
 namespace tgon
 {

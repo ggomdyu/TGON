@@ -18,17 +18,17 @@ namespace tgon
 
 class TGON_API DateTime final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     constexpr DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day);
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second);
 
-/* @section Private constructor */
+/**@section Private constructor */
 private:
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static DateTime Now();
     static DateTime UtcNow();
@@ -48,7 +48,7 @@ public:
     constexpr int32_t GetDayOfYear() const noexcept;
     constexpr DateTimeKind GetDateTimeKind() const noexcept;
 
-/* @section Public variable */
+/**@section Public variable */
 private:
     int32_t m_month;
     int32_t m_day;

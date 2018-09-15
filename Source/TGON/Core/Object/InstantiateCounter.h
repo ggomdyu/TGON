@@ -15,21 +15,21 @@ namespace tgon
 template <typename _InstanceType>
 class InstantiateCounter
 {
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     InstantiateCounter() noexcept
     {
         ++ms_instantiateCount;
     }
     
-/* @section Public method */
+/**@section Public method */
 public:
     static int32_t GetInstantiateCount() noexcept
     {
         return ms_instantiateCount;
     }
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     static int32_t ms_instantiateCount;
 };
@@ -41,7 +41,7 @@ template <typename _InstanceType, int32_t _MaxInstantiateCount>
 class InstantiateCountLimiter :
     private InstantiateCounter<_InstanceType>
 {
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     InstantiateCountLimiter() noexcept
     {

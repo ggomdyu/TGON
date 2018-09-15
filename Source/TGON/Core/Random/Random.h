@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-/* @brief   Returns random value between min to max */
+/**@brief   Returns random value between min to max */
 template <typename _ValueType,
           std::enable_if_t<std::is_floating_point<_ValueType>::value>* = nullptr>
 inline _ValueType RandRange(_ValueType min, _ValueType max)
@@ -24,7 +24,7 @@ inline _ValueType RandRange(_ValueType min, _ValueType max)
     return min + (static_cast<_ValueType>(WELL1024a()) * (max - min));
 }
 
-/* @brief   Returns random value between min to max */
+/**@brief   Returns random value between min to max */
 template <typename _ValueType,
           std::enable_if_t<std::is_integral<_ValueType>::value>* = nullptr>
 inline _ValueType RandRange(_ValueType min, _ValueType max)
@@ -35,7 +35,7 @@ inline _ValueType RandRange(_ValueType min, _ValueType max)
     return static_cast<_ValueType>(RandRange(static_cast<FloatType>(min), static_cast<FloatType>(max + 1)));
 }
 
-/* @brief   Choose a random element from the given container and return it as an iterator. */
+/**@brief   Choose a random element from the given container and return it as an iterator. */
 template <typename _ContainerType>
 inline typename _ContainerType::iterator Choice(_ContainerType& container)
 {
@@ -45,7 +45,7 @@ inline typename _ContainerType::iterator Choice(_ContainerType& container)
     return iter;
 }
 
-/* @brief   Choose a random element from the given container and return it as an iterator. */
+/**@brief   Choose a random element from the given container and return it as an iterator. */
 template <typename _ContainerType>
 inline typename _ContainerType::IteratorType Choice(_ContainerType& container)
 {
@@ -55,7 +55,7 @@ inline typename _ContainerType::IteratorType Choice(_ContainerType& container)
     return iter;
 }
 
-/* @brief   Shuffles the given container. */
+/**@brief   Shuffles the given container. */
 template <typename _ContainerType>
 inline void Shuffle(_ContainerType& container)
 {

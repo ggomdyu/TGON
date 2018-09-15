@@ -19,7 +19,7 @@ namespace tgon
 
 class TGON_API Batch final
 {
-/* @section Public struct */
+/**@section Public struct */
 public:
     struct DrawPrimitive
     {
@@ -27,29 +27,29 @@ public:
         const Matrix4x4* matWorld;
     };
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes the batch with a material. */
+    /**@brief   Initializes the batch with a material. */
     explicit Batch(const std::shared_ptr<Material>& material);
     
-    /* @brief   Initializes the batch with a material and primitives. */
+    /**@brief   Initializes the batch with a material and primitives. */
     explicit Batch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Adds a draw primitive into the batch. */
+    /**@brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWorld);
     
-    /* @brief   Adds a draw primitive into the batch. */
+    /**@brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
 
-    /* @brief   Checks whether the specified material can batched. */
+    /**@brief   Checks whether the specified material can batched. */
     bool CanBatch(const std::shared_ptr<Material>& material) const;
     
-    /* @brief   Draws all batched primitives. */
+    /**@brief   Draws all batched primitives. */
     void Draw(Graphics& graphics, const Camera& camera);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<Material> m_material;
     
@@ -58,18 +58,18 @@ private:
     
 class TGON_API BatchGroup final
 {
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Adds a mesh into the batch list. */
+    /**@brief   Adds a mesh into the batch list. */
     void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
     
-    /* @brief   Adds a batch into the batch list. */
+    /**@brief   Adds a batch into the batch list. */
     void AddBatch(const Batch& batch);
     
-    /* @brief   Flushes all the batch in list. */
+    /**@brief   Flushes all the batch in list. */
     void FlushBatch(Graphics& graphics, const Camera& camera);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::vector<Batch> m_batches;
 };

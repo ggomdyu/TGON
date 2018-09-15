@@ -26,7 +26,7 @@ namespace tgon
 class AudioBuffer final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     AudioBuffer();
 
@@ -55,15 +55,15 @@ public:
 
     AudioBuffer(AudioBuffer&& rhs) = default;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     AudioBuffer& operator=(AudioBuffer&& rhs) = default;
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~AudioBuffer();
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief   Reads a sound data from the path specified by filePath.
@@ -90,33 +90,33 @@ public:
 
     bool IsValid() const noexcept;
 
-    /* @brief   Gets the raw data of the sound. */
+    /**@brief   Gets the raw data of the sound. */
     const std::vector<uint8_t>& GetSoundData() const noexcept;
 
-    /* @brief   Gets bits per sample. */
+    /**@brief   Gets bits per sample. */
     int32_t GetBitsPerSample() const noexcept;
 
-    /* @brief   Gets the count of sound channel. */
+    /**@brief   Gets the count of sound channel. */
     int32_t GetChannels() const noexcept;
 
-    /* @brief   Gets the sampling rate of the sound. */
+    /**@brief   Gets the sampling rate of the sound. */
     int32_t GetSamplingRate() const noexcept;
 
     ALenum GetALFormat() const noexcept;
 
-    /* @brief   Gets the id of ALBuffer that stores sound data. */
+    /**@brief   Gets the id of ALBuffer that stores sound data. */
     ALuint GetALBufferId() const noexcept;
     
-    /* @brief   Gets the file path saved at loading time. */
+    /**@brief   Gets the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
 
-/* @section Private method */
+/**@section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
 
     bool InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::string m_filePath;
     std::vector<uint8_t> m_audioData;

@@ -19,15 +19,15 @@ namespace tgon
 class TGON_API ShaderImpl final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     ShaderImpl(const char* vertexShaderCode, const char* fragmentShaderCode);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~ShaderImpl();
 
-/* @section Public method */
+/**@section Public method */
 public:
     void Use();
     void Unuse();
@@ -47,12 +47,12 @@ public:
     void BindAttributeLocation(const char* name, uint32_t location);
     int GetUniformLocation(const char* name) const;
     
-    /* @brief                   Checks the shader was loaded successfully. */
+    /**@brief                   Checks the shader was loaded successfully. */
     bool IsValid() const noexcept;
 
-/* @section Private method */
+/**@section Private method */
 private:
-    /* @brief                   Links shaders to the program object. */
+    /**@brief                   Links shaders to the program object. */
     bool LinkShadersToProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
 
     /**
@@ -71,7 +71,7 @@ private:
 
     std::string GetShaderInfoLog(GLuint shaderId) const;
 
-/* @section Private variable */
+/**@section Private variable */
 public:
     GLuint m_programId;
 };

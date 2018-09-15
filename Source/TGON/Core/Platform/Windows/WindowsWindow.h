@@ -29,11 +29,11 @@ class WindowsWindow :
 public:
     TGON_RUNTIME_OBJECT(WindowsWindow);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     WindowsWindow(const WindowStyle& windowStyle);
 
-/* @section Public method */
+/**@section Public method */
 public:
     void Show();
     void Hide();
@@ -62,7 +62,7 @@ public:
     DWORD GetRawWindowStyle() const;
     DWORD GetRawWindowStyleEx() const;
 
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -77,11 +77,11 @@ public:
     DelegateChain<void()> OnWindowGetFocus;
     DelegateChain<void()> OnWindowLoseFocus;
 
-/* @section Private method */
+/**@section Private method */
 private:
     void SetUserData(void* data);
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;

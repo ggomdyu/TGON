@@ -18,48 +18,48 @@ class TGON_API TextureImpl final :
     private Image,
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes texture through specified file path and texture property. */
+    /**@brief   Initializes texture through specified file path and texture property. */
     TextureImpl(const std::string& filePath, const TextureProperty& textureProperty);
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     ~TextureImpl();
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Changes rendering pipeline state to use this texture. */
+    /**@brief   Changes rendering pipeline state to use this texture. */
     void Use();
     
-    /* @brief   Sets the texture filter mode. */
+    /**@brief   Sets the texture filter mode. */
     void SetFilterMode(TextureFilterMode filterMode);
     
-    /* @brief   Sets the texture wrap mode. */
+    /**@brief   Sets the texture wrap mode. */
     void SetWrapMode(TextureWrapMode wrapMode);
     
-    /* @brief   Gets the texture filter mode. */
+    /**@brief   Gets the texture filter mode. */
     TextureFilterMode GetFilterMode() const noexcept;
     
-    /* @brief   Gets the texture wrap mode. */
+    /**@brief   Gets the texture wrap mode. */
     TextureWrapMode GetWrapMode() const noexcept;
     
-    /* @brief   Checks the image file was loaded successfully. */
+    /**@brief   Checks the image file was loaded successfully. */
     using Image::IsValid;
     
-    /* @brief   Gets the raw image data. */
+    /**@brief   Gets the raw image data. */
     using Image::GetImageData;
     
-    /* @brief   Gets the image width. */
+    /**@brief   Gets the image width. */
     using Image::GetWidth;
     
-    /* @brief   Gets the image height. */
+    /**@brief   Gets the image height. */
     using Image::GetHeight;
     
-    /* @brief   Gets the count of color channel. */
+    /**@brief   Gets the count of color channel. */
     using Image::GetChannels;
     
-    /* @brief   Gets the pixel format of image. */
+    /**@brief   Gets the pixel format of image. */
     using Image::GetPixelFormat;
     
     /**
@@ -68,7 +68,7 @@ public:
      */
     using Image::GetFilePath;
     
-    /* @brief   Gets the handle of texture object. */
+    /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
 
 private:

@@ -18,18 +18,18 @@ namespace tgon
 
 struct TGON_API Matrix4x4
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
-    /* @brief   Initializes matrix as an Identity matrix. */
+    /**@brief   Initializes matrix as an Identity matrix. */
     constexpr Matrix4x4() noexcept;
 
-    /* @brief   Initializes matrix with the specified value. */
+    /**@brief   Initializes matrix with the specified value. */
     constexpr Matrix4x4(float m00, float m01, float m02, float m03,
                         float m10, float m11, float m12, float m13,
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     Matrix4x4 operator+(const Matrix4x4&) const;
     Matrix4x4 operator-(const Matrix4x4&) const;
@@ -43,7 +43,7 @@ public:
     float* operator[](std::size_t index);
     const float* operator[](std::size_t index) const;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static constexpr const Matrix4x4 Identity();
     static constexpr const Matrix4x4 Zero();
@@ -63,7 +63,7 @@ public:
     static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ);
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
 
-/* @section Public variable */
+/**@section Public variable */
 public:
     float m00, m01, m02, m03,
           m10, m11, m12, m13,

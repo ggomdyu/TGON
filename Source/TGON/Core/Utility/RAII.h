@@ -17,11 +17,11 @@ namespace tgon
 template <typename _ResourceType, typename _DerivedType>
 class RAII
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using ResourceType = _ResourceType;
 
-/* @section Public constructor */
+/**@section Public constructor */
 protected:
     constexpr RAII() noexcept;
     constexpr explicit RAII(const _ResourceType& rhs);
@@ -29,7 +29,7 @@ protected:
     RAII(RAII&& rhs) = delete;
     ~RAII();
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     RAII& operator=(const RAII& rhs) = delete;
     RAII& operator=(RAII&& rhs) = delete;
@@ -48,32 +48,32 @@ public:
     bool operator==(const RAII& rhs) const noexcept;
     bool operator!=(const RAII& rhs) const noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Adds the reference count of managed resource. */
+    /**@brief   Adds the reference count of managed resource. */
     void AddRef();
 
-    /* @brief   Replaces the managed resource. */
+    /**@brief   Replaces the managed resource. */
     void Reset(const _ResourceType& resource);
 
-    /* @brief   Replaces the managed resource. */
+    /**@brief   Replaces the managed resource. */
     void Reset(_ResourceType&& resource);
 
-    /* @brief   Releases the managed resource. */
+    /**@brief   Releases the managed resource. */
     void Release();
 
-    /* @brief   Returns the managed resource. */
+    /**@brief   Returns the managed resource. */
     const _ResourceType& Get() const noexcept;
 
-    /* @brief   Returns the managed resource. */
+    /**@brief   Returns the managed resource. */
     _ResourceType& Get() noexcept;
 
-/* @section Protected method */
+/**@section Protected method */
 protected:
-    /* @brief   Returns special value which indicates resource is null. */
+    /**@brief   Returns special value which indicates resource is null. */
     _ResourceType GetNullValue() const noexcept;
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     _ResourceType m_resource;
 };

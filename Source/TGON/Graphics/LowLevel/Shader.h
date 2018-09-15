@@ -17,11 +17,11 @@ namespace tgon
 class TGON_API Shader final :
     private boost::noncopyable
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Shader(const char* vertexShaderCode, const char* fragmentShaderCode);
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Use();
     void Unuse();
@@ -41,10 +41,10 @@ public:
     void BindAttributeLocation(const char* name, uint32_t location);
     int GetUniformLocation(const char* name) const;
     
-    /* @brief   Checks the shader was loaded successfully. */
+    /**@brief   Checks the shader was loaded successfully. */
     bool IsValid() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 public:
     ShaderImpl m_shaderImpl;
 };

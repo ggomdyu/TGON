@@ -40,7 +40,7 @@ constexpr const _ValueType Gcd(const _ValueType& first, const _ValueType& second
     return first;
 }
 
-/* @brief   Returns the least common multiple. */
+/**@brief   Returns the least common multiple. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType Lcm(const _ValueType& first, const _ValueType& second)
@@ -48,7 +48,7 @@ constexpr const _ValueType Lcm(const _ValueType& first, const _ValueType& second
     return (first * second) / Gcd(first, second);
 }
 
-/* @brief   Discards fractional part of floating point value. */
+/**@brief   Discards fractional part of floating point value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr const _ValueType Floor(const _ValueType& value) noexcept
@@ -63,7 +63,7 @@ constexpr _ValueType Ceil(const _ValueType& value) noexcept
     return std::ceil(value);
 }
 
-/* @brief   Round off the given floating point value. */
+/**@brief   Round off the given floating point value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
 constexpr const _ValueType Round(const _ValueType& value) noexcept
@@ -71,7 +71,7 @@ constexpr const _ValueType Round(const _ValueType& value) noexcept
     return std::round(value);
 }
 
-/* @return	Returns largest value of the given parameters. */
+/**@return	Returns largest value of the given parameters. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& second) noexcept
@@ -102,7 +102,7 @@ constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& secon
     return (first >= second) ? Max(first, args...) : Max(second, args...);
 }
 
-/* @brief   Gets the absolute value. */
+/**@brief   Gets the absolute value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Abs(const _ValueType& value) noexcept
@@ -110,7 +110,7 @@ constexpr _ValueType Abs(const _ValueType& value) noexcept
     return std::abs(value);
 }
 
-/* @brief  Get the sign of value represented as 1, -1 or 0 */
+/**@brief  Get the sign of value represented as 1, -1 or 0 */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Sign(const _ValueType& value) noexcept
@@ -118,7 +118,7 @@ constexpr _ValueType Sign(const _ValueType& value) noexcept
     return (value > static_cast<_ValueType>(0)) ? static_cast<_ValueType>(1) : (value < static_cast<_ValueType>(0)) ? static_cast<_ValueType>(-1) : static_cast<_ValueType>(0);
 }
 
-/* @return	Returns clamped value to min and max range */
+/**@return	Returns clamped value to min and max range */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr _ValueType Clamp(const _ValueType& value, const _ValueType& min, const _ValueType& max) noexcept

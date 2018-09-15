@@ -30,19 +30,19 @@ class TGON_API Application final :
 public:
     TGON_RUNTIME_OBJECT(Application);
 
-/* @section Private constructor */
+/**@section Private constructor */
 private:
     explicit Application();
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Gets the global instance of this class. */
+    /**@brief   Gets the global instance of this class. */
     static Application* GetInstance();
 
-    /* @brief   Loops the message queue and handles messages. */
+    /**@brief   Loops the message queue and handles messages. */
     void MessageLoop();
 
-    /* @brief   Terminates currently running application. */
+    /**@brief   Terminates currently running application. */
     using PlatformApplication::Terminate;
     
     /**
@@ -67,25 +67,25 @@ public:
     
     using PlatformApplication::ShowMessageBox;
 
-    /* @brief   Gets the Engine managed by application. */
+    /**@brief   Gets the Engine managed by application. */
     Engine* GetEngine() noexcept;
 
-    /* @brief   Gets the Engine managed by application. */
+    /**@brief   Gets the Engine managed by application. */
     const Engine* GetEngine() const noexcept;
 
-    /* @brief   Gets the root window. */
+    /**@brief   Gets the root window. */
     Window& GetRootWindow() noexcept;
     
-    /* @brief   Gets the root window. */
+    /**@brief   Gets the root window. */
     const Window& GetRootWindow() const noexcept;
 
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     void OnDidLaunch();
 
     void OnWillTerminate();
     
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     std::unique_ptr<Window> m_rootWindow;
     std::unique_ptr<Engine> m_engine;

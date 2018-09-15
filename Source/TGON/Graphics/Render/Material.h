@@ -21,45 +21,45 @@ class TGON_API Material :
 public:
     TGON_RUNTIME_OBJECT(Material);
     
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     explicit Material(const std::shared_ptr<Shader>& shader) :
         m_shader(shader)
     {
     }
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~Material() = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
     virtual void Use() = 0;
     
     virtual void Unuse() = 0;
     
-    /* @brief   Checks whether the specified material can batched. */
+    /**@brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const = 0;
     
-    /* @brief   Sets the world-view-projection matrix. */
+    /**@brief   Sets the world-view-projection matrix. */
     void SetWVP(const Matrix4x4& matWVP)
     {
         m_shader->SetParameterMatrix4fv("g_uWVP", matWVP[0]);
     }
     
-    /* @brief   Gets the shader. */
+    /**@brief   Gets the shader. */
     std::shared_ptr<Shader>& GetShader() noexcept
     {
         return m_shader;
     }
     
-    /* @brief   Gets the shader. */
+    /**@brief   Gets the shader. */
     const std::shared_ptr<Shader>& GetShader() const noexcept
     {
         return m_shader;
     }
     
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     std::shared_ptr<Shader> m_shader;
 };
@@ -70,7 +70,7 @@ class TGON_API ColorMaterial :
 public:
     TGON_RUNTIME_OBJECT(ColorMaterial);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     ColorMaterial(const Color4f& blendColor);
 
@@ -79,7 +79,7 @@ public:
     {
     }
 
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     ColorMaterial(const std::shared_ptr<Shader>& shader, const Color4f& blendColor) :
         Material(shader),
@@ -87,11 +87,11 @@ protected:
     {
     }
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~ColorMaterial() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
     virtual void Use() override
     {
@@ -121,7 +121,7 @@ public:
         return m_blendColor;
     }
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected: 
     Color4f m_blendColor;
 };
@@ -132,7 +132,7 @@ class TGON_API TextureMaterial :
 public:
     TGON_RUNTIME_OBJECT(TextureMaterial);
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
     
@@ -146,7 +146,7 @@ public:
     {
     }
 
-/* @section Protected constructor */
+/**@section Protected constructor */
 protected:
     TextureMaterial(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
         ColorMaterial(shader, blendColor),
@@ -154,11 +154,11 @@ protected:
     {
     }
 
-/* @section Public destructor */
+/**@section Public destructor */
 public:
     virtual ~TextureMaterial() override = default;
 
-/* @section Public method */
+/**@section Public method */
 public:
     virtual void Use() override
     {
@@ -172,7 +172,7 @@ public:
     {
     }
     
-    /* @brief   Checks whether the specified material can batched. */
+    /**@brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
     
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept
@@ -190,7 +190,7 @@ public:
         return m_texture;
     }
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
 };
@@ -207,15 +207,15 @@ public:
 //public:
 //    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial);
 //
-///* @section Public constructor */
+///**@section Public constructor */
 //public:
 //    GrayscaleTextureMaterial();
 //
-//    /* @section Public destructor */
+//    /**@section Public destructor */
 //public:
 //    virtual ~GrayscaleTextureMaterial() override = default;
 //
-//    /* @section Public method */
+//    /**@section Public method */
 //public:
 //    virtual void Use() override;
 //    virtual void Unuse() override;
@@ -228,15 +228,15 @@ public:
 //public:
 //    TGON_RUNTIME_OBJECT(MaskTextureMaterial);
 //
-///* @section Public constructor */
+///**@section Public constructor */
 //public:
 //    MaskTextureMaterial() = default;
 //
-///* @section Public destructor */
+///**@section Public destructor */
 //public:
 //    virtual ~MaskTextureMaterial() override = default;
 //
-///* @section Public method */
+///**@section Public method */
 //public:
 //    virtual void Use() override;
 //    
@@ -266,7 +266,7 @@ public:
 //    return m_maskTexture;
 //}
 ////
-///* @section Private variable */
+///**@section Private variable */
 //private:
 //    std::shared_ptr<Texture> m_maskTexture;
 //};

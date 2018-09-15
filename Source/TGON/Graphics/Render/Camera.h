@@ -19,7 +19,7 @@ namespace tgon
 
 class TGON_API Camera
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Camera() noexcept;
     
@@ -27,56 +27,56 @@ public:
 
     Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
     void Update();
     
-    /* @brief   Sets the near clipping plane's Z-position. */
+    /**@brief   Sets the near clipping plane's Z-position. */
     void SetNearZ(float nearZ) noexcept;
     
-    /* @brief   Sets the far clipping plane's Z-position. */
+    /**@brief   Sets the far clipping plane's Z-position. */
     void SetFarZ(float farZ) noexcept;
     
-    /* @brief   Sets the Field of view. */
+    /**@brief   Sets the Field of view. */
     void SetFov(float fov) noexcept;
     
-    /* @brief   Sets the Camera's projection mode. */
+    /**@brief   Sets the Camera's projection mode. */
     void SetProjectionMode(ProjectionMode projectionMode) noexcept;
     
-    /* @brief   Sets the position of camera. */
+    /**@brief   Sets the position of camera. */
     void SetEyePt(const Vector3& eyePt) noexcept;
     
-    /* @brief   Sets the direction vector of camera. */
+    /**@brief   Sets the direction vector of camera. */
     void SetLookAt(const Vector3& lookAt) noexcept;
     
     void SetOrthoPlane(const Rect& orthoPlane) noexcept;
 
     const Rect& GetOrthoPlane() const noexcept;
 
-    /* @brief   Gets the near clipping plane's Z-position. */
+    /**@brief   Gets the near clipping plane's Z-position. */
     float GetNearZ() const noexcept;
     
-    /* @brief   Gets the far clipping plane's Z-position. */
+    /**@brief   Gets the far clipping plane's Z-position. */
     float GetFarZ() const noexcept;
     
-    /* @brief   Gets the field of view. */
+    /**@brief   Gets the field of view. */
     float GetFov() const noexcept;
     
     ProjectionMode GetProjectionMode() const noexcept;
     
-    /* @brief   Gets the projection matrix. */
+    /**@brief   Gets the projection matrix. */
     const Matrix4x4& GetProjectionMatrix() const noexcept;
 
-    /* @brief   Gets the view projection matrix. */
+    /**@brief   Gets the view projection matrix. */
     const Matrix4x4& GetViewProjectionMatrix() const noexcept;
     
-    /* @brief   Gets the position of camera. */
+    /**@brief   Gets the position of camera. */
     const Vector3& GetEyePt() const noexcept;
     
-    /* @brief   Gets the direction vector of camera. */
+    /**@brief   Gets the direction vector of camera. */
     const Vector3& GetLookAt() const noexcept;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     Vector3 m_eyePt;
     Vector3 m_lookAt;

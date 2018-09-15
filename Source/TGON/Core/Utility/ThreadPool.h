@@ -17,7 +17,7 @@ namespace tgon
 
 class ThreadPool
 {
-/* @section Private class */
+/**@section Private class */
 private:
     class ThreadWorker;
 
@@ -25,11 +25,11 @@ private:
     class ThreadWorkQueue :
         private std::deque<_ValueType>
     {
-    /* @section Private type */
+    /**@section Private type */
     private:
         using SuperType = std::deque<_ValueType>;
 
-    /* @section Public method */
+    /**@section Public method */
     public:
         template <typename _ValueType2>
         void Enqueue(_ValueType2&& value);
@@ -40,21 +40,21 @@ private:
 
         bool IsEmpty() const;
 
-    /* @section Private variable */
+    /**@section Private variable */
     private:
         mutable std::mutex m_mutex;
     };
 
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit ThreadPool(int32_t allocateThreadCount = std::min(std::thread::hardware_concurrency() - 1u, 1u));
 
-/* @section Public method */
+/**@section Public method */
 public:
     /**
      * @brief               Inserts a task to execute asynchronously by task threads.
-     * @param [in] task     The task to execute asynchronously by task threads.
-     * @param [in] args     The arguments of task function.
+     * @param [in] task     Task to execute asynchronously by task threads.
+     * @param [in] args     Arguments of task function.
      * @return              
      */
     template <typename _TaskType, typename... _ArgTypes>
@@ -73,15 +73,15 @@ public:
      */
     bool IsJoinable() const noexcept;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
-    /* @brief   The pool of threads. */
+    /**@brief   The pool of threads. */
     std::vector<std::thread> m_threads;
 
     std::mutex m_conditionMutex;
     std::condition_variable m_conditionLock;
 
-    /* @brief   The queue of task that used on task management. */
+    /**@brief   The queue of task that used on task management. */
     std::mutex m_taskQueueMutex;
     ThreadWorkQueue<std::function<void()>> m_taskQueue;
 

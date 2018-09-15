@@ -26,7 +26,7 @@ template <typename _CharType, typename _StringTraitsType = StringTraits<_CharTyp
 struct BasicUUID :
     private BasicFixedString<_CharType, 37, _StringTraitsType>
 {
-/* @section Public type */
+/**@section Public type */
 public:
     using CharType = char;
     using ConstReferenceType = const CharType&;
@@ -34,20 +34,20 @@ public:
     using ConstPointerType = const CharType*;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
-/* @section Private type */
+/**@section Private type */
 private:
     using SuperType = BasicFixedString<_CharType, 37, _StringTraitsType>;
     
-/* @section Private constructor */
+/**@section Private constructor */
 private:
     using SuperType::SuperType;
 
-/* @section Public operator */
+/**@section Public operator */
 public:
     using SuperType::operator=;
     const _CharType& operator[](std::size_t index) const;
 
-/* @section Public method */
+/**@section Public method */
 public:
     static BasicUUID NewUUID();
     using SuperType::Compare;

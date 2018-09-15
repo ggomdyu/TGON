@@ -13,19 +13,19 @@ namespace tgon
 
 class Stopwatch final
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     Stopwatch() noexcept;
 
-/* @section Public method */
+/**@section Public method */
 public:
-    /* @brief   Starts measuring elapsed time. */
+    /**@brief   Starts measuring elapsed time. */
     void Start();
     
-    /* @brief   Resets elapsed time. */
+    /**@brief   Resets elapsed time. */
     void Reset();
 
-    /* @brief   Stops measuring elapsed time. */
+    /**@brief   Stops measuring elapsed time. */
     void Stop() noexcept;
 
     /**
@@ -34,16 +34,16 @@ public:
      */
     bool IsRunning() const noexcept;
 
-    /* @brief   Gets the total elapsed time measured by the current instance in seconds. */
+    /**@brief   Gets the total elapsed time measured by the current instance in seconds. */
     int64_t GetElapsedSeconds() const;
 
-    /* @brief   Gets the total elapsed time measured by the current instance in milliseconds. */
+    /**@brief   Gets the total elapsed time measured by the current instance in milliseconds. */
     int64_t GetElapsedMilliseconds() const;
 
-    /* @brief   Gets the total elapsed time measured by the current instance in nanoseconds. */
+    /**@brief   Gets the total elapsed time measured by the current instance in nanoseconds. */
     int64_t GetElapsedNanoseconds() const;
 
-/* @section Private variable */
+/**@section Private variable */
 private:
     int64_t m_oldTime;
 };

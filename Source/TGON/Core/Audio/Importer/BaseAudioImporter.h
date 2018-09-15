@@ -14,12 +14,12 @@ namespace tgon
 template <typename _DerivedType, typename _AllocatorType = std::allocator<uint8_t>>
 class BaseAudioImporter
 {
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     BaseAudioImporter() noexcept;
     BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes);
 
-/* @section Public method */
+/**@section Public method */
 public:
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
@@ -30,7 +30,7 @@ public:
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
 
-/* @section Protected variable */
+/**@section Protected variable */
 protected:
     std::vector<uint8_t, _AllocatorType> m_audioData;
     int32_t m_bitsPerSample;
