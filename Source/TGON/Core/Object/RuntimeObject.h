@@ -33,7 +33,7 @@ public:
 inline RuntimeObject::~RuntimeObject() = default;
 
 template <typename _Type>
-inline auto GetRTTI() -> typename std::enable_if<IsPureType<_Type>, const RTTI*>::type
+inline typename std::enable_if<IsPureType<_Type>, const RTTI*>::type GetRTTI()
 {
     using PureType = PurifyType<_Type>;
     
@@ -44,7 +44,7 @@ inline auto GetRTTI() -> typename std::enable_if<IsPureType<_Type>, const RTTI*>
 }
     
 template <typename _Type>
-inline auto GetRTTI() -> typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type
+inline typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type GetRTTI()
 {
     return GetRTTI<PurifyType<_Type>>();
 }

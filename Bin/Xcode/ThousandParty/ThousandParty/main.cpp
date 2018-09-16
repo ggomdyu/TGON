@@ -69,7 +69,7 @@ private:
     private:
         void Reset()
         {
-            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f, RandRange(0.4f, 1.0f)});
+            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f});
             
             this->SetScale({0.1f, 0.1f, 1.0f});
             
@@ -120,7 +120,7 @@ public:
         // Intro에 사용할 Sprite 생성
         {
             m_fadeInSpriteComponent = m_fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f, 0.4f});
+            m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
             m_fadeInObject->GetTransform().SetPosition({0.0f, 0.0f});
         }
         this->AddObject(m_fadeInObject);
@@ -156,55 +156,58 @@ public:
     TGON_RUNTIME_OBJECT(LogoScene);
 
 public:
-    LogoScene() :
-        m_cameraObject(std::make_shared<GameObject>("camera1")),
-        m_introObject1(std::make_shared<GameObject>("introSprite1")),
-        m_introObject2(std::make_shared<GameObject>("introSprite2")),
-        m_fadeOutObject(std::make_shared<GameObject>("fadeOut"))
+    LogoScene()
     {
         decltype(auto) application = Application::GetInstance();
         decltype(auto) engine = application->GetEngine();
 
-        {
-            m_graphicsModule = engine->FindModule<GraphicsModule>();
-            m_inputModule = engine->FindModule<InputModule>();
-            m_timeModule = engine->FindModule<TimeModule>();
-            m_gameSceneModule = engine->FindModule<GameSceneModule>();
-        }
+        m_graphicsModule = engine->FindModule<GraphicsModule>();
+        m_inputModule = engine->FindModule<InputModule>();
+        m_timeModule = engine->FindModule<TimeModule>();
         
+        m_graphicsModule->GetGraphics().DisableDepthTest();
+        m_graphicsModule->GetGraphics().SetClearColor({1.0f, 1.0f, 1.0f, 1.0f});
+
         // 카메라 생성
         {
+            auto cameraObject = std::make_shared<GameObject>("camera1");
             const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
             const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-//            m_cameraObject->AddComponent(new CameraComponent(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f));
-            m_cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
+            m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
+            //m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
+            this->AddObject(cameraObject);
         }
-        this->AddObject(m_cameraObject);
 
         // Intro에 사용할 Sprite 생성
         {
-            m_introSpriteComponent1 = m_introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-            m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f, 0.0f});
-//            m_introObject1->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            auto introObject1 = std::make_shared<GameObject>("introSprite1");
+            introObject1->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+            m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f});
+            m_introSpriteComponent1->SetOpacity(0.0f);
+            this->AddObject(introObject1);
         }
-        this->AddObject(m_introObject1);
 
         // Intro에 사용할 Sprite 생성
         {
-            m_introSpriteComponent2 = m_introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f, 0.0f});
-//            m_introObject2->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            auto introObject2 = std::make_shared<GameObject>("introSprite2");
+            introObject2->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            m_introSpriteComponent2 = introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+            m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f});
+            m_introSpriteComponent2->SetOpacity(0.0f);
+            this->AddObject(introObject2);
         }
-        this->AddObject(m_introObject2);
         
         // Intro에 사용할 Sprite 생성
         {
-            m_fadeOutSpriteComponent = m_fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f, 0.0f});
-//            m_fadeOutObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            auto fadeOutObject = std::make_shared<GameObject>("fadeOut");
+            fadeOutObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            m_fadeOutSpriteComponent = fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+            m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
+            m_fadeOutSpriteComponent->SetOpacity(0.0f);
+            this->AddObject(fadeOutObject);
         }
-        this->AddObject(m_fadeOutObject);
         
         m_beginTime = tgon::GetTickCount();
      
@@ -216,34 +219,45 @@ public:
         SuperType::Update();
 
         this->OnHandleInput();
+
+        Log(LogLevel::Debug, "%d\n", RandRange(0, 100));
         
-//        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
-//        if (elapsedTime >= 9000)
-//        {
-//            m_gameSceneModule->ChangeScene<IntroScene>();
-//            return;
-//        }
-//        else if (elapsedTime >= 8000)
-//        {
-//            if (m_fadeOutSpriteComponent->GetBlendColor().a <= 1.0f)
-//            {
-//                m_fadeOutSpriteComponent->GetBlendColor().a += 2.5f * m_timeModule->GetTickTime();
-//            }
-//        }
-//        else if (elapsedTime >= 5500)
-//        {
-//            if (m_introSpriteComponent2->GetBlendColor().a <= 1.0f)
-//            {
-//                m_introSpriteComponent2->GetBlendColor().a += 1.7f * m_timeModule->GetTickTime();
-//            }
-//        }
-//        else if (elapsedTime >= 4000)
-//        {
-//            if (m_introSpriteComponent1->GetBlendColor().a >= 0.0f)
-//            {
-//                m_introSpriteComponent1->GetBlendColor().a -= 1.7f * m_timeModule->GetTickTime();
-//            }
-//        }
+        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
+        if (elapsedTime >= 8500)
+        {
+            auto gameSceneModule = Application::GetInstance()->GetEngine()->FindModule<GameSceneModule>();
+
+            gameSceneModule->ChangeScene<IntroScene>();
+            return;
+        }
+        else if (elapsedTime >= 7500)
+        {
+            if (m_fadeOutSpriteComponent->GetOpacity() <= 1.0f)
+            {
+                m_fadeOutSpriteComponent->GetOpacity() += 2.5f * m_timeModule->GetTickTime();
+            }
+        }
+        else if (elapsedTime >= 5000)
+        {
+            if (m_introSpriteComponent2->GetOpacity() <= 1.0f)
+            {
+                m_introSpriteComponent2->GetOpacity() += 2.0f * m_timeModule->GetTickTime();
+            }
+        }
+        else if (elapsedTime >= 3500)
+        {
+            if (m_introSpriteComponent1->GetOpacity() >= 0.0f)
+            {
+                m_introSpriteComponent1->GetOpacity() -= 2.0f * m_timeModule->GetTickTime();
+            }
+        }
+        else if (elapsedTime >= 1000)
+        {
+            if (m_introSpriteComponent1->GetOpacity() <= 1.0f)
+            {
+                m_introSpriteComponent1->GetOpacity() += 2.0f * m_timeModule->GetTickTime();
+            }
+        }
     }
     
     void OnHandleInput()
@@ -254,14 +268,14 @@ public:
         {
             z -= 0.01f;
             
-            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
+            auto& camera = m_cameraComponent->GetCamera();
             camera->SetEyePt({0.0f, 0.0f, z});
         }
         if (keyboard->IsKeyHold(KeyCode::S))
         {
             z += 0.01f;
             
-            auto& camera = m_cameraObject->GetComponent<CameraComponent>()->GetCamera();
+            auto& camera = m_cameraComponent->GetCamera();
             camera->SetEyePt({0.0f, 0.0f, z});
         }
         if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
@@ -279,17 +293,13 @@ public:
 
 private:
     int64_t m_beginTime;
-    std::shared_ptr<GameObject> m_cameraObject;
-    std::shared_ptr<GameObject> m_introObject1;
-    std::shared_ptr<GameObject> m_introObject2;
-    std::shared_ptr<GameObject> m_fadeOutObject;
+    std::shared_ptr<CameraComponent> m_cameraComponent;
     std::shared_ptr<SpriteRendererComponent> m_introSpriteComponent1;
     std::shared_ptr<SpriteRendererComponent> m_introSpriteComponent2;
     std::shared_ptr<SpriteRendererComponent> m_fadeOutSpriteComponent;
     std::shared_ptr<GraphicsModule> m_graphicsModule;
     std::shared_ptr<InputModule> m_inputModule;
     std::shared_ptr<TimeModule> m_timeModule;
-    std::weak_ptr<GameSceneModule> m_gameSceneModule;
 };
 
 class TGON_API ThousandParty final :

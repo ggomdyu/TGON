@@ -27,4 +27,14 @@ GameObject* Component::GetOwner() noexcept
     return m_owner;
 }
 
+void Component::SetAcitve(bool isActive) noexcept
+{
+    m_isActive = isActive;
+}
+
+bool Component::IsActive() const noexcept
+{
+    return m_isActive;
+}
+
 } /* namespace tgon */

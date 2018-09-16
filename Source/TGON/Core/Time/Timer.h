@@ -9,8 +9,6 @@
 
 #include "Core/Object/DelegateChain.h"
 
-#include "Time.h"
-
 namespace tgon
 {
     

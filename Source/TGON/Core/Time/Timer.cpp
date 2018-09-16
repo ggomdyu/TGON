@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include "Timer.h"
+#include "Time.h"
 
 namespace tgon
 {

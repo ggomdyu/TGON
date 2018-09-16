@@ -90,13 +90,13 @@ constexpr const char g_positionUVFrag[] =
                                                                                     \n\
 in vec2 g_fragUV;                                                                   \n\
 out vec4 g_outColor;                                                                \n\
-uniform vec4 g_uBlendColor;                                                         \n\
+uniform vec4 g_uColor;                                                              \n\
                                                                                     \n\
 uniform sampler2D textureSampler;                                                   \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    g_outColor = texture(textureSampler, g_fragUV) * g_uBlendColor;                       \n\
+    g_outColor = texture(textureSampler, g_fragUV) * g_uColor;                      \n\
 }                                                                                   \n\
 ";
 
@@ -106,13 +106,13 @@ constexpr const char g_grayScaleTextureFrag[] =
                                                                                     \n\
 in vec2 g_fragUV;                                                                   \n\
 out vec4 g_outColor;                                                                \n\
-uniform vec4 g_uBlendColor;                                                         \n\
+uniform vec4 g_uColor;                                                              \n\
 uniform sampler2D textureSampler;                                                   \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
     vec4 color = texture(textureSampler, g_fragUV);                                 \n\
     float grayScale = (color.r + color.g + color.b) / 3;                            \n\
-    g_outColor = vec4(grayScale, grayScale, grayScale, color.a) * g_uBlendColor;    \n\
+    g_outColor = vec4(grayScale, grayScale, grayScale, color.a) * g_uColor;         \n\
 }                                                                                   \n\
 ";

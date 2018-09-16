@@ -9,6 +9,7 @@
 #    define WIN32_LEAN_AND_MEAN
 #endif
 #include <Windows.h>
+#include <thread>
 #include <boost/noncopyable.hpp>
 
 #include "Core/Object/CoreObject.h"
@@ -60,6 +61,11 @@ using PlatformApplication = WindowsApplication;
 template <typename _FunctionType>
 inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
 {
+    std::thread t([&]()
+    {
+        onUpdate();
+    });
+
     MSG msg {};
     while (msg.message != WM_QUIT)
     {
@@ -67,11 +73,9 @@ inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
         {
             ::DispatchMessageW(&msg);
         }
-        else
-        {
-            onUpdate();
-        }
     }
+
+    t.join();
 }
 
 } /* namespace tgon */                               

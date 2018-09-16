@@ -23,10 +23,7 @@ public:
     
 /**@section Protected constructor */
 protected:
-    explicit Material(const std::shared_ptr<Shader>& shader) :
-        m_shader(shader)
-    {
-    }
+    explicit Material(const std::shared_ptr<Shader>& shader);
 
 /**@section Public destructor */
 public:
@@ -35,29 +32,19 @@ public:
 /**@section Public method */
 public:
     virtual void Use() = 0;
-    
     virtual void Unuse() = 0;
     
     /**@brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const = 0;
     
     /**@brief   Sets the world-view-projection matrix. */
-    void SetWVP(const Matrix4x4& matWVP)
-    {
-        m_shader->SetParameterMatrix4fv("g_uWVP", matWVP[0]);
-    }
+    void SetWVP(const Matrix4x4& matWVP);
     
-    /**@brief   Gets the shader. */
-    std::shared_ptr<Shader>& GetShader() noexcept
-    {
-        return m_shader;
-    }
+    /**@brief   Gets a shader managed by this material. */
+    std::shared_ptr<Shader>& GetShader() noexcept;
     
-    /**@brief   Gets the shader. */
-    const std::shared_ptr<Shader>& GetShader() const noexcept
-    {
-        return m_shader;
-    }
+    /**@brief   Gets a shader managed by this material. */
+    const std::shared_ptr<Shader>& GetShader() const noexcept;
     
 /**@section Protected variable */
 protected:
@@ -72,20 +59,12 @@ public:
 
 /**@section Public constructor */
 public:
-    ColorMaterial(const Color4f& blendColor);
-
-    ColorMaterial() :
-        ColorMaterial(Color4f(1.0f, 1.0f, 1.0f, 1.0f))
-    {
-    }
+    ColorMaterial(const Color3f& blendColor);
+    ColorMaterial();
 
 /**@section Protected constructor */
 protected:
-    ColorMaterial(const std::shared_ptr<Shader>& shader, const Color4f& blendColor) :
-        Material(shader),
-        m_blendColor(blendColor)
-    {
-    }
+    ColorMaterial(const std::shared_ptr<Shader>& shader, const Color3f& blendColor);
     
 /**@section Public destructor */
 public:
@@ -93,39 +72,36 @@ public:
 
 /**@section Public method */
 public:
-    virtual void Use() override
-    {
-        m_shader->Use();
-        m_shader->SetParameter4f("g_uColor", m_blendColor.r, m_blendColor.g, m_blendColor.b, m_blendColor.a);
-    }
-    
-    virtual void Unuse() override
-    {
-        m_shader->Unuse();
-    }
-    
+    virtual void Use() override;
+    virtual void Unuse() override;
+
+    /**@brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
-    
-    void SetBlendColor(const Color4f& blendColor)
-    {
-        m_blendColor = blendColor;
-    }
 
-    Color4f& GetBlendColor() noexcept
-    {
-        return m_blendColor;
-    }
+    /**@brief   Sets the blend color of this material. */
+    void SetBlendColor(const Color3f& blendColor);
 
-    const Color4f& GetBlendColor() const noexcept
-    {
-        return m_blendColor;
-    }
+    /**@brief   Gets the blend color of this material. */
+    Color3f& GetBlendColor() noexcept;
+
+    /**@brief   Gets the blend color of this material. */
+    const Color3f& GetBlendColor() const noexcept;
 
 /**@section Protected variable */
 protected: 
-    Color4f m_blendColor;
+    Color3f m_blendColor;
+    float m_opacity;
 };
     
+//class TGON_API StandardMaterial :
+//    public Material
+//{
+//public:
+//    void SetDiffuseColor(const Color3f& diffuseColor);
+//    void SetSpecularColor(const Color3f& specularColor);
+//    void SetAmbientColor(const Color3f& ambientColor);
+//};
+
 class TGON_API TextureMaterial :
     public ColorMaterial
 {
@@ -134,25 +110,13 @@ public:
 
 /**@section Public constructor */
 public:
-    TextureMaterial(const std::shared_ptr<Texture>& texture, const Color4f& blendColor);
-    
-    TextureMaterial() :
-        TextureMaterial(nullptr)
-    {
-    }
-
-    TextureMaterial(const std::shared_ptr<Texture>& texture) :
-        TextureMaterial(texture, Color4f(1.0f, 1.0f, 1.0f, 1.0f))
-    {
-    }
+    TextureMaterial();
+    TextureMaterial(const std::shared_ptr<Texture>& texture, const Color3f& blendColor, float opacity);
+    TextureMaterial(const std::shared_ptr<Texture>& texture);
 
 /**@section Protected constructor */
 protected:
-    TextureMaterial(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, const Color4f& blendColor) :
-        ColorMaterial(shader, blendColor),
-        m_texture(texture)
-    {
-    }
+    TextureMaterial(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, const Color3f& blendColor, float opacity);
 
 /**@section Public destructor */
 public:
@@ -160,39 +124,34 @@ public:
 
 /**@section Public method */
 public:
-    virtual void Use() override
-    {
-        m_shader->Use();
-        m_shader->SetParameter4f("g_uBlendColor", m_blendColor.r, m_blendColor.g, m_blendColor.b, m_blendColor.a);
-
-        m_texture->Use();
-    }
-    
-    virtual void Unuse() override
-    {
-    }
+    virtual void Use() override;
+    virtual void Unuse() override;
     
     /**@brief   Checks whether the specified material can batched. */
     virtual bool CanBatch(const Material& rhs) const override;
     
-    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept
-    {
-        m_texture = texture;
-    }
-    
-    const std::shared_ptr<Texture>& GetTexture() noexcept
-    {
-        return m_texture;
-    }
-    
-    std::shared_ptr<const Texture> GetTexture() const noexcept
-    {
-        return m_texture;
-    }
+    /**@brief   Sets the texture of this material. */
+    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+
+    /**@brief   Gets the texture of this material. */
+    const std::shared_ptr<Texture>& GetTexture() noexcept;
+
+    /**@brief   Gets the texture of this material. */
+    std::shared_ptr<const Texture> GetTexture() const noexcept;
+
+    /**@brief   Gets the opacity of this material. */
+    void SetOpacity(float opacity) noexcept;
+
+    /**@brief   Gets the opacity of this material. */
+    float& GetOpacity() noexcept;
+
+    /**@brief   Gets the opacity of this material. */
+    const float GetOpacity() const noexcept;
     
 /**@section Private variable */
 private:
     std::shared_ptr<Texture> m_texture;
+    float m_opacity;
 };
 
 class TGON_API AlphaTextureMaterial :

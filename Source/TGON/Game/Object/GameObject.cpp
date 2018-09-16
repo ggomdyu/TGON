@@ -9,13 +9,13 @@ namespace tgon
 
 GameObject::GameObject(const FixedHashString32& name) :
     m_name(name),
-    m_isActivated(true)
+    m_isActive(true)
 {
 }
 
 void GameObject::Update()
 {
-    if (m_isActivated == false)
+    if (m_isActive == false)
     {
         return;
     }
@@ -78,14 +78,14 @@ const Transform& GameObject::GetTransform() const noexcept
     return m_transform;
 }
 
-void GameObject::SetActivate(bool isActivate)
+void GameObject::SetActive(bool isActive)
 {
-    m_isActivated = isActivate;
+    m_isActive = isActive;
 }
 
-bool GameObject::IsActivated() const noexcept
+bool GameObject::IsActive() const noexcept
 {
-    return m_isActivated;
+    return m_isActive;
 }
 
 bool GameObject::RemoveComponent(size_t componentId)

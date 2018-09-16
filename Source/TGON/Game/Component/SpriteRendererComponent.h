@@ -60,16 +60,25 @@ public:
     const Sprite& GetSprite() const noexcept;
 
     /**
-     * @brief   Sets the color of this sprite.
+     * @brief   Sets the blend color of this sprite.
      * @param [in] color    The reference to the sprite color.
      */
-    void SetBlendColor(const Color4f& blendColor);
+    void SetBlendColor(const Color3f& blendColor);
 
-    /**@brief   Gets the color of this sprite.*/
-    Color4f& GetBlendColor() noexcept;
+    /**@brief   Gets the blend color of this sprite. */
+    Color3f& GetBlendColor() noexcept;
 
-    /**@brief   Gets the color of this sprite. */
-    const Color4f& GetBlendColor() const noexcept;
+    /**@brief   Gets the blend color of this sprite. */
+    const Color3f& GetBlendColor() const noexcept;
+
+    /**@brief   Sets the opacity of this sprite. */
+    void SetOpacity(float opacity) noexcept;
+
+    /**@brief   Gets the opacity of this sprite. */
+    float& GetOpacity() noexcept;
+
+    /**@brief   Gets the opacity of this sprite. */
+    const float GetOpacity() const noexcept;
 
 /**@section Private variable */
 private:

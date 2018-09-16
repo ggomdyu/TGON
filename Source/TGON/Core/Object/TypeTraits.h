@@ -65,11 +65,10 @@ struct FunctionTraits :
 };
     
 template <typename _Type>
-constexpr auto IsPureType = std::integral_constant<bool,
-    !std::is_const<_Type>::value &&
-    !std::is_volatile<_Type>::value &&
-    !std::is_reference<_Type>::value &&
-    !std::is_pointer<_Type>::value>::value;
+constexpr bool IsPureType = !std::is_const<_Type>::value && 
+                            !std::is_volatile<_Type>::value && 
+                            !std::is_reference<_Type>::value && 
+                            !std::is_pointer<_Type>::value;
     
 template <typename _Type>
 using PurifyType = std::decay_t<std::remove_pointer_t<std::remove_volatile_t<_Type>>>;

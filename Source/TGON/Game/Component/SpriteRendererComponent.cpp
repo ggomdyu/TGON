@@ -21,6 +21,11 @@ SpriteRendererComponent::SpriteRendererComponent(std::string&& filePath) :
 
 void SpriteRendererComponent::Update()
 {
+    if (m_material->GetOpacity() <= 0.0f)
+    {
+        return;
+    }
+
     m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, { GetOwner()->GetTransform().GetWorldMatrix() });
 }
 
@@ -39,19 +44,34 @@ const Sprite& SpriteRendererComponent::GetSprite() const noexcept
     return m_sprite;
 }
 
-void SpriteRendererComponent::SetBlendColor(const Color4f& blendColor)
+void SpriteRendererComponent::SetBlendColor(const Color3f& blendColor)
 {
     m_material->SetBlendColor(blendColor);
 }
 
-Color4f& SpriteRendererComponent::GetBlendColor() noexcept
+Color3f& SpriteRendererComponent::GetBlendColor() noexcept
 {
     return m_material->GetBlendColor();
 }
 
-const Color4f& SpriteRendererComponent::GetBlendColor() const noexcept
+const Color3f& SpriteRendererComponent::GetBlendColor() const noexcept
 {
     return m_material->GetBlendColor();
+}
+
+void SpriteRendererComponent::SetOpacity(float opacity) noexcept
+{
+    m_material->SetOpacity(opacity);
+}
+
+float& SpriteRendererComponent::GetOpacity() noexcept
+{
+    return m_material->GetOpacity();
+}
+
+const float SpriteRendererComponent::GetOpacity() const noexcept
+{
+    return m_material->GetOpacity();
 }
 
 } /* namespace tgon */

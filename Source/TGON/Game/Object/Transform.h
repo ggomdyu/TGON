@@ -16,58 +16,30 @@ class Transform
 {
 /**@section Public method */
 public:
-    Transform() noexcept :
-        m_scale({1.0f, 1.0f, 1.0f}),
-        m_isDirty(false)
-    {
-    }
+    Transform() noexcept;
     
     /**@brief   Sets the position. */
-    void SetPosition(const Vector3& position)
-    {
-        m_position = position;
-        m_isDirty = true;
-    }
+    void SetPosition(const Vector3& position);
     
     /**@brief   Sets the rotation. */
-    void SetRotation(const Vector3& rotation)
-    {
-        m_rotation = rotation;
-        m_isDirty = true;
-    }
+    void SetRotation(const Vector3& rotation);
     
     /**@brief   Sets the scale. */
-    void SetScale(const Vector3& scale)
-    {
-        m_scale = scale;
-        m_isDirty = true;
-    }
+    void SetScale(const Vector3& scale);
     
     /**@brief   Gets the position. */
-    const Vector3& GetPosition() const noexcept
-    {
-        return m_position;
-    }
+    const Vector3& GetPosition() const noexcept;
     
     /**@brief   Gets the rotation. */
-    const Vector3& GetRotation() const noexcept
-    {
-        return m_rotation;
-    }
+    const Vector3& GetRotation() const noexcept;
     
     /**@brief   Gets the scale. */
-    const Vector3& GetScale() const noexcept
-    {
-        return m_scale;
-    }
+    const Vector3& GetScale() const noexcept;
     
     void Update();
     
     /**@brief   Gets the world-view-projection matrix. */
-    const Matrix4x4& GetWorldMatrix() const noexcept
-    {
-        return m_matWorld;
-    }
+    const Matrix4x4& GetWorldMatrix() const noexcept;
     
 /**@section Private variable */
 private:

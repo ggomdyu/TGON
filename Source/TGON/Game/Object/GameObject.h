@@ -98,13 +98,13 @@ public:
     const Transform& GetTransform() const noexcept;
 
     /**
-     * @brief   Sets this object activate or deactivate.
-     * @details If this object deactivated, the object will not be updated.
+     * @brief   Sets the active state of this object.
+     * @remarks If this object has been deactivated, all updates performed on this are stopped.
      */
-    void SetActivate(bool isActivate);
+    void SetActive(bool isActivate);
 
-    /**@brief   Gets the state for whether this object has been activated or deactivated. */
-    bool IsActivated() const noexcept;
+    /**@brief   Gets the active state of this object. */
+    bool IsActive() const noexcept;
 
 /**@section Private method */
 private:
@@ -123,7 +123,7 @@ private:
 
 /**@section Private variable */
 private:
-    bool m_isActivated;
+    bool m_isActive;
 
     FixedHashString32 m_name;
 
@@ -135,13 +135,12 @@ private:
 template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
 {
-    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
-    };
-
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), 0, predicate);
+    });
     auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
+    component->SetOwner(this);
 
     return std::static_pointer_cast<_ComponentType>(*m_components.insert(iter, component));
 }

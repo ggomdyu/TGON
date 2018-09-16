@@ -38,13 +38,11 @@ public:
 public:
     template <std::size_t _CharArraySize>
     constexpr BasicHashStringView(const _CharType(&str)[_CharArraySize]) noexcept;
-
     constexpr BasicHashStringView(const _CharType* str, std::size_t strLen) noexcept;
 
 /**@section Public operator */
 public:
     constexpr bool operator==(const BasicHashStringView& rhs) const noexcept;
-
     constexpr const _CharType operator[](std::size_t index) const;
     
 /**@section Public method */

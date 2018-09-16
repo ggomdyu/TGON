@@ -42,8 +42,16 @@ public:
     /**@brief   Gets the owner of this component. */
     GameObject* GetOwner() noexcept;
 
+    /**@brief   Sets the active state of this component. */
+    void SetAcitve(bool isActive) noexcept;
+
+    /**@brief   Gets the active state of this component. */
+    bool IsActive() const noexcept;
+
 /**@section Private variable */
 private:
+    bool m_isActive;
+
     GameObject* m_owner;
 };
 
