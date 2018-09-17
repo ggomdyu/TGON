@@ -21,8 +21,12 @@ class TGON_API MacOSApplication :
 {
 public:
     TGON_RUNTIME_OBJECT(MacOSApplication);
-    
-/* @section Public method */
+        
+/**@section Public destructor */
+public:
+    virtual ~MacOSApplication() = default;
+        
+/**@section Public method */
 public:
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdate);
@@ -31,7 +35,7 @@ public:
     
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
     
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     void OnHandleMessage(NSEvent* message);
 };
