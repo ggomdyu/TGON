@@ -18,16 +18,18 @@ private:
         TGON_RUNTIME_OBJECT(Firefly);
         
     public:
-        Firefly() :
-            GameObject("")
+        Firefly(const FixedHashString32& name) :
+            GameObject(name)
         {
             decltype(auto) application = Application::GetInstance();
             decltype(auto) engine = application->GetEngine();
-            {
-                m_timeModule = engine->FindModule<TimeModule>();
-            }
             
-            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/1536506755.png");
+            m_timeModule = engine->FindModule<TimeModule>();
+            
+            m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "Assets/Image/IntroScene/firefly.png");
+            m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f});
+            
+            this->GetTransform().SetScale({0.31f, 0.31f, 1.0f});
             
             this->Reset();
         }
@@ -42,28 +44,28 @@ private:
 //            if ( m_pTexture[0].GetPosition( ).y <= -123.0F )
 //                Reset( );
             
-           /* if (m_enableOpacityChange)
+            if (m_enableOpacityChange)
             {
-                float opacity = m_fireflySpriteComponent->GetBlendColor().a;
+//                float opacity = m_fireflySpriteComponent->GetBlendColor().a;
                 
-                if (opacity >= 1.0f)
-                {
-                    needToIncreaseOpacity = false;
-                }
-                else if (opacity <= 0)
-                {
-                    needToIncreaseOpacity = true;
-                }
+//                if (opacity >= 1.0f)
+//                {
+//                    needToIncreaseOpacity = false;
+//                }
+//                else if (opacity <= 0)
+//                {
+//                    needToIncreaseOpacity = true;
+//                }
                 
-                if (needToIncreaseOpacity)
-                {
-                    m_fireflySpriteComponent->GetBlendColor().a += m_opacityChangeSpeed * m_timeModule->GetTickTime();
-                }
-                else
-                {
-                     m_fireflySpriteComponent->GetBlendColor().a -= m_opacityChangeSpeed * m_timeModule->GetTickTime();
-                }
-            }*/
+//                if (needToIncreaseOpacity)
+//                {
+//                    m_fireflySpriteComponent->GetBlendColor().a += m_opacityChangeSpeed * m_timeModule->GetTickTime();
+//                }
+//                else
+//                {
+//                     m_fireflySpriteComponent->GetBlendColor().a -= m_opacityChangeSpeed * m_timeModule->GetTickTime();
+//                }
+            }
         }
         
     private:
@@ -90,40 +92,60 @@ private:
         std::shared_ptr<SpriteRendererComponent> m_fireflySpriteComponent;
         std::shared_ptr<TimeModule> m_timeModule;
     };
-    
+    float camZ;
 public:
-    IntroScene() :
-        m_fadeInObject(std::make_shared<GameObject>("fadeIn")),
-        m_cameraObject(std::make_shared<GameObject>("camera1"))
+    IntroScene()
     {
         decltype(auto) application = Application::GetInstance();
         decltype(auto) engine = application->GetEngine();
         
-        {
-            m_graphicsModule = engine->FindModule<GraphicsModule>();
-            m_inputModule = engine->FindModule<InputModule>();
-            m_timeModule = engine->FindModule<TimeModule>();
-        }
+        auto rootWindowSize = application->GetRootWindow().GetSize();
         
+        m_graphicsModule = engine->FindModule<GraphicsModule>();
+        m_inputModule = engine->FindModule<InputModule>();
+        m_timeModule = engine->FindModule<TimeModule>();
+        
+        m_graphicsModule->GetGraphics().DisableDepthTest();
+        m_graphicsModule->GetGraphics().EnableBlend();
+        m_graphicsModule->GetGraphics().SetBlendMode(BlendMode::Alpha);
+        
+        // 카메라 생성
         {
+            auto cameraObject = std::make_shared<GameObject>("camera1");
             const I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
             const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
             const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-            m_cameraObject->AddComponent<CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
+            m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
+            camZ = 50.0f;
+//            m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
+            this->AddObject(cameraObject);
         }
         
-        for (int i = 0; i < 25; ++i)
+//        for (int i = 0; i < 25; ++i)
+//        {
+//            this->AddObject(std::make_shared<Firefly>(StringTraits<char>::Format("firefly_%d", i).first));
+//        }
+        
+        // Intro에 사용할 Sprite 생성
         {
-            this->AddObject(std::make_shared<Firefly>());
+            auto fadeInObject = std::make_shared<GameObject>("fadeIn");
+            fadeInObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            fadeInObject->GetTransform().SetPosition({0.0f, 0.0f, 10.0f});
+            m_fadeInSpriteComponent = fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+            m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
+            m_fadeInSpriteComponent->SetOpacity(1.0f);
+            this->AddObject(fadeInObject);
         }
         
         // Intro에 사용할 Sprite 생성
         {
-            m_fadeInSpriteComponent = m_fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
-            m_fadeInObject->GetTransform().SetPosition({0.0f, 0.0f});
+            m_nightSkyObject = std::make_shared<GameObject>("nightSky");
+            m_nightSkySpriteComponent = m_nightSkyObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/IntroScene/nightSky.png");
+            float nightSkyImageWidth = static_cast<float>(m_nightSkySpriteComponent->GetSprite().GetTexture()->GetWidth());
+            m_nightSkyObject->GetTransform().SetScale({25.14f, 4.42f, 1.0f});
+            m_nightSkyObject->GetTransform().SetPosition({static_cast<float>(nightSkyImageWidth - rootWindowSize.width) * 0.01 * 0.5f, 0.0f, 0.0f});
+            this->AddObject(m_nightSkyObject);
         }
-        this->AddObject(m_fadeInObject);
 
         SuperType::Update();
     }
@@ -133,10 +155,50 @@ public:
     {
         SuperType::Update();
         
-//        if (m_fadeInSpriteComponent->GetBlendColor().a >= 0.0f)
-//        {
-//            m_fadeInSpriteComponent->GetBlendColor().a -= 2.5f * m_timeModule->GetTickTime();
-//        }
+        if (m_fadeInSpriteComponent->GetOpacity() >= 0.0f)
+        {
+            m_fadeInSpriteComponent->GetOpacity() -= 0.025f * m_timeModule->GetTickTime();
+        }
+        
+        decltype(auto) keyboard = m_inputModule->GetKeyboard();
+        if (keyboard->IsKeyHold(KeyCode::W))
+        {
+            camZ -= 0.05f;
+            
+            auto& camera = m_cameraComponent->GetCamera();
+            camera->SetEyePt({0.0f, 0.0f, camZ});
+        }
+        if (keyboard->IsKeyHold(KeyCode::S))
+        {
+            camZ += 0.05f;
+            
+            auto& camera = m_cameraComponent->GetCamera();
+            camera->SetEyePt({0.0f, 0.0f, camZ});
+        }
+        
+        if (keyboard->IsKeyHold(KeyCode::Q))
+        {
+            m_fadeInSpriteComponent->GetOwner()->Move({0.0f, 0.0f, -0.05f});
+        }
+        if (keyboard->IsKeyHold(KeyCode::A))
+        {
+            m_fadeInSpriteComponent->GetOwner()->Move({0.0f, 0.0f, 0.05f});
+        }
+        
+        // Move NightSky
+        {
+            auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
+            float nightSkyImageWidth = static_cast<float>(m_nightSkySpriteComponent->GetSprite().GetTexture()->GetWidth());
+            float nightSkyImageLeftTopX = static_cast<float>(nightSkyImageWidth - rootWindowSize.width) * 0.01f * 0.5f;
+            if (m_nightSkyObject->GetPosition().x <= -nightSkyImageLeftTopX)
+            {
+                m_nightSkyObject->SetPosition({nightSkyImageLeftTopX, 0.0f, 0.0f});
+            }
+            else
+            {
+                m_nightSkyObject->Move({-1.0f * m_timeModule->GetTickTime(), 0.0f, 0.0f});
+            }
+        }
     }
     
 private:
@@ -144,9 +206,11 @@ private:
     std::shared_ptr<InputModule> m_inputModule;
     std::shared_ptr<TimeModule> m_timeModule;
     
-    std::shared_ptr<GameObject> m_fadeInObject;
-    std::shared_ptr<GameObject> m_cameraObject;
+    std::shared_ptr<GameObject> m_nightSkyObject;
+    
+    std::shared_ptr<CameraComponent> m_cameraComponent;
     std::shared_ptr<SpriteRendererComponent> m_fadeInSpriteComponent;
+    std::shared_ptr<SpriteRendererComponent> m_nightSkySpriteComponent;
 };
 
 class TGON_API LogoScene :
@@ -220,8 +284,6 @@ public:
 
         this->OnHandleInput();
 
-        Log(LogLevel::Debug, "%d\n", RandRange(0, 100));
-        
         auto elapsedTime = tgon::GetTickCount() - m_beginTime;
         if (elapsedTime >= 8500)
         {
@@ -262,31 +324,26 @@ public:
     
     void OnHandleInput()
     {
-        static float z = 2.0f;
         decltype(auto) keyboard = m_inputModule->GetKeyboard();
-        if (keyboard->IsKeyHold(KeyCode::W))
-        {
-            z -= 0.01f;
-            
-            auto& camera = m_cameraComponent->GetCamera();
-            camera->SetEyePt({0.0f, 0.0f, z});
-        }
-        if (keyboard->IsKeyHold(KeyCode::S))
-        {
-            z += 0.01f;
-            
-            auto& camera = m_cameraComponent->GetCamera();
-            camera->SetEyePt({0.0f, 0.0f, z});
-        }
         if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
         {
-            if (tgon::GetTickCount() - m_beginTime <= 5000)
+            auto currTime = tgon::GetTickCount();
+            auto elapsedTime = currTime - m_beginTime;
+            if (elapsedTime <= 1000)
             {
-                m_beginTime = tgon::GetTickCount() - 5000;
+                m_beginTime = currTime - 1000.0f;
             }
-            else if (tgon::GetTickCount() - m_beginTime <= 9500)
+            else if (elapsedTime <= 3500)
             {
-                m_beginTime = tgon::GetTickCount() - 9500;
+                m_beginTime = currTime - 3500.0f;
+            }
+            else if (elapsedTime <= 5000)
+            {
+                m_beginTime = currTime - 5000.0f;
+            }
+            else if (elapsedTime <= 7500)
+            {
+                m_beginTime = currTime - 7500.0f;
             }
         }
     }

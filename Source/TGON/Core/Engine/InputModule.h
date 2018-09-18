@@ -29,10 +29,14 @@ public:
 public:
     InputModule(const InputMode& inputMode, Window& inputTarget);
 
+/**@section Public destructor */
+public:
+    virtual ~InputModule() final override;
+
 /**@section Public method */
 public:
     /**@brief   Updates the module. */
-    virtual void Update() override;
+    virtual void Update() final override;
     
     /**@brief   Gets the mouse device. */
     const std::unique_ptr<Mouse>& GetMouse() const noexcept;

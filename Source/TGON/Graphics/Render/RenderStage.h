@@ -35,7 +35,7 @@ public:
     void AddBatch(const Batch& batch);
 
     /**@brief   Adds a mesh into SpriteBatchGroup. */
-    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
+    void AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
 
     /**@brief   Adds a batch into SpriteBatchGroup. */
     void AddSpriteBatch(const SpriteBatch& batch);

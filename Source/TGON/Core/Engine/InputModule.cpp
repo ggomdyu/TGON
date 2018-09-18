@@ -28,6 +28,8 @@ InputModule::InputModule(const InputMode& inputMode, Window& inputTarget) :
     }
 }
     
+InputModule::~InputModule() = default;
+   
 void InputModule::Update()
 {
     m_inputManager.Update();

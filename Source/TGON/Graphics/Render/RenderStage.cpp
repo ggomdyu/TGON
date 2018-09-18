@@ -17,7 +17,7 @@ void RenderStage::AddBatch(const Batch& batch)
     m_batchGroup.AddBatch(batch);
 }
 
-void RenderStage::AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
+void RenderStage::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
 {
     m_spriteBatchGroup.AddSpriteBatch(material, drawPrimitive);
 }

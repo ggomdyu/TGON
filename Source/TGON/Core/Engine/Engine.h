@@ -55,12 +55,6 @@ public:
     std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args);
 
     /**
-     * @brief   Registers a module to manage through this engine.
-     * @param [in] module   The module to insert.
-     */
-    const std::shared_ptr<IModule>& RegisterModule(IModule* module);
-    
-    /**
      * @brief   Unregisters a module managed by this engine.
      * @tparam _ModuleType  The type of module to remove.
      */
@@ -83,6 +77,12 @@ public:
 
 /**@section Private method */
 private:
+    /**
+     * @brief   Registers a module to manage through this engine.
+     * @param [in] module   The module to insert.
+     */
+    void RegisterModule(const std::shared_ptr<IModule>& module);
+    
     /**
      * @brief   Returns a module that managed by Application.
      * @param [in] moduleId     The unique id of the module to get.
@@ -119,7 +119,10 @@ inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const 
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
 {
-    return std::static_pointer_cast<_ModuleType>(this->RegisterModule(new _ModuleType(std::forward<_ArgTypes>(args)...)));
+    auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
+    
+    this->RegisterModule(module);
+    return module;
 }
     
 template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>

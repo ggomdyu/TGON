@@ -25,21 +25,16 @@ void Engine::OnWillTerminate()
 {
 }
 
-const std::shared_ptr<IModule>& Engine::RegisterModule(IModule* module)
+void Engine::RegisterModule(const std::shared_ptr<IModule>& module)
 {
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), module->GetRTTI()->GetHashCode(), [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
-    {
-        return lhs->GetRTTI()->GetHashCode() < rhs;
-    });
-
-    return *m_modules.emplace(iter, std::move(module));
+    m_modules.push_back(module);
 }
 
 std::shared_ptr<IModule> Engine::FindModule(size_t moduleId)
 {
-    auto iter = std::lower_bound(m_modules.begin(), m_modules.end(), moduleId, [&](const std::shared_ptr<IModule>& lhs, size_t rhs)
+    auto iter = std::find_if(m_modules.begin(), m_modules.end(), [&](const std::shared_ptr<IModule>& lhs)
     {
-        return lhs->GetRTTI()->GetHashCode() < rhs;
+        return lhs->GetRTTI()->GetHashCode() == moduleId;
     });
     if (iter != m_modules.end())
     {
@@ -77,7 +72,7 @@ void Engine::Update()
         module->Update();
     }
     
-    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 }
 
 } /* namespace tgon */

@@ -31,10 +31,10 @@ public:
 /**@section Public constructor */
 public:
     /**@brief   Initializes the batch with a material. */
-    explicit SpriteBatch(const std::shared_ptr<Material>& material);
+    explicit SpriteBatch(const std::shared_ptr<TextureMaterial>& material);
     
     /**@brief   Initializes the batch with a material and primitives. */
-    explicit SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
+    explicit SpriteBatch(const std::shared_ptr<TextureMaterial>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
 
 /**@section Public method */
 public:
@@ -45,14 +45,14 @@ public:
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
 
     /**@brief   Checks whether the specified material can batched. */
-    bool CanBatch(const std::shared_ptr<Material>& material) const;
+    bool CanBatch(const std::shared_ptr<TextureMaterial>& material) const;
     
     /**@brief   Draws all batched primitives. */
     void Draw(Graphics& graphics, const Camera& camera);
 
 /**@section Private variable */
 private:
-    std::shared_ptr<Material> m_material;
+    std::shared_ptr<TextureMaterial> m_material;
     
     std::vector<DrawPrimitive> m_drawPrimitives;
 };
@@ -66,7 +66,7 @@ public:
 /**@section Public method */
 public:
     /**@brief   Adds a mesh into the batch list. */
-    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
+    void AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
     
     /**@brief   Adds a batch into the batch list. */
     void AddSpriteBatch(const SpriteBatch& batch);

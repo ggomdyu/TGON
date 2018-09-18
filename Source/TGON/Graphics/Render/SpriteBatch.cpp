@@ -7,12 +7,12 @@
 namespace tgon
 {
     
-SpriteBatch::SpriteBatch(const std::shared_ptr<Material>& material) :
+SpriteBatch::SpriteBatch(const std::shared_ptr<TextureMaterial>& material) :
     m_material(material)
 {
 }
 
-SpriteBatch::SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives) :
+SpriteBatch::SpriteBatch(const std::shared_ptr<TextureMaterial>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives) :
     m_material(material),
     m_drawPrimitives(drawPrimitives)
 {
@@ -28,7 +28,7 @@ void SpriteBatch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
     m_drawPrimitives.push_back(drawPrimitive);
 }
     
-bool SpriteBatch::CanBatch(const std::shared_ptr<Material>& material) const
+bool SpriteBatch::CanBatch(const std::shared_ptr<TextureMaterial>& material) const
 {
     return m_material->CanBatch(*material);
 }
@@ -51,7 +51,7 @@ SpriteBatchGroup::SpriteBatchGroup() :
 {
 }
 
-void SpriteBatchGroup::AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
+void SpriteBatchGroup::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
 {
     for (auto& spriteBatch : m_spriteBatches)
     {

@@ -91,6 +91,15 @@ public:
     /**@brief   Adjusts the scale of this object. */
     void Scale(const Vector3& scale);
     
+    /**@brief   Gets the position of this object. */
+    const Vector3& GetPosition() const noexcept;
+    
+    /**@brief   Gets the rotation of this object. */
+    const Vector3& GetRotation() const noexcept;
+    
+    /**@brief   Gets the scale of this object. */
+    const Vector3& GetScale() const noexcept;
+    
     /**@brief   Gets the transform. */
     Transform& GetTransform() noexcept;
 

@@ -25,7 +25,7 @@ struct WindowStyle final
     bool enableFullScreen = false;
     bool resizeable = true;
     bool topMost = false;
-    bool showMiddle = true;
+    bool showMiddle = false;
 };
 
 } /* namespace tgon */

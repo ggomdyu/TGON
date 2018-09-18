@@ -68,6 +68,21 @@ void GameObject::Scale(const Vector3& scale)
     m_transform.SetScale(m_transform.GetScale() + scale);
 }
 
+const Vector3& GameObject::GetPosition() const noexcept
+{
+    return m_transform.GetPosition();
+}
+    
+const Vector3& GameObject::GetRotation() const noexcept
+{
+    return m_transform.GetRotation();
+}
+
+const Vector3& GameObject::GetScale() const noexcept
+{
+    return m_transform.GetScale();
+}
+
 Transform& GameObject::GetTransform() noexcept
 {
     return m_transform;
