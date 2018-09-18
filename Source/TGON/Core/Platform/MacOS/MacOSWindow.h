@@ -23,20 +23,20 @@ class TGON_API MacOSWindow :
 public:
     TGON_RUNTIME_OBJECT(MacOSWindow);
     
-/* @section Public constructor */
+/**@section Public constructor */
 public:
     explicit MacOSWindow(const WindowStyle& windowStyle);
     MacOSWindow(MacOSWindow&& rhs) noexcept;
     
-/* @section Public operator */
+/**@section Public operator */
 public:
     MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;
     
-/* @section Public destructor */
+/**@section Public destructor */
 public:
-    ~MacOSWindow();
+    virtual ~MacOSWindow();
     
-/* @section Public method */
+/**@section Public method */
 public:
     void Show();
     void Hide();
@@ -61,7 +61,7 @@ public:
     bool IsMinimized() const;
     bool IsTopMost() const;
     
-/* @section Public event handler */
+/**@section Public event handler */
 public:
     DelegateChain<void(int32_t, int32_t)> OnWindowMove;
     DelegateChain<void(int32_t, int32_t)> OnWindowResize;
@@ -74,7 +74,7 @@ public:
     DelegateChain<void()> OnWindowGetFocus;
     DelegateChain<void()> OnWindowLoseFocus;
     
-/* @section Private variable */
+/**@section Private variable */
 private:
     NSWindow* m_nsWindow;
     WindowDelegate* m_nsWindowDelegate;

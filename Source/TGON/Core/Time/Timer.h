@@ -26,7 +26,7 @@ public:
 public:
     /**
      * @brief   Stops this timer.
-     * @details If this timer stopped, the OnTimeElapsed handler will not invoked.
+     * @remarks If this timer stopped, the OnTimeElapsed handler will not invoked.
      */
     void Update();
     
