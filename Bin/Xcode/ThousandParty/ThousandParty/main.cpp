@@ -29,7 +29,7 @@ private:
             m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "Assets/Image/IntroScene/firefly.png");
             m_fireflySpriteComponent->SetBlendColor({1.0f, 1.0f, 1.0f});
             
-            this->GetTransform().SetScale({0.31f, 0.31f, 1.0f});
+            this->SetScale({0.31f, 0.31f, 1.0f});
             
             this->Reset();
         }
@@ -129,8 +129,8 @@ public:
         // Intro에 사용할 Sprite 생성
         {
             auto fadeInObject = std::make_shared<GameObject>("fadeIn");
-            fadeInObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
-            fadeInObject->GetTransform().SetPosition({0.0f, 0.0f, 10.0f});
+            fadeInObject->SetScale({8.38f, 4.42f, 1.0f});
+            fadeInObject->SetPosition({0.0f, 0.0f, 10.0f});
             m_fadeInSpriteComponent = fadeInObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_fadeInSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
             m_fadeInSpriteComponent->SetOpacity(1.0f);
@@ -142,8 +142,8 @@ public:
             m_nightSkyObject = std::make_shared<GameObject>("nightSky");
             m_nightSkySpriteComponent = m_nightSkyObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/IntroScene/nightSky.png");
             float nightSkyImageWidth = static_cast<float>(m_nightSkySpriteComponent->GetSprite().GetTexture()->GetWidth());
-            m_nightSkyObject->GetTransform().SetScale({25.14f, 4.42f, 1.0f});
-            m_nightSkyObject->GetTransform().SetPosition({static_cast<float>(nightSkyImageWidth - rootWindowSize.width) * 0.01 * 0.5f, 0.0f, 0.0f});
+            m_nightSkyObject->SetScale({25.14f, 4.42f, 1.0f});
+            //m_nightSkyObject->GetTransform().SetPosition({static_cast<float>(nightSkyImageWidth - rootWindowSize.width) * 0.01 * 0.5f, 0.0f, 0.0f});
             this->AddObject(m_nightSkyObject);
         }
 
@@ -246,7 +246,7 @@ public:
         // Intro에 사용할 Sprite 생성
         {
             auto introObject1 = std::make_shared<GameObject>("introSprite1");
-            introObject1->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            introObject1->SetScale({8.38f, 4.42f, 1.0f});
             m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f});
             m_introSpriteComponent1->SetOpacity(0.0f);
@@ -256,7 +256,7 @@ public:
         // Intro에 사용할 Sprite 생성
         {
             auto introObject2 = std::make_shared<GameObject>("introSprite2");
-            introObject2->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            introObject2->SetScale({8.38f, 4.42f, 1.0f});
             m_introSpriteComponent2 = introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
             m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f});
             m_introSpriteComponent2->SetOpacity(0.0f);
@@ -266,7 +266,7 @@ public:
         // Intro에 사용할 Sprite 생성
         {
             auto fadeOutObject = std::make_shared<GameObject>("fadeOut");
-            fadeOutObject->GetTransform().SetScale({8.38f, 4.42f, 1.0f});
+            fadeOutObject->SetScale({8.38f, 4.42f, 1.0f});
             m_fadeOutSpriteComponent = fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
             m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
             m_fadeOutSpriteComponent->SetOpacity(0.0f);

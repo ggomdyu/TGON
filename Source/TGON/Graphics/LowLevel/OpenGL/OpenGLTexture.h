@@ -14,18 +14,18 @@
 namespace tgon
 {
 
-class TGON_API TextureImpl final :
+class TGON_API OpenGLTexture final :
     private Image,
     private boost::noncopyable
 {
 /**@section Public constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
-    TextureImpl(const std::string& filePath, const TextureProperty& textureProperty);
+    OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty);
 
 /**@section Public destructor */
 public:
-    ~TextureImpl();
+    ~OpenGLTexture();
 
 /**@section Public method */
 public:
@@ -74,7 +74,7 @@ public:
 private:
     void TransferToVideo();
     
-    void UpdateParemeters();
+    void UpdateTexParemeters();
     
     GLuint CreateTextureHandle() const;
     
@@ -86,5 +86,7 @@ private:
     GLint m_filterMode;
     GLint m_wrapMode;
 };
+
+using PlatformTexture = OpenGLTexture;
 
 } /* namespace tgon */

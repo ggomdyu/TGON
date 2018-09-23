@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-TextureImpl::TextureImpl(const std::string& filePath, const TextureProperty& textureProperty) :
+OpenGLTexture::OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty) :
     Image(filePath),
     m_isUseMipmap(textureProperty.isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
@@ -20,19 +20,19 @@ TextureImpl::TextureImpl(const std::string& filePath, const TextureProperty& tex
     this->TransferToVideo();
 }
 
-TextureImpl::~TextureImpl()
+OpenGLTexture::~OpenGLTexture()
 {
     TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
 }
 
-void TextureImpl::Use()
+void OpenGLTexture::Use()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
     
-    this->UpdateParemeters();
+    this->UpdateTexParemeters();
 }
 
-void TextureImpl::TransferToVideo()
+void OpenGLTexture::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
     TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData()));
@@ -43,7 +43,7 @@ void TextureImpl::TransferToVideo()
     }
 }
 
-void TextureImpl::UpdateParemeters()
+void OpenGLTexture::UpdateTexParemeters()
 {
     // Update texture filter
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
@@ -54,17 +54,17 @@ void TextureImpl::UpdateParemeters()
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrapMode));
 }
 
-void TextureImpl::SetFilterMode(TextureFilterMode filterMode)
+void OpenGLTexture::SetFilterMode(TextureFilterMode filterMode)
 {
     m_filterMode = static_cast<GLint>(filterMode);
 }
 
-void TextureImpl::SetWrapMode(TextureWrapMode wrapMode)
+void OpenGLTexture::SetWrapMode(TextureWrapMode wrapMode)
 {
     m_wrapMode = static_cast<GLint>(wrapMode);
 }
 
-GLuint TextureImpl::CreateTextureHandle() const
+GLuint OpenGLTexture::CreateTextureHandle() const
 {
     GLuint textureHandle;
     TGON_GL_ERROR_CHECK(glGenTextures(1, &textureHandle));
@@ -72,22 +72,22 @@ GLuint TextureImpl::CreateTextureHandle() const
     return textureHandle;
 }
 
-TextureFilterMode TextureImpl::GetFilterMode() const noexcept
+TextureFilterMode OpenGLTexture::GetFilterMode() const noexcept
 {
     return static_cast<TextureFilterMode>(m_filterMode);
 }
 
-TextureWrapMode TextureImpl::GetWrapMode() const noexcept
+TextureWrapMode OpenGLTexture::GetWrapMode() const noexcept
 {
     return static_cast<TextureWrapMode>(m_wrapMode);
 }
 
-void TextureImpl::CreateMipmap() const
+void OpenGLTexture::CreateMipmap() const
 {
     TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
 }
 
-GLuint TextureImpl::GetTextureHandle() const noexcept
+GLuint OpenGLTexture::GetTextureHandle() const noexcept
 {
     return m_textureHandle;
 }

@@ -785,5 +785,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Engine\InputMode.h">
       <Filter>Source\Core\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.inl" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Object\IResource.h">
+      <Filter>Source\Core\Object</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

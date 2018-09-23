@@ -83,14 +83,9 @@ const Vector3& GameObject::GetScale() const noexcept
     return m_transform.GetScale();
 }
 
-Transform& GameObject::GetTransform() noexcept
+const Matrix4x4& GameObject::GetWorldMatrix() const noexcept
 {
-    return m_transform;
-}
-
-const Transform& GameObject::GetTransform() const noexcept
-{
-    return m_transform;
+    return m_transform.GetWorldMatrix();
 }
 
 void GameObject::SetActive(bool isActive)

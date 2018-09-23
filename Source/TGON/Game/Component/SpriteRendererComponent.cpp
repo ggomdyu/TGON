@@ -26,7 +26,7 @@ void SpriteRendererComponent::Update()
         return;
     }
 
-    m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, { GetOwner()->GetTransform().GetWorldMatrix() });
+    m_graphicsModule->GetRenderStage().AddSpriteBatch(m_material, { GetOwner()->GetWorldMatrix() });
 }
 
 void SpriteRendererComponent::SetSprite(const Sprite& sprite)

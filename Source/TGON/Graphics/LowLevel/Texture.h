@@ -15,6 +15,7 @@ namespace tgon
 {
     
 class TGON_API Texture final :
+    private PlatformTexture,
     private boost::noncopyable
 {
 /**@section Public constructor */
@@ -68,14 +69,6 @@ public:
      * @warn    This can not be correct information if the file moved somewhere after image loaded.
      */
     const std::string& GetFilePath() const noexcept;
-
-    TextureImpl& GetTextureImpl() noexcept;
-    
-    const TextureImpl& GetTextureImpl() const noexcept;
-  
-/**@section Private variable */
-public:
-    TextureImpl m_textureImpl;
 };
     
 } /* namespace tgon */
