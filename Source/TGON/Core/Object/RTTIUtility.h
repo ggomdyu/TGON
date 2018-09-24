@@ -1,13 +1,11 @@
 /**
- * @file    RuntimeObjectUtility.h
+ * @file    RTTIUtility.h
  * @author  ggomdyu
  * @since   08/17/2017
  */
 
 #pragma once
 #include <type_traits>
-
-#include "RuntimeObject.h"
 
 namespace tgon
 {
@@ -34,6 +32,27 @@ inline _CastToType DynamicCast(_CastFromType ptr) noexcept
         }
     }
 
+    return nullptr;
+}
+
+template <typename _Type>
+inline typename std::enable_if<IsPureType<_Type>, const RTTI*>::type GetRTTI()
+{
+    using PureType = PurifyType<_Type>;
+    
+    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
+    return &rtti;
+}
+    
+template <typename _Type>
+inline typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type GetRTTI()
+{
+    return GetRTTI<PurifyType<_Type>>();
+}
+
+template <>
+inline const RTTI* GetRTTI<void>()
+{
     return nullptr;
 }
 

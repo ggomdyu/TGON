@@ -6,9 +6,10 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
-#include "Core/Object/TypeTraits.h"
 
 #include "RTTI.h"
+#include "RTTIUtility.h"
+#include "TypeTraits.h"
 
 namespace tgon
 {
@@ -31,29 +32,6 @@ public:
 };
 
 inline RuntimeObject::~RuntimeObject() = default;
-
-template <typename _Type>
-inline typename std::enable_if<IsPureType<_Type>, const RTTI*>::type GetRTTI()
-{
-    using PureType = PurifyType<_Type>;
-    
-    static_assert(std::is_base_of<RuntimeObject, PureType>::value, "GetRTTI only accepts template parameter that inherited from RuntimeObject.");
-
-    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
-    return &rtti;
-}
-    
-template <typename _Type>
-inline typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type GetRTTI()
-{
-    return GetRTTI<PurifyType<_Type>>();
-}
-
-template <>
-inline const RTTI* GetRTTI<void>()
-{
-    return nullptr;
-}
 
 } /* namespace tgon */
 

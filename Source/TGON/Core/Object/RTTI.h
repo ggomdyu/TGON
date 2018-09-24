@@ -28,31 +28,43 @@ public:
     /**@brief   Returns the parent type's RTTI. */
     const RTTI* GetSuperRTTI() const noexcept;
 
+/* @section Public operator */
+public:
+    bool operator==(const RTTI& rhs) const noexcept;
+    bool operator!=(const RTTI& rhs) const noexcept;
+    bool operator<(const RTTI& rhs) const noexcept;
+    bool operator>=(const RTTI& rhs) const noexcept;
+    bool operator>(const RTTI& rhs) const noexcept;
+    bool operator<=(const RTTI& rhs) const noexcept;
+
 /* @section Private variable */
 private:
-    const std::type_info& m_typeInfo;
+    const std::type_info* m_typeInfo;
+
     const RTTI* m_superRTTI;
 };
 
-inline RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept :
-    m_typeInfo(typeInfo),
-    m_superRTTI(superRTTI)
-{
-}
-
-inline std::size_t RTTI::GetHashCode() const noexcept
-{
-    return m_typeInfo.hash_code();
-}
-
-inline const char* RTTI::GetName() const noexcept
-{
-    return m_typeInfo.name();
-}
-
-inline const RTTI* RTTI::GetSuperRTTI() const noexcept
-{
-    return m_superRTTI;
-}
-
 } /* namespace tgon */
+
+namespace std
+{
+
+template<>
+struct hash<tgon::RTTI>
+{
+/* @section Public type */
+public:
+    using argument_type = tgon::RTTI;
+    using result_type = size_t;
+
+/* @section Public method */
+public:
+    size_t operator()(const tgon::RTTI& rhs) const noexcept;
+};
+
+inline size_t hash<tgon::RTTI>::operator()(const tgon::RTTI& rhs) const noexcept
+{
+    return rhs.GetHashCode();
+}
+
+} /* namespace std */

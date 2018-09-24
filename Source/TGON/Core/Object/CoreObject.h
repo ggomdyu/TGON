@@ -10,7 +10,6 @@
 #include <string>
 
 #include "RuntimeObject.h"
-#include "RuntimeObjectUtility.h"
 
 namespace tgon
 {
