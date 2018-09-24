@@ -7,6 +7,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
+#include "Core/Object/CoreObject.h"
 #include "Core/Drawing/Image.h"
 
 #include "../TextureType.h"
@@ -14,14 +15,13 @@
 namespace tgon
 {
 
-class TGON_API OpenGLTexture final :
-    private Image,
-    private boost::noncopyable
+class TGON_API OpenGLTexture :
+    private Image
 {
 /**@section Public constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
-    OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty);
+    OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty = {});
 
 /**@section Public destructor */
 public:

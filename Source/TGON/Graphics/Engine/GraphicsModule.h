@@ -12,12 +12,12 @@
 
 namespace tgon
 {
-    
+
 class TGON_API GraphicsModule :
     public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(GraphicsModule);
+    TGON_DECLARE_RTTI(GraphicsModule);
     
 /**@section Public constructor */
 public:
@@ -29,19 +29,13 @@ public:
     
 /**@section Public method */
 public:
-    /**@brief   Updates the module. */
+    /**@brief   Updates this module. */
     virtual void Update() override;
-    
-    /**@brief   Gets the Graphics. */
+
     Graphics& GetGraphics() noexcept;
-    
-    /**@brief   Gets the Graphics. */
     const Graphics& GetGraphics() const noexcept;
-    
-    /**@brief   Gets the RenderStage. */
+
     RenderStage& GetRenderStage() noexcept;
-    
-    /**@brief   Gets the RenderStage. */
     const RenderStage& GetRenderStage() const noexcept;
     
 /**@section Private method */

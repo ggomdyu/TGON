@@ -29,7 +29,7 @@ class TGON_API Engine :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(Engine);
+    TGON_DECLARE_RTTI(Engine);
 
 /**@section Protected constructor */
 protected:

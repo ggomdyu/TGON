@@ -14,7 +14,7 @@ class TGON_API TimeModule final :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(TimeModule);
+    TGON_DECLARE_RTTI(TimeModule);
 
 /**@section Public constructor */
 public:

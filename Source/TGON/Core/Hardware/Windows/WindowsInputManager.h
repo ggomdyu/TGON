@@ -17,7 +17,7 @@ class TGON_API InputManagerImpl final :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(InputManagerImpl);
+    TGON_DECLARE_RTTI(InputManagerImpl);
 
 /**@section Public constructor */
 public:

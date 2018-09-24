@@ -14,18 +14,12 @@ class TGON_API IModule :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(IModule);
-
-/**@section Public destructor */
-public:
-    virtual ~IModule() = 0;
+    TGON_DECLARE_RTTI(IModule);
 
 /**@section Public method */
 public:
     /**@brief   Updates the module. */
     virtual void Update() = 0;
 };
-    
-inline IModule::~IModule() = default;
 
 } /* namespace tgon */

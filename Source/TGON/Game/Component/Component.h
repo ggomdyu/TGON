@@ -18,7 +18,7 @@ class TGON_API Component :
 	public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(Component);
+    TGON_DECLARE_RTTI(Component);
 
 /**@section Public constructor */
 public:

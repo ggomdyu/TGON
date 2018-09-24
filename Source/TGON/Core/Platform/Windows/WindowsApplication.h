@@ -23,7 +23,7 @@ class TGON_API WindowsApplication :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(WindowsApplication);
+    TGON_DECLARE_RTTI(WindowsApplication);
 
 /**@section Public constructor */
 public:

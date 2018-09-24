@@ -2,8 +2,7 @@
  * @file    Prefix.h
  * @author  ggomdyu
  * @since   03/14/2016
- * @brief   Set of Compiler compatible prefix.
- * @seealso http://www.boost.org/doc/libs/1_64_0/libs/config/doc/html/boost_config/boost_macro_reference.html#boost_config.boost_macro_reference.macros_that_describe_c__11_features_not_supported
+ * @brief   Set of the compiler-agnostic prefix.
  */
 
 #pragma once
@@ -59,4 +58,10 @@
 #   else
 #       define TGON_RESTRICT restrict
 #   endif
+#endif
+
+#if (DEBUG | !NDEBUG)
+#   define TGON_CONDITIONAL_CONSTEXPR
+#else
+#   define TGON_CONDITIONAL_CONSTEXPR constexpr
 #endif

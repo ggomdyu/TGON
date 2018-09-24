@@ -19,7 +19,7 @@ class TGON_API RenderStage final :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(RenderStage);
+    TGON_DECLARE_RTTI(RenderStage);
 
 /**@section Public type */
 public:

@@ -275,9 +275,4 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\stb\stb_voxel_render.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\stb\stretchy_buffer.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Object\GameObject.inl">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-  </ItemGroup>
 </Project>

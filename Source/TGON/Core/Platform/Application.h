@@ -28,7 +28,7 @@ class TGON_API Application final :
     private PlatformApplication
 {
 public:
-    TGON_RUNTIME_OBJECT(Application);
+    TGON_DECLARE_RTTI(Application);
 
 /**@section Private constructor */
 private:

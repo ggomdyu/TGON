@@ -7,24 +7,26 @@
 #pragma once
 #include <type_traits>
 
+#include "TypeTraits.h"
+
 namespace tgon
 {
 
 template <typename _CastToType, typename _CastFromType, typename std::enable_if<std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
-inline _CastToType DynamicCast(_CastFromType ptr) noexcept
+inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
 {
     return ptr;
 }
 
 template <typename _CastToType, typename _CastFromType, typename std::enable_if<!std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
-inline _CastToType DynamicCast(_CastFromType ptr) noexcept
+inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
 {
     const RTTI* rtti = ptr->GetRTTI();
     while (rtti != nullptr)
     {
         if (rtti == GetRTTI<_CastToType>())
         {
-            return reinterpret_cast<_CastToType>(ptr);
+            return reinterpret_cast<_CastToType>(std::forward<_CastFromType>(ptr));
         }
         else
         {
@@ -36,7 +38,7 @@ inline _CastToType DynamicCast(_CastFromType ptr) noexcept
 }
 
 template <typename _Type>
-inline typename std::enable_if<IsPureType<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
 {
     using PureType = PurifyType<_Type>;
     
@@ -45,7 +47,7 @@ inline typename std::enable_if<IsPureType<_Type>, const RTTI*>::type GetRTTI()
 }
     
 template <typename _Type>
-inline typename std::enable_if<!IsPureType<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<!IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
 {
     return GetRTTI<PurifyType<_Type>>();
 }

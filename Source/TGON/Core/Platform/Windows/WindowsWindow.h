@@ -27,7 +27,7 @@ class WindowsWindow :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(WindowsWindow);
+    TGON_DECLARE_RTTI(WindowsWindow);
 
 /**@section Public constructor */
 public:

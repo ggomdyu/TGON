@@ -8,14 +8,14 @@ class TGON_API IntroScene :
     public GameScene
 {
 public:
-    TGON_RUNTIME_OBJECT(IntroScene);
+    TGON_DECLARE_RTTI(IntroScene);
     
 private:
     class TGON_API Firefly final :
         public GameObject
     {
     public:
-        TGON_RUNTIME_OBJECT(Firefly);
+        TGON_DECLARE_RTTI(Firefly);
         
     public:
         Firefly(const FixedHashString32& name) :
@@ -42,7 +42,7 @@ private:
             this->Move(Vector3(0.0f, 0.0f, m_speed * m_timeModule->GetTickTime()));
             
 //            if ( m_pTexture[0].GetPosition( ).y <= -123.0F )
-//                Reset( );
+//                Reset( );2222
             
             if (m_enableOpacityChange)
             {
@@ -184,7 +184,7 @@ public:
         {
             m_fadeInSpriteComponent->GetOwner()->Move({0.0f, 0.0f, 0.05f});
         }
-        
+
         // Move NightSky
         {
             auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
@@ -217,7 +217,7 @@ class TGON_API LogoScene :
     public GameScene
 {
 public:
-    TGON_RUNTIME_OBJECT(LogoScene);
+    TGON_DECLARE_RTTI(LogoScene);
 
 public:
     LogoScene()
@@ -359,11 +359,65 @@ private:
     std::shared_ptr<TimeModule> m_timeModule;
 };
 
+template <typename, typename _EnableType = void>
+class StringHash;
+
+template <typename _StringType>
+class StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>
+{
+/**@section Public type */
+public:
+    using ValueType = _StringType;
+
+/**@section Public constructor */
+public:
+    constexpr StringHash(const _StringType* str, size_t strLen);
+
+/**@section Public method */
+public:
+    const _StringType& CStr() const noexcept;
+
+    const size_t Length() const noexcept;
+    
+    const size_t GetHashCode() const noexcept;
+
+/**@section Private variable */
+public:
+    _StringType m_str;
+    size_t m_strLen;
+    size_t m_hashCode;
+};
+
+template <typename _StringType>
+const _StringType& StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::CStr() const noexcept
+{
+    return m_str;
+}
+
+template <typename _StringType>
+const size_t StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::GetHashCode() const noexcept
+{
+    return m_hashCode;
+}
+
+template <typename _StringType>
+constexpr StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::StringHash(const _StringType* str, size_t strLen) :
+    m_str(str),
+    m_strLen(strLen),
+    m_hashCode()
+{
+}
+
+template <typename _StringType>
+class StringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>
+{
+};
+
 class TGON_API ThousandParty final :
     public Engine
 {
 public:
-    TGON_RUNTIME_OBJECT(ThousandParty);
+    TGON_DECLARE_RTTI(ThousandParty);
 
 /**@section Public constructor */
 public:
@@ -378,7 +432,6 @@ public:
     virtual void OnDidLaunch() override
     {
         Window& rootWindow = Application::GetInstance()->GetRootWindow();
-
         InputMode inputMode;
         {
             inputMode.isUseMouse = false;
@@ -396,10 +449,15 @@ public:
             videoMode.enableMultiSampling = false;
         };
         this->RegisterModule<GraphicsModule>(rootWindow, videoMode);
-        
         this->RegisterModule<TimeModule>();
-        
         this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
+        
+        RemoveAllPointers<int**>::Type a = 3;
+
+
+        //PurifyType<int**> b = 4;
+        
+        //StringHash<A> a;
     }
 
 /**@section Public method */

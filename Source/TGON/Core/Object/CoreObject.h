@@ -19,7 +19,7 @@ class TGON_API CoreObject :
     private boost::noncopyable
 {
 public:
-    TGON_RUNTIME_OBJECT(CoreObject);
+    TGON_DECLARE_RTTI(CoreObject);
 
 /**@section Public constructor */
 public:

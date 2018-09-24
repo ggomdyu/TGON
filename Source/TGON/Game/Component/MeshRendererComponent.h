@@ -18,7 +18,7 @@ class TGON_API MeshRendererComponent :
 	public Component
 {
 public:
-    TGON_RUNTIME_OBJECT(MeshRendererComponent);
+    TGON_DECLARE_RTTI(MeshRendererComponent);
 
 /**@section Public constructor */
 public:

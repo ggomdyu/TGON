@@ -22,7 +22,7 @@ class TGON_API SpriteRendererComponent :
 	public Component
 {
 public:
-    TGON_RUNTIME_OBJECT(SpriteRendererComponent);
+    TGON_DECLARE_RTTI(SpriteRendererComponent);
 
 /**@section Public constructor */
 public:

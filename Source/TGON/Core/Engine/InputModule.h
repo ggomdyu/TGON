@@ -23,7 +23,7 @@ class TGON_API InputModule :
     public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(InputModule);
+    TGON_DECLARE_RTTI(InputModule);
     
 /**@section Public constructor */
 public:

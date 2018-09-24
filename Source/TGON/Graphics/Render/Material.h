@@ -19,7 +19,7 @@ class TGON_API Material :
     public RuntimeObject
 {
 public:
-    TGON_RUNTIME_OBJECT(Material);
+    TGON_DECLARE_RTTI(Material);
     
 /**@section Protected constructor */
 protected:
@@ -55,7 +55,7 @@ class TGON_API ColorMaterial :
     public Material
 {
 public:
-    TGON_RUNTIME_OBJECT(ColorMaterial);
+    TGON_DECLARE_RTTI(ColorMaterial);
 
 /**@section Public constructor */
 public:
@@ -106,7 +106,7 @@ class TGON_API TextureMaterial :
     public ColorMaterial
 {
 public:
-    TGON_RUNTIME_OBJECT(TextureMaterial);
+    TGON_DECLARE_RTTI(TextureMaterial);
 
 /**@section Public constructor */
 public:
@@ -164,7 +164,7 @@ public:
 //    public TextureMaterial
 //{
 //public:
-//    TGON_RUNTIME_OBJECT(GrayscaleTextureMaterial);
+//    TGON_DECLARE_RTTI(GrayscaleTextureMaterial);
 //
 ///**@section Public constructor */
 //public:
@@ -185,7 +185,7 @@ public:
 //    public TextureMaterial
 //{
 //public:
-//    TGON_RUNTIME_OBJECT(MaskTextureMaterial);
+//    TGON_DECLARE_RTTI(MaskTextureMaterial);
 //
 ///**@section Public constructor */
 //public:
@@ -234,7 +234,7 @@ public:
 //    public TextureMaterial
 //{
 //public:
-//    TGON_RUNTIME_OBJECT(GrayTextureMaterial);
+//    TGON_DECLARE_RTTI(GrayTextureMaterial);
 //};
 //
 

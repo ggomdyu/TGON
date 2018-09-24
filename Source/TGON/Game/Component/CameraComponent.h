@@ -18,7 +18,7 @@ class TGON_API CameraComponent :
 	public Component
 {
 public:
-    TGON_RUNTIME_OBJECT(CameraComponent);
+    TGON_DECLARE_RTTI(CameraComponent);
 
 /**@section Public constructor */
 public:

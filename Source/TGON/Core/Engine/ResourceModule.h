@@ -5,6 +5,11 @@
  */
 
 #pragma once
+#include <memory>
+#include <map>
+
+#include "Core/Object/IResource.h"
+
 #include "IModule.h"
 
 namespace tgon
@@ -14,7 +19,7 @@ class TGON_API ResourceModule final :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(ResourceModule);
+    TGON_DECLARE_RTTI(ResourceModule);
 
 /* @section Public constructor */
 public:
@@ -26,14 +31,13 @@ public:
 
 /* @section Public method */
 public:
-    /* @brief                   Updates the ResourceModule. */
     virtual void Update() override;
+
+    void PurgeResource(const char* resourceName);
     
 /* @section Private variable */
 private:
-    uint64_t m_lastRecordedTickTime;
-    float m_timeScale;
-    float m_tickTime;
+    std::map<size_t, std::shared_ptr<IResource>> m_resourcePool;
 };
 
 } /* namespace tgon */

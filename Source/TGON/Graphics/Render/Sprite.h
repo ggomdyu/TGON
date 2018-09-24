@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "Core/Math/Rect.h"
+#include "Core/Math/Vector2.h"
 
 #include "../LowLevel/Texture.h"
 
@@ -30,6 +31,24 @@ public:
     
 /**@section Public method */
 public:
+    /**@brief   Sets the origin point of the sprite. */
+    void SetOriginPoint(const Vector2& originPoint);
+
+    /**@brief   Gets the origin point of the sprite. */
+    Vector2& GetOriginPoint() noexcept;
+
+    /**@brief   Gets the origin point of the sprite. */
+    const Vector2& GetOriginPoint() const noexcept;
+
+    /**@brief   Sets the anchor point of the sprite. */
+    void SetAnchorPoint(const Vector2& anchorPoint);
+    
+    /**@brief   Gets the anchor point of the sprite. */
+    Vector2& GetAnchorPoint() noexcept;
+    
+    /**@brief   Gets the anchor point of the sprite. */
+    const Vector2& GetAnchorPoint() const noexcept;
+
     /**@brief   Sets the texture of the sprite. */
     void SetTexture(const std::shared_ptr<Texture>& texture);
 
@@ -41,6 +60,10 @@ public:
     
 /**@section Private variable */
 private:
+    Vector2 m_originPoint;
+
+    Vector2 m_anchorPoint;
+
     std::shared_ptr<Texture> m_texture;
 };
 

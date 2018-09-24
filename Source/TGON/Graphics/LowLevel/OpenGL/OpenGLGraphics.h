@@ -19,7 +19,7 @@ class TGON_API OpenGLGraphics :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(OpenGLGraphics);
+    TGON_DECLARE_RTTI(OpenGLGraphics);
 
 /**@section Public constructor */
 public:

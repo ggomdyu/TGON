@@ -16,7 +16,7 @@ class TGON_API AudioModule final :
 	public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(AudioModule);
+    TGON_DECLARE_RTTI(AudioModule);
 
 /* @section Public constructor */
 public:

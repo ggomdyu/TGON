@@ -9,7 +9,6 @@
 
 #include "RTTI.h"
 #include "RTTIUtility.h"
-#include "TypeTraits.h"
 
 namespace tgon
 {
@@ -27,7 +26,7 @@ public:
 
 /**@section Public method */
 public:
-    /**@brief   Gets dynamic bound type information. */
+    /**@brief   Gets a runtime type information of this instance. */
     virtual const RTTI* GetRTTI() const = 0;
 };
 
@@ -35,7 +34,7 @@ inline RuntimeObject::~RuntimeObject() = default;
 
 } /* namespace tgon */
 
-#define TGON_RUNTIME_OBJECT(classType)\
+#define TGON_DECLARE_RTTI(classType)\
     using SuperType = ThisType;\
     using ThisType = classType;\
     \

@@ -47,8 +47,13 @@ public:
     /**@brief   Checks whether the specified material can batched. */
     bool CanBatch(const std::shared_ptr<TextureMaterial>& material) const;
     
-    /**@brief   Draws all batched primitives. */
+    /**@brief   Draws all of the batched primitives. */
     void Draw(Graphics& graphics, const Camera& camera);
+
+    /**@brief   Gets all of the batched primitives. */
+    std::vector<DrawPrimitive>& GetDrawPrimitives() noexcept;
+
+    const std::vector<DrawPrimitive>& GetDrawPrimitives() const noexcept;
 
 /**@section Private variable */
 private:

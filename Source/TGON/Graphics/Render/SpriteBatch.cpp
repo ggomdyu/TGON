@@ -46,6 +46,16 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
     }
 }
 
+std::vector<SpriteBatch::DrawPrimitive>& SpriteBatch::GetDrawPrimitives() noexcept
+{
+    return m_drawPrimitives;
+}
+
+const std::vector<SpriteBatch::DrawPrimitive>& SpriteBatch::GetDrawPrimitives() const noexcept
+{
+    return m_drawPrimitives;
+}
+
 SpriteBatchGroup::SpriteBatchGroup() :
     m_quad(MeshUtility::CreateSharedQuad())
 {
@@ -53,16 +63,22 @@ SpriteBatchGroup::SpriteBatchGroup() :
 
 void SpriteBatchGroup::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
 {
-    for (auto& spriteBatch : m_spriteBatches)
+    if (m_spriteBatches.empty())
     {
-        if (spriteBatch.CanBatch(material))
+        m_spriteBatches.push_back(SpriteBatch(material, {drawPrimitive}));
+    }
+    else
+    {
+        auto& backSpriteBatch = m_spriteBatches.back();
+        if (backSpriteBatch.CanBatch(nullptr))
         {
-            spriteBatch.AddDrawPrimitive(drawPrimitive);
-            return;
+            backSpriteBatch.AddDrawPrimitive(drawPrimitive);
+        }
+        else
+        {
+            m_spriteBatches.push_back(SpriteBatch(material, { drawPrimitive }));
         }
     }
-    
-    m_spriteBatches.push_back(SpriteBatch(material, {drawPrimitive}));
 }
 
 void SpriteBatchGroup::AddSpriteBatch(const SpriteBatch& spriteBatch)

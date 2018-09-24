@@ -18,7 +18,7 @@ class TGON_API GameSceneModule final :
     public IModule
 {
 public:
-    TGON_RUNTIME_OBJECT(GameSceneModule);
+    TGON_DECLARE_RTTI(GameSceneModule);
 
 /**@section Public destructor */
 public:

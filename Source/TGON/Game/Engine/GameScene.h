@@ -20,7 +20,7 @@ class TGON_API GameScene :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(GameScene);
+    TGON_DECLARE_RTTI(GameScene);
 
 /**@section Public destructor */
 public:

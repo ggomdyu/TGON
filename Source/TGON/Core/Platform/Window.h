@@ -27,7 +27,7 @@ class TGON_API Window final :
     private PlatformWindow
 {
 public:
-    TGON_RUNTIME_OBJECT(Window);
+    TGON_DECLARE_RTTI(Window);
 
 /**@section Private constructor */
 public:

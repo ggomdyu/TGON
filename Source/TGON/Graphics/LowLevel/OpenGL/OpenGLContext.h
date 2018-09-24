@@ -27,7 +27,7 @@ struct TGON_API OpenGLContext final :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(OpenGLContext);
+    TGON_DECLARE_RTTI(OpenGLContext);
 
 /**@section Public constructor */
 public:
