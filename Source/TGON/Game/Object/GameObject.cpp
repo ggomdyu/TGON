@@ -7,7 +7,7 @@
 namespace tgon
 {
 
-GameObject::GameObject(const FixedHashString32& name) :
+GameObject::GameObject(const StringHash& name) :
     m_name(name),
     m_isActive(true)
 {
@@ -28,12 +28,12 @@ void GameObject::Update()
     }
 }
 
-void GameObject::SetName(const FixedHashString32& name)
+void GameObject::SetName(const StringHash& name)
 {
     m_name = name;
 }
 
-const FixedHashString32& GameObject::GetName() const noexcept
+const StringHash& GameObject::GetName() const noexcept
 {
     return m_name;
 }

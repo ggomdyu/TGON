@@ -7,10 +7,10 @@
 #pragma once
 #include <string>
 
-#include "Core/String/StringView.h"
-#include "Core/String/FixedString.h"
+#include "Core/Hash/Hash.h"
 
-#include "Hash.h"
+#include "StringView.h"
+#include "FixedString.h"
 
 namespace tgon
 {

@@ -173,7 +173,7 @@
 		FDD56D242159F27D00C01939 /* HashStringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1D2159F27C00C01939 /* HashStringView.h */; };
 		FDD56D252159F27D00C01939 /* Encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1E2159F27C00C01939 /* Encoding.h */; };
 		FDD56D262159F27D00C01939 /* StringTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1F2159F27C00C01939 /* StringTraits.h */; };
-		FDD56D282159F29F00C01939 /* StringHash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D272159F29F00C01939 /* StringHash.h */; };
+		FDD56D2A2159FA2F00C01939 /* StringHash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D292159FA2F00C01939 /* StringHash.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEA237820AFF586000885AC /* PrecompiledHeader.h */; };
@@ -390,7 +390,7 @@
 		FDD56D1D2159F27C00C01939 /* HashStringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashStringView.h; sourceTree = "<group>"; };
 		FDD56D1E2159F27C00C01939 /* Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoding.h; sourceTree = "<group>"; };
 		FDD56D1F2159F27C00C01939 /* StringTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTraits.h; sourceTree = "<group>"; };
-		FDD56D272159F29F00C01939 /* StringHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringHash.h; path = ../../Source/TGON/Core/Hash/StringHash.h; sourceTree = "<group>"; };
+		FDD56D292159FA2F00C01939 /* StringHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHash.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDE085CA20B134F100D22E80 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../ThirdParty/Debug/x86_64/libogg.a; sourceTree = "<group>"; };
@@ -488,6 +488,7 @@
 				FDD56D1D2159F27C00C01939 /* HashStringView.h */,
 				FDD56D1F2159F27C00C01939 /* StringTraits.h */,
 				FDD56D1B2159F27C00C01939 /* StringView.h */,
+				FDD56D292159FA2F00C01939 /* StringHash.h */,
 			);
 			name = String;
 			path = ../../Source/TGON/Core/String;
@@ -604,7 +605,6 @@
 			children = (
 				FD2108B120B93286009FC8F1 /* Hash.cpp */,
 				FD2108B220B93286009FC8F1 /* Hash.h */,
-				FDD56D272159F29F00C01939 /* StringHash.h */,
 				FD2108B020B93286009FC8F1 /* UUID.h */,
 			);
 			name = Hash;
@@ -999,7 +999,6 @@
 				FD2559412145917B00FE0FDE /* Timer.h in Headers */,
 				FDEB409B2100FC5A000A3B98 /* Material.h in Headers */,
 				FDBE7E5C2131C81400B4874C /* Transform.h in Headers */,
-				FDD56D282159F29F00C01939 /* StringHash.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
 				FDC546E9211F3F97000A25F8 /* GameSceneModule.h in Headers */,
 				FD806BBA2110AB74002B9DCB /* TimeModule.h in Headers */,
@@ -1056,6 +1055,7 @@
 				FD41922820DA853100536815 /* ICloneable.h in Headers */,
 				FD052C7A20E7F1D200EF3C64 /* OpenGLGraphicsType.h in Headers */,
 				FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */,
+				FDD56D2A2159FA2F00C01939 /* StringHash.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
 				FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */,
 				FD5A1486213C4EAC00175B48 /* EventDispatcher.h in Headers */,
