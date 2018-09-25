@@ -18,7 +18,7 @@ private:
         TGON_DECLARE_RTTI(Firefly);
         
     public:
-        Firefly(const FixedHashString32& name) :
+        Firefly(const StringHash& name) :
             GameObject(name)
         {
             decltype(auto) application = Application::GetInstance();
@@ -398,25 +398,8 @@ public:
         this->RegisterModule<TimeModule>();
         this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
         
-        CharStringHash sh("a");
-        Log(LogLevel::Debug, "Str: %s\n", sh.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh.GetHashCode());
-        
-        StringHash sh2("b");
-        Log(LogLevel::Debug, "Str: %s\n", sh2.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh2.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh2.GetHashCode());
-        
-        FixedString256Hash sh3("ab");
-        Log(LogLevel::Debug, "Str: %s\n", sh3.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh3.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh3.GetHashCode());
-        
-        BasicStringHash<StringView> sh4("abc");
-        Log(LogLevel::Debug, "Str: %s\n", sh4.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh4.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh4.GetHashCode());
+        constexpr CharStringHash sh = "sg";
+    
     }
 
 /**@section Public method */

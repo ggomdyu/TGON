@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "Core/Object/CoreObject.h"
-#include "Core/String/FixedHashString.h"
+#include "Core/String/StringHash.h"
 
 #include "../Component/Component.h"
 
@@ -25,7 +25,7 @@ public:
 
 /**@section Private constructor */
 public:
-    explicit GameObject(const FixedHashString32& name);
+    explicit GameObject(const StringHash& name);
     
 /**@section Public destructor */
 public:
@@ -68,10 +68,10 @@ public:
      * @brief   Sets the name of this object.
      * @param [in] name     The name to set.
      */
-    void SetName(const FixedHashString32& name);
+    void SetName(const StringHash& name);
 
     /**@brief   Gets the name of this object. */
-    const FixedHashString32& GetName() const noexcept;
+    const StringHash& GetName() const noexcept;
 
     /**@brief   Sets the position of this object. */
     void SetPosition(const Vector3& position);
@@ -131,7 +131,7 @@ private:
 private:
     bool m_isActive;
 
-    FixedHashString32 m_name;
+    StringHash m_name;
 
     std::vector<std::shared_ptr<Component>> m_components;
 
