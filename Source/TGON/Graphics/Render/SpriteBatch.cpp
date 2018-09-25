@@ -70,7 +70,7 @@ void SpriteBatchGroup::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& ma
     else
     {
         auto& backSpriteBatch = m_spriteBatches.back();
-        if (backSpriteBatch.CanBatch(nullptr))
+        if (backSpriteBatch.CanBatch(material))
         {
             backSpriteBatch.AddDrawPrimitive(drawPrimitive);
         }

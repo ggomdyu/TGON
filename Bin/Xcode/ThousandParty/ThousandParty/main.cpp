@@ -359,60 +359,6 @@ private:
     std::shared_ptr<TimeModule> m_timeModule;
 };
 
-template <typename, typename _EnableType = void>
-class StringHash;
-
-template <typename _StringType>
-class StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>
-{
-/**@section Public type */
-public:
-    using ValueType = _StringType;
-
-/**@section Public constructor */
-public:
-    constexpr StringHash(const _StringType* str, size_t strLen);
-
-/**@section Public method */
-public:
-    const _StringType& CStr() const noexcept;
-
-    const size_t Length() const noexcept;
-    
-    const size_t GetHashCode() const noexcept;
-
-/**@section Private variable */
-public:
-    _StringType m_str;
-    size_t m_strLen;
-    size_t m_hashCode;
-};
-
-template <typename _StringType>
-const _StringType& StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::CStr() const noexcept
-{
-    return m_str;
-}
-
-template <typename _StringType>
-const size_t StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::GetHashCode() const noexcept
-{
-    return m_hashCode;
-}
-
-template <typename _StringType>
-constexpr StringHash<_StringType, typename std::enable_if<IsCharTypeValue<_StringType>>::type>::StringHash(const _StringType* str, size_t strLen) :
-    m_str(str),
-    m_strLen(strLen),
-    m_hashCode()
-{
-}
-
-template <typename _StringType>
-class StringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>
-{
-};
-
 class TGON_API ThousandParty final :
     public Engine
 {
@@ -452,12 +398,25 @@ public:
         this->RegisterModule<TimeModule>();
         this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
         
-        RemoveAllPointers<int**>::Type a = 3;
-
-
-        //PurifyType<int**> b = 4;
+        CharStringHash sh("a");
+        Log(LogLevel::Debug, "Str: %s\n", sh.CStr());
+        Log(LogLevel::Debug, "Length: %d\n", sh.Length());
+        Log(LogLevel::Debug, "HashCode: %d\n\n", sh.GetHashCode());
         
-        //StringHash<A> a;
+        StringHash sh2("b");
+        Log(LogLevel::Debug, "Str: %s\n", sh2.CStr());
+        Log(LogLevel::Debug, "Length: %d\n", sh2.Length());
+        Log(LogLevel::Debug, "HashCode: %d\n\n", sh2.GetHashCode());
+        
+        FixedString256Hash sh3("ab");
+        Log(LogLevel::Debug, "Str: %s\n", sh3.CStr());
+        Log(LogLevel::Debug, "Length: %d\n", sh3.Length());
+        Log(LogLevel::Debug, "HashCode: %d\n\n", sh3.GetHashCode());
+        
+        BasicStringHash<StringView> sh4("abc");
+        Log(LogLevel::Debug, "Str: %s\n", sh4.CStr());
+        Log(LogLevel::Debug, "Length: %d\n", sh4.Length());
+        Log(LogLevel::Debug, "HashCode: %d\n\n", sh4.GetHashCode());
     }
 
 /**@section Public method */

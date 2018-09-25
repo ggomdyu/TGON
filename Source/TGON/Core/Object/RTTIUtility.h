@@ -12,6 +12,27 @@
 namespace tgon
 {
 
+template <typename _Type>
+inline typename std::enable_if<IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
+{
+    using PureType = PurifyType<_Type>;
+    
+    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
+    return &rtti;
+}
+    
+template <typename _Type>
+inline typename std::enable_if<!IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
+{
+    return GetRTTI<PurifyType<_Type>>();
+}
+
+template <>
+inline const RTTI* GetRTTI<void>()
+{
+    return nullptr;
+}
+
 template <typename _CastToType, typename _CastFromType, typename std::enable_if<std::is_convertible<_CastFromType, _CastToType>::value>::type* = nullptr>
 inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
 {
@@ -33,28 +54,7 @@ inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
             rtti = rtti->GetSuperRTTI();
         }
     }
-
-    return nullptr;
-}
-
-template <typename _Type>
-inline typename std::enable_if<IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
-{
-    using PureType = PurifyType<_Type>;
     
-    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
-    return &rtti;
-}
-    
-template <typename _Type>
-inline typename std::enable_if<!IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
-{
-    return GetRTTI<PurifyType<_Type>>();
-}
-
-template <>
-inline const RTTI* GetRTTI<void>()
-{
     return nullptr;
 }
 

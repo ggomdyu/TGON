@@ -21,7 +21,7 @@ class TGON_API MacOSWindow :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(MacOSWindow);
+    TGON_DECLARE_RTTI(MacOSWindow);
     
 /**@section Public constructor */
 public:

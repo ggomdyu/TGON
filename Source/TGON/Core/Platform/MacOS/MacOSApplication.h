@@ -20,7 +20,7 @@ class TGON_API MacOSApplication :
     public CoreObject
 {
 public:
-    TGON_RUNTIME_OBJECT(MacOSApplication);
+    TGON_DECLARE_RTTI(MacOSApplication);
         
 /**@section Public destructor */
 public:

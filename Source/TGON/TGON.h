@@ -32,6 +32,7 @@
 #include "Core/Random/Random.h"
 #include "Core/String/FixedString.h"
 #include "Core/String/FixedStringUtility.h"
+#include "Core/Hash/StringHash.h"
 #include "Core/File/Path.h"
 #include "Core/Math/Mathematics.h"
 #include "Core/Math/Vector3.h"

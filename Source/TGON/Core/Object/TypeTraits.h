@@ -74,10 +74,14 @@ template <typename _Type>
 using PurifyType = std::decay_t<RemoveAllPointersType<std::remove_cv_t<_Type>>>;
 
 template <typename _Type>
-constexpr bool IsCharTypeValue = std::is_same<_Type, char>::value ||
-                                 std::is_same<_Type, char16_t>::value ||
-                                 std::is_same<_Type, char32_t>::value ||
-                                 std::is_same<_Type, wchar_t>::value;
+constexpr bool IsCharTypeValue = std::is_same<PurifyType<_Type>, char>::value ||
+                                 std::is_same<PurifyType<_Type>, char16_t>::value ||
+                                 std::is_same<PurifyType<_Type>, char32_t>::value ||
+                                 std::is_same<PurifyType<_Type>, wchar_t>::value;
+    
+template <typename _Type>
+constexpr bool IsCharPointerTypeValue = IsCharTypeValue<PurifyType<_Type>> &&
+                                        std::is_pointer<_Type>::value;
 
 template <typename>
 struct IsBasicString : std::false_type {};

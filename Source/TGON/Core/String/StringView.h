@@ -52,6 +52,7 @@ public:
     std::size_t RFind(const BasicStringView& rhs) const;
     std::size_t RFind(_CharType ch, std::size_t strOffset = _StringTraitsType::NPos) const;
     std::size_t RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
+    constexpr const _CharType* CStr() const noexcept;
     constexpr const _CharType* Data() const noexcept;
     constexpr const _CharType At(std::size_t index) const;
     constexpr std::size_t Length() const noexcept;
@@ -202,6 +203,12 @@ template <typename _CharType, typename _StringTraitsType>
 constexpr typename BasicStringView<_CharType, _StringTraitsType>::ConstReverseIteratorType BasicStringView<_CharType, _StringTraitsType>::crend() const noexcept
 {
     return ReverseIteratorType(this->cbegin());
+}
+    
+template <typename _CharType, typename _StringTraitsType>
+constexpr const _CharType* BasicStringView<_CharType, _StringTraitsType>::CStr() const noexcept
+{
+    return m_str;
 }
 
 template <typename _CharType, typename _StringTraitsType>
