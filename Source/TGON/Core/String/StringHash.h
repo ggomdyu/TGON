@@ -36,18 +36,18 @@ public:
     constexpr BasicStringHash(const ValueType* str, size_t strLen) noexcept;
     
     /**@brief   Initializes with string. */
-    BasicStringHash(const _StringType& str) noexcept;
+    constexpr BasicStringHash(const _StringType& str) noexcept;
     
 /**@section Public method */
 public:
     /**@brief   Gets the character pointer to string. */
-    const ValueType* CStr() const noexcept;
+    constexpr const ValueType* CStr() const noexcept;
     
     /**@brief   Gets the length of string. */
-    const size_t Length() const noexcept;
+    constexpr const size_t Length() const noexcept;
     
     /**@brief   Gets the hash code of the string. */
-    const size_t GetHashCode() const noexcept;
+    constexpr const size_t GetHashCode() const noexcept;
     
 /**@section Private variable */
 public:
@@ -76,26 +76,26 @@ constexpr BasicStringHash<_StringType, _EnableType>::BasicStringHash(const Value
 }
 
 template <typename _StringType, typename _EnableType>
-inline BasicStringHash<_StringType, _EnableType>::BasicStringHash(const _StringType& str) noexcept :
+constexpr BasicStringHash<_StringType, _EnableType>::BasicStringHash(const _StringType& str) noexcept :
     m_str(str),
     m_hashCode(X65599Hash(str.c_str()))
 {
 }
 
 template <typename _StringType, typename _EnableType>
-inline const typename _StringType::ValueType* BasicStringHash<_StringType, _EnableType>::CStr() const noexcept
+constexpr const typename _StringType::ValueType* BasicStringHash<_StringType, _EnableType>::CStr() const noexcept
 {
     return m_str.CStr();
 }
 
 template <typename _StringType, typename _EnableType>
-inline const size_t BasicStringHash<_StringType, _EnableType>::Length() const noexcept
+constexpr const size_t BasicStringHash<_StringType, _EnableType>::Length() const noexcept
 {
     return m_str.Length();
 }
 
 template <typename _StringType, typename _EnableType>
-inline const size_t BasicStringHash<_StringType, _EnableType>::GetHashCode() const noexcept
+constexpr const size_t BasicStringHash<_StringType, _EnableType>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }
@@ -123,13 +123,13 @@ public:
 /**@section Public method */
 public:
     /**@brief   Gets the character pointer to string. */
-    const _StringType& CStr() const noexcept;
+    constexpr const _StringType& CStr() const noexcept;
     
     /**@brief   Gets the length of string. */
-    const size_t Length() const noexcept;
+    constexpr const size_t Length() const noexcept;
     
     /**@brief   Gets the hash code of the string. */
-    const size_t GetHashCode() const noexcept;
+    constexpr const size_t GetHashCode() const noexcept;
     
 /**@section Private variable */
 public:
@@ -160,19 +160,19 @@ constexpr BasicStringHash<_StringType, typename std::enable_if<IsCharPointerType
 }
 
 template <typename _StringType>
-inline const _StringType& BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::CStr() const noexcept
+constexpr const _StringType& BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::CStr() const noexcept
 {
     return m_str;
 }
 
 template <typename _StringType>
-inline const size_t BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::Length() const noexcept
+constexpr const size_t BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::Length() const noexcept
 {
     return m_strLen;
 }
 
 template <typename _StringType>
-inline const size_t BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::GetHashCode() const noexcept
+constexpr const size_t BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>::GetHashCode() const noexcept
 {
     return m_hashCode;
 }
@@ -188,7 +188,7 @@ public:
 /**@section Public constructor */
 public:
     /**@brief   Initializes with null character pointer. */
-    constexpr BasicStringHash() noexcept;
+    BasicStringHash() noexcept;
     
     /**@brief   Initializes with character pointer. */
     template <std::size_t _CharArraySize>
@@ -218,7 +218,7 @@ public:
 };
 
 template <typename _StringType>
-constexpr BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>::BasicStringHash() noexcept :
+inline BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>::BasicStringHash() noexcept :
     BasicStringHash(nullptr, 0)
 {
 }
@@ -264,9 +264,9 @@ inline const size_t BasicStringHash<_StringType, typename std::enable_if<IsBasic
 
 using StringHash = BasicStringHash<std::string>;
 using WStringHash = BasicStringHash<std::wstring>;
-
-using CharStringHash = BasicStringHash<const char*>;
-using WCharStringHash = BasicStringHash<const wchar_t*>;
+    
+using StringViewHash = BasicStringHash<StringView>;
+using WStringViewHash = BasicStringHash<WStringView>;
 
 using FixedString8Hash = BasicStringHash<FixedString8>;
 using FixedString16Hash = BasicStringHash<FixedString16>;
@@ -285,8 +285,5 @@ using FixedWString128Hash = BasicStringHash<FixedWString128>;
 using FixedWString256Hash = BasicStringHash<FixedWString256>;
 using FixedWString512Hash = BasicStringHash<FixedWString512>;
 using FixedWString1024Hash = BasicStringHash<FixedWString1024>;
-
-using StringViewHash = BasicStringHash<StringView>;
-using WStringViewHash = BasicStringHash<WStringView>;
 
 } /* namespace tgon */
