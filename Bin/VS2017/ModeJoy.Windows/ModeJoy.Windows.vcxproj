@@ -147,12 +147,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp" />
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.cpp" />
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.cpp" />
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\ThousandParty.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TGON.Windows\TGON.Windows.vcxproj">
       <Project>{13d1e164-c18a-4767-b01f-3e4350922ea9}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.h" />
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

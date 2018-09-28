@@ -7,8 +7,8 @@
 #pragma once
 #include "Core/Object/CoreObject.h"
 
-#include "TimeModule.h"
-#include "InputModule.h"
+#include "Module/TimeModule.h"
+#include "Module/InputModule.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\

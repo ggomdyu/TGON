@@ -243,36 +243,36 @@ public:
             this->AddObject(cameraObject);
         }
 
-        // Intro에 사용할 Sprite 생성
-        {
-            auto introObject1 = std::make_shared<GameObject>("introSprite1");
-            introObject1->SetScale({8.38f, 4.42f, 1.0f});
-            m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f});
-            m_introSpriteComponent1->SetOpacity(0.0f);
-            this->AddObject(introObject1);
-        }
+        //// Intro에 사용할 Sprite 생성
+        //{
+        //    auto introObject1 = std::make_shared<GameObject>("introSprite1");
+        //    introObject1->SetScale({8.38f, 4.42f, 1.0f});
+        //    m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+        //    m_introSpriteComponent1->SetBlendColor({1.0f, 1.0f, 1.0f});
+        //    m_introSpriteComponent1->SetOpacity(0.0f);
+        //    this->AddObject(introObject1);
+        //}
 
-        // Intro에 사용할 Sprite 생성
-        {
-            auto introObject2 = std::make_shared<GameObject>("introSprite2");
-            introObject2->SetScale({8.38f, 4.42f, 1.0f});
-            m_introSpriteComponent2 = introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-            m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f});
-            m_introSpriteComponent2->SetOpacity(0.0f);
-            this->AddObject(introObject2);
-        }
-        
-        // Intro에 사용할 Sprite 생성
-        {
-            auto fadeOutObject = std::make_shared<GameObject>("fadeOut");
-            fadeOutObject->SetScale({8.38f, 4.42f, 1.0f});
-            m_fadeOutSpriteComponent = fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-            m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
-            m_fadeOutSpriteComponent->SetOpacity(0.0f);
-            this->AddObject(fadeOutObject);
-        }
-        
+        //// Intro에 사용할 Sprite 생성
+        //{
+        //    auto introObject2 = std::make_shared<GameObject>("introSprite2");
+        //    introObject2->SetScale({8.38f, 4.42f, 1.0f});
+        //    m_introSpriteComponent2 = introObject2->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+        //    m_introSpriteComponent2->SetBlendColor({1.0f, 1.0f, 1.0f});
+        //    m_introSpriteComponent2->SetOpacity(0.0f);
+        //    this->AddObject(introObject2);
+        //}
+        //
+        //// Intro에 사용할 Sprite 생성
+        //{
+        //    auto fadeOutObject = std::make_shared<GameObject>("fadeOut");
+        //    fadeOutObject->SetScale({8.38f, 4.42f, 1.0f});
+        //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+        //    m_fadeOutSpriteComponent->SetBlendColor({0.0f, 0.0f, 0.0f});
+        //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
+        //    this->AddObject(fadeOutObject);
+        //}
+        //
         m_beginTime = tgon::GetTickCount();
      
         SuperType::Update();
@@ -284,7 +284,7 @@ public:
 
         this->OnHandleInput();
 
-        auto elapsedTime = tgon::GetTickCount() - m_beginTime;
+      /*  auto elapsedTime = tgon::GetTickCount() - m_beginTime;
         if (elapsedTime >= 8500)
         {
             auto gameSceneModule = Application::GetInstance()->GetEngine()->FindModule<GameSceneModule>();
@@ -319,7 +319,7 @@ public:
             {
                 m_introSpriteComponent1->GetOpacity() += 2.0f * m_timeModule->GetTickTime();
             }
-        }
+        }*/
     }
     
     void OnHandleInput()
@@ -398,26 +398,6 @@ public:
         this->RegisterModule<TimeModule>();
         this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
         
-        
-        constexpr CharStringHash sh("a");
-        Log(LogLevel::Debug, "Str: %s\n", sh.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh.GetHashCode());
-        
-        StringHash sh2("b");
-        Log(LogLevel::Debug, "Str: %s\n", sh2.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh2.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh2.GetHashCode());
-        
-        FixedString256Hash sh3("ab");
-        Log(LogLevel::Debug, "Str: %s\n", sh3.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh3.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh3.GetHashCode());
-        
-        constexpr StringViewHash sh4("abc");
-        Log(LogLevel::Debug, "Str: %s\n", sh4.CStr());
-        Log(LogLevel::Debug, "Length: %d\n", sh4.Length());
-        Log(LogLevel::Debug, "HashCode: %d\n\n", sh4.GetHashCode());
     }
 
 /**@section Public method */

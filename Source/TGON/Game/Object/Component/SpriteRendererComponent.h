@@ -11,7 +11,7 @@
 #include "Graphics/Render/Sprite.h"
 #include "Graphics/Engine/GraphicsModule.h"
 
-#include "../Object/GameObject.h"
+#include "../GameObject.h"
 
 #include "Component.h"
 

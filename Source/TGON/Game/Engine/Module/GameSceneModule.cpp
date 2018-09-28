@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
-#include "GameScene.h"
+#include "Game/Scene/GameScene.h"
+
 #include "GameSceneModule.h"
 
 namespace tgon

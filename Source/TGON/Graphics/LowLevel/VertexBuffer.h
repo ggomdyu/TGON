@@ -18,34 +18,23 @@ namespace tgon
 {
 
 class TGON_API VertexBuffer final :
-    private boost::noncopyable
+    private PlatformVertexBuffer
 {
 /**@section Public constructor */
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
 
-    VertexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+    using PlatformVertexBuffer::PlatformVertexBuffer;
 
-    VertexBuffer(VertexBuffer&& rhs);
-    
 /**@section Public method */
 public:
-    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
-    
-    std::size_t GetDataBytes() const noexcept;
-    
-    void Use();
-    
-    void Unuse();
-    
-    bool IsValid() const noexcept;
-    
-    bool IsDynamicUsage() const noexcept;
-
-/**@section Private variable */
-public:
-    VertexBufferImpl m_vertexBufferImpl;
+    using PlatformVertexBuffer::SetData;
+    using PlatformVertexBuffer::GetDataBytes;
+    using PlatformVertexBuffer::Use;
+    using PlatformVertexBuffer::Unuse;
+    using PlatformVertexBuffer::IsValid;
+    using PlatformVertexBuffer::IsDynamicUsage;
 };
 
 template <typename _DataArrayType, std::size_t _DataArraySize>

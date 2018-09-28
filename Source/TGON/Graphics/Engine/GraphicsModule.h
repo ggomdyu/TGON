@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/Engine/IModule.h"
+#include "Core/Engine/Module/IModule.h"
 
 #include "../LowLevel/Graphics.h"
 #include "../Render/RenderStage.h"

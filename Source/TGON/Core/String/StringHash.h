@@ -7,10 +7,11 @@
 #pragma once
 #include <string>
 
+#include "Core/Object/TypeTraits.h"
 #include "Core/Hash/Hash.h"
 
-#include "StringView.h"
 #include "FixedString.h"
+#include "StringView.h"
 
 namespace tgon
 {
@@ -219,7 +220,7 @@ public:
 
 template <typename _StringType>
 inline BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>::BasicStringHash() noexcept :
-    BasicStringHash(nullptr, 0)
+    m_hashCode(0)
 {
 }
 

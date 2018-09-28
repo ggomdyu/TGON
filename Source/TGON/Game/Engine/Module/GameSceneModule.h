@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Core/Engine/IModule.h"
+#include "Core/Engine/Module/IModule.h"
 
 namespace tgon
 {

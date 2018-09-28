@@ -32,17 +32,11 @@ enum class VertexAttributeIndex
 
 struct VertexBufferLayoutDescriptor
 {
+/**section  Public constructor */
 public:
-    constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
-        attribute(attribute),
-        dimension(dimension),
-        type(type),
-        normalized(normalized),
-        stride(stride),
-        offset(offset)
-    {
-    }
+    constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept;
 
+/**section  Public variable */
 public:
     VertexAttributeIndex attribute;
     int32_t dimension;
@@ -51,5 +45,15 @@ public:
     int32_t stride;
     std::size_t offset;
 };
+
+constexpr VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept :
+    attribute(attribute),
+    dimension(dimension),
+    type(type),
+    normalized(normalized),
+    stride(stride),
+    offset(offset)
+{
+}
 
 } /* namespace tgon */

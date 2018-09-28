@@ -4,7 +4,7 @@
 
 #include "MeshRendererComponent.h"
 
-#include "../Object/GameObject.h"
+#include "../GameObject.h"
 
 namespace tgon
 {

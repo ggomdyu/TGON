@@ -6,8 +6,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\main.cpp">
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\ThousandParty.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

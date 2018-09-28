@@ -7,10 +7,10 @@
 #pragma once
 #include <memory>
 
+#include "Core/Hardware/InputManager.h"
+
 #include "IModule.h"
 #include "InputMode.h"
-
-#include "Core/Hardware/InputManager.h"
 
 namespace tgon
 {

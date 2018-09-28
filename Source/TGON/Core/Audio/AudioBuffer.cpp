@@ -31,12 +31,6 @@ AudioBuffer::AudioBuffer(const std::string& filePath) :
     this->Initialize(filePath);
 }
 
-AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat) :
-    AudioBuffer()
-{
-    this->Initialize(filePath, srcData, srcDataBytes, audioFormat);
-}
-
 AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
     AudioBuffer()
 {

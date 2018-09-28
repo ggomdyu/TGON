@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "Core/Object/CoreObject.h"
-#include "Core/String/HashStringView.h"
+#include "Core/String/StringHash.h"
 
 #include "../Object/GameObject.h"
 
@@ -41,19 +41,19 @@ public:
      * @brief   Find a GameObject with the specified object name.
      * @return  Returns the found object, nullptr otherwise.
      */
-    std::shared_ptr<GameObject> FindObject(const HashStringView& objectName);
+    std::shared_ptr<GameObject> FindObject(const StringViewHash& objectName);
 
     /**
      * @brief   Find a GameObject with the specified object name.
      * @return  Returns the found object, nullptr otherwise.
      */
-    const std::shared_ptr<GameObject> FindObject(const HashStringView& objectName) const;
+    const std::shared_ptr<GameObject> FindObject(const StringViewHash& objectName) const;
     
     /**
      * @brief   Removes a object which has the specified name.
      * @param [in] objectName   The name of object to remove.
      */
-    bool RemoveObject(const HashStringView& objectName);
+    bool RemoveObject(const StringViewHash& objectName);
     
 /**@section Private variable */
 private:
