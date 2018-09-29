@@ -61,17 +61,16 @@ using PlatformApplication = WindowsApplication;
 template <typename _FunctionType>
 inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
 {
-    std::thread t([&]()
-    {
-        onUpdate();
-    });
-
     MSG msg {};
     while (msg.message != WM_QUIT)
     {
         if (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE) == TRUE)
         {
             ::DispatchMessageW(&msg);
+        }
+        else
+        {
+            onUpdate();
         }
     }
 
