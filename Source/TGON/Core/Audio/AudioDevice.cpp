@@ -10,21 +10,55 @@ AudioDevice::AudioDevice() :
 {
     if (m_device == nullptr)
     {
-        return;
+        throw std::runtime_error("Failed to invoke alcOpenDevice.");
     }
 
     m_context = alcCreateContext(m_device, nullptr);
     if (m_context == nullptr)
     {
-        return;
+        throw std::runtime_error("Failed to invoke alcCreateContext.");
     }
+}
+
+AudioDevice::AudioDevice(AudioDevice&& rhs) :
+    m_context(rhs.m_context),
+    m_device(rhs.m_device)
+{
+    rhs.m_context = nullptr;
+    rhs.m_device = nullptr;
 }
 
 AudioDevice::~AudioDevice()
 {
-    alcMakeContextCurrent(nullptr);
-    alcDestroyContext(m_context);
-    alcCloseDevice(m_device);
+    if (m_context != nullptr)
+    {
+        // If the main context indicates m_context, then set it to nullptr.
+        if (alcGetCurrentContext() == m_context)
+        {
+            alcMakeContextCurrent(nullptr);
+        }
+
+        alcDestroyContext(m_context);
+    }
+
+    if (m_device != nullptr)
+    {
+        alcCloseDevice(m_device);
+    }
+}
+
+AudioDevice& AudioDevice::operator=(AudioDevice&& rhs)
+{
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
+    m_context = rhs.m_context;
+    m_device = rhs.m_device;
+
+    rhs.m_context = nullptr;
+    rhs.m_device = nullptr;
 }
 
 void AudioDevice::MakeCurrent()

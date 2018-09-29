@@ -52,21 +52,6 @@
     <Filter Include="Source\Core\Engine">
       <UniqueIdentifier>{fc1f2e5b-62b0-4a7b-acd5-906c80b1ff3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Graphics">
-      <UniqueIdentifier>{a0259457-c87a-4b30-ad87-bd7956610625}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Graphics\LowLevel">
-      <UniqueIdentifier>{2755c9e0-2f0e-4dd7-9d84-7034419196b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Graphics\LowLevel\OpenGL">
-      <UniqueIdentifier>{b9718d71-be3a-4dda-8011-dd46f3988097}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Graphics\Render">
-      <UniqueIdentifier>{a334a4ac-3fe6-4ded-8cab-3fd1f42152aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Graphics\Engine">
-      <UniqueIdentifier>{17235cae-bad0-4feb-b70e-0c3f14cde28c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Game">
       <UniqueIdentifier>{8a314e8f-8160-431d-be10-828dd9f6625c}</UniqueIdentifier>
     </Filter>
@@ -102,6 +87,21 @@
     </Filter>
     <Filter Include="Source\Game\Engine\Module">
       <UniqueIdentifier>{1c6fa3e9-7593-4cd8-aaff-539cdcaf765d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{a0259457-c87a-4b30-ad87-bd7956610625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\LowLevel">
+      <UniqueIdentifier>{2755c9e0-2f0e-4dd7-9d84-7034419196b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\LowLevel\OpenGL">
+      <UniqueIdentifier>{b9718d71-be3a-4dda-8011-dd46f3988097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Render">
+      <UniqueIdentifier>{a334a4ac-3fe6-4ded-8cab-3fd1f42152aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Engine">
+      <UniqueIdentifier>{17235cae-bad0-4feb-b70e-0c3f14cde28c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.h" />
     <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.h" />
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\ThousandParty.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

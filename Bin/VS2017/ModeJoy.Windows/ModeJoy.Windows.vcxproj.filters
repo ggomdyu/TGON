@@ -23,5 +23,8 @@
     <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Xcode\ThousandParty\ThousandParty\ThousandParty.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

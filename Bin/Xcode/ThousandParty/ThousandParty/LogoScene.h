@@ -1,36 +1,49 @@
 /**
- * @file    GameObject.h
+ * @file    LogoScene.h
  * @author  ggomdyu
- * @since   03/22/2016
+ * @since   09/29/2018
  */
 
 #pragma once
-//#include "Graphics/Object/Scene.h"
-//
+#include <memory>
+
+#include "Game/Scene/GameScene.h"
+
 namespace tgon
 {
-//
-//class TGON_API TestScene final :
-//    public Scene
-//{
-///* @section Public constructor */
-//public:
-//    TestScene()
-//    {
-//    }
-//
-///* @section Public destructor */
-//public:
-//    virtual ~TestScene() override
-//    {
-//    }
-//
-///* @section Public method */
-//public:
-//    virtual void Update(float) override
-//    {
-//
-//    }
-//};
+
+class CameraComponent;
+class SpriteRendererComponent;
+class GraphicsModule;
+class InputModule;
+class TimeModule;
 
 } /* namespace tgon */
+
+class TGON_API LogoScene :
+    public tgon::GameScene
+{
+public:
+    TGON_DECLARE_RTTI(LogoScene);
+
+/**@section Public constructor */
+public:
+    LogoScene();
+    
+/**@section Public method */
+public:
+    virtual void Update() override;
+    
+    void OnHandleInput();
+
+/**@section Private variable */
+private:
+    int64_t m_beginTime;
+    std::shared_ptr<tgon::CameraComponent> m_cameraComponent;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent1;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent2;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_fadeOutSpriteComponent;
+    std::shared_ptr<tgon::GraphicsModule> m_graphicsModule;
+    std::shared_ptr<tgon::InputModule> m_inputModule;
+    std::shared_ptr<tgon::TimeModule> m_timeModule;
+};

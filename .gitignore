@@ -16,8 +16,7 @@
 [Bb]uild/
 [Ll]ib/
 [Oo]bj/
-[Tt]hirdparty/
-[Rr]esource/
+[Tt]emporary/
 .vs/
 .workspace/
 
@@ -167,4 +166,3 @@ $RECYCLE.BIN/
 *.db
 *.opendb
 *.exp
-/Source/ThirdParty

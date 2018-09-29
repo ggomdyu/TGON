@@ -44,9 +44,10 @@ public:
 
 /**@section Public method */
 public:
+    /**@brief   Makes this context to main. */
     void MakeCurrent();
     
-    /**@brief   Displays the rendered image to the screen. */
+    /**@brief   Displays a back buffer image to screen. */
     void SwapBuffer();
 
 /**@section Public variable */

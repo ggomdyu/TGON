@@ -49,24 +49,24 @@ public:
     /**
      * @brief   Invokes all delegates stored in list.
      * @param [in] args     The parameters of delegate to invoke.
-     * @return  Returns the finally invoked delegate's return value.
+     * @return  Returns a finally invoked delegate's return value.
      */
     template <typename... _ArgTypes2>
     _ReturnType Invoke(_ArgTypes2&&... args);
 
     /**
      * @brief   Inserts a delegate into the list.
-     * @param [in] value    The delegate to insert.
+     * @param [in] delegate     A delegate to insert.
      */
     template <typename _DelegateType>
-    void Append(_DelegateType&& value);
+    void Append(_DelegateType&& delegate);
 
     /**
      * @brief   Erases the delegate stored into the list.
-     * @param [in] value    The delegate to erase.
+     * @param [in] delegate     The delegate to erase.
      * @details The specified delegate's stub pointer must be matched with stored delegate in list.
      */
-    bool Erase(const DelegateType& value);
+    bool Erase(const DelegateType& delegate);
 
     /**@brief   Erases all delegates stored in list. */
     void Clear() noexcept;
@@ -153,17 +153,17 @@ inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes2&&
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _DelegateType>
-inline void DelegateChain<_ReturnType(_ArgTypes...)>::Append(_DelegateType&& value)
+inline void DelegateChain<_ReturnType(_ArgTypes...)>::Append(_DelegateType&& delegate)
 {
-    m_invocationList.push_back(std::forward<_DelegateType>(value));
+    m_invocationList.push_back(std::forward<_DelegateType>(delegate));
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline bool DelegateChain<_ReturnType(_ArgTypes...)>::Erase(const DelegateType& value)
+inline bool DelegateChain<_ReturnType(_ArgTypes...)>::Erase(const DelegateType& delegate)
 {
     auto iter = std::find_if(m_invocationList.begin(), m_invocationList.end(), [&](const DelegateType& rhs)
     {
-        return value == rhs;
+        return delegate == rhs;
     });
 
     if (iter != m_invocationList.end())

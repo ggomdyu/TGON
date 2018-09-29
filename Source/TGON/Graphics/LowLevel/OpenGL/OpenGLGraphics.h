@@ -23,7 +23,7 @@ public:
 
 /**@section Public constructor */
 public:
-    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode);
+    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) noexcept(false);
     
 /**@section Public destructor */
 public:

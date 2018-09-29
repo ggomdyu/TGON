@@ -23,11 +23,17 @@ class TGON_API AudioDevice final :
 {
 /**@section Public constructor */
 public:
-    AudioDevice();
+    AudioDevice() noexcept(false);
+
+    AudioDevice(AudioDevice&& rhs);
 
 /**@section Public destructor */
 public:
     ~AudioDevice();
+
+/**@section Public operator */
+public:
+    AudioDevice& operator=(AudioDevice&& rhs);
 
 public:
     /**@brief   Makes this device's context the current context. */
