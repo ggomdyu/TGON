@@ -301,5 +301,5 @@ void ThousandParty::InitializeModule()
     };
     this->RegisterModule<tgon::GraphicsModule>(rootWindow, videoMode);
     this->RegisterModule<tgon::TimeModule>();
-    //this->RegisterModule<tgon::GameSceneModule>()->ChangeScene<LogoScene>();
+    this->RegisterModule<tgon::GameSceneModule>()->ChangeScene<LogoScene>();
 }

@@ -73,8 +73,6 @@ inline void WindowsApplication::MessageLoop(const _FunctionType& onUpdate)
             onUpdate();
         }
     }
-
-    t.join();
 }
 
 } /* namespace tgon */                               
