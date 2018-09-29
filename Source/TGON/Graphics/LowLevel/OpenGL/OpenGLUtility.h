@@ -8,11 +8,15 @@
 #include <cassert>
 #include <GL/glew.h>
 
+#include "Core/Debug/Log.h"
+
 #if _DEBUG
 #   define TGON_GL_ERROR_CHECK(expression)\
     {\
         expression;\
-        assert(glGetError() == GL_NO_ERROR && "Failed to invoke GL Function.");\
+        \
+        auto glErrorCode = glGetError();\
+        tgon::Assert(glErrorCode == GL_NO_ERROR, "Failed to invoke GL Function. (Code: %d)", glErrorCode);\
     }
 #else
 #   define TGON_GL_ERROR_CHECK(expression) expression
