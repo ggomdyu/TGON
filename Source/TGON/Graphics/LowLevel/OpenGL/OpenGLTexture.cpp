@@ -23,6 +23,7 @@ OpenGLTexture::OpenGLTexture(const std::string& filePath, const TextureProperty&
 OpenGLTexture::~OpenGLTexture()
 {
     TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
+    m_textureHandle = 0;
 }
 
 void OpenGLTexture::Use()

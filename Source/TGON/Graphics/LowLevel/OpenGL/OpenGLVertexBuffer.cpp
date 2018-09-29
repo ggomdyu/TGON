@@ -55,11 +55,11 @@ void OpenGLVertexBuffer::Use()
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));
 
-    for (GLint i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
+    for (size_t i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
     {
         const auto& vertexBufferDesc = m_vertexBufferLayoutDescs[i];
 
-        TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(i));
+        TGON_GL_ERROR_CHECK(glEnableVertexAttribArray(GLuint(i)));
         TGON_GL_ERROR_CHECK(glVertexAttribPointer(
             static_cast<GLuint>(vertexBufferDesc.attribute),
             vertexBufferDesc.dimension,
@@ -73,9 +73,9 @@ void OpenGLVertexBuffer::Use()
 
 void OpenGLVertexBuffer::Unuse()
 {
-    for (GLint i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
+    for (size_t i = 0; i < m_vertexBufferLayoutDescs.size(); ++i)
     {
-        TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(i));
+        TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(GLuint(i)));
     }
 }
 

@@ -14,26 +14,26 @@
 
 LogoScene::LogoScene()
 {
-    decltype(auto) application = tgon::Application::GetInstance();
-    decltype(auto) engine = application->GetEngine();
+    //decltype(auto) application = tgon::Application::GetInstance();
+    //decltype(auto) engine = application->GetEngine();
 
-    m_graphicsModule = engine->FindModule<tgon::GraphicsModule>();
-    m_inputModule = engine->FindModule<tgon::InputModule>();
-    m_timeModule = engine->FindModule<tgon::TimeModule>();
+    //m_graphicsModule = engine->FindModule<tgon::GraphicsModule>();
+    //m_inputModule = engine->FindModule<tgon::InputModule>();
+    //m_timeModule = engine->FindModule<tgon::TimeModule>();
 
-    m_graphicsModule->GetGraphics().DisableDepthTest();
-    m_graphicsModule->GetGraphics().SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+    //m_graphicsModule->GetGraphics().DisableDepthTest();
+    //m_graphicsModule->GetGraphics().SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 
-    // 카메라 생성
-    {
-        auto cameraObject = std::make_shared<tgon::GameObject>("camera1");
-        const tgon::I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
-        const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
-        const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-        m_cameraComponent = cameraObject->AddComponent<tgon::CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
-        //m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
-        this->AddObject(cameraObject);
-    }
+    //// 카메라 생성
+    //{
+    //    auto cameraObject = std::make_shared<tgon::GameObject>("camera1");
+    //    const tgon::I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
+    //    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+    //    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+    //    m_cameraComponent = cameraObject->AddComponent<tgon::CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
+    //    //m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
+    //    this->AddObject(cameraObject);
+    //}
 
     //// Intro에 사용할 Sprite 생성
     //{
@@ -116,7 +116,7 @@ void LogoScene::Update()
 
 void LogoScene::OnHandleInput()
 {
-    decltype(auto) keyboard = m_inputModule->GetKeyboard();
+   /* decltype(auto) keyboard = m_inputModule->GetKeyboard();
     if (keyboard->IsKeyDown(tgon::KeyCode::Space) || keyboard->IsKeyDown(tgon::KeyCode::Return))
     {
         auto currTime = tgon::GetTickCount();
@@ -137,5 +137,5 @@ void LogoScene::OnHandleInput()
         {
             m_beginTime = currTime - 7500.0f;
         }
-    }
+    }*/
 }

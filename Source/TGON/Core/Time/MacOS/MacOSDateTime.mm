@@ -37,7 +37,7 @@ void DateTime::AddDays(float days)
         tempRawTime.tm_mon = m_month - 1;
         tempRawTime.tm_hour = m_hour;
         tempRawTime.tm_min = m_minute;
-        tempRawTime.tm_sec = m_second + (86400.0f * (days - (int)days));
+        tempRawTime.tm_sec = m_second + (86400.0f * (days - std::floor(days)));
     }
     
     std::time_t unixTimestamp = mktime(&tempRawTime);

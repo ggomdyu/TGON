@@ -49,7 +49,7 @@ void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
 bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
-    if (currGamepadState.mButtons.size() <= buttonNumber)
+    if (currGamepadState.mButtons.size() <= size_t(buttonNumber))
     {
         return false;
     }
@@ -87,7 +87,7 @@ bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
 bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
 {
     decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
-    if (currGamepadState.mButtons.size() <= buttonNumber)
+    if (currGamepadState.mButtons.size() <= size_t(buttonNumber))
     {
         return false;
     }
