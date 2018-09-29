@@ -121,7 +121,7 @@ void OpenGLGraphics::ClearColorBuffer()
 
 void OpenGLGraphics::ClearColorDepthBuffer()
 {
-    TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+    TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 void OpenGLGraphics::SwapBuffer()

@@ -66,12 +66,12 @@ HWND WindowsWindowUtility::CreateNativeWindow(const WindowStyle& windowStyle, HI
         return nullptr;
     }
 
-    I32Point windowPos {windowStyle.x, windowStyle.y};
+    IPoint windowPos {static_cast<int>(windowStyle.x), static_cast<int>(windowStyle.y)};
     if (windowStyle.showMiddle)
     {
         // Set the window position to middle of the screen.
-        windowPos.x = (GetSystemMetrics(SM_CXSCREEN) * 0.5f) - (windowStyle.width * 0.5f);
-        windowPos.y = (GetSystemMetrics(SM_CYSCREEN) * 0.5f) - (windowStyle.height * 0.5f);
+        windowPos.x = static_cast<IPoint::ValueType>((static_cast<float>(GetSystemMetrics(SM_CXSCREEN)) * 0.5f) - (static_cast<float>(windowStyle.width) * 0.5f));
+        windowPos.y = static_cast<IPoint::ValueType>((static_cast<float>(GetSystemMetrics(SM_CYSCREEN)) * 0.5f) - (static_cast<float>(windowStyle.height) * 0.5f));
     }
 
     // Convert the client size to window size.

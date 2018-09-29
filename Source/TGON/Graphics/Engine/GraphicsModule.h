@@ -33,9 +33,11 @@ public:
     virtual void Update() override;
 
     Graphics& GetGraphics() noexcept;
+
     const Graphics& GetGraphics() const noexcept;
 
     RenderStage& GetRenderStage() noexcept;
+
     const RenderStage& GetRenderStage() const noexcept;
     
 /**@section Private method */

@@ -206,7 +206,7 @@ void WindowsWindow::SetTopMost(bool setTopMost)
 void WindowsWindow::SetTransparency(float transparency)
 {
     DWORD rawExtendedWindowStyle = this->GetRawWindowStyleEx();
-    if (rawExtendedWindowStyle & WS_EX_LAYERED == false)
+    if ((rawExtendedWindowStyle & WS_EX_LAYERED) == false)
     {
         this->SetRawWindowStyleEx(rawExtendedWindowStyle | WS_EX_LAYERED);
     }
