@@ -12,7 +12,7 @@ namespace tgon
 MeshRendererComponent::MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material) :
     m_mesh(mesh),
     m_material(material),
-    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
 {
 }
 

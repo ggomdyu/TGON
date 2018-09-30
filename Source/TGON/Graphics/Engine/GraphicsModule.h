@@ -25,7 +25,10 @@ public:
 
 /**@section Public destructor */
 public:
-    virtual ~GraphicsModule() override = default;
+    virtual ~GraphicsModule() override
+    {
+        int n = 3;
+    }
     
 /**@section Public method */
 public:

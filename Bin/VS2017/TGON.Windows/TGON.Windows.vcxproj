@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h" />
     <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
       <FileType>Document</FileType>
     </ClCompile>

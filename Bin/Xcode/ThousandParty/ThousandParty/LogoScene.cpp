@@ -34,40 +34,40 @@ LogoScene::LogoScene()
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
         m_cameraComponent = cameraObject->AddComponent<tgon::CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
         //m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
-        this->AddObject(cameraObject);
+        //this->AddObject(cameraObject);
     }
 
-    // Intro에 사용할 Sprite 생성
-    {
-        auto introObject1 = std::make_shared<tgon::GameObject>("introSprite1");
-        introObject1->SetScale({ 8.38f, 4.42f, 1.0f });
-        m_introSpriteComponent1 = introObject1->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-        m_introSpriteComponent1->SetOpacity(0.0f);
-        this->AddObject(introObject1);
-    }
+    //// Intro에 사용할 Sprite 생성
+    //{
+    //    auto introObject1 = std::make_shared<tgon::GameObject>("introSprite1");
+    //    introObject1->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_introSpriteComponent1 = introObject1->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+    //    m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
+    //    m_introSpriteComponent1->SetOpacity(0.0f);
+    //    this->AddObject(introObject1);
+    //}
 
-    // Intro에 사용할 Sprite 생성
-    {
-        auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
-        introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
-        m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-        m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-        m_introSpriteComponent2->SetOpacity(0.0f);
-        this->AddObject(introObject2);
-    }
+    //// Intro에 사용할 Sprite 생성
+    //{
+    //    auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
+    //    introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+    //    m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
+    //    m_introSpriteComponent2->SetOpacity(0.0f);
+    //    this->AddObject(introObject2);
+    //}
 
-    // Intro에 사용할 Sprite 생성
-    {
-        auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
-        fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
-        m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-        m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
-        m_fadeOutSpriteComponent->SetOpacity(0.0f);
-        this->AddObject(fadeOutObject);
-    }
+    //// Intro에 사용할 Sprite 생성
+    //{
+    //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
+    //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+    //    m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
+    //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
+    //    this->AddObject(fadeOutObject);
+    //}
 
-    m_beginTime = tgon::GetTickCount();
+    //m_beginTime = tgon::GetTickCount();
 
     SuperType::Update();
 }
@@ -76,7 +76,7 @@ void LogoScene::Update()
 {
     SuperType::Update();
 
-    this->OnHandleInput();
+    /*this->OnHandleInput();
 
     auto elapsedTime = tgon::GetTickCount() - m_beginTime;
     if (elapsedTime >= 8500)
@@ -113,7 +113,7 @@ void LogoScene::Update()
         {
             m_introSpriteComponent1->GetOpacity() += 2.0f * m_timeModule->GetTickTime();
         }
-    }
+    }*/
 }
 
 void LogoScene::OnHandleInput()

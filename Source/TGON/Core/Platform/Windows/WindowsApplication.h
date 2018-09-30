@@ -46,6 +46,12 @@ public:
      */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
 
+    /**@brief   Enables a crash handler which handled when the crash ocurred. 
+     * @warn    You can not disable this function after invoked this.
+     * @todo    I think it should be moved to Debug.h
+     */
+    void EnableCrashHandler();
+
 /**@section Private event handler */
 private:
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
@@ -54,6 +60,10 @@ private:
 private:
     /**@brief   Register default WNDCLASS to window class table. */
     bool RegisterWindowClass();
+
+/**@section Private variable */
+private:
+    bool m_doCrashReport;
 };
 
 using PlatformApplication = WindowsApplication;

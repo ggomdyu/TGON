@@ -5,14 +5,13 @@
  */
 
 #pragma once
-#include "Graphics/Render/Material.h"
-#include "Graphics/Render/Mesh.h"
-#include "Graphics/Engine/GraphicsModule.h"
-
 #include "Component.h"
 
 namespace tgon
 {
+
+class Camera;
+class GraphicsModule;
 
 class TGON_API CameraComponent :
 	public Component
@@ -22,51 +21,32 @@ public:
 
 /**@section Public constructor */
 public:
-    CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
-        CameraComponent(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
-    {
-    }
+    CameraComponent();
 
-    CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) :
-        CameraComponent(std::make_shared<Camera>(eyePt, lookAt, fov, nearZ, farZ))
-    {
-    }
+    CameraComponent(const Rect& orthoPlane, float nearZ, float farZ);
+
+    CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ);
 
 /**@section Private constructor */
 public:
-    CameraComponent(const std::shared_ptr<Camera>& camera) :
-        m_camera(camera)
-    {
-        Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().AddCamera(camera);
-    }
+    CameraComponent(const std::shared_ptr<Camera>& camera);
 
 /**@section Public destructor */
 public:
-    virtual ~CameraComponent() override
-    {
-        Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()->GetRenderStage().RemoveCamera(m_camera);
-    }
+    virtual ~CameraComponent() override;
 
 /**@section Public method */
 public:
-	virtual void Update() override
-    {
-        m_camera->Update();
-    }
+	virtual void Update() override;
 
-    std::shared_ptr<Camera>& GetCamera() noexcept
-    {
-        return m_camera;
-    }
+    std::shared_ptr<Camera>& GetCamera() noexcept;
 
-    const std::shared_ptr<const Camera> GetCamera() const noexcept
-    {
-        return m_camera;
-    }
+    std::shared_ptr<const Camera> GetCamera() const noexcept;
 
 /**@section Private variable */
 private:
     std::shared_ptr<Camera> m_camera;
+    std::weak_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

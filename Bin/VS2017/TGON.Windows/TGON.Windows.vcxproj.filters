@@ -139,6 +139,9 @@
     <ClInclude Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\Windows\WindowsOpenGLContextUtility.h">
       <Filter>Sources\Graphics\LowLevel\OpenGL\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.h">
+      <Filter>Sources\Core\Debug\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp">
@@ -227,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\Windows\WindowsOpenGLContextUtility.cpp">
       <Filter>Sources\Graphics\LowLevel\OpenGL\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.cpp">
+      <Filter>Sources\Core\Debug\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
