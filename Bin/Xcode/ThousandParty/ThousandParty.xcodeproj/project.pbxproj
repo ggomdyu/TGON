@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		FD515BDE20B46FAD0002F5C3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD06734B20B42CAA00BEA737 /* OpenAL.framework */; };
-		FD7EA6E720B09D2800A76C69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA6E620B09D2700A76C69 /* main.cpp */; };
 		FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */; };
 		FDBF76B120C1A40400A9207F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDBF76B020C1A40300A9207F /* IOKit.framework */; };
+		FDD56D63216086EE00C01939 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D5D216086EE00C01939 /* LogoScene.cpp */; };
+		FDD56D64216086EE00C01939 /* IntroScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D5F216086EE00C01939 /* IntroScene.cpp */; };
+		FDD56D65216086EE00C01939 /* ThousandParty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D61216086EE00C01939 /* ThousandParty.cpp */; };
 		FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9171F68458C000EB7C8 /* Cocoa.framework */; };
 		FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB801F757DDE007AC1AB /* OpenGL.framework */; };
 		FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */; };
@@ -37,10 +39,14 @@
 		FD06734B20B42CAA00BEA737 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		FD515BE020B470C00002F5C3 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../../ThirdParty/Debug/x86_64/libvorbisenc.a; sourceTree = "<group>"; };
 		FD515BE120B470C00002F5C3 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
-		FD7EA6E620B09D2700A76C69 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
-		FDB75AE920D5F4A500CC36C4 /* TestScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
 		FDBF76B020C1A40300A9207F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		FDD56D5D216086EE00C01939 /* LogoScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = LogoScene.cpp; sourceTree = "<group>"; };
+		FDD56D5E216086EE00C01939 /* IntroScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IntroScene.h; sourceTree = "<group>"; };
+		FDD56D5F216086EE00C01939 /* IntroScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = IntroScene.cpp; sourceTree = "<group>"; };
+		FDD56D60216086EE00C01939 /* LogoScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = LogoScene.h; sourceTree = "<group>"; };
+		FDD56D61216086EE00C01939 /* ThousandParty.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ThousandParty.cpp; sourceTree = "<group>"; };
+		FDD56D62216086EE00C01939 /* ThousandParty.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ThousandParty.h; sourceTree = "<group>"; };
 		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,8 +93,12 @@
 		FDD7C8C91F654342000EB7C8 /* ThousandParty */ = {
 			isa = PBXGroup;
 			children = (
-				FD7EA6E620B09D2700A76C69 /* main.cpp */,
-				FDB75AE920D5F4A500CC36C4 /* TestScene.h */,
+				FDD56D5F216086EE00C01939 /* IntroScene.cpp */,
+				FDD56D5E216086EE00C01939 /* IntroScene.h */,
+				FDD56D5D216086EE00C01939 /* LogoScene.cpp */,
+				FDD56D60216086EE00C01939 /* LogoScene.h */,
+				FDD56D61216086EE00C01939 /* ThousandParty.cpp */,
+				FDD56D62216086EE00C01939 /* ThousandParty.h */,
 				FDD7C8C81F654342000EB7C8 /* Products */,
 			);
 			path = ThousandParty;
@@ -174,7 +184,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD7EA6E720B09D2800A76C69 /* main.cpp in Sources */,
+				FDD56D63216086EE00C01939 /* LogoScene.cpp in Sources */,
+				FDD56D65216086EE00C01939 /* ThousandParty.cpp in Sources */,
+				FDD56D64216086EE00C01939 /* IntroScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

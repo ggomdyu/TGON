@@ -8,6 +8,7 @@
 #include "Core/Random/Random.h"
 #include "Core/Math/Mathematics.h"
 #include "Core/Hardware/Keyboard.h"
+#include "Core/Hardware/KeyboardType.h"
 #include "Graphics/Engine/GraphicsModule.h"
 #include "Game/Object/Component/SpriteRendererComponent.h"
 #include "Game/Object/Component/CameraComponent.h"
@@ -162,14 +163,14 @@ void IntroScene::Update()
     }
         
     decltype(auto) keyboard = m_inputModule->GetKeyboard();
-    if (keyboard->IsKeyHold(KeyCode::W))
+    if (keyboard->IsKeyHold(tgon::KeyCode::W))
     {
         camZ -= 0.05f;
             
         auto& camera = m_cameraComponent->GetCamera();
         camera->SetEyePt({0.0f, 0.0f, camZ});
     }
-    if (keyboard->IsKeyHold(KeyCode::S))
+    if (keyboard->IsKeyHold(tgon::KeyCode::S))
     {
         camZ += 0.05f;
             
@@ -177,11 +178,11 @@ void IntroScene::Update()
         camera->SetEyePt({0.0f, 0.0f, camZ});
     }
         
-    if (keyboard->IsKeyHold(KeyCode::Q))
+    if (keyboard->IsKeyHold(tgon::KeyCode::Q))
     {
         m_fadeInSpriteComponent->GetOwner()->Move({0.0f, 0.0f, -0.05f});
     }
-    if (keyboard->IsKeyHold(KeyCode::A))
+    if (keyboard->IsKeyHold(tgon::KeyCode::A))
     {
         m_fadeInSpriteComponent->GetOwner()->Move({0.0f, 0.0f, 0.05f});
     }
