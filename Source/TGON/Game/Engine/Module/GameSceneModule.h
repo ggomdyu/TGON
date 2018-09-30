@@ -22,10 +22,10 @@ public:
 
 /**@section Public destructor */
 public:
-    virtual ~GameSceneModule() final override
+    virtual ~GameSceneModule() override final
     {
         int n = 3;
-    };
+    }
 
 /**@section Public method */
 public:

@@ -189,7 +189,7 @@ void IntroScene::Update()
 
     // Move NightSky
     {
-        auto rootWindowSize = Application::GetInstance()->GetRootWindow().GetSize();
+        auto rootWindowSize = Application::GetRootWindow().GetSize();
         float nightSkyImageWidth = static_cast<float>(m_nightSkySpriteComponent->GetSprite().GetTexture()->GetWidth());
         float nightSkyImageLeftTopX = static_cast<float>(nightSkyImageWidth - rootWindowSize.width) * 0.01f * 0.5f;
         if (m_nightSkyObject->GetPosition().x <= -nightSkyImageLeftTopX)

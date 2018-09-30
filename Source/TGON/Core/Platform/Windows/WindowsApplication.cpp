@@ -1,7 +1,10 @@
 #include "PrecompiledHeader.h"
 
+#include <StackWalker-1.20/Main/StackWalker/StackWalker.h>
+
 #include "Core/Platform/Config.h"
 #include "Core/String/Encoding.h"
+#include "Core/Debug/Windows/WindowsDebugMisc.h"
 
 #include "WindowsApplication.h"
 #include "WindowsWindow.h"
@@ -9,7 +12,8 @@
 namespace tgon
 {
 
-WindowsApplication::WindowsApplication()
+WindowsApplication::WindowsApplication() :
+    m_doCrashReport(false)
 {
     RegisterWindowClass();
 }
@@ -25,12 +29,27 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
     ::MessageBoxW(nullptr, utf16Message, utf16Title, static_cast<UINT>(messageBoxIcon) | MB_OK);
 }
 
+void WindowsApplication::EnableCrashHandler()
+{
+    SetUnhandledExceptionFilter([](EXCEPTION_POINTERS* exceptionPointers) -> LONG
+    {
+        StackWalker stackWalker;
+        stackWalker.ShowCallstack(::GetCurrentThread(), exceptionPointers->ContextRecord, 0, 0);
+
+        MessageBox(nullptr, L"HI", L"HI", MB_OK);
+        
+        return EXCEPTION_CONTINUE_SEARCH;
+    });
+
+    PreventSetUnhandledExceptionFilter();
+}
+
 LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    WindowsWindow* windowImpl = reinterpret_cast<WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
-    if (windowImpl)
+    WindowsWindow* window = reinterpret_cast<WindowsWindow*>(GetWindowLongPtrW(wndHandle, GWLP_USERDATA));
+    if (window)
     {
-        return windowImpl->OnHandleMessage(wndHandle, message, wParam, lParam);
+        return window->OnHandleMessage(wndHandle, message, wParam, lParam);
     }
 
     return DefWindowProc(wndHandle, message, wParam, lParam);

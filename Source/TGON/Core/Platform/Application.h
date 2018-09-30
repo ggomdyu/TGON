@@ -67,18 +67,14 @@ public:
     
     using PlatformApplication::ShowMessageBox;
 
-    /**@brief   Gets the Engine managed by application. */
-    Engine* GetEngine() noexcept;
+    using PlatformApplication::EnableCrashHandler;
 
     /**@brief   Gets the Engine managed by application. */
-    const Engine* GetEngine() const noexcept;
+    static Engine* GetEngine() noexcept;
 
     /**@brief   Gets the root window. */
-    Window& GetRootWindow() noexcept;
+    static Window& GetRootWindow() noexcept;
     
-    /**@brief   Gets the root window. */
-    const Window& GetRootWindow() const noexcept;
-
 /**@section Public event handler */
 public:
     void OnDidLaunch();

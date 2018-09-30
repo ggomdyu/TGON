@@ -44,22 +44,12 @@ void Application::ShowMessageBox(const char* title, const char* message) const
 
 Engine* Application::GetEngine() noexcept
 {
-    return m_engine.get();
-}
-
-const Engine* Application::GetEngine() const noexcept
-{
-    return m_engine.get();
+    return Application::GetInstance()->m_engine.get();
 }
 
 Window& Application::GetRootWindow() noexcept
 {
-    return *m_rootWindow;
-}
-
-const Window& Application::GetRootWindow() const noexcept
-{
-    return *m_rootWindow;
+    return *Application::GetInstance()->m_rootWindow.get();
 }
 
 void Application::OnDidLaunch()
