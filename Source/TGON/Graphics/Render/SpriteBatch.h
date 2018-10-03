@@ -10,14 +10,15 @@
 
 #include "Core/Math/Rect.h"
 
-#include "../LowLevel/Graphics.h"
-
-#include "Material.h"
-#include "Mesh.h"
-#include "Camera.h"
+#include "RectTransform.h"
 
 namespace tgon
 {
+
+class Material;
+class Mesh;
+class Graphics;
+class Camera;
 
 class TGON_API SpriteBatch final
 {
@@ -25,16 +26,17 @@ class TGON_API SpriteBatch final
 public:
     struct DrawPrimitive
     {
-        const Matrix4x4& matWorld;
+        I32Rect scissorRect;
+        const RectTransform& matWorld;
     };
 
 /**@section Public constructor */
 public:
     /**@brief   Initializes the batch with a material. */
-    explicit SpriteBatch(const std::shared_ptr<TextureMaterial>& material);
+    explicit SpriteBatch(const std::shared_ptr<Material>& material);
     
     /**@brief   Initializes the batch with a material and primitives. */
-    explicit SpriteBatch(const std::shared_ptr<TextureMaterial>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
+    explicit SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
 
 /**@section Public method */
 public:
@@ -45,7 +47,7 @@ public:
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
 
     /**@brief   Checks whether the specified material can batched. */
-    bool CanBatch(const std::shared_ptr<TextureMaterial>& material) const;
+    bool CanBatch(const std::shared_ptr<Material>& material) const;
     
     /**@brief   Draws all of the batched primitives. */
     void Draw(Graphics& graphics, const Camera& camera);
@@ -57,7 +59,7 @@ public:
 
 /**@section Private variable */
 private:
-    std::shared_ptr<TextureMaterial> m_material;
+    std::shared_ptr<Material> m_material;
     
     std::vector<DrawPrimitive> m_drawPrimitives;
 };
@@ -71,7 +73,7 @@ public:
 /**@section Public method */
 public:
     /**@brief   Adds a mesh into the batch list. */
-    void AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
+    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
     
     /**@brief   Adds a batch into the batch list. */
     void AddSpriteBatch(const SpriteBatch& batch);

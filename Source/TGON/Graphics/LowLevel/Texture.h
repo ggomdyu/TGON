@@ -30,12 +30,10 @@ public:
     using PlatformTexture::SetWrapMode;
     using PlatformTexture::GetFilterMode;
     using PlatformTexture::GetWrapMode;
-    using PlatformTexture::IsValid;
     using PlatformTexture::GetWidth;
     using PlatformTexture::GetHeight;
     using PlatformTexture::GetChannels;
     using PlatformTexture::GetPixelFormat;
-    using PlatformTexture::GetFilePath;
 };
     
 } /* namespace tgon */

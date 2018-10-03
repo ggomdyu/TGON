@@ -2,6 +2,7 @@
  * @file    DelegateChain.h
  * @author  ggomdyu
  * @since   06/30/2018
+ * @brief   The list that contains delegates.
  */
 
 #pragma once

@@ -8,7 +8,7 @@
 #include "Core/Engine/Module/IModule.h"
 
 #include "../LowLevel/Graphics.h"
-#include "../Render/RenderStage.h"
+#include "../Render/View.h"
 
 namespace tgon
 {
@@ -25,10 +25,7 @@ public:
 
 /**@section Public destructor */
 public:
-    virtual ~GraphicsModule() override
-    {
-        int n = 3;
-    }
+    virtual ~GraphicsModule() override final = default;
     
 /**@section Public method */
 public:
@@ -39,9 +36,9 @@ public:
 
     const Graphics& GetGraphics() const noexcept;
 
-    RenderStage& GetRenderStage() noexcept;
+    View& GetView() noexcept;
 
-    const RenderStage& GetRenderStage() const noexcept;
+    const View& GetView() const noexcept;
     
 /**@section Private method */
 private:
@@ -52,7 +49,7 @@ private:
 public:
     Graphics m_graphics;
     
-    RenderStage m_renderStage;
+    View m_view;
 };
 
 } /* namespace tgon */

@@ -2,11 +2,11 @@
 
 #include <cassert>
 
-#include "../LowLevel/Graphics.h"
-#include "../LowLevel/GraphicsType.h"
-#include "../LowLevel/TextureType.h"
-#include "../LowLevel/VertexBuffer.h"
-#include "../LowLevel/IndexBuffer.h"
+#include "Graphics/LowLevel/Graphics.h"
+#include "Graphics/LowLevel/GraphicsType.h"
+#include "Graphics/LowLevel/TextureType.h"
+#include "Graphics/LowLevel/VertexBuffer.h"
+#include "Graphics/LowLevel/IndexBuffer.h"
 
 #include "Sprite.h"
 #include "Material.h"
@@ -14,50 +14,69 @@
 namespace tgon
 {
 
-Sprite::Sprite(const std::string& filePath) :
-    Sprite(std::make_shared<Texture>(filePath))
-{
-}
-      
 Sprite::Sprite(const std::shared_ptr<Texture>& texture) :
     m_texture(texture)
 {
 }
 
-void Sprite::SetOriginPoint(const Vector2& originPoint)
+Sprite::Sprite(Sprite&& rhs) :
+    //m_originPoint(rhs.m_originPoint),
+    //m_anchorPoint(rhs.m_anchorPoint),
+    m_texture(std::move(rhs.m_texture))
 {
-    m_originPoint = originPoint;
+    //m_originPoint = {};
+    //m_anchorPoint = {};
 }
 
-Vector2& Sprite::GetOriginPoint() noexcept
+void Sprite::SetMaterial(const std::shared_ptr<Material>& material) noexcept
 {
-    return m_originPoint;
+    m_material = material;
 }
 
-const Vector2& Sprite::GetOriginPoint() const noexcept
-{
-    return m_originPoint;
-}
+//void Sprite::SetOriginPoint(const Vector2& originPoint) noexcept
+//{
+//    m_originPoint = originPoint;
+//}
+//
+//void Sprite::SetAnchorPoint(const Vector2& anchorPoint) noexcept
+//{
+//    m_anchorPoint = anchorPoint;
+//}
 
-void Sprite::SetAnchorPoint(const Vector2& anchorPoint)
-{
-    m_anchorPoint = anchorPoint;
-}
-
-Vector2& Sprite::GetAnchorPoint() noexcept
-{
-    return m_anchorPoint;
-}
-
-const Vector2& Sprite::GetAnchorPoint() const noexcept
-{
-    return m_anchorPoint;
-}
-
-void Sprite::SetTexture(const std::shared_ptr<Texture>& texture)
+void Sprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
 }
+
+std::shared_ptr<Material>& Sprite::GetMaterial() noexcept
+{
+    return m_material;
+}
+
+std::shared_ptr<const Material> Sprite::GetMaterial() const noexcept
+{
+    return std::shared_ptr<const Material>();
+}
+
+//Vector2& Sprite::GetOriginPoint() noexcept
+//{
+//    return m_originPoint;
+//}
+//
+//const Vector2& Sprite::GetOriginPoint() const noexcept
+//{
+//    return m_originPoint;
+//}
+//
+//Vector2& Sprite::GetAnchorPoint() noexcept
+//{
+//    return m_anchorPoint;
+//}
+//
+//const Vector2& Sprite::GetAnchorPoint() const noexcept
+//{
+//    return m_anchorPoint;
+//}
    
 std::shared_ptr<Texture>& Sprite::GetTexture() noexcept
 {
@@ -67,6 +86,11 @@ std::shared_ptr<Texture>& Sprite::GetTexture() noexcept
 std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
 {
     return m_texture;
+}
+
+const Extent2D Sprite::GetTextureSize() const noexcept
+{
+    return {m_texture->GetWidth(), m_texture->GetHeight()};
 }
 
 //

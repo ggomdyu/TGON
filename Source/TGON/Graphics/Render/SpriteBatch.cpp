@@ -1,32 +1,37 @@
 #include "PrecompiledHeader.h"
 
+#include "Graphics/LowLevel/Graphics.h"
+
+#include "Mesh.h"
+#include "Camera.h"
 #include "SpriteBatch.h"
-#include "MeshUtility.h"
 #include "FVF.h"
+#include "Material.h"
+#include "MeshUtility.h"
 
 namespace tgon
 {
     
-SpriteBatch::SpriteBatch(const std::shared_ptr<TextureMaterial>& material) :
+SpriteBatch::SpriteBatch(const std::shared_ptr<Material>& material) :
     m_material(material)
 {
 }
 
-SpriteBatch::SpriteBatch(const std::shared_ptr<TextureMaterial>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives) :
+SpriteBatch::SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives) :
     m_material(material),
     m_drawPrimitives(drawPrimitives)
 {
 }
 
-void SpriteBatch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4& matWVP)
-{
-    m_drawPrimitives.push_back(DrawPrimitive{matWVP});
-}
-
-void SpriteBatch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
-{
-    m_drawPrimitives.push_back(drawPrimitive);
-}
+//void SpriteBatch::AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4& matWVP)
+//{
+//    m_drawPrimitives.push_back(DrawPrimitive{matWVP});
+//}
+//
+//void SpriteBatch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
+//{
+//    m_drawPrimitives.push_back(drawPrimitive);
+//}
     
 bool SpriteBatch::CanBatch(const std::shared_ptr<TextureMaterial>& material) const
 {
@@ -57,7 +62,7 @@ const std::vector<SpriteBatch::DrawPrimitive>& SpriteBatch::GetDrawPrimitives() 
 }
 
 SpriteBatchGroup::SpriteBatchGroup() :
-    m_quad(MeshUtility::CreateSharedQuad())
+    m_quad(MeshUtility::GetSharedQuad())
 {
 }
 

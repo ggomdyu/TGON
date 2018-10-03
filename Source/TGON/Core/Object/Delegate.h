@@ -27,7 +27,7 @@
 #endif
 
 /**
- * @brief   Binds delegate with lambda or global function
+ * @brief   Binds delegate with lambda or global function.
  * @param [in] function     A lambda object or Reference to global function(e.g. &functionName)
  */
 #define TGON_MAKE_DELEGATE_1(function)\
@@ -38,7 +38,7 @@
     } ()
 
 /**
- * @brief   Binds delegate with class member function
+ * @brief   Binds delegate with class member function.
  * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
  * @param [in] instance     An instance which handles event
  */

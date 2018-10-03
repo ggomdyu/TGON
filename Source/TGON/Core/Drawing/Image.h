@@ -11,6 +11,7 @@
 #include <string>
 
 #include "Core/Platform/Config.h"
+#include "Core/Math/Extent.h"
 
 #include "ImageType.h"
 
@@ -51,14 +52,10 @@ public:
      */
     Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
-    Image(const Image& rhs) = default;
-
     Image(Image&& rhs);
 
 /**@section Public operator */
 public:
-    Image& operator=(const Image& rhs) = default;
-
     Image& operator=(Image&& rhs);
 
     /**@brief   Gets the raw pointer of image. */

@@ -26,7 +26,7 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     {
         m_graphics.SetViewport(0, 0, width, height);
 
-        auto& cameraList = m_renderStage.GetCameraList();
+        auto& cameraList = m_View.GetCameraList();
         for (auto& camera : cameraList)
         {
             float halfWidth = static_cast<float>(width) * 0.5f;
@@ -45,7 +45,7 @@ void GraphicsModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        m_renderStage.Draw(m_graphics);
+        m_View.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
@@ -60,14 +60,14 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-RenderStage& GraphicsModule::GetRenderStage() noexcept
+View& GraphicsModule::GetView() noexcept
 {
-    return m_renderStage;
+    return m_view;
 }
 
-const RenderStage& GraphicsModule::GetRenderStage() const noexcept
+const View& GraphicsModule::GetView() const noexcept
 {
-    return m_renderStage;
+    return m_view;
 }
     
 } /* namespace tgon */

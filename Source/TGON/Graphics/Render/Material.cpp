@@ -124,7 +124,7 @@ bool TextureMaterial::CanBatch(const Material& rhs) const
     if (rhs2 != nullptr)
     {
         return m_blendColor == rhs2->m_blendColor &&
-               m_texture->GetFilePath() == rhs2->m_texture->GetFilePath();
+               m_texture->GetID() == rhs2->m_texture->GetID();
     }
     else
     {

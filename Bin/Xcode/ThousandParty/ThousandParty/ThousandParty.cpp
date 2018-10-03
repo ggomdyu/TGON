@@ -12,6 +12,8 @@ void ThousandParty::OnDidLaunch()
 {
     SuperType::OnDidLaunch();
 
+    tgon::Sprite s(tgon::GetDesktopDirectory() + "/Assets/Image/IntroScene/girl.png");
+
     this->Initialize();
 }
 

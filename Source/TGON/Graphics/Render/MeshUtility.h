@@ -15,13 +15,14 @@ class TGON_API MeshUtility
 /**@section Public method */
 public:
     /**@brief   Creates a triangle mesh which is global instance. */
-    static std::shared_ptr<Mesh> CreateSharedTriangle();
+    static std::shared_ptr<Mesh> GetSharedTriangle();
                                   
     /**@brief   Creates a shared cube mesh which is global instance. */
-    static std::shared_ptr<Mesh> CreateSharedCube();
+    static std::shared_ptr<Mesh> GetSharedCube();
                                   
     /**@brief   Creates a shared quad mesh which is global instance. */
-    static std::shared_ptr<Mesh> CreateSharedQuad();
+    /**@todo    Return type should be changed to std::shared_ptr<const Mesh> */
+    static std::shared_ptr<Mesh> GetSharedQuad();
 
     //std::shared_ptr<Mesh> CreateUVSphere(int );
     

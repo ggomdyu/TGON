@@ -18,7 +18,7 @@ MeshRendererComponent::MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, 
 
 void MeshRendererComponent::Update()
 {
-    m_graphicsModule->GetRenderStage().AddBatch(m_material, {m_mesh, &GetOwner()->GetWorldMatrix()});
+    m_graphicsModule->GetView().AddBatch(m_material, {m_mesh, &GetOwner()->GetWorldMatrix()});
 }
     
 void MeshRendererComponent::SetMesh(const std::shared_ptr<Mesh>& mesh)
