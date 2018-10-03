@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
+
 #include "Core/Platform/Config.h"
 
 namespace gainput
@@ -20,7 +22,8 @@ namespace tgon
 enum class KeyCode;
 class InputManagerImpl;
     
-class TGON_API KeyboardImpl final
+class TGON_API KeyboardImpl final :
+    private boost::noncopyable
 {
 /**@section Public constructor */
 public:

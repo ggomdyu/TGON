@@ -9,11 +9,18 @@
 
 #include "Core/Platform/Config.h"
 
-#include "WindowsKeyboardType.h"
-#include "WindowsInputManager.h"
+namespace OIS
+{
+    
+class Keyboard;
+    
+} /* namespace OIS */
 
 namespace tgon
 {
+    
+enum class KeyCode;
+class InputManagerImpl;
 
 class TGON_API KeyboardImpl final :
     private boost::noncopyable

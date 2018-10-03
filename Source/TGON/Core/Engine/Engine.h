@@ -58,15 +58,15 @@ public:
      * @brief   Unregisters a module managed by this engine.
      * @tparam _ModuleType  The type of module to remove.
      */
-    template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
+    template <typename _ModuleType>
     bool UnregisterModule();
 
     /**@brief   Returns a module managed by this engine. */
-    template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
+    template <typename _ModuleType>
     std::shared_ptr<_ModuleType> FindModule() noexcept;
 
     /**@brief   Returns a module managed by this engine. */
-    template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>* = nullptr>
+    template <typename _ModuleType>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
     
 /**@section Public event handler */
@@ -119,27 +119,35 @@ inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const 
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
 {
+    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
+    
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     
     this->RegisterModule(module);
     return module;
 }
     
-template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+template <typename _ModuleType>
 inline bool Engine::UnregisterModule()
 {
+    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
+    
     return this->UnregisterModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
 }
 
-template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+template <typename _ModuleType>
 inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 {
+    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
+    
     return std::static_pointer_cast<_ModuleType>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
 }
 
-template <typename _ModuleType, std::enable_if_t<std::is_base_of<IModule, _ModuleType>::value>*>
+template <typename _ModuleType>
 inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 {
+    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
+    
     return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
     

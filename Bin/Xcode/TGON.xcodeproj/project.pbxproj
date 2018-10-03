@@ -23,13 +23,10 @@
 		FD2108B320B93286009FC8F1 /* UUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108B020B93286009FC8F1 /* UUID.h */; };
 		FD2108B520B93286009FC8F1 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108B220B93286009FC8F1 /* Hash.h */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
-		FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */; };
-		FD24D8272120244000CBED64 /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */; };
 		FD24D82C2120245800CBED64 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D8282120245700CBED64 /* Sprite.cpp */; };
 		FD24D82D2120245800CBED64 /* Sprite.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D8292120245700CBED64 /* Sprite.h */; };
 		FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D82A2120245700CBED64 /* SpriteBatch.h */; };
 		FD24D82F2120245800CBED64 /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD24D82B2120245800CBED64 /* SpriteBatch.cpp */; };
-		FD24D832212066D200CBED64 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD24D830212066D100CBED64 /* CameraComponent.h */; };
 		FD2559412145917B00FE0FDE /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2559402145917B00FE0FDE /* Timer.h */; };
 		FD2BF54620138F0500228FFF /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2BF5402012ECAB00228FFF /* Log.h */; };
 		FD41922720DA853100536815 /* IComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD41922220DA853000536815 /* IComparable.h */; };
@@ -48,7 +45,6 @@
 		FD5337EC20E4017A00515DA4 /* MacOSWindowUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD08C52620352C0100355346 /* MacOSWindowUtility.mm */; };
 		FD5337ED20E4017A00515DA4 /* MacOSDateTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD06732320B4258C00BEA737 /* MacOSDateTime.mm */; };
 		FD5337EE20E4017A00515DA4 /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD06734D20B42D6C00BEA737 /* MacOSTime.mm */; };
-		FD5337EF20E4017A00515DA4 /* MacOSOpenGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693820AFA84600791E10 /* MacOSOpenGLContext.mm */; };
 		FD5337F020E4018500515DA4 /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD0672E920B4256600BEA737 /* AudioBuffer.cpp */; };
 		FD5337F120E4018500515DA4 /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD0672E820B4256600BEA737 /* AudioPlayer.cpp */; };
 		FD5337F220E4018500515DA4 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7EA6DC20B094CA00A76C69 /* Image.cpp */; };
@@ -92,13 +88,8 @@
 		FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DD20B094CA00A76C69 /* Drawing.h */; };
 		FD7EA6E320B094CA00A76C69 /* ImageType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DE20B094CA00A76C69 /* ImageType.h */; };
 		FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7EA6DF20B094CA00A76C69 /* ImageUtility.h */; };
-		FD806BB52110AB74002B9DCB /* TimeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD806BAE2110AB74002B9DCB /* TimeModule.cpp */; };
-		FD806BB62110AB74002B9DCB /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD806BAF2110AB74002B9DCB /* InputModule.cpp */; };
 		FD806BB72110AB74002B9DCB /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = FD806BB02110AB74002B9DCB /* Engine.h */; };
-		FD806BB82110AB74002B9DCB /* InputModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD806BB12110AB74002B9DCB /* InputModule.h */; };
 		FD806BB92110AB74002B9DCB /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD806BB22110AB74002B9DCB /* Engine.cpp */; };
-		FD806BBA2110AB74002B9DCB /* TimeModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD806BB32110AB74002B9DCB /* TimeModule.h */; };
-		FD806BBB2110AB74002B9DCB /* IModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD806BB42110AB74002B9DCB /* IModule.h */; };
 		FD81A8A620F122D7006FDAA0 /* OpenGLRenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FD81A8A520F122D7006FDAA0 /* OpenGLRenderTarget.h */; };
 		FD85201220C31F2B00C749BC /* MacOSKeyboardType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200A20C31F2B00C749BC /* MacOSKeyboardType.h */; };
 		FD85201320C31F2B00C749BC /* MacOSInputManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85200B20C31F2B00C749BC /* MacOSInputManager.h */; };
@@ -143,17 +134,8 @@
 		FDBCFA4620E7F96100CBDF0B /* IndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3920E7F96100CBDF0B /* IndexBuffer.h */; };
 		FDBCFA4720E7F96100CBDF0B /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA3A20E7F96100CBDF0B /* VertexBuffer.cpp */; };
 		FDBE44D7211C9F4D0055A968 /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBE44D6211C9F4D0055A968 /* DateTime.cpp */; };
-		FDBE44E2211E78320055A968 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBE44D9211E78300055A968 /* Component.cpp */; };
-		FDBE44E4211E78320055A968 /* MeshRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE44DB211E78300055A968 /* MeshRendererComponent.h */; };
-		FDBE44E6211E78320055A968 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE44DD211E78310055A968 /* Component.h */; };
-		FDBE44E7211E78320055A968 /* ComponentUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE44DE211E78310055A968 /* ComponentUtility.h */; };
-		FDBE44E9211E78320055A968 /* MeshRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */; };
 		FDBE7E5B2131C81400B4874C /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBE7E592131C81400B4874C /* Transform.cpp */; };
 		FDBE7E5C2131C81400B4874C /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBE7E5A2131C81400B4874C /* Transform.h */; };
-		FDC546E9211F3F97000A25F8 /* GameSceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC546E5211F3F96000A25F8 /* GameSceneModule.h */; };
-		FDC546EA211F3F97000A25F8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC546E6211F3F96000A25F8 /* GameScene.cpp */; };
-		FDC546EB211F3F97000A25F8 /* GameScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC546E7211F3F96000A25F8 /* GameScene.h */; };
-		FDC546EC211F3F97000A25F8 /* GameSceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */; };
 		FDD0702D20D0D1A600CB02A7 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD0702B20D0D1A500CB02A7 /* Camera.h */; };
 		FDD3967A20D025B70095F1F8 /* Mouse.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD3966C20D025B50095F1F8 /* Mouse.h */; };
 		FDD3967B20D025B70095F1F8 /* Keyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD3966D20D025B50095F1F8 /* Keyboard.h */; };
@@ -166,14 +148,35 @@
 		FDD56D142159635A00C01939 /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D132159635A00C01939 /* RTTI.cpp */; };
 		FDD56D172159648A00C01939 /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D152159648A00C01939 /* IResource.cpp */; };
 		FDD56D182159648A00C01939 /* IResource.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D162159648A00C01939 /* IResource.h */; };
-		FDD56D202159F27D00C01939 /* FixedHashString.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D192159F27C00C01939 /* FixedHashString.h */; };
 		FDD56D212159F27D00C01939 /* FixedStringUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1A2159F27C00C01939 /* FixedStringUtility.h */; };
 		FDD56D222159F27D00C01939 /* StringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1B2159F27C00C01939 /* StringView.h */; };
 		FDD56D232159F27D00C01939 /* FixedString.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1C2159F27C00C01939 /* FixedString.h */; };
-		FDD56D242159F27D00C01939 /* HashStringView.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1D2159F27C00C01939 /* HashStringView.h */; };
 		FDD56D252159F27D00C01939 /* Encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1E2159F27C00C01939 /* Encoding.h */; };
 		FDD56D262159F27D00C01939 /* StringTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D1F2159F27C00C01939 /* StringTraits.h */; };
 		FDD56D2A2159FA2F00C01939 /* StringHash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D292159FA2F00C01939 /* StringHash.h */; };
+		FDD56D2E2160856F00C01939 /* GameSceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D2C2160856F00C01939 /* GameSceneModule.cpp */; };
+		FDD56D2F2160856F00C01939 /* GameSceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D2D2160856F00C01939 /* GameSceneModule.h */; };
+		FDD56D382160858700C01939 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D302160858600C01939 /* Component.h */; };
+		FDD56D392160858700C01939 /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D312160858600C01939 /* SpriteRendererComponent.cpp */; };
+		FDD56D3A2160858700C01939 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D322160858600C01939 /* SpriteRendererComponent.h */; };
+		FDD56D3B2160858700C01939 /* MeshRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D332160858600C01939 /* MeshRendererComponent.cpp */; };
+		FDD56D3C2160858700C01939 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D342160858700C01939 /* Component.cpp */; };
+		FDD56D3D2160858700C01939 /* ComponentUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D352160858700C01939 /* ComponentUtility.h */; };
+		FDD56D3E2160858700C01939 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D362160858700C01939 /* CameraComponent.h */; };
+		FDD56D3F2160858700C01939 /* MeshRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D372160858700C01939 /* MeshRendererComponent.h */; };
+		FDD56D432160859B00C01939 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D412160859B00C01939 /* GameScene.cpp */; };
+		FDD56D442160859B00C01939 /* GameScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D422160859B00C01939 /* GameScene.h */; };
+		FDD56D50216085BD00C01939 /* AudioModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D46216085BD00C01939 /* AudioModule.h */; };
+		FDD56D51216085BD00C01939 /* IModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D47216085BD00C01939 /* IModule.h */; };
+		FDD56D52216085BD00C01939 /* ResourceModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D48216085BD00C01939 /* ResourceModule.cpp */; };
+		FDD56D53216085BD00C01939 /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D49216085BD00C01939 /* InputModule.cpp */; };
+		FDD56D54216085BD00C01939 /* InputMode.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D4A216085BD00C01939 /* InputMode.h */; };
+		FDD56D55216085BD00C01939 /* TimeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D4B216085BD00C01939 /* TimeModule.cpp */; };
+		FDD56D56216085BD00C01939 /* TimeModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D4C216085BD00C01939 /* TimeModule.h */; };
+		FDD56D57216085BD00C01939 /* AudioModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D4D216085BD00C01939 /* AudioModule.cpp */; };
+		FDD56D58216085BD00C01939 /* ResourceModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D4E216085BD00C01939 /* ResourceModule.h */; };
+		FDD56D59216085BD00C01939 /* InputModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD56D4F216085BD00C01939 /* InputModule.h */; };
+		FDD56D5C216086BC00C01939 /* MacOSOpenGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D5B216086BC00C01939 /* MacOSOpenGLContext.mm */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEA237820AFF586000885AC /* PrecompiledHeader.h */; };
@@ -184,7 +187,6 @@
 		FDF51BF6210A42A000A81407 /* RenderStage.h in Headers */ = {isa = PBXBuildFile; fileRef = FDF51BF4210A42A000A81407 /* RenderStage.h */; };
 		FDF51BF7210A42A000A81407 /* RenderStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDF51BF5210A42A000A81407 /* RenderStage.cpp */; };
 		FDFABD26214D33BA00FB17B0 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDFABD25214D33B900FB17B0 /* Timer.cpp */; };
-		FDFABD28214D3DA500FB17B0 /* InputMode.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFABD27214D3DA400FB17B0 /* InputMode.h */; };
 		FDFECB831F7585B4007AC1AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFECB821F7585B4007AC1AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -251,13 +253,10 @@
 		FD2108B120B93286009FC8F1 /* Hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hash.cpp; path = ../../Source/TGON/Core/Hash/Hash.cpp; sourceTree = "<group>"; };
 		FD2108B220B93286009FC8F1 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hash.h; path = ../../Source/TGON/Core/Hash/Hash.h; sourceTree = "<group>"; };
 		FD2108C920BAE630009FC8F1 /* TGON.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TGON.h; path = ../../Source/TGON/TGON.h; sourceTree = "<group>"; };
-		FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Game/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
-		FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteRendererComponent.cpp; path = ../../../Source/TGON/Game/Component/SpriteRendererComponent.cpp; sourceTree = "<group>"; };
 		FD24D8282120245700CBED64 /* Sprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Sprite.cpp; path = ../../Source/TGON/Graphics/Render/Sprite.cpp; sourceTree = "<group>"; };
 		FD24D8292120245700CBED64 /* Sprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Sprite.h; path = ../../Source/TGON/Graphics/Render/Sprite.h; sourceTree = "<group>"; };
 		FD24D82A2120245700CBED64 /* SpriteBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteBatch.h; path = ../../Source/TGON/Graphics/Render/SpriteBatch.h; sourceTree = "<group>"; };
 		FD24D82B2120245800CBED64 /* SpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteBatch.cpp; path = ../../Source/TGON/Graphics/Render/SpriteBatch.cpp; sourceTree = "<group>"; };
-		FD24D830212066D100CBED64 /* CameraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraComponent.h; path = ../../../Source/TGON/Game/Component/CameraComponent.h; sourceTree = "<group>"; };
 		FD2559402145917B00FE0FDE /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		FD2BF5402012ECAB00228FFF /* Log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Log.h; path = ../../Source/TGON/Core/Debug/Log.h; sourceTree = "<group>"; };
 		FD2BF5422012ECBE00228FFF /* MacOSLog.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = MacOSLog.mm; path = ../../Source/TGON/Core/Debug/MacOS/MacOSLog.mm; sourceTree = "<group>"; };
@@ -288,13 +287,8 @@
 		FD7EA6DD20B094CA00A76C69 /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawing.h; path = ../../Source/TGON/Core/Drawing/Drawing.h; sourceTree = "<group>"; };
 		FD7EA6DE20B094CA00A76C69 /* ImageType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageType.h; path = ../../Source/TGON/Core/Drawing/ImageType.h; sourceTree = "<group>"; };
 		FD7EA6DF20B094CA00A76C69 /* ImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageUtility.h; path = ../../Source/TGON/Core/Drawing/ImageUtility.h; sourceTree = "<group>"; };
-		FD806BAE2110AB74002B9DCB /* TimeModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = TimeModule.cpp; path = ../../Source/TGON/Core/Engine/TimeModule.cpp; sourceTree = "<group>"; };
-		FD806BAF2110AB74002B9DCB /* InputModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = InputModule.cpp; path = ../../Source/TGON/Core/Engine/InputModule.cpp; sourceTree = "<group>"; };
 		FD806BB02110AB74002B9DCB /* Engine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Engine.h; path = ../../Source/TGON/Core/Engine/Engine.h; sourceTree = "<group>"; };
-		FD806BB12110AB74002B9DCB /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = InputModule.h; path = ../../Source/TGON/Core/Engine/InputModule.h; sourceTree = "<group>"; };
 		FD806BB22110AB74002B9DCB /* Engine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Engine.cpp; path = ../../Source/TGON/Core/Engine/Engine.cpp; sourceTree = "<group>"; };
-		FD806BB32110AB74002B9DCB /* TimeModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TimeModule.h; path = ../../Source/TGON/Core/Engine/TimeModule.h; sourceTree = "<group>"; };
-		FD806BB42110AB74002B9DCB /* IModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = IModule.h; path = ../../Source/TGON/Core/Engine/IModule.h; sourceTree = "<group>"; };
 		FD81A8A520F122D7006FDAA0 /* OpenGLRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLRenderTarget.h; sourceTree = "<group>"; };
 		FD85200920C31F2B00C749BC /* MacOSKeyboard.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSKeyboard.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSKeyboard.cpp; sourceTree = "<group>"; };
 		FD85200A20C31F2B00C749BC /* MacOSKeyboardType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSKeyboardType.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSKeyboardType.h; sourceTree = "<group>"; };
@@ -318,7 +312,6 @@
 		FD8E693420AFA84600791E10 /* OpenGLIndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLIndexBuffer.cpp; sourceTree = "<group>"; };
 		FD8E693620AFA84600791E10 /* OpenGLIndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLIndexBuffer.h; sourceTree = "<group>"; };
 		FD8E693720AFA84600791E10 /* OpenGLTexture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
-		FD8E693820AFA84600791E10 /* MacOSOpenGLContext.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSOpenGLContext.mm; sourceTree = "<group>"; };
 		FD8E693920AFA84600791E10 /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		FD8E693A20AFA84600791E10 /* OpenGLTexture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLTexture.h; sourceTree = "<group>"; };
 		FD8E695D20AFA8CC00791E10 /* MeshUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MeshUtility.cpp; path = ../../Source/TGON/Graphics/Render/MeshUtility.cpp; sourceTree = "<group>"; };
@@ -354,17 +347,8 @@
 		FDBCFA3920E7F96100CBDF0B /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IndexBuffer.h; sourceTree = "<group>"; };
 		FDBCFA3A20E7F96100CBDF0B /* VertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = VertexBuffer.cpp; sourceTree = "<group>"; };
 		FDBE44D6211C9F4D0055A968 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
-		FDBE44D9211E78300055A968 /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Component.cpp; path = ../../../Source/TGON/Game/Component/Component.cpp; sourceTree = "<group>"; };
-		FDBE44DB211E78300055A968 /* MeshRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MeshRendererComponent.h; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.h; sourceTree = "<group>"; };
-		FDBE44DD211E78310055A968 /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Component.h; path = ../../../Source/TGON/Game/Component/Component.h; sourceTree = "<group>"; };
-		FDBE44DE211E78310055A968 /* ComponentUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = ComponentUtility.h; path = ../../../Source/TGON/Game/Component/ComponentUtility.h; sourceTree = "<group>"; };
-		FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MeshRendererComponent.cpp; path = ../../../Source/TGON/Game/Component/MeshRendererComponent.cpp; sourceTree = "<group>"; };
 		FDBE7E592131C81400B4874C /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
 		FDBE7E5A2131C81400B4874C /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		FDC546E5211F3F96000A25F8 /* GameSceneModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameSceneModule.h; path = ../../../Source/TGON/Game/Engine/GameSceneModule.h; sourceTree = "<group>"; };
-		FDC546E6211F3F96000A25F8 /* GameScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameScene.cpp; path = ../../../Source/TGON/Game/Engine/GameScene.cpp; sourceTree = "<group>"; };
-		FDC546E7211F3F96000A25F8 /* GameScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameScene.h; path = ../../../Source/TGON/Game/Engine/GameScene.h; sourceTree = "<group>"; };
-		FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameSceneModule.cpp; path = ../../../Source/TGON/Game/Engine/GameSceneModule.cpp; sourceTree = "<group>"; };
 		FDC877FF20CEA1BC00C8CA9A /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Window.cpp; path = ../../Source/TGON/Core/Platform/Window.cpp; sourceTree = "<group>"; };
 		FDD0702A20D0D1A400CB02A7 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../../Source/TGON/Graphics/Render/Camera.cpp; sourceTree = "<group>"; };
 		FDD0702B20D0D1A500CB02A7 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../../Source/TGON/Graphics/Render/Camera.h; sourceTree = "<group>"; };
@@ -383,14 +367,35 @@
 		FDD56D132159635A00C01939 /* RTTI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTTI.cpp; sourceTree = "<group>"; };
 		FDD56D152159648A00C01939 /* IResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IResource.cpp; sourceTree = "<group>"; };
 		FDD56D162159648A00C01939 /* IResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IResource.h; sourceTree = "<group>"; };
-		FDD56D192159F27C00C01939 /* FixedHashString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedHashString.h; sourceTree = "<group>"; };
 		FDD56D1A2159F27C00C01939 /* FixedStringUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedStringUtility.h; sourceTree = "<group>"; };
 		FDD56D1B2159F27C00C01939 /* StringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringView.h; sourceTree = "<group>"; };
 		FDD56D1C2159F27C00C01939 /* FixedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedString.h; sourceTree = "<group>"; };
-		FDD56D1D2159F27C00C01939 /* HashStringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashStringView.h; sourceTree = "<group>"; };
 		FDD56D1E2159F27C00C01939 /* Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoding.h; sourceTree = "<group>"; };
 		FDD56D1F2159F27C00C01939 /* StringTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTraits.h; sourceTree = "<group>"; };
 		FDD56D292159FA2F00C01939 /* StringHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHash.h; sourceTree = "<group>"; };
+		FDD56D2C2160856F00C01939 /* GameSceneModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameSceneModule.cpp; path = ../../../../Source/TGON/Game/Engine/Module/GameSceneModule.cpp; sourceTree = "<group>"; };
+		FDD56D2D2160856F00C01939 /* GameSceneModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameSceneModule.h; path = ../../../../Source/TGON/Game/Engine/Module/GameSceneModule.h; sourceTree = "<group>"; };
+		FDD56D302160858600C01939 /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Component.h; path = ../../../Source/TGON/Game/Object/Component/Component.h; sourceTree = "<group>"; };
+		FDD56D312160858600C01939 /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteRendererComponent.cpp; path = ../../../Source/TGON/Game/Object/Component/SpriteRendererComponent.cpp; sourceTree = "<group>"; };
+		FDD56D322160858600C01939 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Game/Object/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
+		FDD56D332160858600C01939 /* MeshRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MeshRendererComponent.cpp; path = ../../../Source/TGON/Game/Object/Component/MeshRendererComponent.cpp; sourceTree = "<group>"; };
+		FDD56D342160858700C01939 /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Component.cpp; path = ../../../Source/TGON/Game/Object/Component/Component.cpp; sourceTree = "<group>"; };
+		FDD56D352160858700C01939 /* ComponentUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = ComponentUtility.h; path = ../../../Source/TGON/Game/Object/Component/ComponentUtility.h; sourceTree = "<group>"; };
+		FDD56D362160858700C01939 /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CameraComponent.h; path = ../../../Source/TGON/Game/Object/Component/CameraComponent.h; sourceTree = "<group>"; };
+		FDD56D372160858700C01939 /* MeshRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MeshRendererComponent.h; path = ../../../Source/TGON/Game/Object/Component/MeshRendererComponent.h; sourceTree = "<group>"; };
+		FDD56D412160859B00C01939 /* GameScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GameScene.cpp; path = ../../../Source/TGON/Game/Scene/GameScene.cpp; sourceTree = "<group>"; };
+		FDD56D422160859B00C01939 /* GameScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = GameScene.h; path = ../../../Source/TGON/Game/Scene/GameScene.h; sourceTree = "<group>"; };
+		FDD56D46216085BD00C01939 /* AudioModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = AudioModule.h; path = ../../Source/TGON/Core/Engine/Module/AudioModule.h; sourceTree = "<group>"; };
+		FDD56D47216085BD00C01939 /* IModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = IModule.h; path = ../../Source/TGON/Core/Engine/Module/IModule.h; sourceTree = "<group>"; };
+		FDD56D48216085BD00C01939 /* ResourceModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ResourceModule.cpp; path = ../../Source/TGON/Core/Engine/Module/ResourceModule.cpp; sourceTree = "<group>"; };
+		FDD56D49216085BD00C01939 /* InputModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = InputModule.cpp; path = ../../Source/TGON/Core/Engine/Module/InputModule.cpp; sourceTree = "<group>"; };
+		FDD56D4A216085BD00C01939 /* InputMode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = InputMode.h; path = ../../Source/TGON/Core/Engine/Module/InputMode.h; sourceTree = "<group>"; };
+		FDD56D4B216085BD00C01939 /* TimeModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = TimeModule.cpp; path = ../../Source/TGON/Core/Engine/Module/TimeModule.cpp; sourceTree = "<group>"; };
+		FDD56D4C216085BD00C01939 /* TimeModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TimeModule.h; path = ../../Source/TGON/Core/Engine/Module/TimeModule.h; sourceTree = "<group>"; };
+		FDD56D4D216085BD00C01939 /* AudioModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = AudioModule.cpp; path = ../../Source/TGON/Core/Engine/Module/AudioModule.cpp; sourceTree = "<group>"; };
+		FDD56D4E216085BD00C01939 /* ResourceModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = ResourceModule.h; path = ../../Source/TGON/Core/Engine/Module/ResourceModule.h; sourceTree = "<group>"; };
+		FDD56D4F216085BD00C01939 /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = InputModule.h; path = ../../Source/TGON/Core/Engine/Module/InputModule.h; sourceTree = "<group>"; };
+		FDD56D5B216086BC00C01939 /* MacOSOpenGLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MacOSOpenGLContext.mm; path = ../MacOS/MacOSOpenGLContext.mm; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDE085CA20B134F100D22E80 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../ThirdParty/Debug/x86_64/libogg.a; sourceTree = "<group>"; };
@@ -409,7 +414,6 @@
 		FDF51BF4210A42A000A81407 /* RenderStage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = RenderStage.h; path = ../../Source/TGON/Graphics/Render/RenderStage.h; sourceTree = "<group>"; };
 		FDF51BF5210A42A000A81407 /* RenderStage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = RenderStage.cpp; path = ../../Source/TGON/Graphics/Render/RenderStage.cpp; sourceTree = "<group>"; };
 		FDFABD25214D33B900FB17B0 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
-		FDFABD27214D3DA400FB17B0 /* InputMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputMode.h; path = ../../Source/TGON/Core/Engine/InputMode.h; sourceTree = "<group>"; };
 		FDFECB821F7585B4007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDFECB841F75FBAF007AC1AB /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -482,10 +486,8 @@
 			isa = PBXGroup;
 			children = (
 				FDD56D1E2159F27C00C01939 /* Encoding.h */,
-				FDD56D192159F27C00C01939 /* FixedHashString.h */,
 				FDD56D1C2159F27C00C01939 /* FixedString.h */,
 				FDD56D1A2159F27C00C01939 /* FixedStringUtility.h */,
-				FDD56D1D2159F27C00C01939 /* HashStringView.h */,
 				FDD56D1F2159F27C00C01939 /* StringTraits.h */,
 				FDD56D1B2159F27C00C01939 /* StringView.h */,
 				FDD56D292159FA2F00C01939 /* StringHash.h */,
@@ -630,6 +632,7 @@
 		FD39DB3320C9703700C07251 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				FDBE44D8211E78280055A968 /* Component */,
 				FD39DB3420C9703700C07251 /* GameObject.h */,
 				FD39DB3520C9703700C07251 /* GameObject.cpp */,
 				FDBE7E592131C81400B4874C /* Transform.cpp */,
@@ -663,8 +666,8 @@
 		FD7EA52D1FAF6BCF008DF72F /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FDD56D402160859600C01939 /* Scene */,
 				FDC546E4211F3F8C000A25F8 /* Engine */,
-				FDBE44D8211E78280055A968 /* Component */,
 				FD39DB3320C9703700C07251 /* Object */,
 			);
 			name = Game;
@@ -685,14 +688,9 @@
 		FD806BAD2110AB2F002B9DCB /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				FDD56D45216085AC00C01939 /* Module */,
 				FD806BB22110AB74002B9DCB /* Engine.cpp */,
 				FD806BB02110AB74002B9DCB /* Engine.h */,
-				FD806BB42110AB74002B9DCB /* IModule.h */,
-				FDFABD27214D3DA400FB17B0 /* InputMode.h */,
-				FD806BAF2110AB74002B9DCB /* InputModule.cpp */,
-				FD806BB12110AB74002B9DCB /* InputModule.h */,
-				FD806BAE2110AB74002B9DCB /* TimeModule.cpp */,
-				FD806BB32110AB74002B9DCB /* TimeModule.h */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -796,27 +794,69 @@
 		FDBE44D8211E78280055A968 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				FDBE44D9211E78300055A968 /* Component.cpp */,
-				FDBE44DD211E78310055A968 /* Component.h */,
-				FDBE44DE211E78310055A968 /* ComponentUtility.h */,
-				FD24D830212066D100CBED64 /* CameraComponent.h */,
-				FDBE44E0211E78310055A968 /* MeshRendererComponent.cpp */,
-				FDBE44DB211E78300055A968 /* MeshRendererComponent.h */,
-				FD24D8252120244000CBED64 /* SpriteRendererComponent.cpp */,
-				FD24D8242120243F00CBED64 /* SpriteRendererComponent.h */,
+				FDD56D362160858700C01939 /* CameraComponent.h */,
+				FDD56D342160858700C01939 /* Component.cpp */,
+				FDD56D302160858600C01939 /* Component.h */,
+				FDD56D352160858700C01939 /* ComponentUtility.h */,
+				FDD56D332160858600C01939 /* MeshRendererComponent.cpp */,
+				FDD56D372160858700C01939 /* MeshRendererComponent.h */,
+				FDD56D312160858600C01939 /* SpriteRendererComponent.cpp */,
+				FDD56D322160858600C01939 /* SpriteRendererComponent.h */,
 			);
-			path = Component;
+			name = Component;
+			path = ../../../../Bin/Xcode/Component;
 			sourceTree = "<group>";
 		};
 		FDC546E4211F3F8C000A25F8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				FDC546E6211F3F96000A25F8 /* GameScene.cpp */,
-				FDC546E7211F3F96000A25F8 /* GameScene.h */,
-				FDC546E8211F3F97000A25F8 /* GameSceneModule.cpp */,
-				FDC546E5211F3F96000A25F8 /* GameSceneModule.h */,
+				FDD56D2B2160856800C01939 /* Module */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		FDD56D2B2160856800C01939 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				FDD56D2C2160856F00C01939 /* GameSceneModule.cpp */,
+				FDD56D2D2160856F00C01939 /* GameSceneModule.h */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		FDD56D402160859600C01939 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				FDD56D412160859B00C01939 /* GameScene.cpp */,
+				FDD56D422160859B00C01939 /* GameScene.h */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		FDD56D45216085AC00C01939 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				FDD56D4D216085BD00C01939 /* AudioModule.cpp */,
+				FDD56D46216085BD00C01939 /* AudioModule.h */,
+				FDD56D47216085BD00C01939 /* IModule.h */,
+				FDD56D4A216085BD00C01939 /* InputMode.h */,
+				FDD56D49216085BD00C01939 /* InputModule.cpp */,
+				FDD56D4F216085BD00C01939 /* InputModule.h */,
+				FDD56D48216085BD00C01939 /* ResourceModule.cpp */,
+				FDD56D4E216085BD00C01939 /* ResourceModule.h */,
+				FDD56D4B216085BD00C01939 /* TimeModule.cpp */,
+				FDD56D4C216085BD00C01939 /* TimeModule.h */,
+			);
+			name = Module;
+			sourceTree = "<group>";
+		};
+		FDD56D5A2160869F00C01939 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				FDD56D5B216086BC00C01939 /* MacOSOpenGLContext.mm */,
+			);
+			name = MacOS;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		FDD7C8AE1F65430C000EB7C8 = {
@@ -915,9 +955,9 @@
 		FDEA01E02035812A00135040 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				FDD56D5A2160869F00C01939 /* MacOS */,
 				FD81A8A520F122D7006FDAA0 /* OpenGLRenderTarget.h */,
 				FDBA3D1320F13B4F0053B7BC /* OpenGLRenderTarget.cpp */,
-				FD8E693820AFA84600791E10 /* MacOSOpenGLContext.mm */,
 				FD8E693120AFA84600791E10 /* OpenGLContext.h */,
 				FD8E693920AFA84600791E10 /* OpenGLGraphics.cpp */,
 				FD8E693020AFA84600791E10 /* OpenGLGraphics.h */,
@@ -964,22 +1004,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDD56D3F2160858700C01939 /* MeshRendererComponent.h in Headers */,
 				FD81A8A620F122D7006FDAA0 /* OpenGLRenderTarget.h in Headers */,
 				FD5A1485213C4EAC00175B48 /* InstanceCounter.h in Headers */,
+				FDD56D442160859B00C01939 /* GameScene.h in Headers */,
 				FD2108B520B93286009FC8F1 /* Hash.h in Headers */,
 				FD85201820C31F2B00C749BC /* MacOSMouseType.h in Headers */,
 				FD0672FE20B4256700BEA737 /* AudioBufferUtility.h in Headers */,
 				FD806BB72110AB74002B9DCB /* Engine.h in Headers */,
 				FD8E693C20AFA84600791E10 /* OpenGLShader.h in Headers */,
 				FD0672F820B4256700BEA737 /* AudioBuffer.h in Headers */,
-				FD24D832212066D200CBED64 /* CameraComponent.h in Headers */,
 				FD2BF54620138F0500228FFF /* Log.h in Headers */,
 				FD8E692420AFA83B00791E10 /* OpenGLTextureType.h in Headers */,
 				FDBCFA4220E7F96100CBDF0B /* Shader.h in Headers */,
 				FDBA3D1820F19CED0053B7BC /* RenderTarget.h in Headers */,
-				FDBE44E7211E78320055A968 /* ComponentUtility.h in Headers */,
-				FDD56D242159F27D00C01939 /* HashStringView.h in Headers */,
-				FDC546EB211F3F97000A25F8 /* GameScene.h in Headers */,
 				FD41922A20DA853100536815 /* ISerializable.h in Headers */,
 				FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */,
 				FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */,
@@ -994,32 +1032,29 @@
 				FD13BB1820E8677D001A1E15 /* DelegateChain.h in Headers */,
 				FDD3967D20D025B70095F1F8 /* InputManager.h in Headers */,
 				FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */,
-				FDD56D202159F27D00C01939 /* FixedHashString.h in Headers */,
 				FD24D82D2120245800CBED64 /* Sprite.h in Headers */,
 				FD2559412145917B00FE0FDE /* Timer.h in Headers */,
 				FDEB409B2100FC5A000A3B98 /* Material.h in Headers */,
 				FDBE7E5C2131C81400B4874C /* Transform.h in Headers */,
 				FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */,
-				FDC546E9211F3F97000A25F8 /* GameSceneModule.h in Headers */,
-				FD806BBA2110AB74002B9DCB /* TimeModule.h in Headers */,
 				FDBCFA3F20E7F96100CBDF0B /* VertexBuffer.h in Headers */,
 				FDAF474E20D6D136004EC9FF /* BaseAudioImporter.h in Headers */,
 				FDD3967B20D025B70095F1F8 /* Keyboard.h in Headers */,
 				FD0672F920B4256700BEA737 /* AudioBufferType.h in Headers */,
+				FDD56D51216085BD00C01939 /* IModule.h in Headers */,
 				FD85201520C31F2B00C749BC /* MacOSMouse.h in Headers */,
 				FDAF474F20D6D136004EC9FF /* WavAudioImporter.h in Headers */,
 				FDD0702D20D0D1A600CB02A7 /* Camera.h in Headers */,
 				FDBCFA4620E7F96100CBDF0B /* IndexBuffer.h in Headers */,
 				FDBCFA3B20E7F96100CBDF0B /* Texture.h in Headers */,
-				FDBE44E6211E78320055A968 /* Component.h in Headers */,
+				FDD56D50216085BD00C01939 /* AudioModule.h in Headers */,
 				FD85201220C31F2B00C749BC /* MacOSKeyboardType.h in Headers */,
 				FDD3969320D0B3B50095F1F8 /* CameraType.h in Headers */,
 				FD8E696620AFA8D000791E10 /* FVF.h in Headers */,
 				FD5A148F214057B800175B48 /* TypeTraits.h in Headers */,
-				FD806BB82110AB74002B9DCB /* InputModule.h in Headers */,
 				FD0672F520B4256700BEA737 /* AudioPlayer.h in Headers */,
+				FDD56D59216085BD00C01939 /* InputModule.h in Headers */,
 				FD8E695020AFA84600791E10 /* OpenGLTexture.h in Headers */,
-				FDFABD28214D3DA500FB17B0 /* InputMode.h in Headers */,
 				FDB0E1A22110AD96007A4593 /* GraphicsModule.h in Headers */,
 				FD8E693D20AFA84600791E10 /* OpenGLShaderCode.h in Headers */,
 				FDBCFA4320E7F96100CBDF0B /* VertexBufferType.h in Headers */,
@@ -1027,16 +1062,18 @@
 				FD7EA6E020B094CA00A76C69 /* Image.h in Headers */,
 				FD85201320C31F2B00C749BC /* MacOSInputManager.h in Headers */,
 				FD19EBDB20DDEE6E00C5EC4A /* ThreadPool.h in Headers */,
+				FDD56D58216085BD00C01939 /* ResourceModule.h in Headers */,
+				FDD56D54216085BD00C01939 /* InputMode.h in Headers */,
 				FD17741020CAFC1C00D2F893 /* MacOSApplicationType.h in Headers */,
 				FD2108B320B93286009FC8F1 /* UUID.h in Headers */,
 				FDD56D232159F27D00C01939 /* FixedString.h in Headers */,
 				FDEB409220FF9DB4000A3B98 /* Batch.h in Headers */,
 				FD85201620C31F2B00C749BC /* MacOSKeyboard.h in Headers */,
-				FDBE44E4211E78320055A968 /* MeshRendererComponent.h in Headers */,
 				FD41923020DA854C00536815 /* CoreObject.h in Headers */,
 				FDD56D252159F27D00C01939 /* Encoding.h in Headers */,
 				FD7EA6E320B094CA00A76C69 /* ImageType.h in Headers */,
 				FDD56D182159648A00C01939 /* IResource.h in Headers */,
+				FDD56D3D2160858700C01939 /* ComponentUtility.h in Headers */,
 				FDBCFA4120E7F96100CBDF0B /* GraphicsType.h in Headers */,
 				FDD56D212159F27D00C01939 /* FixedStringUtility.h in Headers */,
 				FD8E696420AFA8CD00791E10 /* MeshUtility.h in Headers */,
@@ -1046,22 +1083,25 @@
 				FD85202A20C3FAFB00C749BC /* MacOSGamepadType.h in Headers */,
 				FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */,
 				FD612BA820E3FFC2006FE85E /* MacOSWindow.h in Headers */,
+				FDD56D56216085BD00C01939 /* TimeModule.h in Headers */,
 				FD41922D20DA854500536815 /* RuntimeObject.h in Headers */,
 				FDD3968020D025B70095F1F8 /* Gamepad.h in Headers */,
 				FD5A1487213C4EAC00175B48 /* AutoCast.h in Headers */,
 				FD8E694C20AFA84600791E10 /* OpenGLIndexBuffer.h in Headers */,
 				FD8E696320AFA8CD00791E10 /* Mesh.h in Headers */,
-				FD806BBB2110AB74002B9DCB /* IModule.h in Headers */,
 				FD41922820DA853100536815 /* ICloneable.h in Headers */,
 				FD052C7A20E7F1D200EF3C64 /* OpenGLGraphicsType.h in Headers */,
+				FDD56D382160858700C01939 /* Component.h in Headers */,
 				FD24D82E2120245800CBED64 /* SpriteBatch.h in Headers */,
 				FDD56D2A2159FA2F00C01939 /* StringHash.h in Headers */,
 				FD7EA6E420B094CA00A76C69 /* ImageUtility.h in Headers */,
 				FD64DC9A2138568E003B7D0A /* Rhombus.h in Headers */,
 				FD5A1486213C4EAC00175B48 /* EventDispatcher.h in Headers */,
 				FDD3968720D025B70095F1F8 /* KeyboardType.h in Headers */,
+				FDD56D3A2160858700C01939 /* SpriteRendererComponent.h in Headers */,
 				FDAF475120D6D136004EC9FF /* OggVorbisAudioImporter.h in Headers */,
-				FD24D8262120244000CBED64 /* SpriteRendererComponent.h in Headers */,
+				FDD56D3E2160858700C01939 /* CameraComponent.h in Headers */,
+				FDD56D2F2160856F00C01939 /* GameSceneModule.h in Headers */,
 				FDF51BF6210A42A000A81407 /* RenderStage.h in Headers */,
 				FD5A1483213C4EAC00175B48 /* InstantiateCounter.h in Headers */,
 				FD8E694620AFA84600791E10 /* OpenGLGraphics.h in Headers */,
@@ -1128,20 +1168,22 @@
 			files = (
 				FD5337F020E4018500515DA4 /* AudioBuffer.cpp in Sources */,
 				FD5337F120E4018500515DA4 /* AudioPlayer.cpp in Sources */,
+				FDD56D3B2160858700C01939 /* MeshRendererComponent.cpp in Sources */,
 				FD5337F220E4018500515DA4 /* Image.cpp in Sources */,
 				FD5337F320E4018500515DA4 /* Path.cpp in Sources */,
 				FD5337F420E4018500515DA4 /* Hash.cpp in Sources */,
 				FD5337F520E4018500515DA4 /* MacOSGamepad.cpp in Sources */,
 				FD5A148B213C4ED100175B48 /* Time.cpp in Sources */,
 				FDBE7E5B2131C81400B4874C /* Transform.cpp in Sources */,
+				FDD56D52216085BD00C01939 /* ResourceModule.cpp in Sources */,
 				FD5337F620E4018500515DA4 /* MacOSInputManager.cpp in Sources */,
 				FDBCFA3E20E7F96100CBDF0B /* Texture.cpp in Sources */,
-				FDBE44E9211E78320055A968 /* MeshRendererComponent.cpp in Sources */,
-				FD806BB52110AB74002B9DCB /* TimeModule.cpp in Sources */,
 				FDEB409A2100FC5A000A3B98 /* Material.cpp in Sources */,
+				FDD56D3C2160858700C01939 /* Component.cpp in Sources */,
 				FDBCFA4720E7F96100CBDF0B /* VertexBuffer.cpp in Sources */,
 				FD5337F720E4018500515DA4 /* MacOSKeyboard.cpp in Sources */,
 				FDBCFA4520E7F96100CBDF0B /* IndexBuffer.cpp in Sources */,
+				FDD56D55216085BD00C01939 /* TimeModule.cpp in Sources */,
 				FDBCFA3C20E7F96100CBDF0B /* Shader.cpp in Sources */,
 				FD24D82C2120245800CBED64 /* Sprite.cpp in Sources */,
 				FD5337F820E4018500515DA4 /* MacOSMouse.cpp in Sources */,
@@ -1151,48 +1193,48 @@
 				FDBA3D1420F13B4F0053B7BC /* OpenGLRenderTarget.cpp in Sources */,
 				FD5337F920E4018500515DA4 /* Gamepad.cpp in Sources */,
 				FD5337FA20E4018500515DA4 /* InputManager.cpp in Sources */,
-				FD806BB62110AB74002B9DCB /* InputModule.cpp in Sources */,
 				FD5337FB20E4018500515DA4 /* Keyboard.cpp in Sources */,
 				FD5337FC20E4018500515DA4 /* Mouse.cpp in Sources */,
 				FD5337FE20E4018500515DA4 /* ICloneable.cpp in Sources */,
 				FDFABD26214D33BA00FB17B0 /* Timer.cpp in Sources */,
+				FDD56D57216085BD00C01939 /* AudioModule.cpp in Sources */,
 				FD53380320E4018500515DA4 /* Application.cpp in Sources */,
 				FD53380420E4018500515DA4 /* Window.cpp in Sources */,
 				FD53380520E4018500515DA4 /* WELL1024a.cpp in Sources */,
 				FD53380720E4018500515DA4 /* ThreadPool.cpp in Sources */,
 				FDB0E1A12110AD96007A4593 /* GraphicsModule.cpp in Sources */,
 				FD53381F20E4027000515DA4 /* MacOSApplication.mm in Sources */,
-				FDC546EC211F3F97000A25F8 /* GameSceneModule.cpp in Sources */,
 				FD53380B20E4018500515DA4 /* OpenGLGraphics.cpp in Sources */,
 				FDBA3D1720F19CED0053B7BC /* RenderTarget.cpp in Sources */,
 				FD806BB92110AB74002B9DCB /* Engine.cpp in Sources */,
 				FD53380C20E4018500515DA4 /* OpenGLIndexBuffer.cpp in Sources */,
+				FDD56D5C216086BC00C01939 /* MacOSOpenGLContext.mm in Sources */,
 				FD53380D20E4018500515DA4 /* OpenGLShader.cpp in Sources */,
 				FD53380E20E4018500515DA4 /* OpenGLTexture.cpp in Sources */,
 				FDD56D142159635A00C01939 /* RTTI.cpp in Sources */,
 				FD53380F20E4018500515DA4 /* OpenGLVertexBuffer.cpp in Sources */,
 				FD53381020E4018500515DA4 /* Camera.cpp in Sources */,
 				FD53381420E4018500515DA4 /* Mesh.cpp in Sources */,
+				FDD56D392160858700C01939 /* SpriteRendererComponent.cpp in Sources */,
 				FD5A1484213C4EAC00175B48 /* EventDispatcher.cpp in Sources */,
 				FD53381520E4018500515DA4 /* MeshUtility.cpp in Sources */,
-				FD24D8272120244000CBED64 /* SpriteRendererComponent.cpp in Sources */,
+				FDD56D2E2160856F00C01939 /* GameSceneModule.cpp in Sources */,
 				FD53381B20E4018500515DA4 /* GameObject.cpp in Sources */,
 				FD5337E320E4017A00515DA4 /* MacOSLog.mm in Sources */,
 				FD5337E420E4017A00515DA4 /* MacOSPath.mm in Sources */,
 				FD5337E520E4017A00515DA4 /* MacOSAppDelegate.mm in Sources */,
 				FD5337E720E4017A00515DA4 /* MacOSLocale.mm in Sources */,
 				FD5337E820E4017A00515DA4 /* MacOSMain.mm in Sources */,
-				FDBE44E2211E78320055A968 /* Component.cpp in Sources */,
 				FD5337E920E4017A00515DA4 /* MacOSScreen.mm in Sources */,
-				FDC546EA211F3F97000A25F8 /* GameScene.cpp in Sources */,
 				FD5337EA20E4017A00515DA4 /* MacOSWindow.mm in Sources */,
 				FDF51BF7210A42A000A81407 /* RenderStage.cpp in Sources */,
 				FD5337EB20E4017A00515DA4 /* MacOSWindowDelegate.mm in Sources */,
+				FDD56D53216085BD00C01939 /* InputModule.cpp in Sources */,
 				FD5337EC20E4017A00515DA4 /* MacOSWindowUtility.mm in Sources */,
 				FD5337ED20E4017A00515DA4 /* MacOSDateTime.mm in Sources */,
+				FDD56D432160859B00C01939 /* GameScene.cpp in Sources */,
 				FD5337EE20E4017A00515DA4 /* MacOSTime.mm in Sources */,
 				FDBE44D7211C9F4D0055A968 /* DateTime.cpp in Sources */,
-				FD5337EF20E4017A00515DA4 /* MacOSOpenGLContext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
