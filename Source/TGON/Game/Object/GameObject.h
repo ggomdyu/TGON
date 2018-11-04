@@ -25,7 +25,10 @@ public:
 /**@section Private constructor */
 public:
     explicit GameObject(const StringHash& name);
-    
+
+    template <typename... ComponentTypes>
+    GameObject(const StringHash& name, ComponentTypes&&... components);
+
 /**@section Public destructor */
 public:
     virtual ~GameObject() override = default;
@@ -72,36 +75,6 @@ public:
     /**@brief   Gets the name of this object. */
     const StringHash& GetName() const noexcept;
 
-    /**@brief   Sets the position of this object. */
-    void SetPosition(const Vector3& position);
-    
-    /**@brief   Adjusts the position of this object. */
-    void Move(const Vector3& position);
-    
-    /**@brief   Sets the rotation of this object. */
-    void SetRotation(const Vector3& rotation);
-    
-    /**@brief   Adjusts the rotation of this object. */
-    void Rotate(const Vector3& rotation);
-    
-    /**@brief   Sets the scale of this object. */
-    void SetScale(const Vector3& scale);
-    
-    /**@brief   Adjusts the scale of this object. */
-    void Scale(const Vector3& scale);
-    
-    /**@brief   Gets the position of this object. */
-    const Vector3& GetPosition() const noexcept;
-    
-    /**@brief   Gets the rotation of this object. */
-    const Vector3& GetRotation() const noexcept;
-    
-    /**@brief   Gets the scale of this object. */
-    const Vector3& GetScale() const noexcept;
-    
-    /**@brief   Gets the world matrix of this object. */
-    const Matrix4x4& GetWorldMatrix() const noexcept;
-
     /**
      * @brief   Sets the active state of this object.
      * @remarks If this object has been deactivated, all updates performed on this are stopped.
@@ -134,8 +107,16 @@ private:
 
     std::vector<std::shared_ptr<Component>> m_components;
 
-    Transform m_transform;
+    std::unique_ptr<Transform> m_transform;
 };
+
+template <typename ...ComponentTypes>
+inline GameObject::GameObject(const StringHash& name, ComponentTypes&&... components) :
+    m_name(name),
+    m_isActive(true),
+    m_components(std::forward<ComponentTypes>(components)...)
+{
+}
 
 template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)

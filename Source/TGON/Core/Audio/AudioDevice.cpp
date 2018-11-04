@@ -59,6 +59,8 @@ AudioDevice& AudioDevice::operator=(AudioDevice&& rhs)
 
     rhs.m_context = nullptr;
     rhs.m_device = nullptr;
+
+    return *this;
 }
 
 void AudioDevice::MakeCurrent()

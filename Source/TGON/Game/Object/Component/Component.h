@@ -30,7 +30,7 @@ public:
 
 /**@section Public method */
 public:
-    /**@brief   Updates the component. */
+    /**@brief   Updates this component. */
     virtual void Update() = 0;
 
     /**@brief   Sets the owner of this component. */

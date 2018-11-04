@@ -5,14 +5,13 @@
  */
 
 #pragma once
-
 #include "Core/Math/Vector3.h"
 #include "Core/Math/Matrix4x4.h"
 
 namespace tgon
 {
 
-class Transform
+class TGON_API Transform
 {
 /**@section Public constructor */
 public:
@@ -41,7 +40,7 @@ public:
     /**@brief   Gets the world-view-projection matrix. */
     const Matrix4x4& GetLocalMatrix() const noexcept;
     
-    void Update();
+    virtual void Update();
     
 /**@section Protected variable */
 protected:

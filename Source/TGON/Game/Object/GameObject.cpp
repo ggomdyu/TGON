@@ -20,7 +20,7 @@ void GameObject::Update()
         return;
     }
 
-    m_transform.Update();
+    //m_transform.Update();
 
     for (auto& component : m_components)
     {
@@ -36,56 +36,6 @@ void GameObject::SetName(const StringHash& name)
 const StringHash& GameObject::GetName() const noexcept
 {
     return m_name;
-}
-
-void GameObject::SetPosition(const Vector3& position)
-{
-    m_transform.SetPosition(position);
-}
-
-void GameObject::Move(const Vector3& position)
-{
-    m_transform.SetPosition(m_transform.GetPosition() + position);
-}
-
-void GameObject::SetRotation(const Vector3& rotation)
-{
-    m_transform.SetRotation(rotation);
-}
-
-void GameObject::Rotate(const Vector3& rotation)
-{
-    m_transform.SetRotation(m_transform.GetRotation() + rotation);
-}
-
-void GameObject::SetScale(const Vector3& scale)
-{
-    m_transform.SetScale(scale);
-}
-
-void GameObject::Scale(const Vector3& scale)
-{
-    m_transform.SetScale(m_transform.GetScale() + scale);
-}
-
-const Vector3& GameObject::GetPosition() const noexcept
-{
-    return m_transform.GetPosition();
-}
-    
-const Vector3& GameObject::GetRotation() const noexcept
-{
-    return m_transform.GetRotation();
-}
-
-const Vector3& GameObject::GetScale() const noexcept
-{
-    return m_transform.GetScale();
-}
-
-const Matrix4x4& GameObject::GetWorldMatrix() const noexcept
-{
-    return m_transform.GetWorldMatrix();
 }
 
 void GameObject::SetActive(bool isActive)

@@ -118,13 +118,13 @@ inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgT
 template <typename _ReturnType, typename... _ArgTypes>
 inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
 {
-    return m_invocationList.size() <= 0;
+    return m_invocationList.empty();
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
-    return m_invocationList.size() > 0;
+    return !this->operator==(rhs);
 }
     
 template <typename _ReturnType, typename... _ArgTypes>
@@ -138,7 +138,7 @@ template <typename _ReturnType, typename... _ArgTypes>
 template <typename... _ArgTypes2>
 inline _ReturnType DelegateChain<_ReturnType(_ArgTypes...)>::Invoke(_ArgTypes2&&... args)
 {
-    if (m_invocationList.size() <= 0)
+    if (m_invocationList.empty() == true)
     {
         return _ReturnType();
     }

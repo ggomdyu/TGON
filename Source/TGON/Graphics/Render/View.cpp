@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Core/Debug/Log.h"
+
 #include "View.h"
 
 namespace tgon
@@ -15,24 +17,19 @@ namespace tgon
 //    m_batchGroup.AddBatch(batch);
 //}
 
-//void View::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
-//{
-//    m_spriteBatchGroup.AddSpriteBatch(material, drawPrimitive);
-//}
-//
-//void View::AddSpriteBatch(const SpriteBatch& spriteBatch)
-//{
-//    m_spriteBatchGroup.AddSpriteBatch(spriteBatch);
-//}
+void View::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
+{
+    //m_spriteBatchGroup.AddSpriteBatch(material, drawPrimitive);
+}
+
+void View::AddSpriteBatch(const SpriteBatch& spriteBatch)
+{
+    //m_spriteBatchGroup.AddSpriteBatch(spriteBatch);
+}
 
 View::View(const Window& displayWindow, const VideoMode& videoMode) :
     m_graphics(displayWindow, videoMode)
 {
-}
-
-void View::AddSprite(const Sprite& sprite)
-{
-    m_spriteBatchGroup.AddSpriteBatch(SpriteBatch(sprite.GetTexture(), SpriteBatch::DrawPrimitive()));
 }
 
 void View::AddCamera(const std::shared_ptr<Camera>& camera)
@@ -70,10 +67,6 @@ bool View::RemoveCamera(const std::shared_ptr<Camera>& camera)
 
 void View::Draw()
 {
-}
-
-void View::Draw()
-{
 #ifndef NDEBUG
     if (m_cameraList.size() <= 0)
     {
@@ -83,9 +76,9 @@ void View::Draw()
     
     for (const auto& camera : m_cameraList)
     {
-        m_batchGroup.FlushBatch(m_graphics, *camera);
+        //m_batchGroup.FlushBatch(m_graphics, *camera);
 
-        m_spriteBatchGroup.FlushSpriteBatch(m_graphics, *camera);
+        //m_spriteBatchGroup.FlushSpriteBatch(m_graphics, *camera);
     }
 }
     

@@ -5,17 +5,13 @@
  */
 
 #pragma once
-#include "Graphics/Render/Material.h"
-#include "Graphics/Render/Mesh.h"
-#include "Graphics/Engine/GraphicsModule.h"
-
-#include "Component.h"
+#include "RendererComponent.h"
 
 namespace tgon
 {
 
 class TGON_API MeshRendererComponent :
-	public Component
+	public RendererComponent
 {
 public:
     TGON_DECLARE_RTTI(MeshRendererComponent);
@@ -38,17 +34,9 @@ public:
     /**@brief   Gets the mesh. */
     const std::shared_ptr<Mesh>& GetMesh() const noexcept;
     
-    /**@brief   Sets the material. */
-    void SetMaterial(const std::shared_ptr<Material>& material);
-    
-    /**@brief   Gets the material. */
-    const std::shared_ptr<Material>& GetMaterial() const noexcept;
-    
-/**@section Private variable */
-private:
+/**@section Protected variable */
+protected:
     std::shared_ptr<Mesh> m_mesh;
-    std::shared_ptr<Material> m_material;
-    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

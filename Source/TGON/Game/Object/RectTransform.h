@@ -6,23 +6,28 @@
 
 #pragma once
 #include "Core/Math/Vector2.h"
+#include "Core/Math/Extent.h"
 
 #include "Transform.h"
 
 namespace tgon
 {
 
-class RectTransform final :
+class TGON_API RectTransform :
     private Transform
 {
+/**@section Public constructor */
+public:
+    RectTransform();
+    
+    RectTransform(const Vector2& localAnchor, const Vector2& localPivot);
+
 /**@section Public method */
 public:
     using Transform::GetLocalPosition;
     using Transform::GetLocalRotation;
     using Transform::GetLocalScale;
     using Transform::GetLocalMatrix;
-
-    void Update();
 
     /**@brief   Sets a local anchor. */
     void SetLocalAnchor(const Vector2& localAnchor) noexcept;
@@ -36,10 +41,25 @@ public:
     /**@brief   Gets the local pivot. */
     const Vector2& GetLocalPivot() const noexcept;
 
+    void SetSize(const FExtent2D& size) noexcept;
+
+    void SetWidth(float width) noexcept;
+
+    void SetHeight(float height) noexcept;
+
+    const FExtent2D& GetSize() const noexcept;
+
+    float GetWidth() const noexcept;
+
+    float GetHeight() const noexcept;
+
+    virtual void Update() override;
+
 /**@section Protected variable */
 protected:
     Vector2 m_localAnchor;
     Vector2 m_localPivot;
+    FExtent2D m_size;
 };
 
 } /* namespace tgon */

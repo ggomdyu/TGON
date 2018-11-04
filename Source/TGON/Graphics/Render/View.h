@@ -19,7 +19,7 @@ namespace tgon
 
 class Window;
 struct VideoMode;
-    
+
 class TGON_API View final :
     public CoreObject
 {
@@ -32,12 +32,11 @@ public:
 
 /**@section Public method */
 public:
-
     /**@brief   Adds a mesh into the BatchGroup. */
-    void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
+    //void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
     
     /**@brief   Adds a batch into the BatchGroup. */
-    void AddBatch(const Batch& batch);
+    //void AddBatch(const Batch& batch);
 
     /**@brief   Adds a sprite batch into the SpriteBatchGroup. */
     void AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
@@ -64,6 +63,8 @@ public:
 /**@section Private variable */
 private:
     Graphics m_graphics;
+
+    //BatchGroup m_batchGroup;
 
     SpriteBatchGroup m_spriteBatchGroup;
     

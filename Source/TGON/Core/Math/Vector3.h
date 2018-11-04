@@ -9,13 +9,14 @@
 #include <cassert>
 #include <cstdio>
 
+#include "Core/Platform/Config.h"
 #include "Core/Utility/ExpressionTemplate.h"
 
 namespace tgon
 {
 
 template <typename _ValueType>
-struct BasicVector3 final
+struct TGON_API BasicVector3 final
 {
 /**@section Public constructor */
 public:

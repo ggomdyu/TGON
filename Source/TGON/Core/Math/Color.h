@@ -8,10 +8,12 @@
 #include <cstdint>
 #include <cstdio>
 
+#include "Core/Platform/Config.h"
+
 namespace tgon
 {
 
-struct Color4b
+struct TGON_API Color4b
 {
 /**@section Public constructor */
 public:
@@ -217,7 +219,7 @@ inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
 #endif
 }
 
-struct Color3f
+struct TGON_API Color3f
 {
 /**@section Public constructor */
 public:

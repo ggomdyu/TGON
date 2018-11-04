@@ -44,7 +44,12 @@ AudioBuffer::~AudioBuffer()
 
 bool AudioBuffer::Initialize(const std::string& filePath)
 {
+#ifdef _MSC_VER
+    FILE* file = nullptr;
+    fopen_s(&file, filePath.c_str(), "rb");
+#else
     FILE* file = fopen(filePath.c_str(), "rb");
+#endif
     if (file == nullptr)
     {
         return false;

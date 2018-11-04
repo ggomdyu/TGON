@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Core/Platform/Config.h"
-#include "Core/Object/IResource.h"
 
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
 #   include "OpenGL/OpenGLTexture.h"
@@ -16,7 +15,6 @@ namespace tgon
 {
     
 class TGON_API Texture final :
-    public IResource,
     private PlatformTexture
 {
 /**@section Public constructor */

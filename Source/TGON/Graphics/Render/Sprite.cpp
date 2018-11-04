@@ -9,7 +9,6 @@
 #include "Graphics/LowLevel/IndexBuffer.h"
 
 #include "Sprite.h"
-#include "Material.h"
 
 namespace tgon
 {
@@ -28,11 +27,6 @@ Sprite::Sprite(Sprite&& rhs) :
     //m_anchorPoint = {};
 }
 
-void Sprite::SetMaterial(const std::shared_ptr<Material>& material) noexcept
-{
-    m_material = material;
-}
-
 //void Sprite::SetOriginPoint(const Vector2& originPoint) noexcept
 //{
 //    m_originPoint = originPoint;
@@ -46,16 +40,6 @@ void Sprite::SetMaterial(const std::shared_ptr<Material>& material) noexcept
 void Sprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
-}
-
-std::shared_ptr<Material>& Sprite::GetMaterial() noexcept
-{
-    return m_material;
-}
-
-std::shared_ptr<const Material> Sprite::GetMaterial() const noexcept
-{
-    return std::shared_ptr<const Material>();
 }
 
 //Vector2& Sprite::GetOriginPoint() noexcept
@@ -86,11 +70,6 @@ std::shared_ptr<Texture>& Sprite::GetTexture() noexcept
 std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
 {
     return m_texture;
-}
-
-const Extent2D Sprite::GetTextureSize() const noexcept
-{
-    return {m_texture->GetWidth(), m_texture->GetHeight()};
 }
 
 //

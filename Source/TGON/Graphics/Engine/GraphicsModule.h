@@ -32,13 +32,9 @@ public:
     /**@brief   Updates this module. */
     virtual void Update() override;
 
-    Graphics& GetGraphics() noexcept;
+    //View& GetView() noexcept;
 
-    const Graphics& GetGraphics() const noexcept;
-
-    View& GetView() noexcept;
-
-    const View& GetView() const noexcept;
+    //const View& GetView() const noexcept;
     
 /**@section Private method */
 private:
@@ -47,9 +43,11 @@ private:
 
 /**@section Private variable */
 public:
+    Graphics& GetGraphics() noexcept;
+    const Graphics& GetGraphics() const noexcept;
     Graphics m_graphics;
     
-    View m_view;
+    //View m_view;
 };
 
 } /* namespace tgon */

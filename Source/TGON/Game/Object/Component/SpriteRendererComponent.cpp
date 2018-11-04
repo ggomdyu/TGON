@@ -5,73 +5,50 @@
 namespace tgon
 {
 
-SpriteRendererComponent::SpriteRendererComponent(const std::string& filePath) :
-    m_sprite(filePath),
-    m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite) :
+    m_sprite(sprite)
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(std::string&& filePath) :
-    m_sprite(std::move(filePath)),
-    m_material(std::make_shared<TextureMaterial>(m_sprite.GetTexture())),
-    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Material>& material) :
+    RendererComponent(material)
+{
+}
+
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material) :
+    RendererComponent(material),
+    m_sprite(sprite)
 {
 }
 
 void SpriteRendererComponent::Update()
 {
-    if (m_material->GetOpacity() <= 0.0f)
-    {
-        return;
-    }
-
-    m_graphicsModule->GetView().AddSpriteBatch(m_material, { GetOwner()->GetWorldMatrix() });
+    //m_graphicsModule->GetView().AddSpriteBatch(m_material, { GetOwner()->GetWorldMatrix() });
 }
 
-void SpriteRendererComponent::SetSprite(const Sprite& sprite)
+void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
 {
     m_sprite = sprite;
 }
 
-Sprite& SpriteRendererComponent::GetSprite() noexcept
+std::shared_ptr<Sprite>& SpriteRendererComponent::GetSprite() noexcept
 {
     return m_sprite;
 }
 
-const Sprite& SpriteRendererComponent::GetSprite() const noexcept
+const std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
 }
 
-void SpriteRendererComponent::SetBlendColor(const Color3f& blendColor)
+void SpriteRendererComponent::SetBlendColor(const Color4f& blendColor)
 {
-    m_material->SetBlendColor(blendColor);
+    m_blendColor = blendColor;
 }
 
-Color3f& SpriteRendererComponent::GetBlendColor() noexcept
+const Color4f& SpriteRendererComponent::GetBlendColor() const noexcept
 {
-    return m_material->GetBlendColor();
-}
-
-const Color3f& SpriteRendererComponent::GetBlendColor() const noexcept
-{
-    return m_material->GetBlendColor();
-}
-
-void SpriteRendererComponent::SetOpacity(float opacity) noexcept
-{
-    m_material->SetOpacity(opacity);
-}
-
-float& SpriteRendererComponent::GetOpacity() noexcept
-{
-    return m_material->GetOpacity();
-}
-
-const float SpriteRendererComponent::GetOpacity() const noexcept
-{
-    return m_material->GetOpacity();
+    return m_blendColor;
 }
 
 } /* namespace tgon */

@@ -10,8 +10,6 @@
 
 #include "Core/Math/Rect.h"
 
-#include "RectTransform.h"
-
 namespace tgon
 {
 
@@ -19,48 +17,46 @@ class Material;
 class Mesh;
 class Graphics;
 class Camera;
+class Sprite;
 
 class TGON_API SpriteBatch final
 {
-/**@section Public struct */
+/**@section Public constructor */
 public:
     struct DrawPrimitive
     {
-        I32Rect scissorRect;
-        const RectTransform& matWorld;
+        std::shared_ptr<Sprite> sprite;
+        std::shared_ptr<Material> material;
     };
 
 /**@section Public constructor */
 public:
-    /**@brief   Initializes the batch with a material. */
-    explicit SpriteBatch(const std::shared_ptr<Material>& material);
-    
-    /**@brief   Initializes the batch with a material and primitives. */
-    explicit SpriteBatch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
+    /**@brief   Initializes the batch. */
+    SpriteBatch() = default;
 
+    /**@brief   Initializes the batch with a sprite. */
+    explicit SpriteBatch(const DrawPrimitive& drawPrimitive);
+    
 /**@section Public method */
 public:
-    /**@brief   Adds a draw primitive into the batch. */
-    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4& matWVP);
-    
-    /**@brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
-
-    /**@brief   Checks whether the specified material can batched. */
-    bool CanBatch(const std::shared_ptr<Material>& material) const;
     
-    /**@brief   Draws all of the batched primitives. */
+    bool CanBatch(const Sprite& sprite, const Material& material) const;
+    
     void Draw(Graphics& graphics, const Camera& camera);
+    
+    std::vector<Sprite>& GetSprites() noexcept;
 
-    /**@brief   Gets all of the batched primitives. */
-    std::vector<DrawPrimitive>& GetDrawPrimitives() noexcept;
+    const std::vector<Sprite>& GetSprites() const noexcept;
 
-    const std::vector<DrawPrimitive>& GetDrawPrimitives() const noexcept;
+    /**@brief   Adds a draw primitive into the batch. */
+    /**@brief   Checks whether the specified sprite can batched. */
+    /**@brief   Draws all of the batched sprites. */
+    /**@brief   Gets all of the batched sprites. */
+    /**@brief   Gets all of the batched sprites. */
 
 /**@section Private variable */
 private:
-    std::shared_ptr<Material> m_material;
-    
     std::vector<DrawPrimitive> m_drawPrimitives;
 };
     
@@ -68,18 +64,15 @@ class TGON_API SpriteBatchGroup final
 {
 /**@section Public constructor */
 public:
-    SpriteBatchGroup();
+    SpriteBatchGroup(){};
 
 /**@section Public method */
 public:
-    /**@brief   Adds a mesh into the batch list. */
-    void AddSpriteBatch(const std::shared_ptr<Material>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
+    /**@brief   Adds a sprite into the batch. */
+    void AddSprite(const Sprite& sprite){};
     
-    /**@brief   Adds a batch into the batch list. */
-    void AddSpriteBatch(const SpriteBatch& batch);
-    
-    /**@brief   Flushes all the batch in list. */
-    void FlushSpriteBatch(Graphics& graphics, const Camera& camera);
+    /**@brief   Flushes all of the sprites in batch list. */
+    void FlushBatch(Graphics& graphics, const Camera& camera){};
 
 /**@section Private variable */
 private:

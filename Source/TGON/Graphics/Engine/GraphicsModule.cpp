@@ -22,7 +22,7 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics.EnableBlend();
     m_graphics.SetBlendMode(BlendMode::Alpha);
 
-    window.OnWindowResize += [&](int32_t width, int32_t height)
+    /*window.OnWindowResize += [&](int32_t width, int32_t height)
     {
         m_graphics.SetViewport(0, 0, width, height);
 
@@ -33,7 +33,7 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
             float halfHeight = static_cast<float>(height) * 0.5f;
             camera->SetOrthoPlane({ -halfWidth, halfWidth, -halfHeight, halfHeight });
         }
-    };
+    };*/
 }
     
 void GraphicsModule::Update()
@@ -45,7 +45,7 @@ void GraphicsModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        m_View.Draw(m_graphics);
+        //m_View.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
@@ -60,14 +60,14 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-View& GraphicsModule::GetView() noexcept
-{
-    return m_view;
-}
-
-const View& GraphicsModule::GetView() const noexcept
-{
-    return m_view;
-}
+//View& GraphicsModule::GetView() noexcept
+//{
+//    return m_view;
+//}
+//
+//const View& GraphicsModule::GetView() const noexcept
+//{
+//    return m_view;
+//}
     
 } /* namespace tgon */

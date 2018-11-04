@@ -123,8 +123,8 @@ bool TextureMaterial::CanBatch(const Material& rhs) const
     const TextureMaterial* rhs2 = DynamicCast<const TextureMaterial*>(&rhs);
     if (rhs2 != nullptr)
     {
-        return m_blendColor == rhs2->m_blendColor &&
-               m_texture->GetID() == rhs2->m_texture->GetID();
+        return m_blendColor == rhs2->m_blendColor /*&&
+               m_texture->GetID() == rhs2->m_texture->GetID()*/;
     }
     else
     {
