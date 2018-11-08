@@ -23,6 +23,7 @@ public:
     
 /**@section Public method */
 public:
+    using PlatformGraphics::SetScissorRect;
     using PlatformGraphics::SetClearColor;
     using PlatformGraphics::SetFillMode;
     using PlatformGraphics::SetCullMode;
@@ -30,8 +31,10 @@ public:
     using PlatformGraphics::SetBlendMode;
     using PlatformGraphics::EnableBlend;
     using PlatformGraphics::EnableDepthTest;
+    using PlatformGraphics::EnableScissorTest;
     using PlatformGraphics::DisableBlend;
     using PlatformGraphics::DisableDepthTest;
+    using PlatformGraphics::DisableScissorTest;
     using PlatformGraphics::ClearColorBuffer;
     using PlatformGraphics::ClearColorDepthBuffer;
     using PlatformGraphics::SwapBuffer;

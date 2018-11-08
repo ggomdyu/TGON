@@ -11,10 +11,11 @@
 #include "Core/Math/Rect.h"
 #include "Core/Math/Vector2.h"
 #include "Core/Math/Extent.h"
-#include "Graphics/LowLevel/Texture.h"
 
 namespace tgon
 {
+
+class Texture;
 
 class TGON_API Sprite final
 {

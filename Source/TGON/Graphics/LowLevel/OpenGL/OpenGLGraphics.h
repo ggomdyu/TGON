@@ -8,8 +8,9 @@
 #include <GL/glew.h>
 #include <memory>
 
-#include "../GraphicsType.h"
+#include "Core/Math/Rect.h"
 
+#include "../GraphicsType.h"
 #include "OpenGLContext.h"
 
 namespace tgon
@@ -31,6 +32,7 @@ public:
 
 /**@section Public method */
 public:
+    void SetScissorRect(const FRect& scissorRect);
     void SetClearColor(const Color4f& color);
     void SetFillMode(FillMode fillMode);
     void SetCullMode(CullMode cullMode);
@@ -39,9 +41,11 @@ public:
     void EnableCullFace();
     void EnableBlend();
     void EnableDepthTest();
+    void EnableScissorTest();
     void DisableCullFace();
     void DisableBlend();
     void DisableDepthTest();
+    void DisableScissorTest();
     void ClearColorBuffer();
     void ClearColorDepthBuffer();
     void SwapBuffer();

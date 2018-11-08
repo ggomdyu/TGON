@@ -38,6 +38,12 @@ void OpenGLGraphics::SetDefaultGLRenderState()
     this->EnableCullFace();
 }
 
+void OpenGLGraphics::SetScissorRect(const FRect& scissorRect)
+{
+    //TGON_GL_ERROR_CHECK();
+    //glScissor(scissorRect.left, scissorRect.bottom, scissorRect.)
+}
+
 void OpenGLGraphics::SetClearColor(const Color4f& color)
 {
     TGON_GL_ERROR_CHECK(glClearColor(color.r, color.g, color.b, color.a));
@@ -98,6 +104,11 @@ void OpenGLGraphics::EnableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
 }
+
+void OpenGLGraphics::EnableScissorTest()
+{
+    TGON_GL_ERROR_CHECK(glEnable(GL_SCISSOR_TEST));
+}
     
 void OpenGLGraphics::DisableCullFace()
 {
@@ -112,6 +123,11 @@ void OpenGLGraphics::DisableBlend()
 void OpenGLGraphics::DisableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
+}
+
+void OpenGLGraphics::DisableScissorTest()
+{
+    TGON_GL_ERROR_CHECK(glDisable(GL_SCISSOR_TEST));
 }
 
 void OpenGLGraphics::ClearColorBuffer()

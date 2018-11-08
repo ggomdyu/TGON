@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "Core/Math/Rect.h"
+#include "Core/Math/Color.h"
 
 namespace tgon
 {
@@ -25,6 +26,9 @@ class TGON_API SpriteBatch final
 public:
     struct DrawPrimitive
     {
+        bool isEnableScissorRect;
+        FRect scissorRect;
+        Color4f blendColor;
         std::shared_ptr<Sprite> sprite;
         std::shared_ptr<Material> material;
     };
@@ -39,20 +43,19 @@ public:
     
 /**@section Public method */
 public:
+    /**@brief   Adds a draw primitive into the batch. */
     void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
     
-    bool CanBatch(const Sprite& sprite, const Material& material) const;
+    /**@brief   Checks whether the specified draw primitive can be batched. */
+    bool CanBatch(const DrawPrimitive& drawPrimitive) const;
     
+    /**@brief   Draws all of the batched sprites. */
     void Draw(Graphics& graphics, const Camera& camera);
     
-    std::vector<Sprite>& GetSprites() noexcept;
+    std::vector<DrawPrimitive>& GetDrawPrimitives() noexcept;
 
-    const std::vector<Sprite>& GetSprites() const noexcept;
+    const std::vector<DrawPrimitive>& GetDrawPrimitives() const noexcept;
 
-    /**@brief   Adds a draw primitive into the batch. */
-    /**@brief   Checks whether the specified sprite can batched. */
-    /**@brief   Draws all of the batched sprites. */
-    /**@brief   Gets all of the batched sprites. */
     /**@brief   Gets all of the batched sprites. */
 
 /**@section Private variable */
