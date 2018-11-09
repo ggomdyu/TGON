@@ -50,7 +50,6 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
     const auto& batchedDrawPrimitive = m_drawPrimitives.front();
     const auto& batchedMaterial = batchedDrawPrimitive.material;
 
-    batchedMaterial->SetWVP(camera.GetViewProjectionMatrix());
     batchedMaterial->Use();
 
     if (batchedDrawPrimitive.isEnableScissorRect)
@@ -65,6 +64,7 @@ void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
 
     for (auto& drawPrimitive : m_drawPrimitives)
     {
+        batchedMaterial->SetWVP(drawPrimitive.matLocal * camera.GetViewProjectionMatrix());
         graphics.DrawPrimitives(PrimitiveType::TriangleFan, 4);
     }
 }
