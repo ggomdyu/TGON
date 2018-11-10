@@ -23,7 +23,7 @@ public:
 public:
     CameraComponent();
 
-    CameraComponent(const Rect& orthoPlane, float nearZ, float farZ);
+    CameraComponent(const FRect& orthoPlane, float nearZ, float farZ);
 
     CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ);
 

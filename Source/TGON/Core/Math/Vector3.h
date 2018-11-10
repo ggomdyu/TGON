@@ -319,7 +319,7 @@ template <typename _ValueType>
 template <std::size_t _StrBufferSize>
 inline int32_t BasicVector3<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    this->ToString(destStr, _StrBufferSize);
+    return this->ToString(destStr, _StrBufferSize);
 }
 
 template <typename _ValueType>

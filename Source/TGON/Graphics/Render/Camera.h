@@ -23,8 +23,8 @@ class TGON_API Camera
 public:
     Camera() noexcept;
     
-    Camera(const Rect& orthoPlane, float nearZ, float farZ) noexcept;
-
+    Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept;
+    
     Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept;
 
 /**@section Public method */
@@ -49,7 +49,7 @@ public:
     /**@brief   Sets the direction vector of camera. */
     void SetLookAt(const Vector3& lookAt) noexcept;
     
-    void SetOrthoPlane(const Rect& orthoPlane) noexcept;
+    void SetOrthoPlane(const FRect& orthoPlane) noexcept;
 
     const Rect& GetOrthoPlane() const noexcept;
 

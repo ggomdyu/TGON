@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD515BDE20B46FAD0002F5C3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD06734B20B42CAA00BEA737 /* OpenAL.framework */; };
-		FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */; };
+		FD8D58712196D24200983A4A /* libTGON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D58702196D24200983A4A /* libTGON.a */; };
 		FDBF76B120C1A40400A9207F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDBF76B020C1A40300A9207F /* IOKit.framework */; };
 		FDD56D63216086EE00C01939 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D5D216086EE00C01939 /* LogoScene.cpp */; };
 		FDD56D64216086EE00C01939 /* IntroScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD56D5F216086EE00C01939 /* IntroScene.cpp */; };
@@ -31,15 +31,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FD0672CF20B4240500BEA737 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../ThirdParty/Debug/x86_64/libGLEW.a; sourceTree = "<group>"; };
-		FD0672D020B4240500BEA737 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../../ThirdParty/Debug/x86_64/libogg.a; sourceTree = "<group>"; };
-		FD0672D120B4240500BEA737 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../ThirdParty/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
-		FD0672D220B4240500BEA737 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../../ThirdParty/Debug/x86_64/libvorbis.a; sourceTree = "<group>"; };
-		FD0672D320B4240500BEA737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../ThirdParty/Debug/x86_64/libz.a; sourceTree = "<group>"; };
 		FD06734B20B42CAA00BEA737 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		FD515BE020B470C00002F5C3 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../../ThirdParty/Debug/x86_64/libvorbisenc.a; sourceTree = "<group>"; };
-		FD515BE120B470C00002F5C3 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
-		FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGON.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/TGON-bdikrddnweljspeircsivtuhmnrq/Build/Products/Debug/libTGON.a"; sourceTree = "<group>"; };
+		FD8D586D21966C0900983A4A /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD8D58702196D24200983A4A /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDBF76B020C1A40300A9207F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		FDD56D5D216086EE00C01939 /* LogoScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = LogoScene.cpp; sourceTree = "<group>"; };
 		FDD56D5E216086EE00C01939 /* IntroScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IntroScene.h; sourceTree = "<group>"; };
@@ -47,11 +41,8 @@
 		FDD56D60216086EE00C01939 /* LogoScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = LogoScene.h; sourceTree = "<group>"; };
 		FDD56D61216086EE00C01939 /* ThousandParty.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ThousandParty.cpp; sourceTree = "<group>"; };
 		FDD56D62216086EE00C01939 /* ThousandParty.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ThousandParty.h; sourceTree = "<group>"; };
-		FDD7C8C71F654342000EB7C8 /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD7C9171F68458C000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9191F684593000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FDEA01C920356DB800135040 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../../Source/ThirdParty/Bin/Debug/x86_64/libz.a; sourceTree = "<group>"; };
-		FDEA01CB20356DC800135040 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../../Source/ThirdParty/Bin/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
 		FDFECB801F757DDE007AC1AB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -61,12 +52,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D58712196D24200983A4A /* libTGON.a in Frameworks */,
 				FDBF76B120C1A40400A9207F /* IOKit.framework in Frameworks */,
 				FD515BDE20B46FAD0002F5C3 /* OpenAL.framework in Frameworks */,
 				FDFECB871F75FBC8007AC1AB /* QuartzCore.framework in Frameworks */,
 				FDFECB811F757DDE007AC1AB /* OpenGL.framework in Frameworks */,
 				FDD7C91B1F6845A6000EB7C8 /* Cocoa.framework in Frameworks */,
-				FD898D0D1F6CAB2100E3C0E0 /* libTGON.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +75,7 @@
 		FDD7C8C81F654342000EB7C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FDD7C8C71F654342000EB7C8 /* ThousandParty */,
+				FD8D586D21966C0900983A4A /* ThousandParty */,
 			);
 			name = Products;
 			path = ..;
@@ -107,20 +98,11 @@
 		FDD7C8EE1F6586D5000EB7C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD8D58702196D24200983A4A /* libTGON.a */,
 				FDBF76B020C1A40300A9207F /* IOKit.framework */,
-				FD515BE020B470C00002F5C3 /* libvorbisenc.a */,
-				FD515BE120B470C00002F5C3 /* libvorbisfile.a */,
 				FD06734B20B42CAA00BEA737 /* OpenAL.framework */,
-				FDEA01CB20356DC800135040 /* libpng16.a */,
-				FDEA01C920356DB800135040 /* libz.a */,
-				FD0672CF20B4240500BEA737 /* libGLEW.a */,
-				FD0672D020B4240500BEA737 /* libogg.a */,
-				FD0672D120B4240500BEA737 /* libpng16.a */,
-				FD0672D220B4240500BEA737 /* libvorbis.a */,
-				FD0672D320B4240500BEA737 /* libz.a */,
 				FDFECB861F75FBC8007AC1AB /* QuartzCore.framework */,
 				FDFECB801F757DDE007AC1AB /* OpenGL.framework */,
-				FD898D0C1F6CAB2100E3C0E0 /* libTGON.a */,
 				FDD7C9191F684593000EB7C8 /* Foundation.framework */,
 				FDD7C9171F68458C000EB7C8 /* Cocoa.framework */,
 			);
@@ -144,7 +126,7 @@
 			);
 			name = ThousandParty;
 			productName = ThousandParty;
-			productReference = FDD7C8C71F654342000EB7C8 /* ThousandParty */;
+			productReference = FD8D586D21966C0900983A4A /* ThousandParty */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -317,10 +299,10 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/zlib-1.2.11",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/gainput-1.0.0/lib/include",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_67_0",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Debug/x86_64";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -338,10 +320,10 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/zlib-1.2.11",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/gainput-1.0.0/lib/include",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_67_0",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../Bin/ThirdParty/Release/x86_64";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

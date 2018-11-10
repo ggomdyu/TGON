@@ -60,7 +60,7 @@ public:
     
     /**
      * @brief   Displays a message window which presents a message to user.
-     * @param [in] message  The title appears in the message window.
+     * @param [in] title    The title appears in the message window.
      * @param [in] message  The message appears in the message window.
      */
     void ShowMessageBox(const char* title, const char* message) const;

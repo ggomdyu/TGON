@@ -20,7 +20,7 @@ Camera::Camera() noexcept :
     this->Update();
 }
     
-Camera::Camera(const Rect& orthoPlane, float nearZ, float farZ) noexcept :
+Camera::Camera(const FRect& orthoPlane, float nearZ, float farZ) noexcept :
     m_eyePt(0.0f, 0.0f, 5.0f),
     m_lookAt(0.0f, 0.0f, 0.0f),
     m_fov(Pi / 8),

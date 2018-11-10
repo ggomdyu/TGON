@@ -15,7 +15,7 @@ CameraComponent::CameraComponent() :
 {
 }
 
-CameraComponent::CameraComponent(const Rect& orthoPlane, float nearZ, float farZ) :
+CameraComponent::CameraComponent(const FRect& orthoPlane, float nearZ, float farZ) :
     CameraComponent(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
 {
 }
