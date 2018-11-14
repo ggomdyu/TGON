@@ -11,6 +11,7 @@
 #include <string>
 
 #include "Core/Platform/Config.h"
+#include "Core/String/StringHash.h"
 #include "Core/Math/Extent.h"
 
 #include "ImageType.h"
@@ -91,7 +92,7 @@ public:
      * @brief   Gets the file path saved at loading time.
      * @warn    It can be incorrect if the file moved somewhere after image loaded.
      */
-    const std::string& GetFilePath() const noexcept;
+    const StringHash& GetFilePath() const noexcept;
 
     /**
      * @brief   Saves the image as PNG.
@@ -129,7 +130,7 @@ private:
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
-    std::string m_filePath;
+    StringHash m_filePath;
 };
 
 } /* namespace tgon */

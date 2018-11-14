@@ -32,6 +32,7 @@ public:
     using PlatformTexture::GetHeight;
     using PlatformTexture::GetChannels;
     using PlatformTexture::GetPixelFormat;
+    using PlatformTexture::GetFilePath;
 };
     
 } /* namespace tgon */

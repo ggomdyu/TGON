@@ -125,7 +125,7 @@ PixelFormat Image::GetPixelFormat() const noexcept
     return PixelFormat::R8G8B8A8_Unorm;
 }
 
-const std::string& Image::GetFilePath() const noexcept
+const StringHash& Image::GetFilePath() const noexcept
 {
     return m_filePath;
 }

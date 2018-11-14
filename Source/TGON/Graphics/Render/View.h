@@ -39,10 +39,7 @@ public:
     //void AddBatch(const Batch& batch);
 
     /**@brief   Adds a sprite batch into the SpriteBatchGroup. */
-    void AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive);
-
-    /**@brief   Adds a batch into the SpriteBatchGroup. */
-    void AddSpriteBatch(const SpriteBatch& batch);
+    void AddSpriteBatch(const SpriteBatch::DrawPrimitive& drawPrimitive);
 
     /**@brief   Adds a camera into View. */
     void AddCamera(const std::shared_ptr<Camera>& camera);

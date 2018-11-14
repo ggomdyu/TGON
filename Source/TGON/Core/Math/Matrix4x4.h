@@ -9,14 +9,18 @@
 #include <cassert>
 #include <cmath>
 
-#include "Core/Platform/Config.h"
-
 #include "Vector3.h"
+
+#if _MSC_VER
+#   define TGON_SPRINTF sprintf_s
+#else
+#   define TGON_SPRINTF sprintf
+#endif
 
 namespace tgon
 {
 
-struct TGON_API Matrix4x4
+struct Matrix4x4
 {
 /**@section Public constructor */
 public:
@@ -62,6 +66,22 @@ public:
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
     static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ);
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
+
+    /**
+     * @brief   Creates a string that represents this Matrix.
+     * @param [out] destStr     The destination of the string to be written.
+     * @return  The length of string.
+     */
+    template <std::size_t _StrBufferSize>
+    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+
+    /**
+     * @brief   Creates a string that represents this Matrix.
+     * @param [out] destStr         The destination of the string to be written.
+     * @param [in] strBufferSize    The buffer size of destStr.
+     * @return  The length of string.
+     */
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /**@section Public variable */
 public:
@@ -423,4 +443,17 @@ constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
     );
 }
 
+template<std::size_t _StrBufferSize>
+inline int32_t Matrix4x4::ToString(char(&destStr)[_StrBufferSize]) const
+{
+    this->ToString(destStr, sizeof(destStr));
+}
+
+inline int32_t Matrix4x4::ToString(char * destStr, std::size_t strBufferSize) const
+{
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f", m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+}
+
 } /* namespace tgon */
+
+#undef TGON_SPRINTF

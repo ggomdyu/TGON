@@ -32,7 +32,7 @@ LogoScene::LogoScene()
         const tgon::I32Extent2D rootWindowSize = application->GetRootWindow().GetSize();
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-        m_cameraComponent = cameraObject->AddComponent<tgon::CameraComponent>(tgon::Rect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
+        m_cameraComponent = cameraObject->AddComponent<tgon::CameraComponent>(tgon::FRect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
         //m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
         //this->AddObject(cameraObject);
     }

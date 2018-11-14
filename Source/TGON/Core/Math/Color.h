@@ -8,12 +8,16 @@
 #include <cstdint>
 #include <cstdio>
 
-#include "Core/Platform/Config.h"
+#if _MSC_VER
+#   define TGON_SPRINTF sprintf_s
+#else
+#   define TGON_SPRINTF sprintf
+#endif
 
 namespace tgon
 {
 
-struct TGON_API Color4b
+struct Color4b
 {
 /**@section Public constructor */
 public:
@@ -52,18 +56,18 @@ public:
 /**@section Public method */
 public:
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string converted.
+     * @return  The length of string.
      */
     template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
     
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The size of destStr.
-     * @return  The length of string converted.
+     * @param [in] strBufferSize    The buffer size of destStr.
+     * @return  The length of string.
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
     
@@ -207,19 +211,15 @@ constexpr Color4b::operator uint32_t() const noexcept
 template <std::size_t _StrBufferSize>
 inline int32_t Color4b::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destStr, _StrBufferSize);
+    return this->ToString(destStr, sizeof(destStr));
 }
 
 inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
 }
 
-struct TGON_API Color3f
+struct Color3f
 {
 /**@section Public constructor */
 public:
@@ -234,18 +234,18 @@ public:
 /**@section Public method */
 public:
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string converted.
+     * @return  The length of string.
      */
     template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The size of destStr.
-     * @return  The length of string converted.
+     * @param [in] strBufferSize    The buffer size of destStr.
+     * @return  The length of string.
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
@@ -279,16 +279,12 @@ constexpr bool Color3f::operator!=(const Color3f& rhs) const noexcept
 template <std::size_t _StrBufferSize>
 inline int32_t Color3f::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destStr, _StrBufferSize);
+    return this->ToString(destStr, sizeof(destStr));
 }
 
 inline int32_t Color3f::ToString(char* destStr, std::size_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", r, g, b);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", r, g, b);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", r, g, b);
 }
 
 struct Color4f
@@ -306,18 +302,18 @@ public:
 /**@section Public method */
 public:
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string converted.
+     * @return  The length of string.
      */
     template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
-     * @brief   Converts color to a string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The size of destStr.
-     * @return  The length of string converted.
+     * @param [in] strBufferSize    The buffer size of destStr.
+     * @return  The length of string.
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
@@ -357,11 +353,9 @@ inline int32_t Color4f::ToString(char(&destStr)[_StrBufferSize]) const
 
 inline int32_t Color4f::ToString(char* destStr, std::size_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
 }
 
 } /* namespace tgon */
+
+#undef TGON_SPRINTF

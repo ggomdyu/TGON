@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "Core/Math/Rect.h"
+#include "Core/Math/Matrix4x4.h"
 #include "Core/Math/Color.h"
 
 namespace tgon
@@ -24,58 +25,60 @@ class TGON_API SpriteBatch final
 {
 /**@section Public constructor */
 public:
-    struct DrawPrimitive
-    {
-        bool isEnableScissorRect;
-        FRect scissorRect;
-        Color4f blendColor;
-        std::shared_ptr<Sprite> sprite;
-        std::shared_ptr<Material> material;
-    };
-
-/**@section Public constructor */
-public:
-    /**@brief   Initializes the batch. */
     SpriteBatch() = default;
 
-    /**@brief   Initializes the batch with a sprite. */
-    explicit SpriteBatch(const DrawPrimitive& drawPrimitive);
+    SpriteBatch(const FRect& scissorRect, const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material);
     
 /**@section Public method */
 public:
-    /**@brief   Adds a draw primitive into the batch. */
-    void AddDrawPrimitive(const DrawPrimitive& drawPrimitive);
-    
     /**@brief   Checks whether the specified draw primitive can be batched. */
-    bool CanBatch(const DrawPrimitive& drawPrimitive) const;
+    bool CanBatch(const SpriteBatch& drawPrimitive) const;
     
-    /**@brief   Draws all of the batched sprites. */
+    /**@brief   Draws all of the draw primitive. */
     void Draw(Graphics& graphics, const Camera& camera);
-    
-    std::vector<DrawPrimitive>& GetDrawPrimitives() noexcept;
 
-    const std::vector<DrawPrimitive>& GetDrawPrimitives() const noexcept;
+    const FRect& GetScissorRect() const noexcept;
 
-    /**@brief   Gets all of the batched sprites. */
+    const Color4f& GetBlendColor() const noexcept;
+
+    std::shared_ptr<Sprite>& GetSprite() noexcept;
+
+    std::shared_ptr<const Sprite> GetSprite() const noexcept;
+
+    std::shared_ptr<Material>& GetMaterial() noexcept;
+
+    std::shared_ptr<const Material> GetMaterial() const noexcept;
 
 /**@section Private variable */
 private:
-    std::vector<DrawPrimitive> m_drawPrimitives;
+    const FRect& m_scissorRect;
+
+    const Color4f& m_blendColor;
+
+    std::shared_ptr<Sprite> m_sprite;
+
+    std::shared_ptr<Material> m_material;
 };
     
 class TGON_API SpriteBatchGroup final
 {
 /**@section Public constructor */
 public:
-    SpriteBatchGroup(){};
+    SpriteBatchGroup();
 
 /**@section Public method */
 public:
-    /**@brief   Adds a sprite into the batch. */
-    void AddSprite(const Sprite& sprite){};
-    
+    /**@brief   Adds a draw primitive into the batch. */
+    void AddSpriteBatch(const SpriteBatch& spriteBatch);
+
+    /**@brief   Gets all of the sprite batches. */
+    std::vector<SpriteBatch>& GetSpriteBatches() noexcept;
+
+    /**@brief   Gets all of the sprite batches. */
+    const std::vector<SpriteBatch>& GetSpriteBatches() const noexcept;
+
     /**@brief   Flushes all of the sprites in batch list. */
-    void FlushBatch(Graphics& graphics, const Camera& camera){};
+    void FlushBatch(Graphics& graphics, const Camera& camera);
 
 /**@section Private variable */
 private:

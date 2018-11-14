@@ -15,9 +15,35 @@
 
 namespace tgon
 {
+namespace detail
+{
+
+template <typename _DeriviedType>
+class BasicStringHashImpl
+{
+/**@section Public operator */
+public:
+    constexpr bool operator==(const _DeriviedType& rhs) const noexcept;
+    constexpr bool operator!=(const _DeriviedType& rhs) const noexcept;
+};
+
+template<typename _DeriviedType>
+constexpr bool BasicStringHashImpl<_DeriviedType>::operator==(const _DeriviedType& rhs) const noexcept
+{
+    return reinterpret_cast<_DeriviedType*>(this)->GetHashCode() == rhs.GetHashCode();
+}
+
+template<typename _DeriviedType>
+constexpr bool BasicStringHashImpl<_DeriviedType>::operator!=(const _DeriviedType& rhs) const noexcept
+{
+    return !this->operator==(rhs);
+}
+
+} /* namespace detail */
     
 template <typename _StringType, typename _EnableType = void>
-class BasicStringHash
+class BasicStringHash :
+    public detail::BasicStringHashImpl<BasicStringHash<_StringType, _EnableType>>
 {
 /**@section Public type */
 public:
@@ -51,7 +77,7 @@ public:
     constexpr const size_t GetHashCode() const noexcept;
     
 /**@section Private variable */
-public:
+private:
     _StringType m_str;
     size_t m_hashCode;
 };
@@ -102,7 +128,8 @@ constexpr const size_t BasicStringHash<_StringType, _EnableType>::GetHashCode() 
 }
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>
+class BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type> :
+    public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>
 {
 /**@section Public type */
 public:
@@ -133,7 +160,7 @@ public:
     constexpr const size_t GetHashCode() const noexcept;
     
 /**@section Private variable */
-public:
+private:
     _StringType m_str;
     size_t m_strLen;
     size_t m_hashCode;
@@ -179,7 +206,8 @@ constexpr const size_t BasicStringHash<_StringType, typename std::enable_if<IsCh
 }
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>
+class BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type> :
+    public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>>
 {
 /**@section Public type */
 public:
@@ -213,7 +241,7 @@ public:
     const size_t GetHashCode() const noexcept;
     
 /**@section Private variable */
-public:
+private:
     _StringType m_str;
     size_t m_hashCode;
 };

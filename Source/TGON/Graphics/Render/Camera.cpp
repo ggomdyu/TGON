@@ -102,13 +102,13 @@ void Camera::SetLookAt(const Vector3& lookAt) noexcept
     m_isDirty = true;
 }
     
-void Camera::SetOrthoPlane(const Rect& orthoPlane) noexcept
+void Camera::SetOrthoPlane(const FRect& orthoPlane) noexcept
 {
     m_orthoPlane = orthoPlane;
     m_isDirty = true;
 }
 
-const Rect& Camera::GetOrthoPlane() const noexcept
+const FRect& Camera::GetOrthoPlane() const noexcept
 {
     return m_orthoPlane;
 }

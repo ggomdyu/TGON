@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include "Core/Platform/Config.h"
 #include "Core/Math/Vector3.h"
 #include "Core/Math/Matrix4x4.h"
 

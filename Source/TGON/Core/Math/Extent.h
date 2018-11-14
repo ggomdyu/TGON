@@ -9,6 +9,12 @@
 #include <cstdint>
 #include <cstdio>
 
+#if _MSC_VER
+#   define TGON_SPRINTF sprintf_s
+#else
+#   define TGON_SPRINTF sprintf
+#endif
+
 namespace tgon
 {
 
@@ -47,18 +53,18 @@ public:
 /**@section Public method */
 public:
     /**
-     * @brief   Converts to string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string converted.
+     * @return  The length of string.
      */
     template <uint32_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
-     * @brief   Converts to string.
+     * @brief   Creates a string that represents this struct.
      * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The size of destStr.
-     * @return  The length of string converted.
+     * @param [in] strBufferSize    The buffer size of destStr.
+     * @return  The length of string.
      */
     int32_t ToString(char* destStr, uint32_t strBufferSize) const;
 
@@ -184,37 +190,27 @@ template <typename _ValueType>
 template <uint32_t _StrBufferSize>
 inline int32_t BasicExtent2D<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
-    return this->ToString(destStr, _StrBufferSize);
+    return this->ToString(destStr, sizeof(destStr));
 }
 
 template <typename _ValueType>
 inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, uint32_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
 }
 
 template <>
 inline int32_t BasicExtent2D<float>::ToString(char* destStr, uint32_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
 }
 
 template <>
 inline int32_t BasicExtent2D<double>::ToString(char* destStr, uint32_t strBufferSize) const
 {
-#if _MSC_VER
-    return sprintf_s(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
-#else
-    return snprintf(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
-#endif
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
 }
 
 } /* namespace tgon */
+
+#undef TGON_SPRINTF

@@ -51,7 +51,7 @@ public:
     
     void SetOrthoPlane(const FRect& orthoPlane) noexcept;
 
-    const Rect& GetOrthoPlane() const noexcept;
+    const FRect& GetOrthoPlane() const noexcept;
 
     /**@brief   Gets the near clipping plane's Z-position. */
     float GetNearZ() const noexcept;
@@ -83,7 +83,7 @@ private:
     float m_fov;
     float m_nearZ;
     float m_farZ;
-    Rect m_orthoPlane;
+    FRect m_orthoPlane;
     Matrix4x4 m_matProj;
     Matrix4x4 m_matViewProj;
     bool m_isDirty;
