@@ -6,32 +6,17 @@
 
 namespace tgon
 {
-    
-//void View::AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive)
-//{
-//    m_batchGroup.AddBatch(material, drawPrimitive);
-//}
-//
-//void View::AddBatch(const Batch& batch)
-//{
-//    m_batchGroup.AddBatch(batch);
-//}
-
-void View::AddSpriteBatch(const std::shared_ptr<TextureMaterial>& material, const SpriteBatch::DrawPrimitive& drawPrimitive)
-{
-    //m_spriteBatchGroup.AddSpriteBatch(material, drawPrimitive);
-}
-
-void View::AddSpriteBatch(const SpriteBatch& spriteBatch)
-{
-    //m_spriteBatchGroup.AddSpriteBatch(spriteBatch);
-}
 
 View::View(const Window& displayWindow, const VideoMode& videoMode) :
     m_graphics(displayWindow, videoMode)
 {
 }
 
+void View::AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld)
+{
+    m_spriteBatchGroup.AddSpriteBatch(blendColor, sprite, material, matWorld);
+}
+    
 void View::AddCamera(const std::shared_ptr<Camera>& camera)
 {
     m_cameraList.push_back(camera);

@@ -25,20 +25,27 @@ class TGON_API SpriteBatch final
 {
 /**@section Public constructor */
 public:
-    SpriteBatch() = default;
+    SpriteBatch();
 
-    SpriteBatch(const FRect& scissorRect, const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material);
+    SpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld);
+    
+/**@section Private constructor */
+private:
+    SpriteBatch(const Color4f* blendColor, const std::shared_ptr<Sprite>* sprite, const std::shared_ptr<Material>* material, const Matrix4x4* matWorld);
     
 /**@section Public method */
 public:
-    /**@brief   Checks whether the specified draw primitive can be batched. */
-    bool CanBatch(const SpriteBatch& drawPrimitive) const;
+    void AddWorldMatrix(const Matrix4x4& matWorld);
     
     /**@brief   Draws all of the draw primitive. */
     void Draw(Graphics& graphics, const Camera& camera);
-
-    const FRect& GetScissorRect() const noexcept;
-
+    
+    /**@brief   Checks whether the specified SpriteBatch can be batched with this class. */
+    bool CanBatch(const SpriteBatch& spriteBatch) const;
+    
+    /**@brief   Checks whether the specified parameters can be batched with this class. */
+    bool CanBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material) const;
+    
     const Color4f& GetBlendColor() const noexcept;
 
     std::shared_ptr<Sprite>& GetSprite() noexcept;
@@ -51,13 +58,13 @@ public:
 
 /**@section Private variable */
 private:
-    const FRect& m_scissorRect;
+    std::vector<const Matrix4x4*> m_matWorlds;
+    
+    const Color4f* m_blendColor;
 
-    const Color4f& m_blendColor;
+    const std::shared_ptr<Sprite>* m_sprite;
 
-    std::shared_ptr<Sprite> m_sprite;
-
-    std::shared_ptr<Material> m_material;
+    const std::shared_ptr<Material>* m_material;
 };
     
 class TGON_API SpriteBatchGroup final
@@ -68,11 +75,8 @@ public:
 
 /**@section Public method */
 public:
-    /**@brief   Adds a draw primitive into the batch. */
-    void AddSpriteBatch(const SpriteBatch& spriteBatch);
-
-    /**@brief   Gets all of the sprite batches. */
-    std::vector<SpriteBatch>& GetSpriteBatches() noexcept;
+    /**@brief   Adds a SpriteBatch into the group. */
+    void AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld);
 
     /**@brief   Gets all of the sprite batches. */
     const std::vector<SpriteBatch>& GetSpriteBatches() const noexcept;

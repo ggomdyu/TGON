@@ -32,14 +32,8 @@ public:
 
 /**@section Public method */
 public:
-    /**@brief   Adds a mesh into the BatchGroup. */
-    //void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
-    
-    /**@brief   Adds a batch into the BatchGroup. */
-    //void AddBatch(const Batch& batch);
-
-    /**@brief   Adds a sprite batch into the SpriteBatchGroup. */
-    void AddSpriteBatch(const SpriteBatch::DrawPrimitive& drawPrimitive);
+    /**@brief   Adds a SpriteBatch into the SpriteBatchGroup. */
+    void AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld);
 
     /**@brief   Adds a camera into View. */
     void AddCamera(const std::shared_ptr<Camera>& camera);

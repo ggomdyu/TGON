@@ -4,8 +4,6 @@
 #include "ThousandParty.h"
 #include "LogoScene.h"
 
-#include <StackWalker-1.20\Main\StackWalker\StackWalker.h>
-
 TGON_DECLARE_ENGINE(ThousandParty);
 
 void ThousandParty::OnDidLaunch()

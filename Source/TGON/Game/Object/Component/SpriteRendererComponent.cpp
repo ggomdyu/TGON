@@ -36,7 +36,7 @@ std::shared_ptr<Sprite>& SpriteRendererComponent::GetSprite() noexcept
     return m_sprite;
 }
 
-const std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() const noexcept
+std::shared_ptr<const Sprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
 }

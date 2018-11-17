@@ -57,7 +57,7 @@ public:
 
     std::shared_ptr<Sprite>& GetSprite() noexcept;
 
-    const std::shared_ptr<Sprite> GetSprite() const noexcept;
+    std::shared_ptr<const Sprite> GetSprite() const noexcept;
 
     /**@brief   Sets a color that blended with the sprite. */
     void SetBlendColor(const Color4f& blendColor);

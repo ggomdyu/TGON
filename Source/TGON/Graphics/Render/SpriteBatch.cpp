@@ -12,115 +12,101 @@
 
 namespace tgon
 {
-
-//void SpriteBatch::AddDrawPrimitive(const DrawPrimitive& drawPrimitive)
-//{
-//    m_drawPrimitives.push_back(drawPrimitive);
-//}
-
-void SpriteBatch::AddWorldMatrix(const Matrix4x4& matWorld)
+    
+SpriteBatch::SpriteBatch() :
+    SpriteBatch(nullptr, nullptr, nullptr, nullptr)
 {
-    m_worldMatrixes.push_back(matWorld);
-}
-
-bool SpriteBatch::CanBatch(const SpriteBatch& spriteBatch) const
-{
-    return m_scissorRect == spriteBatch.m_scissorRect &&
-           m_blendColor == spriteBatch.m_blendColor &&
-           m_sprite->GetTexture()->GetFilePath() == spriteBatch.m_sprite->GetTexture()->GetFilePath() &&
-           m_material->CanBatch(*spriteBatch.m_material);
 }
     
-SpriteBatch::SpriteBatch(const FRect& scissorRect, const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material) :
-    m_scissorRect(scissorRect),
+SpriteBatch::SpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld) :
+    SpriteBatch(&blendColor, &sprite, &material, &matWorld)
+{
+}
+    
+SpriteBatch::SpriteBatch(const Color4f* blendColor, const std::shared_ptr<Sprite>* sprite, const std::shared_ptr<Material>* material, const Matrix4x4* matWorld) :
     m_blendColor(blendColor),
     m_sprite(sprite),
-    m_material(material)
+    m_material(material),
+    m_matWorlds{matWorld}
 {
 }
 
-void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
+bool SpriteBatch::CanBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material) const
 {
-    if (m_drawPrimitives.empty())
-    {
-        return;
-    }
-
-    const auto& batchedDrawPrimitive = m_drawPrimitives.front();
-    const auto& batchedMaterial = batchedDrawPrimitive.material;
-
-    batchedMaterial->Use();
-
-    if (batchedDrawPrimitive.isEnableScissorRect)
-    {
-        graphics.SetScissorRect(batchedDrawPrimitive.scissorRect);
-        graphics.EnableScissorTest();
-    }
-    else
-    {
-        graphics.DisableScissorTest();
-    }
-
-    for (const auto& drawPrimitive : m_drawPrimitives)
-    {
-        batchedMaterial->SetWVP(drawPrimitive.matWorld * camera.GetViewProjectionMatrix());
-        graphics.DrawPrimitives(PrimitiveType::TriangleFan, 4);
-    }
+    return *m_blendColor == blendColor &&
+           (*m_sprite)->GetTexture() == sprite->GetTexture() && // TODO: This should be changed to comparing the id of resource!
+           (*m_material)->CanBatch(*material);
 }
-
-const FRect& SpriteBatch::GetScissorRect() const noexcept
+    
+bool SpriteBatch::CanBatch(const SpriteBatch& spriteBatch) const
 {
-    return m_scissorRect;
+    return this->CanBatch(*spriteBatch.m_blendColor, *spriteBatch.m_sprite, *spriteBatch.m_material);
 }
-
-const Color4f& SpriteBatch::GetBlendColor() const noexcept
+    
+void SpriteBatch::AddWorldMatrix(const Matrix4x4& matWorld)
 {
-    return m_blendColor;
+    m_matWorlds.push_back(&matWorld);
 }
-
-std::shared_ptr<Sprite>& SpriteBatch::GetSprite() noexcept
-{
-    return m_sprite;
-}
-
-std::shared_ptr<const Sprite> SpriteBatch::GetSprite() const noexcept
-{
-    return m_sprite;
-}
-
-std::shared_ptr<Material>& SpriteBatch::GetMaterial() noexcept
-{
-    return m_material;
-}
-
-std::shared_ptr<const Material> SpriteBatch::GetMaterial() const noexcept
-{
-    return m_material;
-}
+//
+//void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
+//{
+//    m_material->Use();
+//
+//    if (batchedDrawPrimitive.isEnableScissorRect)
+//    {
+//        graphics.SetScissorRect(batchedDrawPrimitive.scissorRect);
+//        graphics.EnableScissorTest();
+//    }
+//    else
+//    {
+//        graphics.DisableScissorTest();
+//    }
+//
+//    for (const auto& matWorld : m_matWorlds)
+//    {
+//        batchedMaterial->SetWVP(drawPrimitive.matWorld * camera.GetViewProjectionMatrix());
+//        graphics.DrawPrimitives(PrimitiveType::TriangleFan, 4);
+//    }
+//}
+//
+//std::shared_ptr<Sprite>& SpriteBatch::GetSprite() noexcept
+//{
+//    return m_sprite;
+//}
+//
+//std::shared_ptr<const Sprite> SpriteBatch::GetSprite() const noexcept
+//{
+//    return m_sprite;
+//}
+//
+//std::shared_ptr<Material>& SpriteBatch::GetMaterial() noexcept
+//{
+//    return m_material;
+//}
+//
+//std::shared_ptr<const Material> SpriteBatch::GetMaterial() const noexcept
+//{
+//    return m_material;
+//}
 
 SpriteBatchGroup::SpriteBatchGroup() :
     m_quad(MeshUtility::GetSharedQuad())
 {
 }
-
-void SpriteBatchGroup::AddSpriteBatch(const SpriteBatch& spriteBatch)
+    
+void SpriteBatchGroup::AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld)
 {
     if (m_spriteBatches.empty() == false)
     {
-        SpriteBatch& batchedSpriteBatch = m_spriteBatches.back();
-        if (batchedSpriteBatch.CanBatch(spriteBatch))
+        SpriteBatch& backSpriteBatch = m_spriteBatches.back();
+        if (backSpriteBatch.CanBatch(blendColor, sprite, material))
         {
-            batchedSpriteBatch.AddWorldMatrix(spriteBatch);
+            backSpriteBatch.AddWorldMatrix(matWorld);
             return;
         }
     }
-
-    m_spriteBatches.push_back(SpriteBatch(drawPrimitive));
-}
-
-std::vector<SpriteBatch>& SpriteBatchGroup::GetSpriteBatches() noexcept
-{
-    return m_spriteBatches;
+    
+   m_spriteBatches.push_back(SpriteBatch(blendColor, sprite, material, matWorld));
 }
 
 const std::vector<SpriteBatch>& SpriteBatchGroup::GetSpriteBatches() const noexcept
