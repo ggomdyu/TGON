@@ -45,7 +45,7 @@ void GraphicsModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        //m_View.Draw(m_graphics);
+        m_view.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
@@ -60,14 +60,14 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-//View& GraphicsModule::GetView() noexcept
-//{
-//    return m_view;
-//}
-//
-//const View& GraphicsModule::GetView() const noexcept
-//{
-//    return m_view;
-//}
+View& GraphicsModule::GetView() noexcept
+{
+    return m_view;
+}
+
+const View& GraphicsModule::GetView() const noexcept
+{
+    return m_view;
+}
     
 } /* namespace tgon */

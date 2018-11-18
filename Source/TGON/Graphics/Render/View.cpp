@@ -7,9 +7,21 @@
 namespace tgon
 {
 
-View::View(const Window& displayWindow, const VideoMode& videoMode) :
-    m_graphics(displayWindow, videoMode)
+void View::Draw(Graphics& graphics)
 {
+#ifndef NDEBUG
+    if (m_cameraList.size() <= 0)
+    {
+        Log(LogLevel::Debug, "You have no camera but trying to draw.\n");
+    }
+#endif
+    
+    for (const auto& camera : m_cameraList)
+    {
+        //m_batchGroup.FlushBatch(m_graphics, *camera);
+
+        m_spriteBatchGroup.FlushBatch(graphics, *camera);
+    }
 }
 
 void View::AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld)
@@ -50,21 +62,4 @@ bool View::RemoveCamera(const std::shared_ptr<Camera>& camera)
     }
 }
 
-void View::Draw()
-{
-#ifndef NDEBUG
-    if (m_cameraList.size() <= 0)
-    {
-        Log(LogLevel::Debug, "You have no camera but trying to draw.\n");
-    }
-#endif
-    
-    for (const auto& camera : m_cameraList)
-    {
-        //m_batchGroup.FlushBatch(m_graphics, *camera);
-
-        //m_spriteBatchGroup.FlushSpriteBatch(m_graphics, *camera);
-    }
-}
-    
 } /* namespace tgon */

@@ -28,24 +28,23 @@ public:
 
 /**@section Public constructor */
 public:
-    explicit View(const Window& displayWindow, const VideoMode& videoMode);
 
 /**@section Public method */
 public:
+    void Draw(Graphics& graphics);
+    
     /**@brief   Adds a SpriteBatch into the SpriteBatchGroup. */
     void AddSpriteBatch(const Color4f& blendColor, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Matrix4x4& matWorld);
 
     /**@brief   Adds a camera into View. */
     void AddCamera(const std::shared_ptr<Camera>& camera);
 
-    std::vector<std::shared_ptr<Camera>>& GetCameraList() noexcept;
-
-    const std::vector<std::shared_ptr<Camera>>& GetCameraList() const noexcept;
-
     /**@brief   Removes the specified camera in View. */
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
-    void Draw();
+    std::vector<std::shared_ptr<Camera>>& GetCameraList() noexcept;
+
+    const std::vector<std::shared_ptr<Camera>>& GetCameraList() const noexcept;
 
 /**@section Public event handler */
 public:
@@ -53,8 +52,6 @@ public:
 
 /**@section Private variable */
 private:
-    Graphics m_graphics;
-
     //BatchGroup m_batchGroup;
 
     SpriteBatchGroup m_spriteBatchGroup;

@@ -25,23 +25,12 @@ public:
     SpriteRendererComponent() = default;
 
     /**
-     * @brief   Initializes the component with the sprite.
-     * @param [in] sprite       The sprite to be used for rendering.
-     */
-    explicit SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite);
-
-    /**
-     * @brief   Initializes the component with the material.
-     * @param [in] material     The material to be used for rendering.
-     */
-    explicit SpriteRendererComponent(const std::shared_ptr<Material>& material);
-
-    /**
      * @brief   Initializes the component with the sprite and material.
      * @param [in] sprite       The sprite to be used for rendering.
      * @param [in] material     The material to be used for rendering.
+     * @param [in[ blendColor
      */
-    SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material);
+    SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Public destructor */
 public:

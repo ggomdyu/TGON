@@ -1,29 +1,23 @@
 #include "PrecompiledHeader.h"
 
+#include "Graphics/Engine/GraphicsModule.h"
+#include "Game/Object/GameObject.h"
+
 #include "SpriteRendererComponent.h"
 
 namespace tgon
 {
 
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite) :
-    m_sprite(sprite)
-{
-}
-
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Material>& material) :
-    RendererComponent(material)
-{
-}
-
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material) :
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor) :
     RendererComponent(material),
-    m_sprite(sprite)
+    m_sprite(sprite),
+    m_blendColor(blendColor)
 {
 }
 
 void SpriteRendererComponent::Update()
 {
-    //m_graphicsModule->GetView().AddSpriteBatch(m_material, { GetOwner()->GetWorldMatrix() });
+    m_graphicsModule->GetView().AddSpriteBatch(m_blendColor, m_sprite, m_material, GetOwner()->)
 }
 
 void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
