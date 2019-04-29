@@ -271,7 +271,7 @@ public:
 public:
     /**
      * @brief   This is a special magic number which means string does not exist.
-     *          The series of find function will return this variable when substring searching fails.
+     *          The series of find function will return this variable when substring search fails.
      */
     static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
 };
