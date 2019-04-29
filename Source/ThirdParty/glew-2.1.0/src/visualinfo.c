@@ -1144,7 +1144,7 @@ void InitContext (GLContext* ctx)
 
 GLboolean CreateContext (GLContext* ctx)
 {
-  CGLPixelFormatAttribute attrib[] = { kCGLPFAAccelerated, 0 };
+  CGLPixelFormatAttribute attrib[] = { kCGLPFAAccelerated, CGLPixelFormatAttribute(0) };
   CGLPixelFormatObj pf;
   GLint npix;
   CGLError error;

@@ -7,12 +7,6 @@
 namespace tgon
 {
 
-GameObject::GameObject(const StringHash& name) :
-    m_name(name),
-    m_isActive(true)
-{
-}
-
 void GameObject::Update()
 {
     if (m_isActive == false)

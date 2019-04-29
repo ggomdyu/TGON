@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <stdexcept>
+
 #include "AudioDevice.h"
 
 namespace tgon

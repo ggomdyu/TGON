@@ -9,9 +9,9 @@
 
 #include "Core/Object/CoreObject.h"
 #include "Core/String/StringHash.h"
-#include "Graphics/Render/Transform.h"
 
 #include "Component/Component.h"
+#include "Graphics/Render/Transform.h"
 
 namespace tgon
 {
@@ -24,10 +24,13 @@ public:
 
 /**@section Private constructor */
 public:
-    explicit GameObject(const StringHash& name);
-
-    template <typename... ComponentTypes>
-    GameObject(const StringHash& name, ComponentTypes&&... components);
+    template <typename... _ComponentTypes>
+    explicit GameObject(const StringHash& name, _ComponentTypes&&... components) :
+        m_name(name),
+        m_isActive(true),
+        m_components(std::forward<_ComponentTypes>(components)...)
+    {
+    }
 
 /**@section Public destructor */
 public:
@@ -40,31 +43,54 @@ public:
 
     /**@brief   Inserts a component to manage. */
     template <typename _ComponentType, typename... _ArgTypes>
-    std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
+    std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args)
+    {
+        auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
+        component->SetOwner(this);
+        
+        m_components.push_back(component);
+        
+        return std::static_pointer_cast<_ComponentType>(component);
+    }
 
     /**
      * @brief   Removes the managed component.
      * @tparam _ComponentType   The type of component to remove.
      * @return  Returns true if successful, false otherwise.
      */
-    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
-    bool RemoveComponent();
+    template <typename _ComponentType>
+    bool RemoveComponent()
+    {
+        static_assert(std::is_base_of<Component, _ComponentType>::value, "_ComponentType must be inherited from Component.");
+        
+        return this->RemoveComponent(GetComponentId<_ComponentType>());
+    }
 
     /**
      * @brief   Gets a component that managed by this object.
      * @tparam _ComponentType   The type of component to get.
      * @return  Returns a pointer to component if successful, nullptr otherwise.
      */
-    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
-    std::shared_ptr<const _ComponentType> GetComponent() const;
+    template <typename _ComponentType>
+    std::shared_ptr<const _ComponentType> GetComponent() const
+    {
+        static_assert(std::is_base_of<Component, _ComponentType>::value, "_ComponentType must be inherited from Component.");
+        
+        return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
+    }
 
     /**
      * @brief   Gets a component that managed by this object.
      * @tparam _ComponentType   The type of component to get.
      * @return  Returns a pointer to component if successful, nullptr otherwise.
      */
-    template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>* = nullptr>
-    std::shared_ptr<_ComponentType> GetComponent();
+    template <typename _ComponentType>
+    std::shared_ptr<_ComponentType> GetComponent()
+    {
+        static_assert(std::is_base_of<Component, _ComponentType>::value, "_ComponentType must be inherited from Component.");
+        
+        return std::static_pointer_cast<_ComponentType>(GetComponent(GetComponentId<_ComponentType>()));
+    }
 
     /**
      * @brief   Sets the name of this object.
@@ -107,46 +133,7 @@ private:
 
     std::vector<std::shared_ptr<Component>> m_components;
 
-    std::unique_ptr<Transform> m_transform;
+    Transform m_transform;
 };
-
-template <typename ...ComponentTypes>
-inline GameObject::GameObject(const StringHash& name, ComponentTypes&&... components) :
-    m_name(name),
-    m_isActive(true),
-    m_components(std::forward<ComponentTypes>(components)...)
-{
-}
-
-template <typename _ComponentType, typename... _ArgTypes>
-inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
-{
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
-    {
-        return lhs->GetRTTI()->GetHashCode() < rhs;
-    });
-    auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
-    component->SetOwner(this);
-
-    return std::static_pointer_cast<_ComponentType>(*m_components.insert(iter, component));
-}
-
-template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
-inline bool GameObject::RemoveComponent()
-{
-    return this->RemoveComponent(GetComponentId<_ComponentType>());
-}
-
-template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
-inline std::shared_ptr<const _ComponentType> GameObject::GetComponent() const
-{
-    return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
-}
-
-template <typename _ComponentType, std::enable_if_t<std::is_base_of<Component, _ComponentType>::value>*>
-inline std::shared_ptr<_ComponentType> GameObject::GetComponent()
-{
-    return std::static_pointer_cast<_ComponentType>(GetComponent(GetComponentId<_ComponentType>()));
-}
 
 } /* namespace tgon */

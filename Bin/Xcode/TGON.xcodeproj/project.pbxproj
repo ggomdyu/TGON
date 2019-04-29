@@ -146,6 +146,11 @@
 		FD8E694720AFA84600791E10 /* OpenGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E693120AFA84600791E10 /* OpenGLContext.h */; };
 		FD8E694C20AFA84600791E10 /* OpenGLIndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E693620AFA84600791E10 /* OpenGLIndexBuffer.h */; };
 		FD8E695020AFA84600791E10 /* OpenGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E693A20AFA84600791E10 /* OpenGLTexture.h */; };
+		FDB35032227613420022BDDF /* glewinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE7219F342700B2B2BE /* glewinfo.c */; };
+		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
+		FDB35034227613470022BDDF /* visualinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE9219F342700B2B2BE /* visualinfo.c */; };
+		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
+		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
 		FDBA3D1820F19CED0053B7BC /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBA3D1620F19CEC0053B7BC /* RenderTarget.h */; };
 		FDBCFA3B20E7F96100CBDF0B /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA2E20E7F95F00CBDF0B /* Texture.h */; };
 		FDBCFA3F20E7F96100CBDF0B /* VertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3220E7F96000CBDF0B /* VertexBuffer.h */; };
@@ -296,9 +301,9 @@
 		FD4C1BE3219F342700B2B2BE /* eglew.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = eglew.h; sourceTree = "<group>"; };
 		FD4C1BE4219F342700B2B2BE /* wglew.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = wglew.h; sourceTree = "<group>"; };
 		FD4C1BE5219F342700B2B2BE /* glew.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = glew.h; sourceTree = "<group>"; };
-		FD4C1BE7219F342700B2B2BE /* glewinfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glewinfo.c; sourceTree = "<group>"; };
-		FD4C1BE8219F342700B2B2BE /* glew.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = glew.c; sourceTree = "<group>"; };
-		FD4C1BE9219F342700B2B2BE /* visualinfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = visualinfo.c; sourceTree = "<group>"; };
+		FD4C1BE7219F342700B2B2BE /* glewinfo.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = glewinfo.c; sourceTree = "<group>"; };
+		FD4C1BE8219F342700B2B2BE /* glew.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = glew.c; sourceTree = "<group>"; };
+		FD4C1BE9219F342700B2B2BE /* visualinfo.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = visualinfo.c; sourceTree = "<group>"; };
 		FD4C1BEB219F343A00B2B2BE /* framing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = framing.c; sourceTree = "<group>"; };
 		FD4C1BEC219F343A00B2B2BE /* bitwise.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
 		FD4C1BEF219F343A00B2B2BE /* ogg.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ogg.h; sourceTree = "<group>"; };
@@ -584,7 +589,7 @@
 		FDE73F5720CAE6B60026F3D3 /* Application.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Application.cpp; path = ../../Source/TGON/Core/Platform/Application.cpp; sourceTree = "<group>"; };
 		FDEA01FF2037375C00135040 /* Path.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; name = Path.h; path = ../../Source/TGON/Core/File/Path.h; sourceTree = "<group>"; };
 		FDEA02002037375C00135040 /* Path.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = Path.cpp; path = ../../Source/TGON/Core/File/Path.cpp; sourceTree = "<group>"; };
-		FDEA237820AFF586000885AC /* PrecompiledHeader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = PrecompiledHeader.h; path = ../../Source/TGON/PrecompiledHeader.h; sourceTree = "<group>"; };
+		FDEA237820AFF586000885AC /* PrecompiledHeader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp.preprocessed; fileEncoding = 4; name = PrecompiledHeader.h; path = ../../Source/TGON/PrecompiledHeader.h; sourceTree = "<group>"; };
 		FDEA237A20AFF823000885AC /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../ThirdParty/Debug/x86_64/libpng16.a; sourceTree = "<group>"; };
 		FDEA237B20AFF823000885AC /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../ThirdParty/Debug/x86_64/libGLEW.a; sourceTree = "<group>"; };
 		FDEA237C20AFF823000885AC /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../ThirdParty/Debug/x86_64/libz.a; sourceTree = "<group>"; };
@@ -1746,6 +1751,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = FDD7C8AE1F65430C000EB7C8;
@@ -1763,6 +1769,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB350382276138C0022BDDF /* framing.c in Sources */,
+				FDB350392276138E0022BDDF /* bitwise.c in Sources */,
+				FDB35032227613420022BDDF /* glewinfo.c in Sources */,
+				FDB35034227613470022BDDF /* visualinfo.c in Sources */,
+				FDB35033227613420022BDDF /* glew.c in Sources */,
 				FD4C1DEF219F3F8700B2B2BE /* MacOSLog.mm in Sources */,
 				FD4C1DF0219F3F8700B2B2BE /* MacOSPath.mm in Sources */,
 				FD4C1DF1219F3F8700B2B2BE /* MacOSAppDelegate.mm in Sources */,
@@ -1994,7 +2005,7 @@
 		FDD7C8BC1F65430C000EB7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
@@ -2027,7 +2038,7 @@
 		FDD7C8BD1F65430C000EB7C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				DEVELOPMENT_TEAM = WU734J36XA;
 				EXECUTABLE_PREFIX = lib;
