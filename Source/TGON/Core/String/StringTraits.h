@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdarg>
 #include <cassert>
+#include <memory>
 #include <cstdint>
 
 namespace tgon

@@ -52,7 +52,7 @@ public:
     void SetInterval(int64_t interval);
     
     /**@brief   Gets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event. */
-    float GetInterval() const noexcept;
+    double GetInterval() const noexcept;
     
 /**@section Public variable */
 public:
