@@ -5,7 +5,7 @@
 namespace tgon
 {
 
-InputManager::InputManager(const Window& inputTarget) :
+InputManager::InputManager(const std::shared_ptr<Window>& inputTarget) :
     m_inputManagerImpl(inputTarget)
 {
 }

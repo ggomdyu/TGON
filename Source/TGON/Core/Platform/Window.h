@@ -35,6 +35,11 @@ public:
 
 /**@section Public method */
 public:
+    I32Point GetPosition() const;
+    I32Extent2D GetSize() const;
+    PlatformWindow* GetPlatformDependency() noexcept;
+    const PlatformWindow* GetPlatformDependency() const noexcept;
+    
     using PlatformWindow::Show;
     using PlatformWindow::Hide;
     using PlatformWindow::Close;
@@ -49,8 +54,6 @@ public:
     using PlatformWindow::GetPosition;
     using PlatformWindow::GetSize;
     using PlatformWindow::GetTitle;
-    I32Point GetPosition() const;
-    I32Extent2D GetSize() const;
     using PlatformWindow::GetTransparency;
     using PlatformWindow::GetNativeWindow;
     using PlatformWindow::HasCaption;
@@ -61,16 +64,16 @@ public:
 
 /**@section Public event handler */
 public:
-    using PlatformWindow::OnWindowMove;
-    using PlatformWindow::OnWindowResize;
-    using PlatformWindow::OnWindowMaximize;
-    using PlatformWindow::OnWindowMinimize;
-    using PlatformWindow::OnWindowEnterFullScreen;
-    using PlatformWindow::OnWindowExitFullScreen;
-    using PlatformWindow::OnWindowWillClose;
-    using PlatformWindow::OnWindowDidClose;
-    using PlatformWindow::OnWindowGetFocus;
-    using PlatformWindow::OnWindowLoseFocus;
+    using PlatformWindow::OnMove;
+    using PlatformWindow::OnResize;
+    using PlatformWindow::OnMaximize;
+    using PlatformWindow::OnMinimize;
+    using PlatformWindow::OnEnterFullScreen;
+    using PlatformWindow::OnExitFullScreen;
+    using PlatformWindow::OnWillClose;
+    using PlatformWindow::OnDidClose;
+    using PlatformWindow::OnGetFocus;
+    using PlatformWindow::OnLoseFocus;
 };
 
 } /* namespace tgon */

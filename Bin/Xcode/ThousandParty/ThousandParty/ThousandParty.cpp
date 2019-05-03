@@ -6,18 +6,24 @@
 
 TGON_DECLARE_ENGINE(ThousandParty);
 
-void ThousandParty::OnDidLaunch()
+void ThousandParty::OnLaunch()
 {
-    SuperType::OnDidLaunch();
+    SuperType::OnLaunch();
 
     //tgon::Sprite s(tgon::GetDesktopDirectory() + "/Assets/Image/IntroScene/girl.png");
 
+    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
+    rootWindow->OnResize += [](int32_t width, int32_t height)
+    {
+        printf("%d %d\n", width, height);
+    };
+    
     this->Initialize();
 }
 
-void ThousandParty::OnWillTerminate()
+void ThousandParty::OnTerminate()
 {
-    SuperType::OnWillTerminate();
+    SuperType::OnTerminate();
 }
 
 void ThousandParty::Update()
@@ -32,26 +38,26 @@ void ThousandParty::Initialize()
 
 void ThousandParty::InitializeModule()
 {
-    tgon::Application::GetInstance()->EnableCrashHandler();
-
-    tgon::Window& rootWindow = tgon::Application::GetInstance()->GetRootWindow();
-    tgon::InputMode inputMode;
+    using namespace tgon;
+    
+    const auto& rootWindow = Application::GetInstance()->GetRootWindow();
+    InputMode inputMode;
     {
         inputMode.isUseMouse = false;
         inputMode.isUseKeyboard = true;
         inputMode.isUseGamepad = false;
     }
-    this->RegisterModule<tgon::InputModule>(inputMode, rootWindow);
+    this->RegisterModule<InputModule>(rootWindow, inputMode);
 
-    tgon::VideoMode videoMode;
+    VideoMode videoMode;
     {
-        videoMode.clearColor = tgon::Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
+        videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
         videoMode.enableHardwareAccelerate = true;
         videoMode.enableTripleBuffer = false;
         videoMode.enableVerticalSync = false;
         videoMode.enableMultiSampling = false;
     };
-    this->RegisterModule<tgon::GraphicsModule>(rootWindow, videoMode);
-    this->RegisterModule<tgon::TimeModule>();
-    this->RegisterModule<tgon::GameSceneModule>()->ChangeScene<LogoScene>();
+    this->RegisterModule<GraphicsModule>(rootWindow, videoMode);
+    this->RegisterModule<TimeModule>();
+    this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
 }

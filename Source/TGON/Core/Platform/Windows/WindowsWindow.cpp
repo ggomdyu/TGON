@@ -119,12 +119,12 @@ void WindowsWindow::SetRawWindowStyleEx(DWORD rawWindowStyleEx)
 {
 }
 
-DWORD WindowsWindow::GetRawWindowStyle() const
+LONG_PTR WindowsWindow::GetRawWindowStyle() const
 {
     return ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
 }
 
-DWORD WindowsWindow::GetRawWindowStyleEx() const
+LONG_PTR WindowsWindow::GetRawWindowStyleEx() const
 {
     return ::GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
 }
@@ -332,7 +332,7 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
 void WindowsWindow::SetUserData(void* data)
 {
-    SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG>(data));
+    SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(data));
 }
 
 } /* namespace tgon */

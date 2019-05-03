@@ -42,29 +42,49 @@ void Application::ShowMessageBox(const char* title, const char* message) const
     this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }
 
-Engine* Application::GetEngine() noexcept
+std::shared_ptr<Engine> Application::GetEngine() noexcept
 {
-    return Application::GetInstance()->m_engine.get();
+    return m_engine;
+}
+    
+std::shared_ptr<const Engine> Application::GetEngine() const noexcept
+{
+    return m_engine;
 }
 
-Window& Application::GetRootWindow() noexcept
+std::shared_ptr<Window> Application::GetRootWindow() noexcept
 {
-    return *Application::GetInstance()->m_rootWindow.get();
+    return m_rootWindow;
+}
+    
+std::shared_ptr<const Window> Application::GetRootWindow() const noexcept
+{
+    return m_rootWindow;
 }
 
-void Application::OnDidLaunch()
+PlatformApplication* Application::GetPlatformDependency() noexcept
+{
+    return this;
+}
+    
+const PlatformApplication* Application::GetPlatformDependency() const noexcept
+{
+    return this;
+}
+    
+void Application::OnLaunch()
 {
     if (m_engine)
     {
-        m_engine->OnDidLaunch();
+        m_engine->OnLaunch();
     }
 }
 
-void Application::OnWillTerminate()
+void Application::OnTerminate()
 {
     if (m_engine)
     {
-        m_engine->OnWillTerminate();
+        m_engine->OnTerminate();
     }
 }
 

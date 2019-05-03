@@ -8,7 +8,6 @@
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
 
-#import "Core/Platform/Config.h"
 #import "Core/Object/CoreObject.h"
 
 #import "MacOSApplicationType.h"
@@ -29,18 +28,9 @@ public:
 /**@section Public method */
 public:
     template <typename _FunctionType>
-    void MessageLoop(const _FunctionType& onUpdate);
-    
+    void MessageLoop(const _FunctionType& onUpdateFrame);
     void Terminate();
-    
-    /**
-     * @brief   Displays a message window which presents a message to user.
-     * @param [in] title            The title appears in the message window.
-     * @param [in] message          The message appears in the message window.
-     * @param [in] messageBoxIcon   The type of icon appears in the message window.
-     */
     void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
-    
     void EnableCrashHandler() {}
     
 /**@section Public event handler */
@@ -51,7 +41,7 @@ public:
 using PlatformApplication = MacOSApplication;
     
 template <typename _FunctionType>
-inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdate)
+inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdateFrame)
 {
     NSEvent* event = nil;
     while (true)
@@ -64,7 +54,7 @@ inline void MacOSApplication::MessageLoop(const _FunctionType& onUpdate)
             this->OnHandleMessage(event);
         }
         
-        onUpdate();
+        onUpdateFrame();
     }
 }
 

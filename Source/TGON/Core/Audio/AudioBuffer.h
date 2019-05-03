@@ -10,6 +10,7 @@
 #include <vector>
 #include <cstdint>
 #include <memory>
+#include <string>
 
 #include "Core/Platform/Config.h"
 #if TGON_PLATFORM_MACOS

@@ -8,6 +8,7 @@
 #include <deque>
 #include <future>
 #include <thread>
+#include <vector>
 #include <mutex>
 
 #include "Core/Object/Delegate.h"

@@ -30,7 +30,7 @@ class TGON_API InputManagerImpl final :
 {
 /**@section Public constructor */
 public:
-    explicit InputManagerImpl(const Window& window);
+    explicit InputManagerImpl(const std::shared_ptr<Window>& window);
    
 /**@section Public destructor */
 public:

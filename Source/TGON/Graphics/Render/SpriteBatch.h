@@ -48,10 +48,14 @@ public:
     
     const Color4f& GetBlendColor() const noexcept;
 
-    const std::shared_ptr<Sprite>& GetSprite() const noexcept;
+    std::shared_ptr<Sprite> GetSprite() noexcept;
+    
+    std::shared_ptr<const Sprite> GetSprite() const noexcept;
+    
+    std::shared_ptr<Material> GetMaterial() noexcept;
 
-    const std::shared_ptr<Material>& GetMaterial() const noexcept;
-
+    std::shared_ptr<const Material> GetMaterial() const noexcept;
+    
 /**@section Private variable */
 private:
     std::vector<const Matrix4x4*> m_matWorlds;

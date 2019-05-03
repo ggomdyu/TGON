@@ -27,12 +27,12 @@ CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, fl
 
 CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     m_camera(camera),
-    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>())
 {
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)
     {
-        //graphicsModule->GetView().AddCamera(camera);
+        graphicsModule->GetView().AddCamera(camera);
     }
 }
 

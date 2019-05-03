@@ -11,10 +11,10 @@
 namespace tgon
 {
 
-GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
+GraphicsModule::GraphicsModule(const std::shared_ptr<Window>& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
-    auto windowSize = window.GetSize();
+    auto windowSize = window->GetSize();
     m_graphics.SetViewport(0, 0, windowSize.width, windowSize.height);
     m_graphics.SetClearColor(videoMode.clearColor);
     m_graphics.SetCullMode(CullMode::CW);

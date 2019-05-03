@@ -1,7 +1,7 @@
 #import "PrecompiledHeader.h"
 
-#import "MacOSWindow.h"
 #import "MacOSWindowDelegate.h"
+#import "MacOSWindow.h"
 
 @implementation WindowDelegate
 
@@ -18,55 +18,55 @@
 
 - (void)windowDidResize:(NSNotification*)notification
 {
-    if (_window->OnWindowResize != nullptr)
+    if (_window->OnResize != nullptr)
     {
         int32_t width, height;
         _window->GetSize(&width, &height);
 
-        _window->OnWindowResize(width, height);
+        _window->OnResize(width, height);
     }
 }
 
 - (void)windowDidMove:(NSNotification*)notification
 {
-    if (_window->OnWindowMove != nullptr)
+    if (_window->OnMove != nullptr)
     {
         int32_t x, y;
         _window->GetPosition(&x, &y);
         
-        _window->OnWindowMove(x, y);
+        _window->OnMove(x, y);
     }
 }
 
 - (void)windowWillMiniaturize:(NSNotification*)notification
 {
-    if (_window->OnWindowMinimize != nullptr)
+    if (_window->OnMinimize != nullptr)
     {
-        _window->OnWindowMinimize();
+        _window->OnMinimize();
     }
 }
 
 - (void)windowDidDeminiaturize:(NSNotification*)notification
 {
-    if (_window->OnWindowMaximize != nullptr)
+    if (_window->OnMaximize != nullptr)
     {
-        _window->OnWindowMaximize();
+        _window->OnMaximize();
     }
 }
 
 - (void)windowDidEnterFullScreen:(NSNotification *)notification
 {
-    if (_window->OnWindowEnterFullScreen != nullptr)
+    if (_window->OnEnterFullScreen != nullptr)
     {
-        _window->OnWindowEnterFullScreen();
+        _window->OnEnterFullScreen();
     }
 }
 
 - (void)windowDidExitFullScreen:(NSNotification *)notification
 {
-    if (_window->OnWindowExitFullScreen != nullptr)
+    if (_window->OnExitFullScreen != nullptr)
     {
-        _window->OnWindowExitFullScreen();
+        _window->OnExitFullScreen();
     }
 }
 @end

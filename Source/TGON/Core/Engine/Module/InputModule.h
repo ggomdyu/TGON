@@ -10,7 +10,6 @@
 #include "Core/Hardware/InputManager.h"
 
 #include "IModule.h"
-#include "InputMode.h"
 
 namespace tgon
 {
@@ -19,6 +18,27 @@ class Keyboard;
 class Mouse;
 class Gamepad;
 
+struct InputMode final
+{
+/* @section Public constructor */
+public:
+    constexpr InputMode() noexcept = default;
+    constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
+    
+/* @section Public variable */
+public:
+    bool isUseKeyboard = true;
+    bool isUseMouse = false;
+    bool isUseGamepad = false;
+};
+
+constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept :
+    isUseKeyboard(isUseKeyboard),
+    isUseMouse(isUseMouse),
+    isUseGamepad(isUseGamepad)
+{
+}
+    
 class TGON_API InputModule :
     public IModule
 {
@@ -27,7 +47,7 @@ public:
     
 /**@section Public constructor */
 public:
-    InputModule(const InputMode& inputMode, Window& inputTarget);
+    InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode);
 
 /**@section Public destructor */
 public:
@@ -35,16 +55,10 @@ public:
 
 /**@section Public method */
 public:
-    /**@brief   Updates the module. */
     virtual void Update() final override;
     
-    /**@brief   Gets the mouse device. */
     const std::unique_ptr<Mouse>& GetMouse() const noexcept;
-    
-    /**@brief   Gets the keyboard device. */
     const std::unique_ptr<Keyboard>& GetKeyboard() const noexcept;
-
-    /**@brief   Gets the gamepad device. */
     const std::unique_ptr<Gamepad>& GetGamepad() const noexcept;
 
 /**@section Private variable */

@@ -7,12 +7,6 @@
 namespace tgon
 {
 
-GameObject::GameObject(const StringHash& name) :
-    m_name(name),
-    m_isActive(true)
-{
-}
-
 void GameObject::Update()
 {
     if (m_isActive == false)
@@ -46,6 +40,16 @@ void GameObject::SetActive(bool isActive)
 bool GameObject::IsActive() const noexcept
 {
     return m_isActive;
+}
+
+Transform& GameObject::GetTransform()
+{
+    return m_transform;
+}
+
+const Transform& GameObject::GetTransform() const
+{
+    return m_transform;
 }
 
 bool GameObject::RemoveComponent(size_t componentId)

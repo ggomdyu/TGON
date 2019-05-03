@@ -21,7 +21,7 @@ public:
     
 /**@section Public constructor */
 public:
-    GraphicsModule(Window& window, const VideoMode& videoMode);
+    GraphicsModule(const std::shared_ptr<Window>& window, const VideoMode& videoMode);
 
 /**@section Public destructor */
 public:
@@ -31,14 +31,10 @@ public:
 public:
     /**@brief   Updates this module. */
     virtual void Update() override;
-
-    View& GetView() noexcept;
-
     const View& GetView() const noexcept;
-    
-    Graphics& GetGraphics() noexcept;
-    
+    View& GetView() noexcept;
     const Graphics& GetGraphics() const noexcept;
+    Graphics& GetGraphics() noexcept;
 
 /**@section Private method */
 private:
@@ -48,7 +44,6 @@ private:
 /**@section Private variable */
 public:
     Graphics m_graphics;
-    
     View m_view;
 };
 

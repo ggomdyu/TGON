@@ -20,5 +20,15 @@ I32Extent2D Window::GetSize() const
 
     return {width, height};
 }
+    
+PlatformWindow* Window::GetPlatformDependency() noexcept
+{
+    return this;
+}
+
+const PlatformWindow* Window::GetPlatformDependency() const noexcept
+{
+    return this;
+}
 
 } /* namespace tgon */

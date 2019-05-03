@@ -24,8 +24,8 @@ void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
 {
     m_sprite = sprite;
 }
-
-std::shared_ptr<Sprite>& SpriteRendererComponent::GetSprite() noexcept
+    
+std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() noexcept
 {
     return m_sprite;
 }

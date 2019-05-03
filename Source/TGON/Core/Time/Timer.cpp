@@ -12,7 +12,7 @@ Timer::Timer() noexcept :
 }
     
 Timer::Timer(bool isAutoReset) noexcept :
-    Timer(0.0, isAutoReset)
+    Timer(0, isAutoReset)
 {
 }
 
@@ -50,7 +50,7 @@ void Timer::SetInterval(int64_t interval)
     m_interval = interval;
 }
 
-float Timer::GetInterval() const noexcept
+double Timer::GetInterval() const noexcept
 {
     return m_interval;
 }

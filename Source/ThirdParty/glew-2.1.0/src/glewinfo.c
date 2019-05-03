@@ -16725,7 +16725,7 @@ GLboolean glewCreateContext (struct createParams *params)
   }
   #endif
 
-  contextAttrs[i++] = 0;
+  contextAttrs[i++] = CGLPixelFormatAttribute(0);
 
   error = CGLChoosePixelFormat(contextAttrs, &pf, &npix);
   if (error) return GL_TRUE;

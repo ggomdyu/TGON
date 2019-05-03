@@ -59,8 +59,8 @@ public:
     bool IsTopMost() const;
     void SetRawWindowStyle(DWORD rawWindowStyle);
     void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
-    DWORD GetRawWindowStyle() const;
-    DWORD GetRawWindowStyleEx() const;
+    LONG_PTR GetRawWindowStyle() const;
+    LONG_PTR GetRawWindowStyleEx() const;
 
 /**@section Public event handler */
 public:

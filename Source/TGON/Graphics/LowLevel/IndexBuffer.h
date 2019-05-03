@@ -55,18 +55,18 @@ public:
      */
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
-    /**@brief                       Gets the size of the stored index buffer.  */
+    /**@brief   Gets the size of the stored index buffer.  */
     std::size_t GetDataBytes() const noexcept;
     
-    /**@brief                       Sets the rendering pipeline to choose this buffer. */
+    /**@brief   Sets the rendering pipeline to choose this buffer. */
     void Use();
     
-    /**@brief                       Sets the rendering pipeline does not choose this buffer. */
+    /**@brief   Sets the rendering pipeline does not choose this buffer. */
     void Unuse();
     
     /**
-     * @brief                       Checks the index buffer was created successfully.
-     * @return                      Returns true if the buffer was created successfully, false otherwise.
+     * @brief   Checks the index buffer was created successfully.
+     * @return  Returns true if the buffer was created successfully, false otherwise.
      */
     bool IsValid() const noexcept;
     

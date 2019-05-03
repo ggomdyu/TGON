@@ -22,14 +22,8 @@ public:
 
 /**@section Public constructor */
 public:
-    SpriteRendererComponent() = default;
-
-    /**
-     * @brief   Initializes the component with the sprite and material.
-     * @param [in] sprite       The sprite to be used for rendering.
-     * @param [in] material     The material to be used for rendering.
-     * @param [in[ blendColor
-     */
+    using RendererComponent::RendererComponent;
+    
     SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Public destructor */
@@ -43,9 +37,9 @@ public:
 
     /**@brief   Sets a sprite that rendered by this component. */
     void SetSprite(const std::shared_ptr<Sprite>& sprite);
-
-    std::shared_ptr<Sprite>& GetSprite() noexcept;
-
+    
+    std::shared_ptr<Sprite> GetSprite() noexcept;
+    
     std::shared_ptr<const Sprite> GetSprite() const noexcept;
 
     /**@brief   Sets a color that blended with the sprite. */

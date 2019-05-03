@@ -17,11 +17,11 @@ Engine::Engine() :
 
 Engine::~Engine() = default;
 
-void Engine::OnDidLaunch()
+void Engine::OnLaunch()
 {
 }
 
-void Engine::OnWillTerminate()
+void Engine::OnTerminate()
 {
 }
 

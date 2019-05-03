@@ -41,6 +41,24 @@ struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
     using ClassType = _ClassType;
 };
 
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> :
+    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
+{
+};
+    
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> :
+    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
+{
+};
+
+template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
+    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
+{
+};
+
 /**@brief   Traits for the lambda */
 template <typename _FunctionType>
 struct FunctionTraits : FunctionTraits<decltype(&_FunctionType::operator())> {};

@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <cassert>
 #include <cstdio>
+#include <cmath>
 
 #include "Core/Utility/ExpressionTemplate.h"
 

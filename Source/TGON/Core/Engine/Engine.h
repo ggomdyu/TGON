@@ -43,7 +43,7 @@ public:
 public:
     /**
      * @brief   Updates the Engine.
-     * @detail  When this function is invoked, all registered modules are updated.
+     * @detail  When this function has invoked, all registered modules are updated.
      */
     virtual void Update();
     
@@ -71,9 +71,8 @@ public:
     
 /**@section Public event handler */
 public:
-    virtual void OnDidLaunch();
-
-    virtual void OnWillTerminate();
+    virtual void OnLaunch();
+    virtual void OnTerminate();
 
 /**@section Private method */
 private:
@@ -119,8 +118,6 @@ inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const 
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
 {
-    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
-    
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     
     this->RegisterModule(module);
@@ -130,24 +127,18 @@ inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
 template <typename _ModuleType>
 inline bool Engine::UnregisterModule()
 {
-    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
-    
     return this->UnregisterModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
 }
 
 template <typename _ModuleType>
 inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 {
-    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
-    
     return std::static_pointer_cast<_ModuleType>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
 }
 
 template <typename _ModuleType>
 inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 {
-    static_assert(std::is_base_of<IModule, _ModuleType>::value, "HELLO!");
-    
     return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
     

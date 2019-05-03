@@ -11,5 +11,15 @@ Texture::Texture(const std::string& filePath, const TextureProperty& textureProp
     PlatformTexture(filePath, textureProperty)
 {
 }
+    
+PlatformTexture* Texture::GetPlatformDependency() noexcept
+{
+    return this;
+}
+
+const PlatformTexture* Texture::GetPlatformDependency() const noexcept
+{
+    return this;
+}
 
 } /* namespace tgon */

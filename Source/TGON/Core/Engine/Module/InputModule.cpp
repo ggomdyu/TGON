@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-InputModule::InputModule(const InputMode& inputMode, Window& inputTarget) :
+InputModule::InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode) :
     m_inputManager(inputTarget)
 {
     if (inputMode.isUseKeyboard)

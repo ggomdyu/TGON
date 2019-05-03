@@ -63,21 +63,21 @@ public:
     
 /**@section Public event handler */
 public:
-    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
-    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
-    DelegateChain<void()> OnWindowMaximize;
-    DelegateChain<void()> OnWindowMinimize;
-    DelegateChain<void()> OnWindowEnterFullScreen;
-    DelegateChain<void()> OnWindowExitFullScreen;
-    DelegateChain<void()> OnWindowWillClose;
-    DelegateChain<void()> OnWindowDidClose;
-    DelegateChain<void()> OnWindowGetFocus;
-    DelegateChain<void()> OnWindowLoseFocus;
+    DelegateChain<void(int32_t, int32_t)> OnMove;
+    DelegateChain<void(int32_t, int32_t)> OnResize;
+    DelegateChain<void()> OnMaximize;
+    DelegateChain<void()> OnMinimize;
+    DelegateChain<void()> OnEnterFullScreen;
+    DelegateChain<void()> OnExitFullScreen;
+    DelegateChain<void()> OnWillClose;
+    DelegateChain<void()> OnDidClose;
+    DelegateChain<void()> OnGetFocus;
+    DelegateChain<void()> OnLoseFocus;
     
 /**@section Private variable */
 private:
-    NSWindow* m_nsWindow;
-    WindowDelegate* m_nsWindowDelegate;
+    NSWindow* m_window;
+    WindowDelegate* m_windowDelegate;
 };
     
 using PlatformWindow = MacOSWindow;

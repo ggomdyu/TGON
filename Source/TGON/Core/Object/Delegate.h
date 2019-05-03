@@ -11,38 +11,8 @@
 #include <cstdint>
 #include <utility>
 #include <new>
-#include <boost/preprocessor/facilities/overload.hpp>
-#include <boost/preprocessor/facilities/empty.hpp>
 
 #include "TypeTraits.h"
-
-/**
- * @see     http://www.boost.org/doc/libs/master/libs/preprocessor/doc/ref/overload.html
- * @brief   Enables overloading of TGON_MAKE_DELEGATE macro.
- */
-#if BOOST_PP_VARIADICS_MSVC
-#   define TGON_MAKE_DELEGATE(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(TGON_MAKE_DELEGATE_, __VA_ARGS__)(__VA_ARGS__), BOOST_PP_EMPTY())
-#else
-#   define TGON_MAKE_DELEGATE(...) BOOST_PP_OVERLOAD(TGON_MAKE_DELEGATE_,__VA_ARGS__)(__VA_ARGS__)
-#endif
-
-/**
- * @brief   Binds delegate with lambda or global function.
- * @param [in] function     A lambda object or Reference to global function(e.g. &functionName)
- */
-#define TGON_MAKE_DELEGATE_1(function)\
-    [&]()\
-    {\
-        auto functionInstance = function;\
-        return tgon::Delegate<tgon::FunctionTraits<decltype(functionInstance)>::FunctionType>::MakeDelegate(functionInstance);\
-    } ()
-
-/**
- * @brief   Binds delegate with class member function.
- * @param [in] function     A reference to class member function(e.g. &ClassName::functionName)
- * @param [in] instance     An instance which handles event
- */
-#define TGON_MAKE_DELEGATE_2(function, instance) tgon::Delegate<tgon::FunctionTraits<decltype(function)>::FunctionType>::MakeDelegate<tgon::FunctionTraits<decltype(function)>::ClassType, function>(instance)
 
 namespace tgon
 {
@@ -400,6 +370,26 @@ inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
 {
     operator delete(ptr);
     return sizeof(_FunctionType);
+}
+    
+template <auto _Function>
+auto MakeDelegate(typename FunctionTraits<decltype(_Function)>::ClassType* receiver)
+{
+    using ClassType = typename FunctionTraits<decltype(_Function)>::ClassType;
+    
+    return Delegate<typename FunctionTraits<decltype(_Function)>::FunctionType>::template MakeDelegate<ClassType, _Function>(receiver);
+}
+
+template <auto _FunctionType>
+auto MakeDelegate()
+{
+    return Delegate<typename FunctionTraits<decltype(_FunctionType)>::FunctionType>::template MakeDelegate<_FunctionType>();
+}
+
+template <typename _FunctionType>
+auto MakeDelegate(_FunctionType&& function)
+{
+    return Delegate<typename FunctionTraits<_FunctionType>::FunctionType>(std::forward<_FunctionType>(function));
 }
 
 } /* namespace tgon */

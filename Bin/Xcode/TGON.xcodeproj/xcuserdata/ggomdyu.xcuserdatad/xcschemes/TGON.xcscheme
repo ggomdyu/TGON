@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
-            BuildableName = "libTGON.a"
-            BlueprintName = "TGON"
-            ReferencedContainer = "container:TGON.xcodeproj">
+            BlueprintIdentifier = "FDD7C8C61F654342000EB7C8"
+            BuildableName = "ThousandParty"
+            BlueprintName = "ThousandParty"
+            ReferencedContainer = "container:ThousandParty/ThousandParty.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -51,15 +51,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FDD7C8B61F65430C000EB7C8"
-            BuildableName = "libTGON.a"
-            BlueprintName = "TGON"
-            ReferencedContainer = "container:TGON.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
          <AdditionalOption
             key = "MallocStackLogging"

@@ -21,7 +21,7 @@ class TGON_API OpenGLTexture :
 /**@section Public constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
-    OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty = {});
+    explicit OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty = {});
 
 /**@section Public destructor */
 public:
@@ -46,9 +46,6 @@ public:
     
     /**@brief   Checks the image file was loaded successfully. */
     using Image::IsValid;
-    
-    /**@brief   Gets the raw image data. */
-    using Image::GetImageData;
     
     /**@brief   Gets the image width. */
     using Image::GetWidth;
