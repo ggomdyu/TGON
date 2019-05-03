@@ -249,17 +249,17 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
             {
             case SC_MINIMIZE:
                 {
-                    if (OnWindowMinimize != nullptr)
+                    if (OnMinimize != nullptr)
                     {
-                        OnWindowMinimize();
+                        OnMinimize();
                     }
                 }
                 break;
             case SC_MAXIMIZE:
                 {
-                    if (OnWindowMaximize != nullptr)
+                    if (OnMaximize != nullptr)
                     {
-                        OnWindowMaximize();
+                        OnMaximize();
                     }
                 }
                 break;
@@ -269,54 +269,54 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
     case WM_SETFOCUS:
         {
-            if (OnWindowGetFocus != nullptr)
+            if (OnGetFocus != nullptr)
             {
-                OnWindowGetFocus();
+                OnGetFocus();
             }
         }
         break;
 
     case WM_KILLFOCUS:
         {
-            if (OnWindowLoseFocus != nullptr)
+            if (OnLoseFocus != nullptr)
             {
-                OnWindowLoseFocus();
+                OnLoseFocus();
             }
         }
         break;
 
     case WM_MOVE:
         {
-            if (OnWindowMove != nullptr)
+            if (OnMove != nullptr)
             {
-                OnWindowMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                OnMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }
         }
         break;
 
     case WM_SIZE:
         {
-            if (OnWindowResize != nullptr)
+            if (OnResize != nullptr)
             {
-                OnWindowResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                OnResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }   
         }
         break;
 
     case WM_CLOSE:
         {
-            if (OnWindowWillClose != nullptr)
+            if (OnWillClose != nullptr)
             {
-                OnWindowWillClose();
+                OnWillClose();
             }
         }
         break;
 
     case WM_DESTROY:
         {
-            if (OnWindowDidClose != nullptr)
+            if (OnDidClose != nullptr)
             {
-                OnWindowDidClose();
+                OnDidClose();
             }
 
             this->Close();

@@ -17,7 +17,6 @@ SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& 
 
 void SpriteRendererComponent::Update()
 {
-    m_graphicsModule->GetView().AddSpriteBatch(m_blendColor, m_sprite, m_material, GetOwner()->)
 }
 
 void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)

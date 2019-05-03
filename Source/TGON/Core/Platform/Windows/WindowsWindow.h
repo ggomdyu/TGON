@@ -66,16 +66,16 @@ public:
 public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
-    DelegateChain<void(int32_t, int32_t)> OnWindowMove;
-    DelegateChain<void(int32_t, int32_t)> OnWindowResize;
-    DelegateChain<void()> OnWindowMaximize;
-    DelegateChain<void()> OnWindowMinimize;
-    DelegateChain<void()> OnWindowEnterFullScreen;
-    DelegateChain<void()> OnWindowExitFullScreen;
-    DelegateChain<void()> OnWindowWillClose;
-    DelegateChain<void()> OnWindowDidClose;
-    DelegateChain<void()> OnWindowGetFocus;
-    DelegateChain<void()> OnWindowLoseFocus;
+    DelegateChain<void(int32_t, int32_t)> OnMove;
+    DelegateChain<void(int32_t, int32_t)> OnResize;
+    DelegateChain<void()> OnMaximize;
+    DelegateChain<void()> OnMinimize;
+    DelegateChain<void()> OnEnterFullScreen;
+    DelegateChain<void()> OnExitFullScreen;
+    DelegateChain<void()> OnWillClose;
+    DelegateChain<void()> OnDidClose;
+    DelegateChain<void()> OnGetFocus;
+    DelegateChain<void()> OnLoseFocus;
 
 /**@section Private method */
 private:
