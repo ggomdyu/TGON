@@ -21,8 +21,7 @@ public:
 
 /**@section Public constructor */
 public:
-    RendererComponent() = default;
-
+    RendererComponent();
     explicit RendererComponent(const std::shared_ptr<Material>& material);
     
 /**@section Public destructor */
@@ -35,10 +34,10 @@ public:
     void SetMaterial(const std::shared_ptr<Material>& material);
     
     /**@brief   Gets the material. */
-    std::shared_ptr<Material>& GetMaterial() noexcept;
+    std::shared_ptr<Material> GetMaterial() noexcept;
 
     /**@brief   Gets the material. */
-    const std::shared_ptr<Material> GetMaterial() const noexcept;
+    std::shared_ptr<const Material> GetMaterial() const noexcept;
     
 /**@section Protected variable */
 protected:

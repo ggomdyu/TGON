@@ -9,17 +9,6 @@
 
 #include "Core/Engine/Engine.h"
 
-namespace tgon
-{
-
-class CameraComponent;
-class SpriteRendererComponent;
-class GraphicsModule;
-class InputModule;
-class TimeModule;
-
-} /* namespace tgon */
-
 class TGON_API ThousandParty final :
     public tgon::Engine
 {
@@ -32,19 +21,17 @@ public:
 
 /**@section Public destructor */
 public:
-    virtual ~ThousandParty() override {}
+    virtual ~ThousandParty() override = default;
 
 /**@section Public event handler */
 public:
-    virtual void OnDidLaunch() override;
-
-    virtual void OnWillTerminate() override;
+    virtual void OnLaunch() override;
+    virtual void OnTerminate() override;
 
 /**@section Public method */
 public:
     virtual void Update() override;
 
     void Initialize();
-
     void InitializeModule();
 };

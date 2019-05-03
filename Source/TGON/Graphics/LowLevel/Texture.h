@@ -23,6 +23,9 @@ public:
    
 /**@section Public method */
 public:
+    PlatformTexture* GetPlatformDependency() noexcept;
+    const PlatformTexture* GetPlatformDependency() const noexcept;
+    
     using PlatformTexture::Use;
     using PlatformTexture::SetFilterMode;
     using PlatformTexture::SetWrapMode;

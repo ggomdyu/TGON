@@ -31,7 +31,7 @@ public:
 
 /**@section Public constructor */
 public:
-    OpenGLContext(const VideoMode& videoMode, const Window& displayTarget);
+    OpenGLContext(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs);
 
 /**@section Public destructor */

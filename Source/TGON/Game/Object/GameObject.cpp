@@ -42,6 +42,16 @@ bool GameObject::IsActive() const noexcept
     return m_isActive;
 }
 
+Transform& GameObject::GetTransform()
+{
+    return m_transform;
+}
+
+const Transform& GameObject::GetTransform() const
+{
+    return m_transform;
+}
+
 bool GameObject::RemoveComponent(size_t componentId)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)

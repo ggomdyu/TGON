@@ -21,7 +21,7 @@ class TGON_API InputManager final :
 {
 /**@section Public constructor */
 public:
-    InputManager(const Window& inputTarget);
+    InputManager(const std::shared_ptr<Window>& inputTarget);
     
 /**@section Public destructor */
 public:

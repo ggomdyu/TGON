@@ -50,7 +50,16 @@ public:
         
         m_components.push_back(component);
         
-        return std::static_pointer_cast<_ComponentType>(component);
+        return component;
+    }
+    
+    template <typename _ComponentType>
+    std::shared_ptr<_ComponentType> AddComponent(const std::shared_ptr<_ComponentType>& component)
+    {
+        m_components.push_back(component);
+        
+        component->SetOwner(this);
+        return component;
     }
 
     /**
@@ -109,6 +118,10 @@ public:
 
     /**@brief   Gets the active state of this object. */
     bool IsActive() const noexcept;
+    
+    Transform& GetTransform();
+    
+    const Transform& GetTransform() const;
 
 /**@section Private method */
 private:

@@ -17,15 +17,15 @@ SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& 
 
 void SpriteRendererComponent::Update()
 {
-//    m_graphicsModule->GetView().AddSpriteBatch(m_blendColor, m_sprite, m_material, GetOwner()->)
+    m_graphicsModule->GetView().AddSpriteBatch(m_blendColor, m_sprite, m_material, GetOwner()->)
 }
 
 void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
 {
     m_sprite = sprite;
 }
-
-std::shared_ptr<Sprite>& SpriteRendererComponent::GetSprite() noexcept
+    
+std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() noexcept
 {
     return m_sprite;
 }

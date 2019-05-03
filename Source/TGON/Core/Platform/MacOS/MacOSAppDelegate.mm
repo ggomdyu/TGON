@@ -7,30 +7,22 @@
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    using namespace tgon;
-    
     // Initialize singleton objects.
-    decltype(auto) application = Application::GetInstance();
-
-    application->OnDidLaunch();
+    tgon::Application::GetInstance()->OnLaunch();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
-    using namespace tgon;
-    
     // If launch has been completed, then start the message loop.
-    Application::GetInstance()->MessageLoop();
+    tgon::Application::GetInstance()->MessageLoop();
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    using namespace tgon;
-    
-    Application::GetInstance()->OnWillTerminate();
+    tgon::Application::GetInstance()->OnTerminate();
 }
 
-- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
 {
     return YES;
 }

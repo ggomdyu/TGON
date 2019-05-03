@@ -49,7 +49,7 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const VideoMode& videoMode, const Window& window)
+OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& window, const VideoMode& videoMode)
 {
     // Find a suitable pixel format.
     {
@@ -72,7 +72,7 @@ OpenGLContext::OpenGLContext(const VideoMode& videoMode, const Window& window)
     }
 
     // Create a GL View and attach it to thes target window.
-    NSWindow* nativeWindow = (__bridge NSWindow*)window.GetNativeWindow();
+    NSWindow* nativeWindow = (__bridge NSWindow*)window->GetNativeWindow();
     {
         NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
         [openGLView setOpenGLContext:context];

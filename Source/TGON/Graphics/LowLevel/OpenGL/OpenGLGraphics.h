@@ -10,8 +10,9 @@
 
 #include "Core/Math/Rect.h"
 
-#include "../GraphicsType.h"
 #include "OpenGLContext.h"
+
+#include "../GraphicsType.h"
 
 namespace tgon
 {
@@ -24,7 +25,7 @@ public:
 
 /**@section Public constructor */
 public:
-    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) noexcept(false);
+    OpenGLGraphics(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) noexcept(false);
     
 /**@section Public destructor */
 public:

@@ -486,7 +486,6 @@
 		FD4C1D87219F3F7100B2B2BE /* Engine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Engine.h; sourceTree = "<group>"; };
 		FD4C1D89219F3F7100B2B2BE /* IModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IModule.h; sourceTree = "<group>"; };
 		FD4C1D8A219F3F7100B2B2BE /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InputModule.h; sourceTree = "<group>"; };
-		FD4C1D8B219F3F7100B2B2BE /* InputMode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InputMode.h; sourceTree = "<group>"; };
 		FD4C1D8C219F3F7100B2B2BE /* AudioModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AudioModule.cpp; sourceTree = "<group>"; };
 		FD4C1D8D219F3F7100B2B2BE /* ResourceModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ResourceModule.cpp; sourceTree = "<group>"; };
 		FD4C1D8E219F3F7100B2B2BE /* TimeModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TimeModule.h; sourceTree = "<group>"; };
@@ -1279,7 +1278,6 @@
 			children = (
 				FD4C1D89219F3F7100B2B2BE /* IModule.h */,
 				FD4C1D8A219F3F7100B2B2BE /* InputModule.h */,
-				FD4C1D8B219F3F7100B2B2BE /* InputMode.h */,
 				FD4C1D8C219F3F7100B2B2BE /* AudioModule.cpp */,
 				FD4C1D8D219F3F7100B2B2BE /* ResourceModule.cpp */,
 				FD4C1D8E219F3F7100B2B2BE /* TimeModule.h */,

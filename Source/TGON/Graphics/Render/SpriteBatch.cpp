@@ -65,12 +65,22 @@ const Color4f& SpriteBatch::GetBlendColor() const noexcept
     return *m_blendColor;
 }
 
-const std::shared_ptr<Sprite>& SpriteBatch::GetSprite() const noexcept
+std::shared_ptr<Sprite> SpriteBatch::GetSprite() noexcept
+{
+    return *m_sprite;
+}
+    
+std::shared_ptr<const Sprite> SpriteBatch::GetSprite() const noexcept
 {
     return *m_sprite;
 }
 
-const std::shared_ptr<Material>& SpriteBatch::GetMaterial() const noexcept
+std::shared_ptr<Material> SpriteBatch::GetMaterial() noexcept
+{
+    return *m_material;
+}
+    
+std::shared_ptr<const Material> SpriteBatch::GetMaterial() const noexcept
 {
     return *m_material;
 }

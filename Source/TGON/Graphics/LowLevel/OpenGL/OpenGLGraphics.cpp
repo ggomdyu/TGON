@@ -9,8 +9,8 @@
 namespace tgon
 {
 
-OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
-    m_context(videoMode, displayTarget),
+OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) :
+    m_context(displayTarget, videoMode),
     m_vertexArrayHandle(0)
 {
     // It is required because OpenGL expects (0, 0) coordinates to be the left bottom side, but images usually left top side.
