@@ -16,7 +16,7 @@ namespace tgon
 {
 
 class TGON_API OpenGLTexture :
-    private Image
+    private boost::noncopyable
 {
 /**@section Public constructor */
 public:
@@ -44,37 +44,31 @@ public:
     /**@brief   Gets the texture wrap mode. */
     TextureWrapMode GetWrapMode() const noexcept;
     
-    /**@brief   Checks the image file was loaded successfully. */
-    using Image::IsValid;
-    
-    /**@brief   Gets the image width. */
-    using Image::GetWidth;
-    
-    /**@brief   Gets the image height. */
-    using Image::GetHeight;
-    
-    /**@brief   Gets the count of color channel. */
-    using Image::GetChannels;
-    
-    /**@brief   Gets the pixel format of image. */
-    using Image::GetPixelFormat;
-    
-    /**
-     * @brief   Gets the file path saved at loading time.
-     * @warn    This can be incorrect information if the file moved somewhere after image loaded.
-     */
-    using Image::GetFilePath;
-    
     /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
-
+    
+    /**@brief   Checks the image file was loaded successfully. */
+    bool IsValid() const noexcept;
+    
+    /**@brief   Gets the image width. */
+    int32_t GetWidth() const noexcept;
+    
+    /**@brief   Gets the image height. */
+    int32_t GetHeight() const noexcept;
+    
+    /**@brief   Gets the size of image which contains width and height. */
+    I32Extent2D GetSize() const noexcept;
+    
+    /**@brief   Gets the count of color channel. */
+    int32_t GetChannels() const noexcept;
+    
+    /**@brief   Gets the pixel format of image. */
+    PixelFormat GetPixelFormat() const noexcept;
+    
 private:
     void TransferToVideo();
-    
     void UpdateTexParemeters();
-    
     GLuint CreateTextureHandle() const;
-    
     void CreateMipmap() const;
 
 private:
@@ -82,6 +76,7 @@ private:
     GLuint m_textureHandle;
     GLint m_filterMode;
     GLint m_wrapMode;
+    Image m_image;
 };
 
 using PlatformTexture = OpenGLTexture;

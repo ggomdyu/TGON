@@ -12,6 +12,8 @@
 #include "Core/Math/Vector2.h"
 #include "Core/Math/Extent.h"
 
+#include "../LowLevel/GraphicsType.h"
+
 namespace tgon
 {
 
@@ -19,31 +21,38 @@ class Texture;
 
 class TGON_API Sprite final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    /**@brief   Initializes the sprite with texture. */
     explicit Sprite(const std::shared_ptr<Texture>& texture);
-
     Sprite(Sprite&& rhs);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~Sprite() = default;
     
-/**@section Public method */
+/**@section Method */
 public:
-    /**@brief   Sets a texture of the sprite. */
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
-
-    /**@brief   Gets the texture of the sprite. */
-    std::shared_ptr<Texture>& GetTexture() noexcept;
-
-    /**@brief   Gets the texture of the sprite. */
+    std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
-
-/**@section Private variable */
+    void SetTextureRect(const FRect& textureRect);
+    FRect& GetTextureRect() noexcept;
+    const FRect& GetTextureRect() const noexcept;
+    void SetBlendMode(BlendMode blendMode) noexcept;
+    BlendMode GetBlendMode() const noexcept;
+    void SetScissorRect(const FRect& rect) noexcept;
+    FRect& GetScissorRect() noexcept;
+    const FRect& GetScissorRect() const noexcept;
+    void SetLayer(int32_t layer) noexcept;
+    int32_t GetLayer() const noexcept;
+    
+/**@section Variable */
 private:
     std::shared_ptr<Texture> m_texture;
+    BlendMode m_blendMode;
+    FRect m_scissorRect;
+    FRect m_textureRect;
+    int32_t m_layer;
 };
 
 class NinePatchSprite

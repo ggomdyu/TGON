@@ -31,7 +31,7 @@ public:
     constexpr BasicRect() noexcept;
 
     /**@brief   Constructor that initializes the member with the specified value */
-    constexpr BasicRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept;
+    constexpr BasicRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& heght) noexcept;
 
 /**@section Public operator */
 public:
@@ -69,16 +69,16 @@ public:
 
 /**@section Public variable */
 public:
-    _ValueType left;
-    _ValueType right;
-    _ValueType top;
-    _ValueType bottom;
+    _ValueType x;
+    _ValueType y;
+    _ValueType width;
+    _ValueType height;
 };
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType> MakeRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept
+constexpr BasicRect<_ValueType> MakeRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& height) noexcept
 {
-    return {left, right, top, bottom};
+    return {x, y, width, height};
 }
 
 using FRect = BasicRect<float>;
@@ -90,19 +90,19 @@ using LLRect = BasicRect<long long>;
 
 template <typename _ValueType>
 constexpr BasicRect<_ValueType>::BasicRect() noexcept :
-    left{},
-    right{},
-    top{},
-    bottom{}
+    x{},
+    y{},
+    width{},
+    height{}
 {
 }
 
 template <typename _ValueType>
-constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& left, const _ValueType& right, const _ValueType& top, const _ValueType& bottom) noexcept :
-    left(left),
-    right(right),
-    top(top),
-    bottom(bottom)
+constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& height) noexcept :
+    x(x),
+    y(y),
+    width(width),
+    height(height)
 {
 }
 
@@ -133,16 +133,16 @@ constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator/(const _Va
 template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-() const noexcept
 {
-    return BasicRect(-left, -right, -top, -bottom);
+    return BasicRect(-x, -y, -width, -height);
 }
 
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect& rhs) noexcept
 {
-    left += rhs.left;
-    right += rhs.right;
-    top += rhs.top;
-    bottom += rhs.bottom;
+    x += rhs.x;
+    y += rhs.y;
+    width += rhs.width;
+    height += rhs.height;
 
     return *this;
 }
@@ -150,10 +150,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator+=(const BasicRect&
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect& rhs) noexcept
 {
-    left -= rhs.left;
-    right -= rhs.right;
-    top -= rhs.top;
-    bottom -= rhs.bottom;
+    x -= rhs.x;
+    y -= rhs.y;
+    width -= rhs.width;
+    height -= rhs.height;
 
     return *this;
 }
@@ -161,10 +161,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator-=(const BasicRect&
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
-    left *= rhs;
-    right *= rhs;
-    top *= rhs;
-    bottom *= rhs;
+    x *= rhs;
+    y *= rhs;
+    width *= rhs;
+    height *= rhs;
 
     return *this;
 }
@@ -172,10 +172,10 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator*=(const _ValueType
 template <typename _ValueType>
 inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(const _ValueType& rhs)
 {
-    left /= rhs;
-    right /= rhs;
-    top /= rhs;
-    bottom /= rhs;
+    x /= rhs;
+    y /= rhs;
+    width /= rhs;
+    height /= rhs;
 
     return *this;
 }
@@ -183,7 +183,7 @@ inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator/=(const _ValueType
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::operator==(const BasicRect& rhs) const noexcept
 {
-    return (left == rhs.left && right == rhs.right && top == rhs.top && bottom == rhs.bottom);
+    return (x == rhs.x && y == rhs.y && width == rhs.width && height == rhs.height);
 }
 
 template <typename _ValueType>
@@ -195,7 +195,7 @@ constexpr bool BasicRect<_ValueType>::operator!=(const BasicRect& rhs) const noe
 template <typename _ValueType>
 constexpr bool BasicRect<_ValueType>::Intersect(const BasicRect& rhs) const
 {
-    return (left <= rhs.right && top <= rhs.bottom && right >= rhs.left && bottom >= rhs.top);
+    return (x <= rhs.width && y <= rhs.height && width >= rhs.x && height >= rhs.y);
 }
 
 template <typename _ValueType>
@@ -208,19 +208,19 @@ inline int32_t BasicRect<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) c
 template <typename _ValueType>
 inline int32_t BasicRect<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", left, right, top, bottom);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", x, y, width, height);
 }
 
 template <>
 inline int32_t BasicRect<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", left, right, top, bottom);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", x, y, width, height);
 }
 
 template <>
 inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", left, right, top, bottom);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", x, y, width, height);
 }
 
 } /* namespace tgon */

@@ -33,6 +33,7 @@ public:
     using PlatformTexture::GetWrapMode;
     using PlatformTexture::GetWidth;
     using PlatformTexture::GetHeight;
+    using PlatformTexture::GetSize;
     using PlatformTexture::GetChannels;
     using PlatformTexture::GetPixelFormat;
     using PlatformTexture::GetFilePath;

@@ -57,7 +57,7 @@ void Camera::Update()
         }
         else //if (m_projectionMode == ProjectionMode::Orthographic)
         {
-            m_matProj = Matrix4x4::OrthographicRH(m_orthoPlane.left, m_orthoPlane.right, m_orthoPlane.top, m_orthoPlane.bottom, m_nearZ, m_farZ);
+            m_matProj = Matrix4x4::OrthographicRH(m_orthoPlane.x, m_orthoPlane.width, m_orthoPlane.y, m_orthoPlane.height, m_nearZ, m_farZ);
             m_matViewProj = Matrix4x4::Scale(100.0f, 100.0f, 1.0f);
             m_matViewProj *= m_matProj;
         }

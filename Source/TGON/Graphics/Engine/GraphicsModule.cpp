@@ -40,6 +40,16 @@ void GraphicsModule::Update()
 {
     this->Draw();
 }
+    
+View& GraphicsModule::GetView() noexcept
+{
+    return m_view;
+}
+
+const View& GraphicsModule::GetView() const noexcept
+{
+    return m_view;
+}
 
 void GraphicsModule::Draw()
 {

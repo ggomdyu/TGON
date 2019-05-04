@@ -9,7 +9,7 @@ namespace tgon
 {
 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty) :
-    Image(filePath),
+    m_image(filePath),
     m_isUseMipmap(textureProperty.isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
     m_filterMode(static_cast<GLint>(textureProperty.filterMode)),
@@ -36,7 +36,7 @@ void OpenGLTexture::Use()
 void OpenGLTexture::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->GetWidth(), this->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->GetImageData()));
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.GetWidth(), m_image.GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_image.GetImageData()));
 
     if (m_isUseMipmap == true)
     {
@@ -91,6 +91,36 @@ void OpenGLTexture::CreateMipmap() const
 GLuint OpenGLTexture::GetTextureHandle() const noexcept
 {
     return m_textureHandle;
+}
+    
+bool OpenGLTexture::IsValid() const noexcept
+{
+    return m_image.IsValid();
+}
+
+int32_t OpenGLTexture::GetWidth() const noexcept
+{
+    return m_image.GetWidth();
+}
+
+int32_t OpenGLTexture::GetHeight() const noexcept
+{
+    return m_image.GetHeight();
+}
+
+I32Extent2D OpenGLTexture::GetSize() const noexcept
+{
+    return m_image.GetSize();
+}
+
+int32_t OpenGLTexture::GetChannels() const noexcept
+{
+    return m_image.GetChannels();
+}
+
+PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
+{
+    return m_image.GetPixelFormat();
 }
     
 } /* namespace tgon */
