@@ -29,6 +29,9 @@ public:
 
 /**@section Public method */
 public:
+    PlatformVertexBuffer* GetPlatformDependency() noexcept;
+    const PlatformVertexBuffer* GetPlatformDependency() const noexcept;
+    
     using PlatformVertexBuffer::SetData;
     using PlatformVertexBuffer::GetDataBytes;
     using PlatformVertexBuffer::Use;

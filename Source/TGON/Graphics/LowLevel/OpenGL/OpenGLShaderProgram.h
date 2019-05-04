@@ -1,5 +1,5 @@
 /**
- * @file    OpenGLShader.h
+ * @file    OpenGLShaderProgram.h
  * @author  ggomdyu
  * @since   01/06/2018
  */
@@ -16,16 +16,16 @@
 namespace tgon
 {
 
-class TGON_API ShaderImpl final :
+class TGON_API OpenGLShaderProgram :
     private boost::noncopyable
 {
 /**@section Public constructor */
 public:
-    ShaderImpl(const char* vertexShaderCode, const char* fragmentShaderCode);
+    OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
 
 /**@section Public destructor */
 public:
-    ~ShaderImpl();
+    ~OpenGLShaderProgram();
 
 /**@section Public method */
 public:
@@ -47,7 +47,7 @@ public:
     void BindAttributeLocation(const char* name, uint32_t location);
     int GetUniformLocation(const char* name) const;
     
-    /**@brief                   Checks the shader was loaded successfully. */
+    /**@brief   Checks the shader was loaded successfully. */
     bool IsValid() const noexcept;
 
 /**@section Private method */
@@ -75,5 +75,7 @@ private:
 public:
     GLuint m_programId;
 };
-
+    
+using PlatformShaderProgram = OpenGLShaderProgram;
+    
 } /* namespace tgon */

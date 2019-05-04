@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Graphics/LowLevel/Shader.h"
+#include "Graphics/LowLevel/ShaderProgram.h"
 #include "Graphics/LowLevel/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/Render/FVF.h"
 
@@ -45,7 +45,6 @@ void GraphicsModule::Draw()
 {
     m_graphics.ClearColorDepthBuffer();
     {
-        m_view.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
@@ -60,14 +59,27 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-View& GraphicsModule::GetView() noexcept
+void GraphicsModule::AddCamera(const std::shared_ptr<Camera>& camera)
 {
-    return m_view;
+    m_cameraList.push_back(camera);
 }
 
-const View& GraphicsModule::GetView() const noexcept
+bool GraphicsModule::RemoveCamera(const std::shared_ptr<Camera>& camera)
 {
-    return m_view;
+    auto iter = std::find_if(m_cameraList.begin(), m_cameraList.end(), [&](const std::shared_ptr<Camera>& comp)
+    {
+        return comp == camera;
+    });
+
+    if (iter != m_cameraList.end())
+    {
+        m_cameraList.erase(iter);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-    
+
 } /* namespace tgon */

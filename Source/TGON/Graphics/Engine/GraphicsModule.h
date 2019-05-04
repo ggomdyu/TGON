@@ -8,7 +8,7 @@
 #include "Core/Engine/Module/IModule.h"
 
 #include "../LowLevel/Graphics.h"
-#include "../Render/View.h"
+#include "../Render/SpriteBatch.h"
 
 namespace tgon
 {
@@ -31,11 +31,16 @@ public:
 public:
     /**@brief   Updates this module. */
     virtual void Update() override;
-    const View& GetView() const noexcept;
-    View& GetView() noexcept;
-    const Graphics& GetGraphics() const noexcept;
+    
     Graphics& GetGraphics() noexcept;
-
+    
+    const Graphics& GetGraphics() const noexcept;
+    
+    void AddCamera(const std::shared_ptr<Camera>& camera);
+    
+    /**@brief   Removes the specified camera in View. */
+    bool RemoveCamera(const std::shared_ptr<Camera>& camera);
+    
 /**@section Private method */
 private:
     /**@brief   Draws the render stage. */
@@ -44,7 +49,10 @@ private:
 /**@section Private variable */
 public:
     Graphics m_graphics;
-    View m_view;
+    
+    std::vector<std::shared_ptr<Camera>> m_cameraList;
+    
+    std::vector<SpriteBatch> m_spriteBatches;
 };
 
 } /* namespace tgon */

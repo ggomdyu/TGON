@@ -54,7 +54,7 @@
 #include "Graphics/LowLevel/Graphics.h"
 #include "Graphics/LowLevel/GraphicsType.h"
 #include "Graphics/LowLevel/Texture.h"
-#include "Graphics/LowLevel/OpenGL/OpenGLShader.h"
+#include "Graphics/LowLevel/OpenGL/OpenGLShaderProgram.h"
 #include "Graphics/LowLevel/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/LowLevel/VertexBuffer.h"
 #include "Graphics/LowLevel/IndexBuffer.h"

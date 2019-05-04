@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-class IndexBufferImpl final :
+class TGON_API OpenGLIndexBuffer :
     private boost::noncopyable
 {
 /**@section Public constructor */
@@ -22,11 +22,11 @@ public:
      * @param [in] dataBytes        The byte size of the data.
      * @param [in] isDynamicUsage   If true, then the index buffer will not be modified after set.
      */
-    IndexBufferImpl(const void* data, std::size_t dataBytes, bool isDynamicUsage);
+    OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
 
 /**@section Public destructor */
 public:
-    ~IndexBufferImpl();
+    ~OpenGLIndexBuffer();
 
 /**@section Public method */
 public:
@@ -38,18 +38,18 @@ public:
      */
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
-    /**@brief                       Gets the byte size of the data stored in the buffer.  */
+    /**@brief   Gets the byte size of the data stored in the buffer.  */
     std::size_t GetDataBytes() const noexcept;
     
-    /**@brief                       Sets the rendering pipeline to use this buffer. */
+    /**@brief   Sets the rendering pipeline to use this buffer. */
     void Use();
     
-    /**@brief                       Sets the rendering pipeline does not use this buffer. */
+    /**@brief   Sets the rendering pipeline does not use this buffer. */
     void Unuse();
     
     /**
-     * @brief                       Checks the buffer was created successfully.
-     * @return                      Returns true if the buffer was created successfully, false otherwise.
+     * @brief   Checks the buffer was created successfully.
+     * @return  Returns true if the buffer was created successfully, false otherwise.
      */
     bool IsValid() const noexcept;
     
@@ -62,10 +62,10 @@ private:
 /**@section Private variable */
 private:
     std::size_t m_dataBytes;
-    
     bool m_isDynamicUsage;
-    
     GLuint m_indexBufferHandle;
 };
+    
+using PlatformIndexBuffer = OpenGLIndexBuffer;
 
 } /* namespace tgon */

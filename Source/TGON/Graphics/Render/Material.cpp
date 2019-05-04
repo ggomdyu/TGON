@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-Material::Material(const std::shared_ptr<Shader>& shader) :
+Material::Material(const std::shared_ptr<ShaderProgram>& shader) :
     m_shader(shader)
 {
 }
@@ -19,18 +19,18 @@ void Material::SetWVP(const Matrix4x4& matWVP)
     m_shader->SetParameterMatrix4fv("g_uWVP", matWVP[0]);
 }
 
-std::shared_ptr<Shader>& Material::GetShader() noexcept
+std::shared_ptr<ShaderProgram>& Material::GetShader() noexcept
 {
     return m_shader;
 }
 
-const std::shared_ptr<Shader>& Material::GetShader() const noexcept
+const std::shared_ptr<ShaderProgram>& Material::GetShader() const noexcept
 {
     return m_shader;
 }
 
 ColorMaterial::ColorMaterial(const Color3f& blendColor) :
-    ColorMaterial(std::make_shared<Shader>(g_positionColorVert, g_positionColorFrag), blendColor)
+    ColorMaterial(std::make_shared<ShaderProgram>(g_positionColorVert, g_positionColorFrag), blendColor)
 {
 }
 
@@ -39,7 +39,7 @@ ColorMaterial::ColorMaterial() :
 {
 }
 
-ColorMaterial::ColorMaterial(const std::shared_ptr<Shader>& shader, const Color3f& blendColor) :
+ColorMaterial::ColorMaterial(const std::shared_ptr<ShaderProgram>& shader, const Color3f& blendColor) :
     Material(shader),
     m_blendColor(blendColor)
 {
@@ -90,7 +90,7 @@ TextureMaterial::TextureMaterial() :
 }
 
 TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture, const Color3f& blendColor, float opacity) :
-    TextureMaterial(std::make_shared<Shader>(g_positionUVVert, g_positionUVFrag), texture, blendColor, opacity)
+    TextureMaterial(std::make_shared<ShaderProgram>(g_positionUVVert, g_positionUVFrag), texture, blendColor, opacity)
 {
 }
 
@@ -99,7 +99,7 @@ TextureMaterial::TextureMaterial(const std::shared_ptr<Texture>& texture) :
 {
 }
 
-TextureMaterial::TextureMaterial(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, const Color3f& blendColor, float opacity) :
+TextureMaterial::TextureMaterial(const std::shared_ptr<ShaderProgram>& shader, const std::shared_ptr<Texture>& texture, const Color3f& blendColor, float opacity) :
     ColorMaterial(shader, blendColor),
     m_texture(texture),
     m_opacity(opacity)

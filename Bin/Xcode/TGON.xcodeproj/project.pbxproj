@@ -66,14 +66,14 @@
 		FD4C1DC4219F3F7C00B2B2BE /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BD8219F33E900B2B2BE /* Batch.cpp */; };
 		FD4C1DC5219F3F7C00B2B2BE /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BD9219F33E900B2B2BE /* Material.cpp */; };
 		FD4C1DC6219F3F7C00B2B2BE /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA3820E7F96100CBDF0B /* IndexBuffer.cpp */; };
-		FD4C1DC7219F3F7C00B2B2BE /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA2F20E7F95F00CBDF0B /* Shader.cpp */; };
+		FD4C1DC7219F3F7C00B2B2BE /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA2F20E7F95F00CBDF0B /* ShaderProgram.cpp */; };
 		FD4C1DC8219F3F7C00B2B2BE /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA3120E7F96000CBDF0B /* Texture.cpp */; };
 		FD4C1DC9219F3F7C00B2B2BE /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBCFA3A20E7F96100CBDF0B /* VertexBuffer.cpp */; };
 		FD4C1DCA219F3F7C00B2B2BE /* RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBA3D1520F19CEC0053B7BC /* RenderTarget.cpp */; };
 		FD4C1DCB219F3F7C00B2B2BE /* OpenGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBA3D1320F13B4F0053B7BC /* OpenGLRenderTarget.cpp */; };
 		FD4C1DCC219F3F7C00B2B2BE /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693920AFA84600791E10 /* OpenGLGraphics.cpp */; };
 		FD4C1DCD219F3F7C00B2B2BE /* OpenGLIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693420AFA84600791E10 /* OpenGLIndexBuffer.cpp */; };
-		FD4C1DCE219F3F7C00B2B2BE /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E692B20AFA84500791E10 /* OpenGLShader.cpp */; };
+		FD4C1DCE219F3F7C00B2B2BE /* OpenGLShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E692B20AFA84500791E10 /* OpenGLShaderProgram.cpp */; };
 		FD4C1DCF219F3F7C00B2B2BE /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E693720AFA84600791E10 /* OpenGLTexture.cpp */; };
 		FD4C1DD0219F3F7C00B2B2BE /* OpenGLVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD8E692C20AFA84500791E10 /* OpenGLVertexBuffer.cpp */; };
 		FD4C1DD1219F3F7C00B2B2BE /* GainputInputDeviceTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6A219F345200B2B2BE /* GainputInputDeviceTouch.cpp */; };
@@ -139,7 +139,7 @@
 		FD85202820C3FAFB00C749BC /* MacOSGamepad.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202520C3FAFA00C749BC /* MacOSGamepad.h */; };
 		FD85202A20C3FAFB00C749BC /* MacOSGamepadType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD85202720C3FAFB00C749BC /* MacOSGamepadType.h */; };
 		FD8E692420AFA83B00791E10 /* OpenGLTextureType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E691920AFA83B00791E10 /* OpenGLTextureType.h */; };
-		FD8E693C20AFA84600791E10 /* OpenGLShader.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E692620AFA84500791E10 /* OpenGLShader.h */; };
+		FD8E693C20AFA84600791E10 /* OpenGLShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E692620AFA84500791E10 /* OpenGLShaderProgram.h */; };
 		FD8E693D20AFA84600791E10 /* OpenGLShaderCode.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E692720AFA84500791E10 /* OpenGLShaderCode.h */; };
 		FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E692A20AFA84500791E10 /* OpenGLVertexBuffer.h */; };
 		FD8E694620AFA84600791E10 /* OpenGLGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8E693020AFA84600791E10 /* OpenGLGraphics.h */; };
@@ -154,7 +154,7 @@
 		FDBCFA3F20E7F96100CBDF0B /* VertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3220E7F96000CBDF0B /* VertexBuffer.h */; };
 		FDBCFA4020E7F96100CBDF0B /* Graphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3320E7F96000CBDF0B /* Graphics.h */; };
 		FDBCFA4120E7F96100CBDF0B /* GraphicsType.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3420E7F96000CBDF0B /* GraphicsType.h */; };
-		FDBCFA4220E7F96100CBDF0B /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3520E7F96000CBDF0B /* Shader.h */; };
+		FDBCFA4220E7F96100CBDF0B /* ShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3520E7F96000CBDF0B /* ShaderProgram.h */; };
 		FDBCFA4320E7F96100CBDF0B /* VertexBufferType.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3620E7F96000CBDF0B /* VertexBufferType.h */; };
 		FDBCFA4420E7F96100CBDF0B /* TextureType.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3720E7F96000CBDF0B /* TextureType.h */; };
 		FDBCFA4620E7F96100CBDF0B /* IndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBCFA3920E7F96100CBDF0B /* IndexBuffer.h */; };
@@ -517,10 +517,10 @@
 		FD85202620C3FAFB00C749BC /* MacOSGamepad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MacOSGamepad.cpp; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSGamepad.cpp; sourceTree = "<group>"; };
 		FD85202720C3FAFB00C749BC /* MacOSGamepadType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MacOSGamepadType.h; path = ../../Source/TGON/Core/Hardware/MacOS/MacOSGamepadType.h; sourceTree = "<group>"; };
 		FD8E691920AFA83B00791E10 /* OpenGLTextureType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLTextureType.h; sourceTree = "<group>"; };
-		FD8E692620AFA84500791E10 /* OpenGLShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLShader.h; sourceTree = "<group>"; };
+		FD8E692620AFA84500791E10 /* OpenGLShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLShaderProgram.h; sourceTree = "<group>"; };
 		FD8E692720AFA84500791E10 /* OpenGLShaderCode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLShaderCode.h; sourceTree = "<group>"; };
 		FD8E692A20AFA84500791E10 /* OpenGLVertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLVertexBuffer.h; sourceTree = "<group>"; };
-		FD8E692B20AFA84500791E10 /* OpenGLShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLShader.cpp; sourceTree = "<group>"; };
+		FD8E692B20AFA84500791E10 /* OpenGLShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLShaderProgram.cpp; sourceTree = "<group>"; };
 		FD8E692C20AFA84500791E10 /* OpenGLVertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = OpenGLVertexBuffer.cpp; sourceTree = "<group>"; };
 		FD8E693020AFA84600791E10 /* OpenGLGraphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLGraphics.h; sourceTree = "<group>"; };
 		FD8E693120AFA84600791E10 /* OpenGLContext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = OpenGLContext.h; sourceTree = "<group>"; };
@@ -539,12 +539,12 @@
 		FDBA3D1520F19CEC0053B7BC /* RenderTarget.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RenderTarget.cpp; sourceTree = "<group>"; };
 		FDBA3D1620F19CEC0053B7BC /* RenderTarget.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RenderTarget.h; sourceTree = "<group>"; };
 		FDBCFA2E20E7F95F00CBDF0B /* Texture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Texture.h; sourceTree = "<group>"; };
-		FDBCFA2F20E7F95F00CBDF0B /* Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Shader.cpp; sourceTree = "<group>"; };
+		FDBCFA2F20E7F95F00CBDF0B /* ShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		FDBCFA3120E7F96000CBDF0B /* Texture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Texture.cpp; sourceTree = "<group>"; };
 		FDBCFA3220E7F96000CBDF0B /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = VertexBuffer.h; sourceTree = "<group>"; };
 		FDBCFA3320E7F96000CBDF0B /* Graphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Graphics.h; sourceTree = "<group>"; };
 		FDBCFA3420E7F96000CBDF0B /* GraphicsType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GraphicsType.h; sourceTree = "<group>"; };
-		FDBCFA3520E7F96000CBDF0B /* Shader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Shader.h; sourceTree = "<group>"; };
+		FDBCFA3520E7F96000CBDF0B /* ShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ShaderProgram.h; sourceTree = "<group>"; };
 		FDBCFA3620E7F96000CBDF0B /* VertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = VertexBufferType.h; sourceTree = "<group>"; };
 		FDBCFA3720E7F96000CBDF0B /* TextureType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = TextureType.h; sourceTree = "<group>"; };
 		FDBCFA3820E7F96100CBDF0B /* IndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = IndexBuffer.cpp; sourceTree = "<group>"; };
@@ -1584,8 +1584,8 @@
 				FDBCFA3420E7F96000CBDF0B /* GraphicsType.h */,
 				FDBCFA3820E7F96100CBDF0B /* IndexBuffer.cpp */,
 				FDBCFA3920E7F96100CBDF0B /* IndexBuffer.h */,
-				FDBCFA2F20E7F95F00CBDF0B /* Shader.cpp */,
-				FDBCFA3520E7F96000CBDF0B /* Shader.h */,
+				FDBCFA2F20E7F95F00CBDF0B /* ShaderProgram.cpp */,
+				FDBCFA3520E7F96000CBDF0B /* ShaderProgram.h */,
 				FDBCFA3120E7F96000CBDF0B /* Texture.cpp */,
 				FDBCFA2E20E7F95F00CBDF0B /* Texture.h */,
 				FDBCFA3720E7F96000CBDF0B /* TextureType.h */,
@@ -1613,8 +1613,8 @@
 				FD612BA420E3CA20006FE85E /* OpenGLUtility.h */,
 				FD8E693420AFA84600791E10 /* OpenGLIndexBuffer.cpp */,
 				FD8E693620AFA84600791E10 /* OpenGLIndexBuffer.h */,
-				FD8E692B20AFA84500791E10 /* OpenGLShader.cpp */,
-				FD8E692620AFA84500791E10 /* OpenGLShader.h */,
+				FD8E692B20AFA84500791E10 /* OpenGLShaderProgram.cpp */,
+				FD8E692620AFA84500791E10 /* OpenGLShaderProgram.h */,
 				FD8E692720AFA84500791E10 /* OpenGLShaderCode.h */,
 				FD8E693720AFA84600791E10 /* OpenGLTexture.cpp */,
 				FD8E693A20AFA84600791E10 /* OpenGLTexture.h */,
@@ -1655,10 +1655,10 @@
 				FD81A8A620F122D7006FDAA0 /* OpenGLRenderTarget.h in Headers */,
 				FD2108B520B93286009FC8F1 /* Hash.h in Headers */,
 				FD85201820C31F2B00C749BC /* MacOSMouseType.h in Headers */,
-				FD8E693C20AFA84600791E10 /* OpenGLShader.h in Headers */,
+				FD8E693C20AFA84600791E10 /* OpenGLShaderProgram.h in Headers */,
 				FD2BF54620138F0500228FFF /* Log.h in Headers */,
 				FD8E692420AFA83B00791E10 /* OpenGLTextureType.h in Headers */,
-				FDBCFA4220E7F96100CBDF0B /* Shader.h in Headers */,
+				FDBCFA4220E7F96100CBDF0B /* ShaderProgram.h in Headers */,
 				FDBA3D1820F19CED0053B7BC /* RenderTarget.h in Headers */,
 				FD7EA6E220B094CA00A76C69 /* Drawing.h in Headers */,
 				FD8E694020AFA84600791E10 /* OpenGLVertexBuffer.h in Headers */,
@@ -1833,14 +1833,14 @@
 				FD4C1DC4219F3F7C00B2B2BE /* Batch.cpp in Sources */,
 				FD4C1DC5219F3F7C00B2B2BE /* Material.cpp in Sources */,
 				FD4C1DC6219F3F7C00B2B2BE /* IndexBuffer.cpp in Sources */,
-				FD4C1DC7219F3F7C00B2B2BE /* Shader.cpp in Sources */,
+				FD4C1DC7219F3F7C00B2B2BE /* ShaderProgram.cpp in Sources */,
 				FD4C1DC8219F3F7C00B2B2BE /* Texture.cpp in Sources */,
 				FD4C1DC9219F3F7C00B2B2BE /* VertexBuffer.cpp in Sources */,
 				FD4C1DCA219F3F7C00B2B2BE /* RenderTarget.cpp in Sources */,
 				FD4C1DCB219F3F7C00B2B2BE /* OpenGLRenderTarget.cpp in Sources */,
 				FD4C1DCC219F3F7C00B2B2BE /* OpenGLGraphics.cpp in Sources */,
 				FD4C1DCD219F3F7C00B2B2BE /* OpenGLIndexBuffer.cpp in Sources */,
-				FD4C1DCE219F3F7C00B2B2BE /* OpenGLShader.cpp in Sources */,
+				FD4C1DCE219F3F7C00B2B2BE /* OpenGLShaderProgram.cpp in Sources */,
 				FD4C1DCF219F3F7C00B2B2BE /* OpenGLTexture.cpp in Sources */,
 				FD4C1DD0219F3F7C00B2B2BE /* OpenGLVertexBuffer.cpp in Sources */,
 				FD4C1DD1219F3F7C00B2B2BE /* GainputInputDeviceTouch.cpp in Sources */,
