@@ -81,6 +81,9 @@ public:
 
     /**@brief   Gets the image height. */
     int32_t GetHeight() const noexcept;
+    
+    /**@brief   Gets the size of image which contains width and height. */
+    I32Extent2D GetSize() const noexcept;
 
     /**@brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;

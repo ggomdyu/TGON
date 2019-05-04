@@ -114,6 +114,11 @@ int32_t Image::GetHeight() const noexcept
 {
     return m_height;
 }
+    
+I32Extent2D Image::GetSize() const noexcept
+{
+    return {m_width, m_height};
+}
 
 int32_t Image::GetChannels() const noexcept
 {
