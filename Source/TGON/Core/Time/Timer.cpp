@@ -50,7 +50,7 @@ void Timer::SetInterval(int64_t interval)
     m_interval = interval;
 }
 
-double Timer::GetInterval() const noexcept
+int64_t Timer::GetInterval() const noexcept
 {
     return m_interval;
 }
