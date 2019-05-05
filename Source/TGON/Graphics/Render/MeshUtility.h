@@ -12,7 +12,7 @@ namespace tgon
 
 class TGON_API MeshUtility
 {   
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Creates a triangle mesh which is global instance. */
     static std::shared_ptr<Mesh> GetSharedTriangle();

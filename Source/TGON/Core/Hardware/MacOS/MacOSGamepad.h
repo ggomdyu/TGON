@@ -20,26 +20,26 @@ class InputDevicePad;
 namespace tgon
 {
     
-class InputManagerImpl;
+class WindowsInputManager;
 
-class TGON_API GamepadImpl final :
+class TGON_API WindowsGamepad final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit GamepadImpl(InputManagerImpl& inputManagerImpl);
+    explicit WindowsGamepad(WindowsInputManager& inputManagerImpl);
     
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
     void Vibrate(float leftMotor, float rightMotor);
     bool IsButtonDown(int32_t buttonNumber) const;
     bool IsButtonHold(int32_t buttonNumber) const;
     bool IsButtonUp(int32_t buttonNumber) const;
-    const gainput::InputDevicePad* GetGamepadDevice() const noexcept;
-    gainput::InputDevicePad* GetGamepadDevice() noexcept;
+    const gainput::InputDevicePad* GetNativeGamepad() const noexcept;
+    gainput::InputDevicePad* GetNativeGamepad() noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     gainput::InputDevicePad* m_gamepadDevice;
 };

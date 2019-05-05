@@ -171,9 +171,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\RenderTarget.cpp">
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Shader.cpp">
-      <Filter>Source\Graphics\LowLevel</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\VertexBuffer.cpp">
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClCompile>
@@ -305,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Transform.cpp">
       <Filter>Source\Graphics\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\ShaderProgram.cpp">
+      <Filter>Source\Graphics\LowLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -534,9 +534,6 @@
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\RenderTarget.h">
-      <Filter>Source\Graphics\LowLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Shader.h">
       <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\Texture.h">
@@ -823,6 +820,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Render\Transform.h">
       <Filter>Source\Graphics\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\LowLevel\ShaderProgram.h">
+      <Filter>Source\Graphics\LowLevel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

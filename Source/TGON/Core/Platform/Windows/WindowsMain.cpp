@@ -27,11 +27,11 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     // Initialize singleton objects.
     decltype(auto) application = Application::GetInstance();
 
-    application->OnDidLaunch();
+    application->OnLaunch();
     {
         application->MessageLoop();
     }
-    application->OnWillTerminate();
+    application->OnTerminate();
 
     return 0;
 }

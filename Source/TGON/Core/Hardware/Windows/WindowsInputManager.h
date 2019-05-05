@@ -5,49 +5,46 @@
  */
 
 #pragma once
+#include <memory>
 #include <OIS.h>
 
-#include "Core/Platform/Window.h"
 #include "Core/Object/CoreObject.h"
+#include "Core/Platform/Window.h"
 
 namespace tgon
 {
 
-class TGON_API InputManagerImpl final :
+class TGON_API WindowsInputManager :
     public CoreObject
 {
 public:
-    TGON_DECLARE_RTTI(InputManagerImpl);
+    TGON_DECLARE_RTTI(WindowsInputManager);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit InputManagerImpl(const Window& inputTarget);
+    explicit WindowsInputManager(const std::shared_ptr<Window>& inputTarget);
     
-/**@section Public destructor */
+/**@section Destructor */
 public:
-    ~InputManagerImpl();
+    ~WindowsInputManager();
 
-/**@section Public method */
+/**@section Method */
 public:
-    /**@brief   Updates the input manager. */
     void Update();
-    
-    /**@brief   Creates a native mouse device. */
-    OIS::Mouse* CreateMouseDevice();
 
-    /**@brief   Creates a native keyboard device. */
-    OIS::Keyboard* CreateKeyboardDevice();
+protected:
+    OIS::Mouse* CreateNativeMouse();
+    OIS::Keyboard* CreateNativeKeyboard();
+    OIS::JoyStick* CreateNativeGamepad();
 
-    /**@brief   Creates a native gamepad device. */
-    OIS::JoyStick* CreateGamepadDevice();
-
-/**@section Private method */
 private:
-    OIS::ParamList QueryParamList(const Window& inputTarget) const;
+    OIS::ParamList QueryParamList(const std::shared_ptr<Window>& inputTarget) const;
     
-/**@section Protected variable */
+/**@section Variable */
 protected:
     OIS::InputManager* m_inputManager;
 };
+
+using PlatformInputManager = WindowsInputManager;
 
 } /* namespace tgon */

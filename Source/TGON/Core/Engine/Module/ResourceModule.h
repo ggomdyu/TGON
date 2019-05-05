@@ -21,21 +21,21 @@ class TGON_API ResourceModule final :
 public:
     TGON_DECLARE_RTTI(ResourceModule);
 
-/* @section Public constructor */
+/* @section Constructor */
 public:
     ResourceModule();
 
-/* @section Public destructor */
+/* @section Destructor */
 public:
     virtual ~ResourceModule() override = default;
 
-/* @section Public method */
+/* @section Method */
 public:
     virtual void Update() override;
 
     void PurgeResource(const char* resourceName);
     
-/* @section Private variable */
+/* @section Variable */
 private:
     std::map<size_t, std::shared_ptr<IResource>> m_resourcePool;
 };

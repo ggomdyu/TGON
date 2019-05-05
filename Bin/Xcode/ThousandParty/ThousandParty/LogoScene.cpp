@@ -5,6 +5,7 @@
 #include "Core/Platform/Application.h"
 #include "Core/Time/Time.h"
 #include "Core/Math/Mathematics.h"
+#include "Core/Debug/Log.h"
 #include "Core/File/Path.h"
 #include "Core/Hardware/Keyboard.h"
 #include "Graphics/Engine/GraphicsModule.h"
@@ -20,7 +21,7 @@
 LogoScene::LogoScene()
 {
     using namespace tgon;
-    
+
     decltype(auto) application = Application::GetInstance();
     decltype(auto) engine = application->GetEngine();
 
@@ -29,7 +30,14 @@ LogoScene::LogoScene()
     m_timeModule = engine->FindModule<TimeModule>();
 
     m_graphicsModule->GetGraphics().DisableDepthTest();
-    m_graphicsModule->GetGraphics().SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+
+    //tgon::Sprite s(tgon::GetDesktopDirectory() + "/Assets/Image/IntroScene/girl.png");
+
+    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
+    rootWindow->OnResize += [=](int32_t width, int32_t height)
+    {
+        m_graphicsModule->Update();
+    };
 
     // 朝五虞 持失
     {

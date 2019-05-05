@@ -12,23 +12,23 @@ namespace tgon
 
 class SerializationInfo
 {
-/**@section Public method */
+/**@section Method */
 public:
     template <typename _ValueType>
     void AddValue(const std::string& name, const _ValueType& value);
     
-/**@section Private variable */
+/**@section Variable */
 private:
     std::map<std::string, std::string> m_variableTable;
 };
 
 class ISerializable
 {
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~ISerializable() = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Returns copied one from this instance. */
 };

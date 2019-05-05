@@ -29,11 +29,11 @@ class TGON_API Window final :
 public:
     TGON_DECLARE_RTTI(Window);
 
-/**@section Private constructor */
+/**@section Constructor */
 public:
     using PlatformWindow::PlatformWindow;
 
-/**@section Public method */
+/**@section Method */
 public:
     I32Point GetPosition() const;
     I32Extent2D GetSize() const;
@@ -62,7 +62,7 @@ public:
     using PlatformWindow::IsMinimized;
     using PlatformWindow::IsTopMost;
 
-/**@section Public event handler */
+/**@section Event handler */
 public:
     using PlatformWindow::OnMove;
     using PlatformWindow::OnResize;

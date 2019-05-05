@@ -22,7 +22,7 @@ class BasicFixedString :
     static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value,
         "_StringTraitsType's character type doesn't match with the _CharType.");
 
-/**@section Public type */
+/**@section Type */
 public:
     using StringTraitsType = _StringTraitsType;
     using SizeType = std::size_t;
@@ -36,7 +36,7 @@ public:
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept;
     BasicFixedString(const _CharType* str);
@@ -45,7 +45,7 @@ public:
     template <std::size_t _CharArraySize2>
     BasicFixedString(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs);
 
-/**@section Public operator */
+/**@section Operator */
 public:
     BasicFixedString& operator=(const _CharType* rhs);
     BasicFixedString& operator=(const BasicFixedString& rhs) = default;
@@ -65,7 +65,7 @@ public:
     const _CharType& operator[](std::size_t index) const;
     _CharType& operator[](std::size_t index);
 
-/**@section Public method */
+/**@section Method */
 public:
     void Append(const _CharType* str, std::size_t strLen);
     void Append(const _CharType* str);
@@ -110,11 +110,10 @@ public:
     ConstReverseIteratorType crbegin() const noexcept;
     ConstReverseIteratorType crend() const noexcept;
 
-/**@section Public variable */
+/**@section Variable */
 public:
     using _StringTraitsType::NPos;
 
-/**@section Protected variable */
 protected:
     _CharType m_str[_CharArraySize];
     std::size_t m_strLen;

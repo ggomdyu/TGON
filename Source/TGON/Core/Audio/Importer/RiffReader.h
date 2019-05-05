@@ -36,15 +36,15 @@ public:
 
     struct ChunkHeader
     {
-    /**@section Public constructor */
+    /**@section Constructor */
     public:
         ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept;
         
-    /**@section Public method */
+    /**@section Method */
     public:
         std::size_t GetSize() const noexcept;
         
-    /**@section Public variable */
+    /**@section Variable */
     public:
         ChunkId chunkId;
         uint32_t chunkDataSize;
@@ -89,16 +89,16 @@ public:
     {
     };
 
-/**@section Public type */
+/**@section Type */
 public:
     RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     bool ReadNext();
     ChunkHeader GetChunkHeader() const;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     const uint8_t* m_srcData;
     const uint8_t* m_srcDataIter;

@@ -19,7 +19,7 @@ namespace tgon
 class TGON_API IndexBuffer final :
     private PlatformIndexBuffer
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**
      * @brief                       Initializes the index buffer with the specified data.
@@ -31,7 +31,7 @@ public:
     
     using PlatformIndexBuffer::PlatformIndexBuffer;
     
-/**@section Public method */
+/**@section Method */
 public:
     PlatformIndexBuffer* GetPlatformDependency() noexcept;
     const PlatformIndexBuffer* GetPlatformDependency() const noexcept;

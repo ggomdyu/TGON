@@ -17,7 +17,7 @@ namespace tgon
 
 class Mesh final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes with vertex buffer and index buffer. */
     Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer);
@@ -25,12 +25,12 @@ public:
     /**@brief   Initializes with a r-value reference. */
     Mesh(Mesh&& rhs) = default;
     
-/**@section Public operator */
+/**@section Operator */
 public:
     /**@brief   Assigns with a r-value reference. */
     Mesh& operator=(Mesh&& rhs) = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Sets the rendering pipeline to use this mesh. */
     void Use();
@@ -47,7 +47,7 @@ public:
     /**@brief   Gets the index buffer. */
     const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const noexcept;
 
-/**@section Protected variable */
+/**@section Variable */
 protected:
     std::shared_ptr<VertexBuffer> m_vertexBuffer;
     

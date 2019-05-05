@@ -19,27 +19,24 @@ class TGON_API CameraComponent :
 public:
     TGON_DECLARE_RTTI(CameraComponent);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     CameraComponent();
     CameraComponent(const FRect& orthoPlane, float nearZ, float farZ);
     CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ);
-
-/**@section Private constructor */
-public:
     CameraComponent(const std::shared_ptr<Camera>& camera);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~CameraComponent() override;
 
-/**@section Public method */
+/**@section Method */
 public:
 	virtual void Update() override;
     std::shared_ptr<Camera>& GetCamera() noexcept;
     std::shared_ptr<const Camera> GetCamera() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::shared_ptr<Camera> m_camera;
     std::weak_ptr<GraphicsModule> m_graphicsModule;

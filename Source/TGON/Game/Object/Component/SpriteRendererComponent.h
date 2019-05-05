@@ -20,17 +20,17 @@ class TGON_API SpriteRendererComponent :
 public:
     TGON_DECLARE_RTTI(SpriteRendererComponent);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     using RendererComponent::RendererComponent;
     
     SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~SpriteRendererComponent() override = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates this component. */
     virtual void Update() override;
@@ -47,7 +47,7 @@ public:
 
     const Color4f& GetBlendColor() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::shared_ptr<Sprite> m_sprite;
 

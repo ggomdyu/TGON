@@ -18,16 +18,16 @@ namespace tgon
 class TGON_API OpenGLTexture :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
     explicit OpenGLTexture(const std::string& filePath, const TextureProperty& textureProperty = {});
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~OpenGLTexture();
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Changes rendering pipeline state to use this texture. */
     void Use();

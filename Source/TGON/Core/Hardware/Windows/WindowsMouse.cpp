@@ -4,26 +4,27 @@
 #include <OIS.h>
 
 #include "WindowsMouse.h"
+#include "WindowsInputManager.h"
 
 namespace tgon
 {
 
-MouseImpl::MouseImpl(InputManagerImpl& platformInputManager) noexcept :
-    m_mouseDevice(platformInputManager.CreateMouseDevice()),
-    m_prevMouseState(std::make_shared<OIS::MouseState>())
+WindowsMouse::WindowsMouse(OIS::Mouse* nativeMouse) noexcept :
+    m_nativeMouse(nativeMouse),
+    m_currMouseState(std::make_shared<OIS::MouseState>())
 {
 }
 
-void MouseImpl::Update()
+void WindowsMouse::Update()
 {
-    *m_prevMouseState = m_mouseDevice->getMouseState();
-    m_mouseDevice->capture();
+    *m_currMouseState = m_nativeMouse->getMouseState();
+    m_nativeMouse->capture();
 }
 
-void MouseImpl::GetPosition(int32_t* x, int32_t* y)
+void WindowsMouse::GetPosition(int32_t* x, int32_t* y)
 {
     POINT pt;
-    if (GetCursorPos(&pt) == TRUE)
+    if (::GetCursorPos(&pt) == TRUE)
     {
         *x = static_cast<int32_t>(pt.x);
         *y = static_cast<int32_t>(pt.y);
@@ -35,11 +36,11 @@ void MouseImpl::GetPosition(int32_t* x, int32_t* y)
     }
 }
 
-bool MouseImpl::IsMouseDown(MouseCode mouseCode) const
+bool WindowsMouse::IsMouseDown(MouseCode mouseCode) const
 {
-    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_nativeMouse->getMouseState();
 
-    if (m_prevMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false &&
+    if (m_currMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
     {
         return true;
@@ -50,11 +51,11 @@ bool MouseImpl::IsMouseDown(MouseCode mouseCode) const
     }
 }
 
-bool MouseImpl::IsMouseHold(MouseCode mouseCode) const
+bool WindowsMouse::IsMouseHold(MouseCode mouseCode) const
 {
-    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_nativeMouse->getMouseState();
 
-    if (m_prevMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
+    if (m_currMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
     {
         return true;
@@ -65,11 +66,11 @@ bool MouseImpl::IsMouseHold(MouseCode mouseCode) const
     }
 }
 
-bool MouseImpl::IsMouseUp(MouseCode mouseCode) const
+bool WindowsMouse::IsMouseUp(MouseCode mouseCode) const
 {
-    decltype(auto) currMouseState = m_mouseDevice->getMouseState();
+    decltype(auto) currMouseState = m_nativeMouse->getMouseState();
 
-    if (m_prevMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
+    if (m_currMouseState->buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
         currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false)
     {
         return true;
@@ -80,14 +81,14 @@ bool MouseImpl::IsMouseUp(MouseCode mouseCode) const
     }
 }
 
-const OIS::Mouse* MouseImpl::GetMousedDevice() const
+const OIS::Mouse* WindowsMouse::GetNativeMouse() const
 {
-    return m_mouseDevice;
+    return m_nativeMouse;
 }
 
-OIS::Mouse* MouseImpl::GetMouseDevice()
+OIS::Mouse* WindowsMouse::GetNativeMouse()
 {
-    return m_mouseDevice;
+    return m_nativeMouse;
 }
 
 } /* namespace tgon */

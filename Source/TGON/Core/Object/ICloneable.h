@@ -13,11 +13,11 @@ namespace tgon
 
 class ICloneable
 {
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~ICloneable() = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Returns copied one from instance.

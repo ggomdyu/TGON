@@ -23,16 +23,15 @@ class Delegate;
 template <typename _ReturnType, typename... _ArgTypes>
 class Delegate<_ReturnType(_ArgTypes...)> final
 {
-/**@section Private type */
+/**@section Type */
 private:
     using DeleterType = std::size_t(*)(void*);
     using StubType = _ReturnType(*)(void*, _ArgTypes...);
     
-/**@section Public type */
 public:
     using ReturnType = _ReturnType;
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     constexpr Delegate() noexcept;
     constexpr Delegate(std::nullptr_t) noexcept;
@@ -43,11 +42,11 @@ public:
     Delegate(const Delegate& rhs);
     constexpr Delegate(Delegate&& rhs) noexcept;
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~Delegate();
 
-/**@section Public operator */
+/**@section Operator */
 public:
     Delegate& operator=(const Delegate& rhs);
     Delegate& operator=(Delegate&& rhs);
@@ -58,7 +57,7 @@ public:
     template <typename... _ArgTypes2>
     _ReturnType operator()(_ArgTypes2&&... args) const;
 
-/**@section Public method */
+/**@section Method */
 public:
     template <typename _FunctionType>
     static Delegate MakeDelegate(_FunctionType function);
@@ -78,7 +77,6 @@ public:
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
 
-/**@section Private method */
 private:
     template <typename _FunctionType>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
@@ -106,7 +104,7 @@ private:
     template <typename _FunctionType>
     static std::size_t MakeDeleter(void* ptr);
 
-/**@section Private variable */
+/**@section Variable */
 private:
     void* m_ptr;
     DeleterType m_deleter;

@@ -15,20 +15,20 @@ class TGON_API ThousandParty final :
 public:
     TGON_DECLARE_RTTI(ThousandParty);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     ThousandParty() {}
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~ThousandParty() override = default;
 
-/**@section Public event handler */
+/**@section Event Handler */
 public:
     virtual void OnLaunch() override;
     virtual void OnTerminate() override;
 
-/**@section Public method */
+/**@section Method */
 public:
     virtual void Update() override;
 

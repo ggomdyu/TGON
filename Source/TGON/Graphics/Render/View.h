@@ -26,9 +26,6 @@ class TGON_API View final :
 public:
     TGON_DECLARE_RTTI(View);
 
-/**@section Constructor */
-public:
-
 /**@section Method */
 public:
     void Update();

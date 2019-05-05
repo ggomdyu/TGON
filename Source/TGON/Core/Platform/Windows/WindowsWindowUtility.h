@@ -22,7 +22,7 @@ namespace tgon
 
 class TGON_API WindowsWindowUtility
 {
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief                       Creates a window through given arguments.
@@ -33,7 +33,6 @@ public:
      */
     static HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-/**@section Private method */
 private:
     static void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle);
 };

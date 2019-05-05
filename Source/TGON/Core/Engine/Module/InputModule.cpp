@@ -10,22 +10,11 @@ namespace tgon
 {
 
 InputModule::InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode) :
-    m_inputManager(inputTarget)
+    m_inputManager(inputTarget),
+    m_keyboard(inputMode.isUseKeyboard ? m_inputManager.CreateKeyboard() : nullptr),
+    m_mouse(inputMode.isUseMouse ? m_inputManager.CreateMouse() : nullptr),
+    m_gamepad(inputMode.isUseGamepad ? m_inputManager.CreateGamepad() : nullptr)
 {
-    if (inputMode.isUseKeyboard)
-    {
-        m_keyboard = std::make_unique<Keyboard>(m_inputManager);
-    }
-    
-    if (inputMode.isUseMouse)
-    {
-        m_mouse = std::make_unique<Mouse>(m_inputManager);
-    }
-
-    if (inputMode.isUseGamepad)
-    {
-        m_gamepad = std::make_unique<Gamepad>(m_inputManager);
-    }
 }
     
 InputModule::~InputModule() = default;

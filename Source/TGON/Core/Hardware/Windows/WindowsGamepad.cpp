@@ -5,18 +5,18 @@
 namespace tgon
 {
 
-GamepadImpl::GamepadImpl(InputManagerImpl& inputManager) :
-    m_gamepadDevice(inputManager.CreateGamepadDevice())
+WindowsGamepad::WindowsGamepad(OIS::JoyStick* nativeGamepad) :
+    m_nativeGamepad(nativeGamepad)
 {
 }
 
-void GamepadImpl::Update()
+void WindowsGamepad::Update()
 {
-    m_prevGamepadState = m_gamepadDevice->getJoyStickState();
-    m_gamepadDevice->capture();
+    m_prevGamepadState = m_nativeGamepad->getJoyStickState();
+    m_nativeGamepad->capture();
 }
 
-void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
+void WindowsGamepad::Vibrate(float leftMotor, float rightMotor)
 {
     //auto a = m_gamepadDevice->getNumberOfComponents(OIS::OIS_Axis);
     //auto b = m_gamepadDevice->getNumberOfComponents(OIS::OIS_Slider);
@@ -46,9 +46,9 @@ void GamepadImpl::Vibrate(float leftMotor, float rightMotor)
     //int n = 3;
 }
 
-bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonDown(int32_t buttonNumber) const
 {
-    decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
+    decltype(auto) currGamepadState = m_nativeGamepad->getJoyStickState();
     if (currGamepadState.mButtons.size() <= size_t(buttonNumber))
     {
         return false;
@@ -65,9 +65,9 @@ bool GamepadImpl::IsButtonDown(int32_t buttonNumber) const
     }
 }
 
-bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonHold(int32_t buttonNumber) const
 {
-    decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
+    decltype(auto) currGamepadState = m_nativeGamepad->getJoyStickState();
     if (currGamepadState.mButtons.size() <= static_cast<size_t>(buttonNumber))
     {
         return false;
@@ -84,9 +84,9 @@ bool GamepadImpl::IsButtonHold(int32_t buttonNumber) const
     }
 }
 
-bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
+bool WindowsGamepad::IsButtonUp(int32_t buttonNumber) const
 {
-    decltype(auto) currGamepadState = m_gamepadDevice->getJoyStickState();
+    decltype(auto) currGamepadState = m_nativeGamepad->getJoyStickState();
     if (currGamepadState.mButtons.size() <= size_t(buttonNumber))
     {
         return false;
@@ -103,14 +103,14 @@ bool GamepadImpl::IsButtonUp(int32_t buttonNumber) const
     }
 }
 
-const OIS::JoyStick* GamepadImpl::GetGamepadDevice() const noexcept
+const OIS::JoyStick* WindowsGamepad::GetNativeGamepad() const noexcept
 {
-    return m_gamepadDevice;
+    return m_nativeGamepad;
 }
 
-OIS::JoyStick* GamepadImpl::GetGamepadDevice() noexcept
+OIS::JoyStick* WindowsGamepad::GetNativeGamepad() noexcept
 {
-    return m_gamepadDevice;
+    return m_nativeGamepad;
 }
 
 } /* namespace tgon */

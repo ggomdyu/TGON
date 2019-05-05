@@ -12,20 +12,20 @@ namespace tgon
 
 class IResource
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     explicit IResource(size_t id);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~IResource() = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Gets the id of this resource. */
     const size_t GetID() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     size_t m_id;
 };

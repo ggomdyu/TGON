@@ -13,11 +13,11 @@ namespace tgon
 
 struct RTTI final
 {
-/* @section Public constructor */
+/* @section Constructor */
 public:
     RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept;
 
-/* @section Public method */
+/* @section Method */
 public:
     /**@brief   Returns unique hash code for each type. */
     std::size_t GetHashCode() const noexcept;
@@ -28,7 +28,7 @@ public:
     /**@brief   Returns the parent type's RTTI. */
     const RTTI* GetSuperRTTI() const noexcept;
 
-/* @section Public operator */
+/* @section Operator */
 public:
     bool operator==(const RTTI& rhs) const noexcept;
     bool operator!=(const RTTI& rhs) const noexcept;
@@ -37,7 +37,7 @@ public:
     bool operator>(const RTTI& rhs) const noexcept;
     bool operator<=(const RTTI& rhs) const noexcept;
 
-/* @section Private variable */
+/* @section Variable */
 private:
     const std::type_info* m_typeInfo;
 
@@ -52,12 +52,12 @@ namespace std
 template<>
 struct hash<tgon::RTTI>
 {
-/* @section Public type */
+/* @section Type */
 public:
     using argument_type = tgon::RTTI;
     using result_type = size_t;
 
-/* @section Public method */
+/* @section Method */
 public:
     size_t operator()(const tgon::RTTI& rhs) const noexcept;
 };

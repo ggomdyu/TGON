@@ -20,15 +20,15 @@ class TGON_API Component :
 public:
     TGON_DECLARE_RTTI(Component);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Component(GameObject* owner = nullptr) noexcept;
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~Component() override = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates this component. */
     virtual void Update() = 0;
@@ -48,7 +48,7 @@ public:
     /**@brief   Gets the active state of this component. */
     bool IsActive() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     bool m_isActive;
 

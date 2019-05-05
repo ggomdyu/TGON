@@ -24,7 +24,7 @@ namespace tgon
 template <typename _ValueType>
 struct BasicVector2 final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes x, y components to 0. */
     constexpr BasicVector2() noexcept;
@@ -59,7 +59,7 @@ public:
     _ValueType& operator[](std::size_t index) noexcept;
     const _ValueType& operator[](std::size_t index) const noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     static constexpr const BasicVector2 Reflect(const BasicVector2& inDirection, const BasicVector2& inPlaneNormal) noexcept;
     static constexpr _ValueType Dot(const BasicVector2& v1, const BasicVector2& v2) noexcept;
@@ -89,7 +89,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/**@section Public variable */
+/**@section Variable */
 public:
 	_ValueType x, y;
 };

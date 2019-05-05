@@ -16,7 +16,7 @@ namespace tgon
 class OpenGLVertexBuffer :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**
      * @brief   Sets a vertex buffer with the specified data.
@@ -29,11 +29,11 @@ public:
 
     OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~OpenGLVertexBuffer();
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Sets a vertex buffer with the specified data.
@@ -61,11 +61,10 @@ public:
     
     bool IsDynamicUsage() const noexcept;
 
-/**@section Private method */
 private:
     GLuint CreateVertexBufferHandle() const;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::size_t m_dataBytes;
     bool m_isDynamicUsage;

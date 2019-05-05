@@ -22,7 +22,7 @@ class TGON_API GameObject :
 public:
     TGON_DECLARE_RTTI(GameObject);
 
-/**@section Private constructor */
+/**@section Constructor */
 public:
     template <typename... _ComponentTypes>
     explicit GameObject(const StringHash& name, _ComponentTypes&&... components) :
@@ -32,11 +32,11 @@ public:
     {
     }
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~GameObject() override = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates the object. */
     virtual void Update();
@@ -123,7 +123,6 @@ public:
     
     const Transform& GetTransform() const;
 
-/**@section Private method */
 private:
     /**
      * @brief   Removes a component with its unique id.
@@ -138,7 +137,7 @@ private:
      */
     std::shared_ptr<Component> GetComponent(size_t componentId);
 
-/**@section Private variable */
+/**@section Variable */
 private:
     bool m_isActive;
 

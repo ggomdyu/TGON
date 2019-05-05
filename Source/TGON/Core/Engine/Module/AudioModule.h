@@ -18,20 +18,20 @@ class TGON_API AudioModule final :
 public:
     TGON_DECLARE_RTTI(AudioModule);
 
-/* @section Public constructor */
+/* @section Constructor */
 public:
     AudioModule();
 
-/* @section Public destructor */
+/* @section Destructor */
 public:
     virtual ~AudioModule() override = default;
 
-/* @section Public method */
+/* @section Method */
 public:
     /* @brief   Updates the module. */
     virtual void Update() override;
     
-/* @section Private variable */
+/* @section Variable */
 private:
     //AudioDevice m_audioDevice;
 };

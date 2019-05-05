@@ -20,40 +20,26 @@ class Gamepad;
 
 struct InputMode final
 {
-/* @section Public constructor */
-public:
-    constexpr InputMode() noexcept = default;
-    constexpr InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept;
-    
-/* @section Public variable */
-public:
     bool isUseKeyboard = true;
     bool isUseMouse = false;
     bool isUseGamepad = false;
 };
 
-constexpr InputMode::InputMode(bool isUseKeyboard, bool isUseMouse, bool isUseGamepad) noexcept :
-    isUseKeyboard(isUseKeyboard),
-    isUseMouse(isUseMouse),
-    isUseGamepad(isUseGamepad)
-{
-}
-    
 class TGON_API InputModule :
     public IModule
 {
 public:
     TGON_DECLARE_RTTI(InputModule);
     
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode);
+    InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode = {});
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~InputModule() final override;
 
-/**@section Public method */
+/**@section Method */
 public:
     virtual void Update() final override;
     
@@ -61,7 +47,7 @@ public:
     const std::unique_ptr<Keyboard>& GetKeyboard() const noexcept;
     const std::unique_ptr<Gamepad>& GetGamepad() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 public:
     InputManager m_inputManager;
 

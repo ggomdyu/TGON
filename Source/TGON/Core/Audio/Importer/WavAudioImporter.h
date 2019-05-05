@@ -17,11 +17,11 @@ template <typename _AllocatorType>
 class BasicWavAudioImporter final :
     public BaseAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     using BaseAudioImporter<BasicWavAudioImporter<_AllocatorType>, _AllocatorType>::BaseAudioImporter;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Verifies the importing file is exactly Wav. */
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);

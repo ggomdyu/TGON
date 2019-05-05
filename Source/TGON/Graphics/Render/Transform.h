@@ -14,11 +14,11 @@ namespace tgon
 
 class TGON_API Transform
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Transform() noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Sets the position. */
     void SetLocalPosition(const Vector3& position) noexcept;
@@ -43,7 +43,7 @@ public:
     
     virtual void Update();
     
-/**@section Protected variable */
+/**@section Variable */
 protected:
     Vector3 m_localPosition;
     Vector3 m_localRotation;

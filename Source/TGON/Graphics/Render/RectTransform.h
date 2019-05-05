@@ -16,13 +16,13 @@ namespace tgon
 class TGON_API RectTransform :
     private Transform
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     RectTransform();
     
     RectTransform(const Vector2& localAnchor, const Vector2& localPivot);
 
-/**@section Public method */
+/**@section Method */
 public:
     using Transform::GetLocalPosition;
     using Transform::GetLocalRotation;
@@ -55,7 +55,7 @@ public:
 
     virtual void Update() override;
 
-/**@section Protected variable */
+/**@section Variable */
 protected:
     Vector2 m_localAnchor;
     Vector2 m_localPivot;

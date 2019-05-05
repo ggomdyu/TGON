@@ -7,29 +7,29 @@
 namespace tgon
 {
 
-InputManagerImpl::InputManagerImpl(const std::shared_ptr<Window>& window) :
+MacOSInputManager::MacOSInputManager(const std::shared_ptr<Window>& window) :
     m_inputManager(std::make_unique<gainput::InputManager>())
 {
 }
     
-InputManagerImpl::~InputManagerImpl() = default;
+MacOSInputManager::~MacOSInputManager() = default;
 
 void InputManagerImpl::Update()
 {
     m_inputManager->Update();
 }
     
-gainput::InputDeviceMouse* InputManagerImpl::CreateMouseDevice()
+gainput::InputDeviceMouse* MacOSInputManager::CreateNativeMouse()
 {
     return m_inputManager->CreateAndGetDevice<gainput::InputDeviceMouse>();
 }
 
-gainput::InputDeviceKeyboard* InputManagerImpl::CreateKeyboardDevice()
+gainput::InputDeviceKeyboard* MacOSInputManager::CreateNativeKeyboard()
 {
     return m_inputManager->CreateAndGetDevice<gainput::InputDeviceKeyboard>();
 }
 
-gainput::InputDevicePad* InputManagerImpl::CreateGamepadDevice()
+gainput::InputDevicePad* MacOSInputManager::CreateNativeGamepad()
 {
     return m_inputManager->CreateAndGetDevice<gainput::InputDevicePad>();
 }

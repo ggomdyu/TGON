@@ -14,7 +14,7 @@ namespace tgon
     
 class Timer final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Timer() noexcept;
     
@@ -22,7 +22,7 @@ public:
     
     Timer(int64_t interval, bool isAutoReset) noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Stops this timer.
@@ -54,12 +54,12 @@ public:
     /**@brief   Gets the interval, expressed in milliseconds, at which to raise the OnTimeElapsed event. */
     int64_t GetInterval() const noexcept;
     
-/**@section Public variable */
+/**@section Variable */
 public:
     /**@brief   Occurs when the interval elapses. */
     DelegateChain<void()> OnTimeElapsed;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     int64_t m_interval;
     int64_t m_prevTime;

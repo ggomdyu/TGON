@@ -13,34 +13,22 @@
 #   include "MacOS/MacOSKeyboard.h"
 #endif
 
-#include "InputManager.h"
-
 namespace tgon
 {
 
 class TGON_API Keyboard final :
-    private boost::noncopyable
+    private PlatformKeyboard
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit Keyboard(InputManager& inputManager);
+    using PlatformKeyboard::PlatformKeyboard;
     
-/**@section Public destructor */
+/**@section Method */
 public:
-    ~Keyboard();
-    
-/**@section Public method */
-public:
-    void Update();
-    bool IsKeyDown(KeyCode keyCode) const;
-    bool IsKeyHold(KeyCode keyCode) const;
-    bool IsKeyUp(KeyCode keyCode) const;
-    const KeyboardImpl& GetImpl() const noexcept;
-    KeyboardImpl& GetImpl() noexcept;
-    
-/**@section Private variable */
-private:
-    KeyboardImpl m_keyboardImpl;
+    using PlatformKeyboard::Update;
+    using PlatformKeyboard::IsKeyDown;
+    using PlatformKeyboard::IsKeyHold;
+    using PlatformKeyboard::IsKeyUp;  
 };
     
 } /* namespace tgon */

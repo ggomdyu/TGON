@@ -13,11 +13,11 @@ namespace tgon
 
 class Stopwatch final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Stopwatch() noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Starts measuring elapsed time. */
     void Start();
@@ -43,7 +43,7 @@ public:
     /**@brief   Gets the total elapsed time measured by the current instance in nanoseconds. */
     int64_t GetElapsedNanoseconds() const;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     int64_t m_oldTime;
 };
@@ -75,12 +75,12 @@ inline bool Stopwatch::IsRunning() const noexcept
 
 inline int64_t Stopwatch::GetElapsedSeconds() const
 {
-    return static_cast<int64_t>(this->GetElapsedMilliseconds() * 0.001f);
+    return static_cast<int64_t>(this->GetElapsedMilliseconds() * 0.001);
 }
 
 inline int64_t Stopwatch::GetElapsedMilliseconds() const
 {
-    return static_cast<int64_t>(this->GetElapsedNanoseconds() * 0.000001f);
+    return static_cast<int64_t>(this->GetElapsedNanoseconds() * 0.000001);
 }
 
 inline int64_t Stopwatch::GetElapsedNanoseconds() const

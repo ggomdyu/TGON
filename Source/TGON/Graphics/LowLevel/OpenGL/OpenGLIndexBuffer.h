@@ -8,13 +8,15 @@
 #include <boost/noncopyable.hpp>
 #include <GL/glew.h>
 
+#include "Core/Platform/Config.h"
+
 namespace tgon
 {
 
 class TGON_API OpenGLIndexBuffer :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**
      * @brief                       Initializes the index buffer with the specified data.
@@ -24,11 +26,11 @@ public:
      */
     OpenGLIndexBuffer(const void* data, std::size_t dataBytes, bool isDynamicUsage);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~OpenGLIndexBuffer();
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief                       Sets the index buffer with the specified data.
@@ -55,11 +57,10 @@ public:
     
     bool IsDynamicUsage() const noexcept;
 
-/**@section Private method */
 private:
     GLuint CreateIndexBufferHandle() const;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::size_t m_dataBytes;
     bool m_isDynamicUsage;

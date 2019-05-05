@@ -16,7 +16,7 @@ class TGON_API IModule :
 public:
     TGON_DECLARE_RTTI(IModule);
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates the module. */
     virtual void Update() = 0;

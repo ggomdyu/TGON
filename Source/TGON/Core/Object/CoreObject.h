@@ -21,15 +21,15 @@ class TGON_API CoreObject :
 public:
     TGON_DECLARE_RTTI(CoreObject);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     CoreObject() = default;
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~CoreObject() override = default;
     
-/**@section Public method */
+/**@section Method */
 public:
     template <typename _Type>
     void SetExtraData(_Type&& extraData);
@@ -40,7 +40,7 @@ public:
     template <typename _Type>
     const _Type* GetExtraData() const;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     boost::any m_extraData;
 };

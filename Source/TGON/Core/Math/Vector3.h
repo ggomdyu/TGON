@@ -24,7 +24,7 @@ namespace tgon
 template <typename _ValueType>
 struct BasicVector3 final
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes x, y, z components to 0. */
     constexpr BasicVector3() noexcept;
@@ -62,7 +62,7 @@ public:
     constexpr bool operator==(const BasicVector3& v) const noexcept;
     constexpr bool operator!=(const BasicVector3& v) const noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     static constexpr const BasicVector3 Reflect(const BasicVector3& inDirection, const BasicVector3& inPlaneNormal) noexcept;
     static constexpr _ValueType Dot(const BasicVector3& v1, const BasicVector3& v2) noexcept;
@@ -92,7 +92,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
     
-/**@section Public variable */
+/**@section Variable */
 public:
 	_ValueType x, y, z;
 };

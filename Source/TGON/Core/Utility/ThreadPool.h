@@ -18,7 +18,7 @@ namespace tgon
 
 class ThreadPool
 {
-/**@section Private class */
+/**@section Class */
 private:
     class ThreadWorker;
 
@@ -26,11 +26,11 @@ private:
     class ThreadWorkQueue :
         private std::deque<_ValueType>
     {
-    /**@section Private type */
+    /**@section Type */
     private:
         using SuperType = std::deque<_ValueType>;
 
-    /**@section Public method */
+    /**@section Method */
     public:
         template <typename _ValueType2>
         void Enqueue(_ValueType2&& value);
@@ -41,16 +41,16 @@ private:
 
         bool IsEmpty() const;
 
-    /**@section Private variable */
+    /**@section Variable */
     private:
         mutable std::mutex m_mutex;
     };
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     explicit ThreadPool(int32_t allocateThreadCount = std::min(std::thread::hardware_concurrency() - 1u, 1u));
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief               Inserts a task to execute asynchronously by task threads.
@@ -74,7 +74,7 @@ public:
      */
     bool IsJoinable() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     /**@brief   The pool of threads. */
     std::vector<std::thread> m_threads;

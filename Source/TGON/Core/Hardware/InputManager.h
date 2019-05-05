@@ -16,27 +16,24 @@
 namespace tgon
 {
 
+class Mouse;
+class Keyboard;
+class Gamepad;
+
 class TGON_API InputManager final :
-    private boost::noncopyable
+    private PlatformInputManager
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    InputManager(const std::shared_ptr<Window>& inputTarget);
+    using PlatformInputManager::PlatformInputManager;
     
-/**@section Public destructor */
+/**@section Method */
 public:
-    ~InputManager();
-    
-/**@section Public method */
-public:
-    void Update();
-    
-    const InputManagerImpl& GetImpl() const noexcept;
-    InputManagerImpl& GetImpl() noexcept;
-    
-/**@section Private variable */
-private:
-    InputManagerImpl m_inputManagerImpl;
+    std::unique_ptr<Mouse> CreateMouse();
+    std::unique_ptr<Keyboard> CreateKeyboard();
+    std::unique_ptr<Gamepad> CreateGamepad();
+
+    using PlatformInputManager::Update;
 };
 
 } /* namespace tgon */

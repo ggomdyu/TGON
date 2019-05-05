@@ -20,14 +20,14 @@ namespace tgon
 class TGON_API VertexBuffer final :
     private PlatformVertexBuffer
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     template <typename _DataArrayType, std::size_t _DataArraySize>
     VertexBuffer(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
 
     using PlatformVertexBuffer::PlatformVertexBuffer;
 
-/**@section Public method */
+/**@section Method */
 public:
     PlatformVertexBuffer* GetPlatformDependency() noexcept;
     const PlatformVertexBuffer* GetPlatformDependency() const noexcept;

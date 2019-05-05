@@ -19,7 +19,7 @@ namespace tgon
 
 struct Color4b
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Assigns all components to zero. */
     constexpr Color4b() noexcept;
@@ -30,7 +30,7 @@ public:
     /**@brief   Assigns the packed color in RGBA order. */
     constexpr Color4b(uint32_t color) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     constexpr const Color4b operator+(const Color4b& rhs) const noexcept;
     constexpr const Color4b operator-(const Color4b& rhs) const noexcept;
@@ -53,7 +53,7 @@ public:
     constexpr bool operator!=(const Color4b& rhs) const noexcept;
     constexpr operator uint32_t() const noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Creates a string that represents this struct.
@@ -71,7 +71,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
     
-/**@section Public variable */
+/**@section Variable */
 public:
     union
     {
@@ -221,17 +221,17 @@ inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
 
 struct Color3f
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     constexpr Color3f() noexcept;
     constexpr Color3f(float r, float g, float b) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     constexpr bool operator==(const Color3f& rhs) const noexcept;
     constexpr bool operator!=(const Color3f& rhs) const noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Creates a string that represents this struct.
@@ -249,7 +249,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/**@section Public variable */
+/**@section Variable */
 public:
     float r, g, b;
 };
@@ -289,17 +289,17 @@ inline int32_t Color3f::ToString(char* destStr, std::size_t strBufferSize) const
 
 struct Color4f
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     constexpr Color4f() noexcept;
     constexpr Color4f(float r, float g, float b, float a) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     constexpr bool operator==(const Color4f& rhs) const noexcept;
     constexpr bool operator!=(const Color4f& rhs) const noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Creates a string that represents this struct.
@@ -317,7 +317,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/**@section Public variable */
+/**@section Variable */
 public:
     float r, g, b, a;
 };

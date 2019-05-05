@@ -21,7 +21,7 @@ namespace detail
 template <typename _DeriviedType>
 class BasicStringHashImpl
 {
-/**@section Public operator */
+/**@section Operator */
 public:
     constexpr bool operator==(const _DeriviedType& rhs) const noexcept;
     constexpr bool operator!=(const _DeriviedType& rhs) const noexcept;
@@ -45,12 +45,12 @@ template <typename _StringType, typename _EnableType = void>
 class BasicStringHash :
     public detail::BasicStringHashImpl<BasicStringHash<_StringType, _EnableType>>
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ValueType = typename _StringType::ValueType;
     using StringType = _StringType;
     
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes with null character pointer. */
     constexpr BasicStringHash() noexcept;
@@ -65,7 +65,7 @@ public:
     /**@brief   Initializes with string. */
     constexpr BasicStringHash(const _StringType& str) noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
     constexpr const ValueType* CStr() const noexcept;
@@ -76,7 +76,7 @@ public:
     /**@brief   Gets the hash code of the string. */
     constexpr const size_t GetHashCode() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     _StringType m_str;
     size_t m_hashCode;
@@ -131,12 +131,12 @@ template <typename _StringType>
 class BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type> :
     public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ValueType = PurifyType<_StringType>;
     using StringType = _StringType;
     
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes with null character pointer. */
     constexpr BasicStringHash() noexcept;
@@ -148,7 +148,7 @@ public:
     /**@brief   Initializes with character pointer and its length. */
     constexpr BasicStringHash(const ValueType* str, size_t strLen) noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
     constexpr const _StringType& CStr() const noexcept;
@@ -159,7 +159,7 @@ public:
     /**@brief   Gets the hash code of the string. */
     constexpr const size_t GetHashCode() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     _StringType m_str;
     size_t m_strLen;
@@ -209,12 +209,12 @@ template <typename _StringType>
 class BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type> :
     public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType>>::type>>
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ValueType = typename _StringType::value_type;
     using StringType = _StringType;
     
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes with null character pointer. */
     BasicStringHash() noexcept;
@@ -229,7 +229,7 @@ public:
     /**@brief   Initializes with basic_string. */
     BasicStringHash(const _StringType& str) noexcept;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
     const ValueType* CStr() const noexcept;
@@ -240,7 +240,7 @@ public:
     /**@brief   Gets the hash code of the string. */
     const size_t GetHashCode() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     _StringType m_str;
     size_t m_hashCode;

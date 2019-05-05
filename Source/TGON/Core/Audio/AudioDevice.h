@@ -21,17 +21,17 @@ namespace tgon
 class TGON_API AudioDevice final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     AudioDevice() noexcept(false);
 
     AudioDevice(AudioDevice&& rhs);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~AudioDevice();
 
-/**@section Public operator */
+/**@section Operator */
 public:
     AudioDevice& operator=(AudioDevice&& rhs);
 

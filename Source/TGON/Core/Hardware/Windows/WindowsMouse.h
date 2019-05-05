@@ -5,39 +5,49 @@
  */
 
 #pragma once
-#include <memory>
 #include <boost/noncopyable.hpp>
-#include <OIS.h>
+#include <memory>
 
 #include "Core/Platform/Config.h"
 
 #include "WindowsMouseType.h"
-#include "WindowsInputManager.h"
+
+namespace OIS
+{
+
+class Mouse;
+class MouseState;
+
+}
 
 namespace tgon
 {
 
-class TGON_API MouseImpl final :
+class WindowsInputManager;
+
+class TGON_API WindowsMouse :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit MouseImpl(InputManagerImpl& platformInputManager) noexcept;
+    explicit WindowsMouse(OIS::Mouse* nativeMouse) noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;
-    const OIS::Mouse* GetMousedDevice() const;
-    OIS::Mouse* GetMouseDevice();
+    const OIS::Mouse* GetNativeMouse() const;
+    OIS::Mouse* GetNativeMouse();
 
-/**@section Private variable */
+/**@section Variable */
 private:
-    OIS::Mouse* m_mouseDevice;
-    std::shared_ptr<OIS::MouseState> m_prevMouseState;
+    OIS::Mouse* m_nativeMouse;
+    std::shared_ptr<OIS::MouseState> m_currMouseState;
 };
+
+using PlatformMouse = WindowsMouse;
 
 } /* namespace tgon */

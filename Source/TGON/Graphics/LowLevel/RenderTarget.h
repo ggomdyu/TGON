@@ -17,20 +17,20 @@ namespace tgon
 class TGON_API RenderTarget final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     RenderTarget(int32_t width, int32_t height, int32_t multisampleLevel);
     
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~RenderTarget() = default;
     
-/**@section Public method */
+/**@section Method */
 public:
     void Use();
     void Unuse();
     
-/**@section Private variable */
+/**@section Variable */
 private:
     RenderTargetImpl m_renderTargetImpl;
 };

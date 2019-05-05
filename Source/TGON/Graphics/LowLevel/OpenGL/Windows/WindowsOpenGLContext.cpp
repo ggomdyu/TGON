@@ -13,8 +13,8 @@
 namespace tgon
 {
 
-OpenGLContext::OpenGLContext(const VideoMode& videoMode, const Window& displayTarget) :
-    wndHandle(reinterpret_cast<HWND>(displayTarget.GetNativeWindow())),
+OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) :
+    wndHandle(reinterpret_cast<HWND>(displayTarget->GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     assert(wndHandle != nullptr);

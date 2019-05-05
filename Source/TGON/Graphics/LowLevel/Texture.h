@@ -17,11 +17,11 @@ namespace tgon
 class TGON_API Texture final :
     private PlatformTexture
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     explicit Texture(const std::string& filePath, const TextureProperty& textureProperty = {});
    
-/**@section Public method */
+/**@section Method */
 public:
     PlatformTexture* GetPlatformDependency() noexcept;
     const PlatformTexture* GetPlatformDependency() const noexcept;

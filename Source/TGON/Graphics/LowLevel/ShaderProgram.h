@@ -17,7 +17,7 @@ namespace tgon
 class TGON_API ShaderProgram final :
     private PlatformShaderProgram
 {
-/**@section Public method */
+/**@section Method */
 public:
     PlatformShaderProgram* GetPlatformDependency() noexcept;
     const PlatformShaderProgram* GetPlatformDependency() const noexcept;

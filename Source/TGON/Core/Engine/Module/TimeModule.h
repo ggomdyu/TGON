@@ -16,15 +16,15 @@ class TGON_API TimeModule final :
 public:
     TGON_DECLARE_RTTI(TimeModule);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     TimeModule();
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~TimeModule() override = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates the TimeModule. */
     virtual void Update() override;
@@ -47,7 +47,7 @@ public:
      */
     float GetTickTime() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     uint64_t m_lastRecordedTickTime;
     float m_timeScale;

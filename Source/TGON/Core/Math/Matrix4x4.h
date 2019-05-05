@@ -22,7 +22,7 @@ namespace tgon
 
 struct Matrix4x4
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Initializes matrix as an Identity matrix. */
     constexpr Matrix4x4() noexcept;
@@ -33,7 +33,7 @@ public:
                         float m20, float m21, float m22, float m23,
                         float m30, float m31, float m32, float m33) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     Matrix4x4 operator+(const Matrix4x4&) const;
     Matrix4x4 operator-(const Matrix4x4&) const;
@@ -47,7 +47,7 @@ public:
     float* operator[](std::size_t index);
     const float* operator[](std::size_t index) const;
 
-/**@section Public method */
+/**@section Method */
 public:
     static constexpr const Matrix4x4 Identity();
     static constexpr const Matrix4x4 Zero();
@@ -83,7 +83,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/**@section Public variable */
+/**@section Variable */
 public:
     float m00, m01, m02, m03,
           m10, m11, m12, m13,

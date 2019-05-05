@@ -29,11 +29,11 @@ class WindowsWindow :
 public:
     TGON_DECLARE_RTTI(WindowsWindow);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     WindowsWindow(const WindowStyle& windowStyle);
 
-/**@section Public method */
+/**@section Method */
 public:
     void Show();
     void Hide();
@@ -62,7 +62,10 @@ public:
     LONG_PTR GetRawWindowStyle() const;
     LONG_PTR GetRawWindowStyleEx() const;
 
-/**@section Public event handler */
+private:
+    void SetUserData(void* data);
+
+/**@section Event handler */
 public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -77,11 +80,7 @@ public:
     DelegateChain<void()> OnGetFocus;
     DelegateChain<void()> OnLoseFocus;
 
-/**@section Private method */
-private:
-    void SetUserData(void* data);
-
-/**@section Private variable */
+/**@section Variable */
 private:
     HWND m_wndHandle;
     bool m_isDwmCompositionEnabled;

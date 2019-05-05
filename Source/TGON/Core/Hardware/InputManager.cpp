@@ -1,30 +1,26 @@
 #include "PrecompiledHeader.h"
 
 #include "InputManager.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "Gamepad.h"
 
 namespace tgon
 {
 
-InputManager::InputManager(const std::shared_ptr<Window>& inputTarget) :
-    m_inputManagerImpl(inputTarget)
+std::unique_ptr<Mouse> InputManager::CreateMouse()
 {
-}
-    
-InputManager::~InputManager() = default;
-
-void InputManager::Update()
-{
-    m_inputManagerImpl.Update();
+    return std::make_unique<Mouse>(this->CreateNativeMouse());
 }
 
-const InputManagerImpl& InputManager::GetImpl() const noexcept
+std::unique_ptr<Keyboard> InputManager::CreateKeyboard()
 {
-    return m_inputManagerImpl;
+    return std::make_unique<Keyboard>(this->CreateNativeKeyboard());
 }
 
-InputManagerImpl& InputManager::GetImpl() noexcept
+std::unique_ptr<Gamepad> InputManager::CreateGamepad()
 {
-    return m_inputManagerImpl;
+    return std::make_unique<Gamepad>(this->CreateNativeGamepad());
 }
 
 } /* namespace tgon */

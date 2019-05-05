@@ -27,15 +27,15 @@ class TGON_API IntroScene :
 public:
     TGON_DECLARE_RTTI(IntroScene);
     
-/**@section Public constructor */
+/**@section Constructor */
 public:
     IntroScene();
     
-/**@section Public method */
+/**@section Method */
 public:
     virtual void Update() override;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     float camZ;
 

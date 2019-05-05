@@ -20,11 +20,11 @@ class TGON_API GameSceneModule final :
 public:
     TGON_DECLARE_RTTI(GameSceneModule);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~GameSceneModule() override final = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates the frame of scene. */
     virtual void Update() override;
@@ -45,10 +45,7 @@ public:
      */
     GameScene& GetCurrentScene() noexcept;
     
-/**@section Private method */
-private:
-
-/**@section Private variable */
+/**@section Variable */
 private:
     std::unique_ptr<GameScene> m_currentScene;
 };

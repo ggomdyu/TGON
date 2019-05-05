@@ -20,27 +20,27 @@ namespace tgon
 {
     
 enum class KeyCode;
-class InputManagerImpl;
+class WindowsInputManager;
     
-class TGON_API KeyboardImpl final :
+class TGON_API WindowsKeyboard final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit KeyboardImpl(InputManagerImpl& platformInputManager);
+    explicit WindowsKeyboard(WindowsInputManager& platformInputManager);
     
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
     bool IsKeyDown(KeyCode keyCode) const;
     bool IsKeyHold(KeyCode keyCode) const;
     bool IsKeyUp(KeyCode keyCode) const;
-    const gainput::InputDeviceKeyboard* GetKeyboardDevice() const noexcept;
-    gainput::InputDeviceKeyboard* GetKeyboardDevice() noexcept;
+    const gainput::InputDeviceKeyboard* GetNativeKeyboard() const noexcept;
+    gainput::InputDeviceKeyboard* GetNativeKeyboard() noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
-    gainput::InputDeviceKeyboard* m_keyboardDevice;
+    gainput::InputDeviceKeyboard* m_nativeKeyboard;
 };
 
 } /* namespace tgon */

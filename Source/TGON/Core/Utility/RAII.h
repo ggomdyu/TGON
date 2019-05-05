@@ -17,11 +17,11 @@ namespace tgon
 template <typename _ResourceType, typename _DerivedType>
 class RAII
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ResourceType = _ResourceType;
 
-/**@section Public constructor */
+/**@section Constructor */
 protected:
     constexpr RAII() noexcept;
     constexpr explicit RAII(const _ResourceType& rhs);
@@ -29,7 +29,7 @@ protected:
     RAII(RAII&& rhs) = delete;
     ~RAII();
 
-/**@section Public operator */
+/**@section Operator */
 public:
     RAII& operator=(const RAII& rhs) = delete;
     RAII& operator=(RAII&& rhs) = delete;
@@ -48,7 +48,7 @@ public:
     bool operator==(const RAII& rhs) const noexcept;
     bool operator!=(const RAII& rhs) const noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Adds the reference count of managed resource. */
     void AddRef();
@@ -68,12 +68,11 @@ public:
     /**@brief   Returns the managed resource. */
     _ResourceType& Get() noexcept;
 
-/**@section Protected method */
 protected:
     /**@brief   Returns special value which indicates resource is null. */
     _ResourceType GetNullValue() const noexcept;
 
-/**@section Protected variable */
+/**@section Variable */
 protected:
     _ResourceType m_resource;
 };

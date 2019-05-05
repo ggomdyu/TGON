@@ -26,17 +26,17 @@ class TGON_API LogoScene :
 public:
     TGON_DECLARE_RTTI(LogoScene);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     LogoScene();
     
-/**@section Public method */
+/**@section Method */
 public:
     virtual void Update() override;
     
     void OnHandleInput();
 
-/**@section Private variable */
+/**@section Variable */
 private:
     int64_t m_beginTime;
     std::shared_ptr<tgon::CameraComponent> m_cameraComponent;

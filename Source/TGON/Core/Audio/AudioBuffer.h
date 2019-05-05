@@ -27,7 +27,7 @@ namespace tgon
 class AudioBuffer final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     AudioBuffer();
 
@@ -47,15 +47,15 @@ public:
 
     AudioBuffer(AudioBuffer&& rhs) = default;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     AudioBuffer& operator=(AudioBuffer&& rhs) = default;
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~AudioBuffer();
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Reads a sound data from the path specified by filePath.
@@ -102,13 +102,12 @@ public:
     /**@brief   Gets the file path saved at loading time. */
     const std::string& GetFilePath() const noexcept;
 
-/**@section Private method */
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
 
     bool InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::string m_filePath;
     std::vector<uint8_t> m_audioData;

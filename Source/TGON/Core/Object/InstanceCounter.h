@@ -15,28 +15,28 @@ namespace tgon
 template <typename _InstanceType>
 class InstanceCounter
 {
-/**@section Protected constructor */
+/**@section Constructor */
 protected:
     InstanceCounter() noexcept
     {
         ++ms_instanceCount;
     }
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~InstanceCounter() noexcept
     {
         --ms_instanceCount;
     }
 
-/**@section Public method */
+/**@section Method */
 public:
     static int32_t GetInstanceCount() noexcept
     {
         return ms_instanceCount;
     }
 
-/**@section Protected variable */
+/**@section Variable */
 protected:
     static int32_t ms_instanceCount;
 };
@@ -48,7 +48,7 @@ template <typename _InstanceType, int32_t _MaxInstanceCount>
 class InstanceCountLimiter :
     private InstanceCounter<_InstanceType>
 {
-/**@section Protected constructor */
+/**@section Constructor */
 protected:
     InstanceCountLimiter() noexcept
     {

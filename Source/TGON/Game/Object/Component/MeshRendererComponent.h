@@ -16,15 +16,15 @@ class TGON_API MeshRendererComponent :
 public:
     TGON_DECLARE_RTTI(MeshRendererComponent);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     MeshRendererComponent(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material);
     
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~MeshRendererComponent() override = default;
 
-/**@section Public method */
+/**@section Method */
 public:
 	virtual void Update() override;
     
@@ -34,7 +34,7 @@ public:
     /**@brief   Gets the mesh. */
     const std::shared_ptr<Mesh>& GetMesh() const noexcept;
     
-/**@section Protected variable */
+/**@section Variable */
 protected:
     std::shared_ptr<Mesh> m_mesh;
 };

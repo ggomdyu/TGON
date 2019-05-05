@@ -27,7 +27,7 @@ namespace tgon
 //        const Matrix4x4* matWorld;
 //    };
 //
-///**@section Public constructor */
+///**@section Constructor */
 //public:
 //    /**@brief   Initializes the batch with a material. */
 //    explicit Batch(const std::shared_ptr<Material>& material);
@@ -35,7 +35,7 @@ namespace tgon
 //    /**@brief   Initializes the batch with a material and primitives. */
 //    explicit Batch(const std::shared_ptr<Material>& material, const std::initializer_list<DrawPrimitive>& drawPrimitives);
 //
-///**@section Public method */
+///**@section Method */
 //public:
 //    /**@brief   Adds a draw primitive into the batch. */
 //    void AddDrawPrimitive(const std::shared_ptr<Mesh>& mesh, const Matrix4x4* matWorld);
@@ -49,7 +49,7 @@ namespace tgon
 //    /**@brief   Draws all batched primitives. */
 //    void Draw(Graphics& graphics, const Camera& camera);
 //
-///**@section Private variable */
+///**@section Variable */
 //private:
 //    std::shared_ptr<Material> m_material;
 //    
@@ -58,7 +58,7 @@ namespace tgon
 //    
 //class TGON_API BatchGroup final
 //{
-///**@section Public method */
+///**@section Method */
 //public:
 //    /**@brief   Adds a mesh into the batch list. */
 //    void AddBatch(const std::shared_ptr<Material>& material, const Batch::DrawPrimitive& drawPrimitive);
@@ -69,7 +69,7 @@ namespace tgon
 //    /**@brief   Flushes all the batch in list. */
 //    void FlushBatch(Graphics& graphics, const Camera& camera);
 //
-///**@section Private variable */
+///**@section Variable */
 //private:
 //    std::vector<Batch> m_batches;
 //};

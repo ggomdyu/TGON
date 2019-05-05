@@ -21,7 +21,7 @@ class HandleGuard final :
     public RAII<HANDLE, HandleGuard>,
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Adds the reference count of managed resource. */
     void AddRef();

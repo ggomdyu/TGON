@@ -25,24 +25,24 @@ namespace tgon
     
 class Window;
 
-class TGON_API InputManagerImpl final :
+class TGON_API MacOSInputManager :
     private boost::noncopyable
 {
 /**@section Public constructor */
 public:
-    explicit InputManagerImpl(const std::shared_ptr<Window>& window);
+    explicit MacOSInputManager(const std::shared_ptr<Window>& window);
    
 /**@section Public destructor */
 public:
-    ~InputManagerImpl();
+    ~MacOSInputManager();
     
 /**@section Public method */
 public:
     void Update();
 
-    gainput::InputDeviceMouse* CreateMouseDevice();
-    gainput::InputDeviceKeyboard* CreateKeyboardDevice();
-    gainput::InputDevicePad* CreateGamepadDevice();
+    gainput::InputDeviceMouse* CreateNativeMouse();
+    gainput::InputDeviceKeyboard* CreateNativeKeyboard();
+    gainput::InputDevicePad* CreateNativeGamepad();
 
 /**@section Private variable */
 private:

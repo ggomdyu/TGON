@@ -20,17 +20,17 @@ class InputDeviceMouse;
 namespace tgon
 {
 
-class InputManagerImpl;
+class WindowsInputManager;
 enum class MouseCode;
     
-class TGON_API MouseImpl final :
+class TGON_API WindowsMouse final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit MouseImpl(InputManagerImpl& inputManagerImpl);
+    explicit WindowsMouse(WindowsInputManager& inputManagerImpl);
     
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
@@ -39,11 +39,11 @@ public:
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;
     const gainput::InputDeviceMouse* GetMouseDevice() const noexcept;
-    gainput::InputDeviceMouse* GetMouseDevice() noexcept;
+    gainput::InputDeviceMouse* GetNativeMouse() noexcept;
     
-    /**@section Private variable */
+    /**@section Variable */
 private:
-    gainput::InputDeviceMouse* m_mouseDevice;
+    gainput::InputDeviceMouse* m_nativeMouse;
 };
     
 } /* namespace tgon */

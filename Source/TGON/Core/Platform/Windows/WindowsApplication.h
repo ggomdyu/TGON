@@ -25,11 +25,11 @@ class TGON_API WindowsApplication :
 public:
     TGON_DECLARE_RTTI(WindowsApplication);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     WindowsApplication();
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Processes the message stacked in queue. */
     template <typename _FunctionType>
@@ -52,16 +52,15 @@ public:
      */
     void EnableCrashHandler();
 
-/**@section Private event handler */
+/**@section Event Handler */
 private:
     static LRESULT CALLBACK OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
-/**@section Private method */
 private:
     /**@brief   Register default WNDCLASS to window class table. */
     bool RegisterWindowClass();
 
-/**@section Private variable */
+/**@section Variable */
 private:
     bool m_doCrashReport;
 };

@@ -31,15 +31,15 @@ class TGON_API Engine :
 public:
     TGON_DECLARE_RTTI(Engine);
 
-/**@section Protected constructor */
+/**@section Constructor */
 protected:
     Engine();
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~Engine() = 0;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Updates the Engine.
@@ -69,12 +69,12 @@ public:
     template <typename _ModuleType>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
     
-/**@section Public event handler */
+/**@section Event handler */
 public:
     virtual void OnLaunch();
     virtual void OnTerminate();
 
-/**@section Private method */
+/**@section Method */
 private:
     /**
      * @brief   Registers a module to manage through this engine.
@@ -96,7 +96,7 @@ private:
      */
     bool UnregisterModule(size_t moduleId);
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::shared_ptr<TimeModule> m_timeModule;
 

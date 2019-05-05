@@ -29,20 +29,20 @@ struct TGON_API OpenGLContext final :
 public:
     TGON_DECLARE_RTTI(OpenGLContext);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     OpenGLContext(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~OpenGLContext();
 
-/**@section Public operator */
+/**@section Operator */
 public:
     OpenGLContext& operator=(OpenGLContext&& rhs);
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Makes this context to main. */
     void MakeCurrent();
@@ -50,7 +50,7 @@ public:
     /**@brief   Displays a back buffer image to screen. */
     void SwapBuffer();
 
-/**@section Public variable */
+/**@section Variable */
 public:
 #if TGON_PLATFORM_WINDOWS
     HWND wndHandle;

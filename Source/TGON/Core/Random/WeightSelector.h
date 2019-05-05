@@ -18,7 +18,7 @@ class WeightSelector
 {
     static_assert(std::is_scalar<_WeightType>::value, "_WeightType must be scalar type.");
 
-/**@section Public type */
+/**@section Type */
 public:
     using WeightType = _WeightType;
     using WeightHandlerType = Delegate<void()>;
@@ -31,11 +31,11 @@ public:
         WeightHandlerType weightHandler;
     };
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     WeightSelector() noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     void Add(WeightType weight, const WeightHandlerType& handler);
     void Add(WeightType weight, WeightHandlerType&& handler);
@@ -44,7 +44,7 @@ public:
     void Clear();
     bool IsEmpty() const noexcept;
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::vector<WeightDesc> m_weightDescList;
 

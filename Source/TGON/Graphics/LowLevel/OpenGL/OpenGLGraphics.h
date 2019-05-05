@@ -23,15 +23,15 @@ class TGON_API OpenGLGraphics :
 public:
     TGON_DECLARE_RTTI(OpenGLGraphics);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     OpenGLGraphics(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) noexcept(false);
     
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~OpenGLGraphics();
 
-/**@section Public method */
+/**@section Method */
 public:
     void SetScissorRect(const FRect& scissorRect);
     void SetClearColor(const Color4f& color);
@@ -53,11 +53,10 @@ public:
     void DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount);
     void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount);
 
-/**@section Private method */
 private:
     void SetDefaultGLRenderState();
     
-/**@section Private variable */
+/**@section Variable */
 private:
     OpenGLContext m_context;
     

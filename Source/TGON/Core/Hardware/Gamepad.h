@@ -13,35 +13,23 @@
 #   include "MacOS/MacOSGamepad.h"
 #endif
 
-#include "InputManager.h"
-
 namespace tgon
 {
 
 class TGON_API Gamepad final :
-    private boost::noncopyable
+    private PlatformGamepad
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit Gamepad(InputManager& inputManager);
-    
-/**@section Public destructor */
+    using PlatformGamepad::PlatformGamepad;
+
+/**@section Method */
 public:
-    ~Gamepad();
-    
-/**@section Public method */
-public:
-    void Update();
-    void Vibrate(float leftMotor, float rightMotor);
-    bool IsButtonDown(int32_t buttonNumber) const;
-    bool IsButtonHold(int32_t buttonNumber) const;
-    bool IsButtonUp(int32_t buttonNumber) const;
-    const GamepadImpl& GetImpl() const noexcept;
-    GamepadImpl& GetImpl() noexcept;
-    
-/**@section Private variable */
-private:
-    GamepadImpl m_gamepadImpl;
+    using PlatformGamepad::Update;
+    using PlatformGamepad::Vibrate;
+    using PlatformGamepad::IsButtonDown;
+    using PlatformGamepad::IsButtonHold;
+    using PlatformGamepad::IsButtonUp;
 };
     
 } /* namespace tgon */

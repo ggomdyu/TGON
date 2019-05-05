@@ -21,11 +21,11 @@ namespace tgon
 template <typename _ValueType>
 struct BasicRect
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ValueType = _ValueType;
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     /**@brief   Constructor that initializes members to 0 */
     constexpr BasicRect() noexcept;
@@ -33,7 +33,7 @@ public:
     /**@brief   Constructor that initializes the member with the specified value */
     constexpr BasicRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& heght) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     constexpr const BasicRect operator+(const BasicRect&) noexcept;
     constexpr const BasicRect operator-(const BasicRect&) noexcept;
@@ -47,7 +47,7 @@ public:
     constexpr bool operator==(const BasicRect&) const noexcept;
     constexpr bool operator!=(const BasicRect&) const noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     constexpr bool Intersect(const BasicRect& rhs) const;
 
@@ -67,7 +67,7 @@ public:
      */
     int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
-/**@section Public variable */
+/**@section Variable */
 public:
     _ValueType x;
     _ValueType y;

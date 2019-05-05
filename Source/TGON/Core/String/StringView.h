@@ -14,7 +14,7 @@ template <typename _CharType, typename _StringTraitsType = StringTraits<_CharTyp
 class BasicStringView :
     private _StringTraitsType
 {
-/**@section Public type */
+/**@section Type */
 public:
     using StringTraitsType = _StringTraitsType;
     using SizeType = std::size_t;
@@ -28,18 +28,18 @@ public:
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     template <std::size_t _CharArraySize>
     constexpr BasicStringView(const _CharType(&str)[_CharArraySize]) noexcept;
     constexpr BasicStringView(const _CharType* str, std::size_t strLen) noexcept;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     bool operator==(const BasicStringView& rhs) const;
     constexpr const _CharType operator[](std::size_t index) const;
     
-/**@section Public method */
+/**@section Method */
 public:
     template <std::size_t _CharArraySize>
     void Assign(const _CharType(&str)[_CharArraySize]) noexcept;
@@ -63,7 +63,7 @@ public:
     constexpr ConstReverseIteratorType crbegin() const noexcept;
     constexpr ConstReverseIteratorType crend() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     const _CharType* m_str;
     std::size_t m_strLen;

@@ -15,16 +15,16 @@ namespace tgon
 
 class TGON_API RuntimeObject
 {
-/**@section Public type */
+/**@section Type */
 public:
     using SuperType = void;
     using ThisType = RuntimeObject;
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~RuntimeObject() = 0;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Gets a runtime type information of this instance. */
     virtual const RTTI* GetRTTI() const = 0;

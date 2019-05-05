@@ -19,7 +19,7 @@ namespace tgon
 
 class TGON_API Camera
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Camera() noexcept;
     
@@ -27,7 +27,7 @@ public:
     
     Camera(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) noexcept;
 
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
     
@@ -76,7 +76,7 @@ public:
     /**@brief   Gets the direction vector of camera. */
     const Vector3& GetLookAt() const noexcept;
     
-/**@section Private variable */
+/**@section Variable */
 private:
     Vector3 m_eyePt;
     Vector3 m_lookAt;

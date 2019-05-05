@@ -19,16 +19,16 @@ class TGON_API RendererComponent :
 public:
     TGON_DECLARE_RTTI(RendererComponent);
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     RendererComponent();
     explicit RendererComponent(const std::shared_ptr<Material>& material);
     
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~RendererComponent() override = 0;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Sets the material. */
     void SetMaterial(const std::shared_ptr<Material>& material);
@@ -39,7 +39,7 @@ public:
     /**@brief   Gets the material. */
     std::shared_ptr<const Material> GetMaterial() const noexcept;
     
-/**@section Protected variable */
+/**@section Variable */
 protected:
     std::shared_ptr<Material> m_material;
     std::shared_ptr<GraphicsModule> m_graphicsModule;

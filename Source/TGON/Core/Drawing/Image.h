@@ -21,7 +21,7 @@ namespace tgon
 
 class TGON_API Image
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     Image();
 
@@ -55,7 +55,7 @@ public:
     
     Image(Image&& rhs);
 
-/**@section Public operator */
+/**@section Operator */
 public:
     Image& operator=(Image&& rhs);
 
@@ -65,7 +65,7 @@ public:
     /**@brief   Gets the raw pointer of image. */
     const uint8_t operator[](std::size_t index) const;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Checks the image file was loaded successfully. */
     bool IsValid() const noexcept;
@@ -127,7 +127,7 @@ public:
      */
     bool SaveAsTga(const char* saveFilePath);
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::unique_ptr<uint8_t> m_imageData;
     int32_t m_width;

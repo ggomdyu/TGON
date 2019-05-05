@@ -12,11 +12,11 @@ namespace tgon
 
 class IComparable
 {
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~IComparable() = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Compares this instance with another instance of the same type.

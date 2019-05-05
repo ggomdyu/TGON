@@ -30,11 +30,11 @@ class TGON_API Application final :
 public:
     TGON_DECLARE_RTTI(Application);
 
-/**@section Private constructor */
+/**@section Constructor */
 private:
     explicit Application();
 
-/**@section Public method */
+/**@section Method */
 public:
     static Application* GetInstance();
 
@@ -52,12 +52,12 @@ public:
     using PlatformApplication::ShowMessageBox;
     using PlatformApplication::Terminate;
     
-/**@section Public event handler */
+/**@section Event Handler */
 public:
     void OnLaunch();
     void OnTerminate();
     
-/**@section Protected variable */
+/**@section Variable */
 protected:
     std::shared_ptr<Window> m_rootWindow;
     std::shared_ptr<Engine> m_engine;

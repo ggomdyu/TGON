@@ -17,13 +17,13 @@ namespace tgon
 template <typename _CharType>
 class StringTraits
 {
-/**@section Public type */
+/**@section Type */
 public:
     using ValueType = _CharType;
 
     using CharTraitsType = std::char_traits<_CharType>;
 
-/**@section Protected constructor */
+/**@section Constructor */
 protected:
     constexpr StringTraits() noexcept = default;
 
@@ -66,7 +66,7 @@ protected:
     {
     }
     
-/**@section Public method */
+/**@section Method */
 public:
     /**
      * @brief   Assigns srcStr to destStr.
@@ -268,7 +268,7 @@ public:
      */
     static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, std::va_list vaList);
 
-/**@section Public variable */
+/**@section Variable */
 public:
     /**
      * @brief   This is a special magic number which means string does not exist.

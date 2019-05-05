@@ -18,21 +18,21 @@ namespace tgon
 class AudioPlayer final :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     AudioPlayer();
     AudioPlayer(AudioPlayer&& rhs);
     explicit AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~AudioPlayer();
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     AudioPlayer& operator=(AudioPlayer&& rhs);
 
-/**@section Public method */
+/**@section Method */
 public:
     void Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer);
     void Play();
@@ -55,12 +55,11 @@ public:
     void SetLooping(bool isLooping);
     bool IsLooping() const;
 
-/**@section Private method */
 private:
     ALuint CreateALSourceHandle() const;
     void Release();
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::shared_ptr<AudioBuffer> m_audioBuffer;
     ALuint m_alSource;

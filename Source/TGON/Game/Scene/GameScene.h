@@ -22,11 +22,11 @@ class TGON_API GameScene :
 public:
     TGON_DECLARE_RTTI(GameScene);
 
-/**@section Public destructor */
+/**@section Destructor */
 public:
     virtual ~GameScene() = default;
 
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates the frame of the scene. */
     virtual void Update();
@@ -55,7 +55,7 @@ public:
      */
     bool RemoveObject(const StringViewHash& objectName);
     
-/**@section Private variable */
+/**@section Variable */
 private:
     std::vector<std::shared_ptr<GameObject>> m_objects;
     

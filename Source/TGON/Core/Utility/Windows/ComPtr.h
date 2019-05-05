@@ -43,19 +43,19 @@ template <typename _PointerType>
 class ComPtr final :
     public RAII<_PointerType, ComPtr<_PointerType>>
 {
-/**@section Public type */
+/**@section Type */
 public:
     using PointerType = _PointerType;
 
-/**@section Public constructor */
+/**@section Constructor */
 public:
     using ComPtr::ComPtr;
 
-/**@section Public operator */
+/**@section Operator */
 public:
     operator bool() noexcept;
 
-/**@section Protected variable */
+/**@section Variable */
 protected:
     using RAII<_PointerType, ComPtr<_PointerType>>::m_resource;
 };

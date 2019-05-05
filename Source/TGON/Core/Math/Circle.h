@@ -16,11 +16,11 @@
 //template <typename _ValueType>
 //struct Circle
 //{
-///**@section Public type */
+///**@section Type */
 //public:
 //    using ValueType = _ValueType;
 //
-///**@section Public constructor */
+///**@section Constructor */
 //public:
 //    /**@brief   Constructor that initializes members to 0 */
 //    constexpr Circle() noexcept;
@@ -28,7 +28,7 @@
 //    /**@brief   Constructor that initializes the member with the specified value */
 //    constexpr Circle(const _ValueType& radius) noexcept;
 //
-///**@section Public operator */
+///**@section Operator */
 //public:
 //    /*constexpr const BasicExtent2D operator+(const BasicExtent2D& rhs) const noexcept;
 //    constexpr const BasicExtent2D operator-(const BasicExtent2D& rhs) const noexcept;
@@ -45,7 +45,7 @@
 //    template <typename _CastToType>
 //    constexpr operator BasicExtent2D<_CastToType>() const noexcept;*/
 //
-///**@section Public method */
+///**@section Method */
 //public:
 //    /**
 //     * @brief                   Converts to string.
@@ -63,7 +63,7 @@
 //     */
 //    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 //
-///**@section Public variable */
+///**@section Variable */
 //public:
 //    _ValueType width;
 //    _ValueType height;

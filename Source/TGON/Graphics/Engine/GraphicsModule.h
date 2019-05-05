@@ -28,10 +28,12 @@ public:
 public:
     virtual ~GraphicsModule() override final = default;
     
-/**@section Public method */
+/**@section Method */
 public:
     /**@brief   Updates this module. */
     virtual void Update() override;
+    Graphics& GetGraphics() noexcept;
+    const Graphics& GetGraphics() const noexcept;
     View& GetView() noexcept;
     const View& GetView() const noexcept;
     
@@ -40,7 +42,7 @@ private:
     /**@brief   Draws the render stage. */
     void Draw();
 
-/**@section Private variable */
+/**@section Variable */
 public:
     Graphics m_graphics;
     View m_view;

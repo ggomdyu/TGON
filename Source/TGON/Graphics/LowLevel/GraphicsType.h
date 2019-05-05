@@ -31,7 +31,7 @@ enum class GraphicsSDK
 
 struct VideoMode final
 {
-/**@section Public variable */
+/**@section Variable */
 public:
     Color4f clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
     bool enableHardwareAccelerate = true;

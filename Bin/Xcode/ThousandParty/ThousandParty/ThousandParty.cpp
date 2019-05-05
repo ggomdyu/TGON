@@ -10,14 +10,6 @@ void ThousandParty::OnLaunch()
 {
     SuperType::OnLaunch();
 
-    //tgon::Sprite s(tgon::GetDesktopDirectory() + "/Assets/Image/IntroScene/girl.png");
-
-    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
-    rootWindow->OnResize += [](int32_t width, int32_t height)
-    {
-        printf("%d %d\n", width, height);
-    };
-    
     this->Initialize();
 }
 

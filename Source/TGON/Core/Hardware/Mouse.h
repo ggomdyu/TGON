@@ -20,30 +20,20 @@ namespace tgon
 {
     
 class TGON_API Mouse final :
-    private boost::noncopyable
+    private PlatformMouse
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
-    explicit Mouse(InputManager& inputManager);
+    using PlatformMouse::PlatformMouse;
     
-/**@section Public destructor */
+/**@section Method */
 public:
-    ~Mouse();
-    
-/**@section Public method */
-public:
-    void Update();
-    static void GetPosition(int32_t* x, int32_t* y);
     static I32Point GetPosition();
-    bool IsMouseDown(MouseCode mouseCode) const;
-    bool IsMouseHold(MouseCode mouseCode) const;
-    bool IsMouseUp(MouseCode mouseCode) const;
-    const MouseImpl& GetImpl() const noexcept;
-    MouseImpl& GetImpl() noexcept;
-    
-/**@section Private variable */
-private:
-    MouseImpl m_mouseImpl;
+    using PlatformMouse::GetPosition;
+    using PlatformMouse::Update;
+    using PlatformMouse::IsMouseDown;
+    using PlatformMouse::IsMouseHold;
+    using PlatformMouse::IsMouseUp;
 };
     
 } /* namespace tgon */
