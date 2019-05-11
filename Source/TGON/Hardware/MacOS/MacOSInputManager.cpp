@@ -7,7 +7,7 @@
 namespace tgon
 {
 
-MacOSInputManager::MacOSInputManager(const std::shared_ptr<Window>& window) :
+MacOSInputManager::MacOSInputManager(const MacOSWindow& window) :
     m_inputManager(std::make_unique<gainput::InputManager>())
 {
 }

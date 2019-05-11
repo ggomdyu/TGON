@@ -6,7 +6,7 @@
 #include "TGON.h"
 #include "ThousandParty.h"
 #include "LogoScene.h"
-#include <string_view>
+
 TGON_DECLARE_ENGINE(ThousandParty);
 
 using namespace tgon;
@@ -36,9 +36,7 @@ void ThousandParty::Initialize()
 void ThousandParty::InitializeModule()
 {
     using namespace tgon;
-
-    auto a1 = GetFontsDirectory();
-
+    
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {

@@ -21,6 +21,7 @@ class Window;
 
 struct InputMode final
 {
+/**@section Variable */
     bool isUseKeyboard = true;
     bool isUseMouse = false;
     bool isUseGamepad = false;

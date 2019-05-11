@@ -23,14 +23,14 @@ class InputManager;
 namespace tgon
 {
     
-class Window;
+class MacOSWindow;
 
 class TGON_API MacOSInputManager :
     private boost::noncopyable
 {
 /**@section Public constructor */
 public:
-    explicit MacOSInputManager(const std::shared_ptr<Window>& window);
+    explicit MacOSInputManager(const MacOSWindow& window);
    
 /**@section Public destructor */
 public:
