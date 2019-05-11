@@ -3,14 +3,15 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/Mouse.h"
 #include "Hardware/Gamepad.h"
+#include "Platform/Window.h"
 
 #include "InputModule.h"
 
 namespace tgon
 {
 
-InputModule::InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode) :
-    m_inputManager(inputTarget),
+InputModule::InputModule(const Window& inputTarget, const InputMode& inputMode) :
+    m_inputManager(*inputTarget.GetPlatformDependency()),
     m_keyboard(inputMode.isUseKeyboard ? m_inputManager.CreateKeyboard() : nullptr),
     m_mouse(inputMode.isUseMouse ? m_inputManager.CreateMouse() : nullptr),
     m_gamepad(inputMode.isUseGamepad ? m_inputManager.CreateGamepad() : nullptr)

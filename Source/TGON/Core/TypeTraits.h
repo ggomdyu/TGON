@@ -90,17 +90,16 @@ constexpr bool IsPureTypeValue = !std::is_const<_Type>::value &&
                                  !std::is_pointer<_Type>::value;
     
 template <typename _Type>
-using PurifyType = std::decay_t<RemoveAllPointersType<std::remove_cv_t<_Type>>>;
+using PureType = std::decay_t<RemoveAllPointersType<std::remove_cv_t<_Type>>>;
 
 template <typename _Type>
-constexpr bool IsCharTypeValue = std::is_same<PurifyType<_Type>, char>::value ||
-                                 std::is_same<PurifyType<_Type>, char16_t>::value ||
-                                 std::is_same<PurifyType<_Type>, char32_t>::value ||
-                                 std::is_same<PurifyType<_Type>, wchar_t>::value;
+constexpr bool IsCharTypeValue = std::is_same<PureType<_Type>, char>::value ||
+                                 std::is_same<PureType<_Type>, char16_t>::value ||
+                                 std::is_same<PureType<_Type>, char32_t>::value ||
+                                 std::is_same<PureType<_Type>, wchar_t>::value;
     
 template <typename _Type>
-constexpr bool IsCharPointerTypeValue = IsCharTypeValue<PurifyType<_Type>> &&
-                                        std::is_pointer<_Type>::value;
+constexpr bool IsCharPointerTypeValue = IsCharTypeValue<PureType<_Type>> && std::is_pointer<_Type>::value;
 
 template <typename>
 struct IsBasicString : std::false_type {};
@@ -110,5 +109,14 @@ struct IsBasicString<std::basic_string<_CharType, _TraitsType, _AllocatorType>> 
 
 template <typename _Type>
 constexpr bool IsBasicStringValue = IsBasicString<_Type>::value;
+
+template <typename>
+struct IsBasicStringView : std::false_type {};
+
+template <typename _CharType>
+struct IsBasicStringView<std::basic_string_view<_CharType>> : std::true_type {};
+
+template <typename _Type>
+constexpr bool IsBasicStringViewValue = IsBasicStringView<_Type>::value;
 
 } /* namespace tgon */

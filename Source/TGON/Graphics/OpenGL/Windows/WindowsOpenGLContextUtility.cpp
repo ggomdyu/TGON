@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
-#include "Core/Debug/Log.h"
+#include "Diagnostics/Log.h"
 
 #include "WindowsOpenGLContextUtility.h"
 

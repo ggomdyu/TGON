@@ -7,7 +7,7 @@
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
-#include "Core/String/Encoding.h"
+#include "String/Encoding.h"
 
 #include "WindowsWindow.h"
 #include "WindowsWindowUtility.h"

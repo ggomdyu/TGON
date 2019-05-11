@@ -15,23 +15,20 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/CoreObject.h"
-#include "Core/Object/DelegateChain.h"
+#include "Platform/Config.h"
+#include "Core/DelegateChain.h"
 
 #include "../WindowType.h"
 
 namespace tgon
 {
 
-class WindowsWindow :
-    public CoreObject
+class TGON_API WindowsWindow :
+    private boost::noncopyable
 {
-public:
-    TGON_DECLARE_RTTI(WindowsWindow);
-
 /**@section Constructor */
 public:
-    WindowsWindow(const WindowStyle& windowStyle);
+    explicit WindowsWindow(const WindowStyle& windowStyle);
 
 /**@section Method */
 public:

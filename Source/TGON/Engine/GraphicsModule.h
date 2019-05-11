@@ -21,7 +21,7 @@ public:
     
 /**@section Constructor */
 public:
-    GraphicsModule(const std::shared_ptr<Window>& window, const VideoMode& videoMode);
+    GraphicsModule(const Window& window, const VideoMode& videoMode);
 
 /**@section Destructor */
 public:

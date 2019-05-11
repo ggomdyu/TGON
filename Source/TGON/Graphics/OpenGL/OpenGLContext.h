@@ -6,6 +6,8 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
+
+#include "Platform/Config.h"
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN 1
@@ -16,22 +18,19 @@
 #   import <OpenGL/OpenGL.h>
 #endif
 
-#include "Platform/Window.h"
-
 #include "../GraphicsType.h"
 
 namespace tgon
 {
 
-struct TGON_API OpenGLContext final :
-    public CoreObject
-{
-public:
-    TGON_DECLARE_RTTI(OpenGLContext);
+class Window;
 
+struct TGON_API OpenGLContext final :
+    public boost::noncopyable
+{
 /**@section Constructor */
 public:
-    OpenGLContext(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode);
+    OpenGLContext(const Window& displayTarget, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs);
 
 /**@section Destructor */

@@ -7,6 +7,7 @@
 #pragma once
 #include <string>
 #include <cstdint>
+#include <cassert>
 #include <iconv.h>
 
 namespace tgon

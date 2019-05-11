@@ -8,7 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <memory>
 
-#include "Core/Platform/Config.h"
+#include "Platform/Config.h"
 
 #include "WindowsMouseType.h"
 

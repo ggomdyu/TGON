@@ -9,8 +9,9 @@
 
 #include "Core/CoreObject.h"
 #include "String/StringHash.h"
-#include "Graphics/Transform.h"
 #include "Component/Component.h"
+
+#include "Transform.h"
 
 namespace tgon
 {

@@ -1,10 +1,13 @@
 #include "PrecompiledHeader.h"
 
+#include <cassert>
+#include <stdexcept>
 #include <Windows.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
-#include "Core/Debug/Log.h"
+#include "Platform/Window.h"
+#include "Diagnostics/Log.h"
 
 #include "../OpenGLContext.h"
 
@@ -13,8 +16,8 @@
 namespace tgon
 {
 
-OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) :
-    wndHandle(reinterpret_cast<HWND>(displayTarget->GetNativeWindow())),
+OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& videoMode) :
+    wndHandle(reinterpret_cast<HWND>(displayTarget.GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     assert(wndHandle != nullptr);

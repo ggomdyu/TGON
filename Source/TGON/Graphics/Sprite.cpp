@@ -24,7 +24,7 @@ Sprite::Sprite(Sprite&& rhs) :
 void Sprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
-    m_textureRect = {0, 0, m_texture->GetWidth(), m_texture->GetHeight()};
+    m_textureRect = {0, 0, static_cast<float>(m_texture->GetWidth()), static_cast<float>(m_texture->GetHeight())};
 }
 
 std::shared_ptr<Texture> Sprite::GetTexture() noexcept

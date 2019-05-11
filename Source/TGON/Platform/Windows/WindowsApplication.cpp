@@ -2,9 +2,8 @@
 
 #include <StackWalker-1.20/Main/StackWalker/StackWalker.h>
 
-#include "Core/Platform/Config.h"
-#include "Core/String/Encoding.h"
-#include "Core/Debug/Windows/WindowsDebugMisc.h"
+#include "Platform/Config.h"
+#include "String/Encoding.h"
 
 #include "WindowsApplication.h"
 #include "WindowsWindow.h"
@@ -41,7 +40,7 @@ void WindowsApplication::EnableCrashHandler()
         return EXCEPTION_CONTINUE_SEARCH;
     });
 
-    PreventSetUnhandledExceptionFilter();
+    //PreventSetUnhandledExceptionFilter();
 }
 
 LRESULT CALLBACK WindowsApplication::OnHandleMessage(HWND wndHandle, UINT message, WPARAM wParam, LPARAM lParam)

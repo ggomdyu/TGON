@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <cmath>
+
 #include "../DateTime.h"
 
 namespace tgon

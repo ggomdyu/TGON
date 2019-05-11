@@ -1,11 +1,13 @@
 #include "PrecompiledHeader.h"
 
+#include "Platform/Windows/WindowsWindow.h"
+
 #include "WindowsInputManager.h"
 
 namespace tgon
 {
    
-WindowsInputManager::WindowsInputManager(const std::shared_ptr<Window>& inputTarget) :
+WindowsInputManager::WindowsInputManager(const WindowsWindow& inputTarget) :
     m_inputManager(OIS::InputManager::createInputSystem(this->QueryParamList(inputTarget)))
 {
     m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
@@ -35,11 +37,11 @@ OIS::JoyStick* WindowsInputManager::CreateNativeGamepad()
     return static_cast<OIS::JoyStick*>(m_inputManager->createInputObject(OIS::OISJoyStick, true));
 }
 
-OIS::ParamList WindowsInputManager::QueryParamList(const std::shared_ptr<Window>& inputTarget) const
+OIS::ParamList WindowsInputManager::QueryParamList(const WindowsWindow& inputTarget) const
 {
     OIS::ParamList paramList
     {
-        {"WINDOW", std::to_string(reinterpret_cast<size_t>(inputTarget->GetNativeWindow()))}
+        {"WINDOW", std::to_string(reinterpret_cast<size_t>(inputTarget.GetNativeWindow()))}
     };
 
     return paramList;

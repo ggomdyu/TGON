@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <OIS.h>
 
-#include "Core/Platform/Config.h"
+#include "Platform/Config.h"
 
 #include "WindowsGamepadType.h"
 

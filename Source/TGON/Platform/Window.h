@@ -26,9 +26,6 @@ namespace tgon
 class TGON_API Window final :
     private PlatformWindow
 {
-public:
-    TGON_DECLARE_RTTI(Window);
-
 /**@section Constructor */
 public:
     using PlatformWindow::PlatformWindow;

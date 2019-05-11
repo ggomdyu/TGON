@@ -3,16 +3,17 @@
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/FVF.h"
 #include "Graphics/MeshUtility.h"
+#include "Platform/Window.h"
 
 #include "GraphicsModule.h"
 
 namespace tgon
 {
 
-GraphicsModule::GraphicsModule(const std::shared_ptr<Window>& window, const VideoMode& videoMode) :
+GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
-    auto windowSize = window->GetSize();
+    auto windowSize = window.GetSize();
     m_graphics.SetViewport(0, 0, windowSize.width, windowSize.height);
     m_graphics.SetClearColor(videoMode.clearColor);
     m_graphics.SetCullMode(CullMode::CW);

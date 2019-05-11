@@ -16,9 +16,7 @@ namespace tgon
 {
 
 void Log(LogLevel logLevel, const char* formatStr, ...);
-
 void Assert(bool condition);
-
 void Assert(bool condition, const char* formatStr, ...);
 
 } /* namespace tgon */

@@ -9,7 +9,7 @@
 namespace tgon
 {
 
-OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) :
+OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
     m_context(displayTarget, videoMode),
     m_vertexArrayHandle(0)
 {

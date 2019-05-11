@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "Math/Rect.h"
+#include "Math/Color.h"
 
 #include "OpenGLContext.h"
 
@@ -17,15 +18,11 @@
 namespace tgon
 {
     
-class TGON_API OpenGLGraphics :
-    public CoreObject
+class TGON_API OpenGLGraphics
 {
-public:
-    TGON_DECLARE_RTTI(OpenGLGraphics);
-
 /**@section Constructor */
 public:
-    OpenGLGraphics(const std::shared_ptr<Window>& displayTarget, const VideoMode& videoMode) noexcept(false);
+    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) noexcept(false);
     
 /**@section Destructor */
 public:

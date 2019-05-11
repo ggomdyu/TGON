@@ -17,6 +17,7 @@ namespace tgon
 class Keyboard;
 class Mouse;
 class Gamepad;
+class Window;
 
 struct InputMode final
 {
@@ -33,7 +34,7 @@ public:
     
 /**@section Constructor */
 public:
-    InputModule(const std::shared_ptr<Window>& inputTarget, const InputMode& inputMode = {});
+    explicit InputModule(const Window& inputTarget, const InputMode& inputMode = {});
 
 /**@section Destructor */
 public:

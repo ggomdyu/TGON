@@ -1,9 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#include <boost/assert.hpp>
+#include <iostream>
+
 #include "TGON.h"
 #include "ThousandParty.h"
 #include "LogoScene.h"
-
+#include <string_view>
 TGON_DECLARE_ENGINE(ThousandParty);
 
 using namespace tgon;
@@ -33,7 +36,9 @@ void ThousandParty::Initialize()
 void ThousandParty::InitializeModule()
 {
     using namespace tgon;
-    
+
+    auto a1 = GetFontsDirectory();
+
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {
@@ -41,7 +46,7 @@ void ThousandParty::InitializeModule()
         inputMode.isUseKeyboard = true;
         inputMode.isUseGamepad = false;
     }
-    this->RegisterModule<InputModule>(rootWindow, inputMode);
+    this->RegisterModule<InputModule>(*rootWindow, inputMode);
 
     VideoMode videoMode;
     {
@@ -51,7 +56,7 @@ void ThousandParty::InitializeModule()
         videoMode.enableVerticalSync = false;
         videoMode.enableMultiSampling = false;
     };
-    this->RegisterModule<GraphicsModule>(rootWindow, videoMode);
+    this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
     this->RegisterModule<TimeModule>();
     this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
 }

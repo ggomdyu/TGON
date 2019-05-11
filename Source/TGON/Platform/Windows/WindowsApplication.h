@@ -12,7 +12,7 @@
 #include <thread>
 #include <boost/noncopyable.hpp>
 
-#include "Core/Object/CoreObject.h"
+#include "Platform/Config.h"
 
 #include "../ApplicationType.h"
 
@@ -20,11 +20,8 @@ namespace tgon
 {
 
 class TGON_API WindowsApplication :
-    public CoreObject
+    private boost::noncopyable
 {
-public:
-    TGON_DECLARE_RTTI(WindowsApplication);
-
 /**@section Constructor */
 public:
     WindowsApplication();

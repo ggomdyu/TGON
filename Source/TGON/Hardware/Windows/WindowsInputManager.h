@@ -7,22 +7,26 @@
 #pragma once
 #include <memory>
 #include <OIS.h>
+#include <boost/noncopyable.hpp>
 
-#include "Core/Object/CoreObject.h"
-#include "Core/Platform/Window.h"
+#include "Platform/Config.h"
+
+namespace OIS
+{
+
+} /* namespace OIS */
 
 namespace tgon
 {
 
-class TGON_API WindowsInputManager :
-    public CoreObject
-{
-public:
-    TGON_DECLARE_RTTI(WindowsInputManager);
+class WindowsWindow;
 
+class TGON_API WindowsInputManager :
+    private boost::noncopyable
+{
 /**@section Constructor */
 public:
-    explicit WindowsInputManager(const std::shared_ptr<Window>& inputTarget);
+    explicit WindowsInputManager(const WindowsWindow& inputTarget);
     
 /**@section Destructor */
 public:
@@ -38,7 +42,7 @@ protected:
     OIS::JoyStick* CreateNativeGamepad();
 
 private:
-    OIS::ParamList QueryParamList(const std::shared_ptr<Window>& inputTarget) const;
+    OIS::ParamList QueryParamList(const WindowsWindow& inputTarget) const;
     
 /**@section Variable */
 protected:

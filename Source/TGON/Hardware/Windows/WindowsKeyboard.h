@@ -7,7 +7,7 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "Core/Platform/Config.h"
+#include "Platform/Config.h"
 
 namespace OIS
 {

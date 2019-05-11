@@ -13,7 +13,7 @@
 #endif
 #include <windows.h>
 
-#include "Core/Platform/Config.h"
+#include "Platform/Config.h"
 
 #include "../WindowType.h"
 

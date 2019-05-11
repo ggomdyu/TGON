@@ -137,22 +137,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepadType.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboardType.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouseType.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplicationType.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsConfig.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\ComPtr.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Core\Utility\Windows\HandleGuard.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\Windows\WindowsOpenGLContextUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepad.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepadType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsInputManager.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboardType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouse.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouseType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\Misc\AutoReleaseDC.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplicationType.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsConfig.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindowUtility.h" />
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.h" />
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.h" />
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h" />
@@ -162,26 +160,23 @@
     <ClInclude Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsDebugMisc.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Debug\Windows\WindowsLog.cpp">
-      <FileType>Document</FileType>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Core\Drawing\Windows\WindowsDrawing.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\File\Windows\WindowsPath.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsGamepad.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsInputManager.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsKeyboard.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Hardware\Windows\WindowsMouse.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsApplication.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsLocale.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsMain.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsScreen.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Platform\Windows\WindowsWindowUtility.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsDateTime.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Core\Time\Windows\WindowsTime.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\Windows\WindowsOpenGLContext.cpp" />
-    <ClCompile Include="..\..\..\Source\TGON\Graphics\LowLevel\OpenGL\Windows\WindowsOpenGLContextUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsLog.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Drawing\Windows\WindowsDrawing.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepad.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsInputManager.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouse.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsPath.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsLocale.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsMain.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindowUtility.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsDateTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTime.cpp" />
     <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

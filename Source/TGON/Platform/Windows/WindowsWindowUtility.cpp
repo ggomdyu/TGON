@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Debug/Log.h"
-#include "Core/Debug/LogType.h"
-#include "Core/String/Encoding.h"
-#include "Core/Math/Point.h"
-#include "Core/Math/Extent.h"
+#include "Diagnostics/Log.h"
+#include "Diagnostics/LogType.h"
+#include "String/Encoding.h"
+#include "Math/Point.h"
+#include "Math/Extent.h"
 
 #include "WindowsWindowUtility.h"
 

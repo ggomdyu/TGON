@@ -5,8 +5,8 @@
 #endif
 #include <Windows.h>
 
-#include "Core/Engine/Engine.h"
-#include "Core/Platform/Application.h"
+#include "Engine/Engine.h"
+#include "Platform/Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC

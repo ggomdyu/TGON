@@ -14,9 +14,7 @@
 #   define TGON_GL_ERROR_CHECK(expression)\
     {\
         expression;\
-        \
-        auto glErrorCode = glGetError();\
-        tgon::Assert(glErrorCode == GL_NO_ERROR, "Failed to invoke GL Function. (Code: %d)", glErrorCode);\
+        assert(glGetError() == GL_NO_ERROR && "Failed to invoke GL Function.");\
     }
 #else
 #   define TGON_GL_ERROR_CHECK(expression) expression
