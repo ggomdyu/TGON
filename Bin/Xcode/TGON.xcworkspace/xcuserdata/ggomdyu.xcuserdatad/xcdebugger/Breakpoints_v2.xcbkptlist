@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/Game/Component/CameraComponent.h"
-            timestampString = "558893434.123751"
+            filePath = "../../Source/ThirdParty/stb/stb_image.h"
+            timestampString = "553226972.884115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "~CameraComponent()"
+            startingLineNumber = "1187"
+            endingLineNumber = "1187"
+            landmarkName = "stbi_load_from_file_16(FILE *f, int *x, int *y, int *comp, int req_comp)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +25,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/ThirdParty/glew-2.1.0/src/glewinfo.c"
-            timestampString = "578249324.3592139"
+            filePath = "../../Source/ThirdParty/stb/stb_image.h"
+            timestampString = "553226972.884865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "glewPrintExt (const char* name, GLboolean def1, GLboolean def2, GLboolean def3)"
+            startingLineNumber = "1186"
+            endingLineNumber = "1186"
+            landmarkName = "stbi_load_from_file_16(FILE *f, int *x, int *y, int *comp, int req_comp)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/TGON/Game/Object/Component/CameraComponent.cpp"
+            timestampString = "579026068.201768"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "CameraComponent::CameraComponent(const Vector3&amp; eyePt, const Vector3&amp; lookAt, float fov, float nearZ, float farZ)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

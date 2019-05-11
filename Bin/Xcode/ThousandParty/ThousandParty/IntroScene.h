@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Game/Scene/GameScene.h"
+#include "Game/GameScene.h"
 
 namespace tgon
 {

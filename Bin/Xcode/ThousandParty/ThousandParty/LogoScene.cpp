@@ -1,19 +1,19 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Engine/Module/InputModule.h"
-#include "Core/Engine/Module/TimeModule.h"
-#include "Core/Platform/Application.h"
-#include "Core/Time/Time.h"
-#include "Core/Math/Mathematics.h"
-#include "Core/Debug/Log.h"
-#include "Core/File/Path.h"
-#include "Core/Hardware/Keyboard.h"
-#include "Graphics/Engine/GraphicsModule.h"
-#include "Graphics/Render/Sprite.h"
-#include "Graphics/LowLevel/Texture.h"
-#include "Game/Object/Component/SpriteRendererComponent.h"
-#include "Game/Object/Component/CameraComponent.h"
-#include "Game/Engine/Module/GameSceneModule.h"
+#include "Engine/InputModule.h"
+#include "Engine/TimeModule.h"
+#include "Platform/Application.h"
+#include "Time/Time.h"
+#include "Math/Mathematics.h"
+#include "Diagnostics/Log.h"
+#include "IO/Path.h"
+#include "Hardware/Keyboard.h"
+#include "Engine/GraphicsModule.h"
+#include "Graphics/Sprite.h"
+#include "Graphics/Texture.h"
+#include "Game/Component/SpriteRendererComponent.h"
+#include "Game/Component/CameraComponent.h"
+#include "Engine/GameSceneModule.h"
 
 #include "IntroScene.h"
 #include "LogoScene.h"
@@ -30,14 +30,12 @@ LogoScene::LogoScene()
     m_timeModule = engine->FindModule<TimeModule>();
 
     m_graphicsModule->GetGraphics().DisableDepthTest();
-
-    //tgon::Sprite s(tgon::GetDesktopDirectory() + "/Assets/Image/IntroScene/girl.png");
-
-    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
-    rootWindow->OnResize += [=](int32_t width, int32_t height)
-    {
-        m_graphicsModule->Update();
-    };
+//
+//    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
+//    rootWindow->OnResize += [=](int32_t width, int32_t height)
+//    {
+//        m_graphicsModule->Update();
+//    };
 
     // 朝五虞 持失
     {
@@ -45,8 +43,8 @@ LogoScene::LogoScene()
         const tgon::I32Extent2D rootWindowSize = application->GetRootWindow()->GetSize();
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, halfWidth, -halfHeight, halfHeight }, -1024.0f, 1024.0f);
-//        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, 50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
+        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::FRect{-halfWidth, -halfHeight, rootWindowSize.width, rootWindowSize.height}, -1.0f, 1024.0f);
+//        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, -50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
         this->AddObject(cameraObject);
     }
 
@@ -56,7 +54,7 @@ LogoScene::LogoScene()
         auto introObject1 = std::make_shared<GameObject>("introSprite1");
         introObject1->GetTransform().SetLocalScale({ 8.38f, 4.42f, 1.0f });
         m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(std::make_shared<Texture>(GetDesktopDirectory() + "/s.png" )));
+        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(std::make_shared<Texture>(GetDesktopDirectory() + "/s.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true)));
 //        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
 //        m_introSpriteComponent1->SetOpacity(0.0f);
         this->AddObject(introObject1);
@@ -91,7 +89,7 @@ void LogoScene::Update()
 {
     SuperType::Update();
 
-    this->OnHandleInput();
+//    this->OnHandleInput();
 
 //    auto elapsedTime = tgon::GetTickCount() - m_beginTime;
 //    if (elapsedTime >= 8500)

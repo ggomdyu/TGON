@@ -6,6 +6,8 @@
 
 TGON_DECLARE_ENGINE(ThousandParty);
 
+using namespace tgon;
+
 void ThousandParty::OnLaunch()
 {
     SuperType::OnLaunch();

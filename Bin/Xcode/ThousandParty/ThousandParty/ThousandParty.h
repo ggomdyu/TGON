@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Core/Engine/Engine.h"
+#include "Engine/Engine.h"
 
 class TGON_API ThousandParty final :
     public tgon::Engine
