@@ -1,10 +1,11 @@
+#include "..\Path.h"
+#include "..\Path.h"
 #include "PrecompiledHeader.h"
 
 #include <Windows.h>
 #include <shlobj.h>
-#include <type_traits>
 
-#include "Core/String/Encoding.h"
+#include "String/Encoding.h"
 
 #include "../Path.h"
 
@@ -15,63 +16,54 @@
 namespace tgon
 {
 
-TGON_API std::string GetCurrentDirectory()
+thread_local char g_tempPathBuffer[MAX_PATH + 1];
+
+TGON_API int32_t GetCurrentDirectory(char* destStr)
 {
-    wchar_t utf16Path[MAX_PATH] {};
+    wchar_t utf16Path[MAX_PATH + 1] {};
     DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH, utf16Path);
 
-    char utf8Path[MAX_PATH + 1] {};
-    bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, &utf8Path[0], std::extent_v<decltype(utf8Path)>);
+    bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, destStr, MAX_PATH);
     if (isConvertSucceed)
     {
-        return utf8Path;
+        return utf16PathLen;
     }
     else
     {
-        return std::string();
+        return -1;
     }
 }
 
-TGON_API std::string GetUserDirectory()
+TGON_API int32_t GetSpecialDirectory(int csidl, char* destStr)
 {
     wchar_t utf16Path[MAX_PATH + 1];
 
-    if (SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, utf16Path) == S_OK)
+    if (SHGetFolderPathW(NULL, csidl, NULL, 0, utf16Path) == S_OK)
     {
-        char utf8Path[MAX_PATH]{};
-        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, std::wcslen(utf16Path), &utf8Path[0], std::extent_v<decltype(utf8Path)>);
+        auto utf16PathLen = std::wcslen(utf16Path);
+        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, destStr, MAX_PATH);
         if (isConvertSucceed)
         {
-            return utf8Path;
+            return utf16PathLen;
         }
+    }
 
-        return std::string();
-    }
-    else
-    {
-        return std::string();
-    }
+    return -1;
 }
 
-TGON_API std::string GetDesktopDirectory()
+TGON_API int32_t GetUserDirectory(char* destStr)
 {
-    wchar_t utf16Path[MAX_PATH + 1];
+    return GetSpecialDirectory(CSIDL_PROFILE, destStr);   
+}
 
-    if (SHGetFolderPathW(nullptr, CSIDL_DESKTOP, nullptr, 0, utf16Path) == S_OK)
-    {
-        char utf8Path[MAX_PATH] {};
-        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, std::wcslen(utf16Path), &utf8Path[0], std::extent_v<decltype(utf8Path)>);
-        if (isConvertSucceed)
-        {
-            return utf8Path;
-        }
+TGON_API int32_t GetDesktopDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_DESKTOP, destStr);
+}
 
-        return std::string();
-    }
-    else
-    {
-        return std::string();
-    }
+TGON_API int32_t GetFontsDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_FONTS, destStr);
 }
 
 } /* namespace tgon */
