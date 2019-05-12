@@ -7,17 +7,18 @@
 #include "Sprite.h"
 #include "FVF.h"
 #include "MeshUtility.h"
+#include "Random/Random.h"
 
 namespace tgon
 {
     
-SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect) noexcept :
+SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
     m_texture(texture),
     m_blendMode(blendMode),
     m_enableScissorRect(enableScissorRect),
     m_scissorRect(scissorRect),
-    m_vertexStartOffset(0),
-    m_vertexEndOffset(0)
+    m_vertexStartOffset(vertexStartOffset),
+    m_vertexEndOffset(vertexStartOffset)
 {
 }
 
@@ -48,65 +49,69 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
         graphics.DisableScissorTest();
     }
     
-    graphics.DrawPrimitives(PrimitiveType::Triangles, (m_vertexEndOffset - m_vertexStartOffset) / sizeof(V3F_T2F));
+    graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / sizeof(V3F_T2F), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
 bool SpriteBatch::Merge(const Sprite& rhs, std::vector<float>* vertices)
 {
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();
-    auto leftUV = textureRect.x / textureSize.width;
-    auto topUV = textureRect.height / textureSize.height;
-    auto rightUV = textureRect.width / textureSize.width;
-    auto bottomUV = textureRect.y / textureSize.height;
-    auto halfWidth = textureRect.width / 2;
-    auto halfHeight = textureRect.height / 2;
+    float leftUV = textureRect.x / textureSize.width;
+    float topUV = textureRect.height / textureSize.height;
+    float rightUV = textureRect.width / textureSize.width;
+    float bottomUV = textureRect.y / textureSize.height;
+    float halfWidth = textureRect.width / 2;
+    float halfHeight = textureRect.height / 2;
 
-    auto expandSize = sizeof(V3F_T2F) * 6;
+    auto oldVertexEndOffset = m_vertexEndOffset;
+    auto expandSize = sizeof(V3F_T2F) / 4 * 6;
     vertices->resize(m_vertexEndOffset + expandSize);
     m_vertexEndOffset += expandSize;
-    
-    // Left top
-    (*vertices)[0] = -halfWidth;
-    (*vertices)[1] = halfHeight;
-    (*vertices)[2] = 0.0f;
-    (*vertices)[3] = leftUV;
-    (*vertices)[4] = topUV;
+
+    auto x = RandRange(-200.0f, 200.0f);
+
+   // Left top
+    float* newVertices = &(*vertices)[oldVertexEndOffset];
+    newVertices[0] = -halfWidth + x;
+    newVertices[1] = halfHeight;
+    newVertices[2] = 0.0f;
+    newVertices[3] = leftUV;
+    newVertices[4] = topUV;
 
     // Right top
-    (*vertices)[5] = halfWidth;
-    (*vertices)[6] = halfHeight;
-    (*vertices)[7] = 0.0f;
-    (*vertices)[8] = rightUV;
-    (*vertices)[9] = topUV;
+    newVertices[5] = halfWidth + x;
+    newVertices[6] = halfHeight;
+    newVertices[7] = 0.0f;
+    newVertices[8] = rightUV;
+    newVertices[9] = topUV;
     
     // Right bottom
-    (*vertices)[10] = halfWidth;
-    (*vertices)[11] = -halfHeight;
-    (*vertices)[12] = 0.0f;
-    (*vertices)[13] = rightUV;
-    (*vertices)[14] = bottomUV;
+    newVertices[10] = halfWidth + x;
+    newVertices[11] = -halfHeight;
+    newVertices[12] = 0.0f;
+    newVertices[13] = rightUV;
+    newVertices[14] = bottomUV;
     
     // Right bottom
-    (*vertices)[15] = halfWidth;
-    (*vertices)[16] = -halfHeight;
-    (*vertices)[17] = 0.0f;
-    (*vertices)[18] = rightUV;
-    (*vertices)[19] = bottomUV;
+    newVertices[15] = halfWidth + x;
+    newVertices[16] = -halfHeight;
+    newVertices[17] = 0.0f;
+    newVertices[18] = rightUV;
+    newVertices[19] = bottomUV;
 
     // Left bottom
-    (*vertices)[20] = -halfWidth;
-    (*vertices)[21] = -halfHeight;
-    (*vertices)[22] = 0.0f;
-    (*vertices)[23] = leftUV;
-    (*vertices)[24] = bottomUV;
+    newVertices[20] = -halfWidth + x;
+    newVertices[21] = -halfHeight;
+    newVertices[22] = 0.0f;
+    newVertices[23] = leftUV;
+    newVertices[24] = bottomUV;
 
     // Left top
-    (*vertices)[25] = -halfWidth;
-    (*vertices)[26] = halfHeight;
-    (*vertices)[27] = 0.0f;
-    (*vertices)[28] = leftUV;
-    (*vertices)[29] = topUV;
+    newVertices[25] = -halfWidth + x;
+    newVertices[26] = halfHeight;
+    newVertices[27] = 0.0f;
+    newVertices[28] = leftUV;
+    newVertices[29] = topUV;
 
     return true;
 }

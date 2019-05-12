@@ -51,14 +51,17 @@ LogoScene::LogoScene()
     //// Intro에 사용할 Sprite 생성
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/s.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/161084145cbc5cc.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         
         auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
         introObject1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
         m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(texture));
-        m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(texture));
+        m_introSpriteComponent2 = introObject1->AddComponent<SpriteRendererComponent>();
+        m_introSpriteComponent2->SetSprite(std::make_shared<Sprite>(texture));
+        auto m_introSpriteComponent3 = introObject1->AddComponent<SpriteRendererComponent>();
+        m_introSpriteComponent3->SetSprite(std::make_shared<Sprite>(texture2));
 //        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
 //        m_introSpriteComponent1->SetOpacity(0.0f);
         this->AddObject(introObject1);

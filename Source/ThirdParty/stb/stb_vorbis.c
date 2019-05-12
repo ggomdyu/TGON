@@ -4973,7 +4973,12 @@ stb_vorbis * stb_vorbis_open_file(FILE *file, int close_on_free, int *error, con
 
 stb_vorbis * stb_vorbis_open_filename(const char *filename, int *error, const stb_vorbis_alloc *alloc)
 {
-   FILE *f = fopen(filename, "rb");
+#ifdef _MSC_VER
+    FILE* f = NULL;
+    fopen_s(&f, filename, "rb");
+#else
+    FILE *f = fopen(filename, "rb");
+#endif
    if (f) 
       return stb_vorbis_open_file(f, TRUE, error, alloc);
    if (error) *error = VORBIS_file_open_failure;

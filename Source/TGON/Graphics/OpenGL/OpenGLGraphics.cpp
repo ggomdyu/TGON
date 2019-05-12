@@ -145,9 +145,9 @@ void OpenGLGraphics::SwapBuffer()
     m_context.SwapBuffer();
 }
 
-void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexCount)
+void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount)
 {
-    glDrawArrays(static_cast<GLenum>(primitiveType), 0, vertexCount);
+    glDrawArrays(static_cast<GLenum>(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount);
 }
     
 void OpenGLGraphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)

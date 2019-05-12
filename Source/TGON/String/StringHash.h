@@ -19,7 +19,7 @@ namespace detail
 {
 
 template <typename _DeriviedType>
-class BasicStringHashImpl
+class BaseBasicStringHash
 {
 /**@section Operator */
 public:
@@ -38,7 +38,7 @@ public:
     
 template <typename _StringType, typename _EnableType = void>
 class BasicStringHash :
-    public detail::BasicStringHashImpl<BasicStringHash<_StringType, _EnableType>>
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, _EnableType>>
 {
 /**@section Type */
 public:
@@ -102,7 +102,7 @@ private:
 
 template <typename _StringType>
 class BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type> :
-    public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>
 {
 /**@section Type */
 public:
@@ -161,7 +161,7 @@ private:
 
 template <typename _StringType>
 class BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type> :
-    public detail::BasicStringHashImpl<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type>>
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type>>
 {
 /**@section Type */
 public:

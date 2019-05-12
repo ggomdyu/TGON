@@ -22,7 +22,7 @@ AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
     this->Initialize(audioBuffer);
 }
 
-AudioPlayer::AudioPlayer(AudioPlayer&& rhs) :
+AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
     m_alSource(rhs.m_alSource),
     m_audioBuffer(std::move(rhs.m_audioBuffer))
 {
@@ -34,7 +34,7 @@ AudioPlayer::~AudioPlayer()
     this->Release();
 }
 
-AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs)
+AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
 {
     if (&rhs == this)
     {

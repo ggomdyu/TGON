@@ -16,7 +16,7 @@ namespace tgon
 {
 
 WindowsWindow::WindowsWindow(const WindowStyle& windowStyle) :
-    m_wndHandle(WindowsWindowUtility::CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
+    m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON")),
     m_isDwmCompositionEnabled(false)
 {
     assert(m_wndHandle != nullptr);

@@ -13,13 +13,14 @@
 namespace tgon
 {
 
-class OpenGLVertexBuffer :
+class TGON_API OpenGLVertexBuffer :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
     OpenGLVertexBuffer();
-    OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs);
+    OpenGLVertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+    OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) noexcept;
 
 /**@section Destructor */
 public:
@@ -38,11 +39,10 @@ public:
      * @param [in] isDynamicUsage           If true, then the index buffer will not be modified after set.
      * @param [in] vertexBufferLayoutDescs  The vertex layout descriptors.
      */
-    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+    void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     
-    /**@brief   Gets the byte size of the data stored in the buffer.  */
-    std::size_t GetDataBytes() const noexcept;
-    
+    void SetVertexBufferLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+
     /**@brief   Makes the rendering pipeline to use this buffer. */
     void Use();
 
@@ -55,15 +55,11 @@ public:
      */
     bool IsValid() const noexcept;
     
-    bool IsDynamicUsage() const noexcept;
-
 private:
     GLuint CreateVertexBufferHandle() const;
 
 /**@section Variable */
 private:
-    std::size_t m_dataBytes;
-    bool m_isDynamicUsage;
     GLuint m_vertexBufferHandle;
     std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayoutDescs;
 };

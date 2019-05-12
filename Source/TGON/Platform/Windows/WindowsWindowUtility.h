@@ -20,21 +20,15 @@
 namespace tgon
 {
 
-class TGON_API WindowsWindowUtility
-{
-/**@section Method */
-public:
-    /**
-     * @brief                       Creates a window through given arguments.
-     * @param [in] windowStyle		The style information for the window to be created.
-     * @param [in] instanceHandle	The handle of process.
-     * @param [in] className		The class name to be used to initialize the window attributes.
-     * @param [in] extraParam		The extra data that window will have.
-     */
-    static HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
+/**
+ * @brief                       Creates a window through given arguments.
+ * @param [in] windowStyle		The style information for the window to be created.
+ * @param [in] instanceHandle	The handle of process.
+ * @param [in] className		The class name to be used to initialize the window attributes.
+ * @param [in] extraParam		The extra data that window will have.
+ */
+HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr);
 
-private:
-    static void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle);
-};
+void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle);
 
 } /* namespace tgon */

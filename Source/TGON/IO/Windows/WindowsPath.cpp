@@ -64,4 +64,24 @@ TGON_API int32_t GetFontsDirectory(char* destStr)
     return GetSpecialDirectory(CSIDL_FONTS, destStr);
 }
 
+TGON_API int32_t GetMusicDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_MYMUSIC, destStr);
+}
+ 
+TGON_API int32_t GetPicturesDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_MYPICTURES, destStr);
+}
+
+TGON_API int32_t GetVideosDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_MYVIDEO, destStr);
+}
+    
+TGON_API int32_t GetDocumentsDirectory(char* destStr)
+{
+    return GetSpecialDirectory(CSIDL_MYDOCUMENTS, destStr);
+}
+
 } /* namespace tgon */

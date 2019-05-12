@@ -22,7 +22,7 @@ AudioDevice::AudioDevice() :
     }
 }
 
-AudioDevice::AudioDevice(AudioDevice&& rhs) :
+AudioDevice::AudioDevice(AudioDevice&& rhs) noexcept :
     m_context(rhs.m_context),
     m_device(rhs.m_device)
 {
@@ -49,7 +49,7 @@ AudioDevice::~AudioDevice()
     }
 }
 
-AudioDevice& AudioDevice::operator=(AudioDevice&& rhs)
+AudioDevice& AudioDevice::operator=(AudioDevice&& rhs) noexcept
 {
     if (this == &rhs)
     {

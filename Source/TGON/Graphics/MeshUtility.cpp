@@ -26,8 +26,8 @@ std::shared_ptr<Mesh> MeshUtility::GetSharedTriangle()
             VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
             VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>();
-        vertexBuffer->SetData(vertices, false, vertexBufferLayoutDescs);
+        auto vertexBuffer = std::make_shared<VertexBuffer>(vertexBufferLayoutDescs);
+        vertexBuffer->SetData(vertices, false);
 
         // Create an IndexBuffer
         unsigned int indices[] = { 0, 1, 2 };
@@ -62,8 +62,8 @@ std::shared_ptr<Mesh> MeshUtility::GetSharedCube()
             VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
             VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>();
-        vertexBuffer->SetData(vertices, false, vertexBufferLayoutDescs);
+        auto vertexBuffer = std::make_shared<VertexBuffer>(vertexBufferLayoutDescs);
+        vertexBuffer->SetData(vertices, false);
         
         // Create an IndexBuffer
         unsigned int indices[] =
@@ -119,8 +119,8 @@ std::shared_ptr<Mesh> MeshUtility::GetSharedQuad()
             VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
             VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
         };
-        auto vertexBuffer = std::make_shared<VertexBuffer>();
-        vertexBuffer->SetData(vertices, false, vertexBufferLayoutDescs);
+        auto vertexBuffer = std::make_shared<VertexBuffer>(vertexBufferLayoutDescs);
+        vertexBuffer->SetData(vertices, false);
         
         // Create an IndexBuffer
         unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };

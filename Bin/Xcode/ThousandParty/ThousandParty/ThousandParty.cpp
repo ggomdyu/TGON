@@ -36,7 +36,18 @@ void ThousandParty::Initialize()
 void ThousandParty::InitializeModule()
 {
     using namespace tgon;
-    
+
+    static AudioDevice audioDevice;
+    audioDevice.MakeCurrent();
+
+    static auto audioBuffer = std::shared_ptr<AudioBuffer>(new AudioBuffer("E:/Users/ggomdyu/Desktop/Temporary/Sound/Sulk.wav"));
+    static AudioPlayer audioPlayer(audioBuffer);
+    audioPlayer.SetListenerPosition({ 0, 0, 0 });
+    audioPlayer.SetListenerVelocity({ 0, 0, 0 });
+    audioPlayer.SetPosition({ 0, 0, 0 });
+    audioPlayer.SetPitch(1.0f);
+    audioPlayer.Play();
+
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {

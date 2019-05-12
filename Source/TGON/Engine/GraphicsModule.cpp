@@ -13,7 +13,11 @@
 namespace tgon
 {
     
-UIRenderer::UIRenderer()
+UIRenderer::UIRenderer() :
+    m_spriteVertexBuffer({
+        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
+        VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
+    })
 {
     this->PrepareDefaultMaterials();
 }
@@ -27,26 +31,20 @@ void UIRenderer::Update()
     {
         for (const auto& sprite : sprites.second)
         {
-            if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
+            if (m_spriteBatches.empty())
             {
-                m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect()));
-                m_spriteBatches.back().Merge(*sprite, &m_spriteVertices);
+                m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), 0));
             }
-            else
+            else if (m_spriteBatches.back().CanBatch(*sprite) == false)
             {
-                auto& spriteBatch = m_spriteBatches.back();
-                if (spriteBatch.CanBatch(*sprite))
-                {
-                    spriteBatch.Merge(*sprite, &m_spriteVertices);
-                }
+                m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), m_spriteVertices.size()));
             }
+            
+            m_spriteBatches.back().Merge(*sprite, &m_spriteVertices);
         }
     }
     
-    m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false, {
-        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
-        VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
-    });
+    m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
     m_spriteVertexBuffer.Use();
 }
 

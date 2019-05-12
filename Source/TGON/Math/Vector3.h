@@ -70,8 +70,8 @@ public:
     _ValueType& At(std::size_t index);
     const _ValueType& At(std::size_t index) const;
     //static float Angle(const BasicVector3& v1, const BasicVector3& v2) noexcept;
-    static _ValueType Distance(const BasicVector3& v1, const BasicVector3& v2) noexcept;
-    _ValueType Length() const noexcept;
+    static _ValueType Distance(const BasicVector3& v1, const BasicVector3& v2);
+    _ValueType Length() const;
     _ValueType LengthSq() const noexcept;
     void Normalize();
     const BasicVector3 Normalized() const;
@@ -290,13 +290,13 @@ inline const _ValueType& BasicVector3<_ValueType>::At(std::size_t index) const
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector3<_ValueType>::Distance(const BasicVector3& v1, const BasicVector3& v2) noexcept
+inline _ValueType BasicVector3<_ValueType>::Distance(const BasicVector3& v1, const BasicVector3& v2)
 {
     return BasicVector3(v1 - v2).Length();
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector3<_ValueType>::Length() const noexcept
+inline _ValueType BasicVector3<_ValueType>::Length() const
 {
     return std::sqrtf(this->LengthSq());
 }

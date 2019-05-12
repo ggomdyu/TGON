@@ -26,7 +26,7 @@ class TGON_API SpriteBatch final
 {
 /**@section Constructor */
 public:
-    SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect) noexcept;
+    SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:

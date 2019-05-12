@@ -55,7 +55,7 @@ bool AudioBuffer::Initialize(const std::string& filePath)
         return false;
     }
 
-    // Read the audio data from file.
+    // Read the audio data from the file.
     std::vector<uint8_t> audioData;
     {
         fseek(file, 0, SEEK_END);

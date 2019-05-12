@@ -21,7 +21,7 @@ class AudioPlayer final :
 /**@section Constructor */
 public:
     AudioPlayer();
-    AudioPlayer(AudioPlayer&& rhs);
+    AudioPlayer(AudioPlayer&& rhs) noexcept;
     explicit AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
 /**@section Destructor */
@@ -30,7 +30,7 @@ public:
 
 /**@section Destructor */
 public:
-    AudioPlayer& operator=(AudioPlayer&& rhs);
+    AudioPlayer& operator=(AudioPlayer&& rhs) noexcept;
 
 /**@section Method */
 public:

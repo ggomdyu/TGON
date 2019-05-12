@@ -4,14 +4,13 @@
 #include "Diagnostics/LogType.h"
 #include "String/Encoding.h"
 #include "Math/Point.h"
-#include "Math/Extent.h"
 
 #include "WindowsWindowUtility.h"
 
 namespace tgon
 {
 
-void WindowsWindowUtility::ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
+void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
 	*rawExtendedWindowStyle = 0;
 	*rawWindowStyle = 0;
@@ -53,7 +52,7 @@ void WindowsWindowUtility::ConverWindowStyleToNative(const WindowStyle& windowSt
     }
 }
 
-HWND WindowsWindowUtility::CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
+HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className, void* extraParam)
 {
 	// Convert the WindowStyle to the native window style.
 	DWORD rawWindowStyle, rawExtendedWindowStyle;

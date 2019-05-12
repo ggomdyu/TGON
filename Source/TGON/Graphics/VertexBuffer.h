@@ -30,20 +30,18 @@ public:
     const PlatformVertexBuffer* GetPlatformDependency() const noexcept;
     
     template <typename _DataArrayType, std::size_t _DataArraySize>
-    void SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+    void SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
 
     using PlatformVertexBuffer::SetData;
-    using PlatformVertexBuffer::GetDataBytes;
     using PlatformVertexBuffer::Use;
     using PlatformVertexBuffer::Unuse;
     using PlatformVertexBuffer::IsValid;
-    using PlatformVertexBuffer::IsDynamicUsage;
 };
 
 template <typename _DataArrayType, std::size_t _DataArraySize>
-inline void VertexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage, const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
+inline void VertexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage)
 {
-    this->SetData(data, sizeof(data), isDynamicUsage, vertexBufferLayoutDescs);
+    this->SetData(data, sizeof(data), isDynamicUsage);
 }
 
 } /* namespace tgon */
