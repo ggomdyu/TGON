@@ -26,7 +26,7 @@ public:
 
 public:
     Firefly(const StringHash& name) :
-        GameObject(name)
+        GameObject(name, nullptr)
     {
         decltype(auto) application = Application::GetInstance();
         decltype(auto) engine = application->GetEngine();

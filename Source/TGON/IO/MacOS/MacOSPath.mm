@@ -58,4 +58,24 @@ TGON_API int32_t GetFontsDirectory(char* destStr)
     return strLen + 6;
 }
 
+TGON_API int32_t GetMusicDirectory(char* destStr)
+{
+    return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, destStr);
+}
+ 
+TGON_API int32_t GetPicturesDirectory(char* destStr)
+{
+    return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, destStr);
+}
+
+TGON_API int32_t GetVideosDirectory(char* destStr)
+{
+    return GetSpecialDirectory(NSMoviesDirectory, NSUserDomainMask, destStr);
+}
+    
+TGON_API int32_t GetDocumentsDirectory(char* destStr)
+{
+    return GetSpecialDirectory(NSDocumentDirectory, NSUserDomainMask, destStr);
+}
+    
 } /* namespace tgon */

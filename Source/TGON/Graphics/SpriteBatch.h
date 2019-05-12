@@ -31,16 +31,15 @@ public:
 /**@section Method */
 public:
     bool CanBatch(const Sprite& rhs) const noexcept;
-    void Merge(const Sprite& rhs);
+    bool Merge(const Sprite& rhs, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
-
+    
 /**@section Variable */
 private:
     std::shared_ptr<Texture> m_texture;
     BlendMode m_blendMode;
     bool m_enableScissorRect;
     FRect m_scissorRect;
-    std::vector<float> m_vertices;
     int32_t m_vertexStartOffset;
     int32_t m_vertexEndOffset;
 };

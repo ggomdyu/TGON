@@ -13,6 +13,7 @@
 #include "Math/Extent.h"
 
 #include "GraphicsType.h"
+#include "Transform.h"
 
 namespace tgon
 {
@@ -33,12 +34,13 @@ public:
 /**@section Method */
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+    void SetTextureRect(const FRect& textureRect);
+    void SetBlendMode(BlendMode blendMode) noexcept;
+    void SetLayer(int32_t layer) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
-    void SetTextureRect(const FRect& textureRect);
     FRect& GetTextureRect() noexcept;
     const FRect& GetTextureRect() const noexcept;
-    void SetBlendMode(BlendMode blendMode) noexcept;
     BlendMode GetBlendMode() const noexcept;
     void EnableScissorRect() noexcept;
     void DisableScissorRect() noexcept;
@@ -46,7 +48,6 @@ public:
     void SetScissorRect(const FRect& rect) noexcept;
     FRect& GetScissorRect() noexcept;
     const FRect& GetScissorRect() const noexcept;
-    void SetLayer(int32_t layer) noexcept;
     int32_t GetLayer() const noexcept;
     
 /**@section Variable */

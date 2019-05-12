@@ -1090,6 +1090,10 @@
 		FDC02B52228481EF00BEE91A /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				FDD4E0302287124800E26531 /* RectTransform.cpp */,
+				FDD4E02E2287124800E26531 /* RectTransform.h */,
+				FDD4E02D2287124800E26531 /* Transform.cpp */,
+				FDD4E02F2287124800E26531 /* Transform.h */,
 				FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */,
 				FDC02B54228481EF00BEE91A /* Mesh.cpp */,
 				FDC02B55228481EF00BEE91A /* RectTransform.h */,
@@ -1204,10 +1208,6 @@
 				FDC02D312284893F00BEE91A /* Component */,
 				FDC02D3D2284893F00BEE91A /* GameScene.cpp */,
 				FDC02D3F2284893F00BEE91A /* GameScene.h */,
-				FDD4E0302287124800E26531 /* RectTransform.cpp */,
-				FDD4E02E2287124800E26531 /* RectTransform.h */,
-				FDD4E02D2287124800E26531 /* Transform.cpp */,
-				FDD4E02F2287124800E26531 /* Transform.h */,
 			);
 			name = Game;
 			path = ../../Source/TGON/Game;

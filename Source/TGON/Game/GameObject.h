@@ -8,10 +8,9 @@
 #include <vector>
 
 #include "Core/CoreObject.h"
+#include "Graphics/Transform.h"
 #include "String/StringHash.h"
 #include "Component/Component.h"
-
-#include "Transform.h"
 
 namespace tgon
 {
@@ -25,8 +24,9 @@ public:
 /**@section Constructor */
 public:
     template <typename... _ComponentTypes>
-    explicit GameObject(const StringHash& name, _ComponentTypes&&... components) :
+    explicit GameObject(const StringHash& name, Transform* transform, _ComponentTypes&&... components) :
         m_name(name),
+        m_transform(transform),
         m_isActive(true),
         m_components(std::forward<_ComponentTypes>(components)...)
     {
@@ -119,9 +119,9 @@ public:
     /**@brief   Gets the active state of this object. */
     bool IsActive() const noexcept;
     
-    Transform& GetTransform();
+    std::shared_ptr<Transform> GetTransform() noexcept;
     
-    const Transform& GetTransform() const;
+    std::shared_ptr<const Transform> GetTransform() const noexcept;
 
 private:
     /**
@@ -139,9 +139,9 @@ private:
 
 /**@section Variable */
 private:
-    bool m_isActive;
-    Transform m_transform;
     StringHash m_name;
+    std::shared_ptr<Transform> m_transform;
+    bool m_isActive;
     std::vector<std::shared_ptr<Component>> m_components;
 };
 

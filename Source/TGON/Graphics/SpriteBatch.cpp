@@ -10,7 +10,7 @@
 
 namespace tgon
 {
-
+    
 SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect) noexcept :
     m_texture(texture),
     m_blendMode(blendMode),
@@ -48,60 +48,67 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
         graphics.DisableScissorTest();
     }
     
-    graphics.DrawIndexedPrimitives(PrimitiveType::Triangles, 6);
+    graphics.DrawPrimitives(PrimitiveType::Triangles, (m_vertexEndOffset - m_vertexStartOffset) / sizeof(V3F_T2F));
 }
     
-void SpriteBatch::Merge(const Sprite& rhs)
+bool SpriteBatch::Merge(const Sprite& rhs, std::vector<float>* vertices)
 {
-//    if (this->CanBatch(rhs) == false)
-//    {
-//        return;
-//    }
-//    
-//    const auto& textureRect = rhs.GetTextureRect();
-//    const auto& textureSize = rhs.GetTexture()->GetSize();
-//    auto leftUV = textureRect.x / textureSize.width;
-//    auto topUV = textureRect.y / textureSize.height;
-//    auto rightUV = textureRect.width / textureSize.width;
-//    auto bottomUV = textureRect.height / textureSize.height;
-//
-//    auto halfWidth = textureRect.width / 2;
-//    auto halfHeight = textureRect.height / 2;
-//
-////    float* vertices = &m_vertices[m_vertices.size()];
-////    m_vertices.resize(m_vertices.size() + (sizeof(V3F_T2F) / sizeof(float)) * 4);
-//    
-//    m_vertices[0] = -halfWidth;
-//    m_vertices[1] = halfHeight;
-//    m_vertices[2] = 0.0f;
-//    m_vertices[3] = leftUV;
-//    m_vertices[4] = topUV;
-//    
-//    m_vertices[5] = halfWidth;
-//    m_vertices[6] = halfHeight;
-//    m_vertices[7] = 0.0f;
-//    m_vertices[8] = rightUV;
-//    m_vertices[9] = topUV;
-//    
-//    m_vertices[10] = halfWidth;
-//    m_vertices[11] = -halfHeight;
-//    m_vertices[12] = 0.0f;
-//    m_vertices[13] = rightUV;
-//    m_vertices[14] = bottomUV;
-//
-//    m_vertexBuffer.SetData(&m_vertices[0], m_vertices.size() * sizeof(float), true, {
-//        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, 0, 0),
-//        VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, true, 0, 12),
-//    });
+    const auto& textureRect = rhs.GetTextureRect();
+    const auto& textureSize = rhs.GetTexture()->GetSize();
+    auto leftUV = textureRect.x / textureSize.width;
+    auto topUV = textureRect.height / textureSize.height;
+    auto rightUV = textureRect.width / textureSize.width;
+    auto bottomUV = textureRect.y / textureSize.height;
+    auto halfWidth = textureRect.width / 2;
+    auto halfHeight = textureRect.height / 2;
+
+    auto expandSize = sizeof(V3F_T2F) * 6;
+    vertices->resize(m_vertexEndOffset + expandSize);
+    m_vertexEndOffset += expandSize;
     
-//    g_sharedVertices[15] = -halfWidth;
-//    g_sharedVertices[16] = -halfHeight;
-//    g_sharedVertices[17] = 0.0f;
-//    g_sharedVertices[18] = leftUV;
-//    g_sharedVertices[19] = bottomUV;
+    // Left top
+    (*vertices)[0] = -halfWidth;
+    (*vertices)[1] = halfHeight;
+    (*vertices)[2] = 0.0f;
+    (*vertices)[3] = leftUV;
+    (*vertices)[4] = topUV;
+
+    // Right top
+    (*vertices)[5] = halfWidth;
+    (*vertices)[6] = halfHeight;
+    (*vertices)[7] = 0.0f;
+    (*vertices)[8] = rightUV;
+    (*vertices)[9] = topUV;
     
-    auto triangle = MeshUtility::GetSharedTriangle();
-    triangle->Use();
+    // Right bottom
+    (*vertices)[10] = halfWidth;
+    (*vertices)[11] = -halfHeight;
+    (*vertices)[12] = 0.0f;
+    (*vertices)[13] = rightUV;
+    (*vertices)[14] = bottomUV;
+    
+    // Right bottom
+    (*vertices)[15] = halfWidth;
+    (*vertices)[16] = -halfHeight;
+    (*vertices)[17] = 0.0f;
+    (*vertices)[18] = rightUV;
+    (*vertices)[19] = bottomUV;
+
+    // Left bottom
+    (*vertices)[20] = -halfWidth;
+    (*vertices)[21] = -halfHeight;
+    (*vertices)[22] = 0.0f;
+    (*vertices)[23] = leftUV;
+    (*vertices)[24] = bottomUV;
+
+    // Left top
+    (*vertices)[25] = -halfWidth;
+    (*vertices)[26] = halfHeight;
+    (*vertices)[27] = 0.0f;
+    (*vertices)[28] = leftUV;
+    (*vertices)[29] = topUV;
+
+    return true;
 }
 
 //void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)

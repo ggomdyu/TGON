@@ -39,7 +39,7 @@ LogoScene::LogoScene()
 
     // 카메라 생성
     {
-        auto cameraObject = std::make_shared<GameObject>("camera1");
+        auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
         const tgon::I32Extent2D rootWindowSize = application->GetRootWindow()->GetSize();
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
@@ -51,10 +51,14 @@ LogoScene::LogoScene()
     //// Intro에 사용할 Sprite 생성
 
     {
-        auto introObject1 = std::make_shared<GameObject>("introSprite1");
-        introObject1->GetTransform().SetLocalScale({ 8.38f, 4.42f, 1.0f });
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/s.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        
+        auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
+        introObject1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
         m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(std::make_shared<Texture>(GetDesktopDirectory() + "/s.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true)));
+        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(texture));
+        m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
+        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(texture));
 //        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
 //        m_introSpriteComponent1->SetOpacity(0.0f);
         this->AddObject(introObject1);

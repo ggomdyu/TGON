@@ -28,7 +28,7 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~SpriteRendererComponent() override = default;
+    virtual ~SpriteRendererComponent() override;
 
 /**@section Method */
 public:

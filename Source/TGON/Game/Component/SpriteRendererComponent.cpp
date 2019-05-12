@@ -13,15 +13,24 @@ SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& 
     m_sprite(sprite),
     m_blendColor(blendColor)
 {
+    this->SetSprite(sprite);
 }
 
+SpriteRendererComponent::~SpriteRendererComponent()
+{
+    if (m_sprite != nullptr)
+    {
+        m_graphicsModule->GetUIRenderer().RemoveSprite(m_sprite);
+    }
+}
+    
 void SpriteRendererComponent::Update()
 {
-    m_graphicsModule->GetView().AddSprite(m_sprite);
 }
 
 void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
 {
+    m_graphicsModule->GetUIRenderer().AddSprite(sprite);
     m_sprite = sprite;
 }
     

@@ -14,7 +14,7 @@ void GameObject::Update()
         return;
     }
 
-    m_transform.Update();
+    m_transform->Update();
 
     for (auto& component : m_components)
     {
@@ -42,12 +42,12 @@ bool GameObject::IsActive() const noexcept
     return m_isActive;
 }
 
-Transform& GameObject::GetTransform()
+std::shared_ptr<Transform> GameObject::GetTransform() noexcept
 {
     return m_transform;
 }
 
-const Transform& GameObject::GetTransform() const
+std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
 {
     return m_transform;
 }

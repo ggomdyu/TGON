@@ -39,5 +39,13 @@ TGON_API std::string GetDesktopDirectory();
 TGON_API int32_t GetDesktopDirectory(char* destStr);
 TGON_API std::string GetFontsDirectory();
 TGON_API int32_t GetFontsDirectory(char* destStr);
-
+TGON_API std::string GetMusicDirectory();
+TGON_API int32_t GetMusicDirectory(char* destStr);
+TGON_API std::string GetPicturesDirectory();
+TGON_API int32_t GetPicturesDirectory(char* destStr);
+TGON_API std::string GetVideosDirectory();
+TGON_API int32_t GetVideosDirectory(char* destStr);
+TGON_API std::string GetDocumentsDirectory();
+TGON_API int32_t GetDocumentsDirectory(char* destStr);
+    
 } /* namespace tgon */

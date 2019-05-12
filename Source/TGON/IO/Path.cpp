@@ -197,5 +197,29 @@ TGON_API std::string GetFontsDirectory()
     auto strLen = GetFontsDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
+    
+TGON_API std::string GetMusicDirectory()
+{
+    auto strLen = GetMusicDirectory(g_tempPathBuffer);
+    return std::string(g_tempPathBuffer, strLen);
+}
+    
+TGON_API std::string GetPicturesDirectory()
+{
+    auto strLen = GetPicturesDirectory(g_tempPathBuffer);
+    return std::string(g_tempPathBuffer, strLen);
+}
+
+TGON_API std::string GetVideosDirectory()
+{
+    auto strLen = GetVideosDirectory(g_tempPathBuffer);
+    return std::string(g_tempPathBuffer, strLen);
+}
+
+TGON_API std::string GetDocumentsDirectory()
+{
+    auto strLen = GetDocumentsDirectory(g_tempPathBuffer);
+    return std::string(g_tempPathBuffer, strLen);
+}
 
 } /* namespace tgon */
