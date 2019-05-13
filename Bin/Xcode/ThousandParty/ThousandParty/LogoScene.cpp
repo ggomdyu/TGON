@@ -51,8 +51,8 @@ LogoScene::LogoScene()
     //// Intro에 사용할 Sprite 생성
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/161084145cbc5cc.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/Temporary/d49126de0f983e473dd9ee0a6e1d8c6b.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/Temporary/5059f90762a64a396629a92c1f36133f.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         
         auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
         introObject1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });

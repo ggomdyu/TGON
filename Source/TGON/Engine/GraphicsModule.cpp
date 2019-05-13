@@ -44,8 +44,8 @@ void UIRenderer::Update()
         }
     }
     
-    m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
     m_spriteVertexBuffer.Use();
+    m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
 
 void UIRenderer::Draw(Graphics& graphics)
@@ -56,9 +56,6 @@ void UIRenderer::Draw(Graphics& graphics)
     //        Log(LogLevel::Debug, "You have no camera but trying to draw.\n");
     //    }
     //#endif
-    
-    //    static auto quad = MeshUtility::GetSharedQuad();
-    //    quad->Use();
     
     this->FlushSpriteBatches(graphics);
 }

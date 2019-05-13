@@ -49,7 +49,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
         graphics.DisableScissorTest();
     }
     
-    graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / sizeof(V3F_T2F), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
+    graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
 bool SpriteBatch::Merge(const Sprite& rhs, std::vector<float>* vertices)
@@ -60,92 +60,38 @@ bool SpriteBatch::Merge(const Sprite& rhs, std::vector<float>* vertices)
     float topUV = textureRect.height / textureSize.height;
     float rightUV = textureRect.width / textureSize.width;
     float bottomUV = textureRect.y / textureSize.height;
-    float halfWidth = textureRect.width / 2;
-    float halfHeight = textureRect.height / 2;
+    float halfWidth = textureRect.width * 0.5f;
+    float halfHeight = textureRect.height * 0.5f;
 
     auto oldVertexEndOffset = m_vertexEndOffset;
     auto expandSize = sizeof(V3F_T2F) / 4 * 6;
     vertices->resize(m_vertexEndOffset + expandSize);
     m_vertexEndOffset += expandSize;
 
-    auto x = RandRange(-200.0f, 200.0f);
-
-   // Left top
-    float* newVertices = &(*vertices)[oldVertexEndOffset];
-    newVertices[0] = -halfWidth + x;
-    newVertices[1] = halfHeight;
-    newVertices[2] = 0.0f;
-    newVertices[3] = leftUV;
-    newVertices[4] = topUV;
-
+    // Left top
+    V3F_T2F* newVertices = reinterpret_cast<V3F_T2F*>(&(*vertices)[oldVertexEndOffset]);
+    newVertices[0].position = {-halfWidth, halfHeight, 0.0f};
+    newVertices[0].uv = {leftUV, topUV};
+    
     // Right top
-    newVertices[5] = halfWidth + x;
-    newVertices[6] = halfHeight;
-    newVertices[7] = 0.0f;
-    newVertices[8] = rightUV;
-    newVertices[9] = topUV;
+    newVertices[1].position = {halfWidth, halfHeight, 0.0f};
+    newVertices[1].uv = {rightUV, topUV};
     
     // Right bottom
-    newVertices[10] = halfWidth + x;
-    newVertices[11] = -halfHeight;
-    newVertices[12] = 0.0f;
-    newVertices[13] = rightUV;
-    newVertices[14] = bottomUV;
+    newVertices[2].position = {halfWidth, -halfHeight, 0.0f};
+    newVertices[2].uv = {rightUV, bottomUV};
     
     // Right bottom
-    newVertices[15] = halfWidth + x;
-    newVertices[16] = -halfHeight;
-    newVertices[17] = 0.0f;
-    newVertices[18] = rightUV;
-    newVertices[19] = bottomUV;
+    newVertices[3] = newVertices[2];
 
     // Left bottom
-    newVertices[20] = -halfWidth + x;
-    newVertices[21] = -halfHeight;
-    newVertices[22] = 0.0f;
-    newVertices[23] = leftUV;
-    newVertices[24] = bottomUV;
+    newVertices[4].position = {-halfWidth, -halfHeight, 0.0f};
+    newVertices[4].uv = {leftUV, bottomUV};
 
     // Left top
-    newVertices[25] = -halfWidth + x;
-    newVertices[26] = halfHeight;
-    newVertices[27] = 0.0f;
-    newVertices[28] = leftUV;
-    newVertices[29] = topUV;
+    newVertices[5] = newVertices[0];
 
     return true;
 }
 
-//void SpriteBatch::Draw(Graphics& graphics, const Camera& camera)
-//{
-//    (*m_material)->Use();
-//
-//    for (const auto& matWorld : m_matWorlds)
-//    {
-//        (*m_material)->SetWVP((*matWorld) * camera.GetViewProjectionMatrix());
-//
-//        graphics.DrawPrimitives(PrimitiveType::TriangleFan, 4);
-//    }
-//}
-//
-//std::shared_ptr<Sprite> SpriteBatch::GetSprite() noexcept
-//{
-//    return *m_sprite;
-//}
-//    
-//std::shared_ptr<const Sprite> SpriteBatch::GetSprite() const noexcept
-//{
-//    return *m_sprite;
-//}
-//
-//std::shared_ptr<Material> SpriteBatch::GetMaterial() noexcept
-//{
-//    return *m_material;
-//}
-//    
-//std::shared_ptr<const Material> SpriteBatch::GetMaterial() const noexcept
-//{
-//    return *m_material;
-//}
-//    
 } /* namespace tgon */
