@@ -37,7 +37,7 @@ void UIRenderer::Update()
             }
             else if (m_spriteBatches.back().CanBatch(*sprite) == false)
             {
-                m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), m_spriteVertices.size()));
+                m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
             }
             
             m_spriteBatches.back().Merge(*sprite, &m_spriteVertices);
