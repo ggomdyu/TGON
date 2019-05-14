@@ -378,10 +378,10 @@ auto MakeDelegate(typename FunctionTraits<decltype(_Function)>::ClassType* recei
     return Delegate<typename FunctionTraits<decltype(_Function)>::FunctionType>::template MakeDelegate<ClassType, _Function>(receiver);
 }
 
-template <auto _FunctionType>
+template <auto _Function>
 auto MakeDelegate()
 {
-    return Delegate<typename FunctionTraits<decltype(_FunctionType)>::FunctionType>::template MakeDelegate<_FunctionType>();
+    return Delegate<typename FunctionTraits<decltype(_Function)>::FunctionType>::template MakeDelegate<_Function>();
 }
 
 template <typename _FunctionType>
