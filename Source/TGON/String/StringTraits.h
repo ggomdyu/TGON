@@ -164,7 +164,6 @@ public:
      * @param [in] srcStr           The string to find.
      * @param [in] srcStrOffset     The point of srcStr which start to search.
      * @param [in] srcSubStr        The substring to find.
-     * @param [in] srcSubStrLen     The length of srcSubStr.
      */
     static std::size_t RFind(const std::basic_string_view<_CharType>& srcStr, std::size_t srcStrOffset, const std::basic_string_view<_CharType>& srcSubStr);
 
@@ -289,7 +288,7 @@ inline void BasicStringTraits<_CharType>::Assign(const std::basic_string_view<_C
 {
     assert(destStrBufferLen > srcStr.length() && "String buffer overflowed!");
 
-    memcpy(destStr, srcStr, sizeof(_CharType) * (srcStr.length() + 1));
+    memcpy(destStr, srcStr.data(), sizeof(_CharType) * (srcStr.length() + 1));
 
     destStr[srcStr.length()] = _CharType();
 }
@@ -363,11 +362,11 @@ inline int32_t BasicStringTraits<_CharType>::Compare(const std::basic_string_vie
         return ans;
     }
 
-    if (srcLhsStrLen < srcRhsStrLen)
+    if (srcLhsStr.length() < srcRhsStr.length())
     {
         return -1;
     }
-    if (srcLhsStrLen > srcRhsStrLen)
+    if (srcLhsStr.length() > srcRhsStr.length())
     {
         return 1;
     }

@@ -3,7 +3,6 @@
 #include "Platform/Application.h"
 #include "Engine/GraphicsModule.h"
 #include "Graphics/Camera.h"
-#include "Graphics/View.h"
 
 #include "CameraComponent.h"
 
@@ -32,7 +31,7 @@ CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)
     {
-        graphicsModule->GetUIRenderer().AddCamera(camera);
+        graphicsModule->GetCanvasRenderer().AddCamera(camera);
     }
 }
 
@@ -41,7 +40,7 @@ CameraComponent::~CameraComponent()
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)
     {
-        graphicsModule->GetUIRenderer().RemoveCamera(m_camera);
+        graphicsModule->GetCanvasRenderer().RemoveCamera(m_camera);
     }
 }
 

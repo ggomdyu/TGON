@@ -19,19 +19,19 @@ class Graphics;
 class Texture;
 class VertexBuffer;
 class Material;
-class Sprite;
+class CanvasSprite;
 enum class BlendMode;
 
-class TGON_API SpriteBatch final
+class TGON_API CanvasSpriteBatch final
 {
 /**@section Constructor */
 public:
-    SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
+    CanvasSpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
-    bool CanBatch(const Sprite& rhs) const noexcept;
-    bool Merge(const Sprite& rhs, std::vector<float>* vertices);
+    bool CanBatch(const CanvasSprite& rhs) const noexcept;
+    bool Merge(const CanvasSprite& rhs, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
     
 /**@section Variable */

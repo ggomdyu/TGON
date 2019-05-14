@@ -24,7 +24,7 @@ std::mutex g_mutex;
 TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    const char* logStrBuffer = StringTraits<char>::Format(formatStr, vaList).first;
+    const char* logStrBuffer = BasicStringTraits<char>::Format(formatStr, vaList).first;
     if (logStrBuffer == nullptr)
     {
         return;
@@ -72,7 +72,7 @@ void Assert(bool condition, const char* formatStr, ...)
 #if defined(_DEBUG) || ! defined(NDEBUG)
     if (condition == false)
     {
-        if (StringTraits<char>::IsNullOrEmpty(formatStr) == true)
+        if (BasicStringTraits<char>::IsNullOrEmpty(formatStr) == true)
         {
             Assert(condition);
             return;

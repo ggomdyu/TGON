@@ -37,7 +37,6 @@ public:
      * @param [in] data                     The data to store in the vertex buffer.
      * @param [in] dataBytes                The byte size of the data.
      * @param [in] isDynamicUsage           If true, then the index buffer will not be modified after set.
-     * @param [in] vertexBufferLayoutDescs  The vertex layout descriptors.
      */
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
     

@@ -60,7 +60,7 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/IndexBuffer.h"
 #include "Graphics/MeshUtility.h"
-#include "Graphics/Sprite.h"
+#include "Graphics/CanvasSprite.h"
 #include "Graphics/FVF.h"
 #include "Graphics/Camera.h"
 #include "Game/GameObject.h"

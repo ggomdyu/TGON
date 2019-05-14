@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor) :
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor) :
     RendererComponent(material),
     m_sprite(sprite),
     m_blendColor(blendColor)
@@ -20,7 +20,7 @@ SpriteRendererComponent::~SpriteRendererComponent()
 {
     if (m_sprite != nullptr)
     {
-        m_graphicsModule->GetUIRenderer().RemoveSprite(m_sprite);
+        m_graphicsModule->GetCanvasRenderer().RemoveSprite(m_sprite);
     }
 }
     
@@ -28,18 +28,18 @@ void SpriteRendererComponent::Update()
 {
 }
 
-void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
+void SpriteRendererComponent::SetSprite(const std::shared_ptr<CanvasSprite>& sprite)
 {
-    m_graphicsModule->GetUIRenderer().AddSprite(sprite);
+    m_graphicsModule->GetCanvasRenderer().AddSprite(sprite);
     m_sprite = sprite;
 }
     
-std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() noexcept
+std::shared_ptr<CanvasSprite> SpriteRendererComponent::GetSprite() noexcept
 {
     return m_sprite;
 }
 
-std::shared_ptr<const Sprite> SpriteRendererComponent::GetSprite() const noexcept
+std::shared_ptr<const CanvasSprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
 }

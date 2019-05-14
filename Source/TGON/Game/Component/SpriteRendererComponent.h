@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class Sprite;
+class CanvasSprite;
 
 class TGON_API SpriteRendererComponent :
 	public RendererComponent
@@ -24,7 +24,7 @@ public:
 public:
     using RendererComponent::RendererComponent;
     
-    SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
+    SpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Destructor */
 public:
@@ -36,11 +36,11 @@ public:
     virtual void Update() override;
 
     /**@brief   Sets a sprite that rendered by this component. */
-    void SetSprite(const std::shared_ptr<Sprite>& sprite);
+    void SetSprite(const std::shared_ptr<CanvasSprite>& sprite);
     
-    std::shared_ptr<Sprite> GetSprite() noexcept;
+    std::shared_ptr<CanvasSprite> GetSprite() noexcept;
     
-    std::shared_ptr<const Sprite> GetSprite() const noexcept;
+    std::shared_ptr<const CanvasSprite> GetSprite() const noexcept;
 
     /**@brief   Sets a color that blended with the sprite. */
     void SetBlendColor(const Color4f& blendColor);
@@ -49,7 +49,7 @@ public:
 
 /**@section Variable */
 private:
-    std::shared_ptr<Sprite> m_sprite;
+    std::shared_ptr<CanvasSprite> m_sprite;
 
     Color4f m_blendColor;
 };

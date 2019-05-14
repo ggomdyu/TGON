@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include "SpriteBatch.h"
+#include "CanvasSpriteBatch.h"
 #include "Texture.h"
 #include "Graphics.h"
 #include "Material.h"
-#include "Sprite.h"
+#include "CanvasSprite.h"
 #include "FVF.h"
 #include "MeshUtility.h"
 #include "Random/Random.h"
@@ -12,7 +12,7 @@
 namespace tgon
 {
     
-SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
+CanvasSpriteBatch::CanvasSpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
     m_texture(texture),
     m_blendMode(blendMode),
     m_enableScissorRect(enableScissorRect),
@@ -22,7 +22,7 @@ SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blen
 {
 }
 
-bool SpriteBatch::CanBatch(const Sprite& rhs) const noexcept
+bool CanvasSpriteBatch::CanBatch(const CanvasSprite& rhs) const noexcept
 {
     if (m_texture == rhs.GetTexture() &&
         m_blendMode == rhs.GetBlendMode() &&
@@ -35,7 +35,7 @@ bool SpriteBatch::CanBatch(const Sprite& rhs) const noexcept
     return false;
 }
     
-void SpriteBatch::FlushBatch(Graphics& graphics)
+void CanvasSpriteBatch::FlushBatch(Graphics& graphics)
 {
     m_texture->Use();
     
@@ -52,7 +52,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
-bool SpriteBatch::Merge(const Sprite& rhs, std::vector<float>* vertices)
+bool CanvasSpriteBatch::Merge(const CanvasSprite& rhs, std::vector<float>* vertices)
 {
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();

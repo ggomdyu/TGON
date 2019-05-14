@@ -20,23 +20,22 @@ namespace tgon
 
 class Texture;
 
-class TGON_API Sprite final
+class TGON_API CanvasSprite final
 {
 /**@section Constructor */
 public:
-    explicit Sprite(const std::shared_ptr<Texture>& texture);
-    Sprite(Sprite&& rhs);
+    explicit CanvasSprite(const std::shared_ptr<Texture>& texture);
+    CanvasSprite(CanvasSprite&& rhs);
 
 /**@section Destructor */
 public:
-    virtual ~Sprite() = default;
+    virtual ~CanvasSprite() = default;
     
 /**@section Method */
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect);
     void SetBlendMode(BlendMode blendMode) noexcept;
-    void SetLayer(int32_t layer) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     FRect& GetTextureRect() noexcept;
@@ -48,7 +47,6 @@ public:
     void SetScissorRect(const FRect& rect) noexcept;
     FRect& GetScissorRect() noexcept;
     const FRect& GetScissorRect() const noexcept;
-    int32_t GetLayer() const noexcept;
     
 /**@section Variable */
 private:
@@ -57,14 +55,13 @@ private:
     bool m_enableScissorRect;
     FRect m_scissorRect;
     FRect m_textureRect;
-    int32_t m_layer;
 };
 
 class NinePatchSprite
 {
 public:
 private:
-    Sprite m_sprites[9];
+    CanvasSprite m_sprites[9];
 };
     
 } /* namespace tgon */

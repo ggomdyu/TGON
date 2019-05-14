@@ -9,7 +9,7 @@
 #include "IO/Path.h"
 #include "Hardware/Keyboard.h"
 #include "Engine/GraphicsModule.h"
-#include "Graphics/Sprite.h"
+#include "Graphics/CanvasSprite.h"
 #include "Graphics/Texture.h"
 #include "Game/Component/SpriteRendererComponent.h"
 #include "Game/Component/CameraComponent.h"
@@ -57,11 +57,11 @@ LogoScene::LogoScene()
         auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
         introObject1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
         m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<Sprite>(texture));
+        m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
         m_introSpriteComponent2 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent2->SetSprite(std::make_shared<Sprite>(texture));
+        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture));
         auto m_introSpriteComponent3 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent3->SetSprite(std::make_shared<Sprite>(texture2));
+        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
 //        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
 //        m_introSpriteComponent1->SetOpacity(0.0f);
         this->AddObject(introObject1);
