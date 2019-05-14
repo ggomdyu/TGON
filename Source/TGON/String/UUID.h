@@ -22,7 +22,7 @@
 namespace tgon
 {
 
-template <typename _CharType, typename _StringTraitsType = StringTraits<_CharType>>
+template <typename _CharType, typename _StringTraitsType = BasicStringTraits<_CharType>>
 struct BasicUUID :
     private BasicFixedString<_CharType, 37, _StringTraitsType>
 {
@@ -60,7 +60,7 @@ public:
     using SuperType::crbegin;
 };
 
-using UUID = BasicUUID<char, StringTraits<char>>;
+using UUID = BasicUUID<char, BasicStringTraits<char>>;
 
 template <typename _CharType, typename _StringTraitsType>
 inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTraitsType>::NewUUID()

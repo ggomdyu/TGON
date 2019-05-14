@@ -11,7 +11,7 @@ namespace tgon
 ImageFormat ImageUtilty::ConvertStringToImageFormat(const char * imageFormatStr, std::size_t imageFormatStrLen)
 {
     char lowercaseStr[32]{};
-    StringTraits<char>::ToLower(imageFormatStr, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
+    BasicStringTraits<char>::ToLower(imageFormatStr, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
 
     switch (X65599Hash(lowercaseStr))
     {
