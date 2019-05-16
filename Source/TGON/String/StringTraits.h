@@ -356,7 +356,7 @@ inline std::size_t BasicStringTraits<_CharType>::RFind(const std::basic_string_v
 template <typename _CharType>
 inline int32_t BasicStringTraits<_CharType>::Compare(const std::basic_string_view<_CharType>& srcLhsStr, const std::basic_string_view<_CharType>& srcRhsStr)
 {
-    auto ans = CharTraitsType::compare(srcLhsStr, srcRhsStr, std::min(srcLhsStr.length(), srcRhsStr.length()));
+    auto ans = CharTraitsType::compare(srcLhsStr.data(), srcRhsStr.data(), std::min(srcLhsStr.length(), srcRhsStr.length()));
     if (ans != 0)
     {
         return ans;

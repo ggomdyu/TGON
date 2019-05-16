@@ -39,26 +39,26 @@ public:
 /**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept;
-    BasicFixedString(const _CharType* str, std::size_t strLen);
+    BasicFixedString(const std::basic_string_view<_CharType>& str);
     BasicFixedString(std::size_t chCount, _CharType ch);
     template <std::size_t _CharArraySize2>
     BasicFixedString(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs);
 
 /**@section Operator */
 public:
-    BasicFixedString& operator=(const _CharType* rhs);
+    BasicFixedString& operator=(const std::basic_string_view<_CharType>& rhs);
     BasicFixedString& operator=(const BasicFixedString& rhs) = default;
     template <std::size_t _CharArraySize2>
     BasicFixedString& operator=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs);
-    const BasicFixedString operator+(const _CharType* rhs) const;
+    const BasicFixedString operator+(const std::basic_string_view<_CharType>& rhs) const;
     template <std::size_t _CharArraySize2>
     const BasicFixedString operator+(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
     const BasicFixedString operator+(_CharType ch) const;
-    BasicFixedString& operator+=(const _CharType* rhs);
+    BasicFixedString& operator+=(const std::basic_string_view<_CharType>& rhs);
     template <std::size_t _CharArraySize2>
     BasicFixedString& operator+=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs);
     BasicFixedString& operator+=(_CharType ch);
-    bool operator==(const _CharType* rhs) const;
+    bool operator==(const std::basic_string_view<_CharType>& rhs) const;
     template <std::size_t _CharArraySize2>
     bool operator==(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
     const _CharType& operator[](std::size_t index) const;
@@ -66,28 +66,25 @@ public:
 
 /**@section Method */
 public:
-    void Append(const _CharType* str, std::size_t strLen);
-    void Append(const _CharType* str);
+    void Append(const std::basic_string_view<_CharType>& str);
     template <std::size_t _CharArraySize2>
     void Append(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& str);
     void Append(std::size_t chCount, _CharType ch);
-    void Assign(const _CharType* str, std::size_t strLen);
-    void Assign(const _CharType* str);
+    void Assign(const std::basic_string_view<_CharType>& str);
     template <std::size_t _CharArraySize2>
     void Assign(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& str);
     void Assign(std::size_t chCount, _CharType ch);
     template <std::size_t _CharArraySize2>
     BasicFixedString<_CharType, _CharArraySize + _CharArraySize2, _StringTraitsType> Expand(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
-    int32_t Compare(const _CharType* str, std::size_t strLen) const;
-    int32_t Compare(const _CharType* str) const;
+    int32_t Compare(const std::basic_string_view<_CharType>& str) const;
     template <std::size_t _CharArraySize2>
     int32_t Compare(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& str) const;
-    std::size_t Find(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
+    std::size_t Find(const std::basic_string_view<_CharType>& str, std::size_t strOffset) const;
     std::size_t Find(const BasicFixedString& rhs) const;
     template <std::size_t _CharArraySize2>
     std::size_t Find(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
     std::size_t Find(_CharType ch, std::size_t strOffset = 0) const;
-    std::size_t RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const;
+    std::size_t RFind(const std::basic_string_view<_CharType>&, std::size_t strOffset) const;
     std::size_t RFind(const BasicFixedString& rhs) const;
     template <std::size_t _CharArraySize2>
     std::size_t RFind(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const;
@@ -144,15 +141,9 @@ constexpr BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicF
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
-    BasicFixedString(str, _StringTraitsType::Length(str))
-{
-}
-
-template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const _CharType* str, std::size_t strLen) :
-    _StringTraitsType({str, strLen}, m_str, _CharArraySize),
-    m_strLen(strLen)
+    inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
+    _StringTraitsType(str, m_str, _CharArraySize),
+    m_strLen(str.length())
 {
 }
 
@@ -166,7 +157,7 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixe
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) :
-    BasicFixedString(rhs.CStr(), rhs.Length())
+    BasicFixedString({rhs.CStr(), rhs.Length()})
 {
 }
 
@@ -179,7 +170,7 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixe
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator=(const _CharType* rhs)
+inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator=(const std::basic_string_view<_CharType>& rhs)
 {
     this->Assign(rhs);
     return *this;
@@ -193,7 +184,7 @@ inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> Basi
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const _CharType* rhs) const
+inline const BasicFixedString<_CharType, _CharArraySize, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+(const std::basic_string_view<_CharType>& rhs) const
 {
     return (BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>(*this) += rhs);
 }
@@ -208,12 +199,12 @@ template <typename _CharType, std::size_t _CharArraySize, typename _StringTraits
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+=(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs)
 {
-    this->Append(rhs.CStr(), rhs.Length());
+    this->Append({rhs.CStr(), rhs.Length()});
     return *this;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+=(const _CharType* rhs)
+inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator+=(const std::basic_string_view<_CharType>& rhs)
 {
     this->Append(rhs);
     return *this;
@@ -227,9 +218,9 @@ inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>& BasicFixe
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const _CharType* rhs) const
+inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator==(const std::basic_string_view<_CharType>& rhs) const
 {
-    return _StringTraitsType::Compare({m_str, m_strLen}, rhs, _StringTraitsType::Length(rhs)) == 0;
+    return _StringTraitsType::Compare({m_str, m_strLen}, rhs) == 0;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -259,10 +250,10 @@ inline BasicFixedString<_CharType, _CharArraySize + _CharArraySize2, _StringTrai
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Append(const _CharType* str, std::size_t strLen)
+inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Append(const std::basic_string_view<_CharType>& str)
 {
-    _StringTraitsType::Append({str, strLen}, m_str, m_strLen, _CharArraySize);
-    m_strLen += strLen;
+    _StringTraitsType::Append(str, m_str, m_strLen, _CharArraySize);
+    m_strLen += str.length();
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -273,22 +264,10 @@ inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Appe
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Append(const _CharType* str)
-{
-    this->Append(str, _StringTraitsType::Length(str));
-}
-
-template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Append(std::size_t chCount, _CharType ch)
 {
     _StringTraitsType::Append({m_str, m_strLen}, _CharArraySize, ch, chCount);
     m_strLen += chCount;
-}
-
-template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str)
-{
-    new (this) BasicFixedString(str);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -299,9 +278,9 @@ inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Assi
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Assign(const _CharType* str, std::size_t strLen)
+inline void BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Assign(const std::basic_string_view<_CharType>& str)
 {
-    new (this) BasicFixedString({str, strLen});
+    new (this) BasicFixedString(str);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -318,15 +297,9 @@ inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::C
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharType* str, std::size_t strLen) const
+inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const std::basic_string_view<_CharType>& str) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, str, strLen);
-}
-
-template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Compare(const _CharType* str) const
-{
-    return _StringTraitsType::Compare(m_str, m_strLen, str, _StringTraitsType::Length(str));
+    return _StringTraitsType::Compare({m_str, m_strLen}, str);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -349,9 +322,9 @@ inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Find(const _CharType* str, std::size_t strOffset, std::size_t strLen) const
+inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Find(const std::basic_string_view<_CharType>& str, std::size_t strOffset) const
 {
-    return _StringTraitsType::Find({m_str, m_strLen}, strOffset, str, strLen);
+    return _StringTraitsType::Find({m_str, m_strLen}, strOffset, str, str.length());
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
@@ -374,9 +347,9 @@ inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::RFind(const _CharType* str, std::size_t strOffset, std::size_t strLen) const
+inline std::size_t BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::RFind(const std::basic_string_view<_CharType>& str, std::size_t strOffset) const
 {
-    return _StringTraitsType::RFind({m_str, m_strLen}, strOffset, str, strLen);
+    return _StringTraitsType::RFind({m_str, m_strLen}, strOffset, str, str.length());
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>

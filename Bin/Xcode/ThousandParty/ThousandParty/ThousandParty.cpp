@@ -37,9 +37,6 @@ void ThousandParty::InitializeModule()
 {
     using namespace tgon;
 
-    FixedString8 fs(4, 'c');
-    fs = "abcd";
-    
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {
