@@ -69,6 +69,7 @@
 		FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC082289D51300D22E46 /* MeshRenderer.h */; };
 		FD78AC0D2289D51400D22E46 /* CanvasRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */; };
 		FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */; };
+		FD7E61C1228F365400A829FD /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C0228F365400A829FD /* Vector4.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
@@ -360,6 +361,7 @@
 		FD78AC082289D51300D22E46 /* MeshRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRenderer.h; sourceTree = "<group>"; };
 		FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CanvasRenderer.cpp; sourceTree = "<group>"; };
 		FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasRenderer.h; sourceTree = "<group>"; };
+		FD7E61C0228F365400A829FD /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		FDACD2EA20B4518A00C62C24 /* Cpp_Style_Guide(KR).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cpp_Style_Guide(KR).docx"; sourceTree = "<group>"; };
 		FDACD2EC20B4518A00C62C24 /* Windows_License_Notice.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Windows_License_Notice.docx; sourceTree = "<group>"; };
@@ -1224,6 +1226,7 @@
 				FDC02C0A228481F000BEE91A /* Rect.h */,
 				FDC02C0B228481F000BEE91A /* Mathematics.h */,
 				FDC02C0C228481F000BEE91A /* Vector3.h */,
+				FD7E61C0228F365400A829FD /* Vector4.h */,
 			);
 			name = Math;
 			path = ../../Source/TGON/Math;
@@ -1578,6 +1581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDC02D4E2284893F00BEE91A /* GameScene.h in Headers */,
+				FD7E61C1228F365400A829FD /* Vector4.h in Headers */,
 				FDC02CE0228482F000BEE91A /* Hash.h in Headers */,
 				FDC02D492284893F00BEE91A /* MeshRendererComponent.h in Headers */,
 				FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */,

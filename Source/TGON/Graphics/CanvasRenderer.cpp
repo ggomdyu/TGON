@@ -89,7 +89,7 @@ void CanvasRenderer::FlushSpriteBatches(Graphics& graphics)
     
     for (auto& camera : m_cameraList)
     {
-        m_uiMaterial->GetShaderProgram().SetParameterMatrix4fv("g_uWVP", camera->GetViewProjectionMatrix()[0]);
+        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
         
         for (auto& spriteBatch : m_spriteBatches)
         {
@@ -106,9 +106,9 @@ void CanvasRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
 bool CanvasRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
 {
     auto iter = std::find_if(m_cameraList.begin(), m_cameraList.end(), [&](const std::shared_ptr<Camera>& item)
-                             {
-                                 return item == camera;
-                             });
+    {
+        return item == camera;
+    });
     if (iter == m_cameraList.end())
     {
         return false;

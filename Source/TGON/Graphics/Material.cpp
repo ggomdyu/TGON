@@ -14,6 +14,11 @@ Material::Material(const char* vertexShaderCode, const char* fragmentShaderCode)
 {
 }
     
+Material::Material(ShaderProgram&& shaderProgram) noexcept :
+    m_shaderProgram(std::move(shaderProgram))
+{
+}
+    
 void Material::Use()
 {
     m_shaderProgram.Use();

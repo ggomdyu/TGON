@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else
@@ -36,11 +37,6 @@ AudioPlayer::~AudioPlayer()
 
 AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
 {
-    if (&rhs == this)
-    {
-        return *this;
-    }
-
     this->Release();
 
     m_alSource = rhs.m_alSource;

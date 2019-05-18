@@ -43,7 +43,4 @@ private:
     std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent1;
     std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent2;
     std::shared_ptr<tgon::SpriteRendererComponent> m_fadeOutSpriteComponent;
-    std::shared_ptr<tgon::GraphicsModule> m_graphicsModule;
-    std::shared_ptr<tgon::InputModule> m_inputModule;
-    std::shared_ptr<tgon::TimeModule> m_timeModule;
 };

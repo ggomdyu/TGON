@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <algorithm>
+
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/FVF.h"
 #include "Graphics/OpenGL/OpenGLShaderCode.h"

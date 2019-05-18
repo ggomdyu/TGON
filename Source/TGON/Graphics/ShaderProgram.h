@@ -21,6 +21,9 @@ class TGON_API ShaderProgram final :
 public:
     using PlatformShaderProgram::PlatformShaderProgram;
     
+/**@section Operator */
+public:
+    
 /**@section Method */
 public:
     PlatformShaderProgram* GetPlatformDependency() noexcept;
@@ -34,6 +37,7 @@ public:
     using PlatformShaderProgram::SetParameter4f;
     using PlatformShaderProgram::SetParameterMatrix4fv;
     using PlatformShaderProgram::SetParameterSampler;
+    using PlatformShaderProgram::SetParameterWVPMatrix4fv;
     using PlatformShaderProgram::BindAttributeLocation;
     using PlatformShaderProgram::GetUniformLocation;
     using PlatformShaderProgram::IsValid;

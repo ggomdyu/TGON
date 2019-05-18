@@ -7,13 +7,12 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
+#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else
 #   include <alc.h>
 #endif
-
-#include "Platform/Config.h"
 
 namespace tgon
 {

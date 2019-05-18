@@ -6,6 +6,7 @@
 #include "TGON.h"
 #include "ThousandParty.h"
 #include "LogoScene.h"
+#include "Math/Vector4.h"
 
 TGON_DECLARE_ENGINE(ThousandParty);
 

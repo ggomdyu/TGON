@@ -5,26 +5,20 @@
  */
 
 #pragma once
-#include "Core/CoreObject.h"
-#include "Math/Color.h"
-#include "Math/Matrix4x4.h"
+#include <boost/noncopyable.hpp>
 
-#include "Texture.h"
 #include "ShaderProgram.h"
-#include "GraphicsType.h"
 
 namespace tgon
 {
 
 class TGON_API Material :
-    public RuntimeObject
+    private boost::noncopyable
 {
-public:
-    TGON_DECLARE_RTTI(Material);
-    
 /**@section Constructor */
 public:
     Material(const char* vertexShaderCode, const char* fragmentShaderCode);
+    explicit Material(ShaderProgram&& shaderProgram) noexcept;
 
 /**@section Destructor */
 public:
@@ -43,7 +37,6 @@ public:
     
 /**@section Variable */
 protected:
-//    std::unordered_map<int32_t, std::shared_ptr<Texture>> m_textures;
     ShaderProgram m_shaderProgram;
 };
 
