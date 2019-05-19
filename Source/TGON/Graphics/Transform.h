@@ -20,9 +20,11 @@ class TGON_API Transform
 /**@section Constructor */
 public:
     Transform() noexcept;
-    Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
-    Transform(const std::shared_ptr<Transform>& parent) noexcept;
     Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
+    Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition) noexcept;
+    Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
+    explicit Transform(const Vector3& localPosition) noexcept;
+    explicit Transform(const std::shared_ptr<Transform>& parent) noexcept;
     
 /**@section Destructor */
 public:
@@ -39,6 +41,7 @@ public:
     const Vector3& GetLocalPosition() const noexcept;
     const Vector3& GetLocalRotation() const noexcept;
     const Vector3& GetLocalScale() const noexcept;
+    Vector3 GetPosition() const noexcept;
     const Matrix4x4& GetWorldMatrix() const noexcept;
     virtual void Update();
     

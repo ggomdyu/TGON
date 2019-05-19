@@ -21,9 +21,6 @@ class TGON_API ShaderProgram final :
 public:
     using PlatformShaderProgram::PlatformShaderProgram;
     
-/**@section Operator */
-public:
-    
 /**@section Method */
 public:
     PlatformShaderProgram* GetPlatformDependency() noexcept;

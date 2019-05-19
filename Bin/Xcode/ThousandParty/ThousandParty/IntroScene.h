@@ -14,7 +14,7 @@ namespace tgon
 
 class GameObject;
 class CameraComponent;
-class SpriteRendererComponent;
+class CanvasSpriteRendererComponent;
 class GraphicsModule;
 class InputModule;
 class TimeModule;
@@ -44,6 +44,6 @@ private:
     std::shared_ptr<tgon::InputModule> m_inputModule;
     std::shared_ptr<tgon::TimeModule> m_timeModule;
     std::shared_ptr<tgon::CameraComponent> m_cameraComponent;
-    std::shared_ptr<tgon::SpriteRendererComponent> m_fadeInSpriteComponent;
-    std::shared_ptr<tgon::SpriteRendererComponent> m_nightSkySpriteComponent;
+    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeInSpriteComponent;
+    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_nightSkySpriteComponent;
 };

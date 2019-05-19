@@ -52,7 +52,7 @@ void CanvasSpriteBatch::FlushBatch(Graphics& graphics)
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
-bool CanvasSpriteBatch::Merge(const CanvasSprite& rhs, std::vector<float>* vertices)
+void CanvasSpriteBatch::Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();
@@ -70,28 +70,26 @@ bool CanvasSpriteBatch::Merge(const CanvasSprite& rhs, std::vector<float>* verti
 
     // Left top
     V3F_T2F* newVertices = reinterpret_cast<V3F_T2F*>(&(*vertices)[oldVertexEndOffset]);
-    newVertices[0].position = {-halfWidth, halfHeight, 0.0f};
+    newVertices[0].position = matWorld * Vector4(-halfWidth, halfHeight, 0.0f, 1.0f);
     newVertices[0].uv = {leftUV, topUV};
     
     // Right top
-    newVertices[1].position = {halfWidth, halfHeight, 0.0f};
+    newVertices[1].position = matWorld * Vector4(halfWidth, halfHeight, 0.0f, 1.0f);
     newVertices[1].uv = {rightUV, topUV};
     
     // Right bottom
-    newVertices[2].position = {halfWidth, -halfHeight, 0.0f};
+    newVertices[2].position = matWorld * Vector4(halfWidth, -halfHeight, 0.0f, 1.0f);
     newVertices[2].uv = {rightUV, bottomUV};
     
     // Right bottom
     newVertices[3] = newVertices[2];
 
     // Left bottom
-    newVertices[4].position = {-halfWidth, -halfHeight, 0.0f};
+    newVertices[4].position = matWorld * Vector4(-halfWidth, -halfHeight, 0.0f, 1.0f);
     newVertices[4].uv = {leftUV, bottomUV};
 
     // Left top
     newVertices[5] = newVertices[0];
-
-    return true;
 }
 
 } /* namespace tgon */

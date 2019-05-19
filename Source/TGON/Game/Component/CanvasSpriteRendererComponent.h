@@ -14,21 +14,21 @@ namespace tgon
 
 class CanvasSprite;
 
-class TGON_API SpriteRendererComponent :
+class TGON_API CanvasSpriteRendererComponent :
 	public RendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(SpriteRendererComponent);
+    TGON_DECLARE_RTTI(CanvasSpriteRendererComponent);
 
 /**@section Constructor */
 public:
     using RendererComponent::RendererComponent;
     
-    SpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite, const std::shared_ptr<Material>& material, const Color4f& blendColor);
+    CanvasSpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Destructor */
 public:
-    virtual ~SpriteRendererComponent() override;
+    virtual ~CanvasSpriteRendererComponent() override;
 
 /**@section Method */
 public:

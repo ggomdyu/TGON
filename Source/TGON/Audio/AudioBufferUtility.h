@@ -28,17 +28,17 @@ inline AudioFormat ConvertStringToAudioFormat(const char* audioFormatStr, std::s
 
     switch (X65599Hash(lowercaseStr))
     {
-    case X65599Hash("wav"):
+    case TGON_X65599("wav"):
         return AudioFormat::Wav;
-    case X65599Hash("ogg"):
+    case TGON_X65599("ogg"):
         return AudioFormat::OggVorbis;
-    case X65599Hash("mp3"):
+    case TGON_X65599("mp3"):
         return AudioFormat::Mp3;
-    case X65599Hash("flac"):
+    case TGON_X65599("flac"):
         return AudioFormat::Flac;
-    case X65599Hash("m4a"):
+    case TGON_X65599("m4a"):
         return AudioFormat::M4a;
-    case X65599Hash("opus"):
+    case TGON_X65599("opus"):
         return AudioFormat::Opus;
     }
 

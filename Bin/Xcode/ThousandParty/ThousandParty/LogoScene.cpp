@@ -11,8 +11,10 @@
 #include "Engine/GraphicsModule.h"
 #include "Graphics/CanvasSprite.h"
 #include "Graphics/Texture.h"
-#include "Game/Component/SpriteRendererComponent.h"
+#include "Game/Component/CanvasSpriteRendererComponent.h"
 #include "Game/Component/CameraComponent.h"
+#include "Graphics/OpenGL/OpenGLShaderCode.h"
+#include "Graphics/ShaderProgram.h"
 #include "Engine/GameSceneModule.h"
 
 #include "IntroScene.h"
@@ -48,19 +50,18 @@ LogoScene::LogoScene()
     //// Intro에 사용할 Sprite 생성
 
     {
-        auto sprite = std::make_shared<CanvasSprite>(std::make_shared<Texture>(GetDesktopDirectory() + "/Temporary/d49126de0f983e473dd9ee0a6e1d8c6b.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true));
-        auto sprite2 = std::make_shared<CanvasSprite>(std::make_shared<Texture>(GetDesktopDirectory() + "/Temporary/5059f90762a64a396629a92c1f36133f.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true));
-//        sprite2->EnableScissorRect();
-//        sprite2->SetScissorRect(FRect{0, 0, 100, 100});
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         
         auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        introObject1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-        m_introSpriteComponent1 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(sprite);
-        m_introSpriteComponent2 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent2->SetSprite(sprite2);
-        auto m_introSpriteComponent3 = introObject1->AddComponent<SpriteRendererComponent>();
-        m_introSpriteComponent3->SetSprite(sprite2);
+        introObject1->GetTransform()->SetLocalScale({ 2.0f, 1.0f, 1.0f });
+        introObject1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+        m_introSpriteComponent1 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
+        m_introSpriteComponent2 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture));
+        auto m_introSpriteComponent3 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
 //        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
 //        m_introSpriteComponent1->SetOpacity(0.0f);
         this->AddObject(introObject1);

@@ -42,7 +42,7 @@ public:
     template <typename _DerivedExpressionType>
     constexpr BasicVector3(const BaseExpression<_DerivedExpressionType>& expression);
     
-/**@section Public perator */
+/**@section Operator */
 public:
     constexpr const AddExpression<BasicVector3, BasicVector3> operator+(const BasicVector3& v) const noexcept;
     constexpr const SubtractExpression<BasicVector3, BasicVector3> operator-(const BasicVector3& v) const noexcept;

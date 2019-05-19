@@ -92,11 +92,10 @@ in vec2 g_fragUV;                                                               
 out vec4 g_outColor;                                                                \n\
                                                                                     \n\
 uniform sampler2D textureSampler;                                                   \n\
-uniform vec4 g_blendColor;                                                          \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    g_outColor = texture(textureSampler, g_fragUV) * g_blendColor;                  \n\
+    g_outColor = texture(textureSampler, g_fragUV);                                 \n\
 }                                                                                   \n\
 ";
 

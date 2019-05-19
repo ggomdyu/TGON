@@ -8,28 +8,28 @@ namespace tgon
 {
 
 Transform::Transform() noexcept :
-    m_localScale({ 1.0f, 1.0f, 1.0f }),
-    m_matWorld(Matrix4x4::Identity()),
-    m_isDirty(false)
+    Transform(nullptr, {})
 {
 }
     
 Transform::Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
-    m_localPosition(localPosition),
-    m_localRotation(localRotation),
-    m_localScale(localScale),
-    m_matWorld(Matrix4x4::Identity()),
-    m_isDirty(false)
+    Transform(nullptr, localPosition, localRotation, localScale)
+{
+}
+
+Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition) noexcept :
+    Transform(parent, localPosition, {}, {1.0f, 1.0f, 1.0f})
+{
+}
+
+Transform::Transform(const Vector3& localPosition) noexcept :
+    Transform(nullptr, localPosition)
 {
 }
     
 Transform::Transform(const std::shared_ptr<Transform>& parent) noexcept :
-    m_parent(parent),
-    m_localScale({ 1.0f, 1.0f, 1.0f }),
-    m_matWorld(Matrix4x4::Identity()),
-    m_isDirty(true)
+    Transform(parent, {})
 {
-    assert(parent != nullptr);
 }
 
 Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
@@ -40,7 +40,6 @@ Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& lo
     m_matWorld(Matrix4x4::Identity()),
     m_isDirty(true)
 {
-    assert(parent != nullptr);
 }
     
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
@@ -103,6 +102,11 @@ const Vector3& Transform::GetLocalRotation() const noexcept
 const Vector3& Transform::GetLocalScale() const noexcept
 {
     return m_localScale;
+}
+
+Vector3 Transform::GetPosition() const noexcept
+{
+    return {m_matWorld.m30, m_matWorld.m31, m_matWorld.m32};
 }
     
 const Matrix4x4& Transform::GetWorldMatrix() const noexcept

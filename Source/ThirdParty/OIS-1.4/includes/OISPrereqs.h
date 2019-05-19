@@ -225,7 +225,7 @@ namespace OIS
 	class _OISExport Vector3 : public Component
 	{
 	public:
-		Vector3() {}
+		Vector3() : x(0.0f), y(0.0f), z(0.0f) {}
 		Vector3(float _x, float _y, float _z) : Component(OIS_Vector3), x(_x), y(_y), z(_z) {};
 
 		//! X component of vector

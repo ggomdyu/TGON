@@ -6,33 +6,55 @@ namespace tgon
 {
 
 RectTransform::RectTransform() :
-    Transform(),
-    m_localAnchor(0.0f, 0.0f),
-    m_localPivot(0.5f, 0.5f)
+    RectTransform(nullptr)
 {
 }
 
-RectTransform::RectTransform(const Vector2& localAnchor, const Vector2& localPivot) :
-    m_localAnchor(localAnchor),
+RectTransform::RectTransform(const std::shared_ptr<Transform>& parent) noexcept :
+    RectTransform(parent, {})
+{
+}
+
+RectTransform::RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
+    RectTransform(parent, localPosition, localRotation, localScale, {0.5f, 0.5f})
+{
+}
+
+RectTransform::RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale, const Vector2& localPivot) noexcept :
+    Transform(parent, localPosition, localRotation, localScale),
     m_localPivot(localPivot)
 {
 }
 
-void RectTransform::SetLocalAnchor(const Vector2& localAnchor) noexcept
+RectTransform::RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector2& localPivot) :
+    RectTransform(parent, localPosition, {}, {1.0f, 1.0f, 1.0f}, localPivot)
 {
-    m_localAnchor = localAnchor;
-    m_isDirty = true;
+}
+
+RectTransform::RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition) :
+    RectTransform(parent, localPosition, {}, {1.0f, 1.0f, 1.0f}, {0.5f, 0.5f})
+{
+}
+
+RectTransform::RectTransform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale, const Vector2& localPivot) :
+    RectTransform(nullptr, localPosition, localRotation, localScale, localPivot)
+{
+}
+
+RectTransform::RectTransform(const Vector3& localPosition, const Vector2& localPivot) :
+    RectTransform(nullptr, localPosition, localPivot)
+{
+}
+
+RectTransform::RectTransform(const Vector3& localPosition) :
+    RectTransform(nullptr, localPosition)
+{
 }
 
 void RectTransform::SetLocalPivot(const Vector2& localPivot) noexcept
 {
     m_localPivot = localPivot;
     m_isDirty = true;
-}
-
-const Vector2& RectTransform::GetLocalAnchor() const noexcept
-{
-    return m_localAnchor;
 }
 
 const Vector2& RectTransform::GetLocalPivot() const noexcept
@@ -77,5 +99,5 @@ void RectTransform::Update()
 {
     
 }
-    
+
 } /* namespace tgon */

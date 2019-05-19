@@ -15,19 +15,19 @@ ImageFormat ImageUtilty::ConvertStringToImageFormat(const char * imageFormatStr,
 
     switch (X65599Hash(lowercaseStr))
     {
-    case X65599Hash("bmp"):
+    case TGON_X65599("bmp"):
         return ImageFormat::Bmp;
-    case X65599Hash("jpg"):
+    case TGON_X65599("jpg"):
         return ImageFormat::Jpg;
-    case X65599Hash("jpeg"):
+    case TGON_X65599("jpeg"):
         return ImageFormat::Jpeg;
-    case X65599Hash("png"):
+    case TGON_X65599("png"):
         return ImageFormat::Png;
-    case X65599Hash("tiff"):
+    case TGON_X65599("tiff"):
         return ImageFormat::Tiff;
-    case X65599Hash("gif"):
+    case TGON_X65599("gif"):
         return ImageFormat::Gif;
-    case X65599Hash("webp"):
+    case TGON_X65599("webp"):
         return ImageFormat::WebP;
     default:
         return ImageFormat::Unknown;

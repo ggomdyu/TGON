@@ -12,6 +12,8 @@
 
 #include "Core/ExpressionTemplate.h"
 
+#include "Vector3.h"
+
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
 #else
@@ -39,12 +41,12 @@ public:
     template <typename _DerivedExpressionType>
     constexpr BasicVector4(const BaseExpression<_DerivedExpressionType>& expression);
     
-/**@section Public perator */
+/**@section Operator */
 public:
     constexpr const AddExpression<BasicVector4, BasicVector4> operator+(const BasicVector4& v) const noexcept;
     constexpr const SubtractExpression<BasicVector4, BasicVector4> operator-(const BasicVector4& v) const noexcept;
-    constexpr const BasicVector4 operator+(const _ValueType& scalar) const;
-    constexpr const BasicVector4 operator-(const _ValueType& scalar) const;
+    constexpr const BasicVector4 operator+(const _ValueType& scalar) const noexcept;
+    constexpr const BasicVector4 operator-(const _ValueType& scalar) const noexcept;
     constexpr const BasicVector4 operator*(const _ValueType& scalar) const noexcept;
     constexpr const BasicVector4 operator/(const _ValueType& scalar) const;
     constexpr const BasicVector4 operator-() const noexcept;
@@ -58,14 +60,15 @@ public:
     const _ValueType& operator[](std::size_t index) const noexcept;
     constexpr bool operator==(const BasicVector4& v) const noexcept;
     constexpr bool operator!=(const BasicVector4& v) const noexcept;
+    constexpr operator Vector3() const noexcept;
     
 /**@section Method */
 public:
     static constexpr _ValueType Dot(const BasicVector4& v1, const BasicVector4& v2) noexcept;
     _ValueType& At(std::size_t index);
     const _ValueType& At(std::size_t index) const;
-    static _ValueType Distance(const BasicVector4& v1, const BasicVector4& v2);
-    _ValueType Length() const;
+    static _ValueType Distance(const BasicVector4& v1, const BasicVector4& v2) noexcept;
+    _ValueType Length() const noexcept;
     _ValueType LengthSq() const noexcept;
     void Normalize();
     const BasicVector4 Normalized() const;
@@ -135,13 +138,13 @@ constexpr const SubtractExpression<BasicVector4<_ValueType>, BasicVector4<_Value
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator+(const _ValueType& scalar) const
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator+(const _ValueType& scalar) const noexcept
 {
     return BasicVector4(x + scalar, y + scalar, z + scalar, w + scalar);
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator-(const _ValueType& scalar) const
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator-(const _ValueType& scalar) const noexcept
 {
     return BasicVector4(x - scalar, y - scalar, z - scalar, w - scalar);
 }
@@ -249,6 +252,12 @@ constexpr bool BasicVector4<_ValueType>::operator!=(const BasicVector4& v) const
     return !(*this == v);
 }
 
+template<typename _ValueType>
+inline constexpr BasicVector4<_ValueType>::operator Vector3() const noexcept
+{
+    return Vector3(x, y, z);
+}
+
 template <typename _ValueType>
 constexpr _ValueType BasicVector4<_ValueType>::Dot(const BasicVector4& v1, const BasicVector4& v2) noexcept
 {
@@ -272,15 +281,15 @@ inline const _ValueType& BasicVector4<_ValueType>::At(std::size_t index) const
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector4<_ValueType>::Distance(const BasicVector4& v1, const BasicVector4& v2)
+inline _ValueType BasicVector4<_ValueType>::Distance(const BasicVector4& v1, const BasicVector4& v2) noexcept
 {
     return BasicVector4(v1 - v2).Length();
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector4<_ValueType>::Length() const
+inline _ValueType BasicVector4<_ValueType>::Length() const noexcept
 {
-    return std::sqrtf(this->LengthSq());
+    return std::sqrt(this->LengthSq());
 }
 
 template <typename _ValueType>

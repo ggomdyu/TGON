@@ -10,6 +10,7 @@
 #include <cmath>
 
 #include "Vector3.h"
+#include "Vector4.h"
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
@@ -35,37 +36,37 @@ public:
 
 /**@section Operator */
 public:
-    Matrix4x4 operator+(const Matrix4x4&) const;
-    Matrix4x4 operator-(const Matrix4x4&) const;
-    Matrix4x4 operator*(const Matrix4x4&) const;
-    Matrix4x4 operator*(float) const;
-    const Matrix4x4& operator+=(const Matrix4x4&);
-    const Matrix4x4& operator-=(const Matrix4x4&);
-    const Matrix4x4& operator*=(const Matrix4x4&);
-    constexpr bool operator==(const Matrix4x4&) const;
-    constexpr bool operator!=(const Matrix4x4&) const;
+    Matrix4x4 operator+(const Matrix4x4&) const noexcept;
+    Matrix4x4 operator-(const Matrix4x4&) const noexcept;
+    Matrix4x4 operator*(const Matrix4x4&) const noexcept;
+    constexpr Vector4 operator*(const Vector4&) const noexcept;
+    Matrix4x4& operator+=(const Matrix4x4&) noexcept;
+    Matrix4x4& operator-=(const Matrix4x4&) noexcept;
+    Matrix4x4& operator*=(const Matrix4x4&) noexcept;
+    constexpr bool operator==(const Matrix4x4&) const noexcept;
+    constexpr bool operator!=(const Matrix4x4&) const noexcept;
     float* operator[](std::size_t index);
     const float* operator[](std::size_t index) const;
 
 /**@section Method */
 public:
-    static constexpr const Matrix4x4 Identity();
-    static constexpr const Matrix4x4 Zero();
+    static constexpr const Matrix4x4 Identity() noexcept;
+    static constexpr const Matrix4x4 Zero() noexcept;
     static constexpr const Matrix4x4 Translate(float x, float y, float z) noexcept;
-    static const Matrix4x4 Rotate(float yaw, float pitch, float roll);
-    static const Matrix4x4 RotateX(float radian);
-    static const Matrix4x4 RotateY(float radian);
-    static const Matrix4x4 RotateZ(float radian);
+    static const Matrix4x4 Rotate(float yaw, float pitch, float roll) noexcept;
+    static const Matrix4x4 RotateX(float radian) noexcept;
+    static const Matrix4x4 RotateY(float radian) noexcept;
+    static const Matrix4x4 RotateZ(float radian) noexcept;
     static constexpr const Matrix4x4 Scale(float x, float y, float z) noexcept;
     static constexpr const Matrix4x4 Transposed(const Matrix4x4& matrix) noexcept;
     void Transpose() noexcept;
     static constexpr const Matrix4x4 Inverse();
-    static Matrix4x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
-    static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up);
-    static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ);
-    static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ);
-    static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ);
-    static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ);
+    static Matrix4x4 LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    static Matrix4x4 LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept;
+    static Matrix4x4 PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
+    static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
+    static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
 
     /**
      * @brief   Creates a string that represents this Matrix.
@@ -110,7 +111,7 @@ constexpr Matrix4x4::Matrix4x4(float m00, float m01, float m02, float m03,
 {
 }
 
-inline Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const
+inline Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const noexcept
 {
     return Matrix4x4(
         m00 - rhs.m00, m01 - rhs.m01, m02 - rhs.m02, m03 - rhs.m03,
@@ -120,7 +121,7 @@ inline Matrix4x4 Matrix4x4::operator-(const Matrix4x4& rhs) const
     );
 }
 
-inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
+inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
 {
     return Matrix4x4(
         (m00 * rhs.m00) + (m01 * rhs.m10) + (m02 * rhs.m20) + (m03 * rhs.m30),
@@ -145,7 +146,17 @@ inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
     );
 }
 
-inline const Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs)
+constexpr Vector4 Matrix4x4::operator*(const Vector4& rhs) const noexcept
+{
+    return Vector4(
+        m00 * rhs.x + m10 * rhs.y + m20 * rhs.z + m30 * rhs.w,
+        m01 * rhs.x + m11 * rhs.y + m21 * rhs.z + m31 * rhs.w,
+        m02 * rhs.x + m12 * rhs.y + m22 * rhs.z + m32 * rhs.w,
+        m03 * rhs.x + m13 * rhs.y + m23 * rhs.z + m33 * rhs.w
+    );
+}
+
+inline Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs) noexcept
 {
     m00 += rhs.m00; m01 += rhs.m01; m02 += rhs.m02; m03 += rhs.m03;
     m10 += rhs.m10; m11 += rhs.m11; m12 += rhs.m12; m13 += rhs.m13;
@@ -155,7 +166,7 @@ inline const Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs)
     return *this;
 }
 
-inline const Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs)
+inline Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs) noexcept
 {
     m00 -= rhs.m00; m01 -= rhs.m01; m02 -= rhs.m02; m03 -= rhs.m03;
     m10 -= rhs.m10; m11 -= rhs.m11; m12 -= rhs.m12; m13 -= rhs.m13;
@@ -165,7 +176,7 @@ inline const Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& rhs)
     return *this;
 }
 
-inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
+inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept
 {
     Vector3 l = lookAt - eyePt;
     l.Normalize();
@@ -184,7 +195,7 @@ inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt
     );
 }
 
-inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up)
+inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt, const Vector3& up) noexcept
 {
     Vector3 l = lookAt - eyePt;
     l.Normalize();
@@ -203,7 +214,7 @@ inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt
     );
 }
 
-inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ)
+inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
     float scaleY = 1.0f / std::tan(fovy * 0.5f);
     float scaleX = scaleY / aspect;
@@ -216,7 +227,7 @@ inline Matrix4x4 Matrix4x4::PerspectiveLH(float fovy, float aspect, float nearZ,
     );
 }
 
-inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ, float farZ)
+inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept
 {
     float scaleY = 1.0f / std::tan(fovy * 0.5f);
     float scaleX = scaleY / aspect;
@@ -229,7 +240,7 @@ inline Matrix4x4 Matrix4x4::PerspectiveRH(float fovy, float aspect, float nearZ,
     );
 }
     
-constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ)
+constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept
 {
     float width = right - left;
     float height = bottom - top;
@@ -243,7 +254,7 @@ constexpr Matrix4x4 Matrix4x4::OrthographicRH(float left, float right, float top
     );
 }
 
-constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ)
+constexpr Matrix4x4 Matrix4x4::Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept
 {
     float halfWidth = width * 0.5f;
     float halfHeight = height * 0.5f;
@@ -288,7 +299,7 @@ inline void Matrix4x4::Transpose() noexcept
 //{
 //}
 
-inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const
+inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const noexcept
 {
 //#if TGON_SUPPORT_SSE
 //    Matrix4x4 ret;
@@ -309,13 +320,13 @@ inline Matrix4x4 Matrix4x4::operator+(const Matrix4x4& rhs) const
 //#endif
 }
 
-inline const Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs)
+inline Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& rhs) noexcept
 {
     *this = (*this) * rhs;
     return *this;
 }
 
-constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const
+constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const noexcept
 {
     for (int i = 0; i < 16; ++i)
     {
@@ -327,7 +338,7 @@ constexpr bool Matrix4x4::operator==(const Matrix4x4& rhs) const
     return true;
 }
 
-constexpr bool Matrix4x4::operator!=(const Matrix4x4& rhs) const
+constexpr bool Matrix4x4::operator!=(const Matrix4x4& rhs) const noexcept
 {
     return !this->operator==(rhs);
 }
@@ -354,7 +365,7 @@ constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexce
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Identity()
+constexpr const Matrix4x4 Matrix4x4::Identity() noexcept
 {
     return Matrix4x4(
         1.f,    0.f,    0.f,    0.f,
@@ -364,7 +375,7 @@ constexpr const Matrix4x4 Matrix4x4::Identity()
     );
 }
 
-constexpr const Matrix4x4 Matrix4x4::Zero()
+constexpr const Matrix4x4 Matrix4x4::Zero() noexcept
 {
     return Matrix4x4(
         0.f,    0.f,    0.f,    0.f,
@@ -374,16 +385,16 @@ constexpr const Matrix4x4 Matrix4x4::Zero()
     );
 }
 
-inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll)
+inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll) noexcept
 {
-    float cosA = cosf(yaw);
-    float sinA = sinf(yaw);
+    float cosA = std::cos(yaw);
+    float sinA = std::sin(yaw);
     
-    float cosB = cosf(pitch);
-    float sinB = sinf(pitch);
+    float cosB = std::cos(pitch);
+    float sinB = std::sin(pitch);
     
-    float cosC = cosf(roll);
-    float sinC = sinf(roll);
+    float cosC = std::cos(roll);
+    float sinC = std::sin(roll);
     
     return Matrix4x4(
         cosB * cosC,                            cosB * sinC,                            -sinB,          0.0f,
@@ -393,10 +404,10 @@ inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll)
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateX(float radian)
+inline const Matrix4x4 Matrix4x4::RotateX(float radian) noexcept
 {
-    float cosA = cosf(radian);
-    float sinA = sinf(radian);
+    float cosA = std::cos(radian);
+    float sinA = std::sin(radian);
 
     return Matrix4x4(
         1.0f,   0.0f,   0.0f,   0.0f,
@@ -406,10 +417,10 @@ inline const Matrix4x4 Matrix4x4::RotateX(float radian)
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateY(float radian)
+inline const Matrix4x4 Matrix4x4::RotateY(float radian) noexcept
 {
-    const float cosA = cosf(radian);
-    const float sinA = sinf(radian);
+    const float cosA = std::cos(radian);
+    const float sinA = std::sin(radian);
 
     return Matrix4x4(
         cosA,   0.0f,   -sinA,  0.0f,
@@ -419,18 +430,17 @@ inline const Matrix4x4 Matrix4x4::RotateY(float radian)
     );
 }
 
-inline const Matrix4x4 Matrix4x4::RotateZ(float radian)
+inline const Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
 {
-    const float cosA = cosf(radian);
-    const float sinA = sinf(radian);
+    const float cosA = std::cos(radian);
+    const float sinA = std::sin(radian);
 
-    return
-    {
+    return Matrix4x4(
         cosA,   sinA,   0.0f,   0.0f,
         -sinA,  cosA,   0.0f,   0.0f,
         0.0f,   0.0f,   1.0f,   0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
-    };
+    );
 }
 
 constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept

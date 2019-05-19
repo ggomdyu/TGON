@@ -10,7 +10,7 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/KeyboardType.h"
 #include "Engine/GraphicsModule.h"
-#include "Game/Component/SpriteRendererComponent.h"
+#include "Game/Component/CanvasSpriteRendererComponent.h"
 #include "Game/Component/CameraComponent.h"
 #include "Engine/GameSceneModule.h"
 
@@ -93,7 +93,7 @@ private:
     bool needToIncreaseOpacity = false;
     float m_opacityChangeSpeed = 0.0f;
     float m_speed = 0.0f;
-    std::shared_ptr<SpriteRendererComponent> m_fireflySpriteComponent;
+    std::shared_ptr<CanvasSpriteRendererComponent> m_fireflySpriteComponent;
     std::shared_ptr<TimeModule> m_timeModule;
 };
 

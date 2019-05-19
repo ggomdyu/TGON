@@ -40,7 +40,7 @@ void OpenGLGraphics::SetDefaultGLRenderState()
 
 void OpenGLGraphics::SetScissorRect(const FRect& scissorRect)
 {
-    TGON_GL_ERROR_CHECK(glScissor(scissorRect.x, scissorRect.y, scissorRect.width, scissorRect.height));
+    TGON_GL_ERROR_CHECK(glScissor(static_cast<GLint>(scissorRect.x), static_cast<GLint>(scissorRect.y), static_cast<GLint>(scissorRect.width), static_cast<GLint>(scissorRect.height)));
 }
 
 void OpenGLGraphics::SetClearColor(const Color4f& color)

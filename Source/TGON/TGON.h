@@ -67,6 +67,6 @@
 #include "Game/Component/Component.h"
 #include "Game/Component/CameraComponent.h"
 #include "Game/Component/MeshRendererComponent.h"
-#include "Game/Component/SpriteRendererComponent.h"
+#include "Game/Component/CanvasSpriteRendererComponent.h"
 #include "Engine/GameSceneModule.h"
 #include "Game/GameScene.h"

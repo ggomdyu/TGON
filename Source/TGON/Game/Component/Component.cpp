@@ -8,7 +8,8 @@ namespace tgon
 {
 
 Component::Component(GameObject* owner) noexcept :
-    m_owner(owner)
+    m_owner(owner),
+    m_isActive(true)
 {
 }
     

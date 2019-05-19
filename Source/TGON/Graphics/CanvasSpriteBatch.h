@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "Math/Rect.h"
+#include "Math/Matrix4x4.h"
 
 #include "VertexBuffer.h"
 
@@ -31,7 +32,7 @@ public:
 /**@section Method */
 public:
     bool CanBatch(const CanvasSprite& rhs) const noexcept;
-    bool Merge(const CanvasSprite& rhs, std::vector<float>* vertices);
+    void Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
     
 /**@section Variable */
