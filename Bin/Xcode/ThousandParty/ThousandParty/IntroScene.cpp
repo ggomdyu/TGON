@@ -1,19 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/InputModule.h"
-#include "Engine/TimeModule.h"
-#include "Platform/Application.h"
-#include "IO/Path.h"
-#include "Time/Time.h"
-#include "Random/Random.h"
-#include "Math/Mathematics.h"
-#include "Hardware/Keyboard.h"
-#include "Hardware/KeyboardType.h"
-#include "Engine/GraphicsModule.h"
-#include "Game/Component/CanvasSpriteRendererComponent.h"
-#include "Game/Component/CameraComponent.h"
-#include "Engine/GameSceneModule.h"
-
+#include "TGON.h"
 #include "IntroScene.h"
 
 using namespace tgon;

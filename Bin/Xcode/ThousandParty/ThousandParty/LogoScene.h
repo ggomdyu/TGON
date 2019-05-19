@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Game/GameScene.h"
+#include "Game/Scene.h"
 
 namespace tgon
 {
@@ -21,7 +21,7 @@ class TimeModule;
 } /* namespace tgon */
 
 class TGON_API LogoScene :
-    public tgon::GameScene
+    public tgon::Scene
 {
 public:
     TGON_DECLARE_RTTI(LogoScene);
@@ -42,5 +42,8 @@ private:
     std::shared_ptr<tgon::CameraComponent> m_cameraComponent;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent1;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent2;
+    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent3;
+    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent4;
+    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent5;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeOutSpriteComponent;
 };

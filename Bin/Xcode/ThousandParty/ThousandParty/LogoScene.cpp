@@ -6,6 +6,9 @@
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
+std::shared_ptr<tgon::GameObject> object3;
+std::shared_ptr<tgon::GameObject> object4;
+std::shared_ptr<tgon::GameObject> object5;
 
 LogoScene::LogoScene()
 {
@@ -32,20 +35,48 @@ LogoScene::LogoScene()
     {
         auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object1->GetTransform()->SetLocalScale({ 2.0f, 1.0f, 1.0f });
+        object1->GetTransform()->SetLocalScale({ 0.5f, 1.0f, 1.0f });
         object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
         m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
         
         auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object2 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object2->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+        object2->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
         object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
         m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+        object3 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object3->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object3->GetTransform()->SetLocalPosition({ 400.0f, -200.0f, 0.0f });
+        m_introSpriteComponent3 = object3->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+        object4 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object4->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object4->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+        object5 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object5->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object5->GetTransform()->SetLocalPosition({ 100.0f, 100.0f, 0.0f });
+        m_introSpriteComponent5 = object5->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent5->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
         
         this->AddObject(object1);
         this->AddObject(object2);
+        this->AddObject(object3);
+        this->AddObject(object4);
+        this->AddObject(object5);
     }
 
     //

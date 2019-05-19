@@ -13,23 +13,14 @@ CanvasSpriteRendererComponent::CanvasSpriteRendererComponent(const std::shared_p
     m_blendColor(blendColor)
 {
 }
-
-CanvasSpriteRendererComponent::~CanvasSpriteRendererComponent()
-{
-    if (m_sprite != nullptr)
-    {
-        m_graphicsModule->GetCanvasRenderer().RemoveSprite(m_sprite);
-    }
-}
     
 void CanvasSpriteRendererComponent::Update()
 {
+    m_graphicsModule->GetCanvasRenderer().AddSpritePrimitive(m_sprite, GetOwner()->GetTransform()->GetWorldMatrix());
 }
 
 void CanvasSpriteRendererComponent::SetSprite(const std::shared_ptr<CanvasSprite>& sprite)
 {
-    m_graphicsModule->GetCanvasRenderer().AddSprite(sprite, GetOwner()->GetTransform()->GetWorldMatrix());
-
     m_sprite = sprite;
 }
     

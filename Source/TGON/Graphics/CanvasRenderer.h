@@ -31,9 +31,8 @@ public:
     void Update();
     void Draw(Graphics& graphics);
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddSprite(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld);
+    void AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld);
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
-    bool RemoveSprite(const std::shared_ptr<CanvasSprite>& sprite);
     
 private:
     void PrepareDefaultMaterials();
@@ -41,7 +40,6 @@ private:
     
 /**@section Variable */
 private:
-    std::vector<std::pair<std::shared_ptr<CanvasSprite>, const Matrix4x4*>> m_spritePrimitives;
     std::shared_ptr<Material> m_uiMaterial;
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;

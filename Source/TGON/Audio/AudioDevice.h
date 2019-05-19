@@ -34,25 +34,19 @@ public:
     AudioDevice& operator=(AudioDevice&& rhs) noexcept;
 
 public:
-    /**@brief   Makes this device's context the current context. */
+    /**@brief   Binds this to the current device context. */
     void MakeCurrent();
-
-    /**@brief   Gets the device. */
     ALCdevice* GetDevice() noexcept;
-
-    /**@brief   Gets the device. */
-    const ALCdevice* GetDevice() const noexcept;
-
-    /**@brief   Gets the context. */
     ALCcontext* GetContext() noexcept;
-
-    /**@brief   Gets the context. */
+    const ALCdevice* GetDevice() const noexcept;
     const ALCcontext* GetContext() const noexcept;
+
+private:
+    void Destroy();
 
 /**@brief   Private variable */
 private:
     ALCdevice* m_device;
-
     ALCcontext* m_context;
 };
 

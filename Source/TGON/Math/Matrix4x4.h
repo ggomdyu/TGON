@@ -333,8 +333,7 @@ constexpr bool Matrix4x4::operator!=(const Matrix4x4& rhs) const noexcept
 
 inline float* Matrix4x4::operator[](std::size_t index)
 {
-    assert((index < 4 || index > -1) && "Matrix4x4 index out of range");
-    return &m00 + (index * 4);
+    return const_cast<decltype(this)>(this)->operator[](index);
 }
 
 inline const float* Matrix4x4::operator[](std::size_t index) const

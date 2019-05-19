@@ -57,7 +57,7 @@ public:
 
 private:
     ALuint CreateALSourceHandle() const;
-    void Release();
+    void Destroy();
 
 /**@section Variable */
 private:

@@ -5,14 +5,16 @@
  */
 
 #pragma once
-#include <vector>
 #include <cstdint>
+#include <memory>
+#include <boost/noncopyable.hpp>
 
 namespace tgon
 {
 
-template <typename _DerivedType, typename _AllocatorType = std::allocator<uint8_t>>
-class BaseAudioImporter
+template <typename _DerivedType>
+class BaseAudioImporter :
+    private boost::noncopyable
 {
 /**@section Constructor */
 public:
@@ -24,79 +26,88 @@ public:
     static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
     bool IsValid() const noexcept;
-    std::vector<uint8_t, _AllocatorType>& GetAudioData() noexcept;
-    const std::vector<uint8_t, _AllocatorType>& GetAudioData() const noexcept;
+    std::unique_ptr<uint8_t[]>& GetAudioData() noexcept;
+    const std::unique_ptr<uint8_t[]>& GetAudioData() const noexcept;
+    size_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
 
 /**@section Variable */
 protected:
-    std::vector<uint8_t, _AllocatorType> m_audioData;
+    std::unique_ptr<uint8_t[]> m_audioData;
+    size_t m_audioDataBytes;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;
 };
 
-template <typename _DerivedType, typename _AllocatorType>
-inline BaseAudioImporter<_DerivedType, _AllocatorType>::BaseAudioImporter() noexcept :
+template <typename _DerivedType>
+inline BaseAudioImporter<_DerivedType>::BaseAudioImporter() noexcept :
+    m_audioDataBytes(0),
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0)
 {
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline BaseAudioImporter<_DerivedType, _AllocatorType>::BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
+template <typename _DerivedType>
+inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
     BaseAudioImporter()
 {
     this->Import(srcData, srcDataBytes);
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+template <typename _DerivedType>
+inline bool BaseAudioImporter<_DerivedType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::IsValid() const noexcept
+template <typename _DerivedType>
+inline bool BaseAudioImporter<_DerivedType>::IsValid() const noexcept
 {
-    return m_audioData.size() > 0;
+    return m_audioData != nullptr;
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline bool BaseAudioImporter<_DerivedType, _AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+template <typename _DerivedType>
+inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline std::vector<uint8_t, _AllocatorType>& BaseAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() noexcept
+template <typename _DerivedType>
+inline std::unique_ptr<uint8_t[]>& BaseAudioImporter<_DerivedType>::GetAudioData() noexcept
 {
     return m_audioData;
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline const std::vector<uint8_t, _AllocatorType>& BaseAudioImporter<_DerivedType, _AllocatorType>::GetAudioData() const noexcept
+template <typename _DerivedType>
+inline const std::unique_ptr<uint8_t[]>& BaseAudioImporter<_DerivedType>::GetAudioData() const noexcept
 {
     return m_audioData;
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetBitsPerSample() const noexcept
+template<typename _DerivedType>
+inline size_t BaseAudioImporter<_DerivedType>::GetAudioDataBytes() const noexcept
+{
+    return m_audioDataBytes;
+}
+
+template <typename _DerivedType>
+inline int32_t BaseAudioImporter<_DerivedType>::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetChannels() const noexcept
+template <typename _DerivedType>
+inline int32_t BaseAudioImporter<_DerivedType>::GetChannels() const noexcept
 {
     return m_channels;
 }
 
-template <typename _DerivedType, typename _AllocatorType>
-inline int32_t BaseAudioImporter<_DerivedType, _AllocatorType>::GetSamplingRate() const noexcept
+template <typename _DerivedType>
+inline int32_t BaseAudioImporter<_DerivedType>::GetSamplingRate() const noexcept
 {
     return m_samplingRate;
 }

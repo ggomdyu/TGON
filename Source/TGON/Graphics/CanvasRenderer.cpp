@@ -27,24 +27,6 @@ CanvasRenderer::CanvasRenderer() :
 
 void CanvasRenderer::Update()
 {
-    m_spriteBatches.clear();
-    m_spriteVertices.clear();
-    
-    for (const auto& spritePrimitive : m_spritePrimitives)
-    {
-        const auto& sprite = spritePrimitive.first;
-        if (m_spriteBatches.empty())
-        {
-            m_spriteBatches.push_back(CanvasSpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), 0));
-        }
-        else if (m_spriteBatches.back().CanBatch(*sprite) == false)
-        {
-            m_spriteBatches.push_back(CanvasSpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
-        }
-        
-        m_spriteBatches.back().Merge(*sprite, *spritePrimitive.second, &m_spriteVertices);
-    }
-    
     m_spriteVertexBuffer.Use();
     m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
@@ -61,23 +43,18 @@ void CanvasRenderer::Draw(Graphics& graphics)
     this->FlushSpriteBatches(graphics);
 }
 
-void CanvasRenderer::AddSprite(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld)
+void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld)
 {
-    m_spritePrimitives.push_back({sprite, &matWorld});
-}
-
-bool CanvasRenderer::RemoveSprite(const std::shared_ptr<CanvasSprite>& sprite)
-{
-    auto iter = std::find_if(m_spritePrimitives.begin(), m_spritePrimitives.end(), [&](const auto& item) {
-        return item.first == sprite;
-    });
-    if (iter == m_spritePrimitives.end())
+    if (m_spriteBatches.empty())
     {
-        return false;
+        m_spriteBatches.push_back(CanvasSpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), 0));
     }
-    
-    m_spritePrimitives.erase(iter);
-    return true;
+    else if (m_spriteBatches.back().CanBatch(*sprite) == false)
+    {
+        m_spriteBatches.push_back(CanvasSpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+    }
+
+    m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
 }
 
 void CanvasRenderer::PrepareDefaultMaterials()
@@ -98,6 +75,9 @@ void CanvasRenderer::FlushSpriteBatches(Graphics& graphics)
             spriteBatch.FlushBatch(graphics);
         }
     }
+
+    m_spriteBatches.clear();
+    m_spriteVertices.clear();
 }
 
 void CanvasRenderer::AddCamera(const std::shared_ptr<Camera>& camera)

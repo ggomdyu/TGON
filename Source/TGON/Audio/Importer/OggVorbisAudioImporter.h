@@ -5,12 +5,20 @@
  */
 
 #pragma once
-#include <vorbis/vorbisfile.h>
+#define TGON_USE_STB_OGG_VORBIS_IMPORTER 1
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+#   include <vorbis/vorbisfile.h>
+#endif
 #include <ogg/ogg.h>
 
 #include "Diagnostics/Log.h"
 
 #include "BaseAudioImporter.h"
+
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER
+#   define STB_VORBIS_HEADER_ONLY
+#   include <stb/stb_vorbis.c>
+#endif
 
 namespace tgon
 {
@@ -33,25 +41,6 @@ public:
     const uint8_t* srcData;
     const uint8_t* srcDataIter;
     size_t srcDataBytes;
-};
-
-template <typename _AllocatorType>
-class BasicOggVorbisAudioImporter :
-    public BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>
-{
-/**@section Constructor */
-public:
-    using BaseAudioImporter<BasicOggVorbisAudioImporter<_AllocatorType>, _AllocatorType>::BaseAudioImporter;
-
-/**@section Method */
-public:
-    /**@brief   Verifies the importing file is exactly WAV. */
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
-
-private:
-    ov_callbacks MakeCustomIOCallback() const noexcept;
-    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
 };
 
 inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
@@ -124,14 +113,40 @@ inline long OggVorbisFileStream::Tell(void* stream)
     return castedStream->srcDataIter - castedStream->srcData;
 }
 
-template <typename _AllocatorType>
-inline bool BasicOggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+class OggVorbisAudioImporter :
+    public BaseAudioImporter<OggVorbisAudioImporter>
+{
+/**@section Constructor */
+public:
+    using BaseAudioImporter<OggVorbisAudioImporter>::BaseAudioImporter;
+
+/**@section Method */
+public:
+    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+
+private:
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+    ov_callbacks MakeCustomIOCallback() const noexcept;
+    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
+#endif
+};
+
+inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
         return false;
     }
 
+    m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
+
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER
+    short* audioData = nullptr;
+    auto audioDataBytes = stb_vorbis_decode_memory(srcData, srcDataBytes, &m_channels, &m_samplingRate, &audioData);
+    m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
+    m_audioDataBytes = audioDataBytes * 4;
+#else
     OggVorbisFileStream fileStream(srcData, srcDataBytes);
     ov_callbacks ovCallbacks = this->MakeCustomIOCallback();
 
@@ -139,30 +154,33 @@ inline bool BasicOggVorbisAudioImporter<_AllocatorType>::Import(const uint8_t* s
     auto errorCode = ov_open_callbacks(reinterpret_cast<void*>(&fileStream), &oggVorbisFile, nullptr, -1, ovCallbacks);
     if (errorCode != 0)
     {
-        Log(LogLevel::Warning, "Failed to invoke ov_open_callbacks. (Code: %d)", errorCode);
+        Log(LogLevel::Debug, "Failed to invoke ov_open_callbacks. (Code: %d)", errorCode);
         return false;
     }
 
     const vorbis_info* vorbisInfo = ov_info(&oggVorbisFile, -1);
     if (vorbisInfo == nullptr)
     {
-        Log(LogLevel::Warning, "Failed to invoke ov_info.");
+        Log(LogLevel::Debug, "Failed to invoke ov_info.");
         return false;
     }
 
-    this->m_samplingRate = static_cast<int32_t>(vorbisInfo->rate);
-    this->m_channels = vorbisInfo->channels;
-    this->m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
-    
-    ogg_int64_t bufferSize = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
-    this->m_audioData.resize(static_cast<typename decltype(this->m_audioData)::size_type>(bufferSize));
-    DecodeOggVorbis(&oggVorbisFile, &this->m_audioData[0], bufferSize, vorbisInfo->channels);
-    
+    m_samplingRate = static_cast<int32_t>(vorbisInfo->rate);
+    m_channels = vorbisInfo->channels;
+
+    auto audioDataBytes = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
+    m_audioData.reset(new uint8_t[(int)audioDataBytes]);
+    m_audioDataBytes = static_cast<size_t>(audioDataBytes);
+
+    DecodeOggVorbis(&oggVorbisFile, &m_audioData[0], audioDataBytes, vorbisInfo->channels);
+
+    ov_clear(&oggVorbisFile);
+#endif
+
     return true;
 }
 
-template <typename _AllocatorType>
-inline bool BasicOggVorbisAudioImporter<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 16)
     {
@@ -172,8 +190,8 @@ inline bool BasicOggVorbisAudioImporter<_AllocatorType>::VerifyFormat(const uint
     return true;
 }
 
-template <typename _AllocatorType>
-inline ov_callbacks BasicOggVorbisAudioImporter<_AllocatorType>::MakeCustomIOCallback() const noexcept
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+inline ov_callbacks OggVorbisAudioImporter::MakeCustomIOCallback() const noexcept
 {
     ov_callbacks ovCallbacks;
 
@@ -185,8 +203,7 @@ inline ov_callbacks BasicOggVorbisAudioImporter<_AllocatorType>::MakeCustomIOCal
     return ovCallbacks;
 }
 
-template <typename _AllocatorType>
-inline unsigned long BasicOggVorbisAudioImporter<_AllocatorType>::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels)
+inline unsigned long OggVorbisAudioImporter::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels)
 {
     int currentSection;
 
@@ -225,7 +242,6 @@ inline unsigned long BasicOggVorbisAudioImporter<_AllocatorType>::DecodeOggVorbi
 
     return bytesDone;
 }
-    
-using OggVorbisAudioImporter = BasicOggVorbisAudioImporter<std::allocator<uint8_t>>;
+#endif
 
 } /* namespace tgon */

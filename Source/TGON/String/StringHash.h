@@ -21,6 +21,20 @@ namespace detail
 template <typename _DeriviedType>
 class BaseBasicStringHash
 {
+/**@section Constructor */
+public:
+    /**@brief   Initializes with null character pointer. */
+    constexpr BaseBasicStringHash() noexcept :
+        m_hashCode(0)
+    {
+    }
+
+    template <typename _ValueType>
+    constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
+        m_hashCode(X65599Hash(str))
+    {
+    }
+
 /**@section Operator */
 public:
     constexpr bool operator==(const _DeriviedType& rhs) const noexcept
@@ -32,6 +46,23 @@ public:
     {
         return !this->operator==(rhs);
     }
+
+/**@section Method */
+public:
+    /**@brief   Gets the hash code of the string. */
+    constexpr const size_t GetHashCode() const noexcept
+    {
+        return m_hashCode;
+    }
+
+    void Clear()
+    {
+
+    }
+
+/**@section Variable */
+private:
+    size_t m_hashCode;
 };
 
 } /* namespace detail */
@@ -53,24 +84,23 @@ public:
     {
     }
     
-    /**@brief   Initializes with character pointer. */
+    /**@brief   Initializes with character array. */
     template <std::size_t _CharArraySize>
     constexpr BasicStringHash(const ValueType(&str)[_CharArraySize]) noexcept :
         BasicStringHash(str, _CharArraySize - 1)
     {
     }
 
-    /**@brief   Initializes with character pointer and its length. */
-    constexpr BasicStringHash(const ValueType* str, size_t strLen) noexcept :
-        m_str(str, strLen),
-        m_hashCode(X65599Hash(str))
+    /**@brief   Initializes with string_view. */
+    constexpr BasicStringHash(const std::basic_string_view<ValueType>& str) noexcept :
+        BasicStringHash(str.data()),
+        m_str(str, str.length())
     {
     }
     
     /**@brief   Initializes with string. */
     constexpr BasicStringHash(const _StringType& str) noexcept :
-        m_str(str),
-        m_hashCode(X65599Hash(str.c_str()))
+        m_str(str)
     {
     }
     
@@ -87,17 +117,15 @@ public:
     {
         return m_str.Length();
     }
-    
-    /**@brief   Gets the hash code of the string. */
-    constexpr const size_t GetHashCode() const noexcept
+
+    void Clear()
     {
-        return m_hashCode;
+        m_str.Clear();
     }
-    
+
 /**@section Variable */
 private:
     _StringType m_str;
-    size_t m_hashCode;
 };
 
 template <typename _StringType>
@@ -124,11 +152,10 @@ public:
     {
     }
     
-    /**@brief   Initializes with character pointer and its length. */
-    constexpr BasicStringHash(const ValueType* str, size_t strLen) noexcept :
+    /**@brief   Initializes with string_view. */
+    constexpr BasicStringHash(const std::basic_string_view<ValueType>& str) noexcept :
         m_str(str),
-        m_strLen(strLen),
-        m_hashCode(X65599Hash(str))
+        m_strLen(str.length())
     {
     }
     
@@ -145,13 +172,11 @@ public:
     {
         return m_strLen;
     }
-    
-    /**@brief   Gets the hash code of the string. */
-    constexpr const size_t GetHashCode() const noexcept
+
+    void Clear()
     {
-        return m_hashCode;
     }
-    
+
 /**@section Variable */
 private:
     _StringType m_str;
@@ -171,29 +196,18 @@ public:
 /**@section Constructor */
 public:
     /**@brief   Initializes with null character pointer. */
-    constexpr BasicStringHash() noexcept :
-        m_hashCode(0)
-    {
-    }
+    constexpr BasicStringHash() noexcept = default;
     
-    /**@brief   Initializes with character pointer. */
+    /**@brief   Initializes with character array. */
     template <std::size_t _CharArraySize>
     constexpr BasicStringHash(const ValueType(&str)[_CharArraySize]) noexcept :
-        BasicStringHash(str, _CharArraySize - 1)
+        BasicStringHash({str, _CharArraySize - 1})
     {
     }
 
-    /**@brief   Initializes with character pointer and its length. */
-    constexpr BasicStringHash(const ValueType* str, size_t strLen) noexcept :
-        m_str(str, strLen),
-        m_hashCode(X65599Hash(str))
-    {
-    }
-    
     /**@brief   Initializes with basic_string. */
     constexpr BasicStringHash(const _StringType& str) noexcept :
-        m_str(str),
-        m_hashCode(X65599Hash(str.c_str()))
+        m_str(str)
     {
     }
     
@@ -211,16 +225,13 @@ public:
         return m_str.length();
     }
 
-    /**@brief   Gets the hash code of the string. */
-    constexpr const size_t GetHashCode() const noexcept
+    void Clear()
     {
-        return m_hashCode;
     }
-    
+
 /**@section Variable */
 private:
     _StringType m_str;
-    size_t m_hashCode;
 };
 
 using StringHash = BasicStringHash<std::string>;

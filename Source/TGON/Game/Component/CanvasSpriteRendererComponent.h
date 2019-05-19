@@ -26,25 +26,13 @@ public:
     
     CanvasSpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
-/**@section Destructor */
-public:
-    virtual ~CanvasSpriteRendererComponent() override;
-
 /**@section Method */
 public:
-    /**@brief   Updates this component. */
     virtual void Update() override;
-
-    /**@brief   Sets a sprite that rendered by this component. */
     void SetSprite(const std::shared_ptr<CanvasSprite>& sprite);
-    
     std::shared_ptr<CanvasSprite> GetSprite() noexcept;
-    
     std::shared_ptr<const CanvasSprite> GetSprite() const noexcept;
-
-    /**@brief   Sets a color that blended with the sprite. */
     void SetBlendColor(const Color4f& blendColor);
-
     const Color4f& GetBlendColor() const noexcept;
 
 /**@section Variable */

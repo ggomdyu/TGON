@@ -32,12 +32,12 @@ AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
 
 AudioPlayer::~AudioPlayer()
 {
-    this->Release();
+    this->Destroy();
 }
 
 AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
 {
-    this->Release();
+    this->Destroy();
 
     m_alSource = rhs.m_alSource;
     m_audioBuffer = std::move(rhs.m_audioBuffer);
@@ -148,7 +148,7 @@ float AudioPlayer::GetProgressInSeconds() const
 
 float AudioPlayer::GetTotalProgressInSeconds() const
 {
-    return static_cast<float>(m_audioBuffer->GetSoundData().size()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
+    return static_cast<float>(m_audioBuffer->GetAudioDataBytes()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
 }
 
 void AudioPlayer::SetPitch(float pitch)
@@ -185,7 +185,7 @@ ALuint AudioPlayer::CreateALSourceHandle() const
     return alSource;
 }
 
-void AudioPlayer::Release()
+void AudioPlayer::Destroy()
 {
     if (m_alSource != 0)
     {

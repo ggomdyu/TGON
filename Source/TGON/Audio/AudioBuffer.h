@@ -81,19 +81,11 @@ public:
     bool Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes);
 
     bool IsValid() const noexcept;
-
-    /**@brief   Gets the raw data of the sound. */
-    const std::vector<uint8_t>& GetSoundData() const noexcept;
-
-    /**@brief   Gets bits per sample. */
+    const uint8_t* GetAudioData() const noexcept;
+    size_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
-
-    /**@brief   Gets the count of sound channel. */
     int32_t GetChannels() const noexcept;
-
-    /**@brief   Gets the sampling rate of the sound. */
     int32_t GetSamplingRate() const noexcept;
-
     ALenum GetALFormat() const noexcept;
 
     /**@brief   Gets the id of ALBuffer that stores sound data. */
@@ -104,13 +96,13 @@ public:
 
 private:
     bool ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat);
-
-    bool InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate);
+    bool InitializeALBuffer(const uint8_t* audioData, ALsizei m_audioDataBytes, ALenum alFormat, int32_t samplingRate);
 
 /**@section Variable */
 private:
     std::string m_filePath;
-    std::vector<uint8_t> m_audioData;
+    std::unique_ptr<uint8_t[]> m_audioData;
+    size_t m_audioDataBytes;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;

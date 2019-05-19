@@ -1,12 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include <boost/assert.hpp>
-#include <iostream>
-
 #include "TGON.h"
 #include "ThousandParty.h"
 #include "LogoScene.h"
-#include "Math/Vector4.h"
 
 TGON_DECLARE_ENGINE(ThousandParty);
 
@@ -38,6 +34,17 @@ void ThousandParty::InitializeModule()
 {
     using namespace tgon;
 
+    static AudioDevice audioDevice;
+    audioDevice.MakeCurrent();
+
+    static auto audioBuffer = std::shared_ptr<AudioBuffer>(new AudioBuffer("E:/Users/ggomdyu/Desktop/Temporary/Sound/Sulk.ogg"));
+    static AudioPlayer audioPlayer(audioBuffer);
+    audioPlayer.SetListenerPosition({ 0, 0, 0 });
+    audioPlayer.SetListenerVelocity({ 0, 0, 0 });
+    audioPlayer.SetPosition({ 0, 0, 0 });
+    audioPlayer.SetPitch(2.0f);
+    audioPlayer.Play();
+
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {
@@ -57,5 +64,5 @@ void ThousandParty::InitializeModule()
     };
     this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
     this->RegisterModule<TimeModule>();
-    this->RegisterModule<GameSceneModule>()->ChangeScene<LogoScene>();
+    this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
 }

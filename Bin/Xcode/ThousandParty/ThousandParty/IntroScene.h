@@ -7,7 +7,7 @@
 #pragma once
 #include <memory>
 
-#include "Game/GameScene.h"
+#include "Game/Scene.h"
 
 namespace tgon
 {
@@ -22,7 +22,7 @@ class TimeModule;
 } /* namespace tgon */
 
 class TGON_API IntroScene :
-    public tgon::GameScene
+    public tgon::Scene
 {
 public:
     TGON_DECLARE_RTTI(IntroScene);

@@ -32,29 +32,12 @@ AudioDevice::AudioDevice(AudioDevice&& rhs) noexcept :
 
 AudioDevice::~AudioDevice()
 {
-    if (m_context != nullptr)
-    {
-        // If the main context indicates m_context, then set it to nullptr.
-        if (alcGetCurrentContext() == m_context)
-        {
-            alcMakeContextCurrent(nullptr);
-        }
-
-        alcDestroyContext(m_context);
-    }
-
-    if (m_device != nullptr)
-    {
-        alcCloseDevice(m_device);
-    }
+    this->Destroy();
 }
 
 AudioDevice& AudioDevice::operator=(AudioDevice&& rhs) noexcept
 {
-    if (this == &rhs)
-    {
-        return *this;
-    }
+    this->Destroy();
 
     m_context = rhs.m_context;
     m_device = rhs.m_device;
@@ -88,6 +71,25 @@ ALCcontext* AudioDevice::GetContext() noexcept
 const ALCcontext* AudioDevice::GetContext() const noexcept
 {
     return m_context;
+}
+
+void AudioDevice::Destroy()
+{
+    if (m_context != nullptr)
+    {
+        // If the current context indicates m_context, then set it to nullptr.
+        if (alcGetCurrentContext() == m_context)
+        {
+            alcMakeContextCurrent(nullptr);
+        }
+
+        alcDestroyContext(m_context);
+    }
+
+    if (m_device != nullptr)
+    {
+        alcCloseDevice(m_device);
+    }
 }
 
 } /* namespace tgon */

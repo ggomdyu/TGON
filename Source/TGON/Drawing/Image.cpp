@@ -61,10 +61,7 @@ Image::Image(Image&& rhs) :
 
 Image& Image::operator=(Image&& rhs)
 {
-    if (this == &rhs)
-    {
-        return *this;
-    }
+    this->Destroy();
     
     m_imageData = std::move(rhs.m_imageData);
     m_width = rhs.m_width;
@@ -153,6 +150,15 @@ bool Image::SaveAsBmp(const char* saveFilePath)
 bool Image::SaveAsTga(const char* saveFilePath)
 {
     return stbi_write_tga(saveFilePath, m_width, m_height, 4, m_imageData.get()) != 0;
+}
+
+void Image::Destroy()
+{
+    m_imageData.release();
+    m_width = 0;
+    m_height = 0;
+    m_channels = 0;
+    m_filePath.Clear();
 }
 
 } /* namespace tgon */

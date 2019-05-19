@@ -127,6 +127,9 @@ public:
      */
     bool SaveAsTga(const char* saveFilePath);
 
+private:
+    void Destroy();
+
 /**@section Variable */
 private:
     std::unique_ptr<uint8_t> m_imageData;

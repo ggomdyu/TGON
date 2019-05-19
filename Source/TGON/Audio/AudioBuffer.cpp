@@ -17,6 +17,7 @@ namespace tgon
 {
 
 AudioBuffer::AudioBuffer() :
+    m_audioDataBytes(0),
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0),
@@ -67,7 +68,7 @@ bool AudioBuffer::Initialize(const std::string& filePath)
     };
     fclose(file);
 
-    std::size_t extensionOffset = filePath.rfind('.') + 1;
+    size_t extensionOffset = filePath.rfind('.') + 1;
     return this->Initialize(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
 }
 
@@ -84,7 +85,7 @@ bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData
         return false;
     }
 
-    if (this->InitializeALBuffer(m_audioData, m_alFormat, m_samplingRate) == false)
+    if (this->InitializeALBuffer(m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_alFormat, m_samplingRate) == false)
     {
         return false;
     }
@@ -113,7 +114,7 @@ bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData
 
 bool AudioBuffer::IsValid() const noexcept
 {
-    return m_audioData.size() > 0;
+    return m_audioData != nullptr;
 }
 
 const std::string& AudioBuffer::GetFilePath() const noexcept
@@ -121,9 +122,14 @@ const std::string& AudioBuffer::GetFilePath() const noexcept
     return m_filePath;
 }
 
-const std::vector<uint8_t>& AudioBuffer::GetSoundData() const noexcept
+const uint8_t* AudioBuffer::GetAudioData() const noexcept
 {
-    return m_audioData;
+    return m_audioData.get();
+}
+
+size_t AudioBuffer::GetAudioDataBytes() const noexcept
+{
+    return m_audioDataBytes;
 }
 
 int32_t AudioBuffer::GetBitsPerSample() const noexcept
@@ -161,6 +167,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
             if (importer.IsValid())
             {
                 m_audioData = std::move(importer.GetAudioData());
+                m_audioDataBytes = importer.GetAudioDataBytes();
                 m_bitsPerSample = importer.GetBitsPerSample();
                 m_channels = importer.GetChannels();
                 m_samplingRate = importer.GetSamplingRate();
@@ -176,6 +183,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
             if (importer.IsValid())
             {
                 m_audioData = std::move(importer.GetAudioData());
+                m_audioDataBytes = importer.GetAudioDataBytes();
                 m_bitsPerSample = importer.GetBitsPerSample();
                 m_channels = importer.GetChannels();
                 m_samplingRate = importer.GetSamplingRate();
@@ -196,7 +204,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
     return false;
 }
 
-bool AudioBuffer::InitializeALBuffer(const std::vector<uint8_t>& audioData, ALenum alFormat, int32_t samplingRate)
+bool AudioBuffer::InitializeALBuffer(const uint8_t* audioData, ALsizei audioDataBytes, ALenum alFormat, int32_t samplingRate)
 {
     if (m_alBufferId == 0)
     {
@@ -207,7 +215,7 @@ bool AudioBuffer::InitializeALBuffer(const std::vector<uint8_t>& audioData, ALen
         }
     }
 
-    alBufferData(m_alBufferId, alFormat, audioData.data(), static_cast<ALsizei>(audioData.size()), samplingRate);
+    alBufferData(m_alBufferId, alFormat, audioData, audioDataBytes, samplingRate);
     if (alGetError() != AL_NO_ERROR)
     {
         return false;
