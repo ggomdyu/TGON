@@ -13,6 +13,7 @@
 #include "Core/ExpressionTemplate.h"
 
 #include "Vector3.h"
+#include "Matrix4x4.h"
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
@@ -43,31 +44,35 @@ public:
     
 /**@section Operator */
 public:
-    constexpr const AddExpression<BasicVector4, BasicVector4> operator+(const BasicVector4& v) const noexcept;
-    constexpr const SubtractExpression<BasicVector4, BasicVector4> operator-(const BasicVector4& v) const noexcept;
-    constexpr const BasicVector4 operator+(const _ValueType& scalar) const noexcept;
-    constexpr const BasicVector4 operator-(const _ValueType& scalar) const noexcept;
-    constexpr const BasicVector4 operator*(const _ValueType& scalar) const noexcept;
-    constexpr const BasicVector4 operator/(const _ValueType& scalar) const;
+    constexpr const AddExpression<BasicVector4, BasicVector4> operator+(const BasicVector4& rhs) const noexcept;
+    constexpr const SubtractExpression<BasicVector4, BasicVector4> operator-(const BasicVector4& rhs) const noexcept;
+    constexpr const BasicVector4 operator+(const _ValueType& rhs) const noexcept;
+    constexpr const BasicVector4 operator-(const _ValueType& rhs) const noexcept;
+    constexpr const BasicVector4 operator*(const _ValueType& rhs) const noexcept;
+    constexpr const BasicVector4 operator/(const _ValueType& rhs) const;
+    constexpr const BasicVector4 operator*(const Matrix4x4& rhs) const noexcept;
     constexpr const BasicVector4 operator-() const noexcept;
     friend constexpr const BasicVector4 operator*(const _ValueType& scalar, const BasicVector4& v) noexcept;
-    BasicVector4& operator+=(const BasicVector4& v) noexcept;
-    BasicVector4& operator-=(const BasicVector4& v) noexcept;
-    BasicVector4& operator*=(const BasicVector4& v) noexcept;
-    BasicVector4& operator*=(const _ValueType& scalar) noexcept;
-    BasicVector4& operator/=(const _ValueType& scalar);
+    BasicVector4& operator+=(const BasicVector4& rhs) noexcept;
+    BasicVector4& operator-=(const BasicVector4& rhs) noexcept;
+    BasicVector4& operator*=(const BasicVector4& rhs) noexcept;
+    BasicVector4& operator*=(const _ValueType& rhs) noexcept;
+    BasicVector4& operator*=(const Matrix4x4& rhs) noexcept;
+    BasicVector4& operator/=(const _ValueType& rhs);
     _ValueType& operator[](std::size_t index) noexcept;
     const _ValueType& operator[](std::size_t index) const noexcept;
-    constexpr bool operator==(const BasicVector4& v) const noexcept;
-    constexpr bool operator!=(const BasicVector4& v) const noexcept;
+    constexpr bool operator==(const BasicVector4& rhs) const noexcept;
+    constexpr bool operator!=(const BasicVector4& rhs) const noexcept;
     constexpr operator Vector3() const noexcept;
     
 /**@section Method */
 public:
     static constexpr _ValueType Dot(const BasicVector4& v1, const BasicVector4& v2) noexcept;
+    constexpr _ValueType Dot(const BasicVector4& v) const noexcept;
     _ValueType& At(std::size_t index);
     const _ValueType& At(std::size_t index) const;
     static _ValueType Distance(const BasicVector4& v1, const BasicVector4& v2) noexcept;
+    _ValueType Distance(const BasicVector4& v) const noexcept;
     _ValueType Length() const noexcept;
     _ValueType LengthSq() const noexcept;
     void Normalize();
@@ -126,39 +131,50 @@ constexpr BasicVector4<_ValueType>::BasicVector4(const BaseExpression<_DerivedEx
 }
 
 template <typename _ValueType>
-constexpr const AddExpression<BasicVector4<_ValueType>, BasicVector4<_ValueType>> BasicVector4<_ValueType>::operator+(const BasicVector4& v) const noexcept
+constexpr const AddExpression<BasicVector4<_ValueType>, BasicVector4<_ValueType>> BasicVector4<_ValueType>::operator+(const BasicVector4& rhs) const noexcept
 {
-    return {*this, v};
+    return {*this, rhs};
 }
 
 template <typename _ValueType>
-constexpr const SubtractExpression<BasicVector4<_ValueType>, BasicVector4<_ValueType>> BasicVector4<_ValueType>::operator-(const BasicVector4& v) const noexcept
+constexpr const SubtractExpression<BasicVector4<_ValueType>, BasicVector4<_ValueType>> BasicVector4<_ValueType>::operator-(const BasicVector4& rhs) const noexcept
 {
-    return {*this, v};
+    return {*this, rhs};
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator+(const _ValueType& scalar) const noexcept
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator+(const _ValueType& rhs) const noexcept
 {
-    return BasicVector4(x + scalar, y + scalar, z + scalar, w + scalar);
+    return BasicVector4(x + rhs, y + rhs, z + rhs, w + rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator-(const _ValueType& scalar) const noexcept
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator-(const _ValueType& rhs) const noexcept
 {
-    return BasicVector4(x - scalar, y - scalar, z - scalar, w - scalar);
+    return BasicVector4(x - rhs, y - rhs, z - rhs, w - rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator*(const _ValueType& scalar) const noexcept
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator*(const _ValueType& rhs) const noexcept
 {
-    return BasicVector4(x * scalar, y * scalar, z * scalar, w * scalar);
+    return BasicVector4(x * rhs, y * rhs, z * rhs, w * rhs);
 }
 
 template <typename _ValueType>
-constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator/(const _ValueType& scalar) const
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator/(const _ValueType& rhs) const
 {
-    return BasicVector4(x / scalar, y / scalar, z / scalar, w / scalar);
+    return BasicVector4(x / rhs, y / rhs, z / rhs, w / rhs);
+}
+
+template <typename _ValueType>
+constexpr const BasicVector4<_ValueType> BasicVector4<_ValueType>::operator*(const Matrix4x4& rhs) const noexcept
+{
+    return Vector4(
+        (x * rhs.m00) + (y * rhs.m10) + (z * rhs.m20) + (w * rhs.m30),
+        (x * rhs.m01) + (y * rhs.m11) + (z * rhs.m21) + (w * rhs.m31),
+        (x * rhs.m02) + (y * rhs.m12) + (z * rhs.m22) + (w * rhs.m32),
+        (x * rhs.m03) + (y * rhs.m13) + (z * rhs.m23) + (w * rhs.m33)
+   );
 }
 
 template <typename _ValueType>
@@ -174,56 +190,69 @@ constexpr const BasicVector4<_ValueType> operator*(const _ValueType& scalar, con
 }
 
 template <typename _ValueType>
-inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator+=(const BasicVector4& v) noexcept
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator+=(const BasicVector4& rhs) noexcept
 {
-    x += v.x;
-    y += v.y;
-    z += v.z;
-    w += v.w;
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+    w += rhs.w;
     
     return *this;
 }
 
 template <typename _ValueType>
-inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator-=(const BasicVector4& v) noexcept
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator-=(const BasicVector4& rhs) noexcept
 {
-    x -= v.x;
-    y -= v.y;
-    z -= v.z;
-    w -= v.w;
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
+    w -= rhs.w;
     
     return *this;
 }
 
 template <typename _ValueType>
-inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator*=(const BasicVector4& v) noexcept
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator*=(const BasicVector4& rhs) noexcept
 {
-    x *= v.x;
-    y *= v.y;
-    z *= v.z;
-    w *= v.w;
+    x *= rhs.x;
+    y *= rhs.y;
+    z *= rhs.z;
+    w *= rhs.w;
     
     return *this;
 }
 
 template <typename _ValueType>
-inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator*=(const _ValueType& scalar) noexcept
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator*=(const _ValueType& rhs) noexcept
 {
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
-    w *= scalar;
+    x *= rhs;
+    y *= rhs;
+    z *= rhs;
+    w *= rhs;
     
     return *this;
 }
-
+    
 template <typename _ValueType>
-inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator/=(const _ValueType& scalar)
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator*=(const Matrix4x4& rhs) noexcept
 {
-    x /= scalar;
-    y /= scalar;
-    z /= scalar;
-    w /= scalar;
+    *this = Vector4(
+        (x * rhs.m00) + (y * rhs.m10) + (z * rhs.m20) + (w * rhs.m30),
+        (x * rhs.m01) + (y * rhs.m11) + (z * rhs.m21) + (w * rhs.m31),
+        (x * rhs.m02) + (y * rhs.m12) + (z * rhs.m22) + (w * rhs.m32),
+        (x * rhs.m03) + (y * rhs.m13) + (z * rhs.m23) + (w * rhs.m33)
+    );
+    
+    return *this;
+}
+    
+template <typename _ValueType>
+inline BasicVector4<_ValueType>& BasicVector4<_ValueType>::operator/=(const _ValueType& rhs)
+{
+    x /= rhs;
+    y /= rhs;
+    z /= rhs;
+    w /= rhs;
     
     return *this;
 }
@@ -241,15 +270,15 @@ inline const _ValueType& BasicVector4<_ValueType>::operator[](std::size_t index)
 }
 
 template <typename _ValueType>
-constexpr bool BasicVector4<_ValueType>::operator==(const BasicVector4& v) const noexcept
+constexpr bool BasicVector4<_ValueType>::operator==(const BasicVector4& rhs) const noexcept
 {
-    return (x == v.x && y == v.y && z == v.z && w == v.w);
+    return (x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w);
 }
 
 template <typename _ValueType>
-constexpr bool BasicVector4<_ValueType>::operator!=(const BasicVector4& v) const noexcept
+constexpr bool BasicVector4<_ValueType>::operator!=(const BasicVector4& rhs) const noexcept
 {
-    return !(*this == v);
+    return !(*this == rhs);
 }
 
 template<typename _ValueType>
@@ -261,7 +290,13 @@ inline constexpr BasicVector4<_ValueType>::operator Vector3() const noexcept
 template <typename _ValueType>
 constexpr _ValueType BasicVector4<_ValueType>::Dot(const BasicVector4& v1, const BasicVector4& v2) noexcept
 {
-    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z) + (v1.w * v2.w);
+    return v1.Dot(v2);
+}
+    
+template <typename _ValueType>
+constexpr _ValueType BasicVector4<_ValueType>::Dot(const BasicVector4& v) const noexcept
+{
+    return (x * v.x) + (y * v.y) + (z * v.z) + (w * v.w);
 }
 
 template <typename _ValueType>
@@ -284,6 +319,12 @@ template <typename _ValueType>
 inline _ValueType BasicVector4<_ValueType>::Distance(const BasicVector4& v1, const BasicVector4& v2) noexcept
 {
     return BasicVector4(v1 - v2).Length();
+}
+
+template <typename _ValueType>
+inline _ValueType BasicVector4<_ValueType>::Distance(const BasicVector4& v) const noexcept
+{
+    return BasicVector4(*this - v).Length();
 }
 
 template <typename _ValueType>

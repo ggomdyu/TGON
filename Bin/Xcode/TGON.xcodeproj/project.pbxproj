@@ -70,6 +70,7 @@
 		FD78AC0D2289D51400D22E46 /* CanvasRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */; };
 		FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */; };
 		FD7E61C1228F365400A829FD /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C0228F365400A829FD /* Vector4.h */; };
+		FD7E61C322913D7B00A829FD /* IEquatable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C222913D7B00A829FD /* IEquatable.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
@@ -142,13 +143,13 @@
 		FDC02D422284893F00BEE91A /* RendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D332284893F00BEE91A /* RendererComponent.cpp */; };
 		FDC02D432284893F00BEE91A /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D342284893F00BEE91A /* Component.cpp */; };
 		FDC02D442284893F00BEE91A /* MeshRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D352284893F00BEE91A /* MeshRendererComponent.cpp */; };
-		FDC02D452284893F00BEE91A /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D362284893F00BEE91A /* SpriteRendererComponent.h */; };
+		FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D362284893F00BEE91A /* CanvasSpriteRendererComponent.h */; };
 		FDC02D462284893F00BEE91A /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D372284893F00BEE91A /* CameraComponent.h */; };
 		FDC02D472284893F00BEE91A /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D382284893F00BEE91A /* CameraComponent.cpp */; };
 		FDC02D482284893F00BEE91A /* ComponentUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D392284893F00BEE91A /* ComponentUtility.h */; };
 		FDC02D492284893F00BEE91A /* MeshRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3A2284893F00BEE91A /* MeshRendererComponent.h */; };
 		FDC02D4A2284893F00BEE91A /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3B2284893F00BEE91A /* Component.h */; };
-		FDC02D4B2284893F00BEE91A /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D3C2284893F00BEE91A /* SpriteRendererComponent.cpp */; };
+		FDC02D4B2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D3C2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp */; };
 		FDC02D4C2284893F00BEE91A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D3D2284893F00BEE91A /* GameScene.cpp */; };
 		FDC02D4E2284893F00BEE91A /* GameScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3F2284893F00BEE91A /* GameScene.h */; };
 		FDC02D522284897500BEE91A /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D502284897500BEE91A /* GameObject.cpp */; };
@@ -362,6 +363,7 @@
 		FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CanvasRenderer.cpp; sourceTree = "<group>"; };
 		FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasRenderer.h; sourceTree = "<group>"; };
 		FD7E61C0228F365400A829FD /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
+		FD7E61C222913D7B00A829FD /* IEquatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEquatable.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		FDACD2EA20B4518A00C62C24 /* Cpp_Style_Guide(KR).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cpp_Style_Guide(KR).docx"; sourceTree = "<group>"; };
 		FDACD2EC20B4518A00C62C24 /* Windows_License_Notice.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Windows_License_Notice.docx; sourceTree = "<group>"; };
@@ -565,13 +567,13 @@
 		FDC02D332284893F00BEE91A /* RendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RendererComponent.cpp; sourceTree = "<group>"; };
 		FDC02D342284893F00BEE91A /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Component.cpp; sourceTree = "<group>"; };
 		FDC02D352284893F00BEE91A /* MeshRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MeshRendererComponent.cpp; sourceTree = "<group>"; };
-		FDC02D362284893F00BEE91A /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = SpriteRendererComponent.h; sourceTree = "<group>"; };
+		FDC02D362284893F00BEE91A /* CanvasSpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasSpriteRendererComponent.h; sourceTree = "<group>"; };
 		FDC02D372284893F00BEE91A /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CameraComponent.h; sourceTree = "<group>"; };
 		FDC02D382284893F00BEE91A /* CameraComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CameraComponent.cpp; sourceTree = "<group>"; };
 		FDC02D392284893F00BEE91A /* ComponentUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ComponentUtility.h; sourceTree = "<group>"; };
 		FDC02D3A2284893F00BEE91A /* MeshRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRendererComponent.h; sourceTree = "<group>"; };
 		FDC02D3B2284893F00BEE91A /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Component.h; sourceTree = "<group>"; };
-		FDC02D3C2284893F00BEE91A /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SpriteRendererComponent.cpp; sourceTree = "<group>"; };
+		FDC02D3C2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CanvasSpriteRendererComponent.cpp; sourceTree = "<group>"; };
 		FDC02D3D2284893F00BEE91A /* GameScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameScene.cpp; sourceTree = "<group>"; };
 		FDC02D3F2284893F00BEE91A /* GameScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameScene.h; sourceTree = "<group>"; };
 		FDC02D502284897500BEE91A /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameObject.cpp; sourceTree = "<group>"; };
@@ -1487,6 +1489,7 @@
 				FDC02CCE228481F100BEE91A /* IResource.h */,
 				FDC02CCF228481F100BEE91A /* RuntimeObject.h */,
 				FDC02CD0228481F100BEE91A /* IResource.cpp */,
+				FD7E61C222913D7B00A829FD /* IEquatable.h */,
 				FDC02CD5228481F100BEE91A /* EventDispatcher.h */,
 				FDC02CD7228481F100BEE91A /* InstanceCounter.h */,
 				FDC02CD8228481F100BEE91A /* AutoCast.h */,
@@ -1503,13 +1506,13 @@
 				FDC02D332284893F00BEE91A /* RendererComponent.cpp */,
 				FDC02D342284893F00BEE91A /* Component.cpp */,
 				FDC02D352284893F00BEE91A /* MeshRendererComponent.cpp */,
-				FDC02D362284893F00BEE91A /* SpriteRendererComponent.h */,
+				FDC02D362284893F00BEE91A /* CanvasSpriteRendererComponent.h */,
 				FDC02D372284893F00BEE91A /* CameraComponent.h */,
 				FDC02D382284893F00BEE91A /* CameraComponent.cpp */,
 				FDC02D392284893F00BEE91A /* ComponentUtility.h */,
 				FDC02D3A2284893F00BEE91A /* MeshRendererComponent.h */,
 				FDC02D3B2284893F00BEE91A /* Component.h */,
-				FDC02D3C2284893F00BEE91A /* SpriteRendererComponent.cpp */,
+				FDC02D3C2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1588,7 +1591,8 @@
 				FDD4E0332287124800E26531 /* Transform.h in Headers */,
 				FDC02D532284897500BEE91A /* GameObject.h in Headers */,
 				FDC02D2F2284891700BEE91A /* GameSceneModule.h in Headers */,
-				FDC02D452284893F00BEE91A /* SpriteRendererComponent.h in Headers */,
+				FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */,
+				FD7E61C322913D7B00A829FD /* IEquatable.h in Headers */,
 				FDC02D412284893F00BEE91A /* RendererComponent.h in Headers */,
 				FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */,
 				FDC02D462284893F00BEE91A /* CameraComponent.h in Headers */,
@@ -1774,7 +1778,7 @@
 				FDC02CE1228482F000BEE91A /* Hash.cpp in Sources */,
 				FD4C1DDB219F3F7C00B2B2BE /* GainputPinchGesture.cpp in Sources */,
 				FD4C1DDC219F3F7C00B2B2BE /* GainputRotateGesture.cpp in Sources */,
-				FDC02D4B2284893F00BEE91A /* SpriteRendererComponent.cpp in Sources */,
+				FDC02D4B2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp in Sources */,
 				FD4C1DDD219F3F7C00B2B2BE /* GainputSimultaneouslyDownGesture.cpp in Sources */,
 				FD4C1DDE219F3F7C00B2B2BE /* GainputTapGesture.cpp in Sources */,
 				FD4C1DDF219F3F7D00B2B2BE /* GainputHoldGesture.cpp in Sources */,

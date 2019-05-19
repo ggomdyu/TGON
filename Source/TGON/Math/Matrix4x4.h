@@ -10,7 +10,6 @@
 #include <cmath>
 
 #include "Vector3.h"
-#include "Vector4.h"
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
@@ -39,7 +38,6 @@ public:
     Matrix4x4 operator+(const Matrix4x4&) const noexcept;
     Matrix4x4 operator-(const Matrix4x4&) const noexcept;
     Matrix4x4 operator*(const Matrix4x4&) const noexcept;
-    constexpr Vector4 operator*(const Vector4&) const noexcept;
     Matrix4x4& operator+=(const Matrix4x4&) noexcept;
     Matrix4x4& operator-=(const Matrix4x4&) noexcept;
     Matrix4x4& operator*=(const Matrix4x4&) noexcept;
@@ -146,16 +144,6 @@ inline Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const noexcept
     );
 }
 
-constexpr Vector4 Matrix4x4::operator*(const Vector4& rhs) const noexcept
-{
-    return Vector4(
-        m00 * rhs.x + m10 * rhs.y + m20 * rhs.z + m30 * rhs.w,
-        m01 * rhs.x + m11 * rhs.y + m21 * rhs.z + m31 * rhs.w,
-        m02 * rhs.x + m12 * rhs.y + m22 * rhs.z + m32 * rhs.w,
-        m03 * rhs.x + m13 * rhs.y + m23 * rhs.z + m33 * rhs.w
-    );
-}
-
 inline Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& rhs) noexcept
 {
     m00 += rhs.m00; m01 += rhs.m01; m02 += rhs.m02; m03 += rhs.m03;
@@ -205,7 +193,7 @@ inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt
 
     Vector3 u = Vector3::Cross(r, l);
     u.Normalize();
-
+    
     return Matrix4x4(
         r.x, u.x, -l.x, 0.f,
         r.y, u.y, -l.y, 0.f,
@@ -397,9 +385,9 @@ inline const Matrix4x4 Matrix4x4::Rotate(float yaw, float pitch, float roll) noe
     float sinC = std::sin(roll);
     
     return Matrix4x4(
-        cosB * cosC,                            cosB * sinC,                            -sinB,          0.0f,
-        sinA * sinB * cosC + (cosA * -sinC),    sinA * sinB * sinC + cosA * cosC,       sinA * cosB,    0.0f,
-        cosA * sinB * cosC + (-sinA * -sinC),   cosA * sinB * sinC + (-sinA * cosC),    cosA * cosB,    0.0f,
+        cosB * cosC,                            cosB * -sinC,                           sinB,           0.0f,
+        (sinA * sinB * cosC) + (cosA * sinC),   (sinA * sinB * -sinC) + (cosA * cosC),  -sinA * cosB,   0.0f,
+        (cosA * -sinB * cosC) + (sinA * sinC),  (cosA * sinB * sinC) + (sinA * cosC),   cosA * cosB,    0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
     );
 }
@@ -411,33 +399,33 @@ inline const Matrix4x4 Matrix4x4::RotateX(float radian) noexcept
 
     return Matrix4x4(
         1.0f,   0.0f,   0.0f,   0.0f,
-        0.0f,   cosA,   sinA,   0.0f,
-        0.0f,   -sinA,  cosA,   0.0f,
+        0.0f,   cosA,   -sinA,  0.0f,
+        0.0f,   sinA,   cosA,   0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
     );
 }
 
 inline const Matrix4x4 Matrix4x4::RotateY(float radian) noexcept
 {
-    const float cosA = std::cos(radian);
-    const float sinA = std::sin(radian);
+    float cosA = std::cos(radian);
+    float sinA = std::sin(radian);
 
     return Matrix4x4(
-        cosA,   0.0f,   -sinA,  0.0f,
+        cosA,   0.0f,   sinA,   0.0f,
         0.0f,   1.0f,   0.0f,   0.0f,
-        sinA,   0.0f,   cosA,   0.0f,
+        -sinA,  0.0f,   cosA,   0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
     );
 }
 
 inline const Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
 {
-    const float cosA = std::cos(radian);
-    const float sinA = std::sin(radian);
+    float cosA = std::cos(radian);
+    float sinA = std::sin(radian);
 
     return Matrix4x4(
-        cosA,   sinA,   0.0f,   0.0f,
-        -sinA,  cosA,   0.0f,   0.0f,
+        cosA,   -sinA,   0.0f,   0.0f,
+        sinA,   cosA,   0.0f,   0.0f,
         0.0f,   0.0f,   1.0f,   0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
     );

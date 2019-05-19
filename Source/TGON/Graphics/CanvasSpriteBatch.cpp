@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Math/Vector4.h"
+
 #include "CanvasSpriteBatch.h"
 #include "Texture.h"
 #include "Graphics.h"
@@ -7,7 +9,6 @@
 #include "CanvasSprite.h"
 #include "FVF.h"
 #include "MeshUtility.h"
-#include "Random/Random.h"
 
 namespace tgon
 {
@@ -70,22 +71,22 @@ void CanvasSpriteBatch::Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld
 
     // Left top
     V3F_T2F* newVertices = reinterpret_cast<V3F_T2F*>(&(*vertices)[oldVertexEndOffset]);
-    newVertices[0].position = matWorld * Vector4(-halfWidth, halfHeight, 0.0f, 1.0f);
+    newVertices[0].position = Vector4(-halfWidth, halfHeight, 0.0f, 1.0f) * matWorld;
     newVertices[0].uv = {leftUV, topUV};
     
     // Right top
-    newVertices[1].position = matWorld * Vector4(halfWidth, halfHeight, 0.0f, 1.0f);
+    newVertices[1].position = Vector4(halfWidth, halfHeight, 0.0f, 1.0f) * matWorld;
     newVertices[1].uv = {rightUV, topUV};
     
     // Right bottom
-    newVertices[2].position = matWorld * Vector4(halfWidth, -halfHeight, 0.0f, 1.0f);
+    newVertices[2].position = Vector4(halfWidth, -halfHeight, 0.0f, 1.0f) * matWorld;
     newVertices[2].uv = {rightUV, bottomUV};
     
     // Right bottom
     newVertices[3] = newVertices[2];
 
     // Left bottom
-    newVertices[4].position = matWorld * Vector4(-halfWidth, -halfHeight, 0.0f, 1.0f);
+    newVertices[4].position = Vector4(-halfWidth, -halfHeight, 0.0f, 1.0f) * matWorld;
     newVertices[4].uv = {leftUV, bottomUV};
 
     // Left top

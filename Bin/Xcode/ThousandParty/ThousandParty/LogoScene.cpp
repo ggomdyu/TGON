@@ -1,24 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/InputModule.h"
-#include "Engine/TimeModule.h"
-#include "Platform/Application.h"
-#include "Time/Time.h"
-#include "Math/Mathematics.h"
-#include "Diagnostics/Log.h"
-#include "IO/Path.h"
-#include "Hardware/Keyboard.h"
-#include "Engine/GraphicsModule.h"
-#include "Graphics/CanvasSprite.h"
-#include "Graphics/Texture.h"
-#include "Game/Component/CanvasSpriteRendererComponent.h"
-#include "Game/Component/CameraComponent.h"
-#include "Graphics/OpenGL/OpenGLShaderCode.h"
-#include "Graphics/ShaderProgram.h"
-#include "Engine/GameSceneModule.h"
-
+#include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
+
+std::shared_ptr<tgon::GameObject> object1;
+std::shared_ptr<tgon::GameObject> object2;
 
 LogoScene::LogoScene()
 {
@@ -29,45 +16,39 @@ LogoScene::LogoScene()
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
-//
-//    auto rootWindow = tgon::Application::GetInstance()->GetRootWindow();
-//    rootWindow->OnResize += [=](int32_t width, int32_t height)
-//    {
-//        m_graphicsModule->Update();
-//    };
 
-    // 카메라 생성
+    // Create a camera
     {
         auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
         const tgon::I32Extent2D rootWindowSize = application->GetRootWindow()->GetSize();
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
         m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::FRect{-halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height)}, -1.0f, 1024.0f);
-//        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(Vector3(0.0f, 0.0f, -50.0f), Vector3(0.0f, 0.0f, 0.0f), Pi / 8, 0.1f, 1000.0f);
         this->AddObject(cameraObject);
     }
 
-    //// Intro에 사용할 Sprite 생성
+    //
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/1551608511.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
-        
-        auto introObject1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        introObject1->GetTransform()->SetLocalScale({ 2.0f, 1.0f, 1.0f });
-        introObject1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-        m_introSpriteComponent1 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        object1 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object1->GetTransform()->SetLocalScale({ 2.0f, 1.0f, 1.0f });
+        object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+        m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
-        m_introSpriteComponent2 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture));
-        auto m_introSpriteComponent3 = introObject1->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
-//        m_introSpriteComponent1->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-//        m_introSpriteComponent1->SetOpacity(0.0f);
-        this->AddObject(introObject1);
+        
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        object2 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object2->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+        object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+        m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        
+        this->AddObject(object1);
+        this->AddObject(object2);
     }
 
-    // Intro에 사용할 Sprite 생성
+    //
 //    {
 //        auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
 //        introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
@@ -96,6 +77,9 @@ void LogoScene::Update()
 {
     SuperType::Update();
 
+    
+    object2->GetTransform()->SetLocalRotation({tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f)});
+    
 //    this->OnHandleInput();
 
 //    auto elapsedTime = tgon::GetTickCount() - m_beginTime;
