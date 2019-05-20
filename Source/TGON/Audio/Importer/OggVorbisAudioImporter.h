@@ -5,20 +5,23 @@
  */
 
 #pragma once
-#define TGON_USE_STB_OGG_VORBIS_IMPORTER 1
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+#define TGON_USE_STB_OGG_VORBIS_IMPORTER 0
+#if TGON_USE_STB_OGG_VORBIS_IMPORTER
+#   define STB_VORBIS_HEADER_ONLY
+#   include <stb/stb_vorbis.c>
+#else
 #   include <vorbis/vorbisfile.h>
+#   include <ogg/ogg.h>
+#   ifdef _MSC_VER
+#   pragma comment(lib, "libvorbis.lib")
+#   pragma comment(lib, "libvorbisfile.lib")
+#   pragma comment(lib, "libogg.lib")
+#   endif
 #endif
-#include <ogg/ogg.h>
 
 #include "Diagnostics/Log.h"
 
 #include "BaseAudioImporter.h"
-
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER
-#   define STB_VORBIS_HEADER_ONLY
-#   include <stb/stb_vorbis.c>
-#endif
 
 namespace tgon
 {

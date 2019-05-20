@@ -64,8 +64,8 @@ void CanvasSpriteBatch::Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld
     float halfWidth = textureRect.width * 0.5f;
     float halfHeight = textureRect.height * 0.5f;
 
-    auto oldVertexEndOffset = m_vertexEndOffset;
-    auto expandSize = sizeof(V3F_T2F) / 4 * 6;
+    int32_t oldVertexEndOffset = m_vertexEndOffset;
+    int32_t expandSize = sizeof(V3F_T2F) / 4 * 6;
     vertices->resize(m_vertexEndOffset + expandSize);
     m_vertexEndOffset += expandSize;
 

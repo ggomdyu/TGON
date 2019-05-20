@@ -7,10 +7,6 @@
 
 #include "../Path.h"
 
-#ifdef GetCurrentDirectory
-#   undef GetCurrentDirectory
-#endif
-
 namespace tgon
 {
 
@@ -42,7 +38,7 @@ TGON_API int32_t GetSpecialDirectory(int csidl, char* destStr)
         bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, destStr, MAX_PATH);
         if (isConvertSucceed)
         {
-            return utf16PathLen;
+            return static_cast<int32_t>(utf16PathLen);
         }
     }
 
