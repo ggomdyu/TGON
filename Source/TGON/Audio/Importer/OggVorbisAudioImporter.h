@@ -216,7 +216,7 @@ inline unsigned long OggVorbisAudioImporter::DecodeOggVorbis(OggVorbis_File* ogg
             bytesDone += decodeSize;
             if (bytesDone >= bufferSize)
             {
-	            break;
+	    	break;
             }
         }
         else
