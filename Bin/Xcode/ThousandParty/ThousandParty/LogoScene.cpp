@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <deque>
+#include <atomic>
 #include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
@@ -10,8 +12,122 @@ std::shared_ptr<tgon::GameObject> object3;
 std::shared_ptr<tgon::GameObject> object4;
 std::shared_ptr<tgon::GameObject> object5;
 
+namespace tgon
+{
+
+class TGON_API DispatchQueue final
+{
+/**@section Constructor */
+public:
+    explicit DispatchQueue(int32_t threadPoolCount = 1);
+    
+/**@section Destructor */
+public:
+    ~DispatchQueue();
+
+/**@section Method */
+public:
+    void AddAsyncTask(const Delegate<void()>& task);
+    
+private:
+    void DispatchQueueHandler();
+
+/**@section Variable */
+private:
+    std::condition_variable m_cv;
+    std::mutex m_mutex;
+    std::deque<std::thread> m_threadPool;
+    std::deque<Delegate<void()>> m_taskPool;
+    bool m_needToDestroy;
+};
+    
+} /* namespace tgon */
+
+namespace tgon
+{
+
+DispatchQueue::DispatchQueue(int32_t threadPoolCount) :
+    m_threadPool(threadPoolCount),
+    m_needToDestroy(false)
+{
+    for (auto& thread : m_threadPool)
+    {
+        thread = std::thread(&DispatchQueue::DispatchQueueHandler, this);
+    }
+}
+
+DispatchQueue::~DispatchQueue()
+{
+    m_needToDestroy = true;
+    m_cv.notify_all();
+    
+    for (auto& thread : m_threadPool)
+    {
+        if (thread.joinable())
+        {
+            thread.join();
+        }
+    }
+}
+    
+void DispatchQueue::AddAsyncTask(const Delegate<void()>& task)
+{
+    m_taskPool.push_back(task);
+    m_cv.notify_all();
+}
+
+void DispatchQueue::DispatchQueueHandler()
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    
+    while (m_needToDestroy == false)
+    {
+        m_cv.wait(lock, [this]() {
+            return (m_taskPool.size() > 0) || m_needToDestroy;
+        });
+
+        if ((m_taskPool.size() <= 0) || m_needToDestroy)
+        {
+            continue;
+        }
+        
+        auto task = std::move(m_taskPool.front());
+        m_taskPool.pop_front();
+        
+//        lock.unlock();
+        {
+            task();
+        }
+//        lock.lock();
+    }
+}
+
+} /* namespace tgon */
+
+std::unique_ptr<tgon::DispatchQueue> g_dq;
+
 LogoScene::LogoScene()
 {
+    g_dq.reset(new tgon::DispatchQueue(4));
+    
+    static int n = 0;
+    for (int i = 0 ; i < 10; ++i)
+    {
+        static auto beginTime = tgon::GetTickCount();
+//        g_dq->AddAsyncTask([]()
+        {
+            for (int j = 0 ; j < 100000000; ++j)
+            {
+                n += 1;
+            }
+            
+            if (n >= 1000000000)
+            {
+                printf("%d\n", tgon::GetTickCount() - beginTime);
+            }
+        }//);
+    }
+
     using namespace tgon;
 
     decltype(auto) application = Application::GetInstance();
@@ -27,7 +143,7 @@ LogoScene::LogoScene()
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
         m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::FRect{-halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height)}, -1.0f, 1024.0f);
-        this->AddObject(cameraObject);
+        this->AddGlobalObject(cameraObject);
     }
 
     //
@@ -35,26 +151,26 @@ LogoScene::LogoScene()
     {
         auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object1->GetTransform()->SetLocalScale({ 0.5f, 1.0f, 1.0f });
+        object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
         m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
         
         auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object2 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object2->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
         m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
 
         object3 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object3->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object3->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object3->GetTransform()->SetLocalPosition({ 400.0f, -200.0f, 0.0f });
         m_introSpriteComponent3 = object3->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
 
         object4 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object4->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object4->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object4->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
         m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
@@ -66,7 +182,7 @@ LogoScene::LogoScene()
         m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
 
         object5 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object5->GetTransform()->SetLocalScale({ 3.0f, 1.0f, 1.0f });
+        object5->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object5->GetTransform()->SetLocalPosition({ 100.0f, 100.0f, 0.0f });
         m_introSpriteComponent5 = object5->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent5->SetSprite(std::make_shared<CanvasSprite>(texture2));

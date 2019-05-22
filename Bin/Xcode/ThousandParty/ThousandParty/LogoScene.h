@@ -6,6 +6,9 @@
 
 #pragma once
 #include <memory>
+#include <thread>
+#include <condition_variable>
+#include <mutex>
 
 #include "Game/Scene.h"
 
@@ -46,4 +49,8 @@ private:
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent4;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent5;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeOutSpriteComponent;
+    
+    std::thread m_thread1;
+    std::thread m_thread2;
+    std::thread m_thread3;
 };

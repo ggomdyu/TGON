@@ -26,7 +26,6 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Updates the TimeModule. */
     virtual void Update() override;
     
     /**

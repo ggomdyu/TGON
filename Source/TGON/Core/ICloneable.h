@@ -31,5 +31,10 @@ public:
      */
     virtual std::shared_ptr<ICloneable> Clone() = 0;
 };
+    
+inline std::shared_ptr<const ICloneable> ICloneable::Clone() const
+{
+    return const_cast<ICloneable*>(this)->Clone();
+}
 
 } /* namespace tgon */

@@ -71,6 +71,13 @@
 		FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */; };
 		FD7E61C1228F365400A829FD /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C0228F365400A829FD /* Vector4.h */; };
 		FD7E61C322913D7B00A829FD /* IEquatable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C222913D7B00A829FD /* IEquatable.h */; };
+		FD7E61C62291D72F00A829FD /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C42291D72F00A829FD /* Scene.h */; };
+		FD7E61C72291D72F00A829FD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61C52291D72F00A829FD /* Scene.cpp */; };
+		FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61C82291D75700A829FD /* SceneModule.cpp */; };
+		FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C92291D75700A829FD /* SceneModule.h */; };
+		FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CD2291D86000A829FD /* stb_vorbis.c */; };
+		FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CF22945BED00A829FD /* TaskModule.cpp */; };
+		FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61D022945BED00A829FD /* TaskModule.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
@@ -79,15 +86,12 @@
 		FDC02CE2228487CA00BEE91A /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C5E228481F000BEE91A /* AudioDevice.cpp */; };
 		FDC02CE3228487CA00BEE91A /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C61228481F000BEE91A /* AudioBuffer.cpp */; };
 		FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C62228481F000BEE91A /* AudioPlayer.cpp */; };
-		FDC02CE5228487CA00BEE91A /* ICloneable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CBD228481F100BEE91A /* ICloneable.cpp */; };
 		FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CC6228481F100BEE91A /* RTTI.cpp */; };
 		FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */; };
-		FDC02CE8228487CA00BEE91A /* IResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CD0228481F100BEE91A /* IResource.cpp */; };
 		FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C4E228481F000BEE91A /* Image.cpp */; };
 		FDC02CEA228487CA00BEE91A /* ImageUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C51228481F000BEE91A /* ImageUtility.cpp */; };
 		FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C42228481F000BEE91A /* GraphicsModule.cpp */; };
 		FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C43228481F000BEE91A /* AudioModule.cpp */; };
-		FDC02CED228487CA00BEE91A /* ResourceModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C44228481F000BEE91A /* ResourceModule.cpp */; };
 		FDC02CEE228487CA00BEE91A /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C46228481F000BEE91A /* InputModule.cpp */; };
 		FDC02CEF228487CA00BEE91A /* TimeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C47228481F000BEE91A /* TimeModule.cpp */; };
 		FDC02CF0228487CA00BEE91A /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C4A228481F000BEE91A /* Engine.cpp */; };
@@ -115,7 +119,6 @@
 		FDC02D14228487CA00BEE91A /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C73228481F100BEE91A /* Mouse.cpp */; };
 		FDC02D15228487CA00BEE91A /* Gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C74228481F100BEE91A /* Gamepad.cpp */; };
 		FDC02D16228487CA00BEE91A /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C76228481F100BEE91A /* InputManager.cpp */; };
-		FDC02D17228487CA00BEE91A /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C85228481F100BEE91A /* Keyboard.cpp */; };
 		FDC02D18228487CA00BEE91A /* Path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C8B228481F100BEE91A /* Path.cpp */; };
 		FDC02D19228487CA00BEE91A /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CA1228481F100BEE91A /* Window.cpp */; };
 		FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CAA228481F100BEE91A /* Application.cpp */; };
@@ -137,8 +140,6 @@
 		FDC02D2A228487D500BEE91A /* MacOSAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C9D228481F100BEE91A /* MacOSAppDelegate.mm */; };
 		FDC02D2B228487D500BEE91A /* MacOSTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C2F228481F000BEE91A /* MacOSTime.mm */; };
 		FDC02D2C228487D500BEE91A /* MacOSDateTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C30228481F000BEE91A /* MacOSDateTime.mm */; };
-		FDC02D2F2284891700BEE91A /* GameSceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D2D2284891600BEE91A /* GameSceneModule.h */; };
-		FDC02D302284891700BEE91A /* GameSceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D2E2284891600BEE91A /* GameSceneModule.cpp */; };
 		FDC02D412284893F00BEE91A /* RendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D322284893F00BEE91A /* RendererComponent.h */; };
 		FDC02D422284893F00BEE91A /* RendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D332284893F00BEE91A /* RendererComponent.cpp */; };
 		FDC02D432284893F00BEE91A /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D342284893F00BEE91A /* Component.cpp */; };
@@ -150,8 +151,6 @@
 		FDC02D492284893F00BEE91A /* MeshRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3A2284893F00BEE91A /* MeshRendererComponent.h */; };
 		FDC02D4A2284893F00BEE91A /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3B2284893F00BEE91A /* Component.h */; };
 		FDC02D4B2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D3C2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp */; };
-		FDC02D4C2284893F00BEE91A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D3D2284893F00BEE91A /* GameScene.cpp */; };
-		FDC02D4E2284893F00BEE91A /* GameScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D3F2284893F00BEE91A /* GameScene.h */; };
 		FDC02D522284897500BEE91A /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D502284897500BEE91A /* GameObject.cpp */; };
 		FDC02D532284897500BEE91A /* GameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D512284897500BEE91A /* GameObject.h */; };
 		FDD4E0312287124800E26531 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD4E02D2287124800E26531 /* Transform.cpp */; };
@@ -364,6 +363,13 @@
 		FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasRenderer.h; sourceTree = "<group>"; };
 		FD7E61C0228F365400A829FD /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
 		FD7E61C222913D7B00A829FD /* IEquatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEquatable.h; sourceTree = "<group>"; };
+		FD7E61C42291D72F00A829FD /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		FD7E61C52291D72F00A829FD /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		FD7E61C82291D75700A829FD /* SceneModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneModule.cpp; sourceTree = "<group>"; };
+		FD7E61C92291D75700A829FD /* SceneModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModule.h; sourceTree = "<group>"; };
+		FD7E61CD2291D86000A829FD /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../Source/ThirdParty/stb/stb_vorbis.c; sourceTree = "<group>"; };
+		FD7E61CF22945BED00A829FD /* TaskModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskModule.cpp; sourceTree = "<group>"; };
+		FD7E61D022945BED00A829FD /* TaskModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskModule.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		FDACD2EA20B4518A00C62C24 /* Cpp_Style_Guide(KR).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cpp_Style_Guide(KR).docx"; sourceTree = "<group>"; };
 		FDACD2EC20B4518A00C62C24 /* Windows_License_Notice.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Windows_License_Notice.docx; sourceTree = "<group>"; };
@@ -459,14 +465,12 @@
 		FDC02C41228481F000BEE91A /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InputModule.h; sourceTree = "<group>"; };
 		FDC02C42228481F000BEE91A /* GraphicsModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GraphicsModule.cpp; sourceTree = "<group>"; };
 		FDC02C43228481F000BEE91A /* AudioModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AudioModule.cpp; sourceTree = "<group>"; };
-		FDC02C44228481F000BEE91A /* ResourceModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ResourceModule.cpp; sourceTree = "<group>"; };
 		FDC02C45228481F000BEE91A /* TimeModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TimeModule.h; sourceTree = "<group>"; };
 		FDC02C46228481F000BEE91A /* InputModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = InputModule.cpp; sourceTree = "<group>"; };
 		FDC02C47228481F000BEE91A /* TimeModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = TimeModule.cpp; sourceTree = "<group>"; };
 		FDC02C48228481F000BEE91A /* AudioModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AudioModule.h; sourceTree = "<group>"; };
 		FDC02C49228481F000BEE91A /* GraphicsModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsModule.h; sourceTree = "<group>"; };
 		FDC02C4A228481F000BEE91A /* Engine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Engine.cpp; sourceTree = "<group>"; };
-		FDC02C4B228481F000BEE91A /* ResourceModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ResourceModule.h; sourceTree = "<group>"; };
 		FDC02C4D228481F000BEE91A /* ImageType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ImageType.h; sourceTree = "<group>"; };
 		FDC02C4E228481F000BEE91A /* Image.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Image.cpp; sourceTree = "<group>"; };
 		FDC02C4F228481F000BEE91A /* Drawing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Drawing.h; sourceTree = "<group>"; };
@@ -504,7 +508,6 @@
 		FDC02C76228481F100BEE91A /* InputManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = InputManager.cpp; sourceTree = "<group>"; };
 		FDC02C77228481F100BEE91A /* Keyboard.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Keyboard.h; sourceTree = "<group>"; };
 		FDC02C78228481F100BEE91A /* KeyboardType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = KeyboardType.h; sourceTree = "<group>"; };
-		FDC02C85228481F100BEE91A /* Keyboard.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Keyboard.cpp; sourceTree = "<group>"; };
 		FDC02C86228481F100BEE91A /* Gamepad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Gamepad.h; sourceTree = "<group>"; };
 		FDC02C89228481F100BEE91A /* MacOSPath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSPath.mm; sourceTree = "<group>"; };
 		FDC02C8A228481F100BEE91A /* Path.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Path.h; sourceTree = "<group>"; };
@@ -535,7 +538,6 @@
 		FDC02CB9228481F100BEE91A /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Prefix.h; sourceTree = "<group>"; };
 		FDC02CBA228481F100BEE91A /* ScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ScreenType.h; sourceTree = "<group>"; };
 		FDC02CBB228481F100BEE91A /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WindowType.h; sourceTree = "<group>"; };
-		FDC02CBD228481F100BEE91A /* ICloneable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ICloneable.cpp; sourceTree = "<group>"; };
 		FDC02CBE228481F100BEE91A /* StaticInvoke.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = StaticInvoke.h; sourceTree = "<group>"; };
 		FDC02CBF228481F100BEE91A /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Delegate.h; sourceTree = "<group>"; };
 		FDC02CC0228481F100BEE91A /* RAII.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RAII.h; sourceTree = "<group>"; };
@@ -552,17 +554,13 @@
 		FDC02CCB228481F100BEE91A /* ISerializable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ISerializable.h; sourceTree = "<group>"; };
 		FDC02CCC228481F100BEE91A /* ICloneable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ICloneable.h; sourceTree = "<group>"; };
 		FDC02CCD228481F100BEE91A /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = NonAddressable.h; sourceTree = "<group>"; };
-		FDC02CCE228481F100BEE91A /* IResource.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IResource.h; sourceTree = "<group>"; };
 		FDC02CCF228481F100BEE91A /* RuntimeObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RuntimeObject.h; sourceTree = "<group>"; };
-		FDC02CD0228481F100BEE91A /* IResource.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = IResource.cpp; sourceTree = "<group>"; };
 		FDC02CD5228481F100BEE91A /* EventDispatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = EventDispatcher.h; sourceTree = "<group>"; };
 		FDC02CD7228481F100BEE91A /* InstanceCounter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InstanceCounter.h; sourceTree = "<group>"; };
 		FDC02CD8228481F100BEE91A /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AutoCast.h; sourceTree = "<group>"; };
 		FDC02CD9228481F100BEE91A /* ExpressionTemplate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ExpressionTemplate.h; sourceTree = "<group>"; };
 		FDC02CDE228482F000BEE91A /* Hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Hash.h; sourceTree = "<group>"; };
 		FDC02CDF228482F000BEE91A /* Hash.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Hash.cpp; sourceTree = "<group>"; };
-		FDC02D2D2284891600BEE91A /* GameSceneModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameSceneModule.h; sourceTree = "<group>"; };
-		FDC02D2E2284891600BEE91A /* GameSceneModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameSceneModule.cpp; sourceTree = "<group>"; };
 		FDC02D322284893F00BEE91A /* RendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RendererComponent.h; sourceTree = "<group>"; };
 		FDC02D332284893F00BEE91A /* RendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RendererComponent.cpp; sourceTree = "<group>"; };
 		FDC02D342284893F00BEE91A /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Component.cpp; sourceTree = "<group>"; };
@@ -574,8 +572,6 @@
 		FDC02D3A2284893F00BEE91A /* MeshRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRendererComponent.h; sourceTree = "<group>"; };
 		FDC02D3B2284893F00BEE91A /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Component.h; sourceTree = "<group>"; };
 		FDC02D3C2284893F00BEE91A /* CanvasSpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CanvasSpriteRendererComponent.cpp; sourceTree = "<group>"; };
-		FDC02D3D2284893F00BEE91A /* GameScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameScene.cpp; sourceTree = "<group>"; };
-		FDC02D3F2284893F00BEE91A /* GameScene.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameScene.h; sourceTree = "<group>"; };
 		FDC02D502284897500BEE91A /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameObject.cpp; sourceTree = "<group>"; };
 		FDC02D512284897500BEE91A /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameObject.h; sourceTree = "<group>"; };
 		FDD4E02D2287124800E26531 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
@@ -1047,6 +1043,7 @@
 		FD73C00821628BC8006DCCE1 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FD7E61CC2291D84300A829FD /* stb */,
 				FDD0F65F216297BC00EDDB6E /* glew-2.1.0 */,
 				FDD0F65C2162975900EDDB6E /* libogg-1.3.3 */,
 				FD73C0EF2162964D006DCCE1 /* libvorbis-1.3.6 */,
@@ -1071,6 +1068,14 @@
 				FD4C1BF2219F344600B2B2BE /* lib */,
 			);
 			name = "libvorbis-1.3.6";
+			sourceTree = "<group>";
+		};
+		FD7E61CC2291D84300A829FD /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				FD7E61CD2291D86000A829FD /* stb_vorbis.c */,
+			);
+			name = stb;
 			sourceTree = "<group>";
 		};
 		FDACD2E820B4518A00C62C24 /* Document */ = {
@@ -1237,11 +1242,11 @@
 		FDC02C0D228481F000BEE91A /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FD7E61C52291D72F00A829FD /* Scene.cpp */,
+				FD7E61C42291D72F00A829FD /* Scene.h */,
 				FDC02D502284897500BEE91A /* GameObject.cpp */,
 				FDC02D512284897500BEE91A /* GameObject.h */,
 				FDC02D312284893F00BEE91A /* Component */,
-				FDC02D3D2284893F00BEE91A /* GameScene.cpp */,
-				FDC02D3F2284893F00BEE91A /* GameScene.h */,
 			);
 			name = Game;
 			path = ../../Source/TGON/Game;
@@ -1301,18 +1306,18 @@
 				FDC02C3F228481F000BEE91A /* Engine.h */,
 				FDC02C4A228481F000BEE91A /* Engine.cpp */,
 				FDC02C40228481F000BEE91A /* IModule.h */,
-				FDC02C41228481F000BEE91A /* InputModule.h */,
-				FDC02C46228481F000BEE91A /* InputModule.cpp */,
-				FDC02C49228481F000BEE91A /* GraphicsModule.h */,
-				FDC02C42228481F000BEE91A /* GraphicsModule.cpp */,
 				FDC02C48228481F000BEE91A /* AudioModule.h */,
 				FDC02C43228481F000BEE91A /* AudioModule.cpp */,
-				FDC02C4B228481F000BEE91A /* ResourceModule.h */,
-				FDC02C44228481F000BEE91A /* ResourceModule.cpp */,
+				FDC02C41228481F000BEE91A /* InputModule.h */,
+				FDC02C46228481F000BEE91A /* InputModule.cpp */,
+				FD7E61C92291D75700A829FD /* SceneModule.h */,
+				FD7E61C82291D75700A829FD /* SceneModule.cpp */,
+				FDC02C49228481F000BEE91A /* GraphicsModule.h */,
+				FDC02C42228481F000BEE91A /* GraphicsModule.cpp */,
 				FDC02C45228481F000BEE91A /* TimeModule.h */,
 				FDC02C47228481F000BEE91A /* TimeModule.cpp */,
-				FDC02D2E2284891600BEE91A /* GameSceneModule.cpp */,
-				FDC02D2D2284891600BEE91A /* GameSceneModule.h */,
+				FD7E61D022945BED00A829FD /* TaskModule.h */,
+				FD7E61CF22945BED00A829FD /* TaskModule.cpp */,
 			);
 			name = Engine;
 			path = ../../Source/TGON/Engine;
@@ -1380,7 +1385,6 @@
 				FDC02C76228481F100BEE91A /* InputManager.cpp */,
 				FDC02C77228481F100BEE91A /* Keyboard.h */,
 				FDC02C78228481F100BEE91A /* KeyboardType.h */,
-				FDC02C85228481F100BEE91A /* Keyboard.cpp */,
 				FDC02C86228481F100BEE91A /* Gamepad.h */,
 			);
 			name = Hardware;
@@ -1469,30 +1473,27 @@
 		FDC02CBC228481F100BEE91A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02CBD228481F100BEE91A /* ICloneable.cpp */,
-				FDC02CBE228481F100BEE91A /* StaticInvoke.h */,
-				FDC02CBF228481F100BEE91A /* Delegate.h */,
-				FDC02CC0228481F100BEE91A /* RAII.h */,
-				FDC02CC1228481F100BEE91A /* RTTI.h */,
 				FDC02CC2228481F100BEE91A /* Algorithm.h */,
+				FDC02CD8228481F100BEE91A /* AutoCast.h */,
+				FDC02CBF228481F100BEE91A /* Delegate.h */,
+				FDC02CC8228481F100BEE91A /* DelegateChain.h */,
+				FDC02CC0228481F100BEE91A /* RAII.h */,
 				FDC02CC3228481F100BEE91A /* TypeTraits.h */,
 				FDC02CC4228481F100BEE91A /* InstantiateCounter.h */,
+				FDC02CD7228481F100BEE91A /* InstanceCounter.h */,
+				FDC02CCF228481F100BEE91A /* RuntimeObject.h */,
 				FDC02CC5228481F100BEE91A /* CoreObject.h */,
+				FDC02CC1228481F100BEE91A /* RTTI.h */,
 				FDC02CC6228481F100BEE91A /* RTTI.cpp */,
-				FDC02CC7228481F100BEE91A /* IComparable.h */,
-				FDC02CC8228481F100BEE91A /* DelegateChain.h */,
 				FDC02CC9228481F100BEE91A /* DynamicCast.h */,
+				FDC02CD5228481F100BEE91A /* EventDispatcher.h */,
 				FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */,
+				FDC02CCD228481F100BEE91A /* NonAddressable.h */,
 				FDC02CCB228481F100BEE91A /* ISerializable.h */,
 				FDC02CCC228481F100BEE91A /* ICloneable.h */,
-				FDC02CCD228481F100BEE91A /* NonAddressable.h */,
-				FDC02CCE228481F100BEE91A /* IResource.h */,
-				FDC02CCF228481F100BEE91A /* RuntimeObject.h */,
-				FDC02CD0228481F100BEE91A /* IResource.cpp */,
+				FDC02CC7228481F100BEE91A /* IComparable.h */,
 				FD7E61C222913D7B00A829FD /* IEquatable.h */,
-				FDC02CD5228481F100BEE91A /* EventDispatcher.h */,
-				FDC02CD7228481F100BEE91A /* InstanceCounter.h */,
-				FDC02CD8228481F100BEE91A /* AutoCast.h */,
+				FDC02CBE228481F100BEE91A /* StaticInvoke.h */,
 				FDC02CD9228481F100BEE91A /* ExpressionTemplate.h */,
 			);
 			name = Core;
@@ -1583,20 +1584,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC02D4E2284893F00BEE91A /* GameScene.h in Headers */,
 				FD7E61C1228F365400A829FD /* Vector4.h in Headers */,
 				FDC02CE0228482F000BEE91A /* Hash.h in Headers */,
+				FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */,
 				FDC02D492284893F00BEE91A /* MeshRendererComponent.h in Headers */,
 				FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */,
 				FDD4E0332287124800E26531 /* Transform.h in Headers */,
+				FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */,
 				FDC02D532284897500BEE91A /* GameObject.h in Headers */,
-				FDC02D2F2284891700BEE91A /* GameSceneModule.h in Headers */,
 				FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */,
 				FD7E61C322913D7B00A829FD /* IEquatable.h in Headers */,
 				FDC02D412284893F00BEE91A /* RendererComponent.h in Headers */,
 				FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */,
 				FDC02D462284893F00BEE91A /* CameraComponent.h in Headers */,
 				FDC02D4A2284893F00BEE91A /* Component.h in Headers */,
+				FD7E61C62291D72F00A829FD /* Scene.h in Headers */,
 				FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */,
 				FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */,
 				FDD4E0322287124800E26531 /* RectTransform.h in Headers */,
@@ -1663,6 +1665,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */,
 				FD78AC0D2289D51400D22E46 /* CanvasRenderer.cpp in Sources */,
 				FD78AC0B2289D51400D22E46 /* MeshRenderer.cpp in Sources */,
 				FD78ABDB2289C4DF00D22E46 /* res0.c in Sources */,
@@ -1686,6 +1689,7 @@
 				FD78AC002289C4DF00D22E46 /* lsp.c in Sources */,
 				FD78AC012289C4DF00D22E46 /* registry.c in Sources */,
 				FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */,
+				FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */,
 				FD78AC032289C4DF00D22E46 /* window.c in Sources */,
 				FDC02D20228487D500BEE91A /* MacOSLog.mm in Sources */,
 				FDC02D21228487D500BEE91A /* MacOSOpenGLContext.mm in Sources */,
@@ -1695,7 +1699,7 @@
 				FDC02D25228487D500BEE91A /* MacOSScreen.mm in Sources */,
 				FDC02D26228487D500BEE91A /* MacOSMain.mm in Sources */,
 				FDC02D442284893F00BEE91A /* MeshRendererComponent.cpp in Sources */,
-				FDC02D4C2284893F00BEE91A /* GameScene.cpp in Sources */,
+				FD7E61C72291D72F00A829FD /* Scene.cpp in Sources */,
 				FDC02D27228487D500BEE91A /* MacOSWindow.mm in Sources */,
 				FDC02D28228487D500BEE91A /* MacOSWindowDelegate.mm in Sources */,
 				FDC02D29228487D500BEE91A /* MacOSWindowUtility.mm in Sources */,
@@ -1705,16 +1709,14 @@
 				FDC02CE2228487CA00BEE91A /* AudioDevice.cpp in Sources */,
 				FDC02CE3228487CA00BEE91A /* AudioBuffer.cpp in Sources */,
 				FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */,
-				FDC02CE5228487CA00BEE91A /* ICloneable.cpp in Sources */,
 				FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */,
 				FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */,
-				FDC02CE8228487CA00BEE91A /* IResource.cpp in Sources */,
 				FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */,
 				FDD4E0342287124800E26531 /* RectTransform.cpp in Sources */,
 				FDC02CEA228487CA00BEE91A /* ImageUtility.cpp in Sources */,
 				FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */,
 				FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */,
-				FDC02CED228487CA00BEE91A /* ResourceModule.cpp in Sources */,
+				FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */,
 				FDC02CEE228487CA00BEE91A /* InputModule.cpp in Sources */,
 				FDC02CEF228487CA00BEE91A /* TimeModule.cpp in Sources */,
 				FDC02CF0228487CA00BEE91A /* Engine.cpp in Sources */,
@@ -1728,7 +1730,6 @@
 				FDC02CFF228487CA00BEE91A /* Texture.cpp in Sources */,
 				FDC02D03228487CA00BEE91A /* ShaderProgram.cpp in Sources */,
 				FDC02D04228487CA00BEE91A /* Model.cpp in Sources */,
-				FDC02D302284891700BEE91A /* GameSceneModule.cpp in Sources */,
 				FDC02D522284897500BEE91A /* GameObject.cpp in Sources */,
 				FDC02D06228487CA00BEE91A /* Batch.cpp in Sources */,
 				FDC02D07228487CA00BEE91A /* Material.cpp in Sources */,
@@ -1745,7 +1746,6 @@
 				FDC02D14228487CA00BEE91A /* Mouse.cpp in Sources */,
 				FDC02D15228487CA00BEE91A /* Gamepad.cpp in Sources */,
 				FDC02D16228487CA00BEE91A /* InputManager.cpp in Sources */,
-				FDC02D17228487CA00BEE91A /* Keyboard.cpp in Sources */,
 				FDC02D18228487CA00BEE91A /* Path.cpp in Sources */,
 				FDC02D19228487CA00BEE91A /* Window.cpp in Sources */,
 				FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */,
