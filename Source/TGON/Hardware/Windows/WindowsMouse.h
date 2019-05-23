@@ -18,7 +18,7 @@ namespace OIS
 class Mouse;
 class MouseState;
 
-}
+} /* namespace OIS */
 
 namespace tgon
 {
