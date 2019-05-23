@@ -5,6 +5,7 @@
 #include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
+#include "Thread/DispatchQueue.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -15,93 +16,6 @@ std::shared_ptr<tgon::GameObject> object5;
 namespace tgon
 {
 
-class TGON_API DispatchQueue final
-{
-/**@section Constructor */
-public:
-    explicit DispatchQueue(int32_t threadPoolCount = 1);
-    
-/**@section Destructor */
-public:
-    ~DispatchQueue();
-
-/**@section Method */
-public:
-    void AddAsyncTask(const Delegate<void()>& task);
-    
-private:
-    void DispatchQueueHandler();
-
-/**@section Variable */
-private:
-    std::condition_variable m_cv;
-    std::mutex m_mutex;
-    std::deque<std::thread> m_threadPool;
-    std::deque<Delegate<void()>> m_taskPool;
-    bool m_needToDestroy;
-};
-    
-} /* namespace tgon */
-
-namespace tgon
-{
-
-DispatchQueue::DispatchQueue(int32_t threadPoolCount) :
-    m_threadPool(threadPoolCount),
-    m_needToDestroy(false)
-{
-    for (auto& thread : m_threadPool)
-    {
-        thread = std::thread(&DispatchQueue::DispatchQueueHandler, this);
-    }
-}
-
-DispatchQueue::~DispatchQueue()
-{
-    m_needToDestroy = true;
-    m_cv.notify_all();
-    
-    for (auto& thread : m_threadPool)
-    {
-        if (thread.joinable())
-        {
-            thread.join();
-        }
-    }
-}
-    
-void DispatchQueue::AddAsyncTask(const Delegate<void()>& task)
-{
-    m_taskPool.push_back(task);
-    m_cv.notify_all();
-}
-
-void DispatchQueue::DispatchQueueHandler()
-{
-    std::unique_lock<std::mutex> lock(m_mutex);
-    
-    while (m_needToDestroy == false)
-    {
-        m_cv.wait(lock, [this]() {
-            return (m_taskPool.size() > 0) || m_needToDestroy;
-        });
-
-        if ((m_taskPool.size() <= 0) || m_needToDestroy)
-        {
-            continue;
-        }
-        
-        auto task = std::move(m_taskPool.front());
-        m_taskPool.pop_front();
-        
-//        lock.unlock();
-        {
-            task();
-        }
-//        lock.lock();
-    }
-}
-
 } /* namespace tgon */
 
 std::unique_ptr<tgon::DispatchQueue> g_dq;
@@ -110,22 +24,21 @@ LogoScene::LogoScene()
 {
     g_dq.reset(new tgon::DispatchQueue(4));
     
-    static int n = 0;
+    static std::atomic<int> n = 0;
     for (int i = 0 ; i < 10; ++i)
     {
         static auto beginTime = tgon::GetTickCount();
-//        g_dq->AddAsyncTask([]()
+        g_dq->AddAsyncTask([]()
         {
+            int temp = 0;
             for (int j = 0 ; j < 100000000; ++j)
             {
-                n += 1;
+                temp += 1;
             }
             
-            if (n >= 1000000000)
-            {
-                printf("%d\n", tgon::GetTickCount() - beginTime);
-            }
-        }//);
+            n += temp;
+            tgon::Log(tgon::LogLevel::Debug,"%d\n", tgon::GetTickCount() - beginTime);
+        });
     }
 
     using namespace tgon;

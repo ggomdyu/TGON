@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include <StackWalker-1.20/Main/StackWalker/StackWalker.h>
+#include <StackWalker.h>
 
 #include "Platform/Config.h"
 #include "String/Encoding.h"

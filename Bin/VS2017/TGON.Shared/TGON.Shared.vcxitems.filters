@@ -70,29 +70,8 @@
     <Filter Include="Source\Time">
       <UniqueIdentifier>{55087a89-f7c6-4380-a0fb-822f6dd3ba4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1">
-      <UniqueIdentifier>{9976870a-1463-40df-bf45-dd530a0c4bfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\Alc">
-      <UniqueIdentifier>{dad5731d-5a9f-4a67-88b9-5547ef776adc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\Alc\backends">
-      <UniqueIdentifier>{d85a518a-9f5c-40f4-838c-8c02921741a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\Alc\effects">
-      <UniqueIdentifier>{57883559-2867-4a59-b601-6f6ad0a0fbdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\Alc\filters">
-      <UniqueIdentifier>{105adaec-a1f3-4abb-9e3a-8160d018aba3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\Alc\mixer">
-      <UniqueIdentifier>{0a4a91ce-9e53-4f78-a50d-ed34a2a3ea8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\OpenAL32">
-      <UniqueIdentifier>{f1dc362d-626a-4abd-a216-39c43c15f62f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include">
-      <UniqueIdentifier>{6256bcc5-79dd-46cb-8521-0f9243012ca2}</UniqueIdentifier>
+    <Filter Include="Source\Thread">
+      <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,16 +114,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Audio\AudioBuffer.cpp">
       <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\IResource.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\RTTI.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\EventDispatcher.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\ICloneable.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.cpp">
@@ -228,9 +201,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\InputManager.cpp">
       <Filter>Source\Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Keyboard.cpp">
-      <Filter>Source\Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Mouse.cpp">
       <Filter>Source\Hardware</Filter>
     </ClCompile>
@@ -279,207 +249,23 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\MeshRenderer.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\stb\stb_vorbis.c">
       <Filter>Source\ThirdParty\stb</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\SceneModule.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GraphicsModule.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\helpers.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\SceneModule.cpp">
+      <Filter>Source\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\hrtf.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GraphicsModule.cpp">
+      <Filter>Source\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mastering.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.cpp">
+      <Filter>Source\Game\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixvoice.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.cpp">
+      <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\panning.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ringbuffer.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\uhjfilter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ALc.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\alconfig.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ALu.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ambdec.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\bformatdec.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\bs2b.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\converter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\alsa.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\base.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\coreaudio.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\dsound.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\jack.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\loopback.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\null.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\opensl.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\oss.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\portaudio.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\pulseaudio.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\qsa.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\sdl2.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\sndio.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\solaris.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\wasapi.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\wave.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\winmm.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\autowah.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\chorus.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\compressor.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\dedicated.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\distortion.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\echo.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\equalizer.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\fshifter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\modulator.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\null.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\pshifter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\effects\reverb.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\filter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\nfc.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\splitter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\hrtf_inc.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_c.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_neon.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_sse.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_sse2.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_sse3.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\mixer_sse41.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alEffect.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alError.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alExtension.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alFilter.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alListener.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alSource.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alState.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\event.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\sample_cvt.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alAuxEffectSlot.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\alBuffer.c">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Thread\DispatchQueue.cpp">
+      <Filter>Source\Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -660,9 +446,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\InstantiateCounter.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\IResource.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\ISerializable.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
@@ -709,9 +492,6 @@
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Log.h">
-      <Filter>Source\Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\LogType.h">
       <Filter>Source\Diagnostics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\Image.h">
@@ -987,110 +767,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Vector4.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Matrix3x4.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\IEquatable.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\SceneModule.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\hrtf.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\SceneModule.h">
+      <Filter>Source\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\inprogext.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.h">
+      <Filter>Source\Game\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\logging.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.h">
+      <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mastering.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\polymorphism.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ringbuffer.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\uhjfilter.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\vector.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\alconfig.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\alstring.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\ambdec.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\bformatdec.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\compat.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\converter.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\cpu_caps.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\fpu_modes.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\backends\base.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\defs.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\nfc.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\filters\splitter.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\Alc\mixer\defs.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\Alc\mixer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alAuxEffectSlot.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alBuffer.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alEffect.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alError.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alFilter.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alListener.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alMain.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alSource.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\alu.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\bs2b.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include\sample_cvt.h">
-      <Filter>Source\ThirdParty\openal-soft-1.19.1\OpenAL32\Include</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Thread\DispatchQueue.h">
+      <Filter>Source\Thread</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
