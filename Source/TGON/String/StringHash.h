@@ -55,11 +55,6 @@ public:
         return m_hashCode;
     }
 
-    void Clear()
-    {
-
-    }
-
 /**@section Variable */
 private:
     size_t m_hashCode;
@@ -175,6 +170,9 @@ public:
 
     void Clear()
     {
+        m_str = "";
+        m_strLen = 0;
+        m_hashCode = 0;
     }
 
 /**@section Variable */
@@ -227,6 +225,7 @@ public:
 
     void Clear()
     {
+        m_str.clear();
     }
 
 /**@section Variable */
