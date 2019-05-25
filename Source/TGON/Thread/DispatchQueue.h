@@ -16,21 +16,47 @@
 
 namespace tgon
 {
+    
+class TGON_API SerialDispatchQueue final :
+    private boost::noncopyable
+{
+/**@section Method */
+public:
+    void AddAsyncTask(const Delegate<void()>& task);
+    void AddAsyncTask(Delegate<void()>&& task);
+    void AddSyncTask(const Delegate<void()>& task);
+    void Dispatch();
+    
+/**@section Variable */
+private:
+    std::deque<Delegate<void()>> m_taskPool;
+};
+    
+enum class ConcurrentDispatchQoS
+{
+    UserInteractive,
+    UserInitiated,
+    Default,
+    Utility,
+    Background,
+};
 
-class TGON_API DispatchQueue final :
+class TGON_API ConcurrentDispatchQueue final :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    explicit DispatchQueue(int32_t threadPoolCount = 1);
+    ConcurrentDispatchQueue(ConcurrentDispatchQoS qos, int32_t threadPoolCount);
     
 /**@section Destructor */
 public:
-    ~DispatchQueue();
+    ~ConcurrentDispatchQueue();
 
 /**@section Method */
 public:
     void AddAsyncTask(const Delegate<void()>& task);
+    void AddAsyncTask(Delegate<void()>&& task);
+    void AddSyncTask(const Delegate<void()>& task);
     
 private:
     void DispatchQueueHandler();

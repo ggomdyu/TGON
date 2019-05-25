@@ -34,17 +34,7 @@ void ThousandParty::InitializeModule()
 {
     using namespace tgon;
 
-    static AudioDevice audioDevice;
-    audioDevice.MakeCurrent();
-
-    static auto audioBuffer = std::shared_ptr<AudioBuffer>(new AudioBuffer(GetDesktopDirectory() + "/Sulk.ogg"));
-    static AudioPlayer audioPlayer(audioBuffer);
-    audioPlayer.SetListenerPosition({ 0, 0, 0 });
-    audioPlayer.SetListenerVelocity({ 0, 0, 0 });
-    audioPlayer.SetPosition({ 0, 0, 0 });
-    audioPlayer.SetPitch(1.0f);
-    audioPlayer.Play();
-
+    // Input Module
     const auto& rootWindow = Application::GetInstance()->GetRootWindow();
     InputMode inputMode;
     {
@@ -54,6 +44,7 @@ void ThousandParty::InitializeModule()
     }
     this->RegisterModule<InputModule>(*rootWindow, inputMode);
 
+    // Graphics Module
     VideoMode videoMode;
     {
         videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
@@ -63,6 +54,9 @@ void ThousandParty::InitializeModule()
         videoMode.enableMultiSampling = false;
     };
     this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
+    
+    // Etc
     this->RegisterModule<TimeModule>();
+    this->RegisterModule<TaskModule>();
     this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
 }

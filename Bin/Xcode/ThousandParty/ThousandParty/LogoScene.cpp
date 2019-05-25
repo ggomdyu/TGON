@@ -22,29 +22,35 @@ std::unique_ptr<tgon::DispatchQueue> g_dq;
 
 LogoScene::LogoScene()
 {
-    g_dq.reset(new tgon::DispatchQueue(4));
-    
-    static std::atomic<int> n = 0;
-    for (int i = 0 ; i < 10; ++i)
-    {
-        static auto beginTime = tgon::GetTickCount();
-        g_dq->AddAsyncTask([]()
-        {
-            int temp = 0;
-            for (int j = 0 ; j < 100000000; ++j)
-            {
-                temp += 1;
-            }
-            
-            n += temp;
-            tgon::Log(tgon::LogLevel::Debug,"%d\n", tgon::GetTickCount() - beginTime);
-        });
-    }
+//    g_dq.reset(new tgon::DispatchQueue(4));
+//    
+//    static int n = 0;
+//    for (int i = 0 ; i < 10; ++i)
+//    {
+//        static auto beginTime = tgon::GetTickCount();
+//        g_dq->AddSyncTask([]()
+//        {
+//            int temp = 0;
+//            for (int j = 0 ; j < 100000000; ++j)
+//            {
+//                temp += 1;
+//            }
+//            
+//            n += temp;
+//            tgon::Log(tgon::LogLevel::Debug,"%d\n", (int)n);
+//        });
+//    }
 
     using namespace tgon;
 
     decltype(auto) application = Application::GetInstance();
     decltype(auto) engine = application->GetEngine();
+    
+    auto taskModule = engine->FindModule<TaskModule>();
+    taskModule->AddAsyncTask([]()
+    {
+        
+    });
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();

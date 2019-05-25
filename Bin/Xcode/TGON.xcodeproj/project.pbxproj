@@ -81,6 +81,8 @@
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
+		FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */; };
+		FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBDAD7922971A52003B9256 /* DispatchQueue.h */; };
 		FDC02CE0228482F000BEE91A /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02CDE228482F000BEE91A /* Hash.h */; };
 		FDC02CE1228482F000BEE91A /* Hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CDF228482F000BEE91A /* Hash.cpp */; };
 		FDC02CE2228487CA00BEE91A /* AudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C5E228481F000BEE91A /* AudioDevice.cpp */; };
@@ -123,7 +125,6 @@
 		FDC02D19228487CA00BEE91A /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CA1228481F100BEE91A /* Window.cpp */; };
 		FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CAA228481F100BEE91A /* Application.cpp */; };
 		FDC02D1B228487CA00BEE91A /* WELL1024a.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C28228481F000BEE91A /* WELL1024a.cpp */; };
-		FDC02D1C228487CA00BEE91A /* ThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C26228481F000BEE91A /* ThreadPool.cpp */; };
 		FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C31228481F000BEE91A /* Timer.cpp */; };
 		FDC02D1E228487CA00BEE91A /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C39228481F000BEE91A /* DateTime.cpp */; };
 		FDC02D1F228487CA00BEE91A /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C3D228481F000BEE91A /* Time.cpp */; };
@@ -376,6 +377,8 @@
 		FDACD2F020B4632500C62C24 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../ThirdParty/Debug/x86_64/libvorbis.a; sourceTree = "<group>"; };
 		FDACD2F220B4633D00C62C24 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../ThirdParty/Debug/x86_64/libvorbisenc.a; sourceTree = "<group>"; };
 		FDACD2F320B4633D00C62C24 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
+		FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
+		FDBDAD7922971A52003B9256 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		FDC02B49228481EF00BEE91A /* MacOSLog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLog.mm; sourceTree = "<group>"; };
 		FDC02B4A228481EF00BEE91A /* LogType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = LogType.h; sourceTree = "<group>"; };
 		FDC02B4B228481EF00BEE91A /* Log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Log.h; sourceTree = "<group>"; };
@@ -444,8 +447,6 @@
 		FDC02C0A228481F000BEE91A /* Rect.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Rect.h; sourceTree = "<group>"; };
 		FDC02C0B228481F000BEE91A /* Mathematics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Mathematics.h; sourceTree = "<group>"; };
 		FDC02C0C228481F000BEE91A /* Vector3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Vector3.h; sourceTree = "<group>"; };
-		FDC02C25228481F000BEE91A /* ThreadPool.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ThreadPool.h; sourceTree = "<group>"; };
-		FDC02C26228481F000BEE91A /* ThreadPool.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ThreadPool.cpp; sourceTree = "<group>"; };
 		FDC02C28228481F000BEE91A /* WELL1024a.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = WELL1024a.cpp; sourceTree = "<group>"; };
 		FDC02C29228481F000BEE91A /* WELL1024a.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WELL1024a.h; sourceTree = "<group>"; };
 		FDC02C2A228481F000BEE91A /* Random.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Random.h; sourceTree = "<group>"; };
@@ -1255,8 +1256,8 @@
 		FDC02C24228481F000BEE91A /* Thread */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02C25228481F000BEE91A /* ThreadPool.h */,
-				FDC02C26228481F000BEE91A /* ThreadPool.cpp */,
+				FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */,
+				FDBDAD7922971A52003B9256 /* DispatchQueue.h */,
 			);
 			name = Thread;
 			path = ../../Source/TGON/Thread;
@@ -1590,6 +1591,7 @@
 				FDC02D492284893F00BEE91A /* MeshRendererComponent.h in Headers */,
 				FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */,
 				FDD4E0332287124800E26531 /* Transform.h in Headers */,
+				FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */,
 				FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */,
 				FDC02D532284897500BEE91A /* GameObject.h in Headers */,
 				FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */,
@@ -1739,6 +1741,7 @@
 				FDC02D0D228487CA00BEE91A /* OpenGLTexture.cpp in Sources */,
 				FDC02D0E228487CA00BEE91A /* OpenGLShaderProgram.cpp in Sources */,
 				FDC02D0F228487CA00BEE91A /* OpenGLVertexBuffer.cpp in Sources */,
+				FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */,
 				FDC02D10228487CA00BEE91A /* MacOSKeyboard.cpp in Sources */,
 				FDC02D11228487CA00BEE91A /* MacOSInputManager.cpp in Sources */,
 				FDC02D12228487CA00BEE91A /* MacOSGamepad.cpp in Sources */,
@@ -1750,7 +1753,6 @@
 				FDC02D19228487CA00BEE91A /* Window.cpp in Sources */,
 				FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */,
 				FDC02D1B228487CA00BEE91A /* WELL1024a.cpp in Sources */,
-				FDC02D1C228487CA00BEE91A /* ThreadPool.cpp in Sources */,
 				FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */,
 				FDC02D1E228487CA00BEE91A /* DateTime.cpp in Sources */,
 				FDC02D1F228487CA00BEE91A /* Time.cpp in Sources */,
