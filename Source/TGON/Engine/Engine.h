@@ -115,6 +115,12 @@ inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const 
 {
     return m_timeModule;
 }
+
+template <>
+inline std::shared_ptr<TimeModule> Engine::RegisterModule<TimeModule>() noexcept
+{
+    return m_timeModule;
+}
     
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)

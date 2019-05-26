@@ -67,3 +67,4 @@
 #include "Game/Component/CanvasSpriteRendererComponent.h"
 #include "Engine/SceneModule.h"
 #include "Game/Scene.h"
+#include "Thread/Thread.h"

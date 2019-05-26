@@ -16,11 +16,11 @@
 namespace tgon
 {
     
-struct TaskModuleProperty
-{
-    int32_t UserInteractiveDispatchQueue
-//    ConcurrentDispatchQoS qos, int32_t threadPoolCount)
-};
+//struct TaskModuleProperty
+//{
+//    int32_t UserInteractiveDispatchQueue
+////    ConcurrentDispatchQoS qos, int32_t threadPoolCount)
+//};
 
 class TGON_API TaskModule final :
 	public IModule
@@ -40,13 +40,13 @@ public:
 public:
     virtual void Update() override;
     SerialDispatchQueue& GetMainDispatchQueue() noexcept;
-    ConcurrentDispatchQueue& GetGlobalDispatchQueue(ConcurrentDispatchQoS qos = ConcurrentDispatchQoS::Default) noexcept;
+    ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) noexcept;
     const SerialDispatchQueue& GetMainDispatchQueue() const noexcept;
-    const ConcurrentDispatchQueue& GetGlobalDispatchQueue(ConcurrentDispatchQoS qos = ConcurrentDispatchQoS::Default) const noexcept;
+    const ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) const noexcept;
     
 private:
-    ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ConcurrentDispatchQoS qos) noexcept;
-    const ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ConcurrentDispatchQoS qos) const noexcept;
+    ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ThreadPriority threadPriority) noexcept;
+    const ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ThreadPriority threadPriority) const noexcept;
     
 /**@section Variable */
 private:

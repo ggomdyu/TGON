@@ -6,13 +6,14 @@
 
 #pragma once
 #include <cstdint>
-#include <thread>
 #include <deque>
 #include <mutex>
 #include <boost/noncopyable.hpp>
 
 #include "Platform/Config.h"
 #include "Core/Delegate.h"
+
+#include "Thread.h"
 
 namespace tgon
 {
@@ -25,20 +26,13 @@ public:
     void AddAsyncTask(const Delegate<void()>& task);
     void AddAsyncTask(Delegate<void()>&& task);
     void AddSyncTask(const Delegate<void()>& task);
+    void AddSyncTask(Delegate<void()>&& task);
     void Dispatch();
     
 /**@section Variable */
 private:
+    std::mutex m_mutex;
     std::deque<Delegate<void()>> m_taskPool;
-};
-    
-enum class ConcurrentDispatchQoS
-{
-    UserInteractive,
-    UserInitiated,
-    Default,
-    Utility,
-    Background,
 };
 
 class TGON_API ConcurrentDispatchQueue final :
@@ -46,7 +40,7 @@ class TGON_API ConcurrentDispatchQueue final :
 {
 /**@section Constructor */
 public:
-    ConcurrentDispatchQueue(ConcurrentDispatchQoS qos, int32_t threadPoolCount);
+    ConcurrentDispatchQueue(ThreadPriority threadPriority, int32_t threadPoolCount);
     
 /**@section Destructor */
 public:
@@ -57,6 +51,7 @@ public:
     void AddAsyncTask(const Delegate<void()>& task);
     void AddAsyncTask(Delegate<void()>&& task);
     void AddSyncTask(const Delegate<void()>& task);
+    void AddSyncTask(Delegate<void()>&& task);
     
 private:
     void DispatchQueueHandler();
@@ -65,7 +60,7 @@ private:
 private:
     std::condition_variable m_cv;
     std::mutex m_mutex;
-    std::deque<std::thread> m_threadPool;
+    std::deque<Thread> m_threadPool;
     std::deque<Delegate<void()>> m_taskPool;
     bool m_needToDestroy;
 };

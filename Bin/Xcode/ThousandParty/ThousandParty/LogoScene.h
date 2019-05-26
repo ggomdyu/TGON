@@ -42,7 +42,6 @@ public:
 /**@section Variable */
 private:
     int64_t m_beginTime;
-    std::shared_ptr<tgon::CameraComponent> m_cameraComponent;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent1;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent2;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent3;

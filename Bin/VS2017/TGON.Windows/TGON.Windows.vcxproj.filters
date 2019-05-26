@@ -62,6 +62,9 @@
     <Filter Include="Sources\Core\Windows">
       <UniqueIdentifier>{71bf75a8-bd49-476b-acc7-a74f2279d999}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Thread">
+      <UniqueIdentifier>{6da44ec8-91b0-4b16-ac4e-0a59b80769ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h">
@@ -215,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTime.cpp">
       <Filter>Sources\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Thread\Windows\WindowsThread.cpp">
+      <Filter>Sources\Thread</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

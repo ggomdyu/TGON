@@ -1,27 +1,65 @@
 #include "PrecompiledHeader.h"
 
-#include <pthread.h>
-
 #include "DispatchQueue.h"
+#include "Thread.h"
 
 namespace tgon
 {
     
 void SerialDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     m_taskPool.push_back(task);
 }
 
 void SerialDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
+
     m_taskPool.push_back(std::move(task));
 }
 
 void SerialDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 {
-    task();
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    if (Thread::IsMainThread(std::this_thread::get_id()))
+    {
+        task();
+    }
+    else
+    {
+        bool isTaskExecuted = false;
+        this->AddAsyncTask([&, task]()
+        {
+            task();
+            isTaskExecuted = true;
+        });
+        while (isTaskExecuted == false);
+    }
 }
-    
+
+void SerialDispatchQueue::AddSyncTask(Delegate<void()>&& task)
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+
+    if (Thread::IsMainThread(std::this_thread::get_id()))
+    {
+        task();
+    }
+    else
+    {
+        bool isTaskExecuted = false;
+        this->AddAsyncTask([&, task = std::move(task)]()
+        {
+            task();
+            isTaskExecuted = true;
+        });
+        while (isTaskExecuted == false);
+    }
+}
+
 void SerialDispatchQueue::Dispatch()
 {
     for (auto& task : m_taskPool)
@@ -30,13 +68,14 @@ void SerialDispatchQueue::Dispatch()
     }
 }
 
-ConcurrentDispatchQueue::ConcurrentDispatchQueue(ConcurrentDispatchQoS qos, int32_t threadPoolCount) :
+ConcurrentDispatchQueue::ConcurrentDispatchQueue(ThreadPriority threadPriority, int32_t threadPoolCount) :
     m_threadPool(threadPoolCount),
     m_needToDestroy(false)
 {
     for (auto& thread : m_threadPool)
     {
-        thread = std::thread(&ConcurrentDispatchQueue::DispatchQueueHandler, this);
+        thread = Thread(&ConcurrentDispatchQueue::DispatchQueueHandler, this);
+        thread.SetPriority(threadPriority);
     }
 }
 
@@ -56,7 +95,7 @@ ConcurrentDispatchQueue::~ConcurrentDispatchQueue()
     
 void ConcurrentDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
 
     m_taskPool.push_back(task);
     m_cv.notify_one();
@@ -64,7 +103,7 @@ void ConcurrentDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 
 void ConcurrentDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
     
     m_taskPool.push_back(std::move(task));
     m_cv.notify_one();
@@ -86,7 +125,23 @@ void ConcurrentDispatchQueue::AddSyncTask(const Delegate<void()>& task)
     while (isTaskExecuted == false);
 }
 
-    void ConcurrentDispatchQueue::DispatchQueueHandler()
+void ConcurrentDispatchQueue::AddSyncTask(Delegate<void()>&& task)
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+
+    bool isTaskExecuted = false;
+    m_taskPool.push_back([&, task = std::move(task)]()
+    {
+        task();
+        isTaskExecuted = true;
+    });
+    m_cv.notify_one();
+
+    lock.unlock();
+    while (isTaskExecuted == false);
+}
+
+void ConcurrentDispatchQueue::DispatchQueueHandler()
 {
     std::unique_lock<std::mutex> lock(m_mutex);
     

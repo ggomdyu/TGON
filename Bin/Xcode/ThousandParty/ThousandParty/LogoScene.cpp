@@ -1,7 +1,9 @@
 #include "PrecompiledHeader.h"
 
 #include <deque>
+#include <functional>
 #include <atomic>
+#include <thread>
 #include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
@@ -18,7 +20,6 @@ namespace tgon
 
 } /* namespace tgon */
 
-std::unique_ptr<tgon::DispatchQueue> g_dq;
 
 LogoScene::LogoScene()
 {
@@ -26,7 +27,7 @@ LogoScene::LogoScene()
 //    
 //    static int n = 0;
 //    for (int i = 0 ; i < 10; ++i)
-//    {
+//    {  
 //        static auto beginTime = tgon::GetTickCount();
 //        g_dq->AddSyncTask([]()
 //        {
@@ -43,27 +44,27 @@ LogoScene::LogoScene()
 
     using namespace tgon;
 
-    decltype(auto) application = Application::GetInstance();
-    decltype(auto) engine = application->GetEngine();
-    
-    auto taskModule = engine->FindModule<TaskModule>();
-    taskModule->AddAsyncTask([]()
+    auto engine = Application::GetInstance()->GetEngine();
+
+    Thread::IsMainThread({});
+
+    auto taskModule = &(*engine->FindModule<TaskModule>());
+    taskModule->GetGlobalDispatchQueue().AddAsyncTask([this, taskModule]()
     {
-        
+        auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
+        const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetSize();
+        const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+        const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+        cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
+
+        taskModule->GetMainDispatchQueue().AddSyncTask([this, cameraObject]()
+        {
+            this->AddGlobalObject(cameraObject);
+        });
     });
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
-
-    // Create a camera
-    {
-        auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
-        const tgon::I32Extent2D rootWindowSize = application->GetRootWindow()->GetSize();
-        const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
-        const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-        m_cameraComponent = cameraObject->AddComponent<CameraComponent>(tgon::FRect{-halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height)}, -1.0f, 1024.0f);
-        this->AddGlobalObject(cameraObject);
-    }
 
     //
 
@@ -115,24 +116,24 @@ LogoScene::LogoScene()
     }
 
     //
-//    {
-//        auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
-//        introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
-//        m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-//        m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-//        m_introSpriteComponent2->SetOpacity(0.0f);
-//        this->AddObject(introObject2);
-//    }
-//
-//    // Intro에 사용할 Sprite 생성
-//    {
-//        auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
-//        fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
-//        m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-//        m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
-//        m_fadeOutSpriteComponent->SetOpacity(0.0f);
-//        this->AddObject(fadeOutObject);
-//    }
+    //{
+    //    auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
+    //    introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+    //    m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
+    //    m_introSpriteComponent2->SetOpacity(0.0f);
+    //    this->AddObject(introObject2);
+    //}
+
+    //// Intro에 사용할 Sprite 생성
+    //{
+    //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
+    //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+    //    m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
+    //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
+    //    this->AddObject(fadeOutObject);
+    //}
 
     m_beginTime = tgon::GetTickCount();
 
@@ -144,7 +145,7 @@ void LogoScene::Update()
     SuperType::Update();
 
     
-    object2->GetTransform()->SetLocalRotation({tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f)});
+    //object2->GetTransform()->SetLocalRotation({tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f)});
     
 //    this->OnHandleInput();
 
