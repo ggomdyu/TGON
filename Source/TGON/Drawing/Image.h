@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <algorithm>
 #include <string>
+#include <string_view>
 
 #include "Platform/Config.h"
 #include "String/StringHash.h"
@@ -18,6 +19,14 @@
 
 namespace tgon
 {
+    
+ImageFormat ConvertStringToImageFormat(const std::string_view& str);
+
+template <std::size_t _ImageFormatStrLen>
+inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[_ImageFormatStrLen])
+{
+    return ConvertStringToImageFormat({imageFormatStr, _ImageFormatStrLen - 1});
+}
 
 class TGON_API Image
 {

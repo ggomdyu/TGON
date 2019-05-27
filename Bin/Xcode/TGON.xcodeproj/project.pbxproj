@@ -91,7 +91,6 @@
 		FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CC6228481F100BEE91A /* RTTI.cpp */; };
 		FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */; };
 		FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C4E228481F000BEE91A /* Image.cpp */; };
-		FDC02CEA228487CA00BEE91A /* ImageUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C51228481F000BEE91A /* ImageUtility.cpp */; };
 		FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C42228481F000BEE91A /* GraphicsModule.cpp */; };
 		FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C43228481F000BEE91A /* AudioModule.cpp */; };
 		FDC02CEE228487CA00BEE91A /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C46228481F000BEE91A /* InputModule.cpp */; };
@@ -475,8 +474,6 @@
 		FDC02C4D228481F000BEE91A /* ImageType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ImageType.h; sourceTree = "<group>"; };
 		FDC02C4E228481F000BEE91A /* Image.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Image.cpp; sourceTree = "<group>"; };
 		FDC02C4F228481F000BEE91A /* Drawing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Drawing.h; sourceTree = "<group>"; };
-		FDC02C50228481F000BEE91A /* ImageUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ImageUtility.h; sourceTree = "<group>"; };
-		FDC02C51228481F000BEE91A /* ImageUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ImageUtility.cpp; sourceTree = "<group>"; };
 		FDC02C54228481F000BEE91A /* Image.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Image.h; sourceTree = "<group>"; };
 		FDC02C57228481F000BEE91A /* BaseAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseAudioImporter.h; sourceTree = "<group>"; };
 		FDC02C58228481F000BEE91A /* OggVorbisAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OggVorbisAudioImporter.h; sourceTree = "<group>"; };
@@ -1330,8 +1327,6 @@
 				FDC02C4D228481F000BEE91A /* ImageType.h */,
 				FDC02C4E228481F000BEE91A /* Image.cpp */,
 				FDC02C4F228481F000BEE91A /* Drawing.h */,
-				FDC02C50228481F000BEE91A /* ImageUtility.h */,
-				FDC02C51228481F000BEE91A /* ImageUtility.cpp */,
 				FDC02C54228481F000BEE91A /* Image.h */,
 			);
 			name = Drawing;
@@ -1715,7 +1710,6 @@
 				FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */,
 				FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */,
 				FDD4E0342287124800E26531 /* RectTransform.cpp in Sources */,
-				FDC02CEA228487CA00BEE91A /* ImageUtility.cpp in Sources */,
 				FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */,
 				FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */,
 				FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */,
