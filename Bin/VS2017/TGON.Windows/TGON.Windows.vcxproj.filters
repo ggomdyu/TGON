@@ -118,9 +118,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplicationType.h">
-      <Filter>Sources\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsConfig.h">
       <Filter>Sources\Platform\Windows</Filter>
     </ClInclude>

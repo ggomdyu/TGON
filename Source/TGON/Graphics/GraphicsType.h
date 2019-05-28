@@ -8,10 +8,6 @@
 #include "Platform/Config.h"
 #include "Math/Color.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
-#   include "OpenGL/OpenGLGraphicsType.h"
-#endif
-
 namespace tgon
 {
 

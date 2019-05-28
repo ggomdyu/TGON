@@ -56,15 +56,12 @@ OpenGLContext::OpenGLContext(const Window& window, const VideoMode& videoMode)
     // Find a suitable pixel format.
     {
         NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
-        {
-            ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
-        }
+        ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
 
         pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
         if (pixelFormat == nullptr)
         {
-            NSLog(@"No OpenGL pixel format.");
-            return;
+            throw std::runtime_error("Failed to initialize NSOpenGLPixelFormat.");
         }
     }
 
@@ -88,7 +85,7 @@ OpenGLContext::OpenGLContext(const Window& window, const VideoMode& videoMode)
     glewInit();
 }
 
-OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
+OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
     pixelFormat(rhs.pixelFormat),
     context(rhs.context)
 {
@@ -96,19 +93,21 @@ OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
     rhs.context = nil;
 }
 
-OpenGLContext::~OpenGLContext() = default;
+OpenGLContext::~OpenGLContext() noexecpt
+{
+	this->Destroy();
+}
 
 OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
 {
-    if (this != &rhs)
-    {
-        pixelFormat = rhs.pixelFormat;
-        context = rhs.context;
-        
-        rhs.pixelFormat = nil;
-        rhs.context = nil;
-    }
+	this->Destroy();
 
+    pixelFormat = rhs.pixelFormat;
+    context = rhs.context;
+        
+    rhs.pixelFormat = nil;
+    rhs.context = nil;
+    
     return *this;
 }
 
@@ -120,6 +119,12 @@ void OpenGLContext::MakeCurrent()
 void OpenGLContext::SwapBuffer()
 {
     [context flushBuffer];
+}
+
+void OpenGLContext::Destroy()
+{
+    pixelFormat = nil;
+	context = nil;
 }
 
 } /* namespace tgon */

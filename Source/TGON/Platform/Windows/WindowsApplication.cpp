@@ -11,6 +11,16 @@
 namespace tgon
 {
 
+constexpr UINT ConvertToMessageBoxIconNative(MessageBoxIcon messageBoxIcon) noexcept
+{
+    constexpr UINT nativeMessageBoxIcons[] = {
+        -1,
+        MB_ICONQUESTION,
+        MB_ICONEXCLAMATION,
+    };
+    return nativeMessageBoxIcons[static_cast<int>(messageBoxIcon)];
+}
+
 WindowsApplication::WindowsApplication() :
     m_doCrashReport(false)
 {
@@ -25,7 +35,7 @@ void WindowsApplication::ShowMessageBox(const char* title, const char* message, 
     wchar_t utf16Title[256] {};
     UTF8::Convert<UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
 
-    ::MessageBoxW(nullptr, utf16Message, utf16Title, static_cast<UINT>(messageBoxIcon) | MB_OK);
+    ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertToMessageBoxIconNative(messageBoxIcon) | MB_OK);
 }
 
 void WindowsApplication::EnableCrashHandler()

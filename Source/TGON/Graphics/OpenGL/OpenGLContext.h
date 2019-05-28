@@ -31,7 +31,7 @@ struct TGON_API OpenGLContext final :
 /**@section Constructor */
 public:
     OpenGLContext(const Window& displayTarget, const VideoMode& videoMode);
-    OpenGLContext(OpenGLContext&& rhs);
+    OpenGLContext(OpenGLContext&& rhs) noexcept;
 
 /**@section Destructor */
 public:
@@ -48,6 +48,9 @@ public:
     
     /**@brief   Displays a back buffer image to screen. */
     void SwapBuffer();
+
+private:
+    void Destroy();
 
 /**@section Variable */
 public:

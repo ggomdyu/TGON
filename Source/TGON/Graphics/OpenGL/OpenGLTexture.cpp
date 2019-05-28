@@ -10,21 +10,21 @@ namespace tgon
     
 constexpr GLint ConvertTextureFilterModeToNative(TextureFilterMode textureFilterMode) noexcept
 {
-    constexpr GLint textureFilterModes[] = {
+    constexpr GLint nativeTextureFilterModes[] = {
         GL_NEAREST,
         GL_LINEAR
     };
-    return textureFilterModes[static_cast<int>(textureFilterMode)];
+    return nativeTextureFilterModes[static_cast<int>(textureFilterMode)];
 }
     
 constexpr GLint ConvertTextureWrapModeToNative(TextureWrapMode textureWrapMode) noexcept
 {
-    constexpr GLint textureWrapModes[] = {
+    constexpr GLint nativeTextureWrapModes[] = {
         GL_REPEAT,
         GL_CLAMP,
         GL_MIRRORED_REPEAT,
     };
-    return textureWrapModes[static_cast<int>(textureWrapMode)];
+    return nativeTextureWrapModes[static_cast<int>(textureWrapMode)];
 }
 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :

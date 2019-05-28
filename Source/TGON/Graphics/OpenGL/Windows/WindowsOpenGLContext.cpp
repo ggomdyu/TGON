@@ -1,3 +1,4 @@
+#include "..\OpenGLContext.h"
 #include "PrecompiledHeader.h"
 
 #include <cassert>
@@ -27,7 +28,7 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
     HGLRC oldGLRC = MakeOldGLRC(dcHandle);
     if (oldGLRC == nullptr)
     {
-        throw std::runtime_error("Failed to invoke MakeOldGLRC.");
+        throw std::runtime_error("Failed to create old version of OpenGL rendering context.");
     }
 
     if (::wglMakeCurrent(dcHandle, oldGLRC) == FALSE)
@@ -37,14 +38,14 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
  
     if (glewInit() != GLEW_OK)
     {
-        throw std::runtime_error("Failed to invoke glewInit.");
+        throw std::runtime_error("Failed to initialize glew.");
     }
 
     // Create the new version of OpenGL Context.
     context = MakeNewGLRC(dcHandle);
     if (context == nullptr)
     {
-        return;
+        throw std::runtime_error("Failed to create latest version of OpenGL rendering context.");
     }
 
     wglMakeCurrent(nullptr, nullptr);
@@ -57,7 +58,7 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
     }
 }
 
-OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
+OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
     wndHandle(rhs.wndHandle),
     context(rhs.context),
     dcHandle(rhs.dcHandle),
@@ -71,27 +72,12 @@ OpenGLContext::OpenGLContext(OpenGLContext&& rhs) :
 
 OpenGLContext::~OpenGLContext()
 {
-    if (context != nullptr)
-    {
-        ::wglMakeCurrent(nullptr, nullptr);
-        ::wglDeleteContext(context);
-    }
-        
-    if (wndHandle != nullptr && dcHandle != nullptr)
-    {
-        ::ReleaseDC(wndHandle, dcHandle);
-
-        context = nullptr;
-        dcHandle = nullptr;
-    }
+    this->Destroy();
 }
 
 OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
 {
-    if (this == &rhs)
-    {
-        return *this;
-    }
+    this->Destroy();
 
     wndHandle = rhs.wndHandle;
     context = rhs.context;
@@ -114,6 +100,23 @@ void OpenGLContext::MakeCurrent()
 void OpenGLContext::SwapBuffer()
 {
     ::SwapBuffers(dcHandle);
+}
+
+void OpenGLContext::Destroy()
+{
+    if (context != nullptr)
+    {
+        ::wglMakeCurrent(nullptr, nullptr);
+        ::wglDeleteContext(context);
+    }
+
+    if (wndHandle != nullptr && dcHandle != nullptr)
+    {
+        ::ReleaseDC(wndHandle, dcHandle);
+
+        context = nullptr;
+        dcHandle = nullptr;
+    }
 }
 
 } /* namespace tgon */
