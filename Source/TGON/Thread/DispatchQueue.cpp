@@ -22,8 +22,6 @@ void SerialDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 
 void SerialDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
     if (Thread::IsMainThread(std::this_thread::get_id()))
     {
         task();
@@ -42,8 +40,6 @@ void SerialDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 
 void SerialDispatchQueue::AddSyncTask(Delegate<void()>&& task)
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
-
     if (Thread::IsMainThread(std::this_thread::get_id()))
     {
         task();
@@ -111,33 +107,25 @@ void ConcurrentDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
     
 void ConcurrentDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
-    
     bool isTaskExecuted = false;
-    m_taskPool.push_back([&]()
+    this->AddAsyncTask([&]()
     {
         task();
         isTaskExecuted = true;
     });
-    m_cv.notify_one();
     
-    lock.unlock();
     while (isTaskExecuted == false);
 }
 
 void ConcurrentDispatchQueue::AddSyncTask(Delegate<void()>&& task)
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
-
     bool isTaskExecuted = false;
-    m_taskPool.push_back([&, task = std::move(task)]()
+    this->AddAsyncTask([&, task = std::move(task)]()
     {
         task();
         isTaskExecuted = true;
     });
-    m_cv.notify_one();
 
-    lock.unlock();
     while (isTaskExecuted == false);
 }
 
