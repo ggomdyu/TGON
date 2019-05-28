@@ -15,38 +15,11 @@ std::shared_ptr<tgon::GameObject> object3;
 std::shared_ptr<tgon::GameObject> object4;
 std::shared_ptr<tgon::GameObject> object5;
 
-namespace tgon
-{
-
-} /* namespace tgon */
-
-
 LogoScene::LogoScene()
 {
-//    g_dq.reset(new tgon::DispatchQueue(4));
-//    
-//    static int n = 0;
-//    for (int i = 0 ; i < 10; ++i)
-//    {  
-//        static auto beginTime = tgon::GetTickCount();
-//        g_dq->AddSyncTask([]()
-//        {
-//            int temp = 0;
-//            for (int j = 0 ; j < 100000000; ++j)
-//            {
-//                temp += 1;
-//            }
-//            
-//            n += temp;
-//            tgon::Log(tgon::LogLevel::Debug,"%d\n", (int)n);
-//        });
-//    }
-
     using namespace tgon;
 
     auto engine = Application::GetInstance()->GetEngine();
-
-    Thread::IsMainThread({});
 
     auto taskModule = &(*engine->FindModule<TaskModule>());
     taskModule->GetGlobalDispatchQueue().AddAsyncTask([this, taskModule]()
@@ -65,8 +38,6 @@ LogoScene::LogoScene()
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
-
-    //
 
     {
         auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);

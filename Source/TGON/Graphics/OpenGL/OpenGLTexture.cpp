@@ -7,13 +7,32 @@
 
 namespace tgon
 {
+    
+constexpr GLint ConvertTextureFilterModeToNative(TextureFilterMode textureFilterMode) noexcept
+{
+    constexpr GLint textureFilterModes[] = {
+        GL_NEAREST,
+        GL_LINEAR
+    };
+    return textureFilterModes[static_cast<int>(textureFilterMode)];
+}
+    
+constexpr GLint ConvertTextureWrapModeToNative(TextureWrapMode textureWrapMode) noexcept
+{
+    constexpr GLint textureWrapModes[] = {
+        GL_REPEAT,
+        GL_CLAMP,
+        GL_MIRRORED_REPEAT,
+    };
+    return textureWrapModes[static_cast<int>(textureWrapMode)];
+}
 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
     m_image(filePath),
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
-    m_filterMode(static_cast<GLint>(filterMode)),
-    m_wrapMode(static_cast<GLint>(wrapMode))
+    m_filterMode(filterMode),
+    m_wrapMode(wrapMode)
 {
     assert(m_textureHandle != 0);
     
@@ -48,21 +67,21 @@ void OpenGLTexture::UpdateTexParemeters()
 {
     // Update texture filter
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_filterMode)); // When minifying the image
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, ConvertTextureFilterModeToNative(m_filterMode))); // When minifying the image
 
     // Update texture wrap mode
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_wrapMode));
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_wrapMode));
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, ConvertTextureWrapModeToNative(m_wrapMode)));
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, ConvertTextureWrapModeToNative(m_wrapMode)));
 }
 
 void OpenGLTexture::SetFilterMode(TextureFilterMode filterMode)
 {
-    m_filterMode = static_cast<GLint>(filterMode);
+    m_filterMode = filterMode;
 }
 
 void OpenGLTexture::SetWrapMode(TextureWrapMode wrapMode)
 {
-    m_wrapMode = static_cast<GLint>(wrapMode);
+    m_wrapMode = wrapMode;
 }
 
 GLuint OpenGLTexture::CreateTextureHandle() const
@@ -75,12 +94,12 @@ GLuint OpenGLTexture::CreateTextureHandle() const
 
 TextureFilterMode OpenGLTexture::GetFilterMode() const noexcept
 {
-    return static_cast<TextureFilterMode>(m_filterMode);
+    return m_filterMode;
 }
 
 TextureWrapMode OpenGLTexture::GetWrapMode() const noexcept
 {
-    return static_cast<TextureWrapMode>(m_wrapMode);
+    return m_wrapMode;
 }
 
 void OpenGLTexture::CreateMipmap() const

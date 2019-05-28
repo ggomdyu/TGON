@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-std::shared_ptr<Mesh> MeshUtility::GetSharedTriangle()
+std::shared_ptr<Mesh> GetSharedTriangle()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {
@@ -41,7 +41,7 @@ std::shared_ptr<Mesh> MeshUtility::GetSharedTriangle()
     return sharedMesh;
 };
 
-std::shared_ptr<Mesh> MeshUtility::GetSharedCube()
+std::shared_ptr<Mesh> GetSharedCube()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {
@@ -102,7 +102,7 @@ std::shared_ptr<Mesh> MeshUtility::GetSharedCube()
     return sharedMesh;
 };
 
-std::shared_ptr<Mesh> MeshUtility::GetSharedQuad()
+std::shared_ptr<Mesh> GetSharedQuad()
 {
     static std::shared_ptr<Mesh> sharedMesh = []()
     {

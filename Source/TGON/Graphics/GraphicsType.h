@@ -15,6 +15,29 @@
 namespace tgon
 {
 
+enum class PrimitiveType
+{
+    Points,
+    Lines,
+    LineStrip,
+    Triangles,
+    TriangleStrip,
+    TriangleFan,
+};
+
+enum class FillMode
+{
+    Point,
+    WireFrame,
+    Solid,
+};
+
+enum class CullMode
+{
+    CW,
+    CCW,
+};
+
 enum class GraphicsSDK
 {
     OpenGL2_1 = 0,

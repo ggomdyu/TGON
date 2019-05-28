@@ -32,7 +32,6 @@
 #include "Engine/GraphicsModule.h"
 #include "Engine/Engine.h"
 #include "String/FixedString.h"
-#include "String/FixedStringUtility.h"
 #include "String/StringHash.h"
 #include "String/UUID.h"
 #include "String/Hash.h"

@@ -7,20 +7,19 @@
 #pragma once
 #include <cstdlib>
 
-#include "Platform/Config.h"
-
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
-#   include "OpenGL/OpenGLVertexBufferType.h"
-#endif
-
 namespace tgon
 {
-
-enum class BufferType
+    
+enum class VertexFormatType
 {
-    Vertex,
-    Index,
-    Uniform,
+    Float,
+    Double,
+    Byte,
+    UnsignedByte,
+    Short,
+    UnsignedShort,
+    Int,
+    UnsignedInt,
 };
 
 enum class VertexAttributeIndex
@@ -32,11 +31,11 @@ enum class VertexAttributeIndex
 
 struct VertexBufferLayoutDescriptor
 {
-/**section  Public constructor */
+/**section  Constructor */
 public:
     constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept;
 
-/**section  Public variable */
+/**section  Variable */
 public:
     VertexAttributeIndex attribute;
     int32_t dimension;

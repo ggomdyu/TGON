@@ -8,11 +8,6 @@
 #include <thread>
 
 #include "Platform/Config.h"
-#if TGON_PLATFORM_WINDOWS
-#   include <Windows.h>
-#else
-#   include <pthread.h>
-#endif
 
 namespace tgon
 {

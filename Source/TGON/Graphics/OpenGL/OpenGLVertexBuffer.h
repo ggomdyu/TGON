@@ -5,13 +5,16 @@
  */
 
 #pragma once
+#include <GL/glew.h>
 #include <boost/noncopyable.hpp>
 #include <vector>
 
-#include "../VertexBufferType.h"
+#include "Platform/Config.h"
 
 namespace tgon
 {
+    
+struct VertexBufferLayoutDescriptor;
 
 class TGON_API OpenGLVertexBuffer :
     private boost::noncopyable

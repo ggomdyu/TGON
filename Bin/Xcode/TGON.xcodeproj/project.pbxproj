@@ -69,6 +69,11 @@
 		FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC082289D51300D22E46 /* MeshRenderer.h */; };
 		FD78AC0D2289D51400D22E46 /* CanvasRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */; };
 		FD78AC0E2289D51400D22E46 /* CanvasRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */; };
+		FD7DE061229D6C67002B5786 /* Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE05F229D6C67002B5786 /* Thread.h */; };
+		FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE060229D6C67002B5786 /* Thread.cpp */; };
+		FD7DE064229D6C7A002B5786 /* MacOSThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE063229D6C79002B5786 /* MacOSThread.cpp */; };
+		FD7DE067229D6CC7002B5786 /* RectTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE065229D6CC7002B5786 /* RectTransform.h */; };
+		FD7DE068229D6CC7002B5786 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE066229D6CC7002B5786 /* RectTransform.cpp */; };
 		FD7E61C1228F365400A829FD /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C0228F365400A829FD /* Vector4.h */; };
 		FD7E61C322913D7B00A829FD /* IEquatable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C222913D7B00A829FD /* IEquatable.h */; };
 		FD7E61C62291D72F00A829FD /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C42291D72F00A829FD /* Scene.h */; };
@@ -105,7 +110,6 @@
 		FDC02CFF228487CA00BEE91A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B66228481EF00BEE91A /* Texture.cpp */; };
 		FDC02D03228487CA00BEE91A /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B72228481EF00BEE91A /* ShaderProgram.cpp */; };
 		FDC02D04228487CA00BEE91A /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B74228481EF00BEE91A /* Model.cpp */; };
-		FDC02D06228487CA00BEE91A /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B7A228481EF00BEE91A /* Batch.cpp */; };
 		FDC02D07228487CA00BEE91A /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B7B228481EF00BEE91A /* Material.cpp */; };
 		FDC02D08228487CA00BEE91A /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */; };
 		FDC02D09228487CA00BEE91A /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B82228481EF00BEE91A /* OpenGLGraphics.cpp */; };
@@ -154,9 +158,7 @@
 		FDC02D522284897500BEE91A /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D502284897500BEE91A /* GameObject.cpp */; };
 		FDC02D532284897500BEE91A /* GameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D512284897500BEE91A /* GameObject.h */; };
 		FDD4E0312287124800E26531 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD4E02D2287124800E26531 /* Transform.cpp */; };
-		FDD4E0322287124800E26531 /* RectTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD4E02E2287124800E26531 /* RectTransform.h */; };
 		FDD4E0332287124800E26531 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD4E02F2287124800E26531 /* Transform.h */; };
-		FDD4E0342287124800E26531 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD4E0302287124800E26531 /* RectTransform.cpp */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEA237820AFF586000885AC /* PrecompiledHeader.h */; };
@@ -361,6 +363,11 @@
 		FD78AC082289D51300D22E46 /* MeshRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRenderer.h; sourceTree = "<group>"; };
 		FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CanvasRenderer.cpp; sourceTree = "<group>"; };
 		FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasRenderer.h; sourceTree = "<group>"; };
+		FD7DE05F229D6C67002B5786 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		FD7DE060229D6C67002B5786 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		FD7DE063229D6C79002B5786 /* MacOSThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MacOSThread.cpp; sourceTree = "<group>"; };
+		FD7DE065229D6CC7002B5786 /* RectTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectTransform.h; sourceTree = "<group>"; };
+		FD7DE066229D6CC7002B5786 /* RectTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectTransform.cpp; sourceTree = "<group>"; };
 		FD7E61C0228F365400A829FD /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
 		FD7E61C222913D7B00A829FD /* IEquatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEquatable.h; sourceTree = "<group>"; };
 		FD7E61C42291D72F00A829FD /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -383,10 +390,8 @@
 		FDC02B4B228481EF00BEE91A /* Log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Log.h; sourceTree = "<group>"; };
 		FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = VertexBuffer.cpp; sourceTree = "<group>"; };
 		FDC02B54228481EF00BEE91A /* Mesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Mesh.cpp; sourceTree = "<group>"; };
-		FDC02B55228481EF00BEE91A /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RectTransform.h; sourceTree = "<group>"; };
 		FDC02B56228481EF00BEE91A /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IndexBuffer.h; sourceTree = "<group>"; };
 		FDC02B57228481EF00BEE91A /* MeshUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MeshUtility.cpp; sourceTree = "<group>"; };
-		FDC02B58228481EF00BEE91A /* Batch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Batch.h; sourceTree = "<group>"; };
 		FDC02B59228481EF00BEE91A /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Camera.cpp; sourceTree = "<group>"; };
 		FDC02B60228481EF00BEE91A /* Camera.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Camera.h; sourceTree = "<group>"; };
 		FDC02B61228481EF00BEE91A /* CanvasSpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = CanvasSpriteBatch.cpp; sourceTree = "<group>"; };
@@ -405,10 +410,8 @@
 		FDC02B73228481EF00BEE91A /* Model.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Model.h; sourceTree = "<group>"; };
 		FDC02B74228481EF00BEE91A /* Model.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Model.cpp; sourceTree = "<group>"; };
 		FDC02B75228481EF00BEE91A /* GraphicsType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsType.h; sourceTree = "<group>"; };
-		FDC02B76228481EF00BEE91A /* PostProcess.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = PostProcess.h; sourceTree = "<group>"; };
 		FDC02B77228481EF00BEE91A /* Texture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Texture.h; sourceTree = "<group>"; };
 		FDC02B78228481EF00BEE91A /* Graphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Graphics.h; sourceTree = "<group>"; };
-		FDC02B7A228481EF00BEE91A /* Batch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Batch.cpp; sourceTree = "<group>"; };
 		FDC02B7B228481EF00BEE91A /* Material.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Material.cpp; sourceTree = "<group>"; };
 		FDC02B7C228481EF00BEE91A /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = VertexBuffer.h; sourceTree = "<group>"; };
 		FDC02B7E228481EF00BEE91A /* MeshUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MeshUtility.h; sourceTree = "<group>"; };
@@ -424,9 +427,7 @@
 		FDC02B8C228481EF00BEE91A /* OpenGLIndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLIndexBuffer.cpp; sourceTree = "<group>"; };
 		FDC02B8E228481EF00BEE91A /* OpenGLTexture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
 		FDC02B8F228481EF00BEE91A /* OpenGLGraphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLGraphics.h; sourceTree = "<group>"; };
-		FDC02B90228481EF00BEE91A /* OpenGLVertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLVertexBufferType.h; sourceTree = "<group>"; };
 		FDC02B91228481EF00BEE91A /* OpenGLContext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLContext.h; sourceTree = "<group>"; };
-		FDC02B92228481EF00BEE91A /* OpenGLTextureType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLTextureType.h; sourceTree = "<group>"; };
 		FDC02B97228481EF00BEE91A /* OpenGLShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLShaderProgram.h; sourceTree = "<group>"; };
 		FDC02B98228481EF00BEE91A /* OpenGLShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLShaderProgram.cpp; sourceTree = "<group>"; };
 		FDC02B99228481EF00BEE91A /* OpenGLVertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLVertexBuffer.cpp; sourceTree = "<group>"; };
@@ -573,9 +574,7 @@
 		FDC02D502284897500BEE91A /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameObject.cpp; sourceTree = "<group>"; };
 		FDC02D512284897500BEE91A /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameObject.h; sourceTree = "<group>"; };
 		FDD4E02D2287124800E26531 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		FDD4E02E2287124800E26531 /* RectTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectTransform.h; sourceTree = "<group>"; };
 		FDD4E02F2287124800E26531 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		FDD4E0302287124800E26531 /* RectTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectTransform.cpp; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDE085CA20B134F100D22E80 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../ThirdParty/Debug/x86_64/libogg.a; sourceTree = "<group>"; };
@@ -1068,6 +1067,14 @@
 			name = "libvorbis-1.3.6";
 			sourceTree = "<group>";
 		};
+		FD7DE05D229D6C61002B5786 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				FD7DE063229D6C79002B5786 /* MacOSThread.cpp */,
+			);
+			path = MacOS;
+			sourceTree = "<group>";
+		};
 		FD7E61CC2291D84300A829FD /* stb */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,46 +1131,42 @@
 		FDC02B52228481EF00BEE91A /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */,
-				FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */,
 				FD78AC072289D51300D22E46 /* MeshRenderer.cpp */,
 				FD78AC082289D51300D22E46 /* MeshRenderer.h */,
-				FDD4E0302287124800E26531 /* RectTransform.cpp */,
-				FDD4E02E2287124800E26531 /* RectTransform.h */,
+				FDC02B54228481EF00BEE91A /* Mesh.cpp */,
+				FDC02B68228481EF00BEE91A /* Mesh.h */,
+				FDC02B7E228481EF00BEE91A /* MeshUtility.h */,
+				FDC02B7B228481EF00BEE91A /* Material.cpp */,
+				FDC02B65228481EF00BEE91A /* Material.h */,
 				FDD4E02D2287124800E26531 /* Transform.cpp */,
 				FDD4E02F2287124800E26531 /* Transform.h */,
+				FD7DE066229D6CC7002B5786 /* RectTransform.cpp */,
+				FD7DE065229D6CC7002B5786 /* RectTransform.h */,
 				FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */,
-				FDC02B54228481EF00BEE91A /* Mesh.cpp */,
-				FDC02B55228481EF00BEE91A /* RectTransform.h */,
+				FDC02B7C228481EF00BEE91A /* VertexBuffer.h */,
+				FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */,
 				FDC02B56228481EF00BEE91A /* IndexBuffer.h */,
 				FDC02B57228481EF00BEE91A /* MeshUtility.cpp */,
-				FDC02B58228481EF00BEE91A /* Batch.h */,
 				FDC02B59228481EF00BEE91A /* Camera.cpp */,
 				FDC02B60228481EF00BEE91A /* Camera.h */,
+				FDC02B70228481EF00BEE91A /* CameraType.h */,
+				FD78AC092289D51300D22E46 /* CanvasRenderer.cpp */,
+				FD78AC0A2289D51300D22E46 /* CanvasRenderer.h */,
 				FDC02B61228481EF00BEE91A /* CanvasSpriteBatch.cpp */,
+				FDC02B69228481EF00BEE91A /* CanvasSpriteBatch.h */,
+				FDC02B6D228481EF00BEE91A /* CanvasSprite.h */,
 				FDC02B62228481EF00BEE91A /* VertexBufferType.h */,
 				FDC02B63228481EF00BEE91A /* CanvasSprite.cpp */,
-				FDC02B64228481EF00BEE91A /* ShaderProgram.h */,
-				FDC02B65228481EF00BEE91A /* Material.h */,
-				FDC02B66228481EF00BEE91A /* Texture.cpp */,
-				FDC02B68228481EF00BEE91A /* Mesh.h */,
-				FDC02B69228481EF00BEE91A /* CanvasSpriteBatch.h */,
-				FDC02B6C228481EF00BEE91A /* TextureType.h */,
-				FDC02B6D228481EF00BEE91A /* CanvasSprite.h */,
-				FDC02B70228481EF00BEE91A /* CameraType.h */,
-				FDC02B71228481EF00BEE91A /* FVF.h */,
 				FDC02B72228481EF00BEE91A /* ShaderProgram.cpp */,
-				FDC02B73228481EF00BEE91A /* Model.h */,
-				FDC02B74228481EF00BEE91A /* Model.cpp */,
+				FDC02B64228481EF00BEE91A /* ShaderProgram.h */,
 				FDC02B75228481EF00BEE91A /* GraphicsType.h */,
-				FDC02B76228481EF00BEE91A /* PostProcess.h */,
-				FDC02B77228481EF00BEE91A /* Texture.h */,
 				FDC02B78228481EF00BEE91A /* Graphics.h */,
-				FDC02B7A228481EF00BEE91A /* Batch.cpp */,
-				FDC02B7B228481EF00BEE91A /* Material.cpp */,
-				FDC02B7C228481EF00BEE91A /* VertexBuffer.h */,
-				FDC02B7E228481EF00BEE91A /* MeshUtility.h */,
-				FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */,
+				FDC02B6C228481EF00BEE91A /* TextureType.h */,
+				FDC02B66228481EF00BEE91A /* Texture.cpp */,
+				FDC02B77228481EF00BEE91A /* Texture.h */,
+				FDC02B71228481EF00BEE91A /* FVF.h */,
+				FDC02B74228481EF00BEE91A /* Model.cpp */,
+				FDC02B73228481EF00BEE91A /* Model.h */,
 				FDC02B80228481EF00BEE91A /* OpenGL */,
 			);
 			name = Graphics;
@@ -1184,9 +1187,7 @@
 				FDC02B8C228481EF00BEE91A /* OpenGLIndexBuffer.cpp */,
 				FDC02B8E228481EF00BEE91A /* OpenGLTexture.cpp */,
 				FDC02B8F228481EF00BEE91A /* OpenGLGraphics.h */,
-				FDC02B90228481EF00BEE91A /* OpenGLVertexBufferType.h */,
 				FDC02B91228481EF00BEE91A /* OpenGLContext.h */,
-				FDC02B92228481EF00BEE91A /* OpenGLTextureType.h */,
 				FDC02B97228481EF00BEE91A /* OpenGLShaderProgram.h */,
 				FDC02B98228481EF00BEE91A /* OpenGLShaderProgram.cpp */,
 				FDC02B99228481EF00BEE91A /* OpenGLVertexBuffer.cpp */,
@@ -1253,8 +1254,11 @@
 		FDC02C24228481F000BEE91A /* Thread */ = {
 			isa = PBXGroup;
 			children = (
+				FD7DE05D229D6C61002B5786 /* MacOS */,
 				FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */,
 				FDBDAD7922971A52003B9256 /* DispatchQueue.h */,
+				FD7DE060229D6C67002B5786 /* Thread.cpp */,
+				FD7DE05F229D6C67002B5786 /* Thread.h */,
 			);
 			name = Thread;
 			path = ../../Source/TGON/Thread;
@@ -1587,6 +1591,7 @@
 				FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */,
 				FDD4E0332287124800E26531 /* Transform.h in Headers */,
 				FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */,
+				FD7DE067229D6CC7002B5786 /* RectTransform.h in Headers */,
 				FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */,
 				FDC02D532284897500BEE91A /* GameObject.h in Headers */,
 				FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */,
@@ -1598,7 +1603,7 @@
 				FD7E61C62291D72F00A829FD /* Scene.h in Headers */,
 				FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */,
 				FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */,
-				FDD4E0322287124800E26531 /* RectTransform.h in Headers */,
+				FD7DE061229D6C67002B5786 /* Thread.h in Headers */,
 				FDC02D482284893F00BEE91A /* ComponentUtility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1670,6 +1675,7 @@
 				FD78ABDD2289C4DF00D22E46 /* lookup.c in Sources */,
 				FD78ABE02289C4DF00D22E46 /* info.c in Sources */,
 				FD78ABE12289C4DF00D22E46 /* mdct.c in Sources */,
+				FD7DE068229D6CC7002B5786 /* RectTransform.cpp in Sources */,
 				FD78ABE42289C4DF00D22E46 /* envelope.c in Sources */,
 				FD78ABE62289C4DF00D22E46 /* analysis.c in Sources */,
 				FD78AC062289D06000D22E46 /* psy.c in Sources */,
@@ -1705,11 +1711,11 @@
 				FDC02D2C228487D500BEE91A /* MacOSDateTime.mm in Sources */,
 				FDC02CE2228487CA00BEE91A /* AudioDevice.cpp in Sources */,
 				FDC02CE3228487CA00BEE91A /* AudioBuffer.cpp in Sources */,
+				FD7DE064229D6C7A002B5786 /* MacOSThread.cpp in Sources */,
 				FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */,
 				FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */,
 				FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */,
 				FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */,
-				FDD4E0342287124800E26531 /* RectTransform.cpp in Sources */,
 				FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */,
 				FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */,
 				FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */,
@@ -1727,7 +1733,6 @@
 				FDC02D03228487CA00BEE91A /* ShaderProgram.cpp in Sources */,
 				FDC02D04228487CA00BEE91A /* Model.cpp in Sources */,
 				FDC02D522284897500BEE91A /* GameObject.cpp in Sources */,
-				FDC02D06228487CA00BEE91A /* Batch.cpp in Sources */,
 				FDC02D07228487CA00BEE91A /* Material.cpp in Sources */,
 				FDC02D08228487CA00BEE91A /* IndexBuffer.cpp in Sources */,
 				FDC02D09228487CA00BEE91A /* OpenGLGraphics.cpp in Sources */,
@@ -1748,6 +1753,7 @@
 				FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */,
 				FDC02D1B228487CA00BEE91A /* WELL1024a.cpp in Sources */,
 				FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */,
+				FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */,
 				FDC02D1E228487CA00BEE91A /* DateTime.cpp in Sources */,
 				FDC02D1F228487CA00BEE91A /* Time.cpp in Sources */,
 				FDB350382276138C0022BDDF /* framing.c in Sources */,

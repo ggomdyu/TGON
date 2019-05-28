@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
-            timestampString = "580442990.443109"
+            timestampString = "580584243.868677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "LogoScene::LogoScene()"
             landmarkType = "7">
          </BreakpointContent>

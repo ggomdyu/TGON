@@ -9,10 +9,4 @@
 namespace tgon
 {
 
-enum class ProjectionMode
-{
-    Perspective,
-    Orthographic
-};
-    
 } /* namespace tgon */

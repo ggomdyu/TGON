@@ -9,6 +9,41 @@
 namespace tgon
 {
 
+constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
+{
+    constexpr GLenum nativePrimitiveTypes[] = {
+        GL_POINTS,
+        GL_LINES,
+        GL_LINE_STRIP,
+        GL_TRIANGLES,
+        GL_TRIANGLE_STRIP,
+        GL_TRIANGLE_FAN,
+    };
+    
+    return nativePrimitiveTypes[static_cast<int>(primitiveType)];
+}
+    
+constexpr GLenum ConvertFillModeToNative(FillMode fillMode) noexcept
+{
+    constexpr GLenum nativeFillModes[] = {
+        GL_POINT,
+        GL_LINE,
+        GL_FILL,
+    };
+    
+    return nativeFillModes[static_cast<int>(fillMode)];
+}
+    
+constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
+{
+    constexpr GLenum nativecullModes[] = {
+        GL_CW,
+        GL_CCW,
+    };
+    
+    return nativecullModes[static_cast<int>(cullMode)];
+}
+
 OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
     m_context(displayTarget, videoMode),
     m_vertexArrayHandle(0)
@@ -50,12 +85,12 @@ void OpenGLGraphics::SetClearColor(const Color4f& color)
 
 void OpenGLGraphics::SetFillMode(FillMode fillMode)
 {
-    TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, static_cast<GLenum>(fillMode)));
+    TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode)));
 }
 
 void OpenGLGraphics::SetCullMode(CullMode cullMode)
 {
-    TGON_GL_ERROR_CHECK(glFrontFace(static_cast<GLenum>(cullMode)));
+    TGON_GL_ERROR_CHECK(glFrontFace(ConvertCullModeToNative(cullMode)));
 }
 
 void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
@@ -146,12 +181,12 @@ void OpenGLGraphics::SwapBuffer()
 
 void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount)
 {
-    glDrawArrays(static_cast<GLenum>(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount);
+    glDrawArrays(ConvertPrimitiveTypeToNative(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount);
 }
     
 void OpenGLGraphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
-    glDrawElements(static_cast<GLenum>(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
 }
 
 } /* namespace tgon */

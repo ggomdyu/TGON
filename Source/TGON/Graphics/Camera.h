@@ -15,6 +15,12 @@
 
 namespace tgon
 {
+    
+enum class ProjectionMode
+{
+    Perspective,
+    Orthographic
+};
 
 class TGON_API Camera
 {

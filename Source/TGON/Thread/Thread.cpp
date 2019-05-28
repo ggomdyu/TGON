@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
-
 #include "Thread.h"
 
 namespace tgon

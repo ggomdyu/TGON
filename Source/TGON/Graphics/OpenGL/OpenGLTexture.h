@@ -5,9 +5,9 @@
  */
 
 #pragma once
+#include <GL/glew.h>
 #include <boost/noncopyable.hpp>
 
-#include "Core/CoreObject.h"
 #include "Drawing/Image.h"
 
 #include "../TextureType.h"
@@ -74,8 +74,8 @@ private:
 private:
     bool m_isUseMipmap;
     GLuint m_textureHandle;
-    GLint m_filterMode;
-    GLint m_wrapMode;
+    TextureFilterMode m_filterMode;
+    TextureWrapMode m_wrapMode;
     Image m_image;
 };
 

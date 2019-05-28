@@ -2,11 +2,29 @@
 
 #include <cassert>
 
-#include "OpenGLUtility.h"
 #include "OpenGLVertexBuffer.h"
+#include "OpenGLUtility.h"
+
+#include "../VertexBufferType.h"
 
 namespace tgon
 {
+
+constexpr GLenum ConvertVertexFormatTypeToNative(VertexFormatType vertexFormatType) noexcept
+{
+    constexpr GLenum nativeVertexFormatTypes[] = {
+        GL_FLOAT,
+        GL_DOUBLE,
+        GL_BYTE,
+        GL_UNSIGNED_BYTE,
+        GL_SHORT,
+        GL_UNSIGNED_SHORT,
+        GL_INT,
+        GL_UNSIGNED_INT
+    };
+    
+    return nativeVertexFormatTypes[static_cast<int>(vertexFormatType)];
+}
 
 OpenGLVertexBuffer::OpenGLVertexBuffer() :
     m_vertexBufferHandle(this->CreateVertexBufferHandle())
@@ -71,7 +89,7 @@ void OpenGLVertexBuffer::Use()
         TGON_GL_ERROR_CHECK(glVertexAttribPointer(
             static_cast<GLuint>(vertexBufferDesc.attribute),
             vertexBufferDesc.dimension,
-            static_cast<GLenum>(vertexBufferDesc.type),
+            ConvertVertexFormatTypeToNative(vertexBufferDesc.type),
             vertexBufferDesc.normalized,
             vertexBufferDesc.stride,
             reinterpret_cast<const void*>(vertexBufferDesc.offset)

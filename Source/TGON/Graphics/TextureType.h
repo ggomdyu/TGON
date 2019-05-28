@@ -5,8 +5,16 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
-#   include "OpenGL/OpenGLTextureType.h"
-#endif
+enum class TextureFilterMode
+{
+    Point,
+    Bilinear,
+};
+
+enum class TextureWrapMode
+{
+    Repeat,
+    Clamp,
+    Mirror,
+};

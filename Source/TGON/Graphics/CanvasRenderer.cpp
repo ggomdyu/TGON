@@ -12,6 +12,7 @@
 #include "Graphics/Graphics.h"
 
 #include "CanvasRenderer.h"
+#include "VertexBufferType.h"
 
 namespace tgon
 {
