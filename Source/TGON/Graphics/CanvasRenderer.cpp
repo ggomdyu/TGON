@@ -21,7 +21,8 @@ CanvasRenderer::CanvasRenderer() :
     m_spriteVertexBuffer({
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
-    })
+    }),
+    m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), true, true, true})
 {
     this->PrepareDefaultMaterials();
 }
@@ -41,7 +42,16 @@ void CanvasRenderer::Draw(Graphics& graphics)
     }
 #endif
     
+    m_renderTarget.Use();
+    
     this->FlushSpriteBatches(graphics);
+    
+    m_renderTarget.Unuse();
+    
+    graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
+    graphics.ClearColorDepthBuffer();
+    
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld)

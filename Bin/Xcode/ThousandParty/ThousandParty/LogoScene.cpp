@@ -25,7 +25,7 @@ LogoScene::LogoScene()
     taskModule->GetGlobalDispatchQueue().AddAsyncTask([this, taskModule]()
     {
         auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
-        const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetSize();
+        const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
         const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
         const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
         cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);

@@ -6,7 +6,6 @@
 
 #pragma once
 #include <cassert>
-#include <GL/glew.h>
 
 #include "Diagnostics/Log.h"
 

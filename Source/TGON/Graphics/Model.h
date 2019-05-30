@@ -18,12 +18,12 @@ namespace tgon
 
 class TGON_API Model final
 {
-/* @section Public constructor */
+/* @section Constructor */
 public:
     /* @brief   Initializes the mesh renderer with mesh, material, and world-view-projection matrix. */
     Model(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material);
     
-/* @section Public method */
+/* @section Method */
 public:
     /* @brief   Sets the mesh. */
     void SetMesh(const std::shared_ptr<Mesh>& mesh);
@@ -37,7 +37,7 @@ public:
     /* @brief   Gets the material. */
     const std::shared_ptr<Material>& GetMaterial() const noexcept;
     
-/* @section Protected variable */
+/* @section Variable */
 protected:
     std::shared_ptr<Mesh> m_mesh;
     

@@ -21,7 +21,7 @@
     if (_window->OnResize != nullptr)
     {
         int32_t width, height;
-        _window->GetSize(&width, &height);
+        _window->GetExtent(&width, &height);
 
         _window->OnResize(width, height);
     }

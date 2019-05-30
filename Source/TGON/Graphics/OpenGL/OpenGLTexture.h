@@ -32,6 +32,9 @@ public:
     /**@brief   Changes rendering pipeline state to use this texture. */
     void Use();
     
+    /**@brief   Changes rendering pipeline state to not use the texture. */
+    void Unuse();
+    
     /**@brief   Sets the texture filter mode. */
     void SetFilterMode(TextureFilterMode filterMode);
     

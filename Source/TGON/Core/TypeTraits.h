@@ -18,11 +18,11 @@ struct FunctionTraits;
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-/**@section Public enum */
+/**@section Enum */
 public:
     enum { ArgumentCount = sizeof...(_ArgTypes), };
 
-/**@section Public type */
+/**@section Type */
 public:
     using ReturnType = _ReturnType;
     using FunctionType = _ReturnType(_ArgTypes...);
@@ -38,7 +38,7 @@ template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
     FunctionTraits<std::remove_cv_t<_ReturnType(_ArgTypes...)>>
 {
-/**@section Public type */
+/**@section Type */
     using ClassType = _ClassType;
 };
 
@@ -67,7 +67,7 @@ struct FunctionTraits : FunctionTraits<decltype(&_FunctionType::operator())> {};
 template <typename _Type>
 class RemoveAllPointers
 {
-/**@section Public type */
+/**@section Type */
 public:
     using Type = _Type;
 };
@@ -75,7 +75,7 @@ public:
 template <typename _Type>
 class RemoveAllPointers<_Type*>
 {
-/**@section Public type */
+/**@section Type */
 public:
     using Type = typename RemoveAllPointers<_Type>::Type;
 };

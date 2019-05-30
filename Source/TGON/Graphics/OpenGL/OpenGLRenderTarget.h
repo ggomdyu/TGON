@@ -12,19 +12,28 @@
 #include <boost/noncopyable.hpp>
 #include <GL/glew.h>
 
+#include "Platform/Config.h"
+
 namespace tgon
 {
+    
+struct RenderTargetProperty;
 
-class RenderTargetImpl final :
+class TGON_API OpenGLRenderTarget :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    RenderTargetImpl(int32_t width, int32_t height, int32_t multisampleLevel);
+    OpenGLRenderTarget(const RenderTargetProperty& renderTargetProperty);
+    OpenGLRenderTarget(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Destructor */
 public:
-    ~RenderTargetImpl();
+    ~OpenGLRenderTarget();
+
+/**@section Operator */
+public:
+    OpenGLRenderTarget& operator=(OpenGLRenderTarget&& rhs);
     
 /**@section Method */
 public:
@@ -32,14 +41,22 @@ public:
     void Unuse();
 
 private:
-    GLuint CreateRenderBuffer(GLenum format, int32_t width, int32_t height) const;
+    GLuint CreateColorBuffer(float width, float height);
+    GLuint CreateDepthBuffer(float width, float height) const;
+    GLuint CreateDepthStencilBuffer(float width, float height) const;
     GLuint CreateFrameBuffer() const;
+    void Destroy();
 
 /**@section Variable */
 private:
     int32_t m_width;
     int32_t m_height;
+    GLuint m_colorBufferHandle;
+    GLuint m_depthBufferHandle;
+    GLuint m_depthStencilBufferHandle;
     GLuint m_frameBufferHandle;
 };
+    
+using PlatformRenderTarget = OpenGLRenderTarget;
 
 } /* namespace tgon */

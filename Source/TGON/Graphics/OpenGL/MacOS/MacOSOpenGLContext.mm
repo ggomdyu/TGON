@@ -93,7 +93,7 @@ OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
     rhs.context = nil;
 }
 
-OpenGLContext::~OpenGLContext() noexecpt
+OpenGLContext::~OpenGLContext()
 {
 	this->Destroy();
 }

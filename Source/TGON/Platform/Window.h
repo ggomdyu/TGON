@@ -33,7 +33,7 @@ public:
 /**@section Method */
 public:
     I32Point GetPosition() const;
-    I32Extent2D GetSize() const;
+    I32Extent2D GetExtent() const;
     PlatformWindow* GetPlatformDependency() noexcept;
     const PlatformWindow* GetPlatformDependency() const noexcept;
     
@@ -49,7 +49,7 @@ public:
     using PlatformWindow::SetTopMost;
     using PlatformWindow::SetTransparency;
     using PlatformWindow::GetPosition;
-    using PlatformWindow::GetSize;
+    using PlatformWindow::GetExtent;
     using PlatformWindow::GetTitle;
     using PlatformWindow::GetTransparency;
     using PlatformWindow::GetNativeWindow;

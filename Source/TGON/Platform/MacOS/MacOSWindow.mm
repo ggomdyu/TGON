@@ -14,7 +14,7 @@ namespace tgon
 {
 
 MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) :
-    m_window(MacOSWindowUtility::CreateNativeWindow(windowStyle)),
+    m_window(CreateNativeWindow(windowStyle)),
     m_windowDelegate([[WindowDelegate alloc] initWithWindow:this])
 {
     m_window.delegate = m_windowDelegate;
@@ -117,7 +117,7 @@ void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const
     *destY = static_cast<int32_t>((visibleMainScreenFrameRect.origin.y + visibleMainScreenFrameRect.size.height - currentWindowFrameRect.size.height) - currentWindowFrameRect.origin.y);
 }
 
-void MacOSWindow::GetSize(int32_t* destWidth, int32_t* destHeight) const
+void MacOSWindow::GetExtent(int32_t* destWidth, int32_t* destHeight) const
 {
     NSRect currentFrameSize = [m_window frame];
 

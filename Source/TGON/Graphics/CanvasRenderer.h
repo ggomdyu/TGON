@@ -12,6 +12,11 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/CanvasSpriteBatch.h"
 
+// Todo: remove below headers
+#include "RenderTarget.h"
+#include "RenderTargetType.h"
+#include "Platform/Application.h"
+
 namespace tgon
 {
     
@@ -45,6 +50,7 @@ private:
     VertexBuffer m_spriteVertexBuffer;
     std::vector<CanvasSpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
+    RenderTarget m_renderTarget;
 };
     
 } /* namespace tgon */

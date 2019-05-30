@@ -40,18 +40,14 @@ public:
 public:
     virtual void Update() override;
     SerialDispatchQueue& GetMainDispatchQueue() noexcept;
-    ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) noexcept;
+    ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal);
     const SerialDispatchQueue& GetMainDispatchQueue() const noexcept;
-    const ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) const noexcept;
-    
-private:
-    ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ThreadPriority threadPriority) noexcept;
-    const ConcurrentDispatchQueue& GetConcurrentDispatchQueue(ThreadPriority threadPriority) const noexcept;
+    const ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) const;
     
 /**@section Variable */
 private:
     SerialDispatchQueue m_mainDispatchQueue;
-    std::array<std::unique_ptr<ConcurrentDispatchQueue>, 5> m_concurrentDispatchQueues;
+    std::array<std::unique_ptr<ConcurrentDispatchQueue>, 5> m_globalDispatchQueues;
 };
 
 } /* namespace tgon */

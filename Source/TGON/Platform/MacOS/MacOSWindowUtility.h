@@ -9,25 +9,15 @@
 
 #include "Platform/Config.h"
 
-#include "../WindowType.h"
-
 namespace tgon
 {
-
-class TGON_API MacOSWindowUtility final
-{
-/* @section Public method */
-public:
-    /**
-     * @brief                       Creates a window via given WindowStyle.
-     * @param [in] windowStyle      Window style information
-     */
-    static NSWindow* CreateNativeWindow(const WindowStyle& windowStyle);
     
-/* @section Private method */
-private:
-    /* @brief                       Converts a WindowStyle to NSWindowStyleMask. */
-    static NSWindowStyleMask ConvertWindowStyleToMask(const WindowStyle& windowStyle);
-};
+struct WindowStyle;
+
+/**
+ * @brief                   Creates a window via given WindowStyle.
+ * @param [in] windowStyle  Window style information
+ */
+TGON_API NSWindow* CreateNativeWindow(const WindowStyle& windowStyle);
 
 } /* namespace tgon */

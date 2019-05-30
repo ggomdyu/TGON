@@ -21,24 +21,14 @@ SerialDispatchQueue& TaskModule::GetMainDispatchQueue() noexcept
     return m_mainDispatchQueue;
 }
 
-ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority) noexcept
-{
-    return this->GetConcurrentDispatchQueue(threadPriority);
-}
-    
 const SerialDispatchQueue& TaskModule::GetMainDispatchQueue() const noexcept
 {
     return m_mainDispatchQueue;
 }
 
-const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority) const noexcept
+ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority)
 {
-    return this->GetConcurrentDispatchQueue(threadPriority);
-}
-    
-ConcurrentDispatchQueue& TaskModule::GetConcurrentDispatchQueue(ThreadPriority threadPriority) noexcept
-{
-    auto& dispatchQueue = m_concurrentDispatchQueues[(int)threadPriority];
+    auto& dispatchQueue = m_globalDispatchQueues[(int)threadPriority];
     if (dispatchQueue == nullptr)
     {
         dispatchQueue = std::make_unique<ConcurrentDispatchQueue>(threadPriority, 2);
@@ -47,9 +37,9 @@ ConcurrentDispatchQueue& TaskModule::GetConcurrentDispatchQueue(ThreadPriority t
     return *dispatchQueue;
 }
     
-const ConcurrentDispatchQueue& TaskModule::GetConcurrentDispatchQueue(ThreadPriority threadPriority) const noexcept
+const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority) const
 {
-    return const_cast<TaskModule*>(this)->GetConcurrentDispatchQueue(threadPriority);
+    return const_cast<TaskModule*>(this)->GetGlobalDispatchQueue(threadPriority);
 }
 
 } /* namespace tgon */

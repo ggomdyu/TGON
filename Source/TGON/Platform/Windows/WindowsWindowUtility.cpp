@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-void ConverWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
+void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
 	*rawExtendedWindowStyle = 0;
 	*rawWindowStyle = 0;
@@ -56,7 +56,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 {
 	// Convert the WindowStyle to the native window style.
 	DWORD rawWindowStyle, rawExtendedWindowStyle;
-    ConverWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
+    ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
     wchar_t utf16Title[512] {};
     bool isConverSucceeded = UTF8::Convert<UTF16LE>(windowStyle.title.c_str(), windowStyle.title.length(), utf16Title, std::extent_v<decltype(utf16Title)>);

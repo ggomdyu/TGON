@@ -3,8 +3,12 @@
 #include <stb_image.h>
 #include <stb_image_write.h>
 
+#include "Platform/Window.h"
+
 #include "OpenGLGraphics.h"
 #include "OpenGLUtility.h"
+
+#include "../RenderTargetType.h"
 
 namespace tgon
 {

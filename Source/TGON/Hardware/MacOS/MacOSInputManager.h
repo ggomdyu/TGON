@@ -28,15 +28,15 @@ class MacOSWindow;
 class TGON_API MacOSInputManager :
     private boost::noncopyable
 {
-/**@section Public constructor */
+/**@section Constructor */
 public:
     explicit MacOSInputManager(const MacOSWindow& window);
    
-/**@section Public destructor */
+/**@section Destructor */
 public:
     ~MacOSInputManager();
     
-/**@section Public method */
+/**@section Method */
 public:
     void Update();
 
@@ -44,7 +44,7 @@ public:
     gainput::InputDeviceKeyboard* CreateNativeKeyboard();
     gainput::InputDevicePad* CreateNativeGamepad();
 
-/**@section Private variable */
+/**@section Variable */
 private:
     std::unique_ptr<gainput::InputManager> m_inputManager;
 };

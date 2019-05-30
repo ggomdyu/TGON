@@ -51,7 +51,7 @@ public:
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;
-    void GetSize(int32_t* width, int32_t* height) const;
+    void GetExtent(int32_t* width, int32_t* height) const;
     void GetTitle(char* destStr) const;
     float GetTransparency() const;
     void* GetNativeWindow() const;

@@ -51,6 +51,11 @@ void OpenGLTexture::Use()
     
     this->UpdateTexParemeters();
 }
+    
+void OpenGLTexture::Unuse()
+{
+    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
+}
 
 void OpenGLTexture::TransferToVideo()
 {

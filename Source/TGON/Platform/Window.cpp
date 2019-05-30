@@ -13,10 +13,10 @@ I32Point Window::GetPosition() const
     return {x, y};
 }
 
-I32Extent2D Window::GetSize() const
+I32Extent2D Window::GetExtent() const
 {
     I32Point::ValueType width, height;
-    this->GetSize(&width, &height);
+    this->GetExtent(&width, &height);
 
     return {width, height};
 }
