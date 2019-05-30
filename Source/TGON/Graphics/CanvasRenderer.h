@@ -14,7 +14,6 @@
 
 // Todo: remove below headers
 #include "RenderTarget.h"
-#include "RenderTargetType.h"
 #include "Platform/Application.h"
 
 namespace tgon

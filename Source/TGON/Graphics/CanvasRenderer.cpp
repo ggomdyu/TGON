@@ -22,7 +22,7 @@ CanvasRenderer::CanvasRenderer() :
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
     }),
-    m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), true, true, true})
+    m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), 24})
 {
     this->PrepareDefaultMaterials();
 }
@@ -51,6 +51,7 @@ void CanvasRenderer::Draw(Graphics& graphics)
     graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
     graphics.ClearColorDepthBuffer();
     
+    m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 

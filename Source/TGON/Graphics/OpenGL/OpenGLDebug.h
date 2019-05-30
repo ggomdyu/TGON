@@ -1,13 +1,11 @@
 /**
- * @file    OpenGLUtility.h
+ * @file    OpenGLDebug.h
  * @author  ggomdyu
  * @since   04/01/2018
  */
 
 #pragma once
 #include <cassert>
-
-#include "Diagnostics/Log.h"
 
 #if _DEBUG
 #   define TGON_GL_ERROR_CHECK(expression)\

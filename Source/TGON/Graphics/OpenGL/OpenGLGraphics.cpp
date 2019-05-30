@@ -6,9 +6,7 @@
 #include "Platform/Window.h"
 
 #include "OpenGLGraphics.h"
-#include "OpenGLUtility.h"
-
-#include "../RenderTargetType.h"
+#include "OpenGLDebug.h"
 
 namespace tgon
 {

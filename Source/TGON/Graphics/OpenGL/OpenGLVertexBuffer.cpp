@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "OpenGLVertexBuffer.h"
-#include "OpenGLUtility.h"
+#include "OpenGLDebug.h"
 
 #include "../VertexBufferType.h"
 

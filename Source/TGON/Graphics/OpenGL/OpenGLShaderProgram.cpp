@@ -8,7 +8,7 @@
 #include "Math/Vector2.h"
 
 #include "OpenGLShaderProgram.h"
-#include "OpenGLUtility.h"
+#include "OpenGLDebug.h"
 
 namespace tgon
 {

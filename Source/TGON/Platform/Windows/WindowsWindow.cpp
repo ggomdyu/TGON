@@ -56,7 +56,7 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void WindowsWindow::GetSize(int32_t* width, int32_t* height) const
+void WindowsWindow::GetExtent(int32_t* width, int32_t* height) const
 {
     ::RECT rt;
     ::GetClientRect(m_wndHandle, &rt);

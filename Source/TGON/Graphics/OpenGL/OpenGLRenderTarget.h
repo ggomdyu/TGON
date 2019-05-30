@@ -16,15 +16,13 @@
 
 namespace tgon
 {
-    
-struct RenderTargetProperty;
-
+   
 class TGON_API OpenGLRenderTarget :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    OpenGLRenderTarget(const RenderTargetProperty& renderTargetProperty);
+    OpenGLRenderTarget(float width, float height, int32_t depthBits);
     OpenGLRenderTarget(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Destructor */
@@ -33,7 +31,7 @@ public:
 
 /**@section Operator */
 public:
-    OpenGLRenderTarget& operator=(OpenGLRenderTarget&& rhs);
+    OpenGLRenderTarget& operator=(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Method */
 public:
@@ -42,17 +40,16 @@ public:
 
 private:
     GLuint CreateColorBuffer(float width, float height);
-    GLuint CreateDepthBuffer(float width, float height) const;
-    GLuint CreateDepthStencilBuffer(float width, float height) const;
+    GLuint CreateDepthBuffer(float width, float height, int32_t depthBits) const;
+    GLuint CreateDepthStencilBuffer(float width, float height, int32_t depthBits) const;
     GLuint CreateFrameBuffer() const;
     void Destroy();
 
 /**@section Variable */
 private:
-    int32_t m_width;
-    int32_t m_height;
+    float m_width;
+    float m_height;
     GLuint m_colorBufferHandle;
-    GLuint m_depthBufferHandle;
     GLuint m_depthStencilBufferHandle;
     GLuint m_frameBufferHandle;
 };

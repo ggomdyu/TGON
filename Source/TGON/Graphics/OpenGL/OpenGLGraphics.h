@@ -5,8 +5,8 @@
  */
 
 #pragma once
-#include <GL/glew.h>
 #include <memory>
+#include <GL/glew.h>
 
 #include "Math/Rect.h"
 #include "Math/Color.h"

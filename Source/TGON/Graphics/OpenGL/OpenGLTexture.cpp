@@ -3,7 +3,7 @@
 #include "Core/Algorithm.h"
 
 #include "OpenGLTexture.h"
-#include "OpenGLUtility.h"
+#include "OpenGLDebug.h"
 
 namespace tgon
 {

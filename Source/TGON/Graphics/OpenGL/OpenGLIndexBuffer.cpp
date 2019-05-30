@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "OpenGLIndexBuffer.h"
-#include "OpenGLUtility.h"
+#include "OpenGLDebug.h"
 
 namespace tgon
 {
