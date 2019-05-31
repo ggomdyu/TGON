@@ -47,21 +47,17 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) noexcept :
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
-    if (m_vertexBufferHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
-    }
+    this->Destroy();
 }
     
 OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs) noexcept
 {
-    if (&rhs != this)
-    {
-        m_vertexBufferHandle = rhs.m_vertexBufferHandle;
-        m_vertexBufferLayoutDescs = std::move(rhs.m_vertexBufferLayoutDescs);
+    this->Destroy();
+
+    m_vertexBufferHandle = rhs.m_vertexBufferHandle;
+    m_vertexBufferLayoutDescs = std::move(rhs.m_vertexBufferLayoutDescs);
         
-        rhs.m_vertexBufferHandle = 0;
-    }
+    rhs.m_vertexBufferHandle = 0;
     
     return *this;
 }
@@ -116,6 +112,15 @@ GLuint OpenGLVertexBuffer::CreateVertexBufferHandle() const
     TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
 
     return vertexBufferHandle;
+}
+
+void OpenGLVertexBuffer::Destroy()
+{
+    if (m_vertexBufferHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_vertexBufferHandle));
+        m_vertexBufferHandle = 0;
+    }
 }
 
 } /* namespace tgon */

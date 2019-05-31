@@ -60,6 +60,8 @@ public:
 private:
     GLuint CreateVertexBufferHandle() const;
 
+    void Destroy();
+
 /**@section Variable */
 private:
     GLuint m_vertexBufferHandle;

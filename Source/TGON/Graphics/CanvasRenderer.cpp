@@ -2,6 +2,7 @@
 
 #include "Diagnostics/Log.h"
 #include "Math/Matrix4x4.h"
+#include "Math/Vector4.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/FVF.h"
 #include "Graphics/OpenGL/OpenGLShaderCode.h"
@@ -22,14 +23,28 @@ CanvasRenderer::CanvasRenderer() :
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
     }),
+    m_quadVertexBuffer({
+        VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
+        VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
+    }),
     m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), 24})
 {
+    float ff = 600.0f;
+    float a[] = {
+        -ff, ff, 0.0f,   0.0f, 1.0f,
+        ff, ff, 0.0f,    1.0f, 1.0f,
+        ff, -ff, 0.0f,   1.0f, 0.0f,
+        ff, -ff, 0.0f,   1.0f, 0.0f,
+        -ff, -ff, 0.0f,   0.0f, 0.0f,
+        -ff, ff, 0.0f,   0.0f, 1.0f,
+    };
+    m_quadVertexBuffer.SetData(a, sizeof(a), false);
+    
     this->PrepareDefaultMaterials();
 }
 
 void CanvasRenderer::Update()
 {
-    m_spriteVertexBuffer.Use();
     m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
 
@@ -42,17 +57,22 @@ void CanvasRenderer::Draw(Graphics& graphics)
     }
 #endif
     
+    m_uiMaterial->Use();
     m_renderTarget.Use();
-    
-    this->FlushSpriteBatches(graphics);
-    
+    {
+        graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
+        graphics.ClearColorDepthBuffer();
+        m_spriteVertexBuffer.Use();
+        this->FlushSpriteBatches(graphics);
+    }
     m_renderTarget.Unuse();
     
-    graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
+    m_quadVertexBuffer.Use();
+    m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
+    graphics.SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
     graphics.ClearColorDepthBuffer();
     
-    m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 6);
 }
 
 void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld)

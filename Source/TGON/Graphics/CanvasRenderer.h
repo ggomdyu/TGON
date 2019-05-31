@@ -47,6 +47,7 @@ private:
     std::shared_ptr<Material> m_uiMaterial;
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
+    VertexBuffer m_quadVertexBuffer;
     std::vector<CanvasSpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
     RenderTarget m_renderTarget;

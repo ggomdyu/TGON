@@ -27,22 +27,21 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept :
 
 OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
-    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
+    this->Destroy();
 }
     
 OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs) noexcept
 {
-    if (&rhs != this)
-    {
-        m_dataBytes = rhs.m_dataBytes;
-        m_isDynamicUsage = rhs.m_isDynamicUsage;
-        m_indexBufferHandle = rhs.m_indexBufferHandle;
-        
-        rhs.m_dataBytes = 0;
-        rhs.m_isDynamicUsage = false;
-        rhs.m_indexBufferHandle = 0;
-    }
+    this->Destroy();
     
+    m_dataBytes = rhs.m_dataBytes;
+    m_isDynamicUsage = rhs.m_isDynamicUsage;
+    m_indexBufferHandle = rhs.m_indexBufferHandle;
+        
+    rhs.m_dataBytes = 0;
+    rhs.m_isDynamicUsage = false;
+    rhs.m_indexBufferHandle = 0;
+
     return *this;
 }
 
@@ -83,6 +82,15 @@ GLuint OpenGLIndexBuffer::CreateIndexBufferHandle() const
     TGON_GL_ERROR_CHECK(glGenBuffers(1, &vertexBufferHandle));
 
     return vertexBufferHandle;
+}
+
+void OpenGLIndexBuffer::Destroy()
+{
+    if (m_indexBufferHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_indexBufferHandle));
+        m_indexBufferHandle = 0;
+    }
 }
 
 } /* namespace tgon */

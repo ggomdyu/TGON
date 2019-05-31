@@ -32,7 +32,7 @@ public:
 /**@section Method */
 public:
     /**
-     * @brief                       Sets the index buffer with the specified data.
+     * @brief   Sets the index buffer with the specified data.
      * @param [in] data             The data to store in the index buffer.
      * @param [in] dataBytes        The byte size of the data.
      * @param [in] isDynamicUsage   If true, then the index buffer will not be modified after set.
@@ -58,6 +58,8 @@ public:
 
 private:
     GLuint CreateIndexBufferHandle() const;
+
+    void Destroy();
 
 /**@section Variable */
 private:

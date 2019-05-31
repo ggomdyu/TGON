@@ -5,7 +5,6 @@
 #endif
 #include <Windows.h>
 
-#include "Engine/Engine.h"
 #include "Platform/Application.h"
 
 #ifndef NDEBUG
