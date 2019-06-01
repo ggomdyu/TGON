@@ -11,7 +11,6 @@
 #include "Math/Rect.h"
 
 #include "GraphicsType.h"
-#include "CameraType.h"
 
 namespace tgon
 {

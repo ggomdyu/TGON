@@ -3,7 +3,6 @@
 #include "Math/Mathematics.h"
 
 #include "Camera.h"
-#include "CameraType.h"
 
 namespace tgon
 {

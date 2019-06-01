@@ -269,7 +269,7 @@ std::string OpenGLShaderProgram::GetShaderInfoLog(GLuint shaderId) const
 
 void OpenGLShaderProgram::UpdateUniformLocationCache()
 {
-    m_uniformLocationCache[(int)PredefinedUniformLocation::MatrixWVP] = this->GetUniformLocation("g_matWVP");
+    m_uniformLocationCache[(int)PredefinedUniformLocation::MatrixWVP] = this->GetUniformLocation("matWVP");
 }
     
 void OpenGLShaderProgram::ResetUniformCache()

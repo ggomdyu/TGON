@@ -41,6 +41,7 @@ public:
 private:
     void PrepareDefaultMaterials();
     void FlushSpriteBatches(Graphics& graphics);
+    void DebugRenderTargetDraw(Graphics& graphics);
     
 /**@section Variable */
 private:
@@ -50,7 +51,10 @@ private:
     VertexBuffer m_quadVertexBuffer;
     std::vector<CanvasSpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
+    
+    // For test
     RenderTarget m_renderTarget;
+    std::shared_ptr<Material> m_inverseMaterial;
 };
     
 } /* namespace tgon */

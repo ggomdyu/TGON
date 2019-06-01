@@ -29,14 +29,15 @@ CanvasRenderer::CanvasRenderer() :
     }),
     m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), 24})
 {
-    float ff = 600.0f;
+    float ff = 300.0f;
+    float ff2 = 315.0f;
     float a[] = {
-        -ff, ff, 0.0f,   0.0f, 1.0f,
-        ff, ff, 0.0f,    1.0f, 1.0f,
-        ff, -ff, 0.0f,   1.0f, 0.0f,
-        ff, -ff, 0.0f,   1.0f, 0.0f,
-        -ff, -ff, 0.0f,   0.0f, 0.0f,
-        -ff, ff, 0.0f,   0.0f, 1.0f,
+        -ff, ff2, 0.0f,   0.0f, 1.0f,
+        ff, ff2, 0.0f,    1.0f, 1.0f,
+        ff, -ff2, 0.0f,   1.0f, 0.0f,
+        ff, -ff2, 0.0f,   1.0f, 0.0f,
+        -ff, -ff2, 0.0f,   0.0f, 0.0f,
+        -ff, ff2, 0.0f,   0.0f, 1.0f,
     };
     m_quadVertexBuffer.SetData(a, sizeof(a), false);
     
@@ -45,6 +46,7 @@ CanvasRenderer::CanvasRenderer() :
 
 void CanvasRenderer::Update()
 {
+    m_spriteVertexBuffer.Use();
     m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
 
@@ -57,22 +59,36 @@ void CanvasRenderer::Draw(Graphics& graphics)
     }
 #endif
     
-    m_uiMaterial->Use();
+//    this->FlushSpriteBatches(graphics);
+    this->DebugRenderTargetDraw(graphics);
+}
+    
+void CanvasRenderer::DebugRenderTargetDraw(Graphics& graphics)
+{
+    // Use custom framebuffer
     m_renderTarget.Use();
     {
+        m_uiMaterial->Use();
+        m_spriteVertexBuffer.Use();
+        
         graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
         graphics.ClearColorDepthBuffer();
-        m_spriteVertexBuffer.Use();
+        
         this->FlushSpriteBatches(graphics);
     }
+    
+    // Use default framebuffer
     m_renderTarget.Unuse();
-    
-    m_quadVertexBuffer.Use();
-    m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
-    graphics.SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
-    graphics.ClearColorDepthBuffer();
-    
-    graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 6);
+    {
+        m_inverseMaterial->Use();
+        m_inverseMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
+        m_quadVertexBuffer.Use();
+        
+        graphics.SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+        graphics.ClearColorDepthBuffer();
+
+        graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 6);
+    }
 }
 
 void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld)
@@ -92,6 +108,7 @@ void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& spr
 void CanvasRenderer::PrepareDefaultMaterials()
 {
     m_uiMaterial = std::make_shared<Material>(g_positionUVVert, g_positionUVFrag);
+    m_inverseMaterial = std::make_shared<Material>(g_positionUVVert, g_sharpenFrag);
 }
 
 void CanvasRenderer::FlushSpriteBatches(Graphics& graphics)
