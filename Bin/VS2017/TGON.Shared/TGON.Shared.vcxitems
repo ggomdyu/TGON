@@ -40,6 +40,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSpriteBatch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Graphics.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Material.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Mesh.cpp" />
@@ -76,6 +77,279 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\posix.cc">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbase.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbbox.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbdf.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbitmap.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftcid.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftdebug.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftfstype.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgasp.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftglyph.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgxval.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftinit.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftmm.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftotval.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpatent.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpfr.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftstroke.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsynth.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsystem.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\fttype1.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftwinfnt.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\bdf\bdf.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cache\ftcache.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cff\cff.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cid\type1cid.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\gzip\ftgzip.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\lzw\ftlzw.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pcf\pcf.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pfr\pfr.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\psaux\psaux.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pshinter\pshinter.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\psnames\psmodule.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\raster\raster.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\sfnt\sfnt.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\smooth\smooth.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\truetype\truetype.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\type1\type1.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\type42\type42.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\winfonts\winfnt.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</TreatWarningAsError>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\glew-2.1.0\src\glew.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -173,16 +447,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Model.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLContext.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphics.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphicsType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLShaderCode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLShaderProgram.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLTextureType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLDebug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBufferType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\PostProcess.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RectTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RenderTarget.h" />
@@ -245,6 +516,97 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\include\fmt\printf.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\include\fmt\ranges.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\include\fmt\time.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftoption.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\freetype.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftadvanc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbbox.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbdf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbitmap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbzip2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcache.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftchapters.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcolor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftdriver.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fterrors.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgasp.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftglyph.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgxval.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgzip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftimage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftincrem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlist.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlzw.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmac.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmodapi.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmoderr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftotval.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftoutln.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftparams.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftpfr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftrender.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsizes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsnames.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftstroke.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsynth.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttrigon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\autohint.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cffotypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cfftypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftcalc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdebug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdrv.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fthash.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftmemory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftobjs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftpsprop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftrfork.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftserv.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftstream.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fttrace.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftvalid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\internal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\psaux.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\pshints.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svkern.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmetric.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svotval.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svprop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\sfnt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\t1types.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\tttypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\t1tables.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ttnameid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttables.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttags.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\ft2build.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\glew-2.1.0\include\GL\eglew.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\glew-2.1.0\include\GL\glew.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\glew-2.1.0\include\GL\glxew.h" />

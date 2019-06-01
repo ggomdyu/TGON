@@ -239,6 +239,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Update="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbase.c">
+      <FileType>CppCode</FileType>
+    </ClCompile>
+    <ClCompile Update="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftftn.c">
+      <FileType>CppCode</FileType>
+    </ClCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

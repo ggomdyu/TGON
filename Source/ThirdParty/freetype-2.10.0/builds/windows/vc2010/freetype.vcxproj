@@ -340,7 +340,6 @@
     <ClCompile Include="..\ftdebug.c">
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
-    <ResourceCompile Include="..\..\..\src\base\ftver.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

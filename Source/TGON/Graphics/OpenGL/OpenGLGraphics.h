@@ -6,6 +6,7 @@
 
 #pragma once
 #include <memory>
+#include <boost/noncopyable.hpp>
 #include <GL/glew.h>
 
 #include "Math/Rect.h"
@@ -18,7 +19,8 @@
 namespace tgon
 {
     
-class TGON_API OpenGLGraphics
+class TGON_API OpenGLGraphics :
+    private boost::noncopyable
 {
 /**@section Constructor */
 public:

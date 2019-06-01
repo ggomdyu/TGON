@@ -132,9 +132,4 @@
       <Filter>Source Files\FT_MODULES</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\..\..\src\base\ftver.rc">
-      <Filter>Source Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
 </Project>

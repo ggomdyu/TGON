@@ -153,7 +153,7 @@ constexpr const char g_sharpenFrag[] =
 in vec2 fragUV;                                                                     \n\
 out vec4 outColor;                                                                  \n\
 uniform sampler2D textureSampler;                                                   \n\
-uniform float centerKernel = 9.5;                                                   \n\
+uniform float centerKernel = 9;                                                   \n\
 uniform float aroundKernel = -1;                                                    \n\
 uniform float aroundUVOffset = 1.0 / 300.0;                                         \n\
                                                                                     \n\

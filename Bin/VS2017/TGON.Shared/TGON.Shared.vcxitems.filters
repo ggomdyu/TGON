@@ -73,6 +73,18 @@
     <Filter Include="Source\Thread">
       <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0">
+      <UniqueIdentifier>{03c3d8d6-9498-440c-8bd4-d001fe0c3bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\include">
+      <UniqueIdentifier>{2a4ea910-389c-40f3-ba46-5cf1def921b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\include\freetype">
+      <UniqueIdentifier>{bf489bca-29c7-4dd4-ac94-31055d4b51d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\src">
+      <UniqueIdentifier>{cf06ca67-a965-4db6-b40e-6caa364f939f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\format.cc">
@@ -270,7 +282,129 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.cpp">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RenderTarget.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Graphics.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\RenderTarget.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbase.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cache\ftcache.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftdebug.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\gzip\ftgzip.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cff\cff.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\bdf\bdf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftinit.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\lzw\ftlzw.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsystem.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pcf\pcf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pfr\pfr.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\psaux\psaux.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\pshinter\pshinter.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\psnames\psmodule.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\raster\raster.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\sfnt\sfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\smooth\smooth.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\truetype\truetype.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\type1\type1.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\cid\type1cid.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\type42\type42.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\winfonts\winfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbbox.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbdf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbitmap.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftcid.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftfstype.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgasp.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftglyph.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgxval.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftmm.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftotval.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpatent.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpfr.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftstroke.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsynth.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\fttype1.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftwinfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -597,9 +731,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphics.h">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphicsType.h">
-      <Filter>Source\Graphics\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLIndexBuffer.h">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClInclude>
@@ -612,13 +743,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLTexture.h">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLTextureType.h">
-      <Filter>Source\Graphics\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBuffer.h">
-      <Filter>Source\Graphics\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBufferType.h">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Gamepad.h">
@@ -792,6 +917,281 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.h">
       <Filter>Source\Graphics\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLDebug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\ft2build.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\freetype.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftadvanc.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbbox.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbdf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbitmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbzip2.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcache.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftchapters.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcolor.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftdriver.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fterrors.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftfntfmt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgasp.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftglyph.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgxval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgzip.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftimage.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftincrem.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlcdfil.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlist.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlzw.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmac.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmodapi.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmoderr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftotval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftoutln.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftparams.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftpfr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftrender.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsizes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsnames.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftstroke.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsynth.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsystem.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttrigon.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftwinfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\t1tables.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ttnameid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttables.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttags.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftmodule.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftoption.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftstdlib.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\autohint.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cffotypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cfftypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftcalc.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdebug.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdrv.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftgloadr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fthash.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftmemory.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftobjs.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftpsprop.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftrfork.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftserv.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftstream.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fttrace.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftvalid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\internal.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\psaux.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\pshints.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svbdf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcfftl.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svfntfmt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgldict.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgxval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svkern.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmetric.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svotval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpfr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpostnm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svprop.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpscmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpsinfo.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svsfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttcmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svtteng.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttglyf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svwinfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\sfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\t1types.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\tttypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLDebug.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

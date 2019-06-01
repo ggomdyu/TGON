@@ -9,6 +9,9 @@
 #include "LogoScene.h"
 #include "Thread/DispatchQueue.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
 std::shared_ptr<tgon::GameObject> object3;
@@ -17,6 +20,12 @@ std::shared_ptr<tgon::GameObject> object5;
 
 LogoScene::LogoScene()
 {
+    FT_Library ft;
+    FT_Init_FreeType(&ft);
+
+    FT_Face face;
+    FT_New_Face(ft, "fonts/arial.ttf", 0, &face);
+
     using namespace tgon;
 
     auto engine = Application::GetInstance()->GetEngine();

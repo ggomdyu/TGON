@@ -9,10 +9,10 @@
     <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\ThousandParty.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.cpp">
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\IntroScene.cpp">
+    <ClCompile Include="..\..\Xcode\ThousandParty\ThousandParty\LogoScene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
