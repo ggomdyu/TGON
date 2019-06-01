@@ -90,7 +90,7 @@ constexpr bool IsPureTypeValue = !std::is_const<_Type>::value &&
                                  !std::is_pointer<_Type>::value;
     
 template <typename _Type>
-using PureType = std::decay_t<RemoveAllPointersType<std::remove_cv_t<_Type>>>;
+using PureType = std::remove_cv_t<RemoveAllPointersType<std::decay_t<_Type>>>;
 
 template <typename _Type>
 constexpr bool IsCharTypeValue = std::is_same<PureType<_Type>, char>::value ||
@@ -99,7 +99,7 @@ constexpr bool IsCharTypeValue = std::is_same<PureType<_Type>, char>::value ||
                                  std::is_same<PureType<_Type>, wchar_t>::value;
     
 template <typename _Type>
-constexpr bool IsCharPointerTypeValue = IsCharTypeValue<PureType<_Type>> && std::is_pointer<_Type>::value;
+constexpr bool IsCharPointerTypeValue = IsCharTypeValue<PureType<_Type>> && (std::is_pointer_v<_Type> || std::is_reference_v<_Type>);
 
 template <typename>
 struct IsBasicString : std::false_type {};

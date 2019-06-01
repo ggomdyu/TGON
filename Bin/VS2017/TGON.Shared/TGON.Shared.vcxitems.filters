@@ -405,6 +405,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftwinfnt.c">
       <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\FontFactory.cpp">
+      <Filter>Source\Drawing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -848,9 +851,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\FixedString.h">
       <Filter>Source\String</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\FixedStringUtility.h">
-      <Filter>Source\String</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Stopwatch.h">
       <Filter>Source\Time</Filter>
     </ClInclude>
@@ -1192,6 +1192,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLDebug.h">
       <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\FontFactory.h">
+      <Filter>Source\Drawing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

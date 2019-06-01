@@ -115,6 +115,12 @@ protected:
     std::size_t m_strLen;
 };
 
+template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType = BasicStringTraits<_CharType>>
+constexpr auto MakeFixedString(const _CharType(&str)[_CharArraySize]) -> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>
+{
+    return BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>({str, _CharArraySize - 1});
+}
+
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
 using FixedString32 = BasicFixedString<char, 32>;
@@ -141,7 +147,7 @@ constexpr BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicF
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
-    inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
+inline BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
     _StringTraitsType(str, m_str, _CharArraySize),
     m_strLen(str.length())
 {
@@ -233,20 +239,20 @@ inline bool BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::oper
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline const _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index) const
 {
-	return _StringTraitsType::At(m_str, index);
+    return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 inline _CharType& BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::operator[](std::size_t index)
 {
-	return _StringTraitsType::At(m_str, index);
+    return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>
 template <std::size_t _CharArraySize2>
 inline BasicFixedString<_CharType, _CharArraySize + _CharArraySize2, _StringTraitsType> BasicFixedString<_CharType, _CharArraySize, _StringTraitsType>::Expand(const BasicFixedString<_CharType, _CharArraySize2, _StringTraitsType>& rhs) const
 {
-	return BasicFixedString<_CharType, _CharArraySize + _CharArraySize2, _StringTraitsType>(*this) += rhs;
+    return BasicFixedString<_CharType, _CharArraySize + _CharArraySize2, _StringTraitsType>(*this) += rhs;
 }
 
 template <typename _CharType, std::size_t _CharArraySize, typename _StringTraitsType>

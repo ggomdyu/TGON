@@ -20,13 +20,12 @@ std::shared_ptr<tgon::GameObject> object5;
 
 LogoScene::LogoScene()
 {
-    FT_Library ft;
-    FT_Init_FreeType(&ft);
-
-    FT_Face face;
-    FT_New_Face(ft, "fonts/arial.ttf", 0, &face);
-
     using namespace tgon;
+
+    const char* a ="HAI";
+    BasicStringHash<const char*> sh2(a);
+    std::hash<BasicStringHash<const char*>> a2;
+    auto b2 = a2(sh2);
 
     auto engine = Application::GetInstance()->GetEngine();
 

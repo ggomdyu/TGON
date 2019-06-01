@@ -15,12 +15,6 @@
 
 namespace tgon
 {
-    
-//struct TaskModuleProperty
-//{
-//    int32_t UserInteractiveDispatchQueue
-////    ConcurrentDispatchQoS qos, int32_t threadPoolCount)
-//};
 
 class TGON_API TaskModule final :
 	public IModule
