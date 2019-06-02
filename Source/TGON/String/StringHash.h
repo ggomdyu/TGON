@@ -23,7 +23,6 @@ class BaseBasicStringHash
 {
 /**@section Constructor */
 public:
-    /**@brief   Initializes with null character pointer. */
     constexpr BaseBasicStringHash() noexcept :
         m_hashCode(0)
     {
@@ -32,6 +31,11 @@ public:
     template <typename _ValueType>
     constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
         m_hashCode(X65599Hash(str))
+    {
+    }
+
+    constexpr BaseBasicStringHash(uint32_t hashCode) noexcept :
+        m_hashCode(hashCode)
     {
     }
 
@@ -100,14 +104,14 @@ public:
     {
     }
     
-    ///**@brief   Initializes with string. */
-    template <typename _StringType2>
+    /**@brief   Initializes with BasicStringHash. */
+    template <typename _StringType2, typename std::enable_if_t<std::is_base_of_v<detail::BaseBasicStringHash<_StringType2>, _StringType2>>* = nullptr>
     constexpr BasicStringHash(const _StringType2& str) noexcept :
-        SuperType(str.Data()),
-        m_str(str)
+        SuperType(str.GetHashCode()),
+        m_str({str.CStr(), str.Length()})
     {
     }
-    
+
 /**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
@@ -134,13 +138,13 @@ private:
 };
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type> :
-    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type>>
+class BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>> :
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>>>
 {
 /**@section Type */
 public:
     using ValueType = typename _StringType::value_type;
-    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>::type>>;
+    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>>>;
     using StringType = _StringType;
     
 /**@section Constructor */
@@ -162,6 +166,14 @@ public:
     {
     }
     
+    /**@brief   Initializes with BasicStringHash. */
+    template <typename _StringType2, typename std::enable_if_t<std::is_base_of_v<detail::BaseBasicStringHash<_StringType2>, _StringType2>>* = nullptr>
+    constexpr BasicStringHash(const _StringType2& str) noexcept :
+        SuperType(str.GetHashCode()),
+        m_str({str.CStr(), str.Length()})
+    {
+    }
+
 /**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
@@ -188,13 +200,13 @@ private:
 };
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type> :
-    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>
+class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>> :
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>>>
 {
 /**@section Type */
 public:
     using ValueType = PureType<_StringType>;
-    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if<IsCharPointerTypeValue<_StringType>>::type>>;
+    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>>>;
     using StringType = _StringType;
     
 /**@section Constructor */
@@ -220,6 +232,15 @@ public:
     {
     }
     
+    /**@brief   Initializes with BasicStringHash. */
+    template <typename _StringType2, typename std::enable_if_t<std::is_base_of_v<detail::BaseBasicStringHash<_StringType2>, _StringType2>>* = nullptr>
+    constexpr BasicStringHash(const _StringType2& str) noexcept :
+        SuperType(str.GetHashCode()),
+        m_str(str.CStr()),
+        m_strLen(str.Length())
+    {
+    }
+
 /**@section Method */
 public:
     /**@brief   Gets the character pointer to string. */
