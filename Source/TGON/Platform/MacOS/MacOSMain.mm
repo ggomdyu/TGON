@@ -1,8 +1,38 @@
 #import "PrecompiledHeader.h"
 
 #import <AppKit/NSApplication.h>
+#import <objc/NSObject.h>
 
-#import "MacOSAppDelegate.h"
+#import "Platform/Application.h"
+
+@interface AppDelegate : NSObject<NSApplicationDelegate>
+{
+}
+@end
+
+@implementation AppDelegate
+- (void)applicationWillFinishLaunching:(NSNotification*)aNotification
+{
+    // Initialize singleton objects.
+    tgon::Application::GetInstance()->OnLaunch();
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification*)aNotification
+{
+    // If launch has been completed, then start the message loop.
+    tgon::Application::GetInstance()->MessageLoop();
+}
+
+- (void)applicationWillTerminate:(NSNotification*)aNotification
+{
+    tgon::Application::GetInstance()->OnTerminate();
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
+{
+    return YES;
+}
+@end
 
 int main(int argc, const char* argv[])
 {

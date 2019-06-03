@@ -28,7 +28,7 @@ public:
     {
     }
 
-    template <typename _ValueType>
+    template <typename _ValueType, typename std::enable_if_t<IsCharPointerTypeValue<_ValueType>>* = nullptr>
     constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
         m_hashCode(X65599Hash(str))
     {
