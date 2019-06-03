@@ -74,7 +74,7 @@ Image::Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataByte
 {
 }
 
-Image::Image(Image&& rhs) :
+Image::Image(Image&& rhs) noexcept :
     m_imageData(std::move(rhs.m_imageData)),
     m_width(rhs.m_width),
     m_height(rhs.m_height),

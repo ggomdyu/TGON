@@ -5,16 +5,49 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <unordered_map>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 #include "String/StringHash.h"
+#include "Math/Vector2.h"
+#include "Math/Extent.h"
+#include "Platform/Config.h"
 
 namespace tgon
 {
 
-class FontFactory
+using FontSize = uint32_t;
+
+class TGON_API GlyphData :
+    private boost::noncopyable
+{
+/**@section Constructor */
+public:
+    GlyphData(char32_t ch, FT_Face fontFace) noexcept;
+
+/**@section Destructor */
+public:
+    ~GlyphData();
+
+/**@section Method */
+public:
+    I32Extent2D GetSize() const noexcept;
+    I32Vector2 GetBearing() const noexcept;
+    int32_t GetAdvance() const noexcept;
+    uint8_t* GetImageData() noexcept;
+    const uint8_t* GetImageData() const noexcept;
+    char32_t GetCharacter() const noexcept;
+    
+/**@section Variable */
+private:
+    char32_t m_ch;
+    FT_Face m_fontFace;
+};
+
+class TGON_API FontFactory :
+    private boost::noncopyable
 {
 /**@section Constructor */
 public:
@@ -26,7 +59,10 @@ public:
 
 /**@section Method */
 public:
-    bool ImportFont(const StringHash& fontPath);
+    FT_Face GetGlyphData(const StringHash& fontPath, char32_t ch);
+
+private:
+    FT_Face ImportFont(const StringHash& fontPath);
 
 /**@section Variable */
 private:

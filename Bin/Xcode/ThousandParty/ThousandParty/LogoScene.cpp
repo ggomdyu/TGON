@@ -8,6 +8,7 @@
 #include "IntroScene.h"
 #include "LogoScene.h"
 #include "Thread/DispatchQueue.h"
+#include "Drawing/FontFactory.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -22,28 +23,19 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
 
-    const char* a ="HAI";
-    BasicStringHash<const char*> sh2(a);
-    std::hash<BasicStringHash<const char*>> a2;
-    auto b2 = a2(sh2);
+    FontFactory ff;
+    //ff.ImportFont("E:/Users/ggomdyu/Desktop/maplestory.ttf", 32);
 
     auto engine = Application::GetInstance()->GetEngine();
 
-    auto taskModule = &(*engine->FindModule<TaskModule>());
-    taskModule->GetGlobalDispatchQueue().AddAsyncTask([this, taskModule]()
-    {
-        auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
-        const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
-        const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
-        const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-        cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
+    auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
+    const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
+    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+    cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
 
-        taskModule->GetMainDispatchQueue().AddSyncTask([this, cameraObject]()
-        {
-            this->AddGlobalObject(cameraObject);
-        });
-    });
-
+    this->AddGlobalObject(cameraObject);
+    /*
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
@@ -92,7 +84,7 @@ LogoScene::LogoScene()
         this->AddObject(object3);
         this->AddObject(object4);
         this->AddObject(object5);
-    }
+    }*/
 
     //
     //{

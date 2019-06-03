@@ -85,6 +85,9 @@
     <Filter Include="Source\ThirdParty\freetype-2.10.0\src">
       <UniqueIdentifier>{cf06ca67-a965-4db6-b40e-6caa364f939f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ThirdParty\zlib-1.2.11">
+      <UniqueIdentifier>{ad986e51-604c-47ac-905e-07d60be4befe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\format.cc">
@@ -407,6 +410,51 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\FontFactory.cpp">
       <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\deflate.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\gzclose.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\gzlib.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\gzread.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\gzwrite.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\infback.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inffast.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inflate.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inftrees.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\trees.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\uncompr.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zutil.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\adler32.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\compress.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\crc32.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1195,6 +1243,39 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\FontFactory.h">
       <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inffixed.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inflate.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inftrees.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\trees.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zlib.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zutil.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\crc32.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\deflate.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\gzguts.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\inffast.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zconf.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

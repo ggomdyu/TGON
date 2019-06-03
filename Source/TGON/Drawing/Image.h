@@ -62,7 +62,7 @@ public:
      */
     Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
-    Image(Image&& rhs);
+    Image(Image&& rhs) noexcept;
 
 /**@section Operator */
 public:

@@ -95,6 +95,9 @@ public:
 	_ValueType x, y;
 };
 
+using I32Vector2 = BasicVector2<int32_t>;
+using I64Vector2 = BasicVector2<int64_t>;
+using IVector2 = BasicVector2<int>;
 using Vector2 = BasicVector2<float>;
 using DVector2 = BasicVector2<double>;
     
