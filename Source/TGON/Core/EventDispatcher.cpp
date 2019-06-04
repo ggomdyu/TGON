@@ -5,19 +5,19 @@
 namespace tgon
 {
 
-void EventDispatcher::SubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler)
+void EventDispatcher::SubscribeEvent(const StringHash& eventName, const EventHandler& eventHandler)
 {
-    m_eventHandlers[eventName.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = eventHandler;
+    m_eventHandlers[eventName][reinterpret_cast<uintptr_t>(&eventHandler)] = eventHandler;
 }
     
-void EventDispatcher::SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler)
+void EventDispatcher::SubscribeEvent(const StringHash& eventName, EventHandler&& eventHandler)
 {
-    m_eventHandlers[eventName.GetHashCode()][reinterpret_cast<uintptr_t>(&eventHandler)] = std::move(eventHandler);
+    m_eventHandlers[eventName][reinterpret_cast<uintptr_t>(&eventHandler)] = std::move(eventHandler);
 }
     
-bool EventDispatcher::UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler)
+bool EventDispatcher::UnsubscribeEvent(const StringHash& eventName, const EventHandler& eventHandler)
 {
-    auto iter = m_eventHandlers.find(eventName.GetHashCode());
+    auto iter = m_eventHandlers.find(eventName);
     if (iter == m_eventHandlers.end())
     {
         return false;
@@ -28,9 +28,9 @@ bool EventDispatcher::UnsubscribeEvent(const StringViewHash& eventName, const Ev
     return true;
 }
     
-void EventDispatcher::DispatchEvent(const StringViewHash& eventName)
+void EventDispatcher::DispatchEvent(const StringHash& eventName)
 {
-    auto iter = m_eventHandlers.find(eventName.GetHashCode());
+    auto iter = m_eventHandlers.find(eventName);
     if (iter == m_eventHandlers.end())
     {
         return;

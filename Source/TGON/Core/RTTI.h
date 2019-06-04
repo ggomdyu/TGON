@@ -42,7 +42,6 @@ public:
 /* @section Variable */
 private:
     const std::type_info* m_typeInfo;
-
     const RTTI* m_superRTTI;
 };
 

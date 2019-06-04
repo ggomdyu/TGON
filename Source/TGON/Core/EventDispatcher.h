@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <map>
+#include <unordered_map>
 
 #include "Platform/Config.h"
 #include "Core/Delegate.h"
@@ -22,14 +22,14 @@ public:
     
 /**@section Method */
 public:
-    void SubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
-    void SubscribeEvent(const StringViewHash& eventName, EventHandler&& eventHandler);
-    bool UnsubscribeEvent(const StringViewHash& eventName, const EventHandler& eventHandler);
-    void DispatchEvent(const StringViewHash& eventName);
+    void SubscribeEvent(const StringHash& eventName, const EventHandler& eventHandler);
+    void SubscribeEvent(const StringHash& eventName, EventHandler&& eventHandler);
+    bool UnsubscribeEvent(const StringHash& eventName, const EventHandler& eventHandler);
+    void DispatchEvent(const StringHash& eventName);
     
 /**@section Variable */
 private:
-    std::map<size_t, std::map<uintptr_t, EventHandler>> m_eventHandlers;
+    std::unordered_map<StringHash, std::unordered_map<uintptr_t, EventHandler>> m_eventHandlers;
 };
 
 } /* namespace tgon */

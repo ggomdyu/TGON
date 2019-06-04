@@ -56,6 +56,7 @@ void CanvasRenderer::Draw(Graphics& graphics)
     if (m_cameraList.size() <= 0)
     {
         Log(LogLevel::Debug, "CanvasRenderer has no camera but trying to draw.\n");
+        return;
     }
 #endif
     
