@@ -46,6 +46,18 @@ private:
     FT_Face m_fontFace;
 };
 
+class TGON_API Font
+{
+public:
+    StringHash m_font;
+    int32_t m_height;
+};
+
+class FontBakery
+{
+public:
+};
+
 class TGON_API FontFactory :
     private boost::noncopyable
 {
@@ -60,9 +72,9 @@ public:
 /**@section Method */
 public:
     FT_Face GetGlyphData(const StringHash& fontPath, char32_t ch);
+    FT_Face LoadFontFace(const StringHash& fontPath, int32_t height);
 
 private:
-    FT_Face ImportFont(const StringHash& fontPath);
 
 /**@section Variable */
 private:

@@ -23,8 +23,8 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
 
-    FontFactory ff;
-    //ff.ImportFont("E:/Users/ggomdyu/Desktop/maplestory.ttf", 32);
+    //FontFactory ff;
+    //ff.ImportFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
 
     auto engine = Application::GetInstance()->GetEngine();
 
@@ -35,7 +35,7 @@ LogoScene::LogoScene()
     cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
 
     this->AddGlobalObject(cameraObject);
-    /*
+    
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
@@ -84,7 +84,7 @@ LogoScene::LogoScene()
         this->AddObject(object3);
         this->AddObject(object4);
         this->AddObject(object5);
-    }*/
+    }
 
     //
     //{

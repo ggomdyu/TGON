@@ -34,7 +34,6 @@ OpenGLVertexBuffer::OpenGLVertexBuffer() :
 OpenGLVertexBuffer::OpenGLVertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs) :
     m_vertexBufferHandle(this->CreateVertexBufferHandle()),
     m_vertexBufferLayoutDescs(vertexBufferLayoutDescs)
-
 {
 }
 

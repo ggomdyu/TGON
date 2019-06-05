@@ -6,45 +6,29 @@
 
 #pragma once
 #include <vector>
-#include <cstdint>
 #include <algorithm>
 #include <string>
-#include <string_view>
 
-#include "Platform/Config.h"
 #include "String/StringHash.h"
 #include "Math/Extent.h"
 
-#include "ImageType.h"
+#include "ImageUtility.h"
 
 namespace tgon
 {
-    
-ImageFormat ConvertStringToImageFormat(const std::string_view& str);
-
-template <std::size_t _ImageFormatStrLen>
-inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[_ImageFormatStrLen])
-{
-    return ConvertStringToImageFormat({imageFormatStr, _ImageFormatStrLen - 1});
-}
 
 class TGON_API Image
 {
 /**@section Constructor */
 public:
-    Image();
+    Image() noexcept;
 
     /**
      * @brief   Reads an image data from the specified path.
      * @param [in] filePath     The file path of image
      */
-    explicit Image(const std::string& filePath);
-
-    /**
-     * @brief   Reads an image data from the specified path.
-     * @param [in] filePath     The file path of image
-     */
-    explicit Image(std::string&& filePath);
+    template <typename _StringType>
+    explicit Image(_StringType&& filePath);
 
     /**
      * @brief   Reads an image data from memory.
@@ -52,15 +36,8 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes);
-    
-    /**
-     * @brief   Reads an image data from memory.
-     * @param [in] filePath     The file path of image file
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
-     */
-    Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
+    template <typename _StringType>
+    Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
     
     Image(Image&& rhs) noexcept;
 
@@ -80,10 +57,10 @@ public:
     bool IsValid() const noexcept;
 
     /**@brief   Gets the raw image data. */
-    uint8_t* GetImageData() noexcept;
+    std::unique_ptr<uint8_t>& GetImageData() noexcept;
 
     /**@brief   Gets the raw image data. */
-    const uint8_t* GetImageData() const noexcept;
+    const std::unique_ptr<uint8_t>& GetImageData() const noexcept;
     
     /**@brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
@@ -137,6 +114,9 @@ public:
     bool SaveAsTga(const char* saveFilePath);
 
 private:
+  
+
+private:
     void Destroy();
 
 /**@section Variable */
@@ -145,7 +125,24 @@ private:
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
+    PixelFormat m_pixelFormat;
     StringHash m_filePath;
 };
+
+template<typename _StringType>
+inline Image::Image(_StringType&& filePath) :
+    m_filePath(filePath),
+    m_imageData(),
+    m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
+{
+}
+
+template<typename _StringType>
+inline Image::Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
+    m_filePath(filePath),
+    m_imageData(),
+    m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
+{
+}
 
 } /* namespace tgon */

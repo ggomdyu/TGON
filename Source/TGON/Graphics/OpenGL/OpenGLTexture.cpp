@@ -28,15 +28,22 @@ constexpr GLint ConvertTextureWrapModeToNative(TextureWrapMode textureWrapMode) 
 }
 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
-    m_image(filePath),
-    m_isUseMipmap(isUseMipmap),
-    m_textureHandle(this->CreateTextureHandle()),
-    m_filterMode(filterMode),
-    m_wrapMode(wrapMode)
+    OpenGLTexture(Image(filePath), filterMode, wrapMode, isUseMipmap)
 {
     assert(m_textureHandle != 0);
     
     this->TransferToVideo();
+}
+
+OpenGLTexture::OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
+    m_imageData(std::move(image.GetImageData())),
+    m_textureHandle(this->CreateTextureHandle()),
+    m_width(image.GetWidth()),
+    m_height(image.GetHeight()),
+    m_filterMode(filterMode),
+    m_wrapMode(wrapMode),
+    m_isUseMipmap(isUseMipmap)
+{
 }
 
 OpenGLTexture::~OpenGLTexture()
@@ -60,7 +67,7 @@ void OpenGLTexture::Unuse()
 void OpenGLTexture::TransferToVideo()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_image.GetWidth(), m_image.GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, m_image.GetImageData()));
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_imageData.get()));
 
     if (m_isUseMipmap == true)
     {
@@ -116,35 +123,25 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
 {
     return m_textureHandle;
 }
-    
-bool OpenGLTexture::IsValid() const noexcept
-{
-    return m_image.IsValid();
-}
 
 int32_t OpenGLTexture::GetWidth() const noexcept
 {
-    return m_image.GetWidth();
+    return m_width;
 }
 
 int32_t OpenGLTexture::GetHeight() const noexcept
 {
-    return m_image.GetHeight();
+    return m_height;
 }
 
 I32Extent2D OpenGLTexture::GetSize() const noexcept
 {
-    return m_image.GetSize();
-}
-
-int32_t OpenGLTexture::GetChannels() const noexcept
-{
-    return m_image.GetChannels();
+    return {m_width, m_height};
 }
 
 PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
 {
-    return m_image.GetPixelFormat();
+    return m_pixelFormat;
 }
     
 } /* namespace tgon */

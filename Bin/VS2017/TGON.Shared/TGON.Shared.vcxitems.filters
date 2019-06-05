@@ -88,6 +88,9 @@
     <Filter Include="Source\ThirdParty\zlib-1.2.11">
       <UniqueIdentifier>{ad986e51-604c-47ac-905e-07d60be4befe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Drawing\ImageProcessor">
+      <UniqueIdentifier>{3ea0e8fc-5698-43a9-a212-81a4f202994e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\format.cc">
@@ -455,6 +458,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\crc32.c">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.cpp">
+      <Filter>Source\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1276,6 +1285,27 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zconf.h">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.h">
+      <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\PngImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\WebPImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\BaseImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

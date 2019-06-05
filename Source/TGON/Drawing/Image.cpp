@@ -5,7 +5,6 @@
 #ifdef _MSC_VER
 #   define STBI_MSC_SECURE_CRT
 #endif
-#include <stb_image.h>
 #include <stb_image_write.h>
 
 #include "String/StringTraits.h"
@@ -15,73 +14,23 @@
 
 namespace tgon
 {
-    
-ImageFormat ConvertStringToImageFormat(const std::string_view& str)
-{
-    char lowercaseStr[32] {};
-    BasicStringTraits<char>::ToLower(str, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
-    
-    switch (X65599Hash(lowercaseStr))
-    {
-        case TGON_X65599("bmp"):
-            return ImageFormat::Bmp;
-        case TGON_X65599("jpg"):
-            return ImageFormat::Jpg;
-        case TGON_X65599("jpeg"):
-            return ImageFormat::Jpeg;
-        case TGON_X65599("png"):
-            return ImageFormat::Png;
-        case TGON_X65599("tiff"):
-            return ImageFormat::Tiff;
-        case TGON_X65599("gif"):
-            return ImageFormat::Gif;
-        case TGON_X65599("webp"):
-            return ImageFormat::WebP;
-        default:
-            return ImageFormat::Unknown;
-    }
-}
 
-Image::Image() :
+Image::Image() noexcept :
     m_imageData(nullptr),
     m_width(0),
     m_height(0),
-    m_channels(0)
-{
-}
-
-Image::Image(const std::string& filePath) :
-    m_filePath(filePath),
-    m_imageData(stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4))
-{
-}
-
-Image::Image(std::string&& filePath) :
-    m_filePath(std::move(filePath)),
-    m_imageData(stbi_load(filePath.c_str(), &m_width, &m_height, &m_channels, 4))
-{
-}
-
-Image::Image(const std::string& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
-    m_filePath(filePath),
-    m_imageData(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4))
-{
-}
-
-Image::Image(std::string&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
-    m_filePath(filePath),
-    m_imageData(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, &m_width, &m_height, &m_channels, 4))
+    m_channels(0),
+    m_pixelFormat(PixelFormat::Unknown)
 {
 }
 
 Image::Image(Image&& rhs) noexcept :
     m_imageData(std::move(rhs.m_imageData)),
+    m_filePath(std::move(rhs.m_filePath)),
     m_width(rhs.m_width),
     m_height(rhs.m_height),
-    m_channels(rhs.m_channels),
-    m_filePath(std::move(rhs.m_filePath))
+    m_channels(rhs.m_channels)
 {
-    rhs.m_imageData = nullptr;
     rhs.m_width = 0;
     rhs.m_height = 0;
     rhs.m_channels = 0;
@@ -92,12 +41,11 @@ Image& Image::operator=(Image&& rhs)
     this->Destroy();
     
     m_imageData = std::move(rhs.m_imageData);
+    m_filePath = std::move(rhs.m_filePath);
     m_width = rhs.m_width;
     m_height = rhs.m_height;
     m_channels = rhs.m_channels;
-    m_filePath = std::move(rhs.m_filePath);
 
-    rhs.m_imageData = nullptr;
     rhs.m_width = 0;
     rhs.m_height = 0;
     rhs.m_channels = 0;
@@ -120,14 +68,14 @@ bool Image::IsValid() const noexcept
     return m_imageData != nullptr;
 }
 
-uint8_t* Image::GetImageData() noexcept
+std::unique_ptr<uint8_t>& Image::GetImageData() noexcept
 {
-    return m_imageData.get();
+    return m_imageData;
 }
 
-const uint8_t* Image::GetImageData() const noexcept
+const std::unique_ptr<uint8_t>& Image::GetImageData() const noexcept
 {
-    return m_imageData.get();
+    return m_imageData;
 }
 
 int32_t Image::GetWidth() const noexcept
@@ -152,7 +100,7 @@ int32_t Image::GetChannels() const noexcept
 
 PixelFormat Image::GetPixelFormat() const noexcept
 {
-    return PixelFormat::R8G8B8A8_Unorm;
+    return PixelFormat::RGBA8888;
 }
 
 const StringHash& Image::GetFilePath() const noexcept

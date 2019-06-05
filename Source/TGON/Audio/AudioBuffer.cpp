@@ -1,11 +1,12 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else
 #   include <alc.h>
 #endif
+
+#include "Platform/Config.h"
 
 #include "Importer/WavAudioImporter.h"
 #include "Importer/OggVorbisAudioImporter.h"
@@ -16,7 +17,7 @@
 namespace tgon
 {
 
-AudioBuffer::AudioBuffer() :
+AudioBuffer::AudioBuffer() noexcept :
     m_audioDataBytes(0),
     m_bitsPerSample(0),
     m_channels(0),

@@ -76,7 +76,7 @@ FontFactory::~FontFactory()
     }
 }
 
-FT_Face FontFactory::ImportFont(const StringHash& fontPath)
+FT_Face FontFactory::LoadFontFace(const StringHash& fontPath, int32_t height)
 {
     auto& fontFace = m_fontFaces[fontPath];
     if (fontFace != nullptr)
@@ -89,6 +89,12 @@ FT_Face FontFactory::ImportFont(const StringHash& fontPath)
         return nullptr;
     }
 
+    //FT_Face a = fontFace;
+    //FT_Set_Char_Size(a, 0, height );
+    //FT_Load_Char(a, 'X', FT_LOAD_RENDER);
+    //FT_Face b = fontFace;
+    //FT_Set_Pixel_Sizes(b, 0, 48);
+    //FT_Load_Char(b, 'Y', FT_LOAD_RENDER);
 
     return fontFace;
 }

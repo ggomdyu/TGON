@@ -20,8 +20,11 @@ class TGON_API OpenGLTexture :
 {
 /**@section Constructor */
 public:
-    /**@brief   Initializes texture through specified file path and texture property. */
-    explicit OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+    OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+
+    OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+
+private:
 
 /**@section Destructor */
 public:
@@ -50,9 +53,6 @@ public:
     /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
     
-    /**@brief   Checks the image file was loaded successfully. */
-    bool IsValid() const noexcept;
-    
     /**@brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
     
@@ -61,9 +61,6 @@ public:
     
     /**@brief   Gets the size of image which contains width and height. */
     I32Extent2D GetSize() const noexcept;
-    
-    /**@brief   Gets the count of color channel. */
-    int32_t GetChannels() const noexcept;
     
     /**@brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
@@ -79,7 +76,10 @@ private:
     GLuint m_textureHandle;
     TextureFilterMode m_filterMode;
     TextureWrapMode m_wrapMode;
-    Image m_image;
+    PixelFormat m_pixelFormat;
+    int32_t m_width;
+    int32_t m_height;
+    std::unique_ptr<uint8_t> m_imageData;
 };
 
 using PlatformTexture = OpenGLTexture;

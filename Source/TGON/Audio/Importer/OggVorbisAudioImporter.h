@@ -5,11 +5,7 @@
  */
 
 #pragma once
-#define TGON_USE_STB_OGG_VORBIS_IMPORTER 0
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER
-#   define STB_VORBIS_HEADER_ONLY
-#   include <stb/stb_vorbis.c>
-#else
+#if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
 #   include <vorbis/vorbisfile.h>
 #   include <ogg/ogg.h>
 #   ifdef _MSC_VER
@@ -17,6 +13,9 @@
 #   pragma comment(lib, "libvorbisfile.lib")
 #   pragma comment(lib, "libogg.lib")
 #   endif
+#else
+#   define STB_VORBIS_HEADER_ONLY
+#   include <stb/stb_vorbis.c>
 #endif
 
 #include "Diagnostics/Log.h"
@@ -26,6 +25,7 @@
 namespace tgon
 {
 
+#if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
 struct OggVorbisFileStream final
 {
 /**@section Constructor */
@@ -115,6 +115,7 @@ inline long OggVorbisFileStream::Tell(void* stream)
     const OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
     return castedStream->srcDataIter - castedStream->srcData;
 }
+#endif
 
 class OggVorbisAudioImporter :
     public BaseAudioImporter<OggVorbisAudioImporter>
@@ -125,17 +126,17 @@ public:
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* srcData, size_t srcDataBytes);
+    bool Import(const uint8_t* srcData, size_t srcDataBytes);
 
 private:
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+#if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
     ov_callbacks MakeCustomIOCallback() const noexcept;
     unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
 #endif
 };
 
-inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -144,12 +145,7 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, std::size_t s
 
     m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
 
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER
-    short* audioData = nullptr;
-    auto audioDataBytes = stb_vorbis_decode_memory(srcData, srcDataBytes, &m_channels, &m_samplingRate, &audioData);
-    m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
-    m_audioDataBytes = audioDataBytes * 4;
-#else
+#if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
     OggVorbisFileStream fileStream(srcData, srcDataBytes);
     ov_callbacks ovCallbacks = this->MakeCustomIOCallback();
 
@@ -178,12 +174,17 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, std::size_t s
     DecodeOggVorbis(&oggVorbisFile, &m_audioData[0], audioDataBytes, vorbisInfo->channels);
 
     ov_clear(&oggVorbisFile);
+#else
+    short* audioData = nullptr;
+    auto audioDataBytes = stb_vorbis_decode_memory(srcData, srcDataBytes, &m_channels, &m_samplingRate, &audioData);
+    m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
+    m_audioDataBytes = audioDataBytes * 4;
 #endif
 
     return true;
 }
 
-inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* srcData, size_t srcDataBytes)
 {
     if (srcDataBytes < 16)
     {
@@ -193,7 +194,7 @@ inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* srcData, std::si
     return true;
 }
 
-#if TGON_USE_STB_OGG_VORBIS_IMPORTER == 0
+#if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
 inline ov_callbacks OggVorbisAudioImporter::MakeCustomIOCallback() const noexcept
 {
     ov_callbacks ovCallbacks;

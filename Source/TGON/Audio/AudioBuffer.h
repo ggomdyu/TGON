@@ -12,24 +12,25 @@
 #include <memory>
 #include <string>
 
-#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   import <OpenAL/al.h>
 #else
 #   include <al.h>
 #endif
 
+#include "Platform/Config.h"
+
 #include "AudioBufferType.h"
 
 namespace tgon
 {
 
-class AudioBuffer final :
+class TGON_API AudioBuffer final :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    AudioBuffer();
+    AudioBuffer() noexcept;
 
     /**
      * @brief   Reads a audio data from the path specified by filePath.

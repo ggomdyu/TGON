@@ -35,7 +35,6 @@ public:
     using PlatformTexture::GetWidth;
     using PlatformTexture::GetHeight;
     using PlatformTexture::GetSize;
-    using PlatformTexture::GetChannels;
     using PlatformTexture::GetPixelFormat;
 };
     
