@@ -7,56 +7,56 @@
 namespace tgon
 {
 
-GlyphData::GlyphData(char32_t ch, FT_Face fontFace) noexcept :
-    m_ch(ch),
-    m_fontFace(fontFace)
-{
-}
-
-GlyphData::~GlyphData()
-{
-    if (m_fontFace != nullptr)
-    {
-        FT_Done_Face(m_fontFace);
-        m_fontFace = nullptr;
-    }
-}
-
-I32Extent2D GlyphData::GetSize() const noexcept
-{
-    auto width = static_cast<int32_t>(m_fontFace->glyph->bitmap.width);
-    auto height = static_cast<int32_t>(m_fontFace->glyph->bitmap.rows);
-
-    return {width, height};
-}
-
-I32Vector2 GlyphData::GetBearing() const noexcept
-{
-    auto x = static_cast<int32_t>(m_fontFace->glyph->bitmap_left);
-    auto y = static_cast<int32_t>(m_fontFace->glyph->bitmap_top);
-
-    return {x, y};
-}
-
-int32_t GlyphData::GetAdvance() const noexcept
-{
-    return static_cast<int32_t>(m_fontFace->glyph->advance.x);
-}
-
-uint8_t* GlyphData::GetImageData() noexcept
-{
-    return m_fontFace->glyph->bitmap.buffer;
-}
-
-char32_t GlyphData::GetCharacter() const noexcept
-{
-    return m_ch;
-}
-
-const uint8_t* GlyphData::GetImageData() const noexcept
-{
-    return m_fontFace->glyph->bitmap.buffer;
-}
+//GlyphData::GlyphData(char32_t ch, FT_Face fontFace) noexcept :
+//    m_ch(ch),
+//    m_fontFace(fontFace)
+//{
+//}
+//
+//GlyphData::~GlyphData()
+//{
+//    if (m_fontFace != nullptr)
+//    {
+//        FT_Done_Face(m_fontFace);
+//        m_fontFace = nullptr;
+//    }
+//}
+//
+//I32Extent2D GlyphData::GetSize() const noexcept
+//{
+//    auto width = static_cast<int32_t>(m_fontFace->glyph->bitmap.width);
+//    auto height = static_cast<int32_t>(m_fontFace->glyph->bitmap.rows);
+//
+//    return {width, height};
+//}
+//
+//I32Vector2 GlyphData::GetBearing() const noexcept
+//{
+//    auto x = static_cast<int32_t>(m_fontFace->glyph->bitmap_left);
+//    auto y = static_cast<int32_t>(m_fontFace->glyph->bitmap_top);
+//
+//    return {x, y};
+//}
+//
+//int32_t GlyphData::GetAdvance() const noexcept
+//{
+//    return static_cast<int32_t>(m_fontFace->glyph->advance.x);
+//}
+//
+//uint8_t* GlyphData::GetImageData() noexcept
+//{
+//    return m_fontFace->glyph->bitmap.buffer;
+//}
+//
+//char32_t GlyphData::GetCharacter() const noexcept
+//{
+//    return m_ch;
+//}
+//
+//const uint8_t* GlyphData::GetImageData() const noexcept
+//{
+//    return m_fontFace->glyph->bitmap.buffer;
+//}
 
 FontFactory::FontFactory() :
     m_fontLibrary(nullptr)
@@ -76,27 +76,18 @@ FontFactory::~FontFactory()
     }
 }
 
-FT_Face FontFactory::LoadFontFace(const StringHash& fontPath, int32_t height)
+std::shared_ptr<Font> FontFactory::GetFont(const StringHash& fontPath)
 {
-    auto& fontFace = m_fontFaces[fontPath];
-    if (fontFace != nullptr)
+    auto iter = m_fonts.find(fontPath);
+    if (iter != m_fonts.end())
     {
-        return fontFace;
+        return iter->second;
     }
 
-    if (FT_New_Face(m_fontLibrary, fontPath.CStr(), 0, &fontFace) != 0)
-    {
-        return nullptr;
-    }
+    auto font = std::make_shared<Font>(fontPath);
+    m_fonts.insert(iter, {fontPath, font});
 
-    //FT_Face a = fontFace;
-    //FT_Set_Char_Size(a, 0, height );
-    //FT_Load_Char(a, 'X', FT_LOAD_RENDER);
-    //FT_Face b = fontFace;
-    //FT_Set_Pixel_Sizes(b, 0, 48);
-    //FT_Load_Char(b, 'Y', FT_LOAD_RENDER);
-
-    return fontFace;
+    return font;
 }
 
 } /* namespace tgon */

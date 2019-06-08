@@ -57,10 +57,10 @@ public:
     bool IsValid() const noexcept;
 
     /**@brief   Gets the raw image data. */
-    std::unique_ptr<uint8_t>& GetImageData() noexcept;
+    std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
 
     /**@brief   Gets the raw image data. */
-    const std::unique_ptr<uint8_t>& GetImageData() const noexcept;
+    const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
     
     /**@brief   Gets the image width. */
     int32_t GetWidth() const noexcept;
@@ -113,15 +113,9 @@ public:
      */
     bool SaveAsTga(const char* saveFilePath);
 
-private:
-  
-
-private:
-    void Destroy();
-
 /**@section Variable */
 private:
-    std::unique_ptr<uint8_t> m_imageData;
+    std::unique_ptr<uint8_t[]> m_imageData;
     int32_t m_width;
     int32_t m_height;
     int32_t m_channels;
@@ -132,7 +126,7 @@ private:
 template<typename _StringType>
 inline Image::Image(_StringType&& filePath) :
     m_filePath(filePath),
-    m_imageData(),
+    m_imageData(LoadImageData(filePath.c_str(), &m_width, &m_height, &m_channels)),
     m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
 {
 }
@@ -140,7 +134,7 @@ inline Image::Image(_StringType&& filePath) :
 template<typename _StringType>
 inline Image::Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
     m_filePath(filePath),
-    m_imageData(),
+    m_imageData(LoadImageData(srcData, srcDataBytes, &m_width, &m_height, &m_channels)),
     m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
 {
 }

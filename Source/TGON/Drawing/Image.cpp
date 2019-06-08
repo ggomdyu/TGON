@@ -38,8 +38,6 @@ Image::Image(Image&& rhs) noexcept :
 
 Image& Image::operator=(Image&& rhs)
 {
-    this->Destroy();
-    
     m_imageData = std::move(rhs.m_imageData);
     m_filePath = std::move(rhs.m_filePath);
     m_width = rhs.m_width;
@@ -68,12 +66,12 @@ bool Image::IsValid() const noexcept
     return m_imageData != nullptr;
 }
 
-std::unique_ptr<uint8_t>& Image::GetImageData() noexcept
+std::unique_ptr<uint8_t[]>& Image::GetImageData() noexcept
 {
     return m_imageData;
 }
 
-const std::unique_ptr<uint8_t>& Image::GetImageData() const noexcept
+const std::unique_ptr<uint8_t[]>& Image::GetImageData() const noexcept
 {
     return m_imageData;
 }
@@ -126,15 +124,6 @@ bool Image::SaveAsBmp(const char* saveFilePath)
 bool Image::SaveAsTga(const char* saveFilePath)
 {
     return stbi_write_tga(saveFilePath, m_width, m_height, 4, m_imageData.get()) != 0;
-}
-
-void Image::Destroy()
-{
-    m_imageData.release();
-    m_width = 0;
-    m_height = 0;
-    m_channels = 0;
-    m_filePath.Clear();
 }
 
 } /* namespace tgon */

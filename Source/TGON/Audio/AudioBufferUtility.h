@@ -45,28 +45,6 @@ inline AudioFormat ConvertStringToAudioFormat(const char* audioFormatStr, std::s
     return AudioFormat::Unknown;
 }
 
-template <std::size_t _AudioFormatStrLen>
-inline AudioFormat ConvertStringToAudioFormat(const char(&audioFormatStr)[_AudioFormatStrLen])
-{
-    return ConvertStringToAudioFormat(audioFormatStr, _AudioFormatStrLen - 1);
-}
-
-constexpr const char* ConvertAudioFormatToString(AudioFormat AudioFormat)
-{
-    constexpr const char* audioFormatStringTable[] =
-    {
-        "",
-        "wav",
-        "ogg",
-        "mp3",
-        "flac",
-        "m4a",
-        "opus",
-    };
-
-    return audioFormatStringTable[UnderlyingCast(AudioFormat)];
-}
-
 inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
 {
     if (channels == 1)

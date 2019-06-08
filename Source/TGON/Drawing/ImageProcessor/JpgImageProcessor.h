@@ -10,13 +10,12 @@
 namespace tgon
 {
 
-template <typename _AllocatorType>
-class BasicJpgImageProcessor :
-    public BaseImageProcessor<BasicJpgImageProcessor<_AllocatorType>, _AllocatorType>
+class JpgImageProcessor :
+    public BaseImageProcessor<JpgImageProcessor>
 {
 /* @section Constructor */
 public:
-    using BaseImageProcessor<BasicJpgImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
+    using BaseImageProcessor<JpgImageProcessor>::BaseImageProcessor;
 
 /* @section Method */
 public:
@@ -25,8 +24,7 @@ public:
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
-template <typename _AllocatorType>
-inline bool BasicJpgImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool JpgImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -36,8 +34,7 @@ inline bool BasicJpgImageProcessor<_AllocatorType>::Import(const uint8_t* srcDat
     return false;
 }
 
-template <typename _AllocatorType>
-inline bool BasicJpgImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool JpgImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 2)
     {
@@ -46,7 +43,5 @@ inline bool BasicJpgImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* 
 
     return (srcData[0] == 0xFF && srcData[1] == 0xD8);
 }
-
-using JpgImageProcessor = BasicJpgImageProcessor<std::allocator<uint8_t>>;
 
 } /* namespace tgon */

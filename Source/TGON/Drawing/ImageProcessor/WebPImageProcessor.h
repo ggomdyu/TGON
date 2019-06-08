@@ -10,13 +10,12 @@
 namespace tgon
 {
 
-template <typename _AllocatorType>
-class BasicWebPImageProcessor :
-    public BaseImageProcessor<BasicWebPImageProcessor<_AllocatorType>, _AllocatorType>
+class WebPImageProcessor :
+    public BaseImageProcessor<WebPImageProcessor>
 {
 /* @section Constructor */
 public:
-    using BaseImageProcessor<BasicWebPImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
+    using BaseImageProcessor<WebPImageProcessor>::BaseImageProcessor;
 
 /* @section Method */
 public:
@@ -25,14 +24,12 @@ public:
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
-template <typename _AllocatorType>
-inline bool BasicWebPImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WebPImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return false;
 }
 
-template <typename _AllocatorType>
-inline bool BasicWebPImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WebPImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 12)
     {
@@ -42,7 +39,5 @@ inline bool BasicWebPImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t*
     const char* header = reinterpret_cast<const char*>(&srcData[8]);
     return (header[0] == 'W' && header[1] == 'E' && header[2] == 'B' && header[3] == 'P');
 }
-
-using WebPImageProcessor = BasicWebPImageProcessor<std::allocator<uint8_t>>;
 
 } /* namespace tgon */  

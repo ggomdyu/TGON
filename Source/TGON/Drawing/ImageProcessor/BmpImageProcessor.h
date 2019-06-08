@@ -10,13 +10,12 @@
 namespace tgon
 {
 
-template <typename _AllocatorType>
-class BasicBmpImageProcessor :
-    public BaseImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>
+class BmpImageProcessor :
+    public BaseImageProcessor<BmpImageProcessor>
 {
 /* @section Constructor */
 public:
-    using BaseImageProcessor<BasicBmpImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
+    using BaseImageProcessor<BmpImageProcessor>::BaseImageProcessor;
 
 /* @section Method */
 public:
@@ -24,14 +23,12 @@ public:
     bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
 };
 
-template <typename _AllocatorType>
-inline bool BasicBmpImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BmpImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     return false;
 }
 
-template <typename _AllocatorType>
-inline bool BasicBmpImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BmpImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     if (srcDataBytes < 2)
     {
@@ -41,8 +38,6 @@ inline bool BasicBmpImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* 
     const char* header = reinterpret_cast<const char*>(&srcData[0]);
     return (header[0] == 'B' && header[1] == 'M');
 }
-
-using BmpImageProcessor = BasicBmpImageProcessor<std::allocator<uint8_t>>;
     
 } /* namespace tgon */  
 

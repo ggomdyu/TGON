@@ -11,6 +11,8 @@
 
 #include "Platform/Config.h"
 
+#pragma comment(lib, "dinput8.lib")
+
 namespace OIS
 {
 

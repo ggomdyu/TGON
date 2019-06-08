@@ -21,10 +21,7 @@ class TGON_API OpenGLTexture :
 /**@section Constructor */
 public:
     OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
-
     OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
-
-private:
 
 /**@section Destructor */
 public:
@@ -79,7 +76,7 @@ private:
     PixelFormat m_pixelFormat;
     int32_t m_width;
     int32_t m_height;
-    std::unique_ptr<uint8_t> m_imageData;
+    std::unique_ptr<uint8_t[]> m_imageData;
 };
 
 using PlatformTexture = OpenGLTexture;

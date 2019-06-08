@@ -20,42 +20,47 @@ namespace tgon
 
 using FontSize = uint32_t;
 
-class TGON_API GlyphData :
+class TGON_API GlyphData
+{
+///**@section Constructor */
+//public:
+//    GlyphData(char32_t ch, FT_Face fontFace) noexcept;
+//
+///**@section Destructor */
+//public:
+//    ~GlyphData();
+//
+///**@section Method */
+//public:
+//    I32Extent2D GetSize() const noexcept;
+//    I32Vector2 GetBearing() const noexcept;
+//    int32_t GetAdvance() const noexcept;
+//    uint8_t* GetImageData() noexcept;
+//    const uint8_t* GetImageData() const noexcept;
+//    char32_t GetCharacter() const noexcept;
+//    
+///**@section Variable */
+//private:
+//    char32_t m_ch;
+//    FT_Face m_fontFace;
+};
+
+class TGON_API Font :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    GlyphData(char32_t ch, FT_Face fontFace) noexcept;
-
-/**@section Destructor */
-public:
-    ~GlyphData();
+    Font(const StringHash& fontPath);
 
 /**@section Method */
 public:
-    I32Extent2D GetSize() const noexcept;
-    I32Vector2 GetBearing() const noexcept;
-    int32_t GetAdvance() const noexcept;
-    uint8_t* GetImageData() noexcept;
-    const uint8_t* GetImageData() const noexcept;
-    char32_t GetCharacter() const noexcept;
-    
+    const GlyphData& GetGlyphData(char32_t ch, int32_t height) const;
+
 /**@section Variable */
 private:
-    char32_t m_ch;
-    FT_Face m_fontFace;
-};
-
-class TGON_API Font
-{
-public:
-    StringHash m_font;
+    StringHash m_fontPath;
     int32_t m_height;
-};
-
-class FontBakery
-{
-public:
+    FT_Face m_fontFace;
 };
 
 class TGON_API FontFactory :
@@ -71,15 +76,12 @@ public:
 
 /**@section Method */
 public:
-    FT_Face GetGlyphData(const StringHash& fontPath, char32_t ch);
-    FT_Face LoadFontFace(const StringHash& fontPath, int32_t height);
-
-private:
+    std::shared_ptr<Font> GetFont(const StringHash& fontPath);
 
 /**@section Variable */
 private:
     FT_Library m_fontLibrary;
-    std::unordered_map<StringHash, FT_Face> m_fontFaces;
+    mutable std::unordered_map<StringHash, std::shared_ptr<Font>> m_fonts;
 };
 
 } /* namespace tgon */

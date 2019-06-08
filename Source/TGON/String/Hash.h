@@ -7,6 +7,7 @@
 #pragma once
 #include <cstdint>
 #include <cstddef>
+#include <boost/functional/hash.hpp>
 
 #ifdef _MSC_VER
 #define TGON_X65599(str)\
@@ -22,7 +23,7 @@ namespace tgon
 {
 
 constexpr size_t X65599Hash(const char* str) noexcept
-{
+{   
     std::size_t hashValue = 0;
     for (std::size_t i = 0; str[i] != '\0'; ++i)
     {

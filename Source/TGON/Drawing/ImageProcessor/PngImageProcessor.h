@@ -12,13 +12,12 @@
 namespace tgon
 {
 
-template <typename _AllocatorType>
-class BasicPngImageProcessor :
-    public BaseImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>
+class PngImageProcessor :
+    public BaseImageProcessor<PngImageProcessor>
 {
 /* @section Constructor */
 public:
-    using BaseImageProcessor<BasicPngImageProcessor<_AllocatorType>, _AllocatorType>::BaseImageProcessor;
+    using BaseImageProcessor<PngImageProcessor>::BaseImageProcessor;
 
 /* @section Method */
 public:
@@ -27,8 +26,7 @@ public:
     bool Import(const uint8_t* srcData, size_t srcDataBytes);
 };
 
-template <typename _AllocatorType>
-inline bool BasicPngImageProcessor<_AllocatorType>::Import(const uint8_t* srcData, size_t srcDataBytes)
+inline bool PngImageProcessor::Import(const uint8_t* srcData, size_t srcDataBytes)
 {
     if (VerifyFormat(srcData, srcDataBytes) == false)
     {
@@ -88,7 +86,7 @@ inline bool BasicPngImageProcessor<_AllocatorType>::Import(const uint8_t* srcDat
     m_height = png_get_image_height(pngStruct, pngInfo);
     m_colorDepth = png_get_bit_depth(pngStruct, pngInfo);
     m_channels = png_get_channels(pngStruct, pngInfo);
-    m_pixelFormat = PixelFormat::R8G8B8A8_Unorm;
+    m_pixelFormat = PixelFormat::RGBA8888;
 
     png_uint_32 colorType = png_get_color_type(pngStruct, pngInfo);
     if (colorType == PNG_COLOR_TYPE_PALETTE)
@@ -129,14 +127,14 @@ inline bool BasicPngImageProcessor<_AllocatorType>::Import(const uint8_t* srcDat
     {
         png_size_t rowBytes = png_get_rowbytes(pngStruct, pngInfo);
         size_t imageDataBytes = sizeof(png_byte*) * (m_height) * rowBytes;
-        m_imageData.resize(imageDataBytes);
+        m_imageData = std::make_unique<uint8_t[]>(imageDataBytes);
 
         thread_local static std::vector<png_byte*> rowPointer;
         rowPointer.resize(m_height);
 
         for (size_t i = 0; i < m_height; ++i)
         {
-            rowPointer[i] = m_imageData.data() + i * rowBytes;
+            rowPointer[i] = m_imageData.get() + i * rowBytes;
         }
 
         png_read_image(pngStruct, rowPointer.data());
@@ -147,8 +145,7 @@ inline bool BasicPngImageProcessor<_AllocatorType>::Import(const uint8_t* srcDat
     return true;
 }
 
-template <typename _AllocatorType>
-inline bool BasicPngImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* srcData, size_t srcDataBytes)
+inline bool PngImageProcessor::VerifyFormat(const uint8_t* srcData, size_t srcDataBytes)
 {
     if (srcDataBytes < 8)
     {
@@ -158,7 +155,5 @@ inline bool BasicPngImageProcessor<_AllocatorType>::VerifyFormat(const uint8_t* 
     bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
     return isPNGFormat;
 }
-    
-using PngImageProcessor = BasicPngImageProcessor<std::allocator<uint8_t>>;
 
 } /* namespace tgon */  

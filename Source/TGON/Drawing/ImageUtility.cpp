@@ -1,20 +1,16 @@
 #include "PrecompiledHeader.h"
 
-#define TGON_PREFER_LOWLEVEL_IMAGE_IMPORTER 1
-
-#if TGON_PREFER_LOWLEVEL_IMAGE_IMPORTER == 0
-#   define STB_IMAGE_IMPLEMENTATION
-#   define STB_IMAGE_WRITE_IMPLEMENTATION
-#   ifdef _MSC_VER
-#      define STBI_MSC_SECURE_CRT
-#   endif
-#   include <stb_image.h>
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#ifdef _MSC_VER
+#   define STBI_MSC_SECURE_CRT
 #endif
+#include <stb_image.h>
 
 #include "String/StringTraits.h"
 #include "String/Hash.h"
 
-#if TGON_PREFER_LOWLEVEL_IMAGE_IMPORTER
+#if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
 #   include "ImageProcessor/BmpImageProcessor.h"
 #   include "ImageProcessor/JpgImageProcessor.h"
 #   include "ImageProcessor/PngImageProcessor.h"
@@ -26,7 +22,7 @@
 namespace tgon
 {
 
-uint8_t* LoadImageData(const char* filePath, int32_t* width, int32_t* height, int32_t* channels)
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* width, int32_t* height, int32_t* channels)
 {
 #if defined(_MSC_VER) && _MSC_VER >= 1400
     FILE* file = nullptr;
@@ -50,98 +46,35 @@ uint8_t* LoadImageData(const char* filePath, int32_t* width, int32_t* height, in
     return LoadImageData(fileData.get(), fileSize, width, height, channels);
 }
 
-uint8_t* LoadImageData(const uint8_t* srcData, int32_t srcDataBytes, int32_t* width, int32_t* height, int32_t* channels)
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* srcData, int32_t srcDataBytes, int32_t* width, int32_t* height, int32_t* channels)
 {
-    uint8_t* ret;
-    auto d = [&](const auto& imageProcessor)
+#if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
+    auto loadImage = [&](auto& imageProcessor)
     {
-        if (imageProcessor.VerifyFormat(srcData, srcDataBytes))
-        {
-            *ret = std::move(imageProcessor.GetImageData());
-            *width = imageProcessor.GetWidth();
-            *height = imageProcessor.GetHeight();
-            *channels = imageProcessor.GetChannels();
-        }
+        *width = imageProcessor.GetWidth();
+        *height = imageProcessor.GetHeight();
+        *channels = imageProcessor.GetChannels();
+        return std::move(imageProcessor.GetImageData());
     };
 
-    d(PngImageProcessor{});
-
-#if TGON_PREFER_LOWLEVEL_IMAGE_IMPORTER
-    /*if (PngImage)
+    if (PngImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
-    case ImageFormat::Png:
-    {
-        PngImageProcessor imageProcessor(srcData, srcDataBytes);
-        if (imageProcessor.IsValid())
-        {
-            m_imageData = std::move(imageProcessor.GetImageData());
-            m_width = imageProcessor.GetWidth();
-            m_height = imageProcessor.GetHeight();
-            m_channels = imageProcessor.GetChannels();
-            m_colorDepth = imageProcessor.GetColorDepth();
-            m_pixelFormat = imageProcessor.GetPixelFormat();
-            return true;
-        }
+        return loadImage(PngImageProcessor(srcData, srcDataBytes));
     }
-    return false;
-
-    case ImageFormat::Jpg:
+    else if (JpgImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
-        JpgImageProcessor imageProcessor(srcData, srcDataBytes);
-        if (imageProcessor.IsValid())
-        {
-            m_imageData = std::move(imageProcessor.GetImageData());
-            m_width = imageProcessor.GetWidth();
-            m_height = imageProcessor.GetHeight();
-            m_channels = imageProcessor.GetChannels();
-            m_colorDepth = imageProcessor.GetColorDepth();
-            m_pixelFormat = imageProcessor.GetPixelFormat();
-            return true;
-        }
+        return loadImage(JpgImageProcessor(srcData, srcDataBytes));
     }
-    return false;
-
-    case ImageFormat::WebP:
+    else if (BmpImageProcessor::VerifyFormat(srcData, srcDataBytes))
     {
-        WebPImageProcessor imageProcessor(srcData, srcDataBytes);
-        if (imageProcessor.IsValid())
-        {
-            m_imageData = std::move(imageProcessor.GetImageData());
-            m_width = imageProcessor.GetWidth();
-            m_height = imageProcessor.GetHeight();
-            m_channels = imageProcessor.GetChannels();
-            m_colorDepth = imageProcessor.GetColorDepth();
-            m_pixelFormat = imageProcessor.GetPixelFormat();
-            return true;
-        }
+        return loadImage(BmpImageProcessor(srcData, srcDataBytes));
     }
-    return false;
-
-    case ImageFormat::Bmp:
-    {
-        BmpImageProcessor imageProcessor(srcData, srcDataBytes);
-        if (imageProcessor.IsValid())
-        {
-            m_imageData = std::move(imageProcessor.GetImageData());
-            m_width = imageProcessor.GetWidth();
-            m_height = imageProcessor.GetHeight();
-            m_channels = imageProcessor.GetChannels();
-            m_colorDepth = imageProcessor.GetColorDepth();
-            m_pixelFormat = imageProcessor.GetPixelFormat();
-            return true;
-        }
-    }
-    return false;
-
-    default:
-        return false;
-    }*/
-#else   
-    return stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, width, height, channels, 4);
 #endif
+
+    return std::unique_ptr<uint8_t[]>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, width, height, channels, 4));
 }
 
-ImageFormat ConvertStringToImageFormat(const std::string_view& str)
+TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)
 {
     char lowercaseStr[32]{};
     BasicStringTraits<char>::ToLower(str, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);

@@ -91,6 +91,9 @@
     <Filter Include="Source\Drawing\ImageProcessor">
       <UniqueIdentifier>{3ea0e8fc-5698-43a9-a212-81a4f202994e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ThirdParty\lpng1637">
+      <UniqueIdentifier>{e0110d83-29a3-4f33-9c35-c5e4bfb81ad7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\fmt-5.1.0\src\format.cc">
@@ -464,6 +467,54 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.cpp">
       <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngerror.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngget.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngmem.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngpread.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngread.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrio.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrtran.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrutil.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngset.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngtest.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngtrans.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwio.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwrite.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwtran.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwutil.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\png.c">
+      <Filter>Source\ThirdParty\lpng1637</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
