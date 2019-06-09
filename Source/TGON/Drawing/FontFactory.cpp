@@ -4,6 +4,18 @@
 
 #include "FontFactory.h"
 
+#undef __FTERRORS_H__
+#define FT_ERRORDEF( e, v, s )  { e, s },
+#define FT_ERROR_START_LIST     {
+#define FT_ERROR_END_LIST       { 0, 0 } };
+
+const struct
+{
+    int          errorCode;
+    const char*  errorMessage;
+} g_ftErrors[] =
+#include FT_ERRORS_H
+
 namespace tgon
 {
 
@@ -57,11 +69,29 @@ namespace tgon
 //{
 //    return m_fontFace->glyph->bitmap.buffer;
 //}
+    
+Font::Font(const StringHash& fontPath, FT_Library fontLibrary) :
+    m_fontPath(fontPath),
+    m_fontLibrary(fontLibrary),
+    m_fontFace(nullptr)
+{
+    FT_Error error = FT_New_Face(fontLibrary, fontPath.CStr(), 0, &m_fontFace);
+    if (error)
+    {
+        throw std::runtime_error(g_ftErrors[error].errorMessage);
+    }
+    
+    error = FT_Select_Charmap(m_fontFace, FT_ENCODING_UNICODE);
+    if (error)
+    {
+        throw std::runtime_error(g_ftErrors[error].errorMessage);
+    }
+}
 
 FontFactory::FontFactory() :
     m_fontLibrary(nullptr)
 {
-    if (FT_Init_FreeType(&m_fontLibrary) != 0)
+//    if (FT_Init_FreeType(&m_fontLibrary) != 0)
     {
         throw std::runtime_error("Failed to initialize FT_Library.");
     }
@@ -71,7 +101,7 @@ FontFactory::~FontFactory()
 {
     if (m_fontLibrary != nullptr)
     {
-        FT_Done_FreeType(m_fontLibrary);
+//        FT_Done_FreeType(m_fontLibrary);
         m_fontLibrary = nullptr;
     }
 }
@@ -84,7 +114,7 @@ std::shared_ptr<Font> FontFactory::GetFont(const StringHash& fontPath)
         return iter->second;
     }
 
-    auto font = std::make_shared<Font>(fontPath);
+    auto font = std::make_shared<Font>(fontPath, m_fontLibrary);
     m_fonts.insert(iter, {fontPath, font});
 
     return font;

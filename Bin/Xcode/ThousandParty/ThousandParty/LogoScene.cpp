@@ -23,7 +23,7 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
 
-    //FontFactory ff;
+    FontFactory ff;
     //ff.ImportFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
 
     auto engine = Application::GetInstance()->GetEngine();

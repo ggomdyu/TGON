@@ -50,16 +50,17 @@ class TGON_API Font :
 {
 /**@section Constructor */
 public:
-    Font(const StringHash& fontPath);
+    Font(const StringHash& fontPath, FT_Library fontLibrary);
 
 /**@section Method */
 public:
-    const GlyphData& GetGlyphData(char32_t ch, int32_t height) const;
+//    const GlyphData& GetGlyphData(char32_t ch, int32_t height) const;
 
 /**@section Variable */
 private:
     StringHash m_fontPath;
     int32_t m_height;
+    FT_Library m_fontLibrary;
     FT_Face m_fontFace;
 };
 
