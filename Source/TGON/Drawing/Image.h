@@ -126,16 +126,14 @@ private:
 template<typename _StringType>
 inline Image::Image(_StringType&& filePath) :
     m_filePath(filePath),
-    m_imageData(LoadImageData(filePath.c_str(), &m_width, &m_height, &m_channels)),
-    m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
+    m_imageData(LoadImageData(filePath.c_str(), &m_width, &m_height, &m_channels, &m_pixelFormat))
 {
 }
 
 template<typename _StringType>
 inline Image::Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
     m_filePath(filePath),
-    m_imageData(LoadImageData(srcData, srcDataBytes, &m_width, &m_height, &m_channels)),
-    m_pixelFormat(m_channels == 4 ? PixelFormat::RGBA8888 : m_channels == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown)
+    m_imageData(LoadImageData(srcData, srcDataBytes, &m_width, &m_height, &m_channels, &m_pixelFormat))
 {
 }
 

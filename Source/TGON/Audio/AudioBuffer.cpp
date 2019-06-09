@@ -70,7 +70,7 @@ bool AudioBuffer::Initialize(const std::string& filePath)
     fclose(file);
 
     size_t extensionOffset = filePath.rfind('.') + 1;
-    return this->Initialize(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset, filePath.size() - extensionOffset));
+    return this->Initialize(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset));
 }
 
 bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)

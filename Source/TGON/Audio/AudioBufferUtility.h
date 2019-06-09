@@ -6,11 +6,6 @@
 
 #pragma once
 #include <cstdint>
-#if TGON_PLATFORM_MACOS
-#   include <OpenAL/al.h>
-#else
-#   include <al.h>
-#endif
 
 #include "String/StringTraits.h"
 #include "String/Hash.h"
@@ -21,10 +16,10 @@
 namespace tgon
 {
 
-inline AudioFormat ConvertStringToAudioFormat(const char* audioFormatStr, std::size_t audioFormatStrLen)
+inline AudioFormat ConvertStringToAudioFormat(const char* str)
 {
     char lowercaseStr[32] {};
-    BasicStringTraits<char>::ToLower(audioFormatStr, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
+    BasicStringTraits<char>::ToLower(str, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
 
     switch (X65599Hash(lowercaseStr))
     {

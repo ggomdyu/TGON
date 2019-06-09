@@ -14,7 +14,6 @@
 namespace tgon
 {
 
-    
 class TGON_API Texture final :
     private PlatformTexture
 {

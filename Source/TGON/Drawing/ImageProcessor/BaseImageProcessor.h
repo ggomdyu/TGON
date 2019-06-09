@@ -83,7 +83,7 @@ inline const std::unique_ptr<uint8_t[]>& BaseImageProcessor<_DerivedType>::GetIm
 template <typename _DerivedType>
 inline bool BaseImageProcessor<_DerivedType>::IsValid() const noexcept
 {
-    return m_imageData.size() > 0;
+    return m_imageData != nullptr;
 }
 
 template <typename _DerivedType>

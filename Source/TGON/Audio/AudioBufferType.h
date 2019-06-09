@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   import <OpenAL/al.h>
 #else
