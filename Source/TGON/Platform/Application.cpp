@@ -27,17 +27,17 @@ void Application::MessageLoop()
     PlatformApplication::MessageLoop([&](){ m_engine->Update(); });
 }
 
-void Application::ShowMessageBox(const char* message) const
+void Application::ShowMessageBox(const std::string_view& message) const
 {
     this->ShowMessageBox("", message);
 }
 
-void Application::ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const
+void Application::ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon) const
 {
     this->ShowMessageBox("", message, messageBoxIcon);
 }
 
-void Application::ShowMessageBox(const char* title, const char* message) const
+void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message) const
 {
     this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }

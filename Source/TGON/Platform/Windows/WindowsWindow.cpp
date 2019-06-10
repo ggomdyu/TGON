@@ -70,7 +70,7 @@ void WindowsWindow::GetTitle(char* destStr) const
     wchar_t utf16Title[256] {};
     int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
 
-    UTF16LE::Convert<UTF8>(utf16Title, utf16TitleLen, destStr, 256);
+    UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Title, utf16TitleLen), destStr, 256);
 }
 
 bool WindowsWindow::IsResizable() const
@@ -186,12 +186,12 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
     ::SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetTitle(const char* captionTitle)
+void WindowsWindow::SetTitle(const std::string_view& captionTitle)
 {
     assert(captionTitle != nullptr);
 
     char utf16Title[512] {};
-    bool isConvertSucceed = UTF8::Convert<UTF16LE>(captionTitle, std::strlen(captionTitle), utf16Title, std::extent_v<decltype(utf16Title)>);
+    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(captionTitle, utf16Title, std::extent_v<decltype(utf16Title)>);
     if (isConvertSucceed)
     {
         ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));

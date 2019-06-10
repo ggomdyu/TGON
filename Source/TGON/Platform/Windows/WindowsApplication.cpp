@@ -27,13 +27,13 @@ WindowsApplication::WindowsApplication() :
     RegisterWindowClass();
 }
 
-void WindowsApplication::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const
+void WindowsApplication::ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon) const
 {
     wchar_t utf16Message[1024] {};
-    UTF8::Convert<UTF16LE>(message, std::strlen(message), reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
+    UTF8::ConvertTo<UTF16LE>(message, reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
 
     wchar_t utf16Title[256] {};
-    UTF8::Convert<UTF16LE>(title, std::strlen(title), reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
+    UTF8::ConvertTo<UTF16LE>(title, reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
 
     ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertToMessageBoxIconNative(messageBoxIcon) | MB_OK);
 }

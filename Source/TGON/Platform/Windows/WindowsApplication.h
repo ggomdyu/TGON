@@ -41,7 +41,7 @@ public:
      * @param [in] message          The message to show in description area.
      * @param [in] messageBoxIcon   The type of icon appears in the message box.
      */
-    void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
+    void ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon) const;
 
     /**@brief   Enables a crash handler which handled when the crash ocurred. 
      * @warn    You can not disable this function after invoked this.

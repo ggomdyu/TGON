@@ -516,6 +516,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\png.c">
       <Filter>Source\ThirdParty\lpng1637</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\UnicodeScalar.cpp">
+      <Filter>Source\String</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\Encoding.cpp">
+      <Filter>Source\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -1357,6 +1363,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h">
       <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\UnicodeScalar.h">
+      <Filter>Source\String</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

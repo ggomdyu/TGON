@@ -24,7 +24,12 @@ LogoScene::LogoScene()
     using namespace tgon;
 
     FontFactory ff;
-    //ff.ImportFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
+    std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
+    font->GetGlyphData(u8'D', 20);
+
+
+    //auto c = R"(c:\windows\fonts\)";
+    //auto c2 = "(c:\windows\fonts\)";
 
     auto engine = Application::GetInstance()->GetEngine();
 
@@ -40,14 +45,14 @@ LogoScene::LogoScene()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object1 = std::make_shared<GameObject>("introSprite1", new Transform());
         object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
         m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
         
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object2 = std::make_shared<GameObject>("introSprite1", new Transform());
         object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });

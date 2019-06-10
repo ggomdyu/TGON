@@ -35,9 +35,9 @@ public:
     static Application* GetInstance();
 
     void MessageLoop();
-    void ShowMessageBox(const char* message) const;
-    void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon) const;
-    void ShowMessageBox(const char* title, const char* message) const;
+    void ShowMessageBox(const std::string_view& message) const;
+    void ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon) const;
+    void ShowMessageBox(const std::string_view& title, const std::string_view& message) const;
     std::shared_ptr<Engine> GetEngine() noexcept;
     std::shared_ptr<const Engine> GetEngine() const noexcept;
     std::shared_ptr<Window> GetRootWindow() noexcept;

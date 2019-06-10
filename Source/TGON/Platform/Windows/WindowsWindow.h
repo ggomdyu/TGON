@@ -41,7 +41,7 @@ public:
     void Flash();
     void SetPosition(int32_t x, int32_t y);
     void SetSize(int32_t width, int32_t height);
-    void SetTitle(const char* title);
+    void SetTitle(const std::string_view& title);
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;

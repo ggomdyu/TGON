@@ -18,13 +18,13 @@ class Encoding
 {
 /**@section Method */
 public:
-    template <typename _ToEncodingType, typename _CharType, typename _CharType2>
-    static bool Convert(const _CharType* srcStr, std::size_t srcStrLen, _CharType2* destStr, std::size_t destStrBufferLen);
+    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType>
+    static bool ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, std::size_t destStrBufferLen);
 };
 
 template <typename _FromEncodingType>
-template <typename _ToEncodingType, typename _CharType, typename _CharType2>
-inline bool Encoding<_FromEncodingType>::Convert(const _CharType* srcStr, std::size_t srcStrLen, _CharType2* destStr, std::size_t destStrBufferLen)
+template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType>
+inline bool Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, std::size_t destStrBufferLen)
 {
     assert(srcStr != nullptr);
     assert(destStr != nullptr);
@@ -35,11 +35,11 @@ inline bool Encoding<_FromEncodingType>::Convert(const _CharType* srcStr, std::s
         return false;
     }
 
-    size_t srcStrBytes = sizeof(_CharType) * (srcStrLen + 1);
-    std::size_t destStrBufferBytes = sizeof(_CharType2) * (destStrBufferLen);
+    size_t srcStrBytes = sizeof(_SrcCharType) * (srcStr.length() + 1);
+    std::size_t destStrBufferBytes = sizeof(_DestCharType) * (destStrBufferLen);
 
     bool isConvertSucceed = true;
-    if (iconv(cd, (const char**)&srcStr, &srcStrBytes, (char**)&destStr, &destStrBufferBytes) == size_t(-1))
+    if (iconv(cd, (const char**)&srcStr.data(), &srcStrBytes, (char**)&destStr, &destStrBufferBytes) == size_t(-1))
     {
         isConvertSucceed = false;
     }
@@ -54,80 +54,59 @@ class ASCII :
 {
 /**@section Variable */
 public:
-    static constexpr const char EncodingName[] = "ASCII";
+    static constexpr const char EncodingName[] = "US-ASCII";
     static constexpr const int32_t MinCharSize = 1;
     static constexpr const int32_t MaxCharSize = 1;
+    static constexpr const int32_t CodePage = 20127;
+    static constexpr const bool IsSingleByte = true;
 
 /**@section Method */
 public:
-    static int32_t GetCharCount(const char* srcStr);
+    static int32_t GetCharCount(const char* str);
 };
-
-class EUC_KR :
-    public Encoding<EUC_KR>
-{
-/**@section Variable */
-public:
-    static constexpr const char EncodingName[] = "EUC-KR";
-    static constexpr const int32_t MinCharSize = 1;
-    static constexpr const int32_t MaxCharSize = 2;
-};
-
-class EUC_JP :
-    public Encoding<EUC_JP>
-{
-/**@section Variable */
-public:
-    static constexpr const char EncodingName[] = "EUC-JP";
-    static constexpr const int32_t MinCharSize = 1;
-    static constexpr const int32_t MaxCharSize = 3;
-};
-
-template <typename _DerivedEncodingType>
-class UnicodeEncoding :
-    public Encoding<_DerivedEncodingType>
-{
-};
-
-template <typename _EncodingType>
-constexpr bool IsUnicodeEncoding = std::is_base_of<UnicodeEncoding<_EncodingType>, _EncodingType>::value;
 
 class UTF8 :
-    public UnicodeEncoding<UTF8>
+    public Encoding<UTF8>
 {
 /**@section Variable */
 public:
     static constexpr const char EncodingName[] = "UTF-8";
     static constexpr const int32_t MinCharSize = 1;
     static constexpr const int32_t MaxCharSize = 3;
+    static constexpr const int32_t CodePage = 65001;
+    static constexpr const bool IsSingleByte = false;
 
 /**@section Method */
 public:
-    static int32_t GetCharCount(const char* srcStr);
+    static int32_t GetCharCount(const char* str);
 };
 
 class UTF16LE :
-    public UnicodeEncoding<UTF16LE>
+    public Encoding<UTF16LE>
 {
 /**@section Variable */
 public:
     static constexpr const char EncodingName[] = "UTF-16LE";
     static constexpr const int32_t MinCharSize = 2;
     static constexpr const int32_t MaxCharSize = 2;
+    static constexpr const int32_t CodePage = 1200;
+    static constexpr const bool IsSingleByte = false;
 
 /**@section Method */
 public:
-    static int32_t GetCharCount(const char* srcStr);
+    static int32_t GetCharCount(const char* str);
 };
 
 class UTF32 :
-    public UnicodeEncoding<UTF32>
+    public Encoding<UTF32>
 {
 /**@section Variable */
 public:
     static constexpr const char EncodingName[] = "UTF-32";
     static constexpr const int32_t MinCharSize = 4;
     static constexpr const int32_t MaxCharSize = 4;
+    static constexpr const int32_t CodePage = 12000;
+    static constexpr const bool IsSingleByte = false;
 
 /**@section Method */
 public:

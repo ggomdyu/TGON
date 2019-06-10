@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <stdexcept>
+#include <iostream>
 
 #include "FontFactory.h"
 
@@ -9,89 +10,77 @@
 #define FT_ERROR_START_LIST     {
 #define FT_ERROR_END_LIST       { 0, 0 } };
 
+#define TGON_FT_CHECK_ERROR(expr)\
+{\
+    FT_Error error = expr;\
+    if (error)\
+    {\
+        throw std::runtime_error(GetFTErrorMessage(error));\
+    }\
+}
+
+namespace
+{
+
 const struct
 {
-    int          errorCode;
-    const char*  errorMessage;
+    int errorCode;
+    const char* errorMessage;
 } g_ftErrors[] =
 #include FT_ERRORS_H
+
+const char* GetFTErrorMessage(FT_Error error)
+{
+    return g_ftErrors[error].errorMessage;
+}
+
+} /* namespace */
 
 namespace tgon
 {
 
-//GlyphData::GlyphData(char32_t ch, FT_Face fontFace) noexcept :
-//    m_ch(ch),
-//    m_fontFace(fontFace)
-//{
-//}
-//
-//GlyphData::~GlyphData()
-//{
-//    if (m_fontFace != nullptr)
-//    {
-//        FT_Done_Face(m_fontFace);
-//        m_fontFace = nullptr;
-//    }
-//}
-//
-//I32Extent2D GlyphData::GetSize() const noexcept
-//{
-//    auto width = static_cast<int32_t>(m_fontFace->glyph->bitmap.width);
-//    auto height = static_cast<int32_t>(m_fontFace->glyph->bitmap.rows);
-//
-//    return {width, height};
-//}
-//
-//I32Vector2 GlyphData::GetBearing() const noexcept
-//{
-//    auto x = static_cast<int32_t>(m_fontFace->glyph->bitmap_left);
-//    auto y = static_cast<int32_t>(m_fontFace->glyph->bitmap_top);
-//
-//    return {x, y};
-//}
-//
-//int32_t GlyphData::GetAdvance() const noexcept
-//{
-//    return static_cast<int32_t>(m_fontFace->glyph->advance.x);
-//}
-//
-//uint8_t* GlyphData::GetImageData() noexcept
-//{
-//    return m_fontFace->glyph->bitmap.buffer;
-//}
-//
-//char32_t GlyphData::GetCharacter() const noexcept
-//{
-//    return m_ch;
-//}
-//
-//const uint8_t* GlyphData::GetImageData() const noexcept
-//{
-//    return m_fontFace->glyph->bitmap.buffer;
-//}
-    
+
 Font::Font(const StringHash& fontPath, FT_Library fontLibrary) :
     m_fontPath(fontPath),
     m_fontLibrary(fontLibrary),
     m_fontFace(nullptr)
 {
-    FT_Error error = FT_New_Face(fontLibrary, fontPath.CStr(), 0, &m_fontFace);
-    if (error)
+    TGON_FT_CHECK_ERROR(FT_New_Face(fontLibrary, fontPath.CStr(), 0, &m_fontFace));   
+    TGON_FT_CHECK_ERROR(FT_Select_Charmap(m_fontFace, FT_ENCODING_UNICODE));
+}
+
+const GlyphData& Font::GetGlyphData(char32_t character, int32_t size) const
+{
+    auto& characterTable = m_glyphDataCaches[character];
+    auto iter = characterTable.find(size);
+    if (iter != characterTable.end())
     {
-        throw std::runtime_error(g_ftErrors[error].errorMessage);
+        return iter->second;
     }
+
+    TGON_FT_CHECK_ERROR(FT_Set_Pixel_Sizes(m_fontFace, 0, size));
+    TGON_FT_CHECK_ERROR(FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER));
+    TGON_FT_CHECK_ERROR(FT_Render_Glyph(m_fontFace->glyph, FT_RENDER_MODE_NORMAL));
     
-    error = FT_Select_Charmap(m_fontFace, FT_ENCODING_UNICODE);
-    if (error)
-    {
-        throw std::runtime_error(g_ftErrors[error].errorMessage);
-    }
+    int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
+    int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
+
+    auto bitmap = std::make_unique<uint8_t[]>(bitmapWidth * bitmapHeight * 3);
+    memcpy(bitmap.get(), m_fontFace->glyph->bitmap.buffer, bitmapWidth * bitmapHeight * 3);
+
+    return characterTable.insert(iter, {size, GlyphData{
+        character,
+        I32Extent2D(static_cast<int32_t>(bitmapWidth), static_cast<int32_t>(bitmapHeight)),
+        I32Vector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top)),
+        static_cast<int32_t>(m_fontFace->glyph->advance.x),
+        std::move(bitmap)
+    }})->second;
 }
 
 FontFactory::FontFactory() :
     m_fontLibrary(nullptr)
 {
-//    if (FT_Init_FreeType(&m_fontLibrary) != 0)
+    if (FT_Init_FreeType(&m_fontLibrary) != 0)
     {
         throw std::runtime_error("Failed to initialize FT_Library.");
     }
@@ -101,7 +90,7 @@ FontFactory::~FontFactory()
 {
     if (m_fontLibrary != nullptr)
     {
-//        FT_Done_FreeType(m_fontLibrary);
+        FT_Done_FreeType(m_fontLibrary);
         m_fontLibrary = nullptr;
     }
 }
@@ -121,3 +110,8 @@ std::shared_ptr<Font> FontFactory::GetFont(const StringHash& fontPath)
 }
 
 } /* namespace tgon */
+
+#undef FT_ERRORDEF
+#undef FT_ERROR_START_LIST
+#undef FT_ERROR_END_LIST
+#undef TGON_FT_CHECK_ERROR

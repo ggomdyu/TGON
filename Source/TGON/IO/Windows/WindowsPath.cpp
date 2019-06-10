@@ -17,7 +17,7 @@ TGON_API int32_t GetCurrentDirectory(char* destStr)
     wchar_t utf16Path[MAX_PATH + 1] {};
     DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH, utf16Path);
 
-    bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, destStr, MAX_PATH);
+    bool isConvertSucceed = UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Path, utf16PathLen), destStr, MAX_PATH);
     if (isConvertSucceed)
     {
         return utf16PathLen;
@@ -35,7 +35,7 @@ TGON_API int32_t GetSpecialDirectory(int csidl, char* destStr)
     if (SHGetFolderPathW(NULL, csidl, NULL, 0, utf16Path) == S_OK)
     {
         auto utf16PathLen = std::wcslen(utf16Path);
-        bool isConvertSucceed = UTF16LE::Convert<UTF8>(utf16Path, utf16PathLen, destStr, MAX_PATH);
+        bool isConvertSucceed = UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Path, utf16PathLen), destStr, MAX_PATH);
         if (isConvertSucceed)
         {
             return static_cast<int32_t>(utf16PathLen);

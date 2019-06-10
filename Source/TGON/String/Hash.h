@@ -7,7 +7,6 @@
 #pragma once
 #include <cstdint>
 #include <cstddef>
-#include <boost/functional/hash.hpp>
 
 #ifdef _MSC_VER
 #define TGON_X65599(str)\

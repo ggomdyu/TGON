@@ -20,29 +20,15 @@ namespace tgon
 
 using FontSize = uint32_t;
 
-class TGON_API GlyphData
+struct GlyphData
 {
-///**@section Constructor */
-//public:
-//    GlyphData(char32_t ch, FT_Face fontFace) noexcept;
-//
-///**@section Destructor */
-//public:
-//    ~GlyphData();
-//
-///**@section Method */
-//public:
-//    I32Extent2D GetSize() const noexcept;
-//    I32Vector2 GetBearing() const noexcept;
-//    int32_t GetAdvance() const noexcept;
-//    uint8_t* GetImageData() noexcept;
-//    const uint8_t* GetImageData() const noexcept;
-//    char32_t GetCharacter() const noexcept;
-//    
-///**@section Variable */
-//private:
-//    char32_t m_ch;
-//    FT_Face m_fontFace;
+    //constexpr const size_t GetHashCode() noexcept;
+
+    char32_t character;
+    I32Extent2D size;
+    I32Vector2 bearing;
+    int32_t advance;
+    std::unique_ptr<uint8_t[]> bitmap;
 };
 
 class TGON_API Font :
@@ -54,14 +40,14 @@ public:
 
 /**@section Method */
 public:
-//    const GlyphData& GetGlyphData(char32_t ch, int32_t height) const;
+    const GlyphData& GetGlyphData(char32_t character, int32_t size) const;
 
 /**@section Variable */
 private:
     StringHash m_fontPath;
-    int32_t m_height;
     FT_Library m_fontLibrary;
     FT_Face m_fontFace;
+    mutable std::unordered_map<char32_t, std::unordered_map<int32_t, GlyphData>> m_glyphDataCaches;
 };
 
 class TGON_API FontFactory :

@@ -51,9 +51,11 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* srcData, int32_
 #if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
     auto loadImage = [&](auto& imageProcessor)
     {
-        *width = imageProcessor.GetWidth();
-        *height = imageProcessor.GetHeight();
-        *channels = imageProcessor.GetChannels();
+        *destWidth = imageProcessor.GetWidth();
+        *destHeight = imageProcessor.GetHeight();
+        *destChannels = imageProcessor.GetChannels();
+        *destPixelFormat = imageProcessor.GetChannels() == 4 ? PixelFormat::RGBA8888 : imageProcessor.GetChannels() == 3 ? PixelFormat::RGB888 : PixelFormat::Unknown;
+
         return std::move(imageProcessor.GetImageData());
     };
 
