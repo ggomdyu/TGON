@@ -7,44 +7,35 @@
 #pragma once
 #include <boost/noncopyable.hpp>
 
-#include "GenericGraphicsDeviceType.h"
+#include "Core/Platform/Config.h"
 
-#include "Core/String/TFixedString.h"
-#include "Core/Platform/TWindow.h"
+namespace tgon
+{
+namespace graphics
+{
 
-namespace tgon {
-namespace graphics {
-
+template <typename _DerivedType>
 class TGON_API GenericGraphicsDevice :
     private boost::noncopyable
 {
-/**
- * @section Ctor/Dtor
- */
+/* @section Ctor/Dtor */
 public:
-    explicit GenericGraphicsDevice(const platform::TSharedWindow& surfaceWindow);
+    explicit GenericGraphicsDevice() = default;
     ~GenericGraphicsDevice() = default;
 
-/**
- * @section Get method
- */
+/* @section Get method */
 public:
-	platform::TSharedWindow& GetSurfaceWindow() noexcept;
-    const string::TFixedString& GetVideoCardDescription() const noexcept;
-    const TRefreshRate& GetRefreshRate() const noexcept;
-    uint32_t GetVendorId() const noexcept;
-    /* @return  Current device's Video memory in MiB */
-    uint32_t GetVideoMemorySize() const noexcept;
+    //const string::TFixedString& GetVideoCardDescription() const noexcept;
 
-/**
- * @section Private variable
- */
+    //const TRefreshRate& GetRefreshRate() const noexcept;
+
+    //uint32_t GetVendorId() const noexcept;
+
+    /* @return  Current device's Video memory in MiB */
+    //uint32_t GetVideoMemorySize() const noexcept;
+
+/* @section Private variable */
 protected:
-    platform::TSharedWindow m_surfaceWindow;
-    string::TFixedString m_videoCardDescription;
-    TRefreshRate m_refreshRate;
-    uint32_t m_vendorID;
-    uint32_t m_videoMemoryMiB;
 };
 
 } /* namespace graphics */

@@ -79,7 +79,13 @@ public:
 /**@section Method */
 public:
     static int32_t GetCharCount(const char* str);
+    static constexpr char32_t ToChar32( const char* str );
 };
+
+constexpr char32_t UTF8::ToChar32( const char* str )
+{
+    return U'°¡';
+}
 
 class UTF16LE :
     public Encoding<UTF16LE>

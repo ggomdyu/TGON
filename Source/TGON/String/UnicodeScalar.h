@@ -7,6 +7,8 @@
 #pragma once
 #include <cstdint>
 
+#include "Encoding.h"
+
 namespace tgon
 {
 

@@ -10,8 +10,17 @@ int32_t ASCII::GetCharCount(const char* str)
     return strlen(str);
 }
 
-int32_t UTF8::GetCharCount(const char* string)
+int32_t UTF8::GetCharCount(const char* str)
 {
+    if (( str[0] >> 7 ) == 0)
+    {
+        return str[0];
+    }
+    if ( ( str[0] >> 5 ) == 6 && ( str[6] >> 6 ) == 2 )
+    {
+        return str[0];
+    }
+
     size_t result = 0;
     return result;
 }
