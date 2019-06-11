@@ -4,55 +4,15 @@
 
 namespace tgon
 {
-namespace
-{
-
-enum BitsToHex
-{
-    _00000000 = 0x0,
-    _10000000 = 0x80,
-    _11000000 = 0xC0,
-    _11100000 = 0xE0,
-    _11110000 = 0xF0,
-    _00011111 = 0x1F,
-    _00111111 = 0x3F,
-};
-
-} /* namespace */
 
 int32_t ASCII::GetCharCount(const char* str)
 {
-    return strlen(str);
-}
-
-int32_t UTF8::GetCharCount(const char* str)
-{
-    int32_t chCount = 0;
-
-    while ( str[0] != '\0' )
-    {
-        if ( ( str[0] & BitsToHex::_10000000 ) == 0 )
-        {
-            str += 1;
-        }
-        else if ( ( str[0] & BitsToHex::_11100000 ) == BitsToHex::_11000000 )
-        {
-            str += 2;
-        }
-        else if ( ( str[0] & BitsToHex::_11110000 ) == BitsToHex::_11100000 )
-        {
-            str += 3;
-        }
-
-        ++chCount;
-    }
-    //Todo: Check surrogate?
-    return chCount;
+    return static_cast<int32_t>(strlen(str));
 }
 
 int32_t UTF16LE::GetCharCount(const char* str)
 {
-    return wcslen(reinterpret_cast<const wchar_t*>(str));
+    return static_cast<int32_t>(wcslen(reinterpret_cast<const wchar_t*>(str)));
 }
 
 // 옛날에 짰던 코드인데 겁나느림

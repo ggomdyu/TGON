@@ -32,7 +32,7 @@ public:
     }
 
     constexpr UnicodeScalar(const char* str) :
-        m_value(0)
+        m_value(UTF8::ToChar32(str))
     {
     }
 

@@ -68,6 +68,21 @@ public:
 class UTF8 :
     public Encoding<UTF8>
 {
+/**@section Enum */
+private:
+    enum BitsToHex
+    {
+        _00000000 = 0x0,
+        _10000000 = 0x80,
+        _11000000 = 0xC0,
+        _11100000 = 0xE0,
+        _11110000 = 0xF0,
+        _11111000 = 0x7C,
+        _00001111 = 0x0F,
+        _00011111 = 0x1F,
+        _00111111 = 0x3F,
+    };
+
 /**@section Variable */
 public:
     static constexpr const char EncodingName[] = "UTF-8";
@@ -78,13 +93,64 @@ public:
 
 /**@section Method */
 public:
-    static int32_t GetCharCount(const char* str);
-    static constexpr char32_t ToChar32( const char* str );
+    static constexpr int32_t GetCharCount(const char* str);
+    static constexpr char32_t ToChar32(const char* str);
 };
-
-constexpr char32_t UTF8::ToChar32( const char* str )
+    
+constexpr int32_t UTF8::GetCharCount(const char* str)
 {
-    return U'°¡';
+    if (str == nullptr)
+    {
+        return 0;
+    }
+
+    int32_t chCount = 0;
+    
+    while (str[0] != '\0')
+    {
+        if ( ( str[0] & BitsToHex::_10000000) == 0)
+        {
+            str += 1;
+        }
+        else if ((str[0] & BitsToHex::_11100000) == BitsToHex::_11000000)
+        {
+            str += 2;
+        }
+        else if ((str[0] & BitsToHex::_11110000) == BitsToHex::_11100000)
+        {
+            str += 3;
+        }
+        else if ((str[0] & BitsToHex::_11111000) == BitsToHex::_11110000)
+        {
+            str += 4;
+        }
+        else
+        {
+            str += 1;
+        }
+        
+        ++chCount;
+    }
+    
+    return chCount;
+}
+
+constexpr char32_t UTF8::ToChar32(const char* str)
+{
+    if ((str[0] & BitsToHex::_10000000) == 0)
+    {
+        return str[0];
+    }
+    else if ((str[0] & BitsToHex::_11100000) == BitsToHex::_11000000)
+    {
+        return ((str[0] & BitsToHex::_00011111) << 6) | (str[1] & BitsToHex::_00111111);
+    }
+    else if ((str[0] & BitsToHex::_11110000) == BitsToHex::_11100000)
+    {
+        return ((str[0] & BitsToHex::_00001111) << 12) | ((str[1] & BitsToHex::_00111111) << 6) | (str[2] & BitsToHex::_00111111);
+    }
+    
+    return 0;
 }
 
 class UTF16LE :

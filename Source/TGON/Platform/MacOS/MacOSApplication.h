@@ -7,6 +7,7 @@
 #pragma once
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSApplication.h>
+#import <string_view>
 
 #import "Platform/Config.h"
 
@@ -26,7 +27,7 @@ public:
     template <typename _FunctionType>
     void MessageLoop(const _FunctionType& onUpdateFrame);
     void Terminate();
-    void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon) const;
+    void ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon) const;
     void EnableCrashHandler() {}
     
 /**@section Public event handler */
