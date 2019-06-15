@@ -1,9 +1,10 @@
-#include "PrecompiledHeader.h"
+ï»¿#include "PrecompiledHeader.h"
 
 #include "TGON.h"
 #include "ThousandParty.h"
 #include "Drawing/FontFactory.h"
 #include "String/Encoding.h"
+#include "String/UnicodeScalar.h"
 #include "LogoScene.h"
 
 TGON_DECLARE_ENGINE(ThousandParty);
@@ -36,17 +37,17 @@ void ThousandParty::InitializeModule()
 {
     using namespace tgon;
 
-
-    auto c1 = UTF8::GetCharCount(u8"°¡");
-    auto c2 = UTF8::GetCharCount(u8"°¡³ª´Ù");
+    auto c1 = UTF8::GetCharCount(u8"ê°€");
+    auto c2 = UTF8::GetCharCount(u8"ê°€ë‚˜ë‹¤");
     auto c3 = UTF8::GetCharCount(u8"abc");
-    auto c4 = UTF8::GetCharCount(u8"°¡ab");
+    auto c4 = UTF8::GetCharCount(u8"ê°€ab");
 
     FontFactory ff;
     std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
     
-    char str[] = u8"°¡";
-    size_t* ptr = (size_t*)&str[0];
+    char str[] = u8"ê°€";
+    char32_t ch = u'ê°€';
+    constexpr UnicodeScalar us(u8"ê°€");
     //char32_t c = (str[0] << 0);
     auto& glyphData = font->GetGlyphData(44032, 50);
 

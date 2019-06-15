@@ -8,7 +8,9 @@
 #include <string>
 #include <cstdint>
 #include <cassert>
-#include <iconv.h>
+#include <unicode/unistr.h>
+#include <unicode/utypes.h>
+//#include <iconv.h>
 
 namespace tgon
 {
@@ -26,7 +28,8 @@ template <typename _FromEncodingType>
 template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType>
 inline bool Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, std::size_t destStrBufferLen)
 {
-    assert(srcStr != nullptr);
+    icu::UnicodeString sd;
+   /* assert(srcStr != nullptr);
     assert(destStr != nullptr);
 
     iconv_t cd = iconv_open(_ToEncodingType::EncodingName, _FromEncodingType::EncodingName);
@@ -44,9 +47,9 @@ inline bool Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<
         isConvertSucceed = false;
     }
 
-    iconv_close(cd);
+    iconv_close(cd);*/
 
-    return isConvertSucceed;
+    return true;//isConvertSucceed;
 }
 
 class ASCII :
