@@ -6,6 +6,9 @@
 #include "String/Encoding.h"
 #include "String/UnicodeScalar.h"
 #include "LogoScene.h"
+#include <unicode/ucnv.h>
+#include <unicode/unistr.h>
+#include <unicode/utypes.h>
 
 TGON_DECLARE_ENGINE(ThousandParty);
 
@@ -36,11 +39,12 @@ void ThousandParty::Initialize()
 void ThousandParty::InitializeModule()
 {
     using namespace tgon;
+    
+    char a[16] {};
+    int n = UTF16LE::ConvertTo<UTF8>(std::wstring_view(L"가가가e"), a);
 
-    auto c1 = UTF8::GetCharCount(u8"가");
-    auto c2 = UTF8::GetCharCount(u8"가나다");
-    auto c3 = UTF8::GetCharCount(u8"abc");
-    auto c4 = UTF8::GetCharCount(u8"가ab");
+    wchar_t b[16] {};
+    int c = UTF8::ConvertTo<UTF16LE>(std::string_view(a, strlen(a)), b);
 
     FontFactory ff;
     std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");

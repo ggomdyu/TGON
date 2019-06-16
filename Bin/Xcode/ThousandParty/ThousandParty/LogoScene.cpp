@@ -10,9 +10,6 @@
 #include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
 std::shared_ptr<tgon::GameObject> object3;
@@ -23,13 +20,6 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
 
-    FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
-    font->GetGlyphData(u8'D', 20);
-
-
-    //auto c = R"(c:\windows\fonts\)";
-    //auto c2 = "(c:\windows\fonts\)";
 
     auto engine = Application::GetInstance()->GetEngine();
 

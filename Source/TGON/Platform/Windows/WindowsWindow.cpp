@@ -191,7 +191,7 @@ void WindowsWindow::SetTitle(const std::string_view& captionTitle)
     assert(captionTitle != nullptr);
 
     char utf16Title[512] {};
-    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(captionTitle, utf16Title, std::extent_v<decltype(utf16Title)>);
+    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(captionTitle, utf16Title, std::extent_v<decltype(utf16Title)>) != -1;
     if (isConvertSucceed)
     {
         ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));

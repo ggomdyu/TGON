@@ -59,7 +59,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
     wchar_t utf16Title[512] {};
-    bool isConverSucceeded = UTF8::ConvertTo<UTF16LE>(std::string_view(windowStyle.title.c_str(), windowStyle.title.length()), utf16Title, std::extent_v<decltype(utf16Title)>);
+    bool isConverSucceeded = UTF8::ConvertTo<UTF16LE>(std::string_view(windowStyle.title.c_str(), windowStyle.title.length()), utf16Title, std::extent_v<decltype(utf16Title)>) != -1;
     if (isConverSucceeded == false)
     {
         return nullptr;

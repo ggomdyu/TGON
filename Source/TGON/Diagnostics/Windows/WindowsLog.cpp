@@ -34,7 +34,7 @@ void Log(LogLevel logLevel, const char* formatStr, ...)
     va_start(vaList, formatStr);
     int utf8StrLen = vsprintf_s(g_utf8StrBuffer.get(), g_strBufferLen, formatStr, vaList);
         
-    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(std::string_view(g_utf8StrBuffer.get(), utf8StrLen), g_utf16StrBuffer.get(), g_strBufferLen);
+    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(std::string_view(g_utf8StrBuffer.get(), utf8StrLen), g_utf16StrBuffer.get(), g_strBufferLen) != -1;
     if (isConvertSucceed)
     {
         if (logLevel == LogLevel::Debug)

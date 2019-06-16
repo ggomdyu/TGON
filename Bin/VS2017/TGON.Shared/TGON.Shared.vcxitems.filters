@@ -1032,9 +1032,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucptrie.cpp">
       <Filter>Source\ThirdParty\icu4c-64_2</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udata.cpp">
-      <Filter>Source\ThirdParty\icu4c-64_2</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udatamem.cpp">
       <Filter>Source\ThirdParty\icu4c-64_2</Filter>
     </ClCompile>
@@ -1099,6 +1096,9 @@
       <Filter>Source\ThirdParty\icu4c-64_2</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\static_unicode_sets.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udata.cpp">
       <Filter>Source\ThirdParty\icu4c-64_2</Filter>
     </ClCompile>
   </ItemGroup>
