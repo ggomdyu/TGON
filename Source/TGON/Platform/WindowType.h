@@ -13,7 +13,7 @@ namespace tgon
 
 struct WindowStyle final
 {
-    std::string title = u8"°¡³ªa";
+    std::string title = u8"Hello World!";
 
     int32_t x = 100;
     int32_t y = 100;

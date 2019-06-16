@@ -147,6 +147,7 @@ constexpr char32_t UTF8::ToChar32(const char* str)
         _11100000 = 0xE0,
         _11110000 = 0xF0,
         _11111000 = 0x7C,
+        _00000111 = 0x07,
         _00001111 = 0x0F,
         _00011111 = 0x1F,
         _00111111 = 0x3F,
@@ -163,6 +164,10 @@ constexpr char32_t UTF8::ToChar32(const char* str)
     else if ((str[0] & BitsToHex::_11110000) == BitsToHex::_11100000)
     {
         return ((str[0] & BitsToHex::_00001111) << 12) | ((str[1] & BitsToHex::_00111111) << 6) | (str[2] & BitsToHex::_00111111);
+    }
+    else if ((str[0] & BitsToHex::_11111000) == BitsToHex::_11110000)
+    {
+        return ((str[0] & BitsToHex::_00000111) << 18) | ((str[1] & BitsToHex::_00111111) << 12) | ((str[2] & BitsToHex::_00111111) << 6) | (str[3] & BitsToHex::_00111111);
     }
     
     return 0;

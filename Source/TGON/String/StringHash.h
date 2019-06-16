@@ -93,7 +93,7 @@ public:
     /**@brief   Initializes with character array. */
     template <std::size_t _CharBufferLen>
     constexpr BasicStringHash(const ValueType(&str)[_CharBufferLen]) noexcept :
-        BasicStringHash({str, _CharArraySize - 1})
+        BasicStringHash({str, _CharBufferLen - 1})
     {
     }
 
@@ -220,7 +220,7 @@ public:
     /**@brief   Initializes with character pointer. */
     template <std::size_t _CharBufferLen>
     constexpr BasicStringHash(const ValueType(&str)[_CharBufferLen]) noexcept :
-        BasicStringHash({str, _CharArraySize - 1})
+        BasicStringHash({str, _CharBufferLen - 1})
     {
     }
     

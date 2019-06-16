@@ -302,7 +302,8 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
-					"/Users/ggomdyu/Desktop/Programming/Git/GitHub/TGON/Source/ThirdParty/freetype-2.10.0/include",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -326,7 +327,8 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/libpng16",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
-					"/Users/ggomdyu/Desktop/Programming/Git/GitHub/TGON/Source/ThirdParty/freetype-2.10.0/include",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
