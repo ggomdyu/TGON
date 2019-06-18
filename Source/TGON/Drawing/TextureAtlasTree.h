@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <unordered_map>
 #include <memory>
 #include <boost/noncopyable.hpp>
 
@@ -23,7 +24,7 @@ public:
 
 /**@section Method */
 public:
-    void Insert(const I32Rect& rect, int32_t id);
+    TextureAltasTreeNode* Insert(const I32Rect& rect, int32_t id);
 
 /**@section Variable */
 public:
@@ -50,6 +51,7 @@ public:
 
 private:
     TextureAltasTreeNode m_rootNode;
+    //std::unordered_map<key, int32_t>
 };
 
 } /* namespace tgon */
