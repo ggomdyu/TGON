@@ -2,6 +2,7 @@
  * @file    AtlasTree.h
  * @author  ggomdyu
  * @since   06/18/2019
+ * @see     http://blackpawn.com/texts/lightmaps/
  */
 
 #pragma once
@@ -11,27 +12,31 @@
 
 #include "Platform/Config.h"
 #include "Math/Rect.h"
+#include "Math/Extent.h"
 
 namespace tgon
 {
 
-struct TextureAltasTreeNode :
+struct TextureAltasNode :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    TextureAltasTreeNode(const I32Rect& rect);
+    TextureAltasNode(const I32Rect& rect);
 
 /**@section Method */
 public:
-    TextureAltasTreeNode* Insert(const I32Rect& rect, int32_t id);
+    TextureAltasNode* Insert(const I32Rect& rect, int32_t id);
+
+private:
+    bool IsLeafNode() const noexcept;
 
 /**@section Variable */
 public:
     I32Rect rect;
-    int id;
-    std::unique_ptr<TextureAltasTreeNode> left;
-    std::unique_ptr<TextureAltasTreeNode> right;
+    int32_t id;
+    std::unique_ptr<TextureAltasNode> left;
+    std::unique_ptr<TextureAltasNode> right;
 };
 
 class TGON_API TextureAtlasTree :
@@ -47,11 +52,10 @@ public:
 
 /**@section Method */
 public:
-    void Insert(const I32Rect& rect, int32_t id);
+    bool Insert(const I32Rect& rect, int32_t id);
 
-private:
-    TextureAltasTreeNode m_rootNode;
-    //std::unordered_map<key, int32_t>
+public:
+    TextureAltasNode m_rootNode;
 };
 
 } /* namespace tgon */

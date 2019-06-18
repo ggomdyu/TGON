@@ -40,16 +40,50 @@ void ThousandParty::Initialize()
     this->InitializeModule();
 }
 
+void Draw(TextureAltasNode* node)
+{
+    if (node->left)
+    {
+        Draw(node->left.get());
+    }
+    if (node->right)
+    {
+        Draw(node->right.get());
+    }
+
+    auto r = RandRange(0, 255);
+    auto g = RandRange(0, 255);
+    auto b = RandRange(0, 255);
+    if (node->id != 0)
+    for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
+        for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
+        {
+            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+            HDC dcHandle = ::GetDC(wndHandle);
+            {
+                SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
+            }
+            ::ReleaseDC(wndHandle, dcHandle);
+        }
+}
+
 void ThousandParty::InitializeModule()
 {
     using namespace tgon;
     
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont("/Users/ggomdyu/Desktop/MaplestoryLight.ttf");
+    std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
     
-    tat.Insert({0,0,50, 50}, 1);
-    tat.Insert({0,0,100, 100}, 2);
-    tat.Insert({0,0,70, 70}, 2);
+    for (int i = 0; i < 300; ++i)
+    {
+        bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
+        if (a == false)
+        {
+            int n = 34;
+        }
+    }
+    Draw(&tat.m_rootNode);
+
     
     int n = 3;
 //    char str[] = u8"가";
@@ -84,19 +118,19 @@ void ThousandParty::InitializeModule()
     }
     this->RegisterModule<InputModule>(*rootWindow, inputMode);
 
-    // Graphics Module
-    VideoMode videoMode;
-    {
-        videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
-        videoMode.enableHardwareAccelerate = true;
-        videoMode.enableTripleBuffer = false;
-        videoMode.enableVerticalSync = false;
-        videoMode.enableMultiSampling = false;
-    };
-    this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
+    //// Graphics Module
+    //VideoMode videoMode;
+    //{
+    //    videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
+    //    videoMode.enableHardwareAccelerate = true;
+    //    videoMode.enableTripleBuffer = false;
+    //    videoMode.enableVerticalSync = false;
+    //    videoMode.enableMultiSampling = false;
+    //};
+    //this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
     
     // Etc
     this->RegisterModule<TimeModule>();
     this->RegisterModule<TaskModule>();
-    this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
+    //this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
 }

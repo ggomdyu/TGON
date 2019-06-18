@@ -1101,7 +1101,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\EventDispatcher.cpp">
       <Filter>Source\TGON\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\jhcha\Desktop\Programming\Git\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Drawing\TextureAtlasTree.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\TextureAtlasTree.cpp">
       <Filter>Source\TGON\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2546,6 +2546,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucptrie.h">
       <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\InstanceCounter.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\InstantiateCounter.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
@@ -2561,10 +2564,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\ExpressionTemplate.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\InstanceCounter.h">
-      <Filter>Source\TGON\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\jhcha\Desktop\Programming\Git\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Drawing\TextureAtlasTree.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\TextureAtlasTree.h">
       <Filter>Source\TGON\Drawing</Filter>
     </ClInclude>
   </ItemGroup>
