@@ -10,9 +10,13 @@
 #include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
+#include "Drawing/TextureAtlasTree.h"
+
 TGON_DECLARE_ENGINE(ThousandParty);
 
 using namespace tgon;
+
+TextureAtlasTree tat;
 
 void ThousandParty::OnLaunch()
 {
@@ -41,8 +45,13 @@ void ThousandParty::InitializeModule()
     using namespace tgon;
     
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont("E:/Users/ggomdyu/Desktop/maplestory.ttf");
+    std::shared_ptr<Font> font = ff.GetFont("/Users/ggomdyu/Desktop/MaplestoryLight.ttf");
     
+    tat.Insert({0,0,50, 50}, 1);
+    tat.Insert({0,0,100, 100}, 2);
+    tat.Insert({0,0,70, 70}, 2);
+    
+    int n = 3;
 //    char str[] = u8"가";
 //    char32_t ch = u'가';
 //    constexpr UnicodeScalar us(u8"가");
@@ -75,19 +84,19 @@ void ThousandParty::InitializeModule()
     }
     this->RegisterModule<InputModule>(*rootWindow, inputMode);
 
-    //// Graphics Module
-    //VideoMode videoMode;
-    //{
-    //    videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
-    //    videoMode.enableHardwareAccelerate = true;
-    //    videoMode.enableTripleBuffer = false;
-    //    videoMode.enableVerticalSync = false;
-    //    videoMode.enableMultiSampling = false;
-    //};
-    //this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
+    // Graphics Module
+    VideoMode videoMode;
+    {
+        videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
+        videoMode.enableHardwareAccelerate = true;
+        videoMode.enableTripleBuffer = false;
+        videoMode.enableVerticalSync = false;
+        videoMode.enableMultiSampling = false;
+    };
+    this->RegisterModule<GraphicsModule>(*rootWindow, videoMode);
     
     // Etc
     this->RegisterModule<TimeModule>();
-    //this->RegisterModule<TaskModule>();
-    //this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
+    this->RegisterModule<TaskModule>();
+    this->RegisterModule<SceneModule>()->ChangeScene(new LogoScene);
 }

@@ -5,8 +5,8 @@ namespace tgon
 namespace
 {
 
-constexpr int32_t g_defaultTextureAtlasWidth;
-constexpr int32_t g_defaultTextureAtlasHeight;
+constexpr int32_t g_defaultTextureAtlasWidth = 1024;
+constexpr int32_t g_defaultTextureAtlasHeight = 1024;
 
 } /* namespace */
 
@@ -16,7 +16,7 @@ TextureAltasTreeNode::TextureAltasTreeNode(const I32Rect& rect) :
 {
 }
 
-TextureAltasTreeNode* TextureAltasTreeNode::Insert(const I32Rect& rect, int32_t id)
+TextureAltasTreeNode* TextureAltasTreeNode::Insert(const I32Rect& image, int32_t id)
 {
     bool isLeafNode = (left == nullptr && right == nullptr);
     if (isLeafNode)
@@ -27,24 +27,37 @@ TextureAltasTreeNode* TextureAltasTreeNode::Insert(const I32Rect& rect, int32_t 
             return nullptr;
         }
 
-        bool isFitWithImage = this->rect.Intersect(rect) == false;
+        bool isFitWithImage = rect.Intersect(image) == false;
         if (isFitWithImage == false)
         {
             return nullptr;
         }
-
-        this->
+        
+        if (rect.width - image.width > rect.height - image.height)
+        {
+            left = std::make_unique<TextureAltasTreeNode>(I32Rect(rect.x, rect.y, image.width, rect.height));
+            right = std::make_unique<TextureAltasTreeNode>(I32Rect(rect.x + image.width, rect.y, rect.width - image.width, rect.height));
+        }
+        else
+        {
+            left = std::make_unique<TextureAltasTreeNode>(I32Rect(rect.x, rect.y, rect.width, image.height));
+            right = std::make_unique<TextureAltasTreeNode>(I32Rect(rect.x, rect.y + image.height, rect.width, rect.height - image.height));
+        }
+        
+        left->id = id;
     }
     else
     {
-        auto insertedNode = left->Insert(rect, id);
+        auto insertedNode = left->Insert(image, id);
         if (insertedNode == nullptr)
         {
-            insertedNode = right->Insert( rect, id );
+            insertedNode = right->Insert( image, id );
         }
 
         return insertedNode;
     }
+    
+    return nullptr;
 }
 
 TextureAtlasTree::TextureAtlasTree() :

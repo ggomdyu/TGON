@@ -664,6 +664,15 @@
 		FDB7036522B6B30C0055FCED /* ftzconf.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035622B6B30C0055FCED /* ftzconf.h */; };
 		FDB7036622B6B30C0055FCED /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035722B6B30C0055FCED /* inftrees.h */; };
 		FDB7036822B6B3420055FCED /* infcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036722B6B3410055FCED /* infcodes.h */; };
+		FDB7036B22B910E90055FCED /* TextureAtlasTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */; };
+		FDB7036C22B910E90055FCED /* TextureAtlasTree.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036A22B910E90055FCED /* TextureAtlasTree.h */; };
+		FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036E22B9132A0055FCED /* StaticInvoke.h */; };
+		FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036F22B9132A0055FCED /* InstantiateCounter.h */; };
+		FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037022B9132A0055FCED /* EventDispatcher.h */; };
+		FDB7037822B9132B0055FCED /* ExpressionTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037122B9132A0055FCED /* ExpressionTemplate.h */; };
+		FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7037222B9132A0055FCED /* EventDispatcher.cpp */; };
+		FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037322B9132B0055FCED /* InstanceCounter.h */; };
+		FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037422B9132B0055FCED /* AutoCast.h */; };
 		FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */; };
 		FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBDAD7922971A52003B9256 /* DispatchQueue.h */; };
 		FDC02CE0228482F000BEE91A /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02CDE228482F000BEE91A /* Hash.h */; };
@@ -672,7 +681,6 @@
 		FDC02CE3228487CA00BEE91A /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C61228481F000BEE91A /* AudioBuffer.cpp */; };
 		FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C62228481F000BEE91A /* AudioPlayer.cpp */; };
 		FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CC6228481F100BEE91A /* RTTI.cpp */; };
-		FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */; };
 		FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C4E228481F000BEE91A /* Image.cpp */; };
 		FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C42228481F000BEE91A /* GraphicsModule.cpp */; };
 		FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C43228481F000BEE91A /* AudioModule.cpp */; };
@@ -1537,6 +1545,15 @@
 		FDB7035622B6B30C0055FCED /* ftzconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftzconf.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/ftzconf.h"; sourceTree = "<group>"; };
 		FDB7035722B6B30C0055FCED /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inftrees.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/inftrees.h"; sourceTree = "<group>"; };
 		FDB7036722B6B3410055FCED /* infcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = infcodes.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/infcodes.h"; sourceTree = "<group>"; };
+		FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlasTree.cpp; sourceTree = "<group>"; };
+		FDB7036A22B910E90055FCED /* TextureAtlasTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlasTree.h; sourceTree = "<group>"; };
+		FDB7036E22B9132A0055FCED /* StaticInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticInvoke.h; path = ../../../Source/TGON/Misc/StaticInvoke.h; sourceTree = "<group>"; };
+		FDB7036F22B9132A0055FCED /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../../Source/TGON/Misc/InstantiateCounter.h; sourceTree = "<group>"; };
+		FDB7037022B9132A0055FCED /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = ../../../Source/TGON/Misc/EventDispatcher.h; sourceTree = "<group>"; };
+		FDB7037122B9132A0055FCED /* ExpressionTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpressionTemplate.h; path = ../../../Source/TGON/Misc/ExpressionTemplate.h; sourceTree = "<group>"; };
+		FDB7037222B9132A0055FCED /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = ../../../Source/TGON/Misc/EventDispatcher.cpp; sourceTree = "<group>"; };
+		FDB7037322B9132B0055FCED /* InstanceCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstanceCounter.h; path = ../../../Source/TGON/Misc/InstanceCounter.h; sourceTree = "<group>"; };
+		FDB7037422B9132B0055FCED /* AutoCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCast.h; path = ../../../Source/TGON/Misc/AutoCast.h; sourceTree = "<group>"; };
 		FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
 		FDBDAD7922971A52003B9256 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		FDC02B49228481EF00BEE91A /* MacOSLog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLog.mm; sourceTree = "<group>"; };
@@ -1682,27 +1699,20 @@
 		FDC02CB9228481F100BEE91A /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Prefix.h; sourceTree = "<group>"; };
 		FDC02CBA228481F100BEE91A /* ScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ScreenType.h; sourceTree = "<group>"; };
 		FDC02CBB228481F100BEE91A /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WindowType.h; sourceTree = "<group>"; };
-		FDC02CBE228481F100BEE91A /* StaticInvoke.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = StaticInvoke.h; sourceTree = "<group>"; };
 		FDC02CBF228481F100BEE91A /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Delegate.h; sourceTree = "<group>"; };
 		FDC02CC0228481F100BEE91A /* RAII.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RAII.h; sourceTree = "<group>"; };
 		FDC02CC1228481F100BEE91A /* RTTI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RTTI.h; sourceTree = "<group>"; };
 		FDC02CC2228481F100BEE91A /* Algorithm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Algorithm.h; sourceTree = "<group>"; };
 		FDC02CC3228481F100BEE91A /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TypeTraits.h; sourceTree = "<group>"; };
-		FDC02CC4228481F100BEE91A /* InstantiateCounter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InstantiateCounter.h; sourceTree = "<group>"; };
 		FDC02CC5228481F100BEE91A /* CoreObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = CoreObject.h; sourceTree = "<group>"; };
 		FDC02CC6228481F100BEE91A /* RTTI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RTTI.cpp; sourceTree = "<group>"; };
 		FDC02CC7228481F100BEE91A /* IComparable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IComparable.h; sourceTree = "<group>"; };
 		FDC02CC8228481F100BEE91A /* DelegateChain.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DelegateChain.h; sourceTree = "<group>"; };
 		FDC02CC9228481F100BEE91A /* DynamicCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DynamicCast.h; sourceTree = "<group>"; };
-		FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = EventDispatcher.cpp; sourceTree = "<group>"; };
 		FDC02CCB228481F100BEE91A /* ISerializable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ISerializable.h; sourceTree = "<group>"; };
 		FDC02CCC228481F100BEE91A /* ICloneable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ICloneable.h; sourceTree = "<group>"; };
 		FDC02CCD228481F100BEE91A /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = NonAddressable.h; sourceTree = "<group>"; };
 		FDC02CCF228481F100BEE91A /* RuntimeObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RuntimeObject.h; sourceTree = "<group>"; };
-		FDC02CD5228481F100BEE91A /* EventDispatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = EventDispatcher.h; sourceTree = "<group>"; };
-		FDC02CD7228481F100BEE91A /* InstanceCounter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InstanceCounter.h; sourceTree = "<group>"; };
-		FDC02CD8228481F100BEE91A /* AutoCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AutoCast.h; sourceTree = "<group>"; };
-		FDC02CD9228481F100BEE91A /* ExpressionTemplate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ExpressionTemplate.h; sourceTree = "<group>"; };
 		FDC02CDE228482F000BEE91A /* Hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Hash.h; sourceTree = "<group>"; };
 		FDC02CDF228482F000BEE91A /* Hash.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Hash.cpp; sourceTree = "<group>"; };
 		FDC02D322284893F00BEE91A /* RendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RendererComponent.h; sourceTree = "<group>"; };
@@ -2382,6 +2392,7 @@
 		FD73C00721628BBB006DCCE1 /* TGON */ = {
 			isa = PBXGroup;
 			children = (
+				FDB7036D22B9131F0055FCED /* Misc */,
 				FDC02C55228481F000BEE91A /* Audio */,
 				FDC02CBC228481F100BEE91A /* Core */,
 				FDC02B47228481EF00BEE91A /* Diagnostics */,
@@ -2913,6 +2924,20 @@
 			name = gzip;
 			sourceTree = "<group>";
 		};
+		FDB7036D22B9131F0055FCED /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FDB7037422B9132B0055FCED /* AutoCast.h */,
+				FDB7037222B9132A0055FCED /* EventDispatcher.cpp */,
+				FDB7037022B9132A0055FCED /* EventDispatcher.h */,
+				FDB7037122B9132A0055FCED /* ExpressionTemplate.h */,
+				FDB7037322B9132B0055FCED /* InstanceCounter.h */,
+				FDB7036F22B9132A0055FCED /* InstantiateCounter.h */,
+				FDB7036E22B9132A0055FCED /* StaticInvoke.h */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		FDC02B47228481EF00BEE91A /* Diagnostics */ = {
 			isa = PBXGroup;
 			children = (
@@ -3139,6 +3164,8 @@
 				FDC02C54228481F000BEE91A /* Image.h */,
 				FD53333122A5834A001EB57C /* FontFactory.cpp */,
 				FD53333022A5834A001EB57C /* FontFactory.h */,
+				FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */,
+				FDB7036A22B910E90055FCED /* TextureAtlasTree.h */,
 			);
 			name = Drawing;
 			path = ../../Source/TGON/Drawing;
@@ -3277,27 +3304,20 @@
 			isa = PBXGroup;
 			children = (
 				FDC02CC2228481F100BEE91A /* Algorithm.h */,
-				FDC02CD8228481F100BEE91A /* AutoCast.h */,
 				FDC02CBF228481F100BEE91A /* Delegate.h */,
 				FDC02CC8228481F100BEE91A /* DelegateChain.h */,
 				FDC02CC0228481F100BEE91A /* RAII.h */,
 				FDC02CC3228481F100BEE91A /* TypeTraits.h */,
-				FDC02CC4228481F100BEE91A /* InstantiateCounter.h */,
-				FDC02CD7228481F100BEE91A /* InstanceCounter.h */,
 				FDC02CCF228481F100BEE91A /* RuntimeObject.h */,
 				FDC02CC5228481F100BEE91A /* CoreObject.h */,
 				FDC02CC1228481F100BEE91A /* RTTI.h */,
 				FDC02CC6228481F100BEE91A /* RTTI.cpp */,
 				FDC02CC9228481F100BEE91A /* DynamicCast.h */,
-				FDC02CD5228481F100BEE91A /* EventDispatcher.h */,
-				FDC02CCA228481F100BEE91A /* EventDispatcher.cpp */,
 				FDC02CCD228481F100BEE91A /* NonAddressable.h */,
 				FDC02CCB228481F100BEE91A /* ISerializable.h */,
 				FDC02CCC228481F100BEE91A /* ICloneable.h */,
 				FDC02CC7228481F100BEE91A /* IComparable.h */,
 				FD7E61C222913D7B00A829FD /* IEquatable.h */,
-				FDC02CBE228481F100BEE91A /* StaticInvoke.h */,
-				FDC02CD9228481F100BEE91A /* ExpressionTemplate.h */,
 			);
 			name = Core;
 			path = ../../Source/TGON/Core;
@@ -3483,6 +3503,7 @@
 				FDB7033E22B69D600055FCED /* uvectr64.h in Headers */,
 				FDC02D452284893F00BEE91A /* CanvasSpriteRendererComponent.h in Headers */,
 				FD5332DD22A2EA1C001EB57C /* t1tables.h in Headers */,
+				FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */,
 				FD5332E322A2EA1C001EB57C /* ftbitmap.h in Headers */,
 				FD53329622A2EA1C001EB57C /* ftconfig.h in Headers */,
 				FD5332D722A2EA1C001EB57C /* ftpfr.h in Headers */,
@@ -3574,6 +3595,7 @@
 				FD5332E822A2EA1C001EB57C /* ftrender.h in Headers */,
 				FD5332E722A2EA1C001EB57C /* ftbdf.h in Headers */,
 				FDB7009B22B69D1F0055FCED /* uvernum.h in Headers */,
+				FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */,
 				FD53329222A2EA1C001EB57C /* ftparams.h in Headers */,
 				FD53329822A2EA1C001EB57C /* ftmodule.h in Headers */,
 				FD53331522A57F38001EB57C /* deflate.h in Headers */,
@@ -3608,7 +3630,10 @@
 				FDB7023522B69D600055FCED /* ucnv_cnv.h in Headers */,
 				FDB7023C22B69D600055FCED /* ustrenum.h in Headers */,
 				FD5332BB22A2EA1C001EB57C /* svpscmap.h in Headers */,
+				FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */,
+				FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */,
 				FD5332A522A2EA1C001EB57C /* psaux.h in Headers */,
+				FDB7036C22B910E90055FCED /* TextureAtlasTree.h in Headers */,
 				FD5332A822A2EA1C001EB57C /* autohint.h in Headers */,
 				FD5332A222A2EA1C001EB57C /* ftdrv.h in Headers */,
 				FDB7029B22B69D600055FCED /* bmpset.h in Headers */,
@@ -3629,6 +3654,7 @@
 				FDB7028C22B69D600055FCED /* locmap.h in Headers */,
 				FD5332DE22A2EA1C001EB57C /* ftimage.h in Headers */,
 				FDB7036622B6B30C0055FCED /* inftrees.h in Headers */,
+				FDB7037822B9132B0055FCED /* ExpressionTemplate.h in Headers */,
 				FDB7032922B69D600055FCED /* ucol_data.h in Headers */,
 				FD5332D122A2EA1C001EB57C /* ftotval.h in Headers */,
 				FDB700D122B69D1F0055FCED /* uenum.h in Headers */,
@@ -3671,6 +3697,7 @@
 				FDB7036022B6B30C0055FCED /* infblock.h in Headers */,
 				FDB7022422B69D600055FCED /* uprops.h in Headers */,
 				FD53331622A57F38001EB57C /* gzguts.h in Headers */,
+				FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */,
 				FD5332E522A2EA1C001EB57C /* ftmac.h in Headers */,
 				FDB7022B22B69D600055FCED /* wintz.h in Headers */,
 				FDB7032422B69D600055FCED /* uhash.h in Headers */,
@@ -3875,6 +3902,7 @@
 				FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */,
 				FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */,
 				FD78AC032289C4DF00D22E46 /* window.c in Sources */,
+				FDB7036B22B910E90055FCED /* TextureAtlasTree.cpp in Sources */,
 				FDB702F122B69D600055FCED /* ubiditransform.cpp in Sources */,
 				FDC02D20228487D500BEE91A /* MacOSLog.mm in Sources */,
 				FDB7029122B69D600055FCED /* ucnv.cpp in Sources */,
@@ -3911,11 +3939,11 @@
 				FD53332422A57F38001EB57C /* gzlib.c in Sources */,
 				FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */,
 				FDB7032F22B69D600055FCED /* ucnv2022.cpp in Sources */,
+				FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */,
 				FD53320822A2E8B6001EB57C /* ftlzw.c in Sources */,
 				FD53331422A57F38001EB57C /* deflate.c in Sources */,
 				FDC02CE6228487CA00BEE91A /* RTTI.cpp in Sources */,
 				FD5331E022A2E546001EB57C /* ftgzip.c in Sources */,
-				FDC02CE7228487CA00BEE91A /* EventDispatcher.cpp in Sources */,
 				FDB7030722B69D600055FCED /* utf_impl.cpp in Sources */,
 				FDB702BD22B69D600055FCED /* edits.cpp in Sources */,
 				FDB702C722B69D600055FCED /* servlk.cpp in Sources */,

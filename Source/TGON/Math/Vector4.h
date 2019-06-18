@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <cmath>
 
-#include "Core/ExpressionTemplate.h"
+#include "Misc/ExpressionTemplate.h"
 
 #include "Vector3.h"
 #include "Matrix4x4.h"

@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <cmath>
 
-#include "Core/ExpressionTemplate.h"
+#include "Misc/ExpressionTemplate.h"
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
