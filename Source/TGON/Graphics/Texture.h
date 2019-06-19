@@ -27,12 +27,12 @@ public:
     const PlatformTexture* GetPlatformDependency() const noexcept;
     
     using PlatformTexture::Use;
+    using PlatformTexture::Unuse;
+    using PlatformTexture::SetData;
     using PlatformTexture::SetFilterMode;
     using PlatformTexture::SetWrapMode;
     using PlatformTexture::GetFilterMode;
     using PlatformTexture::GetWrapMode;
-    using PlatformTexture::GetWidth;
-    using PlatformTexture::GetHeight;
     using PlatformTexture::GetSize;
     using PlatformTexture::GetPixelFormat;
 };

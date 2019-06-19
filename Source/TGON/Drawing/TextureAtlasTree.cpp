@@ -4,14 +4,6 @@
 
 namespace tgon
 {
-namespace
-{
-
-constexpr int32_t g_defaultTextureAtlasWidth = 1024;
-constexpr int32_t g_defaultTextureAtlasHeight = 1024;
-constexpr int32_t paddingOffset = 2;
-
-} /* namespace */
 
 TextureAltasNode::TextureAltasNode(const I32Rect& rect) :
     rect(rect),
@@ -29,8 +21,8 @@ TextureAltasNode* TextureAltasNode::Insert(const I32Rect& image, int32_t id)
             return nullptr;
         }
 
-        int32_t paddedImageWidth = image.width + paddingOffset;
-        int32_t paddedImageHeight = image.height + paddingOffset;
+        int32_t paddedImageWidth = image.width + m_paddingOffset;
+        int32_t paddedImageHeight = image.height + m_paddingOffset;
         if (rect.width < paddedImageWidth || rect.height < paddedImageHeight)
         {
             return nullptr;
@@ -74,12 +66,9 @@ bool TextureAltasNode::IsLeafNode() const noexcept
     return left == nullptr && right == nullptr;
 }
 
-TextureAtlasTree::TextureAtlasTree() :
-    m_rootNode(I32Rect(0, 0, g_defaultTextureAtlasWidth, g_defaultTextureAtlasHeight))
-{
-}
-
-TextureAtlasTree::~TextureAtlasTree()
+TextureAtlasTree::TextureAtlasTree(const I32Extent2D& textureAtlasSize, int32_t paddingOffset) :
+    m_rootNode(I32Rect(0, 0, textureAtlasSize.width, textureAtlasSize.height)),
+    m_paddingOffset(paddingOffset)
 {
 }
 

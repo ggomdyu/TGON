@@ -60,8 +60,8 @@ void CanvasRenderer::Draw(Graphics& graphics)
     }
 #endif
     
-//    this->FlushSpriteBatches(graphics);
-    this->DebugRenderTargetDraw(graphics);
+    this->FlushSpriteBatches(graphics);
+//    this->DebugRenderTargetDraw(graphics);
 }
     
 void CanvasRenderer::DebugRenderTargetDraw(Graphics& graphics)

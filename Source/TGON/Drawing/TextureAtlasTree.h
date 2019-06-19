@@ -44,18 +44,16 @@ class TGON_API TextureAtlasTree :
 {
 /**@section Constructor */
 public:
-    TextureAtlasTree();
-
-/**@section Destructor */
-public:
-    virtual ~TextureAtlasTree();
+    explicit TextureAtlasTree(const I32Extent2D& textureAtlasSize, int32_t paddingOffset = 2);
 
 /**@section Method */
 public:
     bool Insert(const I32Rect& rect, int32_t id);
+    int32_t GetPaddingOffset() const noexcept;
 
-public:
+private:
     TextureAltasNode m_rootNode;
+    int32_t m_paddingOffset;
 };
 
 } /* namespace tgon */

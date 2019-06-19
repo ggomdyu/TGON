@@ -22,6 +22,7 @@ class TGON_API OpenGLTexture :
 public:
     OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
     OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+    OpenGLTexture(uint8_t* imageData, const I32Extent2D& size, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
 
 /**@section Destructor */
 public:
@@ -34,6 +35,9 @@ public:
     
     /**@brief   Changes rendering pipeline state to not use the texture. */
     void Unuse();
+    
+    /**@brief   Sets image data into the buffer. */
+    void SetData(void* imageData);
     
     /**@brief   Sets the texture filter mode. */
     void SetFilterMode(TextureFilterMode filterMode);
@@ -50,20 +54,13 @@ public:
     /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
     
-    /**@brief   Gets the image width. */
-    int32_t GetWidth() const noexcept;
-    
-    /**@brief   Gets the image height. */
-    int32_t GetHeight() const noexcept;
-    
     /**@brief   Gets the size of image which contains width and height. */
-    I32Extent2D GetSize() const noexcept;
+    const I32Extent2D& GetSize() const noexcept;
     
     /**@brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
     
 private:
-    void TransferToVideo();
     void UpdateTexParemeters();
     GLuint CreateTextureHandle() const;
     void CreateMipmap() const;
@@ -74,9 +71,7 @@ private:
     TextureFilterMode m_filterMode;
     TextureWrapMode m_wrapMode;
     PixelFormat m_pixelFormat;
-    int32_t m_width;
-    int32_t m_height;
-    std::unique_ptr<uint8_t[]> m_imageData;
+    I32Extent2D m_size;
 };
 
 using PlatformTexture = OpenGLTexture;
