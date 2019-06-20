@@ -21,7 +21,7 @@ CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture) noexcept :
 CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept :
     m_texture(texture),
     m_transform(transform),
-    m_textureRect(0, 0, static_cast<float>(m_texture->GetWidth()), static_cast<float>(m_texture->GetHeight())),
+    m_textureRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height)),
     m_enableScissorRect(false),
     m_blendMode(BlendMode::Normal)
 {
@@ -55,7 +55,7 @@ CanvasSprite& CanvasSprite::operator=(const CanvasSprite& rhs) noexcept
 void CanvasSprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
-    m_textureRect = {0, 0, static_cast<float>(m_texture->GetWidth()), static_cast<float>(m_texture->GetHeight())};
+    m_textureRect = {0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height)};
 }
 
 std::shared_ptr<Texture> CanvasSprite::GetTexture() noexcept

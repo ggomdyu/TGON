@@ -30,20 +30,28 @@ constexpr GLint ConvertTextureWrapModeToNative(TextureWrapMode textureWrapMode) 
 OpenGLTexture::OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
     OpenGLTexture(Image(filePath), filterMode, wrapMode, isUseMipmap)
 {
-    assert(m_textureHandle != 0);
-    
-    this->TransferToVideo();
 }
 
 OpenGLTexture::OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
-    m_imageData(std::move(image.GetImageData())),
+    OpenGLTexture(image.GetImageData().get(), image.GetSize(), filterMode, wrapMode, isUseMipmap)
+{
+}
+    
+OpenGLTexture::OpenGLTexture(uint8_t* imageData, const I32Extent2D& size, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
+    m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
-    m_width(image.GetWidth()),
-    m_height(image.GetHeight()),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
-    m_isUseMipmap(isUseMipmap)
+    m_size(size)
 {
+    assert(m_textureHandle != 0);
+    
+    this->SetData(imageData);
+    
+    if (m_isUseMipmap == true)
+    {
+        this->CreateMipmap();
+    }
 }
 
 OpenGLTexture::~OpenGLTexture()
@@ -64,15 +72,10 @@ void OpenGLTexture::Unuse()
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-void OpenGLTexture::TransferToVideo()
+void OpenGLTexture::SetData(void* imageData)
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_imageData.get()));
-
-    if (m_isUseMipmap == true)
-    {
-        this->CreateMipmap();
-    }
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width, m_size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData));
 }
 
 void OpenGLTexture::UpdateTexParemeters()
@@ -82,8 +85,9 @@ void OpenGLTexture::UpdateTexParemeters()
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, ConvertTextureFilterModeToNative(m_filterMode))); // When minifying the image
 
     // Update texture wrap mode
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, ConvertTextureWrapModeToNative(m_wrapMode)));
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, ConvertTextureWrapModeToNative(m_wrapMode)));
+    auto wrapMode = ConvertTextureWrapModeToNative(m_wrapMode);
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode));
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode));
 }
 
 void OpenGLTexture::SetFilterMode(TextureFilterMode filterMode)
@@ -124,19 +128,9 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
     return m_textureHandle;
 }
 
-int32_t OpenGLTexture::GetWidth() const noexcept
+const I32Extent2D& OpenGLTexture::GetSize() const noexcept
 {
-    return m_width;
-}
-
-int32_t OpenGLTexture::GetHeight() const noexcept
-{
-    return m_height;
-}
-
-I32Extent2D OpenGLTexture::GetSize() const noexcept
-{
-    return {m_width, m_height};
+    return m_size;
 }
 
 PixelFormat OpenGLTexture::GetPixelFormat() const noexcept

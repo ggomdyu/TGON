@@ -9,12 +9,42 @@
 #include "LogoScene.h"
 #include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
+#include "Drawing/TextureAtlasTree.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
 std::shared_ptr<tgon::GameObject> object3;
 std::shared_ptr<tgon::GameObject> object4;
 std::shared_ptr<tgon::GameObject> object5;
+
+
+void Draw(tgon::TextureAltasNode* node)
+{
+    if (node->left)
+    {
+        Draw(node->left.get());
+    }
+    if (node->right)
+    {
+        Draw(node->right.get());
+    }
+    
+    auto r = tgon::RandRange(0, 255);
+    auto g = tgon::RandRange(0, 255);
+    auto b = tgon::RandRange(0, 255);
+    //    if (node->id != 0)
+    //    for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
+    //        for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
+    //        {
+    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+    //            HDC dcHandle = ::GetDC(wndHandle);
+    //            {
+    //                SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
+    //            }
+    //            ::ReleaseDC(wndHandle, dcHandle);
+    //        }
+}
+
 
 LogoScene::LogoScene()
 {
@@ -28,6 +58,44 @@ LogoScene::LogoScene()
     const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
     const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
     cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
+    
+    FontFactory ff;
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
+    
+    TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
+    for (int i = 0; i < 300; ++i)
+    {
+        bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
+        if (a == false)
+        {
+            int n = 34;
+        }
+    }
+    Draw(&tat.m_rootNode);
+    
+    
+    int n = 3;
+    //    char str[] = u8"";
+    //    char32_t ch = u'';
+    //    constexpr UnicodeScalar us(u8"");
+    //    //char32_t c = (str[0] << 0);
+    //    auto& glyphData = font->GetGlyphData(44032, 50);
+    //
+    //    for (int y = 0; y < glyphData.size.height; ++y)
+    //        for (int x = 0; x < glyphData.size.width; ++x)
+    //        {
+    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+    //            HDC dcHandle = ::GetDC(wndHandle);
+    //            {
+    //                auto color = 255 - glyphData.bitmap[y * glyphData.size.width + x];
+    //                if (color != 255)
+    //                {
+    //                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(color, color, color));
+    //                }
+    //            }
+    //            ::ReleaseDC(wndHandle, dcHandle);
+    //        }
+
 
     this->AddGlobalObject(cameraObject);
     
@@ -35,14 +103,14 @@ LogoScene::LogoScene()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object1 = std::make_shared<GameObject>("introSprite1", new Transform());
         object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
         m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
         
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.png", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object2 = std::make_shared<GameObject>("introSprite1", new Transform());
         object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
@@ -65,7 +133,7 @@ LogoScene::LogoScene()
         m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
         m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
         m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture));
 
         object5 = std::make_shared<GameObject>("introSprite1", new Transform());
         object5->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
