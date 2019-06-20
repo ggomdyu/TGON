@@ -33,10 +33,10 @@ AudioBuffer::AudioBuffer(const std::string& filePath) :
     this->Initialize(filePath);
 }
 
-AudioBuffer::AudioBuffer(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes) :
+AudioBuffer::AudioBuffer(const uint8_t* srcData, std::size_t srcDataBytes) :
     AudioBuffer()
 {
-    this->Initialize(filePath, srcData, srcDataBytes);
+    this->Initialize(srcData, srcDataBytes);
 }
 
 AudioBuffer::~AudioBuffer()
@@ -46,6 +46,8 @@ AudioBuffer::~AudioBuffer()
 
 bool AudioBuffer::Initialize(const std::string& filePath)
 {
+    m_filePath = filePath;
+
 #ifdef _MSC_VER
     FILE* file = nullptr;
     fopen_s(&file, filePath.c_str(), "rb");
@@ -70,10 +72,10 @@ bool AudioBuffer::Initialize(const std::string& filePath)
     fclose(file);
 
     size_t extensionOffset = filePath.rfind('.') + 1;
-    return this->Initialize(filePath, audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset));
+    return this->Initialize(audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset));
 }
 
-bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
 {
     if (this->ParseData(srcData, srcDataBytes, audioFormat) == false)
     {
@@ -94,7 +96,7 @@ bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData
     return true;
 }
 
-bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData, std::size_t srcDataBytes)
+bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioImporter::VerifyFormat(srcData, srcDataBytes))
@@ -110,7 +112,7 @@ bool AudioBuffer::Initialize(const std::string& filePath, const uint8_t* srcData
         return false;
     }
 
-    return this->Initialize(filePath, srcData, srcDataBytes, audioFormat);
+    return this->Initialize(srcData, srcDataBytes, audioFormat);
 }
 
 bool AudioBuffer::IsValid() const noexcept
