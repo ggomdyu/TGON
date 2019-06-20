@@ -27,17 +27,28 @@ constexpr GLint ConvertTextureWrapModeToNative(TextureWrapMode textureWrapMode) 
     return nativeTextureWrapModes[static_cast<int>(textureWrapMode)];
 }
 
+constexpr GLint ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
+{
+    constexpr GLint nativePixelFormats[] = {
+        -1,
+        GL_RGBA,
+        GL_RGB,
+        GL_RGB4,
+    };
+    return nativePixelFormats[static_cast<int>(pixelFormat)];
+}
+
 OpenGLTexture::OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
     OpenGLTexture(Image(filePath), filterMode, wrapMode, isUseMipmap)
 {
 }
 
 OpenGLTexture::OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
-    OpenGLTexture(image.GetImageData().get(), image.GetSize(), filterMode, wrapMode, isUseMipmap)
+    OpenGLTexture(image.GetImageData().get(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap)
 {
 }
-    
-OpenGLTexture::OpenGLTexture(uint8_t* imageData, const I32Extent2D& size, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
+
+OpenGLTexture::OpenGLTexture(const uint8_t* data, const I32Extent2D& size, PixelFormat pixelFormat, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
     m_filterMode(filterMode),
@@ -46,7 +57,7 @@ OpenGLTexture::OpenGLTexture(uint8_t* imageData, const I32Extent2D& size, Textur
 {
     assert(m_textureHandle != 0);
     
-    this->SetData(imageData);
+    this->SetData(data, size, pixelFormat);
     
     if (m_isUseMipmap == true)
     {
@@ -72,10 +83,12 @@ void OpenGLTexture::Unuse()
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-void OpenGLTexture::SetData(void* imageData)
+void OpenGLTexture::SetData(const uint8_t* data, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width, m_size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData));
+
+    auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, data));
 }
 
 void OpenGLTexture::UpdateTexParemeters()
@@ -131,11 +144,6 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
 const I32Extent2D& OpenGLTexture::GetSize() const noexcept
 {
     return m_size;
-}
-
-PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
-{
-    return m_pixelFormat;
 }
     
 } /* namespace tgon */

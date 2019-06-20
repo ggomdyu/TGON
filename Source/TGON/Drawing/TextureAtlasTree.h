@@ -26,7 +26,7 @@ public:
 
 /**@section Method */
 public:
-    TextureAltasNode* Insert(const I32Rect& rect, int32_t id);
+    TextureAltasNode* Insert(const I32Rect& rect, int32_t paddingOffset, int32_t id);
 
 private:
     bool IsLeafNode() const noexcept;
@@ -49,6 +49,7 @@ public:
 /**@section Method */
 public:
     bool Insert(const I32Rect& rect, int32_t id);
+    void Bake();
     int32_t GetPaddingOffset() const noexcept;
 
 private:

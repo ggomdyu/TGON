@@ -22,7 +22,7 @@ class TGON_API OpenGLTexture :
 public:
     OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
     OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
-    OpenGLTexture(uint8_t* imageData, const I32Extent2D& size, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+    OpenGLTexture(const uint8_t* data, const I32Extent2D& imageize, PixelFormat pixelFormat, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
 
 /**@section Destructor */
 public:
@@ -37,7 +37,7 @@ public:
     void Unuse();
     
     /**@brief   Sets image data into the buffer. */
-    void SetData(void* imageData);
+    void SetData(const uint8_t* data, const I32Extent2D& size, PixelFormat pixelFormat);
     
     /**@brief   Sets the texture filter mode. */
     void SetFilterMode(TextureFilterMode filterMode);
@@ -70,7 +70,6 @@ private:
     GLuint m_textureHandle;
     TextureFilterMode m_filterMode;
     TextureWrapMode m_wrapMode;
-    PixelFormat m_pixelFormat;
     I32Extent2D m_size;
 };
 

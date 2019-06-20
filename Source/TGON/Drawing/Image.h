@@ -36,8 +36,7 @@ public:
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data
      */
-    template <typename _StringType>
-    Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes);
+    Image(const uint8_t* srcData, int32_t srcDataBytes);
     
     Image(Image&& rhs) noexcept;
 
@@ -62,14 +61,8 @@ public:
     /**@brief   Gets the raw image data. */
     const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
     
-    /**@brief   Gets the image width. */
-    int32_t GetWidth() const noexcept;
-
-    /**@brief   Gets the image height. */
-    int32_t GetHeight() const noexcept;
-    
-    /**@brief   Gets the size of image which contains width and height. */
-    I32Extent2D GetSize() const noexcept;
+    /**@brief   Gets the image size. */
+    const I32Extent2D& GetSize() const noexcept;
 
     /**@brief   Gets the count of color channel. */
     int32_t GetChannels() const noexcept;
@@ -115,25 +108,20 @@ public:
 
 /**@section Variable */
 private:
+    I32Extent2D m_size;
     std::unique_ptr<uint8_t[]> m_imageData;
-    int32_t m_width;
-    int32_t m_height;
-    int32_t m_channels;
-    PixelFormat m_pixelFormat;
     StringHash m_filePath;
 };
 
 template<typename _StringType>
 inline Image::Image(_StringType&& filePath) :
     m_filePath(filePath),
-    m_imageData(LoadImageData(filePath.c_str(), &m_width, &m_height, &m_channels, &m_pixelFormat))
+    m_imageData(LoadImageData(filePath.c_str(), &m_size.width, &m_size.height))
 {
 }
 
-template<typename _StringType>
-inline Image::Image(_StringType&& filePath, const uint8_t* srcData, int32_t srcDataBytes) :
-    m_filePath(filePath),
-    m_imageData(LoadImageData(srcData, srcDataBytes, &m_width, &m_height, &m_channels, &m_pixelFormat))
+inline Image::Image(const uint8_t* srcData, int32_t srcDataBytes) :
+    m_imageData(LoadImageData(srcData, srcDataBytes, &m_size.width, &m_size.height))
 {
 }
 

@@ -103,16 +103,6 @@ bool OpenGLFontTexture::IsValid() const noexcept
     return m_image.IsValid();
 }
 
-int32_t OpenGLFontTexture::GetWidth() const noexcept
-{
-    return m_image.GetWidth();
-}
-
-int32_t OpenGLFontTexture::GetHeight() const noexcept
-{
-    return m_image.GetHeight();
-}
-
 I32Extent2D OpenGLFontTexture::GetSize() const noexcept
 {
     return m_image.GetSize();

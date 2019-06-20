@@ -59,20 +59,20 @@ LogoScene::LogoScene()
     const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
     cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
     
-    FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
-    
-    TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
-    for (int i = 0; i < 300; ++i)
-    {
-        bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
-        if (a == false)
-        {
-            int n = 34;
-        }
-    }
-    Draw(&tat.m_rootNode);
-    
+    //FontFactory ff;
+    //std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
+    //
+    //TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
+    //for (int i = 0; i < 300; ++i)
+    //{
+    //    bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
+    //    if (a == false)
+    //    {
+    //        int n = 34;
+    //    }
+    //}
+    //Draw(&tat.m_rootNode);
+    //
     
     int n = 3;
     //    char str[] = u8"";
@@ -96,14 +96,13 @@ LogoScene::LogoScene()
     //            ::ReleaseDC(wndHandle, dcHandle);
     //        }
 
-
     this->AddGlobalObject(cameraObject);
     
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
     {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/1.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
         object1 = std::make_shared<GameObject>("introSprite1", new Transform());
         object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
         object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
