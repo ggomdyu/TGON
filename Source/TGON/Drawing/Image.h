@@ -24,14 +24,14 @@ public:
     Image() noexcept;
 
     /**
-     * @brief   Reads an image data from the specified path.
+     * @brief   Reads image data from the specified path.
      * @param [in] filePath     The file path of image
      */
     template <typename _StringType>
     explicit Image(_StringType&& filePath);
 
     /**
-     * @brief   Reads an image data from memory.
+     * @brief   Reads image data from memory.
      * @param [in] filePath     The file path of image file
      * @param [in] srcData      The pointer to image data
      * @param [in] srcDataBytes The bytes of image data

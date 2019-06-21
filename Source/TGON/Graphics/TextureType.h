@@ -6,15 +6,20 @@
 
 #pragma once
 
-enum class TextureFilterMode
+namespace tgon
+{
+
+enum class FilterMode
 {
     Point,
     Bilinear,
 };
 
-enum class TextureWrapMode
+enum class WrapMode
 {
     Repeat,
     Clamp,
     Mirror,
 };
+
+} /* namespace tgon */

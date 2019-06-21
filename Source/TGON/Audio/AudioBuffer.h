@@ -64,7 +64,7 @@ public:
     bool Initialize(const std::string& filePath);
 
     /**
-     * @brief   Reads a audio file data from memory.
+     * @brief   Reads audio file data from memory.
      * @param [in] filePath     The file path of the audio file
      * @param [in] srcData      The pointer to the audio data
      * @param [in] srcDataBytes The bytes of the audio data

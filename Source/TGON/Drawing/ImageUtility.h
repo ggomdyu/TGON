@@ -21,10 +21,21 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* srcData, int32_
 
 TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str);
 
-template <std::size_t _ImageFormatStrLen>
-inline ImageFormat ConvertStringToImageFormat(const char(&imageFormatStr)[_ImageFormatStrLen])
+constexpr int32_t GetBytesPerPixel(PixelFormat pixelFormat)
 {
-    return ConvertStringToImageFormat({imageFormatStr, _ImageFormatStrLen - 1});
+    constexpr int32_t bitsPerPixelTable[] = {
+        0, // Unknown
+        4, // RGBA8888
+        3, // RGB888
+        2, // RGBA4444
+    };
+
+    return bitsPerPixelTable[static_cast<int>(pixelFormat)];
+}
+
+constexpr int32_t GetBitsPerPixel(PixelFormat pixelFormat)
+{
+    return GetBytesPerPixel(pixelFormat) * 8;
 }
 
 } /* namespace tgon */

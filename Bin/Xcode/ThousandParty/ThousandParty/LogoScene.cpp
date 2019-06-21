@@ -48,129 +48,11 @@ void Draw(tgon::TextureAltasNode* node)
 
 LogoScene::LogoScene()
 {
-    using namespace tgon;
-
-
-    auto engine = Application::GetInstance()->GetEngine();
-
-    auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
-    const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
-    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
-    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
-    cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
-    
-    //FontFactory ff;
-    //std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
-    //
-    //TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
-    //for (int i = 0; i < 300; ++i)
-    //{
-    //    bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
-    //    if (a == false)
-    //    {
-    //        int n = 34;
-    //    }
-    //}
-    //Draw(&tat.m_rootNode);
-    //
-    
-    int n = 3;
-    //    char str[] = u8"";
-    //    char32_t ch = u'';
-    //    constexpr UnicodeScalar us(u8"");
-    //    //char32_t c = (str[0] << 0);
-    //    auto& glyphData = font->GetGlyphData(44032, 50);
-    //
-    //    for (int y = 0; y < glyphData.size.height; ++y)
-    //        for (int x = 0; x < glyphData.size.width; ++x)
-    //        {
-    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
-    //            HDC dcHandle = ::GetDC(wndHandle);
-    //            {
-    //                auto color = 255 - glyphData.bitmap[y * glyphData.size.width + x];
-    //                if (color != 255)
-    //                {
-    //                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(color, color, color));
-    //                }
-    //            }
-    //            ::ReleaseDC(wndHandle, dcHandle);
-    //        }
-
-    this->AddGlobalObject(cameraObject);
-    
-    auto graphicsModule = engine->FindModule<GraphicsModule>();
-    graphicsModule->GetGraphics().DisableDepthTest();
-
-    {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
-        object1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-        m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
-        
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", TextureFilterMode::Bilinear, TextureWrapMode::Repeat, true);
-        object2 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-        m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
-
-        object3 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object3->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object3->GetTransform()->SetLocalPosition({ 400.0f, -200.0f, 0.0f });
-        m_introSpriteComponent3 = object3->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
-
-        object4 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object4->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object4->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture));
-
-        object5 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object5->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object5->GetTransform()->SetLocalPosition({ 100.0f, 100.0f, 0.0f });
-        m_introSpriteComponent5 = object5->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent5->SetSprite(std::make_shared<CanvasSprite>(texture2));
-
-        
-        this->AddObject(object1);
-        this->AddObject(object2);
-        this->AddObject(object3);
-        this->AddObject(object4);
-        this->AddObject(object5);
-    }
-
-    //
-    //{
-    //    auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
-    //    introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
-    //    m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-    //    m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-    //    m_introSpriteComponent2->SetOpacity(0.0f);
-    //    this->AddObject(introObject2);
-    //}
-
-    //// Intro에 사용할 Sprite 생성
-    //{
-    //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
-    //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
-    //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-    //    m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
-    //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
-    //    this->AddObject(fadeOutObject);
-    //}
-
     m_beginTime = tgon::GetTickCount();
 
     SuperType::Update();
+
+    this->InitPhase2();
 }
 
 void LogoScene::Update()
@@ -218,6 +100,168 @@ void LogoScene::Update()
 //            m_introSpriteComponent1->GetOpacity() += 2.0f * m_timeModule->GetTickTime();
 //        }
 //    }
+}
+
+void LogoScene::InitPhase1()
+{
+    using namespace tgon;
+
+
+    auto engine = Application::GetInstance()->GetEngine();
+
+    auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
+    const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
+    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+    cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
+
+    //FontFactory ff;
+    //std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
+    //
+    //TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
+    //for (int i = 0; i < 300; ++i)
+    //{
+    //    bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
+    //    if (a == false)
+    //    {
+    //        int n = 34;
+    //    }
+    //}
+    //Draw(&tat.m_rootNode);
+    //
+
+    int n = 3;
+    //    char str[] = u8"";
+    //    char32_t ch = u'';
+    //    constexpr UnicodeScalar us(u8"");
+    //    //char32_t c = (str[0] << 0);
+    //    auto& glyphData = font->GetGlyphData(44032, 50);
+    //
+    //    for (int y = 0; y < glyphData.size.height; ++y)
+    //        for (int x = 0; x < glyphData.size.width; ++x)
+    //        {
+    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+    //            HDC dcHandle = ::GetDC(wndHandle);
+    //            {
+    //                auto color = 255 - glyphData.bitmap[y * glyphData.size.width + x];
+    //                if (color != 255)
+    //                {
+    //                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(color, color, color));
+    //                }
+    //            }
+    //            ::ReleaseDC(wndHandle, dcHandle);
+    //        }
+
+    this->AddGlobalObject(cameraObject);
+
+    auto graphicsModule = engine->FindModule<GraphicsModule>();
+    graphicsModule->GetGraphics().DisableDepthTest();
+
+    {
+        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+        object1 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
+        object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+        m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
+
+        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+        object2 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
+        object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+        m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+        object3 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object3->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
+        object3->GetTransform()->SetLocalPosition({ 400.0f, -200.0f, 0.0f });
+        m_introSpriteComponent3 = object3->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+        object4 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object4->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
+        object4->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
+        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture));
+
+        object5 = std::make_shared<GameObject>("introSprite1", new Transform());
+        object5->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
+        object5->GetTransform()->SetLocalPosition({ 100.0f, 100.0f, 0.0f });
+        m_introSpriteComponent5 = object5->AddComponent<CanvasSpriteRendererComponent>();
+        m_introSpriteComponent5->SetSprite(std::make_shared<CanvasSprite>(texture2));
+
+
+        this->AddObject(object1);
+        this->AddObject(object2);
+        this->AddObject(object3);
+        this->AddObject(object4);
+        this->AddObject(object5);
+    }
+
+    //
+    //{
+    //    auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
+    //    introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
+    //    m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
+    //    m_introSpriteComponent2->SetOpacity(0.0f);
+    //    this->AddObject(introObject2);
+    //}
+
+    //// Intro에 사용할 Sprite 생성
+    //{
+    //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
+    //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
+    //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
+    //    m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
+    //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
+    //    this->AddObject(fadeOutObject);
+    //}
+
+}
+
+void LogoScene::InitPhase2()
+{
+    using namespace tgon;
+
+    auto engine = Application::GetInstance()->GetEngine();
+
+    // 카메라 추가
+    auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
+    const auto rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
+    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+    cameraObject->AddComponent<CameraComponent>(FRect{-halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height)}, -1.0f, 1024.0f);
+    this->AddGlobalObject(cameraObject);
+
+    auto graphicsModule = engine->FindModule<GraphicsModule>();
+    graphicsModule->GetGraphics().DisableDepthTest();
+
+    // 텍스처 오브젝트 추가
+    //auto texture = std::make_shared<tgon::Texture>(tgon::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+
+    auto texture = std::shared_ptr<Texture>(new Texture(nullptr, I32Extent2D(1443, 1063), PixelFormat::RGBA8888, FilterMode::Point, WrapMode::Repeat, false, false));
+    Image image(GetDesktopDirectory() + "/2.jpg");
+    auto beginTime = GetTickCount64();
+    for (int i = 0; i < 5000; ++i)
+    {
+        texture->SetData(&image.GetImageData()[0], image.GetSize(), image.GetPixelFormat());
+    }
+    Log(LogLevel::Debug, "%d", GetTickCount64() - beginTime);
+    // PBO 적용 이전: 7519ms
+
+    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
+    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+    object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
+    spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
+    this->AddObject(object);
 }
 
 void LogoScene::OnHandleInput()

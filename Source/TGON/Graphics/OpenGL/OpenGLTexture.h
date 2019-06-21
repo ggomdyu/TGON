@@ -20,9 +20,14 @@ class TGON_API OpenGLTexture :
 {
 /**@section Constructor */
 public:
-    OpenGLTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
-    OpenGLTexture(Image&& image, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
-    OpenGLTexture(const uint8_t* data, const I32Extent2D& imageize, PixelFormat pixelFormat, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+    /**
+     * @brief   Reads image data from the specified path.
+     * @param [in] filePath     The file path of texture
+     * @param [in] filterMode   The filtering mode of the texture
+     */
+    OpenGLTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+    OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+    OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
 
 /**@section Destructor */
 public:
@@ -37,19 +42,19 @@ public:
     void Unuse();
     
     /**@brief   Sets image data into the buffer. */
-    void SetData(const uint8_t* data, const I32Extent2D& size, PixelFormat pixelFormat);
+    void SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     
     /**@brief   Sets the texture filter mode. */
-    void SetFilterMode(TextureFilterMode filterMode);
+    void SetFilterMode(FilterMode filterMode);
     
     /**@brief   Sets the texture wrap mode. */
-    void SetWrapMode(TextureWrapMode wrapMode);
+    void SetWrapMode(WrapMode wrapMode);
     
     /**@brief   Gets the texture filter mode. */
-    TextureFilterMode GetFilterMode() const noexcept;
+    FilterMode GetFilterMode() const noexcept;
     
     /**@brief   Gets the texture wrap mode. */
-    TextureWrapMode GetWrapMode() const noexcept;
+    WrapMode GetWrapMode() const noexcept;
     
     /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
@@ -63,13 +68,16 @@ public:
 private:
     void UpdateTexParemeters();
     GLuint CreateTextureHandle() const;
+    GLuint CreatePixelBufferHandle(int32_t bufferBytes) const;
     void CreateMipmap() const;
 
 private:
     bool m_isUseMipmap;
+    bool m_isDynamicUsage;
     GLuint m_textureHandle;
-    TextureFilterMode m_filterMode;
-    TextureWrapMode m_wrapMode;
+    GLuint m_pixelBufferHandle;
+    FilterMode m_filterMode;
+    WrapMode m_wrapMode;
     I32Extent2D m_size;
 };
 

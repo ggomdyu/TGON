@@ -37,6 +37,9 @@ public:
 public:
     virtual void Update() override;
     
+    void InitPhase1();
+    void InitPhase2();
+
     void OnHandleInput();
 
 /**@section Variable */

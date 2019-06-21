@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-OpenGLFontTexture::OpenGLFontTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap) :
+OpenGLFontTexture::OpenGLFontTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap) :
     m_image(filePath),
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
@@ -60,12 +60,12 @@ void OpenGLFontTexture::UpdateTexParemeters()
     //TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, ConvertTextureWrapModeToNative(m_wrapMode)));
 }
 
-void OpenGLFontTexture::SetFilterMode(TextureFilterMode filterMode)
+void OpenGLFontTexture::SetFilterMode(FilterMode filterMode)
 {
     m_filterMode = filterMode;
 }
 
-void OpenGLFontTexture::SetWrapMode(TextureWrapMode wrapMode)
+void OpenGLFontTexture::SetWrapMode(WrapMode wrapMode)
 {
     m_wrapMode = wrapMode;
 }
@@ -78,12 +78,12 @@ GLuint OpenGLFontTexture::CreateTextureHandle() const
     return textureHandle;
 }
 
-TextureFilterMode OpenGLFontTexture::GetFilterMode() const noexcept
+FilterMode OpenGLFontTexture::GetFilterMode() const noexcept
 {
     return m_filterMode;
 }
 
-TextureWrapMode OpenGLFontTexture::GetWrapMode() const noexcept
+WrapMode OpenGLFontTexture::GetWrapMode() const noexcept
 {
     return m_wrapMode;
 }

@@ -21,7 +21,7 @@ class TGON_API OpenGLFontTexture :
 /**@section Constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
-    explicit OpenGLFontTexture(const std::string& filePath, TextureFilterMode filterMode, TextureWrapMode wrapMode, bool isUseMipmap);
+    explicit OpenGLFontTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap);
 
 /**@section Destructor */
 public:
@@ -36,16 +36,16 @@ public:
     void Unuse();
     
     /**@brief   Sets the texture filter mode. */
-    void SetFilterMode(TextureFilterMode filterMode);
+    void SetFilterMode(FilterMode filterMode);
     
     /**@brief   Sets the texture wrap mode. */
-    void SetWrapMode(TextureWrapMode wrapMode);
+    void SetWrapMode(WrapMode wrapMode);
     
     /**@brief   Gets the texture filter mode. */
-    TextureFilterMode GetFilterMode() const noexcept;
+    FilterMode GetFilterMode() const noexcept;
     
     /**@brief   Gets the texture wrap mode. */
-    TextureWrapMode GetWrapMode() const noexcept;
+    WrapMode GetWrapMode() const noexcept;
     
     /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
@@ -77,8 +77,8 @@ private:
 private:
     bool m_isUseMipmap;
     GLuint m_textureHandle;
-    TextureFilterMode m_filterMode;
-    TextureWrapMode m_wrapMode;
+    FilterMode m_filterMode;
+    WrapMode m_wrapMode;
     Image m_image;
     int32_t m_width;
     int32_t m_height;
