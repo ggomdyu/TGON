@@ -7,12 +7,14 @@
 
 namespace tgon
 {
+
+constexpr bool g_isUsePixelBuffer = false;
     
 constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode) noexcept
 {
     constexpr GLint nativeTextureFilterModes[] = {
-        GL_NEAREST,
-        GL_LINEAR
+        GL_NEAREST,         // Point,
+        GL_LINEAR           // Bilinear,
     };
     return nativeTextureFilterModes[static_cast<int>(textureFilterMode)];
 }
@@ -20,9 +22,9 @@ constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode) n
 constexpr GLint ConvertTextureWrapModeToNative(WrapMode textureWrapMode) noexcept
 {
     constexpr GLint nativeTextureWrapModes[] = {
-        GL_REPEAT,
-        GL_CLAMP,
-        GL_MIRRORED_REPEAT,
+        GL_REPEAT,          // Repeat
+        GL_CLAMP,           // Clamp
+        GL_MIRRORED_REPEAT, // Mirror
     };
     return nativeTextureWrapModes[static_cast<int>(textureWrapMode)];
 }
@@ -30,11 +32,12 @@ constexpr GLint ConvertTextureWrapModeToNative(WrapMode textureWrapMode) noexcep
 constexpr GLint ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
 {
     constexpr GLint nativePixelFormats[] = {
-        -1,
-        GL_RGBA,
-        GL_RGB,
-        GL_RGB4,
-    };
+        -1,                 // Unknown
+        GL_RGBA,            // RGBA8888
+        GL_RGB,             // RGB888
+        GL_RGB4,            // RGBA4444
+        GL_RED,             // R8
+    };              
     return nativePixelFormats[static_cast<int>(pixelFormat)];
 }
 
@@ -52,6 +55,7 @@ OpenGLTexture::OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, 
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
     m_pixelBufferHandle(this->CreatePixelBufferHandle(size.width * size.height * GetBytesPerPixel(pixelFormat))),
+    m_pixelFormat(pixelFormat),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
     m_size(size),
@@ -73,13 +77,24 @@ OpenGLTexture::OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, 
 OpenGLTexture::~OpenGLTexture()
 {
     TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
+    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_pixelBufferHandle));
+    
     m_textureHandle = 0;
+    m_pixelBufferHandle = 0;
 }
 
 void OpenGLTexture::Use()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    
+
+    // Let the texture object to use pixel buffer
+    if constexpr (g_isUsePixelBuffer)
+    {
+        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
+        auto nativePixelFormat = ConvertPixelFormatToNative(m_pixelFormat);
+        glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, m_size.width, m_size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, nullptr);
+    }
+
     this->UpdateTexParemeters();
 }
     
@@ -90,27 +105,21 @@ void OpenGLTexture::Unuse()
 
 void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
-    // PBO에 이미지 데이터 세팅
-    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
-    TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * GetBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
-    uint8_t* ptr = (uint8_t*)TGON_GL_ERROR_CHECK(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY));
-    memcpy(ptr, imageData, size.width * size.height * GetBytesPerPixel(pixelFormat));
-    TGON_GL_ERROR_CHECK(glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER));
-
-    // 텍스처 오브젝트에 PBO 데이터 붙여넣기
-    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
-    auto c= glGetError();
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.width, size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-    auto c2 = glGetError();
-    int n = 3;
-    //glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);TGON_GL_ERROR_CHECK(
-
-    //TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    //auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
-    //TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
+    if constexpr (g_isUsePixelBuffer)
+    {
+        // Set image data into pixel buffer
+        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
+        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * GetBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
+        uint8_t* pixelBufferPtr = TGON_GL_ERROR_CHECK(reinterpret_cast<uint8_t*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)));
+        memcpy(pixelBufferPtr, imageData, size.width * size.height * GetBytesPerPixel(pixelFormat));
+        TGON_GL_ERROR_CHECK(glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER));
+    }
+    else
+    {
+        TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
+        TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
+    }
 }
 
 void OpenGLTexture::UpdateTexParemeters()

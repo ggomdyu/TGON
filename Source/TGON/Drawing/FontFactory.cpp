@@ -57,7 +57,7 @@ const GlyphData& Font::GetGlyphData(char32_t character, int32_t size) const
     {
         return iter->second;
     }
-
+    
     TGON_FT_CHECK_ERROR(FT_Set_Pixel_Sizes(m_fontFace, 0, size));
     TGON_FT_CHECK_ERROR(FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER));
     TGON_FT_CHECK_ERROR(FT_Render_Glyph(m_fontFace->glyph, FT_RENDER_MODE_NORMAL));
@@ -65,8 +65,8 @@ const GlyphData& Font::GetGlyphData(char32_t character, int32_t size) const
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
     int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
 
-    auto bitmap = std::make_unique<uint8_t[]>(bitmapWidth * bitmapHeight * 3);
-    memcpy(bitmap.get(), m_fontFace->glyph->bitmap.buffer, bitmapWidth * bitmapHeight * 3);
+    auto bitmap = std::make_unique<uint8_t[]>(bitmapWidth * bitmapHeight);
+    memcpy(bitmap.get(), m_fontFace->glyph->bitmap.buffer, bitmapWidth * bitmapHeight);
 
     return characterTable.insert(iter, {size, GlyphData{
         character,

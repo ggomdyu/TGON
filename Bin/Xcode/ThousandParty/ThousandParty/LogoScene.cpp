@@ -9,7 +9,9 @@
 #include "LogoScene.h"
 #include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
-#include "Drawing/TextureAtlasTree.h"
+#include "Graphics/TextureAtlasTree.h"
+#include "String/UnicodeScalar.h"
+#include "String/Encoding.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -32,19 +34,18 @@ void Draw(tgon::TextureAltasNode* node)
     auto r = tgon::RandRange(0, 255);
     auto g = tgon::RandRange(0, 255);
     auto b = tgon::RandRange(0, 255);
-    //    if (node->id != 0)
-    //    for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
-    //        for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
-    //        {
-    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
-    //            HDC dcHandle = ::GetDC(wndHandle);
-    //            {
-    //                SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
-    //            }
-    //            ::ReleaseDC(wndHandle, dcHandle);
-    //        }
+        if (node->id != 0)
+        for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
+            for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
+            {
+                HWND wndHandle = reinterpret_cast<HWND>(tgon::Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+                HDC dcHandle = ::GetDC(wndHandle);
+                {
+                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
+                }
+                ::ReleaseDC(wndHandle, dcHandle);
+            }
 }
-
 
 LogoScene::LogoScene()
 {
@@ -52,7 +53,7 @@ LogoScene::LogoScene()
 
     SuperType::Update();
 
-    this->InitPhase2();
+    this->InitPhase3();
 }
 
 void LogoScene::Update()
@@ -106,7 +107,6 @@ void LogoScene::InitPhase1()
 {
     using namespace tgon;
 
-
     auto engine = Application::GetInstance()->GetEngine();
 
     auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
@@ -114,44 +114,6 @@ void LogoScene::InitPhase1()
     const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
     const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
     cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
-
-    //FontFactory ff;
-    //std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/MaplestoryLight.ttf"));
-    //
-    //TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
-    //for (int i = 0; i < 300; ++i)
-    //{
-    //    bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
-    //    if (a == false)
-    //    {
-    //        int n = 34;
-    //    }
-    //}
-    //Draw(&tat.m_rootNode);
-    //
-
-    int n = 3;
-    //    char str[] = u8"";
-    //    char32_t ch = u'';
-    //    constexpr UnicodeScalar us(u8"");
-    //    //char32_t c = (str[0] << 0);
-    //    auto& glyphData = font->GetGlyphData(44032, 50);
-    //
-    //    for (int y = 0; y < glyphData.size.height; ++y)
-    //        for (int x = 0; x < glyphData.size.width; ++x)
-    //        {
-    //            HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
-    //            HDC dcHandle = ::GetDC(wndHandle);
-    //            {
-    //                auto color = 255 - glyphData.bitmap[y * glyphData.size.width + x];
-    //                if (color != 255)
-    //                {
-    //                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(color, color, color));
-    //                }
-    //            }
-    //            ::ReleaseDC(wndHandle, dcHandle);
-    //        }
-
     this->AddGlobalObject(cameraObject);
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
@@ -262,6 +224,72 @@ void LogoScene::InitPhase2()
     auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
     spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
     this->AddObject(object);
+}
+
+void LogoScene::InitPhase3()
+{
+    using namespace tgon;
+    auto engine = Application::GetInstance()->GetEngine();
+
+    auto graphicsModule = engine->FindModule<GraphicsModule>();
+    graphicsModule->GetGraphics().DisableDepthTest();
+    
+    // 카메라 추가
+    auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
+    const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
+    const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
+    const float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
+    cameraObject->AddComponent<CameraComponent>(tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>(rootWindowSize.width), static_cast<float>(rootWindowSize.height) }, -1.0f, 1024.0f);
+    this->AddGlobalObject(cameraObject);
+
+    // 텍스처 추가
+    FontFactory ff;
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory.ttf"));
+    auto& glyphData = font->GetGlyphData(u'플', 50);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Repeat, false, false);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+    // 씬에 폰트 Draw
+    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
+    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+    object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
+    spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
+    this->AddObject(object);
+
+
+    /*TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
+    for (int i = 0; i < 300; ++i)
+    {
+        bool a = tat.Insert({0,0,RandRange(50, 70), RandRange(50, 70) }, i);
+        if (a == false)
+        {
+            int n = 34;
+        }
+    }
+    Draw(tat.GetRootNode());
+    */
+
+    //int n = 3;
+    //constexpr UnicodeScalar us(u8"궐");
+    ////char32_t c = (str[0] << 0);
+    //auto& glyphData = font->GetGlyphData(us.GetValue(), 50);
+
+    //for (int y = 0; y < glyphData.size.height; ++y)
+    //    for (int x = 0; x < glyphData.size.width; ++x)
+    //    {
+    //        HWND wndHandle = reinterpret_cast<HWND>(Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+    //        HDC dcHandle = ::GetDC(wndHandle);
+    //        {
+    //            auto color = 255 - glyphData.bitmap[y * glyphData.size.width + x];
+    //            if (color != 255)
+    //            {
+    //                SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(color, color, color));
+    //            }
+    //        }
+    //        ::ReleaseDC(wndHandle, dcHandle);
+    //    }
 }
 
 void LogoScene::OnHandleInput()

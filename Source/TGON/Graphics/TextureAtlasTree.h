@@ -1,5 +1,5 @@
 /**
- * @file    AtlasTree.h
+ * @file    TextureAtlasTree.h
  * @author  ggomdyu
  * @since   06/18/2019
  * @see     http://blackpawn.com/texts/lightmaps/
@@ -14,6 +14,8 @@
 #include "Math/Rect.h"
 #include "Math/Extent.h"
 
+#include "Texture.h"
+
 namespace tgon
 {
 
@@ -22,7 +24,7 @@ struct TextureAltasNode :
 {
 /**@section Constructor */
 public:
-    TextureAltasNode(const I32Rect& rect);
+    explicit TextureAltasNode(const I32Rect& rect);
 
 /**@section Method */
 public:
@@ -51,6 +53,8 @@ public:
     bool Insert(const I32Rect& rect, int32_t id);
     void Bake();
     int32_t GetPaddingOffset() const noexcept;
+    const TextureAltasNode* GetRootNode() const noexcept;
+    TextureAltasNode* GetRootNode() noexcept;
 
 private:
     TextureAltasNode m_rootNode;

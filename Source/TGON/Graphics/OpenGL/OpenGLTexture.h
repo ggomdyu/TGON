@@ -76,6 +76,7 @@ private:
     bool m_isDynamicUsage;
     GLuint m_textureHandle;
     GLuint m_pixelBufferHandle;
+    PixelFormat m_pixelFormat;
     FilterMode m_filterMode;
     WrapMode m_wrapMode;
     I32Extent2D m_size;

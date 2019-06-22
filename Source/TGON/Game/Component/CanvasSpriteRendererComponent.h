@@ -14,6 +14,7 @@ namespace tgon
 
 class CanvasSprite;
 
+
 class TGON_API CanvasSpriteRendererComponent :
 	public RendererComponent
 {

@@ -82,4 +82,14 @@ int32_t TextureAtlasTree::GetPaddingOffset() const noexcept
     return m_paddingOffset;
 }
 
+const TextureAltasNode* TextureAtlasTree::GetRootNode() const noexcept
+{
+    return &m_rootNode;
+}
+
+TextureAltasNode* TextureAtlasTree::GetRootNode() noexcept
+{
+    return &m_rootNode;
+}
+
 } /* namespace tgon */

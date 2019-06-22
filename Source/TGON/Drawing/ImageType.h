@@ -27,6 +27,7 @@ enum class PixelFormat
     RGBA8888,
     RGB888,
     RGBA4444,
+    R8,
     //AST
     //ETC
     //ETC2

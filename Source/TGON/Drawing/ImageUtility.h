@@ -28,6 +28,7 @@ constexpr int32_t GetBytesPerPixel(PixelFormat pixelFormat)
         4, // RGBA8888
         3, // RGB888
         2, // RGBA4444
+        1, // R8
     };
 
     return bitsPerPixelTable[static_cast<int>(pixelFormat)];

@@ -95,9 +95,11 @@ uniform sampler2D textureSampler;                                               
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    outColor = texture(textureSampler, fragUV);                                     \n\
+    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(textureSampler, fragUV).r);          \n\
+    outColor = sampled;                                                             \n\
 }                                                                                   \n\
 ";
+//outColor = texture(textureSampler, fragUV);                                     \n\
 
 constexpr const char g_grayScaleFrag[] =
 "                                                                                   \n\

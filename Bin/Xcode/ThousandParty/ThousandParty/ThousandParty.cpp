@@ -2,13 +2,7 @@
 
 #include "TGON.h"
 #include "ThousandParty.h"
-#include "Drawing/FontFactory.h"
-#include "String/Encoding.h"
-#include "String/UnicodeScalar.h"
 #include "LogoScene.h"
-#include <unicode/ucnv.h>
-#include <unicode/unistr.h>
-#include <unicode/utypes.h>
 
 TGON_DECLARE_ENGINE(ThousandParty);
 
@@ -50,7 +44,7 @@ void ThousandParty::InitializeModule()
     }
     this->RegisterModule<InputModule>(*rootWindow, inputMode);
 
-    //// Graphics Module
+    // Graphics Module
     VideoMode videoMode;
     {
         videoMode.clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);

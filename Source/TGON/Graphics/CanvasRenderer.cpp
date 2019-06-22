@@ -28,19 +28,7 @@ CanvasRenderer::CanvasRenderer() :
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
     }),
     m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), 24})
-{
-    float ff = 300.0f;
-    float ff2 = 315.0f;
-    float a[] = {
-        -ff, ff2, 0.0f,   0.0f, 1.0f,
-        ff, ff2, 0.0f,    1.0f, 1.0f,
-        ff, -ff2, 0.0f,   1.0f, 0.0f,
-        ff, -ff2, 0.0f,   1.0f, 0.0f,
-        -ff, -ff2, 0.0f,   0.0f, 0.0f,
-        -ff, ff2, 0.0f,   0.0f, 1.0f,
-    };
-    m_quadVertexBuffer.SetData(a, sizeof(a), false);
-    
+{   
     this->PrepareDefaultMaterials();
 }
 

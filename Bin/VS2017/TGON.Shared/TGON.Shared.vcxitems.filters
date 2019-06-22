@@ -1101,8 +1101,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\EventDispatcher.cpp">
       <Filter>Source\TGON\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\TextureAtlasTree.cpp">
-      <Filter>Source\TGON\Drawing</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlasTree.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2564,8 +2564,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\ExpressionTemplate.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\TextureAtlasTree.h">
-      <Filter>Source\TGON\Drawing</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlasTree.h">
+      <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
