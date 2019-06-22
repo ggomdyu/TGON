@@ -22,18 +22,21 @@ public:
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 };
 
-inline bool WavAudioImporter::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WavAudioImporter::Import(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (VerifyFormat(srcData, srcDataBytes) == false)
+    if (VerifyFormat(fileData, fileDataBytes) == false)
     {
         return false;
     }
 
-    RiffReader riffReader(srcData, srcDataBytes);
+    RiffReader riffReader(fileData, fileDataBytes);
     do
     {
         RiffReader::ChunkHeader chunkHeader = riffReader.GetChunkHeader();
@@ -75,24 +78,24 @@ inline bool WavAudioImporter::Import(const uint8_t* srcData, std::size_t srcData
     return true;
 }
 
-inline bool WavAudioImporter::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WavAudioImporter::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (srcDataBytes < 16)
+    if (fileDataBytes < 16)
     {
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[0]) != RiffReader::ChunkId::Riff)
+    if (*reinterpret_cast<const uint32_t*>(&fileData[0]) != RiffReader::ChunkId::Riff)
     {
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[8]) != RiffReader::ChunkId::Wave)
+    if (*reinterpret_cast<const uint32_t*>(&fileData[8]) != RiffReader::ChunkId::Wave)
     {
         return false;
     }
 
-    if (*reinterpret_cast<const uint32_t*>(&srcData[12]) != RiffReader::ChunkId::Fmt)
+    if (*reinterpret_cast<const uint32_t*>(&fileData[12]) != RiffReader::ChunkId::Fmt)
     {
         return false;
     }

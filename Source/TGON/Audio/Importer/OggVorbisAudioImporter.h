@@ -30,7 +30,7 @@ struct OggVorbisFileStream final
 {
 /**@section Constructor */
 public:
-    OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept;
+    OggVorbisFileStream(const uint8_t* fileData, size_t fileDataBytes) noexcept;
 
 /**@section Method */
 public:
@@ -41,15 +41,15 @@ public:
 
 /**@section Variable */    
 public:
-    const uint8_t* srcData;
-    const uint8_t* srcDataIter;
-    size_t srcDataBytes;
+    const uint8_t* fileData;
+    const uint8_t* fileDataIter;
+    size_t fileDataBytes;
 };
 
-inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* srcData, size_t srcDataBytes) noexcept :
-    srcData(srcData),
-    srcDataIter(srcData),
-    srcDataBytes(srcDataBytes)
+inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* fileData, size_t fileDataBytes) noexcept :
+    fileData(fileData),
+    fileDataIter(fileData),
+    fileDataBytes(fileDataBytes)
 {
 }
 
@@ -58,13 +58,13 @@ inline size_t OggVorbisFileStream::Read(void* buffer, size_t elementSize, size_t
     OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
     
     size_t bytes = elementSize * elementCount;
-    if (castedStream->srcDataIter + bytes > castedStream->srcData + castedStream->srcDataBytes)
+    if (castedStream->fileDataIter + bytes > castedStream->fileData + castedStream->fileDataBytes)
     {
-        bytes = castedStream->srcData + castedStream->srcDataBytes - castedStream->srcDataIter;
+        bytes = castedStream->fileData + castedStream->fileDataBytes - castedStream->fileDataIter;
     }
 
-    memcpy(buffer, castedStream->srcDataIter, bytes);
-    castedStream->srcDataIter += bytes;
+    memcpy(buffer, castedStream->fileDataIter, bytes);
+    castedStream->fileDataIter += bytes;
 
     return bytes;
 }
@@ -75,30 +75,30 @@ inline int OggVorbisFileStream::Seek(void* stream, ogg_int64_t offset, int origi
 
     if (origin == SEEK_CUR)
     {
-        castedStream->srcDataIter += offset;
+        castedStream->fileDataIter += offset;
     }
     else if (origin == SEEK_END)
     {
-        castedStream->srcDataIter = castedStream->srcData + castedStream->srcDataBytes - offset;
+        castedStream->fileDataIter = castedStream->fileData + castedStream->fileDataBytes - offset;
     }
     else if (origin == SEEK_SET)
     {
-        castedStream->srcDataIter = castedStream->srcData + offset;
+        castedStream->fileDataIter = castedStream->fileData + offset;
     }
     else
     {
         return -1;
     }
 
-    if (castedStream->srcDataIter < castedStream->srcData)
+    if (castedStream->fileDataIter < castedStream->fileData)
     {
-        castedStream->srcDataIter = castedStream->srcData;
+        castedStream->fileDataIter = castedStream->fileData;
         return -1;
     }
 
-    if (castedStream->srcDataIter > castedStream->srcData + castedStream->srcDataBytes)
+    if (castedStream->fileDataIter > castedStream->fileData + castedStream->fileDataBytes)
     {
-        castedStream->srcDataIter = castedStream->srcData + castedStream->srcDataBytes;
+        castedStream->fileDataIter = castedStream->fileData + castedStream->fileDataBytes;
         return -1;
     }
 
@@ -113,7 +113,7 @@ inline int OggVorbisFileStream::Close(void* stream)
 inline long OggVorbisFileStream::Tell(void* stream)
 {
     const OggVorbisFileStream* castedStream = reinterpret_cast<OggVorbisFileStream*>(stream);
-    return castedStream->srcDataIter - castedStream->srcData;
+    return castedStream->fileDataIter - castedStream->fileData;
 }
 #endif
 
@@ -126,8 +126,11 @@ public:
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 
 private:
 #if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
@@ -136,9 +139,9 @@ private:
 #endif
 };
 
-inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, size_t srcDataBytes)
+inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileDataBytes)
 {
-    if (VerifyFormat(srcData, srcDataBytes) == false)
+    if (VerifyFormat(fileData, fileDataBytes) == false)
     {
         return false;
     }
@@ -146,7 +149,7 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, size_t srcDat
     m_bitsPerSample = 16; // ogg vorbis is always 16 bit.
 
 #if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
-    OggVorbisFileStream fileStream(srcData, srcDataBytes);
+    OggVorbisFileStream fileStream(fileData, fileDataBytes);
     ov_callbacks ovCallbacks = this->MakeCustomIOCallback();
 
     OggVorbis_File oggVorbisFile;
@@ -176,7 +179,7 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, size_t srcDat
     ov_clear(&oggVorbisFile);
 #else
     short* audioData = nullptr;
-    auto audioDataBytes = stb_vorbis_decode_memory(srcData, srcDataBytes, &m_channels, &m_samplingRate, &audioData);
+    auto audioDataBytes = stb_vorbis_decode_memory(fileData, fileDataBytes, &m_channels, &m_samplingRate, &audioData);
     m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
     m_audioDataBytes = audioDataBytes * 4;
 #endif
@@ -184,9 +187,9 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* srcData, size_t srcDat
     return true;
 }
 
-inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* srcData, size_t srcDataBytes)
+inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* fileData, size_t fileDataBytes)
 {
-    if (srcDataBytes < 16)
+    if (fileDataBytes < 16)
     {
         return false;
     }

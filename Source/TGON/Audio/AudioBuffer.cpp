@@ -25,18 +25,23 @@ AudioBuffer::AudioBuffer() noexcept :
     m_alBufferId(0),
     m_alFormat(0)
 {
+    alGenBuffers(1, &m_alBufferId);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        throw std::runtime_error("Failed to invoke alGenBuffers.");
+    }
 }
 
 AudioBuffer::AudioBuffer(const std::string& filePath) :
     AudioBuffer()
 {
-    this->Initialize(filePath);
+    this->SetAudioData(filePath);
 }
 
-AudioBuffer::AudioBuffer(const uint8_t* srcData, std::size_t srcDataBytes) :
+AudioBuffer::AudioBuffer(const uint8_t* fileData, std::size_t fileDataBytes) :
     AudioBuffer()
 {
-    this->Initialize(srcData, srcDataBytes);
+    this->SetAudioData(fileData, fileDataBytes);
 }
 
 AudioBuffer::~AudioBuffer()
@@ -44,7 +49,7 @@ AudioBuffer::~AudioBuffer()
     alDeleteBuffers(1, &m_alBufferId);
 }
 
-bool AudioBuffer::Initialize(const std::string& filePath)
+bool AudioBuffer::SetAudioData(const std::string& filePath)
 {
     m_filePath = filePath;
 
@@ -72,12 +77,12 @@ bool AudioBuffer::Initialize(const std::string& filePath)
     fclose(file);
 
     size_t extensionOffset = filePath.rfind('.') + 1;
-    return this->Initialize(audioData.data(), audioData.size(), ConvertStringToAudioFormat(&filePath[0] + extensionOffset));
+    return this->SetAudioData(audioData.data(), audioData.size(), ConvertToAudioFormat(&filePath[0] + extensionOffset));
 }
 
-bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::SetAudioData(const uint8_t* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
 {
-    if (this->ParseData(srcData, srcDataBytes, audioFormat) == false)
+    if (this->Decode(fileData, fileDataBytes, audioFormat) == false)
     {
         return false;
     }
@@ -88,7 +93,8 @@ bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes, A
         return false;
     }
 
-    if (this->InitializeALBuffer(m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_alFormat, m_samplingRate) == false)
+    alBufferData(m_alBufferId, m_alFormat, m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate);
+    if (alGetError() != AL_NO_ERROR)
     {
         return false;
     }
@@ -96,14 +102,14 @@ bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes, A
     return true;
 }
 
-bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes)
+bool AudioBuffer::SetAudioData(const uint8_t* fileData, std::size_t fileDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
-    if (WavAudioImporter::VerifyFormat(srcData, srcDataBytes))
+    if (WavAudioImporter::VerifyFormat(fileData, fileDataBytes))
     {
         audioFormat = AudioFormat::Wav;
     }
-    else if (OggVorbisAudioImporter::VerifyFormat(srcData, srcDataBytes))
+    else if (OggVorbisAudioImporter::VerifyFormat(fileData, fileDataBytes))
     {
         audioFormat = AudioFormat::OggVorbis;
     }
@@ -112,7 +118,7 @@ bool AudioBuffer::Initialize(const uint8_t* srcData, std::size_t srcDataBytes)
         return false;
     }
 
-    return this->Initialize(srcData, srcDataBytes, audioFormat);
+    return this->SetAudioData(fileData, fileDataBytes, audioFormat);
 }
 
 bool AudioBuffer::IsValid() const noexcept
@@ -160,13 +166,13 @@ ALuint AudioBuffer::GetALBufferId() const noexcept
     return m_alBufferId;
 }
 
-bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::Decode(const uint8_t* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
 {
     switch (audioFormat)
     {
     case AudioFormat::Wav:
         {
-            WavAudioImporter importer(srcData, srcDataBytes);
+            WavAudioImporter importer(fileData, fileDataBytes);
             if (importer.IsValid())
             {
                 m_audioData = std::move(importer.GetAudioData());
@@ -182,7 +188,7 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
         
     case AudioFormat::OggVorbis:
         {
-            OggVorbisAudioImporter importer(srcData, srcDataBytes);
+            OggVorbisAudioImporter importer(fileData, fileDataBytes);
             if (importer.IsValid())
             {
                 m_audioData = std::move(importer.GetAudioData());
@@ -205,26 +211,6 @@ bool AudioBuffer::ParseData(const uint8_t* srcData, std::size_t srcDataBytes, Au
     }
 
     return false;
-}
-
-bool AudioBuffer::InitializeALBuffer(const uint8_t* audioData, ALsizei audioDataBytes, ALenum alFormat, int32_t samplingRate)
-{
-    if (m_alBufferId == 0)
-    {
-        alGenBuffers(1, &m_alBufferId);
-        if (alGetError() != AL_NO_ERROR)
-        {
-            return false;
-        }
-    }
-
-    alBufferData(m_alBufferId, alFormat, audioData, audioDataBytes, samplingRate);
-    if (alGetError() != AL_NO_ERROR)
-    {
-        return false;
-    }
-
-    return true;
 }
 
 } /* namespace tgon */

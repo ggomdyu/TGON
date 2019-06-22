@@ -91,7 +91,7 @@ public:
 
 /**@section Type */
 public:
-    RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept;
+    RiffReader(const uint8_t* fileData, std::size_t fileDataBytes) noexcept;
     
 /**@section Method */
 public:
@@ -100,9 +100,9 @@ public:
 
 /**@section Variable */
 private:
-    const uint8_t* m_srcData;
-    const uint8_t* m_srcDataIter;
-    std::size_t m_srcDataBytes;
+    const uint8_t* m_fileData;
+    const uint8_t* m_fileDataIter;
+    std::size_t m_fileDataBytes;
 };
 
 inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept :
@@ -123,10 +123,10 @@ inline std::size_t RiffReader::ChunkHeader::GetSize() const noexcept
     return chunkSize;
 }
 
-inline RiffReader::RiffReader(const uint8_t* srcData, std::size_t srcDataBytes) noexcept :
-    m_srcData(srcData),
-    m_srcDataIter(srcData),
-    m_srcDataBytes(srcDataBytes)
+inline RiffReader::RiffReader(const uint8_t* fileData, std::size_t fileDataBytes) noexcept :
+    m_fileData(fileData),
+    m_fileDataIter(fileData),
+    m_fileDataBytes(fileDataBytes)
 {
 }
 
@@ -134,8 +134,8 @@ inline bool RiffReader::ReadNext()
 {
     ChunkHeader currChunk = GetChunkHeader();
 
-    m_srcDataIter += currChunk.GetSize();
-    if (m_srcDataIter >= m_srcData + m_srcDataBytes) // This not works fine. Should be fixed!
+    m_fileDataIter += currChunk.GetSize();
+    if (m_fileDataIter >= m_fileData + m_fileDataBytes) // This not works fine. Should be fixed!
     {
         return false;
     }
@@ -145,7 +145,7 @@ inline bool RiffReader::ReadNext()
 
 inline RiffReader::ChunkHeader RiffReader::GetChunkHeader() const
 {
-    return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_srcDataIter[0])), *reinterpret_cast<const uint32_t*>(&m_srcDataIter[4]), &m_srcDataIter[8]);
+    return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_fileDataIter[0])), *reinterpret_cast<const uint32_t*>(&m_fileDataIter[4]), &m_fileDataIter[8]);
 }
 
 } /* namespace tgon */

@@ -21,14 +21,16 @@ public:
 
 /* @section Method */
 public:
-    /* @brief   Verifies the importing file is exactly PNG. */
-    static bool VerifyFormat(const uint8_t* srcData, size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 };
 
-inline bool PngImageProcessor::Import(const uint8_t* srcData, size_t srcDataBytes)
+inline bool PngImageProcessor::Import(const uint8_t* fileData, size_t fileDataBytes)
 {
-    if (VerifyFormat(srcData, srcDataBytes) == false)
+    if (VerifyFormat(fileData, fileDataBytes) == false)
     {
         return false;
     }
@@ -57,7 +59,7 @@ inline bool PngImageProcessor::Import(const uint8_t* srcData, size_t srcDataByte
             png_size_t size;
             const uint8_t* data;
             png_size_t offset;
-        } imageSource{static_cast<png_size_t>(srcDataBytes), reinterpret_cast<const uint8_t*>(srcData), 0};
+        } imageSource{static_cast<png_size_t>(fileDataBytes), reinterpret_cast<const uint8_t*>(fileData), 0};
 
         png_set_read_fn(pngStruct, &imageSource, [](png_structp pngStruct, png_bytep data, png_size_t dataLen)
         {
@@ -145,14 +147,14 @@ inline bool PngImageProcessor::Import(const uint8_t* srcData, size_t srcDataByte
     return true;
 }
 
-inline bool PngImageProcessor::VerifyFormat(const uint8_t* srcData, size_t srcDataBytes)
+inline bool PngImageProcessor::VerifyFormat(const uint8_t* fileData, size_t fileDataBytes)
 {
-    if (srcDataBytes < 8)
+    if (fileDataBytes < 8)
     {
         return false;
     }
 
-    bool isPNGFormat = png_sig_cmp(srcData, 0, 8) == 0;
+    bool isPNGFormat = png_sig_cmp(fileData, 0, 8) == 0;
     return isPNGFormat;
 }
 

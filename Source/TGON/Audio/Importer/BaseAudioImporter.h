@@ -19,12 +19,12 @@ class BaseAudioImporter :
 /**@section Constructor */
 public:
     BaseAudioImporter() noexcept;
-    BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes);
+    BaseAudioImporter(const uint8_t* fileData, std::size_t fileDataBytes);
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    static bool VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes);
+    bool Import(const uint8_t* fileData, std::size_t fileDataBytes);
     bool IsValid() const noexcept;
     std::unique_ptr<uint8_t[]>& GetAudioData() noexcept;
     const std::unique_ptr<uint8_t[]>& GetAudioData() const noexcept;
@@ -52,16 +52,16 @@ inline BaseAudioImporter<_DerivedType>::BaseAudioImporter() noexcept :
 }
 
 template <typename _DerivedType>
-inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const uint8_t* srcData, std::size_t srcDataBytes) :
+inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const uint8_t* fileData, std::size_t fileDataBytes) :
     BaseAudioImporter()
 {
-    this->Import(srcData, srcDataBytes);
+    this->Import(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>
-inline bool BaseAudioImporter<_DerivedType>::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseAudioImporter<_DerivedType>::Import(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
+    return static_cast<_DerivedType*>(this)->Import(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>
@@ -71,9 +71,9 @@ inline bool BaseAudioImporter<_DerivedType>::IsValid() const noexcept
 }
 
 template <typename _DerivedType>
-inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    return _DerivedType::VerifyFormat(srcData, srcDataBytes);
+    return _DerivedType::VerifyFormat(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>

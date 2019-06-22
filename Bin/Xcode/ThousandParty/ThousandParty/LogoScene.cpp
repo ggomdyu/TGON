@@ -206,17 +206,7 @@ void LogoScene::InitPhase2()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     // 텍스처 오브젝트 추가
-    //auto texture = std::make_shared<tgon::Texture>(tgon::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
-
-    auto texture = std::shared_ptr<Texture>(new Texture(nullptr, I32Extent2D(1443, 1063), PixelFormat::RGBA8888, FilterMode::Point, WrapMode::Repeat, false, false));
-    Image image(GetDesktopDirectory() + "/2.jpg");
-    auto beginTime = GetTickCount64();
-    for (int i = 0; i < 5000; ++i)
-    {
-        texture->SetData(&image.GetImageData()[0], image.GetSize(), image.GetPixelFormat());
-    }
-    Log(LogLevel::Debug, "%d", GetTickCount64() - beginTime);
-    // PBO 적용 이전: 7519ms
+    auto texture = std::make_shared<tgon::Texture>(tgon::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -244,20 +234,17 @@ void LogoScene::InitPhase3()
 
     // 텍스처 추가
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory.ttf"));
-    auto& glyphData = font->GetGlyphData(u'플', 50);
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/AnonymousPro.ttf"));
+    auto& glyphData = font->GetGlyphData(u'Q', 50);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Repeat, false, false);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
 
-    // 씬에 폰트 Draw
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
     auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
     spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
     this->AddObject(object);
-
 
     /*TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
     for (int i = 0; i < 300; ++i)

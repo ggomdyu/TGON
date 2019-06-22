@@ -19,14 +19,16 @@ public:
 
 /* @section Method */
 public:
-    /* @brief   Verifies the importing file is exactly PNG. */
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 };
 
-inline bool JpgImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool JpgImageProcessor::Import(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (VerifyFormat(srcData, srcDataBytes) == false)
+    if (VerifyFormat(fileData, fileDataBytes) == false)
     {
         return false;
     }
@@ -34,14 +36,14 @@ inline bool JpgImageProcessor::Import(const uint8_t* srcData, std::size_t srcDat
     return false;
 }
 
-inline bool JpgImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool JpgImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (srcDataBytes < 2)
+    if (fileDataBytes < 2)
     {
         return false;
     }
 
-    return (srcData[0] == 0xFF && srcData[1] == 0xD8);
+    return (fileData[0] == 0xFF && fileData[1] == 0xD8);
 }
 
 } /* namespace tgon */

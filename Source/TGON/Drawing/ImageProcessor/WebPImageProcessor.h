@@ -19,24 +19,26 @@ public:
 
 /* @section Method */
 public:
-    /* @brief   Verifies the importing file is exactly PNG. */
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 };
 
-inline bool WebPImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WebPImageProcessor::Import(const uint8_t* fileData, std::size_t fileDataBytes)
 {
     return false;
 }
 
-inline bool WebPImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool WebPImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (srcDataBytes < 12)
+    if (fileDataBytes < 12)
     {
         return false;
     }
 
-    const char* header = reinterpret_cast<const char*>(&srcData[8]);
+    const char* header = reinterpret_cast<const char*>(&fileData[8]);
     return (header[0] == 'W' && header[1] == 'E' && header[2] == 'B' && header[3] == 'P');
 }
 

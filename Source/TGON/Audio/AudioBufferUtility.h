@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-inline AudioFormat ConvertStringToAudioFormat(const char* str)
+inline AudioFormat ConvertToAudioFormat(const char* str)
 {
     char lowercaseStr[32] {};
     BasicStringTraits<char>::ToLower(str, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);

@@ -19,23 +19,26 @@ public:
 
 /* @section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, std::size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+
+    /* @brief   Decodes the file to the image. */
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
 };
 
-inline bool BmpImageProcessor::Import(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BmpImageProcessor::Import(const uint8_t* fileData, std::size_t fileDataBytes)
 {
     return false;
 }
 
-inline bool BmpImageProcessor::VerifyFormat(const uint8_t* srcData, std::size_t srcDataBytes)
+inline bool BmpImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
 {
-    if (srcDataBytes < 2)
+    if (fileDataBytes < 2)
     {
         return false;
     }
 
-    const char* header = reinterpret_cast<const char*>(&srcData[0]);
+    const char* header = reinterpret_cast<const char*>(&fileData[0]);
     return (header[0] == 'B' && header[1] == 'M');
 }
     

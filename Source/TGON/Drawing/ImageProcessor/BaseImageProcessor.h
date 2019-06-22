@@ -20,12 +20,13 @@ class BaseImageProcessor
 /* @section Constructor */
 public:
     BaseImageProcessor() noexcept;
-    BaseImageProcessor(const uint8_t* srcData, size_t srcDataBytes);
+    BaseImageProcessor(const uint8_t* fileData, size_t fileDataBytes);
 
 /* @section Method */
 public:
-    static bool VerifyFormat(const uint8_t* srcData, size_t srcDataBytes);
-    bool Import(const uint8_t* srcData, size_t srcDataBytes);
+    /* @brief   Verifies the file format is exact. */
+    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+    bool Import(const uint8_t* fileData, size_t fileDataBytes);
     bool IsValid() const noexcept;
     std::unique_ptr<uint8_t[]>& GetImageData() noexcept;
     const std::unique_ptr<uint8_t[]>& GetImageData() const noexcept;
@@ -56,16 +57,16 @@ inline BaseImageProcessor<_DerivedType>::BaseImageProcessor() noexcept :
 }
 
 template <typename _DerivedType>
-inline BaseImageProcessor<_DerivedType>::BaseImageProcessor(const uint8_t* srcData, size_t srcDataBytes) :
+inline BaseImageProcessor<_DerivedType>::BaseImageProcessor(const uint8_t* fileData, size_t fileDataBytes) :
     BaseImageProcessor()
 {
-    this->Import(srcData, srcDataBytes);
+    this->Import(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>
-inline bool BaseImageProcessor<_DerivedType>::Import(const uint8_t* srcData, size_t srcDataBytes)
+inline bool BaseImageProcessor<_DerivedType>::Import(const uint8_t* fileData, size_t fileDataBytes)
 {
-    return static_cast<_DerivedType*>(this)->Import(srcData, srcDataBytes);
+    return static_cast<_DerivedType*>(this)->Import(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>

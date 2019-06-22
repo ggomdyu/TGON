@@ -32,11 +32,10 @@ public:
 
     /**
      * @brief   Reads image data from memory.
-     * @param [in] filePath     The file path of image file
-     * @param [in] srcData      The pointer to image data
-     * @param [in] srcDataBytes The bytes of image data
+     * @param [in] fileData         The pointer to image data
+     * @param [in] fileDataBytes    The bytes of image data
      */
-    Image(const uint8_t* srcData, int32_t srcDataBytes);
+    Image(const uint8_t* fileData, int32_t fileDataBytes);
     
     Image(Image&& rhs) noexcept;
 
@@ -120,8 +119,8 @@ inline Image::Image(_StringType&& filePath) :
 {
 }
 
-inline Image::Image(const uint8_t* srcData, int32_t srcDataBytes) :
-    m_imageData(LoadImageData(srcData, srcDataBytes, &m_size.width, &m_size.height))
+inline Image::Image(const uint8_t* fileData, int32_t fileDataBytes) :
+    m_imageData(LoadImageData(fileData, fileDataBytes, &m_size.width, &m_size.height))
 {
 }
 

@@ -46,7 +46,7 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t*
     return LoadImageData(fileData.get(), fileSize, destWidth, destHeight);
 }
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* srcData, int32_t srcDataBytes, int32_t* destWidth, int32_t* destHeight)
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight)
 {
 #if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
     auto loadImage = [&](auto& imageProcessor)
@@ -58,21 +58,21 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* srcData, int32_
         return std::move(imageProcessor.GetImageData());
     };
 
-    if (PngImageProcessor::VerifyFormat(srcData, srcDataBytes))
+    if (PngImageProcessor::VerifyFormat(fileData, fileDataBytes))
     {
-        return loadImage(PngImageProcessor(srcData, srcDataBytes));
+        return loadImage(PngImageProcessor(fileData, fileDataBytes));
     }
-    else if (JpgImageProcessor::VerifyFormat(srcData, srcDataBytes))
+    else if (JpgImageProcessor::VerifyFormat(fileData, fileDataBytes))
     {
-        return loadImage(JpgImageProcessor(srcData, srcDataBytes));
+        return loadImage(JpgImageProcessor(fileData, fileDataBytes));
     }
-    else if (BmpImageProcessor::VerifyFormat(srcData, srcDataBytes))
+    else if (BmpImageProcessor::VerifyFormat(fileData, fileDataBytes))
     {
-        return loadImage(BmpImageProcessor(srcData, srcDataBytes));
+        return loadImage(BmpImageProcessor(fileData, fileDataBytes));
     }
 #endif
 
-    return std::unique_ptr<uint8_t[]>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(srcData), srcDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha));
+    return std::unique_ptr<uint8_t[]>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha));
 }
 
 TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)

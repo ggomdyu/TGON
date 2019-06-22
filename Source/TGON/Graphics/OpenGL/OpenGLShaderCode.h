@@ -80,7 +80,7 @@ out vec2 fragUV;                                                                
 void main()                                                                         \n\
 {                                                                                   \n\
     gl_Position = matWVP * vec4(vertPosition, 1.0);                                 \n\
-    fragUV = vertUV;                                                                \n\
+    fragUV = vec2(vertUV.x, 1.0 - vertUV.y);                                        \n\
 }                                                                                   \n\
 ";
 
