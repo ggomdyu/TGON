@@ -234,8 +234,14 @@ void LogoScene::InitPhase3()
 
     // 텍스처 추가
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/AnonymousPro.ttf"));
-    auto& glyphData = font->GetGlyphData(u'Q', 50);
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory.ttf"));
+    std::shared_ptr<Font> font2 = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory_bold.ttf"));
+    std::shared_ptr<Font> font3 = ff.GetFont(StringHash(GetDesktopDirectory() + "/BlueHighway.ttf"));
+    std::shared_ptr<Font> font4 = ff.GetFont(StringHash(GetDesktopDirectory() + "/AnonymousPro.ttf"));
+    auto& glyphData = font->GetGlyphData(u'ホ', 300);
+    auto& glyphData2 = font2->GetGlyphData(u'Q', 50);
+    auto& glyphData3 = font3->GetGlyphData(u'Q', 50);
+    auto& glyphData4 = font4->GetGlyphData(u'Q', 50);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
 

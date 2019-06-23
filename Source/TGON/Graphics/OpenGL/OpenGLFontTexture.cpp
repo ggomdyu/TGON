@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-OpenGLFontTexture::OpenGLFontTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap) :
+OpenGLFontTexture::OpenGLFontTexture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap) :
     m_image(filePath),
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),

@@ -21,7 +21,7 @@ class TGON_API OpenGLFontTexture :
 /**@section Constructor */
 public:
     /**@brief   Initializes texture through specified file path and texture property. */
-    explicit OpenGLFontTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap);
+    explicit OpenGLFontTexture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap);
 
 /**@section Destructor */
 public:

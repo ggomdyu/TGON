@@ -22,7 +22,7 @@
 namespace tgon
 {
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight)
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
 {
 #if defined(_MSC_VER) && _MSC_VER >= 1400
     FILE* file = nullptr;
@@ -43,10 +43,10 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t*
     fread(fileData.get(), 1, fileSize, file);
     fclose(file);
 
-    return LoadImageData(fileData.get(), fileSize, destWidth, destHeight);
+    return LoadImageData(fileData.get(), fileSize, destWidth, destHeight, destPixelFormat);
 }
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight)
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
 {
 #if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
     auto loadImage = [&](auto& imageProcessor)
@@ -70,6 +70,8 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32
     {
         return loadImage(BmpImageProcessor(fileData, fileDataBytes));
     }
+#else
+    *destPixelFormat = PixelFormat::RGBA8888;
 #endif
 
     return std::unique_ptr<uint8_t[]>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha));

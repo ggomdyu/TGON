@@ -41,7 +41,7 @@ constexpr GLint ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
     return nativePixelFormats[static_cast<int>(pixelFormat)];
 }
 
-OpenGLTexture::OpenGLTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+OpenGLTexture::OpenGLTexture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     OpenGLTexture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
 }

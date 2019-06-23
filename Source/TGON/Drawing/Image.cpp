@@ -16,25 +16,48 @@ namespace tgon
 {
 
 Image::Image() noexcept :
-    m_imageData(nullptr)
+    m_imageData(nullptr),
+    m_size(),
+    m_pixelFormat(PixelFormat::Unknown)
+{
+}
+
+Image::Image(const std::string_view& filePath) :
+    Image()
+{
+    m_imageData = LoadImageData(filePath.data(), &m_size.width, &m_size.height, &m_pixelFormat);
+}
+
+Image::Image(const uint8_t* fileData, int32_t fileDataBytes) :
+    Image()
+{
+    m_imageData = LoadImageData(fileData, fileDataBytes, &m_size.width, &m_size.height, &m_pixelFormat);
+}
+
+Image::Image(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
+    m_imageData(imageData),
+    m_size(size),
+    m_pixelFormat(pixelFormat)
 {
 }
 
 Image::Image(Image&& rhs) noexcept :
     m_imageData(std::move(rhs.m_imageData)),
-    m_filePath(std::move(rhs.m_filePath)),
-    m_size(rhs.m_size)
+    m_size(rhs.m_size),
+    m_pixelFormat(rhs.m_pixelFormat)
 {
     rhs.m_size = {};
+    rhs.m_pixelFormat = PixelFormat::Unknown;
 }
 
 Image& Image::operator=(Image&& rhs)
 {
     m_imageData = std::move(rhs.m_imageData);
-    m_filePath = std::move(rhs.m_filePath);
     m_size = rhs.m_size;
+    m_pixelFormat = rhs.m_pixelFormat;
 
     rhs.m_size = {};
+    rhs.m_pixelFormat = PixelFormat::Unknown;
 
     return *this;
 }
@@ -52,6 +75,13 @@ const uint8_t Image::operator[](std::size_t index) const
 bool Image::IsValid() const noexcept
 {
     return m_imageData != nullptr;
+}
+
+void Image::SetImageData(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
+{
+    m_imageData.reset(imageData);
+    m_size = size;
+    m_pixelFormat = pixelFormat;
 }
 
 std::unique_ptr<uint8_t[]>& Image::GetImageData() noexcept
@@ -76,12 +106,7 @@ int32_t Image::GetChannels() const noexcept
 
 PixelFormat Image::GetPixelFormat() const noexcept
 {
-    return PixelFormat::RGBA8888;
-}
-
-const StringHash& Image::GetFilePath() const noexcept
-{
-    return m_filePath;
+    return m_pixelFormat;
 }
 
 bool Image::SaveAsPng(const char* saveFilePath)

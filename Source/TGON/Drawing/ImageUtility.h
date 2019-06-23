@@ -15,9 +15,9 @@
 namespace tgon
 {
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight);
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat);
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight);
+TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat);
 
 TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str);
 

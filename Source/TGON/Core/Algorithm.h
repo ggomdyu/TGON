@@ -14,6 +14,12 @@
 namespace tgon
 {
 
+template <typename _ValueType>
+constexpr _ValueType AlignOf(const _ValueType& value, std::size_t alignment)
+{
+    return (value + alignment - 1) & ~(alignment - 1);
+}
+
 template <typename _CharType>
 constexpr bool IsPalindrome(const _CharType* str, std::size_t strLen)
 {
@@ -118,7 +124,7 @@ constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noex
 }
 
 template <typename _Type>
-    void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
+void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
 {
     _Type temp = std::move(lhs);
     lhs = std::move(rhs);

@@ -22,8 +22,8 @@ using FontSize = uint32_t;
 
 struct GlyphData
 {
-    //constexpr const size_t GetHashCode() noexcept;
-
+/**@section Variable */
+public:
     char32_t character;
     I32Extent2D size;
     I32Vector2 bearing;
@@ -31,23 +31,49 @@ struct GlyphData
     std::unique_ptr<uint8_t[]> bitmap;
 };
 
+class TGON_API FontFace :
+    private boost::noncopyable
+{
+/**@section Constructor */
+public:
+    FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize);
+    FontFace(FontFace&& rhs) noexcept;
+
+/**@section Operator */
+public:
+    FontFace& operator=(FontFace&& rhs) noexcept;
+
+/**@section Method */
+public:
+    const GlyphData& GetGlyphData(char32_t character) const;
+
+/**@section Variable */
+public:
+    FT_Face m_fontFace;
+    int32_t m_fontSize;
+    mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
+};
+
 class TGON_API Font :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    Font(const StringHash& fontPath, FT_Library fontLibrary);
+    Font(const StringHash& fontPath, FT_Library library);
+    Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library);
+    Font(Font&& rhs);
 
 /**@section Method */
 public:
-    const GlyphData& GetGlyphData(char32_t character, int32_t size) const;
+    const FontFace& GetFace(FontSize fontSize) const;
+    const GlyphData& GetGlyphData(char32_t character, FontSize fontSize) const;
 
 /**@section Variable */
 private:
-    StringHash m_fontPath;
-    FT_Library m_fontLibrary;
-    FT_Face m_fontFace;
-    mutable std::unordered_map<char32_t, std::unordered_map<int32_t, GlyphData>> m_glyphDataCaches;
+    std::unique_ptr<uint8_t[]> m_fileData;
+    std::size_t m_fileDataBytes;
+    FT_Library m_library;
+    mutable std::unordered_map<FontSize, FontFace> m_fontFaces;
 };
 
 class TGON_API FontFactory :
@@ -67,7 +93,7 @@ public:
 
 /**@section Variable */
 private:
-    FT_Library m_fontLibrary;
+    FT_Library m_library;
     mutable std::unordered_map<StringHash, std::shared_ptr<Font>> m_fonts;
 };
 

@@ -21,13 +21,22 @@ class TGON_API OpenGLTexture :
 /**@section Constructor */
 public:
     /**
-     * @brief   Reads image data from the specified path.
-     * @param [in] filePath     The file path of texture
-     * @param [in] filterMode   The filtering mode of the texture
+     * @brief   Initializes with the specified path of the image.
+     * @param [in] filePath     The file path of the image.
+     * @param [in] filterMode   The filtering mode of the texture.
+     * @param [in] wrapMode     The wrapping mode of the texture.
      */
-    OpenGLTexture(const std::string& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
-    OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+    OpenGLTexture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+
+    /**
+     * @brief   Initializes with the decoded texture data.
+     * @param [in] imageData    The pointer to the decoded image data.
+     * @param [in] size         The size of the texture.
+     * @param [in] pixelFormat  The type of the pixel encoding.
+     */
     OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+
+    OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
 
 /**@section Destructor */
 public:
