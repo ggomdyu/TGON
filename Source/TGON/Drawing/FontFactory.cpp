@@ -167,7 +167,7 @@ const FontFace& Font::GetFace(FontSize fontSize) const
         return iter->second;
     }
 ;
-    return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, size)})->second;
+    return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
 }
 
 const GlyphData& Font::GetGlyphData(char32_t character, FontSize fontSize) const

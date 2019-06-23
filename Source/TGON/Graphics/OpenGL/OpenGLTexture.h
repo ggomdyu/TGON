@@ -9,6 +9,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Drawing/Image.h"
+#include "Math/Vector2.h"
 
 #include "../TextureType.h"
 
@@ -50,9 +51,12 @@ public:
     /**@brief   Changes rendering pipeline state to not use the texture. */
     void Unuse();
     
-    /**@brief   Sets image data into the buffer. */
+    /**@brief   Sets the image data into the buffer. */
     void SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     
+    /**@brief   Sets the image data into the buffer. */
+    void SetData(const uint8_t* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat);
+
     /**@brief   Sets the texture filter mode. */
     void SetFilterMode(FilterMode filterMode);
     
