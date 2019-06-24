@@ -72,9 +72,9 @@ TextureAtlasTree::TextureAtlasTree(const I32Extent2D& textureAtlasSize, int32_t 
 {
 }
 
-bool TextureAtlasTree::Insert(const I32Rect& rect, int32_t id)
+bool TextureAtlasTree::Insert(const I32Rect& textureSize, int32_t id)
 {
-    return m_rootNode.Insert(rect, m_paddingOffset, id) != nullptr;
+    return m_rootNode.Insert(textureSize, m_paddingOffset, id) != nullptr;
 }
 
 int32_t TextureAtlasTree::GetPaddingOffset() const noexcept

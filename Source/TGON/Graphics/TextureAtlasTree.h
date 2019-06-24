@@ -8,6 +8,7 @@
 #pragma once
 #include <unordered_map>
 #include <memory>
+#include <vector>
 #include <boost/noncopyable.hpp>
 
 #include "Platform/Config.h"
@@ -44,20 +45,38 @@ public:
 class TGON_API TextureAtlasTree :
     private boost::noncopyable
 {
+/**@section Type */
+public:
+    using ReferenceType = TextureAltasNode&;
+    using ConstReferenceType = const TextureAltasNode&;
+    using IteratorType = TextureAltasNode*;
+    using ConstIteratorType = const TextureAltasNode*;
+    using ReverseIteratorType = std::reverse_iterator<IteratorType>;
+    using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
+
 /**@section Constructor */
 public:
-    explicit TextureAtlasTree(const I32Extent2D& textureAtlasSize, int32_t paddingOffset = 2);
+    TextureAtlasTree(const I32Extent2D& textureSize, int32_t paddingOffset);
 
 /**@section Method */
 public:
     bool Insert(const I32Rect& rect, int32_t id);
-    void Bake();
+    //void Erase(const TextureAltasNode* node);
     int32_t GetPaddingOffset() const noexcept;
     const TextureAltasNode* GetRootNode() const noexcept;
     TextureAltasNode* GetRootNode() noexcept;
+    IteratorType begin() noexcept;
+    IteratorType end() noexcept;
+    ConstIteratorType cbegin() const noexcept;
+    ConstIteratorType cend() const noexcept;
+    ReverseIteratorType rbegin() noexcept;
+    ReverseIteratorType rend() noexcept;
+    ConstReverseIteratorType crbegin() const noexcept;
+    ConstReverseIteratorType crend() const noexcept;
 
 private:
     TextureAltasNode m_rootNode;
+    std::unordered_map<int, TextureAltasNode*> m_nodes;
     int32_t m_paddingOffset;
 };
 

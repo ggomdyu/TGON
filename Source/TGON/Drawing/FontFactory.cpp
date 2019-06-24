@@ -10,7 +10,7 @@
 #define FT_ERROR_START_LIST     {
 #define FT_ERROR_END_LIST       { 0, 0 } };
 
-#define TGON_FT_CHECK_ERROR(expr)\
+#define TGON_FT_THROW(expr)\
 {\
     FT_Error error = expr;\
     if (error)\
@@ -60,9 +60,9 @@ FontFace::FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Librar
     m_fontFace([&]()
     {
         FT_Face face = nullptr;
-        TGON_FT_CHECK_ERROR(FT_New_Memory_Face(library, fileData, fileDataBytes, 0, &face));
-        TGON_FT_CHECK_ERROR(FT_Select_Charmap(face, FT_ENCODING_UNICODE));
-        TGON_FT_CHECK_ERROR(FT_Set_Pixel_Sizes(face, 0, fontSize));
+        TGON_FT_THROW(FT_New_Memory_Face(library, fileData, fileDataBytes, 0, &face));
+        TGON_FT_THROW(FT_Select_Charmap(face, FT_ENCODING_UNICODE));
+        TGON_FT_THROW(FT_Set_Pixel_Sizes(face, 0, fontSize));
 
         return face;
     } ())
@@ -98,7 +98,7 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
         return iter->second;
     }
     
-    TGON_FT_CHECK_ERROR(FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER));
+    TGON_FT_THROW(FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER));
 
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
     int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;

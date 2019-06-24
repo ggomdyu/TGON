@@ -236,19 +236,13 @@ void LogoScene::InitPhase3()
 
     // 텍스처 추가
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory.ttf"));
-    std::shared_ptr<Font> font2 = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory_bold.ttf"));
-    std::shared_ptr<Font> font3 = ff.GetFont(StringHash(GetDesktopDirectory() + "/BlueHighway.ttf"));
-    std::shared_ptr<Font> font4 = ff.GetFont(StringHash(GetDesktopDirectory() + "/AnonymousPro.ttf"));
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/Maplestory Bold.ttf"));
+    std::shared_ptr<Font> font2 = ff.GetFont(StringHash(GetDesktopDirectory() + "/Maplestory Light.ttf"));
     auto& glyphData = font->GetGlyphData(u'Q', 100);
     auto& glyphData2 = font2->GetGlyphData(u'Q', 100);
-    auto& glyphData3 = font3->GetGlyphData(u'Q', 100);
-    auto& glyphData4 = font4->GetGlyphData(u'Q', 100);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
     auto texture2 = std::make_shared<Texture>(&glyphData2.bitmap[0], glyphData2.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
-    auto texture3 = std::make_shared<Texture>(&glyphData3.bitmap[0], glyphData3.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
-    auto texture4 = std::make_shared<Texture>(&glyphData4.bitmap[0], glyphData4.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
 
     {
         auto object = std::make_shared<GameObject>("introSprite1", new Transform());
@@ -266,23 +260,6 @@ void LogoScene::InitPhase3()
         spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture2));
         this->AddObject(object);
     }
-    {
-        auto object = std::make_shared<GameObject>("introSprite3", new Transform());
-        object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-        object->GetTransform()->SetLocalPosition({ 50.0f, 0.0f, 0.0f });
-        auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
-        spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture3));
-        this->AddObject(object);
-    }
-    {
-        auto object = std::make_shared<GameObject>("introSprite4", new Transform());
-        object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-        object->GetTransform()->SetLocalPosition({ 150.0f, 0.0f, 0.0f });
-        auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
-        spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture4));
-        this->AddObject(object);
-    }
-
     /*TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
     for (int i = 0; i < 300; ++i)
     {

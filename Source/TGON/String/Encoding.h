@@ -37,6 +37,15 @@ public:
      */
     template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, std::size_t _DestCharBufferLen>
     static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferLen]);
+
+    /**
+     * @brief   Converts a string from one encoding to another.
+     * @param [in] srcStr       The source of _FromEncodingType.
+     * @param [out] destStr     The output destination of _ToEncodingType.
+     * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
+     */
+    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType = char>
+    static std::basic_string<_DestCharType> ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr);
 };
 
 template <typename _FromEncodingType>

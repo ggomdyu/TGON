@@ -7,12 +7,12 @@ namespace tgon
 
 int32_t ASCII::GetCharCount(const char* str)
 {
-    return static_cast<int32_t>(strlen(str));
+    return static_cast<int32_t>(std::char_traits<char>::length(str));
 }
 
 int32_t UTF16LE::GetCharCount(const char* str)
 {
-    return static_cast<int32_t>(wcslen(reinterpret_cast<const wchar_t*>(str)));
+    return static_cast<int32_t>(std::char_traits<char16_t>::length(reinterpret_cast<const char16_t*>(str)));
 }
 
 } /* namespace tgon */
