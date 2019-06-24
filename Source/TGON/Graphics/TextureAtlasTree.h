@@ -65,14 +65,14 @@ public:
     int32_t GetPaddingOffset() const noexcept;
     const TextureAltasNode* GetRootNode() const noexcept;
     TextureAltasNode* GetRootNode() noexcept;
-    IteratorType begin() noexcept;
+    /*IteratorType begin() noexcept;
     IteratorType end() noexcept;
     ConstIteratorType cbegin() const noexcept;
     ConstIteratorType cend() const noexcept;
     ReverseIteratorType rbegin() noexcept;
     ReverseIteratorType rend() noexcept;
     ConstReverseIteratorType crbegin() const noexcept;
-    ConstReverseIteratorType crend() const noexcept;
+    ConstReverseIteratorType crend() const noexcept;*/
 
 private:
     TextureAltasNode m_rootNode;
