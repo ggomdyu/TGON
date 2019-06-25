@@ -237,28 +237,36 @@ void LogoScene::InitPhase3()
     // 텍스처 추가
     FontFactory ff;
     std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/malgun.ttf"));
-    auto& glyphData = font->GetGlyphData(u'A', 100);
-    auto& glyphData2 = font->GetGlyphData(u'W', 100);
-    auto kerning =  font->GetKerning( u'W', u'A', 100);
+ 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
-    auto texture2 = std::make_shared<Texture>(&glyphData2.bitmap[0], glyphData2.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
 
+    float accumulatedXPos = -250.0f;
+    float accumulatedYPos = 0.0f;
+    const wchar_t str[] = L"This is sample text";
+    for (int i = 0; i < std::extent<decltype(str)>::value - 1; ++i)
     {
+        int32_t fontSize = 50;
+        auto& glyphData = font->GetGlyphData(str[i], fontSize);
+
+        if (i != 0)
+        {
+            auto kerning = font->GetKerning(str[i-1], str[i], fontSize);
+            /*accumulatedXPos += kerning.x;
+            accumulatedYPos += kerning.y;*/
+        }
+
+        float xPos = accumulatedXPos;// + glyphData.bearing.x;
+        float yPos = accumulatedYPos - glyphData.size.height / 2 + glyphData.bearing.y;
+
         auto object = std::make_shared<GameObject>("introSprite1", new Transform());
         object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-        object->GetTransform()->SetLocalPosition({ -150.0f, 0.0f, 0.0f });
+        object->GetTransform()->SetLocalPosition(Vector3( xPos, yPos, 0.0f ));
         auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
+        auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
         spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
         this->AddObject(object);
-    }
-    {
-        auto object = std::make_shared<GameObject>("introSprite2", new Transform());
-        object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-        object->GetTransform()->SetLocalPosition({ -50.0f, 0.0f, 0.0f });
-        auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
-        spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        this->AddObject(object);
+
+        accumulatedXPos += glyphData.advance.x;
     }
     /*TextureAtlasTree tat(I32Extent2D(2048, 2048), 2);
     for (int i = 0; i < 300; ++i)

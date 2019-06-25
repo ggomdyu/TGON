@@ -110,7 +110,7 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
         character,
         I32Extent2D(static_cast<int32_t>(bitmapWidth), static_cast<int32_t>(bitmapHeight)),
         I32Vector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top)),
-        static_cast<int32_t>(m_fontFace->glyph->advance.x),
+        I32Vector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6)),
         std::move(bitmap)
     }})->second;
 }
@@ -118,9 +118,11 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
 const I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
 {
     FT_Vector kerning;
-    return FT_Get_Kerning(m_fontFace, lhs, rhs, FT_KERNING_DEFAULT, &kerning);
+    auto lhsIndex = FT_Get_Char_Index(m_fontFace, lhs);
+    auto rhsIndex = FT_Get_Char_Index(m_fontFace, rhs);
+    FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
 
-    return I32Vector2(static_cast<int32_t>(kerning.x), static_cast<int32_t>(kerning.y));
+    return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
 }
 
 Font::Font(const StringHash& filePath, FT_Library library) :

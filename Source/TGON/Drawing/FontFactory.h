@@ -20,6 +20,13 @@ namespace tgon
 
 using FontSize = uint32_t;
 
+struct GlyphMetrics
+{
+    I32Extent2D size;
+    I32Vector2 bearing;
+    int32_t advance;
+};
+
 struct GlyphData
 {
 /**@section Variable */
@@ -27,7 +34,7 @@ public:
     char32_t character;
     I32Extent2D size;
     I32Vector2 bearing;
-    int32_t advance;
+    I32Vector2 advance;
     std::unique_ptr<uint8_t[]> bitmap;
 };
 
