@@ -115,12 +115,20 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
     }})->second;
 }
 
-Font::Font(const StringHash& fontPath, FT_Library library) :
+const I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
+{
+    FT_Vector kerning;
+    return FT_Get_Kerning(m_fontFace, lhs, rhs, FT_KERNING_DEFAULT, &kerning);
+
+    return I32Vector2(static_cast<int32_t>(kerning.x), static_cast<int32_t>(kerning.y));
+}
+
+Font::Font(const StringHash& filePath, FT_Library library) :
     Font([&]() -> Font
     {
 #if defined(_MSC_VER) && _MSC_VER >= 1400
         FILE * file = nullptr;
-        fopen_s(&file, fontPath.CStr(), "rb");
+        fopen_s(&file, filePath.CStr(), "rb");
 #else
         FILE* file = fopen(filePath, "rb");
 #endif
@@ -166,13 +174,18 @@ const FontFace& Font::GetFace(FontSize fontSize) const
     {
         return iter->second;
     }
-;
+
     return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
 }
 
 const GlyphData& Font::GetGlyphData(char32_t character, FontSize fontSize) const
 {
     return this->GetFace(fontSize).GetGlyphData(character);
+}
+
+const I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const
+{
+    return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }
 
 FontFactory::FontFactory() :
@@ -193,16 +206,16 @@ FontFactory::~FontFactory()
     }
 }
 
-std::shared_ptr<Font> FontFactory::GetFont(const StringHash& fontPath)
+std::shared_ptr<Font> FontFactory::GetFont(const StringHash& filePath)
 {
-    auto iter = m_fonts.find(fontPath);
+    auto iter = m_fonts.find(filePath);
     if (iter != m_fonts.end())
     {
         return iter->second;
     }
 
-    auto font = std::make_shared<Font>(fontPath, m_library);
-    m_fonts.insert(iter, {fontPath, font});
+    auto font = std::make_shared<Font>(filePath, m_library);
+    m_fonts.insert(iter, {filePath, font});
 
     return font;
 }

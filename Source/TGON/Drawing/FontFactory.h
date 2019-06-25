@@ -46,6 +46,7 @@ public:
 /**@section Method */
 public:
     const GlyphData& GetGlyphData(char32_t character) const;
+    const I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
 
 /**@section Variable */
 public:
@@ -59,7 +60,7 @@ class TGON_API Font :
 {
 /**@section Constructor */
 public:
-    Font(const StringHash& fontPath, FT_Library library);
+    Font(const StringHash& filePath, FT_Library library);
     Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library);
     Font(Font&& rhs);
 
@@ -67,6 +68,7 @@ public:
 public:
     const FontFace& GetFace(FontSize fontSize) const;
     const GlyphData& GetGlyphData(char32_t character, FontSize fontSize) const;
+    const I32Vector2 GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const;
 
 /**@section Variable */
 private:
@@ -89,7 +91,7 @@ public:
 
 /**@section Method */
 public:
-    std::shared_ptr<Font> GetFont(const StringHash& fontPath);
+    std::shared_ptr<Font> GetFont(const StringHash& filePath);
 
 /**@section Variable */
 private:
