@@ -242,20 +242,22 @@ void LogoScene::InitPhase3()
 
     float accumulatedXPos = -250.0f;
     float accumulatedYPos = 0.0f;
-    const wchar_t str[] = L"This is sample text";
+    const wchar_t str[] = L"³ª´ÂHello,¡¡What is your name?¡¡My Name is ªÊª«ªàªé¡£";
     for (int i = 0; i < std::extent<decltype(str)>::value - 1; ++i)
     {
-        int32_t fontSize = 50;
+        int32_t fontSize = 30;
         auto& glyphData = font->GetGlyphData(str[i], fontSize);
 
         if (i != 0)
         {
-            auto kerning = font->GetKerning(str[i-1], str[i], fontSize);
-            /*accumulatedXPos += kerning.x;
-            accumulatedYPos += kerning.y;*/
+            auto& prevGlyphData = font->GetGlyphData( str[i - 1], fontSize );
+            accumulatedXPos -= (prevGlyphData.size.width - glyphData.size.width) / 2;
+
+            auto kerning = font->GetKerning( str[i - 1], str[i], fontSize );
+            accumulatedXPos += kerning.x;
         }
 
-        float xPos = accumulatedXPos;// + glyphData.bearing.x;
+        float xPos = accumulatedXPos + glyphData.bearing.x;
         float yPos = accumulatedYPos - glyphData.size.height / 2 + glyphData.bearing.y;
 
         auto object = std::make_shared<GameObject>("introSprite1", new Transform());
