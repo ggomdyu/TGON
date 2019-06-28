@@ -63,10 +63,7 @@ OpenGLTexture::OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, 
 {
     assert(m_textureHandle != 0);
     
-    if (imageData != nullptr)
-    {
-        this->SetData(imageData, size, pixelFormat);
-    }
+    this->SetData(imageData, size, pixelFormat);
     
     if (m_isUseMipmap == true)
     {
@@ -120,6 +117,13 @@ void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, P
         TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
         TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
     }
+}
+
+void OpenGLTexture::SetData(const uint8_t* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
+{
+    auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
+    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
+    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, pos.x, pos.y, size.width, size.height, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
 }
 
 void OpenGLTexture::UpdateTexParemeters()

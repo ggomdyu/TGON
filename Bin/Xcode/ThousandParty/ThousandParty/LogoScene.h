@@ -40,6 +40,7 @@ public:
     void InitPhase1();
     void InitPhase2();
     void InitPhase3();
+    void InitPhase4();
 
     void OnHandleInput();
 

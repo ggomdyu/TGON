@@ -53,7 +53,7 @@ LogoScene::LogoScene()
 
     SuperType::Update();
 
-    this->InitPhase3();
+    this->InitPhase4();
 }
 
 void LogoScene::Update()
@@ -236,13 +236,13 @@ void LogoScene::InitPhase3()
 
     // 텍스처 추가
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/malgun.ttf"));
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/Maplestory Bold.ttf"));
  
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    float accumulatedXPos = -250.0f;
+    float accumulatedXPos = -100.0f;
     float accumulatedYPos = 0.0f;
-    const wchar_t str[] = L"나는Hello,　What is your name?　My Name is なかむら。";
+    const wchar_t str[] = L"これ無理。Hello.테스트";
     for (int i = 0; i < std::extent<decltype(str)>::value - 1; ++i)
     {
         int32_t fontSize = 30;
@@ -301,6 +301,44 @@ void LogoScene::InitPhase3()
     //        }
     //        ::ReleaseDC(wndHandle, dcHandle);
     //    }
+}
+
+void LogoScene::InitPhase4()
+{
+    using namespace tgon;
+    auto engine = Application::GetInstance()->GetEngine();
+
+    auto graphicsModule = engine->FindModule<GraphicsModule>();
+    graphicsModule->GetGraphics().DisableDepthTest();
+
+    // 카메라 추가
+    auto cameraObject = std::make_shared<GameObject>( "camera1", new Transform() );
+    const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
+    const float halfWidth = static_cast<float>( rootWindowSize.width ) * 0.5f;
+    const float halfHeight = static_cast<float>( rootWindowSize.height ) * 0.5f;
+    cameraObject->AddComponent<CameraComponent>( tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>( rootWindowSize.width ), static_cast<float>( rootWindowSize.height ) }, -1.0f, 1024.0f );
+    this->AddGlobalObject( cameraObject );
+
+    TextureAtlasTree tat( I32Extent2D( 4096, 4096 ), 2 );
+
+    // 텍스처 추가
+    FontFactory ff;
+    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/Maplestory Bold.ttf" ) );
+
+    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+
+    auto object = std::make_shared<GameObject>( "introSprite1", new Transform() );
+    object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
+    object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
+    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
+    
+    auto texture = std::make_shared<Texture>( nullptr, I32Extent2D( 1024, 1024 ), PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false );
+    auto& glyphData = font->GetGlyphData(u'가', 100);
+    texture->SetData( glyphData.bitmap.get(), Vector2(0.0f, 0.0f), glyphData.size, PixelFormat::R8 );
+
+    spriteComponent->SetSprite( std::make_shared<CanvasSprite>( texture ) );
+    this->AddObject( object );
+
 }
 
 void LogoScene::OnHandleInput()
