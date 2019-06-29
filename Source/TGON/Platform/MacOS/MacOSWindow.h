@@ -45,14 +45,14 @@ public:
     void Minimize();
     void BringToFront();
     void SetPosition(int32_t x, int32_t y);
-    void SetSize(int32_t width, int32_t height);
+    void SetContentSize(int32_t width, int32_t height);
     void SetTitle(const char* title);
     void SetFullScreen(bool isFullScreen);
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;
     void GetExtent(int32_t* width, int32_t* height) const;
-    void GetTitle(char* destStr) const;
+    void GetTitle(char* destTitle) const;
     float GetTransparency() const;
     void* GetNativeWindow() const;
     bool HasCaption() const;

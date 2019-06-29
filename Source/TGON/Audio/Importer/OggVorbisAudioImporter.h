@@ -179,7 +179,7 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileD
     ov_clear(&oggVorbisFile);
 #else
     short* audioData = nullptr;
-    auto audioDataBytes = stb_vorbis_decode_memory(fileData, fileDataBytes, &m_channels, &m_samplingRate, &audioData);
+    auto audioDataBytes = stb_vorbis_decode_memory(fileData, static_cast<int>(fileDataBytes), &m_channels, &m_samplingRate, &audioData);
     m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
     m_audioDataBytes = audioDataBytes * 4;
 #endif

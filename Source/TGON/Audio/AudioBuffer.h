@@ -29,7 +29,7 @@ class TGON_API AudioBuffer final :
 {
 /**@section Constructor */
 public:
-    AudioBuffer() noexcept;
+    AudioBuffer();
 
     /**
      * @brief   Reads audio data from the path specified by filePath.
@@ -64,7 +64,6 @@ public:
 
     /**
      * @brief   Reads audio file data from memory.
-     * @param [in] filePath         The file path of the audio file
      * @param [in] fileData         The pointer to the audio data
      * @param [in] fileDataBytes    The bytes of the audio data
      * @param [in] audioFormat      The format of the audio
@@ -73,7 +72,6 @@ public:
     
     /**
      * @brief   Reads audio file data from memory.
-     * @param [in] filePath         The file path of the audio source
      * @param [in] fileData         The pointer to the audio data
      * @param [in] fileDataBytes    The bytes of the audio data
      */

@@ -34,17 +34,17 @@ void Draw(tgon::TextureAltasNode* node)
     auto r = tgon::RandRange(0, 255);
     auto g = tgon::RandRange(0, 255);
     auto b = tgon::RandRange(0, 255);
-        if (node->id != 0)
-        for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
-            for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
-            {
-                HWND wndHandle = reinterpret_cast<HWND>(tgon::Application::GetInstance()->GetRootWindow()->GetNativeWindow());
-                HDC dcHandle = ::GetDC(wndHandle);
-                {
-                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
-                }
-                ::ReleaseDC(wndHandle, dcHandle);
-            }
+//        if (node->id != 0)
+//        for (int y = node->rect.y; y < node->rect.y + node->rect.height-4; ++y)
+//            for (int x = node->rect.x; x < node->rect.x + node->rect.width-4; ++x)
+//            {
+//                HWND wndHandle = reinterpret_cast<HWND>(tgon::Application::GetInstance()->GetRootWindow()->GetNativeWindow());
+//                HDC dcHandle = ::GetDC(wndHandle);
+//                {
+//                    SetPixel(dcHandle, static_cast<int>(x), static_cast<int>(y), RGB(r, g, b));
+//                }
+//                ::ReleaseDC(wndHandle, dcHandle);
+//            }
 }
 
 LogoScene::LogoScene()
@@ -176,7 +176,7 @@ void LogoScene::InitPhase1()
     //    this->AddObject(introObject2);
     //}
 
-    //// Intro¿¡ »ç¿ëÇÒ Sprite »ý¼º
+    //// Introï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Sprite ï¿½ï¿½ï¿½ï¿½
     //{
     //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
     //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
@@ -194,7 +194,7 @@ void LogoScene::InitPhase2()
 
     auto engine = Application::GetInstance()->GetEngine();
 
-    // Ä«¸Þ¶ó Ãß°¡
+    // Ä«ï¿½Þ¶ï¿½ ï¿½ß°ï¿½
     auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
     const auto rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
     const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
@@ -205,7 +205,7 @@ void LogoScene::InitPhase2()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    // ÅØ½ºÃ³ ¿ÀºêÁ§Æ® Ãß°¡
+    // ï¿½Ø½ï¿½Ã³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ß°ï¿½
     auto texture = std::make_shared<tgon::Texture>(tgon::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
@@ -224,7 +224,7 @@ void LogoScene::InitPhase3()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
     
-    // Ä«¸Þ¶ó Ãß°¡
+    // Ä«ï¿½Þ¶ï¿½ ï¿½ß°ï¿½
     auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
     const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
     const float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
@@ -234,15 +234,15 @@ void LogoScene::InitPhase3()
 
     TextureAtlasTree tat(I32Extent2D(4096, 4096), 2);
 
-    // ÅØ½ºÃ³ Ãß°¡
+    // ï¿½Ø½ï¿½Ã³ ï¿½ß°ï¿½
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/Maplestory Bold.ttf"));
+    std::shared_ptr<Font> font = ff.GetFont(StringHash(GetDesktopDirectory() + "/maplestory_bold.ttf"));
  
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     float accumulatedXPos = -100.0f;
     float accumulatedYPos = 0.0f;
-    const wchar_t str[] = L"ª³ªìÙí×â¡£Hello.Å×½ºÆ®";
+    const wchar_t str[] = L"Hello.My name is Junho";
     for (int i = 0; i < std::extent<decltype(str)>::value - 1; ++i)
     {
         int32_t fontSize = 30;
@@ -283,7 +283,7 @@ void LogoScene::InitPhase3()
     */
 
     //int n = 3;
-    //constexpr UnicodeScalar us(u8"±È");
+    //constexpr UnicodeScalar us(u8"ï¿½ï¿½");
     ////char32_t c = (str[0] << 0);
     //auto& glyphData = font->GetGlyphData(us.GetValue(), 50);
 
@@ -311,7 +311,7 @@ void LogoScene::InitPhase4()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    // Ä«¸Þ¶ó Ãß°¡
+    // Ä«ï¿½Þ¶ï¿½ ï¿½ß°ï¿½
     auto cameraObject = std::make_shared<GameObject>( "camera1", new Transform() );
     const tgon::I32Extent2D rootWindowSize = Application::GetInstance()->GetRootWindow()->GetExtent();
     const float halfWidth = static_cast<float>( rootWindowSize.width ) * 0.5f;
@@ -319,11 +319,10 @@ void LogoScene::InitPhase4()
     cameraObject->AddComponent<CameraComponent>( tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>( rootWindowSize.width ), static_cast<float>( rootWindowSize.height ) }, -1.0f, 1024.0f );
     this->AddGlobalObject( cameraObject );
 
-    TextureAtlasTree tat( I32Extent2D( 4096, 4096 ), 2 );
+    TextureAtlasTree tat( I32Extent2D( 512, 512 ), 2 );
 
-    // ÅØ½ºÃ³ Ãß°¡
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/Maplestory Bold.ttf" ) );
+    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
 
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
@@ -332,10 +331,12 @@ void LogoScene::InitPhase4()
     object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
     auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
     
-    auto texture = std::make_shared<Texture>( nullptr, I32Extent2D( 1024, 1024 ), PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false );
-    auto& glyphData = font->GetGlyphData(u'°¡', 100);
+    auto texture = std::make_shared<Texture>( nullptr, I32Extent2D( 512, 512 ), PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false );
+    auto& glyphData = font->GetGlyphData(u'ê°€', 100);
     texture->SetData( glyphData.bitmap.get(), Vector2(0.0f, 0.0f), glyphData.size, PixelFormat::R8 );
-
+    auto& glyphData2 = font->GetGlyphData(u'ã‚', 100);
+    texture->SetData( glyphData2.bitmap.get(), Vector2(120.0f, 120.0f), glyphData2.size, PixelFormat::R8 );
+    
     spriteComponent->SetSprite( std::make_shared<CanvasSprite>( texture ) );
     this->AddObject( object );
 

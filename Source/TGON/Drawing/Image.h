@@ -62,9 +62,10 @@ public:
     bool IsValid() const noexcept;
 
     /**
-     * @brief   Sets the decoded raw image data.
-     * @param [in] imageData        The pointer to the decoded image data
-     * @param [in] imageDataBytes   The bytes size of the decoded image data
+     * @brief   Initializes with the decoded image data.
+     * @param [in] imageData    The pointer to the decoded image data.
+     * @param [in] size         The size of the image.
+     * @param [in] pixelFormat  The type of the pixel encoding.
      */
     void SetImageData(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
 
@@ -103,7 +104,7 @@ public:
      * @param [in] destFilePath     The path to save the image.
      * @return  Returns true if the save was successful, false otherwise.
      */
-    bool SaveAsBmp(const char* saveFilePath);
+    bool SaveAsBmp(const char* destFilePath);
 
     /**
      * @brief   Saves the image as TGA.

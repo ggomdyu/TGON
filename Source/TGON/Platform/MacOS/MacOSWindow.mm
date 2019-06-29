@@ -144,19 +144,21 @@ void MacOSWindow::BringToFront()
 void MacOSWindow::SetPosition(int32_t x, int32_t y)
 {
     NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
-    NSRect windowFrameRect = [m_window frame];
+    NSRect windowRect = [m_window frame];
 
-    [m_window setFrameOrigin:NSMakePoint(static_cast<CGFloat>(x),(mainScreenRect.origin.y + mainScreenRect.size.height - windowFrameRect.size.height) - y)];
+    [m_window setFrameOrigin:NSMakePoint(static_cast<CGFloat>(x),(mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - y)];
 }
 
-void MacOSWindow::SetSize(int32_t width, int32_t height)
+void MacOSWindow::SetContentSize(int32_t width, int32_t height)
 {
-    NSRect currentFrameSize = [m_window frame];
-    currentFrameSize.origin.y += currentFrameSize.size.height - static_cast<CGFloat>(height);
-    currentFrameSize.size.width = static_cast<CGFloat>(width);
-    currentFrameSize.size.height = static_cast<CGFloat>(height);
-
-    [m_window setFrame:currentFrameSize display:YES animate:NO];
+    NSRect windowRect = [m_window frame];
+    windowRect.size.width = static_cast<CGFloat>(width);
+    windowRect.size.height = static_cast<CGFloat>(height);
+    
+    NSRect clientRect = [m_window frameRectForContentRect:windowRect];
+    clientRect.origin.y += clientRect.size.height - static_cast<CGFloat>(height);
+    
+    [m_window setContentSize:NSMakeSize(clientRect.size.width, clientRect.size.height)];
 }
 
 void MacOSWindow::SetTitle(const char* title)
@@ -187,27 +189,27 @@ void MacOSWindow::SetTransparency(float transparency)
 
 void MacOSWindow::GetPosition(int32_t* destX, int32_t* destY) const
 {
-    NSRect visibleMainScreenFrameRect = [[NSScreen mainScreen] visibleFrame];
-    NSRect currentWindowFrameRect = [m_window frame];
+    NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
+    NSRect windowRect = [m_window frame];
 
-    *destX = static_cast<int32_t>(currentWindowFrameRect.origin.x);
-    *destY = static_cast<int32_t>((visibleMainScreenFrameRect.origin.y + visibleMainScreenFrameRect.size.height - currentWindowFrameRect.size.height) - currentWindowFrameRect.origin.y);
+    *destX = static_cast<int32_t>(windowRect.origin.x);
+    *destY = static_cast<int32_t>((mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - windowRect.origin.y);
 }
 
 void MacOSWindow::GetExtent(int32_t* destWidth, int32_t* destHeight) const
 {
-    NSRect currentFrameSize = [m_window frame];
-
-    *destWidth = static_cast<int32_t>(currentFrameSize.size.width);
-    *destHeight = static_cast<int32_t>(currentFrameSize.size.height);
+    auto windowRect = [m_window frame];
+    
+    *destWidth = static_cast<int32_t>(windowRect.size.width);
+    *destHeight = static_cast<int32_t>(windowRect.size.height);
 }
 
-void MacOSWindow::GetTitle(char* destCaptionTitle) const
+void MacOSWindow::GetTitle(char* destTitle) const
 {
-    const char* utf8Str = [[m_window title] UTF8String];
-    std::size_t utf8StrLen = strlen(utf8Str) + 1;
+    const char* str = [[m_window title] UTF8String];
+    size_t strBytes = [[m_window title] lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
 
-    std::memcpy(destCaptionTitle, utf8Str, utf8StrLen + 1);
+    memcpy(destTitle, str, strBytes + 1);
 }
 
 void* MacOSWindow::GetNativeWindow() const

@@ -132,7 +132,7 @@ Font::Font(const StringHash& filePath, FT_Library library) :
         FILE * file = nullptr;
         fopen_s(&file, filePath.CStr(), "rb");
 #else
-        FILE* file = fopen(filePath, "rb");
+        FILE* file = fopen(filePath.CStr(), "rb");
 #endif
         if (file == nullptr)
         {

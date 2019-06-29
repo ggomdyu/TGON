@@ -44,13 +44,13 @@ void WindowsWindow::Flash()
     fwi.hwnd = m_wndHandle;
     fwi.uCount = 1;
 
-    ::FlashWindowEx(&fwi);
+    FlashWindowEx(&fwi);
 }
 
 void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 {
-    ::RECT rt;
-    ::GetWindowRect(m_wndHandle, &rt);
+    RECT rt;
+    GetWindowRect(m_wndHandle, &rt);
 
     *x = rt.left;
     *y = rt.top;
@@ -58,19 +58,19 @@ void WindowsWindow::GetPosition(int32_t* x, int32_t* y) const
 
 void WindowsWindow::GetExtent(int32_t* width, int32_t* height) const
 {
-    ::RECT rt;
-    ::GetClientRect(m_wndHandle, &rt);
+    RECT rt;
+    GetClientRect(m_wndHandle, &rt);
 
     *width = rt.right;
     *height = rt.bottom;
 }
 
-void WindowsWindow::GetTitle(char* destStr) const
+void WindowsWindow::GetTitle(char* destTitle) const
 {
     wchar_t utf16Title[256] {};
     int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
 
-    UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Title, utf16TitleLen), destStr, 256);
+    UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Title, utf16TitleLen), destTitle, 256);
 }
 
 bool WindowsWindow::IsResizable() const
@@ -121,12 +121,12 @@ void WindowsWindow::SetRawWindowStyleEx(DWORD rawWindowStyleEx)
 
 LONG_PTR WindowsWindow::GetRawWindowStyle() const
 {
-    return ::GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
+    return GetWindowLongPtrW(m_wndHandle, GWL_STYLE);
 }
 
 LONG_PTR WindowsWindow::GetRawWindowStyleEx() const
 {
-    return ::GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
+    return GetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE);
 }
 
 void* WindowsWindow::GetNativeWindow() const
@@ -136,42 +136,42 @@ void* WindowsWindow::GetNativeWindow() const
 
 void WindowsWindow::Show()
 {
-    ::ShowWindow(m_wndHandle, SW_NORMAL);
+    ShowWindow(m_wndHandle, SW_NORMAL);
 }
 
 void WindowsWindow::Hide()
 {
-    ::ShowWindow(m_wndHandle, SW_HIDE);
+    ShowWindow(m_wndHandle, SW_HIDE);
 }
 
 void WindowsWindow::Maximize()
 {
-    ::ShowWindow(m_wndHandle, SW_MAXIMIZE);
+    ShowWindow(m_wndHandle, SW_MAXIMIZE);
 }
 
 void WindowsWindow::Minimize()
 {
-    ::ShowWindow(m_wndHandle, SW_MINIMIZE);
+    ShowWindow(m_wndHandle, SW_MINIMIZE);
 }
 
 void WindowsWindow::Close()
 {
-    ::DestroyWindow(m_wndHandle);
+    DestroyWindow(m_wndHandle);
 }
 
 void WindowsWindow::SetPosition(int32_t x, int32_t y)
 {
-    ::SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+    SetWindowPos(m_wndHandle, nullptr, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void WindowsWindow::SetSize(int32_t width, int32_t height)
+void WindowsWindow::SetContentSize(int32_t width, int32_t height)
 {
-    ::RECT rt{0, 0, width, height};
+    RECT rt{0, 0, width, height};
 
-    ::DWORD rawWindowStyle = this->GetRawWindowStyle();
-    ::DWORD rawExtendedWindowStyle = this->GetRawWindowStyleEx();
+    DWORD rawWindowStyle = this->GetRawWindowStyle();
+    DWORD rawExtendedWindowStyle = this->GetRawWindowStyleEx();
 
-    ::AdjustWindowRectEx(&rt, rawWindowStyle, ::GetMenu(m_wndHandle) != nullptr, rawExtendedWindowStyle);
+    AdjustWindowRectEx(&rt, rawWindowStyle, GetMenu(m_wndHandle) != nullptr, rawExtendedWindowStyle);
 
     if (rawWindowStyle & WS_VSCROLL)
     {
@@ -183,7 +183,7 @@ void WindowsWindow::SetSize(int32_t width, int32_t height)
         rt.bottom += GetSystemMetrics(SM_CYVSCROLL);
     }
 
-    ::SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
+    SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
 void WindowsWindow::SetTitle(const std::string_view& captionTitle)
@@ -194,13 +194,13 @@ void WindowsWindow::SetTitle(const std::string_view& captionTitle)
     bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(captionTitle, utf16Title, std::extent_v<decltype(utf16Title)>) != -1;
     if (isConvertSucceed)
     {
-        ::SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));
+        SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));
     }
 }
 
 void WindowsWindow::SetTopMost(bool setTopMost)
 {
-    ::SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+    SetWindowPos(m_wndHandle, setTopMost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 }
 
 void WindowsWindow::SetTransparency(float transparency)
@@ -211,13 +211,13 @@ void WindowsWindow::SetTransparency(float transparency)
         this->SetRawWindowStyleEx(rawExtendedWindowStyle | WS_EX_LAYERED);
     }
 
-    ::SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);
+    SetLayeredWindowAttributes(m_wndHandle, 0, static_cast<BYTE>(transparency * 255.0f), LWA_ALPHA);
 }
 
 float WindowsWindow::GetTransparency() const
 {
     BYTE transparency;
-    ::GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
+    GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
 
     return transparency / 255.0f;
 }

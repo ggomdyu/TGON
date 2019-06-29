@@ -44,7 +44,7 @@ public:
     using PlatformWindow::Minimize;
     using PlatformWindow::BringToFront;
     using PlatformWindow::SetPosition;
-    using PlatformWindow::SetSize;
+    using PlatformWindow::SetContentSize;
     using PlatformWindow::SetTitle;
     using PlatformWindow::SetTopMost;
     using PlatformWindow::SetTransparency;

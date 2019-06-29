@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-AudioBuffer::AudioBuffer() noexcept :
+AudioBuffer::AudioBuffer() :
     m_audioDataBytes(0),
     m_bitsPerSample(0),
     m_channels(0),

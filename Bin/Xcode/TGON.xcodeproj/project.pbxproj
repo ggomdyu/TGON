@@ -664,8 +664,6 @@
 		FDB7036522B6B30C0055FCED /* ftzconf.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035622B6B30C0055FCED /* ftzconf.h */; };
 		FDB7036622B6B30C0055FCED /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035722B6B30C0055FCED /* inftrees.h */; };
 		FDB7036822B6B3420055FCED /* infcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036722B6B3410055FCED /* infcodes.h */; };
-		FDB7036B22B910E90055FCED /* TextureAtlasTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */; };
-		FDB7036C22B910E90055FCED /* TextureAtlasTree.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036A22B910E90055FCED /* TextureAtlasTree.h */; };
 		FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036E22B9132A0055FCED /* StaticInvoke.h */; };
 		FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036F22B9132A0055FCED /* InstantiateCounter.h */; };
 		FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037022B9132A0055FCED /* EventDispatcher.h */; };
@@ -673,6 +671,8 @@
 		FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7037222B9132A0055FCED /* EventDispatcher.cpp */; };
 		FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037322B9132B0055FCED /* InstanceCounter.h */; };
 		FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037422B9132B0055FCED /* AutoCast.h */; };
+		FDB7038A22C289B40055FCED /* TextureAtlasTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */; };
+		FDB7038B22C289B40055FCED /* TextureAtlasTree.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7038922C289B40055FCED /* TextureAtlasTree.h */; };
 		FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */; };
 		FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBDAD7922971A52003B9256 /* DispatchQueue.h */; };
 		FDC02CE0228482F000BEE91A /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02CDE228482F000BEE91A /* Hash.h */; };
@@ -1545,8 +1545,6 @@
 		FDB7035622B6B30C0055FCED /* ftzconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftzconf.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/ftzconf.h"; sourceTree = "<group>"; };
 		FDB7035722B6B30C0055FCED /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inftrees.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/inftrees.h"; sourceTree = "<group>"; };
 		FDB7036722B6B3410055FCED /* infcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = infcodes.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/infcodes.h"; sourceTree = "<group>"; };
-		FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlasTree.cpp; sourceTree = "<group>"; };
-		FDB7036A22B910E90055FCED /* TextureAtlasTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlasTree.h; sourceTree = "<group>"; };
 		FDB7036E22B9132A0055FCED /* StaticInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticInvoke.h; path = ../../../Source/TGON/Misc/StaticInvoke.h; sourceTree = "<group>"; };
 		FDB7036F22B9132A0055FCED /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../../Source/TGON/Misc/InstantiateCounter.h; sourceTree = "<group>"; };
 		FDB7037022B9132A0055FCED /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = ../../../Source/TGON/Misc/EventDispatcher.h; sourceTree = "<group>"; };
@@ -1554,6 +1552,8 @@
 		FDB7037222B9132A0055FCED /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = ../../../Source/TGON/Misc/EventDispatcher.cpp; sourceTree = "<group>"; };
 		FDB7037322B9132B0055FCED /* InstanceCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstanceCounter.h; path = ../../../Source/TGON/Misc/InstanceCounter.h; sourceTree = "<group>"; };
 		FDB7037422B9132B0055FCED /* AutoCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCast.h; path = ../../../Source/TGON/Misc/AutoCast.h; sourceTree = "<group>"; };
+		FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlasTree.cpp; sourceTree = "<group>"; };
+		FDB7038922C289B40055FCED /* TextureAtlasTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlasTree.h; sourceTree = "<group>"; };
 		FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
 		FDBDAD7922971A52003B9256 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		FDC02B49228481EF00BEE91A /* MacOSLog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLog.mm; sourceTree = "<group>"; };
@@ -2995,6 +2995,8 @@
 				FDC02B6C228481EF00BEE91A /* TextureType.h */,
 				FDC02B66228481EF00BEE91A /* Texture.cpp */,
 				FDC02B77228481EF00BEE91A /* Texture.h */,
+				FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */,
+				FDB7038922C289B40055FCED /* TextureAtlasTree.h */,
 				FDC02B71228481EF00BEE91A /* FVF.h */,
 				FDC02B74228481EF00BEE91A /* Model.cpp */,
 				FDC02B73228481EF00BEE91A /* Model.h */,
@@ -3164,8 +3166,6 @@
 				FDC02C54228481F000BEE91A /* Image.h */,
 				FD53333122A5834A001EB57C /* FontFactory.cpp */,
 				FD53333022A5834A001EB57C /* FontFactory.h */,
-				FDB7036922B910E90055FCED /* TextureAtlasTree.cpp */,
-				FDB7036A22B910E90055FCED /* TextureAtlasTree.h */,
 			);
 			name = Drawing;
 			path = ../../Source/TGON/Drawing;
@@ -3456,6 +3456,7 @@
 				FDB700BA22B69D1F0055FCED /* uclean.h in Headers */,
 				FD53333222A5834A001EB57C /* FontFactory.h in Headers */,
 				FD53329D22A2EA1C001EB57C /* ftbbox.h in Headers */,
+				FDB7038B22C289B40055FCED /* TextureAtlasTree.h in Headers */,
 				FD53332722A57F38001EB57C /* inflate.h in Headers */,
 				FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */,
 				FD5332C822A2EA1C001EB57C /* ftrfork.h in Headers */,
@@ -3633,7 +3634,6 @@
 				FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */,
 				FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */,
 				FD5332A522A2EA1C001EB57C /* psaux.h in Headers */,
-				FDB7036C22B910E90055FCED /* TextureAtlasTree.h in Headers */,
 				FD5332A822A2EA1C001EB57C /* autohint.h in Headers */,
 				FD5332A222A2EA1C001EB57C /* ftdrv.h in Headers */,
 				FDB7029B22B69D600055FCED /* bmpset.h in Headers */,
@@ -3902,7 +3902,6 @@
 				FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */,
 				FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */,
 				FD78AC032289C4DF00D22E46 /* window.c in Sources */,
-				FDB7036B22B910E90055FCED /* TextureAtlasTree.cpp in Sources */,
 				FDB702F122B69D600055FCED /* ubiditransform.cpp in Sources */,
 				FDC02D20228487D500BEE91A /* MacOSLog.mm in Sources */,
 				FDB7029122B69D600055FCED /* ucnv.cpp in Sources */,
@@ -4148,6 +4147,7 @@
 				FDB7028422B69D600055FCED /* ustr_wcs.cpp in Sources */,
 				FD4C1DD9219F3F7C00B2B2BE /* GainputButtonStickGesture.cpp in Sources */,
 				FD4C1DDA219F3F7C00B2B2BE /* GainputDoubleClickGesture.cpp in Sources */,
+				FDB7038A22C289B40055FCED /* TextureAtlasTree.cpp in Sources */,
 				FDB702E822B69D600055FCED /* utrace.cpp in Sources */,
 				FDB7023622B69D600055FCED /* uchar.cpp in Sources */,
 				FDB7024322B69D600055FCED /* uobject.cpp in Sources */,
