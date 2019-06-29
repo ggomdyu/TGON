@@ -52,5 +52,5 @@ private:
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent3;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent4;
     std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent5;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeOutSpriteComponent;
+    //std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeOutSpriteComponent;
 };

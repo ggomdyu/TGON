@@ -50,6 +50,9 @@ public:
     
     /**@brief   Changes rendering pipeline state to not use the texture. */
     void Unuse();
+
+    /**@brief   Checks the texture was created successfully. */
+    bool IsValid() const;
     
     /**@brief   Sets the image data into the buffer. */
     void SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);

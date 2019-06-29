@@ -17,7 +17,7 @@ struct WindowStyle final
 
     int32_t x = 100;
     int32_t y = 100;
-    int32_t width = 1024;
+    int32_t width = 512;
     int32_t height = 512;
 
     bool hasCaption = true;

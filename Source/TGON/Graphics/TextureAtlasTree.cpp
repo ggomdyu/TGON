@@ -11,7 +11,7 @@ TextureAltasNode::TextureAltasNode(const I32Rect& rect) :
 {
 }
 
-TextureAltasNode* TextureAltasNode::Insert(const I32Rect& image, int32_t paddingOffset, int32_t id)
+TextureAltasNode* TextureAltasNode::Insert(KeyType key, const I32Extent2D& size, int32_t paddingOffset)
 {
     if (this->IsLeafNode())
     {
@@ -21,8 +21,8 @@ TextureAltasNode* TextureAltasNode::Insert(const I32Rect& image, int32_t padding
             return nullptr;
         }
 
-        int32_t paddedImageWidth = image.width + paddingOffset;
-        int32_t paddedImageHeight = image.height + paddingOffset;
+        int32_t paddedImageWidth = size.width + paddingOffset;
+        int32_t paddedImageHeight = size.height + paddingOffset;
         if (rect.width < paddedImageWidth || rect.height < paddedImageHeight)
         {
             return nullptr;
@@ -30,7 +30,7 @@ TextureAltasNode* TextureAltasNode::Insert(const I32Rect& image, int32_t padding
         
         if (rect.width == paddedImageWidth && rect.height == paddedImageHeight)
         {
-            this->id = id;
+            this->id = key;
             return this;
         }
 
@@ -45,14 +45,14 @@ TextureAltasNode* TextureAltasNode::Insert(const I32Rect& image, int32_t padding
             right = std::make_unique<TextureAltasNode>(I32Rect(rect.x, rect.y + paddedImageHeight, rect.width, rect.height - paddedImageHeight));
         }
         
-        return left->Insert(image, paddingOffset, id);
+        return left->Insert(key, size, paddingOffset);
     }
     else
     {
-        auto insertedNode = left->Insert(image, paddingOffset, id);
+        auto insertedNode = left->Insert(key, size, paddingOffset);
         if (insertedNode == nullptr)
         {
-            insertedNode = right->Insert(image, paddingOffset, id);
+            insertedNode = right->Insert(key, size, paddingOffset);
         }
 
         return insertedNode;
@@ -72,9 +72,9 @@ TextureAtlasTree::TextureAtlasTree(const I32Extent2D& textureAtlasSize, int32_t 
 {
 }
 
-bool TextureAtlasTree::Insert(const I32Rect& textureSize, int32_t id)
+TextureAtlasTree::IteratorType TextureAtlasTree::Insert(KeyType id, const I32Extent2D& size)
 {
-    return m_rootNode.Insert(textureSize, m_paddingOffset, id) != nullptr;
+    return m_rootNode.Insert(id, size, m_paddingOffset);
 }
 
 int32_t TextureAtlasTree::GetPaddingOffset() const noexcept
@@ -91,5 +91,28 @@ TextureAltasNode* TextureAtlasTree::GetRootNode() noexcept
 {
     return &m_rootNode;
 }
+
+//static _Rb_tree_node_base*
+//local_Rb_tree_increment(_Rb_tree_node_base* __x) throw ()
+//{
+//    if (__x->_M_right != 0)
+//    {
+//        __x = __x->_M_right;
+//        while (__x->_M_left != 0)
+//            __x = __x->_M_left;
+//    }
+//    else
+//    {
+//        _Rb_tree_node_base* __y = __x->_M_parent;
+//        while (__x == __y->_M_right)
+//        {
+//            __x = __y;
+//            __y = __y->_M_parent;
+//        }
+//        if (__x->_M_right != __y)
+//            __x = __y;
+//    }
+//    return __x;
+//}
 
 } /* namespace tgon */

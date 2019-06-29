@@ -100,6 +100,11 @@ void OpenGLTexture::Unuse()
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
+bool OpenGLTexture::IsValid() const
+{
+    return glIsTexture(m_textureHandle);
+}
+
 void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);

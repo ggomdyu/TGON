@@ -28,6 +28,7 @@ public:
     
     using PlatformTexture::Use;
     using PlatformTexture::Unuse;
+    using PlatformTexture::IsValid;
     using PlatformTexture::SetData;
     using PlatformTexture::SetFilterMode;
     using PlatformTexture::SetWrapMode;

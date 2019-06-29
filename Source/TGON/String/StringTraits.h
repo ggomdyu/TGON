@@ -11,6 +11,7 @@
 #include <cctype>
 #include <string_view>
 #include <memory>
+#include <string_view>
 
 namespace tgon
 {
@@ -246,14 +247,15 @@ public:
      * @param [in] formatStr    The format string.
      * @return  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
-    static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, ...);
+    static std::basic_string_view<_CharType> Format(const _CharType* formatStr, ...);
     
+private:
     /**
      * @brief   Replaces each format item in formatStr to text.
      * @param [in] formatStr    The format string.
      * @return  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
      */
-    static std::pair<const _CharType*, std::size_t> Format(const _CharType* formatStr, std::va_list vaList);
+    static std::basic_string_view<_CharType> Format(const _CharType* formatStr, std::va_list vaList);
 
 /**@section Variable */
 public:
@@ -444,39 +446,40 @@ inline bool BasicStringTraits<_CharType>::IsNullOrEmpty(const _CharType* srcStr)
 }
     
 template <typename _CharType>
-inline std::pair<const _CharType*, std::size_t> BasicStringTraits<_CharType>::Format(const _CharType* formatStr, ...)
+inline std::basic_string_view<_CharType> BasicStringTraits<_CharType>::Format(const _CharType* formatStr, ...)
 {
     std::va_list vaList;
     va_start(vaList, formatStr);
+
     return Format(formatStr, vaList);
 }
-    
+
 template <>
-inline std::pair<const char*, std::size_t> BasicStringTraits<char>::Format(const char* formatStr, std::va_list vaList)
+inline std::string_view BasicStringTraits<char>::Format(const char* formatStr, std::va_list vaList)
 {
-    constexpr std::size_t strBufferLen = 1024 * 8;
-    thread_local static std::unique_ptr<char[]> strBuffer(new char[strBufferLen] {});
+    constexpr std::size_t strBufferSize = 1024 * 8;
+    thread_local static std::unique_ptr<char[]> strBuffer(new char[strBufferSize] {});
 
 #ifdef _MSC_VER
-    int strLen = vsprintf_s(strBuffer.get(), strBufferLen, formatStr, vaList);
+    int strLen = vsprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
 #else
     int strLen = vsprintf(strBuffer.get(), formatStr, vaList);
 #endif
-    return {strBuffer.get(), strLen};
+    return std::string_view(strBuffer.get(), strLen);
 }
     
 template <>
-inline std::pair<const wchar_t*, std::size_t> BasicStringTraits<wchar_t>::Format(const wchar_t* formatStr, std::va_list vaList)
+inline std::wstring_view BasicStringTraits<wchar_t>::Format(const wchar_t* formatStr, std::va_list vaList)
 {
-    constexpr std::size_t strBufferLen = 1024 * 8;
-    thread_local static std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferLen] {});
+    constexpr std::size_t strBufferSize = 1024 * 8;
+    thread_local static std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferSize] {});
     
 #ifdef _MSC_VER
-    int strLen = vswprintf_s(strBuffer.get(), strBufferLen, formatStr, vaList);
+    int strLen = vswprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
 #else
     int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
 #endif
-    return {strBuffer.get(), strLen};
+    return std::wstring_view(strBuffer.get(), strLen);
 }
 
 } /* namespace tgon */
