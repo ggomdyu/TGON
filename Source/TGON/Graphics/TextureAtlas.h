@@ -1,0 +1,58 @@
+/**
+ * @file    TextureAtlasTree.h
+ * @author  ggomdyu
+ * @since   06/18/2019
+ * @see     http://blackpawn.com/texts/lightmaps/
+ */
+
+#pragma once
+#include <unordered_map>
+#include <boost/noncopyable.hpp>
+#include <stb/stb_rect_pack.h>
+
+#include "Math/Rect.h"
+#include "Math/Extent.h"
+
+#include "Texture.h"
+
+namespace tgon
+{
+
+class TGON_API TextureAtlas :
+    private boost::noncopyable
+{
+/**@section Struct */
+public:
+    struct PackedTextureDesc
+    {
+        I32Rect rect;
+        std::shared_ptr<Texture> texture;
+    };
+
+/**@section Constructor */
+public:
+    TextureAtlas(const I32Extent2D& atlasSize, int32_t paddingOffset = 2);
+
+/**@section Method */
+public:
+    bool Insert(const StringViewHash& name, const std::shared_ptr<Texture>& texture);
+    bool Insert(const std::initializer_list<std::pair<StringViewHash, std::shared_ptr<Texture>>>& textureDescs);
+    std::shared_ptr<const Texture> GetTexture(const StringViewHash& name) const;
+    std::shared_ptr<Texture> GetTexture(const StringViewHash& name);
+    const I32Rect& GetTextureRect(const StringViewHash& name) const;
+    bool IsExist(const Texture& texture);
+    bool IsExist(const std::string_view& name);
+    int32_t GetTextureCount() const noexcept;
+    int32_t GetPaddingOffset() const noexcept;
+    I32Extent2D GetAtlasSize() const noexcept;
+
+/**@section Variable */
+private:
+    stbrp_context m_context;
+    stbrp_node m_nodes[4096];
+    stbrp_rect m_nodeRects[std::extent<decltype(m_nodes)>::value];
+    mutable std::unordered_map<size_t, PackedTextureDesc> m_textures;
+    int32_t m_paddingOffset;
+};
+
+} /* namespace tgon */

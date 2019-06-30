@@ -266,6 +266,9 @@ public:
     static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
 };
 
+using StringTraits = BasicStringTraits<char>;
+using WStringTraits = BasicStringTraits<wchar_t>;
+
 template <typename _CharType>
 inline BasicStringTraits<_CharType>::BasicStringTraits(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen)
 {

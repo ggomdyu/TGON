@@ -34,7 +34,7 @@ public:
     {
     }
 
-    constexpr BaseBasicStringHash(uint32_t hashCode) noexcept :
+    constexpr BaseBasicStringHash(size_t hashCode) noexcept :
         m_hashCode(hashCode)
     {
     }

@@ -22,7 +22,7 @@ public:
 /* @section Method */
 public:
     /**@brief   Returns unique hash code for each type. */
-    std::size_t GetHashCode() const noexcept;
+    size_t GetHashCode() const noexcept;
     
     /**@brief   Returns the type name of RTTI owner. */
     const char* GetName() const noexcept;

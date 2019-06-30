@@ -34,9 +34,6 @@
     <Filter Include="Source\ThirdParty\zlib-1.2.11">
       <UniqueIdentifier>{ad986e51-604c-47ac-905e-07d60be4befe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\ThirdParty\lpng1637">
-      <UniqueIdentifier>{e0110d83-29a3-4f33-9c35-c5e4bfb81ad7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON">
       <UniqueIdentifier>{233c58eb-b0e3-4c39-8d23-28c7963d79c9}</UniqueIdentifier>
     </Filter>
@@ -476,54 +473,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.cpp">
       <Filter>Source\TGON\Drawing</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngerror.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngget.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngmem.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngpread.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngread.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrio.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrtran.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngrutil.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngset.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngtest.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngtrans.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwio.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwrite.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwtran.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\pngwutil.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\lpng1637\png.c">
-      <Filter>Source\ThirdParty\lpng1637</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\Encoding.cpp">
       <Filter>Source\TGON\String</Filter>
@@ -1101,7 +1050,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\EventDispatcher.cpp">
       <Filter>Source\TGON\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlasTree.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.cpp">
       <Filter>Source\TGON\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2564,7 +2513,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Misc\ExpressionTemplate.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlasTree.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
