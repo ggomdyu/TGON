@@ -21,7 +21,7 @@ enum class ThreadPriority
 };
 
 class TGON_API Thread :
-    public std::thread
+    private std::thread
 {
 /**@section Type */
 public:
