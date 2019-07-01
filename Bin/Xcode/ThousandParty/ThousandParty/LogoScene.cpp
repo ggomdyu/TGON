@@ -271,30 +271,17 @@ void LogoScene::InitPhase4()
     auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    auto texture = std::make_shared<Texture>( nullptr, I32Extent2D( 512, 512 ), PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false );
-    const char chArray[] = "ABC";
-    /*for (auto ch : chArray)
-    {
-        auto& glyphData = font->GetGlyphData(ch, 30);
-        auto begin = std::chrono::high_resolution_clock::now();
-        auto iter = tat.Insert(ch, glyphData.size);
-        n += (std::chrono::high_resolution_clock::now() - begin).count();
-
-        texture->SetData(glyphData.bitmap.get(), Vector2(iter->rect.x, iter->rect.y), glyphData.size, PixelFormat::R8);
-    }*/
-
-    TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, false);
-
+    const wchar_t chArray[] = L"가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅢㅟㅝㅞㅖㅐ½⅓⅔¼¾⅛⅝⅞๑•ิ.•ั๑๑۩۞۩๑♬✿.｡.:*εїз℡❣·۰•○○○ōゃ♥♡๑۩ﺴ☞☜☎☏♡⊙◎☺☻✖╄ஐ가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲ";
+    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, false);
     for (auto ch : chArray)
     {
         const auto& glyphData = font->GetGlyphData(ch, 30);
-        textureAtlas.Insert(StringViewHash(&ch), Image(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
-        break;
+
+
+        textureAtlas.Insert(StringViewHash(&ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
     }
 
-    //texture->SetData(glyphData.bitmap.get(), Vector2(rect.x, rect.y), glyphData.size, PixelFormat::R8);
-
-    spriteComponent->SetSprite( std::make_shared<CanvasSprite>( texture ) );
+    spriteComponent->SetSprite( std::make_shared<CanvasSprite>(textureAtlas.GetAtlasTexture()) );
     this->AddObject( object );
 
 }

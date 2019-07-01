@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 
 #include "OpenGLFontTexture.h"
 #include "OpenGLDebug.h"

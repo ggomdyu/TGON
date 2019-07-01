@@ -120,4 +120,54 @@ private:
     PixelFormat m_pixelFormat;
 };
 
+class TGON_API ImageView
+{
+/**@section Constructor */
+public:
+    /**
+     * @brief   Initializes with the decoded image data.
+     * @param [in] imageData    The pointer to the decoded image data.
+     * @param [in] size         The size of the image.
+     * @param [in] pixelFormat  The type of the pixel encoding.
+     */
+    ImageView(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
+
+    /**
+     * @brief   Initializes with the image.
+     * @param [in] imageData    The reference to the image.
+     */
+    ImageView(Image& image);
+    
+/**@section Operator */
+public:
+    /**@brief   Gets the raw pointer of image. */
+    uint8_t& operator[](std::size_t index);
+
+    /**@brief   Gets the raw pointer of image. */
+    const uint8_t operator[](std::size_t index) const;
+
+/**@section Method */
+public:
+    /**@brief   Gets the decoded raw image data. */
+    uint8_t* GetImageData() noexcept;
+
+    /**@brief   Gets the decoded raw image data. */
+    const uint8_t* GetImageData() const noexcept;
+
+    /**@brief   Gets the image size. */
+    const I32Extent2D& GetSize() const noexcept;
+
+    /**@brief   Gets the count of color channel. */
+    int32_t GetChannels() const noexcept;
+
+    /**@brief   Gets the pixel format of image. */
+    PixelFormat GetPixelFormat() const noexcept;
+
+/**@section Variable */
+public:
+    uint8_t* m_imageData;
+    I32Extent2D m_size;
+    PixelFormat m_pixelFormat;
+};
+
 } /* namespace tgon */

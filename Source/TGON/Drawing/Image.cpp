@@ -101,7 +101,7 @@ const I32Extent2D& Image::GetSize() const noexcept
 
 int32_t Image::GetChannels() const noexcept
 {
-    return 4;
+    return ConvertPixelFormatToBytesPerPixel(m_pixelFormat);
 }
 
 PixelFormat Image::GetPixelFormat() const noexcept
@@ -127,6 +127,55 @@ bool Image::SaveAsBmp(const char* saveFilePath)
 bool Image::SaveAsTga(const char* saveFilePath)
 {
     return stbi_write_tga(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
+}
+
+ImageView::ImageView(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
+    m_imageData(imageData),
+    m_size(size),
+    m_pixelFormat(pixelFormat)
+{
+}
+
+ImageView::ImageView(Image& image) :
+    m_imageData(image.GetImageData().get()),
+    m_size(image.GetSize()),
+    m_pixelFormat(image.GetPixelFormat())
+{
+}
+
+uint8_t& ImageView::operator[](std::size_t index)
+{
+    return m_imageData[index];
+}
+
+const uint8_t ImageView::operator[](std::size_t index) const
+{
+    return m_imageData[index];
+}
+
+uint8_t* ImageView::GetImageData() noexcept
+{
+    return m_imageData;
+}
+
+const uint8_t* ImageView::GetImageData() const noexcept
+{
+    return m_imageData;
+}
+
+const I32Extent2D& ImageView::GetSize() const noexcept
+{
+    return m_size;
+}
+
+int32_t ImageView::GetChannels() const noexcept
+{
+    return ConvertPixelFormatToBytesPerPixel(m_pixelFormat);
+}
+
+PixelFormat ImageView::GetPixelFormat() const noexcept
+{
+    return m_pixelFormat;
 }
 
 } /* namespace tgon */

@@ -5,7 +5,7 @@
 #include <mutex>
 #include <iostream>
 
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 #include "String/Encoding.h"
 #include "String/StringTraits.h"
 

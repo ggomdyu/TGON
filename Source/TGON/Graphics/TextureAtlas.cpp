@@ -9,7 +9,7 @@ namespace tgon
 {
 
 TextureAtlas::TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, bool isStaticAtlas, int32_t paddingOffset) :
-    m_atlasTexture(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, !isStaticAtlas),
+    m_atlasTexture(std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, !isStaticAtlas)),
     m_context{},
     m_nodes{},
     m_paddingOffset(paddingOffset)
@@ -17,7 +17,7 @@ TextureAtlas::TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelF
     stbrp_init_target(&m_context, atlasSize.width, atlasSize.height, m_nodes, std::extent<decltype(m_nodes)>::value);
 }
 
-bool TextureAtlas::Insert(const StringViewHash& name, const Image& image)
+bool TextureAtlas::Insert(const StringViewHash& name, const ImageView& image)
 {
     stbrp_rect rect
     {
@@ -32,7 +32,7 @@ bool TextureAtlas::Insert(const StringViewHash& name, const Image& image)
     bool isPackingSucceed = stbrp_pack_rects(&m_context, &rect, 1) == 1;
     if (isPackingSucceed)
     {
-        m_atlasTexture.SetData(image.GetImageData().get(), Vector2(rect.x, rect.y), image.GetSize(), m_atlasTexture.GetPixelFormat());
+        m_atlasTexture->SetData(image.GetImageData(), Vector2(rect.x, rect.y), image.GetSize(), m_atlasTexture->GetPixelFormat());
         m_packedImageInfos.insert({name.GetHashCode(), I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w), int32_t(rect.h))});
         return true;
     }
@@ -40,7 +40,7 @@ bool TextureAtlas::Insert(const StringViewHash& name, const Image& image)
     return false;
 }
 
-bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, Image>>& imageDescs)
+bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs)
 {
     for (int32_t i = 0; i < imageDescs.size(); ++i)
     {
@@ -86,14 +86,19 @@ int32_t TextureAtlas::GetPaddingOffset() const noexcept
     return m_paddingOffset;
 }
 
-const Texture& TextureAtlas::GetAtlasTexture() const noexcept
+std::shared_ptr<const Texture> TextureAtlas::GetAtlasTexture() const noexcept
+{
+    return m_atlasTexture;
+}
+
+std::shared_ptr<Texture> TextureAtlas::GetAtlasTexture() noexcept
 {
     return m_atlasTexture;
 }
 
 const I32Extent2D& TextureAtlas::GetAtlasSize() const noexcept
 {
-    return m_atlasTexture.GetSize();
+    return m_atlasTexture->GetSize();
 }
 
 } /* namespace tgon */

@@ -54,7 +54,7 @@ OpenGLTexture::OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrap
 OpenGLTexture::OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
-    m_pixelBufferHandle(this->CreatePixelBufferHandle(size.width * size.height * GetBytesPerPixel(pixelFormat))),
+    m_pixelBufferHandle(this->CreatePixelBufferHandle(size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat))),
     m_pixelFormat(pixelFormat),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
@@ -112,9 +112,9 @@ void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, P
     {
         // Set image data into pixel buffer
         TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
-        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * GetBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
+        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
         uint8_t* pixelBufferPtr = TGON_GL_ERROR_CHECK(reinterpret_cast<uint8_t*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)));
-        memcpy(pixelBufferPtr, imageData, size.width * size.height * GetBytesPerPixel(pixelFormat));
+        memcpy(pixelBufferPtr, imageData, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat));
         TGON_GL_ERROR_CHECK(glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER));
     }
     else
@@ -163,11 +163,14 @@ GLuint OpenGLTexture::CreateTextureHandle() const
 
 GLuint OpenGLTexture::CreatePixelBufferHandle(int32_t bufferBytes) const
 {
-    GLuint pixelBufferHandle;
-    TGON_GL_ERROR_CHECK(glGenBuffers(1, &pixelBufferHandle));
-    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBufferHandle));
-    TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, static_cast<GLsizeiptr>(bufferBytes), nullptr, GL_STATIC_DRAW));
-    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0));
+    GLuint pixelBufferHandle = 0;
+    if constexpr (g_isUsePixelBuffer)
+    {
+        TGON_GL_ERROR_CHECK(glGenBuffers(1, &pixelBufferHandle));
+        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBufferHandle));
+        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, static_cast<GLsizeiptr>(bufferBytes), nullptr, GL_STATIC_DRAW));
+        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0));
+    }
 
     return pixelBufferHandle;
 }
