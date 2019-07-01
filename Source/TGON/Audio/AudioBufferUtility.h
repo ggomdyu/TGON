@@ -9,7 +9,7 @@
 
 #include "String/StringTraits.h"
 #include "String/Hash.h"
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 
 #include "AudioBufferType.h"
 

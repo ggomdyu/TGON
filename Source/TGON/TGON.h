@@ -43,7 +43,7 @@
 #include "Random/Random.h"
 #include "Random/WeightSelector.h"
 #include "IO/Path.h"
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/GraphicsType.h"
 #include "Graphics/Texture.h"

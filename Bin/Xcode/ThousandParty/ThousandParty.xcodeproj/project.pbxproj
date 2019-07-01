@@ -304,6 +304,7 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/stb",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -329,6 +330,7 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/stb",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -263,7 +263,7 @@ void LogoScene::InitPhase4()
 
     //TextureAtlasTree tat( I32Extent2D( 512, 512 ), 2 );
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/malgun.ttf" ) );
+    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
 
     auto object = std::make_shared<GameObject>( "introSprite1", new Transform() );
     object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
@@ -272,7 +272,7 @@ void LogoScene::InitPhase4()
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
     auto texture = std::make_shared<Texture>( nullptr, I32Extent2D( 512, 512 ), PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false );
-    const wchar_t chArray[] = L"가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅢㅟㅝㅞㅖㅐ½⅓⅔¼¾⅛⅝⅞๑•ิ.•ั๑๑۩۞۩๑♬✿.｡.:*εїз℡❣·۰•○○○ōゃ♥♡๑۩ﺴ☞☜☎☏♡⊙◎☺☻✖╄ஐ가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲ";
+    const char chArray[] = "ABC";
     /*for (auto ch : chArray)
     {
         auto& glyphData = font->GetGlyphData(ch, 30);
@@ -283,48 +283,15 @@ void LogoScene::InitPhase4()
         texture->SetData(glyphData.bitmap.get(), Vector2(iter->rect.x, iter->rect.y), glyphData.size, PixelFormat::R8);
     }*/
 
-   /* stbrp_context context;
-    constexpr int nodeCount = 4096;
-    stbrp_node nodes[nodeCount]{};
-    stbrp_init_target(&context, 512, 512, nodes, nodeCount);
-    int32_t rectId = 0;
+    TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, false);
+
     for (auto ch : chArray)
     {
-        auto& glyphData = font->GetGlyphData(ch, 30);
-        stbrp_rect rect{};
-        rect.id = rectId;
-        rect.w = glyphData.size.width + 2;
-        rect.h = glyphData.size.height + 2;
-        rect.x = 0;
-        rect.y = 0;
-        rect.was_packed = 0;
-        stbrp_pack_rects(&context, &rect, 1);
-
-        texture->SetData(glyphData.bitmap.get(), Vector2(rect.x, rect.y), glyphData.size, PixelFormat::R8);
-    
-        ++rectId;
+        const auto& glyphData = font->GetGlyphData(ch, 30);
+        textureAtlas.Insert(StringViewHash(&ch), Image(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
+        break;
     }
-    */
 
-    stbrp_context context;
-    constexpr int nodeCount = 4096;
-    stbrp_node nodes[nodeCount]{};
-    stbrp_init_target(&context, 512, 512, nodes, nodeCount);
-    int32_t rectId = 0;
-    stbrp_rect rect[nodeCount] {};
-    for (auto ch : chArray)
-    {
-        auto& glyphData = font->GetGlyphData(ch, 30);
-        rect[rectId].id = rectId;
-        rect[rectId].w = glyphData.size.width + 2;
-        rect[rectId].h = glyphData.size.height + 2;
-        rect[rectId].x = 0;
-        rect[rectId].y = 0;
-        rect[rectId].was_packed = 0;
-
-        ++rectId;
-    }
-    int n = stbrp_pack_rects(&context, rect, rectId);
     //texture->SetData(glyphData.bitmap.get(), Vector2(rect.x, rect.y), glyphData.size, PixelFormat::R8);
 
     spriteComponent->SetSprite( std::make_shared<CanvasSprite>( texture ) );

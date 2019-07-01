@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 
 #include "OpenGLTexture.h"
 #include "OpenGLDebug.h"
@@ -195,6 +195,11 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
 const I32Extent2D& OpenGLTexture::GetSize() const noexcept
 {
     return m_size;
+}
+    
+PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
+{
+    return m_pixelFormat;
 }
     
 } /* namespace tgon */

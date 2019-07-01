@@ -249,7 +249,6 @@ public:
      */
     static std::basic_string_view<_CharType> Format(const _CharType* formatStr, ...);
     
-private:
     /**
      * @brief   Replaces each format item in formatStr to text.
      * @param [in] formatStr    The format string.
@@ -480,7 +479,7 @@ inline std::wstring_view BasicStringTraits<wchar_t>::Format(const wchar_t* forma
 #ifdef _MSC_VER
     int strLen = vswprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
 #else
-    int strLen = vswprintf(strBuffer.get(), strBufferLen, formatStr, vaList);
+    int strLen = vswprintf(strBuffer.get(), strBufferSize, formatStr, vaList);
 #endif
     return std::wstring_view(strBuffer.get(), strLen);
 }

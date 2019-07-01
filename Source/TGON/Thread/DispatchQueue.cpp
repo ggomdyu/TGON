@@ -82,9 +82,9 @@ ConcurrentDispatchQueue::~ConcurrentDispatchQueue()
     
     for (auto& thread : m_threadPool)
     {
-        if (thread.joinable())
+        if (thread.Joinable())
         {
-            thread.join();
+            thread.Join();
         }
     }
 }

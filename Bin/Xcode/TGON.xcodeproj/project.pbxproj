@@ -248,6 +248,10 @@
 		FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CD2291D86000A829FD /* stb_vorbis.c */; };
 		FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CF22945BED00A829FD /* TaskModule.cpp */; };
 		FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61D022945BED00A829FD /* TaskModule.h */; };
+		FD9AEEC322CA45C5003607DC /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */; };
+		FD9AEEC422CA45C5003607DC /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC222CA45C5003607DC /* TextureAtlas.h */; };
+		FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC522CA606A003607DC /* Algorithm.h */; };
+		FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC722CA606E003607DC /* NonAddressable.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
@@ -671,8 +675,6 @@
 		FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7037222B9132A0055FCED /* EventDispatcher.cpp */; };
 		FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037322B9132B0055FCED /* InstanceCounter.h */; };
 		FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037422B9132B0055FCED /* AutoCast.h */; };
-		FDB7038A22C289B40055FCED /* TextureAtlasTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */; };
-		FDB7038B22C289B40055FCED /* TextureAtlasTree.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7038922C289B40055FCED /* TextureAtlasTree.h */; };
 		FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */; };
 		FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBDAD7922971A52003B9256 /* DispatchQueue.h */; };
 		FDC02CE0228482F000BEE91A /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02CDE228482F000BEE91A /* Hash.h */; };
@@ -1126,6 +1128,10 @@
 		FD7E61CD2291D86000A829FD /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../Source/ThirdParty/stb/stb_vorbis.c; sourceTree = "<group>"; };
 		FD7E61CF22945BED00A829FD /* TaskModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskModule.cpp; sourceTree = "<group>"; };
 		FD7E61D022945BED00A829FD /* TaskModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskModule.h; sourceTree = "<group>"; };
+		FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
+		FD9AEEC222CA45C5003607DC /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
+		FD9AEEC522CA606A003607DC /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithm.h; path = ../../../Source/TGON/Misc/Algorithm.h; sourceTree = "<group>"; };
+		FD9AEEC722CA606E003607DC /* NonAddressable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonAddressable.h; path = ../../../Source/TGON/Misc/NonAddressable.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		FDACD2EA20B4518A00C62C24 /* Cpp_Style_Guide(KR).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cpp_Style_Guide(KR).docx"; sourceTree = "<group>"; };
 		FDACD2EC20B4518A00C62C24 /* Windows_License_Notice.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Windows_License_Notice.docx; sourceTree = "<group>"; };
@@ -1552,8 +1558,6 @@
 		FDB7037222B9132A0055FCED /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = ../../../Source/TGON/Misc/EventDispatcher.cpp; sourceTree = "<group>"; };
 		FDB7037322B9132B0055FCED /* InstanceCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstanceCounter.h; path = ../../../Source/TGON/Misc/InstanceCounter.h; sourceTree = "<group>"; };
 		FDB7037422B9132B0055FCED /* AutoCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCast.h; path = ../../../Source/TGON/Misc/AutoCast.h; sourceTree = "<group>"; };
-		FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlasTree.cpp; sourceTree = "<group>"; };
-		FDB7038922C289B40055FCED /* TextureAtlasTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlasTree.h; sourceTree = "<group>"; };
 		FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
 		FDBDAD7922971A52003B9256 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		FDC02B49228481EF00BEE91A /* MacOSLog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLog.mm; sourceTree = "<group>"; };
@@ -1700,9 +1704,7 @@
 		FDC02CBA228481F100BEE91A /* ScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ScreenType.h; sourceTree = "<group>"; };
 		FDC02CBB228481F100BEE91A /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WindowType.h; sourceTree = "<group>"; };
 		FDC02CBF228481F100BEE91A /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Delegate.h; sourceTree = "<group>"; };
-		FDC02CC0228481F100BEE91A /* RAII.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RAII.h; sourceTree = "<group>"; };
 		FDC02CC1228481F100BEE91A /* RTTI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RTTI.h; sourceTree = "<group>"; };
-		FDC02CC2228481F100BEE91A /* Algorithm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Algorithm.h; sourceTree = "<group>"; };
 		FDC02CC3228481F100BEE91A /* TypeTraits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TypeTraits.h; sourceTree = "<group>"; };
 		FDC02CC5228481F100BEE91A /* CoreObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = CoreObject.h; sourceTree = "<group>"; };
 		FDC02CC6228481F100BEE91A /* RTTI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RTTI.cpp; sourceTree = "<group>"; };
@@ -1711,7 +1713,6 @@
 		FDC02CC9228481F100BEE91A /* DynamicCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DynamicCast.h; sourceTree = "<group>"; };
 		FDC02CCB228481F100BEE91A /* ISerializable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ISerializable.h; sourceTree = "<group>"; };
 		FDC02CCC228481F100BEE91A /* ICloneable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ICloneable.h; sourceTree = "<group>"; };
-		FDC02CCD228481F100BEE91A /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = NonAddressable.h; sourceTree = "<group>"; };
 		FDC02CCF228481F100BEE91A /* RuntimeObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RuntimeObject.h; sourceTree = "<group>"; };
 		FDC02CDE228482F000BEE91A /* Hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Hash.h; sourceTree = "<group>"; };
 		FDC02CDF228482F000BEE91A /* Hash.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Hash.cpp; sourceTree = "<group>"; };
@@ -2927,6 +2928,8 @@
 		FDB7036D22B9131F0055FCED /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				FD9AEEC522CA606A003607DC /* Algorithm.h */,
+				FD9AEEC722CA606E003607DC /* NonAddressable.h */,
 				FDB7037422B9132B0055FCED /* AutoCast.h */,
 				FDB7037222B9132A0055FCED /* EventDispatcher.cpp */,
 				FDB7037022B9132A0055FCED /* EventDispatcher.h */,
@@ -2995,8 +2998,8 @@
 				FDC02B6C228481EF00BEE91A /* TextureType.h */,
 				FDC02B66228481EF00BEE91A /* Texture.cpp */,
 				FDC02B77228481EF00BEE91A /* Texture.h */,
-				FDB7038822C289B40055FCED /* TextureAtlasTree.cpp */,
-				FDB7038922C289B40055FCED /* TextureAtlasTree.h */,
+				FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */,
+				FD9AEEC222CA45C5003607DC /* TextureAtlas.h */,
 				FDC02B71228481EF00BEE91A /* FVF.h */,
 				FDC02B74228481EF00BEE91A /* Model.cpp */,
 				FDC02B73228481EF00BEE91A /* Model.h */,
@@ -3303,17 +3306,14 @@
 		FDC02CBC228481F100BEE91A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02CC2228481F100BEE91A /* Algorithm.h */,
 				FDC02CBF228481F100BEE91A /* Delegate.h */,
 				FDC02CC8228481F100BEE91A /* DelegateChain.h */,
-				FDC02CC0228481F100BEE91A /* RAII.h */,
 				FDC02CC3228481F100BEE91A /* TypeTraits.h */,
 				FDC02CCF228481F100BEE91A /* RuntimeObject.h */,
 				FDC02CC5228481F100BEE91A /* CoreObject.h */,
 				FDC02CC1228481F100BEE91A /* RTTI.h */,
 				FDC02CC6228481F100BEE91A /* RTTI.cpp */,
 				FDC02CC9228481F100BEE91A /* DynamicCast.h */,
-				FDC02CCD228481F100BEE91A /* NonAddressable.h */,
 				FDC02CCB228481F100BEE91A /* ISerializable.h */,
 				FDC02CCC228481F100BEE91A /* ICloneable.h */,
 				FDC02CC7228481F100BEE91A /* IComparable.h */,
@@ -3454,9 +3454,9 @@
 				FDB7023222B69D600055FCED /* uelement.h in Headers */,
 				FDD4E0332287124800E26531 /* Transform.h in Headers */,
 				FDB700BA22B69D1F0055FCED /* uclean.h in Headers */,
+				FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */,
 				FD53333222A5834A001EB57C /* FontFactory.h in Headers */,
 				FD53329D22A2EA1C001EB57C /* ftbbox.h in Headers */,
-				FDB7038B22C289B40055FCED /* TextureAtlasTree.h in Headers */,
 				FD53332722A57F38001EB57C /* inflate.h in Headers */,
 				FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */,
 				FD5332C822A2EA1C001EB57C /* ftrfork.h in Headers */,
@@ -3683,6 +3683,7 @@
 				FDB700C922B69D1F0055FCED /* appendable.h in Headers */,
 				FD53328F22A2EA1C001EB57C /* ftwinfnt.h in Headers */,
 				FDB702B322B69D600055FCED /* capi_helper.h in Headers */,
+				FD9AEEC422CA45C5003607DC /* TextureAtlas.h in Headers */,
 				FDB702DF22B69D600055FCED /* unisetspan.h in Headers */,
 				FDB7024522B69D600055FCED /* udataswp.h in Headers */,
 				FDB7023722B69D600055FCED /* rbbisetb.h in Headers */,
@@ -3722,6 +3723,7 @@
 				FD5332E422A2EA1C001EB57C /* ftlist.h in Headers */,
 				FDB700CE22B69D1F0055FCED /* ubrk.h in Headers */,
 				FDB700EF22B69D1F0055FCED /* chariter.h in Headers */,
+				FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */,
 				FD5332EB22A36015001EB57C /* ft2build.h in Headers */,
 				FD5332DC22A2EA1C001EB57C /* ftsystem.h in Headers */,
 				FD5332D822A2EA1C001EB57C /* ftgxval.h in Headers */,
@@ -3972,6 +3974,7 @@
 				FD5331F222A2E842001EB57C /* ftbbox.c in Sources */,
 				FDB7028B22B69D600055FCED /* errorcode.cpp in Sources */,
 				FDB702E022B69D600055FCED /* usetiter.cpp in Sources */,
+				FD9AEEC322CA45C5003607DC /* TextureAtlas.cpp in Sources */,
 				FDC02CF9228487CA00BEE91A /* VertexBuffer.cpp in Sources */,
 				FDB7022922B69D600055FCED /* ushape.cpp in Sources */,
 				FDC02CFA228487CA00BEE91A /* Mesh.cpp in Sources */,
@@ -4147,7 +4150,6 @@
 				FDB7028422B69D600055FCED /* ustr_wcs.cpp in Sources */,
 				FD4C1DD9219F3F7C00B2B2BE /* GainputButtonStickGesture.cpp in Sources */,
 				FD4C1DDA219F3F7C00B2B2BE /* GainputDoubleClickGesture.cpp in Sources */,
-				FDB7038A22C289B40055FCED /* TextureAtlasTree.cpp in Sources */,
 				FDB702E822B69D600055FCED /* utrace.cpp in Sources */,
 				FDB7023622B69D600055FCED /* uchar.cpp in Sources */,
 				FDB7024322B69D600055FCED /* uobject.cpp in Sources */,

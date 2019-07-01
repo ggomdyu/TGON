@@ -3,7 +3,7 @@
 #import <gainput/gainput.h>
 #import <AppKit/AppKit.h>
 
-#import "Core/Algorithm.h"
+#import "Misc/Algorithm.h"
 
 #import "MacOSMouse.h"
 #import "MacOSMouseType.h"

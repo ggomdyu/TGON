@@ -2,7 +2,7 @@
 
 #include <gainput/gainput.h>
 
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 #include "Hardware/Keyboard.h"
 
 #include "MacOSKeyboard.h"

@@ -5,7 +5,7 @@
 #include <mutex>
 #include <AppKit/NSAlert.h>
 
-#include "Core/Algorithm.h"
+#include "Misc/Algorithm.h"
 #include "String/StringTraits.h"
 
 #include "../Log.h"
@@ -24,7 +24,7 @@ std::mutex g_mutex;
 TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    const char* logStrBuffer = BasicStringTraits<char>::Format(formatStr, vaList).first;
+    const char* logStrBuffer = BasicStringTraits<char>::Format(formatStr, vaList).data();
     if (logStrBuffer == nullptr)
     {
         return;
