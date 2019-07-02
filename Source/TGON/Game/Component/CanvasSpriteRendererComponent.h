@@ -25,6 +25,7 @@ public:
 public:
     using RendererComponent::RendererComponent;
     
+    explicit CanvasSpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite);
     CanvasSpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Method */

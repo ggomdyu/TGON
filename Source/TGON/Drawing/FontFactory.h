@@ -15,6 +15,10 @@
 #include "Math/Extent.h"
 #include "Platform/Config.h"
 
+#ifdef CreateFont
+#   undef CreateFont
+#endif
+
 namespace tgon
 {
 
@@ -98,12 +102,11 @@ public:
 
 /**@section Method */
 public:
-    std::shared_ptr<Font> GetFont(const StringHash& filePath);
+    std::shared_ptr<Font> CreateFont(const StringHash& filePath) const;
 
 /**@section Variable */
 private:
     FT_Library m_library;
-    mutable std::unordered_map<StringHash, std::shared_ptr<Font>> m_fonts;
 };
 
 } /* namespace tgon */

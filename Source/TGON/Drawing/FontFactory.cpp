@@ -208,18 +208,9 @@ FontFactory::~FontFactory()
     }
 }
 
-std::shared_ptr<Font> FontFactory::GetFont(const StringHash& filePath)
+std::shared_ptr<Font> FontFactory::CreateFont(const StringHash& filePath) const
 {
-    auto iter = m_fonts.find(filePath);
-    if (iter != m_fonts.end())
-    {
-        return iter->second;
-    }
-
-    auto font = std::make_shared<Font>(filePath, m_library);
-    m_fonts.insert(iter, {filePath, font});
-
-    return font;
+    return std::make_shared<Font>(filePath, m_library);
 }
 
 } /* namespace tgon */

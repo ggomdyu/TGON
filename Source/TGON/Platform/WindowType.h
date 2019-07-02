@@ -17,8 +17,8 @@ struct WindowStyle final
 
     int32_t x = 100;
     int32_t y = 100;
-    int32_t width = 512;
-    int32_t height = 512;
+    int32_t width = 1200;
+    int32_t height = 1200;
 
     bool hasCaption = true;
     bool enableSystemButton = true;

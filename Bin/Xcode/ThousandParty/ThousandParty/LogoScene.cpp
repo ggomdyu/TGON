@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -26,7 +26,7 @@ LogoScene::LogoScene()
 
     SuperType::Update();
 
-    this->InitPhase4();
+    this->InitPhase1();
 }
 
 void LogoScene::Update()
@@ -92,73 +92,20 @@ void LogoScene::InitPhase1()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    {
-        auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
-        object1 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object1->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-        m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent1->SetSprite(std::make_shared<CanvasSprite>(texture));
+    auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
-        auto texture2 = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
-        object2 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object2->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-        m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent2->SetSprite(std::make_shared<CanvasSprite>(texture2));
+    object1 = std::make_shared<GameObject>("introSprite1", new Transform());
+    object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+    object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+    m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>(std::make_shared<CanvasSprite>(texture));
 
-        object3 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object3->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object3->GetTransform()->SetLocalPosition({ 400.0f, -200.0f, 0.0f });
-        m_introSpriteComponent3 = object3->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent3->SetSprite(std::make_shared<CanvasSprite>(texture2));
+    object2 = std::make_shared<GameObject>("introSprite1", new Transform());
+    object2->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+    object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+    m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>(std::make_shared<CanvasSprite>(texture));
 
-        object4 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object4->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object4->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture2));
-        m_introSpriteComponent4 = object4->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent4->SetSprite(std::make_shared<CanvasSprite>(texture));
-
-        object5 = std::make_shared<GameObject>("introSprite1", new Transform());
-        object5->GetTransform()->SetLocalScale({ 0.3f, 1.0f, 1.0f });
-        object5->GetTransform()->SetLocalPosition({ 100.0f, 100.0f, 0.0f });
-        m_introSpriteComponent5 = object5->AddComponent<CanvasSpriteRendererComponent>();
-        m_introSpriteComponent5->SetSprite(std::make_shared<CanvasSprite>(texture2));
-
-
-        this->AddObject(object1);
-        this->AddObject(object2);
-        this->AddObject(object3);
-        this->AddObject(object4);
-        this->AddObject(object5);
-    }
-
-    //
-    //{
-    //    auto introObject2 = std::make_shared<tgon::GameObject>("introSprite2");
-    //    introObject2->SetScale({ 8.38f, 4.42f, 1.0f });
-    //    m_introSpriteComponent2 = introObject2->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/onLogo.png");
-    //    m_introSpriteComponent2->SetBlendColor({ 1.0f, 1.0f, 1.0f });
-    //    m_introSpriteComponent2->SetOpacity(0.0f);
-    //    this->AddObject(introObject2);
-    //}
-
-    //// Intro�� ����� Sprite ����
-    //{
-    //    auto fadeOutObject = std::make_shared<tgon::GameObject>("fadeOut");
-    //    fadeOutObject->SetScale({ 8.38f, 4.42f, 1.0f });
-    //    m_fadeOutSpriteComponent = fadeOutObject->AddComponent<tgon::SpriteRendererComponent>(tgon::GetDesktopDirectory() + "/Assets/Image/LogoScene/teamTPLogo.png");
-    //    m_fadeOutSpriteComponent->SetBlendColor({ 0.0f, 0.0f, 0.0f });
-    //    m_fadeOutSpriteComponent->SetOpacity(0.0f);
-    //    this->AddObject(fadeOutObject);
-    //}
-
+    this->AddObject(object1);
+    this->AddObject(object2);
 }
 
 void LogoScene::InitPhase2()
@@ -263,7 +210,7 @@ void LogoScene::InitPhase4()
 
     //TextureAtlasTree tat( I32Extent2D( 512, 512 ), 2 );
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.GetFont( StringHash( GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
+    std::shared_ptr<Font> font = ff.CreateFont( StringHash( GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
 
     auto object = std::make_shared<GameObject>( "introSprite1", new Transform() );
     object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
@@ -276,10 +223,10 @@ void LogoScene::InitPhase4()
     for (auto ch : chArray)
     {
         const auto& glyphData = font->GetGlyphData(ch, 30);
-
-
-        textureAtlas.Insert(StringViewHash(&ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
+        textureAtlas.Insert(ch, ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
     }
+
+    //auto& imageRect = textureAtlas.GetImageRect(u'가');
 
     spriteComponent->SetSprite( std::make_shared<CanvasSprite>(textureAtlas.GetAtlasTexture()) );
     this->AddObject( object );

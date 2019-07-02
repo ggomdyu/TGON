@@ -9,7 +9,7 @@ namespace tgon
 {
 
 CanvasSprite::CanvasSprite() noexcept :
-    CanvasSprite(nullptr, nullptr)
+    CanvasSprite(nullptr)
 {
 }
 
@@ -19,9 +19,14 @@ CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture) noexcept :
 }
 
 CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept :
+    CanvasSprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)), transform)
+{
+}
+
+CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept :
     m_texture(texture),
     m_transform(transform),
-    m_textureRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height)),
+    m_textureRect(textureRect),
     m_enableScissorRect(false),
     m_blendMode(BlendMode::Normal)
 {
@@ -35,9 +40,13 @@ CanvasSprite::CanvasSprite(CanvasSprite&& rhs) noexcept :
     m_scissorRect(rhs.m_scissorRect),
     m_enableScissorRect(rhs.m_enableScissorRect)
 {
+    rhs.m_textureRect = {};
+    rhs.m_blendMode = {};
+    rhs.m_scissorRect = {};
+    rhs.m_enableScissorRect = false;
 }
 
-CanvasSprite& CanvasSprite::operator=(const CanvasSprite& rhs) noexcept
+CanvasSprite& CanvasSprite::operator=(CanvasSprite&& rhs) noexcept
 {
     if (this == &rhs)
     {
@@ -47,6 +56,11 @@ CanvasSprite& CanvasSprite::operator=(const CanvasSprite& rhs) noexcept
         m_textureRect = rhs.m_textureRect;
         m_scissorRect = rhs.m_scissorRect;
         m_enableScissorRect = rhs.m_enableScissorRect;
+
+        rhs.m_textureRect = {};
+        rhs.m_blendMode = {};
+        rhs.m_scissorRect = {};
+        rhs.m_enableScissorRect = false;
     }
 
     return *this;
@@ -55,7 +69,7 @@ CanvasSprite& CanvasSprite::operator=(const CanvasSprite& rhs) noexcept
 void CanvasSprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
-    m_textureRect = {0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height)};
+    m_textureRect = FRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height));
 }
 
 std::shared_ptr<Texture> CanvasSprite::GetTexture() noexcept

@@ -23,18 +23,20 @@ class TGON_API TextureAtlas :
 {
 /**@section Constructor */
 public:
-    TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, bool isStaticAtlas, int32_t paddingOffset = 2);
+    TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = 2);
 
 /**@section Method */
 public:
+    bool Insert(size_t name, const ImageView& image);
     bool Insert(const StringViewHash& name, const ImageView& image);
+    bool Insert(const std::initializer_list<std::pair<size_t, ImageView>>& imageDescs);
     bool Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs);
-    const I32Rect& GetImageRect(const StringViewHash& name) const;
+    const I32Rect& GetTextureRect(size_t name) const;
+    const I32Rect& GetTextureRect(const StringViewHash& name) const;
     int32_t GetTextureCount() const noexcept;
     int32_t GetPaddingOffset() const noexcept;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
-    const I32Extent2D& GetAtlasSize() const noexcept;
 
 /**@section Variable */
 private:

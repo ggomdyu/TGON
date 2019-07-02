@@ -8,6 +8,11 @@
 namespace tgon
 {
 
+CanvasSpriteRendererComponent::CanvasSpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite) :
+    m_sprite(sprite)
+{
+}
+
 CanvasSpriteRendererComponent::CanvasSpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor) :
     RendererComponent(material),
     m_blendColor(blendColor)

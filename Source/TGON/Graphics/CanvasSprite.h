@@ -25,6 +25,7 @@ public:
     CanvasSprite() noexcept;
     explicit CanvasSprite(const std::shared_ptr<Texture>& texture) noexcept;
     CanvasSprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept;
+    CanvasSprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept;
     CanvasSprite(CanvasSprite&& rhs) noexcept;
 
 /**@section Destructor */
@@ -33,7 +34,7 @@ public:
 
 /**@section Operator */
 public:
-    CanvasSprite& operator=(const CanvasSprite& rhs) noexcept;
+    CanvasSprite& operator=(CanvasSprite&& rhs) noexcept;
     
 /**@section Method */
 public:
