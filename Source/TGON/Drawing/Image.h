@@ -6,10 +6,9 @@
 
 #pragma once
 #include <vector>
+#include <string_view>
 #include <algorithm>
-#include <string>
 
-#include "String/StringHash.h"
 #include "Math/Extent.h"
 
 #include "ImageUtility.h"

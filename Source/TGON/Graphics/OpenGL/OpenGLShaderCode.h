@@ -80,10 +80,24 @@ out vec2 fragUV;                                                                
 void main()                                                                         \n\
 {                                                                                   \n\
     gl_Position = matWVP * vec4(vertPosition, 1.0);                                 \n\
-    fragUV = vec2(vertUV.x, 1.0 - vertUV.y);                                        \n\
+    fragUV = vec2(vertUV.x, vertUV.y);                                              \n\
 }                                                                                   \n\
 ";
 
+//constexpr const char g_positionUVFrag[] =
+//"                                                                                   \n\
+//#version 330 core                                                                   \n\
+//                                                                                    \n\
+//in vec2 fragUV;                                                                     \n\
+//out vec4 outColor;                                                                  \n\
+//                                                                                    \n\
+//uniform sampler2D textureSampler;                                                   \n\
+//                                                                                    \n\
+//void main()                                                                         \n\
+//{                                                                                   \n\
+//    outColor = texture(textureSampler, fragUV);                                     \n\
+//}                                                                                   \n\
+//";
 constexpr const char g_positionUVFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\
@@ -99,7 +113,6 @@ void main()                                                                     
     outColor = sampled;                                                             \n\
 }                                                                                   \n\
 ";
-//outColor = texture(textureSampler, fragUV);                                     \n\
 
 constexpr const char g_grayScaleFrag[] =
 "                                                                                   \n\

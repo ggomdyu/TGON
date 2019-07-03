@@ -10,6 +10,8 @@
 #include <boost/noncopyable.hpp>
 #include <stb/stb_rect_pack.h>
 
+#include "String/UnicodeScalar.h"
+#include "String/StringHash.h"
 #include "Math/Rect.h"
 #include "Math/Extent.h"
 
@@ -27,16 +29,19 @@ public:
 
 /**@section Method */
 public:
-    bool Insert(size_t name, const ImageView& image);
+    bool Insert(UnicodeScalar name, const ImageView& image);
     bool Insert(const StringViewHash& name, const ImageView& image);
-    bool Insert(const std::initializer_list<std::pair<size_t, ImageView>>& imageDescs);
+    bool Insert(const std::initializer_list<std::pair<UnicodeScalar, ImageView>>& imageDescs);
     bool Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs);
-    const I32Rect& GetTextureRect(size_t name) const;
+    const I32Rect& GetTextureRect(UnicodeScalar name) const;
     const I32Rect& GetTextureRect(const StringViewHash& name) const;
     int32_t GetTextureCount() const noexcept;
     int32_t GetPaddingOffset() const noexcept;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
+
+private:
+    bool Insert(size_t nameHashCode, const ImageView& image);
 
 /**@section Variable */
 private:

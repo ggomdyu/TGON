@@ -59,9 +59,9 @@ void CanvasSpriteBatch::Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();
     float leftUV = textureRect.x / textureSize.width;
-    float topUV = textureRect.height / textureSize.height;
-    float rightUV = textureRect.width / textureSize.width;
-    float bottomUV = textureRect.y / textureSize.height;
+    float topUV = textureRect.y / textureSize.height;
+    float rightUV = (textureRect.x + textureRect.width) / textureSize.width;
+    float bottomUV = (textureRect.y + textureRect.height) / textureSize.height;
     float halfWidth = textureRect.width * 0.5f;
     float halfHeight = textureRect.height * 0.5f;
 

@@ -26,7 +26,7 @@ LogoScene::LogoScene()
 
     SuperType::Update();
 
-    this->InitPhase1();
+    this->InitPhase4();
 }
 
 void LogoScene::Update()
@@ -219,16 +219,18 @@ void LogoScene::InitPhase4()
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
     const wchar_t chArray[] = L"가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅢㅟㅝㅞㅖㅐ½⅓⅔¼¾⅛⅝⅞๑•ิ.•ั๑๑۩۞۩๑♬✿.｡.:*εїз℡❣·۰•○○○ōゃ♥♡๑۩ﺴ☞☜☎☏♡⊙◎☺☻✖╄ஐ가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲ";
-    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, false);
+    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, 6);
     for (auto ch : chArray)
     {
-        const auto& glyphData = font->GetGlyphData(ch, 30);
-        textureAtlas.Insert(ch, ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
+        const auto& glyphData = font->GetGlyphData(ch, 100);
+        textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
     }
 
-    //auto& imageRect = textureAtlas.GetImageRect(u'가');
-
-    spriteComponent->SetSprite( std::make_shared<CanvasSprite>(textureAtlas.GetAtlasTexture()) );
+    auto& imageRect = textureAtlas.GetTextureRect(u'h');
+    decltype(auto) texture = textureAtlas.GetAtlasTexture();
+    decltype(auto) sprite = std::make_shared<CanvasSprite>(texture);
+    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    spriteComponent->SetSprite(sprite);
     this->AddObject( object );
 
 }
