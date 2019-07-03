@@ -45,7 +45,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
         };
     }
 
-    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, imageDescs.size()) != 0;
+    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, static_cast<int>(imageDescs.size())) != 0;
     if (isPackingFailed == false)
     {
         return false;
@@ -54,7 +54,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
     for (int32_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& imageDesc = imageDescs.begin() + i;
-        m_packedImageInfos.insert({imageDesc->first.GetValue(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
+        m_packedImageInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
     }
 
     return true;
@@ -76,7 +76,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
         };
     }
 
-    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, imageDescs.size()) != 0;
+    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, static_cast<int>(imageDescs.size())) != 0;
     if (isPackingFailed == false)
     {
         return false;
@@ -93,7 +93,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
 
 const I32Rect& TextureAtlas::GetTextureRect(UnicodeScalar name) const
 {
-    return m_packedImageInfos[name];
+    return m_packedImageInfos[name.GetHashCode()];
 }
 
 const I32Rect& TextureAtlas::GetTextureRect(const StringViewHash& name) const
@@ -103,7 +103,7 @@ const I32Rect& TextureAtlas::GetTextureRect(const StringViewHash& name) const
 
 int32_t TextureAtlas::GetTextureCount() const noexcept
 {
-    return m_packedImageInfos.size();
+    return static_cast<int32_t>(m_packedImageInfos.size());
 }
 
 int32_t TextureAtlas::GetPaddingOffset() const noexcept

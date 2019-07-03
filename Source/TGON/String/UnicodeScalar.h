@@ -8,6 +8,7 @@
 #include <cstdint>
 
 #include "Encoding.h"
+#include "Hash.h"
 
 namespace tgon
 {
@@ -16,17 +17,22 @@ class UnicodeScalar
 {
 /**@section Method */
 public:
-    constexpr UnicodeScalar(char value) :
+    constexpr UnicodeScalar(char value) noexcept :
         m_value(value)
     {
     }
 
-    constexpr UnicodeScalar(char16_t value) :
+    constexpr UnicodeScalar(char16_t value) noexcept :
         m_value(value)
     {
     }
 
-    constexpr UnicodeScalar(char32_t value) :
+    constexpr UnicodeScalar(char32_t value) noexcept :
+        m_value(value)
+    {
+    }
+    
+    constexpr UnicodeScalar(wchar_t value) noexcept :
         m_value(value)
     {
     }
@@ -48,6 +54,11 @@ public:
     constexpr char32_t GetValue() const noexcept
     {
         return m_value;
+    }
+    
+    constexpr size_t GetHashCode() const noexcept
+    {
+        return TGON_X65599(m_value);
     }
 
 /**@section Variable */

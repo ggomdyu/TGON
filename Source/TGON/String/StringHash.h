@@ -28,7 +28,7 @@ public:
     {
     }
 
-    template <typename _ValueType, typename std::enable_if_t<IsCharPointerTypeValue<_ValueType>>* = nullptr>
+    template <typename _ValueType, typename std::enable_if_t<IsCharPointerValue<_ValueType>>* = nullptr>
     constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
         m_hashCode(X65599Hash(str))
     {
@@ -200,13 +200,13 @@ private:
 };
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>> :
-    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>>>
+class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>> :
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>>>
 {
 /**@section Type */
 public:
     using ValueType = PureType<_StringType>;
-    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerTypeValue<_StringType>>>>;
+    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>>>;
     using StringType = _StringType;
     
 /**@section Constructor */
