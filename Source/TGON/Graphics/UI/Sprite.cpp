@@ -2,28 +2,28 @@
 
 #include "Graphics/Texture.h"
 
-#include "CanvasSprite.h"
+#include "Sprite.h"
 #include "Transform.h"
 
 namespace tgon
 {
 
-CanvasSprite::CanvasSprite() noexcept :
-    CanvasSprite(nullptr)
+Sprite::Sprite() noexcept :
+    Sprite(nullptr)
 {
 }
 
-CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture) noexcept :
-    CanvasSprite(texture, nullptr)
+Sprite::Sprite(const std::shared_ptr<Texture>& texture) noexcept :
+    Sprite(texture, nullptr)
 {
 }
 
-CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept :
-    CanvasSprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)), transform)
+Sprite::Sprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept :
+    Sprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)), transform)
 {
 }
 
-CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept :
+Sprite::Sprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept :
     m_texture(texture),
     m_transform(transform),
     m_textureRect(textureRect),
@@ -32,7 +32,7 @@ CanvasSprite::CanvasSprite(const std::shared_ptr<Texture>& texture, const FRect&
 {
 }
 
-CanvasSprite::CanvasSprite(CanvasSprite&& rhs) noexcept :
+Sprite::Sprite(Sprite&& rhs) noexcept :
     m_texture(std::move(rhs.m_texture)),
     m_transform(std::move(rhs.m_transform)),
     m_blendMode(rhs.m_blendMode),
@@ -46,7 +46,7 @@ CanvasSprite::CanvasSprite(CanvasSprite&& rhs) noexcept :
     rhs.m_enableScissorRect = false;
 }
 
-CanvasSprite& CanvasSprite::operator=(CanvasSprite&& rhs) noexcept
+Sprite& Sprite::operator=(Sprite&& rhs) noexcept
 {
     if (this == &rhs)
     {
@@ -66,88 +66,88 @@ CanvasSprite& CanvasSprite::operator=(CanvasSprite&& rhs) noexcept
     return *this;
 }
 
-void CanvasSprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
+void Sprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
     m_textureRect = FRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height));
 }
 
-std::shared_ptr<Texture> CanvasSprite::GetTexture() noexcept
+std::shared_ptr<Texture> Sprite::GetTexture() noexcept
 {
     return m_texture;
 }
 
-std::shared_ptr<const Texture> CanvasSprite::GetTexture() const noexcept
+std::shared_ptr<const Texture> Sprite::GetTexture() const noexcept
 {
     return m_texture;
 }
 
-std::shared_ptr<Transform> CanvasSprite::GetTransform() noexcept
+std::shared_ptr<Transform> Sprite::GetTransform() noexcept
 {
     return m_transform;
 }
 
-std::shared_ptr<const Transform> CanvasSprite::GetTransform() const noexcept
+std::shared_ptr<const Transform> Sprite::GetTransform() const noexcept
 {
     return m_transform;
 }
     
-void CanvasSprite::SetTextureRect(const FRect& textureRect)
+void Sprite::SetTextureRect(const FRect& textureRect)
 {
     m_textureRect = textureRect;
 }
 
-void CanvasSprite::SetTransform(const std::shared_ptr<Transform>& transform) noexcept
+void Sprite::SetTransform(const std::shared_ptr<Transform>& transform) noexcept
 {
     m_transform = transform;
 }
     
-FRect& CanvasSprite::GetTextureRect() noexcept
+FRect& Sprite::GetTextureRect() noexcept
 {
     return m_textureRect;
 }
     
-const FRect& CanvasSprite::GetTextureRect() const noexcept
+const FRect& Sprite::GetTextureRect() const noexcept
 {
     return m_textureRect;
 }
     
-void CanvasSprite::SetBlendMode(BlendMode blendMode) noexcept
+void Sprite::SetBlendMode(BlendMode blendMode) noexcept
 {
     m_blendMode = blendMode;
 }
 
-BlendMode CanvasSprite::GetBlendMode() const noexcept
+BlendMode Sprite::GetBlendMode() const noexcept
 {
     return m_blendMode;
 }
     
-void CanvasSprite::EnableScissorRect() noexcept
+void Sprite::EnableScissorRect() noexcept
 {
     m_enableScissorRect = true;
 }
     
-void CanvasSprite::DisableScissorRect() noexcept
+void Sprite::DisableScissorRect() noexcept
 {
     m_enableScissorRect = false;
 }
     
-bool CanvasSprite::IsEnableScissorRect() const noexcept
+bool Sprite::IsEnableScissorRect() const noexcept
 {
     return m_enableScissorRect;
 }
 
-void CanvasSprite::SetScissorRect(const FRect& scissorRect) noexcept
+void Sprite::SetScissorRect(const FRect& scissorRect) noexcept
 {
     m_scissorRect = scissorRect;
 }
     
-FRect& CanvasSprite::GetScissorRect() noexcept
+FRect& Sprite::GetScissorRect() noexcept
 {
     return m_scissorRect;
 }
     
-const FRect& CanvasSprite::GetScissorRect() const noexcept
+const FRect& Sprite::GetScissorRect() const noexcept
 {
     return m_scissorRect;
 }

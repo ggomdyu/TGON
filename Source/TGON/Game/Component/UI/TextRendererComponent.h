@@ -1,5 +1,5 @@
 /**
- * @file    CanvasTextRendererComponent.h
+ * @file    TextRendererComponent.h
  * @author  ggomdyu
  * @since   08/11/2018
  */
@@ -7,12 +7,12 @@
 #pragma once
 #include "Math/Color.h"
 
-#include "RendererComponent.h"
+#include "../RendererComponent.h"
 
 namespace tgon
 {
 
-class CanvasSprite;
+class Sprite;
 class Texture;
 class Font;
 
@@ -37,17 +37,17 @@ enum class LineBreakMode
     TruncateTail,
 };
 
-class TGON_API CanvasTextRendererComponent :
+class TGON_API TextRendererComponent :
 	public RendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(CanvasTextRendererComponent);
+    TGON_DECLARE_RTTI(TextRendererComponent);
 
 /**@section Constructor */
 public:
     using RendererComponent::RendererComponent;
     
-    explicit CanvasTextRendererComponent(const std::shared_ptr<Material>& material);
+    explicit TextRendererComponent(const std::shared_ptr<Material>& material);
 
 /**@section Method */
 public:
@@ -69,7 +69,7 @@ private:
 private:
     bool m_isDirty;
     std::string m_text;
-    std::shared_ptr<CanvasSprite> m_sprite;
+    std::shared_ptr<Sprite> m_sprite;
     std::shared_ptr<Texture> m_mainTexture;
     std::shared_ptr<Font> m_font;
     LineBreakMode m_lineBreakMode;

@@ -15,7 +15,10 @@ class SerializationInfo
 /**@section Method */
 public:
     template <typename _ValueType>
-    void AddValue(const std::string& name, const _ValueType& value);
+    void AddValue(const std::string& name, const _ValueType& value)
+    {
+        m_variableTable.insert(name, value);
+    }
     
 /**@section Variable */
 private:
@@ -32,11 +35,5 @@ public:
 public:
     /**@brief   Returns copied one from this instance. */
 };
-
-template <typename _ValueType>
-inline void SerializationInfo::AddValue(const std::string& name, const _ValueType& value)
-{
-    m_variableTable.insert(name, value);
-}
 
 } /* namespace tgon */

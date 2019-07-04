@@ -23,7 +23,7 @@ GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode)
 void GraphicsModule::Update()
 {
     m_meshRenderer.Update();
-    m_canvasRenderer.Update();
+    m_uiRenderer.Update();
     
     this->Draw();
 }
@@ -33,7 +33,7 @@ void GraphicsModule::Draw()
     m_graphics.ClearColorDepthBuffer();
     {
         m_meshRenderer.Draw(m_graphics);
-        m_canvasRenderer.Draw(m_graphics);
+        m_uiRenderer.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
 }
@@ -48,14 +48,14 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-CanvasRenderer& GraphicsModule::GetCanvasRenderer() noexcept
+UIRenderer& GraphicsModule::GetUIRenderer() noexcept
 {
-    return m_canvasRenderer;
+    return m_uiRenderer;
 }
 
-const CanvasRenderer& GraphicsModule::GetCanvasRenderer() const noexcept
+const UIRenderer& GraphicsModule::GetUIRenderer() const noexcept
 {
-    return m_canvasRenderer;
+    return m_uiRenderer;
 }
 
 MeshRenderer& GraphicsModule::GetMeshRenderer() noexcept

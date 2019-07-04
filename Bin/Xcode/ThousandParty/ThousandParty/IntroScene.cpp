@@ -80,7 +80,7 @@ private:
     bool needToIncreaseOpacity = false;
     float m_opacityChangeSpeed = 0.0f;
     float m_speed = 0.0f;
-    std::shared_ptr<CanvasSpriteRendererComponent> m_fireflySpriteComponent;
+    std::shared_ptr<SpriteRendererComponent> m_fireflySpriteComponent;
     std::shared_ptr<TimeModule> m_timeModule;
 };
 

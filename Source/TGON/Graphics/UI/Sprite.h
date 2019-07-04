@@ -9,8 +9,8 @@
 
 #include "Math/Rect.h"
 
-#include "GraphicsType.h"
-#include "Transform.h"
+#include "../GraphicsType.h"
+#include "../Transform.h"
 
 namespace tgon
 {

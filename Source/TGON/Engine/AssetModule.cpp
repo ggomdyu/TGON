@@ -2,16 +2,16 @@
 
 #include "Time/Time.h"
 
-#include "ResourceModule.h"
+#include "AssetModule.h"
 
 namespace tgon
 {
 
-ResourceModule::ResourceModule()
+AssetModule::AssetModule()
 {
 }
 
-void ResourceModule::Update()
+void AssetModule::Update()
 {
 }
 

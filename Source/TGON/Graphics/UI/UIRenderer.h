@@ -1,5 +1,5 @@
 /**
- * @file    CanvasRenderer.h
+ * @file    UIRenderer.h
  * @author  ggomdyu
  * @since   12/31/2017
  */
@@ -10,16 +10,16 @@
 
 #include "Math/Matrix4x4.h"
 #include "Graphics/VertexBuffer.h"
-#include "Graphics/SpriteBatch.h"
+#include "Graphics/UI/SpriteBatch.h"
 
 // Todo: remove below headers
-#include "RenderTarget.h"
 #include "Platform/Application.h"
+#include "../RenderTarget.h"
 
 namespace tgon
 {
     
-class CanvasSprite;
+class Sprite;
 class Material;
 class Camera;
 class Graphics;
@@ -35,7 +35,7 @@ public:
     void Update();
     void Draw(Graphics& graphics);
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddSpritePrimitive(const std::shared_ptr<CanvasSprite>& sprite, const Matrix4x4& matWorld);
+    void AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const Matrix4x4& matWorld);
 //    void AddSpriteBatch(const CanvasSpriteBatch& )
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
@@ -50,7 +50,7 @@ private:
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
     VertexBuffer m_quadVertexBuffer;
-    std::vector<CanvasSpriteBatch> m_spriteBatches;
+    std::vector<SpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
     
     // For test

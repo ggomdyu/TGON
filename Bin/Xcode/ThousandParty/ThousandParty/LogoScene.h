@@ -16,7 +16,7 @@ namespace tgon
 {
 
 class CameraComponent;
-class CanvasSpriteRendererComponent;
+class SpriteRendererComponent;
 class GraphicsModule;
 class InputModule;
 class TimeModule;
@@ -47,10 +47,10 @@ public:
 /**@section Variable */
 private:
     int64_t m_beginTime;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent1;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent2;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent3;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent4;
-    std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_introSpriteComponent5;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent1;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent2;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent3;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent4;
+    std::shared_ptr<tgon::SpriteRendererComponent> m_introSpriteComponent5;
     //std::shared_ptr<tgon::CanvasSpriteRendererComponent> m_fadeOutSpriteComponent;
 };

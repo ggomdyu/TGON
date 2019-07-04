@@ -21,7 +21,7 @@ public:
 
 /* @section Method */
 public:
-    /**@brief   Returns unique hash code for each type. */
+    /**@brief   Returns the type hash code. */
     size_t GetHashCode() const noexcept;
     
     /**@brief   Returns the type name of RTTI owner. */

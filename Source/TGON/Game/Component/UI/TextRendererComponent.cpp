@@ -3,71 +3,72 @@
 #include "Game/GameObject.h"
 #include "Engine/GraphicsModule.h"
 
-#include "CanvasTextRendererComponent.h"
+#include "TextRendererComponent.h"
 
 namespace tgon
 {
 
-CanvasTextRendererComponent::CanvasTextRendererComponent(const std::shared_ptr<Material>& material) :
+TextRendererComponent::TextRendererComponent(const std::shared_ptr<Material>& material) :
     RendererComponent(material),
     m_lineSpacing(0.0f),
     m_fontSize(0)
 {
 }
     
-void CanvasTextRendererComponent::Update()
+void TextRendererComponent::Update()
 {
+    m_graphicsModule->GetUIRenderer().AddSpritePrimitive(m_sprite, GetOwner()->GetTransform()->GetWorldMatrix());
 }
 
-void CanvasTextRendererComponent::SetFont(const std::shared_ptr<Font>& font) noexcept
+void TextRendererComponent::SetFont(const std::shared_ptr<Font>& font) noexcept
 {
     m_font = font;
     m_isDirty = true;
 }
 
-void CanvasTextRendererComponent::SetText(const std::string_view& text)
+void TextRendererComponent::SetText(const std::string_view& text)
 {
     m_isDirty = true;
 }
 
-void CanvasTextRendererComponent::SetLineSpacing(float lineSpacing) noexcept
+void TextRendererComponent::SetLineSpacing(float lineSpacing) noexcept
 {
     m_lineSpacing = lineSpacing;
     m_isDirty = true;
 }
 
-void CanvasTextRendererComponent::SetLineBreakMode(LineBreakMode lineBreakMode) noexcept
+void TextRendererComponent::SetLineBreakMode(LineBreakMode lineBreakMode) noexcept
 {
     m_isDirty = true;
 }
 
-void CanvasTextRendererComponent::SetColor(const Color4f& color)
+void TextRendererComponent::SetColor(const Color4f& color) noexcept
 {
     m_color = color;
     m_isDirty = true;
 }
 
-LineBreakMode CanvasTextRendererComponent::GetLineBreakMode() const noexcept
+LineBreakMode TextRendererComponent::GetLineBreakMode() const noexcept
 {
     return m_lineBreakMode;
 }
 
-const Color4f& CanvasTextRendererComponent::GetColor() const noexcept
+const Color4f& TextRendererComponent::GetColor() const noexcept
 {
     return m_color;
 }
 
-std::shared_ptr<const Font> CanvasTextRendererComponent::GetFont() const noexcept
+std::shared_ptr<const Font> TextRendererComponent::GetFont() const noexcept
 {
     return m_font;
 }
 
-std::shared_ptr<Font> CanvasTextRendererComponent::GetFont() noexcept
+std::shared_ptr<Font> TextRendererComponent::GetFont() noexcept
 {
     return m_font;
 }
 
-void CanvasTextRendererComponent::DrawTextToMainTexture()
+void TextRendererComponent::DrawTextToMainTexture()
 {
     //float accumulatedXPos = -100.0f;
     //float accumulatedYPos = 0.0f;

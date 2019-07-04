@@ -1,5 +1,5 @@
 /**
- * @file    SpriteBatch.h
+ * @file    UISpriteBatch.h
  * @author  ggomdyu
  * @since   06/03/2018
  */
@@ -8,31 +8,28 @@
 #include <vector>
 #include <memory>
 
+#include "Platform/Config.h"
 #include "Math/Rect.h"
 #include "Math/Matrix4x4.h"
-
-#include "VertexBuffer.h"
 
 namespace tgon
 {
 
 class Graphics;
 class Texture;
-class VertexBuffer;
-class Material;
-class CanvasSprite;
+class Sprite;
 enum class BlendMode;
 
-class TGON_API CanvasSpriteBatch final
+class TGON_API SpriteBatch final
 {
 /**@section Constructor */
 public:
-    CanvasSpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
+    SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
-    bool CanBatch(const CanvasSprite& rhs) const noexcept;
-    void Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices);
+    bool CanBatch(const Sprite& rhs) const noexcept;
+    void Merge(const Sprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
     
 /**@section Variable */

@@ -7,8 +7,8 @@
 #pragma once
 #include "Engine/IModule.h"
 #include "Graphics/Graphics.h"
-#include "Graphics/CanvasRenderer.h"
 #include "Graphics/MeshRenderer.h"
+#include "Graphics/UI/UIRenderer.h"
 
 namespace tgon
 {
@@ -31,10 +31,10 @@ public:
 public:
     virtual void Update() override;
     Graphics& GetGraphics() noexcept;
-    CanvasRenderer& GetCanvasRenderer() noexcept;
+    UIRenderer& GetUIRenderer() noexcept;
     MeshRenderer& GetMeshRenderer() noexcept;
     const Graphics& GetGraphics() const noexcept;
-    const CanvasRenderer& GetCanvasRenderer() const noexcept;
+    const UIRenderer& GetUIRenderer() const noexcept;
     const MeshRenderer& GetMeshRenderer() const noexcept;
     
 /**@section Method */
@@ -44,7 +44,7 @@ private:
 /**@section Variable */
 public:
     Graphics m_graphics;
-    CanvasRenderer m_canvasRenderer;
+    UIRenderer m_uiRenderer;
     MeshRenderer m_meshRenderer;
 };
 

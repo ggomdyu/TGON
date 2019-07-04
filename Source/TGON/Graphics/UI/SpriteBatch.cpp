@@ -2,18 +2,19 @@
 
 #include "Math/Vector4.h"
 
-#include "CanvasSpriteBatch.h"
-#include "Texture.h"
-#include "Graphics.h"
-#include "Material.h"
-#include "CanvasSprite.h"
-#include "FVF.h"
-#include "MeshUtility.h"
+#include "SpriteBatch.h"
+#include "Sprite.h"
+
+#include "../Texture.h"
+#include "../Graphics.h"
+#include "../Material.h"
+#include "../FVF.h"
+#include "../MeshUtility.h"
 
 namespace tgon
 {
     
-CanvasSpriteBatch::CanvasSpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
+SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
     m_texture(texture),
     m_blendMode(blendMode),
     m_enableScissorRect(enableScissorRect),
@@ -23,7 +24,7 @@ CanvasSpriteBatch::CanvasSpriteBatch(const std::shared_ptr<Texture>& texture, Bl
 {
 }
 
-bool CanvasSpriteBatch::CanBatch(const CanvasSprite& rhs) const noexcept
+bool SpriteBatch::CanBatch(const Sprite& rhs) const noexcept
 {
     if (m_texture == rhs.GetTexture() &&
         m_blendMode == rhs.GetBlendMode() &&
@@ -36,7 +37,7 @@ bool CanvasSpriteBatch::CanBatch(const CanvasSprite& rhs) const noexcept
     return false;
 }
     
-void CanvasSpriteBatch::FlushBatch(Graphics& graphics)
+void SpriteBatch::FlushBatch(Graphics& graphics)
 {
     m_texture->Use();
     
@@ -54,7 +55,7 @@ void CanvasSpriteBatch::FlushBatch(Graphics& graphics)
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
-void CanvasSpriteBatch::Merge(const CanvasSprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices)
+void SpriteBatch::Merge(const Sprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();

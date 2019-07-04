@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -97,12 +97,12 @@ void LogoScene::InitPhase1()
     object1 = std::make_shared<GameObject>("introSprite1", new Transform());
     object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-    m_introSpriteComponent1 = object1->AddComponent<CanvasSpriteRendererComponent>(std::make_shared<CanvasSprite>(texture));
+    m_introSpriteComponent1 = object1->AddComponent<SpriteRendererComponent>(std::make_shared<Sprite>(texture));
 
     object2 = std::make_shared<GameObject>("introSprite1", new Transform());
     object2->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-    m_introSpriteComponent2 = object2->AddComponent<CanvasSpriteRendererComponent>(std::make_shared<CanvasSprite>(texture));
+    m_introSpriteComponent2 = object2->AddComponent<SpriteRendererComponent>(std::make_shared<Sprite>(texture));
 
     this->AddObject(object1);
     this->AddObject(object2);
@@ -131,8 +131,8 @@ void LogoScene::InitPhase2()
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
-    spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
+    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
+    spriteComponent->SetSprite(std::make_shared<Sprite>(texture));
     this->AddObject(object);
 }
 
@@ -215,21 +215,21 @@ void LogoScene::InitPhase4()
     auto object = std::make_shared<GameObject>( "introSprite1", new Transform() );
     object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
     object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
-    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
+    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    const wchar_t chArray[] = L"가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅢㅟㅝㅞㅖㅐ½⅓⅔¼¾⅛⅝⅞๑•ิ.•ั๑๑۩۞۩๑♬✿.｡.:*εїз℡❣·۰•○○○ōゃ♥♡๑۩ﺴ☞☜☎☏♡⊙◎☺☻✖╄ஐ가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲ";
+    const wchar_t chArray[] = L"가나다라마바사아자차카타파하abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをアイウえおカキクケコさしすせそタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅢㅟㅝㅞㅖㅐ½⅓⅔¼¾⅛⅝⅞๑•ิ.•ั๑๑۩۞۩๑♬✿.｡.:*εїз℡❣·۰•○○○ōゃ♥♡๑۩ﺴ☞☜☎☏♡⊙◎☺☻✖╄ஐ";
     static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, 6);
     for (auto ch : chArray)
     {
-        const auto& glyphData = font->GetGlyphData(ch, 100);
+        const auto& glyphData = font->GetGlyphData(ch, 35);
         textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
     }
 
     auto& imageRect = textureAtlas.GetTextureRect(u'h');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
-    decltype(auto) sprite = std::make_shared<CanvasSprite>(texture);
-    //sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    decltype(auto) sprite = std::make_shared<Sprite>(texture);
+    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
 

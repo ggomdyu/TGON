@@ -31,7 +31,7 @@ CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)
     {
-        graphicsModule->GetCanvasRenderer().AddCamera(camera);
+        graphicsModule->GetUIRenderer().AddCamera(camera);
     }
 }
 
@@ -40,7 +40,7 @@ CameraComponent::~CameraComponent()
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)
     {
-        graphicsModule->GetCanvasRenderer().RemoveCamera(m_camera);
+        graphicsModule->GetUIRenderer().RemoveCamera(m_camera);
     }
 }
 

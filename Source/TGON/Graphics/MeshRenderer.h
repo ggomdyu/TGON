@@ -13,7 +13,7 @@
 namespace tgon
 {
     
-class CanvasSprite;
+class Sprite;
 class Material;
 class Camera;
 class Graphics;
