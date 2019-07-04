@@ -1053,7 +1053,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.cpp">
       <Filter>Source\TGON\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.cpp">
+    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.cpp">
       <Filter>Source\TGON\Game\Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2516,7 +2516,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.h">
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.h">
       <Filter>Source\TGON\Game\Component</Filter>
     </ClInclude>
   </ItemGroup>

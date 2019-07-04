@@ -1,5 +1,5 @@
 /**
- * @file    CanvasFontRendererComponent.h
+ * @file    CanvasTextRendererComponent.h
  * @author  ggomdyu
  * @since   08/11/2018
  */
@@ -37,17 +37,17 @@ enum class LineBreakMode
     TruncateTail,
 };
 
-class TGON_API CanvasFontRendererComponent :
+class TGON_API CanvasTextRendererComponent :
 	public RendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(CanvasFontRendererComponent);
+    TGON_DECLARE_RTTI(CanvasTextRendererComponent);
 
 /**@section Constructor */
 public:
     using RendererComponent::RendererComponent;
     
-    explicit CanvasFontRendererComponent(const std::shared_ptr<Material>& material);
+    explicit CanvasTextRendererComponent(const std::shared_ptr<Material>& material);
 
 /**@section Method */
 public:
@@ -72,6 +72,7 @@ private:
     std::shared_ptr<CanvasSprite> m_sprite;
     std::shared_ptr<Texture> m_mainTexture;
     std::shared_ptr<Font> m_font;
+    LineBreakMode m_lineBreakMode;
     Color4f m_color;
     int32_t m_fontSize;
     float m_lineSpacing;
