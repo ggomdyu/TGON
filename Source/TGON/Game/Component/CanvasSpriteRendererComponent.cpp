@@ -9,6 +9,7 @@ namespace tgon
 {
 
 CanvasSpriteRendererComponent::CanvasSpriteRendererComponent(const std::shared_ptr<CanvasSprite>& sprite) :
+    RendererComponent(),
     m_sprite(sprite)
 {
 }

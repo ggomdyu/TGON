@@ -1053,8 +1053,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.cpp">
       <Filter>Source\TGON\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FontTexture.cpp">
-      <Filter>Source\TGON\Graphics</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.cpp">
+      <Filter>Source\TGON\Game\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1230,9 +1230,6 @@
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\ISerializable.h">
-      <Filter>Source\TGON\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\NonAddressable.h">
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\RTTI.h">
@@ -2519,8 +2516,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FontTexture.h">
-      <Filter>Source\TGON\Graphics</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.h">
+      <Filter>Source\TGON\Game\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

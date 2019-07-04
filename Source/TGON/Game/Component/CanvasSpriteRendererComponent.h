@@ -1,5 +1,5 @@
 /**
- * @file    SpriteRendererComponent.h
+ * @file    CanvasSpriteRendererComponent.h
  * @author  ggomdyu
  * @since   08/11/2018
  */

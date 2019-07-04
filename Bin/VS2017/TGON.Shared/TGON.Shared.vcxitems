@@ -31,6 +31,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\TaskModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\TimeModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\RendererComponent.cpp" />
@@ -41,7 +42,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSpriteBatch.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FontTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Graphics.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Material.cpp" />
@@ -1652,7 +1652,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\IComparable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\IEquatable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\ISerializable.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\NonAddressable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\RTTI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\RuntimeObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\TypeTraits.h" />
@@ -1676,6 +1675,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\TaskModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\TimeModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasFontRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.h" />
@@ -1688,7 +1688,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\CanvasSpriteBatch.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FontTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FVF.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\Graphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\GraphicsType.h" />

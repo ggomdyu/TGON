@@ -21,8 +21,6 @@ WindowsWindow::WindowsWindow(const WindowStyle& windowStyle) :
 {
     assert(m_wndHandle != nullptr);
 
-    // Store pointer to the window to extra memory.
-    // It will be used to notify that the message event occured. 
     this->SetUserData(this);
 }
 
@@ -117,6 +115,7 @@ void WindowsWindow::SetRawWindowStyle(DWORD rawWindowStyle)
 
 void WindowsWindow::SetRawWindowStyleEx(DWORD rawWindowStyleEx)
 {
+    SetWindowLongPtrW(m_wndHandle, GWL_EXSTYLE, rawWindowStyleEx);
 }
 
 LONG_PTR WindowsWindow::GetRawWindowStyle() const

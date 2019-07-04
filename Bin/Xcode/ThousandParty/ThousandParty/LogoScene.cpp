@@ -229,7 +229,7 @@ void LogoScene::InitPhase4()
     auto& imageRect = textureAtlas.GetTextureRect(u'h');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
     decltype(auto) sprite = std::make_shared<CanvasSprite>(texture);
-    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    //sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
 

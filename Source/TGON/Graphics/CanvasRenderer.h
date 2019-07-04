@@ -1,5 +1,5 @@
 /**
- * @file    GraphicsModule.h
+ * @file    CanvasRenderer.h
  * @author  ggomdyu
  * @since   12/31/2017
  */

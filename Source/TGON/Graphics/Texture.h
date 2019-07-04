@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API Texture final :
+class TGON_API Texture :
     private PlatformTexture
 {
 /**@section Constructor */
