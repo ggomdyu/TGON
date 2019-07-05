@@ -29,7 +29,7 @@ constexpr size_t X65599Hash(_CharType ch) noexcept
     return ch ^ (ch >> 16);
 }
     
-template <typename _CharType>
+template <typename _CharType, typename std::enable_if_t<IsCharPointerValue<_CharType>>* = nullptr>
 constexpr size_t X65599Hash(const _CharType* str) noexcept
 {   
     std::size_t hashValue = 0;

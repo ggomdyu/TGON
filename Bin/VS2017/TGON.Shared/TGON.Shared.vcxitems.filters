@@ -61,9 +61,6 @@
     <Filter Include="Source\TGON\Game">
       <UniqueIdentifier>{5e14c30a-1ec7-4663-804c-f0d206dba98c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TGON\Game\Component">
-      <UniqueIdentifier>{a0f6cbf0-7329-4175-8620-bd47f72e5f97}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON\Graphics">
       <UniqueIdentifier>{fe86d327-bce9-4bfd-9a90-9e8462856547}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="Source\TGON\Misc">
       <UniqueIdentifier>{e087f30a-792f-44df-89fd-2b015d2a2fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Component">
+      <UniqueIdentifier>{9052ce00-a0a7-47c3-bc4d-28543d6de649}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -164,18 +164,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\GameObject.cpp">
       <Filter>Source\TGON\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\RendererComponent.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\VertexBuffer.cpp">
       <Filter>Source\TGON\Graphics</Filter>
@@ -278,9 +266,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\GraphicsModule.cpp">
       <Filter>Source\TGON\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.cpp">
       <Filter>Source\TGON\Game</Filter>
@@ -1053,9 +1038,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.cpp">
       <Filter>Source\TGON\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.cpp">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -1292,21 +1275,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\GameObject.h">
       <Filter>Source\TGON\Game</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CameraComponent.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\Component.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\ComponentUtility.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\MeshRendererComponent.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\RendererComponent.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\VertexBuffer.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
@@ -1522,9 +1490,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Engine\SceneModule.h">
       <Filter>Source\TGON\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasSpriteRendererComponent.h">
-      <Filter>Source\TGON\Game\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Scene.h">
       <Filter>Source\TGON\Game</Filter>
@@ -2516,8 +2481,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\TextureAtlas.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.h">
-      <Filter>Source\TGON\Game\Component</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Game\Component\CanvasTextRendererComponent.h" />
   </ItemGroup>
 </Project>

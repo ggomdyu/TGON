@@ -15,7 +15,7 @@
 #include "Math/Extent.h"
 #include "Platform/Config.h"
 
-#ifdef CreateFont
+#if TGON_PLATFORM_WINDOWS
 #   undef CreateFont
 #endif
 

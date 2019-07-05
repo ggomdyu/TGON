@@ -94,9 +94,9 @@ using PureType = std::remove_cv_t<RemoveAllPointersType<std::decay_t<_Type>>>;
 
 template <typename _Type>
 constexpr bool IsCharValue = std::is_same<_Type, char>::value ||
-std::is_same<_Type, char16_t>::value ||
-std::is_same<_Type, char32_t>::value ||
-std::is_same<_Type, wchar_t>::value;
+                             std::is_same<_Type, char16_t>::value ||
+                             std::is_same<_Type, char32_t>::value ||
+                             std::is_same<_Type, wchar_t>::value;
     
 template <typename _Type>
 constexpr bool IsCharPointerValue = IsCharValue<PureType<_Type>> && (std::is_pointer_v<_Type> || std::is_reference_v<_Type>);
