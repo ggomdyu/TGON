@@ -11,9 +11,9 @@
 #include "Graphics/Material.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Graphics.h"
+#include "Graphics/VertexBufferType.h"
 
 #include "UIRenderer.h"
-#include "VertexBufferType.h"
 
 namespace tgon
 {

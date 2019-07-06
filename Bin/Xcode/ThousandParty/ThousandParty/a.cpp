@@ -225,7 +225,7 @@ void LogoScene::InitPhase4()
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    const wchar_t chArray[] = L"가abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const wchar_t chArray[] = L"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ5";
     static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, 6);
     for (auto ch : chArray)
     {
@@ -233,7 +233,7 @@ void LogoScene::InitPhase4()
         textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
     }
 
-    auto& imageRect = textureAtlas.GetTextureRect(u'가');
+    auto& imageRect = textureAtlas.GetTextureRect(u'h');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
     decltype(auto) sprite = std::make_shared<Sprite>(texture);
     sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));

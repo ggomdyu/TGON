@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.h"
 
 #include "Graphics/Texture.h"
+#include "Graphics/Transform.h"
 
 #include "CanvasSprite.h"
-#include "Transform.h"
 
 namespace tgon
 {
