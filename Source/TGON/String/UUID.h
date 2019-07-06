@@ -50,6 +50,7 @@ public:
 public:
     static BasicUUID NewUUID();
     const _CharType At(size_t index) const;
+    const Range<const _CharType> Range() const noexcept;
     using SuperType::Compare;
     using SuperType::Find;
     using SuperType::RFind;
@@ -57,10 +58,6 @@ public:
     using SuperType::Data;
     using SuperType::Length;
     using SuperType::Capacity;
-    using SuperType::begin;
-    using SuperType::end;
-    using SuperType::rbegin;
-    using SuperType::rend;
 };
 
 using UUID = BasicUUID<char, BasicStringTraits<char>>;
@@ -102,5 +99,11 @@ inline const _CharType BasicUUID<_CharType, _StringTraitsType>::At(size_t index)
 {
     return SuperType::At(index);
 }
-
+    
+template <typename _CharType, typename _StringTraitsType>
+inline const Range<const _CharType> BasicUUID<_CharType, _StringTraitsType>::Range() const noexcept
+{
+    return SuperType::Range();
+}
+    
 } /* namespace tgon */

@@ -19,22 +19,12 @@ public:
 
 /**@section Operator */
 public:
-    bool operator==(const IEquatable* rhs) const
-    {
-        return this->Equals(rhs);
-    }
-    
-    bool operator!=(const IEquatable* rhs) const
-    {
-        return !this->Equals(rhs);
-    }
+    bool operator==(const IEquatable* rhs) const;
+    bool operator!=(const IEquatable* rhs) const;
     
 /**@section Method */
 public:
-    virtual bool Equals(const IComparable* rhs) const
-    {
-        return this->CompareTo(rhs) == 0;
-    }
+    virtual bool Equals(const IComparable* rhs) const;
     
     /**
      * @brief   Compares this instance with another instance of the same type.
@@ -45,5 +35,20 @@ public:
      */
     virtual int32_t CompareTo(const IComparable* rhs) const = 0;
 };
+    
+inline bool IComparable::operator==(const IEquatable* rhs) const
+{
+    return this->Equals(rhs);
+}
+    
+inline bool IComparable::operator!=(const IEquatable* rhs) const
+{
+    return !this->Equals(rhs);
+}
+
+inline bool IComparable::Equals(const IComparable* rhs) const
+{
+    return this->CompareTo(rhs) == 0;
+}
 
 } /* namespace tgon */

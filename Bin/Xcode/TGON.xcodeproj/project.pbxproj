@@ -27,6 +27,42 @@
 		FD268ED722CFDE0000F83F1E /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD268ECA22CFDE0000F83F1E /* CameraComponent.cpp */; };
 		FD268ED822CFDE0000F83F1E /* ComponentUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD268ECB22CFDE0000F83F1E /* ComponentUtility.h */; };
 		FD268ED922CFDE0000F83F1E /* MeshComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD268ECC22CFDE0000F83F1E /* MeshComponent.h */; };
+		FD2D6D0022D064410087DF85 /* Graphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CDF22D0643D0087DF85 /* Graphics.h */; };
+		FD2D6D0122D064410087DF85 /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */; };
+		FD2D6D0222D064410087DF85 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE122D0643D0087DF85 /* ShaderProgram.cpp */; };
+		FD2D6D0322D064410087DF85 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE222D0643D0087DF85 /* Model.cpp */; };
+		FD2D6D0422D064410087DF85 /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE322D0643D0087DF85 /* IndexBuffer.cpp */; };
+		FD2D6D0522D064410087DF85 /* IndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE422D0643D0087DF85 /* IndexBuffer.h */; };
+		FD2D6D0622D064410087DF85 /* GraphicsType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE522D0643E0087DF85 /* GraphicsType.h */; };
+		FD2D6D0722D064410087DF85 /* VertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE622D0643E0087DF85 /* VertexBuffer.h */; };
+		FD2D6D0822D064410087DF85 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */; };
+		FD2D6D0922D064410087DF85 /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE822D0643E0087DF85 /* RenderTarget.h */; };
+		FD2D6D0A22D064410087DF85 /* FVF.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE922D0643E0087DF85 /* FVF.h */; };
+		FD2D6D0B22D064410087DF85 /* TextureType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CEA22D0643E0087DF85 /* TextureType.h */; };
+		FD2D6D0C22D064410087DF85 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CEB22D0643E0087DF85 /* Transform.cpp */; };
+		FD2D6D0D22D064410087DF85 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CEC22D0643F0087DF85 /* Model.h */; };
+		FD2D6D0E22D064410087DF85 /* MeshRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CED22D0643F0087DF85 /* MeshRenderer.h */; };
+		FD2D6D0F22D064410087DF85 /* MeshUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CEE22D0643F0087DF85 /* MeshUtility.h */; };
+		FD2D6D1022D064410087DF85 /* MeshRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CEF22D0643F0087DF85 /* MeshRenderer.cpp */; };
+		FD2D6D1122D064410087DF85 /* RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */; };
+		FD2D6D1222D064410087DF85 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF122D0643F0087DF85 /* Material.h */; };
+		FD2D6D1322D064410087DF85 /* ShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF222D0643F0087DF85 /* ShaderProgram.h */; };
+		FD2D6D1422D064410087DF85 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF322D0643F0087DF85 /* Texture.cpp */; };
+		FD2D6D1522D064410087DF85 /* CanvasSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF422D064400087DF85 /* CanvasSprite.h */; };
+		FD2D6D1622D064410087DF85 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF522D064400087DF85 /* Transform.h */; };
+		FD2D6D1722D064410087DF85 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF622D064400087DF85 /* Mesh.cpp */; };
+		FD2D6D1822D064410087DF85 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF722D064400087DF85 /* Mesh.h */; };
+		FD2D6D1922D064410087DF85 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF822D064400087DF85 /* Camera.cpp */; };
+		FD2D6D1A22D064410087DF85 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF922D064400087DF85 /* Camera.h */; };
+		FD2D6D1B22D064410087DF85 /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CFA22D064400087DF85 /* Texture.h */; };
+		FD2D6D1C22D064410087DF85 /* MeshUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CFB22D064400087DF85 /* MeshUtility.cpp */; };
+		FD2D6D1D22D064410087DF85 /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CFC22D064400087DF85 /* TextureAtlas.h */; };
+		FD2D6D1E22D064410087DF85 /* VertexBufferType.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CFD22D064400087DF85 /* VertexBufferType.h */; };
+		FD2D6D1F22D064410087DF85 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CFE22D064410087DF85 /* Material.cpp */; };
+		FD2D6D2022D064410087DF85 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CFF22D064410087DF85 /* Graphics.cpp */; };
+		FD2D6D2322D064810087DF85 /* RectTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6D2122D064810087DF85 /* RectTransform.h */; };
+		FD2D6D2422D064810087DF85 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6D2222D064810087DF85 /* RectTransform.cpp */; };
+		FD2D6D2622D069E10087DF85 /* Range.h in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6D2522D069E10087DF85 /* Range.h */; };
 		FD4C1DD1219F3F7C00B2B2BE /* GainputInputDeviceTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6A219F345200B2B2BE /* GainputInputDeviceTouch.cpp */; };
 		FD4C1DD2219F3F7C00B2B2BE /* gainput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6E219F345200B2B2BE /* gainput.cpp */; };
 		FD4C1DD3219F3F7C00B2B2BE /* GainputInputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6F219F345200B2B2BE /* GainputInputState.cpp */; };
@@ -63,7 +99,6 @@
 		FD4C1DFF219F3F8700B2B2BE /* GainputMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA2219F345200B2B2BE /* GainputMac.mm */; };
 		FD4C1E00219F3F8700B2B2BE /* GainputInputDeviceBuiltInIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA7219F345200B2B2BE /* GainputInputDeviceBuiltInIos.mm */; };
 		FD5331B922A043BB001EB57C /* OpenGLDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5331B822A043BB001EB57C /* OpenGLDebug.h */; };
-		FD5331BB22A043F1001EB57C /* RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD5331BA22A043F1001EB57C /* RenderTarget.cpp */; };
 		FD5331DC22A2E52F001EB57C /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DB22A2E52F001EB57C /* ftbase.c */; };
 		FD5331DE22A2E53C001EB57C /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DD22A2E53C001EB57C /* autofit.c */; };
 		FD5331E022A2E546001EB57C /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DF22A2E546001EB57C /* ftgzip.c */; };
@@ -246,16 +281,11 @@
 		FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C38219F344600B2B2BE /* vorbisfile.c */; };
 		FD78AC032289C4DF00D22E46 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C39219F344600B2B2BE /* window.c */; };
 		FD78AC062289D06000D22E46 /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C24219F344600B2B2BE /* psy.c */; };
-		FD78AC0B2289D51400D22E46 /* MeshRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD78AC072289D51300D22E46 /* MeshRenderer.cpp */; };
-		FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FD78AC082289D51300D22E46 /* MeshRenderer.h */; };
 		FD7DE061229D6C67002B5786 /* Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE05F229D6C67002B5786 /* Thread.h */; };
 		FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE060229D6C67002B5786 /* Thread.cpp */; };
 		FD7DE064229D6C7A002B5786 /* MacOSThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE063229D6C79002B5786 /* MacOSThread.cpp */; };
-		FD7DE067229D6CC7002B5786 /* RectTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE065229D6CC7002B5786 /* RectTransform.h */; };
-		FD7DE068229D6CC7002B5786 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE066229D6CC7002B5786 /* RectTransform.cpp */; };
 		FD7DE06B229D973C002B5786 /* OpenGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE069229D973C002B5786 /* OpenGLRenderTarget.cpp */; };
 		FD7DE06C229D973C002B5786 /* OpenGLRenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE06A229D973C002B5786 /* OpenGLRenderTarget.h */; };
-		FD7DE06F229E393A002B5786 /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE06D229E393A002B5786 /* RenderTarget.h */; };
 		FD7E61C1228F365400A829FD /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C0228F365400A829FD /* Vector4.h */; };
 		FD7E61C62291D72F00A829FD /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C42291D72F00A829FD /* Scene.h */; };
 		FD7E61C72291D72F00A829FD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61C52291D72F00A829FD /* Scene.cpp */; };
@@ -264,8 +294,6 @@
 		FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CD2291D86000A829FD /* stb_vorbis.c */; };
 		FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CF22945BED00A829FD /* TaskModule.cpp */; };
 		FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61D022945BED00A829FD /* TaskModule.h */; };
-		FD9AEEC322CA45C5003607DC /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */; };
-		FD9AEEC422CA45C5003607DC /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC222CA45C5003607DC /* TextureAtlas.h */; };
 		FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC522CA606A003607DC /* Algorithm.h */; };
 		FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC722CA606E003607DC /* NonAddressable.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
@@ -705,15 +733,6 @@
 		FDC02CEE228487CA00BEE91A /* InputModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C46228481F000BEE91A /* InputModule.cpp */; };
 		FDC02CEF228487CA00BEE91A /* TimeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C47228481F000BEE91A /* TimeModule.cpp */; };
 		FDC02CF0228487CA00BEE91A /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C4A228481F000BEE91A /* Engine.cpp */; };
-		FDC02CF9228487CA00BEE91A /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */; };
-		FDC02CFA228487CA00BEE91A /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B54228481EF00BEE91A /* Mesh.cpp */; };
-		FDC02CFB228487CA00BEE91A /* MeshUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B57228481EF00BEE91A /* MeshUtility.cpp */; };
-		FDC02CFC228487CA00BEE91A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B59228481EF00BEE91A /* Camera.cpp */; };
-		FDC02CFF228487CA00BEE91A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B66228481EF00BEE91A /* Texture.cpp */; };
-		FDC02D03228487CA00BEE91A /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B72228481EF00BEE91A /* ShaderProgram.cpp */; };
-		FDC02D04228487CA00BEE91A /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B74228481EF00BEE91A /* Model.cpp */; };
-		FDC02D07228487CA00BEE91A /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B7B228481EF00BEE91A /* Material.cpp */; };
-		FDC02D08228487CA00BEE91A /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */; };
 		FDC02D09228487CA00BEE91A /* OpenGLGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B82228481EF00BEE91A /* OpenGLGraphics.cpp */; };
 		FDC02D0B228487CA00BEE91A /* OpenGLIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B8C228481EF00BEE91A /* OpenGLIndexBuffer.cpp */; };
 		FDC02D0D228487CA00BEE91A /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B8E228481EF00BEE91A /* OpenGLTexture.cpp */; };
@@ -749,8 +768,6 @@
 		FDC83D4D22CE40A200B93C8D /* IAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC83D4C22CE40A100B93C8D /* IAsset.h */; };
 		FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */; };
 		FDC83D5122CE40EE00B93C8D /* AssetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC83D4F22CE40EE00B93C8D /* AssetModule.h */; };
-		FDD4E0312287124800E26531 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDD4E02D2287124800E26531 /* Transform.cpp */; };
-		FDD4E0332287124800E26531 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = FDD4E02F2287124800E26531 /* Transform.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
 		FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = FDEA237820AFF586000885AC /* PrecompiledHeader.h */; };
@@ -781,6 +798,42 @@
 		FD268ECA22CFDE0000F83F1E /* CameraComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CameraComponent.cpp; path = ../../../Source/TGON/Component/CameraComponent.cpp; sourceTree = "<group>"; };
 		FD268ECB22CFDE0000F83F1E /* ComponentUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = ComponentUtility.h; path = ../../../Source/TGON/Component/ComponentUtility.h; sourceTree = "<group>"; };
 		FD268ECC22CFDE0000F83F1E /* MeshComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = MeshComponent.h; path = ../../../Source/TGON/Component/MeshComponent.h; sourceTree = "<group>"; };
+		FD2D6CDF22D0643D0087DF85 /* Graphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Graphics.h; sourceTree = "<group>"; };
+		FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = VertexBuffer.cpp; sourceTree = "<group>"; };
+		FD2D6CE122D0643D0087DF85 /* ShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ShaderProgram.cpp; sourceTree = "<group>"; };
+		FD2D6CE222D0643D0087DF85 /* Model.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Model.cpp; sourceTree = "<group>"; };
+		FD2D6CE322D0643D0087DF85 /* IndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = IndexBuffer.cpp; sourceTree = "<group>"; };
+		FD2D6CE422D0643D0087DF85 /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IndexBuffer.h; sourceTree = "<group>"; };
+		FD2D6CE522D0643E0087DF85 /* GraphicsType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GraphicsType.h; sourceTree = "<group>"; };
+		FD2D6CE622D0643E0087DF85 /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = VertexBuffer.h; sourceTree = "<group>"; };
+		FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = TextureAtlas.cpp; sourceTree = "<group>"; };
+		FD2D6CE822D0643E0087DF85 /* RenderTarget.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RenderTarget.h; sourceTree = "<group>"; };
+		FD2D6CE922D0643E0087DF85 /* FVF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FVF.h; sourceTree = "<group>"; };
+		FD2D6CEA22D0643E0087DF85 /* TextureType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = TextureType.h; sourceTree = "<group>"; };
+		FD2D6CEB22D0643E0087DF85 /* Transform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Transform.cpp; sourceTree = "<group>"; };
+		FD2D6CEC22D0643F0087DF85 /* Model.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Model.h; sourceTree = "<group>"; };
+		FD2D6CED22D0643F0087DF85 /* MeshRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRenderer.h; sourceTree = "<group>"; };
+		FD2D6CEE22D0643F0087DF85 /* MeshUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshUtility.h; sourceTree = "<group>"; };
+		FD2D6CEF22D0643F0087DF85 /* MeshRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MeshRenderer.cpp; sourceTree = "<group>"; };
+		FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RenderTarget.cpp; sourceTree = "<group>"; };
+		FD2D6CF122D0643F0087DF85 /* Material.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Material.h; sourceTree = "<group>"; };
+		FD2D6CF222D0643F0087DF85 /* ShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ShaderProgram.h; sourceTree = "<group>"; };
+		FD2D6CF322D0643F0087DF85 /* Texture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Texture.cpp; sourceTree = "<group>"; };
+		FD2D6CF422D064400087DF85 /* CanvasSprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CanvasSprite.h; sourceTree = "<group>"; };
+		FD2D6CF522D064400087DF85 /* Transform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Transform.h; sourceTree = "<group>"; };
+		FD2D6CF622D064400087DF85 /* Mesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Mesh.cpp; sourceTree = "<group>"; };
+		FD2D6CF722D064400087DF85 /* Mesh.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Mesh.h; sourceTree = "<group>"; };
+		FD2D6CF822D064400087DF85 /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Camera.cpp; sourceTree = "<group>"; };
+		FD2D6CF922D064400087DF85 /* Camera.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Camera.h; sourceTree = "<group>"; };
+		FD2D6CFA22D064400087DF85 /* Texture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Texture.h; sourceTree = "<group>"; };
+		FD2D6CFB22D064400087DF85 /* MeshUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MeshUtility.cpp; sourceTree = "<group>"; };
+		FD2D6CFC22D064400087DF85 /* TextureAtlas.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = TextureAtlas.h; sourceTree = "<group>"; };
+		FD2D6CFD22D064400087DF85 /* VertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = VertexBufferType.h; sourceTree = "<group>"; };
+		FD2D6CFE22D064410087DF85 /* Material.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Material.cpp; sourceTree = "<group>"; };
+		FD2D6CFF22D064410087DF85 /* Graphics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Graphics.cpp; sourceTree = "<group>"; };
+		FD2D6D2122D064810087DF85 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = RectTransform.h; path = ../../../Source/TGON/UI/RectTransform.h; sourceTree = "<group>"; };
+		FD2D6D2222D064810087DF85 /* RectTransform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = RectTransform.cpp; path = ../../../Source/TGON/UI/RectTransform.cpp; sourceTree = "<group>"; };
+		FD2D6D2522D069E10087DF85 /* Range.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Range.h; sourceTree = "<group>"; };
 		FD41202D201E3A8200D70538 /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4C1BE2219F342700B2B2BE /* glxew.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = glxew.h; sourceTree = "<group>"; };
 		FD4C1BE3219F342700B2B2BE /* eglew.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = eglew.h; sourceTree = "<group>"; };
@@ -971,7 +1024,6 @@
 		FD4C1CB8219F345200B2B2BE /* GainputInputDeviceKeyboardMac.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GainputInputDeviceKeyboardMac.cpp; sourceTree = "<group>"; };
 		FD4C1CB9219F345200B2B2BE /* GainputInputDevice.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GainputInputDevice.cpp; sourceTree = "<group>"; };
 		FD5331B822A043BB001EB57C /* OpenGLDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLDebug.h; sourceTree = "<group>"; };
-		FD5331BA22A043F1001EB57C /* RenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderTarget.cpp; sourceTree = "<group>"; };
 		FD5331DB22A2E52F001EB57C /* ftbase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbase.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/base/ftbase.c"; sourceTree = "<group>"; };
 		FD5331DD22A2E53C001EB57C /* autofit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = autofit.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/autofit/autofit.c"; sourceTree = "<group>"; };
 		FD5331DF22A2E546001EB57C /* ftgzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgzip.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/ftgzip.c"; sourceTree = "<group>"; };
@@ -1132,16 +1184,11 @@
 		FD53332E22A58011001EB57C /* gzwrite.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; fileEncoding = 4; name = gzwrite.c; path = "../../Source/ThirdParty/zlib-1.2.11/gzwrite.c"; sourceTree = "<group>"; };
 		FD53333022A5834A001EB57C /* FontFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontFactory.h; sourceTree = "<group>"; };
 		FD53333122A5834A001EB57C /* FontFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontFactory.cpp; sourceTree = "<group>"; };
-		FD78AC072289D51300D22E46 /* MeshRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MeshRenderer.cpp; sourceTree = "<group>"; };
-		FD78AC082289D51300D22E46 /* MeshRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = MeshRenderer.h; sourceTree = "<group>"; };
 		FD7DE05F229D6C67002B5786 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		FD7DE060229D6C67002B5786 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
 		FD7DE063229D6C79002B5786 /* MacOSThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MacOSThread.cpp; sourceTree = "<group>"; };
-		FD7DE065229D6CC7002B5786 /* RectTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectTransform.h; sourceTree = "<group>"; };
-		FD7DE066229D6CC7002B5786 /* RectTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectTransform.cpp; sourceTree = "<group>"; };
 		FD7DE069229D973C002B5786 /* OpenGLRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRenderTarget.cpp; sourceTree = "<group>"; };
 		FD7DE06A229D973C002B5786 /* OpenGLRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLRenderTarget.h; sourceTree = "<group>"; };
-		FD7DE06D229E393A002B5786 /* RenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTarget.h; sourceTree = "<group>"; };
 		FD7E61C0228F365400A829FD /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
 		FD7E61C42291D72F00A829FD /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		FD7E61C52291D72F00A829FD /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
@@ -1150,8 +1197,6 @@
 		FD7E61CD2291D86000A829FD /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../Source/ThirdParty/stb/stb_vorbis.c; sourceTree = "<group>"; };
 		FD7E61CF22945BED00A829FD /* TaskModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskModule.cpp; sourceTree = "<group>"; };
 		FD7E61D022945BED00A829FD /* TaskModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskModule.h; sourceTree = "<group>"; };
-		FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
-		FD9AEEC222CA45C5003607DC /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
 		FD9AEEC522CA606A003607DC /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithm.h; path = ../../../Source/TGON/Misc/Algorithm.h; sourceTree = "<group>"; };
 		FD9AEEC722CA606E003607DC /* NonAddressable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonAddressable.h; path = ../../../Source/TGON/Misc/NonAddressable.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
@@ -1585,29 +1630,6 @@
 		FDC02B49228481EF00BEE91A /* MacOSLog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLog.mm; sourceTree = "<group>"; };
 		FDC02B4A228481EF00BEE91A /* LogType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = LogType.h; sourceTree = "<group>"; };
 		FDC02B4B228481EF00BEE91A /* Log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Log.h; sourceTree = "<group>"; };
-		FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = VertexBuffer.cpp; sourceTree = "<group>"; };
-		FDC02B54228481EF00BEE91A /* Mesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Mesh.cpp; sourceTree = "<group>"; };
-		FDC02B56228481EF00BEE91A /* IndexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IndexBuffer.h; sourceTree = "<group>"; };
-		FDC02B57228481EF00BEE91A /* MeshUtility.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MeshUtility.cpp; sourceTree = "<group>"; };
-		FDC02B59228481EF00BEE91A /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Camera.cpp; sourceTree = "<group>"; };
-		FDC02B60228481EF00BEE91A /* Camera.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Camera.h; sourceTree = "<group>"; };
-		FDC02B62228481EF00BEE91A /* VertexBufferType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = VertexBufferType.h; sourceTree = "<group>"; };
-		FDC02B64228481EF00BEE91A /* ShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ShaderProgram.h; sourceTree = "<group>"; };
-		FDC02B65228481EF00BEE91A /* Material.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Material.h; sourceTree = "<group>"; };
-		FDC02B66228481EF00BEE91A /* Texture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Texture.cpp; sourceTree = "<group>"; };
-		FDC02B68228481EF00BEE91A /* Mesh.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Mesh.h; sourceTree = "<group>"; };
-		FDC02B6C228481EF00BEE91A /* TextureType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = TextureType.h; sourceTree = "<group>"; };
-		FDC02B71228481EF00BEE91A /* FVF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = FVF.h; sourceTree = "<group>"; };
-		FDC02B72228481EF00BEE91A /* ShaderProgram.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
-		FDC02B73228481EF00BEE91A /* Model.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Model.h; sourceTree = "<group>"; };
-		FDC02B74228481EF00BEE91A /* Model.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Model.cpp; sourceTree = "<group>"; };
-		FDC02B75228481EF00BEE91A /* GraphicsType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsType.h; sourceTree = "<group>"; };
-		FDC02B77228481EF00BEE91A /* Texture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Texture.h; sourceTree = "<group>"; };
-		FDC02B78228481EF00BEE91A /* Graphics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Graphics.h; sourceTree = "<group>"; };
-		FDC02B7B228481EF00BEE91A /* Material.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Material.cpp; sourceTree = "<group>"; };
-		FDC02B7C228481EF00BEE91A /* VertexBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = VertexBuffer.h; sourceTree = "<group>"; };
-		FDC02B7E228481EF00BEE91A /* MeshUtility.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MeshUtility.h; sourceTree = "<group>"; };
-		FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = IndexBuffer.cpp; sourceTree = "<group>"; };
 		FDC02B81228481EF00BEE91A /* OpenGLShaderCode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLShaderCode.h; sourceTree = "<group>"; };
 		FDC02B82228481EF00BEE91A /* OpenGLGraphics.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = OpenGLGraphics.cpp; sourceTree = "<group>"; };
 		FDC02B84228481EF00BEE91A /* MacOSOpenGLContext.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSOpenGLContext.mm; sourceTree = "<group>"; };
@@ -1736,11 +1758,9 @@
 		FDC02CDF228482F000BEE91A /* Hash.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Hash.cpp; sourceTree = "<group>"; };
 		FDC02D502284897500BEE91A /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameObject.cpp; sourceTree = "<group>"; };
 		FDC02D512284897500BEE91A /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameObject.h; sourceTree = "<group>"; };
-		FDC83D4C22CE40A100B93C8D /* IAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAsset.h; sourceTree = "<group>"; };
+		FDC83D4C22CE40A100B93C8D /* IAsset.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IAsset.h; sourceTree = "<group>"; };
 		FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetModule.cpp; sourceTree = "<group>"; };
 		FDC83D4F22CE40EE00B93C8D /* AssetModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetModule.h; sourceTree = "<group>"; };
-		FDD4E02D2287124800E26531 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		FDD4E02F2287124800E26531 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDE085CA20B134F100D22E80 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../ThirdParty/Debug/x86_64/libogg.a; sourceTree = "<group>"; };
@@ -1775,6 +1795,8 @@
 				FD268EB322CFDDE500F83F1E /* CanvasSpriteBatch.h */,
 				FD268EB422CFDDE500F83F1E /* UIRenderer.cpp */,
 				FD268EB522CFDDE500F83F1E /* UIRenderer.h */,
+				FD2D6D2222D064810087DF85 /* RectTransform.cpp */,
+				FD2D6D2122D064810087DF85 /* RectTransform.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3018,39 +3040,39 @@
 			isa = PBXGroup;
 			children = (
 				FDC02B80228481EF00BEE91A /* OpenGL */,
-				FD78AC072289D51300D22E46 /* MeshRenderer.cpp */,
-				FD78AC082289D51300D22E46 /* MeshRenderer.h */,
-				FDC02B54228481EF00BEE91A /* Mesh.cpp */,
-				FDC02B68228481EF00BEE91A /* Mesh.h */,
-				FDC02B57228481EF00BEE91A /* MeshUtility.cpp */,
-				FDC02B7E228481EF00BEE91A /* MeshUtility.h */,
-				FDC02B7B228481EF00BEE91A /* Material.cpp */,
-				FDC02B65228481EF00BEE91A /* Material.h */,
-				FDD4E02D2287124800E26531 /* Transform.cpp */,
-				FDD4E02F2287124800E26531 /* Transform.h */,
-				FD7DE066229D6CC7002B5786 /* RectTransform.cpp */,
-				FD7DE065229D6CC7002B5786 /* RectTransform.h */,
-				FD5331BA22A043F1001EB57C /* RenderTarget.cpp */,
-				FD7DE06D229E393A002B5786 /* RenderTarget.h */,
-				FDC02B53228481EF00BEE91A /* VertexBuffer.cpp */,
-				FDC02B7C228481EF00BEE91A /* VertexBuffer.h */,
-				FDC02B7F228481EF00BEE91A /* IndexBuffer.cpp */,
-				FDC02B56228481EF00BEE91A /* IndexBuffer.h */,
-				FDC02B59228481EF00BEE91A /* Camera.cpp */,
-				FDC02B60228481EF00BEE91A /* Camera.h */,
-				FDC02B62228481EF00BEE91A /* VertexBufferType.h */,
-				FDC02B72228481EF00BEE91A /* ShaderProgram.cpp */,
-				FDC02B64228481EF00BEE91A /* ShaderProgram.h */,
-				FDC02B75228481EF00BEE91A /* GraphicsType.h */,
-				FDC02B78228481EF00BEE91A /* Graphics.h */,
-				FDC02B66228481EF00BEE91A /* Texture.cpp */,
-				FDC02B77228481EF00BEE91A /* Texture.h */,
-				FDC02B6C228481EF00BEE91A /* TextureType.h */,
-				FD9AEEC122CA45C4003607DC /* TextureAtlas.cpp */,
-				FD9AEEC222CA45C5003607DC /* TextureAtlas.h */,
-				FDC02B71228481EF00BEE91A /* FVF.h */,
-				FDC02B74228481EF00BEE91A /* Model.cpp */,
-				FDC02B73228481EF00BEE91A /* Model.h */,
+				FD2D6CF822D064400087DF85 /* Camera.cpp */,
+				FD2D6CF922D064400087DF85 /* Camera.h */,
+				FD2D6CF422D064400087DF85 /* CanvasSprite.h */,
+				FD2D6CE922D0643E0087DF85 /* FVF.h */,
+				FD2D6CFF22D064410087DF85 /* Graphics.cpp */,
+				FD2D6CDF22D0643D0087DF85 /* Graphics.h */,
+				FD2D6CE522D0643E0087DF85 /* GraphicsType.h */,
+				FD2D6CE322D0643D0087DF85 /* IndexBuffer.cpp */,
+				FD2D6CE422D0643D0087DF85 /* IndexBuffer.h */,
+				FD2D6CFE22D064410087DF85 /* Material.cpp */,
+				FD2D6CF122D0643F0087DF85 /* Material.h */,
+				FD2D6CF622D064400087DF85 /* Mesh.cpp */,
+				FD2D6CF722D064400087DF85 /* Mesh.h */,
+				FD2D6CEF22D0643F0087DF85 /* MeshRenderer.cpp */,
+				FD2D6CED22D0643F0087DF85 /* MeshRenderer.h */,
+				FD2D6CFB22D064400087DF85 /* MeshUtility.cpp */,
+				FD2D6CEE22D0643F0087DF85 /* MeshUtility.h */,
+				FD2D6CE222D0643D0087DF85 /* Model.cpp */,
+				FD2D6CEC22D0643F0087DF85 /* Model.h */,
+				FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */,
+				FD2D6CE822D0643E0087DF85 /* RenderTarget.h */,
+				FD2D6CE122D0643D0087DF85 /* ShaderProgram.cpp */,
+				FD2D6CF222D0643F0087DF85 /* ShaderProgram.h */,
+				FD2D6CF322D0643F0087DF85 /* Texture.cpp */,
+				FD2D6CFA22D064400087DF85 /* Texture.h */,
+				FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */,
+				FD2D6CFC22D064400087DF85 /* TextureAtlas.h */,
+				FD2D6CEA22D0643E0087DF85 /* TextureType.h */,
+				FD2D6CEB22D0643E0087DF85 /* Transform.cpp */,
+				FD2D6CF522D064400087DF85 /* Transform.h */,
+				FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */,
+				FD2D6CE622D0643E0087DF85 /* VertexBuffer.h */,
+				FD2D6CFD22D064400087DF85 /* VertexBufferType.h */,
 			);
 			name = Graphics;
 			path = ../../Source/TGON/Graphics;
@@ -3362,6 +3384,7 @@
 				FDC02CC5228481F100BEE91A /* CoreObject.h */,
 				FDC02CC1228481F100BEE91A /* RTTI.h */,
 				FDC02CC6228481F100BEE91A /* RTTI.cpp */,
+				FD2D6D2522D069E10087DF85 /* Range.h */,
 				FDC02CC9228481F100BEE91A /* DynamicCast.h */,
 				FDC83D4C22CE40A100B93C8D /* IAsset.h */,
 				FDC02CCB228481F100BEE91A /* ISerializable.h */,
@@ -3468,8 +3491,11 @@
 				FDB7033522B69D600055FCED /* punycode.h in Headers */,
 				FD268EBB22CFDDE500F83F1E /* UIRenderer.h in Headers */,
 				FDB702A522B69D600055FCED /* ucasemap_imp.h in Headers */,
+				FD2D6D1B22D064410087DF85 /* Texture.h in Headers */,
+				FD2D6D0B22D064410087DF85 /* TextureType.h in Headers */,
 				FDB700E822B69D1F0055FCED /* localpointer.h in Headers */,
 				FDB7030A22B69D600055FCED /* utypeinfo.h in Headers */,
+				FD2D6D1322D064410087DF85 /* ShaderProgram.h in Headers */,
 				FDB7026A22B69D600055FCED /* cwchar.h in Headers */,
 				FD268ECE22CFDE0000F83F1E /* TextComponent.h in Headers */,
 				FD5332AB22A2EA1C001EB57C /* tttypes.h in Headers */,
@@ -3481,13 +3507,13 @@
 				FD5332AC22A2EA1C001EB57C /* ftvalid.h in Headers */,
 				FDB702FB22B69D600055FCED /* uvector.h in Headers */,
 				FDB7024622B69D600055FCED /* ubidi_props_data.h in Headers */,
+				FD2D6D0722D064410087DF85 /* VertexBuffer.h in Headers */,
 				FD5332CB22A2EA1C001EB57C /* ftadvanc.h in Headers */,
-				FD78AC0C2289D51400D22E46 /* MeshRenderer.h in Headers */,
 				FD53329122A2EA1C001EB57C /* fttypes.h in Headers */,
 				FDB7023222B69D600055FCED /* uelement.h in Headers */,
-				FDD4E0332287124800E26531 /* Transform.h in Headers */,
 				FDB700BA22B69D1F0055FCED /* uclean.h in Headers */,
 				FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */,
+				FD2D6D0F22D064410087DF85 /* MeshUtility.h in Headers */,
 				FD53333222A5834A001EB57C /* FontFactory.h in Headers */,
 				FD53329D22A2EA1C001EB57C /* ftbbox.h in Headers */,
 				FD53332722A57F38001EB57C /* inflate.h in Headers */,
@@ -3502,7 +3528,6 @@
 				FDB7027D22B69D600055FCED /* ucmndata.h in Headers */,
 				FDB7030422B69D600055FCED /* unistrappender.h in Headers */,
 				FDB700EA22B69D1F0055FCED /* ucnvsel.h in Headers */,
-				FD7DE067229D6CC7002B5786 /* RectTransform.h in Headers */,
 				FD5332B822A2EA1C001EB57C /* svttcmap.h in Headers */,
 				FDB700B622B69D1F0055FCED /* ubidi.h in Headers */,
 				FDB700BD22B69D1F0055FCED /* casemap.h in Headers */,
@@ -3517,13 +3542,15 @@
 				FDB7024122B69D600055FCED /* ustrfmt.h in Headers */,
 				FDB702C522B69D600055FCED /* cstr.h in Headers */,
 				FD53331D22A57F38001EB57C /* zlib.h in Headers */,
+				FD2D6D0522D064410087DF85 /* IndexBuffer.h in Headers */,
 				FDB702D822B69D600055FCED /* brkeng.h in Headers */,
 				FD53329722A2EA1C001EB57C /* ftoption.h in Headers */,
 				FDB7022522B69D600055FCED /* rbbiscan.h in Headers */,
 				FDB7036822B6B3420055FCED /* infcodes.h in Headers */,
 				FD5332C722A2EA1C001EB57C /* svpostnm.h in Headers */,
+				FD2D6D1D22D064410087DF85 /* TextureAtlas.h in Headers */,
+				FD2D6D2322D064810087DF85 /* RectTransform.h in Headers */,
 				FDB702D522B69D600055FCED /* locutil.h in Headers */,
-				FD7DE06F229E393A002B5786 /* RenderTarget.h in Headers */,
 				FDB700D222B69D1F0055FCED /* brkiter.h in Headers */,
 				FDB700C722B69D1F0055FCED /* ucnv_cb.h in Headers */,
 				FD5332CF22A2EA1C001EB57C /* ftstroke.h in Headers */,
@@ -3551,11 +3578,13 @@
 				FD5332DA22A2EA1C001EB57C /* tttags.h in Headers */,
 				FDB700E422B69D1F0055FCED /* utf_old.h in Headers */,
 				FDB700A622B69D1F0055FCED /* parseerr.h in Headers */,
+				FD2D6D0022D064410087DF85 /* Graphics.h in Headers */,
 				FDB7009722B69D1F0055FCED /* ucasemap.h in Headers */,
 				FDB702A722B69D600055FCED /* uinvchar.h in Headers */,
 				FD5332C122A2EA1C001EB57C /* svfntfmt.h in Headers */,
 				FDB700DE22B69D1F0055FCED /* usprep.h in Headers */,
 				FD268ED922CFDE0000F83F1E /* MeshComponent.h in Headers */,
+				FD2D6D1222D064410087DF85 /* Material.h in Headers */,
 				FDB7027622B69D600055FCED /* uset_imp.h in Headers */,
 				FDB7030322B69D600055FCED /* servnotf.h in Headers */,
 				FD53332222A57F38001EB57C /* inftrees.h in Headers */,
@@ -3566,6 +3595,7 @@
 				FD5331B922A043BB001EB57C /* OpenGLDebug.h in Headers */,
 				FD5332D222A2EA1C001EB57C /* freetype.h in Headers */,
 				FD5332B022A2EA1C001EB57C /* fthash.h in Headers */,
+				FD2D6D1A22D064410087DF85 /* Camera.h in Headers */,
 				FDB700AB22B69D1F0055FCED /* ptypes.h in Headers */,
 				FDB700E122B69D1F0055FCED /* bytestrie.h in Headers */,
 				FDB702CC22B69D600055FCED /* ucln_imp.h in Headers */,
@@ -3591,6 +3621,7 @@
 				FD5332B522A2EA1C001EB57C /* svmm.h in Headers */,
 				FDB702C622B69D600055FCED /* messageimpl.h in Headers */,
 				FDB7034122B69D600055FCED /* uarrsort.h in Headers */,
+				FD2D6D0A22D064410087DF85 /* FVF.h in Headers */,
 				FDB7029D22B69D600055FCED /* utrie2.h in Headers */,
 				FD5332BA22A2EA1C001EB57C /* svgldict.h in Headers */,
 				FDB700DD22B69D1F0055FCED /* uset.h in Headers */,
@@ -3623,11 +3654,13 @@
 				FDB702B922B69D600055FCED /* unifiedcache.h in Headers */,
 				FDB7009F22B69D1F0055FCED /* rbbi.h in Headers */,
 				FD53329B22A2EA1C001EB57C /* ftbzip2.h in Headers */,
+				FD2D6D0622D064410087DF85 /* GraphicsType.h in Headers */,
 				FDB702C322B69D600055FCED /* icuplugimp.h in Headers */,
 				FD5332AA22A2EA1C001EB57C /* cfftypes.h in Headers */,
 				FDB700E622B69D1F0055FCED /* icuplug.h in Headers */,
 				FDB700A522B69D1F0055FCED /* utrace.h in Headers */,
 				FD5332E822A2EA1C001EB57C /* ftrender.h in Headers */,
+				FD2D6D1622D064410087DF85 /* Transform.h in Headers */,
 				FD5332E722A2EA1C001EB57C /* ftbdf.h in Headers */,
 				FDB7009B22B69D1F0055FCED /* uvernum.h in Headers */,
 				FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */,
@@ -3687,6 +3720,7 @@
 				FD5332DE22A2EA1C001EB57C /* ftimage.h in Headers */,
 				FDB7036622B6B30C0055FCED /* inftrees.h in Headers */,
 				FDB7037822B9132B0055FCED /* ExpressionTemplate.h in Headers */,
+				FD2D6D1E22D064410087DF85 /* VertexBufferType.h in Headers */,
 				FDB7032922B69D600055FCED /* ucol_data.h in Headers */,
 				FD5332D122A2EA1C001EB57C /* ftotval.h in Headers */,
 				FDB700D122B69D1F0055FCED /* uenum.h in Headers */,
@@ -3702,6 +3736,7 @@
 				FD5332CD22A2EA1C001EB57C /* fterrors.h in Headers */,
 				FDB7034022B69D600055FCED /* sharedobject.h in Headers */,
 				FD5332E122A2EA1C001EB57C /* ftglyph.h in Headers */,
+				FD2D6D1522D064410087DF85 /* CanvasSprite.h in Headers */,
 				FDB700F322B69D1F0055FCED /* schriter.h in Headers */,
 				FD5332AE22A2EA1C001EB57C /* fttrace.h in Headers */,
 				FD5332A122A2EA1C001EB57C /* internal.h in Headers */,
@@ -3712,10 +3747,10 @@
 				FDB700C522B69D1F0055FCED /* ucharstrie.h in Headers */,
 				FDB700B022B69D1F0055FCED /* strenum.h in Headers */,
 				FD5332CE22A2EA1C001EB57C /* ftgasp.h in Headers */,
+				FD2D6D0D22D064410087DF85 /* Model.h in Headers */,
 				FDB700C922B69D1F0055FCED /* appendable.h in Headers */,
 				FD53328F22A2EA1C001EB57C /* ftwinfnt.h in Headers */,
 				FDB702B322B69D600055FCED /* capi_helper.h in Headers */,
-				FD9AEEC422CA45C5003607DC /* TextureAtlas.h in Headers */,
 				FDB702DF22B69D600055FCED /* unisetspan.h in Headers */,
 				FDB7024522B69D600055FCED /* udataswp.h in Headers */,
 				FDB7023722B69D600055FCED /* rbbisetb.h in Headers */,
@@ -3756,12 +3791,14 @@
 				FDB7024222B69D600055FCED /* utracimp.h in Headers */,
 				FDB700BB22B69D1F0055FCED /* stringpiece.h in Headers */,
 				FD5332E422A2EA1C001EB57C /* ftlist.h in Headers */,
+				FD2D6D1822D064410087DF85 /* Mesh.h in Headers */,
 				FDB700CE22B69D1F0055FCED /* ubrk.h in Headers */,
 				FDB700EF22B69D1F0055FCED /* chariter.h in Headers */,
 				FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */,
 				FD5332EB22A36015001EB57C /* ft2build.h in Headers */,
 				FD5332DC22A2EA1C001EB57C /* ftsystem.h in Headers */,
 				FD5332D822A2EA1C001EB57C /* ftgxval.h in Headers */,
+				FD2D6D0E22D064410087DF85 /* MeshRenderer.h in Headers */,
 				FDEA237920AFF586000885AC /* PrecompiledHeader.h in Headers */,
 				FDB7026822B69D600055FCED /* resource.h in Headers */,
 				FD5332BC22A2EA1C001EB57C /* svkern.h in Headers */,
@@ -3780,6 +3817,7 @@
 				FDB700B222B69D1F0055FCED /* icudataver.h in Headers */,
 				FDB7009922B69D1F0055FCED /* docmain.h in Headers */,
 				FD268EBD22CFDDE500F83F1E /* CanvasSprite.h in Headers */,
+				FD2D6D0922D064410087DF85 /* RenderTarget.h in Headers */,
 				FDB7021F22B69D600055FCED /* cmemory.h in Headers */,
 				FDB700A122B69D1F0055FCED /* utf.h in Headers */,
 				FDB7022C22B69D600055FCED /* putilimp.h in Headers */,
@@ -3862,7 +3900,6 @@
 				FDB702BF22B69D600055FCED /* filteredbrk.cpp in Sources */,
 				FD5331FC22A2E877001EB57C /* ftdebug.c in Sources */,
 				FDB7025822B69D600055FCED /* uenum.cpp in Sources */,
-				FD78AC0B2289D51400D22E46 /* MeshRenderer.cpp in Sources */,
 				FD78ABDB2289C4DF00D22E46 /* res0.c in Sources */,
 				FDB7025922B69D600055FCED /* ubidiwrt.cpp in Sources */,
 				FD78ABDC2289C4DF00D22E46 /* block.c in Sources */,
@@ -3880,8 +3917,8 @@
 				FD5331F622A2E855001EB57C /* ftbitmap.c in Sources */,
 				FDB702C022B69D600055FCED /* uinit.cpp in Sources */,
 				FDB7028922B69D600055FCED /* pluralmap.cpp in Sources */,
-				FD7DE068229D6CC7002B5786 /* RectTransform.cpp in Sources */,
 				FDB702EA22B69D600055FCED /* bytestriebuilder.cpp in Sources */,
+				FD2D6D2622D069E10087DF85 /* Range.h in Sources */,
 				FDB702CD22B69D600055FCED /* ustring.cpp in Sources */,
 				FDB7023822B69D600055FCED /* unistr_titlecase_brkiter.cpp in Sources */,
 				FD53321E22A2E94E001EB57C /* pshinter.c in Sources */,
@@ -3912,6 +3949,7 @@
 				FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */,
 				FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */,
 				FDB702CF22B69D600055FCED /* ucnvbocu.cpp in Sources */,
+				FD2D6D1C22D064410087DF85 /* MeshUtility.cpp in Sources */,
 				FDB7035822B6B30C0055FCED /* zutil.c in Sources */,
 				FDB7030E22B69D600055FCED /* filterednormalizer2.cpp in Sources */,
 				FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */,
@@ -3929,6 +3967,7 @@
 				FD78ABF72289C4DF00D22E46 /* synthesis.c in Sources */,
 				FDB7025722B69D600055FCED /* ucat.cpp in Sources */,
 				FDB7023A22B69D600055FCED /* servlkf.cpp in Sources */,
+				FD2D6D2022D064410087DF85 /* Graphics.cpp in Sources */,
 				FD78ABFB2289C4DF00D22E46 /* mapping0.c in Sources */,
 				FD78ABFD2289C4DF00D22E46 /* lpc.c in Sources */,
 				FDB702FC22B69D600055FCED /* ucmndata.cpp in Sources */,
@@ -3943,6 +3982,8 @@
 				FDC02D20228487D500BEE91A /* MacOSLog.mm in Sources */,
 				FDB7029122B69D600055FCED /* ucnv.cpp in Sources */,
 				FDC02D21228487D500BEE91A /* MacOSOpenGLContext.mm in Sources */,
+				FD2D6D0822D064410087DF85 /* TextureAtlas.cpp in Sources */,
+				FD2D6D0322D064410087DF85 /* Model.cpp in Sources */,
 				FDB7031E22B69D600055FCED /* utypes.cpp in Sources */,
 				FDB7024922B69D600055FCED /* servls.cpp in Sources */,
 				FDB7033322B69D600055FCED /* ucase.cpp in Sources */,
@@ -3991,6 +4032,7 @@
 				FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */,
 				FDC02CEE228487CA00BEE91A /* InputModule.cpp in Sources */,
 				FDC02CEF228487CA00BEE91A /* TimeModule.cpp in Sources */,
+				FD2D6D1422D064410087DF85 /* Texture.cpp in Sources */,
 				FDB702E522B69D600055FCED /* cwchar.cpp in Sources */,
 				FDB702CA22B69D600055FCED /* rbbiscan.cpp in Sources */,
 				FDB702AA22B69D600055FCED /* uchriter.cpp in Sources */,
@@ -4004,17 +4046,15 @@
 				FDB702FE22B69D600055FCED /* stringtriebuilder.cpp in Sources */,
 				FDB7025C22B69D600055FCED /* cstring.cpp in Sources */,
 				FDB7030622B69D600055FCED /* uloc_keytype.cpp in Sources */,
+				FD2D6D0422D064410087DF85 /* IndexBuffer.cpp in Sources */,
 				FD268EBC22CFDDE500F83F1E /* CanvasSprite.cpp in Sources */,
 				FD5331F222A2E842001EB57C /* ftbbox.c in Sources */,
+				FD2D6D2422D064810087DF85 /* RectTransform.cpp in Sources */,
 				FDB7028B22B69D600055FCED /* errorcode.cpp in Sources */,
 				FDB702E022B69D600055FCED /* usetiter.cpp in Sources */,
-				FD9AEEC322CA45C5003607DC /* TextureAtlas.cpp in Sources */,
-				FDC02CF9228487CA00BEE91A /* VertexBuffer.cpp in Sources */,
 				FDB7022922B69D600055FCED /* ushape.cpp in Sources */,
-				FDC02CFA228487CA00BEE91A /* Mesh.cpp in Sources */,
 				FDB7035D22B6B30C0055FCED /* infutil.c in Sources */,
-				FDC02CFB228487CA00BEE91A /* MeshUtility.cpp in Sources */,
-				FDC02CFC228487CA00BEE91A /* Camera.cpp in Sources */,
+				FD2D6D1122D064410087DF85 /* RenderTarget.cpp in Sources */,
 				FDB7032522B69D600055FCED /* ustr_cnv.cpp in Sources */,
 				FDB7032E22B69D600055FCED /* uscript.cpp in Sources */,
 				FDB7027422B69D600055FCED /* ucnv_set.cpp in Sources */,
@@ -4023,6 +4063,7 @@
 				FDB7026522B69D600055FCED /* uniset.cpp in Sources */,
 				FD5331EE22A2E5AE001EB57C /* pcf.c in Sources */,
 				FD7DE06B229D973C002B5786 /* OpenGLRenderTarget.cpp in Sources */,
+				FD2D6D0222D064410087DF85 /* ShaderProgram.cpp in Sources */,
 				FDB7023D22B69D600055FCED /* uhash_us.cpp in Sources */,
 				FDB7028022B69D600055FCED /* uts46.cpp in Sources */,
 				FDB7033922B69D600055FCED /* ustrfmt.cpp in Sources */,
@@ -4033,11 +4074,8 @@
 				FD53322A22A2E9C0001EB57C /* type1cid.c in Sources */,
 				FDB7033722B69D600055FCED /* normlzr.cpp in Sources */,
 				FDB7027F22B69D600055FCED /* ucharstrie.cpp in Sources */,
-				FDC02CFF228487CA00BEE91A /* Texture.cpp in Sources */,
-				FDC02D03228487CA00BEE91A /* ShaderProgram.cpp in Sources */,
 				FDB7027222B69D600055FCED /* uset_props.cpp in Sources */,
 				FDB7025122B69D600055FCED /* uarrsort.cpp in Sources */,
-				FDC02D04228487CA00BEE91A /* Model.cpp in Sources */,
 				FDB7024022B69D600055FCED /* static_unicode_sets.cpp in Sources */,
 				FDB702E122B69D600055FCED /* utrie.cpp in Sources */,
 				FDB7027B22B69D600055FCED /* ustrenum.cpp in Sources */,
@@ -4051,14 +4089,13 @@
 				FDB7027822B69D600055FCED /* ucnvdisp.cpp in Sources */,
 				FDB7024C22B69D600055FCED /* udata.cpp in Sources */,
 				FDB702CE22B69D600055FCED /* bmpset.cpp in Sources */,
-				FDC02D07228487CA00BEE91A /* Material.cpp in Sources */,
 				FDB702B122B69D600055FCED /* ucnv_io.cpp in Sources */,
-				FDC02D08228487CA00BEE91A /* IndexBuffer.cpp in Sources */,
 				FDB7029C22B69D600055FCED /* util_props.cpp in Sources */,
 				FDC02D09228487CA00BEE91A /* OpenGLGraphics.cpp in Sources */,
 				FDB702AC22B69D600055FCED /* cmemory.cpp in Sources */,
 				FD5331DE22A2E53C001EB57C /* autofit.c in Sources */,
 				FDC02D0B228487CA00BEE91A /* OpenGLIndexBuffer.cpp in Sources */,
+				FD2D6D1022D064410087DF85 /* MeshRenderer.cpp in Sources */,
 				FD53321022A2E8F8001EB57C /* ftpfr.c in Sources */,
 				FDB702DD22B69D600055FCED /* ucnv_bld.cpp in Sources */,
 				FDC02D0D228487CA00BEE91A /* OpenGLTexture.cpp in Sources */,
@@ -4067,7 +4104,6 @@
 				FD268EB822CFDDE500F83F1E /* CanvasSpriteBatch.cpp in Sources */,
 				FDB702A222B69D600055FCED /* wintz.cpp in Sources */,
 				FDB7022722B69D600055FCED /* locdspnm.cpp in Sources */,
-				FD5331BB22A043F1001EB57C /* RenderTarget.cpp in Sources */,
 				FD5331DC22A2E52F001EB57C /* ftbase.c in Sources */,
 				FDC02D0E228487CA00BEE91A /* OpenGLShaderProgram.cpp in Sources */,
 				FD268ED122CFDE0000F83F1E /* MeshComponent.cpp in Sources */,
@@ -4104,8 +4140,10 @@
 				FDB7023922B69D600055FCED /* ucnvsel.cpp in Sources */,
 				FDC02D15228487CA00BEE91A /* Gamepad.cpp in Sources */,
 				FDC02D16228487CA00BEE91A /* InputManager.cpp in Sources */,
+				FD2D6D1922D064410087DF85 /* Camera.cpp in Sources */,
 				FDB7022622B69D600055FCED /* locbased.cpp in Sources */,
 				FDB7028222B69D600055FCED /* ucnv_ext.cpp in Sources */,
+				FD2D6D1F22D064410087DF85 /* Material.cpp in Sources */,
 				FDC02D18228487CA00BEE91A /* Path.cpp in Sources */,
 				FDC02D19228487CA00BEE91A /* Window.cpp in Sources */,
 				FDB7027022B69D600055FCED /* locmap.cpp in Sources */,
@@ -4139,6 +4177,7 @@
 				FDB350392276138E0022BDDF /* bitwise.c in Sources */,
 				FDB35033227613420022BDDF /* glew.c in Sources */,
 				FD4C1DFC219F3F8700B2B2BE /* GainputIos.mm in Sources */,
+				FD2D6D1722D064410087DF85 /* Mesh.cpp in Sources */,
 				FD53331F22A57F38001EB57C /* trees.c in Sources */,
 				FD4C1DFD219F3F8700B2B2BE /* GainputInputDevicePadIos.mm in Sources */,
 				FDB7026B22B69D600055FCED /* servrbf.cpp in Sources */,
@@ -4172,7 +4211,6 @@
 				FD4C1DD2219F3F7C00B2B2BE /* gainput.cpp in Sources */,
 				FDB7031222B69D600055FCED /* uloc.cpp in Sources */,
 				FD4C1DD3219F3F7C00B2B2BE /* GainputInputState.cpp in Sources */,
-				FDD4E0312287124800E26531 /* Transform.cpp in Sources */,
 				FD4C1DD4219F3F7C00B2B2BE /* GainputMapFilters.cpp in Sources */,
 				FD4C1DD5219F3F7C00B2B2BE /* GainputInputDevicePadMac.cpp in Sources */,
 				FD4C1DD6219F3F7C00B2B2BE /* GainputInputDevicePad.cpp in Sources */,
@@ -4218,6 +4256,7 @@
 				FDB7025022B69D600055FCED /* uiter.cpp in Sources */,
 				FDB702D722B69D600055FCED /* rbbi.cpp in Sources */,
 				FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */,
+				FD2D6D0C22D064410087DF85 /* Transform.cpp in Sources */,
 				FD4C1DE3219F3F7D00B2B2BE /* GainputNetListener.cpp in Sources */,
 				FD4C1DE4219F3F7D00B2B2BE /* GainputMemoryStream.cpp in Sources */,
 				FD4C1DE5219F3F7D00B2B2BE /* GainputNetConnection.cpp in Sources */,
@@ -4233,6 +4272,7 @@
 				FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */,
 				FD53322222A2E99B001EB57C /* raster.c in Sources */,
 				FD4C1DEA219F3F7D00B2B2BE /* GainputAllocator.cpp in Sources */,
+				FD2D6D0122D064410087DF85 /* VertexBuffer.cpp in Sources */,
 				FD4C1DEB219F3F7D00B2B2BE /* GainputInputDeviceBuiltIn.cpp in Sources */,
 				FD4C1DEC219F3F7D00B2B2BE /* GainputInputDeviceKeyboard.cpp in Sources */,
 				FDB7026422B69D600055FCED /* umutex.cpp in Sources */,

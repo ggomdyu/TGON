@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
-            timestampString = "584075256.111509"
+            timestampString = "584089762.2572941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270">
+            startingLineNumber = "269"
+            endingLineNumber = "269">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
-            timestampString = "584075256.112044"
+            timestampString = "584089762.257392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "LogoScene::LogoScene()"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,13 +88,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
-            timestampString = "584075256.112457"
+            timestampString = "584089762.257453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "LogoScene::LogoScene()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LogoScene::LogoScene()"
+                  moduleName = "ThousandParty"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ggomdyu/Desktop/Programming/Git/GitHub/TGON/Bin/Xcode/ThousandParty/ThousandParty/LogoScene.cpp"
+                  timestampString = "584089762.812301"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "238">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LogoScene::LogoScene()"
+                  moduleName = "ThousandParty"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ggomdyu/Desktop/Programming/Git/GitHub/TGON/Bin/Xcode/ThousandParty/ThousandParty/LogoScene.cpp"
+                  timestampString = "584089762.814893"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "303">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

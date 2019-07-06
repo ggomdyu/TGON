@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -25,10 +25,9 @@ LogoScene::LogoScene()
     m_beginTime = tgon::GetTickCount();
 
     auto uuid = tgon::UUID::NewUUID();
-    for (auto& ch : uuid)
+    for (char ch : uuid.Range())
     {
         ch = 'A';
-        int n = 3;
     }
 
     SuperType::Update();
