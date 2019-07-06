@@ -3,7 +3,7 @@
 #include "Engine/GraphicsModule.h"
 #include "Game/GameObject.h"
 
-#include "SpriteRendererComponent.h"
+#include "SpriteComponent.h"
 
 namespace tgon
 {

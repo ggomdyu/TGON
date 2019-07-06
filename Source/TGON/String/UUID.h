@@ -27,15 +27,15 @@ struct BasicUUID :
     private BasicFixedString<_CharType, 37, _StringTraitsType>
 {
 /**@section Type */
+private:
+    using SuperType = BasicFixedString<_CharType, 37, _StringTraitsType>;
+
 public:
-    using CharType = char;
+    using CharType = _CharType;
     using ConstReferenceType = const CharType&;
     using ConstIteratorType = const CharType*;
     using ConstPointerType = const CharType*;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
-
-private:
-    using SuperType = BasicFixedString<_CharType, 37, _StringTraitsType>;
     
 /**@section Constructor */
 private:
@@ -44,20 +44,23 @@ private:
 /**@section Operator */
 public:
     using SuperType::operator=;
-    const _CharType& operator[](std::size_t index) const;
+    const _CharType operator[](size_t index) const;
 
 /**@section Method */
 public:
     static BasicUUID NewUUID();
+    const _CharType At(size_t index) const;
     using SuperType::Compare;
     using SuperType::Find;
     using SuperType::RFind;
-    using SuperType::At;
     using SuperType::CStr;
     using SuperType::Data;
     using SuperType::Length;
-    using SuperType::cbegin;
-    using SuperType::crbegin;
+    using SuperType::Capacity;
+    using SuperType::begin;
+    using SuperType::end;
+    using SuperType::rbegin;
+    using SuperType::rend;
 };
 
 using UUID = BasicUUID<char, BasicStringTraits<char>>;
@@ -72,8 +75,7 @@ inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTrait
     RPC_CSTR rawUUIDStr;
     UuidToStringA(&rawUUID, &rawUUIDStr);
     
-    BasicUUID ret(reinterpret_cast<const char*>(rawUUIDStr), 36);
-
+    BasicUUID ret({reinterpret_cast<const char*>(rawUUIDStr), 36});
     RpcStringFreeA(&rawUUIDStr);
 
     return ret;
@@ -81,16 +83,24 @@ inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTrait
     uuid_t uuid;
     uuid_generate_random(uuid);
 
-    BasicUUID ret;
-    uuid_unparse(uuid, ret.m_str);
+    char rawUUIDStr[37] {};
+    uuid_unparse(uuid, rawUUIDStr);
+    BasicUUID ret({rawUUIDStr, 36});
+    
     return ret;
 #endif
 }
    
 template <typename _CharType, typename _StringTraitsType>
-inline const _CharType& BasicUUID<_CharType, _StringTraitsType>::operator[](std::size_t index) const
+inline const _CharType BasicUUID<_CharType, _StringTraitsType>::operator[](size_t index) const
 {
     return SuperType::operator[](index);
+}
+    
+template <typename _CharType, typename _StringTraitsType>
+inline const _CharType BasicUUID<_CharType, _StringTraitsType>::At(size_t index) const
+{
+    return SuperType::At(index);
 }
 
 } /* namespace tgon */

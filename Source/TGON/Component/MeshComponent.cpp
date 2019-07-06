@@ -5,9 +5,7 @@
 #include "Graphics/Material.h"
 #include "Engine/GraphicsModule.h"
 
-#include "MeshRendererComponent.h"
-
-#include "../GameObject.h"
+#include "MeshComponent.h"
 
 namespace tgon
 {

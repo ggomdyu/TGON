@@ -19,6 +19,11 @@ namespace tgon
 
 class TGON_API Path
 {
+/**@section Constructor */
+public:
+    Path() = delete;
+    ~Path() = delete;
+    
 /**@section Method */
 public:
     static std::string GetExtension(const std::string_view& path);

@@ -2,7 +2,7 @@
 
 #include "Graphics/Texture.h"
 
-#include "Sprite.h"
+#include "CanvasSprite.h"
 #include "Transform.h"
 
 namespace tgon

@@ -24,6 +24,13 @@ LogoScene::LogoScene()
 {
     m_beginTime = tgon::GetTickCount();
 
+    auto uuid = tgon::UUID::NewUUID();
+    for (auto& ch : uuid)
+    {
+        ch = 'A';
+        int n = 3;
+    }
+
     SuperType::Update();
 
     this->InitPhase4();
@@ -92,7 +99,7 @@ void LogoScene::InitPhase1()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    auto texture = std::make_shared<Texture>(GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<Texture>(Path::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     object1 = std::make_shared<GameObject>("introSprite1", new Transform());
     object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -126,7 +133,7 @@ void LogoScene::InitPhase2()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     // �ؽ�ó ������Ʈ �߰�
-    auto texture = std::make_shared<tgon::Texture>(tgon::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<tgon::Texture>(Path::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -210,7 +217,7 @@ void LogoScene::InitPhase4()
 
     //TextureAtlasTree tat( I32Extent2D( 512, 512 ), 2 );
     FontFactory ff;
-    std::shared_ptr<Font> font = ff.CreateFont( StringHash( GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
+    std::shared_ptr<Font> font = ff.CreateFont( StringHash( Path::GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
 
     auto object = std::make_shared<GameObject>( "introSprite1", new Transform() );
     object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );

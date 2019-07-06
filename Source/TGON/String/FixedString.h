@@ -445,13 +445,13 @@ inline typename BasicFixedString<_CharType, _CharBufferLen, _StringTraitsType>::
 template <typename _CharType, std::size_t _CharBufferLen, typename _StringTraitsType>
 inline _CharType& BasicFixedString<_CharType, _CharBufferLen, _StringTraitsType>::At(std::size_t index)
 {
-    return _StringTraitsType::At(m_str, m_strLen, index);
+    return _StringTraitsType::At(m_str, index);
 }
 
 template <typename _CharType, std::size_t _CharBufferLen, typename _StringTraitsType>
 inline const _CharType& BasicFixedString<_CharType, _CharBufferLen, _StringTraitsType>::At(std::size_t index) const
 {
-    return _StringTraitsType::At(m_str, m_strLen, index);
+    return _StringTraitsType::At(m_str, index);
 }
 
 } /* namespace tgon */

@@ -8,7 +8,7 @@
 #include "Engine/IModule.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/MeshRenderer.h"
-#include "Graphics/UI/UIRenderer.h"
+#include "UI/UIRenderer.h"
 
 namespace tgon
 {

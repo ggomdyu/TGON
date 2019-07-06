@@ -1,15 +1,14 @@
 #include "PrecompiledHeader.h"
 
 #include "Math/Vector4.h"
+#include "Graphics/Texture.h"
+#include "Graphics/Graphics.h"
+#include "Graphics/Material.h"
+#include "Graphics/FVF.h"
+#include "Graphics/MeshUtility.h"
 
-#include "SpriteBatch.h"
-#include "Sprite.h"
-
-#include "../Texture.h"
-#include "../Graphics.h"
-#include "../Material.h"
-#include "../FVF.h"
-#include "../MeshUtility.h"
+#include "CanvasSpriteBatch.h"
+#include "CanvasSprite.h"
 
 namespace tgon
 {

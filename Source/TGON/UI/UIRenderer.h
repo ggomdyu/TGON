@@ -10,11 +10,12 @@
 
 #include "Math/Matrix4x4.h"
 #include "Graphics/VertexBuffer.h"
-#include "Graphics/UI/SpriteBatch.h"
+
+#include "CanvasSpriteBatch.h"
 
 // Todo: remove below headers
 #include "Platform/Application.h"
-#include "../RenderTarget.h"
+#include "Graphics/RenderTarget.h"
 
 namespace tgon
 {

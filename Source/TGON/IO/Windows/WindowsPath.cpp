@@ -12,7 +12,7 @@ namespace tgon
 
 thread_local char g_tempPathBuffer[MAX_PATH + 1];
 
-TGON_API int32_t GetCurrentDirectory(char* destStr)
+TGON_API int32_t Path::GetCurrentDirectory(char* destStr)
 {
     wchar_t utf16Path[MAX_PATH + 1] {};
     DWORD utf16PathLen = GetCurrentDirectoryW(MAX_PATH, utf16Path);
@@ -45,37 +45,37 @@ TGON_API int32_t GetSpecialDirectory(int csidl, char* destStr)
     return -1;
 }
 
-TGON_API int32_t GetUserDirectory(char* destStr)
+TGON_API int32_t Path::GetUserDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_PROFILE, destStr);   
 }
 
-TGON_API int32_t GetDesktopDirectory(char* destStr)
+TGON_API int32_t Path::GetDesktopDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_DESKTOP, destStr);
 }
 
-TGON_API int32_t GetFontsDirectory(char* destStr)
+TGON_API int32_t Path::GetFontsDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_FONTS, destStr);
 }
 
-TGON_API int32_t GetMusicDirectory(char* destStr)
+TGON_API int32_t Path::GetMusicDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_MYMUSIC, destStr);
 }
  
-TGON_API int32_t GetPicturesDirectory(char* destStr)
+TGON_API int32_t Path::GetPicturesDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_MYPICTURES, destStr);
 }
 
-TGON_API int32_t GetVideosDirectory(char* destStr)
+TGON_API int32_t Path::GetVideosDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_MYVIDEO, destStr);
 }
     
-TGON_API int32_t GetDocumentsDirectory(char* destStr)
+TGON_API int32_t Path::GetDocumentsDirectory(char* destStr)
 {
     return GetSpecialDirectory(CSIDL_MYDOCUMENTS, destStr);
 }

@@ -3,7 +3,7 @@
 #include "Game/GameObject.h"
 #include "Engine/GraphicsModule.h"
 
-#include "TextRendererComponent.h"
+#include "TextComponent.h"
 
 namespace tgon
 {
