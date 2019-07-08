@@ -50,7 +50,7 @@ public:
 public:
     static BasicUUID NewUUID();
     const _CharType At(size_t index) const;
-    const Range<const _CharType> Range() const noexcept;
+    const tgon::Range<const _CharType> Range() const noexcept;
     using SuperType::Compare;
     using SuperType::Find;
     using SuperType::RFind;

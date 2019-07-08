@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -22,13 +22,15 @@ std::shared_ptr<tgon::GameObject> object5;
 
 LogoScene::LogoScene()
 {
-    m_beginTime = tgon::GetTickCount();
-
-    auto uuid = tgon::UUID::NewUUID();
-    for (char ch : uuid.Range())
+    using namespace tgon;
+    
+    FixedString8 fs = "fsss";
+    for (auto ch : fs.Range())
     {
-        ch = 'A';
+        int n = 3;
     }
+
+    m_beginTime = tgon::GetTickCount();
 
     SuperType::Update();
 

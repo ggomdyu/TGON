@@ -31,12 +31,6 @@ public:
     using ValueType = _CharType;
     using ReferenceType = ValueType&;
     using ConstReferenceType = const ValueType&;
-    using IteratorType = ValueType*;
-    using ConstIteratorType = const ValueType*;
-    using PointerType = ValueType*;
-    using ConstPointerType = const ValueType*;
-    using ReverseIteratorType = std::reverse_iterator<IteratorType>;
-    using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
 
 /**@section Constructor */
 public:
@@ -99,8 +93,8 @@ public:
     std::size_t Size() const noexcept;
     std::size_t Length() const noexcept;
     constexpr std::size_t Capacity() const noexcept;
-    Range<_CharType> Range() noexcept;
-    const Range<const _CharType> Range() const noexcept;
+    tgon::Range<_CharType> Range() noexcept;
+    const tgon::Range<const _CharType> Range() const noexcept;
 
 /**@section Variable */
 public:
@@ -402,10 +396,16 @@ inline const _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTrai
     return _StringTraitsType::At(m_str, index);
 }
  
-//template <typename _CharType, std::size_t _CharBufferSize, typename _StringTraitsType>
-//inline Range<const _CharType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Range() const noexcept
-//{
-//    return {m_str, m_str + m_strLen};
-//}
+template <typename _CharType, std::size_t _CharBufferSize, typename _StringTraitsType>
+inline const Range<const _CharType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Range() const noexcept
+{
+    return {m_str, m_str + m_strLen};
+}
+
+template <typename _CharType, std::size_t _CharBufferSize, typename _StringTraitsType>
+inline Range<_CharType> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Range() noexcept
+{
+    return { m_str, m_str + m_strLen };
+}
 
 } /* namespace tgon */

@@ -2513,5 +2513,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\FVF.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Range.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

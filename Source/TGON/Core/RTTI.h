@@ -46,16 +46,16 @@ private:
 };
 
 template <typename _Type>
-inline typename std::enable_if<IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<IsPure_v<_Type>, const RTTI*>::type GetRTTI()
 {
-    using PureType = PureType<_Type>;
+    using PureType = Pure_t<_Type>;
     
     static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
     return &rtti;
 }
 
 template <typename _Type>
-inline typename std::enable_if<!IsPureTypeValue<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<!IsPure_v<_Type>, const RTTI*>::type GetRTTI()
 {
     return GetRTTI<PureType<_Type>>();
 }
