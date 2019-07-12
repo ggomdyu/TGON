@@ -84,20 +84,6 @@ void main()                                                                     
 }                                                                                   \n\
 ";
 
-//constexpr const char g_positionUVFrag[] =
-//"                                                                                   \n\
-//#version 330 core                                                                   \n\
-//                                                                                    \n\
-//in vec2 fragUV;                                                                     \n\
-//out vec4 outColor;                                                                  \n\
-//                                                                                    \n\
-//uniform sampler2D textureSampler;                                                   \n\
-//                                                                                    \n\
-//void main()                                                                         \n\
-//{                                                                                   \n\
-//    outColor = texture(textureSampler, fragUV);                                     \n\
-//}                                                                                   \n\
-//";
 constexpr const char g_positionUVFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\
@@ -109,8 +95,7 @@ uniform sampler2D textureSampler;                                               
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(textureSampler, fragUV).r);          \n\
-    outColor = sampled;                                                             \n\
+    outColor = texture(textureSampler, fragUV);                                     \n\
 }                                                                                   \n\
 ";
 

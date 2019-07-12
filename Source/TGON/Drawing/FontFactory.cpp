@@ -103,8 +103,13 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
     int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
 
-    auto bitmap = std::make_unique<uint8_t[]>((bitmapWidth * bitmapHeight));
-    memcpy(bitmap.get(), m_fontFace->glyph->bitmap.buffer, bitmapWidth * bitmapHeight);
+    auto bitmap = std::make_unique<uint8_t[]>((bitmapWidth * bitmapHeight * 4));
+    std::fill(bitmap.get(), bitmap.get() + bitmapWidth * bitmapHeight * 4, 255);
+
+    for (int i = 0; i < bitmapWidth * bitmapHeight; ++i)
+    {
+        bitmap[i] = m_fontFace->glyph->bitmap.buffer[j];
+    }
 
     return m_glyphDatas.insert(iter, {character, GlyphData{
         character,

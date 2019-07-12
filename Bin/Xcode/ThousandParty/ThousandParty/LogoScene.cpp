@@ -24,12 +24,6 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
     
-    FixedString8 fs = "fsss";
-    for (auto ch : fs.Range())
-    {
-        int n = 3;
-    }
-
     m_beginTime = tgon::GetTickCount();
 
     SuperType::Update();
@@ -216,7 +210,6 @@ void LogoScene::InitPhase4()
     cameraObject->AddComponent<CameraComponent>( tgon::FRect{ -halfWidth, -halfHeight, static_cast<float>( rootWindowSize.width ), static_cast<float>( rootWindowSize.height ) }, -1.0f, 1024.0f );
     this->AddGlobalObject( cameraObject );
 
-    //TextureAtlasTree tat( I32Extent2D( 512, 512 ), 2 );
     FontFactory ff;
     std::shared_ptr<Font> font = ff.CreateFont( StringHash( Path::GetDesktopDirectory() + "/maplestory_bold.ttf" ) );
 
@@ -226,18 +219,19 @@ void LogoScene::InitPhase4()
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
     
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    const wchar_t chArray[] = L"가abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::R8, 6);
+    const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
+    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
     for (auto ch : chArray)
     {
         const auto& glyphData = font->GetGlyphData(ch, 35);
-        textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::R8));
+        textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::RGBA8888));
+        break;
     }
 
     auto& imageRect = textureAtlas.GetTextureRect(u'가');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
     decltype(auto) sprite = std::make_shared<Sprite>(texture);
-    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    //sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
 
