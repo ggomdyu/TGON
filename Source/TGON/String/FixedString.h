@@ -35,6 +35,7 @@ public:
 /**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept;
+    BasicFixedString(const _CharType* str);
     BasicFixedString(const std::basic_string_view<_CharType>& str);
     BasicFixedString(std::size_t chCount, _CharType ch);
     template <std::size_t _CharBufferSize2>
@@ -133,6 +134,12 @@ template <typename _CharType, std::size_t _CharBufferSize, typename _StringTrait
 constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString() noexcept :
     m_str{},
     m_strLen(0)
+{
+}
+    
+template <typename _CharType, std::size_t _CharBufferSize, typename _StringTraitsType>
+inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
+    BasicFixedString(std::basic_string_view<_CharType>(str))
 {
 }
 

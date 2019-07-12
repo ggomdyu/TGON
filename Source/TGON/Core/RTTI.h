@@ -57,7 +57,7 @@ inline typename std::enable_if<IsPure_v<_Type>, const RTTI*>::type GetRTTI()
 template <typename _Type>
 inline typename std::enable_if<!IsPure_v<_Type>, const RTTI*>::type GetRTTI()
 {
-    return GetRTTI<PureType<_Type>>();
+    return GetRTTI<Pure_t<_Type>>();
 }
 
 template <>
