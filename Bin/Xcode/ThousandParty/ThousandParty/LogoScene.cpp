@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -218,20 +218,18 @@ void LogoScene::InitPhase4()
     object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
     
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
     const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
     static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
     for (auto ch : chArray)
     {
         const auto& glyphData = font->GetGlyphData(ch, 35);
         textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::RGBA8888));
-        break;
     }
 
     auto& imageRect = textureAtlas.GetTextureRect(u'가');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
     decltype(auto) sprite = std::make_shared<Sprite>(texture);
-    //sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
 

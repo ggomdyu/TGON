@@ -8,6 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/any.hpp>
 #include <string>
+#include <any>
 
 #include "RuntimeObject.h"
 
@@ -42,7 +43,7 @@ public:
     
 /**@section Variable */
 private:
-    boost::any m_extraData;
+    std::any m_extraData;
 };
 
 template <typename _Type>
@@ -54,7 +55,7 @@ inline void CoreObject::SetExtraData(_Type&& extraData)
 template <typename _Type>
 inline _Type* CoreObject::GetExtraData()
 {
-    return boost::any_cast<_Type>(&m_extraData);
+    return std::any_cast<_Type>(&m_extraData);
 }
 
 template <typename _Type>
