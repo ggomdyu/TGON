@@ -1,8 +1,10 @@
 #include "PrecompiledHeader.h"
 
 #include "Random/WELL1024a.h"
+#include "Engine/Engine.h"
 
 #include "Application.h"
+#include "Window.h"
 
 namespace tgon
 {

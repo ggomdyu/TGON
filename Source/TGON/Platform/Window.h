@@ -2,7 +2,7 @@
  * @file    Window.h
  * @author  ggomdyu
  * @since   02/15/2018
- * @brief   The platform agnostic window class implement.
+ * @brief   The platform agnostic window class implementation.
  */
 
 #pragma once

@@ -5,15 +5,18 @@
 #include "Math/Vector4.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/FVF.h"
-#include "Graphics/OpenGL/OpenGLShaderCode.h"
-#include "UI/CanvasSprite.h"
-#include "UI/CanvasSpriteBatch.h"
 #include "Graphics/Material.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/VertexBufferType.h"
+#include "Graphics/OpenGL/OpenGLShaderCode.h"
+#include "UI/CanvasSprite.h"
+#include "UI/CanvasSpriteBatch.h"
 
 #include "UIRenderer.h"
+
+//todo:remove below headers
+#include "Platform/Window.h"
 
 namespace tgon
 {

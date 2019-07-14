@@ -1,7 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Application.h"
+#include "Engine/Engine.h"
 #include "Engine/GraphicsModule.h"
+#include "Platform/Application.h"
 
 #include "RendererComponent.h"
 

@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Platform/Config.h"
-#include "Engine/Engine.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -18,10 +17,11 @@
 #   import "IOS/IOSApplication.h"
 #endif
 
-#include "Window.h"
-
 namespace tgon
 {
+
+class Window;
+class Engine;
 
 class TGON_API Application final :
     private PlatformApplication
