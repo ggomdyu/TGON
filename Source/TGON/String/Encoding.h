@@ -17,6 +17,15 @@ namespace tgon
 template <typename _FromEncodingType>
 class Encoding
 {
+/**@section Type */
+private:
+    template <typename _ToEncodingType>
+    using EncodeResultCharType =
+        std::conditional_t<_ToEncodingType::MinCharSize == 1, char,
+        std::conditional_t<_ToEncodingType::MinCharSize == 2, char16_t,
+        std::conditional_t<_ToEncodingType::MinCharSize == 4, char32_t, char>>
+    >;
+
 /**@section Method */
 public:
     /**
@@ -35,8 +44,8 @@ public:
      * @param [out] destStr     The output destination of _ToEncodingType.
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
-    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, std::size_t _DestCharBufferLen>
-    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferLen]);
+    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, std::size_t _DestCharBufferSize>
+    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferSize]);
 
     /**
      * @brief   Converts a string from one encoding to another.
@@ -44,8 +53,8 @@ public:
      * @param [out] destStr     The output destination of _ToEncodingType.
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
-    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType = char>
-    static std::basic_string<_DestCharType> ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr);
+    template <typename _ToEncodingType, typename _SrcCharType>
+    static std::basic_string<EncodeResultCharType<_ToEncodingType>> ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr);
 };
 
 template <typename _FromEncodingType>
@@ -66,10 +75,26 @@ inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_vi
 }
 
 template<typename _FromEncodingType>
-template<typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, std::size_t _DestCharBufferLen>
-inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferLen])
+template<typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, std::size_t _DestCharBufferSize>
+inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferSize])
 {
-    return ConvertTo<_ToEncodingType, _SrcCharType, _DestCharType>(srcStr, destStr, _DestCharBufferLen);
+    return ConvertTo<_ToEncodingType, _SrcCharType, _DestCharType>(srcStr, destStr, _DestCharBufferSize);
+}
+
+template<typename _FromEncodingType>
+template<typename _ToEncodingType, typename _SrcCharType>
+inline auto Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr) -> std::basic_string<EncodeResultCharType<_ToEncodingType>>
+{
+    icu::UnicodeString ustr(reinterpret_cast<const char*>(srcStr.data()), static_cast<int32_t>(srcStr.length() * sizeof(_SrcCharType)), _FromEncodingType::EncodingName);
+
+    int32_t encodedStrBytes = ustr.extract(0, ustr.length(), nullptr, _ToEncodingType::EncodingName);
+
+    std::basic_string<EncodeResultCharType<_ToEncodingType>> destStr;
+    size_t destStrLen = encodedStrBytes / sizeof(Encoding<_FromEncodingType>);
+    destStr.resize(destStrLen);
+
+    ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr.data()), destStrLen, _ToEncodingType::EncodingName);
+    return destStr;
 }
 
 class ASCII :

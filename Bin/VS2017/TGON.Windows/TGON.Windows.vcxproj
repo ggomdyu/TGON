@@ -168,6 +168,7 @@
     <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsInputManager.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouse.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsFile.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsPath.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsLocale.cpp" />

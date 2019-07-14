@@ -51,9 +51,9 @@ bool RTTI::operator>(const RTTI& rhs) const noexcept
     return (rhs < *this);
 }
 
-bool RTTI::operator<=(const RTTI & rhs) const noexcept
+bool RTTI::operator<=(const RTTI& rhs) const noexcept
 {
-    return !(rhs < *this);
+    return !(*this > rhs);
 }
 
 } /* namespace tgon */

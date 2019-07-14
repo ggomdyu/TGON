@@ -54,7 +54,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
     for (int32_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& imageDesc = imageDescs.begin() + i;
-        m_packedImageInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
+        m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
     }
 
     return true;
@@ -85,7 +85,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
     for (int32_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& imageDesc = imageDescs.begin() + i;
-        m_packedImageInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
+        m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
     }
 
     return true;
@@ -93,17 +93,17 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
 
 const I32Rect& TextureAtlas::GetTextureRect(UnicodeScalar name) const
 {
-    return m_packedImageInfos[name.GetHashCode()];
+    return m_packedTextureInfos[name.GetHashCode()];
 }
 
 const I32Rect& TextureAtlas::GetTextureRect(const StringViewHash& name) const
 {
-    return m_packedImageInfos[name.GetHashCode()];
+    return m_packedTextureInfos[name.GetHashCode()];
 }
 
 int32_t TextureAtlas::GetTextureCount() const noexcept
 {
-    return static_cast<int32_t>(m_packedImageInfos.size());
+    return static_cast<int32_t>(m_packedTextureInfos.size());
 }
 
 int32_t TextureAtlas::GetPaddingOffset() const noexcept
@@ -125,7 +125,7 @@ bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
 {
     stbrp_rect rect
     {
-        static_cast<int>(m_packedImageInfos.size()), // id
+        static_cast<int>(m_packedTextureInfos.size()), // id
         static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
         static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
         0, // x
@@ -137,7 +137,7 @@ bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
     if (isPackingSucceed)
     {
         m_atlasTexture->SetData(image.GetImageData(), Vector2(rect.x, rect.y), image.GetSize(), m_atlasTexture->GetPixelFormat());
-        m_packedImageInfos.insert({nameHashCode, I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w - m_paddingOffset), int32_t(rect.h - m_paddingOffset))});
+        m_packedTextureInfos.insert({nameHashCode, I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w - m_paddingOffset), int32_t(rect.h - m_paddingOffset))});
         return true;
     }
 

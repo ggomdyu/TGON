@@ -112,6 +112,15 @@ constexpr auto MakeFixedString(const _CharType(&str)[_CharBufferSize]) -> BasicF
     return BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>({str, _CharBufferSize - 1});
 }
 
+template <typename>
+struct IsBasicFixedString : std::false_type {};
+
+template <typename _CharType, std::size_t _CharBufferSize, typename _StringTraitsType>
+struct IsBasicFixedString<BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>> : std::true_type {};
+
+template <typename _Type>
+constexpr bool IsBasicFixedString_v = IsBasicFixedString<_Type>::value;;
+
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
 using FixedString32 = BasicFixedString<char, 32>;

@@ -13,7 +13,7 @@
 #include "UI/CanvasSprite.h"
 #include "UI/CanvasSpriteBatch.h"
 
-#include "UIRenderer.h"
+#include "CanvasRenderer.h"
 
 //todo:remove below headers
 #include "Platform/Window.h"
@@ -21,7 +21,7 @@
 namespace tgon
 {
     
-UIRenderer::UIRenderer() :
+CanvasRenderer::CanvasRenderer() :
     m_spriteVertexBuffer({
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
@@ -35,13 +35,13 @@ UIRenderer::UIRenderer() :
     this->PrepareDefaultMaterials();
 }
 
-void UIRenderer::Update()
+void CanvasRenderer::Update()
 {
     m_spriteVertexBuffer.Use();
     m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
 
-void UIRenderer::Draw(Graphics& graphics)
+void CanvasRenderer::Draw(Graphics& graphics)
 {
 #ifndef NDEBUG
     if (m_cameraList.size() <= 0)
@@ -54,7 +54,7 @@ void UIRenderer::Draw(Graphics& graphics)
     this->FlushSpriteBatches(graphics);
 }
     
-void UIRenderer::DebugRenderTargetDraw(Graphics& graphics)
+void CanvasRenderer::DebugRenderTargetDraw(Graphics& graphics)
 {
     // Use custom framebuffer
     m_renderTarget.Use();
@@ -82,7 +82,7 @@ void UIRenderer::DebugRenderTargetDraw(Graphics& graphics)
     }
 }
 
-void UIRenderer::AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const Matrix4x4& matWorld)
+void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const Matrix4x4& matWorld)
 {
     if (m_spriteBatches.empty())
     {
@@ -96,13 +96,13 @@ void UIRenderer::AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const
     m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
 }
 
-void UIRenderer::PrepareDefaultMaterials()
+void CanvasRenderer::PrepareDefaultMaterials()
 {
     m_uiMaterial = std::make_shared<Material>(g_positionUVVert, g_positionUVFrag);
     m_inverseMaterial = std::make_shared<Material>(g_positionUVVert, g_sharpenFrag);
 }
 
-void UIRenderer::FlushSpriteBatches(Graphics& graphics)
+void CanvasRenderer::FlushSpriteBatches(Graphics& graphics)
 {
     m_uiMaterial->Use();
     
@@ -120,12 +120,12 @@ void UIRenderer::FlushSpriteBatches(Graphics& graphics)
     m_spriteVertices.clear();
 }
 
-void UIRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
+void CanvasRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
 {
     m_cameraList.push_back(camera);
 }
 
-bool UIRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
+bool CanvasRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
 {
     auto iter = std::find_if(m_cameraList.begin(), m_cameraList.end(), [&](const std::shared_ptr<Camera>& item)
     {

@@ -11,6 +11,7 @@
 #include FT_FREETYPE_H
 
 #include "String/StringHash.h"
+#include "String/UnicodeScalar.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 #include "Platform/Config.h"
@@ -35,7 +36,7 @@ struct GlyphData
 {
 /**@section Variable */
 public:
-    char32_t character;
+    UnicodeScalar character;
     I32Extent2D size;
     I32Vector2 bearing;
     I32Vector2 advance;
@@ -56,14 +57,14 @@ public:
 
 /**@section Method */
 public:
-    const GlyphData& GetGlyphData(char32_t character) const;
-    const I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
+    const GlyphData& GetGlyphData(UnicodeScalar character) const;
+    const I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const;
 
 /**@section Variable */
 public:
     FT_Face m_fontFace;
     int32_t m_fontSize;
-    mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
+    mutable std::unordered_map<UnicodeScalar, GlyphData> m_glyphDatas;
 };
 
 class TGON_API Font :
@@ -78,8 +79,8 @@ public:
 /**@section Method */
 public:
     const FontFace& GetFace(FontSize fontSize) const;
-    const GlyphData& GetGlyphData(char32_t character, FontSize fontSize) const;
-    const I32Vector2 GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const;
+    const GlyphData& GetGlyphData(UnicodeScalar character, FontSize fontSize) const;
+    const I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const;
 
 /**@section Variable */
 private:

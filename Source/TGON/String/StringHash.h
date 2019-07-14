@@ -268,6 +268,15 @@ private:
     size_t m_strLen;
 };
 
+template <typename>
+struct IsBasicStringHash : std::false_type {};
+
+template <typename _StringType>
+struct IsBasicStringHash<BasicStringHash<_StringType>> : std::true_type {};
+
+template <typename _Type>
+constexpr bool IsBasicStringHash_v = false;
+
 using StringHash = BasicStringHash<std::string>;
 using WStringHash = BasicStringHash<std::wstring>;
     

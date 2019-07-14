@@ -33,13 +33,23 @@ void Mesh::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 {
     m_indexBuffer = indexBuffer;
 }
+
+std::shared_ptr<VertexBuffer> Mesh::GetVertexBuffer() noexcept
+{
+    return m_vertexBuffer;
+}
     
-const std::shared_ptr<VertexBuffer>& Mesh::GetVertexBuffer() const noexcept
+std::shared_ptr<const VertexBuffer> Mesh::GetVertexBuffer() const noexcept
 {
     return m_vertexBuffer;
 }
 
-const std::shared_ptr<IndexBuffer>& Mesh::GetIndexBuffer() const noexcept
+std::shared_ptr<IndexBuffer> Mesh::GetIndexBuffer() noexcept
+{
+    return m_indexBuffer;
+}
+
+std::shared_ptr<const IndexBuffer> Mesh::GetIndexBuffer() const noexcept
 {
     return m_indexBuffer;
 }

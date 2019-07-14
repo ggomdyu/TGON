@@ -90,7 +90,7 @@ FontFace& FontFace::operator=(FontFace&& rhs) noexcept
     return *this;
 }
 
-const GlyphData& FontFace::GetGlyphData(char32_t character) const
+const GlyphData& FontFace::GetGlyphData(UnicodeScalar character) const
 {
     auto iter = m_glyphDatas.find(character);
     if (iter != m_glyphDatas.end())
@@ -121,7 +121,7 @@ const GlyphData& FontFace::GetGlyphData(char32_t character) const
     }})->second;
 }
 
-const I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
+const I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const
 {
     FT_Vector kerning;
     auto lhsIndex = FT_Get_Char_Index(m_fontFace, lhs);
@@ -186,12 +186,12 @@ const FontFace& Font::GetFace(FontSize fontSize) const
     return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
 }
 
-const GlyphData& Font::GetGlyphData(char32_t character, FontSize fontSize) const
+const GlyphData& Font::GetGlyphData(UnicodeScalar character, FontSize fontSize) const
 {
     return this->GetFace(fontSize).GetGlyphData(character);
 }
 
-const I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const
+const I32Vector2 Font::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const
 {
     return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }

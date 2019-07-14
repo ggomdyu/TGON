@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -197,8 +197,11 @@ void LogoScene::InitPhase3()
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
+
     auto engine = Application::GetInstance()->GetEngine();
 
+    bool a = File::Delete("E:/Users/ggomdyu/Desktop/bararm/나.dat");
+    bool b = File::Delete("E:/Users/ggomdyu/Desktop/bararm/svkpnd.dll");
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
@@ -220,10 +223,11 @@ void LogoScene::InitPhase4()
     
     const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
     static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
-    for (auto ch : chArray)
+    //for (auto ch : chArray)
     {
-        const auto& glyphData = font->GetGlyphData(ch, 35);
-        textureAtlas.Insert(UnicodeScalar(ch), ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::RGBA8888));
+        const auto& glyphData = font->GetGlyphData('A', 35);
+        const auto& glyphData2 = font->GetGlyphData('B', 35);
+        textureAtlas.Insert(glyphData.character, ImageView(glyphData.bitmap.get(), glyphData.size, PixelFormat::RGBA8888));
     }
 
     auto& imageRect = textureAtlas.GetTextureRect(u'가');
@@ -232,7 +236,6 @@ void LogoScene::InitPhase4()
     sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
-
 }
 
 void LogoScene::OnHandleInput()

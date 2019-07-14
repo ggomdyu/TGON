@@ -74,11 +74,6 @@ namespace std
 template<>
 struct hash<tgon::RTTI>
 {
-/* @section Type */
-public:
-    using argument_type = tgon::RTTI;
-    using result_type = size_t;
-
 /* @section Method */
 public:
     size_t operator()(const tgon::RTTI& rhs) const noexcept;

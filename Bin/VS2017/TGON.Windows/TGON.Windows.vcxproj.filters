@@ -222,5 +222,8 @@
     <ClCompile Include="..\..\..\Source\TGON\Thread\Windows\WindowsThread.cpp">
       <Filter>Sources\TGON\Thread</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsFile.cpp">
+      <Filter>Sources\TGON\IO</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

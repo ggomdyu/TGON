@@ -6,8 +6,6 @@
 
 namespace tgon
 {
-    
-thread_local char g_tempPathBuffer[PATH_MAX + 1];
 
 TGON_API int32_t Path::GetCurrentDirectory(char* destStr)
 {

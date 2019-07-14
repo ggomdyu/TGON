@@ -49,7 +49,7 @@ private:
     stbrp_context m_context;
     stbrp_node m_nodes[4096];
     stbrp_rect m_nodeRects[std::extent<decltype(m_nodes)>::value];
-    mutable std::unordered_map<size_t, I32Rect> m_packedImageInfos;
+    mutable std::unordered_map<size_t, I32Rect> m_packedTextureInfos;
     int32_t m_paddingOffset;
 };
 

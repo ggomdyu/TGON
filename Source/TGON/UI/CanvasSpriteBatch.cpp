@@ -5,7 +5,6 @@
 #include "Graphics/Graphics.h"
 #include "Graphics/Material.h"
 #include "Graphics/FVF.h"
-#include "Graphics/MeshUtility.h"
 
 #include "CanvasSpriteBatch.h"
 #include "CanvasSprite.h"

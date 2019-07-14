@@ -25,11 +25,11 @@ class Material;
 class Camera;
 class Graphics;
     
-class TGON_API UIRenderer
+class TGON_API CanvasRenderer
 {
 /**@section Constructor */
 public:
-    UIRenderer();
+    CanvasRenderer();
     
 /**@section Method */
 public:
