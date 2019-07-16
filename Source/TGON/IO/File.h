@@ -22,8 +22,8 @@ private:
 
 /**@section Method */
 public:
-    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName);
-    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName, bool overwrite);
+    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName) noexcept;
+    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName, bool overwrite) noexcept;
     static bool Delete(const std::string_view& path);
     static bool Exists(const std::string_view& path);
     static bool Move(const std::string_view& srcFileName, const std::string_view& destFileName);

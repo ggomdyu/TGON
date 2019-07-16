@@ -2494,5 +2494,8 @@
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeSpan.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

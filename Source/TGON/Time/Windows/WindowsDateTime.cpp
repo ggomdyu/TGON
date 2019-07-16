@@ -9,9 +9,9 @@ namespace tgon
 
 DateTime DateTime::Now()
 {
-    std::time_t unixTimestamp = std::time(nullptr);
+    time_t unixTimestamp = ::time(nullptr);
     
-    std::tm rawLocalTime;
+    tm rawLocalTime;
     gmtime_s(&rawLocalTime, &unixTimestamp);
     localtime_s(&rawLocalTime, &unixTimestamp);
         
@@ -20,9 +20,9 @@ DateTime DateTime::Now()
 
 DateTime DateTime::UtcNow()
 {
-    std::time_t unixTimestamp = std::time(nullptr);
+    time_t unixTimestamp = ::time(nullptr);
     
-    std::tm rawUtcTime;
+    tm rawUtcTime;
     gmtime_s(&rawUtcTime, &unixTimestamp);
     
     return DateTime(rawUtcTime, DateTimeKind::Utc);
@@ -40,9 +40,9 @@ void DateTime::AddDays(float days)
         tempRawTime.tm_sec = m_second + static_cast<decltype(tempRawTime.tm_sec)>(86400.0f * (days - std::floor(days)));
     }
 
-    std::time_t unixTimestamp = mktime(&tempRawTime);
+    time_t unixTimestamp = mktime(&tempRawTime);
 
-    std::tm newRawTime;
+    tm newRawTime;
     gmtime_s(&newRawTime, &unixTimestamp);
 
     if (m_dateTimeKind != DateTimeKind::Utc)

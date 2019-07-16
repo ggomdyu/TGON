@@ -12,6 +12,7 @@
 #include "Platform/Config.h"
 
 #include "DateTimeType.h"
+#include "TimeSpan.h"
 
 namespace tgon
 {
@@ -23,9 +24,13 @@ public:
     constexpr DateTime(const std::tm& rawTime, DateTimeKind dateTimeKind) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day);
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second);
+    constexpr DateTime(const TimeSpan& timeSpan);
 
 private:
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DayOfWeek dayOfWeek, DateTimeKind dateTimeKind) noexcept;
+
+/**@section Operator */
+public:
 
 /**@section Method */
 public:
@@ -46,12 +51,17 @@ public:
     static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
     constexpr int32_t GetDayOfYear() const noexcept;
     constexpr DateTimeKind GetDateTimeKind() const noexcept;
+    //static DateTime GetMaxValue();
+    //static DateTime GetMinValue();
+    //static constexpr DateTime GetUnixEpoch();
 
 /**@section Variable */
+public:
+
 private:
+    int32_t m_year;
     int32_t m_month;
     int32_t m_day;
-    int32_t m_year;
     int32_t m_hour;
     int32_t m_minute;
     int32_t m_second;

@@ -198,10 +198,10 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
+    auto t = File::GetCreationTime("E:/Users/ggomdyu/Desktop/44.docx");
+
     auto engine = Application::GetInstance()->GetEngine();
 
-    bool a = File::Delete("E:/Users/ggomdyu/Desktop/bararm/나.dat");
-    bool b = File::Delete("E:/Users/ggomdyu/Desktop/bararm/svkpnd.dll");
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
@@ -236,6 +236,7 @@ void LogoScene::InitPhase4()
     sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );
+
 }
 
 void LogoScene::OnHandleInput()

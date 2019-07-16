@@ -16,6 +16,7 @@
 #include "Platform/Locale.h"
 #include "Platform/ScreenType.h"
 #include "Time/Time.h"
+#include "Time/TimeSpan.h"
 #include "Time/DateTime.h"
 #include "Time/Stopwatch.h"
 #include "Hardware/InputManager.h"
