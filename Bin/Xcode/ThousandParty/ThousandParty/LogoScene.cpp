@@ -198,7 +198,14 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    auto t = File::GetCreationTime("E:/Users/ggomdyu/Desktop/44.docx");
+    auto dt = DateTime( 2019, 7, 17, 22, 4, 16 );
+    auto a = dt.GetYear();
+    auto b = dt.GetMonth();
+    auto c = dt.GetDay();
+    auto d = dt.GetHour();
+    auto e = dt.GetMinute();
+    auto f = dt.GetSecond();
+    auto g = dt.GetDayOfWeek();
 
     auto engine = Application::GetInstance()->GetEngine();
 
