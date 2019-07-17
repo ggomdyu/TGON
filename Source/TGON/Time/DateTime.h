@@ -56,6 +56,7 @@ public:
 private:
     static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
     static constexpr int64_t TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept;
+    constexpr int32_t GetDatePart(int32_t part) const noexcept;
 
 /**@section Variable */
 public:
@@ -110,61 +111,65 @@ constexpr bool DateTime::IsLeapYear(int32_t year) noexcept
     return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
 }
 
+constexpr int32_t DateTime::GetYear() const noexcept
+{
+    return this->GetDatePart(DatePartYear);
+}
+
 constexpr int32_t DateTime::GetMonth() const noexcept
 {
-    //todo: impl
-    return -1;
+    return this->GetDatePart(DatePartMonth);
 }
 
 constexpr int32_t DateTime::GetDay() const noexcept
 {
-    // n = number of days since 1/1/0001
-    int n = (int)( m_ticks / TicksPerDay );
-    // y400 = number of whole 400-year periods since 1/1/0001
+    return this->GetDatePart(DatePartDay);
+}
+
+constexpr int32_t DateTime::GetDatePart(int32_t part) const noexcept
+{
+    int64_t n = m_ticks / TicksPerDay;
     int y400 = n / DaysPer400Years;
-    // n = day number within 400-year period
     n -= y400 * DaysPer400Years;
-    // y100 = number of whole 100-year periods within 400-year period
+    
     int y100 = n / DaysPer100Years;
-    // Last 100-year period has an extra day, so decrement result if 4
-    if ( y100 == 4 ) y100 = 3;
-    // n = day number within 100-year period
+    if ( y100 == 4 )
+    {
+        y100 = 3;
+    }
     n -= y100 * DaysPer100Years;
-    // y4 = number of whole 4-year periods within 100-year period
+    
     int y4 = n / DaysPer4Years;
-    // n = day number within 4-year period
     n -= y4 * DaysPer4Years;
-    // y1 = number of whole years within 4-year period
     int y1 = n / DaysPerYear;
-    // Last year has an extra day, so decrement result if 4
-    if ( y1 == 4 ) y1 = 3;
-    // If year was requested, compute and return it
+    if ( y1 == 4 )
+    {
+        y1 = 3;
+    }
+    
     if ( part == DatePartYear ) {
         return y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1;
     }
-    // n = day number within year
+    
     n -= y1 * DaysPerYear;
-    // If day-of-year was requested, return it
-    if ( part == DatePartDayOfYear ) return n + 1;
-    // Leap year calculation looks different from IsLeapYear since y1, y4,
-    // and y100 are relative to year 1, not year 0
-    bool leapYear = y1 == 3 && ( y4 != 24 || y100 == 3 );
-    int[] days = leapYear ? DaysToMonth366 : DaysToMonth365;
-    // All months have less than 32 days, so n >> 5 is a good conservative
-    // estimate for the month
-    int m = n >> 5 + 1;
-    // m = 1-based month number
-    while ( n >= days[m] ) m++;
-    // If month was requested, return it
-    if ( part == DatePartMonth ) return m;
-    // Return 1-based day-of-month
+    if ( part == DatePartDayOfYear )
+    {
+        return n + 1;
+    }
+    
+    bool isLeapYear = y1 == 3 && ( y4 != 24 || y100 == 3 );
+    const int* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
+    int m = (n >> 5) + 1;
+    while ( n >= days[m] )
+    {
+        ++m;
+    }
+    if ( part == DatePartMonth )
+    {
+        return m;
+    }
+    
     return n - days[m - 1] + 1;
-}
-
-constexpr int32_t DateTime::GetYear() const noexcept
-{
-    // todo: impl
-    return -1;
 }
 
 constexpr int32_t DateTime::GetHour() const noexcept
@@ -201,11 +206,6 @@ constexpr int32_t DateTime::GetDayOfYear() const noexcept
     // todo: impl
     return -1;
 }
-
-//constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
-//{
-//    return m_dateTimeKind;
-//}
 
 constexpr int64_t DateTime::DateToTicks(int32_t year, int32_t month, int32_t day) noexcept
 {
