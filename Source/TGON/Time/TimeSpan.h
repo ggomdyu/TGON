@@ -23,24 +23,24 @@ public:
 
 /**@section Operator */
 public:
-    static constexpr int Compare(TimeSpan& lhs, TimeSpan& rhs) noexcept;
-    constexpr int CompareTo(TimeSpan& value) const noexcept;
-    constexpr bool operator==(TimeSpan& rhs) const noexcept;
-    constexpr bool operator!=(TimeSpan& rhs) const noexcept;
-    constexpr bool operator>(TimeSpan& rhs) const noexcept;
-    constexpr bool operator>=(TimeSpan& rhs) const noexcept;
-    constexpr bool operator<(TimeSpan& rhs) const noexcept;
-    constexpr bool operator<=(TimeSpan& rhs) const noexcept;
-    constexpr TimeSpan operator+(TimeSpan& rhs) const noexcept;
-    constexpr TimeSpan operator-(TimeSpan& rhs) const noexcept;
-    constexpr TimeSpan operator*(TimeSpan& timeSpan) const noexcept;
-    friend constexpr TimeSpan operator*(double factor, TimeSpan& timeSpan) noexcept;
+    constexpr bool operator==(const TimeSpan& rhs) const noexcept;
+    constexpr bool operator!=(const TimeSpan& rhs) const noexcept;
+    constexpr bool operator>(const TimeSpan& rhs) const noexcept;
+    constexpr bool operator>=(const TimeSpan& rhs) const noexcept;
+    constexpr bool operator<(const TimeSpan& rhs) const noexcept;
+    constexpr bool operator<=(const TimeSpan& rhs) const noexcept;
+    constexpr TimeSpan operator+(const TimeSpan& rhs) const noexcept;
+    constexpr TimeSpan operator-(const TimeSpan& rhs) const noexcept;
+    constexpr TimeSpan operator*(const TimeSpan& timeSpan) const noexcept;
+    friend constexpr TimeSpan operator*(double factor, const TimeSpan& timeSpan) noexcept;
     constexpr TimeSpan operator/(double divisor) const noexcept;
     constexpr TimeSpan operator-() const noexcept;
     constexpr TimeSpan operator+() const noexcept;
 
 /**@section Method */
 public:
+    static constexpr int Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept;
+    constexpr int CompareTo(const TimeSpan& value) const noexcept;
     constexpr int32_t GetDays() const noexcept;
     constexpr int32_t GetHours() const noexcept;
     constexpr int32_t GetMinutes() const noexcept;
@@ -52,12 +52,12 @@ public:
     constexpr double GetTotalMinutes() const noexcept;
     constexpr double GetTotalSeconds() const noexcept;
     constexpr double GetTotalMilliseconds() const noexcept;
-    constexpr TimeSpan Add(TimeSpan& timeSpan) const noexcept;
+    constexpr TimeSpan Add(const TimeSpan& timeSpan) const noexcept;
     constexpr TimeSpan Divide(double divisor) const noexcept;
-    constexpr double Divide(TimeSpan& timeSpan) const noexcept;
+    constexpr double Divide(const TimeSpan& timeSpan) const noexcept;
     constexpr TimeSpan Multiply(double factor) const noexcept;
     constexpr TimeSpan Negate() const noexcept;
-    constexpr TimeSpan Subtract(TimeSpan& timeSpan) const noexcept;
+    constexpr TimeSpan Subtract(const TimeSpan& timeSpan) const noexcept;
     constexpr TimeSpan Duration() const noexcept;
     static constexpr TimeSpan FromDays(double value) noexcept;
     static constexpr TimeSpan FromHours(double value) noexcept;
@@ -115,66 +115,47 @@ constexpr TimeSpan::TimeSpan(int64_t ticks) noexcept :
 {
 }
 
-constexpr int TimeSpan::Compare(TimeSpan& lhs, TimeSpan& rhs) noexcept
-{
-    return lhs.CompareTo(rhs);
-}
-
-constexpr int TimeSpan::CompareTo(TimeSpan& value) const noexcept
-{
-    if (m_ticks > value.m_ticks)
-    {
-        return 1;
-    }
-    else if (m_ticks < value.m_ticks)
-    {
-        return -1;
-    }
-
-    return 0;
-}
-
-constexpr bool TimeSpan::operator==(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator==(const TimeSpan& rhs) const noexcept
 {
     return m_ticks == rhs.m_ticks;
 }
 
-constexpr bool TimeSpan::operator!=(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator!=(const TimeSpan& rhs) const noexcept
 {
     return m_ticks != rhs.m_ticks;
 }
 
-constexpr bool TimeSpan::operator>(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator>(const TimeSpan& rhs) const noexcept
 {
     return m_ticks > rhs.m_ticks;
 }
 
-constexpr bool TimeSpan::operator>=(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator>=(const TimeSpan& rhs) const noexcept
 {
     return m_ticks >= rhs.m_ticks;
 }
 
-constexpr bool TimeSpan::operator<(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator<(const TimeSpan& rhs) const noexcept
 {
     return m_ticks < rhs.m_ticks;
 }
 
-constexpr bool TimeSpan::operator<=(TimeSpan& rhs) const noexcept
+constexpr bool TimeSpan::operator<=(const TimeSpan& rhs) const noexcept
 {
     return m_ticks <= rhs.m_ticks;
 }
 
-constexpr TimeSpan TimeSpan::operator*(TimeSpan& timeSpan) const noexcept
+constexpr TimeSpan TimeSpan::operator*(const TimeSpan& timeSpan) const noexcept
 {
     return TimeSpan(m_ticks * timeSpan.m_ticks);
 }
 
-constexpr TimeSpan TimeSpan::operator+(TimeSpan& rhs) const noexcept
+constexpr TimeSpan TimeSpan::operator+(const TimeSpan& rhs) const noexcept
 {
     return TimeSpan(m_ticks + rhs.m_ticks);
 }
 
-constexpr TimeSpan TimeSpan::operator-(TimeSpan& rhs) const noexcept
+constexpr TimeSpan TimeSpan::operator-(const TimeSpan& rhs) const noexcept
 {
     return TimeSpan(m_ticks - rhs.m_ticks);
 }
@@ -184,7 +165,7 @@ constexpr TimeSpan TimeSpan::operator/(double divisor) const noexcept
     return TimeSpan(static_cast<int64_t>(static_cast<double>(m_ticks) / divisor));
 }
 
-constexpr TimeSpan operator*(double factor, TimeSpan& timeSpan) noexcept
+constexpr TimeSpan operator*(double factor, const TimeSpan& timeSpan) noexcept
 {
     return TimeSpan(static_cast<int64_t>(factor * static_cast<double>(timeSpan.m_ticks)));
 }
@@ -197,6 +178,25 @@ constexpr TimeSpan TimeSpan::operator-() const noexcept
 constexpr TimeSpan TimeSpan::operator+() const noexcept
 {
     return TimeSpan(m_ticks);
+}
+
+constexpr int TimeSpan::Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept
+{
+    return lhs.CompareTo(rhs);
+}
+
+constexpr int TimeSpan::CompareTo(const TimeSpan& value) const noexcept
+{
+    if (m_ticks > value.m_ticks)
+    {
+        return 1;
+    }
+    else if (m_ticks < value.m_ticks)
+    {
+        return -1;
+    }
+
+    return 0;
 }
 
 constexpr int32_t TimeSpan::GetDays() const noexcept
@@ -254,7 +254,7 @@ constexpr double TimeSpan::GetTotalMilliseconds() const noexcept
     return static_cast<double>(m_ticks) * MillisecondsPerTick;
 }
 
-constexpr TimeSpan TimeSpan::Add(TimeSpan& timeSpan) const noexcept
+constexpr TimeSpan TimeSpan::Add(const TimeSpan& timeSpan) const noexcept
 {
     return TimeSpan(m_ticks + timeSpan.m_ticks);
 }
@@ -264,7 +264,7 @@ constexpr TimeSpan TimeSpan::Divide(double divisor) const noexcept
     return TimeSpan(static_cast<int64_t>(static_cast<double>(m_ticks) / divisor));
 }
 
-constexpr double TimeSpan::Divide(TimeSpan& timeSpan) const noexcept
+constexpr double TimeSpan::Divide(const TimeSpan& timeSpan) const noexcept
 {
     return static_cast<double>(m_ticks / timeSpan.m_ticks);
 }
@@ -279,7 +279,7 @@ constexpr TimeSpan TimeSpan::Negate() const noexcept
     return TimeSpan(-m_ticks);
 }
 
-constexpr TimeSpan TimeSpan::Subtract(TimeSpan& timeSpan) const noexcept
+constexpr TimeSpan TimeSpan::Subtract(const TimeSpan& timeSpan) const noexcept
 {
     return TimeSpan(m_ticks - timeSpan.m_ticks);
 }

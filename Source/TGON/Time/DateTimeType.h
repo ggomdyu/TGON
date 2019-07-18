@@ -11,9 +11,9 @@ namespace tgon
 
 enum class DateTimeKind
 {
-    Unspecified,
-    Local,
-    Utc,
+    Unspecified = 0x0,
+    Local = 0x1,
+    Utc = 0x2,
 };
 
 enum class DayOfWeek
