@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -199,6 +199,7 @@ void LogoScene::InitPhase4()
     using namespace tgon;
 
     auto dt = DateTime( 2019, 7, 17, 22, 4, 16 );
+    dt.AddDays(1.5);
     auto a = dt.GetYear();
     auto b = dt.GetMonth();
     auto c = dt.GetDay();
@@ -206,7 +207,7 @@ void LogoScene::InitPhase4()
     auto e = dt.GetMinute();
     auto f = dt.GetSecond();
     auto g = dt.GetDayOfWeek();
-
+    
     auto engine = Application::GetInstance()->GetEngine();
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();

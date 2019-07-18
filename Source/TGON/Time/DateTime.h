@@ -37,14 +37,15 @@ public:
     static DateTime Today();
     static constexpr bool IsLeapYear(int32_t year) noexcept;
     static constexpr int32_t DaysInMonth(int32_t year, int32_t month) noexcept;
-    void AddDays(int days);
-    void AddDays(float days);
+    template <typename _ValueType>
+    void AddDays(const _ValueType& days) noexcept;
+    constexpr int32_t GetYear() const noexcept;
     constexpr int32_t GetMonth() const noexcept;
     constexpr int32_t GetDay() const noexcept;
-    constexpr int32_t GetYear() const noexcept;
     constexpr int32_t GetHour() const noexcept;
     constexpr int32_t GetMinute() const noexcept;
     constexpr int32_t GetSecond() const noexcept;
+    constexpr int64_t GetTicks() const noexcept;
     constexpr DayOfWeek GetDayOfWeek() const noexcept;
     static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
     constexpr int32_t GetDayOfYear() const noexcept;
@@ -57,6 +58,7 @@ private:
     static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
     static constexpr int64_t TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept;
     constexpr int32_t GetDatePart(int32_t part) const noexcept;
+    constexpr int64_t GetInternalTicks() const noexcept;
 
 /**@section Variable */
 public:
@@ -83,7 +85,6 @@ private:
     static constexpr int32_t DaysTo10000 = DaysPer400Years * 25 - 366;
 
     int64_t m_ticks;
-    //DateTimeKind m_dateTimeKind;
 };
 
 constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day) noexcept :
@@ -111,6 +112,12 @@ constexpr bool DateTime::IsLeapYear(int32_t year) noexcept
     return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
 }
 
+template <typename _ValueType>
+inline void DateTime::AddDays(const _ValueType& days) noexcept
+{
+    m_ticks += days * TicksPerDay;
+}
+
 constexpr int32_t DateTime::GetYear() const noexcept
 {
     return this->GetDatePart(DatePartYear);
@@ -129,47 +136,48 @@ constexpr int32_t DateTime::GetDay() const noexcept
 constexpr int32_t DateTime::GetDatePart(int32_t part) const noexcept
 {
     int64_t n = m_ticks / TicksPerDay;
-    int y400 = n / DaysPer400Years;
+    int64_t y400 = n / DaysPer400Years;
     n -= y400 * DaysPer400Years;
     
-    int y100 = n / DaysPer100Years;
-    if ( y100 == 4 )
+    int64_t y100 = n / DaysPer100Years;
+    if (y100 == 4)
     {
         y100 = 3;
     }
     n -= y100 * DaysPer100Years;
     
-    int y4 = n / DaysPer4Years;
+    int64_t y4 = n / DaysPer4Years;
     n -= y4 * DaysPer4Years;
-    int y1 = n / DaysPerYear;
-    if ( y1 == 4 )
+    int64_t y1 = n / DaysPerYear;
+    if (y1 == 4)
     {
         y1 = 3;
     }
     
-    if ( part == DatePartYear ) {
-        return y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1;
+    if (part == DatePartYear)
+    {
+        return static_cast<int32_t>(y400 * 400 + y100 * 100 + y4 * 4 + y1 + 1);
     }
     
     n -= y1 * DaysPerYear;
-    if ( part == DatePartDayOfYear )
+    if (part == DatePartDayOfYear)
     {
-        return n + 1;
+        return static_cast<int32_t>(n + 1);
     }
     
-    bool isLeapYear = y1 == 3 && ( y4 != 24 || y100 == 3 );
+    bool isLeapYear = y1 == 3 && (y4 != 24 || y100 == 3);
     const int* days = isLeapYear ? DaysToMonth366 : DaysToMonth365;
-    int m = (n >> 5) + 1;
-    while ( n >= days[m] )
+    int64_t m = (n >> 5) + 1;
+    while (n >= days[m])
     {
         ++m;
     }
-    if ( part == DatePartMonth )
+    if (part == DatePartMonth)
     {
-        return m;
+        return static_cast<int32_t>(m);
     }
     
-    return n - days[m - 1] + 1;
+    return static_cast<int32_t>(n - days[m - 1] + 1);
 }
 
 constexpr int32_t DateTime::GetHour() const noexcept
@@ -187,6 +195,11 @@ constexpr int32_t DateTime::GetSecond() const noexcept
     return (m_ticks / TicksPerSecond) % 60;
 }
 
+constexpr int64_t DateTime::GetTicks() const noexcept
+{
+    return m_ticks;
+}
+
 constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
 {
     return DayOfWeek((m_ticks / TicksPerDay + 1) % 7);
@@ -194,7 +207,7 @@ constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
 
 constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t day)
 {
-    constexpr int32_t termTable[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+    constexpr int32_t termTable[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
 
     year -= month < 3;
     
@@ -231,7 +244,6 @@ constexpr int64_t DateTime::TimeToTicks(int32_t hour, int32_t minute, int32_t se
 
 constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
 {
-    // todo: test
     if (month == 2)
     {
         return IsLeapYear(year) ? DaysToMonth366[month] - DaysToMonth366[month - 1] : DaysToMonth365[month] - DaysToMonth365[month - 1];

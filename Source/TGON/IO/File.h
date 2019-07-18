@@ -17,8 +17,8 @@ class File
 {
 /**@section Constructor */
 private:
-    File();
-    ~File();
+    File() = delete;
+    ~File() = delete;
 
 /**@section Method */
 public:

@@ -8,20 +8,6 @@
 
 namespace tgon
 {
-namespace
-{
-
-thread_local char g_tempPathBuffer[2048];
-
-} /* namespace */
-
-File::File()
-{
-}
-
-File::~File()
-{
-}
 
 bool File::Copy(const std::string_view& srcFileName, const std::string_view& destFileName) noexcept
 {

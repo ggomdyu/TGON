@@ -4,12 +4,8 @@
 
 namespace tgon
 {
-namespace
-{
-
-thread_local char g_tempPathBuffer[2048];
-
-} /* namespace */
+    
+extern thread_local char g_tempPathBuffer[];
 
 TGON_API std::string Path::GetExtension(const std::string_view& path)
 {
