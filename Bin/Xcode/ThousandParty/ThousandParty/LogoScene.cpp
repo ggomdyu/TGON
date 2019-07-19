@@ -198,17 +198,6 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    auto dt = DateTime::UtcNow();
-    auto y = dt.GetYear();
-    auto m = dt.GetMonth();
-    auto d = dt.GetDay();
-    auto h = dt.GetHour();
-    auto min = dt.GetMinute();
-    auto sec = dt.GetSecond();
-    
-    time_t when = std::time(nullptr);
-    auto const tm = *std::localtime(&when);
-    
     auto engine = Application::GetInstance()->GetEngine();
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();

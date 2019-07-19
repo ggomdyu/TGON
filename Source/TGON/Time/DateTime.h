@@ -75,6 +75,7 @@ private:
     static constexpr int64_t TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept;
     constexpr int32_t GetDatePart(int32_t part) const noexcept;
     constexpr std::tuple<int32_t, int32_t, int32_t> GetDateParts() const noexcept;
+    static int64_t GetTimeSinceUnixEpoch();
 
 /**@section Variable */
 public:
@@ -199,39 +200,39 @@ constexpr int DateTime::CompareTo(const DateTime& value) const noexcept
 
 inline DateTime DateTime::Now()
 {
-    auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch().count();
-
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch, DateTimeKind::Local);
+    time_t utcTime = 0;
+    time(&utcTime);
+    tm* localTimeInfo = std::localtime(&utcTime);
+    int64_t timeZoneOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
+    
+    return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + timeZoneOffset, DateTimeKind::Local);
 }
 
 inline DateTime DateTime::UtcNow()
 {
-    using DurationType = decltype(std::chrono::system_clock::now().time_since_epoch());
-    
-    if constexpr(DurationType::period::den == 10000000)
-    {
-        auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
-        
-        return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch.count(), DateTimeKind::Local);
-    }
-    else
-    {
-        auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
-        auto castedTimeSinceEpoch = std::chrono::duration_cast<std::chrono::duration<int64_t, std::ratio<1, 10000000>>>(timeSinceEpoch);
-        
-        return DateTime(DateTime::GetUnixEpoch().GetTicks() + castedTimeSinceEpoch.count(), DateTimeKind::Local);
-    }
+    return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch(), DateTimeKind::Local);
 }
-
 
 inline DateTime DateTime::Today()
 {
-    return DateTime::Now().GetDate();
+    return Now().GetDate();
 }
 
 constexpr bool DateTime::IsLeapYear(int32_t year) noexcept
 {
     return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
+}
+
+constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
+{
+    if (month == 2)
+    {
+        return IsLeapYear(year) ? DaysToMonth366[month] - DaysToMonth366[month - 1] : DaysToMonth365[month] - DaysToMonth365[month - 1];
+    }
+    else
+    {
+        return DaysToMonth365[month] - DaysToMonth365[month - 1];
+    }
 }
 
 constexpr DateTime DateTime::AddYears(int32_t value) noexcept
@@ -280,6 +281,93 @@ constexpr int32_t DateTime::GetMonth() const noexcept
 constexpr int32_t DateTime::GetDay() const noexcept
 {
     return this->GetDatePart(DatePartDay);
+}
+
+constexpr int32_t DateTime::GetHour() const noexcept
+{
+    return (this->GetTicks() / TicksPerHour) % 24;
+}
+
+constexpr int32_t DateTime::GetMinute() const noexcept
+{
+    return (this->GetTicks() / TicksPerMinute) % 60;
+}
+
+constexpr int32_t DateTime::GetSecond() const noexcept
+{
+    return (this->GetTicks() / TicksPerSecond) % 60;
+}
+
+constexpr int64_t DateTime::GetTicks() const noexcept
+{
+    return m_ticks & TicksMask;
+}
+
+constexpr DateTime DateTime::GetDate() const noexcept
+{
+    auto ticks = this->GetTicks();
+    return DateTime(ticks - (ticks % TicksPerDay), this->GetDateTimeKind());
+}
+
+constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
+{
+    return DayOfWeek((this->GetTicks() / TicksPerDay + 1) % 7);
+}
+
+constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t day)
+{
+    constexpr int32_t termTable[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+
+    year -= month < 3;
+    
+    return DayOfWeek((year + year / 4 - year / 100 + year / 400 + termTable[month - 1] + day) % 7);
+}
+
+constexpr int32_t DateTime::GetDayOfYear() const noexcept
+{
+    return GetDatePart(DatePartDayOfYear);
+}
+
+constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
+{
+    return static_cast<DateTimeKind>(m_ticks >> KindShift);
+}
+
+constexpr DateTime DateTime::GetMaxValue() noexcept
+{
+    return DateTime(DaysTo10000 * TicksPerDay - 1);
+}
+
+constexpr DateTime DateTime::GetMinValue() noexcept
+{
+    return DateTime(0);
+}
+
+constexpr DateTime DateTime::GetUnixEpoch() noexcept
+{
+    return DateTime(1970, 1, 1);
+}
+
+constexpr int64_t DateTime::DateToTicks(int32_t year, int32_t month, int32_t day) noexcept
+{
+    if (1 <= month && month <= 12)
+    {
+        const int* daysToMonth = IsLeapYear(year) ? DaysToMonth366 : DaysToMonth365;
+        if (1 <= day && day <= daysToMonth[month])
+        {
+            int y = year - 1;
+            int n = y * 365 + y / 4 - y / 100 + y / 400 + daysToMonth[month - 1] + day - 1;
+            return n * TicksPerDay;
+        }
+    }
+
+    return 0;
+}
+
+constexpr int64_t DateTime::TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept
+{
+    int64_t totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) + static_cast<int64_t>(second);
+    return totalSeconds * TicksPerSecond;
 }
 
 constexpr int32_t DateTime::GetDatePart(int32_t part) const noexcept
@@ -364,106 +452,23 @@ constexpr std::tuple<int32_t, int32_t, int32_t> DateTime::GetDateParts() const n
     
     int32_t month = static_cast<int32_t>(m);
     int32_t day = static_cast<int32_t>(n - days[m - 1] + 1);
-
+    
     return {year, month, day};
 }
 
-constexpr int32_t DateTime::GetHour() const noexcept
+inline int64_t DateTime::GetTimeSinceUnixEpoch()
 {
-    return (this->GetTicks() / TicksPerHour) % 24;
-}
-
-constexpr int32_t DateTime::GetMinute() const noexcept
-{
-    return (this->GetTicks() / TicksPerMinute) % 60;
-}
-
-constexpr int32_t DateTime::GetSecond() const noexcept
-{
-    return (this->GetTicks() / TicksPerSecond) % 60;
-}
-
-constexpr int64_t DateTime::GetTicks() const noexcept
-{
-    return m_ticks & TicksMask;
-}
-
-constexpr DateTime DateTime::GetDate() const noexcept
-{
-    auto ticks = this->GetTicks();
-    return DateTime(ticks - (ticks % DateTime::TicksPerDay), this->GetDateTimeKind());
-}
-
-constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
-{
-    return DayOfWeek((this->GetTicks() / TicksPerDay + 1) % 7);
-}
-
-constexpr DayOfWeek DateTime::GetDayOfWeek(int32_t year, int32_t month, int32_t day)
-{
-    constexpr int32_t termTable[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-
-    year -= month < 3;
+    auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
     
-    return DayOfWeek((year + year / 4 - year / 100 + year / 400 + termTable[month - 1] + day) % 7);
-}
-
-constexpr int32_t DateTime::GetDayOfYear() const noexcept
-{
-    return GetDatePart(DatePartDayOfYear);
-}
-
-constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
-{
-    return static_cast<DateTimeKind>(m_ticks >> DateTime::KindShift);
-}
-
-constexpr DateTime DateTime::GetMaxValue() noexcept
-{
-    return DateTime(DaysTo10000 * TicksPerDay - 1);
-}
-
-constexpr DateTime DateTime::GetMinValue() noexcept
-{
-    return DateTime(0);
-}
-
-constexpr DateTime DateTime::GetUnixEpoch() noexcept
-{
-    return DateTime(1970, 1, 1);
-}
-
-constexpr int64_t DateTime::DateToTicks(int32_t year, int32_t month, int32_t day) noexcept
-{
-    if (1 <= month && month <= 12)
+    using DurationType = decltype(timeSinceEpoch);
+    if constexpr(DurationType::period::den == 10000000)
     {
-        const int* daysToMonth = IsLeapYear(year) ? DaysToMonth366 : DaysToMonth365;
-        if (1 <= day && day <= daysToMonth[month])
-        {
-            int y = year - 1;
-            int n = y * 365 + y / 4 - y / 100 + y / 400 + daysToMonth[month - 1] + day - 1;
-            return n * TicksPerDay;
-        }
-    }
-
-    return 0;
-}
-
-constexpr int64_t DateTime::TimeToTicks(int32_t hour, int32_t minute, int32_t second) noexcept
-{
-    int64_t totalSeconds = (static_cast<int64_t>(hour) * 3600) + (static_cast<int64_t>(minute) * 60) + static_cast<int64_t>(second);
-    return totalSeconds * TicksPerSecond;
-}
-
-constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
-{
-    if (month == 2)
-    {
-        return IsLeapYear(year) ? DaysToMonth366[month] - DaysToMonth366[month - 1] : DaysToMonth365[month] - DaysToMonth365[month - 1];
+        return timeSinceEpoch.count();
     }
     else
     {
-        return DaysToMonth365[month] - DaysToMonth365[month - 1];
+        auto castedTimeSinceEpoch = std::chrono::duration_cast<std::chrono::duration<int64_t, std::ratio<1, 10000000>>>(timeSinceEpoch);
+        return castedTimeSinceEpoch.count();
     }
 }
 
