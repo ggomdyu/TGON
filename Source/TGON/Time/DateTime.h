@@ -204,6 +204,14 @@ inline DateTime DateTime::Now()
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch, DateTimeKind::Local);
 }
 
+inline DateTime DateTime::UtcNow()
+{
+    auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch().count() * 10;
+ 
+    return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch, DateTimeKind::Local);
+}
+
+
 inline DateTime DateTime::Today()
 {
     return DateTime::Now().GetDate();

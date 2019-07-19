@@ -75,15 +75,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B350E704-87B2-40AB-9F33-BA1DB433C5EA"
+            uuid = "60436DC2-5D84-40B1-BB97-6857A26AA392"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "LogoScene::InitPhase4()"
             landmarkType = "7">
          </BreakpointContent>
@@ -91,15 +91,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B6F06DFC-51E7-4946-89A3-4D220402B911"
+            uuid = "784FD6C1-CE5A-47A0-A74E-25AA1C935EC8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "LogoScene::InitPhase4()"
             landmarkType = "7">
          </BreakpointContent>

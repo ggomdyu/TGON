@@ -745,7 +745,6 @@
 		FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CAA228481F100BEE91A /* Application.cpp */; };
 		FDC02D1B228487CA00BEE91A /* WELL1024a.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C28228481F000BEE91A /* WELL1024a.cpp */; };
 		FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C31228481F000BEE91A /* Timer.cpp */; };
-		FDC02D1E228487CA00BEE91A /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C39228481F000BEE91A /* DateTime.cpp */; };
 		FDC02D1F228487CA00BEE91A /* Time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C3D228481F000BEE91A /* Time.cpp */; };
 		FDC02D20228487D500BEE91A /* MacOSLog.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B49228481EF00BEE91A /* MacOSLog.mm */; };
 		FDC02D21228487D500BEE91A /* MacOSOpenGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B84228481EF00BEE91A /* MacOSOpenGLContext.mm */; };
@@ -1659,7 +1658,6 @@
 		FDC02C36228481F000BEE91A /* DateTimeType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DateTimeType.h; sourceTree = "<group>"; };
 		FDC02C37228481F000BEE91A /* Timer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Timer.h; sourceTree = "<group>"; };
 		FDC02C38228481F000BEE91A /* Stopwatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Stopwatch.h; sourceTree = "<group>"; };
-		FDC02C39228481F000BEE91A /* DateTime.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = DateTime.cpp; sourceTree = "<group>"; };
 		FDC02C3D228481F000BEE91A /* Time.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Time.cpp; sourceTree = "<group>"; };
 		FDC02C3F228481F000BEE91A /* Engine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Engine.h; sourceTree = "<group>"; };
 		FDC02C40228481F000BEE91A /* IModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IModule.h; sourceTree = "<group>"; };
@@ -3170,7 +3168,6 @@
 				FDC02C3D228481F000BEE91A /* Time.cpp */,
 				FDC02C2D228481F000BEE91A /* Time.h */,
 				FD98AF3022DE3CD600467A92 /* TimeSpan.h */,
-				FDC02C39228481F000BEE91A /* DateTime.cpp */,
 				FDC02C32228481F000BEE91A /* DateTime.h */,
 				FDC02C36228481F000BEE91A /* DateTimeType.h */,
 				FDC02C38228481F000BEE91A /* Stopwatch.h */,
@@ -4143,7 +4140,6 @@
 				FDB702C222B69D600055FCED /* resbund_cnv.cpp in Sources */,
 				FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */,
 				FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */,
-				FDC02D1E228487CA00BEE91A /* DateTime.cpp in Sources */,
 				FDC02D1F228487CA00BEE91A /* Time.cpp in Sources */,
 				FDB702BE22B69D600055FCED /* caniter.cpp in Sources */,
 				FDB702A322B69D600055FCED /* ucnv_err.cpp in Sources */,

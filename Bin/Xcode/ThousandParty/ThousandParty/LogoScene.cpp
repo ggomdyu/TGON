@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -198,13 +198,16 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    auto dt = DateTime::GetMaxValue();
+    auto dt = DateTime::UtcNow();
     auto y = dt.GetYear();
-    auto a = dt.GetMonth();
-    auto b = dt.GetDay();
-    auto c = dt.GetHour();
-    auto d = dt.GetMinute();
-    auto e5 = dt.GetSecond();
+    auto m = dt.GetMonth();
+    auto d = dt.GetDay();
+    auto h = dt.GetHour();
+    auto min = dt.GetMinute();
+    auto sec = dt.GetSecond();
+    
+    time_t when = std::time(nullptr);
+    auto const tm = *std::localtime(&when);
     
     auto engine = Application::GetInstance()->GetEngine();
 
