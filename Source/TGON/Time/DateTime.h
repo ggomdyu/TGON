@@ -206,9 +206,21 @@ inline DateTime DateTime::Now()
 
 inline DateTime DateTime::UtcNow()
 {
-    auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch().count() * 10;
- 
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch, DateTimeKind::Local);
+    using DurationType = decltype(std::chrono::system_clock::now().time_since_epoch());
+    
+    if constexpr(DurationType::period::den == 10000000)
+    {
+        auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
+        
+        return DateTime(DateTime::GetUnixEpoch().GetTicks() + timeSinceEpoch.count(), DateTimeKind::Local);
+    }
+    else
+    {
+        auto timeSinceEpoch = std::chrono::system_clock::now().time_since_epoch();
+        auto castedTimeSinceEpoch = std::chrono::duration_cast<std::chrono::duration<int64_t, std::ratio<1, 10000000>>>(timeSinceEpoch);
+        
+        return DateTime(DateTime::GetUnixEpoch().GetTicks() + castedTimeSinceEpoch.count(), DateTimeKind::Local);
+    }
 }
 
 
