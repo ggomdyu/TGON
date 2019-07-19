@@ -6,7 +6,6 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <boost/any.hpp>
 #include <string>
 #include <any>
 
