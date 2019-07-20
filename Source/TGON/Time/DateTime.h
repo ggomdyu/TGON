@@ -9,6 +9,7 @@
 #pragma once
 #include <cstdint>
 #include <chrono>
+#include <ctime>
 #include <tuple>
 
 #include "TimeSpan.h"
@@ -200,8 +201,17 @@ inline DateTime DateTime::Now()
 {
     time_t utcTime = 0;
     time(&utcTime);
-    const tm* localTimeInfo = std::localtime(&utcTime);
-    int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
+
+#ifdef _MSC_VER
+    tm localTimeInfo {};
+    gmtime_s(&localTimeInfo, &utcTime);
+    
+    time_t localTime = mktime(&localTimeInfo);
+    int64_t utcOffset = static_cast<int64_t>((difftime(utcTime, localTime) / 3600.0) * TicksPerHour);
+#else
+    const tm* localTimeInfo = localtime(&utcTime);
+    int64_t utcOffset = localTimeInfo->tm_gmtoff / 3600
+#endif
     
     return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + utcOffset, DateTimeKind::Local);
 }

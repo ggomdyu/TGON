@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -45,7 +45,7 @@ private:
 
 inline TimeSpan TimeZone::GetUtcOffset(const DateTime& dateTime)
 {
-    if (dateTime.GetKind() == DateTimeKind::Utc)
+    /*if (dateTime.GetKind() == DateTimeKind::Utc)
     {
         return TimeSpan(0);
     }
@@ -56,8 +56,8 @@ inline TimeSpan TimeZone::GetUtcOffset(const DateTime& dateTime)
     time(&utcTime);
     tm* localTimeInfo = std::localtime(&utcTime);
     int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
-    
-    return TimeSpan(utcOffset);
+    */
+    return TimeSpan(0);
 }
 
 }
@@ -240,7 +240,16 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    auto n = TimeZone::GetUtcOffset(DateTime::Now())
+
+    auto now = DateTime::Now();
+    auto a = now.GetYear();
+    auto b = now.GetMonth();
+    auto c = now.GetDay();
+    auto d = now.GetHour();
+    auto e = now.GetMinute();
+    auto f = now.GetSecond();
+
+    //auto n = TimeZone::GetUtcOffset(DateTime::Now())
     
     auto engine = Application::GetInstance()->GetEngine();
 
