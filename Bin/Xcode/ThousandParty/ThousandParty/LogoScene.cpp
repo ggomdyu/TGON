@@ -11,8 +11,8 @@
 #include "Drawing/FontFactory.h"
 #include "Graphics/TextureAtlas.h"
 #include "String/UnicodeScalar.h"
-#include "String/Encoding.h"
-#include <stb/stb_rect_pack.h>
+#include <unicode/timezone.h>
+#include <unicode/locid.h>
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -236,11 +236,24 @@ void LogoScene::InitPhase3()
     //}
 }
 
+class CultureInfo
+{
+
+};
+
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
+    auto country = icu::Locale::getDefault();
+    auto c = country.getCountry();
+    auto c2 = country.getLanguage();
 
+    /*auto timeZone = icu::TimeZone::createDefault();
+    icu::UnicodeString str{};
+    str = timeZone->getDisplayName(, str);
+    auto ch = str.getTerminatedBuffer();*/
+/*
     auto now = DateTime::Now();
     auto a = now.GetYear();
     auto b = now.GetMonth();
@@ -248,7 +261,7 @@ void LogoScene::InitPhase4()
     auto d = now.GetHour();
     auto e = now.GetMinute();
     auto f = now.GetSecond();
-
+*/
     //auto n = TimeZone::GetUtcOffset(DateTime::Now())
     
     auto engine = Application::GetInstance()->GetEngine();
