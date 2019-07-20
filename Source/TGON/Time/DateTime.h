@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-class TGON_API DateTime final
+class DateTime final
 {
 /**@section Constructor */
 public:
