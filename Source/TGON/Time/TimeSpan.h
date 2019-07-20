@@ -7,12 +7,10 @@
 #pragma once
 #include <cstdint>
 
-#include "Platform/Config.h"
-
 namespace tgon
 {
 
-class TGON_API TimeSpan final
+class TimeSpan final
 {
 /**@section Constructor */
 public:
