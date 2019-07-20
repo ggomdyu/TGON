@@ -200,7 +200,7 @@ inline DateTime DateTime::Now()
 {
     time_t utcTime = 0;
     time(&utcTime);
-    tm* localTimeInfo = std::localtime(&utcTime);
+    const tm* localTimeInfo = std::localtime(&utcTime);
     int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
     
     return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + utcOffset, DateTimeKind::Local);
