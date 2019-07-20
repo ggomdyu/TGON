@@ -11,10 +11,8 @@
 #include <chrono>
 #include <tuple>
 
-#include "Platform/Config.h"
-
-#include "DateTimeType.h"
 #include "TimeSpan.h"
+#include "DateTimeType.h"
 
 namespace tgon
 {
