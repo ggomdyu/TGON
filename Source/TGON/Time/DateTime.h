@@ -65,7 +65,7 @@ public:
     constexpr DayOfWeek GetDayOfWeek() const noexcept;
     static constexpr DayOfWeek GetDayOfWeek(int32_t year, int32_t month, int32_t day);
     constexpr int32_t GetDayOfYear() const noexcept;
-    constexpr DateTimeKind GetDateTimeKind() const noexcept;
+    constexpr DateTimeKind GetKind() const noexcept;
     static constexpr DateTime GetMaxValue() noexcept;
     static constexpr DateTime GetMinValue() noexcept;
     static constexpr DateTime GetUnixEpoch() noexcept;
@@ -136,12 +136,12 @@ constexpr DateTime::DateTime(int64_t ticks, DateTimeKind dateTimeKind) noexcept 
 
 constexpr DateTime DateTime::operator+(const DateTime& rhs) const noexcept
 {
-    return DateTime(this->GetTicks() + rhs.GetTicks(), this->GetDateTimeKind());
+    return DateTime(this->GetTicks() + rhs.GetTicks(), this->GetKind());
 }
 
 constexpr DateTime DateTime::operator-(const DateTime& rhs) const noexcept
 {
-    return DateTime(this->GetTicks() - rhs.GetTicks(), this->GetDateTimeKind());
+    return DateTime(this->GetTicks() - rhs.GetTicks(), this->GetKind());
 }
 
 constexpr TimeSpan DateTime::operator-(const TimeSpan& rhs) const noexcept
@@ -203,9 +203,9 @@ inline DateTime DateTime::Now()
     time_t utcTime = 0;
     time(&utcTime);
     tm* localTimeInfo = std::localtime(&utcTime);
-    int64_t timeZoneOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
+    int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
     
-    return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + timeZoneOffset, DateTimeKind::Local);
+    return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + utcOffset, DateTimeKind::Local);
 }
 
 inline DateTime DateTime::UtcNow()
@@ -255,17 +255,17 @@ constexpr DateTime DateTime::AddMonths(int32_t value) noexcept
         month -= (y * 12);
     }
 
-    return DateTime(DateToTicks(year, month, day) + (this->GetTicks() % TicksPerDay), this->GetDateTimeKind());
+    return DateTime(DateToTicks(year, month, day) + (this->GetTicks() % TicksPerDay), this->GetKind());
 }
 
 constexpr DateTime DateTime::AddDays(double value) noexcept
 {
-    return DateTime(this->GetTicks() + static_cast<int64_t>(value * TicksPerDay), this->GetDateTimeKind());
+    return DateTime(this->GetTicks() + static_cast<int64_t>(value * TicksPerDay), this->GetKind());
 }
 
 constexpr DateTime DateTime::AddHours(double value) noexcept
 {
-    return DateTime(this->GetTicks() + static_cast<int64_t>(value * TicksPerHour), this->GetDateTimeKind());
+    return DateTime(this->GetTicks() + static_cast<int64_t>(value * TicksPerHour), this->GetKind());
 }
 
 constexpr int32_t DateTime::GetYear() const noexcept
@@ -306,7 +306,7 @@ constexpr int64_t DateTime::GetTicks() const noexcept
 constexpr DateTime DateTime::GetDate() const noexcept
 {
     auto ticks = this->GetTicks();
-    return DateTime(ticks - (ticks % TicksPerDay), this->GetDateTimeKind());
+    return DateTime(ticks - (ticks % TicksPerDay), this->GetKind());
 }
 
 constexpr DayOfWeek DateTime::GetDayOfWeek() const noexcept
@@ -328,7 +328,7 @@ constexpr int32_t DateTime::GetDayOfYear() const noexcept
     return GetDatePart(DatePartDayOfYear);
 }
 
-constexpr DateTimeKind DateTime::GetDateTimeKind() const noexcept
+constexpr DateTimeKind DateTime::GetKind() const noexcept
 {
     return static_cast<DateTimeKind>(m_ticks >> KindShift);
 }

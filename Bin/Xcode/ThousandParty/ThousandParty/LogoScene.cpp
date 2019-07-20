@@ -20,6 +20,48 @@ std::shared_ptr<tgon::GameObject> object3;
 std::shared_ptr<tgon::GameObject> object4;
 std::shared_ptr<tgon::GameObject> object5;
 
+namespace tgon
+{
+
+class TGON_API TimeZone
+{
+public:
+    
+public:
+    std::string GetDaylightName();
+    std::string GetStandardName();
+    TimeSpan GetUtcOffset(const DateTime& dateTime);
+    DateTime ToUniversalTime(const DateTime& dateTime);
+    DateTime ToLocalTime(const DateTime& dateTime);
+    
+/**@section Variable */
+private:
+    static constexpr int64_t TicksPerMillisecond = 10000;
+    static constexpr int64_t TicksPerSecond = TicksPerMillisecond * 1000;
+    static constexpr int64_t TicksPerMinute = TicksPerSecond * 60;
+    static constexpr int64_t TicksPerHour = TicksPerMinute * 60;
+    static constexpr int64_t TicksPerDay = TicksPerHour * 24;
+};
+
+inline TimeSpan TimeZone::GetUtcOffset(const DateTime& dateTime)
+{
+    if (dateTime.GetKind() == DateTimeKind::Utc)
+    {
+        return TimeSpan(0);
+    }
+    else {
+        return new TimeSpan(TimeZone.CalculateUtcOffset(time, GetDaylightChanges(time.Year)).Ticks + m_ticksOffset);
+    }
+    time_t utcTime = 0;
+    time(&utcTime);
+    tm* localTimeInfo = std::localtime(&utcTime);
+    int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
+    
+    return TimeSpan(utcOffset);
+}
+
+}
+
 LogoScene::LogoScene()
 {
     using namespace tgon;
@@ -198,6 +240,8 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
+    auto n = TimeZone::GetUtcOffset(DateTime::Now())
+    
     auto engine = Application::GetInstance()->GetEngine();
 
     auto graphicsModule = engine->FindModule<GraphicsModule>();
