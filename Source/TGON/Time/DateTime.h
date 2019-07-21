@@ -210,7 +210,7 @@ inline DateTime DateTime::Now()
     int64_t utcOffset = static_cast<int64_t>((difftime(utcTime, localTime) / 3600.0) * TicksPerHour);
 #else
     const tm* localTimeInfo = localtime(&utcTime);
-    int64_t utcOffset = localTimeInfo->tm_gmtoff / 3600
+    int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
 #endif
     
     return DateTime(GetUnixEpoch().GetTicks() + GetTimeSinceUnixEpoch() + utcOffset, DateTimeKind::Local);

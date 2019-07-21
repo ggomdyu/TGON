@@ -33,7 +33,7 @@ public:
 /**@section Method */
 public:
 	virtual void Update() override;
-    std::shared_ptr<Camera>& GetCamera() noexcept;
+    std::shared_ptr<Camera> GetCamera() noexcept;
     std::shared_ptr<const Camera> GetCamera() const noexcept;
 
 /**@section Variable */

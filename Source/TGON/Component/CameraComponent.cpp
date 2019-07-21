@@ -50,7 +50,7 @@ void CameraComponent::Update()
     m_camera->Update();
 }
 
-std::shared_ptr<Camera>& CameraComponent::GetCamera() noexcept
+std::shared_ptr<Camera> CameraComponent::GetCamera() noexcept
 {
     return m_camera;
 }
