@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <filesystem>
+#include <sys/stat.h>
 
 #include "Time/DateTime.h"
 
@@ -34,7 +35,8 @@ bool File::Delete(const std::string_view& path)
 
 bool File::Exists(const std::string_view& path)
 {
-    return std::filesystem::exists(path);
+    struct stat s;
+    return stat(path.data(), &s) != 0;
 }
 
 bool File::Move(const std::string_view& srcFileName, const std::string_view& destFileName)
