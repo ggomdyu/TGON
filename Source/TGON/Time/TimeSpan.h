@@ -29,6 +29,8 @@ public:
     constexpr bool operator<=(const TimeSpan& rhs) const noexcept;
     constexpr TimeSpan operator+(const TimeSpan& rhs) const noexcept;
     constexpr TimeSpan operator-(const TimeSpan& rhs) const noexcept;
+    TimeSpan& operator+=(const TimeSpan& rhs) noexcept;
+    TimeSpan& operator-=(const TimeSpan& rhs) noexcept;
     constexpr TimeSpan operator*(const TimeSpan& timeSpan) const noexcept;
     friend constexpr TimeSpan operator*(double factor, const TimeSpan& timeSpan) noexcept;
     constexpr TimeSpan operator/(double divisor) const noexcept;
@@ -156,6 +158,18 @@ constexpr TimeSpan TimeSpan::operator+(const TimeSpan& rhs) const noexcept
 constexpr TimeSpan TimeSpan::operator-(const TimeSpan& rhs) const noexcept
 {
     return TimeSpan(m_ticks - rhs.m_ticks);
+}
+
+inline TimeSpan& TimeSpan::operator+=(const TimeSpan& rhs) noexcept
+{
+    m_ticks += rhs.m_ticks;
+    return *this;
+}
+
+inline TimeSpan& TimeSpan::operator-=(const TimeSpan& rhs) noexcept
+{
+    m_ticks -= rhs.m_ticks;
+    return *this;
 }
 
 constexpr TimeSpan TimeSpan::operator/(double divisor) const noexcept

@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -11,56 +11,13 @@
 #include "Drawing/FontFactory.h"
 #include "Graphics/TextureAtlas.h"
 #include "String/UnicodeScalar.h"
-#include <unicode/timezone.h>
-#include <unicode/locid.h>
+#include "Time/TimeZoneInfo.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
 std::shared_ptr<tgon::GameObject> object3;
 std::shared_ptr<tgon::GameObject> object4;
 std::shared_ptr<tgon::GameObject> object5;
-
-namespace tgon
-{
-
-class TGON_API TimeZone
-{
-public:
-    
-public:
-    std::string GetDaylightName();
-    std::string GetStandardName();
-    TimeSpan GetUtcOffset(const DateTime& dateTime);
-    DateTime ToUniversalTime(const DateTime& dateTime);
-    DateTime ToLocalTime(const DateTime& dateTime);
-    
-/**@section Variable */
-private:
-    static constexpr int64_t TicksPerMillisecond = 10000;
-    static constexpr int64_t TicksPerSecond = TicksPerMillisecond * 1000;
-    static constexpr int64_t TicksPerMinute = TicksPerSecond * 60;
-    static constexpr int64_t TicksPerHour = TicksPerMinute * 60;
-    static constexpr int64_t TicksPerDay = TicksPerHour * 24;
-};
-
-inline TimeSpan TimeZone::GetUtcOffset(const DateTime& dateTime)
-{
-    /*if (dateTime.GetKind() == DateTimeKind::Utc)
-    {
-        return TimeSpan(0);
-    }
-    else {
-        return new TimeSpan(TimeZone.CalculateUtcOffset(time, GetDaylightChanges(time.Year)).Ticks + m_ticksOffset);
-    }
-    time_t utcTime = 0;
-    time(&utcTime);
-    tm* localTimeInfo = std::localtime(&utcTime);
-    int64_t utcOffset = (localTimeInfo->tm_gmtoff / 3600) * TicksPerHour;
-    */
-    return TimeSpan(0);
-}
-
-}
 
 LogoScene::LogoScene()
 {
@@ -241,28 +198,20 @@ class CultureInfo
 
 };
 
+namespace tgon
+{
+
+}
+
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
-
-    auto country = icu::Locale::getDefault();
-    auto c = country.getCountry();
-    auto c2 = country.getLanguage();
-
-    /*auto timeZone = icu::TimeZone::createDefault();
-    icu::UnicodeString str{};
-    str = timeZone->getDisplayName(, str);
-    auto ch = str.getTerminatedBuffer();*/
-/*
-    auto now = DateTime::Now();
-    auto a = now.GetYear();
-    auto b = now.GetMonth();
-    auto c = now.GetDay();
-    auto d = now.GetHour();
-    auto e = now.GetMinute();
-    auto f = now.GetSecond();
-*/
-    //auto n = TimeZone::GetUtcOffset(DateTime::Now())
+    
+    auto localTimeZone = TimeZoneInfo::Local();
+    auto now = DateTime::UtcNow();
+    auto c = TimeZoneInfo::ConvertTimeFromUtc(now, localTimeZone);
+    auto ch = c.GetHour();
+    auto cd = c.GetDay();
     
     auto engine = Application::GetInstance()->GetEngine();
 

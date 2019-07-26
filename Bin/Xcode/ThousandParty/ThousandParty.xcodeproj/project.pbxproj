@@ -303,8 +303,9 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/stb",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/i18n",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
@@ -335,8 +336,9 @@
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/boost_1_68_0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/glm-0.9.9.0",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/freetype-2.10.0/include",
-					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 					"$(PROJECT_DIR)/../../../Source/ThirdParty/stb",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/common",
+					"$(PROJECT_DIR)/../../../Source/ThirdParty/icu4c-64_2/icu/source/i18n",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
