@@ -222,5 +222,8 @@
     <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsFile.cpp">
       <Filter>Sources\TGON\IO</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTimeZoneInfo.cpp">
+      <Filter>Sources\TGON\Time\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

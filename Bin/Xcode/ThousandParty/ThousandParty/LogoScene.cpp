@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -207,7 +207,7 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
-    auto localTimeZone = TimeZoneInfo::Local();
+    auto localTimeZone = TimeZoneInfo::Utc();
     auto now = DateTime::UtcNow();
     auto c = TimeZoneInfo::ConvertTimeFromUtc(now, localTimeZone);
     auto ch = c.GetHour();

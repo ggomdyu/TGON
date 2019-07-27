@@ -1,6 +1,6 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import "TimeZoneInfo.h"
+#include "TimeZoneInfo.h"
 
 namespace tgon
 {
@@ -28,7 +28,7 @@ TimeZoneInfo::TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const 
 const TimeZoneInfo& TimeZoneInfo::Utc()
 {
     static auto timeZoneInfo = CreateUtc();
-    return TimeZoneInfo;
+    return timeZoneInfo;
 }
 
 DateTime TimeZoneInfo::ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone)

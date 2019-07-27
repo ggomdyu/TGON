@@ -178,6 +178,9 @@
     <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindowUtility.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Thread\Windows\WindowsThread.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTimeZoneInfo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\hiddevice.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

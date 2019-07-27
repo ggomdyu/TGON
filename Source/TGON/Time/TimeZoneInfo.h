@@ -20,7 +20,7 @@ class TGON_API TimeZoneInfo final
 /**@section Constructor */
 public:
     TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool isSupportDaylightSaveingTime);
-    
+
 /**@section Method */
 public:
     static const TimeZoneInfo& Local();
