@@ -75,15 +75,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D8D5D084-AC35-416D-94E6-1B5EBC48D6F0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
+            timestampString = "585981529.1774189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "LogoScene::InitPhase4()"
             landmarkType = "7">
          </BreakpointContent>

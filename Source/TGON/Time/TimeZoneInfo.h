@@ -10,7 +10,6 @@
 #include "Platform/Config.h"
 
 #include "DateTime.h"
-#include "TimeSpan.h"
 
 namespace tgon
 {
@@ -19,7 +18,7 @@ class TGON_API TimeZoneInfo final
 {
 /**@section Constructor */
 public:
-    TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool isSupportDaylightSaveingTime);
+    TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool supportsDaylightSavingTime);
 
 /**@section Method */
 public:
@@ -31,7 +30,7 @@ public:
     const TimeSpan& GetBaseUtcOffset() const noexcept;
     const std::string& GetStandardDisplayName() const noexcept;
     const std::string& GetDaylightDisplayName() const noexcept;
-    bool IsSupportDaylightSaveingTime() const noexcept;
+    bool IsSupportDaylightSavingTime() const noexcept;
     
 /**@section Variable */
 private:
@@ -40,7 +39,7 @@ private:
     std::string m_displayName;
     std::string m_standardDisplayName;
     std::string m_daylightDisplayName;
-    bool m_isSupportDaylightSaveingTime;
+    bool m_supportsDaylightSavingTime;
 };
 
 } /* namespace tgon */

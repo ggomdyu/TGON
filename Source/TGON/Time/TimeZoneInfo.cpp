@@ -15,13 +15,13 @@ TimeZoneInfo CreateUtc()
 
 } /* namespace */
 
-TimeZoneInfo::TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool isSupportDaylightSaveingTime) :
+TimeZoneInfo::TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool supportsDaylightSavingTime) :
     m_id(id),
     m_baseUtcOffset(baseUtcOffset),
     m_displayName(displayName),
     m_standardDisplayName(standardDisplayName),
     m_daylightDisplayName(daylightDisplayName),
-    m_isSupportDaylightSaveingTime(isSupportDaylightSaveingTime)
+    m_supportsDaylightSavingTime(supportsDaylightSavingTime)
 {
 }
 
@@ -75,9 +75,9 @@ const std::string& TimeZoneInfo::GetDaylightDisplayName() const noexcept
     return m_daylightDisplayName;
 }
 
-bool TimeZoneInfo::IsSupportDaylightSaveingTime() const noexcept
+bool TimeZoneInfo::IsSupportDaylightSavingTime() const noexcept
 {
-    return m_isSupportDaylightSaveingTime;
+    return m_supportsDaylightSavingTime;
 }
 
 } /* namespace tgon */

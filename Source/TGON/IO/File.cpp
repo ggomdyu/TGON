@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.h"
 
-#include <filesystem>
+#include <cstdio>
 #include <sys/stat.h>
 
-#include "Time/DateTime.h"
+#include "Time/TimeZoneInfo.h"
 
 #include "File.h"
 
@@ -17,47 +17,88 @@ bool File::Copy(const std::string_view& srcFileName, const std::string_view& des
 
 bool File::Copy(const std::string_view& srcFileName, const std::string_view& destFileName, bool overwrite) noexcept
 {
-    try
-    {
-        std::filesystem::copy_file(srcFileName, destFileName, overwrite ? std::filesystem::copy_options::overwrite_existing : std::filesystem::copy_options::none);
-        return true;
-    }
-    catch (const std::filesystem::filesystem_error& error)
-    {
-        return false;
-    }
+    return true;
 }
 
-bool File::Delete(const std::string_view& path)
+bool File::Delete(const char* path)
 {
-    return std::filesystem::remove(path);
+    return remove(path) == 0;
 }
 
-bool File::Exists(const std::string_view& path)
+bool File::Exists(const char* path)
 {
     struct stat s;
-    return stat(path.data(), &s) != 0;
-}
-
-bool File::Move(const std::string_view& srcFileName, const std::string_view& destFileName)
-{
-    try
-    {
-        std::filesystem::rename(srcFileName, destFileName);
-        return true;
-    }
-    catch (const std::filesystem::filesystem_error& error)
+    if (stat(path, &s) != 0)
     {
         return false;
     }
+    
+    if (S_ISREG(s.st_mode) == false)
+    {
+        return false;
+    }
+    
+    return true;
 }
 
-std::optional<DateTime> File::GetCreationTime(const std::string_view& path)
+bool File::Move(const char* srcFileName, const char* destFileName)
 {
-    auto lastWriteTime = std::filesystem::last_write_time(path);
-    auto b = std::chrono::duration_cast<std::chrono::milliseconds>(lastWriteTime.time_since_epoch());
+    return std::rename(srcFileName, destFileName) == 0;
+}
 
-    return std::optional<DateTime>();
+std::optional<DateTime> File::GetCreationTime(const char* path)
+{
+    auto ret = GetCreationTimeUtc(path);
+    if (ret)
+    {
+        return ret.value() + TimeZoneInfo::Local().GetBaseUtcOffset();
+    }
+    
+    return ret;
+}
+    
+std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
+{
+    struct stat s;
+    if (stat(path, &s) != 0)
+    {
+        return {};
+    }
+    
+    if (S_ISREG(s.st_mode) == false)
+    {
+        return {};
+    }
+    
+    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_birthtimespec.tv_sec);
+}
+
+
+std::optional<DateTime> File::GetLastAccessTime(const char* path)
+{
+    auto ret = GetLastAccessTimeUtc(path);
+    if (ret)
+    {
+        return ret.value() + TimeZoneInfo::Local().GetBaseUtcOffset();
+    }
+    
+    return ret;
+}
+
+std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
+{
+    struct stat s;
+    if (stat(path, &s) != 0)
+    {
+        return {};
+    }
+    
+    if (S_ISREG(s.st_mode) == false)
+    {
+        return {};
+    }
+    
+    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atimespec.tv_sec);
 }
 
 } /* namespace tgon */

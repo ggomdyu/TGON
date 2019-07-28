@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -7,6 +7,7 @@
 #include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
+#include "IO/File.h"
 #include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
 #include "Graphics/TextureAtlas.h"
@@ -207,11 +208,26 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
+    auto ct = File::GetLastAccessTime(u8"/System/Volumes/Data/Users/ggomdyu/Desktop/4e58519f768d09ef61f8f54100166a78_11180249855.png").value();
+    auto utcct = File::GetLastAccessTimeUtc(u8"/System/Volumes/Data/Users/ggomdyu/Desktop/4e58519f768d09ef61f8f54100166a78_11180249855.png").value();
+    
+    auto y = ct.GetYear();
+    auto m = ct.GetMonth();
+    auto d = ct.GetDay();
+    auto h = ct.GetHour();
+    auto mm = ct.GetMinute();
+    auto ss = ct.GetSecond();
+    
+    auto utcy = utcct.GetYear();
+    auto utcm = utcct.GetMonth();
+    auto utcd = utcct.GetDay();
+    auto utch = utcct.GetHour();
+    auto utcmm = utcct.GetMinute();
+    auto utcss = utcct.GetSecond();
+    
     auto localTimeZone = TimeZoneInfo::Utc();
     auto now = DateTime::UtcNow();
     auto c = TimeZoneInfo::ConvertTimeFromUtc(now, localTimeZone);
-    auto ch = c.GetHour();
-    auto cd = c.GetDay();
     
     auto engine = Application::GetInstance()->GetEngine();
 

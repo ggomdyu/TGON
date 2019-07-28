@@ -24,15 +24,15 @@ private:
 public:
     static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName) noexcept;
     static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName, bool overwrite) noexcept;
-    static bool Delete(const std::string_view& path);
-    static bool Exists(const std::string_view& path);
-    static bool Move(const std::string_view& srcFileName, const std::string_view& destFileName);
-    static std::optional<DateTime> GetCreationTime(const std::string_view& path);
-    static std::optional<DateTime> GetCreationTimeUtc(const std::string_view& path);
-    static std::optional<DateTime> GetLastAccessTime(const std::string_view& path);
-    static std::optional<DateTime> GetLastAccessTimeUtc(const std::string_view& path);
-    static std::optional<DateTime> GetLastWriteTime(const std::string_view& path);
-    static std::optional<DateTime> GetLastWriteTimeUtc(const std::string_view& path);
+    static bool Delete(const char* path);
+    static bool Exists(const char* path);
+    static bool Move(const char* srcFileName, const char* destFileName);
+    static std::optional<DateTime> GetCreationTime(const char* path);
+    static std::optional<DateTime> GetCreationTimeUtc(const char* path);
+    static std::optional<DateTime> GetLastAccessTime(const char* path);
+    static std::optional<DateTime> GetLastAccessTimeUtc(const char* path);
+    static std::optional<DateTime> GetLastWriteTime(const char* path);
+    static std::optional<DateTime> GetLastWriteTimeUtc(const char* path);
     //static FileAttributes GetAttributes(const std::string_view& path);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents, Encoding encoding);
