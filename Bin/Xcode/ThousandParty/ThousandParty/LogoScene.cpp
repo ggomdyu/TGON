@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -208,8 +208,13 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
-    auto ct = File::GetLastAccessTime(u8"/System/Volumes/Data/Users/ggomdyu/Desktop/4e58519f768d09ef61f8f54100166a78_11180249855.png").value();
-    auto utcct = File::GetLastAccessTimeUtc(u8"/System/Volumes/Data/Users/ggomdyu/Desktop/4e58519f768d09ef61f8f54100166a78_11180249855.png").value();
+    auto now = DateTime::Now();
+
+    auto ct = now.ToFileTime();
+    auto utcct = now.ToFileTimeUtc();
+
+    //auto ct = File::GetLastAccessTime(u8"E:/Users/ggomdyu/Desktop/1564267658.jpg").value();
+    //auto utcct = File::GetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/1564267658.jpg").value();
     
     auto y = ct.GetYear();
     auto m = ct.GetMonth();
@@ -224,13 +229,10 @@ void LogoScene::InitPhase4()
     auto utch = utcct.GetHour();
     auto utcmm = utcct.GetMinute();
     auto utcss = utcct.GetSecond();
-    
-    auto localTimeZone = TimeZoneInfo::Utc();
-    auto now = DateTime::UtcNow();
-    auto c = TimeZoneInfo::ConvertTimeFromUtc(now, localTimeZone);
-    
+  
     auto engine = Application::GetInstance()->GetEngine();
 
+    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(1999, 10, 12));
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 

@@ -74,6 +74,9 @@ public:
     static constexpr DateTime GetMaxValue() noexcept;
     static constexpr DateTime GetMinValue() noexcept;
     static constexpr DateTime GetUnixEpoch() noexcept;
+    DateTime ToUniversalTime() const;
+    DateTime ToFileTime() const;
+    DateTime ToFileTimeUtc() const;
 
 private:
     static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
@@ -102,6 +105,7 @@ private:
     static constexpr int32_t DaysTo1899 = DaysPer400Years * 4 + DaysPer100Years * 3 - 367;
     static constexpr int32_t DaysTo1970 = DaysPer400Years * 4 + DaysPer100Years * 3 + DaysPer4Years * 17 + DaysPerYear;
     static constexpr int32_t DaysTo10000 = DaysPer400Years * 25 - 366;
+    static constexpr int64_t FileTimeOffset = DaysTo1601 * TimeSpan::TicksPerDay;
 
     int64_t m_ticks;
 };
@@ -509,5 +513,16 @@ inline int64_t DateTime::GetTimeSinceUnixEpoch()
         return castedTimeSinceEpoch.count();
     }
 }
+
+inline DateTime DateTime::ToFileTime() const
+{
+    return ToFileTimeUtc();
+}
+
+inline DateTime DateTime::ToFileTimeUtc() const
+{
+    return this->ToUniversalTime() - TimeSpan(FileTimeOffset);
+}
+
 
 } /* namespace tgon */

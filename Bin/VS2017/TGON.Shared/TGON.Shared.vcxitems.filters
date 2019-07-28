@@ -1045,6 +1045,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeZoneInfo.cpp">
       <Filter>Source\TGON\Time</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\DateTime.cpp">
+      <Filter>Source\TGON\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">

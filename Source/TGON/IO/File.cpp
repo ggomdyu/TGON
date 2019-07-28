@@ -7,6 +7,10 @@
 
 #include "File.h"
 
+#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
+#   define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
+#endif
+
 namespace tgon
 {
 
@@ -20,15 +24,15 @@ bool File::Copy(const std::string_view& srcFileName, const std::string_view& des
     return true;
 }
 
-bool File::Delete(const char* path)
+bool File::Delete(const std::string_view& path)
 {
-    return remove(path) == 0;
+    return remove(path.data()) == 0;
 }
 
-bool File::Exists(const char* path)
+bool File::Exists(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path, &s) != 0)
+    if (stat(path.data(), &s) != 0)
     {
         return false;
     }
@@ -41,12 +45,12 @@ bool File::Exists(const char* path)
     return true;
 }
 
-bool File::Move(const char* srcFileName, const char* destFileName)
+bool File::Move(const std::string_view& srcFileName, const std::string_view& destFileName)
 {
-    return std::rename(srcFileName, destFileName) == 0;
+    return std::rename(srcFileName.data(), destFileName.data()) == 0;
 }
 
-std::optional<DateTime> File::GetCreationTime(const char* path)
+std::optional<DateTime> File::GetCreationTime(const std::string_view& path)
 {
     auto ret = GetCreationTimeUtc(path);
     if (ret)
@@ -56,25 +60,8 @@ std::optional<DateTime> File::GetCreationTime(const char* path)
     
     return ret;
 }
-    
-std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
-{
-    struct stat s;
-    if (stat(path, &s) != 0)
-    {
-        return {};
-    }
-    
-    if (S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-    
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_birthtimespec.tv_sec);
-}
 
-
-std::optional<DateTime> File::GetLastAccessTime(const char* path)
+std::optional<DateTime> File::GetLastAccessTime(const std::string_view& path)
 {
     auto ret = GetLastAccessTimeUtc(path);
     if (ret)
@@ -85,20 +72,51 @@ std::optional<DateTime> File::GetLastAccessTime(const char* path)
     return ret;
 }
 
-std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
+std::optional<DateTime> File::GetLastWriteTime(const std::string_view& path)
+{
+    auto ret = GetLastWriteTimeUtc(path);
+    if (ret)
+    {
+        return ret.value() + TimeZoneInfo::Local().GetBaseUtcOffset();
+    }
+
+    return ret;
+}
+
+#if TGON_PLATFORM_MACOS == 0
+std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path, &s) != 0)
+    if (stat(path.data(), &s) != 0)
     {
         return {};
     }
-    
+
     if (S_ISREG(s.st_mode) == false)
     {
         return {};
     }
-    
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atimespec.tv_sec);
+
+    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atime);
 }
+#endif
+
+#if TGON_PLATFORM_MACOS == 0
+std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
+{
+    struct stat s;
+    if (stat(path.data(), &s) != 0)
+    {
+        return {};
+    }
+
+    if (S_ISREG(s.st_mode) == false)
+    {
+        return {};
+    }
+
+    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_mtime);
+}
+#endif
 
 } /* namespace tgon */
