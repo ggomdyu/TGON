@@ -65,7 +65,7 @@ inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_vi
 
     int32_t encodedStrBytes = ustr.extract(0, ustr.length(), nullptr, _ToEncodingType::EncodingName);
     int32_t destStrBufferBytes = destStrBufferLen * sizeof(_DestCharType);
-    if (encodedStrBytes + sizeof(_DestCharType) > destStrBufferBytes)
+    if (encodedStrBytes + static_cast<int32_t>(sizeof(_DestCharType)) > destStrBufferBytes)
     {
         return -1;
     }

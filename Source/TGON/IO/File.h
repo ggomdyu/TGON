@@ -51,7 +51,7 @@ public:
     //static void SetCreationTimeUtc(const std::string_view& path, DateTime creationTimeUtc);
     //static void SetLastAccessTime(const std::string_view& path, DateTime lastAccessTime);
     //static void SetLastAccessTimeUtc(const std::string_view& path, DateTime lastAccessTimeUtc);
-    //static void SetLastWriteTime(const std::string_view& path, DateTime lastWriteTime);
+    static void SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime);
     static bool SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc);
     //static void SetAttributes(const std::string_view& path, FileAttributes fileAttributes);
     static std::optional<DateTime> GetCreationTime(const std::string_view& path);

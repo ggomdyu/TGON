@@ -18,15 +18,19 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
 {
     std::u16string utf16Path = UTF8::ConvertTo<UTF16LE>(path);
 
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(utf16Path.c_str()), GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
-    if (static_cast<HANDLE>(handle) == INVALID_HANDLE_VALUE)
+    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(utf16Path.c_str()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    if (handle.IsValid() == false)
     {
         return false;
     }
 
-    auto ticks = lastWriteTimeUtc.ToFileTimeUtc().GetTicks();
-    FILETIME fileTime = *reinterpret_cast<const FILETIME*>(&ticks);
-    auto c = SetFileTime(handle, nullptr, nullptr, &fileTime);
+    int64_t ticks = lastWriteTimeUtc.ToFileTimeUtc();
+    FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
+
+    if (SetFileTime(handle, nullptr, nullptr, &fileTime) == 0)
+    {
+        return false;
+    }
 
     return true;
 }

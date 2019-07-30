@@ -24,6 +24,7 @@ public:
 public:
     static const TimeZoneInfo& Local();
     static const TimeZoneInfo& Utc();
+    static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
     static DateTime ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone);
     static DateTime ConvertTimeToUtc(const DateTime& dateTime);
     const std::string& GetId() const noexcept;
@@ -32,6 +33,10 @@ public:
     const std::string& GetDaylightDisplayName() const noexcept;
     bool IsSupportDaylightSavingTime() const noexcept;
     
+private:
+    static DateTimeKind GetCorrespondingKind(const TimeZoneInfo& timeZone);
+    static DateTime ConvertTime(const DateTime& dateTime, const TimeZoneInfo& sourceTimeZone, const TimeZoneInfo& destinationTimeZone);
+
 /**@section Variable */
 private:
     std::string m_id;

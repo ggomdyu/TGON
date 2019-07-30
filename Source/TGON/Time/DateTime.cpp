@@ -6,6 +6,11 @@
 namespace tgon
 {
 
+DateTime DateTime::ToLocalTime() const
+{
+    return TimeZoneInfo::ConvertTimeFromUtc(*this, TimeZoneInfo::Local());
+}
+
 DateTime DateTime::ToUniversalTime() const
 {
     return TimeZoneInfo::ConvertTimeToUtc(*this);

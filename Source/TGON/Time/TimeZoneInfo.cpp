@@ -31,28 +31,26 @@ const TimeZoneInfo& TimeZoneInfo::Utc()
     return timeZoneInfo;
 }
 
-DateTime TimeZoneInfo::ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone)
+DateTime TimeZoneInfo::ConvertTime(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone)
 {
-    if (dateTime.GetKind() == DateTimeKind::Local)
+    if (dateTime.GetKind() == DateTimeKind::Utc)
     {
-        return dateTime;
+        return ConvertTime(dateTime, Utc(), destinationTimeZone);
     }
     else
     {
-        return dateTime + destinationTimeZone.GetBaseUtcOffset();
+        return ConvertTime(dateTime, Local(), destinationTimeZone);
     }
+}
+
+DateTime TimeZoneInfo::ConvertTimeFromUtc(const DateTime& dateTime, const TimeZoneInfo& destinationTimeZone)
+{
+    return ConvertTime(dateTime, TimeZoneInfo::Utc(), destinationTimeZone);
 }
 
 DateTime TimeZoneInfo::ConvertTimeToUtc(const DateTime& dateTime)
 {
-    if (dateTime.GetKind() == DateTimeKind::Utc)
-    {
-        return dateTime;
-    }
-    else
-    {
-        return dateTime - TimeZoneInfo::Local().GetBaseUtcOffset();
-    }
+    return ConvertTime(dateTime, TimeZoneInfo::Local(), TimeZoneInfo::Utc());
 }
 
 const std::string& TimeZoneInfo::GetId() const noexcept
@@ -78,6 +76,49 @@ const std::string& TimeZoneInfo::GetDaylightDisplayName() const noexcept
 bool TimeZoneInfo::IsSupportDaylightSavingTime() const noexcept
 {
     return m_supportsDaylightSavingTime;
+}
+
+DateTimeKind TimeZoneInfo::GetCorrespondingKind(const TimeZoneInfo& timeZone)
+{
+    if (&timeZone == &Utc())
+    {
+        return DateTimeKind::Utc;
+    }
+    else if (&timeZone == &Local())
+    {
+        return DateTimeKind::Local;
+    }
+    
+    return DateTimeKind::Unspecified;
+}
+
+DateTime TimeZoneInfo::ConvertTime(const DateTime& dateTime, const TimeZoneInfo& sourceTimeZone, const TimeZoneInfo& destinationTimeZone)
+{
+    // The kind of dateTime and sourceTimeZone must be the same.
+    DateTimeKind sourceKind = GetCorrespondingKind(sourceTimeZone);
+    if (dateTime.GetKind() != sourceKind)
+    {
+        return dateTime;
+    }
+
+    // Filter the special case like UTC->UTC or Local->Local
+    DateTimeKind destinationKind = GetCorrespondingKind(destinationTimeZone);
+    if (sourceKind != DateTimeKind::Unspecified && destinationKind != DateTimeKind::Unspecified && sourceKind == destinationKind)
+    {
+        return dateTime;
+    }
+
+    // Convert the dateTime utc offset to 0.
+    int64_t ticks = dateTime.GetTicks() - sourceTimeZone.GetBaseUtcOffset().GetTicks();
+
+    if (destinationKind == DateTimeKind::Local)
+    {
+        return DateTime(ticks + destinationTimeZone.GetBaseUtcOffset().GetTicks(), DateTimeKind::Local);
+    }
+    else
+    {
+        return DateTime(ticks, destinationKind);
+    }
 }
 
 } /* namespace tgon */

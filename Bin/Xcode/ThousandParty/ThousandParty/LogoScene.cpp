@@ -208,31 +208,30 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
-    auto now = DateTime::Now();
 
-    auto ct = now.ToFileTime();
-    auto utcct = now.ToFileTimeUtc();
+    auto engine = Application::GetInstance()->GetEngine();
 
-    //auto ct = File::GetLastAccessTime(u8"E:/Users/ggomdyu/Desktop/1564267658.jpg").value();
-    //auto utcct = File::GetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/1564267658.jpg").value();
-    
+
+    auto r = DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local);
+    auto ct = TimeZoneInfo::ConvertTimeFromUtc(r, TimeZoneInfo::Local());
+
     auto y = ct.GetYear();
     auto m = ct.GetMonth();
     auto d = ct.GetDay();
     auto h = ct.GetHour();
     auto mm = ct.GetMinute();
     auto ss = ct.GetSecond();
-    
-    auto utcy = utcct.GetYear();
-    auto utcm = utcct.GetMonth();
-    auto utcd = utcct.GetDay();
-    auto utch = utcct.GetHour();
-    auto utcmm = utcct.GetMinute();
-    auto utcss = utcct.GetSecond();
-  
-    auto engine = Application::GetInstance()->GetEngine();
 
-    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(1999, 10, 12));
+    auto k = r.GetKind();
+    if (k == DateTimeKind::Local)
+    {
+        int n = 3;
+    }
+
+    File::SetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
+    File::SetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));
+    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 

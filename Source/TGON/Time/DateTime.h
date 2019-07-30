@@ -26,8 +26,8 @@ public:
     constexpr DateTime(int32_t year, int32_t month, int32_t day) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DateTimeKind dateTimeKind) noexcept;
-    constexpr DateTime(int64_t ticks) noexcept;
-    constexpr DateTime(int64_t ticks, DateTimeKind dateTimeKind) noexcept;
+    constexpr DateTime(uint64_t ticks) noexcept;
+    constexpr DateTime(uint64_t ticks, DateTimeKind dateTimeKind) noexcept;
 
 /**@section Operator */
 public:
@@ -74,9 +74,10 @@ public:
     static constexpr DateTime GetMaxValue() noexcept;
     static constexpr DateTime GetMinValue() noexcept;
     static constexpr DateTime GetUnixEpoch() noexcept;
+    DateTime ToLocalTime() const;
     DateTime ToUniversalTime() const;
-    DateTime ToFileTime() const;
-    DateTime ToFileTimeUtc() const;
+    int64_t ToFileTime() const;
+    int64_t ToFileTimeUtc() const;
 
 private:
     static constexpr int64_t DateToTicks(int32_t year, int32_t month, int32_t day) noexcept;
@@ -107,7 +108,7 @@ private:
     static constexpr int32_t DaysTo10000 = DaysPer400Years * 25 - 366;
     static constexpr int64_t FileTimeOffset = DaysTo1601 * TimeSpan::TicksPerDay;
 
-    int64_t m_ticks;
+    uint64_t m_ticks;
 };
 
 constexpr DateTime::DateTime() noexcept :
@@ -130,13 +131,13 @@ constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day, int32_t h
 {
 }
 
-constexpr DateTime::DateTime(int64_t ticks) noexcept :
+constexpr DateTime::DateTime(uint64_t ticks) noexcept :
     m_ticks(ticks)
 {
 }
 
-constexpr DateTime::DateTime(int64_t ticks, DateTimeKind dateTimeKind) noexcept :
-    m_ticks(ticks | (static_cast<int64_t>(dateTimeKind) << DateTime::KindShift))
+constexpr DateTime::DateTime(uint64_t ticks, DateTimeKind dateTimeKind) noexcept :
+    m_ticks(ticks | (static_cast<uint64_t>(dateTimeKind) << DateTime::KindShift))
 {
 }
 
@@ -337,7 +338,7 @@ constexpr int32_t DateTime::GetSecond() const noexcept
 
 constexpr int64_t DateTime::GetTicks() const noexcept
 {
-    return m_ticks & TicksMask;
+    return static_cast<int64_t>(m_ticks & TicksMask);
 }
 
 constexpr TimeSpan DateTime::GetTimeOfDay() const noexcept
@@ -372,7 +373,7 @@ constexpr int32_t DateTime::GetDayOfYear() const noexcept
 
 constexpr DateTimeKind DateTime::GetKind() const noexcept
 {
-    return static_cast<DateTimeKind>(m_ticks >> KindShift);
+    return static_cast<DateTimeKind>(m_ticks >> 62);
 }
 
 constexpr DateTime DateTime::GetMaxValue() noexcept
@@ -514,14 +515,14 @@ inline int64_t DateTime::GetTimeSinceUnixEpoch()
     }
 }
 
-inline DateTime DateTime::ToFileTime() const
+inline int64_t DateTime::ToFileTime() const
 {
     return ToFileTimeUtc();
 }
 
-inline DateTime DateTime::ToFileTimeUtc() const
+inline int64_t DateTime::ToFileTimeUtc() const
 {
-    return this->ToUniversalTime() - TimeSpan(FileTimeOffset);
+    return this->ToUniversalTime().GetTicks() - FileTimeOffset;
 }
 
 
