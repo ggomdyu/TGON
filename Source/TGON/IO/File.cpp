@@ -101,9 +101,14 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 }
 #endif
 
-void File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime)
+bool File::SetLastAccessTime(const std::string_view& path, const DateTime& lastAccessTime)
 {
-    SetLastWriteTimeUtc(path, lastWriteTime.ToUniversalTime());
+    return SetLastAccessTimeUtc(path, lastAccessTime);
+}
+
+bool File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime)
+{
+    return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
 #if TGON_PLATFORM_MACOS == 0

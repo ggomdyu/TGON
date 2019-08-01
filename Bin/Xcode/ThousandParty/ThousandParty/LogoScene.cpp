@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -213,14 +213,7 @@ void LogoScene::InitPhase4()
 
 
     auto r = DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local);
-    auto ct = TimeZoneInfo::ConvertTimeFromUtc(r, TimeZoneInfo::Local());
-
-    auto y = ct.GetYear();
-    auto m = ct.GetMonth();
-    auto d = ct.GetDay();
-    auto h = ct.GetHour();
-    auto mm = ct.GetMinute();
-    auto ss = ct.GetSecond();
+//    auto ct = TimeZoneInfo::ConvertTimeFromUtc(r, TimeZoneInfo::Local());
 
     auto k = r.GetKind();
     if (k == DateTimeKind::Local)
@@ -228,10 +221,25 @@ void LogoScene::InitPhase4()
         int n = 3;
     }
 
-    File::SetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
-    File::SetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
-    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));
-    File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/가.png", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    bool a342 = File::SetLastAccessTime(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
+    auto ct = File::GetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg").value();//9
+    auto y = ct.GetYear();
+    auto m = ct.GetMonth();
+    auto d = ct.GetDay();
+    auto h = ct.GetHour();
+    auto mm = ct.GetMinute();
+    auto ss = ct.GetSecond();
+    auto ct2 = File::GetLastWriteTimeUtc(u8"/Users/chajunho/Desktop/a.jpg").value();//9
+    auto y2 = ct2.GetYear();
+    auto m2 = ct2.GetMonth();
+    auto d2 = ct2.GetDay();
+    auto h2 = ct2.GetHour();
+    auto mm2 = ct2.GetMinute();
+    auto ss2 = ct2.GetSecond();
+
+    bool a34 = File::SetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    bool a35 = File::SetLastAccessTime(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));
+    bool a36 = File::SetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 

@@ -49,9 +49,9 @@ public:
     static bool Move(const std::string_view& srcFileName, const std::string_view& destFileName);
     //static void SetCreationTime(const std::string_view& path, DateTime creationTime);
     //static void SetCreationTimeUtc(const std::string_view& path, DateTime creationTimeUtc);
-    //static void SetLastAccessTime(const std::string_view& path, DateTime lastAccessTime);
-    //static void SetLastAccessTimeUtc(const std::string_view& path, DateTime lastAccessTimeUtc);
-    static void SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime);
+    static bool SetLastAccessTime(const std::string_view& path, const DateTime& lastAccessTime);
+    static bool SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTimeUtc);
+    static bool SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime);
     static bool SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc);
     //static void SetAttributes(const std::string_view& path, FileAttributes fileAttributes);
     static std::optional<DateTime> GetCreationTime(const std::string_view& path);
