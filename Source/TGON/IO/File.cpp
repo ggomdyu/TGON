@@ -101,6 +101,11 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 }
 #endif
 
+bool File::SetCreationTime(const std::string_view& path, const DateTime& creationTime)
+{
+    return SetCreationTimeUtc(path, creationTime);
+}
+
 bool File::SetLastAccessTime(const std::string_view& path, const DateTime& lastAccessTime)
 {
     return SetLastAccessTimeUtc(path, lastAccessTime);

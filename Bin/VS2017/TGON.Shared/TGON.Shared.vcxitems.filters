@@ -2473,5 +2473,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeZoneInfo.h">
       <Filter>Source\TGON\Time</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Test\IO\FileTest.h">
+      <Filter>Source\TGON</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

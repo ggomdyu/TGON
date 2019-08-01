@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -13,6 +13,8 @@
 #include "Graphics/TextureAtlas.h"
 #include "String/UnicodeScalar.h"
 #include "Time/TimeZoneInfo.h"
+#include "./../Test/Time/DateTimeTest.h"
+#include "./../Test/IO/FileTest.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -199,15 +201,13 @@ class CultureInfo
 
 };
 
-namespace tgon
-{
-
-}
-
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
+    DateTimeTest().DoTest();
+    FileTest().DoTest();
+
 
     auto engine = Application::GetInstance()->GetEngine();
 
@@ -221,25 +221,12 @@ void LogoScene::InitPhase4()
         int n = 3;
     }
 
-    bool a342 = File::SetLastAccessTime(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
-    auto ct = File::GetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg").value();//9
-    auto y = ct.GetYear();
-    auto m = ct.GetMonth();
-    auto d = ct.GetDay();
-    auto h = ct.GetHour();
-    auto mm = ct.GetMinute();
-    auto ss = ct.GetSecond();
-    auto ct2 = File::GetLastWriteTimeUtc(u8"/Users/chajunho/Desktop/a.jpg").value();//9
-    auto y2 = ct2.GetYear();
-    auto m2 = ct2.GetMonth();
-    auto d2 = ct2.GetDay();
-    auto h2 = ct2.GetHour();
-    auto mm2 = ct2.GetMinute();
-    auto ss2 = ct2.GetSecond();
-
-    bool a34 = File::SetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
-    bool a35 = File::SetLastAccessTime(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));
-    bool a36 = File::SetLastAccessTimeUtc(u8"/Users/chajunho/Desktop/a.jpg", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    bool a342 = File::SetCreationTime(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
+    bool a34 = File::SetCreationTimeUtc(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    bool a35 = File::SetLastAccessTime(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));
+    bool a36 = File::SetLastAccessTimeUtc(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));
+    bool a37 = File::SetLastWriteTime(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Utc));
+    bool a38 = File::SetLastWriteTimeUtc(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local));
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 

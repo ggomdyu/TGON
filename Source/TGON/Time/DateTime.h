@@ -265,22 +265,48 @@ constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
 
 constexpr DateTime DateTime::AddYears(int32_t value) noexcept
 {
+    if (value < -10000 || value > 10000)
+    {
+        return DateTime(0);
+    }
+
     return this->AddMonths(value * 12);
 }
 
 constexpr DateTime DateTime::AddMonths(int32_t value) noexcept
 {
+    if (value < -120000 || value > 120000)
+    {
+        return DateTime(0);
+    }
+
     auto dateParts = GetDateParts();
 
     int32_t year = std::get<0>(dateParts);
-    int32_t month = std::get<1>(dateParts) + value;
+    int32_t month = std::get<1>(dateParts);
     int32_t day = std::get<2>(dateParts);
 
-    if (month > 12)
+    int32_t i = month + value;
+    if (i >= 0)
     {
-        int32_t y = (month - 1) / 12;
-        year += y;
-        month -= (y * 12);
+        month = ((i - 1) % 12) + 1;
+        year = year + i / 12;
+    }
+    else
+    {
+        month = 12 + i % 12;
+        year = year + (i - 11) / 12;
+    }
+
+    if (year < 1 || year > 9999)
+    {
+        return DateTime(0);
+    }
+
+    int32_t days = DaysInMonth(year, month);
+    if (day > days)
+    {
+        day = days;
     }
 
     return DateTime(DateToTicks(year, month, day) + (this->GetTicks() % TimeSpan::TicksPerDay), this->GetKind());

@@ -11,7 +11,6 @@
 #include <cctype>
 #include <string_view>
 #include <memory>
-#include <string_view>
 
 namespace tgon
 {
