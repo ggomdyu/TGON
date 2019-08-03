@@ -41,11 +41,6 @@ void* Thread::GetNativeHandle()
     return this->native_handle();
 }
 
-void Thread::Swap(Thread& rhs)
-{
-    this->swap(rhs);
-}
-
 int32_t Thread::GetHardwareConcurrency() noexcept
 {
     return static_cast<int32_t>(std::thread::hardware_concurrency());

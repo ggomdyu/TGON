@@ -18,23 +18,23 @@ namespace tgon
 class Texture;
 class Transform;
 
-class TGON_API Sprite final
+class TGON_API UISprite final
 {
 /**@section Constructor */
 public:
-    Sprite() noexcept;
-    explicit Sprite(const std::shared_ptr<Texture>& texture) noexcept;
-    Sprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept;
-    Sprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept;
-    Sprite(Sprite&& rhs) noexcept;
+    UISprite() noexcept;
+    explicit UISprite(const std::shared_ptr<Texture>& texture) noexcept;
+    UISprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept;
+    UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept;
+    UISprite(UISprite&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    virtual ~Sprite() = default;
+    virtual ~UISprite() = default;
 
 /**@section Operator */
 public:
-    Sprite& operator=(Sprite&& rhs) noexcept;
+    UISprite& operator=(UISprite&& rhs) noexcept;
     
 /**@section Method */
 public:
@@ -70,7 +70,7 @@ class NinePatchSprite
 {
 public:
 private:
-    Sprite m_sprites[9];
+    UISprite m_sprites[9];
 };
     
 } /* namespace tgon */

@@ -6,13 +6,13 @@
 #include "Graphics/Material.h"
 #include "Graphics/FVF.h"
 
-#include "CanvasSpriteBatch.h"
-#include "CanvasSprite.h"
+#include "UISpriteBatch.h"
+#include "UISprite.h"
 
 namespace tgon
 {
     
-SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
+UISpriteBatch::UISpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
     m_texture(texture),
     m_blendMode(blendMode),
     m_enableScissorRect(enableScissorRect),
@@ -22,7 +22,7 @@ SpriteBatch::SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blen
 {
 }
 
-bool SpriteBatch::CanBatch(const Sprite& rhs) const noexcept
+bool UISpriteBatch::CanBatch(const UISprite& rhs) const noexcept
 {
     if (m_texture == rhs.GetTexture() &&
         m_blendMode == rhs.GetBlendMode() &&
@@ -35,7 +35,7 @@ bool SpriteBatch::CanBatch(const Sprite& rhs) const noexcept
     return false;
 }
     
-void SpriteBatch::FlushBatch(Graphics& graphics)
+void UISpriteBatch::FlushBatch(Graphics& graphics)
 {
     m_texture->Use();
     
@@ -53,7 +53,7 @@ void SpriteBatch::FlushBatch(Graphics& graphics)
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_T2F) / 4));
 }
     
-void SpriteBatch::Merge(const Sprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices)
+void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();

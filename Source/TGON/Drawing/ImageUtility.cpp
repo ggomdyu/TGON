@@ -79,8 +79,8 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32
 
 TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)
 {
-    char lowercaseStr[32]{};
-    BasicStringTraits<char>::ToLower(str, lowercaseStr, std::extent<decltype(lowercaseStr)>::value);
+    char lowercaseStr[32] {};
+    BasicStringTraits<char>::ToLower(str.data(), str.length(), lowercaseStr);
 
     switch (X65599Hash(lowercaseStr))
     {

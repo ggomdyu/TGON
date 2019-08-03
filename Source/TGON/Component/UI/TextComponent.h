@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class Sprite;
+class UISprite;
 class Texture;
 class Font;
 
@@ -69,7 +69,7 @@ private:
 private:
     bool m_isDirty;
     std::string m_text;
-    std::shared_ptr<Sprite> m_sprite;
+    std::shared_ptr<UISprite> m_sprite;
     std::shared_ptr<Texture> m_mainTexture;
     std::shared_ptr<Font> m_font;
     LineBreakMode m_lineBreakMode;

@@ -38,7 +38,6 @@ public:
     void Detach();
     void Join();
     bool Joinable() const;
-    void Swap(Thread& rhs);
     static int32_t GetHardwareConcurrency() noexcept;
     static bool IsMainThread(ThreadId threadId) noexcept;
     ThreadId GetId() const noexcept;

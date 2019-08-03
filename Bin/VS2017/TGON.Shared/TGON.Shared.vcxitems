@@ -77,8 +77,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasSprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasSpriteBatch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -1631,6 +1631,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Test\IO\FileTest.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Test\String\FixedStringTest.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Audio\AudioBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Audio\AudioBufferType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Audio\AudioBufferUtility.h" />
@@ -1752,14 +1753,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Thread\DispatchQueue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Thread\Thread.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\DateTime.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\DateTimeType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Stopwatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Time.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeSpan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeZoneInfo.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasSprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasSpriteBatch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h" />

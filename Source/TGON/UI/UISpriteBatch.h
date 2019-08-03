@@ -17,19 +17,19 @@ namespace tgon
 
 class Graphics;
 class Texture;
-class Sprite;
+class UISprite;
 enum class BlendMode;
 
-class TGON_API SpriteBatch final
+class TGON_API UISpriteBatch final
 {
 /**@section Constructor */
 public:
-    SpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
+    UISpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
-    bool CanBatch(const Sprite& rhs) const noexcept;
-    void Merge(const Sprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices);
+    bool CanBatch(const UISprite& rhs) const noexcept;
+    void Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
     
 /**@section Variable */

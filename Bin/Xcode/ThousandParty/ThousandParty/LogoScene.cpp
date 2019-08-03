@@ -14,6 +14,7 @@
 #include "String/UnicodeScalar.h"
 #include "Time/TimeZoneInfo.h"
 #include "./../Test/Time/DateTimeTest.h"
+#include "./../Test/String/FixedStringTest.h"
 #include "./../Test/IO/FileTest.h"
 
 std::shared_ptr<tgon::GameObject> object1;
@@ -37,7 +38,6 @@ void LogoScene::Update()
 {
     SuperType::Update();
 
-    
     //object2->GetTransform()->SetLocalRotation({tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f), tgon::RandRange(-3.14f, 3.14f)});
     
 //    this->OnHandleInput();
@@ -84,6 +84,8 @@ void LogoScene::InitPhase1()
 {
     using namespace tgon;
 
+    FixedStringTest().DoTest();
+
     auto engine = Application::GetInstance()->GetEngine();
 
     auto cameraObject = std::make_shared<GameObject>("camera1", new Transform());
@@ -101,12 +103,12 @@ void LogoScene::InitPhase1()
     object1 = std::make_shared<GameObject>("introSprite1", new Transform());
     object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object1->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-    m_introSpriteComponent1 = object1->AddComponent<SpriteRendererComponent>(std::make_shared<Sprite>(texture));
+    m_introSpriteComponent1 = object1->AddComponent<SpriteRendererComponent>(std::make_shared<UISprite>(texture));
 
     object2 = std::make_shared<GameObject>("introSprite1", new Transform());
     object2->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object2->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-    m_introSpriteComponent2 = object2->AddComponent<SpriteRendererComponent>(std::make_shared<Sprite>(texture));
+    m_introSpriteComponent2 = object2->AddComponent<SpriteRendererComponent>(std::make_shared<UISprite>(texture));
 
     this->AddObject(object1);
     this->AddObject(object2);
@@ -136,7 +138,7 @@ void LogoScene::InitPhase2()
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
-    spriteComponent->SetSprite(std::make_shared<Sprite>(texture));
+    spriteComponent->SetSprite(std::make_shared<UISprite>(texture));
     this->AddObject(object);
 }
 
@@ -205,9 +207,10 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
+    FixedStringTest().DoTest();
+
     DateTimeTest().DoTest();
     FileTest().DoTest();
-
 
     auto engine = Application::GetInstance()->GetEngine();
 
@@ -257,7 +260,7 @@ void LogoScene::InitPhase4()
 
     auto& imageRect = textureAtlas.GetTextureRect(u'가');
     decltype(auto) texture = textureAtlas.GetAtlasTexture();
-    decltype(auto) sprite = std::make_shared<Sprite>(texture);
+    decltype(auto) sprite = std::make_shared<UISprite>(texture);
     sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
     this->AddObject( object );

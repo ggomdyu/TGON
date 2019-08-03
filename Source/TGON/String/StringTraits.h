@@ -21,307 +21,63 @@ class BasicStringTraits
 /**@section Type */
 public:
     using ValueType = _CharType;
-    using CharTraitsType = std::char_traits<_CharType>;
 
-/**@section Constructor */
-protected:
-    constexpr BasicStringTraits() noexcept = default;
-
-    /**
-     * @brief   Assigns srcStr to destStr.
-     * @param [in] srcStr               The string to copy.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    BasicStringTraits(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Assigns srcStr to destStr.
-     * @param [in] srcStr       The string to copy.
-     * @param [out] destStr     The destination of assign.
-     */
-    template <std::size_t _DestStrBufferLen>
-    BasicStringTraits(const std::basic_string_view<_CharType>& srcStr, _CharType(&destStr)[_DestStrBufferLen]);
-
-    /**
-     * @brief   Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     * @param [in] ch                   The character to assign to the string.
-     * @param [in] chCount              The count of ch to assign to the string.
-     */
-    BasicStringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
-
-    /**
-     * @brief   Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr     The destination of assign.
-     * @param [in] ch           The character to assign to the string.
-     * @param [in] chCount      The count of ch to assign to the string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    BasicStringTraits(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount = 1) :
-        BasicStringTraits(destStr, _DestStrBufferLen, ch, chCount)
-    {
-    }
-    
 /**@section Method */
 public:
-    /**
-     * @brief   Assigns srcStr to destStr.
-     * @param [in] srcStr               The string to copy.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static void Assign(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Assigns srcStr to destStr.
-     * @param [in] srcStr       The string to copy.
-     * @param [out] destStr     The destination of assign.
-     */
-    template <std::size_t _DestStrBufferLen>
-    static void Assign(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr)
-    {
-        Assign(srcStr, destStr, _DestStrBufferLen);
-    }
-
-    /**
-     * @brief   Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of assign.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     * @param [in] ch                   The character to assign to destStr.
-     * @param [in] chCount              The count of ch to assign to destStr.
-     */
-    static void Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount);
-    
-    /**
-     * @brief   Assigns the chCount copies of ch to destStr.
-     * @param [out] destStr     The destination of assign.
-     * @param [in] ch           The character to assign to destStr.
-     * @param [in] chCount      The count of ch to assign to destStr.
-     */
-    template <std::size_t _DestStrBufferLen>
-    static void Assign(_CharType(&destStr)[_DestStrBufferLen], _CharType ch, std::size_t chCount)
-    {
-        Assign(destStr, _DestStrBufferLen, ch, chCount);
-    }
-
-    /**
-     * @brief   Appends srcStr to destStr.
-     * @param [in] srcStr               The string to append.
-     * @param [out] destStr             The destination of append.
-     * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static void Append( const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen );
-
-    /**
-     * @brief   Appends srcStr to destStr.
-     * @param [in] srcStr       The string to append.
-     * @param [out] destStr     The destination of append.
-     * @param [in] destStrLen   The length of destStr.
-     */
-    template <std::size_t _DestStrBufferLen>
-    static void Append(const std::basic_string_view<_CharType>& srcStr, _CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen)
-    {
-        Append(srcStr, destStr, destStrLen, _DestStrBufferLen);
-    }
-
-    /**
-     * @brief   Appends the chCount copies of ch to destStr.
-     * @param [out] destStr             The destination of append.
-     * @param [in] destStrLen           The length of destStr.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     * @param [in] ch                   The character to append to destStr.
-     * @param [in] chCount              The count of ch to append to destStr.
-     */
-    static void Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount = 1);
-
-    /**
-     * @brief   Appends the chCount copies of ch to destStr.
-     * @param [out] destStr     The destination of append.
-     * @param [in] destStrLen   The length of destStr.
-     * @param [in] ch           The character to append to destStr.
-     * @param [in] chCount      The count of ch to append to destStr.
-     */
-    template <std::size_t _DestStrBufferLen>
-    static void Append(_CharType(&destStr)[_DestStrBufferLen], std::size_t destStrLen, _CharType ch, std::size_t chCount = 1)
-    {
-        Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
-    }
-
-    /**
-     * @brief   Searches a matching substring.
-     * @param [in] srcStr           The string to find.
-     * @param [in] srcStrOffset     The point of srcStr which start to search.
-     * @param [in] srcSubStr        The substring to find.
-     * @param [in] srcSubStrLen     The length of srcSubStr.
-     */
-    static std::size_t Find(const std::basic_string_view<_CharType>& srcStr, std::size_t srcStrOffset, const _CharType* srcSubStr, std::size_t srcSubStrLen);
-
-    /**
-     * @brief   Searches a last matching substring.
-     * @param [in] srcStr           The string to find.
-     * @param [in] srcStrOffset     The point of srcStr which start to search.
-     * @param [in] srcSubStr        The substring to find.
-     */
-    static std::size_t RFind(const std::basic_string_view<_CharType>& srcStr, std::size_t srcStrOffset, const std::basic_string_view<_CharType>& srcSubStr);
-
-    static int32_t Compare(const std::basic_string_view<_CharType>& srcLhsStr, const std::basic_string_view<_CharType>& srcRhsStr);
-
-    /**
-     * @brief   Returns a reference to the character specified by index.
-     * @return                  The reference to the character.
-     * @param [in] srcStr       The source or string to index.
-     * @param [in] index        The index which indicates position of character within string.
-     */
-    static _CharType& At(_CharType* srcStr, std::size_t index);
-    
-    /**
-     * @brief   Returns a reference to the character specified by index.
-     * @return                  The reference to the character.
-     * @param [in] srcStr       The source or string to index.
-     * @param [in] index        The index which indicates position of character within string.
-     */
-    static const _CharType& At(const _CharType* srcStr, std::size_t index);
-
-    /**
-     * @brief   Returns the length of srcStr.
-     * @return              The length of srcStr.
-     * @param [in] srcStr   The source of string.
-     */
-    static std::size_t Length(const _CharType* srcStr);
-
-    /**
-     * @brief   Swaps the contents of strings.
-     * @param [in] srcStr              The string to be swapped with destStr.
-     * @param [in] srcStrLen           The length of srcStr.
-     * @param [in] srcStrBufferLen     The buffer length of srcStr.
-     * @param [in] destStr             The string to be swapped with srcStr.
-     * @param [in] destStrLen          The length of destStr.
-     * @param [in] destStrBufferLen    The buffer length of destStr.
-     */
-    static void Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Converts the content of string to lowercase.
-     * @param [in] srcStr               The source or string to convert.
-     * @param [in] destStr              The destination of convert.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static void ToLower(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Converts the content of string to lowercase.
-     * @param [in] srcStr               The source or string to convert.
-     * @param [in] destStr              The destination of convert.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static std::size_t ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Converts the content of string to uppercase.
-     * @param [in] srcStr               The source or string to convert.
-     * @param [in] destStr              The destination of convert.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static void ToUpper(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Converts the content of string to uppercase.
-     * @param [in] srcStr               The source or string to convert.
-     * @param [in] destStr              The destination of convert.
-     * @param [in] destStrBufferLen     The buffer length of destStr.
-     */
-    static std::size_t ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen);
-
-    /**
-     * @brief   Checks the string is null or empty.
-     * @return  True if the string is null or empty, false otherwise.
-     */
-    static bool IsNullOrEmpty(const _CharType* srcStr) noexcept;
-    
-    /**
-     * @brief   Replaces each format item in formatStr to text.
-     * @param [in] formatStr    The format string.
-     * @return  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
-     */
-    static std::basic_string_view<_CharType> Format(const _CharType* formatStr, ...);
-    
-    /**
-     * @brief   Replaces each format item in formatStr to text.
-     * @param [in] formatStr    The format string.
-     * @return  Returns a pair, which its first member is replaced string. The second member is length of format string if succeed, -1 otherwise.
-     */
-    static std::basic_string_view<_CharType> Format(const _CharType* formatStr, std::va_list vaList);
-
-/**@section Variable */
-public:
-    /**
-     * @brief   This is a special magic number which means string does not exist.
-     *          The series of find function will return this variable when substring search fails.
-     */
-    static constexpr const std::size_t NPos = static_cast<std::size_t>(-1);
+    static void Append(const _CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferSize);
+    template <std::size_t _DestStrBufferSize>
+    static void Append(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize], int32_t destStrLen);
+    static void Append(_CharType* destStr, int32_t destStrLen, int32_t destStrBufferSize, _CharType ch, int32_t chCount = 1);
+    template <std::size_t _DestStrBufferSize>
+    static void Append(_CharType(&destStr)[_DestStrBufferSize], int32_t destStrLen, _CharType ch, int32_t chCount = 1);
+    static int32_t IndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen);
+    template <typename _PredicateType>
+    static int32_t IndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
+    static int32_t LastIndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen);
+    template <typename _PredicateType>
+    static int32_t LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
+    static int32_t Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen);
+    static constexpr int32_t Length(const _CharType* str) noexcept;
+    static void Swap(_CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen);
+    template <std::size_t _DestStrBufferSize>
+    static void ToLower(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize]);
+    template <std::size_t _DestStrBufferSize>
+    static void ToUpper(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize]);
 };
 
 using StringTraits = BasicStringTraits<char>;
+using U16StringTraits = BasicStringTraits<char16_t>;
+using U32StringTraits = BasicStringTraits<char32_t>;
 using WStringTraits = BasicStringTraits<wchar_t>;
 
-template <typename _CharType>
-inline BasicStringTraits<_CharType>::BasicStringTraits(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen)
+template<typename _CharType>
+template<std::size_t _DestStrBufferSize>
+inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize], int32_t destStrLen)
 {
-    BasicStringTraits::Assign(srcStr, destStr, destStrBufferLen);
-}
-
-template <typename _CharType>
-template <std::size_t _DestStrBufferLen>
-inline BasicStringTraits<_CharType>::BasicStringTraits(const std::basic_string_view<_CharType>& srcStr, _CharType(&destStr)[_DestStrBufferLen]) :
-    BasicStringTraits(srcStr, destStr, _DestStrBufferLen)
-{
-}
-    
-template <typename _CharType>
-inline BasicStringTraits<_CharType>::BasicStringTraits(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
-{
-    BasicStringTraits::Assign(destStr, destStrBufferLen, ch, chCount);
-}
-
-template <typename _CharType>
-inline void BasicStringTraits<_CharType>::Assign(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen)
-{
-    assert(destStrBufferLen > srcStr.length() && "String buffer overflowed!");
-
-    memcpy(destStr, srcStr.data(), sizeof(_CharType) * (srcStr.length() + 1));
-
-    destStr[srcStr.length()] = _CharType();
-}
-
-template <typename _CharType>
-inline void BasicStringTraits<_CharType>::Assign(_CharType* destStr, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
-{
-    assert(destStrBufferLen > chCount && "String buffer overflowed!");
-
-    std::size_t i = 0;
-    while (i < chCount)
-    {
-        destStr[i++] = ch;
-    }
-
-    destStr[i] = _CharType();
+    Append(srcStr, srcStrLen, destStr, destStrLen, _DestStrBufferSize);
 }
 
 template<typename _CharType>
-inline void BasicStringTraits<_CharType>::Append(const std::basic_string_view<_CharType>& srcStr, _CharType * destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
+inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferSize)
 {
-    assert(destStrBufferLen > srcStr.length() + destStrLen && "String buffer overflowed!");
+    assert(destStrBufferSize > srcStrLen + destStrLen && "String buffer overflowed!");
 
-    memcpy(&destStr[destStrLen], srcStr.data(), sizeof(_CharType) * (srcStr.length() + 1));
+    memcpy(&destStr[destStrLen], srcStr, sizeof(_CharType) * srcStrLen);
+
+    destStr[srcStrLen + destStrLen] = _CharType();
+}
+
+template<typename _CharType>
+template<std::size_t _DestStrBufferSize>
+inline void BasicStringTraits<_CharType>::Append(_CharType(&destStr)[_DestStrBufferSize], int32_t destStrLen, _CharType ch, int32_t chCount)
+{
+    Append(destStr, destStrLen, _DestStrBufferSize, ch, chCount);
 }
 
 template <typename _CharType>
-inline void BasicStringTraits<_CharType>::Append(_CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen, _CharType ch, std::size_t chCount)
+inline void BasicStringTraits<_CharType>::Append(_CharType* destStr, int32_t destStrLen, int32_t destStrBufferSize, _CharType ch, int32_t chCount)
 {
-    assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed!");
+    assert(destStrBufferSize > chCount + destStrLen && "String buffer overflowed!");
 
     chCount += destStrLen;
     while (destStrLen < chCount)
@@ -333,154 +89,106 @@ inline void BasicStringTraits<_CharType>::Append(_CharType* destStr, std::size_t
 }
 
 template <typename _CharType>
-inline std::size_t BasicStringTraits<_CharType>::Find(const std::basic_string_view<_CharType>& srcStr, std::size_t srcStrOffset, const _CharType* srcSubStr, std::size_t srcSubStrLen)
+inline int32_t BasicStringTraits<_CharType>::IndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen)
 {
-    const _CharType* foundStr = std::search(srcStr + srcStrOffset, srcStr + srcStr.length(), srcSubStr, srcSubStr + srcSubStrLen);
-    if (foundStr != srcStr + srcStr.length())
+    const _CharType* foundStr = std::search(str, str + strLen, subStr, subStr + subStrLen);
+    if (foundStr != str + strLen)
     {
-        return static_cast<std::size_t>(foundStr - srcStr);
+        return static_cast<std::size_t>(foundStr - str);
     }
 
-    return NPos;
+    return -1;
+}
+
+template<typename _CharType>
+template<typename _PredicateType>
+inline int32_t BasicStringTraits<_CharType>::IndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
+{
+    const _CharType* foundStr = std::find_if(str, str + strLen, predicate);
+    if (foundStr != str + strLen)
+    {
+        return static_cast<std::size_t>(foundStr - str);
+    }
+
+    return -1;
 }
 
 template <typename _CharType>
-inline std::size_t BasicStringTraits<_CharType>::RFind(const std::basic_string_view<_CharType>& srcStr, std::size_t srcStrOffset, const std::basic_string_view<_CharType>& srcSubStr)
+inline int32_t BasicStringTraits<_CharType>::LastIndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen)
 {
-    const _CharType* foundStr = std::find_end(srcStr + srcStrOffset, srcStr + srcStr.length(), srcSubStr, srcSubStr + srcSubStr.length());
-    if (foundStr != srcStr + srcStr.length())
+    const _CharType* foundStr = std::find_end(str, str + strLen, subStr, subStr + subStrLen);
+    if (foundStr != str + strLen)
     {
-        return static_cast<std::size_t>(foundStr - srcStr);
+        return static_cast<std::size_t>(foundStr - str);
     }
 
-    return NPos;
+    return -1;
+}
+
+template<typename _CharType>
+template<typename _PredicateType>
+inline int32_t BasicStringTraits<_CharType>::LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
+{
+    for (int32_t i = strLen - 1; i >= 0; --i)
+    {
+        if (predicate(str[i]))
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 template <typename _CharType>
-inline int32_t BasicStringTraits<_CharType>::Compare(const std::basic_string_view<_CharType>& srcLhsStr, const std::basic_string_view<_CharType>& srcRhsStr)
+inline int32_t BasicStringTraits<_CharType>::Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen)
 {
-    auto ans = CharTraitsType::compare(srcLhsStr.data(), srcRhsStr.data(), std::min(srcLhsStr.length(), srcRhsStr.length()));
+    auto ans = std::char_traits<_CharType>::compare(lhsStr, rhsStr, std::min(lhsStrLen, rhsStrLen));
     if (ans != 0)
     {
         return ans;
     }
 
-    if (srcLhsStr.length() < srcRhsStr.length())
+    if (lhsStrLen < rhsStrLen)
     {
         return -1;
     }
-    if (srcLhsStr.length() > srcRhsStr.length())
+    if (lhsStrLen > rhsStrLen)
     {
         return 1;
     }
-    
+
     return 0;
 }
 
 template <typename _CharType>
-inline _CharType& BasicStringTraits<_CharType>::At(_CharType* srcStr, std::size_t index)
+constexpr int32_t BasicStringTraits<_CharType>::Length(const _CharType* srcStr) noexcept
 {
-    return srcStr[index];
+    return static_cast<int32_t>(std::char_traits<_CharType>::length(srcStr));
 }
 
 template <typename _CharType>
-inline const _CharType& BasicStringTraits<_CharType>::At(const _CharType* srcStr, std::size_t index)
-{
-    return srcStr[index];
-}
-    
-template <typename _CharType>
-inline std::size_t BasicStringTraits<_CharType>::Length(const _CharType* srcStr)
-{
-    return CharTraitsType::length(srcStr);
-}
-
-template <typename _CharType>
-inline void BasicStringTraits<_CharType>::Swap(_CharType* srcStr, std::size_t srcStrLen, std::size_t srcStrBufferLen, _CharType* destStr, std::size_t destStrLen, std::size_t destStrBufferLen)
+inline void BasicStringTraits<_CharType>::Swap(_CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen)
 {
     std::swap_ranges(srcStr, srcStr + srcStrLen, destStr);
 }
 
 template <typename _CharType>
-inline void BasicStringTraits<_CharType>::ToLower(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen)
+template <std::size_t _DestStrBufferSize>
+inline void BasicStringTraits<_CharType>::ToLower(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize])
 {
-    assert(destStrBufferLen > srcStr.length() && "String buffer overflowed!");
+    assert(_DestStrBufferSize > srcStrLen && "String buffer overflowed!");
 
-    std::transform(srcStr.data(), srcStr.data() + srcStr.length() + 1, destStr, ::tolower);
+    std::transform(srcStr, srcStr + srcStrLen, destStr, ::tolower);
 }
 
 template <typename _CharType>
-inline std::size_t BasicStringTraits<_CharType>::ToLower(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
+template <std::size_t _DestStrBufferSize>
+inline void BasicStringTraits<_CharType>::ToUpper(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferSize])
 {
-    std::size_t srcStrLen = std::strlen(srcStr);
-    ToLower({srcStr, srcStrLen}, destStr, destStrBufferLen);
-    
-    return srcStrLen;
-}
+    assert(_DestStrBufferSize > srcStrLen && "String buffer overflowed!");
 
-template <typename _CharType>
-inline void BasicStringTraits<_CharType>::ToUpper(const std::basic_string_view<_CharType>& srcStr, _CharType* destStr, std::size_t destStrBufferLen)
-{
-    assert(destStrBufferLen > srcStr.length() && "String buffer overflowed!");
-
-    std::transform(srcStr.data(), srcStr.data() + srcStr.length() + 1, destStr, ::toupper);
-}
-
-template <typename _CharType>
-inline std::size_t BasicStringTraits<_CharType>::ToUpper(const _CharType* srcStr, _CharType* destStr, std::size_t destStrBufferLen)
-{
-    std::size_t srcStrLen = std::strlen(srcStr);
-    ToUpper({srcStr, srcStrLen}, destStr, destStrBufferLen);
-    
-    return srcStrLen;
-}
-
-template <typename _CharType>
-inline bool BasicStringTraits<_CharType>::IsNullOrEmpty(const _CharType* srcStr) noexcept
-{   
-    if (srcStr == nullptr || srcStr[0] == _CharType(0))
-    {
-        return true;
-    }
-
-    return false;
-}
-    
-template <typename _CharType>
-inline std::basic_string_view<_CharType> BasicStringTraits<_CharType>::Format(const _CharType* formatStr, ...)
-{
-    std::va_list vaList;
-    va_start(vaList, formatStr);
-
-    return Format(formatStr, vaList);
-}
-
-template <>
-inline std::string_view BasicStringTraits<char>::Format(const char* formatStr, std::va_list vaList)
-{
-    constexpr std::size_t strBufferSize = 1024 * 8;
-    thread_local static std::unique_ptr<char[]> strBuffer(new char[strBufferSize] {});
-
-#ifdef _MSC_VER
-    int strLen = vsprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
-#else
-    int strLen = vsprintf(strBuffer.get(), formatStr, vaList);
-#endif
-    return std::string_view(strBuffer.get(), strLen);
-}
-    
-template <>
-inline std::wstring_view BasicStringTraits<wchar_t>::Format(const wchar_t* formatStr, std::va_list vaList)
-{
-    constexpr std::size_t strBufferSize = 1024 * 8;
-    thread_local static std::unique_ptr<wchar_t[]> strBuffer(new wchar_t[strBufferSize] {});
-    
-#ifdef _MSC_VER
-    int strLen = vswprintf_s(strBuffer.get(), strBufferSize, formatStr, vaList);
-#else
-    int strLen = vswprintf(strBuffer.get(), strBufferSize, formatStr, vaList);
-#endif
-    return std::wstring_view(strBuffer.get(), strLen);
+    std::transform(srcStr, srcStr + srcStrLen, destStr, ::toupper);
 }
 
 } /* namespace tgon */

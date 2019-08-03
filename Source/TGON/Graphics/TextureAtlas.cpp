@@ -31,12 +31,12 @@ bool TextureAtlas::Insert(const StringViewHash& name, const ImageView& image)
 
 bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, ImageView>>& imageDescs)
 {
-    for (int32_t i = 0; i < imageDescs.size(); ++i)
+    for (size_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& image = (imageDescs.begin() + i)->second;
 
         m_nodeRects[i] = stbrp_rect{
-            i, // id
+            static_cast<int>(i), // id
             static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
             static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
             0, // x
@@ -51,7 +51,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
         return false;
     }
 
-    for (int32_t i = 0; i < imageDescs.size(); ++i)
+    for (size_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& imageDesc = imageDescs.begin() + i;
         m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
@@ -62,12 +62,12 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
 
 bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs)
 {
-    for (int32_t i = 0; i < imageDescs.size(); ++i)
+    for (size_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& image = (imageDescs.begin() + i)->second;
 
         m_nodeRects[i] = stbrp_rect{
-            i, // id
+            static_cast<int>(i), // id
             static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
             static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
             0, // x
@@ -82,7 +82,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
         return false;
     }
 
-    for (int32_t i = 0; i < imageDescs.size(); ++i)
+    for (size_t i = 0; i < imageDescs.size(); ++i)
     {
         const auto& imageDesc = imageDescs.begin() + i;
         m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});

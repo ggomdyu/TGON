@@ -11,7 +11,7 @@
 #include "Math/Matrix4x4.h"
 #include "Graphics/VertexBuffer.h"
 
-#include "CanvasSpriteBatch.h"
+#include "UISpriteBatch.h"
 
 // Todo: remove below headers
 #include "Platform/Application.h"
@@ -20,7 +20,7 @@
 namespace tgon
 {
     
-class Sprite;
+class UISprite;
 class Material;
 class Camera;
 class Graphics;
@@ -36,7 +36,7 @@ public:
     void Update();
     void Draw(Graphics& graphics);
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const Matrix4x4& matWorld);
+    void AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld);
 //    void AddSpriteBatch(const CanvasSpriteBatch& )
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     
@@ -51,7 +51,7 @@ private:
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
     VertexBuffer m_quadVertexBuffer;
-    std::vector<SpriteBatch> m_spriteBatches;
+    std::vector<UISpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
     
     // For test

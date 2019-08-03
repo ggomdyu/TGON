@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class Sprite;
+class UISprite;
 
 class TGON_API SpriteRendererComponent :
 	public RendererComponent
@@ -24,21 +24,21 @@ public:
 public:
     using RendererComponent::RendererComponent;
     
-    explicit SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite);
+    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite);
     SpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor);
 
 /**@section Method */
 public:
     virtual void Update() override;
-    void SetSprite(const std::shared_ptr<Sprite>& sprite);
-    std::shared_ptr<Sprite> GetSprite() noexcept;
-    std::shared_ptr<const Sprite> GetSprite() const noexcept;
+    void SetSprite(const std::shared_ptr<UISprite>& sprite);
+    std::shared_ptr<UISprite> GetSprite() noexcept;
+    std::shared_ptr<const UISprite> GetSprite() const noexcept;
     void SetBlendColor(const Color4f& blendColor);
     const Color4f& GetBlendColor() const noexcept;
 
 /**@section Variable */
 private:
-    std::shared_ptr<Sprite> m_sprite;
+    std::shared_ptr<UISprite> m_sprite;
 
     Color4f m_blendColor;
 };

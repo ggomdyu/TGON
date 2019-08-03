@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Sprite>& sprite) :
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite) :
     RendererComponent(),
     m_sprite(sprite)
 {
@@ -25,17 +25,17 @@ void SpriteRendererComponent::Update()
     m_graphicsModule->GetUIRenderer().AddSpritePrimitive(m_sprite, GetOwner()->GetTransform()->GetWorldMatrix());
 }
 
-void SpriteRendererComponent::SetSprite(const std::shared_ptr<Sprite>& sprite)
+void SpriteRendererComponent::SetSprite(const std::shared_ptr<UISprite>& sprite)
 {
     m_sprite = sprite;
 }
     
-std::shared_ptr<Sprite> SpriteRendererComponent::GetSprite() noexcept
+std::shared_ptr<UISprite> SpriteRendererComponent::GetSprite() noexcept
 {
     return m_sprite;
 }
 
-std::shared_ptr<const Sprite> SpriteRendererComponent::GetSprite() const noexcept
+std::shared_ptr<const UISprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
 }

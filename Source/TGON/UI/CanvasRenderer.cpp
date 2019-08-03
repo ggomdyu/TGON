@@ -10,8 +10,8 @@
 #include "Graphics/Graphics.h"
 #include "Graphics/VertexBufferType.h"
 #include "Graphics/OpenGL/OpenGLShaderCode.h"
-#include "UI/CanvasSprite.h"
-#include "UI/CanvasSpriteBatch.h"
+#include "UI/UISprite.h"
+#include "UI/UISpriteBatch.h"
 
 #include "CanvasRenderer.h"
 
@@ -82,15 +82,15 @@ void CanvasRenderer::DebugRenderTargetDraw(Graphics& graphics)
     }
 }
 
-void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<Sprite>& sprite, const Matrix4x4& matWorld)
+void CanvasRenderer::AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld)
 {
     if (m_spriteBatches.empty())
     {
-        m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), 0));
+        m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), 0));
     }
     else if (m_spriteBatches.back().CanBatch(*sprite) == false)
     {
-        m_spriteBatches.push_back(SpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+        m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
     }
 
     m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);

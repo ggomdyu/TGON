@@ -52,7 +52,7 @@
 #include "Graphics/OpenGL/OpenGLShaderCode.h"
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/IndexBuffer.h"
-#include "UI/CanvasSprite.h"
+#include "UI/UISprite.h"
 #include "Graphics/FVF.h"
 #include "Graphics/Camera.h"
 #include "Game/GameObject.h"
