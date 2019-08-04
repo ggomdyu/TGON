@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -83,8 +83,6 @@ void LogoScene::Update()
 void LogoScene::InitPhase1()
 {
     using namespace tgon;
-
-    FixedStringTest().DoTest();
 
     auto engine = Application::GetInstance()->GetEngine();
 
@@ -207,10 +205,10 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
     
-    FixedStringTest().DoTest();
+    FixedStringTest().Evaluate();
 
-    DateTimeTest().DoTest();
-    FileTest().DoTest();
+    DateTimeTest().Evaluate();
+    FileTest().Evaluate();
 
     auto engine = Application::GetInstance()->GetEngine();
 

@@ -24,23 +24,26 @@ std::mutex g_mutex;
 TGON_API void Log(LogLevel logLevel, const char* formatStr, va_list vaList)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    const char* logStrBuffer = BasicStringTraits<char>::Format(formatStr, vaList).data();
-    if (logStrBuffer == nullptr)
+    if (formatStr == nullptr || formatStr[0] == '\0')
     {
         return;
     }
+
+    thread_local static std::unique_ptr<char[]> strBuffer(new char[1024 * 8] {});
+    
+    vsprintf(strBuffer.get(), formatStr, vaList);
     
     std::lock_guard<std::mutex> lockGuard(g_mutex);
 
     if (logLevel == LogLevel::Debug)
     {
-        NSLog(@"%s", logStrBuffer);
+        NSLog(@"%s", strBuffer.get());
     }
     else if (logLevel == LogLevel::Warning)
     {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText:@""];
-        [alert setInformativeText:[NSString stringWithUTF8String:logStrBuffer]];
+        [alert setInformativeText:[NSString stringWithUTF8String:strBuffer.get()]];
         [alert setAlertStyle:NSAlertStyleCritical];
         [alert runModal];
     }
@@ -72,7 +75,7 @@ void Assert(bool condition, const char* formatStr, ...)
 #if defined(_DEBUG) || ! defined(NDEBUG)
     if (condition == false)
     {
-        if (BasicStringTraits<char>::IsNullOrEmpty(formatStr) == true)
+        if (formatStr == nullptr || formatStr[0] == '\0')
         {
             Assert(condition);
             return;

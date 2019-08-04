@@ -14,8 +14,7 @@ namespace tgon
 {
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-class BasicFixedString :
-    private _StringTraitsType
+class BasicFixedString final
 {
     static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value,
         "_StringTraitsType's character type doesn't match with the _CharType.");
@@ -32,6 +31,7 @@ public:
 /**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept;
+    BasicFixedString(const _CharType* str);
     BasicFixedString(const std::basic_string_view<_CharType>& str);
     BasicFixedString(_CharType ch, int32_t chCount);
     template <int32_t _CharBufferSize2>
@@ -65,9 +65,9 @@ public:
 public:
     template <int32_t _CharBufferSize2>
     BasicFixedString<_CharType, _CharBufferSize + _CharBufferSize2, _StringTraitsType> Expand(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
-    int32_t Compare(const std::basic_string_view<_CharType>& str) const;
     template <int32_t _CharBufferSize2>
-    int32_t Compare(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const;
+    int32_t CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const;
+    int32_t CompareTo(const std::basic_string_view<_CharType>& str) const;
     int32_t IndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex = 0) const;
     int32_t IndexOf(_CharType ch, int32_t startIndex = 0) const;
     template<typename _PredicateType>
@@ -131,6 +131,12 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString() noexcept :
     m_str{},
     m_strLen(0)
+{
+}
+
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
+    BasicFixedString(std::basic_string_view(str))
 {
 }
 
@@ -211,7 +217,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(_CharType rhs)
 {
     _StringTraitsType::Append(m_str, m_strLen, rhs, 1);
-    m_strLen += chCount;
+    m_strLen += 1;
 
     return *this;
 }
@@ -230,16 +236,16 @@ inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ope
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const std::basic_string_view<_CharType>& rhs) const
-{
-    return _StringTraitsType::Compare(m_str, m_strLen, rhs.data(), rhs.length()) == 0;
-}
-
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 template <int32_t _CharBufferSize2>
 inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
 {
     return _StringTraitsType::Compare(m_str, m_strLen, rhs.Data(), rhs.Length()) == 0;
+}
+
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const std::basic_string_view<_CharType>& rhs) const
+{
+    return _StringTraitsType::Compare(m_str, m_strLen, rhs.data(), rhs.length()) == 0;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -275,15 +281,15 @@ inline BasicFixedString<_CharType, _CharBufferSize + _CharBufferSize2, _StringTr
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 template <int32_t _CharBufferSize2>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Compare(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const
+inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const
 {
     return _StringTraitsType::Compare(m_str, static_cast<size_t>(m_strLen), str.Data(), static_cast<size_t>(str.Length()));
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Compare(const std::basic_string_view<_CharType>& str) const
+inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const std::basic_string_view<_CharType>& str) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, str);
+    return _StringTraitsType::Compare(m_str, m_strLen, str.length(), str.data());
 }
 
 template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>

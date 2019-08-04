@@ -7,16 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8CC61CAB22F3289200F415C8 /* CanvasSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CA322F3289100F415C8 /* CanvasSprite.h */; };
-		8CC61CAC22F3289200F415C8 /* CanvasRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CA422F3289100F415C8 /* CanvasRenderer.h */; };
-		8CC61CAD22F3289200F415C8 /* CanvasRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CA522F3289100F415C8 /* CanvasRenderer.cpp */; };
-		8CC61CAE22F3289200F415C8 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CA622F3289100F415C8 /* RectTransform.cpp */; };
-		8CC61CAF22F3289200F415C8 /* CanvasSpriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CA722F3289100F415C8 /* CanvasSpriteBatch.h */; };
-		8CC61CB022F3289200F415C8 /* CanvasSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CA822F3289100F415C8 /* CanvasSprite.cpp */; };
-		8CC61CB122F3289200F415C8 /* RectTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CA922F3289100F415C8 /* RectTransform.h */; };
-		8CC61CB222F3289200F415C8 /* CanvasSpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CAA22F3289100F415C8 /* CanvasSpriteBatch.cpp */; };
 		8CC61CB422F3299700F415C8 /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB322F3299600F415C8 /* DateTime.cpp */; };
 		8CC61CB622F329B300F415C8 /* MacOSFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB522F329B300F415C8 /* MacOSFile.mm */; };
+		8CC61CC022F677D100F415C8 /* CanvasRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB922F610AE00F415C8 /* CanvasRenderer.cpp */; };
+		8CC61CC122F677D100F415C8 /* UISpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */; };
+		8CC61CC222F677D100F415C8 /* UISprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBB22F610AE00F415C8 /* UISprite.cpp */; };
+		8CC61CC322F677D100F415C8 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
 		FD268ECD22CFDE0000F83F1E /* SpriteComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD268EC022CFDDFF00F83F1E /* SpriteComponent.h */; };
 		FD268ECE22CFDE0000F83F1E /* TextComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = FD268EC122CFDDFF00F83F1E /* TextComponent.h */; };
@@ -773,16 +769,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8CC61CA322F3289100F415C8 /* CanvasSprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CanvasSprite.h; path = ../../../Source/TGON/UI/CanvasSprite.h; sourceTree = "<group>"; };
-		8CC61CA422F3289100F415C8 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CanvasRenderer.h; path = ../../../Source/TGON/UI/CanvasRenderer.h; sourceTree = "<group>"; };
-		8CC61CA522F3289100F415C8 /* CanvasRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CanvasRenderer.cpp; path = ../../../Source/TGON/UI/CanvasRenderer.cpp; sourceTree = "<group>"; };
-		8CC61CA622F3289100F415C8 /* RectTransform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = RectTransform.cpp; path = ../../../Source/TGON/UI/RectTransform.cpp; sourceTree = "<group>"; };
-		8CC61CA722F3289100F415C8 /* CanvasSpriteBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CanvasSpriteBatch.h; path = ../../../Source/TGON/UI/CanvasSpriteBatch.h; sourceTree = "<group>"; };
-		8CC61CA822F3289100F415C8 /* CanvasSprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CanvasSprite.cpp; path = ../../../Source/TGON/UI/CanvasSprite.cpp; sourceTree = "<group>"; };
-		8CC61CA922F3289100F415C8 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = RectTransform.h; path = ../../../Source/TGON/UI/RectTransform.h; sourceTree = "<group>"; };
-		8CC61CAA22F3289100F415C8 /* CanvasSpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CanvasSpriteBatch.cpp; path = ../../../Source/TGON/UI/CanvasSpriteBatch.cpp; sourceTree = "<group>"; };
 		8CC61CB322F3299600F415C8 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
 		8CC61CB522F329B300F415C8 /* MacOSFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSFile.mm; sourceTree = "<group>"; };
+		8CC61CB822F610AE00F415C8 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RectTransform.h; sourceTree = "<group>"; };
+		8CC61CB922F610AE00F415C8 /* CanvasRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = CanvasRenderer.cpp; sourceTree = "<group>"; };
+		8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UISpriteBatch.cpp; sourceTree = "<group>"; };
+		8CC61CBB22F610AE00F415C8 /* UISprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UISprite.cpp; sourceTree = "<group>"; };
+		8CC61CBC22F610AE00F415C8 /* CanvasRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = CanvasRenderer.h; sourceTree = "<group>"; };
+		8CC61CBD22F610AE00F415C8 /* UISpriteBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UISpriteBatch.h; sourceTree = "<group>"; };
+		8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RectTransform.cpp; sourceTree = "<group>"; };
+		8CC61CBF22F610AE00F415C8 /* UISprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UISprite.h; sourceTree = "<group>"; };
 		FD10725B20C19E0C0098E76D /* libgainputstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgainputstatic.a; path = ../ThirdParty/Debug/x86_64/libgainputstatic.a; sourceTree = "<group>"; };
 		FD1F5650203EFF5B005B1F09 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		FD1F5653203F089A005B1F09 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../../../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -1782,19 +1778,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FD268E8A22CFDD9900F83F1E /* UI */ = {
+		8CC61CB722F610AE00F415C8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8CC61CA522F3289100F415C8 /* CanvasRenderer.cpp */,
-				8CC61CA422F3289100F415C8 /* CanvasRenderer.h */,
-				8CC61CA822F3289100F415C8 /* CanvasSprite.cpp */,
-				8CC61CA322F3289100F415C8 /* CanvasSprite.h */,
-				8CC61CAA22F3289100F415C8 /* CanvasSpriteBatch.cpp */,
-				8CC61CA722F3289100F415C8 /* CanvasSpriteBatch.h */,
-				8CC61CA622F3289100F415C8 /* RectTransform.cpp */,
-				8CC61CA922F3289100F415C8 /* RectTransform.h */,
+				8CC61CB822F610AE00F415C8 /* RectTransform.h */,
+				8CC61CB922F610AE00F415C8 /* CanvasRenderer.cpp */,
+				8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */,
+				8CC61CBB22F610AE00F415C8 /* UISprite.cpp */,
+				8CC61CBC22F610AE00F415C8 /* CanvasRenderer.h */,
+				8CC61CBD22F610AE00F415C8 /* UISpriteBatch.h */,
+				8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */,
+				8CC61CBF22F610AE00F415C8 /* UISprite.h */,
 			);
-			path = UI;
+			name = UI;
+			path = ../../Source/TGON/UI;
 			sourceTree = "<group>";
 		};
 		FD268EBE22CFDDF400F83F1E /* Component */ = {
@@ -2469,7 +2466,7 @@
 				FDC02C3E228481F000BEE91A /* Engine */,
 				FDC02C0D228481F000BEE91A /* Game */,
 				FDC02B52228481EF00BEE91A /* Graphics */,
-				FD268E8A22CFDD9900F83F1E /* UI */,
+				8CC61CB722F610AE00F415C8 /* UI */,
 				FDC02C64228481F100BEE91A /* Hardware */,
 				FDC02C87228481F100BEE91A /* IO */,
 				FDC02C03228481F000BEE91A /* Math */,
@@ -3541,7 +3538,6 @@
 				FDE1B5A822E40FDB0093FDC1 /* putil.h in Headers */,
 				FDE1B6B022E4100F0093FDC1 /* ucnv_bld.h in Headers */,
 				FDE1B5A222E40FDB0093FDC1 /* docmain.h in Headers */,
-				8CC61CAF22F3289200F415C8 /* CanvasSpriteBatch.h in Headers */,
 				FDE1B5DF22E40FDB0093FDC1 /* ushape.h in Headers */,
 				FDE1B67622E4100F0093FDC1 /* ucln_cmn.h in Headers */,
 				FD2D6D1D22D064410087DF85 /* TextureAtlas.h in Headers */,
@@ -3695,7 +3691,6 @@
 				FDE1B5CC22E40FDB0093FDC1 /* uobject.h in Headers */,
 				FDE1B6B822E4100F0093FDC1 /* utracimp.h in Headers */,
 				FDE1B69422E4100F0093FDC1 /* propname.h in Headers */,
-				8CC61CAC22F3289200F415C8 /* CanvasRenderer.h in Headers */,
 				FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */,
 				FD5332A522A2EA1C001EB57C /* psaux.h in Headers */,
 				FDE1B6BF22E4100F0093FDC1 /* ubidi_props.h in Headers */,
@@ -3750,7 +3745,6 @@
 				FDE1B69C22E4100F0093FDC1 /* ucnv_cnv.h in Headers */,
 				FDE1B6CB22E4100F0093FDC1 /* normalizer2impl.h in Headers */,
 				FDE1B68C22E4100F0093FDC1 /* ubrkimpl.h in Headers */,
-				8CC61CB122F3289200F415C8 /* RectTransform.h in Headers */,
 				FD268ED822CFDE0000F83F1E /* ComponentUtility.h in Headers */,
 				FDE1B5B822E40FDB0093FDC1 /* ures.h in Headers */,
 				FD5332D022A2EA1C001EB57C /* ftcache.h in Headers */,
@@ -3808,7 +3802,6 @@
 				FDE1B5AD22E40FDB0093FDC1 /* uscript.h in Headers */,
 				FDE1B67722E4100F0093FDC1 /* servnotf.h in Headers */,
 				FDE1B5DA22E40FDB0093FDC1 /* stringtriebuilder.h in Headers */,
-				8CC61CAB22F3289200F415C8 /* CanvasSprite.h in Headers */,
 				FDE1B5E522E40FDB0093FDC1 /* edits.h in Headers */,
 				FDE1B5E422E40FDB0093FDC1 /* uniset.h in Headers */,
 				FDE1B5C422E40FDB0093FDC1 /* ustringtrie.h in Headers */,
@@ -3893,6 +3886,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC61CC022F677D100F415C8 /* CanvasRenderer.cpp in Sources */,
+				8CC61CC122F677D100F415C8 /* UISpriteBatch.cpp in Sources */,
+				8CC61CC222F677D100F415C8 /* UISprite.cpp in Sources */,
+				8CC61CC322F677D100F415C8 /* RectTransform.cpp in Sources */,
 				FD5332F822A4CEC3001EB57C /* zutil.c in Sources */,
 				FD5331FA22A2E86B001EB57C /* ftcid.c in Sources */,
 				FDE1B50022E40E940093FDC1 /* ubidiwrt.cpp in Sources */,
@@ -4044,7 +4041,6 @@
 				FD2D6D1422D064410087DF85 /* Texture.cpp in Sources */,
 				FD53320622A2E8AA001EB57C /* ftinit.c in Sources */,
 				FDC02CF0228487CA00BEE91A /* Engine.cpp in Sources */,
-				8CC61CB022F3289200F415C8 /* CanvasSprite.cpp in Sources */,
 				FDE1B4D722E40E940093FDC1 /* uscript_props.cpp in Sources */,
 				FD2D6D0422D064410087DF85 /* IndexBuffer.cpp in Sources */,
 				FDE1B4BC22E40E940093FDC1 /* cmemory.cpp in Sources */,
@@ -4147,7 +4143,6 @@
 				FD2D6D1F22D064410087DF85 /* Material.cpp in Sources */,
 				FDC02D18228487CA00BEE91A /* Path.cpp in Sources */,
 				FDC02D19228487CA00BEE91A /* Window.cpp in Sources */,
-				8CC61CAD22F3289200F415C8 /* CanvasRenderer.cpp in Sources */,
 				FDE1B4FC22E40E940093FDC1 /* ruleiter.cpp in Sources */,
 				FDE1B49622E40E940093FDC1 /* ucnvdisp.cpp in Sources */,
 				FDC02D1A228487CA00BEE91A /* Application.cpp in Sources */,
@@ -4191,7 +4186,6 @@
 				FD53322C22A2E9CB001EB57C /* winfnt.c in Sources */,
 				FD53332F22A58011001EB57C /* gzwrite.c in Sources */,
 				FD4C1DFF219F3F8700B2B2BE /* GainputMac.mm in Sources */,
-				8CC61CAE22F3289200F415C8 /* RectTransform.cpp in Sources */,
 				FDE1B49422E40E940093FDC1 /* characterproperties.cpp in Sources */,
 				FD268ED522CFDE0000F83F1E /* RendererComponent.cpp in Sources */,
 				FDE1B48C22E40E940093FDC1 /* ucnv_bld.cpp in Sources */,
@@ -4264,7 +4258,6 @@
 				FD4C1DE8219F3F7D00B2B2BE /* GainputInputMap.cpp in Sources */,
 				FDE1B48522E40E940093FDC1 /* propname.cpp in Sources */,
 				FDE1B4F722E40E940093FDC1 /* uloc_tag.cpp in Sources */,
-				8CC61CB222F3289200F415C8 /* CanvasSpriteBatch.cpp in Sources */,
 				FDE1B48822E40E940093FDC1 /* ubiditransform.cpp in Sources */,
 				FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */,
 				FDE1B4F622E40E940093FDC1 /* uloc_keytype.cpp in Sources */,

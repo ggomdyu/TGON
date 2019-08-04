@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file    DateTimeTest.h
  * @author  ggomdyu
  * @since   08/02/2019
@@ -20,7 +20,7 @@ class FixedStringTest :
 {
 /**@section Method */
 public:
-    virtual void DoTest() override
+    virtual void Evaluate() override
     {
         //abcdefabc
         //
@@ -57,12 +57,12 @@ public:
         assert(a != FixedString256("abcdefab"));
         assert(a != FixedString256("abcdefabcg"));
 
-        FixedString16 b = "abcdefab";
-        assert(a.Compare(b) == 1);
-        b += "c";
-        assert(a.Compare(b) == 0);
-        b += "h";
-        assert(a.Compare(b) == -1);
+//        FixedString16 b = "abcdefab";
+//        assert(a.CompareTo(b) == 1);
+//        b += "c";
+//        assert(a.CompareTo(b) == 0);
+//        b += "h";
+//        assert(a.CompareTo(b) == -1);
         
     }
 

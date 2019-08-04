@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file    Test.h
  * @author  ggomdyu
  * @since   08/02/2019
@@ -13,7 +13,7 @@ class Test
 {
 /**@section Method */
 public:
-    virtual void DoTest() = 0;
+    virtual void Evaluate() = 0;
 };
 
 } /* namespace tgon */

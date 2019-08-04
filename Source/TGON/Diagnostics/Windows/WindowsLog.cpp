@@ -28,6 +28,12 @@ std::mutex g_mutex;
 void Log(LogLevel logLevel, const char* formatStr, ...)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
+    if (formatStr == nullptr || formatStr[0] == '\0')
+    {
+        Assert(condition);
+        return;
+    }
+
     std::lock_guard<std::mutex> lockGuard(g_mutex);
 
     va_list vaList;
