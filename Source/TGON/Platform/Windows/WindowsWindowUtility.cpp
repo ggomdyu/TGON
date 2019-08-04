@@ -1,7 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include "Diagnostics/Log.h"
-#include "Diagnostics/LogType.h"
+#include <sstream>
+
+#include "Diagnostics/Debug.h"
 #include "String/Encoding.h"
 #include "Math/Point.h"
 
@@ -94,7 +95,10 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 
     if (wndHandle == nullptr)
     {
-        Log(LogLevel::Warning, "Failed to invoke CreateWindowExW. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke CreateWindowExW. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
     }
 
 	return wndHandle;

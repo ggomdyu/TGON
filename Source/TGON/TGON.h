@@ -7,7 +7,7 @@
 #pragma once
 #include "Audio/AudioBuffer.h"
 #include "Audio/AudioPlayer.h"
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 #include "Drawing/Image.h"
 #include "Platform/Window.h"
 #include "Platform/WindowType.h"

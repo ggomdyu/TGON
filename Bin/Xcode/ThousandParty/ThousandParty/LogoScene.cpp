@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -204,15 +204,15 @@ class CultureInfo
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
-    
+   /* 
     FixedStringTest().Evaluate();
 
     DateTimeTest().Evaluate();
     FileTest().Evaluate();
+*/
+    Debug::Assert(false, u8"여기서 실패가 일어났어요.", u8"여기서 왜 실패했지?");
 
     auto engine = Application::GetInstance()->GetEngine();
-
-
     auto r = DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local);
 //    auto ct = TimeZoneInfo::ConvertTimeFromUtc(r, TimeZoneInfo::Local());
 

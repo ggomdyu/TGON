@@ -8,7 +8,7 @@
 #include <cassert>
 
 #include "String/FixedString.h"
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "../Test.h"
 

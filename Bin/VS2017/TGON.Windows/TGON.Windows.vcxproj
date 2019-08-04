@@ -161,7 +161,7 @@
     <ClInclude Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsLog.cpp" />
+    <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsDebug.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Drawing\Windows\WindowsDrawing.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp" />
     <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.cpp" />

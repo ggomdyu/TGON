@@ -177,9 +177,6 @@
     <ClCompile Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.cpp">
       <Filter>Sources\ThirdParty\StackWalker-1.20</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsLog.cpp">
-      <Filter>Sources\TGON\Diagnostics\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Drawing\Windows\WindowsDrawing.cpp">
       <Filter>Sources\TGON\Drawing\Windows</Filter>
     </ClCompile>
@@ -233,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Thread\Windows\WindowsThread.cpp">
       <Filter>Sources\TGON\Thread\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsDebug.cpp">
+      <Filter>Sources\TGON\Diagnostics\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

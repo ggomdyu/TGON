@@ -9,7 +9,7 @@
 
 #include "Time/DateTime.h"
 #include "Time/TimeZoneInfo.h"
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "../Test.h"
 
@@ -53,7 +53,7 @@ private:
 
     void DateTimeToString(DateTime dt)
     {
-        Log(LogLevel::Debug, "%d-%d-%d %d:%d:%d\n", dt.GetYear(), dt.GetMonth(), dt.GetDay(), dt.GetHour(), dt.GetMinute(), dt.GetSecond());
+        //Debug::Log(LogLevel::Debug, "%d-%d-%d %d:%d:%d\n", dt.GetYear(), dt.GetMonth(), dt.GetDay(), dt.GetHour(), dt.GetMinute(), dt.GetSecond());
     }
 };
 

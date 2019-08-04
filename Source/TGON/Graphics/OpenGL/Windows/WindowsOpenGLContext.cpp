@@ -1,14 +1,12 @@
-#include "..\OpenGLContext.h"
 #include "PrecompiledHeader.h"
 
 #include <cassert>
-#include <stdexcept>
 #include <Windows.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
 #include "Platform/Window.h"
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "../OpenGLContext.h"
 
@@ -24,37 +22,43 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
     assert(wndHandle != nullptr);
     assert(dcHandle != nullptr);
 
-    // Makes a old OpenGL rendering context that used temporary to make newer version of context.
+    // Create the old version of GLRC(GL rendering context).
+    // It will be used to create the latest version of GLRC.
     HGLRC oldGLRC = MakeOldGLRC(dcHandle);
     if (oldGLRC == nullptr)
     {
-        throw std::runtime_error("Failed to create old version of OpenGL rendering context.");
+        Debug::WriteLine("Failed to create the old version of GLRC.");
+        return;
     }
 
     if (::wglMakeCurrent(dcHandle, oldGLRC) == FALSE)
     {
-        throw std::runtime_error("Failed to invoke wglMakeCurrent.");
+        Debug::WriteLine("Failed to invoke wglMakeCurrent.");
+        return;
     }
  
     if (glewInit() != GLEW_OK)
     {
-        throw std::runtime_error("Failed to initialize glew.");
+        Debug::WriteLine("Failed to initialize glew.");
+        return;
     }
 
-    // Create the new version of OpenGL Context.
+    // Create the new version of GLRC.
     context = MakeNewGLRC(dcHandle);
     if (context == nullptr)
     {
-        throw std::runtime_error("Failed to create latest version of OpenGL rendering context.");
+        Debug::WriteLine("Failed to create the latest version of GLRC.");
+        return;
     }
 
+    // The old OpenGL context is attached to the new GLRC. thus, release it.
     wglMakeCurrent(nullptr, nullptr);
     wglDeleteContext(oldGLRC);
 
-    // Makes a old OpenGL rendering context that used temporary to make newer version of context.
     if (::wglMakeCurrent(dcHandle, context) == FALSE)
     {
-        throw std::runtime_error("Failed to invoke wglMakeCurrent.");
+        Debug::WriteLine("Failed to invoke wglMakeCurrent.");
+        return;
     }
 }
 

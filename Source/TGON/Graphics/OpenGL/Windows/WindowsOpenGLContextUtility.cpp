@@ -1,9 +1,10 @@
 #include "PrecompiledHeader.h"
 
+#include <sstream>
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "WindowsOpenGLContextUtility.h"
 
@@ -29,14 +30,20 @@ HGLRC MakeOldGLRC(HDC dcHandle)
     int pixelFormat = ::ChoosePixelFormat(dcHandle, &pixelFormatDesc);
     if (pixelFormat == -1)
     {
-        Log(LogLevel::Warning, "Failed to invoke ChoosePixelFormat. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke ChoosePixelFormat. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
         return nullptr;
     }
 
     // Sets the pixel format of the specified device context to the format specified by the pixelFormat index.
     if (::SetPixelFormat(dcHandle, pixelFormat, &pixelFormatDesc) == FALSE)
     {
-        Log(LogLevel::Warning, "Failed to invoke SetPixelFormat. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke SetPixelFormat. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
         return nullptr;
     }
 
@@ -44,7 +51,10 @@ HGLRC MakeOldGLRC(HDC dcHandle)
     HGLRC context = ::wglCreateContext(dcHandle);
     if (context == nullptr)
     {
-        Log(LogLevel::Warning, "Failed to invoke wglCreateContext. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke wglCreateContext. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
         return nullptr;
     }
 
@@ -68,14 +78,22 @@ HGLRC MakeNewGLRC(HDC dcHandle)
     UINT formatCount = 0;
     if (wglChoosePixelFormatARB(dcHandle, pixelFormatAttributes, nullptr, 1, &pixelFormat, &formatCount) == FALSE)
     {
-        Log(LogLevel::Warning, "Failed to invoke wglChoosePixelFormatARB. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke wglChoosePixelFormatARB. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
+        return nullptr;
     }
 
     // Sets the pixel format of the specified device context to the format specified by the pixelFormat index.
     PIXELFORMATDESCRIPTOR pfd;
     if (::SetPixelFormat(dcHandle, pixelFormat, &pfd) == FALSE)
     {
-        Log(LogLevel::Warning, "Failed to invoke SetPixelFormat. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke SetPixelFormat. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
+        return nullptr;
     }
 
     int contextAttributes[64] =
@@ -90,7 +108,10 @@ HGLRC MakeNewGLRC(HDC dcHandle)
     HGLRC context = wglCreateContextAttribsARB(dcHandle, nullptr, contextAttributes);
     if (context == nullptr)
     {
-        Log(LogLevel::Warning, "Failed to invoke wglCreateContextAttribsARB. (Code: %d)", GetLastError());
+        std::stringstream ss;
+        ss << "Failed to invoke wglCreateContextAttribsARB. (Code: " << GetLastError() << ")";
+
+        Debug::WriteLine(ss.str());
         return nullptr;
     }
 

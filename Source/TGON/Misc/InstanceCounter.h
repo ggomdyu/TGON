@@ -17,32 +17,23 @@ class InstanceCounter
 {
 /**@section Constructor */
 protected:
-    InstanceCounter() noexcept
-    {
-        ++ms_instanceCount;
-    }
+    InstanceCounter() noexcept;
 
 /**@section Destructor */
 public:
-    ~InstanceCounter() noexcept
-    {
-        --ms_instanceCount;
-    }
+    ~InstanceCounter() noexcept;
 
 /**@section Method */
 public:
-    static int32_t GetInstanceCount() noexcept
-    {
-        return ms_instanceCount;
-    }
+    static int32_t GetInstanceCount() noexcept;
 
 /**@section Variable */
 protected:
-    static int32_t ms_instanceCount;
+    static int32_t m_instanceCount;
 };
 
 template <typename _InstanceType>
-int32_t InstanceCounter<_InstanceType>::ms_instanceCount = 0;
+int32_t InstanceCounter<_InstanceType>::m_instanceCount = 0;
 
 template <typename _InstanceType, int32_t _MaxInstanceCount>
 class InstanceCountLimiter :
@@ -50,10 +41,31 @@ class InstanceCountLimiter :
 {
 /**@section Constructor */
 protected:
-    InstanceCountLimiter() noexcept
-    {
-        assert(InstanceCounter<_InstanceType>::GetInstanceCount() <= _MaxInstanceCount && "The object instance count is more than specified.");
-    }
+    InstanceCountLimiter() noexcept;
 };
+
+template <typename _InstanceType>
+inline InstanceCounter<_InstanceType>::InstanceCounter() noexcept
+{
+    ++m_instanceCount;
+}
+
+template <typename _InstanceType>
+inline InstanceCounter<_InstanceType>::~InstanceCounter() noexcept
+{
+    --m_instanceCount;
+}
+
+template <typename _InstanceType>
+inline int32_t InstanceCounter<_InstanceType>::GetInstanceCount() noexcept
+{
+    return m_instanceCount;
+}
+
+template <typename _InstanceType, int32_t _MaxInstanceCount>
+inline InstanceCountLimiter<_InstanceType, _MaxInstanceCount>::InstanceCountLimiter() noexcept
+{
+    assert(InstanceCounter<_InstanceType>::GetInstanceCount() <= _MaxInstanceCount && "The object instance count is more than specified.");
+}
 
 } /* namespace tgon */

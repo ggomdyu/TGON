@@ -1,8 +1,9 @@
 #include "PrecompiledHeader.h"
 
 #include <cassert>
+#include <sstream>
 
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 #include "Math/Vector4.h"
 #include "Math/Vector3.h"
 #include "Math/Vector2.h"
@@ -237,7 +238,10 @@ GLuint OpenGLShaderProgram::CompileShader(GLenum shaderType, const char* shaderC
     TGON_GL_ERROR_CHECK(glCompileShader(shaderId));
     if (this->IsShaderCompileSucceed(shaderId) == false)
     {
-        Log(LogLevel::Warning, "Failed to invoke glCompileShader. (%s)", GetShaderInfoLog(shaderId).c_str());
+        std::stringstream ss;
+        ss << "Failed to invoke glCompileShader. (" << GetShaderInfoLog(shaderId) << ")";
+
+        Debug::WriteLine(ss.str());
         return 0;
     }
 

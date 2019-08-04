@@ -18,7 +18,7 @@
 #   include <stb/stb_vorbis.c>
 #endif
 
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "BaseAudioImporter.h"
 
@@ -156,14 +156,14 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileD
     auto errorCode = ov_open_callbacks(reinterpret_cast<void*>(&fileStream), &oggVorbisFile, nullptr, -1, ovCallbacks);
     if (errorCode != 0)
     {
-        Log(LogLevel::Debug, "Failed to invoke ov_open_callbacks. (Code: %d)", errorCode);
+        Debug::Log(LogLevel::Debug, "Failed to invoke ov_open_callbacks. (Code: %d)", errorCode);
         return false;
     }
 
     const vorbis_info* vorbisInfo = ov_info(&oggVorbisFile, -1);
     if (vorbisInfo == nullptr)
     {
-        Log(LogLevel::Debug, "Failed to invoke ov_info.");
+        Debug::Log(LogLevel::Debug, "Failed to invoke ov_info.");
         return false;
     }
 

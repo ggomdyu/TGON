@@ -9,7 +9,7 @@
 
 #include "IO/Path.h"
 #include "IO/File.h"
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 
 #include "../Test.h"
 
@@ -25,7 +25,7 @@ public:
     {
         // WARNING: This test requires 1.png in desktop directory!
         auto desktopPath = Path::GetDesktopDirectory();
-        auto srcImagePath = desktopPath + "/1.png";
+        auto srcImagePath = desktopPath + u8"/rk°¡.png";
         if (File::Exists(srcImagePath) == false)
         {
             assert(false && "This test requires 1.png in desktop directory!");
@@ -35,17 +35,17 @@ public:
         auto dtl = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Local);
         auto dtu = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Utc);
 
-//        File::SetCreationTime(srcImagePath, dtl);
-//        assert(File::GetCreationTime(srcImagePath).value() == dtu);
-//        File::SetCreationTime(srcImagePath, dtu);
-//        assert(File::GetCreationTime(srcImagePath).value() == dtu.AddHours(9.0));
-//
-//        File::SetCreationTimeUtc(srcImagePath, dtu);
-//        assert(File::GetCreationTimeUtc(srcImagePath).value() == dtu);
-//        File::SetCreationTimeUtc(srcImagePath, dtl);
-//        assert(File::GetCreationTimeUtc(srcImagePath).value() == dtu.AddHours(-9.0));
-//
-//        File::SetLastWriteTime(srcImagePath, dtl);
+        assert(File::SetCreationTime(srcImagePath, dtl));
+        assert(File::GetCreationTime(srcImagePath).value() == dtu);
+        assert(File::SetCreationTime(srcImagePath, dtu));
+        assert(File::GetCreationTime(srcImagePath).value() == dtu.AddHours(9.0));
+
+        File::SetCreationTimeUtc(srcImagePath, dtu);
+        assert(File::GetCreationTimeUtc(srcImagePath).value() == dtu);
+        File::SetCreationTimeUtc(srcImagePath, dtl);
+        assert(File::GetCreationTimeUtc(srcImagePath).value() == dtu.AddHours(-9.0));
+
+        File::SetLastWriteTime(srcImagePath, dtl);
         DateTime c = File::GetLastWriteTime(srcImagePath).value();
         assert(c == dtu);
         File::SetLastWriteTime(srcImagePath, dtu);
@@ -57,15 +57,15 @@ public:
         File::SetLastAccessTimeUtc(srcImagePath, dtl);
         assert(File::GetLastAccessTimeUtc(srcImagePath).value() == dtu.AddHours(-9.0));
 
-//        File::SetLastWriteTime(srcImagePath, dtl);
-//        assert(File::GetLastWriteTime(srcImagePath).value() == dtu);
-//        File::SetLastWriteTime(srcImagePath, dtu);
-//        assert(File::GetLastWriteTime(srcImagePath).value() == dtu.AddHours(9.0));
-//
-//        File::SetLastWriteTimeUtc(srcImagePath, dtu);
-//        assert(File::GetLastWriteTimeUtc(srcImagePath).value() == dtu);
-//        File::SetLastWriteTimeUtc(srcImagePath, dtl);
-//        assert(File::GetLastWriteTimeUtc(srcImagePath).value() == dtu.AddHours(-9.0));
+        File::SetLastWriteTime(srcImagePath, dtl);
+        assert(File::GetLastWriteTime(srcImagePath).value() == dtu);
+        File::SetLastWriteTime(srcImagePath, dtu);
+        assert(File::GetLastWriteTime(srcImagePath).value() == dtu.AddHours(9.0));
+
+        File::SetLastWriteTimeUtc(srcImagePath, dtu);
+        assert(File::GetLastWriteTimeUtc(srcImagePath).value() == dtu);
+        File::SetLastWriteTimeUtc(srcImagePath, dtl);
+        assert(File::GetLastWriteTimeUtc(srcImagePath).value() == dtu.AddHours(-9.0));
 
         auto destImagePath = desktopPath + "/1_q43289n231nk.png";
         File::Move(srcImagePath, destImagePath);

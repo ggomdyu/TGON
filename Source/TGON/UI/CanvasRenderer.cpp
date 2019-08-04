@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Diagnostics/Log.h"
+#include "Diagnostics/Debug.h"
 #include "Math/Matrix4x4.h"
 #include "Math/Vector4.h"
 #include "Graphics/ShaderProgram.h"
@@ -46,7 +46,7 @@ void CanvasRenderer::Draw(Graphics& graphics)
 #ifndef NDEBUG
     if (m_cameraList.size() <= 0)
     {
-        Log(LogLevel::Debug, "CanvasRenderer has no camera but trying to draw.\n");
+        Debug::WriteLine("CanvasRenderer has no camera but trying to draw.");
         return;
     }
 #endif
