@@ -210,7 +210,22 @@ void LogoScene::InitPhase4()
     DateTimeTest().Evaluate();
     FileTest().Evaluate();
 */
-    Debug::Assert(false, u8"여기서 실패가 일어났어요.", u8"여기서 왜 실패했지?");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::Indent();
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::Indent();
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::Unindent();
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::Write(u8"hahaha");
+    Debug::Unindent();
+    Debug::WriteLine(u8"진짜웃겨요!!");
+    Debug::WriteLine(u8"진짜웃겨요!!");
 
     auto engine = Application::GetInstance()->GetEngine();
     auto r = DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local);
