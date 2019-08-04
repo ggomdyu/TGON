@@ -8,6 +8,7 @@
 #include <string_view>
 #include <optional>
 
+#include "Platform/Config.h"
 #include "Time/DateTime.h"
 
 namespace tgon
@@ -33,7 +34,7 @@ enum class FileAttributes
     Temporary = 0x100
 };
 
-class File
+class TGON_API File
 {
 /**@section Constructor */
 private:
@@ -42,18 +43,17 @@ private:
 
 /**@section Method */
 public:
-    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName) noexcept;
-    static bool Copy(const std::string_view& srcFileName, const std::string_view& destFileName, bool overwrite) noexcept;
+    static bool Copy(const std::string_view& srcPath, const std::string_view& destPath) noexcept;
+    static bool Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept;
     static bool Delete(const std::string_view& path);
     static bool Exists(const std::string_view& path);
-    static bool Move(const std::string_view& srcFileName, const std::string_view& destFileName);
+    static bool Move(const std::string_view& srcPath, const std::string_view& destPath);
     static bool SetCreationTime(const std::string_view& path, const DateTime& creationTime);
     static bool SetCreationTimeUtc(const std::string_view& path, const DateTime& creationTimeUtc);
     static bool SetLastAccessTime(const std::string_view& path, const DateTime& lastAccessTime);
     static bool SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTimeUtc);
     static bool SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime);
     static bool SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc);
-    //static void SetAttributes(const std::string_view& path, FileAttributes fileAttributes);
     static std::optional<DateTime> GetCreationTime(const std::string_view& path);
     static std::optional<DateTime> GetCreationTimeUtc(const std::string_view& path);
     static std::optional<DateTime> GetLastAccessTime(const std::string_view& path);
@@ -61,6 +61,7 @@ public:
     static std::optional<DateTime> GetLastWriteTime(const std::string_view& path);
     static std::optional<DateTime> GetLastWriteTimeUtc(const std::string_view& path);
     static FileAttributes GetAttributes(const std::string_view& path);
+    //static void SetAttributes(const std::string_view& path, FileAttributes fileAttributes);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents, Encoding encoding);
     //static Task AppendAllLinesAsync(const std::string_view& path, IEnumerable<string> contents, CancellationToken cancellationToken = default(CancellationToken));
@@ -94,8 +95,8 @@ public:
     //static Task<string> ReadAllTextAsync(const std::string_view& path, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
     //static IEnumerable<string> ReadLines(const std::string_view& path);
     //static IEnumerable<string> ReadLines(const std::string_view& path, Encoding encoding);
-    //static void Replace(const std::string_view& sourceFileName, string destinationFileName, string destinationBackupFileName);
-    //static void Replace(const std::string_view& sourceFileName, string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors);
+    //static void Replace(const std::string_view& sourcePath, string destinationPath, string destinationBackupPath);
+    //static void Replace(const std::string_view& sourcePath, string destinationPath, string destinationBackupPath, bool ignoreMetadataErrors);
     //static void WriteAllBytes(const std::string_view& path, byte[] bytes);
     //static Task WriteAllBytesAsync(const std::string_view& path, byte[] bytes, CancellationToken cancellationToken = default(CancellationToken));
     //static void WriteAllLines(const std::string_view& path, string[] contents);

@@ -71,6 +71,9 @@ inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_vi
     }
 
     ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr), destStrBufferSize, _ToEncodingType::EncodingName);
+    
+    destStr[encodedStrBytes / static_cast<int32_t>(sizeof(_DestCharType))] = _DestCharType();
+
     return encodedStrBytes;
 }
 
@@ -90,10 +93,9 @@ inline auto Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<
     int32_t encodedStrBytes = ustr.extract(0, ustr.length(), nullptr, _ToEncodingType::EncodingName);
 
     std::basic_string<EncodeResultCharType<_ToEncodingType>> destStr;
-    size_t destStrLen = encodedStrBytes / sizeof(Encoding<_FromEncodingType>);
-    destStr.resize(destStrLen);
+    destStr.resize(encodedStrBytes / sizeof(EncodeResultCharType<_ToEncodingType>));
 
-    ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr.data()), destStrLen, _ToEncodingType::EncodingName);
+    ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr.data()), encodedStrBytes, _ToEncodingType::EncodingName);
     return destStr;
 }
 
