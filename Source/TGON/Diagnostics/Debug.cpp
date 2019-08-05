@@ -29,6 +29,8 @@ void Debug::Fail(const std::string_view& message, const std::string_view& detail
     std::stringstream ss;
     ss << "---- DEBUG ASSERTION FAILED ----\n---- Assert Short Message ----\n" << message << "\n---- Assert Long Message ----\n" << detailMessage << "\n";
 
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
+
     // Ignore the indent when printing the failure message
     auto prevIndentLevel = m_indentLevel;
     m_indentLevel = 0;
@@ -44,6 +46,7 @@ void Debug::Fail(const std::string_view& message, const std::string_view& detail
 void Debug::SetIndentLevel(int32_t indentLevel) noexcept
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
     m_indentLevel = std::max(indentLevel, 0);
 #endif
 }
@@ -56,6 +59,7 @@ int32_t Debug::GetIndentLevel() noexcept
 void Debug::Indent()
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
     m_indentLevel += 1;
 #endif
 }
@@ -63,6 +67,7 @@ void Debug::Indent()
 void Debug::Unindent()
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
+    std::lock_guard<std::recursive_mutex> lockGuard( m_mutex );
     m_indentLevel = std::max(m_indentLevel - 1, 0);
 #endif
 }

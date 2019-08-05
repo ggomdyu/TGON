@@ -1,7 +1,8 @@
 #include "PrecompiledHeader.h"
 
 #include <stdexcept>
-#include <iostream>
+
+#include "Diagnostics/Debug.h"
 
 #include "FontFactory.h"
 
@@ -9,15 +10,6 @@
 #define FT_ERRORDEF( e, v, s )  { e, s },
 #define FT_ERROR_START_LIST     {
 #define FT_ERROR_END_LIST       { 0, 0 } };
-
-#define TGON_FT_THROW(expr)\
-{\
-    FT_Error error = expr;\
-    if (error)\
-    {\
-        throw std::runtime_error(GetFTErrorMessage(error));\
-    }\
-}
 
 namespace
 {
@@ -57,12 +49,29 @@ namespace tgon
 
 FontFace::FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize) :
     m_fontSize(fontSize),
-    m_fontFace([&]()
+    m_fontFace([&]() -> FT_Face
     {
         FT_Face face = nullptr;
-        TGON_FT_THROW(FT_New_Memory_Face(library, fileData, fileDataBytes, 0, &face));
-        TGON_FT_THROW(FT_Select_Charmap(face, FT_ENCODING_UNICODE));
-        TGON_FT_THROW(FT_Set_Pixel_Sizes(face, 0, fontSize));
+        FT_Error error = FT_New_Memory_Face(library, fileData, fileDataBytes, 0, &face);
+        if (error)
+        {
+            Debug::Fail(GetFTErrorMessage(error));
+            return nullptr;
+        }
+        
+        error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
+        if ( error )
+        {
+            Debug::Fail(GetFTErrorMessage(error));
+            return nullptr;
+        }
+
+        error = FT_Set_Pixel_Sizes(face, 0, fontSize);
+        if ( error )
+        {
+            Debug::Fail(GetFTErrorMessage(error));
+            return nullptr;
+        }
 
         return face;
     } ())
@@ -98,7 +107,12 @@ const GlyphData& FontFace::GetGlyphData(UnicodeScalar character) const
         return iter->second;
     }
     
-    TGON_FT_THROW(FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER));
+    FT_Error error = FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER);
+    if (error)
+    {
+        Debug::Fail(GetFTErrorMessage(error));
+        return m_glyphDatas.insert(iter, {character, GlyphData{character, I32Extent2D(0, 0), I32Vector2(0, 0), I32Vector2(0, 0), nullptr}})->second;
+    }
 
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
     int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
@@ -125,8 +139,13 @@ const I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) cons
 {
     FT_Vector kerning;
     auto lhsIndex = FT_Get_Char_Index(m_fontFace, lhs);
-    auto rhsIndex = FT_Get_Char_Index(m_fontFace, rhs);
-    FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
+    auto rhsIndex = FT_Get_Char_Index( m_fontFace, rhs );
+    FT_Error error = FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
+    if (error)
+    {
+        Debug::Fail(GetFTErrorMessage(error));
+        return I32Vector2(0, 0);
+    }
 
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
 }
@@ -186,7 +205,7 @@ const FontFace& Font::GetFace(FontSize fontSize) const
     return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
 }
 
-const GlyphData& Font::GetGlyphData(UnicodeScalar character, FontSize fontSize) const
+std::optional<const GlyphData&> Font::GetGlyphData(UnicodeScalar character, FontSize fontSize) const
 {
     return this->GetFace(fontSize).GetGlyphData(character);
 }

@@ -8,6 +8,7 @@
 #pragma once
 #include <cstdint>
 #include <string_view>
+#include <mutex>
 
 #include "Platform/Config.h"
 
@@ -38,6 +39,7 @@ public:
 /**@section Variable */
 private:
     inline static int32_t m_indentLevel = 0;
+    inline static std::recursive_mutex m_mutex;
 };
 
 } /* namespace tgon */

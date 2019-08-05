@@ -297,11 +297,7 @@ constexpr DateTime DateTime::AddMonths(int32_t value) noexcept
         return DateTime(0);
     }
 
-    auto dateParts = GetDateParts();
-
-    int32_t year = std::get<0>(dateParts);
-    int32_t month = std::get<1>(dateParts);
-    int32_t day = std::get<2>(dateParts);
+    auto [year, month, day] = GetDateParts();
 
     int32_t i = month + value;
     if (i >= 0)
