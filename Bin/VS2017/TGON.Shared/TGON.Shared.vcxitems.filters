@@ -106,14 +106,14 @@
     <Filter Include="Source\TGON\Game">
       <UniqueIdentifier>{446860f8-a8fd-485f-a75d-bcff7c1884ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TGON\Math">
-      <UniqueIdentifier>{18d2a407-7212-46fa-8195-18f41273558f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\ThirdParty\icu4c-64_2\common\unicode">
       <UniqueIdentifier>{fd864ff1-ef22-4943-afb0-6b72f0f46f56}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Test">
       <UniqueIdentifier>{eaf823de-98a4-410f-9c5b-563d3ddac005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Math">
+      <UniqueIdentifier>{18d2a407-7212-46fa-8195-18f41273558f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2478,5 +2478,8 @@
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

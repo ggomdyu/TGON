@@ -47,11 +47,12 @@ void SerialDispatchQueue::AddSyncTask(Delegate<void()>&& task)
     else
     {
         bool isTaskExecuted = false;
-        this->AddAsyncTask([&, task = std::move(task)]()
+        this->AddAsyncTask([&isTaskExecuted, task = std::move(task)]()
         {
             task();
             isTaskExecuted = true;
         });
+
         while (isTaskExecuted == false);
     }
 }
@@ -108,7 +109,7 @@ void ConcurrentDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 void ConcurrentDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 {
     bool isTaskExecuted = false;
-    this->AddAsyncTask([&]()
+    this->AddAsyncTask([&isTaskExecuted, &task]()
     {
         task();
         isTaskExecuted = true;
@@ -120,7 +121,7 @@ void ConcurrentDispatchQueue::AddSyncTask(const Delegate<void()>& task)
 void ConcurrentDispatchQueue::AddSyncTask(Delegate<void()>&& task)
 {
     bool isTaskExecuted = false;
-    this->AddAsyncTask([&, task = std::move(task)]()
+    this->AddAsyncTask([&isTaskExecuted, task = std::move(task)]()
     {
         task();
         isTaskExecuted = true;

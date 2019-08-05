@@ -234,5 +234,8 @@
     <ClCompile Include="..\..\..\Source\TGON\Diagnostics\Windows\WindowsDebug.cpp">
       <Filter>Sources\TGON\Diagnostics\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\TGON\IO\Windows\WindowsFileStream.cpp">
+      <Filter>Sources\TGON\IO\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

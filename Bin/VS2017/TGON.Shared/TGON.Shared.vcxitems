@@ -1716,6 +1716,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\File.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\FileStream.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Path.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Circle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Extent.h" />

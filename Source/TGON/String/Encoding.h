@@ -54,7 +54,7 @@ public:
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
     template <typename _ToEncodingType, typename _SrcCharType>
-    static std::basic_string<EncodeResultCharType<_ToEncodingType>> ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr);
+    static std::basic_string<EncodeResultCharType<_ToEncodingType>> ConvertTo(const std::basic_string_view<_SrcCharType>& str);
 };
 
 template <typename _FromEncodingType>
@@ -86,9 +86,9 @@ inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_vi
 
 template<typename _FromEncodingType>
 template<typename _ToEncodingType, typename _SrcCharType>
-inline auto Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr) -> std::basic_string<EncodeResultCharType<_ToEncodingType>>
+inline auto Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& str) -> std::basic_string<EncodeResultCharType<_ToEncodingType>>
 {
-    icu::UnicodeString ustr(reinterpret_cast<const char*>(srcStr.data()), static_cast<int32_t>(srcStr.length() * sizeof(_SrcCharType)), _FromEncodingType::EncodingName);
+    icu::UnicodeString ustr(reinterpret_cast<const char*>(str.data()), static_cast<int32_t>(str.length() * sizeof(_SrcCharType)), _FromEncodingType::EncodingName);
 
     int32_t encodedStrBytes = ustr.extract(0, ustr.length(), nullptr, _ToEncodingType::EncodingName);
 

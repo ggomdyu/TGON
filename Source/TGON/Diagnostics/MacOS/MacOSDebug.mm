@@ -1,51 +1,46 @@
 #import "PrecompiledHeader.h"
 
 #import <string>
-#import <cstdarg>
 #import <mutex>
 #import <AppKit/NSAlert.h>
-
-#import "Misc/Algorithm.h"
-#import "String/StringTraits.h"
 
 #import "../Log.h"
 
 namespace tgon
 {
-namespace
-{
 
+void Debug::Write(const std::string_view& message)
+{
 #if defined(_DEBUG) || !defined(NDEBUG)
-thread_local std::unique_ptr<char[]> g_strBuffer(new char[1024 * 8] {});
-std::mutex g_mutex;
+	std::string str = message;
+    str.insert(0, m_indentLevel, '\t');
+
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
+    NSLog(@"%s", str.c_str());
 #endif
+}
 
-} /* namespace */
-
-TGON_API void Debug::Log(LogLevel logLevel, const char* formatStr, va_list vaList)
+void Debug::WriteLine(const std::string_view& message)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    if (formatStr == nullptr || formatStr[0] == '\0')
+    std::string str = message;
+    str.insert(0, m_indentLevel, '\t');
+    str += u8"\n";
+
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
+    NSLog(@"%s", str.c_str());
+#endif
+}
+
+void Debug::Assert(bool condition, const std::string_view& message, const std::string_view& detailMessage)
+{
+#if defined(_DEBUG) || !defined(NDEBUG)
+    if (condition)
     {
         return;
     }
 
-    vsprintf(g_strBuffer.get(), formatStr, vaList);
-	
-    std::lock_guard<std::mutex> lockGuard(g_mutex);
-    
-    if (logLevel == LogLevel::Debug)
-    {
-        NSLog(@"%s", g_strBuffer.get());
-    }
-    else if (logLevel == LogLevel::Warning)
-    {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:@""];
-        [alert setInformativeText:[NSString stringWithUTF8String:g_strBuffer.get()]];
-        [alert setAlertStyle:NSAlertStyleCritical];
-        [alert runModal];
-    }
+    Fail(message, detailMessage);
 #endif
 }
    
