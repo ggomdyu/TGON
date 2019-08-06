@@ -15,7 +15,7 @@ TimeZoneInfo CreateUtc()
 
 } /* namespace */
 
-TimeZoneInfo::TimeZoneInfo(const std::string& id, TimeSpan baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool supportsDaylightSavingTime) :
+TimeZoneInfo::TimeZoneInfo(const std::string& id, const TimeSpan& baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool supportsDaylightSavingTime) :
     m_id(id),
     m_baseUtcOffset(baseUtcOffset),
     m_displayName(displayName),

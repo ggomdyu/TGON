@@ -67,6 +67,14 @@ FileStream::~FileStream()
     }
 }
 
+
+void FileStream::Write( uint8_t * buffer, int32_t offset, int32_t count )
+{
+}
+void tgon::FileStream::WriteByte( uint8_t value )
+{
+}
+
 bool FileStream::IsClosed() const noexcept
 {
     return m_nativeHandle == INVALID_HANDLE_VALUE;

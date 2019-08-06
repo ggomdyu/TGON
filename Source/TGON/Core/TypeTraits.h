@@ -81,7 +81,7 @@ struct IsBasicStringView<std::basic_string_view<_CharType>> : std::true_type {};
 template <typename _Type>
 class RemoveAllPointers
 {
-    /**@section Type */
+/**@section Type */
 public:
     using Type = _Type;
 };
@@ -89,7 +89,7 @@ public:
 template <typename _Type>
 class RemoveAllPointers<_Type*>
 {
-    /**@section Type */
+/**@section Type */
 public:
     using Type = typename RemoveAllPointers<_Type>::Type;
 };
