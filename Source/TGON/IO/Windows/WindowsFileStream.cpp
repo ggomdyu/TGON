@@ -1,4 +1,5 @@
 #include "..\FileStream.h"
+#include "..\FileStream.h"
 #include "PrecompiledHeader.h"
 
 #include <Windows.h>
@@ -44,7 +45,7 @@ HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess a
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
     m_access(access),
-    m_name(path)
+    m_fileName(path)
 {
     if (m_nativeHandle == INVALID_HANDLE_VALUE)
     {
@@ -67,6 +68,11 @@ FileStream::~FileStream()
     }
 }
 
+
+const std::string& FileStream::Name() const noexcept
+{
+    return m_fileName;
+}
 
 void FileStream::Write( uint8_t * buffer, int32_t offset, int32_t count )
 {

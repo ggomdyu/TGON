@@ -83,14 +83,15 @@ public:
     virtual bool CanWrite() const override;
     virtual bool IsAsync() const;
     virtual void SetLength(int64_t value) override;
-    virtual int64_t GetLength() const override;
-    virtual int64_t GetPosition() const override;
-    virtual const std::string& GetName() const override;
+    virtual int64_t Length() const override;
+    virtual int64_t Position() const override;
+    const std::string& Name() const noexcept;
     virtual int Read(uint8_t* buffer, int32_t offset, int32_t count) override;
     virtual int32_t ReadByte() override;
     virtual void Write(uint8_t* buffer, int32_t offset, int32_t count) override;
     virtual void WriteByte(uint8_t value) override;
     virtual long Seek(int64_t offset, SeekOrigin origin) override;
+    virtual void Close() override;
     /*virtual SafeFileHandle SafeFileHandle
     FileStream(SafeFileHandle handle, FileAccess access)
     FileStream(SafeFileHandle handle, FileAccess access, int bufferSize)
@@ -124,9 +125,10 @@ private:
     bool m_canRead;
     bool m_canWrite;
     bool m_isUseAsync;
+    int32_t m_readPos;
+    int32_t m_writePos;
     FileAccess m_access;
-
-    std::string m_name;    
+    std::string m_fileName;    
 };
 
 } /* namespace tgon */

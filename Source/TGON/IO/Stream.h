@@ -29,21 +29,20 @@ public:
     virtual bool CanWrite() const = 0;
     virtual bool IsAsync() const = 0;
     virtual void SetLength(int64_t value) = 0;
-    virtual int64_t GetLength() const = 0;
-    virtual int64_t GetPosition() const = 0;
-    virtual const std::string& GetName() const = 0;
+    virtual int64_t Length() const = 0;
+    virtual int64_t Position() const = 0;
     virtual int Read(uint8_t* buffer, int32_t offset, int32_t count) = 0;
     virtual int32_t ReadByte() {}
     virtual void Write(uint8_t* buffer, int32_t offset, int32_t count) = 0;
     virtual void WriteByte(uint8_t value) = 0;
     virtual long Seek(int64_t offset, SeekOrigin origin) = 0;
+    virtual void Close() = 0;
     //static readonly Stream Null;
     //virtual bool CanTimeout
     //virtual int ReadTimeout
     //virtual int WriteTimeout
     //virtual IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state) = 0
     //virtual IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state) = 0;
-    //virtual void Close()
     //void Dispose()
     //virtual int EndRead(IAsyncResult asyncResult)
     //virtual void EndWrite(IAsyncResult asyncResult)
