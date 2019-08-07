@@ -75,18 +75,15 @@ public:
     _ValueType height;
 };
 
-template <typename _ValueType>
-constexpr BasicRect<_ValueType> MakeRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& height) noexcept
-{
-    return {x, y, width, height};
-}
-
 using FRect = BasicRect<float>;
 using DRect = BasicRect<double>;
 using I32Rect = BasicRect<int32_t>;
 using I64Rect = BasicRect<int64_t>;
 using IRect = BasicRect<int>;
 using LLRect = BasicRect<long long>;
+
+template <typename... _Types>
+BasicRect(_Types...) -> BasicRect<std::common_type_t<_Types...>>;
 
 template <typename _ValueType>
 constexpr BasicRect<_ValueType>::BasicRect() noexcept :

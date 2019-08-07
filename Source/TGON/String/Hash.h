@@ -23,7 +23,7 @@
 namespace tgon
 {
 
-template <typename _CharType, typename std::enable_if_t<IsChar_v<_CharType>>* = nullptr>
+template <typename _CharType, typename std::enable_if_t<IsCharValue<_CharType>>* = nullptr>
 constexpr size_t X65599Hash(_CharType ch) noexcept
 {
     return ch ^ (ch >> 16);

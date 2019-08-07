@@ -8,6 +8,7 @@
 #include "IntroScene.h"
 #include "LogoScene.h"
 #include "IO/File.h"
+#include "Math/Rect.h"
 #include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
 #include "Graphics/TextureAtlas.h"
@@ -204,12 +205,17 @@ class CultureInfo
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
-   /* 
-    FixedStringTest().Evaluate();
 
+    FixedStringTest().Evaluate();
     DateTimeTest().Evaluate();
-    FileTest().Evaluate();
-*/
+    /*FileTest().Evaluate();*/
+
+    int a[] = {3,4,5,65,7};
+    auto span = Span(a);
+    span.Clear();
+
+    auto r8 = BasicRect(3, 53.0f, 34.4, 5);
+    
     Debug::WriteLine(u8"진짜웃겨요!!");
     Debug::Indent();
     Debug::WriteLine(u8"진짜웃겨요!!");

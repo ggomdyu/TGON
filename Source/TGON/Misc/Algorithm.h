@@ -114,7 +114,7 @@ constexpr std::size_t GetArraySize(const _ArrayElementType(&)[_ArraySize]) noexc
 template <typename... _Args>
 constexpr std::array<std::decay_t<std::common_type_t<_Args...>>, sizeof...(_Args)> MakeArray(_Args&&... rhs) noexcept
 {
-    return { std::forward<_Args>(rhs)... };
+    return {std::forward<_Args>(rhs)...};
 }
 
 template <typename _EnumType, std::enable_if_t<std::is_enum<_EnumType>::value>* = nullptr>

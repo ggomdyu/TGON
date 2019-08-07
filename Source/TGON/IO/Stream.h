@@ -31,11 +31,11 @@ public:
     virtual void SetLength(int64_t value) = 0;
     virtual int64_t Length() const = 0;
     virtual int64_t Position() const = 0;
-    virtual int Read(uint8_t* buffer, int32_t offset, int32_t count) = 0;
-    virtual int32_t ReadByte() {}
-    virtual void Write(uint8_t* buffer, int32_t offset, int32_t count) = 0;
-    virtual void WriteByte(uint8_t value) = 0;
-    virtual long Seek(int64_t offset, SeekOrigin origin) = 0;
+    virtual int32_t Read(uint8_t* buffer, int32_t offset, int32_t count) = 0;
+    virtual int32_t ReadByte() = 0;
+    virtual bool Write(uint8_t* buffer, int32_t offset, int32_t count) = 0;
+    virtual bool WriteByte(uint8_t value) = 0;
+    virtual int64_t Seek(int64_t offset, SeekOrigin origin) = 0;
     virtual void Close() = 0;
     //static readonly Stream Null;
     //virtual bool CanTimeout

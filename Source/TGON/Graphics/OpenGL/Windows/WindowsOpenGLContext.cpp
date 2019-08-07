@@ -1,9 +1,12 @@
 #include "PrecompiledHeader.h"
 
-#include <cassert>
+#ifndef NOMINMAX
+#    define NOMINMAX
+#endif
 #include <Windows.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>
+#include <cassert>
 
 #include "Platform/Window.h"
 #include "Diagnostics/Debug.h"

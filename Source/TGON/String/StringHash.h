@@ -28,7 +28,7 @@ public:
     {
     }
 
-    template <typename _ValueType, typename std::enable_if_t<IsCharPointer_v<_ValueType>>* = nullptr>
+    template <typename _ValueType, typename std::enable_if_t<IsCharPointerValue<_ValueType>>* = nullptr>
     constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
         m_hashCode(X65599Hash(str))
     {
@@ -138,13 +138,13 @@ private:
 };
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if_t<IsBasicString_v<_StringType> || IsBasicStringView_v<_StringType>>> :
-    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicString_v<_StringType> || IsBasicStringView_v<_StringType>>>>
+class BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>> :
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>>>
 {
 /**@section Type */
 public:
     using ValueType = typename _StringType::value_type;
-    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicString_v<_StringType> || IsBasicStringView_v<_StringType>>>>;
+    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsBasicStringValue<_StringType> || IsBasicStringViewValue<_StringType>>>>;
     using StringType = _StringType;
     
 /**@section Constructor */
@@ -200,13 +200,13 @@ private:
 };
 
 template <typename _StringType>
-class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointer_v<_StringType>>> :
-    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointer_v<_StringType>>>>
+class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>> :
+    public detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>>>
 {
 /**@section Type */
 public:
     using ValueType = Pure_t<_StringType>;
-    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointer_v<_StringType>>>>;
+    using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>>>;
     using StringType = _StringType;
     
 /**@section Constructor */
@@ -275,7 +275,7 @@ template <typename _StringType>
 struct IsBasicStringHash<BasicStringHash<_StringType>> : std::true_type {};
 
 template <typename _Type>
-constexpr bool IsBasicStringHash_v = false;
+constexpr bool IsBasicStringHashValue = false;
 
 using StringHash = BasicStringHash<std::string>;
 using WStringHash = BasicStringHash<std::wstring>;

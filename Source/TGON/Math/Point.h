@@ -81,6 +81,9 @@ using I32Point = BasicPoint<int32_t>;
 using IPoint = BasicPoint<int>;
 using LLPoint = BasicPoint<long long>;
 
+template <typename... _Types>
+BasicPoint(_Types...) ->BasicPoint<std::common_type_t<_Types...>>;
+
 template <typename _ValueType>
 constexpr BasicPoint<_ValueType> MakePoint(const _ValueType& x, const _ValueType& y) noexcept
 {

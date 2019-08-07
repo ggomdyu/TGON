@@ -1316,9 +1316,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Vector3.h">
       <Filter>Source\TGON\Math</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Circle.h">
-      <Filter>Source\TGON\Math</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Math\Color.h">
       <Filter>Source\TGON\Math</Filter>
     </ClInclude>
@@ -2480,6 +2477,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.h">
       <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Span.h">
+      <Filter>Source\TGON\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

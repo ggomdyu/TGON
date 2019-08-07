@@ -95,10 +95,7 @@ protected:
 };
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-constexpr auto MakeFixedString(const _CharType(&str)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>
-{
-    return BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>({str, _CharBufferSize - 1});
-}
+BasicFixedString(const _CharType(&)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>;
 
 template <typename>
 struct IsBasicFixedString : std::false_type {};
@@ -107,7 +104,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 struct IsBasicFixedString<BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>> : std::true_type {};
 
 template <typename _Type>
-constexpr bool IsBasicFixedString_v = IsBasicFixedString<_Type>::value;;
+constexpr bool IsBasicFixedStringValue = IsBasicFixedString<_Type>::value;;
 
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
@@ -136,7 +133,7 @@ constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Basic
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
-    BasicFixedString(std::basic_string_view(str))
+    BasicFixedString(std::basic_string_view<_CharType>(str))
 {
 }
 

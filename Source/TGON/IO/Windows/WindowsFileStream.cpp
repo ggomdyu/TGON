@@ -1,7 +1,8 @@
-#include "..\FileStream.h"
-#include "..\FileStream.h"
 #include "PrecompiledHeader.h"
 
+#ifndef NOMINMAX
+#    define NOMINMAX
+#endif
 #include <Windows.h>
 
 #include "String/Encoding.h"
@@ -34,16 +35,26 @@ HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess a
     }
     
     // The named pipe on Windows allows the server to impersonate the client.
-    // So we have to add the below flags because of the security vulnerability.
+    // So we have to add the below flags because of this security vulnerability.
     DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
 
     return CreateFileW(reinterpret_cast<LPCWSTR>(utf16Path.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
+//int32_t NativeWriteFile(HANDLE handle, uint8_t* buffer, )
+//{
+//
+//}
+
 } /* namespace */
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
+    m_bufferSize(bufferSize),
+    m_readPos(0),
+    m_writePos(0),
+    m_canSeek(false),
+    m_isUseAsync(false),
     m_access(access),
     m_fileName(path)
 {
@@ -68,22 +79,34 @@ FileStream::~FileStream()
     }
 }
 
-
 const std::string& FileStream::Name() const noexcept
 {
     return m_fileName;
 }
 
-void FileStream::Write( uint8_t * buffer, int32_t offset, int32_t count )
-{
-}
-void tgon::FileStream::WriteByte( uint8_t value )
-{
-}
-
 bool FileStream::IsClosed() const noexcept
 {
     return m_nativeHandle == INVALID_HANDLE_VALUE;
+}
+
+void FileStream::FlushWriteBuffer()
+{
+    
+    m_writePos = 0;
+}
+
+void FileStream::FlushWriteBufferAsync()
+{
+    m_writePos = 0;
+}
+
+int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
+{
+    return 0;
+}
+
+void FileStream::Close()
+{
 }
 
 } /* namespace tgon */

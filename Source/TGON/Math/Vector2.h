@@ -100,7 +100,10 @@ using I64Vector2 = BasicVector2<int64_t>;
 using IVector2 = BasicVector2<int>;
 using Vector2 = BasicVector2<float>;
 using DVector2 = BasicVector2<double>;
-    
+
+template <typename... _Types>
+BasicVector2(_Types...) -> BasicVector2<std::common_type_t<_Types...>>;
+
 template <typename _ValueType>
 constexpr BasicVector2<_ValueType>::BasicVector2() noexcept :
     x(0.0f),

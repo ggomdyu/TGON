@@ -101,24 +101,24 @@ template <typename _Type>
 using Pure_t = std::remove_cv_t<RemoveAllPointers_t<std::decay_t<_Type>>>;
 
 template <typename _Type, typename... _Types>
-constexpr bool IsAllSame_v = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
+constexpr bool IsAllSameValue = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
 
 template <typename _Type, typename... _Types>
-constexpr bool IsAny_v = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
+constexpr bool IsAnyValue = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
 
 template <typename _Type>
-constexpr bool IsPure_v = std::is_same_v<Pure_t<_Type>, _Type>;
+constexpr bool IsPureValue = std::is_same_v<Pure_t<_Type>, _Type>;
 
 template <typename _Type>
-constexpr bool IsChar_v = IsAny_v<_Type, char, char16_t, char32_t, wchar_t>;
+constexpr bool IsCharValue = IsAnyValue<_Type, char, char16_t, char32_t, wchar_t>;
     
 template <typename _Type>
-constexpr bool IsCharPointer_v = IsChar_v<Pure_t<_Type>> && (std::is_pointer_v<_Type> || std::is_reference_v<_Type>);
+constexpr bool IsCharPointerValue = IsCharValue<Pure_t<_Type>> && (std::is_pointer_v<_Type> || std::is_reference_v<_Type>);
 
 template <typename _Type>
-constexpr bool IsBasicString_v = IsBasicString<_Type>::value;
+constexpr bool IsBasicStringValue = IsBasicString<_Type>::value;
 
 template <typename _Type>
-constexpr bool IsBasicStringView_v = IsBasicStringView<_Type>::value;
+constexpr bool IsBasicStringViewValue = IsBasicStringView<_Type>::value;
 
 } /* namespace tgon */

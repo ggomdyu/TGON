@@ -57,7 +57,7 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <uint32_t _StrBufferSize>
+    template <std::size_t _StrBufferSize>
     int32_t ToString(char(&destStr)[_StrBufferSize]) const;
 
     /**
@@ -66,7 +66,7 @@ public:
      * @param [in] strBufferSize    The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, uint32_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
 
 /**@section Variable */
 public:
@@ -74,18 +74,15 @@ public:
     _ValueType height;
 };
 
-template <typename _ValueType>
-constexpr BasicExtent2D<_ValueType> MakeExtent(const _ValueType& width, const _ValueType& height) noexcept
-{
-    return {width, height};
-}
-
 using FExtent2D = BasicExtent2D<float>;
 using DExtent2D = BasicExtent2D<double>;
 using I32Extent2D = BasicExtent2D<int32_t>;
 using I64Extent2D = BasicExtent2D<int64_t>;
 using IExtent2D = BasicExtent2D<int>;
 using LLExtent2D = BasicExtent2D<long long>;
+
+template <typename... _Types>
+BasicExtent2D(_Types...) -> BasicExtent2D<std::common_type_t<_Types...>>;
 
 template <typename _ValueType>
 constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :
@@ -187,26 +184,26 @@ constexpr BasicExtent2D<_ValueType>::operator BasicExtent2D<_CastToType>() const
 }
 
 template <typename _ValueType>
-template <uint32_t _StrBufferSize>
+template <std::size_t _StrBufferSize>
 inline int32_t BasicExtent2D<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
 {
     return this->ToString(destStr, sizeof(destStr));
 }
 
 template <typename _ValueType>
-inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, uint32_t strBufferSize) const
+inline int32_t BasicExtent2D<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", width, height);
 }
 
 template <>
-inline int32_t BasicExtent2D<float>::ToString(char* destStr, uint32_t strBufferSize) const
+inline int32_t BasicExtent2D<float>::ToString(char* destStr, std::size_t strBufferSize) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", width, height);
 }
 
 template <>
-inline int32_t BasicExtent2D<double>::ToString(char* destStr, uint32_t strBufferSize) const
+inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t strBufferSize) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
 }

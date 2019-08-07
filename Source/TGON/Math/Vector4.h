@@ -102,6 +102,9 @@ public:
 using Vector4 = BasicVector4<float>;
 using DVector4 = BasicVector4<double>;
 
+template <typename... _Types>
+BasicVector4(_Types...) -> BasicVector4<std::common_type_t<_Types...>>;
+
 template <typename _ValueType>
 constexpr BasicVector4<_ValueType>::BasicVector4() noexcept  :
     BasicVector4(0.0f, 0.0f, 0.0f, 0.0f)

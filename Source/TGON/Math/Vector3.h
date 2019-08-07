@@ -105,6 +105,9 @@ public:
 using Vector3 = BasicVector3<float>;
 using DVector3 = BasicVector3<double>;
 
+template <typename... _Types>
+BasicVector3(_Types...) -> BasicVector3<std::common_type_t<_Types...>>;
+
 template <typename _ValueType>
 constexpr BasicVector3<_ValueType>::BasicVector3() noexcept  :
     BasicVector3(0.0f, 0.0f, 0.0f)

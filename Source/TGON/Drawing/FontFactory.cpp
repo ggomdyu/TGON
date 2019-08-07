@@ -150,11 +150,11 @@ const I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) cons
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
 }
 
-Font::Font(const StringHash & filePath, FT_Library library) :
+Font::Font(const StringHash& filePath, FT_Library library) :
     Font([&]() -> Font
     {
 #if defined(_MSC_VER) && _MSC_VER >= 1400
-        FILE * file = nullptr;
+        FILE* file = nullptr;
         fopen_s(&file, filePath.CStr(), "rb");
 #else
         FILE* file = fopen(filePath.CStr(), "rb");
@@ -177,14 +177,14 @@ Font::Font(const StringHash & filePath, FT_Library library) :
 {
 }
 
-Font::Font(uint8_t * fileData, std::size_t fileDataBytes, FT_Library library) :
+Font::Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library) :
     m_fileData(fileData),
     m_fileDataBytes(fileDataBytes),
     m_library(library)
 {
 }
 
-Font::Font(Font && rhs) :
+Font::Font(Font&& rhs) :
     m_fileData(std::move(rhs.m_fileData)),
     m_fileDataBytes(rhs.m_fileDataBytes),
     m_library(rhs.m_library),
@@ -235,7 +235,7 @@ FontFactory::~FontFactory()
     }
 }
 
-std::shared_ptr<Font> FontFactory::CreateFont(const StringHash & filePath) const
+std::shared_ptr<Font> FontFactory::CreateFont(const StringHash& filePath) const
 {
     return std::make_shared<Font>(filePath, m_library);
 }

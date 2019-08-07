@@ -81,16 +81,16 @@ public:
     virtual bool CanRead() const override;
     virtual bool CanSeek() const override;
     virtual bool CanWrite() const override;
-    virtual bool IsAsync() const;
+    virtual bool IsAsync() const override;
     virtual void SetLength(int64_t value) override;
     virtual int64_t Length() const override;
     virtual int64_t Position() const override;
     const std::string& Name() const noexcept;
-    virtual int Read(uint8_t* buffer, int32_t offset, int32_t count) override;
+    virtual int32_t Read(uint8_t* buffer, int32_t offset, int32_t count) override;
     virtual int32_t ReadByte() override;
-    virtual void Write(uint8_t* buffer, int32_t offset, int32_t count) override;
-    virtual void WriteByte(uint8_t value) override;
-    virtual long Seek(int64_t offset, SeekOrigin origin) override;
+    virtual bool Write(uint8_t* buffer, int32_t offset, int32_t count) override;
+    virtual bool WriteByte(uint8_t value) override;
+    virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
     virtual void Close() override;
     /*virtual SafeFileHandle SafeFileHandle
     FileStream(SafeFileHandle handle, FileAccess access)
@@ -112,6 +112,9 @@ public:
 
 private:
     bool IsClosed() const noexcept;
+    std::vector<uint8_t>& GetBuffer() noexcept;
+    void FlushWriteBuffer();
+    void FlushWriteBufferAsync();
 
 /**@section Variable */
 private:
@@ -121,12 +124,12 @@ private:
 
     void* m_nativeHandle;
     std::vector<uint8_t> m_buffer;
-    bool m_canSeek;
-    bool m_canRead;
-    bool m_canWrite;
-    bool m_isUseAsync;
+    int32_t m_bufferSize;
     int32_t m_readPos;
     int32_t m_writePos;
+    int32_t m_filePosition;
+    bool m_canSeek;
+    bool m_isUseAsync;
     FileAccess m_access;
     std::string m_fileName;    
 };
