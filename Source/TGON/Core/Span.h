@@ -10,15 +10,26 @@
 #include <cassert>
 #include <numeric>
 
+#if defined(_DEBUG) || defined(NDEBUG)
+#   define TGON_STRINGIFY(m) #m
+#   define TGON_EXPECT(e)\
+if (!e)\
+{\
+    throw std::logic_error("Span expected:" TGON_STRINGIFY(e));\
+}
+#else
+#   define TGON_EXPECT(e)
+#endif
+
 namespace tgon
 {
 namespace detail
 {
 
 /**@brief   DynamicExtent is used to differentiate Span of static or dynamic extent. */
-constexpr auto DynamicExtent = std::numeric_limits<int32_t>::max();
+constexpr int32_t DynamicExtent = std::numeric_limits<int32_t>::max();
 
-template <typename _ElementType, std::size_t N>
+template <typename _ElementType, int32_t Extent>
 class SpanStorage
 {
 /**@section Constructor */
@@ -29,17 +40,17 @@ public:
 /**@section Variable */
 protected:
     _ElementType* m_data;
-    static constexpr int32_t m_size = static_cast<int32_t>(N);
+    static constexpr int32_t m_size = Extent;
 };
 
-template <typename _ElementType, std::size_t N>
-constexpr SpanStorage<_ElementType, N>::SpanStorage() noexcept :
+template <typename _ElementType, int32_t Extent>
+constexpr SpanStorage<_ElementType, Extent>::SpanStorage() noexcept :
     m_data(nullptr)
 {
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr SpanStorage<_ElementType, N>::SpanStorage(_ElementType* data, int32_t) noexcept :
+template <typename _ElementType, int32_t Extent>
+constexpr SpanStorage<_ElementType, Extent>::SpanStorage(_ElementType* data, int32_t) noexcept :
     m_data(data)
 {
 }
@@ -74,9 +85,9 @@ constexpr SpanStorage<_ElementType, DynamicExtent>::SpanStorage(_ElementType* da
 
 } /* namespace detail */
 
-template <typename _ElementType, std::size_t N = detail::DynamicExtent>
+template <typename _ElementType, int32_t Extent = detail::DynamicExtent>
 class Span final :
-    private detail::SpanStorage<_ElementType, N>
+    private detail::SpanStorage<_ElementType, Extent>
 {
 /**@section Type */
 public:
@@ -87,15 +98,15 @@ public:
     using ConstReferenceType = const _ElementType&;
 
 private:
-    using SpanStorageType = detail::SpanStorage<_ElementType, N>;
+    using SpanStorageType = detail::SpanStorage<_ElementType, Extent>;
 
     template <int32_t Start, int32_t Length>
-    using SubSpanType = Span<_ElementType, (N != detail::DynamicExtent) ? Length - Start : detail::DynamicExtent>;
+    using SubSpanType = Span<_ElementType, (Length != detail::DynamicExtent) ? Length : (Extent != detail::DynamicExtent) ? Extent - Start : detail::DynamicExtent>;
     
 /**@section Constructor */
 public:
     constexpr Span(PointerType ptr, int32_t count) noexcept;
-    constexpr Span(_ElementType(&arr)[N]) noexcept;
+    constexpr Span(_ElementType(&arr)[Extent]) noexcept;
     
 /**@section Operator */
 public:
@@ -109,19 +120,16 @@ public:
     constexpr Span<_ElementType> Slice(int32_t start) const;
     constexpr Span<_ElementType> Slice(int32_t start, int32_t length) const;
     template <int32_t Start, int32_t Length = detail::DynamicExtent>
-    constexpr SubSpanType<Start, Length> Slice() const noexcept
-    {
-        return {};
-    }
+    constexpr SubSpanType<Start, Length> Slice() const;
     void Clear();
     void Fill(const _ElementType& value);
 };
 
-template <typename _ElementType, std::size_t N>
-Span(_ElementType(&)[N]) -> Span<_ElementType, N>;
+template <typename _ElementType, int32_t Extent>
+Span(_ElementType(&)[Extent]) -> Span<_ElementType, Extent>;
 
-template <typename _ElementType, std::size_t N>
-Span(const _ElementType(&)[N]) -> Span<const _ElementType, N>;
+template <typename _ElementType, int32_t Extent>
+Span(const _ElementType(&)[Extent]) -> Span<const _ElementType, Extent>;
 
 template <typename _ElementType>
 Span(_ElementType*, int32_t) -> Span<_ElementType>;
@@ -129,11 +137,11 @@ Span(_ElementType*, int32_t) -> Span<_ElementType>;
 template <typename _ElementType>
 Span(const _ElementType*, int32_t) -> Span<const _ElementType>;
 
-//template <typename _ContainerType, std::size_t N>
-//Span(_ContainerType&) -> Span<typename _ContainerType::value_type, N>;
+//template <typename _ContainerType, int32_t Extent>
+//Span(_ContainerType&) -> Span<typename _ContainerType::value_type, Extent>;
 //
-//template <typename _ContainerType, std::size_t N>
-//Span(const _ContainerType&)->Span<const typename _ContainerType::value_type, N>;
+//template <typename _ContainerType, int32_t Extent>
+//Span(const _ContainerType&)->Span<const typename _ContainerType::value_type, Extent>;
 
 template <typename _ContainerType>
 Span(_ContainerType&) -> Span<typename _ContainerType::value_type>;
@@ -144,79 +152,90 @@ Span(const _ContainerType&) -> Span<const typename _ContainerType::value_type>;
 template <typename>
 struct IsSpan : std::false_type {};
 
-template <typename _ElementType, std::size_t N>
-struct IsSpan<Span<_ElementType, N>> : std::true_type {};
+template <typename _ElementType, int32_t Extent>
+struct IsSpan<Span<_ElementType, Extent>> : std::true_type {};
 
-template <typename _ElementType, std::size_t N>
-constexpr bool IsSpanValue = IsSpan<_ElementType, N>::value;
+template <typename _ElementType, int32_t Extent>
+constexpr bool IsSpanValue = IsSpan<_ElementType, Extent>::value;
 
-template <typename _ElementType, std::size_t N>
-constexpr Span<_ElementType, N>::Span(PointerType ptr, int32_t count) noexcept :
-    SpanStorageType(str, count)
+template <typename _ElementType, int32_t Extent>
+constexpr Span<_ElementType, Extent>::Span(PointerType ptr, int32_t count) noexcept :
+    SpanStorageType(ptr, count)
 {
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr Span<_ElementType, N>::Span(_ElementType(&arr)[N]) noexcept :
-    SpanStorageType(arr, N)
+template <typename _ElementType, int32_t Extent>
+constexpr Span<_ElementType, Extent>::Span(_ElementType(&arr)[Extent]) noexcept :
+    SpanStorageType(arr, Extent)
 {
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr typename Span<_ElementType, N>::ReferenceType Span<_ElementType, N>::operator[](int32_t index)
+template <typename _ElementType, int32_t Extent>
+constexpr typename Span<_ElementType, Extent>::ReferenceType Span<_ElementType, Extent>::operator[](int32_t index)
 {
-    assert(index >= 0 && index < m_size);
+    TGON_EXPECT(index >= 0 && index < m_size);
     return m_data[index];
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr typename Span<_ElementType, N>::ConstReferenceType Span<_ElementType, N>::operator[](int32_t index) const
+template <typename _ElementType, int32_t Extent>
+constexpr typename Span<_ElementType, Extent>::ConstReferenceType Span<_ElementType, Extent>::operator[](int32_t index) const
 {
     return const_cast<decltype(this)>->operator[](index);
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr bool Span<_ElementType, N>::IsEmpty() const noexcept
+template <typename _ElementType, int32_t Extent>
+constexpr bool Span<_ElementType, Extent>::IsEmpty() const noexcept
 {
     return m_size == 0;
 }
 
-template <typename _ElementType, std::size_t N>
-constexpr int32_t Span<_ElementType, N>::Length() const noexcept
+template <typename _ElementType, int32_t Extent>
+constexpr int32_t Span<_ElementType, Extent>::Length() const noexcept
 {
     return m_size;
 }
 
-template<typename _ElementType, std::size_t N>
-constexpr Span<_ElementType> Span<_ElementType, N>::Slice(int32_t start) const
+template<typename _ElementType, int32_t Extent>
+constexpr Span<_ElementType> Span<_ElementType, Extent>::Slice(int32_t start) const
 {
-    assert(start >= 0 && start <= m_size);
+    TGON_EXPECT(start >= 0 && start <= m_size);
     return {m_data + start, m_size - start};
 }
 
-template<typename _ElementType, std::size_t N>
-constexpr Span<_ElementType> Span<_ElementType, N>::Slice(int32_t start, int32_t length) const
+template<typename _ElementType, int32_t Extent>
+constexpr Span<_ElementType> Span<_ElementType, Extent>::Slice(int32_t start, int32_t length) const
 {
-    assert((start >= 0 && start <= length) && (length >= 0 && start + length <= m_size));
+    TGON_EXPECT((start >= 0 && start <= length) && (length >= 0 && start + length <= m_size));
     return {m_data + start, length};
 }
 
-template<typename _ElementType, std::size_t N>
-inline void Span<_ElementType, N>::Clear()
+template <typename _ElementType, int32_t Extent>
+template <int32_t Start, int32_t Length>
+constexpr Span<_ElementType, Extent>::SubSpanType<Start, Length> Span<_ElementType, Extent>::Slice() const
 {
-    for (std::size_t i = 0; i < m_size; ++i)
+    TGON_EXPECT((Start >= 0 && Start <= Length) && (Length != detail::DynamicExtent || Length <= Extent));
+    return {m_data + Start, (Length != detail::DynamicExtent) ? Length : (Extent != detail::DynamicExtent) ? Extent - Start : detail::DynamicExtent};
+}
+
+template<typename _ElementType, int32_t Extent>
+inline void Span<_ElementType, Extent>::Clear()
+{
+    for (int32_t i = 0; i < m_size; ++i)
     {
         m_data[i] = {};
     }
 }
 
-template <typename _ElementType, std::size_t N>
-inline void Span<_ElementType, N>::Fill(const _ElementType& value)
+template <typename _ElementType, int32_t Extent>
+inline void Span<_ElementType, Extent>::Fill(const _ElementType& value)
 {
-    for (std::size_t i = 0; i < m_size; ++i)
+    for (int32_t i = 0; i < m_size; ++i)
     {
         m_data[i] = value;
     }
 }
 
 } /* namespace tgon */
+
+#undef TGON_STRINGIFY
+#undef TGON_EXPECT

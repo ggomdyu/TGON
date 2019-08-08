@@ -206,13 +206,14 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
+    int arr[] = {1,24,35,3,646,47,42};
+    Span ss1(arr);
+    auto ss2 = ss1.Slice<2>();
+    ss2.Fill(4);
+
     FixedStringTest().Evaluate();
     DateTimeTest().Evaluate();
     /*FileTest().Evaluate();*/
-
-    int a[] = {3,4,5,65,7};
-    auto span = Span(a);
-    span.Clear();
 
     auto r8 = BasicRect(3, 53.0f, 34.4, 5);
     
