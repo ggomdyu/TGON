@@ -85,7 +85,7 @@ public:
     {
         static_assert(std::is_base_of<Component, _ComponentType>::value, "_ComponentType must be inherited from Component.");
         
-        return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
+        return const_cast<decltype(this)>(this)->GetComponent<_ComponentType>();
     }
 
     /**

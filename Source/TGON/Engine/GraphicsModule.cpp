@@ -46,12 +46,12 @@ const Graphics& GraphicsModule::GetGraphics() const noexcept
     return m_graphics;
 }
     
-CanvasRenderer& GraphicsModule::GetUIRenderer() noexcept
+UIRenderer& GraphicsModule::GetUIRenderer() noexcept
 {
     return m_canvasRenderer;
 }
 
-const CanvasRenderer& GraphicsModule::GetUIRenderer() const noexcept
+const UIRenderer& GraphicsModule::GetUIRenderer() const noexcept
 {
     return m_canvasRenderer;
 }

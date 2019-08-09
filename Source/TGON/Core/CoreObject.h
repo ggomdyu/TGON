@@ -60,7 +60,7 @@ inline _Type* CoreObject::GetExtraData()
 template <typename _Type>
 inline const _Type* CoreObject::GetExtraData() const
 {
-    return const_cast<CoreObject*>(this)->GetExtraData<_Type>();
+    return const_cast<decltype(this)>(this)->GetExtraData<_Type>();
 }
 
 } /* namespace tgon */

@@ -33,7 +33,7 @@ std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName)
 
 const std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName) const
 {
-    return const_cast<Scene*>(this)->FindObject(objectName);
+    return const_cast<decltype(this)>(this)->FindObject(objectName);
 }
 
 std::shared_ptr<GameObject> Scene::FindGlobalObject(const StringViewHash& objectName)
@@ -49,7 +49,7 @@ std::shared_ptr<GameObject> Scene::FindGlobalObject(const StringViewHash& object
 
 std::shared_ptr<const GameObject> Scene::FindGlobalObject(const StringViewHash& objectName) const
 {
-    return const_cast<Scene*>(this)->FindGlobalObject(objectName);
+    return const_cast<decltype(this)>(this)->FindGlobalObject(objectName);
 }
     
 bool Scene::RemoveObject(const StringViewHash& objectName)

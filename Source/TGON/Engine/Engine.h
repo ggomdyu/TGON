@@ -146,7 +146,7 @@ inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 template <typename _ModuleType>
 inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 {
-    return const_cast<Engine*>(this)->FindModule<_ModuleType>();
+    return const_cast<decltype(this)>(this)->FindModule<_ModuleType>();
 }
     
 } /* namespace tgon */

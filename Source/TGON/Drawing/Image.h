@@ -133,7 +133,7 @@ public:
 
     /**
      * @brief   Initializes with the image.
-     * @param [in] imageData    The reference to the image.
+     * @param [in] image        The reference to the image.
      */
     ImageView(Image& image);
     

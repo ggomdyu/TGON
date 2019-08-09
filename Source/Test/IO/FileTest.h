@@ -25,7 +25,7 @@ public:
     {
         // WARNING: This test requires 1.png in desktop directory!
         auto desktopPath = Path::GetDesktopDirectory();
-        auto srcImagePath = desktopPath + u8"/rk°¡.png";
+        auto srcImagePath = desktopPath + u8"/rk.png";
         if (File::Exists(srcImagePath) == false)
         {
             assert(false && "This test requires 1.png in desktop directory!");

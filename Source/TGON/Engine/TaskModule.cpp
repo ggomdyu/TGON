@@ -39,7 +39,7 @@ ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threa
     
 const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority) const
 {
-    return const_cast<TaskModule*>(this)->GetGlobalDispatchQueue(threadPriority);
+    return const_cast<decltype(this)>(this)->GetGlobalDispatchQueue(threadPriority);
 }
 
 } /* namespace tgon */

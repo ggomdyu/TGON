@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <deque>
 #include <functional>
@@ -208,8 +208,8 @@ void LogoScene::InitPhase4()
 
     int arr[] = {1,24,35,3,646,47,42};
     Span ss1(arr);
-    auto ss2 = ss1.Slice<2>();
-    ss2.Fill(4);
+//    auto ss2 = ss1.Slice<2>();
+//    ss2.Fill(4);
 
     FixedStringTest().Evaluate();
     DateTimeTest().Evaluate();

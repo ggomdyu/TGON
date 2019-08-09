@@ -4,7 +4,7 @@
 #import <mutex>
 #import <AppKit/NSAlert.h>
 
-#import "../Log.h"
+#import "../Debug.h"
 
 namespace tgon
 {
@@ -12,7 +12,7 @@ namespace tgon
 void Debug::Write(const std::string_view& message)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-	std::string str = message;
+	std::string str(message);
     str.insert(0, m_indentLevel, '\t');
 
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
@@ -23,7 +23,7 @@ void Debug::Write(const std::string_view& message)
 void Debug::WriteLine(const std::string_view& message)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    std::string str = message;
+    std::string str(message);
     str.insert(0, m_indentLevel, '\t');
     str += u8"\n";
 
