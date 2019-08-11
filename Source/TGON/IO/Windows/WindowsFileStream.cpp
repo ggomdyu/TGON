@@ -8,7 +8,6 @@
 #include "String/Encoding.h"
 #include "Diagnostics/Debug.h"
 #include "Misc/Algorithm.h"
-#include "Misc/Windows/SafeFileHandle.h"
 
 #include "../FileStream.h"
 
@@ -20,8 +19,7 @@ namespace
 HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
     auto utf16Path = Encoding<UTF8>::ConvertTo<UTF16LE>(std::string_view(path));
-
-    DWORD desiredAccess = (UnderlyingCast(access) & UnderlyingCast(FileAccess::Read)) ? GENERIC_READ : (UnderlyingCast(access) & UnderlyingCast(FileAccess::Write)) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
+    auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
 
     bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);
     SECURITY_ATTRIBUTES securityAttributes{};
@@ -41,47 +39,27 @@ HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess a
     return CreateFileW(reinterpret_cast<LPCWSTR>(utf16Path.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
-//int32_t NativeWriteFile(HANDLE handle, uint8_t* buffer, )
-//{
-//
-//}
-
 } /* namespace */
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
     m_bufferSize(bufferSize),
     m_readPos(0),
+    m_readLen(0),
     m_writePos(0),
-    m_canSeek(false),
-    m_isUseAsync(false),
+    m_filePos(0),
     m_access(access),
     m_fileName(path)
 {
     if (m_nativeHandle == INVALID_HANDLE_VALUE)
     {
-        return;
+        Debug::Fail("Failed to construct the FileStream.", "Could not create the file handle.");
     }
 
     if (GetFileType(m_nativeHandle) != FILE_TYPE_DISK)
     {
-        Debug::Fail("Failed to construct the FileStream.", "The FileStream is not a file.");
-        return;
+        Debug::Fail("Failed to construct the FileStream.", "The FileStream instance is not a file.");
     }
-}
-
-FileStream::~FileStream()
-{
-    if (m_nativeHandle != INVALID_HANDLE_VALUE)
-    {
-        CloseHandle(m_nativeHandle);
-        m_nativeHandle = INVALID_HANDLE_VALUE;
-    }
-}
-
-const std::string& FileStream::Name() const noexcept
-{
-    return m_fileName;
 }
 
 bool FileStream::IsClosed() const noexcept
@@ -89,24 +67,109 @@ bool FileStream::IsClosed() const noexcept
     return m_nativeHandle == INVALID_HANDLE_VALUE;
 }
 
-void FileStream::FlushWriteBuffer()
+bool FileStream::Write(uint8_t* buffer, int32_t count)
 {
-    
-    m_writePos = 0;
-}
-
-void FileStream::FlushWriteBufferAsync()
-{
-    m_writePos = 0;
+    if (this->CanWrite() == false)
+    {
+        return false;
+    }
+    // TODO: impl
+    return true;
 }
 
 int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
 {
-    return 0;
+    if (this->CanSeek() == false)
+    {
+        return -1;
+    }
+
+    this->FlushWriteBuffer();
+
+    if (origin == SeekOrigin::Current)
+    {
+        //offset -= _readLen - _readPos;
+    }
+
+    m_readPos = m_readLen = 0;
+
+    int64_t oldPos = m_filePos;
+    int64_t pos = SeekCore(offset, origin);
+
+    return pos;
+}
+
+int64_t FileStream::Length() const
+{
+    LARGE_INTEGER li;
+    if (GetFileSizeEx(m_nativeHandle, &li) == FALSE)
+    {
+        return -1;
+    }
+
+    DWORD lowPart = 0, highPart = 0;
+    if ((lowPart = GetFileSize(m_nativeHandle, &highPart)) == -1)
+    {
+        return -1;
+    }
+
+    return li.QuadPart;
 }
 
 void FileStream::Close()
 {
+    if (m_writePos == 0)
+    {
+        return;
+    }
+
+    this->FlushWriteBuffer();
+
+    if (m_nativeHandle != INVALID_HANDLE_VALUE)
+    {
+        CloseHandle(m_nativeHandle);
+        m_nativeHandle = INVALID_HANDLE_VALUE;
+    }
+}
+
+int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
+{
+    DWORD readBytes = 0;
+    if (ReadFile(m_nativeHandle, buffer, count, &readBytes, nullptr) == FALSE)
+    {
+        return -1;
+    }
+
+    m_filePos += readBytes;
+    return readBytes;
+}
+
+int32_t FileStream::WriteCore(uint8_t* buffer, int32_t bufferBytes)
+{
+    DWORD writtenBytes = 0;
+    if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
+    {
+        return -1;
+    }
+
+    m_filePos += writtenBytes;
+    return writtenBytes;
+}
+
+int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
+{
+    LARGE_INTEGER distanceToMove;
+    distanceToMove.QuadPart = offset;
+
+    LARGE_INTEGER newFilePointer;
+    if (SetFilePointerEx(m_nativeHandle, distanceToMove, &newFilePointer, static_cast<DWORD>(origin)) == FALSE)
+    {
+        return -1;
+    }
+
+    m_filePos = newFilePointer.QuadPart;
+
+    return newFilePointer.QuadPart;
 }
 
 } /* namespace tgon */

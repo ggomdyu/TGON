@@ -15,7 +15,7 @@ RendererComponent::RendererComponent() :
 }
 
 RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) :
-    m_graphicsModule(Application::GetInstance()->GetEngine()->FindModule<GraphicsModule>()),
+    m_graphicsModule(Application::GetInstance().GetEngine()->FindModule<GraphicsModule>()),
     m_material(material)
 {
 }

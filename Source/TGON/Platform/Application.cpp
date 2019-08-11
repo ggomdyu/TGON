@@ -1,10 +1,8 @@
 #include "PrecompiledHeader.h"
 
 #include "Random/WELL1024a.h"
-#include "Engine/Engine.h"
 
 #include "Application.h"
-#include "Window.h"
 
 namespace tgon
 {
@@ -17,76 +15,63 @@ Application::Application() :
 {
     SrandWELL1024a();
 }
-    
-Application* Application::GetInstance()
+
+Application& Application::GetInstance()
 {
     static Application instance;
-    return &instance;
+    return instance;
 }
 
-void Application::MessageLoop()
+void Application::ShowMessageBox(const std::string_view& message)
 {
-    PlatformApplication::MessageLoop([&](){ m_engine->Update(); });
+    ShowMessageBox("", message);
 }
 
-void Application::ShowMessageBox(const std::string_view& message) const
+void Application::ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon)
 {
-    this->ShowMessageBox("", message);
+    ShowMessageBox("", message, messageBoxIcon);
 }
 
-void Application::ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon) const
+void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message)
 {
-    this->ShowMessageBox("", message, messageBoxIcon);
-}
-
-void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message) const
-{
-    this->ShowMessageBox(title, message, MessageBoxIcon::Informational);
+    ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }
 
 std::shared_ptr<Engine> Application::GetEngine() noexcept
 {
-    return m_engine;
-}
-    
-std::shared_ptr<const Engine> Application::GetEngine() const noexcept
-{
-    return m_engine;
+    return GetInstance().m_engine;
 }
 
 std::shared_ptr<Window> Application::GetRootWindow() noexcept
 {
-    return m_rootWindow;
-}
-    
-std::shared_ptr<const Window> Application::GetRootWindow() const noexcept
-{
-    return m_rootWindow;
+    return GetInstance().m_rootWindow;
 }
 
-PlatformApplication* Application::GetPlatformDependency() noexcept
+PlatformApplication& Application::GetPlatformDependency() noexcept
 {
-    return this;
+    return *this;
 }
     
-const PlatformApplication* Application::GetPlatformDependency() const noexcept
+const PlatformApplication& Application::GetPlatformDependency() const noexcept
 {
-    return this;
+    return *this;
 }
     
 void Application::OnLaunch()
 {
-    if (m_engine)
+    auto engine = GetEngine();
+    if (engine)
     {
-        m_engine->OnLaunch();
+        engine->OnLaunch();
     }
 }
 
 void Application::OnTerminate()
 {
-    if (m_engine)
+    auto engine = GetEngine();
+    if (engine)
     {
-        m_engine->OnTerminate();
+        engine->OnTerminate();
     }
 }
 

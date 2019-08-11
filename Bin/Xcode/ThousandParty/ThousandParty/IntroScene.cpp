@@ -15,10 +15,7 @@ public:
     Firefly(const StringHash& name) :
         GameObject(name, nullptr)
     {
-        decltype(auto) application = Application::GetInstance();
-        decltype(auto) engine = application->GetEngine();
-
-        m_timeModule = engine->FindModule<TimeModule>();
+        Application& application = Application::GetInstance();
 
         //m_fireflySpriteComponent = this->AddComponent<SpriteRendererComponent>(GetDesktopDirectory() + "Assets/Image/IntroScene/firefly.png");
         //m_fireflySpriteComponent->SetBlendColor({ 1.0f, 1.0f, 1.0f });
@@ -87,9 +84,9 @@ private:
 IntroScene::IntroScene()
 {
     decltype(auto) application = Application::GetInstance();
-    decltype(auto) engine = application->GetEngine();
+    decltype(auto) engine = application.GetEngine();
         
-    auto rootWindowSize = application->GetRootWindow()->GetExtent();
+    auto rootWindowSize = application.GetRootWindow()->GetExtent();
         
     m_graphicsModule = engine->FindModule<GraphicsModule>();
     m_inputModule = engine->FindModule<InputModule>();

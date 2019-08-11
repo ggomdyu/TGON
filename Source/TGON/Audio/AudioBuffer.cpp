@@ -6,8 +6,7 @@
 #   include <alc.h>
 #endif
 
-#include "Platform/Config.h"
-
+#include "Diagnostics/Debug.h"
 #include "Importer/WavAudioImporter.h"
 #include "Importer/OggVorbisAudioImporter.h"
 
@@ -18,17 +17,17 @@ namespace tgon
 {
 
 AudioBuffer::AudioBuffer() :
+    m_alBufferId(0),
     m_audioDataBytes(0),
     m_bitsPerSample(0),
     m_channels(0),
     m_samplingRate(0),
-    m_alBufferId(0),
     m_alFormat(0)
 {
     alGenBuffers(1, &m_alBufferId);
     if (alGetError() != AL_NO_ERROR)
     {
-        throw std::runtime_error("Failed to invoke alGenBuffers.");
+        Debug::Fail("Failed to invoke alGenBuffers.");
     }
 }
 

@@ -32,6 +32,11 @@ FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access
 {
 }
 
+FileStream::~FileStream()
+{
+    FileStream::Close();
+}
+
 bool FileStream::operator==(const FileStream& rhs) const noexcept
 {
     return m_nativeHandle == rhs.m_nativeHandle;
@@ -49,8 +54,7 @@ bool FileStream::CanRead() const
 
 bool FileStream::CanSeek() const
 {
-    // TODO: impl
-    return false;
+    return this->IsClosed() == false;
 }
 
 bool FileStream::CanWrite() const
@@ -58,32 +62,24 @@ bool FileStream::CanWrite() const
     return this->IsClosed() == false && (UnderlyingCast(m_access) & UnderlyingCast(FileAccess::Write)) != 0;
 }
 
-bool FileStream::IsAsync() const
-{
-    // TODO: impl
-    return false;
-}
-
 void FileStream::SetLength(int64_t value)
 {
     // TODO: impl
 }
 
-int64_t FileStream::Length() const
-{
-    // TODO: impl
-    return int64_t();
-}
-
 int64_t FileStream::Position() const
 {
-    // TODO: impl
-    return int64_t();
+    return m_filePos + m_writePos;
+}
+
+const std::string& FileStream::Name() const noexcept
+{
+    return m_fileName;
 }
 
 std::vector<uint8_t>& FileStream::GetBuffer() noexcept
 {
-    if (m_buffer.size() == 0)
+    if (m_buffer.empty())
     {
         m_buffer.resize(m_bufferSize);
     }
@@ -91,35 +87,84 @@ std::vector<uint8_t>& FileStream::GetBuffer() noexcept
     return m_buffer;
 }
 
-int32_t FileStream::Read(uint8_t* buffer, int32_t offset, int32_t count)
-{
-    // TODO: impl
-    return 0;
-}
-
 int32_t FileStream::ReadByte()
 {
-    // TODO: impl
-    return 0;
+    if (this->CanRead() == false)
+    {
+        return -1;
+    }
+
+    int32_t leftReadBufferSpace = m_readLen - m_readPos;
+    if (leftReadBufferSpace == 0)
+    {
+        this->FlushWriteBuffer();
+
+        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
+        m_readPos = 0;
+        m_readLen = readBytes;
+
+        if (readBytes == 0)
+        {
+            return -1;
+        }
+    }
+
+    return m_buffer[m_readPos++];;
 }
 
-bool FileStream::Write(uint8_t* buffer, int32_t offset, int32_t count)
+int32_t FileStream::Read(uint8_t* buffer, int32_t count)
 {
-    if (this->CanWrite() == false)
+    if (this->CanRead() == false || m_bufferSize < count)
     {
-        return false;
+        return -1;
     }
-    // TODO: impl
-    return true;
+
+    int32_t leftReadBufferSpace = m_readLen - m_readPos;
+    if (leftReadBufferSpace == 0)
+    {
+        this->FlushWriteBuffer();
+    
+        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
+        m_readPos = 0;
+        m_readLen = leftReadBufferSpace = readBytes;
+
+        if (readBytes == 0)
+        {
+            return -1;
+        }
+    }
+    
+    int32_t copiedBytes = std::min(leftReadBufferSpace, count);
+    std::memcpy(buffer, &m_buffer[0] + m_readPos, copiedBytes);
+
+    // Copied less than the required bytes?
+    if (copiedBytes < count)
+    {
+        int32_t moreReadBytes = this->ReadCore(buffer + m_readPos + copiedBytes, count - copiedBytes);
+        copiedBytes += moreReadBytes;
+
+        m_readLen = 0;
+        m_readPos = 0;
+    }
+
+    m_readPos += copiedBytes;
+
+    return copiedBytes;
 }
 
 bool FileStream::WriteByte(uint8_t value)
 {
-    if (this->CanWrite() == false)
+    if (m_writePos == 0)
     {
-        return false;
-    }
+        if (this->CanWrite() == false)
+        {
+            return false;
+        }
 
+        // todo: Flush read buffer
+        m_readLen = 0;
+        m_readPos = 0;
+    }
     if (m_writePos == m_bufferSize)
     {
         this->FlushWriteBuffer();
@@ -128,6 +173,18 @@ bool FileStream::WriteByte(uint8_t value)
     this->GetBuffer()[m_writePos++] = value;
 
     return true;
+}
+
+void FileStream::FlushWriteBuffer()
+{
+    if (m_writePos <= 0)
+    {
+        return;
+    }
+
+    this->WriteCore(&m_buffer[0], m_writePos);
+
+    m_writePos = 0;
 }
 
 } /* namespace tgon */

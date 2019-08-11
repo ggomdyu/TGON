@@ -98,7 +98,7 @@ template <typename _Type>
 using RemoveAllPointers_t = typename RemoveAllPointers<_Type>::Type;
 
 template <typename _Type>
-using Pure_t = std::remove_cv_t<RemoveAllPointers_t<std::decay_t<_Type>>>;
+using Pure = std::remove_cv_t<RemoveAllPointers_t<std::decay_t<_Type>>>;
 
 template <typename _Type, typename... _Types>
 constexpr bool IsAllSameValue = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
@@ -107,13 +107,16 @@ template <typename _Type, typename... _Types>
 constexpr bool IsAnyValue = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
 
 template <typename _Type>
-constexpr bool IsPureValue = std::is_same_v<Pure_t<_Type>, _Type>;
+constexpr bool IsPureValue = std::is_same_v<Pure<_Type>, _Type>;
 
 template <typename _Type>
 constexpr bool IsCharValue = IsAnyValue<_Type, char, char16_t, char32_t, wchar_t>;
     
 template <typename _Type>
-constexpr bool IsCharPointerValue = IsCharValue<Pure_t<_Type>> && (std::is_pointer_v<_Type> || std::is_reference_v<_Type>);
+constexpr bool IsCharPointerValue = IsCharValue<Pure<_Type>> && std::is_pointer_v<_Type>;
+
+template <typename _Type>
+constexpr bool IsCharReferenceValue = IsCharValue<Pure<_Type>> && std::is_reference_v<_Type>;
 
 template <typename _Type>
 constexpr bool IsBasicStringValue = IsBasicString<_Type>::value;

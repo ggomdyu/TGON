@@ -8,9 +8,6 @@
 #pragma once
 #include <type_traits>
 #include <cstring>
-#include <cstdint>
-#include <utility>
-#include <new>
 
 #include "TypeTraits.h"
 
@@ -49,7 +46,7 @@ public:
 /**@section Operator */
 public:
     Delegate& operator=(const Delegate& rhs);
-    Delegate& operator=(Delegate&& rhs);
+    Delegate& operator=(Delegate&& rhs) noexcept;
     constexpr bool operator==(std::nullptr_t rhs) const noexcept;
     constexpr bool operator!=(std::nullptr_t rhs) const noexcept;
     constexpr bool operator==(const Delegate& rhs) const noexcept;
@@ -224,7 +221,7 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs)
+inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs) noexcept
 {
     if (this == &rhs)
     {
@@ -370,18 +367,18 @@ inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
     return sizeof(_FunctionType);
 }
     
-template <auto _Function>
-auto MakeDelegate(typename FunctionTraits<decltype(_Function)>::ClassType* receiver)
+template <auto Function>
+auto MakeDelegate(typename FunctionTraits<decltype(Function)>::ClassType* receiver)
 {
-    using ClassType = typename FunctionTraits<decltype(_Function)>::ClassType;
+    using ClassType = typename FunctionTraits<decltype(Function)>::ClassType;
     
-    return Delegate<typename FunctionTraits<decltype(_Function)>::FunctionType>::template MakeDelegate<ClassType, _Function>(receiver);
+    return Delegate<typename FunctionTraits<decltype(Function)>::FunctionType>::template MakeDelegate<ClassType, Function>(receiver);
 }
 
-template <auto _Function>
+template <auto Function>
 auto MakeDelegate()
 {
-    return Delegate<typename FunctionTraits<decltype(_Function)>::FunctionType>::template MakeDelegate<_Function>();
+    return Delegate<typename FunctionTraits<decltype(Function)>::FunctionType>::template MakeDelegate<Function>();
 }
 
 template <typename _FunctionType>

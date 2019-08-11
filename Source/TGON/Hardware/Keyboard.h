@@ -13,6 +13,8 @@
 #   include "MacOS/MacOSKeyboard.h"
 #endif
 
+#include "InputManager.h"
+
 namespace tgon
 {
 
@@ -21,14 +23,16 @@ class TGON_API Keyboard final :
 {
 /**@section Constructor */
 public:
-    using PlatformKeyboard::PlatformKeyboard;
-    
+    explicit Keyboard(InputManager& inputManager);
+
 /**@section Method */
 public:
-    using PlatformKeyboard::Update;
-    using PlatformKeyboard::IsKeyDown;
-    using PlatformKeyboard::IsKeyHold;
-    using PlatformKeyboard::IsKeyUp;  
+    PlatformKeyboard& GetPlatformDependency() noexcept;
+    const PlatformKeyboard& GetPlatformDependency() const noexcept;
+    void Update();
+    bool IsKeyDown(KeyCode keyCode) const;
+    bool IsKeyHold(KeyCode keyCode) const;
+    bool IsKeyUp(KeyCode keyCode) const;
 };
     
 } /* namespace tgon */

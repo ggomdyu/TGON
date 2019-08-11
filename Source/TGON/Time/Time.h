@@ -16,6 +16,4 @@ namespace tgon
 /**@brief   Gets the milliseconds that have elapsed since the system was started. */
 TGON_API int64_t GetTickCount();
 
-TGON_API int64_t GetUnixTimestamp();
-
 } /* namespace tgon */

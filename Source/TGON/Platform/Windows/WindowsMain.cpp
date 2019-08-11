@@ -24,13 +24,13 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     using namespace tgon;
 
     // Initialize singleton objects.
-    decltype(auto) application = Application::GetInstance();
+    Application& application = Application::GetInstance();
 
-    application->OnLaunch();
+    application.OnLaunch();
     {
-        application->MessageLoop();
+        application.MessageLoop();
     }
-    application->OnTerminate();
+    application.OnTerminate();
 
     return 0;
 }

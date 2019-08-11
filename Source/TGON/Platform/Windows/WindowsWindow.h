@@ -16,9 +16,6 @@
 #include <boost/noncopyable.hpp>
 
 #include "Platform/Config.h"
-#include "Core/DelegateChain.h"
-
-#include "../WindowType.h"
 
 namespace tgon
 {
@@ -27,60 +24,29 @@ class TGON_API WindowsWindow :
     private boost::noncopyable
 {
 /**@section Constructor */
+protected:
+    explicit WindowsWindow(HWND wndHandle) noexcept;
+    WindowsWindow(WindowsWindow&& rhs) noexcept;
+
+/**@section Operator */
 public:
-    explicit WindowsWindow(const WindowStyle& windowStyle);
+    WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
 
 /**@section Method */
 public:
-    void Show();
-    void Hide();
-    void Close();
-    void Maximize();
-    void Minimize();
-    void BringToFront();
-    void Flash();
-    void SetPosition(int32_t x, int32_t y);
-    void SetContentSize(int32_t width, int32_t height);
-    void SetTitle(const std::string_view& title);
-    void SetTopMost(bool setTopMost);
-    void SetTransparency(float transparency);
-    void GetPosition(int32_t* x, int32_t* y) const;
-    void GetExtent(int32_t* width, int32_t* height) const;
-    void GetTitle(char* destTitle) const;
-    float GetTransparency() const;
-    void* GetNativeWindow() const;
-    bool HasCaption() const;
-    bool IsResizable() const;
-    bool IsMaximized() const;
-    bool IsMinimized() const;
-    bool IsTopMost() const;
     void SetRawWindowStyle(DWORD rawWindowStyle);
     void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
     LONG_PTR GetRawWindowStyle() const;
     LONG_PTR GetRawWindowStyleEx() const;
-
-private:
     void SetUserData(void* data);
 
 /**@section Event handler */
 public:
     LRESULT OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam);
 
-    DelegateChain<void(int32_t, int32_t)> OnMove;
-    DelegateChain<void(int32_t, int32_t)> OnResize;
-    DelegateChain<void()> OnMaximize;
-    DelegateChain<void()> OnMinimize;
-    DelegateChain<void()> OnEnterFullScreen;
-    DelegateChain<void()> OnExitFullScreen;
-    DelegateChain<void()> OnWillClose;
-    DelegateChain<void()> OnDidClose;
-    DelegateChain<void()> OnGetFocus;
-    DelegateChain<void()> OnLoseFocus;
-
 /**@section Variable */
-private:
+protected:
     HWND m_wndHandle;
-    bool m_isDwmCompositionEnabled;
 };
 
 using PlatformWindow = WindowsWindow;

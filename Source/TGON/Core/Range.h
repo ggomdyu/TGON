@@ -22,11 +22,7 @@ public:
     
 /**@section Constructor */
 public:
-    Range(IteratorType begin, IteratorType end) noexcept :
-        m_begin(begin),
-        m_end(end)
-    {
-    }
+    Range(IteratorType begin, IteratorType end) noexcept;
     
 /**@section Method */
 public:
@@ -44,6 +40,13 @@ private:
     IteratorType m_begin;
     IteratorType m_end;
 };
+
+template <typename _ValueType>
+inline Range<_ValueType>::Range(IteratorType begin, IteratorType end) noexcept :
+    m_begin(begin),
+    m_end(end)
+{
+}
 
 template <typename _ValueType>
 inline typename Range<_ValueType>::IteratorType Range<_ValueType>::begin() noexcept

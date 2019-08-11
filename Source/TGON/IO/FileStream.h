@@ -6,7 +6,6 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <numeric>
 #include <vector>
 
 #include "Stream.h"
@@ -53,8 +52,7 @@ enum class FileOptions
 };
 
 class TGON_API FileStream :
-    public Stream,
-    private boost::noncopyable
+    public Stream
 {
 /**@section Constructor */
 public:
@@ -68,7 +66,7 @@ public:
 
 /**@section Destructor */
 public:
-    ~FileStream();
+    virtual ~FileStream() override;
     
 /**@section Operator */
 public:
@@ -81,40 +79,37 @@ public:
     virtual bool CanRead() const override;
     virtual bool CanSeek() const override;
     virtual bool CanWrite() const override;
-    virtual bool IsAsync() const override;
     virtual void SetLength(int64_t value) override;
     virtual int64_t Length() const override;
     virtual int64_t Position() const override;
-    const std::string& Name() const noexcept;
-    virtual int32_t Read(uint8_t* buffer, int32_t offset, int32_t count) override;
+    virtual int32_t Read(uint8_t* buffer, int32_t count) override;
     virtual int32_t ReadByte() override;
-    virtual bool Write(uint8_t* buffer, int32_t offset, int32_t count) override;
+    virtual bool Write(uint8_t* buffer, int32_t count) override;
     virtual bool WriteByte(uint8_t value) override;
     virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
     virtual void Close() override;
-    /*virtual SafeFileHandle SafeFileHandle
-    FileStream(SafeFileHandle handle, FileAccess access)
-    FileStream(SafeFileHandle handle, FileAccess access, int bufferSize)
-    FileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
+    const std::string& Name() const noexcept;
+    /*
     override IAsyncResult BeginRead(byte[] array, int offset, int numBytes, AsyncCallback callback, object state)
     override IAsyncResult BeginWrite(byte[] array, int offset, int numBytes, AsyncCallback callback, object state)
-    override void Dispose(bool disposing)
     override int EndRead(IAsyncResult asyncResult)
     override void EndWrite(IAsyncResult asyncResult)
-    override void Flush()
-    virtual void Flush(bool flushToDisk)
     override Task FlushAsync(CancellationToken cancellationToken)
+    override void Flush()
+    override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
+    virtual void Flush(bool flushToDisk)
     virtual void Lock(long position, long length)
     override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     virtual void Unlock(long position, long length)
-    override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
     */
 
 private:
     bool IsClosed() const noexcept;
     std::vector<uint8_t>& GetBuffer() noexcept;
     void FlushWriteBuffer();
-    void FlushWriteBufferAsync();
+    int32_t ReadCore(uint8_t* buffer, int32_t count);
+    int32_t WriteCore(uint8_t* buffer, int32_t count);
+    int64_t SeekCore(int64_t offset, SeekOrigin origin);
 
 /**@section Variable */
 private:
@@ -126,10 +121,9 @@ private:
     std::vector<uint8_t> m_buffer;
     int32_t m_bufferSize;
     int32_t m_readPos;
+    int32_t m_readLen;
     int32_t m_writePos;
-    int32_t m_filePosition;
-    bool m_canSeek;
-    bool m_isUseAsync;
+    int64_t m_filePos;
     FileAccess m_access;
     std::string m_fileName;    
 };

@@ -13,7 +13,7 @@
 #if defined(_DEBUG) || defined(NDEBUG)
 #   define TGON_STRINGIFY(m) #m
 #   define TGON_EXPECT(e)\
-if (!e)\
+if (e == false)\
 {\
     throw std::logic_error("Span expected:" TGON_STRINGIFY(e));\
 }
@@ -93,9 +93,7 @@ class Span final :
 public:
     using ElementType = _ElementType;
     using PointerType = _ElementType*;
-    using ConstointerType = const _ElementType*;
     using ReferenceType = _ElementType&;
-    using ConstReferenceType = const _ElementType&;
 
 private:
     using SpanStorageType = detail::SpanStorage<_ElementType, Extent>;
@@ -110,8 +108,7 @@ public:
     
 /**@section Operator */
 public:
-    constexpr ReferenceType operator[](int32_t index);
-    constexpr ConstReferenceType operator[](int32_t index) const;
+    constexpr ReferenceType operator[](int32_t index) const;
     
 /**@section Method */
 public:
@@ -176,16 +173,10 @@ constexpr Span<_ElementType, Extent>::Span(_ElementType(&arr)[Extent]) noexcept 
 }
 
 template <typename _ElementType, int32_t Extent>
-constexpr typename Span<_ElementType, Extent>::ReferenceType Span<_ElementType, Extent>::operator[](int32_t index)
+constexpr typename Span<_ElementType, Extent>::ReferenceType Span<_ElementType, Extent>::operator[](int32_t index) const
 {
     TGON_EXPECT(index >= 0 && index < m_size);
     return m_data[index];
-}
-
-template <typename _ElementType, int32_t Extent>
-constexpr typename Span<_ElementType, Extent>::ConstReferenceType Span<_ElementType, Extent>::operator[](int32_t index) const
-{
-    return const_cast<decltype(this)>(this)->operator[](index);
 }
 
 template <typename _ElementType, int32_t Extent>
@@ -216,7 +207,11 @@ constexpr Span<_ElementType> Span<_ElementType, Extent>::Slice(int32_t start, in
 
 template <typename _ElementType, int32_t Extent>
 template <int32_t Start, int32_t Extent2>
+#if _MSC_VER
+constexpr typename Span<_ElementType, Extent>::SubSpanType<Start, Extent2> Span<_ElementType, Extent>::Slice() const
+#else
 constexpr typename Span<_ElementType, Extent>::template SubSpanType<Start, Extent2> Span<_ElementType, Extent>::Slice() const
+#endif
 {
     TGON_EXPECT((Start >= 0 && Start <= N) && (Extent2 != detail::DynamicExtent || Extent2 <= Extent));
     return {m_data + Start, Start + Extent2};

@@ -30,7 +30,7 @@ UIRenderer::UIRenderer() :
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_T2F), offsetof(V3F_T2F, uv))
     }),
-    m_renderTarget({Application::GetInstance()->GetRootWindow()->GetExtent(), 24})
+    m_renderTarget({Application::GetInstance().GetRootWindow()->GetExtent(), 24})
 {   
     this->PrepareDefaultMaterials();
 }

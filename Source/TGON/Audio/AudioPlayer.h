@@ -6,8 +6,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Math/Vector3.h"
 
 #include "AudioBuffer.h"
@@ -15,7 +13,7 @@
 namespace tgon
 {
 
-class AudioPlayer final :
+class TGON_API AudioPlayer final :
     private boost::noncopyable
 {
 /**@section Constructor */
@@ -56,13 +54,13 @@ public:
     bool IsLooping() const;
 
 private:
-    ALuint CreateALSourceHandle() const;
+    static ALuint CreateALSourceHandle();
     void Destroy();
 
 /**@section Variable */
 private:
-    std::shared_ptr<AudioBuffer> m_audioBuffer;
     ALuint m_alSource;
+    std::shared_ptr<AudioBuffer> m_audioBuffer;
 };
 
 class StreamAudioPlayer

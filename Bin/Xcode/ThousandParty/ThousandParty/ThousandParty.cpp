@@ -35,7 +35,7 @@ void ThousandParty::InitializeModule()
     using namespace tgon;
 
     // Input Module
-    const auto& rootWindow = Application::GetInstance()->GetRootWindow();
+    decltype(auto) rootWindow = Application::GetInstance().GetRootWindow();
     InputMode inputMode;
     {
         inputMode.isUseMouse = false;

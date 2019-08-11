@@ -109,9 +109,6 @@
     <Filter Include="Source\ThirdParty\icu4c-64_2\common\unicode">
       <UniqueIdentifier>{fd864ff1-ef22-4943-afb0-6b72f0f46f56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Test">
-      <UniqueIdentifier>{eaf823de-98a4-410f-9c5b-563d3ddac005}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON\Math">
       <UniqueIdentifier>{18d2a407-7212-46fa-8195-18f41273558f}</UniqueIdentifier>
     </Filter>
@@ -206,9 +203,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\Hash.cpp">
       <Filter>Source\TGON\String</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Time.cpp">
-      <Filter>Source\TGON\Time</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\Timer.cpp">
       <Filter>Source\TGON\Time</Filter>
@@ -468,7 +462,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\File.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\appendable.cpp">
       <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
     </ClCompile>
@@ -1045,14 +1038,30 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\DateTime.cpp">
       <Filter>Source\TGON\Time</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\FileStream.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\RectTransform.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UIRenderer.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.cpp">
+      <Filter>Source\TGON\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Keyboard.cpp">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -1286,13 +1295,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Keyboard.h">
       <Filter>Source\TGON\Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\KeyboardType.h">
-      <Filter>Source\TGON\Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Mouse.h">
-      <Filter>Source\TGON\Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\MouseType.h">
       <Filter>Source\TGON\Hardware</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Path.h">
@@ -1325,9 +1328,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\Application.h">
       <Filter>Source\TGON\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\ApplicationType.h">
-      <Filter>Source\TGON\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\Config.h">
       <Filter>Source\TGON\Platform</Filter>
     </ClInclude>
@@ -1344,9 +1344,6 @@
       <Filter>Source\TGON\Platform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\Window.h">
-      <Filter>Source\TGON\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\WindowType.h">
       <Filter>Source\TGON\Platform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Random\WeightSelector.h">
@@ -1841,7 +1838,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\File.h">
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\CanvasRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeSpan.h">
       <Filter>Source\TGON\Time</Filter>
     </ClInclude>
@@ -2463,23 +2459,29 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeZoneInfo.h">
       <Filter>Source\TGON\Time</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Test\IO\FileTest.h">
-      <Filter>Source\TGON</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Test\String\FixedStringTest.h">
-      <Filter>Source\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\FileStream.h">
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.h">
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Span.h">
       <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\RectTransform.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UIRenderer.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISprite.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\UISpriteBatch.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Diagnostics\Debug.h">
+      <Filter>Source\TGON\Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

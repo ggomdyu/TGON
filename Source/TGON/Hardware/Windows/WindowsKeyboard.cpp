@@ -1,26 +1,38 @@
 #include "PrecompiledHeader.h"
 
-#include <OIS.h>
-
-#include "WindowsKeyboard.h"
-#include "WindowsKeyboardType.h"
+#include "../Keyboard.h"
 
 namespace tgon
 {
 
-WindowsKeyboard::WindowsKeyboard(OIS::Keyboard* nativeKeyboard) :
+WindowsKeyboard::WindowsKeyboard(OIS::Keyboard* nativeKeyboard) noexcept :
     m_nativeKeyboard(nativeKeyboard),
     m_currKeyStates{}
 {
 }
 
-void WindowsKeyboard::Update()
+OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() noexcept
 {
-    m_nativeKeyboard->copyKeyStates(m_currKeyStates);
+    return m_nativeKeyboard;
+}
+
+const OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() const noexcept
+{
+    return m_nativeKeyboard;
+}
+
+Keyboard::Keyboard(InputManager& inputManager) :
+    WindowsKeyboard(inputManager.GetPlatformDependency().CreateNativeKeyboard())
+{
+}
+
+void Keyboard::Update()
+{
+    m_nativeKeyboard->copyKeyStates(m_currKeyStates.data());
     m_nativeKeyboard->capture();
 }
 
-bool WindowsKeyboard::IsKeyDown(KeyCode keyCode) const
+bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
     if ((m_currKeyStates[static_cast<char>(keyCode)] == 0) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
@@ -33,7 +45,7 @@ bool WindowsKeyboard::IsKeyDown(KeyCode keyCode) const
     }
 }
 
-bool WindowsKeyboard::IsKeyHold(KeyCode keyCode) const
+bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
     if ((m_currKeyStates[static_cast<char>(keyCode)] == 1) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
@@ -46,7 +58,7 @@ bool WindowsKeyboard::IsKeyHold(KeyCode keyCode) const
     }
 }
 
-bool WindowsKeyboard::IsKeyUp(KeyCode keyCode) const
+bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
     if ((m_currKeyStates[static_cast<char>(keyCode)] == 1) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)) == false)
@@ -57,16 +69,6 @@ bool WindowsKeyboard::IsKeyUp(KeyCode keyCode) const
     {
         return false;
     }
-}
-
-const OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() const noexcept
-{
-    return m_nativeKeyboard;
-}
-
-OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() noexcept
-{
-    return m_nativeKeyboard;
 }
 
 } /* namespace tgon */

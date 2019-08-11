@@ -14,6 +14,8 @@
 #   include "MacOS/MacOSMouse.h"
 #endif
 
+#include "InputManager.h"
+
 namespace tgon
 {
     
@@ -22,16 +24,18 @@ class TGON_API Mouse final :
 {
 /**@section Constructor */
 public:
-    using PlatformMouse::PlatformMouse;
-    
+    explicit Mouse(InputManager& inputManager);
+
 /**@section Method */
 public:
+    PlatformMouse& GetPlatformDependency() noexcept;
+    const PlatformMouse& GetPlatformDependency() const noexcept;
+    void Update();
+    static void GetPosition(int32_t* x, int32_t* y);
     static I32Point GetPosition();
-    using PlatformMouse::GetPosition;
-    using PlatformMouse::Update;
-    using PlatformMouse::IsMouseDown;
-    using PlatformMouse::IsMouseHold;
-    using PlatformMouse::IsMouseUp;
+    bool IsMouseDown(MouseCode mouseCode) const;
+    bool IsMouseHold(MouseCode mouseCode) const;
+    bool IsMouseUp(MouseCode mouseCode) const;
 };
     
 } /* namespace tgon */

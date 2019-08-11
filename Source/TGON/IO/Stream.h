@@ -5,10 +5,11 @@
  */
 
 #pragma once
+#include <boost/noncopyable.hpp>
 #include <cstdint>
-#include <string>
 
 #include "Platform/Config.h"
+#include "Core/Span.h"
 
 namespace tgon
 {
@@ -20,20 +21,26 @@ enum class SeekOrigin
     End
 };
  
-class TGON_API Stream
+class TGON_API Stream :
+    private boost::noncopyable
 {
+/**@section Destructor */
+public:
+    virtual ~Stream() = default;
+    
 /**@section Method */
 public:
     virtual bool CanRead() const = 0;
     virtual bool CanSeek() const = 0;
     virtual bool CanWrite() const = 0;
-    virtual bool IsAsync() const = 0;
     virtual void SetLength(int64_t value) = 0;
     virtual int64_t Length() const = 0;
     virtual int64_t Position() const = 0;
-    virtual int32_t Read(uint8_t* buffer, int32_t offset, int32_t count) = 0;
+    int32_t Read(const Span<uint8_t>& buffer);
+    virtual int32_t Read(uint8_t* buffer, int32_t count) = 0;
     virtual int32_t ReadByte() = 0;
-    virtual bool Write(uint8_t* buffer, int32_t offset, int32_t count) = 0;
+    bool Write(const Span<uint8_t>& buffer);
+    virtual bool Write(uint8_t* buffer, int32_t count) = 0;
     virtual bool WriteByte(uint8_t value) = 0;
     virtual int64_t Seek(int64_t offset, SeekOrigin origin) = 0;
     virtual void Close() = 0;

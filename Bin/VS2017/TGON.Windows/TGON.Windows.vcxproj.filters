@@ -26,12 +26,6 @@
     <Filter Include="Sources\TGON\Diagnostics\Windows">
       <UniqueIdentifier>{a6eb22fc-72ef-41cd-a92b-ab6d5605928e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\TGON\Drawing">
-      <UniqueIdentifier>{3d26fa01-b09b-45b2-a39e-55de6664961d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\TGON\Drawing\Windows">
-      <UniqueIdentifier>{a2fa8450-0995-4834-b663-09b9be0a5b56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\TGON\Graphics">
       <UniqueIdentifier>{199d87c5-5539-4d79-bb39-42985801adec}</UniqueIdentifier>
     </Filter>
@@ -103,26 +97,14 @@
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepad.h">
       <Filter>Sources\TGON\Hardware\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepadType.h">
-      <Filter>Sources\TGON\Hardware\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsInputManager.h">
       <Filter>Sources\TGON\Hardware\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.h">
       <Filter>Sources\TGON\Hardware\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboardType.h">
-      <Filter>Sources\TGON\Hardware\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouse.h">
       <Filter>Sources\TGON\Hardware\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouseType.h">
-      <Filter>Sources\TGON\Hardware\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\Misc\AutoReleaseDC.h">
-      <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\TGON\Platform\Windows</Filter>
@@ -131,9 +113,6 @@
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.h">
-      <Filter>Sources\TGON\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindowUtility.h">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Misc\Windows\SafeFileHandle.h">
@@ -177,9 +156,6 @@
     <ClCompile Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.cpp">
       <Filter>Sources\ThirdParty\StackWalker-1.20</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Drawing\Windows\WindowsDrawing.cpp">
-      <Filter>Sources\TGON\Drawing\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp">
       <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>
     </ClCompile>
@@ -211,9 +187,6 @@
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Sources\TGON\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindowUtility.cpp">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Time\Windows\WindowsTime.cpp">

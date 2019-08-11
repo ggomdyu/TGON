@@ -90,13 +90,6 @@ public:
     {
     }
     
-    /**@brief   Initializes with character array. */
-    template <std::size_t _CharBufferSize>
-    constexpr BasicStringHash(const ValueType(&str)[_CharBufferSize]) noexcept :
-        BasicStringHash({str, _CharBufferSize - 1})
-    {
-    }
-
     /**@brief   Initializes with string_view. */
     constexpr BasicStringHash(const std::basic_string_view<ValueType>& str) noexcept :
         SuperType(str.data()),
@@ -205,7 +198,7 @@ class BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<
 {
 /**@section Type */
 public:
-    using ValueType = Pure_t<_StringType>;
+    using ValueType = Pure<_StringType>;
     using SuperType = detail::BaseBasicStringHash<BasicStringHash<_StringType, typename std::enable_if_t<IsCharPointerValue<_StringType>>>>;
     using StringType = _StringType;
     

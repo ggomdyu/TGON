@@ -5,6 +5,39 @@
 namespace tgon
 {
 
+Window::Window(Window&& rhs) noexcept :
+    PlatformWindow(std::move(rhs)),
+    OnMove(std::move(rhs.OnMove)),
+    OnResize(std::move(rhs.OnResize)),
+    OnMaximize(std::move(rhs.OnMaximize)),
+    OnMinimize(std::move(rhs.OnMinimize)),
+    OnEnterFullScreen(std::move(rhs.OnEnterFullScreen)),
+    OnExitFullScreen(std::move(rhs.OnExitFullScreen)),
+    OnWillClose(std::move(rhs.OnWillClose)),
+    OnDidClose(std::move(rhs.OnDidClose)),
+    OnGetFocus(std::move(rhs.OnGetFocus)),
+    OnLoseFocus(std::move(rhs.OnLoseFocus))
+{
+}
+
+Window& Window::operator=(Window&& rhs) noexcept
+{
+    PlatformWindow::operator=(std::move(rhs));
+
+    OnMove = std::move(rhs.OnMove);
+    OnResize = std::move(rhs.OnResize);
+    OnMaximize = std::move(rhs.OnMaximize);
+    OnMinimize = std::move(rhs.OnMinimize);
+    OnEnterFullScreen = std::move(rhs.OnEnterFullScreen);
+    OnExitFullScreen = std::move(rhs.OnExitFullScreen);
+    OnWillClose = std::move(rhs.OnWillClose);
+    OnDidClose = std::move(rhs.OnDidClose);
+    OnGetFocus = std::move(rhs.OnGetFocus);
+    OnLoseFocus = std::move(rhs.OnLoseFocus);
+
+    return *this;
+}
+
 I32Point Window::GetPosition() const
 {
     I32Point::ValueType x, y;
@@ -21,14 +54,14 @@ I32Extent2D Window::GetExtent() const
     return {width, height};
 }
     
-PlatformWindow* Window::GetPlatformDependency() noexcept
+PlatformWindow& Window::GetPlatformDependency() noexcept
 {
-    return this;
+    return *this;
 }
 
-const PlatformWindow* Window::GetPlatformDependency() const noexcept
+const PlatformWindow& Window::GetPlatformDependency() const noexcept
 {
-    return this;
+    return *this;
 }
 
 } /* namespace tgon */

@@ -7,7 +7,6 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <vector>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -24,30 +23,31 @@
 namespace tgon
 {
 
-class TGON_API AudioBuffer final :
-    private boost::noncopyable
+class TGON_API AudioBuffer
 {
 /**@section Constructor */
 public:
     AudioBuffer();
 
     /**
-     * @brief   Reads audio data from the path specified by filePath.
+     * @brief   Reads the audio data from the directory specified by filePath.
      * @param [in] filePath     The file path of the audio file
      */
     explicit AudioBuffer(const std::string& filePath);
 
     /**
-     * @brief   Reads audio file data from memory.
+     * @brief   Reads the audio data from the file memory.
      * @param [in] fileData         The pointer to audio data
      * @param [in] fileDataBytes    The bytes of the audio data
      */
     AudioBuffer(const uint8_t* fileData, std::size_t fileDataBytes);
 
+    AudioBuffer(const AudioBuffer& rhs) = delete;
     AudioBuffer(AudioBuffer&& rhs) = default;
 
 /**@section Operator */
 public:
+    AudioBuffer& operator=(const AudioBuffer& rhs) = delete;
     AudioBuffer& operator=(AudioBuffer&& rhs) = default;
 
 /**@section Destructor */
@@ -93,18 +93,17 @@ public:
 
 private:
     bool Decode(const uint8_t* fileData, std::size_t fileDataBytes, AudioFormat audioFormat);
-    bool SetAudioData(const uint8_t* audioData, ALsizei audioDataBytes, ALenum alFormat, int32_t samplingRate);
 
 /**@section Variable */
 private:
     std::string m_filePath;
     std::unique_ptr<uint8_t[]> m_audioData;
+    ALuint m_alBufferId;
     size_t m_audioDataBytes;
     int32_t m_bitsPerSample;
     int32_t m_channels;
     int32_t m_samplingRate;
     ALenum m_alFormat;
-    ALuint m_alBufferId;
 };
 
 } /* namespace tgon */

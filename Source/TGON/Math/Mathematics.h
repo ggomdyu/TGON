@@ -8,17 +8,16 @@
 #include <algorithm>
 #include <cmath>
 #include <type_traits>
-#include <cstdint>
 
 #include "Vector3.h"
 
 namespace tgon
 {
 
-constexpr const float Pi = 3.14159265358f;
+constexpr float Pi = 3.14159265358f;
 
-constexpr const float Deg2Rad = Pi / 180;
-constexpr const float Rad2Deg = 180 / Pi;
+constexpr float Deg2Rad = Pi / 180;
+constexpr float Rad2Deg = 180 / Pi;
 
 /**
  * @brief   Returns the greatest common divisor using Euclidean algorithm.
@@ -26,9 +25,9 @@ constexpr const float Rad2Deg = 180 / Pi;
  */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr const _ValueType Gcd(const _ValueType& first, const _ValueType& second)
+constexpr _ValueType Gcd(const _ValueType& first, const _ValueType& second)
 {
-    _ValueType mod;
+    _ValueType mod {};
     while (second != 0)
     {
         mod = first % second;
@@ -43,7 +42,7 @@ constexpr const _ValueType Gcd(const _ValueType& first, const _ValueType& second
 /**@brief   Returns the least common multiple. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
-constexpr const _ValueType Lcm(const _ValueType& first, const _ValueType& second)
+constexpr _ValueType Lcm(const _ValueType& first, const _ValueType& second)
 {
     return (first * second) / Gcd(first, second);
 }
@@ -51,7 +50,7 @@ constexpr const _ValueType Lcm(const _ValueType& first, const _ValueType& second
 /**@brief   Discards fractional part of floating point value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
-constexpr const _ValueType Floor(const _ValueType& value) noexcept
+constexpr _ValueType Floor(const _ValueType& value) noexcept
 {
     return std::floor(value);
 }
@@ -66,7 +65,7 @@ constexpr _ValueType Ceil(const _ValueType& value) noexcept
 /**@brief   Round off the given floating point value. */
 template <typename _ValueType,
           typename = typename std::enable_if<std::is_floating_point<_ValueType>::value>::type>
-constexpr const _ValueType Round(const _ValueType& value) noexcept
+constexpr _ValueType Round(const _ValueType& value) noexcept
 {
     return std::round(value);
 }
@@ -147,7 +146,7 @@ constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
         return (value == 2);
     }
 
-    for (int i = 3; i < value; ++i)
+    for (decltype(value) i = 3; i < value; ++i)
     {
         if (value % i == 0)
         {
@@ -166,7 +165,7 @@ constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
  * @return  Returns Interpolated value
  */
 template <typename _ValueType>
-constexpr const _ValueType Lerp(const _ValueType& from, const _ValueType& to, float time) noexcept
+constexpr _ValueType Lerp(const _ValueType& from, const _ValueType& to, float time) noexcept
 {
     return from + ((to - from) * time);
 }
@@ -185,7 +184,7 @@ constexpr float Smoothstep(float from, float to, float time) noexcept
  * @param [in] time     Elapsed time ratio between 0.0 ~ 1.0
  * @return  Returns Interpolated vertex.
  */
-constexpr const Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
+constexpr Vector3 QuadraticBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, float time) noexcept
 {
     float invTime = 1.0f - time;
     return {(invTime * invTime * v1) + (2.0f * time * invTime * v2) + (time * invTime * v3)};

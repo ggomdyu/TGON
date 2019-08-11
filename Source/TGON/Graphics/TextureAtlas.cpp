@@ -5,8 +5,6 @@
 #define STB_RECT_PACK_IMPLEMENTATION
 #include <stb/stb_rect_pack.h>
 
-#include "String/Hash.h"
-
 namespace tgon
 {
 
@@ -14,6 +12,7 @@ TextureAtlas::TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelF
     m_atlasTexture(std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, true)),
     m_context{},
     m_nodes{},
+    m_nodeRects{},
     m_paddingOffset(paddingOffset)
 {
     stbrp_init_target(&m_context, atlasSize.width, atlasSize.height, m_nodes, std::extent<decltype(m_nodes)>::value);

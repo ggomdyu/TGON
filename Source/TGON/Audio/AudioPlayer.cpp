@@ -177,7 +177,7 @@ bool AudioPlayer::IsLooping() const
     return isLooping == AL_TRUE ? true : false;
 }
 
-ALuint AudioPlayer::CreateALSourceHandle() const
+ALuint AudioPlayer::CreateALSourceHandle()
 {
     ALuint alSource;
     alGenSources(1, &alSource);

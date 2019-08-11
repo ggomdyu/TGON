@@ -8,17 +8,15 @@
 #include <memory>
 
 #include "Hardware/InputManager.h"
+#include "Hardware/Keyboard.h"
+#include "Hardware/Mouse.h"
+#include "Hardware/Gamepad.h"
 
 #include "IModule.h"
 
 namespace tgon
 {
     
-class Keyboard;
-class Mouse;
-class Gamepad;
-class Window;
-
 struct InputMode final
 {
 /**@section Variable */
@@ -27,7 +25,7 @@ struct InputMode final
     bool isUseGamepad = false;
 };
 
-class TGON_API InputModule :
+class TGON_API InputModule final :
     public IModule
 {
 public:
@@ -37,25 +35,22 @@ public:
 public:
     explicit InputModule(const Window& inputTarget, const InputMode& inputMode = {});
 
-/**@section Destructor */
-public:
-    virtual ~InputModule() final override;
-
 /**@section Method */
 public:
-    virtual void Update() final override;
-    
-    const std::unique_ptr<Mouse>& GetMouse() const noexcept;
-    const std::unique_ptr<Keyboard>& GetKeyboard() const noexcept;
-    const std::unique_ptr<Gamepad>& GetGamepad() const noexcept;
+    virtual void Update() override;
+    std::shared_ptr<Mouse> GetMouse() noexcept;
+    std::shared_ptr<const Mouse> GetMouse() const noexcept;
+    std::shared_ptr<Keyboard> GetKeyboard() noexcept;
+    std::shared_ptr<const Keyboard> GetKeyboard() const noexcept;
+    std::shared_ptr<Gamepad> GetGamepad() noexcept;
+    std::shared_ptr<const Gamepad> GetGamepad() const noexcept;
 
 /**@section Variable */
 public:
     InputManager m_inputManager;
-
-    std::unique_ptr<Keyboard> m_keyboard;
-    std::unique_ptr<Mouse> m_mouse;
-    std::unique_ptr<Gamepad> m_gamepad;
+    std::shared_ptr<Keyboard> m_keyboard;
+    std::shared_ptr<Mouse> m_mouse;
+    std::shared_ptr<Gamepad> m_gamepad;
 };
 
 } /* namespace tgon */

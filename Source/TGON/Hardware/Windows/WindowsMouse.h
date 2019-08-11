@@ -6,46 +6,59 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <memory>
+#include <OIS.h>
 
 #include "Platform/Config.h"
-
-#include "WindowsMouseType.h"
-
-namespace OIS
-{
-
-class Mouse;
-class MouseState;
-
-} /* namespace OIS */
 
 namespace tgon
 {
 
-class WindowsInputManager;
+enum class MouseCode
+{
+    Mouse0  = OIS::MB_Left,
+    Mouse1  = OIS::MB_Right,
+    Mouse2  = OIS::MB_Middle,
+    Mouse3  = OIS::MB_Button3,
+    Mouse4  = OIS::MB_Button4,
+    Mouse5  = OIS::MB_Button5,
+    Mouse6  = OIS::MB_Button6,
+    Mouse7  = OIS::MB_Button7,
+    Mouse8,
+    Mouse9,
+    Mouse10,
+    Mouse11,
+    Mouse12,
+    Mouse13,
+    Mouse14,
+    Mouse15,
+    Mouse16,
+    Mouse17,
+    Mouse18,
+    Mouse19,
+    Mouse20,
+    Left = Mouse0,
+    Middle = Mouse1,
+    Right = Mouse2,
+    WheelUp = Mouse3,
+    WheelDown = Mouse4,
+};
 
 class TGON_API WindowsMouse :
     private boost::noncopyable
 {
 /**@section Constructor */
-public:
+protected:
     explicit WindowsMouse(OIS::Mouse* nativeMouse) noexcept;
-
+    
 /**@section Method */
 public:
-    void Update();
-    static void GetPosition(int32_t* x, int32_t* y);
-    bool IsMouseDown(MouseCode mouseCode) const;
-    bool IsMouseHold(MouseCode mouseCode) const;
-    bool IsMouseUp(MouseCode mouseCode) const;
-    const OIS::Mouse* GetNativeMouse() const;
-    OIS::Mouse* GetNativeMouse();
+    OIS::Mouse* GetNativeMouse() noexcept;
+    const OIS::Mouse* GetNativeMouse() const noexcept;
 
 /**@section Variable */
-private:
+protected:
     OIS::Mouse* m_nativeMouse;
-    std::shared_ptr<OIS::MouseState> m_currMouseState;
+    OIS::MouseState m_currMouseState;
 };
 
 using PlatformMouse = WindowsMouse;

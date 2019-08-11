@@ -5,47 +5,30 @@
  */
 
 #pragma once
-#include <memory>
-#include <OIS.h>
 #include <boost/noncopyable.hpp>
-
-#include "Platform/Config.h"
+#include <OIS.h>
 
 #pragma comment(lib, "dinput8.lib")
 
-namespace OIS
-{
-
-} /* namespace OIS */
-
 namespace tgon
 {
-
-class WindowsWindow;
 
 class TGON_API WindowsInputManager :
     private boost::noncopyable
 {
 /**@section Constructor */
-public:
-    explicit WindowsInputManager(const WindowsWindow& inputTarget);
-    
-/**@section Destructor */
-public:
-    ~WindowsInputManager();
+protected:
+    explicit WindowsInputManager(OIS::InputManager* inputManager) noexcept;
 
 /**@section Method */
-public:
-    void Update();
-
-protected:
+public:    
     OIS::Mouse* CreateNativeMouse();
     OIS::Keyboard* CreateNativeKeyboard();
     OIS::JoyStick* CreateNativeGamepad();
+    OIS::ParamList QueryParamList(const Window& inputTargetWindow) const;
+    OIS::InputManager* GetInputManager() noexcept;
+    const OIS::InputManager* GetInputManager() const noexcept;
 
-private:
-    OIS::ParamList QueryParamList(const WindowsWindow& inputTarget) const;
-    
 /**@section Variable */
 protected:
     OIS::InputManager* m_inputManager;

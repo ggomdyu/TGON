@@ -8,9 +8,19 @@ namespace tgon
 I32Point Mouse::GetPosition()
 {
     I32Point pt;
-    PlatformMouse::GetPosition(&pt.x, &pt.y);
+    Mouse::GetPosition(&pt.x, &pt.y);
 
     return pt;
 }
- 
+
+PlatformMouse& Mouse::GetPlatformDependency() noexcept
+{
+    return *this;
+}
+
+const PlatformMouse& Mouse::GetPlatformDependency() const noexcept
+{
+    return *this;
+}
+
 } /* namespace tgon */

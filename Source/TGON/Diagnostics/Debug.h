@@ -6,7 +6,6 @@
  */
 
 #pragma once
-#include <cstdint>
 #include <string_view>
 #include <mutex>
 
@@ -18,7 +17,7 @@ namespace tgon
 class TGON_API Debug
 {
 /**@section Constructor */
-private:
+public:
     Debug() = delete;
     ~Debug() = delete;
 
@@ -27,8 +26,8 @@ public:
     static void Assert(bool condition);
     static void Assert(bool condition, const std::string_view& message);
     static void Assert(bool condition, const std::string_view& message, const std::string_view& detailMessage);
-    static void Fail(const std::string_view& message);
-    static void Fail(const std::string_view& message, const std::string_view& detailMessage);
+    [[noreturn]] static void Fail(const std::string_view& message);
+    [[noreturn]] static void Fail(const std::string_view& message, const std::string_view& detailMessage);
     static void Write(const std::string_view& message);
     static void WriteLine(const std::string_view& message);
     static void SetIndentLevel(int32_t indentLevel) noexcept;

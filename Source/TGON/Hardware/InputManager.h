@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
+#include "Platform/Window.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsInputManager.h"
@@ -16,24 +16,22 @@
 namespace tgon
 {
 
-class Mouse;
-class Keyboard;
-class Gamepad;
-
 class TGON_API InputManager final :
     private PlatformInputManager
 {
 /**@section Constructor */
 public:
-    using PlatformInputManager::PlatformInputManager;
-    
+    explicit InputManager(const Window& inputTargetWindow);
+
+/**@section Destructor */
+public:
+    ~InputManager();
+
 /**@section Method */
 public:
-    std::unique_ptr<Mouse> CreateMouse();
-    std::unique_ptr<Keyboard> CreateKeyboard();
-    std::unique_ptr<Gamepad> CreateGamepad();
-
-    using PlatformInputManager::Update;
+    PlatformInputManager& GetPlatformDependency() noexcept;
+    const PlatformInputManager& GetPlatformDependency() const noexcept;
+    void Update();
 };
 
 } /* namespace tgon */

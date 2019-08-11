@@ -6,35 +6,35 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
-#include <cstdint>
 #include <OIS.h>
-
-#include "Platform/Config.h"
-
-#include "WindowsGamepadType.h"
 
 namespace tgon
 {
+
+enum class GamepadPov
+{
+    Left,
+    Up,
+    Down,
+    Right,
+    LeftUp,
+    LeftDown,
+};
 
 class TGON_API WindowsGamepad :
     private boost::noncopyable
 {
 /**@section Constructor */
-public:
-    explicit WindowsGamepad(OIS::JoyStick* nativeGamepad);
+protected:
+    explicit WindowsGamepad(OIS::JoyStick* nativeGamepad) noexcept;
 
 /**@section Method */
 public:
-    void Update();
-    void Vibrate(float leftMotor, float rightMotor);
-    bool IsButtonDown(int32_t buttonNumber) const;
-    bool IsButtonHold(int32_t buttonNumber) const;
-    bool IsButtonUp(int32_t buttonNumber) const;
-    const OIS::JoyStick* GetNativeGamepad() const noexcept;
     OIS::JoyStick* GetNativeGamepad() noexcept;
+    const OIS::JoyStick* GetNativeGamepad() const noexcept;
 
 /**@section Variable */
-private:
+protected:
     OIS::JoyStick* m_nativeGamepad;
     OIS::JoyStickState m_prevGamepadState;
 };

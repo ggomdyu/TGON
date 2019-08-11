@@ -5,7 +5,11 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
+#include <memory>
+
+#include "Engine/Engine.h"
+
+#include "Window.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsApplication.h"
@@ -20,43 +24,43 @@
 namespace tgon
 {
 
-class Window;
-class Engine;
+enum class MessageBoxIcon
+{
+    No,
+    Informational,
+    Warning,
+};
 
 class TGON_API Application final :
     private PlatformApplication
 {
 /**@section Constructor */
 private:
-    explicit Application();
+    Application();
 
 /**@section Method */
 public:
-    static Application* GetInstance();
-
+    PlatformApplication& GetPlatformDependency() noexcept;
+    const PlatformApplication& GetPlatformDependency() const noexcept;
+    static Application& GetInstance();
     void MessageLoop();
-    void ShowMessageBox(const std::string_view& message) const;
-    void ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon) const;
-    void ShowMessageBox(const std::string_view& title, const std::string_view& message) const;
-    std::shared_ptr<Engine> GetEngine() noexcept;
-    std::shared_ptr<const Engine> GetEngine() const noexcept;
-    std::shared_ptr<Window> GetRootWindow() noexcept;
-    std::shared_ptr<const Window> GetRootWindow() const noexcept;
-    PlatformApplication* GetPlatformDependency() noexcept;
-    const PlatformApplication* GetPlatformDependency() const noexcept;
-    
-    using PlatformApplication::ShowMessageBox;
-    using PlatformApplication::Terminate;
+    static void Terminate();
+    static void ShowMessageBox(const std::string_view& message);
+    static void ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon);
+    static void ShowMessageBox(const std::string_view& title, const std::string_view& message);
+    static void ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon);
+    static std::shared_ptr<Engine> GetEngine() noexcept;
+    static std::shared_ptr<Window> GetRootWindow() noexcept;
     
 /**@section Event Handler */
 public:
-    void OnLaunch();
-    void OnTerminate();
+    static void OnLaunch();
+    static void OnTerminate();
     
 /**@section Variable */
 protected:
-    std::shared_ptr<Window> m_rootWindow;
     std::shared_ptr<Engine> m_engine;
+    std::shared_ptr<Window> m_rootWindow;
 };
 
 } /* namespace tgon */
