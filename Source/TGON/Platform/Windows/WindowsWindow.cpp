@@ -67,8 +67,8 @@ TGON_API void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* 
  */
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr)
 {
-	// Convert the WindowStyle to the native window style.
-	DWORD rawWindowStyle, rawExtendedWindowStyle;
+    // Convert the WindowStyle to the native window style.
+    DWORD rawWindowStyle, rawExtendedWindowStyle;
     ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
     wchar_t utf16Title[512] {};
@@ -88,21 +88,21 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 
     // Convert the client size to window size.
     RECT windowSize = {0, 0, windowStyle.width, windowStyle.height};
-    ::AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
- 
+    AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
+
 	HWND wndHandle = ::CreateWindowExW(
-		rawExtendedWindowStyle,
-		className,
+        rawExtendedWindowStyle,
+        className,
         utf16Title,
         rawWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
         windowSize.right - windowSize.left,
         windowSize.bottom - windowSize.top,
-		nullptr,
-		nullptr,
-		instanceHandle,
-		extraParam
+        nullptr,
+        nullptr,
+        instanceHandle,
+        extraParam
 	);
 
     if (wndHandle == nullptr)
@@ -113,12 +113,13 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         Debug::WriteLine(ss.str());
     }
 
-	return wndHandle;
+    return wndHandle;
 }
 
 WindowsWindow::WindowsWindow(HWND wndHandle) noexcept :
     m_wndHandle(wndHandle)
 {
+    this->SetUserData(this);
 }
 
 WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
@@ -127,7 +128,16 @@ WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
     rhs.m_wndHandle = nullptr;
 }
 
-WindowsWindow& tgon::WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
+WindowsWindow::~WindowsWindow()
+{
+    if (m_wndHandle != nullptr)
+    {
+        DestroyWindow(m_wndHandle);
+        m_wndHandle = nullptr;
+    }
+}
+
+WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
 {
     m_wndHandle = rhs.m_wndHandle;
     
@@ -158,7 +168,7 @@ LONG_PTR WindowsWindow::GetRawWindowStyleEx() const
 
 LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    Window* derivedMe = reinterpret_cast<Window*>(this);
+    auto downcastedMe = reinterpret_cast<Window*>(this);
 
     switch (msg)
     {
@@ -171,18 +181,18 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
         {
         case SC_MINIMIZE:
             {
-                if (derivedMe->OnMinimize != nullptr)
+                if (downcastedMe->OnMinimize != nullptr)
                 {
-                    derivedMe->OnMinimize();
+                    downcastedMe->OnMinimize();
                 }
             }
             break;
 
         case SC_MAXIMIZE:
             {
-                if (derivedMe->OnMaximize != nullptr)
+                if (downcastedMe->OnMaximize != nullptr)
                 {
-                    derivedMe->OnMaximize();
+                    downcastedMe->OnMaximize();
                 }
             }
             break;
@@ -192,60 +202,60 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
     case WM_SETFOCUS:
         {
-            if (derivedMe->OnGetFocus != nullptr)
+            if (downcastedMe->OnGetFocus != nullptr)
             {
-                derivedMe->OnGetFocus();
+                downcastedMe->OnGetFocus();
             }
         }
         break;
 
     case WM_KILLFOCUS:
         {
-            if (derivedMe->OnLoseFocus != nullptr)
+            if (downcastedMe->OnLoseFocus != nullptr)
             {
-                derivedMe->OnLoseFocus();
+                downcastedMe->OnLoseFocus();
             }
         }
         break;
 
     case WM_MOVE:
         {
-            if (derivedMe->OnMove != nullptr)
+            if (downcastedMe->OnMove != nullptr)
             {
-                derivedMe->OnMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                downcastedMe->OnMove(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }
         }
         break;
 
     case WM_SIZE:
         {
-            if (derivedMe->OnResize != nullptr)
+            if (downcastedMe->OnResize != nullptr)
             {
-                derivedMe->OnResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
+                downcastedMe->OnResize(static_cast<int32_t>(LOWORD(lParam)), static_cast<int32_t>(HIWORD(lParam)));
             }
         }
         break;
 
     case WM_CLOSE:
         {
-            if (derivedMe->OnWillClose != nullptr)
+            if (downcastedMe->OnWillClose != nullptr)
             {
-                derivedMe->OnWillClose();
+                downcastedMe->OnWillClose();
             }
         }
         break;
 
     case WM_DESTROY:
         {
-            if (derivedMe->OnDidClose != nullptr)
+            if (downcastedMe->OnDidClose != nullptr)
             {
-                derivedMe->OnDidClose();
+                downcastedMe->OnDidClose();
             }
 
-            derivedMe->Close();
+            downcastedMe->Close();
 
-            // Destroy the message queue and quit message loop.
-            ::PostQuitMessage(0);
+            // Destroy the message queue and quit the message loop.
+            PostQuitMessage(0);
         }
         break;
     }
@@ -259,11 +269,8 @@ void WindowsWindow::SetUserData(void* data)
 }
 
 Window::Window(const WindowStyle& windowStyle) :
-    WindowsWindow(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr), L"TGON"))
+    WindowsWindow(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr)))
 {
-    assert(m_wndHandle != nullptr);
-
-    this->SetUserData(this);
 }
 
 void Window::BringToFront()
@@ -307,7 +314,7 @@ void Window::GetExtent(int32_t* width, int32_t* height) const
 void Window::GetTitle(char* destTitle) const
 {
     wchar_t utf16Title[256] {};
-    int utf16TitleLen = ::GetWindowTextW(m_wndHandle, utf16Title, 256);
+    int32_t utf16TitleLen = GetWindowTextW(m_wndHandle, utf16Title, 256);
 
     UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Title, utf16TitleLen), destTitle, 256);
 }
@@ -376,7 +383,11 @@ void Window::Minimize()
 
 void Window::Close()
 {
-    DestroyWindow(m_wndHandle);
+    if (m_wndHandle != nullptr)
+    {
+        DestroyWindow(m_wndHandle);
+        m_wndHandle = nullptr;
+    }
 }
 
 void Window::SetPosition(int32_t x, int32_t y)

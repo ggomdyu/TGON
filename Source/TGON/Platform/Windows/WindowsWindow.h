@@ -15,8 +15,6 @@
 #include <Windows.h>
 #include <boost/noncopyable.hpp>
 
-#include "Platform/Config.h"
-
 namespace tgon
 {
 
@@ -28,6 +26,10 @@ protected:
     explicit WindowsWindow(HWND wndHandle) noexcept;
     WindowsWindow(WindowsWindow&& rhs) noexcept;
 
+/**@section Destructor */
+public:
+    ~WindowsWindow();
+
 /**@section Operator */
 public:
     WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;
@@ -38,6 +40,8 @@ public:
     void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
     LONG_PTR GetRawWindowStyle() const;
     LONG_PTR GetRawWindowStyleEx() const;
+
+private:
     void SetUserData(void* data);
 
 /**@section Event handler */

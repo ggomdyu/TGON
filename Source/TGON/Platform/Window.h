@@ -49,6 +49,10 @@ public:
     explicit Window(const WindowStyle& windowStyle);
     Window(Window&& rhs) noexcept;
 
+/**@section Destructor */
+public:
+    ~Window() = default;
+
 /**@section Operator */
 public:
     Window& operator=(Window&& rhs) noexcept;

@@ -87,31 +87,6 @@ std::vector<uint8_t>& FileStream::GetBuffer() noexcept
     return m_buffer;
 }
 
-int32_t FileStream::ReadByte()
-{
-    if (this->CanRead() == false)
-    {
-        return -1;
-    }
-
-    int32_t leftReadBufferSpace = m_readLen - m_readPos;
-    if (leftReadBufferSpace == 0)
-    {
-        this->FlushWriteBuffer();
-
-        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
-        m_readPos = 0;
-        m_readLen = readBytes;
-
-        if (readBytes == 0)
-        {
-            return -1;
-        }
-    }
-
-    return m_buffer[m_readPos++];;
-}
-
 int32_t FileStream::Read(uint8_t* buffer, int32_t count)
 {
     if (this->CanRead() == false || m_bufferSize < count)
@@ -152,19 +127,50 @@ int32_t FileStream::Read(uint8_t* buffer, int32_t count)
     return copiedBytes;
 }
 
+int32_t FileStream::ReadByte()
+{
+    if (this->CanRead() == false)
+    {
+        return -1;
+    }
+
+    int32_t leftReadBufferSpace = m_readLen - m_readPos;
+    if (leftReadBufferSpace == 0)
+    {
+        this->FlushWriteBuffer();
+
+        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
+        m_readPos = 0;
+        m_readLen = readBytes;
+
+        if (readBytes == 0)
+        {
+            return -1;
+        }
+    }
+
+    return m_buffer[m_readPos++];;
+}
+
+bool FileStream::Write(uint8_t* buffer, int32_t count)
+{
+    if (this->CanWrite() == false)
+    {
+        return false;
+    }
+    // TODO: impl
+    return true;
+}
+
 bool FileStream::WriteByte(uint8_t value)
 {
-    if (m_writePos == 0)
+    if (this->CanWrite() == false)
     {
-        if (this->CanWrite() == false)
-        {
-            return false;
-        }
-
-        // todo: Flush read buffer
-        m_readLen = 0;
-        m_readPos = 0;
+        return false;
     }
+
+    this->FlushReadBuffer();
+
     if (m_writePos == m_bufferSize)
     {
         this->FlushWriteBuffer();
@@ -185,6 +191,23 @@ void FileStream::FlushWriteBuffer()
     this->WriteCore(&m_buffer[0], m_writePos);
 
     m_writePos = 0;
+}
+
+void FileStream::FlushReadBuffer()
+{
+    if (m_writePos != 0)
+    {
+        return;
+    }
+
+    // We must rewind the seek pointer if a write occured.
+    int32_t rewindOffset = m_readPos - m_readLen;
+    if (rewindOffset != 0)
+    {
+        this->SeekCore(rewindOffset, SeekOrigin::Current);
+    }
+
+    m_readLen = m_readPos = 0;
 }
 
 } /* namespace tgon */

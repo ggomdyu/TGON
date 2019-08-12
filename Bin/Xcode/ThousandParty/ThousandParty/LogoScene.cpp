@@ -1,16 +1,15 @@
 ﻿#include "PrecompiledHeader.h"
 
-#include <deque>
 #include <functional>
 #include <atomic>
 #include <thread>
+#include <fstream>
 #include "TGON.h"
 #include "IntroScene.h"
 #include "LogoScene.h"
-#include "IO/File.h"
 #include "Math/Rect.h"
+#include "IO/File.h"
 #include "Core/Range.h"
-#include "Thread/DispatchQueue.h"
 #include "Drawing/FontFactory.h"
 #include "Graphics/TextureAtlas.h"
 #include "String/UnicodeScalar.h"
@@ -244,20 +243,24 @@ public:
 /**@section Variable */
 };
 
+class A
+{
+public:
+    tgon::DelegateChain<void()> d;
+};
+
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    AudioBuffer ab;
-    AudioBuffer ab2(std::move(ab));
-
-    FileStream f2("E:/Users/ggomdyu/Desktop/b", FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);
+    FileStream f2("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);
     f2.Length();
     uint8_t buffer[1024] {};
-    (char)f2.ReadByte();
-    (char)f2.ReadByte();
-    (char)f2.ReadByte();
-    (char)f2.ReadByte();
+    auto cc1 = (char)f2.ReadByte();
+    auto cc2 = (char)f2.ReadByte();
+    auto cc3 = (char)f2.ReadByte();
+    auto cc4 = (char)f2.ReadByte();
+    f2.WriteByte(255);
     f2.Seek(50, SeekOrigin::Current);
     f2.Seek(185, SeekOrigin::Begin);
     f2.ReadByte();

@@ -90,16 +90,9 @@ public:
     virtual void Close() override;
     const std::string& Name() const noexcept;
     /*
-    override IAsyncResult BeginRead(byte[] array, int offset, int numBytes, AsyncCallback callback, object state)
-    override IAsyncResult BeginWrite(byte[] array, int offset, int numBytes, AsyncCallback callback, object state)
-    override int EndRead(IAsyncResult asyncResult)
-    override void EndWrite(IAsyncResult asyncResult)
-    override Task FlushAsync(CancellationToken cancellationToken)
     override void Flush()
-    override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
     virtual void Flush(bool flushToDisk)
     virtual void Lock(long position, long length)
-    override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     virtual void Unlock(long position, long length)
     */
 
@@ -107,6 +100,7 @@ private:
     bool IsClosed() const noexcept;
     std::vector<uint8_t>& GetBuffer() noexcept;
     void FlushWriteBuffer();
+    void FlushReadBuffer();
     int32_t ReadCore(uint8_t* buffer, int32_t count);
     int32_t WriteCore(uint8_t* buffer, int32_t count);
     int64_t SeekCore(int64_t offset, SeekOrigin origin);

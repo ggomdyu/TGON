@@ -67,16 +67,6 @@ bool FileStream::IsClosed() const noexcept
     return m_nativeHandle == INVALID_HANDLE_VALUE;
 }
 
-bool FileStream::Write(uint8_t* buffer, int32_t count)
-{
-    if (this->CanWrite() == false)
-    {
-        return false;
-    }
-    // TODO: impl
-    return true;
-}
-
 int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
 {
     if (this->CanSeek() == false)
@@ -84,18 +74,20 @@ int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
         return -1;
     }
 
-    this->FlushWriteBuffer();
-
-    if (origin == SeekOrigin::Current)
+    if (m_writePos > 0)
     {
-        //offset -= _readLen - _readPos;
+        this->FlushWriteBuffer();
+    }
+    else if (origin == SeekOrigin::Current)
+    {
+        // If we've read the buffer once before, then the seek offset is automatically moved to the end of the buffer.
+        // So we must adjust the offset to set the seek offset as required.
+        offset -= m_readLen - m_readPos;
     }
 
     m_readPos = m_readLen = 0;
 
-    int64_t oldPos = m_filePos;
     int64_t pos = SeekCore(offset, origin);
-
     return pos;
 }
 
