@@ -356,6 +356,6 @@ inline int32_t Color4f::ToString(char* destStr, std::size_t strBufferSize) const
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

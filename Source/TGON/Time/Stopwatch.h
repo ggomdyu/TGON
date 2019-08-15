@@ -95,4 +95,4 @@ inline int64_t Stopwatch::GetElapsedNanoseconds() const
     }
 }
 
-} /* namespace tgon */
+}

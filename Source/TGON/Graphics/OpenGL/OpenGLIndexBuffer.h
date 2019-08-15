@@ -70,4 +70,4 @@ private:
     
 using PlatformIndexBuffer = OpenGLIndexBuffer;
 
-} /* namespace tgon */
+}

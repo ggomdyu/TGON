@@ -92,4 +92,4 @@ private:
     ProjectionMode m_projectionMode;
 };
 
-} /* namespace tgon */
+}

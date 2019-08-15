@@ -42,4 +42,4 @@ const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority
     return const_cast<TaskModule*>(this)->GetGlobalDispatchQueue(threadPriority);
 }
 
-} /* namespace tgon */
+}

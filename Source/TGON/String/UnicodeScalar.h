@@ -113,7 +113,7 @@ constexpr size_t UnicodeScalar::GetHashCode() const noexcept
     return TGON_X65599(m_value);
 }
 
-} /* namespace tgon */
+}
 
 namespace std
 {

@@ -63,4 +63,4 @@ protected:
     std::shared_ptr<Window> m_rootWindow;
 };
 
-} /* namespace tgon */
+}

@@ -158,4 +158,4 @@ inline bool PngImageProcessor::VerifyFormat(const uint8_t* fileData, size_t file
     return isPNGFormat;
 }
 
-} /* namespace tgon */  
+}  

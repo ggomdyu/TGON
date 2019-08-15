@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <vector>
 
 #include "Stream.h"
@@ -62,7 +61,7 @@ public:
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, bool isUseAsync);
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
-    FileStream(FileStream&& rhs);
+    FileStream(FileStream&& rhs) noexcept;
 
 /**@section Destructor */
 public:
@@ -79,34 +78,36 @@ public:
     virtual bool CanRead() const override;
     virtual bool CanSeek() const override;
     virtual bool CanWrite() const override;
-    virtual void SetLength(int64_t value) override;
+    virtual bool SetLength(int64_t value) override;
     virtual int64_t Length() const override;
     virtual int64_t Position() const override;
     virtual int32_t Read(uint8_t* buffer, int32_t count) override;
     virtual int32_t ReadByte() override;
-    virtual bool Write(uint8_t* buffer, int32_t count) override;
+    virtual bool Write(const uint8_t* buffer, int32_t count) override;
     virtual bool WriteByte(uint8_t value) override;
     virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
     virtual void Close() override;
     const std::string& Name() const noexcept;
+    virtual void Flush() override;
+    void Flush(bool flushToDisk);
     /*
-    override void Flush()
-    virtual void Flush(bool flushToDisk)
     virtual void Lock(long position, long length)
     virtual void Unlock(long position, long length)
     */
 
-private:
+protected:
     bool IsClosed() const noexcept;
     std::vector<uint8_t>& GetBuffer() noexcept;
     void FlushWriteBuffer();
     void FlushReadBuffer();
     int32_t ReadCore(uint8_t* buffer, int32_t count);
-    int32_t WriteCore(uint8_t* buffer, int32_t count);
+    int32_t WriteCore(const uint8_t* buffer, int32_t count);
     int64_t SeekCore(int64_t offset, SeekOrigin origin);
+    void FlushCore();
+    bool SetLengthCore(int64_t value);
 
 /**@section Variable */
-private:
+protected:
     static constexpr FileShare DefaultShare = FileShare::Read;
     static constexpr bool DefaultIsAsync = false;
     static constexpr int DefaultBufferSize = 4096;
@@ -122,4 +123,4 @@ private:
     std::string m_fileName;    
 };
 
-} /* namespace tgon */
+}

@@ -40,4 +40,4 @@ protected:
     ShaderProgram m_shaderProgram;
 };
 
-} /* namespace tgon */
+}

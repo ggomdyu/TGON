@@ -13,7 +13,7 @@ TimeZoneInfo CreateUtc()
     return TimeZoneInfo(id, TimeSpan(0), id, id, id, false);
 }
 
-} /* namespace */
+}
 
 TimeZoneInfo::TimeZoneInfo(const std::string& id, const TimeSpan& baseUtcOffset, const std::string& displayName, const std::string& standardDisplayName, const std::string& daylightDisplayName, bool supportsDaylightSavingTime) :
     m_id(id),
@@ -121,4 +121,4 @@ DateTime TimeZoneInfo::ConvertTime(const DateTime& dateTime, const TimeZoneInfo&
     }
 }
 
-} /* namespace tgon */
+}

@@ -51,4 +51,4 @@ inline bool IComparable::Equals(const IComparable* rhs) const
     return this->CompareTo(rhs) == 0;
 }
 
-} /* namespace tgon */
+}

@@ -23,4 +23,4 @@ const PlatformMouse& Mouse::GetPlatformDependency() const noexcept
     return *this;
 }
 
-} /* namespace tgon */
+}

@@ -5,7 +5,6 @@
 #endif
 #include <Windows.h>
 #include <GL/glew.h>
-#include <GL/wglew.h>
 #include <cassert>
 
 #include "Platform/Window.h"
@@ -126,4 +125,4 @@ void OpenGLContext::Destroy()
     }
 }
 
-} /* namespace tgon */
+}

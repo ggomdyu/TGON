@@ -60,4 +60,4 @@ std::shared_ptr<const Camera> CameraComponent::GetCamera() const noexcept
     return m_camera;
 }
 
-} /* namespace tgon */
+}

@@ -75,4 +75,4 @@ constexpr ForceAutoCaster<_CastFromType> ForceAutoCast(_CastFromType&& value) no
 	return ForceAutoCaster<_CastFromType>(std::forward<_CastFromType>(value));
 }
 
-} /* namespace tgon */
+}

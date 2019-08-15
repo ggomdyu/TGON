@@ -360,6 +360,6 @@ inline int32_t BasicVector3<_ValueType>::ToString(char* destStr, std::size_t str
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", x, y, z);
 }
     
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

@@ -387,4 +387,4 @@ auto MakeDelegate(_FunctionType&& function)
     return Delegate<typename FunctionTraits<_FunctionType>::FunctionType>(std::forward<_FunctionType>(function));
 }
 
-} /* namespace tgon */
+}

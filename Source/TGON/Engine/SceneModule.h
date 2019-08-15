@@ -38,4 +38,4 @@ private:
     std::unique_ptr<Scene> m_currScene;
 };
 
-} /* namespace tgon */
+}

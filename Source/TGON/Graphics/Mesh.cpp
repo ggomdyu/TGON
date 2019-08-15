@@ -54,4 +54,4 @@ std::shared_ptr<const IndexBuffer> Mesh::GetIndexBuffer() const noexcept
     return m_indexBuffer;
 }
 
-} /* namespace tgon */
+}

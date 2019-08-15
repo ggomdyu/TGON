@@ -10,4 +10,4 @@ RenderTarget::RenderTarget(const FExtent2D& extent, int32_t depthBits) :
 {
 }
 
-} /* namespace tgon */
+}

@@ -50,4 +50,4 @@ const Color4f& SpriteRendererComponent::GetBlendColor() const noexcept
     return m_blendColor;
 }
 
-} /* namespace tgon */
+}

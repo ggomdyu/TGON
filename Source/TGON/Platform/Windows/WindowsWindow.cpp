@@ -467,4 +467,4 @@ float Window::GetTransparency() const
 //#endif
 //}
 
-} /* namespace tgon */
+}

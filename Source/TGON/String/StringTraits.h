@@ -191,4 +191,4 @@ inline void BasicStringTraits<_CharType>::ToUpper(const _CharType* srcStr, int32
     std::transform(srcStr, srcStr + srcStrLen, destStr, ::toupper);
 }
 
-} /* namespace tgon */
+}

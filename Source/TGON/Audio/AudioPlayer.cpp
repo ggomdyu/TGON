@@ -194,4 +194,4 @@ void AudioPlayer::Destroy()
     }
 }
 
-} /* namespace tgon */
+}

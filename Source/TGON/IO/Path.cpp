@@ -222,4 +222,4 @@ TGON_API std::string Path::GetDocumentsDirectory()
     return std::string(g_tempPathBuffer, strLen);
 }
 
-} /* namespace tgon */
+}

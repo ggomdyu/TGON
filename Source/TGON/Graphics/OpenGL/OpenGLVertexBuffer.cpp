@@ -122,4 +122,4 @@ void OpenGLVertexBuffer::Destroy()
     }
 }
 
-} /* namespace tgon */
+}

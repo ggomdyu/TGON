@@ -58,4 +58,4 @@ protected:
     std::shared_ptr<IndexBuffer> m_indexBuffer;
 };
 
-} /* namespace tgon */
+}

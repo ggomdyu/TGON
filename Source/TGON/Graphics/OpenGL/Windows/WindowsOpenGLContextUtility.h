@@ -17,7 +17,6 @@ namespace tgon
 {
 
 HGLRC MakeOldGLRC(HDC dcHandle);
-
 HGLRC MakeNewGLRC(HDC dcHandle);
 
-} /* namespace tgon */
+}

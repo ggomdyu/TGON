@@ -39,4 +39,4 @@ constexpr int32_t ConvertPixelFormatToBitsPerPixel(PixelFormat pixelFormat)
     return ConvertPixelFormatToBytesPerPixel(pixelFormat) * 8;
 }
 
-} /* namespace tgon */
+}

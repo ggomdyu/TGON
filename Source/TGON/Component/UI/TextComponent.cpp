@@ -102,4 +102,4 @@ void TextRendererComponent::DrawTextToMainTexture()
     //}
 }
 
-} /* namespace tgon */
+}

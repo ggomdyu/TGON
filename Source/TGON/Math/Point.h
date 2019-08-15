@@ -214,6 +214,6 @@ inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t strBuffer
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", x, y);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

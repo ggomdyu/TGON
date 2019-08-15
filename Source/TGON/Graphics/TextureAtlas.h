@@ -53,4 +53,4 @@ private:
     int32_t m_paddingOffset;
 };
 
-} /* namespace tgon */
+}

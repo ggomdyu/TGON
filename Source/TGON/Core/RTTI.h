@@ -66,7 +66,7 @@ inline const RTTI* GetRTTI<void>()
     return nullptr;
 }
 
-} /* namespace tgon */
+}
 
 namespace std
 {

@@ -84,4 +84,4 @@ private:
 
 };
 
-} /* namespace tgon */
+}

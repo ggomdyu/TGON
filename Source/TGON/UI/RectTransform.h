@@ -46,4 +46,4 @@ protected:
     FExtent2D m_size;
 };
 
-} /* namespace tgon */
+}

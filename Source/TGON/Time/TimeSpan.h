@@ -6,6 +6,7 @@
 
 #pragma once
 #include <cstdint>
+#include <numeric>
 
 namespace tgon
 {
@@ -66,6 +67,9 @@ public:
     static constexpr TimeSpan FromMilliseconds(double value) noexcept;
     static constexpr TimeSpan FromTicks(int64_t value) noexcept;
     constexpr size_t GetHashCode() const noexcept;
+    static constexpr TimeSpan GetMaxValue() noexcept;
+    static constexpr TimeSpan GetMinValue() noexcept;
+    static constexpr TimeSpan GetZero() noexcept;
     //string ToString();
     //string ToString(string format);
     //string ToString(string format, IFormatProvider formatProvider);
@@ -75,10 +79,6 @@ private:
 
 /**@section Variable */
 public:
-    //static readonly TimeSpan MaxValue;
-    //static readonly TimeSpan MinValue;
-    //static constexpr TimeSpan Zero;
-
     static constexpr int64_t TicksPerMillisecond = 10000;
     static constexpr int64_t TicksPerSecond = TicksPerMillisecond * 1000;
     static constexpr int64_t TicksPerMinute = TicksPerSecond * 60;
@@ -278,7 +278,7 @@ constexpr TimeSpan TimeSpan::Divide(double divisor) const noexcept
 
 constexpr double TimeSpan::Divide(const TimeSpan& timeSpan) const noexcept
 {
-    return static_cast<double>(m_ticks / timeSpan.m_ticks);
+    return static_cast<double>(m_ticks) / timeSpan.m_ticks;
 }
 
 constexpr TimeSpan TimeSpan::Multiply(double factor) const noexcept
@@ -342,4 +342,21 @@ constexpr size_t TimeSpan::GetHashCode() const noexcept
     return static_cast<size_t>(m_ticks ^ (m_ticks >> 32));
 }
 
-} /* namespace tgon */
+constexpr TimeSpan TimeSpan::GetMaxValue() noexcept
+{
+    auto b = std::numeric_limits<int64_t>::max();
+    return TimeSpan(b);
+}
+
+constexpr TimeSpan TimeSpan::GetMinValue() noexcept
+{
+    auto b = std::numeric_limits<int64_t>::max();
+    return TimeSpan(b);
+}
+
+constexpr TimeSpan TimeSpan::GetZero() noexcept
+{
+    return TimeSpan(0);
+}
+
+}

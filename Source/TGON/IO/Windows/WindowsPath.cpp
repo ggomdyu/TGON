@@ -1,5 +1,8 @@
 #include "PrecompiledHeader.h"
 
+#ifndef NOMINMAX
+#    define NOMINMAX
+#endif
 #include <Windows.h>
 #include <shlobj.h>
 
@@ -78,4 +81,4 @@ TGON_API int32_t Path::GetDocumentsDirectory(char* destStr)
     return GetSpecialDirectory(CSIDL_MYDOCUMENTS, destStr);
 }
 
-} /* namespace tgon */
+}

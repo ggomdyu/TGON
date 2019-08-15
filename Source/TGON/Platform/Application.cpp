@@ -75,4 +75,4 @@ void Application::OnTerminate()
     }
 }
 
-} /* namespace tgon */
+}

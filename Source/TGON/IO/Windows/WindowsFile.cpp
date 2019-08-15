@@ -1,5 +1,8 @@
 #include "PrecompiledHeader.h"
 
+#ifndef NOMINMAX
+#    define NOMINMAX
+#endif
 #include <Windows.h>
 
 #include "String/Encoding.h"
@@ -31,7 +34,7 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
     return s;
 }
 
-} /* namespace */
+}
 
 bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept
 {
@@ -51,12 +54,7 @@ bool File::Delete(const std::string_view& path)
 bool File::Exists(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false)
-    {
-        return false;
-    }
-
-    if (S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
     }
@@ -75,12 +73,7 @@ bool File::Move(const std::string_view& srcPath, const std::string_view& destPat
 std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false)
-    {
-        return false;
-    }
-
-    if (S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return {};
     }
@@ -91,12 +84,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false)
-    {
-        return false;
-    }
-
-    if (S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return {};
     }
@@ -116,7 +104,6 @@ bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& crea
 
     int64_t ticks = creationTimeUtc.ToFileTimeUtc();
     FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
-
     if (SetFileTime(handle, &fileTime, nullptr, nullptr) == 0)
     {
         return false;
@@ -137,7 +124,6 @@ bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& la
 
     int64_t ticks = lastAccessTimeUtc.ToFileTimeUtc();
     FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
-
     if (SetFileTime(handle, nullptr, &fileTime, nullptr) == 0)
     {
         return false;
@@ -158,7 +144,6 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
 
     int64_t ticks = lastWriteTimeUtc.ToFileTimeUtc();
     FILETIME fileTime{static_cast<DWORD>(ticks), static_cast<DWORD>(ticks >> 32)};
-
     if (SetFileTime(handle, nullptr, nullptr, &fileTime) == 0)
     {
         return false;
@@ -170,16 +155,11 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
 std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false)
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return {};
     }
 
-    if (S_ISREG(s->st_mode) == false)
-    {
-        return {};
-    }
-   
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s->st_ctime);
 }
 
@@ -196,4 +176,4 @@ FileAttributes File::GetAttributes(const std::string_view& path)
     return FileAttributes(fileAttributeData.dwFileAttributes);
 }
 
-} /* namespace tgon */
+}

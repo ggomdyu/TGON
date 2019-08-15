@@ -40,4 +40,4 @@ public:
     using PlatformShaderProgram::IsValid;
 };
 
-} /* namespace tgon */
+}

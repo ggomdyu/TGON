@@ -22,4 +22,4 @@ enum class WrapMode
     Mirror,
 };
 
-} /* namespace tgon */
+}

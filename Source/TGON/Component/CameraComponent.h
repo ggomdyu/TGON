@@ -42,4 +42,4 @@ private:
     std::weak_ptr<GraphicsModule> m_graphicsModule;
 };
 
-} /* namespace tgon */
+}

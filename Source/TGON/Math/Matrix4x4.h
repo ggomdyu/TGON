@@ -450,6 +450,6 @@ inline int32_t Matrix4x4::ToString(char * destStr, std::size_t strBufferSize) co
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f", m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

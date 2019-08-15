@@ -208,6 +208,6 @@ inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t strBuf
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", width, height);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

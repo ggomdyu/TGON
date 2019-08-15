@@ -23,4 +23,4 @@ TGON_API Screen GetPrimaryScreen();
 /**@brief   Returns all detected screen informations.*/
 TGON_API std::vector<Screen> GetAllScreens();
 
-} /* namespace tgon */
+}

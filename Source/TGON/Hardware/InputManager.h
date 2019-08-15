@@ -34,4 +34,4 @@ public:
     void Update();
 };
 
-} /* namespace tgon */
+}

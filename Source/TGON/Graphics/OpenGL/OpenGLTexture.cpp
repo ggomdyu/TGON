@@ -205,4 +205,4 @@ PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
     return m_pixelFormat;
 }
     
-} /* namespace tgon */
+}

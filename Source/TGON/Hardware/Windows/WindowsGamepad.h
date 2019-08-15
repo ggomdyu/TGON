@@ -41,4 +41,4 @@ protected:
 
 using PlatformGamepad = WindowsGamepad;
 
-} /* namespace tgon */
+}

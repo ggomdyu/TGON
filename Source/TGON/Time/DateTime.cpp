@@ -16,4 +16,4 @@ DateTime DateTime::ToUniversalTime() const
     return TimeZoneInfo::ConvertTimeToUtc(*this);
 }
 
-} /* namespace tgon */
+}

@@ -18,6 +18,7 @@
 #include "./../Test/Time/DateTimeTest.h"
 #include "./../Test/String/FixedStringTest.h"
 #include "./../Test/IO/FileTest.h"
+#include "./../Test/IO/FileStreamTest.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -243,7 +244,8 @@ public:
 /**@section Variable */
 };
 
-class A
+class A :
+    boost::noncopyable
 {
 public:
     tgon::DelegateChain<void()> d;
@@ -253,23 +255,7 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    FileStream f2("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);
-    f2.Length();
-    uint8_t buffer[1024] {};
-    auto cc1 = (char)f2.ReadByte();
-    auto cc2 = (char)f2.ReadByte();
-    auto cc3 = (char)f2.ReadByte();
-    auto cc4 = (char)f2.ReadByte();
-    f2.WriteByte(255);
-    f2.Seek(50, SeekOrigin::Current);
-    f2.Seek(185, SeekOrigin::Begin);
-    f2.ReadByte();
-    f2.ReadByte();
-    f2.ReadByte();
-    f2.ReadByte();
-    f2.ReadByte();
-
-    return;
+    FileStreamTest().Evaluate();
 
     FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
     for (int i = 0; i < (int)(4096.0 * 1.1); ++i)

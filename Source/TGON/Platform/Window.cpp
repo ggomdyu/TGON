@@ -69,4 +69,4 @@ const PlatformWindow& Window::GetPlatformDependency() const noexcept
     return *this;
 }
 
-} /* namespace tgon */
+}

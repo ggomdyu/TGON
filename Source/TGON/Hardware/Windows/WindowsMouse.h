@@ -63,4 +63,4 @@ protected:
 
 using PlatformMouse = WindowsMouse;
 
-} /* namespace tgon */
+}

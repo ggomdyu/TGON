@@ -190,4 +190,4 @@ inline const std::vector<Delegate<_ReturnType(_ArgTypes...)>>& DelegateChain<_Re
     return m_invocationList;
 }
 
-} /* namespace tgon */
+}

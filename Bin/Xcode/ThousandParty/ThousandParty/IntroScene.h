@@ -19,7 +19,7 @@ class GraphicsModule;
 class InputModule;
 class TimeModule;
 
-} /* namespace tgon */
+}
 
 class TGON_API IntroScene :
     public tgon::Scene

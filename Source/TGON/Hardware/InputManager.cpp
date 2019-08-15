@@ -15,4 +15,4 @@ const PlatformInputManager& InputManager::GetPlatformDependency() const noexcept
     return *this;
 }
 
-} /* namespace tgon */
+}

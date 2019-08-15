@@ -36,4 +36,4 @@ public:
     bool IsButtonUp(int32_t buttonNumber) const;
 };
     
-} /* namespace tgon */
+}

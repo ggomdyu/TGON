@@ -106,4 +106,4 @@ private:
     ALenum m_alFormat;
 };
 
-} /* namespace tgon */
+}

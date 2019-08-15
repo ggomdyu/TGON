@@ -43,7 +43,7 @@ public:
     constexpr DateTime(int32_t year, int32_t month, int32_t day) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DateTimeKind dateTimeKind) noexcept;
-    constexpr DateTime(uint64_t ticks) noexcept;
+    constexpr explicit DateTime(uint64_t ticks) noexcept;
     constexpr DateTime(uint64_t ticks, DateTimeKind dateTimeKind) noexcept;
 
 /**@section Operator */
@@ -69,12 +69,12 @@ public:
     static DateTime Today();
     static constexpr bool IsLeapYear(int32_t year) noexcept;
     static constexpr int32_t DaysInMonth(int32_t year, int32_t month) noexcept;
-    constexpr DateTime AddYears(int32_t value) noexcept;
-    constexpr DateTime AddMonths(int32_t value) noexcept;
-    constexpr DateTime AddDays(double value) noexcept;
-    constexpr DateTime AddHours(double value) noexcept;
-    constexpr DateTime AddMinutes(double value) noexcept;
-    constexpr DateTime AddSeconds(double value) noexcept;
+    constexpr DateTime AddYears(int32_t value) const noexcept;
+    constexpr DateTime AddMonths(int32_t value) const noexcept;
+    constexpr DateTime AddDays(double value) const noexcept;
+    constexpr DateTime AddHours(double value) const noexcept;
+    constexpr DateTime AddMinutes(double value) const noexcept;
+    constexpr DateTime AddSeconds(double value) const noexcept;
     constexpr int32_t GetYear() const noexcept;
     constexpr int32_t GetMonth() const noexcept;
     constexpr int32_t GetDay() const noexcept;
@@ -103,6 +103,7 @@ private:
     constexpr std::tuple<int32_t, int32_t, int32_t> GetDateParts() const noexcept;
     static int64_t GetTimeSinceUnixEpoch();
 
+/**@section Variable */
 private:
     static constexpr int64_t TicksMask = 0x3FFFFFFFFFFFFFFF;
     static constexpr int64_t KindUnspecified = 0x0000000000000000;
@@ -280,7 +281,7 @@ constexpr int32_t DateTime::DaysInMonth(int32_t year, int32_t month) noexcept
     }
 }
 
-constexpr DateTime DateTime::AddYears(int32_t value) noexcept
+constexpr DateTime DateTime::AddYears(int32_t value) const noexcept
 {
     if (value < -10000 || value > 10000)
     {
@@ -290,7 +291,7 @@ constexpr DateTime DateTime::AddYears(int32_t value) noexcept
     return this->AddMonths(value * 12);
 }
 
-constexpr DateTime DateTime::AddMonths(int32_t value) noexcept
+constexpr DateTime DateTime::AddMonths(int32_t value) const noexcept
 {
     if (value < -120000 || value > 120000)
     {
@@ -325,22 +326,22 @@ constexpr DateTime DateTime::AddMonths(int32_t value) noexcept
     return DateTime(DateToTicks(year, month, day) + (this->GetTicks() % TimeSpan::TicksPerDay), this->GetKind());
 }
 
-constexpr DateTime DateTime::AddDays(double value) noexcept
+constexpr DateTime DateTime::AddDays(double value) const noexcept
 {
     return DateTime(this->GetTicks() + static_cast<int64_t>(value * TimeSpan::TicksPerDay), this->GetKind());
 }
 
-constexpr DateTime DateTime::AddHours(double value) noexcept
+constexpr DateTime DateTime::AddHours(double value) const noexcept
 {
     return DateTime(this->GetTicks() + static_cast<int64_t>(value * TimeSpan::TicksPerHour), this->GetKind());
 }
 
-constexpr DateTime DateTime::AddMinutes(double value) noexcept
+constexpr DateTime DateTime::AddMinutes(double value) const noexcept
 {
     return DateTime(this->GetTicks() + static_cast<int64_t>(value * TimeSpan::TicksPerMinute), this->GetKind());
 }
 
-constexpr DateTime DateTime::AddSeconds(double value) noexcept
+constexpr DateTime DateTime::AddSeconds(double value) const noexcept
 {
     return DateTime(this->GetTicks() + static_cast<int64_t>(value * TimeSpan::TicksPerSecond), this->GetKind());
 }
@@ -565,4 +566,4 @@ inline int64_t DateTime::ToFileTimeUtc() const
 }
 
 
-} /* namespace tgon */
+}
