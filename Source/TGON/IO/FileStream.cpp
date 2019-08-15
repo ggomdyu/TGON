@@ -32,9 +32,50 @@ FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access
 {
 }
 
+FileStream::FileStream(FileStream&& rhs) noexcept :
+    m_nativeHandle(rhs.m_nativeHandle),
+    m_buffer(std::move(rhs.m_buffer)),
+    m_bufferSize(rhs.m_bufferSize),
+    m_readPos(rhs.m_readPos),
+    m_readLen(rhs.m_readLen),
+    m_writePos(rhs.m_writePos),
+    m_filePos(rhs.m_filePos),
+    m_access(rhs.m_access),
+    m_fileName(std::move(rhs.m_fileName))
+{
+    rhs.m_nativeHandle = nullptr;
+    rhs.m_bufferSize = 0;
+    rhs.m_readPos = 0;
+    rhs.m_readLen = 0;
+    rhs.m_writePos = 0;
+    rhs.m_filePos = 0;
+}
+
 FileStream::~FileStream()
 {
     FileStream::Close();
+}
+
+FileStream& FileStream::operator=(FileStream&& rhs) noexcept
+{
+    m_nativeHandle = rhs.m_nativeHandle;
+    m_buffer = std::move(rhs.m_buffer);
+    m_bufferSize = rhs.m_bufferSize;
+    m_readPos = rhs.m_readPos;
+    m_readLen = rhs.m_readLen;
+    m_writePos = rhs.m_writePos;
+    m_filePos = rhs.m_filePos;
+    m_access = rhs.m_access;
+    m_fileName = std::move(rhs.m_fileName);
+
+    rhs.m_nativeHandle = nullptr;
+    rhs.m_bufferSize = 0;
+    rhs.m_readPos = 0;
+    rhs.m_readLen = 0;
+    rhs.m_writePos = 0;
+    rhs.m_filePos = 0;
+
+    return *this;
 }
 
 bool FileStream::operator==(const FileStream& rhs) const noexcept
@@ -62,9 +103,25 @@ bool FileStream::CanWrite() const
     return this->IsClosed() == false && (UnderlyingCast(m_access) & UnderlyingCast(FileAccess::Write)) != 0;
 }
 
-void FileStream::SetLength(int64_t value)
+bool FileStream::SetLength(int64_t value)
 {
-    // TODO: impl
+    if (CanRead() == false || CanWrite() == false)
+    {
+        return false;
+    }
+
+    // If the write buffer is not empty
+    if (m_writePos > 0)
+    {
+        this->FlushWriteBuffer();
+    }
+    // If the read buffer is not empty
+    else if (m_readPos < m_readLen)
+    {
+        this->FlushReadBuffer();
+    }
+
+    return this->SetLengthCore(value);
 }
 
 int64_t FileStream::Position() const
@@ -75,6 +132,11 @@ int64_t FileStream::Position() const
 const std::string& FileStream::Name() const noexcept
 {
     return m_fileName;
+}
+
+void FileStream::Flush()
+{
+    this->Flush(false);
 }
 
 std::vector<uint8_t>& FileStream::GetBuffer() noexcept
@@ -149,16 +211,51 @@ int32_t FileStream::ReadByte()
         }
     }
 
-    return m_buffer[m_readPos++];;
+    return m_buffer[m_readPos++];
 }
 
-bool FileStream::Write(uint8_t* buffer, int32_t count)
+bool FileStream::Write(const uint8_t* buffer, int32_t count)
 {
     if (this->CanWrite() == false)
     {
         return false;
     }
-    // TODO: impl
+
+    this->FlushReadBuffer();
+
+    if (m_writePos > 0)
+    {
+        int64_t numBytes = m_bufferSize - m_writePos;
+        if (numBytes > 0)
+        {
+            // If the specified buffer can be stored into the m_buffer directly
+            if (count <= numBytes)
+            {
+                std::memcpy(&GetBuffer()[m_writePos], buffer, count);
+                m_writePos += count;
+                return true;
+            }
+            else
+            {
+                std::memcpy(&GetBuffer()[m_writePos], buffer, static_cast<size_t>(numBytes));
+                m_writePos += numBytes;
+                buffer += numBytes;
+                count -= numBytes;
+            }
+        }
+
+        this->FlushWriteBuffer();
+    }
+
+    if (m_bufferSize < count)
+    {
+        this->WriteCore(buffer, count);
+        return true;
+    }
+
+    std::memcpy(&GetBuffer()[m_writePos], buffer, count);
+    m_writePos += count;
+
     return true;
 }
 
@@ -208,6 +305,23 @@ void FileStream::FlushReadBuffer()
     }
 
     m_readLen = m_readPos = 0;
+}
+
+void FileStream::Flush(bool flushToDisk)
+{
+    if (m_writePos > 0 && this->CanWrite())
+    {
+        this->FlushWriteBuffer();
+    }
+    else if (m_readPos < m_readLen && this->CanSeek())
+    {
+        this->FlushReadBuffer();
+    }
+
+    if (flushToDisk)
+    {
+        this->FlushCore();
+    }
 }
 
 } /* namespace tgon */

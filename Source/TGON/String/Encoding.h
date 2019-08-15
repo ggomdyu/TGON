@@ -49,8 +49,7 @@ public:
 
     /**
      * @brief   Converts a string from one encoding to another.
-     * @param [in] srcStr       The source of _FromEncodingType.
-     * @param [out] destStr     The output destination of _ToEncodingType.
+     * @param [in] str      The source of _FromEncodingType.
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
     template <typename _ToEncodingType, typename _SrcCharType>
@@ -104,11 +103,11 @@ class ASCII :
 {
 /**@section Variable */
 public:
-    static constexpr const char EncodingName[] = "US-ASCII";
-    static constexpr const int32_t MinCharSize = 1;
-    static constexpr const int32_t MaxCharSize = 1;
-    static constexpr const int32_t CodePage = 20127;
-    static constexpr const bool IsSingleByte = true;
+    static constexpr char EncodingName[] = "US-ASCII";
+    static constexpr int32_t MinCharSize = 1;
+    static constexpr int32_t MaxCharSize = 1;
+    static constexpr int32_t CodePage = 20127;
+    static constexpr bool IsSingleByte = true;
 
 /**@section Method */
 public:
@@ -120,11 +119,11 @@ class UTF8 :
 {
 /**@section Variable */
 public:
-    static constexpr const char EncodingName[] = "UTF-8";
-    static constexpr const int32_t MinCharSize = 1;
-    static constexpr const int32_t MaxCharSize = 3;
-    static constexpr const int32_t CodePage = 65001;
-    static constexpr const bool IsSingleByte = false;
+    static constexpr char EncodingName[] = "UTF-8";
+    static constexpr int32_t MinCharSize = 1;
+    static constexpr int32_t MaxCharSize = 3;
+    static constexpr int32_t CodePage = 65001;
+    static constexpr bool IsSingleByte = false;
 
 /**@section Method */
 public:
@@ -214,11 +213,11 @@ class UTF16LE :
 {
 /**@section Variable */
 public:
-    static constexpr const char EncodingName[] = "UTF16LE";
-    static constexpr const int32_t MinCharSize = 2;
-    static constexpr const int32_t MaxCharSize = 2;
-    static constexpr const int32_t CodePage = 1200;
-    static constexpr const bool IsSingleByte = false;
+    static constexpr char EncodingName[] = "UTF16LE";
+    static constexpr int32_t MinCharSize = 2;
+    static constexpr int32_t MaxCharSize = 2;
+    static constexpr int32_t CodePage = 1200;
+    static constexpr bool IsSingleByte = false;
 
 /**@section Method */
 public:
@@ -230,11 +229,11 @@ class UTF32 :
 {
 /**@section Variable */
 public:
-    static constexpr const char EncodingName[] = "UTF-32";
-    static constexpr const int32_t MinCharSize = 4;
-    static constexpr const int32_t MaxCharSize = 4;
-    static constexpr const int32_t CodePage = 12000;
-    static constexpr const bool IsSingleByte = false;
+    static constexpr char EncodingName[] = "UTF-32";
+    static constexpr int32_t MinCharSize = 4;
+    static constexpr int32_t MaxCharSize = 4;
+    static constexpr int32_t CodePage = 12000;
+    static constexpr bool IsSingleByte = false;
 
 /**@section Method */
 public:

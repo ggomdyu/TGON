@@ -6,8 +6,8 @@
 #include <Windows.h>
 
 #include "String/Encoding.h"
-#include "Diagnostics/Debug.h"
 #include "Misc/Algorithm.h"
+#include "Diagnostics/Debug.h"
 
 #include "../FileStream.h"
 
@@ -87,8 +87,7 @@ int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
 
     m_readPos = m_readLen = 0;
 
-    int64_t pos = SeekCore(offset, origin);
-    return pos;
+    return SeekCore(offset, origin);
 }
 
 int64_t FileStream::Length() const
@@ -105,7 +104,13 @@ int64_t FileStream::Length() const
         return -1;
     }
 
-    return li.QuadPart;
+    int64_t length = li.QuadPart;
+    if (m_filePos + m_writePos > li.QuadPart)
+    {
+        length = m_filePos + m_writePos;
+    }
+
+    return length;
 }
 
 void FileStream::Close()
@@ -136,7 +141,7 @@ int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
     return readBytes;
 }
 
-int32_t FileStream::WriteCore(uint8_t* buffer, int32_t bufferBytes)
+int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t bufferBytes)
 {
     DWORD writtenBytes = 0;
     if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
@@ -162,6 +167,49 @@ int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
     m_filePos = newFilePointer.QuadPart;
 
     return newFilePointer.QuadPart;
+}
+
+bool FileStream::SetLengthCore(int64_t value)
+{
+    auto prevFilePos = m_filePos;
+    if (m_filePos != value)
+    {
+        if (this->SeekCore(value, SeekOrigin::Begin) == -1)
+        {
+            return false;
+        }
+    }
+
+    if (SetEndOfFile(m_nativeHandle) == FALSE)
+    {
+        return false;
+    }
+
+    if (prevFilePos != value)
+    {
+        if (value <= prevFilePos)
+        {
+            if (this->SeekCore(0, SeekOrigin::End) == false)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            // Roll back the seek position
+            if (this->SeekCore(prevFilePos, SeekOrigin::Begin))
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+void FileStream::FlushCore()
+{
+    FlushFileBuffers(m_nativeHandle);
 }
 
 } /* namespace tgon */
