@@ -140,4 +140,4 @@ bool File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWr
     return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
-} /* namespace tgon */
+}

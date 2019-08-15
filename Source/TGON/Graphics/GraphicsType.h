@@ -77,4 +77,4 @@ enum class BlendMode
     HardLight,
 };
 
-} /* namespace tgon */
+}

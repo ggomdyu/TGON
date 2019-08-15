@@ -21,4 +21,4 @@ inline std::size_t GetComponentId()
     return tgon::GetRTTI<_ComponentType>()->GetHashCode();
 }
 
-} /* namespace tgon */
+}

@@ -93,4 +93,4 @@ void OpenGLIndexBuffer::Destroy()
     }
 }
 
-} /* namespace tgon */
+}

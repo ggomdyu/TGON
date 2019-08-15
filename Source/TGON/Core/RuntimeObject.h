@@ -31,7 +31,7 @@ public:
 
 inline RuntimeObject::~RuntimeObject() = default;
 
-} /* namespace tgon */
+}
 
 #define TGON_DECLARE_RTTI(classType)\
     using SuperType = ThisType;\

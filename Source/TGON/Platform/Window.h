@@ -100,4 +100,4 @@ public:
     DelegateChain<void()> OnLoseFocus;
 };
 
-} /* namespace tgon */
+}

@@ -118,4 +118,4 @@ HGLRC MakeNewGLRC(HDC dcHandle)
     return context;
 }
 
-} /* namespace tgon */
+}

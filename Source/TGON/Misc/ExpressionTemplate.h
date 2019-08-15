@@ -241,4 +241,4 @@ private:
     const _SecondOperandType& m_secondOperand;
 };
 
-} /* namespace tgon */
+}

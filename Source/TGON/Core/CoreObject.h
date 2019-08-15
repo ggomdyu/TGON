@@ -63,4 +63,4 @@ inline const _Type* CoreObject::GetExtraData() const
     return const_cast<decltype(this)>(this)->GetExtraData<_Type>();
 }
 
-} /* namespace tgon */
+}

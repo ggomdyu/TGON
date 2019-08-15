@@ -152,4 +152,4 @@ const FRect& UISprite::GetScissorRect() const noexcept
     return m_scissorRect;
 }
 
-} /* namespace tgon */
+}

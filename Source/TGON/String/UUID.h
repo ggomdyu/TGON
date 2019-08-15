@@ -99,4 +99,4 @@ inline const _CharType BasicUUID<_CharType, _StringTraitsType>::At(size_t index)
     return SuperType::At(index);
 }
     
-} /* namespace tgon */
+}

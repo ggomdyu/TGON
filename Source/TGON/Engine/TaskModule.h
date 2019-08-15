@@ -44,4 +44,4 @@ private:
     std::array<std::unique_ptr<ConcurrentDispatchQueue>, 5> m_globalDispatchQueues;
 };
 
-} /* namespace tgon */
+}

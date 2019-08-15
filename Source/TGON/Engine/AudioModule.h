@@ -36,4 +36,4 @@ private:
     //AudioDevice m_audioDevice;
 };
 
-} /* namespace tgon */
+}

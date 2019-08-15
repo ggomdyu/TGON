@@ -28,4 +28,4 @@ public:
 
 inline IModule::~IModule() = default;
 
-} /* namespace tgon */
+}

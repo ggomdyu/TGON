@@ -44,4 +44,4 @@ inline void VertexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], b
     this->SetData(data, sizeof(data), isDynamicUsage);
 }
 
-} /* namespace tgon */
+}

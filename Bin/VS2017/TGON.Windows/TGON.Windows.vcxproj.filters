@@ -62,12 +62,6 @@
     <Filter Include="Sources\TGON\Thread\Windows">
       <UniqueIdentifier>{d0c6a97a-117e-4d09-b92a-f77e4d48fca1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\TGON\Misc">
-      <UniqueIdentifier>{5f4d163e-b6d3-4020-ba8c-57cebab54319}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\TGON\Misc\Windows">
-      <UniqueIdentifier>{28a82b34-9a2e-47f7-9f45-5aade2be10ba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMoteFactoryCreator.h">
@@ -109,14 +103,11 @@
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.h">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsConfig.h">
-      <Filter>Sources\TGON\Platform\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.h">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Misc\Windows\SafeFileHandle.h">
-      <Filter>Sources\TGON\Misc\Windows</Filter>
+    <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsConfig.h">
+      <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

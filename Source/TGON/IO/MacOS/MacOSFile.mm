@@ -25,12 +25,7 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
 std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0)
-    {
-        return {};
-    }
-    
-    if (S_ISREG(s.st_mode) == false)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }
@@ -41,28 +36,18 @@ std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
 std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }
     
-    if (S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atimespec.tv_sec);
 }
 
 std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0)
-    {
-        return {};
-    }
-
-    if (S_ISREG(s.st_mode) == false)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }

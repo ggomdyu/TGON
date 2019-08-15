@@ -17,4 +17,4 @@ TGON_API void SrandWELL1024a();
 /**@brief	Gets random value between 0.0 ~ 1.0 */
 TGON_API double WELL1024a();
 
-} /* namespace tgon */
+}

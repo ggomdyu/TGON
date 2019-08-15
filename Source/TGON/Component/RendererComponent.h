@@ -45,4 +45,4 @@ protected:
     std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
-} /* namespace tgon */
+}

@@ -156,4 +156,4 @@ void ConcurrentDispatchQueue::DispatchQueueHandler()
     }
 }
 
-} /* namespace tgon */
+}

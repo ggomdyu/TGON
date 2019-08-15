@@ -1,5 +1,8 @@
 #include "PrecompiledHeader.h"
 
+#ifndef NOMINMAX
+#    define NOMINMAX
+#endif
 #include <Windows.h>
 
 #include "../Locale.h"
@@ -28,4 +31,4 @@ std::string GetLanguage()
     return std::string(languageStr, languageStrLen);
 }
 
-} /* namespace tgon */
+}

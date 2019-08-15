@@ -55,4 +55,4 @@ protected:
 
 using PlatformWindow = WindowsWindow;
 
-} /* namespace tgon */
+}

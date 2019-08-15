@@ -103,4 +103,4 @@ TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)
     }
 }
 
-} /* namespace tgon */
+}

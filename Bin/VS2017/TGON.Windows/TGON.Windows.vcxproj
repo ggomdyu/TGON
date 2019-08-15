@@ -143,7 +143,6 @@
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsInputManager.h" />
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.h" />
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsMouse.h" />
-    <ClInclude Include="..\..\..\Source\TGON\Misc\Windows\SafeFileHandle.h" />
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsApplication.h" />
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\..\Source\TGON\Platform\Windows\WindowsWindow.h" />

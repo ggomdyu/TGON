@@ -65,4 +65,4 @@ private:
     bool m_needToDestroy;
 };
     
-} /* namespace tgon */
+}

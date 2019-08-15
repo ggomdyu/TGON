@@ -126,4 +126,4 @@ bool Gamepad::IsButtonUp(int32_t buttonNumber) const
     }
 }
 
-} /* namespace tgon */
+}

@@ -100,4 +100,4 @@ private:
 
 using PlatformTexture = OpenGLTexture;
 
-} /* namespace tgon */
+}

@@ -140,4 +140,4 @@ bool UIRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
     return true;
 }
 
-} /* namespace tgon */
+}

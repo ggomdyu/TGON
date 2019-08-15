@@ -178,4 +178,4 @@ PixelFormat ImageView::GetPixelFormat() const noexcept
     return m_pixelFormat;
 }
 
-} /* namespace tgon */
+}

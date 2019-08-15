@@ -108,4 +108,4 @@ void EnableCrashHandler()
     PreventSetUnhandledExceptionFilter();
 }
 
-} /* namespace tgon */
+}

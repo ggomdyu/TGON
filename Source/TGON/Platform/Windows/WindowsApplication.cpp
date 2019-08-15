@@ -19,7 +19,7 @@ constexpr UINT ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noex
     return nativeMessageBoxIcons[static_cast<int>(messageBoxIcon)];
 }
 
-} /* namespace */
+}
 
 WindowsApplication::WindowsApplication()
 {
@@ -84,4 +84,4 @@ void Application::ShowMessageBox(const std::string_view& title, const std::strin
     ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
 }
 
-} /* namespace tgon */
+}

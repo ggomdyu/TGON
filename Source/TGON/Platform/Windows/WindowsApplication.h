@@ -25,4 +25,4 @@ private:
 
 using PlatformApplication = WindowsApplication;
 
-} /* namespace tgon */                               
+}                               

@@ -112,4 +112,4 @@ inline int32_t BaseAudioImporter<_DerivedType>::GetSamplingRate() const noexcept
     return m_samplingRate;
 }
 
-} /* namespace tgon */
+}

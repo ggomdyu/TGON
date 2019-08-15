@@ -35,4 +35,4 @@ enum class PixelFormat
     //PVRTC4
 };
 
-} /* namespace tgon */  
+}  

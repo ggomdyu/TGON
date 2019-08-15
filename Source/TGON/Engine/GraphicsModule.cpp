@@ -56,4 +56,4 @@ const UIRenderer& GraphicsModule::GetUIRenderer() const noexcept
     return m_canvasRenderer;
 }
 
-} /* namespace tgon */
+}

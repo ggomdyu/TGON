@@ -70,4 +70,4 @@ private:
 
 using PlatformVertexBuffer = OpenGLVertexBuffer;
 
-} /* namespace tgon */
+}

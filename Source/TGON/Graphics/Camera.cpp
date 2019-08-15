@@ -151,4 +151,4 @@ const Vector3& Camera::GetLookAt() const noexcept
     return m_lookAt;
 }
 
-} /* namespace tgon */
+}

@@ -86,4 +86,4 @@ private:
 
 using PlatformTexture = OpenGLFontTexture;
 
-} /* namespace tgon */
+}

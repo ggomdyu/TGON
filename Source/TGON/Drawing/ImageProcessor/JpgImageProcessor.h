@@ -46,4 +46,4 @@ inline bool JpgImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t
     return (fileData[0] == 0xFF && fileData[1] == 0xD8);
 }
 
-} /* namespace tgon */
+}

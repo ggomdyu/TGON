@@ -50,4 +50,4 @@ public:
     //virtual int WriteTimeout
 };
 
-} /* namespace tgon */
+}

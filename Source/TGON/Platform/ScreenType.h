@@ -50,4 +50,4 @@ constexpr Screen::Screen(int32_t width, int32_t height, int16_t bitsPerPixel, in
 {
 }
 
-} /* namespace tgon */
+}

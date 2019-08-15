@@ -68,4 +68,4 @@ inline InstanceCountLimiter<_InstanceType, _MaxInstanceCount>::InstanceCountLimi
     assert(InstanceCounter<_InstanceType>::GetInstanceCount() <= _MaxInstanceCount && "The object instance count is more than specified.");
 }
 
-} /* namespace tgon */
+}

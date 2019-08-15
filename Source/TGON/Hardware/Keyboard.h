@@ -35,4 +35,4 @@ public:
     bool IsKeyUp(KeyCode keyCode) const;
 };
     
-} /* namespace tgon */
+}

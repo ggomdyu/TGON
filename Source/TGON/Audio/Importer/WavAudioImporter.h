@@ -103,4 +103,4 @@ inline bool WavAudioImporter::VerifyFormat(const uint8_t* fileData, std::size_t 
     return true;
 }
 
-} /* namespace tgon */
+}

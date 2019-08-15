@@ -7,7 +7,6 @@
 #pragma once
 #include <string>
 #include <cstdint>
-#include <cassert>
 #include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
@@ -240,4 +239,4 @@ public:
     static int32_t GetCharCount(const char* str);
 };
 
-} /* namespace tgon */
+}

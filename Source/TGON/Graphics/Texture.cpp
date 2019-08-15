@@ -17,4 +17,4 @@ const PlatformTexture* Texture::GetPlatformDependency() const noexcept
     return this;
 }
 
-} /* namespace tgon */
+}

@@ -19,7 +19,7 @@ namespace
 Vector4 g_uniformCache[64] {};
 OpenGLShaderProgram* g_lastUsedShaderProgram;
 
-} /* namespace */
+}
 
 OpenGLShaderProgram::OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
     m_programId(0),
@@ -281,4 +281,4 @@ void OpenGLShaderProgram::ResetUniformCache()
     memset(g_uniformCache, 0, sizeof(g_uniformCache));
 }
 
-} /* namespace tgon */
+}
