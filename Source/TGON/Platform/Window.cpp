@@ -4,6 +4,11 @@
 
 namespace tgon
 {
+    
+Window::~Window()
+{
+    this->Close();
+}
 
 Window::Window(Window&& rhs) noexcept :
     PlatformWindow(std::move(rhs)),

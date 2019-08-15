@@ -14,18 +14,18 @@
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
     // Initialize singleton objects.
-    tgon::Application::GetInstance()->OnLaunch();
+    tgon::Application::OnLaunch();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
     // If launch has been completed, then start the message loop.
-    tgon::Application::GetInstance()->MessageLoop();
+    tgon::Application::GetInstance().MessageLoop();
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    tgon::Application::GetInstance()->OnTerminate();
+    tgon::Application::OnTerminate();
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender

@@ -1,30 +1,26 @@
 #import "PrecompiledHeader.h"
 
-#import "MacOSApplication.h"
+#import <AppKit/NSAlert.h>
+
+#import "../Application.h"
 
 namespace tgon
 {
-
-void MacOSApplication::ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon) const
+namespace
 {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:[NSString stringWithUTF8String:title.data()]];
-    [alert setInformativeText:[NSString stringWithUTF8String:message.data()]];
     
-    if (messageBoxIcon != MessageBoxIcon::No)
-    {
-        [alert setAlertStyle:static_cast<NSAlertStyle>(messageBoxIcon)];
-    }
-
-    [alert runModal];
-}
-
-void MacOSApplication::Terminate()
+constexpr NSAlertStyle ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noexcept
 {
-    [NSApp terminate:nil];
+    constexpr NSAlertStyle nativeMessageBoxIcons[] = {
+        NSAlertStyle(-1),
+        NSAlertStyleInformational,
+        NSAlertStyleCritical,
+    };
+    
+    return nativeMessageBoxIcons[static_cast<int32_t>(messageBoxIcon)];
 }
 
-void MacOSApplication::OnHandleMessage(NSEvent* event)
+void OnHandleMessage(NSEvent* event)
 {
     NSEventType eventType = [event type];
     switch (eventType)
@@ -32,10 +28,48 @@ void MacOSApplication::OnHandleMessage(NSEvent* event)
     case NSEventTypeKeyDown:
     case NSEventTypeKeyUp:
         break;
-            
+        
     default:
         [NSApp sendEvent:event];
         break;
+    }
+}
+
+} /* namespace */
+
+void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon)
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:[NSString stringWithUTF8String:title.data()]];
+    [alert setInformativeText:[NSString stringWithUTF8String:message.data()]];
+    
+    if (messageBoxIcon != MessageBoxIcon::No)
+    {
+        [alert setAlertStyle:ConvertMessageBoxIconToNative(messageBoxIcon)];
+    }
+
+    [alert runModal];
+}
+
+void Application::Terminate()
+{
+    [NSApp terminate:nil];
+}
+    
+void Application::MessageLoop()
+{
+    NSEvent* event = nil;
+    while (true)
+    {
+        while((event = [NSApp nextEventMatchingMask:NSEventMaskAny
+                                          untilDate:nil
+                                             inMode:NSDefaultRunLoopMode
+                                            dequeue:YES]) != nil)
+        {
+            OnHandleMessage(event);
+        }
+        
+        m_engine->Update();
     }
 }
 

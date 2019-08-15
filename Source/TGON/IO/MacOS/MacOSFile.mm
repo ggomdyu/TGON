@@ -1,5 +1,6 @@
 #import "PrecompiledHeader.h"
 
+#import <Foundation/Foundation.h>
 #import <utime.h>
 #import <cstdio>
 #import <sys/stat.h>
@@ -8,18 +9,52 @@
 
 namespace tgon
 {
-    
-bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTime)
+namespace
 {
-    return false;
+    
+NSDate* ConvertDateTimeToNative(const DateTime& dateTime)
+{
+    NSDateComponents* dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setYear:dateTime.GetYear()];
+    [dateComponents setMonth:dateTime.GetMonth()];
+    [dateComponents setDay:dateTime.GetDay()];
+    [dateComponents setHour:dateTime.GetHour()];
+    [dateComponents setMinute:dateTime.GetMinute()];
+    [dateComponents setSecond:dateTime.GetSecond()];
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDate* modificationDate = [[calendar dateFromComponents:dateComponents] dateByAddingTimeInterval:[[NSTimeZone systemTimeZone] secondsFromGMT]];
+    return modificationDate;
+}
+    
+} /* namespace */
+    
+bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& creationTimeUtc)
+{
+    NSDate* date = ConvertDateTimeToNative(creationTimeUtc);
+    
+    NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: date, NSFileCreationDate, nullptr];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    bool isSucceed = [fileManager setAttributes: attributes ofItemAtPath: [NSString stringWithUTF8String:path.data()] error: nullptr];
+    return isSucceed;
+}
+    
+bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTimeUtc)
+{
+    int64_t ticks = (lastAccessTimeUtc.ToUniversalTime().GetTicks() - DateTime::GetUnixEpoch().GetTicks()) / TimeSpan::TicksPerSecond;
+    
+    utimbuf buf{ticks, ticks};
+    return utime(path.data(), &buf) == 0;
 }
 
 bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc)
 {
-    int64_t ticks = (lastWriteTimeUtc.ToUniversalTime().GetTicks() - DateTime::GetUnixEpoch().GetTicks()) / TimeSpan::TicksPerSecond;
+    NSDate* dateComponents = ConvertDateTimeToNative(lastWriteTimeUtc);
     
-    utimbuf buf{0, ticks};
-    return utime(path.data(), &buf) == 0;
+    NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: dateComponents, NSFileModificationDate, nullptr];
+    return [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:[NSString stringWithUTF8String:path.data()] error:nil];
 }
 
 std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
