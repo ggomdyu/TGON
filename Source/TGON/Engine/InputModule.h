@@ -53,4 +53,4 @@ public:
     std::shared_ptr<Gamepad> m_gamepad;
 };
 
-}
+} /* namespace tgon */

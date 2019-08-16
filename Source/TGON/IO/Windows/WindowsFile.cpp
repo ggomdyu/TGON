@@ -34,7 +34,7 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
     return s;
 }
 
-}
+} /* namespace */
 
 bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept
 {
@@ -176,4 +176,4 @@ FileAttributes File::GetAttributes(const std::string_view& path)
     return FileAttributes(fileAttributeData.dwFileAttributes);
 }
 
-}
+} /* namespace tgon */

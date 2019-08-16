@@ -37,4 +37,4 @@ float TimeModule::GetTickTime() const noexcept
     return m_tickTime;
 }
 
-}
+} /* namespace tgon */

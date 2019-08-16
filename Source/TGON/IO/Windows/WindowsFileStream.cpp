@@ -39,7 +39,7 @@ HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess a
     return CreateFileW(reinterpret_cast<LPCWSTR>(utf16Path.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
-}
+} /* namespace */
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
@@ -212,4 +212,4 @@ void FileStream::FlushCore()
     FlushFileBuffers(m_nativeHandle);
 }
 
-}
+} /* namespace tgon */

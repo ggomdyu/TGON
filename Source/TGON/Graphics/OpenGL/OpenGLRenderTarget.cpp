@@ -141,4 +141,4 @@ void OpenGLRenderTarget::Destroy()
     }
 }
     
-}
+} /* namespace tgon */

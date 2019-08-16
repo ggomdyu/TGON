@@ -38,4 +38,4 @@ std::shared_ptr<const Material> RendererComponent::GetMaterial() const noexcept
 }
 
 
-}
+} /* namespace tgon */

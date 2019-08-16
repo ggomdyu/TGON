@@ -123,4 +123,4 @@ protected:
     std::string m_fileName;    
 };
 
-}
+} /* namespace tgon */

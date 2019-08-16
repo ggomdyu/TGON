@@ -15,4 +15,4 @@ const PlatformKeyboard& Keyboard::GetPlatformDependency() const noexcept
     return *this;
 }
 
-}
+} /* namespace tgon */

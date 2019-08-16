@@ -50,4 +50,4 @@ private:
     ALCcontext* m_context;
 };
 
-}
+} /* namespace tgon */

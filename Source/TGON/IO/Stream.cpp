@@ -15,4 +15,4 @@ bool Stream::Write(const Span<const uint8_t>& buffer)
     return this->Write(&buffer[0], buffer.Length());
 }
 
-}
+} /* namespace tgon */

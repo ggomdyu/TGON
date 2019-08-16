@@ -71,4 +71,4 @@ bool Keyboard::IsKeyUp(KeyCode keyCode) const
     }
 }
 
-}
+} /* namespace tgon */

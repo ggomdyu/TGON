@@ -38,4 +38,4 @@ public:
     bool IsMouseUp(MouseCode mouseCode) const;
 };
     
-}
+} /* namespace tgon */

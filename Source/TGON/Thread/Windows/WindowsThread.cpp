@@ -33,4 +33,4 @@ void Thread::SetPriority(ThreadPriority threadPriority)
     }
 }
 
-}
+} /* namespace tgon */

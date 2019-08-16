@@ -29,4 +29,4 @@ public:
     using PlatformRenderTarget::Unuse;
 };
 
-}
+} /* namespace tgon */

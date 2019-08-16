@@ -89,4 +89,4 @@ private:
     static std::unordered_map<int32_t, int32_t> m_globalObjectNameHashMap;
 };
 
-}
+} /* namespace tgon */

@@ -324,4 +324,4 @@ void FileStream::Flush(bool flushToDisk)
     }
 }
 
-}
+} /* namespace tgon */

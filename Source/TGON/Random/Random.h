@@ -63,4 +63,4 @@ inline void Shuffle(_ContainerType& container)
     std::shuffle(container.begin(), container.end(), std::default_random_engine(randomSeed));
 };
 
-}
+} /* namespace tgon */

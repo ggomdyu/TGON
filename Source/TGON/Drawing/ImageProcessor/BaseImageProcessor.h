@@ -123,4 +123,4 @@ inline bool BaseImageProcessor<_DerivedType>::VerifyFormat(const uint8_t* srcDat
     return _DerivedType::VerifyFormat(srcData, srcDataBytes);
 }
 
-}  
+} /* namespace tgon */  

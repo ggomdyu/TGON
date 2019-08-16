@@ -68,4 +68,4 @@ class StreamAudioPlayer
 public:
 };
 
-}
+} /* namespace tgon */

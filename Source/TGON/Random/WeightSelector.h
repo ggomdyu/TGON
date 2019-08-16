@@ -129,4 +129,4 @@ inline bool WeightSelector<_WeightType>::IsEmpty() const noexcept
     return m_weightDescList.size() <= 0;
 }
 
-}
+} /* namespace tgon */

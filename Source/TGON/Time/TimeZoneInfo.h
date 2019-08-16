@@ -47,4 +47,4 @@ private:
     bool m_supportsDaylightSavingTime;
 };
 
-}
+} /* namespace tgon */

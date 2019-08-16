@@ -38,4 +38,4 @@ bool Component::IsActive() const noexcept
     return m_isActive;
 }
 
-}
+} /* namespace tgon */

@@ -58,4 +58,4 @@ inline InstantiateCountLimiter<_InstanceType, _MaxInstantiateCount>::Instantiate
     assert(InstantiateCounter<_InstanceType>::GetInstantiateCount() <= _MaxInstantiateCount && "The object has been instantiated more than the specified count.");
 }
 
-}
+} /* namespace tgon */

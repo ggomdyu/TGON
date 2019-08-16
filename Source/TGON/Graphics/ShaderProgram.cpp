@@ -15,4 +15,4 @@ const PlatformShaderProgram* ShaderProgram::GetPlatformDependency() const noexce
     return this;
 }
 
-}
+} /* namespace tgon */

@@ -42,4 +42,4 @@ private:
     int32_t m_vertexEndOffset;
 };
 
-}
+} /* namespace tgon */

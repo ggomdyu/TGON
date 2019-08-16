@@ -32,4 +32,4 @@ private:
     std::unordered_map<StringHash, std::unordered_map<uintptr_t, EventHandler>> m_eventHandlers;
 };
 
-}
+} /* namespace tgon */

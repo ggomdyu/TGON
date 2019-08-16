@@ -42,4 +42,4 @@ inline bool WebPImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_
     return (header[0] == 'W' && header[1] == 'E' && header[2] == 'B' && header[3] == 'P');
 }
 
-}  
+} /* namespace tgon */  

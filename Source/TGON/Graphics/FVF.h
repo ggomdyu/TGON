@@ -38,4 +38,4 @@ struct V3F_N3F_T2F
     Vector2 uv;
 };
 
-}
+} /* namespace tgon */

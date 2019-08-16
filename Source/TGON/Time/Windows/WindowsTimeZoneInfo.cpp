@@ -32,7 +32,7 @@ TimeZoneInfo CreateLocal()
     return TimeZoneInfo(std::string(id, idBytes), baseUtcOffset, std::string(standardName, standardNameBytes), std::string(standardName, standardNameBytes), std::string(daylightDisplayName, daylightDisplayNameBytes), isSupportDaylightSavingTime);
 }
     
-}
+} /* namespace */
 
 const TimeZoneInfo& TimeZoneInfo::Local()
 {
@@ -40,4 +40,4 @@ const TimeZoneInfo& TimeZoneInfo::Local()
     return timeZoneInfo;
 }
 
-}
+} /* namespace tgon */

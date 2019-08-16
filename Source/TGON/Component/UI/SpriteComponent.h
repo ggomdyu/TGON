@@ -43,4 +43,4 @@ private:
     Color4f m_blendColor;
 };
 
-}
+} /* namespace tgon */

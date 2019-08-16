@@ -53,4 +53,4 @@ private:
     float m_tickTime;
 };
 
-}
+} /* namespace tgon */

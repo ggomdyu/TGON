@@ -390,7 +390,7 @@ inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>:
     return this->End();
 }
 
-}
+} /* namespace tgon */
 
 //Swap
 //_StringTraitsType::Swap(&m_str[0], m_strLen, _CharBufferSize, &rhs[0], rhs.Length(), rhs.Capacity());

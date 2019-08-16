@@ -60,4 +60,4 @@ public:
     static constexpr const char DirectorySeparatorChar = '\\';
 };
 
-}
+} /* namespace tgon */

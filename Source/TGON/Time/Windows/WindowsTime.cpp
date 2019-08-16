@@ -15,4 +15,4 @@ TGON_API int64_t GetTickCount()
     return GetTickCount64();
 }
 
-}
+} /* namespace tgon */

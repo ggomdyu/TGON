@@ -55,4 +55,4 @@ constexpr VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor(VertexAttri
 {
 }
 
-}
+} /* namespace tgon */

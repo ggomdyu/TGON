@@ -15,4 +15,4 @@ const PlatformVertexBuffer* VertexBuffer::GetPlatformDependency() const noexcept
     return this;
 }
 
-}
+} /* namespace tgon */

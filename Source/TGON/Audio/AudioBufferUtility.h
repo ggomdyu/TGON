@@ -76,4 +76,4 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
-}  
+} /* namespace tgon */  

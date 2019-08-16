@@ -124,4 +124,4 @@ constexpr bool IsBasicStringValue = IsBasicString<_Type>::value;
 template <typename _Type>
 constexpr bool IsBasicStringViewValue = IsBasicStringView<_Type>::value;
 
-}
+} /* namespace tgon */

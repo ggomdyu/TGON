@@ -56,4 +56,4 @@ private:
     
 using PlatformRenderTarget = OpenGLRenderTarget;
 
-}
+} /* namespace tgon */

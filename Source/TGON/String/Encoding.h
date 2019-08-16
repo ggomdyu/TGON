@@ -239,4 +239,4 @@ public:
     static int32_t GetCharCount(const char* str);
 };
 
-}
+} /* namespace tgon */

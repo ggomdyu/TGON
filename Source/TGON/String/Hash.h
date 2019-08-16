@@ -41,4 +41,4 @@ constexpr size_t X65599Hash(const _CharType* str) noexcept
     return hashValue ^ (hashValue >> 16);
 }
 
-}
+} /* namespace tgon */

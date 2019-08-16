@@ -30,7 +30,7 @@ Screen ConvertDEVMODEToScreen(const DEVMODE& dm) noexcept
     );
 }
 
-}
+} /* namespace */
 
 //bool WindowsScreen::SetFullScreen(bool setFullScreen, const WindowsWindow& window)
 //{
@@ -101,4 +101,4 @@ std::vector<Screen> GetAllScreen()
     return screens;
 }
 
-}
+} /* namespace tgon */

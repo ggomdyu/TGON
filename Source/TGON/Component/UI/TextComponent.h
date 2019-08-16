@@ -78,4 +78,4 @@ private:
     float m_lineSpacing;
 };
 
-}
+} /* namespace tgon */

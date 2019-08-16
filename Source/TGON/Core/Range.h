@@ -96,4 +96,4 @@ inline typename Range<_ValueType>::ConstReverseIteratorType Range<_ValueType>::r
     return m_begin;
 }
 
-}
+} /* namespace tgon */

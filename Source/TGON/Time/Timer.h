@@ -67,4 +67,4 @@ private:
     bool m_isEnabled;
 };
 
-}
+} /* namespace tgon */

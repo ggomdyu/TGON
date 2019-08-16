@@ -99,4 +99,4 @@ public:
     
 using PlatformShaderProgram = OpenGLShaderProgram;
     
-}
+} /* namespace tgon */

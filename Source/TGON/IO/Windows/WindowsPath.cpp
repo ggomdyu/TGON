@@ -81,4 +81,4 @@ TGON_API int32_t Path::GetDocumentsDirectory(char* destStr)
     return GetSpecialDirectory(CSIDL_MYDOCUMENTS, destStr);
 }
 
-}
+} /* namespace tgon */

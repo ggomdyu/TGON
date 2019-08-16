@@ -38,4 +38,4 @@ public:
     using PlatformTexture::GetPixelFormat;
 };
     
-}
+} /* namespace tgon */

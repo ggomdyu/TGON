@@ -45,4 +45,4 @@ public:
     using PlatformGraphics::DrawIndexedPrimitives;
 };
 
-}
+} /* namespace tgon */

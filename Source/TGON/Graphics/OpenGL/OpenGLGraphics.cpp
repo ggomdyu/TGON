@@ -191,4 +191,4 @@ void OpenGLGraphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t 
     glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
 }
 
-}
+} /* namespace tgon */

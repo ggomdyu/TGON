@@ -15,4 +15,4 @@ const PlatformGraphics* Graphics::GetPlatformDependency() const noexcept
     return this;
 }
 
-}
+} /* namespace tgon */

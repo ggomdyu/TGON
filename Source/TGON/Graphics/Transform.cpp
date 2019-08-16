@@ -142,4 +142,4 @@ void Transform::Update()
     m_isDirty = false;
 }
     
-}
+} /* namespace tgon */

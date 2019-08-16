@@ -44,4 +44,4 @@ public:
     UIRenderer m_canvasRenderer;
 };
 
-}
+} /* namespace tgon */

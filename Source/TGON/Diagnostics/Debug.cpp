@@ -72,4 +72,4 @@ void Debug::Unindent()
 #endif
 }
 
-}
+} /* namespace tgon */

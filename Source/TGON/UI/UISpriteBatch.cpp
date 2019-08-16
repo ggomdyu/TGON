@@ -93,4 +93,4 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
     newVertices[5] = newVertices[0];
 }
 
-}
+} /* namespace tgon */

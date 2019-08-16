@@ -42,7 +42,7 @@ inline bool BmpImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t
     return (header[0] == 'B' && header[1] == 'M');
 }
     
-}  
+} /* namespace tgon */  
 
 //namespace
 //{
@@ -73,4 +73,4 @@ inline bool BmpImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t
 //    return true;
 //}
 //
-//}
+//} /* namespace */

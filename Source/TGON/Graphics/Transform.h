@@ -56,4 +56,4 @@ protected:
     bool m_isDirty;
 };
 
-}
+} /* namespace tgon */

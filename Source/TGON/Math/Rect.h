@@ -220,6 +220,6 @@ inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t strBufferS
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf %lf %lf", x, y, width, height);
 }
 
-}
+} /* namespace tgon */
 
 #undef TGON_SPRINTF

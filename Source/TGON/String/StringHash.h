@@ -294,7 +294,7 @@ using FixedWString256Hash = BasicStringHash<FixedWString256>;
 using FixedWString512Hash = BasicStringHash<FixedWString512>;
 using FixedWString1024Hash = BasicStringHash<FixedWString1024>;
 
-}
+} /* namespace tgon */
 
 namespace std
 {

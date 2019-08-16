@@ -37,4 +37,4 @@ inline std::shared_ptr<const ICloneable> ICloneable::Clone() const
     return const_cast<decltype(this)>(this)->Clone();
 }
 
-}
+} /* namespace tgon */

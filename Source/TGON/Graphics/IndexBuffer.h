@@ -45,4 +45,4 @@ inline void IndexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bo
     this->SetData(data, sizeof(data), isDynamicUsage);
 }
 
-}
+} /* namespace tgon */

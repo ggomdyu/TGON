@@ -200,4 +200,4 @@ inline float Sqrt(float number)
     return std::sqrtf(number);
 }
 
-}
+} /* namespace tgon */

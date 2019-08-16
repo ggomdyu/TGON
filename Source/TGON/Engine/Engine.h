@@ -22,7 +22,7 @@
         return std::make_unique<className>();\
     }\
     \
-    }
+    } /* namespace tgon */
 
 namespace tgon
 {
@@ -149,4 +149,4 @@ inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
     return const_cast<decltype(this)>(this)->FindModule<_ModuleType>();
 }
     
-}
+} /* namespace tgon */

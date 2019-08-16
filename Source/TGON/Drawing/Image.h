@@ -208,4 +208,4 @@ public:
     PixelFormat m_pixelFormat;
 };
 
-}
+} /* namespace tgon */

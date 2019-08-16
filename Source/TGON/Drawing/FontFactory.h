@@ -110,4 +110,4 @@ private:
     FT_Library m_library;
 };
 
-}
+} /* namespace tgon */

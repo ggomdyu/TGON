@@ -90,4 +90,4 @@ bool Mouse::IsMouseUp(MouseCode mouseCode) const
     }
 }
 
-}
+} /* namespace tgon */

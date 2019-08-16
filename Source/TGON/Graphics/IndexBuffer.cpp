@@ -15,4 +15,4 @@ const PlatformIndexBuffer* IndexBuffer::GetPlatformDependency() const noexcept
     return this;
 }
     
-}
+} /* namespace tgon */

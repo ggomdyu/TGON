@@ -212,4 +212,4 @@ bool AudioBuffer::Decode(const uint8_t* fileData, std::size_t fileDataBytes, Aud
     return false;
 }
 
-}
+} /* namespace tgon */

@@ -359,4 +359,4 @@ constexpr TimeSpan TimeSpan::GetZero() noexcept
     return TimeSpan(0);
 }
 
-}
+} /* namespace tgon */

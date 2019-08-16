@@ -31,4 +31,4 @@ std::string GetLanguage()
     return std::string(languageStr, languageStrLen);
 }
 
-}
+} /* namespace tgon */

@@ -39,4 +39,4 @@ const ShaderProgram& Material::GetShaderProgram() const noexcept
     return m_shaderProgram;
 }
 
-}
+} /* namespace tgon */

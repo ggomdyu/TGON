@@ -27,4 +27,4 @@ Scene& SceneModule::GetCurrentScene() noexcept
     return *m_currScene;
 }
 
-}
+} /* namespace tgon */

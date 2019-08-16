@@ -9,7 +9,7 @@ namespace
 
 std::thread::id g_mainThreadId = std::this_thread::get_id();
 
-}
+} /* namespace */
 
 void Thread::Detach()
 {
@@ -51,4 +51,4 @@ bool Thread::IsMainThread(ThreadId threadId) noexcept
     return threadId == g_mainThreadId;
 }
 
-}
+} /* namespace tgon */

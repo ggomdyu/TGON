@@ -41,4 +41,4 @@ private:
     inline static std::recursive_mutex m_mutex;
 };
 
-}
+} /* namespace tgon */

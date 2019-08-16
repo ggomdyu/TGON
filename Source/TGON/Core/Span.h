@@ -235,7 +235,7 @@ inline void Span<_ElementType, Extent>::Fill(const _ElementType& value)
     }
 }
 
-}
+} /* namespace tgon */
 
 #undef TGON_STRINGIFY
 #undef TGON_EXPECT

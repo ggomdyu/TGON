@@ -45,4 +45,4 @@ public:
     void* GetNativeHandle();
 };
 
-}
+} /* namespace tgon */

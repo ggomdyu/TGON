@@ -100,4 +100,4 @@ void RectTransform::Update()
     
 }
 
-}
+} /* namespace tgon */

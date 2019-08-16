@@ -341,6 +341,6 @@ inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, std::size_t str
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", x, y);
 }
 
-}
+} /* namespace tgon */
 
 #undef TGON_SPRINTF

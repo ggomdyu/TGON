@@ -158,4 +158,4 @@ protected:
 
 using PlatformKeyboard = WindowsKeyboard;
 
-}
+} /* namespace tgon */

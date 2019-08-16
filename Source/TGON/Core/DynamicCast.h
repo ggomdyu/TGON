@@ -37,4 +37,4 @@ inline _CastToType DynamicCast(_CastFromType&& ptr) noexcept
     return nullptr;
 }
 
-}
+} /* namespace tgon */

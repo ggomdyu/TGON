@@ -369,6 +369,6 @@ inline int32_t BasicVector4<_ValueType>::ToString(char* destStr, std::size_t str
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f, %f", x, y, z, w);
 }
     
-}
+} /* namespace tgon */
 
 #undef TGON_SPRINTF

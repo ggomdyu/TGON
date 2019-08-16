@@ -63,4 +63,4 @@ private:
 
 using PlatformGraphics = OpenGLGraphics;
 
-}
+} /* namespace tgon */

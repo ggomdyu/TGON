@@ -59,4 +59,4 @@ private:
     std::shared_ptr<Material> m_inverseMaterial;
 };
     
-}
+} /* namespace tgon */

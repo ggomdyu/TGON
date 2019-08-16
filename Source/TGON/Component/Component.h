@@ -55,4 +55,4 @@ private:
     GameObject* m_owner;
 };
 
-}
+} /* namespace tgon */

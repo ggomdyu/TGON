@@ -20,4 +20,4 @@ int32_t UTF32::GetCharCount(const char* str)
     return static_cast<int32_t>(std::char_traits<char32_t>::length(reinterpret_cast<const char32_t*>(str)));
 }
 
-}
+} /* namespace tgon */

@@ -125,4 +125,4 @@ void OpenGLContext::Destroy()
     }
 }
 
-}
+} /* namespace tgon */

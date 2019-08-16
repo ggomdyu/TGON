@@ -63,4 +63,4 @@ std::shared_ptr<const Gamepad> InputModule::GetGamepad() const noexcept
     return m_gamepad;
 }
 
-}
+} /* namespace tgon */

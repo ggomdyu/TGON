@@ -118,4 +118,4 @@ PixelFormat OpenGLFontTexture::GetPixelFormat() const noexcept
     return m_image.GetPixelFormat();
 }
     
-}
+} /* namespace tgon */

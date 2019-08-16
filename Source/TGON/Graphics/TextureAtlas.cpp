@@ -143,4 +143,4 @@ bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
     return false;
 }
 
-}
+} /* namespace tgon */

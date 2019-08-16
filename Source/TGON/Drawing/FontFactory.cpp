@@ -42,7 +42,7 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode)
     return bytesTable[static_cast<int>(pixelMode)];
 }
 
-}
+} /* namespace */
 
 namespace tgon
 {
@@ -240,7 +240,7 @@ std::shared_ptr<Font> FontFactory::CreateFont(const StringHash& filePath) const
     return std::make_shared<Font>(filePath, m_library);
 }
 
-}
+} /* namespace tgon */
 
 #undef FT_ERRORDEF
 #undef FT_ERROR_START_LIST

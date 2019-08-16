@@ -36,4 +36,4 @@ protected:
 
 using PlatformInputManager = WindowsInputManager;
 
-}
+} /* namespace tgon */

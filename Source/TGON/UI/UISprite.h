@@ -72,4 +72,4 @@ private:
     UISprite m_sprites[9];
 };
     
-}
+} /* namespace tgon */

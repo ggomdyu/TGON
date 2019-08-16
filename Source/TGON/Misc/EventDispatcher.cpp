@@ -42,4 +42,4 @@ void EventDispatcher::DispatchEvent(const StringHash& eventName)
     }
 }
     
-}
+} /* namespace tgon */
