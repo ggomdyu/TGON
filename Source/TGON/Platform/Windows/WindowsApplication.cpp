@@ -16,7 +16,7 @@ constexpr UINT ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noex
         MB_ICONQUESTION,
         MB_ICONEXCLAMATION,
     };
-    return nativeMessageBoxIcons[static_cast<int>(messageBoxIcon)];
+    return nativeMessageBoxIcons[static_cast<int32_t>(messageBoxIcon)];
 }
 
 }

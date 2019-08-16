@@ -15,7 +15,6 @@
 #include "Platform/Application.h"
 #include "Platform/Screen.h"
 #include "Platform/Locale.h"
-#include "Platform/ScreenType.h"
 #include "Time/Time.h"
 #include "Time/TimeSpan.h"
 #include "Time/DateTime.h"

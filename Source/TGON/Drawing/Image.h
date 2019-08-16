@@ -9,12 +9,32 @@
 #include <string_view>
 #include <algorithm>
 
+#include "Platform/Config.h"
 #include "Math/Extent.h"
-
-#include "ImageUtility.h"
 
 namespace tgon
 {
+
+enum class ImageFormat
+{
+    Unknown = 0,
+    Bmp,
+    Jpg,
+    Jpeg = Jpg,
+    Png,
+    Tiff,
+    Gif,
+    WebP,
+};
+
+enum class PixelFormat
+{
+    Unknown = 0,
+    RGBA8888,
+    RGB888,
+    RGBA4444,
+    R8,
+};
 
 class TGON_API Image
 {
@@ -119,6 +139,25 @@ private:
     PixelFormat m_pixelFormat;
 };
 
+constexpr int32_t ConvertPixelFormatToBytesPerPixel(PixelFormat pixelFormat)
+{
+    constexpr int32_t bitsPerPixelTable[] = {
+        0, // Unknown
+        4, // RGBA8888
+        3, // RGB888
+        2, // RGBA4444
+        1, // R8
+    };
+    
+    return bitsPerPixelTable[static_cast<int>(pixelFormat)];
+}
+
+constexpr int32_t ConvertPixelFormatToBitsPerPixel(PixelFormat pixelFormat)
+{
+    return ConvertPixelFormatToBytesPerPixel(pixelFormat) * 8;
+}
+
+/*todo: deprecated. Use tgon::Span */
 class TGON_API ImageView
 {
 /**@section Constructor */

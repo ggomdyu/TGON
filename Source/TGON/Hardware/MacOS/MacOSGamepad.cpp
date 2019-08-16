@@ -3,7 +3,6 @@
 #include <gainput/gainput.h>
 
 #include "MacOSGamepad.h"
-#include "MacOSGamepadType.h"
 
 namespace tgon
 {

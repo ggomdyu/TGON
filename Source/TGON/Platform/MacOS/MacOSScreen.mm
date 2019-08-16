@@ -1,7 +1,6 @@
 #import "PrecompiledHeader.h"
 
 #import "../Screen.h"
-#import "../ScreenType.h"
 #import "../Window.h"
 
 #import <vector>

@@ -26,10 +26,6 @@ protected:
     explicit WindowsWindow(HWND wndHandle) noexcept;
     WindowsWindow(WindowsWindow&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    ~WindowsWindow();
-
 /**@section Operator */
 public:
     WindowsWindow& operator=(WindowsWindow&& rhs) noexcept;

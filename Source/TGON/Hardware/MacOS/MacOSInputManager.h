@@ -6,46 +6,27 @@
 
 #pragma once
 #include <boost/noncopyable.hpp>
+#include <gainput/gainput.h>
 #include <memory>
-
-#include "Platform/Config.h"
-
-namespace gainput
-{
-    
-class InputDeviceMouse;
-class InputDeviceKeyboard;
-class InputDevicePad;
-class InputManager;
-
-} /* namespace gainput */
 
 namespace tgon
 {
-    
-class MacOSWindow;
 
 class TGON_API MacOSInputManager :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
-    explicit MacOSInputManager(const MacOSWindow& window);
+    explicit MacOSInputManager();
    
-/**@section Destructor */
-public:
-    ~MacOSInputManager();
-    
 /**@section Method */
 public:
-    void Update();
-
     gainput::InputDeviceMouse* CreateNativeMouse();
     gainput::InputDeviceKeyboard* CreateNativeKeyboard();
     gainput::InputDevicePad* CreateNativeGamepad();
 
 /**@section Variable */
-private:
+protected:
     std::unique_ptr<gainput::InputManager> m_inputManager;
 };
     

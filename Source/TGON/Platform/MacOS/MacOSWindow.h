@@ -25,10 +25,6 @@ protected:
     MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexcept;
     MacOSWindow(MacOSWindow&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    virtual ~MacOSWindow();
-    
 /**@section Operator */
 public:
     MacOSWindow& operator=(MacOSWindow&& rhs) noexcept;

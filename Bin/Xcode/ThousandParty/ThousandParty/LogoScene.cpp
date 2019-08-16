@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <functional>
 #include <atomic>
@@ -255,20 +255,20 @@ void LogoScene::InitPhase4()
 {
     using namespace tgon;
 
-    FileStreamTest().Evaluate();
+//    FileStreamTest().Evaluate();
 
-    FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
-    for (int i = 0; i < (int)(4096.0 * 1.1); ++i)
-    {
-        if (i > 4095)
-        {
-            f.WriteByte(2);
-        }
-        else
-        {
-            f.WriteByte(1);
-        }
-    }
+//    FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
+//    for (int i = 0; i < (int)(4096.0 * 1.1); ++i)
+//    {
+//        if (i > 4095)
+//        {
+//            f.WriteByte(2);
+//        }
+//        else
+//        {
+//            f.WriteByte(1);
+//        }
+//    }
 
     //// Range 클래스에서 써보자
     ///*HasBeginEnd<std::vector<int>>::TypeCheckFunc<std::vector<int>>(1);

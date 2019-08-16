@@ -51,7 +51,7 @@ public:
 
 /**@section Destructor */
 public:
-    ~Window() = default;
+    ~Window();
 
 /**@section Operator */
 public:

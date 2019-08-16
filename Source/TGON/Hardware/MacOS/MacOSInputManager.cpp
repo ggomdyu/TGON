@@ -1,24 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <gainput/gainput.h>
-
-#include "MacOSInputManager.h"
+#include "../InputManager.h"
 
 namespace tgon
 {
 
-MacOSInputManager::MacOSInputManager(const MacOSWindow& window) :
-    m_inputManager(std::make_unique<gainput::InputManager>())
-{
-}
-    
-MacOSInputManager::~MacOSInputManager() = default;
-
-void MacOSInputManager::Update()
-{
-    m_inputManager->Update();
-}
-    
 gainput::InputDeviceMouse* MacOSInputManager::CreateNativeMouse()
 {
     return m_inputManager->CreateAndGetDevice<gainput::InputDeviceMouse>();
@@ -32,6 +18,23 @@ gainput::InputDeviceKeyboard* MacOSInputManager::CreateNativeKeyboard()
 gainput::InputDevicePad* MacOSInputManager::CreateNativeGamepad()
 {
     return m_inputManager->CreateAndGetDevice<gainput::InputDevicePad>();
+}
+
+MacOSInputManager::MacOSInputManager() :
+    m_inputManager(std::make_unique<gainput::InputManager>())
+{
+}
+
+InputManager::InputManager(const Window& inputTargetWindow) :
+    MacOSInputManager()
+{
+}
+
+InputManager::~InputManager() = default;
+
+void InputManager::Update()
+{
+    m_inputManager->Update();
 }
 
 } /* namespace tgon */

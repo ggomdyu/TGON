@@ -298,7 +298,6 @@
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
 		FDB6931822E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB6931722E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp */; };
-		FDB7001E22ABD68C0055FCED /* ImageUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7001D22ABD68C0055FCED /* ImageUtility.cpp */; };
 		FDB7034822B6B2E80055FCED /* infcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034722B6B2E80055FCED /* infcodes.c */; };
 		FDB7035822B6B30C0055FCED /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034922B6B30B0055FCED /* zutil.c */; };
 		FDB7035922B6B30C0055FCED /* infcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034A22B6B30B0055FCED /* infcodes.c */; };
@@ -1202,7 +1201,6 @@
 		FDACD2F220B4633D00C62C24 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../ThirdParty/Debug/x86_64/libvorbisenc.a; sourceTree = "<group>"; };
 		FDACD2F320B4633D00C62C24 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../ThirdParty/Debug/x86_64/libvorbisfile.a; sourceTree = "<group>"; };
 		FDB6931722E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSTimeZoneInfo.cpp; sourceTree = "<group>"; };
-		FDB7001D22ABD68C0055FCED /* ImageUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageUtility.cpp; sourceTree = "<group>"; };
 		FDB7034722B6B2E80055FCED /* infcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = infcodes.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/infcodes.c"; sourceTree = "<group>"; };
 		FDB7034922B6B30B0055FCED /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zutil.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/zutil.c"; sourceTree = "<group>"; };
 		FDB7034A22B6B30B0055FCED /* infcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = infcodes.c; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/infcodes.c"; sourceTree = "<group>"; };
@@ -1278,7 +1276,6 @@
 		FDC02C48228481F000BEE91A /* AudioModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AudioModule.h; sourceTree = "<group>"; };
 		FDC02C49228481F000BEE91A /* GraphicsModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = GraphicsModule.h; sourceTree = "<group>"; };
 		FDC02C4A228481F000BEE91A /* Engine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Engine.cpp; sourceTree = "<group>"; };
-		FDC02C4D228481F000BEE91A /* ImageType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ImageType.h; sourceTree = "<group>"; };
 		FDC02C4E228481F000BEE91A /* Image.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Image.cpp; sourceTree = "<group>"; };
 		FDC02C54228481F000BEE91A /* Image.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Image.h; sourceTree = "<group>"; };
 		FDC02C57228481F000BEE91A /* BaseAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseAudioImporter.h; sourceTree = "<group>"; };
@@ -1300,12 +1297,9 @@
 		FDC02C6A228481F100BEE91A /* MacOSInputManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSInputManager.cpp; sourceTree = "<group>"; };
 		FDC02C6B228481F100BEE91A /* MacOSGamepad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSGamepad.cpp; sourceTree = "<group>"; };
 		FDC02C6C228481F100BEE91A /* MacOSMouse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSMouse.h; sourceTree = "<group>"; };
-		FDC02C6D228481F100BEE91A /* MacOSGamepadType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSGamepadType.h; sourceTree = "<group>"; };
 		FDC02C6E228481F100BEE91A /* MacOSMouse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = MacOSMouse.cpp; sourceTree = "<group>"; };
 		FDC02C6F228481F100BEE91A /* MacOSInputManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSInputManager.h; sourceTree = "<group>"; };
 		FDC02C70228481F100BEE91A /* MacOSGamepad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSGamepad.h; sourceTree = "<group>"; };
-		FDC02C71228481F100BEE91A /* MacOSKeyboardType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSKeyboardType.h; sourceTree = "<group>"; };
-		FDC02C72228481F100BEE91A /* MouseType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MouseType.h; sourceTree = "<group>"; };
 		FDC02C73228481F100BEE91A /* Mouse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Mouse.cpp; sourceTree = "<group>"; };
 		FDC02C74228481F100BEE91A /* Gamepad.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Gamepad.cpp; sourceTree = "<group>"; };
 		FDC02C75228481F100BEE91A /* Mouse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Mouse.h; sourceTree = "<group>"; };
@@ -1329,11 +1323,9 @@
 		FDC02CA1228481F100BEE91A /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Window.cpp; sourceTree = "<group>"; };
 		FDC02CA2228481F100BEE91A /* Application.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Application.h; sourceTree = "<group>"; };
 		FDC02CA3228481F100BEE91A /* Window.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Window.h; sourceTree = "<group>"; };
-		FDC02CA4228481F100BEE91A /* ApplicationType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ApplicationType.h; sourceTree = "<group>"; };
 		FDC02CA9228481F100BEE91A /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Screen.h; sourceTree = "<group>"; };
 		FDC02CAA228481F100BEE91A /* Application.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Application.cpp; sourceTree = "<group>"; };
 		FDC02CB9228481F100BEE91A /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Prefix.h; sourceTree = "<group>"; };
-		FDC02CBA228481F100BEE91A /* ScreenType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ScreenType.h; sourceTree = "<group>"; };
 		FDC02CBB228481F100BEE91A /* WindowType.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WindowType.h; sourceTree = "<group>"; };
 		FDC02CBF228481F100BEE91A /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Delegate.h; sourceTree = "<group>"; };
 		FDC02CC1228481F100BEE91A /* RTTI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RTTI.h; sourceTree = "<group>"; };
@@ -2812,8 +2804,6 @@
 		FDC02C4C228481F000BEE91A /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02C4D228481F000BEE91A /* ImageType.h */,
-				FDB7001D22ABD68C0055FCED /* ImageUtility.cpp */,
 				FDC02C4E228481F000BEE91A /* Image.cpp */,
 				FDC02C54228481F000BEE91A /* Image.h */,
 				FD53333122A5834A001EB57C /* FontFactory.cpp */,
@@ -2864,7 +2854,6 @@
 			children = (
 				FDC02C66228481F100BEE91A /* MacOS */,
 				FDC02C65228481F100BEE91A /* InputManager.h */,
-				FDC02C72228481F100BEE91A /* MouseType.h */,
 				FDC02C73228481F100BEE91A /* Mouse.cpp */,
 				FDC02C74228481F100BEE91A /* Gamepad.cpp */,
 				FDC02C75228481F100BEE91A /* Mouse.h */,
@@ -2886,11 +2875,9 @@
 				FDC02C6A228481F100BEE91A /* MacOSInputManager.cpp */,
 				FDC02C6B228481F100BEE91A /* MacOSGamepad.cpp */,
 				FDC02C6C228481F100BEE91A /* MacOSMouse.h */,
-				FDC02C6D228481F100BEE91A /* MacOSGamepadType.h */,
 				FDC02C6E228481F100BEE91A /* MacOSMouse.cpp */,
 				FDC02C6F228481F100BEE91A /* MacOSInputManager.h */,
 				FDC02C70228481F100BEE91A /* MacOSGamepad.h */,
-				FDC02C71228481F100BEE91A /* MacOSKeyboardType.h */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -2926,11 +2913,9 @@
 				FDC02CA1228481F100BEE91A /* Window.cpp */,
 				FDC02CA2228481F100BEE91A /* Application.h */,
 				FDC02CA3228481F100BEE91A /* Window.h */,
-				FDC02CA4228481F100BEE91A /* ApplicationType.h */,
 				FDC02CA9228481F100BEE91A /* Screen.h */,
 				FDC02CAA228481F100BEE91A /* Application.cpp */,
 				FDC02CB9228481F100BEE91A /* Prefix.h */,
-				FDC02CBA228481F100BEE91A /* ScreenType.h */,
 				FDC02CBB228481F100BEE91A /* WindowType.h */,
 			);
 			name = Platform;
@@ -4168,7 +4153,6 @@
 				FD4C1DFD219F3F8700B2B2BE /* GainputInputDevicePadIos.mm in Sources */,
 				FDE1B4DB22E40E940093FDC1 /* cstring.cpp in Sources */,
 				FDE1B4FF22E40E940093FDC1 /* caniter.cpp in Sources */,
-				FDB7001E22ABD68C0055FCED /* ImageUtility.cpp in Sources */,
 				FDE1B4C422E40E940093FDC1 /* ustrfmt.cpp in Sources */,
 				FD4C1DFE219F3F8700B2B2BE /* GainputInputDeviceMouseMac.mm in Sources */,
 				FD53322622A2E9AF001EB57C /* smooth.c in Sources */,

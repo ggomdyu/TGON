@@ -128,15 +128,6 @@ WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
     rhs.m_wndHandle = nullptr;
 }
 
-WindowsWindow::~WindowsWindow()
-{
-    if (m_wndHandle != nullptr)
-    {
-        DestroyWindow(m_wndHandle);
-        m_wndHandle = nullptr;
-    }
-}
-
 WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
 {
     m_wndHandle = rhs.m_wndHandle;
