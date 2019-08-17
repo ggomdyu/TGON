@@ -7,6 +7,11 @@ namespace tgon
     
 thread_local char g_tempPathBuffer[2048];
 
+std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
+{
+    return "";
+}
+
 std::string_view Path::GetExtension(const std::string_view& path)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
@@ -39,10 +44,11 @@ int32_t Path::GetFileName(const std::string_view& path, char* destStr)
     {
         if (--iterIndex <= 0)
         {
-            memcpy(destStr, &path[iterIndex], sizeof(destStr[0]) * (path.length() + 1));
+            memcpy(destStr, &path.data()[0], sizeof(destStr[0]) * (path.length() + 1));
             return static_cast<int32_t>(path.length());
         }
-        else if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
+
+        if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             auto destStrLen = path.length() - (++iterIndex);
             memcpy(destStr, &path[iterIndex], sizeof(path[0]) * (destStrLen + 1));
@@ -70,16 +76,18 @@ int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* de
             memcpy(destStr, path.data(), extensionStartIndex);
             return extensionStartIndex;
         }
-        else if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
+
+        if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t strLen = extensionStartIndex - (iterIndex + 1);
+            int32_t destStrLen = extensionStartIndex - (iterIndex + 1);
             
-            memcpy(destStr, &path[iterIndex + 1], strLen);
-            destStr[strLen] = '\0';
+            memcpy(destStr, &path[iterIndex + 1], destStrLen);
+            destStr[destStrLen] = '\0';
             
-            return strLen;
+            return destStrLen;
         }
-        else if (path[iterIndex] == '.' && path[extensionStartIndex] == '\0')
+
+        if (path[iterIndex] == '.' && path.data()[extensionStartIndex] == '\0')
         {
             extensionStartIndex = iterIndex;
         }
@@ -103,7 +111,8 @@ int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr)
             destStr[0] = '\0';
             return 0;
         }
-        else if (path[iterIndex] == AltDirectorySeparatorChar)
+        
+        if (path[iterIndex] == AltDirectorySeparatorChar)
         {
             memcpy(destStr, &path[0], sizeof(path[0]) * iterIndex);
             destStr[iterIndex] = '\0';
@@ -123,12 +132,10 @@ bool Path::HasExtension(const std::string_view& path)
         {
             return false;
         }
-        else
+
+        if (path[iterIndex] == '.')
         {
-            if (path[iterIndex] == '.')
-            {
-                return (path.length() - (iterIndex + 1)) > 0;
-            }
+            return (path.length() - (iterIndex + 1)) > 0;
         }
     }
 }
@@ -141,26 +148,31 @@ std::string Path::ChangeExtension(const std::string_view& path, const std::strin
 
 int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr)
 {
-    int32_t iterIndex = static_cast<int32_t>(path.length());
-
-    while (true)
+    if (path.length() == 0)
     {
-        if (--iterIndex < 0)
-        {
-            memcpy(destStr, path.data(), path.length());
-            
-            dest
-            
-            return 0;
-        }
-        else if (path[iterIndex] == '.')
-        {
-            memcpy(&destStr[iterIndex + 1], extension.data(), sizeof(extension[0]) * (extension.length() + 1));
+        destStr[0] = '\0';
+        return 0;
+    }
 
-            auto pathExtensionLen = path.length() - (iterIndex + 1);
-            return static_cast<int32_t>((path.length() - pathExtensionLen) + extension.length());
+    std::string_view newExtension = extension[0] == '.' ? extension.substr(1) : extension;
+
+    int32_t iterIndex = static_cast<int32_t>(path.length());
+    while (--iterIndex >= 0)
+    {
+        if (path[iterIndex] == '.')
+        {
+            memcpy(destStr, path.data(), iterIndex + 1);
+            memcpy(&destStr[iterIndex + 1], newExtension.data(), newExtension.length() + 1);
+
+            return iterIndex + 1 + newExtension.length();
         }
     }
+
+    memcpy(destStr, path.data(), path.length());
+    memcpy(&destStr[path.length() + 1], newExtension.data(), newExtension.length() + 1);
+    destStr[path.length()] = '.';
+
+    return path.length() + 1 + newExtension.length();
 }
 
 std::string Path::GetCurrentDirectory()

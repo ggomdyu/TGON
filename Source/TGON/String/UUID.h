@@ -72,9 +72,10 @@ inline UUID UUID::NewUUID()
     ::UUID rawUUID;
     UuidCreate(&rawUUID);
 
-    UUID ret;
-    ret.m_strLen = 36;
-    UuidToStringA(&rawUUID, ret.m_str);
+    RPC_CSTR rawUUIDStr;
+    UuidToStringA(&rawUUID, &rawUUIDStr);
+
+    UUID ret(reinterpret_cast<char*>(rawUUIDStr), 36);
     RpcStringFreeA(&rawUUIDStr);
 #else
     uuid_t uuid;

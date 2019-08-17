@@ -19,7 +19,6 @@ class TGON_API Debug
 /**@section Constructor */
 public:
     Debug() = delete;
-    ~Debug() = delete;
 
 /**@section Method */
 public:

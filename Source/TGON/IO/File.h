@@ -37,9 +37,8 @@ enum class FileAttributes
 class TGON_API File
 {
 /**@section Constructor */
-private:
+public:
     File() = delete;
-    ~File() = delete;
 
 /**@section Method */
 public:

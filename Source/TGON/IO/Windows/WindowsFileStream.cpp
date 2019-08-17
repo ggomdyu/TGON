@@ -75,12 +75,6 @@ int64_t FileStream::Length() const
         return -1;
     }
 
-    DWORD lowPart = 0, highPart = 0;
-    if ((lowPart = GetFileSize(m_nativeHandle, &highPart)) == -1)
-    {
-        return -1;
-    }
-
     int64_t length = li.QuadPart;
     if (m_filePos + m_writePos > length)
     {
@@ -99,6 +93,18 @@ void FileStream::Close()
         CloseHandle(m_nativeHandle);
         m_nativeHandle = INVALID_HANDLE_VALUE;
     }
+}
+
+void FileStream::FlushWriteBuffer()
+{
+    if (m_writePos <= 0)
+    {
+        return;
+    }
+
+    this->WriteCore(&m_buffer[0], m_writePos);
+
+    m_writePos = 0;
 }
 
 int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)

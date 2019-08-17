@@ -22,11 +22,10 @@ class TGON_API Path
 /**@section Constructor */
 public:
     Path() = delete;
-    ~Path() = delete;
     
 /**@section Method */
 public:
-//    static std::string Combine(const std::string_view& path1, const std::string_view& path2);
+    static std::string Combine(const std::string_view& path1, const std::string_view& path2);
 //    static std::string GetFullPath(const std::string_view& path);
 //    static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);
 //    static std::string GetPathRoot(const std::string_view& path);
@@ -67,10 +66,10 @@ public:
 
 /**@section Variable */
 public:
-    static constexpr const char AltDirectorySeparatorChar = '/';
-    static constexpr const char DirectorySeparatorChar = '\\';
-    static constexpr const char PathSeparator = ':';
-    static constexpr const char VolumeSeparatorChar = '/';
+    static constexpr char AltDirectorySeparatorChar = '/';
+    static constexpr char DirectorySeparatorChar = '\\';
+    static constexpr char PathSeparator = ':';
+    static constexpr char VolumeSeparatorChar = '/';
 };
 
 } /* namespace tgon */

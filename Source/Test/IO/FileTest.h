@@ -23,14 +23,11 @@ class FileTest :
 public:
     virtual void Evaluate() override
     {
-        // WARNING: This test requires 1.png in desktop directory!
+        CreateTemporaryFileToEvaluateTest();
+
+        // WARNING: This test requires 1.png indesktop directory!
         auto desktopPath = Path::GetDesktopDirectory();
-        auto srcImagePath = desktopPath + u8"/rk.png";
-        if (File::Exists(srcImagePath) == false)
-        {
-            assert(false && "This test requires 1.png in desktop directory!");
-            return;
-        }
+        auto srcImagePath = Path::GetDesktopDirectory() + "/qwexqwexqw.png";
 
         auto dtl = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Local);
         auto dtu = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Utc);
@@ -78,10 +75,23 @@ public:
 
         File::Delete(destImagePath);
         assert(File::Exists(destImagePath) == false);
+
+        File::Delete(srcImagePath);
     }
 
 private:
+    void CreateTemporaryFileToEvaluateTest()
+    {
+        auto filePath = Path::GetDesktopDirectory() + "/qwexqwexqw.png";
+        File::Delete(filePath);
 
+        FileStream f3(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);;
+        for (int i = 0; i < 1024; ++i)
+        {
+            f3.WriteByte(i);
+        }
+        f3.Close();
+    }
 };
 
 } /* namespace tgon */

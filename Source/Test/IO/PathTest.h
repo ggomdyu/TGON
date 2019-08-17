@@ -27,13 +27,13 @@ public:
         assert(Path::GetExtension("/Users/chajunho/Desktop/1") == "");
         assert(Path::GetExtension("1.png") == ".png");
         assert(Path::GetExtension("1") == "");
+        assert(Path::GetFileNameWithoutExtension("") == "");
         assert(Path::GetExtension("") == "");
         assert(Path::GetFileName("/Users/chajunho/Desktop/1.png") == "1.png");
         assert(Path::GetFileName("") == "");
         assert(Path::GetFileNameWithoutExtension("/Users/chajunho/Desktop/123") == "123");
         assert(Path::GetFileNameWithoutExtension("/Users/chajunho/Desktop/1") == "1");
         assert(Path::GetFileNameWithoutExtension("/Users/123123.png") == "123123");
-        assert(Path::GetFileNameWithoutExtension("") == "");
         assert(Path::GetFileNameWithoutExtension("/Users/chajunho/Desktop/1.png") == "1");
         assert(Path::GetFileNameWithoutExtension("/Users/chajunho/Desktop/1.1.png") == "1.1");
         assert(Path::GetFileNameWithoutExtension("123123") == "123123");
@@ -53,11 +53,11 @@ public:
         assert(Path::HasExtension("1.png") == true);
         assert(Path::HasExtension(".png") == true);
         assert(Path::HasExtension("png") == false);
+        assert(Path::ChangeExtension("/Users/chajunho/Desktop/1.png", "ext") == "/Users/chajunho/Desktop/1.ext");
+        assert(Path::ChangeExtension(".png", "ext") == ".ext");
         assert(Path::ChangeExtension("/Users/chajunho/Desktop", "ext") == "/Users/chajunho/Desktop.ext");
         assert(Path::ChangeExtension("/Users/chajunho/Desktop/", "ext") == "/Users/chajunho/Desktop/.ext");
-        assert(Path::ChangeExtension("/Users/chajunho/Desktop/1.png", "ext") == "/Users/chajunho/Desktop/1.ext");
         assert(Path::ChangeExtension("1.png", "ext") == "1.ext");
-        assert(Path::ChangeExtension(".png", "ext") == ".ext");
         assert(Path::ChangeExtension("png", "ext") == "png.ext");
         assert(Path::ChangeExtension("", "ext") == "");
         assert(Path::ChangeExtension("", "") == "");

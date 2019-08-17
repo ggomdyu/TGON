@@ -186,9 +186,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Mouse.cpp">
       <Filter>Source\TGON\Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Gamepad.cpp">
-      <Filter>Source\TGON\Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Path.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.cpp">
       <Filter>Source\TGON\Graphics\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.cpp">
-      <Filter>Source\TGON\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\Encoding.cpp">
       <Filter>Source\TGON\String</Filter>
@@ -1059,9 +1053,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Hardware\Keyboard.cpp">
       <Filter>Source\TGON\Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.cpp">
-      <Filter>Source\TGON\IO</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -1239,9 +1230,6 @@
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\Image.h">
-      <Filter>Source\TGON\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageType.h">
       <Filter>Source\TGON\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\Drawing.h">
@@ -1720,9 +1708,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.h">
       <Filter>Source\TGON\Graphics\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageUtility.h">
-      <Filter>Source\TGON\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h">
       <Filter>Source\TGON\Drawing\ImageProcessor</Filter>

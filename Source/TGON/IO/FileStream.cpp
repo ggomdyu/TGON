@@ -172,14 +172,14 @@ std::vector<uint8_t>& FileStream::GetBuffer() noexcept
     return m_buffer;
 }
 
-int64_t FileStream::Read(uint8_t* buffer, int64_t count)
+int32_t FileStream::Read(uint8_t* buffer, int32_t count)
 {
     if (this->CanRead() == false || m_bufferSize < count)
     {
         return -1;
     }
 
-    int64_t leftReadBufferSpace = m_readLen - m_readPos;
+    int32_t leftReadBufferSpace = m_readLen - m_readPos;
     if (leftReadBufferSpace == 0)
     {
         this->FlushWriteBuffer();
@@ -248,7 +248,7 @@ bool FileStream::Write(const uint8_t* buffer, int32_t count)
 
     if (m_writePos > 0)
     {
-        int64_t numBytes = m_bufferSize - m_writePos;
+        int32_t numBytes = m_bufferSize - m_writePos;
         if (numBytes > 0)
         {
             // If the specified buffer can be stored into the m_buffer directly
@@ -299,18 +299,6 @@ bool FileStream::WriteByte(uint8_t value)
     this->GetBuffer()[m_writePos++] = value;
 
     return true;
-}
-
-void FileStream::FlushWriteBuffer()
-{
-    if (m_writePos <= 0)
-    {
-        return;
-    }
-
-    this->WriteCore(&m_buffer[0], m_writePos);
-
-    m_writePos = 0;
 }
 
 void FileStream::FlushReadBuffer()

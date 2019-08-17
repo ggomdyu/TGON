@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <thread>
 
-#include "Platform/Application.h"
-
 #include "Engine.h"
 
 namespace tgon

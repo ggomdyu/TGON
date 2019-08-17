@@ -1,11 +1,11 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <cstdio>
+#include <cstdio>
 
-#import "Misc/Algorithm.h"
-#import "Diagnostics/Debug.h"
+#include "Diagnostics/Debug.h"
 
-#import "../FileStream.h"
+#include "../FileStream.h"
+#include "../File.h"
 
 namespace tgon
 {
@@ -22,26 +22,17 @@ constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess ac
         {nullptr, "wb", "wb+"},
         {nullptr, "ab", "ab+"},
     };
-    
-    return fopenModeTable[static_cast<int32_t>(mode)][static_cast<int32_t>(access)];
+
+    return fopenModeTable[static_cast<int32_t>(mode) - 1][static_cast<int32_t>(access) - 1];
 }
-//
-//long ConvertSeekOriginToNative(SeekOrigin seekOrigin)
-//{
-//    constexpr const char* fopenModeTable[][3] = {
-//        {nullptr, "wb", "wb+"},
-//        {nullptr, "wb", "wb+"},
-//        {"rb", "wb", "rb+"},
-//        {"rb", "wb", "rb+"},
-//        {nullptr, "wb", "wb+"},
-//        {nullptr, "ab", "ab+"},
-//    };
-//
-//    return fopenModeTable[static_cast<int32_t>(mode)][static_cast<int32_t>(access)];
-//}
 
 FILE* CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess access)
 {
+    if (mode == FileMode::OpenOrCreate && File::Exists(path) == false)
+    {
+        FileStream(path, FileMode::CreateNew);
+    }
+
     return fopen(path.data(), ConvertFileModeAccessToNative(mode, access));
 }
 
@@ -93,10 +84,24 @@ void FileStream::Close()
     }
 }
 
-int64_t FileStream::ReadCore(uint8_t* buffer, int64_t count)
+void FileStream::FlushWriteBuffer()
+{
+    if (m_writePos <= 0)
+    {
+        return;
+    }
+
+    this->WriteCore(&m_buffer[0], m_writePos);
+
+    fflush(reinterpret_cast<FILE*>(m_nativeHandle));
+
+    m_writePos = 0;
+}
+
+int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
 {
     auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
-    if (readBytes == -1)
+    if (readBytes == static_cast<decltype(readBytes)>(-1))
     {
         return -1;
     }
@@ -105,10 +110,10 @@ int64_t FileStream::ReadCore(uint8_t* buffer, int64_t count)
     return readBytes;
 }
 
-int64_t FileStream::WriteCore(const uint8_t* buffer, int64_t bufferBytes)
+int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t count)
 {
-    DWORD writtenBytes = 0;
-    if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
+    auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
+    if (writtenBytes == static_cast<decltype(writtenBytes)>(-1))
     {
         return -1;
     }
@@ -144,7 +149,7 @@ bool FileStream::SetLengthCore(int64_t value)
 
 void FileStream::FlushCore()
 {
-    FlushFileBuffers(m_nativeHandle);
+    fflush(reinterpret_cast<FILE*>(m_nativeHandle));
 }
 
 } /* namespace tgon */

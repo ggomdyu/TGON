@@ -31,6 +31,7 @@ public:
 /**@section Constructor */
 public:
     constexpr BasicFixedString() noexcept;
+    BasicFixedString(const _CharType* str, int32_t count);
     BasicFixedString(const _CharType* str);
     BasicFixedString(const std::basic_string_view<_CharType>& str);
     BasicFixedString(_CharType ch, int32_t chCount);
@@ -132,6 +133,14 @@ constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Basic
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str, int32_t count) :
+    BasicFixedString()
+{
+    _StringTraitsType::Append(str, count, m_str, m_strLen);
+    m_strLen += count;
+}
+
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str) :
     BasicFixedString(std::basic_string_view<_CharType>(str))
 {
@@ -139,10 +148,8 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFix
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
-    BasicFixedString()
+    BasicFixedString(str.data(), str.length())
 {
-    _StringTraitsType::Append(str.data(), static_cast<int32_t>(str.length()), m_str, m_strLen);
-    m_strLen += str.length();
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>

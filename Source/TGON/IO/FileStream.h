@@ -82,9 +82,9 @@ public:
     virtual bool SetLength(int64_t value) override;
     virtual int64_t Length() const override;
     virtual int64_t Position() const override;
-    virtual int64_t Read(uint8_t* buffer, int64_t count) override;
+    virtual int32_t Read(uint8_t* buffer, int32_t count) override;
     virtual int32_t ReadByte() override;
-    virtual bool Write(const uint8_t* buffer, int64_t count) override;
+    virtual bool Write(const uint8_t* buffer, int32_t count) override;
     virtual bool WriteByte(uint8_t value) override;
     virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
     virtual void Close() override;
@@ -101,8 +101,8 @@ protected:
     std::vector<uint8_t>& GetBuffer() noexcept;
     void FlushWriteBuffer();
     void FlushReadBuffer();
-    int64_t ReadCore(uint8_t* buffer, int64_t count);
-    int64_t WriteCore(const uint8_t* buffer, int64_t count);
+    int32_t ReadCore(uint8_t* buffer, int32_t count);
+    int32_t WriteCore(const uint8_t* buffer, int32_t count);
     int64_t SeekCore(int64_t offset, SeekOrigin origin);
     void FlushCore();
     bool SetLengthCore(int64_t value);
@@ -115,10 +115,10 @@ protected:
 
     void* m_nativeHandle;
     std::vector<uint8_t> m_buffer;
-    int64_t m_bufferSize;
-    int64_t m_readPos;
-    int64_t m_readLen;
-    int64_t m_writePos;
+    int32_t m_bufferSize;
+    int32_t m_readPos;
+    int32_t m_readLen;
+    int32_t m_writePos;
     int64_t m_filePos;
     FileAccess m_access;
     std::string m_fileName;    
