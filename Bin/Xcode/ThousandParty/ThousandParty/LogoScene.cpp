@@ -19,6 +19,7 @@
 #include "./../Test/String/FixedStringTest.h"
 #include "./../Test/IO/FileTest.h"
 #include "./../Test/IO/FileStreamTest.h"
+#include "./../Test/IO/PathTest.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -247,6 +248,8 @@ public:
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
+    
+    PathTest().Evaluate();
 
 //    FileStreamTest().Evaluate();
 

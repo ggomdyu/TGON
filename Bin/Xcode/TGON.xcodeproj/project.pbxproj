@@ -10,7 +10,6 @@
 		8C012C0623073AE500285F74 /* FileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C012C0423073AE500285F74 /* FileStream.h */; };
 		8C012C0723073AE500285F74 /* FileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C0523073AE500285F74 /* FileStream.cpp */; };
 		8C012C0A23073AE900285F74 /* Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C012C0823073AE900285F74 /* Stream.h */; };
-		8C012C0D23073B7500285F74 /* MacOSFileStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C0C23073B7400285F74 /* MacOSFileStream.mm */; };
 		8CC61CB422F3299700F415C8 /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB322F3299600F415C8 /* DateTime.cpp */; };
 		8CC61CB622F329B300F415C8 /* MacOSFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB522F329B300F415C8 /* MacOSFile.mm */; };
 		8CC61CC022F677D100F415C8 /* UIRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */; };
@@ -774,7 +773,6 @@
 		8C012C0423073AE500285F74 /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
 		8C012C0523073AE500285F74 /* FileStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileStream.cpp; sourceTree = "<group>"; };
 		8C012C0823073AE900285F74 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
-		8C012C0C23073B7400285F74 /* MacOSFileStream.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSFileStream.mm; sourceTree = "<group>"; };
 		8CC61CB322F3299600F415C8 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
 		8CC61CB522F329B300F415C8 /* MacOSFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSFile.mm; sourceTree = "<group>"; };
 		8CC61CB822F610AE00F415C8 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RectTransform.h; sourceTree = "<group>"; };
@@ -2905,7 +2903,6 @@
 			children = (
 				8CC61CB522F329B300F415C8 /* MacOSFile.mm */,
 				FDC02C89228481F100BEE91A /* MacOSPath.mm */,
-				8C012C0C23073B7400285F74 /* MacOSFileStream.mm */,
 			);
 			path = MacOS;
 			sourceTree = "<group>";
@@ -2917,10 +2914,10 @@
 				FDC02C9F228481F100BEE91A /* Locale.h */,
 				FDC02CA0228481F100BEE91A /* Config.h */,
 				FDC02CA1228481F100BEE91A /* Window.cpp */,
-				FDC02CA2228481F100BEE91A /* Application.h */,
 				FDC02CA3228481F100BEE91A /* Window.h */,
-				FDC02CA9228481F100BEE91A /* Screen.h */,
 				FDC02CAA228481F100BEE91A /* Application.cpp */,
+				FDC02CA2228481F100BEE91A /* Application.h */,
+				FDC02CA9228481F100BEE91A /* Screen.h */,
 				FDC02CB9228481F100BEE91A /* Prefix.h */,
 			);
 			name = Platform;
@@ -4094,7 +4091,6 @@
 				FDE1B48922E40E940093FDC1 /* charstr.cpp in Sources */,
 				FDE1B50522E40E950093FDC1 /* dtintrv.cpp in Sources */,
 				FDB7034822B6B2E80055FCED /* infcodes.c in Sources */,
-				8C012C0D23073B7500285F74 /* MacOSFileStream.mm in Sources */,
 				FDE1B52422E40E950093FDC1 /* static_unicode_sets.cpp in Sources */,
 				FDE1B4C222E40E940093FDC1 /* unorm.cpp in Sources */,
 				FDC02D0F228487CA00BEE91A /* OpenGLVertexBuffer.cpp in Sources */,

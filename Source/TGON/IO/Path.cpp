@@ -7,13 +7,7 @@ namespace tgon
     
 thread_local char g_tempPathBuffer[2048];
 
-TGON_API std::string Path::GetExtension(const std::string_view& path)
-{
-    int32_t strLen = GetExtension(path, &g_tempPathBuffer[0]);
-    return std::string(g_tempPathBuffer, strLen);
-}
-
-TGON_API int32_t Path::GetExtension(const std::string_view& path, char* destStr)
+std::string_view Path::GetExtension(const std::string_view& path)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
     
@@ -21,24 +15,23 @@ TGON_API int32_t Path::GetExtension(const std::string_view& path, char* destStr)
     {
         if (--iterIndex < 0)
         {
-            return -1;
+            return {"", 0};
         }
 
         if (path[iterIndex] == '.')
         {
-            *destStr = path[iterIndex];
-            return static_cast<int32_t>(path.length() - iterIndex);
+            return path.substr(iterIndex);
         }
     }
 }
 
-TGON_API std::string Path::GetFileName(const std::string_view& path)
+std::string Path::GetFileName(const std::string_view& path)
 {
     int32_t strLen = GetFileName(path, &g_tempPathBuffer[0]);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API int32_t Path::GetFileName(const std::string_view& path, char* destStr)
+int32_t Path::GetFileName(const std::string_view& path, char* destStr)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
 
@@ -49,8 +42,7 @@ TGON_API int32_t Path::GetFileName(const std::string_view& path, char* destStr)
             memcpy(destStr, &path[iterIndex], sizeof(destStr[0]) * (path.length() + 1));
             return static_cast<int32_t>(path.length());
         }
-        else if (path[iterIndex] == AltDirectorySeparatorChar ||
-                 path[iterIndex] == DirectorySeparatorChar)
+        else if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             auto destStrLen = path.length() - (++iterIndex);
             memcpy(destStr, &path[iterIndex], sizeof(path[0]) * (destStrLen + 1));
@@ -60,49 +52,47 @@ TGON_API int32_t Path::GetFileName(const std::string_view& path, char* destStr)
     }
 }
 
-TGON_API std::string Path::GetFileNameWithoutExtension(const std::string_view& path)
+std::string Path::GetFileNameWithoutExtension(const std::string_view& path)
 {
     int32_t strLen = GetFileNameWithoutExtension(path, &g_tempPathBuffer[0]);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr)
+int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
-    int32_t extensionOffset = -1;
-
+    int32_t extensionStartIndex = iterIndex;
+    
     while (true)
     {
         if (--iterIndex <= 0)
         {
-            memcpy(destStr, &path[iterIndex], sizeof(destStr[0]) * (path.length() + 1));
-            return static_cast<int32_t>(path.length());
+            memcpy(destStr, path.data(), extensionStartIndex);
+            return extensionStartIndex;
         }
-        else if (path[iterIndex] == AltDirectorySeparatorChar ||
-                 path[iterIndex] == DirectorySeparatorChar)
+        else if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
-            auto destStrLen = path.length() - (++iterIndex);
-            auto extensionLen = destStrLen - extensionOffset;
-
-            memcpy(destStr, &path[iterIndex], sizeof(path[0]) * extensionLen);
-            destStr[extensionLen] = '\0';
-
-            return static_cast<int32_t>(destStrLen);
+            int32_t strLen = extensionStartIndex - (iterIndex + 1);
+            
+            memcpy(destStr, &path[iterIndex + 1], strLen);
+            destStr[strLen] = '\0';
+            
+            return strLen;
         }
-        else if (extensionOffset == -1 && path[iterIndex] == '.')
+        else if (path[iterIndex] == '.' && path[extensionStartIndex] == '\0')
         {
-            extensionOffset = static_cast<int32_t>(path.length() - iterIndex);
+            extensionStartIndex = iterIndex;
         }
     }
 }
 
-TGON_API std::string Path::GetDirectoryName(const std::string_view& path)
+std::string Path::GetDirectoryName(const std::string_view& path)
 {
     int32_t strLen = GetDirectoryName(path, &g_tempPathBuffer[0]);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr)
+int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
 
@@ -110,10 +100,10 @@ TGON_API int32_t Path::GetDirectoryName(const std::string_view& path, char* dest
     {
         if (--iterIndex < 0)
         {
-            return -1;
+            destStr[0] = '\0';
+            return 0;
         }
-
-        if (path[iterIndex] == AltDirectorySeparatorChar)
+        else if (path[iterIndex] == AltDirectorySeparatorChar)
         {
             memcpy(destStr, &path[0], sizeof(path[0]) * iterIndex);
             destStr[iterIndex] = '\0';
@@ -123,7 +113,7 @@ TGON_API int32_t Path::GetDirectoryName(const std::string_view& path, char* dest
     }
 }
 
-TGON_API bool Path::HasExtension(const std::string_view& path)
+bool Path::HasExtension(const std::string_view& path)
 {
     int32_t iterIndex = static_cast<int32_t>(path.length());
 
@@ -143,80 +133,79 @@ TGON_API bool Path::HasExtension(const std::string_view& path)
     }
 }
 
-TGON_API std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
+std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
 {
     int32_t strLen = ChangeExtension(path, extension, &g_tempPathBuffer[0]);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr)
+int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr)
 {
-    memcpy(&destStr[0], path.data(), sizeof(path[0]) * path.length() + 1);
-
     int32_t iterIndex = static_cast<int32_t>(path.length());
 
     while (true)
     {
         if (--iterIndex < 0)
         {
-            return static_cast<int32_t>(path.length());
+            memcpy(destStr, path.data(), path.length());
+            
+            dest
+            
+            return 0;
         }
-        else
+        else if (path[iterIndex] == '.')
         {
-            if (path[iterIndex] == '.')
-            {
-                memcpy(&destStr[iterIndex + 1], extension.data(), sizeof(extension[0]) * (extension.length() + 1));
+            memcpy(&destStr[iterIndex + 1], extension.data(), sizeof(extension[0]) * (extension.length() + 1));
 
-                auto pathExtensionLen = path.length() - (iterIndex + 1);
-                return static_cast<int32_t>((path.length() - pathExtensionLen) + extension.length());
-            }
+            auto pathExtensionLen = path.length() - (iterIndex + 1);
+            return static_cast<int32_t>((path.length() - pathExtensionLen) + extension.length());
         }
     }
 }
 
-TGON_API std::string Path::GetCurrentDirectory()
+std::string Path::GetCurrentDirectory()
 {
     auto strLen = GetCurrentDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API std::string Path::GetUserDirectory()
+std::string Path::GetUserDirectory()
 {
     auto strLen = GetUserDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API std::string Path::GetDesktopDirectory()
+std::string Path::GetDesktopDirectory()
 {
     auto strLen = GetDesktopDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API std::string Path::GetFontsDirectory()
+std::string Path::GetFontsDirectory()
 {
     auto strLen = GetFontsDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
     
-TGON_API std::string Path::GetMusicDirectory()
+std::string Path::GetMusicDirectory()
 {
     auto strLen = GetMusicDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
     
-TGON_API std::string Path::GetPicturesDirectory()
+std::string Path::GetPicturesDirectory()
 {
     auto strLen = GetPicturesDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API std::string Path::GetVideosDirectory()
+std::string Path::GetVideosDirectory()
 {
     auto strLen = GetVideosDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);
 }
 
-TGON_API std::string Path::GetDocumentsDirectory()
+std::string Path::GetDocumentsDirectory()
 {
     auto strLen = GetDocumentsDirectory(g_tempPathBuffer);
     return std::string(g_tempPathBuffer, strLen);

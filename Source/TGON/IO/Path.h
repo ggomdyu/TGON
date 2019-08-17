@@ -26,8 +26,17 @@ public:
     
 /**@section Method */
 public:
-    static std::string GetExtension(const std::string_view& path);
-    static int32_t GetExtension(const std::string_view& path, char* destStr);
+//    static std::string Combine(const std::string_view& path1, const std::string_view& path2);
+//    static std::string GetFullPath(const std::string_view& path);
+//    static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);
+//    static std::string GetPathRoot(const std::string_view& path);
+//    static std::string GetRandomFileName();
+//    static std::string GetTempPath();
+//    static bool IsPathRooted(const std::string_view& path);
+//    static const std::vector<char>& GetInvalidFileNameChars();
+//    static const std::vector<char>& GetInvalidPathChars();
+    
+    static std::string_view GetExtension(const std::string_view& path);
     static std::string GetFileName(const std::string_view& path);
     static int32_t GetFileName(const std::string_view& path, char* destStr);
     static std::string GetFileNameWithoutExtension(const std::string_view& path);
@@ -37,6 +46,8 @@ public:
     static bool HasExtension(const std::string_view& path);
     static std::string ChangeExtension(const std::string_view& path, const std::string_view& extension);
     static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr);
+    
+    // TODO: Move to Environment.h
     static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr);
     static std::string GetUserDirectory();
@@ -58,6 +69,8 @@ public:
 public:
     static constexpr const char AltDirectorySeparatorChar = '/';
     static constexpr const char DirectorySeparatorChar = '\\';
+    static constexpr const char PathSeparator = ':';
+    static constexpr const char VolumeSeparatorChar = '/';
 };
 
 } /* namespace tgon */
