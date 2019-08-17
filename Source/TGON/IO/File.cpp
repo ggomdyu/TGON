@@ -8,12 +8,19 @@
 
 #include "File.h"
 
-#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
-#   define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
-#endif
-
 namespace tgon
 {
+namespace
+{
+    
+#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
+constexpr bool S_ISREG(unsigned short m) noexcept
+{
+    return (m & S_IFMT) == S_IFREG;
+}
+#endif
+    
+} /* namespace */
 
 bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath) noexcept
 {
@@ -36,13 +43,7 @@ bool File::Delete(const std::string_view& path)
 bool File::Exists(const std::string_view& path)
 {
     struct stat s;
-
-    if (stat(path.data(), &s) != 0)
-    {
-        return false;
-    }
-    
-    if (S_ISREG(s.st_mode) == false)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
@@ -59,12 +60,7 @@ bool File::Move(const std::string_view& srcPath, const std::string_view& destPat
 std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0)
-    {
-        return {};
-    }
-
-    if (S_ISREG(s.st_mode) == false)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }
@@ -77,12 +73,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view & path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0)
-    {
-        return {};
-    }
-
-    if (S_ISREG(s.st_mode) == false)
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }

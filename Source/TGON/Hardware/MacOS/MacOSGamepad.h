@@ -5,17 +5,10 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <cstdint>
+#import <boost/noncopyable.hpp>
+#import <gainput/gainput.h>
 
-#include "Platform/Config.h"
-
-namespace gainput
-{
-    
-class InputDevicePad;
-    
-} /* namespace gainput */
+#import "Platform/Config.h"
 
 namespace tgon
 {
@@ -29,16 +22,11 @@ public:
     
 /**@section Method */
 public:
-    void Update();
-    void Vibrate(float leftMotor, float rightMotor);
-    bool IsButtonDown(int32_t buttonNumber) const;
-    bool IsButtonHold(int32_t buttonNumber) const;
-    bool IsButtonUp(int32_t buttonNumber) const;
-    const gainput::InputDevicePad* GetNativeGamepad() const noexcept;
     gainput::InputDevicePad* GetNativeGamepad() noexcept;
+    const gainput::InputDevicePad* GetNativeGamepad() const noexcept;
     
 /**@section Variable */
-private:
+protected:
     gainput::InputDevicePad* m_nativeGamepad;
 };
     

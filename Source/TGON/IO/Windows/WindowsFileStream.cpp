@@ -67,29 +67,6 @@ bool FileStream::IsClosed() const noexcept
     return m_nativeHandle == INVALID_HANDLE_VALUE;
 }
 
-int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
-{
-    if (this->CanSeek() == false)
-    {
-        return -1;
-    }
-
-    if (m_writePos > 0)
-    {
-        this->FlushWriteBuffer();
-    }
-    else if (origin == SeekOrigin::Current)
-    {
-        // If we've read the buffer once before, then the seek offset is automatically moved to the end of the buffer.
-        // So we must adjust the offset to set the seek offset as required.
-        offset -= m_readLen - m_readPos;
-    }
-
-    m_readPos = m_readLen = 0;
-
-    return SeekCore(offset, origin);
-}
-
 int64_t FileStream::Length() const
 {
     LARGE_INTEGER li;
@@ -105,7 +82,7 @@ int64_t FileStream::Length() const
     }
 
     int64_t length = li.QuadPart;
-    if (m_filePos + m_writePos > li.QuadPart)
+    if (m_filePos + m_writePos > length)
     {
         length = m_filePos + m_writePos;
     }
@@ -115,11 +92,6 @@ int64_t FileStream::Length() const
 
 void FileStream::Close()
 {
-    if (m_writePos == 0)
-    {
-        return;
-    }
-
     this->FlushWriteBuffer();
 
     if (m_nativeHandle != INVALID_HANDLE_VALUE)

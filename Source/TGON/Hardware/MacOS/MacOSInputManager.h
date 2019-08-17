@@ -5,9 +5,8 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-#include <gainput/gainput.h>
-#include <memory>
+#import <boost/noncopyable.hpp>
+#import <gainput/gainput.h>
 
 namespace tgon
 {
@@ -15,10 +14,6 @@ namespace tgon
 class TGON_API MacOSInputManager :
     private boost::noncopyable
 {
-/**@section Constructor */
-public:
-    explicit MacOSInputManager();
-   
 /**@section Method */
 public:
     gainput::InputDeviceMouse* CreateNativeMouse();
@@ -27,7 +22,7 @@ public:
 
 /**@section Variable */
 protected:
-    std::unique_ptr<gainput::InputManager> m_inputManager;
+    gainput::InputManager m_inputManager;
 };
     
 using PlatformInputManager = MacOSInputManager;

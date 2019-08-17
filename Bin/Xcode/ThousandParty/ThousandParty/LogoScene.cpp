@@ -244,13 +244,6 @@ public:
 /**@section Variable */
 };
 
-class A :
-    boost::noncopyable
-{
-public:
-    tgon::DelegateChain<void()> d;
-};
-
 void LogoScene::InitPhase4()
 {
     using namespace tgon;

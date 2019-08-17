@@ -22,19 +22,18 @@
 namespace tgon
 {
 
-template <typename _CharType, typename _StringTraitsType = BasicStringTraits<_CharType>>
-struct BasicUUID :
-    private BasicFixedString<_CharType, 37, _StringTraitsType>
+struct UUID :
+    private BasicFixedString<char, 37>
 {
 /**@section Type */
 private:
-    using SuperType = BasicFixedString<_CharType, 37, _StringTraitsType>;
+    using SuperType = BasicFixedString<char, 37>;
 
 public:
-    using CharType = _CharType;
-    using ConstReferenceType = const CharType&;
-    using ConstIteratorType = const CharType*;
-    using ConstPointerType = const CharType*;
+    using ValueType = char;
+    using ConstReferenceType = const char&;
+    using ConstIteratorType = const char*;
+    using ConstPointerType = const char*;
     using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
     
 /**@section Constructor */
@@ -44,59 +43,63 @@ private:
 /**@section Operator */
 public:
     using SuperType::operator=;
-    const _CharType operator[](size_t index) const;
-
+    using SuperType::operator!=;
+    using SuperType::operator==;
+    using SuperType::operator std::basic_string<char>;
+    using SuperType::operator std::basic_string_view<char>;
+    const char operator[](int32_t index) const;
+    
 /**@section Method */
 public:
-    static BasicUUID NewUUID();
-    const _CharType At(size_t index) const;
-    using SuperType::Compare;
-    using SuperType::Find;
-    using SuperType::RFind;
-    using SuperType::CStr;
+    static UUID NewUUID();
+    ConstIteratorType Begin() const noexcept;
+    ConstIteratorType End() const noexcept;
+    using SuperType::CompareTo;
+    using SuperType::IndexOf;
+    using SuperType::IndexOfAny;
+    using SuperType::LastIndexOf;
+    using SuperType::LastIndexOfAny;
     using SuperType::Data;
     using SuperType::Length;
     using SuperType::Capacity;
+    using SuperType::CBegin;
+    using SuperType::CEnd;
 };
 
-using UUID = BasicUUID<char, BasicStringTraits<char>>;
-
-template <typename _CharType, typename _StringTraitsType>
-inline BasicUUID<_CharType, _StringTraitsType> BasicUUID<_CharType, _StringTraitsType>::NewUUID()
+inline UUID UUID::NewUUID()
 {
 #ifdef _MSC_VER
     ::UUID rawUUID;
     UuidCreate(&rawUUID);
 
-    RPC_CSTR rawUUIDStr;
-    UuidToStringA(&rawUUID, &rawUUIDStr);
-    
-    BasicUUID ret({reinterpret_cast<const char*>(rawUUIDStr), 36});
+    UUID ret;
+    ret.m_strLen = 36;
+    UuidToStringA(&rawUUID, ret.m_str);
     RpcStringFreeA(&rawUUIDStr);
-
-    return ret;
 #else
     uuid_t uuid;
     uuid_generate_random(uuid);
 
-    char rawUUIDStr[37] {};
-    uuid_unparse(uuid, rawUUIDStr);
-    BasicUUID ret({rawUUIDStr, 36});
-    
-    return ret;
+    UUID ret;
+    ret.m_strLen = 36;
+    uuid_unparse(uuid, ret.m_str);
 #endif
+    return ret;
+}
+    
+inline UUID::ConstIteratorType UUID::Begin() const noexcept
+{
+    return this->CBegin();
+}
+
+inline UUID::ConstIteratorType UUID::End() const noexcept
+{
+    return this->CEnd();
 }
    
-template <typename _CharType, typename _StringTraitsType>
-inline const _CharType BasicUUID<_CharType, _StringTraitsType>::operator[](size_t index) const
+inline const char UUID::operator[](int32_t index) const
 {
     return SuperType::operator[](index);
 }
-    
-template <typename _CharType, typename _StringTraitsType>
-inline const _CharType BasicUUID<_CharType, _StringTraitsType>::At(size_t index) const
-{
-    return SuperType::At(index);
-}
-    
+
 } /* namespace tgon */

@@ -17,7 +17,7 @@
 #   import "MacOS/MacOSWindow.h"
 #elif TGON_PLATFORM_ANDROID
 #   include "Android/AndroidWindow.h"
-#elif BOOST_OS_IOS
+#elif TGON_PLATFORM_IOS
 #   import "IOS/IOSWindow.h"
 #endif
 

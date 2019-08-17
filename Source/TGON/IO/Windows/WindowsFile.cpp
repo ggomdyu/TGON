@@ -14,6 +14,7 @@ namespace tgon
 {
 namespace
 {
+
 #if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
 constexpr bool S_ISREG(unsigned short m) noexcept
 {

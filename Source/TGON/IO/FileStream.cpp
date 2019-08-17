@@ -129,6 +129,29 @@ int64_t FileStream::Position() const
     return m_filePos + m_writePos;
 }
 
+int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
+{
+    if (this->CanSeek() == false)
+    {
+        return -1;
+    }
+    
+    if (m_writePos > 0)
+    {
+        this->FlushWriteBuffer();
+    }
+    else if (origin == SeekOrigin::Current)
+    {
+        // If we've read the buffer once before, then the seek offset is automatically moved to the end of the buffer.
+        // So we must adjust the offset to set the seek offset as required.
+        offset -= m_readLen - m_readPos;
+    }
+    
+    m_readPos = m_readLen = 0;
+    
+    return SeekCore(offset, origin);
+}
+
 const std::string& FileStream::Name() const noexcept
 {
     return m_fileName;
@@ -149,14 +172,14 @@ std::vector<uint8_t>& FileStream::GetBuffer() noexcept
     return m_buffer;
 }
 
-int32_t FileStream::Read(uint8_t* buffer, int32_t count)
+int64_t FileStream::Read(uint8_t* buffer, int64_t count)
 {
     if (this->CanRead() == false || m_bufferSize < count)
     {
         return -1;
     }
 
-    int32_t leftReadBufferSpace = m_readLen - m_readPos;
+    int64_t leftReadBufferSpace = m_readLen - m_readPos;
     if (leftReadBufferSpace == 0)
     {
         this->FlushWriteBuffer();

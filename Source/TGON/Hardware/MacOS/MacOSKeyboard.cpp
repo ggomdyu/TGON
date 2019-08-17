@@ -1,12 +1,8 @@
-#include "PrecompiledHeader.h"
+#import "PrecompiledHeader.h"
 
-#include <gainput/gainput.h>
+#import "Misc/Algorithm.h"
 
-#include "Misc/Algorithm.h"
-#include "Hardware/Keyboard.h"
-
-#include "MacOSKeyboard.h"
-#include "MacOSKeyboardType.h"
+#import "../Keyboard.h"
 
 namespace tgon
 {
@@ -15,12 +11,27 @@ MacOSKeyboard::MacOSKeyboard(gainput::InputDeviceKeyboard* nativeKeyboard) :
     m_nativeKeyboard(nativeKeyboard)
 {
 }
+
+gainput::InputDeviceKeyboard* MacOSKeyboard::GetNativeKeyboard() noexcept
+{
+    return m_nativeKeyboard;
+}
+
+const gainput::InputDeviceKeyboard* MacOSKeyboard::GetNativeKeyboard() const noexcept
+{
+    return m_nativeKeyboard;
+}
     
-void MacOSKeyboard::Update()
+Keyboard::Keyboard(InputManager& inputManager) :
+    MacOSKeyboard(inputManager.GetPlatformDependency().CreateNativeKeyboard())
+{
+}
+
+void Keyboard::Update()
 {
 }
     
-bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
+bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_nativeKeyboard->GetBoolPrevious(castedKeyCode) == false &&
@@ -34,7 +45,7 @@ bool MacOSKeyboard::IsKeyDown(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
+bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_nativeKeyboard->GetBoolPrevious(castedKeyCode) &&
@@ -48,7 +59,7 @@ bool MacOSKeyboard::IsKeyHold(KeyCode keyCode) const
     }
 }
     
-bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
+bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
     auto castedKeyCode = UnderlyingCast(keyCode);
     if (m_nativeKeyboard->GetBoolPrevious(castedKeyCode) &&
@@ -62,14 +73,4 @@ bool MacOSKeyboard::IsKeyUp(KeyCode keyCode) const
     }
 }
     
-gainput::InputDeviceKeyboard* MacOSKeyboard::GetNativeKeyboard() noexcept
-{
-    return m_nativeKeyboard;
-}
-
-const gainput::InputDeviceKeyboard* MacOSKeyboard::GetNativeKeyboard() const noexcept
-{
-    return m_nativeKeyboard;
-}
-
 } /* namespace tgon */

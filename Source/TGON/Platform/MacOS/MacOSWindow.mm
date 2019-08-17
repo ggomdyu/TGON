@@ -184,9 +184,22 @@ MacOSWindow::MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexc
 }
 
 MacOSWindow::MacOSWindow(MacOSWindow&& rhs) noexcept :
-    m_window(rhs.m_window)
+    m_window(rhs.m_window),
+    m_windowDelegate(rhs.m_windowDelegate)
 {
     rhs.m_window = nullptr;
+    rhs.m_windowDelegate = nullptr;
+}
+
+MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
+{
+    m_window = rhs.m_window;
+    m_windowDelegate = rhs.m_windowDelegate;
+    
+    rhs.m_window = nullptr;
+    rhs.m_windowDelegate = nullptr;
+    
+    return *this;
 }
 
 Window::Window(const WindowStyle& windowStyle) :

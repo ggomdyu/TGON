@@ -14,7 +14,7 @@ namespace tgon
 {
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-class BasicFixedString final
+class BasicFixedString
 {
     static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value,
         "_StringTraitsType's character type doesn't match with the _CharType.");
@@ -260,13 +260,13 @@ inline _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
 template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string_view<_CharType>() const noexcept
 {
-    return {m_str, m_strLen};
+    return {m_str, static_cast<size_t>(m_strLen)};
 }
 
 template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string<_CharType>() const noexcept
 {
-    return {m_str, m_strLen};
+    return {m_str, static_cast<size_t>(m_strLen)};
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -375,19 +375,19 @@ inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>:
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::End() noexcept
 {
-    return m_strLen;
+    return m_str + m_strLen;
 }
 
 template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
 {
-    return this->Begin();
+    return m_str;
 }
 
 template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
 {
-    return this->End();
+    return m_str + m_strLen;
 }
 
 } /* namespace tgon */

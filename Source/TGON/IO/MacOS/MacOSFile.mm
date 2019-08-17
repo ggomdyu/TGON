@@ -1,9 +1,9 @@
 #import "PrecompiledHeader.h"
 
 #import <Foundation/Foundation.h>
+#import <sys/stat.h>
 #import <utime.h>
 #import <cstdio>
-#import <sys/stat.h>
 
 #import "../File.h"
 
@@ -33,7 +33,6 @@ NSDate* ConvertDateTimeToNative(const DateTime& dateTime)
 bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& creationTimeUtc)
 {
     NSDate* date = ConvertDateTimeToNative(creationTimeUtc);
-    
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: date, NSFileCreationDate, nullptr];
     
     NSFileManager* fileManager = [NSFileManager defaultManager];

@@ -6,8 +6,7 @@
  */
 
 #pragma once
-#import "Core/CoreObject.h"
-#import "Core/DelegateChain.h"
+#import <boost/noncopyable.hpp>
 
 #import "Platform/Config.h"
 

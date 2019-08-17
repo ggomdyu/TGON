@@ -49,5 +49,15 @@ public:
     //virtual int ReadTimeout
     //virtual int WriteTimeout
 };
+    
+inline int32_t Stream::Read(const Span<uint8_t>& buffer)
+{
+    return this->Read(&buffer[0], buffer.Length());
+}
+
+inline bool Stream::Write(const Span<const uint8_t>& buffer)
+{
+    return this->Write(&buffer[0], buffer.Length());
+}
 
 } /* namespace tgon */

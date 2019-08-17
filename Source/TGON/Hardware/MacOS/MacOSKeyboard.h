@@ -5,9 +5,10 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
+#import <boost/noncopyable.hpp>
+#import <gainput/gainput.h>
 
-#include "Platform/Config.h"
+#import "Platform/Config.h"
 
 namespace tgon
 {
@@ -145,15 +146,11 @@ public:
     
 /**@section Method */
 public:
-    void Update();
-    bool IsKeyDown(KeyCode keyCode) const;
-    bool IsKeyHold(KeyCode keyCode) const;
-    bool IsKeyUp(KeyCode keyCode) const;
-    const gainput::InputDeviceKeyboard* GetNativeKeyboard() const noexcept;
     gainput::InputDeviceKeyboard* GetNativeKeyboard() noexcept;
+    const gainput::InputDeviceKeyboard* GetNativeKeyboard() const noexcept;
     
 /**@section Variable */
-private:
+protected:
     gainput::InputDeviceKeyboard* m_nativeKeyboard;
 };
     
