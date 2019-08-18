@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Source/TGON/IO/Path.cpp"
-            timestampString = "587745472.198662"
+            timestampString = "587784741.500368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "Path::ChangeExtension(const std::string_view&amp; path, const std::string_view&amp; extension, char* destStr)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/IO/Path.cpp"
-            timestampString = "587745472.1990089"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "Path::ChangeExtension(const std::string_view&amp; path, const std::string_view&amp; extension, char* destStr)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "Path::Combine(const std::string_view&amp; path1, const std::string_view&amp; path2, char* destStr)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

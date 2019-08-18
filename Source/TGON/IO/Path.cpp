@@ -7,9 +7,23 @@ namespace tgon
     
 thread_local char g_tempPathBuffer[2048];
 
-std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
+int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr)
 {
-    return "";
+    auto seperator = path1[path1.length() - 1];
+    
+    int32_t index = static_cast<int32_t>(path1.size());
+    
+    bool hasSeperator = seperator == DirectorySeparatorChar || seperator == AltDirectorySeparatorChar;
+    if (hasSeperator)
+    {
+        destStr[index] = AltDirectorySeparatorChar;
+        index += 1;
+    }
+    
+    memcpy(destStr, path1.data(), path1.length());
+    memcpy(&destStr[index + 1], path2.data(), path2.length() + 1);
+    
+    return index + path2.length();
 }
 
 std::string_view Path::GetExtension(const std::string_view& path)
@@ -164,7 +178,7 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
             memcpy(destStr, path.data(), iterIndex + 1);
             memcpy(&destStr[iterIndex + 1], newExtension.data(), newExtension.length() + 1);
 
-            return iterIndex + 1 + newExtension.length();
+            return static_cast<int32_t>(iterIndex + 1 + newExtension.length());
         }
     }
 
@@ -172,7 +186,7 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
     memcpy(&destStr[path.length() + 1], newExtension.data(), newExtension.length() + 1);
     destStr[path.length()] = '.';
 
-    return path.length() + 1 + newExtension.length();
+    return static_cast<int32_t>(path.length() + 1 + newExtension.length());
 }
 
 std::string Path::GetCurrentDirectory()

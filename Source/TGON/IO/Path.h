@@ -26,6 +26,7 @@ public:
 /**@section Method */
 public:
     static std::string Combine(const std::string_view& path1, const std::string_view& path2);
+    static int32_t Combine(const std::string_view& path1, const std::string_view& path2, char* destStr);
 //    static std::string GetFullPath(const std::string_view& path);
 //    static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);
 //    static std::string GetPathRoot(const std::string_view& path);
