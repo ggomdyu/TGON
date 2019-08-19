@@ -61,6 +61,19 @@ public:
         assert(Path::ChangeExtension("png", "ext") == "png.ext");
         assert(Path::ChangeExtension("", "ext") == "");
         assert(Path::ChangeExtension("", "") == "");
+        assert(Path::Combine("C:/User/Sys", "C:/ibs") == "C:/ibs");
+        assert(Path::Combine("/User/Sys", "C:/ibs") == "C:/ibs");
+        assert(Path::Combine("dec", "col") == "dec\\col");
+        assert(Path::Combine("dec/", "col") == "dec/col");
+        assert(Path::Combine("dec", "col/") == "dec\\col/");
+        assert(Path::Combine("dec/", "col/.png") == "dec/col/.png");
+        assert(Path::Combine("C:/col/2.png", "C:/col/.png") == "C:/col/.png");
+        assert(Path::Combine("col/2.png", "") == "col/2.png");
+        assert(Path::Combine("", "col/2.png") == "col/2.png");
+        assert(Path::Combine("/User/Sys", "ibs") == "/User/Sys\\ibs");
+        assert(Path::Combine("/User/Sys", "/ibs") == "/ibs");
+        assert(Path::Combine("/User/Sys/", "/ibs") == "/ibs");
+        assert(Path::Combine("", "") == "");
     }
 
 private:

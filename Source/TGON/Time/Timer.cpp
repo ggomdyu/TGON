@@ -1,7 +1,8 @@
 #include "PrecompiledHeader.h"
 
+#include "Platform/Environment.h"
+
 #include "Timer.h"
-#include "Time.h"
 
 namespace tgon
 {
@@ -27,7 +28,7 @@ Timer::Timer(int64_t interval, bool isAutoReset) noexcept :
 void Timer::Start()
 {
     m_isEnabled = true;
-    m_prevTime = tgon::GetTickCount();
+    m_prevTime = Environment::GetTickCount();
 }
 
 void Timer::Stop()
@@ -62,9 +63,7 @@ void Timer::Update()
         return;
     }
     
-    using tgon::GetTickCount;
-    
-    auto currTime = GetTickCount();
+    auto currTime = Environment::GetTickCount();
     if ((currTime - m_prevTime) > m_interval)
     {
         if (OnTimeElapsed != nullptr)

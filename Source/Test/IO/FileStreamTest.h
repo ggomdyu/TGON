@@ -10,6 +10,7 @@
 
 #include "IO/Path.h"
 #include "IO/FileStream.h"
+#include "Platform/Environment.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Test.h"
@@ -38,7 +39,7 @@ public:
     {
         CreateTemporaryFileToEvaluateTest();
 
-        auto filePath = Path::GetDesktopDirectory() + "/qwexqds2";
+        auto filePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
         const char str[] = "wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546";
         const char str2[] = "wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546";
         CustomFileStream f2(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);
@@ -126,7 +127,7 @@ public:
 private:
     void CreateTemporaryFileToEvaluateTest()
     {
-        auto filePath = Path::GetDesktopDirectory() + "/qwexqds2";
+        auto filePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
         File::Delete(filePath);
 
         FileStream f3(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);;

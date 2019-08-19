@@ -7,7 +7,6 @@
 #pragma once
 #include <cstdint>
 #include <array>
-#include <cassert>
 #include <numeric>
 
 #if defined(_DEBUG) || defined(NDEBUG)
@@ -98,8 +97,8 @@ public:
 private:
     using SpanStorageType = detail::SpanStorage<_ElementType, Extent>;
 
-    template <int32_t Start, int32_t Length>
-    using SubSpanType = Span<_ElementType, (Length != detail::DynamicExtent) ? Length : (Extent != detail::DynamicExtent) ? Extent - Start : detail::DynamicExtent>;
+    template <int32_t Start, int32_t Extent2>
+    using SubSpanType = Span<_ElementType, (Extent2 != detail::DynamicExtent) ? Extent2 : (Extent != detail::DynamicExtent) ? Extent - Start : detail::DynamicExtent>;
     
 /**@section Constructor */
 public:

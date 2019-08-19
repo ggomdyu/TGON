@@ -22,16 +22,6 @@ namespace tgon
  */
 int32_t GetLanguage(char* destStr, std::size_t destStrBufferSize);
 
-/**
- * @brief   Returns the current system language.
- * @param [out] destStr     The destination of the string to be written.
- */
-template <std::size_t N>
-inline int32_t GetLanguage(char(&destStr)[N])
-{
-    return GetLanguage(destStr, N);
-}
-
 /**@brief   Returns the current system language. */
 std::string GetLanguage();
 

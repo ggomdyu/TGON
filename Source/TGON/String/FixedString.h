@@ -16,8 +16,7 @@ namespace tgon
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
 class BasicFixedString
 {
-    static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value,
-        "_StringTraitsType's character type doesn't match with the _CharType.");
+    static_assert(std::is_same<_CharType, typename _StringTraitsType::ValueType>::value, "_StringTraitsType's character type doesn't match with the _CharType.");
 
 /**@section Type */
 public:

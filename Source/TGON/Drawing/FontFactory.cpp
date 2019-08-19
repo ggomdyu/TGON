@@ -26,7 +26,7 @@ const char* ConvertFTErrorToString(FT_Error error)
     return g_ftErrors[error].errorMessage;
 }
 
-constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode)
+constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
 {
     constexpr int32_t bytesTable[] =
     {
@@ -39,7 +39,7 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode)
         32, // FT_PIXEL_MODE_BGRA
     };
 
-    return bytesTable[static_cast<int>(pixelMode)];
+    return bytesTable[static_cast<int32_t>(pixelMode)];
 }
 
 } /* namespace */
@@ -56,21 +56,18 @@ FontFace::FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Librar
         if (error)
         {
             Debug::Fail("Failed to invoke FT_New_Memory_Face.", ConvertFTErrorToString(error));
-            return nullptr;
         }
 
         error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
         if (error)
         {
             Debug::Fail("Failed to invoke FT_Select_Charmap.", ConvertFTErrorToString(error));
-            return nullptr;
         }
 
         error = FT_Set_Pixel_Sizes(face, 0, fontSize);
         if (error)
         {
             Debug::Fail("Failed to invoke FT_Set_Pixel_Sizes.", ConvertFTErrorToString(error));
-            return nullptr;
         }
 
         return face;
@@ -79,9 +76,9 @@ FontFace::FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Librar
 }
 
 FontFace::FontFace(FontFace&& rhs) noexcept :
-    m_glyphDatas(std::move(rhs.m_glyphDatas)),
+    m_fontSize(rhs.m_fontSize),
     m_fontFace(rhs.m_fontFace),
-    m_fontSize(rhs.m_fontSize)
+    m_glyphDatas(std::move(rhs.m_glyphDatas))
 {
     rhs.m_fontFace = nullptr;
     rhs.m_fontSize = 0;
@@ -99,19 +96,18 @@ FontFace& FontFace::operator=(FontFace&& rhs) noexcept
     return *this;
 }
 
-const GlyphData& FontFace::GetGlyphData(UnicodeScalar character) const
+const GlyphData& FontFace::GetGlyphData(UnicodeScalar ch) const
 {
-    auto iter = m_glyphDatas.find(character);
+    auto iter = m_glyphDatas.find(ch);
     if (iter != m_glyphDatas.end())
     {
         return iter->second;
     }
 
-    FT_Error error = FT_Load_Char(m_fontFace, character, FT_LOAD_RENDER);
+    FT_Error error = FT_Load_Char(m_fontFace, ch, FT_LOAD_RENDER);
     if (error)
     {
         Debug::Fail("Failed to invoke FT_Load_Char.", ConvertFTErrorToString(error));
-        return m_glyphDatas.insert(iter, {character, GlyphData{character, I32Extent2D(0, 0), I32Vector2(0, 0), I32Vector2(0, 0), nullptr}})->second;
     }
 
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
@@ -126,25 +122,26 @@ const GlyphData& FontFace::GetGlyphData(UnicodeScalar character) const
         bitmap[i + 3] = m_fontFace->glyph->bitmap.buffer[j];
     }
 
-    return m_glyphDatas.insert(iter, {character, GlyphData{
-        character,
-        I32Extent2D(static_cast<int32_t>(bitmapWidth), static_cast<int32_t>(bitmapHeight)),
-        I32Vector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top)),
-        I32Vector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6)),
+    return m_glyphDatas.insert(iter, {ch, GlyphData{
+        ch,
+        GlyphMetrics{
+            I32Extent2D(static_cast<int32_t>(bitmapWidth), static_cast<int32_t>(bitmapHeight)), 
+            I32Vector2(static_cast<int32_t>(m_fontFace->glyph->bitmap_left), static_cast<int32_t>(m_fontFace->glyph->bitmap_top)),
+            I32Vector2(static_cast<int32_t>(m_fontFace->glyph->advance.x >> 6), static_cast<int32_t>(m_fontFace->glyph->advance.y >> 6))
+        },
         std::move(bitmap)
     }})->second;
 }
 
-const I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const
+I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const
 {
     FT_Vector kerning;
     auto lhsIndex = FT_Get_Char_Index(m_fontFace, lhs);
     auto rhsIndex = FT_Get_Char_Index(m_fontFace, rhs);
-    FT_Error error = FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
+    auto error = FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
     if (error)
     {
         Debug::Fail("Failed to invoke FT_Get_Kerning.", ConvertFTErrorToString(error));
-        return I32Vector2(0, 0);
     }
 
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
@@ -184,7 +181,7 @@ Font::Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library) :
 {
 }
 
-Font::Font(Font&& rhs) :
+Font::Font(Font&& rhs) noexcept :
     m_fileData(std::move(rhs.m_fileData)),
     m_fileDataBytes(rhs.m_fileDataBytes),
     m_library(rhs.m_library),
@@ -192,6 +189,19 @@ Font::Font(Font&& rhs) :
 {
     rhs.m_fileDataBytes = 0;
     rhs.m_library = nullptr;
+}
+
+Font& Font::operator=(Font&& rhs) noexcept
+{
+    m_fileData = std::move(rhs.m_fileData);
+    m_fileDataBytes = rhs.m_fileDataBytes;
+    m_library = rhs.m_library;
+    m_fontFaces = std::move(rhs.m_fontFaces);
+    
+    rhs.m_fileDataBytes = 0;
+    rhs.m_library = nullptr;
+
+    return *this;
 }
 
 const FontFace& Font::GetFace(FontSize fontSize) const
@@ -205,12 +215,12 @@ const FontFace& Font::GetFace(FontSize fontSize) const
     return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
 }
 
-const GlyphData& Font::GetGlyphData(UnicodeScalar character, FontSize fontSize) const
+const GlyphData& Font::GetGlyphData(UnicodeScalar ch, FontSize fontSize) const
 {
-    return this->GetFace(fontSize).GetGlyphData(character);
+    return this->GetFace(fontSize).GetGlyphData(ch);
 }
 
-const I32Vector2 Font::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const
+I32Vector2 Font::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const
 {
     return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }
@@ -222,7 +232,6 @@ FontFactory::FontFactory() :
     if (error)
     {
         Debug::Fail("Failed to invoke FT_Init_FreeType.", ConvertFTErrorToString(error));
-        return;
     }
 }
 

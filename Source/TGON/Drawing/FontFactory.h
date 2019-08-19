@@ -25,31 +25,31 @@ namespace tgon
 
 using FontSize = uint32_t;
 
-struct GlyphMetrics
+struct GlyphMetrics final
 {
-    I32Extent2D size;
-    I32Vector2 bearing;
-    int32_t advance;
-};
-
-struct GlyphData
-{
-/**@section Variable */
-public:
-    UnicodeScalar character;
     I32Extent2D size;
     I32Vector2 bearing;
     I32Vector2 advance;
+};
+
+struct GlyphData final
+{
+    UnicodeScalar ch;
+    GlyphMetrics metrics;
     std::unique_ptr<uint8_t[]> bitmap;
 };
 
-class TGON_API FontFace :
+class TGON_API FontFace final :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
     FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize);
     FontFace(FontFace&& rhs) noexcept;
+    
+/**@section Destructor */
+public:
+    ~FontFace() = default;
 
 /**@section Operator */
 public:
@@ -57,30 +57,38 @@ public:
 
 /**@section Method */
 public:
-    const GlyphData& GetGlyphData(UnicodeScalar character) const;
-    const I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const;
+    const GlyphData& GetGlyphData(UnicodeScalar ch) const;
+    I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const;
 
 /**@section Variable */
 public:
-    FT_Face m_fontFace;
     int32_t m_fontSize;
+    FT_Face m_fontFace;
     mutable std::unordered_map<UnicodeScalar, GlyphData> m_glyphDatas;
 };
 
-class TGON_API Font :
+class TGON_API Font final :
     private boost::noncopyable
 {
 /**@section Constructor */
 public:
     Font(const StringHash& filePath, FT_Library library);
     Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library);
-    Font(Font&& rhs);
+    Font(Font&& rhs) noexcept;
+    
+/**@section Destructor */
+public:
+    ~Font() = default;
+    
+/**@section Operator */
+public:
+    Font& operator=(Font&& rhs) noexcept;
 
 /**@section Method */
 public:
     const FontFace& GetFace(FontSize fontSize) const;
-    const GlyphData& GetGlyphData(UnicodeScalar character, FontSize fontSize) const;
-    const I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const;
+    const GlyphData& GetGlyphData(UnicodeScalar ch, FontSize fontSize) const;
+    I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const;
 
 /**@section Variable */
 private:

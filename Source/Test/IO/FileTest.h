@@ -9,6 +9,7 @@
 
 #include "IO/Path.h"
 #include "IO/File.h"
+#include "Platform/Environment.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Test.h"
@@ -26,8 +27,8 @@ public:
         CreateTemporaryFileToEvaluateTest();
 
         // WARNING: This test requires 1.png indesktop directory!
-        auto desktopPath = Path::GetDesktopDirectory();
-        auto srcImagePath = Path::GetDesktopDirectory() + "/qwexqwexqw.png";
+        auto desktopPath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+        auto srcImagePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqwexqw.png";
 
         auto dtl = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Local);
         auto dtu = DateTime(2001, 10, 12, 4, 2, 10, DateTimeKind::Utc);
@@ -82,7 +83,7 @@ public:
 private:
     void CreateTemporaryFileToEvaluateTest()
     {
-        auto filePath = Path::GetDesktopDirectory() + "/qwexqwexqw.png";
+        auto filePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqwexqw.png";
         File::Delete(filePath);
 
         FileStream f3(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);;

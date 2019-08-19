@@ -100,7 +100,7 @@ void LogoScene::InitPhase1()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    auto texture = std::make_shared<Texture>(Path::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<Texture>(Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     object1 = std::make_shared<GameObject>("introSprite1", new Transform());
     object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -134,7 +134,7 @@ void LogoScene::InitPhase2()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     // �ؽ�ó ������Ʈ �߰�
-    auto texture = std::make_shared<tgon::Texture>(Path::GetDesktopDirectory() + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<tgon::Texture>(Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -225,7 +225,6 @@ template <typename _Type>
 struct HasBeginEnd
 {
 /**@section Enum */
-private:
 public:
     template <typename _Type2>
     static void TypeCheckFunc(std::enable_if_t<std::is_same_v<
@@ -248,10 +247,25 @@ public:
 void LogoScene::InitPhase4()
 {
     using namespace tgon;
-    
-    PathTest().Evaluate();
 
-//    FileStreamTest().Evaluate();
+    FixedStringTest().Evaluate();
+    DateTimeTest().Evaluate();
+    PathTest().Evaluate();
+    FileStreamTest().Evaluate();
+
+    auto commandLine = Environment::GetCommandLine();
+    auto commandLine2 = Environment::GetCurrentDirectory();
+    auto commandLine3 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+
+    auto a = Path::GetFullPath(u8"ext.png");
+    auto b = Path::GetFullPath(u8"/ext.png");
+    auto c = Path::GetFullPath(u8"\\ext.png");
+
+    while (true)
+    {
+        auto str = std::to_string(Environment::GetTickCount());
+        Debug::WriteLine(str);
+    }
 
 //    FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
 //    for (int i = 0; i < (int)(4096.0 * 1.1); ++i)
@@ -270,8 +284,6 @@ void LogoScene::InitPhase4()
     ///*HasBeginEnd<std::vector<int>>::TypeCheckFunc<std::vector<int>>(1);
     //HasBeginEnd<std::vector<int>>::TypeCheckFunc<int>(1);*/
     //
-    //FixedStringTest().Evaluate();
-    //DateTimeTest().Evaluate();
     ///*FileTest().Evaluate();*/
     //
     //char ch[446] {};

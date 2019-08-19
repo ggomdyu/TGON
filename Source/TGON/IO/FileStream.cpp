@@ -8,27 +8,22 @@ namespace tgon
 {
 
 FileStream::FileStream(const std::string& path, FileMode mode) :
-    FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultIsAsync)
+    FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access) :
-    FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultIsAsync)
+    FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share) :
-    FileStream(path, mode, access, share, DefaultBufferSize, DefaultIsAsync)
+    FileStream(path, mode, access, share, DefaultBufferSize, DefaultFileOption)
 {
 }
 
 FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
-    FileStream(path, mode, access, share, bufferSize, DefaultIsAsync)
-{
-}
-
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, bool isUseAsync) :
-    FileStream(path, mode, access, share, bufferSize, isUseAsync ? FileOptions::Asynchronous : FileOptions::None)
+    FileStream(path, mode, access, share, bufferSize, DefaultFileOption)
 {
 }
 

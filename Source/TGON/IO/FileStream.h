@@ -2,6 +2,7 @@
  * @file    FileStream.h
  * @author  ggomdyu
  * @since   08/04/2019
+ * @see     https://referencesource.microsoft.com/#mscorlib/system/io/filestream.cs
  */
 
 #pragma once
@@ -60,7 +61,6 @@ public:
     FileStream(const std::string& path, FileMode mode, FileAccess access);
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share);
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
-    FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, bool isUseAsync);
     FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
     FileStream(FileStream&& rhs) noexcept;
 
@@ -110,7 +110,7 @@ protected:
 /**@section Variable */
 protected:
     static constexpr FileShare DefaultShare = FileShare::Read;
-    static constexpr bool DefaultIsAsync = false;
+    static constexpr FileOptions DefaultFileOption = FileOptions::None;
     static constexpr int DefaultBufferSize = 4096;
 
     void* m_nativeHandle;
