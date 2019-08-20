@@ -1,4 +1,5 @@
-﻿#include "PrecompiledHeader.h"
+﻿#include "..\Environment.h"
+#include "PrecompiledHeader.h"
 
 #ifndef NOMINMAX
 #    define NOMINMAX
@@ -85,6 +86,14 @@ std::string_view Environment::GetNewLine()
 {
     char newLine[] = "\r\n";
     return {newLine, std::extent_v<decltype(newLine)> - 1};
+}
+
+int32_t Environment::GetSystemPageSize()
+{
+    SYSTEM_INFO si;
+    GetSystemInfo(&si);
+
+    return static_cast<int32_t>(si.dwPageSize);
 }
 
 } /* namespace tgon */

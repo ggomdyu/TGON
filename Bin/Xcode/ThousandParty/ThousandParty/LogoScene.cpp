@@ -31,7 +31,7 @@ LogoScene::LogoScene()
 {
     using namespace tgon;
     
-    m_beginTime = tgon::GetTickCount();
+    m_beginTime = Environment::GetTickCount();
 
     SuperType::Update();
 

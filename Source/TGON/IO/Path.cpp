@@ -284,9 +284,4 @@ bool Path::IsValidDriveChar(char ch) noexcept
     return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
-int32_t Path::GetFullPath(const std::string_view& path, const Span<char>& destStr)
-{
-    return GetFullPath(path, &destStr[0], destStr.Length());
-}
-
 } /* namespace tgon */

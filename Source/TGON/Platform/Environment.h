@@ -93,6 +93,7 @@ public:
     static bool Is64BitOperatingSystem();
     static int32_t GetProcessorCount();
     static std::string_view GetNewLine();
+    static int32_t GetSystemPageSize();
 
     /*public static string GetEnvironmentVariable(string variable);
     public static string GetEnvironmentVariable(string variable, EnvironmentVariableTarget target);
@@ -119,7 +120,6 @@ public:
     public static string UserName{ get; }
     public static string UserDomainName{ get; }
     public static string[] GetLogicalDrives();
-    public static int SystemPageSize{ get; }
     public static int ExitCode{ get; set; }
     public static string MachineName{ get; }
     public static string SystemDirectory{ get; }*/
