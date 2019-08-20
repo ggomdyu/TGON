@@ -31,7 +31,7 @@ public:
     static std::string GetFileNameWithoutExtension(const std::string_view& path);
     static int32_t GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
     static std::string GetDirectoryName(const std::string_view& path);
-    static int32_t GetDirectoryName(const std::string_view& path, char* destStr);
+    static int32_t GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
     static bool HasExtension(const std::string_view& path);
     static std::string ChangeExtension(const std::string_view& path, const std::string_view& extension);
     static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr);
