@@ -79,16 +79,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
 
     /**
      * @brief   Creates a string that represents this struct.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destBuffer.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destBuffer.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
 
 /**@section Variable */
 public:
@@ -329,16 +329,16 @@ inline const BasicVector2<_ValueType> BasicVector2<_ValueType>::Normalized() con
 }
 
 template <typename _ValueType>
-template <std::size_t _StrBufferSize>
-inline int32_t BasicVector2<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
+template <std::size_t _DestStrBufferLen>
+inline int32_t BasicVector2<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     this->ToString(destStr, sizeof(destStr));
 }
 
 template <typename _ValueType>
-inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", x, y);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f", x, y);
 }
 
 } /* namespace tgon */

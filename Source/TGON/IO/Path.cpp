@@ -13,12 +13,12 @@ std::string Path::Combine(const std::string_view& path1, const std::string_view&
     return std::string(g_tempUtf8Buffer.data(), strLen);
 }
 
-int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferSize)
+int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen)
 {
     if (path2.length() == 0)
     {
         int32_t destStrLen = static_cast<int32_t>(path1.length());
-        if (destStrLen + 1 > destStrBufferSize)
+        if (destStrLen + 1 > destStrBufferLen)
         {
             return -1;
         }
@@ -29,7 +29,7 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
 
     if (path1.length() == 0 || IsPathRooted(path2))
     {
-        if (static_cast<int32_t>(path2.length() + 1) > destStrBufferSize)
+        if (static_cast<int32_t>(path2.length() + 1) > destStrBufferLen)
         {
             return -1;
         }
@@ -45,7 +45,7 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
     bool hasSeperator = (path1Seperator == DirectorySeparatorChar) || (path1Seperator == AltDirectorySeparatorChar) || (path2Seperator == DirectorySeparatorChar) || (path2Seperator == AltDirectorySeparatorChar);
     if (!hasSeperator)
     {
-        if (index + 1 + static_cast<int32_t>(path2.length()) > destStrBufferSize)
+        if (index + 1 + static_cast<int32_t>(path2.length()) > destStrBufferLen)
         {
             return -1;
         }
@@ -55,7 +55,7 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
     }
     else
     {
-        if (index + static_cast<int32_t>(path2.length()) > destStrBufferSize)
+        if (index + static_cast<int32_t>(path2.length()) > destStrBufferLen)
         {
             return -1;
         }
@@ -96,7 +96,7 @@ std::string Path::GetFileName(const std::string_view& path)
     return std::string(g_tempUtf8Buffer.data(), strLen);
 }
 
-int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferSize)
+int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
 
@@ -105,7 +105,7 @@ int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t d
         if (--iterIndex <= 0)
         {
             int32_t destStrLen = static_cast<int32_t>(path.length());
-            if (destStrLen + 1 > destStrBufferSize)
+            if (destStrLen + 1 > destStrBufferLen)
             {
                 return -1;
             }
@@ -119,7 +119,7 @@ int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t d
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             auto destStrLen = static_cast<int32_t>(path.length()) - (++iterIndex);
-            if (destStrLen + 1 > destStrBufferSize)
+            if (destStrLen + 1 > destStrBufferLen)
             {
                 return -1;
             }
@@ -138,7 +138,7 @@ std::string Path::GetFileNameWithoutExtension(const std::string_view& path)
     return std::string(g_tempUtf8Buffer.data(), strLen);
 }
 
-int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferSize)
+int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
     auto extensionStartIndex = iterIndex;
@@ -147,7 +147,7 @@ int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* de
     {
         if (--iterIndex <= 0)
         {
-            if (extensionStartIndex > destStrBufferSize)
+            if (extensionStartIndex > destStrBufferLen)
             {
                 return -1;
             }
@@ -159,7 +159,7 @@ int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* de
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             int32_t destStrLen = extensionStartIndex - (iterIndex + 1);
-            if (destStrLen + 1 > destStrBufferSize)
+            if (destStrLen + 1 > destStrBufferLen)
             {
                 return -1;
             }
@@ -183,7 +183,7 @@ std::string Path::GetDirectoryName(const std::string_view& path)
     return std::string(g_tempUtf8Buffer.data(), strLen);
 }
 
-int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferSize)
+int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
 
@@ -191,7 +191,7 @@ int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr, int3
     {
         if (--iterIndex < 0)
         {
-            if (1 > destStrBufferSize)
+            if (1 > destStrBufferLen)
             {
                 return -1;
             }
@@ -202,7 +202,7 @@ int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr, int3
         
         if (path[iterIndex] == AltDirectorySeparatorChar)
         {
-            if (iterIndex + 1 > destStrBufferSize)
+            if (iterIndex + 1 > destStrBufferLen)
             {
                 return -1;
             }

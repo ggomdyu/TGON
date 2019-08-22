@@ -1,5 +1,4 @@
-﻿#include "..\Environment.h"
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #ifndef NOMINMAX
 #    define NOMINMAX
@@ -18,29 +17,29 @@ namespace tgon
 thread_local std::array<char, 16384> g_tempUtf8Buffer;
 thread_local std::array<wchar_t, 16384> g_tempUtf16Buffer;
 
-int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferSize)
+int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    auto utf16PathLen = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
-    if (utf16PathLen != 0)
+    auto utf16StrSize = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
+    if (utf16StrSize != 0)
     {
-        auto utf8PathLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16PathLen), &destStr[0], destStrBufferSize);
-        if (utf8PathLen != -1)
+        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
+        if (utf8StrSize != -1)
         {
-            return utf8PathLen;
+            return utf8StrSize;
         }
     }
 
     return -1;
 }
 
-int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferSize)
+int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
     if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16Buffer.data()) == S_OK)
     {
-        auto utf8PathLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(g_tempUtf16Buffer.data()), destStr, destStrBufferSize);
-        if (utf8PathLen != -1)
+        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(g_tempUtf16Buffer.data()), destStr, destStrBufferLen);
+        if (utf8StrSize != -1)
         {
-            return utf8PathLen;
+            return utf8StrSize;
         }
     }
 
@@ -94,6 +93,41 @@ int32_t Environment::GetSystemPageSize()
     GetSystemInfo(&si);
 
     return static_cast<int32_t>(si.dwPageSize);
+}
+
+int32_t Environment::GetCurrentManagedThreadId()
+{
+    return GetCurrentThreadId();
+}
+
+int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
+{
+    DWORD utf16StrSize = 0;
+    if (GetUserNameW(g_tempUtf16Buffer.data(), &utf16StrSize) == TRUE)
+    {
+        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
+        if (utf8StrSize != -1)
+        {
+            return utf8StrSize;
+        }
+    }
+
+    return -1;
+}
+
+int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
+{
+    DWORD utf16StrSize = 0;
+    if (GetComputerNameW(g_tempUtf16Buffer.data(), &utf16StrSize) == TRUE)
+    {
+        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
+        if (utf8StrSize != -1)
+        {
+            return utf8StrSize;
+        }
+    }
+
+    return -1;
 }
 
 } /* namespace tgon */

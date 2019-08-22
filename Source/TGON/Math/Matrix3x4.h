@@ -70,16 +70,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
 
     /**
      * @brief   Creates a string that represents this Matrix.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destStr.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
 
 /**@section Variable */
 public:
@@ -392,15 +392,15 @@ constexpr const Matrix3x4 Matrix3x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-template<std::size_t _StrBufferSize>
-inline int32_t Matrix3x4::ToString(char(&destStr)[_StrBufferSize]) const
+template<std::size_t _DestStrBufferLen>
+inline int32_t Matrix3x4::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     this->ToString(destStr, sizeof(destStr));
 }
 
-inline int32_t Matrix3x4::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t Matrix3x4::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f", m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f\n%f\t%f\t%f", m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32);
 }
 
 } /* namespace tgon */

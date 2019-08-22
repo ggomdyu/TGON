@@ -23,28 +23,28 @@ public:
 /**@section Method */
 public:
     static std::string Combine(const std::string_view& path1, const std::string_view& path2);
-    static int32_t Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferSize);
+    static int32_t Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t Combine(const std::string_view& path1, const std::string_view& path2, const Span<char, Length>& destStr);
     static bool IsPathRooted(const std::string_view& path);
     static std::string_view GetExtension(const std::string_view& path);
     static std::string GetFileName(const std::string_view& path);
-    static int32_t GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
+    static int32_t GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetFileName(const std::string_view& path, const Span<char, Length>& destStr);
     static std::string GetFileNameWithoutExtension(const std::string_view& path);
-    static int32_t GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
+    static int32_t GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetFileNameWithoutExtension(const std::string_view& path, const Span<char, Length>& destStr);
     static std::string GetDirectoryName(const std::string_view& path);
-    static int32_t GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
+    static int32_t GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetDirectoryName(const std::string_view& path, const Span<char, Length>& destStr);
     static bool HasExtension(const std::string_view& path);
     static std::string ChangeExtension(const std::string_view& path, const std::string_view& extension);
     static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr);
     static std::string GetFullPath(const std::string_view& path);
-    static int32_t GetFullPath(const std::string_view& path, char* destStr, int32_t destStrBufferSize);
+    static int32_t GetFullPath(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetFullPath(const std::string_view& path, const Span<char, Length>& destStr);
 //    static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);

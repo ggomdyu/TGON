@@ -31,11 +31,11 @@ public:
      * @brief   Converts a string from one encoding to another.
      * @param [in] srcStr               The source of _FromEncodingType.
      * @param [out] destStr             The output destination of _ToEncodingType.
-     * @param [out] destStrBufferSize   The buffer length of output destination.
+     * @param [out] destStrBufferLen    The buffer length of output destination.
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
     template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType>
-    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, int32_t destStrBufferSize);
+    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, int32_t destStrBufferLen);
 
     /**
      * @brief   Converts a string from one encoding to another.
@@ -43,8 +43,8 @@ public:
      * @param [out] destStr     The output destination of _ToEncodingType.
      * @return  Returns the bytes count of destStr if succeed, -1 otherwise.
      */
-    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, int32_t _DestCharBufferSize>
-    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferSize]);
+    template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, int32_t _DestStrBufferLen>
+    static int32_t ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestStrBufferLen]);
 
     /**
      * @brief   Converts a string from one encoding to another.
@@ -57,18 +57,18 @@ public:
 
 template <typename _FromEncodingType>
 template <typename _ToEncodingType, typename _SrcCharType, typename _DestCharType>
-inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, int32_t destStrBufferSize)
+inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType* destStr, int32_t destStrBufferLen)
 {
     icu::UnicodeString ustr(reinterpret_cast<const char*>(srcStr.data()), static_cast<int32_t>(srcStr.length() * sizeof(_SrcCharType)), _FromEncodingType::EncodingName);
 
     int32_t encodedStrBytes = ustr.extract(0, ustr.length(), nullptr, _ToEncodingType::EncodingName);
-    int32_t destStrBufferBytes = destStrBufferSize * sizeof(_DestCharType);
+    int32_t destStrBufferBytes = destStrBufferLen * sizeof(_DestCharType);
     if (encodedStrBytes + static_cast<int32_t>(sizeof(_DestCharType)) > destStrBufferBytes)
     {
         return -1;
     }
 
-    ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr), destStrBufferSize, _ToEncodingType::EncodingName);
+    ustr.extract(0, ustr.length(), reinterpret_cast<char*>(destStr), destStrBufferLen, _ToEncodingType::EncodingName);
     
     destStr[encodedStrBytes / static_cast<int32_t>(sizeof(_DestCharType))] = _DestCharType();
 
@@ -76,10 +76,10 @@ inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_vi
 }
 
 template<typename _FromEncodingType>
-template<typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, int32_t _DestCharBufferSize>
-inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestCharBufferSize])
+template<typename _ToEncodingType, typename _SrcCharType, typename _DestCharType, int32_t _DestStrBufferLen>
+inline int32_t Encoding<_FromEncodingType>::ConvertTo(const std::basic_string_view<_SrcCharType>& srcStr, _DestCharType(&destStr)[_DestStrBufferLen])
 {
-    return ConvertTo<_ToEncodingType, _SrcCharType, _DestCharType>(srcStr, destStr, _DestCharBufferSize);
+    return ConvertTo<_ToEncodingType, _SrcCharType, _DestCharType>(srcStr, destStr, _DestStrBufferLen);
 }
 
 template<typename _FromEncodingType>

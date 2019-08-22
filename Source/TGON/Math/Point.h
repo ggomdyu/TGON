@@ -57,16 +57,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
 
     /**
      * @brief   Creates a string that represents this struct.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destStr.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
 
 /**@section Variable */
 public:
@@ -190,28 +190,28 @@ constexpr BasicPoint<_ValueType>::operator BasicPoint<_CastToType>() const noexc
 }
 
 template <typename _ValueType>
-template <std::size_t _StrBufferSize>
-inline int32_t BasicPoint<_ValueType>::ToString(char(&destStr)[_StrBufferSize]) const
+template <std::size_t _DestStrBufferLen>
+inline int32_t BasicPoint<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     return this->ToString(destStr, sizeof(destStr));
 }
 
 template <typename _ValueType>
-inline int32_t BasicPoint<_ValueType>::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t BasicPoint<_ValueType>::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d", x, y);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%d %d", x, y);
 }
 
 template <>
-inline int32_t BasicPoint<float>::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t BasicPoint<float>::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f", x, y);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f", x, y);
 }
 
 template <>
-inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t BasicPoint<double>::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%lf %lf", x, y);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%lf %lf", x, y);
 }
 
 } /* namespace tgon */

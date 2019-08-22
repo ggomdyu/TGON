@@ -60,16 +60,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
     
     /**
      * @brief   Creates a string that represents this struct.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destStr.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
     
 /**@section Variable */
 public:
@@ -208,15 +208,15 @@ constexpr Color4b::operator uint32_t() const noexcept
     return color;
 }
 
-template <std::size_t _StrBufferSize>
-inline int32_t Color4b::ToString(char(&destStr)[_StrBufferSize]) const
+template <std::size_t _DestStrBufferLen>
+inline int32_t Color4b::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     return this->ToString(destStr, sizeof(destStr));
 }
 
-inline int32_t Color4b::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t Color4b::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%d %d %d %d", r, g, b, a);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%d %d %d %d", r, g, b, a);
 }
 
 struct Color3f
@@ -238,16 +238,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
 
     /**
      * @brief   Creates a string that represents this struct.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destStr.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
 
 /**@section Variable */
 public:
@@ -276,15 +276,15 @@ constexpr bool Color3f::operator!=(const Color3f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-template <std::size_t _StrBufferSize>
-inline int32_t Color3f::ToString(char(&destStr)[_StrBufferSize]) const
+template <std::size_t _DestStrBufferLen>
+inline int32_t Color3f::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     return this->ToString(destStr, sizeof(destStr));
 }
 
-inline int32_t Color3f::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t Color3f::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f", r, g, b);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f", r, g, b);
 }
 
 struct Color4f
@@ -306,16 +306,16 @@ public:
      * @param [out] destStr     The destination of the string to be written.
      * @return  The length of string.
      */
-    template <std::size_t _StrBufferSize>
-    int32_t ToString(char(&destStr)[_StrBufferSize]) const;
+    template <std::size_t _DestStrBufferLen>
+    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
 
     /**
      * @brief   Creates a string that represents this struct.
-     * @param [out] destStr         The destination of the string to be written.
-     * @param [in] strBufferSize    The buffer size of destStr.
+     * @param [out] destStr             The destination of the string to be written.
+     * @param [in] destStrBufferLen     The buffer size of destStr.
      * @return  The length of string.
      */
-    int32_t ToString(char* destStr, std::size_t strBufferSize) const;
+    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
 
 /**@section Variable */
 public:
@@ -345,15 +345,15 @@ constexpr bool Color4f::operator!=(const Color4f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-template <std::size_t _StrBufferSize>
-inline int32_t Color4f::ToString(char(&destStr)[_StrBufferSize]) const
+template <std::size_t _DestStrBufferLen>
+inline int32_t Color4f::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
-    return this->ToString(destStr, _StrBufferSize);
+    return this->ToString(destStr, _DestStrBufferLen);
 }
 
-inline int32_t Color4f::ToString(char* destStr, std::size_t strBufferSize) const
+inline int32_t Color4f::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
-    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * strBufferSize, "%f %f %f %f", r, g, b, a);
+    return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f %f", r, g, b, a);
 }
 
 } /* namespace tgon */
