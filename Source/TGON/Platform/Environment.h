@@ -87,12 +87,6 @@ public:
     static std::string GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
     static int32_t GetFolderPath(SpecialFolder folder, const Span<char>& destStr);
-    static const std::string& GetCommandLine();
-    static void Exit(int32_t exitCode);
-    static int64_t GetTickCount();
-    static bool Is64BitProcess();
-    static bool Is64BitOperatingSystem();
-    static int32_t GetProcessorCount();
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
@@ -102,7 +96,16 @@ public:
     static std::string GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetMachineName(const Span<char>& destStr);
-        /*public static string GetEnvironmentVariable(string variable);
+    static std::string GetUserDomainName();
+    static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
+    static int32_t GetUserDomainName(const Span<char>& destStr);
+    static const std::string& GetCommandLine();
+    static void Exit(int32_t exitCode);
+    static int64_t GetTickCount();
+    static int32_t GetProcessorCount();
+    static bool Is64BitProcess();
+    static bool Is64BitOperatingSystem();
+    /*public static string GetEnvironmentVariable(string variable);
     public static string GetEnvironmentVariable(string variable, EnvironmentVariableTarget target);
     public static IDictionary GetEnvironmentVariables();
     public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
@@ -123,7 +126,6 @@ public:
     public static string StackTrace{ [MethodImpl(MethodImplOptions.NoInlining)] get; }
     public static bool UserInteractive{ get; }
     public static long WorkingSet{ get; }
-    public static string UserDomainName{ get; }
     public static string[] GetLogicalDrives();
     public static int ExitCode{ get; set; }
     public static string SystemDirectory{ get; }*/

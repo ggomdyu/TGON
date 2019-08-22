@@ -55,12 +55,24 @@ std::string Environment::GetUserName()
 
 int32_t Environment::GetMachineName(const Span<char>& destStr)
 {
-    return int32_t();
+    return GetMachineName(&destStr[0], destStr.Length());
 }
 
 std::string Environment::GetMachineName()
 {
-    return std::string();
+    auto strLen = GetMachineName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+}
+
+int32_t Environment::GetUserDomainName(const Span<char>& destStr)
+{
+    return GetUserDomainName(&destStr[0], destStr.Length());
+}
+
+std::string Environment::GetUserDomainName()
+{
+    auto strLen = GetUserDomainName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
 }
 
 } /* namespace tgon */

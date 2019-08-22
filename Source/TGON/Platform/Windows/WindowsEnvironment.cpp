@@ -19,13 +19,13 @@ thread_local std::array<wchar_t, 16384> g_tempUtf16Buffer;
 
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    auto utf16StrSize = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
-    if (utf16StrSize != 0)
+    auto utf16StrLen = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
+    if (utf16StrLen != 0)
     {
-        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
-        if (utf8StrSize != -1)
+        auto utf8StrLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrLen), &destStr[0], destStrBufferLen);
+        if (utf8StrLen != -1)
         {
-            return utf8StrSize;
+            return utf8StrLen;
         }
     }
 
@@ -36,10 +36,10 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
 {
     if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16Buffer.data()) == S_OK)
     {
-        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(g_tempUtf16Buffer.data()), destStr, destStrBufferLen);
-        if (utf8StrSize != -1)
+        auto utf8StrLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(g_tempUtf16Buffer.data()), destStr, destStrBufferLen);
+        if (utf8StrLen != -1)
         {
-            return utf8StrSize;
+            return utf8StrLen;
         }
     }
 
@@ -102,13 +102,13 @@ int32_t Environment::GetCurrentManagedThreadId()
 
 int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 {
-    DWORD utf16StrSize = 0;
-    if (GetUserNameW(g_tempUtf16Buffer.data(), &utf16StrSize) == TRUE)
+    DWORD utf16StrLen = 0;
+    if (GetUserNameW(g_tempUtf16Buffer.data(), &utf16StrLen) == TRUE)
     {
-        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
-        if (utf8StrSize != -1)
+        auto utf8StrLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrLen), &destStr[0], destStrBufferLen);
+        if (utf8StrLen != -1)
         {
-            return utf8StrSize;
+            return utf8StrLen;
         }
     }
 
@@ -117,17 +117,31 @@ int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 
 int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 {
-    DWORD utf16StrSize = 0;
-    if (GetComputerNameW(g_tempUtf16Buffer.data(), &utf16StrSize) == TRUE)
+    DWORD utf16StrLen = 0;
+    if (GetComputerNameW(g_tempUtf16Buffer.data(), &utf16StrLen) == TRUE)
     {
-        auto utf8StrSize = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrSize), &destStr[0], destStrBufferLen);
-        if (utf8StrSize != -1)
+        auto utf8StrLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrLen), &destStr[0], destStrBufferLen);
+        if (utf8StrLen != -1)
         {
-            return utf8StrSize;
+            return utf8StrLen;
         }
     }
 
     return -1;
 }
 
+int32_t tgon::Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
+{
+    DWORD utf16StrLen = 0;
+    if (GetUserNameW(g_tempUtf16Buffer.data(), &utf16StrLen) == TRUE)
+    {
+        auto utf8StrLen = UTF16LE::ConvertTo<UTF8>(std::wstring_view(&g_tempUtf16Buffer[0], utf16StrLen), &destStr[0], destStrBufferLen);
+        if (utf8StrLen != -1)
+        {
+            return utf8StrLen;
+        }
+    }
+
+    return -1;
+}
 } /* namespace tgon */
