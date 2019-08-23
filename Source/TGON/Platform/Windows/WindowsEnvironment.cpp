@@ -14,8 +14,21 @@
 namespace tgon
 {
 
-thread_local std::array<char, 16384> g_tempUtf8Buffer;
-thread_local std::array<wchar_t, 16384> g_tempUtf16Buffer;
+thread_local std::array<wchar_t, 32767> g_tempUtf16Buffer;
+
+bool Environment::SetEnvironmentVariable(const std::string_view& name, const std::string_view& value)
+{
+    auto utf16Name = UTF8::ConvertTo<UTF16LE>(name);
+    auto utf16Value = UTF8::ConvertTo<UTF16LE>(value);
+
+    return SetEnvironmentVariableW(reinterpret_cast<const wchar_t*>(utf16Name.c_str()), reinterpret_cast<const wchar_t*>(utf16Value.c_str())) == TRUE;
+}
+
+int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen)
+{
+    // todo: impl
+    return -1;
+}
 
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {

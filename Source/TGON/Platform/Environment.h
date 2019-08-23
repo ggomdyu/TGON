@@ -12,8 +12,10 @@
 #include "Core/Span.h"
 
 #if TGON_PLATFORM_WINDOWS
+#   undef SetEnvironmentVariable
 #   undef GetCurrentDirectory
 #   undef GetCommandLine
+#   undef GetEnvironmentVariable
 #   undef GetUserName
 #endif
 
@@ -81,6 +83,10 @@ public:
 
 /**@section Method */
 public:
+    static bool SetEnvironmentVariable(const std::string_view& name, const std::string_view& value);
+    static int32_t GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen);
+    static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char>& destStr);
+    static std::string GetEnvironmentVariable(const std::string_view& name);
     static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     static int32_t GetCurrentDirectory(const Span<char>& destStr);
@@ -105,11 +111,11 @@ public:
     static int32_t GetProcessorCount();
     static bool Is64BitProcess();
     static bool Is64BitOperatingSystem();
-    /*public static string GetEnvironmentVariable(string variable);
+
+    /*
     public static string GetEnvironmentVariable(string variable, EnvironmentVariableTarget target);
     public static IDictionary GetEnvironmentVariables();
     public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
-    public static void SetEnvironmentVariable(string variable, string value);
     public static void SetEnvironmentVariable(
         string variable,
         string value,
