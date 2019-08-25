@@ -1,12 +1,12 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <memory>
-#import <cstdint>
-#import <cstring>
-#import <AppKit/NSWindow.h>
-#import <Cocoa/Cocoa.h>
+#include <AppKit/NSWindow.h>
+#include <Cocoa/Cocoa.h>
+#include <memory>
+#include <cstdint>
+#include <cstring>
 
-#import "../Window.h"
+#include "../Window.h"
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
 {

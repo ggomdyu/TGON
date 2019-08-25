@@ -14,11 +14,11 @@
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsWindow.h"
 #elif TGON_PLATFORM_MACOS
-#   import "MacOS/MacOSWindow.h"
+#   include "MacOS/MacOSWindow.h"
 #elif TGON_PLATFORM_ANDROID
 #   include "Android/AndroidWindow.h"
 #elif TGON_PLATFORM_IOS
-#   import "IOS/IOSWindow.h"
+#   include "IOS/IOSWindow.h"
 #endif
 
 namespace tgon

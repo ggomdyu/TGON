@@ -1,11 +1,11 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import "../Screen.h"
-#import "../Window.h"
+#include <vector>
+#include <Foundation/NSArray.h>
+#include <AppKit/NSScreen.h>
 
-#import <vector>
-#import <Foundation/NSArray.h>
-#import <AppKit/NSScreen.h>
+#include "../Screen.h"
+#include "../Window.h"
 
 namespace tgon
 {

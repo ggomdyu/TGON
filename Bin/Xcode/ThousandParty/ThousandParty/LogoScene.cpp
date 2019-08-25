@@ -100,7 +100,7 @@ void LogoScene::InitPhase1()
     auto graphicsModule = engine->FindModule<GraphicsModule>();
     graphicsModule->GetGraphics().DisableDepthTest();
 
-    auto texture = std::make_shared<Texture>(Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<Texture>(*Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     object1 = std::make_shared<GameObject>("introSprite1", new Transform());
     object1->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -134,7 +134,7 @@ void LogoScene::InitPhase2()
     graphicsModule->GetGraphics().DisableDepthTest();
 
     // �ؽ�ó ������Ʈ �߰�
-    auto texture = std::make_shared<tgon::Texture>(Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<tgon::Texture>(*Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
 
     auto object = std::make_shared<GameObject>("introSprite1", new Transform());
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
@@ -252,20 +252,38 @@ void LogoScene::InitPhase4()
     DateTimeTest().Evaluate();
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
+    
+//    Debug::WriteLine(*Environment::GetUserDomainName());
+    Debug::WriteLine(*Environment::GetFolderPath(Environment::SpecialFolder::ProgramFiles));
+    auto ar = Environment::GetCommandLineArgs();
+    auto ac = Environment::GetMachineName();
+    int n = 3;
+    
+//    auto commandLine = Environment::GetCommandLine();
+//    auto commandLine2 = Environment::GetCurrentDirectory();
+//    auto commandLine3 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+//    auto pageSize = Environment::GetSystemPageSize();
+//    auto is64P = Environment::Is64BitProcess();
+//    auto is64OS = Environment::Is64BitOperatingSystem();
+//    auto newLine = Environment::GetNewLine();
+//    auto d1 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+//    auto d2 = Environment::GetFolderPath(Environment::SpecialFolder::MyMusic);
+//    auto d3 = Environment::GetFolderPath(Environment::SpecialFolder::MyVideos);
+//    auto d4 = Environment::GetFolderPath(Environment::SpecialFolder::Fonts);
+//    auto d5 = Environment::GetFolderPath(Environment::SpecialFolder::MyDocuments);
+//    auto d6 = Environment::GetFolderPath(Environment::SpecialFolder::MyPictures);
+//    auto d7 = Path::GetInvalidPathChars();
+//    auto d8 = Path::GetInvalidFileNameChars();
+//    
+//    auto a = Path::GetFullPath(u8"ext.png");
+//    auto b = Path::GetFullPath(u8"/ext.png");
+//    auto c = Path::GetFullPath(u8"\\ext.png");
 
-    auto commandLine = Environment::GetCommandLine();
-    auto commandLine2 = Environment::GetCurrentDirectory();
-    auto commandLine3 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-
-    auto a = Path::GetFullPath(u8"ext.png");
-    auto b = Path::GetFullPath(u8"/ext.png");
-    auto c = Path::GetFullPath(u8"\\ext.png");
-
-    while (true)
-    {
-        auto str = std::to_string(Environment::GetTickCount());
-        Debug::WriteLine(str);
-    }
+//    while (true)
+//    {
+//        auto str = std::to_string(Environment::GetTickCount());
+//        Debug::WriteLine(str);
+//    }
 
 //    FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
 //    for (int i = 0; i < (int)(4096.0 * 1.1); ++i)

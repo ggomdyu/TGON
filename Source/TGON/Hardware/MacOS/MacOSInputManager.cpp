@@ -1,6 +1,6 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import "../InputManager.h"
+#include "../InputManager.h"
 
 namespace tgon
 {

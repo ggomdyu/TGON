@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/TGON/IO/Path.cpp"
-            timestampString = "587784741.500368"
+            filePath = "ThousandParty/ThousandParty/LogoScene.cpp"
+            timestampString = "588431118.153998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "Path::Combine(const std::string_view&amp; path1, const std::string_view&amp; path2, char* destStr)"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "LogoScene::InitPhase4()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

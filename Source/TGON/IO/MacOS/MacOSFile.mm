@@ -1,11 +1,11 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <Foundation/Foundation.h>
-#import <sys/stat.h>
-#import <utime.h>
-#import <cstdio>
+#include <Foundation/Foundation.h>
+#include <sys/stat.h>
+#include <utime.h>
+#include <cstdio>
 
-#import "../File.h"
+#include "../File.h"
 
 namespace tgon
 {

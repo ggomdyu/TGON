@@ -5,12 +5,17 @@
 namespace tgon
 {
 
-extern std::array<char, 16384> g_tempUtf8Buffer;
+extern thread_local std::array<char, 16384> g_tempUtf8Buffer;
 
-std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
+std::optional<std::string> Path::Combine(const std::string_view& path1, const std::string_view& path2)
 {
     auto strLen = Combine(path1, path2, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen)
@@ -90,10 +95,15 @@ std::string_view Path::GetExtension(const std::string_view& path)
     }
 }
 
-std::string Path::GetFileName(const std::string_view& path)
+std::optional<std::string> Path::GetFileName(const std::string_view& path)
 {
     auto strLen = GetFileName(path, g_tempUtf8Buffer.data(), g_tempUtf8Buffer.size());
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
@@ -132,10 +142,15 @@ int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t d
     }
 }
 
-std::string Path::GetFileNameWithoutExtension(const std::string_view& path)
+std::optional<std::string> Path::GetFileNameWithoutExtension(const std::string_view& path)
 {
     auto strLen = GetFileNameWithoutExtension(path, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
@@ -177,10 +192,15 @@ int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* de
     }
 }
 
-std::string Path::GetDirectoryName(const std::string_view& path)
+std::optional<std::string> Path::GetDirectoryName(const std::string_view& path)
 {
     auto strLen = GetDirectoryName(path, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 int32_t Path::GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
@@ -233,10 +253,15 @@ bool Path::HasExtension(const std::string_view& path)
     }
 }
 
-std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
+std::optional<std::string> Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
 {
     auto strLen = ChangeExtension(path, extension, g_tempUtf8Buffer.data());
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr)
@@ -268,10 +293,26 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
     return static_cast<int32_t>(path.length() + 1 + newExtension.length());
 }
 
-std::string Path::GetFullPath(const std::string_view& path)
+std::optional<std::string> Path::GetFullPath(const std::string_view& path)
 {
     auto strLen = GetFullPath(path, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(g_tempUtf8Buffer.data(), strLen);
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
+}
+    
+std::optional<std::string> Path::GetTempPath()
+{
+    auto strLen = GetTempPath(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
 
 bool Path::IsDirectorySeparator(char ch) noexcept

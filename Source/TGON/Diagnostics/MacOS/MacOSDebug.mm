@@ -1,10 +1,10 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <string>
-#import <mutex>
-#import <AppKit/NSAlert.h>
+#include <string>
+#include <mutex>
+#include <AppKit/NSAlert.h>
 
-#import "../Debug.h"
+#include "../Debug.h"
 
 namespace tgon
 {

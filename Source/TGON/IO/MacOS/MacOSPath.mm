@@ -1,79 +1,72 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <Foundation/Foundation.h>
+#include <Foundation/Foundation.h>
 
-#import "../Path.h"
+#include "Platform/Environment.h"
+
+#include "../Path.h"
 
 namespace tgon
 {
 
-TGON_API int32_t Path::GetCurrentDirectory(char* destStr)
+int32_t Path::GetFullPath(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
 {
-    NSString* path = [[NSFileManager defaultManager] currentDirectoryPath];
-    auto pathStrBytes = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    
-    memcpy(destStr, path.UTF8String, pathStrBytes + 1);
-    return static_cast<int32_t>(pathStrBytes);
-}
-
-TGON_API int32_t Path::GetUserDirectory(char* destStr)
-{
-    NSString* path = NSHomeDirectory();
-    auto pathStrBytes = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    
-    memcpy(destStr, path.UTF8String, pathStrBytes + 1);
-    return static_cast<int32_t>(pathStrBytes);
+    return 0;
 }
     
-TGON_API int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchPathDomainMask pathDomainMask, char* destStr)
+Span<const char> Path::GetInvalidFileNameChars() noexcept
 {
-    NSArray<NSString*>* paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, pathDomainMask, YES);
+    constexpr char invalidFileNameChars[] = "\0a";
+    return Span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
+}
+    
+Span<const char> Path::GetInvalidPathChars() noexcept
+{
+    constexpr char invalidPathChars[] = "\0";
+    return Span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
+}
 
-    if ([paths count] > 0)
+int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
+{
+    const char tempEnvVarName[] = "TMPDIR";
+    auto tempEnvVarValue = Environment::GetEnvironmentVariable(tempEnvVarName);
+    if (!tempEnvVarValue)
     {
-        NSString* path = [paths objectAtIndex: 0];
-        auto pathStrBytes = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        const char defaultTempPath[] = "/tmp/";
+        if (std::extent_v<decltype(defaultTempPath)> > destStrBufferLen)
+        {
+            return -1;
+        }
         
-        memcpy(destStr, path.UTF8String, pathStrBytes + 1);
-        return static_cast<int32_t>(pathStrBytes);
+        memcpy(destStr, defaultTempPath, std::extent_v<decltype(defaultTempPath)>);
+        return static_cast<int32_t>(std::extent_v<decltype(defaultTempPath)>) - 1;
+    }
+    
+    if (Path::IsDirectorySeparator((*tempEnvVarValue)[tempEnvVarValue->length() - 1]))
+    {
+        if (tempEnvVarValue->length() + 1 > destStrBufferLen)
+        {
+            return -1;
+        }
+        
+        memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
+        destStr[tempEnvVarValue->size()] = '\0';
+        
+        return static_cast<int32_t>(tempEnvVarValue->size());
     }
     else
     {
-        return -1;
+        if (tempEnvVarValue->length() + 2 > destStrBufferLen)
+        {
+            return -1;
+        }
+        
+        memcpy(destStr, tempEnvVarValue->data(), tempEnvVarValue->size());
+        destStr[tempEnvVarValue->size()] = Path::DirectorySeparatorChar;
+        destStr[tempEnvVarValue->size() + 1] = '\0';
+        
+        return static_cast<int32_t>(tempEnvVarValue->size());
     }
 }
 
-TGON_API int32_t Path::GetDesktopDirectory(char* destStr)
-{
-    return GetSpecialDirectory(NSDesktopDirectory, NSUserDomainMask, destStr);
-}
-
-TGON_API int32_t Path::GetFontsDirectory(char* destStr)
-{
-    int32_t strLen = GetSpecialDirectory(NSLibraryDirectory, NSSystemDomainMask, destStr);
-    memcpy(&destStr[strLen], "/Fonts", sizeof(destStr[0]) * 7);
-
-    return strLen + 6;
-}
-
-TGON_API int32_t Path::GetMusicDirectory(char* destStr)
-{
-    return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, destStr);
-}
- 
-TGON_API int32_t Path::GetPicturesDirectory(char* destStr)
-{
-    return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, destStr);
-}
-
-TGON_API int32_t Path::GetVideosDirectory(char* destStr)
-{
-    return GetSpecialDirectory(NSMoviesDirectory, NSUserDomainMask, destStr);
-}
-    
-TGON_API int32_t Path::GetDocumentsDirectory(char* destStr)
-{
-    return GetSpecialDirectory(NSDocumentDirectory, NSUserDomainMask, destStr);
-}
-    
 } /* namespace tgon */

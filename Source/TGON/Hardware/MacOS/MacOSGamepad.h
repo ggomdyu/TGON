@@ -5,10 +5,10 @@
  */
 
 #pragma once
-#import <boost/noncopyable.hpp>
-#import <gainput/gainput.h>
+#include <boost/noncopyable.hpp>
+#include <gainput/gainput.h>
 
-#import "Platform/Config.h"
+#include "Platform/Config.h"
 
 namespace tgon
 {

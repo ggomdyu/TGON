@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #ifndef NOMINMAX
 #    define NOMINMAX
@@ -157,4 +157,5 @@ int32_t tgon::Environment::GetUserDomainName(char* destStr, int32_t destStrBuffe
 
     return -1;
 }
+    
 } /* namespace tgon */

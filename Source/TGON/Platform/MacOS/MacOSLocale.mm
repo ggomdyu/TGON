@@ -1,15 +1,15 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <Foundation/NSString.h>
-#import <Foundation/NSLocale.h>
-#import <cstring>
+#include <Foundation/NSString.h>
+#include <Foundation/NSLocale.h>
+#include <cstring>
 
-#import "../Locale.h"
+#include "../Locale.h"
 
 namespace tgon
 {
     
-int32_t GetLanguage(char* destStr, std::size_t destStrBufferSize)
+int32_t GetLanguage(char* destStr, std::size_t destStrBufferLen)
 {
     NSString* currentLanguageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
     [currentLanguageCode cStringUsingEncoding:NSUTF8StringEncoding];

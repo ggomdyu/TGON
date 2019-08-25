@@ -1,8 +1,8 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import "Misc/Algorithm.h"
+#include "Misc/Algorithm.h"
 
-#import "../Keyboard.h"
+#include "../Keyboard.h"
 
 namespace tgon
 {

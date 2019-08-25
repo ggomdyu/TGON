@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#import <boost/noncopyable.hpp>
+#include <boost/noncopyable.hpp>
 
-#import "Platform/Config.h"
+#include "Platform/Config.h"
 
 namespace tgon
 {

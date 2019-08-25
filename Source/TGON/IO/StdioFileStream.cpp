@@ -4,8 +4,8 @@
 
 #include "Diagnostics/Debug.h"
 
-#include "../FileStream.h"
-#include "../File.h"
+#include "FileStream.h"
+#include "File.h"
 
 namespace tgon
 {
@@ -107,7 +107,7 @@ int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
     }
     
     m_filePos += readBytes;
-    return readBytes;
+    return static_cast<int32_t>(readBytes);
 }
 
 int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t count)
@@ -119,7 +119,7 @@ int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t count)
     }
 
     m_filePos += writtenBytes;
-    return writtenBytes;
+    return static_cast<int32_t>(writtenBytes);
 }
 
 int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
@@ -139,7 +139,7 @@ int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
     
     m_filePos = newFilePos;
 
-    return newFilePos;
+    return static_cast<int32_t>(newFilePos);
 }
 
 bool FileStream::SetLengthCore(int64_t value)

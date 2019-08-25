@@ -1,6 +1,6 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import "../Gamepad.h"
+#include "../Gamepad.h"
 
 namespace tgon
 {

@@ -1,7 +1,7 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#include <array>
 #include <thread>
+#include <array>
 
 #include "Environment.h"
 
@@ -15,16 +15,26 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const 
     return GetEnvironmentVariable(name, &destStr[0], destStr.Length());
 }
 
-std::string Environment::GetEnvironmentVariable(const std::string_view& name)
+std::optional<std::string> Environment::GetEnvironmentVariable(const std::string_view& name)
 {
     auto strLen = GetEnvironmentVariable(name, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-std::string Environment::GetCurrentDirectory()
+std::optional<std::string> Environment::GetCurrentDirectory()
 {
     auto strLen = GetCurrentDirectory(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
 int32_t Environment::GetCurrentDirectory(const Span<char>& destStr)
@@ -32,10 +42,15 @@ int32_t Environment::GetCurrentDirectory(const Span<char>& destStr)
     return GetCurrentDirectory(&destStr[0], destStr.Length());
 }
 
-std::string Environment::GetFolderPath(SpecialFolder folder)
+std::optional<std::string> Environment::GetFolderPath(SpecialFolder folder)
 {
     auto strLen = GetFolderPath(folder, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
 int32_t Environment::GetFolderPath(SpecialFolder folder, const Span<char>& destStr)
@@ -58,10 +73,15 @@ int32_t Environment::GetUserName(const Span<char>& destStr)
     return GetUserName(&destStr[0], destStr.Length());
 }
 
-std::string Environment::GetUserName()
+std::optional<std::string> Environment::GetUserName()
 {
     auto strLen = GetUserName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
 int32_t Environment::GetMachineName(const Span<char>& destStr)
@@ -69,10 +89,15 @@ int32_t Environment::GetMachineName(const Span<char>& destStr)
     return GetMachineName(&destStr[0], destStr.Length());
 }
 
-std::string Environment::GetMachineName()
+std::optional<std::string> Environment::GetMachineName()
 {
     auto strLen = GetMachineName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
 int32_t Environment::GetUserDomainName(const Span<char>& destStr)
@@ -80,10 +105,15 @@ int32_t Environment::GetUserDomainName(const Span<char>& destStr)
     return GetUserDomainName(&destStr[0], destStr.Length());
 }
 
-std::string Environment::GetUserDomainName()
+std::optional<std::string> Environment::GetUserDomainName()
 {
     auto strLen = GetUserDomainName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
 } /* namespace tgon */

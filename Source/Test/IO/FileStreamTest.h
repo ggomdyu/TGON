@@ -11,6 +11,7 @@
 #include "IO/Path.h"
 #include "IO/FileStream.h"
 #include "Platform/Environment.h"
+#include "Platform/Config.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Test.h"
@@ -39,11 +40,11 @@ public:
     {
         CreateTemporaryFileToEvaluateTest();
 
-        auto filePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
+        auto filePath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
         const char str[] = "wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546";
         const char str2[] = "wer123f2534636433g3634357345f34aaaaf59375f345f7345f35f3ff213d12d31d21d1d123123we46546";
         CustomFileStream f2(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);
-        if constexpr (TGON_PLATFORM_WINDOWS)
+#if TGON_PLATFORM_WINDOWS
         {
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 0 && f2.m_writePos == 0 && f2.Length() == 256);
             f2.SetLength(2050);
@@ -84,7 +85,7 @@ public:
             f2.ReadByte();
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 50 && f2.m_writePos == 0 && f2.Length() == 50 && f2.m_buffer[5] == 51 && f2.m_buffer[20] == 51 && f2.m_buffer[50] == 102 && f2.m_buffer[80] == 52 && f2.m_buffer[110] == 0 && f2.m_buffer[120] == 0);
         }
-        else // Test for OS which does not support SetLength
+#else // Test for OS which does not support SetLength
         {
             uint8_t buffer[1024]{};
             f2.Write(reinterpret_cast<const uint8_t*>(str2), std::extent_v<decltype(str2)> -1);
@@ -120,6 +121,7 @@ public:
             auto cc9 = f2.ReadByte();
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 526 && f2.m_writePos == 0 && cc9 == -1);
         }
+#endif
 
         File::Delete(filePath);
     }
@@ -127,7 +129,7 @@ public:
 private:
     void CreateTemporaryFileToEvaluateTest()
     {
-        auto filePath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
+        auto filePath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqds2";
         File::Delete(filePath);
 
         FileStream f3(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);;

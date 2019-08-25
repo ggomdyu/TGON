@@ -1,12 +1,12 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <GL/glew.h>
-#import <AppKit/NSOpenGLView.h>
-#import <AppKit/NSWindow.h>
+#include <GL/glew.h>
+#include <AppKit/NSOpenGLView.h>
+#include <AppKit/NSWindow.h>
 
-#import "Platform/Window.h"
+#include "Platform/Window.h"
 
-#import "OpenGLContext.h"
+#include "OpenGLContext.h"
 
 namespace tgon
 {

@@ -1,8 +1,8 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <Foundation/Foundation.h>
+#include <Foundation/Foundation.h>
 
-#import "../TimeZoneInfo.h"
+#include "../TimeZoneInfo.h"
 
 namespace tgon
 {

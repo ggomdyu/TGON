@@ -11,9 +11,9 @@
 #   include "Windows/WindowsConfig.h"
 #elif defined(__APPLE__)
 #   if defined(TARGET_OS_MAC) || defined(macintosh) || defined(Macintosh) || defined(__MACH__)
-#       import "MacOS/MacOSConfig.h"
+#       include "MacOS/MacOSConfig.h"
 #   elif defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
-#       import "IOS/IOSConfig.h"
+#       include "IOS/IOSConfig.h"
 #   endif
 #elif defined(__ANDROID__) || defined(__ANDROID_API__)
 #   include "Android/AndroidConfig.h"

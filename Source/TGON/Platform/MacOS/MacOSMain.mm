@@ -1,9 +1,9 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <AppKit/NSApplication.h>
-#import <objc/NSObject.h>
+#include <AppKit/NSApplication.h>
+#include <objc/NSObject.h>
 
-#import "Platform/Application.h"
+#include "Platform/Application.h"
 
 @interface AppDelegate : NSObject<NSApplicationDelegate>
 {

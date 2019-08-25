@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Time/Time.h"
-
 #include "AssetModule.h"
 
 namespace tgon

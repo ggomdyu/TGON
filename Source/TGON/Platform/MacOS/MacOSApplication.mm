@@ -1,8 +1,8 @@
-#import "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
-#import <AppKit/NSAlert.h>
+#include <AppKit/NSAlert.h>
 
-#import "../Application.h"
+#include "../Application.h"
 
 namespace tgon
 {

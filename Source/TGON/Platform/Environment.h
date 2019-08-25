@@ -7,6 +7,8 @@
 #pragma once
 #include <cstdint>
 #include <string>
+#include <vector>
+#include <optional>
 
 #include "Platform/Config.h"
 #include "Core/Span.h"
@@ -86,27 +88,28 @@ public:
     static bool SetEnvironmentVariable(const std::string_view& name, const std::string_view& value);
     static int32_t GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen);
     static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char>& destStr);
-    static std::string GetEnvironmentVariable(const std::string_view& name);
-    static std::string GetCurrentDirectory();
+    static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name);
+    static std::optional<std::string> GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     static int32_t GetCurrentDirectory(const Span<char>& destStr);
-    static std::string GetFolderPath(SpecialFolder folder);
+    static std::optional<std::string> GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
     static int32_t GetFolderPath(SpecialFolder folder, const Span<char>& destStr);
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
-    static std::string GetUserName();
+    static std::optional<std::string> GetUserName();
     static int32_t GetUserName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetUserName(const Span<char>& destStr);
-    static std::string GetMachineName();
+    static std::optional<std::string> GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetMachineName(const Span<char>& destStr);
-    static std::string GetUserDomainName();
+    static std::optional<std::string> GetUserDomainName();
     static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetUserDomainName(const Span<char>& destStr);
     static const std::string& GetCommandLine();
-    static void Exit(int32_t exitCode);
+    static const std::vector<std::string>& GetCommandLineArgs();
+    [[noreturn]] static void Exit(int32_t exitCode);
     static int64_t GetTickCount();
     static int32_t GetProcessorCount();
     static bool Is64BitProcess();
@@ -123,7 +126,7 @@ public:
     public static void FailFast(string message);
     public static void FailFast(string message, Exception exception);
     public static string ExpandEnvironmentVariables(string name);
-    public static string[] GetCommandLineArgs();
+    
     public static strPath(
         Environment.SpecialFolder folder,
         Environment.SpecialFolderOption option);
