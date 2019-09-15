@@ -14,11 +14,7 @@
 #include "Core/Span.h"
 
 #if TGON_PLATFORM_WINDOWS
-#   undef SetEnvironmentVariable
-#   undef GetCurrentDirectory
-#   undef GetCommandLine
-#   undef GetEnvironmentVariable
-#   undef GetUserName
+#   include "Windows/WindowsEnvironment.h"
 #endif
 
 namespace tgon
@@ -87,26 +83,32 @@ public:
 public:
     static bool SetEnvironmentVariable(const std::string_view& name, const std::string_view& value);
     static int32_t GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen);
-    static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char, Length>& destStr);
     static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name);
     static std::optional<std::string> GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
-    static int32_t GetCurrentDirectory(const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetCurrentDirectory(const Span<char, Length>& destStr);
     static std::optional<std::string> GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
-    static int32_t GetFolderPath(SpecialFolder folder, const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetFolderPath(SpecialFolder folder, const Span<char, Length>& destStr);
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
     static std::optional<std::string> GetUserName();
     static int32_t GetUserName(char* destStr, int32_t destStrBufferLen);
-    static int32_t GetUserName(const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetUserName(const Span<char, Length>& destStr);
     static std::optional<std::string> GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
-    static int32_t GetMachineName(const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetMachineName(const Span<char, Length>& destStr);
     static std::optional<std::string> GetUserDomainName();
     static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
-    static int32_t GetUserDomainName(const Span<char>& destStr);
+    template <int32_t Length>
+    static int32_t GetUserDomainName(const Span<char, Length>& destStr);
     static const std::string& GetCommandLine();
     static const std::vector<std::string>& GetCommandLineArgs();
     [[noreturn]] static void Exit(int32_t exitCode);
@@ -139,5 +141,41 @@ public:
     public static int ExitCode{ get; set; }
     public static string SystemDirectory{ get; }*/
 };
+
+template <int32_t Length>
+inline int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const Span<char, Length>& destStr)
+{
+    return GetEnvironmentVariable(name, &destStr[0], destStr.Length());
+}
+
+template <int32_t Length>
+inline int32_t Environment::GetCurrentDirectory(const Span<char, Length>& destStr)
+{
+    return GetCurrentDirectory(&destStr[0], destStr.Length());
+}
+
+template <int32_t Length>
+inline int32_t Environment::GetFolderPath(SpecialFolder folder, const Span<char, Length>& destStr)
+{
+    return GetFolderPath(folder, &destStr[0], destStr.Length());
+}
+
+template <int32_t Length>
+inline int32_t Environment::GetUserName(const Span<char, Length>& destStr)
+{
+    return GetUserName(&destStr[0], destStr.Length());
+}
+
+template <int32_t Length>
+inline int32_t Environment::GetMachineName(const Span<char, Length>& destStr)
+{
+    return GetMachineName(&destStr[0], destStr.Length());
+}
+
+template <int32_t Length>
+inline int32_t Environment::GetUserDomainName(const Span<char, Length>& destStr)
+{
+    return GetUserDomainName(&destStr[0], destStr.Length());
+}
 
 } /* namespace tgon */

@@ -31,7 +31,7 @@ class TGON_API Engine :
     public CoreObject
 {
 public:
-    TGON_DECLARE_RTTI(Engine);
+    TGON_DECLARE_RTTI(Engine)
 
 /**@section Constructor */
 protected:

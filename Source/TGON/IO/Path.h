@@ -12,6 +12,10 @@
 #include "Platform/Config.h"
 #include "Core/Span.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsPath.h"
+#endif
+
 namespace tgon
 {
 

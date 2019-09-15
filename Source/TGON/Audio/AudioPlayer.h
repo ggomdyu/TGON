@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include "Core/NonCopyable.h"
 #include "Math/Vector3.h"
 
 #include "AudioBuffer.h"
@@ -14,7 +15,7 @@ namespace tgon
 {
 
 class TGON_API AudioPlayer final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

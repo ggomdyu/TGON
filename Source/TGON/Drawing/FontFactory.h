@@ -5,11 +5,11 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <unordered_map>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "Core/NonCopyable.h"
 #include "String/StringHash.h"
 #include "String/UnicodeScalar.h"
 #include "Math/Vector2.h"
@@ -36,15 +36,15 @@ struct GlyphData final
 {
     UnicodeScalar ch;
     GlyphMetrics metrics;
-    std::unique_ptr<uint8_t[]> bitmap;
+    std::unique_ptr<std::byte[]> bitmap;
 };
 
 class TGON_API FontFace final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:
-    FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize);
+    FontFace(const std::byte* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize);
     FontFace(FontFace&& rhs) noexcept;
     
 /**@section Destructor */
@@ -68,12 +68,12 @@ public:
 };
 
 class TGON_API Font final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:
     Font(const StringHash& filePath, FT_Library library);
-    Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library);
+    Font(std::unique_ptr<std::byte[]> fileData, std::size_t fileDataBytes, FT_Library library);
     Font(Font&& rhs) noexcept;
     
 /**@section Destructor */
@@ -92,14 +92,14 @@ public:
 
 /**@section Variable */
 private:
-    std::unique_ptr<uint8_t[]> m_fileData;
+    std::unique_ptr<std::byte[]> m_fileData;
     std::size_t m_fileDataBytes;
     FT_Library m_library;
     mutable std::unordered_map<FontSize, FontFace> m_fontFaces;
 };
 
 class TGON_API FontFactory :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

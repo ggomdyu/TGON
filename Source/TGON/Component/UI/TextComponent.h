@@ -41,7 +41,7 @@ class TGON_API TextRendererComponent :
 	public RendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(TextRendererComponent);
+    TGON_DECLARE_RTTI(TextRendererComponent)
 
 /**@section Constructor */
 public:

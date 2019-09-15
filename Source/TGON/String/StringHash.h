@@ -172,7 +172,7 @@ public:
     /**@brief   Gets the character pointer to string. */
     constexpr const ValueType* CStr() const noexcept
     {
-        return m_str.c_str();
+        return m_str.data();
     }
     
     /**@brief   Gets the length of string. */

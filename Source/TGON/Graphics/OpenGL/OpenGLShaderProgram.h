@@ -6,18 +6,17 @@
 
 #pragma once
 #include <string>
-#include <cstdlib>
 #include <array>
 #include <GL/glew.h>
-#include <boost/noncopyable.hpp>
 
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 class TGON_API OpenGLShaderProgram :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Enum */
 public:

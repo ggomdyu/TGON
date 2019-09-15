@@ -24,6 +24,7 @@
 #include "unicode/utypes.h"
 
 #if !UCONFIG_NO_CONVERSION
+#include <unordered_map>
 
 #include "unicode/putil.h"
 #include "unicode/udata.h"
@@ -191,6 +192,21 @@ static struct {
 #endif
 };
 
+std::unordered_map<int32_t, UConverterType> cnvCodepageType = []()
+{
+    std::unordered_map<int32_t, UConverterType> ret;
+    for (const UConverterSharedData* elem : converterData)
+    {
+        if (elem == nullptr || elem->staticData == nullptr)
+        {
+            continue;
+        }
+
+        ret.insert({elem->staticData->codepage, elem->impl->type});
+    }
+
+    return ret;
+} ();
 
 /*initializes some global variables */
 static UHashtable *SHARED_DATA_HASHTABLE = NULL;
@@ -382,7 +398,7 @@ static UConverterSharedData *createConverterFromFile(UConverterLoadArgs *pArgs, 
 
 /*returns a converter type from a string
  */
-static const UConverterSharedData *
+const UConverterSharedData *
 getAlgorithmicTypeFromName(const char *realName)
 {
     uint32_t mid, start, limit;
@@ -417,6 +433,19 @@ getAlgorithmicTypeFromName(const char *realName)
     }
 
     return NULL;
+}
+
+/*returns a converter type from a code page
+ */
+const UConverterSharedData *
+getAlgorithmicTypeFromCodePage(int32_t codePage)
+{
+    auto iter = cnvCodepageType.find(codePage);
+    if (iter == cnvCodepageType.end()) {
+        return nullptr;
+    }
+
+    return converterData[iter->second];
 }
 
 /*

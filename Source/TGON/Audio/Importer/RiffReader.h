@@ -38,7 +38,7 @@ public:
     {
     /**@section Constructor */
     public:
-        ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept;
+        ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const std::byte* chunkData) noexcept;
         
     /**@section Method */
     public:
@@ -48,7 +48,7 @@ public:
     public:
         ChunkId chunkId;
         uint32_t chunkDataSize;
-        const uint8_t* chunkData;
+        const std::byte* chunkData;
     };
 
     struct RIFFChunkData
@@ -91,7 +91,7 @@ public:
 
 /**@section Type */
 public:
-    RiffReader(const uint8_t* fileData, std::size_t fileDataBytes) noexcept;
+    RiffReader(const std::byte* fileData, std::size_t fileDataBytes) noexcept;
     
 /**@section Method */
 public:
@@ -100,12 +100,12 @@ public:
 
 /**@section Variable */
 private:
-    const uint8_t* m_fileData;
-    const uint8_t* m_fileDataIter;
+    const std::byte* m_fileData;
+    const std::byte* m_fileDataIter;
     std::size_t m_fileDataBytes;
 };
 
-inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const uint8_t* chunkData) noexcept :
+inline RiffReader::ChunkHeader::ChunkHeader(ChunkId chunkId, uint32_t chunkDataSize, const std::byte* chunkData) noexcept :
     chunkId(chunkId),
     chunkDataSize(chunkDataSize),
     chunkData(chunkData)
@@ -123,7 +123,7 @@ inline std::size_t RiffReader::ChunkHeader::GetSize() const noexcept
     return chunkSize;
 }
 
-inline RiffReader::RiffReader(const uint8_t* fileData, std::size_t fileDataBytes) noexcept :
+inline RiffReader::RiffReader(const std::byte* fileData, std::size_t fileDataBytes) noexcept :
     m_fileData(fileData),
     m_fileDataIter(fileData),
     m_fileDataBytes(fileDataBytes)

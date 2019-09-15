@@ -5,8 +5,9 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <OIS.h>
+
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
@@ -22,7 +23,7 @@ enum class GamepadPov
 };
 
 class TGON_API WindowsGamepad :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

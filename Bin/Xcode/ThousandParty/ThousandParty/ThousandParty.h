@@ -13,7 +13,7 @@ class TGON_API ThousandParty final :
     public tgon::Engine
 {
 public:
-    TGON_DECLARE_RTTI(ThousandParty);
+    TGON_DECLARE_RTTI(ThousandParty)
 
 /**@section Constructor */
 public:

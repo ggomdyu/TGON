@@ -9,7 +9,7 @@ class TGON_API Firefly final :
     public GameObject
 {
 public:
-    TGON_DECLARE_RTTI(Firefly);
+    TGON_DECLARE_RTTI(Firefly)
 
 public:
     Firefly(const StringHash& name) :
@@ -67,9 +67,9 @@ private:
         //this->SetPosition({ RandRange(-0.5f, 0.5f), 0.0f, -3.0f });
         //            RandRange(-rootWindowSize.width * 0.5f, rootWindowSize.width * 0.5f)
         //            -rootWindowSize.height * 0.5f
-        m_enableOpacityChange = (RandRange(0, 2) == 0) ? true : false;
-        m_opacityChangeSpeed = RandRange(0.00392f, 0.01568f);
-        m_speed = RandRange(0.3f, 1.0f);
+        m_enableOpacityChange = (Random().Next(0, 2) == 0) ? true : false;
+        m_opacityChangeSpeed = Random().NextDouble(0.00392, 0.01568);
+        m_speed = Random().Next(0.3f, 1.0f);
     }
 
 private:

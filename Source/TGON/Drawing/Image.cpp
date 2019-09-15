@@ -24,7 +24,7 @@ namespace tgon
 namespace
 {
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
+TGON_API std::unique_ptr<std::byte[]> LoadImageData(const std::byte* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
 {
 #if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
     auto loadImage = [&](auto& imageProcessor)
@@ -52,10 +52,10 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const uint8_t* fileData, int32
     *destPixelFormat = PixelFormat::RGBA8888;
 #endif
     
-    return std::unique_ptr<uint8_t[]>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha));
+    return std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha)));
 }
 
-TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
+TGON_API std::unique_ptr<std::byte[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
 {
 #if defined(_MSC_VER) && _MSC_VER >= 1400
     FILE* file = nullptr;
@@ -72,7 +72,7 @@ TGON_API std::unique_ptr<uint8_t[]> LoadImageData(const char* filePath, int32_t*
     int32_t fileSize = static_cast<int32_t>(ftell(file));
     fseek(file, 0, SEEK_SET);
     
-    auto fileData = std::make_unique<uint8_t[]>(fileSize);
+    auto fileData = std::make_unique<std::byte[]>(fileSize);
     fread(fileData.get(), 1, fileSize, file);
     fclose(file);
     
@@ -120,13 +120,13 @@ Image::Image(const std::string_view& filePath) :
     m_imageData = LoadImageData(filePath.data(), &m_size.width, &m_size.height, &m_pixelFormat);
 }
 
-Image::Image(const uint8_t* fileData, int32_t fileDataBytes) :
+Image::Image(const std::byte* fileData, int32_t fileDataBytes) :
     Image()
 {
     m_imageData = LoadImageData(fileData, fileDataBytes, &m_size.width, &m_size.height, &m_pixelFormat);
 }
 
-Image::Image(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
+Image::Image(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
     m_imageData(imageData),
     m_size(size),
     m_pixelFormat(pixelFormat)
@@ -142,7 +142,7 @@ Image::Image(Image&& rhs) noexcept :
     rhs.m_pixelFormat = PixelFormat::Unknown;
 }
 
-Image& Image::operator=(Image&& rhs)
+Image& Image::operator=(Image&& rhs) noexcept
 {
     m_imageData = std::move(rhs.m_imageData);
     m_size = rhs.m_size;
@@ -154,12 +154,12 @@ Image& Image::operator=(Image&& rhs)
     return *this;
 }
 
-uint8_t& Image::operator[](std::size_t index)
+std::byte& Image::operator[](std::size_t index)
 {
     return m_imageData.get()[index];
 }
 
-const uint8_t Image::operator[](std::size_t index) const
+std::byte Image::operator[](std::size_t index) const
 {
     return m_imageData.get()[index];
 }
@@ -169,19 +169,19 @@ bool Image::IsValid() const noexcept
     return m_imageData != nullptr;
 }
 
-void Image::SetImageData(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
+void Image::SetImageData(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     m_imageData.reset(imageData);
     m_size = size;
     m_pixelFormat = pixelFormat;
 }
 
-std::unique_ptr<uint8_t[]>& Image::GetImageData() noexcept
+std::unique_ptr<std::byte[]>& Image::GetImageData() noexcept
 {
     return m_imageData;
 }
 
-const std::unique_ptr<uint8_t[]>& Image::GetImageData() const noexcept
+const std::unique_ptr<std::byte[]>& Image::GetImageData() const noexcept
 {
     return m_imageData;
 }
@@ -201,27 +201,27 @@ PixelFormat Image::GetPixelFormat() const noexcept
     return m_pixelFormat;
 }
 
-bool Image::SaveAsPng(const char* saveFilePath)
+bool Image::SaveAsPng(const char* saveFilePath) const
 {
     return stbi_write_png(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get(), m_size.width * 4) != 0;
 }
 
-bool Image::SaveAsJpeg(const char* saveFilePath, int32_t quality)
+bool Image::SaveAsJpeg(const char* saveFilePath, int32_t quality) const
 {
     return stbi_write_jpg(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get(), quality) != 0;
 }
 
-bool Image::SaveAsBmp(const char* saveFilePath)
+bool Image::SaveAsBmp(const char* saveFilePath) const
 {
     return stbi_write_bmp(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
 }
 
-bool Image::SaveAsTga(const char* saveFilePath)
+bool Image::SaveAsTga(const char* saveFilePath) const
 {
     return stbi_write_tga(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
 }
 
-ImageView::ImageView(uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
+ImageView::ImageView(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
     m_imageData(imageData),
     m_size(size),
     m_pixelFormat(pixelFormat)
@@ -235,22 +235,22 @@ ImageView::ImageView(Image& image) :
 {
 }
 
-uint8_t& ImageView::operator[](std::size_t index)
+std::byte& ImageView::operator[](std::size_t index)
 {
     return m_imageData[index];
 }
 
-const uint8_t ImageView::operator[](std::size_t index) const
+const std::byte ImageView::operator[](std::size_t index) const
 {
     return m_imageData[index];
 }
 
-uint8_t* ImageView::GetImageData() noexcept
+std::byte* ImageView::GetImageData() noexcept
 {
     return m_imageData;
 }
 
-const uint8_t* ImageView::GetImageData() const noexcept
+const std::byte* ImageView::GetImageData() const noexcept
 {
     return m_imageData;
 }

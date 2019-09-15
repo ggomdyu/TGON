@@ -1,8 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <sstream>
-#include <type_traits>
-#include <cassert>
+#include <array>
 #if TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
@@ -15,6 +14,8 @@
 
 namespace tgon
 {
+
+thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
 
 TGON_API void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
@@ -71,29 +72,24 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     DWORD rawWindowStyle, rawExtendedWindowStyle;
     ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
-    wchar_t utf16Title[512] {};
-    bool isConverSucceeded = UTF8::ConvertTo<UTF16LE>(std::string_view(windowStyle.title.c_str(), windowStyle.title.length()), utf16Title, std::extent_v<decltype(utf16Title)>) != -1;
-    if (isConverSucceeded == false)
-    {
-        return nullptr;
-    }
-
     IPoint windowPos {static_cast<int>(windowStyle.x), static_cast<int>(windowStyle.y)};
     if (windowStyle.showMiddle)
     {
         // Set the window position to middle of the screen.
-        windowPos.x = static_cast<IPoint::ValueType>((static_cast<float>(GetSystemMetrics(SM_CXSCREEN)) * 0.5f) - (static_cast<float>(windowStyle.width) * 0.5f));
-        windowPos.y = static_cast<IPoint::ValueType>((static_cast<float>(GetSystemMetrics(SM_CYSCREEN)) * 0.5f) - (static_cast<float>(windowStyle.height) * 0.5f));
+        windowPos.x = (GetSystemMetrics(SM_CXSCREEN) - windowStyle.width) / 2;
+        windowPos.y = (GetSystemMetrics(SM_CYSCREEN) - windowStyle.height) / 2;
     }
 
+    auto utf16Title = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(windowStyle.title.data()), windowStyle.title.size() + 1);
+
     // Convert the client size to window size.
-    RECT windowSize = {0, 0, windowStyle.width, windowStyle.height};
+    RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
     AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
 
 	HWND wndHandle = ::CreateWindowExW(
         rawExtendedWindowStyle,
         className,
-        utf16Title,
+        reinterpret_cast<LPCWSTR>(utf16Title.data()),
         rawWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
@@ -126,6 +122,16 @@ WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
     m_wndHandle(rhs.m_wndHandle)
 {
     rhs.m_wndHandle = nullptr;
+}
+
+bool Window::operator==(const Window& rhs) const noexcept
+{
+    return m_wndHandle == rhs.m_wndHandle;
+}
+
+bool Window::operator!=(const Window& rhs) const noexcept
+{
+    return m_wndHandle != rhs.m_wndHandle;
 }
 
 WindowsWindow& WindowsWindow::operator=(WindowsWindow&& rhs) noexcept
@@ -302,12 +308,21 @@ void Window::GetExtent(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-void Window::GetTitle(char* destTitle) const
+int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
 {
-    wchar_t utf16Title[256] {};
-    int32_t utf16TitleLen = GetWindowTextW(m_wndHandle, utf16Title, 256);
+    auto utf16TitleLen = GetWindowTextW(m_wndHandle, &g_tempUtf16Buffer[0], 256);
+    if (utf16TitleLen == 0)
+    {
+        return -1;
+    }
 
-    UTF16LE::ConvertTo<UTF8>(std::wstring_view(utf16Title, utf16TitleLen), destTitle, 256);
+    auto utf8TitleBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16TitleLen * 2), reinterpret_cast<std::byte*>(destTitle), destTitleBufferLen);
+    if (utf8TitleBytes == -1)
+    {
+        return -1;
+    }
+
+    return utf8TitleBytes;
 }
 
 bool Window::IsResizable() const
@@ -408,16 +423,16 @@ void Window::SetContentSize(int32_t width, int32_t height)
     SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void Window::SetTitle(const std::string_view& captionTitle)
+void Window::SetTitle(const std::string_view& title)
 {
-    assert(captionTitle != nullptr);
-
-    char utf16Title[512] {};
-    bool isConvertSucceed = UTF8::ConvertTo<UTF16LE>(captionTitle, utf16Title, std::extent_v<decltype(utf16Title)>) != -1;
-    if (isConvertSucceed)
+    auto utf16TitleBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(title.data()), static_cast<int32_t>(title.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
+    if (utf16TitleBytes == -1)
     {
-        SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(utf16Title));
+        return;
     }
+
+
+    SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]));
 }
 
 void Window::SetTopMost(bool setTopMost)
@@ -441,7 +456,7 @@ float Window::GetTransparency() const
     BYTE transparency;
     GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
 
-    return transparency / 255.0f;
+    return static_cast<float>(transparency) / 255.0f;
 }
 
 //void Window::SetWindowTransparencyPerPixel(const Color4f& pixel, float opacity)

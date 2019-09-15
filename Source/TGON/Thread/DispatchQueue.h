@@ -8,10 +8,10 @@
 #include <cstdint>
 #include <deque>
 #include <mutex>
-#include <boost/noncopyable.hpp>
 
 #include "Platform/Config.h"
 #include "Core/Delegate.h"
+#include "Core/NonCopyable.h"
 
 #include "Thread.h"
 
@@ -19,7 +19,7 @@ namespace tgon
 {
     
 class TGON_API SerialDispatchQueue final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Method */
 public:
@@ -36,7 +36,7 @@ private:
 };
 
 class TGON_API ConcurrentDispatchQueue final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

@@ -21,7 +21,7 @@ class TGON_API Scene :
     public CoreObject
 {
 public:
-    TGON_DECLARE_RTTI(Scene);
+    TGON_DECLARE_RTTI(Scene)
 
 /**@section Destructor */
 public:

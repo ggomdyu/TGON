@@ -29,7 +29,7 @@ class TGON_API InputModule final :
     public IModule
 {
 public:
-    TGON_DECLARE_RTTI(InputModule);
+    TGON_DECLARE_RTTI(InputModule)
     
 /**@section Constructor */
 public:

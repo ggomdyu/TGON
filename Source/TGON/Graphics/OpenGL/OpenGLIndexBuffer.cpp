@@ -45,13 +45,13 @@ OpenGLIndexBuffer& OpenGLIndexBuffer::operator=(OpenGLIndexBuffer&& rhs) noexcep
     return *this;
 }
 
-void OpenGLIndexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)
+void OpenGLIndexBuffer::SetData(const void* data, int32_t dataBytes, bool isDynamicUsage)
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle));
     TGON_GL_ERROR_CHECK(glBufferData(GL_ELEMENT_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 }
 
-std::size_t OpenGLIndexBuffer::GetDataBytes() const noexcept
+int32_t OpenGLIndexBuffer::GetDataBytes() const noexcept
 {
     return m_dataBytes;
 }

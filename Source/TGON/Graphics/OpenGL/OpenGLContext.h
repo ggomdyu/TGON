@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
 #include "Platform/Config.h"
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
@@ -21,6 +19,8 @@
 #   import <OpenGL/OpenGL.h>
 #endif
 
+#include "Core/NonCopyable.h"
+
 #include "../GraphicsType.h"
 
 namespace tgon
@@ -29,7 +29,7 @@ namespace tgon
 class Window;
 
 struct TGON_API OpenGLContext final :
-    public boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

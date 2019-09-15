@@ -17,7 +17,7 @@ class TGON_API RendererComponent :
 	public Component
 {
 public:
-    TGON_DECLARE_RTTI(RendererComponent);
+    TGON_DECLARE_RTTI(RendererComponent)
 
 /**@section Constructor */
 public:
@@ -30,13 +30,8 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Sets the material. */
     void SetMaterial(const std::shared_ptr<Material>& material);
-    
-    /**@brief   Gets the material. */
     std::shared_ptr<Material> GetMaterial() noexcept;
-
-    /**@brief   Gets the material. */
     std::shared_ptr<const Material> GetMaterial() const noexcept;
     
 /**@section Variable */

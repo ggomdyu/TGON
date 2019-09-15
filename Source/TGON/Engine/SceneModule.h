@@ -18,7 +18,7 @@ class TGON_API SceneModule final :
     public IModule
 {
 public:
-    TGON_DECLARE_RTTI(SceneModule);
+    TGON_DECLARE_RTTI(SceneModule)
 
 /**@section Destructor */
 public:

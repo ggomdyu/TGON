@@ -5,11 +5,11 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <OIS.h>
 #include <array>
 
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
@@ -139,7 +139,7 @@ enum class KeyCode
 };
 
 class TGON_API WindowsKeyboard :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

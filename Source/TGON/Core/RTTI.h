@@ -22,7 +22,7 @@ public:
 /* @section Method */
 public:
     /**@brief   Returns the type hash code. */
-    size_t GetHashCode() const noexcept;
+    int32_t GetHashCode() const noexcept;
     
     /**@brief   Returns the type name of RTTI owner. */
     const char* GetName() const noexcept;
@@ -81,7 +81,7 @@ public:
 
 inline size_t hash<tgon::RTTI>::operator()(const tgon::RTTI& rhs) const noexcept
 {
-    return rhs.GetHashCode();
+    return static_cast<size_t>(rhs.GetHashCode());
 }
     
 } /* namespace std */

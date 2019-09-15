@@ -390,9 +390,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\crc32.c">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.cpp">
-      <Filter>Source\TGON\Graphics\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\String\Encoding.cpp">
       <Filter>Source\TGON\String</Filter>
     </ClCompile>
@@ -1026,9 +1023,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\wintz.cpp">
       <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\TimeZoneInfo.cpp">
-      <Filter>Source\TGON\Time</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Time\DateTime.cpp">
       <Filter>Source\TGON\Time</Filter>
     </ClCompile>
@@ -1055,6 +1049,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\Environment.cpp">
       <Filter>Source\TGON\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Random\Random.cpp">
+      <Filter>Source\TGON\Random</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1708,9 +1705,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ThirdParty\zlib-1.2.11\zconf.h">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Graphics\OpenGL\OpenGLFontTexture.h">
-      <Filter>Source\TGON\Graphics\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h">
       <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
@@ -2473,6 +2467,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Platform\Environment.h">
       <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\NonCopyable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\NonAddressable.h">
+      <Filter>Source\TGON\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

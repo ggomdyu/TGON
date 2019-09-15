@@ -27,7 +27,7 @@ class TGON_API LogoScene :
     public tgon::Scene
 {
 public:
-    TGON_DECLARE_RTTI(LogoScene);
+    TGON_DECLARE_RTTI(LogoScene)
 
 /**@section Constructor */
 public:

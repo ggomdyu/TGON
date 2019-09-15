@@ -38,7 +38,7 @@ AudioBuffer::AudioBuffer(const std::string& filePath) :
     this->SetAudioData(filePath);
 }
 
-AudioBuffer::AudioBuffer(const uint8_t* fileData, std::size_t fileDataBytes) :
+AudioBuffer::AudioBuffer(const std::byte* fileData, std::size_t fileDataBytes) :
     AudioBuffer()
 {
     this->SetAudioData(fileData, fileDataBytes);
@@ -65,7 +65,7 @@ bool AudioBuffer::SetAudioData(const std::string& filePath)
     }
 
     // Read the audio data from the file.
-    std::vector<uint8_t> audioData;
+    std::vector<std::byte> audioData;
     {
         fseek(file, 0, SEEK_END);
         long fileSize = ftell(file);
@@ -80,7 +80,7 @@ bool AudioBuffer::SetAudioData(const std::string& filePath)
     return this->SetAudioData(audioData.data(), audioData.size(), ConvertToAudioFormat(&filePath[0] + extensionOffset));
 }
 
-bool AudioBuffer::SetAudioData(const uint8_t* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::SetAudioData(const std::byte* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
 {
     if (this->Decode(fileData, fileDataBytes, audioFormat) == false)
     {
@@ -102,7 +102,7 @@ bool AudioBuffer::SetAudioData(const uint8_t* fileData, std::size_t fileDataByte
     return true;
 }
 
-bool AudioBuffer::SetAudioData(const uint8_t* fileData, std::size_t fileDataBytes)
+bool AudioBuffer::SetAudioData(const std::byte* fileData, std::size_t fileDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioImporter::VerifyFormat(fileData, fileDataBytes))
@@ -131,7 +131,7 @@ const std::string& AudioBuffer::GetFilePath() const noexcept
     return m_filePath;
 }
 
-const uint8_t* AudioBuffer::GetAudioData() const noexcept
+const std::byte* AudioBuffer::GetAudioData() const noexcept
 {
     return m_audioData.get();
 }
@@ -166,7 +166,7 @@ ALuint AudioBuffer::GetALBufferId() const noexcept
     return m_alBufferId;
 }
 
-bool AudioBuffer::Decode(const uint8_t* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
+bool AudioBuffer::Decode(const std::byte* fileData, std::size_t fileDataBytes, AudioFormat audioFormat)
 {
     switch (audioFormat)
     {

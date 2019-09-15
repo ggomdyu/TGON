@@ -25,7 +25,7 @@ class TGON_API IntroScene :
     public tgon::Scene
 {
 public:
-    TGON_DECLARE_RTTI(IntroScene);
+    TGON_DECLARE_RTTI(IntroScene)
     
 /**@section Constructor */
 public:

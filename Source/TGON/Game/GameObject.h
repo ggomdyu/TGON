@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "Core/CoreObject.h"
+#include "Core/DynamicCast.h"
 #include "Graphics/Transform.h"
 #include "String/StringHash.h"
 #include "Component/Component.h"
@@ -19,7 +20,7 @@ class TGON_API GameObject :
 	public CoreObject
 {
 public:
-    TGON_DECLARE_RTTI(GameObject);
+    TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
 public:
@@ -71,8 +72,9 @@ public:
     bool RemoveComponent()
     {
         static_assert(std::is_base_of<Component, _ComponentType>::value, "_ComponentType must be inherited from Component.");
-        
-        return this->RemoveComponent(GetComponentId<_ComponentType>());
+
+        auto componentHashCode = tgon::GetRTTI<_ComponentType>()->GetHashCode();
+        return this->RemoveComponent(componentHashCode);
     }
 
     /**

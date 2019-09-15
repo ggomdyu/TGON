@@ -6,37 +6,34 @@
 
 #pragma once
 #include <GL/glew.h>
-#include <boost/noncopyable.hpp>
 
+#include "Core/NonCopyable.h"
 #include "Drawing/Image.h"
 #include "Math/Vector2.h"
-
-#include "../TextureType.h"
 
 namespace tgon
 {
 
+enum class FilterMode
+{
+    Point,
+    Bilinear,
+};
+
+enum class WrapMode
+{
+    Repeat,
+    Clamp,
+    Mirror,
+};
+
 class TGON_API OpenGLTexture :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:
-    /**
-     * @brief   Initializes with the specified path of the image.
-     * @param [in] filePath     The file path of the image.
-     * @param [in] filterMode   The filtering mode of the texture.
-     * @param [in] wrapMode     The wrapping mode of the texture.
-     */
     OpenGLTexture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
-
-    /**
-     * @brief   Initializes with the decoded texture data.
-     * @param [in] imageData    The pointer to the decoded image data.
-     * @param [in] size         The size of the texture.
-     * @param [in] pixelFormat  The type of the pixel encoding.
-     */
-    OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
-
+    OpenGLTexture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
 
 /**@section Destructor */
@@ -45,40 +42,17 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Changes rendering pipeline state to use this texture. */
     void Use();
-    
-    /**@brief   Changes rendering pipeline state to not use the texture. */
     void Unuse();
-
-    /**@brief   Checks the texture was created successfully. */
     bool IsValid() const;
-    
-    /**@brief   Sets the image data into the buffer. */
-    void SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
-    
-    /**@brief   Sets the image data into the buffer. */
-    void SetData(const uint8_t* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat);
-
-    /**@brief   Sets the texture filter mode. */
+    void SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
+    void SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat);
     void SetFilterMode(FilterMode filterMode);
-    
-    /**@brief   Sets the texture wrap mode. */
     void SetWrapMode(WrapMode wrapMode);
-    
-    /**@brief   Gets the texture filter mode. */
     FilterMode GetFilterMode() const noexcept;
-    
-    /**@brief   Gets the texture wrap mode. */
     WrapMode GetWrapMode() const noexcept;
-    
-    /**@brief   Gets the handle of texture object. */
     GLuint GetTextureHandle() const noexcept;
-    
-    /**@brief   Gets the size of image which contains width and height. */
     const I32Extent2D& GetSize() const noexcept;
-    
-    /**@brief   Gets the pixel format of image. */
     PixelFormat GetPixelFormat() const noexcept;
     
 private:

@@ -18,7 +18,7 @@ class TGON_API SpriteRendererComponent :
 	public RendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(SpriteRendererComponent);
+    TGON_DECLARE_RTTI(SpriteRendererComponent)
 
 /**@section Constructor */
 public:

@@ -29,9 +29,9 @@ constexpr GLint ConvertTextureWrapModeToNative(WrapMode textureWrapMode) noexcep
     return nativeTextureWrapModes[static_cast<int>(textureWrapMode)];
 }
 
-constexpr GLint ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
+constexpr GLenum ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
 {
-    constexpr GLint nativePixelFormats[] = {
+    constexpr GLenum nativePixelFormats[] = {
         -1,                 // Unknown
         GL_RGBA,            // RGBA8888
         GL_RGB,             // RGB888
@@ -51,7 +51,7 @@ OpenGLTexture::OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrap
 {
 }
 
-OpenGLTexture::OpenGLTexture(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+OpenGLTexture::OpenGLTexture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     m_isUseMipmap(isUseMipmap),
     m_textureHandle(this->CreateTextureHandle()),
     m_pixelBufferHandle(this->CreatePixelBufferHandle(size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat))),
@@ -105,7 +105,7 @@ bool OpenGLTexture::IsValid() const
     return glIsTexture(m_textureHandle);
 }
 
-void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
+void OpenGLTexture::SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
     if constexpr (g_isUsePixelBuffer)
@@ -113,7 +113,7 @@ void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, P
         // Set image data into pixel buffer
         TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
         TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
-        uint8_t* pixelBufferPtr = TGON_GL_ERROR_CHECK(reinterpret_cast<uint8_t*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)));
+        std::byte* pixelBufferPtr = TGON_GL_ERROR_CHECK(reinterpret_cast<std::byte*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)));
         memcpy(pixelBufferPtr, imageData, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat));
         TGON_GL_ERROR_CHECK(glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER));
     }
@@ -124,11 +124,11 @@ void OpenGLTexture::SetData(const uint8_t* imageData, const I32Extent2D& size, P
     }
 }
 
-void OpenGLTexture::SetData(const uint8_t* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
+void OpenGLTexture::SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, pos.x, pos.y, size.width, size.height, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
+    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
 }
 
 void OpenGLTexture::UpdateTexParemeters()

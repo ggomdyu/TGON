@@ -55,6 +55,8 @@ public:
 
 /**@section Operator */
 public:
+    bool operator==(const Window& rhs) const noexcept;
+    bool operator!=(const Window& rhs) const noexcept;
     Window& operator=(Window&& rhs) noexcept;
 
 /**@section Method */
@@ -77,7 +79,8 @@ public:
     I32Point GetPosition() const;
     void GetExtent(int32_t* width, int32_t* height) const;
     I32Extent2D GetExtent() const;
-    void GetTitle(char* destTitle) const;
+    int32_t GetTitle(char* destTitle, int32_t destTitleBufferLen) const;
+    std::string GetTitle() const;
     float GetTransparency() const;
     void* GetNativeWindow() const;
     bool HasCaption() const;

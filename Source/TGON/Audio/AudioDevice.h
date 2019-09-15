@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
+#include "Core/NonCopyable.h"
 
 #include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
@@ -18,7 +18,7 @@ namespace tgon
 {
 
 class TGON_API AudioDevice final :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

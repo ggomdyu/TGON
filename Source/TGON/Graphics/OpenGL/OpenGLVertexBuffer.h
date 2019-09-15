@@ -6,10 +6,10 @@
 
 #pragma once
 #include <GL/glew.h>
-#include <boost/noncopyable.hpp>
 #include <vector>
 
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
@@ -17,7 +17,7 @@ namespace tgon
 struct VertexBufferLayoutDescriptor;
 
 class TGON_API OpenGLVertexBuffer :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

@@ -30,7 +30,7 @@ struct OggVorbisFileStream final
 {
 /**@section Constructor */
 public:
-    OggVorbisFileStream(const uint8_t* fileData, size_t fileDataBytes) noexcept;
+    OggVorbisFileStream(const std::byte* fileData, size_t fileDataBytes) noexcept;
 
 /**@section Method */
 public:
@@ -41,12 +41,12 @@ public:
 
 /**@section Variable */    
 public:
-    const uint8_t* fileData;
-    const uint8_t* fileDataIter;
+    const std::byte* fileData;
+    const std::byte* fileDataIter;
     size_t fileDataBytes;
 };
 
-inline OggVorbisFileStream::OggVorbisFileStream(const uint8_t* fileData, size_t fileDataBytes) noexcept :
+inline OggVorbisFileStream::OggVorbisFileStream(const std::byte* fileData, size_t fileDataBytes) noexcept :
     fileData(fileData),
     fileDataIter(fileData),
     fileDataBytes(fileDataBytes)
@@ -127,19 +127,19 @@ public:
 /**@section Method */
 public:
     /* @brief   Verifies the file format is exact. */
-    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+    static bool VerifyFormat(const std::byte* fileData, size_t fileDataBytes);
 
     /* @brief   Decodes the file to the image. */
-    bool Import(const uint8_t* fileData, size_t fileDataBytes);
+    bool Import(const std::byte* fileData, size_t fileDataBytes);
 
 private:
 #if TGON_USE_LOWLEVEL_AUDIO_IMPORTER
     ov_callbacks MakeCustomIOCallback() const noexcept;
-    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
+    unsigned long DecodeOggVorbis(OggVorbis_File* oggVorbisFile, std::byte* destDecodeBuffer, ogg_int64_t bufferSize, int channels);
 #endif
 };
 
-inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileDataBytes)
+inline bool OggVorbisAudioImporter::Import(const std::byte* fileData, size_t fileDataBytes)
 {
     if (VerifyFormat(fileData, fileDataBytes) == false)
     {
@@ -171,7 +171,7 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileD
     m_channels = vorbisInfo->channels;
 
     auto audioDataBytes = ov_pcm_total(&oggVorbisFile, -1) * 2 * static_cast<int64_t>(this->m_channels);
-    m_audioData.reset(new uint8_t[(int)audioDataBytes]);
+    m_audioData.reset(new std::byte[(int)audioDataBytes]);
     m_audioDataBytes = static_cast<size_t>(audioDataBytes);
 
     DecodeOggVorbis(&oggVorbisFile, &m_audioData[0], audioDataBytes, vorbisInfo->channels);
@@ -179,15 +179,15 @@ inline bool OggVorbisAudioImporter::Import(const uint8_t* fileData, size_t fileD
     ov_clear(&oggVorbisFile);
 #else
     short* audioData = nullptr;
-    auto audioDataBytes = stb_vorbis_decode_memory(fileData, static_cast<int>(fileDataBytes), &m_channels, &m_samplingRate, &audioData);
-    m_audioData.reset(reinterpret_cast<uint8_t*>(audioData));
+    auto audioDataBytes = stb_vorbis_decode_memory(reinterpret_cast<const unsigned char*>(fileData), static_cast<int>(fileDataBytes), &m_channels, &m_samplingRate, &audioData);
+    m_audioData.reset(reinterpret_cast<std::byte*>(audioData));
     m_audioDataBytes = audioDataBytes * 4;
 #endif
 
     return true;
 }
 
-inline bool OggVorbisAudioImporter::VerifyFormat(const uint8_t* fileData, size_t fileDataBytes)
+inline bool OggVorbisAudioImporter::VerifyFormat(const std::byte* fileData, size_t fileDataBytes)
 {
     if (fileDataBytes < 16)
     {
@@ -210,7 +210,7 @@ inline ov_callbacks OggVorbisAudioImporter::MakeCustomIOCallback() const noexcep
     return ovCallbacks;
 }
 
-inline unsigned long OggVorbisAudioImporter::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, uint8_t* destDecodeBuffer, ogg_int64_t bufferSize, int channels)
+inline unsigned long OggVorbisAudioImporter::DecodeOggVorbis(OggVorbis_File* oggVorbisFile, std::byte* destDecodeBuffer, ogg_int64_t bufferSize, int channels)
 {
     int currentSection;
 

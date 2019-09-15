@@ -2,6 +2,7 @@
 
 #include <thread>
 #include <array>
+#include <sstream>
 
 #include "Environment.h"
 
@@ -9,11 +10,6 @@ namespace tgon
 {
 
 thread_local std::array<char, 16384> g_tempUtf8Buffer;
-
-int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const Span<char>& destStr)
-{
-    return GetEnvironmentVariable(name, &destStr[0], destStr.Length());
-}
 
 std::optional<std::string> Environment::GetEnvironmentVariable(const std::string_view& name)
 {
@@ -37,11 +33,6 @@ std::optional<std::string> Environment::GetCurrentDirectory()
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-int32_t Environment::GetCurrentDirectory(const Span<char>& destStr)
-{
-    return GetCurrentDirectory(&destStr[0], destStr.Length());
-}
-
 std::optional<std::string> Environment::GetFolderPath(SpecialFolder folder)
 {
     auto strLen = GetFolderPath(folder, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
@@ -53,9 +44,23 @@ std::optional<std::string> Environment::GetFolderPath(SpecialFolder folder)
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-int32_t Environment::GetFolderPath(SpecialFolder folder, const Span<char>& destStr)
+const std::vector<std::string>& Environment::GetCommandLineArgs()
 {
-    return GetFolderPath(folder, &destStr[0], destStr.Length());
+    static auto commandLineArgs = []()
+    {
+        std::vector<std::string> ret;
+
+        std::stringstream ss(GetCommandLine());
+        std::string commandLineArg;
+        while (std::getline(ss, commandLineArg, ' '))
+        {
+            ret.push_back(std::move(commandLineArg));
+        }
+
+        return ret;
+    } ();
+
+    return commandLineArgs;
 }
 
 void Environment::Exit(int32_t exitCode)
@@ -66,11 +71,6 @@ void Environment::Exit(int32_t exitCode)
 int32_t Environment::GetProcessorCount()
 {
     return static_cast<int32_t>(std::thread::hardware_concurrency());
-}
-
-int32_t Environment::GetUserName(const Span<char>& destStr)
-{
-    return GetUserName(&destStr[0], destStr.Length());
 }
 
 std::optional<std::string> Environment::GetUserName()
@@ -84,11 +84,6 @@ std::optional<std::string> Environment::GetUserName()
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-int32_t Environment::GetMachineName(const Span<char>& destStr)
-{
-    return GetMachineName(&destStr[0], destStr.Length());
-}
-
 std::optional<std::string> Environment::GetMachineName()
 {
     auto strLen = GetMachineName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
@@ -98,11 +93,6 @@ std::optional<std::string> Environment::GetMachineName()
     }
     
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
-}
-
-int32_t Environment::GetUserDomainName(const Span<char>& destStr)
-{
-    return GetUserDomainName(&destStr[0], destStr.Length());
 }
 
 std::optional<std::string> Environment::GetUserDomainName()

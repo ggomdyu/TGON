@@ -52,14 +52,14 @@ std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
     return m_transform;
 }
 
-bool GameObject::RemoveComponent(size_t componentId)
+bool GameObject::RemoveComponent(size_t componentHashCode)
 {
-    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    auto predicate = [&](const std::shared_ptr<Component>& lhs, int32_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
     
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentHashCode, predicate);
     if (iter != m_components.end())
     {
         m_components.erase(iter);

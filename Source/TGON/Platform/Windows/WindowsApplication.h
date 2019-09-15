@@ -5,13 +5,13 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 class TGON_API WindowsApplication :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

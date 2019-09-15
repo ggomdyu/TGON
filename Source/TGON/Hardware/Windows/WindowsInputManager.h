@@ -5,8 +5,9 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <OIS.h>
+
+#include "Core/NonCopyable.h"
 
 #pragma comment(lib, "dinput8.lib")
 
@@ -14,7 +15,7 @@ namespace tgon
 {
 
 class TGON_API WindowsInputManager :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

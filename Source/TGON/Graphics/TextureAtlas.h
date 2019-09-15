@@ -7,9 +7,9 @@
 
 #pragma once
 #include <unordered_map>
-#include <boost/noncopyable.hpp>
 #include <stb/stb_rect_pack.h>
 
+#include "Core/NonCopyable.h"
 #include "String/UnicodeScalar.h"
 #include "String/StringHash.h"
 #include "Math/Rect.h"
@@ -21,7 +21,7 @@ namespace tgon
 {
 
 class TGON_API TextureAtlas :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

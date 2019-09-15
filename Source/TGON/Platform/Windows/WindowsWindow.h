@@ -13,13 +13,14 @@
 #    define NOMINMAX
 #endif
 #include <Windows.h>
-#include <boost/noncopyable.hpp>
+
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 class TGON_API WindowsWindow :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

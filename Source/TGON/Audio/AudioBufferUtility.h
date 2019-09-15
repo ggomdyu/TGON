@@ -11,8 +11,6 @@
 #include "String/Hash.h"
 #include "Misc/Algorithm.h"
 
-#include "AudioBufferType.h"
-
 namespace tgon
 {
 

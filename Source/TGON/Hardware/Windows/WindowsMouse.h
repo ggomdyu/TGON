@@ -5,9 +5,9 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <OIS.h>
 
+#include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
 namespace tgon
@@ -44,7 +44,7 @@ enum class MouseCode
 };
 
 class TGON_API WindowsMouse :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:

@@ -23,13 +23,13 @@ public:
 /**@section Method */
 public:
     /* @brief   Verifies the file format is exact. */
-    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
+    static bool VerifyFormat(const std::byte* fileData, size_t fileDataBytes);
 
     /* @brief   Decodes the file to the image. */
-    bool Import(const uint8_t* fileData, size_t fileDataBytes);
+    bool Import(const std::byte* fileData, size_t fileDataBytes);
 };
 
-inline bool WavAudioImporter::Import(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool WavAudioImporter::Import(const std::byte* fileData, std::size_t fileDataBytes)
 {
     if (VerifyFormat(fileData, fileDataBytes) == false)
     {
@@ -63,7 +63,7 @@ inline bool WavAudioImporter::Import(const uint8_t* fileData, std::size_t fileDa
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
                 m_audioDataBytes = chunkHeader.chunkDataSize;
-                m_audioData.reset(new uint8_t[chunkHeader.chunkDataSize]);
+                m_audioData.reset(new std::byte[chunkHeader.chunkDataSize]);
 
                 memcpy(&m_audioData[0], chunkData, chunkHeader.chunkDataSize);
             }
@@ -78,7 +78,7 @@ inline bool WavAudioImporter::Import(const uint8_t* fileData, std::size_t fileDa
     return true;
 }
 
-inline bool WavAudioImporter::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool WavAudioImporter::VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes)
 {
     if (fileDataBytes < 16)
     {

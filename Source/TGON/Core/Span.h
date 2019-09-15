@@ -103,7 +103,9 @@ private:
 /**@section Constructor */
 public:
     constexpr Span(PointerType ptr, int32_t count) noexcept;
-    constexpr Span(_ElementType(&arr)[Extent]) noexcept;
+    constexpr explicit Span(_ElementType(&arr)[Extent]) noexcept;
+    template <int32_t Extent2>
+    constexpr explicit Span(const Span<_ElementType, Extent2>& rhs) noexcept;
     
 /**@section Operator */
 public:
@@ -168,6 +170,13 @@ constexpr Span<_ElementType, Extent>::Span(PointerType ptr, int32_t count) noexc
 template <typename _ElementType, int32_t Extent>
 constexpr Span<_ElementType, Extent>::Span(_ElementType(&arr)[Extent]) noexcept :
     SpanStorageType(arr, Extent)
+{
+}
+
+template <typename _ElementType, int32_t Extent>
+template <int32_t Extent2>
+constexpr Span<_ElementType, Extent>::Span(const Span<_ElementType, Extent2>& rhs) noexcept :
+    SpanStorageType(&rhs[0], rhs.Length())
 {
 }
 

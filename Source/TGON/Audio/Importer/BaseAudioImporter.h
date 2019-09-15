@@ -7,27 +7,28 @@
 #pragma once
 #include <cstdint>
 #include <memory>
-#include <boost/noncopyable.hpp>
+
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 template <typename _DerivedType>
 class BaseAudioImporter :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:
     BaseAudioImporter() noexcept;
-    BaseAudioImporter(const uint8_t* fileData, std::size_t fileDataBytes);
+    BaseAudioImporter(const std::byte* fileData, std::size_t fileDataBytes);
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes);
-    bool Import(const uint8_t* fileData, std::size_t fileDataBytes);
+    static bool VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes);
+    bool Import(const std::byte* fileData, std::size_t fileDataBytes);
     bool IsValid() const noexcept;
-    std::unique_ptr<uint8_t[]>& GetAudioData() noexcept;
-    const std::unique_ptr<uint8_t[]>& GetAudioData() const noexcept;
+    std::unique_ptr<std::byte[]>& GetAudioData() noexcept;
+    const std::unique_ptr<std::byte[]>& GetAudioData() const noexcept;
     size_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
@@ -35,7 +36,7 @@ public:
 
 /**@section Variable */
 protected:
-    std::unique_ptr<uint8_t[]> m_audioData;
+    std::unique_ptr<std::byte[]> m_audioData;
     size_t m_audioDataBytes;
     int32_t m_bitsPerSample;
     int32_t m_channels;
@@ -52,14 +53,14 @@ inline BaseAudioImporter<_DerivedType>::BaseAudioImporter() noexcept :
 }
 
 template <typename _DerivedType>
-inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const uint8_t* fileData, std::size_t fileDataBytes) :
+inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const std::byte* fileData, std::size_t fileDataBytes) :
     BaseAudioImporter()
 {
     this->Import(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>
-inline bool BaseAudioImporter<_DerivedType>::Import(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool BaseAudioImporter<_DerivedType>::Import(const std::byte* fileData, std::size_t fileDataBytes)
 {
     return static_cast<_DerivedType*>(this)->Import(fileData, fileDataBytes);
 }
@@ -71,19 +72,19 @@ inline bool BaseAudioImporter<_DerivedType>::IsValid() const noexcept
 }
 
 template <typename _DerivedType>
-inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes)
 {
     return _DerivedType::VerifyFormat(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>
-inline std::unique_ptr<uint8_t[]>& BaseAudioImporter<_DerivedType>::GetAudioData() noexcept
+inline std::unique_ptr<std::byte[]>& BaseAudioImporter<_DerivedType>::GetAudioData() noexcept
 {
     return m_audioData;
 }
 
 template <typename _DerivedType>
-inline const std::unique_ptr<uint8_t[]>& BaseAudioImporter<_DerivedType>::GetAudioData() const noexcept
+inline const std::unique_ptr<std::byte[]>& BaseAudioImporter<_DerivedType>::GetAudioData() const noexcept
 {
     return m_audioData;
 }

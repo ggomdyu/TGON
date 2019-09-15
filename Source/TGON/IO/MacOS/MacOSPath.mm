@@ -16,13 +16,13 @@ int32_t Path::GetFullPath(const std::string_view& path, char* destStr, int32_t d
     
 Span<const char> Path::GetInvalidFileNameChars() noexcept
 {
-    constexpr char invalidFileNameChars[] = "\0a";
+    constexpr char invalidFileNameChars[] = {'\0', 'a'};
     return Span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
 }
     
 Span<const char> Path::GetInvalidPathChars() noexcept
 {
-    constexpr char invalidPathChars[] = "\0";
+    constexpr char invalidPathChars[] = {'\0'};
     return Span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 

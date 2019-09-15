@@ -44,7 +44,7 @@ public:
     const PlatformApplication& GetPlatformDependency() const noexcept;
     static Application& GetInstance();
     void MessageLoop();
-    static void Terminate();
+    [[noreturn]] static void Terminate();
     static void ShowMessageBox(const std::string_view& message);
     static void ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon);
     static void ShowMessageBox(const std::string_view& title, const std::string_view& message);

@@ -20,7 +20,7 @@ class TGON_API TaskModule final :
 	public IModule
 {
 public:
-    TGON_DECLARE_RTTI(TaskModule);
+    TGON_DECLARE_RTTI(TaskModule)
 
 /**@section Constructor */
 public:

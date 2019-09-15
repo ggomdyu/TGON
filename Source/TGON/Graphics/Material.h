@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
+#include "Core/NonCopyable.h"
 
 #include "ShaderProgram.h"
 
@@ -13,7 +13,7 @@ namespace tgon
 {
 
 class TGON_API Material :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

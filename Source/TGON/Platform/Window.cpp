@@ -1,10 +1,14 @@
 #include "PrecompiledHeader.h"
 
+#include <array>
+
 #include "Window.h"
 
 namespace tgon
 {
-    
+
+extern thread_local std::array<char, 16384> g_tempUtf8Buffer;
+
 Window::~Window()
 {
     this->Close();
@@ -43,6 +47,16 @@ Window& Window::operator=(Window&& rhs) noexcept
     return *this;
 }
 
+PlatformWindow& Window::GetPlatformDependency() noexcept
+{
+    return *this;
+}
+
+const PlatformWindow& Window::GetPlatformDependency() const noexcept
+{
+    return *this;
+}
+
 I32Point Window::GetPosition() const
 {
     I32Point::ValueType x, y;
@@ -58,15 +72,11 @@ I32Extent2D Window::GetExtent() const
 
     return {width, height};
 }
-    
-PlatformWindow& Window::GetPlatformDependency() noexcept
-{
-    return *this;
-}
 
-const PlatformWindow& Window::GetPlatformDependency() const noexcept
+std::string Window::GetTitle() const
 {
-    return *this;
+    int32_t utf8TitleLen = this->GetTitle(&g_tempUtf8Buffer[0], static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    return std::string(&g_tempUtf8Buffer[0], utf8TitleLen);
 }
 
 } /* namespace tgon */

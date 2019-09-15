@@ -1,4 +1,4 @@
-#include "PrecompiledHeader.h"
+﻿#include "PrecompiledHeader.h"
 
 #include <functional>
 #include <atomic>
@@ -243,20 +243,40 @@ public:
 
 /**@section Variable */
 };
-
+using namespace tgon;
 void LogoScene::InitPhase4()
 {
-    using namespace tgon;
+    auto qwexqb = Path::GetFullPath("Hallo my name is CHA");
+    //auto& a = NewEncoding::UTF8();
+    //auto& b = NewEncoding::Unicode();
+    //auto& c = NewEncoding::BigEndianUnicode();
+    //auto& d = NewEncoding::UTF32();
+
+    //auto& e = NewEncoding::GetEncoding("UTF-8");
+    //auto& f = NewEncoding::GetEncoding("UTF-32");
+    //auto& g = NewEncoding::GetEncoding(1208);
+
+    auto& a = TimeZoneInfo::Local();
 
     FixedStringTest().Evaluate();
     DateTimeTest().Evaluate();
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
-    
+
+    Debug::Write(u8"WOW하!");
+    Debug::WriteLine(u8"알로에먹고싶다");
+    Debug::Write(u8"WOW하!");
 //    Debug::WriteLine(*Environment::GetUserDomainName());
     Debug::WriteLine(*Environment::GetFolderPath(Environment::SpecialFolder::ProgramFiles));
     auto ar = Environment::GetCommandLineArgs();
-    auto ac = Environment::GetMachineName();
+    auto ac = Environment::GetMachineName();    
+    auto dgb = Environment::GetUserDomainName();
+    auto ad = Environment::GetUserName();
+    auto ad43354 = Environment::GetEnvironmentVariable("PATH_TGON");
+    auto ad23 = Environment::SetEnvironmentVariable("PATH_TGON", u8"C:/H알로하AI");
+    auto ad4354 = Environment::GetEnvironmentVariable("PATH_TGON");
+    auto ad435s4 = Environment::GetCurrentDirectory();
+    auto dsa = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
     int n = 3;
     
 //    auto commandLine = Environment::GetCommandLine();
@@ -275,9 +295,9 @@ void LogoScene::InitPhase4()
 //    auto d7 = Path::GetInvalidPathChars();
 //    auto d8 = Path::GetInvalidFileNameChars();
 //    
-//    auto a = Path::GetFullPath(u8"ext.png");
-//    auto b = Path::GetFullPath(u8"/ext.png");
-//    auto c = Path::GetFullPath(u8"\\ext.png");
+    auto a1212 = File::SetLastAccessTimeUtc(u8"E:/Users/ggomdyu/Desktop/jubeat_festo_logo.png", DateTime::Now());
+    auto b232324 = Path::GetFullPath(u8"/ext.png");
+    auto c124 = Path::GetFullPath(u8"\\ext.png");
 
 //    while (true)
 //    {

@@ -6,6 +6,9 @@
 
 namespace tgon
 {
+
+thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+
 namespace
 {
 
@@ -75,13 +78,22 @@ void Application::MessageLoop()
 
 void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon)
 {
-    wchar_t utf16Message[1024] {};
-    UTF8::ConvertTo<UTF16LE>(message, reinterpret_cast<char*>(utf16Message), std::extent<decltype(utf16Message)>::value);
+    const wchar_t* utf16Message = &g_tempUtf16Buffer[0];
+    auto utf16MessageBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(title.data()), static_cast<int32_t>(title.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
+    if (utf16MessageBytes == -1)
+    {
+        return;
+    }
 
-    wchar_t utf16Title[256] {};
-    UTF8::ConvertTo<UTF16LE>(title, reinterpret_cast<char*>(utf16Title), std::extent<decltype(utf16Title)>::value);
+    auto utf16MessageLen = utf16MessageBytes / 2;
+    const wchar_t* utf16Title = &g_tempUtf16Buffer[utf16MessageLen + 1];
+    auto utf16TitleBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(message.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[utf16MessageLen + 1]), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16MessageBytes + sizeof(wchar_t))));
+    if (utf16TitleBytes == -1)
+    {
+        return;
+    }
 
-    ::MessageBoxW(nullptr, utf16Message, utf16Title, ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
+    ::MessageBoxW(nullptr, utf16Title, utf16Message, ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
 }
 
 } /* namespace tgon */

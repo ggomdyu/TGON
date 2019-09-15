@@ -47,12 +47,12 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
 namespace tgon
 {
 
-FontFace::FontFace(const uint8_t* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize) :
+FontFace::FontFace(const std::byte* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize) :
     m_fontSize(fontSize),
     m_fontFace([&]() -> FT_Face
     {
         FT_Face face = nullptr;
-        FT_Error error = FT_New_Memory_Face(library, fileData, fileDataBytes, 0, &face);
+        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData), fileDataBytes, 0, &face);
         if (error)
         {
             Debug::Fail("Failed to invoke FT_New_Memory_Face.", ConvertFTErrorToString(error));
@@ -113,13 +113,13 @@ const GlyphData& FontFace::GetGlyphData(UnicodeScalar ch) const
     int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
     int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
 
-    auto bitmap = std::make_unique<uint8_t[]>((bitmapWidth * bitmapHeight * 4));
+    auto bitmap = std::make_unique<std::byte[]>((bitmapWidth * bitmapHeight * 4));
     for (int i = 0, j = 0; i < bitmapWidth * bitmapHeight * 4; i += 4, ++j)
     {
-        bitmap[i] = 255;
-        bitmap[i + 1] = 255;
-        bitmap[i + 2] = 255;
-        bitmap[i + 3] = m_fontFace->glyph->bitmap.buffer[j];
+        bitmap[i] = std::byte(255);
+        bitmap[i + 1] = std::byte(255);
+        bitmap[i + 2] = std::byte(255);
+        bitmap[i + 3] = std::byte(m_fontFace->glyph->bitmap.buffer[j]);
     }
 
     return m_glyphDatas.insert(iter, {ch, GlyphData{
@@ -165,17 +165,17 @@ Font::Font(const StringHash& filePath, FT_Library library) :
         int32_t fileDataBytes = static_cast<int32_t>(ftell(file));
         fseek(file, 0, SEEK_SET);
 
-        auto fileData = new uint8_t[fileDataBytes];
-        fread(fileData, 1, fileDataBytes, file);
+        auto fileData = std::make_unique<std::byte[]>(fileDataBytes);
+        fread(fileData.get(), 1, fileDataBytes, file);
         fclose(file);
 
-        return Font(fileData, fileDataBytes, library);
+        return Font(std::move(fileData), fileDataBytes, library);
     } ())
 {
 }
 
-Font::Font(uint8_t* fileData, std::size_t fileDataBytes, FT_Library library) :
-    m_fileData(fileData),
+Font::Font(std::unique_ptr<std::byte[]> fileData, std::size_t fileDataBytes, FT_Library library) :
+    m_fileData(std::move(fileData)),
     m_fileDataBytes(fileDataBytes),
     m_library(library)
 {

@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Random/WELL1024a.h"
-
 #include "Application.h"
 
 namespace tgon
@@ -13,7 +11,6 @@ Application::Application() :
     m_engine(CreateEngine()),
     m_rootWindow(std::make_unique<Window>(WindowStyle{}))
 {
-    SrandWELL1024a();
 }
 
 Application& Application::GetInstance()

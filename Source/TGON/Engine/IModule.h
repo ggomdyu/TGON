@@ -14,7 +14,7 @@ class TGON_API IModule :
     public CoreObject
 {
 public:
-    TGON_DECLARE_RTTI(IModule);
+    TGON_DECLARE_RTTI(IModule)
 
 /**@section Destructor */
 public:

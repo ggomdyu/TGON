@@ -9,16 +9,16 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <GL/glew.h>
 
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
    
 class TGON_API OpenGLRenderTarget :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

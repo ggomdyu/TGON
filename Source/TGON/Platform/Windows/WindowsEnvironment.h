@@ -13,4 +13,5 @@
 #   undef GetCommandLine
 #   undef GetEnvironmentVariable
 #   undef GetUserName
+#   undef GetTempPath
 #endif

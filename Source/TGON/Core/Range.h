@@ -42,6 +42,9 @@ private:
 };
 
 template <typename _ValueType>
+Range(typename Range<_ValueType>::IteratorType first, typename Range<_ValueType>::IteratorType second) -> Range<_ValueType>;
+
+template <typename _ValueType>
 inline Range<_ValueType>::Range(IteratorType begin, IteratorType end) noexcept :
     m_begin(begin),
     m_end(end)

@@ -18,7 +18,7 @@ namespace
 
 HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    auto utf16Path = Encoding<UTF8>::ConvertTo<UTF16LE>(std::string_view(path));
+    auto utf16Path = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&path[0]), path.size() + 1);
     auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
 
     bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);

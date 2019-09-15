@@ -38,6 +38,9 @@ public:
     constexpr char32_t GetValue() const noexcept;
     constexpr size_t GetHashCode() const noexcept;
 
+private:
+    constexpr char32_t ToChar32(const char* str);
+
 /**@section Variable */
 private:
     char32_t m_value;
@@ -64,7 +67,7 @@ constexpr UnicodeScalar::UnicodeScalar(wchar_t value) noexcept :
 }
 
 constexpr UnicodeScalar::UnicodeScalar(const char* str) :
-    m_value(UTF8::ToChar32(str))
+    m_value(ToChar32(str))
 {
 }
 
@@ -111,6 +114,41 @@ constexpr char32_t UnicodeScalar::GetValue() const noexcept
 constexpr size_t UnicodeScalar::GetHashCode() const noexcept
 {
     return TGON_X65599(m_value);
+}
+
+constexpr char32_t UnicodeScalar::ToChar32(const char* str)
+{
+    enum BitsToHex
+    {
+        _10000000 = 0x80,
+        _11000000 = 0xC0,
+        _11100000 = 0xE0,
+        _11110000 = 0xF0,
+        _11111000 = 0x7C,
+        _00000111 = 0x07,
+        _00001111 = 0x0F,
+        _00011111 = 0x1F,
+        _00111111 = 0x3F,
+    };
+
+    if ((str[0] & BitsToHex::_10000000) == 0)
+    {
+        return str[0];
+    }
+    else if ((str[0] & BitsToHex::_11100000) == BitsToHex::_11000000)
+    {
+        return ((str[0] & BitsToHex::_00011111) << 6) | (str[1] & BitsToHex::_00111111);
+    }
+    else if ((str[0] & BitsToHex::_11110000) == BitsToHex::_11100000)
+    {
+        return ((str[0] & BitsToHex::_00001111) << 12) | ((str[1] & BitsToHex::_00111111) << 6) | (str[2] & BitsToHex::_00111111);
+    }
+    else if ((str[0] & BitsToHex::_11111000) == BitsToHex::_11110000)
+    {
+        return ((str[0] & BitsToHex::_00000111) << 18) | ((str[1] & BitsToHex::_00111111) << 12) | ((str[2] & BitsToHex::_00111111) << 6) | (str[3] & BitsToHex::_00111111);
+    }
+    
+    return 0;
 }
 
 } /* namespace tgon */

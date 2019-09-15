@@ -5,10 +5,10 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <cstdint>
 
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 #include "Core/Span.h"
 
 namespace tgon
@@ -22,7 +22,7 @@ enum class SeekOrigin
 };
  
 class TGON_API Stream :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Destructor */
 public:

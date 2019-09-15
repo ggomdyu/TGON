@@ -16,7 +16,7 @@ class TGON_API GraphicsModule :
     public IModule
 {
 public:
-    TGON_DECLARE_RTTI(GraphicsModule);
+    TGON_DECLARE_RTTI(GraphicsModule)
     
 /**@section Constructor */
 public:
