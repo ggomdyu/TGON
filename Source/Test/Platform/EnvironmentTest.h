@@ -9,8 +9,8 @@
 
 #include "IO/Path.h"
 #include "IO/File.h"
-#include "Platform/Environment.h"
 #include "Diagnostics/Debug.h"
+#include "Platform/Environment.h"
 
 #include "../Test.h"
 
@@ -25,12 +25,23 @@ public:
     virtual void Evaluate() override
     {
 #if TGON_PLATFORM_MACOS
-        assert(Environment::GetPageSize() == 4096);
+        assert(Environment::GetSystemPageSize() == 4096);
         assert(Environment::Is64BitProcess() == true);
         assert(Environment::Is64BitOperatingSystem() == true);
         assert(Environment::GetNewLine() == "\n");
-#if TGON_PLATFORM_WINDOWS
 #endif
+        auto a = Environment::GetCommandLineArgs();
+        auto b = Environment::GetMachineName();
+        auto c = Environment::GetUserDomainName();
+        auto d = Environment::GetUserName();
+        auto e = Environment::GetEnvironmentVariable("PATH_TGON");
+        assert(e.has_value() == false);
+        auto f = Environment::SetEnvironmentVariable("PATH_TGON", u8"C:/HU7AI");
+        auto g = Environment::GetEnvironmentVariable("PATH_TGON");
+        assert(g.value() == u8"C:/HU7AI");
+        auto h = Environment::GetCurrentDirectory();
+        auto i = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+        auto j = Environment::GetCurrentManagedThreadId();
     }
 };
 

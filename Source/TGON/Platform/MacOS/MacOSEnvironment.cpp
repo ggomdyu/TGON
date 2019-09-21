@@ -2,7 +2,9 @@
 
 #include <Foundation/Foundation.h>
 #include <mach/mach_time.h>
+#include <sys/utsname.h>
 #include <unistd.h>
+#include <pthread.h>
 #include <array>
 
 #include "../Environment.h"
@@ -47,6 +49,11 @@ bool Environment::SetEnvironmentVariable(const std::string_view& name, const std
 int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen)
 {
     const char* envValue = getenv(name.data());
+    if (envValue == nullptr)
+    {
+        return -1;
+    }
+    
     size_t envValueBytes = strlen(envValue);
     if (envValueBytes + 1 > destStrBufferLen)
     {
@@ -60,8 +67,7 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* 
 
 int32_t Environment::GetCurrentManagedThreadId()
 {
-    // todo: impl
-    return -1;
+    return static_cast<int32_t>(pthread_mach_thread_np(pthread_self()));
 }
 
 int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
@@ -81,22 +87,28 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
         return -1;
     }
     
-    return static_cast<int32_t>(strlen(destStr));
-}
-
-int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
-{
-    if (getdomainname(destStr, destStrBufferLen) != 0)
+    utsname name;
+    uname(&name);
+    
+    int32_t nodeNameLen = static_cast<int32_t>(strlen(name.nodename));
+    if (nodeNameLen + 1 > destStrBufferLen)
     {
         return -1;
     }
     
-    return static_cast<int32_t>(strlen(destStr));
+    memcpy(destStr, name.nodename, nodeNameLen + 1);
+    
+    return nodeNameLen;
+}
+
+int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
+{
+    return GetMachineName(destStr, destStrBufferLen);
 }
 
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    NSString* path = [[NSFileManager defaultManager] currentDirectoryPath];
+    auto path = [[NSFileManager defaultManager] currentDirectoryPath];
     auto pathStrLen = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (pathStrLen + 1 > destStrBufferLen)
     {
@@ -196,8 +208,7 @@ bool Environment::Is64BitOperatingSystem()
 
 std::string_view Environment::GetNewLine()
 {
-    char newLine[] = "\n";
-    return {newLine, std::extent_v<decltype(newLine)> - 1};
+    return "\n";
 }
 
 int32_t Environment::GetSystemPageSize()

@@ -86,7 +86,7 @@ public:
     template <int32_t Length>
     static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char, Length>& destStr);
     static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name);
-    static std::optional<std::string> GetCurrentDirectory();
+    static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetCurrentDirectory(const Span<char, Length>& destStr);
@@ -97,15 +97,15 @@ public:
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
-    static std::optional<std::string> GetUserName();
+    static std::string GetUserName();
     static int32_t GetUserName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetUserName(const Span<char, Length>& destStr);
-    static std::optional<std::string> GetMachineName();
+    static std::string GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetMachineName(const Span<char, Length>& destStr);
-    static std::optional<std::string> GetUserDomainName();
+    static std::string GetUserDomainName();
     static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
     static int32_t GetUserDomainName(const Span<char, Length>& destStr);

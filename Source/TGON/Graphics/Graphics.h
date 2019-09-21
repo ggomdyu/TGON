@@ -25,7 +25,6 @@ public:
 public:
     PlatformGraphics* GetPlatformDependency() noexcept;
     const PlatformGraphics* GetPlatformDependency() const noexcept;
-
     using PlatformGraphics::SetScissorRect;
     using PlatformGraphics::SetClearColor;
     using PlatformGraphics::SetFillMode;

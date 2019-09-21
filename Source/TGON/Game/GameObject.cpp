@@ -32,7 +32,7 @@ const StringHash& GameObject::GetName() const noexcept
     return m_name;
 }
 
-void GameObject::SetActive(bool isActive)
+void GameObject::SetActive(bool isActive) noexcept
 {
     m_isActive = isActive;
 }
@@ -52,7 +52,7 @@ std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
     return m_transform;
 }
 
-bool GameObject::RemoveComponent(size_t componentHashCode)
+bool GameObject::RemoveComponent(int32_t componentHashCode)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, int32_t rhs)
     {
@@ -71,9 +71,9 @@ bool GameObject::RemoveComponent(size_t componentHashCode)
     }
 }
 
-std::shared_ptr<Component> GameObject::GetComponent(size_t componentId)
+std::shared_ptr<Component> GameObject::GetComponent(int32_t componentId)
 {
-    auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    auto predicate = [&](const std::shared_ptr<Component>& lhs, int32_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };

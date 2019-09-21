@@ -32,7 +32,7 @@ constexpr GLint ConvertTextureWrapModeToNative(WrapMode textureWrapMode) noexcep
 constexpr GLenum ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
 {
     constexpr GLenum nativePixelFormats[] = {
-        -1,                 // Unknown
+        0,                  // Unknown
         GL_RGBA,            // RGBA8888
         GL_RGB,             // RGB888
         GL_RGB4,            // RGBA4444

@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <functional>
 #include <atomic>
@@ -20,6 +20,7 @@
 #include "./../Test/IO/FileTest.h"
 #include "./../Test/IO/FileStreamTest.h"
 #include "./../Test/IO/PathTest.h"
+#include "./../Test/Platform/EnvironmentTest.h"
 
 std::shared_ptr<tgon::GameObject> object1;
 std::shared_ptr<tgon::GameObject> object2;
@@ -262,23 +263,14 @@ void LogoScene::InitPhase4()
     DateTimeTest().Evaluate();
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
+    EnvironmentTest().Evaluate();
 
     Debug::Write(u8"WOW하!");
     Debug::WriteLine(u8"알로에먹고싶다");
     Debug::Write(u8"WOW하!");
 //    Debug::WriteLine(*Environment::GetUserDomainName());
-    Debug::WriteLine(*Environment::GetFolderPath(Environment::SpecialFolder::ProgramFiles));
-    auto ar = Environment::GetCommandLineArgs();
-    auto ac = Environment::GetMachineName();    
-    auto dgb = Environment::GetUserDomainName();
-    auto ad = Environment::GetUserName();
-    auto ad43354 = Environment::GetEnvironmentVariable("PATH_TGON");
-    auto ad23 = Environment::SetEnvironmentVariable("PATH_TGON", u8"C:/H알로하AI");
-    auto ad4354 = Environment::GetEnvironmentVariable("PATH_TGON");
-    auto ad435s4 = Environment::GetCurrentDirectory();
-    auto dsa = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+   
     int n = 3;
-    
 //    auto commandLine = Environment::GetCommandLine();
 //    auto commandLine2 = Environment::GetCurrentDirectory();
 //    auto commandLine3 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
