@@ -8,6 +8,7 @@
 #include <vector>
 #include <string_view>
 #include <algorithm>
+#include <memory>
 
 #include "Platform/Config.h"
 #include "Math/Extent.h"

@@ -284,7 +284,7 @@ constexpr bool BasicVector4<_ValueType>::operator!=(const BasicVector4& rhs) con
     return !(*this == rhs);
 }
 
-template<typename _ValueType>
+template <typename _ValueType>
 inline constexpr BasicVector4<_ValueType>::operator Vector3() const noexcept
 {
     return Vector3(x, y, z);

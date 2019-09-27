@@ -10,7 +10,6 @@
 #include "Diagnostics/Debug.h"
 #include "Drawing/Image.h"
 #include "Core/CoreObject.h"
-#include "Core/Span.h"
 #include "Platform/Window.h"
 #include "Platform/Application.h"
 #include "Platform/Screen.h"

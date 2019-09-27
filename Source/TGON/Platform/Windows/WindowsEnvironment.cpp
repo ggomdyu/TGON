@@ -1,21 +1,27 @@
 #include "PrecompiledHeader.h"
 
-#ifndef NOMINMAX
-#   define NOMINMAX
-#endif
 #include <Windows.h>
 #ifndef SECURITY_WIN32
 #   define SECURITY_WIN32
 #endif
 #include <security.h>
 #include <shlobj.h>
+#include <Psapi.h>
 #include <array>
+#include <sstream>
 
+#pragma pack( push, before_imagehlp, 8 )
+#include <imagehlp.h>
+#pragma pack( pop, before_imagehlp )
+
+#include "Diagnostics/Debug.h"
 #include "String/Encoding.h"
 
 #include "../Environment.h"
 
 #pragma comment(lib, "Secur32.lib")
+#pragma comment(lib, "psapi.lib")
+#pragma comment(lib, "dbghelp.lib")
 
 namespace tgon
 {
@@ -140,6 +146,22 @@ bool Environment::Is64BitOperatingSystem()
 #endif
 }
 
+void Environment::FailFast(const std::string_view& message)
+{
+    FailFast(message, {});
+}
+
+void Environment::FailFast(const std::string_view& message, const std::exception& exception)
+{
+    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(message.data()), static_cast<int32_t>(message.size()));
+    utf16Message.insert(utf16Message.end(), { std::byte('\n'), std::byte(0), std::byte(0), std::byte(0) });
+
+    OutputDebugStringW(L"FailFast:\n");
+    OutputDebugStringW(reinterpret_cast<const wchar_t*>(utf16Message.data()));
+
+    throw exception;
+}
+
 std::string_view Environment::GetNewLine()
 {
     char newLine[] = "\r\n";
@@ -225,5 +247,119 @@ int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
 
     return -1;
 }
+
+DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destStrBufferLen, int32_t* destStrLen)
+{
+    HANDLE threadHandle = GetCurrentThread();
+    HANDLE processHandle = GetCurrentProcess();
+    if (SymInitialize(processHandle, nullptr, false) == FALSE)
+    {
+        *destStrLen = -1;
+        return EXCEPTION_EXECUTE_HANDLER;
+    }
+
+    SymSetOptions(SymGetOptions() | SYMOPT_LOAD_LINES | SYMOPT_UNDNAME);
     
+    CONTEXT* context = ep->ContextRecord;
+#ifdef _M_X64
+    STACKFRAME64 frame;
+    frame.AddrPC.Offset = context->Rip;
+    frame.AddrPC.Mode = AddrModeFlat;
+    frame.AddrStack.Offset = context->Rsp;
+    frame.AddrStack.Mode = AddrModeFlat;
+    frame.AddrFrame.Offset = context->Rbp;
+    frame.AddrFrame.Mode = AddrModeFlat;
+#else
+    STACKFRAME64 frame;
+    frame.AddrPC.Offset = context->Eip;
+    frame.AddrPC.Mode = AddrModeFlat;
+    frame.AddrStack.Offset = context->Esp;
+    frame.AddrStack.Mode = AddrModeFlat;
+    frame.AddrFrame.Offset = context->Ebp;
+    frame.AddrFrame.Mode = AddrModeFlat;
+#endif
+    
+    std::vector<HMODULE> moduleHandles;
+    DWORD moduleHandlesSize = 0;
+    EnumProcessModules(processHandle, nullptr, 0, &moduleHandlesSize);
+    moduleHandles.resize(moduleHandlesSize / sizeof(HMODULE));
+    EnumProcessModules(processHandle, &moduleHandles[0], moduleHandles.size() * sizeof(HMODULE), &moduleHandlesSize);
+
+    void* baseModuleAddress = nullptr;
+    for (auto iter = moduleHandles.rbegin(); iter != moduleHandles.rend(); ++iter)
+    {
+        HMODULE moduleHandle = *iter;
+        MODULEINFO moduleInfo;
+        GetModuleInformation(processHandle, moduleHandle, &moduleInfo, sizeof(moduleInfo));
+
+        std::array<char, 4096> imageName;
+        GetModuleFileNameExA(processHandle, moduleHandle, imageName.data(), sizeof(imageName));
+        std::array<char, 4096> moduleName;
+        GetModuleBaseNameA(processHandle, moduleHandle, moduleName.data(), sizeof(moduleName));
+
+        SymLoadModule64(processHandle, 0, &imageName[0], &moduleName[0], reinterpret_cast<DWORD64>(moduleInfo.lpBaseOfDll), moduleInfo.SizeOfImage);
+
+        baseModuleAddress = moduleInfo.lpBaseOfDll;
+    }
+
+    PIMAGE_NT_HEADERS image = ImageNtHeader(baseModuleAddress);
+    DWORD imageType = image->FileHeader.Machine;
+
+    IMAGEHLP_LINE64 line {};
+    line.SizeOfStruct = sizeof(line);
+    
+    DWORD64 displacement = 0;
+    DWORD offsetFromSymbol = 0;
+    std::array<char, 1024> undecoratedName;
+
+    *destStrLen = 0;
+
+    do
+    {
+        if (frame.AddrPC.Offset != 0)
+        {
+            std::array<std::byte, sizeof(IMAGEHLP_SYMBOL64) + 1024> symBytes {};
+            IMAGEHLP_SYMBOL64* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(symBytes.data());
+            sym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+            sym->MaxNameLength = static_cast<DWORD>(undecoratedName.size());
+            SymGetSymFromAddr64(processHandle, frame.AddrPC.Offset, &displacement, sym);
+
+            // Get the undecorated name of function
+            if (UnDecorateSymbolName(sym->Name, &undecoratedName[0], sym->MaxNameLength, UNDNAME_COMPLETE) == FALSE)
+            {
+                continue;
+            }
+            
+            // Get the file name and line
+            SymGetLineFromAddr64(processHandle, frame.AddrPC.Offset, &offsetFromSymbol, &line);
+
+            *destStrLen += sprintf_s(destStr + *destStrLen, destStrBufferLen - *destStrLen, "   at %s in %s:line %d\n", undecoratedName.data(), line.FileName, line.LineNumber);
+        }
+
+        if (StackWalk64(imageType, processHandle, threadHandle, &frame, context, nullptr, SymFunctionTableAccess64, SymGetModuleBase64, nullptr) == FALSE)
+        {
+            break;
+        }
+    } while (frame.AddrReturn.Offset != 0);
+
+    SymCleanup(processHandle);
+
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+
+int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
+{
+    int32_t ret;
+
+    __try {
+        volatile int temp = 0;
+        temp = 1 / temp;
+    }
+    __except (InternalGetStackTrace(GetExceptionInformation(), destStr, destStrBufferLen, &ret)) 
+    {
+    }
+
+    return ret;
+}
+
 } /* namespace tgon */

@@ -2447,9 +2447,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Stream.h">
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\Span.h">
-      <Filter>Source\TGON\Core</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\UI\RectTransform.h">
       <Filter>Source\TGON\UI</Filter>
     </ClInclude>

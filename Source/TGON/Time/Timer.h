@@ -17,11 +17,9 @@ class Timer final
 /**@section Constructor */
 public:
     Timer() noexcept;
-    
-    explicit Timer(bool isAutoReset) noexcept;
-    
     Timer(int64_t interval, bool isAutoReset) noexcept;
-    
+    explicit Timer(bool isAutoReset) noexcept;
+
 /**@section Method */
 public:
     /**

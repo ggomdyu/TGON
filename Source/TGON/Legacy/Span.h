@@ -199,14 +199,14 @@ constexpr int32_t Span<_ElementType, Extent>::Length() const noexcept
     return m_size;
 }
 
-template<typename _ElementType, int32_t Extent>
+template <typename _ElementType, int32_t Extent>
 constexpr Span<_ElementType> Span<_ElementType, Extent>::Slice(int32_t start) const
 {
     TGON_EXPECT(start >= 0 && start <= m_size);
     return {m_data + start, m_size - start};
 }
 
-template<typename _ElementType, int32_t Extent>
+template <typename _ElementType, int32_t Extent>
 constexpr Span<_ElementType> Span<_ElementType, Extent>::Slice(int32_t start, int32_t length) const
 {
     TGON_EXPECT((start >= 0 && start <= length) && (length >= 0 && start + length <= m_size));
@@ -225,7 +225,7 @@ constexpr typename Span<_ElementType, Extent>::template SubSpanType<Start, Exten
     return {m_data + Start, Start + Extent2};
 }
 
-template<typename _ElementType, int32_t Extent>
+template <typename _ElementType, int32_t Extent>
 inline void Span<_ElementType, Extent>::Clear()
 {
     for (int32_t i = 0; i < m_size; ++i)

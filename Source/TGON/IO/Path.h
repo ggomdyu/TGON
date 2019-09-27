@@ -8,9 +8,9 @@
 #include <cstdint>
 #include <string>
 #include <optional>
+#include <gsl/span>
 
 #include "Platform/Config.h"
-#include "Core/Span.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsPath.h"
@@ -30,37 +30,37 @@ public:
     static std::optional<std::string> Combine(const std::string_view& path1, const std::string_view& path2);
     static int32_t Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t Combine(const std::string_view& path1, const std::string_view& path2, const Span<char, Length>& destStr);
+    static int32_t Combine(const std::string_view& path1, const std::string_view& path2, const gsl::span<char, Length>& destStr);
     static bool IsPathRooted(const std::string_view& path);
     static std::string_view GetExtension(const std::string_view& path);
     static std::optional<std::string> GetFileName(const std::string_view& path);
     static int32_t GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetFileName(const std::string_view& path, const Span<char, Length>& destStr);
+    static int32_t GetFileName(const std::string_view& path, const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetFileNameWithoutExtension(const std::string_view& path);
     static int32_t GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetFileNameWithoutExtension(const std::string_view& path, const Span<char, Length>& destStr);
+    static int32_t GetFileNameWithoutExtension(const std::string_view& path, const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetDirectoryName(const std::string_view& path);
     static int32_t GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetDirectoryName(const std::string_view& path, const Span<char, Length>& destStr);
+    static int32_t GetDirectoryName(const std::string_view& path, const gsl::span<char, Length>& destStr);
     static bool HasExtension(const std::string_view& path);
     static std::optional<std::string> ChangeExtension(const std::string_view& path, const std::string_view& extension);
     static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr);
     static std::optional<std::string> GetFullPath(const std::string_view& path);
     static int32_t GetFullPath(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetFullPath(const std::string_view& path, const Span<char, Length>& destStr);
+    static int32_t GetFullPath(const std::string_view& path, const gsl::span<char, Length>& destStr);
 //    static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);
 //    static std::string GetPathRoot(const std::string_view& path);
 //    static std::string GetRandomFileName();
     static std::optional<std::string> GetTempPath();
     static int32_t GetTempPath(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetTempPath(const Span<char, Length>& destStr);
-    static Span<const char> GetInvalidFileNameChars() noexcept;
-    static Span<const char> GetInvalidPathChars() noexcept;
+    static int32_t GetTempPath(const gsl::span<char, Length>& destStr);
+    static gsl::span<const char> GetInvalidFileNameChars() noexcept;
+    static gsl::span<const char> GetInvalidPathChars() noexcept;
 
 private:
     static bool IsValidDriveChar(char ch) noexcept;
@@ -75,37 +75,37 @@ public:
 };
 
 template <int32_t Length>
-inline int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, const Span<char, Length>& destStr)
+inline int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, const gsl::span<char, Length>& destStr)
 {
     return Combine( path1, path2, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Path::GetFileName(const std::string_view& path, const Span<char, Length>& destStr)
+inline int32_t Path::GetFileName(const std::string_view& path, const gsl::span<char, Length>& destStr)
 {
     return GetFileName(path, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, const Span<char, Length>& destStr)
+inline int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, const gsl::span<char, Length>& destStr)
 {
     return GetFileNameWithoutExtension(path, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Path::GetDirectoryName(const std::string_view& path, const Span<char, Length>& destStr)
+inline int32_t Path::GetDirectoryName(const std::string_view& path, const gsl::span<char, Length>& destStr)
 {
     return GetDirectoryName(path, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Path::GetFullPath(const std::string_view& path, const Span<char, Length>& destStr)
+inline int32_t Path::GetFullPath(const std::string_view& path, const gsl::span<char, Length>& destStr)
 {
     return GetFullPath(path, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Path::GetTempPath(const Span<char, Length>& destStr)
+inline int32_t Path::GetTempPath(const gsl::span<char, Length>& destStr)
 {
     return GetTempPath(&destStr[0], destStr.Length());
 }

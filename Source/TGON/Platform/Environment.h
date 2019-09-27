@@ -9,9 +9,9 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <gsl/span>
 
 #include "Platform/Config.h"
-#include "Core/Span.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsEnvironment.h"
@@ -20,7 +20,14 @@
 namespace tgon
 {
 
-class TGON_API Environment
+enum class EnvironmentVariableTarget
+{
+    Process = 0,
+    User = 1,
+    Machine = 2,
+};
+
+class TGON_API Environment final
 {
 /**@section Constructor */
 public:
@@ -84,31 +91,32 @@ public:
     static bool SetEnvironmentVariable(const std::string_view& name, const std::string_view& value);
     static int32_t GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetEnvironmentVariable(const std::string_view& name, const Span<char, Length>& destStr);
+    static int32_t GetEnvironmentVariable(const std::string_view& name, const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name);
+    static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name, EnvironmentVariableTarget target);
     static std::optional<std::string> GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetCurrentDirectory(const Span<char, Length>& destStr);
+    static int32_t GetCurrentDirectory(const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetFolderPath(SpecialFolder folder, const Span<char, Length>& destStr);
+    static int32_t GetFolderPath(SpecialFolder folder, const gsl::span<char, Length>& destStr);
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
     static std::optional<std::string> GetUserName();
     static int32_t GetUserName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetUserName(const Span<char, Length>& destStr);
+    static int32_t GetUserName(const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetMachineName(const Span<char, Length>& destStr);
+    static int32_t GetMachineName(const gsl::span<char, Length>& destStr);
     static std::optional<std::string> GetUserDomainName();
     static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetUserDomainName(const Span<char, Length>& destStr);
+    static int32_t GetUserDomainName(const gsl::span<char, Length>& destStr);
     static const std::string& GetCommandLine();
     static const std::vector<std::string>& GetCommandLineArgs();
     [[noreturn]] static void Exit(int32_t exitCode);
@@ -116,17 +124,18 @@ public:
     static int32_t GetProcessorCount();
     static bool Is64BitProcess();
     static bool Is64BitOperatingSystem();
-
-    /*
-    public static string GetEnvironmentVariable(string variable, EnvironmentVariableTarget target);
+    [[noreturn]] static void FailFast(const std::string_view& message);
+    [[noreturn]] static void FailFast(const std::string_view& message, const std::exception& exception);
+    static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
+    static std::string GetStackTrace();
+        /*
     public static IDictionary GetEnvironmentVariables();
     public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
     public static void SetEnvironmentVariable(
         string variable,
         string value,
         EnvironmentVariableTarget target);
-    public static void FailFast(string message);
-    public static void FailFast(string message, Exception exception);
+    
     public static string ExpandEnvironmentVariables(string name);
     
     public static strPath(
@@ -134,7 +143,6 @@ public:
         Environment.SpecialFolderOption option);
     public static bool HasShutdownSting GetFolderarted{ get; }
     public static OperatingSystem OSVersion{ get; }
-    public static string StackTrace{ [MethodImpl(MethodImplOptions.NoInlining)] get; }
     public static bool UserInteractive{ get; }
     public static long WorkingSet{ get; }
     public static string[] GetLogicalDrives();
@@ -143,37 +151,37 @@ public:
 };
 
 template <int32_t Length>
-inline int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const Span<char, Length>& destStr)
+inline int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const gsl::span<char, Length>& destStr)
 {
     return GetEnvironmentVariable(name, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Environment::GetCurrentDirectory(const Span<char, Length>& destStr)
+inline int32_t Environment::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
 {
     return GetCurrentDirectory(&destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Environment::GetFolderPath(SpecialFolder folder, const Span<char, Length>& destStr)
+inline int32_t Environment::GetFolderPath(SpecialFolder folder, const gsl::span<char, Length>& destStr)
 {
     return GetFolderPath(folder, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Environment::GetUserName(const Span<char, Length>& destStr)
+inline int32_t Environment::GetUserName(const gsl::span<char, Length>& destStr)
 {
     return GetUserName(&destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Environment::GetMachineName(const Span<char, Length>& destStr)
+inline int32_t Environment::GetMachineName(const gsl::span<char, Length>& destStr)
 {
     return GetMachineName(&destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
-inline int32_t Environment::GetUserDomainName(const Span<char, Length>& destStr)
+inline int32_t Environment::GetUserDomainName(const gsl::span<char, Length>& destStr)
 {
     return GetUserDomainName(&destStr[0], destStr.Length());
 }

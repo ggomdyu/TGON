@@ -299,7 +299,7 @@ using FixedWString1024Hash = BasicStringHash<FixedWString1024>;
 namespace std
 {
 
-template<typename _StringType>
+template <typename _StringType>
 struct hash<tgon::BasicStringHash<_StringType>>
 {
 /* @section Method */

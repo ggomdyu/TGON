@@ -392,7 +392,7 @@ constexpr const Matrix3x4 Matrix3x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-template<std::size_t _DestStrBufferLen>
+template <std::size_t _DestStrBufferLen>
 inline int32_t Matrix3x4::ToString(char(&destStr)[_DestStrBufferLen]) const
 {
     this->ToString(destStr, sizeof(destStr));

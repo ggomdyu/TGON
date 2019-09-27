@@ -70,15 +70,15 @@ public:
     int32_t CompareTo(const std::basic_string_view<_CharType>& str) const;
     int32_t IndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex = 0) const;
     int32_t IndexOf(_CharType ch, int32_t startIndex = 0) const;
-    template<typename _PredicateType>
+    template <typename _PredicateType>
     int32_t IndexOfAny(const _PredicateType& predicate, int32_t startIndex = 0) const;
     int32_t LastIndexOf(const std::basic_string_view<_CharType>& str) const;
     int32_t LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex = 0) const;
     int32_t LastIndexOf(_CharType ch) const;
     int32_t LastIndexOf(_CharType ch, int32_t startIndex) const;
-    template<typename _PredicateType>
+    template <typename _PredicateType>
     int32_t LastIndexOfAny(const _PredicateType& predicate) const;
-    template<typename _PredicateType>
+    template <typename _PredicateType>
     int32_t LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const;
     const _CharType* Data() const noexcept;
     int32_t Length() const noexcept;
@@ -263,13 +263,13 @@ inline _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
     return m_str[index];
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string_view<_CharType>() const noexcept
 {
     return {m_str, static_cast<size_t>(m_strLen)};
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string<_CharType>() const noexcept
 {
     return {m_str, static_cast<size_t>(m_strLen)};
@@ -295,8 +295,8 @@ inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::
     return _StringTraitsType::Compare(m_str, m_strLen, str.length(), str.data());
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template<typename _PredicateType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
 {
     return _StringTraitsType::IndexOfAny(m_str + startIndex, m_strLen - startIndex, predicate) + startIndex;
@@ -322,7 +322,7 @@ inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::
     return _StringTraitsType::LastIndexOf(m_str, startIndex + 1, str, 1);
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(const std::basic_string_view<_CharType>& str) const
 {
     return _StringTraitsType::LastIndexOf(m_str, m_strLen, str, str.length());
@@ -334,21 +334,21 @@ inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::
     return _StringTraitsType::LastIndexOf(m_str, startIndex, str, str.length());
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch) const
 {
     return _StringTraitsType::LastIndexOf(m_str, m_strLen, &ch, 1);
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template<typename _PredicateType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate) const
 {
     return _StringTraitsType::LastIndexOfAny(m_str, m_strLen, predicate);
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-template<typename _PredicateType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
 {
     return _StringTraitsType::LastIndexOfAny(m_str, startIndex, predicate);
@@ -372,7 +372,7 @@ constexpr int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
     return _CharBufferSize;
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Begin() noexcept
 {
     return m_str;
@@ -384,19 +384,16 @@ inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>:
     return m_str + m_strLen;
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
 {
     return m_str;
 }
 
-template<typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
 {
     return m_str + m_strLen;
 }
 
 } /* namespace tgon */
-
-//Swap
-//_StringTraitsType::Swap(&m_str[0], m_strLen, _CharBufferSize, &rhs[0], rhs.Length(), rhs.Capacity());

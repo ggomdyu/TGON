@@ -89,7 +89,7 @@ inline const std::unique_ptr<std::byte[]>& BaseAudioImporter<_DerivedType>::GetA
     return m_audioData;
 }
 
-template<typename _DerivedType>
+template <typename _DerivedType>
 inline size_t BaseAudioImporter<_DerivedType>::GetAudioDataBytes() const noexcept
 {
     return m_audioDataBytes;

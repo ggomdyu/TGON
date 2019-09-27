@@ -11,9 +11,6 @@
     <Filter Include="Sources\ThirdParty\OIS-1.4">
       <UniqueIdentifier>{ea8cb9e5-6592-44cb-a99c-f503e59667f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\ThirdParty\StackWalker-1.20">
-      <UniqueIdentifier>{b3f11d49-87ee-4dcf-9e50-3decde210044}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\TGON">
       <UniqueIdentifier>{855b392b-ed70-4b89-b57f-932ef72dd9c4}</UniqueIdentifier>
     </Filter>
@@ -82,9 +79,6 @@
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.h">
       <Filter>Sources\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.h">
-      <Filter>Sources\ThirdParty\StackWalker-1.20</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.h">
       <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>
     </ClInclude>
@@ -146,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\Win32Mouse.cpp">
       <Filter>Sources\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\ThirdParty\StackWalker-1.20\Main\StackWalker\StackWalker.cpp">
-      <Filter>Sources\ThirdParty\StackWalker-1.20</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp">
       <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>

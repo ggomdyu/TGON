@@ -111,7 +111,7 @@ const Encoding& Encoding::GetEncoding(const char* codePageName) noexcept(false)
     auto converterSharedData = getAlgorithmicTypeFromName(codePageName);
     if (converterSharedData == nullptr)
     {
-        throw std::runtime_error("Cannot found the code page name.");
+        throw std::runtime_error("Can't found the code page name.");
     }
 
     return GetEncoding(converterSharedData->staticData->codepage);

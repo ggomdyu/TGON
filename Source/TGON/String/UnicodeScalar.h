@@ -156,7 +156,7 @@ constexpr char32_t UnicodeScalar::ToChar32(const char* str)
 namespace std
 {
 
-template<>
+template <>
 struct hash<tgon::UnicodeScalar>
 {
 /* @section Method */

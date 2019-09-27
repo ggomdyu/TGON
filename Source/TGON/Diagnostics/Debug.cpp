@@ -67,7 +67,7 @@ void Debug::Indent()
 void Debug::Unindent()
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    std::lock_guard<std::recursive_mutex> lockGuard( m_mutex );
+    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
     m_indentLevel = std::max(m_indentLevel - 1, 0);
 #endif
 }

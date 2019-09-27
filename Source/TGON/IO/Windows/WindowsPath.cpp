@@ -1,8 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#ifndef NOMINMAX
-#    define NOMINMAX
-#endif
 #include <Windows.h>
 
 #include "String/Encoding.h"
@@ -47,7 +44,7 @@ int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
     return -1;
 }
 
-Span<const char> Path::GetInvalidFileNameChars() noexcept
+gsl::span<const char> Path::GetInvalidFileNameChars() noexcept
 {
     constexpr char invalidFileNameChars[] = {
         '\"', '<', '>', '|', '\0', static_cast<char>(1), static_cast<char>(2), static_cast<char>(3),
@@ -59,10 +56,10 @@ Span<const char> Path::GetInvalidFileNameChars() noexcept
         static_cast<char>(25), static_cast<char>(26), static_cast<char>(27), static_cast<char>(28),
         static_cast<char>(29), static_cast<char>(30), static_cast<char>(31), ':', '*', '?', '\\', '/'
     };
-    return Span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
+    return gsl::span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
 }
 
-Span<const char> Path::GetInvalidPathChars() noexcept
+gsl::span<const char> Path::GetInvalidPathChars() noexcept
 {
     constexpr char invalidPathChars[] = {
         '|', '\0', static_cast<char>(1), static_cast<char>(2), static_cast<char>(3), static_cast<char>(4),
@@ -74,7 +71,7 @@ Span<const char> Path::GetInvalidPathChars() noexcept
         static_cast<char>(26), static_cast<char>(27), static_cast<char>(28), static_cast<char>(29),
         static_cast<char>(30), static_cast<char>(31)
     };
-    return Span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
+    return gsl::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 
 } /* namespace tgon */

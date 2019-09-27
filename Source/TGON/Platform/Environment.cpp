@@ -22,6 +22,45 @@ std::optional<std::string> Environment::GetEnvironmentVariable(const std::string
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
+std::optional<std::string> Environment::GetEnvironmentVariable(const std::string_view& name, EnvironmentVariableTarget target)
+{
+    if (target == EnvironmentVariableTarget::Process)
+    {
+        return GetEnvironmentVariable(name);
+    }
+
+    if (target == EnvironmentVariableTarget::Machine)
+    {
+    
+        /*using (RegistryKey environmentKey =
+            Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Session Manager\Environment", false)) {
+
+                Contract.Assert(environmentKey != null, @"HKLM\System\CurrentControlSet\Control\Session Manager\Environment is missing!");
+                    if (environmentKey == null) {
+                        return null;
+                    }
+
+        string value = environmentKey.GetValue(variable) as string;
+        return value;*/
+    }
+    
+    if (target == EnvironmentVariableTarget::User)
+    {
+        /*using (RegistryKey environmentKey =
+        Registry.CurrentUser.OpenSubKey("Environment", false)) {
+
+        Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");
+            if (environmentKey == null) {
+                return null;
+            }
+
+        string value = environmentKey.GetValue(variable) as string;
+        return value;*/
+    }
+
+    return {};
+}
+
 std::optional<std::string> Environment::GetCurrentDirectory()
 {
     auto strLen = GetCurrentDirectory(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
@@ -103,6 +142,17 @@ std::optional<std::string> Environment::GetUserDomainName()
         return {};
     }
     
+    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+}
+
+std::string Environment::GetStackTrace()
+{
+    auto strLen = GetStackTrace(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    if (strLen == -1)
+    {
+        return {};
+    }
+
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 

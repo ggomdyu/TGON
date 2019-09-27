@@ -25,7 +25,7 @@ int32_t Random::Next(int32_t maxValue) noexcept
 
 int32_t Random::Next(int32_t minValue, int32_t maxValue) noexcept
 {
-    return minValue + (Sample() * (maxValue - minValue));
+    return minValue + int32_t(Sample() * double(maxValue - minValue));
 }
 
 void Random::NextBytes(std::byte* bytes, int32_t count) noexcept

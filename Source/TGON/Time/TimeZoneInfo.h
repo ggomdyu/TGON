@@ -20,6 +20,7 @@ class TGON_API TimeZoneInfo final
 public:
     template <typename _StringType1, typename _StringType2, typename _StringType3, typename _StringType4>
     TimeZoneInfo(_StringType1&& id, const TimeSpan& baseUtcOffset, _StringType2&& displayName, _StringType3&& standardDisplayName, _StringType4&& daylightDisplayName, bool supportsDaylightSavingTime);
+    TimeZoneInfo() = default;
 
 /**@section Method */
 public:

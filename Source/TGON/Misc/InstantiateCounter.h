@@ -40,19 +40,19 @@ protected:
     InstantiateCountLimiter() noexcept;
 };
 
-template<typename _InstanceType>
+template <typename _InstanceType>
 inline InstantiateCounter<_InstanceType>::InstantiateCounter() noexcept
 {
     ++m_instantiateCount;
 }
 
-template<typename _InstanceType>
+template <typename _InstanceType>
 inline int32_t InstantiateCounter<_InstanceType>::GetInstantiateCount() noexcept
 {
     return m_instantiateCount;
 }
 
-template<typename _InstanceType, int32_t _MaxInstantiateCount>
+template <typename _InstanceType, int32_t _MaxInstantiateCount>
 inline InstantiateCountLimiter<_InstanceType, _MaxInstantiateCount>::InstantiateCountLimiter() noexcept
 {
     assert(InstantiateCounter<_InstanceType>::GetInstantiateCount() <= _MaxInstantiateCount && "The object has been instantiated more than the specified count.");

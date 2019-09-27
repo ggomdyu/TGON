@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <array>
+
 #include "Path.h"
 
 namespace tgon

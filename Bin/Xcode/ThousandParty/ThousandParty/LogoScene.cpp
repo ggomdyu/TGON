@@ -246,77 +246,17 @@ public:
 using namespace tgon;
 void LogoScene::InitPhase4()
 {
+   /* constexpr bool a = has_begin_end<std::vector<int>>::beg_value;
+    constexpr bool b = has_begin_end<int>::beg_value;*/
+    auto st = Environment::GetStackTrace();
     auto qwexqb = Path::GetFullPath("Hallo my name is CHA");
-    //auto& a = NewEncoding::UTF8();
-    //auto& b = NewEncoding::Unicode();
-    //auto& c = NewEncoding::BigEndianUnicode();
-    //auto& d = NewEncoding::UTF32();
-
-    //auto& e = NewEncoding::GetEncoding("UTF-8");
-    //auto& f = NewEncoding::GetEncoding("UTF-32");
-    //auto& g = NewEncoding::GetEncoding(1208);
-
-    auto& a = TimeZoneInfo::Local();
 
     FixedStringTest().Evaluate();
     DateTimeTest().Evaluate();
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
-
-    Debug::Write(u8"WOW하!");
-    Debug::WriteLine(u8"알로에먹고싶다");
-    Debug::Write(u8"WOW하!");
-//    Debug::WriteLine(*Environment::GetUserDomainName());
-    Debug::WriteLine(*Environment::GetFolderPath(Environment::SpecialFolder::ProgramFiles));
-    auto ar = Environment::GetCommandLineArgs();
-    auto ac = Environment::GetMachineName();    
-    auto dgb = Environment::GetUserDomainName();
-    auto ad = Environment::GetUserName();
-    auto ad43354 = Environment::GetEnvironmentVariable("PATH_TGON");
-    auto ad23 = Environment::SetEnvironmentVariable("PATH_TGON", u8"C:/H알로하AI");
-    auto ad4354 = Environment::GetEnvironmentVariable("PATH_TGON");
-    auto ad435s4 = Environment::GetCurrentDirectory();
-    auto dsa = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-    int n = 3;
     
-//    auto commandLine = Environment::GetCommandLine();
-//    auto commandLine2 = Environment::GetCurrentDirectory();
-//    auto commandLine3 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-//    auto pageSize = Environment::GetSystemPageSize();
-//    auto is64P = Environment::Is64BitProcess();
-//    auto is64OS = Environment::Is64BitOperatingSystem();
-//    auto newLine = Environment::GetNewLine();
-//    auto d1 = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-//    auto d2 = Environment::GetFolderPath(Environment::SpecialFolder::MyMusic);
-//    auto d3 = Environment::GetFolderPath(Environment::SpecialFolder::MyVideos);
-//    auto d4 = Environment::GetFolderPath(Environment::SpecialFolder::Fonts);
-//    auto d5 = Environment::GetFolderPath(Environment::SpecialFolder::MyDocuments);
-//    auto d6 = Environment::GetFolderPath(Environment::SpecialFolder::MyPictures);
-//    auto d7 = Path::GetInvalidPathChars();
-//    auto d8 = Path::GetInvalidFileNameChars();
-//    
-    auto a1212 = File::SetLastAccessTimeUtc(u8"E:/Users/ggomdyu/Desktop/jubeat_festo_logo.png", DateTime::Now());
-    auto b232324 = Path::GetFullPath(u8"/ext.png");
-    auto c124 = Path::GetFullPath(u8"\\ext.png");
-
-//    while (true)
-//    {
-//        auto str = std::to_string(Environment::GetTickCount());
-//        Debug::WriteLine(str);
-//    }
-
-//    FileStream f("E:/Users/ggomdyu/Desktop/a", FileMode::OpenOrCreate, FileAccess::ReadWrite);
-//    for (int i = 0; i < (int)(4096.0 * 1.1); ++i)
-//    {
-//        if (i > 4095)
-//        {
-//            f.WriteByte(2);
-//        }
-//        else
-//        {
-//            f.WriteByte(1);
-//        }
-//    }
+    int n = 3;
 
     //// Range 클래스에서 써보자
     ///*HasBeginEnd<std::vector<int>>::TypeCheckFunc<std::vector<int>>(1);
@@ -332,33 +272,6 @@ void LogoScene::InitPhase4()
     //    int n = 3;
     //}*/
     //FixedString8Hash s3 = ch;
-    //
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::Indent();
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::Indent();
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::Unindent();
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::Write(u8"hahaha");
-    //Debug::Unindent();
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //Debug::WriteLine(u8"진짜웃겨요!!");
-    //
-    //auto engine = Application::GetInstance().GetEngine();
-    //auto r = DateTime(2001, 10, 12, 0, 0, 0, DateTimeKind::Local);
-//  //  auto ct = TimeZoneInfo::ConvertTimeFromUtc(r, TimeZoneInfo::Local());
-    //
-    //auto k = r.GetKind();
-    //if (k == DateTimeKind::Local)
-    //{
-    //    int n = 3;
-    //}
     //
     //bool a342 = File::SetCreationTime(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Utc));//9
     //bool a34 = File::SetCreationTimeUtc(u8"E:/Users/ggomdyu/Desktop/1.PNG", DateTime(2001, 10, 12, 0,0,0, DateTimeKind::Local));

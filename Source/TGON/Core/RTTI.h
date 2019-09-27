@@ -71,7 +71,7 @@ inline const RTTI* GetRTTI<void>()
 namespace std
 {
 
-template<>
+template <>
 struct hash<tgon::RTTI>
 {
 /* @section Method */

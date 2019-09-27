@@ -50,14 +50,14 @@ using U16StringTraits = BasicStringTraits<char16_t>;
 using U32StringTraits = BasicStringTraits<char32_t>;
 using WStringTraits = BasicStringTraits<wchar_t>;
 
-template<typename _CharType>
-template<std::size_t _DestStrBufferLen>
+template <typename _CharType>
+template <std::size_t _DestStrBufferLen>
 inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen)
 {
     Append(srcStr, srcStrLen, destStr, destStrLen, _DestStrBufferLen);
 }
 
-template<typename _CharType>
+template <typename _CharType>
 inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen)
 {
     assert(destStrBufferLen > srcStrLen + destStrLen && "String buffer overflowed!");
@@ -67,8 +67,8 @@ inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_
     destStr[srcStrLen + destStrLen] = _CharType();
 }
 
-template<typename _CharType>
-template<std::size_t _DestStrBufferLen>
+template <typename _CharType>
+template <std::size_t _DestStrBufferLen>
 inline void BasicStringTraits<_CharType>::Append(_CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen, _CharType ch, int32_t chCount)
 {
     Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
@@ -100,8 +100,8 @@ inline int32_t BasicStringTraits<_CharType>::IndexOf(const _CharType* str, int32
     return -1;
 }
 
-template<typename _CharType>
-template<typename _PredicateType>
+template <typename _CharType>
+template <typename _PredicateType>
 inline int32_t BasicStringTraits<_CharType>::IndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
 {
     const _CharType* foundStr = std::find_if(str, str + strLen, predicate);
@@ -125,8 +125,8 @@ inline int32_t BasicStringTraits<_CharType>::LastIndexOf(const _CharType* str, i
     return -1;
 }
 
-template<typename _CharType>
-template<typename _PredicateType>
+template <typename _CharType>
+template <typename _PredicateType>
 inline int32_t BasicStringTraits<_CharType>::LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
 {
     for (int32_t i = strLen - 1; i >= 0; --i)
