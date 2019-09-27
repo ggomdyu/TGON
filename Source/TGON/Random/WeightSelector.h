@@ -93,7 +93,7 @@ inline void WeightSelector<_WeightType>::Erase(const WeightHandlerType& handler)
 template <typename _WeightType>
 inline void WeightSelector<_WeightType>::Select()
 {
-    auto rand = RandRange<WeightType>(WeightType(0), m_totalWeight);
+    auto rand = Random().Next(WeightType(0), m_totalWeight);
     
     WeightType accumulatedWeight = 0;
     for (auto& weightDesc : m_weightDescList)

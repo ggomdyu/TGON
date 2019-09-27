@@ -299,12 +299,18 @@ void Window::GetExtent(int32_t* destWidth, int32_t* destHeight) const
     *destHeight = static_cast<int32_t>(windowRect.size.height);
 }
 
-void Window::GetTitle(char* destTitle) const
+int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
 {
-    const char* str = [[m_window title] UTF8String];
-    size_t strBytes = [[m_window title] lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-
-    memcpy(destTitle, str, strBytes + 1);
+    auto title = [m_window title];
+    
+    auto utf8TitleLen = static_cast<int32_t>([title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+    if (utf8TitleLen + 1 > destTitleBufferLen)
+    {
+        return -1;
+    }
+    
+    memcpy(destTitle, [title UTF8String], utf8TitleLen + 1);
+    return utf8TitleLen;
 }
 
 void* Window::GetNativeWindow() const

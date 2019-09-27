@@ -121,6 +121,25 @@ const std::string& Environment::GetCommandLine()
     return commandLine;
 }
 
+const std::vector<std::string>& Environment::GetCommandLineArgs()
+{
+    static auto commandLineArgs = []()
+    {
+        std::vector<std::string> ret;
+        
+        std::stringstream ss(GetCommandLine());
+        std::string commandLineArg;
+        while (std::getline(ss, commandLineArg, ' '))
+        {
+            ret.push_back(std::move(commandLineArg));
+        }
+        
+        return ret;
+    } ();
+    
+    return commandLineArgs;
+}
+
 int64_t Environment::GetTickCount()
 {
     return static_cast<int64_t>(::GetTickCount());
