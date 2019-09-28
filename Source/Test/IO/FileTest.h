@@ -89,7 +89,7 @@ private:
         FileStream f3(filePath, FileMode::OpenOrCreate, FileAccess::ReadWrite, FileShare::None);;
         for (int i = 0; i < 1024; ++i)
         {
-            f3.WriteByte(i);
+            f3.WriteByte(std::byte(i));
         }
         f3.Close();
     }

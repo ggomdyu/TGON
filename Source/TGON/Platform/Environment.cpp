@@ -83,25 +83,6 @@ std::optional<std::string> Environment::GetFolderPath(SpecialFolder folder)
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-const std::vector<std::string>& Environment::GetCommandLineArgs()
-{
-    static auto commandLineArgs = []()
-    {
-        std::vector<std::string> ret;
-
-        std::stringstream ss(GetCommandLine());
-        std::string commandLineArg;
-        while (std::getline(ss, commandLineArg, ' '))
-        {
-            ret.push_back(std::move(commandLineArg));
-        }
-
-        return ret;
-    } ();
-
-    return commandLineArgs;
-}
-
 void Environment::Exit(int32_t exitCode)
 {
     std::exit(exitCode);

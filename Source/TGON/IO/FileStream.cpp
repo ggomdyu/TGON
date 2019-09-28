@@ -7,22 +7,22 @@
 namespace tgon
 {
 
-FileStream::FileStream(const std::string& path, FileMode mode) :
+FileStream::FileStream(const std::string_view& path, FileMode mode) :
     FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access) :
+FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access) :
     FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share) :
+FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share) :
     FileStream(path, mode, access, share, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
+FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
     FileStream(path, mode, access, share, bufferSize, DefaultFileOption)
 {
 }
@@ -157,7 +157,7 @@ void FileStream::Flush()
     this->Flush(false);
 }
 
-std::vector<uint8_t>& FileStream::GetBuffer() noexcept
+std::vector<std::byte>& FileStream::GetBuffer() noexcept
 {
     if (m_buffer.empty())
     {
@@ -167,7 +167,7 @@ std::vector<uint8_t>& FileStream::GetBuffer() noexcept
     return m_buffer;
 }
 
-int32_t FileStream::Read(uint8_t* buffer, int32_t count)
+int32_t FileStream::Read(std::byte* buffer, int32_t count)
 {
     if (this->CanRead() == false || m_bufferSize < count)
     {
@@ -229,10 +229,10 @@ int32_t FileStream::ReadByte()
         }
     }
 
-    return m_buffer[m_readPos++];
+    return static_cast<int32_t>(m_buffer[m_readPos++]);
 }
 
-bool FileStream::Write(const uint8_t* buffer, int32_t count)
+bool FileStream::Write(const std::byte* buffer, int32_t count)
 {
     if (this->CanWrite() == false)
     {
@@ -277,7 +277,7 @@ bool FileStream::Write(const uint8_t* buffer, int32_t count)
     return true;
 }
 
-bool FileStream::WriteByte(uint8_t value)
+bool FileStream::WriteByte(std::byte value)
 {
     if (this->CanWrite() == false)
     {

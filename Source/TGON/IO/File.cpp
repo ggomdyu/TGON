@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <cstdio>
+#include <array>
 #include <sys/stat.h>
 
 #include "String/Encoding.h"
@@ -27,7 +28,7 @@ bool File::Copy(const std::string_view& srcPath, const std::string_view& destPat
     return Copy(srcPath, destPath, false);
 }
 
-#if TGON_PLATFORM_FILESYSTEM_UTF16 == 0
+#if TGON_PLATFORM_WINDOWS == 0
 bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept
 {
     Delete(srcPath);
@@ -70,7 +71,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 #endif
 
 #if TGON_PLATFORM_MACOS == 0
-std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view & path)
+std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
 {
     struct stat s;
     if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
@@ -129,6 +130,29 @@ bool File::SetLastAccessTime(const std::string_view& path, const DateTime& lastA
 bool File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime)
 {
     return SetLastWriteTimeUtc(path, lastWriteTime);
+}
+
+std::optional<std::vector<std::byte>> File::ReadAllBytes(const std::string_view& path)
+{
+    FileStream fs(path.data(), FileMode::Open, FileAccess::Read, FileShare::Read);
+    if (fs.Length() > INT_MAX)
+    {
+        return {};
+    }
+
+    int32_t fileBytes = static_cast<int32_t>(fs.Length());
+    int32_t index = 0;
+
+    std::vector<std::byte> ret(static_cast<size_t>(fileBytes));
+    while (fileBytes > 0)
+    {
+        auto readBytes = fs.Read(&ret[index], 4096);
+
+        index += readBytes;
+        fileBytes -= readBytes;
+    }
+
+    return ret;
 }
 
 } /* namespace tgon */

@@ -11,6 +11,8 @@
 #include "Platform/Config.h"
 #include "Time/DateTime.h"
 
+#include "FileStream.h"
+
 namespace tgon
 {
  
@@ -59,7 +61,19 @@ public:
     static std::optional<DateTime> GetLastAccessTimeUtc(const std::string_view& path);
     static std::optional<DateTime> GetLastWriteTime(const std::string_view& path);
     static std::optional<DateTime> GetLastWriteTimeUtc(const std::string_view& path);
-    static FileAttributes GetAttributes(const std::string_view& path);
+    static std::optional<FileAttributes> GetAttributes(const std::string_view& path);
+    static bool Decrypt(const std::string_view& path);
+    static bool Encrypt(const std::string_view& path);
+    static std::string ReadAllText(const std::string_view& path);
+    static std::string ReadAllText(const std::string_view& path, const Encoding& encoding);
+    static std::optional<std::vector<std::byte>> ReadAllBytes(const std::string_view& path);
+    static FileStream Create(const std::string_view& path);
+    static FileStream Create(const std::string_view& path, int32_t bufferSize);
+    static FileStream Create(const std::string_view& path, int32_t bufferSize, FileOptions options);
+    static FileStream Open(const std::string_view& path, FileMode mode);
+    static FileStream Open(const std::string_view& path, FileMode mode, FileAccess access);
+    static FileStream Open(const std::string_view& path, FileMode mode, FileAccess access, FileShare share);
+
     //static void SetAttributes(const std::string_view& path, FileAttributes fileAttributes);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents);
     //static void AppendAllLines(const std::string_view& path, IEnumerable<string> contents, Encoding encoding);
@@ -70,44 +84,25 @@ public:
     //static Task AppendAllTextAsync(const std::string_view& path, string contents, CancellationToken cancellationToken = default(CancellationToken));
     //static Task AppendAllTextAsync(const std::string_view& path, string contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
     //static StreamWriter AppendText(const std::string_view& path);
-    //static FileStream Create(const std::string_view& path);
-    //static FileStream Create(const std::string_view& path, int bufferSize);
-    //static FileStream Create(const std::string_view& path, int bufferSize, FileOptions options);
+    
     //static StreamWriter CreateText(const std::string_view& path);
-    //static void Decrypt(const std::string_view& path);
-    //static void Encrypt(const std::string_view& path);
-    //static FileStream Open(const std::string_view& path, FileMode mode);
-    //static FileStream Open(const std::string_view& path, FileMode mode, FileAccess access);
-    //static FileStream Open(const std::string_view& path, FileMode mode, FileAccess access, FileShare share);
     //static FileStream OpenRead(const std::string_view& path);
     //static StreamReader OpenText(const std::string_view& path);
     //static FileStream OpenWrite(const std::string_view& path);
-    //static byte[] ReadAllBytes(const std::string_view& path);
-    //static Task<byte[]> ReadAllBytesAsync(const std::string_view& path, CancellationToken cancellationToken = default(CancellationToken));
     //static string[] ReadAllLines(const std::string_view& path);
     //static string[] ReadAllLines(const std::string_view& path, Encoding encoding);
-    //static Task<string[]> ReadAllLinesAsync(const std::string_view& path, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task<string[]> ReadAllLinesAsync(const std::string_view& path, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
-    //static string ReadAllText(const std::string_view& path);
-    //static string ReadAllText(const std::string_view& path, Encoding encoding);
-    //static Task<string> ReadAllTextAsync(const std::string_view& path, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task<string> ReadAllTextAsync(const std::string_view& path, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
+    
     //static IEnumerable<string> ReadLines(const std::string_view& path);
     //static IEnumerable<string> ReadLines(const std::string_view& path, Encoding encoding);
     //static void Replace(const std::string_view& sourcePath, string destinationPath, string destinationBackupPath);
     //static void Replace(const std::string_view& sourcePath, string destinationPath, string destinationBackupPath, bool ignoreMetadataErrors);
     //static void WriteAllBytes(const std::string_view& path, byte[] bytes);
-    //static Task WriteAllBytesAsync(const std::string_view& path, byte[] bytes, CancellationToken cancellationToken = default(CancellationToken));
     //static void WriteAllLines(const std::string_view& path, string[] contents);
     //static void WriteAllLines(const std::string_view& path, IEnumerable<string> contents);
     //static void WriteAllLines(const std::string_view& path, string[] contents, Encoding encoding);
     //static void WriteAllLines(const std::string_view& path, IEnumerable<string> contents, Encoding encoding);
-    //static Task WriteAllLinesAsync(const std::string_view& path, IEnumerable<string> contents, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task WriteAllLinesAsync(const std::string_view& path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
     //static void WriteAllText(const std::string_view& path, string contents);
     //static void WriteAllText(const std::string_view& path, string contents, Encoding encoding);
-    //static Task WriteAllTextAsync(const std::string_view& path, string contents, CancellationToken cancellationToken = default(CancellationToken));
-    //static Task WriteAllTextAsync(const std::string_view& path, string contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken));
 };
 
 } /* namespace tgon */

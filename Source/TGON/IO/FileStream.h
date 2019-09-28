@@ -57,11 +57,11 @@ class TGON_API FileStream :
 {
 /**@section Constructor */
 public:
-    FileStream(const std::string& path, FileMode mode);
-    FileStream(const std::string& path, FileMode mode, FileAccess access);
-    FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share);
-    FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
-    FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
+    FileStream(const std::string_view& path, FileMode mode);
+    FileStream(const std::string_view& path, FileMode mode, FileAccess access);
+    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share);
+    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
+    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
     FileStream(FileStream&& rhs) noexcept;
 
 /**@section Destructor */
@@ -82,10 +82,10 @@ public:
     virtual bool SetLength(int64_t value) override;
     virtual int64_t Length() const override;
     virtual int64_t Position() const override;
-    virtual int32_t Read(uint8_t* buffer, int32_t count) override;
+    virtual int32_t Read(std::byte* buffer, int32_t count) override;
     virtual int32_t ReadByte() override;
-    virtual bool Write(const uint8_t* buffer, int32_t count) override;
-    virtual bool WriteByte(uint8_t value) override;
+    virtual bool Write(const std::byte* buffer, int32_t count) override;
+    virtual bool WriteByte(std::byte value) override;
     virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
     virtual void Close() override;
     const std::string& Name() const noexcept;
@@ -98,11 +98,11 @@ public:
 
 protected:
     bool IsClosed() const noexcept;
-    std::vector<uint8_t>& GetBuffer() noexcept;
+    std::vector<std::byte>& GetBuffer() noexcept;
     void FlushWriteBuffer();
     void FlushReadBuffer();
-    int32_t ReadCore(uint8_t* buffer, int32_t count);
-    int32_t WriteCore(const uint8_t* buffer, int32_t count);
+    int32_t ReadCore(std::byte* buffer, int32_t count);
+    int32_t WriteCore(const std::byte* buffer, int32_t count);
     int64_t SeekCore(int64_t offset, SeekOrigin origin);
     void FlushCore();
     bool SetLengthCore(int64_t value);
@@ -114,7 +114,7 @@ protected:
     static constexpr int DefaultBufferSize = 4096;
 
     void* m_nativeHandle;
-    std::vector<uint8_t> m_buffer;
+    std::vector<std::byte> m_buffer;
     int32_t m_bufferSize;
     int32_t m_readPos;
     int32_t m_readLen;

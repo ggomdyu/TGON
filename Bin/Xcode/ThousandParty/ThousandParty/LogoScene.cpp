@@ -255,7 +255,9 @@ void LogoScene::InitPhase4()
     DateTimeTest().Evaluate();
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
-    
+  
+    auto b = File::ReadAllBytes("E:/Users/ggomdyu/Desktop/a.cpp");
+    const char* p = (const char*)&(b.value())[0];
     int n = 3;
 
     //// Range 클래스에서 써보자

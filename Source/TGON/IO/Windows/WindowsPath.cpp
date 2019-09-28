@@ -31,7 +31,6 @@ int32_t Path::GetFullPath(const std::string_view& path, char* destStr, int32_t d
     auto destStrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&utf16FullPath[0]), static_cast<int32_t>(utf16FullPathLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
     if (destStrLen == -1)
     {
-
         return -1;
     }
 

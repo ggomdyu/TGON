@@ -2,24 +2,31 @@
 
 #include <Windows.h>
 
-#include "String/Encoding.h"
-#include "Misc/Algorithm.h"
 #include "Diagnostics/Debug.h"
+#include "Misc/Algorithm.h"
+#include "String/Encoding.h"
 
 #include "../FileStream.h"
 
 namespace tgon
 {
+
+thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+
 namespace
 {
 
-HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+HANDLE CreateFileOpenHandle(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    auto utf16Path = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&path[0]), path.size() + 1);
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    {
+        return {};
+    }
+
     auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
 
     bool useSecurityAttributes = UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable);
-    SECURITY_ATTRIBUTES securityAttributes{};
+    SECURITY_ATTRIBUTES securityAttributes {};
     if (useSecurityAttributes)
     {
         if ((UnderlyingCast(share) & UnderlyingCast(FileShare::Inheritable)) != 0)
@@ -33,12 +40,12 @@ HANDLE CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess a
     // So we have to add the below flags because of this security vulnerability.
     DWORD flagsAndAttributes = UnderlyingCast(options) | SECURITY_SQOS_PRESENT | SECURITY_ANONYMOUS;
 
-    return CreateFileW(reinterpret_cast<LPCWSTR>(utf16Path.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
+    return CreateFileW(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
 } /* namespace */
 
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
     m_bufferSize(bufferSize),
     m_readPos(0),
@@ -104,7 +111,7 @@ void FileStream::FlushWriteBuffer()
     m_writePos = 0;
 }
 
-int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
+int32_t FileStream::ReadCore(std::byte* buffer, int32_t count)
 {
     DWORD readBytes = 0;
     if (ReadFile(m_nativeHandle, buffer, count, &readBytes, nullptr) == FALSE)
@@ -116,7 +123,7 @@ int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
     return readBytes;
 }
 
-int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t bufferBytes)
+int32_t FileStream::WriteCore(const std::byte* buffer, int32_t bufferBytes)
 {
     DWORD writtenBytes = 0;
     if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
