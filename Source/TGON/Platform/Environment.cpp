@@ -156,4 +156,9 @@ std::string Environment::GetStackTrace()
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
+std::optional<std::string> Environment::GetSystemDirectory()
+{
+    return GetFolderPath(SpecialFolder::System);
+}
+    
 } /* namespace tgon */

@@ -14,16 +14,16 @@ int32_t Path::GetFullPath(const std::string_view& path, char* destStr, int32_t d
     return 0;
 }
     
-Span<const char> Path::GetInvalidFileNameChars() noexcept
+gsl::span<const char> Path::GetInvalidFileNameChars() noexcept
 {
     constexpr char invalidFileNameChars[] = {'\0', 'a'};
-    return Span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
+    return gsl::span(invalidFileNameChars, std::extent_v<decltype(invalidFileNameChars)> - 1);
 }
     
-Span<const char> Path::GetInvalidPathChars() noexcept
+gsl::span<const char> Path::GetInvalidPathChars() noexcept
 {
     constexpr char invalidPathChars[] = {'\0'};
-    return Span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
+    return gsl::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 
 int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)

@@ -172,25 +172,22 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
 
 const std::string& Environment::GetCommandLine()
 {
-    return GetCommandLineArgs()[0];
-}
-
-const std::vector<std::string>& Environment::GetCommandLineArgs()
-{
-    static std::vector<std::string> commandLines = []()
+    static std::string commandLine = []()
     {
-        std::vector<std::string> ret;
+        std::string ret;
         for (NSString* commandLine in [[NSProcessInfo processInfo] arguments])
         {
-            ret.push_back([commandLine UTF8String]);
+            ret += [commandLine UTF8String];
+            ret += " ";
         }
         
+        ret.pop_back();
         return ret;
     } ();
     
-    return commandLines;
+    return commandLine;
 }
-    
+
 int64_t Environment::GetTickCount()
 {
     return mach_absolute_time() * 0.000001f;

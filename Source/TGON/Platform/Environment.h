@@ -128,6 +128,7 @@ public:
     [[noreturn]] static void FailFast(const std::string_view& message, const std::exception& exception);
     static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
     static std::string GetStackTrace();
+    static std::optional<std::string> GetSystemDirectory();
         /*
     public static IDictionary GetEnvironmentVariables();
     public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
@@ -146,8 +147,7 @@ public:
     public static bool UserInteractive{ get; }
     public static long WorkingSet{ get; }
     public static string[] GetLogicalDrives();
-    public static int ExitCode{ get; set; }
-    public static string SystemDirectory{ get; }*/
+    public static int ExitCode{ get; set; }*/
 };
 
 template <int32_t Length>
