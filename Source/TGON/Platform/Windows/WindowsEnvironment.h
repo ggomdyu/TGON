@@ -12,6 +12,7 @@
 #   undef GetCurrentDirectory
 #   undef GetCommandLine
 #   undef GetEnvironmentVariable
+#   undef GetSystemDirectory
 #   undef GetUserName
 #   undef GetTempPath
 #endif

@@ -2,7 +2,6 @@
  * @file    WELL1024a.h
  * @author  ggomdyu
  * @since   05/05/2017
- * @brief   Fast uniform random number generators.
  * @see     http://www.iro.umontreal.ca/~panneton/WELLRNG.html
  */
 

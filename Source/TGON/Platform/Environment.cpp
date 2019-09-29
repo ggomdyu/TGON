@@ -61,7 +61,7 @@ std::optional<std::string> Environment::GetEnvironmentVariable(const std::string
     return {};
 }
 
-std::optional<std::string> Environment::GetCurrentDirectory()
+std::string Environment::GetCurrentDirectory()
 {
     auto strLen = GetCurrentDirectory(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)

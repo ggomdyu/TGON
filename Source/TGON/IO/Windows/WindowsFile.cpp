@@ -16,7 +16,7 @@ thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
 namespace
 {
 
-#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
+#if !defined(S_ISREG)
 constexpr bool S_ISREG(unsigned short m) noexcept
 {
     return (m & S_IFMT) == S_IFREG;
@@ -25,13 +25,12 @@ constexpr bool S_ISREG(unsigned short m) noexcept
 
 std::optional<struct _stat> CreateStat(const std::string_view& path)
 {
-    struct _stat s;
-
     if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return {};
     }
 
+    struct _stat s;
     if (_wstat(reinterpret_cast<const wchar_t*>(g_tempUtf16Buffer.data()), &s) != 0)
     {
         return {};
@@ -42,7 +41,7 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
 
 } /* namespace */
 
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept
+bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite)
 {
     auto utf16SrcPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&srcPath[0]), srcPath.size() + 1);
     auto utf16DestPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&destPath[0]), destPath.size() + 1);
@@ -52,7 +51,8 @@ bool File::Copy(const std::string_view& srcPath, const std::string_view& destPat
 
 bool File::Delete(const std::string_view& path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    auto s = CreateStat(path);
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
     }
@@ -73,17 +73,17 @@ bool File::Exists(const std::string_view& path)
 
 bool File::Move(const std::string_view& srcPath, const std::string_view& destPath)
 {
-    const wchar_t* utf16SrcPath = &g_tempUtf16Buffer[0];
-    auto utf16SrcPathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(srcPath.data()), static_cast<int32_t>(srcPath.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
-    if (utf16SrcPathBytes == -1)
+    auto s = CreateStat(srcPath);
+    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
     }
 
-    auto utf16PathLen = utf16SrcPathBytes / 2;
-    wchar_t* utf16DestPath = &g_tempUtf16Buffer[utf16PathLen + 1];
-    auto utf16DestPathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath.data()), static_cast<int32_t>(destPath.size()), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathBytes + 2)));
-    if (utf16DestPathBytes == -1)
+    wchar_t* utf16SrcPath = &g_tempUtf16Buffer[0];
+    auto utf16SrcPathLen = wcslen(utf16SrcPath);
+
+    wchar_t* utf16DestPath = &g_tempUtf16Buffer[utf16SrcPathLen + 1];
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath.data()), static_cast<int32_t>(destPath.size()), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
     {
         return false;
     }
@@ -94,7 +94,7 @@ bool File::Move(const std::string_view& srcPath, const std::string_view& destPat
 std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false)
     {
         return {};
     }
@@ -105,7 +105,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false)
     {
         return {};
     }
@@ -120,6 +120,7 @@ bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& crea
         return false;
     }
 
+    // TODO: Support directory
     SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
@@ -143,6 +144,7 @@ bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& la
         return false;
     }
 
+    // TODO: Support directory
     SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
@@ -166,6 +168,7 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
         return false;
     }
 
+    // TODO: Support directory
     SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
@@ -185,7 +188,7 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
 std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
 {
     auto s = CreateStat(path);
-    if (s.has_value() == false || S_ISREG(s->st_mode) == false)
+    if (s.has_value() == false)
     {
         return {};
     }
@@ -229,44 +232,10 @@ bool File::Encrypt(const std::string_view& path)
     return EncryptFileW(g_tempUtf16Buffer.data()) == TRUE;
 }
 
-std::string File::ReadAllText(const std::string_view& path)
-{
-    return ReadAllText(path, Encoding::UTF8());
-}
-
 std::string File::ReadAllText(const std::string_view& path, const Encoding& encoding)
 {
+    // TODO: Implement
     return std::string(nullptr);
-}
-
-FileStream File::Create(const std::string_view& path)
-{
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
-}
-
-FileStream File::Create(const std::string_view& path, int32_t bufferSize)
-{
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
-}
-
-FileStream File::Create(const std::string_view& path, int32_t bufferSize, FileOptions options)
-{
-    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
-}
-
-FileStream File::Open(const std::string_view& path, FileMode mode)
-{
-    return Open(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None);
-}
-
-FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access)
-{
-    return Open(path, mode, access, FileShare::None);
-}
-
-FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access, FileShare share)
-{
-    return FileStream(path, mode, access, share);
 }
 
 } /* namespace tgon */

@@ -6,8 +6,14 @@
 
 #pragma once
 #include <string>
+#include <optional>
+#include <vector>
 
 #include "Platform/Config.h"
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsDirectory.h"
+#endif
 
 namespace tgon
 {
@@ -20,8 +26,7 @@ public:
     
 public:
 //    static DirectoryInfo CreateDirectory(const std::string_view& path);
-//    static void Delete(const std::string_view& path);
-//    static void Delete(const std::string_view& path, bool recursive);
+    static bool Delete(const std::string_view& path, bool recursive = false);
 //    static IEnumerable<string> EnumerateDirectories(const std::string_view& path);
 //    static IEnumerable<string> EnumerateDirectories(const std::string_view& path, const std::string_view& searchPattern);
 //    static IEnumerable<string> EnumerateDirectories(const std::string_view& path, const std::string_view& searchPattern, SearchOption searchOption);
@@ -34,16 +39,16 @@ public:
 //    static IEnumerable<string> EnumerateFileSystemEntries(const std::string_view& path, const std::string_view& searchPattern);
 //    static IEnumerable<string> EnumerateFileSystemEntries(const std::string_view& path, const std::string_view& searchPattern, SearchOption searchOption);
 //    static IEnumerable<string> EnumerateFileSystemEntries(const std::string_view& path, const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    static bool Exists(const std::string_view& path);
+    static bool Exists(const std::string_view& path);
 //    static DateTime GetCreationTime(const std::string_view& path);
 //    static DateTime GetCreationTimeUtc(const std::string_view& path);
-//    static std::string GetCurrentDirectory();
-//    static string[] GetDirectories(const std::string_view& path);
+    static std::string GetCurrentDirectory();
+    static std::vector<std::string> GetDirectories(const std::string_view& path);
 //    static string[] GetDirectories(const std::string_view& path, const std::string_view& searchPattern);
 //    static string[] GetDirectories(const std::string_view& path, const std::string_view& searchPattern, SearchOption searchOption);
 //    static string[] GetDirectories(const std::string_view& path, const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
 //    static string GetDirectoryRoot(const std::string_view& path);
-//    static string[] GetFiles(const std::string_view& path);
+    static std::vector<std::string> GetFiles(const std::string_view& path);
 //    static string[] GetFiles(const std::string_view& path, const std::string_view& searchPattern);
 //    static string[] GetFiles(const std::string_view& path, const std::string_view& searchPattern, SearchOption searchOption);
 //    static string[] GetFiles(const std::string_view& path, const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
@@ -55,9 +60,9 @@ public:
 //    static DateTime GetLastAccessTimeUtc(const std::string_view& path);
 //    static DateTime GetLastWriteTime(const std::string_view& path);
 //    static DateTime GetLastWriteTimeUtc(const std::string_view& path);
-//    static string[] GetLogicalDrives();
+    static std::vector<std::string> GetLogicalDrives();
 //    static DirectoryInfo GetParent(const std::string_view& path);
-//    static void Move(const std::string_view& sourceDirName, const std::string_view& destDirName);
+    static bool Move(const std::string_view& srcPath, const std::string_view& destPath);
 //    static void SetCreationTime(const std::string_view& path, DateTime creationTime);
 //    static void SetCreationTimeUtc(const std::string_view& path, DateTime creationTimeUtc);
 //    static void SetCurrentDirectory(const std::string_view& path);
@@ -65,7 +70,6 @@ public:
 //    static void SetLastAccessTimeUtc(const std::string_view& path, DateTime lastAccessTimeUtc);
 //    static void SetLastWriteTime(const std::string_view& path, DateTime lastWriteTime);
 //    static void SetLastWriteTimeUtc(const std::string_view& path, DateTime lastWriteTimeUtc);
-
 };
 
 } /* namespace tgon */

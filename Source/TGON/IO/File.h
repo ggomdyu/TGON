@@ -45,8 +45,7 @@ public:
 
 /**@section Method */
 public:
-    static bool Copy(const std::string_view& srcPath, const std::string_view& destPath);
-    static bool Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite);
+    static bool Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite = false);
     static bool Delete(const std::string_view& path);
     static bool Exists(const std::string_view& path);
     static bool Move(const std::string_view& srcPath, const std::string_view& destPath);

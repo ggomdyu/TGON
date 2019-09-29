@@ -156,6 +156,11 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
     return encodedStrBytes;
 }
 
+int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const gsl::span<std::byte>& srcBytes, const gsl::span<std::byte>& destBytes)
+{
+    return Convert(srcEncoding, destEncoding, &srcBytes[0], srcBytes.size(), &destBytes[0], destBytes.size());
+}
+
 std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) const
 {
     std::vector<char32_t> ret;
@@ -182,6 +187,11 @@ std::vector<char32_t> Encoding::GetChars(const std::byte* bytes, int32_t count) 
     return ret;
 }
 
+std::vector<char32_t> Encoding::GetChars(const gsl::span<std::byte>& bytes) const
+{
+    return GetChars(&bytes[0], bytes.size());
+}
+
 int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
 {
     int32_t ret = 0;
@@ -206,6 +216,11 @@ int32_t Encoding::GetCharCount(const std::byte* bytes, int32_t count) const
     }
 
     return ret;
+}
+
+int32_t Encoding::GetCharCount(const gsl::span<std::byte>& bytes) const
+{
+    return GetCharCount(&bytes[0], bytes.size());
 }
 
 const std::string_view& Encoding::GetEncodingName() const noexcept

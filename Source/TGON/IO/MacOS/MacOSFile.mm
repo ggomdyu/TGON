@@ -56,39 +56,6 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
     return [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:[NSString stringWithUTF8String:path.data()] error:nil];
 }
 
-std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-   
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_birthtimespec.tv_sec);
-}
-
-std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-    
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atimespec.tv_sec);
-}
-
-std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_mtimespec.tv_sec);
-}
-
 bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite)
 {
     if (overwrite)

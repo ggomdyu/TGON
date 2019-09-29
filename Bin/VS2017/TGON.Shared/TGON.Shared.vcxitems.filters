@@ -1053,6 +1053,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Random\Random.cpp">
       <Filter>Source\TGON\Random</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Directory.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\PrecompiledHeader.h">
@@ -2470,6 +2473,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\Core\NonAddressable.h">
       <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\DirectoryInfo.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\TGON\IO\Directory.h">
+      <Filter>Source\TGON\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

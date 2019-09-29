@@ -10,77 +10,6 @@
 
 namespace tgon
 {
-namespace
-{
-    
-#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
-constexpr bool S_ISREG(unsigned short m) noexcept
-{
-    return (m & S_IFMT) == S_IFREG;
-}
-#endif
-    
-} /* namespace */
-
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath)
-{
-    return Copy(srcPath, destPath, false);
-}
-
-#if TGON_PLATFORM_WINDOWS == 0
-bool File::Delete(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return false;
-    }
-    
-    return remove(path.data()) == 0;
-}
-
-bool File::Exists(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return false;
-    }
-    
-    return true;
-}
-
-bool File::Move(const std::string_view& srcPath, const std::string_view& destPath)
-{
-    return std::rename(srcPath.data(), destPath.data()) == 0;
-}
-
-#if TGON_PLATFORM_MACOS == 0
-std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_atime);
-}
-#endif
-
-#if TGON_PLATFORM_MACOS == 0
-std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
-{
-    struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
-    {
-        return {};
-    }
-
-    return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_mtime);
-}
-#endif
-#endif
 
 std::optional<DateTime> File::GetCreationTime(const std::string_view& path)
 {
@@ -151,6 +80,41 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const std::string_view&
     }
 
     return ret;
+}
+
+std::string File::ReadAllText(const std::string_view& path)
+{
+    return ReadAllText(path, Encoding::UTF8());
+}
+
+FileStream File::Create(const std::string_view& path)
+{
+    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
+}
+
+FileStream File::Create(const std::string_view& path, int32_t bufferSize)
+{
+    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
+}
+
+FileStream File::Create(const std::string_view& path, int32_t bufferSize, FileOptions options)
+{
+    return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
+}
+
+FileStream File::Open(const std::string_view& path, FileMode mode)
+{
+    return Open(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None);
+}
+
+FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access)
+{
+    return Open(path, mode, access, FileShare::None);
+}
+
+FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access, FileShare share)
+{
+    return FileStream(path, mode, access, share);
 }
 
 } /* namespace tgon */

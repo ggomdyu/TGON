@@ -10,9 +10,9 @@
 #include <array>
 #include <sstream>
 
-#pragma pack( push, before_imagehlp, 8 )
+#pragma pack(push, before_imagehlp, 8)
 #include <imagehlp.h>
-#pragma pack( pop, before_imagehlp )
+#pragma pack(pop, before_imagehlp)
 
 #include "Diagnostics/Debug.h"
 #include "String/Encoding.h"
@@ -78,6 +78,11 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* 
     return -1;
 }
 
+int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const gsl::span<char>& destStr)
+{
+    return GetEnvironmentVariable(name, &destStr[0], destStr.size());
+}
+
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
     auto utf16StrLen = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
@@ -95,6 +100,11 @@ int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen
     return -1;
 }
 
+int32_t Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
+{
+    return GetCurrentDirectory(&destStr[0], destStr.size());
+}
+
 int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
     if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16Buffer.data()) == S_OK)
@@ -107,6 +117,11 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
     }
 
     return -1;
+}
+
+int32_t Environment::GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr)
+{
+    return GetFolderPath(folder, &destStr[0], destStr.size());
 }
 
 const std::string& Environment::GetCommandLine()
@@ -215,6 +230,11 @@ int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
     return -1;
 }
 
+int32_t Environment::GetUserName(const gsl::span<char>& destStr)
+{
+    return GetUserName(&destStr[0], destStr.size());
+}
+
 int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 {
     DWORD utf16BufferLen = g_tempUtf16Buffer.size();
@@ -228,6 +248,11 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
     }
 
     return -1;
+}
+
+int32_t Environment::GetMachineName(const gsl::span<char>& destStr)
+{
+    return GetMachineName(&destStr[0], destStr.size());
 }
 
 int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
@@ -265,6 +290,11 @@ int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
     }
 
     return -1;
+}
+
+int32_t Environment::GetUserDomainName(const gsl::span<char>& destStr)
+{
+    return GetUserDomainName(&destStr[0], destStr.size());
 }
 
 DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destStrBufferLen, int32_t* destStrLen)

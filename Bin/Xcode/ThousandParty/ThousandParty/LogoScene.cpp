@@ -249,14 +249,19 @@ void LogoScene::InitPhase4()
 {
    /* constexpr bool a = has_begin_end<std::vector<int>>::beg_value;
     constexpr bool b = has_begin_end<int>::beg_value;*/
-    bool a = File::Copy("/Users/chajunho/Desktop/c.jpg", "/Users/chajunho/Desktop/b.pdf", true);
-    auto st = Environment::GetStackTrace();
-    auto qwexqb = Path::GetFullPath("Hallo my name is CHA");
 
-    FixedStringTest().Evaluate();
-    DateTimeTest().Evaluate();
-    PathTest().Evaluate();
-    FileStreamTest().Evaluate();
+    //FixedStringTest().Evaluate();
+    //DateTimeTest().Evaluate();
+    //PathTest().Evaluate();
+    //FileStreamTest().Evaluate();
+  
+    auto csdf = Directory::GetLogicalDrives();
+    auto dir = Directory::GetDirectories("E:/Users/ggomdyu/Desktop/A1");
+    auto dir2 = Directory::GetFiles("E:/Users/ggomdyu/Desktop/A1");
+    int n = 3;
+
+    auto aa2 = Directory::Delete("E:/Users/ggomdyu/Desktop/A1");
+    auto aa3 = Directory::Delete("E:/Users/ggomdyu/Desktop/A2", true);
   
     //// Range 클래스에서 써보자
     ///*HasBeginEnd<std::vector<int>>::TypeCheckFunc<std::vector<int>>(1);
