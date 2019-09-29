@@ -5,14 +5,15 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <gainput/gainput.h>
+
+#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 class TGON_API MacOSInputManager :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Method */
 public:

@@ -5,15 +5,14 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
+#include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
 namespace tgon
 {
 
 class TGON_API MacOSApplication :
-    private boost::noncopyable
+    private NonCopyable
 {
 };
 

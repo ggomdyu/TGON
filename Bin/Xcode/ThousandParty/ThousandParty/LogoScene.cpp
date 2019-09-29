@@ -1,4 +1,4 @@
-﻿#include "PrecompiledHeader.h"
+#include "PrecompiledHeader.h"
 
 #include <functional>
 #include <atomic>
@@ -14,6 +14,7 @@
 #include "Graphics/TextureAtlas.h"
 #include "String/UnicodeScalar.h"
 #include "IO/FileStream.h"
+#include "IO/Directory.h"
 #include "Time/TimeZoneInfo.h"
 #include "./../Test/Time/DateTimeTest.h"
 #include "./../Test/String/FixedStringTest.h"
@@ -248,6 +249,7 @@ void LogoScene::InitPhase4()
 {
    /* constexpr bool a = has_begin_end<std::vector<int>>::beg_value;
     constexpr bool b = has_begin_end<int>::beg_value;*/
+    bool a = File::Copy("/Users/chajunho/Desktop/c.jpg", "/Users/chajunho/Desktop/b.pdf", true);
     auto st = Environment::GetStackTrace();
     auto qwexqb = Path::GetFullPath("Hallo my name is CHA");
 
@@ -256,10 +258,6 @@ void LogoScene::InitPhase4()
     PathTest().Evaluate();
     FileStreamTest().Evaluate();
   
-    auto b = File::ReadAllBytes("E:/Users/ggomdyu/Desktop/a.cpp");
-    const char* p = (const char*)&(b.value())[0];
-    int n = 3;
-
     //// Range 클래스에서 써보자
     ///*HasBeginEnd<std::vector<int>>::TypeCheckFunc<std::vector<int>>(1);
     //HasBeginEnd<std::vector<int>>::TypeCheckFunc<int>(1);*/

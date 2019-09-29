@@ -1,11 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#include <array>
 #include <Foundation/Foundation.h>
 #include <mach/mach_time.h>
 #include <sys/utsname.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <array>
+#include <execinfo.h>
 
 #include "../Environment.h"
 
@@ -211,6 +212,27 @@ std::string_view Environment::GetNewLine()
 int32_t Environment::GetSystemPageSize()
 {
     return static_cast<int32_t>(getpagesize());
+}
+
+int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
+{
+    std::array<void*, 256> addr;
+    int numFrames = backtrace(addr.data(), static_cast<int>(addr.size()));
+    if (numFrames <= 0)
+    {
+        return -1;
+    }
+    
+    int32_t destStrLen = 0;
+    char** symbols = backtrace_symbols(addr.data(), numFrames);
+    for (int i = 0; i < numFrames; ++i)
+    {
+        destStrLen += sprintf(&destStr[destStrLen], "%s\n", symbols[i]);
+    }
+    
+    free(symbols);
+    
+    return destStrLen;
 }
 
 } /* namespace tgon */

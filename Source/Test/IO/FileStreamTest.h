@@ -100,7 +100,7 @@ public:
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 340 && f2.m_writePos == 0 && cc3 == -1);
             auto cc4 = (char)f2.ReadByte();
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 340 && f2.m_writePos == 0 && cc4 == -1);
-            f2.WriteByte(255);
+            f2.WriteByte(std::byte(255));
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 340 && f2.m_writePos == 1 && f2.m_buffer[5] == std::byte(51) && f2.m_buffer[20] == std::byte(51) && f2.m_buffer[50] == std::byte(102) && f2.m_buffer[80] == std::byte(52) && f2.m_buffer[110] == std::byte(51) && f2.m_buffer[120] == std::byte(102));
             f2.Seek(50, SeekOrigin::Current);
             assert(f2.m_readLen == 0 && f2.m_readPos == 0 && f2.m_filePos == 391 && f2.m_writePos == 0 && f2.m_buffer[5] == std::byte(51) && f2.m_buffer[20] == std::byte(51) && f2.m_buffer[50] == std::byte(102) && f2.m_buffer[80] == std::byte(52) && f2.m_buffer[110] == std::byte(51) && f2.m_buffer[120] == std::byte(102));

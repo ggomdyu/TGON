@@ -26,7 +26,7 @@ constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess ac
     return fopenModeTable[static_cast<int32_t>(mode) - 1][static_cast<int32_t>(access) - 1];
 }
 
-FILE* CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess access)
+FILE* CreateFileOpenHandle(const std::string_view& path, FileMode mode, FileAccess access)
 {
     if (mode == FileMode::OpenOrCreate && File::Exists(path) == false)
     {
@@ -38,7 +38,7 @@ FILE* CreateFileOpenHandle(const std::string& path, FileMode mode, FileAccess ac
 
 } /* namespace */
 
-FileStream::FileStream(const std::string& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access)),
     m_bufferSize(bufferSize),
     m_readPos(0),
@@ -98,7 +98,7 @@ void FileStream::FlushWriteBuffer()
     m_writePos = 0;
 }
 
-int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
+int32_t FileStream::ReadCore(std::byte* buffer, int32_t count)
 {
     auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (readBytes == static_cast<decltype(readBytes)>(-1))
@@ -110,7 +110,7 @@ int32_t FileStream::ReadCore(uint8_t* buffer, int32_t count)
     return static_cast<int32_t>(readBytes);
 }
 
-int32_t FileStream::WriteCore(const uint8_t* buffer, int32_t count)
+int32_t FileStream::WriteCore(const std::byte* buffer, int32_t count)
 {
     auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (writtenBytes == static_cast<decltype(writtenBytes)>(-1))

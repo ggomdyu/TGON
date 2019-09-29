@@ -95,9 +95,9 @@ public:
     virtual void Lock(long position, long length)
     virtual void Unlock(long position, long length)
     */
-
-protected:
     bool IsClosed() const noexcept;
+    
+protected:
     std::vector<std::byte>& GetBuffer() noexcept;
     void FlushWriteBuffer();
     void FlushReadBuffer();

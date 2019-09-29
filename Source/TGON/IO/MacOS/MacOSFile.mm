@@ -89,4 +89,16 @@ std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s.st_mtimespec.tv_sec);
 }
 
+bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite)
+{
+    if (overwrite)
+    {
+        Delete(destPath);
+    }
+    
+    NSString* nsSrcPath = [NSString stringWithUTF8String:srcPath.data()];
+    NSString* nsDestPath = [NSString stringWithUTF8String:destPath.data()];
+    return [[NSFileManager defaultManager] copyItemAtPath:nsSrcPath toPath:nsDestPath error:nil];
+}
+
 } /* namespace tgon */

@@ -4,7 +4,6 @@
 #include <array>
 #include <sys/stat.h>
 
-#include "String/Encoding.h"
 #include "Time/TimeZoneInfo.h"
 
 #include "File.h"
@@ -23,21 +22,20 @@ constexpr bool S_ISREG(unsigned short m) noexcept
     
 } /* namespace */
 
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath) noexcept
+bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath)
 {
     return Copy(srcPath, destPath, false);
 }
 
 #if TGON_PLATFORM_WINDOWS == 0
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite) noexcept
-{
-    Delete(srcPath);
-
-    return true;
-}
-
 bool File::Delete(const std::string_view& path)
 {
+    struct stat s;
+    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    {
+        return false;
+    }
+    
     return remove(path.data()) == 0;
 }
 
@@ -135,7 +133,7 @@ bool File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWr
 std::optional<std::vector<std::byte>> File::ReadAllBytes(const std::string_view& path)
 {
     FileStream fs(path.data(), FileMode::Open, FileAccess::Read, FileShare::Read);
-    if (fs.Length() > INT_MAX)
+    if (fs.IsClosed() || fs.Length() > INT_MAX)
     {
         return {};
     }

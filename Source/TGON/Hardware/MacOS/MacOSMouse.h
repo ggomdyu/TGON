@@ -5,10 +5,10 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
 #include <gainput/gainput.h>
 #include <cstdint>
 
+#include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
 namespace tgon
@@ -45,7 +45,7 @@ enum class MouseCode
 };
 
 class TGON_API MacOSMouse :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:

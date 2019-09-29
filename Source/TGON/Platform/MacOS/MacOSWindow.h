@@ -6,8 +6,7 @@
  */
 
 #pragma once
-#include <boost/noncopyable.hpp>
-
+#include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
 @class NSWindow;
@@ -17,7 +16,7 @@ namespace tgon
 {
 
 class TGON_API MacOSWindow :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 protected:
