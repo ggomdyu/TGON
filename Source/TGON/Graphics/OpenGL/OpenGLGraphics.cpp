@@ -5,12 +5,15 @@
 
 #include "Platform/Window.h"
 
-#include "OpenGLGraphics.h"
 #include "OpenGLDebug.h"
+
+#include "../Graphics.h"
 
 namespace tgon
 {
-
+namespace
+{
+    
 constexpr GLenum ConvertPrimitiveTypeToNative(PrimitiveType primitiveType) noexcept
 {
     constexpr GLenum nativePrimitiveTypes[] = {
@@ -45,8 +48,10 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
     
     return nativecullModes[static_cast<int>(cullMode)];
 }
+    
+} /* namespace */
 
-OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
+Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
     m_context(displayTarget, videoMode),
     m_vertexArrayHandle(0)
 {
@@ -60,7 +65,7 @@ OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& vid
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 }
 
-OpenGLGraphics::~OpenGLGraphics()
+Graphics::~Graphics()
 {
     if (m_vertexArrayHandle != 0)
     {
@@ -75,32 +80,32 @@ void OpenGLGraphics::SetDefaultGLRenderState()
     this->EnableCullFace();
 }
 
-void OpenGLGraphics::SetScissorRect(const FRect& scissorRect)
+void Graphics::SetScissorRect(const FRect& scissorRect)
 {
     TGON_GL_ERROR_CHECK(glScissor(static_cast<GLint>(scissorRect.x), static_cast<GLint>(scissorRect.y), static_cast<GLint>(scissorRect.width), static_cast<GLint>(scissorRect.height)));
 }
 
-void OpenGLGraphics::SetClearColor(const Color4f& color)
+void Graphics::SetClearColor(const Color4f& color)
 {
     TGON_GL_ERROR_CHECK(glClearColor(color.r, color.g, color.b, color.a));
 }
 
-void OpenGLGraphics::SetFillMode(FillMode fillMode)
+void Graphics::SetFillMode(FillMode fillMode)
 {
     TGON_GL_ERROR_CHECK(glPolygonMode(GL_FRONT_AND_BACK, ConvertFillModeToNative(fillMode)));
 }
 
-void OpenGLGraphics::SetCullMode(CullMode cullMode)
+void Graphics::SetCullMode(CullMode cullMode)
 {
     TGON_GL_ERROR_CHECK(glFrontFace(ConvertCullModeToNative(cullMode)));
 }
 
-void OpenGLGraphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
+void Graphics::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
 {
     TGON_GL_ERROR_CHECK(glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 }
     
-void OpenGLGraphics::SetBlendMode(BlendMode blendMode)
+void Graphics::SetBlendMode(BlendMode blendMode)
 {
     switch (blendMode)
     {
@@ -126,67 +131,67 @@ void OpenGLGraphics::SetBlendMode(BlendMode blendMode)
     }
 }
 
-void OpenGLGraphics::EnableCullFace()
+void Graphics::EnableCullFace()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_CULL_FACE));
 }
     
-void OpenGLGraphics::EnableBlend()
+void Graphics::EnableBlend()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_BLEND));
 }
 
-void OpenGLGraphics::EnableDepthTest()
+void Graphics::EnableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_DEPTH_TEST));
 }
 
-void OpenGLGraphics::EnableScissorTest()
+void Graphics::EnableScissorTest()
 {
     TGON_GL_ERROR_CHECK(glEnable(GL_SCISSOR_TEST));
 }
     
-void OpenGLGraphics::DisableCullFace()
+void Graphics::DisableCullFace()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_CULL_FACE));
 }
 
-void OpenGLGraphics::DisableBlend()
+void Graphics::DisableBlend()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_BLEND));
 }
 
-void OpenGLGraphics::DisableDepthTest()
+void Graphics::DisableDepthTest()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_DEPTH_TEST));
 }
 
-void OpenGLGraphics::DisableScissorTest()
+void Graphics::DisableScissorTest()
 {
     TGON_GL_ERROR_CHECK(glDisable(GL_SCISSOR_TEST));
 }
 
-void OpenGLGraphics::ClearColorBuffer()
+void Graphics::ClearColorBuffer()
 {
     TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT));
 }
 
-void OpenGLGraphics::ClearColorDepthBuffer()
+void Graphics::ClearColorDepthBuffer()
 {
     TGON_GL_ERROR_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
-void OpenGLGraphics::SwapBuffer()
+void Graphics::SwapBuffer()
 {
     m_context.SwapBuffer();
 }
 
-void OpenGLGraphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount)
+void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount)
 {
     glDrawArrays(ConvertPrimitiveTypeToNative(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount);
 }
     
-void OpenGLGraphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
+void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
     glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
 }
