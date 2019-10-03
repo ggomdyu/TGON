@@ -5,14 +5,14 @@
 namespace tgon
 {
 
-PlatformVertexBuffer* VertexBuffer::GetPlatformDependency() noexcept
+PlatformVertexBuffer& VertexBuffer::GetPlatformDependency() noexcept
 {
-    return this;
+    return *this;
 }
 
-const PlatformVertexBuffer* VertexBuffer::GetPlatformDependency() const noexcept
+const PlatformVertexBuffer& VertexBuffer::GetPlatformDependency() const noexcept
 {
-    return this;
+    return *this;
 }
 
 } /* namespace tgon */

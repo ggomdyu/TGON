@@ -10,8 +10,6 @@
 #include "Math/Vector3.h"
 #include "Math/Rect.h"
 
-#include "GraphicsType.h"
-
 namespace tgon
 {
     

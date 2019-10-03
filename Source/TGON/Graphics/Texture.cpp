@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "String/Hash.h"
-
 #include "Texture.h"
 
 namespace tgon

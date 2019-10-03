@@ -31,7 +31,7 @@ std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName)
     return m_objects[iter->second];
 }
 
-const std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName) const
+std::shared_ptr<const GameObject> Scene::FindObject(const StringViewHash& objectName) const
 {
     return const_cast<Scene*>(this)->FindObject(objectName);
 }

@@ -8,8 +8,8 @@
 #include <memory>
 
 #include "Math/Rect.h"
-#include "Graphics/GraphicsType.h"
 #include "Graphics/Transform.h"
+#include "Graphics/Graphics.h"
 
 namespace tgon
 {

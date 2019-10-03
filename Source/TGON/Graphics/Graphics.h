@@ -53,19 +53,6 @@ enum class GraphicsSDK
     Vulkan,
 };
 
-struct VideoMode final
-{
-    Color4f clearColor = Color4f(0.0f, 0.44313f, 0.75686f, 1.0f);
-    bool enableHardwareAccelerate = true;
-    bool enableTripleBuffer = false;
-    bool enableVerticalSync = false;
-    bool enableMultiSampling = false;
-    uint16_t sampleCount = 16;
-    uint16_t colorBits = 32;
-    uint16_t depthBits;
-    uint16_t stencilBits;
-};
-
 enum class BlendMode
 {
     Normal,
@@ -85,12 +72,16 @@ class TGON_API Graphics final :
 {
 /**@section Constructor */
 public:
-    using PlatformGraphics::PlatformGraphics;
+    Graphics(const Window& displayTarget, const VideoMode& videoMode);
+
+/**@section Destructor */
+public:
+    ~Graphics();
     
 /**@section Method */
 public:
-    PlatformGraphics* GetPlatformDependency() noexcept;
-    const PlatformGraphics* GetPlatformDependency() const noexcept;
+    PlatformGraphics& GetPlatformDependency() noexcept;
+    const PlatformGraphics& GetPlatformDependency() const noexcept;
     void SetScissorRect(const FRect& scissorRect);
     void SetClearColor(const Color4f& color);
     void SetFillMode(FillMode fillMode);

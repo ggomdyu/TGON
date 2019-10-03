@@ -5,7 +5,7 @@
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLDebug.h"
 
-#include "../VertexBufferType.h"
+#include "../VertexBuffer.h"
 
 namespace tgon
 {
@@ -67,7 +67,7 @@ void OpenGLVertexBuffer::SetData(const void* data, std::size_t dataBytes, bool i
     TGON_GL_ERROR_CHECK(glBufferData(GL_ARRAY_BUFFER, dataBytes, data, isDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 }
 
-void OpenGLVertexBuffer::SetVertexBufferLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
+void VertexBuffer::SetVertexBufferLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs)
 {
     m_vertexBufferLayoutDescs = vertexBufferLayoutDescs;
 }
@@ -98,11 +98,6 @@ void OpenGLVertexBuffer::Unuse()
     {
         TGON_GL_ERROR_CHECK(glDisableVertexAttribArray(GLuint(i)));
     }
-}
-
-bool OpenGLVertexBuffer::IsValid() const noexcept
-{
-    return m_vertexBufferHandle != 0;
 }
 
 GLuint OpenGLVertexBuffer::CreateVertexBufferHandle() const

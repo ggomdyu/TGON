@@ -72,7 +72,7 @@ class TGON_API Font final :
 {
 /**@section Constructor */
 public:
-    Font(const StringHash& filePath, FT_Library library);
+    Font(const char* filePath, FT_Library library);
     Font(std::unique_ptr<std::byte[]> fileData, std::size_t fileDataBytes, FT_Library library);
     Font(Font&& rhs) noexcept;
     
@@ -111,7 +111,7 @@ public:
 
 /**@section Method */
 public:
-    std::shared_ptr<Font> CreateFont(const StringHash& filePath) const;
+    std::shared_ptr<Font> CreateFont(const char* filePath) const;
 
 /**@section Variable */
 private:

@@ -49,39 +49,27 @@ void ConvertVideoModeToNative(const VideoMode& videoMode, NSOpenGLPixelFormatAtt
     attributes[attributeIndex++] = 0;
 }
 
+NSOpenGLPixelFormat* FindSuitablePixelFormat(const VideoMode& videoMode)
+{
+    NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
+    ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent_v<decltype(pixelFormatAttributes)>);
+
+    return [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
+}
+
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const Window& window, const VideoMode& videoMode)
+OpenGLContext::OpenGLContext(const Window& window, const VideoMode& videoMode) :
+    context([[NSOpenGLContext alloc] initWithFormat:FindSuitablePixelFormat(videoMode) shareContext:nil])
 {
-    // Find a suitable pixel format.
-    {
-        NSOpenGLPixelFormatAttribute pixelFormatAttributes[64];
-        ConvertVideoModeToNative(videoMode, pixelFormatAttributes, std::extent<decltype(pixelFormatAttributes)>::value);
-
-        pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:pixelFormatAttributes];
-        if (pixelFormat == nullptr)
-        {
-            throw std::runtime_error("Failed to initialize NSOpenGLPixelFormat.");
-        }
-    }
-
-    // Create a GL context through the selected pixel format.
-    {
-        context = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil];
-    }
-
-    // Create a GL View and attach it to thes target window.
     NSWindow* nativeWindow = (__bridge NSWindow*)window.GetNativeWindow();
-    {
-        NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
-        [openGLView setOpenGLContext:context];
-
-        // Now, we will use this context.
-        [[openGLView openGLContext] makeCurrentContext];
-
-        [nativeWindow setContentView:openGLView];
-    }
-
+    
+    // Create a NSOpenGLView and attach it to the target window.
+    NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];
+    [openGLView setOpenGLContext: context];
+    [[openGLView openGLContext] makeCurrentContext];
+    [nativeWindow setContentView:openGLView];
+    
     glewInit();
 }
 
@@ -95,13 +83,12 @@ OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
 
 OpenGLContext::~OpenGLContext()
 {
-	this->Destroy();
+	pixelFormat = nil;
+    context = nil;
 }
 
 OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
 {
-	this->Destroy();
-
     pixelFormat = rhs.pixelFormat;
     context = rhs.context;
         
@@ -119,12 +106,6 @@ void OpenGLContext::MakeCurrent()
 void OpenGLContext::SwapBuffer()
 {
     [context flushBuffer];
-}
-
-void OpenGLContext::Destroy()
-{
-    pixelFormat = nil;
-	context = nil;
 }
 
 } /* namespace tgon */

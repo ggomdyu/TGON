@@ -36,14 +36,14 @@ void ThousandParty::InitializeModule()
 
     // Input Module
     decltype(auto) rootWindow = Application::GetInstance().GetRootWindow();
-    /*InputMode inputMode;
+    InputMode inputMode;
     {
         inputMode.isUseMouse = false;
         inputMode.isUseKeyboard = true;
         inputMode.isUseGamepad = false;
     }
     this->RegisterModule<InputModule>(*rootWindow, inputMode);
-*/
+
     // Graphics Module
     VideoMode videoMode;
     {

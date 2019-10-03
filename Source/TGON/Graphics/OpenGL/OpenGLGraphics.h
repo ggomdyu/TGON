@@ -19,20 +19,12 @@ class TGON_API OpenGLGraphics :
 {
 /**@section Constructor */
 protected:
-    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) noexcept(false);
-    
-/**@section Destructor */
-protected:
-    ~OpenGLGraphics();
-
-/**@section Method */
-protected:
-    void SetDefaultGLRenderState();
+    OpenGLGraphics(OpenGLContext&& context);
     
 /**@section Variable */
 protected:
     OpenGLContext m_context;
-    GLuint m_vertexArrayHandle;
+    GLuint m_vertexArrayHandle = 0;
 };
 
 using PlatformGraphics = OpenGLGraphics;

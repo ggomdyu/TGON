@@ -48,12 +48,12 @@ public:
     
 inline int32_t Stream::Read(const gsl::span<std::byte>& buffer)
 {
-    return this->Read(&buffer[0], buffer.size());
+    return this->Read(&buffer[0], static_cast<int32_t>(buffer.size()));
 }
 
 inline bool Stream::Write(const gsl::span<const std::byte>& buffer)
 {
-    return this->Write(&buffer[0], buffer.size());
+    return this->Write(&buffer[0], static_cast<int32_t>(buffer.size()));
 }
 
 } /* namespace tgon */

@@ -5,14 +5,14 @@
 namespace tgon
 {
 
-PlatformGraphics* Graphics::GetPlatformDependency() noexcept
+PlatformGraphics& Graphics::GetPlatformDependency() noexcept
 {
-    return this;
+    return *this;
 }
 
-const PlatformGraphics* Graphics::GetPlatformDependency() const noexcept
+const PlatformGraphics& Graphics::GetPlatformDependency() const noexcept
 {
-    return this;
+    return *this;
 }
 
 } /* namespace tgon */

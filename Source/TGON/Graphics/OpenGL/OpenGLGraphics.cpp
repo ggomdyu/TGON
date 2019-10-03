@@ -52,17 +52,21 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
 } /* namespace */
 
 Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
-    m_context(displayTarget, videoMode),
-    m_vertexArrayHandle(0)
+    PlatformGraphics(OpenGLContext(displayTarget, videoMode))
 {
     // It is required because OpenGL expects (0, 0) coordinates to be the left bottom side, but images usually left top side.
     stbi_set_flip_vertically_on_load(true);
     stbi_flip_vertically_on_write(true);
     
-    this->SetDefaultGLRenderState();
+    this->EnableCullFace();
     
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+}
+
+OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) :
+    m_context(std::move(context))
+{
 }
 
 Graphics::~Graphics()
@@ -73,11 +77,6 @@ Graphics::~Graphics()
         TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
         m_vertexArrayHandle = 0;
     }
-}
-    
-void OpenGLGraphics::SetDefaultGLRenderState()
-{
-    this->EnableCullFace();
 }
 
 void Graphics::SetScissorRect(const FRect& scissorRect)

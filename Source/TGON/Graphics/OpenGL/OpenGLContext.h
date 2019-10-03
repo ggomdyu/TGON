@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN 1
@@ -17,15 +16,14 @@
 #endif
 
 #include "Core/NonCopyable.h"
+#include "Platform/Window.h"
 
-#include "../GraphicsType.h"
+#include "../VideoMode.h"
 
 namespace tgon
 {
 
-class Window;
-
-struct TGON_API OpenGLContext final :
+class TGON_API OpenGLContext final :
     private NonCopyable
 {
 /**@section Constructor */
@@ -43,14 +41,8 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Makes this context to main. */
     void MakeCurrent();
-    
-    /**@brief   Displays a back buffer image to screen. */
     void SwapBuffer();
-
-private:
-    void Destroy();
 
 /**@section Variable */
 public:
