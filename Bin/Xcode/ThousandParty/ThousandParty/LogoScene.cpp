@@ -154,7 +154,7 @@ void LogoScene::CreateGameObjects()
     object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
     object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
-    auto texture = std::make_shared<Texture>(desktopPath + "/2.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    auto texture = std::make_shared<Texture>(desktopPath + "/a.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
     spriteComponent->SetSprite(std::make_shared<UISprite>(texture));
     this->AddObject(object);
 }

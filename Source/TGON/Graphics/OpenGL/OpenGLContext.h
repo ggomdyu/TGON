@@ -44,6 +44,9 @@ public:
     void MakeCurrent();
     void SwapBuffer();
 
+private:
+    void Destroy();
+
 /**@section Variable */
 public:
 #if TGON_PLATFORM_WINDOWS

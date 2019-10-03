@@ -18,80 +18,23 @@ namespace tgon
 class TGON_API OpenGLShaderProgram :
     private NonCopyable
 {
-/**@section Enum */
-public:
-    enum class PredefinedUniformLocation
-    {
-        MatrixWVP,
-        Sampler,
-        BlendColor,
-        Ambient,
-        Specular,
-        Diffuse,
-        Emissive
-    };
-    
 /**@section Constructor */
-public:
-    OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
+protected:
+    explicit OpenGLShaderProgram(GLuint programId) noexcept;
     OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    ~OpenGLShaderProgram();
-
 /**@section Operator */
-public:
+protected:
     OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs) noexcept;
     
 /**@section Method */
-public:
-    void Use();
-    void Unuse();
-    void SetParameter1f(const char* name, float f);
-    void SetParameter2f(const char* name, float f1, float f2);
-    void SetParameter3f(const char* name, float f1, float f2, float f3);
-    void SetParameter4f(const char* name, float f1, float f2, float f3, float f4);
-    void SetParameterMatrix4fv(const char* name, const float* f);
-    void SetParameter1f(int32_t location, float f);
-    void SetParameter2f(int32_t location, float f1, float f2);
-    void SetParameter3f(int32_t location, float f1, float f2, float f3);
-    void SetParameter4f(int32_t location, float f1, float f2, float f3, float f4);
-    void SetParameterMatrix4fv(int32_t location, const float* f);
-    void SetParameterWVPMatrix4fv(const float* f);
-    void SetParameterSampler(int32_t location, uint32_t textureUnit, uint32_t texture);
-    void BindAttributeLocation(const char* name, uint32_t location);
-    int32_t GetUniformLocation(const char* name) const;
-    
-    /**@brief   Checks the shader was loaded successfully. */
-    bool IsValid() const noexcept;
-
-/**@section Method */
-private:
-    /**@brief   Links shaders to the program object. */
-    bool LinkShadersToProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
-
-    /**
-     * @brief                   Compiles shader and return the handle of it.
-     * @param [in]  shaderType  The type of shader: GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, etc
-     * @param [in]  shaderCode  The source code of shader.
-     * @return                  If the function fails, the return value is zero.
-     */
+protected:
     GLuint CompileShader(GLenum shaderType, const char* shaderCode) const;
-
-    /**
-     * @brief   Checks shader was compiled successfully.
-     * @return  Returns true if the compile was succeeded, false otherwise.
-     */
     bool IsShaderCompileSucceed(GLuint shaderId) const;
-
     std::string GetShaderInfoLog(GLuint shaderId) const;
     
-    void UpdateUniformLocationCache();
-    void ResetUniformCache();
-    
 /**@section Variable */
-public:
+protected:
     GLuint m_programId;
     std::array<int32_t, 8> m_uniformLocationCache;
 };

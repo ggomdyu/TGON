@@ -6,7 +6,6 @@
 
 #pragma once
 #include <GL/glew.h>
-#include <vector>
 
 #include "Platform/Config.h"
 #include "Core/NonCopyable.h"
@@ -14,34 +13,25 @@
 namespace tgon
 {
     
-struct VertexBufferLayoutDescriptor;
-
 class TGON_API OpenGLVertexBuffer :
     private NonCopyable
 {
 /**@section Constructor */
-public:
-    OpenGLVertexBuffer();
-    OpenGLVertexBuffer(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
+protected:
+    explicit OpenGLVertexBuffer(GLuint vertexBufferHandle) noexcept;
     OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) noexcept;
-
-/**@section Destructor */
-public:
-    ~OpenGLVertexBuffer();
     
 /**@section Operator */
-public:
-    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&& rhs) noexcept;
+protected:
+    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&& rhs);
 
 /**@section Method */
 protected:
-    GLuint CreateVertexBufferHandle() const;
     void Destroy();
 
 /**@section Variable */
 protected:
     GLuint m_vertexBufferHandle;
-    std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayoutDescs;
 };
 
 using PlatformVertexBuffer = OpenGLVertexBuffer;

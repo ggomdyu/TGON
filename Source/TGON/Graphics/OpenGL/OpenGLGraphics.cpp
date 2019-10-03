@@ -51,6 +51,11 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
     
 } /* namespace */
 
+OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) :
+    m_context(std::move(context))
+{
+}
+
 Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
     PlatformGraphics(OpenGLContext(displayTarget, videoMode))
 {
@@ -62,11 +67,6 @@ Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
     
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
-}
-
-OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) :
-    m_context(std::move(context))
-{
 }
 
 Graphics::~Graphics()

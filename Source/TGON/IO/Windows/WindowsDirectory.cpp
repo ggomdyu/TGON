@@ -1,5 +1,3 @@
-#include "..\Directory.h"
-#include "..\Directory.h"
 #include "PrecompiledHeader.h"
 
 #include <sys/stat.h>
@@ -80,7 +78,7 @@ void InternalEnumerateFileNames(const std::string_view& path, _HandlerType handl
         }
 
         std::string str;
-        if constexpr (FilterFileAttributes & FILE_ATTRIBUTE_ARCHIVE)
+        if constexpr (FilterFileAttributes & FILE_ATTRIBUTE_ARCHIVE == true)
         {
             str += path;
             str += Path::DirectorySeparatorChar;

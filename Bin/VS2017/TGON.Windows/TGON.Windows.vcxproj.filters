@@ -79,9 +79,6 @@
     <ClInclude Include="..\..\..\Source\ThirdParty\OIS-1.4\src\win32\extras\WiiMote\OISWiiMote.h">
       <Filter>Sources\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.h">
-      <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepad.h">
       <Filter>Sources\TGON\Hardware\Windows</Filter>
     </ClInclude>
@@ -145,9 +142,6 @@
       <Filter>Sources\ThirdParty\OIS-1.4</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp">
-      <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\TGON\Graphics\OpenGL\Windows\WindowsOpenGLContextUtility.cpp">
       <Filter>Sources\TGON\Graphics\OpenGL\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TGON\Hardware\Windows\WindowsGamepad.cpp">

@@ -6,6 +6,7 @@
 
 #pragma once
 #include <initializer_list>
+#include <gsl/span>
 
 #include "Platform/Config.h"
 
@@ -21,28 +22,32 @@ class TGON_API IndexBuffer final :
 {
 /**@section Constructor */
 public:
-    using PlatformIndexBuffer::PlatformIndexBuffer;
+    IndexBuffer();
+    IndexBuffer(IndexBuffer&& rhs) noexcept;
+
+/**@section Destructor */
+public:
+    ~IndexBuffer();
     
+/**@section Operator */
+public:
+    IndexBuffer& operator=(IndexBuffer&& rhs);
+
 /**@section Method */
 public:
-    PlatformIndexBuffer* GetPlatformDependency() noexcept;
-    const PlatformIndexBuffer* GetPlatformDependency() const noexcept;
-    
-    template <typename _DataArrayType, std::size_t _DataArraySize>
-    void SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage);
-    
-    using PlatformIndexBuffer::SetData;
-    using PlatformIndexBuffer::GetDataBytes;
-    using PlatformIndexBuffer::Use;
-    using PlatformIndexBuffer::Unuse;
-    using PlatformIndexBuffer::IsValid;
-    using PlatformIndexBuffer::IsDynamicUsage;
+    PlatformIndexBuffer& GetPlatformDependency() noexcept;
+    const PlatformIndexBuffer& GetPlatformDependency() const noexcept;
+    template <typename _Type>
+    void SetData(const gsl::span<_Type>& data, bool isDynamicUsage);
+    void SetData(const void* data, int32_t dataBytes, bool isDynamicUsage);
+    void Use();
+    void Unuse();
 };
 
-template <typename _DataArrayType, std::size_t _DataArraySize>
-inline void IndexBuffer::SetData(const _DataArrayType(&data)[_DataArraySize], bool isDynamicUsage)
+template<typename _Type>
+inline void tgon::IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
 {
-    this->SetData(data, sizeof(data), isDynamicUsage);
+    this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }
 
 } /* namespace tgon */

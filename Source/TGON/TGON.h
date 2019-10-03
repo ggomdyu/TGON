@@ -9,7 +9,6 @@
 #include "Audio/AudioPlayer.h"
 #include "Diagnostics/Debug.h"
 #include "Drawing/Image.h"
-#include "Drawing/FontFactory.h"
 #include "Core/CoreObject.h"
 #include "Platform/Window.h"
 #include "Platform/Application.h"
@@ -62,3 +61,4 @@
 #include "Engine/SceneModule.h"
 #include "Game/Scene.h"
 #include "Thread/Thread.h"
+#include "Drawing/FontFactory.h"

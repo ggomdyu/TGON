@@ -6,7 +6,6 @@
 
 #pragma once
 #include <GL/glew.h>
-#include <cstdint>
 
 #include "Platform/Config.h"
 #include "Core/NonCopyable.h"
@@ -18,35 +17,20 @@ class TGON_API OpenGLIndexBuffer :
     private NonCopyable
 {
 /**@section Constructor */
-public:
-    OpenGLIndexBuffer();
+protected:
+    explicit OpenGLIndexBuffer(GLuint indexBufferHandle) noexcept;
     OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    ~OpenGLIndexBuffer();
+/**@section Method */
+protected:
+    void Destroy();
     
 /**@section Operator */
-public:
-    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&& rhs) noexcept;
-
-/**@section Method */
-public:
-    void SetData(const void* data, int32_t dataBytes, bool isDynamicUsage);
-    int32_t GetDataBytes() const noexcept;
-    void Use();
-    void Unuse();
-    bool IsValid() const noexcept;
-    bool IsDynamicUsage() const noexcept;
-
-private:
-    GLuint CreateIndexBufferHandle() const;
-    void Destroy();
+protected:
+    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&& rhs);
 
 /**@section Variable */
-private:
-    int32_t m_dataBytes;
-    bool m_isDynamicUsage;
+protected:
     GLuint m_indexBufferHandle;
 };
     

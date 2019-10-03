@@ -8,7 +8,6 @@
 #include "Graphics/Material.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Graphics.h"
-#include "Graphics/VertexBufferType.h"
 #include "Graphics/OpenGL/OpenGLShaderCode.h"
 #include "UI/UISprite.h"
 #include "UI/UISpriteBatch.h"

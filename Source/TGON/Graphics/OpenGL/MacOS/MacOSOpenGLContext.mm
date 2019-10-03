@@ -83,8 +83,7 @@ OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
 
 OpenGLContext::~OpenGLContext()
 {
-	pixelFormat = nil;
-    context = nil;
+	this->Destroy();
 }
 
 OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
@@ -106,6 +105,12 @@ void OpenGLContext::MakeCurrent()
 void OpenGLContext::SwapBuffer()
 {
     [context flushBuffer];
+}
+
+void OpenGLContext::Destroy()
+{
+	pixelFormat = nil;
+    context = nil;
 }
 
 } /* namespace tgon */
