@@ -41,7 +41,7 @@ public:
     
 /**@section Operator */
 public:
-    ShaderProgram& operator=(ShaderProgram&& rhs) noexcept;
+    ShaderProgram& operator=(ShaderProgram&& rhs);
    
 /**@section Method */
 public:
@@ -67,6 +67,7 @@ public:
 private:
     void UpdateUniformLocationCache();
     void ResetUniformCache();
+    void Destroy();
 
 private:
     inline static std::array<Vector4, 64> m_uniformCache {};

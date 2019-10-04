@@ -25,7 +25,7 @@ protected:
 
 /**@section Operator */
 protected:
-    OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs) noexcept;
+    OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs);
     
 /**@section Method */
 protected:

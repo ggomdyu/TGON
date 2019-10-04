@@ -88,26 +88,25 @@ void LogoScene::CreateFontObject()
     FontFactory ff;
     auto fontPath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop).value() + "/maplestory_bold.ttf";
     std::shared_ptr<Font> font = ff.CreateFont(fontPath.c_str());
-//    auto object = std::make_shared<GameObject>( "font", new Transform() );
-//    object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
-//    object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
-//    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
-//
-//    const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
-//    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
-//    //for (auto ch : chArray)
-//    {
-//        const auto& glyphData = font->GetGlyphData('A', 35);
-//        const auto& glyphData2 = font->GetGlyphData('B', 35);
-//        textureAtlas.Insert(glyphData.ch, ImageView(glyphData.bitmap.get(), glyphData.metrics.size, PixelFormat::RGBA8888));
-//    }
-//
-//    auto& imageRect = textureAtlas.GetTextureRect(u'A');
-//    decltype(auto) texture = textureAtlas.GetAtlasTexture();
-//    decltype(auto) sprite = std::make_shared<UISprite>(texture);
-//    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
-//    spriteComponent->SetSprite(sprite);
-//    this->AddObject( object );
+    auto object = std::make_shared<GameObject>( "font", new Transform() );
+    object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
+    object->GetTransform()->SetLocalPosition( Vector3( 0.0f, 0.0f, 0.0f ) );
+    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
+
+    const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
+    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
+    for (auto ch : chArray)
+    {
+        const auto& glyphData = font->GetGlyphData(ch, 35);
+        textureAtlas.Insert(glyphData.ch, ImageView(glyphData.bitmap.get(), glyphData.metrics.size, PixelFormat::RGBA8888));
+    }
+
+    auto& imageRect = textureAtlas.GetTextureRect(u'A');
+    decltype(auto) texture = textureAtlas.GetAtlasTexture();
+    decltype(auto) sprite = std::make_shared<UISprite>(texture);
+    sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
+    spriteComponent->SetSprite(sprite);
+    this->AddObject( object );
 //    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
 //
 //    float accumulatedXPos = -100.0f;
@@ -148,15 +147,15 @@ void LogoScene::CreateGameObjects()
     this->CreateCameraObject();
     this->CreateFontObject();
     
-    auto desktopPath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-
-    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
-    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-    object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
-    auto texture = std::make_shared<Texture>(desktopPath + "/a.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
-    spriteComponent->SetSprite(std::make_shared<UISprite>(texture));
-    this->AddObject(object);
+//    auto desktopPath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+//
+//    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
+//    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+//    object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+//    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
+//    auto texture = std::make_shared<Texture>(desktopPath + "/a.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+//    spriteComponent->SetSprite(std::make_shared<UISprite>(texture));
+//    this->AddObject(object);
 }
 
 void LogoScene::OnHandleInput()

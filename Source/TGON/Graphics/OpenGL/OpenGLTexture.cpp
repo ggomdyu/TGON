@@ -2,136 +2,194 @@
 
 #include "Misc/Algorithm.h"
 
-#include "OpenGLTexture.h"
 #include "OpenGLDebug.h"
+
+#include "../Texture.h"
 
 namespace tgon
 {
+namespace
+{
 
-constexpr bool g_isUsePixelBuffer = false;
-    
 constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode) noexcept
 {
     constexpr GLint nativeTextureFilterModes[] = {
-        GL_NEAREST,         // Point,
-        GL_LINEAR           // Bilinear,
+        GL_NEAREST,
+        GL_LINEAR
     };
-    return nativeTextureFilterModes[static_cast<int>(textureFilterMode)];
+    return nativeTextureFilterModes[UnderlyingCast(textureFilterMode)];
 }
     
 constexpr GLint ConvertTextureWrapModeToNative(WrapMode textureWrapMode) noexcept
 {
     constexpr GLint nativeTextureWrapModes[] = {
-        GL_REPEAT,          // Repeat
-        GL_CLAMP,           // Clamp
-        GL_MIRRORED_REPEAT, // Mirror
+        GL_REPEAT,
+        GL_CLAMP,
+        GL_MIRRORED_REPEAT,
     };
-    return nativeTextureWrapModes[static_cast<int>(textureWrapMode)];
+    return nativeTextureWrapModes[UnderlyingCast(textureWrapMode)];
 }
 
 constexpr GLenum ConvertPixelFormatToNative(PixelFormat pixelFormat) noexcept
 {
     constexpr GLenum nativePixelFormats[] = {
-        0,                  // Unknown
-        GL_RGBA,            // RGBA8888
-        GL_RGB,             // RGB888
-        GL_RGB4,            // RGBA4444
-        GL_RED,             // R8
+        0,
+        GL_RGBA,
+        GL_RGB,
+        GL_RGB4,
+        GL_RED,
     };              
-    return nativePixelFormats[static_cast<int>(pixelFormat)];
+    return nativePixelFormats[UnderlyingCast(pixelFormat)];
 }
 
-OpenGLTexture::OpenGLTexture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    OpenGLTexture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+GLuint CreateTextureHandle()
+{
+    GLuint textureHandle;
+    TGON_GL_ERROR_CHECK(glGenTextures(1, &textureHandle));
+
+    return textureHandle;
+}
+
+GLuint CreatePixelBufferHandle(int32_t bufferBytes)
+{
+    GLuint pixelBufferHandle = 0;
+
+    TGON_GL_ERROR_CHECK(glGenBuffers(1, &pixelBufferHandle));
+    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBufferHandle));
+    TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, static_cast<GLsizeiptr>(bufferBytes), nullptr, GL_STATIC_DRAW));
+    TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0));
+
+    return pixelBufferHandle;
+}
+
+} /* namespace */
+
+OpenGLTexture::OpenGLTexture(GLuint textureHandle) noexcept :
+    m_textureHandle(textureHandle)
 {
 }
 
-OpenGLTexture::OpenGLTexture(Image&& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    OpenGLTexture(image.GetImageData().get(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+OpenGLTexture::OpenGLTexture(OpenGLTexture&& rhs) noexcept :
+    m_textureHandle(rhs.m_textureHandle)
+{
+    rhs.m_textureHandle = 0;
+}
+
+void OpenGLTexture::CreateMipmap() const
+{
+    TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
+}
+
+void OpenGLTexture::Destroy()
+{
+    if (m_textureHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
+        m_textureHandle = 0;
+    }
+}
+
+GLuint OpenGLTexture::GetTextureHandle() const noexcept
+{
+    return m_textureHandle;
+}
+
+Texture::Texture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    Texture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
 }
 
-OpenGLTexture::OpenGLTexture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    Texture(image.GetImageData().get(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+{
+}
+
+Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    OpenGLTexture(CreateTextureHandle()),
     m_isUseMipmap(isUseMipmap),
-    m_textureHandle(this->CreateTextureHandle()),
-    m_pixelBufferHandle(this->CreatePixelBufferHandle(size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat))),
     m_pixelFormat(pixelFormat),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
     m_size(size),
     m_isDynamicUsage(isDynamicUsage)
 {
-    assert(m_textureHandle != 0);
-    
     this->SetData(imageData, size, pixelFormat);
     
-    if (m_isUseMipmap == true)
+    if (isUseMipmap == true)
     {
         this->CreateMipmap();
     }
 }
 
-OpenGLTexture::~OpenGLTexture()
+Texture::~Texture()
 {
-    TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
-    TGON_GL_ERROR_CHECK(glDeleteBuffers(1, &m_pixelBufferHandle));
-    
-    m_textureHandle = 0;
-    m_pixelBufferHandle = 0;
+    this->Destroy();
 }
 
-void OpenGLTexture::Use()
+void Texture::Use()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-
-    // Let the texture object to use pixel buffer
-    if constexpr (g_isUsePixelBuffer)
-    {
-        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
-        auto nativePixelFormat = ConvertPixelFormatToNative(m_pixelFormat);
-        glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, m_size.width, m_size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, nullptr);
-    }
 
     this->UpdateTexParemeters();
 }
     
-void OpenGLTexture::Unuse()
+void Texture::Unuse()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-bool OpenGLTexture::IsValid() const
+bool Texture::IsValid() const
 {
     return glIsTexture(m_textureHandle);
 }
 
-void OpenGLTexture::SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
+void Texture::SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
-    if constexpr (g_isUsePixelBuffer)
-    {
-        // Set image data into pixel buffer
-        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_pixelBufferHandle));
-        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat), nullptr, GL_STATIC_DRAW));
-        std::byte* pixelBufferPtr = TGON_GL_ERROR_CHECK(reinterpret_cast<std::byte*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)));
-        memcpy(pixelBufferPtr, imageData, size.width * size.height * ConvertPixelFormatToBytesPerPixel(pixelFormat));
-        TGON_GL_ERROR_CHECK(glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER));
-    }
-    else
-    {
-        TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-        TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
-    }
+    
+    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
+    TGON_GL_ERROR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, nativePixelFormat, size.width, size.height, 0, nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
 }
 
-void OpenGLTexture::SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
+void Texture::SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
+    
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
     TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
 }
 
-void OpenGLTexture::UpdateTexParemeters()
+void Texture::SetFilterMode(FilterMode filterMode)
+{
+    m_filterMode = filterMode;
+}
+
+void Texture::SetWrapMode(WrapMode wrapMode)
+{
+    m_wrapMode = wrapMode;
+}
+
+FilterMode Texture::GetFilterMode() const noexcept
+{
+    return m_filterMode;
+}
+
+WrapMode Texture::GetWrapMode() const noexcept
+{
+    return m_wrapMode;
+}
+
+const I32Extent2D& Texture::GetSize() const noexcept
+{
+    return m_size;
+}
+    
+PixelFormat Texture::GetPixelFormat() const noexcept
+{
+    return m_pixelFormat;
+}
+
+void Texture::UpdateTexParemeters()
 {
     // Update texture filter
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
@@ -143,66 +201,4 @@ void OpenGLTexture::UpdateTexParemeters()
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode));
 }
 
-void OpenGLTexture::SetFilterMode(FilterMode filterMode)
-{
-    m_filterMode = filterMode;
-}
-
-void OpenGLTexture::SetWrapMode(WrapMode wrapMode)
-{
-    m_wrapMode = wrapMode;
-}
-
-GLuint OpenGLTexture::CreateTextureHandle() const
-{
-    GLuint textureHandle;
-    TGON_GL_ERROR_CHECK(glGenTextures(1, &textureHandle));
-
-    return textureHandle;
-}
-
-GLuint OpenGLTexture::CreatePixelBufferHandle(int32_t bufferBytes) const
-{
-    GLuint pixelBufferHandle = 0;
-    if constexpr (g_isUsePixelBuffer)
-    {
-        TGON_GL_ERROR_CHECK(glGenBuffers(1, &pixelBufferHandle));
-        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBufferHandle));
-        TGON_GL_ERROR_CHECK(glBufferData(GL_PIXEL_UNPACK_BUFFER, static_cast<GLsizeiptr>(bufferBytes), nullptr, GL_STATIC_DRAW));
-        TGON_GL_ERROR_CHECK(glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0));
-    }
-
-    return pixelBufferHandle;
-}
-
-FilterMode OpenGLTexture::GetFilterMode() const noexcept
-{
-    return m_filterMode;
-}
-
-WrapMode OpenGLTexture::GetWrapMode() const noexcept
-{
-    return m_wrapMode;
-}
-
-void OpenGLTexture::CreateMipmap() const
-{
-    TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
-}
-
-GLuint OpenGLTexture::GetTextureHandle() const noexcept
-{
-    return m_textureHandle;
-}
-
-const I32Extent2D& OpenGLTexture::GetSize() const noexcept
-{
-    return m_size;
-}
-    
-PixelFormat OpenGLTexture::GetPixelFormat() const noexcept
-{
-    return m_pixelFormat;
-}
-    
 } /* namespace tgon */

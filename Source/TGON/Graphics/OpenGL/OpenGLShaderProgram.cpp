@@ -57,14 +57,16 @@ OpenGLShaderProgram::OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept :
     m_programId(rhs.m_programId),
     m_uniformLocationCache(rhs.m_uniformLocationCache)
 {
+    rhs.m_uniformLocationCache = {};
     rhs.m_programId = 0;
 }
     
-OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) noexcept
+OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs)
 {
     m_uniformLocationCache = rhs.m_uniformLocationCache;
     m_programId = rhs.m_programId;
     
+    rhs.m_uniformLocationCache = {};
     rhs.m_programId = 0;
     
     return *this;
@@ -126,12 +128,6 @@ ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentS
     } ())
 {
     this->UpdateUniformLocationCache();
-}
-
-ShaderProgram::~ShaderProgram()
-{
-    TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
-    m_programId = 0;
 }
 
 void ShaderProgram::Use()
@@ -228,6 +224,15 @@ void ShaderProgram::SetParameterSampler(int32_t location, uint32_t textureUnit, 
 
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, texture));
     TGON_GL_ERROR_CHECK(glUniform1i(location, texture));
+}
+
+void ShaderProgram::Destroy()
+{
+    if (m_programId != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
+        m_programId = 0;
+    }
 }
 
 } /* namespace tgon */

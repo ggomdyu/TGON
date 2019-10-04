@@ -22,8 +22,15 @@ ShaderProgram::ShaderProgram(ShaderProgram&& shaderProgram) noexcept :
 {
 }
 
-ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs) noexcept
+ShaderProgram::~ShaderProgram()
 {
+    this->Destroy();
+}
+
+ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
+{
+    this->Destroy();
+    
     PlatformShaderProgram::operator=(std::move(rhs));
     return *this;
 }

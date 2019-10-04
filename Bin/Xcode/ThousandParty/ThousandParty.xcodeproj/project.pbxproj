@@ -31,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8CB5BB2023477BB10032F332 /* ThousandPartyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThousandPartyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD06734B20B42CAA00BEA737 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		FD8D586D21966C0900983A4A /* ThousandParty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThousandParty; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8D58702196D24200983A4A /* libTGON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTGON.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +49,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8CB5BB1D23477BB10032F332 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDD7C8C41F654342000EB7C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				FD8D586D21966C0900983A4A /* ThousandParty */,
+				8CB5BB2023477BB10032F332 /* ThousandPartyApp.app */,
 			);
 			name = Products;
 			path = ..;
@@ -112,6 +121,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8CB5BB1F23477BB10032F332 /* ThousandPartyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB5BB3123477BB30032F332 /* Build configuration list for PBXNativeTarget "ThousandPartyApp" */;
+			buildPhases = (
+				8CB5BB1C23477BB10032F332 /* Sources */,
+				8CB5BB1D23477BB10032F332 /* Frameworks */,
+				8CB5BB1E23477BB10032F332 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThousandPartyApp;
+			productName = ThousandPartyApp;
+			productReference = 8CB5BB2023477BB10032F332 /* ThousandPartyApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		FDD7C8C61F654342000EB7C8 /* ThousandParty */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDD7C8CE1F654342000EB7C8 /* Build configuration list for PBXNativeTarget "ThousandParty" */;
@@ -138,6 +164,11 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = ggomdyu;
 				TargetAttributes = {
+					8CB5BB1F23477BB10032F332 = {
+						CreatedOnToolsVersion = 11.0;
+						DevelopmentTeam = WU734J36XA;
+						ProvisioningStyle = Automatic;
+					};
 					FDD7C8C61F654342000EB7C8 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
@@ -158,11 +189,29 @@
 			projectRoot = "";
 			targets = (
 				FDD7C8C61F654342000EB7C8 /* ThousandParty */,
+				8CB5BB1F23477BB10032F332 /* ThousandPartyApp */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		8CB5BB1E23477BB10032F332 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		8CB5BB1C23477BB10032F332 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDD7C8C31F654342000EB7C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,6 +225,55 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		8CB5BB3223477BB30032F332 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ThousandPartyApp/ThousandPartyApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WU734J36XA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ThousandPartyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ThousandPartyApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8CB5BB3323477BB30032F332 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ThousandPartyApp/ThousandPartyApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WU734J36XA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ThousandPartyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ThousandPartyApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		FDD7C8CC1F654342000EB7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -360,6 +458,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8CB5BB3123477BB30032F332 /* Build configuration list for PBXNativeTarget "ThousandPartyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB5BB3223477BB30032F332 /* Debug */,
+				8CB5BB3323477BB30032F332 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FDD7C8C21F654342000EB7C8 /* Build configuration list for PBXProject "ThousandParty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
