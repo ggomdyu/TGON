@@ -63,6 +63,7 @@ public:
     PixelFormat GetPixelFormat() const noexcept;
     
 private:
+    void Destroy();
     void UpdateTexParemeters();
     
 /**@section Variable */

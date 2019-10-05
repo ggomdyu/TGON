@@ -10,12 +10,40 @@ namespace tgon
 
 TextureAtlas::TextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset) :
     m_atlasTexture(std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, true)),
-    m_context{},
-    m_nodes{},
-    m_nodeRects{},
+    m_context(std::make_unique<stbrp_context>()),
+    m_nodes(std::make_unique<stbrp_node[]>(4096)),
+    m_nodeRects(std::make_unique<stbrp_rect[]>(4096)),
     m_paddingOffset(paddingOffset)
 {
-    stbrp_init_target(&m_context, atlasSize.width, atlasSize.height, m_nodes, std::extent<decltype(m_nodes)>::value);
+    stbrp_init_target(m_context.get(), atlasSize.width, atlasSize.height, m_nodes.get(), 4096);
+}
+
+TextureAtlas::TextureAtlas(TextureAtlas&& rhs) noexcept :
+    m_atlasTexture(std::move(rhs.m_atlasTexture)),
+    m_context(std::move(rhs.m_context)),
+    m_nodes(std::move(rhs.m_nodes)),
+    m_nodeRects(std::move(rhs.m_nodeRects)),
+    m_paddingOffset(rhs.m_paddingOffset)
+{
+    rhs.m_paddingOffset = 0;
+}
+
+TextureAtlas& TextureAtlas::operator=(TextureAtlas&& rhs)
+{
+    m_atlasTexture = std::move(rhs.m_atlasTexture);
+    m_context = std::move(rhs.m_context);
+    m_nodes = std::move(rhs.m_nodes);
+    m_nodeRects = std::move(rhs.m_nodeRects);
+    m_paddingOffset = rhs.m_paddingOffset;
+    
+    rhs.m_paddingOffset = 0;
+
+    return *this;
+}
+
+TextureAtlas TextureAtlas::Create(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset)
+{
+    return TextureAtlas(atlasSize, atlasPixelFormat, paddingOffset);
 }
 
 bool TextureAtlas::Insert(UnicodeScalar name, const ImageView& image)
@@ -44,7 +72,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, I
         };
     }
 
-    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, static_cast<int>(imageDescs.size())) != 0;
+    bool isPackingFailed = stbrp_pack_rects(m_context.get(), m_nodeRects.get(), static_cast<int>(imageDescs.size())) != 0;
     if (isPackingFailed == false)
     {
         return false;
@@ -75,7 +103,7 @@ bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, 
         };
     }
 
-    bool isPackingFailed = stbrp_pack_rects(&m_context, m_nodeRects, static_cast<int>(imageDescs.size())) != 0;
+    bool isPackingFailed = stbrp_pack_rects(m_context.get(), m_nodeRects.get(), static_cast<int>(imageDescs.size())) != 0;
     if (isPackingFailed == false)
     {
         return false;
@@ -132,7 +160,7 @@ bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
         0 // was_packed
     };
 
-    bool isPackingSucceed = stbrp_pack_rects(&m_context, &rect, 1) == 1;
+    bool isPackingSucceed = stbrp_pack_rects(m_context.get(), &rect, 1) == 1;
     if (isPackingSucceed)
     {
         m_atlasTexture->SetData(image.GetImageData(), Vector2(rect.x, rect.y), image.GetSize(), m_atlasTexture->GetPixelFormat());

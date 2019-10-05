@@ -31,17 +31,18 @@ enum class VertexFormatType
 enum class VertexAttributeIndex
 {
     Position = 0,
-    Normal = 1,
-    UV = 1,
+    Color = 1,
+    UV = 2,
+    Normal = 3,
 };
 
 struct VertexBufferLayoutDescriptor
 {
-/**section  Constructor */
+/**@section Constructor */
 public:
     constexpr VertexBufferLayoutDescriptor(VertexAttributeIndex attribute, int32_t dimension, VertexFormatType type, bool normalized, int32_t stride, std::size_t offset) noexcept;
 
-/**section  Variable */
+/**@section Variable */
 public:
     VertexAttributeIndex attribute;
     int32_t dimension;
@@ -88,6 +89,9 @@ public:
     void SetLayoutDescriptor(const std::initializer_list<VertexBufferLayoutDescriptor>& vertexBufferLayoutDescs);
     void Use();
     void Unuse();
+
+private:
+    void Destroy();
     
 /**@section Variable */
 private:

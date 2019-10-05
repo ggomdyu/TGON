@@ -51,9 +51,25 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
     
 } /* namespace */
 
-OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) :
-    m_context(std::move(context))
+OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) noexcept :
+    m_context(std::move(context)),
+    m_vertexArrayHandle(0)
 {
+}
+
+OpenGLContext& OpenGLGraphics::GetContext() noexcept
+{
+    return m_context;
+}
+
+const OpenGLContext& OpenGLGraphics::GetContext() const noexcept
+{
+    return m_context;
+}
+
+GLuint OpenGLGraphics::GetVertexArrayHandle() const noexcept
+{
+    return m_vertexArrayHandle;
 }
 
 Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
@@ -64,7 +80,7 @@ Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
     stbi_flip_vertically_on_write(true);
     
     this->EnableCullFace();
-    
+
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
     TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
 }

@@ -25,43 +25,43 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, const std::shared_pt
 
 UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept :
     m_texture(texture),
-    m_transform(transform),
     m_textureRect(textureRect),
-    m_enableScissorRect(false),
-    m_blendMode(BlendMode::Normal)
+    m_transform(transform),
+    m_blendMode(BlendMode::Normal),
+    m_blendColor(1.0f, 1.0f, 1.0f, 1.0f),
+    m_enableScissorRect(false)
 {
 }
 
 UISprite::UISprite(UISprite&& rhs) noexcept :
     m_texture(std::move(rhs.m_texture)),
+    m_textureRect(rhs.m_textureRect),
     m_transform(std::move(rhs.m_transform)),
     m_blendMode(rhs.m_blendMode),
-    m_textureRect(rhs.m_textureRect),
+    m_blendColor(rhs.m_blendColor),
     m_scissorRect(rhs.m_scissorRect),
     m_enableScissorRect(rhs.m_enableScissorRect)
 {
     rhs.m_textureRect = {};
     rhs.m_blendMode = {};
+    rhs.m_blendColor = {};
     rhs.m_scissorRect = {};
     rhs.m_enableScissorRect = false;
 }
 
 UISprite& UISprite::operator=(UISprite&& rhs) noexcept
 {
-    if (this == &rhs)
-    {
-        m_texture = std::move(rhs.m_texture);
-        m_transform = std::move(rhs.m_transform);
-        m_blendMode = rhs.m_blendMode;
-        m_textureRect = rhs.m_textureRect;
-        m_scissorRect = rhs.m_scissorRect;
-        m_enableScissorRect = rhs.m_enableScissorRect;
+    m_texture = std::move(rhs.m_texture);
+    m_transform = std::move(rhs.m_transform);
+    m_blendMode = rhs.m_blendMode;
+    m_textureRect = rhs.m_textureRect;
+    m_scissorRect = rhs.m_scissorRect;
+    m_enableScissorRect = rhs.m_enableScissorRect;
 
-        rhs.m_textureRect = {};
-        rhs.m_blendMode = {};
-        rhs.m_scissorRect = {};
-        rhs.m_enableScissorRect = false;
-    }
+    rhs.m_textureRect = {};
+    rhs.m_blendMode = {};
+    rhs.m_scissorRect = {};
+    rhs.m_enableScissorRect = false;
 
     return *this;
 }
@@ -92,7 +92,7 @@ std::shared_ptr<const Transform> UISprite::GetTransform() const noexcept
     return m_transform;
 }
     
-void UISprite::SetTextureRect(const FRect& textureRect)
+void UISprite::SetTextureRect(const FRect& textureRect) noexcept
 {
     m_textureRect = textureRect;
 }
@@ -117,9 +117,19 @@ void UISprite::SetBlendMode(BlendMode blendMode) noexcept
     m_blendMode = blendMode;
 }
 
+void UISprite::SetBlendColor(const Color4f& blendColor) noexcept
+{
+    m_blendColor = blendColor;
+}
+
 BlendMode UISprite::GetBlendMode() const noexcept
 {
     return m_blendMode;
+}
+
+const Color4f& UISprite::GetBlendColor() const noexcept
+{
+    return m_blendColor;
 }
     
 void UISprite::EnableScissorRect() noexcept

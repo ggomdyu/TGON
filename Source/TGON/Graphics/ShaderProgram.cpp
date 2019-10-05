@@ -2,6 +2,8 @@
 
 #include <array>
 
+#include "Misc/Algorithm.h"
+
 #include "ShaderProgram.h"
 
 namespace tgon
@@ -17,9 +19,11 @@ const PlatformShaderProgram& ShaderProgram::GetPlatformDependency() const noexce
     return *this;
 }
 
-ShaderProgram::ShaderProgram(ShaderProgram&& shaderProgram) noexcept :
-    PlatformShaderProgram(std::move(shaderProgram))
+ShaderProgram::ShaderProgram(ShaderProgram&& rhs) noexcept :
+    PlatformShaderProgram(std::move(rhs)),
+    m_uniformLocationCache(rhs.m_uniformLocationCache)
 {
+    rhs.m_uniformLocationCache = {};
 }
 
 ShaderProgram::~ShaderProgram()
@@ -32,6 +36,11 @@ ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
     this->Destroy();
     
     PlatformShaderProgram::operator=(std::move(rhs));
+
+    m_uniformLocationCache = rhs.m_uniformLocationCache;
+
+    rhs.m_uniformLocationCache = {};
+
     return *this;
 }
 
@@ -62,7 +71,7 @@ void ShaderProgram::SetParameterMatrix4fv(const char* name, const float* f)
 
 void ShaderProgram::UpdateUniformLocationCache()
 {
-    m_uniformLocationCache[(int)PredefinedUniformLocation::MatrixWVP] = this->GetUniformLocation("matWVP");
+    m_uniformLocationCache[UnderlyingCast(PredefinedUniformLocation::MatrixWVP)] = this->GetUniformLocation("matWVP");
 }
 
 void ShaderProgram::ResetUniformCache()

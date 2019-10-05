@@ -42,10 +42,13 @@ public:
     void SetData(const void* data, int32_t dataBytes, bool isDynamicUsage);
     void Use();
     void Unuse();
+
+private:
+    void Destroy();
 };
 
 template<typename _Type>
-inline void tgon::IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
+inline void IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }

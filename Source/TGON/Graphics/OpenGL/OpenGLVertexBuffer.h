@@ -23,11 +23,11 @@ protected:
     
 /**@section Operator */
 protected:
-    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&& rhs);
+    OpenGLVertexBuffer& operator=(OpenGLVertexBuffer&& rhs) noexcept;
 
 /**@section Method */
-protected:
-    void Destroy();
+public:
+    GLuint GetVertexBufferHandle() const noexcept;
 
 /**@section Variable */
 protected:

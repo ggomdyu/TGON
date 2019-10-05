@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Misc/Algorithm.h"
+
 #include "../Keyboard.h"
 
 namespace tgon
@@ -28,13 +30,13 @@ Keyboard::Keyboard(InputManager& inputManager) :
 
 void Keyboard::Update()
 {
-    m_nativeKeyboard->copyKeyStates(m_currKeyStates.data());
+    m_nativeKeyboard->copyKeyStates(m_currKeyStates);
     m_nativeKeyboard->capture();
 }
 
 bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[static_cast<char>(keyCode)] == 0) &&
+    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 0) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
     {
         return true;
@@ -47,7 +49,7 @@ bool Keyboard::IsKeyDown(KeyCode keyCode) const
 
 bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[static_cast<char>(keyCode)] == 1) &&
+    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 1) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
     {
         return true;
@@ -60,7 +62,7 @@ bool Keyboard::IsKeyHold(KeyCode keyCode) const
 
 bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[static_cast<char>(keyCode)] == 1) &&
+    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 1) &&
         m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)) == false)
     {
         return true;

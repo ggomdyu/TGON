@@ -84,14 +84,21 @@ FontFace::FontFace(FontFace&& rhs) noexcept :
     rhs.m_fontSize = 0;
 }
 
+FontFace::~FontFace()
+{
+    this->Destroy();
+}
+
 FontFace& FontFace::operator=(FontFace&& rhs) noexcept
 {
-    m_glyphDatas = std::move(rhs.m_glyphDatas);
-    m_fontFace = rhs.m_fontFace;
-    m_fontSize = rhs.m_fontSize;
+    this->Destroy();
 
-    rhs.m_fontFace = nullptr;
+    m_fontSize = rhs.m_fontSize;
+    m_fontFace = rhs.m_fontFace;
+    m_glyphDatas = std::move(rhs.m_glyphDatas);
+
     rhs.m_fontSize = 0;
+    rhs.m_fontFace = nullptr;
 
     return *this;
 }
@@ -135,9 +142,9 @@ const GlyphData& FontFace::GetGlyphData(UnicodeScalar ch) const
 
 I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const
 {
-    FT_Vector kerning;
     auto lhsIndex = FT_Get_Char_Index(m_fontFace, lhs);
     auto rhsIndex = FT_Get_Char_Index(m_fontFace, rhs);
+    FT_Vector kerning;
     auto error = FT_Get_Kerning(m_fontFace, lhsIndex, rhsIndex, FT_KERNING_DEFAULT, &kerning);
     if (error)
     {
@@ -145,6 +152,15 @@ I32Vector2 FontFace::GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const
     }
 
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
+}
+
+void FontFace::Destroy()
+{
+    if (m_fontFace != nullptr)
+    {
+        FT_Done_Face(m_fontFace);
+        m_fontFace = nullptr;
+    }
 }
 
 Font::Font(const char* filePath, FT_Library library) :

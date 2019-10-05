@@ -32,8 +32,15 @@ Texture::Texture(Texture&& rhs) noexcept :
     rhs.m_size = {};
 }
 
+Texture::~Texture()
+{
+    this->Destroy();
+}
+
 Texture& Texture::operator=(Texture&& rhs)
 {
+    this->Destroy();
+
     PlatformTexture::operator=(std::move(rhs));
     
     m_isUseMipmap = rhs.m_isUseMipmap;

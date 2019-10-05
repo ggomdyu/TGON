@@ -20,15 +20,18 @@ IndexBuffer::IndexBuffer(IndexBuffer&& rhs) noexcept :
 {
 }
 
-IndexBuffer& IndexBuffer::operator=(IndexBuffer&& rhs)
-{
-    OpenGLIndexBuffer::operator=(std::move(rhs));
-    return *this;
-}
-
 IndexBuffer::~IndexBuffer()
 {
     this->Destroy();
+}
+
+IndexBuffer& IndexBuffer::operator=(IndexBuffer&& rhs)
+{
+    this->Destroy();
+
+    OpenGLIndexBuffer::operator=(std::move(rhs));
+
+    return *this;
 }
 
 } /* namespace tgon */

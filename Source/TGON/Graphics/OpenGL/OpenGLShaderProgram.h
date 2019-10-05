@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <string>
-#include <array>
 #include <GL/glew.h>
 
 #include "Platform/Config.h"
@@ -25,18 +23,15 @@ protected:
 
 /**@section Operator */
 protected:
-    OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs);
+    OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs) noexcept;
     
 /**@section Method */
-protected:
-    GLuint CompileShader(GLenum shaderType, const char* shaderCode) const;
-    bool IsShaderCompileSucceed(GLuint shaderId) const;
-    std::string GetShaderInfoLog(GLuint shaderId) const;
+public:
+    GLuint GetProgramId() const noexcept;
     
 /**@section Variable */
 protected:
     GLuint m_programId;
-    std::array<int32_t, 8> m_uniformLocationCache;
 };
     
 using PlatformShaderProgram = OpenGLShaderProgram;

@@ -68,26 +68,30 @@ void main()                                                                     
 }                                                                                   \n\
 ";
 
-constexpr const char g_positionUVVert[] =
+constexpr const char g_positionColorUVVert[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\
                                                                                     \n\
 layout(location = 0) in vec3 vertPosition;                                          \n\
-layout(location = 1) in vec2 vertUV;                                                \n\
+layout(location = 1) in vec4 vertColor;                                             \n\
+layout(location = 2) in vec2 vertUV;                                                \n\
 uniform mat4 matWVP;                                                                \n\
+out vec4 fragColor;                                                                 \n\
 out vec2 fragUV;                                                                    \n\
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
     gl_Position = matWVP * vec4(vertPosition, 1.0);                                 \n\
     fragUV = vec2(vertUV.x, vertUV.y);                                              \n\
+    fragColor = vertColor;                                                          \n\
 }                                                                                   \n\
 ";
 
-constexpr const char g_positionUVFrag[] =
+constexpr const char g_positionColorUVFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\
                                                                                     \n\
+in vec4 fragColor;                                                                  \n\
 in vec2 fragUV;                                                                     \n\
 out vec4 outColor;                                                                  \n\
                                                                                     \n\
@@ -95,7 +99,7 @@ uniform sampler2D textureSampler;                                               
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    outColor = texture(textureSampler, fragUV);                                     \n\
+    outColor = texture(textureSampler, fragUV) * fragColor;                         \n\
 }                                                                                   \n\
 ";
 
@@ -153,7 +157,7 @@ constexpr const char g_sharpenFrag[] =
 in vec2 fragUV;                                                                     \n\
 out vec4 outColor;                                                                  \n\
 uniform sampler2D textureSampler;                                                   \n\
-uniform float centerKernel = 9;                                                   \n\
+uniform float centerKernel = 9;                                                     \n\
 uniform float aroundKernel = -1;                                                    \n\
 uniform float aroundUVOffset = 1.0 / 300.0;                                         \n\
                                                                                     \n\

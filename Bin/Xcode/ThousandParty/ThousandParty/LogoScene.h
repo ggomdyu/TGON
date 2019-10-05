@@ -9,6 +9,7 @@
 
 #include "Game/Scene.h"
 #include "Engine/InputModule.h"
+#include "Engine/TimeModule.h"
 
 class TGON_API LogoScene :
     public tgon::Scene
@@ -36,4 +37,5 @@ private:
 /**@section Variable */
 private:
     std::shared_ptr<tgon::InputModule> m_inputModule;
+    std::shared_ptr<tgon::TimeModule> m_timeModule;
 };

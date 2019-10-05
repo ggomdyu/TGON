@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <array>
+
 #include "Math/Vector4.h"
 
 #if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
@@ -33,7 +35,7 @@ private:
 /**@section Constructor */
 public:
     ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
-    ShaderProgram(ShaderProgram&& shaderProgram) noexcept;
+    ShaderProgram(ShaderProgram&& rhs) noexcept;
     
 /**@section Destructor */
 public:
@@ -69,8 +71,10 @@ private:
     void ResetUniformCache();
     void Destroy();
 
+/**@section Variable */
 private:
     inline static std::array<Vector4, 64> m_uniformCache {};
+    std::array<int32_t, 8> m_uniformLocationCache {};
 };
 
 } /* namespace tgon */

@@ -17,8 +17,8 @@ class TGON_API Material :
 {
 /**@section Constructor */
 public:
-    Material(const char* vertexShaderCode, const char* fragmentShaderCode);
     explicit Material(ShaderProgram&& shaderProgram) noexcept;
+    Material(const char* vertexShaderCode, const char* fragmentShaderCode);
 
 /**@section Destructor */
 public:
@@ -28,11 +28,7 @@ public:
 public:
     void Use();
     void Unuse();
-    
-    /**@brief   Gets a shader managed by this material. */
     ShaderProgram& GetShaderProgram() noexcept;
-    
-    /**@brief   Gets a shader managed by this material. */
     const ShaderProgram& GetShaderProgram() const noexcept;
     
 /**@section Variable */

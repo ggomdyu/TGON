@@ -9,13 +9,13 @@
 namespace tgon
 {
 
-Material::Material(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    m_shaderProgram(vertexShaderCode, fragmentShaderCode)
-{
-}
-    
 Material::Material(ShaderProgram&& shaderProgram) noexcept :
     m_shaderProgram(std::move(shaderProgram))
+{
+}
+
+Material::Material(const char* vertexShaderCode, const char* fragmentShaderCode) :
+    m_shaderProgram(vertexShaderCode, fragmentShaderCode)
 {
 }
     

@@ -75,18 +75,18 @@ OpenGLTexture::OpenGLTexture(OpenGLTexture&& rhs) noexcept :
     rhs.m_textureHandle = 0;
 }
 
+OpenGLTexture& OpenGLTexture::operator=(OpenGLTexture&& rhs) noexcept
+{
+    m_textureHandle = rhs.m_textureHandle;
+
+    rhs.m_textureHandle = 0;
+
+    return *this;
+}
+
 void OpenGLTexture::CreateMipmap() const
 {
     TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
-}
-
-void OpenGLTexture::Destroy()
-{
-    if (m_textureHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
-        m_textureHandle = 0;
-    }
 }
 
 GLuint OpenGLTexture::GetTextureHandle() const noexcept
@@ -119,11 +119,6 @@ Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelForma
     {
         this->CreateMipmap();
     }
-}
-
-Texture::~Texture()
-{
-    this->Destroy();
 }
 
 void Texture::Use()
@@ -191,14 +186,23 @@ PixelFormat Texture::GetPixelFormat() const noexcept
 
 void Texture::UpdateTexParemeters()
 {
-    // Update texture filter
+    // Update the texture filter
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, ConvertTextureFilterModeToNative(m_filterMode))); // When minifying the image
 
-    // Update texture wrap mode
+    // Update the texture wrap mode
     auto wrapMode = ConvertTextureWrapModeToNative(m_wrapMode);
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode));
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode));
+}
+
+void Texture::Destroy()
+{
+    if (m_textureHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
+        m_textureHandle = 0;
+    }
 }
 
 } /* namespace tgon */

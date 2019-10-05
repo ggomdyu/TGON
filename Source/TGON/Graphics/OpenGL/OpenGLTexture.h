@@ -21,9 +21,12 @@ protected:
     explicit OpenGLTexture(GLuint textureHandle) noexcept;
     OpenGLTexture(OpenGLTexture&& rhs) noexcept;
     
+/**@section Operator */
+public:
+    OpenGLTexture& operator=(OpenGLTexture&& rhs) noexcept;
+
 /**@section Method */
 protected:
-    void Destroy();
     GLuint GetTextureHandle() const noexcept;
     void CreateMipmap() const;
 

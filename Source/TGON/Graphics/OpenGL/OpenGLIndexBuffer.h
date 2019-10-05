@@ -21,13 +21,13 @@ protected:
     explicit OpenGLIndexBuffer(GLuint indexBufferHandle) noexcept;
     OpenGLIndexBuffer(OpenGLIndexBuffer&& rhs) noexcept;
 
-/**@section Method */
-protected:
-    void Destroy();
-    
 /**@section Operator */
 protected:
-    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&& rhs);
+    OpenGLIndexBuffer& operator=(OpenGLIndexBuffer&& rhs) noexcept;
+    
+/**@section Method */
+public:
+    GLuint GetIndexBufferHandle() const noexcept;
 
 /**@section Variable */
 protected:

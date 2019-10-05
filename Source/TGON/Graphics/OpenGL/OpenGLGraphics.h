@@ -19,12 +19,18 @@ class TGON_API OpenGLGraphics :
 {
 /**@section Constructor */
 protected:
-    OpenGLGraphics(OpenGLContext&& context);
+    OpenGLGraphics(OpenGLContext&& context) noexcept;
     
+/**@section Method */
+public:
+    OpenGLContext& GetContext() noexcept;
+    const OpenGLContext& GetContext() const noexcept;
+    GLuint GetVertexArrayHandle() const noexcept;
+
 /**@section Variable */
 protected:
     OpenGLContext m_context;
-    GLuint m_vertexArrayHandle = 0;
+    GLuint m_vertexArrayHandle;
 };
 
 using PlatformGraphics = OpenGLGraphics;

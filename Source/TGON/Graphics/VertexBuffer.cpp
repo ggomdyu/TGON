@@ -21,18 +21,20 @@ VertexBuffer::VertexBuffer(VertexBuffer&& rhs) noexcept :
 {
 }
 
+VertexBuffer::~VertexBuffer()
+{
+    this->Destroy();
+}
+
 VertexBuffer& VertexBuffer::operator=(VertexBuffer&& rhs)
 {
+    this->Destroy();
+
     PlatformVertexBuffer::operator=(std::move(rhs));
 
     m_vertexBufferLayoutDescs = std::move(rhs.m_vertexBufferLayoutDescs);
 
     return *this;
-}
-
-VertexBuffer::~VertexBuffer()
-{
-    this->Destroy();
 }
 
 } /* namespace tgon */

@@ -49,7 +49,7 @@ public:
     
 /**@section Destructor */
 public:
-    ~FontFace() = default;
+    ~FontFace();
 
 /**@section Operator */
 public:
@@ -59,6 +59,9 @@ public:
 public:
     const GlyphData& GetGlyphData(UnicodeScalar ch) const;
     I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const;
+
+private:
+    void Destroy();
 
 /**@section Variable */
 public:

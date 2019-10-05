@@ -7,6 +7,7 @@
 #pragma once
 #include "Math/Vector3.h"
 #include "Math/Vector2.h"
+#include "Math/Color.h"
 
 namespace tgon
 {
@@ -20,6 +21,13 @@ struct V3F_C2F
 struct V3F_T2F
 {
     Vector3 position;
+    Vector2 uv;
+};
+
+struct V3F_C4F_T2F
+{
+    Vector3 position;
+    Color4f color;
     Vector2 uv;
 };
 

@@ -59,6 +59,7 @@ void LogoScene::Update()
 void LogoScene::Initialize()
 {
     m_inputModule = Application::GetEngine()->FindModule<InputModule>();
+    m_timeModule = Application::GetEngine()->FindModule<TimeModule>();
     
     this->InitializeGraphics();
     this->CreateGameObjects();
@@ -85,8 +86,8 @@ void LogoScene::CreateCameraObject()
 
 void LogoScene::CreateFontObject()
 {
-    FontFactory ff;
-    auto fontPath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop).value() + "/maplestory_bold.ttf";
+    /*FontFactory ff;
+    auto fontPath = Environment::GetFolderPath(Environment::SpecialFolder::Desktop).value() + "/Temporary/Thousand Party/Resource/Fonts/malgun.ttf";
     std::shared_ptr<Font> font = ff.CreateFont(fontPath.c_str());
     auto object = std::make_shared<GameObject>( "font", new Transform() );
     object->GetTransform()->SetLocalScale( { 1.0f, 1.0f, 1.0f } );
@@ -94,7 +95,7 @@ void LogoScene::CreateFontObject()
     auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
 
     const wchar_t chArray[] = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvrwxyz가나다라마바사아자차카타파하";
-    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
+    static auto textureAtlas = TextureAtlas::Create(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
     for (auto ch : chArray)
     {
         const auto& glyphData = font->GetGlyphData(ch, 35);
@@ -106,7 +107,7 @@ void LogoScene::CreateFontObject()
     decltype(auto) sprite = std::make_shared<UISprite>(texture);
     sprite->SetTextureRect(FRect(imageRect.x, imageRect.y, imageRect.width, imageRect.height));
     spriteComponent->SetSprite(sprite);
-    this->AddObject( object );
+    this->AddObject( object );*/
 //    static TextureAtlas textureAtlas(I32Extent2D(512, 512), PixelFormat::RGBA8888, 6);
 //
 //    float accumulatedXPos = -100.0f;
@@ -147,39 +148,59 @@ void LogoScene::CreateGameObjects()
     this->CreateCameraObject();
     this->CreateFontObject();
     
-//    auto desktopPath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
-//
-//    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
-//    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-//    object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
-//    auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
-//    auto texture = std::make_shared<Texture>(desktopPath + "/a.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
-//    spriteComponent->SetSprite(std::make_shared<UISprite>(texture));
-//    this->AddObject(object);
+    auto desktopPath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
+    auto texture = std::make_shared<Texture>(desktopPath + "/a.jpg", FilterMode::Bilinear, WrapMode::Repeat, true, false);
+    {
+        auto object = std::make_shared<GameObject>("introSprite1", new Transform());
+        object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+        object->GetTransform()->SetLocalPosition({ -150.0f, -150.0f, 0.0f });
+        auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
+        auto sprite = std::make_shared<UISprite>(texture);
+        sprite->SetBlendColor(Color4f(1.0f, 1.0f, 1.0f, 1.0f));
+        spriteComponent->SetSprite(sprite);
+        this->AddObject(object);
+    }
+    {
+        auto object = std::make_shared<GameObject>("introSprite2", new Transform());
+        object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+        object->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+        auto spriteComponent = object->AddComponent<SpriteRendererComponent>();
+        auto sprite = std::make_shared<UISprite>(texture);
+        sprite->SetBlendColor(Color4f(1.0f, 0.0f, 0.0f, 0.5f));
+        spriteComponent->SetSprite(sprite);
+        this->AddObject(object);
+    }
 }
 
 void LogoScene::OnHandleInput()
 {
-     decltype(auto) keyboard = m_inputModule->GetKeyboard();
-     if (keyboard->IsKeyDown(KeyCode::Space) || keyboard->IsKeyDown(KeyCode::Return))
-     {
-//         auto currTime = GetTickCount();
-//         auto elapsedTime = currTime - m_beginTime;
-//         if (elapsedTime <= 1000)
-//         {
-//             m_beginTime = currTime - 1000.0f;
-//         }
-//         else if (elapsedTime <= 3500)
-//         {
-//             m_beginTime = currTime - 3500.0f;
-//         }
-//         else if (elapsedTime <= 5000)
-//         {
-//             m_beginTime = currTime - 5000.0f;
-//         }
-//         else if (elapsedTime <= 7500)
-//         {
-//             m_beginTime = currTime - 7500.0f;
-//         }
-     }
+    auto moveableObject = this->FindObject("introSprite2");
+    if (moveableObject == nullptr)
+    {
+        return;
+    }
+
+    auto transform = moveableObject->GetTransform();
+    auto newPos = transform->GetLocalPosition();
+    float speed = 200.0f;
+
+    decltype(auto) keyboard = m_inputModule->GetKeyboard();
+    if (keyboard->IsKeyHold(KeyCode::LeftArrow))
+    {
+        newPos.x -= speed * m_timeModule->GetTickTime();
+    }
+    if (keyboard->IsKeyHold(KeyCode::RightArrow))
+    {
+        newPos.x += speed * m_timeModule->GetTickTime();
+    }
+    if (keyboard->IsKeyHold(KeyCode::UpArrow))
+    {
+        newPos.y += speed * m_timeModule->GetTickTime();
+    }
+    if (keyboard->IsKeyHold(KeyCode::DownArrow))
+    {
+        newPos.y -= speed * m_timeModule->GetTickTime();
+    }
+
+    transform->SetLocalPosition(newPos);
 }
