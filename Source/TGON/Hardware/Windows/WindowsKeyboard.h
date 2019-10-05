@@ -153,7 +153,7 @@ public:
 /**@section Variable */
 protected:
     OIS::Keyboard* m_nativeKeyboard;
-    char m_currKeyStates[256];
+    std::array<char, 256> m_currKeyStates;
 };
 
 using PlatformKeyboard = WindowsKeyboard;

@@ -157,7 +157,7 @@ const std::vector<std::string>& Environment::GetCommandLineArgs()
 
 int64_t Environment::GetTickCount()
 {
-    return static_cast<int64_t>(::GetTickCount());
+    return static_cast<int64_t>(::GetTickCount64());
 }
 
 bool Environment::Is64BitProcess()

@@ -30,7 +30,7 @@ Keyboard::Keyboard(InputManager& inputManager) :
 
 void Keyboard::Update()
 {
-    m_nativeKeyboard->copyKeyStates(m_currKeyStates);
+    m_nativeKeyboard->copyKeyStates(m_currKeyStates.data());
     m_nativeKeyboard->capture();
 }
 

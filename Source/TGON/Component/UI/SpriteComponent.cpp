@@ -14,9 +14,8 @@ SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<UISprite>
 {
 }
 
-SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Material>& material, const Color4f& blendColor) :
-    RendererComponent(material),
-    m_blendColor(blendColor)
+SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<Material>& material) :
+    RendererComponent(material)
 {
 }
     
@@ -38,16 +37,6 @@ std::shared_ptr<UISprite> SpriteRendererComponent::GetSprite() noexcept
 std::shared_ptr<const UISprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
-}
-
-void SpriteRendererComponent::SetBlendColor(const Color4f& blendColor)
-{
-    m_blendColor = blendColor;
-}
-
-const Color4f& SpriteRendererComponent::GetBlendColor() const noexcept
-{
-    return m_blendColor;
 }
 
 } /* namespace tgon */

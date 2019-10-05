@@ -1,0 +1,2475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{f2d995bf-e852-4a9d-81b3-f3d71f4cb75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty">
+      <UniqueIdentifier>{cfc900c3-3a21-453a-95b0-fadd4a61ce65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\stb">
+      <UniqueIdentifier>{d5200210-5b80-4243-8e14-cf43a3a8f480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\fmt-5.1.0">
+      <UniqueIdentifier>{c8c0c57f-e31e-4d90-8131-e948fc0f28cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\glew-2.1.0">
+      <UniqueIdentifier>{01cf65c0-f8a3-478f-a716-454b3893d322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\OIS-1.4">
+      <UniqueIdentifier>{939c67de-2c29-461a-9566-63343db6e887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0">
+      <UniqueIdentifier>{03c3d8d6-9498-440c-8bd4-d001fe0c3bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\include">
+      <UniqueIdentifier>{2a4ea910-389c-40f3-ba46-5cf1def921b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\include\freetype">
+      <UniqueIdentifier>{bf489bca-29c7-4dd4-ac94-31055d4b51d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\freetype-2.10.0\src">
+      <UniqueIdentifier>{cf06ca67-a965-4db6-b40e-6caa364f939f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\zlib-1.2.11">
+      <UniqueIdentifier>{ad986e51-604c-47ac-905e-07d60be4befe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON">
+      <UniqueIdentifier>{233c58eb-b0e3-4c39-8d23-28c7963d79c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Audio">
+      <UniqueIdentifier>{6c32cac1-0b09-41ea-8c98-5a0805336c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Audio\Importer">
+      <UniqueIdentifier>{e62418c4-9498-4f3e-ac81-74411532bae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Core">
+      <UniqueIdentifier>{a07c7e90-97ee-4ff7-b41c-e7aaae69ac23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Diagnostics">
+      <UniqueIdentifier>{b40619fa-57ec-4097-b0dd-18f48ee4a690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Drawing">
+      <UniqueIdentifier>{0cfb97d9-70aa-46c4-bafd-d32b71920042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Drawing\ImageProcessor">
+      <UniqueIdentifier>{3ea0e8fc-5698-43a9-a212-81a4f202994e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Engine">
+      <UniqueIdentifier>{7a4aecf5-8f19-4c28-b472-4821da7b20c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Graphics">
+      <UniqueIdentifier>{fe86d327-bce9-4bfd-9a90-9e8462856547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Graphics\OpenGL">
+      <UniqueIdentifier>{8b1bbe34-12c5-4350-abcd-18edeca21189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Hardware">
+      <UniqueIdentifier>{aefdb740-a220-4180-93ae-d7feebf2eed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\IO">
+      <UniqueIdentifier>{14642a17-b420-4ab8-a630-1edeb86b2c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Platform">
+      <UniqueIdentifier>{6bedc5b7-9af9-4504-a300-a2904cbe06f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Random">
+      <UniqueIdentifier>{d93372fe-1913-4ffc-9856-c1d8b2caa009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\String">
+      <UniqueIdentifier>{8808d572-e4ce-494f-9a2c-90e55539b93b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Thread">
+      <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Time">
+      <UniqueIdentifier>{55087a89-f7c6-4380-a0fb-822f6dd3ba4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\icu4c-64_2">
+      <UniqueIdentifier>{7f25e1e5-e3d5-4755-aa40-d941878c7d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\icu4c-64_2\common">
+      <UniqueIdentifier>{c3b900b1-0ec2-4f82-bbf4-ea45411bc46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Misc">
+      <UniqueIdentifier>{e087f30a-792f-44df-89fd-2b015d2a2fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Component">
+      <UniqueIdentifier>{9052ce00-a0a7-47c3-bc4d-28543d6de649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Component\UI">
+      <UniqueIdentifier>{706cd837-77a5-42f0-bf1f-ae8cba37d9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\UI">
+      <UniqueIdentifier>{895d0d33-319a-4abd-a30a-64854d5b44dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Game">
+      <UniqueIdentifier>{446860f8-a8fd-485f-a75d-bcff7c1884ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\icu4c-64_2\common\unicode">
+      <UniqueIdentifier>{fd864ff1-ef22-4943-afb0-6b72f0f46f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Math">
+      <UniqueIdentifier>{18d2a407-7212-46fa-8195-18f41273558f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\src\glew.c">
+      <Filter>Source\ThirdParty\glew-2.1.0</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISEffect.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISException.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISForceFeedback.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISInputManager.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISJoyStick.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISKeyboard.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISObject.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.cpp">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioPlayer.cpp">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBuffer.cpp">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.cpp">
+      <Filter>Source\TGON\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.cpp">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimeModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphics.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLIndexBuffer.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLShaderProgram.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLTexture.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\InputManager.cpp">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\Mouse.cpp">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Path.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Window.cpp">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Application.cpp">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WELL1024a.cpp">
+      <Filter>Source\TGON\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Hash.cpp">
+      <Filter>Source\TGON\String</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.cpp">
+      <Filter>Source\TGON\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_vorbis.c">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\GraphicsModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.cpp">
+      <Filter>Source\TGON\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.cpp">
+      <Filter>Source\TGON\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.cpp">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbase.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\cache\ftcache.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftdebug.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\gzip\ftgzip.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\cff\cff.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\bdf\bdf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftinit.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\lzw\ftlzw.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsystem.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\pcf\pcf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\pfr\pfr.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\psaux\psaux.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\pshinter\pshinter.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\psnames\psmodule.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\raster\raster.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\sfnt\sfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\smooth\smooth.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\truetype\truetype.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\type1\type1.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\cid\type1cid.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\type42\type42.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\winfonts\winfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbbox.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbdf.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftbitmap.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftcid.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftfstype.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgasp.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftglyph.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftgxval.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftmm.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftotval.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpatent.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftpfr.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftstroke.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftsynth.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\fttype1.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftwinfnt.c">
+      <Filter>Source\ThirdParty\freetype-2.10.0\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\deflate.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\gzclose.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\gzlib.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\gzread.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\gzwrite.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\infback.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inffast.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inflate.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inftrees.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\trees.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\uncompr.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\zutil.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\adler32.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\compress.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\crc32.c">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Encoding.cpp">
+      <Filter>Source\TGON\String</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\EventDispatcher.cpp">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.cpp">
+      <Filter>Source\TGON\Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.cpp">
+      <Filter>Source\TGON\Component\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\CameraComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\Scene.cpp">
+      <Filter>Source\TGON\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\GameObject.cpp">
+      <Filter>Source\TGON\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\IndexBuffer.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Material.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Mesh.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\RenderTarget.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\ShaderProgram.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Texture.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\TextureAtlas.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Transform.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\VertexBuffer.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Camera.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Graphics.cpp">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\File.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\appendable.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bmpset.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\brkeng.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\brkiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytesinkutil.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytestream.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytestrie.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytestriebuilder.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytestrieiterator.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\caniter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\characterproperties.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\chariter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\charstr.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cmemory.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cstr.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cstring.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cwchar.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\dictbe.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\dictionarydata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\dtintrv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\edits.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\errorcode.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\filteredbrk.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\filterednormalizer2.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\icudataver.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\icuplug.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\loadednormalizer2impl.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\localebuilder.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locavailable.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locbased.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locdispnames.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locdspnm.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locid.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\loclikely.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locmap.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locresdata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locutil.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\messagepattern.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\normalizer2.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\normalizer2impl.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\normlzr.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\parsepos.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\patternprops.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\pluralmap.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\propname.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\propsvec.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\punycode.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\putil.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbi.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbi_cache.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbidata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbinode.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbirb.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbiscan.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbisetb.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbistbl.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbitblb.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\resbund.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\resbund_cnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\resource.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ruleiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\schriter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\serv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servlk.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servlkf.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servls.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servnotf.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servrbf.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servslkf.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\sharedobject.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\simpleformatter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\static_unicode_sets.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\stringpiece.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\stringtriebuilder.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uarrsort.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidi.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidi_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidiln.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubiditransform.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidiwrt.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubrk.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucase.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucasemap.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucasemap_titlecase_brkiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucat.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uchar.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucharstrie.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucharstriebuilder.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucharstrieiterator.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uchriter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucln_cmn.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucmndata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_bld.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_cb.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_cnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_ct.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_err.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_ext.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_io.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_lmb.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_set.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_u7.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_u8.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_u16.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_u32.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv2022.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvbocu.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvdisp.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvhz.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvisci.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvlat1.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvmbcs.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvscsu.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvsel.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucol_swp.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucptrie.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucurr.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udatamem.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udataswp.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uenum.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uhash.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uhash_us.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uidna.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uinit.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uinvchar.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ulist.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uloc.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uloc_keytype.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uloc_tag.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umapfile.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umath.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umutablecptrie.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umutex.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unames.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unifiedcache.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unifilt.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unifunct.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uniset.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uniset_closure.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uniset_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unisetspan.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr_case.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr_case_locale.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr_cnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistr_titlecase_brkiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unorm.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unormcmp.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uobject.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uprops.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ures_cnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uresbund.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uresdata.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\usc_impl.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uscript.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uscript_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uset.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uset_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\usetiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ushape.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\usprep.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustack.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustr_cnv.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustr_titlecase_brkiter.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustr_wcs.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrcase.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrcase_locale.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrenum.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrfmt.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustring.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrtrns.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utext.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utf_impl.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\util.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\util_props.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrace.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie_swap.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie2.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie2_builder.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uts46.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utypes.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvector.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvectr32.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvectr64.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\wintz.cpp">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.cpp">
+      <Filter>Source\TGON\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileStream.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp">
+      <Filter>Source\TGON\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\Keyboard.cpp">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Environment.cpp">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\Random.cpp">
+      <Filter>Source\TGON\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Directory.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_herringbone_wang_tile.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_image.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_image_resize.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_image_write.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_leakcheck.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_perlin.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_rect_pack.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_sprintf.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_textedit.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_tilemap_editor.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_truetype.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_voxel_render.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stretchy_buffer.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_c_lexer.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_connected_components.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_divide.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_dxt.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_easy_font.h">
+      <Filter>Source\ThirdParty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\include\GL\eglew.h">
+      <Filter>Source\ThirdParty\glew-2.1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\include\GL\glew.h">
+      <Filter>Source\ThirdParty\glew-2.1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\include\GL\glxew.h">
+      <Filter>Source\ThirdParty\glew-2.1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\include\GL\wglew.h">
+      <Filter>Source\ThirdParty\glew-2.1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEffect.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEvents.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISException.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISFactoryCreator.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISForceFeedback.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInputManager.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInterface.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISJoyStick.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISKeyboard.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMouse.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMultiTouch.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISObject.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISPrereqs.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OIS.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISConfig.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferType.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferUtility.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioPlayer.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBuffer.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\BaseAudioImporter.h">
+      <Filter>Source\TGON\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\OggVorbisAudioImporter.h">
+      <Filter>Source\TGON\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\RiffReader.h">
+      <Filter>Source\TGON\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\WavAudioImporter.h">
+      <Filter>Source\TGON\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\IComparable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\ISerializable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RuntimeObject.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\TypeTraits.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Delegate.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\DelegateChain.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\DynamicCast.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\ICloneable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.h">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Drawing.h">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\GraphicsModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\IModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimeModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLContext.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLGraphics.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLIndexBuffer.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLShaderCode.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLShaderProgram.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLTexture.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLVertexBuffer.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\Gamepad.h">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\InputManager.h">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\Keyboard.h">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Hardware\Mouse.h">
+      <Filter>Source\TGON\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Path.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Mathematics.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Matrix4x4.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Point.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Rect.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Vector2.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Vector3.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Color.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Extent.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Application.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Config.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Locale.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Prefix.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Screen.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\ScreenType.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Window.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WeightSelector.h">
+      <Filter>Source\TGON\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WELL1024a.h">
+      <Filter>Source\TGON\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\Random.h">
+      <Filter>Source\TGON\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Hash.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\StringHash.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\StringTraits.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\UUID.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Encoding.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\FixedString.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Stopwatch.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Time.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Vector4.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Matrix3x4.h">
+      <Filter>Source\TGON\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.h">
+      <Filter>Source\TGON\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.h">
+      <Filter>Source\TGON\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\ft2build.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\freetype.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftadvanc.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbbox.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbdf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbitmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftbzip2.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcache.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftchapters.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftcolor.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftdriver.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fterrors.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftfntfmt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgasp.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftglyph.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgxval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftgzip.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftimage.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftincrem.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlcdfil.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlist.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftlzw.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmac.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmodapi.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftmoderr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftotval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftoutln.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftparams.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftpfr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftrender.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsizes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsnames.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftstroke.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsynth.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftsystem.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttrigon.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\fttypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ftwinfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\t1tables.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\ttnameid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttables.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\tttags.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftmodule.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftoption.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftstdlib.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\autohint.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cffotypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\cfftypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftcalc.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdebug.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftdrv.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftgloadr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fthash.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftmemory.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftobjs.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftpsprop.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftrfork.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftserv.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftstream.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\fttrace.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\ftvalid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\internal.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\psaux.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\pshints.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svbdf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcfftl.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svcid.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svfntfmt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgldict.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svgxval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svkern.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmetric.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svmm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svotval.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpfr.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpostnm.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svprop.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpscmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svpsinfo.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svsfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttcmap.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svtteng.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svttglyf.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\services\svwinfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\sfnt.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\t1types.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\internal\tttypes.h">
+      <Filter>Source\ThirdParty\freetype-2.10.0\include\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLDebug.h">
+      <Filter>Source\TGON\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.h">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inffixed.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inflate.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inftrees.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\trees.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\zlib.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\zutil.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\crc32.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\deflate.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\gzguts.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\inffast.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\zconf.h">
+      <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\PngImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\WebPImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BaseImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\UnicodeScalar.h">
+      <Filter>Source\TGON\String</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstanceCounter.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstantiateCounter.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\StaticInvoke.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\AutoCast.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\EventDispatcher.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\ExpressionTemplate.h">
+      <Filter>Source\TGON\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.h">
+      <Filter>Source\TGON\Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.h">
+      <Filter>Source\TGON\Component\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\ComponentUtility.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\CameraComponent.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\GameObject.h">
+      <Filter>Source\TGON\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\Scene.h">
+      <Filter>Source\TGON\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Graphics.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\IndexBuffer.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Material.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Mesh.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\RenderTarget.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\ShaderProgram.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Texture.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\TextureAtlas.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Transform.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\VertexBuffer.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Camera.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\FVF.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Range.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\File.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeSpan.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unormimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uposixdefs.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uprops.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uresdata.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uresimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ureslocs.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\usc_impl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uset_imp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustr_cnv.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustr_imp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrenum.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ustrfmt.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\util.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utracimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie2.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utrie2_impl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\utypeinfo.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvector.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvectr32.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uvectr64.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\wintz.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bmpset.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\brkeng.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\bytesinkutil.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\capi_helper.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\charstr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cmemory.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cpputils.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cstr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cstring.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\cwchar.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\dictbe.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\dictionarydata.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\hash.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\icuplugimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\localsvc.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locbased.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locmap.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\locutil.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\messageimpl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\msvcres.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\mutex.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\norm2_nfc_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\norm2allmodes.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\normalizer2impl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\patternprops.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\pluralmap.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\propname.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\propname_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\propsvec.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\punycode.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\putilimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbi_cache.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbidata.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbinode.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbirb.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbirpt.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbiscan.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbisetb.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\rbbitblb.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\resource.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ruleiter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\serv.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servloc.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\servnotf.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\sharedobject.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\sprpimpl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\static_unicode_sets.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uarrsort.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uassert.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidi_props.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidi_props_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubidiimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ubrkimpl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucase.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucase_props_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucasemap_imp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uchar_props_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucln.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucln_cmn.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucln_imp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucmndata.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_bld.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_cnv.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_ext.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_imp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnv_io.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucnvmbcs.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucol_data.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucol_swp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucptrie_impl.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ucurrimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udatamem.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\udataswp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uelement.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uenumimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uhash.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\uinvchar.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ulayout_props.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ulist.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\ulocimp.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umapfile.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\umutex.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unifiedcache.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unisetspan.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unistrappender.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uidna.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uiter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uldnames.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uloc.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\umachine.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\umisc.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\umutablecptrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unifilt.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unifunct.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unimatch.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uniset.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unistr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unorm.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\unorm2.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uobject.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\urename.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\urep.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ures.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uscript.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uset.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\usetiter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ushape.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\usprep.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ustring.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ustringtrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utext.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utf.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utf_old.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utf8.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utf16.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utf32.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utrace.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\utypes.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uvernum.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uversion.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\appendable.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\brkiter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\bytestream.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\bytestrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\bytestriebuilder.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\caniter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\casemap.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\char16ptr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\chariter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\dbbi.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\docmain.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\dtintrv.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\edits.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\enumset.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\errorcode.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\filteredbrk.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\icudataver.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\icuplug.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\idna.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\localebuilder.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\localpointer.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\locdspnm.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\locid.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\messagepattern.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\normalizer2.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\normlzr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\parseerr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\parsepos.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\platform.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ptypes.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\putil.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\rbbi.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\rep.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\resbund.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\schriter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\simpleformatter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\std_string.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\strenum.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\stringoptions.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\stringpiece.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\stringtriebuilder.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\symtable.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ubidi.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ubiditransform.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ubrk.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucasemap.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucat.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uchar.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucharstrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucharstriebuilder.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uchriter.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uclean.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucnv.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucnv_cb.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucnv_err.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucnvsel.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uconfig.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucpmap.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucptrie.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\ucurr.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\udata.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\udisplaycontext.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\icu4c-64_2\icu\source\common\unicode\uenum.h">
+      <Filter>Source\ThirdParty\icu4c-64_2\common\unicode</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeZoneInfo.h">
+      <Filter>Source\TGON\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileStream.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Stream.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.h">
+      <Filter>Source\TGON\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Environment.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\NonCopyable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\NonAddressable.h">
+      <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\DirectoryInfo.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Directory.h">
+      <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\VideoMode.h">
+      <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

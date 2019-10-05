@@ -5,13 +5,13 @@
  */
 
 #pragma once
+#include "Graphics/Camera.h"
+#include "Engine/GraphicsModule.h"
+
 #include "Component.h"
 
 namespace tgon
 {
-
-class Camera;
-class GraphicsModule;
 
 class TGON_API CameraComponent :
 	public Component

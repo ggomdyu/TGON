@@ -26,12 +26,12 @@ namespace tgon
 
 struct WindowStyle final
 {
-    std::string title = u8"Hell of world!";
+    std::string title = u8"Thousand Party";
 
     int32_t x = 100;
     int32_t y = 100;
-    int32_t width = 600;
-    int32_t height = 600;
+    int32_t width = 838;
+    int32_t height = 441;
 
     bool hasCaption = true;
     bool enableSystemButton = true;

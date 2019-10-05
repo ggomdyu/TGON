@@ -142,24 +142,20 @@ public:
     
 /**@section Constructor */
 public:
-    /**@brief   Initializes with null character pointer. */
     constexpr BasicStringHash() noexcept = default;
     
-    /**@brief   Initializes with character array. */
     template <std::size_t _CharBufferSize>
     constexpr BasicStringHash(const ValueType(&str)[_CharBufferSize]) noexcept :
         BasicStringHash({str, _CharBufferSize - 1})
     {
     }
 
-    /**@brief   Initializes with basic_string. */
     constexpr BasicStringHash(const std::basic_string_view<ValueType>& str) noexcept :
         SuperType(str.data()),
         m_str(str)
     {
     }
     
-    /**@brief   Initializes with BasicStringHash. */
     template <typename _StringType2, typename std::enable_if_t<std::is_base_of_v<detail::BaseBasicStringHash<_StringType2>, _StringType2>>* = nullptr>
     constexpr BasicStringHash(const _StringType2& str) noexcept :
         SuperType(str.GetHashCode()),
