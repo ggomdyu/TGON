@@ -1,9 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/Engine.h"
 #include "Engine/GraphicsModule.h"
-#include "Platform/Application.h"
 #include "Graphics/Camera.h"
+#include "Platform/Application.h"
 
 #include "CameraComponent.h"
 
@@ -26,8 +25,9 @@ CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, fl
 }
 
 CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
+    Component(),
     m_camera(camera),
-    m_graphicsModule(Application::GetInstance().GetEngine()->FindModule<GraphicsModule>())
+    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
 {
     auto graphicsModule = m_graphicsModule.lock();
     if (graphicsModule != nullptr)

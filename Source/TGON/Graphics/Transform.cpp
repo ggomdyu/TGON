@@ -7,38 +7,44 @@
 namespace tgon
 {
 
-Transform::Transform() noexcept :
-    Transform(nullptr, {})
-{
-}
-    
-Transform::Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
-    Transform(nullptr, localPosition, localRotation, localScale)
+Transform::Transform(const std::weak_ptr<GameObject>& gameObject) noexcept :
+    Transform(gameObject, nullptr, {}, {}, Vector3(1.0f, 1.0f, 1.0f))
 {
 }
 
-Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition) noexcept :
-    Transform(parent, localPosition, {}, {1.0f, 1.0f, 1.0f})
+Transform::Transform(const std::weak_ptr<GameObject>& gameObject, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) :
+    Transform(gameObject, nullptr, localPosition, localRotation, localScale)
 {
 }
 
-Transform::Transform(const Vector3& localPosition) noexcept :
-    Transform(nullptr, localPosition)
-{
-}
-    
-Transform::Transform(const std::shared_ptr<Transform>& parent) noexcept :
-    Transform(parent, {})
+Transform::Transform(const std::weak_ptr<GameObject>& gameObject, const std::shared_ptr<Transform>& parent) :
+    Transform(gameObject, parent, {}, {}, Vector3(1.0f, 1.0f, 1.0f))
 {
 }
 
-Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
+Transform::Transform(const std::weak_ptr<GameObject>& gameObject, const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
+    Component(gameObject),
     m_parent(parent),
     m_localPosition(localPosition),
     m_localRotation(localRotation),
     m_localScale(localScale),
     m_matWorld(Matrix4x4::Identity()),
     m_isDirty(true)
+{
+}
+
+Transform::Transform(const std::shared_ptr<Transform>& parent) :
+    Transform(std::weak_ptr<GameObject>(), parent)
+{
+}
+
+Transform::Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) :
+    Transform(std::weak_ptr<GameObject>(), localPosition, localRotation, localScale)
+{
+}
+
+Transform::Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept :
+    Transform(std::weak_ptr<GameObject>(), parent, localPosition, localRotation, localScale)
 {
 }
     

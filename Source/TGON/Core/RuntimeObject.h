@@ -6,13 +6,15 @@
 
 #pragma once
 #include "Platform/Config.h"
+#include "Core/NonCopyable.h"
 
 #include "RTTI.h"
 
 namespace tgon
 {
 
-class TGON_API RuntimeObject
+class TGON_API RuntimeObject :
+    private NonCopyable
 {
 /**@section Type */
 public:

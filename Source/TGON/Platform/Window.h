@@ -36,7 +36,7 @@ struct WindowStyle final
     bool hasCaption = true;
     bool enableSystemButton = true;
     bool enableFullScreen = false;
-    bool resizeable = true;
+    bool resizeable = false;
     bool topMost = false;
     bool showMiddle = true;
 };

@@ -5,13 +5,13 @@
  */
 
 #pragma once
+#include "Engine/GraphicsModule.h"
+#include "Graphics/Material.h"
+
 #include "Component.h"
 
 namespace tgon
 {
-
-class Material;
-class GraphicsModule;
 
 class TGON_API RendererComponent :
 	public Component
@@ -21,8 +21,7 @@ public:
 
 /**@section Constructor */
 public:
-    RendererComponent();
-    explicit RendererComponent(const std::shared_ptr<Material>& material);
+    explicit RendererComponent(const std::shared_ptr<Material>& material = nullptr);
     
 /**@section Destructor */
 public:

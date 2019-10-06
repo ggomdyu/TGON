@@ -24,16 +24,16 @@ namespace tgon
 {
 
 template <typename _CharType, typename std::enable_if_t<IsCharValue<_CharType>>* = nullptr>
-constexpr size_t X65599Hash(_CharType ch) noexcept
+constexpr int32_t X65599Hash(_CharType ch) noexcept
 {
     return ch ^ (ch >> 16);
 }
     
 template <typename _CharType>
-constexpr size_t X65599Hash(const _CharType* str) noexcept
+constexpr int32_t X65599Hash(const _CharType* str) noexcept
 {   
-    std::size_t hashValue = 0;
-    for (std::size_t i = 0; str[i] != 0; ++i)
+    int32_t hashValue = 0;
+    for (int32_t i = 0; str[i] != 0; ++i)
     {
         hashValue = 65599 * hashValue + str[i];
     }

@@ -22,12 +22,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\CameraComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.cpp" />
@@ -1638,10 +1640,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\WavAudioImporter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\CameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\ComponentUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Delegate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\DelegateChain.h" />
@@ -1664,6 +1665,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\PngImageProcessor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\WebPImageProcessor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.h" />

@@ -23,52 +23,71 @@ class BaseBasicStringHash
 {
 /**@section Constructor */
 public:
-    constexpr BaseBasicStringHash() noexcept :
-        m_hashCode(0)
-    {
-    }
+    constexpr BaseBasicStringHash() noexcept;
+    constexpr BaseBasicStringHash(int32_t hashCode) noexcept;
 
     template <typename _ValueType, typename std::enable_if_t<IsCharPointerValue<_ValueType>>* = nullptr>
-    constexpr BaseBasicStringHash(const _ValueType& str) noexcept :
-        m_hashCode(X65599Hash(str))
-    {
-    }
-
-    constexpr BaseBasicStringHash(size_t hashCode) noexcept :
-        m_hashCode(hashCode)
-    {
-    }
+    constexpr BaseBasicStringHash(const _ValueType& str) noexcept;
 
 /**@section Operator */
 public:
-    constexpr bool operator==(const _DeriviedType& rhs) const noexcept
-    {
-        return m_hashCode == rhs.GetHashCode();
-    }
-
-    constexpr bool operator!=(const _DeriviedType& rhs) const noexcept
-    {
-        return !this->operator==(rhs);
-    }
+    constexpr bool operator==(const _DeriviedType& rhs) const noexcept;
+    constexpr bool operator!=(const _DeriviedType& rhs) const noexcept;
 
 /**@section Method */
 public:
-    /**@brief   Gets the hash code of the string. */
-    constexpr const size_t GetHashCode() const noexcept
-    {
-        return m_hashCode;
-    }
+    constexpr const int32_t GetHashCode() const noexcept;
 
 protected:
-    void Clear()
-    {
-        m_hashCode = 0;
-    }
+    void Clear();
 
 /**@section Variable */
 private:
-    size_t m_hashCode;
+    int32_t m_hashCode;
 };
+
+template <typename _DeriviedType>
+constexpr BaseBasicStringHash<_DeriviedType>::BaseBasicStringHash() noexcept :
+    m_hashCode(0)
+{
+}
+
+template <typename _DeriviedType>
+constexpr BaseBasicStringHash<_DeriviedType>::BaseBasicStringHash(int32_t hashCode) noexcept :
+    m_hashCode(hashCode)
+{
+}
+
+template <typename _DeriviedType>
+template <typename _ValueType, typename std::enable_if_t<IsCharPointerValue<_ValueType>>*>
+inline constexpr tgon::detail::BaseBasicStringHash<_DeriviedType>::BaseBasicStringHash(const _ValueType & str) noexcept :
+    m_hashCode(X65599Hash(str))
+{
+}
+
+template <typename _DeriviedType>
+constexpr bool BaseBasicStringHash<_DeriviedType>::operator==(const _DeriviedType& rhs) const noexcept
+{
+    return m_hashCode == rhs.GetHashCode();
+}
+
+template <typename _DeriviedType>
+constexpr bool BaseBasicStringHash<_DeriviedType>::operator!=(const _DeriviedType& rhs) const noexcept
+{
+    return !this->operator==(rhs);
+}
+
+template <typename _DeriviedType>
+constexpr const int32_t BaseBasicStringHash<_DeriviedType>::GetHashCode() const noexcept
+{
+    return m_hashCode;
+}
+
+template <typename _DeriviedType>
+inline void BaseBasicStringHash<_DeriviedType>::Clear()
+{
+    m_hashCode = 0;
+}
 
 } /* namespace detail */
     
@@ -84,9 +103,8 @@ public:
     
 /**@section Constructor */
 public:
-    /**@brief   Initializes with null character pointer. */
     constexpr BasicStringHash() noexcept :
-        BasicStringHash(nullptr, 0)
+        BasicStringHash("", 0)
     {
     }
     
@@ -114,7 +132,7 @@ public:
     }
     
     /**@brief   Gets the length of string. */
-    constexpr const size_t Length() const noexcept
+    constexpr const int32_t Length() const noexcept
     {
         return m_str.Length();
     }
@@ -144,7 +162,7 @@ public:
 public:
     constexpr BasicStringHash() noexcept = default;
     
-    template <std::size_t _CharBufferSize>
+    template <std::int32_t _CharBufferSize>
     constexpr BasicStringHash(const ValueType(&str)[_CharBufferSize]) noexcept :
         BasicStringHash({str, _CharBufferSize - 1})
     {
@@ -172,7 +190,7 @@ public:
     }
     
     /**@brief   Gets the length of string. */
-    constexpr const size_t Length() const noexcept
+    constexpr const int32_t Length() const noexcept
     {
         return m_str.length();
     }
@@ -207,7 +225,7 @@ public:
     }
     
     /**@brief   Initializes with character pointer. */
-    template <std::size_t _CharBufferSize>
+    template <std::int32_t _CharBufferSize>
     constexpr BasicStringHash(const ValueType(&str)[_CharBufferSize]) noexcept :
         BasicStringHash({str, _CharBufferSize - 1})
     {
@@ -239,7 +257,7 @@ public:
     }
 
     /**@brief   Gets the length of string. */
-    constexpr const size_t Length() const noexcept
+    constexpr const int32_t Length() const noexcept
     {
         return m_strLen;
     }
@@ -254,7 +272,7 @@ public:
 /**@section Variable */
 private:
     _StringType m_str;
-    size_t m_strLen;
+    int32_t m_strLen;
 };
 
 template <typename>
@@ -300,7 +318,7 @@ struct hash<tgon::BasicStringHash<_StringType>>
 {
 /* @section Method */
 public:
-    size_t operator()(const tgon::BasicStringHash<_StringType>& rhs) const noexcept
+    int32_t operator()(const tgon::BasicStringHash<_StringType>& rhs) const noexcept
     {
         return rhs.GetHashCode();
     }

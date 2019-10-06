@@ -11,21 +11,27 @@
 #include "Platform/Config.h"
 #include "Math/Vector3.h"
 #include "Math/Matrix4x4.h"
+#include "Component/Component.h"
 
 namespace tgon
 {
 
-class TGON_API Transform
+class TGON_API Transform :
+    public Component
 {
+public:
+    TGON_DECLARE_RTTI(Transform)
+
 /**@section Constructor */
 public:
-    Transform() noexcept;
+    explicit Transform(const std::weak_ptr<GameObject>& gameObject = {}) noexcept;
+    Transform(const std::weak_ptr<GameObject>& gameObject, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale);
+    Transform(const std::weak_ptr<GameObject>& gameObject, const std::shared_ptr<Transform>& parent);
+    Transform(const std::weak_ptr<GameObject>& gameObject, const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
+    explicit Transform(const std::shared_ptr<Transform>& parent);
+    Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale);
     Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
-    Transform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition) noexcept;
-    Transform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
-    explicit Transform(const Vector3& localPosition) noexcept;
-    explicit Transform(const std::shared_ptr<Transform>& parent) noexcept;
-    
+
 /**@section Destructor */
 public:
     virtual ~Transform() noexcept = default;

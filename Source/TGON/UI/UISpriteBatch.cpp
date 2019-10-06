@@ -66,7 +66,7 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
 
     int32_t oldVertexEndOffset = m_vertexEndOffset;
     int32_t expandSize = sizeof(V3F_C4F_T2F) / 4 * 6;
-    vertices->resize(m_vertexEndOffset + expandSize);
+    vertices->resize(static_cast<size_t>(m_vertexEndOffset) + expandSize);
     m_vertexEndOffset += expandSize;
 
     // Left top

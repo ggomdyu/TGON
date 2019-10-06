@@ -37,7 +37,6 @@ thread_local std::unique_ptr<unsigned int[]> state;
 
 TGON_API void SrandWELL1024a()
 {
-    // Initialize the WELL1024a seed
     if (state == nullptr)
     {
         state = std::make_unique<unsigned int[]>(R);

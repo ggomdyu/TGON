@@ -8,30 +8,23 @@
 #include <vector>
 
 #include "Core/CoreObject.h"
-#include "Core/DynamicCast.h"
 #include "Graphics/Transform.h"
-#include "String/StringHash.h"
 #include "Component/Component.h"
 
 namespace tgon
 {
 
 class TGON_API GameObject :
-	public CoreObject
+	public CoreObject,
+    public std::enable_shared_from_this<GameObject>
 {
 public:
     TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
 public:
-    template <typename... _ComponentTypes>
-    explicit GameObject(const StringHash& name, Transform* transform, _ComponentTypes&&... components) :
-        m_name(name),
-        m_transform(transform),
-        m_isActive(true),
-        m_components(std::forward<_ComponentTypes>(components)...)
-    {
-    }
+    GameObject();
+    explicit GameObject(const StringHash& name);
 
 /**@section Destructor */
 public:
@@ -43,15 +36,11 @@ public:
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
     template <typename _ComponentType>
-    std::shared_ptr<_ComponentType> AddComponent(const std::shared_ptr<_ComponentType>& component);
-    template <typename _ComponentType>
     bool RemoveComponent();
     template <typename _ComponentType>
     std::shared_ptr<const _ComponentType> GetComponent() const;
     template <typename _ComponentType>
     std::shared_ptr<_ComponentType> GetComponent();
-    void SetName(const StringHash& name);
-    const StringHash& GetName() const noexcept;
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
     std::shared_ptr<Transform> GetTransform() noexcept;
@@ -63,24 +52,19 @@ private:
 
 /**@section Variable */
 private:
-    StringHash m_name;
     bool m_isActive;
     std::shared_ptr<Transform> m_transform;
     std::vector<std::shared_ptr<Component>> m_components;
 };
-    
+
 template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
 {
-    return this->AddComponent(std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...));
-}
+    auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
+    component->SetGameObject(this->weak_from_this());
 
-template <typename _ComponentType>
-inline std::shared_ptr<_ComponentType> GameObject::AddComponent(const std::shared_ptr<_ComponentType>& component)
-{
     m_components.push_back(component);
-    component->SetOwner(this);
-    
+
     return component;
 }
 
@@ -102,6 +86,12 @@ inline std::shared_ptr<_ComponentType> GameObject::GetComponent()
 {
     auto componentId = tgon::GetRTTI<_ComponentType>()->GetHashCode();
     return std::static_pointer_cast<_ComponentType>(GetComponent(componentId));
+}
+
+template <>
+inline std::shared_ptr<Transform> GameObject::GetComponent()
+{
+    return m_transform;
 }
     
 } /* namespace tgon */

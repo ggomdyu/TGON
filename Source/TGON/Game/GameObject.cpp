@@ -7,6 +7,18 @@
 namespace tgon
 {
 
+GameObject::GameObject() :
+    GameObject(StringHash())
+{
+}
+
+GameObject::GameObject(const StringHash& name) :
+    CoreObject(name),
+    m_isActive(true),
+    m_transform(std::make_shared<Transform>(this->weak_from_this()))
+{
+}
+
 void GameObject::Update()
 {
     if (m_isActive == false)
@@ -20,16 +32,6 @@ void GameObject::Update()
     {
         component->Update();
     }
-}
-
-void GameObject::SetName(const StringHash& name)
-{
-    m_name = name;
-}
-
-const StringHash& GameObject::GetName() const noexcept
-{
-    return m_name;
 }
 
 void GameObject::SetActive(bool isActive) noexcept

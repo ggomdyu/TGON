@@ -18,15 +18,7 @@ class TGON_API RectTransform :
 {
 /**@section Constructor */
 public:
-    RectTransform();
-    RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale) noexcept;
-    RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale, const Vector2& localPivot) noexcept;
-    RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition, const Vector2& localPivot);
-    RectTransform(const std::shared_ptr<Transform>& parent, const Vector3& localPosition);
-    RectTransform(const Vector3& localPosition, const Vector3& localRotation, const Vector3& localScale, const Vector2& localPivot);
-    RectTransform(const Vector3& localPosition, const Vector2& localPivot);
-    explicit RectTransform(const std::shared_ptr<Transform>& parent) noexcept;
-    explicit RectTransform(const Vector3& localPosition);
+    using Transform::Transform;
 
 /**@section Method */
 public:

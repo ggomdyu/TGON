@@ -5,12 +5,13 @@
 namespace tgon
 {
 
-AssetModule::AssetModule()
+void AssetModule::Update()
 {
 }
 
-void AssetModule::Update()
+void AssetModule::PurgeResource(const StringViewHash& resourceName)
 {
+    m_resourceCache.erase(resourceName.GetHashCode());
 }
 
 } /* namespace tgon */

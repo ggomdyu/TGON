@@ -19,8 +19,7 @@ class TGON_API UISprite final
 public:
     UISprite() noexcept;
     explicit UISprite(const std::shared_ptr<Texture>& texture) noexcept;
-    UISprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept;
-    UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept;
+    UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect) noexcept;
     UISprite(UISprite&& rhs) noexcept;
 
 /**@section Destructor */
@@ -35,13 +34,10 @@ public:
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect) noexcept;
-    void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;
     void SetBlendColor(const Color4f& blendColor) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
-    std::shared_ptr<Transform> GetTransform() noexcept;
-    std::shared_ptr<const Transform> GetTransform() const noexcept;
     FRect& GetTextureRect() noexcept;
     const FRect& GetTextureRect() const noexcept;
     BlendMode GetBlendMode() const noexcept;
@@ -57,7 +53,6 @@ public:
 private:
     std::shared_ptr<Texture> m_texture;
     FRect m_textureRect;
-    std::shared_ptr<Transform> m_transform;
     BlendMode m_blendMode;
     Color4f m_blendColor;
     FRect m_scissorRect;

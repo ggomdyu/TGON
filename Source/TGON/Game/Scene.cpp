@@ -14,6 +14,12 @@ void Scene::AddObject(const std::shared_ptr<GameObject>& object)
     m_objects.push_back(object);
 }
 
+void Scene::AddObject(std::shared_ptr<GameObject>&& object)
+{
+    m_objectNameHashMap.emplace(object->GetName().GetHashCode(), m_objects.size());
+    m_objects.push_back(std::move(object));
+}
+
 void Scene::AddGlobalObject(const std::shared_ptr<GameObject>& object)
 {
     m_globalObjectNameHashMap.emplace(object->GetName().GetHashCode(), m_objects.size());

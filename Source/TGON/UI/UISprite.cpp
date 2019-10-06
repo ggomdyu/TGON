@@ -14,19 +14,13 @@ UISprite::UISprite() noexcept :
 }
 
 UISprite::UISprite(const std::shared_ptr<Texture>& texture) noexcept :
-    UISprite(texture, nullptr)
+    UISprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)))
 {
 }
 
-UISprite::UISprite(const std::shared_ptr<Texture>& texture, const std::shared_ptr<Transform>& transform) noexcept :
-    UISprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)), transform)
-{
-}
-
-UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect, const std::shared_ptr<Transform>& transform) noexcept :
+UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect) noexcept :
     m_texture(texture),
     m_textureRect(textureRect),
-    m_transform(transform),
     m_blendMode(BlendMode::Normal),
     m_blendColor(1.0f, 1.0f, 1.0f, 1.0f),
     m_enableScissorRect(false)
@@ -36,7 +30,6 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& texture
 UISprite::UISprite(UISprite&& rhs) noexcept :
     m_texture(std::move(rhs.m_texture)),
     m_textureRect(rhs.m_textureRect),
-    m_transform(std::move(rhs.m_transform)),
     m_blendMode(rhs.m_blendMode),
     m_blendColor(rhs.m_blendColor),
     m_scissorRect(rhs.m_scissorRect),
@@ -52,7 +45,6 @@ UISprite::UISprite(UISprite&& rhs) noexcept :
 UISprite& UISprite::operator=(UISprite&& rhs) noexcept
 {
     m_texture = std::move(rhs.m_texture);
-    m_transform = std::move(rhs.m_transform);
     m_blendMode = rhs.m_blendMode;
     m_textureRect = rhs.m_textureRect;
     m_scissorRect = rhs.m_scissorRect;
@@ -82,26 +74,11 @@ std::shared_ptr<const Texture> UISprite::GetTexture() const noexcept
     return m_texture;
 }
 
-std::shared_ptr<Transform> UISprite::GetTransform() noexcept
-{
-    return m_transform;
-}
-
-std::shared_ptr<const Transform> UISprite::GetTransform() const noexcept
-{
-    return m_transform;
-}
-    
 void UISprite::SetTextureRect(const FRect& textureRect) noexcept
 {
     m_textureRect = textureRect;
 }
 
-void UISprite::SetTransform(const std::shared_ptr<Transform>& transform) noexcept
-{
-    m_transform = transform;
-}
-    
 FRect& UISprite::GetTextureRect() noexcept
 {
     return m_textureRect;

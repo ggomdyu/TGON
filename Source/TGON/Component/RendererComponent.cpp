@@ -1,7 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include "Engine/Engine.h"
-#include "Engine/GraphicsModule.h"
 #include "Platform/Application.h"
 
 #include "RendererComponent.h"
@@ -9,12 +8,8 @@
 namespace tgon
 {
     
-RendererComponent::RendererComponent() :
-    RendererComponent(nullptr)
-{
-}
-
 RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) :
+    Component(),
     m_graphicsModule(Application::GetInstance().GetEngine()->FindModule<GraphicsModule>()),
     m_material(material)
 {

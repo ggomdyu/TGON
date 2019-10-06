@@ -30,6 +30,7 @@ public:
     virtual void Update();
     
     void AddObject(const std::shared_ptr<GameObject>& object);
+    void AddObject(std::shared_ptr<GameObject>&& object);
     void AddGlobalObject(const std::shared_ptr<GameObject>& object);
     bool RemoveObject(const StringViewHash& objectName);
     bool RemoveGlobalObject(const StringViewHash& objectName);

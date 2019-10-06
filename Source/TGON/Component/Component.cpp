@@ -7,25 +7,25 @@
 namespace tgon
 {
 
-Component::Component(GameObject* owner) noexcept :
-    m_owner(owner),
+Component::Component(const std::weak_ptr<GameObject>& gameObject) noexcept :
+    m_gameObject(gameObject),
     m_isActive(true)
 {
 }
     
-void Component::SetOwner(GameObject* owner)
+void Component::SetGameObject(const std::weak_ptr<GameObject>& gameObject) noexcept
 {
-    m_owner = owner;
+    m_gameObject = gameObject;
 }
 
-const GameObject* Component::GetOwner() const noexcept
+std::weak_ptr<GameObject> Component::GetGameObject() noexcept
 {
-    return m_owner;
+    return m_gameObject;
 }
 
-GameObject* Component::GetOwner() noexcept
+std::weak_ptr<const GameObject> Component::GetGameObject() const noexcept
 {
-    return m_owner;
+    return m_gameObject;
 }
 
 void Component::SetAcitve(bool isActive) noexcept

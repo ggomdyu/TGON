@@ -97,9 +97,6 @@
     <Filter Include="Source\TGON\Component">
       <UniqueIdentifier>{9052ce00-a0a7-47c3-bc4d-28543d6de649}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TGON\Component\UI">
-      <UniqueIdentifier>{706cd837-77a5-42f0-bf1f-ae8cba37d9be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON\UI">
       <UniqueIdentifier>{895d0d33-319a-4abd-a30a-64854d5b44dc}</UniqueIdentifier>
     </Filter>
@@ -395,12 +392,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\EventDispatcher.cpp">
       <Filter>Source\TGON\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.cpp">
-      <Filter>Source\TGON\Component\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.cpp">
-      <Filter>Source\TGON\Component\UI</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.cpp">
       <Filter>Source\TGON\Component</Filter>
@@ -1055,6 +1046,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Directory.cpp">
       <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\SpriteRendererComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\TextRendererComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.cpp">
+      <Filter>Source\TGON\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1745,16 +1748,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\ExpressionTemplate.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\SpriteComponent.h">
-      <Filter>Source\TGON\Component\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\UI\TextComponent.h">
-      <Filter>Source\TGON\Component\UI</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.h">
-      <Filter>Source\TGON\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\ComponentUtility.h">
       <Filter>Source\TGON\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.h">
@@ -2470,6 +2464,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\VideoMode.h">
       <Filter>Source\TGON\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\SpriteRendererComponent.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\TextRendererComponent.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h">
+      <Filter>Source\TGON\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
