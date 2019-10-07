@@ -41,7 +41,7 @@ FireFly::FireFly(const StringHash& name) :
 
 void FireFly::Initialize()
 {
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     auto transform = this->GetComponent<Transform>();
     auto scale = static_cast<float>(Random().NextDouble(0.3, 1.0));
     transform->SetLocalScale(Vector3(scale, scale, 1.0f));
@@ -62,7 +62,7 @@ void FireFly::Reset()
     m_opacityAdjustSpeed = static_cast<float>(Random().NextDouble(0.0625, 0.25));
     m_moveSpeed = static_cast<float>(Random().NextDouble(30, 60));
 
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     auto transform = this->GetComponent<Transform>();
     auto scale = static_cast<float>(Random().NextDouble(0.3, 1.0));
     transform->SetLocalScale(Vector3(scale, scale, 1.0f));
@@ -75,7 +75,7 @@ void FireFly::Update()
 
     auto tickTime = Application::GetEngine()->FindModule<TimeModule>()->GetTickTime();
 
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     auto transform = this->GetComponent<Transform>();
     auto newPos = transform->GetLocalPosition();
     if (newPos.y >= windowSize.height / 2 + 123.0F)
@@ -116,7 +116,7 @@ void TitleScene::Update()
 
     this->OnHandleInput();
 
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     float halfWindowWidth = windowSize.width * 0.5f;
     float halfWindowHeight = windowSize.height * 0.5f;
     auto nightSkyNewPos = m_nightSky->GetTransform()->GetLocalPosition();
@@ -211,19 +211,20 @@ void TitleScene::CreateFontObjects()
 
 void TitleScene::CreateUIObjects()
 {
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     float halfWindowWidth = windowSize.width * 0.5f;
     float halfWindowHeight = windowSize.height * 0.5f;
 
-    const char* texturePathList[] =
+    std::string resourceFolderPath = "/Users/chajunho/Desktop/Programming/Git/GitHub/TGON/ThousandParty/Resource";
+    std::string texturePathList[] =
     {
-        u8"../../Resource/Backgrounds/TitleScene/nightSky.png",
-        u8"../../Resource/Backgrounds/TitleScene/star.png",
-        u8"../../Resource/Backgrounds/TitleScene/earth.png",
-        u8"../../Resource/Backgrounds/TitleScene/girl.png",
-        u8"../../Resource/UI/TitleScene/Logo.png",
-        //u8"../../Resource/UI/TitleScene/Press.png",
-        u8"../../Resource/UI/Common/FadeInOut.png",
+        resourceFolderPath + u8"/Backgrounds/TitleScene/nightSky.png",
+        resourceFolderPath + u8"/Backgrounds/TitleScene/star.png",
+        resourceFolderPath + u8"/Backgrounds/TitleScene/earth.png",
+        resourceFolderPath + u8"/Backgrounds/TitleScene/girl.png",
+        resourceFolderPath + u8"/UI/TitleScene/Logo.png",
+        //resourceFolderPath + u8"../../Resource/UI/TitleScene/Press.png",
+        resourceFolderPath + u8"/UI/Common/FadeInOut.png",
     };
     Vector3 texturePosList[] =
     {

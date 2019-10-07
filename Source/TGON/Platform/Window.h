@@ -36,7 +36,7 @@ struct WindowStyle final
     bool hasCaption = true;
     bool enableSystemButton = true;
     bool enableFullScreen = false;
-    bool resizeable = false;
+    bool resizeable = true;
     bool topMost = false;
     bool showMiddle = true;
 };
@@ -77,8 +77,10 @@ public:
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;
     I32Point GetPosition() const;
-    void GetExtent(int32_t* width, int32_t* height) const;
-    I32Extent2D GetExtent() const;
+    void GetWindowSize(int32_t* destWidth, int32_t* destHeight) const;
+    I32Extent2D GetWindowSize() const;
+    void GetClientSize(int32_t* width, int32_t* height) const;
+    I32Extent2D GetClientSize() const;
     int32_t GetTitle(char* destTitle, int32_t destTitleBufferLen) const;
     std::string GetTitle() const;
     float GetTransparency() const;

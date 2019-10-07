@@ -35,7 +35,7 @@
 {
     if (_window->OnResize != nullptr)
     {
-        auto extent = _window->GetExtent();
+        auto extent = _window->GetClientSize();
         _window->OnResize(extent.width, extent.height);
     }
 }
@@ -113,10 +113,6 @@ constexpr NSWindowStyleMask ConvertWindowStyleToNative(const WindowStyle& window
     return nativeWindowStyleMask;
 }
 
-/**
- * @brief                   Creates a window through given WindowStyle.
- * @param [in] windowStyle  Window style information
- */
 NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
 {
     NSScreen* mainScreen = [NSScreen mainScreen];
@@ -129,48 +125,33 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
                                                       screen:mainScreen];
     
     // Set window attribute
+    [window setAcceptsMouseMovedEvents:YES];
+    [window makeKeyAndOrderFront:[NSApplication sharedApplication]];
+    [window setBackgroundColor:[NSColor whiteColor]];
+    [window setReleasedWhenClosed:YES];
+    [window setLevel:NSMainMenuWindowLevel];
+    [window setTitle:[NSString stringWithUTF8String:windowStyle.title.c_str()]];
+    if (windowStyle.enableSystemButton == false)
     {
-        [window setAcceptsMouseMovedEvents:YES];
-        [window makeKeyAndOrderFront:[NSApplication sharedApplication]];
-        [window setBackgroundColor:[NSColor whiteColor]];
-        [window setReleasedWhenClosed:YES];
-        [window setLevel:NSMainMenuWindowLevel];
-        [window setTitle:[NSString stringWithUTF8String:windowStyle.title.c_str()]];
-        
-        if (windowStyle.enableSystemButton == false)
-        {
-            [[window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
-        }
+        [[window standardWindowButton:NSWindowZoomButton] setEnabled:NO];
     }
     
     // Set window content size
-    {
-        NSRect windowRect = [window frame];
-        windowRect.size.width = CGFloat(windowStyle.width);
-        windowRect.size.height = CGFloat(windowStyle.height);
-        
-        NSRect clientRect = [window frameRectForContentRect:windowRect];
-        clientRect.origin.y += clientRect.size.height - CGFloat(windowStyle.height);
-        
-        [window setContentSize:NSMakeSize(CGFloat(clientRect.size.width), CGFloat(clientRect.size.height))];
-    }
+    [window setContentSize:NSMakeSize(CGFloat(windowStyle.width), CGFloat(windowStyle.height))];
     
     // Set window position
+    NSRect windowRect = [window frame];
+    NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
+    NSPoint windowPosition;
+    if (windowStyle.showMiddle == true)
     {
-        NSRect windowRect = [window frame];
-        NSRect mainScreenRect = [[NSScreen mainScreen] visibleFrame];
-        
-        NSPoint windowPosition;
-        if (windowStyle.showMiddle == true)
-        {
-            windowPosition = NSMakePoint((mainScreenRect.size.width * 0.5f) - (windowRect.size.width * 0.5f), ((mainScreenRect.origin.y + mainScreenRect.size.height) * 0.5f) - (windowRect.size.height * 0.5f));
-        }
-        else
-        {
-            windowPosition = NSMakePoint(CGFloat(windowStyle.x), (mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - CGFloat(windowStyle.y));
-        }
-        [window setFrameOrigin:windowPosition];
+        windowPosition = NSMakePoint((mainScreenRect.size.width * 0.5f) - (windowRect.size.width * 0.5f), ((mainScreenRect.origin.y + mainScreenRect.size.height) * 0.5f) - (windowRect.size.height * 0.5f));
     }
+    else
+    {
+        windowPosition = NSMakePoint(CGFloat(windowStyle.x), (mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - CGFloat(windowStyle.y));
+    }
+    [window setFrameOrigin:windowPosition];
     
     return window;
 }
@@ -291,9 +272,17 @@ void Window::GetPosition(int32_t* destX, int32_t* destY) const
     *destY = static_cast<int32_t>((mainScreenRect.origin.y + mainScreenRect.size.height - windowRect.size.height) - windowRect.origin.y);
 }
 
-void Window::GetExtent(int32_t* destWidth, int32_t* destHeight) const
+void Window::GetWindowSize(int32_t* destWidth, int32_t* destHeight) const
 {
     auto windowRect = [m_window frame];
+    
+    *destWidth = static_cast<int32_t>(windowRect.size.width);
+    *destHeight = static_cast<int32_t>(windowRect.size.height);
+}
+
+void Window::GetClientSize(int32_t* destWidth, int32_t* destHeight) const
+{
+    auto windowRect = [[m_window contentView] frame];
     
     *destWidth = static_cast<int32_t>(windowRect.size.width);
     *destHeight = static_cast<int32_t>(windowRect.size.height);

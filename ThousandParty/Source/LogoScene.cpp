@@ -94,7 +94,7 @@ void LogoScene::CreateCameraObject()
 {
     auto camera = std::make_shared<GameObject>("camera1");
     
-    auto rootWindowSize = Application::GetInstance().GetRootWindow()->GetExtent();
+    auto rootWindowSize = Application::GetInstance().GetRootWindow()->GetClientSize();
     float halfWidth = static_cast<float>(rootWindowSize.width) * 0.5f;
     float halfHeight = static_cast<float>(rootWindowSize.height) * 0.5f;
     camera->AddComponent<CameraComponent>(FRect(-halfWidth, -halfHeight, rootWindowSize.width, rootWindowSize.height), -1.0f, 1024.0f);
@@ -103,7 +103,8 @@ void LogoScene::CreateCameraObject()
 
 void LogoScene::CreateUIObject()
 {
-    auto windowSize = Application::GetRootWindow()->GetExtent();
+    auto path = Environment::GetCurrentDirectory();
+    auto windowSize = Application::GetRootWindow()->GetClientSize();
     float halfWindowWidth = windowSize.width * 0.5f;
     float halfWindowHeight = windowSize.height * 0.5f;
 
