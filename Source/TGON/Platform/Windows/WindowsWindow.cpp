@@ -39,7 +39,6 @@ TGON_API void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* 
         {
             *rawWindowStyle |= WS_OVERLAPPED;
             *rawWindowStyle |= WS_CAPTION;
-            *rawWindowStyle |= WS_THICKFRAME;
         }
 
         if (windowStyle.enableSystemButton)
