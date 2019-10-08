@@ -13,13 +13,11 @@
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    // Initialize singleton objects.
     tgon::Application::OnLaunch();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
-    // If launch has been completed, then start the message loop.
     tgon::Application::GetInstance().MessageLoop();
 }
 
@@ -38,7 +36,6 @@ int main(int argc, const char* argv[])
 {
     @autoreleasepool
     {
-        // Initialize NSApp.
         id sharedApplication = [NSApplication sharedApplication];
 
         id appDelegate = [AppDelegate alloc];
