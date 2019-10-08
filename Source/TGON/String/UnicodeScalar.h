@@ -1,5 +1,5 @@
 /**
- * @file    Encoding.h
+ * @file    UnicodeScalar.h
  * @author  ggomdyu
  * @since   04/09/2017
  */
