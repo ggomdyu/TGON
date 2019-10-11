@@ -4,7 +4,7 @@
 #include "Graphics/Texture.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/Material.h"
-#include "Graphics/FVF.h"
+#include "Graphics/VertexFormat.h"
 
 #include "UISpriteBatch.h"
 #include "UISprite.h"

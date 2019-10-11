@@ -30,8 +30,8 @@ public:
 public:
     virtual void Update() override;
     Graphics& GetGraphics() noexcept;
-    UIRenderer& GetUIRenderer() noexcept;
     const Graphics& GetGraphics() const noexcept;
+    UIRenderer& GetUIRenderer() noexcept;
     const UIRenderer& GetUIRenderer() const noexcept;
     
 /**@section Method */
@@ -41,7 +41,7 @@ private:
 /**@section Variable */
 public:
     Graphics m_graphics;
-    UIRenderer m_canvasRenderer;
+    UIRenderer m_uiRenderer;
 };
 
 } /* namespace tgon */

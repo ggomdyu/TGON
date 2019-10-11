@@ -6,7 +6,7 @@ namespace tgon
 {
 
 std::vector<std::shared_ptr<GameObject>> Scene::m_globalObjects;
-std::unordered_map<int32_t, int32_t> Scene::m_globalObjectNameHashMap;
+std::unordered_map<size_t, int32_t> Scene::m_globalObjectNameHashMap;
 
 void Scene::AddObject(const std::shared_ptr<GameObject>& object)
 {

@@ -16,10 +16,15 @@ SpriteRendererComponent::SpriteRendererComponent(const std::shared_ptr<UISprite>
 
 void SpriteRendererComponent::Update()
 {
+    if (m_sprite == nullptr || m_sprite->GetBlendColor().a <= 0.0f)
+    {
+        return;
+    }
+    
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_graphicsModule->GetUIRenderer().AddSpritePrimitive(m_sprite, gameObject->GetComponent<Transform>()->GetWorldMatrix());
+        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, gameObject->GetComponent<Transform>()->GetWorldMatrix());
     }
 }
 

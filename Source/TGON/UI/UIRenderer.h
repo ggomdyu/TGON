@@ -5,17 +5,34 @@
  */
 
 #pragma once
-#include <vector>
+#include <set>
 
-#include "Math/Matrix4x4.h"
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/Material.h"
 #include "Graphics/Camera.h"
+#include "String/StringHash.h"
 
 #include "UISpriteBatch.h"
 
 namespace tgon
 {
+
+class UISortingLayer
+{
+/**@section Constructor */
+public:
+    explicit UISortingLayer(const StringHash& sortingLayerName);
+    explicit UISortingLayer(StringHash&& sortingLayerName);
+
+/**@section Method */
+public:
+    void AddPrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld);
+    
+/**@section Variable */
+private:
+    StringHash m_sortingLayerName;
+    std::vector<UISpriteBatch> m_spriteBatches;
+};
 
 class TGON_API UIRenderer
 {
@@ -26,22 +43,24 @@ public:
 /**@section Method */
 public:
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld);
+    void AddPrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld);
+    void AddSortingLayer(const StringHash& sortingLayerName);
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
+    bool RemoveSortingLayer(const StringViewHash& sortingLayerName);
     void Update();
     void Draw(Graphics& graphics);
     
 private:
     void PrepareDefaultMaterials();
     void FlushSpriteBatches(Graphics& graphics);
-    void DebugRenderTargetDraw(Graphics& graphics);
     
 /**@section Variable */
 private:
     std::shared_ptr<Material> m_uiMaterial;
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
-    std::vector<UISpriteBatch> m_spriteBatches;
+    std::vector<UISortingLayer> m_sortingLayers;
+    std::set<StringHash> m_sortingLayer;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
 };
     

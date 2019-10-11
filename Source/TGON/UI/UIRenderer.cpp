@@ -1,24 +1,24 @@
 #include "PrecompiledHeader.h"
 
 #include "Diagnostics/Debug.h"
-#include "Math/Matrix4x4.h"
-#include "Math/Vector4.h"
 #include "Graphics/ShaderProgram.h"
-#include "Graphics/FVF.h"
-#include "Graphics/Material.h"
-#include "Graphics/Camera.h"
-#include "Graphics/Graphics.h"
+#include "Graphics/VertexFormat.h"
 #include "Graphics/OpenGL/OpenGLShaderCode.h"
-#include "UI/UISprite.h"
-#include "UI/UISpriteBatch.h"
 
 #include "UIRenderer.h"
 
-//todo:remove below headers
-#include "Platform/Window.h"
-
 namespace tgon
 {
+
+UISortingLayer::UISortingLayer(const StringHash& sortingLayerName) :
+    m_sortingLayerName(sortingLayerName)
+{
+}
+
+UISortingLayer::UISortingLayer(StringHash&& sortingLayerName) :
+   m_sortingLayerName(std::move(sortingLayerName))
+{
+}
     
 UIRenderer::UIRenderer() :
     m_spriteVertexBuffer({
@@ -48,66 +48,19 @@ void UIRenderer::Draw(Graphics& graphics)
     
     this->FlushSpriteBatches(graphics);
 }
-    
-void UIRenderer::DebugRenderTargetDraw(Graphics& graphics)
-{
-    // Use custom framebuffer
-    //m_renderTarget.Use();
-    //{
-    //    m_uiMaterial->Use();
-    //    m_spriteVertexBuffer.Use();
-    //    
-    //    graphics.SetClearColor({1.0f, 0.0f, 0.0f, 1.0f});
-    //    graphics.ClearColorDepthBuffer();
-    //    
-    //    this->FlushSpriteBatches(graphics);
-    //}
-    //
-    //// Use default framebuffer
-    //m_renderTarget.Unuse();
-    //{
-    //    m_inverseMaterial->Use();
-    //    m_inverseMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(m_cameraList[0]->GetViewProjectionMatrix()[0]);
-    //    m_quadVertexBuffer.Use();
-    //    
-    //    graphics.SetClearColor({ 1.0f, 1.0f, 1.0f, 1.0f });
-    //    graphics.ClearColorDepthBuffer();
 
-    //    graphics.DrawPrimitives(PrimitiveType::Triangles, 0, 6);
-    //}
+void UIRenderer::AddPrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld)
+{
+//    if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
+//    {
+//        m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+//    }
+//
+//    m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
 }
 
-void UIRenderer::AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld)
+void UIRenderer::AddSortingLayer(const StringHash& sortingLayerName)
 {
-    if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
-    {
-        m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
-    }
-
-    m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
-}
-
-void UIRenderer::PrepareDefaultMaterials()
-{
-    m_uiMaterial = std::make_shared<Material>(g_positionColorUVVert, g_positionColorUVFrag);
-}
-
-void UIRenderer::FlushSpriteBatches(Graphics& graphics)
-{
-    m_uiMaterial->Use();
-    
-    for (auto& camera : m_cameraList)
-    {
-        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
-        
-        for (auto& spriteBatch : m_spriteBatches)
-        {
-            spriteBatch.FlushBatch(graphics);
-        }
-    }
-
-    m_spriteBatches.clear();
-    m_spriteVertices.clear();
 }
 
 void UIRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
@@ -128,6 +81,34 @@ bool UIRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
     
     m_cameraList.erase(iter);
     return true;
+}
+
+bool UIRenderer::RemoveSortingLayer(const StringViewHash& sortingLayerName)
+{
+    return true;
+}
+
+void UIRenderer::PrepareDefaultMaterials()
+{
+    m_uiMaterial = std::make_shared<Material>(g_positionColorUVVert, g_positionColorUVFrag);
+}
+
+void UIRenderer::FlushSpriteBatches(Graphics& graphics)
+{
+//    m_uiMaterial->Use();
+//
+//    for (auto& camera : m_cameraList)
+//    {
+//        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
+//
+//        for (auto& spriteBatch : m_spriteBatches)
+//        {
+//            spriteBatch.FlushBatch(graphics);
+//        }
+//    }
+//
+//    m_spriteBatches.clear();
+//    m_spriteVertices.clear();
 }
 
 } /* namespace tgon */

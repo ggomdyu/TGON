@@ -86,19 +86,19 @@ TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)
     
     switch (X65599Hash(lowercaseStr))
     {
-        case TGON_X65599("bmp"):
+        case X65599Hash("bmp"):
             return ImageFormat::Bmp;
-        case TGON_X65599("jpg"):
+        case X65599Hash("jpg"):
             return ImageFormat::Jpg;
-        case TGON_X65599("jpeg"):
+        case X65599Hash("jpeg"):
             return ImageFormat::Jpeg;
-        case TGON_X65599("png"):
+        case X65599Hash("png"):
             return ImageFormat::Png;
-        case TGON_X65599("tiff"):
+        case X65599Hash("tiff"):
             return ImageFormat::Tiff;
-        case TGON_X65599("gif"):
+        case X65599Hash("gif"):
             return ImageFormat::Gif;
-        case TGON_X65599("webp"):
+        case X65599Hash("webp"):
             return ImageFormat::WebP;
         default:
             return ImageFormat::Unknown;

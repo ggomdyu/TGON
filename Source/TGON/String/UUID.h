@@ -83,7 +83,7 @@ inline UUID UUID::NewUUID()
 
     UUID ret;
     ret.m_strLen = 36;
-    uuid_unparse(uuid, ret.m_str);
+    uuid_unparse(uuid, &ret.m_str[0]);
 #endif
     return ret;
 }

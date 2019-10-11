@@ -233,9 +233,9 @@ int32_t Encoding::GetCodePage() const noexcept
     return m_converter->sharedData->staticData->codepage;
 }
 
-int32_t Encoding::GetHashCode() const noexcept
+uint32_t Encoding::GetHashCode() const noexcept
 {
-    return m_converter->sharedData->staticData->codepage;
+    return static_cast<uint32_t>(m_converter->sharedData->staticData->codepage);
 }
 
 const Encoding& Encoding::UTF8()

@@ -5,13 +5,13 @@
  */
 
 #pragma once
-#include "Core/CoreObject.h"
+#include "Core/Object.h"
 
 namespace tgon
 {
 
 class TGON_API IModule :
-    public CoreObject
+    public Object
 {
 public:
     TGON_DECLARE_RTTI(IModule)
@@ -22,7 +22,6 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Updates the module. */
     virtual void Update() = 0;
 };
 

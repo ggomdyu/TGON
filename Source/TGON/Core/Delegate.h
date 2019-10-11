@@ -93,11 +93,6 @@ private:
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
 
-    /**
-     * @brief   Deletes the pointer specified by ptr.
-     * @param [in]  ptr     The delete target pointer
-     * @return  The size to delete or deleted
-     */
     template <typename _FunctionType>
     static std::size_t MakeDeleter(void* ptr);
 

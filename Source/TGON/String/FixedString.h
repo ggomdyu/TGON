@@ -7,6 +7,7 @@
 
 #pragma once
 #include <type_traits>
+#include <array>
 
 #include "StringTraits.h"
 
@@ -90,7 +91,7 @@ public:
 
 /**@section Variable */
 protected:
-    _CharType m_str[_CharBufferSize];
+    std::array<_CharType, _CharBufferSize> m_str;
     int32_t m_strLen;
 };
 
@@ -135,7 +136,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str, int32_t count) :
     BasicFixedString()
 {
-    _StringTraitsType::Append(str, count, m_str, m_strLen);
+    _StringTraitsType::Append(str, count, m_str.data(), m_strLen);
     m_strLen += count;
 }
 
@@ -155,7 +156,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(_CharType ch, int32_t chCount) :
     BasicFixedString()
 {
-    _StringTraitsType::Append(m_str, m_strLen, ch, chCount);
+    _StringTraitsType::Append(m_str.data(), m_strLen, ch, chCount);
     m_strLen += chCount;
 }
 
@@ -210,7 +211,7 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFix
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(const std::basic_string_view<_CharType>& rhs)
 {
-    _StringTraitsType::Append(rhs.data(), static_cast<int32_t>(rhs.length()), m_str, m_strLen);
+    _StringTraitsType::Append(rhs.data(), static_cast<int32_t>(rhs.length()), m_str.data(), m_strLen);
     m_strLen += rhs.length();
 
     return *this;
@@ -219,7 +220,7 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFix
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(_CharType rhs)
 {
-    _StringTraitsType::Append(m_str, m_strLen, rhs, 1);
+    _StringTraitsType::Append(m_str.data(), m_strLen, rhs, 1);
     m_strLen += 1;
 
     return *this;
@@ -242,13 +243,13 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 template <int32_t _CharBufferSize2>
 inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, rhs.Data(), rhs.Length()) == 0;
+    return _StringTraitsType::Compare(m_str.data(), m_strLen, rhs.Data(), rhs.Length()) == 0;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator==(const std::basic_string_view<_CharType>& rhs) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, rhs.data(), rhs.length()) == 0;
+    return _StringTraitsType::Compare(m_str.data(), m_strLen, rhs.data(), rhs.length()) == 0;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -266,13 +267,13 @@ inline _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string_view<_CharType>() const noexcept
 {
-    return {m_str, static_cast<size_t>(m_strLen)};
+    return {m_str.data(), static_cast<size_t>(m_strLen)};
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator std::basic_string<_CharType>() const noexcept
 {
-    return {m_str, static_cast<size_t>(m_strLen)};
+    return {m_str.data(), static_cast<size_t>(m_strLen)};
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -286,78 +287,78 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 template <int32_t _CharBufferSize2>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const
 {
-    return _StringTraitsType::Compare(m_str, static_cast<size_t>(m_strLen), str.Data(), static_cast<size_t>(str.Length()));
+    return _StringTraitsType::Compare(m_str.data(), static_cast<size_t>(m_strLen), str.Data(), static_cast<size_t>(str.Length()));
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const std::basic_string_view<_CharType>& str) const
 {
-    return _StringTraitsType::Compare(m_str, m_strLen, str.length(), str.data());
+    return _StringTraitsType::Compare(m_str.data(), m_strLen, str.length(), str.data());
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
 {
-    return _StringTraitsType::IndexOfAny(m_str + startIndex, m_strLen - startIndex, predicate) + startIndex;
+    return _StringTraitsType::IndexOfAny(m_str.data() + startIndex, m_strLen - startIndex, predicate) + startIndex;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOf(_CharType ch, int32_t startIndex) const
 {
     char str[] = {ch, '\0'};
-    return _StringTraitsType::IndexOf(m_str + startIndex, m_strLen - startIndex, str, 1) + startIndex;
+    return _StringTraitsType::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, 1) + startIndex;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const
 {
-    return _StringTraitsType::IndexOf(m_str + startIndex, m_strLen - startIndex, str, str.length()) + startIndex;
+    return _StringTraitsType::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, str.length()) + startIndex;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch, int32_t startIndex) const
 {
     char str[] = {ch, '\0'};
-    return _StringTraitsType::LastIndexOf(m_str, startIndex + 1, str, 1);
+    return _StringTraitsType::LastIndexOf(m_str.data(), startIndex + 1, str, 1);
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(const std::basic_string_view<_CharType>& str) const
 {
-    return _StringTraitsType::LastIndexOf(m_str, m_strLen, str, str.length());
+    return _StringTraitsType::LastIndexOf(m_str.data(), m_strLen, str, str.length());
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const
 {
-    return _StringTraitsType::LastIndexOf(m_str, startIndex, str, str.length());
+    return _StringTraitsType::LastIndexOf(m_str.data(), startIndex, str, str.length());
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch) const
 {
-    return _StringTraitsType::LastIndexOf(m_str, m_strLen, &ch, 1);
+    return _StringTraitsType::LastIndexOf(m_str.data(), m_strLen, &ch, 1);
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate) const
 {
-    return _StringTraitsType::LastIndexOfAny(m_str, m_strLen, predicate);
+    return _StringTraitsType::LastIndexOfAny(m_str.data(), m_strLen, predicate);
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 template <typename _PredicateType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const
 {
-    return _StringTraitsType::LastIndexOfAny(m_str, startIndex, predicate);
+    return _StringTraitsType::LastIndexOfAny(m_str.data(), startIndex, predicate);
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline const _CharType* BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Data() const noexcept
 {
-    return m_str;
+    return m_str.data();
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -375,25 +376,25 @@ constexpr int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Begin() noexcept
 {
-    return m_str;
+    return m_str.begin();
 }
  
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::End() noexcept
 {
-    return m_str + m_strLen;
+    return m_str.begin() + m_strLen;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
 {
-    return m_str;
+    return m_str.cbegin();
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
 {
-    return m_str + m_strLen;
+    return m_str.cbegin() + m_strLen;
 }
 
 } /* namespace tgon */

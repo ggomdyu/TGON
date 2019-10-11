@@ -22,7 +22,7 @@ public:
 /* @section Method */
 public:
     /**@brief   Returns the type hash code. */
-    int32_t GetHashCode() const noexcept;
+    uint32_t GetHashCode() const noexcept;
     
     /**@brief   Returns the type name of RTTI owner. */
     const char* GetName() const noexcept;

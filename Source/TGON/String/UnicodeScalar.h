@@ -36,7 +36,7 @@ public:
 /**@section Method */
 public:
     constexpr char32_t GetValue() const noexcept;
-    constexpr size_t GetHashCode() const noexcept;
+    constexpr uint32_t GetHashCode() const noexcept;
 
 private:
     constexpr char32_t ToChar32(const char* str);
@@ -111,9 +111,9 @@ constexpr char32_t UnicodeScalar::GetValue() const noexcept
     return m_value;
 }
 
-constexpr size_t UnicodeScalar::GetHashCode() const noexcept
+constexpr uint32_t UnicodeScalar::GetHashCode() const noexcept
 {
-    return TGON_X65599(m_value);
+    return X65599Hash(m_value);
 }
 
 constexpr char32_t UnicodeScalar::ToChar32(const char* str)

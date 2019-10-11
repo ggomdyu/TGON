@@ -13,7 +13,7 @@ GameObject::GameObject() :
 }
 
 GameObject::GameObject(const StringHash& name) :
-    CoreObject(name),
+    Object(name),
     m_isActive(true),
     m_transform(std::make_shared<Transform>(this->weak_from_this()))
 {

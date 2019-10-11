@@ -66,7 +66,7 @@ public:
     static constexpr TimeSpan FromSeconds(double value) noexcept;
     static constexpr TimeSpan FromMilliseconds(double value) noexcept;
     static constexpr TimeSpan FromTicks(int64_t value) noexcept;
-    constexpr size_t GetHashCode() const noexcept;
+    constexpr uint32_t GetHashCode() const noexcept;
     static constexpr TimeSpan GetMaxValue() noexcept;
     static constexpr TimeSpan GetMinValue() noexcept;
     static constexpr TimeSpan GetZero() noexcept;
@@ -337,9 +337,9 @@ constexpr int64_t TimeSpan::TimeToTicks(int32_t hour, int32_t minute, int32_t se
     return totalSeconds * TicksPerSecond;
 }
 
-constexpr size_t TimeSpan::GetHashCode() const noexcept
+constexpr uint32_t TimeSpan::GetHashCode() const noexcept
 {
-    return static_cast<size_t>(m_ticks ^ (m_ticks >> 32));
+    return static_cast<uint32_t>(m_ticks ^ (m_ticks >> 32));
 }
 
 constexpr TimeSpan TimeSpan::GetMaxValue() noexcept

@@ -8,7 +8,7 @@
 #include <memory>
 #include <vector>
 
-#include "Core/CoreObject.h"
+#include "Core/Object.h"
 #include "Engine/TimeModule.h"
 #include "Engine/InputModule.h"
 
@@ -28,7 +28,7 @@ namespace tgon
 {
 
 class TGON_API Engine :
-    public CoreObject
+    public Object
 {
 public:
     TGON_DECLARE_RTTI(Engine)

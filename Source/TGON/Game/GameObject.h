@@ -7,7 +7,7 @@
 #pragma once
 #include <vector>
 
-#include "Core/CoreObject.h"
+#include "Core/Object.h"
 #include "Graphics/Transform.h"
 #include "Component/Component.h"
 
@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class TGON_API GameObject :
-	public CoreObject,
+	public Object,
     public std::enable_shared_from_this<GameObject>
 {
 public:

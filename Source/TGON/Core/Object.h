@@ -1,5 +1,5 @@
 /**
- * @file    CoreObject.h
+ * @file    Object.h
  * @author  ggomdyu
  * @since   03/22/2016
  */
@@ -12,17 +12,17 @@
 namespace tgon
 {
 
-class TGON_API CoreObject :
+class TGON_API Object :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(CoreObject)
+    TGON_DECLARE_RTTI(Object)
     
 /**@section Constructor */
 public:
-    CoreObject() = default;
-    CoreObject(const StringHash& name);
-    CoreObject(StringHash&& name);
+    Object() = default;
+    Object(const StringHash& name);
+    Object(StringHash&& name);
 
 /**@section Method */
 public:

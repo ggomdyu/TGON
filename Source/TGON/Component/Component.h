@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/CoreObject.h"
+#include "Core/Object.h"
 #include "Core/NonCopyable.h"
 
 namespace tgon
@@ -14,7 +14,7 @@ namespace tgon
 class GameObject;
     
 class TGON_API Component :
-	public CoreObject
+	public Object
 {
 public:
     TGON_DECLARE_RTTI(Component)

@@ -55,7 +55,7 @@ public:
     int32_t GetCharCount(const gsl::span<std::byte>& bytes) const;
     const std::string_view& GetEncodingName() const noexcept;
     int32_t GetCodePage() const noexcept;
-    int32_t GetHashCode() const noexcept;
+    uint32_t GetHashCode() const noexcept;
     static const Encoding& UTF8();
     static const Encoding& UTF32();
     static const Encoding& Unicode();

@@ -13,7 +13,7 @@ void TextRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_graphicsModule->GetUIRenderer().AddSpritePrimitive(m_sprite, gameObject->GetTransform()->GetWorldMatrix());
+        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, gameObject->GetTransform()->GetWorldMatrix());
     }
 }
 

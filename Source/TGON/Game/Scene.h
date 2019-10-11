@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class TGON_API Scene :
-    public CoreObject
+    public Object
 {
 public:
     TGON_DECLARE_RTTI(Scene)
@@ -44,8 +44,8 @@ private:
     std::vector<std::shared_ptr<GameObject>> m_objects;
     static std::vector<std::shared_ptr<GameObject>> m_globalObjects;
     
-    std::unordered_map<int32_t, int32_t> m_objectNameHashMap;
-    static std::unordered_map<int32_t, int32_t> m_globalObjectNameHashMap;
+    std::unordered_map<size_t, int32_t> m_objectNameHashMap;
+    static std::unordered_map<size_t, int32_t> m_globalObjectNameHashMap;
 };
 
 } /* namespace tgon */

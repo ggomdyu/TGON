@@ -6,19 +6,13 @@
 
 #pragma once
 #include <vector>
-#include <memory>
 
-#include "Platform/Config.h"
-#include "Math/Rect.h"
 #include "Math/Matrix4x4.h"
+
+#include "UISprite.h"
 
 namespace tgon
 {
-
-class Graphics;
-class Texture;
-class UISprite;
-enum class BlendMode;
 
 class TGON_API UISpriteBatch final
 {
