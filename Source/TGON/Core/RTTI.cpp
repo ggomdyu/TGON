@@ -13,7 +13,7 @@ RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept :
 
 uint32_t RTTI::GetHashCode() const noexcept
 {
-    return m_typeInfo->hash_code();
+    return static_cast<uint32_t>(m_typeInfo->hash_code());
 }
 
 const char* RTTI::GetName() const noexcept

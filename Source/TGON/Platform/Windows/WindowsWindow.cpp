@@ -298,10 +298,19 @@ void Window::GetPosition(int32_t* x, int32_t* y) const
     *y = rt.top;
 }
 
-void Window::GetExtent(int32_t* width, int32_t* height) const
+void Window::GetClientSize(int32_t* width, int32_t* height) const
 {
     RECT rt;
     GetClientRect(m_wndHandle, &rt);
+
+    *width = rt.right;
+    *height = rt.bottom;
+}
+
+void Window::GetWindowSize(int32_t* width, int32_t* height) const
+{
+    RECT rt;
+    GetWindowRect(m_wndHandle, &rt);
 
     *width = rt.right;
     *height = rt.bottom;

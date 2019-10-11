@@ -24,7 +24,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp" />
@@ -1643,7 +1643,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Delegate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\DelegateChain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\DynamicCast.h" />
@@ -1652,6 +1651,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\ISerializable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\NonAddressable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\NonCopyable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Range.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RuntimeObject.h" />
