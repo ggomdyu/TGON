@@ -24,8 +24,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\RTTI.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.cpp" />

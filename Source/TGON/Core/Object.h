@@ -27,11 +27,37 @@ public:
 /**@section Method */
 public:
     void SetName(const StringHash& name);
+    void SetName(StringHash&& name);
     const StringHash& GetName() const noexcept;
 
 /**@section Variable */
 private:
     StringHash m_name;
 };
+
+inline Object::Object(const StringHash& name) :
+    m_name(name)
+{
+}
+
+inline Object::Object(StringHash&& name) :
+    m_name(std::move(name))
+{
+}
+
+inline void Object::SetName(const StringHash& name)
+{
+    m_name = name;
+}
+
+inline void Object::SetName(StringHash&& name)
+{
+    m_name = std::move(name);
+}
+
+inline const StringHash& Object::GetName() const noexcept
+{
+    return m_name;
+}
 
 } /* namespace tgon */
