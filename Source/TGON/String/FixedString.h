@@ -95,8 +95,8 @@ protected:
     int32_t m_strLen;
 };
 
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
-BasicFixedString(const _CharType(&)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>;
+namespace detail
+{
 
 template <typename>
 struct IsBasicFixedString : std::false_type {};
@@ -104,8 +104,13 @@ struct IsBasicFixedString : std::false_type {};
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 struct IsBasicFixedString<BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>> : std::true_type {};
 
+} /* namespace detail */
+
+template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
+BasicFixedString(const _CharType(&)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>;
+
 template <typename _Type>
-constexpr bool IsBasicFixedStringValue = IsBasicFixedString<_Type>::value;;
+constexpr bool IsBasicFixedString = detail::IsBasicFixedString<_Type>::value;
 
 using FixedString8 = BasicFixedString<char, 8>;
 using FixedString16 = BasicFixedString<char, 16>;
@@ -115,15 +120,45 @@ using FixedString128 = BasicFixedString<char, 128>;
 using FixedString256 = BasicFixedString<char, 256>;
 using FixedString512 = BasicFixedString<char, 512>;
 using FixedString1024 = BasicFixedString<char, 1024>;
+using FixedString2048 = BasicFixedString<char, 2048>;
+using FixedString4096 = BasicFixedString<char, 4096>;
+using FixedString8192 = BasicFixedString<char, 8192>;
 
-using FixedWString8 = BasicFixedString<wchar_t, 8>;
-using FixedWString16 = BasicFixedString<wchar_t, 16>;
-using FixedWString32 = BasicFixedString<wchar_t, 32>;
-using FixedWString64 = BasicFixedString<wchar_t, 64>;
-using FixedWString128 = BasicFixedString<wchar_t, 128>;
-using FixedWString256 = BasicFixedString<wchar_t, 256>;
-using FixedWString512 = BasicFixedString<wchar_t, 512>;
-using FixedWString1024 = BasicFixedString<wchar_t, 1024>;
+using WFixedString8 = BasicFixedString<wchar_t, 8>;
+using WFixedString16 = BasicFixedString<wchar_t, 16>;
+using WFixedString32 = BasicFixedString<wchar_t, 32>;
+using WFixedString64 = BasicFixedString<wchar_t, 64>;
+using WFixedString128 = BasicFixedString<wchar_t, 128>;
+using WFixedString256 = BasicFixedString<wchar_t, 256>;
+using WFixedString512 = BasicFixedString<wchar_t, 512>;
+using WFixedString1024 = BasicFixedString<wchar_t, 1024>;
+using WFixedString2048 = BasicFixedString<wchar_t, 2048>;
+using WFixedString4096 = BasicFixedString<wchar_t, 4096>;
+using WFixedString8192 = BasicFixedString<wchar_t, 8192>;
+
+using U16FixedString8 = BasicFixedString<char16_t, 8>;
+using U16FixedString16 = BasicFixedString<char16_t, 16>;
+using U16FixedString32 = BasicFixedString<char16_t, 32>;
+using U16FixedString64 = BasicFixedString<char16_t, 64>;
+using U16FixedString128 = BasicFixedString<char16_t, 128>;
+using U16FixedString256 = BasicFixedString<char16_t, 256>;
+using U16FixedString512 = BasicFixedString<char16_t, 512>;
+using U16FixedString1024 = BasicFixedString<char16_t, 1024>;
+using U16FixedString2048 = BasicFixedString<char16_t, 2048>;
+using U16FixedString4096 = BasicFixedString<char16_t, 4096>;
+using U16FixedString8192 = BasicFixedString<char16_t, 8192>;
+
+using U32FixedString8 = BasicFixedString<char32_t, 8>;
+using U32FixedString16 = BasicFixedString<char32_t, 16>;
+using U32FixedString32 = BasicFixedString<char32_t, 32>;
+using U32FixedString64 = BasicFixedString<char32_t, 64>;
+using U32FixedString128 = BasicFixedString<char32_t, 128>;
+using U32FixedString256 = BasicFixedString<char32_t, 256>;
+using U32FixedString512 = BasicFixedString<char32_t, 512>;
+using U32FixedString1024 = BasicFixedString<char32_t, 1024>;
+using U32FixedString2048 = BasicFixedString<char32_t, 2048>;
+using U32FixedString4096 = BasicFixedString<char32_t, 4096>;
+using U32FixedString8192 = BasicFixedString<char32_t, 8192>;
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString() noexcept :

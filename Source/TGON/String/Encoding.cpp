@@ -130,7 +130,7 @@ std::vector<std::byte> Encoding::Convert(const Encoding& srcEncoding, const Enco
 
     std::vector<std::byte> ret(encodedStrBytes);
     status = U_ZERO_ERROR;
-    ustr.extract(reinterpret_cast<char*>(&ret[0]), ret.size(), destEncoding.m_converter, status);
+    ustr.extract(reinterpret_cast<char*>(&ret[0]), static_cast<int32_t>(ret.size()), destEncoding.m_converter, status);
 
     return ret;
 }

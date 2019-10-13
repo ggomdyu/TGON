@@ -11,6 +11,34 @@
 
 namespace tgon
 {
+namespace detail
+{
+
+template <typename>
+struct IsBasicString : std::false_type {};
+
+template <typename _CharType, typename _TraitsType, typename _AllocatorType>
+struct IsBasicString<std::basic_string<_CharType, _TraitsType, _AllocatorType>> : std::true_type {};
+
+template <typename>
+struct IsBasicStringView : std::false_type {};
+
+template <typename _CharType>
+struct IsBasicStringView<std::basic_string_view<_CharType>> : std::true_type {};
+
+template <typename _Type>
+struct RemoveAllPointers
+{
+    using Type = _Type;
+};
+
+template <typename _Type>
+struct RemoveAllPointers<_Type*>
+{
+    using Type = typename RemoveAllPointers<_Type>::Type;
+};
+
+} /* namespace detail */
 
 template <typename>
 struct FunctionTraits;
@@ -18,29 +46,24 @@ struct FunctionTraits;
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-/**@section Enum */
 public:
     enum { ArgumentCount = sizeof...(_ArgTypes), };
 
-/**@section Type */
 public:
     using ReturnType = _ReturnType;
     using FunctionType = _ReturnType(_ArgTypes...);
     using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
 };
 
-/**@brief   Traits for the global function */
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> : FunctionTraits<_ReturnType(_ArgTypes...)>
 {
 };
 
-/**@brief   Traits for the class member function */
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
     FunctionTraits<std::remove_cv_t<_ReturnType(_ArgTypes...)>>
 {
-/**@section Type */
     using ClassType = _ClassType;
 };
 
@@ -62,66 +85,40 @@ struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
 {
 };
 
-/**@brief   Traits for the lambda */
 template <typename _FunctionType>
-struct FunctionTraits : FunctionTraits<decltype(&_FunctionType::operator())> {};
-
-template <typename>
-struct IsBasicString : std::false_type {};
-
-template <typename _CharType, typename _TraitsType, typename _AllocatorType>
-struct IsBasicString<std::basic_string<_CharType, _TraitsType, _AllocatorType>> : std::true_type {};
-
-template <typename>
-struct IsBasicStringView : std::false_type {};
-
-template <typename _CharType>
-struct IsBasicStringView<std::basic_string_view<_CharType>> : std::true_type {};
-
-template <typename _Type>
-class RemoveAllPointers
+struct FunctionTraits :
+    FunctionTraits<decltype(&_FunctionType::operator())>
 {
-/**@section Type */
-public:
-    using Type = _Type;
 };
 
 template <typename _Type>
-class RemoveAllPointers<_Type*>
-{
-/**@section Type */
-public:
-    using Type = typename RemoveAllPointers<_Type>::Type;
-};
+constexpr bool IsBasicString = detail::IsBasicString<_Type>::value;
 
 template <typename _Type>
-using RemoveAllPointers_t = typename RemoveAllPointers<_Type>::Type;
+constexpr bool IsBasicStringView = detail::IsBasicStringView<_Type>::value;
 
 template <typename _Type>
-using Pure = std::remove_cv_t<RemoveAllPointers_t<std::decay_t<_Type>>>;
+using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
+
+template <typename _Type>
+using Pure = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;
+
+template <typename _Type>
+constexpr bool IsPure = std::is_same_v<Pure<_Type>, _Type>;
 
 template <typename _Type, typename... _Types>
-constexpr bool IsAllSameValue = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
+constexpr bool IsAllSame = std::bool_constant<(std::is_same_v<_Type, _Types> && ...)>::value;
 
 template <typename _Type, typename... _Types>
-constexpr bool IsAnyValue = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
+constexpr bool IsAny = std::bool_constant<(std::is_same_v<_Type, _Types> || ...)>::value;
 
 template <typename _Type>
-constexpr bool IsPureValue = std::is_same_v<Pure<_Type>, _Type>;
-
-template <typename _Type>
-constexpr bool IsCharValue = IsAnyValue<_Type, char, char16_t, char32_t, wchar_t>;
+constexpr bool IsChar = IsAny<_Type, char, char16_t, char32_t, wchar_t>;
     
 template <typename _Type>
-constexpr bool IsCharPointerValue = IsCharValue<Pure<_Type>> && std::is_pointer_v<_Type>;
+constexpr bool IsCharPointer = IsChar<Pure<_Type>> && std::is_pointer_v<_Type>;
 
 template <typename _Type>
-constexpr bool IsCharReferenceValue = IsCharValue<Pure<_Type>> && std::is_reference_v<_Type>;
-
-template <typename _Type>
-constexpr bool IsBasicStringValue = IsBasicString<_Type>::value;
-
-template <typename _Type>
-constexpr bool IsBasicStringViewValue = IsBasicStringView<_Type>::value;
+constexpr bool IsCharReference = IsChar<Pure<_Type>> && std::is_reference_v<_Type>;
 
 } /* namespace tgon */

@@ -6,14 +6,13 @@
 
 #pragma once
 #include <typeinfo>
-#include <cstdint>
 
 #include "TypeTraits.h"
 
 namespace tgon
 {
 
-struct RTTI final
+class RTTI final
 {
 /* @section Constructor */
 public:
@@ -21,13 +20,8 @@ public:
 
 /* @section Method */
 public:
-    /**@brief   Returns the type hash code. */
     uint32_t GetHashCode() const noexcept;
-    
-    /**@brief   Returns the type name of RTTI owner. */
     const char* GetName() const noexcept;
-
-    /**@brief   Returns the parent type's RTTI. */
     const RTTI* GetSuperRTTI() const noexcept;
 
 /* @section Operator */
@@ -46,7 +40,7 @@ private:
 };
 
 template <typename _Type>
-inline typename std::enable_if<IsPureValue<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<IsPure<_Type>, const RTTI*>::type GetRTTI()
 {
     using PureType = Pure<_Type>;
 
@@ -55,7 +49,7 @@ inline typename std::enable_if<IsPureValue<_Type>, const RTTI*>::type GetRTTI()
 }
 
 template <typename _Type>
-inline typename std::enable_if<!IsPureValue<_Type>, const RTTI*>::type GetRTTI()
+inline typename std::enable_if<!IsPure<_Type>, const RTTI*>::type GetRTTI()
 {
     return GetRTTI<Pure<_Type>>();
 }
@@ -64,6 +58,57 @@ template <>
 inline const RTTI* GetRTTI<void>()
 {
     return nullptr;
+}
+
+inline RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcept :
+    m_typeInfo(&typeInfo),
+    m_superRTTI(superRTTI)
+{
+}
+
+inline uint32_t RTTI::GetHashCode() const noexcept
+{
+    return m_typeInfo->hash_code();
+}
+
+inline const char* RTTI::GetName() const noexcept
+{
+    return m_typeInfo->name();
+}
+
+inline const RTTI* RTTI::GetSuperRTTI() const noexcept
+{
+    return m_superRTTI;
+}
+
+inline bool RTTI::operator==(const RTTI& rhs) const noexcept
+{
+    return m_typeInfo == rhs.m_typeInfo;
+}
+
+inline bool RTTI::operator!=(const RTTI& rhs) const noexcept
+{
+    return !(*this == rhs);
+}
+
+inline bool RTTI::operator<(const RTTI& rhs) const noexcept
+{
+    return m_typeInfo->before(*rhs.m_typeInfo);
+}
+
+inline bool RTTI::operator>=(const RTTI& rhs) const noexcept
+{
+    return !(*this < rhs);
+}
+
+inline bool RTTI::operator>(const RTTI& rhs) const noexcept
+{
+    return (rhs < *this);
+}
+
+inline bool RTTI::operator<=(const RTTI& rhs) const noexcept
+{
+    return !(*this > rhs);
 }
 
 } /* namespace tgon */

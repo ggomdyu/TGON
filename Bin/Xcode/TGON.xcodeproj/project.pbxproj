@@ -35,7 +35,6 @@
 		8CF8A17D234A435100763883 /* NonAddressable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16E234A435000763883 /* NonAddressable.h */; };
 		8CF8A17E234A435100763883 /* RuntimeObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16F234A435000763883 /* RuntimeObject.h */; };
 		8CF8A17F234A435100763883 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A170234A435000763883 /* Object.cpp */; };
-		8CF8A180234A435100763883 /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A171234A435000763883 /* RTTI.cpp */; };
 		8CF8A181234A435100763883 /* RTTI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A172234A435000763883 /* RTTI.h */; };
 		8CF8A182234A435100763883 /* Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A173234A435000763883 /* Delegate.h */; };
 		8CF8A183234A435100763883 /* Range.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A174234A435000763883 /* Range.h */; };
@@ -817,7 +816,6 @@
 		8CF8A16E234A435000763883 /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = NonAddressable.h; sourceTree = "<group>"; };
 		8CF8A16F234A435000763883 /* RuntimeObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RuntimeObject.h; sourceTree = "<group>"; };
 		8CF8A170234A435000763883 /* Object.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Object.cpp; sourceTree = "<group>"; };
-		8CF8A171234A435000763883 /* RTTI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RTTI.cpp; sourceTree = "<group>"; };
 		8CF8A172234A435000763883 /* RTTI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RTTI.h; sourceTree = "<group>"; };
 		8CF8A173234A435000763883 /* Delegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Delegate.h; sourceTree = "<group>"; };
 		8CF8A174234A435000763883 /* Range.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Range.h; sourceTree = "<group>"; };
@@ -2958,7 +2956,6 @@
 				8CF8A16E234A435000763883 /* NonAddressable.h */,
 				8CF8A177234A435000763883 /* NonCopyable.h */,
 				8CF8A174234A435000763883 /* Range.h */,
-				8CF8A171234A435000763883 /* RTTI.cpp */,
 				8CF8A172234A435000763883 /* RTTI.h */,
 				8CF8A16F234A435000763883 /* RuntimeObject.h */,
 				8CF8A176234A435000763883 /* TypeTraits.h */,
@@ -3937,7 +3934,6 @@
 				8CF8A19D234A438800763883 /* Component.cpp in Sources */,
 				8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */,
 				FD53322422A2E9A4001EB57C /* sfnt.c in Sources */,
-				8CF8A180234A435100763883 /* RTTI.cpp in Sources */,
 				FD78AC062289D06000D22E46 /* psy.c in Sources */,
 				FDE1B4AE22E40E940093FDC1 /* unistr_titlecase_brkiter.cpp in Sources */,
 				FDE1B47722E40E940093FDC1 /* edits.cpp in Sources */,
