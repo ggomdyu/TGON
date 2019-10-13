@@ -30,6 +30,7 @@ public:
         assert(a.Length() == 3);
 
         a += "defabc";
+        assert(!strcmp(&a[0], "abcdefabc"));
         assert(a.Length() == 9);
         assert(a[3] == 'd');
         assert(a.IndexOf('a') == 0);

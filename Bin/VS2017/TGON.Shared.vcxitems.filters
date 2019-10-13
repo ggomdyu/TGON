@@ -1047,16 +1047,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Directory.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\SpriteRendererComponent.cpp">
-      <Filter>Source\TGON\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\TextRendererComponent.cpp">
-      <Filter>Source\TGON\Component</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp">
       <Filter>Source\TGON\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.cpp">
       <Filter>Source\TGON\Core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1218,9 +1214,6 @@
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\TypeTraits.h">
-      <Filter>Source\TGON\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\CoreObject.h">
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Delegate.h">
@@ -2465,14 +2458,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\VideoMode.h">
       <Filter>Source\TGON\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\SpriteRendererComponent.h">
-      <Filter>Source\TGON\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\..\..\Source\TGON\Component\TextRendererComponent.h">
-      <Filter>Source\TGON\Component</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h">
       <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.h">
+      <Filter>Source\TGON\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

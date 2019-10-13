@@ -18,7 +18,9 @@ namespace tgon
 
 class TGON_API Asset
 {
-
+private:
+    StringHash m_path;
+    std::any m_resource;
 };
 
 

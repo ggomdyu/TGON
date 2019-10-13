@@ -85,7 +85,7 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const 
 
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    auto utf16StrLen = GetCurrentDirectoryW(g_tempUtf16Buffer.size(), g_tempUtf16Buffer.data());
+    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
     if (utf16StrLen == 0)
     {
         return -1;
