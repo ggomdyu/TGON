@@ -29,7 +29,8 @@ public:
     /**@brief   Updates the frame of scene. */
     virtual void Update() override;
 
-    void ChangeScene(Scene* scene);
+    template <typename _SceneType, typename... _Args>
+    void ChangeScene(_Args&&... args);
     Scene& GetCurrentScene() noexcept;
     const Scene& GetCurrentScene() const noexcept;
     
@@ -37,5 +38,12 @@ public:
 private:
     std::unique_ptr<Scene> m_currScene;
 };
+
+template <typename _SceneType, typename ..._Args>
+inline void SceneModule::ChangeScene(_Args&&... args)
+{
+    m_currScene = std::make_unique<_SceneType>(std::forward<_Args>(args)...);
+    m_currScene->Initialize();
+}
 
 } /* namespace tgon */
