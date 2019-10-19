@@ -74,7 +74,7 @@ public:
     template <typename _PredicateType>
     int32_t IndexOfAny(const _PredicateType& predicate, int32_t startIndex = 0) const;
     int32_t LastIndexOf(const std::basic_string_view<_CharType>& str) const;
-    int32_t LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex = 0) const;
+    int32_t LastIndexOf(const std::basic_string_view<_CharType>& str, int32_t startIndex) const;
     int32_t LastIndexOf(_CharType ch) const;
     int32_t LastIndexOf(_CharType ch, int32_t startIndex) const;
     template <typename _PredicateType>
@@ -183,7 +183,7 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFix
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const std::basic_string_view<_CharType>& str) :
-    BasicFixedString(str.data(), str.length())
+    BasicFixedString(str.data(), static_cast<int32_t>(str.length()))
 {
 }
 
@@ -322,7 +322,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 template <int32_t _CharBufferSize2>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CompareTo(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& str) const
 {
-    return _StringTraitsType::Compare(m_str.data(), static_cast<size_t>(m_strLen), str.Data(), static_cast<size_t>(str.Length()));
+    return _StringTraitsType::Compare(m_str.data(), m_strLen, str.Data(), str.Length());
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -341,7 +341,7 @@ inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IndexOf(_CharType ch, int32_t startIndex) const
 {
-    char str[] = {ch, '\0'};
+    ValueType str[] = {ch, 0};
     return _StringTraitsType::IndexOf(m_str.data() + startIndex, m_strLen - startIndex, str, 1) + startIndex;
 }
 
@@ -354,7 +354,7 @@ inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::LastIndexOf(_CharType ch, int32_t startIndex) const
 {
-    char str[] = {ch, '\0'};
+    ValueType str[] = {ch, 0};
     return _StringTraitsType::LastIndexOf(m_str.data(), startIndex + 1, str, 1);
 }
 

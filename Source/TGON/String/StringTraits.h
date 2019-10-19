@@ -35,8 +35,8 @@ public:
     static int32_t IndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
     static int32_t LastIndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen);
     template <typename _PredicateType>
-    static int32_t LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
-    static int32_t Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen);
+    static constexpr int32_t LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
+    static constexpr int32_t Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen);
     static constexpr int32_t Length(const _CharType* str) noexcept;
     static void Swap(_CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen);
     template <std::size_t _DestStrBufferLen>
@@ -94,7 +94,7 @@ inline int32_t BasicStringTraits<_CharType>::IndexOf(const _CharType* str, int32
     const _CharType* foundStr = std::search(str, str + strLen, subStr, subStr + subStrLen);
     if (foundStr != str + strLen)
     {
-        return static_cast<std::size_t>(foundStr - str);
+        return foundStr - str;
     }
 
     return -1;
@@ -107,7 +107,7 @@ inline int32_t BasicStringTraits<_CharType>::IndexOfAny(const _CharType* str, in
     const _CharType* foundStr = std::find_if(str, str + strLen, predicate);
     if (foundStr != str + strLen)
     {
-        return static_cast<std::size_t>(foundStr - str);
+        return foundStr - str;
     }
 
     return -1;
@@ -119,7 +119,7 @@ inline int32_t BasicStringTraits<_CharType>::LastIndexOf(const _CharType* str, i
     const _CharType* foundStr = std::find_end(str, str + strLen, subStr, subStr + subStrLen);
     if (foundStr != str + strLen)
     {
-        return static_cast<std::size_t>(foundStr - str);
+        return foundStr - str;
     }
 
     return -1;
@@ -127,9 +127,9 @@ inline int32_t BasicStringTraits<_CharType>::LastIndexOf(const _CharType* str, i
 
 template <typename _CharType>
 template <typename _PredicateType>
-inline int32_t BasicStringTraits<_CharType>::LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
+constexpr int32_t BasicStringTraits<_CharType>::LastIndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate)
 {
-    for (int32_t i = strLen - 1; i >= 0; --i)
+    for (auto i = strLen - 1; i >= 0; --i)
     {
         if (predicate(str[i]))
         {
@@ -141,7 +141,7 @@ inline int32_t BasicStringTraits<_CharType>::LastIndexOfAny(const _CharType* str
 }
 
 template <typename _CharType>
-inline int32_t BasicStringTraits<_CharType>::Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen)
+constexpr int32_t BasicStringTraits<_CharType>::Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen)
 {
     auto ans = std::char_traits<_CharType>::compare(lhsStr, rhsStr, std::min(lhsStrLen, rhsStrLen));
     if (ans != 0)
