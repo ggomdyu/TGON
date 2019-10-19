@@ -38,6 +38,12 @@ struct RemoveAllPointers<_Type*>
     using Type = typename RemoveAllPointers<_Type>::Type;
 };
 
+template <class _Type>
+struct RemoveCvref
+{
+    using Type = std::remove_cv_t<std::remove_reference_t<_Type>>;
+};
+
 } /* namespace detail */
 
 template <typename>
@@ -99,6 +105,9 @@ constexpr bool IsBasicStringView = detail::IsBasicStringView<_Type>::value;
 
 template <typename _Type>
 using RemoveAllPointers = typename detail::RemoveAllPointers<_Type>::Type;
+
+template <typename _Type>
+using RemoveCvref = typename detail::RemoveCvref<_Type>::Type;
 
 template <typename _Type>
 using Pure = std::remove_cv_t<RemoveAllPointers<std::decay_t<_Type>>>;
