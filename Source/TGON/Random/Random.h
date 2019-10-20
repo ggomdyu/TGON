@@ -8,6 +8,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "Platform/Config.h"
+
 namespace tgon
 {
 

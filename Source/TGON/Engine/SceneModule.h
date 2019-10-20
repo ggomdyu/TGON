@@ -7,12 +7,11 @@
 #pragma once
 #include <memory>
 
+#include "Game/Scene.h"
 #include "Engine/IModule.h"
 
 namespace tgon
 {
-
-class Scene;
 
 class TGON_API SceneModule final :
     public IModule
@@ -26,13 +25,10 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Updates the frame of scene. */
     virtual void Update() override;
 
     template <typename _SceneType, typename... _Args>
     void ChangeScene(_Args&&... args);
-    Scene& GetCurrentScene() noexcept;
-    const Scene& GetCurrentScene() const noexcept;
     
 /**@section Variable */
 private:

@@ -10,23 +10,14 @@
 namespace tgon
 {
 
-UISortingLayer::UISortingLayer(const StringHash& sortingLayerName) :
-    m_sortingLayerName(sortingLayerName)
-{
-}
-
-UISortingLayer::UISortingLayer(StringHash&& sortingLayerName) :
-   m_sortingLayerName(std::move(sortingLayerName))
-{
-}
-    
 UIRenderer::UIRenderer() :
     m_spriteVertexBuffer({
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Position, 3, VertexFormatType::Float, false, sizeof(V3F_C4F_T2F), offsetof(V3F_C4F_T2F, position)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Color, 4, VertexFormatType::Float, true, sizeof(V3F_C4F_T2F), offsetof(V3F_C4F_T2F, color)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_C4F_T2F), offsetof(V3F_C4F_T2F, uv))
-    })
-{   
+    }),
+    m_sortingLayers(1)
+{
     this->PrepareDefaultMaterials();
 }
 
@@ -49,18 +40,16 @@ void UIRenderer::Draw(Graphics& graphics)
     this->FlushSpriteBatches(graphics);
 }
 
-void UIRenderer::AddPrimitive(const std::shared_ptr<UISprite>& sprite, const Matrix4x4& matWorld)
+void UIRenderer::AddPrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld)
 {
-//    if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
-//    {
-//        m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
-//    }
-//
-//    m_spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
-}
+    auto& spriteBatches = m_sortingLayers[sotringLayer];
+    
+    if (spriteBatches.empty() || spriteBatches.back().CanBatch(*sprite) == false)
+    {
+        spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+    }
 
-void UIRenderer::AddSortingLayer(const StringHash& sortingLayerName)
-{
+    spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
 }
 
 void UIRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
@@ -83,9 +72,19 @@ bool UIRenderer::RemoveCamera(const std::shared_ptr<Camera>& camera)
     return true;
 }
 
-bool UIRenderer::RemoveSortingLayer(const StringViewHash& sortingLayerName)
+void UIRenderer::SetMaxSortingLayer(int32_t maxSortingLayer) noexcept
 {
-    return true;
+    m_sortingLayers.resize(static_cast<size_t>(maxSortingLayer));
+}
+
+int32_t UIRenderer::GetMinSortingLayer() const noexcept
+{
+    return 0;
+}
+
+int32_t UIRenderer::GetMaxSortingLayer() const noexcept
+{
+    return static_cast<int32_t>(m_sortingLayers.size());
 }
 
 void UIRenderer::PrepareDefaultMaterials()
@@ -95,20 +94,24 @@ void UIRenderer::PrepareDefaultMaterials()
 
 void UIRenderer::FlushSpriteBatches(Graphics& graphics)
 {
-//    m_uiMaterial->Use();
-//
-//    for (auto& camera : m_cameraList)
-//    {
-//        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
-//
-//        for (auto& spriteBatch : m_spriteBatches)
-//        {
-//            spriteBatch.FlushBatch(graphics);
-//        }
-//    }
-//
-//    m_spriteBatches.clear();
-//    m_spriteVertices.clear();
+    m_uiMaterial->Use();
+
+    for (auto& camera : m_cameraList)
+    {
+        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
+
+        for (auto& spriteBatches : m_sortingLayers)
+        {
+            for (auto& spriteBatch : spriteBatches)
+            {
+                spriteBatch.FlushBatch(graphics);
+            }
+            
+            spriteBatches.clear();
+        }
+    }
+
+    m_spriteVertices.clear();
 }
 
 } /* namespace tgon */

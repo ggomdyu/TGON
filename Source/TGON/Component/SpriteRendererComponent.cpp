@@ -24,13 +24,18 @@ void SpriteRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, gameObject->GetComponent<Transform>()->GetWorldMatrix());
+        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
     }
 }
 
-void SpriteRendererComponent::SetSprite(const std::shared_ptr<UISprite>& sprite)
+void SpriteRendererComponent::SetSprite(const std::shared_ptr<UISprite>& sprite) noexcept
 {
     m_sprite = sprite;
+}
+
+void SpriteRendererComponent::SetSortingLayer(int32_t sortingLayer) noexcept
+{
+    m_sortingLayer = sortingLayer;
 }
     
 std::shared_ptr<UISprite> SpriteRendererComponent::GetSprite() noexcept
@@ -41,6 +46,11 @@ std::shared_ptr<UISprite> SpriteRendererComponent::GetSprite() noexcept
 std::shared_ptr<const UISprite> SpriteRendererComponent::GetSprite() const noexcept
 {
     return m_sprite;
+}
+
+int32_t SpriteRendererComponent::GetSortingLayer() const noexcept
+{
+    return m_sortingLayer;
 }
 
 } /* namespace tgon */

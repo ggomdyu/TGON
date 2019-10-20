@@ -41,18 +41,19 @@ enum class AudioSampleFormat
     Stereo16 = AL_FORMAT_STEREO16,
 };
 
-class TGON_API AudioBuffer : NonCopyable
+class TGON_API AudioBuffer :
+    private NonCopyable
 {
 /**@section Constructor */
 public:
     AudioBuffer();
     explicit AudioBuffer(const std::string& filePath);
     AudioBuffer(const std::byte* fileData, std::size_t fileDataBytes);
-    AudioBuffer(AudioBuffer&& rhs) = default;
+    AudioBuffer(AudioBuffer&& rhs);
 
 /**@section Operator */
 public:
-    AudioBuffer& operator=(AudioBuffer&& rhs) = default;
+    AudioBuffer& operator=(AudioBuffer&& rhs);
 
 /**@section Destructor */
 public:
@@ -75,6 +76,7 @@ public:
 
 private:
     bool Decode(const std::byte* fileData, std::size_t fileDataBytes, AudioFormat audioFormat);
+    void Destroy();
 
 /**@section Variable */
 private:

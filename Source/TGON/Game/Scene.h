@@ -26,9 +26,8 @@ public:
 
 /**@section Method */
 public:
-    virtual void Initialize() = 0;
+    virtual void Initialize() {}
     virtual void Update();
-    
     void AddObject(const std::shared_ptr<GameObject>& object);
     void AddObject(std::shared_ptr<GameObject>&& object);
     void AddGlobalObject(const std::shared_ptr<GameObject>& object);

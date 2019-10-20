@@ -44,9 +44,50 @@ AudioBuffer::AudioBuffer(const std::byte* fileData, std::size_t fileDataBytes) :
     this->SetAudioData(fileData, fileDataBytes);
 }
 
+AudioBuffer::AudioBuffer(AudioBuffer&& rhs) :
+    m_filePath(std::move(rhs.m_filePath)),
+    m_audioData(std::move(rhs.m_audioData)),
+    m_alBufferId(rhs.m_alBufferId),
+    m_audioDataBytes(rhs.m_audioDataBytes),
+    m_bitsPerSample(rhs.m_bitsPerSample),
+    m_channels(rhs.m_channels),
+    m_samplingRate(rhs.m_samplingRate),
+    m_alFormat(rhs.m_alFormat)
+{
+    rhs.m_alBufferId = 0;
+    rhs.m_audioDataBytes = 0;
+    rhs.m_bitsPerSample = 0;
+    rhs.m_channels = 0;
+    rhs.m_samplingRate = 0;
+    rhs.m_alFormat = 0;
+}
+
 AudioBuffer::~AudioBuffer()
 {
-    alDeleteBuffers(1, &m_alBufferId);
+    this->Destroy();
+}
+
+AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs)
+{
+    this->Destroy();
+    
+    m_filePath = std::move(rhs.m_filePath);
+    m_audioData = std::move(rhs.m_audioData);
+    m_alBufferId = rhs.m_alBufferId;
+    m_audioDataBytes = rhs.m_audioDataBytes;
+    m_bitsPerSample = rhs.m_bitsPerSample;
+    m_channels = rhs.m_channels;
+    m_samplingRate = rhs.m_samplingRate;
+    m_alFormat = rhs.m_alFormat;
+    
+    rhs.m_alBufferId = 0;
+    rhs.m_audioDataBytes = 0;
+    rhs.m_bitsPerSample = 0;
+    rhs.m_channels = 0;
+    rhs.m_samplingRate = 0;
+    rhs.m_alFormat = 0;
+    
+    return *this;
 }
 
 bool AudioBuffer::SetAudioData(const std::string& filePath)
@@ -211,6 +252,15 @@ bool AudioBuffer::Decode(const std::byte* fileData, std::size_t fileDataBytes, A
     }
 
     return false;
+}
+
+void AudioBuffer::Destroy()
+{
+    if (m_alBufferId != 0)
+    {
+        alDeleteBuffers(1, &m_alBufferId);
+        m_alBufferId = 0;
+    }
 }
 
 } /* namespace tgon */

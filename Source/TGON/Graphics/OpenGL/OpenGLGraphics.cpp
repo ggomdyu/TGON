@@ -131,7 +131,7 @@ void Graphics::SetBlendMode(BlendMode blendMode)
             
     case BlendMode::Alpha:
         TGON_GL_ERROR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
+//        TGON_GL_ERROR_CHECK(glBlendEquation(GL_FUNC_ADD));
         break;
             
     case BlendMode::Additive:

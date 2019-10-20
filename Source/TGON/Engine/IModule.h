@@ -16,15 +16,10 @@ class TGON_API IModule :
 public:
     TGON_DECLARE_RTTI(IModule)
 
-/**@section Destructor */
-public:
-    virtual ~IModule() = 0;
-
 /**@section Method */
 public:
-    virtual void Update() = 0;
+    virtual void Initialize() {}
+    virtual void Update() {}
 };
-
-inline IModule::~IModule() = default;
 
 } /* namespace tgon */

@@ -68,12 +68,16 @@ public:
     constexpr bool operator==(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
     template <typename _StringType2, typename _StringTraitsType2>
     constexpr bool operator!=(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
+    template <typename _StringType2, typename _StringTraitsType2>
+    constexpr bool operator<(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
+    template <typename _StringType2, typename _StringTraitsType2>
+    constexpr bool operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
+    operator std::basic_string<ValueType>() const noexcept;
+    operator std::basic_string_view<ValueType>() const noexcept;
 
 /**@section Method */
 public:
-    int32_t CompareTo(const BasicStringHash& rhs) noexcept;
-    template <typename _StringType2>
-    int32_t CompareTo(const _StringType2& str) noexcept;
+    int32_t CompareTo(const std::basic_string_view<ValueType>& str) noexcept;
     int32_t IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex = 0) const;
     int32_t IndexOf(ValueType ch, int32_t startIndex = 0) const;
     template <typename _PredicateType>
@@ -88,10 +92,10 @@ public:
     int32_t LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const;
     constexpr const ValueType* Data() const noexcept;
     constexpr const int32_t Length() const noexcept;
-    IteratorType Begin() noexcept;
-    IteratorType End() noexcept;
-    ConstIteratorType CBegin() const noexcept;
-    ConstIteratorType CEnd() const noexcept;
+    constexpr IteratorType Begin() noexcept;
+    constexpr IteratorType End() noexcept;
+    constexpr ConstIteratorType CBegin() const noexcept;
+    constexpr ConstIteratorType CEnd() const noexcept;
     constexpr HashCodeType GetHashCode() const noexcept;
 
 /**@section Variable */
@@ -196,6 +200,32 @@ constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator!=(const
 }
 
 template <typename _StringType, typename _StringTraitsType>
+template <typename _StringType2, typename _StringTraitsType2>
+constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator<(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept
+{
+    return m_hashCode < rhs.GetHashCode();
+}
+
+template <typename _StringType, typename _StringTraitsType>
+template <typename _StringType2, typename _StringTraitsType2>
+constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept
+{
+    return m_hashCode > rhs.GetHashCode();
+}
+
+template <typename _StringType, typename _StringTraitsType>
+inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string<ValueType>() const noexcept
+{
+    return {this->Data(), static_cast<size_t>(this->Length())};
+}
+
+template <typename _StringType, typename _StringTraitsType>
+inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string_view<ValueType>() const noexcept
+{
+    return {this->Data(), static_cast<size_t>(this->Length())};
+}
+
+template <typename _StringType, typename _StringTraitsType>
 constexpr typename BasicStringHash<_StringType, _StringTraitsType>::HashCodeType BasicStringHash<_StringType, _StringTraitsType>::GetHashCode() const noexcept
 {
     return m_hashCode;
@@ -210,16 +240,9 @@ inline int32_t BasicStringHash<_StringType, _StringTraitsType>::IndexOf(ValueTyp
 }
 
 template<typename _StringType, typename _StringTraitsType>
-inline int32_t BasicStringHash<_StringType, _StringTraitsType>::CompareTo(const BasicStringHash& str) noexcept
+inline int32_t BasicStringHash<_StringType, _StringTraitsType>::CompareTo(const std::basic_string_view<ValueType>& str) noexcept
 {
-    return _StringTraitsType::Compare(this->Data(), this->Length(), str.Data(), str.Length());
-}
-
-template<typename _StringType, typename _StringTraitsType>
-template<typename _StringType2>
-inline int32_t BasicStringHash<_StringType, _StringTraitsType>::CompareTo(const _StringType2& str) noexcept
-{
-    return _StringTraitsType::Compare(this->Data(), this->Length(), std::string_view(str).length(), &str[0]);
+    return _StringTraitsType::Compare(this->Data(), this->Length(), str.data(), str.length());
 }
 
 template <typename _StringType, typename _StringTraitsType>
@@ -294,25 +317,25 @@ constexpr const int32_t BasicStringHash<_StringType, _StringTraitsType>::Length(
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline typename BasicStringHash<_StringType, _StringTraitsType>::IteratorType BasicStringHash<_StringType, _StringTraitsType>::Begin() noexcept
+constexpr typename BasicStringHash<_StringType, _StringTraitsType>::IteratorType BasicStringHash<_StringType, _StringTraitsType>::Begin() noexcept
 {
     return &this->Data()[0];
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline typename BasicStringHash<_StringType, _StringTraitsType>::IteratorType BasicStringHash<_StringType, _StringTraitsType>::End() noexcept
+constexpr typename BasicStringHash<_StringType, _StringTraitsType>::IteratorType BasicStringHash<_StringType, _StringTraitsType>::End() noexcept
 {
     return &this->Data()[0] + this->Length();
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline typename BasicStringHash<_StringType, _StringTraitsType>::ConstIteratorType BasicStringHash<_StringType, _StringTraitsType>::CBegin() const noexcept
+constexpr typename BasicStringHash<_StringType, _StringTraitsType>::ConstIteratorType BasicStringHash<_StringType, _StringTraitsType>::CBegin() const noexcept
 {
     return this->Begin();
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline typename BasicStringHash<_StringType, _StringTraitsType>::ConstIteratorType BasicStringHash<_StringType, _StringTraitsType>::CEnd() const noexcept
+constexpr typename BasicStringHash<_StringType, _StringTraitsType>::ConstIteratorType BasicStringHash<_StringType, _StringTraitsType>::CEnd() const noexcept
 {
     return this->End();
 }

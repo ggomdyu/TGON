@@ -10,19 +10,14 @@
 #include <any>
 
 #include "String/StringHash.h"
+#include "Audio/AudioBuffer.h"
+#include "Graphics/Texture.h"
+#include "Graphics/TextureAtlas.h"
 
 #include "IModule.h"
 
 namespace tgon
 {
-
-class TGON_API Asset
-{
-private:
-    StringHash m_path;
-    std::any m_resource;
-};
-
 
 class TGON_API AssetModule final :
 	public IModule
@@ -30,20 +25,15 @@ class TGON_API AssetModule final :
 public:
     TGON_DECLARE_RTTI(AssetModule);
 
-/* @section Destructor */
-public:
-    virtual ~AssetModule() override = default;
-
 /* @section Method */
 public:
-    virtual void Update() override;
-    std::shared_ptr<Asset> Load(const StringViewHash& path);
-    void Store(std::shared_ptr<Asset> asset);
-    void PurgeResource(const StringViewHash& resourceName);
+    std::shared_ptr<Texture> LoadTexture(const StringViewHash& path);
+    std::shared_ptr<AudioBuffer> LoadAudioBuffer(const StringViewHash& path);
+    void PurgeResource(const StringViewHash& path);
     
 /* @section Variable */
 private:
-    std::unordered_map<size_t, std::shared_ptr<Asset>> m_resourceCache;
+    std::unordered_map<StringHash, std::any> m_resourceCache;
 };
 
 } /* namespace tgon */

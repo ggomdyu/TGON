@@ -45,7 +45,6 @@ void UISpriteBatch::FlushBatch(Graphics& graphics)
         graphics.SetScissorRect(m_scissorRect);
     }
     else
-
     {
         graphics.DisableScissorTest();
     }

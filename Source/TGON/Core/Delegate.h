@@ -22,7 +22,7 @@ class Delegate<_ReturnType(_ArgTypes...)> final
 {
 /**@section Type */
 private:
-    using DeleterType = std::size_t(*)(void*);
+    using DeleterType = size_t(*)(void*);
     using StubType = _ReturnType(*)(void*, _ArgTypes...);
     
 public:
@@ -45,56 +45,46 @@ public:
 
 /**@section Operator */
 public:
+    template <typename... _ArgTypes2>
+    _ReturnType operator()(_ArgTypes2&&... args) const;
     Delegate& operator=(const Delegate& rhs);
     Delegate& operator=(Delegate&& rhs) noexcept;
     constexpr bool operator==(std::nullptr_t rhs) const noexcept;
     constexpr bool operator!=(std::nullptr_t rhs) const noexcept;
     constexpr bool operator==(const Delegate& rhs) const noexcept;
     constexpr bool operator!=(const Delegate& rhs) const noexcept;
-    template <typename... _ArgTypes2>
-    _ReturnType operator()(_ArgTypes2&&... args) const;
 
 /**@section Method */
 public:
     template <typename _FunctionType>
     static Delegate MakeDelegate(_FunctionType function);
-
     template <_ReturnType(*Handler)(_ArgTypes...)>
     static Delegate MakeDelegate() noexcept;
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static Delegate MakeDelegate(_ClassType* receiver) noexcept;
 
 private:
     template <typename _FunctionType>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    
     template <_ReturnType(*Handler)(_ArgTypes...)>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    
     template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-
     template <typename _FunctionType>
-    static std::size_t MakeDeleter(void* ptr);
+    static size_t MakeDeleter(void* ptr);
+    void Destroy();
 
 /**@section Variable */
 private:
@@ -136,11 +126,11 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
-    m_ptr(operator new(sizeof(typename std::decay<_FunctionType>::type))),
-    m_stub(&MakeStub<typename std::decay<_FunctionType>::type>),
-    m_deleter(&MakeDeleter<typename std::decay<_FunctionType>::type>)
+    m_ptr(operator new(sizeof(std::decay_t<_FunctionType>))),
+    m_stub(&MakeStub<std::decay_t<_FunctionType>>),
+    m_deleter(&MakeDeleter<std::decay_t<_FunctionType>>)
 {
-    new (m_ptr) typename std::decay<_FunctionType>::type(function);
+    new (m_ptr) std::decay_t<_FunctionType>(function);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -150,10 +140,10 @@ inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
 {
     if (m_deleter)
     {
-        std::size_t allocationSize = m_deleter(nullptr);
+        size_t allocationSize = m_deleter(nullptr);
 
         m_ptr = operator new(allocationSize);
-        std::memcpy(m_ptr, rhs.m_ptr, allocationSize);
+        memcpy(m_ptr, rhs.m_ptr, allocationSize);
     }
     else
     {
@@ -202,10 +192,10 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 
     if (rhs.m_deleter)
     {
-        std::size_t allocationSize = m_deleter(nullptr);
+        size_t allocationSize = m_deleter(nullptr);
 
         m_ptr = operator new(allocationSize);
-        std::memcpy(m_ptr, rhs.m_ptr, allocationSize);
+        memcpy(m_ptr, rhs.m_ptr, allocationSize);
     }
     else
     {
@@ -356,7 +346,7 @@ inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver,
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
-inline std::size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
+inline size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
 {
     operator delete(ptr);
     return sizeof(_FunctionType);

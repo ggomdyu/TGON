@@ -30,6 +30,7 @@
 #include "Engine/AudioModule.h"
 #include "Engine/TaskModule.h"
 #include "Engine/GraphicsModule.h"
+#include "Engine/AssetModule.h"
 #include "Engine/Engine.h"
 #include "String/FixedString.h"
 #include "String/StringHash.h"

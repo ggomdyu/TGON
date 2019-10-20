@@ -23,15 +23,12 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~RuntimeObject() = 0;
+    virtual ~RuntimeObject() {}
 
 /**@section Method */
 public:
-    /**@brief   Gets a runtime type information of this instance. */
     virtual const RTTI* GetRTTI() const = 0;
 };
-
-inline RuntimeObject::~RuntimeObject() = default;
 
 } /* namespace tgon */
 
