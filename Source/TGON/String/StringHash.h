@@ -73,7 +73,7 @@ public:
     template <typename _StringType2, typename _StringTraitsType2>
     constexpr bool operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
     operator std::basic_string<ValueType>() const noexcept;
-    operator std::basic_string_view<ValueType>() const noexcept;
+    constexpr operator std::basic_string_view<ValueType>() const noexcept;
 
 /**@section Method */
 public:
@@ -220,7 +220,7 @@ inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_stri
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string_view<ValueType>() const noexcept
+constexpr BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string_view<ValueType>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
