@@ -34,6 +34,7 @@ public:
     
 private:
     void PrepareDefaultMaterials();
+    void UpdateSpriteBatches();
     void FlushSpriteBatches(Graphics& graphics);
     
 /**@section Variable */
@@ -41,7 +42,8 @@ private:
     std::shared_ptr<Material> m_uiMaterial;
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
-    std::vector<std::vector<UISpriteBatch>> m_sortingLayers;
+    std::vector<std::vector<std::pair<std::shared_ptr<UISprite>, const Matrix4x4&>>> m_sortingLayers;
+    std::vector<UISpriteBatch> m_spriteBatches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
 };
     

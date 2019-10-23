@@ -23,6 +23,8 @@ UIRenderer::UIRenderer() :
 
 void UIRenderer::Update()
 {
+    this->UpdateSpriteBatches();
+    
     m_spriteVertexBuffer.Use();
     m_spriteVertexBuffer.SetData(m_spriteVertices.data(), m_spriteVertices.size() * sizeof(m_spriteVertices[0]), false);
 }
@@ -42,14 +44,8 @@ void UIRenderer::Draw(Graphics& graphics)
 
 void UIRenderer::AddPrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld)
 {
-    auto& spriteBatches = m_sortingLayers[sotringLayer];
-    
-    if (spriteBatches.empty() || spriteBatches.back().CanBatch(*sprite) == false)
-    {
-        spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
-    }
-
-    spriteBatches.back().Merge(*sprite, matWorld, &m_spriteVertices);
+    auto& sortingLayer = m_sortingLayers[sotringLayer];
+    sortingLayer.push_back({sprite, matWorld});
 }
 
 void UIRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
@@ -92,6 +88,25 @@ void UIRenderer::PrepareDefaultMaterials()
     m_uiMaterial = std::make_shared<Material>(g_positionColorUVVert, g_positionColorUVFrag);
 }
 
+void UIRenderer::UpdateSpriteBatches()
+{
+    for (auto& sortingLayer : m_sortingLayers)
+    {
+        for (auto& primitive : sortingLayer)
+        {
+            auto& sprite = primitive.first;
+            if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
+            {
+                m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+            }
+            
+            m_spriteBatches.back().Merge(*sprite, primitive.second, &m_spriteVertices);
+        }
+        
+        sortingLayer.clear();
+    }
+}
+
 void UIRenderer::FlushSpriteBatches(Graphics& graphics)
 {
     m_uiMaterial->Use();
@@ -100,15 +115,16 @@ void UIRenderer::FlushSpriteBatches(Graphics& graphics)
     {
         m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
 
-        for (auto& spriteBatches : m_sortingLayers)
+        int32_t drawCall = 0;
+        for (auto& spriteBatch : m_spriteBatches)
         {
-            for (auto& spriteBatch : spriteBatches)
-            {
-                spriteBatch.FlushBatch(graphics);
-            }
-            
-            spriteBatches.clear();
+            spriteBatch.FlushBatch(graphics);
+            ++drawCall;
         }
+        
+        m_spriteBatches.clear();
+        
+        Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
     }
 
     m_spriteVertices.clear();
