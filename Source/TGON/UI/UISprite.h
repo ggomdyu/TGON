@@ -20,16 +20,11 @@ public:
     UISprite() noexcept;
     explicit UISprite(const std::shared_ptr<Texture>& texture) noexcept;
     UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect) noexcept;
-    UISprite(UISprite&& rhs) noexcept;
 
 /**@section Destructor */
 public:
     virtual ~UISprite() = default;
 
-/**@section Operator */
-public:
-    UISprite& operator=(UISprite&& rhs) noexcept;
-    
 /**@section Method */
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
