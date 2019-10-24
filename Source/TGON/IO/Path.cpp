@@ -97,17 +97,6 @@ std::string_view Path::GetExtension(const std::string_view& path)
     }
 }
 
-std::optional<std::string> Path::GetFileName(const std::string_view& path)
-{
-    auto strLen = GetFileName(path, g_tempUtf8Buffer.data(), g_tempUtf8Buffer.size());
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
-    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
-}
-    
 std::string_view Path::GetFileName(const std::string_view& path)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
