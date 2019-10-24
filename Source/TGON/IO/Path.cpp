@@ -107,41 +107,20 @@ std::optional<std::string> Path::GetFileName(const std::string_view& path)
     
     return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
 }
-
-int32_t Path::GetFileName(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
+    
+std::string_view Path::GetFileName(const std::string_view& path)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
 
-    while (true)
+    while (--iterIndex >= 0)
     {
-        if (--iterIndex <= 0)
-        {
-            int32_t destStrLen = static_cast<int32_t>(path.length());
-            if (destStrLen + 1 > destStrBufferLen)
-            {
-                return -1;
-            }
-
-            memcpy(destStr, &path.data()[0], static_cast<size_t>(destStrLen));
-            destStr[destStrLen] = '\0';
-
-            return static_cast<int32_t>(path.length());
-        }
-
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
-            auto destStrLen = static_cast<int32_t>(path.length()) - (++iterIndex);
-            if (destStrLen + 1 > destStrBufferLen)
-            {
-                return -1;
-            }
-
-            memcpy(destStr, &path[iterIndex], static_cast<size_t>(destStrLen));
-            destStr[destStrLen] = '\0';
-
-            return destStrLen;
+            return path.substr(iterIndex + 1, path.length() - iterIndex);
         }
     }
+
+    return path;
 }
 
 std::optional<std::string> Path::GetFileNameWithoutExtension(const std::string_view& path)
