@@ -112,47 +112,16 @@ std::string_view Path::GetFileName(const std::string_view& path)
     return path;
 }
 
-std::optional<std::string> Path::GetFileNameWithoutExtension(const std::string_view& path)
-{
-    auto strLen = GetFileNameWithoutExtension(path, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
-    return std::string(g_tempUtf8Buffer.data(), static_cast<int32_t>(strLen));
-}
-
-int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen)
+std::string_view Path::GetFileNameWithoutExtension(const std::string_view& path)
 {
     auto iterIndex = static_cast<int32_t>(path.length());
     auto extensionStartIndex = iterIndex;
     
-    while (true)
+    while (--iterIndex >= 0)
     {
-        if (--iterIndex <= 0)
-        {
-            if (extensionStartIndex > destStrBufferLen)
-            {
-                return -1;
-            }
-
-            memcpy(destStr, path.data(), extensionStartIndex);
-            return extensionStartIndex;
-        }
-
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
-            int32_t destStrLen = extensionStartIndex - (iterIndex + 1);
-            if (destStrLen + 1 > destStrBufferLen)
-            {
-                return -1;
-            }
-            
-            memcpy(destStr, &path[iterIndex + 1], destStrLen);
-            destStr[destStrLen] = '\0';
-            
-            return destStrLen;
+            return path.substr(iterIndex + 1, extensionStartIndex - (iterIndex + 1));   
         }
 
         if (path[iterIndex] == '.' && path.data()[extensionStartIndex] == '\0')
@@ -160,6 +129,8 @@ int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, char* de
             extensionStartIndex = iterIndex;
         }
     }
+
+    return std::string_view();
 }
 
 std::optional<std::string> Path::GetDirectoryName(const std::string_view& path)
