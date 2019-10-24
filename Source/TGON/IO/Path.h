@@ -34,10 +34,7 @@ public:
     static bool IsPathRooted(const std::string_view& path);
     static std::string_view GetExtension(const std::string_view& path);
     static std::string_view GetFileName(const std::string_view& path);
-    static std::optional<std::string> GetFileNameWithoutExtension(const std::string_view& path);
-    static int32_t GetFileNameWithoutExtension(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
-    template <int32_t Length>
-    static int32_t GetFileNameWithoutExtension(const std::string_view& path, const gsl::span<char, Length>& destStr);
+    static std::string_view GetFileNameWithoutExtension(const std::string_view& path);
     static std::optional<std::string> GetDirectoryName(const std::string_view& path);
     static int32_t GetDirectoryName(const std::string_view& path, char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
@@ -75,12 +72,6 @@ template <int32_t Length>
 inline int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, const gsl::span<char, Length>& destStr)
 {
     return Combine( path1, path2, &destStr[0], destStr.Length());
-}
-
-template <int32_t Length>
-inline int32_t Path::GetFileNameWithoutExtension(const std::string_view& path, const gsl::span<char, Length>& destStr)
-{
-    return GetFileNameWithoutExtension(path, &destStr[0], destStr.Length());
 }
 
 template <int32_t Length>
