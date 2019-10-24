@@ -48,11 +48,13 @@ FileStream::FileStream(FileStream&& rhs) noexcept :
 
 FileStream::~FileStream()
 {
-    FileStream::Close();
+    this->Close();
 }
 
 FileStream& FileStream::operator=(FileStream&& rhs) noexcept
 {
+    this->Close();
+    
     m_nativeHandle = rhs.m_nativeHandle;
     m_buffer = std::move(rhs.m_buffer);
     m_bufferSize = rhs.m_bufferSize;
