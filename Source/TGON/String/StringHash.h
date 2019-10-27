@@ -122,7 +122,7 @@ constexpr BasicStringHash<_StringType, _StringTraitsType>::BasicStringHash(Basic
 template <typename _StringType, typename _StringTraitsType>
 template <typename _StringType2, typename std::enable_if_t<IsBasicStringHash<std::remove_reference_t<_StringType2>>>*>
 constexpr BasicStringHash<_StringType, _StringTraitsType>::BasicStringHash(const _StringType2& str) noexcept :
-    m_str(decltype(m_str)(str.Data(), str.Length())),
+    m_str(str.Data(), str.Length()),
     m_hashCode(str.GetHashCode())
 {
 }

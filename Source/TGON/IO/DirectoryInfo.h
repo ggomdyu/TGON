@@ -5,15 +5,18 @@
  */
 
 #pragma once
+#include <string>
+
 #include "Platform/Config.h"
 
 namespace tgon
 {
 
-class DirectoryInfo : FileSystemInfo
+class DirectoryInfo// : FileSystemInfo
 {
+/**@section Constructor */
 public:
-    DirectoryInfo(const std::string_view& path);
+    explicit DirectoryInfo(const std::string_view& path);
     
 public:
 //    bool IsExists();
@@ -50,6 +53,10 @@ public:
 //    FileSystemInfo[] GetFileSystemInfos(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
 //    void MoveTo(const std::string_view& destDirName);
 //    string_view ToString();
+    
+/**@section Variable */
+private:
+    std::string m_fullPath;
 };
 
 } /* namespace tgon */

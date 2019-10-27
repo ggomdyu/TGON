@@ -4,6 +4,8 @@
 #include <array>
 #include <sstream>
 
+#include "IO/Directory.h"
+
 #include "Environment.h"
 
 namespace tgon
@@ -63,21 +65,20 @@ std::optional<std::string> Environment::GetEnvironmentVariable(const std::string
 
 std::string Environment::GetCurrentDirectory()
 {
-    auto strLen = GetCurrentDirectory(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
-    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+    return Directory::GetCurrentDirectory();
 }
 
-std::optional<std::string> Environment::GetFolderPath(SpecialFolder folder)
+int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+{
+    return Directory::GetCurrentDirectory(destStr, destStrBufferLen);
+}
+
+std::string Environment::GetFolderPath(SpecialFolder folder)
 {
     auto strLen = GetFolderPath(folder, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return {};
+        return std::string();
     }
     
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
@@ -93,29 +94,29 @@ int32_t Environment::GetProcessorCount()
     return static_cast<int32_t>(std::thread::hardware_concurrency());
 }
 
-std::optional<std::string> Environment::GetUserName()
+std::string Environment::GetUserName()
 {
     auto strLen = GetUserName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return {};
+        return std::string();
     }
     
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-std::optional<std::string> Environment::GetMachineName()
+std::string Environment::GetMachineName()
 {
     auto strLen = GetMachineName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return {};
+        return std::string();
     }
     
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-std::optional<std::string> Environment::GetUserDomainName()
+std::string Environment::GetUserDomainName()
 {
     auto strLen = GetUserDomainName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
@@ -137,7 +138,7 @@ std::string Environment::GetStackTrace()
     return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
 }
 
-std::optional<std::string> Environment::GetSystemDirectory()
+std::string Environment::GetSystemDirectory()
 {
     return GetFolderPath(SpecialFolder::System);
 }

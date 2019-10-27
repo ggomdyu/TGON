@@ -107,19 +107,6 @@ int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
     return GetMachineName(destStr, destStrBufferLen);
 }
 
-int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
-{
-    auto path = [[NSFileManager defaultManager] currentDirectoryPath];
-    auto pathStrLen = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    if (pathStrLen + 1 > destStrBufferLen)
-    {
-        return -1;
-    }
-    
-    memcpy(destStr, path.UTF8String, pathStrLen + 1);
-    return static_cast<int32_t>(pathStrLen);
-}
-
 int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
     switch (folder)

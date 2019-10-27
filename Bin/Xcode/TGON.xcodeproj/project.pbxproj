@@ -30,6 +30,8 @@
 		8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */; };
 		8CC61CC822FB3B7A00F415C8 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC622FB3B7A00F415C8 /* Debug.cpp */; };
 		8CC61CC922FB3B7A00F415C8 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CC722FB3B7A00F415C8 /* Debug.h */; };
+		8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */; };
+		8CE691B02365FE1600482062 /* UnixDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AF2365FE1500482062 /* UnixDirectory.cpp */; };
 		8CF8A17B234A435100763883 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16C234A435000763883 /* Object.h */; };
 		8CF8A17C234A435100763883 /* ISerializable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16D234A435000763883 /* ISerializable.h */; };
 		8CF8A17D234A435100763883 /* NonAddressable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16E234A435000763883 /* NonAddressable.h */; };
@@ -809,6 +811,8 @@
 		8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSDebug.mm; sourceTree = "<group>"; };
 		8CC61CC622FB3B7A00F415C8 /* Debug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Debug.cpp; sourceTree = "<group>"; };
 		8CC61CC722FB3B7A00F415C8 /* Debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Debug.h; sourceTree = "<group>"; };
+		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
+		8CE691AF2365FE1500482062 /* UnixDirectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixDirectory.cpp; sourceTree = "<group>"; };
 		8CF8A16C234A435000763883 /* Object.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Object.h; sourceTree = "<group>"; };
 		8CF8A16D234A435000763883 /* ISerializable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ISerializable.h; sourceTree = "<group>"; };
 		8CF8A16E234A435000763883 /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = NonAddressable.h; sourceTree = "<group>"; };
@@ -2876,8 +2880,10 @@
 			isa = PBXGroup;
 			children = (
 				FDC02C88228481F100BEE91A /* MacOS */,
+				8CE691AF2365FE1500482062 /* UnixDirectory.cpp */,
 				8CB5BB12233F814C0032F332 /* Directory.cpp */,
 				8CB5BB11233F814C0032F332 /* Directory.h */,
+				8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */,
 				8CB5BB15233F96E50032F332 /* DirectoryInfo.h */,
 				FDC02C8B228481F100BEE91A /* Path.cpp */,
 				FDC02C8A228481F100BEE91A /* Path.h */,
@@ -3941,6 +3947,7 @@
 				FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */,
 				FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */,
 				FDE1B50F22E40E950093FDC1 /* ustring.cpp in Sources */,
+				8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */,
 				FDE1B4F222E40E940093FDC1 /* ucnv_cb.cpp in Sources */,
 				FDB6931822E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp in Sources */,
 				FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */,
@@ -4012,6 +4019,7 @@
 				FD53331422A57F38001EB57C /* deflate.c in Sources */,
 				FDE1B4C022E40E940093FDC1 /* rbbitblb.cpp in Sources */,
 				FDC02CE9228487CA00BEE91A /* Image.cpp in Sources */,
+				8CE691B02365FE1600482062 /* UnixDirectory.cpp in Sources */,
 				FDC02CEB228487CA00BEE91A /* GraphicsModule.cpp in Sources */,
 				FDC02CEC228487CA00BEE91A /* AudioModule.cpp in Sources */,
 				FDB7035F22B6B30C0055FCED /* inflate.c in Sources */,

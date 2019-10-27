@@ -94,20 +94,21 @@ public:
     static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name, EnvironmentVariableTarget target);
     static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
-    static int32_t GetCurrentDirectory(const gsl::span<char>& destStr);
-    static std::optional<std::string> GetFolderPath(SpecialFolder folder);
+    template <int32_t Length>
+    static int32_t GetCurrentDirectory(const gsl::span<char, Length>& destStr);
+    static std::string GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
     static int32_t GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr);
     static std::string_view GetNewLine();
     static int32_t GetSystemPageSize();
     static int32_t GetCurrentManagedThreadId();
-    static std::optional<std::string> GetUserName();
+    static std::string GetUserName();
     static int32_t GetUserName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetUserName(const gsl::span<char>& destStr);
-    static std::optional<std::string> GetMachineName();
+    static std::string GetMachineName();
     static int32_t GetMachineName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetMachineName(const gsl::span<char>& destStr);
-    static std::optional<std::string> GetUserDomainName();
+    static std::string GetUserDomainName();
     static int32_t GetUserDomainName(char* destStr, int32_t destStrBufferLen);
     static int32_t GetUserDomainName(const gsl::span<char>& destStr);
     static const std::string& GetCommandLine();
@@ -121,7 +122,7 @@ public:
     [[noreturn]] static void FailFast(const std::string_view& message, const std::exception& exception);
     static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
     static std::string GetStackTrace();
-    static std::optional<std::string> GetSystemDirectory();
+    static std::string GetSystemDirectory();
         /*
     public static IDictionary GetEnvironmentVariables();
     public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
@@ -142,5 +143,11 @@ public:
     public static string[] GetLogicalDrives();
     public static int ExitCode{ get; set; }*/
 };
+
+template <int32_t Length>
+inline int32_t Environment::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
+{
+    return GetCurrentDirectory(destStr.data(), Length);
+}
 
 } /* namespace tgon */

@@ -6,35 +6,41 @@ namespace tgon
 {
 
 std::vector<std::shared_ptr<GameObject>> Scene::m_globalObjects;
-std::unordered_map<size_t, int32_t> Scene::m_globalObjectNameHashMap;
+std::unordered_map<StringHash, std::shared_ptr<GameObject>> Scene::m_globalObjectHashMap;
 
 void Scene::AddObject(const std::shared_ptr<GameObject>& object)
 {
-    m_objectNameHashMap.emplace(object->GetName().GetHashCode(), m_objects.size());
+    m_objectHashMap.emplace(object->GetName(), object);
     m_objects.push_back(object);
 }
 
 void Scene::AddObject(std::shared_ptr<GameObject>&& object)
 {
-    m_objectNameHashMap.emplace(object->GetName().GetHashCode(), m_objects.size());
+    m_objectHashMap.emplace(object->GetName(), object);
     m_objects.push_back(std::move(object));
 }
 
 void Scene::AddGlobalObject(const std::shared_ptr<GameObject>& object)
 {
-    m_globalObjectNameHashMap.emplace(object->GetName().GetHashCode(), m_objects.size());
+    m_globalObjectHashMap.emplace(object->GetName(), object);
     m_globalObjects.push_back(object);
+}
+
+void Scene::AddGlobalObject(std::shared_ptr<GameObject>&& object)
+{
+    m_globalObjectHashMap.emplace(object->GetName(), object);
+    m_globalObjects.push_back(std::move(object));
 }
 
 std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName)
 {
-    auto iter = m_objectNameHashMap.find(objectName.GetHashCode());
-    if (m_objectNameHashMap.end() == iter)
+    auto iter = m_objectHashMap.find(objectName);
+    if (m_objectHashMap.end() == iter)
     {
         return nullptr;
     }
 
-    return m_objects[iter->second];
+    return iter->second;
 }
 
 std::shared_ptr<const GameObject> Scene::FindObject(const StringViewHash& objectName) const
@@ -44,45 +50,34 @@ std::shared_ptr<const GameObject> Scene::FindObject(const StringViewHash& object
 
 std::shared_ptr<GameObject> Scene::FindGlobalObject(const StringViewHash& objectName)
 {
-    auto iter = m_globalObjectNameHashMap.find(objectName.GetHashCode());
-    if (m_globalObjectNameHashMap.end() == iter)
+    auto iter = m_globalObjectHashMap.find(objectName);
+    if (m_globalObjectHashMap.end() == iter)
     {
         return nullptr;
     }
 
-    return m_globalObjects[iter->second];
-}
-
-std::shared_ptr<const GameObject> Scene::FindGlobalObject(const StringViewHash& objectName) const
-{
-    return const_cast<Scene*>(this)->FindGlobalObject(objectName);
+    return iter->second;
 }
     
 bool Scene::RemoveObject(const StringViewHash& objectName)
 {
-    auto objectNameHashMapIter = m_objectNameHashMap.find(objectName.GetHashCode());
-    if (m_objectNameHashMap.end() == objectNameHashMapIter)
+    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [&](const std::shared_ptr<GameObject>& item)
     {
-        return false;
-    }
-
-    m_objectNameHashMap.erase(objectNameHashMapIter);
-    m_objects.erase(m_objects.begin() + objectNameHashMapIter->second);
-
+        return objectName == item->GetName();
+    }));
+    
+    m_objectHashMap.erase(objectName);
     return true;
 }
 
 bool Scene::RemoveGlobalObject(const StringViewHash& objectName)
 {
-    auto objectNameHashMapIter = m_globalObjectNameHashMap.find(objectName.GetHashCode());
-    if (m_globalObjectNameHashMap.end() == objectNameHashMapIter)
+    m_globalObjects.erase(std::remove_if(m_globalObjects.begin(), m_globalObjects.end(), [&](const std::shared_ptr<GameObject>& item)
     {
-        return false;
-    }
-
-    m_globalObjectNameHashMap.erase(objectNameHashMapIter);
-    m_globalObjects.erase(m_globalObjects.begin() + objectNameHashMapIter->second);
-
+        return objectName == item->GetName();
+    }));
+    
+    m_globalObjectHashMap.erase(objectName);
     return true;
 }
 

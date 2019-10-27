@@ -27,37 +27,6 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& texture
 {
 }
 
-UISprite::UISprite(UISprite&& rhs) noexcept :
-    m_texture(std::move(rhs.m_texture)),
-    m_textureRect(rhs.m_textureRect),
-    m_blendMode(rhs.m_blendMode),
-    m_blendColor(rhs.m_blendColor),
-    m_scissorRect(rhs.m_scissorRect),
-    m_enableScissorRect(rhs.m_enableScissorRect)
-{
-    rhs.m_textureRect = {};
-    rhs.m_blendMode = {};
-    rhs.m_blendColor = {};
-    rhs.m_scissorRect = {};
-    rhs.m_enableScissorRect = false;
-}
-
-UISprite& UISprite::operator=(UISprite&& rhs) noexcept
-{
-    m_texture = std::move(rhs.m_texture);
-    m_blendMode = rhs.m_blendMode;
-    m_textureRect = rhs.m_textureRect;
-    m_scissorRect = rhs.m_scissorRect;
-    m_enableScissorRect = rhs.m_enableScissorRect;
-
-    rhs.m_textureRect = {};
-    rhs.m_blendMode = {};
-    rhs.m_scissorRect = {};
-    rhs.m_enableScissorRect = false;
-
-    return *this;
-}
-
 void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
