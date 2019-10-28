@@ -80,7 +80,7 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
 
 std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
 {
-    auto strLen = ChangeExtension(path, extension, g_tempUtf8Buffer.data());
+    auto strLen = ChangeExtension(path, extension, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
         return std::string();
@@ -239,7 +239,7 @@ bool Path::IsValidDriveChar(char ch) noexcept
 std::string Path::RemoveRelativeSegments(const std::string_view& path)
 {
     std::string ret;
-    for (size_t i = 0; i < path.size(); ++i)
+    for (decltype(path.length()) i = 0; i < path.length(); ++i)
     {
         char c = path[i];
         if (Path::IsDirectorySeparator(c) && i + 1 < path.length())
@@ -259,7 +259,7 @@ std::string Path::RemoveRelativeSegments(const std::string_view& path)
             
             if (i + 3 < path.length() && Path::IsDirectorySeparator(path[i + 3]) && path[i + 2] == '.' && path[i + 1] == '.')
             {
-                size_t j = ret.length() == 0 ? 0 : ret.length() - 1;
+                decltype(ret.length()) j = ret.length() == 0 ? 0 : ret.length() - 1;
                 for (; j >= 0; --j)
                 {
                     if (Path::IsDirectorySeparator(ret[j]))

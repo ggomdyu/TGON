@@ -19,14 +19,13 @@ public:
     explicit DirectoryInfo(const std::string_view& path);
     
 public:
-//    bool IsExists();
+    bool IsExists();
 //    const std::string_view& GetName();
 //    DirectoryInfo GetParent();
 //    DirectoryInfo GetRoot();
 //    void Create();
 //    DirectoryInfo CreateSubdirectory(const std::string_view& path);
-//    void Delete();
-//    void Delete(bool recursive);
+    bool Delete(bool recursive = false);
 //    IEnumerable<DirectoryInfo> EnumerateDirectories();
 //    IEnumerable<DirectoryInfo> EnumerateDirectories(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
 //    IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);

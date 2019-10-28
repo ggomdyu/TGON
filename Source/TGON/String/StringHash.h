@@ -39,7 +39,7 @@ class BasicStringHash
 public:
     using StringType = std::conditional_t<IsCharPointer<_StringType>, std::string_view, _StringType>;
     using StringTraitsType = _StringTraitsType;
-    using ValueType = RemoveCvref<decltype(StringType()[0])>;
+    using ValueType = typename _StringTraitsType::ValueType;
     using IteratorType = ValueType*;
     using ConstIteratorType = const ValueType*;
     using ReverseIteratorType = std::reverse_iterator<IteratorType>;
@@ -72,8 +72,8 @@ public:
     constexpr bool operator<(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
     template <typename _StringType2, typename _StringTraitsType2>
     constexpr bool operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
-    operator std::basic_string<ValueType>() const noexcept;
-    constexpr operator std::basic_string_view<ValueType>() const noexcept;
+    operator std::basic_string<typename _StringTraitsType::ValueType>() const noexcept;
+    constexpr operator std::basic_string_view<typename _StringTraitsType::ValueType>() const noexcept;
 
 /**@section Method */
 public:
@@ -214,13 +214,13 @@ constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator>(const 
 }
 
 template <typename _StringType, typename _StringTraitsType>
-inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string<ValueType>() const noexcept
+inline BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string<typename _StringTraitsType::ValueType>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
 
 template <typename _StringType, typename _StringTraitsType>
-constexpr BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string_view<ValueType>() const noexcept
+constexpr BasicStringHash<_StringType, _StringTraitsType>::operator std::basic_string_view<typename _StringTraitsType::ValueType>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
@@ -308,11 +308,11 @@ constexpr const int32_t BasicStringHash<_StringType, _StringTraitsType>::Length(
 {
     if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
     {
-        return m_str.length();
+        return static_cast<int32_t>(m_str.length());
     }
     else
     {
-        return m_str.Length();
+        return static_cast<int32_t>(m_str.Length());
     }
 }
 

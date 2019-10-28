@@ -9,4 +9,5 @@
 
 #if TGON_PLATFORM_WINDOWS
 #   undef GetCurrentDirectory
+#   undef CreateDirectory
 #endif

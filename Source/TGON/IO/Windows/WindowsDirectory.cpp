@@ -9,6 +9,7 @@
 #include "../File.h"
 #include "../Path.h"
 #include "../Directory.h"
+#include "../DirectoryInfo.h"
 
 namespace tgon
 {
@@ -42,14 +43,12 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
     return s;
 }
 
-
-template <DWORD FilterFileAttributes, typename _HandlerType>
-void InternalEnumerateFileNames(const std::string_view& path, _HandlerType handler)
+std::vector<std::string> InternalEnumerateFileNames(const std::string_view& path, DWORD filterFileAttributes)
 {
     int32_t utf16PathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size() + 1), reinterpret_cast<std::byte*>(g_tempUtf16Buffer.data()), static_cast<int32_t>(sizeof(g_tempUtf16Buffer)));
     if (utf16PathBytes == -1)
     {
-        return;
+        return {};
     }
 
     int32_t utf16PathLen = (utf16PathBytes / 2) - 1;
@@ -60,13 +59,15 @@ void InternalEnumerateFileNames(const std::string_view& path, _HandlerType handl
     HANDLE handle = FindFirstFileW(reinterpret_cast<const wchar_t*>(g_tempUtf16Buffer.data()), &findData);
     if (handle == INVALID_HANDLE_VALUE)
     {
-        return;
+        return {};
     }
+
+    std::vector<std::string> ret;
 
     do
     {
         bool isRelativeDirectory = findData.cFileName[0] == '.' && (findData.cFileName[1] == '\0' || (findData.cFileName[1] == '.' && findData.cFileName[2] == '\0'));
-        if (!(findData.dwFileAttributes & FilterFileAttributes) || isRelativeDirectory)
+        if (!(findData.dwFileAttributes & filterFileAttributes) || isRelativeDirectory)
         {
             continue;
         }
@@ -78,14 +79,14 @@ void InternalEnumerateFileNames(const std::string_view& path, _HandlerType handl
         }
 
         std::string str;
-        if constexpr (FilterFileAttributes & FILE_ATTRIBUTE_ARCHIVE == true)
+        if ((filterFileAttributes & FILE_ATTRIBUTE_ARCHIVE) == true)
         {
             str += path;
             str += Path::DirectorySeparatorChar;
         }
-
         str.append(&g_tempUtf8Buffer[0], utf8FileNameBytes);
-        handler(std::move(str));
+
+        ret.push_back(std::move(str));
         
     } while (FindNextFileW(handle, &findData) == TRUE);
 
@@ -93,6 +94,17 @@ void InternalEnumerateFileNames(const std::string_view& path, _HandlerType handl
 }
 
 } /* namespace */
+
+DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
+{
+    auto s = CreateStat(path);
+    if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
+    {
+        _wmkdir(&g_tempUtf16Buffer[0]);
+    }
+
+    return DirectoryInfo(path);
+}
 
 bool Directory::Delete(const std::string_view& path, bool recursive)
 {
@@ -104,12 +116,11 @@ bool Directory::Delete(const std::string_view& path, bool recursive)
     
     if (recursive)
     {
-        // TODO: IMPLEMENT
-        return false;
+        return RemoveDirectoryW(g_tempUtf16Buffer.data()) == TRUE;
     }
     else
     {
-        return RemoveDirectoryW(g_tempUtf16Buffer.data()) == TRUE;
+        // todo: impl
     }
 }
 
@@ -163,26 +174,31 @@ bool Directory::Move(const std::string_view& srcPath, const std::string_view& de
     return _wrename(reinterpret_cast<const wchar_t*>(utf16SrcPath), reinterpret_cast<const wchar_t*>(utf16DestPath)) == 0;
 }
 
+int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+{
+    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
+    if (utf16StrLen == 0)
+    {
+        return -1;
+    }
+    
+    auto utf8StrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
+    if (utf8StrLen >= 0)
+    {
+        return utf8StrLen;
+    }
+
+    return -1;
+}
+
 std::vector<std::string> Directory::GetDirectories(const std::string_view& path)
 {
-    std::vector<std::string> ret;
-    InternalEnumerateFileNames<FILE_ATTRIBUTE_DIRECTORY>(path, [&](std::string&& s)
-    {
-        ret.push_back(std::move(s));
-    });
-    
-    return ret;
+    return InternalEnumerateFileNames(path, FILE_ATTRIBUTE_DIRECTORY);
 }
 
 std::vector<std::string> Directory::GetFiles(const std::string_view& path)
 {
-    std::vector<std::string> ret;
-    InternalEnumerateFileNames<FILE_ATTRIBUTE_ARCHIVE>(path, [&](std::string&& s)
-    {
-        ret.push_back(std::move(s));
-    });
-
-    return ret;
+    return InternalEnumerateFileNames(path, FILE_ATTRIBUTE_ARCHIVE);
 }
 
 } /* namespace tgon */

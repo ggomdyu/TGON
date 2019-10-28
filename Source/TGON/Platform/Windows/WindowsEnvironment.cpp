@@ -83,28 +83,6 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const 
     return GetEnvironmentVariable(name, &destStr[0], destStr.size());
 }
 
-int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
-{
-    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
-    if (utf16StrLen == 0)
-    {
-        return -1;
-    }
-    
-    auto utf8StrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
-    if (utf8StrLen >= 0)
-    {
-        return utf8StrLen;
-    }
-
-    return -1;
-}
-
-int32_t Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
-{
-    return GetCurrentDirectory(&destStr[0], destStr.size());
-}
-
 int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
     if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16Buffer.data()) == S_OK)

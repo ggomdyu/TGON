@@ -9,11 +9,6 @@ namespace tgon
 
 extern thread_local std::array<char, 16384> g_tempUtf8Buffer;
 
-DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
-{
-    return DirectoryInfo(path);
-}
-
 DirectoryInfo Directory::GetParent(const std::string_view& path)
 {
     return DirectoryInfo("../");

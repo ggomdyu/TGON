@@ -38,7 +38,7 @@ public:
     static constexpr std::string_view GetDirectoryName(const std::string_view& path) noexcept;
     static constexpr bool HasExtension(const std::string_view& path) noexcept;
     static std::string ChangeExtension(const std::string_view& path, const std::string_view& extension);
-    static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr);
+    static int32_t ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr, int32_t destStrBufferLen);
     static std::string GetFullPath(const std::string_view& path);
     static std::string GetFullPath(const std::string_view& path, const std::string_view& basePath);
 //    static constexpr std::string_view GetPathRoot(const std::string_view& path) noexcept;
