@@ -5,9 +5,10 @@
  */
 
 #pragma once
-#include <Windows.h>
 #include <string>
 #include <boost/noncopyable.hpp>
+
+#include "Platform/Windows/Windows.h"
 
 namespace tgon
 {

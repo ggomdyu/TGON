@@ -1,9 +1,9 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
 #include <array>
 
-#include "String/Encoding.h"
+#include "Platform/Windows/Windows.h"
+#include "Text/Encoding.h"
 
 #include "../TimeZoneInfo.h"
 

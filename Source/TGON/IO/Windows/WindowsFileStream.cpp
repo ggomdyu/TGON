@@ -1,10 +1,9 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
-
 #include "Diagnostics/Debug.h"
 #include "Misc/Algorithm.h"
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
+#include "Platform/Windows/Windows.h"
 
 #include "../FileStream.h"
 
@@ -16,9 +15,9 @@ thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
 namespace
 {
 
-HANDLE CreateFileOpenHandle(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+HANDLE CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return {};
     }
@@ -45,7 +44,7 @@ HANDLE CreateFileOpenHandle(const std::string_view& path, FileMode mode, FileAcc
 
 } /* namespace */
 
-FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
     m_bufferSize(bufferSize),
     m_readPos(0),

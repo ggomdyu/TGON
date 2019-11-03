@@ -9,10 +9,10 @@
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN 1
 #   endif
-#   include <Windows.h>
+#   include "Platform/Windows/Windows.h"
 #elif TGON_PLATFORM_MACOS
-#   import <AppKit/NSOpenGL.h>
-#   import <OpenGL/OpenGL.h>
+#   include <AppKit/NSOpenGL.h>
+#   include <OpenGL/OpenGL.h>
 #endif
 
 #include "Core/NonCopyable.h"

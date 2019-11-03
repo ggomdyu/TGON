@@ -141,12 +141,20 @@ int32_t Encoding::Convert(const Encoding& srcEncoding, const Encoding& destEncod
     icu::UnicodeString ustr(reinterpret_cast<const char*>(srcBytes), srcBytesCount, srcEncoding.m_converter, status);
     if (U_FAILURE(status))
     {
+        if (destBytesCount >= destEncoding.GetMinCharByte())
+        {
+            memset(destBytes, 0, destEncoding.GetMinCharByte());
+        }
         return -1;
     }
 
     int32_t encodedStrBytes = ustr.extract(nullptr, 0, destEncoding.m_converter, status);
     if (encodedStrBytes > destBytesCount)
     {
+        if (destBytesCount >= destEncoding.GetMinCharByte())
+        {
+            memset(destBytes, 0, destEncoding.GetMinCharByte());
+        }
         return -1;
     }
 

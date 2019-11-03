@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
 
 #include "../Application.h"
 

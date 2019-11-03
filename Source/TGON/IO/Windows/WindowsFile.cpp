@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
 #include <array>
 
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
 #include "Misc/Windows/SafeFileHandle.h"
+#include "Platform/Windows/Windows.h"
 
 #include "../File.h"
 
@@ -41,15 +41,15 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
 
 } /* namespace */
 
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite)
+bool File::Copy(const char* srcPath, const char* destPath, bool overwrite)
 {
-    auto utf16SrcPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&srcPath[0]), srcPath.size() + 1);
-    auto utf16DestPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&destPath[0]), destPath.size() + 1);
+    auto utf16SrcPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&srcPath[0]), static_cast<int32_t>(strlen(srcPath) + 1));
+    auto utf16DestPath = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&destPath[0]), static_cast<int32_t>(strlen(destPath) + 1));
 
     return CopyFileW(reinterpret_cast<LPCWSTR>(utf16SrcPath.data()), reinterpret_cast<LPCWSTR>(utf16DestPath.data()), overwrite ? FALSE : TRUE) != 0;
 }
 
-bool File::Delete(const std::string_view& path)
+bool File::Delete(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
@@ -60,7 +60,7 @@ bool File::Delete(const std::string_view& path)
     return _wremove(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data())) == 0;
 }
 
-bool File::Exists(const std::string_view& path)
+bool File::Exists(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
@@ -71,7 +71,7 @@ bool File::Exists(const std::string_view& path)
     return true;
 }
 
-bool File::Move(const std::string_view& srcPath, const std::string_view& destPath)
+bool File::Move(const char* srcPath, const char* destPath)
 {
     auto s = CreateStat(srcPath);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
@@ -83,7 +83,7 @@ bool File::Move(const std::string_view& srcPath, const std::string_view& destPat
     auto utf16SrcPathLen = wcslen(utf16SrcPath);
 
     wchar_t* utf16DestPath = &g_tempUtf16Buffer[utf16SrcPathLen + 1];
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath.data()), static_cast<int32_t>(destPath.size()), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
     {
         return false;
     }
@@ -91,7 +91,7 @@ bool File::Move(const std::string_view& srcPath, const std::string_view& destPat
     return _wrename(reinterpret_cast<const wchar_t*>(utf16SrcPath), reinterpret_cast<const wchar_t*>(utf16DestPath)) == 0;
 }
 
-std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
+std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false)
@@ -102,7 +102,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s->st_atime);
 }
 
-std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
+std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false)
@@ -113,9 +113,9 @@ std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s->st_mtime);
 }
 
-bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& creationTimeUtc)
+bool File::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return false;
     }
@@ -137,9 +137,9 @@ bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& crea
     return true;
 }
 
-bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTimeUtc)
+bool File::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return false;
     }
@@ -161,9 +161,9 @@ bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& la
     return true;
 }
 
-bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc)
+bool File::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return false;
     }
@@ -185,7 +185,7 @@ bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& las
     return true;
 }
 
-std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
+std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false)
@@ -196,9 +196,9 @@ std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
     return DateTime(DateTime::GetUnixEpoch().GetTicks() + TimeSpan::TicksPerSecond * s->st_ctime);
 }
 
-std::optional<FileAttributes> File::GetAttributes(const std::string_view& path)
+std::optional<FileAttributes> File::GetAttributes(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return {};
     }
@@ -212,9 +212,9 @@ std::optional<FileAttributes> File::GetAttributes(const std::string_view& path)
     return FileAttributes(fileAttributeData.dwFileAttributes);
 }
 
-bool File::Decrypt(const std::string_view& path)
+bool File::Decrypt(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return false;
     }
@@ -222,9 +222,9 @@ bool File::Decrypt(const std::string_view& path)
     return DecryptFileW(g_tempUtf16Buffer.data(), 0) == TRUE;
 }
 
-bool File::Encrypt(const std::string_view& path)
+bool File::Encrypt(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return false;
     }
@@ -232,7 +232,7 @@ bool File::Encrypt(const std::string_view& path)
     return EncryptFileW(g_tempUtf16Buffer.data()) == TRUE;
 }
 
-std::string File::ReadAllText(const std::string_view& path, const Encoding& encoding)
+std::string File::ReadAllText(const char* path, const Encoding& encoding)
 {
     // TODO: Implement
     return std::string(nullptr);

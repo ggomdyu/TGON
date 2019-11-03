@@ -15,7 +15,7 @@
 #pragma pack(pop, before_imagehlp)
 
 #include "Diagnostics/Debug.h"
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
 
 #include "../Environment.h"
 

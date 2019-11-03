@@ -143,6 +143,8 @@
     <ClInclude Include="..\..\Source\TGON\Hardware\Windows\WindowsKeyboard.h" />
     <ClInclude Include="..\..\Source\TGON\Hardware\Windows\WindowsMouse.h" />
     <ClInclude Include="..\..\Source\TGON\IO\Windows\WindowsDirectory.h" />
+    <ClInclude Include="..\..\Source\TGON\IO\Windows\WindowsPath.h" />
+    <ClInclude Include="..\..\Source\TGON\Platform\Windows\Windows.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsApplication.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsConfig.h" />
     <ClInclude Include="..\..\Source\TGON\Platform\Windows\WindowsEnvironment.h" />
@@ -238,6 +240,9 @@
     <ClCompile Update="E:\Users\ggomdyu\Desktop\Programming\Git\GitHub\TGON\Bin\VS2017\TGON.Shared\..\..\Source\ThirdParty\freetype-2.10.0\src\base\ftftn.c">
       <FileType>CppCode</FileType>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\TGON\IO\Windows\WindowsDirectory.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

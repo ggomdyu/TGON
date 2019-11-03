@@ -76,9 +76,6 @@
     <Filter Include="Source\TGON\Random">
       <UniqueIdentifier>{d93372fe-1913-4ffc-9856-c1d8b2caa009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TGON\String">
-      <UniqueIdentifier>{8808d572-e4ce-494f-9a2c-90e55539b93b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON\Thread">
       <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
     </Filter>
@@ -108,6 +105,9 @@
     </Filter>
     <Filter Include="Source\TGON\Math">
       <UniqueIdentifier>{18d2a407-7212-46fa-8195-18f41273558f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Text">
+      <UniqueIdentifier>{7177a720-582b-485a-8937-4f8ff1e0779d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WELL1024a.cpp">
       <Filter>Source\TGON\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Hash.cpp">
-      <Filter>Source\TGON\String</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.cpp">
       <Filter>Source\TGON\Time</Filter>
@@ -383,9 +380,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\crc32.c">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Encoding.cpp">
-      <Filter>Source\TGON\String</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\EventDispatcher.cpp">
       <Filter>Source\TGON\Misc</Filter>
@@ -1049,6 +1043,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Encoding.cpp">
+      <Filter>Source\TGON\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Hash.cpp">
+      <Filter>Source\TGON\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\DirectoryInfo.cpp">
+      <Filter>Source\TGON\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
@@ -1335,24 +1338,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\Random.h">
       <Filter>Source\TGON\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Hash.h">
-      <Filter>Source\TGON\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\StringHash.h">
-      <Filter>Source\TGON\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\StringTraits.h">
-      <Filter>Source\TGON\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\UUID.h">
-      <Filter>Source\TGON\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\Encoding.h">
-      <Filter>Source\TGON\String</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\FixedString.h">
-      <Filter>Source\TGON\String</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Stopwatch.h">
       <Filter>Source\TGON\Time</Filter>
@@ -1713,9 +1698,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h">
       <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\String\UnicodeScalar.h">
-      <Filter>Source\TGON\String</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstanceCounter.h">
       <Filter>Source\TGON\Misc</Filter>
@@ -2459,6 +2441,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.h">
       <Filter>Source\TGON\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\StringTraits.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\UnicodeScalar.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\UUID.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Encoding.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\FixedString.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Hash.h">
+      <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\StringHash.h">
+      <Filter>Source\TGON\Text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

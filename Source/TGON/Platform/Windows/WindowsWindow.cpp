@@ -7,7 +7,7 @@
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Window.h"
@@ -438,7 +438,6 @@ void Window::SetTitle(const std::string_view& title)
     {
         return;
     }
-
 
     SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]));
 }

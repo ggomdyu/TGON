@@ -12,10 +12,6 @@
 
 #include "Platform/Config.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsDirectory.h"
-#endif
-
 #include "DirectoryInfo.h"
 
 namespace tgon

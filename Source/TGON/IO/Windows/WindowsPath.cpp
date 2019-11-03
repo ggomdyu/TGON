@@ -1,8 +1,7 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
-
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
+#include "Platform/Windows/Windows.h"
 
 #include "../Path.h"
 
@@ -13,8 +12,13 @@ thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
 
 int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
 {
-    //GetTempPathW(destStr, destStrBufferLen);
-    return -1;
+    DWORD strLen = GetTempPathW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
+    if (strLen == 0)
+    {
+        return -1;
+    }
+
+    return Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(strLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
 }
 
 gsl::span<const char> Path::GetInvalidFileNameChars() noexcept

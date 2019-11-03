@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
+#include "Platform/Windows/Windows.h"
 
 #include "../Thread.h"
 

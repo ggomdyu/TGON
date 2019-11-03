@@ -1,15 +1,15 @@
 #include "PrecompiledHeader.h"
 
 #include <sys/stat.h>
-#include <Windows.h>
 
+#include "Platform/Windows/Windows.h"
 #include "Misc/Algorithm.h"
-#include "String/Encoding.h"
+#include "Text/Encoding.h"
 
 #include "../File.h"
 #include "../Path.h"
-#include "../Directory.h"
 #include "../DirectoryInfo.h"
+#include "../Directory.h"
 
 namespace tgon
 {
@@ -27,9 +27,9 @@ constexpr bool S_ISDIR(unsigned short m) noexcept
 }
 #endif
 
-std::optional<struct _stat> CreateStat(const std::string_view& path)
+std::optional<struct _stat> CreateStat(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return {};
     }
@@ -43,9 +43,9 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
     return s;
 }
 
-std::vector<std::string> InternalEnumerateFileNames(const std::string_view& path, DWORD filterFileAttributes)
+std::vector<std::string> InternalEnumerateFileNames(const char* path, DWORD filterFileAttributes)
 {
-    int32_t utf16PathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size() + 1), reinterpret_cast<std::byte*>(g_tempUtf16Buffer.data()), static_cast<int32_t>(sizeof(g_tempUtf16Buffer)));
+    int32_t utf16PathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path) + 1), reinterpret_cast<std::byte*>(g_tempUtf16Buffer.data()), static_cast<int32_t>(g_tempUtf16Buffer.size()));
     if (utf16PathBytes == -1)
     {
         return {};
@@ -95,7 +95,7 @@ std::vector<std::string> InternalEnumerateFileNames(const std::string_view& path
 
 } /* namespace */
 
-DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
+DirectoryInfo Directory::CreateDirectory(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
@@ -106,7 +106,7 @@ DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
     return DirectoryInfo(path);
 }
 
-bool Directory::Delete(const std::string_view& path, bool recursive)
+bool Directory::Delete(const char* path, bool recursive)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
@@ -124,7 +124,7 @@ bool Directory::Delete(const std::string_view& path, bool recursive)
     }
 }
 
-bool Directory::Exists(const std::string_view& path)
+bool Directory::Exists(const char* path)
 {
     auto s = CreateStat(path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
@@ -154,7 +154,7 @@ std::vector<std::string> Directory::GetLogicalDrives()
     return ret;
 }
 
-bool Directory::Move(const std::string_view& srcPath, const std::string_view& destPath)
+bool Directory::Move(const char* srcPath, const char* destPath)
 {
     auto s = CreateStat(srcPath);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
@@ -166,7 +166,7 @@ bool Directory::Move(const std::string_view& srcPath, const std::string_view& de
     auto utf16SrcPathLen = wcslen(utf16SrcPath);
 
     wchar_t* utf16DestPath = &g_tempUtf16Buffer[utf16SrcPathLen + 1];
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath.data()), static_cast<int32_t>(destPath.size()), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
     {
         return false;
     }
@@ -182,21 +182,15 @@ int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
         return -1;
     }
     
-    auto utf8StrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
-    if (utf8StrLen >= 0)
-    {
-        return utf8StrLen;
-    }
-
-    return -1;
+    return Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
 }
 
-std::vector<std::string> Directory::GetDirectories(const std::string_view& path)
+std::vector<std::string> Directory::GetDirectories(const char* path, const char* searchPattern, SearchOption searchOption)
 {
     return InternalEnumerateFileNames(path, FILE_ATTRIBUTE_DIRECTORY);
 }
 
-std::vector<std::string> Directory::GetFiles(const std::string_view& path)
+std::vector<std::string> Directory::GetFiles(const char* path, const char* searchPattern, SearchOption searchOption)
 {
     return InternalEnumerateFileNames(path, FILE_ATTRIBUTE_ARCHIVE);
 }

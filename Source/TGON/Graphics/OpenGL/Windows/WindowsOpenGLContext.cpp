@@ -1,11 +1,11 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
 #include <GL/glew.h>
 #include <GL/wglew.h>
 #include <cassert>
 
 #include "Platform/Window.h"
+#include "Platform/Windows/Windows.h"
 #include "Diagnostics/Debug.h"
 
 #include "../OpenGLContext.h"

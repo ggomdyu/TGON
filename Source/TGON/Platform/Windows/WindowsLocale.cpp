@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
+#include "Windows.h"
 
 #include "../Locale.h"
 

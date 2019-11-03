@@ -3,12 +3,10 @@
 #ifndef NDEBUG
 #   include <crtdbg.h>
 #endif
-#ifndef NOMINMAX
-#    define NOMINMAX
-#endif
-#include <Windows.h>
 
 #include "Platform/Application.h"
+
+#include "Windows.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
