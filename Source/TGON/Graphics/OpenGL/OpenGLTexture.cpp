@@ -11,6 +11,8 @@ namespace tgon
 namespace
 {
 
+static Texture* g_lastUsedTexture = nullptr;
+
 constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode) noexcept
 {
     constexpr GLint nativeTextureFilterModes[] = {
@@ -123,14 +125,22 @@ Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelForma
 
 void Texture::Use()
 {
-    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
+    if (g_lastUsedTexture == this)
+    {
+        return;
+    }
 
+    TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
     this->UpdateTexParemeters();
+
+    g_lastUsedTexture = this;
 }
     
 void Texture::Unuse()
 {
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
+
+    g_lastUsedTexture = nullptr;
 }
 
 bool Texture::IsValid() const

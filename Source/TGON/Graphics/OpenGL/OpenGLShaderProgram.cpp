@@ -125,20 +125,22 @@ ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentS
 
 void ShaderProgram::Use()
 {
-    if (g_lastUsedShaderProgram != this)
+    if (g_lastUsedShaderProgram == this)
     {
-        this->ResetUniformCache();
-        g_lastUsedShaderProgram = this;
-    
-        TGON_GL_ERROR_CHECK(glUseProgram(m_programId));
+        return;
     }
+    
+    this->ResetUniformCache();
+    TGON_GL_ERROR_CHECK(glUseProgram(m_programId));
+    
+    g_lastUsedShaderProgram = this;
 }
 
 void ShaderProgram::Unuse()
 {
-    g_lastUsedShaderProgram = nullptr;
-    
     TGON_GL_ERROR_CHECK(glUseProgram(0));
+    
+    g_lastUsedShaderProgram = nullptr;
 }
 
 void ShaderProgram::BindAttributeLocation(const char* name, uint32_t index)
