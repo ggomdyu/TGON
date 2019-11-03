@@ -2,26 +2,26 @@
 
 #include <sys/stat.h>
 
-#include "File.h"
+#include "../File.h"
 
 namespace tgon
 {
 
-bool File::Delete(const std::string_view& path)
+bool File::Delete(const char* path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
     
-    return remove(path.data()) == 0;
+    return remove(path) == 0;
 }
 
-bool File::Exists(const std::string_view& path)
+bool File::Exists(const char* path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return false;
     }
@@ -29,15 +29,21 @@ bool File::Exists(const std::string_view& path)
     return true;
 }
 
-bool File::Move(const std::string_view& srcPath, const std::string_view& destPath)
-{
-    return std::rename(srcPath.data(), destPath.data()) == 0;
-}
-
-std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
+bool File::Move(const char* srcPath, const char* destPath)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(srcPath, &s) != 0 || S_ISREG(s.st_mode) == false)
+    {
+        return false;
+    }
+    
+    return rename(srcPath, destPath) == 0;
+}
+
+std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
+{
+    struct stat s;
+    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }
@@ -49,10 +55,10 @@ std::optional<DateTime> File::GetCreationTimeUtc(const std::string_view& path)
 #endif
 }
 
-std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
+std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }
@@ -64,10 +70,10 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const std::string_view& path)
 #endif
 }
 
-std::optional<DateTime> File::GetLastWriteTimeUtc(const std::string_view& path)
+std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 {
     struct stat s;
-    if (stat(path.data(), &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
     {
         return {};
     }

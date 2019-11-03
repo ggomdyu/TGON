@@ -9,7 +9,7 @@
 
 #include "Platform/Config.h"
 #include "Core/Delegate.h"
-#include "String/StringHash.h"
+#include "Text/StringHash.h"
 
 namespace tgon
 {

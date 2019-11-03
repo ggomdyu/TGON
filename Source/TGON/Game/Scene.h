@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 #include "GameObject.h"
-#include "String/StringHash.h"
+#include "Text/StringHash.h"
 
 namespace tgon
 {

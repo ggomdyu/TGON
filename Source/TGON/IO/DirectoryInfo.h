@@ -20,8 +20,8 @@ public:
     
 public:
     bool IsExists();
-//    const std::string_view& GetName();
-//    DirectoryInfo GetParent();
+    std::string_view GetName() const;
+    DirectoryInfo GetParent() const;
 //    DirectoryInfo GetRoot();
 //    void Create();
 //    DirectoryInfo CreateSubdirectory(const std::string_view& path);

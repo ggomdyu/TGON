@@ -7,8 +7,8 @@
 #pragma once
 #include <cstdint>
 
-#include "String/StringTraits.h"
-#include "String/Hash.h"
+#include "Text/StringTraits.h"
+#include "Text/Hash.h"
 #include "Misc/Algorithm.h"
 
 namespace tgon

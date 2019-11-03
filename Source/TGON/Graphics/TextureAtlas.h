@@ -12,8 +12,8 @@
 #include <stb/stb_rect_pack.h>
 
 #include "Core/NonCopyable.h"
-#include "String/UnicodeScalar.h"
-#include "String/StringHash.h"
+#include "Text/UnicodeScalar.h"
+#include "Text/StringHash.h"
 #include "Math/Rect.h"
 #include "Math/Extent.h"
 

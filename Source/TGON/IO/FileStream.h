@@ -57,11 +57,11 @@ class TGON_API FileStream :
 {
 /**@section Constructor */
 public:
-    FileStream(const std::string_view& path, FileMode mode);
-    FileStream(const std::string_view& path, FileMode mode, FileAccess access);
-    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share);
-    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
-    FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
+    FileStream(const char* path, FileMode mode);
+    FileStream(const char* path, FileMode mode, FileAccess access);
+    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share);
+    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize);
+    FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options);
     FileStream(FileStream&& rhs) noexcept;
 
 /**@section Destructor */
@@ -91,10 +91,6 @@ public:
     const std::string& Name() const noexcept;
     virtual void Flush() override;
     void Flush(bool flushToDisk);
-    /*
-    virtual void Lock(long position, long length)
-    virtual void Unlock(long position, long length)
-    */
     bool IsClosed() const noexcept;
     
 protected:

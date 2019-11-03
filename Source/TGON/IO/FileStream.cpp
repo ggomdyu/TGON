@@ -7,22 +7,22 @@
 namespace tgon
 {
 
-FileStream::FileStream(const std::string_view& path, FileMode mode) :
+FileStream::FileStream(const char* path, FileMode mode) :
     FileStream(path, mode, (mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite), DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access) :
+FileStream::FileStream(const char* path, FileMode mode, FileAccess access) :
     FileStream(path, mode, access, DefaultShare, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share) :
+FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share) :
     FileStream(path, mode, access, share, DefaultBufferSize, DefaultFileOption)
 {
 }
 
-FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
+FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize) :
     FileStream(path, mode, access, share, bufferSize, DefaultFileOption)
 {
 }

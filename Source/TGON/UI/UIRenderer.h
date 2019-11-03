@@ -8,7 +8,7 @@
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/Material.h"
 #include "Graphics/Camera.h"
-#include "String/StringHash.h"
+#include "Text/StringHash.h"
 
 #include "UISpriteBatch.h"
 

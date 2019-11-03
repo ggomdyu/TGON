@@ -7,7 +7,7 @@
 #pragma once
 #include "RuntimeObject.h"
 
-#include "String/StringHash.h"
+#include "Text/StringHash.h"
 
 namespace tgon
 {

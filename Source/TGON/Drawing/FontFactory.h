@@ -10,8 +10,8 @@
 #include FT_FREETYPE_H
 
 #include "Core/NonCopyable.h"
-#include "String/StringHash.h"
-#include "String/UnicodeScalar.h"
+#include "Text/StringHash.h"
+#include "Text/UnicodeScalar.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 #include "Platform/Config.h"

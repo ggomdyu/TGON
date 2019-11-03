@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-std::optional<DateTime> File::GetCreationTime(const std::string_view& path)
+std::optional<DateTime> File::GetCreationTime(const char* path)
 {
     auto ret = GetCreationTimeUtc(path);
     if (ret)
@@ -22,7 +22,7 @@ std::optional<DateTime> File::GetCreationTime(const std::string_view& path)
     return ret;
 }
 
-std::optional<DateTime> File::GetLastAccessTime(const std::string_view& path)
+std::optional<DateTime> File::GetLastAccessTime(const char* path)
 {
     auto ret = GetLastAccessTimeUtc(path);
     if (ret)
@@ -33,7 +33,7 @@ std::optional<DateTime> File::GetLastAccessTime(const std::string_view& path)
     return ret;
 }
 
-std::optional<DateTime> File::GetLastWriteTime(const std::string_view& path)
+std::optional<DateTime> File::GetLastWriteTime(const char* path)
 {
     auto ret = GetLastWriteTimeUtc(path);
     if (ret)
@@ -44,24 +44,24 @@ std::optional<DateTime> File::GetLastWriteTime(const std::string_view& path)
     return ret;
 }
 
-bool File::SetCreationTime(const std::string_view& path, const DateTime& creationTime)
+bool File::SetCreationTime(const char* path, const DateTime& creationTime)
 {
     return SetCreationTimeUtc(path, creationTime);
 }
 
-bool File::SetLastAccessTime(const std::string_view& path, const DateTime& lastAccessTime)
+bool File::SetLastAccessTime(const char* path, const DateTime& lastAccessTime)
 {
     return SetLastAccessTimeUtc(path, lastAccessTime);
 }
 
-bool File::SetLastWriteTime(const std::string_view& path, const DateTime& lastWriteTime)
+bool File::SetLastWriteTime(const char* path, const DateTime& lastWriteTime)
 {
     return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
-std::optional<std::vector<std::byte>> File::ReadAllBytes(const std::string_view& path)
+std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path)
 {
-    FileStream fs(path.data(), FileMode::Open, FileAccess::Read, FileShare::Read);
+    FileStream fs(path, FileMode::Open, FileAccess::Read, FileShare::Read);
     if (fs.IsClosed() || fs.Length() > INT_MAX)
     {
         return {};
@@ -82,37 +82,37 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const std::string_view&
     return ret;
 }
 
-std::string File::ReadAllText(const std::string_view& path)
+std::string File::ReadAllText(const char* path)
 {
     return ReadAllText(path, Encoding::UTF8());
 }
 
-FileStream File::Create(const std::string_view& path)
+FileStream File::Create(const char* path)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Create(const std::string_view& path, int32_t bufferSize)
+FileStream File::Create(const char* path, int32_t bufferSize)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize);
 }
 
-FileStream File::Create(const std::string_view& path, int32_t bufferSize, FileOptions options)
+FileStream File::Create(const char* path, int32_t bufferSize, FileOptions options)
 {
     return FileStream(path, FileMode::Create, FileAccess::ReadWrite, FileShare::None, bufferSize, options);
 }
 
-FileStream File::Open(const std::string_view& path, FileMode mode)
+FileStream File::Open(const char* path, FileMode mode)
 {
     return Open(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None);
 }
 
-FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access)
+FileStream File::Open(const char* path, FileMode mode, FileAccess access)
 {
     return Open(path, mode, access, FileShare::None);
 }
 
-FileStream File::Open(const std::string_view& path, FileMode mode, FileAccess access, FileShare share)
+FileStream File::Open(const char* path, FileMode mode, FileAccess access, FileShare share)
 {
     return FileStream(path, mode, access, share);
 }

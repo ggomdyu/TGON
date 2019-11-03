@@ -19,9 +19,10 @@ class TGON_API TimeZoneInfo final
 {
 /**@section Constructor */
 public:
+    TimeZoneInfo() = default;
+    
     template <typename _StringType1, typename _StringType2, typename _StringType3, typename _StringType4>
     TimeZoneInfo(_StringType1&& id, const TimeSpan& baseUtcOffset, _StringType2&& displayName, _StringType3&& standardDisplayName, _StringType4&& daylightDisplayName, bool supportsDaylightSavingTime);
-    TimeZoneInfo() = default;
 
 /**@section Method */
 public:
@@ -43,7 +44,7 @@ private:
 /**@section Variable */
 private:
     std::string m_id;
-    TimeSpan m_baseUtcOffset;
+    TimeSpan m_baseUtcOffset = TimeSpan(0);
     std::string m_displayName;
     std::string m_standardDisplayName;
     std::string m_daylightDisplayName;

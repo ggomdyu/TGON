@@ -291,15 +291,14 @@ void Window::GetClientSize(int32_t* destWidth, int32_t* destHeight) const
 int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
 {
     auto title = [m_window title];
-    
-    auto utf8TitleLen = static_cast<int32_t>([title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
-    if (utf8TitleLen + 1 > destTitleBufferLen)
+    auto titleLen = static_cast<int32_t>([title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+    if (titleLen + 1 > destTitleBufferLen)
     {
         return -1;
     }
     
-    memcpy(destTitle, [title UTF8String], utf8TitleLen + 1);
-    return utf8TitleLen;
+    memcpy(destTitle, [title UTF8String], titleLen + 1);
+    return titleLen;
 }
 
 void* Window::GetNativeWindow() const

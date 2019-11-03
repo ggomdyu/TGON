@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <any>
 
-#include "String/StringHash.h"
+#include "Text/StringHash.h"
 #include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
 #include "Graphics/TextureAtlas.h"

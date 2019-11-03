@@ -26,19 +26,19 @@ constexpr const char* ConvertFileModeAccessToNative(FileMode mode, FileAccess ac
     return fopenModeTable[static_cast<int32_t>(mode) - 1][static_cast<int32_t>(access) - 1];
 }
 
-FILE* CreateFileOpenHandle(const std::string_view& path, FileMode mode, FileAccess access)
+FILE* CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access)
 {
     if (mode == FileMode::OpenOrCreate && File::Exists(path) == false)
     {
         FileStream(path, FileMode::CreateNew);
     }
 
-    return fopen(path.data(), ConvertFileModeAccessToNative(mode, access));
+    return fopen(path, ConvertFileModeAccessToNative(mode, access));
 }
 
 } /* namespace */
 
-FileStream::FileStream(const std::string_view& path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
+FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access)),
     m_bufferSize(bufferSize),
     m_readPos(0),

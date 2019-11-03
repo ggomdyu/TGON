@@ -83,8 +83,13 @@ I32Extent2D Window::GetClientSize() const
 
 std::string Window::GetTitle() const
 {
-    int32_t utf8TitleLen = this->GetTitle(&g_tempUtf8Buffer[0], static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(&g_tempUtf8Buffer[0], utf8TitleLen);
+    int32_t titleLen = this->GetTitle(&g_tempUtf8Buffer[0], static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    if (titleLen == -1)
+    {
+        return {};
+    }
+    
+    return {&g_tempUtf8Buffer[0], static_cast<size_t>(titleLen)};
 }
 
 } /* namespace tgon */

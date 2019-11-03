@@ -30,41 +30,41 @@ NSDate* ConvertDateTimeToNative(const DateTime& dateTime)
     
 } /* namespace */
     
-bool File::SetCreationTimeUtc(const std::string_view& path, const DateTime& creationTimeUtc)
+bool File::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
 {
     NSDate* date = ConvertDateTimeToNative(creationTimeUtc);
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: date, NSFileCreationDate, nullptr];
     
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    bool isSucceed = [fileManager setAttributes: attributes ofItemAtPath: [NSString stringWithUTF8String:path.data()] error: nullptr];
+    bool isSucceed = [fileManager setAttributes: attributes ofItemAtPath: [NSString stringWithUTF8String:path] error: nullptr];
     return isSucceed;
 }
     
-bool File::SetLastAccessTimeUtc(const std::string_view& path, const DateTime& lastAccessTimeUtc)
+bool File::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTimeUtc)
 {
     int64_t ticks = (lastAccessTimeUtc.ToUniversalTime().GetTicks() - DateTime::GetUnixEpoch().GetTicks()) / TimeSpan::TicksPerSecond;
     
     utimbuf buf{ticks, ticks};
-    return utime(path.data(), &buf) == 0;
+    return utime(path, &buf) == 0;
 }
 
-bool File::SetLastWriteTimeUtc(const std::string_view& path, const DateTime& lastWriteTimeUtc)
+bool File::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUtc)
 {
     NSDate* dateComponents = ConvertDateTimeToNative(lastWriteTimeUtc);
     
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: dateComponents, NSFileModificationDate, nullptr];
-    return [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:[NSString stringWithUTF8String:path.data()] error:nil];
+    return [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:[NSString stringWithUTF8String:path] error:nil];
 }
 
-bool File::Copy(const std::string_view& srcPath, const std::string_view& destPath, bool overwrite)
+bool File::Copy(const char* srcPath, const char* destPath, bool overwrite)
 {
     if (overwrite)
     {
         Delete(destPath);
     }
     
-    NSString* nsSrcPath = [NSString stringWithUTF8String:srcPath.data()];
-    NSString* nsDestPath = [NSString stringWithUTF8String:destPath.data()];
+    NSString* nsSrcPath = [NSString stringWithUTF8String:srcPath];
+    NSString* nsDestPath = [NSString stringWithUTF8String:destPath];
     return [[NSFileManager defaultManager] copyItemAtPath:nsSrcPath toPath:nsDestPath error:nil];
 }
 

@@ -62,9 +62,7 @@ public:
 };
 
 template <typename _ReturnType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> : FunctionTraits<_ReturnType(_ArgTypes...)>
-{
-};
+struct FunctionTraits<_ReturnType(*)(_ArgTypes...)> : FunctionTraits<_ReturnType(_ArgTypes...)> {};
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
@@ -74,28 +72,16 @@ struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
 };
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> :
-    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
-{
-};
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
     
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> :
-    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
-{
-};
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) volatile> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
-struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> :
-    FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)>
-{
-};
+struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...) const volatile> : FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> {};
 
 template <typename _FunctionType>
-struct FunctionTraits :
-    FunctionTraits<decltype(&_FunctionType::operator())>
-{
-};
+struct FunctionTraits : FunctionTraits<decltype(&_FunctionType::operator())> {};
 
 template <typename _Type>
 constexpr bool IsBasicString = detail::IsBasicString<_Type>::value;

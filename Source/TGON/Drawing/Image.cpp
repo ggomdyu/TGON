@@ -8,8 +8,8 @@
 #include <stb_image.h>
 #include <stb_image_write.h>
 
-#include "String/StringTraits.h"
-#include "String/Hash.h"
+#include "Text/StringTraits.h"
+#include "Text/Hash.h"
 #if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
 #   include "ImageProcessor/BmpImageProcessor.h"
 #   include "ImageProcessor/JpgImageProcessor.h"

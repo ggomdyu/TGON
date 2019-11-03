@@ -18,10 +18,10 @@ std::string Path::Combine(const std::string_view& path1, const std::string_view&
     auto strLen = Combine(path1, path2, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return std::string();
+        return {};
     }
     
-    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
 }
 
 int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen)
@@ -83,39 +83,38 @@ std::string Path::ChangeExtension(const std::string_view& path, const std::strin
     auto strLen = ChangeExtension(path, extension, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return std::string();
+        return {};
     }
     
-    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
 }
 
-int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr)
+int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr, int32_t destStrBufferLen)
 {
-    if (path.length() == 0)
+    size_t extensionStartIndex = path.length();
+    for (int32_t i = static_cast<int32_t>(extensionStartIndex) - 1; i >= 0; --i)
     {
-        destStr[0] = '\0';
-        return 0;
-    }
-
-    auto newExtension = extension[0] == '.' ? extension.substr(1) : extension;
-
-    int32_t iterIndex = static_cast<int32_t>(path.length());
-    while (--iterIndex >= 0)
-    {
-        if (path[iterIndex] == '.')
+        if (path[i] == '.')
         {
-            memcpy(destStr, path.data(), iterIndex + 1);
-            memcpy(&destStr[iterIndex + 1], newExtension.data(), newExtension.length() + 1);
-
-            return iterIndex + 1 + static_cast<int32_t>(newExtension.length());
+            extensionStartIndex = static_cast<size_t>(i);
+            break;
         }
     }
+    
+    size_t requiredDestStrBufferLen = extensionStartIndex + extension.length() + 2;
+    if (requiredDestStrBufferLen > destStrBufferLen)
+    {
+        return -1;
+    }
 
-    memcpy(destStr, path.data(), path.length());
-    memcpy(&destStr[path.length() + 1], newExtension.data(), newExtension.length() + 1);
-    destStr[path.length()] = '.';
-
-    return static_cast<int32_t>(path.length() + 1 + newExtension.length());
+    memcpy(destStr, path.data(), extensionStartIndex);
+    memcpy(&destStr[extensionStartIndex + 1], extension.data(), extension.size());
+    
+    int32_t strLen = static_cast<int32_t>(extensionStartIndex + 1 + extension.size());
+    destStr[strLen] = '\0';
+    destStr[extensionStartIndex] = '.';
+    
+    return strLen;
 }
 
 std::string Path::GetFullPath(const std::string_view& path)
@@ -169,7 +168,12 @@ int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
 std::string Path::GetRandomFileName()
 {
     auto strLen = GetRandomFileName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+    if (strLen == -1)
+    {
+        return {};
+    }
+    
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Path::GetTempPath()
@@ -177,10 +181,10 @@ std::string Path::GetTempPath()
     auto strLen = GetTempPath(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
     if (strLen == -1)
     {
-        return std::string();
+        return {};
     }
     
-    return std::string(g_tempUtf8Buffer.data(), static_cast<size_t>(strLen));
+    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
 }
 
 int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
@@ -224,16 +228,6 @@ int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
         
         return static_cast<int32_t>(tempEnvVarValue->size());
     }
-}
-
-bool Path::IsDirectorySeparator(char ch) noexcept
-{
-    return ch == AltDirectorySeparatorChar || ch == DirectorySeparatorChar;
-}
-
-bool Path::IsValidDriveChar(char ch) noexcept
-{
-    return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
 std::string Path::RemoveRelativeSegments(const std::string_view& path)

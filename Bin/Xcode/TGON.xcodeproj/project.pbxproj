@@ -56,6 +56,8 @@
 		8CF8A19F234A438800763883 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A194234A438800763883 /* SpriteRendererComponent.h */; };
 		8CF8A1A0234A438800763883 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A195234A438800763883 /* CameraComponent.h */; };
 		8CF8A1A3234CC3B800763883 /* UnicodeScalar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */; };
+		8CFB9E502369EB7C0056A076 /* UnixPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CFB9E4F2369EB7C0056A076 /* UnixPath.h */; };
+		8CFB9E5E2369FDA30056A076 /* UnixDirectory.inl in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
 		FD2D6D0022D064410087DF85 /* Graphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CDF22D0643D0087DF85 /* Graphics.h */; };
 		FD2D6D0122D064410087DF85 /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */; };
@@ -783,23 +785,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8C012C0423073AE500285F74 /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
-		8C012C0523073AE500285F74 /* FileStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileStream.cpp; sourceTree = "<group>"; };
-		8C012C0823073AE900285F74 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
+		8C012C0423073AE500285F74 /* FileStream.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FileStream.h; sourceTree = "<group>"; };
+		8C012C0523073AE500285F74 /* FileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FileStream.cpp; sourceTree = "<group>"; };
+		8C012C0823073AE900285F74 /* Stream.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Stream.h; sourceTree = "<group>"; };
 		8C012C0F230C580D00285F74 /* Environment.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Environment.h; sourceTree = "<group>"; };
-		8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StdioFileStream.cpp; sourceTree = "<group>"; };
-		8C012C16230C743F00285F74 /* MacOSPath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSPath.mm; sourceTree = "<group>"; };
+		8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = StdioFileStream.cpp; sourceTree = "<group>"; };
+		8C012C16230C743F00285F74 /* MacOSPath.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSPath.mm; sourceTree = "<group>"; };
 		8C59E306232EB42700EBE199 /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoding.cpp; sourceTree = "<group>"; };
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		8C59E30A2330014700EBE199 /* Environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Environment.cpp; sourceTree = "<group>"; };
 		8C59E30C2330014F00EBE199 /* MacOSEnvironment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSEnvironment.cpp; sourceTree = "<group>"; };
-		8CB5BB11233F814C0032F332 /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Directory.h; sourceTree = "<group>"; };
-		8CB5BB12233F814C0032F332 /* Directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Directory.cpp; sourceTree = "<group>"; };
-		8CB5BB15233F96E50032F332 /* DirectoryInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectoryInfo.h; sourceTree = "<group>"; };
-		8CB5BB162340D6100032F332 /* UnixFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixFile.cpp; sourceTree = "<group>"; };
+		8CB5BB11233F814C0032F332 /* Directory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Directory.h; sourceTree = "<group>"; };
+		8CB5BB12233F814C0032F332 /* Directory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Directory.cpp; sourceTree = "<group>"; };
+		8CB5BB15233F96E50032F332 /* DirectoryInfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DirectoryInfo.h; sourceTree = "<group>"; };
+		8CB5BB162340D6100032F332 /* UnixFile.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UnixFile.cpp; sourceTree = "<group>"; };
 		8CB5BB1A23460D900032F332 /* VideoMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMode.h; sourceTree = "<group>"; };
 		8CC61CB322F3299600F415C8 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
-		8CC61CB522F329B300F415C8 /* MacOSFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSFile.mm; sourceTree = "<group>"; };
+		8CC61CB522F329B300F415C8 /* MacOSFile.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSFile.mm; sourceTree = "<group>"; };
 		8CC61CB822F610AE00F415C8 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RectTransform.h; sourceTree = "<group>"; };
 		8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UIRenderer.cpp; sourceTree = "<group>"; };
 		8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UISpriteBatch.cpp; sourceTree = "<group>"; };
@@ -811,8 +813,8 @@
 		8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSDebug.mm; sourceTree = "<group>"; };
 		8CC61CC622FB3B7A00F415C8 /* Debug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Debug.cpp; sourceTree = "<group>"; };
 		8CC61CC722FB3B7A00F415C8 /* Debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Debug.h; sourceTree = "<group>"; };
-		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
-		8CE691AF2365FE1500482062 /* UnixDirectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixDirectory.cpp; sourceTree = "<group>"; };
+		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
+		8CE691AF2365FE1500482062 /* UnixDirectory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UnixDirectory.cpp; sourceTree = "<group>"; };
 		8CF8A16C234A435000763883 /* Object.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Object.h; sourceTree = "<group>"; };
 		8CF8A16D234A435000763883 /* ISerializable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ISerializable.h; sourceTree = "<group>"; };
 		8CF8A16E234A435000763883 /* NonAddressable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = NonAddressable.h; sourceTree = "<group>"; };
@@ -837,6 +839,16 @@
 		8CF8A194234A438800763883 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
 		8CF8A195234A438800763883 /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CameraComponent.h; path = ../../../Source/TGON/Component/CameraComponent.h; sourceTree = "<group>"; };
 		8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnicodeScalar.h; sourceTree = "<group>"; };
+		8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixDirectory.inl; sourceTree = "<group>"; };
+		8CFB9E4F2369EB7C0056A076 /* UnixPath.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UnixPath.h; sourceTree = "<group>"; };
+		8CFB9E532369F7E50056A076 /* EnvironmentTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentTest.h; sourceTree = "<group>"; };
+		8CFB9E552369F7E50056A076 /* DirectoryTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectoryTest.h; sourceTree = "<group>"; };
+		8CFB9E562369F7E50056A076 /* FileTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileTest.h; sourceTree = "<group>"; };
+		8CFB9E572369F7E50056A076 /* PathTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathTest.h; sourceTree = "<group>"; };
+		8CFB9E582369F7E50056A076 /* FileStreamTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileStreamTest.h; sourceTree = "<group>"; };
+		8CFB9E592369F7E50056A076 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		8CFB9E5B2369F7E50056A076 /* DateTimeTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateTimeTest.h; sourceTree = "<group>"; };
+		8CFB9E5D2369F7E50056A076 /* FixedStringTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixedStringTest.h; sourceTree = "<group>"; };
 		FD10725B20C19E0C0098E76D /* libgainputstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgainputstatic.a; path = ../ThirdParty/Debug/x86_64/libgainputstatic.a; sourceTree = "<group>"; };
 		FD1F5650203EFF5B005B1F09 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		FD1F5653203F089A005B1F09 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../../../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
@@ -1817,6 +1829,65 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		8CFB9E4E2369CB550056A076 /* Unix */ = {
+			isa = PBXGroup;
+			children = (
+				8CB5BB162340D6100032F332 /* UnixFile.cpp */,
+				8CE691AF2365FE1500482062 /* UnixDirectory.cpp */,
+				8CFB9E4F2369EB7C0056A076 /* UnixPath.h */,
+				8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */,
+			);
+			path = Unix;
+			sourceTree = "<group>";
+		};
+		8CFB9E512369F7E50056A076 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB9E522369F7E50056A076 /* Platform */,
+				8CFB9E542369F7E50056A076 /* IO */,
+				8CFB9E592369F7E50056A076 /* Test.h */,
+				8CFB9E5A2369F7E50056A076 /* Time */,
+				8CFB9E5C2369F7E50056A076 /* String */,
+			);
+			name = Test;
+			path = ../../Source/Test;
+			sourceTree = "<group>";
+		};
+		8CFB9E522369F7E50056A076 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB9E532369F7E50056A076 /* EnvironmentTest.h */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		8CFB9E542369F7E50056A076 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB9E552369F7E50056A076 /* DirectoryTest.h */,
+				8CFB9E562369F7E50056A076 /* FileTest.h */,
+				8CFB9E572369F7E50056A076 /* PathTest.h */,
+				8CFB9E582369F7E50056A076 /* FileStreamTest.h */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
+		8CFB9E5A2369F7E50056A076 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB9E5B2369F7E50056A076 /* DateTimeTest.h */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		8CFB9E5C2369F7E50056A076 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				8CFB9E5D2369F7E50056A076 /* FixedStringTest.h */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
 		FD4C1BE0219F342700B2B2BE /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -2468,7 +2539,7 @@
 				FDC02C03228481F000BEE91A /* Math */,
 				FDC02C8E228481F100BEE91A /* Platform */,
 				FDC02C27228481F000BEE91A /* Random */,
-				FDC02BFB228481EF00BEE91A /* String */,
+				FDC02BFB228481EF00BEE91A /* Text */,
 				FDC02C24228481F000BEE91A /* Thread */,
 				FDC02C2C228481F000BEE91A /* Time */,
 				FDB7036D22B9131F0055FCED /* Misc */,
@@ -2684,7 +2755,7 @@
 			path = MacOS;
 			sourceTree = "<group>";
 		};
-		FDC02BFB228481EF00BEE91A /* String */ = {
+		FDC02BFB228481EF00BEE91A /* Text */ = {
 			isa = PBXGroup;
 			children = (
 				FDC02BFC228481EF00BEE91A /* UUID.h */,
@@ -2697,8 +2768,8 @@
 				FDC02CDE228482F000BEE91A /* Hash.h */,
 				8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */,
 			);
-			name = String;
-			path = ../../Source/TGON/String;
+			name = Text;
+			path = ../../Source/TGON/Text;
 			sourceTree = "<group>";
 		};
 		FDC02C03228481F000BEE91A /* Math */ = {
@@ -2879,8 +2950,8 @@
 		FDC02C87228481F100BEE91A /* IO */ = {
 			isa = PBXGroup;
 			children = (
+				8CFB9E4E2369CB550056A076 /* Unix */,
 				FDC02C88228481F100BEE91A /* MacOS */,
-				8CE691AF2365FE1500482062 /* UnixDirectory.cpp */,
 				8CB5BB12233F814C0032F332 /* Directory.cpp */,
 				8CB5BB11233F814C0032F332 /* Directory.h */,
 				8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */,
@@ -2889,7 +2960,6 @@
 				FDC02C8A228481F100BEE91A /* Path.h */,
 				FD49FCF622DB74ED00A394D8 /* File.cpp */,
 				FD49FCF522DB74EC00A394D8 /* File.h */,
-				8CB5BB162340D6100032F332 /* UnixFile.cpp */,
 				8C012C0523073AE500285F74 /* FileStream.cpp */,
 				8C012C0423073AE500285F74 /* FileStream.h */,
 				8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */,
@@ -2996,6 +3066,7 @@
 			children = (
 				FD73C00721628BBB006DCCE1 /* TGON */,
 				FD73C00821628BC8006DCCE1 /* ThirdParty */,
+				8CFB9E512369F7E50056A076 /* Test */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -3628,6 +3699,7 @@
 				FD4916A622E4E067004166F8 /* TimeZoneInfo.h in Headers */,
 				FD5332AA22A2EA1C001EB57C /* cfftypes.h in Headers */,
 				FDE1B5DB22E40FDB0093FDC1 /* ucharstrie.h in Headers */,
+				8CFB9E502369EB7C0056A076 /* UnixPath.h in Headers */,
 				FD5332E822A2EA1C001EB57C /* ftrender.h in Headers */,
 				FDE1B5B022E40FDB0093FDC1 /* utext.h in Headers */,
 				8CF8A17E234A435100763883 /* RuntimeObject.h in Headers */,
@@ -4233,6 +4305,7 @@
 				FDE1B4FD22E40E940093FDC1 /* uinit.cpp in Sources */,
 				FDE1B4B422E40E940093FDC1 /* uvectr64.cpp in Sources */,
 				FD4C1DE1219F3F7D00B2B2BE /* GainputInputRecorder.cpp in Sources */,
+				8CFB9E5E2369FDA30056A076 /* UnixDirectory.inl in Sources */,
 				FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */,
 				FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */,
 				FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */,
