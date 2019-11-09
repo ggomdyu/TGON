@@ -91,14 +91,14 @@ void FileStream::FlushWriteBuffer()
         return;
     }
 
-    this->WriteCore(&m_buffer[0], m_writePos);
+    this->InternalWrite(&m_buffer[0], m_writePos);
 
     fflush(reinterpret_cast<FILE*>(m_nativeHandle));
 
     m_writePos = 0;
 }
 
-int32_t FileStream::ReadCore(std::byte* buffer, int32_t count)
+int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 {
     auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (readBytes == static_cast<decltype(readBytes)>(-1))
@@ -110,7 +110,7 @@ int32_t FileStream::ReadCore(std::byte* buffer, int32_t count)
     return static_cast<int32_t>(readBytes);
 }
 
-int32_t FileStream::WriteCore(const std::byte* buffer, int32_t count)
+int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t count)
 {
     auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (writtenBytes == static_cast<decltype(writtenBytes)>(-1))
@@ -122,7 +122,7 @@ int32_t FileStream::WriteCore(const std::byte* buffer, int32_t count)
     return static_cast<int32_t>(writtenBytes);
 }
 
-int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
+int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
 {
     auto nativeHandle = reinterpret_cast<FILE*>(m_nativeHandle);
     auto result = fseek(nativeHandle, offset, static_cast<int>(origin));
@@ -142,12 +142,12 @@ int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
     return static_cast<int32_t>(newFilePos);
 }
 
-bool FileStream::SetLengthCore(int64_t value)
+bool FileStream::InternalSetLength(int64_t value)
 {
     return false;
 }
 
-void FileStream::FlushCore()
+void FileStream::InternalFlush()
 {
     fflush(reinterpret_cast<FILE*>(m_nativeHandle));
 }

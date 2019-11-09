@@ -6,6 +6,7 @@
 
 #include "../IndexBuffer.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -77,3 +78,4 @@ void IndexBuffer::Destroy()
 }
 
 } /* namespace tgon */
+#endif

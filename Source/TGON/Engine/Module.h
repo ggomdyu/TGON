@@ -1,5 +1,5 @@
 /**
- * @file    IModule.h
+ * @file    Module.h
  * @author  ggomdyu
  * @since   07/13/2016
  */
@@ -10,11 +10,11 @@
 namespace tgon
 {
 
-class TGON_API IModule :
+class TGON_API Module :
     public Object
 {
 public:
-    TGON_DECLARE_RTTI(IModule)
+    TGON_DECLARE_RTTI(Module)
 
 /**@section Method */
 public:

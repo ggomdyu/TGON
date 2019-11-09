@@ -14,13 +14,13 @@
 #include "Graphics/Texture.h"
 #include "Graphics/TextureAtlas.h"
 
-#include "IModule.h"
+#include "Module.h"
 
 namespace tgon
 {
 
-class TGON_API AssetModule final :
-	public IModule
+class TGON_API AssetModule :
+	public Module
 {
 public:
     TGON_DECLARE_RTTI(AssetModule);

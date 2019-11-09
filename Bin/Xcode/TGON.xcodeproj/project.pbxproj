@@ -13,6 +13,8 @@
 		8C012C11230C580D00285F74 /* Environment.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C012C0F230C580D00285F74 /* Environment.h */; };
 		8C012C15230C6C9E00285F74 /* StdioFileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */; };
 		8C012C17230C744000285F74 /* MacOSPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C16230C743F00285F74 /* MacOSPath.mm */; };
+		8C1271472372AC2D009D1993 /* FileSystemEnumerable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */; };
+		8C1271492372AE3E009D1993 /* UnixFileSystemEnumerable.inl in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */; };
 		8C59E307232EB42700EBE199 /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E306232EB42700EBE199 /* Encoding.cpp */; };
 		8C59E309232EB44000EBE199 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E308232EB44000EBE199 /* Random.cpp */; };
 		8C59E30B2330014700EBE199 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30A2330014700EBE199 /* Environment.cpp */; };
@@ -57,7 +59,6 @@
 		8CF8A1A0234A438800763883 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A195234A438800763883 /* CameraComponent.h */; };
 		8CF8A1A3234CC3B800763883 /* UnicodeScalar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */; };
 		8CFB9E502369EB7C0056A076 /* UnixPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CFB9E4F2369EB7C0056A076 /* UnixPath.h */; };
-		8CFB9E5E2369FDA30056A076 /* UnixDirectory.inl in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
 		FD2D6D0022D064410087DF85 /* Graphics.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CDF22D0643D0087DF85 /* Graphics.h */; };
 		FD2D6D0122D064410087DF85 /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */; };
@@ -791,6 +792,9 @@
 		8C012C0F230C580D00285F74 /* Environment.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Environment.h; sourceTree = "<group>"; };
 		8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = StdioFileStream.cpp; sourceTree = "<group>"; };
 		8C012C16230C743F00285F74 /* MacOSPath.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSPath.mm; sourceTree = "<group>"; };
+		8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSystemEnumerable.h; sourceTree = "<group>"; };
+		8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnixFileSystemEnumerable.inl; sourceTree = "<group>"; };
+		8C439484236FC666009911B1 /* UnixPath.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixPath.inl; sourceTree = "<group>"; };
 		8C59E306232EB42700EBE199 /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoding.cpp; sourceTree = "<group>"; };
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		8C59E30A2330014700EBE199 /* Environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Environment.cpp; sourceTree = "<group>"; };
@@ -839,7 +843,6 @@
 		8CF8A194234A438800763883 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
 		8CF8A195234A438800763883 /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CameraComponent.h; path = ../../../Source/TGON/Component/CameraComponent.h; sourceTree = "<group>"; };
 		8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnicodeScalar.h; sourceTree = "<group>"; };
-		8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixDirectory.inl; sourceTree = "<group>"; };
 		8CFB9E4F2369EB7C0056A076 /* UnixPath.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UnixPath.h; sourceTree = "<group>"; };
 		8CFB9E532369F7E50056A076 /* EnvironmentTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentTest.h; sourceTree = "<group>"; };
 		8CFB9E552369F7E50056A076 /* DirectoryTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectoryTest.h; sourceTree = "<group>"; };
@@ -1314,7 +1317,7 @@
 		FDC02C37228481F000BEE91A /* Timer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Timer.h; sourceTree = "<group>"; };
 		FDC02C38228481F000BEE91A /* Stopwatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Stopwatch.h; sourceTree = "<group>"; };
 		FDC02C3F228481F000BEE91A /* Engine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Engine.h; sourceTree = "<group>"; };
-		FDC02C40228481F000BEE91A /* IModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = IModule.h; sourceTree = "<group>"; };
+		FDC02C40228481F000BEE91A /* Module.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Module.h; sourceTree = "<group>"; };
 		FDC02C41228481F000BEE91A /* InputModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = InputModule.h; sourceTree = "<group>"; };
 		FDC02C42228481F000BEE91A /* GraphicsModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = GraphicsModule.cpp; sourceTree = "<group>"; };
 		FDC02C43228481F000BEE91A /* AudioModule.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AudioModule.cpp; sourceTree = "<group>"; };
@@ -1833,9 +1836,10 @@
 			isa = PBXGroup;
 			children = (
 				8CB5BB162340D6100032F332 /* UnixFile.cpp */,
+				8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */,
 				8CE691AF2365FE1500482062 /* UnixDirectory.cpp */,
 				8CFB9E4F2369EB7C0056A076 /* UnixPath.h */,
-				8CFB9E4D2369C54D0056A076 /* UnixDirectory.inl */,
+				8C439484236FC666009911B1 /* UnixPath.inl */,
 			);
 			path = Unix;
 			sourceTree = "<group>";
@@ -2540,7 +2544,7 @@
 				FDC02C8E228481F100BEE91A /* Platform */,
 				FDC02C27228481F000BEE91A /* Random */,
 				FDC02BFB228481EF00BEE91A /* Text */,
-				FDC02C24228481F000BEE91A /* Thread */,
+				FDC02C24228481F000BEE91A /* Threading */,
 				FDC02C2C228481F000BEE91A /* Time */,
 				FDB7036D22B9131F0055FCED /* Misc */,
 				FD2108C920BAE630009FC8F1 /* TGON.h */,
@@ -2802,7 +2806,7 @@
 			path = ../../Source/TGON/Game;
 			sourceTree = "<group>";
 		};
-		FDC02C24228481F000BEE91A /* Thread */ = {
+		FDC02C24228481F000BEE91A /* Threading */ = {
 			isa = PBXGroup;
 			children = (
 				FD7DE05D229D6C61002B5786 /* MacOS */,
@@ -2811,8 +2815,8 @@
 				FD7DE060229D6C67002B5786 /* Thread.cpp */,
 				FD7DE05F229D6C67002B5786 /* Thread.h */,
 			);
-			name = Thread;
-			path = ../../Source/TGON/Thread;
+			name = Threading;
+			path = ../../Source/TGON/Threading;
 			sourceTree = "<group>";
 		};
 		FDC02C27228481F000BEE91A /* Random */ = {
@@ -2857,7 +2861,7 @@
 			children = (
 				FDC02C3F228481F000BEE91A /* Engine.h */,
 				FDC02C4A228481F000BEE91A /* Engine.cpp */,
-				FDC02C40228481F000BEE91A /* IModule.h */,
+				FDC02C40228481F000BEE91A /* Module.h */,
 				FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */,
 				FDC83D4F22CE40EE00B93C8D /* AssetModule.h */,
 				FDC02C48228481F000BEE91A /* AudioModule.h */,
@@ -2962,6 +2966,7 @@
 				FD49FCF522DB74EC00A394D8 /* File.h */,
 				8C012C0523073AE500285F74 /* FileStream.cpp */,
 				8C012C0423073AE500285F74 /* FileStream.h */,
+				8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */,
 				8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */,
 				8C012C0823073AE900285F74 /* Stream.h */,
 			);
@@ -3576,6 +3581,7 @@
 				FD2D6D0522D064410087DF85 /* IndexBuffer.h in Headers */,
 				FD53329722A2EA1C001EB57C /* ftoption.h in Headers */,
 				FDB7036822B6B3420055FCED /* infcodes.h in Headers */,
+				8C1271492372AE3E009D1993 /* UnixFileSystemEnumerable.inl in Headers */,
 				FDE1B66B22E4100F0093FDC1 /* uvector.h in Headers */,
 				FDE1B5D322E40FDB0093FDC1 /* ucurr.h in Headers */,
 				8CF8A185234A435100763883 /* TypeTraits.h in Headers */,
@@ -3840,6 +3846,7 @@
 				FDE1B59E22E40FDB0093FDC1 /* chariter.h in Headers */,
 				FDE1B6B722E4100F0093FDC1 /* udatamem.h in Headers */,
 				8CF8A1A3234CC3B800763883 /* UnicodeScalar.h in Headers */,
+				8C1271472372AC2D009D1993 /* FileSystemEnumerable.h in Headers */,
 				FD53329922A2EA1C001EB57C /* ftcolor.h in Headers */,
 				FD5332E422A2EA1C001EB57C /* ftlist.h in Headers */,
 				FDE1B5CD22E40FDB0093FDC1 /* locdspnm.h in Headers */,
@@ -4305,7 +4312,6 @@
 				FDE1B4FD22E40E940093FDC1 /* uinit.cpp in Sources */,
 				FDE1B4B422E40E940093FDC1 /* uvectr64.cpp in Sources */,
 				FD4C1DE1219F3F7D00B2B2BE /* GainputInputRecorder.cpp in Sources */,
-				8CFB9E5E2369FDA30056A076 /* UnixDirectory.inl in Sources */,
 				FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */,
 				FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */,
 				FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */,

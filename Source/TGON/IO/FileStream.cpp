@@ -118,7 +118,7 @@ bool FileStream::SetLength(int64_t value)
         this->FlushReadBuffer();
     }
 
-    return this->SetLengthCore(value);
+    return this->InternalSetLength(value);
 }
 
 int64_t FileStream::Position() const
@@ -146,7 +146,7 @@ int64_t FileStream::Seek(int64_t offset, SeekOrigin origin)
     
     m_readPos = m_readLen = 0;
     
-    return SeekCore(offset, origin);
+    return InternalSeek(offset, origin);
 }
 
 const std::string& FileStream::Name() const noexcept
@@ -181,7 +181,7 @@ int32_t FileStream::Read(std::byte* buffer, int32_t count)
     {
         this->FlushWriteBuffer();
     
-        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
+        auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
         m_readPos = 0;
         m_readLen = leftReadBufferSpace = readBytes;
 
@@ -197,7 +197,7 @@ int32_t FileStream::Read(std::byte* buffer, int32_t count)
     // Copied less than the required bytes?
     if (copiedBytes < count)
     {
-        int32_t moreReadBytes = this->ReadCore(buffer + m_readPos + copiedBytes, count - copiedBytes);
+        int32_t moreReadBytes = this->InternalRead(buffer + m_readPos + copiedBytes, count - copiedBytes);
         copiedBytes += moreReadBytes;
 
         m_readLen = 0;
@@ -221,7 +221,7 @@ int32_t FileStream::ReadByte()
     {
         this->FlushWriteBuffer();
 
-        auto readBytes = this->ReadCore(&this->GetBuffer()[0], m_bufferSize);
+        auto readBytes = this->InternalRead(&this->GetBuffer()[0], m_bufferSize);
         m_readPos = 0;
         m_readLen = readBytes;
 
@@ -269,7 +269,7 @@ bool FileStream::Write(const std::byte* buffer, int32_t count)
 
     if (m_bufferSize < count)
     {
-        this->WriteCore(buffer, count);
+        this->InternalWrite(buffer, count);
         return true;
     }
 
@@ -309,7 +309,7 @@ void FileStream::FlushReadBuffer()
     int32_t rewindOffset = m_readPos - m_readLen;
     if (rewindOffset != 0)
     {
-        this->SeekCore(rewindOffset, SeekOrigin::Current);
+        this->InternalSeek(rewindOffset, SeekOrigin::Current);
     }
 
     m_readLen = m_readPos = 0;
@@ -328,7 +328,7 @@ void FileStream::Flush(bool flushToDisk)
 
     if (flushToDisk)
     {
-        this->FlushCore();
+        this->InternalFlush();
     }
 }
 

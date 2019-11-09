@@ -8,7 +8,7 @@
 #include "Math/Vector2.h"
 #include "Drawing/Image.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLTexture.h"
 #endif
 

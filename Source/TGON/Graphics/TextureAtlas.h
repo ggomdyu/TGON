@@ -40,8 +40,6 @@ public:
     static TextureAtlas Create(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = 2);
     bool Insert(UnicodeScalar name, const ImageView& image);
     bool Insert(const StringViewHash& name, const ImageView& image);
-    bool Insert(const std::initializer_list<std::pair<UnicodeScalar, ImageView>>& imageDescs);
-    bool Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs);
     const I32Rect& GetTextureRect(UnicodeScalar name) const;
     const I32Rect& GetTextureRect(const StringViewHash& name) const;
     int32_t GetTextureCount() const noexcept;

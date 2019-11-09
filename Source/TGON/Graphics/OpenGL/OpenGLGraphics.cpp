@@ -4,11 +4,13 @@
 #include <stb_image_write.h>
 
 #include "Platform/Window.h"
+#include "Drawing/FontFactory.h"
 
 #include "OpenGLDebug.h"
 
 #include "../Graphics.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -75,10 +77,6 @@ GLuint OpenGLGraphics::GetVertexArrayHandle() const noexcept
 Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
     PlatformGraphics(OpenGLContext(displayTarget, videoMode))
 {
-    // It is required because OpenGL expects (0, 0) coordinates to be the left bottom side, but images usually left top side.
-    stbi_set_flip_vertically_on_load(true);
-    stbi_flip_vertically_on_write(true);
-    
     this->EnableCullFace();
 
     TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
@@ -212,3 +210,4 @@ void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexC
 }
 
 } /* namespace tgon */
+#endif

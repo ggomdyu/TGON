@@ -11,12 +11,11 @@
 namespace tgon
 {
 
-extern thread_local std::array<char, 16384> g_tempUtf8Buffer;
-
 std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
 {
-    auto strLen = Combine(path1, path2, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    std::array<char, 16384> str;
+    auto strLen = Combine(path1, path2, str.data(), static_cast<int32_t>(str.size()));
+    return {str.data(), static_cast<size_t>(strLen)};
 }
 
 int32_t Path::Combine(const std::string_view& path1, const std::string_view& path2, char* destStr, int32_t destStrBufferLen)
@@ -75,12 +74,22 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
 
 std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
 {
-    auto strLen = ChangeExtension(path, extension, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    std::array<char, 16384> str;
+    auto strLen = ChangeExtension(path, extension, str.data(), static_cast<int32_t>(str.size()));
+    return {str.data(), static_cast<size_t>(strLen)};
 }
 
 int32_t Path::ChangeExtension(const std::string_view& path, const std::string_view& extension, char* destStr, int32_t destStrBufferLen)
 {
+    if (path.length() == 0)
+    {
+        if (destStrBufferLen >= 1)
+        {
+            destStr[0] = '\0';
+        }
+        return 0;
+    }
+    
     size_t extensionStartIndex = path.length();
     for (int32_t i = static_cast<int32_t>(extensionStartIndex) - 1; i >= 0; --i)
     {
@@ -91,29 +100,45 @@ int32_t Path::ChangeExtension(const std::string_view& path, const std::string_vi
         }
     }
     
-    size_t requiredDestStrBufferLen = extensionStartIndex + extension.length() + 2;
+    bool extensionHasDot = extension.length() > 0 && extension[0] == '.';
+    size_t requiredDestStrBufferLen = extensionStartIndex + (extensionHasDot ? extension.length() + 1 : extension.length() + 2);
     if (requiredDestStrBufferLen > destStrBufferLen)
     {
         return 0;
     }
 
     memcpy(destStr, path.data(), extensionStartIndex);
-    memcpy(&destStr[extensionStartIndex + 1], extension.data(), extension.size());
     
-    int32_t strLen = static_cast<int32_t>(extensionStartIndex + 1 + extension.size());
+    int32_t strLen = 0;
+    if (extensionHasDot)
+    {
+        memcpy(&destStr[extensionStartIndex], extension.data(), extension.size());
+        strLen = static_cast<int32_t>(extensionStartIndex + extension.size());
+    }
+    else
+    {
+        memcpy(&destStr[extensionStartIndex + 1], extension.data(), extension.size());
+        destStr[extensionStartIndex] = '.';
+        strLen = static_cast<int32_t>(extensionStartIndex + 1 + extension.size());
+    }
+    
     destStr[strLen] = '\0';
-    destStr[extensionStartIndex] = '.';
-    
     return strLen;
 }
 
 std::string Path::GetFullPath(const std::string_view& path)
 {
+    if (path.length() <= 0)
+    {
+        return {};
+    }
+    
     std::string collapsedString;
     if (!Path::IsPathRooted(path))
     {
-        int32_t collapsedStringLen = Path::Combine(Directory::GetCurrentDirectory(), path, g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-        collapsedString = RemoveRelativeSegments(std::string_view(&g_tempUtf8Buffer[0], collapsedStringLen));
+        std::array<char, 16384> str;
+        int32_t collapsedStringLen = Path::Combine(Directory::GetCurrentDirectory(), path, str.data(), static_cast<int32_t>(str.size()));
+        collapsedString = RemoveRelativeSegments(std::string_view(&str[0], collapsedStringLen));
     }
     else
     {
@@ -157,19 +182,21 @@ int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
 
 std::string Path::GetRandomFileName()
 {
-    auto strLen = GetRandomFileName(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    std::array<char, 16384> str;
+    auto strLen = GetRandomFileName(str.data(), static_cast<int32_t>(str.size()));
+    return {str.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Path::GetTempPath()
 {
-    auto strLen = GetTempPath(g_tempUtf8Buffer.data(), static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    std::array<char, 16384> str;
+    auto strLen = GetTempPath(str.data(), static_cast<int32_t>(str.size()));
     if (strLen == -1)
     {
         return {};
     }
 
-    return {g_tempUtf8Buffer.data(), static_cast<size_t>(strLen)};
+    return {str.data(), static_cast<size_t>(strLen)};
 }
 
 int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)

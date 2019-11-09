@@ -56,68 +56,6 @@ bool TextureAtlas::Insert(const StringViewHash& name, const ImageView& image)
     return this->Insert(name.GetHashCode(), image);
 }
 
-bool TextureAtlas::Insert(const std::initializer_list<std::pair<UnicodeScalar, ImageView>>& imageDescs)
-{
-    for (size_t i = 0; i < imageDescs.size(); ++i)
-    {
-        const auto& image = (imageDescs.begin() + i)->second;
-
-        m_nodeRects[i] = stbrp_rect{
-            static_cast<int>(i), // id
-            static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
-            static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
-            0, // x
-            0, // y
-            0 // was_packed
-        };
-    }
-
-    bool isPackingFailed = stbrp_pack_rects(m_context.get(), m_nodeRects.get(), static_cast<int>(imageDescs.size())) != 0;
-    if (isPackingFailed == false)
-    {
-        return false;
-    }
-
-    for (size_t i = 0; i < imageDescs.size(); ++i)
-    {
-        const auto& imageDesc = imageDescs.begin() + i;
-        m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
-    }
-
-    return true;
-}
-
-bool TextureAtlas::Insert(const std::initializer_list<std::pair<StringViewHash, ImageView>>& imageDescs)
-{
-    for (size_t i = 0; i < imageDescs.size(); ++i)
-    {
-        const auto& image = (imageDescs.begin() + i)->second;
-
-        m_nodeRects[i] = stbrp_rect{
-            static_cast<int>(i), // id
-            static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
-            static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
-            0, // x
-            0, // y
-            0 // was_packed
-        };
-    }
-
-    bool isPackingFailed = stbrp_pack_rects(m_context.get(), m_nodeRects.get(), static_cast<int>(imageDescs.size())) != 0;
-    if (isPackingFailed == false)
-    {
-        return false;
-    }
-
-    for (size_t i = 0; i < imageDescs.size(); ++i)
-    {
-        const auto& imageDesc = imageDescs.begin() + i;
-        m_packedTextureInfos.insert({imageDesc->first.GetHashCode(), I32Rect(int32_t(m_nodeRects[i].x), int32_t(m_nodeRects[i].y), int32_t(m_nodeRects[i].w - m_paddingOffset), int32_t(m_nodeRects[i].h - m_paddingOffset))});
-    }
-
-    return true;
-}
-
 const I32Rect& TextureAtlas::GetTextureRect(UnicodeScalar name) const
 {
     return m_packedTextureInfos[name.GetHashCode()];

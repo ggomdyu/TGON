@@ -115,16 +115,21 @@ void UIRenderer::FlushSpriteBatches(Graphics& graphics)
     {
         m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
 
+#if DEBUG
         int32_t drawCall = 0;
+#endif
         for (auto& spriteBatch : m_spriteBatches)
         {
             spriteBatch.FlushBatch(graphics);
+#if DEBUG
             ++drawCall;
+#endif
         }
         
         m_spriteBatches.clear();
-        
+#if DEBUG
         Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
+#endif
     }
 
     m_spriteVertices.clear();

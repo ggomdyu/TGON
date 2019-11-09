@@ -12,6 +12,7 @@
 
 #include "../ShaderProgram.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -231,3 +232,4 @@ void ShaderProgram::Destroy()
 }
 
 } /* namespace tgon */
+#endif

@@ -82,14 +82,14 @@ private:
      * @brief   Registers a module to manage through this engine.
      * @param [in] module   The module to insert.
      */
-    void RegisterModule(const std::shared_ptr<IModule>& module);
+    void RegisterModule(const std::shared_ptr<Module>& module);
     
     /**
      * @brief   Returns a module that managed by Application.
      * @param [in] moduleId     The unique id of the module to get.
      * @return  Returns a pointer to module if successful, nullptr otherwise.
      */
-    std::shared_ptr<IModule> FindModule(size_t moduleId);
+    std::shared_ptr<Module> FindModule(size_t moduleId);
 
     /**
      * @brief   Returns a module that managed by Application.
@@ -101,7 +101,7 @@ private:
 /**@section Variable */
 private:
     std::shared_ptr<TimeModule> m_timeModule;
-    std::vector<std::shared_ptr<IModule>> m_modules;
+    std::vector<std::shared_ptr<Module>> m_modules;
 };
     
 template <>

@@ -7,8 +7,6 @@
 namespace tgon
 {
 
-extern thread_local std::array<char, 16384> g_tempUtf8Buffer;
-
 Window::~Window()
 {
     this->Close();
@@ -83,13 +81,14 @@ I32Extent2D Window::GetClientSize() const
 
 std::string Window::GetTitle() const
 {
-    int32_t titleLen = this->GetTitle(&g_tempUtf8Buffer[0], static_cast<int32_t>(g_tempUtf8Buffer.size()));
+    std::array<char, 16384> str;
+    int32_t titleLen = this->GetTitle(&str[0], static_cast<int32_t>(str.size()));
     if (titleLen == -1)
     {
         return {};
     }
     
-    return {&g_tempUtf8Buffer[0], static_cast<size_t>(titleLen)};
+    return {&str[0], static_cast<size_t>(titleLen)};
 }
 
 } /* namespace tgon */

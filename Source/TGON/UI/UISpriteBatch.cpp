@@ -57,9 +57,14 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
     const auto& textureRect = rhs.GetTextureRect();
     const auto& textureSize = rhs.GetTexture()->GetSize();
     float leftUV = textureRect.x / textureSize.width;
-    float topUV = (textureRect.y + textureRect.height) / textureSize.height;
     float rightUV = (textureRect.x + textureRect.width) / textureSize.width;
+#if TGON_GRAPHICS_OPENGL
+    float topUV = textureRect.y / textureSize.height;
+    float bottomUV = (textureRect.y + textureRect.height) / textureSize.height;
+#else
+    float topUV = (textureRect.y + textureRect.height) / textureSize.height;
     float bottomUV = textureRect.y / textureSize.height;
+#endif
     float halfWidth = textureRect.width * 0.5f;
     float halfHeight = textureRect.height * 0.5f;
 

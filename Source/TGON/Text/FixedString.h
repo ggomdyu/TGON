@@ -30,7 +30,7 @@ public:
 
 /**@section Constructor */
 public:
-    constexpr BasicFixedString() noexcept;
+    constexpr BasicFixedString() noexcept = default;
     BasicFixedString(const _CharType* str, int32_t count);
     BasicFixedString(const _CharType* str);
     BasicFixedString(const std::basic_string_view<_CharType>& str);
@@ -91,8 +91,8 @@ public:
 
 /**@section Variable */
 protected:
-    std::array<_CharType, _CharBufferSize> m_str;
-    int32_t m_strLen;
+    std::array<_CharType, _CharBufferSize> m_str = {};
+    int32_t m_strLen = 0;
 };
 
 namespace detail
@@ -123,6 +123,7 @@ using FixedString1024 = BasicFixedString<char, 1024>;
 using FixedString2048 = BasicFixedString<char, 2048>;
 using FixedString4096 = BasicFixedString<char, 4096>;
 using FixedString8192 = BasicFixedString<char, 8192>;
+using FixedString16384 = BasicFixedString<char, 16384>;
 
 using WFixedString8 = BasicFixedString<wchar_t, 8>;
 using WFixedString16 = BasicFixedString<wchar_t, 16>;
@@ -135,6 +136,7 @@ using WFixedString1024 = BasicFixedString<wchar_t, 1024>;
 using WFixedString2048 = BasicFixedString<wchar_t, 2048>;
 using WFixedString4096 = BasicFixedString<wchar_t, 4096>;
 using WFixedString8192 = BasicFixedString<wchar_t, 8192>;
+using WFixedString16384 = BasicFixedString<wchar_t, 16384>;
 
 using U16FixedString8 = BasicFixedString<char16_t, 8>;
 using U16FixedString16 = BasicFixedString<char16_t, 16>;
@@ -147,6 +149,7 @@ using U16FixedString1024 = BasicFixedString<char16_t, 1024>;
 using U16FixedString2048 = BasicFixedString<char16_t, 2048>;
 using U16FixedString4096 = BasicFixedString<char16_t, 4096>;
 using U16FixedString8192 = BasicFixedString<char16_t, 8192>;
+using U16FixedString16384 = BasicFixedString<char16_t, 16384>;
 
 using U32FixedString8 = BasicFixedString<char32_t, 8>;
 using U32FixedString16 = BasicFixedString<char32_t, 16>;
@@ -159,20 +162,13 @@ using U32FixedString1024 = BasicFixedString<char32_t, 1024>;
 using U32FixedString2048 = BasicFixedString<char32_t, 2048>;
 using U32FixedString4096 = BasicFixedString<char32_t, 4096>;
 using U32FixedString8192 = BasicFixedString<char32_t, 8192>;
-
-template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-constexpr BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString() noexcept :
-    m_str{},
-    m_strLen(0)
-{
-}
+using U32FixedString16384 = BasicFixedString<char32_t, 16384>;
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(const _CharType* str, int32_t count) :
-    BasicFixedString()
+    m_strLen(count)
 {
     _StringTraitsType::Append(str, count, m_str.data(), 0, static_cast<int32_t>(m_str.size()));
-    m_strLen += count;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -189,10 +185,9 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFix
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::BasicFixedString(_CharType ch, int32_t chCount) :
-    BasicFixedString()
+    m_strLen(chCount)
 {
-    _StringTraitsType::Append(m_str.data(), m_strLen, ch, chCount);
-    m_strLen += chCount;
+    _StringTraitsType::Append(ch, chCount, m_str.data(), 0, _CharBufferSize);
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
@@ -255,7 +250,7 @@ inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFix
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(_CharType rhs)
 {
-    _StringTraitsType::Append(m_str.data(), m_strLen, rhs, 1);
+    _StringTraitsType::Append(rhs, 1, m_str.data(), m_strLen, _CharBufferSize);
     m_strLen += 1;
 
     return *this;

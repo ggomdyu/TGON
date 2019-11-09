@@ -55,12 +55,12 @@ public:
     static int32_t GetTempPath(const gsl::span<char, Length>& destStr);
     static gsl::span<const char> GetInvalidFileNameChars() noexcept;
     static gsl::span<const char> GetInvalidPathChars() noexcept;
-
+    static constexpr int32_t GetRootLength(const std::string_view& path) noexcept;
+    static constexpr bool IsDirectorySeparator(char ch) noexcept;
+    
 private:
     static constexpr bool IsValidDriveChar(char ch) noexcept;
-    static constexpr bool IsDirectorySeparator(char ch) noexcept;
     static std::string RemoveRelativeSegments(const std::string_view& path);
-    static constexpr int32_t GetRootLength(const std::string_view& path) noexcept;
     
 /**@section Variable */
 public:
@@ -88,10 +88,8 @@ constexpr bool Path::IsPathRooted(const std::string_view& path) noexcept
 constexpr std::string_view Path::GetExtension(const std::string_view& path) noexcept
 {
     auto iterIndex = path.length();
-    while (iterIndex > 0)
+    while (iterIndex-- > 0)
     {
-        --iterIndex;
-        
         if (path[iterIndex] == '.')
         {
             return path.substr(iterIndex);
@@ -104,10 +102,8 @@ constexpr std::string_view Path::GetExtension(const std::string_view& path) noex
 constexpr std::string_view Path::GetFileName(const std::string_view& path) noexcept
 {
     auto iterIndex = path.length();
-    while (iterIndex > 0)
+    while (iterIndex-- > 0)
     {
-        --iterIndex;
-        
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             return path.substr(iterIndex + 1, path.length() - iterIndex);
@@ -122,10 +118,8 @@ constexpr std::string_view Path::GetFileNameWithoutExtension(const std::string_v
     auto extensionStartIndex = path.length();
     
     auto iterIndex = extensionStartIndex;
-    while (iterIndex > 0)
+    while (iterIndex-- > 0)
     {
-        --iterIndex;
-        
         if (IsDirectorySeparator(path[iterIndex]))
         {
             return path.substr(iterIndex + 1, extensionStartIndex - (iterIndex + 1));
@@ -147,10 +141,8 @@ constexpr std::string_view Path::GetFileNameWithoutExtension(const std::string_v
 constexpr std::string_view Path::GetDirectoryName(const std::string_view& path) noexcept
 {
     auto iterIndex = path.length();
-    while (iterIndex > 0)
+    while (iterIndex-- > 0)
     {
-        --iterIndex;
-        
         if (path[iterIndex] == AltDirectorySeparatorChar || path[iterIndex] == DirectorySeparatorChar)
         {
             return path.substr(0, iterIndex);
@@ -163,10 +155,8 @@ constexpr std::string_view Path::GetDirectoryName(const std::string_view& path) 
 constexpr bool Path::HasExtension(const std::string_view& path) noexcept
 {
     auto iterIndex = path.length();
-    while (iterIndex > 0)
+    while (iterIndex-- > 0)
     {
-        --iterIndex;
-        
         if (path[iterIndex] == '.')
         {
             return path.length() > (iterIndex + 1);
@@ -242,9 +232,10 @@ constexpr bool Path::IsValidDriveChar(char ch) noexcept
     return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
-constexpr int32_t Path::GetRootLength(const std::string_view& path) noexcept
-{
-    return path.length() > 0 && Path::IsDirectorySeparator(path[0]) ? 1 : 0;
-}
-
 } /* namespace tgon */
+
+#if TGON_PLATFORM_WINDOWS
+#   include "Windows/WindowsPath.inl"
+#elif TGON_PLATFORM_MACOS
+#   include "Unix/UnixPath.inl"
+#endif

@@ -43,7 +43,7 @@ bool File::Move(const char* srcPath, const char* destPath)
 std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0)
     {
         return {};
     }
@@ -58,7 +58,7 @@ std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0)
     {
         return {};
     }
@@ -73,7 +73,7 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 {
     struct stat s;
-    if (stat(path, &s) != 0 || S_ISREG(s.st_mode) == false)
+    if (stat(path, &s) != 0)
     {
         return {};
     }

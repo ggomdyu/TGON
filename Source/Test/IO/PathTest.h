@@ -63,9 +63,12 @@ public:
         assert(Path::ChangeExtension("1.png", "ext") == "1.ext");
         assert(Path::ChangeExtension("png", "ext") == "png.ext");
         assert(Path::ChangeExtension("", "ext") == "");
+        assert(Path::ChangeExtension("", "..ext") == "");
         assert(Path::ChangeExtension("", "") == "");
-        assert(Path::Combine("C:/User/Sys", "C:/ibs") == "C:/ibs");
-        assert(Path::Combine("/User/Sys", "C:/ibs") == "C:/ibs");
+        assert(Path::ChangeExtension("a", ".ext") == "a.ext");
+        assert(Path::ChangeExtension("a", "ext") == "a.ext");
+        assert(Path::ChangeExtension("a", "..ext") == "a..ext");
+#if TGON_PLATFORM_WINDOWS
         assert(Path::Combine("dec", "col") == "dec\\col");
         assert(Path::Combine("dec/", "col") == "dec/col");
         assert(Path::Combine("dec", "col/") == "dec\\col/");
@@ -77,6 +80,45 @@ public:
         assert(Path::Combine("/User/Sys", "/ibs") == "/ibs");
         assert(Path::Combine("/User/Sys/", "/ibs") == "/ibs");
         assert(Path::Combine("", "") == "");
+        assert(Path::Combine("/User/Sys", "C:/ibs") == "C:/ibs");
+        assert(Path::Combine("C:/User/Sys", "C:/ibs") == "C:/ibs");
+        
+        assert(Path::GetPathRoot("/Users/chajunho/") == "\\");
+        assert(Path::GetPathRoot("/") == "\\");
+        assert(Path::GetPathRoot("/Users") == "\\");
+        assert(Path::GetPathRoot("") == "");
+        assert(Path::GetPathRoot("C:/") == "C:\\");
+        assert(Path::GetPathRoot("C:") == "C:");
+        assert(Path::GetPathRoot("C://") == "C:\\");
+        assert(Path::GetPathRoot("C:\\") == "C:\\");
+        assert(Path::GetPathRoot("\\Users\\chajunho\\") == "\\");
+        assert(Path::GetPathRoot("\\") == "\\");
+#elif TGON_PLATFORM_MACOS
+        assert(Path::Combine("dec", "col") == "dec/col");
+        assert(Path::Combine("dec/", "col") == "dec/col");
+        assert(Path::Combine("dec", "col/") == "dec/col/");
+        assert(Path::Combine("dec/", "col/.png") == "dec/col/.png");
+        assert(Path::Combine("col/2.png", "") == "col/2.png");
+        assert(Path::Combine("", "col/2.png") == "col/2.png");
+        assert(Path::Combine("/User/Sys", "ibs") == "/User/Sys/ibs");
+        assert(Path::Combine("/User/Sys", "/ibs") == "/ibs");
+        assert(Path::Combine("/User/Sys/", "/ibs") == "/ibs");
+        assert(Path::Combine("", "") == "");
+        assert(Path::Combine("C:/col/2.png", "C:/col/.png") == "C:/col/2.png/C:/col/.png");
+        assert(Path::Combine("/User/Sys", "C:/ibs") == "/User/Sys/C:/ibs");
+        assert(Path::Combine("C:/User/Sys", "C:/ibs") == "C:/User/Sys/C:/ibs");
+        
+        assert(Path::GetPathRoot("/Users/chajunho/") == "/");
+        assert(Path::GetPathRoot("/") == "/");
+        assert(Path::GetPathRoot("/Users") == "/");
+        assert(Path::GetPathRoot("") == "");
+        assert(Path::GetPathRoot("C:/") == "");
+        assert(Path::GetPathRoot("C:") == "");
+        assert(Path::GetPathRoot("C://") == "");
+        assert(Path::GetPathRoot("C:\\") == "");
+        assert(Path::GetPathRoot("\\Users\\chajunho\\") == "");
+        assert(Path::GetPathRoot("\\") == "");
+#endif
         assert(Path::GetDirectoryName("C:/1.png") == "C:");
         assert(Path::GetDirectoryName("C:\\1.png") == "");
         assert(Path::GetDirectoryName("C:/Dir/1.png") == "C:/Dir");
@@ -84,6 +126,8 @@ public:
         assert(Path::GetDirectoryName("") == "");
         assert(Path::GetDirectoryName("abc.png") == "");
         assert(Path::GetDirectoryName("abc") == "");
+        assert(Path::GetFullPath("") == "");
+        assert(Path::GetFullPath("/") == "/");
     }
 
 private:

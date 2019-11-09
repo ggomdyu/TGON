@@ -6,6 +6,7 @@
 
 #include "../Texture.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -216,3 +217,4 @@ void Texture::Destroy()
 }
 
 } /* namespace tgon */
+#endif

@@ -7,7 +7,8 @@
 #pragma once
 #include "Math/Extent.h"
 #include "Platform/Config.h"
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+
+#if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLRenderTarget.h"
 #endif
 

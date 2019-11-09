@@ -25,8 +25,7 @@ public:
     virtual void Evaluate() override
     {
         CreateTemporaryFileToEvaluateTest();
-
-        // WARNING: This test requires 1.png indesktop directory!
+        
         auto desktopPath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
         auto srcImagePath = *Environment::GetFolderPath(Environment::SpecialFolder::Desktop) + "/qwexqwexqw.png";
 

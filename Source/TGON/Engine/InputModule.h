@@ -12,12 +12,12 @@
 #include "Hardware/Mouse.h"
 #include "Hardware/Gamepad.h"
 
-#include "IModule.h"
+#include "Module.h"
 
 namespace tgon
 {
     
-struct InputMode final
+struct InputMode
 {
 /**@section Variable */
     bool isUseKeyboard = true;
@@ -25,8 +25,8 @@ struct InputMode final
     bool isUseGamepad = false;
 };
 
-class TGON_API InputModule final :
-    public IModule
+class TGON_API InputModule :
+    public Module
 {
 public:
     TGON_DECLARE_RTTI(InputModule)

@@ -5,11 +5,12 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 #include "Math/Rect.h"
 #include "Math/Color.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#include "Platform/Config.h"
+
+#if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLGraphics.h"
 #endif
 

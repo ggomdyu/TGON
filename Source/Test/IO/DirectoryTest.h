@@ -37,31 +37,18 @@ public:
         assert(Directory::Exists(newDirPath.c_str()) == false);
         assert(Directory::Exists(newDirPath2.c_str()) == true);
         
-#if TGON_PLATFORM_WINDOWS
-        assert(Path::GetPathRoot("/Users/chajunho/") == "\\");
-        assert(Path::GetPathRoot("/") == "\\");
-        assert(Path::GetPathRoot("/Users") == "\\");
-        assert(Path::GetPathRoot("") == "");
-        assert(Path::GetPathRoot("C:/") == "C:\\");
-        assert(Path::GetPathRoot("C:") == "C:");
-        assert(Path::GetPathRoot("C://") == "C:\\");
-        assert(Path::GetPathRoot("C:\\") == "C:\\");
-        assert(Path::GetPathRoot("\\Users\\chajunho\\") == "\\");
-        assert(Path::GetPathRoot("\\") == "\\");
-#else
-        assert(Path::GetPathRoot("/Users/chajunho/") == "/");
-        assert(Path::GetPathRoot("/") == "/");
-        assert(Path::GetPathRoot("/Users") == "/");
-        assert(Path::GetPathRoot("") == "");
-        assert(Path::GetPathRoot("C:/") == "");
-        assert(Path::GetPathRoot("C:") == "");
-        assert(Path::GetPathRoot("C://") == "");
-        assert(Path::GetPathRoot("C:\\") == "");
-        assert(Path::GetPathRoot("\\Users\\chajunho\\") == "");
-        assert(Path::GetPathRoot("\\") == "");
-#endif
+        assert(Directory::GetParent("").ToString() == "");
+        assert(Directory::GetParent("/").ToString() == "/");
+        assert(Directory::GetParent("/Users/chajunho/Desktop").ToString() == "/Users/chajunho/");
+        assert(Directory::GetParent("/Users").ToString() == "/");
+        assert(Directory::GetParent("/a").ToString() == "/");
         
-        assert(Directory::Delete(newDirPath2.c_str()) == true);
+        auto prevCurrDir = Directory::GetCurrentDirectory();
+        assert(Directory::SetCurrentDirectory("/Users") == true);
+        assert(Directory::GetCurrentDirectory() == "/Users");
+        assert(Directory::SetCurrentDirectory(prevCurrDir.c_str()) == true);
+
+//        assert(Directory::Delete(newDirPath2.c_str()) == true);
     }
 
 private:

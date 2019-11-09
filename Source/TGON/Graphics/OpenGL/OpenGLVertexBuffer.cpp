@@ -6,6 +6,7 @@
 
 #include "../VertexBuffer.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -121,3 +122,4 @@ void VertexBuffer::Destroy()
 }
 
 } /* namespace tgon */
+#endif

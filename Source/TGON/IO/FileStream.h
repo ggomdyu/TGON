@@ -97,11 +97,11 @@ protected:
     std::vector<std::byte>& GetBuffer() noexcept;
     void FlushWriteBuffer();
     void FlushReadBuffer();
-    int32_t ReadCore(std::byte* buffer, int32_t count);
-    int32_t WriteCore(const std::byte* buffer, int32_t count);
-    int64_t SeekCore(int64_t offset, SeekOrigin origin);
-    void FlushCore();
-    bool SetLengthCore(int64_t value);
+    int32_t InternalRead(std::byte* buffer, int32_t count);
+    int32_t InternalWrite(const std::byte* buffer, int32_t count);
+    int64_t InternalSeek(int64_t offset, SeekOrigin origin);
+    void InternalFlush();
+    bool InternalSetLength(int64_t value);
 
 /**@section Variable */
 protected:

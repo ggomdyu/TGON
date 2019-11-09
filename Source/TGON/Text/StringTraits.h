@@ -25,11 +25,11 @@ public:
 /**@section Method */
 public:
     static void Append(const _CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen);
-    template <std::size_t _DestStrBufferLen>
+    template <size_t _DestStrBufferLen>
     static void Append(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen);
-    static void Append(_CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen, _CharType ch, int32_t chCount = 1);
-    template <std::size_t _DestStrBufferLen>
-    static void Append(_CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen, _CharType ch, int32_t chCount = 1);
+    static void Append(_CharType ch, int32_t chCount, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen);
+    template <size_t _DestStrBufferLen>
+    static void Append(_CharType ch, int32_t chCount, _CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen);
     static int32_t IndexOf(const _CharType* str, int32_t strLen, const _CharType* subStr, int32_t subStrLen);
     template <typename _PredicateType>
     static int32_t IndexOfAny(const _CharType* str, int32_t strLen, const _PredicateType& predicate);
@@ -39,9 +39,9 @@ public:
     static constexpr int32_t Compare(const _CharType* lhsStr, int32_t lhsStrLen, const _CharType* rhsStr, int32_t rhsStrLen);
     static constexpr int32_t Length(const _CharType* str) noexcept;
     static void Swap(_CharType* srcStr, int32_t srcStrLen, _CharType* destStr, int32_t destStrLen);
-    template <std::size_t _DestStrBufferLen>
+    template <size_t _DestStrBufferLen>
     static void ToLower(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]);
-    template <std::size_t _DestStrBufferLen>
+    template <size_t _DestStrBufferLen>
     static void ToUpper(const _CharType* srcStr, int32_t srcStrLen, _CharType(&destStr)[_DestStrBufferLen]);
 };
 
@@ -69,13 +69,13 @@ inline void BasicStringTraits<_CharType>::Append(const _CharType* srcStr, int32_
 
 template <typename _CharType>
 template <std::size_t _DestStrBufferLen>
-inline void BasicStringTraits<_CharType>::Append(_CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen, _CharType ch, int32_t chCount)
+inline void BasicStringTraits<_CharType>::Append(_CharType ch, int32_t chCount, _CharType(&destStr)[_DestStrBufferLen], int32_t destStrLen)
 {
     Append(destStr, destStrLen, _DestStrBufferLen, ch, chCount);
 }
 
 template <typename _CharType>
-inline void BasicStringTraits<_CharType>::Append(_CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen, _CharType ch, int32_t chCount)
+inline void BasicStringTraits<_CharType>::Append(_CharType ch, int32_t chCount, _CharType* destStr, int32_t destStrLen, int32_t destStrBufferLen)
 {
     assert(destStrBufferLen > chCount + destStrLen && "String buffer overflowed!");
 

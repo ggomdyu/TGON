@@ -10,7 +10,7 @@
 
 #include "Platform/Config.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLIndexBuffer.h"
 #endif
 

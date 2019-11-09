@@ -4,6 +4,7 @@
 
 #include "OpenGLRenderTarget.h"
 
+#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 
@@ -142,3 +143,4 @@ void OpenGLRenderTarget::Destroy()
 }
     
 } /* namespace tgon */
+#endif

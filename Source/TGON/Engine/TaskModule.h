@@ -9,15 +9,15 @@
 #include <array>
 #include <memory>
 
-#include "Thread/DispatchQueue.h"
+#include "Threading/DispatchQueue.h"
 
-#include "IModule.h"
+#include "Module.h"
 
 namespace tgon
 {
 
 class TGON_API TaskModule final :
-	public IModule
+	public Module
 {
 public:
     TGON_DECLARE_RTTI(TaskModule)

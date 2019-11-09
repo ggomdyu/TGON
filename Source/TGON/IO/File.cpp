@@ -82,9 +82,28 @@ std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path)
     return ret;
 }
 
-std::string File::ReadAllText(const char* path)
+std::optional<std::string> File::ReadAllText(const char* path)
 {
-    return ReadAllText(path, Encoding::UTF8());
+    FileStream fs(path, FileMode::Open, FileAccess::Read, FileShare::Read);
+    if (fs.IsClosed() || fs.Length() > INT_MAX)
+    {
+        return {};
+    }
+
+    int32_t fileBytes = static_cast<int32_t>(fs.Length());
+    int32_t index = 0;
+
+    std::string ret;
+    ret.resize(static_cast<size_t>(fileBytes));
+    while (fileBytes > 0)
+    {
+        auto readBytes = fs.Read(reinterpret_cast<std::byte*>(&ret[index]), 4096);
+
+        index += readBytes;
+        fileBytes -= readBytes;
+    }
+
+    return ret;
 }
 
 FileStream File::Create(const char* path)

@@ -5,15 +5,16 @@
  */
 
 #pragma once
-#include "Engine/IModule.h"
 #include "Graphics/Graphics.h"
 #include "UI/UIRenderer.h"
+
+#include "Module.h"
 
 namespace tgon
 {
 
 class TGON_API GraphicsModule :
-    public IModule
+    public Module
 {
 public:
     TGON_DECLARE_RTTI(GraphicsModule)

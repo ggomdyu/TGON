@@ -9,53 +9,109 @@
 
 #include "Platform/Config.h"
 
+#include "FileSystemEnumerable.h"
+
 namespace tgon
 {
 
-class DirectoryInfo// : FileSystemInfo
+struct FullPathTag {};
+
+class DirectoryInfo
 {
 /**@section Constructor */
 public:
     explicit DirectoryInfo(const std::string_view& path);
+    DirectoryInfo(const std::string_view& path, FullPathTag);
     
 public:
-    bool IsExists();
-    std::string_view GetName() const;
+    void Create() const;
+    DirectoryInfo CreateSubdirectory(const std::string_view& path) const;
+    bool Delete(bool recursive = false) const;
+    bool IsExists() const;
+    bool MoveTo(const char* destDirName) const;
+    std::string_view GetName() const noexcept;
+    DirectoryInfo GetRoot() const;
     DirectoryInfo GetParent() const;
-//    DirectoryInfo GetRoot();
-//    void Create();
-//    DirectoryInfo CreateSubdirectory(const std::string_view& path);
-    bool Delete(bool recursive = false);
-//    IEnumerable<DirectoryInfo> EnumerateDirectories();
-//    IEnumerable<DirectoryInfo> EnumerateDirectories(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    IEnumerable<DirectoryInfo> EnumerateDirectories(const std::string_view& searchPattern);
-//    IEnumerable<FileInfo> EnumerateFiles();
-//    IEnumerable<FileInfo> EnumerateFiles(const std::string_view& searchPattern);
-//    IEnumerable<FileInfo> EnumerateFiles(const std::string_view& searchPattern, SearchOption searchOption);
-//    IEnumerable<FileInfo> EnumerateFiles(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    IEnumerable<FileSystemInfo> EnumerateFileSystemInfos();
-//    IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(const std::string_view& searchPattern);
-//    IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(const std::string_view& searchPattern, SearchOption searchOption);
-//    IEnumerable<DirectoryInfo> EnumerateDirectories(const std::string_view& searchPattern, SearchOption searchOption);
-//    DirectoryInfo[] GetDirectories();
-//    DirectoryInfo[] GetDirectories(const std::string_view& searchPattern);
-//    DirectoryInfo[] GetDirectories(const std::string_view& searchPattern, SearchOption searchOption);
-//    DirectoryInfo[] GetDirectories(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    FileInfo[] GetFiles();
-//    FileInfo[] GetFiles(const std::string_view& searchPattern);
-//    FileInfo[] GetFiles(const std::string_view& searchPattern, SearchOption searchOption);
-//    FileInfo[] GetFiles(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    FileSystemInfo[] GetFileSystemInfos();
-//    FileSystemInfo[] GetFileSystemInfos(const std::string_view& searchPattern);
-//    FileSystemInfo[] GetFileSystemInfos(const std::string_view& searchPattern, SearchOption searchOption);
-//    FileSystemInfo[] GetFileSystemInfos(const std::string_view& searchPattern, EnumerationOptions enumerationOptions);
-//    void MoveTo(const std::string_view& destDirName);
-//    string_view ToString();
+    std::vector<std::string> GetDirectories(const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    std::vector<std::string> GetFiles(const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    std::vector<std::string> GetFileSystemEntries(const char* searchPattern = "*", SearchOption searchOption = SearchOption::TopDirectoryOnly);
+    template <typename _HandlerType>
+    void EnumerateDirectories(const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateDirectories(const char* searchPattern, const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateDirectories(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateFiles(const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateFiles(const char* searchPattern, const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateFiles(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler) const;
+    template <typename _HandlerType>
+    void EnumerateFileSystemEntries(const _HandlerType& handler);
+    template <typename _HandlerType>
+    void EnumerateFileSystemEntries(const char* searchPattern, const _HandlerType& handler);
+    template <typename _HandlerType>
+    void EnumerateFileSystemEntries(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler);
+    const std::string& ToString() const noexcept;
     
 /**@section Variable */
 private:
     std::string m_fullPath;
 };
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateDirectories(const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateDirectories(m_fullPath.c_str(), handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateDirectories(const char* searchPattern, const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateDirectories(m_fullPath.c_str(), searchPattern, handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateDirectories(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateDirectories(m_fullPath.c_str(), searchPattern, searchOption, handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFiles(const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateFiles(m_fullPath.c_str(), handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFiles(const char* searchPattern, const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateFiles(m_fullPath.c_str(), searchPattern, handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFiles(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler) const
+{
+    FileSystemEnumerable::EnumerateFiles(m_fullPath.c_str(), searchPattern, searchOption, handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFileSystemEntries(const _HandlerType& handler)
+{
+    FileSystemEnumerable::EnumerateFileSystemEntries(m_fullPath.c_str(), handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFileSystemEntries(const char* searchPattern, const _HandlerType& handler)
+{
+    FileSystemEnumerable::EnumerateFileSystemEntries(m_fullPath.c_str(), searchPattern, handler);
+}
+
+template <typename _HandlerType>
+inline void DirectoryInfo::EnumerateFileSystemEntries(const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
+{
+    FileSystemEnumerable::EnumerateFileSystemEntries(m_fullPath.c_str(), searchPattern, searchOption, handler);
+}
 
 } /* namespace tgon */

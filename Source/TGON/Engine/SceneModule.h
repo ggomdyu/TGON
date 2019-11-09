@@ -8,13 +8,14 @@
 #include <memory>
 
 #include "Game/Scene.h"
-#include "Engine/IModule.h"
+
+#include "Module.h"
 
 namespace tgon
 {
 
-class TGON_API SceneModule final :
-    public IModule
+class TGON_API SceneModule :
+    public Module
 {
 public:
     TGON_DECLARE_RTTI(SceneModule)

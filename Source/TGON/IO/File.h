@@ -64,8 +64,7 @@ public:
     static std::optional<FileAttributes> GetAttributes(const char* path);
     static bool Decrypt(const char* path);
     static bool Encrypt(const char* path);
-    static std::string ReadAllText(const char* path);
-    static std::string ReadAllText(const char* path, const Encoding& encoding);
+    static std::optional<std::string> ReadAllText(const char* path);
     static std::optional<std::vector<std::byte>> ReadAllBytes(const char* path);
     static FileStream Create(const char* path);
     static FileStream Create(const char* path, int32_t bufferSize);

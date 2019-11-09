@@ -20,7 +20,7 @@ public:
 
 /**@section Constructor */
 public:
-    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite);
+    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite = nullptr);
 
 /**@section Method */
 public:

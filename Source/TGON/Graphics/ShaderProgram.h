@@ -8,8 +8,9 @@
 #include <array>
 
 #include "Math/Vector4.h"
+#include "Platform/Config.h"
 
-#if (TGON_PLATFORM_WINDOWS || TGON_PLATFORM_MACOS)
+#if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLShaderProgram.h"
 #endif
 

@@ -7,13 +7,13 @@
 #pragma once
 #include "Audio/AudioDevice.h"
 
-#include "IModule.h"
+#include "Module.h"
 
 namespace tgon
 {
 
-class TGON_API AudioModule final :
-	public IModule
+class TGON_API AudioModule :
+	public Module
 {
 public:
     TGON_DECLARE_RTTI(AudioModule)

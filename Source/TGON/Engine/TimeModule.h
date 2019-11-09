@@ -5,13 +5,13 @@
  */
 
 #pragma once
-#include "IModule.h"
+#include "Module.h"
 
 namespace tgon
 {
 
 class TGON_API TimeModule final :
-	public IModule
+	public Module
 {
 public:
     TGON_DECLARE_RTTI(TimeModule)
