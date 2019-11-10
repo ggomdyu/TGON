@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 void Debug::Write(const std::string_view& message)
 {

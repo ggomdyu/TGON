@@ -242,7 +242,7 @@ template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsTyp
 inline BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator+=(const std::basic_string_view<_CharType>& rhs)
 {
     _StringTraitsType::Append(rhs.data(), static_cast<int32_t>(rhs.length()), m_str.data(), m_strLen, static_cast<int32_t>(m_str.size()));
-    m_strLen += rhs.length();
+    m_strLen += static_cast<int32_t>(rhs.length());
 
     return *this;
 }

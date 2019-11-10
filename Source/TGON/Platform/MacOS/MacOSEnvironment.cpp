@@ -52,13 +52,13 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* 
     const char* envValue = getenv(name.data());
     if (envValue == nullptr)
     {
-        return 0;
+        return -1;
     }
     
     size_t envValueBytes = strlen(envValue);
     if (envValueBytes + 1 > destStrBufferLen)
     {
-        return 0;
+        return -1;
     }
     
     memcpy(destStr, envValue, envValueBytes + 1);

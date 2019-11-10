@@ -15,7 +15,7 @@
 namespace tgon
 {
 
-thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 TGON_API void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
@@ -318,13 +318,13 @@ void Window::GetWindowSize(int32_t* width, int32_t* height) const
 
 int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
 {
-    auto utf16TitleLen = GetWindowTextW(m_wndHandle, &g_tempUtf16Buffer[0], 256);
+    auto utf16TitleLen = GetWindowTextW(m_wndHandle, g_tempUtf16Buffer.data(), 256);
     if (utf16TitleLen == 0)
     {
         return -1;
     }
 
-    auto utf8TitleBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16TitleLen * 2), reinterpret_cast<std::byte*>(destTitle), destTitleBufferLen);
+    auto utf8TitleBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(g_tempUtf16Buffer.data()), static_cast<int32_t>(utf16TitleLen * 2), reinterpret_cast<std::byte*>(destTitle), destTitleBufferLen);
     if (utf8TitleBytes == -1)
     {
         return -1;
@@ -413,8 +413,8 @@ void Window::SetContentSize(int32_t width, int32_t height)
 {
     RECT rt{0, 0, width, height};
 
-    DWORD rawWindowStyle = this->GetRawWindowStyle();
-    DWORD rawExtendedWindowStyle = this->GetRawWindowStyleEx();
+    auto rawWindowStyle = this->GetRawWindowStyle();
+    auto rawExtendedWindowStyle = this->GetRawWindowStyleEx();
 
     AdjustWindowRectEx(&rt, rawWindowStyle, GetMenu(m_wndHandle) != nullptr, rawExtendedWindowStyle);
 

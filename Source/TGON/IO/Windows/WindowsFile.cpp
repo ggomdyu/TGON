@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 namespace
 {
@@ -31,7 +31,7 @@ std::optional<struct _stat> CreateStat(const std::string_view& path)
     }
 
     struct _stat s;
-    if (_wstat(reinterpret_cast<const wchar_t*>(g_tempUtf16Buffer.data()), &s) != 0)
+    if (_wstat(reinterpret_cast<const wchar_t*>(&g_tempUtf16Buffer[0]), &s) != 0)
     {
         return {};
     }
@@ -57,7 +57,7 @@ bool File::Delete(const char* path)
         return false;
     }
 
-    return _wremove(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data())) == 0;
+    return _wremove(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0])) == 0;
 }
 
 bool File::Exists(const char* path)
@@ -121,7 +121,7 @@ bool File::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
     }
 
     // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -145,7 +145,7 @@ bool File::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTime
     }
 
     // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -169,7 +169,7 @@ bool File::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUt
     }
 
     // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -204,7 +204,7 @@ std::optional<FileAttributes> File::GetAttributes(const char* path)
     }
 
     WIN32_FILE_ATTRIBUTE_DATA fileAttributeData;
-    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
+    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
     {
         return {};
     }
@@ -219,7 +219,7 @@ bool File::Decrypt(const char* path)
         return false;
     }
 
-    return DecryptFileW(g_tempUtf16Buffer.data(), 0) == TRUE;
+    return DecryptFileW(&g_tempUtf16Buffer[0], 0) == TRUE;
 }
 
 bool File::Encrypt(const char* path)
@@ -229,13 +229,7 @@ bool File::Encrypt(const char* path)
         return false;
     }
 
-    return EncryptFileW(g_tempUtf16Buffer.data()) == TRUE;
-}
-
-std::string File::ReadAllText(const char* path, const Encoding& encoding)
-{
-    // TODO: Implement
-    return std::string(nullptr);
+    return EncryptFileW(&g_tempUtf16Buffer[0]) == TRUE;
 }
 
 } /* namespace tgon */

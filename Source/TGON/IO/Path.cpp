@@ -13,7 +13,7 @@ namespace tgon
 
 std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = Combine(path1, path2, str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
@@ -74,7 +74,7 @@ int32_t Path::Combine(const std::string_view& path1, const std::string_view& pat
 
 std::string Path::ChangeExtension(const std::string_view& path, const std::string_view& extension)
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = ChangeExtension(path, extension, str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
@@ -136,7 +136,7 @@ std::string Path::GetFullPath(const std::string_view& path)
     std::string collapsedString;
     if (!Path::IsPathRooted(path))
     {
-        std::array<char, 16384> str;
+        std::array<char, 8192> str;
         int32_t collapsedStringLen = Path::Combine(Directory::GetCurrentDirectory(), path, str.data(), static_cast<int32_t>(str.size()));
         collapsedString = RemoveRelativeSegments(std::string_view(&str[0], collapsedStringLen));
     }
@@ -182,14 +182,14 @@ int32_t Path::GetRandomFileName(char* destStr, int32_t destStrBufferLen)
 
 std::string Path::GetRandomFileName()
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = GetRandomFileName(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Path::GetTempPath()
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = GetTempPath(str.data(), static_cast<int32_t>(str.size()));
     if (strLen == -1)
     {

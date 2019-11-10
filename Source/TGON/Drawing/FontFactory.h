@@ -44,7 +44,7 @@ class TGON_API FontFace final :
 {
 /**@section Constructor */
 public:
-    FontFace(const std::byte* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize);
+    FontFace(const std::vector<std::byte>& fileData, FT_Library library, FontSize fontSize);
     FontFace(FontFace&& rhs) noexcept;
     
 /**@section Destructor */
@@ -76,7 +76,8 @@ class TGON_API Font final :
 /**@section Constructor */
 public:
     Font(const char* filePath, FT_Library library);
-    Font(std::unique_ptr<std::byte[]> fileData, std::size_t fileDataBytes, FT_Library library);
+    Font(const std::vector<std::byte>& fileData, FT_Library library);
+    Font(std::vector<std::byte>&& fileData, FT_Library library);
     Font(Font&& rhs) noexcept;
     
 /**@section Destructor */
@@ -95,8 +96,7 @@ public:
 
 /**@section Variable */
 private:
-    std::unique_ptr<std::byte[]> m_fileData;
-    std::size_t m_fileDataBytes;
+    std::vector<std::byte> m_fileData;
     FT_Library m_library;
     mutable std::unordered_map<FontSize, FontFace> m_fontFaces;
 };

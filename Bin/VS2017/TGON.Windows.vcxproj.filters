@@ -44,9 +44,6 @@
     <Filter Include="Sources\TGON\Platform\Windows">
       <UniqueIdentifier>{f7c95d5c-577a-424d-a08c-a882b388c77f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\TGON\Thread">
-      <UniqueIdentifier>{6da44ec8-91b0-4b16-ac4e-0a59b80769ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\TGON\Time">
       <UniqueIdentifier>{2d4aea76-2a06-4e16-9273-531623986f10}</UniqueIdentifier>
     </Filter>
@@ -56,7 +53,10 @@
     <Filter Include="Sources\TGON\IO\Windows">
       <UniqueIdentifier>{7140f2e3-bf67-468e-af71-f38829ce569b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\TGON\Thread\Windows">
+    <Filter Include="Sources\TGON\Threading">
+      <UniqueIdentifier>{6da44ec8-91b0-4b16-ac4e-0a59b80769ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\TGON\Threading\Windows">
       <UniqueIdentifier>{d0c6a97a-117e-4d09-b92a-f77e4d48fca1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -186,9 +186,6 @@
     <ClCompile Include="..\..\Source\TGON\IO\Windows\WindowsFile.cpp">
       <Filter>Sources\TGON\IO\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Thread\Windows\WindowsThread.cpp">
-      <Filter>Sources\TGON\Thread\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Diagnostics\Windows\WindowsDebug.cpp">
       <Filter>Sources\TGON\Diagnostics\Windows</Filter>
     </ClCompile>
@@ -201,9 +198,15 @@
     <ClCompile Include="..\..\Source\TGON\IO\Windows\WindowsDirectory.cpp">
       <Filter>Sources\TGON\IO\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\TGON\Threading\Windows\WindowsThread.cpp">
+      <Filter>Sources\TGON\Threading\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\TGON\IO\Windows\WindowsDirectory.inl">
+    <None Include="..\..\Source\TGON\IO\Windows\WindowsFileSystemEnumerable.inl">
+      <Filter>Sources\TGON\IO\Windows</Filter>
+    </None>
+    <None Include="..\..\Source\TGON\IO\Windows\WindowsPath.inl">
       <Filter>Sources\TGON\IO\Windows</Filter>
     </None>
   </ItemGroup>

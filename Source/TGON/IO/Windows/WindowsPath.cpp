@@ -8,18 +8,7 @@
 namespace tgon
 {
 
-thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
-
-int32_t Path::GetTempPath(char* destStr, int32_t destStrBufferLen)
-{
-    DWORD strLen = GetTempPathW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
-    if (strLen == 0)
-    {
-        return -1;
-    }
-
-    return Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(strLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
-}
+thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 gsl::span<const char> Path::GetInvalidFileNameChars() noexcept
 {

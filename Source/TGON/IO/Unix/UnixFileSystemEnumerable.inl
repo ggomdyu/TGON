@@ -25,7 +25,7 @@ template <typename _HandlerType>
 inline void InternalEnumerateAllDirectories(const char* path, const char* searchPattern, uint8_t filterType, const _HandlerType& handler)
 {
     std::deque<std::string> directories(1, std::string(path));
-    std::array<char, 16384> newPath;
+    std::array<char, 8192> newPath;
     
     do
     {
@@ -36,15 +36,15 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
         {
             struct dirent* ent;
             while ((ent = readdir(dir)) != nullptr)
-            {
-                // Ignore the . and ..
-                if ((ent->d_namlen == 1 && ent->d_name[0] == '.') || (ent->d_namlen == 2 && !strcmp(ent->d_name, "..")))
-                {
-                    continue;
-                }
-                
+            {   
                 if (ent->d_type & DT_DIR)
                 {
+                    // Ignore the . and ..
+                    if ((ent->d_namlen == 1 && ent->d_name[0] == '.') || (ent->d_namlen == 2 && !strcmp(ent->d_name, "..")))
+                    {
+                        continue;
+                    }
+                    
                     directories.push_back(Path::Combine(currPath, {ent->d_name, ent->d_namlen}));
                 }
                 
@@ -84,7 +84,7 @@ inline void InternalEnumerateTopDirectoryOnly(const char* path, const char* sear
     DIR* dir = opendir(path);
     if (dir != nullptr)
     {
-        std::array<char, 16384> newPath;
+        std::array<char, 8192> newPath;
         
         struct dirent* ent;
         while ((ent = readdir(dir)) != nullptr)

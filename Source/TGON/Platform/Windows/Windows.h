@@ -10,5 +10,8 @@
 #endif
 #include <Windows.h>
 
+#undef SetCurrentDirectory
 #undef GetCurrentDirectory
 #undef CreateDirectory
+#undef SetEnvironmentVariable
+#undef GetEnvironmentVariable

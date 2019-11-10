@@ -173,7 +173,7 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsMain.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsScreen.cpp" />
     <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="..\..\Source\TGON\Thread\Windows\WindowsThread.cpp" />
+    <ClCompile Include="..\..\Source\TGON\Threading\Windows\WindowsThread.cpp" />
     <ClCompile Include="..\..\Source\TGON\Time\Windows\WindowsTimeZoneInfo.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -242,7 +242,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\TGON\IO\Windows\WindowsDirectory.inl" />
+    <None Include="..\..\Source\TGON\IO\Windows\WindowsFileSystemEnumerable.inl" />
+    <None Include="..\..\Source\TGON\IO\Windows\WindowsPath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

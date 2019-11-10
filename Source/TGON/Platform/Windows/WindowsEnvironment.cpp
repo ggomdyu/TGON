@@ -23,83 +23,69 @@
 #pragma comment(lib, "psapi.lib")
 #pragma comment(lib, "dbghelp.lib")
 
+#define TGON_THROW_SEH_EXCEPTION() volatile int temp = 0; temp = 1 / temp;
+
 namespace tgon
 {
 
-thread_local std::array<wchar_t, 32767> g_tempUtf16Buffer;
+thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 bool Environment::SetEnvironmentVariable(const std::string_view& name, const std::string_view& value)
 {
-    const wchar_t* utf16Name = &g_tempUtf16Buffer[0];
-    auto utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(name.data()), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
+    gsl::span<wchar_t> utf16Name(&g_tempUtf16Buffer[0], g_tempUtf16Buffer.size() / 2);
+    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
     if (utf16NameBytes == -1)
     {
         return false;
     }
 
-    auto utf16NameLen = utf16NameBytes / 2;
-    const wchar_t* utf16Value = &g_tempUtf16Buffer[utf16NameLen + 1];
-    auto utf16ValueBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&value[0]), static_cast<int32_t>(value.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[utf16NameLen + 1]), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16NameBytes + sizeof(wchar_t))));
+    gsl::span<wchar_t> utf16Value(&g_tempUtf16Buffer[g_tempUtf16Buffer.size() / 2], g_tempUtf16Buffer.size() / 2);
+    int32_t utf16ValueBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&value[0]), static_cast<int32_t>(value.size()), reinterpret_cast<std::byte*>(&utf16Value[0]), static_cast<int32_t>(utf16Value.size()));
     if (utf16ValueBytes == -1)
     {
         return false;
     }
 
-    return SetEnvironmentVariableW(utf16Name, utf16Value) == TRUE;
+    return SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]) == TRUE;
 }
 
 int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen)
 {
-    do
+    gsl::span<wchar_t> utf16Name(&g_tempUtf16Buffer[0], g_tempUtf16Buffer.size() / 2);
+    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
+    if (utf16NameBytes == -1)
     {
-        const wchar_t* utf16Name = &g_tempUtf16Buffer[0];
-        auto utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(name.data()), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
-        if (utf16NameBytes == -1)
-        {
-            break;
-        }
-
-        auto utf16NameLen = utf16NameBytes / 2;
-        const wchar_t* utf16Value = &g_tempUtf16Buffer[utf16NameLen + 1];
-        DWORD utf16ValueLen = GetEnvironmentVariableW(utf16Name, &g_tempUtf16Buffer[utf16NameLen + 1], static_cast<DWORD>(g_tempUtf16Buffer.size() - (utf16NameBytes + sizeof(wchar_t))));
-        if (utf16ValueLen == 0)
-        {
-            break;
-        }
-
-        auto utf8StrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(utf16Value), static_cast<int32_t>(utf16ValueLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
-        if (utf8StrLen >= 0)
-        {
-            return utf8StrLen;
-        }
+        return -1;
     }
-    while (false);
 
-    return -1;
+    gsl::span<wchar_t> utf16Value(&g_tempUtf16Buffer[g_tempUtf16Buffer.size() / 2], g_tempUtf16Buffer.size() / 2);
+    DWORD utf16ValueBytes = GetEnvironmentVariableW(&utf16Name[0], &utf16Value[0], static_cast<DWORD>(utf16Value.size())) * 2;
+    if (utf16ValueBytes == 0)
+    {
+        return -1;
+    }
+
+    return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&utf16Value[0]), static_cast<int32_t>(utf16ValueBytes), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen));
 }
 
 int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const gsl::span<char>& destStr)
 {
-    return GetEnvironmentVariable(name, &destStr[0], destStr.size());
+    return GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
-    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, g_tempUtf16Buffer.data()) == S_OK)
+    if (SHGetFolderPathW(nullptr, static_cast<int>(folder), nullptr, 0, &g_tempUtf16Buffer[0]) == S_OK)
     {
-        auto utf8StrLen = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(wcslen(&g_tempUtf16Buffer[0]) * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen);
-        if (utf8StrLen >= 0)
-        {
-            return utf8StrLen;
-        }
+        return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(wcslen(&g_tempUtf16Buffer[0]) * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen));
     }
 
-    return -1;
+    return 0;
 }
 
 int32_t Environment::GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr)
 {
-    return GetFolderPath(folder, &destStr[0], destStr.size());
+    return GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 const std::string& Environment::GetCommandLine()
@@ -109,7 +95,7 @@ const std::string& Environment::GetCommandLine()
         std::wstring_view commandLine = GetCommandLineW();
 
         auto utf8Str = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&commandLine[0]), static_cast<int32_t>(commandLine.size() * 2));
-        return std::string(reinterpret_cast<const char*>(utf8Str.data()), utf8Str.size());
+        return std::string(reinterpret_cast<const char*>(&utf8Str[0]), utf8Str.size());
     } ();
     return commandLine;
 }
@@ -165,11 +151,11 @@ void Environment::FailFast(const std::string_view& message)
 
 void Environment::FailFast(const std::string_view& message, const std::exception& exception)
 {
-    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(message.data()), static_cast<int32_t>(message.size()));
+    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(message.size()));
     utf16Message.insert(utf16Message.end(), { std::byte('\n'), std::byte(0), std::byte(0), std::byte(0) });
 
     OutputDebugStringW(L"FailFast:\n");
-    OutputDebugStringW(reinterpret_cast<const wchar_t*>(utf16Message.data()));
+    OutputDebugStringW(reinterpret_cast<const wchar_t*>(&utf16Message[0]));
 
     throw exception;
 }
@@ -195,60 +181,48 @@ int32_t Environment::GetCurrentManagedThreadId()
 
 int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 {
-    DWORD utf16BufferLen = g_tempUtf16Buffer.size();
+    DWORD utf16BufferLen = static_cast<DWORD>(g_tempUtf16Buffer.size());
     if (GetUserNameW(&g_tempUtf16Buffer[0], &utf16BufferLen) == TRUE)
     {
-        auto utf8StrBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
-        if (utf8StrBytes >= 0)
-        {
-            return utf8StrBytes;
-        }
+        return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen)));
     }
 
-    return -1;
+    return 0;
 }
 
 int32_t Environment::GetUserName(const gsl::span<char>& destStr)
 {
-    return GetUserName(&destStr[0], destStr.size());
+    return GetUserName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 {
-    DWORD utf16BufferLen = g_tempUtf16Buffer.size();
+    DWORD utf16BufferLen = static_cast<DWORD>(g_tempUtf16Buffer.size());
     if (GetComputerNameW(&g_tempUtf16Buffer[0], &utf16BufferLen) == TRUE)
     {
-        auto utf8StrBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
-        if (utf8StrBytes >= 0)
-        {
-            return utf8StrBytes;
-        }
+        return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen)));
     }
 
-    return -1;
+    return 0;
 }
 
 int32_t Environment::GetMachineName(const gsl::span<char>& destStr)
 {
-    return GetMachineName(&destStr[0], destStr.size());
+    return GetMachineName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
 {
-    DWORD utf16BufferLen = g_tempUtf16Buffer.size();
+    DWORD utf16BufferLen = static_cast<DWORD>(g_tempUtf16Buffer.size());
     if (GetUserNameExW(NameSamCompatible, &g_tempUtf16Buffer[0], &utf16BufferLen) == TRUE)
     {
         if (const wchar_t* str = wcschr(&g_tempUtf16Buffer[0], '\\'); str != nullptr)
         {
-            auto utf8StrBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(str - &g_tempUtf16Buffer[0]) * 2, reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
-            if (utf8StrBytes >= 0)
-            {
-                return utf8StrBytes;
-            }
+            return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(str - &g_tempUtf16Buffer[0]) * 2, reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen)));
         }
     }
 
-    utf16BufferLen = g_tempUtf16Buffer.size();
+    utf16BufferLen = static_cast<DWORD>(g_tempUtf16Buffer.size());
 
     wchar_t userName[256];
     DWORD userNameBufferLen = std::extent_v<decltype(userName)>;
@@ -259,20 +233,16 @@ int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
         DWORD sidLen = std::extent_v<decltype(sid)>;
         if (LookupAccountNameW(nullptr, userName, sid, &sidLen, &g_tempUtf16Buffer[0], &utf16BufferLen, &peUse) == TRUE)
         {
-            auto utf8StrBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen));
-            if (utf8StrBytes >= 0)
-            {
-                return utf8StrBytes;
-            }
+            return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16BufferLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), static_cast<int32_t>(destStrBufferLen)));
         }
     }
 
-    return -1;
+    return 0;
 }
 
 int32_t Environment::GetUserDomainName(const gsl::span<char>& destStr)
 {
-    return GetUserDomainName(&destStr[0], destStr.size());
+    return GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destStrBufferLen, int32_t* destStrLen)
@@ -281,7 +251,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
     HANDLE processHandle = GetCurrentProcess();
     if (SymInitialize(processHandle, nullptr, false) == FALSE)
     {
-        *destStrLen = -1;
+        *destStrLen = 0;
         return EXCEPTION_EXECUTE_HANDLER;
     }
 
@@ -310,7 +280,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
     DWORD moduleHandlesSize = 0;
     EnumProcessModules(processHandle, nullptr, 0, &moduleHandlesSize);
     moduleHandles.resize(moduleHandlesSize / sizeof(HMODULE));
-    EnumProcessModules(processHandle, &moduleHandles[0], moduleHandles.size() * sizeof(HMODULE), &moduleHandlesSize);
+    EnumProcessModules(processHandle, &moduleHandles[0], static_cast<DWORD>(moduleHandles.size() * sizeof(HMODULE)), &moduleHandlesSize);
 
     void* baseModuleAddress = nullptr;
     for (auto iter = moduleHandles.rbegin(); iter != moduleHandles.rend(); ++iter)
@@ -320,9 +290,9 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
         GetModuleInformation(processHandle, moduleHandle, &moduleInfo, sizeof(moduleInfo));
 
         std::array<char, 4096> imageName;
-        GetModuleFileNameExA(processHandle, moduleHandle, imageName.data(), sizeof(imageName));
+        GetModuleFileNameExA(processHandle, moduleHandle, &imageName[0], sizeof(imageName));
         std::array<char, 4096> moduleName;
-        GetModuleBaseNameA(processHandle, moduleHandle, moduleName.data(), sizeof(moduleName));
+        GetModuleBaseNameA(processHandle, moduleHandle, &moduleName[0], sizeof(moduleName));
 
         SymLoadModule64(processHandle, 0, &imageName[0], &moduleName[0], reinterpret_cast<DWORD64>(moduleInfo.lpBaseOfDll), moduleInfo.SizeOfImage);
 
@@ -346,7 +316,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
         if (frame.AddrPC.Offset != 0)
         {
             std::array<std::byte, sizeof(IMAGEHLP_SYMBOL64) + 1024> symBytes {};
-            IMAGEHLP_SYMBOL64* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(symBytes.data());
+            IMAGEHLP_SYMBOL64* sym = reinterpret_cast<IMAGEHLP_SYMBOL64*>(&symBytes[0]);
             sym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
             sym->MaxNameLength = static_cast<DWORD>(undecoratedName.size());
             SymGetSymFromAddr64(processHandle, frame.AddrPC.Offset, &displacement, sym);
@@ -360,7 +330,7 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
             // Get the file name and line
             SymGetLineFromAddr64(processHandle, frame.AddrPC.Offset, &offsetFromSymbol, &line);
 
-            *destStrLen += sprintf_s(destStr + *destStrLen, destStrBufferLen - *destStrLen, "   at %s in %s:line %d\n", undecoratedName.data(), line.FileName, line.LineNumber);
+            *destStrLen += sprintf_s(destStr + *destStrLen, static_cast<size_t>(destStrBufferLen) - *destStrLen, "   at %s in %s:line %d\n", &undecoratedName[0], line.FileName, line.LineNumber);
         }
 
         if (StackWalk64(imageType, processHandle, threadHandle, &frame, context, nullptr, SymFunctionTableAccess64, SymGetModuleBase64, nullptr) == FALSE)
@@ -376,17 +346,13 @@ DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destS
 
 int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
 {
-    int32_t ret;
+    int32_t destStrLen = 0;
+    __try { TGON_THROW_SEH_EXCEPTION(); }
+    __except (InternalGetStackTrace(GetExceptionInformation(), destStr, destStrBufferLen, &destStrLen)) {}
 
-    __try {
-        volatile int temp = 0;
-        temp = 1 / temp;
-    }
-    __except (InternalGetStackTrace(GetExceptionInformation(), destStr, destStrBufferLen, &ret)) 
-    {
-    }
-
-    return ret;
+    return destStrLen;
 }
 
 } /* namespace tgon */
+
+#undef TGON_THROW_SEH_EXCEPTION

@@ -13,13 +13,13 @@ namespace tgon
 
 std::optional<std::string> Environment::GetEnvironmentVariable(const std::string_view& name)
 {
-    std::array<char, 16384> str;
+    std::array<char, 4096> str;
     auto strLen = GetEnvironmentVariable(name, str.data(), static_cast<int32_t>(str.size()));
     if (strLen == -1)
     {
         return {};
     }
-    
+
     return std::string(str.data(), static_cast<size_t>(strLen));
 }
 
@@ -74,7 +74,7 @@ int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen
 
 std::string Environment::GetFolderPath(SpecialFolder folder)
 {
-    std::array<char, 16384> str;
+    std::array<char, 4096> str;
     auto strLen = GetFolderPath(folder, str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
@@ -91,28 +91,28 @@ int32_t Environment::GetProcessorCount()
 
 std::string Environment::GetUserName()
 {
-    std::array<char, 16384> str;
+    std::array<char, 4096> str;
     auto strLen = GetUserName(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Environment::GetMachineName()
 {
-    std::array<char, 16384> str;
+    std::array<char, 4096> str;
     auto strLen = GetMachineName(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Environment::GetUserDomainName()
 {
-    std::array<char, 16384> str;
+    std::array<char, 4096> str;
     auto strLen = GetUserDomainName(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
 std::string Environment::GetStackTrace()
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = GetStackTrace(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }

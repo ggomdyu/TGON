@@ -70,8 +70,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WELL1024a.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Encoding.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Hash.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\DispatchQueue.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\Thread.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp" />
@@ -1705,6 +1705,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\DirectoryInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\File.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileStream.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileSystemEnumerable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Path.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Stream.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Math\Color.h" />
@@ -1742,8 +1743,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\StringTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\UnicodeScalar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\UUID.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\DispatchQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\Thread.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Stopwatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Time.h" />

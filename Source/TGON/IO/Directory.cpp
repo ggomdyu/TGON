@@ -35,7 +35,7 @@ DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
 
 DirectoryInfo Directory::GetParent(const std::string_view& path)
 {
-    FixedString16384 str(path);
+    FixedString8192 str(path);
     if (path.length() > 0)
     {
         if (Path::IsDirectorySeparator(str[str.Length() - 1]) == false)
@@ -55,7 +55,7 @@ DirectoryInfo Directory::GetParent(const std::string_view& path)
 
 std::string Directory::GetCurrentDirectory()
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
     return {str.data(), static_cast<size_t>(strLen)};
 }

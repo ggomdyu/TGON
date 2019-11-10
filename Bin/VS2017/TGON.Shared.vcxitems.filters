@@ -76,9 +76,6 @@
     <Filter Include="Source\TGON\Random">
       <UniqueIdentifier>{d93372fe-1913-4ffc-9856-c1d8b2caa009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TGON\Thread">
-      <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\TGON\Time">
       <UniqueIdentifier>{55087a89-f7c6-4380-a0fb-822f6dd3ba4f}</UniqueIdentifier>
     </Filter>
@@ -108,6 +105,9 @@
     </Filter>
     <Filter Include="Source\TGON\Text">
       <UniqueIdentifier>{7177a720-582b-485a-8937-4f8ff1e0779d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TGON\Threading">
+      <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -204,14 +204,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\GraphicsModule.cpp">
       <Filter>Source\TGON\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.cpp">
-      <Filter>Source\TGON\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.cpp">
       <Filter>Source\TGON\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.cpp">
-      <Filter>Source\TGON\Thread</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.cpp">
       <Filter>Source\TGON\Graphics\OpenGL</Filter>
@@ -1052,6 +1046,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\DirectoryInfo.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\Thread.cpp">
+      <Filter>Source\TGON\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\DispatchQueue.cpp">
+      <Filter>Source\TGON\Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
@@ -1360,14 +1360,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.h">
       <Filter>Source\TGON\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\DispatchQueue.h">
-      <Filter>Source\TGON\Thread</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.h">
       <Filter>Source\TGON\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Thread\Thread.h">
-      <Filter>Source\TGON\Thread</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\OpenGL\OpenGLRenderTarget.h">
       <Filter>Source\TGON\Graphics\OpenGL</Filter>
@@ -2462,6 +2456,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\StringHash.h">
       <Filter>Source\TGON\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\DispatchQueue.h">
+      <Filter>Source\TGON\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\Thread.h">
+      <Filter>Source\TGON\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileSystemEnumerable.h">
+      <Filter>Source\TGON\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

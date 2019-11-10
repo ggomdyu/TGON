@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-thread_local extern std::array<wchar_t, 32767> g_tempUtf16Buffer;
+thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 namespace
 {
@@ -105,36 +105,36 @@ void FileStream::FlushWriteBuffer()
         return;
     }
 
-    this->WriteCore(&m_buffer[0], m_writePos);
+    this->InternalWrite(&m_buffer[0], m_writePos);
 
     m_writePos = 0;
 }
 
-int32_t FileStream::ReadCore(std::byte* buffer, int32_t count)
+int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
 {
     DWORD readBytes = 0;
     if (ReadFile(m_nativeHandle, buffer, count, &readBytes, nullptr) == FALSE)
     {
-        return -1;
+        return 0;
     }
 
     m_filePos += readBytes;
     return readBytes;
 }
 
-int32_t FileStream::WriteCore(const std::byte* buffer, int32_t bufferBytes)
+int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t bufferBytes)
 {
     DWORD writtenBytes = 0;
     if (WriteFile(m_nativeHandle, buffer, bufferBytes, &writtenBytes, nullptr) == FALSE)
     {
-        return -1;
+        return 0;
     }
 
     m_filePos += writtenBytes;
     return writtenBytes;
 }
 
-int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
+int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
 {
     LARGE_INTEGER distanceToMove;
     distanceToMove.QuadPart = offset;
@@ -142,7 +142,7 @@ int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
     LARGE_INTEGER newFilePointer;
     if (SetFilePointerEx(m_nativeHandle, distanceToMove, &newFilePointer, static_cast<DWORD>(origin)) == FALSE)
     {
-        return -1;
+        return 0;
     }
 
     m_filePos = newFilePointer.QuadPart;
@@ -150,12 +150,12 @@ int64_t FileStream::SeekCore(int64_t offset, SeekOrigin origin)
     return newFilePointer.QuadPart;
 }
 
-bool FileStream::SetLengthCore(int64_t value)
+bool FileStream::InternalSetLength(int64_t value)
 {
     auto prevFilePos = m_filePos;
     if (m_filePos != value)
     {
-        if (this->SeekCore(value, SeekOrigin::Begin) == -1)
+        if (this->InternalSeek(value, SeekOrigin::Begin) == -1)
         {
             return false;
         }
@@ -170,7 +170,7 @@ bool FileStream::SetLengthCore(int64_t value)
     {
         if (value <= prevFilePos)
         {
-            if (this->SeekCore(0, SeekOrigin::End) == false)
+            if (this->InternalSeek(0, SeekOrigin::End) == false)
             {
                 return false;
             }
@@ -178,7 +178,7 @@ bool FileStream::SetLengthCore(int64_t value)
         else
         {
             // Roll back the seek position
-            if (this->SeekCore(prevFilePos, SeekOrigin::Begin))
+            if (this->InternalSeek(prevFilePos, SeekOrigin::Begin))
             {
                 return false;
             }
@@ -188,7 +188,7 @@ bool FileStream::SetLengthCore(int64_t value)
     return true;
 }
 
-void FileStream::FlushCore()
+void FileStream::InternalFlush()
 {
     FlushFileBuffers(m_nativeHandle);
 }

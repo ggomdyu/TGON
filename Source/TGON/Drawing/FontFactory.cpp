@@ -3,13 +3,14 @@
 #include <stdexcept>
 
 #include "Diagnostics/Debug.h"
+#include "IO/File.h"
 
 #include "FontFactory.h"
 
 #undef __FTERRORS_H__
 #define FT_ERRORDEF( e, v, s )  {e, s},
 #define FT_ERROR_START_LIST     {
-#define FT_ERROR_END_LIST       {0, 0 }};
+#define FT_ERROR_END_LIST       {0, 0}};
 
 namespace
 {
@@ -47,12 +48,12 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
 namespace tgon
 {
 
-FontFace::FontFace(const std::byte* fileData, std::size_t fileDataBytes, FT_Library library, FontSize fontSize) :
+FontFace::FontFace(const std::vector<std::byte>& fileData, FT_Library library, FontSize fontSize) :
     m_fontSize(fontSize),
     m_fontFace([&]() -> FT_Face
     {
         FT_Face face = nullptr;
-        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData), fileDataBytes, 0, &face);
+        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), fileData.size(), 0, &face);
         if (error)
         {
             Debug::Fail("Failed to invoke FT_New_Memory_Face.", ConvertFTErrorToString(error));
@@ -117,11 +118,11 @@ const GlyphData& FontFace::GetGlyphData(UnicodeScalar ch) const
         Debug::Fail("Failed to invoke FT_Load_Char.", ConvertFTErrorToString(error));
     }
 
-    int32_t bitmapWidth = m_fontFace->glyph->bitmap.width;
-    int32_t bitmapHeight = m_fontFace->glyph->bitmap.rows;
+    auto bitmapWidth = static_cast<size_t>(m_fontFace->glyph->bitmap.width);
+    auto bitmapHeight = static_cast<size_t>(m_fontFace->glyph->bitmap.rows);
 
-    auto bitmap = std::make_unique<std::byte[]>((bitmapWidth * bitmapHeight * 4));
-    for (int i = 0, j = 0; i < bitmapWidth * bitmapHeight * 4; i += 4, ++j)
+    auto bitmap = std::make_unique<std::byte[]>(bitmapWidth * bitmapHeight * 4);
+    for (size_t i = 0, j = 0; i < bitmapWidth * bitmapHeight * 4; i += 4, ++j)
     {
         bitmap[i] = std::byte(255);
         bitmap[i + 1] = std::byte(255);
@@ -164,57 +165,36 @@ void FontFace::Destroy()
 }
 
 Font::Font(const char* filePath, FT_Library library) :
-    Font([&]() -> Font
-    {
-#if defined(_MSC_VER) && _MSC_VER >= 1400
-        FILE* file = nullptr;
-        fopen_s(&file, filePath, "rb");
-#else
-        FILE* file = fopen(filePath, "rb");
-#endif
-        if (file == nullptr)
-        {
-            return Font(nullptr, 0, library);
-        }
-
-        fseek(file, 0, SEEK_END);
-        int32_t fileDataBytes = static_cast<int32_t>(ftell(file));
-        fseek(file, 0, SEEK_SET);
-
-        auto fileData = std::make_unique<std::byte[]>(fileDataBytes);
-        fread(fileData.get(), 1, fileDataBytes, file);
-        fclose(file);
-
-        return Font(std::move(fileData), fileDataBytes, library);
-    } ())
+    Font(File::ReadAllBytes(filePath).value_or(std::vector<std::byte>()), library)
 {
 }
 
-Font::Font(std::unique_ptr<std::byte[]> fileData, std::size_t fileDataBytes, FT_Library library) :
+Font::Font(const std::vector<std::byte>& fileData, FT_Library library) :
+    m_fileData(fileData),
+    m_library(library)
+{
+}
+
+Font::Font(std::vector<std::byte>&& fileData, FT_Library library) :
     m_fileData(std::move(fileData)),
-    m_fileDataBytes(fileDataBytes),
     m_library(library)
 {
 }
 
 Font::Font(Font&& rhs) noexcept :
     m_fileData(std::move(rhs.m_fileData)),
-    m_fileDataBytes(rhs.m_fileDataBytes),
     m_library(rhs.m_library),
     m_fontFaces(std::move(rhs.m_fontFaces))
 {
-    rhs.m_fileDataBytes = 0;
     rhs.m_library = nullptr;
 }
 
 Font& Font::operator=(Font&& rhs) noexcept
 {
     m_fileData = std::move(rhs.m_fileData);
-    m_fileDataBytes = rhs.m_fileDataBytes;
     m_library = rhs.m_library;
     m_fontFaces = std::move(rhs.m_fontFaces);
     
-    rhs.m_fileDataBytes = 0;
     rhs.m_library = nullptr;
 
     return *this;
@@ -228,7 +208,7 @@ const FontFace& Font::GetFace(FontSize fontSize) const
         return iter->second;
     }
 
-    return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData.get(), m_fileDataBytes, m_library, fontSize)})->second;
+    return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData, m_library, fontSize)})->second;
 }
 
 const GlyphData& Font::GetGlyphData(UnicodeScalar ch, FontSize fontSize) const
