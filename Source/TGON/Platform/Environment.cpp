@@ -76,11 +76,6 @@ std::string Environment::GetFolderPath(SpecialFolder folder)
 {
     std::array<char, 16384> str;
     auto strLen = GetFolderPath(folder, str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
@@ -98,11 +93,6 @@ std::string Environment::GetUserName()
 {
     std::array<char, 16384> str;
     auto strLen = GetUserName(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
@@ -110,11 +100,6 @@ std::string Environment::GetMachineName()
 {
     std::array<char, 16384> str;
     auto strLen = GetMachineName(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
@@ -122,11 +107,6 @@ std::string Environment::GetUserDomainName()
 {
     std::array<char, 16384> str;
     auto strLen = GetUserDomainName(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
     return {str.data(), static_cast<size_t>(strLen)};
 }
 
@@ -134,11 +114,6 @@ std::string Environment::GetStackTrace()
 {
     std::array<char, 16384> str;
     auto strLen = GetStackTrace(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-
     return {str.data(), static_cast<size_t>(strLen)};
 }
 

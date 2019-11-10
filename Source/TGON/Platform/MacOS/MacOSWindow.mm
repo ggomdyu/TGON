@@ -294,7 +294,7 @@ int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
     auto titleLen = static_cast<int32_t>([title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
     if (titleLen + 1 > destTitleBufferLen)
     {
-        return -1;
+        return 0;
     }
     
     memcpy(destTitle, [title UTF8String], titleLen + 1);

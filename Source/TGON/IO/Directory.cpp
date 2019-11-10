@@ -57,11 +57,6 @@ std::string Directory::GetCurrentDirectory()
 {
     std::array<char, 16384> str;
     auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
-    {
-        return {};
-    }
-    
     return {str.data(), static_cast<size_t>(strLen)};
 }
 

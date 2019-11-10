@@ -29,7 +29,7 @@ std::string_view DirectoryInfo::GetName() const noexcept
 
 DirectoryInfo DirectoryInfo::GetParent() const
 {
-    return DirectoryInfo("../");
+    return Directory::GetParent(m_fullPath);
 }
 
 DirectoryInfo DirectoryInfo::GetRoot() const

@@ -20,7 +20,7 @@ int32_t GetSpecialDirectory(NSString* path, const std::string_view& postfixStr, 
     auto pathStrLen = [path lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (pathStrLen + postfixStr.length() + 1 > destStrBufferLen)
     {
-        return -1;
+        return 0;
     }
     
     memcpy(destStr, path.UTF8String, pathStrLen);
@@ -34,7 +34,7 @@ int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchP
     NSArray<NSString*>* paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, pathDomainMask, YES);
     if ([paths count] <= 0)
     {
-        return -1;
+        return 0;
     }
     
     return GetSpecialDirectory([paths objectAtIndex: 0], postfixStr, destStr, destStrBufferLen);
@@ -52,13 +52,13 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* 
     const char* envValue = getenv(name.data());
     if (envValue == nullptr)
     {
-        return -1;
+        return 0;
     }
     
     size_t envValueBytes = strlen(envValue);
     if (envValueBytes + 1 > destStrBufferLen)
     {
-        return -1;
+        return 0;
     }
     
     memcpy(destStr, envValue, envValueBytes + 1);
@@ -75,7 +75,7 @@ int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 {
     if (getlogin_r(destStr, destStrBufferLen) != 0)
     {
-        return -1;
+        return 0;
     }
     
     return static_cast<int32_t>(strlen(destStr));
@@ -85,7 +85,7 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 {
     if (gethostname(destStr, destStrBufferLen) != 0)
     {
-        return -1;
+        return 0;
     }
     
     utsname name;
@@ -94,7 +94,7 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
     int32_t nodeNameLen = static_cast<int32_t>(strlen(name.nodename));
     if (nodeNameLen + 1 > destStrBufferLen)
     {
-        return -1;
+        return 0;
     }
     
     memcpy(destStr, name.nodename, nodeNameLen + 1);
@@ -147,15 +147,10 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
         return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, "", destStr, destStrBufferLen);
             
     default:
-        if (destStrBufferLen >= 1)
-        {
-            destStr[0] = '\0';
-            return 0;
-        }
-        break;
+        return 0;
     }
     
-    return -1;
+    return 0;
 }
 
 const std::string& Environment::GetCommandLine()
@@ -203,11 +198,11 @@ int32_t Environment::GetSystemPageSize()
 
 int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
 {
-    std::array<void*, 256> addr;
+    std::array<void*, 2048> addr;
     int numFrames = backtrace(addr.data(), static_cast<int>(addr.size()));
     if (numFrames <= 0)
     {
-        return -1;
+        return 0;
     }
     
     int32_t destStrLen = 0;

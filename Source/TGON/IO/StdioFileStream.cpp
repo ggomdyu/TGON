@@ -103,7 +103,7 @@ int32_t FileStream::InternalRead(std::byte* buffer, int32_t count)
     auto readBytes = fread(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (readBytes == static_cast<decltype(readBytes)>(-1))
     {
-        return -1;
+        return 0;
     }
     
     m_filePos += readBytes;
@@ -115,7 +115,7 @@ int32_t FileStream::InternalWrite(const std::byte* buffer, int32_t count)
     auto writtenBytes = fwrite(buffer, 1, count, reinterpret_cast<FILE*>(m_nativeHandle));
     if (writtenBytes == static_cast<decltype(writtenBytes)>(-1))
     {
-        return -1;
+        return 0;
     }
 
     m_filePos += writtenBytes;
@@ -128,13 +128,13 @@ int64_t FileStream::InternalSeek(int64_t offset, SeekOrigin origin)
     auto result = fseek(nativeHandle, offset, static_cast<int>(origin));
     if (result != 0)
     {
-        return -1;
+        return 0;
     }
 
     int64_t newFilePos = ftell(nativeHandle);
     if (newFilePos == -1)
     {
-        return -1;
+        return 0;
     }
     
     m_filePos = newFilePos;

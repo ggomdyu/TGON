@@ -88,7 +88,7 @@ int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
     if (getcwd(destStr, destStrBufferLen) == nullptr)
     {
-        return -1;
+        return 0;
     }
     
     return static_cast<int32_t>(strlen(destStr));
