@@ -14,7 +14,7 @@ FontFace::FontFace(const std::vector<std::byte>& fileData, FT_Library library, F
     m_fontFace([&]() -> FT_Face
     {
         FT_Face face = nullptr;
-        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), fileData.size(), 0, &face);
+        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), static_cast<FT_Long>(fileData.size()), 0, &face);
         if (error)
         {
             Debug::Fail("Failed to invoke FT_New_Memory_Face.", ConvertFTErrorToString(error));

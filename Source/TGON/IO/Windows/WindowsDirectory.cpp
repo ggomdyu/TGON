@@ -34,7 +34,7 @@ std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t
     }
 
     struct _stat s;
-    if (_wstat(reinterpret_cast<const wchar_t*>(g_tempUtf16Buffer.data()), &s) != 0)
+    if (_wstat(reinterpret_cast<const wchar_t*>(&g_tempUtf16Buffer[0]), &s) != 0)
     {
         return {};
     }
@@ -54,7 +54,7 @@ bool Directory::Delete(const char* path, bool recursive)
     
     if (recursive)
     {
-        return RemoveDirectoryW(g_tempUtf16Buffer.data()) == TRUE;
+        return RemoveDirectoryW(&g_tempUtf16Buffer[0]) == TRUE;
     }
     else
     {
@@ -102,7 +102,7 @@ bool Directory::Move(const char* srcPath, const char* destPath)
     }
 
     gsl::span<wchar_t> utf16DestPath(&g_tempUtf16Buffer[g_tempUtf16Buffer.size() / 2], g_tempUtf16Buffer.size() / 2);
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(utf16DestPath.data()), static_cast<int32_t>(utf16DestPath.size())) == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(&utf16DestPath[0]), static_cast<int32_t>(utf16DestPath.size())) == -1)
     {
         return false;
     }
@@ -110,9 +110,19 @@ bool Directory::Move(const char* srcPath, const char* destPath)
     return _wrename(reinterpret_cast<const wchar_t*>(utf16SrcPath.data()), reinterpret_cast<const wchar_t*>(utf16DestPath.data())) == 0;
 }
 
+bool Directory::SetCurrentDirectory(const char* path)
+{
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    {
+        return false;
+    }
+
+    return _wchdir(&g_tempUtf16Buffer[0]) == 0;
+}
+
 int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), g_tempUtf16Buffer.data());
+    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), &g_tempUtf16Buffer[0]);
     return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen));
 }
 

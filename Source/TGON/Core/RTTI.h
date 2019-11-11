@@ -20,7 +20,7 @@ public:
 
 /* @section Method */
 public:
-    uint32_t GetHashCode() const noexcept;
+    size_t GetHashCode() const noexcept;
     const char* GetName() const noexcept;
     const RTTI* GetSuperRTTI() const noexcept;
 
@@ -66,7 +66,7 @@ inline RTTI::RTTI(const std::type_info& typeInfo, const RTTI* superRTTI) noexcep
 {
 }
 
-inline uint32_t RTTI::GetHashCode() const noexcept
+inline size_t RTTI::GetHashCode() const noexcept
 {
     return m_typeInfo->hash_code();
 }

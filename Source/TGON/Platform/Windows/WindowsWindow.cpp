@@ -79,7 +79,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         windowPos.y = (GetSystemMetrics(SM_CYSCREEN) - windowStyle.height) / 2;
     }
 
-    auto utf16Title = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(windowStyle.title.data()), windowStyle.title.size() + 1);
+    auto utf16Title = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(windowStyle.title.data()), static_cast<int32_t>(windowStyle.title.size() + 1));
 
     // Convert the client size to window size.
     RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
@@ -413,8 +413,8 @@ void Window::SetContentSize(int32_t width, int32_t height)
 {
     RECT rt{0, 0, width, height};
 
-    auto rawWindowStyle = this->GetRawWindowStyle();
-    auto rawExtendedWindowStyle = this->GetRawWindowStyleEx();
+    DWORD rawWindowStyle = static_cast<DWORD>(this->GetRawWindowStyle());
+    DWORD rawExtendedWindowStyle = static_cast<DWORD>(this->GetRawWindowStyleEx());
 
     AdjustWindowRectEx(&rt, rawWindowStyle, GetMenu(m_wndHandle) != nullptr, rawExtendedWindowStyle);
 
@@ -449,7 +449,7 @@ void Window::SetTopMost(bool setTopMost)
 
 void Window::SetTransparency(float transparency)
 {
-    DWORD rawExtendedWindowStyle = this->GetRawWindowStyleEx();
+    DWORD rawExtendedWindowStyle = static_cast<DWORD>(this->GetRawWindowStyleEx());
     if ((rawExtendedWindowStyle & WS_EX_LAYERED) == false)
     {
         this->SetRawWindowStyleEx(rawExtendedWindowStyle | WS_EX_LAYERED);

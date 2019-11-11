@@ -1052,6 +1052,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\DispatchQueue.cpp">
       <Filter>Source\TGON\Threading</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.cpp">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.cpp">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
@@ -2465,6 +2474,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileSystemEnumerable.h">
       <Filter>Source\TGON\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.h">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.h">
+      <Filter>Source\TGON\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h">
+      <Filter>Source\TGON\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

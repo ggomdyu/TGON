@@ -25,6 +25,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp" />
@@ -78,6 +80,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -1657,6 +1660,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\TypeTraits.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Drawing.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BaseImageProcessor.h" />
@@ -1755,6 +1760,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftmodule.h" />

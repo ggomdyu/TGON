@@ -6,6 +6,8 @@
 
 #pragma once
 #include <vector>
+#include <memory>
+#include <cstddef>
 #include <unordered_map>
 #include <ft2build.h>
 #include FT_FREETYPE_H

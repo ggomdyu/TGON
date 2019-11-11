@@ -51,6 +51,7 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
             {
                 if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
                 {
+                    // Ignore the . and ..
                     if (findData.cFileName[0] == L'.' && (findData.cFileName[1] == L'\0' || (findData.cFileName[1] == L'.' && findData.cFileName[2] == L'\0')))
                     {
                         continue;
@@ -123,6 +124,7 @@ void InternalEnumerateTopDirectoryOnly(const char* path, const char* searchPatte
         {
             if (findData.dwFileAttributes & filterType)
             {
+                // Ignore the . and ..
                 if (findData.cFileName[0] == L'.' && (findData.cFileName[1] == L'\0' || (findData.cFileName[1] == L'.' && findData.cFileName[2] == L'\0')))
                 {
                     continue;
