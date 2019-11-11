@@ -14,13 +14,13 @@ namespace tgon
 {
 
 template <typename _CharType, typename std::enable_if_t<IsChar<_CharType>>* = nullptr>
-constexpr uint32_t X65599Hash(_CharType ch) noexcept
+constexpr size_t X65599Hash(_CharType ch) noexcept
 {
     return ch ^ (ch >> 16);
 }
     
 template <typename _CharType>
-constexpr uint32_t X65599Hash(const _CharType* str) noexcept
+constexpr size_t X65599Hash(const _CharType* str) noexcept
 {
     if (str == nullptr)
     {

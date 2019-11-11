@@ -7,13 +7,12 @@
 #pragma once
 #include <memory>
 #include <unordered_map>
-#include <mutex>
 #include <any>
 
 #include "Text/StringHash.h"
 #include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
-#include "Drawing/FontFactory.h"
+#include "Graphics/TextureAtlas.h"
 
 #include "Module.h"
 
@@ -28,17 +27,13 @@ public:
 
 /* @section Method */
 public:
-    std::shared_ptr<Texture> GetTexture(const StringViewHash& path);
-    std::shared_ptr<AudioBuffer> GetAudioBuffer(const StringViewHash& path);
-    std::shared_ptr<Font> GetFont(const StringViewHash& path);
-    
+    std::shared_ptr<Texture> LoadTexture(const StringViewHash& path);
+    std::shared_ptr<AudioBuffer> LoadAudioBuffer(const StringViewHash& path);
     void PurgeResource(const StringViewHash& path);
     
 /* @section Variable */
 private:
     std::unordered_map<StringHash, std::any> m_resourceCache;
-    std::mutex m_mutex;
-    FontFactory m_fontFactory;
 };
 
 } /* namespace tgon */

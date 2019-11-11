@@ -1,12 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include "Misc/Algorithm.h"
 
 #include "OpenGLDebug.h"
 
 #include "../Texture.h"
 
-#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace
@@ -97,13 +97,13 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
     return m_textureHandle;
 }
 
-Texture::Texture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+Texture::Texture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     Texture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
 }
 
 Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    Texture(image.GetImageData().get(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+    Texture(image.GetData(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
 }
 
@@ -132,7 +132,7 @@ void Texture::Use()
     }
 
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    this->UpdateTexParemeters();
+    this->UpdateTextureParameters();
 
     g_lastUsedTexture = this;
 }
@@ -195,7 +195,16 @@ PixelFormat Texture::GetPixelFormat() const noexcept
     return m_pixelFormat;
 }
 
-void Texture::UpdateTexParemeters()
+void Texture::Destroy()
+{
+    if (m_textureHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
+        m_textureHandle = 0;
+    }
+}
+
+void Texture::UpdateTextureParameters()
 {
     // Update the texture filter
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
@@ -205,15 +214,6 @@ void Texture::UpdateTexParemeters()
     auto wrapMode = ConvertTextureWrapModeToNative(m_wrapMode);
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode));
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode));
-}
-
-void Texture::Destroy()
-{
-    if (m_textureHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteTextures(1, &m_textureHandle));
-        m_textureHandle = 0;
-    }
 }
 
 } /* namespace tgon */

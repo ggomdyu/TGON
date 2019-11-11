@@ -5,101 +5,10 @@
  */
 
 #pragma once
-#include <unordered_map>
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
-#include "Core/NonCopyable.h"
-#include "Text/StringHash.h"
-#include "Text/UnicodeScalar.h"
-#include "Math/Vector2.h"
-#include "Math/Extent.h"
-#include "Platform/Config.h"
-
-#if TGON_PLATFORM_WINDOWS
-#   undef CreateFont
-#endif
+#include "Font.h"
 
 namespace tgon
 {
-
-using FontSize = uint32_t;
-
-struct GlyphMetrics final
-{
-    I32Extent2D size;
-    I32Vector2 bearing;
-    I32Vector2 advance;
-};
-
-struct GlyphData final
-{
-    UnicodeScalar ch;
-    GlyphMetrics metrics;
-    std::unique_ptr<std::byte[]> bitmap;
-};
-
-class TGON_API FontFace final :
-    private NonCopyable
-{
-/**@section Constructor */
-public:
-    FontFace(const std::vector<std::byte>& fileData, FT_Library library, FontSize fontSize);
-    FontFace(FontFace&& rhs) noexcept;
-    
-/**@section Destructor */
-public:
-    ~FontFace();
-
-/**@section Operator */
-public:
-    FontFace& operator=(FontFace&& rhs) noexcept;
-
-/**@section Method */
-public:
-    const GlyphData& GetGlyphData(UnicodeScalar ch) const;
-    I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs) const;
-
-private:
-    void Destroy();
-
-/**@section Variable */
-public:
-    int32_t m_fontSize;
-    FT_Face m_fontFace;
-    mutable std::unordered_map<UnicodeScalar, GlyphData> m_glyphDatas;
-};
-
-class TGON_API Font final :
-    private NonCopyable
-{
-/**@section Constructor */
-public:
-    Font(const char* filePath, FT_Library library);
-    Font(const std::vector<std::byte>& fileData, FT_Library library);
-    Font(std::vector<std::byte>&& fileData, FT_Library library);
-    Font(Font&& rhs) noexcept;
-    
-/**@section Destructor */
-public:
-    ~Font() = default;
-    
-/**@section Operator */
-public:
-    Font& operator=(Font&& rhs) noexcept;
-
-/**@section Method */
-public:
-    const FontFace& GetFace(FontSize fontSize) const;
-    const GlyphData& GetGlyphData(UnicodeScalar ch, FontSize fontSize) const;
-    I32Vector2 GetKerning(UnicodeScalar lhs, UnicodeScalar rhs, FontSize fontSize) const;
-
-/**@section Variable */
-private:
-    std::vector<std::byte> m_fileData;
-    FT_Library m_library;
-    mutable std::unordered_map<FontSize, FontFace> m_fontFaces;
-};
 
 class TGON_API FontFactory :
     private NonCopyable
@@ -114,7 +23,8 @@ public:
 
 /**@section Method */
 public:
-    std::shared_ptr<Font> CreateFont(const char* filePath) const;
+    FT_Library GetFTLibrary() noexcept;
+    const FT_Library GetFTLibrary() const noexcept;
 
 /**@section Variable */
 private:

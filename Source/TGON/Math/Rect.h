@@ -32,6 +32,9 @@ public:
 
     /**@brief   Constructor that initializes the member with the specified value */
     constexpr BasicRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& heght) noexcept;
+    
+    template <typename _ValueType2>
+    constexpr BasicRect(const BasicRect<_ValueType2>& rhs) noexcept;
 
 /**@section Operator */
 public:
@@ -40,6 +43,8 @@ public:
     constexpr const BasicRect operator*(const _ValueType&) const noexcept;
     constexpr const BasicRect operator/(const _ValueType&) const;
     constexpr const BasicRect operator-() const noexcept;
+    template <typename _ValueType2>
+    BasicRect& operator=(const BasicRect<_ValueType2>& rhs) noexcept;
     BasicRect& operator+=(const BasicRect&) noexcept;
     BasicRect& operator-=(const BasicRect&) noexcept;
     BasicRect& operator*=(const _ValueType&) noexcept;
@@ -104,6 +109,16 @@ constexpr BasicRect<_ValueType>::BasicRect(const _ValueType& x, const _ValueType
 }
 
 template <typename _ValueType>
+template <typename _ValueType2>
+constexpr BasicRect<_ValueType>::BasicRect(const BasicRect<_ValueType2>& rhs) noexcept :
+    x(static_cast<_ValueType>(rhs.x)),
+    y(static_cast<_ValueType>(rhs.y)),
+    width(static_cast<_ValueType>(rhs.width)),
+    height(static_cast<_ValueType>(rhs.height))
+{
+}
+
+template <typename _ValueType>
 inline constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator+(const BasicRect& rhs) noexcept
 {
     return BasicRect(*this) += rhs;
@@ -131,6 +146,18 @@ template <typename _ValueType>
 constexpr const BasicRect<_ValueType> BasicRect<_ValueType>::operator-() const noexcept
 {
     return BasicRect(-x, -y, -width, -height);
+}
+
+template <typename _ValueType>
+template <typename _ValueType2>
+inline BasicRect<_ValueType>& BasicRect<_ValueType>::operator=(const BasicRect<_ValueType2>& rhs) noexcept
+{
+    x = static_cast<_ValueType>(rhs.x);
+    y = static_cast<_ValueType>(rhs.y);
+    width = static_cast<_ValueType>(rhs.width);
+    height = static_cast<_ValueType>(rhs.height);
+    
+    return *this;
 }
 
 template <typename _ValueType>

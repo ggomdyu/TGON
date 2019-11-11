@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include <stb_image.h>
 #include <stb_image_write.h>
 
@@ -10,7 +11,6 @@
 
 #include "../Graphics.h"
 
-#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace

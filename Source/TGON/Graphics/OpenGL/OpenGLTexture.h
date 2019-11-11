@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Platform/Config.h"
@@ -38,3 +39,4 @@ protected:
 using PlatformTexture = OpenGLTexture;
 
 } /* namespace tgon */
+#endif

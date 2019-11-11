@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 #include <AppKit/NSOpenGLView.h>
 #include <AppKit/NSWindow.h>
@@ -114,3 +115,4 @@ void OpenGLContext::Destroy()
 }
 
 } /* namespace tgon */
+#endif

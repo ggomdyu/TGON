@@ -40,20 +40,6 @@ enum class CullMode
     CCW,
 };
 
-enum class GraphicsSDK
-{
-    OpenGL2_1 = 0,
-    OpenGL3_0,
-    OpenGL4_0,
-    OpenGL4_6,
-    OpenGLES,
-    Direct3D9,
-    Direct3D11,
-    Direct3D12,
-    Metal,
-    Vulkan,
-};
-
 enum class BlendMode
 {
     Normal,

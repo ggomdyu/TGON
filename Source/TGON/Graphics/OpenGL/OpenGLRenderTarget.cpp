@@ -1,10 +1,10 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include <stdexcept>
 
 #include "OpenGLRenderTarget.h"
 
-#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 

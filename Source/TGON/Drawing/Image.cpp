@@ -10,12 +10,7 @@
 
 #include "Text/StringTraits.h"
 #include "Text/Hash.h"
-#if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
-#   include "ImageProcessor/BmpImageProcessor.h"
-#   include "ImageProcessor/JpgImageProcessor.h"
-#   include "ImageProcessor/PngImageProcessor.h"
-#endif
-//#include "ImageProcessor/WebPImageProcessor.h"
+#include "Misc/Algorithm.h"
 
 #include "Image.h"
 
@@ -24,106 +19,25 @@ namespace tgon
 namespace
 {
 
-TGON_API std::unique_ptr<std::byte[]> LoadImageData(const std::byte* fileData, int32_t fileDataBytes, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
+constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
 {
-#if TGON_USE_LOWLEVEL_IMAGE_IMPORTER
-    auto loadImage = [&](auto& imageProcessor)
-    {
-        *destWidth = imageProcessor.GetWidth();
-        *destHeight = imageProcessor.GetHeight();
-        *destChannels = imageProcessor.GetChannels();
-        
-        return std::move(imageProcessor.GetImageData());
+    constexpr int32_t channelCountTable[] = {
+        0, // Unknown
+        4, // RGBA8888
+        3, // RGB888
+        4, // RGBA4444
+        1, // R8
     };
     
-    if (PngImageProcessor::VerifyFormat(fileData, fileDataBytes))
-    {
-        return loadImage(PngImageProcessor(fileData, fileDataBytes));
-    }
-    else if (JpgImageProcessor::VerifyFormat(fileData, fileDataBytes))
-    {
-        return loadImage(JpgImageProcessor(fileData, fileDataBytes));
-    }
-    else if (BmpImageProcessor::VerifyFormat(fileData, fileDataBytes))
-    {
-        return loadImage(BmpImageProcessor(fileData, fileDataBytes));
-    }
-#else
-    *destPixelFormat = PixelFormat::RGBA8888;
-#endif
-    
-    return std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, destWidth, destHeight, nullptr, STBI_rgb_alpha)));
-}
-
-TGON_API std::unique_ptr<std::byte[]> LoadImageData(const char* filePath, int32_t* destWidth, int32_t* destHeight, PixelFormat* destPixelFormat)
-{
-#if defined(_MSC_VER) && _MSC_VER >= 1400
-    FILE* file = nullptr;
-    fopen_s(&file, filePath, "rb");
-#else
-    FILE* file = fopen(filePath, "rb");
-#endif
-    if (file == nullptr)
-    {
-        return nullptr;
-    }
-    
-    fseek(file, 0, SEEK_END);
-    int32_t fileSize = static_cast<int32_t>(ftell(file));
-    fseek(file, 0, SEEK_SET);
-    
-    auto fileData = std::make_unique<std::byte[]>(fileSize);
-    fread(fileData.get(), 1, fileSize, file);
-    fclose(file);
-    
-    return LoadImageData(fileData.get(), fileSize, destWidth, destHeight, destPixelFormat);
-}
-
-TGON_API ImageFormat ConvertStringToImageFormat(const std::string_view& str)
-{
-    char lowercaseStr[32] {};
-    BasicStringTraits<char>::ToLower(str.data(), str.length(), lowercaseStr);
-    
-    switch (X65599Hash(lowercaseStr))
-    {
-        case X65599Hash("bmp"):
-            return ImageFormat::Bmp;
-        case X65599Hash("jpg"):
-            return ImageFormat::Jpg;
-        case X65599Hash("jpeg"):
-            return ImageFormat::Jpeg;
-        case X65599Hash("png"):
-            return ImageFormat::Png;
-        case X65599Hash("tiff"):
-            return ImageFormat::Tiff;
-        case X65599Hash("gif"):
-            return ImageFormat::Gif;
-        case X65599Hash("webp"):
-            return ImageFormat::WebP;
-        default:
-            return ImageFormat::Unknown;
-    }
+    return channelCountTable[UnderlyingCast(pixelFormat)];
 }
 
 } /* namespace */
 
-Image::Image() noexcept :
-    m_imageData(nullptr),
-    m_size(),
-    m_pixelFormat(PixelFormat::Unknown)
-{
-}
-
-Image::Image(const std::string_view& filePath) :
+Image::Image(const char* filePath) :
     Image()
 {
-    m_imageData = LoadImageData(filePath.data(), &m_size.width, &m_size.height, &m_pixelFormat);
-}
-
-Image::Image(const std::byte* fileData, int32_t fileDataBytes) :
-    Image()
-{
-    m_imageData = LoadImageData(fileData, fileDataBytes, &m_size.width, &m_size.height, &m_pixelFormat);
+    this->LoadImageData(filePath);
 }
 
 Image::Image(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
@@ -154,36 +68,31 @@ Image& Image::operator=(Image&& rhs) noexcept
     return *this;
 }
 
-std::byte& Image::operator[](std::size_t index)
+std::byte& Image::operator[](size_t index) noexcept
 {
-    return m_imageData.get()[index];
+    return m_imageData[index];
 }
 
-std::byte Image::operator[](std::size_t index) const
+std::byte Image::operator[](size_t index) const noexcept
 {
-    return m_imageData.get()[index];
+    return m_imageData[index];
 }
 
-bool Image::IsValid() const noexcept
-{
-    return m_imageData != nullptr;
-}
-
-void Image::SetImageData(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
+void Image::SetData(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
 {
     m_imageData.reset(imageData);
     m_size = size;
     m_pixelFormat = pixelFormat;
 }
 
-std::unique_ptr<std::byte[]>& Image::GetImageData() noexcept
+std::byte* Image::GetData() noexcept
 {
-    return m_imageData;
+    return &m_imageData[0];
 }
 
-const std::unique_ptr<std::byte[]>& Image::GetImageData() const noexcept
+const std::byte* Image::GetData() const noexcept
 {
-    return m_imageData;
+    return &m_imageData[0];
 }
 
 const I32Extent2D& Image::GetSize() const noexcept
@@ -193,7 +102,7 @@ const I32Extent2D& Image::GetSize() const noexcept
 
 int32_t Image::GetChannels() const noexcept
 {
-    return ConvertPixelFormatToBytesPerPixel(m_pixelFormat);
+    return ConvertPixelFormatToChannelCount(m_pixelFormat);
 }
 
 PixelFormat Image::GetPixelFormat() const noexcept
@@ -221,53 +130,35 @@ bool Image::SaveAsTga(const char* saveFilePath) const
     return stbi_write_tga(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
 }
 
-ImageView::ImageView(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
-    m_imageData(imageData),
-    m_size(size),
-    m_pixelFormat(pixelFormat)
+void Image::LoadImageData(const std::byte* fileData, int32_t fileDataBytes)
 {
+    int width = 0, height = 0;
+    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(fileData), fileDataBytes, &width, &height, nullptr, STBI_rgb_alpha)));
+    m_size = {static_cast<decltype(m_size.width)>(width), static_cast<decltype(m_size.height)>(height)};
 }
 
-ImageView::ImageView(Image& image) :
-    m_imageData(image.GetImageData().get()),
-    m_size(image.GetSize()),
-    m_pixelFormat(image.GetPixelFormat())
+void Image::LoadImageData(const char* filePath)
 {
-}
-
-std::byte& ImageView::operator[](std::size_t index)
-{
-    return m_imageData[index];
-}
-
-const std::byte ImageView::operator[](std::size_t index) const
-{
-    return m_imageData[index];
-}
-
-std::byte* ImageView::GetImageData() noexcept
-{
-    return m_imageData;
-}
-
-const std::byte* ImageView::GetImageData() const noexcept
-{
-    return m_imageData;
-}
-
-const I32Extent2D& ImageView::GetSize() const noexcept
-{
-    return m_size;
-}
-
-int32_t ImageView::GetChannels() const noexcept
-{
-    return ConvertPixelFormatToBytesPerPixel(m_pixelFormat);
-}
-
-PixelFormat ImageView::GetPixelFormat() const noexcept
-{
-    return m_pixelFormat;
+#if defined(_MSC_VER) && _MSC_VER >= 1400
+    FILE* file = nullptr;
+    fopen_s(&file, filePath, "rb");
+#else
+    FILE* file = fopen(filePath, "rb");
+#endif
+    if (file == nullptr)
+    {
+        return;
+    }
+    
+    fseek(file, 0, SEEK_END);
+    auto fileSize = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    
+    auto fileData = std::make_unique<std::byte[]>(static_cast<size_t>(fileSize));
+    fread(&fileData[0], 1, fileSize, file);
+    fclose(file);
+    
+    this->LoadImageData(&fileData[0], static_cast<int32_t>(fileSize));
 }
 
 } /* namespace tgon */

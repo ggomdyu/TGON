@@ -1,12 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include <cassert>
 
 #include "OpenGLDebug.h"
 
 #include "../IndexBuffer.h"
 
-#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace

@@ -15,3 +15,4 @@
 #undef CreateDirectory
 #undef SetEnvironmentVariable
 #undef GetEnvironmentVariable
+#undef CreateFont

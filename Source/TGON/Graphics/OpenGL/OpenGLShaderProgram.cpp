@@ -1,5 +1,6 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_GRAPHICS_OPENGL
 #include <cassert>
 #include <sstream>
 
@@ -12,7 +13,6 @@
 
 #include "../ShaderProgram.h"
 
-#if TGON_GRAPHICS_OPENGL
 namespace tgon
 {
 namespace

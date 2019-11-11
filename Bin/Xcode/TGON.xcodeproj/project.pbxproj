@@ -19,6 +19,12 @@
 		8C59E309232EB44000EBE199 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E308232EB44000EBE199 /* Random.cpp */; };
 		8C59E30B2330014700EBE199 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30A2330014700EBE199 /* Environment.cpp */; };
 		8C59E30D2330014F00EBE199 /* MacOSEnvironment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30C2330014F00EBE199 /* MacOSEnvironment.cpp */; };
+		8C7A8F1023793AF800DC7196 /* UIText.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7A8F0E23793AF800DC7196 /* UIText.h */; };
+		8C7A8F1123793AF800DC7196 /* UIText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A8F0F23793AF800DC7196 /* UIText.cpp */; };
+		8C7A8F142379635200DC7196 /* FontFace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A8F122379635100DC7196 /* FontFace.cpp */; };
+		8C7A8F152379635200DC7196 /* FontFace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7A8F132379635100DC7196 /* FontFace.h */; };
+		8C7A8F182379641E00DC7196 /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7A8F162379641D00DC7196 /* Font.h */; };
+		8C7A8F192379641E00DC7196 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A8F172379641D00DC7196 /* Font.cpp */; };
 		8CB5BB13233F814D0032F332 /* Directory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CB5BB11233F814C0032F332 /* Directory.h */; };
 		8CB5BB14233F814D0032F332 /* Directory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB12233F814C0032F332 /* Directory.cpp */; };
 		8CB5BB172340D6100032F332 /* UnixFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB162340D6100032F332 /* UnixFile.cpp */; };
@@ -799,6 +805,12 @@
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		8C59E30A2330014700EBE199 /* Environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Environment.cpp; sourceTree = "<group>"; };
 		8C59E30C2330014F00EBE199 /* MacOSEnvironment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSEnvironment.cpp; sourceTree = "<group>"; };
+		8C7A8F0E23793AF800DC7196 /* UIText.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UIText.h; sourceTree = "<group>"; };
+		8C7A8F0F23793AF800DC7196 /* UIText.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UIText.cpp; sourceTree = "<group>"; };
+		8C7A8F122379635100DC7196 /* FontFace.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FontFace.cpp; sourceTree = "<group>"; };
+		8C7A8F132379635100DC7196 /* FontFace.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FontFace.h; sourceTree = "<group>"; };
+		8C7A8F162379641D00DC7196 /* Font.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Font.h; sourceTree = "<group>"; };
+		8C7A8F172379641D00DC7196 /* Font.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Font.cpp; sourceTree = "<group>"; };
 		8CB5BB11233F814C0032F332 /* Directory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Directory.h; sourceTree = "<group>"; };
 		8CB5BB12233F814C0032F332 /* Directory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Directory.cpp; sourceTree = "<group>"; };
 		8CB5BB15233F96E50032F332 /* DirectoryInfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DirectoryInfo.h; sourceTree = "<group>"; };
@@ -1230,8 +1242,8 @@
 		FD53331222A57F38001EB57C /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zconf.h; path = "../../Source/ThirdParty/zlib-1.2.11/zconf.h"; sourceTree = "<group>"; };
 		FD53331322A57F38001EB57C /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffast.h; path = "../../Source/ThirdParty/zlib-1.2.11/inffast.h"; sourceTree = "<group>"; };
 		FD53332E22A58011001EB57C /* gzwrite.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; fileEncoding = 4; name = gzwrite.c; path = "../../Source/ThirdParty/zlib-1.2.11/gzwrite.c"; sourceTree = "<group>"; };
-		FD53333022A5834A001EB57C /* FontFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontFactory.h; sourceTree = "<group>"; };
-		FD53333122A5834A001EB57C /* FontFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontFactory.cpp; sourceTree = "<group>"; };
+		FD53333022A5834A001EB57C /* FontFactory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FontFactory.h; sourceTree = "<group>"; };
+		FD53333122A5834A001EB57C /* FontFactory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FontFactory.cpp; sourceTree = "<group>"; };
 		FD7DE05F229D6C67002B5786 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		FD7DE060229D6C67002B5786 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
 		FD7DE063229D6C79002B5786 /* MacOSThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MacOSThread.cpp; sourceTree = "<group>"; };
@@ -1810,6 +1822,8 @@
 				8CC61CBF22F610AE00F415C8 /* UISprite.h */,
 				8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */,
 				8CC61CBD22F610AE00F415C8 /* UISpriteBatch.h */,
+				8C7A8F0F23793AF800DC7196 /* UIText.cpp */,
+				8C7A8F0E23793AF800DC7196 /* UIText.h */,
 			);
 			name = UI;
 			path = ../../Source/TGON/UI;
@@ -2886,6 +2900,10 @@
 			children = (
 				FDC02C4E228481F000BEE91A /* Image.cpp */,
 				FDC02C54228481F000BEE91A /* Image.h */,
+				8C7A8F172379641D00DC7196 /* Font.cpp */,
+				8C7A8F162379641D00DC7196 /* Font.h */,
+				8C7A8F122379635100DC7196 /* FontFace.cpp */,
+				8C7A8F132379635100DC7196 /* FontFace.h */,
 				FD53333122A5834A001EB57C /* FontFactory.cpp */,
 				FD53333022A5834A001EB57C /* FontFactory.h */,
 			);
@@ -3715,6 +3733,7 @@
 				FDE1B67022E4100F0093FDC1 /* unistrappender.h in Headers */,
 				FDE1B5D222E40FDB0093FDC1 /* normalizer2.h in Headers */,
 				FDE1B66E22E4100F0093FDC1 /* uhash.h in Headers */,
+				8C7A8F1023793AF800DC7196 /* UIText.h in Headers */,
 				FDE1B5EA22E40FDB0093FDC1 /* dtintrv.h in Headers */,
 				FDE1B5B422E40FDB0093FDC1 /* icuplug.h in Headers */,
 				FDE1B66D22E4100F0093FDC1 /* pluralmap.h in Headers */,
@@ -3758,6 +3777,7 @@
 				FDE1B69422E4100F0093FDC1 /* propname.h in Headers */,
 				FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */,
 				FD5332A522A2EA1C001EB57C /* psaux.h in Headers */,
+				8C7A8F182379641E00DC7196 /* Font.h in Headers */,
 				FDE1B6BF22E4100F0093FDC1 /* ubidi_props.h in Headers */,
 				FDE1B66222E4100F0093FDC1 /* uprops.h in Headers */,
 				FDE1B5D522E40FDB0093FDC1 /* parseerr.h in Headers */,
@@ -3843,6 +3863,7 @@
 				FDE1B5C222E40FDB0093FDC1 /* unistr.h in Headers */,
 				FD53329022A2EA1C001EB57C /* ftsizes.h in Headers */,
 				FD5332D522A2EA1C001EB57C /* fterrdef.h in Headers */,
+				8C7A8F152379635200DC7196 /* FontFace.h in Headers */,
 				FDE1B59E22E40FDB0093FDC1 /* chariter.h in Headers */,
 				FDE1B6B722E4100F0093FDC1 /* udatamem.h in Headers */,
 				8CF8A1A3234CC3B800763883 /* UnicodeScalar.h in Headers */,
@@ -4013,6 +4034,7 @@
 				8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */,
 				FD53322422A2E9A4001EB57C /* sfnt.c in Sources */,
 				FD78AC062289D06000D22E46 /* psy.c in Sources */,
+				8C7A8F142379635200DC7196 /* FontFace.cpp in Sources */,
 				FDE1B4AE22E40E940093FDC1 /* unistr_titlecase_brkiter.cpp in Sources */,
 				FDE1B47722E40E940093FDC1 /* edits.cpp in Sources */,
 				FD78ABE72289C4DF00D22E46 /* lookups.pl in Sources */,
@@ -4022,6 +4044,7 @@
 				FD53321A22A2E92C001EB57C /* ftwinfnt.c in Sources */,
 				FD78ABE92289C4DF00D22E46 /* floor0.c in Sources */,
 				FD78ABEC2289C4DF00D22E46 /* bitrate.c in Sources */,
+				8C7A8F192379641E00DC7196 /* Font.cpp in Sources */,
 				FDE1B4DA22E40E940093FDC1 /* ustrcase.cpp in Sources */,
 				FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */,
 				FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */,
@@ -4031,6 +4054,7 @@
 				FDB6931822E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp in Sources */,
 				FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */,
 				FD53332A22A57F38001EB57C /* infback.c in Sources */,
+				8C7A8F1123793AF800DC7196 /* UIText.cpp in Sources */,
 				FD78ABF52289C4DF00D22E46 /* floor1.c in Sources */,
 				FDE1B50E22E40E950093FDC1 /* ustrtrns.cpp in Sources */,
 				FDE1B48B22E40E940093FDC1 /* usprep.cpp in Sources */,
@@ -4400,8 +4424,8 @@
 					FT2_BUILD_LIBRARY,
 					FT_DEBUG_LEVEL_ERROR,
 					FT_DEBUG_LEVEL_TRACE,
-					"TGON_USING_OPENGL=1",
 					"TGON_PLATFORM_MACOS=1",
+					"TGON_GRAPHICS_OPENGL=1",
 					U_STATIC_IMPLEMENTATION,
 					U_COMMON_IMPLEMENTATION,
 					U_I18N_IMPLEMENTATION,
@@ -4464,8 +4488,8 @@
 					FT2_BUILD_LIBRARY,
 					FT_DEBUG_LEVEL_ERROR,
 					FT_DEBUG_LEVEL_TRACE,
-					"TGON_USING_OPENGL=1",
 					"TGON_PLATFORM_MACOS=1",
+					"TGON_GRAPHICS_OPENGL=1",
 					U_STATIC_IMPLEMENTATION,
 					U_COMMON_IMPLEMENTATION,
 					U_I18N_IMPLEMENTATION,

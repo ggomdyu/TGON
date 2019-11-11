@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
@@ -36,3 +37,4 @@ protected:
 using PlatformGraphics = OpenGLGraphics;
 
 } /* namespace tgon */
+#endif

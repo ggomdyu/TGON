@@ -9,6 +9,7 @@
  */
 
 #pragma once
+#if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Platform/Config.h"
@@ -57,3 +58,4 @@ private:
 using PlatformRenderTarget = OpenGLRenderTarget;
 
 } /* namespace tgon */
+#endif

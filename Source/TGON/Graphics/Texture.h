@@ -33,7 +33,7 @@ class TGON_API Texture :
 {
 /**@section Constructor */
 public:
-    Texture(const std::string_view& filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
+    Texture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     Texture(Texture&& rhs) noexcept;
@@ -64,7 +64,7 @@ public:
     
 private:
     void Destroy();
-    void UpdateTexParemeters();
+    void UpdateTextureParameters();
     
 /**@section Variable */
 protected:

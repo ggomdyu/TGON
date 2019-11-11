@@ -46,19 +46,19 @@ TextureAtlas TextureAtlas::Create(const I32Extent2D& atlasSize, PixelFormat atla
     return TextureAtlas(atlasSize, atlasPixelFormat, paddingOffset);
 }
 
-bool TextureAtlas::Insert(UnicodeScalar name, const ImageView& image)
+bool TextureAtlas::Insert(char32_t name, std::byte* imageData, const I32Extent2D& size)
 {
-    return this->Insert(name.GetHashCode(), image);
+    return this->Insert(X65599Hash(name), imageData, size);
 }
 
-bool TextureAtlas::Insert(const StringViewHash& name, const ImageView& image)
+bool TextureAtlas::Insert(const StringViewHash& name, std::byte* imageData, const I32Extent2D& size)
 {
-    return this->Insert(name.GetHashCode(), image);
+    return this->Insert(name.GetHashCode(), imageData, size);
 }
 
-const I32Rect& TextureAtlas::GetTextureRect(UnicodeScalar name) const
+const I32Rect& TextureAtlas::GetTextureRect(char32_t name) const
 {
-    return m_packedTextureInfos[name.GetHashCode()];
+    return m_packedTextureInfos[X65599Hash(name)];
 }
 
 const I32Rect& TextureAtlas::GetTextureRect(const StringViewHash& name) const
@@ -86,13 +86,13 @@ std::shared_ptr<Texture> TextureAtlas::GetAtlasTexture() noexcept
     return m_atlasTexture;
 }
 
-bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
+bool TextureAtlas::Insert(size_t nameHashCode, std::byte* imageData, const I32Extent2D& size)
 {
     stbrp_rect rect
     {
         static_cast<int>(m_packedTextureInfos.size()), // id
-        static_cast<stbrp_coord>(image.GetSize().width + m_paddingOffset), // w
-        static_cast<stbrp_coord>(image.GetSize().height + m_paddingOffset), // h
+        static_cast<stbrp_coord>(size.width + m_paddingOffset), // w
+        static_cast<stbrp_coord>(size.height + m_paddingOffset), // h
         0, // x
         0, // y
         0 // was_packed
@@ -101,7 +101,7 @@ bool TextureAtlas::Insert(size_t nameHashCode, const ImageView& image)
     bool isPackingSucceed = stbrp_pack_rects(m_context.get(), &rect, 1) == 1;
     if (isPackingSucceed)
     {
-        m_atlasTexture->SetData(image.GetImageData(), Vector2(rect.x, rect.y), image.GetSize(), m_atlasTexture->GetPixelFormat());
+        m_atlasTexture->SetData(imageData, Vector2(rect.x, rect.y), size, m_atlasTexture->GetPixelFormat());
         m_packedTextureInfos.insert({nameHashCode, I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w - m_paddingOffset), int32_t(rect.h - m_paddingOffset))});
         return true;
     }
