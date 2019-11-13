@@ -36,9 +36,9 @@ public:
     
 /* @section Variable */
 private:
+    FontFactory m_fontFactory;
     std::unordered_map<StringHash, std::any> m_resourceCache;
     std::mutex m_mutex;
-    FontFactory m_fontFactory;
 };
 
 } /* namespace tgon */
