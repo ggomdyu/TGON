@@ -30,7 +30,7 @@ struct WindowStyle final
 
     int32_t x = 100;
     int32_t y = 100;
-    int32_t width = 838;
+    int32_t width = 1200;
     int32_t height = 441;
 
     bool hasCaption = true;
@@ -72,7 +72,7 @@ public:
     void Flash();
     void SetPosition(int32_t x, int32_t y);
     void SetContentSize(int32_t width, int32_t height);
-    void SetTitle(const std::string_view& title);
+    void SetTitle(const char* title);
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;

@@ -201,12 +201,12 @@ void Graphics::SwapBuffer()
 
 void Graphics::DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount)
 {
-    glDrawArrays(ConvertPrimitiveTypeToNative(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount);
+    TGON_GL_ERROR_CHECK(glDrawArrays(ConvertPrimitiveTypeToNative(primitiveType), static_cast<int32_t>(vertexStartOffset), vertexCount));
 }
     
 void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount)
 {
-    glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr);
+    TGON_GL_ERROR_CHECK(glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr));
 }
 
 } /* namespace tgon */

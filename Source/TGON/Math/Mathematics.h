@@ -79,7 +79,7 @@ constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& secon
 }
 
 template <typename _ValueType,
-          typename ..._ArgTypes,
+          typename... _ArgTypes,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType& Min(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {
@@ -94,7 +94,7 @@ constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& secon
 }
 
 template <typename _ValueType,
-          typename ..._ArgTypes,
+          typename... _ArgTypes,
           typename = typename std::enable_if<std::is_arithmetic<_ValueType>::value>::type>
 constexpr const _ValueType& Max(const _ValueType& first, const _ValueType& second, const _ArgTypes&... args) noexcept
 {

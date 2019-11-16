@@ -46,7 +46,7 @@ Font& Font::operator=(Font&& rhs) noexcept
     return *this;
 }
 
-const FontFace& Font::GetFace(FontSize fontSize) const
+const FontFace& Font::GetFace(int32_t fontSize) const
 {
     auto iter = m_fontFaces.find(fontSize);
     if (iter != m_fontFaces.end())
@@ -54,15 +54,15 @@ const FontFace& Font::GetFace(FontSize fontSize) const
         return iter->second;
     }
 
-    return m_fontFaces.insert(iter, {fontSize, FontFace(m_fileData, m_library, fontSize)})->second;
+    return m_fontFaces.emplace_hint(iter, fontSize, FontFace(m_fileData, m_library, fontSize))->second;
 }
 
-const GlyphData& Font::GetGlyphData(char32_t ch, FontSize fontSize) const
+const GlyphData& Font::GetGlyphData(char32_t ch, int32_t fontSize) const
 {
     return this->GetFace(fontSize).GetGlyphData(ch);
 }
 
-I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const
+I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
 {
     return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }

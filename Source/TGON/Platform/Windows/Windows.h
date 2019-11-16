@@ -10,9 +10,13 @@
 #endif
 #include <Windows.h>
 
-#undef SetCurrentDirectory
-#undef GetCurrentDirectory
 #undef CreateDirectory
-#undef SetEnvironmentVariable
-#undef GetEnvironmentVariable
 #undef CreateFont
+#undef SetCurrentDirectory
+#undef SetEnvironmentVariable
+#undef GetCurrentDirectory
+#undef GetEnvironmentVariable
+#undef GetCommandLine
+#undef GetSystemDirectory
+#undef GetUserName
+#undef GetTempPath

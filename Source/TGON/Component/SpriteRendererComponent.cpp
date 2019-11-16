@@ -24,7 +24,7 @@ void SpriteRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
+        m_graphicsModule->GetUIRenderer().AddSpritePrimitive(m_sprite, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
     }
 }
 

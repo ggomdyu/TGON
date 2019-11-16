@@ -26,7 +26,7 @@
     tgon::Application::OnTerminate();
 }
 
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed: (NSApplication *)sender
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
 }

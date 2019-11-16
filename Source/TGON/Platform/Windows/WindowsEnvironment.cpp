@@ -144,15 +144,10 @@ bool Environment::Is64BitOperatingSystem()
 #endif
 }
 
-void Environment::FailFast(const std::string_view& message)
+void Environment::FailFast(const char* message, const std::exception& exception)
 {
-    FailFast(message, {});
-}
-
-void Environment::FailFast(const std::string_view& message, const std::exception& exception)
-{
-    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(message.size()));
-    utf16Message.insert(utf16Message.end(), { std::byte('\n'), std::byte(0), std::byte(0), std::byte(0) });
+    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(strlen()));
+    utf16Message.insert(utf16Message.end(), {std::byte('\n'), std::byte(0), std::byte(0), std::byte(0)});
 
     OutputDebugStringW(L"FailFast:\n");
     OutputDebugStringW(reinterpret_cast<const wchar_t*>(&utf16Message[0]));

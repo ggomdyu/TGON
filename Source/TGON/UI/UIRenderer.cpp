@@ -42,10 +42,10 @@ void UIRenderer::Draw(Graphics& graphics)
     this->FlushSpriteBatches(graphics);
 }
 
-void UIRenderer::AddPrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld)
+void UIRenderer::AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld)
 {
     auto& sortingLayer = m_sortingLayers[sotringLayer];
-    sortingLayer.push_back({sprite, matWorld});
+    sortingLayer.emplace_back(sprite, matWorld);
 }
 
 void UIRenderer::AddCamera(const std::shared_ptr<Camera>& camera)
@@ -97,7 +97,7 @@ void UIRenderer::UpdateSpriteBatches()
             auto& sprite = primitive.first;
             if (m_spriteBatches.empty() || m_spriteBatches.back().CanBatch(*sprite) == false)
             {
-                m_spriteBatches.push_back(UISpriteBatch(sprite->GetTexture(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), sprite->GetTextureRect(), static_cast<int32_t>(m_spriteVertices.size())));
+                m_spriteBatches.emplace_back(sprite->GetTexture(), sprite->GetFilterMode(), sprite->GetWrapMode(), sprite->GetBlendMode(), sprite->IsEnableScissorRect(), sprite->GetScissorRect(), static_cast<int32_t>(m_spriteVertices.size()));
             }
             
             m_spriteBatches.back().Merge(*sprite, primitive.second, &m_spriteVertices);

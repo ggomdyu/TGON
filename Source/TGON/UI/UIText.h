@@ -11,6 +11,8 @@
 #include "Math/Color.h"
 #include "Drawing/Font.h"
 
+#include "UISpriteBatch.h"
+
 namespace tgon
 {
 
@@ -63,6 +65,9 @@ public:
     float GetLineSpacing() const noexcept;
     LineBreakMode GetLineBreakMode() const noexcept;
     const Color4f& GetColor() const noexcept;
+    
+private:
+    
     
 /**@section Variable */
 private:

@@ -37,11 +37,11 @@ void OnHandleMessage(NSEvent* event)
 
 } /* namespace */
 
-void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon)
+void Application::ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon)
 {
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:[NSString stringWithUTF8String:title.data()]];
-    [alert setInformativeText:[NSString stringWithUTF8String:message.data()]];
+    [alert setMessageText:[NSString stringWithUTF8String:title]];
+    [alert setInformativeText:[NSString stringWithUTF8String:message]];
     
     if (messageBoxIcon != MessageBoxIcon::No)
     {

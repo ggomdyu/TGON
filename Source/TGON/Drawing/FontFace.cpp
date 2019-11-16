@@ -9,7 +9,7 @@ namespace tgon
 
 extern const char* ConvertFTErrorToString(FT_Error error);
 
-FontFace::FontFace(const std::vector<std::byte>& fileData, FT_Library library, FontSize fontSize) :
+FontFace::FontFace(const std::vector<std::byte>& fileData, FT_Library library, int32_t fontSize) :
     m_fontSize(fontSize),
     m_fontFace([&]() -> FT_Face
     {

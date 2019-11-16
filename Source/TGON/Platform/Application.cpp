@@ -19,17 +19,17 @@ Application& Application::GetInstance()
     return instance;
 }
 
-void Application::ShowMessageBox(const std::string_view& message)
+void Application::ShowMessageBox(const char* message)
 {
     ShowMessageBox("", message);
 }
 
-void Application::ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon)
+void Application::ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon)
 {
     ShowMessageBox("", message, messageBoxIcon);
 }
 
-void Application::ShowMessageBox(const std::string_view& title, const std::string_view& message)
+void Application::ShowMessageBox(const char* title, const char* message)
 {
     ShowMessageBox(title, message, MessageBoxIcon::Informational);
 }

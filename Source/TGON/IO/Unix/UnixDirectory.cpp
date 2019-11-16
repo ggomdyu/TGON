@@ -62,6 +62,7 @@ bool Directory::Delete(const char* path, bool recursive)
 {
     if (recursive)
     {
+        
         return InternalRecursiveDelete(path);
     }
     

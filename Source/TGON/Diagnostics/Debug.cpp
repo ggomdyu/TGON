@@ -10,17 +10,17 @@ namespace tgon
 
 void Debug::Assert(bool condition)
 {
-    Assert(condition, "", "");
+    Assert(condition, {"", 0}, {"", 0});
 }
 
 void Debug::Assert(bool condition, const std::string_view& message)
 {
-    Assert(condition, message, "");
+    Assert(condition, message, {"", 0});
 }
 
 void Debug::Fail(const std::string_view& message)
 {
-    Fail(message, "");
+    Fail(message, {"", 0});
 }
 
 void Debug::Fail(const std::string_view& message, const std::string_view& detailMessage)

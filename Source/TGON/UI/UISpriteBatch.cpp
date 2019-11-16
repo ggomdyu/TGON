@@ -12,8 +12,10 @@
 namespace tgon
 {
     
-UISpriteBatch::UISpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept :
+UISpriteBatch::UISpriteBatch(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, int32_t vertexStartOffset) noexcept :
     m_texture(texture),
+    m_filterMode(filterMode),
+    m_wrapMode(wrapMode),
     m_blendMode(blendMode),
     m_enableScissorRect(enableScissorRect),
     m_scissorRect(scissorRect),
@@ -25,6 +27,8 @@ UISpriteBatch::UISpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode 
 bool UISpriteBatch::CanBatch(const UISprite& rhs) const noexcept
 {
     if (m_texture == rhs.GetTexture() &&
+        m_filterMode == rhs.GetFilterMode() &&
+        m_wrapMode == rhs.GetWrapMode() &&
         m_blendMode == rhs.GetBlendMode() &&
         m_enableScissorRect == rhs.IsEnableScissorRect() &&
         m_scissorRect == rhs.GetScissorRect())

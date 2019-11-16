@@ -81,8 +81,9 @@ I32Extent2D Window::GetClientSize() const
 
 std::string Window::GetTitle() const
 {
-    std::array<char, 16384> str;
+    std::array<char, 8192> str;
     int32_t titleLen = this->GetTitle(&str[0], static_cast<int32_t>(str.size()));
+    
     return {&str[0], static_cast<size_t>(titleLen)};
 }
 

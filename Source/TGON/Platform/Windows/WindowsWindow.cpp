@@ -431,9 +431,9 @@ void Window::SetContentSize(int32_t width, int32_t height)
     SetWindowPos(m_wndHandle, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_NOMOVE | SWP_NOZORDER);
 }
 
-void Window::SetTitle(const std::string_view& title)
+void Window::SetTitle(const char* title)
 {
-    auto utf16TitleBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(title.data()), static_cast<int32_t>(title.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
+    auto utf16TitleBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&title[0]), static_cast<int32_t>(strlen(title)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
     if (utf16TitleBytes == -1)
     {
         return;

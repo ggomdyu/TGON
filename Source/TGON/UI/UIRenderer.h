@@ -11,6 +11,7 @@
 #include "Text/StringHash.h"
 
 #include "UISpriteBatch.h"
+#include "UIText.h"
 
 namespace tgon
 {
@@ -24,7 +25,7 @@ public:
 /**@section Method */
 public:
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddPrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld);
+    void AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld);
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     void SetMaxSortingLayer(int32_t maxSortingLayer) noexcept;
     int32_t GetMinSortingLayer() const noexcept;

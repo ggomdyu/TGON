@@ -5,9 +5,6 @@
  */
 
 #pragma once
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 #include "FontFace.h"
 
 namespace tgon
@@ -33,15 +30,15 @@ public:
 
 /**@section Method */
 public:
-    const FontFace& GetFace(FontSize fontSize) const;
-    const GlyphData& GetGlyphData(char32_t ch, FontSize fontSize) const;
-    I32Vector2 GetKerning(char32_t lhs, char32_t rhs, FontSize fontSize) const;
+    const FontFace& GetFace(int32_t fontSize) const;
+    const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
+    I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
 
 /**@section Variable */
 private:
     std::vector<std::byte> m_fileData;
     FT_Library m_library;
-    mutable std::unordered_map<FontSize, FontFace> m_fontFaces;
+    mutable std::unordered_map<int32_t, FontFace> m_fontFaces;
 };
 
 } /* namespace tgon */

@@ -7,7 +7,7 @@ namespace tgon
 
 std::shared_ptr<Texture> AssetModule::GetTexture(const StringViewHash& path)
 {
-    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    m_mutex.lock();
     
     auto iter = m_resourceCache.find(path);
     if (iter == m_resourceCache.end())
@@ -15,12 +15,14 @@ std::shared_ptr<Texture> AssetModule::GetTexture(const StringViewHash& path)
         iter = m_resourceCache.insert({path, std::make_shared<Texture>(path.Data(), FilterMode::Bilinear, WrapMode::Clamp, false, false)}).first;
     }
     
+    m_mutex.unlock();
+    
     return std::any_cast<std::shared_ptr<Texture>>(iter->second);
 }
 
 std::shared_ptr<AudioBuffer> AssetModule::GetAudioBuffer(const StringViewHash& path)
 {
-    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    m_mutex.lock();
     
     auto iter = m_resourceCache.find(path);
     if (iter == m_resourceCache.end())
@@ -28,18 +30,22 @@ std::shared_ptr<AudioBuffer> AssetModule::GetAudioBuffer(const StringViewHash& p
         iter = m_resourceCache.insert({path, std::make_shared<AudioBuffer>(path)}).first;
     }
     
+    m_mutex.unlock();
+    
     return std::any_cast<std::shared_ptr<AudioBuffer>>(iter->second);
 }
 
 std::shared_ptr<Font> AssetModule::GetFont(const StringViewHash& path)
 {
-    std::lock_guard<std::mutex> lockGuard(m_mutex);
+    m_mutex.lock();
     
     auto iter = m_resourceCache.find(path);
     if (iter == m_resourceCache.end())
     {
         iter = m_resourceCache.insert({path, std::make_shared<Font>(path.Data(), m_fontFactory.GetFTLibrary())}).first;
     }
+    
+    m_mutex.unlock();
     
     return std::any_cast<std::shared_ptr<Font>>(iter->second);
 }

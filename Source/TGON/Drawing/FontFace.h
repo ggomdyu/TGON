@@ -20,8 +20,6 @@
 namespace tgon
 {
 
-using FontSize = int32_t;
-
 struct GlyphMetrics final
 {
     I32Extent2D size;
@@ -41,7 +39,7 @@ class TGON_API FontFace final :
 {
 /**@section Constructor */
 public:
-    FontFace(const std::vector<std::byte>& fileData, FT_Library library, FontSize fontSize);
+    FontFace(const std::vector<std::byte>& fileData, FT_Library library, int32_t fontSize);
     FontFace(FontFace&& rhs) noexcept;
     
 /**@section Destructor */
@@ -62,7 +60,7 @@ private:
 
 /**@section Variable */
 public:
-    FontSize m_fontSize;
+    int32_t m_fontSize;
     FT_Face m_fontFace;
     mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
 };

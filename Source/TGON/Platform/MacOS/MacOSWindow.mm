@@ -242,9 +242,9 @@ void Window::SetContentSize(int32_t width, int32_t height)
     [m_window setContentSize:NSMakeSize(clientRect.size.width, clientRect.size.height)];
 }
 
-void Window::SetTitle(const std::string_view& title)
+void Window::SetTitle(const char* title)
 {
-    [m_window setTitle:[NSString stringWithUTF8String:title.data()]];
+    [m_window setTitle:[NSString stringWithUTF8String:title]];
 }
 
 void Window::SetTopMost(bool setTopMost)

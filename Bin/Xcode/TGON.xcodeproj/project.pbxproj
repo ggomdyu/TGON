@@ -323,8 +323,6 @@
 		FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CF22945BED00A829FD /* TaskModule.cpp */; };
 		FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61D022945BED00A829FD /* TaskModule.h */; };
 		FD98AF3122DE3CD600467A92 /* TimeSpan.h in Headers */ = {isa = PBXBuildFile; fileRef = FD98AF3022DE3CD600467A92 /* TimeSpan.h */; };
-		FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC522CA606A003607DC /* Algorithm.h */; };
-		FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9AEEC722CA606E003607DC /* NonAddressable.h */; };
 		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
 		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
 		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
@@ -344,13 +342,6 @@
 		FDB7036522B6B30C0055FCED /* ftzconf.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035622B6B30C0055FCED /* ftzconf.h */; };
 		FDB7036622B6B30C0055FCED /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035722B6B30C0055FCED /* inftrees.h */; };
 		FDB7036822B6B3420055FCED /* infcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036722B6B3410055FCED /* infcodes.h */; };
-		FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036E22B9132A0055FCED /* StaticInvoke.h */; };
-		FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7036F22B9132A0055FCED /* InstantiateCounter.h */; };
-		FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037022B9132A0055FCED /* EventDispatcher.h */; };
-		FDB7037822B9132B0055FCED /* ExpressionTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037122B9132A0055FCED /* ExpressionTemplate.h */; };
-		FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB7037222B9132A0055FCED /* EventDispatcher.cpp */; };
-		FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037322B9132B0055FCED /* InstanceCounter.h */; };
-		FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7037422B9132B0055FCED /* AutoCast.h */; };
 		FDBDAD7A22971A52003B9256 /* DispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */; };
 		FDBDAD7B22971A52003B9256 /* DispatchQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBDAD7922971A52003B9256 /* DispatchQueue.h */; };
 		FDC02CE1228482F000BEE91A /* Hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02CDF228482F000BEE91A /* Hash.cpp */; };
@@ -1258,8 +1249,6 @@
 		FD7E61CF22945BED00A829FD /* TaskModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskModule.cpp; sourceTree = "<group>"; };
 		FD7E61D022945BED00A829FD /* TaskModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskModule.h; sourceTree = "<group>"; };
 		FD98AF3022DE3CD600467A92 /* TimeSpan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSpan.h; sourceTree = "<group>"; };
-		FD9AEEC522CA606A003607DC /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Algorithm.h; path = ../../../Source/TGON/Misc/Algorithm.h; sourceTree = "<group>"; };
-		FD9AEEC722CA606E003607DC /* NonAddressable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonAddressable.h; path = ../../../Source/TGON/Misc/NonAddressable.h; sourceTree = "<group>"; };
 		FDA03DAD2040781A004AB168 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		FDACD2EA20B4518A00C62C24 /* Cpp_Style_Guide(KR).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cpp_Style_Guide(KR).docx"; sourceTree = "<group>"; };
 		FDACD2EC20B4518A00C62C24 /* Windows_License_Notice.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Windows_License_Notice.docx; sourceTree = "<group>"; };
@@ -1284,13 +1273,6 @@
 		FDB7035622B6B30C0055FCED /* ftzconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftzconf.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/ftzconf.h"; sourceTree = "<group>"; };
 		FDB7035722B6B30C0055FCED /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inftrees.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/inftrees.h"; sourceTree = "<group>"; };
 		FDB7036722B6B3410055FCED /* infcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = infcodes.h; path = "../../Source/ThirdParty/freetype-2.10.0/src/gzip/infcodes.h"; sourceTree = "<group>"; };
-		FDB7036E22B9132A0055FCED /* StaticInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticInvoke.h; path = ../../../Source/TGON/Misc/StaticInvoke.h; sourceTree = "<group>"; };
-		FDB7036F22B9132A0055FCED /* InstantiateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstantiateCounter.h; path = ../../../Source/TGON/Misc/InstantiateCounter.h; sourceTree = "<group>"; };
-		FDB7037022B9132A0055FCED /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = ../../../Source/TGON/Misc/EventDispatcher.h; sourceTree = "<group>"; };
-		FDB7037122B9132A0055FCED /* ExpressionTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpressionTemplate.h; path = ../../../Source/TGON/Misc/ExpressionTemplate.h; sourceTree = "<group>"; };
-		FDB7037222B9132A0055FCED /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = ../../../Source/TGON/Misc/EventDispatcher.cpp; sourceTree = "<group>"; };
-		FDB7037322B9132B0055FCED /* InstanceCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstanceCounter.h; path = ../../../Source/TGON/Misc/InstanceCounter.h; sourceTree = "<group>"; };
-		FDB7037422B9132B0055FCED /* AutoCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCast.h; path = ../../../Source/TGON/Misc/AutoCast.h; sourceTree = "<group>"; };
 		FDBDAD7822971A52003B9256 /* DispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DispatchQueue.cpp; sourceTree = "<group>"; };
 		FDBDAD7922971A52003B9256 /* DispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueue.h; sourceTree = "<group>"; };
 		FDC02B81228481EF00BEE91A /* OpenGLShaderCode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OpenGLShaderCode.h; sourceTree = "<group>"; };
@@ -2560,7 +2542,6 @@
 				FDC02BFB228481EF00BEE91A /* Text */,
 				FDC02C24228481F000BEE91A /* Threading */,
 				FDC02C2C228481F000BEE91A /* Time */,
-				FDB7036D22B9131F0055FCED /* Misc */,
 				FD2108C920BAE630009FC8F1 /* TGON.h */,
 				FDEA237820AFF586000885AC /* PrecompiledHeader.h */,
 			);
@@ -2672,22 +2653,6 @@
 				FDB7034722B6B2E80055FCED /* infcodes.c */,
 			);
 			name = gzip;
-			sourceTree = "<group>";
-		};
-		FDB7036D22B9131F0055FCED /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				FD9AEEC522CA606A003607DC /* Algorithm.h */,
-				FD9AEEC722CA606E003607DC /* NonAddressable.h */,
-				FDB7037422B9132B0055FCED /* AutoCast.h */,
-				FDB7037222B9132A0055FCED /* EventDispatcher.cpp */,
-				FDB7037022B9132A0055FCED /* EventDispatcher.h */,
-				FDB7037122B9132A0055FCED /* ExpressionTemplate.h */,
-				FDB7037322B9132B0055FCED /* InstanceCounter.h */,
-				FDB7036F22B9132A0055FCED /* InstantiateCounter.h */,
-				FDB7036E22B9132A0055FCED /* StaticInvoke.h */,
-			);
-			path = Misc;
 			sourceTree = "<group>";
 		};
 		FDC02B47228481EF00BEE91A /* Diagnostics */ = {
@@ -2850,8 +2815,8 @@
 			isa = PBXGroup;
 			children = (
 				FDC02C2E228481F000BEE91A /* MacOS */,
-				FDC02C32228481F000BEE91A /* DateTime.h */,
 				8CC61CB322F3299600F415C8 /* DateTime.cpp */,
+				FDC02C32228481F000BEE91A /* DateTime.h */,
 				FDC02C31228481F000BEE91A /* Timer.cpp */,
 				FDC02C37228481F000BEE91A /* Timer.h */,
 				FD98AF3022DE3CD600467A92 /* TimeSpan.h */,
@@ -3581,7 +3546,6 @@
 				FDE1B5BD22E40FDB0093FDC1 /* ucasemap.h in Headers */,
 				FDE1B6AE22E4100F0093FDC1 /* usc_impl.h in Headers */,
 				FD53329122A2EA1C001EB57C /* fttypes.h in Headers */,
-				FD9AEEC822CA606F003607DC /* NonAddressable.h in Headers */,
 				FDE1B69122E4100F0093FDC1 /* unisetspan.h in Headers */,
 				FD53333222A5834A001EB57C /* FontFactory.h in Headers */,
 				FD53329D22A2EA1C001EB57C /* ftbbox.h in Headers */,
@@ -3635,7 +3599,6 @@
 				FDC83D5122CE40EE00B93C8D /* AssetModule.h in Headers */,
 				FDE1B5A422E40FDB0093FDC1 /* usetiter.h in Headers */,
 				FDE1B66722E4100F0093FDC1 /* ulocimp.h in Headers */,
-				FDB7037B22B9132B0055FCED /* AutoCast.h in Headers */,
 				FD5332E322A2EA1C001EB57C /* ftbitmap.h in Headers */,
 				FDE1B6B422E4100F0093FDC1 /* icuplugimp.h in Headers */,
 				FDE1B5BC22E40FDB0093FDC1 /* ucptrie.h in Headers */,
@@ -3738,7 +3701,6 @@
 				FDE1B5B422E40FDB0093FDC1 /* icuplug.h in Headers */,
 				FDE1B66D22E4100F0093FDC1 /* pluralmap.h in Headers */,
 				FDE1B5A122E40FDB0093FDC1 /* ucharstriebuilder.h in Headers */,
-				FDB7037722B9132B0055FCED /* EventDispatcher.h in Headers */,
 				FD53329222A2EA1C001EB57C /* ftparams.h in Headers */,
 				FDE1B6C522E4100F0093FDC1 /* charstr.h in Headers */,
 				FDE1B5E822E40FDB0093FDC1 /* idna.h in Headers */,
@@ -3771,11 +3733,9 @@
 				FD5332BB22A2EA1C001EB57C /* svpscmap.h in Headers */,
 				FDE1B6BB22E4100F0093FDC1 /* ucnv_ext.h in Headers */,
 				FDE1B59522E40FDB0093FDC1 /* uset.h in Headers */,
-				FDB7037522B9132B0055FCED /* StaticInvoke.h in Headers */,
 				FDE1B5CC22E40FDB0093FDC1 /* uobject.h in Headers */,
 				FDE1B6B822E4100F0093FDC1 /* utracimp.h in Headers */,
 				FDE1B69422E4100F0093FDC1 /* propname.h in Headers */,
-				FDB7037622B9132B0055FCED /* InstantiateCounter.h in Headers */,
 				FD5332A522A2EA1C001EB57C /* psaux.h in Headers */,
 				8C7A8F182379641E00DC7196 /* Font.h in Headers */,
 				FDE1B6BF22E4100F0093FDC1 /* ubidi_props.h in Headers */,
@@ -3806,7 +3766,6 @@
 				FDE1B69F22E4100F0093FDC1 /* uvectr32.h in Headers */,
 				8CF8A17C234A435100763883 /* ISerializable.h in Headers */,
 				FDE1B5CA22E40FDB0093FDC1 /* char16ptr.h in Headers */,
-				FDB7037822B9132B0055FCED /* ExpressionTemplate.h in Headers */,
 				FDE1B6B122E4100F0093FDC1 /* servloc.h in Headers */,
 				FD5332D122A2EA1C001EB57C /* ftotval.h in Headers */,
 				FD53331922A57F38001EB57C /* zutil.h in Headers */,
@@ -3847,7 +3806,6 @@
 				FDB7036022B6B30C0055FCED /* infblock.h in Headers */,
 				FD53331622A57F38001EB57C /* gzguts.h in Headers */,
 				FDE1B5D422E40FDB0093FDC1 /* stringpiece.h in Headers */,
-				FDB7037A22B9132B0055FCED /* InstanceCounter.h in Headers */,
 				FDE1B66822E4100F0093FDC1 /* ucol_data.h in Headers */,
 				FD5332E522A2EA1C001EB57C /* ftmac.h in Headers */,
 				FDE1B5F222E40FDB0093FDC1 /* utf32.h in Headers */,
@@ -3872,7 +3830,6 @@
 				FD5332E422A2EA1C001EB57C /* ftlist.h in Headers */,
 				FDE1B5CD22E40FDB0093FDC1 /* locdspnm.h in Headers */,
 				FD2D6D1822D064410087DF85 /* Mesh.h in Headers */,
-				FD9AEEC622CA606B003607DC /* Algorithm.h in Headers */,
 				FD5332EB22A36015001EB57C /* ft2build.h in Headers */,
 				8CF8A19A234A438800763883 /* RendererComponent.h in Headers */,
 				FDE1B67222E4100F0093FDC1 /* locbased.h in Headers */,
@@ -4117,7 +4074,6 @@
 				FDE1B4CD22E40E940093FDC1 /* ucnv_ext.cpp in Sources */,
 				FDE1B48422E40E940093FDC1 /* udata.cpp in Sources */,
 				FDC02CE4228487CA00BEE91A /* AudioPlayer.cpp in Sources */,
-				FDB7037922B9132B0055FCED /* EventDispatcher.cpp in Sources */,
 				FD53320822A2E8B6001EB57C /* ftlzw.c in Sources */,
 				FD53331422A57F38001EB57C /* deflate.c in Sources */,
 				FDE1B4C022E40E940093FDC1 /* rbbitblb.cpp in Sources */,

@@ -18,36 +18,43 @@ void UIText::SetFont(const std::shared_ptr<Font>& font, int32_t fontSize)
 {
     m_font = font;
     m_fontSize = fontSize;
+    m_isDirty = true;
 }
 
 void UIText::SetFontSize(int32_t fontSize)
 {
     m_fontSize = fontSize;
+    m_isDirty = true;
 }
 
 void UIText::SetText(const std::string_view& text)
 {
     m_text = text;
+    m_isDirty = true;
 }
 
 void UIText::SetTextAlignment(TextAlignment textAlignment)
 {
     m_textAlignment = textAlignment;
+    m_isDirty = true;
 }
 
 void UIText::SetLineSpacing(float lineSpacing)
 {
     m_lineSpacing = lineSpacing;
+    m_isDirty = true;
 }
 
 void UIText::SetLineBreakMode(LineBreakMode lineBreakMode)
 {
     m_lineBreakMode = lineBreakMode;
+    m_isDirty = true;
 }
 
 void UIText::SetColor(const Color4f& color)
 {
     m_color = color;
+    m_isDirty = true;
 }
 
 std::shared_ptr<Font> UIText::GetFont() noexcept

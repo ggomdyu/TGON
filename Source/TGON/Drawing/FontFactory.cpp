@@ -1,9 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include <stdexcept>
-
 #include "Diagnostics/Debug.h"
-#include "IO/File.h"
 
 #include "FontFactory.h"
 

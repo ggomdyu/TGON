@@ -18,7 +18,7 @@ class TGON_API UISpriteBatch final
 {
 /**@section Constructor */
 public:
-    UISpriteBatch(const std::shared_ptr<Texture>& texture, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, const FRect& textureRect, int32_t vertexStartOffset) noexcept;
+    UISpriteBatch(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
@@ -29,6 +29,8 @@ public:
 /**@section Variable */
 private:
     std::shared_ptr<Texture> m_texture;
+    FilterMode m_filterMode;
+    WrapMode m_wrapMode;
     BlendMode m_blendMode;
     bool m_enableScissorRect;
     FRect m_scissorRect;

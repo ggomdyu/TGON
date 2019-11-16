@@ -12,6 +12,8 @@
 #include <ctime>
 #include <tuple>
 
+#include "Platform/Config.h"
+
 #include "TimeSpan.h"
 
 namespace tgon
@@ -35,7 +37,7 @@ enum class DayOfWeek
     Saturday,
 };
 
-class DateTime final
+class TGON_API DateTime final
 {
 /**@section Constructor */
 public:
@@ -298,7 +300,7 @@ constexpr DateTime DateTime::AddMonths(int32_t value) const noexcept
         return DateTime(0);
     }
 
-    auto [year, month, day] = GetDateParts();
+    auto [year, month, day] = this->GetDateParts();
 
     int32_t i = month + value;
     if (i >= 0)

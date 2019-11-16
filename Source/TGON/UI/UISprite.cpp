@@ -1,29 +1,19 @@
 #include "PrecompiledHeader.h"
 
 #include "Graphics/Texture.h"
-#include "Graphics/Transform.h"
 
 #include "UISprite.h"
 
 namespace tgon
 {
 
-UISprite::UISprite() noexcept :
-    UISprite(nullptr)
-{
-}
-
-UISprite::UISprite(const std::shared_ptr<Texture>& texture) noexcept :
-    UISprite(texture, FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height)))
-{
-}
-
-UISprite::UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect) noexcept :
+UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, Color4f blendColor) noexcept :
     m_texture(texture),
-    m_textureRect(textureRect),
-    m_blendMode(BlendMode::Normal),
-    m_blendColor(1.0f, 1.0f, 1.0f, 1.0f),
-    m_enableScissorRect(false)
+    m_textureRect(FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height))),
+    m_filterMode(filterMode),
+    m_wrapMode(wrapMode),
+    m_blendMode(blendMode),
+    m_blendColor(blendColor)
 {
 }
 
@@ -66,6 +56,16 @@ void UISprite::SetBlendMode(BlendMode blendMode) noexcept
 void UISprite::SetBlendColor(const Color4f& blendColor) noexcept
 {
     m_blendColor = blendColor;
+}
+
+FilterMode UISprite::GetFilterMode() const noexcept
+{
+    return m_filterMode;
+}
+
+WrapMode UISprite::GetWrapMode() const noexcept
+{
+    return m_wrapMode;
 }
 
 BlendMode UISprite::GetBlendMode() const noexcept

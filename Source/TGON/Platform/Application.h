@@ -45,10 +45,10 @@ public:
     static Application& GetInstance();
     void MessageLoop();
     [[noreturn]] static void Terminate();
-    static void ShowMessageBox(const std::string_view& message);
-    static void ShowMessageBox(const std::string_view& message, MessageBoxIcon messageBoxIcon);
-    static void ShowMessageBox(const std::string_view& title, const std::string_view& message);
-    static void ShowMessageBox(const std::string_view& title, const std::string_view& message, MessageBoxIcon messageBoxIcon);
+    static void ShowMessageBox(const char* message);
+    static void ShowMessageBox(const char* message, MessageBoxIcon messageBoxIcon);
+    static void ShowMessageBox(const char* title, const char* message);
+    static void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon);
     static std::shared_ptr<Engine> GetEngine() noexcept;
     static std::shared_ptr<Window> GetRootWindow() noexcept;
     

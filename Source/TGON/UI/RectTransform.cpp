@@ -49,9 +49,4 @@ float RectTransform::GetHeight() const noexcept
     return m_size.height;
 }
 
-void RectTransform::Update()
-{
-    
-}
-
 } /* namespace tgon */

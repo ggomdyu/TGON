@@ -87,11 +87,11 @@ public:
 
 /**@section Method */
 public:
-    static bool SetEnvironmentVariable(const std::string_view& name, const std::string_view& value);
-    static int32_t GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen);
-    static int32_t GetEnvironmentVariable(const std::string_view& name, const gsl::span<char>& destStr);
-    static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name);
-    static std::optional<std::string> GetEnvironmentVariable(const std::string_view& name, EnvironmentVariableTarget target);
+    static bool SetEnvironmentVariable(const char* name, const char* value);
+    static int32_t GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen);
+    static int32_t GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr);
+    static std::optional<std::string> GetEnvironmentVariable(const char* name);
+    static std::optional<std::string> GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target);
     static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
@@ -118,8 +118,8 @@ public:
     static int32_t GetProcessorCount();
     static bool Is64BitProcess();
     static bool Is64BitOperatingSystem();
-    [[noreturn]] static void FailFast(const std::string_view& message);
-    [[noreturn]] static void FailFast(const std::string_view& message, const std::exception& exception);
+    [[noreturn]] static void FailFast(const char* message);
+    [[noreturn]] static void FailFast(const char* message, const std::exception& exception);
     static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
     static std::string GetStackTrace();
     static std::string GetSystemDirectory();

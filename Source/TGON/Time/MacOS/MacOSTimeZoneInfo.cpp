@@ -31,28 +31,4 @@ const TimeZoneInfo& TimeZoneInfo::Local()
     return timeZoneInfo;
 }
 
-//std::vector<std::string> GetTimeZoneNames()
-//{
-//    NSArray* array = [NSTimeZone knownTimeZoneNames];
-//
-//    std::vector<std::string> ret;
-//    ret.reserve(array.count);
-//
-//    for (int i = 0; i < array.count; ++i)
-//    {
-//        NSString* timeZoneName = [array[i] name];
-//        ret.push_back([timeZoneName UTF8String]);
-//    }
-//
-//    return ret;
-//}
-
-//TimeZoneInfo TimeZoneInfo::CreateTimeZoneInfo(const std::string_view& timeZoneName)
-//{
-//    NSString* timeZoneName2 = [[NSString alloc] initWithUTF8String: timeZoneName];
-//    
-//    NSTimeZone* timeZone = [[NSTimeZone alloc] initWithName: nsTimeZoneName2];
-//    
-//}
-
 } /* namespace tgon */

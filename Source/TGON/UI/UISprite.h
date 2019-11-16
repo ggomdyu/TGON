@@ -8,7 +8,6 @@
 #include "Math/Rect.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/Texture.h"
-#include "Graphics/Transform.h"
 
 namespace tgon
 {
@@ -17,20 +16,23 @@ class TGON_API UISprite final
 {
 /**@section Constructor */
 public:
-    UISprite() noexcept;
-    explicit UISprite(const std::shared_ptr<Texture>& texture) noexcept;
-    UISprite(const std::shared_ptr<Texture>& texture, const FRect& textureRect) noexcept;
+    UISprite() noexcept = default;
+    UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode = FilterMode::Bilinear, WrapMode wrapMode = WrapMode::Clamp, BlendMode blendMode = BlendMode::Normal, Color4f blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f)) noexcept;
 
 /**@section Method */
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect) noexcept;
+    void SetFilterMode(FilterMode filterMode) noexcept;
+    void SetWrapMode(WrapMode wrapMode) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;
     void SetBlendColor(const Color4f& blendColor) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     FRect& GetTextureRect() noexcept;
     const FRect& GetTextureRect() const noexcept;
+    FilterMode GetFilterMode() const noexcept;
+    WrapMode GetWrapMode() const noexcept;
     BlendMode GetBlendMode() const noexcept;
     const Color4f& GetBlendColor() const noexcept;
     void EnableScissorRect() noexcept;
@@ -44,17 +46,12 @@ public:
 private:
     std::shared_ptr<Texture> m_texture;
     FRect m_textureRect;
-    BlendMode m_blendMode;
-    Color4f m_blendColor;
+    FilterMode m_filterMode = FilterMode::Bilinear;
+    WrapMode m_wrapMode = WrapMode::Clamp;
+    BlendMode m_blendMode = BlendMode::Normal;
+    Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
     FRect m_scissorRect;
-    bool m_enableScissorRect;
+    bool m_enableScissorRect = false;
 };
 
-class NinePatchSprite
-{
-public:
-private:
-    UISprite m_sprites[9];
-};
-    
 } /* namespace tgon */

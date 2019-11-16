@@ -16,7 +16,7 @@ void Debug::Write(const std::string_view& message)
     str.insert(0, m_indentLevel, '\t');
 
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
-    printf("%s", str.c_str());
+    printf(u8"%s", str.c_str());
 #endif
 }
 
@@ -28,7 +28,7 @@ void Debug::WriteLine(const std::string_view& message)
     str += u8"\n";
 
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
-    printf("%s", str.c_str());
+    printf(u8"%s", str.c_str());
 #endif
 }
 

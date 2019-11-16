@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class TGON_API GameObject :
-	public Object,
+    public Object,
     public std::enable_shared_from_this<GameObject>
 {
 public:

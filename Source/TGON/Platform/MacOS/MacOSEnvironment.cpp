@@ -42,14 +42,14 @@ int32_t GetSpecialDirectory(NSSearchPathDirectory searchPathDirectory, NSSearchP
     
 } /* namespace */
 
-bool Environment::SetEnvironmentVariable(const std::string_view& name, const std::string_view& value)
+bool Environment::SetEnvironmentVariable(const char* name, const char* value)
 {
-    return setenv(name.data(), value.data(), true) == 0;
+    return setenv(name, value, true) == 0;
 }
 
-int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen)
+int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
 {
-    const char* envValue = getenv(name.data());
+    const char* envValue = getenv(name);
     if (envValue == nullptr)
     {
         return -1;
@@ -115,11 +115,11 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
         return GetSpecialDirectory(NSHomeDirectory(), ".config", destStr, destStrBufferLen);
             
     case SpecialFolder::CommonApplicationData:
-        return GetSpecialDirectory(@"/usr/share", "", destStr, destStrBufferLen);
+            return GetSpecialDirectory(@"/usr/share", {"", 0}, destStr, destStrBufferLen);
        
     case SpecialFolder::Desktop:
     case SpecialFolder::DesktopDirectory:
-        return GetSpecialDirectory(NSDesktopDirectory, NSUserDomainMask, "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSDesktopDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::Fonts:
         return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, "/Fonts", destStr, destStrBufferLen);
@@ -128,23 +128,23 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
         return GetSpecialDirectory(NSLibraryDirectory, NSUserDomainMask, "/Favorites", destStr, destStrBufferLen);
             
     case SpecialFolder::InternetCache:
-        return GetSpecialDirectory(NSCachesDirectory, NSUserDomainMask, "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSCachesDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::ProgramFiles:
-        return GetSpecialDirectory(@"/Applications", "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/Applications", {"", 0}, destStr, destStrBufferLen);
             
     case SpecialFolder::System:
-        return GetSpecialDirectory(@"/System", "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/System", {"", 0}, destStr, destStrBufferLen);
         
     case SpecialFolder::UserProfile:
     case SpecialFolder::MyDocuments:
-        return GetSpecialDirectory(NSHomeDirectory(), "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSHomeDirectory(), {"", 0}, destStr, destStrBufferLen);
     
     case SpecialFolder::MyMusic:
-        return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSMusicDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
         
     case SpecialFolder::MyPictures:
-        return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, "", destStr, destStrBufferLen);
+        return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
             
     default:
         return 0;
@@ -194,6 +194,13 @@ std::string_view Environment::GetNewLine()
 int32_t Environment::GetSystemPageSize()
 {
     return static_cast<int32_t>(getpagesize());
+}
+
+void Environment::FailFast(const char* message, const std::exception& exception)
+{
+    printf("FailFast:\n%s", message);
+
+    throw exception;
 }
 
 int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
