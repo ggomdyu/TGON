@@ -59,7 +59,7 @@ private:
     void Destroy();
 
 /**@section Variable */
-public:
+private:
     int32_t m_fontSize;
     FT_Face m_fontFace;
     mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;

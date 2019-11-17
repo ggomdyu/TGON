@@ -12,9 +12,7 @@
 
 #include "Platform/Config.h"
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsEnvironment.h"
-#endif
+#include "Version.h"
 
 namespace tgon
 {
@@ -24,6 +22,11 @@ enum class EnvironmentVariableTarget
     Process = 0,
     User = 1,
     Machine = 2,
+};
+
+class TGON_API OperatingSystem final
+{
+
 };
 
 class TGON_API Environment final
@@ -123,25 +126,23 @@ public:
     static int32_t GetStackTrace(char* destStr, int32_t destStrBufferLen);
     static std::string GetStackTrace();
     static std::string GetSystemDirectory();
-        /*
-    public static IDictionary GetEnvironmentVariables();
-    public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
-    public static void SetEnvironmentVariable(
-        string variable,
-        string value,
-        EnvironmentVariableTarget target);
-    
-    public static string ExpandEnvironmentVariables(string name);
-    
-    public static strPath(
-        Environment.SpecialFolder folder,
-        Environment.SpecialFolderOption option);
-    public static bool HasShutdownSting GetFolderarted{ get; }
-    public static OperatingSystem OSVersion{ get; }
-    public static bool UserInteractive{ get; }
-    public static long WorkingSet{ get; }
-    public static string[] GetLogicalDrives();
-    public static int ExitCode{ get; set; }*/
+    //public static IDictionary GetEnvironmentVariables();
+    //public static IDictionary GetEnvironmentVariables(EnvironmentVariableTarget target);
+    //public static void SetEnvironmentVariable(
+    //    string variable,
+    //    string value,
+    //    EnvironmentVariableTarget target);
+    //
+    //public static string ExpandEnvironmentVariables(string name);
+    //
+    //public static strPath(
+    //    Environment.SpecialFolder folder,
+    //    Environment.SpecialFolderOption option);
+    //public static bool HasShutdownSting GetFolderarted{ get; }
+    //public static OperatingSystem OSVersion{ get; }
+    static bool GetUserInteractive();
+    //public static long WorkingSet{ get; }
+    static std::vector<std::string> GetLogicalDrives();
 };
 
 template <int32_t Length>

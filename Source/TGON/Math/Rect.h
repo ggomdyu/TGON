@@ -8,6 +8,7 @@
 #include <type_traits>
 #include <cstdint>
 #include <cstdio>
+#include <gsl/span>
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
@@ -27,12 +28,8 @@ public:
 
 /**@section Constructor */
 public:
-    /**@brief   Constructor that initializes members to 0 */
-    constexpr BasicRect() noexcept;
-
-    /**@brief   Constructor that initializes the member with the specified value */
+    constexpr BasicRect() noexcept = default;
     constexpr BasicRect(const _ValueType& x, const _ValueType& y, const _ValueType& width, const _ValueType& heght) noexcept;
-    
     template <typename _ValueType2>
     constexpr BasicRect(const BasicRect<_ValueType2>& rhs) noexcept;
 
@@ -55,29 +52,13 @@ public:
 /**@section Method */
 public:
     constexpr bool Intersect(const BasicRect& rhs) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-    _ValueType x;
-    _ValueType y;
-    _ValueType width;
-    _ValueType height;
+    _ValueType x{}, y{}, width{}, height{};
 };
 
 using FRect = BasicRect<float>;
@@ -223,10 +204,17 @@ constexpr bool BasicRect<_ValueType>::Intersect(const BasicRect& rhs) const
 }
 
 template <typename _ValueType>
-template <std::size_t _DestStrBufferLen>
-inline int32_t BasicRect<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t BasicRect<_ValueType>::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
+}
+
+template <typename _ValueType>
+inline std::string BasicRect<_ValueType>::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 template <typename _ValueType>

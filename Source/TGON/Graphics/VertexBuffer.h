@@ -99,7 +99,7 @@ private:
     std::vector<VertexBufferLayoutDescriptor> m_vertexBufferLayoutDescs;
 };
 
-template<typename _Type>
+template <typename _Type>
 inline void VertexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);

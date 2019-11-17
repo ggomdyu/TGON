@@ -26,16 +26,9 @@ struct BasicVector2 final
 {
 /**@section Constructor */
 public:
-    /**@brief   Initializes x, y components to 0. */
-    constexpr BasicVector2() noexcept;
-
-    /**@brief   Initializes x, y components with the specified value. */
+    constexpr BasicVector2() noexcept = default;
     constexpr BasicVector2(const _ValueType& scalar) noexcept;
-
-    /**@brief   Initializes x, y components with the specified value. */
     constexpr BasicVector2(const _ValueType& x, const _ValueType& y) noexcept;
-
-    /**@brief   Initializes x, y components with the specified expression template. */
     template <typename _DerivedExpressionType>
     constexpr BasicVector2(const BaseExpression<_DerivedExpressionType>& expression);
 
@@ -57,7 +50,7 @@ public:
     constexpr bool operator==(const BasicVector2& rhs) const noexcept;
     constexpr bool operator!=(const BasicVector2& rhs) const noexcept;
     _ValueType& operator[](std::size_t index) noexcept;
-    const _ValueType& operator[](std::size_t index) const noexcept;
+    _ValueType operator[](std::size_t index) const noexcept;
     
 /**@section Method */
 public:
@@ -68,31 +61,18 @@ public:
     static _ValueType Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept;
     _ValueType Distance(const BasicVector2& v) const noexcept;
     _ValueType& At(std::size_t index);
-    const _ValueType& At(std::size_t index) const;
+    _ValueType At(std::size_t index) const;
     _ValueType Length() const noexcept;
     _ValueType LengthSq() const noexcept;
     void Normalize();
     const BasicVector2 Normalized() const;
-    
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destBuffer.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-	_ValueType x, y;
+	_ValueType x{}, y{};
 };
 
 using I32Vector2 = BasicVector2<int32_t>;
@@ -103,13 +83,6 @@ using DVector2 = BasicVector2<double>;
 
 template <typename... _Types>
 BasicVector2(_Types...) -> BasicVector2<std::common_type_t<_Types...>>;
-
-template <typename _ValueType>
-constexpr BasicVector2<_ValueType>::BasicVector2() noexcept :
-    x(0.0f),
-    y(0.0f)
-{
-}
 
 template <typename _ValueType>
 constexpr BasicVector2<_ValueType>::BasicVector2(const _ValueType& scalar) noexcept :
@@ -245,7 +218,7 @@ inline _ValueType& BasicVector2<_ValueType>::operator[](std::size_t index) noexc
 }
 
 template <typename _ValueType>
-inline const _ValueType& BasicVector2<_ValueType>::operator[](std::size_t index) const noexcept
+inline _ValueType BasicVector2<_ValueType>::operator[](std::size_t index) const noexcept
 {
     return *(&x + index);
 }
@@ -295,7 +268,7 @@ inline _ValueType& BasicVector2<_ValueType>::At(std::size_t index)
 }
 
 template <typename _ValueType>
-inline const _ValueType& BasicVector2<_ValueType>::At(std::size_t index) const
+inline _ValueType BasicVector2<_ValueType>::At(std::size_t index) const
 {
     assert((index < 2 && index > -1) && "BasicVector2 index out of range");
     
@@ -329,16 +302,23 @@ inline const BasicVector2<_ValueType> BasicVector2<_ValueType>::Normalized() con
 }
 
 template <typename _ValueType>
-template <std::size_t _DestStrBufferLen>
-inline int32_t BasicVector2<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t BasicVector2<_ValueType>::ToString(const gsl::span<char>& destStr) const
 {
-    this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
 }
 
 template <typename _ValueType>
 inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f", x, y);
+}
+
+template <typename _ValueType>
+inline std::string BasicVector2<_ValueType>::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 } /* namespace tgon */

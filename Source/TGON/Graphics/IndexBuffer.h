@@ -47,7 +47,7 @@ private:
     void Destroy();
 };
 
-template<typename _Type>
+template <typename _Type>
 inline void IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsage)
 {
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);

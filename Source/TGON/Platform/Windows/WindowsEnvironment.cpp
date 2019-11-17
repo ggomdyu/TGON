@@ -1,15 +1,14 @@
 #include "PrecompiledHeader.h"
 
-#include <Windows.h>
+#include <sstream>
+#include <array>
+#include <Platform/Windows/Windows.h>
 #ifndef SECURITY_WIN32
 #   define SECURITY_WIN32
 #endif
 #include <security.h>
 #include <shlobj.h>
 #include <Psapi.h>
-#include <array>
-#include <sstream>
-
 #pragma pack(push, before_imagehlp, 8)
 #include <imagehlp.h>
 #pragma pack(pop, before_imagehlp)
@@ -30,17 +29,17 @@ namespace tgon
 
 thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
-bool Environment::SetEnvironmentVariable(const std::string_view& name, const std::string_view& value)
+bool Environment::SetEnvironmentVariable(const char* name, const char* value)
 {
     gsl::span<wchar_t> utf16Name(&g_tempUtf16Buffer[0], g_tempUtf16Buffer.size() / 2);
-    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
+    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(strlen(name)), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
     if (utf16NameBytes == -1)
     {
         return false;
     }
 
     gsl::span<wchar_t> utf16Value(&g_tempUtf16Buffer[g_tempUtf16Buffer.size() / 2], g_tempUtf16Buffer.size() / 2);
-    int32_t utf16ValueBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&value[0]), static_cast<int32_t>(value.size()), reinterpret_cast<std::byte*>(&utf16Value[0]), static_cast<int32_t>(utf16Value.size()));
+    int32_t utf16ValueBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&value[0]), static_cast<int32_t>(strlen(value)), reinterpret_cast<std::byte*>(&utf16Value[0]), static_cast<int32_t>(utf16Value.size()));
     if (utf16ValueBytes == -1)
     {
         return false;
@@ -49,10 +48,10 @@ bool Environment::SetEnvironmentVariable(const std::string_view& name, const std
     return SetEnvironmentVariableW(&utf16Name[0], &utf16Value[0]) == TRUE;
 }
 
-int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* destStr, int32_t destStrBufferLen)
+int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
 {
     gsl::span<wchar_t> utf16Name(&g_tempUtf16Buffer[0], g_tempUtf16Buffer.size() / 2);
-    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(name.size()), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
+    int32_t utf16NameBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&name[0]), static_cast<int32_t>(strlen(name)), reinterpret_cast<std::byte*>(&utf16Name[0]), static_cast<int32_t>(utf16Name.size()));
     if (utf16NameBytes == -1)
     {
         return -1;
@@ -68,7 +67,7 @@ int32_t Environment::GetEnvironmentVariable(const std::string_view& name, char* 
     return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&utf16Value[0]), static_cast<int32_t>(utf16ValueBytes), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen));
 }
 
-int32_t Environment::GetEnvironmentVariable(const std::string_view& name, const gsl::span<char>& destStr)
+int32_t Environment::GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr)
 {
     return GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
@@ -146,7 +145,7 @@ bool Environment::Is64BitOperatingSystem()
 
 void Environment::FailFast(const char* message, const std::exception& exception)
 {
-    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(strlen()));
+    auto utf16Message = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&message[0]), static_cast<int32_t>(strlen(message)));
     utf16Message.insert(utf16Message.end(), {std::byte('\n'), std::byte(0), std::byte(0), std::byte(0)});
 
     OutputDebugStringW(L"FailFast:\n");
@@ -346,6 +345,30 @@ int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
     __except (InternalGetStackTrace(GetExceptionInformation(), destStr, destStrBufferLen, &destStrLen)) {}
 
     return destStrLen;
+}
+
+bool Environment::GetUserInteractive()
+{
+    static HWINSTA cachedWindowStationHandle = 0;
+    static bool isUserNonInteractive = false;
+
+    auto windowStationHandle = GetProcessWindowStation();
+    if (windowStationHandle != 0 && windowStationHandle != cachedWindowStationHandle)
+    {
+        USEROBJECTFLAGS flags;
+        DWORD needLength;
+        if (GetUserObjectInformationW(windowStationHandle, UOI_FLAGS, reinterpret_cast<PVOID>(&flags), sizeof(flags), &needLength) == TRUE)
+        {
+            if ((flags.dwFlags & WSF_VISIBLE) == 0)
+            {
+                isUserNonInteractive = true;
+            }
+        }
+
+        cachedWindowStationHandle = windowStationHandle;
+    }
+
+    return !isUserNonInteractive;
 }
 
 } /* namespace tgon */

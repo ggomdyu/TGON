@@ -27,10 +27,7 @@ public:
 
 /**@section Constructor */
 public:
-    /**@brief   Constructor that initializes members to 0 */
-    constexpr BasicExtent2D() noexcept;
-
-    /**@brief   Constructor that initializes the member with the specified value */
+    constexpr BasicExtent2D() noexcept = default;
     constexpr BasicExtent2D(const _ValueType& width, const _ValueType& height) noexcept;
 
 /**@section Operator */
@@ -46,32 +43,18 @@ public:
     BasicExtent2D& operator/=(const _ValueType& rhs);
     constexpr bool operator==(const BasicExtent2D& rhs) const noexcept;
     constexpr bool operator!=(const BasicExtent2D& rhs) const noexcept;
-
     template <typename _CastToType>
     constexpr operator BasicExtent2D<_CastToType>() const noexcept;
 
 /**@section Method */
 public:
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-    _ValueType width;
-    _ValueType height;
+    _ValueType width{}, height{};
 };
 
 using FExtent2D = BasicExtent2D<float>;
@@ -83,13 +66,6 @@ using LLExtent2D = BasicExtent2D<long long>;
 
 template <typename... _Types>
 BasicExtent2D(_Types...) -> BasicExtent2D<std::common_type_t<_Types...>>;
-
-template <typename _ValueType>
-constexpr BasicExtent2D<_ValueType>::BasicExtent2D() noexcept :
-    width{},
-    height{}
-{
-}
 
 template <typename _ValueType>
 constexpr BasicExtent2D<_ValueType>::BasicExtent2D(const _ValueType& width, const _ValueType& height) noexcept :
@@ -184,10 +160,17 @@ constexpr BasicExtent2D<_ValueType>::operator BasicExtent2D<_CastToType>() const
 }
 
 template <typename _ValueType>
-template <std::size_t _DestStrBufferLen>
-inline int32_t BasicExtent2D<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t BasicExtent2D<_ValueType>::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
+}
+
+template <typename _ValueType>
+inline std::string BasicExtent2D<_ValueType>::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 template <typename _ValueType>

@@ -21,13 +21,8 @@ struct Color4b
 {
 /**@section Constructor */
 public:
-    /**@brief   Assigns all components to zero. */
-    constexpr Color4b() noexcept;
-
-    /**@brief   Assigns color components with the specified value. */
+    constexpr Color4b() noexcept = default;
     constexpr Color4b(uint8_t r, uint8_t g, uint8_t b, uint8_t a) noexcept;
-
-    /**@brief   Assigns the packed color in RGBA order. */
     constexpr Color4b(uint32_t color) noexcept;
 
 /**@section Operator */
@@ -55,35 +50,18 @@ public:
     
 /**@section Method */
 public:
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-    
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
     
 /**@section Variable */
 public:
     union
     {
-        uint32_t color;
+        uint32_t color{};
         struct { uint8_t r, g, b, a; };
     };
 };
-
-constexpr Color4b::Color4b() noexcept :
-    Color4b(0, 0, 0, 255)
-{
-}
 
 constexpr Color4b::Color4b(uint8_t r, uint8_t g, uint8_t b, uint8_t a) noexcept :
     r(r),
@@ -208,10 +186,9 @@ constexpr Color4b::operator uint32_t() const noexcept
     return color;
 }
 
-template <std::size_t _DestStrBufferLen>
-inline int32_t Color4b::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t Color4b::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
 }
 
 inline int32_t Color4b::ToString(char* destStr, std::size_t destStrBufferLen) const
@@ -219,11 +196,18 @@ inline int32_t Color4b::ToString(char* destStr, std::size_t destStrBufferLen) co
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%d %d %d %d", r, g, b, a);
 }
 
+inline std::string Color4b::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
+}
+
 struct Color3f
 {
 /**@section Constructor */
 public:
-    constexpr Color3f() noexcept;
+    constexpr Color3f() noexcept = default;
     constexpr Color3f(float r, float g, float b) noexcept;
 
 /**@section Operator */
@@ -233,32 +217,15 @@ public:
 
 /**@section Method */
 public:
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-    float r, g, b;
+    float r{}, g{}, b{};
 };
 
-constexpr Color3f::Color3f() noexcept :
-    Color3f(0.0f, 0.0f, 0.0f)
-{
-}
-    
 constexpr Color3f::Color3f(float r, float g, float b) noexcept :
     r(r),
     g(g),
@@ -276,10 +243,9 @@ constexpr bool Color3f::operator!=(const Color3f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-template <std::size_t _DestStrBufferLen>
-inline int32_t Color3f::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t Color3f::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
 }
 
 inline int32_t Color3f::ToString(char* destStr, std::size_t destStrBufferLen) const
@@ -287,11 +253,18 @@ inline int32_t Color3f::ToString(char* destStr, std::size_t destStrBufferLen) co
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f", r, g, b);
 }
 
+inline std::string Color3f::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
+}
+
 struct Color4f
 {
 /**@section Constructor */
 public:
-    constexpr Color4f() noexcept;
+    constexpr Color4f() noexcept = default;
     constexpr Color4f(float r, float g, float b, float a) noexcept;
 
 /**@section Operator */
@@ -301,32 +274,15 @@ public:
 
 /**@section Method */
 public:
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-    float r, g, b, a;
+    float r{}, g{}, b{}, a{};
 };
 
-constexpr Color4f::Color4f() noexcept :
-    Color4f(0.0f, 0.0f, 0.0f, 1.0f)
-{
-}
-    
 constexpr Color4f::Color4f(float r, float g, float b, float a) noexcept :
     r(r),
     g(g),
@@ -345,15 +301,21 @@ constexpr bool Color4f::operator!=(const Color4f& rhs) const noexcept
     return !this->operator==(rhs);
 }
 
-template <std::size_t _DestStrBufferLen>
-inline int32_t Color4f::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t Color4f::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, _DestStrBufferLen);
+    return this->ToString(&destStr[0], destStr.size());
 }
 
 inline int32_t Color4f::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f %f %f", r, g, b, a);
+}
+
+inline std::string Color4f::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 } /* namespace tgon */

@@ -2484,5 +2484,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h">
       <Filter>Source\TGON\UI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Version.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

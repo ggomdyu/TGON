@@ -27,10 +27,7 @@ public:
 
 /**@section Constructor */
 public:
-    /**@brief   Constructor that initializes members to 0 */
-    constexpr BasicPoint() noexcept;
-
-    /**@brief   Constructor that initializes the member with the specified value */
+    constexpr BasicPoint() noexcept = default;
     constexpr BasicPoint(const _ValueType& x, const _ValueType& y) noexcept;
 
 /**@section Operator */
@@ -46,32 +43,18 @@ public:
     BasicPoint& operator/=(const _ValueType&);
     constexpr bool operator==(const BasicPoint&) const noexcept;
     constexpr bool operator!=(const BasicPoint&) const noexcept;
-
     template <typename _CastToType>
     constexpr operator BasicPoint<_CastToType>() const noexcept;
 
 /**@section Method */
 public:
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this struct.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
-    _ValueType x;
-    _ValueType y;
+    _ValueType x{}, y{};
 };
 
 using Point = BasicPoint<float>;
@@ -88,13 +71,6 @@ template <typename _ValueType>
 constexpr BasicPoint<_ValueType> MakePoint(const _ValueType& x, const _ValueType& y) noexcept
 {
     return {x, y};
-}
-
-template <typename _ValueType>
-constexpr BasicPoint<_ValueType>::BasicPoint() noexcept :
-    x{},
-    y{}
-{
 }
 
 template <typename _ValueType>
@@ -190,10 +166,17 @@ constexpr BasicPoint<_ValueType>::operator BasicPoint<_CastToType>() const noexc
 }
 
 template <typename _ValueType>
-template <std::size_t _DestStrBufferLen>
-inline int32_t BasicPoint<_ValueType>::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t BasicPoint<_ValueType>::ToString(const gsl::span<char>& destStr) const
 {
-    return this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
+}
+
+template <typename _ValueType>
+inline std::string BasicPoint<_ValueType>::ToString() const
+{
+    std::array<char, 1024> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 template <typename _ValueType>

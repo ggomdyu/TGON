@@ -126,5 +126,10 @@ std::string Environment::GetSystemDirectory()
 {
     return GetFolderPath(SpecialFolder::System);
 }
-    
+
+std::vector<std::string> Environment::GetLogicalDrives()
+{
+    return Directory::GetLogicalDrives();
+}
+
 } /* namespace tgon */

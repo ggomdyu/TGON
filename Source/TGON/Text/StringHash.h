@@ -239,7 +239,7 @@ inline int32_t BasicStringHash<_StringType, _StringTraitsType>::IndexOf(ValueTyp
 
 }
 
-template<typename _StringType, typename _StringTraitsType>
+template <typename _StringType, typename _StringTraitsType>
 inline int32_t BasicStringHash<_StringType, _StringTraitsType>::CompareTo(const std::basic_string_view<ValueType>& str) noexcept
 {
     return _StringTraitsType::Compare(this->Data(), this->Length(), str.data(), str.length());

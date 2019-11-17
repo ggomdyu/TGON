@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <cassert>
 #include <cmath>
+#include <gsl/span>
 
 #include "Vector3.h"
 
@@ -24,10 +25,7 @@ struct Matrix4x4
 {
 /**@section Constructor */
 public:
-    /**@brief   Initializes matrix as an Identity matrix. */
     constexpr Matrix4x4() noexcept;
-
-    /**@brief   Initializes matrix with the specified value. */
     constexpr Matrix4x4(float m00, float m01, float m02, float m03,
                         float m10, float m11, float m12, float m13,
                         float m20, float m21, float m22, float m23,
@@ -65,22 +63,9 @@ public:
     static Matrix4x4 PerspectiveRH(float fovy, float aspect, float nearZ, float farZ) noexcept;
     static constexpr Matrix4x4 OrthographicRH(float left, float right, float top, float bottom, float nearZ, float farZ) noexcept;
     static constexpr Matrix4x4 Viewport(float x, float y, float width, float height, float minZ, float maxZ) noexcept;
-
-    /**
-     * @brief   Creates a string that represents this Matrix.
-     * @param [out] destStr     The destination of the string to be written.
-     * @return  The length of string.
-     */
-    template <std::size_t _DestStrBufferLen>
-    int32_t ToString(char(&destStr)[_DestStrBufferLen]) const;
-
-    /**
-     * @brief   Creates a string that represents this Matrix.
-     * @param [out] destStr             The destination of the string to be written.
-     * @param [in] destStrBufferLen     The buffer size of destStr.
-     * @return  The length of string.
-     */
+    int32_t ToString(const gsl::span<char>& destStr) const;
     int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    std::string ToString() const;
 
 /**@section Variable */
 public:
@@ -439,15 +424,21 @@ constexpr const Matrix4x4 Matrix4x4::Scale(float x, float y, float z) noexcept
     );
 }
 
-template <std::size_t _DestStrBufferLen>
-inline int32_t Matrix4x4::ToString(char(&destStr)[_DestStrBufferLen]) const
+inline int32_t Matrix4x4::ToString(const gsl::span<char>& destStr) const
 {
-    this->ToString(destStr, sizeof(destStr));
+    return this->ToString(&destStr[0], destStr.size());
 }
 
 inline int32_t Matrix4x4::ToString(char* destStr, std::size_t destStrBufferLen) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f\n%f\t%f\t%f\t%f", m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+}
+
+inline std::string Matrix4x4::ToString() const
+{
+    std::array<char, 2048> str;
+    int32_t strLen = this->ToString(str);
+    return {&str[0], static_cast<size_t>(strLen)};
 }
 
 } /* namespace tgon */
