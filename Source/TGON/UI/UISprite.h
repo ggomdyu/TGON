@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Math/Rect.h"
+#include "Math/Vector2.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/Texture.h"
 
@@ -27,6 +28,7 @@ public:
     void SetWrapMode(WrapMode wrapMode) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;
     void SetBlendColor(const Color4f& blendColor) noexcept;
+    void SetPivot(const Vector2& pivot) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     FRect& GetTextureRect() noexcept;
@@ -39,8 +41,8 @@ public:
     void DisableScissorRect() noexcept;
     bool IsEnableScissorRect() const noexcept;
     void SetScissorRect(const FRect& rect) noexcept;
-    FRect& GetScissorRect() noexcept;
     const FRect& GetScissorRect() const noexcept;
+    const Vector2& GetPivot() const noexcept;
     
 /**@section Variable */
 private:
@@ -52,6 +54,7 @@ private:
     Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
     FRect m_scissorRect;
     bool m_enableScissorRect = false;
+    Vector2 m_pivot = Vector2(0.5f, 0.5f);
 };
 
 } /* namespace tgon */

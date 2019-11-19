@@ -58,6 +58,11 @@ void UISprite::SetBlendColor(const Color4f& blendColor) noexcept
     m_blendColor = blendColor;
 }
 
+void UISprite::SetPivot(const Vector2& pivot) noexcept
+{
+    m_pivot = pivot;
+}
+
 FilterMode UISprite::GetFilterMode() const noexcept
 {
     return m_filterMode;
@@ -97,15 +102,15 @@ void UISprite::SetScissorRect(const FRect& scissorRect) noexcept
 {
     m_scissorRect = scissorRect;
 }
-    
-FRect& UISprite::GetScissorRect() noexcept
-{
-    return m_scissorRect;
-}
-    
+
 const FRect& UISprite::GetScissorRect() const noexcept
 {
     return m_scissorRect;
+}
+
+const Vector2& UISprite::GetPivot() const noexcept
+{
+    return m_pivot;
 }
 
 } /* namespace tgon */

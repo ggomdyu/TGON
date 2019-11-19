@@ -71,6 +71,8 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
 #endif
     float halfWidth = textureRect.width * 0.5f;
     float halfHeight = textureRect.height * 0.5f;
+    float xOffset = -textureRect.width * (rhs.GetPivot().x - 0.5f);
+    float yOffset = textureRect.height * (rhs.GetPivot().y - 0.5f);
 
     int32_t oldVertexEndOffset = m_vertexEndOffset;
     int32_t expandSize = sizeof(V3F_C4F_T2F) / 4 * 6;
@@ -79,17 +81,17 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
 
     // Left top
     V3F_C4F_T2F* newVertices = reinterpret_cast<V3F_C4F_T2F*>(&(*vertices)[oldVertexEndOffset]);
-    newVertices[0].position = Vector4(-halfWidth, halfHeight, 0.0f, 1.0f) * matWorld;
+    newVertices[0].position = Vector4(-halfWidth + xOffset, halfHeight + yOffset, 0.0f, 1.0f) * matWorld;
     newVertices[0].color = rhs.GetBlendColor();
     newVertices[0].uv = {leftUV, topUV};
     
     // Right top
-    newVertices[1].position = Vector4(halfWidth, halfHeight, 0.0f, 1.0f) * matWorld;
+    newVertices[1].position = Vector4(halfWidth + xOffset, halfHeight + yOffset, 0.0f, 1.0f) * matWorld;
     newVertices[1].color = rhs.GetBlendColor();
     newVertices[1].uv = {rightUV, topUV};
     
     // Right bottom
-    newVertices[2].position = Vector4(halfWidth, -halfHeight, 0.0f, 1.0f) * matWorld;
+    newVertices[2].position = Vector4(halfWidth + xOffset, -halfHeight + yOffset, 0.0f, 1.0f) * matWorld;
     newVertices[2].color = rhs.GetBlendColor();
     newVertices[2].uv = {rightUV, bottomUV};
     
@@ -97,7 +99,7 @@ void UISpriteBatch::Merge(const UISprite& rhs, const Matrix4x4& matWorld, std::v
     newVertices[3] = newVertices[2];
 
     // Left bottom
-    newVertices[4].position = Vector4(-halfWidth, -halfHeight, 0.0f, 1.0f) * matWorld;
+    newVertices[4].position = Vector4(-halfWidth + xOffset, -halfHeight + yOffset, 0.0f, 1.0f) * matWorld;
     newVertices[4].color = rhs.GetBlendColor();
     newVertices[4].uv = {leftUV, bottomUV};
 
