@@ -28,7 +28,7 @@ TextureAtlas::TextureAtlas(TextureAtlas&& rhs) noexcept :
     rhs.m_paddingOffset = 0;
 }
 
-TextureAtlas& TextureAtlas::operator=(TextureAtlas&& rhs)
+TextureAtlas& TextureAtlas::operator=(TextureAtlas&& rhs) noexcept
 {
     m_atlasTexture = std::move(rhs.m_atlasTexture);
     m_context = std::move(rhs.m_context);
@@ -46,24 +46,32 @@ TextureAtlas TextureAtlas::Create(const I32Extent2D& atlasSize, PixelFormat atla
     return TextureAtlas(atlasSize, atlasPixelFormat, paddingOffset);
 }
 
-bool TextureAtlas::Insert(char32_t name, std::byte* imageData, const I32Extent2D& size)
+bool TextureAtlas::Insert(size_t key, std::byte* imageData, const I32Extent2D& size)
 {
-    return this->Insert(X65599Hash(name), imageData, size);
+    stbrp_rect rect
+    {
+        static_cast<decltype(stbrp_rect::id)>(m_packedTextureInfos.size()),
+        static_cast<decltype(stbrp_rect::w)>(size.width + m_paddingOffset),
+        static_cast<decltype(stbrp_rect::h)>(size.height + m_paddingOffset),
+        0,
+        0,
+        0
+    };
+
+    bool isPackingSucceed = stbrp_pack_rects(m_context.get(), &rect, 1) == 1;
+    if (isPackingSucceed)
+    {
+        m_atlasTexture->SetData(imageData, Vector2(rect.x, rect.y), size, m_atlasTexture->GetPixelFormat());
+        m_packedTextureInfos.emplace(key, I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w - m_paddingOffset), int32_t(rect.h - m_paddingOffset)));
+        return true;
+    }
+
+    return false;
 }
 
-bool TextureAtlas::Insert(const StringViewHash& name, std::byte* imageData, const I32Extent2D& size)
+const I32Rect& TextureAtlas::GetTextureRect(size_t key) const
 {
-    return this->Insert(name.GetHashCode(), imageData, size);
-}
-
-const I32Rect& TextureAtlas::GetTextureRect(char32_t name) const
-{
-    return m_packedTextureInfos[X65599Hash(name)];
-}
-
-const I32Rect& TextureAtlas::GetTextureRect(const StringViewHash& name) const
-{
-    return m_packedTextureInfos[name.GetHashCode()];
+    return m_packedTextureInfos[key];
 }
 
 int32_t TextureAtlas::GetTextureCount() const noexcept
@@ -84,29 +92,6 @@ std::shared_ptr<const Texture> TextureAtlas::GetAtlasTexture() const noexcept
 std::shared_ptr<Texture> TextureAtlas::GetAtlasTexture() noexcept
 {
     return m_atlasTexture;
-}
-
-bool TextureAtlas::Insert(size_t nameHashCode, std::byte* imageData, const I32Extent2D& size)
-{
-    stbrp_rect rect
-    {
-        static_cast<int>(m_packedTextureInfos.size()), // id
-        static_cast<stbrp_coord>(size.width + m_paddingOffset), // w
-        static_cast<stbrp_coord>(size.height + m_paddingOffset), // h
-        0, // x
-        0, // y
-        0 // was_packed
-    };
-
-    bool isPackingSucceed = stbrp_pack_rects(m_context.get(), &rect, 1) == 1;
-    if (isPackingSucceed)
-    {
-        m_atlasTexture->SetData(imageData, Vector2(rect.x, rect.y), size, m_atlasTexture->GetPixelFormat());
-        m_packedTextureInfos.insert({nameHashCode, I32Rect(int32_t(rect.x), int32_t(rect.y), int32_t(rect.w - m_paddingOffset), int32_t(rect.h - m_paddingOffset))});
-        return true;
-    }
-
-    return false;
 }
 
 } /* namespace tgon */

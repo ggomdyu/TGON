@@ -47,8 +47,8 @@ public:
     std::shared_ptr<const Transform> GetTransform() const noexcept;
 
 private:
-    bool RemoveComponent(int32_t componentId);
-    std::shared_ptr<Component> GetComponent(int32_t componentId);
+    bool RemoveComponent(size_t key);
+    std::shared_ptr<Component> GetComponent(size_t key);
 
 /**@section Variable */
 private:

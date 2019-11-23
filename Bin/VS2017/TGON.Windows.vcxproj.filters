@@ -171,9 +171,6 @@
     <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsMain.cpp">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsScreen.cpp">
-      <Filter>Sources\TGON\Platform\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\TGON\Platform\Windows\WindowsWindow.cpp">
       <Filter>Sources\TGON\Platform\Windows</Filter>
     </ClCompile>

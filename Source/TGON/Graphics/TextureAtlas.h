@@ -12,7 +12,6 @@
 #include <stb/stb_rect_pack.h>
 
 #include "Core/NonCopyable.h"
-#include "Text/StringHash.h"
 #include "Math/Rect.h"
 #include "Math/Extent.h"
 
@@ -31,23 +30,18 @@ private:
 
 /**@section Operator */
 public:
-    TextureAtlas& operator=(TextureAtlas&& rhs);
+    TextureAtlas& operator=(TextureAtlas&& rhs) noexcept;
 
 /**@section Method */
 public:
     static std::optional<TextureAtlas> Load(const std::string_view& path);
     static TextureAtlas Create(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = 2);
-    bool Insert(char32_t name, std::byte* imageData, const I32Extent2D& size);
-    bool Insert(const StringViewHash& name, std::byte* imageData, const I32Extent2D& size);
-    const I32Rect& GetTextureRect(char32_t name) const;
-    const I32Rect& GetTextureRect(const StringViewHash& name) const;
+    bool Insert(size_t key, std::byte* imageData, const I32Extent2D& size);
+    const I32Rect& GetTextureRect(size_t key) const;
     int32_t GetTextureCount() const noexcept;
     int32_t GetPaddingOffset() const noexcept;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
-
-private:
-    bool Insert(size_t nameHashCode, std::byte* imageData, const I32Extent2D& size);
 
 /**@section Variable */
 private:

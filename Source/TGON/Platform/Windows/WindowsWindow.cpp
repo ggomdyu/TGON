@@ -71,7 +71,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     DWORD rawWindowStyle, rawExtendedWindowStyle;
     ConvertWindowStyleToNative(windowStyle, &rawWindowStyle, &rawExtendedWindowStyle);
 
-    IPoint windowPos {static_cast<int>(windowStyle.x), static_cast<int>(windowStyle.y)};
+    I32Vector2 windowPos(windowStyle.x, windowStyle.y);
     if (windowStyle.showMiddle)
     {
         // Set the window position to middle of the screen.
