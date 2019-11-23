@@ -15,7 +15,7 @@
 namespace tgon
 {
     
-class TGON_API OpenGLGraphics :
+class OpenGLGraphics :
     private NonCopyable
 {
 /**@section Constructor */

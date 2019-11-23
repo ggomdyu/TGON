@@ -5,9 +5,9 @@
 namespace tgon
 {
 
-I32Point Mouse::GetPosition()
+I32Vector2 Mouse::GetPosition()
 {
-    I32Point pt;
+    I32Vector2 pt;
     Mouse::GetPosition(&pt.x, &pt.y);
 
     return pt;

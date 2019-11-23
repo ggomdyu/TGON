@@ -33,7 +33,6 @@ public:
 
 /**@section Method */
 public:
-    /**@brief   Returns copied one from this instance. */
 };
 
 } /* namespace tgon */

@@ -20,7 +20,7 @@ enum class SeekOrigin
     End
 };
  
-class TGON_API Stream :
+class Stream :
     private NonCopyable
 {
 /**@section Destructor */

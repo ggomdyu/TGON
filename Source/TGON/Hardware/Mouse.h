@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Platform/Config.h"
-#include "Math/Point.h"
+#include "Math/Vector2.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsMouse.h"
@@ -19,7 +19,7 @@
 namespace tgon
 {
     
-class TGON_API Mouse final :
+class Mouse final :
     private PlatformMouse
 {
 /**@section Constructor */
@@ -32,7 +32,7 @@ public:
     const PlatformMouse& GetPlatformDependency() const noexcept;
     void Update();
     static void GetPosition(int32_t* x, int32_t* y);
-    static I32Point GetPosition();
+    static I32Vector2 GetPosition();
     bool IsMouseDown(MouseCode mouseCode) const;
     bool IsMouseHold(MouseCode mouseCode) const;
     bool IsMouseUp(MouseCode mouseCode) const;

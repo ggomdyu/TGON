@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class TGON_API SpriteRendererComponent :
+class SpriteRendererComponent :
 	public RendererComponent
 {
 public:

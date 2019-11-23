@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-TGON_API void SrandWELL1024a();
-TGON_API double WELL1024a() noexcept;
+void SrandWELL1024a();
+double WELL1024a() noexcept;
 
 } /* namespace tgon */

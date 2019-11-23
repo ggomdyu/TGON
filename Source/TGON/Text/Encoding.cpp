@@ -14,20 +14,6 @@ extern const UConverterSharedData* getAlgorithmicTypeFromCodePage(int32_t codePa
 namespace tgon
 {
 
-std::unordered_map<int32_t, Encoding> Encoding::m_encodingTable;
-
-Encoding::Encoding() noexcept :
-    m_converter(nullptr)
-{
-}
-
-Encoding::Encoding(Encoding&& rhs) noexcept :
-    m_converter(rhs.m_converter),
-    m_encodingName(rhs.m_encodingName)
-{
-    rhs.m_converter = nullptr;
-}
-
 Encoding::Encoding(const char* codePageName) :
     Encoding(CreateUConverter(codePageName))
 {
@@ -47,20 +33,10 @@ Encoding::Encoding(UConverter* converter) noexcept :
 Encoding::~Encoding()
 {
     if (m_converter != nullptr)
-    {       
+    {
         ucnv_close(m_converter);
         m_converter = nullptr;
     }
-}
-
-Encoding& Encoding::operator=(Encoding&& rhs) noexcept
-{
-    m_converter = rhs.m_converter;
-    m_encodingName = rhs.m_encodingName;
-
-    rhs.m_converter = nullptr;
-
-    return *this;
 }
 
 bool Encoding::operator==(const Encoding& rhs) const noexcept
@@ -97,7 +73,7 @@ const Encoding& Encoding::GetEncoding(int32_t codePage)
     auto iter = m_encodingTable.find(codePage);
     if (iter == m_encodingTable.end())
     {
-        iter = m_encodingTable.insert(iter, {codePage, Encoding(codePage)});
+        iter = m_encodingTable.try_emplace(iter, codePage, codePage);
     }
 
     return iter->second;
@@ -241,9 +217,9 @@ int32_t Encoding::GetCodePage() const noexcept
     return m_converter->sharedData->staticData->codepage;
 }
 
-uint32_t Encoding::GetHashCode() const noexcept
+size_t Encoding::GetHashCode() const noexcept
 {
-    return static_cast<uint32_t>(m_converter->sharedData->staticData->codepage);
+    return static_cast<size_t>(m_converter->sharedData->staticData->codepage);
 }
 
 const Encoding& Encoding::UTF8()

@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <string_view>
+#include <string>
 #include <cstdint>
 #include <vector>
 #include <unordered_map>
@@ -19,31 +19,27 @@ struct UConverter;
 namespace tgon
 {
 
-class TGON_API Encoding final :
+class Encoding final :
     private NonCopyable
 {
 /**@section Constructor */
-protected:
-    Encoding() noexcept;
+public:
+    Encoding() noexcept = default;
     explicit Encoding(const char* codePageName);
     explicit Encoding(int32_t codePage);
     explicit Encoding(UConverter* converter) noexcept;
 
-public:
-    Encoding(Encoding&& rhs) noexcept;
-
 /**@section Destructor */
 public:
     ~Encoding();
-    
+
 /**@section Operator */
 public:
-    Encoding& operator=(Encoding&& rhs) noexcept;
     bool operator==(const Encoding& rhs) const noexcept;
     bool operator!=(const Encoding& rhs) const noexcept;
 
 /**@section Method */
-public:                             
+public:
     static const Encoding& GetEncoding(int32_t codePage);
     static const Encoding& GetEncoding(const char* codePageName) noexcept(false);
     static std::vector<std::byte> Convert(const Encoding& srcEncoding, const Encoding& destEncoding, const std::byte* bytes, int32_t count);
@@ -55,7 +51,7 @@ public:
     int32_t GetCharCount(const gsl::span<std::byte>& bytes) const;
     const std::string_view& GetEncodingName() const noexcept;
     int32_t GetCodePage() const noexcept;
-    uint32_t GetHashCode() const noexcept;
+    size_t GetHashCode() const noexcept;
     static const Encoding& UTF8();
     static const Encoding& UTF32();
     static const Encoding& Unicode();
@@ -70,9 +66,9 @@ private:
 
 /**@section Variable */
 private:
-    UConverter* m_converter;
+    UConverter* m_converter = nullptr;
     std::string_view m_encodingName;
-    static std::unordered_map<int32_t, Encoding> m_encodingTable;
+    inline static std::unordered_map<int32_t, Encoding> m_encodingTable;
 };
 
 } /* namespace tgon */

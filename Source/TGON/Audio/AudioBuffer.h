@@ -41,7 +41,7 @@ enum class AudioSampleFormat
     Stereo16 = AL_FORMAT_STEREO16,
 };
 
-class TGON_API AudioBuffer :
+class AudioBuffer :
     private NonCopyable
 {
 /**@section Constructor */

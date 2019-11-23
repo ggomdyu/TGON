@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API OpenGLShaderProgram :
+class OpenGLShaderProgram :
     private NonCopyable
 {
 /**@section Constructor */

@@ -18,7 +18,7 @@
 namespace tgon
 {
     
-class TGON_API SerialDispatchQueue final :
+class SerialDispatchQueue final :
     private NonCopyable
 {
 /**@section Method */
@@ -35,7 +35,7 @@ private:
     std::deque<Delegate<void()>> m_taskPool;
 };
 
-class TGON_API ConcurrentDispatchQueue final :
+class ConcurrentDispatchQueue final :
     private NonCopyable
 {
 /**@section Constructor */

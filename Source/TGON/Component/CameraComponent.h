@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API CameraComponent :
+class CameraComponent :
 	public Component
 {
 public:
@@ -39,7 +39,7 @@ public:
 /**@section Variable */
 private:
     std::shared_ptr<Camera> m_camera;
-    std::weak_ptr<GraphicsModule> m_graphicsModule;
+    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

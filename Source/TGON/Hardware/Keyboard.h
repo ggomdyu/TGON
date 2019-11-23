@@ -18,7 +18,7 @@
 namespace tgon
 {
 
-class TGON_API Keyboard final :
+class Keyboard final :
     private PlatformKeyboard
 {
 /**@section Constructor */

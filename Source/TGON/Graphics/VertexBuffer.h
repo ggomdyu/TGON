@@ -63,7 +63,7 @@ constexpr VertexBufferLayoutDescriptor::VertexBufferLayoutDescriptor(VertexAttri
 {
 }
 
-class TGON_API VertexBuffer final :
+class VertexBuffer final :
     private PlatformVertexBuffer
 {
 /**@section Constructor */

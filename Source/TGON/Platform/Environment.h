@@ -24,12 +24,12 @@ enum class EnvironmentVariableTarget
     Machine = 2,
 };
 
-class TGON_API OperatingSystem final
+class OperatingSystem final
 {
 
 };
 
-class TGON_API Environment final
+class Environment final
 {
 /**@section Constructor */
 public:
@@ -91,14 +91,14 @@ public:
 /**@section Method */
 public:
     static bool SetEnvironmentVariable(const char* name, const char* value);
+    static bool SetEnvironmentVariable(const char* name, const char* value, EnvironmentVariableTarget target);
     static int32_t GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen);
     static int32_t GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr);
     static std::optional<std::string> GetEnvironmentVariable(const char* name);
     static std::optional<std::string> GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target);
     static std::string GetCurrentDirectory();
     static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
-    template <int32_t Length>
-    static int32_t GetCurrentDirectory(const gsl::span<char, Length>& destStr);
+    static int32_t GetCurrentDirectory(const gsl::span<char>& destStr);
     static std::string GetFolderPath(SpecialFolder folder);
     static int32_t GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen);
     static int32_t GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr);
@@ -144,11 +144,5 @@ public:
     //public static long WorkingSet{ get; }
     static std::vector<std::string> GetLogicalDrives();
 };
-
-template <int32_t Length>
-inline int32_t Environment::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
-{
-    return GetCurrentDirectory(destStr.data(), Length);
-}
 
 } /* namespace tgon */

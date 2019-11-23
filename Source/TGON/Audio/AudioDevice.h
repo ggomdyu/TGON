@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-class TGON_API AudioDevice final :
+class AudioDevice final :
     private NonCopyable
 {
 /**@section Constructor */

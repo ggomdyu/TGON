@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API Debug
+class Debug
 {
 /**@section Constructor */
 public:

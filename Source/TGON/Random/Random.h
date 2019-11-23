@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API Random
+class Random
 {
 /**@section Constructor */
 public:

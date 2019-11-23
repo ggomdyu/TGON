@@ -44,7 +44,7 @@ enum class MouseCode
     WheelDown   = Mouse4,
 };
 
-class TGON_API MacOSMouse :
+class MacOSMouse :
     private NonCopyable
 {
 /**@section Constructor */

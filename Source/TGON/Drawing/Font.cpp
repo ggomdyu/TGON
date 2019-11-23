@@ -67,4 +67,16 @@ I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
     return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }
 
+I32Extent2D Font::GetTextSize(int32_t fontSize)
+{
+    // TODO: Impl
+    return {};
+}
+
+I32Extent2D Font::GetTextSize(int32_t fontSize, const I32Extent2D& rect) const
+{
+    // TODO: Impl
+    return {};
+}
+
 } /* namespace tgon */

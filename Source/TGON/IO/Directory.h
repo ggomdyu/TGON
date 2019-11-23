@@ -19,7 +19,7 @@
 namespace tgon
 {
 
-class TGON_API Directory
+class Directory
 {
 /**@section Constructor */
 public:

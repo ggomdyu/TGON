@@ -21,7 +21,7 @@
 namespace tgon
 {
 
-class TGON_API TextureAtlas :
+class TextureAtlas :
     private NonCopyable
 {
 /**@section Constructor */

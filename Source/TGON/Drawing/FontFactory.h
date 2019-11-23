@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API FontFactory :
+class FontFactory :
     private NonCopyable
 {
 /**@section Constructor */

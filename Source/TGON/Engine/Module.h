@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API Module :
+class Module :
     public Object
 {
 public:

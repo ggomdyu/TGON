@@ -373,7 +373,6 @@
 		FDC02D21228487D500BEE91A /* MacOSOpenGLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02B84228481EF00BEE91A /* MacOSOpenGLContext.mm */; };
 		FDC02D23228487D500BEE91A /* MacOSLocale.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C93228481F100BEE91A /* MacOSLocale.mm */; };
 		FDC02D24228487D500BEE91A /* MacOSApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C94228481F100BEE91A /* MacOSApplication.mm */; };
-		FDC02D25228487D500BEE91A /* MacOSScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C97228481F100BEE91A /* MacOSScreen.mm */; };
 		FDC02D26228487D500BEE91A /* MacOSMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C99228481F100BEE91A /* MacOSMain.mm */; };
 		FDC02D27228487D500BEE91A /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C9A228481F100BEE91A /* MacOSWindow.mm */; };
 		FDC02D522284897500BEE91A /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D502284897500BEE91A /* GameObject.cpp */; };
@@ -1296,7 +1295,6 @@
 		FDC02C04228481F000BEE91A /* Matrix4x4.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Matrix4x4.h; sourceTree = "<group>"; };
 		FDC02C05228481F000BEE91A /* Circle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Circle.h; sourceTree = "<group>"; };
 		FDC02C06228481F000BEE91A /* Vector2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Vector2.h; sourceTree = "<group>"; };
-		FDC02C07228481F000BEE91A /* Point.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Point.h; sourceTree = "<group>"; };
 		FDC02C08228481F000BEE91A /* Color.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Color.h; sourceTree = "<group>"; };
 		FDC02C09228481F000BEE91A /* Extent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Extent.h; sourceTree = "<group>"; };
 		FDC02C0A228481F000BEE91A /* Rect.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Rect.h; sourceTree = "<group>"; };
@@ -1355,7 +1353,6 @@
 		FDC02C93228481F100BEE91A /* MacOSLocale.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSLocale.mm; sourceTree = "<group>"; };
 		FDC02C94228481F100BEE91A /* MacOSApplication.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSApplication.mm; sourceTree = "<group>"; };
 		FDC02C96228481F100BEE91A /* MacOSConfig.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSConfig.h; sourceTree = "<group>"; };
-		FDC02C97228481F100BEE91A /* MacOSScreen.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSScreen.mm; sourceTree = "<group>"; };
 		FDC02C98228481F100BEE91A /* MacOSApplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = MacOSApplication.h; sourceTree = "<group>"; };
 		FDC02C99228481F100BEE91A /* MacOSMain.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSMain.mm; sourceTree = "<group>"; };
 		FDC02C9A228481F100BEE91A /* MacOSWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MacOSWindow.mm; sourceTree = "<group>"; };
@@ -1364,7 +1361,6 @@
 		FDC02CA1228481F100BEE91A /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Window.cpp; sourceTree = "<group>"; };
 		FDC02CA2228481F100BEE91A /* Application.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Application.h; sourceTree = "<group>"; };
 		FDC02CA3228481F100BEE91A /* Window.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Window.h; sourceTree = "<group>"; };
-		FDC02CA9228481F100BEE91A /* Screen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Screen.h; sourceTree = "<group>"; };
 		FDC02CAA228481F100BEE91A /* Application.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Application.cpp; sourceTree = "<group>"; };
 		FDC02CB9228481F100BEE91A /* Prefix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Prefix.h; sourceTree = "<group>"; };
 		FDC02CDE228482F000BEE91A /* Hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Hash.h; sourceTree = "<group>"; };
@@ -2761,7 +2757,6 @@
 				FDC02C04228481F000BEE91A /* Matrix4x4.h */,
 				FDC02C05228481F000BEE91A /* Circle.h */,
 				FDC02C06228481F000BEE91A /* Vector2.h */,
-				FDC02C07228481F000BEE91A /* Point.h */,
 				FDC02C08228481F000BEE91A /* Color.h */,
 				FDC02C09228481F000BEE91A /* Extent.h */,
 				FDC02C0A228481F000BEE91A /* Rect.h */,
@@ -2978,7 +2973,6 @@
 				FDC02CA2228481F100BEE91A /* Application.h */,
 				8C59E30A2330014700EBE199 /* Environment.cpp */,
 				8C012C0F230C580D00285F74 /* Environment.h */,
-				FDC02CA9228481F100BEE91A /* Screen.h */,
 				FDC02CB9228481F100BEE91A /* Prefix.h */,
 			);
 			name = Platform;
@@ -2994,7 +2988,6 @@
 				8C59E30C2330014F00EBE199 /* MacOSEnvironment.cpp */,
 				FDC02C93228481F100BEE91A /* MacOSLocale.mm */,
 				FDC02C99228481F100BEE91A /* MacOSMain.mm */,
-				FDC02C97228481F100BEE91A /* MacOSScreen.mm */,
 				FDC02C9A228481F100BEE91A /* MacOSWindow.mm */,
 				FDC02C92228481F100BEE91A /* MacOSWindow.h */,
 			);
@@ -4043,7 +4036,6 @@
 				FDC02D23228487D500BEE91A /* MacOSLocale.mm in Sources */,
 				FDC02D24228487D500BEE91A /* MacOSApplication.mm in Sources */,
 				FDE1B48722E40E940093FDC1 /* ustrenum.cpp in Sources */,
-				FDC02D25228487D500BEE91A /* MacOSScreen.mm in Sources */,
 				FDE1B4EB22E40E940093FDC1 /* ustr_cnv.cpp in Sources */,
 				FDE1B4A222E40E940093FDC1 /* resource.cpp in Sources */,
 				FDC02D26228487D500BEE91A /* MacOSMain.mm in Sources */,

@@ -5,14 +5,6 @@
  */
 
 #pragma once
-#include <cstdint>
-#include <cassert>
-#include <cstdio>
-#include <cmath>
-#include <gsl/span>
-
-#include "Misc/ExpressionTemplate.h"
-
 #include "Vector2.h"
 
 #if _MSC_VER

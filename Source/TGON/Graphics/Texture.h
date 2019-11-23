@@ -28,7 +28,7 @@ enum class WrapMode
     Mirror,
 };
 
-class TGON_API Texture :
+class Texture :
     private PlatformTexture
 {
 /**@section Constructor */

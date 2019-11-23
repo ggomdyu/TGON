@@ -21,7 +21,7 @@
 namespace tgon
 {
 
-class TGON_API Path :
+class Path :
     private PlatformPath
 {
 /**@section Constructor */

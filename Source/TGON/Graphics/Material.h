@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class TGON_API Material :
+class Material :
     private NonCopyable
 {
 /**@section Constructor */

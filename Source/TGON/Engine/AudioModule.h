@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class TGON_API AudioModule :
+class AudioModule :
 	public Module
 {
 public:

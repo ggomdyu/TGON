@@ -20,7 +20,7 @@ enum class ThreadPriority
     Lowest
 };
 
-class TGON_API Thread :
+class Thread :
     private std::thread
 {
 /**@section Type */

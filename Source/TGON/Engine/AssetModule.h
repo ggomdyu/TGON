@@ -20,7 +20,7 @@
 namespace tgon
 {
 
-class TGON_API AssetModule :
+class AssetModule :
 	public Module
 {
 public:

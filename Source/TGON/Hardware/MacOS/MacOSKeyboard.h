@@ -137,7 +137,7 @@ enum class KeyCode
     SysRq               = gainput::KeySysRq,
 };
 
-class TGON_API MacOSKeyboard :
+class MacOSKeyboard :
     private NonCopyable
 {
 /**@section Constructor */

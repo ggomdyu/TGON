@@ -54,7 +54,7 @@ enum class BlendMode
     HardLight,
 };
 
-class TGON_API Graphics final :
+class Graphics final :
     private PlatformGraphics
 {
 /**@section Constructor */

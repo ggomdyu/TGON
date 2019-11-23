@@ -57,7 +57,7 @@ public:
     bool operator==(const std::basic_string_view<_CharType>& rhs) const;
     template <int32_t _CharBufferSize2>
     bool operator==(const BasicFixedString<_CharType, _CharBufferSize2, _StringTraitsType>& rhs) const;
-    const _CharType& operator[](int32_t index) const;
+    _CharType operator[](int32_t index) const;
     _CharType& operator[](int32_t index);
     operator std::basic_string<_CharType>() const noexcept;
     operator std::basic_string_view<_CharType>() const noexcept;
@@ -283,7 +283,7 @@ inline bool BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ope
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline const _CharType& BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator[](int32_t index) const
+inline _CharType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::operator[](int32_t index) const
 {
     return m_str[index];
 }

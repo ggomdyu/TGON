@@ -37,7 +37,7 @@ enum class FileAttributes
     Temporary = 0x100
 };
 
-class TGON_API File
+class File
 {
 /**@section Constructor */
 public:

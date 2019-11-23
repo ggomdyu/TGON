@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class TGON_API MacOSInputManager :
+class MacOSInputManager :
     private NonCopyable
 {
 /**@section Method */

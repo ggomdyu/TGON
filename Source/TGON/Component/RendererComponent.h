@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API RendererComponent :
+class RendererComponent :
 	public Component
 {
 public:

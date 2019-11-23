@@ -4,7 +4,7 @@
 #include <Foundation/Foundation.h>
 #include <mach/mach_time.h>
 #include <sys/utsname.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <pthread.h>
 #include <execinfo.h>
 
@@ -47,6 +47,16 @@ bool Environment::SetEnvironmentVariable(const char* name, const char* value)
     return setenv(name, value, true) == 0;
 }
 
+bool Environment::SetEnvironmentVariable(const char* name, const char* value, EnvironmentVariableTarget target)
+{
+    if (target == EnvironmentVariableTarget::Process)
+    {
+        return SetEnvironmentVariable(name, value);
+    }
+
+    return false;
+}
+
 int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
 {
     const char* envValue = getenv(name);
@@ -64,6 +74,16 @@ int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int
     memcpy(destStr, envValue, envValueBytes + 1);
     
     return static_cast<int32_t>(envValueBytes);
+}
+
+std::optional<std::string> Environment::GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target)
+{
+    if (target == EnvironmentVariableTarget::Process)
+    {
+        return GetEnvironmentVariable(name);
+    }
+
+    return {};
 }
 
 int32_t Environment::GetCurrentManagedThreadId()

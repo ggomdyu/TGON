@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API UnixPath
+class UnixPath
 {
 /**@section Constructor */
 public:

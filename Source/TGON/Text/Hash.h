@@ -27,8 +27,8 @@ constexpr size_t X65599Hash(const _CharType* str) noexcept
         return 0;
     }
     
-    uint32_t hashValue = 0;
-    for (uint32_t i = 0; str[i] != 0; ++i)
+    size_t hashValue = 0;
+    for (size_t i = 0; str[i] != 0; ++i)
     {
         hashValue = 65599 * hashValue + str[i];
     }

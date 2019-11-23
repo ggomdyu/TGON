@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API Scene :
+class Scene :
     public Object
 {
 public:

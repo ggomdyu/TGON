@@ -5,13 +5,6 @@
  */
 
 #pragma once
-#include <cstdint>
-#include <cassert>
-#include <cstdio>
-#include <cmath>
-
-#include "Misc/ExpressionTemplate.h"
-
 #include "Vector3.h"
 #include "Matrix4x4.h"
 

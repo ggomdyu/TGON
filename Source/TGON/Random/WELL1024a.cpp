@@ -35,7 +35,7 @@ thread_local std::unique_ptr<unsigned int[]> state;
 
 } /* namespace */
 
-TGON_API void SrandWELL1024a()
+void SrandWELL1024a()
 {
     if (state == nullptr)
     {
@@ -49,7 +49,7 @@ TGON_API void SrandWELL1024a()
     }
 }
 
-TGON_API double WELL1024a() noexcept
+double WELL1024a() noexcept
 {
     thread_local unsigned int state_i;
     thread_local unsigned int z0, z1, z2;

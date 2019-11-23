@@ -28,9 +28,7 @@ public:
 /**@section Constructor */
 public:
     DelegateChain() noexcept = default;
-
     explicit DelegateChain(const std::initializer_list<DelegateType>& initializerList);
-    
     template <typename _DelegateContainer>
     explicit DelegateChain(_DelegateContainer&& delegateContainer);
 
@@ -49,10 +47,8 @@ public:
 public:
     template <typename... _ArgTypes2>
     _ReturnType Invoke(_ArgTypes2&&... args);
-
     template <typename _DelegateType>
     void Append(_DelegateType&& delegate);
-
     bool Erase(const DelegateType& delegate);
     void Clear() noexcept;
     const std::vector<DelegateType>& GetInvocationList() const noexcept;

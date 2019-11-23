@@ -52,7 +52,7 @@ enum class FileOptions
     Asynchronous = 1073741824
 };
 
-class TGON_API FileStream :
+class FileStream :
     public Stream
 {
 /**@section Constructor */

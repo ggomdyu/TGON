@@ -29,20 +29,12 @@ CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     m_camera(camera),
     m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
 {
-    auto graphicsModule = m_graphicsModule.lock();
-    if (graphicsModule != nullptr)
-    {
-        graphicsModule->GetUIRenderer().AddCamera(camera);
-    }
+    m_graphicsModule->GetUIRenderer().AddCamera(camera);
 }
 
 CameraComponent::~CameraComponent()
 {
-    auto graphicsModule = m_graphicsModule.lock();
-    if (graphicsModule != nullptr)
-    {
-        graphicsModule->GetUIRenderer().RemoveCamera(m_camera);
-    }
+    m_graphicsModule->GetUIRenderer().RemoveCamera(m_camera);
 }
 
 void CameraComponent::Update()

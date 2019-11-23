@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class TGON_API InputManager final :
+class InputManager final :
     private PlatformInputManager
 {
 /**@section Constructor */

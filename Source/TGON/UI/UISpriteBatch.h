@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API UISpriteBatch final
+class UISpriteBatch final
 {
 /**@section Constructor */
 public:

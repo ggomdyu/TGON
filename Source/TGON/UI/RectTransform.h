@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API RectTransform :
+class RectTransform :
     public Transform
 {
 /**@section Constructor */

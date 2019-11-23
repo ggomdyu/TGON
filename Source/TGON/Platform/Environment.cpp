@@ -23,45 +23,6 @@ std::optional<std::string> Environment::GetEnvironmentVariable(const char* name)
     return std::string(str.data(), static_cast<size_t>(strLen));
 }
 
-std::optional<std::string> Environment::GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target)
-{
-    if (target == EnvironmentVariableTarget::Process)
-    {
-        return GetEnvironmentVariable(name);
-    }
-
-    if (target == EnvironmentVariableTarget::Machine)
-    {
-    
-        /*using (RegistryKey environmentKey =
-            Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Session Manager\Environment", false)) {
-
-                Contract.Assert(environmentKey != null, @"HKLM\System\CurrentControlSet\Control\Session Manager\Environment is missing!");
-                    if (environmentKey == null) {
-                        return null;
-                    }
-
-        string value = environmentKey.GetValue(variable) as string;
-        return value;*/
-    }
-    
-    if (target == EnvironmentVariableTarget::User)
-    {
-        /*using (RegistryKey environmentKey =
-        Registry.CurrentUser.OpenSubKey("Environment", false)) {
-
-        Contract.Assert(environmentKey != null, @"HKCU\Environment is missing!");
-            if (environmentKey == null) {
-                return null;
-            }
-
-        string value = environmentKey.GetValue(variable) as string;
-        return value;*/
-    }
-
-    return {};
-}
-
 std::string Environment::GetCurrentDirectory()
 {
     return Directory::GetCurrentDirectory();
@@ -70,6 +31,11 @@ std::string Environment::GetCurrentDirectory()
 int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
     return Directory::GetCurrentDirectory(destStr, destStrBufferLen);
+}
+
+int32_t Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
+{
+    return GetCurrentDirectory(destStr.data(), static_cast<int32_t>(destStr.size()));
 }
 
 std::string Environment::GetFolderPath(SpecialFolder folder)

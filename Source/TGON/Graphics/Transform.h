@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class TGON_API Transform :
+class Transform :
     public Component
 {
 public:

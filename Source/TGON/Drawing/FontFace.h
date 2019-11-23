@@ -34,7 +34,7 @@ struct GlyphData final
     std::unique_ptr<std::byte[]> bitmap;
 };
 
-class TGON_API FontFace final :
+class FontFace final :
     private NonCopyable
 {
 /**@section Constructor */

@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API Mesh
+class Mesh
 {
 /**@section Constructor */
 public:

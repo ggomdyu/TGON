@@ -8,6 +8,8 @@
 #include <type_traits>
 #include <cstdint>
 #include <cstdio>
+#include <string>
+#include <gsl/span>
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s

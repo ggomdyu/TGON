@@ -24,7 +24,7 @@
 namespace tgon
 {
 
-class TGON_API OpenGLContext final :
+class OpenGLContext final :
     private NonCopyable
 {
 /**@section Constructor */

@@ -17,7 +17,7 @@
 namespace tgon
 {
     
-class TGON_API IndexBuffer final :
+class IndexBuffer final :
     private PlatformIndexBuffer
 {
 /**@section Constructor */

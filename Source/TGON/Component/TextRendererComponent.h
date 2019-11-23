@@ -37,7 +37,7 @@ namespace tgon
 //    TruncateTail,
 //};
 //
-//class TGON_API TextRendererComponent :
+//class TextRendererComponent :
 //	public RendererComponent
 //{
 //public:

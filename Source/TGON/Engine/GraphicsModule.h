@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API GraphicsModule :
+class GraphicsModule :
     public Module
 {
 public:

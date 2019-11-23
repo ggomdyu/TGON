@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class TGON_API TaskModule final :
+class TaskModule final :
 	public Module
 {
 public:

@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-class TGON_API MacOSApplication :
+class MacOSApplication :
     private NonCopyable
 {
 };

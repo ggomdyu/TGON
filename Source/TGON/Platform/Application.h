@@ -31,7 +31,7 @@ enum class MessageBoxIcon
     Warning,
 };
 
-class TGON_API Application final :
+class Application final :
     private PlatformApplication
 {
 /**@section Constructor */

@@ -13,7 +13,7 @@
 namespace tgon
 {
     
-class TGON_API MacOSGamepad :
+class MacOSGamepad :
     private NonCopyable
 {
 /**@section Constructor */

@@ -71,7 +71,11 @@ public:
     template <typename _StringType2, typename _StringTraitsType2>
     constexpr bool operator<(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
     template <typename _StringType2, typename _StringTraitsType2>
+    constexpr bool operator<=(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
+    template <typename _StringType2, typename _StringTraitsType2>
     constexpr bool operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
+    template <typename _StringType2, typename _StringTraitsType2>
+    constexpr bool operator>=(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept;
     operator std::basic_string<typename _StringTraitsType::ValueType>() const noexcept;
     constexpr operator std::basic_string_view<typename _StringTraitsType::ValueType>() const noexcept;
 
@@ -208,9 +212,23 @@ constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator<(const 
 
 template <typename _StringType, typename _StringTraitsType>
 template <typename _StringType2, typename _StringTraitsType2>
+constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator<=(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept
+{
+    return m_hashCode <= rhs.GetHashCode();
+}
+
+template <typename _StringType, typename _StringTraitsType>
+template <typename _StringType2, typename _StringTraitsType2>
 constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator>(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept
 {
     return m_hashCode > rhs.GetHashCode();
+}
+
+template <typename _StringType, typename _StringTraitsType>
+template <typename _StringType2, typename _StringTraitsType2>
+constexpr bool BasicStringHash<_StringType, _StringTraitsType>::operator>=(const BasicStringHash<_StringType2, _StringTraitsType2>& rhs) const noexcept
+{
+    return m_hashCode >= rhs.GetHashCode();
 }
 
 template <typename _StringType, typename _StringTraitsType>

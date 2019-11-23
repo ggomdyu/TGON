@@ -12,7 +12,6 @@
 #include "Core/Object.h"
 #include "Platform/Window.h"
 #include "Platform/Application.h"
-#include "Platform/Screen.h"
 #include "Platform/Locale.h"
 #include "Platform/Environment.h"
 #include "IO/File.h"

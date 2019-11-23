@@ -126,7 +126,7 @@ public:
 
 inline size_t hash<tgon::RTTI>::operator()(const tgon::RTTI& rhs) const noexcept
 {
-    return static_cast<size_t>(rhs.GetHashCode());
+    return rhs.GetHashCode();
 }
     
 } /* namespace std */

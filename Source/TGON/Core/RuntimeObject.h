@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class TGON_API RuntimeObject :
+class RuntimeObject :
     private NonCopyable
 {
 /**@section Type */

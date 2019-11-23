@@ -37,7 +37,7 @@ enum class PixelFormat
     R8,
 };
 
-class TGON_API Image
+class Image
 {
 /**@section Constructor */
 public:

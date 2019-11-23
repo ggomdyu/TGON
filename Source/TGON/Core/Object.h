@@ -12,7 +12,7 @@
 namespace tgon
 {
 
-class TGON_API Object :
+class Object :
     public RuntimeObject
 {
 public:

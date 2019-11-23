@@ -6,14 +6,13 @@
 
 #pragma once
 #include "Core/Object.h"
-#include "Core/NonCopyable.h"
 
 namespace tgon
 {
 
 class GameObject;
-    
-class TGON_API Component :
+
+class Component :
 	public Object
 {
 public:
@@ -21,7 +20,8 @@ public:
 
 /**@section Constructor */
 public:
-    Component(const std::weak_ptr<GameObject>& gameObject = {}) noexcept;
+    Component() noexcept = default;
+    Component(const std::weak_ptr<GameObject>& gameObject) noexcept;
 
 /**@section Destructor */
 public:
@@ -29,17 +29,17 @@ public:
 
 /**@section Method */
 public:
-    virtual void Update() = 0;
+    virtual void Update();
     void SetGameObject(const std::weak_ptr<GameObject>& gameObject) noexcept;
-    std::weak_ptr<GameObject> GetGameObject() noexcept;
-    std::weak_ptr<const GameObject> GetGameObject() const noexcept;
     void SetAcitve(bool isActive) noexcept;
+    std::shared_ptr<GameObject> GetGameObject() noexcept;
+    std::shared_ptr<const GameObject> GetGameObject() const noexcept;
     bool IsActive() const noexcept;
 
 /**@section Variable */
 protected:
-    bool m_isActive;
     std::weak_ptr<GameObject> m_gameObject;
+    bool m_isActive;
 };
 
 } /* namespace tgon */

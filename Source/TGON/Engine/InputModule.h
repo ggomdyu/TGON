@@ -25,7 +25,7 @@ struct InputMode
     bool isUseGamepad = false;
 };
 
-class TGON_API InputModule :
+class InputModule :
     public Module
 {
 public:

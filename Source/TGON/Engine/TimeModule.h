@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API TimeModule final :
+class TimeModule final :
 	public Module
 {
 public:

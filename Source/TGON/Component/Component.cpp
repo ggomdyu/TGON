@@ -12,20 +12,24 @@ Component::Component(const std::weak_ptr<GameObject>& gameObject) noexcept :
     m_isActive(true)
 {
 }
+
+void Component::Update()
+{
+}
     
 void Component::SetGameObject(const std::weak_ptr<GameObject>& gameObject) noexcept
 {
     m_gameObject = gameObject;
 }
 
-std::weak_ptr<GameObject> Component::GetGameObject() noexcept
+std::shared_ptr<GameObject> Component::GetGameObject() noexcept
 {
-    return m_gameObject;
+    return m_gameObject.lock();
 }
 
-std::weak_ptr<const GameObject> Component::GetGameObject() const noexcept
+std::shared_ptr<const GameObject> Component::GetGameObject() const noexcept
 {
-    return m_gameObject;
+    return m_gameObject.lock();
 }
 
 void Component::SetAcitve(bool isActive) noexcept

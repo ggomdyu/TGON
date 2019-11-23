@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API Font final :
+class Font final :
     private NonCopyable
 {
 /**@section Constructor */
@@ -33,6 +33,8 @@ public:
     const FontFace& GetFace(int32_t fontSize) const;
     const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
+    I32Extent2D GetTextSize(int32_t fontSize);
+    I32Extent2D GetTextSize(int32_t fontSize, const I32Extent2D& rect) const;
 
 /**@section Variable */
 private:

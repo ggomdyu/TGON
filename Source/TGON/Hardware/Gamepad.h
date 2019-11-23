@@ -18,7 +18,7 @@
 namespace tgon
 {
 
-class TGON_API Gamepad final :
+class Gamepad final :
     private PlatformGamepad
 {
 /**@section Constructor */

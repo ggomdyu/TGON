@@ -95,6 +95,12 @@ int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
     return static_cast<int32_t>(strlen(destStr));
 }
 
+std::vector<std::string> Directory::GetLogicalDrives()
+{
+    // TODO: Implement
+    return {};
+}
+
 bool Directory::InternalCreateDirectory(const char* path)
 {
     return mkdir(path, 0777) == 0;

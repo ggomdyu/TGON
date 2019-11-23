@@ -27,7 +27,7 @@
 namespace tgon
 {
 
-class TGON_API Engine :
+class Engine :
     public Object
 {
 public:

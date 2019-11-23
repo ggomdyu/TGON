@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-class TGON_API ShaderProgram final :
+class ShaderProgram final :
     private PlatformShaderProgram
 {
 /**@section Enum */

@@ -15,7 +15,7 @@
 namespace tgon
 {
 
-class TGON_API RenderTarget final :
+class RenderTarget final :
     private PlatformRenderTarget
 {
 /**@section Constructor */

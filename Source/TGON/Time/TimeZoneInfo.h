@@ -15,7 +15,7 @@
 namespace tgon
 {
 
-class TGON_API TimeZoneInfo final
+class TimeZoneInfo final
 {
 /**@section Constructor */
 public:

@@ -8,8 +8,8 @@
 #pragma once
 #include "Platform/Config.h"
 #include "Core/DelegateChain.h"
-#include "Math/Point.h"
 #include "Math/Extent.h"
+#include "Math/Vector2.h"
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsWindow.h"
@@ -41,7 +41,7 @@ struct WindowStyle final
     bool showMiddle = true;
 };
 
-class TGON_API Window final :
+class Window final :
     private PlatformWindow
 {
 /**@section Constructor */
@@ -76,7 +76,7 @@ public:
     void SetTopMost(bool setTopMost);
     void SetTransparency(float transparency);
     void GetPosition(int32_t* x, int32_t* y) const;
-    I32Point GetPosition() const;
+    I32Vector2 GetPosition() const;
     void GetWindowSize(int32_t* destWidth, int32_t* destHeight) const;
     I32Extent2D GetWindowSize() const;
     void GetClientSize(int32_t* width, int32_t* height) const;

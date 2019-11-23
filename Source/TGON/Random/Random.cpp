@@ -43,7 +43,7 @@ double Random::NextDouble() noexcept
 
 double Random::NextDouble(double minValue, double maxValue) noexcept
 {
-    return minValue + (Sample() * (maxValue - minValue));
+    return minValue + (this->Sample() * (maxValue - minValue));
 }
 
 double Random::Sample() noexcept

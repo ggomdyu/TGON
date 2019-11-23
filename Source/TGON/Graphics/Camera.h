@@ -19,7 +19,7 @@ enum class ProjectionMode
     Orthographic
 };
 
-class TGON_API Camera
+class Camera
 {
 /**@section Constructor */
 public:

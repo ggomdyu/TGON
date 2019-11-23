@@ -5,15 +5,15 @@
  */
 
 #pragma once
-#include "Math/Rect.h"
-#include "Math/Vector2.h"
 #include "Graphics/Graphics.h"
 #include "Graphics/Texture.h"
+#include "Math/Rect.h"
+#include "Math/Vector2.h"
 
 namespace tgon
 {
 
-class TGON_API UISprite final
+class UISprite final
 {
 /**@section Constructor */
 public:

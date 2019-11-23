@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API OpenGLIndexBuffer :
+class OpenGLIndexBuffer :
     private NonCopyable
 {
 /**@section Constructor */

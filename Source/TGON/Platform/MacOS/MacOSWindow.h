@@ -15,7 +15,7 @@
 namespace tgon
 {
 
-class TGON_API MacOSWindow :
+class MacOSWindow :
     private NonCopyable
 {
 /**@section Constructor */

@@ -9,6 +9,8 @@
 #include <cassert>
 #include <cstdio>
 #include <cmath>
+#include <string>
+#include <gsl/span>
 
 #include "Misc/ExpressionTemplate.h"
 

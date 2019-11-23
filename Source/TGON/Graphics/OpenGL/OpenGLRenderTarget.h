@@ -18,7 +18,7 @@
 namespace tgon
 {
    
-class TGON_API OpenGLRenderTarget :
+class OpenGLRenderTarget :
     private NonCopyable
 {
 /**@section Constructor */

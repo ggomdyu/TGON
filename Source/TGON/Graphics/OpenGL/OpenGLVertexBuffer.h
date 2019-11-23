@@ -14,7 +14,7 @@
 namespace tgon
 {
     
-class TGON_API OpenGLVertexBuffer :
+class OpenGLVertexBuffer :
     private NonCopyable
 {
 /**@section Constructor */

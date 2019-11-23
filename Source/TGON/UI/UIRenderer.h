@@ -16,7 +16,7 @@
 namespace tgon
 {
 
-class TGON_API UIRenderer
+class UIRenderer
 {
 /**@section Constructor */
 public:
