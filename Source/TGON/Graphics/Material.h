@@ -22,7 +22,7 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~Material() = default;
+    ~Material() = default;
 
 /**@section Method */
 public:

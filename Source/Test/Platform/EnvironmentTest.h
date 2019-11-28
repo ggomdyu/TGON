@@ -22,7 +22,7 @@ class EnvironmentTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
 #if TGON_PLATFORM_MACOS
         assert(Environment::GetSystemPageSize() == 4096);

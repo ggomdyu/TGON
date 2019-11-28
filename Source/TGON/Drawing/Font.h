@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class Font final :
+class Font :
     private NonCopyable
 {
 /**@section Constructor */

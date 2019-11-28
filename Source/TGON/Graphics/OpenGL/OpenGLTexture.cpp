@@ -97,16 +97,6 @@ GLuint OpenGLTexture::GetTextureHandle() const noexcept
     return m_textureHandle;
 }
 
-Texture::Texture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    Texture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
-{
-}
-
-Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    Texture(image.GetData(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
-{
-}
-
 Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     OpenGLTexture(CreateTextureHandle()),
     m_isUseMipmap(isUseMipmap),
@@ -159,40 +149,19 @@ void Texture::SetData(const std::byte* imageData, const I32Extent2D& size, Pixel
 
 void Texture::SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
 {
+    std::vector<std::byte> c(size.width * size.height * 4);
+    for (size_t i = 0; i < c.size(); i += 4)
+    {
+        c[i] = std::byte(imageData[i]);
+        c[i+1] = std::byte(imageData[i+1]);
+        c[i+2] = std::byte(imageData[i+2]);
+        c[i+3] = std::byte(imageData[i+3]);
+    }
+    
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
     
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, imageData));
-}
-
-void Texture::SetFilterMode(FilterMode filterMode)
-{
-    m_filterMode = filterMode;
-}
-
-void Texture::SetWrapMode(WrapMode wrapMode)
-{
-    m_wrapMode = wrapMode;
-}
-
-FilterMode Texture::GetFilterMode() const noexcept
-{
-    return m_filterMode;
-}
-
-WrapMode Texture::GetWrapMode() const noexcept
-{
-    return m_wrapMode;
-}
-
-const I32Extent2D& Texture::GetSize() const noexcept
-{
-    return m_size;
-}
-    
-PixelFormat Texture::GetPixelFormat() const noexcept
-{
-    return m_pixelFormat;
+    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, &c[0]));
 }
 
 void Texture::Destroy()

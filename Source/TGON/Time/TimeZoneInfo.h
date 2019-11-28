@@ -8,8 +8,6 @@
 #pragma once
 #include <string>
 
-#include "Platform/Config.h"
-
 #include "DateTime.h"
 
 namespace tgon

@@ -22,7 +22,7 @@ class DirectoryTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
         using namespace tgon;
         

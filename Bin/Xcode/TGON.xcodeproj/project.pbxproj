@@ -29,15 +29,19 @@
 		8CB5BB14233F814D0032F332 /* Directory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB12233F814C0032F332 /* Directory.cpp */; };
 		8CB5BB172340D6100032F332 /* UnixFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB162340D6100032F332 /* UnixFile.cpp */; };
 		8CB5BB1B23460D900032F332 /* VideoMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CB5BB1A23460D900032F332 /* VideoMode.h */; };
+		8CC13980238A4665008BCC66 /* UIElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC1397E238A4664008BCC66 /* UIElement.h */; };
+		8CC13981238A4665008BCC66 /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1397F238A4664008BCC66 /* UIElement.cpp */; };
 		8CC61CB422F3299700F415C8 /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB322F3299600F415C8 /* DateTime.cpp */; };
 		8CC61CB622F329B300F415C8 /* MacOSFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB522F329B300F415C8 /* MacOSFile.mm */; };
 		8CC61CC022F677D100F415C8 /* UIRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */; };
-		8CC61CC122F677D100F415C8 /* UISpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */; };
+		8CC61CC122F677D100F415C8 /* UIBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBA22F610AE00F415C8 /* UIBatch.cpp */; };
 		8CC61CC222F677D100F415C8 /* UISprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBB22F610AE00F415C8 /* UISprite.cpp */; };
 		8CC61CC322F677D100F415C8 /* RectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */; };
 		8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */; };
 		8CC61CC822FB3B7A00F415C8 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC622FB3B7A00F415C8 /* Debug.cpp */; };
 		8CC61CC922FB3B7A00F415C8 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CC722FB3B7A00F415C8 /* Debug.h */; };
+		8CD20BCA238B68AF001F4473 /* UIFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD20BC8238B68AE001F4473 /* UIFont.h */; };
+		8CD20BCB238B68AF001F4473 /* UIFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD20BC9238B68AF001F4473 /* UIFont.cpp */; };
 		8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */; };
 		8CE691B02365FE1600482062 /* UnixDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AF2365FE1500482062 /* UnixDirectory.cpp */; };
 		8CF8A17B234A435100763883 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16C234A435000763883 /* Object.h */; };
@@ -806,19 +810,23 @@
 		8CB5BB15233F96E50032F332 /* DirectoryInfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DirectoryInfo.h; sourceTree = "<group>"; };
 		8CB5BB162340D6100032F332 /* UnixFile.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UnixFile.cpp; sourceTree = "<group>"; };
 		8CB5BB1A23460D900032F332 /* VideoMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMode.h; sourceTree = "<group>"; };
+		8CC1397E238A4664008BCC66 /* UIElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIElement.h; sourceTree = "<group>"; };
+		8CC1397F238A4664008BCC66 /* UIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		8CC61CB322F3299600F415C8 /* DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DateTime.cpp; sourceTree = "<group>"; };
 		8CC61CB522F329B300F415C8 /* MacOSFile.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSFile.mm; sourceTree = "<group>"; };
 		8CC61CB822F610AE00F415C8 /* RectTransform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RectTransform.h; sourceTree = "<group>"; };
 		8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UIRenderer.cpp; sourceTree = "<group>"; };
-		8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UISpriteBatch.cpp; sourceTree = "<group>"; };
+		8CC61CBA22F610AE00F415C8 /* UIBatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UIBatch.cpp; sourceTree = "<group>"; };
 		8CC61CBB22F610AE00F415C8 /* UISprite.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = UISprite.cpp; sourceTree = "<group>"; };
 		8CC61CBC22F610AE00F415C8 /* UIRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UIRenderer.h; sourceTree = "<group>"; };
-		8CC61CBD22F610AE00F415C8 /* UISpriteBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UISpriteBatch.h; sourceTree = "<group>"; };
+		8CC61CBD22F610AE00F415C8 /* UIBatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UIBatch.h; sourceTree = "<group>"; };
 		8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = RectTransform.cpp; sourceTree = "<group>"; };
 		8CC61CBF22F610AE00F415C8 /* UISprite.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = UISprite.h; sourceTree = "<group>"; };
 		8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSDebug.mm; sourceTree = "<group>"; };
 		8CC61CC622FB3B7A00F415C8 /* Debug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Debug.cpp; sourceTree = "<group>"; };
 		8CC61CC722FB3B7A00F415C8 /* Debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Debug.h; sourceTree = "<group>"; };
+		8CD20BC8238B68AE001F4473 /* UIFont.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UIFont.h; sourceTree = "<group>"; };
+		8CD20BC9238B68AF001F4473 /* UIFont.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UIFont.cpp; sourceTree = "<group>"; };
 		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
 		8CE691AF2365FE1500482062 /* UnixDirectory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UnixDirectory.cpp; sourceTree = "<group>"; };
 		8CF8A16C234A435000763883 /* Object.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Object.h; sourceTree = "<group>"; };
@@ -1794,14 +1802,18 @@
 			children = (
 				8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */,
 				8CC61CB822F610AE00F415C8 /* RectTransform.h */,
+				8CD20BC9238B68AF001F4473 /* UIFont.cpp */,
+				8CD20BC8238B68AE001F4473 /* UIFont.h */,
 				8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */,
 				8CC61CBC22F610AE00F415C8 /* UIRenderer.h */,
 				8CC61CBB22F610AE00F415C8 /* UISprite.cpp */,
 				8CC61CBF22F610AE00F415C8 /* UISprite.h */,
-				8CC61CBA22F610AE00F415C8 /* UISpriteBatch.cpp */,
-				8CC61CBD22F610AE00F415C8 /* UISpriteBatch.h */,
+				8CC61CBA22F610AE00F415C8 /* UIBatch.cpp */,
+				8CC61CBD22F610AE00F415C8 /* UIBatch.h */,
 				8C7A8F0F23793AF800DC7196 /* UIText.cpp */,
 				8C7A8F0E23793AF800DC7196 /* UIText.h */,
+				8CC1397F238A4664008BCC66 /* UIElement.cpp */,
+				8CC1397E238A4664008BCC66 /* UIElement.h */,
 			);
 			name = UI;
 			path = ../../Source/TGON/UI;
@@ -3498,6 +3510,7 @@
 				FDE1B59C22E40FDB0093FDC1 /* ubrk.h in Headers */,
 				FD53329322A2EA1C001EB57C /* ftmm.h in Headers */,
 				FDE1B59A22E40FDB0093FDC1 /* messagepattern.h in Headers */,
+				8CC13980238A4665008BCC66 /* UIElement.h in Headers */,
 				FDE1B69B22E4100F0093FDC1 /* uchar_props_data.h in Headers */,
 				FD7DE06C229D973C002B5786 /* OpenGLRenderTarget.h in Headers */,
 				FD5332A022A2EA1C001EB57C /* sfnt.h in Headers */,
@@ -3550,6 +3563,7 @@
 				FD5332B822A2EA1C001EB57C /* svttcmap.h in Headers */,
 				FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */,
 				FDE1B5C822E40FDB0093FDC1 /* uenum.h in Headers */,
+				8CD20BCA238B68AF001F4473 /* UIFont.h in Headers */,
 				FDE1B67B22E4100F0093FDC1 /* uset_imp.h in Headers */,
 				8CF8A186234A435100763883 /* NonCopyable.h in Headers */,
 				FD53331D22A57F38001EB57C /* zlib.h in Headers */,
@@ -3932,7 +3946,7 @@
 			files = (
 				8CC61CC022F677D100F415C8 /* UIRenderer.cpp in Sources */,
 				8CF8A19E234A438800763883 /* TextRendererComponent.cpp in Sources */,
-				8CC61CC122F677D100F415C8 /* UISpriteBatch.cpp in Sources */,
+				8CC61CC122F677D100F415C8 /* UIBatch.cpp in Sources */,
 				8CC61CC222F677D100F415C8 /* UISprite.cpp in Sources */,
 				8CC61CC322F677D100F415C8 /* RectTransform.cpp in Sources */,
 				FD5332F822A4CEC3001EB57C /* zutil.c in Sources */,
@@ -4124,6 +4138,7 @@
 				FDE1B53022E40E950093FDC1 /* unisetspan.cpp in Sources */,
 				FDE1B4F522E40E940093FDC1 /* ucnv_u7.cpp in Sources */,
 				FDE1B49022E40E940093FDC1 /* rbbiscan.cpp in Sources */,
+				8CC13981238A4665008BCC66 /* UIElement.cpp in Sources */,
 				8CF8A199234A438800763883 /* SpriteRendererComponent.cpp in Sources */,
 				FDE1B49922E40E940093FDC1 /* utrie.cpp in Sources */,
 				FDE1B50A22E40E950093FDC1 /* ucnv_u32.cpp in Sources */,
@@ -4302,6 +4317,7 @@
 				FDE1B4A822E40E940093FDC1 /* normalizer2impl.cpp in Sources */,
 				FD4C1DE8219F3F7D00B2B2BE /* GainputInputMap.cpp in Sources */,
 				FDE1B48522E40E940093FDC1 /* propname.cpp in Sources */,
+				8CD20BCB238B68AF001F4473 /* UIFont.cpp in Sources */,
 				FDE1B4F722E40E940093FDC1 /* uloc_tag.cpp in Sources */,
 				FDE1B48822E40E940093FDC1 /* ubiditransform.cpp in Sources */,
 				FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */,

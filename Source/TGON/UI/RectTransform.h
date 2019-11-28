@@ -30,7 +30,7 @@ public:
     const FExtent2D& GetSize() const noexcept;
     float GetWidth() const noexcept;
     float GetHeight() const noexcept;
-    virtual void Update() override;
+    void Update() override;
 
 /**@section Variable */
 protected:

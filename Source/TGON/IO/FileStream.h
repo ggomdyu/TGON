@@ -66,7 +66,7 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~FileStream() override;
+    ~FileStream() override;
     
 /**@section Operator */
 public:
@@ -76,20 +76,20 @@ public:
 
 /**@section Method */
 public:
-    virtual bool CanRead() const override;
-    virtual bool CanSeek() const override;
-    virtual bool CanWrite() const override;
-    virtual bool SetLength(int64_t value) override;
-    virtual int64_t Length() const override;
-    virtual int64_t Position() const override;
-    virtual int32_t Read(std::byte* buffer, int32_t count) override;
-    virtual int32_t ReadByte() override;
-    virtual bool Write(const std::byte* buffer, int32_t count) override;
-    virtual bool WriteByte(std::byte value) override;
-    virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
-    virtual void Close() override;
+    bool CanRead() const override;
+    bool CanSeek() const override;
+    bool CanWrite() const override;
+    bool SetLength(int64_t value) override;
+    int64_t Length() const override;
+    int64_t Position() const override;
+    int32_t Read(std::byte* buffer, int32_t count) override;
+    int32_t ReadByte() override;
+    bool Write(const std::byte* buffer, int32_t count) override;
+    bool WriteByte(std::byte value) override;
+    int64_t Seek(int64_t offset, SeekOrigin origin) override;
+    void Close() override;
     const std::string& Name() const noexcept;
-    virtual void Flush() override;
+    void Flush() override;
     void Flush(bool flushToDisk);
     bool IsClosed() const noexcept;
     

@@ -34,7 +34,7 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~Transform() noexcept = default;
+    ~Transform() noexcept = default;
     
 /**@section Method */
 public:
@@ -49,7 +49,7 @@ public:
     const Vector3& GetLocalScale() const noexcept;
     Vector3 GetPosition() const noexcept;
     const Matrix4x4& GetWorldMatrix() const noexcept;
-    virtual void Update() override;
+    void Update() override;
     
 /**@section Variable */
 protected:

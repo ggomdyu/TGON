@@ -12,8 +12,6 @@
 #include <ctime>
 #include <tuple>
 
-#include "Platform/Config.h"
-
 #include "TimeSpan.h"
 
 namespace tgon

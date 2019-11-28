@@ -21,7 +21,7 @@ class PathTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
         assert(Path::GetPathRoot("/Users/chajunho/") == "/");
         assert(Path::GetPathRoot("/") == "/");

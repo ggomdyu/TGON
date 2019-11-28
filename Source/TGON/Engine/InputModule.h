@@ -37,7 +37,7 @@ public:
 
 /**@section Method */
 public:
-    virtual void Update() override;
+    void Update() override;
     std::shared_ptr<Mouse> GetMouse() noexcept;
     std::shared_ptr<const Mouse> GetMouse() const noexcept;
     std::shared_ptr<Keyboard> GetKeyboard() noexcept;

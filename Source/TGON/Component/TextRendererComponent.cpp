@@ -3,100 +3,123 @@
 #include "Game/GameObject.h"
 #include "Engine/GraphicsModule.h"
 
+#include "Platform/Application.h"
+#include "Engine/AssetModule.h"
+
 #include "TextRendererComponent.h"
 
 namespace tgon
 {
+
+TextRendererComponent::TextRendererComponent() :
+    RendererComponent(),
+    m_text(std::make_shared<UIText>())
+{
+}
+
+void TextRendererComponent::SetFont(const char* fontPath)
+{
+    auto assetModule = Application::GetEngine()->FindModule<AssetModule>();
+    this->SetFont(assetModule->GetFont(fontPath));
+}
+
+void TextRendererComponent::SetFont(const std::shared_ptr<UIFont>& font) noexcept
+{
+    m_text->SetFont(font);
+}
+
+void TextRendererComponent::SetText(const std::string_view& text)
+{
+    m_text->SetText(text);
+}
+
+void TextRendererComponent::SetFontSize(int32_t fontSize) noexcept
+{
+    m_text->SetFontSize(fontSize);
+}
+
+void TextRendererComponent::SetLineSpacing(float lineSpacing) noexcept
+{
+    m_text->SetLineSpacing(lineSpacing);
+}
+
+void TextRendererComponent::SetLineBreakMode(LineBreakMode lineBreakMode) noexcept
+{
+    m_text->SetLineBreakMode(lineBreakMode);
+}
+
+void TextRendererComponent::SetTextAlignment(TextAlignment textAlignment) noexcept
+{
+    m_text->SetTextAlignment(textAlignment);
+}
+
+void TextRendererComponent::SetColor(const Color4f& color) noexcept
+{
+    m_text->SetColor(color);
+}
+
+void TextRendererComponent::SetRect(const I32Rect& rect) noexcept
+{
+    m_text->SetRect(rect);
+}
+
+void TextRendererComponent::SetSortingLayer(int32_t sortingLayer) noexcept
+{
+    m_sortingLayer = sortingLayer;
+}
+
+LineBreakMode TextRendererComponent::GetLineBreakMode() const noexcept
+{
+    return m_text->GetLineBreakMode();
+}
+
+TextAlignment TextRendererComponent::GetTextAlignment() const noexcept
+{
+    return m_text->GetTextAlignment();
+}
+
+const Color4f& TextRendererComponent::GetColor() const noexcept
+{
+    return m_text->GetColor();
+}
+
+std::shared_ptr<const UIFont> TextRendererComponent::GetFont() const noexcept
+{
+    return m_text->GetFont();
+}
+
+std::shared_ptr<UIFont> TextRendererComponent::GetFont() noexcept
+{
+    return m_text->GetFont();
+}
+
+int32_t TextRendererComponent::GetFontSize() const noexcept
+{
+    return m_text->GetFontSize();
+}
+
+const I32Rect& TextRendererComponent::GetRect() const noexcept
+{
+    return m_text->GetRect();
+}
+
+int32_t TextRendererComponent::GetSortingLayer() const noexcept
+{
+    return m_sortingLayer;
+}
+
+void TextRendererComponent::Update()
+{
+    if (m_text->GetColor().a <= 0.0f)
+    {
+        return;
+    }
     
-//void TextRendererComponent::Update()
-//{
-//    auto gameObject = m_gameObject.lock();
-//    if (gameObject != nullptr)
-//    {
-//        m_graphicsModule->GetUIRenderer().AddPrimitive(m_sprite, 0, gameObject->GetTransform()->GetWorldMatrix());
-//    }
-//}
-//
-//void TextRendererComponent::SetFont(const std::shared_ptr<Font>& font) noexcept
-//{
-//    m_font = font;
-//    m_isDirty = true;
-//}
-//
-//void TextRendererComponent::SetText(const std::string_view& text)
-//{
-//    m_isDirty = true;
-//}
-//
-//void TextRendererComponent::SetLineSpacing(float lineSpacing) noexcept
-//{
-//    m_lineSpacing = lineSpacing;
-//    m_isDirty = true;
-//}
-//
-//void TextRendererComponent::SetLineBreakMode(LineBreakMode lineBreakMode) noexcept
-//{
-//    m_isDirty = true;
-//}
-//
-//void TextRendererComponent::SetColor(const Color4f& color) noexcept
-//{
-//    m_color = color;
-//    m_isDirty = true;
-//}
-//
-//LineBreakMode TextRendererComponent::GetLineBreakMode() const noexcept
-//{
-//    return m_lineBreakMode;
-//}
-//
-//const Color4f& TextRendererComponent::GetColor() const noexcept
-//{
-//    return m_color;
-//}
-//
-//std::shared_ptr<const Font> TextRendererComponent::GetFont() const noexcept
-//{
-//    return m_font;
-//}
-//
-//std::shared_ptr<Font> TextRendererComponent::GetFont() noexcept
-//{
-//    return m_font;
-//}
-//
-//void TextRendererComponent::DrawTextToMainTexture()
-//{
-//    //float accumulatedXPos = -100.0f;
-//    //float accumulatedYPos = 0.0f;
-//    //const wchar_t str[] = L"Hello.My name is Junho";
-//    //for (int i = 0; i < std::extent<decltype(str)>::value - 1; ++i)
-//    //{
-//    //    int32_t fontSize = 30;
-//    //    auto& glyphData = font->GetGlyphData(str[i], fontSize);
-//    //
-//    //    if (i != 0)
-//    //    {
-//    //        auto& prevGlyphData = font->GetGlyphData( str[i - 1], fontSize );
-//    //        accumulatedXPos -= (prevGlyphData.size.width - glyphData.size.width) / 2;
-//    //
-//    //        auto kerning = font->GetKerning( str[i - 1], str[i], fontSize );
-//    //        accumulatedXPos += kerning.x;
-//    //    }
-//    //
-//    //    float xPos = accumulatedXPos + glyphData.bearing.x;
-//    //    float yPos = accumulatedYPos - glyphData.size.height / 2 + glyphData.bearing.y;
-//    //
-//    //    auto object = std::make_shared<GameObject>("introSprite1", new Transform());
-//    //    object->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
-//    //    object->GetTransform()->SetLocalPosition(Vector3( xPos, yPos, 0.0f ));
-//    //    auto spriteComponent = object->AddComponent<CanvasSpriteRendererComponent>();
-//    //    auto texture = std::make_shared<Texture>(&glyphData.bitmap[0], glyphData.size, PixelFormat::R8, FilterMode::Point, WrapMode::Clamp, false, false);
-//    //    spriteComponent->SetSprite(std::make_shared<CanvasSprite>(texture));
-//    //    this->AddObject(object);
-//    //
-//    //    accumulatedXPos += glyphData.advance.x;
-//    //}
-//}
+    auto gameObject = m_gameObject.lock();
+    if (gameObject != nullptr)
+    {
+        m_graphicsModule->GetUIRenderer().AddUIElement(m_text, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
+    }
+}
 
 } /* namespace tgon */

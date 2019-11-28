@@ -5,14 +5,14 @@
 namespace tgon
 {
 
-PlatformTexture& Texture::GetPlatformDependency() noexcept
+Texture::Texture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    Texture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
-    return *this;
 }
 
-const PlatformTexture& Texture::GetPlatformDependency() const noexcept
+Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    Texture(image.GetData(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
-    return *this;
 }
 
 Texture::Texture(Texture&& rhs) noexcept :
@@ -58,6 +58,46 @@ Texture& Texture::operator=(Texture&& rhs)
     rhs.m_size = {};
 
     return *this;
+}
+
+PlatformTexture& Texture::GetPlatformDependency() noexcept
+{
+    return *this;
+}
+
+const PlatformTexture& Texture::GetPlatformDependency() const noexcept
+{
+    return *this;
+}
+
+void Texture::SetFilterMode(FilterMode filterMode)
+{
+    m_filterMode = filterMode;
+}
+
+void Texture::SetWrapMode(WrapMode wrapMode)
+{
+    m_wrapMode = wrapMode;
+}
+
+FilterMode Texture::GetFilterMode() const noexcept
+{
+    return m_filterMode;
+}
+
+WrapMode Texture::GetWrapMode() const noexcept
+{
+    return m_wrapMode;
+}
+
+const I32Extent2D& Texture::GetSize() const noexcept
+{
+    return m_size;
+}
+    
+PixelFormat Texture::GetPixelFormat() const noexcept
+{
+    return m_pixelFormat;
 }
 
 } /* namespace tgon */

@@ -22,7 +22,7 @@ class FileTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
         CreateTemporaryFileToEvaluateTest();
         

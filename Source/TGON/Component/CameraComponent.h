@@ -28,11 +28,11 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~CameraComponent() override;
+    ~CameraComponent() override;
 
 /**@section Method */
 public:
-	virtual void Update() override;
+	void Update() override;
     std::shared_ptr<Camera> GetCamera() noexcept;
     std::shared_ptr<const Camera> GetCamera() const noexcept;
 

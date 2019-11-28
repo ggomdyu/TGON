@@ -41,7 +41,7 @@ struct WindowStyle final
     bool showMiddle = true;
 };
 
-class Window final :
+class Window :
     private PlatformWindow
 {
 /**@section Constructor */

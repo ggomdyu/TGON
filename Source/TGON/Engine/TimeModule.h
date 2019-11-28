@@ -22,28 +22,13 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~TimeModule() override = default;
+    ~TimeModule() override = default;
 
 /**@section Method */
 public:
-    virtual void Update() override;
-    
-    /**
-     * @brief   Sets the scale which the time passing.
-     * @param [in] timeScale    The scale of time passing.
-     */
+    void Update() override;
     void SetTimeScale(float timeScale) noexcept;
-    
-    /**
-     * @brief   Gets the scale which the time passing.
-     * @return  The scale of time passing.
-     */
     float GetTimeScale() const noexcept;
-    
-    /**
-     * @brief   Gets the elapsed time per frame.
-     * @return  The elapsed time per frame.
-     */
     float GetTickTime() const noexcept;
 
 /**@section Variable */

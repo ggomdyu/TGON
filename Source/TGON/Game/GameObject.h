@@ -28,7 +28,7 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~GameObject() override = default;
+    ~GameObject() override = default;
 
 /**@section Method */
 public:

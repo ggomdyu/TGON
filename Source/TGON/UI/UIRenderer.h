@@ -5,13 +5,12 @@
  */
 
 #pragma once
-#include "Graphics/VertexBuffer.h"
-#include "Graphics/Material.h"
 #include "Graphics/Camera.h"
-#include "Text/StringHash.h"
+#include "Graphics/Material.h"
+#include "Graphics/VertexBuffer.h"
 
-#include "UISpriteBatch.h"
-#include "UIText.h"
+#include "UIElement.h"
+#include "UIBatch.h"
 
 namespace tgon
 {
@@ -25,7 +24,7 @@ public:
 /**@section Method */
 public:
     void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddSpritePrimitive(const std::shared_ptr<UISprite>& sprite, int32_t sotringLayer, const Matrix4x4& matWorld);
+    void AddUIElement(const std::shared_ptr<UIElement>& element, int32_t sotringLayer, const Matrix4x4& matWorld);
     bool RemoveCamera(const std::shared_ptr<Camera>& camera);
     void SetMaxSortingLayer(int32_t maxSortingLayer) noexcept;
     int32_t GetMinSortingLayer() const noexcept;
@@ -43,8 +42,8 @@ private:
     std::shared_ptr<Material> m_uiMaterial;
     std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
-    std::vector<std::vector<std::pair<std::shared_ptr<UISprite>, const Matrix4x4&>>> m_sortingLayers;
-    std::vector<UISpriteBatch> m_spriteBatches;
+    std::vector<std::vector<std::pair<std::shared_ptr<UIElement>, const Matrix4x4&>>> m_sortingLayers;
+    std::vector<UIBatch> m_batches;
     std::vector<std::shared_ptr<Camera>> m_cameraList;
 };
     

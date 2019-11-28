@@ -37,11 +37,6 @@ void UISprite::SetTextureRect(const FRect& textureRect) noexcept
 {
     m_textureRect = textureRect;
 }
-
-FRect& UISprite::GetTextureRect() noexcept
-{
-    return m_textureRect;
-}
     
 const FRect& UISprite::GetTextureRect() const noexcept
 {
@@ -111,6 +106,17 @@ const FRect& UISprite::GetScissorRect() const noexcept
 const Vector2& UISprite::GetPivot() const noexcept
 {
     return m_pivot;
+}
+
+void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
+{
+    UIBatch batch(m_texture, m_filterMode, m_wrapMode, m_blendMode, m_enableScissorRect, m_scissorRect, static_cast<int32_t>(vertices->size()));
+    if (batches->empty() || batches->back().CanBatch(batch) == false)
+    {
+        batches->push_back(batch);
+    }
+
+    batches->back().Merge(m_textureRect, m_pivot, m_blendColor, matWorld, vertices);
 }
 
 } /* namespace tgon */

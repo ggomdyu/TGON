@@ -25,7 +25,7 @@ public:
     
 /**@section Destructor */
 public:
-    virtual ~RendererComponent() override = 0;
+    ~RendererComponent() override = 0;
 
 /**@section Method */
 public:

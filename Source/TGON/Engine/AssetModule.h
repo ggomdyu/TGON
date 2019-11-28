@@ -14,6 +14,8 @@
 #include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
 #include "Drawing/FontFactory.h"
+#include "UI/UIFont.h"
+
 
 #include "Module.h"
 
@@ -30,7 +32,7 @@ public:
 public:
     std::shared_ptr<Texture> GetTexture(const StringViewHash& path);
     std::shared_ptr<AudioBuffer> GetAudioBuffer(const StringViewHash& path);
-    std::shared_ptr<Font> GetFont(const StringViewHash& path);
+    std::shared_ptr<UIFont> GetFont(const StringViewHash& path);
     
     void PurgeResource(const StringViewHash& path);
     

@@ -11,7 +11,6 @@
 #include <unordered_map>
 #include <gsl/span>
 
-#include "Platform/Config.h"
 #include "Core/NonCopyable.h"
 
 struct UConverter;

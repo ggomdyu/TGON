@@ -36,7 +36,7 @@ public:
     using SuperType = ThisType;\
     using ThisType = classType;\
     \
-    virtual const tgon::RTTI* GetRTTI() const override\
+    const tgon::RTTI* GetRTTI() const override\
     {\
         return tgon::GetRTTI<classType>();\
     }

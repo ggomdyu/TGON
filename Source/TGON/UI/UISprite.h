@@ -9,11 +9,15 @@
 #include "Graphics/Texture.h"
 #include "Math/Rect.h"
 #include "Math/Vector2.h"
+#include "Math/Matrix4x4.h"
+
+#include "UIElement.h"
 
 namespace tgon
 {
 
-class UISprite final
+class UISprite :
+    public UIElement
 {
 /**@section Constructor */
 public:
@@ -31,7 +35,6 @@ public:
     void SetPivot(const Vector2& pivot) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
-    FRect& GetTextureRect() noexcept;
     const FRect& GetTextureRect() const noexcept;
     FilterMode GetFilterMode() const noexcept;
     WrapMode GetWrapMode() const noexcept;
@@ -43,7 +46,8 @@ public:
     void SetScissorRect(const FRect& rect) noexcept;
     const FRect& GetScissorRect() const noexcept;
     const Vector2& GetPivot() const noexcept;
-    
+    void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const override;
+       
 /**@section Variable */
 private:
     std::shared_ptr<Texture> m_texture;

@@ -21,7 +21,7 @@ class DateTimeTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
         auto dt = DateTime(2017, 10, 20, 10, 0, 5, DateTimeKind::Local);
         EvaluateDateTime(dt, 2017, 10, 20, 10, 0, 5, DateTimeKind::Local);

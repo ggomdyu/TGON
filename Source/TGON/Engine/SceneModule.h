@@ -22,11 +22,11 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~SceneModule() override final = default;
+    ~SceneModule() override final = default;
 
 /**@section Method */
 public:
-    virtual void Update() override;
+    void Update() override;
 
     template <typename _SceneType, typename... _Args>
     void ChangeScene(_Args&&... args);

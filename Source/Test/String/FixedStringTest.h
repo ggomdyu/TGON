@@ -20,7 +20,7 @@ class FixedStringTest :
 {
 /**@section Method */
 public:
-    virtual void Evaluate() override
+    void Evaluate() override
     {
         //abcdefabc
         //

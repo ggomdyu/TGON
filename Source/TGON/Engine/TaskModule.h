@@ -28,11 +28,11 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~TaskModule() override = default;
+    ~TaskModule() override = default;
 
 /**@section Method */
 public:
-    virtual void Update() override;
+    void Update() override;
     SerialDispatchQueue& GetMainDispatchQueue() noexcept;
     ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal);
     const SerialDispatchQueue& GetMainDispatchQueue() const noexcept;

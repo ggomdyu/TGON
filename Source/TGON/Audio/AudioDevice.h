@@ -33,8 +33,8 @@ public:
 public:
     AudioDevice& operator=(AudioDevice&& rhs) noexcept;
 
+/**@section Method */
 public:
-    /**@brief   Binds this to the current device context. */
     void MakeCurrent();
     ALCdevice* GetDevice() noexcept;
     ALCcontext* GetContext() noexcept;
@@ -44,7 +44,7 @@ public:
 private:
     void Destroy();
 
-/**@brief   Private variable */
+/**@section Variable */
 private:
     ALCdevice* m_device;
     ALCcontext* m_context;

@@ -25,11 +25,11 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~GraphicsModule() override final = default;
+    ~GraphicsModule() override final = default;
     
 /**@section Method */
 public:
-    virtual void Update() override;
+    void Update() override;
     Graphics& GetGraphics() noexcept;
     const Graphics& GetGraphics() const noexcept;
     UIRenderer& GetUIRenderer() noexcept;

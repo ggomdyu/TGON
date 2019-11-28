@@ -24,16 +24,15 @@ public:
 
 /* @section Destructor */
 public:
-    virtual ~AudioModule() override = default;
+    ~AudioModule() override = default;
 
 /* @section Method */
 public:
-    /* @brief   Updates the module. */
-    virtual void Update() override;
+    void Update() override;
     
 /* @section Variable */
 private:
-    //AudioDevice m_audioDevice;
+    AudioDevice m_audioDevice;
 };
 
 } /* namespace tgon */

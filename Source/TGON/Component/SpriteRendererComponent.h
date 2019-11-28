@@ -20,7 +20,8 @@ public:
 
 /**@section Constructor */
 public:
-    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite = nullptr);
+    SpriteRendererComponent() = default;
+    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite);
 
 /**@section Method */
 public:
@@ -29,7 +30,7 @@ public:
     std::shared_ptr<UISprite> GetSprite() noexcept;
     std::shared_ptr<const UISprite> GetSprite() const noexcept;
     int32_t GetSortingLayer() const noexcept;
-    virtual void Update() override;
+    void Update() override;
 
 /**@section Variable */
 private:

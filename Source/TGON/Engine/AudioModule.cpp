@@ -7,7 +7,7 @@ namespace tgon
 
 AudioModule::AudioModule() 
 {
-    //m_audioDevice.MakeCurrent();
+    m_audioDevice.MakeCurrent();
 }
 
 void AudioModule::Update()

@@ -35,19 +35,19 @@ std::shared_ptr<AudioBuffer> AssetModule::GetAudioBuffer(const StringViewHash& p
     return std::any_cast<std::shared_ptr<AudioBuffer>>(iter->second);
 }
 
-std::shared_ptr<Font> AssetModule::GetFont(const StringViewHash& path)
+std::shared_ptr<UIFont> AssetModule::GetFont(const StringViewHash& path)
 {
     m_mutex.lock();
     
     auto iter = m_resourceCache.find(path);
     if (iter == m_resourceCache.end())
     {
-        iter = m_resourceCache.insert({path, std::make_shared<Font>(path.Data(), m_fontFactory.GetFTLibrary())}).first;
+        iter = m_resourceCache.emplace(path, std::make_shared<UIFont>(Font(path.Data(), m_fontFactory.GetFTLibrary()))).first;
     }
     
     m_mutex.unlock();
     
-    return std::any_cast<std::shared_ptr<Font>>(iter->second);
+    return std::any_cast<std::shared_ptr<UIFont>>(iter->second);
 }
 
 void AssetModule::PurgeResource(const StringViewHash& path)

@@ -56,6 +56,7 @@
 #include "Component/Component.h"
 #include "Component/CameraComponent.h"
 #include "Component/SpriteRendererComponent.h"
+#include "Component/TextRendererComponent.h"
 #include "Engine/SceneModule.h"
 #include "Game/Scene.h"
 #include "Threading/Thread.h"
