@@ -23,7 +23,7 @@ public:
     
 /**@section Method */
 public:
-    virtual void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const {}
+    virtual void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const = 0;
 };
 
 } /* namespace tgon */

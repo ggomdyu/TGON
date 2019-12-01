@@ -7,14 +7,13 @@
 #pragma once
 #include <unordered_map>
 
-#include "Platform/Config.h"
 #include "Core/Delegate.h"
 #include "Text/StringHash.h"
 
 namespace tgon
 {
 
-class TGON_API EventDispatcher final
+class EventDispatcher final
 {
 /**@section Type */
 public:

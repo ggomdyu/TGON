@@ -8,7 +8,6 @@
 #include <OIS.h>
 
 #include "Core/NonCopyable.h"
-#include "Platform/Config.h"
 
 namespace tgon
 {
@@ -43,7 +42,7 @@ enum class MouseCode
     WheelDown = Mouse4,
 };
 
-class TGON_API WindowsMouse :
+class WindowsMouse :
     private NonCopyable
 {
 /**@section Constructor */

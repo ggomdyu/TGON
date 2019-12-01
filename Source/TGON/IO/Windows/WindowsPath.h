@@ -5,16 +5,11 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
-
-#if TGON_PLATFORM_WINDOWS
-#   undef GetTempPath
-#endif
 
 namespace tgon
 {
 
-class TGON_API WindowsPath
+class WindowsPath
 {
 /**@section Constructor */
 public:

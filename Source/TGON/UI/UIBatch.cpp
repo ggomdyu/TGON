@@ -68,10 +68,10 @@ void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& p
     float topUV = (textureRect.y + textureRect.height) / textureSize.height;
     float bottomUV = textureRect.y / textureSize.height;
 #endif
-    float halfWidth = textureRect.width * 0.5f;
-    float halfHeight = textureRect.height * 0.5f;
-    float xOffset = x + -textureRect.width * (pivot.x - 0.5f);
-    float yOffset = y + textureRect.height * (pivot.y - 0.5f);
+    float halfWidth = 0.5f * textureRect.width;
+    float halfHeight = 0.5f * textureRect.height;
+    float xOffset = x + (pivot.x - 0.5f) * -textureRect.width;
+    float yOffset = y + (pivot.y - 0.5f) * textureRect.height;
 
     int32_t oldVertexEndOffset = m_vertexEndOffset;
     int32_t expandSize = sizeof(V3F_C4F_T2F) / 4 * 6;

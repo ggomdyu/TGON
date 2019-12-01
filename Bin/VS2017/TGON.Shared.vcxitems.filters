@@ -1005,18 +1005,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\FileStream.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.cpp">
       <Filter>Source\TGON\Diagnostics</Filter>
     </ClCompile>
@@ -1058,7 +1046,25 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.cpp">
       <Filter>Source\TGON\Drawing</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.cpp">
       <Filter>Source\TGON\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2404,18 +2410,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Stream.h">
       <Filter>Source\TGON\IO</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.h">
-      <Filter>Source\TGON\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h">
-      <Filter>Source\TGON\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h">
-      <Filter>Source\TGON\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.h">
-      <Filter>Source\TGON\UI</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Diagnostics\Debug.h">
       <Filter>Source\TGON\Diagnostics</Filter>
     </ClInclude>
@@ -2481,11 +2475,29 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.h">
       <Filter>Source\TGON\Drawing</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Version.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h">
       <Filter>Source\TGON\UI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Version.h">
-      <Filter>Source\TGON\Platform</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.h">
+      <Filter>Source\TGON\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

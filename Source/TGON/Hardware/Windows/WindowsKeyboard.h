@@ -8,7 +8,6 @@
 #include <OIS.h>
 #include <array>
 
-#include "Platform/Config.h"
 #include "Core/NonCopyable.h"
 
 namespace tgon
@@ -138,7 +137,7 @@ enum class KeyCode
     SysRq               = OIS::KeyCode::KC_SYSRQ,
 };
 
-class TGON_API WindowsKeyboard :
+class WindowsKeyboard :
     private NonCopyable
 {
 /**@section Constructor */

@@ -32,7 +32,10 @@ public:
     void SetWrapMode(WrapMode wrapMode) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;
     void SetBlendColor(const Color4f& blendColor) noexcept;
+    void SetScissorRect(const FRect& rect) noexcept;
     void SetPivot(const Vector2& pivot) noexcept;
+    void EnableScissorRect() noexcept;
+    void DisableScissorRect() noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     const FRect& GetTextureRect() const noexcept;
@@ -40,10 +43,7 @@ public:
     WrapMode GetWrapMode() const noexcept;
     BlendMode GetBlendMode() const noexcept;
     const Color4f& GetBlendColor() const noexcept;
-    void EnableScissorRect() noexcept;
-    void DisableScissorRect() noexcept;
     bool IsEnableScissorRect() const noexcept;
-    void SetScissorRect(const FRect& rect) noexcept;
     const FRect& GetScissorRect() const noexcept;
     const Vector2& GetPivot() const noexcept;
     void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const override;

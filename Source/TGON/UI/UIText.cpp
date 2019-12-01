@@ -371,7 +371,7 @@ UIText::UIText(UIText&& rhs) noexcept :
     m_textAlignment(rhs.m_textAlignment),
     m_lineSpacing(rhs.m_lineSpacing),
     m_lineBreakMode(rhs.m_lineBreakMode),
-    m_color(rhs.m_color),
+    m_blendColor(rhs.m_blendColor),
     m_rect(rhs.m_rect),
     m_isDirty(rhs.m_isDirty),
     m_textBlock(std::move(rhs.m_textBlock))
@@ -386,16 +386,16 @@ UIText& UIText::operator=(UIText&& rhs) noexcept
     m_textAlignment = rhs.m_textAlignment;
     m_lineSpacing = rhs.m_lineSpacing;
     m_lineBreakMode = rhs.m_lineBreakMode;
-    m_color = rhs.m_color;
+    m_blendColor = rhs.m_blendColor;
     m_rect = rhs.m_rect;
     m_isDirty = rhs.m_isDirty;
     m_textBlock = std::move(rhs.m_textBlock);
     
-    rhs.m_fontSize = {};
+    rhs.m_fontSize = DefaultFontSize;
     rhs.m_textAlignment = TextAlignment::UpperLeft;
-    rhs.m_lineSpacing = {};
+    rhs.m_lineSpacing = 0.0f;
     rhs.m_lineBreakMode = LineBreakMode::CharacterWrap;
-    rhs.m_color = {};
+    rhs.m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
     rhs.m_rect = {};
     rhs.m_isDirty = true;
     
@@ -438,9 +438,9 @@ void UIText::SetLineBreakMode(LineBreakMode lineBreakMode)
     m_isDirty = true;
 }
 
-void UIText::SetColor(const Color4f& color)
+void UIText::SetBlendColor(const Color4f& color)
 {
-    m_color = color;
+    m_blendColor = color;
     m_isDirty = true;
 }
 
@@ -485,14 +485,19 @@ LineBreakMode UIText::GetLineBreakMode() const noexcept
     return m_lineBreakMode;
 }
 
-const Color4f& UIText::GetColor() const noexcept
+const Color4f& UIText::GetBlendColor() const noexcept
 {
-    return m_color;
+    return m_blendColor;
 }
 
 const I32Rect& UIText::GetRect() const noexcept
 {
     return m_rect;
+}
+
+const I32Rect& UIText::GetContentRect() const noexcept
+{
+    return m_textBlock->GetContentRect();
 }
 
 const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noexcept
@@ -527,7 +532,7 @@ void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld
         }
         
         const FRect& textureRect = (*optTextureRect).get();
-        batches->back().Merge(float(characterInfo.rect.x), float(characterInfo.rect.y), textureRect, Vector2(0.0f, 0.0f), Color4f(1.0f, 1.0f, 1.0f, 1.0f), matWorld, vertices);
+        batches->back().Merge(float(characterInfo.rect.x), float(characterInfo.rect.y), textureRect, Vector2(0.0f, 0.0f), m_blendColor, matWorld, vertices);
     }
 }
 

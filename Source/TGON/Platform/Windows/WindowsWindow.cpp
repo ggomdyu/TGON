@@ -17,7 +17,7 @@ namespace tgon
 
 thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
-TGON_API void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
+void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
 	*rawExtendedWindowStyle = 0;
 	*rawWindowStyle = 0;

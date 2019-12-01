@@ -20,15 +20,31 @@ public:
 
 /**@section Constructor */
 public:
-    SpriteRendererComponent() = default;
-    explicit SpriteRendererComponent(const std::shared_ptr<UISprite>& sprite);
+    SpriteRendererComponent();
 
 /**@section Method */
 public:
-    void SetSprite(const std::shared_ptr<UISprite>& sprite) noexcept;
+    void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
+    void SetTextureRect(const FRect& textureRect) noexcept;
+    void SetFilterMode(FilterMode filterMode) noexcept;
+    void SetWrapMode(WrapMode wrapMode) noexcept;
+    void SetBlendMode(BlendMode blendMode) noexcept;
+    void SetBlendColor(const Color4f& blendColor) noexcept;
+    void SetPivot(const Vector2& pivot) noexcept;
     void SetSortingLayer(int32_t sortingLayer) noexcept;
-    std::shared_ptr<UISprite> GetSprite() noexcept;
-    std::shared_ptr<const UISprite> GetSprite() const noexcept;
+    std::shared_ptr<Texture> GetTexture() noexcept;
+    std::shared_ptr<const Texture> GetTexture() const noexcept;
+    const FRect& GetTextureRect() const noexcept;
+    FilterMode GetFilterMode() const noexcept;
+    WrapMode GetWrapMode() const noexcept;
+    BlendMode GetBlendMode() const noexcept;
+    const Color4f& GetBlendColor() const noexcept;
+    void EnableScissorRect() noexcept;
+    void DisableScissorRect() noexcept;
+    bool IsEnableScissorRect() const noexcept;
+    void SetScissorRect(const FRect& rect) noexcept;
+    const FRect& GetScissorRect() const noexcept;
+    const Vector2& GetPivot() const noexcept;
     int32_t GetSortingLayer() const noexcept;
     void Update() override;
 

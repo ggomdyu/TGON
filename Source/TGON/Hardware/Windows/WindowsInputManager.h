@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class TGON_API WindowsInputManager :
+class WindowsInputManager :
     private NonCopyable
 {
 /**@section Constructor */

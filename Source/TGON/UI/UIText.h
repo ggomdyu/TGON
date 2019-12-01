@@ -6,10 +6,7 @@
 
 #pragma once
 #include <string>
-#include <shared_mutex>
 
-#include "Drawing/Font.h"
-#include "Graphics/TextureAtlas.h"
 #include "Math/Color.h"
 #include "Math/Rect.h"
 
@@ -50,6 +47,7 @@ public:
     {
         char32_t character;
         I32Rect rect;
+        //Color4f color;
     };
     
 /**@section Enum */
@@ -77,7 +75,7 @@ public:
     void SetTextAlignment(TextAlignment textAlignment);
     void SetLineSpacing(float lineSpacing);
     void SetLineBreakMode(LineBreakMode lineBreakMode);
-    void SetColor(const Color4f& color);
+    void SetBlendColor(const Color4f& blendColor);
     void SetRect(const I32Rect& rect);
     std::shared_ptr<UIFont> GetFont() noexcept;
     std::shared_ptr<const UIFont> GetFont() const noexcept;
@@ -86,11 +84,11 @@ public:
     TextAlignment GetTextAlignment() const noexcept;
     float GetLineSpacing() const noexcept;
     LineBreakMode GetLineBreakMode() const noexcept;
-    const Color4f& GetColor() const noexcept;
+    const Color4f& GetBlendColor() const noexcept;
     const I32Rect& GetRect() const noexcept;
     const I32Rect& GetContentRect() const noexcept;
     const std::vector<CharacterInfo>& GetCharacterInfos() const noexcept;
-    void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const;
+    void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const override;
     
 /**@section Variable */
 private:
@@ -100,7 +98,7 @@ private:
     TextAlignment m_textAlignment = TextAlignment::UpperLeft;
     float m_lineSpacing = 0.0f;
     LineBreakMode m_lineBreakMode = LineBreakMode::CharacterWrap;
-    Color4f m_color = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
     I32Rect m_rect;
     mutable bool m_isDirty = true;
     std::unique_ptr<class TextBlock> m_textBlock;

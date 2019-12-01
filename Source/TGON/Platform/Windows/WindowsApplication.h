@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TGON_API WindowsApplication :
+class WindowsApplication :
     private NonCopyable
 {
 /**@section Constructor */

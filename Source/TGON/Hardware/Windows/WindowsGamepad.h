@@ -22,7 +22,7 @@ enum class GamepadPov
     LeftDown,
 };
 
-class TGON_API WindowsGamepad :
+class WindowsGamepad :
     private NonCopyable
 {
 /**@section Constructor */

@@ -32,12 +32,12 @@ public:
     void SetLineSpacing(float lineSpacing) noexcept;
     void SetLineBreakMode(LineBreakMode lineBreakMode) noexcept;
     void SetTextAlignment(TextAlignment textAlignment) noexcept;
-    void SetColor(const Color4f& color) noexcept;
+    void SetBlendColor(const Color4f& color) noexcept;
     void SetRect(const I32Rect& rect) noexcept;
     void SetSortingLayer(int32_t sortingLayer) noexcept;
     LineBreakMode GetLineBreakMode() const noexcept;
     TextAlignment GetTextAlignment() const noexcept;
-    const Color4f& GetColor() const noexcept;
+    const Color4f& GetBlendColor() const noexcept;
     std::shared_ptr<const UIFont> GetFont() const noexcept;
     int32_t GetFontSize() const noexcept;
     std::shared_ptr<UIFont> GetFont() noexcept;

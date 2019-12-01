@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-class TGON_API WindowsWindow :
+class WindowsWindow :
     private NonCopyable
 {
 /**@section Constructor */

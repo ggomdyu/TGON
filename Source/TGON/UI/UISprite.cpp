@@ -23,26 +23,21 @@ void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
     m_textureRect = FRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height));
 }
 
-std::shared_ptr<Texture> UISprite::GetTexture() noexcept
-{
-    return m_texture;
-}
-
-std::shared_ptr<const Texture> UISprite::GetTexture() const noexcept
-{
-    return m_texture;
-}
-
 void UISprite::SetTextureRect(const FRect& textureRect) noexcept
 {
     m_textureRect = textureRect;
 }
-    
-const FRect& UISprite::GetTextureRect() const noexcept
+
+void UISprite::SetFilterMode(FilterMode filterMode) noexcept
 {
-    return m_textureRect;
+    m_filterMode = filterMode;
 }
-    
+
+void UISprite::SetWrapMode(WrapMode wrapMode) noexcept
+{
+    m_wrapMode = wrapMode;
+}
+
 void UISprite::SetBlendMode(BlendMode blendMode) noexcept
 {
     m_blendMode = blendMode;
@@ -53,9 +48,39 @@ void UISprite::SetBlendColor(const Color4f& blendColor) noexcept
     m_blendColor = blendColor;
 }
 
+void UISprite::SetScissorRect(const FRect& scissorRect) noexcept
+{
+    m_scissorRect = scissorRect;
+}
+
 void UISprite::SetPivot(const Vector2& pivot) noexcept
 {
     m_pivot = pivot;
+}
+
+void UISprite::EnableScissorRect() noexcept
+{
+    m_enableScissorRect = true;
+}
+
+void UISprite::DisableScissorRect() noexcept
+{
+    m_enableScissorRect = false;
+}
+
+std::shared_ptr<Texture> UISprite::GetTexture() noexcept
+{
+    return m_texture;
+}
+
+std::shared_ptr<const Texture> UISprite::GetTexture() const noexcept
+{
+    return m_texture;
+}
+
+const FRect& UISprite::GetTextureRect() const noexcept
+{
+    return m_textureRect;
 }
 
 FilterMode UISprite::GetFilterMode() const noexcept
@@ -77,25 +102,10 @@ const Color4f& UISprite::GetBlendColor() const noexcept
 {
     return m_blendColor;
 }
-    
-void UISprite::EnableScissorRect() noexcept
-{
-    m_enableScissorRect = true;
-}
-    
-void UISprite::DisableScissorRect() noexcept
-{
-    m_enableScissorRect = false;
-}
-    
+
 bool UISprite::IsEnableScissorRect() const noexcept
 {
     return m_enableScissorRect;
-}
-
-void UISprite::SetScissorRect(const FRect& scissorRect) noexcept
-{
-    m_scissorRect = scissorRect;
 }
 
 const FRect& UISprite::GetScissorRect() const noexcept

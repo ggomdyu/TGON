@@ -77,9 +77,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -1758,9 +1760,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeSpan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeZoneInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISpriteBatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h" />

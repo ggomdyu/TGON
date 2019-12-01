@@ -53,9 +53,9 @@ void TextRendererComponent::SetTextAlignment(TextAlignment textAlignment) noexce
     m_text->SetTextAlignment(textAlignment);
 }
 
-void TextRendererComponent::SetColor(const Color4f& color) noexcept
+void TextRendererComponent::SetBlendColor(const Color4f& color) noexcept
 {
-    m_text->SetColor(color);
+    m_text->SetBlendColor(color);
 }
 
 void TextRendererComponent::SetRect(const I32Rect& rect) noexcept
@@ -78,9 +78,9 @@ TextAlignment TextRendererComponent::GetTextAlignment() const noexcept
     return m_text->GetTextAlignment();
 }
 
-const Color4f& TextRendererComponent::GetColor() const noexcept
+const Color4f& TextRendererComponent::GetBlendColor() const noexcept
 {
-    return m_text->GetColor();
+    return m_text->GetBlendColor();
 }
 
 std::shared_ptr<const UIFont> TextRendererComponent::GetFont() const noexcept
@@ -110,7 +110,7 @@ int32_t TextRendererComponent::GetSortingLayer() const noexcept
 
 void TextRendererComponent::Update()
 {
-    if (m_text->GetColor().a <= 0.0f)
+    if (m_text->GetBlendColor().a <= 0.0f)
     {
         return;
     }

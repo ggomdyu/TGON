@@ -149,19 +149,10 @@ void Texture::SetData(const std::byte* imageData, const I32Extent2D& size, Pixel
 
 void Texture::SetData(const std::byte* imageData, const Vector2& pos, const I32Extent2D& size, PixelFormat pixelFormat)
 {
-    std::vector<std::byte> c(size.width * size.height * 4);
-    for (size_t i = 0; i < c.size(); i += 4)
-    {
-        c[i] = std::byte(imageData[i]);
-        c[i+1] = std::byte(imageData[i+1]);
-        c[i+2] = std::byte(imageData[i+2]);
-        c[i+3] = std::byte(imageData[i+3]);
-    }
-    
     auto nativePixelFormat = ConvertPixelFormatToNative(pixelFormat);
     
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, m_textureHandle));
-    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, &c[0]));
+    TGON_GL_ERROR_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pos.x), static_cast<GLint>(pos.y), static_cast<GLsizei>(size.width), static_cast<GLsizei>(size.height), nativePixelFormat, GL_UNSIGNED_BYTE, &imageData[0]));
 }
 
 void Texture::Destroy()
