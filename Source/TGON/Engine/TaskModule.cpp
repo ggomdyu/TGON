@@ -7,13 +7,9 @@
 namespace tgon
 {
 
-TaskModule::TaskModule()
+TaskModule::TaskModule(int32_t threadPoolCount) :
+    m_globalDispatchQueue(threadPoolCount)
 {
-}
-
-void TaskModule::Update()
-{
-    m_mainDispatchQueue.Dispatch();
 }
 
 SerialDispatchQueue& TaskModule::GetMainDispatchQueue() noexcept
@@ -26,20 +22,19 @@ const SerialDispatchQueue& TaskModule::GetMainDispatchQueue() const noexcept
     return m_mainDispatchQueue;
 }
 
-ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority)
+ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue()
 {
-    auto& dispatchQueue = m_globalDispatchQueues[(int)threadPriority];
-    if (dispatchQueue == nullptr)
-    {
-        dispatchQueue = std::make_unique<ConcurrentDispatchQueue>(threadPriority, 2);
-    }
-    
-    return *dispatchQueue;
+    return m_globalDispatchQueue;
 }
     
-const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue(ThreadPriority threadPriority) const
+const ConcurrentDispatchQueue& TaskModule::GetGlobalDispatchQueue() const
 {
-    return const_cast<TaskModule*>(this)->GetGlobalDispatchQueue(threadPriority);
+    return const_cast<TaskModule*>(this)->GetGlobalDispatchQueue();
+}
+
+void TaskModule::Update()
+{
+    m_mainDispatchQueue.Dispatch();
 }
 
 } /* namespace tgon */

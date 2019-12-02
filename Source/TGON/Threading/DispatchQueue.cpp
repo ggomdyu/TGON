@@ -65,14 +65,13 @@ void SerialDispatchQueue::Dispatch()
     }
 }
 
-ConcurrentDispatchQueue::ConcurrentDispatchQueue(ThreadPriority threadPriority, int32_t threadPoolCount) :
-    m_threadPool(threadPoolCount),
+ConcurrentDispatchQueue::ConcurrentDispatchQueue(int32_t threadPoolCount) :
     m_needToDestroy(false)
 {
-    for (auto& thread : m_threadPool)
+    m_threadPool.reserve(threadPoolCount);
+    for (int32_t i = 0; i < threadPoolCount; ++i)
     {
-        thread = Thread(&ConcurrentDispatchQueue::DispatchQueueHandler, this);
-        thread.SetPriority(threadPriority);
+        m_threadPool.emplace_back(&ConcurrentDispatchQueue::DispatchQueueHandler, this);
     }
 }
 

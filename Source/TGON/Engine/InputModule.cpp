@@ -13,26 +13,6 @@ InputModule::InputModule(const Window& inputTarget, const InputMode& inputMode) 
 {
 }
 
-void InputModule::Update()
-{
-    m_inputManager.Update();
-
-    if (m_keyboard != nullptr)
-    {
-        m_keyboard->Update();
-    }
-
-    if (m_mouse != nullptr)
-    {
-        m_mouse->Update();
-    }
-
-    if (m_gamepad != nullptr)
-    {
-        m_gamepad->Update();
-    }
-}
-
 std::shared_ptr<Mouse> InputModule::GetMouse() noexcept
 {
     return m_mouse;
@@ -61,6 +41,26 @@ std::shared_ptr<Gamepad> InputModule::GetGamepad() noexcept
 std::shared_ptr<const Gamepad> InputModule::GetGamepad() const noexcept
 {
     return m_gamepad;
+}
+
+void InputModule::Update()
+{
+    m_inputManager.Update();
+
+    if (m_keyboard != nullptr)
+    {
+        m_keyboard->Update();
+    }
+
+    if (m_mouse != nullptr)
+    {
+        m_mouse->Update();
+    }
+
+    if (m_gamepad != nullptr)
+    {
+        m_gamepad->Update();
+    }
 }
 
 } /* namespace tgon */

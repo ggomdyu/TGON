@@ -11,7 +11,7 @@
 #include "Math/Rect.h"
 
 #include "UIElement.h"
-#include "UIFont.h"
+#include "FontAtlas.h"
 
 namespace tgon
 {
@@ -69,7 +69,7 @@ public:
     
 /**@section Method */
 public:
-    void SetFont(const std::shared_ptr<UIFont>& font);
+    void SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas);
     void SetFontSize(int32_t fontSize);
     void SetText(const std::string_view& text);
     void SetTextAlignment(TextAlignment textAlignment);
@@ -77,8 +77,8 @@ public:
     void SetLineBreakMode(LineBreakMode lineBreakMode);
     void SetBlendColor(const Color4f& blendColor);
     void SetRect(const I32Rect& rect);
-    std::shared_ptr<UIFont> GetFont() noexcept;
-    std::shared_ptr<const UIFont> GetFont() const noexcept;
+    std::shared_ptr<FontAtlas> GetFontAtlas() noexcept;
+    std::shared_ptr<const FontAtlas> GetFontAtlas() const noexcept;
     int32_t GetFontSize() const noexcept;
     const std::string& GetText() const noexcept;
     TextAlignment GetTextAlignment() const noexcept;
@@ -93,7 +93,7 @@ public:
 /**@section Variable */
 private:
     std::string m_text;
-    std::shared_ptr<UIFont> m_font;
+    std::shared_ptr<FontAtlas> m_fontAtlas;
     int32_t m_fontSize = DefaultFontSize;
     TextAlignment m_textAlignment = TextAlignment::UpperLeft;
     float m_lineSpacing = 0.0f;

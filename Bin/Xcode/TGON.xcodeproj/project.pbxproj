@@ -15,6 +15,9 @@
 		8C012C17230C744000285F74 /* MacOSPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C16230C743F00285F74 /* MacOSPath.mm */; };
 		8C1271472372AC2D009D1993 /* FileSystemEnumerable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */; };
 		8C1271492372AE3E009D1993 /* UnixFileSystemEnumerable.inl in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */; };
+		8C3DA3A0239421DF004A24E4 /* TimerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA39E239421DF004A24E4 /* TimerModule.h */; };
+		8C3DA3A1239421DF004A24E4 /* TimerModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C3DA39F239421DF004A24E4 /* TimerModule.cpp */; };
+		8C3DA3A3239518D3004A24E4 /* TimerHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA3A2239518D3004A24E4 /* TimerHandle.h */; };
 		8C59E307232EB42700EBE199 /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E306232EB42700EBE199 /* Encoding.cpp */; };
 		8C59E309232EB44000EBE199 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E308232EB44000EBE199 /* Random.cpp */; };
 		8C59E30B2330014700EBE199 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30A2330014700EBE199 /* Environment.cpp */; };
@@ -40,8 +43,8 @@
 		8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */; };
 		8CC61CC822FB3B7A00F415C8 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC622FB3B7A00F415C8 /* Debug.cpp */; };
 		8CC61CC922FB3B7A00F415C8 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CC722FB3B7A00F415C8 /* Debug.h */; };
-		8CD20BCA238B68AF001F4473 /* UIFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD20BC8238B68AE001F4473 /* UIFont.h */; };
-		8CD20BCB238B68AF001F4473 /* UIFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD20BC9238B68AF001F4473 /* UIFont.cpp */; };
+		8CD20BCA238B68AF001F4473 /* FontAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD20BC8238B68AE001F4473 /* FontAtlas.h */; };
+		8CD20BCB238B68AF001F4473 /* FontAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD20BC9238B68AF001F4473 /* FontAtlas.cpp */; };
 		8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */; };
 		8CE691B02365FE1600482062 /* UnixDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AF2365FE1500482062 /* UnixDirectory.cpp */; };
 		8CF8A17B234A435100763883 /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A16C234A435000763883 /* Object.h */; };
@@ -95,81 +98,81 @@
 		FD2D6D2022D064410087DF85 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CFF22D064410087DF85 /* Graphics.cpp */; };
 		FD4916A622E4E067004166F8 /* TimeZoneInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = FD4916A422E4E067004166F8 /* TimeZoneInfo.h */; };
 		FD49FCF722DB74ED00A394D8 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = FD49FCF522DB74EC00A394D8 /* File.h */; };
-		FD49FCF822DB74ED00A394D8 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD49FCF622DB74ED00A394D8 /* File.cpp */; };
-		FD4C1DD1219F3F7C00B2B2BE /* GainputInputDeviceTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6A219F345200B2B2BE /* GainputInputDeviceTouch.cpp */; };
-		FD4C1DD2219F3F7C00B2B2BE /* gainput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6E219F345200B2B2BE /* gainput.cpp */; };
-		FD4C1DD3219F3F7C00B2B2BE /* GainputInputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6F219F345200B2B2BE /* GainputInputState.cpp */; };
-		FD4C1DD4219F3F7C00B2B2BE /* GainputMapFilters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C70219F345200B2B2BE /* GainputMapFilters.cpp */; };
-		FD4C1DD5219F3F7C00B2B2BE /* GainputInputDevicePadMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C72219F345200B2B2BE /* GainputInputDevicePadMac.cpp */; };
-		FD4C1DD6219F3F7C00B2B2BE /* GainputInputDevicePad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C78219F345200B2B2BE /* GainputInputDevicePad.cpp */; };
-		FD4C1DD7219F3F7C00B2B2BE /* GainputInputDeviceMouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C84219F345200B2B2BE /* GainputInputDeviceMouse.cpp */; };
-		FD4C1DD8219F3F7C00B2B2BE /* GainputInputDeltaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C88219F345200B2B2BE /* GainputInputDeltaState.cpp */; };
-		FD4C1DD9219F3F7C00B2B2BE /* GainputButtonStickGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8A219F345200B2B2BE /* GainputButtonStickGesture.cpp */; };
-		FD4C1DDA219F3F7C00B2B2BE /* GainputDoubleClickGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8B219F345200B2B2BE /* GainputDoubleClickGesture.cpp */; };
-		FD4C1DDB219F3F7C00B2B2BE /* GainputPinchGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8C219F345200B2B2BE /* GainputPinchGesture.cpp */; };
-		FD4C1DDC219F3F7C00B2B2BE /* GainputRotateGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8D219F345200B2B2BE /* GainputRotateGesture.cpp */; };
-		FD4C1DDD219F3F7C00B2B2BE /* GainputSimultaneouslyDownGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8E219F345200B2B2BE /* GainputSimultaneouslyDownGesture.cpp */; };
-		FD4C1DDE219F3F7C00B2B2BE /* GainputTapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8F219F345200B2B2BE /* GainputTapGesture.cpp */; };
-		FD4C1DDF219F3F7D00B2B2BE /* GainputHoldGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C90219F345200B2B2BE /* GainputHoldGesture.cpp */; };
-		FD4C1DE0219F3F7D00B2B2BE /* GainputInputRecording.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C92219F345200B2B2BE /* GainputInputRecording.cpp */; };
-		FD4C1DE1219F3F7D00B2B2BE /* GainputInputRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C93219F345200B2B2BE /* GainputInputRecorder.cpp */; };
-		FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C94219F345200B2B2BE /* GainputInputPlayer.cpp */; };
-		FD4C1DE3219F3F7D00B2B2BE /* GainputNetListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C97219F345200B2B2BE /* GainputNetListener.cpp */; };
-		FD4C1DE4219F3F7D00B2B2BE /* GainputMemoryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C98219F345200B2B2BE /* GainputMemoryStream.cpp */; };
-		FD4C1DE5219F3F7D00B2B2BE /* GainputNetConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C9A219F345200B2B2BE /* GainputNetConnection.cpp */; };
-		FD4C1DE6219F3F7D00B2B2BE /* GainputDev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA0219F345200B2B2BE /* GainputDev.cpp */; };
-		FD4C1DE7219F3F7D00B2B2BE /* GainputNetAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA1219F345200B2B2BE /* GainputNetAddress.cpp */; };
-		FD4C1DE8219F3F7D00B2B2BE /* GainputInputMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA3219F345200B2B2BE /* GainputInputMap.cpp */; };
-		FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA4219F345200B2B2BE /* GainputInputManager.cpp */; };
-		FD4C1DEA219F3F7D00B2B2BE /* GainputAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA5219F345200B2B2BE /* GainputAllocator.cpp */; };
-		FD4C1DEB219F3F7D00B2B2BE /* GainputInputDeviceBuiltIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA8219F345200B2B2BE /* GainputInputDeviceBuiltIn.cpp */; };
-		FD4C1DEC219F3F7D00B2B2BE /* GainputInputDeviceKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB7219F345200B2B2BE /* GainputInputDeviceKeyboard.cpp */; };
-		FD4C1DED219F3F7D00B2B2BE /* GainputInputDeviceKeyboardMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB8219F345200B2B2BE /* GainputInputDeviceKeyboardMac.cpp */; };
-		FD4C1DEE219F3F7D00B2B2BE /* GainputInputDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB9219F345200B2B2BE /* GainputInputDevice.cpp */; };
-		FD4C1DFC219F3F8700B2B2BE /* GainputIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C66219F345200B2B2BE /* GainputIos.mm */; };
-		FD4C1DFD219F3F8700B2B2BE /* GainputInputDevicePadIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C73219F345200B2B2BE /* GainputInputDevicePadIos.mm */; };
-		FD4C1DFE219F3F8700B2B2BE /* GainputInputDeviceMouseMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C80219F345200B2B2BE /* GainputInputDeviceMouseMac.mm */; };
-		FD4C1DFF219F3F8700B2B2BE /* GainputMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA2219F345200B2B2BE /* GainputMac.mm */; };
-		FD4C1E00219F3F8700B2B2BE /* GainputInputDeviceBuiltInIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA7219F345200B2B2BE /* GainputInputDeviceBuiltInIos.mm */; };
+		FD49FCF822DB74ED00A394D8 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD49FCF622DB74ED00A394D8 /* File.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD1219F3F7C00B2B2BE /* GainputInputDeviceTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6A219F345200B2B2BE /* GainputInputDeviceTouch.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD2219F3F7C00B2B2BE /* gainput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6E219F345200B2B2BE /* gainput.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD3219F3F7C00B2B2BE /* GainputInputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C6F219F345200B2B2BE /* GainputInputState.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD4219F3F7C00B2B2BE /* GainputMapFilters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C70219F345200B2B2BE /* GainputMapFilters.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD5219F3F7C00B2B2BE /* GainputInputDevicePadMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C72219F345200B2B2BE /* GainputInputDevicePadMac.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD6219F3F7C00B2B2BE /* GainputInputDevicePad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C78219F345200B2B2BE /* GainputInputDevicePad.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD7219F3F7C00B2B2BE /* GainputInputDeviceMouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C84219F345200B2B2BE /* GainputInputDeviceMouse.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD8219F3F7C00B2B2BE /* GainputInputDeltaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C88219F345200B2B2BE /* GainputInputDeltaState.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DD9219F3F7C00B2B2BE /* GainputButtonStickGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8A219F345200B2B2BE /* GainputButtonStickGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDA219F3F7C00B2B2BE /* GainputDoubleClickGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8B219F345200B2B2BE /* GainputDoubleClickGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDB219F3F7C00B2B2BE /* GainputPinchGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8C219F345200B2B2BE /* GainputPinchGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDC219F3F7C00B2B2BE /* GainputRotateGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8D219F345200B2B2BE /* GainputRotateGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDD219F3F7C00B2B2BE /* GainputSimultaneouslyDownGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8E219F345200B2B2BE /* GainputSimultaneouslyDownGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDE219F3F7C00B2B2BE /* GainputTapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C8F219F345200B2B2BE /* GainputTapGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DDF219F3F7D00B2B2BE /* GainputHoldGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C90219F345200B2B2BE /* GainputHoldGesture.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE0219F3F7D00B2B2BE /* GainputInputRecording.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C92219F345200B2B2BE /* GainputInputRecording.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE1219F3F7D00B2B2BE /* GainputInputRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C93219F345200B2B2BE /* GainputInputRecorder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C94219F345200B2B2BE /* GainputInputPlayer.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE3219F3F7D00B2B2BE /* GainputNetListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C97219F345200B2B2BE /* GainputNetListener.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE4219F3F7D00B2B2BE /* GainputMemoryStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C98219F345200B2B2BE /* GainputMemoryStream.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE5219F3F7D00B2B2BE /* GainputNetConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C9A219F345200B2B2BE /* GainputNetConnection.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE6219F3F7D00B2B2BE /* GainputDev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA0219F345200B2B2BE /* GainputDev.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE7219F3F7D00B2B2BE /* GainputNetAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA1219F345200B2B2BE /* GainputNetAddress.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE8219F3F7D00B2B2BE /* GainputInputMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA3219F345200B2B2BE /* GainputInputMap.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA4219F345200B2B2BE /* GainputInputManager.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DEA219F3F7D00B2B2BE /* GainputAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA5219F345200B2B2BE /* GainputAllocator.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DEB219F3F7D00B2B2BE /* GainputInputDeviceBuiltIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA8219F345200B2B2BE /* GainputInputDeviceBuiltIn.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DEC219F3F7D00B2B2BE /* GainputInputDeviceKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB7219F345200B2B2BE /* GainputInputDeviceKeyboard.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DED219F3F7D00B2B2BE /* GainputInputDeviceKeyboardMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB8219F345200B2B2BE /* GainputInputDeviceKeyboardMac.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DEE219F3F7D00B2B2BE /* GainputInputDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CB9219F345200B2B2BE /* GainputInputDevice.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DFC219F3F8700B2B2BE /* GainputIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C66219F345200B2B2BE /* GainputIos.mm */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DFD219F3F8700B2B2BE /* GainputInputDevicePadIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C73219F345200B2B2BE /* GainputInputDevicePadIos.mm */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DFE219F3F8700B2B2BE /* GainputInputDeviceMouseMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C80219F345200B2B2BE /* GainputInputDeviceMouseMac.mm */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1DFF219F3F8700B2B2BE /* GainputMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA2219F345200B2B2BE /* GainputMac.mm */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD4C1E00219F3F8700B2B2BE /* GainputInputDeviceBuiltInIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1CA7219F345200B2B2BE /* GainputInputDeviceBuiltInIos.mm */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD5331B922A043BB001EB57C /* OpenGLDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5331B822A043BB001EB57C /* OpenGLDebug.h */; };
-		FD5331DC22A2E52F001EB57C /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DB22A2E52F001EB57C /* ftbase.c */; };
-		FD5331DE22A2E53C001EB57C /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DD22A2E53C001EB57C /* autofit.c */; };
-		FD5331E222A2E550001EB57C /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E122A2E550001EB57C /* cff.c */; };
-		FD5331E422A2E559001EB57C /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E322A2E559001EB57C /* bdf.c */; };
-		FD5331E622A2E573001EB57C /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E522A2E573001EB57C /* type1.c */; };
-		FD5331E822A2E57C001EB57C /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E722A2E57C001EB57C /* type42.c */; };
-		FD5331EC22A2E5A2001EB57C /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331EB22A2E5A2001EB57C /* pfr.c */; };
-		FD5331EE22A2E5AE001EB57C /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331ED22A2E5AE001EB57C /* pcf.c */; };
-		FD5331F222A2E842001EB57C /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F122A2E842001EB57C /* ftbbox.c */; };
-		FD5331F422A2E847001EB57C /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F322A2E847001EB57C /* ftbdf.c */; };
-		FD5331F622A2E855001EB57C /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F522A2E855001EB57C /* ftbitmap.c */; };
-		FD5331F822A2E860001EB57C /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F722A2E860001EB57C /* ftcache.c */; };
-		FD5331FA22A2E86B001EB57C /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F922A2E86B001EB57C /* ftcid.c */; };
-		FD5331FC22A2E877001EB57C /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FB22A2E877001EB57C /* ftdebug.c */; };
-		FD5331FE22A2E880001EB57C /* ftfstype.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FD22A2E880001EB57C /* ftfstype.c */; };
-		FD53320022A2E889001EB57C /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FF22A2E889001EB57C /* ftgasp.c */; };
-		FD53320222A2E893001EB57C /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320122A2E893001EB57C /* ftglyph.c */; };
-		FD53320422A2E89C001EB57C /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320322A2E89C001EB57C /* ftgxval.c */; };
-		FD53320622A2E8AA001EB57C /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320522A2E8AA001EB57C /* ftinit.c */; };
-		FD53320822A2E8B6001EB57C /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320722A2E8B6001EB57C /* ftlzw.c */; };
-		FD53320A22A2E8C1001EB57C /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320922A2E8C1001EB57C /* ftmm.c */; };
-		FD53320C22A2E8C9001EB57C /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320B22A2E8C9001EB57C /* ftotval.c */; };
-		FD53320E22A2E8D3001EB57C /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320D22A2E8D3001EB57C /* ftpatent.c */; };
-		FD53321022A2E8F8001EB57C /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320F22A2E8F8001EB57C /* ftpfr.c */; };
-		FD53321222A2E903001EB57C /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321122A2E903001EB57C /* ftstroke.c */; };
-		FD53321422A2E90B001EB57C /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321322A2E90B001EB57C /* ftsynth.c */; };
-		FD53321622A2E915001EB57C /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321522A2E915001EB57C /* ftsystem.c */; };
-		FD53321822A2E922001EB57C /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321722A2E922001EB57C /* fttype1.c */; };
-		FD53321A22A2E92C001EB57C /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321922A2E92C001EB57C /* ftwinfnt.c */; };
-		FD53321C22A2E93D001EB57C /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321B22A2E93D001EB57C /* psaux.c */; };
-		FD53321E22A2E94E001EB57C /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321D22A2E94E001EB57C /* pshinter.c */; };
-		FD53322022A2E964001EB57C /* psmodule.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321F22A2E964001EB57C /* psmodule.c */; };
-		FD53322222A2E99B001EB57C /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322122A2E99B001EB57C /* raster.c */; };
-		FD53322422A2E9A4001EB57C /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322322A2E9A4001EB57C /* sfnt.c */; };
-		FD53322622A2E9AF001EB57C /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322522A2E9AF001EB57C /* smooth.c */; };
-		FD53322822A2E9B6001EB57C /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322722A2E9B6001EB57C /* truetype.c */; };
-		FD53322A22A2E9C0001EB57C /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322922A2E9C0001EB57C /* type1cid.c */; };
-		FD53322C22A2E9CB001EB57C /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322B22A2E9CA001EB57C /* winfnt.c */; };
+		FD5331DC22A2E52F001EB57C /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DB22A2E52F001EB57C /* ftbase.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331DE22A2E53C001EB57C /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331DD22A2E53C001EB57C /* autofit.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331E222A2E550001EB57C /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E122A2E550001EB57C /* cff.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331E422A2E559001EB57C /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E322A2E559001EB57C /* bdf.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331E622A2E573001EB57C /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E522A2E573001EB57C /* type1.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331E822A2E57C001EB57C /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331E722A2E57C001EB57C /* type42.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331EC22A2E5A2001EB57C /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331EB22A2E5A2001EB57C /* pfr.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331EE22A2E5AE001EB57C /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331ED22A2E5AE001EB57C /* pcf.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331F222A2E842001EB57C /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F122A2E842001EB57C /* ftbbox.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331F422A2E847001EB57C /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F322A2E847001EB57C /* ftbdf.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331F622A2E855001EB57C /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F522A2E855001EB57C /* ftbitmap.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331F822A2E860001EB57C /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F722A2E860001EB57C /* ftcache.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331FA22A2E86B001EB57C /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331F922A2E86B001EB57C /* ftcid.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331FC22A2E877001EB57C /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FB22A2E877001EB57C /* ftdebug.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD5331FE22A2E880001EB57C /* ftfstype.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FD22A2E880001EB57C /* ftfstype.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320022A2E889001EB57C /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5331FF22A2E889001EB57C /* ftgasp.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320222A2E893001EB57C /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320122A2E893001EB57C /* ftglyph.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320422A2E89C001EB57C /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320322A2E89C001EB57C /* ftgxval.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320622A2E8AA001EB57C /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320522A2E8AA001EB57C /* ftinit.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320822A2E8B6001EB57C /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320722A2E8B6001EB57C /* ftlzw.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320A22A2E8C1001EB57C /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320922A2E8C1001EB57C /* ftmm.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320C22A2E8C9001EB57C /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320B22A2E8C9001EB57C /* ftotval.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53320E22A2E8D3001EB57C /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320D22A2E8D3001EB57C /* ftpatent.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321022A2E8F8001EB57C /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53320F22A2E8F8001EB57C /* ftpfr.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321222A2E903001EB57C /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321122A2E903001EB57C /* ftstroke.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321422A2E90B001EB57C /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321322A2E90B001EB57C /* ftsynth.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321622A2E915001EB57C /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321522A2E915001EB57C /* ftsystem.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321822A2E922001EB57C /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321722A2E922001EB57C /* fttype1.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321A22A2E92C001EB57C /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321922A2E92C001EB57C /* ftwinfnt.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321C22A2E93D001EB57C /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321B22A2E93D001EB57C /* psaux.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53321E22A2E94E001EB57C /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321D22A2E94E001EB57C /* pshinter.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322022A2E964001EB57C /* psmodule.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53321F22A2E964001EB57C /* psmodule.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322222A2E99B001EB57C /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322122A2E99B001EB57C /* raster.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322422A2E9A4001EB57C /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322322A2E9A4001EB57C /* sfnt.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322622A2E9AF001EB57C /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322522A2E9AF001EB57C /* smooth.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322822A2E9B6001EB57C /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322722A2E9B6001EB57C /* truetype.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322A22A2E9C0001EB57C /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322922A2E9C0001EB57C /* type1cid.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53322C22A2E9CB001EB57C /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53322B22A2E9CA001EB57C /* winfnt.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53328E22A2EA1C001EB57C /* ftsnames.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53322F22A2EA1B001EB57C /* ftsnames.h */; };
 		FD53328F22A2EA1C001EB57C /* ftwinfnt.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53323022A2EA1B001EB57C /* ftwinfnt.h */; };
 		FD53329022A2EA1C001EB57C /* ftsizes.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53323122A2EA1B001EB57C /* ftsizes.h */; };
@@ -262,57 +265,57 @@
 		FD5332E722A2EA1C001EB57C /* ftbdf.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53328B22A2EA1C001EB57C /* ftbdf.h */; };
 		FD5332E822A2EA1C001EB57C /* ftrender.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53328C22A2EA1C001EB57C /* ftrender.h */; };
 		FD5332EB22A36015001EB57C /* ft2build.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5332EA22A36014001EB57C /* ft2build.h */; };
-		FD5332F822A4CEC3001EB57C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332F722A4CEC3001EB57C /* zutil.c */; };
-		FD53331422A57F38001EB57C /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FA22A57F36001EB57C /* deflate.c */; };
+		FD5332F822A4CEC3001EB57C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332F722A4CEC3001EB57C /* zutil.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53331422A57F38001EB57C /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FA22A57F36001EB57C /* deflate.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53331522A57F38001EB57C /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5332FB22A57F36001EB57C /* deflate.h */; };
 		FD53331622A57F38001EB57C /* gzguts.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5332FC22A57F36001EB57C /* gzguts.h */; };
-		FD53331722A57F38001EB57C /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FD22A57F36001EB57C /* inftrees.c */; };
-		FD53331822A57F38001EB57C /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FE22A57F36001EB57C /* uncompr.c */; };
+		FD53331722A57F38001EB57C /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FD22A57F36001EB57C /* inftrees.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53331822A57F38001EB57C /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = FD5332FE22A57F36001EB57C /* uncompr.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53331922A57F38001EB57C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = FD5332FF22A57F36001EB57C /* zutil.h */; };
 		FD53331A22A57F38001EB57C /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330022A57F36001EB57C /* inffixed.h */; };
 		FD53331B22A57F38001EB57C /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330122A57F36001EB57C /* trees.h */; };
-		FD53331C22A57F38001EB57C /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330222A57F36001EB57C /* adler32.c */; };
+		FD53331C22A57F38001EB57C /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330222A57F36001EB57C /* adler32.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53331D22A57F38001EB57C /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330322A57F36001EB57C /* zlib.h */; };
-		FD53331E22A57F38001EB57C /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330422A57F36001EB57C /* gzclose.c */; };
-		FD53331F22A57F38001EB57C /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330522A57F36001EB57C /* trees.c */; };
-		FD53332022A57F38001EB57C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330622A57F37001EB57C /* zutil.c */; };
-		FD53332122A57F38001EB57C /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330722A57F37001EB57C /* compress.c */; };
+		FD53331E22A57F38001EB57C /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330422A57F36001EB57C /* gzclose.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53331F22A57F38001EB57C /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330522A57F36001EB57C /* trees.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53332022A57F38001EB57C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330622A57F37001EB57C /* zutil.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53332122A57F38001EB57C /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330722A57F37001EB57C /* compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53332222A57F38001EB57C /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330822A57F37001EB57C /* inftrees.h */; };
-		FD53332422A57F38001EB57C /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330A22A57F37001EB57C /* gzlib.c */; };
+		FD53332422A57F38001EB57C /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330A22A57F37001EB57C /* gzlib.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53332522A57F38001EB57C /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330B22A57F37001EB57C /* crc32.h */; };
-		FD53332622A57F38001EB57C /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330C22A57F37001EB57C /* gzread.c */; };
+		FD53332622A57F38001EB57C /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330C22A57F37001EB57C /* gzread.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53332722A57F38001EB57C /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53330D22A57F37001EB57C /* inflate.h */; };
-		FD53332822A57F38001EB57C /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330E22A57F37001EB57C /* inflate.c */; };
-		FD53332922A57F38001EB57C /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330F22A57F37001EB57C /* inffast.c */; };
-		FD53332A22A57F38001EB57C /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53331022A57F37001EB57C /* infback.c */; };
-		FD53332B22A57F38001EB57C /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53331122A57F37001EB57C /* crc32.c */; };
+		FD53332822A57F38001EB57C /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330E22A57F37001EB57C /* inflate.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53332922A57F38001EB57C /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53330F22A57F37001EB57C /* inffast.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53332A22A57F38001EB57C /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53331022A57F37001EB57C /* infback.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD53332B22A57F38001EB57C /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53331122A57F37001EB57C /* crc32.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53332C22A57F38001EB57C /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53331222A57F38001EB57C /* zconf.h */; };
 		FD53332D22A57F38001EB57C /* inffast.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53331322A57F38001EB57C /* inffast.h */; };
-		FD53332F22A58011001EB57C /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53332E22A58011001EB57C /* gzwrite.c */; };
+		FD53332F22A58011001EB57C /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = FD53332E22A58011001EB57C /* gzwrite.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD53333222A5834A001EB57C /* FontFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = FD53333022A5834A001EB57C /* FontFactory.h */; };
 		FD53333322A5834A001EB57C /* FontFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD53333122A5834A001EB57C /* FontFactory.cpp */; };
-		FD78ABDB2289C4DF00D22E46 /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF5219F344600B2B2BE /* res0.c */; };
-		FD78ABDC2289C4DF00D22E46 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF6219F344600B2B2BE /* block.c */; };
-		FD78ABDD2289C4DF00D22E46 /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF7219F344600B2B2BE /* lookup.c */; };
-		FD78ABE02289C4DF00D22E46 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C0E219F344600B2B2BE /* info.c */; };
-		FD78ABE12289C4DF00D22E46 /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C0F219F344600B2B2BE /* mdct.c */; };
-		FD78ABE42289C4DF00D22E46 /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C12219F344600B2B2BE /* envelope.c */; };
-		FD78ABE62289C4DF00D22E46 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C14219F344600B2B2BE /* analysis.c */; };
-		FD78ABE72289C4DF00D22E46 /* lookups.pl in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C15219F344600B2B2BE /* lookups.pl */; };
-		FD78ABE82289C4DF00D22E46 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C16219F344600B2B2BE /* codebook.c */; };
-		FD78ABE92289C4DF00D22E46 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C17219F344600B2B2BE /* floor0.c */; };
-		FD78ABEC2289C4DF00D22E46 /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C1A219F344600B2B2BE /* bitrate.c */; };
-		FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C27219F344600B2B2BE /* smallft.c */; };
-		FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2A219F344600B2B2BE /* sharedbook.c */; };
-		FD78ABF52289C4DF00D22E46 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2B219F344600B2B2BE /* floor1.c */; };
-		FD78ABF72289C4DF00D22E46 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2D219F344600B2B2BE /* synthesis.c */; };
-		FD78ABFB2289C4DF00D22E46 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C31219F344600B2B2BE /* mapping0.c */; };
-		FD78ABFD2289C4DF00D22E46 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C33219F344600B2B2BE /* lpc.c */; };
-		FD78AC002289C4DF00D22E46 /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C36219F344600B2B2BE /* lsp.c */; };
-		FD78AC012289C4DF00D22E46 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C37219F344600B2B2BE /* registry.c */; };
-		FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C38219F344600B2B2BE /* vorbisfile.c */; };
-		FD78AC032289C4DF00D22E46 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C39219F344600B2B2BE /* window.c */; };
-		FD78AC062289D06000D22E46 /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C24219F344600B2B2BE /* psy.c */; };
+		FD78ABDB2289C4DF00D22E46 /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF5219F344600B2B2BE /* res0.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABDC2289C4DF00D22E46 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF6219F344600B2B2BE /* block.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABDD2289C4DF00D22E46 /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BF7219F344600B2B2BE /* lookup.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE02289C4DF00D22E46 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C0E219F344600B2B2BE /* info.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE12289C4DF00D22E46 /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C0F219F344600B2B2BE /* mdct.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE42289C4DF00D22E46 /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C12219F344600B2B2BE /* envelope.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE62289C4DF00D22E46 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C14219F344600B2B2BE /* analysis.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE72289C4DF00D22E46 /* lookups.pl in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C15219F344600B2B2BE /* lookups.pl */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE82289C4DF00D22E46 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C16219F344600B2B2BE /* codebook.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABE92289C4DF00D22E46 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C17219F344600B2B2BE /* floor0.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABEC2289C4DF00D22E46 /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C1A219F344600B2B2BE /* bitrate.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C27219F344600B2B2BE /* smallft.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2A219F344600B2B2BE /* sharedbook.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABF52289C4DF00D22E46 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2B219F344600B2B2BE /* floor1.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABF72289C4DF00D22E46 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C2D219F344600B2B2BE /* synthesis.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABFB2289C4DF00D22E46 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C31219F344600B2B2BE /* mapping0.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78ABFD2289C4DF00D22E46 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C33219F344600B2B2BE /* lpc.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78AC002289C4DF00D22E46 /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C36219F344600B2B2BE /* lsp.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78AC012289C4DF00D22E46 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C37219F344600B2B2BE /* registry.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78AC022289C4DF00D22E46 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C38219F344600B2B2BE /* vorbisfile.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78AC032289C4DF00D22E46 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C39219F344600B2B2BE /* window.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FD78AC062289D06000D22E46 /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1C24219F344600B2B2BE /* psy.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD7DE061229D6C67002B5786 /* Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7DE05F229D6C67002B5786 /* Thread.h */; };
 		FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE060229D6C67002B5786 /* Thread.cpp */; };
 		FD7DE064229D6C7A002B5786 /* MacOSThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7DE063229D6C79002B5786 /* MacOSThread.cpp */; };
@@ -323,23 +326,23 @@
 		FD7E61C72291D72F00A829FD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61C52291D72F00A829FD /* Scene.cpp */; };
 		FD7E61CA2291D75700A829FD /* SceneModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61C82291D75700A829FD /* SceneModule.cpp */; };
 		FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61C92291D75700A829FD /* SceneModule.h */; };
-		FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CD2291D86000A829FD /* stb_vorbis.c */; };
+		FD7E61CE2291D86000A829FD /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CD2291D86000A829FD /* stb_vorbis.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FD7E61D122945BEE00A829FD /* TaskModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD7E61CF22945BED00A829FD /* TaskModule.cpp */; };
 		FD7E61D222945BEE00A829FD /* TaskModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FD7E61D022945BED00A829FD /* TaskModule.h */; };
 		FD98AF3122DE3CD600467A92 /* TimeSpan.h in Headers */ = {isa = PBXBuildFile; fileRef = FD98AF3022DE3CD600467A92 /* TimeSpan.h */; };
-		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; };
-		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; };
-		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; };
+		FDB35033227613420022BDDF /* glew.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BE8219F342700B2B2BE /* glew.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB350382276138C0022BDDF /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEB219F343A00B2B2BE /* framing.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB350392276138E0022BDDF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = FD4C1BEC219F343A00B2B2BE /* bitwise.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FDB6931822E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB6931722E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp */; };
-		FDB7034822B6B2E80055FCED /* infcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034722B6B2E80055FCED /* infcodes.c */; };
-		FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034B22B6B30B0055FCED /* inftrees.c */; };
+		FDB7034822B6B2E80055FCED /* infcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034722B6B2E80055FCED /* infcodes.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034B22B6B30B0055FCED /* inftrees.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FDB7035B22B6B30C0055FCED /* infutil.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7034C22B6B30B0055FCED /* infutil.h */; };
-		FDB7035C22B6B30C0055FCED /* infblock.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034D22B6B30B0055FCED /* infblock.c */; };
-		FDB7035D22B6B30C0055FCED /* infutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034E22B6B30B0055FCED /* infutil.c */; };
-		FDB7035E22B6B30C0055FCED /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034F22B6B30B0055FCED /* ftgzip.c */; };
-		FDB7035F22B6B30C0055FCED /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7035022B6B30B0055FCED /* inflate.c */; };
+		FDB7035C22B6B30C0055FCED /* infblock.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034D22B6B30B0055FCED /* infblock.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB7035D22B6B30C0055FCED /* infutil.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034E22B6B30B0055FCED /* infutil.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB7035E22B6B30C0055FCED /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7034F22B6B30B0055FCED /* ftgzip.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDB7035F22B6B30C0055FCED /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7035022B6B30B0055FCED /* inflate.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FDB7036022B6B30C0055FCED /* infblock.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035122B6B30B0055FCED /* infblock.h */; };
-		FDB7036122B6B30C0055FCED /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7035222B6B30B0055FCED /* adler32.c */; };
+		FDB7036122B6B30C0055FCED /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = FDB7035222B6B30B0055FCED /* adler32.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FDB7036222B6B30C0055FCED /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035322B6B30C0055FCED /* zutil.h */; };
 		FDB7036322B6B30C0055FCED /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035422B6B30C0055FCED /* zlib.h */; };
 		FDB7036422B6B30C0055FCED /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = FDB7035522B6B30C0055FCED /* inffixed.h */; };
@@ -385,196 +388,196 @@
 		FDC83D5122CE40EE00B93C8D /* AssetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC83D4F22CE40EE00B93C8D /* AssetModule.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
-		FDE1B47522E40E940093FDC1 /* rbbi_cache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B722E40E830093FDC1 /* rbbi_cache.cpp */; };
-		FDE1B47622E40E940093FDC1 /* ucnvmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B822E40E830093FDC1 /* ucnvmbcs.cpp */; };
-		FDE1B47722E40E940093FDC1 /* edits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B922E40E830093FDC1 /* edits.cpp */; };
-		FDE1B47822E40E940093FDC1 /* icuplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BA22E40E830093FDC1 /* icuplug.cpp */; };
-		FDE1B47922E40E940093FDC1 /* ucnvbocu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BB22E40E840093FDC1 /* ucnvbocu.cpp */; };
-		FDE1B47A22E40E940093FDC1 /* uniset_closure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BC22E40E840093FDC1 /* uniset_closure.cpp */; };
-		FDE1B47B22E40E940093FDC1 /* ucnvisci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BD22E40E840093FDC1 /* ucnvisci.cpp */; };
-		FDE1B47C22E40E940093FDC1 /* bytestriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BE22E40E840093FDC1 /* bytestriebuilder.cpp */; };
-		FDE1B47D22E40E940093FDC1 /* uhash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BF22E40E840093FDC1 /* uhash.cpp */; };
-		FDE1B47E22E40E940093FDC1 /* bytestrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C022E40E840093FDC1 /* bytestrie.cpp */; };
-		FDE1B47F22E40E940093FDC1 /* locavailable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C122E40E840093FDC1 /* locavailable.cpp */; };
-		FDE1B48022E40E940093FDC1 /* messagepattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C222E40E840093FDC1 /* messagepattern.cpp */; };
-		FDE1B48122E40E940093FDC1 /* servlkf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C322E40E840093FDC1 /* servlkf.cpp */; };
-		FDE1B48222E40E940093FDC1 /* uset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C422E40E850093FDC1 /* uset.cpp */; };
-		FDE1B48322E40E940093FDC1 /* bmpset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C522E40E850093FDC1 /* bmpset.cpp */; };
-		FDE1B48422E40E940093FDC1 /* udata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C622E40E850093FDC1 /* udata.cpp */; };
-		FDE1B48522E40E940093FDC1 /* propname.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C722E40E850093FDC1 /* propname.cpp */; };
-		FDE1B48622E40E940093FDC1 /* ucharstrieiterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C822E40E850093FDC1 /* ucharstrieiterator.cpp */; };
-		FDE1B48722E40E940093FDC1 /* ustrenum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C922E40E850093FDC1 /* ustrenum.cpp */; };
-		FDE1B48822E40E940093FDC1 /* ubiditransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CA22E40E850093FDC1 /* ubiditransform.cpp */; };
-		FDE1B48922E40E940093FDC1 /* charstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CB22E40E850093FDC1 /* charstr.cpp */; };
-		FDE1B48A22E40E940093FDC1 /* uloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CC22E40E850093FDC1 /* uloc.cpp */; };
-		FDE1B48B22E40E940093FDC1 /* usprep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CD22E40E850093FDC1 /* usprep.cpp */; };
-		FDE1B48C22E40E940093FDC1 /* ucnv_bld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CE22E40E860093FDC1 /* ucnv_bld.cpp */; };
-		FDE1B48D22E40E940093FDC1 /* servslkf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CF22E40E860093FDC1 /* servslkf.cpp */; };
-		FDE1B48E22E40E940093FDC1 /* ucasemap_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D022E40E860093FDC1 /* ucasemap_titlecase_brkiter.cpp */; };
-		FDE1B48F22E40E940093FDC1 /* servrbf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D122E40E860093FDC1 /* servrbf.cpp */; };
-		FDE1B49022E40E940093FDC1 /* rbbiscan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D222E40E860093FDC1 /* rbbiscan.cpp */; };
-		FDE1B49122E40E940093FDC1 /* ucharstriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D322E40E860093FDC1 /* ucharstriebuilder.cpp */; };
-		FDE1B49222E40E940093FDC1 /* loclikely.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D422E40E860093FDC1 /* loclikely.cpp */; };
-		FDE1B49322E40E940093FDC1 /* uvectr32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D522E40E860093FDC1 /* uvectr32.cpp */; };
-		FDE1B49422E40E940093FDC1 /* characterproperties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D622E40E860093FDC1 /* characterproperties.cpp */; };
-		FDE1B49522E40E940093FDC1 /* bytestream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D722E40E870093FDC1 /* bytestream.cpp */; };
-		FDE1B49622E40E940093FDC1 /* ucnvdisp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D822E40E870093FDC1 /* ucnvdisp.cpp */; };
-		FDE1B49722E40E940093FDC1 /* ustr_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D922E40E870093FDC1 /* ustr_titlecase_brkiter.cpp */; };
-		FDE1B49822E40E940093FDC1 /* uset_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DA22E40E870093FDC1 /* uset_props.cpp */; };
-		FDE1B49922E40E940093FDC1 /* utrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DB22E40E870093FDC1 /* utrie.cpp */; };
-		FDE1B49A22E40E940093FDC1 /* uvector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DC22E40E870093FDC1 /* uvector.cpp */; };
-		FDE1B49B22E40E940093FDC1 /* uresbund.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DD22E40E870093FDC1 /* uresbund.cpp */; };
-		FDE1B49C22E40E940093FDC1 /* utypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DE22E40E870093FDC1 /* utypes.cpp */; };
-		FDE1B49D22E40E940093FDC1 /* rbbi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DF22E40E870093FDC1 /* rbbi.cpp */; };
-		FDE1B49E22E40E940093FDC1 /* locutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E022E40E870093FDC1 /* locutil.cpp */; };
-		FDE1B49F22E40E940093FDC1 /* cwchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E122E40E880093FDC1 /* cwchar.cpp */; };
-		FDE1B4A022E40E940093FDC1 /* ulist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E222E40E880093FDC1 /* ulist.cpp */; };
-		FDE1B4A122E40E940093FDC1 /* dictbe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E322E40E880093FDC1 /* dictbe.cpp */; };
-		FDE1B4A222E40E940093FDC1 /* resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E422E40E880093FDC1 /* resource.cpp */; };
-		FDE1B4A322E40E940093FDC1 /* uenum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E522E40E880093FDC1 /* uenum.cpp */; };
-		FDE1B4A422E40E940093FDC1 /* ucasemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E622E40E880093FDC1 /* ucasemap.cpp */; };
-		FDE1B4A522E40E940093FDC1 /* rbbirb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E722E40E880093FDC1 /* rbbirb.cpp */; };
-		FDE1B4A622E40E940093FDC1 /* ucnv_ct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E822E40E880093FDC1 /* ucnv_ct.cpp */; };
-		FDE1B4A722E40E940093FDC1 /* ucnv_err.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E922E40E880093FDC1 /* ucnv_err.cpp */; };
-		FDE1B4A822E40E940093FDC1 /* normalizer2impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EA22E40E880093FDC1 /* normalizer2impl.cpp */; };
-		FDE1B4A922E40E940093FDC1 /* ucnv_set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EB22E40E880093FDC1 /* ucnv_set.cpp */; };
-		FDE1B4AA22E40E940093FDC1 /* udataswp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EC22E40E880093FDC1 /* udataswp.cpp */; };
-		FDE1B4AB22E40E940093FDC1 /* locbased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3ED22E40E890093FDC1 /* locbased.cpp */; };
-		FDE1B4AC22E40E940093FDC1 /* ures_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EE22E40E890093FDC1 /* ures_cnv.cpp */; };
-		FDE1B4AD22E40E940093FDC1 /* propsvec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EF22E40E890093FDC1 /* propsvec.cpp */; };
-		FDE1B4AE22E40E940093FDC1 /* unistr_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F022E40E890093FDC1 /* unistr_titlecase_brkiter.cpp */; };
-		FDE1B4AF22E40E940093FDC1 /* ucnvscsu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F122E40E890093FDC1 /* ucnvscsu.cpp */; };
-		FDE1B4B022E40E940093FDC1 /* ucnv2022.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F222E40E890093FDC1 /* ucnv2022.cpp */; };
-		FDE1B4B122E40E940093FDC1 /* unistr_case_locale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F322E40E890093FDC1 /* unistr_case_locale.cpp */; };
-		FDE1B4B222E40E940093FDC1 /* utrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F422E40E890093FDC1 /* utrace.cpp */; };
-		FDE1B4B322E40E940093FDC1 /* bytesinkutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F522E40E890093FDC1 /* bytesinkutil.cpp */; };
-		FDE1B4B422E40E940093FDC1 /* uvectr64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F622E40E890093FDC1 /* uvectr64.cpp */; };
-		FDE1B4B522E40E940093FDC1 /* simpleformatter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F722E40E890093FDC1 /* simpleformatter.cpp */; };
-		FDE1B4B622E40E940093FDC1 /* schriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F822E40E890093FDC1 /* schriter.cpp */; };
-		FDE1B4B722E40E940093FDC1 /* uresdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F922E40E8A0093FDC1 /* uresdata.cpp */; };
-		FDE1B4B822E40E940093FDC1 /* uinvchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FA22E40E8A0093FDC1 /* uinvchar.cpp */; };
-		FDE1B4B922E40E940093FDC1 /* stringpiece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FB22E40E8A0093FDC1 /* stringpiece.cpp */; };
-		FDE1B4BA22E40E940093FDC1 /* wintz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FC22E40E8A0093FDC1 /* wintz.cpp */; };
-		FDE1B4BB22E40E940093FDC1 /* appendable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FD22E40E8A0093FDC1 /* appendable.cpp */; };
-		FDE1B4BC22E40E940093FDC1 /* cmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FE22E40E8A0093FDC1 /* cmemory.cpp */; };
-		FDE1B4BD22E40E940093FDC1 /* ucnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FF22E40E8A0093FDC1 /* ucnv.cpp */; };
-		FDE1B4BE22E40E940093FDC1 /* unistr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40022E40E8A0093FDC1 /* unistr.cpp */; };
-		FDE1B4BF22E40E940093FDC1 /* servls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40122E40E8A0093FDC1 /* servls.cpp */; };
-		FDE1B4C022E40E940093FDC1 /* rbbitblb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40222E40E8A0093FDC1 /* rbbitblb.cpp */; };
-		FDE1B4C122E40E940093FDC1 /* ubrk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40322E40E8A0093FDC1 /* ubrk.cpp */; };
-		FDE1B4C222E40E940093FDC1 /* unorm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40422E40E8A0093FDC1 /* unorm.cpp */; };
-		FDE1B4C322E40E940093FDC1 /* dictionarydata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40522E40E8B0093FDC1 /* dictionarydata.cpp */; };
-		FDE1B4C422E40E940093FDC1 /* ustrfmt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40622E40E8B0093FDC1 /* ustrfmt.cpp */; };
-		FDE1B4C522E40E940093FDC1 /* locresdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40722E40E8B0093FDC1 /* locresdata.cpp */; };
-		FDE1B4C622E40E940093FDC1 /* utf_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40822E40E8B0093FDC1 /* utf_impl.cpp */; };
-		FDE1B4C722E40E940093FDC1 /* parsepos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40922E40E8B0093FDC1 /* parsepos.cpp */; };
-		FDE1B4C822E40E940093FDC1 /* unistr_case.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40A22E40E8B0093FDC1 /* unistr_case.cpp */; };
-		FDE1B4C922E40E940093FDC1 /* uscript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40B22E40E8B0093FDC1 /* uscript.cpp */; };
-		FDE1B4CA22E40E940093FDC1 /* filteredbrk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40C22E40E8B0093FDC1 /* filteredbrk.cpp */; };
-		FDE1B4CB22E40E940093FDC1 /* servlk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40D22E40E8B0093FDC1 /* servlk.cpp */; };
-		FDE1B4CC22E40E940093FDC1 /* pluralmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40E22E40E8B0093FDC1 /* pluralmap.cpp */; };
-		FDE1B4CD22E40E940093FDC1 /* ucnv_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40F22E40E8B0093FDC1 /* ucnv_ext.cpp */; };
-		FDE1B4CE22E40E940093FDC1 /* uniset_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41022E40E8C0093FDC1 /* uniset_props.cpp */; };
-		FDE1B4CF22E40E940093FDC1 /* usc_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41122E40E8C0093FDC1 /* usc_impl.cpp */; };
-		FDE1B4D022E40E940093FDC1 /* punycode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41222E40E8C0093FDC1 /* punycode.cpp */; };
-		FDE1B4D122E40E940093FDC1 /* ucat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41322E40E8C0093FDC1 /* ucat.cpp */; };
-		FDE1B4D222E40E940093FDC1 /* ucnv_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41422E40E8C0093FDC1 /* ucnv_io.cpp */; };
-		FDE1B4D322E40E940093FDC1 /* locdspnm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41522E40E8C0093FDC1 /* locdspnm.cpp */; };
-		FDE1B4D422E40E940093FDC1 /* locmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41622E40E8C0093FDC1 /* locmap.cpp */; };
-		FDE1B4D522E40E940093FDC1 /* uiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41722E40E8C0093FDC1 /* uiter.cpp */; };
-		FDE1B4D622E40E940093FDC1 /* usetiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41822E40E8C0093FDC1 /* usetiter.cpp */; };
-		FDE1B4D722E40E940093FDC1 /* uscript_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41922E40E8C0093FDC1 /* uscript_props.cpp */; };
-		FDE1B4D822E40E940093FDC1 /* ustack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41A22E40E8C0093FDC1 /* ustack.cpp */; };
-		FDE1B4D922E40E940093FDC1 /* ustr_wcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41B22E40E8D0093FDC1 /* ustr_wcs.cpp */; };
-		FDE1B4DA22E40E940093FDC1 /* ustrcase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41C22E40E8D0093FDC1 /* ustrcase.cpp */; };
-		FDE1B4DB22E40E940093FDC1 /* cstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41D22E40E8D0093FDC1 /* cstring.cpp */; };
-		FDE1B4DC22E40E940093FDC1 /* serv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41E22E40E8D0093FDC1 /* serv.cpp */; };
-		FDE1B4DD22E40E940093FDC1 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41F22E40E8D0093FDC1 /* umutex.cpp */; };
-		FDE1B4DE22E40E940093FDC1 /* unistr_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42022E40E8D0093FDC1 /* unistr_cnv.cpp */; };
-		FDE1B4DF22E40E940093FDC1 /* utrie_swap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42122E40E8D0093FDC1 /* utrie_swap.cpp */; };
-		FDE1B4E022E40E940093FDC1 /* utrie2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42222E40E8D0093FDC1 /* utrie2.cpp */; };
-		FDE1B4E122E40E940093FDC1 /* rbbidata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42322E40E8D0093FDC1 /* rbbidata.cpp */; };
-		FDE1B4E222E40E940093FDC1 /* umutablecptrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42422E40E8D0093FDC1 /* umutablecptrie.cpp */; };
-		FDE1B4E322E40E940093FDC1 /* putil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42522E40E8D0093FDC1 /* putil.cpp */; };
-		FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42622E40E8D0093FDC1 /* ushape.cpp */; };
-		FDE1B4E522E40E940093FDC1 /* rbbistbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42722E40E8E0093FDC1 /* rbbistbl.cpp */; };
-		FDE1B4E622E40E940093FDC1 /* uidna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42822E40E8E0093FDC1 /* uidna.cpp */; };
-		FDE1B4E722E40E940093FDC1 /* unormcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42922E40E8E0093FDC1 /* unormcmp.cpp */; };
-		FDE1B4E822E40E940093FDC1 /* brkeng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42A22E40E8E0093FDC1 /* brkeng.cpp */; };
-		FDE1B4E922E40E940093FDC1 /* cstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42B22E40E8E0093FDC1 /* cstr.cpp */; };
-		FDE1B4EA22E40E940093FDC1 /* unistr_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42C22E40E8E0093FDC1 /* unistr_props.cpp */; };
-		FDE1B4EB22E40E940093FDC1 /* ustr_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42D22E40E8E0093FDC1 /* ustr_cnv.cpp */; };
-		FDE1B4EC22E40E940093FDC1 /* locid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42E22E40E8E0093FDC1 /* locid.cpp */; };
-		FDE1B4ED22E40E940093FDC1 /* errorcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42F22E40E8E0093FDC1 /* errorcode.cpp */; };
-		FDE1B4EE22E40E940093FDC1 /* uts46.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43022E40E8E0093FDC1 /* uts46.cpp */; };
-		FDE1B4EF22E40E940093FDC1 /* bytestrieiterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43122E40E8E0093FDC1 /* bytestrieiterator.cpp */; };
-		FDE1B4F022E40E940093FDC1 /* sharedobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43222E40E8E0093FDC1 /* sharedobject.cpp */; };
-		FDE1B4F122E40E940093FDC1 /* ucharstrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43322E40E8E0093FDC1 /* ucharstrie.cpp */; };
-		FDE1B4F222E40E940093FDC1 /* ucnv_cb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43422E40E8F0093FDC1 /* ucnv_cb.cpp */; };
-		FDE1B4F322E40E940093FDC1 /* udatamem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43522E40E8F0093FDC1 /* udatamem.cpp */; };
-		FDE1B4F422E40E940093FDC1 /* ubidi_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43622E40E8F0093FDC1 /* ubidi_props.cpp */; };
-		FDE1B4F522E40E940093FDC1 /* ucnv_u7.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43722E40E8F0093FDC1 /* ucnv_u7.cpp */; };
-		FDE1B4F622E40E940093FDC1 /* uloc_keytype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43822E40E8F0093FDC1 /* uloc_keytype.cpp */; };
-		FDE1B4F722E40E940093FDC1 /* uloc_tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43922E40E8F0093FDC1 /* uloc_tag.cpp */; };
-		FDE1B4F822E40E940093FDC1 /* ucurr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43A22E40E8F0093FDC1 /* ucurr.cpp */; };
-		FDE1B4F922E40E940093FDC1 /* ucase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43B22E40E8F0093FDC1 /* ucase.cpp */; };
-		FDE1B4FA22E40E940093FDC1 /* ubidiln.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43C22E40E8F0093FDC1 /* ubidiln.cpp */; };
-		FDE1B4FB22E40E940093FDC1 /* ucnv_u16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43D22E40E8F0093FDC1 /* ucnv_u16.cpp */; };
-		FDE1B4FC22E40E940093FDC1 /* ruleiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43E22E40E8F0093FDC1 /* ruleiter.cpp */; };
-		FDE1B4FD22E40E940093FDC1 /* uinit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43F22E40E8F0093FDC1 /* uinit.cpp */; };
-		FDE1B4FE22E40E940093FDC1 /* filterednormalizer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44022E40E900093FDC1 /* filterednormalizer2.cpp */; };
-		FDE1B4FF22E40E940093FDC1 /* caniter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44122E40E900093FDC1 /* caniter.cpp */; };
-		FDE1B50022E40E940093FDC1 /* ubidiwrt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44222E40E900093FDC1 /* ubidiwrt.cpp */; };
-		FDE1B50122E40E940093FDC1 /* uniset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44322E40E900093FDC1 /* uniset.cpp */; };
-		FDE1B50222E40E950093FDC1 /* rbbisetb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44422E40E900093FDC1 /* rbbisetb.cpp */; };
-		FDE1B50322E40E950093FDC1 /* ucnv_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44522E40E900093FDC1 /* ucnv_cnv.cpp */; };
-		FDE1B50422E40E950093FDC1 /* chariter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44622E40E900093FDC1 /* chariter.cpp */; };
-		FDE1B50522E40E950093FDC1 /* dtintrv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44722E40E900093FDC1 /* dtintrv.cpp */; };
-		FDE1B50622E40E950093FDC1 /* patternprops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44822E40E900093FDC1 /* patternprops.cpp */; };
-		FDE1B50722E40E950093FDC1 /* icudataver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44922E40E900093FDC1 /* icudataver.cpp */; };
-		FDE1B50822E40E950093FDC1 /* ucnv_u8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44A22E40E900093FDC1 /* ucnv_u8.cpp */; };
-		FDE1B50922E40E950093FDC1 /* servnotf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44B22E40E900093FDC1 /* servnotf.cpp */; };
-		FDE1B50A22E40E950093FDC1 /* ucnv_u32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44C22E40E910093FDC1 /* ucnv_u32.cpp */; };
-		FDE1B50B22E40E950093FDC1 /* ucnvhz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44D22E40E910093FDC1 /* ucnvhz.cpp */; };
-		FDE1B50C22E40E950093FDC1 /* ucnvsel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44E22E40E910093FDC1 /* ucnvsel.cpp */; };
-		FDE1B50D22E40E950093FDC1 /* uhash_us.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44F22E40E910093FDC1 /* uhash_us.cpp */; };
-		FDE1B50E22E40E950093FDC1 /* ustrtrns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45022E40E910093FDC1 /* ustrtrns.cpp */; };
-		FDE1B50F22E40E950093FDC1 /* ustring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45122E40E910093FDC1 /* ustring.cpp */; };
-		FDE1B51022E40E950093FDC1 /* utext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45222E40E910093FDC1 /* utext.cpp */; };
-		FDE1B51122E40E950093FDC1 /* umapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45322E40E910093FDC1 /* umapfile.cpp */; };
-		FDE1B51222E40E950093FDC1 /* unifilt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45422E40E910093FDC1 /* unifilt.cpp */; };
-		FDE1B51322E40E950093FDC1 /* resbund_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45522E40E910093FDC1 /* resbund_cnv.cpp */; };
-		FDE1B51422E40E950093FDC1 /* uobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45622E40E910093FDC1 /* uobject.cpp */; };
-		FDE1B51522E40E950093FDC1 /* uarrsort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45722E40E920093FDC1 /* uarrsort.cpp */; };
-		FDE1B51622E40E950093FDC1 /* unifunct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45822E40E920093FDC1 /* unifunct.cpp */; };
-		FDE1B51722E40E950093FDC1 /* uprops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45922E40E920093FDC1 /* uprops.cpp */; };
-		FDE1B51822E40E950093FDC1 /* ubidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45A22E40E920093FDC1 /* ubidi.cpp */; };
-		FDE1B51922E40E950093FDC1 /* locdispnames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45B22E40E920093FDC1 /* locdispnames.cpp */; };
-		FDE1B51A22E40E950093FDC1 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45C22E40E920093FDC1 /* util.cpp */; };
-		FDE1B51B22E40E950093FDC1 /* ucnvlat1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45D22E40E920093FDC1 /* ucnvlat1.cpp */; };
-		FDE1B51C22E40E950093FDC1 /* ucmndata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45E22E40E920093FDC1 /* ucmndata.cpp */; };
-		FDE1B51D22E40E950093FDC1 /* umath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45F22E40E920093FDC1 /* umath.cpp */; };
-		FDE1B51E22E40E950093FDC1 /* unifiedcache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46022E40E920093FDC1 /* unifiedcache.cpp */; };
-		FDE1B51F22E40E950093FDC1 /* resbund.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46122E40E920093FDC1 /* resbund.cpp */; };
-		FDE1B52022E40E950093FDC1 /* normlzr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46222E40E920093FDC1 /* normlzr.cpp */; };
-		FDE1B52122E40E950093FDC1 /* brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46322E40E930093FDC1 /* brkiter.cpp */; };
-		FDE1B52222E40E950093FDC1 /* localebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46422E40E930093FDC1 /* localebuilder.cpp */; };
-		FDE1B52322E40E950093FDC1 /* util_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46522E40E930093FDC1 /* util_props.cpp */; };
-		FDE1B52422E40E950093FDC1 /* static_unicode_sets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46622E40E930093FDC1 /* static_unicode_sets.cpp */; };
-		FDE1B52522E40E950093FDC1 /* loadednormalizer2impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46722E40E930093FDC1 /* loadednormalizer2impl.cpp */; };
-		FDE1B52622E40E950093FDC1 /* stringtriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46822E40E930093FDC1 /* stringtriebuilder.cpp */; };
-		FDE1B52722E40E950093FDC1 /* normalizer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46922E40E930093FDC1 /* normalizer2.cpp */; };
-		FDE1B52822E40E950093FDC1 /* uchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46A22E40E930093FDC1 /* uchar.cpp */; };
-		FDE1B52922E40E950093FDC1 /* ucol_swp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46B22E40E930093FDC1 /* ucol_swp.cpp */; };
-		FDE1B52A22E40E950093FDC1 /* unames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46C22E40E930093FDC1 /* unames.cpp */; };
-		FDE1B52B22E40E950093FDC1 /* ustrcase_locale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46D22E40E930093FDC1 /* ustrcase_locale.cpp */; };
-		FDE1B52C22E40E950093FDC1 /* utrie2_builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46E22E40E930093FDC1 /* utrie2_builder.cpp */; };
-		FDE1B52D22E40E950093FDC1 /* ucptrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46F22E40E940093FDC1 /* ucptrie.cpp */; };
-		FDE1B52E22E40E950093FDC1 /* ucnv_lmb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47022E40E940093FDC1 /* ucnv_lmb.cpp */; };
-		FDE1B52F22E40E950093FDC1 /* rbbinode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47122E40E940093FDC1 /* rbbinode.cpp */; };
-		FDE1B53022E40E950093FDC1 /* unisetspan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47222E40E940093FDC1 /* unisetspan.cpp */; };
-		FDE1B53122E40E950093FDC1 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47322E40E940093FDC1 /* ucln_cmn.cpp */; };
-		FDE1B53222E40E950093FDC1 /* uchriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47422E40E940093FDC1 /* uchriter.cpp */; };
+		FDE1B47522E40E940093FDC1 /* rbbi_cache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B722E40E830093FDC1 /* rbbi_cache.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47622E40E940093FDC1 /* ucnvmbcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B822E40E830093FDC1 /* ucnvmbcs.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47722E40E940093FDC1 /* edits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3B922E40E830093FDC1 /* edits.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47822E40E940093FDC1 /* icuplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BA22E40E830093FDC1 /* icuplug.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47922E40E940093FDC1 /* ucnvbocu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BB22E40E840093FDC1 /* ucnvbocu.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47A22E40E940093FDC1 /* uniset_closure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BC22E40E840093FDC1 /* uniset_closure.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47B22E40E940093FDC1 /* ucnvisci.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BD22E40E840093FDC1 /* ucnvisci.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47C22E40E940093FDC1 /* bytestriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BE22E40E840093FDC1 /* bytestriebuilder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47D22E40E940093FDC1 /* uhash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3BF22E40E840093FDC1 /* uhash.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47E22E40E940093FDC1 /* bytestrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C022E40E840093FDC1 /* bytestrie.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B47F22E40E940093FDC1 /* locavailable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C122E40E840093FDC1 /* locavailable.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48022E40E940093FDC1 /* messagepattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C222E40E840093FDC1 /* messagepattern.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48122E40E940093FDC1 /* servlkf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C322E40E840093FDC1 /* servlkf.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48222E40E940093FDC1 /* uset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C422E40E850093FDC1 /* uset.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48322E40E940093FDC1 /* bmpset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C522E40E850093FDC1 /* bmpset.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48422E40E940093FDC1 /* udata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C622E40E850093FDC1 /* udata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48522E40E940093FDC1 /* propname.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C722E40E850093FDC1 /* propname.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48622E40E940093FDC1 /* ucharstrieiterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C822E40E850093FDC1 /* ucharstrieiterator.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48722E40E940093FDC1 /* ustrenum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3C922E40E850093FDC1 /* ustrenum.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48822E40E940093FDC1 /* ubiditransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CA22E40E850093FDC1 /* ubiditransform.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48922E40E940093FDC1 /* charstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CB22E40E850093FDC1 /* charstr.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48A22E40E940093FDC1 /* uloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CC22E40E850093FDC1 /* uloc.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48B22E40E940093FDC1 /* usprep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CD22E40E850093FDC1 /* usprep.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48C22E40E940093FDC1 /* ucnv_bld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CE22E40E860093FDC1 /* ucnv_bld.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48D22E40E940093FDC1 /* servslkf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3CF22E40E860093FDC1 /* servslkf.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48E22E40E940093FDC1 /* ucasemap_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D022E40E860093FDC1 /* ucasemap_titlecase_brkiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B48F22E40E940093FDC1 /* servrbf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D122E40E860093FDC1 /* servrbf.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49022E40E940093FDC1 /* rbbiscan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D222E40E860093FDC1 /* rbbiscan.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49122E40E940093FDC1 /* ucharstriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D322E40E860093FDC1 /* ucharstriebuilder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49222E40E940093FDC1 /* loclikely.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D422E40E860093FDC1 /* loclikely.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49322E40E940093FDC1 /* uvectr32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D522E40E860093FDC1 /* uvectr32.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49422E40E940093FDC1 /* characterproperties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D622E40E860093FDC1 /* characterproperties.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49522E40E940093FDC1 /* bytestream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D722E40E870093FDC1 /* bytestream.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49622E40E940093FDC1 /* ucnvdisp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D822E40E870093FDC1 /* ucnvdisp.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49722E40E940093FDC1 /* ustr_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3D922E40E870093FDC1 /* ustr_titlecase_brkiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49822E40E940093FDC1 /* uset_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DA22E40E870093FDC1 /* uset_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49922E40E940093FDC1 /* utrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DB22E40E870093FDC1 /* utrie.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49A22E40E940093FDC1 /* uvector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DC22E40E870093FDC1 /* uvector.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49B22E40E940093FDC1 /* uresbund.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DD22E40E870093FDC1 /* uresbund.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49C22E40E940093FDC1 /* utypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DE22E40E870093FDC1 /* utypes.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49D22E40E940093FDC1 /* rbbi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3DF22E40E870093FDC1 /* rbbi.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49E22E40E940093FDC1 /* locutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E022E40E870093FDC1 /* locutil.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B49F22E40E940093FDC1 /* cwchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E122E40E880093FDC1 /* cwchar.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A022E40E940093FDC1 /* ulist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E222E40E880093FDC1 /* ulist.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A122E40E940093FDC1 /* dictbe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E322E40E880093FDC1 /* dictbe.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A222E40E940093FDC1 /* resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E422E40E880093FDC1 /* resource.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A322E40E940093FDC1 /* uenum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E522E40E880093FDC1 /* uenum.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A422E40E940093FDC1 /* ucasemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E622E40E880093FDC1 /* ucasemap.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A522E40E940093FDC1 /* rbbirb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E722E40E880093FDC1 /* rbbirb.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A622E40E940093FDC1 /* ucnv_ct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E822E40E880093FDC1 /* ucnv_ct.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A722E40E940093FDC1 /* ucnv_err.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3E922E40E880093FDC1 /* ucnv_err.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A822E40E940093FDC1 /* normalizer2impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EA22E40E880093FDC1 /* normalizer2impl.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4A922E40E940093FDC1 /* ucnv_set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EB22E40E880093FDC1 /* ucnv_set.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AA22E40E940093FDC1 /* udataswp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EC22E40E880093FDC1 /* udataswp.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AB22E40E940093FDC1 /* locbased.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3ED22E40E890093FDC1 /* locbased.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AC22E40E940093FDC1 /* ures_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EE22E40E890093FDC1 /* ures_cnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AD22E40E940093FDC1 /* propsvec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3EF22E40E890093FDC1 /* propsvec.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AE22E40E940093FDC1 /* unistr_titlecase_brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F022E40E890093FDC1 /* unistr_titlecase_brkiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4AF22E40E940093FDC1 /* ucnvscsu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F122E40E890093FDC1 /* ucnvscsu.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B022E40E940093FDC1 /* ucnv2022.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F222E40E890093FDC1 /* ucnv2022.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B122E40E940093FDC1 /* unistr_case_locale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F322E40E890093FDC1 /* unistr_case_locale.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B222E40E940093FDC1 /* utrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F422E40E890093FDC1 /* utrace.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B322E40E940093FDC1 /* bytesinkutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F522E40E890093FDC1 /* bytesinkutil.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B422E40E940093FDC1 /* uvectr64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F622E40E890093FDC1 /* uvectr64.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B522E40E940093FDC1 /* simpleformatter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F722E40E890093FDC1 /* simpleformatter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B622E40E940093FDC1 /* schriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F822E40E890093FDC1 /* schriter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B722E40E940093FDC1 /* uresdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3F922E40E8A0093FDC1 /* uresdata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B822E40E940093FDC1 /* uinvchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FA22E40E8A0093FDC1 /* uinvchar.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4B922E40E940093FDC1 /* stringpiece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FB22E40E8A0093FDC1 /* stringpiece.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BA22E40E940093FDC1 /* wintz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FC22E40E8A0093FDC1 /* wintz.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BB22E40E940093FDC1 /* appendable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FD22E40E8A0093FDC1 /* appendable.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BC22E40E940093FDC1 /* cmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FE22E40E8A0093FDC1 /* cmemory.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BD22E40E940093FDC1 /* ucnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B3FF22E40E8A0093FDC1 /* ucnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BE22E40E940093FDC1 /* unistr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40022E40E8A0093FDC1 /* unistr.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4BF22E40E940093FDC1 /* servls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40122E40E8A0093FDC1 /* servls.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C022E40E940093FDC1 /* rbbitblb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40222E40E8A0093FDC1 /* rbbitblb.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C122E40E940093FDC1 /* ubrk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40322E40E8A0093FDC1 /* ubrk.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C222E40E940093FDC1 /* unorm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40422E40E8A0093FDC1 /* unorm.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C322E40E940093FDC1 /* dictionarydata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40522E40E8B0093FDC1 /* dictionarydata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C422E40E940093FDC1 /* ustrfmt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40622E40E8B0093FDC1 /* ustrfmt.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C522E40E940093FDC1 /* locresdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40722E40E8B0093FDC1 /* locresdata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C622E40E940093FDC1 /* utf_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40822E40E8B0093FDC1 /* utf_impl.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C722E40E940093FDC1 /* parsepos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40922E40E8B0093FDC1 /* parsepos.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C822E40E940093FDC1 /* unistr_case.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40A22E40E8B0093FDC1 /* unistr_case.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4C922E40E940093FDC1 /* uscript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40B22E40E8B0093FDC1 /* uscript.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CA22E40E940093FDC1 /* filteredbrk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40C22E40E8B0093FDC1 /* filteredbrk.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CB22E40E940093FDC1 /* servlk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40D22E40E8B0093FDC1 /* servlk.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CC22E40E940093FDC1 /* pluralmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40E22E40E8B0093FDC1 /* pluralmap.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CD22E40E940093FDC1 /* ucnv_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B40F22E40E8B0093FDC1 /* ucnv_ext.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CE22E40E940093FDC1 /* uniset_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41022E40E8C0093FDC1 /* uniset_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4CF22E40E940093FDC1 /* usc_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41122E40E8C0093FDC1 /* usc_impl.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D022E40E940093FDC1 /* punycode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41222E40E8C0093FDC1 /* punycode.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D122E40E940093FDC1 /* ucat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41322E40E8C0093FDC1 /* ucat.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D222E40E940093FDC1 /* ucnv_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41422E40E8C0093FDC1 /* ucnv_io.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D322E40E940093FDC1 /* locdspnm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41522E40E8C0093FDC1 /* locdspnm.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D422E40E940093FDC1 /* locmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41622E40E8C0093FDC1 /* locmap.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D522E40E940093FDC1 /* uiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41722E40E8C0093FDC1 /* uiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D622E40E940093FDC1 /* usetiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41822E40E8C0093FDC1 /* usetiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D722E40E940093FDC1 /* uscript_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41922E40E8C0093FDC1 /* uscript_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D822E40E940093FDC1 /* ustack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41A22E40E8C0093FDC1 /* ustack.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4D922E40E940093FDC1 /* ustr_wcs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41B22E40E8D0093FDC1 /* ustr_wcs.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DA22E40E940093FDC1 /* ustrcase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41C22E40E8D0093FDC1 /* ustrcase.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DB22E40E940093FDC1 /* cstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41D22E40E8D0093FDC1 /* cstring.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DC22E40E940093FDC1 /* serv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41E22E40E8D0093FDC1 /* serv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DD22E40E940093FDC1 /* umutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B41F22E40E8D0093FDC1 /* umutex.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DE22E40E940093FDC1 /* unistr_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42022E40E8D0093FDC1 /* unistr_cnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4DF22E40E940093FDC1 /* utrie_swap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42122E40E8D0093FDC1 /* utrie_swap.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E022E40E940093FDC1 /* utrie2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42222E40E8D0093FDC1 /* utrie2.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E122E40E940093FDC1 /* rbbidata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42322E40E8D0093FDC1 /* rbbidata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E222E40E940093FDC1 /* umutablecptrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42422E40E8D0093FDC1 /* umutablecptrie.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E322E40E940093FDC1 /* putil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42522E40E8D0093FDC1 /* putil.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42622E40E8D0093FDC1 /* ushape.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E522E40E940093FDC1 /* rbbistbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42722E40E8E0093FDC1 /* rbbistbl.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E622E40E940093FDC1 /* uidna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42822E40E8E0093FDC1 /* uidna.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E722E40E940093FDC1 /* unormcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42922E40E8E0093FDC1 /* unormcmp.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E822E40E940093FDC1 /* brkeng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42A22E40E8E0093FDC1 /* brkeng.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4E922E40E940093FDC1 /* cstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42B22E40E8E0093FDC1 /* cstr.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4EA22E40E940093FDC1 /* unistr_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42C22E40E8E0093FDC1 /* unistr_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4EB22E40E940093FDC1 /* ustr_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42D22E40E8E0093FDC1 /* ustr_cnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4EC22E40E940093FDC1 /* locid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42E22E40E8E0093FDC1 /* locid.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4ED22E40E940093FDC1 /* errorcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B42F22E40E8E0093FDC1 /* errorcode.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4EE22E40E940093FDC1 /* uts46.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43022E40E8E0093FDC1 /* uts46.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4EF22E40E940093FDC1 /* bytestrieiterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43122E40E8E0093FDC1 /* bytestrieiterator.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F022E40E940093FDC1 /* sharedobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43222E40E8E0093FDC1 /* sharedobject.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F122E40E940093FDC1 /* ucharstrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43322E40E8E0093FDC1 /* ucharstrie.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F222E40E940093FDC1 /* ucnv_cb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43422E40E8F0093FDC1 /* ucnv_cb.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F322E40E940093FDC1 /* udatamem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43522E40E8F0093FDC1 /* udatamem.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F422E40E940093FDC1 /* ubidi_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43622E40E8F0093FDC1 /* ubidi_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F522E40E940093FDC1 /* ucnv_u7.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43722E40E8F0093FDC1 /* ucnv_u7.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F622E40E940093FDC1 /* uloc_keytype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43822E40E8F0093FDC1 /* uloc_keytype.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F722E40E940093FDC1 /* uloc_tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43922E40E8F0093FDC1 /* uloc_tag.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F822E40E940093FDC1 /* ucurr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43A22E40E8F0093FDC1 /* ucurr.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4F922E40E940093FDC1 /* ucase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43B22E40E8F0093FDC1 /* ucase.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FA22E40E940093FDC1 /* ubidiln.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43C22E40E8F0093FDC1 /* ubidiln.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FB22E40E940093FDC1 /* ucnv_u16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43D22E40E8F0093FDC1 /* ucnv_u16.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FC22E40E940093FDC1 /* ruleiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43E22E40E8F0093FDC1 /* ruleiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FD22E40E940093FDC1 /* uinit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B43F22E40E8F0093FDC1 /* uinit.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FE22E40E940093FDC1 /* filterednormalizer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44022E40E900093FDC1 /* filterednormalizer2.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B4FF22E40E940093FDC1 /* caniter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44122E40E900093FDC1 /* caniter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50022E40E940093FDC1 /* ubidiwrt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44222E40E900093FDC1 /* ubidiwrt.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50122E40E940093FDC1 /* uniset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44322E40E900093FDC1 /* uniset.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50222E40E950093FDC1 /* rbbisetb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44422E40E900093FDC1 /* rbbisetb.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50322E40E950093FDC1 /* ucnv_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44522E40E900093FDC1 /* ucnv_cnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50422E40E950093FDC1 /* chariter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44622E40E900093FDC1 /* chariter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50522E40E950093FDC1 /* dtintrv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44722E40E900093FDC1 /* dtintrv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50622E40E950093FDC1 /* patternprops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44822E40E900093FDC1 /* patternprops.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50722E40E950093FDC1 /* icudataver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44922E40E900093FDC1 /* icudataver.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50822E40E950093FDC1 /* ucnv_u8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44A22E40E900093FDC1 /* ucnv_u8.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50922E40E950093FDC1 /* servnotf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44B22E40E900093FDC1 /* servnotf.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50A22E40E950093FDC1 /* ucnv_u32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44C22E40E910093FDC1 /* ucnv_u32.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50B22E40E950093FDC1 /* ucnvhz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44D22E40E910093FDC1 /* ucnvhz.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50C22E40E950093FDC1 /* ucnvsel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44E22E40E910093FDC1 /* ucnvsel.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50D22E40E950093FDC1 /* uhash_us.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B44F22E40E910093FDC1 /* uhash_us.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50E22E40E950093FDC1 /* ustrtrns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45022E40E910093FDC1 /* ustrtrns.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B50F22E40E950093FDC1 /* ustring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45122E40E910093FDC1 /* ustring.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51022E40E950093FDC1 /* utext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45222E40E910093FDC1 /* utext.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51122E40E950093FDC1 /* umapfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45322E40E910093FDC1 /* umapfile.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51222E40E950093FDC1 /* unifilt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45422E40E910093FDC1 /* unifilt.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51322E40E950093FDC1 /* resbund_cnv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45522E40E910093FDC1 /* resbund_cnv.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51422E40E950093FDC1 /* uobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45622E40E910093FDC1 /* uobject.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51522E40E950093FDC1 /* uarrsort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45722E40E920093FDC1 /* uarrsort.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51622E40E950093FDC1 /* unifunct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45822E40E920093FDC1 /* unifunct.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51722E40E950093FDC1 /* uprops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45922E40E920093FDC1 /* uprops.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51822E40E950093FDC1 /* ubidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45A22E40E920093FDC1 /* ubidi.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51922E40E950093FDC1 /* locdispnames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45B22E40E920093FDC1 /* locdispnames.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51A22E40E950093FDC1 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45C22E40E920093FDC1 /* util.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51B22E40E950093FDC1 /* ucnvlat1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45D22E40E920093FDC1 /* ucnvlat1.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51C22E40E950093FDC1 /* ucmndata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45E22E40E920093FDC1 /* ucmndata.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51D22E40E950093FDC1 /* umath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B45F22E40E920093FDC1 /* umath.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51E22E40E950093FDC1 /* unifiedcache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46022E40E920093FDC1 /* unifiedcache.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B51F22E40E950093FDC1 /* resbund.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46122E40E920093FDC1 /* resbund.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52022E40E950093FDC1 /* normlzr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46222E40E920093FDC1 /* normlzr.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52122E40E950093FDC1 /* brkiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46322E40E930093FDC1 /* brkiter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52222E40E950093FDC1 /* localebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46422E40E930093FDC1 /* localebuilder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52322E40E950093FDC1 /* util_props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46522E40E930093FDC1 /* util_props.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52422E40E950093FDC1 /* static_unicode_sets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46622E40E930093FDC1 /* static_unicode_sets.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52522E40E950093FDC1 /* loadednormalizer2impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46722E40E930093FDC1 /* loadednormalizer2impl.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52622E40E950093FDC1 /* stringtriebuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46822E40E930093FDC1 /* stringtriebuilder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52722E40E950093FDC1 /* normalizer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46922E40E930093FDC1 /* normalizer2.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52822E40E950093FDC1 /* uchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46A22E40E930093FDC1 /* uchar.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52922E40E950093FDC1 /* ucol_swp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46B22E40E930093FDC1 /* ucol_swp.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52A22E40E950093FDC1 /* unames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46C22E40E930093FDC1 /* unames.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52B22E40E950093FDC1 /* ustrcase_locale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46D22E40E930093FDC1 /* ustrcase_locale.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52C22E40E950093FDC1 /* utrie2_builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46E22E40E930093FDC1 /* utrie2_builder.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52D22E40E950093FDC1 /* ucptrie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B46F22E40E940093FDC1 /* ucptrie.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52E22E40E950093FDC1 /* ucnv_lmb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47022E40E940093FDC1 /* ucnv_lmb.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B52F22E40E950093FDC1 /* rbbinode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47122E40E940093FDC1 /* rbbinode.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B53022E40E950093FDC1 /* unisetspan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47222E40E940093FDC1 /* unisetspan.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B53122E40E950093FDC1 /* ucln_cmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47322E40E940093FDC1 /* ucln_cmn.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		FDE1B53222E40E950093FDC1 /* uchriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE1B47422E40E940093FDC1 /* uchriter.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FDE1B59522E40FDB0093FDC1 /* uset.h in Headers */ = {isa = PBXBuildFile; fileRef = FDE1B53322E40FD10093FDC1 /* uset.h */; };
 		FDE1B59622E40FDB0093FDC1 /* errorcode.h in Headers */ = {isa = PBXBuildFile; fileRef = FDE1B53422E40FD20093FDC1 /* errorcode.h */; };
 		FDE1B59722E40FDB0093FDC1 /* utrace.h in Headers */ = {isa = PBXBuildFile; fileRef = FDE1B53522E40FD20093FDC1 /* utrace.h */; };
@@ -794,6 +797,9 @@
 		8C012C16230C743F00285F74 /* MacOSPath.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSPath.mm; sourceTree = "<group>"; };
 		8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSystemEnumerable.h; sourceTree = "<group>"; };
 		8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnixFileSystemEnumerable.inl; sourceTree = "<group>"; };
+		8C3DA39E239421DF004A24E4 /* TimerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerModule.h; sourceTree = "<group>"; };
+		8C3DA39F239421DF004A24E4 /* TimerModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerModule.cpp; sourceTree = "<group>"; };
+		8C3DA3A2239518D3004A24E4 /* TimerHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHandle.h; sourceTree = "<group>"; };
 		8C439484236FC666009911B1 /* UnixPath.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixPath.inl; sourceTree = "<group>"; };
 		8C59E306232EB42700EBE199 /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoding.cpp; sourceTree = "<group>"; };
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
@@ -825,8 +831,8 @@
 		8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSDebug.mm; sourceTree = "<group>"; };
 		8CC61CC622FB3B7A00F415C8 /* Debug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Debug.cpp; sourceTree = "<group>"; };
 		8CC61CC722FB3B7A00F415C8 /* Debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Debug.h; sourceTree = "<group>"; };
-		8CD20BC8238B68AE001F4473 /* UIFont.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UIFont.h; sourceTree = "<group>"; };
-		8CD20BC9238B68AF001F4473 /* UIFont.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UIFont.cpp; sourceTree = "<group>"; };
+		8CD20BC8238B68AE001F4473 /* FontAtlas.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FontAtlas.h; sourceTree = "<group>"; };
+		8CD20BC9238B68AF001F4473 /* FontAtlas.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FontAtlas.cpp; sourceTree = "<group>"; };
 		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
 		8CE691AF2365FE1500482062 /* UnixDirectory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = UnixDirectory.cpp; sourceTree = "<group>"; };
 		8CF8A16C234A435000763883 /* Object.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Object.h; sourceTree = "<group>"; };
@@ -1802,8 +1808,8 @@
 			children = (
 				8CC61CBE22F610AE00F415C8 /* RectTransform.cpp */,
 				8CC61CB822F610AE00F415C8 /* RectTransform.h */,
-				8CD20BC9238B68AF001F4473 /* UIFont.cpp */,
-				8CD20BC8238B68AE001F4473 /* UIFont.h */,
+				8CD20BC9238B68AF001F4473 /* FontAtlas.cpp */,
+				8CD20BC8238B68AE001F4473 /* FontAtlas.h */,
 				8CC61CB922F610AE00F415C8 /* UIRenderer.cpp */,
 				8CC61CBC22F610AE00F415C8 /* UIRenderer.h */,
 				8CC61CBB22F610AE00F415C8 /* UISprite.cpp */,
@@ -2845,23 +2851,26 @@
 		FDC02C3E228481F000BEE91A /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02C3F228481F000BEE91A /* Engine.h */,
 				FDC02C4A228481F000BEE91A /* Engine.cpp */,
+				FDC02C3F228481F000BEE91A /* Engine.h */,
 				FDC02C40228481F000BEE91A /* Module.h */,
 				FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */,
 				FDC83D4F22CE40EE00B93C8D /* AssetModule.h */,
-				FDC02C48228481F000BEE91A /* AudioModule.h */,
 				FDC02C43228481F000BEE91A /* AudioModule.cpp */,
-				FDC02C41228481F000BEE91A /* InputModule.h */,
+				FDC02C48228481F000BEE91A /* AudioModule.h */,
 				FDC02C46228481F000BEE91A /* InputModule.cpp */,
-				FD7E61C92291D75700A829FD /* SceneModule.h */,
+				FDC02C41228481F000BEE91A /* InputModule.h */,
 				FD7E61C82291D75700A829FD /* SceneModule.cpp */,
-				FDC02C49228481F000BEE91A /* GraphicsModule.h */,
+				FD7E61C92291D75700A829FD /* SceneModule.h */,
 				FDC02C42228481F000BEE91A /* GraphicsModule.cpp */,
-				FDC02C45228481F000BEE91A /* TimeModule.h */,
+				FDC02C49228481F000BEE91A /* GraphicsModule.h */,
 				FDC02C47228481F000BEE91A /* TimeModule.cpp */,
-				FD7E61D022945BED00A829FD /* TaskModule.h */,
+				FDC02C45228481F000BEE91A /* TimeModule.h */,
+				8C3DA39F239421DF004A24E4 /* TimerModule.cpp */,
+				8C3DA39E239421DF004A24E4 /* TimerModule.h */,
+				8C3DA3A2239518D3004A24E4 /* TimerHandle.h */,
 				FD7E61CF22945BED00A829FD /* TaskModule.cpp */,
+				FD7E61D022945BED00A829FD /* TaskModule.h */,
 			);
 			name = Engine;
 			path = ../../Source/TGON/Engine;
@@ -3563,7 +3572,7 @@
 				FD5332B822A2EA1C001EB57C /* svttcmap.h in Headers */,
 				FD7E61CB2291D75700A829FD /* SceneModule.h in Headers */,
 				FDE1B5C822E40FDB0093FDC1 /* uenum.h in Headers */,
-				8CD20BCA238B68AF001F4473 /* UIFont.h in Headers */,
+				8CD20BCA238B68AF001F4473 /* FontAtlas.h in Headers */,
 				FDE1B67B22E4100F0093FDC1 /* uset_imp.h in Headers */,
 				8CF8A186234A435100763883 /* NonCopyable.h in Headers */,
 				FD53331D22A57F38001EB57C /* zlib.h in Headers */,
@@ -3657,6 +3666,7 @@
 				FDE1B5BA22E40FDB0093FDC1 /* utf_old.h in Headers */,
 				FDE1B6A022E4100F0093FDC1 /* rbbi_cache.h in Headers */,
 				FDE1B5B222E40FDB0093FDC1 /* resbund.h in Headers */,
+				8C3DA3A0239421DF004A24E4 /* TimerModule.h in Headers */,
 				FDE1B68422E4100F0093FDC1 /* ucln.h in Headers */,
 				FDE1B5CE22E40FDB0093FDC1 /* uloc.h in Headers */,
 				8CB5BB13233F814D0032F332 /* Directory.h in Headers */,
@@ -3807,6 +3817,7 @@
 				FDE1B5A922E40FDB0093FDC1 /* locid.h in Headers */,
 				FD7E61C62291D72F00A829FD /* Scene.h in Headers */,
 				FD5332A622A2EA1C001EB57C /* t1types.h in Headers */,
+				8C3DA3A3239518D3004A24E4 /* TimerHandle.h in Headers */,
 				FDE1B6C722E4100F0093FDC1 /* ubidi_props_data.h in Headers */,
 				FDE1B6B622E4100F0093FDC1 /* uarrsort.h in Headers */,
 				FDE1B6AD22E4100F0093FDC1 /* ucase.h in Headers */,
@@ -4151,6 +4162,7 @@
 				FDC02D09228487CA00BEE91A /* OpenGLGraphics.cpp in Sources */,
 				FD5331DE22A2E53C001EB57C /* autofit.c in Sources */,
 				FDC02D0B228487CA00BEE91A /* OpenGLIndexBuffer.cpp in Sources */,
+				8C3DA3A1239421DF004A24E4 /* TimerModule.cpp in Sources */,
 				FD53321022A2E8F8001EB57C /* ftpfr.c in Sources */,
 				FDE1B4C822E40E940093FDC1 /* unistr_case.cpp in Sources */,
 				FDE1B52922E40E950093FDC1 /* ucol_swp.cpp in Sources */,
@@ -4317,7 +4329,7 @@
 				FDE1B4A822E40E940093FDC1 /* normalizer2impl.cpp in Sources */,
 				FD4C1DE8219F3F7D00B2B2BE /* GainputInputMap.cpp in Sources */,
 				FDE1B48522E40E940093FDC1 /* propname.cpp in Sources */,
-				8CD20BCB238B68AF001F4473 /* UIFont.cpp in Sources */,
+				8CD20BCB238B68AF001F4473 /* FontAtlas.cpp in Sources */,
 				FDE1B4F722E40E940093FDC1 /* uloc_tag.cpp in Sources */,
 				FDE1B48822E40E940093FDC1 /* ubiditransform.cpp in Sources */,
 				FD4C1DE9219F3F7D00B2B2BE /* GainputInputManager.cpp in Sources */,

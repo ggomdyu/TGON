@@ -17,15 +17,15 @@ TextRendererComponent::TextRendererComponent() :
 {
 }
 
-void TextRendererComponent::SetFont(const char* fontPath)
+void TextRendererComponent::SetFontAtlas(const char* fontAtlasPath)
 {
     auto assetModule = Application::GetEngine()->FindModule<AssetModule>();
-    this->SetFont(assetModule->GetFont(fontPath));
+    this->SetFontAtlas(assetModule->GetFontAtlas(fontAtlasPath));
 }
 
-void TextRendererComponent::SetFont(const std::shared_ptr<UIFont>& font) noexcept
+void TextRendererComponent::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas) noexcept
 {
-    m_text->SetFont(font);
+    m_text->SetFontAtlas(fontAtlas);
 }
 
 void TextRendererComponent::SetText(const std::string_view& text)
@@ -83,14 +83,14 @@ const Color4f& TextRendererComponent::GetBlendColor() const noexcept
     return m_text->GetBlendColor();
 }
 
-std::shared_ptr<const UIFont> TextRendererComponent::GetFont() const noexcept
+std::shared_ptr<const FontAtlas> TextRendererComponent::GetFontAtlas() const noexcept
 {
-    return m_text->GetFont();
+    return m_text->GetFontAtlas();
 }
 
-std::shared_ptr<UIFont> TextRendererComponent::GetFont() noexcept
+std::shared_ptr<FontAtlas> TextRendererComponent::GetFontAtlas() noexcept
 {
-    return m_text->GetFont();
+    return m_text->GetFontAtlas();
 }
 
 int32_t TextRendererComponent::GetFontSize() const noexcept

@@ -11,21 +11,20 @@
 namespace tgon
 {
 
-class UIFont
+class FontAtlas
 {
 /**@section Constructor */
 public:
-    UIFont(Font&& font);
-    UIFont(UIFont&& rhs) noexcept;
+    FontAtlas(const std::shared_ptr<Font>& font);
+    FontAtlas(std::shared_ptr<Font>&& font);
+    FontAtlas(FontAtlas&& rhs) noexcept;
         
 /**@section Operator */
 public:
-    UIFont& operator=(UIFont&& rhs) noexcept;
+    FontAtlas& operator=(FontAtlas&& rhs) noexcept;
 
 /**@section Method */
 public:
-    void Insert(char32_t ch, int32_t fontSize);
-    void Insert(const gsl::span<char32_t>& characters, int32_t fontSize);
     std::optional<std::reference_wrapper<FRect>> GetTextureRect(size_t key) const;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
@@ -37,8 +36,8 @@ public:
 
 /**@section Variable */
 private:
-    Font m_font;
-    TextureAtlas m_textureAtlas;
+    std::shared_ptr<Font> m_font;
+    mutable TextureAtlas m_textureAtlas;
 };
 
 } /* namespace tgon */

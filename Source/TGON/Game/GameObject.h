@@ -63,7 +63,11 @@ inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... a
     auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
     component->SetGameObject(this->weak_from_this());
 
-    m_components.push_back(component);
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    {
+        return lhs->GetRTTI()->GetHashCode() < rhs;
+    });
+    m_components.insert(iter, component);
 
     return component;
 }

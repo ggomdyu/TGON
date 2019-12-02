@@ -9,8 +9,9 @@
 #include <vector>
 
 #include "Core/Object.h"
-#include "Engine/TimeModule.h"
-#include "Engine/InputModule.h"
+
+#include "TimeModule.h"
+#include "AudioModule.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
@@ -33,43 +34,21 @@ class Engine :
 public:
     TGON_DECLARE_RTTI(Engine)
 
-/**@section Constructor */
-protected:
-    Engine();
-
 /**@section Destructor */
 public:
     virtual ~Engine() = 0;
     
 /**@section Method */
 public:
-    /**
-     * @brief   Updates the Engine.
-     * @detail  When this function has invoked, all registered modules are updated.
-     */
-    virtual void Update();
-    
-    /**
-     * @brief   Registers a module to manage through this engine.
-     * @param [in] args     Parameters of the _ModuleType constructor.
-     */
     template <typename _ModuleType, typename... _ArgTypes>
     std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args);
-
-    /**
-     * @brief   Unregisters a module managed by this engine.
-     * @tparam _ModuleType  The type of module to remove.
-     */
     template <typename _ModuleType>
     bool UnregisterModule();
-
-    /**@brief   Returns a module managed by this engine. */
     template <typename _ModuleType>
     std::shared_ptr<_ModuleType> FindModule() noexcept;
-
-    /**@brief   Returns a module managed by this engine. */
     template <typename _ModuleType>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
+    virtual void Update();
     
 /**@section Event handler */
 public:
@@ -78,49 +57,16 @@ public:
 
 /**@section Method */
 private:
-    /**
-     * @brief   Registers a module to manage through this engine.
-     * @param [in] module   The module to insert.
-     */
     void RegisterModule(const std::shared_ptr<Module>& module);
-    
-    /**
-     * @brief   Returns a module that managed by Application.
-     * @param [in] moduleId     The unique id of the module to get.
-     * @return  Returns a pointer to module if successful, nullptr otherwise.
-     */
-    std::shared_ptr<Module> FindModule(size_t moduleId);
-
-    /**
-     * @brief   Returns a module that managed by Application.
-     * @param [in] moduleId     The unique id of the module to get.
-     * @return  Returns a pointer to module if successful, nullptr otherwise.
-     */
     bool UnregisterModule(size_t moduleId);
+    std::shared_ptr<Module> FindModule(size_t moduleId);
 
 /**@section Variable */
 private:
     std::shared_ptr<TimeModule> m_timeModule;
+    std::shared_ptr<AudioModule> m_audioModule;
     std::vector<std::shared_ptr<Module>> m_modules;
 };
-    
-template <>
-inline std::shared_ptr<TimeModule> Engine::FindModule<TimeModule>() noexcept
-{
-    return m_timeModule;
-}
-
-template <>
-inline std::shared_ptr<const TimeModule> Engine::FindModule<TimeModule>() const noexcept
-{
-    return m_timeModule;
-}
-
-template <>
-inline std::shared_ptr<TimeModule> Engine::RegisterModule<TimeModule>()
-{
-    return m_timeModule;
-}
     
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)

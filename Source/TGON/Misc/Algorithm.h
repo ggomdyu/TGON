@@ -10,6 +10,7 @@
 #include <tuple>
 #include <type_traits>
 #include <array>
+#include <algorithm>
 
 namespace tgon
 {
@@ -124,11 +125,25 @@ constexpr std::underlying_type_t<_EnumType> UnderlyingCast(_EnumType value) noex
 }
 
 template <typename _Type>
-void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
+inline void Swap(_Type& lhs, _Type& rhs) noexcept(std::is_nothrow_move_constructible<_Type>::value && std::is_nothrow_move_assignable<_Type>::value)
 {
     _Type temp = std::move(lhs);
     lhs = std::move(rhs);
     rhs = std::move(temp);
+}
+
+template <typename _IteratorType, typename _ValueType>
+inline bool BinarySearch(_IteratorType begin, _IteratorType end, const _ValueType& value)
+{
+    begin = std::lower_bound(begin, end, value);
+    return !(begin == end) && !(value < *begin);
+}
+
+template <typename _IteratorType, typename _ValueType, typename _PredicateType>
+inline bool BinarySearch(_IteratorType begin, _IteratorType end, const _ValueType& value, _PredicateType predicate)
+{
+    begin = std::lower_bound(begin, end, value, predicate);
+    return !(begin == end) && !predicate(*begin, value);
 }
 
 } /* namespace tgon */

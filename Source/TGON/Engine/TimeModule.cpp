@@ -14,14 +14,6 @@ TimeModule::TimeModule() :
 {
 }
 
-void TimeModule::Update()
-{
-    auto currTime = Environment::GetTickCount();
-
-    m_tickTime = (static_cast<float>(currTime - m_lastRecordedTickTime) * 0.001f) * m_timeScale;
-    m_lastRecordedTickTime = currTime;
-}
-
 void TimeModule::SetTimeScale(float timeScale) noexcept
 {
     m_timeScale = timeScale;
@@ -35,6 +27,14 @@ float TimeModule::GetTimeScale() const noexcept
 float TimeModule::GetTickTime() const noexcept
 {
     return m_tickTime;
+}
+
+void TimeModule::Update()
+{
+    auto currTime = Environment::GetTickCount();
+
+    m_tickTime = (static_cast<float>(currTime - m_lastRecordedTickTime) * 0.001f) * m_timeScale;
+    m_lastRecordedTickTime = currTime;
 }
 
 } /* namespace tgon */

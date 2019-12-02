@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include <gainput/gainput.h>
+
 #include "../Gamepad.h"
 
 namespace tgon

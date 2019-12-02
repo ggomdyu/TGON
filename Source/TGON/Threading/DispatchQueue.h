@@ -5,11 +5,10 @@
  */
 
 #pragma once
-#include <cstdint>
 #include <deque>
+#include <vector>
 #include <mutex>
 
-#include "Platform/Config.h"
 #include "Core/Delegate.h"
 #include "Core/NonCopyable.h"
 
@@ -18,7 +17,7 @@
 namespace tgon
 {
     
-class SerialDispatchQueue final :
+class SerialDispatchQueue :
     private NonCopyable
 {
 /**@section Method */
@@ -35,12 +34,12 @@ private:
     std::deque<Delegate<void()>> m_taskPool;
 };
 
-class ConcurrentDispatchQueue final :
+class ConcurrentDispatchQueue :
     private NonCopyable
 {
 /**@section Constructor */
 public:
-    ConcurrentDispatchQueue(ThreadPriority threadPriority, int32_t threadPoolCount);
+    explicit ConcurrentDispatchQueue(int32_t threadPoolCount);
     
 /**@section Destructor */
 public:
@@ -60,7 +59,7 @@ private:
 private:
     std::condition_variable m_cv;
     std::mutex m_mutex;
-    std::deque<Thread> m_threadPool;
+    std::vector<Thread> m_threadPool;
     std::deque<Delegate<void()>> m_taskPool;
     bool m_needToDestroy;
 };

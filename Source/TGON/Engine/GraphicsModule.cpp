@@ -19,13 +19,6 @@ GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode)
     m_graphics.EnableBlend();
     m_graphics.SetBlendMode(BlendMode::Alpha);
 }
-    
-void GraphicsModule::Update()
-{
-    m_uiRenderer.Update();
-    
-    this->Draw();
-}
 
 void GraphicsModule::Draw()
 {
@@ -54,6 +47,13 @@ UIRenderer& GraphicsModule::GetUIRenderer() noexcept
 const UIRenderer& GraphicsModule::GetUIRenderer() const noexcept
 {
     return m_uiRenderer;
+}
+
+void GraphicsModule::Update()
+{
+    m_uiRenderer.Update();
+    
+    this->Draw();
 }
 
 } /* namespace tgon */

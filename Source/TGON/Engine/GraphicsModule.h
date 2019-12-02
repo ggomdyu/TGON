@@ -29,18 +29,18 @@ public:
     
 /**@section Method */
 public:
-    void Update() override;
     Graphics& GetGraphics() noexcept;
     const Graphics& GetGraphics() const noexcept;
     UIRenderer& GetUIRenderer() noexcept;
     const UIRenderer& GetUIRenderer() const noexcept;
+    void Update() override;
     
 /**@section Method */
 private:
     void Draw();
-
+    
 /**@section Variable */
-public:
+private:
     Graphics m_graphics;
     UIRenderer m_uiRenderer;
 };

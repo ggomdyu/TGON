@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 #include "Core/NonCopyable.h"
 
 #include "RTTI.h"

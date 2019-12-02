@@ -10,7 +10,7 @@
 namespace tgon
 {
 
-class TimeModule final :
+class TimeModule :
 	public Module
 {
 public:
@@ -20,20 +20,16 @@ public:
 public:
     TimeModule();
 
-/**@section Destructor */
-public:
-    ~TimeModule() override = default;
-
 /**@section Method */
 public:
-    void Update() override;
     void SetTimeScale(float timeScale) noexcept;
     float GetTimeScale() const noexcept;
     float GetTickTime() const noexcept;
+    void Update() override;
 
 /**@section Variable */
 private:
-    uint64_t m_lastRecordedTickTime;
+    int64_t m_lastRecordedTickTime;
     float m_timeScale;
     float m_tickTime;
 };

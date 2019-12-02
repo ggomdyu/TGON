@@ -26,10 +26,6 @@ public:
 public:
     ~AudioModule() override = default;
 
-/* @section Method */
-public:
-    void Update() override;
-    
 /* @section Variable */
 private:
     AudioDevice m_audioDevice;

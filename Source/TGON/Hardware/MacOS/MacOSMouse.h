@@ -9,7 +9,6 @@
 #include <cstdint>
 
 #include "Core/NonCopyable.h"
-#include "Platform/Config.h"
 
 namespace tgon
 {

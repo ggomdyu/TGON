@@ -25,8 +25,8 @@ public:
     
 /**@section Method */
 public:
-    void SetFont(const char* fontPath);
-    void SetFont(const std::shared_ptr<UIFont>& font) noexcept;
+    void SetFontAtlas(const char* fontAtlasPath);
+    void SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas) noexcept;
     void SetFontSize(int32_t fontSize) noexcept;
     void SetText(const std::string_view& text);
     void SetLineSpacing(float lineSpacing) noexcept;
@@ -38,9 +38,9 @@ public:
     LineBreakMode GetLineBreakMode() const noexcept;
     TextAlignment GetTextAlignment() const noexcept;
     const Color4f& GetBlendColor() const noexcept;
-    std::shared_ptr<const UIFont> GetFont() const noexcept;
+    std::shared_ptr<FontAtlas> GetFontAtlas() noexcept;
+    std::shared_ptr<const FontAtlas> GetFontAtlas() const noexcept;
     int32_t GetFontSize() const noexcept;
-    std::shared_ptr<UIFont> GetFont() noexcept;
     const I32Rect& GetRect() const noexcept;
     int32_t GetSortingLayer() const noexcept;
     void Update() override;

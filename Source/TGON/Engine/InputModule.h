@@ -37,14 +37,14 @@ public:
 
 /**@section Method */
 public:
-    void Update() override;
     std::shared_ptr<Mouse> GetMouse() noexcept;
     std::shared_ptr<const Mouse> GetMouse() const noexcept;
     std::shared_ptr<Keyboard> GetKeyboard() noexcept;
     std::shared_ptr<const Keyboard> GetKeyboard() const noexcept;
     std::shared_ptr<Gamepad> GetGamepad() noexcept;
     std::shared_ptr<const Gamepad> GetGamepad() const noexcept;
-
+    void Update() override;
+    
 /**@section Variable */
 public:
     InputManager m_inputManager;

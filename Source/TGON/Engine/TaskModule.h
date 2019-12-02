@@ -5,10 +5,6 @@
  */
 
 #pragma once
-#include <unordered_map>
-#include <array>
-#include <memory>
-
 #include "Threading/DispatchQueue.h"
 
 #include "Module.h"
@@ -16,7 +12,7 @@
 namespace tgon
 {
 
-class TaskModule final :
+class TaskModule :
 	public Module
 {
 public:
@@ -24,24 +20,20 @@ public:
 
 /**@section Constructor */
 public:
-    TaskModule();
-
-/**@section Destructor */
-public:
-    ~TaskModule() override = default;
+    explicit TaskModule(int32_t threadPoolCount = Thread::GetHardwareConcurrency());
 
 /**@section Method */
 public:
-    void Update() override;
     SerialDispatchQueue& GetMainDispatchQueue() noexcept;
-    ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal);
     const SerialDispatchQueue& GetMainDispatchQueue() const noexcept;
-    const ConcurrentDispatchQueue& GetGlobalDispatchQueue(ThreadPriority threadPriority = ThreadPriority::Normal) const;
+    ConcurrentDispatchQueue& GetGlobalDispatchQueue();
+    const ConcurrentDispatchQueue& GetGlobalDispatchQueue() const;
+    void Update() override;
     
 /**@section Variable */
 private:
     SerialDispatchQueue m_mainDispatchQueue;
-    std::array<std::unique_ptr<ConcurrentDispatchQueue>, 5> m_globalDispatchQueues;
+    ConcurrentDispatchQueue m_globalDispatchQueue;
 };
 
 } /* namespace tgon */

@@ -22,10 +22,6 @@ public:
 
 /**@section Method */
 public:
-    /**
-     * @brief   Stops this timer.
-     * @remarks If this timer stopped, the OnTimeElapsed handler will not invoked.
-     */
     void Update();
     
     /**

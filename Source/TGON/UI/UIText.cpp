@@ -21,18 +21,18 @@ public:
 /**@section Constructor */
 public:
     TextBlock() = default;
-    TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
+    TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
     
 /**@section Method */
 public:
-    void Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
+    void Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
     void Clear();
     const I32Rect& GetRect() const noexcept;
     const I32Rect& GetContentRect() const noexcept;
     const std::vector<UIText::CharacterInfo>& GetCharacterInfos() const noexcept;
     
 private:
-    int32_t TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect);
+    int32_t TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect);
     void PopBackLine();
     void ProcessTextAlignment(TextAlignment textAlignment);
     void ProcessLineBreakMode(LineBreakMode lineBreakMode);
@@ -46,7 +46,7 @@ private:
     int32_t m_iterIndex = 0;
 };
 
-TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept :
+TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept :
     m_rect(rect),
     m_contentRect(rect.x, rect.y, 0, 0)
 {
@@ -64,7 +64,7 @@ TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::sha
 
         m_lineInfos.push_back(LineInfo{0, 0, I32Rect(rect.x, rect.y - m_contentRect.height, 0, 0)});
 
-        int32_t insertedCharacterLen = this->TryAddTextLine(charactersSpan, font, fontSize, rect);
+        int32_t insertedCharacterLen = this->TryAddTextLine(charactersSpan, fontAtlas, fontSize, rect);
         if (insertedCharacterLen == 0)
         {
             this->PopBackLine();
@@ -82,11 +82,11 @@ TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::sha
     }
 }
 
-void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
+void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
 {
     this->Clear();
     
-    new (this) TextBlock(characters, font, fontSize, rect, lineBreakMode, textAlignment);
+    new (this) TextBlock(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
 }
 
 void TextBlock::Clear()
@@ -131,7 +131,7 @@ void TextBlock::PopBackLine()
     m_lineInfos.pop_back();
 }
 
-int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<UIFont>& font, int32_t fontSize, const I32Rect& rect)
+int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect)
 {
     int32_t yMin = INT32_MAX;
     int32_t yMax = -INT32_MAX;
@@ -146,7 +146,7 @@ int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, c
     {
         auto ch = characters[i];
         
-        const auto& glyphData = font->GetGlyphData(ch, fontSize);
+        const auto& glyphData = fontAtlas->GetGlyphData(ch, fontSize);
         if (rect.width < xAdvance + glyphData.metrics.size.width)
         {
             insertedTextLen = static_cast<int32_t>(i);
@@ -366,7 +366,7 @@ UIText::~UIText() = default;
 
 UIText::UIText(UIText&& rhs) noexcept :
     m_text(std::move(rhs.m_text)),
-    m_font(std::move(rhs.m_font)),
+    m_fontAtlas(std::move(rhs.m_fontAtlas)),
     m_fontSize(rhs.m_fontSize),
     m_textAlignment(rhs.m_textAlignment),
     m_lineSpacing(rhs.m_lineSpacing),
@@ -381,7 +381,7 @@ UIText::UIText(UIText&& rhs) noexcept :
 UIText& UIText::operator=(UIText&& rhs) noexcept
 {
     m_text = std::move(rhs.m_text);
-    m_font = std::move(rhs.m_font);
+    m_fontAtlas = std::move(rhs.m_fontAtlas);
     m_fontSize = rhs.m_fontSize;
     m_textAlignment = rhs.m_textAlignment;
     m_lineSpacing = rhs.m_lineSpacing;
@@ -402,9 +402,9 @@ UIText& UIText::operator=(UIText&& rhs) noexcept
     return *this;
 }
 
-void UIText::SetFont(const std::shared_ptr<UIFont>& font)
+void UIText::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas)
 {
-    m_font = font;
+    m_fontAtlas = fontAtlas;
     m_isDirty = true;
 }
 
@@ -450,14 +450,14 @@ void UIText::SetRect(const I32Rect& rect)
     m_isDirty = true;
 }
 
-std::shared_ptr<UIFont> UIText::GetFont() noexcept
+std::shared_ptr<FontAtlas> UIText::GetFontAtlas() noexcept
 {
-    return m_font;
+    return m_fontAtlas;
 }
 
-std::shared_ptr<const UIFont> UIText::GetFont() const noexcept
+std::shared_ptr<const FontAtlas> UIText::GetFontAtlas() const noexcept
 {
-    return m_font;
+    return m_fontAtlas;
 }
 
 int32_t UIText::GetFontSize() const noexcept
@@ -506,9 +506,7 @@ const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noex
     {
         auto characters = Encoding::UTF8().GetChars(reinterpret_cast<const std::byte*>(&m_text[0]), static_cast<int32_t>(m_text.length()));
         
-        m_textBlock->Initialize(characters, m_font, m_fontSize, m_rect, m_lineBreakMode, m_textAlignment);
-        m_font->Insert(characters, m_fontSize);
-        
+        m_textBlock->Initialize(characters, m_fontAtlas, m_fontSize, m_rect, m_lineBreakMode, m_textAlignment);
         m_isDirty = false;
     }
     
@@ -517,7 +515,7 @@ const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noex
 
 void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_font->GetAtlasTexture(), FilterMode::Bilinear, WrapMode::Clamp, BlendMode::Alpha, false, {}, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_fontAtlas->GetAtlasTexture(), FilterMode::Bilinear, WrapMode::Clamp, BlendMode::Alpha, false, {}, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);
@@ -525,7 +523,7 @@ void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld
 
     for (const auto& characterInfo : this->GetCharacterInfos())
     {
-        auto optTextureRect = m_font->GetTextureRect(characterInfo.character);
+        auto optTextureRect = m_fontAtlas->GetTextureRect(characterInfo.character);
         if (optTextureRect.has_value() == false)
         {
             continue;
