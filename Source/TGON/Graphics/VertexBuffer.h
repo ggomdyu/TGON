@@ -8,8 +8,6 @@
 #include <vector>
 #include <gsl/span>
 
-#include "Platform/Config.h"
-
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLVertexBuffer.h"
 #endif

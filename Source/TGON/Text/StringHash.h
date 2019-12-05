@@ -243,14 +243,14 @@ constexpr bool BasicStringHash<_StringType>::operator>=(const BasicStringHash<_S
     return m_hashCode >= rhs.GetHashCode();
 }
 
-template <typename _StringType>
-inline BasicStringHash<_StringType>::operator std::basic_string<ValueType>() const noexcept
+template<typename _StringType>
+inline BasicStringHash<_StringType>::operator std::basic_string<RemoveCvref<decltype(_StringType()[0])>>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }
 
-template <typename _StringType>
-constexpr BasicStringHash<_StringType>::operator std::basic_string_view<ValueType>() const noexcept
+template<typename _StringType>
+constexpr BasicStringHash<_StringType>::operator std::basic_string_view<RemoveCvref<decltype(_StringType()[0])>>() const noexcept
 {
     return {this->Data(), static_cast<size_t>(this->Length())};
 }

@@ -9,8 +9,6 @@
 #include <string_view>
 #include <mutex>
 
-#include "Platform/Config.h"
-
 namespace tgon
 {
 

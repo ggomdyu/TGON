@@ -1023,8 +1023,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp">
       <Filter>Source\TGON\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Encoding.cpp">
       <Filter>Source\TGON\Text</Filter>
     </ClCompile>
@@ -1046,9 +1044,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Font.cpp">
       <Filter>Source\TGON\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.cpp">
-      <Filter>Source\TGON\UI</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp">
       <Filter>Source\TGON\UI</Filter>
     </ClCompile>
@@ -1066,6 +1061,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.cpp">
       <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\FontAtlas.cpp">
+      <Filter>Source\TGON\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerModule.cpp">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.cpp">
+      <Filter>Source\TGON\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2434,8 +2441,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h">
       <Filter>Source\TGON\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Core\Object.h">
       <Filter>Source\TGON\Core</Filter>
     </ClInclude>
@@ -2478,9 +2483,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Version.h">
       <Filter>Source\TGON\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.h">
-      <Filter>Source\TGON\UI</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h">
       <Filter>Source\TGON\UI</Filter>
     </ClInclude>
@@ -2498,6 +2500,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.h">
       <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\FontAtlas.h">
+      <Filter>Source\TGON\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerModule.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerHandle.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\SpriteRendererComponent.h">
+      <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\TextRendererComponent.h">
+      <Filter>Source\TGON\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

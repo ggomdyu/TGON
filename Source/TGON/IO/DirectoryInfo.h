@@ -8,8 +8,6 @@
 #include <string>
 #include <vector>
 
-#include "Platform/Config.h"
-
 #include "FileSystemEnumerable.h"
 
 namespace tgon

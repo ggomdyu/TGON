@@ -11,8 +11,8 @@ namespace tgon
 GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
-    auto windowSize = window.GetClientSize();
-    m_graphics.SetViewport(0, 0, windowSize.width, windowSize.height);
+    auto clientSize = window.GetClientSize();
+    m_graphics.SetViewport(0, 0, clientSize.width, clientSize.height);
     m_graphics.SetClearColor(videoMode.clearColor);
     m_graphics.SetCullMode(CullMode::CW);
     m_graphics.EnableDepthTest();

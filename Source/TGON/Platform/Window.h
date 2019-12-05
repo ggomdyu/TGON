@@ -6,7 +6,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 #include "Core/DelegateChain.h"
 #include "Math/Extent.h"
 #include "Math/Vector2.h"

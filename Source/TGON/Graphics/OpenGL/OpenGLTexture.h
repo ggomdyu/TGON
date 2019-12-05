@@ -8,7 +8,6 @@
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
-#include "Platform/Config.h"
 #include "Core/NonCopyable.h"
 
 namespace tgon

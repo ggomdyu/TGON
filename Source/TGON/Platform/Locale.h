@@ -10,8 +10,6 @@
 #include <cstdint>
 #include <string>
 
-#include "Platform/Config.h"
-
 namespace tgon
 {
 

@@ -6,7 +6,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 
 namespace tgon
 {

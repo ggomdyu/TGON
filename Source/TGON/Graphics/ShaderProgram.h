@@ -8,7 +8,6 @@
 #include <array>
 
 #include "Math/Vector4.h"
-#include "Platform/Config.h"
 
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLShaderProgram.h"
@@ -17,7 +16,7 @@
 namespace tgon
 {
 
-class ShaderProgram final :
+class ShaderProgram :
     private PlatformShaderProgram
 {
 /**@section Enum */

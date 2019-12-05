@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Math/Extent.h"
-#include "Platform/Config.h"
 
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLRenderTarget.h"
@@ -15,7 +14,7 @@
 namespace tgon
 {
 
-class RenderTarget final :
+class RenderTarget :
     private PlatformRenderTarget
 {
 /**@section Constructor */

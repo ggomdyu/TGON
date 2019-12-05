@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else

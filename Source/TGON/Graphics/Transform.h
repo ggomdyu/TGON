@@ -8,10 +8,8 @@
 #include <vector>
 #include <memory>
 
-#include "Platform/Config.h"
-#include "Math/Vector3.h"
-#include "Math/Matrix4x4.h"
 #include "Component/Component.h"
+#include "Math/Matrix4x4.h"
 
 namespace tgon
 {

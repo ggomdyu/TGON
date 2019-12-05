@@ -15,26 +15,25 @@
 #include "Core/NonCopyable.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
-#include "Platform/Config.h"
 
 namespace tgon
 {
 
-struct GlyphMetrics final
+struct GlyphMetrics
 {
     I32Extent2D size;
     I32Vector2 bearing;
     I32Vector2 advance;
 };
 
-struct GlyphData final
+struct GlyphData
 {
     char32_t ch;
     GlyphMetrics metrics;
     std::unique_ptr<std::byte[]> bitmap;
 };
 
-class FontFace final :
+class FontFace :
     private NonCopyable
 {
 /**@section Constructor */

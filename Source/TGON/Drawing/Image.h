@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <memory>
 
-#include "Platform/Config.h"
 #include "Math/Extent.h"
 
 namespace tgon

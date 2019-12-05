@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
 #include "Math/Vector2.h"
 
 #if TGON_PLATFORM_WINDOWS
@@ -19,7 +18,7 @@
 namespace tgon
 {
     
-class Mouse final :
+class Mouse :
     private PlatformMouse
 {
 /**@section Constructor */

@@ -10,8 +10,6 @@
 #include <optional>
 #include <gsl/span>
 
-#include "Platform/Config.h"
-
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsPath.h"
 #elif TGON_PLATFORM_MACOS

@@ -37,6 +37,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimeModule.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\GameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\Scene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Camera.cpp" />
@@ -76,10 +77,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Threading\Thread.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\DateTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\FontAtlas.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp" />
@@ -1680,6 +1681,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TaskModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimeModule.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\TimerModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\GameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Game\Scene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Graphics\Camera.h" />
@@ -1759,10 +1762,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeSpan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Time\TimeZoneInfo.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\FontAtlas.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\RectTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIBatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIElement.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIFont.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h" />

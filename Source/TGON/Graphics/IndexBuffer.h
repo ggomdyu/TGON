@@ -8,8 +8,6 @@
 #include <initializer_list>
 #include <gsl/span>
 
-#include "Platform/Config.h"
-
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLIndexBuffer.h"
 #endif
@@ -17,7 +15,7 @@
 namespace tgon
 {
     
-class IndexBuffer final :
+class IndexBuffer :
     private PlatformIndexBuffer
 {
 /**@section Constructor */

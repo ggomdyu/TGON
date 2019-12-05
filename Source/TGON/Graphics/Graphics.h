@@ -8,8 +8,6 @@
 #include "Math/Rect.h"
 #include "Math/Color.h"
 
-#include "Platform/Config.h"
-
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLGraphics.h"
 #endif
@@ -54,7 +52,7 @@ enum class BlendMode
     HardLight,
 };
 
-class Graphics final :
+class Graphics :
     private PlatformGraphics
 {
 /**@section Constructor */

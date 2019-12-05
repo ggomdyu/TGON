@@ -8,7 +8,6 @@
 #include <string_view>
 #include <optional>
 
-#include "Platform/Config.h"
 #include "Text/Encoding.h"
 #include "Time/DateTime.h"
 

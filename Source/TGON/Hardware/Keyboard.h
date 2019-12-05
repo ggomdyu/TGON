@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include "Platform/Config.h"
-
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsKeyboard.h"
 #elif TGON_PLATFORM_MACOS
@@ -18,7 +16,7 @@
 namespace tgon
 {
 
-class Keyboard final :
+class Keyboard :
     private PlatformKeyboard
 {
 /**@section Constructor */

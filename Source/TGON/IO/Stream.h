@@ -7,7 +7,6 @@
 #pragma once
 #include <gsl/span>
 
-#include "Platform/Config.h"
 #include "Core/NonCopyable.h"
 
 namespace tgon

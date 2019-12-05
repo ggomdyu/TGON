@@ -10,8 +10,6 @@
 #include <optional>
 #include <gsl/span>
 
-#include "Platform/Config.h"
-
 #include "Version.h"
 
 namespace tgon
