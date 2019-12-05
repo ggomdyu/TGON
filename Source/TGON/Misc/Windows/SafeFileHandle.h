@@ -6,15 +6,15 @@
 
 #pragma once
 #include <string>
-#include <boost/noncopyable.hpp>
 
+#include "Core/NonCopyable.h"
 #include "Platform/Windows/Windows.h"
 
 namespace tgon
 {
 
 class SafeFileHandle :
-    private boost::noncopyable
+    private NonCopyable
 {
 /**@section Constructor */
 public:
