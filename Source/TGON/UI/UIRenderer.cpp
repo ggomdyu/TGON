@@ -122,7 +122,7 @@ void UIRenderer::FlushSpriteBatches(Graphics& graphics)
 
         m_batches.clear();
 #if DEBUG
-        Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
+//        Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
 #endif
     }
 

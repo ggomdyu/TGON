@@ -24,6 +24,11 @@ void SpriteRendererComponent::SetTextureRect(const FRect& textureRect) noexcept
     m_sprite->SetTextureRect(textureRect);
 }
 
+void SpriteRendererComponent::SetTextureSize(const FExtent2D& textureSize) noexcept
+{
+    m_sprite->SetTextureSize(textureSize);
+}
+
 void SpriteRendererComponent::SetFilterMode(FilterMode filterMode) noexcept
 {
     m_sprite->SetFilterMode(filterMode);
@@ -131,11 +136,7 @@ void SpriteRendererComponent::Update()
         return;
     }
 
-    auto gameObject = m_gameObject.lock();
-    if (gameObject != nullptr)
-    {
-        m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
-    }
+    m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, m_gameObject->GetComponent<Transform>()->GetWorldMatrix());
 }
 
 } /* namespace tgon */

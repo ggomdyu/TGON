@@ -23,8 +23,8 @@ class BasicFixedString
 public:
     using StringTraitsType = _StringTraitsType;
     using ValueType = _CharType;
-    using IteratorType = _CharType*;
-    using ConstIteratorType = const _CharType*;
+    using Iterator = _CharType*;
+    using ConstIterator = const _CharType*;
     using ReferenceType = _CharType&;
     using ConstReferenceType = const _CharType&;
 
@@ -84,10 +84,10 @@ public:
     const _CharType* Data() const noexcept;
     int32_t Length() const noexcept;
     constexpr int32_t Capacity() const noexcept;
-    IteratorType Begin() noexcept;
-    IteratorType End() noexcept;
-    ConstIteratorType CBegin() const noexcept;
-    ConstIteratorType CEnd() const noexcept;
+    Iterator Begin() noexcept;
+    Iterator End() noexcept;
+    ConstIterator CBegin() const noexcept;
+    ConstIterator CEnd() const noexcept;
 
 /**@section Variable */
 protected:
@@ -404,25 +404,25 @@ constexpr int32_t BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Begin() noexcept
+inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Iterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Begin() noexcept
 {
     return m_str.data();
 }
  
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::IteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::End() noexcept
+inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::Iterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::End() noexcept
 {
     return m_str.data() + m_strLen;
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
+inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CBegin() const noexcept
 {
     return m_str.data();
 }
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
-inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIteratorType BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
+inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::ConstIterator BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>::CEnd() const noexcept
 {
     return m_str.data() + m_strLen;
 }

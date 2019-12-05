@@ -16,7 +16,7 @@ TimerModule::TimerModule() noexcept :
 TimerHandle TimerModule::SetTimer(const Delegate<void()>& callback, float interval, bool isLoop)
 {
     auto timerHandle = CreateTimerHandle();
-    m_timerInfos.emplace_back(timerHandle, callback, 0.0f, interval, isLoop);
+    m_timerInfos.push_back(TimerInfo{timerHandle, callback, 0.0f, interval, isLoop, false});
     
     return timerHandle;
 }
@@ -24,7 +24,7 @@ TimerHandle TimerModule::SetTimer(const Delegate<void()>& callback, float interv
 TimerHandle TimerModule::SetTimer(Delegate<void()>&& callback, float interval, bool isLoop)
 {
     auto timerHandle = CreateTimerHandle();
-    m_timerInfos.emplace_back(timerHandle, std::move(callback), 0.0f, interval, isLoop);
+    m_timerInfos.push_back(TimerInfo{timerHandle, callback, 0.0f, interval, isLoop, false});
     
     return timerHandle;
 }
@@ -45,7 +45,7 @@ bool TimerModule::ClearTimer(TimerHandle timerHandle)
     auto iter = this->FindTimerInfo(timerHandle);
     if (iter != m_timerInfos.end())
     {
-        m_timerInfos.erase(iter);
+        iter->isDeleteReserved = true;
         return true;
     }
     else
@@ -70,7 +70,7 @@ std::vector<TimerModule::TimerInfo>::const_iterator TimerModule::FindTimerInfo(T
 TimerHandle TimerModule::CreateTimerHandle() noexcept
 {
     static int64_t rawTimerHandle;
-    return TimerHandle(rawTimerHandle++);
+    return TimerHandle(++rawTimerHandle);
 }
 
 void TimerModule::Update()
@@ -86,7 +86,7 @@ void TimerModule::Update()
         if (timerInfo.elapsedTime >= timerInfo.interval)
         {
             timerInfo.callback();
-            if (timerInfo.isLoop)
+            if (timerInfo.isLoop && timerInfo.isDeleteReserved == false)
             {
                 timerInfo.elapsedTime = 0.0f;
             }

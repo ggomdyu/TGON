@@ -46,12 +46,20 @@ private:
     int32_t m_iterIndex = 0;
 };
 
-TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept :
-    m_rect(rect),
-    m_contentRect(rect.x, rect.y, 0, 0)
+TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
 {
-    // TODO: First of all, we must check whether the text spill over.
+    this->Initialize(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
+}
 
+void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
+{
+    this->Clear();
+    
+    m_rect = rect;
+    m_contentRect = {rect.x, rect.y, 0, 0};
+ 
+    // TODO: First of all, we must check whether the text spill over.
+    
     gsl::span<const char32_t> charactersSpan = characters;
     while (true)
     {
@@ -80,13 +88,6 @@ TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::sha
     {
         this->ProcessTextAlignment(textAlignment);
     }
-}
-
-void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
-{
-    this->Clear();
-    
-    new (this) TextBlock(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
 }
 
 void TextBlock::Clear()

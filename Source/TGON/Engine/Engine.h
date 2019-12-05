@@ -7,11 +7,11 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <unordered_map>
 
 #include "Core/Object.h"
 
-#include "TimeModule.h"
-#include "AudioModule.h"
+#include "Module.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
@@ -40,59 +40,75 @@ public:
     
 /**@section Method */
 public:
+    virtual void Initialize();
+    virtual void Update();
     template <typename _ModuleType, typename... _ArgTypes>
-    std::shared_ptr<_ModuleType> RegisterModule(_ArgTypes&&... args);
-    template <typename _ModuleType>
-    bool UnregisterModule();
+    std::shared_ptr<_ModuleType> AddModule(_ArgTypes&&... args);
     template <typename _ModuleType>
     std::shared_ptr<_ModuleType> FindModule() noexcept;
     template <typename _ModuleType>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
-    virtual void Update();
-    
-/**@section Event handler */
-public:
-    virtual void OnLaunch();
-    virtual void OnTerminate();
-
-/**@section Method */
-private:
-    void RegisterModule(const std::shared_ptr<Module>& module);
-    bool UnregisterModule(size_t moduleId);
-    std::shared_ptr<Module> FindModule(size_t moduleId);
+    template <typename _ModuleType>
+    bool RemoveModule();
 
 /**@section Variable */
 private:
-    std::shared_ptr<TimeModule> m_timeModule;
-    std::shared_ptr<AudioModule> m_audioModule;
     std::vector<std::shared_ptr<Module>> m_modules;
+    std::unordered_map<size_t, std::shared_ptr<Module>> m_moduleDict;
 };
     
 template <typename _ModuleType, typename... _ArgTypes>
-inline std::shared_ptr<_ModuleType> Engine::RegisterModule(_ArgTypes&&... args)
+inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
 {
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     
-    this->RegisterModule(module);
-    return module;
-}
+    m_modules.push_back(module);
+    m_moduleDict.emplace(tgon::GetRTTI<_ModuleType>()->GetHashCode(), module);
     
-template <typename _ModuleType>
-inline bool Engine::UnregisterModule()
-{
-    return this->UnregisterModule(tgon::GetRTTI<_ModuleType>()->GetHashCode());
+    return module;
 }
 
 template <typename _ModuleType>
 inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 {
-    return std::static_pointer_cast<_ModuleType>(this->FindModule(tgon::GetRTTI<_ModuleType>()->GetHashCode()));
+    auto iter = m_moduleDict.find(tgon::GetRTTI<_ModuleType>()->GetHashCode());
+    if (iter == m_moduleDict.end())
+    {
+        return nullptr;
+    }
+    
+    return std::static_pointer_cast<_ModuleType>(iter->second);
 }
 
 template <typename _ModuleType>
 inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 {
-    return const_cast<decltype(this)>(this)->FindModule<_ModuleType>();
+    return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
+
+template <typename _ModuleType>
+inline bool Engine::RemoveModule()
+{
+    // Remove module in unordered_map.
+    auto moduleHashCode = tgon::GetRTTI<_ModuleType>()->GetHashCode();
+    auto dictIter = m_moduleDict.find(moduleHashCode);
+    if (dictIter == m_moduleDict.end())
+    {
+        return false;
+    }
     
+    m_moduleDict.erase(dictIter);
+    
+    auto vecIter = std::find_if(m_modules.begin(), m_modules.end(), [&](const std::shared_ptr<Module>& module)
+    {
+        return moduleHashCode == module->GetRTTI()->GetHashCode();
+    });
+    if (vecIter != m_modules.end())
+    {
+        m_modules.erase(vecIter);
+    }
+    
+    return true;
+}
+
 } /* namespace tgon */

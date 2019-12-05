@@ -13,17 +13,17 @@
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    tgon::Application::OnLaunch();
+    tgon::Application::GetInstance().OnLaunch();
+}
+
+- (void)applicationWillTerminate:(NSNotification*)aNotification
+{
+    tgon::Application::GetInstance().OnTerminate();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
     tgon::Application::GetInstance().MessageLoop();
-}
-
-- (void)applicationWillTerminate:(NSNotification*)aNotification
-{
-    tgon::Application::OnTerminate();
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender

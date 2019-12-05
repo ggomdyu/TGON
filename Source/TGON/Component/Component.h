@@ -21,16 +21,12 @@ public:
 /**@section Constructor */
 public:
     Component() noexcept = default;
-    Component(const std::weak_ptr<GameObject>& gameObject) noexcept;
-
-/**@section Destructor */
-public:
-    ~Component() override = default;
+    Component(const std::shared_ptr<GameObject>& gameObject) noexcept;
 
 /**@section Method */
 public:
     virtual void Update();
-    void SetGameObject(const std::weak_ptr<GameObject>& gameObject) noexcept;
+    void SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept;
     void SetAcitve(bool isActive) noexcept;
     std::shared_ptr<GameObject> GetGameObject() noexcept;
     std::shared_ptr<const GameObject> GetGameObject() const noexcept;
@@ -38,7 +34,7 @@ public:
 
 /**@section Variable */
 protected:
-    std::weak_ptr<GameObject> m_gameObject;
+    std::shared_ptr<GameObject> m_gameObject;
     bool m_isActive;
 };
 

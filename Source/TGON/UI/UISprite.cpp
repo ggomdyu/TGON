@@ -10,6 +10,7 @@ namespace tgon
 UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, Color4f blendColor) noexcept :
     m_texture(texture),
     m_textureRect(FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height))),
+    m_textureSize(texture->GetSize()),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
     m_blendMode(blendMode),
@@ -20,7 +21,13 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMod
 void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_texture = texture;
-    m_textureRect = FRect(0, 0, static_cast<float>(m_texture->GetSize().width), static_cast<float>(m_texture->GetSize().height));
+    m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
+    m_textureRect = FRect(0, 0, m_textureSize.width, m_textureSize.height);
+}
+
+void UISprite::SetTextureSize(const FExtent2D& textureSize) noexcept
+{
+    m_textureSize = textureSize;
 }
 
 void UISprite::SetTextureRect(const FRect& textureRect) noexcept
@@ -126,7 +133,7 @@ void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWor
         batches->push_back(batch);
     }
 
-    batches->back().Merge(m_textureRect, m_pivot, m_blendColor, matWorld, vertices);
+    batches->back().Merge(m_textureRect, m_textureSize, m_pivot, m_blendColor, matWorld, vertices);
 }
 
 } /* namespace tgon */

@@ -26,6 +26,7 @@ public:
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect) noexcept;
+    void SetTextureSize(const FExtent2D& textureSize) noexcept;
     void SetFilterMode(FilterMode filterMode) noexcept;
     void SetWrapMode(WrapMode wrapMode) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;

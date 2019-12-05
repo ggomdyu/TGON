@@ -19,11 +19,7 @@ public:
     Font(const std::vector<std::byte>& fileData, FT_Library library);
     Font(std::vector<std::byte>&& fileData, FT_Library library);
     Font(Font&& rhs) noexcept;
-    
-/**@section Destructor */
-public:
-    ~Font() = default;
-    
+
 /**@section Operator */
 public:
     Font& operator=(Font&& rhs) noexcept;

@@ -27,43 +27,43 @@ struct UUID :
 {
 /**@section Type */
 private:
-    using SuperType = BasicFixedString<char, 37>;
+    using Super = BasicFixedString<char, 37>;
 
 public:
     using ValueType = char;
-    using ConstReferenceType = const char&;
-    using ConstIteratorType = const char*;
-    using ConstPointerType = const char*;
-    using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
+    using ConstReference = const char&;
+    using ConstIterator = const char*;
+    using ConstPointer = const char*;
+    using ConstReverseIterator = std::reverse_iterator<ConstIterator>;
     
 /**@section Constructor */
 private:
-    using SuperType::SuperType;
+    using Super::Super;
 
 /**@section Operator */
 public:
-    using SuperType::operator=;
-    using SuperType::operator!=;
-    using SuperType::operator==;
-    using SuperType::operator std::basic_string<char>;
-    using SuperType::operator std::basic_string_view<char>;
+    using Super::operator=;
+    using Super::operator!=;
+    using Super::operator==;
+    using Super::operator std::basic_string<char>;
+    using Super::operator std::basic_string_view<char>;
     const char operator[](int32_t index) const;
     
 /**@section Method */
 public:
     static UUID NewUUID();
-    ConstIteratorType Begin() const noexcept;
-    ConstIteratorType End() const noexcept;
-    using SuperType::CompareTo;
-    using SuperType::IndexOf;
-    using SuperType::IndexOfAny;
-    using SuperType::LastIndexOf;
-    using SuperType::LastIndexOfAny;
-    using SuperType::Data;
-    using SuperType::Length;
-    using SuperType::Capacity;
-    using SuperType::CBegin;
-    using SuperType::CEnd;
+    ConstIterator Begin() const noexcept;
+    ConstIterator End() const noexcept;
+    using Super::CompareTo;
+    using Super::IndexOf;
+    using Super::IndexOfAny;
+    using Super::LastIndexOf;
+    using Super::LastIndexOfAny;
+    using Super::Data;
+    using Super::Length;
+    using Super::Capacity;
+    using Super::CBegin;
+    using Super::CEnd;
 };
 
 inline UUID UUID::NewUUID()
@@ -88,19 +88,19 @@ inline UUID UUID::NewUUID()
     return ret;
 }
     
-inline UUID::ConstIteratorType UUID::Begin() const noexcept
+inline UUID::ConstIterator UUID::Begin() const noexcept
 {
     return this->CBegin();
 }
 
-inline UUID::ConstIteratorType UUID::End() const noexcept
+inline UUID::ConstIterator UUID::End() const noexcept
 {
     return this->CEnd();
 }
    
 inline const char UUID::operator[](int32_t index) const
 {
-    return SuperType::operator[](index);
+    return Super::operator[](index);
 }
 
 } /* namespace tgon */

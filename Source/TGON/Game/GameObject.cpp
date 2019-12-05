@@ -6,17 +6,20 @@
 
 namespace tgon
 {
-
-GameObject::GameObject() :
-    GameObject(StringHash())
+                                             
+GameObject::GameObject(const StringHash& name, const std::shared_ptr<Transform>& transform) :
+    Object(name),
+    m_isActive(true),
+    m_transform(transform)
 {
 }
 
-GameObject::GameObject(const StringHash& name) :
-    Object(name),
-    m_isActive(true),
-    m_transform(std::make_shared<Transform>(this->weak_from_this()))
+void GameObject::Initialize()
 {
+    if (m_transform != nullptr)
+    {
+        m_transform->SetGameObject(this->shared_from_this());
+    }
 }
 
 void GameObject::Update()
@@ -25,12 +28,27 @@ void GameObject::Update()
     {
         return;
     }
-
-    m_transform->Update();
-
-    for (auto& component : m_components)
+    
+    if (m_transform != nullptr)
     {
-        component->Update();
+        m_transform->Update();
+
+        for (auto& component : m_components)
+        {
+            component->Update();
+        }
+        
+        for (auto& child : m_transform->GetChildren())
+        {
+            child->GetGameObject()->Update();
+        }
+    }
+    else
+    {
+        for (auto& component : m_components)
+        {
+            component->Update();
+        }
     }
 }
 
@@ -54,14 +72,14 @@ std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
     return m_transform;
 }
 
-bool GameObject::RemoveComponent(size_t key)
+bool GameObject::RemoveComponent(size_t componentId)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
     
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), key, predicate);
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
     if (iter != m_components.end())
     {
         m_components.erase(iter);
@@ -73,14 +91,14 @@ bool GameObject::RemoveComponent(size_t key)
     }
 }
 
-std::shared_ptr<Component> GameObject::GetComponent(size_t key)
+std::shared_ptr<Component> GameObject::GetComponent(size_t componentId)
 {
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     };
     
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), key, predicate);
+    auto iter = std::lower_bound(m_components.begin(), m_components.end(), componentId, predicate);
     if (iter != m_components.end())
     {
         return *iter;

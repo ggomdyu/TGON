@@ -8,7 +8,7 @@
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 
-#include "Graphics/Transform.h"
+#include "Component/Transform.h"
 
 namespace tgon
 {

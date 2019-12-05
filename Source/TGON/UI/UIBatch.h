@@ -25,7 +25,7 @@ public:
 public:
     bool CanBatch(const UIBatch& rhs) const noexcept;
     void Merge(float x, float y, const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices);
-    void Merge(const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices);
+    void Merge(const FRect& textureRect, const FExtent2D& textureSize, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices);
     void FlushBatch(Graphics& graphics);
     
 /**@section Variable */

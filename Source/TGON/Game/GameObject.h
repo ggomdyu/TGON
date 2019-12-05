@@ -8,8 +8,7 @@
 #include <vector>
 
 #include "Core/Object.h"
-#include "Graphics/Transform.h"
-#include "Component/Component.h"
+#include "Component/Transform.h"
 
 namespace tgon
 {
@@ -23,15 +22,11 @@ public:
 
 /**@section Constructor */
 public:
-    GameObject();
-    explicit GameObject(const StringHash& name);
-
-/**@section Destructor */
-public:
-    ~GameObject() override = default;
+    GameObject(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>());
 
 /**@section Method */
 public:
+    virtual void Initialize();
     virtual void Update();
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
@@ -47,8 +42,8 @@ public:
     std::shared_ptr<const Transform> GetTransform() const noexcept;
 
 private:
-    bool RemoveComponent(size_t key);
-    std::shared_ptr<Component> GetComponent(size_t key);
+    bool RemoveComponent(size_t componentId);
+    std::shared_ptr<Component> GetComponent(size_t componentId);
 
 /**@section Variable */
 private:
@@ -61,13 +56,12 @@ template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
 {
     auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
-    component->SetGameObject(this->weak_from_this());
+    component->SetGameObject(this->shared_from_this());
 
-    auto iter = std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
+    m_components.insert(std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
-    });
-    m_components.insert(iter, component);
+    }), component);
 
     return component;
 }
@@ -75,8 +69,7 @@ inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... a
 template <typename _ComponentType>
 inline bool GameObject::RemoveComponent()
 {
-    auto componentId = tgon::GetRTTI<_ComponentType>()->GetHashCode();
-    return this->RemoveComponent(componentId);
+    return this->RemoveComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode());
 }
 
 template <typename _ComponentType>
@@ -88,8 +81,8 @@ inline std::shared_ptr<const _ComponentType> GameObject::GetComponent() const
 template <typename _ComponentType>
 inline std::shared_ptr<_ComponentType> GameObject::GetComponent()
 {
-    auto componentId = tgon::GetRTTI<_ComponentType>()->GetHashCode();
-    return std::static_pointer_cast<_ComponentType>(GetComponent(componentId));
+    auto component = this->GetComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode());
+    return std::static_pointer_cast<_ComponentType>(component);
 }
 
 template <>

@@ -6,10 +6,9 @@
  */
 
 #pragma once
-#include <boost/predef/compiler.h>
 
 #ifndef TGON_THREAD_LOCAL
-#	if BOOST_COMP_MSVC_DETECTION
+#	if TGON_COMPILER_MSVC
 #		if (_MSC_VER >= 1900)
 #			define TGON_THREAD_LOCAL thread_local
 #		else
@@ -23,7 +22,7 @@
 #endif
 
 #ifndef TGON_NOVTABLE
-#   ifdef BOOST_COMP_MSVC_DETECTION
+#   ifdef TGON_COMPILER_MSVC
 #   	define TGON_NOVTABLE __declspec(novtable)
 #   else
 #       define TGON_NOVTABLE
@@ -34,9 +33,9 @@
 #   if __cplusplus > 199711L
 #		define TGON_DEPRECATED(message) [[deprecated(#message)]]
 #   else
-#   	if BOOST_COMP_MSVC_DETECTION
+#   	if TGON_COMPILER_MSVC
 #   		define TGON_DEPRECATED(message) __declspec(deprecated(a))
-#   	elif BOOST_COMP_GNUC_DETECTION
+#   	elif TGON_COMPILER_GNUC
 #   		define TGON_DEPRECATED(message) __attribute__((__deprecated__))
 #   	else
 #   		define TGON_DEPRECATED(message)
@@ -45,15 +44,15 @@
 #endif
 
 #ifndef TGON_CDECL
-#   if BOOST_COMP_MSVC_DETECTION
+#   if TGON_COMPILER_MSVC
 #      define TGON_CDECL __cdecl
-#   elif BOOST_COMP_GNUC_DETECTION
+#   elif TGON_COMPILER_GNUC
 #      define TGON_CDECL __attribute__((__cdecl__))
 #   endif
 #endif
 
 #ifndef TGON_RESTRICT
-#   if BOOST_COMP_MSVC_DETECTION
+#   if TGON_COMPILER_MSVC
 #       define TGON_RESTRICT __restrict
 #   else
 #       define TGON_RESTRICT restrict

@@ -10,8 +10,6 @@
 #include <vector>
 #include <gsl/span>
 
-#include "Platform/Config.h"
-
 #include "DirectoryInfo.h"
 #include "File.h"
 #include "FileSystemEnumerable.h"

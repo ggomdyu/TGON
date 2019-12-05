@@ -106,10 +106,8 @@ void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& p
     newVertices[5] = newVertices[0];
 }
     
-void UIBatch::Merge(const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
+void UIBatch::Merge(const FRect& textureRect, const FExtent2D& textureSize, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)
 {
-    decltype(auto) textureSize = m_texture->GetSize();
-    
     float leftUV = textureRect.x / textureSize.width;
     float rightUV = (textureRect.x + textureRect.width) / textureSize.width;
 #if TGON_GRAPHICS_OPENGL
@@ -119,10 +117,10 @@ void UIBatch::Merge(const FRect& textureRect, const Vector2& pivot, const Color4
     float topUV = (textureRect.y + textureRect.height) / textureSize.height;
     float bottomUV = textureRect.y / textureSize.height;
 #endif
-    float halfWidth = textureRect.width * 0.5f;
-    float halfHeight = textureRect.height * 0.5f;
-    float xOffset = -textureRect.width * (pivot.x - 0.5f);
-    float yOffset = textureRect.height * (pivot.y - 0.5f);
+    float halfWidth = textureSize.width * 0.5f;
+    float halfHeight = textureSize.height * 0.5f;
+    float xOffset = -textureSize.width * (pivot.x - 0.5f);
+    float yOffset = textureSize.height * (pivot.y - 0.5f);
 
     int32_t oldVertexEndOffset = m_vertexEndOffset;
     int32_t expandSize = sizeof(V3F_C4F_T2F) / 4 * 6;

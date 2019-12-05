@@ -23,11 +23,6 @@ template <typename _KeyType>
 class BasicTextureAtlas :
     private NonCopyable
 {
-/**@section Type */
-public:
-    using IteratorType = std::unordered_map<size_t, I32Rect>::iterator;
-    using ConstIteratorType = std::unordered_map<size_t, I32Rect>::const_iterator;
-    
 /**@section Constructor */
 public:
     BasicTextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = 2);
@@ -41,6 +36,7 @@ public:
 public:
     static std::optional<BasicTextureAtlas> Load(const std::string_view& path);
     bool Insert(_KeyType key, std::byte* imageData, const I32Extent2D& size);
+    bool Contains(_KeyType key);
     std::optional<std::reference_wrapper<FRect>> GetTextureRect(_KeyType key) const;
     int32_t GetTextureCount() const noexcept;
     int32_t GetPaddingOffset() const noexcept;
@@ -117,6 +113,12 @@ inline bool BasicTextureAtlas<_KeyType>::Insert(_KeyType key, std::byte* imageDa
     }
 
     return false;
+}
+
+template <typename _KeyType>
+inline bool BasicTextureAtlas<_KeyType>::Contains(_KeyType key)
+{
+    return m_packedTextureInfos.find(key) != m_packedTextureInfos.end();
 }
 
 template <typename _KeyType>
