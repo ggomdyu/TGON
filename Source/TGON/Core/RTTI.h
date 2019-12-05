@@ -44,7 +44,7 @@ inline typename std::enable_if<IsPure<_Type>, const RTTI*>::type GetRTTI()
 {
     using PureType = Pure<_Type>;
 
-    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::SuperType>());
+    static const RTTI rtti(typeid(PureType), GetRTTI<typename PureType::Super>());
     return &rtti;
 }
 

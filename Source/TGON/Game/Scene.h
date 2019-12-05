@@ -41,9 +41,9 @@ public:
 /**@section Variable */
 private:
     std::vector<std::shared_ptr<GameObject>> m_objects;
-    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_objectHashMap;
-    static std::vector<std::shared_ptr<GameObject>> m_globalObjects;
-    static std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_globalObjectHashMap;
+    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_objectDict;
+    inline static std::vector<std::shared_ptr<GameObject>> m_globalObjects;
+    inline static std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_globalObjectDict;
 };
 
 } /* namespace tgon */

@@ -32,14 +32,6 @@ enum class AudioFormat
     Opus,
 };
 
-enum class AudioSampleFormat
-{
-    Mono8 = AL_FORMAT_MONO8,
-    Mono16 = AL_FORMAT_MONO16,
-    Stereo8 = AL_FORMAT_STEREO8,
-    Stereo16 = AL_FORMAT_STEREO16,
-};
-
 class AudioBuffer :
     private NonCopyable
 {

@@ -1,11 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #include <vector>
-#if TGON_PLATFORM_MACOS
-#   include <OpenAL/alc.h>
-#else
-#   include <alc.h>
-#endif
 
 #include "Diagnostics/Debug.h"
 #include "Importer/WavAudioImporter.h"

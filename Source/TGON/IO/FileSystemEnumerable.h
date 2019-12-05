@@ -46,37 +46,37 @@ public:
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const _HandlerType& handler)
 {
-    EnumerateDirectories(path, "*", handler);
+    FileSystemEnumerable::EnumerateDirectories(path, "*", handler);
 }
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const char* searchPattern, const _HandlerType& handler)
 {
-    EnumerateDirectories(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateDirectories(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
 }
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateFiles(const char* path, const _HandlerType& handler)
 {
-    EnumerateFiles(path, "*", handler);
+    FileSystemEnumerable::EnumerateFiles(path, "*", handler);
 }
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateFiles(const char* path, const char* searchPattern, const _HandlerType& handler)
 {
-    EnumerateFiles(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateFiles(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
 }
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, const _HandlerType& handler)
 {
-    EnumerateFileSystemEntries(path, "*", handler);
+    FileSystemEnumerable::EnumerateFileSystemEntries(path, "*", handler);
 }
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, const char* searchPattern, const _HandlerType& handler)
 {
-    EnumerateFileSystemEntries(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
+    FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
 }
 
 } /* namespace tgon */

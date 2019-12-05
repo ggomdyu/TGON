@@ -24,7 +24,7 @@ namespace tgon
 {
     
 template <typename _ValueType>
-struct BasicVector2 final
+struct BasicVector2
 {
 /**@section Constructor */
 public:

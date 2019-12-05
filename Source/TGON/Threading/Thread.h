@@ -25,12 +25,12 @@ class Thread :
 {
 /**@section Type */
 public:
-    using SuperType = std::thread;
+    using Super = std::thread;
     using ThreadId = std::thread::id;
 
 /**@section Constructor */
 public:
-    using SuperType::SuperType;
+    using Super::Super;
 
 /**@section Method */
 public:

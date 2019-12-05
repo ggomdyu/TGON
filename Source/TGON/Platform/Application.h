@@ -54,8 +54,8 @@ public:
     
 /**@section Event Handler */
 public:
-    static void OnLaunch();
-    static void OnTerminate();
+    void OnLaunch();
+    void OnTerminate();
     
 /**@section Variable */
 protected:

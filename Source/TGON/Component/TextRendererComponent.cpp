@@ -1,10 +1,8 @@
 #include "PrecompiledHeader.h"
 
-#include "Game/GameObject.h"
-#include "Engine/GraphicsModule.h"
-
 #include "Platform/Application.h"
 #include "Engine/AssetModule.h"
+#include "Game/GameObject.h"
 
 #include "TextRendererComponent.h"
 
@@ -115,11 +113,7 @@ void TextRendererComponent::Update()
         return;
     }
     
-    auto gameObject = m_gameObject.lock();
-    if (gameObject != nullptr)
-    {
-        m_graphicsModule->GetUIRenderer().AddUIElement(m_text, m_sortingLayer, gameObject->GetComponent<Transform>()->GetWorldMatrix());
-    }
+    m_graphicsModule->GetUIRenderer().AddUIElement(m_text, m_sortingLayer, m_gameObject->GetComponent<Transform>()->GetWorldMatrix());
 }
 
 } /* namespace tgon */

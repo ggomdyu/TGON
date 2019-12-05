@@ -28,6 +28,7 @@ public:
 public:
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect) noexcept;
+    void SetTextureSize(const FExtent2D& textureSize) noexcept;
     void SetFilterMode(FilterMode filterMode) noexcept;
     void SetWrapMode(WrapMode wrapMode) noexcept;
     void SetBlendMode(BlendMode blendMode) noexcept;
@@ -52,6 +53,7 @@ public:
 private:
     std::shared_ptr<Texture> m_texture;
     FRect m_textureRect;
+    FExtent2D m_textureSize;
     FilterMode m_filterMode = FilterMode::Bilinear;
     WrapMode m_wrapMode = WrapMode::Clamp;
     BlendMode m_blendMode = BlendMode::Normal;

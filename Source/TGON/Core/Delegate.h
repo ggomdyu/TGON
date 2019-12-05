@@ -22,8 +22,8 @@ class Delegate<_ReturnType(_ArgTypes...)> final
 {
 /**@section Type */
 private:
-    using DeleterType = size_t(*)(void*);
-    using StubType = _ReturnType(*)(void*, _ArgTypes...);
+    using Deleter = size_t(*)(void*);
+    using Stub = _ReturnType(*)(void*, _ArgTypes...);
     
 public:
     using ReturnType = _ReturnType;
@@ -32,8 +32,8 @@ public:
 public:
     constexpr Delegate() noexcept;
     constexpr Delegate(std::nullptr_t) noexcept;
-    constexpr Delegate(void* receiver, StubType stub) noexcept;
-    constexpr Delegate(void* receiver, StubType stub, DeleterType deleter) noexcept;
+    constexpr Delegate(void* receiver, Stub stub) noexcept;
+    constexpr Delegate(void* receiver, Stub stub, Deleter deleter) noexcept;
     template <typename _FunctionType>
     Delegate(_FunctionType function);
     Delegate(const Delegate& rhs);
@@ -89,8 +89,8 @@ private:
 /**@section Variable */
 private:
     void* m_ptr;
-    DeleterType m_deleter;
-    StubType m_stub;
+    Deleter m_deleter;
+    Stub m_stub;
 };
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -108,7 +108,7 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType stub) noexcept :
+constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, Stub stub) noexcept :
     m_ptr(receiver),
     m_deleter(nullptr),
     m_stub(stub)
@@ -116,7 +116,7 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, StubType stub, DeleterType deleter) noexcept :
+constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, Stub stub, Deleter deleter) noexcept :
     m_ptr(receiver),
     m_deleter(deleter),
     m_stub(stub)

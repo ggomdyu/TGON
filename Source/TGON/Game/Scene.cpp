@@ -5,37 +5,34 @@
 namespace tgon
 {
 
-std::vector<std::shared_ptr<GameObject>> Scene::m_globalObjects;
-std::unordered_map<StringHash, std::shared_ptr<GameObject>> Scene::m_globalObjectHashMap;
-
 void Scene::AddObject(const std::shared_ptr<GameObject>& object)
-{
-    m_objectHashMap.emplace(object->GetName(), object);
+{   
+    m_objectDict.emplace(object->GetName(), object);
     m_objects.push_back(object);
 }
 
 void Scene::AddObject(std::shared_ptr<GameObject>&& object)
 {
-    m_objectHashMap.emplace(object->GetName(), object);
+    m_objectDict.emplace(object->GetName(), object);
     m_objects.push_back(std::move(object));
 }
 
 void Scene::AddGlobalObject(const std::shared_ptr<GameObject>& object)
 {
-    m_globalObjectHashMap.emplace(object->GetName(), object);
+    m_globalObjectDict.emplace(object->GetName(), object);
     m_globalObjects.push_back(object);
 }
 
 void Scene::AddGlobalObject(std::shared_ptr<GameObject>&& object)
 {
-    m_globalObjectHashMap.emplace(object->GetName(), object);
+    m_globalObjectDict.emplace(object->GetName(), object);
     m_globalObjects.push_back(std::move(object));
 }
 
 std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName)
 {
-    auto iter = m_objectHashMap.find(objectName);
-    if (m_objectHashMap.end() == iter)
+    auto iter = m_objectDict.find(objectName);
+    if (m_objectDict.end() == iter)
     {
         return nullptr;
     }
@@ -50,8 +47,8 @@ std::shared_ptr<const GameObject> Scene::FindObject(const StringViewHash& object
 
 std::shared_ptr<GameObject> Scene::FindGlobalObject(const StringViewHash& objectName)
 {
-    auto iter = m_globalObjectHashMap.find(objectName);
-    if (m_globalObjectHashMap.end() == iter)
+    auto iter = m_globalObjectDict.find(objectName);
+    if (m_globalObjectDict.end() == iter)
     {
         return nullptr;
     }
@@ -66,7 +63,7 @@ bool Scene::RemoveObject(const StringViewHash& objectName)
         return objectName == item->GetName();
     }));
     
-    m_objectHashMap.erase(objectName);
+    m_objectDict.erase(objectName);
     return true;
 }
 
@@ -77,7 +74,7 @@ bool Scene::RemoveGlobalObject(const StringViewHash& objectName)
         return objectName == item->GetName();
     }));
     
-    m_globalObjectHashMap.erase(objectName);
+    m_globalObjectDict.erase(objectName);
     return true;
 }
 

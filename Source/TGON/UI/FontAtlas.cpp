@@ -55,7 +55,7 @@ const GlyphData& FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
 {
     decltype(auto) glyphData = m_font->GetGlyphData(ch, fontSize);
     
-    if (m_textureAtlas.Find(ch) == false)
+    if (m_textureAtlas.Contains(ch) == false)
     {
         m_textureAtlas.Insert(ch, &glyphData.bitmap[0], glyphData.metrics.size);
     }

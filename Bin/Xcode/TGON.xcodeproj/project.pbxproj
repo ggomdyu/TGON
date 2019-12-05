@@ -18,6 +18,8 @@
 		8C3DA3A0239421DF004A24E4 /* TimerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA39E239421DF004A24E4 /* TimerModule.h */; };
 		8C3DA3A1239421DF004A24E4 /* TimerModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C3DA39F239421DF004A24E4 /* TimerModule.cpp */; };
 		8C3DA3A3239518D3004A24E4 /* TimerHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA3A2239518D3004A24E4 /* TimerHandle.h */; };
+		8C5045602398C90800B4E5BA /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C50455E2398C90700B4E5BA /* Transform.cpp */; };
+		8C5045612398C90800B4E5BA /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C50455F2398C90800B4E5BA /* Transform.h */; };
 		8C59E307232EB42700EBE199 /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E306232EB42700EBE199 /* Encoding.cpp */; };
 		8C59E309232EB44000EBE199 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E308232EB44000EBE199 /* Random.cpp */; };
 		8C59E30B2330014700EBE199 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30A2330014700EBE199 /* Environment.cpp */; };
@@ -82,12 +84,10 @@
 		FD2D6D0822D064410087DF85 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */; };
 		FD2D6D0922D064410087DF85 /* RenderTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE822D0643E0087DF85 /* RenderTarget.h */; };
 		FD2D6D0A22D064410087DF85 /* VertexFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CE922D0643E0087DF85 /* VertexFormat.h */; };
-		FD2D6D0C22D064410087DF85 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CEB22D0643E0087DF85 /* Transform.cpp */; };
 		FD2D6D1122D064410087DF85 /* RenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */; };
 		FD2D6D1222D064410087DF85 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF122D0643F0087DF85 /* Material.h */; };
 		FD2D6D1322D064410087DF85 /* ShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF222D0643F0087DF85 /* ShaderProgram.h */; };
 		FD2D6D1422D064410087DF85 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF322D0643F0087DF85 /* Texture.cpp */; };
-		FD2D6D1622D064410087DF85 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF522D064400087DF85 /* Transform.h */; };
 		FD2D6D1722D064410087DF85 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF622D064400087DF85 /* Mesh.cpp */; };
 		FD2D6D1822D064410087DF85 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2D6CF722D064400087DF85 /* Mesh.h */; };
 		FD2D6D1922D064410087DF85 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD2D6CF822D064400087DF85 /* Camera.cpp */; };
@@ -801,6 +801,8 @@
 		8C3DA39F239421DF004A24E4 /* TimerModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerModule.cpp; sourceTree = "<group>"; };
 		8C3DA3A2239518D3004A24E4 /* TimerHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHandle.h; sourceTree = "<group>"; };
 		8C439484236FC666009911B1 /* UnixPath.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixPath.inl; sourceTree = "<group>"; };
+		8C50455E2398C90700B4E5BA /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transform.cpp; path = ../../../Source/TGON/Component/Transform.cpp; sourceTree = "<group>"; };
+		8C50455F2398C90800B4E5BA /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = ../../../Source/TGON/Component/Transform.h; sourceTree = "<group>"; };
 		8C59E306232EB42700EBE199 /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoding.cpp; sourceTree = "<group>"; };
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		8C59E30A2330014700EBE199 /* Environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Environment.cpp; sourceTree = "<group>"; };
@@ -881,12 +883,10 @@
 		FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = TextureAtlas.cpp; sourceTree = "<group>"; };
 		FD2D6CE822D0643E0087DF85 /* RenderTarget.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = RenderTarget.h; sourceTree = "<group>"; };
 		FD2D6CE922D0643E0087DF85 /* VertexFormat.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = VertexFormat.h; sourceTree = "<group>"; };
-		FD2D6CEB22D0643E0087DF85 /* Transform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Transform.cpp; sourceTree = "<group>"; };
 		FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RenderTarget.cpp; sourceTree = "<group>"; };
 		FD2D6CF122D0643F0087DF85 /* Material.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Material.h; sourceTree = "<group>"; };
 		FD2D6CF222D0643F0087DF85 /* ShaderProgram.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ShaderProgram.h; sourceTree = "<group>"; };
 		FD2D6CF322D0643F0087DF85 /* Texture.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Texture.cpp; sourceTree = "<group>"; };
-		FD2D6CF522D064400087DF85 /* Transform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Transform.h; sourceTree = "<group>"; };
 		FD2D6CF622D064400087DF85 /* Mesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Mesh.cpp; sourceTree = "<group>"; };
 		FD2D6CF722D064400087DF85 /* Mesh.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Mesh.h; sourceTree = "<group>"; };
 		FD2D6CF822D064400087DF85 /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Camera.cpp; sourceTree = "<group>"; };
@@ -1832,6 +1832,8 @@
 				8CF8A195234A438800763883 /* CameraComponent.h */,
 				8CF8A192234A438700763883 /* Component.cpp */,
 				8CF8A18B234A438600763883 /* Component.h */,
+				8C50455E2398C90700B4E5BA /* Transform.cpp */,
+				8C50455F2398C90800B4E5BA /* Transform.h */,
 				8CF8A18C234A438700763883 /* RendererComponent.cpp */,
 				8CF8A18F234A438700763883 /* RendererComponent.h */,
 				8CF8A18E234A438700763883 /* SpriteRendererComponent.cpp */,
@@ -2709,8 +2711,6 @@
 				FD2D6CFA22D064400087DF85 /* Texture.h */,
 				FD2D6CE722D0643E0087DF85 /* TextureAtlas.cpp */,
 				FD2D6CFC22D064400087DF85 /* TextureAtlas.h */,
-				FD2D6CEB22D0643E0087DF85 /* Transform.cpp */,
-				FD2D6CF522D064400087DF85 /* Transform.h */,
 				FD2D6CE022D0643D0087DF85 /* VertexBuffer.cpp */,
 				FD2D6CE622D0643E0087DF85 /* VertexBuffer.h */,
 				8CB5BB1A23460D900032F332 /* VideoMode.h */,
@@ -3707,7 +3707,6 @@
 				FD5332E822A2EA1C001EB57C /* ftrender.h in Headers */,
 				FDE1B5B022E40FDB0093FDC1 /* utext.h in Headers */,
 				8CF8A17E234A435100763883 /* RuntimeObject.h in Headers */,
-				FD2D6D1622D064410087DF85 /* Transform.h in Headers */,
 				8C012C0A23073AE900285F74 /* Stream.h in Headers */,
 				FD5332E722A2EA1C001EB57C /* ftbdf.h in Headers */,
 				FDE1B67022E4100F0093FDC1 /* unistrappender.h in Headers */,
@@ -3731,6 +3730,7 @@
 				FD5332D922A2EA1C001EB57C /* ftchapters.h in Headers */,
 				FDE1B5C922E40FDB0093FDC1 /* unifunct.h in Headers */,
 				FDE1B69622E4100F0093FDC1 /* sprpimpl.h in Headers */,
+				8C5045612398C90800B4E5BA /* Transform.h in Headers */,
 				FDE1B68D22E4100F0093FDC1 /* rbbisetb.h in Headers */,
 				FD53332D22A57F38001EB57C /* inffast.h in Headers */,
 				FD5332DB22A2EA1C001EB57C /* ftlzw.h in Headers */,
@@ -4225,6 +4225,7 @@
 				FDE1B4C322E40E940093FDC1 /* dictionarydata.cpp in Sources */,
 				FDE1B48D22E40E940093FDC1 /* servslkf.cpp in Sources */,
 				FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */,
+				8C5045602398C90800B4E5BA /* Transform.cpp in Sources */,
 				FDE1B51222E40E950093FDC1 /* unifilt.cpp in Sources */,
 				FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */,
 				FDE1B51922E40E950093FDC1 /* locdispnames.cpp in Sources */,
@@ -4314,7 +4315,6 @@
 				FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */,
 				FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */,
 				FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */,
-				FD2D6D0C22D064410087DF85 /* Transform.cpp in Sources */,
 				FD4C1DE3219F3F7D00B2B2BE /* GainputNetListener.cpp in Sources */,
 				FD4C1DE4219F3F7D00B2B2BE /* GainputMemoryStream.cpp in Sources */,
 				FDE1B4D322E40E940093FDC1 /* locdspnm.cpp in Sources */,

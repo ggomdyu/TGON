@@ -56,20 +56,12 @@ const PlatformApplication& Application::GetPlatformDependency() const noexcept
     
 void Application::OnLaunch()
 {
-    auto engine = GetEngine();
-    if (engine)
-    {
-        engine->OnLaunch();
-    }
+    m_engine->Initialize();
 }
 
 void Application::OnTerminate()
 {
-    auto engine = GetEngine();
-    if (engine)
-    {
-        engine->OnTerminate();
-    }
+    m_engine.reset();
 }
 
 } /* namespace tgon */

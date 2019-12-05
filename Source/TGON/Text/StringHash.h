@@ -39,10 +39,10 @@ class BasicStringHash
 public:
     using StringType = std::conditional_t<IsCharPointer<_StringType>, std::string_view, _StringType>;
     using ValueType = RemoveCvref<decltype(_StringType()[0])>;
-    using IteratorType = ValueType*;
-    using ConstIteratorType = const ValueType*;
-    using ReverseIteratorType = std::reverse_iterator<IteratorType>;
-    using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
+    using Iterator = ValueType*;
+    using ConstIterator = const ValueType*;
+    using ReverseIterator = std::reverse_iterator<Iterator>;
+    using ConstReverseIterator = std::reverse_iterator<ConstIterator>;
 
 /**@section Constructor */
 public:
@@ -96,10 +96,10 @@ public:
     int32_t LastIndexOfAny(const _PredicateType& predicate, int32_t startIndex) const;
     constexpr const ValueType* Data() const noexcept;
     constexpr const int32_t Length() const noexcept;
-    constexpr IteratorType Begin() noexcept;
-    constexpr IteratorType End() noexcept;
-    constexpr ConstIteratorType CBegin() const noexcept;
-    constexpr ConstIteratorType CEnd() const noexcept;
+    constexpr Iterator Begin() noexcept;
+    constexpr Iterator End() noexcept;
+    constexpr ConstIterator CBegin() const noexcept;
+    constexpr ConstIterator CEnd() const noexcept;
     constexpr size_t GetHashCode() const noexcept;
 
 /**@section Variable */
@@ -347,25 +347,25 @@ constexpr const int32_t BasicStringHash<_StringType>::Length() const noexcept
 }
 
 template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::IteratorType BasicStringHash<_StringType>::Begin() noexcept
+constexpr typename BasicStringHash<_StringType>::Iterator BasicStringHash<_StringType>::Begin() noexcept
 {
     return &this->Data()[0];
 }
 
 template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::IteratorType BasicStringHash<_StringType>::End() noexcept
+constexpr typename BasicStringHash<_StringType>::Iterator BasicStringHash<_StringType>::End() noexcept
 {
     return &this->Data()[0] + this->Length();
 }
 
 template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ConstIteratorType BasicStringHash<_StringType>::CBegin() const noexcept
+constexpr typename BasicStringHash<_StringType>::ConstIterator BasicStringHash<_StringType>::CBegin() const noexcept
 {
     return this->Begin();
 }
 
 template <typename _StringType>
-constexpr typename BasicStringHash<_StringType>::ConstIteratorType BasicStringHash<_StringType>::CEnd() const noexcept
+constexpr typename BasicStringHash<_StringType>::ConstIterator BasicStringHash<_StringType>::CEnd() const noexcept
 {
     return this->End();
 }

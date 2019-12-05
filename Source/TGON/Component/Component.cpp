@@ -7,9 +7,8 @@
 namespace tgon
 {
 
-Component::Component(const std::weak_ptr<GameObject>& gameObject) noexcept :
-    m_gameObject(gameObject),
-    m_isActive(true)
+Component::Component(const std::shared_ptr<GameObject>& gameObject) noexcept :
+    m_gameObject(gameObject)
 {
 }
 
@@ -17,19 +16,19 @@ void Component::Update()
 {
 }
     
-void Component::SetGameObject(const std::weak_ptr<GameObject>& gameObject) noexcept
+void Component::SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept
 {
     m_gameObject = gameObject;
 }
 
 std::shared_ptr<GameObject> Component::GetGameObject() noexcept
 {
-    return m_gameObject.lock();
+    return m_gameObject;
 }
 
 std::shared_ptr<const GameObject> Component::GetGameObject() const noexcept
 {
-    return m_gameObject.lock();
+    return m_gameObject;
 }
 
 void Component::SetAcitve(bool isActive) noexcept

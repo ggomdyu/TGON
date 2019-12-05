@@ -15,83 +15,83 @@ class Range
 {
 /**@section Type */
 public:
-    using IteratorType = _ValueType*;
-    using ConstIteratorType = const _ValueType*;
-    using ReverseIteratorType = std::reverse_iterator<IteratorType>;
-    using ConstReverseIteratorType = std::reverse_iterator<ConstIteratorType>;
+    using Iterator = _ValueType*;
+    using ConstIterator = const _ValueType*;
+    using ReverseIterator = std::reverse_iterator<Iterator>;
+    using ConstReverseIterator = std::reverse_iterator<ConstIterator>;
     
 /**@section Constructor */
 public:
-    Range(IteratorType begin, IteratorType end) noexcept;
+    Range(Iterator begin, Iterator end) noexcept;
     
 /**@section Method */
 public:
-    IteratorType begin() noexcept;
-    IteratorType end() noexcept;
-    ConstIteratorType begin() const noexcept;
-    ConstIteratorType end() const noexcept;
-    ReverseIteratorType rbegin() noexcept;
-    ReverseIteratorType rend() noexcept;
-    ConstReverseIteratorType rbegin() const noexcept;
-    ConstReverseIteratorType rend() const noexcept;
+    Iterator begin() noexcept;
+    Iterator end() noexcept;
+    ConstIterator begin() const noexcept;
+    ConstIterator end() const noexcept;
+    ReverseIterator rbegin() noexcept;
+    ReverseIterator rend() noexcept;
+    ConstReverseIterator rbegin() const noexcept;
+    ConstReverseIterator rend() const noexcept;
     
 /**@section Variable */
 private:
-    IteratorType m_begin;
-    IteratorType m_end;
+    Iterator m_begin;
+    Iterator m_end;
 };
 
 template <typename _ValueType>
-inline Range<_ValueType>::Range(IteratorType begin, IteratorType end) noexcept :
+inline Range<_ValueType>::Range(Iterator begin, Iterator end) noexcept :
     m_begin(begin),
     m_end(end)
 {
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::IteratorType Range<_ValueType>::begin() noexcept
+inline typename Range<_ValueType>::Iterator Range<_ValueType>::begin() noexcept
 {
     return m_begin;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::IteratorType Range<_ValueType>::end() noexcept
+inline typename Range<_ValueType>::Iterator Range<_ValueType>::end() noexcept
 {
     return m_end;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ConstIteratorType Range<_ValueType>::begin() const noexcept
+inline typename Range<_ValueType>::ConstIterator Range<_ValueType>::begin() const noexcept
 {
     return m_begin;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ConstIteratorType Range<_ValueType>::end() const noexcept
+inline typename Range<_ValueType>::ConstIterator Range<_ValueType>::end() const noexcept
 {
     return m_end;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ReverseIteratorType Range<_ValueType>::rbegin() noexcept
+inline typename Range<_ValueType>::ReverseIterator Range<_ValueType>::rbegin() noexcept
 {
     return m_end;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ReverseIteratorType Range<_ValueType>::rend() noexcept
+inline typename Range<_ValueType>::ReverseIterator Range<_ValueType>::rend() noexcept
 {
     return m_begin;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ConstReverseIteratorType Range<_ValueType>::rbegin() const noexcept
+inline typename Range<_ValueType>::ConstReverseIterator Range<_ValueType>::rbegin() const noexcept
 {
     return m_end;
 }
 
 template <typename _ValueType>
-inline typename Range<_ValueType>::ConstReverseIteratorType Range<_ValueType>::rend() const noexcept
+inline typename Range<_ValueType>::ConstReverseIterator Range<_ValueType>::rend() const noexcept
 {
     return m_begin;
 }

@@ -26,18 +26,12 @@ public:
 private:
     struct TimerInfo
     {
-    /**@section Constructor */
-    public:
-        template <typename _CallbackType>
-        TimerInfo(TimerHandle timerHandle, _CallbackType&& callback, float elapsedTime, float interval, bool isLoop) noexcept(std::is_nothrow_move_constructible_v<_CallbackType>);
-        
-    /**@section Variable */
-    public:
         TimerHandle timerHandle;
         Delegate<void()> callback;
         float elapsedTime;
         float interval;
         bool isLoop;
+        bool isDeleteReserved;
     };
 
 /**@section Constructor */
@@ -62,16 +56,5 @@ private:
     int64_t m_lastRecordedTickTime;
     std::vector<TimerInfo> m_timerInfos;
 };
-
-template <typename _CallbackType>
-inline TimerModule::TimerInfo::TimerInfo(TimerHandle timerHandle, _CallbackType&& callback, float elapsedTime, float interval, bool isLoop) noexcept(std::is_nothrow_move_constructible_v<_CallbackType>) :
-   timerHandle(timerHandle),
-   callback(std::move(callback)),
-   elapsedTime(elapsedTime),
-   interval(interval),
-   isLoop(isLoop)
-{
-}
-
 
 } /* namespace tgon */

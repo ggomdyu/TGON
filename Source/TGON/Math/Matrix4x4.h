@@ -161,10 +161,10 @@ inline Matrix4x4 Matrix4x4::LookAtLH(const Vector3& eyePt, const Vector3& lookAt
     u.Normalize();
 
     return Matrix4x4(
-        r.x, u.x, l.x, 0.f,
-        r.y, u.y, l.y, 0.f,
-        r.z, u.z, l.z, 0.f,
-        -Vector3::Dot(r, eyePt), -Vector3::Dot(u, eyePt), -Vector3::Dot(l, eyePt), 1.f
+        r.x,    u.x,    l.x,    0.0f,
+        r.y,    u.y,    l.y,    0.0f,
+        r.z,    u.z,    l.z,    0.0f,
+        -Vector3::Dot(r, eyePt), -Vector3::Dot(u, eyePt), -Vector3::Dot(l, eyePt), 1.0f
     );
 }
 
@@ -180,10 +180,10 @@ inline Matrix4x4 Matrix4x4::LookAtRH(const Vector3& eyePt, const Vector3& lookAt
     u.Normalize();
     
     return Matrix4x4(
-        r.x, u.x, -l.x, 0.f,
-        r.y, u.y, -l.y, 0.f,
-        r.z, u.z, -l.z, 0.f,
-        -Vector3::Dot(r, eyePt), -Vector3::Dot(u, eyePt), Vector3::Dot(l, eyePt), 1.f
+        r.x,    u.x,    -l.x,   0.0f,
+        r.y,    u.y,    -l.y,   0.0f,
+        r.z,    u.z,    -l.z,   0.0f,
+        -Vector3::Dot(r, eyePt), -Vector3::Dot(u, eyePt), Vector3::Dot(l, eyePt), 1.0f
     );
 }
 
@@ -339,20 +339,20 @@ constexpr const Matrix4x4 Matrix4x4::Translate(float x, float y, float z) noexce
 constexpr const Matrix4x4 Matrix4x4::Identity() noexcept
 {
     return Matrix4x4(
-        1.f,    0.f,    0.f,    0.f,
-        0.f,    1.f,    0.f,    0.f,
-        0.f,    0.f,    1.f,    0.f,
-        0.f,    0.f,    0.f,    1.f
+        1.0f,   0.0f,   0.0f,   0.0f,
+        0.0f,   1.0f,   0.0f,   0.0f,
+        0.0f,   0.0f,   1.0f,   0.0f,
+        0.0f,   0.0f,   0.0f,   1.0f
     );
 }
 
 constexpr const Matrix4x4 Matrix4x4::Zero() noexcept
 {
     return Matrix4x4(
-        0.f,    0.f,    0.f,    0.f,
-        0.f,    0.f,    0.f,    0.f,
-        0.f,    0.f,    0.f,    0.f,
-        0.f,    0.f,    0.f,    0.f
+        0.0f,   0.0f,   0.0f,   0.0f,
+        0.0f,   0.0f,   0.0f,   0.0f,
+        0.0f,   0.0f,   0.0f,   0.0f,
+        0.0f,   0.0f,   0.0f,   0.0f
     );
 }
 
@@ -407,7 +407,7 @@ inline const Matrix4x4 Matrix4x4::RotateZ(float radian) noexcept
     float sinA = std::sin(radian);
 
     return Matrix4x4(
-        cosA,   -sinA,   0.0f,   0.0f,
+        cosA,   -sinA,  0.0f,   0.0f,
         sinA,   cosA,   0.0f,   0.0f,
         0.0f,   0.0f,   1.0f,   0.0f,
         0.0f,   0.0f,   0.0f,   1.0f
