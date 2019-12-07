@@ -136,7 +136,7 @@ void SpriteRendererComponent::Update()
         return;
     }
 
-    m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, m_gameObject->GetComponent<Transform>()->GetWorldMatrix());
+    m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, m_gameObject->FindComponent<Transform>()->GetWorldMatrix());
 }
 
 } /* namespace tgon */

@@ -907,7 +907,6 @@
 		FD4C1BEB219F343A00B2B2BE /* framing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = framing.c; sourceTree = "<group>"; };
 		FD4C1BEC219F343A00B2B2BE /* bitwise.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bitwise.c; sourceTree = "<group>"; };
 		FD4C1BEF219F343A00B2B2BE /* ogg.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ogg.h; sourceTree = "<group>"; };
-		FD4C1BF0219F343A00B2B2BE /* config_types.h.in */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = config_types.h.in; sourceTree = "<group>"; };
 		FD4C1BF1219F343A00B2B2BE /* os_types.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = os_types.h; sourceTree = "<group>"; };
 		FD4C1BF3219F344600B2B2BE /* smallft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = smallft.h; sourceTree = "<group>"; };
 		FD4C1BF4219F344600B2B2BE /* vorbisenc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vorbisenc.c; sourceTree = "<group>"; };
@@ -1956,7 +1955,6 @@
 			isa = PBXGroup;
 			children = (
 				FD4C1BEF219F343A00B2B2BE /* ogg.h */,
-				FD4C1BF0219F343A00B2B2BE /* config_types.h.in */,
 				FD4C1BF1219F343A00B2B2BE /* os_types.h */,
 			);
 			path = ogg;

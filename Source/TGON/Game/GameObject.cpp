@@ -91,8 +91,13 @@ bool GameObject::RemoveComponent(size_t componentId)
     }
 }
 
-std::shared_ptr<Component> GameObject::GetComponent(size_t componentId)
+std::shared_ptr<Component> GameObject::FindComponent(size_t componentId)
 {
+    if (m_components.size() == 0)
+    {
+        return nullptr;
+    }
+    
     auto predicate = [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;

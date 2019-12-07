@@ -10,6 +10,7 @@
 #include <memory>
 #include <string>
 
+#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/al.h>
 #else

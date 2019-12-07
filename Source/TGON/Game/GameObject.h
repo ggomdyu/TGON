@@ -33,9 +33,9 @@ public:
     template <typename _ComponentType>
     bool RemoveComponent();
     template <typename _ComponentType>
-    std::shared_ptr<const _ComponentType> GetComponent() const;
+    std::shared_ptr<const _ComponentType> FindComponent() const;
     template <typename _ComponentType>
-    std::shared_ptr<_ComponentType> GetComponent();
+    std::shared_ptr<_ComponentType> FindComponent();
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
     std::shared_ptr<Transform> GetTransform() noexcept;
@@ -43,7 +43,7 @@ public:
 
 private:
     bool RemoveComponent(size_t componentId);
-    std::shared_ptr<Component> GetComponent(size_t componentId);
+    std::shared_ptr<Component> FindComponent(size_t componentId);
 
 /**@section Variable */
 private:
@@ -73,20 +73,20 @@ inline bool GameObject::RemoveComponent()
 }
 
 template <typename _ComponentType>
-inline std::shared_ptr<const _ComponentType> GameObject::GetComponent() const
+inline std::shared_ptr<const _ComponentType> GameObject::FindComponent() const
 {
-    return const_cast<GameObject*>(this)->GetComponent<_ComponentType>();
+    return const_cast<GameObject*>(this)->FindComponent<_ComponentType>();
 }
 
 template <typename _ComponentType>
-inline std::shared_ptr<_ComponentType> GameObject::GetComponent()
+inline std::shared_ptr<_ComponentType> GameObject::FindComponent()
 {
-    auto component = this->GetComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode());
+    auto component = this->FindComponent(tgon::GetRTTI<_ComponentType>()->GetHashCode());
     return std::static_pointer_cast<_ComponentType>(component);
 }
 
 template <>
-inline std::shared_ptr<Transform> GameObject::GetComponent()
+inline std::shared_ptr<Transform> GameObject::FindComponent()
 {
     return m_transform;
 }
