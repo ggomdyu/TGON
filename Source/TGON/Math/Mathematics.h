@@ -149,7 +149,7 @@ constexpr bool IsPrimeNumber(const _ValueType& value) noexcept
 template <typename _ValueType>
 constexpr _ValueType Lerp(const _ValueType& from, const _ValueType& to, float time) noexcept
 {
-    return from + ((to - from) * time);
+    return from + (_ValueType(to - from) * time);
 }
 
 constexpr float Smoothstep(float from, float to, float time) noexcept

@@ -131,7 +131,7 @@ int32_t SpriteRendererComponent::GetSortingLayer() const noexcept
 
 void SpriteRendererComponent::Update()
 {
-    if (m_sprite == nullptr || m_sprite->GetBlendColor().a <= 0.0f)
+    if (m_sprite->GetTexture() == nullptr || m_sprite->GetBlendColor().a <= 0.0f)
     {
         return;
     }

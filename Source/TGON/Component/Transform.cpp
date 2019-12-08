@@ -9,21 +9,34 @@ namespace tgon
     
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 {
-#if _DEBUG
-    auto iter = std::find_if(parent->m_children.begin(), parent->m_children.end(), [&](const std::shared_ptr<Transform>& item) {
-        return this == item.get();
-    });
-    if (iter != parent->m_children.end())
+    auto sharedThis = this->shared_from_this();
+    if (m_parent != nullptr)
     {
-        assert(false && "The parent transform already has this child!");
-        return;
+        m_parent->DetachChild(sharedThis);
     }
-#endif
 
-    parent->m_children.push_back(this->shared_from_this());
+    if (parent != nullptr)
+    {
+        parent->m_children.push_back(sharedThis);
+    }
     
     m_parent = parent;
     m_isDirty = true;
+}
+
+bool Transform::DetachChild(const std::shared_ptr<Transform>& child)
+{
+    auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<Transform>& object)
+    {
+        return child == object;
+    });
+    if (iter != m_children.end())
+    {
+        m_children.erase(iter);
+        return true;
+    }
+
+    return false;
 }
 
 void Transform::DetachChildren()
@@ -104,6 +117,11 @@ void Transform::Update()
         m_matWorld *= Matrix4x4::Scale(m_localScale.x, m_localScale.y, m_localScale.z);
         m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
         m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
+
+        for (auto& child : m_children)
+        {
+            child->m_isDirty = true;
+        }
     }
     
     m_isDirty = false;

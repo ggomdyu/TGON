@@ -27,7 +27,7 @@ private:
     struct TimerInfo
     {
         TimerHandle timerHandle;
-        Delegate<void()> callback;
+        Delegate<void(TimerHandle)> callback;
         float elapsedTime;
         float interval;
         bool isLoop;
@@ -40,8 +40,8 @@ public:
 
 /**@section Method */
 public:
-    TimerHandle SetTimer(const Delegate<void()>& callback, float interval, bool isLoop);
-    TimerHandle SetTimer(Delegate<void()>&& callback, float interval, bool isLoop);
+    TimerHandle SetTimer(const Delegate<void(TimerHandle)>& callback, float interval, bool isLoop);
+    TimerHandle SetTimer(Delegate<void(TimerHandle)>&& callback, float interval, bool isLoop);
     float GetTimerElapsed(TimerHandle timerHandle) const noexcept;
     bool ClearTimer(TimerHandle timerHandle);
     void Update() override;

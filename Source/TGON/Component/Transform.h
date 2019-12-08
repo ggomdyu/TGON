@@ -42,7 +42,10 @@ public:
     const Matrix4x4& GetWorldMatrix() const noexcept;
     bool IsDirty() const noexcept;
     void Update() override;
-    
+
+private:
+    bool DetachChild(const std::shared_ptr<Transform>& child);
+
 /**@section Variable */
 protected:
     std::shared_ptr<Transform> m_parent;

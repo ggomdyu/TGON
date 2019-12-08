@@ -13,7 +13,7 @@ TimerModule::TimerModule() noexcept :
 {
 }
 
-TimerHandle TimerModule::SetTimer(const Delegate<void()>& callback, float interval, bool isLoop)
+TimerHandle TimerModule::SetTimer(const Delegate<void(TimerHandle)>& callback, float interval, bool isLoop)
 {
     auto timerHandle = CreateTimerHandle();
     m_timerInfos.push_back(TimerInfo{timerHandle, callback, 0.0f, interval, isLoop, false});
@@ -21,7 +21,7 @@ TimerHandle TimerModule::SetTimer(const Delegate<void()>& callback, float interv
     return timerHandle;
 }
 
-TimerHandle TimerModule::SetTimer(Delegate<void()>&& callback, float interval, bool isLoop)
+TimerHandle TimerModule::SetTimer(Delegate<void(TimerHandle)>&& callback, float interval, bool isLoop)
 {
     auto timerHandle = CreateTimerHandle();
     m_timerInfos.push_back(TimerInfo{timerHandle, callback, 0.0f, interval, isLoop, false});
@@ -85,7 +85,7 @@ void TimerModule::Update()
         auto& timerInfo = *iter;
         if (timerInfo.elapsedTime >= timerInfo.interval)
         {
-            timerInfo.callback();
+            timerInfo.callback(timerInfo.timerHandle);
             if (timerInfo.isLoop && timerInfo.isDeleteReserved == false)
             {
                 timerInfo.elapsedTime = 0.0f;
