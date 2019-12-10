@@ -18,8 +18,6 @@
 		8C3DA3A0239421DF004A24E4 /* TimerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA39E239421DF004A24E4 /* TimerModule.h */; };
 		8C3DA3A1239421DF004A24E4 /* TimerModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C3DA39F239421DF004A24E4 /* TimerModule.cpp */; };
 		8C3DA3A3239518D3004A24E4 /* TimerHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA3A2239518D3004A24E4 /* TimerHandle.h */; };
-		8C5045602398C90800B4E5BA /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C50455E2398C90700B4E5BA /* Transform.cpp */; };
-		8C5045612398C90800B4E5BA /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C50455F2398C90800B4E5BA /* Transform.h */; };
 		8C59E307232EB42700EBE199 /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E306232EB42700EBE199 /* Encoding.cpp */; };
 		8C59E309232EB44000EBE199 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E308232EB44000EBE199 /* Random.cpp */; };
 		8C59E30B2330014700EBE199 /* Environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C59E30A2330014700EBE199 /* Environment.cpp */; };
@@ -45,6 +43,18 @@
 		8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */; };
 		8CC61CC822FB3B7A00F415C8 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC61CC622FB3B7A00F415C8 /* Debug.cpp */; };
 		8CC61CC922FB3B7A00F415C8 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CC61CC722FB3B7A00F415C8 /* Debug.h */; };
+		8CD02C3E239DE56C006EFA79 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C32239DE56B006EFA79 /* Transform.h */; };
+		8CD02C3F239DE56C006EFA79 /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C33239DE56B006EFA79 /* CameraComponent.cpp */; };
+		8CD02C40239DE56C006EFA79 /* RendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C34239DE56B006EFA79 /* RendererComponent.cpp */; };
+		8CD02C41239DE56C006EFA79 /* RendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C35239DE56B006EFA79 /* RendererComponent.h */; };
+		8CD02C42239DE56C006EFA79 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C36239DE56B006EFA79 /* Transform.cpp */; };
+		8CD02C43239DE56C006EFA79 /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C37239DE56B006EFA79 /* SpriteRendererComponent.cpp */; };
+		8CD02C44239DE56C006EFA79 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C38239DE56B006EFA79 /* Component.cpp */; };
+		8CD02C45239DE56C006EFA79 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C39239DE56C006EFA79 /* Component.h */; };
+		8CD02C46239DE56C006EFA79 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C3A239DE56C006EFA79 /* SpriteRendererComponent.h */; };
+		8CD02C47239DE56C006EFA79 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C3B239DE56C006EFA79 /* CameraComponent.h */; };
+		8CD02C48239DE56C006EFA79 /* TextRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD02C3C239DE56C006EFA79 /* TextRendererComponent.h */; };
+		8CD02C49239DE56C006EFA79 /* TextRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD02C3D239DE56C006EFA79 /* TextRendererComponent.cpp */; };
 		8CD20BCA238B68AF001F4473 /* FontAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD20BC8238B68AE001F4473 /* FontAtlas.h */; };
 		8CD20BCB238B68AF001F4473 /* FontAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CD20BC9238B68AF001F4473 /* FontAtlas.cpp */; };
 		8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */; };
@@ -62,16 +72,6 @@
 		8CF8A187234A435100763883 /* IComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A178234A435100763883 /* IComparable.h */; };
 		8CF8A188234A435100763883 /* DynamicCast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A179234A435100763883 /* DynamicCast.h */; };
 		8CF8A189234A435100763883 /* ICloneable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A17A234A435100763883 /* ICloneable.h */; };
-		8CF8A196234A438800763883 /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A18B234A438600763883 /* Component.h */; };
-		8CF8A197234A438800763883 /* RendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A18C234A438700763883 /* RendererComponent.cpp */; };
-		8CF8A198234A438800763883 /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A18D234A438700763883 /* CameraComponent.cpp */; };
-		8CF8A199234A438800763883 /* SpriteRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A18E234A438700763883 /* SpriteRendererComponent.cpp */; };
-		8CF8A19A234A438800763883 /* RendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A18F234A438700763883 /* RendererComponent.h */; };
-		8CF8A19C234A438800763883 /* TextRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A191234A438700763883 /* TextRendererComponent.h */; };
-		8CF8A19D234A438800763883 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A192234A438700763883 /* Component.cpp */; };
-		8CF8A19E234A438800763883 /* TextRendererComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CF8A193234A438800763883 /* TextRendererComponent.cpp */; };
-		8CF8A19F234A438800763883 /* SpriteRendererComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A194234A438800763883 /* SpriteRendererComponent.h */; };
-		8CF8A1A0234A438800763883 /* CameraComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A195234A438800763883 /* CameraComponent.h */; };
 		8CF8A1A3234CC3B800763883 /* UnicodeScalar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */; };
 		8CFB9E502369EB7C0056A076 /* UnixPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CFB9E4F2369EB7C0056A076 /* UnixPath.h */; };
 		FD2108CA20BAE630009FC8F1 /* TGON.h in Headers */ = {isa = PBXBuildFile; fileRef = FD2108C920BAE630009FC8F1 /* TGON.h */; };
@@ -801,8 +801,6 @@
 		8C3DA39F239421DF004A24E4 /* TimerModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerModule.cpp; sourceTree = "<group>"; };
 		8C3DA3A2239518D3004A24E4 /* TimerHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerHandle.h; sourceTree = "<group>"; };
 		8C439484236FC666009911B1 /* UnixPath.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnixPath.inl; sourceTree = "<group>"; };
-		8C50455E2398C90700B4E5BA /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transform.cpp; path = ../../../Source/TGON/Component/Transform.cpp; sourceTree = "<group>"; };
-		8C50455F2398C90800B4E5BA /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = ../../../Source/TGON/Component/Transform.h; sourceTree = "<group>"; };
 		8C59E306232EB42700EBE199 /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoding.cpp; sourceTree = "<group>"; };
 		8C59E308232EB44000EBE199 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		8C59E30A2330014700EBE199 /* Environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Environment.cpp; sourceTree = "<group>"; };
@@ -833,6 +831,18 @@
 		8CC61CC422FB3B7400F415C8 /* MacOSDebug.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSDebug.mm; sourceTree = "<group>"; };
 		8CC61CC622FB3B7A00F415C8 /* Debug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Debug.cpp; sourceTree = "<group>"; };
 		8CC61CC722FB3B7A00F415C8 /* Debug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Debug.h; sourceTree = "<group>"; };
+		8CD02C32239DE56B006EFA79 /* Transform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Transform.h; path = ../../../Source/TGON/Component/Transform.h; sourceTree = "<group>"; };
+		8CD02C33239DE56B006EFA79 /* CameraComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CameraComponent.cpp; path = ../../../Source/TGON/Component/CameraComponent.cpp; sourceTree = "<group>"; };
+		8CD02C34239DE56B006EFA79 /* RendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = RendererComponent.cpp; path = ../../../Source/TGON/Component/RendererComponent.cpp; sourceTree = "<group>"; };
+		8CD02C35239DE56B006EFA79 /* RendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = RendererComponent.h; path = ../../../Source/TGON/Component/RendererComponent.h; sourceTree = "<group>"; };
+		8CD02C36239DE56B006EFA79 /* Transform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Transform.cpp; path = ../../../Source/TGON/Component/Transform.cpp; sourceTree = "<group>"; };
+		8CD02C37239DE56B006EFA79 /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteRendererComponent.cpp; path = ../../../Source/TGON/Component/SpriteRendererComponent.cpp; sourceTree = "<group>"; };
+		8CD02C38239DE56B006EFA79 /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Component.cpp; path = ../../../Source/TGON/Component/Component.cpp; sourceTree = "<group>"; };
+		8CD02C39239DE56C006EFA79 /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Component.h; path = ../../../Source/TGON/Component/Component.h; sourceTree = "<group>"; };
+		8CD02C3A239DE56C006EFA79 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
+		8CD02C3B239DE56C006EFA79 /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CameraComponent.h; path = ../../../Source/TGON/Component/CameraComponent.h; sourceTree = "<group>"; };
+		8CD02C3C239DE56C006EFA79 /* TextRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TextRendererComponent.h; path = ../../../Source/TGON/Component/TextRendererComponent.h; sourceTree = "<group>"; };
+		8CD02C3D239DE56C006EFA79 /* TextRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = TextRendererComponent.cpp; path = ../../../Source/TGON/Component/TextRendererComponent.cpp; sourceTree = "<group>"; };
 		8CD20BC8238B68AE001F4473 /* FontAtlas.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FontAtlas.h; sourceTree = "<group>"; };
 		8CD20BC9238B68AF001F4473 /* FontAtlas.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = FontAtlas.cpp; sourceTree = "<group>"; };
 		8CE691AD2365F8E900482062 /* DirectoryInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = DirectoryInfo.cpp; sourceTree = "<group>"; };
@@ -850,16 +860,6 @@
 		8CF8A178234A435100763883 /* IComparable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = IComparable.h; sourceTree = "<group>"; };
 		8CF8A179234A435100763883 /* DynamicCast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = DynamicCast.h; sourceTree = "<group>"; };
 		8CF8A17A234A435100763883 /* ICloneable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = ICloneable.h; sourceTree = "<group>"; };
-		8CF8A18B234A438600763883 /* Component.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = Component.h; path = ../../../Source/TGON/Component/Component.h; sourceTree = "<group>"; };
-		8CF8A18C234A438700763883 /* RendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = RendererComponent.cpp; path = ../../../Source/TGON/Component/RendererComponent.cpp; sourceTree = "<group>"; };
-		8CF8A18D234A438700763883 /* CameraComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CameraComponent.cpp; path = ../../../Source/TGON/Component/CameraComponent.cpp; sourceTree = "<group>"; };
-		8CF8A18E234A438700763883 /* SpriteRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SpriteRendererComponent.cpp; path = ../../../Source/TGON/Component/SpriteRendererComponent.cpp; sourceTree = "<group>"; };
-		8CF8A18F234A438700763883 /* RendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = RendererComponent.h; path = ../../../Source/TGON/Component/RendererComponent.h; sourceTree = "<group>"; };
-		8CF8A191234A438700763883 /* TextRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = TextRendererComponent.h; path = ../../../Source/TGON/Component/TextRendererComponent.h; sourceTree = "<group>"; };
-		8CF8A192234A438700763883 /* Component.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Component.cpp; path = ../../../Source/TGON/Component/Component.cpp; sourceTree = "<group>"; };
-		8CF8A193234A438800763883 /* TextRendererComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = TextRendererComponent.cpp; path = ../../../Source/TGON/Component/TextRendererComponent.cpp; sourceTree = "<group>"; };
-		8CF8A194234A438800763883 /* SpriteRendererComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = SpriteRendererComponent.h; path = ../../../Source/TGON/Component/SpriteRendererComponent.h; sourceTree = "<group>"; };
-		8CF8A195234A438800763883 /* CameraComponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = CameraComponent.h; path = ../../../Source/TGON/Component/CameraComponent.h; sourceTree = "<group>"; };
 		8CF8A1A2234CC3B700763883 /* UnicodeScalar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnicodeScalar.h; sourceTree = "<group>"; };
 		8CFB9E4F2369EB7C0056A076 /* UnixPath.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = UnixPath.h; sourceTree = "<group>"; };
 		8CFB9E532369F7E50056A076 /* EnvironmentTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvironmentTest.h; sourceTree = "<group>"; };
@@ -1827,20 +1827,21 @@
 		8CF8A18A234A437E00763883 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				8CF8A18D234A438700763883 /* CameraComponent.cpp */,
-				8CF8A195234A438800763883 /* CameraComponent.h */,
-				8CF8A192234A438700763883 /* Component.cpp */,
-				8CF8A18B234A438600763883 /* Component.h */,
-				8C50455E2398C90700B4E5BA /* Transform.cpp */,
-				8C50455F2398C90800B4E5BA /* Transform.h */,
-				8CF8A18C234A438700763883 /* RendererComponent.cpp */,
-				8CF8A18F234A438700763883 /* RendererComponent.h */,
-				8CF8A18E234A438700763883 /* SpriteRendererComponent.cpp */,
-				8CF8A194234A438800763883 /* SpriteRendererComponent.h */,
-				8CF8A193234A438800763883 /* TextRendererComponent.cpp */,
-				8CF8A191234A438700763883 /* TextRendererComponent.h */,
+				8CD02C33239DE56B006EFA79 /* CameraComponent.cpp */,
+				8CD02C3B239DE56C006EFA79 /* CameraComponent.h */,
+				8CD02C38239DE56B006EFA79 /* Component.cpp */,
+				8CD02C39239DE56C006EFA79 /* Component.h */,
+				8CD02C34239DE56B006EFA79 /* RendererComponent.cpp */,
+				8CD02C35239DE56B006EFA79 /* RendererComponent.h */,
+				8CD02C37239DE56B006EFA79 /* SpriteRendererComponent.cpp */,
+				8CD02C3A239DE56C006EFA79 /* SpriteRendererComponent.h */,
+				8CD02C3D239DE56C006EFA79 /* TextRendererComponent.cpp */,
+				8CD02C3C239DE56C006EFA79 /* TextRendererComponent.h */,
+				8CD02C36239DE56B006EFA79 /* Transform.cpp */,
+				8CD02C32239DE56B006EFA79 /* Transform.h */,
 			);
-			path = Component;
+			name = Component;
+			path = ../../Source/TGON/Component;
 			sourceTree = "<group>";
 		};
 		8CFB9E4E2369CB550056A076 /* Unix */ = {
@@ -3642,7 +3643,6 @@
 				FDE1B6AA22E4100F0093FDC1 /* hash.h in Headers */,
 				FD5332E622A2EA1C001EB57C /* ftlcdfil.h in Headers */,
 				FD53331B22A57F38001EB57C /* trees.h in Headers */,
-				8CF8A19C234A438800763883 /* TextRendererComponent.h in Headers */,
 				FDE1B66F22E4100F0093FDC1 /* locmap.h in Headers */,
 				FDE1B69822E4100F0093FDC1 /* ruleiter.h in Headers */,
 				FDE1B6AF22E4100F0093FDC1 /* ucln_imp.h in Headers */,
@@ -3659,6 +3659,7 @@
 				FD5332B122A2EA1C001EB57C /* ftgloadr.h in Headers */,
 				FDE1B67522E4100F0093FDC1 /* bytesinkutil.h in Headers */,
 				FDE1B5AF22E40FDB0093FDC1 /* casemap.h in Headers */,
+				8CD02C3E239DE56C006EFA79 /* Transform.h in Headers */,
 				FD53331A22A57F38001EB57C /* inffixed.h in Headers */,
 				FDE1B5CB22E40FDB0093FDC1 /* ustring.h in Headers */,
 				FDE1B5BA22E40FDB0093FDC1 /* utf_old.h in Headers */,
@@ -3678,6 +3679,7 @@
 				FDE1B69722E4100F0093FDC1 /* messageimpl.h in Headers */,
 				FDE1B5B322E40FDB0093FDC1 /* stringoptions.h in Headers */,
 				FDE1B59822E40FDB0093FDC1 /* utf16.h in Headers */,
+				8CD02C45239DE56C006EFA79 /* Component.h in Headers */,
 				FDE1B69322E4100F0093FDC1 /* ucurrimp.h in Headers */,
 				FD5332BA22A2EA1C001EB57C /* svgldict.h in Headers */,
 				FD5332C222A2EA1C001EB57C /* svbdf.h in Headers */,
@@ -3718,6 +3720,7 @@
 				FD53329222A2EA1C001EB57C /* ftparams.h in Headers */,
 				FDE1B6C522E4100F0093FDC1 /* charstr.h in Headers */,
 				FDE1B5E822E40FDB0093FDC1 /* idna.h in Headers */,
+				8CD02C48239DE56C006EFA79 /* TextRendererComponent.h in Headers */,
 				FD53329822A2EA1C001EB57C /* ftmodule.h in Headers */,
 				FD53331522A57F38001EB57C /* deflate.h in Headers */,
 				FDE1B5ED22E40FDB0093FDC1 /* udata.h in Headers */,
@@ -3728,15 +3731,14 @@
 				FD5332D922A2EA1C001EB57C /* ftchapters.h in Headers */,
 				FDE1B5C922E40FDB0093FDC1 /* unifunct.h in Headers */,
 				FDE1B69622E4100F0093FDC1 /* sprpimpl.h in Headers */,
-				8C5045612398C90800B4E5BA /* Transform.h in Headers */,
 				FDE1B68D22E4100F0093FDC1 /* rbbisetb.h in Headers */,
 				FD53332D22A57F38001EB57C /* inffast.h in Headers */,
 				FD5332DB22A2EA1C001EB57C /* ftlzw.h in Headers */,
 				FDE1B67422E4100F0093FDC1 /* bmpset.h in Headers */,
 				FDE1B67C22E4100F0093FDC1 /* uelement.h in Headers */,
+				8CD02C47239DE56C006EFA79 /* CameraComponent.h in Headers */,
 				FDE1B67122E4100F0093FDC1 /* sharedobject.h in Headers */,
 				FDE1B67D22E4100F0093FDC1 /* udataswp.h in Headers */,
-				8CF8A1A0234A438800763883 /* CameraComponent.h in Headers */,
 				FD5332BD22A2EA1C001EB57C /* svmetric.h in Headers */,
 				FDE1B6C422E4100F0093FDC1 /* utrie2_impl.h in Headers */,
 				8CF8A182234A435100763883 /* Delegate.h in Headers */,
@@ -3820,6 +3822,7 @@
 				FDE1B6B622E4100F0093FDC1 /* uarrsort.h in Headers */,
 				FDE1B6AD22E4100F0093FDC1 /* ucase.h in Headers */,
 				FDB7036022B6B30C0055FCED /* infblock.h in Headers */,
+				8CD02C41239DE56C006EFA79 /* RendererComponent.h in Headers */,
 				FD53331622A57F38001EB57C /* gzguts.h in Headers */,
 				FDE1B5D422E40FDB0093FDC1 /* stringpiece.h in Headers */,
 				FDE1B66822E4100F0093FDC1 /* ucol_data.h in Headers */,
@@ -3847,7 +3850,6 @@
 				FDE1B5CD22E40FDB0093FDC1 /* locdspnm.h in Headers */,
 				FD2D6D1822D064410087DF85 /* Mesh.h in Headers */,
 				FD5332EB22A36015001EB57C /* ft2build.h in Headers */,
-				8CF8A19A234A438800763883 /* RendererComponent.h in Headers */,
 				FDE1B67222E4100F0093FDC1 /* locbased.h in Headers */,
 				FD5332DC22A2EA1C001EB57C /* ftsystem.h in Headers */,
 				FD5332D822A2EA1C001EB57C /* ftgxval.h in Headers */,
@@ -3864,7 +3866,6 @@
 				FDE1B5BF22E40FDB0093FDC1 /* uchar.h in Headers */,
 				FD5332E222A2EA1C001EB57C /* ftmoderr.h in Headers */,
 				FDE1B5AD22E40FDB0093FDC1 /* uscript.h in Headers */,
-				8CF8A196234A438800763883 /* Component.h in Headers */,
 				FDE1B67722E4100F0093FDC1 /* servnotf.h in Headers */,
 				FDE1B5DA22E40FDB0093FDC1 /* stringtriebuilder.h in Headers */,
 				FDE1B5E522E40FDB0093FDC1 /* edits.h in Headers */,
@@ -3887,7 +3888,7 @@
 				FDE1B5E922E40FDB0093FDC1 /* icudataver.h in Headers */,
 				FD2D6D0922D064410087DF85 /* RenderTarget.h in Headers */,
 				FD5332A322A2EA1C001EB57C /* cffotypes.h in Headers */,
-				8CF8A19F234A438800763883 /* SpriteRendererComponent.h in Headers */,
+				8CD02C46239DE56C006EFA79 /* SpriteRendererComponent.h in Headers */,
 				FD5332AD22A2EA1C001EB57C /* ftobjs.h in Headers */,
 				FD5332C022A2EA1C001EB57C /* svgxval.h in Headers */,
 				FDE1B5E622E40FDB0093FDC1 /* ptypes.h in Headers */,
@@ -3953,8 +3954,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CD02C42239DE56C006EFA79 /* Transform.cpp in Sources */,
 				8CC61CC022F677D100F415C8 /* UIRenderer.cpp in Sources */,
-				8CF8A19E234A438800763883 /* TextRendererComponent.cpp in Sources */,
 				8CC61CC122F677D100F415C8 /* UIBatch.cpp in Sources */,
 				8CC61CC222F677D100F415C8 /* UISprite.cpp in Sources */,
 				8CC61CC322F677D100F415C8 /* RectTransform.cpp in Sources */,
@@ -3986,7 +3987,7 @@
 				FDE1B4F322E40E940093FDC1 /* udatamem.cpp in Sources */,
 				8CC61CC822FB3B7A00F415C8 /* Debug.cpp in Sources */,
 				FDE1B50922E40E950093FDC1 /* servnotf.cpp in Sources */,
-				8CF8A197234A438800763883 /* RendererComponent.cpp in Sources */,
+				8CD02C40239DE56C006EFA79 /* RendererComponent.cpp in Sources */,
 				FD53322822A2E9B6001EB57C /* truetype.c in Sources */,
 				FD53333322A5834A001EB57C /* FontFactory.cpp in Sources */,
 				FD78ABE12289C4DF00D22E46 /* mdct.c in Sources */,
@@ -4003,7 +4004,6 @@
 				FDE1B4CB22E40E940093FDC1 /* servlk.cpp in Sources */,
 				FDB7035E22B6B30C0055FCED /* ftgzip.c in Sources */,
 				FD78ABE62289C4DF00D22E46 /* analysis.c in Sources */,
-				8CF8A19D234A438800763883 /* Component.cpp in Sources */,
 				8CC61CC522FB3B7400F415C8 /* MacOSDebug.mm in Sources */,
 				FD53322422A2E9A4001EB57C /* sfnt.c in Sources */,
 				FD78AC062289D06000D22E46 /* psy.c in Sources */,
@@ -4027,6 +4027,7 @@
 				FDB6931822E4E0BB00F1B02D /* MacOSTimeZoneInfo.cpp in Sources */,
 				FD78ABF42289C4DF00D22E46 /* sharedbook.c in Sources */,
 				FD53332A22A57F38001EB57C /* infback.c in Sources */,
+				8CD02C43239DE56C006EFA79 /* SpriteRendererComponent.cpp in Sources */,
 				8C7A8F1123793AF800DC7196 /* UIText.cpp in Sources */,
 				FD78ABF52289C4DF00D22E46 /* floor1.c in Sources */,
 				FDE1B50E22E40E950093FDC1 /* ustrtrns.cpp in Sources */,
@@ -4122,6 +4123,7 @@
 				FDB7035D22B6B30C0055FCED /* infutil.c in Sources */,
 				FD2D6D1122D064410087DF85 /* RenderTarget.cpp in Sources */,
 				FD5331EE22A2E5AE001EB57C /* pcf.c in Sources */,
+				8CD02C3F239DE56C006EFA79 /* CameraComponent.cpp in Sources */,
 				FD7DE06B229D973C002B5786 /* OpenGLRenderTarget.cpp in Sources */,
 				FDE1B4EA22E40E940093FDC1 /* unistr_props.cpp in Sources */,
 				FDE1B4A022E40E940093FDC1 /* ulist.cpp in Sources */,
@@ -4148,7 +4150,6 @@
 				FDE1B4F522E40E940093FDC1 /* ucnv_u7.cpp in Sources */,
 				FDE1B49022E40E940093FDC1 /* rbbiscan.cpp in Sources */,
 				8CC13981238A4665008BCC66 /* UIElement.cpp in Sources */,
-				8CF8A199234A438800763883 /* SpriteRendererComponent.cpp in Sources */,
 				FDE1B49922E40E940093FDC1 /* utrie.cpp in Sources */,
 				FDE1B50A22E40E950093FDC1 /* ucnv_u32.cpp in Sources */,
 				FDE1B49822E40E940093FDC1 /* uset_props.cpp in Sources */,
@@ -4222,8 +4223,8 @@
 				FDE1B49B22E40E940093FDC1 /* uresbund.cpp in Sources */,
 				FDE1B4C322E40E940093FDC1 /* dictionarydata.cpp in Sources */,
 				FDE1B48D22E40E940093FDC1 /* servslkf.cpp in Sources */,
+				8CD02C44239DE56C006EFA79 /* Component.cpp in Sources */,
 				FDC02D1D228487CA00BEE91A /* Timer.cpp in Sources */,
-				8C5045602398C90800B4E5BA /* Transform.cpp in Sources */,
 				FDE1B51222E40E950093FDC1 /* unifilt.cpp in Sources */,
 				FD7DE062229D6C67002B5786 /* Thread.cpp in Sources */,
 				FDE1B51922E40E950093FDC1 /* locdispnames.cpp in Sources */,
@@ -4255,7 +4256,6 @@
 				FD53322C22A2E9CB001EB57C /* winfnt.c in Sources */,
 				FD53332F22A58011001EB57C /* gzwrite.c in Sources */,
 				FD4C1DFF219F3F8700B2B2BE /* GainputMac.mm in Sources */,
-				8CF8A198234A438800763883 /* CameraComponent.cpp in Sources */,
 				FDE1B49422E40E940093FDC1 /* characterproperties.cpp in Sources */,
 				FDE1B48C22E40E940093FDC1 /* ucnv_bld.cpp in Sources */,
 				FD53331E22A57F38001EB57C /* gzclose.c in Sources */,
@@ -4311,6 +4311,7 @@
 				FDE1B4B422E40E940093FDC1 /* uvectr64.cpp in Sources */,
 				FD4C1DE1219F3F7D00B2B2BE /* GainputInputRecorder.cpp in Sources */,
 				FD4C1DE2219F3F7D00B2B2BE /* GainputInputPlayer.cpp in Sources */,
+				8CD02C49239DE56C006EFA79 /* TextRendererComponent.cpp in Sources */,
 				FDE1B4E422E40E940093FDC1 /* ushape.cpp in Sources */,
 				FDB7035A22B6B30C0055FCED /* inftrees.c in Sources */,
 				FD4C1DE3219F3F7D00B2B2BE /* GainputNetListener.cpp in Sources */,

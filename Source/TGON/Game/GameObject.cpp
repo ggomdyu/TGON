@@ -6,7 +6,27 @@
 
 namespace tgon
 {
-                                             
+                                   
+GameObject::GameObject() :
+    GameObject({}, {})
+{
+}
+
+GameObject::GameObject(const StringHash& name) :
+   GameObject(name, {})
+{
+}
+
+GameObject::GameObject(StringHash&& name) :
+    GameObject(std::move(name), {})
+{
+}
+
+GameObject::GameObject(const std::shared_ptr<Transform>& transform) :
+    GameObject({}, transform)
+{
+}
+
 GameObject::GameObject(const StringHash& name, const std::shared_ptr<Transform>& transform) :
     Object(name),
     m_isActive(true),
@@ -14,12 +34,11 @@ GameObject::GameObject(const StringHash& name, const std::shared_ptr<Transform>&
 {
 }
 
-void GameObject::Initialize()
+GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform) :
+    Object(std::move(name)),
+    m_isActive(true),
+    m_transform(transform)
 {
-    if (m_transform != nullptr)
-    {
-        m_transform->SetGameObject(this->shared_from_this());
-    }
 }
 
 void GameObject::Update()

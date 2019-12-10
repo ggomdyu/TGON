@@ -13,7 +13,7 @@ namespace tgon
 {
 
 class SpriteRendererComponent :
-	public RendererComponent
+    public RendererComponent
 {
 public:
     TGON_DECLARE_RTTI(SpriteRendererComponent)

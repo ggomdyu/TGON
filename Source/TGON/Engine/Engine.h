@@ -9,8 +9,6 @@
 #include <vector>
 #include <unordered_map>
 
-#include "Core/Object.h"
-
 #include "Module.h"
 
 #define TGON_DECLARE_ENGINE(className)\
@@ -40,7 +38,7 @@ public:
     
 /**@section Method */
 public:
-    virtual void Initialize();
+    virtual void Initialize() {}
     virtual void Update();
     template <typename _ModuleType, typename... _ArgTypes>
     std::shared_ptr<_ModuleType> AddModule(_ArgTypes&&... args);
@@ -61,9 +59,10 @@ template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
 {
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
-    
     m_modules.push_back(module);
     m_moduleDict.emplace(tgon::GetRTTI<_ModuleType>()->GetHashCode(), module);
+    
+    module->Initialize();
     
     return module;
 }

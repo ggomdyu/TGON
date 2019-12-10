@@ -65,6 +65,7 @@ public:
     static bool Encrypt(const char* path);
     static std::optional<std::string> ReadAllText(const char* path);
     static std::optional<std::vector<std::byte>> ReadAllBytes(const char* path);
+    static std::optional<std::vector<std::string>> ReadAllLines(const char* path);
     static FileStream Create(const char* path);
     static FileStream Create(const char* path, int32_t bufferSize);
     static FileStream Create(const char* path, int32_t bufferSize, FileOptions options);

@@ -524,7 +524,7 @@ void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld
 
     for (const auto& characterInfo : this->GetCharacterInfos())
     {
-        auto optTextureRect = m_fontAtlas->GetTextureRect(characterInfo.character);
+        auto optTextureRect = m_fontAtlas->GetTextureRect(characterInfo.character, m_fontSize);
         if (optTextureRect.has_value() == false)
         {
             continue;

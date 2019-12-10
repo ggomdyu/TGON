@@ -14,7 +14,7 @@ namespace tgon
 {
 
 class TextRendererComponent :
-	public RendererComponent
+    public RendererComponent
 {
 public:
     TGON_DECLARE_RTTI(TextRendererComponent)

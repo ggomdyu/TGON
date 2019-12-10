@@ -14,7 +14,7 @@
 namespace tgon
 {
 
-class AudioPlayer final :
+class AudioPlayer :
     private NonCopyable
 {
 /**@section Constructor */

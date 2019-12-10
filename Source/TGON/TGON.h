@@ -10,6 +10,7 @@
 #include "Diagnostics/Debug.h"
 #include "Drawing/Image.h"
 #include "Core/Object.h"
+#include "Core/DynamicCast.h"
 #include "Platform/Window.h"
 #include "Platform/Application.h"
 #include "Platform/Locale.h"

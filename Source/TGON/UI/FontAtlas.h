@@ -25,7 +25,7 @@ public:
 
 /**@section Method */
 public:
-    std::optional<std::reference_wrapper<FRect>> GetTextureRect(size_t key) const;
+    std::optional<std::reference_wrapper<FRect>> GetTextureRect(char32_t ch, int32_t fontSize) const;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
     const FontFace& GetFace(int32_t fontSize) const;
@@ -34,10 +34,13 @@ public:
     I32Extent2D GetTextSize(int32_t fontSize);
     I32Extent2D GetTextSize(int32_t fontSize, const I32Extent2D& rect) const;
 
+private:
+    static uint64_t CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept;
+    
 /**@section Variable */
 private:
     std::shared_ptr<Font> m_font;
-    mutable TextureAtlas m_textureAtlas;
+    mutable BasicTextureAtlas<uint64_t> m_textureAtlas;
 };
 
 } /* namespace tgon */

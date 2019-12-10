@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <array>
 #include <sys/stat.h>
+#include <fstream>
 
 #include "Time/TimeZoneInfo.h"
 
@@ -103,6 +104,31 @@ std::optional<std::string> File::ReadAllText(const char* path)
         fileBytes -= readBytes;
     }
 
+    return ret;
+}
+
+std::optional<std::vector<std::string>> File::ReadAllLines(const char* path)
+{
+    std::ifstream fs;
+    fs.open(path);
+    
+    if (!fs)
+    {
+        return {};
+    }
+    
+    std::vector<std::string> ret;
+    std::string line;
+    while (std::getline(fs, line))
+    {
+        if (line.empty())
+        {
+            continue;
+        }
+        
+        ret.push_back(std::move(line));
+    }
+    
     return ret;
 }
 

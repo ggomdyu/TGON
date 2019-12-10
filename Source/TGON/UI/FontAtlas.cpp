@@ -31,9 +31,10 @@ FontAtlas& FontAtlas::operator=(FontAtlas&& rhs) noexcept
     return *this;
 }
 
-std::optional<std::reference_wrapper<FRect>> FontAtlas::GetTextureRect(size_t key) const
+std::optional<std::reference_wrapper<FRect>> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
 {
-    return m_textureAtlas.GetTextureRect(key);
+    auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
+    return m_textureAtlas.GetTextureRect(textureAtlasKey);
 }
 
 std::shared_ptr<const Texture> FontAtlas::GetAtlasTexture() const noexcept
@@ -55,9 +56,10 @@ const GlyphData& FontAtlas::GetGlyphData(char32_t ch, int32_t fontSize) const
 {
     decltype(auto) glyphData = m_font->GetGlyphData(ch, fontSize);
     
-    if (m_textureAtlas.Contains(ch) == false)
+    auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
+    if (m_textureAtlas.Contains(textureAtlasKey) == false)
     {
-        m_textureAtlas.Insert(ch, &glyphData.bitmap[0], glyphData.metrics.size);
+        m_textureAtlas.Insert(textureAtlasKey, &glyphData.bitmap[0], glyphData.metrics.size);
     }
     
     return glyphData;
@@ -76,6 +78,11 @@ I32Extent2D FontAtlas::GetTextSize(int32_t fontSize)
 I32Extent2D FontAtlas::GetTextSize(int32_t fontSize, const I32Extent2D& rect) const
 {
     return m_font->GetTextSize(fontSize, rect);
+}
+
+uint64_t FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept
+{
+    return static_cast<uint64_t>(ch) << 32 | fontSize;
 }
 
 } /* namespace tgon */

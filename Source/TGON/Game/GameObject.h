@@ -21,12 +21,19 @@ public:
     TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
-public:
-    GameObject(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>());
+protected:
+    GameObject();
+    explicit GameObject(const StringHash& name);
+    explicit GameObject(StringHash&& name);
+    explicit GameObject(const std::shared_ptr<Transform>& transform);
+    GameObject(const StringHash& name, const std::shared_ptr<Transform>& transform);
+    GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform);
 
 /**@section Method */
 public:
-    virtual void Initialize();
+    template <typename _Type = GameObject>
+    static std::shared_ptr<_Type> Create(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>());
+    virtual void Initialize() {}
     virtual void Update();
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
@@ -38,6 +45,7 @@ public:
     std::shared_ptr<_ComponentType> FindComponent();
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
+    void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
     std::shared_ptr<Transform> GetTransform() noexcept;
     std::shared_ptr<const Transform> GetTransform() const noexcept;
 
@@ -46,11 +54,30 @@ private:
     std::shared_ptr<Component> FindComponent(size_t componentId);
 
 /**@section Variable */
-private:
+protected:
     bool m_isActive;
     std::shared_ptr<Transform> m_transform;
     std::vector<std::shared_ptr<Component>> m_components;
 };
+
+template <typename _Type>
+inline std::shared_ptr<_Type> GameObject::Create(const StringHash& name, const std::shared_ptr<Transform>& transform)
+{
+    static_assert(std::is_convertible_v<_Type*, GameObject*>, "GameObject::Create accepts only class that inherited from GameObject.");
+
+    std::shared_ptr<_Type> object(new _Type());
+    object->SetName(name);
+    object->m_transform = transform;
+    
+    if (transform != nullptr)
+    {
+        transform->SetGameObject(object);;
+    }
+    
+    object->Initialize();
+
+    return object;
+}
 
 template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)

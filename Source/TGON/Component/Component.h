@@ -13,7 +13,7 @@ namespace tgon
 class GameObject;
 
 class Component :
-	public Object
+    public Object
 {
 public:
     TGON_DECLARE_RTTI(Component)

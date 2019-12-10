@@ -14,7 +14,7 @@ namespace tgon
 {
 
 class CameraComponent :
-	public Component
+    public Component
 {
 public:
     TGON_DECLARE_RTTI(CameraComponent)
@@ -32,7 +32,7 @@ public:
 
 /**@section Method */
 public:
-	void Update() override;
+    void Update() override;
     std::shared_ptr<Camera> GetCamera() noexcept;
     std::shared_ptr<const Camera> GetCamera() const noexcept;
 

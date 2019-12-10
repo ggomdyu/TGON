@@ -8,10 +8,12 @@
 namespace tgon
 {
 
-Engine::~Engine() = default;
-
-void Engine::Initialize()
+Engine::~Engine()
 {
+    while (m_modules.empty() == false)
+    {
+        m_modules.pop_back();
+    }
 }
 
 void Engine::Update()
