@@ -111,12 +111,14 @@ void Transform::Update()
 {
     if (m_isDirty == true)
     {
-        bool isRootTransform = m_parent == nullptr;
-        
-        m_matWorld = (isRootTransform) ? Matrix4x4::Identity() : m_parent->GetWorldMatrix();
-        m_matWorld *= Matrix4x4::Scale(m_localScale.x, m_localScale.y, m_localScale.z);
+        m_matWorld = Matrix4x4::Scale(m_localScale.x, m_localScale.y, m_localScale.z);
         m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
         m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
+        
+        if (m_parent != nullptr)
+        {
+            m_matWorld *= m_parent->GetWorldMatrix();
+        }
 
         for (auto& child : m_children)
         {
