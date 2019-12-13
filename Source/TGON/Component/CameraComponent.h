@@ -24,7 +24,7 @@ public:
     CameraComponent();
     CameraComponent(const FRect& orthoPlane, float nearZ, float farZ);
     CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ);
-    CameraComponent(const std::shared_ptr<Camera>& camera);
+    explicit CameraComponent(const std::shared_ptr<Camera>& camera);
 
 /**@section Destructor */
 public:
@@ -33,6 +33,14 @@ public:
 /**@section Method */
 public:
     void Update() override;
+    void SetNearZ(float nearZ) noexcept;
+    void SetFarZ(float farZ) noexcept;
+    void SetCamera(const std::shared_ptr<Camera>& camera);
+    float GetNearZ() const noexcept;
+    float GetFarZ() const noexcept;
+    ProjectionMode GetProjectionMode() const noexcept;
+    const Matrix4x4& GetProjectionMatrix() const noexcept;
+    const Matrix4x4& GetViewProjectionMatrix() const noexcept;
     std::shared_ptr<Camera> GetCamera() noexcept;
     std::shared_ptr<const Camera> GetCamera() const noexcept;
 

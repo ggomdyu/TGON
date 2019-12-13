@@ -81,6 +81,11 @@ bool GameObject::IsActive() const noexcept
     return m_isActive;
 }
 
+void GameObject::SetTransform(const std::shared_ptr<Transform>& transform) noexcept
+{
+    m_transform = transform;
+}
+
 std::shared_ptr<Transform> GameObject::GetTransform() noexcept
 {
     return m_transform;

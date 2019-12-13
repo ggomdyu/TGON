@@ -31,8 +31,8 @@ protected:
 
 /**@section Method */
 public:
-    template <typename _Type = GameObject>
-    static std::shared_ptr<_Type> Create(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>());
+    template <typename _Type = GameObject, typename... _ArgTypes>
+    static std::shared_ptr<_Type> Create(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>(), _ArgTypes&&... args);
     virtual void Initialize() {}
     virtual void Update();
     template <typename _ComponentType, typename... _ArgTypes>
@@ -60,14 +60,14 @@ protected:
     std::vector<std::shared_ptr<Component>> m_components;
 };
 
-template <typename _Type>
-inline std::shared_ptr<_Type> GameObject::Create(const StringHash& name, const std::shared_ptr<Transform>& transform)
+template <typename _Type, typename... _ArgTypes>
+inline std::shared_ptr<_Type> GameObject::Create(const StringHash& name, const std::shared_ptr<Transform>& transform, _ArgTypes&&... args)
 {
     static_assert(std::is_convertible_v<_Type*, GameObject*>, "GameObject::Create accepts only class that inherited from GameObject.");
 
-    std::shared_ptr<_Type> object(new _Type());
+    std::shared_ptr<_Type> object(new _Type(std::forward<_ArgTypes>(args)...));
     object->SetName(name);
-    object->m_transform = transform;
+    object->SetTransform(transform);
     
     if (transform != nullptr)
     {

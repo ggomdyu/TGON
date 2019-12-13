@@ -5,9 +5,8 @@
  */
 
 #pragma once
-#include "Core/NonCopyable.h"
-
 #include "ShaderProgram.h"
+#include "Pass.h"
 
 namespace tgon
 {

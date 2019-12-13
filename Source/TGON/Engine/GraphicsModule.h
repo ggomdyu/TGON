@@ -21,12 +21,8 @@ public:
     
 /**@section Constructor */
 public:
-    GraphicsModule(const Window& window, const VideoMode& videoMode);
+    GraphicsModule(Window& window, const VideoMode& videoMode);
 
-/**@section Destructor */
-public:
-    ~GraphicsModule() override final = default;
-    
 /**@section Method */
 public:
     Graphics& GetGraphics() noexcept;
@@ -38,6 +34,7 @@ public:
 /**@section Method */
 private:
     void Draw();
+    void OnResizeWindow(int32_t width, int32_t height);
     
 /**@section Variable */
 private:

@@ -73,6 +73,7 @@ VertexBuffer::VertexBuffer(const std::initializer_list<VertexBufferLayoutDescrip
     m_vertexBufferLayoutDescs(vertexBufferLayoutDescs)
 {
 }
+
 void VertexBuffer::SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage)
 {
     TGON_GL_ERROR_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle));

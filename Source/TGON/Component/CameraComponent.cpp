@@ -10,17 +10,17 @@ namespace tgon
 {
 
 CameraComponent::CameraComponent() :
-    CameraComponent(std::make_shared<Camera>())
+    CameraComponent(nullptr)
 {
 }
 
 CameraComponent::CameraComponent(const FRect& orthoPlane, float nearZ, float farZ) :
-    CameraComponent(std::make_shared<Camera>(orthoPlane, nearZ, farZ))
+    CameraComponent(std::make_shared<OrthographicCamera>(orthoPlane, nearZ, farZ))
 {
 }
 
 CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, float fov, float nearZ, float farZ) :
-    CameraComponent(std::make_shared<Camera>(eyePt, lookAt, fov, nearZ, farZ))
+    CameraComponent(std::make_shared<PerspectiveCamera>(eyePt, lookAt, fov, nearZ, farZ))
 {
 }
 
@@ -29,7 +29,10 @@ CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     m_camera(camera),
     m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
 {
-    m_graphicsModule->GetUIRenderer().AddCamera(camera);
+    if (camera != nullptr)
+    {
+        m_graphicsModule->GetUIRenderer().AddCamera(camera);
+    }
 }
 
 CameraComponent::~CameraComponent()
@@ -39,7 +42,50 @@ CameraComponent::~CameraComponent()
 
 void CameraComponent::Update()
 {
-    m_camera->Update();
+    if (m_camera != nullptr)
+    {
+        m_camera->Update();
+    }
+}
+
+void CameraComponent::SetNearZ(float nearZ) noexcept
+{
+    return m_camera->SetNearZ(nearZ);
+}
+
+void CameraComponent::SetFarZ(float farZ) noexcept
+{
+    return m_camera->SetFarZ(farZ);
+}
+
+float CameraComponent::GetNearZ() const noexcept
+{
+    return m_camera->GetNearZ();
+}
+
+float CameraComponent::GetFarZ() const noexcept
+{
+    return m_camera->GetFarZ();
+}
+
+ProjectionMode CameraComponent::GetProjectionMode() const noexcept
+{
+    return m_camera->GetProjectionMode();
+}
+
+const Matrix4x4& CameraComponent::GetProjectionMatrix() const noexcept
+{
+    return m_camera->GetProjectionMatrix();
+}
+
+const Matrix4x4& CameraComponent::GetViewProjectionMatrix() const noexcept
+{
+    return m_camera->GetViewProjectionMatrix();
+}
+
+void CameraComponent::SetCamera(const std::shared_ptr<Camera>& camera)
+{
+    m_camera = camera;
 }
 
 std::shared_ptr<Camera> CameraComponent::GetCamera() noexcept

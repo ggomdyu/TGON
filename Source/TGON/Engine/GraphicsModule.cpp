@@ -8,7 +8,7 @@
 namespace tgon
 {
 
-GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode) :
+GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics(window, videoMode)
 {
     auto clientSize = window.GetClientSize();
@@ -18,6 +18,8 @@ GraphicsModule::GraphicsModule(const Window& window, const VideoMode& videoMode)
     m_graphics.EnableDepthTest();
     m_graphics.EnableBlend();
     m_graphics.SetBlendMode(BlendMode::Alpha);
+    
+    window.OnResize += MakeDelegate<&GraphicsModule::OnResizeWindow>(this);
 }
 
 void GraphicsModule::Draw()
@@ -27,6 +29,11 @@ void GraphicsModule::Draw()
         m_uiRenderer.Draw(m_graphics);
     }
     m_graphics.SwapBuffer();
+}
+
+void GraphicsModule::OnResizeWindow(int32_t width, int32_t height)
+{
+    m_graphics.SetViewport(0, 0, width, height);
 }
     
 Graphics& GraphicsModule::GetGraphics() noexcept

@@ -13,6 +13,8 @@
 		8C012C11230C580D00285F74 /* Environment.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C012C0F230C580D00285F74 /* Environment.h */; };
 		8C012C15230C6C9E00285F74 /* StdioFileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */; };
 		8C012C17230C744000285F74 /* MacOSPath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C012C16230C743F00285F74 /* MacOSPath.mm */; };
+		8C0C8B4223A349A300AA01F3 /* Pass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C8B4023A349A300AA01F3 /* Pass.cpp */; };
+		8C0C8B4323A349A300AA01F3 /* Pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C0C8B4123A349A300AA01F3 /* Pass.h */; };
 		8C1271472372AC2D009D1993 /* FileSystemEnumerable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */; };
 		8C1271492372AE3E009D1993 /* UnixFileSystemEnumerable.inl in Headers */ = {isa = PBXBuildFile; fileRef = 8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */; };
 		8C3DA3A0239421DF004A24E4 /* TimerModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3DA39E239421DF004A24E4 /* TimerModule.h */; };
@@ -795,6 +797,8 @@
 		8C012C0F230C580D00285F74 /* Environment.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Environment.h; sourceTree = "<group>"; };
 		8C012C14230C6C9E00285F74 /* StdioFileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = StdioFileStream.cpp; sourceTree = "<group>"; };
 		8C012C16230C743F00285F74 /* MacOSPath.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = MacOSPath.mm; sourceTree = "<group>"; };
+		8C0C8B4023A349A300AA01F3 /* Pass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pass.cpp; sourceTree = "<group>"; };
+		8C0C8B4123A349A300AA01F3 /* Pass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pass.h; sourceTree = "<group>"; };
 		8C1271462372AC2C009D1993 /* FileSystemEnumerable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSystemEnumerable.h; sourceTree = "<group>"; };
 		8C1271482372AE3E009D1993 /* UnixFileSystemEnumerable.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnixFileSystemEnumerable.inl; sourceTree = "<group>"; };
 		8C3DA39E239421DF004A24E4 /* TimerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerModule.h; sourceTree = "<group>"; };
@@ -2702,6 +2706,8 @@
 				FD2D6CF122D0643F0087DF85 /* Material.h */,
 				FD2D6CF622D064400087DF85 /* Mesh.cpp */,
 				FD2D6CF722D064400087DF85 /* Mesh.h */,
+				8C0C8B4023A349A300AA01F3 /* Pass.cpp */,
+				8C0C8B4123A349A300AA01F3 /* Pass.h */,
 				FD2D6CF022D0643F0087DF85 /* RenderTarget.cpp */,
 				FD2D6CE822D0643E0087DF85 /* RenderTarget.h */,
 				FD2D6CE122D0643D0087DF85 /* ShaderProgram.cpp */,
@@ -3527,6 +3533,7 @@
 				FD53329C22A2EA1C001EB57C /* fttrigon.h in Headers */,
 				FD5332B322A2EA1C001EB57C /* ftserv.h in Headers */,
 				FD5332A722A2EA1C001EB57C /* pshints.h in Headers */,
+				8C0C8B4323A349A300AA01F3 /* Pass.h in Headers */,
 				FDE1B66622E4100F0093FDC1 /* cstr.h in Headers */,
 				FDE1B5D022E40FDB0093FDC1 /* ucnvsel.h in Headers */,
 				FD53332522A57F38001EB57C /* crc32.h in Headers */,
@@ -4293,6 +4300,7 @@
 				FDE1B50B22E40E950093FDC1 /* ucnvhz.cpp in Sources */,
 				FD4C1DDC219F3F7C00B2B2BE /* GainputRotateGesture.cpp in Sources */,
 				FD53320C22A2E8C9001EB57C /* ftotval.c in Sources */,
+				8C0C8B4223A349A300AA01F3 /* Pass.cpp in Sources */,
 				FDE1B4B922E40E940093FDC1 /* stringpiece.cpp in Sources */,
 				FDE1B51522E40E950093FDC1 /* uarrsort.cpp in Sources */,
 				FD4C1DDD219F3F7C00B2B2BE /* GainputSimultaneouslyDownGesture.cpp in Sources */,
