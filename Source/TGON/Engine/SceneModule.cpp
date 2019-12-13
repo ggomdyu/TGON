@@ -13,7 +13,10 @@ void SceneModule::Update()
         m_currScene->Initialize();
     }
     
-    m_currScene->Update();
+    if (m_currScene != nullptr)
+    {
+        m_currScene->Update();
+    }
 
     for (auto& object : m_globalObjects)
     {

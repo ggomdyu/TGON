@@ -136,7 +136,11 @@ void SpriteRendererComponent::Update()
         return;
     }
 
-    m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, m_gameObject->FindComponent<Transform>()->GetWorldMatrix());
+    auto gameObject = m_gameObject.lock();
+    if (gameObject != nullptr)
+    {
+        m_graphicsModule->GetUIRenderer().AddUIElement(m_sprite, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
+    }
 }
 
 } /* namespace tgon */

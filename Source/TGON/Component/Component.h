@@ -34,8 +34,8 @@ public:
 
 /**@section Variable */
 protected:
-    std::shared_ptr<GameObject> m_gameObject;
-    bool m_isActive;
+    std::weak_ptr<GameObject> m_gameObject;
+    bool m_isActive = true;
 };
 
 } /* namespace tgon */

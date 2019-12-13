@@ -71,7 +71,7 @@ inline std::shared_ptr<_Type> GameObject::Create(const StringHash& name, const s
     
     if (transform != nullptr)
     {
-        transform->SetGameObject(object);;
+        transform->SetGameObject(object);
     }
     
     object->Initialize();

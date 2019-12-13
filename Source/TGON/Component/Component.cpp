@@ -23,12 +23,12 @@ void Component::SetGameObject(const std::shared_ptr<GameObject>& gameObject) noe
 
 std::shared_ptr<GameObject> Component::GetGameObject() noexcept
 {
-    return m_gameObject;
+    return m_gameObject.lock();
 }
 
 std::shared_ptr<const GameObject> Component::GetGameObject() const noexcept
 {
-    return m_gameObject;
+    return m_gameObject.lock();
 }
 
 void Component::SetAcitve(bool isActive) noexcept
