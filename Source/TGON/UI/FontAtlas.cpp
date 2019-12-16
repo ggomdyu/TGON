@@ -12,8 +12,8 @@ FontAtlas::FontAtlas(const std::shared_ptr<Font>& font) :
 }
 
 FontAtlas::FontAtlas(std::shared_ptr<Font>&& font) :
-   m_font(std::move(font)),
-   m_textureAtlas(I32Extent2D(1024, 1024), PixelFormat::RGBA8888, 2)
+    m_font(std::move(font)),
+    m_textureAtlas(I32Extent2D(1024, 1024), PixelFormat::RGBA8888, 2)
 {
 }
 
@@ -29,6 +29,18 @@ FontAtlas& FontAtlas::operator=(FontAtlas&& rhs) noexcept
     m_textureAtlas = std::move(rhs.m_textureAtlas);
     
     return *this;
+}
+
+void FontAtlas::Initialize(const std::shared_ptr<Font>& font)
+{
+    m_textureAtlas.Clear();
+    m_font = font;
+}
+
+void FontAtlas::Initialize(std::shared_ptr<Font>&& font)
+{
+    m_textureAtlas.Clear();
+    m_font = std::move(font);
 }
 
 std::optional<std::reference_wrapper<FRect>> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
@@ -70,19 +82,14 @@ I32Vector2 FontAtlas::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) c
     return m_font->GetKerning(lhs, rhs, fontSize);
 }
 
-I32Extent2D FontAtlas::GetTextSize(int32_t fontSize)
+I32Extent2D FontAtlas::GetCharSize(char32_t ch, int32_t fontSize)
 {
-    return m_font->GetTextSize(fontSize);
+    return m_font->GetCharSize(ch, fontSize);
 }
 
-I32Extent2D FontAtlas::GetTextSize(int32_t fontSize, const I32Extent2D& rect) const
+FontAtlas::TextureAtlasKey FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept
 {
-    return m_font->GetTextSize(fontSize, rect);
-}
-
-uint64_t FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept
-{
-    return static_cast<uint64_t>(ch) << 32 | fontSize;
+    return static_cast<TextureAtlasKey>(ch) << 32 | fontSize;
 }
 
 } /* namespace tgon */

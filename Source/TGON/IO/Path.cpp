@@ -5,8 +5,8 @@
 #include "Random/Random.h"
 #include "Platform/Environment.h"
 
-#include "Directory.h"
 #include "Path.h"
+#include "Directory.h"
 
 namespace tgon
 {

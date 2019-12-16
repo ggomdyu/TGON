@@ -13,10 +13,15 @@ namespace tgon
 
 class FontAtlas
 {
+/**@section Type */
+public:
+    using TextureAtlasKey = uint64_t;
+
 /**@section Constructor */
 public:
-    FontAtlas(const std::shared_ptr<Font>& font);
-    FontAtlas(std::shared_ptr<Font>&& font);
+    FontAtlas() = default;
+    explicit FontAtlas(const std::shared_ptr<Font>& font);
+    explicit FontAtlas(std::shared_ptr<Font>&& font);
     FontAtlas(FontAtlas&& rhs) noexcept;
         
 /**@section Operator */
@@ -25,22 +30,23 @@ public:
 
 /**@section Method */
 public:
+    void Initialize(const std::shared_ptr<Font>& font);
+    void Initialize(std::shared_ptr<Font>&& font);
     std::optional<std::reference_wrapper<FRect>> GetTextureRect(char32_t ch, int32_t fontSize) const;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
     const FontFace& GetFace(int32_t fontSize) const;
     const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
-    I32Extent2D GetTextSize(int32_t fontSize);
-    I32Extent2D GetTextSize(int32_t fontSize, const I32Extent2D& rect) const;
+    I32Extent2D GetCharSize(char32_t ch, int32_t fontSize);
 
 private:
-    static uint64_t CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept;
+    static TextureAtlasKey CreateTextureAtlasKey(char32_t ch, int32_t fontSize) noexcept;
     
 /**@section Variable */
 private:
     std::shared_ptr<Font> m_font;
-    mutable BasicTextureAtlas<uint64_t> m_textureAtlas;
+    mutable BasicTextureAtlas<TextureAtlasKey> m_textureAtlas;
 };
 
 } /* namespace tgon */

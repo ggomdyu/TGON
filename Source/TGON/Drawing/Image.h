@@ -42,18 +42,21 @@ class Image
 public:
     Image() noexcept = default;
     explicit Image(const char* filePath);
-    Image(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
+    Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     Image(Image&& rhs) noexcept;
 
 /**@section Operator */
 public:
+    bool operator==(const Image& rhs) const noexcept;
+    bool operator!=(const Image& rhs) const noexcept;
     Image& operator=(Image&& rhs) noexcept;
     std::byte& operator[](size_t index) noexcept;
     std::byte operator[](size_t index) const noexcept;
 
 /**@section Method */
 public:
-    void SetData(std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
+    bool Initialize(const char* filePath);
+    void Initialize(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     std::byte* GetData() noexcept;
     const std::byte* GetData() const noexcept;
     const I32Extent2D& GetSize() const noexcept;
@@ -64,15 +67,11 @@ public:
     bool SaveAsBmp(const char* destFilePath) const;
     bool SaveAsTga(const char* destFilePath) const;
     
-private:
-    void LoadImageData(const char* filePath);
-    void LoadImageData(const std::byte* fileData, int32_t fileDataBytes);
-
 /**@section Variable */
 private:
     std::unique_ptr<std::byte[]> m_imageData;
     I32Extent2D m_size;
-    PixelFormat m_pixelFormat = PixelFormat::RGBA8888;
+    PixelFormat m_pixelFormat = PixelFormat::Unknown;
 };
 
 } /* namespace tgon */

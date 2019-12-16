@@ -1818,8 +1818,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferType.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\BaseAudioImporter.h" />

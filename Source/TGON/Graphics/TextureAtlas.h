@@ -36,6 +36,7 @@ public:
 public:
     static std::optional<BasicTextureAtlas> Load(const std::string_view& path);
     bool Insert(_KeyType key, std::byte* imageData, const I32Extent2D& size);
+    void Clear();
     bool Contains(_KeyType key);
     std::optional<std::reference_wrapper<FRect>> GetTextureRect(_KeyType key) const;
     int32_t GetTextureCount() const noexcept;
@@ -46,14 +47,16 @@ public:
 /**@section Variable */
 private:
     std::shared_ptr<Texture> m_atlasTexture;
-    std::unique_ptr<stbrp_context> m_context;
-    std::unique_ptr<stbrp_node[]> m_nodes;
-    std::unique_ptr<stbrp_rect[]> m_nodeRects;
+    stbrp_context m_context;
+    std::array<stbrp_node, 4096> m_nodes;
+    std::array<stbrp_rect, 4096> m_nodeRects;
     mutable std::unordered_map<_KeyType, FRect> m_packedTextureInfos;
     int32_t m_paddingOffset;
 };
 
 using TextureAtlas = BasicTextureAtlas<size_t>;
+using I32TextureAtlas = BasicTextureAtlas<int32_t>;
+using I64extureAtlas = BasicTextureAtlas<int64_t>;
 
 template <typename _KeyType>
 inline BasicTextureAtlas<_KeyType>::BasicTextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset) :
@@ -113,6 +116,18 @@ inline bool BasicTextureAtlas<_KeyType>::Insert(_KeyType key, std::byte* imageDa
     }
 
     return false;
+}
+
+template<typename _KeyType>
+inline void BasicTextureAtlas<_KeyType>::Clear()
+{
+    m_context(std::make_unique<stbrp_context>());
+    m_context
+
+
+    m_nodes(std::make_unique<stbrp_node[]>(4096));
+    m_nodeRects(std::make_unique<stbrp_rect[]>(4096));
+    m_paddingOffset(paddingOffset);
 }
 
 template <typename _KeyType>

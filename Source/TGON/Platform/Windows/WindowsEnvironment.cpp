@@ -69,7 +69,7 @@ int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int
 
 int32_t Environment::GetEnvironmentVariable(const char* name, const gsl::span<char>& destStr)
 {
-    return GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
+    return Environment::GetEnvironmentVariable(name, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
@@ -84,7 +84,7 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
 
 int32_t Environment::GetFolderPath(SpecialFolder folder, const gsl::span<char>& destStr)
 {
-    return GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
+    return Environment::GetFolderPath(folder, &destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 const std::string& Environment::GetCommandLine()
@@ -186,7 +186,7 @@ int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 
 int32_t Environment::GetUserName(const gsl::span<char>& destStr)
 {
-    return GetUserName(&destStr[0], static_cast<int32_t>(destStr.size()));
+    return Environment::GetUserName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
@@ -202,7 +202,7 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 
 int32_t Environment::GetMachineName(const gsl::span<char>& destStr)
 {
-    return GetMachineName(&destStr[0], static_cast<int32_t>(destStr.size()));
+    return Environment::GetMachineName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
@@ -236,7 +236,7 @@ int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
 
 int32_t Environment::GetUserDomainName(const gsl::span<char>& destStr)
 {
-    return GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
+    return Environment::GetUserDomainName(&destStr[0], static_cast<int32_t>(destStr.size()));
 }
 
 DWORD InternalGetStackTrace(EXCEPTION_POINTERS* ep, char* destStr, int32_t destStrBufferLen, int32_t* destStrLen)

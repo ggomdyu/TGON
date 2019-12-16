@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Diagnostics/Debug.h"
 #include "IO/File.h"
 
 #include "Font.h"
@@ -10,9 +9,15 @@ namespace tgon
 
 extern const char* ConvertFTErrorToString(FT_Error error);
 
-Font::Font(const char* filePath, FT_Library library) :
-    Font(File::ReadAllBytes(filePath).value_or(std::vector<std::byte>()), library)
+Font::Font(FT_Library library) noexcept :
+    m_library(library)
 {
+}
+
+Font::Font(const char* filePath, FT_Library library) :
+    Font(library)
+{
+    this->Initialize(filePath);
 }
 
 Font::Font(const std::vector<std::byte>& fileData, FT_Library library) :
@@ -46,6 +51,30 @@ Font& Font::operator=(Font&& rhs) noexcept
     return *this;
 }
 
+bool Font::Initialize(const char* filePath)
+{
+    auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
+    if (fileData.has_value() == false)
+    {
+        return false;
+    }
+
+    this->Initialize(*fileData);
+    return true;
+}
+
+void Font::Initialize(std::vector<std::byte>&& fileData)
+{
+    m_fontFaces.clear();
+    m_fileData = std::move(fileData);
+}
+
+void Font::Initialize(const std::vector<std::byte>& fileData)
+{
+    m_fontFaces.clear();
+    m_fileData = fileData;
+}
+
 const FontFace& Font::GetFace(int32_t fontSize) const
 {
     auto iter = m_fontFaces.find(fontSize);
@@ -67,16 +96,9 @@ I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
     return this->GetFace(fontSize).GetKerning(lhs, rhs);
 }
 
-I32Extent2D Font::GetTextSize(int32_t fontSize)
+I32Extent2D Font::GetCharSize(char32_t ch, int32_t fontSize)
 {
-    // TODO: Impl
-    return {};
-}
-
-I32Extent2D Font::GetTextSize(int32_t fontSize, const I32Extent2D& rect) const
-{
-    // TODO: Impl
-    return {};
+    return this->GetFace(fontSize).GetGlyphData(ch).metrics.size;
 }
 
 } /* namespace tgon */

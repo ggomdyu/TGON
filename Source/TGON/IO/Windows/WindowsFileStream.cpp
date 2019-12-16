@@ -1,8 +1,8 @@
 #include "PrecompiledHeader.h"
 
 #include "Diagnostics/Debug.h"
-#include "Misc/Algorithm.h"
 #include "Text/Encoding.h"
+#include "Misc/Algorithm.h"
 #include "Platform/Windows/Windows.h"
 
 #include "../FileStream.h"
@@ -19,7 +19,7 @@ HANDLE CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access, 
 {
     if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
-        return {};
+        return INVALID_HANDLE_VALUE;
     }
 
     auto desiredAccess = (access == FileAccess::Read) ? GENERIC_READ : (access == FileAccess::Write) ? GENERIC_WRITE : GENERIC_READ | GENERIC_WRITE;
@@ -56,12 +56,12 @@ FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileS
 {
     if (m_nativeHandle == INVALID_HANDLE_VALUE)
     {
-        Debug::Fail("Failed to construct the FileStream.", "Could not create the file handle.");
+        Debug::WriteLine("Could not create the file handle.");
     }
 
     if (GetFileType(m_nativeHandle) != FILE_TYPE_DISK)
     {
-        Debug::Fail("Failed to construct the FileStream.", "The FileStream instance is not a file.");
+        Debug::WriteLine("The FileStream instance is not a file.");
     }
 }
 

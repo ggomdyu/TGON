@@ -4,6 +4,8 @@
 
 #include "AudioDevice.h"
 
+#pragma comment(lib, "Winmm.lib")
+
 namespace tgon
 {
 

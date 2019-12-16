@@ -1400,12 +1400,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISConfig.h">
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferType.h">
-      <Filter>Source\TGON\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioBufferUtility.h">
-      <Filter>Source\TGON\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.h">
       <Filter>Source\TGON\Audio</Filter>
     </ClInclude>

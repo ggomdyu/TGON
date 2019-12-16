@@ -60,51 +60,88 @@ bool File::SetLastWriteTime(const char* path, const DateTime& lastWriteTime)
     return SetLastWriteTimeUtc(path, lastWriteTime);
 }
 
-std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path)
+std::unique_ptr<std::byte[]> File::ReadAllBytes(const char* path, ReturnSmartPointerTag)
 {
-    FileStream fs(path, FileMode::Open, FileAccess::Read, FileShare::Read);
-    if (fs.IsClosed() || fs.Length() > INT_MAX)
+#ifdef _MSC_VER
+    FILE* fp = nullptr;
+    fopen_s(&fp, path, "rb");
+#else
+    FILE* fp = fopen(path, "rb");
+#endif
+    if (fp == nullptr)
+    {
+        return nullptr;
+    }
+
+    fseek(fp, 0, SEEK_END);
+    auto fileSize = static_cast<size_t>(ftell(fp));
+    fseek(fp, 0, SEEK_SET);
+
+    auto fileData = std::make_unique<std::byte[]>(static_cast<size_t>(fileSize));
+#ifdef _MSC_VER
+    fread_s(&fileData[0], fileSize, 1, fileSize, fp);
+#else
+    fread(&fileData[0], 1, fileSize, fp);
+#endif
+
+    fclose(fp);
+    return fileData;
+}
+
+std::optional<std::vector<std::byte>> File::ReadAllBytes(const char* path, ReturnVectorTag)
+{
+#ifdef _MSC_VER
+    FILE* fp = nullptr;
+    fopen_s(&fp, path, "rb");
+#else
+    FILE* fp = fopen(path, "rb");
+#endif
+    if (fp == nullptr)
     {
         return {};
     }
 
-    int32_t fileBytes = static_cast<int32_t>(fs.Length());
-    int32_t index = 0;
+    fseek(fp, 0, SEEK_END);
+    auto fileSize = static_cast<size_t>(ftell(fp));
+    fseek(fp, 0, SEEK_SET);
 
-    std::vector<std::byte> ret(static_cast<size_t>(fileBytes));
-    while (fileBytes > 0)
-    {
-        auto readBytes = fs.Read(&ret[index], 4096);
+    std::vector<std::byte> fileData(fileSize);
+#ifdef _MSC_VER
+    fread_s(&fileData[0], fileSize, 1, fileSize, fp);
+#else
+    fread(&fileData[0], 1, fileSize, fp);
+#endif
 
-        index += readBytes;
-        fileBytes -= readBytes;
-    }
-
-    return ret;
+    fclose(fp);
+    return fileData;
 }
 
 std::optional<std::string> File::ReadAllText(const char* path)
 {
-    FileStream fs(path, FileMode::Open, FileAccess::Read, FileShare::Read);
-    if (fs.IsClosed() || fs.Length() > INT_MAX)
+#ifdef _MSC_VER
+    FILE* fp = nullptr;
+    fopen_s(&fp, path, "r");
+#else
+    FILE* fp = fopen(path, "r");
+#endif
+    if (fp == nullptr)
     {
         return {};
     }
 
-    int32_t fileBytes = static_cast<int32_t>(fs.Length());
-    int32_t index = 0;
+    fseek(fp, 0, SEEK_END);
+    auto fileSize = static_cast<size_t>(ftell(fp));
+    fseek(fp, 0, SEEK_SET);
 
-    std::string ret;
-    ret.resize(static_cast<size_t>(fileBytes));
-    while (fileBytes > 0)
-    {
-        auto readBytes = fs.Read(reinterpret_cast<std::byte*>(&ret[index]), 4096);
+    std::string fileData(fileSize, '\0');
+#ifdef _MSC_VER
+    fread_s(&fileData[0], fileSize, 1, fileSize, fp);
+#else
+    fread(&fileData[0], 1, fileSize, fp);
+#endif
 
-        index += readBytes;
-        fileBytes -= readBytes;
-    }
-
-    return ret;
+    fclose(fp);
+    return fileData;
 }
 
 std::optional<std::vector<std::string>> File::ReadAllLines(const char* path)
