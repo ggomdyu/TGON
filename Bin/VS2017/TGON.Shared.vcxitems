@@ -1623,9 +1623,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_c.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_neon.cpp">
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
