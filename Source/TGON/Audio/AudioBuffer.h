@@ -14,7 +14,7 @@
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/al.h>
 #else
-#   include <al.h>
+#   include <AL/al.h>
 #endif
 
 #include "Core/NonCopyable.h"

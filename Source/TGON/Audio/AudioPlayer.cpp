@@ -3,7 +3,7 @@
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/alc.h>
 #else
-#   include <alc.h>
+#   include <AL/alc.h>
 #endif
 
 #include "AudioPlayer.h"

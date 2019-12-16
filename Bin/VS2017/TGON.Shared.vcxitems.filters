@@ -109,6 +109,30 @@
     <Filter Include="Source\TGON\Threading">
       <UniqueIdentifier>{4e2265e0-087b-4de4-9e87-27c676cedd85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0">
+      <UniqueIdentifier>{30ca0fc9-9c08-4b7e-91f0-e73d6b928901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\al">
+      <UniqueIdentifier>{aee3158e-d8c9-469a-9ecb-049d4875e546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc">
+      <UniqueIdentifier>{e22f3cd7-2633-4d27-9217-e1c2747a5e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\common">
+      <UniqueIdentifier>{7082e05c-6224-4716-910e-35bd2e3eb513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc\backends">
+      <UniqueIdentifier>{5ef54fe6-345b-4b92-8880-ed09e689c7e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc\effects">
+      <UniqueIdentifier>{428c3e0e-fdd1-4791-8f47-6573c0acb6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc\filters">
+      <UniqueIdentifier>{ca80aadd-d156-45a0-acb5-6362a8f31305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc\mixer">
+      <UniqueIdentifier>{d5ddc266-304c-49b1-96a3-1662edaf5b74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\src\glew.c">
@@ -1073,6 +1097,192 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Transform.cpp">
       <Filter>Source\TGON\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\alcomplex.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\alexcpt.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\alfstream.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\almalloc.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\alstring.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\dynload.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\strutils.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\common\threads.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\common</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\auxeffectslot.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\buffer.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\effect.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\error.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\event.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\extension.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\filter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\listener.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\source.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\al\state.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\al</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alc.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alconfig.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alu.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ambdec.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bformatdec.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bs2b.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\converter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\helpers.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\hrtf.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mastering.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\panning.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ringbuffer.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\uhjfilter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\uiddefs.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\voice.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\base.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\dsound.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\loopback.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wasapi.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wave.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\winmm.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\autowah.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\chorus.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\compressor.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\dedicated.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\distortion.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\echo.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\equalizer.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\fshifter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\modulator.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\null.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\pshifter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\reverb.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\vmorpher.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\biquad.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\nfc.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\splitter.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_c.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_neon.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse2.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse3.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse41.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
