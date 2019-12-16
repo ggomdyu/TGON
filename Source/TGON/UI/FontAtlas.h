@@ -32,7 +32,7 @@ public:
 public:
     void Initialize(const std::shared_ptr<Font>& font);
     void Initialize(std::shared_ptr<Font>&& font);
-    std::optional<std::reference_wrapper<FRect>> GetTextureRect(char32_t ch, int32_t fontSize) const;
+    std::optional<FRect> GetTextureRect(char32_t ch, int32_t fontSize) const;
     std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
     const FontFace& GetFace(int32_t fontSize) const;
@@ -45,6 +45,10 @@ private:
     
 /**@section Variable */
 private:
+    static constexpr auto DefaultAtlasSize = I32Extent2D(1024, 1024);
+    static constexpr auto DefaultPixelFormat = PixelFormat::RGBA8888;
+    static constexpr auto DefaultPaddingOffset = 2;
+
     std::shared_ptr<Font> m_font;
     mutable BasicTextureAtlas<TextureAtlasKey> m_textureAtlas;
 };

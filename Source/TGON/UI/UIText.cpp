@@ -530,8 +530,7 @@ void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld
             continue;
         }
         
-        const FRect& textureRect = (*optTextureRect).get();
-        batches->back().Merge(float(characterInfo.rect.x), float(characterInfo.rect.y), textureRect, Vector2(0.0f, 0.0f), m_blendColor, matWorld, vertices);
+        batches->back().Merge(float(characterInfo.rect.x), float(characterInfo.rect.y), optTextureRect.value(), Vector2(0.0f, 0.0f), m_blendColor, matWorld, vertices);
     }
 }
 

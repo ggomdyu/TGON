@@ -7,13 +7,13 @@ namespace tgon
 
 FontAtlas::FontAtlas(const std::shared_ptr<Font>& font) :
     m_font(font),
-    m_textureAtlas(I32Extent2D(1024, 1024), PixelFormat::RGBA8888, 2)
+    m_textureAtlas(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset)
 {
 }
 
 FontAtlas::FontAtlas(std::shared_ptr<Font>&& font) :
     m_font(std::move(font)),
-    m_textureAtlas(I32Extent2D(1024, 1024), PixelFormat::RGBA8888, 2)
+    m_textureAtlas(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset)
 {
 }
 
@@ -33,17 +33,17 @@ FontAtlas& FontAtlas::operator=(FontAtlas&& rhs) noexcept
 
 void FontAtlas::Initialize(const std::shared_ptr<Font>& font)
 {
-    m_textureAtlas.Clear();
+    m_textureAtlas.Initialize(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset);
     m_font = font;
 }
 
 void FontAtlas::Initialize(std::shared_ptr<Font>&& font)
 {
-    m_textureAtlas.Clear();
+    m_textureAtlas.Initialize(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset);
     m_font = std::move(font);
 }
 
-std::optional<std::reference_wrapper<FRect>> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
+std::optional<FRect> FontAtlas::GetTextureRect(char32_t ch, int32_t fontSize) const
 {
     auto textureAtlasKey = FontAtlas::CreateTextureAtlasKey(ch, fontSize);
     return m_textureAtlas.GetTextureRect(textureAtlasKey);
