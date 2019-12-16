@@ -30,7 +30,6 @@ restrictions:
 #if (defined (_DEBUG) || defined(OIS_WIN32_JOYFF_DEBUG))
   #include <iostream>
   #include <sstream>
-  using namespace std;
 #endif
 
 using namespace OIS;
@@ -40,9 +39,9 @@ Win32ForceFeedback::Win32ForceFeedback(IDirectInputDevice8* pDIJoy, const DIDEVC
   mHandles(0), mJoyStick(pDIJoy), mFFAxes(0), mpDIJoyCaps(pDIJoyCaps)
 {
 #if (OIS_WIN32_JOYFF_DEBUG > 0)
-  cout << "FFSamplePeriod      : " << mpDIJoyCaps->dwFFSamplePeriod << " mu-s, "
+  std::cout << "FFSamplePeriod      : " << mpDIJoyCaps->dwFFSamplePeriod << " mu-s, "
 	   << "FFMinTimeResolution : " << mpDIJoyCaps->dwFFMinTimeResolution << " mu-s,"
-	   << "" << endl;
+	   << "" << std::endl;
 #endif
 }
 
@@ -155,15 +154,15 @@ void Win32ForceFeedback::setMasterGain( float level )
 	DIPropGain.dwData            = gain_level;
 
 #if (OIS_WIN32_JOYFF_DEBUG > 0)
-	cout << "Win32ForceFeedback("<< mJoyStick << ") : Setting master gain to "
-		 << level << " => " << DIPropGain.dwData << endl;
+	std::cout << "Win32ForceFeedback("<< mJoyStick << ") : Setting master gain to "
+		 << level << " => " << DIPropGain.dwData << std::endl;
 #endif
 
 	const HRESULT hr = mJoyStick->SetProperty(DIPROP_FFGAIN, &DIPropGain.diph);
 
 #if defined (_DEBUG)
 	if(FAILED(hr))
-	    cout << "Failed to change master gain" << endl;
+	    std::cout << "Failed to change master gain" << std::endl;
 #endif
 }
 
@@ -178,15 +177,15 @@ void Win32ForceFeedback::setAutoCenterMode( bool auto_on )
 	DIPropAutoCenter.dwData            = (auto_on ? DIPROPAUTOCENTER_ON : DIPROPAUTOCENTER_OFF);
 
 #if (OIS_WIN32_JOYFF_DEBUG > 0)
-	cout << "Win32ForceFeedback("<< mJoyStick << ") : Setting auto-center mode to "
-		 << auto_on << " => " << DIPropAutoCenter.dwData << endl;
+	std::cout << "Win32ForceFeedback("<< mJoyStick << ") : Setting auto-center mode to "
+		 << auto_on << " => " << DIPropAutoCenter.dwData << std::endl;
 #endif
 
 	const HRESULT hr = mJoyStick->SetProperty(DIPROP_AUTOCENTER, &DIPropAutoCenter.diph);
 
 #if defined (_DEBUG)
 	if(FAILED(hr))
-	    cout << "Failed to change auto-center mode" << endl;
+	    std::cout << "Failed to change auto-center mode" << std::endl;
 #endif
 }
 
@@ -206,8 +205,8 @@ void Win32ForceFeedback::_updateConstantEffect( const Effect* effect )
 	cf.lMagnitude = eff->level;
 
 #if (OIS_WIN32_JOYFF_DEBUG > 1)
-	cout << "  Level : " << eff->level
-		 << " => " << cf.lMagnitude << endl;
+	std::cout << "  Level : " << eff->level
+		 << " => " << cf.lMagnitude << std::endl;
 #endif
 
 	_setCommonProperties(&diEffect, rgdwAxes, rglDirection, &diEnvelope, sizeof(DICONSTANTFORCE), &cf, effect, &eff->envelope);
@@ -327,11 +326,11 @@ void Win32ForceFeedback::_setCommonProperties(
 	diEffect->dwTriggerRepeatInterval = effect->trigger_interval;
 
 #if (OIS_WIN32_JOYFF_DEBUG > 1)
-	cout << "  Trigger :" << endl
+	std::cout << "  Trigger :" << std::endl
 		 << "    Button   : " << effect->trigger_button
-		 << " => " << diEffect->dwTriggerButton << endl
+		 << " => " << diEffect->dwTriggerButton << std::endl
 		 << "    Interval : " << effect->trigger_interval
-		 << " => " << diEffect->dwTriggerRepeatInterval << endl;
+		 << " => " << diEffect->dwTriggerRepeatInterval << std::endl;
 #endif
 
 	diEffect->cAxes                   = 1; // effect->getNumAxes();
@@ -340,11 +339,11 @@ void Win32ForceFeedback::_setCommonProperties(
 	diEffect->rglDirection            = rglDirection; // TODO: conversion from effect->direction
 
 #if (OIS_WIN32_JOYFF_DEBUG > 1)
-	cout << "  Direction : " << Effect::getDirectionName(effect->direction)
+	std::cout << "  Direction : " << Effect::getDirectionName(effect->direction)
 		 << " => {";
 	for (int iDir=0; iDir < (int)diEffect->cAxes; iDir++)
-	  cout << " " << diEffect->rglDirection[iDir];
-	cout << "}" << endl;
+	  std::cout << " " << diEffect->rglDirection[iDir];
+	std::cout << "}" << std::endl;
 #endif
 
 	if (diEnvelope && envelope && envelope->isUsed())
@@ -362,15 +361,15 @@ void Win32ForceFeedback::_setCommonProperties(
 #if (OIS_WIN32_JOYFF_DEBUG > 1)
 	if (diEnvelope && envelope && envelope->isUsed())
 	{
-		cout << "  Enveloppe :" << endl
+		std::cout << "  Enveloppe :" << std::endl
 			 << "    AttackLen : " << envelope->attackLength
-			 << " => " << diEnvelope->dwAttackTime << endl
+			 << " => " << diEnvelope->dwAttackTime << std::endl
 			 << "    AttackLvl : " << envelope->attackLevel
-			 << " => " << diEnvelope->dwAttackLevel << endl
+			 << " => " << diEnvelope->dwAttackLevel << std::endl
 			 << "    FadeLen   : " << envelope->fadeLength
-			 << " => " << diEnvelope->dwFadeTime << endl
+			 << " => " << diEnvelope->dwFadeTime << std::endl
 			 << "    FadeLvl   : " << envelope->fadeLevel
-			 << " => " << diEnvelope->dwFadeLevel << endl;
+			 << " => " << diEnvelope->dwFadeLevel << std::endl;
 	}
 #endif
 
@@ -379,11 +378,11 @@ void Win32ForceFeedback::_setCommonProperties(
 	diEffect->dwStartDelay            = effect->replay_delay;
 
 #if (OIS_WIN32_JOYFF_DEBUG > 1)
-	cout << "  Replay :" << endl
+	std::cout << "  Replay :" << std::endl
 		 << "    Length : " << effect->replay_length
-		 << " => " << diEffect->dwDuration << endl
+		 << " => " << diEffect->dwDuration << std::endl
 		 << "    Delay  : " << effect->replay_delay
-		 << " => " << diEffect->dwStartDelay << endl;
+		 << " => " << diEffect->dwStartDelay << std::endl;
 #endif
 
 	diEffect->cbTypeSpecificParams    = struct_size;
@@ -433,41 +432,41 @@ void Win32ForceFeedback::_addEffectSupport( LPCDIEFFECTINFO pdei )
 {
 #if (OIS_WIN32_JOYFF_DEBUG > 0)
     // Dump some usefull information about the effect type.
-    cout << "Adding support for '" << pdei->tszName << "' effect type" << endl;
-	cout << "  Supported static params: ";
-	if (pdei->dwStaticParams & DIEP_AXES) cout << " Axes";
-	if (pdei->dwStaticParams & DIEP_DIRECTION) cout << " Direction";
-	if (pdei->dwStaticParams & DIEP_DURATION) cout << " Duration";
-	if (pdei->dwStaticParams & DIEP_ENVELOPE) cout << " Envelope";
-	if (pdei->dwStaticParams & DIEP_GAIN) cout << " Gain";
-	if (pdei->dwStaticParams & DIEP_SAMPLEPERIOD) cout << " SamplePeriod";
-	if (pdei->dwStaticParams & DIEP_STARTDELAY) cout << " StartDelay";
-	if (pdei->dwStaticParams & DIEP_TRIGGERBUTTON) cout << " TriggerButton";
-	if (pdei->dwStaticParams & DIEP_TRIGGERREPEATINTERVAL) cout << " TriggerRepeatInterval";
-	if (pdei->dwStaticParams & DIEP_TYPESPECIFICPARAMS) cout << " TypeSpecificParams";
-	cout << endl;
-	cout << "  Supported dynamic params: ";
-	if (pdei->dwDynamicParams & DIEP_AXES) cout << " Axes";
-	if (pdei->dwDynamicParams & DIEP_DIRECTION) cout << " Direction";
-	if (pdei->dwDynamicParams & DIEP_DURATION) cout << " Duration";
-	if (pdei->dwDynamicParams & DIEP_ENVELOPE) cout << " Envelope";
-	if (pdei->dwDynamicParams & DIEP_GAIN) cout << " Gain";
-	if (pdei->dwDynamicParams & DIEP_SAMPLEPERIOD) cout << " SamplePeriod";
-	if (pdei->dwDynamicParams & DIEP_STARTDELAY) cout << " StartDelay";
-	if (pdei->dwDynamicParams & DIEP_TRIGGERBUTTON) cout << " TriggerButton";
-	if (pdei->dwDynamicParams & DIEP_TRIGGERREPEATINTERVAL) cout << " TriggerRepeatInterval";
-	if (pdei->dwDynamicParams & DIEP_TYPESPECIFICPARAMS) cout << " TypeSpecificParams";
-	cout << endl;
-	cout << "  More details about supported parameters support: ";
-	if (pdei->dwEffType & DIEFT_STARTDELAY) cout << " StartDelay";
-	if (pdei->dwEffType & DIEFT_FFATTACK) cout << " Attack";
-	if (pdei->dwEffType & DIEFT_FFFADE) cout << " Fade";
-	if (pdei->dwEffType & DIEFT_DEADBAND) cout << " DeadBand";
-	if (pdei->dwEffType & DIEFT_SATURATION) cout << " Saturation";
-	if (pdei->dwEffType & DIEFT_POSNEGSATURATION) cout << " PosNegaturation";
-	if (pdei->dwEffType & DIEFT_POSNEGCOEFFICIENTS) cout << " PosNegCoefficients";
-	if (pdei->dwEffType & DIEFT_HARDWARE) cout << " HardwareSpecific";
-	cout << endl;
+    std::cout << "Adding support for '" << pdei->tszName << "' effect type" << std::endl;
+	std::cout << "  Supported static params: ";
+	if (pdei->dwStaticParams & DIEP_AXES) std::cout << " Axes";
+	if (pdei->dwStaticParams & DIEP_DIRECTION) std::cout << " Direction";
+	if (pdei->dwStaticParams & DIEP_DURATION) std::cout << " Duration";
+	if (pdei->dwStaticParams & DIEP_ENVELOPE) std::cout << " Envelope";
+	if (pdei->dwStaticParams & DIEP_GAIN) std::cout << " Gain";
+	if (pdei->dwStaticParams & DIEP_SAMPLEPERIOD) std::cout << " SamplePeriod";
+	if (pdei->dwStaticParams & DIEP_STARTDELAY) std::cout << " StartDelay";
+	if (pdei->dwStaticParams & DIEP_TRIGGERBUTTON) std::cout << " TriggerButton";
+	if (pdei->dwStaticParams & DIEP_TRIGGERREPEATINTERVAL) std::cout << " TriggerRepeatInterval";
+	if (pdei->dwStaticParams & DIEP_TYPESPECIFICPARAMS) std::cout << " TypeSpecificParams";
+	std::cout << std::endl;
+	std::cout << "  Supported dynamic params: ";
+	if (pdei->dwDynamicParams & DIEP_AXES) std::cout << " Axes";
+	if (pdei->dwDynamicParams & DIEP_DIRECTION) std::cout << " Direction";
+	if (pdei->dwDynamicParams & DIEP_DURATION) std::cout << " Duration";
+	if (pdei->dwDynamicParams & DIEP_ENVELOPE) std::cout << " Envelope";
+	if (pdei->dwDynamicParams & DIEP_GAIN) std::cout << " Gain";
+	if (pdei->dwDynamicParams & DIEP_SAMPLEPERIOD) std::cout << " SamplePeriod";
+	if (pdei->dwDynamicParams & DIEP_STARTDELAY) std::cout << " StartDelay";
+	if (pdei->dwDynamicParams & DIEP_TRIGGERBUTTON) std::cout << " TriggerButton";
+	if (pdei->dwDynamicParams & DIEP_TRIGGERREPEATINTERVAL) std::cout << " TriggerRepeatInterval";
+	if (pdei->dwDynamicParams & DIEP_TYPESPECIFICPARAMS) std::cout << " TypeSpecificParams";
+	std::cout << std::endl;
+	std::cout << "  More details about supported parameters support: ";
+	if (pdei->dwEffType & DIEFT_STARTDELAY) std::cout << " StartDelay";
+	if (pdei->dwEffType & DIEFT_FFATTACK) std::cout << " Attack";
+	if (pdei->dwEffType & DIEFT_FFFADE) std::cout << " Fade";
+	if (pdei->dwEffType & DIEFT_DEADBAND) std::cout << " DeadBand";
+	if (pdei->dwEffType & DIEFT_SATURATION) std::cout << " Saturation";
+	if (pdei->dwEffType & DIEFT_POSNEGSATURATION) std::cout << " PosNegaturation";
+	if (pdei->dwEffType & DIEFT_POSNEGCOEFFICIENTS) std::cout << " PosNegCoefficients";
+	if (pdei->dwEffType & DIEFT_HARDWARE) std::cout << " HardwareSpecific";
+	std::cout << std::endl;
 #endif
 
     Effect::EForce eForce;
@@ -491,8 +490,8 @@ void Win32ForceFeedback::_addEffectSupport( LPCDIEFFECTINFO pdei )
 	    default:
 		    eForce = Effect::UnknownForce;
 #if defined (_DEBUG)
-			cout << "Win32ForceFeedback: DirectInput8 Effect type support not implemented: "
-				 << "DIEFT_GETTYPE="<< (int)DIEFT_GETTYPE(pdei->dwEffType) << endl;
+			std::cout << "Win32ForceFeedback: DirectInput8 Effect type support not implemented: "
+				 << "DIEFT_GETTYPE="<< (int)DIEFT_GETTYPE(pdei->dwEffType) << std::endl;
 #endif
 			return;
 	}
