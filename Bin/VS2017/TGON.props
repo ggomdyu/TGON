@@ -7,16 +7,19 @@
     <OutDir>$(SolutionDir)\$(ProjectName)\bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\obj\$(PlatformTarget)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\$(PlatformTarget);$(TGON_PATH)\Source\Thirdparty\icu4c-59_1-src\icu\lib;$(TGON_PATH)\Bin\ThirdParty\$(Configuration)\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(DXSDK_DIR)Lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(TGON_PATH)\Source\TGON;$(TGON_PATH)\Source\Thirdparty\tinyxml2;$(TGON_PATH)\Source\Thirdparty\OIS-1.4\includes;$(TGON_PATH)\Source\Thirdparty\boost_1_68_0;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\alc;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\common;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\include;$(TGON_PATH)\Source\Thirdparty\zlib-1.2.11;$(TGON_PATH)\Source\ThirdParty\glew-2.1.0\include;$(TGON_PATH)\Source\Thirdparty\icu4c-64_2\icu\source\i18n;$(TGON_PATH)\Source\Thirdparty\icu4c-64_2\icu\source\common;$(TGON_PATH)\Source\ThirdParty\lpng1637;$(TGON_PATH)\Source\Thirdparty\freetype-2.10.0\include;$(TGON_PATH)\Source\ThirdParty\GSL-2.0.0\include;$(TGON_PATH)\Source\ThirdParty\assimp-4.1.0\include;$(TGON_PATH)\Source\ThirdParty\libvorbis-1.3.6\include;$(TGON_PATH)\Source\ThirdParty\libogg-1.3.3\include;$(TGON_PATH)\Source\ThirdParty\libiconv-1.9.2\include;$(TGON_PATH)\Source\ThirdParty\rapidjson-1.1.0\include;$(TGON_PATH)\Source\Thirdparty\fmt-5.1.0\include;$(TGON_PATH)\Source\ThirdParty\rapidxml-1.13;$(TGON_PATH)\Source\ThirdParty\tbb2018_20180618oss\include;$(TGON_PATH)\Source\ThirdParty\pstl2018_20180618oss\include;$(TGON_PATH)\Source\ThirdParty\stb;$(DXSDK_DIR)\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TGON_PATH)\Source\TGON;$(TGON_PATH)\Source\Thirdparty\tinyxml2;$(TGON_PATH)\Source\Thirdparty\OIS-1.4\includes;$(TGON_PATH)\Source\Thirdparty\boost_1_68_0;$(TGON_PATH)\Source\Thirdparty\fmt-6.1.2\include;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\alc;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\common;$(TGON_PATH)\Source\Thirdparty\openal-soft-1.20.0\include;$(TGON_PATH)\Source\Thirdparty\zlib-1.2.11;$(TGON_PATH)\Source\ThirdParty\glew-2.1.0\include;$(TGON_PATH)\Source\Thirdparty\icu4c-64_2\icu\source\i18n;$(TGON_PATH)\Source\Thirdparty\icu4c-64_2\icu\source\common;$(TGON_PATH)\Source\ThirdParty\lpng1637;$(TGON_PATH)\Source\Thirdparty\freetype-2.10.0\include;$(TGON_PATH)\Source\ThirdParty\GSL-2.0.0\include;$(TGON_PATH)\Source\ThirdParty\assimp-4.1.0\include;$(TGON_PATH)\Source\ThirdParty\libvorbis-1.3.6\include;$(TGON_PATH)\Source\ThirdParty\libogg-1.3.3\include;$(TGON_PATH)\Source\ThirdParty\libiconv-1.9.2\include;$(TGON_PATH)\Source\ThirdParty\rapidxml-1.13;$(TGON_PATH)\Source\ThirdParty\stb;$(DXSDK_DIR)\Include</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <PreprocessorDefinitions>GLEW_STATIC;TGON_GRAPHICS_OPENGL=1;TGON_PLATFORM_WINDOWS=1;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;U_STATIC_IMPLEMENTATION;U_COMMON_IMPLEMENTATION;U_I18N_IMPLEMENTATION;NOMINMAX;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;TGON_GRAPHICS_OPENGL=1;TGON_PLATFORM_WINDOWS=1;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;U_STATIC_IMPLEMENTATION;U_COMMON_IMPLEMENTATION;U_I18N_IMPLEMENTATION;NOMINMAX;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ConformanceMode>false</ConformanceMode>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OpenGL32.Lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>

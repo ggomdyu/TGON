@@ -84,6 +84,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\src\format.cc">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\src\posix.cc">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\src\autofit\autofit.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -1950,6 +1956,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UISprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\UI\UIText.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\chrono.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\color.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\compile.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\core.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\format-inl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\format.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\locale.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\ostream.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\posix.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\printf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\ranges.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftconfig.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftheader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\freetype-2.10.0\include\freetype\config\ftmodule.h" />
@@ -2265,6 +2282,39 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMultiTouch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISPrereqs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alcmain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alconfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alcontext.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alu.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ambdec.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ambidefs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\base.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\dsound.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\loopback.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wasapi.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wave.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\winmm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bformatdec.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bs2b.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\compat.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\converter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\cpu_caps.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\devformat.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\base.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\biquad.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\nfc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\splitter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\fpu_modes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\hrtf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\inprogext.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\logging.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mastering.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\defs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\hrtfbase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ringbuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\uhjfilter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\voice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_connected_components.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\stb\stb_c_lexer.h" />

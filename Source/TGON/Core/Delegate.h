@@ -7,7 +7,6 @@
 
 #pragma once
 #include <type_traits>
-#include <cstring>
 
 #include "TypeTraits.h"
 
@@ -84,7 +83,6 @@ private:
     static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
     template <typename _FunctionType>
     static size_t MakeDeleter(void* ptr);
-    void Destroy();
 
 /**@section Variable */
 private:

@@ -64,12 +64,14 @@ template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
 {
     auto component = std::make_shared<_ComponentType>(std::forward<_ArgTypes>(args)...);
-    component->SetGameObject(this->shared_from_this());
 
     m_components.insert(std::lower_bound(m_components.begin(), m_components.end(), tgon::GetRTTI<_ComponentType>()->GetHashCode(), [&](const std::shared_ptr<Component>& lhs, size_t rhs)
     {
         return lhs->GetRTTI()->GetHashCode() < rhs;
     }), component);
+
+    component->SetGameObject(this->shared_from_this());
+    component->Initialize();
 
     return component;
 }

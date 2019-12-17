@@ -151,7 +151,10 @@ void ShaderProgram::BindAttributeLocation(const char* name, uint32_t index)
 
 int32_t ShaderProgram::GetUniformLocation(const char* name) const
 {
-    return static_cast<int32_t>(glGetUniformLocation(m_programId, name));
+    GLint location = 0;
+    TGON_GL_ERROR_CHECK(location = glGetUniformLocation(m_programId, name));
+
+    return static_cast<int32_t>(location);
 }
 
 void ShaderProgram::SetParameter1f(int32_t location, float f)

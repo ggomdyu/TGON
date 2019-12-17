@@ -143,7 +143,7 @@ int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, c
     
     auto& lineInfo = m_lineInfos.back();
     
-    for (size_t i = 0; i < characters.size(); ++i)
+    for (decltype(characters.size()) i = 0; i < characters.size(); ++i)
     {
         auto ch = characters[i];
         

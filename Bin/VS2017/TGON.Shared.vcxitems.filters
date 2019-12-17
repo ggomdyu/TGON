@@ -10,9 +10,6 @@
     <Filter Include="Source\ThirdParty\stb">
       <UniqueIdentifier>{d5200210-5b80-4243-8e14-cf43a3a8f480}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\ThirdParty\fmt-5.1.0">
-      <UniqueIdentifier>{c8c0c57f-e31e-4d90-8131-e948fc0f28cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\ThirdParty\glew-2.1.0">
       <UniqueIdentifier>{01cf65c0-f8a3-478f-a716-454b3893d322}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,18 @@
     </Filter>
     <Filter Include="Source\ThirdParty\openal-soft-1.20.0\alc\mixer">
       <UniqueIdentifier>{d5ddc266-304c-49b1-96a3-1662edaf5b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\fmt-6.1.2">
+      <UniqueIdentifier>{e7ee6948-5b47-4bb1-8f52-753aa8659c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\fmt-6.1.2\include">
+      <UniqueIdentifier>{587732f5-bd7e-41ab-a7e9-cb27f938c7ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\fmt-6.1.2\src">
+      <UniqueIdentifier>{8d50630f-2a65-4e32-9775-3eca83d2fe41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\fmt-6.1.2\include\fmt">
+      <UniqueIdentifier>{4e6b9106-80ac-4f0a-825a-96b5262ca01e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1206,9 +1215,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\loopback.cpp">
       <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.cpp">
-      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wasapi.cpp">
       <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
     </ClCompile>
@@ -1280,6 +1286,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\mixer_sse41.cpp">
       <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\src\format.cc">
+      <Filter>Source\ThirdParty\fmt-6.1.2\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\src\posix.cc">
+      <Filter>Source\ThirdParty\fmt-6.1.2\src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.cpp">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2716,6 +2731,138 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Transform.h">
       <Filter>Source\TGON\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\chrono.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\color.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\compile.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\core.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\format-inl.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\format.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\locale.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\ostream.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\posix.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\printf.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\fmt-6.1.2\include\fmt\ranges.h">
+      <Filter>Source\ThirdParty\fmt-6.1.2\include\fmt</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alcmain.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alconfig.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alu.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ambdec.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ambidefs.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\alcontext.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\inprogext.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\logging.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mastering.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\ringbuffer.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\uhjfilter.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\voice.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bformatdec.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\bs2b.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\compat.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\converter.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\cpu_caps.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\devformat.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\fpu_modes.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\hrtf.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\base.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\base.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\defs.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\mixer\hrtfbase.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\mixer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\splitter.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\biquad.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\filters\nfc.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wasapi.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wave.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\winmm.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\loopback.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\dsound.h">
+      <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -58,13 +58,6 @@ void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindow
     }
 }
 
-/**
- * @brief                       Creates a window through given arguments.
- * @param [in] windowStyle		The window style information.
- * @param [in] instanceHandle	The handle of process instance.
- * @param [in] className		The name for class which stores window attributes.
- * @param [in] extraParam		The extra data to store in the window.
- */
 HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle, const wchar_t* className = L"TGON", void* extraParam = nullptr)
 {
     // Convert the WindowStyle to the native window style.
