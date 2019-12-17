@@ -98,8 +98,9 @@ bool Image::Initialize(const char* filePath)
     }
 
     int width = 0, height = 0;
-    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&(*fileData)[0]), static_cast<int>(fileData->size()), &width, &height, nullptr, STBI_rgb_alpha)));
+    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData->at(0)), static_cast<int>(fileData->size()), &width, &height, nullptr, STBI_rgb_alpha)));
     m_size = I32Extent2D(static_cast<int32_t>(width), static_cast<int32_t>(height));
+    m_pixelFormat = PixelFormat::RGBA8888;
 
     return true;
 }
