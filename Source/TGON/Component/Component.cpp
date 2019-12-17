@@ -12,10 +12,6 @@ Component::Component(const std::shared_ptr<GameObject>& gameObject) noexcept :
 {
 }
 
-void Component::Update()
-{
-}
-    
 void Component::SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept
 {
     m_gameObject = gameObject;

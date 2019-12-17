@@ -41,6 +41,25 @@ GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& tran
 {
 }
 
+std::shared_ptr<GameObject> GameObject::Create(const StringHash& name, const std::shared_ptr<Transform>& transform)
+{
+    std::shared_ptr<GameObject> object(new GameObject(name, transform));
+    
+    if (transform != nullptr)
+    {
+        transform->SetGameObject(object);
+    }
+    
+    object->Initialize();
+
+    return object;
+}
+
+std::shared_ptr<GameObject> GameObject::Create(const std::shared_ptr<Transform>& transform)
+{
+    return GameObject::Create({}, transform);
+}
+
 void GameObject::Update()
 {
     if (m_isActive == false)

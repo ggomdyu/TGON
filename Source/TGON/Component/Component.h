@@ -25,7 +25,8 @@ public:
 
 /**@section Method */
 public:
-    virtual void Update();
+    virtual void Initialize() {}
+    virtual void Update() {}
     void SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept;
     void SetAcitve(bool isActive) noexcept;
     std::shared_ptr<GameObject> GetGameObject() noexcept;
