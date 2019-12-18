@@ -27,16 +27,14 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
 {
     std::string_view searchPatternStr = searchPattern;
 
-    std::array<char, 8192> tempPathStr;
+    std::array<char, 4096> tempPathStr;
     int32_t combinedPathLen = Path::Combine(path, searchPattern, &tempPathStr[0], static_cast<int32_t>(tempPathStr.size()));
-    std::deque<std::string> directories(1, std::string(tempPathStr.data(), combinedPathLen));
+    std::deque<std::string> directories(1, std::string(tempPathStr.data(), static_cast<size_t>(combinedPathLen)));
 
     do
     {
         const std::string& currPath = directories.front();
-        
-        int32_t utf16PathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(currPath.data()), static_cast<int32_t>(currPath.length()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
-        if (utf16PathBytes == -1)
+        if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(currPath.data()), static_cast<int32_t>(currPath.length()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
         {
             continue;
         }
@@ -97,8 +95,7 @@ inline void InternalEnumerateAllDirectories(const char* path, const char* search
         }
 
         directories.pop_front();
-    }
-    while (directories.empty() == false);
+    } while (directories.empty() == false);
 }
 
 template <typename _HandlerType>
@@ -106,10 +103,9 @@ void InternalEnumerateTopDirectoryOnly(const char* path, const char* searchPatte
 {
     std::string_view pathStr = path;
 
-    std::array<char, 8192> tempPathStr;
+    std::array<char, 4096> tempPathStr;
     int32_t combinedPathLen = Path::Combine(pathStr, searchPattern, &tempPathStr[0], static_cast<int32_t>(tempPathStr.size()));
-    int32_t utf16PathBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(tempPathStr.data()), static_cast<int32_t>(combinedPathLen), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
-    if (utf16PathBytes == -1)
+    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(tempPathStr.data()), static_cast<int32_t>(combinedPathLen), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
     {
         return;
     }
@@ -175,11 +171,11 @@ inline void FileSystemEnumerable::EnumerateFiles(const char* path, const char* s
 {
     if (searchOption == SearchOption::AllDirectories)
     {
-        detail::InternalEnumerateAllDirectories(path, searchPattern, FILE_ATTRIBUTE_ARCHIVE, handler);
+        detail::InternalEnumerateAllDirectories(path, searchPattern, ~FILE_ATTRIBUTE_DIRECTORY, handler);
     }
     else
     {
-        detail::InternalEnumerateTopDirectoryOnly(path, searchPattern, FILE_ATTRIBUTE_ARCHIVE, handler);
+        detail::InternalEnumerateTopDirectoryOnly(path, searchPattern, ~FILE_ATTRIBUTE_DIRECTORY, handler);
     }
 }
 
@@ -188,11 +184,11 @@ inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, c
 {
     if (searchOption == SearchOption::AllDirectories)
     {
-        detail::InternalEnumerateAllDirectories(path, searchPattern, FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_ARCHIVE, handler);
+        detail::InternalEnumerateAllDirectories(path, searchPattern, UINT8_MAX, handler);
     }
     else
     {
-        detail::InternalEnumerateTopDirectoryOnly(path, searchPattern, FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_ARCHIVE, handler);
+        detail::InternalEnumerateTopDirectoryOnly(path, searchPattern, UINT8_MAX, handler);
     }
 }
 

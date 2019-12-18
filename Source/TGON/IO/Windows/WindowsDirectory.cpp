@@ -3,13 +3,12 @@
 #include <sys/stat.h>
 
 #include "Platform/Windows/Windows.h"
-#include "Misc/Algorithm.h"
 #include "Text/Encoding.h"
 
-#include "../File.h"
-#include "../Path.h"
 #include "../DirectoryInfo.h"
 #include "../Directory.h"
+#include "../File.h"
+#include "../Path.h"
 
 namespace tgon
 {
@@ -42,6 +41,59 @@ std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t
     return s;
 }
 
+bool InternalRecursiveDelete(const std::wstring_view& path)
+{
+    std::array<wchar_t, 4096> tempPathStr{};
+    memcpy(&tempPathStr[0], path.data(), path.size() * 2);
+
+    size_t pathLen = path.size();
+    if (Path::IsDirectorySeparator(path.back()))
+    {
+        tempPathStr[pathLen] = L'*';
+        pathLen += 1;
+    }
+    else
+    {
+        tempPathStr[pathLen] = Path::DirectorySeparatorChar;
+        tempPathStr[pathLen + 1] = L'*';
+        pathLen += 2;
+    }
+
+    WIN32_FIND_DATAW findData;
+    HANDLE handle = FindFirstFileW(reinterpret_cast<const wchar_t*>(&tempPathStr[0]), &findData);
+    if (handle != INVALID_HANDLE_VALUE)
+    {
+        do
+        {
+            if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+            {
+                // Ignore the . and ..
+                if (findData.cFileName[0] == L'.' && (findData.cFileName[1] == L'\0' || (findData.cFileName[1] == L'.' && findData.cFileName[2] == L'\0')))
+                {
+                    continue;
+                }
+
+                size_t fileNameLen = wcslen(findData.cFileName);
+                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(wchar_t));
+
+                InternalRecursiveDelete({&tempPathStr[0], pathLen - 1 + fileNameLen});
+            }
+            else
+            {
+                size_t fileNameLen = wcslen(findData.cFileName);
+                memcpy(&tempPathStr[pathLen - 1], findData.cFileName, fileNameLen * 2 + sizeof(wchar_t));
+
+                _wremove(&tempPathStr[0]);
+            }
+        }
+        while (FindNextFileW(handle, &findData) == TRUE);
+
+        FindClose(handle);
+    }
+
+    return _wrmdir(path.data()) == 0;
+}
+
 } /* namespace */
 
 bool Directory::Delete(const char* path, bool recursive)
@@ -51,15 +103,13 @@ bool Directory::Delete(const char* path, bool recursive)
     {
         return false;
     }
-    
+
     if (recursive)
     {
-        return RemoveDirectoryW(&g_tempUtf16Buffer[0]) == TRUE;
+        return InternalRecursiveDelete(&g_tempUtf16Buffer[0]);
     }
-    else
-    {
-        // todo: impl
-    }
+
+    return _wrmdir(&g_tempUtf16Buffer[0]) == 0;
 }
 
 bool Directory::Exists(const char* path)
