@@ -147,27 +147,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\src\glew.c">
       <Filter>Source\ThirdParty\glew-2.1.0</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISEffect.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISException.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISForceFeedback.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISInputManager.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISJoyStick.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISKeyboard.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISObject.cpp">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.cpp">
       <Filter>Source\TGON\Audio</Filter>
     </ClCompile>
@@ -1296,6 +1275,27 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.cpp">
       <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISException.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISForceFeedback.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISInputManager.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISJoyStick.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISKeyboard.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISObject.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISEffect.cpp">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
@@ -1369,51 +1369,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\glew-2.1.0\include\GL\wglew.h">
       <Filter>Source\ThirdParty\glew-2.1.0</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEffect.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEvents.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISException.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISFactoryCreator.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISForceFeedback.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInputManager.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInterface.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISJoyStick.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISKeyboard.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMouse.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMultiTouch.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISObject.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISPrereqs.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OIS.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISConfig.h">
-      <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\AudioDevice.h">
       <Filter>Source\TGON\Audio</Filter>
@@ -2863,6 +2818,51 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\dsound.h">
       <Filter>Source\ThirdParty\openal-soft-1.20.0\alc\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISException.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISFactoryCreator.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISForceFeedback.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInputManager.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISInterface.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISJoyStick.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISKeyboard.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMouse.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISMultiTouch.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISObject.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISPrereqs.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OIS.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISConfig.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEffect.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEvents.h">
+      <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

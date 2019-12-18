@@ -1550,6 +1550,7 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\null.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ObjectFileName>$(IntDir)alc\backends\null.cpp</ObjectFileName>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\backends\wasapi.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -1598,6 +1599,7 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\null.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ObjectFileName>$(IntDir)alc\effects\null.cpp</ObjectFileName>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\openal-soft-1.20.0\alc\effects\pshifter.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
