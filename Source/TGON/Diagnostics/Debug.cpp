@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <algorithm>
-#include <sstream>
+#include <fmt/format.h>
 
 #include "Debug.h"
 
@@ -26,16 +26,15 @@ void Debug::Fail(const std::string_view& message)
 void Debug::Fail(const std::string_view& message, const std::string_view& detailMessage)
 {
 #if defined(_DEBUG) || !defined(NDEBUG)
-    std::stringstream ss;
-    ss << "---- DEBUG ASSERTION FAILED ----\n---- Assert Short Message ----\n" << message << "\n---- Assert Long Message ----\n" << detailMessage << "\n";
-
+    auto str = fmt::format("---- DEBUG ASSERTION FAILED ----\n---- Assert Short Message ----\n{0}\n---- Assert Long Message ----\n{1}\n", message, detailMessage);
+    
     std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
 
     // Ignore the indent when printing the failure message
     auto prevIndentLevel = m_indentLevel;
     m_indentLevel = 0;
     {
-        Write(ss.str());
+        Write(str);
     }
     m_indentLevel = prevIndentLevel;
 

@@ -30,6 +30,8 @@
 		8C7A8F152379635200DC7196 /* FontFace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7A8F132379635100DC7196 /* FontFace.h */; };
 		8C7A8F182379641E00DC7196 /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C7A8F162379641D00DC7196 /* Font.h */; };
 		8C7A8F192379641E00DC7196 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C7A8F172379641D00DC7196 /* Font.cpp */; };
+		8C9FB44723A9BB6400C0E12D /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8C9FB44523A9BB6400C0E12D /* format.cc */; };
+		8C9FB44823A9BB6400C0E12D /* posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8C9FB44623A9BB6400C0E12D /* posix.cc */; };
 		8CB5BB13233F814D0032F332 /* Directory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CB5BB11233F814C0032F332 /* Directory.h */; };
 		8CB5BB14233F814D0032F332 /* Directory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB12233F814C0032F332 /* Directory.cpp */; };
 		8CB5BB172340D6100032F332 /* UnixFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5BB162340D6100032F332 /* UnixFile.cpp */; };
@@ -815,6 +817,19 @@
 		8C7A8F132379635100DC7196 /* FontFace.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = FontFace.h; sourceTree = "<group>"; };
 		8C7A8F162379641D00DC7196 /* Font.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Font.h; sourceTree = "<group>"; };
 		8C7A8F172379641D00DC7196 /* Font.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Font.cpp; sourceTree = "<group>"; };
+		8C9FB44523A9BB6400C0E12D /* format.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = format.cc; path = "../../Source/ThirdParty/fmt-6.1.2/src/format.cc"; sourceTree = "<group>"; };
+		8C9FB44623A9BB6400C0E12D /* posix.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = posix.cc; path = "../../Source/ThirdParty/fmt-6.1.2/src/posix.cc"; sourceTree = "<group>"; };
+		8C9FB44A23A9BB7D00C0E12D /* ostream.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ostream.h; sourceTree = "<group>"; };
+		8C9FB44B23A9BB7D00C0E12D /* format-inl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = "format-inl.h"; sourceTree = "<group>"; };
+		8C9FB44C23A9BB7D00C0E12D /* ranges.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = ranges.h; sourceTree = "<group>"; };
+		8C9FB44D23A9BB7D00C0E12D /* core.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = core.h; sourceTree = "<group>"; };
+		8C9FB44E23A9BB7D00C0E12D /* locale.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = locale.h; sourceTree = "<group>"; };
+		8C9FB44F23A9BB7D00C0E12D /* chrono.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = chrono.h; sourceTree = "<group>"; };
+		8C9FB45023A9BB7D00C0E12D /* color.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = color.h; sourceTree = "<group>"; };
+		8C9FB45123A9BB7D00C0E12D /* printf.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = printf.h; sourceTree = "<group>"; };
+		8C9FB45223A9BB7D00C0E12D /* compile.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = compile.h; sourceTree = "<group>"; };
+		8C9FB45323A9BB7D00C0E12D /* posix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = posix.h; sourceTree = "<group>"; };
+		8C9FB45423A9BB7D00C0E12D /* format.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = format.h; sourceTree = "<group>"; };
 		8CB5BB11233F814C0032F332 /* Directory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Directory.h; sourceTree = "<group>"; };
 		8CB5BB12233F814C0032F332 /* Directory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Directory.cpp; sourceTree = "<group>"; };
 		8CB5BB15233F96E50032F332 /* DirectoryInfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = DirectoryInfo.h; sourceTree = "<group>"; };
@@ -1806,6 +1821,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C9FB44223A9BB4900C0E12D /* fmt-6.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				8C9FB44323A9BB5300C0E12D /* include */,
+				8C9FB44423A9BB5B00C0E12D /* src */,
+			);
+			name = "fmt-6.1.2";
+			sourceTree = "<group>";
+		};
+		8C9FB44323A9BB5300C0E12D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8C9FB44923A9BB7D00C0E12D /* fmt */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		8C9FB44423A9BB5B00C0E12D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8C9FB44523A9BB6400C0E12D /* format.cc */,
+				8C9FB44623A9BB6400C0E12D /* posix.cc */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		8C9FB44923A9BB7D00C0E12D /* fmt */ = {
+			isa = PBXGroup;
+			children = (
+				8C9FB44A23A9BB7D00C0E12D /* ostream.h */,
+				8C9FB44B23A9BB7D00C0E12D /* format-inl.h */,
+				8C9FB44C23A9BB7D00C0E12D /* ranges.h */,
+				8C9FB44D23A9BB7D00C0E12D /* core.h */,
+				8C9FB44E23A9BB7D00C0E12D /* locale.h */,
+				8C9FB44F23A9BB7D00C0E12D /* chrono.h */,
+				8C9FB45023A9BB7D00C0E12D /* color.h */,
+				8C9FB45123A9BB7D00C0E12D /* printf.h */,
+				8C9FB45223A9BB7D00C0E12D /* compile.h */,
+				8C9FB45323A9BB7D00C0E12D /* posix.h */,
+				8C9FB45423A9BB7D00C0E12D /* format.h */,
+			);
+			name = fmt;
+			path = "../../Source/ThirdParty/fmt-6.1.2/include/fmt";
+			sourceTree = "<group>";
+		};
 		8CC61CB722F610AE00F415C8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2570,6 +2630,7 @@
 		FD73C00821628BC8006DCCE1 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				8C9FB44223A9BB4900C0E12D /* fmt-6.1.2 */,
 				FDB7002E22B69CD10055FCED /* icu4c-64_2 */,
 				FD5332F922A57F1C001EB57C /* zlib-1.2.11 */,
 				FD5331D922A2E50A001EB57C /* freetype-2.10.0 */,
@@ -3977,6 +4038,7 @@
 				FD78ABDB2289C4DF00D22E46 /* res0.c in Sources */,
 				8C59E30B2330014700EBE199 /* Environment.cpp in Sources */,
 				FD78ABDC2289C4DF00D22E46 /* block.c in Sources */,
+				8C9FB44723A9BB6400C0E12D /* format.cc in Sources */,
 				FD78ABDD2289C4DF00D22E46 /* lookup.c in Sources */,
 				FDE1B4B522E40E940093FDC1 /* simpleformatter.cpp in Sources */,
 				FD5331F422A2E847001EB57C /* ftbdf.c in Sources */,
@@ -4251,6 +4313,7 @@
 				FD4C1DFC219F3F8700B2B2BE /* GainputIos.mm in Sources */,
 				FD2D6D1722D064410087DF85 /* Mesh.cpp in Sources */,
 				FDE1B4B622E40E940093FDC1 /* schriter.cpp in Sources */,
+				8C9FB44823A9BB6400C0E12D /* posix.cc in Sources */,
 				FDE1B4AA22E40E940093FDC1 /* udataswp.cpp in Sources */,
 				FD53331F22A57F38001EB57C /* trees.c in Sources */,
 				FD4C1DFD219F3F8700B2B2BE /* GainputInputDevicePadIos.mm in Sources */,
@@ -4523,6 +4586,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/icu4c-64_2/icu/source/i18n",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/GSL-2.0.0/include",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/fmt-6.1.2/include",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -4559,6 +4623,7 @@
 					"$(PROJECT_DIR)/../../Source/ThirdParty/icu4c-64_2/icu/source/common",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/icu4c-64_2/icu/source/i18n",
 					"$(PROJECT_DIR)/../../Source/ThirdParty/GSL-2.0.0/include",
+					"$(PROJECT_DIR)/../../Source/ThirdParty/fmt-6.1.2/include",
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";

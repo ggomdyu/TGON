@@ -29,9 +29,16 @@ protected:
 public:
     GLuint GetProgramId() const noexcept;
     
+protected:
+    static GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
+    static std::string GetShaderLog(GLuint shaderId);
+    static bool IsShaderCompileSucceed(GLuint shaderId);
+    static GLuint CompileShader(GLenum shaderType, const char* shaderCode);
+    
 /**@section Variable */
 protected:
     GLuint m_programId;
+    inline static OpenGLShaderProgram* g_lastUsedShaderProgram;
 };
     
 using PlatformShaderProgram = OpenGLShaderProgram;

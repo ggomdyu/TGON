@@ -2,7 +2,6 @@
 
 #include <thread>
 #include <array>
-#include <sstream>
 
 #include "IO/Directory.h"
 

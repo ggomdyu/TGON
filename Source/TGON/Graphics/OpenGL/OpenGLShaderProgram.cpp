@@ -1,13 +1,10 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_GRAPHICS_OPENGL
-#include <cassert>
-#include <sstream>
+#include <fmt/format.h>
 
 #include "Diagnostics/Debug.h"
 #include "Math/Vector4.h"
-#include "Math/Vector3.h"
-#include "Math/Vector2.h"
 
 #include "OpenGLDebug.h"
 
@@ -15,78 +12,6 @@
 
 namespace tgon
 {
-namespace
-{
-
-OpenGLShaderProgram* g_lastUsedShaderProgram;
-
-GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
-{
-    // Creates an empty program object.
-    GLuint programId = 0;
-    TGON_GL_ERROR_CHECK(programId = glCreateProgram());
-    if (programId == 0)
-    {
-        return 0;
-    }
-
-    // In order to create a complete shader program, there must be a way to specify the list of things that will be linked together.
-    // Shaders that are to be linked together in a program object must first be attached to that program object.
-    // glAttachShader attaches the shader object to the program object.
-    TGON_GL_ERROR_CHECK(glAttachShader(programId, vertexShaderId));
-    TGON_GL_ERROR_CHECK(glAttachShader(programId, fragmentShaderId));
-    TGON_GL_ERROR_CHECK(glLinkProgram(programId));
-
-    TGON_GL_ERROR_CHECK(glDetachShader(programId, vertexShaderId));
-    TGON_GL_ERROR_CHECK(glDetachShader(programId, fragmentShaderId));
-
-    TGON_GL_ERROR_CHECK(glDeleteShader(vertexShaderId));
-    TGON_GL_ERROR_CHECK(glDeleteShader(fragmentShaderId));
-    
-    return programId;
-}
-
-std::string GetShaderLog(GLuint shaderId)
-{
-    int32_t infoLogLen;
-    TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
-
-    std::string infoLog;
-    infoLog.resize(infoLogLen + 1);
-    TGON_GL_ERROR_CHECK(glGetShaderInfoLog(shaderId, infoLogLen, nullptr, &infoLog[0]));
-
-    return infoLog;
-}
-
-bool IsShaderCompileSucceed(GLuint shaderId)
-{
-    GLint shaderCompileStatus;
-    TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus));
-
-    return shaderCompileStatus == GL_TRUE;
-}
-
-GLuint CompileShader(GLenum shaderType, const char* shaderCode)
-{
-    GLuint shaderId = 0;
-    TGON_GL_ERROR_CHECK(shaderId = glCreateShader(shaderType));
-    TGON_GL_ERROR_CHECK(glShaderSource(shaderId, 1, &shaderCode, nullptr));
-
-    // Compile the shader code that stored in the shader object.
-    TGON_GL_ERROR_CHECK(glCompileShader(shaderId));
-    if (IsShaderCompileSucceed(shaderId) == false)
-    {
-        std::stringstream ss;
-        ss << "Failed to invoke glCompileShader. (" << GetShaderLog(shaderId) << ")";
-
-        Debug::WriteLine(ss.str());
-        return 0;
-    }
-
-    return shaderId;
-}
-
-} /* namespace */
 
 OpenGLShaderProgram::OpenGLShaderProgram(GLuint programId) noexcept :
     m_programId(programId)
@@ -113,12 +38,75 @@ GLuint OpenGLShaderProgram::GetProgramId() const noexcept
     return m_programId;
 }
 
+GLuint OpenGLShaderProgram::CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
+{
+    // Creates an empty program object.
+    GLuint programId = 0;
+    TGON_GL_ERROR_CHECK(programId = glCreateProgram());
+    if (programId == 0)
+    {
+        return 0;
+    }
+
+    // In order to create a complete shader program, there must be a way to specify the list of things that will be linked together.
+    // Shaders that are to be linked together in a program object must first be attached to that program object.
+    // glAttachShader attaches the shader object to the program object.
+    TGON_GL_ERROR_CHECK(glAttachShader(programId, vertexShaderId));
+    TGON_GL_ERROR_CHECK(glAttachShader(programId, fragmentShaderId));
+    TGON_GL_ERROR_CHECK(glLinkProgram(programId));
+
+    TGON_GL_ERROR_CHECK(glDetachShader(programId, vertexShaderId));
+    TGON_GL_ERROR_CHECK(glDetachShader(programId, fragmentShaderId));
+
+    TGON_GL_ERROR_CHECK(glDeleteShader(vertexShaderId));
+    TGON_GL_ERROR_CHECK(glDeleteShader(fragmentShaderId));
+    
+    return programId;
+}
+
+std::string OpenGLShaderProgram::GetShaderLog(GLuint shaderId)
+{
+    int32_t infoLogLen;
+    TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
+
+    std::string infoLog;
+    infoLog.resize(infoLogLen + 1);
+    TGON_GL_ERROR_CHECK(glGetShaderInfoLog(shaderId, infoLogLen, nullptr, &infoLog[0]));
+
+    return infoLog;
+}
+
+bool OpenGLShaderProgram::IsShaderCompileSucceed(GLuint shaderId)
+{
+    GLint shaderCompileStatus;
+    TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus));
+
+    return shaderCompileStatus == GL_TRUE;
+}
+
+GLuint OpenGLShaderProgram::CompileShader(GLenum shaderType, const char* shaderCode)
+{
+    GLuint shaderId = 0;
+    TGON_GL_ERROR_CHECK(shaderId = glCreateShader(shaderType));
+    TGON_GL_ERROR_CHECK(glShaderSource(shaderId, 1, &shaderCode, nullptr));
+
+    // Compile the shader code that stored in the shader object.
+    TGON_GL_ERROR_CHECK(glCompileShader(shaderId));
+    if (OpenGLShaderProgram::IsShaderCompileSucceed(shaderId) == false)
+    {
+        Debug::WriteLine(fmt::format("Failed to invoke glCompileShader. ({0})", OpenGLShaderProgram::GetShaderLog(shaderId)));
+        return 0;
+    }
+
+    return shaderId;
+}
+
 ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
     OpenGLShaderProgram([&]()
     {
-        GLuint vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
-        GLuint fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
-        return CreateShaderProgram(vertexShaderId, fragmentShaderId);
+        GLuint vertexShaderId = OpenGLShaderProgram::CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
+        GLuint fragmentShaderId = OpenGLShaderProgram::CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+        return OpenGLShaderProgram::CreateShaderProgram(vertexShaderId, fragmentShaderId);
     } ())
 {
     this->UpdateUniformLocationCache();

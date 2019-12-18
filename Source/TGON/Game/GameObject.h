@@ -13,7 +13,7 @@
 namespace tgon
 {
 
-class GameObject :
+class GameObject final :
     public Object,
     public std::enable_shared_from_this<GameObject>
 {
