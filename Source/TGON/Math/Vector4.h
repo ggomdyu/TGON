@@ -11,7 +11,7 @@
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s
 #else
-#   define TGON_SPRINTF sprintf
+#   define TGON_SPRINTF snprintf
 #endif
 
 namespace tgon
