@@ -417,6 +417,11 @@ void UIText::SetFontSize(int32_t fontSize)
 
 void UIText::SetText(const std::string_view& text)
 {
+    if (text == m_text)
+    {
+        return;
+    }
+    
     m_text = text;
     m_isDirty = true;
 }
