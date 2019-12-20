@@ -32,7 +32,7 @@ std::shared_ptr<AudioBuffer> AssetModule::GetAudioBuffer(const StringViewHash& p
     auto iter = m_resourceCache.find(path);
     if (iter == m_resourceCache.end())
     {
-        iter = m_resourceCache.insert({path, std::make_shared<AudioBuffer>(path)}).first;
+        iter = m_resourceCache.insert({path, std::make_shared<AudioBuffer>(path.Data())}).first;
     }
     
     m_mutex.unlock();

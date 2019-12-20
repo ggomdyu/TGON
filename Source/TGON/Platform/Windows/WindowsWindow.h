@@ -22,7 +22,7 @@ class WindowsWindow :
 {
 /**@section Constructor */
 protected:
-    explicit WindowsWindow(const class WindowStyle& windowStyle) noexcept;
+    explicit WindowsWindow(const struct WindowStyle& windowStyle) noexcept;
     WindowsWindow(WindowsWindow&& rhs) noexcept;
 
 /**@section Operator */

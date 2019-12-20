@@ -1353,7 +1353,7 @@
 		FDC02C4A228481F000BEE91A /* Engine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Engine.cpp; sourceTree = "<group>"; };
 		FDC02C4E228481F000BEE91A /* Image.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = Image.cpp; sourceTree = "<group>"; };
 		FDC02C54228481F000BEE91A /* Image.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = Image.h; sourceTree = "<group>"; };
-		FDC02C57228481F000BEE91A /* BaseAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BaseAudioImporter.h; sourceTree = "<group>"; };
+		FDC02C57228481F000BEE91A /* AudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = AudioImporter.h; sourceTree = "<group>"; };
 		FDC02C58228481F000BEE91A /* OggVorbisAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = OggVorbisAudioImporter.h; sourceTree = "<group>"; };
 		FDC02C59228481F000BEE91A /* WavAudioImporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = WavAudioImporter.h; sourceTree = "<group>"; };
 		FDC02C5A228481F000BEE91A /* RiffReader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = RiffReader.h; sourceTree = "<group>"; };
@@ -2978,7 +2978,7 @@
 		FDC02C56228481F000BEE91A /* Importer */ = {
 			isa = PBXGroup;
 			children = (
-				FDC02C57228481F000BEE91A /* BaseAudioImporter.h */,
+				FDC02C57228481F000BEE91A /* AudioImporter.h */,
 				FDC02C58228481F000BEE91A /* OggVorbisAudioImporter.h */,
 				FDC02C59228481F000BEE91A /* WavAudioImporter.h */,
 				FDC02C5A228481F000BEE91A /* RiffReader.h */,

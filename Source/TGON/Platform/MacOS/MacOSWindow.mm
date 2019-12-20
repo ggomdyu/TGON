@@ -158,10 +158,11 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     
 } /* namespace */
 
-MacOSWindow::MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexcept :
-    m_window(window),
-    m_windowDelegate(windowDelegate)
+MacOSWindow::MacOSWindow(const WindowStyle& windowStyle) noexcept :
+    m_window(CreateNativeWindow(windowStyle)),
+    m_windowDelegate([[WindowDelegate alloc] initWithWindow:reinterpret_cast<Window*>(this)])
 {
+    m_window.delegate = m_windowDelegate;
 }
 
 MacOSWindow::MacOSWindow(MacOSWindow&& rhs) noexcept :
@@ -181,12 +182,6 @@ MacOSWindow& MacOSWindow::operator=(MacOSWindow&& rhs) noexcept
     rhs.m_windowDelegate = nullptr;
     
     return *this;
-}
-
-Window::Window(const WindowStyle& windowStyle) :
-    PlatformWindow(CreateNativeWindow(windowStyle), [[WindowDelegate alloc] initWithWindow:this])
-{
-    m_window.delegate = m_windowDelegate;
 }
 
 void Window::Show()

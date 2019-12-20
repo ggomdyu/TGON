@@ -10,13 +10,10 @@
 namespace tgon
 {
 
-WindowsInputManager::WindowsInputManager(const Window& inputTarget)
+WindowsInputManager::WindowsInputManager(const Window& inputTarget) :
+    m_inputManager(OIS::InputManager::createInputSystem(reinterpret_cast<size_t>(inputTarget.GetNativeWindow())))
 {
-    OIS::ParamList paramList{{"WINDOW", std::to_string(reinterpret_cast<size_t>(inputTarget.GetNativeWindow()))}};
-    auto inputManager = OIS::InputManager::createInputSystem(paramList);
-    inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
-
-    m_inputManager = inputManager;
+    m_inputManager->enableAddOnFactory(OIS::InputManager::AddOn_All);
 }
 
 WindowsInputManager::WindowsInputManager(WindowsInputManager&& rhs) noexcept :

@@ -7,6 +7,11 @@
 namespace tgon
 {
 
+Window::Window(const WindowStyle& windowStyle) :
+    PlatformWindow(windowStyle)
+{
+}
+
 Window::~Window()
 {
     this->Close();

@@ -20,7 +20,7 @@ class MacOSWindow :
 {
 /**@section Constructor */
 protected:
-    MacOSWindow(NSWindow* window, WindowDelegate* windowDelegate) noexcept;
+    MacOSWindow(const struct WindowStyle& windowStyle) noexcept;
     MacOSWindow(MacOSWindow&& rhs) noexcept;
 
 /**@section Operator */

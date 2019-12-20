@@ -23,7 +23,7 @@
 namespace tgon
 {
 
-class WindowStyle final
+struct WindowStyle final
 {
     std::string title = u8"Thousand Party";
 

@@ -7,36 +7,29 @@
  */
 
 #pragma once
-#include "BaseAudioImporter.h"
+#include "AudioImporter.h"
 #include "RiffReader.h"
 
 namespace tgon
 {
 
 class WavAudioImporter final :
-    public BaseAudioImporter<WavAudioImporter>
+    public AudioImporter
 {
-/**@section Constructor */
-public:
-    using BaseAudioImporter<WavAudioImporter>::BaseAudioImporter;
-
 /**@section Method */
 public:
-    /* @brief   Verifies the file format is exact. */
-    static bool VerifyFormat(const std::byte* fileData, size_t fileDataBytes);
-
-    /* @brief   Decodes the file to the image. */
-    bool Import(const std::byte* fileData, size_t fileDataBytes);
+    static bool IsExactFormat(const gsl::span<const std::byte>& fileData);
+    bool Initialize(const gsl::span<const std::byte>& fileData) override;
 };
 
-inline bool WavAudioImporter::Import(const std::byte* fileData, std::size_t fileDataBytes)
+inline bool WavAudioImporter::Initialize(const gsl::span<const std::byte>& fileData)
 {
-    if (VerifyFormat(fileData, fileDataBytes) == false)
+    if (WavAudioImporter::IsExactFormat(fileData) == false)
     {
         return false;
     }
 
-    RiffReader riffReader(fileData, fileDataBytes);
+    RiffReader riffReader(fileData.data(), fileData.size());
     do
     {
         RiffReader::ChunkHeader chunkHeader = riffReader.GetChunkHeader();
@@ -78,9 +71,9 @@ inline bool WavAudioImporter::Import(const std::byte* fileData, std::size_t file
     return true;
 }
 
-inline bool WavAudioImporter::VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes)
+inline bool WavAudioImporter::IsExactFormat(const gsl::span<const std::byte>& fileData)
 {
-    if (fileDataBytes < 16)
+    if (fileData.size() < 16)
     {
         return false;
     }

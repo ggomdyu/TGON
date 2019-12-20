@@ -6,11 +6,9 @@
  */
 
 #pragma once
-#include <cstdint>
 #include <memory>
-#include <string>
+#include <gsl/span>
 
-#include "Platform/Config.h"
 #if TGON_PLATFORM_MACOS
 #   include <OpenAL/al.h>
 #else
@@ -39,8 +37,8 @@ class AudioBuffer :
 /**@section Constructor */
 public:
     AudioBuffer();
-    explicit AudioBuffer(const std::string& filePath);
-    AudioBuffer(const std::byte* fileData, std::size_t fileDataBytes);
+    explicit AudioBuffer(const char* filePath);
+    explicit AudioBuffer(const gsl::span<const std::byte>& fileData);
     AudioBuffer(AudioBuffer&& rhs);
 
 /**@section Operator */
@@ -53,10 +51,9 @@ public:
 
 /**@section Method */
 public:
-    bool SetAudioData(const std::string& filePath);
-    bool SetAudioData(const std::byte* fileData, std::size_t fileDataBytes, AudioFormat audioFormat);
-    bool SetAudioData(const std::byte* fileData, std::size_t fileDataBytes);
-    bool IsValid() const noexcept;
+    bool Initialize(const char* filePath);
+    bool Initialize(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
+    bool Initialize(const gsl::span<const std::byte>& fileData);
     const std::byte* GetAudioData() const noexcept;
     size_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
@@ -64,22 +61,20 @@ public:
     int32_t GetSamplingRate() const noexcept;
     ALenum GetALFormat() const noexcept;
     ALuint GetALBufferId() const noexcept;
-    const std::string& GetFilePath() const noexcept;
 
 private:
-    bool Decode(const std::byte* fileData, std::size_t fileDataBytes, AudioFormat audioFormat);
+    bool DecodeFileData(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
     void Destroy();
 
 /**@section Variable */
 private:
-    std::string m_filePath;
     std::unique_ptr<std::byte[]> m_audioData;
-    ALuint m_alBufferId;
-    size_t m_audioDataBytes;
-    int32_t m_bitsPerSample;
-    int32_t m_channels;
-    int32_t m_samplingRate;
-    ALenum m_alFormat;
+    ALuint m_alBufferId = 0;
+    size_t m_audioDataBytes = 0;
+    int32_t m_bitsPerSample = 0;
+    int32_t m_channels = 0;
+    int32_t m_samplingRate = 0;
+    ALenum m_alFormat = 0;
 };
 
 } /* namespace tgon */

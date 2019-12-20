@@ -254,11 +254,6 @@ void WindowsWindow::SetUserData(void* data)
     SetWindowLongPtrW(m_wndHandle, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(data));
 }
 
-Window::Window(const WindowStyle& windowStyle) :
-    WindowsWindow(windowStyle)
-{
-}
-
 void Window::BringToFront()
 {
     // SetForegroundWindow, BringWindowToTop doesn't work as expected, therefore we will use a hack.

@@ -6,6 +6,7 @@
 
 #pragma once
 #include <gainput/gainput.h>
+#include <memory>
 
 #include "Core/NonCopyable.h"
 
@@ -15,6 +16,11 @@ namespace tgon
 class MacOSInputManager :
     private NonCopyable
 {
+/**@section Constructor */
+public:
+    explicit MacOSInputManager(const class Window& inputTargetWindow);
+    MacOSInputManager(MacOSInputManager&& rhs) noexcept;
+
 /**@section Method */
 public:
     gainput::InputDeviceMouse* CreateNativeMouse();
@@ -23,7 +29,7 @@ public:
 
 /**@section Variable */
 protected:
-    gainput::InputManager m_inputManager;
+    std::unique_ptr<gainput::InputManager> m_inputManager;
 };
     
 using PlatformInputManager = MacOSInputManager;
