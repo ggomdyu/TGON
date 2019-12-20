@@ -20,18 +20,24 @@ class OpenGLGraphics :
 {
 /**@section Constructor */
 protected:
-    OpenGLGraphics(OpenGLContext&& context) noexcept;
-    
+    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode);
+    OpenGLGraphics(OpenGLGraphics&& rhs) noexcept;
+
+protected:
+    ~OpenGLGraphics();
+
 /**@section Method */
 public:
     OpenGLContext& GetContext() noexcept;
     const OpenGLContext& GetContext() const noexcept;
+
+protected:
     GLuint GetVertexArrayHandle() const noexcept;
 
 /**@section Variable */
 protected:
     OpenGLContext m_context;
-    GLuint m_vertexArrayHandle;
+    GLuint m_vertexArrayHandle = 0;
 };
 
 using PlatformGraphics = OpenGLGraphics;

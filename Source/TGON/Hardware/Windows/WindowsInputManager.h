@@ -9,8 +9,6 @@
 
 #include "Core/NonCopyable.h"
 
-#pragma comment(lib, "dinput8.lib")
-
 namespace tgon
 {
 
@@ -19,20 +17,24 @@ class WindowsInputManager :
 {
 /**@section Constructor */
 protected:
-    explicit WindowsInputManager(OIS::InputManager* inputManager) noexcept;
+    explicit WindowsInputManager(const class Window& inputTarget);
+    WindowsInputManager(WindowsInputManager&& rhs) noexcept;
+
+/**@section Destructor */
+public:
+    ~WindowsInputManager();
 
 /**@section Method */
-public:    
+public:
     OIS::Mouse* CreateNativeMouse();
     OIS::Keyboard* CreateNativeKeyboard();
     OIS::JoyStick* CreateNativeGamepad();
-    OIS::ParamList QueryParamList(const Window& inputTargetWindow) const;
     OIS::InputManager* GetInputManager() noexcept;
     const OIS::InputManager* GetInputManager() const noexcept;
 
 /**@section Variable */
 protected:
-    OIS::InputManager* m_inputManager;
+    OIS::InputManager* m_inputManager = nullptr;
 };
 
 using PlatformInputManager = WindowsInputManager;

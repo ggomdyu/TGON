@@ -19,12 +19,12 @@ class BaseAudioImporter :
 {
 /**@section Constructor */
 public:
-    BaseAudioImporter() noexcept;
+    BaseAudioImporter() noexcept = default;
     BaseAudioImporter(const std::byte* fileData, std::size_t fileDataBytes);
 
 /**@section Method */
 public:
-    static bool VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes);
+    static bool IsExactFormat(const std::byte* fileData, std::size_t fileDataBytes);
     bool Import(const std::byte* fileData, std::size_t fileDataBytes);
     bool IsValid() const noexcept;
     std::unique_ptr<std::byte[]>& GetAudioData() noexcept;
@@ -37,20 +37,11 @@ public:
 /**@section Variable */
 protected:
     std::unique_ptr<std::byte[]> m_audioData;
-    size_t m_audioDataBytes;
-    int32_t m_bitsPerSample;
-    int32_t m_channels;
-    int32_t m_samplingRate;
+    size_t m_audioDataBytes = 0;
+    int32_t m_bitsPerSample = 0;
+    int32_t m_channels = 0;
+    int32_t m_samplingRate = 0;
 };
-
-template <typename _DerivedType>
-inline BaseAudioImporter<_DerivedType>::BaseAudioImporter() noexcept :
-    m_audioDataBytes(0),
-    m_bitsPerSample(0),
-    m_channels(0),
-    m_samplingRate(0)
-{
-}
 
 template <typename _DerivedType>
 inline BaseAudioImporter<_DerivedType>::BaseAudioImporter(const std::byte* fileData, std::size_t fileDataBytes) :
@@ -72,9 +63,9 @@ inline bool BaseAudioImporter<_DerivedType>::IsValid() const noexcept
 }
 
 template <typename _DerivedType>
-inline bool BaseAudioImporter<_DerivedType>::VerifyFormat(const std::byte* fileData, std::size_t fileDataBytes)
+inline bool BaseAudioImporter<_DerivedType>::IsExactFormat(const std::byte* fileData, std::size_t fileDataBytes)
 {
-    return _DerivedType::VerifyFormat(fileData, fileDataBytes);
+    return _DerivedType::IsExactFormat(fileData, fileDataBytes);
 }
 
 template <typename _DerivedType>

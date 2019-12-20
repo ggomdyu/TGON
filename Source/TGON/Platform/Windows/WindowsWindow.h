@@ -22,7 +22,7 @@ class WindowsWindow :
 {
 /**@section Constructor */
 protected:
-    explicit WindowsWindow(HWND wndHandle) noexcept;
+    explicit WindowsWindow(const class WindowStyle& windowStyle) noexcept;
     WindowsWindow(WindowsWindow&& rhs) noexcept;
 
 /**@section Operator */
@@ -35,8 +35,6 @@ public:
     void SetRawWindowStyleEx(DWORD rawWindowStyleEx);
     LONG_PTR GetRawWindowStyle() const;
     LONG_PTR GetRawWindowStyleEx() const;
-
-private:
     void SetUserData(void* data);
 
 /**@section Event handler */

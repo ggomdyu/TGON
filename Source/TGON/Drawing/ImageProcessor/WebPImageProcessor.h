@@ -5,41 +5,39 @@
  */
 
 #pragma once
-#include "BaseImageProcessor.h"
+#include "ImageProcessor.h"
 
 namespace tgon
 {
 
-class WebPImageProcessor :
-    public BaseImageProcessor<WebPImageProcessor>
-{
-/* @section Constructor */
-public:
-    using BaseImageProcessor<WebPImageProcessor>::BaseImageProcessor;
 
+class WebPImageProcessor :
+    public ImageProcessor
+{
 /* @section Method */
 public:
-    /* @brief   Verifies the file format is exact. */
-    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
-
-    /* @brief   Decodes the file to the image. */
-    bool Import(const uint8_t* fileData, size_t fileDataBytes);
+    static bool IsExactFormat(const gsl::span<const std::byte>& fileData);
+    bool Initialize(const gsl::span<const std::byte>& fileData) override;
 };
 
-inline bool WebPImageProcessor::Import(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool WebPImageProcessor::Initialize(const gsl::span<const std::byte>& fileData)
 {
-    return false;
-}
-
-inline bool WebPImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
-{
-    if (fileDataBytes < 12)
+    if (WebPImageProcessor::IsExactFormat(fileData) == false)
     {
         return false;
     }
 
-    const char* header = reinterpret_cast<const char*>(&fileData[8]);
-    return (header[0] == 'W' && header[1] == 'E' && header[2] == 'B' && header[3] == 'P');
+    return false;
 }
 
+inline bool WebPImageProcessor::IsExactFormat(const gsl::span<const std::byte>& fileData)
+{
+    if (fileData.size() < 12)
+    {
+        return false;
+    }
+
+    return memcmp(&fileData[0], "WEBP", 4) == 0;
+}
+    
 } /* namespace tgon */  

@@ -15,7 +15,7 @@ namespace tgon
 namespace
 {
 
-HGLRC MakeOldGLRC(HDC dcHandle)
+HGLRC MakeOldGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits)
 {
     PIXELFORMATDESCRIPTOR pixelFormatDesc{};
     {
@@ -23,9 +23,9 @@ HGLRC MakeOldGLRC(HDC dcHandle)
         pixelFormatDesc.nVersion = 1;
         pixelFormatDesc.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
         pixelFormatDesc.iPixelType = PFD_TYPE_RGBA;
-        pixelFormatDesc.cColorBits = 32;
-        pixelFormatDesc.cDepthBits = 24;
-        pixelFormatDesc.cStencilBits = 8;
+        pixelFormatDesc.cColorBits = colorBits;
+        pixelFormatDesc.cDepthBits = depthBits;
+        pixelFormatDesc.cStencilBits = stencilBits;
         pixelFormatDesc.iLayerType = PFD_MAIN_PLANE;
     }
 
@@ -43,16 +43,16 @@ HGLRC MakeOldGLRC(HDC dcHandle)
     return wglCreateContext(dcHandle);
 }
 
-HGLRC MakeNewGLRC(HDC dcHandle, int majorVersion, int minorVersion)
+HGLRC MakeNewGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits, int majorVersion, int minorVersion)
 {
     int pixelFormatAttributes[] =
     {
         WGL_DRAW_TO_WINDOW_ARB, /*=*/ GL_TRUE,
         WGL_DOUBLE_BUFFER_ARB,  /*=*/ GL_TRUE,
         WGL_PIXEL_TYPE_ARB,     /*=*/ WGL_TYPE_RGBA_ARB,
-        WGL_COLOR_BITS_ARB,     /*=*/ 32,
-        WGL_DEPTH_BITS_ARB,     /*=*/ 24,
-        WGL_STENCIL_BITS_ARB,   /*=*/ 8,
+        WGL_COLOR_BITS_ARB,     /*=*/ colorBits,
+        WGL_DEPTH_BITS_ARB,     /*=*/ depthBits,
+        WGL_STENCIL_BITS_ARB,   /*=*/ stencilBits,
         0
     };
     int pixelFormat = 0;
@@ -84,7 +84,7 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
     wndHandle(reinterpret_cast<HWND>(displayTarget.GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
-    HGLRC oldGLRC = MakeOldGLRC(dcHandle);
+    HGLRC oldGLRC = MakeOldGLRC(dcHandle, videoMode.colorBits, videoMode.depthBits,videoMode.stencilBits);
     if (oldGLRC == nullptr)
     {
         return;
@@ -101,7 +101,7 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
     }
 
     // Create the new version of GLRC.
-    context = MakeNewGLRC(dcHandle, 4, 1);
+    context = MakeNewGLRC(dcHandle, videoMode.colorBits, videoMode.depthBits, videoMode.stencilBits, 4, 1);
     if (context == nullptr)
     {
         return;

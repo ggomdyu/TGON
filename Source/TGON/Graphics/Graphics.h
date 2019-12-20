@@ -52,17 +52,13 @@ enum class BlendMode
     HardLight,
 };
 
-class Graphics :
+class Graphics final :
     private PlatformGraphics
 {
 /**@section Constructor */
 public:
     Graphics(const Window& displayTarget, const VideoMode& videoMode);
 
-/**@section Destructor */
-public:
-    ~Graphics();
-    
 /**@section Method */
 public:
     PlatformGraphics& GetPlatformDependency() noexcept;

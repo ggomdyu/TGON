@@ -39,7 +39,7 @@ public:
     constexpr int32_t GetHashCode() const noexcept;
     constexpr int32_t CompareTo(const Version& rhs) const noexcept;
     std::optional<std::string> ToString() const;
-    std::optional<std::string> ToString(int fieldCount) const;
+    std::optional<std::string> ToString(int32_t fieldCount) const;
 
 private:
     static void AppendPositiveNumber(int32_t num, std::string* str);
@@ -212,7 +212,7 @@ inline std::optional<std::string> Version::ToString() const
     return this->ToString(4);
 }
 
-inline std::optional<std::string> Version::ToString(int fieldCount) const
+inline std::optional<std::string> Version::ToString(int32_t fieldCount) const
 {
     switch (fieldCount)
     {

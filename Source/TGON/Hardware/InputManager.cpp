@@ -5,6 +5,11 @@
 namespace tgon
 {
 
+InputManager::InputManager(const Window& inputTargetWindow) :
+    PlatformInputManager(inputTargetWindow)
+{
+}
+
 PlatformInputManager& InputManager::GetPlatformDependency() noexcept
 {
     return *this;

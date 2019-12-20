@@ -11,6 +11,10 @@
 #   include "Windows/WindowsInputManager.h"
 #elif TGON_PLATFORM_MACOS
 #   include "MacOS/MacOSInputManager.h"
+#elif TGON_PLATFORM_IOS
+#   include "IOS/IOSInputManager.h"
+#elif TGON_PLATFORM_ANDROID
+#   include "Android/AndroidInputManager.h"
 #endif
 
 namespace tgon
@@ -22,10 +26,6 @@ class InputManager final :
 /**@section Constructor */
 public:
     explicit InputManager(const Window& inputTargetWindow);
-
-/**@section Destructor */
-public:
-    ~InputManager();
 
 /**@section Method */
 public:

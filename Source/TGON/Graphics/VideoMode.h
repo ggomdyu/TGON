@@ -19,8 +19,8 @@ struct VideoMode final
     bool enableMultiSampling = false;
     uint16_t sampleCount = 16;
     uint16_t colorBits = 32;
-    uint16_t depthBits;
-    uint16_t stencilBits;
+    uint16_t depthBits = 24;
+    uint16_t stencilBits = 8;
 };
 
 } /* namespace tgon */

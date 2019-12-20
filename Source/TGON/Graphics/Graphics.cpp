@@ -5,6 +5,12 @@
 namespace tgon
 {
 
+Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
+    PlatformGraphics(displayTarget, videoMode)
+{
+    this->EnableCullFace();
+}
+
 PlatformGraphics& Graphics::GetPlatformDependency() noexcept
 {
     return *this;

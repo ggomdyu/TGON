@@ -17,7 +17,7 @@
 namespace tgon
 {
 
-class Directory
+class Directory final
 {
 /**@section Constructor */
 public:

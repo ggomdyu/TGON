@@ -19,7 +19,6 @@ protected:
 
 /**@section Method */
 private:
-    /**@brief   Register default WNDCLASS to window class table. */
     static bool RegisterDefaultWindowClass();
 };
 

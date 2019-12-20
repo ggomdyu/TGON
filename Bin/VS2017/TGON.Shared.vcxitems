@@ -1857,10 +1857,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BaseImageProcessor.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\PngImageProcessor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\WebPImageProcessor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.h" />

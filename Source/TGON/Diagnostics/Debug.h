@@ -2,7 +2,7 @@
  * @file    Debug.h
  * @author  ggomdyu
  * @since   04/01/2016
- * @brief   Set of platform agnostic debug interfaces.
+ * @brief   The platform agnostic debugging interfaces.
  */
 
 #pragma once

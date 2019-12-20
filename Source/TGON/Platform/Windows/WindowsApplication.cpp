@@ -26,7 +26,7 @@ constexpr UINT ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noex
 
 WindowsApplication::WindowsApplication()
 {
-    RegisterDefaultWindowClass();
+    WindowsApplication::RegisterDefaultWindowClass();
 }
 
 bool WindowsApplication::RegisterDefaultWindowClass()

@@ -1871,19 +1871,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\zlib-1.2.11\zconf.h">
       <Filter>Source\ThirdParty\zlib-1.2.11</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\JpgImageProcessor.h">
-      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\PngImageProcessor.h">
-      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\WebPImageProcessor.h">
-      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BaseImageProcessor.h">
-      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\BmpImageProcessor.h">
       <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstanceCounter.h">
@@ -2863,6 +2851,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEvents.h">
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jhcha\Desktop\Programming\Git\TGON\Bin\VS2017\..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h">
+      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

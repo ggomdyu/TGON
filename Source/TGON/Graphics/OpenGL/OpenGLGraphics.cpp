@@ -11,6 +11,10 @@
 
 #include "../Graphics.h"
 
+#ifdef _MSC_VER
+#   pragma comment(lib, "OpenGL32.Lib")
+#endif
+
 namespace tgon
 {
 namespace
@@ -53,10 +57,28 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
     
 } /* namespace */
 
-OpenGLGraphics::OpenGLGraphics(OpenGLContext&& context) noexcept :
-    m_context(std::move(context)),
-    m_vertexArrayHandle(0)
+OpenGLGraphics::OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode) :
+    m_context(displayTarget, videoMode)
 {
+    TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
+    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+}
+
+OpenGLGraphics::OpenGLGraphics(OpenGLGraphics&& rhs) noexcept :
+    m_context(std::move(rhs.m_context)),
+    m_vertexArrayHandle(rhs.m_vertexArrayHandle)
+{
+    rhs.m_vertexArrayHandle = 0;
+}
+
+OpenGLGraphics::~OpenGLGraphics()
+{
+    if (m_vertexArrayHandle != 0)
+    {
+        TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
+        TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
+        m_vertexArrayHandle = 0;
+    }
 }
 
 OpenGLContext& OpenGLGraphics::GetContext() noexcept
@@ -72,25 +94,6 @@ const OpenGLContext& OpenGLGraphics::GetContext() const noexcept
 GLuint OpenGLGraphics::GetVertexArrayHandle() const noexcept
 {
     return m_vertexArrayHandle;
-}
-
-Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
-    PlatformGraphics(OpenGLContext(displayTarget, videoMode))
-{
-    this->EnableCullFace();
-
-    TGON_GL_ERROR_CHECK(glGenVertexArrays(1, &m_vertexArrayHandle));
-    TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
-}
-
-Graphics::~Graphics()
-{
-    if (m_vertexArrayHandle != 0)
-    {
-        TGON_GL_ERROR_CHECK(glBindVertexArray(m_vertexArrayHandle));
-        TGON_GL_ERROR_CHECK(glDeleteVertexArrays(1, &m_vertexArrayHandle));
-        m_vertexArrayHandle = 0;
-    }
 }
 
 void Graphics::SetScissorRect(const FRect& scissorRect)

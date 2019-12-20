@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-class TimeSpan final
+struct TimeSpan final
 {
 /**@section Constructor */
 public:
@@ -40,8 +40,8 @@ public:
 
 /**@section Method */
 public:
-    static constexpr int Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept;
-    constexpr int CompareTo(const TimeSpan& value) const noexcept;
+    static constexpr int32_t Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept;
+    constexpr int32_t CompareTo(const TimeSpan& value) const noexcept;
     constexpr int32_t GetDays() const noexcept;
     constexpr int32_t GetHours() const noexcept;
     constexpr int32_t GetMinutes() const noexcept;
@@ -92,7 +92,7 @@ private:
     static constexpr double SecondsPerTick = 1.0 / TicksPerSecond;
     static constexpr double MillisecondsPerTick = 1.0 / TicksPerMillisecond;
 
-    int64_t m_ticks;
+    int64_t m_ticks = 0;
 };
 
 constexpr TimeSpan::TimeSpan(int32_t hours, int32_t minutes, int32_t seconds) noexcept :
@@ -192,12 +192,12 @@ constexpr TimeSpan TimeSpan::operator+() const noexcept
     return TimeSpan(m_ticks);
 }
 
-constexpr int TimeSpan::Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept
+constexpr int32_t TimeSpan::Compare(const TimeSpan& lhs, const TimeSpan& rhs) noexcept
 {
     return lhs.CompareTo(rhs);
 }
 
-constexpr int TimeSpan::CompareTo(const TimeSpan& value) const noexcept
+constexpr int32_t TimeSpan::CompareTo(const TimeSpan& value) const noexcept
 {
     if (m_ticks > value.m_ticks)
     {

@@ -15,7 +15,7 @@ namespace tgon
 
 struct FullPathTag {};
 
-class DirectoryInfo
+class DirectoryInfo final
 {
 /**@section Constructor */
 public:

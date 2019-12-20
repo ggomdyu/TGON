@@ -2,75 +2,42 @@
  * @file    BmpImageProcessor.h
  * @author  ggomdyu
  * @since   04/22/2018
+ * @warning This image processor supports only Windows bmp format, not for os2!
  */
 
 #pragma once
-#include "BaseImageProcessor.h"
+#include "ImageProcessor.h"
 
 namespace tgon
 {
 
 class BmpImageProcessor :
-    public BaseImageProcessor<BmpImageProcessor>
+    public ImageProcessor
 {
-/* @section Constructor */
-public:
-    using BaseImageProcessor<BmpImageProcessor>::BaseImageProcessor;
-
 /* @section Method */
 public:
-    /* @brief   Verifies the file format is exact. */
-    static bool VerifyFormat(const uint8_t* fileData, size_t fileDataBytes);
-
-    /* @brief   Decodes the file to the image. */
-    bool Import(const uint8_t* fileData, size_t fileDataBytes);
+    static bool IsExactFormat(const gsl::span<const std::byte>& fileData);
+    bool Initialize(const gsl::span<const std::byte>& fileData) override;
 };
 
-inline bool BmpImageProcessor::Import(const uint8_t* fileData, std::size_t fileDataBytes)
+inline bool BmpImageProcessor::Initialize(const gsl::span<const std::byte>& fileData)
 {
-    return false;
-}
-
-inline bool BmpImageProcessor::VerifyFormat(const uint8_t* fileData, std::size_t fileDataBytes)
-{
-    if (fileDataBytes < 2)
+    if (BmpImageProcessor::IsExactFormat(fileData) == false)
     {
         return false;
     }
 
-    const char* header = reinterpret_cast<const char*>(&fileData[0]);
-    return (header[0] == 'B' && header[1] == 'M');
+    return false;
+}
+
+inline bool BmpImageProcessor::IsExactFormat(const gsl::span<const std::byte>& fileData)
+{
+    if (fileData.size() < 2)
+    {
+        return false;
+    }
+
+    return (fileData[0] == std::byte('B') && fileData[1] == std::byte('M'));
 }
     
 } /* namespace tgon */  
-
-//namespace
-//{
-//
-//// Currently support windows format, not os2
-//template <typename _AllocatorType>
-//bool ResolveBMP(const uint8_t* srcData, std::size_t srcDataLen, std::vector<uint8_t, _AllocatorType>* destData, int32_t* width, int32_t* height, int32_t* channels, int32_t* colorDepth, PixelFormat* pixelFormat)
-//{
-//    if (srcData[0] != 'B' || srcData[1] != 'M')
-//    {
-//        return false;
-//    }
-//
-//    *width = *(int*)&(srcData[0x12]);
-//    *height = *(int*)&(srcData[0x16]);
-//
-//    int imageSize = *(int*)&(srcData[0x22]);
-//    destData->resize(imageSize);
-//
-//    int dataStartPos = *(int*)&(srcData[0x0A]);
-//    if (dataStartPos == 0)
-//    {
-//        dataStartPos = 54;
-//    }
-//
-//    memcpy(destData->data(), srcData + dataStartPos, imageSize);
-//
-//    return true;
-//}
-//
-//} /* namespace */

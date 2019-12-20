@@ -23,7 +23,7 @@
 namespace tgon
 {
 
-struct WindowStyle final
+class WindowStyle final
 {
     std::string title = u8"Thousand Party";
 
@@ -40,7 +40,7 @@ struct WindowStyle final
     bool showMiddle = true;
 };
 
-class Window :
+class Window final :
     private PlatformWindow
 {
 /**@section Constructor */

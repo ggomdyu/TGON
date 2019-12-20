@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <array>
+#include <fmt/format.h>
 #if TGON_SUPPORT_DWMAPI
 #   include <dwmapi.h>
 #   pragma comment(lib, "dwmapi.lib")
@@ -19,16 +20,16 @@ thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
-	*rawExtendedWindowStyle = 0;
-	*rawWindowStyle = 0;
+    *rawExtendedWindowStyle = 0;
+    *rawWindowStyle = 0;
 
-	// Create a normal window style.
+    // Create a normal window style.
     {
         *rawWindowStyle |= WS_VISIBLE;
         
         if (windowStyle.resizeable)
         {
-	    	*rawWindowStyle |= WS_THICKFRAME;
+            *rawWindowStyle |= WS_THICKFRAME;
         }
 
         if (!windowStyle.hasCaption)
@@ -78,7 +79,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
     AdjustWindowRect(&windowSize, rawWindowStyle, FALSE);
 
-	HWND wndHandle = ::CreateWindowExW(
+    HWND wndHandle = ::CreateWindowExW(
         rawExtendedWindowStyle,
         className,
         reinterpret_cast<LPCWSTR>(utf16Title.data()),
@@ -95,19 +96,15 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 
     if (wndHandle == nullptr)
     {
-        std::stringstream ss;
-        ss << "Failed to invoke CreateWindowExW. (Code: " << GetLastError() << ")";
-
-        Debug::WriteLine(ss.str());
+        Debug::WriteLine(fmt::format("Failed to invoke CreateWindowExW. (Code: {0})", GetLastError()));
     }
 
     return wndHandle;
 }
 
-WindowsWindow::WindowsWindow(HWND wndHandle) noexcept :
-    m_wndHandle(wndHandle)
+WindowsWindow::WindowsWindow(const WindowStyle& windowStyle) noexcept :
+    m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr)))
 {
-    this->SetUserData(this);
 }
 
 WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :
@@ -243,7 +240,7 @@ LRESULT WindowsWindow::OnHandleMessage(HWND wndHandle, UINT msg, WPARAM wParam, 
 
             downcastedMe->Close();
 
-            // Destroy the message queue and quit the message loop.
+            // Destroy the message queue and quit the loop.
             PostQuitMessage(0);
         }
         break;
@@ -258,7 +255,7 @@ void WindowsWindow::SetUserData(void* data)
 }
 
 Window::Window(const WindowStyle& windowStyle) :
-    WindowsWindow(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr)))
+    WindowsWindow(windowStyle)
 {
 }
 
@@ -456,7 +453,7 @@ float Window::GetTransparency() const
     BYTE transparency;
     GetLayeredWindowAttributes(m_wndHandle, nullptr, &transparency, nullptr);
 
-    return static_cast<float>(transparency) / 255.0f;
+    return static_cast<float>(transparency) * (1.0f / 255.0f);
 }
 
 //void Window::SetWindowTransparencyPerPixel(const Color4f& pixel, float opacity)

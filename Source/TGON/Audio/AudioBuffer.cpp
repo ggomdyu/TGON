@@ -202,11 +202,11 @@ bool AudioBuffer::SetAudioData(const std::byte* fileData, std::size_t fileDataBy
 bool AudioBuffer::SetAudioData(const std::byte* fileData, std::size_t fileDataBytes)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
-    if (WavAudioImporter::VerifyFormat(fileData, fileDataBytes))
+    if (WavAudioImporter::IsExactFormat(fileData, fileDataBytes))
     {
         audioFormat = AudioFormat::Wav;
     }
-    else if (OggVorbisAudioImporter::VerifyFormat(fileData, fileDataBytes))
+    else if (OggVorbisAudioImporter::IsExactFormat(fileData, fileDataBytes))
     {
         audioFormat = AudioFormat::OggVorbis;
     }

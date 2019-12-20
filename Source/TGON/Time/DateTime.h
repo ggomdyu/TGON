@@ -35,11 +35,11 @@ enum class DayOfWeek
     Saturday,
 };
 
-class DateTime final
+struct DateTime final
 {
 /**@section Constructor */
 public:
-    constexpr DateTime() noexcept;
+    constexpr DateTime() noexcept = default;
     constexpr DateTime(int32_t year, int32_t month, int32_t day) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second) noexcept;
     constexpr DateTime(int32_t year, int32_t month, int32_t day, int32_t hour, int32_t minute, int32_t second, DateTimeKind dateTimeKind) noexcept;
@@ -62,8 +62,8 @@ public:
 
 /**@section Method */
 public:
-    static constexpr int Compare(const DateTime& lhs, const DateTime& rhs) noexcept;
-    constexpr int CompareTo(const DateTime& value) const noexcept;
+    static constexpr int32_t Compare(const DateTime& lhs, const DateTime& rhs) noexcept;
+    constexpr int32_t CompareTo(const DateTime& value) const noexcept;
     static DateTime Now();
     static DateTime UtcNow();
     static DateTime Today();
@@ -126,13 +126,8 @@ private:
     static constexpr int32_t DaysTo10000 = DaysPer400Years * 25 - 366;
     static constexpr int64_t FileTimeOffset = DaysTo1601 * TimeSpan::TicksPerDay;
 
-    uint64_t m_ticks;
+    uint64_t m_ticks = 0;
 };
-
-constexpr DateTime::DateTime() noexcept :
-    DateTime(0)
-{
-}
 
 constexpr DateTime::DateTime(int32_t year, int32_t month, int32_t day) noexcept :
     DateTime(year, month, day, 0, 0, 0)
@@ -216,12 +211,12 @@ constexpr bool DateTime::operator<=(const DateTime& rhs) const noexcept
     return this->GetTicks() <= rhs.GetTicks();
 }
 
-constexpr int DateTime::Compare(const DateTime& lhs, const DateTime& rhs) noexcept
+constexpr int32_t DateTime::Compare(const DateTime& lhs, const DateTime& rhs) noexcept
 {
     return lhs.CompareTo(rhs);
 }
 
-constexpr int DateTime::CompareTo(const DateTime& value) const noexcept
+constexpr int32_t DateTime::CompareTo(const DateTime& value) const noexcept
 {
     if (this->GetTicks() > value.GetTicks())
     {
