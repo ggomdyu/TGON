@@ -52,13 +52,16 @@ struct FunctionTraits;
 template <typename _ReturnType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ArgTypes...)>
 {
-public:
-    enum { ArgumentCount = sizeof...(_ArgTypes), };
-
+/**@section Type */
 public:
     using ReturnType = _ReturnType;
     using FunctionType = _ReturnType(_ArgTypes...);
     using FunctionPtrType = _ReturnType(*)(_ArgTypes...);
+    
+/**@section Variable */
+public:
+    static constexpr bool IsMemberFunction = false;
+    static constexpr size_t ArgumentCount = sizeof...(_ArgTypes);
 };
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -68,7 +71,13 @@ template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
 struct FunctionTraits<_ReturnType(_ClassType::*)(_ArgTypes...)> :
     FunctionTraits<std::remove_cv_t<_ReturnType(_ArgTypes...)>>
 {
+/**@section Type */
+public:
     using ClassType = _ClassType;
+    
+/**@section Variable */
+public:
+    static constexpr bool IsMemberFunction = true;
 };
 
 template <typename _ReturnType, typename _ClassType, typename... _ArgTypes>
