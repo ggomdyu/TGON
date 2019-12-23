@@ -14,6 +14,8 @@ extern const UConverterSharedData* getAlgorithmicTypeFromCodePage(int32_t codePa
 namespace tgon
 {
 
+std::unordered_map<int32_t, Encoding> Encoding::m_encodingTable;
+
 Encoding::Encoding(const char* codePageName) :
     Encoding(CreateUConverter(codePageName))
 {

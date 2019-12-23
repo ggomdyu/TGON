@@ -67,7 +67,7 @@ private:
 private:
     UConverter* m_converter = nullptr;
     std::string_view m_encodingName;
-    inline static std::unordered_map<int32_t, Encoding> m_encodingTable;
+    static std::unordered_map<int32_t, Encoding> m_encodingTable;
 };
 
 } /* namespace tgon */
