@@ -7,11 +7,245 @@
 
 #pragma once
 #include <type_traits>
+#include <array>
 
 #include "TypeTraits.h"
 
 namespace tgon
 {
+namespace experimental
+{
+namespace detail
+{
+
+template <typename _ReturnType, typename... _ArgTypes>
+class Callable
+{
+/**@section Destructor */
+public:
+    virtual ~Callable() = default;
+
+/**@section Method */
+public:
+    virtual void CopyTo(Callable** callable) const = 0;
+    virtual _ReturnType Invoke(_ArgTypes... args) const = 0;
+    virtual void Destroy() = 0;
+};
+
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+class CallableImpl :
+    public Callable<_ReturnType, _ArgTypes...>
+{
+/**@section Constructor */
+public:
+    explicit CallableImpl(_FunctionType function, void* receiver = nullptr) noexcept;
+    
+/**@section Method */
+public:
+    void CopyTo(Callable<_ReturnType, _ArgTypes...>** callable) const override;
+    _ReturnType Invoke(_ArgTypes... args) const override;
+    void Destroy() override;
+
+/**@section Variable */
+private:
+    _FunctionType m_function;
+    void* m_receiver;
+};
+
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::CallableImpl(_FunctionType function, void* receiver) noexcept :
+    m_function(function),
+    m_receiver(receiver)
+{
+}
+
+template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline void CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::CopyTo(Callable<_ReturnType, _ArgTypes...>** callable) const
+{
+    Callable<_ReturnType, _ArgTypes...>* lhs = *callable;
+    new (&*callable) CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>(m_function, m_receiver);
+}
+
+template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline _ReturnType CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::Invoke(_ArgTypes... args) const
+{
+    if constexpr (tgon::FunctionTraits<_FunctionType>::IsMemberFunction)
+    {
+        return (reinterpret_cast<typename tgon::FunctionTraits<_FunctionType>::ClassType*>(m_receiver)->*m_function)(args...);
+    }
+    else
+    {
+        return m_function(args...);
+    }
+}
+
+template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline void CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::Destroy()
+{
+    if constexpr (tgon::FunctionTraits<_FunctionType>::IsFunctor)
+    {
+        m_function.~_FunctionType();
+    }
+}
+
+} /* namespace detail */
+
+template <typename>
+class Delegate;
+
+template <typename _ReturnType, typename... _ArgTypes>
+class Delegate<_ReturnType(_ArgTypes...)> final
+{
+/**@section Type */
+public:
+    using ReturnType = _ReturnType;
+
+private:
+    template <typename _FunctionType>
+    using CallableImpl = detail::CallableImpl<std::decay_t<_FunctionType>, _ReturnType, _ArgTypes...>;
+    using Callable = detail::Callable<_ReturnType, _ArgTypes...>;
+
+/**@section Constructor */
+public:
+    constexpr Delegate() noexcept = default;
+    constexpr Delegate(std::nullptr_t) noexcept;
+    Delegate(const Delegate& rhs);
+    Delegate(Delegate&& rhs) noexcept;
+    template <typename _FunctionType>
+    Delegate(_FunctionType function, void* receiver = nullptr);
+
+/**@section Destructor */
+public:
+    ~Delegate();
+
+/**@section Operator */
+public:
+    template <typename... _ArgTypes2>
+    _ReturnType operator()(_ArgTypes2&&... args) const;
+    Delegate& operator=(const Delegate& rhs);
+    Delegate& operator=(Delegate&& rhs) noexcept;
+    constexpr bool operator==(std::nullptr_t rhs) const noexcept;
+    constexpr bool operator!=(std::nullptr_t rhs) const noexcept;
+    constexpr bool operator==(const Delegate& rhs) const noexcept;
+    constexpr bool operator!=(const Delegate& rhs) const noexcept;
+
+/**@section Method */
+private:
+    Callable* GetCallable();
+    const Callable* GetCallable() const;
+
+/**@section Variable */
+private:
+    union
+    {
+        std::array<char, sizeof(void*) * 8> m_dummy{};
+        Callable* m_callable;
+    };
+};
+
+template <typename _ReturnType, typename... _ArgTypes>
+constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept :
+    Delegate()
+{
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
+    m_callable(nullptr)
+{
+    rhs.GetCallable()->CopyTo(&m_callable);
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
+    m_dummy(rhs.m_dummy)
+{
+    rhs.m_callable = nullptr;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, void* receiver)
+{
+    new (&m_callable) CallableImpl<_FunctionType>(function, receiver);
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline Delegate<_ReturnType(_ArgTypes...)>::~Delegate()
+{
+    if (m_callable)
+    {
+        this->GetCallable()->Destroy();
+        m_callable = nullptr;
+    }
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+template <typename... _ArgTypes2>
+inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&... args) const
+{
+    if (m_callable == nullptr)
+    {
+        return _ReturnType();
+    }
+
+    return this->GetCallable()->Invoke();
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(const Delegate& rhs)
+{
+    rhs.GetCallable()->CopyTo(&m_callable);
+
+    return *this;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs) noexcept
+{
+    m_callable = rhs.m_callable;
+    rhs.m_callable = nullptr;
+
+    return *this;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
+{
+    return m_callable == rhs;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
+{
+    return m_callable != rhs;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(const Delegate& rhs) const noexcept
+{
+    return m_callable == rhs.m_callable;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& rhs) const noexcept
+{
+    return m_callable != rhs.m_callable;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline detail::Callable<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetCallable()
+{
+    return reinterpret_cast<Callable*>(&m_callable);
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+inline const detail::Callable<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetCallable() const
+{
+    return reinterpret_cast<const Callable*>(&m_callable);
+}
+
+} /* namespace experimental */
 
 template <typename>
 class Delegate;
