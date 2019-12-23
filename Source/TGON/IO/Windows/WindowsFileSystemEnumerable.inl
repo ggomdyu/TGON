@@ -23,7 +23,7 @@ namespace detail
 {
 
 template <typename _HandlerType>
-inline void InternalEnumerateAllDirectories(const char* path, const char* searchPattern, uint8_t filterType, const _HandlerType& handler)
+inline void InternalEnumerateAllDirectories(const char* path, const char* searchPattern, DWORD filterType, const _HandlerType& handler)
 {
     std::string_view searchPatternStr = searchPattern;
 

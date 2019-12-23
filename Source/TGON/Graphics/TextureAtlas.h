@@ -39,7 +39,7 @@ public:
 /**@section Method */
 public:
     void Initialize(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset = DefaultPaddingOffset);
-    bool Insert(const _KeyType& key, std::byte* imageData, const I32Extent2D& size);
+    bool Insert(const _KeyType& key, const std::byte* imageData, const I32Extent2D& size);
     bool Contains(const _KeyType& key);
     std::optional<FRect> GetTextureRect(const _KeyType& key) const;
     int32_t GetTextureCount() const noexcept;
@@ -112,7 +112,7 @@ inline void BasicTextureAtlas<_KeyType>::Initialize(const I32Extent2D& atlasSize
 }
 
 template <typename _KeyType>
-inline bool BasicTextureAtlas<_KeyType>::Insert(const _KeyType& key, std::byte* imageData, const I32Extent2D& size)
+inline bool BasicTextureAtlas<_KeyType>::Insert(const _KeyType& key, const std::byte* imageData, const I32Extent2D& size)
 {
     stbrp_rect rect{static_cast<int>(m_packedTextureInfos.size()), static_cast<stbrp_coord>(size.width + m_paddingOffset), static_cast<stbrp_coord>(size.height + m_paddingOffset), 0, 0, 0};
 

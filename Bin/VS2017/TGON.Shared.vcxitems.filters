@@ -2852,8 +2852,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\includes\OISEvents.h">
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\jhcha\Desktop\Programming\Git\TGON\Bin\VS2017\..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h">
-      <Filter>Source\TGON\Drawing\ImageProcessor</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h" />
   </ItemGroup>
 </Project>

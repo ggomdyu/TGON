@@ -91,6 +91,7 @@ void AudioDevice::Destroy()
     if (m_device != nullptr)
     {
         alcCloseDevice(m_device);
+        m_device = nullptr;
     }
 }
 

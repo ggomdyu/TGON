@@ -94,7 +94,7 @@ inline DelegateChain<_ReturnType(_ArgTypes...)>& DelegateChain<_ReturnType(_ArgT
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
+inline bool DelegateChain<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t) const noexcept
 {
     return m_invocationList.empty();
 }

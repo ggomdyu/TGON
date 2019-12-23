@@ -105,6 +105,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
 WindowsWindow::WindowsWindow(const WindowStyle& windowStyle) noexcept :
     m_wndHandle(CreateNativeWindow(windowStyle, GetModuleHandle(nullptr)))
 {
+    this->SetUserData(this);
 }
 
 WindowsWindow::WindowsWindow(WindowsWindow&& rhs) noexcept :

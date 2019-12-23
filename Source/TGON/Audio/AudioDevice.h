@@ -45,8 +45,8 @@ private:
 
 /**@section Variable */
 private:
-    ALCdevice* m_device;
-    ALCcontext* m_context;
+    ALCdevice* m_device = nullptr;
+    ALCcontext* m_context = nullptr;
 };
 
 } /* namespace tgon */
