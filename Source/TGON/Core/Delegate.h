@@ -2,7 +2,6 @@
  * @file    Delegate.h
  * @author  ggomdyu
  * @since   09/25/2016
- * @seealso https://www.codeproject.com/articles/11015/the-impossibly-fast-c-delegates
  */
 
 #pragma once
@@ -12,8 +11,6 @@
 #include "TypeTraits.h"
 
 namespace tgon
-{
-namespace experimental
 {
 namespace detail
 {
@@ -28,8 +25,9 @@ public:
 /**@section Method */
 public:
     virtual _ReturnType Invoke(_ArgTypes... args) const = 0;
-    virtual void Destroy() = 0;
     virtual void CopyTo(Functor* functor) const = 0;
+    virtual void Destroy() = 0;
+    virtual size_t GetBytes() const noexcept = 0;
 };
 
 template <typename _FunctionType, bool IsMemberFunction>
@@ -58,13 +56,15 @@ public:
     
 /**@section Constructor */
 public:
-    explicit FunctorImpl(const FunctorImplParam& param) noexcept;
+    template <typename _Type>
+    explicit FunctorImpl(_Type&& arg) noexcept;
     
 /**@section Method */
 public:
     _ReturnType Invoke(_ArgTypes... args) const override;
-    void Destroy() override;
     void CopyTo(Functor<_ReturnType, _ArgTypes...>* functor) const override;
+    void Destroy() override;
+    size_t GetBytes() const noexcept override;
 
 /**@section Variable */
 private:
@@ -72,23 +72,24 @@ private:
 };
 
 template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(const FunctorImplParam& param) noexcept :
-    m_param(param)
+template <typename _Type>
+inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(_Type&& arg) noexcept :
+    m_param(std::forward<_Type>(arg))
 {
 }
 
-template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
 inline void FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::CopyTo(Functor<_ReturnType, _ArgTypes...>* functor) const
 {
     new (functor) FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>(m_param);
 }
 
-template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
 inline _ReturnType FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::Invoke(_ArgTypes... args) const
 {
-    if constexpr (tgon::FunctionTraits<_FunctionType>::IsMemberFunction)
+    if constexpr (FunctionTraits<_FunctionType>::IsMemberFunction)
     {
-        return (reinterpret_cast<typename tgon::FunctionTraits<_FunctionType>::ClassType*>(m_param.receiver)->*(m_param.function))(args...);
+        return (reinterpret_cast<typename FunctionTraits<_FunctionType>::ClassType*>(m_param.receiver)->*(m_param.function))(args...);
     }
     else
     {
@@ -96,13 +97,19 @@ inline _ReturnType FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::Invoke
     }
 }
 
-template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
 inline void FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::Destroy()
 {
-    if constexpr (tgon::FunctionTraits<_FunctionType>::IsFunctor)
+    if constexpr (FunctionTraits<_FunctionType>::IsFunctor)
     {
         m_param.function.~_FunctionType();
     }
+}
+
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline size_t FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::GetBytes() const noexcept
+{
+    return sizeof(*this);
 }
 
 } /* namespace detail */
@@ -119,7 +126,7 @@ public:
 
 private:
     template <typename _FunctionType>
-    using FunctorImpl = detail::FunctorImpl<std::decay_t<_FunctionType>, _ReturnType, _ArgTypes...>;
+    using FunctorImpl = detail::FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>;
     using Functor = detail::Functor<_ReturnType, _ArgTypes...>;
 
 /**@section Constructor */
@@ -152,15 +159,27 @@ public:
 private:
     Functor* GetFunctor() noexcept;
     const Functor* GetFunctor() const noexcept;
+    template <typename _FunctionType>
+    static constexpr bool IsLargeFunction() noexcept;
+    bool IsDynamicAllocated() const noexcept;
+    void Destroy();
 
 /**@section Variable */
 private:
+    static constexpr size_t StorageCapacity = 8;
+
     union
     {
-        std::array<char, sizeof(void*) * 8> m_storage = {};
+        std::array<void*, StorageCapacity> m_storage = {};
         void* m_ptr;
     };
 };
+
+template <typename _FunctionType>
+Delegate(_FunctionType function) -> Delegate<typename FunctionTraits<_FunctionType>::FunctionType>;
+
+template <typename _FunctionType>
+Delegate(_FunctionType function, void* receiver) -> Delegate<typename FunctionTraits<_FunctionType>::FunctionType>;
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept :
@@ -172,40 +191,76 @@ template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
     Delegate()
 {
+    if (rhs.m_ptr == nullptr)
+    {
+        return;
+    }
+
+    m_ptr = rhs.IsDynamicAllocated() ? operator new(rhs.GetFunctor()->GetBytes()) : &m_storage[1];
+
     rhs.GetFunctor()->CopyTo(this->GetFunctor());
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
-    m_storage(rhs.m_storage)
+    Delegate()
 {
+    if (rhs.m_ptr == nullptr)
+    {
+        return;
+    }
+
+    if (rhs.IsDynamicAllocated())
+    {
+        m_ptr = rhs.m_ptr;
+    }
+    else
+    {
+        m_storage = rhs.m_storage;
+        m_ptr = &m_storage[1];
+    }
+
     rhs.m_ptr = nullptr;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function)
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
+    Delegate()
 {
-    constexpr bool IsMemberFunction = FunctionTraits<_FunctionType>::IsMemberFunction;
-    new (&m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, IsMemberFunction>{function});
+    if constexpr (Delegate::IsLargeFunction<_FunctionType>())
+    {
+        m_ptr = operator new(sizeof(FunctorImpl<_FunctionType>));
+    }
+    else
+    {
+        m_ptr = &m_storage[1];
+    }
+    
+    new (m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, void* receiver)
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, void* receiver) :
+    Delegate()
 {
-    constexpr bool IsMemberFunction = FunctionTraits<_FunctionType>::IsMemberFunction;
-    new (&m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, IsMemberFunction>{function, receiver});
+    if constexpr (Delegate::IsLargeFunction<_FunctionType>())
+    {
+        m_ptr = operator new(sizeof(FunctorImpl<_FunctionType>));
+    }
+    else
+    {
+        m_ptr = &m_storage[1];
+    }
+
+    new (m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function, receiver});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::~Delegate()
 {
-    if (m_ptr)
-    {
-        this->GetFunctor()->Destroy();
-        m_ptr = nullptr;
-    }
+    this->Destroy();
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -221,8 +276,24 @@ inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&.
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType>
+constexpr bool Delegate<_ReturnType(_ArgTypes...)>::IsLargeFunction() noexcept
+{
+    return sizeof(_FunctionType) > (sizeof(m_storage) - sizeof(m_storage[0]));
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(const Delegate& rhs)
 {
+    this->Destroy();
+
+    if (rhs.m_ptr == nullptr)
+    {
+        return *this;
+    }
+
+    m_ptr = rhs.IsDynamicAllocated() ? operator new(rhs.GetFunctor()->GetBytes()) : &m_storage[1];
+
     rhs.GetFunctor()->CopyTo(this->GetFunctor());
 
     return *this;
@@ -231,10 +302,25 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs) noexcept
 {
-    m_ptr = rhs.m_ptr;
+    this->Destroy();
     
-    rhs.m_functor = nullptr;
+    if (rhs.m_ptr == nullptr)
+    {
+        return *this;
+    }
+    
+    if (rhs.IsDynamicAllocated())
+    {
+        m_ptr = rhs.m_ptr;
+    }
+    else
+    {
+        m_storage = rhs.m_storage;
+        m_ptr = &m_storage[1];
+    }
 
+    rhs.m_ptr = nullptr;
+    
     return *this;
 }
 
@@ -265,372 +351,37 @@ constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& r
 template <typename _ReturnType, typename... _ArgTypes>
 inline detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() noexcept
 {
-    return reinterpret_cast<Functor*>(&m_ptr);
+    return reinterpret_cast<Functor*>(m_ptr);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline const detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() const noexcept
 {
-    return reinterpret_cast<const Functor*>(&m_ptr);
-}
-
-} /* namespace experimental */
-
-template <typename>
-class Delegate;
-
-template <typename _ReturnType, typename... _ArgTypes>
-class Delegate<_ReturnType(_ArgTypes...)> final
-{
-/**@section Type */
-private:
-    using Deleter = size_t(*)(void*);
-    using Stub = _ReturnType(*)(void*, _ArgTypes...);
-    
-public:
-    using ReturnType = _ReturnType;
-
-/**@section Constructor */
-public:
-    constexpr Delegate() noexcept;
-    constexpr Delegate(std::nullptr_t) noexcept;
-    constexpr Delegate(void* receiver, Stub stub) noexcept;
-    constexpr Delegate(void* receiver, Stub stub, Deleter deleter) noexcept;
-    template <typename _FunctionType>
-    Delegate(_FunctionType function);
-    Delegate(const Delegate& rhs);
-    constexpr Delegate(Delegate&& rhs) noexcept;
-
-/**@section Destructor */
-public:
-    ~Delegate();
-
-/**@section Operator */
-public:
-    template <typename... _ArgTypes2>
-    _ReturnType operator()(_ArgTypes2&&... args) const;
-    Delegate& operator=(const Delegate& rhs);
-    Delegate& operator=(Delegate&& rhs) noexcept;
-    constexpr bool operator==(std::nullptr_t rhs) const noexcept;
-    constexpr bool operator!=(std::nullptr_t rhs) const noexcept;
-    constexpr bool operator==(const Delegate& rhs) const noexcept;
-    constexpr bool operator!=(const Delegate& rhs) const noexcept;
-
-/**@section Method */
-public:
-    template <typename _FunctionType>
-    static Delegate MakeDelegate(_FunctionType function);
-    template <_ReturnType(*Handler)(_ArgTypes...)>
-    static Delegate MakeDelegate() noexcept;
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
-    static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
-    static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
-    static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
-    static Delegate MakeDelegate(_ClassType* receiver) noexcept;
-
-private:
-    template <typename _FunctionType>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <_ReturnType(*Handler)(_ArgTypes...)>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
-    static _ReturnType MakeStub(void* receiver, _ArgTypes... args);
-    template <typename _FunctionType>
-    static size_t MakeDeleter(void* ptr);
-
-/**@section Variable */
-private:
-    void* m_ptr;
-    Deleter m_deleter;
-    Stub m_stub;
-};
-
-template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate() noexcept :
-    m_ptr(nullptr),
-    m_deleter(nullptr),
-    m_stub(nullptr)
-{
+    return reinterpret_cast<const Functor*>(m_ptr);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept :
-    Delegate()
+inline bool Delegate<_ReturnType(_ArgTypes...)>::IsDynamicAllocated() const noexcept
 {
+    return m_ptr != &m_storage[1];
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, Stub stub) noexcept :
-    m_ptr(receiver),
-    m_deleter(nullptr),
-    m_stub(stub)
+inline void Delegate<_ReturnType(_ArgTypes...)>::Destroy()
 {
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(void* receiver, Stub stub, Deleter deleter) noexcept :
-    m_ptr(receiver),
-    m_deleter(deleter),
-    m_stub(stub)
-{
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
-    m_ptr(operator new(sizeof(std::decay_t<_FunctionType>))),
-    m_stub(&MakeStub<std::decay_t<_FunctionType>>),
-    m_deleter(&MakeDeleter<std::decay_t<_FunctionType>>)
-{
-    new (m_ptr) std::decay_t<_FunctionType>(function);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
-    m_deleter(rhs.m_deleter),
-    m_stub(rhs.m_stub)
-{
-    if (m_deleter)
+    if (m_ptr == nullptr)
     {
-        size_t allocationSize = m_deleter(nullptr);
-
-        m_ptr = operator new(allocationSize);
-        memcpy(m_ptr, rhs.m_ptr, allocationSize);
-    }
-    else
-    {
-        m_ptr = nullptr;
-    }
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
-    m_ptr(rhs.m_ptr),
-    m_deleter(rhs.m_deleter),
-    m_stub(rhs.m_stub)
-{
-    rhs.m_deleter = nullptr;
-    rhs.m_ptr = nullptr;
-    rhs.m_stub = nullptr;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline Delegate<_ReturnType(_ArgTypes...)>::~Delegate()
-{
-    if (m_deleter)
-    {
-        m_deleter(m_ptr);
-
-        m_deleter = nullptr;
-        m_ptr = nullptr;
-    }
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(const Delegate& rhs)
-{
-    if (this == &rhs)
-    {
-        return *this;
+        return;
     }
 
-    if (m_deleter)
+    this->GetFunctor()->Destroy();
+
+    if (this->IsDynamicAllocated())
     {
-        m_deleter(m_ptr);
+        operator delete(m_ptr);
     }
 
-    m_deleter = rhs.m_deleter;
-    m_stub = rhs.m_stub;
-
-    if (rhs.m_deleter)
-    {
-        size_t allocationSize = m_deleter(nullptr);
-
-        m_ptr = operator new(allocationSize);
-        memcpy(m_ptr, rhs.m_ptr, allocationSize);
-    }
-    else
-    {
-        m_ptr = nullptr;
-    }
-
-    return *this;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs) noexcept
-{
-    if (this == &rhs)
-    {
-        return *this;
-    }
-
-    if (m_deleter)
-    {
-        m_deleter(m_ptr);
-    }
-    
-    m_deleter = rhs.m_deleter;
-    m_ptr = rhs.m_ptr;
-    m_stub = rhs.m_stub;
-    
-    rhs.m_deleter = nullptr;
-    rhs.m_ptr = nullptr;
-    rhs.m_stub = nullptr;
-    
-    return *this;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
-{
-    return m_stub == nullptr;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
-{
-    return m_stub != nullptr;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(const Delegate& rhs) const noexcept
-{
-    return m_stub == rhs.m_stub;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& rhs) const noexcept
-{
-    return m_stub != rhs.m_stub;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename... _ArgTypes2>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&... args) const
-{
-    return m_stub(m_ptr, std::forward<_ArgTypes2>(args)...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_FunctionType function)
-{
-    return Delegate(std::forward<_FunctionType>(function));
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <_ReturnType(*Handler)(_ArgTypes...)>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate() noexcept
-{
-    return Delegate(nullptr, &MakeStub<Handler>);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...)>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
-{
-    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
-{
-    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) volatile>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
-{
-    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::*Handler)(_ArgTypes...) const volatile>
-inline Delegate<_ReturnType(_ArgTypes...)> Delegate<_ReturnType(_ArgTypes...)>::MakeDelegate(_ClassType* receiver) noexcept
-{
-    return Delegate(receiver, &MakeStub<_ClassType, Handler>);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return (*reinterpret_cast<_FunctionType*>(receiver))(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <_ReturnType(*Handler)(_ArgTypes...)>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return Handler(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::* Handler)(_ArgTypes...)>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return (reinterpret_cast<_ClassType*>(receiver)->*Handler)(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::* Handler)(_ArgTypes...) const>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return (reinterpret_cast<_ClassType*>(receiver)->*Handler)(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::* Handler)(_ArgTypes...) volatile>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return (reinterpret_cast<_ClassType*>(receiver)->*Handler)(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _ClassType, _ReturnType(_ClassType::* Handler)(_ArgTypes...) const volatile>
-inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::MakeStub(void* receiver, _ArgTypes... args)
-{
-    return (reinterpret_cast<_ClassType*>(receiver)->*Handler)(args...);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline size_t Delegate<_ReturnType(_ArgTypes...)>::MakeDeleter(void* ptr)
-{
-    operator delete(ptr);
-    return sizeof(_FunctionType);
-}
-    
-template <auto Function>
-auto MakeDelegate(typename FunctionTraits<decltype(Function)>::ClassType* receiver)
-{
-    using ClassType = typename FunctionTraits<decltype(Function)>::ClassType;
-    
-    return Delegate<typename FunctionTraits<decltype(Function)>::FunctionType>::template MakeDelegate<ClassType, Function>(receiver);
-}
-
-template <auto Function>
-auto MakeDelegate()
-{
-    return Delegate<typename FunctionTraits<decltype(Function)>::FunctionType>::template MakeDelegate<Function>();
-}
-
-template <typename _FunctionType>
-auto MakeDelegate(_FunctionType&& function)
-{
-    return Delegate<typename FunctionTraits<_FunctionType>::FunctionType>(std::forward<_FunctionType>(function));
+    m_storage = {};
 }
 
 } /* namespace tgon */

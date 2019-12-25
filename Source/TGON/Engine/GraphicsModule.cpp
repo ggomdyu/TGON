@@ -19,7 +19,7 @@ GraphicsModule::GraphicsModule(Window& window, const VideoMode& videoMode) :
     m_graphics.EnableBlend();
     m_graphics.SetBlendMode(BlendMode::Alpha);
     
-    window.OnResize += MakeDelegate<&GraphicsModule::OnResizeWindow>(this);
+    window.OnResize += Delegate(&GraphicsModule::OnResizeWindow, this);
 }
 
 void GraphicsModule::Draw()
