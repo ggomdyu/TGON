@@ -97,6 +97,7 @@ struct FunctionTraits :
 /**@section Variable */
 public:
     static constexpr bool IsFunctor = true;
+    static constexpr bool IsMemberFunction = false;
 };
 
 template <typename _Type>

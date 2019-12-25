@@ -19,72 +19,89 @@ namespace detail
 {
 
 template <typename _ReturnType, typename... _ArgTypes>
-class Callable
+class Functor
 {
 /**@section Destructor */
 public:
-    virtual ~Callable() = default;
+    virtual ~Functor() = default;
 
 /**@section Method */
 public:
-    virtual void CopyTo(Callable** callable) const = 0;
     virtual _ReturnType Invoke(_ArgTypes... args) const = 0;
     virtual void Destroy() = 0;
+    virtual void CopyTo(Functor* functor) const = 0;
+};
+
+template <typename _FunctionType, bool IsMemberFunction>
+struct FunctorImplParam;
+
+template <typename _FunctionType>
+struct FunctorImplParam<_FunctionType, false>
+{
+    _FunctionType function;
+};
+
+template <typename _FunctionType>
+struct FunctorImplParam<_FunctionType, true>
+{
+    _FunctionType function;
+    void* receiver;
 };
 
 template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-class CallableImpl :
-    public Callable<_ReturnType, _ArgTypes...>
+class FunctorImpl final :
+    public Functor<_ReturnType, _ArgTypes...>
 {
+/**@section Type */
+public:
+    using FunctorImplParam = FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>;
+    
 /**@section Constructor */
 public:
-    explicit CallableImpl(_FunctionType function, void* receiver = nullptr) noexcept;
+    explicit FunctorImpl(const FunctorImplParam& param) noexcept;
     
 /**@section Method */
 public:
-    void CopyTo(Callable<_ReturnType, _ArgTypes...>** callable) const override;
     _ReturnType Invoke(_ArgTypes... args) const override;
     void Destroy() override;
+    void CopyTo(Functor<_ReturnType, _ArgTypes...>* functor) const override;
 
 /**@section Variable */
 private:
-    _FunctionType m_function;
-    void* m_receiver;
+    FunctorImplParam m_param;
 };
 
 template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-inline CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::CallableImpl(_FunctionType function, void* receiver) noexcept :
-    m_function(function),
-    m_receiver(receiver)
+inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(const FunctorImplParam& param) noexcept :
+    m_param(param)
 {
 }
 
 template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-inline void CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::CopyTo(Callable<_ReturnType, _ArgTypes...>** callable) const
+inline void FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::CopyTo(Functor<_ReturnType, _ArgTypes...>* functor) const
 {
-    Callable<_ReturnType, _ArgTypes...>* lhs = *callable;
-    new (&*callable) CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>(m_function, m_receiver);
+    new (functor) FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>(m_param);
 }
 
 template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-inline _ReturnType CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::Invoke(_ArgTypes... args) const
+inline _ReturnType FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::Invoke(_ArgTypes... args) const
 {
     if constexpr (tgon::FunctionTraits<_FunctionType>::IsMemberFunction)
     {
-        return (reinterpret_cast<typename tgon::FunctionTraits<_FunctionType>::ClassType*>(m_receiver)->*m_function)(args...);
+        return (reinterpret_cast<typename tgon::FunctionTraits<_FunctionType>::ClassType*>(m_param.receiver)->*(m_param.function))(args...);
     }
     else
     {
-        return m_function(args...);
+        return m_param.function(args...);
     }
 }
 
 template<typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-inline void CallableImpl<_FunctionType, _ReturnType, _ArgTypes...>::Destroy()
+inline void FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::Destroy()
 {
     if constexpr (tgon::FunctionTraits<_FunctionType>::IsFunctor)
     {
-        m_function.~_FunctionType();
+        m_param.function.~_FunctionType();
     }
 }
 
@@ -102,8 +119,8 @@ public:
 
 private:
     template <typename _FunctionType>
-    using CallableImpl = detail::CallableImpl<std::decay_t<_FunctionType>, _ReturnType, _ArgTypes...>;
-    using Callable = detail::Callable<_ReturnType, _ArgTypes...>;
+    using FunctorImpl = detail::FunctorImpl<std::decay_t<_FunctionType>, _ReturnType, _ArgTypes...>;
+    using Functor = detail::Functor<_ReturnType, _ArgTypes...>;
 
 /**@section Constructor */
 public:
@@ -112,7 +129,9 @@ public:
     Delegate(const Delegate& rhs);
     Delegate(Delegate&& rhs) noexcept;
     template <typename _FunctionType>
-    Delegate(_FunctionType function, void* receiver = nullptr);
+    Delegate(_FunctionType function);
+    template <typename _FunctionType>
+    Delegate(_FunctionType function, void* receiver);
 
 /**@section Destructor */
 public:
@@ -131,15 +150,15 @@ public:
 
 /**@section Method */
 private:
-    Callable* GetCallable();
-    const Callable* GetCallable() const;
+    Functor* GetFunctor() noexcept;
+    const Functor* GetFunctor() const noexcept;
 
 /**@section Variable */
 private:
     union
     {
-        std::array<char, sizeof(void*) * 8> m_dummy{};
-        Callable* m_callable;
+        std::array<char, sizeof(void*) * 8> m_storage = {};
+        void* m_ptr;
     };
 };
 
@@ -151,32 +170,41 @@ constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
-    m_callable(nullptr)
+    Delegate()
 {
-    rhs.GetCallable()->CopyTo(&m_callable);
+    rhs.GetFunctor()->CopyTo(this->GetFunctor());
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
-    m_dummy(rhs.m_dummy)
+    m_storage(rhs.m_storage)
 {
-    rhs.m_callable = nullptr;
+    rhs.m_ptr = nullptr;
+}
+
+template <typename _ReturnType, typename... _ArgTypes>
+template <typename _FunctionType>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function)
+{
+    constexpr bool IsMemberFunction = FunctionTraits<_FunctionType>::IsMemberFunction;
+    new (&m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, IsMemberFunction>{function});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, void* receiver)
 {
-    new (&m_callable) CallableImpl<_FunctionType>(function, receiver);
+    constexpr bool IsMemberFunction = FunctionTraits<_FunctionType>::IsMemberFunction;
+    new (&m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, IsMemberFunction>{function, receiver});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::~Delegate()
 {
-    if (m_callable)
+    if (m_ptr)
     {
-        this->GetCallable()->Destroy();
-        m_callable = nullptr;
+        this->GetFunctor()->Destroy();
+        m_ptr = nullptr;
     }
 }
 
@@ -184,18 +212,18 @@ template <typename _ReturnType, typename... _ArgTypes>
 template <typename... _ArgTypes2>
 inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&... args) const
 {
-    if (m_callable == nullptr)
+    if (m_ptr == nullptr)
     {
         return _ReturnType();
     }
 
-    return this->GetCallable()->Invoke();
+    return this->GetFunctor()->Invoke(std::forward<_ArgTypes2>(args)...);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(const Delegate& rhs)
 {
-    rhs.GetCallable()->CopyTo(&m_callable);
+    rhs.GetFunctor()->CopyTo(this->GetFunctor());
 
     return *this;
 }
@@ -203,8 +231,9 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>::operator=(Delegate&& rhs) noexcept
 {
-    m_callable = rhs.m_callable;
-    rhs.m_callable = nullptr;
+    m_ptr = rhs.m_ptr;
+    
+    rhs.m_functor = nullptr;
 
     return *this;
 }
@@ -212,37 +241,37 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
 {
-    return m_callable == rhs;
+    return m_ptr == rhs;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
-    return m_callable != rhs;
+    return m_ptr != rhs;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(const Delegate& rhs) const noexcept
 {
-    return m_callable == rhs.m_callable;
+    return m_ptr == rhs.m_ptr;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& rhs) const noexcept
 {
-    return m_callable != rhs.m_callable;
+    return m_ptr != rhs.m_ptr;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline detail::Callable<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetCallable()
+inline detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() noexcept
 {
-    return reinterpret_cast<Callable*>(&m_callable);
+    return reinterpret_cast<Functor*>(&m_ptr);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-inline const detail::Callable<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetCallable() const
+inline const detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() const noexcept
 {
-    return reinterpret_cast<const Callable*>(&m_callable);
+    return reinterpret_cast<const Functor*>(&m_ptr);
 }
 
 } /* namespace experimental */
