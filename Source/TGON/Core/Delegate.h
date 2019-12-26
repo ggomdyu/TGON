@@ -157,8 +157,6 @@ public:
 
 /**@section Method */
 private:
-    Functor* GetFunctor() noexcept;
-    const Functor* GetFunctor() const noexcept;
     template <typename _FunctionType>
     static constexpr bool IsLargeFunction() noexcept;
     bool IsDynamicAllocated() const noexcept;
@@ -171,7 +169,7 @@ private:
     union
     {
         std::array<void*, StorageCapacity> m_storage = {};
-        void* m_ptr;
+        Functor* m_functor;
     };
 };
 
@@ -191,36 +189,36 @@ template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(const Delegate& rhs) :
     Delegate()
 {
-    if (rhs.m_ptr == nullptr)
+    if (rhs.m_functor == nullptr)
     {
         return;
     }
 
-    m_ptr = rhs.IsDynamicAllocated() ? operator new(rhs.GetFunctor()->GetBytes()) : &m_storage[1];
+    m_functor = reinterpret_cast<Functor*>(rhs.IsDynamicAllocated() ? operator new(rhs.m_functor->GetBytes()) : &m_storage[1]);
 
-    rhs.GetFunctor()->CopyTo(this->GetFunctor());
+    rhs.m_functor->CopyTo(m_functor);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
     Delegate()
 {
-    if (rhs.m_ptr == nullptr)
+    if (rhs.m_functor == nullptr)
     {
         return;
     }
 
     if (rhs.IsDynamicAllocated())
     {
-        m_ptr = rhs.m_ptr;
+        m_functor = rhs.m_functor;
     }
     else
     {
         m_storage = rhs.m_storage;
-        m_ptr = &m_storage[1];
+        m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
 
-    rhs.m_ptr = nullptr;
+    rhs.m_functor = nullptr;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -230,14 +228,14 @@ inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
 {
     if constexpr (Delegate::IsLargeFunction<_FunctionType>())
     {
-        m_ptr = operator new(sizeof(FunctorImpl<_FunctionType>));
+        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<_FunctionType>)));
     }
     else
     {
-        m_ptr = &m_storage[1];
+        m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
     
-    new (m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function});
+    new (m_functor) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -247,14 +245,14 @@ inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, voi
 {
     if constexpr (Delegate::IsLargeFunction<_FunctionType>())
     {
-        m_ptr = operator new(sizeof(FunctorImpl<_FunctionType>));
+        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<_FunctionType>)));
     }
     else
     {
-        m_ptr = &m_storage[1];
+        m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
 
-    new (m_ptr) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function, receiver});
+    new (m_functor) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function, receiver});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -267,12 +265,12 @@ template <typename _ReturnType, typename... _ArgTypes>
 template <typename... _ArgTypes2>
 inline _ReturnType Delegate<_ReturnType(_ArgTypes...)>::operator()(_ArgTypes2&&... args) const
 {
-    if (m_ptr == nullptr)
+    if (m_functor == nullptr)
     {
         return _ReturnType();
     }
 
-    return this->GetFunctor()->Invoke(std::forward<_ArgTypes2>(args)...);
+    return m_functor->Invoke(std::forward<_ArgTypes2>(args)...);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -287,14 +285,14 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 {
     this->Destroy();
 
-    if (rhs.m_ptr == nullptr)
+    if (rhs.m_functor == nullptr)
     {
         return *this;
     }
 
-    m_ptr = rhs.IsDynamicAllocated() ? operator new(rhs.GetFunctor()->GetBytes()) : &m_storage[1];
+    m_functor = reinterpret_cast<Functor*>(rhs.IsDynamicAllocated() ? operator new(rhs.m_functor->GetBytes()) : &m_storage[1]);
 
-    rhs.GetFunctor()->CopyTo(this->GetFunctor());
+    rhs.m_functor->CopyTo(m_functor);
 
     return *this;
 }
@@ -304,22 +302,22 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 {
     this->Destroy();
     
-    if (rhs.m_ptr == nullptr)
+    if (rhs.m_functor == nullptr)
     {
         return *this;
     }
     
     if (rhs.IsDynamicAllocated())
     {
-        m_ptr = rhs.m_ptr;
+        m_functor = rhs.m_functor;
     }
     else
     {
         m_storage = rhs.m_storage;
-        m_ptr = &m_storage[1];
+        m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
 
-    rhs.m_ptr = nullptr;
+    rhs.m_functor = nullptr;
     
     return *this;
 }
@@ -327,58 +325,46 @@ inline Delegate<_ReturnType(_ArgTypes...)>& Delegate<_ReturnType(_ArgTypes...)>:
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(std::nullptr_t rhs) const noexcept
 {
-    return m_ptr == rhs;
+    return m_functor == rhs;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(std::nullptr_t rhs) const noexcept
 {
-    return m_ptr != rhs;
+    return m_functor != rhs;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator==(const Delegate& rhs) const noexcept
 {
-    return m_ptr == rhs.m_ptr;
+    return m_functor == rhs.m_functor;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::operator!=(const Delegate& rhs) const noexcept
 {
-    return m_ptr != rhs.m_ptr;
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() noexcept
-{
-    return reinterpret_cast<Functor*>(m_ptr);
-}
-
-template <typename _ReturnType, typename... _ArgTypes>
-inline const detail::Functor<_ReturnType, _ArgTypes...>* Delegate<_ReturnType(_ArgTypes...)>::GetFunctor() const noexcept
-{
-    return reinterpret_cast<const Functor*>(m_ptr);
+    return m_functor != rhs.m_functor;
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline bool Delegate<_ReturnType(_ArgTypes...)>::IsDynamicAllocated() const noexcept
 {
-    return m_ptr != &m_storage[1];
+    return m_functor != reinterpret_cast<const Functor*>(&m_storage[1]);
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
 inline void Delegate<_ReturnType(_ArgTypes...)>::Destroy()
 {
-    if (m_ptr == nullptr)
+    if (m_functor == nullptr)
     {
         return;
     }
 
-    this->GetFunctor()->Destroy();
+    m_functor->Destroy();
 
     if (this->IsDynamicAllocated())
     {
-        operator delete(m_ptr);
+        operator delete(m_functor);
     }
 
     m_storage = {};
