@@ -24,7 +24,7 @@ TimerHandle TimerModule::SetTimer(const Delegate<void(TimerHandle)>& callback, f
 TimerHandle TimerModule::SetTimer(Delegate<void(TimerHandle)>&& callback, float interval, bool isLoop)
 {
     auto timerHandle = CreateTimerHandle();
-    m_timerInfos.push_back(TimerInfo{timerHandle, callback, 0.0f, interval, isLoop, false});
+    m_timerInfos.push_back(TimerInfo{timerHandle, std::move(callback), 0.0f, interval, isLoop, false});
     
     return timerHandle;
 }

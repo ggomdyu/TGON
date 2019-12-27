@@ -12,8 +12,18 @@
 
 namespace tgon
 {
+
+template <typename>
+class Delegate;
+
 namespace detail
 {
+
+template <typename>
+struct IsDelegate : std::false_type {};
+
+template <typename _Type>
+struct IsDelegate<Delegate<_Type>> : std::true_type {};
 
 template <typename _ReturnType, typename... _ArgTypes>
 class Functor
@@ -56,8 +66,8 @@ public:
     
 /**@section Constructor */
 public:
-    template <typename _Type>
-    explicit FunctorImpl(_Type&& arg) noexcept;
+    explicit FunctorImpl(const FunctorImplParam& param) noexcept;
+    explicit FunctorImpl(FunctorImplParam&& param) noexcept;
     
 /**@section Method */
 public:
@@ -72,9 +82,14 @@ private:
 };
 
 template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
-template <typename _Type>
-inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(_Type&& arg) noexcept :
-    m_param(std::forward<_Type>(arg))
+inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(const FunctorImplParam& param) noexcept :
+    m_param(param)
+{
+}
+
+template <typename _FunctionType, typename _ReturnType, typename... _ArgTypes>
+inline FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::FunctorImpl(FunctorImplParam&& param) noexcept :
+    m_param(std::move(param))
 {
 }
 
@@ -114,8 +129,8 @@ inline size_t FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::GetBytes() 
 
 } /* namespace detail */
 
-template <typename>
-class Delegate;
+template <typename _Type>
+constexpr bool IsDelegate = detail::IsDelegate<_Type>::value;
 
 template <typename _ReturnType, typename... _ArgTypes>
 class Delegate<_ReturnType(_ArgTypes...)> final
@@ -135,10 +150,10 @@ public:
     constexpr Delegate(std::nullptr_t) noexcept;
     Delegate(const Delegate& rhs);
     Delegate(Delegate&& rhs) noexcept;
-    template <typename _FunctionType>
-    Delegate(_FunctionType function);
-    template <typename _FunctionType>
-    Delegate(_FunctionType function, void* receiver);
+    template <typename _FunctionType, typename std::enable_if_t<!IsDelegate<RemoveCvref<_FunctionType>>>* = nullptr>
+    Delegate(_FunctionType&& function);
+    template <typename _FunctionType, typename std::enable_if_t<!IsDelegate<RemoveCvref<_FunctionType>>>* = nullptr>
+    Delegate(_FunctionType&& function, void* receiver);
 
 /**@section Destructor */
 public:
@@ -174,10 +189,10 @@ private:
 };
 
 template <typename _FunctionType>
-Delegate(_FunctionType function) -> Delegate<typename FunctionTraits<_FunctionType>::FunctionType>;
+Delegate(_FunctionType&& function) -> Delegate<typename FunctionTraits<RemoveCvref<_FunctionType>>::FunctionType>;
 
 template <typename _FunctionType>
-Delegate(_FunctionType function, void* receiver) -> Delegate<typename FunctionTraits<_FunctionType>::FunctionType>;
+Delegate(_FunctionType&& function, void* receiver) -> Delegate<typename FunctionTraits<RemoveCvref<_FunctionType>>::FunctionType>;
 
 template <typename _ReturnType, typename... _ArgTypes>
 constexpr Delegate<_ReturnType(_ArgTypes...)>::Delegate(std::nullptr_t) noexcept :
@@ -222,37 +237,39 @@ inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(Delegate&& rhs) noexcept :
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function) :
+template <typename _FunctionType, typename std::enable_if_t<!IsDelegate<RemoveCvref<_FunctionType>>>*>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType&& function) :
     Delegate()
 {
-    if constexpr (Delegate::IsLargeFunction<_FunctionType>())
+    using FunctionType = std::decay_t<_FunctionType>;
+    if constexpr (Delegate::IsLargeFunction<FunctionType>())
     {
-        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<_FunctionType>)));
+        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<FunctionType>)));
     }
     else
     {
         m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
     
-    new (m_functor) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function});
+    new (m_functor) FunctorImpl<FunctionType>({std::forward<_FunctionType>(function)});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
-template <typename _FunctionType>
-inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType function, void* receiver) :
+template <typename _FunctionType, typename std::enable_if_t<!IsDelegate<RemoveCvref<_FunctionType>>>*>
+inline Delegate<_ReturnType(_ArgTypes...)>::Delegate(_FunctionType&& function, void* receiver) :
     Delegate()
 {
-    if constexpr (Delegate::IsLargeFunction<_FunctionType>())
+    using FunctionType = std::decay_t<_FunctionType>;
+    if constexpr (Delegate::IsLargeFunction<FunctionType>())
     {
-        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<_FunctionType>)));
+        m_functor = reinterpret_cast<Functor*>(operator new(sizeof(FunctorImpl<FunctionType>)));
     }
     else
     {
         m_functor = reinterpret_cast<Functor*>(&m_storage[1]);
     }
 
-    new (m_functor) FunctorImpl<_FunctionType>(detail::FunctorImplParam<_FunctionType, FunctionTraits<_FunctionType>::IsMemberFunction>{function, receiver});
+    new (m_functor) FunctorImpl<FunctionType>({std::forward<_FunctionType>(function), receiver});
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
@@ -277,7 +294,7 @@ template <typename _ReturnType, typename... _ArgTypes>
 template <typename _FunctionType>
 constexpr bool Delegate<_ReturnType(_ArgTypes...)>::IsLargeFunction() noexcept
 {
-    return sizeof(_FunctionType) > (sizeof(m_storage) - sizeof(m_storage[0]));
+    return sizeof(FunctorImpl<_FunctionType>) > (sizeof(m_storage) - sizeof(m_storage[0]));
 }
 
 template <typename _ReturnType, typename... _ArgTypes>
