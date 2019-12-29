@@ -13,9 +13,12 @@
 #if defined(_DEBUG) || !defined(NDEBUG)
 #   define TGON_GL_ERROR_CHECK(expression)\
     expression;\
-    if (glGetError() != GL_NO_ERROR)\
     {\
-        tgon::Debug::WriteLine(""); \
+        auto errorCode = glGetError();\
+        if (errorCode != GL_NO_ERROR)\
+        {\
+            tgon::Debug::WriteLine(fmt::format("Failed to invoke GL Function. (Code:{0}, Expression:{1})", errorCode, #expression));\
+        }\
     }
 #else
 #   define TGON_GL_ERROR_CHECK(expression) expression
