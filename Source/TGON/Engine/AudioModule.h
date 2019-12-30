@@ -22,10 +22,6 @@ public:
 public:
     AudioModule();
 
-/* @section Destructor */
-public:
-    ~AudioModule() override = default;
-
 /* @section Variable */
 private:
     AudioDevice m_audioDevice;

@@ -42,6 +42,7 @@ class Image
 public:
     Image() noexcept = default;
     explicit Image(const char* filePath);
+    explicit Image(const gsl::span<const std::byte>& fileData);
     Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     Image(Image&& rhs) noexcept;
 
@@ -56,6 +57,7 @@ public:
 /**@section Method */
 public:
     bool Initialize(const char* filePath);
+    bool Initialize(const gsl::span<const std::byte>& fileData);
     void Initialize(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     std::byte* GetData() noexcept;
     const std::byte* GetData() const noexcept;

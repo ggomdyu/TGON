@@ -38,10 +38,6 @@ public:
     Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     Texture(Texture&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    ~Texture();
-    
 /**@section Operator */
 public:
     Texture& operator=(Texture&& rhs);
@@ -62,10 +58,6 @@ public:
     const I32Extent2D& GetSize() const noexcept;
     PixelFormat GetPixelFormat() const noexcept;
     
-private:
-    void Destroy();
-    void UpdateTextureParameters();
-    
 /**@section Variable */
 protected:
     bool m_isUseMipmap;
@@ -74,6 +66,7 @@ protected:
     FilterMode m_filterMode;
     WrapMode m_wrapMode;
     I32Extent2D m_size;
+    inline static Texture* g_lastUsedTexture = nullptr;
 };
     
 } /* namespace tgon */

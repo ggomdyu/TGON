@@ -18,11 +18,18 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMod
 {
 }
 
-void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
+void UISprite::SetTexture(std::shared_ptr<Texture>&& texture) noexcept
 {
-    m_texture = texture;
     m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
     m_textureRect = FRect(0, 0, m_textureSize.width, m_textureSize.height);
+    m_texture = std::move(texture);
+}
+
+void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
+{
+    m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
+    m_textureRect = FRect(0, 0, m_textureSize.width, m_textureSize.height);
+    m_texture = texture;
 }
 
 void UISprite::SetTextureSize(const FExtent2D& textureSize) noexcept

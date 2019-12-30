@@ -5,15 +5,14 @@
  */
 
 #pragma once
-#include <memory>
-#include <unordered_map>
 #include <mutex>
+#include <unordered_map>
 #include <any>
 
 #include "Text/StringHash.h"
+#include "Drawing/FontFactory.h"
 #include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
-#include "Drawing/FontFactory.h"
 #include "UI/FontAtlas.h"
 
 #include "Module.h"
@@ -24,24 +23,124 @@ namespace tgon
 class AssetModule :
 	public Module
 {
+private:
+    using ResourceCache = std::unordered_map<StringHash, std::any>;
+    using ResourceUnitTable = std::vector<ResourceCache>;
+    using ResourceUnit = size_t;
+
 public:
     TGON_DECLARE_RTTI(AssetModule);
 
 /* @section Method */
 public:
-    std::shared_ptr<Texture> GetTexture(const StringViewHash& path);
-    std::shared_ptr<const Texture> GetTexture(const StringViewHash& path) const;
-    std::shared_ptr<AudioBuffer> GetAudioBuffer(const StringViewHash& path);
-    std::shared_ptr<const AudioBuffer> GetAudioBuffer(const StringViewHash& path) const;
-    std::shared_ptr<FontAtlas> GetFontAtlas(const StringViewHash& path);
-    std::shared_ptr<const FontAtlas> GetFontAtlas(const StringViewHash& path) const;
+    template <typename _ResourceType>
+    std::shared_ptr<_ResourceType> GetResource(const StringViewHash& path);
+    template <typename _ResourceType>
+    std::shared_ptr<const _ResourceType> GetResource(const StringViewHash& path) const;
+    template <typename _ResourceType>
     void PurgeResource(const StringViewHash& path);
-    
+    template <typename _ResourceType>
+    void PurgeResource();
+    void PurgeAllResource();
+
+private:
+    template <typename _ResourceType>
+    std::shared_ptr<_ResourceType> CreateResource(const StringViewHash& path) const;
+    template <typename _ResourceType>
+    ResourceUnit GetResourceUnit() const;
+
 /* @section Variable */
 private:
-    std::unordered_map<StringHash, std::any> m_resourceCache;
+    std::mutex m_mutex;
     FontFactory m_fontFactory;
-    std::recursive_mutex m_mutex;
+    mutable ResourceUnitTable m_resourceUnitTable;
+    inline static ResourceUnit m_maxResourceUnit = 0;
 };
+
+template<typename _ResourceType>
+inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewHash& path)
+{
+    m_mutex.lock();
+
+    ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+    auto iter = resourceCache.find(path);
+    if (iter == resourceCache.end())
+    {
+        iter = resourceCache.emplace(path, this->CreateResource<_ResourceType>(path)).first;
+    }
+
+    m_mutex.unlock();
+
+    return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
+}
+
+template<typename _ResourceType>
+inline std::shared_ptr<const _ResourceType> AssetModule::GetResource(const StringViewHash& path) const
+{
+    return const_cast<AssetModule*>(this)->GetResource(path);
+}
+
+template <typename _ResourceType>
+inline std::shared_ptr<_ResourceType> AssetModule::CreateResource(const StringViewHash& path) const
+{
+    return std::make_shared<_ResourceType>(path.Data());
+}
+
+template <>
+inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash& path) const
+{
+    return std::make_shared<Texture>(path.Data(), FilterMode::Bilinear, WrapMode::Clamp, false, false);
+}
+
+template <>
+inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& path) const
+{
+    return std::make_shared<Font>(path.Data(), m_fontFactory.GetFTLibrary());
+}
+
+template <>
+inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHash& path) const
+{
+    ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
+    auto iter = resourceCache.find(path);
+    if (iter == resourceCache.end())
+    {
+        iter = resourceCache.emplace(path, this->CreateResource<Font>(path)).first;
+    }
+
+    return std::make_shared<FontAtlas>(std::any_cast<std::shared_ptr<Font>>(iter->second));
+}
+
+template<typename _ResourceType>
+inline AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
+{
+    static ResourceUnit resourceUnit = m_maxResourceUnit;
+
+    std::once_flag flag;
+    std::call_once(flag, [&]()
+    {
+        m_resourceUnitTable.resize(m_resourceUnitTable.size() + 1);
+        resourceUnit = m_maxResourceUnit++;
+    });
+
+    return resourceUnit;
+}
+
+template<typename _ResourceType>
+inline void AssetModule::PurgeResource(const StringViewHash& path)
+{
+    m_resourceUnitTable[GetResourceUnit<Font>()].erase(path);
+}
+
+template <typename _ResourceType>
+inline void AssetModule::PurgeResource()
+{
+    m_resourceUnitTable[GetResourceUnit<Font>()].clear();
+}
+
+inline void AssetModule::PurgeAllResource()
+{
+    m_resourceUnitTable.clear();
+}
 
 } /* namespace tgon */

@@ -16,6 +16,10 @@ class Module :
 public:
     TGON_DECLARE_RTTI(Module)
 
+/* @section Destructor */
+public:
+    virtual ~Module() = default;
+
 /**@section Method */
 public:
     virtual void Initialize() {}

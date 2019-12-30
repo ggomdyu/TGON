@@ -10,6 +10,8 @@ namespace tgon
 
 Engine::~Engine()
 {
+    m_moduleDict.clear();
+
     while (m_modules.empty() == false)
     {
         m_modules.pop_back();

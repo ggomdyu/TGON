@@ -1,42 +1,14 @@
 #include "PrecompiledHeader.h"
 
-#include <vector>
-
-#include "Diagnostics/Debug.h"
-#include "Text/StringTraits.h"
-#include "Text/Hash.h"
 #include "Importer/WavAudioImporter.h"
 #include "Importer/OggVorbisAudioImporter.h"
 #include "IO/File.h"
 
 #include "AudioBuffer.h"
+#include "OpenALDebug.h"
 
 namespace tgon
 {
-
-inline AudioFormat ConvertToAudioFormat(const char* str)
-{
-    char lowercaseStr[32] {};
-    BasicStringTraits<char>::ToLower(str, static_cast<int32_t>(strlen(str)), lowercaseStr);
-
-    switch (X65599Hash(lowercaseStr))
-    {
-    case X65599Hash("wav"):
-        return AudioFormat::Wav;
-    case X65599Hash("ogg"):
-        return AudioFormat::OggVorbis;
-    case X65599Hash("mp3"):
-        return AudioFormat::Mp3;
-    case X65599Hash("flac"):
-        return AudioFormat::Flac;
-    case X65599Hash("m4a"):
-        return AudioFormat::M4a;
-    case X65599Hash("opus"):
-        return AudioFormat::Opus;
-    }
-
-    return AudioFormat::Unknown;
-}
 
 inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
 {
@@ -76,11 +48,7 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
 
 AudioBuffer::AudioBuffer()
 {
-    alGenBuffers(1, &m_alBufferId);
-    if (alGetError() != AL_NO_ERROR)
-    {
-        Debug::Fail("Failed to invoke alGenBuffers.");
-    }
+    TGON_AL_ERROR_CHECK(alGenBuffers(1, &m_alBufferId));
 }
 
 AudioBuffer::AudioBuffer(const char* filePath) :
@@ -152,22 +120,18 @@ bool AudioBuffer::Initialize(const char* filePath)
 
 bool AudioBuffer::Initialize(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
-    if (this->DecodeFileData(fileData, audioFormat) == false)
+    if (this->Decode(fileData, audioFormat) == false)
     {
         return false;
     }
 
     m_alFormat = ConvertToALFormat(m_channels, m_bitsPerSample);
-    if (m_alFormat == 0)
+    if (m_alFormat == -1)
     {
         return false;
     }
-
-    alBufferData(m_alBufferId, m_alFormat, m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate);
-    if (alGetError() != AL_NO_ERROR)
-    {
-        return false;
-    }
+        
+    TGON_AL_ERROR_CHECK(alBufferData(m_alBufferId, m_alFormat, m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate));
 
     return true;
 }
@@ -196,7 +160,7 @@ const std::byte* AudioBuffer::GetAudioData() const noexcept
     return &m_audioData[0];
 }
 
-size_t AudioBuffer::GetAudioDataBytes() const noexcept
+int32_t AudioBuffer::GetAudioDataBytes() const noexcept
 {
     return m_audioDataBytes;
 }
@@ -226,7 +190,7 @@ ALuint AudioBuffer::GetALBufferId() const noexcept
     return m_alBufferId;
 }
 
-bool AudioBuffer::DecodeFileData(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
+bool AudioBuffer::Decode(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
     switch (audioFormat)
     {
@@ -277,7 +241,7 @@ void AudioBuffer::Destroy()
 {
     if (m_alBufferId != 0)
     {
-        alDeleteBuffers(1, &m_alBufferId);
+        TGON_AL_ERROR_CHECK(alDeleteBuffers(1, &m_alBufferId));
         m_alBufferId = 0;
     }
 }

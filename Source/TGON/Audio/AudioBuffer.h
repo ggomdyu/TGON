@@ -55,7 +55,7 @@ public:
     bool Initialize(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
     bool Initialize(const gsl::span<const std::byte>& fileData);
     const std::byte* GetAudioData() const noexcept;
-    size_t GetAudioDataBytes() const noexcept;
+    int32_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
@@ -63,14 +63,14 @@ public:
     ALuint GetALBufferId() const noexcept;
 
 private:
-    bool DecodeFileData(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
+    bool Decode(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
     void Destroy();
 
 /**@section Variable */
 private:
-    std::unique_ptr<std::byte[]> m_audioData;
     ALuint m_alBufferId = 0;
-    size_t m_audioDataBytes = 0;
+    std::unique_ptr<std::byte[]> m_audioData;
+    int32_t m_audioDataBytes = 0;
     int32_t m_bitsPerSample = 0;
     int32_t m_channels = 0;
     int32_t m_samplingRate = 0;

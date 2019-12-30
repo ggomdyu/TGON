@@ -26,6 +26,7 @@ public:
 
 /**@section Method */
 public:
+    void SetTexture(std::shared_ptr<Texture>&& texture) noexcept;
     void SetTexture(const std::shared_ptr<Texture>& texture) noexcept;
     void SetTextureRect(const FRect& textureRect) noexcept;
     void SetTextureSize(const FExtent2D& textureSize) noexcept;

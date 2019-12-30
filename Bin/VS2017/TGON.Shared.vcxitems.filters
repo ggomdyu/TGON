@@ -1029,9 +1029,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\IO\Directory.cpp">
       <Filter>Source\TGON\IO</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp">
-      <Filter>Source\TGON\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Text\Encoding.cpp">
       <Filter>Source\TGON\Text</Filter>
     </ClCompile>
@@ -1878,9 +1875,6 @@
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstantiateCounter.h">
-      <Filter>Source\TGON\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\StaticInvoke.h">
       <Filter>Source\TGON\Misc</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\AutoCast.h">
@@ -2853,5 +2847,8 @@
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\OpenALDebug.h">
+      <Filter>Source\TGON\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

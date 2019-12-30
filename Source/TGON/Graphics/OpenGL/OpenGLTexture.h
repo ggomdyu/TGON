@@ -18,17 +18,27 @@ class OpenGLTexture :
 {
 /**@section Constructor */
 protected:
-    explicit OpenGLTexture(GLuint textureHandle) noexcept;
+    OpenGLTexture() noexcept;
     OpenGLTexture(OpenGLTexture&& rhs) noexcept;
     
+/**@section Destructor */
+protected:
+    ~OpenGLTexture();
+
 /**@section Operator */
-public:
+protected:
     OpenGLTexture& operator=(OpenGLTexture&& rhs) noexcept;
 
 /**@section Method */
 protected:
-    GLuint GetTextureHandle() const noexcept;
+    void Use();
+    void Unuse();
     void CreateMipmap() const;
+    GLuint GetTextureHandle() const noexcept;
+    void Destroy();
+
+private:
+    void UpdateTexParameters();
 
 /**@section Variable */
 protected:

@@ -18,7 +18,7 @@ TextRendererComponent::TextRendererComponent() :
 void TextRendererComponent::SetFontAtlas(const char* fontAtlasPath)
 {
     auto assetModule = Application::GetEngine()->FindModule<AssetModule>();
-    this->SetFontAtlas(assetModule->GetFontAtlas(fontAtlasPath));
+    this->SetFontAtlas(assetModule->GetResource<FontAtlas>(fontAtlasPath));
 }
 
 void TextRendererComponent::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas) noexcept

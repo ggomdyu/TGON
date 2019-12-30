@@ -14,6 +14,11 @@ SpriteRendererComponent::SpriteRendererComponent() :
 {
 }
 
+void SpriteRendererComponent::SetTexture(std::shared_ptr<Texture>&& texture) noexcept
+{
+    m_sprite->SetTexture(std::move(texture));
+}
+
 void SpriteRendererComponent::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
     m_sprite->SetTexture(texture);

@@ -9,8 +9,6 @@
 #include <stb_image_write.h>
 
 #include "IO/File.h"
-#include "Text/StringTraits.h"
-#include "Text/Hash.h"
 #include "Misc/Algorithm.h"
 
 #include "Image.h"
@@ -39,6 +37,12 @@ Image::Image(const char* filePath) :
     Image()
 {
     this->Initialize(filePath);
+}
+
+Image::Image(const gsl::span<const std::byte>& fileData) :
+    Image()
+{
+    this->Initialize(fileData);
 }
 
 Image::Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
@@ -97,8 +101,18 @@ bool Image::Initialize(const char* filePath)
         return false;
     }
 
+    return this->Initialize(*fileData);
+}
+
+bool Image::Initialize(const gsl::span<const std::byte>& fileData)
+{
     int width = 0, height = 0;
-    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData->at(0)), static_cast<int>(fileData->size()), &width, &height, nullptr, STBI_rgb_alpha)));
+    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData[0]), static_cast<int>(fileData.size()), &width, &height, nullptr, STBI_rgb_alpha)));
+    if (m_imageData == nullptr)
+    {
+        return false;
+    }
+
     m_size = I32Extent2D(static_cast<int32_t>(width), static_cast<int32_t>(height));
     m_pixelFormat = PixelFormat::RGBA8888;
 

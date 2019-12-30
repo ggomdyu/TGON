@@ -30,7 +30,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFace.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\FontFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\Image.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.cpp" />
@@ -1832,6 +1831,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\OggVorbisAudioImporter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\RiffReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\Importer\WavAudioImporter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\OpenALDebug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\CameraComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Component\RendererComponent.h" />
@@ -1919,7 +1919,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\ExpressionTemplate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstanceCounter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\InstantiateCounter.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\StaticInvoke.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Application.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Config.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Environment.h" />

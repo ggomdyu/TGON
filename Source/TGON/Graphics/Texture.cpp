@@ -32,15 +32,8 @@ Texture::Texture(Texture&& rhs) noexcept :
     rhs.m_size = {};
 }
 
-Texture::~Texture()
-{
-    this->Destroy();
-}
-
 Texture& Texture::operator=(Texture&& rhs)
 {
-    this->Destroy();
-
     PlatformTexture::operator=(std::move(rhs));
     
     m_isUseMipmap = rhs.m_isUseMipmap;
@@ -68,6 +61,23 @@ PlatformTexture& Texture::GetPlatformDependency() noexcept
 const PlatformTexture& Texture::GetPlatformDependency() const noexcept
 {
     return *this;
+}
+
+void Texture::Use()
+{
+    if (g_lastUsedTexture == this)
+    {
+        return;
+    }
+
+    PlatformTexture::Use();
+    g_lastUsedTexture = this;
+}
+
+void Texture::Unuse()
+{
+    PlatformTexture::Unuse();
+    g_lastUsedTexture = nullptr;
 }
 
 void Texture::SetFilterMode(FilterMode filterMode)
