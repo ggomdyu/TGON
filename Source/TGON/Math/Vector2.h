@@ -51,8 +51,8 @@ public:
     BasicVector2& operator/=(_ValueType scalar);
     constexpr bool operator==(const BasicVector2& rhs) const noexcept;
     constexpr bool operator!=(const BasicVector2& rhs) const noexcept;
-    _ValueType& operator[](std::size_t index) noexcept;
-    _ValueType operator[](std::size_t index) const noexcept;
+    _ValueType& operator[](int32_t index) noexcept;
+    _ValueType operator[](int32_t index) const noexcept;
     
 /**@section Method */
 public:
@@ -62,14 +62,14 @@ public:
     static _ValueType Angle(const BasicVector2& v1, const BasicVector2& v2) noexcept;
     static _ValueType Distance(const BasicVector2& v1, const BasicVector2& v2) noexcept;
     _ValueType Distance(const BasicVector2& v) const noexcept;
-    _ValueType& At(std::size_t index);
-    _ValueType At(std::size_t index) const;
+    _ValueType& At(int32_t index);
+    _ValueType At(int32_t index) const;
     _ValueType Length() const noexcept;
     _ValueType LengthSq() const noexcept;
     void Normalize();
     const BasicVector2 Normalized() const;
     int32_t ToString(const gsl::span<char>& destStr) const;
-    int32_t ToString(char* destStr, std::size_t destStrBufferLen) const;
+    int32_t ToString(char* destStr, size_t destStrBufferLen) const;
     std::string ToString() const;
 
 /**@section Variable */
@@ -214,13 +214,13 @@ constexpr bool BasicVector2<_ValueType>::operator!=(const BasicVector2& rhs) con
 }
 
 template <typename _ValueType>
-inline _ValueType& BasicVector2<_ValueType>::operator[](std::size_t index) noexcept
+inline _ValueType& BasicVector2<_ValueType>::operator[](int32_t index) noexcept
 {
     return *(&x + index);
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::operator[](std::size_t index) const noexcept
+inline _ValueType BasicVector2<_ValueType>::operator[](int32_t index) const noexcept
 {
     return *(&x + index);
 }
@@ -262,7 +262,7 @@ inline _ValueType BasicVector2<_ValueType>::Distance(const BasicVector2& v) cons
 }
 
 template <typename _ValueType>
-inline _ValueType& BasicVector2<_ValueType>::At(std::size_t index)
+inline _ValueType& BasicVector2<_ValueType>::At(int32_t index)
 {
     assert((index < 2 && index > -1) && "BasicVector2 index out of range");
     
@@ -270,7 +270,7 @@ inline _ValueType& BasicVector2<_ValueType>::At(std::size_t index)
 }
 
 template <typename _ValueType>
-inline _ValueType BasicVector2<_ValueType>::At(std::size_t index) const
+inline _ValueType BasicVector2<_ValueType>::At(int32_t index) const
 {
     assert((index < 2 && index > -1) && "BasicVector2 index out of range");
     
@@ -292,7 +292,10 @@ inline _ValueType BasicVector2<_ValueType>::LengthSq() const noexcept
 template <typename _ValueType>
 inline void BasicVector2<_ValueType>::Normalize()
 {
-    *this = this->Normalized();
+    _ValueType length = this->Length();
+    
+    x = x / length;
+    y = y / length;
 }
 
 template <typename _ValueType>
@@ -310,7 +313,7 @@ inline int32_t BasicVector2<_ValueType>::ToString(const gsl::span<char>& destStr
 }
 
 template <typename _ValueType>
-inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, std::size_t destStrBufferLen) const
+inline int32_t BasicVector2<_ValueType>::ToString(char* destStr, size_t destStrBufferLen) const
 {
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%f %f", x, y);
 }

@@ -6,14 +6,12 @@ namespace tgon
 {
 
 FontAtlas::FontAtlas(const std::shared_ptr<Font>& font) :
-    m_font(font),
-    m_textureAtlas(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset)
+    m_font(font)
 {
 }
 
 FontAtlas::FontAtlas(std::shared_ptr<Font>&& font) :
-    m_font(std::move(font)),
-    m_textureAtlas(FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset)
+    m_font(std::move(font))
 {
 }
 

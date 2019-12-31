@@ -37,10 +37,6 @@ public:
     ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
     ShaderProgram(ShaderProgram&& rhs) noexcept;
     
-/**@section Destructor */
-public:
-    ~ShaderProgram();
-    
 /**@section Operator */
 public:
     ShaderProgram& operator=(ShaderProgram&& rhs);
@@ -69,7 +65,6 @@ public:
 private:
     void UpdateUniformLocationCache();
     void ResetUniformCache();
-    void Destroy();
 
 /**@section Variable */
 private:

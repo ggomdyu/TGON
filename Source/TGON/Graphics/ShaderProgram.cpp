@@ -26,15 +26,8 @@ ShaderProgram::ShaderProgram(ShaderProgram&& rhs) noexcept :
     rhs.m_uniformLocationCache = {};
 }
 
-ShaderProgram::~ShaderProgram()
-{
-    this->Destroy();
-}
-
 ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
 {
-    this->Destroy();
-    
     PlatformShaderProgram::operator=(std::move(rhs));
 
     m_uniformLocationCache = rhs.m_uniformLocationCache;

@@ -77,7 +77,7 @@ inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewH
 template<typename _ResourceType>
 inline std::shared_ptr<const _ResourceType> AssetModule::GetResource(const StringViewHash& path) const
 {
-    return const_cast<AssetModule*>(this)->GetResource(path);
+    return const_cast<AssetModule*>(this)->GetResource<_ResourceType>(path);
 }
 
 template <typename _ResourceType>

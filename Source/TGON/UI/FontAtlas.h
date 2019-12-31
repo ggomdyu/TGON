@@ -11,7 +11,8 @@
 namespace tgon
 {
 
-class FontAtlas
+class FontAtlas :
+    private NonCopyable
 {
 /**@section Type */
 public:
@@ -50,7 +51,7 @@ private:
     static constexpr auto DefaultPaddingOffset = 2;
 
     std::shared_ptr<Font> m_font;
-    mutable BasicTextureAtlas<TextureAtlasKey> m_textureAtlas;
+    mutable BasicTextureAtlas<TextureAtlasKey> m_textureAtlas = {FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset};
 };
 
 } /* namespace tgon */

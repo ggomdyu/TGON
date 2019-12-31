@@ -388,7 +388,6 @@
 		FDC02D27228487D500BEE91A /* MacOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDC02C9A228481F100BEE91A /* MacOSWindow.mm */; };
 		FDC02D522284897500BEE91A /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC02D502284897500BEE91A /* GameObject.cpp */; };
 		FDC02D532284897500BEE91A /* GameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC02D512284897500BEE91A /* GameObject.h */; };
-		FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */; };
 		FDC83D5122CE40EE00B93C8D /* AssetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC83D4F22CE40EE00B93C8D /* AssetModule.h */; };
 		FDD7C9301F684911000EB7C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C92F1F684911000EB7C8 /* Cocoa.framework */; };
 		FDD7C9321F6849FC000EB7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7C9311F6849FC000EB7C8 /* Foundation.framework */; };
@@ -1399,7 +1398,6 @@
 		FDC02CDF228482F000BEE91A /* Hash.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Hash.cpp; sourceTree = "<group>"; };
 		FDC02D502284897500BEE91A /* GameObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GameObject.cpp; sourceTree = "<group>"; };
 		FDC02D512284897500BEE91A /* GameObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = GameObject.h; sourceTree = "<group>"; };
-		FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetModule.cpp; sourceTree = "<group>"; };
 		FDC83D4F22CE40EE00B93C8D /* AssetModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetModule.h; sourceTree = "<group>"; };
 		FDD7C92F1F684911000EB7C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FDD7C9311F6849FC000EB7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -2920,7 +2918,6 @@
 				FDC02C4A228481F000BEE91A /* Engine.cpp */,
 				FDC02C3F228481F000BEE91A /* Engine.h */,
 				FDC02C40228481F000BEE91A /* Module.h */,
-				FDC83D4E22CE40EE00B93C8D /* AssetModule.cpp */,
 				FDC83D4F22CE40EE00B93C8D /* AssetModule.h */,
 				FDC02C43228481F000BEE91A /* AudioModule.cpp */,
 				FDC02C48228481F000BEE91A /* AudioModule.h */,
@@ -4089,7 +4086,6 @@
 				8C7A8F192379641E00DC7196 /* Font.cpp in Sources */,
 				FDE1B4DA22E40E940093FDC1 /* ustrcase.cpp in Sources */,
 				FD78ABF12289C4DF00D22E46 /* smallft.c in Sources */,
-				FDC83D5022CE40EE00B93C8D /* AssetModule.cpp in Sources */,
 				FDE1B50F22E40E950093FDC1 /* ustring.cpp in Sources */,
 				8CE691AE2365F8E900482062 /* DirectoryInfo.cpp in Sources */,
 				FDE1B4F222E40E940093FDC1 /* ucnv_cb.cpp in Sources */,

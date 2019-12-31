@@ -1,9 +1,6 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_GRAPHICS_OPENGL
-#include <fmt/format.h>
-
-#include "Diagnostics/Debug.h"
 #include "Math/Vector4.h"
 
 #include "OpenGLDebug.h"
@@ -12,33 +9,10 @@
 
 namespace tgon
 {
-
-OpenGLShaderProgram::OpenGLShaderProgram(GLuint programId) noexcept :
-    m_programId(programId)
+namespace
 {
-}
 
-OpenGLShaderProgram::OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept :
-    m_programId(rhs.m_programId)
-{
-    rhs.m_programId = 0;
-}
-    
-OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) noexcept
-{
-    m_programId = rhs.m_programId;
-    
-    rhs.m_programId = 0;
-    
-    return *this;
-}
-
-GLuint OpenGLShaderProgram::GetProgramId() const noexcept
-{
-    return m_programId;
-}
-
-GLuint OpenGLShaderProgram::CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
+GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId)
 {
     // Creates an empty program object.
     GLuint programId = 0;
@@ -64,7 +38,7 @@ GLuint OpenGLShaderProgram::CreateShaderProgram(GLuint vertexShaderId, GLuint fr
     return programId;
 }
 
-std::string OpenGLShaderProgram::GetShaderLog(GLuint shaderId)
+std::string GetShaderLog(GLuint shaderId)
 {
     int32_t infoLogLen;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogLen));
@@ -76,7 +50,7 @@ std::string OpenGLShaderProgram::GetShaderLog(GLuint shaderId)
     return infoLog;
 }
 
-bool OpenGLShaderProgram::IsShaderCompileSucceed(GLuint shaderId)
+bool IsShaderCompileSucceed(GLuint shaderId)
 {
     GLint shaderCompileStatus;
     TGON_GL_ERROR_CHECK(glGetShaderiv(shaderId, GL_COMPILE_STATUS, &shaderCompileStatus));
@@ -84,7 +58,7 @@ bool OpenGLShaderProgram::IsShaderCompileSucceed(GLuint shaderId)
     return shaderCompileStatus == GL_TRUE;
 }
 
-GLuint OpenGLShaderProgram::CompileShader(GLenum shaderType, const char* shaderCode)
+GLuint CompileShader(GLenum shaderType, const char* shaderCode)
 {
     GLuint shaderId = 0;
     TGON_GL_ERROR_CHECK(shaderId = glCreateShader(shaderType));
@@ -92,22 +66,65 @@ GLuint OpenGLShaderProgram::CompileShader(GLenum shaderType, const char* shaderC
 
     // Compile the shader code that stored in the shader object.
     TGON_GL_ERROR_CHECK(glCompileShader(shaderId));
-    if (OpenGLShaderProgram::IsShaderCompileSucceed(shaderId) == false)
+    if (IsShaderCompileSucceed(shaderId) == false)
     {
-        Debug::WriteLine(fmt::format("Failed to invoke glCompileShader. ({0})", OpenGLShaderProgram::GetShaderLog(shaderId)));
+        Debug::WriteLine(fmt::format("Failed to invoke glCompileShader. ({0})", GetShaderLog(shaderId)));
         return 0;
     }
 
     return shaderId;
 }
 
-ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    OpenGLShaderProgram([&]()
+} /* namespace */
+
+OpenGLShaderProgram::OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
+    m_programId([&]()
     {
-        GLuint vertexShaderId = OpenGLShaderProgram::CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
-        GLuint fragmentShaderId = OpenGLShaderProgram::CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
-        return OpenGLShaderProgram::CreateShaderProgram(vertexShaderId, fragmentShaderId);
+        GLuint vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
+        GLuint fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+        return CreateShaderProgram(vertexShaderId, fragmentShaderId);
     } ())
+{
+}
+
+OpenGLShaderProgram::OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept :
+    m_programId(rhs.m_programId)
+{
+    rhs.m_programId = 0;
+}
+
+OpenGLShaderProgram::~OpenGLShaderProgram()
+{
+    this->Destroy();
+}
+    
+OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) noexcept
+{
+    this->Destroy();
+    
+    m_programId = rhs.m_programId;
+    
+    rhs.m_programId = 0;
+    
+    return *this;
+}
+
+GLuint OpenGLShaderProgram::GetProgramId() const noexcept
+{
+    return m_programId;
+}
+
+void OpenGLShaderProgram::Destroy()
+{
+    if (m_programId != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
+        m_programId = 0;
+    }
+}
+
+ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
+    OpenGLShaderProgram(vertexShaderCode, fragmentShaderCode)
 {
     this->UpdateUniformLocationCache();
 }
@@ -211,15 +228,6 @@ void ShaderProgram::SetParameterSampler(int32_t location, uint32_t textureUnit, 
 
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, texture));
     TGON_GL_ERROR_CHECK(glUniform1i(location, texture));
-}
-
-void ShaderProgram::Destroy()
-{
-    if (m_programId != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
-        m_programId = 0;
-    }
 }
 
 } /* namespace tgon */

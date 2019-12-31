@@ -18,9 +18,13 @@ class OpenGLShaderProgram :
 {
 /**@section Constructor */
 protected:
-    explicit OpenGLShaderProgram(GLuint programId) noexcept;
+    OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
     OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept;
 
+/**@section Destructor */
+protected:
+    ~OpenGLShaderProgram();
+    
 /**@section Operator */
 protected:
     OpenGLShaderProgram& operator=(OpenGLShaderProgram&& rhs) noexcept;
@@ -29,11 +33,8 @@ protected:
 public:
     GLuint GetProgramId() const noexcept;
     
-protected:
-    static GLuint CreateShaderProgram(GLuint vertexShaderId, GLuint fragmentShaderId);
-    static std::string GetShaderLog(GLuint shaderId);
-    static bool IsShaderCompileSucceed(GLuint shaderId);
-    static GLuint CompileShader(GLenum shaderType, const char* shaderCode);
+private:
+    void Destroy();
     
 /**@section Variable */
 protected:
