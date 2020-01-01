@@ -330,7 +330,14 @@ inline int32_t BasicStringHash<_StringType>::LastIndexOfAny(const _PredicateType
 template <typename _StringType>
 constexpr const typename BasicStringHash<_StringType>::ValueType* BasicStringHash<_StringType>::Data() const noexcept
 {
-    return &m_str[0];
+    if constexpr (IsBasicString<StringType> || IsBasicStringView<StringType>)
+    {
+        return m_str.data();
+    }
+    else
+    {
+        return m_str.Data();
+    }
 }
 
 template <typename _StringType>
