@@ -23,6 +23,7 @@ public:
 /**@section Method */
 public:
     virtual void Initialize() {}
+    virtual void Destroy() {}
     virtual void Update() {}
 };
 

@@ -23,13 +23,14 @@ namespace tgon
 class AssetModule :
 	public Module
 {
+public:
+    TGON_DECLARE_RTTI(AssetModule);
+
+/* @section Type */
 private:
     using ResourceCache = std::unordered_map<StringHash, std::any>;
     using ResourceUnitTable = std::vector<ResourceCache>;
     using ResourceUnit = size_t;
-
-public:
-    TGON_DECLARE_RTTI(AssetModule);
 
 /* @section Method */
 public:
@@ -54,13 +55,13 @@ private:
     std::mutex m_mutex;
     FontFactory m_fontFactory;
     mutable ResourceUnitTable m_resourceUnitTable;
-    inline static ResourceUnit m_maxResourceUnit = 0;
+    inline static ResourceUnit m_maxResourceUnit;
 };
 
 template<typename _ResourceType>
 inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewHash& path)
 {
-    m_mutex.lock();
+    std::lock_guard<std::mutex> lock(m_mutex);
 
     ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
     auto iter = resourceCache.find(path);
@@ -68,8 +69,6 @@ inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewH
     {
         iter = resourceCache.emplace(path, this->CreateResource<_ResourceType>(path)).first;
     }
-
-    m_mutex.unlock();
 
     return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
 }

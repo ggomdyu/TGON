@@ -10,9 +10,9 @@ namespace tgon
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 {
     auto sharedThis = this->shared_from_this();
-    if (m_parent != nullptr)
+    if (auto parent = m_parent.lock(); parent != nullptr)
     {
-        m_parent->DetachChild(sharedThis);
+        parent->DetachChild(sharedThis);
     }
 
     if (parent != nullptr)
@@ -74,12 +74,12 @@ const std::vector<std::shared_ptr<Transform>>& Transform::GetChildren() const no
     
 std::shared_ptr<Transform> Transform::GetParent() noexcept
 {
-    return m_parent;
+    return m_parent.lock();
 }
 
 std::shared_ptr<const Transform> Transform::GetParent() const noexcept
 {
-    return m_parent;
+    return m_parent.lock();
 }
 
 const Vector3& Transform::GetLocalPosition() const noexcept
@@ -115,14 +115,14 @@ void Transform::Update()
         m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
         m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
         
-        if (m_parent != nullptr)
+        if (auto parent = m_parent.lock(); parent != nullptr)
         {
-            m_matWorld *= m_parent->GetWorldMatrix();
-        }
+            m_matWorld *= parent->GetWorldMatrix();
 
-        for (auto& child : m_children)
-        {
-            child->m_isDirty = true;
+            for (auto& child : m_children)
+            {
+                child->m_isDirty = true;
+            }
         }
     }
     

@@ -61,6 +61,7 @@ void Application::OnLaunch()
 
 void Application::OnTerminate()
 {
+    m_engine->Destroy();
     m_engine.reset();
 }
 

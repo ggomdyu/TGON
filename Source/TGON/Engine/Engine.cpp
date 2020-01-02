@@ -8,19 +8,32 @@
 namespace tgon
 {
 
-Engine::~Engine()
-{
-    m_moduleDict.clear();
+Engine::~Engine() = default;
 
-    while (m_modules.empty() == false)
+void Engine::Initialize()
+{
+    for (auto& module : m_moduleCache)
     {
-        m_modules.pop_back();
+        module->Initialize();
+    }
+}
+
+void Engine::Destroy()
+{
+    for (auto iter = m_moduleCache.rbegin(); iter != m_moduleCache.rend(); ++iter)
+    {
+        (*iter)->Destroy();
+    }
+
+    while (m_moduleCache.empty() == false)
+    {
+        m_moduleCache.back();
     }
 }
 
 void Engine::Update()
 {
-    for (auto& module : m_modules)
+    for (auto& module : m_moduleCache)
     {
         module->Update();
     }

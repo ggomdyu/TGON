@@ -22,13 +22,13 @@ public:
 
 /**@section Method */
 public:
+    void Update() override;
     template <typename _SceneType, typename... _Args>
     void ChangeScene(_Args&&... args);
     void AddGlobalObject(const std::shared_ptr<GameObject>& object);
     void AddGlobalObject(std::shared_ptr<GameObject>&& object);
     std::shared_ptr<GameObject> FindGlobalObject(const StringViewHash& objectName);
     bool RemoveGlobalObject(const StringViewHash& objectName);
-    void Update() override;
 
 /**@section Variable */
 private:

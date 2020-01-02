@@ -1293,6 +1293,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\ThirdParty\OIS-1.4\src\OISEffect.cpp">
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h">
@@ -1422,9 +1423,6 @@
       <Filter>Source\TGON\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\GraphicsModule.h">
-      <Filter>Source\TGON\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\IModule.h">
       <Filter>Source\TGON\Engine</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputModule.h">
@@ -2847,8 +2845,9 @@
       <Filter>Source\ThirdParty\OIS-1.4</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\OpenALDebug.h">
-      <Filter>Source\TGON\Audio</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Misc\StaticInvoke.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Module.h">
+      <Filter>Source\TGON\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

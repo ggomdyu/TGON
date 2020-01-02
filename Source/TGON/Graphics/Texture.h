@@ -66,7 +66,7 @@ protected:
     FilterMode m_filterMode;
     WrapMode m_wrapMode;
     I32Extent2D m_size;
-    inline static Texture* g_lastUsedTexture = nullptr;
+    inline static Texture* g_lastUsedTexture;
 };
     
 } /* namespace tgon */

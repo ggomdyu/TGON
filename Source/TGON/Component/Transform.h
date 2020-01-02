@@ -48,13 +48,13 @@ private:
 
 /**@section Variable */
 protected:
-    std::shared_ptr<Transform> m_parent;
+    std::weak_ptr<Transform> m_parent;
     std::vector<std::shared_ptr<Transform>> m_children;
     Vector3 m_localPosition;
     Vector3 m_localRotation;
     Vector3 m_localScale = Vector3(1.0f, 1.0f, 1.0f);
     Matrix4x4 m_matWorld;
-    bool m_isDirty;
+    bool m_isDirty = true;
 };
 
 } /* namespace tgon */
