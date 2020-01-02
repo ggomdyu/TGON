@@ -113,14 +113,12 @@ inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHa
 template<typename _ResourceType>
 inline AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
 {
-    static ResourceUnit resourceUnit = m_maxResourceUnit;
-
-    std::once_flag flag;
-    std::call_once(flag, [&]()
+    static ResourceUnit resourceUnit = [&]()
     {
-        m_resourceUnitTable.resize(m_resourceUnitTable.size() + 1);
-        resourceUnit = m_maxResourceUnit++;
-    });
+        ResourceUnit resourceUnit = m_maxResourceUnit;
+        m_resourceUnitTable.resize(++m_maxResourceUnit);
+        return resourceUnit;
+    } ();
 
     return resourceUnit;
 }

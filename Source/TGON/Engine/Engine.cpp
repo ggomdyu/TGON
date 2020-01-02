@@ -27,7 +27,7 @@ void Engine::Destroy()
 
     while (m_moduleCache.empty() == false)
     {
-        m_moduleCache.back();
+        m_moduleCache.pop_back();
     }
 }
 

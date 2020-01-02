@@ -69,7 +69,8 @@ inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
     std::lock_guard<std::mutex> lock(m_mutex);
 
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
-    m_moduleCache.push_back(module);
+    auto moduleUnit = GetModuleUnit<_ModuleType>();
+    m_moduleCache[moduleUnit] = module;
     
     return module;
 }
@@ -80,7 +81,7 @@ inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
     std::lock_guard<std::mutex> lock(m_mutex);
 
     auto moduleUnit = GetModuleUnit<_ModuleType>();
-    if (moduleUnit >= m_moduleCache.size())
+    if (moduleUnit >= m_moduleCache.size() || m_moduleCache[moduleUnit] == nullptr)
     {
         return nullptr;
     }
@@ -97,14 +98,12 @@ inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 template<typename _ModuleType>
 inline Engine::ModuleUnit Engine::GetModuleUnit() const
 {
-    static ModuleUnit moduleUnit = m_maxModuleUnit;
-
-    std::once_flag flag;
-    std::call_once(flag, [&]()
+    static ModuleUnit moduleUnit = [&]()
     {
-        m_moduleCache.resize(m_moduleCache.size() + 1);
-        moduleUnit = m_maxModuleUnit++;
-    });
+        ModuleUnit moduleUnit = m_maxModuleUnit;
+        m_moduleCache.resize(++m_maxModuleUnit);
+        return moduleUnit;
+    } ();
 
     return moduleUnit;
 }
