@@ -20,6 +20,11 @@ class Scene :
 public:
     TGON_DECLARE_RTTI(Scene)
 
+/**@section Type */
+private:
+    using GameObjectVector = std::vector<std::shared_ptr<GameObject>>;
+    using GameObjectMap = std::unordered_map<StringHash, std::shared_ptr<GameObject>>;
+
 /**@section Method */
 public:
     virtual void Initialize() {}
@@ -27,13 +32,14 @@ public:
     void AddObject(const std::shared_ptr<GameObject>& object);
     void AddObject(std::shared_ptr<GameObject>&& object);
     bool RemoveObject(const StringViewHash& objectName);
+    void RemoveAllObject();
     std::shared_ptr<GameObject> FindObject(const StringViewHash& objectName);
     std::shared_ptr<const GameObject> FindObject(const StringViewHash& objectName) const;
 
 /**@section Variable */
 private:
-    std::vector<std::shared_ptr<GameObject>> m_objects;
-    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_objectDict;
+    GameObjectVector m_objectVector;
+    GameObjectMap m_objectMap;
 };
 
 } /* namespace tgon */

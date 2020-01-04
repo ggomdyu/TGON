@@ -8,14 +8,14 @@ namespace tgon
     
 void SerialDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     m_taskPool.push_back(task);
 }
 
 void SerialDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     m_taskPool.push_back(std::move(task));
 }
@@ -91,7 +91,7 @@ ConcurrentDispatchQueue::~ConcurrentDispatchQueue()
     
 void ConcurrentDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     m_taskPool.push_back(task);
     m_cv.notify_one();
@@ -99,7 +99,7 @@ void ConcurrentDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
 
 void ConcurrentDispatchQueue::AddAsyncTask(Delegate<void()>&& task)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
     
     m_taskPool.push_back(std::move(task));
     m_cv.notify_one();
@@ -131,7 +131,7 @@ void ConcurrentDispatchQueue::AddSyncTask(Delegate<void()>&& task)
 
 void ConcurrentDispatchQueue::DispatchQueueHandler()
 {
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::unique_lock lock(m_mutex);
     
     while (m_needToDestroy == false)
     {

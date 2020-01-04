@@ -7,6 +7,7 @@
 #pragma once
 #include <cstdint>
 #include <cstdio>
+#include <gsl/span>
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s

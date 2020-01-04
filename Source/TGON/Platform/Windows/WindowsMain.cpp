@@ -4,9 +4,7 @@
 #   include <crtdbg.h>
 #endif
 
-#include "Platform/Application.h"
-
-#include "Windows.h"
+#include "../Application.h"
 
 #ifndef NDEBUG
 #   define _CRTDBG_MAP_ALLOC
@@ -22,16 +20,10 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    using namespace tgon;
-
-    // Initialize singleton objects.
-    Application& application = Application::GetInstance();
-
-    application.OnLaunch();
-    {
-        application.MessageLoop();
-    }
-    application.OnTerminate();
+    decltype(auto) application = tgon::Application::GetInstance();
+    application.Initialize();
+    application.MessageLoop();
+    application.Destroy();
 
     return 0;
 }

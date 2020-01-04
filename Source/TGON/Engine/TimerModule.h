@@ -38,11 +38,6 @@ private:
 public:
     TimerModule() noexcept;
 
-    virtual ~TimerModule() override
-    {
-        m_timerInfos.clear();
-    }
-
 /**@section Method */
 public:
     TimerHandle SetTimer(const Delegate<void(TimerHandle)>& callback, float interval, bool isLoop);

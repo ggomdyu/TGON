@@ -13,17 +13,10 @@
 #include "Hardware/Gamepad.h"
 
 #include "Module.h"
+#include "InputMode.h"
 
 namespace tgon
 {
-    
-struct InputMode
-{
-/**@section Variable */
-    bool isUseKeyboard = true;
-    bool isUseMouse = false;
-    bool isUseGamepad = false;
-};
 
 class InputModule :
     public Module

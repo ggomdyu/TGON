@@ -9,7 +9,7 @@ extern std::unique_ptr<Engine> CreateEngine();
 
 Application::Application() :
     m_engine(CreateEngine()),
-    m_rootWindow(std::make_unique<Window>(WindowStyle{}))
+    m_rootWindow(std::make_unique<Window>(m_engine->GetEngineConfig().windowStyle))
 {
 }
 
@@ -17,6 +17,16 @@ Application& Application::GetInstance()
 {
     static Application instance;
     return instance;
+}
+
+void Application::Initialize()
+{
+    m_engine->Initialize();
+}
+
+void Application::Destroy()
+{
+    m_engine->Destroy();
 }
 
 void Application::ShowMessageBox(const char* message)
@@ -52,16 +62,6 @@ PlatformApplication& Application::GetPlatformDependency() noexcept
 const PlatformApplication& Application::GetPlatformDependency() const noexcept
 {
     return *this;
-}
-    
-void Application::OnLaunch()
-{
-    m_engine->Initialize();
-}
-
-void Application::OnTerminate()
-{
-    m_engine->Destroy();
 }
 
 } /* namespace tgon */

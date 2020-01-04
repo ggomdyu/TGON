@@ -344,14 +344,12 @@ constexpr size_t TimeSpan::GetHashCode() const noexcept
 
 constexpr TimeSpan TimeSpan::GetMaxValue() noexcept
 {
-    auto b = std::numeric_limits<int64_t>::max();
-    return TimeSpan(b);
+    return TimeSpan(std::numeric_limits<decltype(m_ticks)>::max());
 }
 
 constexpr TimeSpan TimeSpan::GetMinValue() noexcept
 {
-    auto b = std::numeric_limits<int64_t>::max();
-    return TimeSpan(b);
+    return TimeSpan(std::numeric_limits<decltype(m_ticks)>::min());
 }
 
 constexpr TimeSpan TimeSpan::GetZero() noexcept

@@ -61,7 +61,7 @@ private:
 template<typename _ResourceType>
 inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewHash& path)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard lock(m_mutex);
 
     ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
     auto iter = resourceCache.find(path);
@@ -115,9 +115,9 @@ inline AssetModule::ResourceUnit AssetModule::GetResourceUnit() const
 {
     static ResourceUnit resourceUnit = [&]()
     {
-        ResourceUnit resourceUnit = m_maxResourceUnit;
+        ResourceUnit ret = m_maxResourceUnit;
         m_resourceUnitTable.resize(++m_maxResourceUnit);
-        return resourceUnit;
+        return ret;
     } ();
 
     return resourceUnit;

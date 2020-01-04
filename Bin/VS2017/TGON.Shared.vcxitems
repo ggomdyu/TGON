@@ -1862,6 +1862,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AssetModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\AudioModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\Engine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\EngineConfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\SceneModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\GraphicsModule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\IModule.h" />
@@ -1928,6 +1930,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\ScreenType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Version.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\Window.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\WindowStyle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\PrecompiledHeader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\Random.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Random\WeightSelector.h" />

@@ -43,6 +43,8 @@ public:
     PlatformApplication& GetPlatformDependency() noexcept;
     const PlatformApplication& GetPlatformDependency() const noexcept;
     static Application& GetInstance();
+    void Initialize();
+    void Destroy();
     void MessageLoop();
     [[noreturn]] static void Terminate();
     static void ShowMessageBox(const char* message);
@@ -51,11 +53,6 @@ public:
     static void ShowMessageBox(const char* title, const char* message, MessageBoxIcon messageBoxIcon);
     static std::shared_ptr<Engine> GetEngine() noexcept;
     static std::shared_ptr<Window> GetRootWindow() noexcept;
-    
-/**@section Event Handler */
-public:
-    void OnLaunch();
-    void OnTerminate();
     
 /**@section Variable */
 protected:

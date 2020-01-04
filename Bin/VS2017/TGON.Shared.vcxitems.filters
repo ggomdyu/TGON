@@ -2846,5 +2846,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Drawing\ImageProcessor\ImageProcessor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Audio\OpenALDebug.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\IModule.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\InputMode.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Platform\WindowStyle.h">
+      <Filter>Source\TGON\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\TGON\Engine\EngineConfig.h">
+      <Filter>Source\TGON\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

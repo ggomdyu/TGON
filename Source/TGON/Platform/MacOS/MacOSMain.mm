@@ -13,12 +13,12 @@
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification*)aNotification
 {
-    tgon::Application::GetInstance().OnLaunch();
+    tgon::Application::GetInstance().Initialize();
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
 {
-    tgon::Application::GetInstance().OnTerminate();
+    tgon::Application::GetInstance().Destroy();
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification

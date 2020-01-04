@@ -29,13 +29,14 @@ public:
     void AddGlobalObject(std::shared_ptr<GameObject>&& object);
     std::shared_ptr<GameObject> FindGlobalObject(const StringViewHash& objectName);
     bool RemoveGlobalObject(const StringViewHash& objectName);
+    void RemoveAllGlobalObject();
 
 /**@section Variable */
 private:
     std::unique_ptr<Scene> m_currScene;
     std::unique_ptr<Scene> m_nextScene;
-    std::vector<std::shared_ptr<GameObject>> m_globalObjects;
-    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_globalObjectDict;
+    std::vector<std::shared_ptr<GameObject>> m_globalObjectVector;
+    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_globalObjectMap;
 };
 
 template <typename _SceneType, typename ..._Args>

@@ -18,7 +18,7 @@ void SceneModule::Update()
         m_currScene->Update();
     }
 
-    for (auto& object : m_globalObjects)
+    for (auto& object : m_globalObjectVector)
     {
         object->Update();
     }
@@ -26,20 +26,20 @@ void SceneModule::Update()
 
 void SceneModule::AddGlobalObject(const std::shared_ptr<GameObject>& object)
 {
-    m_globalObjectDict.emplace(object->GetName(), object);
-    m_globalObjects.push_back(object);
+    m_globalObjectMap.emplace(object->GetName(), object);
+    m_globalObjectVector.push_back(object);
 }
 
 void SceneModule::AddGlobalObject(std::shared_ptr<GameObject>&& object)
 {
-    m_globalObjectDict.emplace(object->GetName(), object);
-    m_globalObjects.push_back(std::move(object));
+    m_globalObjectMap.emplace(object->GetName(), object);
+    m_globalObjectVector.push_back(std::move(object));
 }
 
 std::shared_ptr<GameObject> SceneModule::FindGlobalObject(const StringViewHash& objectName)
 {
-    auto iter = m_globalObjectDict.find(objectName);
-    if (m_globalObjectDict.end() == iter)
+    auto iter = m_globalObjectMap.find(objectName);
+    if (m_globalObjectMap.end() == iter)
     {
         return nullptr;
     }
@@ -49,13 +49,25 @@ std::shared_ptr<GameObject> SceneModule::FindGlobalObject(const StringViewHash& 
     
 bool SceneModule::RemoveGlobalObject(const StringViewHash& objectName)
 {
-    m_globalObjects.erase(std::remove_if(m_globalObjects.begin(), m_globalObjects.end(), [&](const std::shared_ptr<GameObject>& item)
+    auto mapIter = m_globalObjectMap.find(objectName);
+    if (mapIter == m_globalObjectMap.end())
+    {
+        return false;
+    }
+
+    m_globalObjectMap.erase(mapIter);
+    m_globalObjectVector.erase(std::find_if(m_globalObjectVector.begin(), m_globalObjectVector.end(), [&](const std::shared_ptr<GameObject>& item)
     {
         return objectName == item->GetName();
     }));
-    
-    m_globalObjectDict.erase(objectName);
+ 
     return true;
+}
+
+void SceneModule::RemoveAllGlobalObject()
+{
+    m_globalObjectVector.clear();
+    m_globalObjectMap.clear();
 }
 
 } /* namespace tgon */

@@ -280,7 +280,7 @@ inline void Version::AppendPositiveNumber(int32_t num, std::string* str)
     {
         reminder = num % 10;
         num = num / 10;
-        str->push_back('0' + reminder);
+        str->push_back('0' + static_cast<char>(reminder));
     } while (num > 0);
 }
 

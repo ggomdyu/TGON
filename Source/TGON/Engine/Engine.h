@@ -6,9 +6,9 @@
 
 #pragma once
 #include <vector>
-#include <mutex>
 
 #include "Module.h"
+#include "EngineConfig.h"
 
 #define TGON_DECLARE_ENGINE(className)\
     namespace tgon\
@@ -36,6 +36,10 @@ private:
     using ModuleUnit = size_t;
     using ModuleCache = std::vector<std::shared_ptr<Module>>;
 
+/**@section Constructor */
+public:
+    explicit Engine(const EngineConfig& enfingConfig) noexcept;
+
 /**@section Destructor */
 public:
     virtual ~Engine() = 0;
@@ -43,6 +47,7 @@ public:
 /**@section Method */
 public:
     virtual void Initialize();
+    virtual void InitializeModule();
     virtual void Destroy();
     virtual void Update();
     template <typename _ModuleType, typename... _ArgTypes>
@@ -51,6 +56,10 @@ public:
     std::shared_ptr<_ModuleType> FindModule() noexcept;
     template <typename _ModuleType>
     std::shared_ptr<const _ModuleType> FindModule() const noexcept;
+    template <typename _ModuleType>
+    bool RemoveModule();
+    void RemoveAllModule();
+    const EngineConfig& GetEngineConfig() const noexcept;
 
 private:
     template <typename _ModuleType>
@@ -58,7 +67,7 @@ private:
 
 /**@section Variable */
 private:
-    std::mutex m_mutex;
+    EngineConfig m_engineConfig;
     mutable ModuleCache m_moduleCache;
     inline static ModuleUnit m_maxModuleUnit;
 };
@@ -66,8 +75,6 @@ private:
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
     auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     auto moduleUnit = GetModuleUnit<_ModuleType>();
     m_moduleCache[moduleUnit] = module;
@@ -78,8 +85,6 @@ inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
 template <typename _ModuleType>
 inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
-
     auto moduleUnit = GetModuleUnit<_ModuleType>();
     if (moduleUnit >= m_moduleCache.size() || m_moduleCache[moduleUnit] == nullptr)
     {
@@ -96,13 +101,27 @@ inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
 }
 
 template<typename _ModuleType>
+inline bool Engine::RemoveModule()
+{
+    auto moduleUnit = GetModuleUnit<_ModuleType>();
+    auto iter = m_moduleCache.cbegin() + moduleUnit;
+    if (*iter == nullptr)
+    {
+        return false;
+    }
+
+    m_moduleCache.erase(iter);
+    return true;
+}
+
+template<typename _ModuleType>
 inline Engine::ModuleUnit Engine::GetModuleUnit() const
 {
     static ModuleUnit moduleUnit = [&]()
     {
-        ModuleUnit moduleUnit = m_maxModuleUnit;
+        ModuleUnit ret = m_maxModuleUnit;
         m_moduleCache.resize(++m_maxModuleUnit);
-        return moduleUnit;
+        return ret;
     } ();
 
     return moduleUnit;

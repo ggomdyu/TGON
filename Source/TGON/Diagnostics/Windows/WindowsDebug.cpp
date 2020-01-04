@@ -23,7 +23,7 @@ void Debug::Write(const std::string_view& message)
 
     int32_t utf16MessageLen = utf16MessageBytes / 2;
 
-    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
+    std::lock_guard lockGuard(m_mutex);
     for (int32_t i = 0; i < m_indentLevel; ++i)
     {
         g_tempUtf16Buffer[utf16MessageLen + i] = '\t';
@@ -46,7 +46,7 @@ void Debug::WriteLine(const std::string_view& message)
 
     int32_t utf16MessageLen = utf16MessageBytes / 2;
 
-    std::lock_guard<std::recursive_mutex> lockGuard(m_mutex);
+    std::lock_guard lockGuard(m_mutex);
     for (int32_t i = 0; i < m_indentLevel; ++i)
     {
         g_tempUtf16Buffer[utf16MessageLen + i] = '\t';

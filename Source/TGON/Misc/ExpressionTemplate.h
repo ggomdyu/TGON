@@ -30,7 +30,7 @@ struct BaseExpression
 {
 /**@section Operator */
 public:
-    constexpr const auto operator[](std::size_t index) const
+    constexpr const auto operator[](int32_t index) const
     {
         return reinterpret_cast<const _DerivedExpressionType&>(*this).operator[](index);
     }
@@ -103,7 +103,7 @@ public:
 
 /**@section Operator */
 public:
-    constexpr auto operator[](std::size_t index) const
+    constexpr auto operator[](int32_t index) const
     {
         return m_firstOperand[index] + m_secondOperand[index];
     }
@@ -134,7 +134,7 @@ public:
 
 /**@section Operator */
 public:
-    constexpr const auto operator[](std::size_t index) const
+    constexpr const auto operator[](int32_t index) const
     {
         return m_firstOperand[index] - m_secondOperand[index];
     }
@@ -176,7 +176,7 @@ public:
 
 /**@section Operator */
 public:
-    constexpr const auto operator[](std::size_t index) const
+    constexpr const auto operator[](int32_t index) const
     {
         return m_firstOperand[index] * m_secondOperand[index];
     }
@@ -218,7 +218,7 @@ public:
 
 /**@section Operator */
 public:
-    constexpr const auto operator[](std::size_t index) const
+    constexpr const auto operator[](int32_t index) const
     {
         return m_firstOperand[index] / m_secondOperand[index];
     }

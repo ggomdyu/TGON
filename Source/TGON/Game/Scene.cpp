@@ -6,21 +6,21 @@ namespace tgon
 {
 
 void Scene::AddObject(const std::shared_ptr<GameObject>& object)
-{   
-    m_objectDict.emplace(object->GetName(), object);
-    m_objects.push_back(object);
+{
+    m_objectMap.emplace(object->GetName(), object);
+    m_objectVector.push_back(object);
 }
 
 void Scene::AddObject(std::shared_ptr<GameObject>&& object)
 {
-    m_objectDict.emplace(object->GetName(), object);
-    m_objects.push_back(std::move(object));
+    m_objectMap.emplace(object->GetName(), object);
+    m_objectVector.push_back(std::move(object));
 }
 
 std::shared_ptr<GameObject> Scene::FindObject(const StringViewHash& objectName)
 {
-    auto iter = m_objectDict.find(objectName);
-    if (m_objectDict.end() == iter)
+    auto iter = m_objectMap.find(objectName);
+    if (m_objectMap.end() == iter)
     {
         return nullptr;
     }
@@ -35,18 +35,30 @@ std::shared_ptr<const GameObject> Scene::FindObject(const StringViewHash& object
 
 bool Scene::RemoveObject(const StringViewHash& objectName)
 {
-    m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [&](const std::shared_ptr<GameObject>& item)
+    auto mapIter = m_objectMap.find(objectName);
+    if (mapIter == m_objectMap.end())
+    {
+        return false;
+    }
+
+    m_objectMap.erase(objectName);
+    m_objectVector.erase(std::find_if(m_objectVector.begin(), m_objectVector.end(), [&](const std::shared_ptr<GameObject>& item)
     {
         return objectName == item->GetName();
     }));
     
-    m_objectDict.erase(objectName);
     return true;
+}
+
+void Scene::RemoveAllObject()
+{
+    m_objectVector.clear();
+    m_objectMap.clear();
 }
 
 void Scene::Update()
 {
-    for (auto& object : m_objects)
+    for (auto& object : m_objectVector)
     {
         object->Update();
     }
