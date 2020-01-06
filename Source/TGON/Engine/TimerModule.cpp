@@ -85,8 +85,12 @@ void TimerModule::Update()
         auto& timerInfo = *iter;
         if (timerInfo.elapsedTime >= timerInfo.interval)
         {
-            timerInfo.callback(timerInfo.timerHandle);
-            if (timerInfo.isLoop && timerInfo.isDeleteReserved == false)
+            if (timerInfo.isDeleteReserved == false)
+            {
+                timerInfo.callback(timerInfo.timerHandle);
+            }
+
+            if (timerInfo.isLoop)
             {
                 timerInfo.elapsedTime = 0.0f;
             }

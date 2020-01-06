@@ -9,7 +9,7 @@
 #include "TimerModule.h"
 #include "TaskModule.h"
 #include "InputModule.h"
-#include "GraphicsModule.h"
+#include "UIRendererModule.h"
 #include "SceneModule.h"
 
 namespace tgon
@@ -24,28 +24,18 @@ Engine::~Engine() = default;
 
 void Engine::Initialize()
 {
-    this->InitializeModule();
-
-    for (auto& module : m_moduleCache)
-    {
-        if (module != nullptr)
-        {
-            module->Initialize();
-        }
-    }
-}
-
-void Engine::InitializeModule()
-{
+    this->AddModule<TaskModule>();
     this->AddModule<AssetModule>();
     this->AddModule<AudioModule>();
     this->AddModule<TimeModule>();
     this->AddModule<TimerModule>();
-    this->AddModule<TaskModule>();
 
     decltype(auto) rootWindow = Application::GetInstance().GetRootWindow();
     this->AddModule<InputModule>(*rootWindow, m_engineConfig.inputMode);
-    this->AddModule<GraphicsModule>(*rootWindow, m_engineConfig.videoMode);
+
+    auto graphics = std::make_shared<Graphics>(*rootWindow, m_engineConfig.videoMode);
+    this->AddModule<UIRendererModule>(graphics);
+
     this->AddModule<SceneModule>();
 }
 

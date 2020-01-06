@@ -1,21 +1,15 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/Engine.h"
-#include "Platform/Application.h"
-
 #include "RendererComponent.h"
 
 namespace tgon
 {
     
-RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) :
+RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) noexcept :
     Component(),
-    m_graphicsModule(Application::GetInstance().GetEngine()->FindModule<GraphicsModule>()),
     m_material(material)
 {
 }
-
-RendererComponent::~RendererComponent() = default;
 
 void RendererComponent::SetMaterial(const std::shared_ptr<Material>& material)
 {
@@ -31,6 +25,5 @@ std::shared_ptr<const Material> RendererComponent::GetMaterial() const noexcept
 {
     return m_material;
 }
-
 
 } /* namespace tgon */

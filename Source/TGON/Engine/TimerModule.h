@@ -6,7 +6,6 @@
 
 #pragma once
 #include <vector>
-#include <mutex>
 
 #include "Core/Delegate.h"
 

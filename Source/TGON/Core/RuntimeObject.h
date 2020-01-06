@@ -37,6 +37,6 @@ public:
     \
     const tgon::RTTI* GetRTTI() const override\
     {\
-        static_assert(std::is_same<std::remove_const_t<std::remove_pointer_t<decltype(this)>>, This>::value, "TGON_DECLARE_RTTI didn't received the owner type as a parameter.");\
+        static_assert(std::is_same_v<std::remove_const_t<std::remove_pointer_t<decltype(this)>>, This>, "TGON_DECLARE_RTTI didn't received the owner type as a parameter.");\
         return tgon::GetRTTI<classType>();\
     }

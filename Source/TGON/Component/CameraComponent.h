@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Graphics/Camera.h"
-#include "Engine/GraphicsModule.h"
 
 #include "Component.h"
 
@@ -47,7 +46,6 @@ public:
 /**@section Variable */
 private:
     std::shared_ptr<Camera> m_camera;
-    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

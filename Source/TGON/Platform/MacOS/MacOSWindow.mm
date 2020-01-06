@@ -131,6 +131,7 @@ NSWindow* CreateNativeWindow(const WindowStyle& windowStyle)
     [window setReleasedWhenClosed:YES];
     [window setLevel:NSMainMenuWindowLevel];
     [window setTitle:[NSString stringWithUTF8String:windowStyle.title.c_str()]];
+    
     if (windowStyle.enableSystemButton == false)
     {
         [[window standardWindowButton:NSWindowZoomButton] setEnabled:NO];

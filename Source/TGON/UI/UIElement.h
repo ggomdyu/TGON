@@ -24,6 +24,16 @@ public:
 /**@section Method */
 public:
     virtual void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const = 0;
+    void SetScissorRect(const FRect& rect) noexcept;
+    const FRect& GetScissorRect() const noexcept;
+    void EnableScissorRect() noexcept;
+    void DisableScissorRect() noexcept;
+    bool IsEnableScissorRect() const noexcept;
+
+/**@section Variable */
+protected:
+    bool m_enableScissorRect = false;
+    FRect m_scissorRect;
 };
 
 } /* namespace tgon */

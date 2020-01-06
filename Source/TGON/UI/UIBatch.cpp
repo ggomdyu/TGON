@@ -29,7 +29,7 @@ bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
         m_filterMode == rhs.m_filterMode &&
         m_wrapMode == rhs.m_wrapMode &&
         m_blendMode == rhs.m_blendMode &&
-        m_enableScissorRect == rhs.m_enableScissorRect &&
+        m_enableScissorRect == m_enableScissorRect &&
         m_scissorRect == rhs.m_scissorRect)
     {
         return true;
@@ -40,8 +40,6 @@ bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
     
 void UIBatch::FlushBatch(Graphics& graphics)
 {
-    m_texture->Use();
-    
     if (m_enableScissorRect)
     {
         graphics.EnableScissorTest();
@@ -51,8 +49,40 @@ void UIBatch::FlushBatch(Graphics& graphics)
     {
         graphics.DisableScissorTest();
     }
+
+    m_texture->Use();
     
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_C4F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_C4F_T2F) / 4));
+}
+
+std::shared_ptr<Texture> UIBatch::GetTexture() noexcept
+{
+    return m_texture;
+}
+
+std::shared_ptr<const Texture> UIBatch::GetTexture() const noexcept
+{
+    return m_texture;
+}
+
+FilterMode UIBatch::GetFilterMode() const noexcept
+{
+    return m_filterMode;
+}
+
+BlendMode UIBatch::GetBlendMode() const noexcept
+{
+    return m_blendMode;
+}
+
+bool UIBatch::IsEnableScissorRect() const noexcept
+{
+    return m_enableScissorRect;
+}
+
+const FRect& UIBatch::GetScissorRect() const noexcept
+{
+    return m_scissorRect;
 }
 
 void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)

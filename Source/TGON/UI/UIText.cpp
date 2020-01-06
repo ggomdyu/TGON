@@ -409,6 +409,12 @@ void UIText::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas)
     m_isDirty = true;
 }
 
+void UIText::SetFontAtlas(std::shared_ptr<FontAtlas>&& fontAtlas)
+{
+    m_fontAtlas = std::move(fontAtlas);
+    m_isDirty = true;
+}
+
 void UIText::SetFontSize(int32_t fontSize)
 {
     m_fontSize = fontSize;

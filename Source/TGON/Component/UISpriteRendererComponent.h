@@ -7,20 +7,20 @@
 #pragma once
 #include "UI/UISprite.h"
 
-#include "RendererComponent.h"
+#include "UIRendererComponent.h"
 
 namespace tgon
 {
 
-class SpriteRendererComponent :
-    public RendererComponent
+class UISpriteRendererComponent :
+    public UIRendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(SpriteRendererComponent)
+    TGON_DECLARE_RTTI(UISpriteRendererComponent)
 
 /**@section Constructor */
 public:
-    SpriteRendererComponent();
+    UISpriteRendererComponent();
 
 /**@section Method */
 public:
@@ -33,7 +33,6 @@ public:
     void SetBlendMode(BlendMode blendMode) noexcept;
     void SetBlendColor(const Color4f& blendColor) noexcept;
     void SetPivot(const Vector2& pivot) noexcept;
-    void SetSortingLayer(int32_t sortingLayer) noexcept;
     std::shared_ptr<Texture> GetTexture() noexcept;
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     const FRect& GetTextureRect() const noexcept;
@@ -47,13 +46,11 @@ public:
     void SetScissorRect(const FRect& rect) noexcept;
     const FRect& GetScissorRect() const noexcept;
     const Vector2& GetPivot() const noexcept;
-    int32_t GetSortingLayer() const noexcept;
     void Update() override;
 
 /**@section Variable */
-private:
+protected:
     std::shared_ptr<UISprite> m_sprite;
-    int32_t m_sortingLayer = 0;
 };
 
 } /* namespace tgon */

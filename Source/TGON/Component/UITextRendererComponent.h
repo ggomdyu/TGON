@@ -8,25 +8,26 @@
 #include "Math/Color.h"
 #include "UI/UIText.h"
 
-#include "RendererComponent.h"
+#include "UIRendererComponent.h"
 
 namespace tgon
 {
 
-class TextRendererComponent :
-    public RendererComponent
+class UITextRendererComponent :
+    public UIRendererComponent
 {
 public:
-    TGON_DECLARE_RTTI(TextRendererComponent)
+    TGON_DECLARE_RTTI(UITextRendererComponent)
 
 /**@section Constructor */
 public:
-    TextRendererComponent();
+    UITextRendererComponent();
     
 /**@section Method */
 public:
     void SetFontAtlas(const char* fontAtlasPath);
     void SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas) noexcept;
+    void SetFontAtlas(std::shared_ptr<FontAtlas>&& fontAtlas) noexcept;
     void SetFontSize(int32_t fontSize) noexcept;
     void SetText(const std::string_view& text);
     void SetLineSpacing(float lineSpacing) noexcept;
@@ -46,9 +47,8 @@ public:
     void Update() override;
     
 /**@section Variable */
-private:
+protected:
     std::shared_ptr<UIText> m_text;
-    int32_t m_sortingLayer = 0;
 };
 
 } /* namespace tgon */

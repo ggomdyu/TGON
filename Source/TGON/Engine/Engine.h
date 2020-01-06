@@ -16,7 +16,7 @@
     \
     std::unique_ptr<Engine> CreateEngine()\
     {\
-        static_assert(std::is_base_of<Engine, className>::value, "TGON_DECLARE_ENGINE accepts only class that inherited from Engine.");\
+        static_assert(std::is_base_of_v<Engine, className>, "TGON_DECLARE_ENGINE accepts only class that inherited from Engine.");\
         return std::make_unique<className>();\
     }\
     \
@@ -43,11 +43,10 @@ public:
 /**@section Destructor */
 public:
     virtual ~Engine() = 0;
-    
+
 /**@section Method */
 public:
     virtual void Initialize();
-    virtual void InitializeModule();
     virtual void Destroy();
     virtual void Update();
     template <typename _ModuleType, typename... _ArgTypes>
@@ -75,10 +74,11 @@ private:
 template <typename _ModuleType, typename... _ArgTypes>
 inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
 {
-    auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     auto moduleUnit = GetModuleUnit<_ModuleType>();
+    auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
     m_moduleCache[moduleUnit] = module;
     
+    module->Initialize();
     return module;
 }
 
@@ -104,13 +104,13 @@ template<typename _ModuleType>
 inline bool Engine::RemoveModule()
 {
     auto moduleUnit = GetModuleUnit<_ModuleType>();
-    auto iter = m_moduleCache.cbegin() + moduleUnit;
-    if (*iter == nullptr)
+    auto& module = m_moduleCache[moduleUnit];
+    if (module == nullptr)
     {
         return false;
     }
 
-    m_moduleCache.erase(iter);
+    module = nullptr;
     return true;
 }
 

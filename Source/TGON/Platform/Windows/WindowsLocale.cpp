@@ -24,7 +24,7 @@ std::string GetLanguage()
 {
     char languageStr[16];
 
-    int32_t languageStrLen = GetLanguage(languageStr, std::extent<decltype(languageStr)>::value);
+    int32_t languageStrLen = GetLanguage(languageStr, std::extent_v<decltype(languageStr)>);
     return std::string(languageStr, languageStrLen);
 }
 

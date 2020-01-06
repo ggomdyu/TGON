@@ -107,7 +107,7 @@ float PerspectiveCamera::GetFov() const noexcept
 }
 
 OrthographicCamera::OrthographicCamera(const FRect& orthoPlane, float nearZ, float farZ) noexcept :
-    Camera(ProjectionMode::Perspective, nearZ, farZ),
+    Camera(ProjectionMode::Orthographic, nearZ, farZ),
     m_orthoPlane(orthoPlane)
 {
     this->Update();

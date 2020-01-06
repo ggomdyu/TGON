@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Engine/GraphicsModule.h"
+#include "Engine/UIRendererModule.h"
 #include "Graphics/Camera.h"
 #include "Platform/Application.h"
 
@@ -26,18 +26,14 @@ CameraComponent::CameraComponent(const Vector3& eyePt, const Vector3& lookAt, fl
 
 CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     Component(),
-    m_camera(camera),
-    m_graphicsModule(Application::GetEngine()->FindModule<GraphicsModule>())
+    m_camera(camera)
 {
-    if (camera != nullptr)
-    {
-        m_graphicsModule->GetUIRenderer().AddCamera(camera);
-    }
+    Application::GetEngine()->FindModule<UIRendererModule>()->AddCamera(camera);
 }
 
 CameraComponent::~CameraComponent()
 {
-    m_graphicsModule->GetUIRenderer().RemoveCamera(m_camera);
+    Application::GetEngine()->FindModule<UIRendererModule>()->AddCamera(m_camera);
 }
 
 void CameraComponent::Update()

@@ -70,6 +70,7 @@ public:
 /**@section Method */
 public:
     void SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas);
+    void SetFontAtlas(std::shared_ptr<FontAtlas>&& fontAtlas);
     void SetFontSize(int32_t fontSize);
     void SetText(const std::string_view& text);
     void SetTextAlignment(TextAlignment textAlignment);

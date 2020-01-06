@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "Engine/GraphicsModule.h"
 #include "Graphics/Material.h"
 
 #include "Component.h"
@@ -21,12 +20,8 @@ public:
 
 /**@section Constructor */
 public:
-    explicit RendererComponent(const std::shared_ptr<Material>& material = nullptr);
+    explicit RendererComponent(const std::shared_ptr<Material>& material = nullptr) noexcept;
     
-/**@section Destructor */
-public:
-    ~RendererComponent() override = 0;
-
 /**@section Method */
 public:
     void SetMaterial(const std::shared_ptr<Material>& material);
@@ -36,7 +31,6 @@ public:
 /**@section Variable */
 protected:
     std::shared_ptr<Material> m_material;
-    std::shared_ptr<GraphicsModule> m_graphicsModule;
 };
 
 } /* namespace tgon */

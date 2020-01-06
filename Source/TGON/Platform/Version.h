@@ -274,7 +274,6 @@ inline std::optional<std::string> Version::ToString(int32_t fieldCount) const
 
 inline void Version::AppendPositiveNumber(int32_t num, std::string* str)
 {
-    int32_t index = static_cast<int32_t>(str->length());
     int32_t reminder;
     do
     {
