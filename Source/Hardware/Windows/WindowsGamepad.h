@@ -1,45 +1,39 @@
 /**
  * @file    WindowsGamepad.h
  * @author  ggomdyu
- * @since   06/02/2018
+ * @since   06/03/2018
  */
 
 #pragma once
-#include <OIS.h>
-
 #include "Core/NonCopyable.h"
+
+namespace gainput
+{
+
+class InputDevicePad;
+
+} /* namespace tgon */
 
 namespace tgon
 {
-
-enum class GamepadPov
-{
-    Left,
-    Up,
-    Down,
-    Right,
-    LeftUp,
-    LeftDown,
-};
-
+    
 class WindowsGamepad :
     private NonCopyable
 {
 /**@section Constructor */
-protected:
-    explicit WindowsGamepad(OIS::JoyStick* nativeGamepad) noexcept;
-
+public:
+    explicit WindowsGamepad(gainput::InputDevicePad* nativeGamepad);
+    
 /**@section Method */
 public:
-    OIS::JoyStick* GetNativeGamepad() noexcept;
-    const OIS::JoyStick* GetNativeGamepad() const noexcept;
-
+    gainput::InputDevicePad* GetNativeGamepad() noexcept;
+    const gainput::InputDevicePad* GetNativeGamepad() const noexcept;
+    
 /**@section Variable */
 protected:
-    OIS::JoyStick* m_nativeGamepad;
-    OIS::JoyStickState m_prevGamepadState;
+    gainput::InputDevicePad* m_nativeGamepad;
 };
-
+    
 using PlatformGamepad = WindowsGamepad;
 
 } /* namespace tgon */

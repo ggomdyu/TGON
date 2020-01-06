@@ -1,11 +1,12 @@
 /**
  * @file    WindowsInputManager.h
  * @author  ggomdyu
- * @since   05/15/2018
+ * @since   06/02/2018
  */
 
 #pragma once
-#include <OIS.h>
+#include <gainput/gainput.h>
+#include <memory>
 
 #include "Core/NonCopyable.h"
 
@@ -16,27 +17,21 @@ class WindowsInputManager :
     private NonCopyable
 {
 /**@section Constructor */
-protected:
-    explicit WindowsInputManager(const class Window& inputTarget);
-    WindowsInputManager(WindowsInputManager&& rhs) noexcept;
-
-/**@section Destructor */
 public:
-    ~WindowsInputManager();
+    explicit WindowsInputManager(const class Window& inputTargetWindow);
+    WindowsInputManager(WindowsInputManager&& rhs) noexcept;
 
 /**@section Method */
 public:
-    OIS::Mouse* CreateNativeMouse();
-    OIS::Keyboard* CreateNativeKeyboard();
-    OIS::JoyStick* CreateNativeGamepad();
-    OIS::InputManager* GetInputManager() noexcept;
-    const OIS::InputManager* GetInputManager() const noexcept;
+    gainput::InputDeviceMouse* CreateNativeMouse();
+    gainput::InputDeviceKeyboard* CreateNativeKeyboard();
+    gainput::InputDevicePad* CreateNativeGamepad();
 
 /**@section Variable */
 protected:
-    OIS::InputManager* m_inputManager = nullptr;
+    std::unique_ptr<gainput::InputManager> m_inputManager;
 };
-
+    
 using PlatformInputManager = WindowsInputManager;
 
 } /* namespace tgon */

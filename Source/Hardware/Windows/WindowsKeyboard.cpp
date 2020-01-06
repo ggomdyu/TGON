@@ -6,23 +6,22 @@
 
 namespace tgon
 {
-
-WindowsKeyboard::WindowsKeyboard(OIS::Keyboard* nativeKeyboard) noexcept :
-    m_nativeKeyboard(nativeKeyboard),
-    m_currKeyStates{}
+    
+WindowsKeyboard::WindowsKeyboard(gainput::InputDeviceKeyboard* nativeKeyboard) :
+    m_nativeKeyboard(nativeKeyboard)
 {
 }
 
-OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() noexcept
-{
-    return m_nativeKeyboard;
-}
-
-const OIS::Keyboard* WindowsKeyboard::GetNativeKeyboard() const noexcept
+gainput::InputDeviceKeyboard* WindowsKeyboard::GetNativeKeyboard() noexcept
 {
     return m_nativeKeyboard;
 }
 
+const gainput::InputDeviceKeyboard* WindowsKeyboard::GetNativeKeyboard() const noexcept
+{
+    return m_nativeKeyboard;
+}
+    
 Keyboard::Keyboard(InputManager& inputManager) :
     WindowsKeyboard(inputManager.GetPlatformDependency().CreateNativeKeyboard())
 {
@@ -30,47 +29,24 @@ Keyboard::Keyboard(InputManager& inputManager) :
 
 void Keyboard::Update()
 {
-    m_nativeKeyboard->copyKeyStates(m_currKeyStates.data());
-    m_nativeKeyboard->capture();
 }
-
+    
 bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 0) &&
-        m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    auto castedKeyCode = UnderlyingCast(keyCode);
+    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) == false && m_nativeKeyboard->GetBool(castedKeyCode);
 }
-
+    
 bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 1) &&
-        m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    auto castedKeyCode = UnderlyingCast(keyCode);
+    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode);
 }
-
+    
 bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
-    if ((m_currKeyStates[UnderlyingCast(keyCode)] == 1) &&
-        m_nativeKeyboard->isKeyDown(static_cast<OIS::KeyCode>(keyCode)) == false)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    auto castedKeyCode = UnderlyingCast(keyCode);
+    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode) == false;
 }
-
+    
 } /* namespace tgon */

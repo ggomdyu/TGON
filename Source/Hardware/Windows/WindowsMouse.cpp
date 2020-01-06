@@ -1,23 +1,23 @@
 #include "PrecompiledHeader.h"
 
-#include "Platform/Windows/Windows.h"
+#include "Misc/Algorithm.h"
 
 #include "../Mouse.h"
 
 namespace tgon
 {
 
-WindowsMouse::WindowsMouse(OIS::Mouse* nativeMouse) noexcept :
+WindowsMouse::WindowsMouse(gainput::InputDeviceMouse* nativeMouse) noexcept :
     m_nativeMouse(nativeMouse)
 {
 }
 
-OIS::Mouse* WindowsMouse::GetNativeMouse() noexcept
+const gainput::InputDeviceMouse* WindowsMouse::GetNativeMouse() const noexcept
 {
     return m_nativeMouse;
 }
 
-const OIS::Mouse* WindowsMouse::GetNativeMouse() const noexcept
+gainput::InputDeviceMouse* WindowsMouse::GetNativeMouse() noexcept
 {
     return m_nativeMouse;
 }
@@ -29,29 +29,18 @@ Mouse::Mouse(InputManager& inputManager) :
 
 void Mouse::Update()
 {
-    m_currMouseState = m_nativeMouse->getMouseState();
-    m_nativeMouse->capture();
 }
-
+    
 void Mouse::GetPosition(int32_t* x, int32_t* y)
 {
-    POINT pt;
-    if (::GetCursorPos(&pt) == TRUE)
-    {
-        *x = static_cast<int32_t>(pt.x);
-        *y = static_cast<int32_t>(pt.y);
-    }
-    else
-    {
-        *x = 0;
-        *y = 0;
-    }
 }
 
 bool Mouse::IsMouseDown(MouseCode mouseCode) const
 {
-    if (m_currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false &&
-        m_nativeMouse->getMouseState().buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
+    auto castedMouseCode = UnderlyingCast(mouseCode);
+    
+    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) == false &&
+        m_nativeMouse->GetBool(castedMouseCode))
     {
         return true;
     }
@@ -60,11 +49,13 @@ bool Mouse::IsMouseDown(MouseCode mouseCode) const
         return false;
     }
 }
-
+    
 bool Mouse::IsMouseHold(MouseCode mouseCode) const
 {
-    if (m_currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
-        m_nativeMouse->getMouseState().buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)))
+    auto castedMouseCode = UnderlyingCast(mouseCode);
+    
+    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
+        m_nativeMouse->GetBool(castedMouseCode))
     {
         return true;
     }
@@ -76,8 +67,10 @@ bool Mouse::IsMouseHold(MouseCode mouseCode) const
 
 bool Mouse::IsMouseUp(MouseCode mouseCode) const
 {
-    if (m_currMouseState.buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) &&
-        m_nativeMouse->getMouseState().buttonDown(static_cast<OIS::MouseButtonID>(mouseCode)) == false)
+    auto castedMouseCode = UnderlyingCast(mouseCode);
+    
+    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
+        m_nativeMouse->GetBool(castedMouseCode) == false)
     {
         return true;
     }

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test_inputdevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test_inputmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test_inputmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test_inputrecording.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\test_inputstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D2095AA4-3D6A-3C06-8D9C-38E4BBF5539F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
