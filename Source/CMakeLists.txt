@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.8)
 
 # Add filters
 file(GLOB_RECURSE SRC_LIST_TEMP
@@ -8,8 +8,8 @@ file(GLOB_RECURSE SRC_LIST_TEMP
 )
 
 set(SRC_LIST)
-set(TGON_PLATFORM_PREFIXES "Windows" "MacOS" "Android" "IOS" "Linux" "Unix")
-set(TGON_GRAPHICS_PREFIXES "OpenGL" "Vulkan" "Direct3D11" "Direct3D12" "Metal")
+set(TGON_PLATFORM_LIST "WINDOWS" "MACOS" "ANDROID" "IOS" "LINUX" "UNIX")
+set(TGON_GRAPHICS_LIST "OPENGL" "VULKAN" "DIRECT3D11" "DIRECT3D12" "METAL")
 
 message (STATUS ${SRC})
 
@@ -24,12 +24,13 @@ foreach (SRC ${SRC_LIST_TEMP})
 
 	# Ignore other graphics API sources
 	set(NEED_TO_CONTINUE FALSE)
-	foreach (GRAPHICS_PREFIX ${TGON_GRAPHICS_PREFIXES})
-		string(FIND ${SRC} /${GRAPHICS_PREFIX}/ SUBSTR_INDEX)
+	foreach (ITER_GRAPHICS ${TGON_GRAPHICS_LIST})
+		string(FIND ${SRC} /${ITER_GRAPHICS}/ SUBSTR_INDEX)
+		message(STATUS ${SRC})
 		if (NOT SUBSTR_INDEX EQUAL -1)
 			set(NEED_TO_CONTINUE TRUE)
-			if (GRAPHICS_PREFIX STREQUAL TGON_GRAPHICS_PREFIX)
-				list(APPEND SRC_LIST ${SRC})
+			if (ITER_GRAPHICS STREQUAL TGON_GRAPHICS)
+				set(NEED_TO_CONTINUE FALSE)
 				break ()
 			endif ()
 		endif ()
@@ -40,11 +41,11 @@ foreach (SRC ${SRC_LIST_TEMP})
 	endif ()
 
 	# Ignore other platform sources
-	foreach (PLATFORM_PREFIX ${TGON_PLATFORM_PREFIXES})
-		string(FIND ${SRC} /${PLATFORM_PREFIX}/ SUBSTR_INDEX)
+	foreach (ITER_PLATFORM ${TGON_PLATFORM_LIST})
+		string(FIND ${SRC} /${ITER_PLATFORM}/ SUBSTR_INDEX)
 		if (NOT SUBSTR_INDEX EQUAL -1)
 			set(NEED_TO_CONTINUE TRUE)
-			if (PLATFORM_PREFIX STREQUAL TGON_PLATFORM_PREFIX)
+			if (ITER_PLATFORM STREQUAL TGON_PLATFORM)
 				list(APPEND SRC_LIST ${SRC})
 				break ()
 			endif ()
@@ -60,7 +61,7 @@ endforeach ()
 
 
 foreach (SRC ${SRC_LIST})
-	message(STATUS ${SRC})
+	
 endforeach ()
 
 add_library(TGON ${SRC_LIST})
