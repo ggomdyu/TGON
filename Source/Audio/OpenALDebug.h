@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#if TGON_GRAPHICS_OPENGL
 #include <fmt/format.h>
 
 #include "Diagnostics/Debug.h"
@@ -22,5 +21,4 @@
     }
 #else
 #   define TGON_GL_ERROR_CHECK(expression) expression
-#endif
 #endif

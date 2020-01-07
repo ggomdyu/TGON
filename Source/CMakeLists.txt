@@ -1,71 +1,103 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Add filters
-file(GLOB_RECURSE SRC_LIST_TEMP
+set(GLOB_AGRUMENTS
 	${TGON_SOURCE_PATH}/*/*.cpp
 	${TGON_SOURCE_PATH}/*/*.h
 	${TGON_SOURCE_PATH}/PrecompiledHeader.h
+	${TGON_SOURCE_PATH}/*/*.mm
 )
+if (APPLE)
+	list(APPEND GLOB_AGRUMENTS ${TGON_SOURCE_PATH}/*/*.mm)
+endif ()
 
-set(SRC_LIST)
-set(TGON_PLATFORM_LIST "WINDOWS" "MACOS" "ANDROID" "IOS" "LINUX" "UNIX")
-set(TGON_GRAPHICS_LIST "OPENGL" "VULKAN" "DIRECT3D11" "DIRECT3D12" "METAL")
+file(GLOB_RECURSE TEMP_SRC_PATH_LIST ${GLOB_AGRUMENTS})
 
-message (STATUS ${SRC})
+set(SRC_PATH_LIST)
+set(TGON_PLATFORM_NAME_LIST "WINDOWS" "MACOS" "ANDROID" "IOS" "LINUX" "UNIX")
+set(TGON_GRAPHICS_NAME_LIST "OPENGL" "VULKAN" "DIRECT3D11" "DIRECT3D12" "METAL")
 
-foreach (SRC ${SRC_LIST_TEMP})
-	set(SUBSTR_INDEX 0)
+function(is_platform_src SRC_PATH IS_PLATFORM_SRC)
+	set(IS_PLATFORM_SRC FALSE)
+	get_filename_component(FILE_NAME ${SRC_PATH} NAME)
+	string(TOUPPER ${FILE_NAME} UPPERCASE_FILE_NAME)
+	foreach (PLATFORM_NAME ${TGON_PLATFORM_NAME_LIST})
+		string(FIND ${UPPERCASE_FILE_NAME} ${PLATFORM_NAME} SUBSTR_INDEX)
+		if (SUBSTR_INDEX EQUAL 0)
+			if (PLATFORM_NAME STREQUAL TGON_PLATFORM_NAME)
+				set(IS_PLATFORM_SRC TRUE)
+				break ()
+			endif ()
+		endif ()
+	endforeach ()
+endfunction()
 
+foreach (SRC_PATH ${TEMP_SRC_PATH_LIST})
 	# Ignore third-party libraries
-	string(FIND ${SRC} "TGON/Source/ThirdParty/" SUBSTR_INDEX)
+	string(FIND ${SRC_PATH} "TGON/Source/ThirdParty/" SUBSTR_INDEX)
 	if (NOT SUBSTR_INDEX EQUAL -1)
 		continue ()
 	endif ()
 
 	# Ignore other graphics API sources
-	set(NEED_TO_CONTINUE FALSE)
-	foreach (ITER_GRAPHICS ${TGON_GRAPHICS_LIST})
-		string(FIND ${SRC} /${ITER_GRAPHICS}/ SUBSTR_INDEX)
-		message(STATUS ${SRC})
-		if (NOT SUBSTR_INDEX EQUAL -1)
-			set(NEED_TO_CONTINUE TRUE)
-			if (ITER_GRAPHICS STREQUAL TGON_GRAPHICS)
-				set(NEED_TO_CONTINUE FALSE)
-				break ()
-			endif ()
+	string(TOUPPER ${SRC_PATH} UPPERCASE_SRC)
+	string(FIND ${SRC_PATH} "TGON/Source/Graphics/" SUBSTR_INDEX)
+	if (NOT SUBSTR_INDEX EQUAL -1)
+		string(FIND ${UPPERCASE_SRC} "/${TGON_GRAPHICS_NAME}/" SUBSTR_INDEX)
+		if (SUBSTR_INDEX EQUAL -1)
+			continue ()
 		endif ()
-	endforeach ()
-
-	if (NEED_TO_CONTINUE)
-		continue ()
 	endif ()
 
-	# Ignore other platform sources
-	foreach (ITER_PLATFORM ${TGON_PLATFORM_LIST})
-		string(FIND ${SRC} /${ITER_PLATFORM}/ SUBSTR_INDEX)
-		if (NOT SUBSTR_INDEX EQUAL -1)
-			set(NEED_TO_CONTINUE TRUE)
-			if (ITER_PLATFORM STREQUAL TGON_PLATFORM)
-				list(APPEND SRC_LIST ${SRC})
-				break ()
-			endif ()
-		endif ()
-	endforeach ()
+	message("${SRC_PATH}")
+
+	#set(IS_PLATFORM_SRC FALSE)
+	#is_platform_src(${SRC} IS_PLATFORM_SRC)
+	#if (IS_PLATFORM_SRC)
+	#endif()
 	
-	if (NEED_TO_CONTINUE)
-		continue ()
-	endif ()
+	#set(NEED_TO_CONTINUE FALSE)
+	#foreach (ITER_GRAPHICS ${TGON_GRAPHICS_NAME_LIST})
+	#	string(FIND ${UPPERCASE_SRC} /${ITER_GRAPHICS}/ SUBSTR_INDEX)
+	#	if (NOT SUBSTR_INDEX EQUAL -1)
+	#		set(NEED_TO_CONTINUE TRUE)
+	#		if (ITER_GRAPHICS STREQUAL TGON_GRAPHICS)
+	#			set(NEED_TO_CONTINUE FALSE)
+	#			break ()
+	#		endif ()
+	#	endif ()
+	#endforeach ()
+	#
+	#if (NEED_TO_CONTINUE)
+	#	continue ()
+	#endif ()
+	#
+	## Ignore other platform sources
+	#foreach (ITER_PLATFORM ${TGON_PLATFORM_NAME_LIST})
+	#	string(FIND ${UPPERCASE_SRC} /${ITER_PLATFORM}/ SUBSTR_INDEX)
+	#	if (NOT SUBSTR_INDEX EQUAL -1)
+	#		set(NEED_TO_CONTINUE TRUE)
+	#		if (ITER_PLATFORM STREQUAL TGON_PLATFORM_NAME)
+	#			list(APPEND SRC_PATH_LIST ${SRC})
+	#			break ()
+	#		endif ()
+	#	endif ()
+	#endforeach ()
+	#
+	#if (NEED_TO_CONTINUE)
+	#	continue ()
+	#endif ()
 	
-	list(APPEND SRC_LIST ${SRC})
+	list(APPEND SRC_PATH_LIST ${SRC})
 endforeach ()
 
 
-foreach (SRC ${SRC_LIST})
-	
+foreach (SRC ${SRC_PATH_LIST})
+#	message(STATUS ${SRC})
 endforeach ()
 
-add_library(TGON ${SRC_LIST})
-source_group(TREE ${TGON_PATH} FILES ${SRC_LIST})
+add_library(TGON ${SRC_PATH_LIST})
+source_group(TREE ${TGON_PATH} FILES ${SRC_PATH_LIST})
 
 # Add include directories
 set(TGON_THIRDPARTY_PATH ${TGON_SOURCE_PATH}/ThirdParty)
@@ -93,8 +125,6 @@ endif ()
 
 include_directories(${TGON_SOURCE_PATH})
 include_directories(${TGON_THIRDPARTY_DIRECTORIES})
-
-set(GAINPUT_TESTS OFF)
 
 # Add macros
 target_compile_definitions(TGON PRIVATE
