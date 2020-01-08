@@ -1,5 +1,0 @@
-C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/bbb/CMakeFiles/PACKAGE.dir
-C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/bbb/CMakeFiles/ALL_BUILD.dir
-C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/bbb/CMakeFiles/ZERO_CHECK.dir
-C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/bbb/Source/CMakeFiles/TGON.dir
-C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/bbb/Source/CMakeFiles/PACKAGE.dir
