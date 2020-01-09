@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\src\glew.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include\GL\eglew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include\GL\glew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include\GL\glxew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include\GL\wglew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{CA317D9F-E2B5-3C95-9749-8257C1CC1AED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9F73FCEA-0930-3280-B4EC-C33AEC8C3101}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

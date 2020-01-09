@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioBuffer.cpp">
+      <Filter>Source\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioDevice.cpp">
+      <Filter>Source\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioPlayer.cpp">
+      <Filter>Source\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\CameraComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\Component.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\RendererComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\Transform.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UIRendererComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UISpriteRendererComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UiTextRendererComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Diagnostics\Debug.cpp">
+      <Filter>Source\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Diagnostics\Windows\WindowsDebug.cpp">
+      <Filter>Source\Diagnostics\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\Font.cpp">
+      <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\FontFace.cpp">
+      <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\FontFactory.cpp">
+      <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\Image.cpp">
+      <Filter>Source\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\AudioModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\Engine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\InputModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\SceneModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TaskModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TimeModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TimerModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\UIRendererModule.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Game\GameObject.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Game\Scene.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLGraphics.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLIndexBuffer.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLRenderTarget.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLShaderProgram.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLTexture.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\Windows\WindowsOpenGLContext.cpp">
+      <Filter>Source\Graphics\OpenGL\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\InputManager.cpp">
+      <Filter>Source\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Keyboard.cpp">
+      <Filter>Source\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Mouse.cpp">
+      <Filter>Source\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsGamepad.cpp">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsInputManager.cpp">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsKeyboard.cpp">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsMouse.cpp">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Directory.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\DirectoryInfo.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\File.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\FileStream.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Path.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\StdioFileStream.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Windows\WindowsDirectory.cpp">
+      <Filter>Source\IO\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Windows\WindowsFile.cpp">
+      <Filter>Source\IO\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Windows\WindowsFileStream.cpp">
+      <Filter>Source\IO\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Windows\WindowsPath.cpp">
+      <Filter>Source\IO\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\EventDispatcher.cpp">
+      <Filter>Source\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Application.cpp">
+      <Filter>Source\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Environment.cpp">
+      <Filter>Source\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Window.cpp">
+      <Filter>Source\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsApplication.cpp">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsEnvironment.cpp">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsLocale.cpp">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsMain.cpp">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\Random.cpp">
+      <Filter>Source\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\WELL1024a.cpp">
+      <Filter>Source\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Encoding.cpp">
+      <Filter>Source\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Hash.cpp">
+      <Filter>Source\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Threading\DispatchQueue.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Threading\Thread.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Threading\Windows\WindowsThread.cpp">
+      <Filter>Source\Threading\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\DateTime.cpp">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\Timer.cpp">
+      <Filter>Source\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\Windows\WindowsTimeZoneInfo.cpp">
+      <Filter>Source\Time\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\FontAtlas.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\RectTransform.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIBatch.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIElement.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UISprite.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIText.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioBuffer.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioDevice.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\AudioPlayer.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\Importer\AudioImporter.h">
+      <Filter>Source\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\Importer\OggVorbisAudioImporter.h">
+      <Filter>Source\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\Importer\RiffReader.h">
+      <Filter>Source\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\Importer\WavAudioImporter.h">
+      <Filter>Source\Audio\Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Audio\OpenALDebug.h">
+      <Filter>Source\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\CameraComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\Component.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\RendererComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\Transform.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UIRendererComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UISpriteRendererComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Component\UITextRendererComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\Delegate.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\DelegateChain.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\DynamicCast.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\ICloneable.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\IComparable.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\ISerializable.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\NonAddressable.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\NonCopyable.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\Object.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\RTTI.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\Range.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\RuntimeObject.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Core\TypeTraits.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Diagnostics\Debug.h">
+      <Filter>Source\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\Font.h">
+      <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\FontFace.h">
+      <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\FontFactory.h">
+      <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\Image.h">
+      <Filter>Source\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\ImageProcessor\BmpImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\ImageProcessor\ImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Drawing\ImageProcessor\WebPImageProcessor.h">
+      <Filter>Source\Drawing\ImageProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\AssetModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\AudioModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\Engine.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\EngineConfig.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\InputMode.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\InputModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\Module.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\SceneModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TaskModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TimeModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TimerHandle.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\TimerModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Engine\UIRendererModule.h">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Game\GameObject.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Game\Scene.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLContext.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLDebug.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLGraphics.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLIndexBuffer.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLRenderTarget.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLShaderCode.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLShaderProgram.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLTexture.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Graphics\OpenGL\OpenGLVertexBuffer.h">
+      <Filter>Source\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Gamepad.h">
+      <Filter>Source\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\InputManager.h">
+      <Filter>Source\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Keyboard.h">
+      <Filter>Source\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Mouse.h">
+      <Filter>Source\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsGamepad.h">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsInputManager.h">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsKeyboard.h">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Hardware\Windows\WindowsMouse.h">
+      <Filter>Source\Hardware\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Directory.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\DirectoryInfo.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\File.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\FileStream.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\FileSystemEnumerable.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Path.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Stream.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\IO\Windows\WindowsPath.h">
+      <Filter>Source\IO\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Circle.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Color.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Extent.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Mathematics.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Matrix3x4.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Matrix4x4.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Rect.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Vector2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Vector3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Math\Vector4.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\Algorithm.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\AutoCast.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\EventDispatcher.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\ExpressionTemplate.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\InstanceCounter.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\InstantiateCounter.h">
+      <Filter>Source\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Misc\Windows\SafeFileHandle.h">
+      <Filter>Source\Misc\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Application.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Config.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Environment.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Locale.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Prefix.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Version.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Window.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\WindowStyle.h">
+      <Filter>Source\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\Windows.h">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsApplication.h">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsConfig.h">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Platform\Windows\WindowsWindow.h">
+      <Filter>Source\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\PrecompiledHeader.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\Random.h">
+      <Filter>Source\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\WELL1024a.h">
+      <Filter>Source\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\WeightSelector.h">
+      <Filter>Source\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\TGON.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Encoding.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\FixedString.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Hash.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\StringHash.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\StringTraits.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\UUID.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\UnicodeScalar.h">
+      <Filter>Source\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Threading\DispatchQueue.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Threading\Thread.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\DateTime.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\Stopwatch.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\TimeSpan.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\TimeZoneInfo.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Time\Timer.h">
+      <Filter>Source\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\FontAtlas.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\RectTransform.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIBatch.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIElement.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UISprite.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\UI\UIText.h">
+      <Filter>Source\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{9338C2EA-BE13-30A8-93E8-5792BE37AB1F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio">
+      <UniqueIdentifier>{FA02AE94-19FC-37FB-A606-A64C9D00C178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Audio\Importer">
+      <UniqueIdentifier>{B6DFE540-4927-3F71-A2B5-B401D629097F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Component">
+      <UniqueIdentifier>{3FF65B03-AADE-3E28-840E-FBE8B914991E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{3F49890B-953C-34AE-A423-FD41DAA7435A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Diagnostics">
+      <UniqueIdentifier>{2DD0AF38-1228-3474-B487-9B13A48FAC2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Diagnostics\Windows">
+      <UniqueIdentifier>{4F8822DE-9DC7-3FE4-B3C7-E333451A71E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Drawing">
+      <UniqueIdentifier>{6B87C1A4-F5D4-3E65-B852-03B85BF02B9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Drawing\ImageProcessor">
+      <UniqueIdentifier>{B98C3CB5-0563-3CFF-929B-363435BAA9C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{4BC57788-50B3-3DB4-9E5C-C7CB1A43E6E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{C1BB13B8-62B8-34ED-896E-210EEDFD059F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{94361AE9-3483-30C3-8F34-C9C88A639146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\OpenGL">
+      <UniqueIdentifier>{9DA10DEB-F53A-3187-8E80-33907A8F81DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\OpenGL\Windows">
+      <UniqueIdentifier>{2C70D78A-8382-3649-B4C2-14D3098E32BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Hardware">
+      <UniqueIdentifier>{9BDD761D-FA81-3CB8-9FB3-254542706602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Hardware\Windows">
+      <UniqueIdentifier>{D1A2EFA1-D7D9-3EC6-A671-FFF159C16DE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\IO">
+      <UniqueIdentifier>{748E0740-FF8D-3616-B4F2-27A1355FF39B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\IO\Windows">
+      <UniqueIdentifier>{896C8664-46E3-3B18-9BA0-408C533A1DA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Math">
+      <UniqueIdentifier>{0EA8B537-8457-3BEF-AE1B-B7A4798E8164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Misc">
+      <UniqueIdentifier>{65A88503-39E6-3F6C-86A9-CB04F450FBED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Misc\Windows">
+      <UniqueIdentifier>{CA7E7829-60C7-35B5-A39B-31120F48816B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform">
+      <UniqueIdentifier>{B8BC7BB5-7379-31A9-A052-94E6956E435F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform\Windows">
+      <UniqueIdentifier>{4AC7F0C7-9BF9-38F0-B5E5-C3C45D27483A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Random">
+      <UniqueIdentifier>{C7F9CE4F-FF95-389C-8148-747516CBD2E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Text">
+      <UniqueIdentifier>{252641B4-DF6A-36CD-B7C7-CA5A40625F83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Threading">
+      <UniqueIdentifier>{6CDB64F9-5D5D-3789-9C7A-F3E6F9B76796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Threading\Windows">
+      <UniqueIdentifier>{07471798-7780-3EE3-992D-27D4293AF320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time">
+      <UniqueIdentifier>{8A65E32B-7F35-399F-8CD1-3A3E57241D02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Time\Windows">
+      <UniqueIdentifier>{23F4AD03-A734-3934-BF11-1ABF45656C18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{D8B8C72E-2C50-3507-A2B0-1F960F997823}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
