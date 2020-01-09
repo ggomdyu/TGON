@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jhcha\Desktop\Programming\Git\TGON\bbb\CMakeFiles\16912454c38e89de39a5bc2b9011b22e\PACKAGE_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D0224CDD-E429-38F2-9C12-EE72FC181CEF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

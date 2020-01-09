@@ -36,12 +36,12 @@ foreach (SRC_PATH ${TEMP_SRC_PATH_LIST})
 	endif ()
 
 	# Ignore other platform sources
-	set(IS_PLATFORM_SRC FALSE)
+	set(IS_PLATFORM_SPECIFIC_SRC FALSE)
 	string(TOUPPER ${SRC_PATH} UPPERCASE_SRC_PATH)
 	foreach (PLATFORM_NAME ${TGON_PLATFORM_NAME_LIST})
 		string(FIND ${UPPERCASE_SRC_PATH} /${PLATFORM_NAME}/ SUBSTR_INDEX)
 		if (NOT SUBSTR_INDEX EQUAL -1)
-			set(IS_PLATFORM_SRC TRUE)
+			set(IS_PLATFORM_SPECIFIC_SRC TRUE)
 			if (PLATFORM_NAME STREQUAL TGON_PLATFORM_NAME)
 				list(APPEND SRC_PATH_LIST ${SRC_PATH})
 				break ()
@@ -52,7 +52,7 @@ foreach (SRC_PATH ${TEMP_SRC_PATH_LIST})
 		endif ()
 	endforeach ()
 
-	if (NOT IS_PLATFORM_SRC)
+	if (NOT IS_PLATFORM_SPECIFIC_SRC)
 		list(APPEND SRC_PATH_LIST ${SRC_PATH})
 	endif ()
 endforeach ()
@@ -93,15 +93,23 @@ add_subdirectory(ThirdParty/gainput-1.0.0)
 add_subdirectory(ThirdParty/glew-2.1.0)
 add_subdirectory(ThirdParty/freetype-2.10.1)
 
-set_target_properties(gainputstatic PROPERTIES FOLDER "ThirdParty")
-set_target_properties(glew-2.1.0 PROPERTIES FOLDER "ThirdParty")
+# Set properties
+set_target_properties(gainput PROPERTIES FOLDER "ThirdParty")
+set_target_properties(glew PROPERTIES FOLDER "ThirdParty")
 set_target_properties(freetype PROPERTIES FOLDER "ThirdParty")
 
 # Add macros
-add_definitions(TGON PRIVATE
-	FT_DEBUG_LEVEL_ERROR
+target_compile_definitions(glew PUBLIC GLEW_STATIC)
+target_compile_definitions(freetype PUBLIC
+    FT_DEBUG_LEVEL_ERROR
 	FT_DEBUG_LEVEL_TRACE
 	FT2_BUILD_LIBRARY
+)
+target_link_libraries(TGON
+    PRIVATE glew freetype
+)
+
+target_compile_definitions(TGON PRIVATE
 	U_STATIC_IMPLEMENTATION
 	U_COMMON_IMPLEMENTATION
 	U_I18N_IMPLEMENTATION
