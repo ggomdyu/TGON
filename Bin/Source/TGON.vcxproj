@@ -59,19 +59,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TGON.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TGON</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TGON.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TGON</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">TGON.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">TGON</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">TGON.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">TGON</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
@@ -94,11 +94,11 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\lib\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\fmt-6.1.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\alc;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\zlib-1.2.11;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\i18n;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\GSL-2.0.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\assimp-4.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\libiconv-1.9.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\stb;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source;\Include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\freetype-2.10.1\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\freetype-2.10.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -129,13 +129,13 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\lib\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\fmt-6.1.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\alc;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\zlib-1.2.11;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\i18n;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\GSL-2.0.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\assimp-4.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\libiconv-1.9.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\stb;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source;\Include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\freetype-2.10.1\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\freetype-2.10.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -166,13 +166,13 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\lib\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\fmt-6.1.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\alc;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\zlib-1.2.11;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\i18n;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\GSL-2.0.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\assimp-4.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\libiconv-1.9.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\stb;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source;\Include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\freetype-2.10.1\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\freetype-2.10.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -204,11 +204,11 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;TGON_PLATFORM_WINDOWS=1;TGON_GRAPHICS_OPENGL=1;GLEW_STATIC;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;AL_BUILD_LIBRARY;AL_ALEXT_PROTOTYPES;OpenAL_EXPORTS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\gainput-1.0.0\lib\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\fmt-6.1.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\alc;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\zlib-1.2.11;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\i18n;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\icu4c-64_2\icu\source\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\GSL-2.0.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\assimp-4.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\libiconv-1.9.2\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\stb;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source;\Include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\glew-2.1.0\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\freetype-2.10.1\include;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\freetype-2.10.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -451,6 +451,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\WELL1024a.h" />
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Random\WeightSelector.h" />
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\TGON.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\DirectoryTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\FileStreamTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\FileTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\PathTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Platform\EnvironmentTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\String\FixedStringTest.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Test.h" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Time\DateTimeTest.h" />
     <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Encoding.cpp" />
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Encoding.h" />
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\FixedString.h" />
@@ -492,6 +500,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\OpenAL.vcxproj">
+      <Project>{E0CFF817-52CA-338E-AE5F-195A87570800}</Project>
+      <Name>OpenAL</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\freetype-2.10.1\freetype.vcxproj">
       <Project>{43E4E3FA-417E-3E37-ACDD-048370858090}</Project>

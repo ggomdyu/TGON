@@ -33,7 +33,7 @@ IF(NOT CMAKE_DEBUG_POSTFIX)
 ENDIF()
 
 SET(CMAKE_MODULE_PATH "${OpenAL_SOURCE_DIR}/cmake")
-
+SET(LIBTYPE STATIC)
 
 INCLUDE(CheckFunctionExists)
 INCLUDE(CheckLibraryExists)
@@ -50,14 +50,6 @@ include(GNUInstallDirs)
 
 
 OPTION(ALSOFT_DLOPEN  "Check for the dlopen API for loading optional libs"  ON)
-
-OPTION(ALSOFT_WERROR  "Treat compile warnings as errors"      OFF)
-
-OPTION(ALSOFT_UTILS          "Build and install utility programs"         ON)
-OPTION(ALSOFT_NO_CONFIG_UTIL "Disable building the alsoft-config utility" OFF)
-
-OPTION(ALSOFT_EXAMPLES  "Build and install example programs"  ON)
-OPTION(ALSOFT_TESTS     "Build and install test programs"     ON)
 
 OPTION(ALSOFT_CONFIG "Install alsoft.conf sample configuration file" ON)
 OPTION(ALSOFT_HRTF_DEFS "Install HRTF definition files" ON)
@@ -107,10 +99,6 @@ ENDIF()
 IF ("${CMAKE_C_PLATFORM_ID}" STREQUAL "QNX")
     SET(INC_PATHS ${INC_PATHS} /usr/include)
     SET(LINKER_FLAGS ${LINKER_FLAGS} -L/usr/lib)
-ENDIF()
-
-IF(NOT LIBTYPE)
-    SET(LIBTYPE SHARED)
 ENDIF()
 
 SET(LIB_MAJOR_VERSION "1")
@@ -209,10 +197,6 @@ ELSE()
     SET(C_FLAGS ${C_FLAGS} -Winline -Wunused -Wall -Wextra -Wshadow -Wconversion -Wcast-align
         -Wpedantic
         $<$<COMPILE_LANGUAGE:CXX>:-Wold-style-cast -Wnon-virtual-dtor -Woverloaded-virtual>)
-
-    IF(ALSOFT_WERROR)
-        SET(C_FLAGS ${C_FLAGS} -Werror)
-    ENDIF()
 
     # We want RelWithDebInfo to actually include debug stuff (define _DEBUG
     # instead of NDEBUG)
@@ -1131,20 +1115,6 @@ ADD_CUSTOM_COMMAND(OUTPUT "${OpenAL_BINARY_DIR}/bsinc_inc.h"
 )
 SET(ALC_OBJS  ${ALC_OBJS} "${OpenAL_BINARY_DIR}/bsinc_inc.h")
 
-
-IF(ALSOFT_UTILS AND NOT ALSOFT_NO_CONFIG_UTIL)
-    add_subdirectory(utils/alsoft-config)
-ENDIF()
-IF(ALSOFT_EXAMPLES)
-    IF(NOT SDL2_FOUND)
-        FIND_PACKAGE(SDL2)
-    ENDIF()
-    IF(SDL2_FOUND)
-        FIND_PACKAGE(SDL_sound)
-        FIND_PACKAGE(FFmpeg COMPONENTS AVFORMAT AVCODEC AVUTIL SWSCALE SWRESAMPLE)
-    ENDIF()
-ENDIF()
-
 IF(NOT WIN32)
     SET(LIBNAME "openal")
 ELSE()
@@ -1183,11 +1153,11 @@ CONFIGURE_FILE(
     @ONLY)
 
 
-ADD_LIBRARY(common STATIC EXCLUDE_FROM_ALL ${COMMON_OBJS})
-TARGET_INCLUDE_DIRECTORIES(common PRIVATE ${OpenAL_BINARY_DIR} ${OpenAL_SOURCE_DIR}/include)
-TARGET_COMPILE_DEFINITIONS(common PRIVATE ${CPP_DEFS})
-TARGET_COMPILE_OPTIONS(common PRIVATE ${C_FLAGS})
-SET_TARGET_PROPERTIES(common PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+ADD_LIBRARY(OpenAL-common STATIC EXCLUDE_FROM_ALL ${COMMON_OBJS})
+TARGET_INCLUDE_DIRECTORIES(OpenAL-common PRIVATE ${OpenAL_BINARY_DIR} ${OpenAL_SOURCE_DIR}/include)
+TARGET_COMPILE_DEFINITIONS(OpenAL-common PRIVATE ${CPP_DEFS})
+TARGET_COMPILE_OPTIONS(OpenAL-common PRIVATE ${C_FLAGS})
+SET_TARGET_PROPERTIES(OpenAL-common PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 
 UNSET(HAS_ROUTER)
@@ -1223,7 +1193,7 @@ ELSE()
         TARGET_COMPILE_DEFINITIONS(OpenAL
             PRIVATE AL_BUILD_LIBRARY AL_ALEXT_PROTOTYPES ${CPP_DEFS})
         TARGET_COMPILE_OPTIONS(OpenAL PRIVATE ${C_FLAGS})
-        TARGET_LINK_LIBRARIES(OpenAL PRIVATE common ${LINKER_FLAGS})
+        TARGET_LINK_LIBRARIES(OpenAL PRIVATE OpenAL-common ${LINKER_FLAGS})
         TARGET_INCLUDE_DIRECTORIES(OpenAL
           PUBLIC
             $<BUILD_INTERFACE:${OpenAL_SOURCE_DIR}/include>
@@ -1248,7 +1218,7 @@ ELSE()
     IF(WIN32)
         SET_TARGET_PROPERTIES(${IMPL_TARGET} PROPERTIES PREFIX "")
     ENDIF()
-    TARGET_LINK_LIBRARIES(${IMPL_TARGET} PRIVATE common ${LINKER_FLAGS} ${EXTRA_LIBS} ${MATH_LIB})
+    TARGET_LINK_LIBRARIES(${IMPL_TARGET} PRIVATE OpenAL-common ${LINKER_FLAGS} ${EXTRA_LIBS} ${MATH_LIB})
 ENDIF()
 
 TARGET_INCLUDE_DIRECTORIES(${IMPL_TARGET}
@@ -1379,194 +1349,4 @@ IF(ALSOFT_AMBDEC_PRESETS)
         DESTINATION ${CMAKE_INSTALL_DATADIR}/openal/presets)
     MESSAGE(STATUS "Installing AmbDec presets")
     MESSAGE(STATUS "")
-ENDIF()
-
-IF(ALSOFT_UTILS)
-    set(UTIL_TARGETS )
-
-    ADD_EXECUTABLE(openal-info utils/openal-info.c)
-    TARGET_INCLUDE_DIRECTORIES(openal-info PRIVATE ${OpenAL_SOURCE_DIR}/common)
-    TARGET_COMPILE_OPTIONS(openal-info PRIVATE ${C_FLAGS})
-    TARGET_LINK_LIBRARIES(openal-info PRIVATE ${LINKER_FLAGS} OpenAL)
-    set(UTIL_TARGETS ${UTIL_TARGETS} openal-info)
-
-    find_package(MySOFA)
-    if(MYSOFA_FOUND)
-        set(MAKEMHR_SRCS
-            utils/makemhr/loaddef.cpp
-            utils/makemhr/loaddef.h
-            utils/makemhr/loadsofa.cpp
-            utils/makemhr/loadsofa.h
-            utils/makemhr/makemhr.cpp
-            utils/makemhr/makemhr.h)
-        if(NOT HAVE_GETOPT)
-            set(MAKEMHR_SRCS  ${MAKEMHR_SRCS} utils/getopt.c utils/getopt.h)
-        endif()
-        add_executable(makemhr ${MAKEMHR_SRCS})
-        target_compile_definitions(makemhr PRIVATE ${CPP_DEFS})
-        target_include_directories(makemhr
-            PRIVATE ${OpenAL_SOURCE_DIR}/common ${OpenAL_BINARY_DIR})
-        target_compile_options(makemhr PRIVATE ${C_FLAGS})
-        target_link_libraries(makemhr PRIVATE common ${LINKER_FLAGS} MySOFA::MySOFA)
-        set(UTIL_TARGETS ${UTIL_TARGETS} makemhr)
-
-        set(SOFAINFO_SRCS  utils/sofa-info.cpp)
-        add_executable(sofa-info ${SOFAINFO_SRCS})
-        target_compile_definitions(sofa-info PRIVATE ${CPP_DEFS})
-        target_include_directories(sofa-info PRIVATE ${OpenAL_SOURCE_DIR}/common)
-        target_compile_options(sofa-info PRIVATE ${C_FLAGS})
-        target_link_libraries(sofa-info PRIVATE ${LINKER_FLAGS} MySOFA::MySOFA)
-    endif()
-
-    IF(ALSOFT_INSTALL)
-        INSTALL(TARGETS ${UTIL_TARGETS}
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    ENDIF()
-
-    MESSAGE(STATUS "Building utility programs")
-    IF(TARGET alsoft-config)
-        MESSAGE(STATUS "Building configuration program")
-    ENDIF()
-    MESSAGE(STATUS "")
-ENDIF()
-
-
-# Add a static library with common functions used by multiple example targets
-ADD_LIBRARY(ex-common STATIC EXCLUDE_FROM_ALL
-    examples/common/alhelpers.c
-    examples/common/alhelpers.h)
-TARGET_COMPILE_DEFINITIONS(ex-common PUBLIC ${CPP_DEFS})
-TARGET_INCLUDE_DIRECTORIES(ex-common PUBLIC ${OpenAL_SOURCE_DIR}/common)
-TARGET_COMPILE_OPTIONS(ex-common PUBLIC ${C_FLAGS})
-TARGET_LINK_LIBRARIES(ex-common PUBLIC OpenAL PRIVATE ${RT_LIB})
-
-IF(ALSOFT_TESTS)
-    ADD_EXECUTABLE(altonegen examples/altonegen.c)
-    TARGET_COMPILE_DEFINITIONS(altonegen PRIVATE ${CPP_DEFS})
-    TARGET_INCLUDE_DIRECTORIES(altonegen PRIVATE ${OpenAL_SOURCE_DIR}/common)
-    TARGET_COMPILE_OPTIONS(altonegen PRIVATE ${C_FLAGS})
-    TARGET_LINK_LIBRARIES(altonegen PRIVATE ${LINKER_FLAGS} ${MATH_LIB} ex-common)
-
-    IF(ALSOFT_INSTALL)
-        INSTALL(TARGETS altonegen
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    ENDIF()
-
-    MESSAGE(STATUS "Building test programs")
-    MESSAGE(STATUS "")
-ENDIF()
-
-IF(ALSOFT_EXAMPLES)
-    ADD_EXECUTABLE(alrecord examples/alrecord.c)
-    TARGET_LINK_LIBRARIES(alrecord PRIVATE ${LINKER_FLAGS} ex-common)
-
-    IF(ALSOFT_INSTALL)
-        INSTALL(TARGETS alrecord
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    ENDIF()
-
-    MESSAGE(STATUS "Building example programs")
-
-    IF(SDL2_FOUND)
-        IF(SDL_SOUND_FOUND)
-            ADD_EXECUTABLE(alplay examples/alplay.c)
-            TARGET_INCLUDE_DIRECTORIES(alplay
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(alplay
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common)
-
-            ADD_EXECUTABLE(alstream examples/alstream.c)
-            TARGET_INCLUDE_DIRECTORIES(alstream
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(alstream
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common)
-
-            ADD_EXECUTABLE(alreverb examples/alreverb.c)
-            TARGET_INCLUDE_DIRECTORIES(alreverb
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(alreverb
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common)
-
-            ADD_EXECUTABLE(almultireverb examples/almultireverb.c)
-            TARGET_INCLUDE_DIRECTORIES(almultireverb
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(almultireverb
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common
-                ${MATH_LIB})
-
-            ADD_EXECUTABLE(allatency examples/allatency.c)
-            TARGET_INCLUDE_DIRECTORIES(allatency
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(allatency
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common)
-
-            ADD_EXECUTABLE(alloopback examples/alloopback.c)
-            TARGET_INCLUDE_DIRECTORIES(alloopback
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(alloopback
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common ${MATH_LIB})
-
-            ADD_EXECUTABLE(alhrtf examples/alhrtf.c)
-            TARGET_INCLUDE_DIRECTORIES(alhrtf
-                PRIVATE ${SDL2_INCLUDE_DIR} ${SDL_SOUND_INCLUDE_DIR})
-            TARGET_LINK_LIBRARIES(alhrtf
-                PRIVATE ${LINKER_FLAGS} ${SDL_SOUND_LIBRARIES} ${SDL2_LIBRARY} ex-common ${MATH_LIB})
-
-            IF(ALSOFT_INSTALL)
-                INSTALL(TARGETS alplay alstream alreverb almultireverb allatency alloopback alhrtf
-                    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-                    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-            ENDIF()
-
-            MESSAGE(STATUS "Building SDL_sound example programs")
-        ENDIF()
-
-        SET(FFVER_OK FALSE)
-        IF(FFMPEG_FOUND)
-            SET(FFVER_OK TRUE)
-            IF(AVFORMAT_VERSION VERSION_LESS "57.56.101")
-                MESSAGE(STATUS "libavformat is too old! (${AVFORMAT_VERSION}, wanted 57.56.101)")
-                SET(FFVER_OK FALSE)
-            ENDIF()
-            IF(AVCODEC_VERSION VERSION_LESS "57.64.101")
-                MESSAGE(STATUS "libavcodec is too old! (${AVCODEC_VERSION}, wanted 57.64.101)")
-                SET(FFVER_OK FALSE)
-            ENDIF()
-            IF(AVUTIL_VERSION VERSION_LESS "55.34.101")
-                MESSAGE(STATUS "libavutil is too old! (${AVUTIL_VERSION}, wanted 55.34.101)")
-                SET(FFVER_OK FALSE)
-            ENDIF()
-            IF(SWSCALE_VERSION VERSION_LESS "4.2.100")
-                MESSAGE(STATUS "libswscale is too old! (${SWSCALE_VERSION}, wanted 4.2.100)")
-                SET(FFVER_OK FALSE)
-            ENDIF()
-            IF(SWRESAMPLE_VERSION VERSION_LESS "2.3.100")
-                MESSAGE(STATUS "libswresample is too old! (${SWRESAMPLE_VERSION}, wanted 2.3.100)")
-                SET(FFVER_OK FALSE)
-            ENDIF()
-        ENDIF()
-        IF(FFVER_OK)
-            ADD_EXECUTABLE(alffplay examples/alffplay.cpp)
-            TARGET_INCLUDE_DIRECTORIES(alffplay
-                PRIVATE ${SDL2_INCLUDE_DIR} ${FFMPEG_INCLUDE_DIRS})
-            TARGET_LINK_LIBRARIES(alffplay
-                PRIVATE ${LINKER_FLAGS} ${SDL2_LIBRARY} ${FFMPEG_LIBRARIES} ex-common)
-
-            IF(ALSOFT_INSTALL)
-                INSTALL(TARGETS alffplay
-                    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-                    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-            ENDIF()
-            MESSAGE(STATUS "Building SDL+FFmpeg example programs")
-        ENDIF()
-        MESSAGE(STATUS "")
-    ENDIF()
 ENDIF()

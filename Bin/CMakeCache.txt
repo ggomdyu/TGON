@@ -14,6 +14,123 @@
 # EXTERNAL cache entries
 ########################
 
+//The ALSA (asound) include directory
+ALSA_INCLUDE_DIR:PATH=ALSA_INCLUDE_DIR-NOTFOUND
+
+//The ALSA (asound) library
+ALSA_LIBRARY:FILEPATH=ALSA_LIBRARY-NOTFOUND
+
+//Install AmbDec preset files
+ALSOFT_AMBDEC_PRESETS:BOOL=ON
+
+//Enable DirectSound backend
+ALSOFT_BACKEND_DSOUND:BOOL=ON
+
+//Enable WASAPI backend
+ALSOFT_BACKEND_WASAPI:BOOL=ON
+
+//Enable Wave Writer backend
+ALSOFT_BACKEND_WAVE:BOOL=ON
+
+//Enable Windows Multimedia backend
+ALSOFT_BACKEND_WINMM:BOOL=ON
+
+//Build the router (EXPERIMENTAL; creates OpenAL32.dll and soft_oal.dll)
+ALSOFT_BUILD_ROUTER:BOOL=OFF
+
+//Install alsoft.conf sample configuration file
+ALSOFT_CONFIG:BOOL=ON
+
+//Enable SSE support
+ALSOFT_CPUEXT_SSE:BOOL=ON
+
+//Enable SSE2 support
+ALSOFT_CPUEXT_SSE2:BOOL=ON
+
+//Enable SSE3 support
+ALSOFT_CPUEXT_SSE3:BOOL=ON
+
+//Enable SSE4.1 support
+ALSOFT_CPUEXT_SSE4_1:BOOL=ON
+
+//Check for the dlopen API for loading optional libs
+ALSOFT_DLOPEN:BOOL=ON
+
+//Embed the HRTF data files (increases library footprint)
+ALSOFT_EMBED_HRTF_DATA:BOOL=ON
+
+//Install HRTF definition files
+ALSOFT_HRTF_DEFS:BOOL=ON
+
+//Install headers and libraries
+ALSOFT_INSTALL:BOOL=ON
+
+//Path to prebuilt native tools (leave blank to auto-build)
+ALSOFT_NATIVE_TOOLS_PATH:STRING=
+
+//Do not define GUIDs, IIDs, CLSIDs, or PropertyKeys
+ALSOFT_NO_UID_DEFS:BOOL=OFF
+
+//Require ALSA backend
+ALSOFT_REQUIRE_ALSA:BOOL=OFF
+
+//Require CoreAudio backend
+ALSOFT_REQUIRE_COREAUDIO:BOOL=OFF
+
+//Require DirectSound backend
+ALSOFT_REQUIRE_DSOUND:BOOL=OFF
+
+//Require JACK backend
+ALSOFT_REQUIRE_JACK:BOOL=OFF
+
+//Require ARM Neon support
+ALSOFT_REQUIRE_NEON:BOOL=OFF
+
+//Require OpenSL backend
+ALSOFT_REQUIRE_OPENSL:BOOL=OFF
+
+//Require OSS backend
+ALSOFT_REQUIRE_OSS:BOOL=OFF
+
+//Require PortAudio backend
+ALSOFT_REQUIRE_PORTAUDIO:BOOL=OFF
+
+//Require PulseAudio backend
+ALSOFT_REQUIRE_PULSEAUDIO:BOOL=OFF
+
+//Require QSA backend
+ALSOFT_REQUIRE_QSA:BOOL=OFF
+
+//Require SDL2 backend
+ALSOFT_REQUIRE_SDL2:BOOL=OFF
+
+//Require SndIO backend
+ALSOFT_REQUIRE_SNDIO:BOOL=OFF
+
+//Require Solaris backend
+ALSOFT_REQUIRE_SOLARIS:BOOL=OFF
+
+//Require SSE support
+ALSOFT_REQUIRE_SSE:BOOL=OFF
+
+//Require SSE2 support
+ALSOFT_REQUIRE_SSE2:BOOL=OFF
+
+//Require SSE3 support
+ALSOFT_REQUIRE_SSE3:BOOL=OFF
+
+//Require SSE4.1 support
+ALSOFT_REQUIRE_SSE4_1:BOOL=OFF
+
+//Require WASAPI backend
+ALSOFT_REQUIRE_WASAPI:BOOL=OFF
+
+//Require Windows Multimedia backend
+ALSOFT_REQUIRE_WINMM:BOOL=OFF
+
+//The AudioIO include directory
+AUDIOIO_INCLUDE_DIR:PATH=AUDIOIO_INCLUDE_DIR-NOTFOUND
+
 //Path to a file.
 BZIP2_INCLUDE_DIR:PATH=BZIP2_INCLUDE_DIR-NOTFOUND
 
@@ -22,6 +139,14 @@ BZIP2_LIBRARY_DEBUG:FILEPATH=BZIP2_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
 BZIP2_LIBRARY_RELEASE:FILEPATH=BZIP2_LIBRARY_RELEASE-NOTFOUND
+
+//For backwards compatibility, what version of CMake commands and
+// syntax should this version of CMake try to support.
+CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
+
+//Choose the type of build, options are: Debug Release RelWithDebInfo
+// MinSizeRel.
+CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 
 //Semicolon separated list of supported configuration types, only
 // supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything
@@ -63,6 +188,9 @@ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=/MD /Zi /O2 /Ob1 /DNDEBUG
 
 //Libraries linked by default with all C applications.
 CMAKE_C_STANDARD_LIBRARIES:STRING=kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+
+//Library postfix for debug builds. Normally left blank.
+CMAKE_DEBUG_POSTFIX:STRING=
 
 //Flags used by the linker during all build types.
 CMAKE_EXE_LINKER_FLAGS:STRING=/machine:x64
@@ -205,10 +333,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+CMAKE_SKIP_INSTALL_RPATH:BOOL=OFF
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=NO
+CMAKE_SKIP_RPATH:BOOL=OFF
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -234,13 +362,28 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
+
+//Path to a library.
+COREAUDIO_FRAMEWORK:FILEPATH=COREAUDIO_FRAMEWORK-NOTFOUND
 
 //Enable to build 7-Zip source packages
 CPACK_SOURCE_7Z:BOOL=ON
 
 //Enable to build ZIP source packages
 CPACK_SOURCE_ZIP:BOOL=ON
+
+//The DirectSound include directory
+DSOUND_INCLUDE_DIR:PATH=C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/um
+
+//The DirectSound library
+DSOUND_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/dsound.lib
+
+//Single output directory for building all executables.
+EXECUTABLE_OUTPUT_PATH:PATH=
+
+//Force /MT for static VC runtimes
+FORCE_STATIC_VCRT:BOOL=OFF
 
 //Support bzip2 compressed fonts.
 FT_WITH_BZIP2:BOOL=OFF
@@ -254,23 +397,89 @@ FT_WITH_PNG:BOOL=OFF
 //Use system zlib instead of internal library.
 FT_WITH_ZLIB:BOOL=OFF
 
+//Git command line client
+GIT_EXECUTABLE:FILEPATH=C:/Users/ggomdyu/AppData/Local/Atlassian/SourceTree/git_local/bin/git.exe
+
 //Path to a file.
 HARFBUZZ_INCLUDE_DIRS:PATH=HARFBUZZ_INCLUDE_DIRS-NOTFOUND
 
 //Path to a library.
 HARFBUZZ_LIBRARIES:FILEPATH=HARFBUZZ_LIBRARIES-NOTFOUND
 
+//The JACK include directory
+JACK_INCLUDE_DIR:PATH=JACK_INCLUDE_DIR-NOTFOUND
+
+//The JACK library
+JACK_LIBRARY:FILEPATH=JACK_LIBRARY-NOTFOUND
+
+//Single output directory for building all libraries.
+LIBRARY_OUTPUT_PATH:PATH=
+
+//The OpenSL Android include directory
+OPENSL_ANDROID_INCLUDE_DIR:PATH=OPENSL_ANDROID_INCLUDE_DIR-NOTFOUND
+
+//The OpenSL include directory
+OPENSL_INCLUDE_DIR:PATH=OPENSL_INCLUDE_DIR-NOTFOUND
+
+//The OpenSL library
+OPENSL_LIBRARY:FILEPATH=OPENSL_LIBRARY-NOTFOUND
+
+//The OSS include directory
+OSS_INCLUDE_DIR:PATH=OSS_INCLUDE_DIR-NOTFOUND
+
+//Optional OSS library
+OSS_LIBRARY:FILEPATH=OSS_LIBRARY-NOTFOUND
+
+//Value Computed by CMake
+OpenAL_BINARY_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0
+
+//Dependencies for the target
+OpenAL_LIB_DEPENDS:STATIC=general;C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/WinMM.Lib;
+
+//Value Computed by CMake
+OpenAL_SOURCE_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0
+
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
+
+//The PortAudio include directory
+PORTAUDIO_INCLUDE_DIR:PATH=PORTAUDIO_INCLUDE_DIR-NOTFOUND
+
+//The PortAudio library
+PORTAUDIO_LIBRARY:FILEPATH=PORTAUDIO_LIBRARY-NOTFOUND
+
+//The PulseAudio include directory
+PULSEAUDIO_INCLUDE_DIR:PATH=PULSEAUDIO_INCLUDE_DIR-NOTFOUND
+
+//The PulseAudio library
+PULSEAUDIO_LIBRARY:FILEPATH=PULSEAUDIO_LIBRARY-NOTFOUND
+
+//Path to a library.
+SDL2MAIN_LIBRARY:FILEPATH=SDL2MAIN_LIBRARY-NOTFOUND
+
+//Path to a library.
+SDL2_CORE_LIBRARY:FILEPATH=SDL2_CORE_LIBRARY-NOTFOUND
+
+//Path to a file.
+SDL2_INCLUDE_DIR:PATH=SDL2_INCLUDE_DIR-NOTFOUND
+
+//The SoundIO include directory
+SOUNDIO_INCLUDE_DIR:PATH=SOUNDIO_INCLUDE_DIR-NOTFOUND
+
+//The SoundIO library
+SOUNDIO_LIBRARY:FILEPATH=SOUNDIO_LIBRARY-NOTFOUND
 
 //Value Computed by CMake
 TGON_BINARY_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin
 
 //Dependencies for the target
-TGON_LIB_DEPENDS:STATIC=general;glew;general;freetype;
+TGON_LIB_DEPENDS:STATIC=general;glew;general;freetype;general;OpenAL;general;common;
 
 //Value Computed by CMake
 TGON_SOURCE_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON
+
+//Path to a library.
+WINMM_LIBRARY:FILEPATH=C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/WinMM.Lib
 
 //Path to a file.
 ZLIB_INCLUDE_DIR:PATH=ZLIB_INCLUDE_DIR-NOTFOUND
@@ -302,11 +511,23 @@ glew_BINARY_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Sou
 //Value Computed by CMake
 glew_SOURCE_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/glew-2.1.0
 
+//Value Computed by CMake
+zlib_BINARY_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/zlib-1.2.11
+
+//Value Computed by CMake
+zlib_SOURCE_DIR:STATIC=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/zlib-1.2.11
+
 
 ########################
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: ALSA_INCLUDE_DIR
+ALSA_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ALSA_LIBRARY
+ALSA_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: AUDIOIO_INCLUDE_DIR
+AUDIOIO_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: BZIP2_INCLUDE_DIR
 BZIP2_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: BZIP2_LIBRARY_DEBUG
@@ -373,6 +594,8 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=C:/Program Files (x86)/Microsoft Visual Studio
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON
@@ -423,7 +646,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER
@@ -471,10 +694,122 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 CPACK_SOURCE_7Z-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CPACK_SOURCE_ZIP
 CPACK_SOURCE_ZIP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DSOUND_INCLUDE_DIR
+DSOUND_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DSOUND_LIBRARY
+DSOUND_LIBRARY-ADVANCED:INTERNAL=1
+//Details about finding DSound
+FIND_PACKAGE_MESSAGE_DETAILS_DSound:INTERNAL=[C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/dsound.lib][C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/um][v()]
+//Details about finding Git
+FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[C:/Users/ggomdyu/AppData/Local/Atlassian/SourceTree/git_local/bin/git.exe][v2.21.0.windows.1()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//Details about finding WindowsSDK
+FIND_PACKAGE_MESSAGE_DETAILS_WindowsSDK:INTERNAL=[C:/Program Files (x86)/Windows Kits/10][v()]
+//ADVANCED property for variable: GIT_EXECUTABLE
+GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: HARFBUZZ_INCLUDE_DIRS
 HARFBUZZ_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: HARFBUZZ_LIBRARIES
 HARFBUZZ_LIBRARIES-ADVANCED:INTERNAL=1
+//Have include arm_neon.h
+HAVE_ARM_NEON_H:INTERNAL=
+//Test HAVE_BITSCANFORWARD64_INTRINSIC
+HAVE_BITSCANFORWARD64_INTRINSIC:INTERNAL=1
+//Test HAVE_BITSCANFORWARD_INTRINSIC
+HAVE_BITSCANFORWARD_INTRINSIC:INTERNAL=1
+//Have include cpuid.h
+HAVE_CPUID_H:INTERNAL=
+//Test HAVE_CPUID_INTRINSIC
+HAVE_CPUID_INTRINSIC:INTERNAL=1
+//Have include dirent.h
+HAVE_DIRENT_H:INTERNAL=
+//Have include dlfcn.h
+HAVE_DLFCN_H:INTERNAL=
+//Have include emmintrin.h
+HAVE_EMMINTRIN_H:INTERNAL=1
+//Have function fseeko
+HAVE_FSEEKO:INTERNAL=
+//Test HAVE_GCC_FORMAT
+HAVE_GCC_FORMAT:INTERNAL=
+//Have symbol getopt
+HAVE_GETOPT:INTERNAL=
+//Have include guiddef.h
+HAVE_GUIDDEF_H:INTERNAL=1
+//Have include intrin.h
+HAVE_INTRIN_H:INTERNAL=1
+//Test HAVE_LIBATOMIC
+HAVE_LIBATOMIC:INTERNAL=
+//Have library dl
+HAVE_LIBDL:INTERNAL=
+//Have library log
+HAVE_LIBLOG:INTERNAL=
+//Have library m
+HAVE_LIBM:INTERNAL=
+//Have library rt
+HAVE_LIBRT:INTERNAL=
+//Have include malloc.h
+HAVE_MALLOC_H:INTERNAL=1
+//Test HAVE_MFPU_NEON_SWITCH
+HAVE_MFPU_NEON_SWITCH:INTERNAL=
+//Have include mmdeviceapi.h
+HAVE_MMDEVICEAPI_H:INTERNAL=1
+//Have include windows.h;mmsystem.h
+HAVE_MMSYSTEM_H:INTERNAL=1
+//Test HAVE_MSSE2_SWITCH
+HAVE_MSSE2_SWITCH:INTERNAL=
+//Test HAVE_MSSE3_SWITCH
+HAVE_MSSE3_SWITCH:INTERNAL=
+//Test HAVE_MSSE4_1_SWITCH
+HAVE_MSSE4_1_SWITCH:INTERNAL=
+//Result of TRY_COMPILE
+HAVE_OFF64_T:INTERNAL=FALSE
+//Test HAVE_PERMISSIVE_SWITCH
+HAVE_PERMISSIVE_SWITCH:INTERNAL=1
+//Have include pmmintrin.h
+HAVE_PMMINTRIN_H:INTERNAL=1
+//Have symbol posix_memalign
+HAVE_POSIX_MEMALIGN:INTERNAL=
+//Have symbol proc_pidpath
+HAVE_PROC_PIDPATH:INTERNAL=
+//Result of TRY_COMPILE
+HAVE_SIZEOF_LONG:INTERNAL=TRUE
+//Have include smmintrin.h
+HAVE_SMMINTRIN_H:INTERNAL=1
+//Test HAVE_SSE_INTRINSICS
+HAVE_SSE_INTRINSICS:INTERNAL=1
+//Have function stat
+HAVE_STAT:INTERNAL=1
+//Have include stddef.h
+HAVE_STDDEF_H:INTERNAL=1
+//Have include stdint.h
+HAVE_STDINT_H:INTERNAL=1
+//Have include sys/sysconf.h
+HAVE_SYS_SYSCONF_H:INTERNAL=
+//Have include sys/types.h
+HAVE_SYS_TYPES_H:INTERNAL=1
+//Have include xmmintrin.h
+HAVE_XMMINTRIN_H:INTERNAL=1
+//Have symbol _aligned_malloc
+HAVE__ALIGNED_MALLOC:INTERNAL=1
+//Test HAVE___RESTRICT
+HAVE___RESTRICT:INTERNAL=1
+//ADVANCED property for variable: JACK_INCLUDE_DIR
+JACK_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: JACK_LIBRARY
+JACK_LIBRARY-ADVANCED:INTERNAL=1
+//CHECK_TYPE_SIZE: off64_t unknown
+OFF64_T:INTERNAL=
+//ADVANCED property for variable: OPENSL_ANDROID_INCLUDE_DIR
+OPENSL_ANDROID_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENSL_INCLUDE_DIR
+OPENSL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENSL_LIBRARY
+OPENSL_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OSS_INCLUDE_DIR
+OSS_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OSS_LIBRARY
+OSS_LIBRARY-ADVANCED:INTERNAL=1
 PC_HARFBUZZ_CFLAGS:INTERNAL=
 PC_HARFBUZZ_CFLAGS_I:INTERNAL=
 PC_HARFBUZZ_CFLAGS_OTHER:INTERNAL=
@@ -498,13 +833,33 @@ PC_HARFBUZZ_STATIC_LIBS_PATHS:INTERNAL=
 PC_HARFBUZZ_VERSION:INTERNAL=
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PORTAUDIO_INCLUDE_DIR
+PORTAUDIO_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PORTAUDIO_LIBRARY
+PORTAUDIO_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PULSEAUDIO_INCLUDE_DIR
+PULSEAUDIO_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PULSEAUDIO_LIBRARY
+PULSEAUDIO_LIBRARY-ADVANCED:INTERNAL=1
+//CHECK_TYPE_SIZE: sizeof(long)
+SIZEOF_LONG:INTERNAL=4
+//ADVANCED property for variable: SOUNDIO_INCLUDE_DIR
+SOUNDIO_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SOUNDIO_LIBRARY
+SOUNDIO_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_INCLUDE_DIR
 ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_DEBUG
 ZLIB_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_RELEASE
 ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//Have include unistd.h
+Z_HAVE_UNISTD_H:INTERNAL=
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/TGON
+_WINDOWSSDK_VISTAONLY_PESTERED:INTERNAL=ON
 __pkg_config_checked_PC_HARFBUZZ:INTERNAL=1
+_win_sdk_buildsanddirs:INTERNAL=10.0.18362;C:/Program Files (x86)/Windows Kits/10
+_win_sdk_dirs:INTERNAL=C:/Program Files (x86)/Windows Kits/10
+_win_sdk_versanddirs:INTERNAL=Windows SDK v10.0 (Microsoft Windows SDK for Windows 10.0.18362);C:/Program Files (x86)/Windows Kits/10
 

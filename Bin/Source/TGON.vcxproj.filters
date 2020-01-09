@@ -558,6 +558,30 @@
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\TGON.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\DirectoryTest.h">
+      <Filter>Source\Test\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\FileStreamTest.h">
+      <Filter>Source\Test\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\FileTest.h">
+      <Filter>Source\Test\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\IO\PathTest.h">
+      <Filter>Source\Test\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Platform\EnvironmentTest.h">
+      <Filter>Source\Test\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\String\FixedStringTest.h">
+      <Filter>Source\Test\String</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Test.h">
+      <Filter>Source\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Test\Time\DateTimeTest.h">
+      <Filter>Source\Test\Time</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\Text\Encoding.h">
       <Filter>Source\Text</Filter>
     </ClInclude>
@@ -694,6 +718,21 @@
     </Filter>
     <Filter Include="Source\Random">
       <UniqueIdentifier>{C7F9CE4F-FF95-389C-8148-747516CBD2E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test">
+      <UniqueIdentifier>{24B56AEA-4DF1-3BA7-84A1-139CB7D76A89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\IO">
+      <UniqueIdentifier>{75D1DFB5-560F-3D45-BA37-FD29641D3613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Platform">
+      <UniqueIdentifier>{AD04D017-B173-3BFB-B4B3-B6D22F4EF385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\String">
+      <UniqueIdentifier>{CF26D42E-8D04-37A4-A23B-7AC0183E112F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test\Time">
+      <UniqueIdentifier>{BD592D80-ED59-38C6-9B05-F2BA6D125796}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Text">
       <UniqueIdentifier>{252641B4-DF6A-36CD-B7C7-CA5A40625F83}</UniqueIdentifier>

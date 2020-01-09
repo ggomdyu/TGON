@@ -46,7 +46,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
         message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Debug/gainput-d.lib")
+file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/RelWithDebInfo/Debug/gainput-d.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
      "C:/Program Files (x86)/TGON/lib/gainput.lib")
@@ -56,7 +56,7 @@ file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY F
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
         message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Release/gainput.lib")
+file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/RelWithDebInfo/Release/gainput.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
      "C:/Program Files (x86)/TGON/lib/gainput.lib")
@@ -66,7 +66,7 @@ file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY F
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
         message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/MinSizeRel/gainput.lib")
+file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/RelWithDebInfo/MinSizeRel/gainput.lib")
   elseif("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
     list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
      "C:/Program Files (x86)/TGON/lib/gainput.lib")
@@ -76,7 +76,7 @@ file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY F
     if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
         message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
     endif()
-file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/RelWithDebInfo/gainput.lib")
+file(INSTALL DESTINATION "C:/Program Files (x86)/TGON/lib" TYPE STATIC_LIBRARY FILES "C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/RelWithDebInfo/RelWithDebInfo/gainput.lib")
   endif()
 endif()
 

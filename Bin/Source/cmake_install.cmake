@@ -37,6 +37,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/glew-2.1.0/cmake_install.cmake")
   include("C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/freetype-2.10.1/cmake_install.cmake")
   include("C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/gainput-1.0.0/cmake_install.cmake")
+  include("C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/zlib-1.2.11/cmake_install.cmake")
+  include("C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0/cmake_install.cmake")
 
 endif()
 

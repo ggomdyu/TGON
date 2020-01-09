@@ -219,7 +219,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\glew-2.1.0\ALL_BUILD.vcxproj">
+    <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\zlib-1.2.11\ALL_BUILD.vcxproj">
       <Project>{33D94BFC-5975-3F5C-B03E-D52FC6316C05}</Project>
       <Name>ALL_BUILD</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
