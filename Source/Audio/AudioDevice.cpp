@@ -25,8 +25,8 @@ AudioDevice::AudioDevice() :
 }
 
 AudioDevice::AudioDevice(AudioDevice&& rhs) noexcept :
-    m_context(rhs.m_context),
-    m_device(rhs.m_device)
+    m_device(rhs.m_device),
+    m_context(rhs.m_context)
 {
     rhs.m_context = nullptr;
     rhs.m_device = nullptr;

@@ -137,11 +137,11 @@ void OpenGLTexture::UpdateTexParameters()
 Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
     OpenGLTexture(),
     m_isUseMipmap(isUseMipmap),
+    m_isDynamicUsage(isDynamicUsage),
     m_pixelFormat(pixelFormat),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
-    m_size(size),
-    m_isDynamicUsage(isDynamicUsage)
+    m_size(size)
 {
     this->SetData(imageData, size, pixelFormat);
 }

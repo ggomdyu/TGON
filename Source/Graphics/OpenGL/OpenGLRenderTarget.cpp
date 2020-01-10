@@ -11,8 +11,8 @@ namespace tgon
 OpenGLRenderTarget::OpenGLRenderTarget(float width, float height, int32_t depthBits) :
     m_width(width),
     m_height(height),
-    m_frameBufferHandle(this->CreateFrameBuffer()),
     m_colorBufferHandle(this->CreateColorBuffer(m_width, m_height)),
+    m_frameBufferHandle(this->CreateFrameBuffer()),
     m_depthStencilBufferHandle(this->CreateDepthStencilBuffer(m_width, m_height, depthBits))
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);

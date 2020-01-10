@@ -11,7 +11,7 @@ MacOSInputManager::MacOSInputManager(const Window& inputTargetWindow) :
 }
 
 MacOSInputManager::MacOSInputManager(MacOSInputManager&& rhs) noexcept :
-    m_inputManager(std::move(m_inputManager))
+    m_inputManager(std::move(rhs.m_inputManager))
 {
 }
 

@@ -29,7 +29,7 @@ bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
         m_filterMode == rhs.m_filterMode &&
         m_wrapMode == rhs.m_wrapMode &&
         m_blendMode == rhs.m_blendMode &&
-        m_enableScissorRect == m_enableScissorRect &&
+        m_enableScissorRect == rhs.m_enableScissorRect &&
         m_scissorRect == rhs.m_scissorRect)
     {
         return true;

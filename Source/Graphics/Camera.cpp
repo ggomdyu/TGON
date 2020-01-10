@@ -15,6 +15,8 @@ Camera::Camera(ProjectionMode projectionMode, float nearZ, float farZ) noexcept 
 {
 }
 
+Camera::~Camera() = default;
+
 void Camera::SetNearZ(float nearZ) noexcept
 {
     m_nearZ = nearZ;

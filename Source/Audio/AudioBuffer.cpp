@@ -64,8 +64,8 @@ AudioBuffer::AudioBuffer(const gsl::span<const std::byte>& fileData) :
 }
 
 AudioBuffer::AudioBuffer(AudioBuffer&& rhs) :
-    m_audioData(std::move(rhs.m_audioData)),
     m_alBufferId(rhs.m_alBufferId),
+    m_audioData(std::move(rhs.m_audioData)),
     m_audioDataBytes(rhs.m_audioDataBytes),
     m_bitsPerSample(rhs.m_bitsPerSample),
     m_channels(rhs.m_channels),

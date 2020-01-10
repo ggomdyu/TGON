@@ -7,7 +7,7 @@
 
 #include "Platform/Window.h"
 
-#include "OpenGLContext.h"
+#include "../OpenGLContext.h"
 
 namespace tgon
 {

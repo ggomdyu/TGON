@@ -23,6 +23,10 @@ class Camera
 public:
     Camera(ProjectionMode projectionMode, float nearZ, float farZ) noexcept;
 
+/**@section Destructor */
+public:
+    virtual ~Camera() = 0;
+    
 /**@section Method */
 public:
     virtual void Update() = 0;

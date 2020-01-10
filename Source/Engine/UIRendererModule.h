@@ -36,7 +36,7 @@ public:
     int32_t GetMaxSortingLayer() const noexcept;
     std::shared_ptr<Graphics> GetGraphics() noexcept;
     std::shared_ptr<const Graphics> GetGraphics() const noexcept;
-    void Update();
+    void Update() override;
     void Draw();
 
 private:
