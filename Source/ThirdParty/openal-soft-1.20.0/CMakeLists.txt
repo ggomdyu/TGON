@@ -1085,7 +1085,7 @@ ELSE()
         VERBATIM
     )
 ENDIF()
-ADD_CUSTOM_TARGET(native-tools
+ADD_CUSTOM_TARGET(OpenAL-native-tools
     DEPENDS "${BIN2H_COMMAND}" "${BSINCGEN_COMMAND}"
     VERBATIM
 )
@@ -1098,7 +1098,7 @@ if(ALSOFT_EMBED_HRTF_DATA)
 
         ADD_CUSTOM_COMMAND(OUTPUT "${outfile}"
             COMMAND "${BIN2H_COMMAND}" "${infile}" "${outfile}" ${VARNAME}
-            DEPENDS native-tools "${infile}"
+            DEPENDS OpenAL-native-tools "${infile}"
             VERBATIM
         )
         SET(ALC_OBJS  ${ALC_OBJS} "${outfile}")
@@ -1110,7 +1110,7 @@ endif()
 
 ADD_CUSTOM_COMMAND(OUTPUT "${OpenAL_BINARY_DIR}/bsinc_inc.h"
     COMMAND "${BSINCGEN_COMMAND}" "${OpenAL_BINARY_DIR}/bsinc_inc.h"
-    DEPENDS native-tools "${NATIVE_SRC_DIR}/bsincgen.c"
+    DEPENDS OpenAL-native-tools "${NATIVE_SRC_DIR}/bsincgen.c"
     VERBATIM
 )
 SET(ALC_OBJS  ${ALC_OBJS} "${OpenAL_BINARY_DIR}/bsinc_inc.h")

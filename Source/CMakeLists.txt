@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.8)
 
-function (init_project)
+function (init_tgon)
 	set(GLOB_AGRUMENTS *.cpp *.h)
 
 	if (APPLE)
@@ -54,32 +54,26 @@ function (init_project)
 
 	add_library(TGON ${SRC_PATH_LIST})
 	source_group(TREE ${TGON_PATH} FILES ${SRC_PATH_LIST})
+
+    init_tgon_include_directory()
 endfunction ()
 
-function (init_subproject)
-	add_subdirectory(ThirdParty/glew-2.1.0)
-	add_subdirectory(ThirdParty/freetype-2.10.1)
-	add_subdirectory(ThirdParty/gainput-1.0.0)
-	add_subdirectory(ThirdParty/zlib-1.2.11)
-	add_subdirectory(ThirdParty/openal-soft-1.20.0)
-endfunction ()
-
-function (init_project_include_directory)
+function (init_tgon_include_directory)
 	set(TGON_INCLUDE_PATH_LIST
-		ThirdParty/gainput-1.0.0/lib/include
+		${CMAKE_CURRENT_SOURCE_DIR}
+		ThirdParty/assimp-4.1.0/include
 		ThirdParty/fmt-6.1.2/include
+		ThirdParty/gainput-1.0.0/lib/include
+		ThirdParty/GSL-2.0.0/include
+		ThirdParty/icu4c-64_2/icu/source/common
+		ThirdParty/icu4c-64_2/icu/source/i18n
+		ThirdParty/libiconv-1.9.2/include
 		ThirdParty/openal-soft-1.20.0
 		ThirdParty/openal-soft-1.20.0/alc
 		ThirdParty/openal-soft-1.20.0/common
 		ThirdParty/openal-soft-1.20.0/include
-		ThirdParty/zlib-1.2.11
-		ThirdParty/icu4c-64_2/icu/source/i18n
-		ThirdParty/icu4c-64_2/icu/source/common
-		ThirdParty/GSL-2.0.0/include
-		ThirdParty/assimp-4.1.0/include
-		ThirdParty/libiconv-1.9.2/include
 		ThirdParty/stb
-		${CMAKE_CURRENT_SOURCE_DIR}
+		ThirdParty/zlib-1.2.11
 	)
 	if (WIN32)
 		list(APPEND TGON_INCLUDE_PATH_LIST $ENV{DXSDK_DIR}/Include)
@@ -88,11 +82,23 @@ function (init_project_include_directory)
 	target_include_directories(TGON PUBLIC ${TGON_INCLUDE_PATH_LIST})
 endfunction ()
 
-function (init_subproject_properties)
+function (init_thirdparty)
+	add_subdirectory(ThirdParty/glew-2.1.0)
+	add_subdirectory(ThirdParty/freetype-2.10.1)
+	add_subdirectory(ThirdParty/gainput-1.0.0)
+	add_subdirectory(ThirdParty/zlib-1.2.11)
+	add_subdirectory(ThirdParty/openal-soft-1.20.0)
+	add_subdirectory(ThirdParty/icu4c-64_2/icu)
+
+    init_thirdparty_properties()
+endfunction ()
+
+function (init_thirdparty_properties)
 	target_compile_definitions(glew PUBLIC GLEW_STATIC)
 	target_compile_definitions(freetype PUBLIC FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY)
 	target_compile_definitions(OpenAL PUBLIC AL_BUILD_LIBRARY AL_ALEXT_PROTOTYPES OpenAL_EXPORTS)
 	target_compile_definitions(OpenAL-common PUBLIC AL_BUILD_LIBRARY AL_ALEXT_PROTOTYPES OpenAL_EXPORTS)
+	target_compile_definitions(icu PUBLIC U_STATIC_IMPLEMENTATION U_COMMON_IMPLEMENTATION U_I18N_IMPLEMENTATION)
 	
 	set_target_properties(gainput PROPERTIES FOLDER ThirdParty)
 	set_target_properties(glew PROPERTIES FOLDER ThirdParty)
@@ -100,13 +106,11 @@ function (init_subproject_properties)
 	set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
 	set_target_properties(OpenAL PROPERTIES FOLDER ThirdParty)
 	set_target_properties(OpenAL-common PROPERTIES FOLDER ThirdParty)
-	set_target_properties(native-tools PROPERTIES FOLDER ThirdParty)
+	set_target_properties(OpenAL-native-tools PROPERTIES FOLDER ThirdParty)
+	set_target_properties(icu PROPERTIES FOLDER ThirdParty)
 endfunction ()
 
-init_project()
-init_project_include_directory()
+init_tgon()
+init_thirdparty()
 
-init_subproject()
-init_subproject_properties()
-
-target_link_libraries(TGON PRIVATE glew freetype OpenAL common)
+target_link_libraries(TGON PRIVATE glew freetype OpenAL common icu)

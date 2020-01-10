@@ -4,9 +4,6 @@ project(TGON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS ON)
 set(TGON_PATH ${CMAKE_CURRENT_LIST_DIR})
 set(TGON_SOURCE_PATH ${TGON_PATH}/Source)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
@@ -30,16 +27,28 @@ else ()
     message(FATAL_ERROR "Not supported platform!")
 endif ()
 
-function (init_subproject)
-    add_subdirectory(${TGON_SOURCE_PATH})
+function (init_global_properties)
+    if (WIN32)
+        add_definitions(-DUNICODE -D_UNICODE)
+    endif ()
 endfunction ()
 
-function (init_project_properties)
-    if (WIN32)
-        target_compile_definitions(TGON PRIVATE UNICODE _UNICODE)
-    endif ()
+function (init_tgon)
+    add_subdirectory(${TGON_SOURCE_PATH})
+    init_tgon_properties()
+endfunction ()
 
-    target_compile_definitions(TGON PRIVATE TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1)
+function (init_tgon_properties)
+    set_target_properties(TGON PROPERTIES
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED YES
+        CXX_EXTENSIONS NO
+    )
+
+    target_compile_definitions(TGON PRIVATE 
+        TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 
+        TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1
+    )
 
     if (MSVC)
         target_compile_options(TGON PRIVATE
@@ -50,5 +59,5 @@ function (init_project_properties)
     endif()
 endfunction ()
 
-init_subproject()
-init_project_properties()
+init_global_properties()
+init_tgon()
