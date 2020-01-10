@@ -1,0 +1,35 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.16/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckCCompilerFlag.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckCXXCompilerFlag.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckCXXSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckIncludeFiles.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckStructHasMember.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckSymbolExists.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindGit.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/GNUInstallDirs.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/CMakeLists.txt
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindALSA.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindAudioIO.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindDSound.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindJACK.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindOSS.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindOpenSL.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindPortAudio.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindPulseAudio.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindQSA.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindSDL2.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindSoundIO.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/cmake/FindWindowsSDK.cmake
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/config.h.in
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/openal.pc.in
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/version.h.in

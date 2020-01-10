@@ -3,10 +3,10 @@
  * @author  ggomdyu
  * @since   04/20/2018
  */
-
+ 
 #pragma once
 #define STB_VORBIS_HEADER_ONLY
-#include <stb/stb_vorbis.c>
+#include <stb_vorbis.c>
 #include <gsl/span>
 
 #include "Diagnostics/Debug.h"

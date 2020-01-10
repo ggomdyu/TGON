@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <optional>
 #include <memory>
-#include <stb/stb_rect_pack.h>
+#include <stb_rect_pack.h>
 
 #include "Core/NonCopyable.h"
 #include "Math/Rect.h"

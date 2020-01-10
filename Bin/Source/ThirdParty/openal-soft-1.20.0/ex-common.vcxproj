@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CB9F43CA-640D-3D20-BC43-034050F35575}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ex-common</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ex-common.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ex-common</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ex-common.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ex-common</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ex-common.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ex-common</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\RelWithDebInfo\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ex-common.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ex-common</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14640</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4065;4268;4324</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14640</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <DisableSpecificWarnings>4065;4268;4324</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14640</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <DisableSpecificWarnings>4065;4268;4324</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /w14640</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4065;4268;4324</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_WIN32;_WIN32_WINNT=0x0502;_CRT_SECURE_NO_WARNINGS;NOMINMAX;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\common;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON -BC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin --check-stamp-file C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindALSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindAudioIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindDSound.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindJACK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindMySOFA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOSS.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOpenSL.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPortAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPulseAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindQSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSDL2.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSoundIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindWindowsSDK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\config.h.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\openal.pc.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON -BC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin --check-stamp-file C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindALSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindAudioIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindDSound.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindJACK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindMySOFA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOSS.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOpenSL.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPortAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPulseAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindQSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSDL2.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSoundIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindWindowsSDK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\config.h.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\openal.pc.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON -BC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin --check-stamp-file C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindALSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindAudioIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindDSound.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindJACK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindMySOFA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOSS.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOpenSL.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPortAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPulseAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindQSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSDL2.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSoundIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindWindowsSDK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\config.h.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\openal.pc.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/openal-soft-1.20.0/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON -BC:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin --check-stamp-file C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Bin/Source/ThirdParty/openal-soft-1.20.0/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindALSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindAudioIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindDSound.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindJACK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindMySOFA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOSS.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindOpenSL.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPortAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindPulseAudio.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindQSA.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSDL2.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindSoundIO.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\cmake\FindWindowsSDK.cmake;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\config.h.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\openal.pc.in;C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\version.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\examples\common\alhelpers.c" />
+    <ClInclude Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Source\ThirdParty\openal-soft-1.20.0\examples\common\alhelpers.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\ZERO_CHECK.vcxproj">
+      <Project>{D95D7DDE-0C24-3CE8-A63A-B2BF859092C1}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ggomdyu\Desktop\프로그래밍\Git\TGON\Bin\Source\ThirdParty\openal-soft-1.20.0\OpenAL.vcxproj">
+      <Project>{E0CFF817-52CA-338E-AE5F-195A87570800}</Project>
+      <Name>OpenAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,15 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.16/Modules/CPack.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CPackComponent.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindBZip2.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPNG.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindPkgConfig.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/FindZLIB.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-3.16/Modules/SelectLibraryConfigurations.cmake
+C:/Program Files/CMake/share/cmake-3.16/Templates/CPackConfig.cmake.in
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/freetype-2.10.1/CMakeLists.txt
+C:/Users/ggomdyu/Desktop/프로그래밍/Git/TGON/Source/ThirdParty/freetype-2.10.1/builds/cmake/FindHarfBuzz.cmake
