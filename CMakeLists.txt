@@ -18,9 +18,10 @@ elseif (APPLE)
     set(TGON_GRAPHICS_NAME "OPENGL")
     set(TGON_UNIX_BASE_OS TRUE)
     set(CMAKE_CXX_FLAGS "-x objective-c++")
+    set(TGON_PLATFORM_NAME "MACOS")
     if (IOS)
         set(TGON_PLATFORM_NAME "IOS")
-    elseif ()
+    else ()
         set(TGON_PLATFORM_NAME "MACOS")
     endif ()
 else ()
@@ -45,7 +46,7 @@ function (init_tgon_properties)
         CXX_EXTENSIONS NO
     )
 
-    target_compile_definitions(TGON PRIVATE 
+    target_compile_definitions(TGON PUBLIC 
         TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 
         TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1
     )
