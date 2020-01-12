@@ -43,6 +43,7 @@ function (init_tgon_properties)
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
+        FOLDER TGON
     )
 
     target_compile_definitions(TGON PUBLIC 

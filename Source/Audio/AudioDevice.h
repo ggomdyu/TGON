@@ -21,7 +21,7 @@ class AudioDevice final :
 {
 /**@section Constructor */
 public:
-    AudioDevice() noexcept(false);
+    AudioDevice();
     AudioDevice(AudioDevice&& rhs) noexcept;
 
 /**@section Destructor */

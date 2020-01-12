@@ -24,7 +24,7 @@ enum class AudioFormat
 {
     Unknown,
     Wav,
-    OggVorbis,
+    Vorbis,
     Mp3,
     Flac,
     M4a,
@@ -39,11 +39,11 @@ public:
     AudioBuffer();
     explicit AudioBuffer(const char* filePath);
     explicit AudioBuffer(const gsl::span<const std::byte>& fileData);
-    AudioBuffer(AudioBuffer&& rhs);
+    AudioBuffer(AudioBuffer&& rhs) noexcept;
 
 /**@section Operator */
 public:
-    AudioBuffer& operator=(AudioBuffer&& rhs);
+    AudioBuffer& operator=(AudioBuffer&& rhs) noexcept;
 
 /**@section Destructor */
 public:

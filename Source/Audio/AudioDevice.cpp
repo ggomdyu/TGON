@@ -4,7 +4,9 @@
 
 #include "AudioDevice.h"
 
-#pragma comment(lib, "Winmm.lib")
+#ifdef _MSC_VER
+#   pragma comment(lib, "Winmm.lib")
+#endif
 
 namespace tgon
 {

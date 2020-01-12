@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include "Importer/WavAudioImporter.h"
-#include "Importer/OggVorbisAudioImporter.h"
+#include "Importer/VorbisAudioImporter.h"
 #include "IO/File.h"
 
 #include "AudioBuffer.h"
@@ -63,7 +63,7 @@ AudioBuffer::AudioBuffer(const gsl::span<const std::byte>& fileData) :
     this->Initialize(fileData);
 }
 
-AudioBuffer::AudioBuffer(AudioBuffer&& rhs) :
+AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :
     m_alBufferId(rhs.m_alBufferId),
     m_audioData(std::move(rhs.m_audioData)),
     m_audioDataBytes(rhs.m_audioDataBytes),
@@ -85,7 +85,7 @@ AudioBuffer::~AudioBuffer()
     this->Destroy();
 }
 
-AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs)
+AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs) noexcept
 {
     this->Destroy();
     
@@ -143,9 +143,9 @@ bool AudioBuffer::Initialize(const gsl::span<const std::byte>& fileData)
     {
         audioFormat = AudioFormat::Wav;
     }
-    else if (OggVorbisAudioImporter::IsExactFormat(fileData))
+    else if (VorbisAudioImporter::IsExactFormat(fileData))
     {
-        audioFormat = AudioFormat::OggVorbis;
+        audioFormat = AudioFormat::Vorbis;
     }
     else
     {
@@ -210,9 +210,9 @@ bool AudioBuffer::Decode(const gsl::span<const std::byte>& fileData, AudioFormat
         }
         break;
         
-    case AudioFormat::OggVorbis:
+    case AudioFormat::Vorbis:
         {
-            OggVorbisAudioImporter importer;
+            VorbisAudioImporter importer;
             if (importer.Initialize(fileData))
             {
                 m_audioData = std::move(importer.GetAudioData());

@@ -21,6 +21,6 @@
         }\
     }
 #else
-#   define TGON_GL_ERROR_CHECK(expression) expression
+#   define TGON_GL_ERROR_CHECK(expression) expression;
 #endif
 #endif

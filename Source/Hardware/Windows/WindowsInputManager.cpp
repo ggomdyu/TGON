@@ -17,22 +17,17 @@ WindowsInputManager::WindowsInputManager(WindowsInputManager&& rhs) noexcept :
 
 gainput::InputDeviceMouse* WindowsInputManager::CreateNativeMouse()
 {
-    return m_inputManager->CreateAndGetDevice<gainput::InputDeviceMouse>();
+    return nullptr;//m_inputManager->CreateAndGetDevice<gainput::InputDeviceMouse>();
 }
 
 gainput::InputDeviceKeyboard* WindowsInputManager::CreateNativeKeyboard()
 {
-    return m_inputManager->CreateAndGetDevice<gainput::InputDeviceKeyboard>();
-}
-
-gainput::InputDevicePad* WindowsInputManager::CreateNativeGamepad()
-{
-    return m_inputManager->CreateAndGetDevice<gainput::InputDevicePad>();
+    return nullptr;//m_inputManager->CreateAndGetDevice<gainput::InputDeviceKeyboard>();
 }
 
 void InputManager::Update()
 {
-    m_inputManager->Update();
+    //m_inputManager->Update();
 }
 
 } /* namespace tgon */

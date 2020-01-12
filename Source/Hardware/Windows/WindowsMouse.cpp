@@ -37,47 +37,50 @@ void Mouse::GetPosition(int32_t* x, int32_t* y)
 
 bool Mouse::IsMouseDown(MouseCode mouseCode) const
 {
-    auto castedMouseCode = UnderlyingCast(mouseCode);
-    
-    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) == false &&
-        m_nativeMouse->GetBool(castedMouseCode))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
+    //auto castedMouseCode = UnderlyingCast(mouseCode);
+    //
+    //if (m_nativeMouse->GetBoolPrevious(castedMouseCode) == false &&
+    //    m_nativeMouse->GetBool(castedMouseCode))
+    //{
+    //    return true;
+    //}
+    //else
+    //{
+    //    return false;
+    //}
 }
     
 bool Mouse::IsMouseHold(MouseCode mouseCode) const
 {
-    auto castedMouseCode = UnderlyingCast(mouseCode);
-    
-    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
-        m_nativeMouse->GetBool(castedMouseCode))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
+    //auto castedMouseCode = UnderlyingCast(mouseCode);
+    //
+    //if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
+    //    m_nativeMouse->GetBool(castedMouseCode))
+    //{
+    //    return true;
+    //}
+    //else
+    //{
+    //    return false;
+    //}
 }
 
 bool Mouse::IsMouseUp(MouseCode mouseCode) const
 {
-    auto castedMouseCode = UnderlyingCast(mouseCode);
-    
-    if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
-        m_nativeMouse->GetBool(castedMouseCode) == false)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
+    //auto castedMouseCode = UnderlyingCast(mouseCode);
+    //
+    //if (m_nativeMouse->GetBoolPrevious(castedMouseCode) &&
+    //    m_nativeMouse->GetBool(castedMouseCode) == false)
+    //{
+    //    return true;
+    //}
+    //else
+    //{
+    //    return false;
+    //}
 }
 
 } /* namespace tgon */

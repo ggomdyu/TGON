@@ -57,6 +57,7 @@ FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileS
     if (m_nativeHandle == INVALID_HANDLE_VALUE)
     {
         Debug::WriteLine("Could not create the file handle.");
+        return;
     }
 
     if (GetFileType(m_nativeHandle) != FILE_TYPE_DISK)

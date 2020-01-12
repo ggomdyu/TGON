@@ -25,7 +25,6 @@ public:
 public:
     gainput::InputDeviceMouse* CreateNativeMouse();
     gainput::InputDeviceKeyboard* CreateNativeKeyboard();
-    gainput::InputDevicePad* CreateNativeGamepad();
 
 /**@section Variable */
 protected:

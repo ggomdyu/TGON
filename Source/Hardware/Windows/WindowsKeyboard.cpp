@@ -33,20 +33,23 @@ void Keyboard::Update()
     
 bool Keyboard::IsKeyDown(KeyCode keyCode) const
 {
-    auto castedKeyCode = UnderlyingCast(keyCode);
-    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) == false && m_nativeKeyboard->GetBool(castedKeyCode);
+    return false;
+    //auto castedKeyCode = UnderlyingCast(keyCode);
+    //return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) == false && m_nativeKeyboard->GetBool(castedKeyCode);
 }
     
 bool Keyboard::IsKeyHold(KeyCode keyCode) const
 {
-    auto castedKeyCode = UnderlyingCast(keyCode);
-    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode);
+    return false;
+    //auto castedKeyCode = UnderlyingCast(keyCode);
+    //return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode);
 }
     
 bool Keyboard::IsKeyUp(KeyCode keyCode) const
 {
-    auto castedKeyCode = UnderlyingCast(keyCode);
-    return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode) == false;
+    return false;
+    //auto castedKeyCode = UnderlyingCast(keyCode);
+    //return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode) == false;
 }
     
 } /* namespace tgon */

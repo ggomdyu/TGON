@@ -34,8 +34,6 @@ public:
     std::shared_ptr<const Mouse> GetMouse() const noexcept;
     std::shared_ptr<Keyboard> GetKeyboard() noexcept;
     std::shared_ptr<const Keyboard> GetKeyboard() const noexcept;
-    std::shared_ptr<Gamepad> GetGamepad() noexcept;
-    std::shared_ptr<const Gamepad> GetGamepad() const noexcept;
     void Update() override;
     
 /**@section Variable */
@@ -43,7 +41,6 @@ public:
     InputManager m_inputManager;
     std::shared_ptr<Keyboard> m_keyboard;
     std::shared_ptr<Mouse> m_mouse;
-    std::shared_ptr<Gamepad> m_gamepad;
 };
 
 } /* namespace tgon */
