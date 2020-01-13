@@ -6,3 +6,6 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <fmt/format.h>
+#include <AL/al.h>
+#include <AL/alc.h>

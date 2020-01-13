@@ -5,33 +5,36 @@
  */
 
 #pragma once
-//#if TGON_PLATFORM_WINDOWS
-//#   include "Windows/WindowsGamepad.h"
-//#elif TGON_PLATFORM_MACOS
-//#   include "MacOS/MacOSGamepad.h"
-//#endif
-//
-//#include "InputManager.h"
-//
-//namespace tgon
-//{
-//
-//class Gamepad :
-//    private PlatformGamepad
-//{
-///**@section Constructor */
-//public:
-//    explicit Gamepad(InputManager& inputManager);
-//
-///**@section Method */
-//public:
-//    PlatformGamepad& GetPlatformDependency() noexcept;
-//    const PlatformGamepad& GetPlatformDependency() const noexcept;
-//    void Update();
-//    void Vibrate(float leftMotor, float rightMotor);
-//    bool IsButtonDown(int32_t buttonNumber) const;
-//    bool IsButtonHold(int32_t buttonNumber) const;
-//    bool IsButtonUp(int32_t buttonNumber) const;
-//};
-//    
-//} /* namespace tgon */
+#include <gainput/gainput.h>
+
+#include "Core/NonCopyable.h"
+
+namespace tgon
+{
+
+class Gamepad final :
+    private NonCopyable
+{
+/**@section Constructor */
+public:
+    explicit Gamepad(gainput::InputDevicePad* nativeGamePad) noexcept;
+    Gamepad(Gamepad&& rhs) noexcept;
+    
+/**@section Operator */
+public:
+    Gamepad& operator=(Gamepad&& rhs) noexcept;
+
+/**@section Method */
+public:
+    void Update();
+    void Vibrate(float leftMotor, float rightMotor);
+    bool IsButtonDown(int32_t buttonNumber) const;
+    bool IsButtonHold(int32_t buttonNumber) const;
+    bool IsButtonUp(int32_t buttonNumber) const;
+
+/**@section Variable */
+private:
+    gainput::InputDevicePad* m_nativeGamepad;
+};
+    
+} /* namespace tgon */

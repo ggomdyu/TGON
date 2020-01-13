@@ -11,13 +11,12 @@
 namespace tgon
 {
     
-UIBatch::UIBatch(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, int32_t vertexStartOffset) noexcept :
+UIBatch::UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, int32_t vertexStartOffset) noexcept :
+    m_material(material),
     m_texture(texture),
     m_filterMode(filterMode),
     m_wrapMode(wrapMode),
     m_blendMode(blendMode),
-    m_enableScissorRect(enableScissorRect),
-    m_scissorRect(scissorRect),
     m_vertexStartOffset(vertexStartOffset),
     m_vertexEndOffset(vertexStartOffset)
 {
@@ -26,11 +25,10 @@ UIBatch::UIBatch(const std::shared_ptr<Texture>& texture, FilterMode filterMode,
 bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
 {
     if (m_texture == rhs.m_texture &&
+        m_material == rhs.m_material &&
         m_filterMode == rhs.m_filterMode &&
         m_wrapMode == rhs.m_wrapMode &&
-        m_blendMode == rhs.m_blendMode &&
-        m_enableScissorRect == rhs.m_enableScissorRect &&
-        m_scissorRect == rhs.m_scissorRect)
+        m_blendMode == rhs.m_blendMode)
     {
         return true;
     }
@@ -40,16 +38,7 @@ bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
     
 void UIBatch::FlushBatch(Graphics& graphics)
 {
-    if (m_enableScissorRect)
-    {
-        graphics.EnableScissorTest();
-        graphics.SetScissorRect(m_scissorRect);
-    }
-    else
-    {
-        graphics.DisableScissorTest();
-    }
-
+    m_material->Use();
     m_texture->Use();
     
     graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_C4F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_C4F_T2F) / 4));
@@ -73,16 +62,6 @@ FilterMode UIBatch::GetFilterMode() const noexcept
 BlendMode UIBatch::GetBlendMode() const noexcept
 {
     return m_blendMode;
-}
-
-bool UIBatch::IsEnableScissorRect() const noexcept
-{
-    return m_enableScissorRect;
-}
-
-const FRect& UIBatch::GetScissorRect() const noexcept
-{
-    return m_scissorRect;
 }
 
 void UIBatch::Merge(float x, float y, const FRect& textureRect, const Vector2& pivot, const Color4f& blendColor, const Matrix4x4& matWorld, std::vector<float>* vertices)

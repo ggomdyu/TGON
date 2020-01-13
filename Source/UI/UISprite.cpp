@@ -109,7 +109,7 @@ const Vector2& UISprite::GetPivot() const noexcept
 
 void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_texture, m_filterMode, m_wrapMode, m_blendMode, m_enableScissorRect, m_scissorRect, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_material, m_texture, m_filterMode, m_wrapMode, m_blendMode, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);

@@ -9,9 +9,9 @@
 
 #include "Math/Color.h"
 #include "Math/Rect.h"
+#include "Graphics/FontAtlas.h"
 
 #include "UIElement.h"
-#include "FontAtlas.h"
 
 namespace tgon
 {

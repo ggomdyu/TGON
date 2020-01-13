@@ -20,7 +20,10 @@ Engine::Engine(const EngineConfig& enfingConfig) noexcept :
 {
 }
 
-Engine::~Engine() = default;
+Engine::~Engine()
+{
+    this->Destroy();
+}
 
 void Engine::Initialize()
 {
@@ -29,11 +32,9 @@ void Engine::Initialize()
     this->AddModule<AudioModule>();
     this->AddModule<TimeModule>();
     this->AddModule<TimerModule>();
+    this->AddModule<InputModule>(m_engineConfig.inputMode);
 
-    decltype(auto) rootWindow = Application::GetInstance().GetRootWindow();
-    this->AddModule<InputModule>(*rootWindow, m_engineConfig.inputMode);
-
-    auto graphics = std::make_shared<Graphics>(*rootWindow, m_engineConfig.videoMode);
+    auto graphics = std::make_shared<Graphics>(*Application::GetInstance().GetRootWindow(), m_engineConfig.videoMode);
     this->AddModule<UIRendererModule>(graphics);
 
     this->AddModule<SceneModule>();

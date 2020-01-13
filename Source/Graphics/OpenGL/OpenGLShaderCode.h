@@ -103,6 +103,30 @@ void main()                                                                     
 }                                                                                   \n\
 ";
 
+constexpr const char g_scissorFrag[] =
+"                                                                                   \n\
+#version 330 core                                                                   \n\
+                                                                                    \n\
+in vec4 fragColor;                                                                  \n\
+in vec2 fragUV;                                                                     \n\
+out vec4 outColor;                                                                  \n\
+                                                                                    \n\
+uniform vec4 clipUV;                                                                \n\
+uniform sampler2D textureSampler;                                                   \n\
+                                                                                    \n\
+void main()                                                                         \n\
+{                                                                                   \n\
+    if (fragUV.x < clipUV.x || fragUV.x > clipUV.z || fragUV.y < clipUV.y || fragUV.y > clipUV.w)\n\
+    {                                                                               \n\
+        outColor = vec4(1.0, 1.0, 1.0, 0.0);                                        \n\
+    }                                                                               \n\
+    else                                                                            \n\
+    {                                                                               \n\
+        outColor = texture(textureSampler, fragUV) * fragColor;                     \n\
+    }                                                                               \n\
+}                                                                                   \n\
+";
+
 constexpr const char g_grayScaleFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\

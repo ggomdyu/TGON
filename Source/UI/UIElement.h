@@ -24,16 +24,14 @@ public:
 /**@section Method */
 public:
     virtual void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const = 0;
-    void SetScissorRect(const FRect& rect) noexcept;
-    const FRect& GetScissorRect() const noexcept;
-    void EnableScissorRect() noexcept;
-    void DisableScissorRect() noexcept;
-    bool IsEnableScissorRect() const noexcept;
+    void SetMaterial(std::shared_ptr<Material>&& material) noexcept;
+    void SetMaterial(const std::shared_ptr<Material>& material) noexcept;
+    std::shared_ptr<Material> GetMaterial() noexcept;
+    std::shared_ptr<const Material> GetMaterial() const noexcept;
 
 /**@section Variable */
 protected:
-    bool m_enableScissorRect = false;
-    FRect m_scissorRect;
+    std::shared_ptr<Material> m_material;
 };
 
 } /* namespace tgon */

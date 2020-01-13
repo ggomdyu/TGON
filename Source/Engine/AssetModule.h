@@ -13,7 +13,7 @@
 #include "Drawing/FontFactory.h"
 #include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
-#include "UI/FontAtlas.h"
+#include "Graphics/FontAtlas.h"
 
 #include "Module.h"
 

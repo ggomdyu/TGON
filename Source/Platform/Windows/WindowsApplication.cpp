@@ -54,6 +54,11 @@ bool WindowsApplication::RegisterDefaultWindowClass()
     return RegisterClassExW(&wcex) != 0;
 }
 
+void WindowsApplication::SetMessageHandler(MessageHandler messageHandler)
+{
+    m_messageHandler = messageHandler;
+}
+
 void Application::Terminate()
 {
     PostQuitMessage(0);
@@ -67,6 +72,11 @@ void Application::MessageLoop()
         if (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE) == TRUE)
         {
             ::DispatchMessageW(&msg);
+
+            if (m_messageHandler != nullptr)
+            {
+                m_messageHandler(msg);
+            }
         }
         else
         {

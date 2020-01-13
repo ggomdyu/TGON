@@ -40,11 +40,6 @@ public:
     WrapMode GetWrapMode() const noexcept;
     BlendMode GetBlendMode() const noexcept;
     const Color4f& GetBlendColor() const noexcept;
-    void EnableScissorRect() noexcept;
-    void DisableScissorRect() noexcept;
-    bool IsEnableScissorRect() const noexcept;
-    void SetScissorRect(const FRect& rect) noexcept;
-    const FRect& GetScissorRect() const noexcept;
     const Vector2& GetPivot() const noexcept;
     void Update() override;
 

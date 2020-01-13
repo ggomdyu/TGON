@@ -5,33 +5,36 @@
  */
 
 #pragma once
-#include "Platform/Window.h"
+#include <memory>
 
-#if TGON_PLATFORM_WINDOWS
-#   include "Windows/WindowsInputManager.h"
-#elif TGON_PLATFORM_MACOS
-#   include "MacOS/MacOSInputManager.h"
-#elif TGON_PLATFORM_IOS
-#   include "IOS/IOSInputManager.h"
-#elif TGON_PLATFORM_ANDROID
-#   include "Android/AndroidInputManager.h"
-#endif
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "GamePad.h"
 
 namespace tgon
 {
 
 class InputManager final :
-    private PlatformInputManager
+    private NonCopyable
 {
 /**@section Constructor */
 public:
-    explicit InputManager(const Window& inputTargetWindow);
+    InputManager();
+
+/**@section Destructor */
+public:
+    ~InputManager();
 
 /**@section Method */
 public:
-    PlatformInputManager& GetPlatformDependency() noexcept;
-    const PlatformInputManager& GetPlatformDependency() const noexcept;
     void Update();
+    std::shared_ptr<Keyboard> CreateKeyboard();
+    std::shared_ptr<Mouse> CreateMouse();
+    std::shared_ptr<Gamepad> CreateGamePad();
+
+/**@section Variable */
+protected:
+    inline static std::unique_ptr<gainput::InputManager> m_inputManager;
 };
 
 } /* namespace tgon */

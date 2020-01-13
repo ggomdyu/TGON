@@ -53,24 +53,9 @@ void UISpriteRendererComponent::SetBlendColor(const Color4f& blendColor) noexcep
     m_sprite->SetBlendColor(blendColor);
 }
 
-void UISpriteRendererComponent::SetScissorRect(const FRect& rect) noexcept
-{
-    m_sprite->SetScissorRect(rect);
-}
-
 void UISpriteRendererComponent::SetPivot(const Vector2& pivot) noexcept
 {
     m_sprite->SetPivot(pivot);
-}
-
-void UISpriteRendererComponent::EnableScissorRect() noexcept
-{
-    m_sprite->EnableScissorRect();
-}
-
-void UISpriteRendererComponent::DisableScissorRect() noexcept
-{
-    m_sprite->DisableScissorRect();
 }
 
 std::shared_ptr<Texture> UISpriteRendererComponent::GetTexture() noexcept
@@ -108,16 +93,6 @@ const Color4f& UISpriteRendererComponent::GetBlendColor() const noexcept
     return m_sprite->GetBlendColor();
 }
 
-bool UISpriteRendererComponent::IsEnableScissorRect() const noexcept
-{
-    return m_sprite->IsEnableScissorRect();
-}
-
-const FRect& UISpriteRendererComponent::GetScissorRect() const noexcept
-{
-    return m_sprite->GetScissorRect();
-}
- 
 const Vector2& UISpriteRendererComponent::GetPivot() const noexcept
 {
     return m_sprite->GetPivot();

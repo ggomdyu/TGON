@@ -9,6 +9,7 @@
 
 #include "Graphics/Graphics.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Material.h"
 #include "Math/Color.h"
 #include "Math/Matrix4x4.h"
 
@@ -19,7 +20,7 @@ class UIBatch
 {
 /**@section Constructor */
 public:
-    UIBatch(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, bool enableScissorRect, const FRect& scissorRect, int32_t vertexStartOffset) noexcept;
+    UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
@@ -31,17 +32,14 @@ public:
     std::shared_ptr<const Texture> GetTexture() const noexcept;
     FilterMode GetFilterMode() const noexcept;
     BlendMode GetBlendMode() const noexcept;
-    bool IsEnableScissorRect() const noexcept;
-    const FRect& GetScissorRect() const noexcept;
 
 /**@section Variable */
 private:
+    std::shared_ptr<Material> m_material;
     std::shared_ptr<Texture> m_texture;
     FilterMode m_filterMode;
     WrapMode m_wrapMode;
     BlendMode m_blendMode;
-    bool m_enableScissorRect;
-    FRect m_scissorRect;
     int32_t m_vertexStartOffset;
     int32_t m_vertexEndOffset;
 };

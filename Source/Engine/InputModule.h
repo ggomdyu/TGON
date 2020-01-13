@@ -8,9 +8,6 @@
 #include <memory>
 
 #include "Hardware/InputManager.h"
-#include "Hardware/Keyboard.h"
-#include "Hardware/Mouse.h"
-#include "Hardware/Gamepad.h"
 
 #include "Module.h"
 #include "InputMode.h"
@@ -26,13 +23,13 @@ public:
     
 /**@section Constructor */
 public:
-    explicit InputModule(const Window& inputTarget, const InputMode& inputMode = {});
+    explicit InputModule(const InputMode& inputMode = {});
 
 /**@section Method */
 public:
     std::shared_ptr<Mouse> GetMouse() noexcept;
-    std::shared_ptr<const Mouse> GetMouse() const noexcept;
     std::shared_ptr<Keyboard> GetKeyboard() noexcept;
+    std::shared_ptr<const Mouse> GetMouse() const noexcept;
     std::shared_ptr<const Keyboard> GetKeyboard() const noexcept;
     void Update() override;
     

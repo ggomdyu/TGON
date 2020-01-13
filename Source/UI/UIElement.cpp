@@ -1,33 +1,27 @@
 #include "PrecompiledHeader.h"
-
 #include "UIElement.h"
 
 namespace tgon
 {
 
-void UIElement::SetScissorRect(const FRect& scissorRect) noexcept
+void UIElement::SetMaterial(std::shared_ptr<Material>&& material) noexcept
 {
-    m_scissorRect = scissorRect;
+    m_material = std::move(material);
 }
 
-void UIElement::EnableScissorRect() noexcept
+void UIElement::SetMaterial(const std::shared_ptr<Material>& material) noexcept
 {
-    m_enableScissorRect = true;
+    m_material = material;
 }
 
-void UIElement::DisableScissorRect() noexcept
+std::shared_ptr<Material> UIElement::GetMaterial() noexcept
 {
-    m_enableScissorRect = false;
+    return m_material;
 }
 
-bool UIElement::IsEnableScissorRect() const noexcept
+std::shared_ptr<const Material> UIElement::GetMaterial() const noexcept
 {
-    return m_enableScissorRect;
-}
-
-const FRect& UIElement::GetScissorRect() const noexcept
-{
-    return m_scissorRect;
+    return m_material;
 }
 
 } /* namespace tgon */

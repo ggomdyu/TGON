@@ -1,5 +1,5 @@
 /**
- * @file    UIAtlasFont.h
+ * @file    AtlasFont.h
  * @author  ggomdyu
  * @since   11/11/2019
  */
