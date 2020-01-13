@@ -56,13 +56,9 @@ private:
 
 /**@section Constructor */
 public:
-    UIText() noexcept;
+    UIText();
     UIText(UIText&& rhs) noexcept;
 
-/**@section Destructor */
-public:
-    ~UIText();
-    
 /**@section Operator */
 public:
     UIText& operator=(UIText&& rhs) noexcept;

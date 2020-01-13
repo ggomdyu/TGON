@@ -21,9 +21,14 @@ class UISprite :
 {
 /**@section Constructor */
 public:
-    UISprite() noexcept = default;
+    UISprite() = default;
     UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode = FilterMode::Bilinear, WrapMode wrapMode = WrapMode::Clamp, BlendMode blendMode = BlendMode::Normal, Color4f blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f)) noexcept;
-
+    UISprite(UISprite&& rhs) noexcept;
+    
+/**@section Operator */
+public:
+    UISprite& operator=(UISprite&& rhs) noexcept;
+    
 /**@section Method */
 public:
     void SetTexture(std::shared_ptr<Texture>&& texture) noexcept;

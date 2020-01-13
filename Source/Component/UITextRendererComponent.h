@@ -45,10 +45,6 @@ public:
     const I32Rect& GetRect() const noexcept;
     int32_t GetSortingLayer() const noexcept;
     void Update() override;
-    
-/**@section Variable */
-protected:
-    std::shared_ptr<UIText> m_text;
 };
 
 } /* namespace tgon */

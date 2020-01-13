@@ -18,6 +18,30 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMod
 {
 }
 
+UISprite::UISprite(UISprite&& rhs) noexcept :
+    m_texture(std::move(rhs.m_texture)),
+    m_textureRect(rhs.m_textureRect),
+    m_textureSize(rhs.m_textureSize),
+    m_filterMode(rhs.m_filterMode),
+    m_wrapMode(rhs.m_wrapMode),
+    m_blendMode(rhs.m_blendMode),
+    m_blendColor(rhs.m_blendColor)
+{
+}
+
+UISprite& UISprite::operator=(UISprite&& rhs) noexcept
+{
+    m_texture = std::move(rhs.m_texture);
+    m_textureRect = rhs.m_textureRect;
+    m_textureSize = rhs.m_textureSize;
+    m_filterMode = rhs.m_filterMode;
+    m_wrapMode = rhs.m_wrapMode;
+    m_blendMode = rhs.m_blendMode;
+    m_blendColor = rhs.m_blendColor;
+
+    return *this;
+}
+
 void UISprite::SetTexture(std::shared_ptr<Texture>&& texture) noexcept
 {
     m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
@@ -109,7 +133,7 @@ const Vector2& UISprite::GetPivot() const noexcept
 
 void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_material, m_texture, m_filterMode, m_wrapMode, m_blendMode, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_texture, m_filterMode, m_wrapMode, m_blendMode, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);

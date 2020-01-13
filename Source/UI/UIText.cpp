@@ -358,12 +358,10 @@ void TextBlock::ProcessTextAlignment(TextAlignment textAlignment)
     }
 }
 
-UIText::UIText() noexcept :
+UIText::UIText() :
     m_textBlock(std::make_unique<TextBlock>())
 {
 }
-
-UIText::~UIText() = default;
 
 UIText::UIText(UIText&& rhs) noexcept :
     m_text(std::move(rhs.m_text)),
@@ -391,14 +389,6 @@ UIText& UIText::operator=(UIText&& rhs) noexcept
     m_rect = rhs.m_rect;
     m_isDirty = rhs.m_isDirty;
     m_textBlock = std::move(rhs.m_textBlock);
-    
-    rhs.m_fontSize = DefaultFontSize;
-    rhs.m_textAlignment = TextAlignment::UpperLeft;
-    rhs.m_lineSpacing = 0.0f;
-    rhs.m_lineBreakMode = LineBreakMode::CharacterWrap;
-    rhs.m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
-    rhs.m_rect = {};
-    rhs.m_isDirty = true;
     
     return *this;
 }
@@ -527,7 +517,7 @@ const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noex
 
 void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_fontAtlas->GetAtlasTexture(), FilterMode::Bilinear, WrapMode::Clamp, BlendMode::Alpha, false, {}, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_fontAtlas->GetAtlasTexture(), FilterMode::Bilinear, WrapMode::Clamp, BlendMode::Alpha, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);

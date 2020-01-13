@@ -8,99 +8,99 @@ namespace tgon
 {
 
 UISpriteRendererComponent::UISpriteRendererComponent() :
-    UIRendererComponent(),
-    m_sprite(std::make_shared<UISprite>())
+    UIRendererComponent(nullptr, std::make_shared<UISprite>())
 {
 }
 
 void UISpriteRendererComponent::SetTexture(std::shared_ptr<Texture>&& texture) noexcept
 {
-    m_sprite->SetTexture(std::move(texture));
+    std::static_pointer_cast<UISprite>(m_element)->SetTexture(std::move(texture));
 }
 
 void UISpriteRendererComponent::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
-    m_sprite->SetTexture(texture);
+    std::static_pointer_cast<UISprite>(m_element)->SetTexture(texture);
 }
 
 void UISpriteRendererComponent::SetTextureRect(const FRect& textureRect) noexcept
 {
-    m_sprite->SetTextureRect(textureRect);
+    std::static_pointer_cast<UISprite>(m_element)->SetTextureRect(textureRect);
 }
 
 void UISpriteRendererComponent::SetTextureSize(const FExtent2D& textureSize) noexcept
 {
-    m_sprite->SetTextureSize(textureSize);
+    std::static_pointer_cast<UISprite>(m_element)->SetTextureSize(textureSize);
 }
 
 void UISpriteRendererComponent::SetFilterMode(FilterMode filterMode) noexcept
 {
-    m_sprite->SetFilterMode(filterMode);
+    std::static_pointer_cast<UISprite>(m_element)->SetFilterMode(filterMode);
 }
 
 void UISpriteRendererComponent::SetWrapMode(WrapMode wrapMode) noexcept
 {
-    m_sprite->SetWrapMode(wrapMode);
+    std::static_pointer_cast<UISprite>(m_element)->SetWrapMode(wrapMode);
 }
 
 void UISpriteRendererComponent::SetBlendMode(BlendMode blendMode) noexcept
 {
-    m_sprite->SetBlendMode(blendMode);
+    std::static_pointer_cast<UISprite>(m_element)->SetBlendMode(blendMode);
 }
 
 void UISpriteRendererComponent::SetBlendColor(const Color4f& blendColor) noexcept
 {
-    m_sprite->SetBlendColor(blendColor);
+    std::static_pointer_cast<UISprite>(m_element)->SetBlendColor(blendColor);
 }
 
 void UISpriteRendererComponent::SetPivot(const Vector2& pivot) noexcept
 {
-    m_sprite->SetPivot(pivot);
+    std::static_pointer_cast<UISprite>(m_element)->SetPivot(pivot);
 }
 
 std::shared_ptr<Texture> UISpriteRendererComponent::GetTexture() noexcept
 {
-    return m_sprite->GetTexture();
+    return std::static_pointer_cast<UISprite>(m_element)->GetTexture();
 }
 
 std::shared_ptr<const Texture> UISpriteRendererComponent::GetTexture() const noexcept
 {
-    return m_sprite->GetTexture();
+    return std::static_pointer_cast<UISprite>(m_element)->GetTexture();
 }
 
 const FRect& UISpriteRendererComponent::GetTextureRect() const noexcept
 {
-    return m_sprite->GetTextureRect();
+    return std::static_pointer_cast<UISprite>(m_element)->GetTextureRect();
 }
 
 FilterMode UISpriteRendererComponent::GetFilterMode() const noexcept
 {
-    return m_sprite->GetFilterMode();
+    return std::static_pointer_cast<UISprite>(m_element)->GetFilterMode();
 }
 
 WrapMode UISpriteRendererComponent::GetWrapMode() const noexcept
 {
-    return m_sprite->GetWrapMode();
+    return std::static_pointer_cast<UISprite>(m_element)->GetWrapMode();
 }
 
 BlendMode UISpriteRendererComponent::GetBlendMode() const noexcept
 {
-    return m_sprite->GetBlendMode();
+    return std::static_pointer_cast<UISprite>(m_element)->GetBlendMode();
 }
 
 const Color4f& UISpriteRendererComponent::GetBlendColor() const noexcept
 {
-    return m_sprite->GetBlendColor();
+    return std::static_pointer_cast<UISprite>(m_element)->GetBlendColor();
 }
 
 const Vector2& UISpriteRendererComponent::GetPivot() const noexcept
 {
-    return m_sprite->GetPivot();
+    return std::static_pointer_cast<UISprite>(m_element)->GetPivot();
 }
 
 void UISpriteRendererComponent::Update()
 {
-    if (m_sprite->GetTexture() == nullptr || m_sprite->GetBlendColor().a <= 0.0f)
+    auto sprite = std::static_pointer_cast<UISprite>(m_element);
+    if (sprite->GetTexture() == nullptr || sprite->GetBlendColor().a <= 0.0f)
     {
         return;
     }
@@ -108,7 +108,7 @@ void UISpriteRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_uiRendererModule->AddUIElement(m_sprite, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
+        m_uiRendererModule->AddUIElement(sprite, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
     }
 }
 

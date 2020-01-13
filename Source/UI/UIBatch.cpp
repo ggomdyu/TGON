@@ -41,12 +41,22 @@ void UIBatch::FlushBatch(Graphics& graphics)
     m_material->Use();
     m_texture->Use();
     
-    graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_C4F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / (sizeof(V3F_C4F_T2F) / 4));
+    graphics.DrawPrimitives(PrimitiveType::Triangles, m_vertexStartOffset / (sizeof(V3F_C4F_T2F) / 4), (m_vertexEndOffset - m_vertexStartOffset) / static_cast<int32_t>(sizeof(V3F_C4F_T2F) / 4));
+}
+
+std::shared_ptr<Material> UIBatch::GetMaterial() noexcept
+{
+    return m_material;
 }
 
 std::shared_ptr<Texture> UIBatch::GetTexture() noexcept
 {
     return m_texture;
+}
+
+std::shared_ptr<const Material> UIBatch::GetMaterial() const noexcept
+{
+    return m_material;
 }
 
 std::shared_ptr<const Texture> UIBatch::GetTexture() const noexcept

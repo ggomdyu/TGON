@@ -40,7 +40,6 @@ public:
     void Draw();
 
 private:
-    void PrepareDefaultMaterials();
     void UpdateSpriteBatches();
     void FlushSpriteBatches();
 

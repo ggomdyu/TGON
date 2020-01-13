@@ -24,7 +24,7 @@ class AssetModule :
 	public Module
 {
 public:
-    TGON_DECLARE_RTTI(AssetModule);
+    TGON_DECLARE_RTTI(AssetModule)
 
 /* @section Type */
 private:

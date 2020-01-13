@@ -2,7 +2,6 @@
 
 #include "Diagnostics/Debug.h"
 #include "Graphics/VertexFormat.h"
-#include "Graphics/OpenGL/OpenGLShaderCode.h"
 
 #include "UIRendererModule.h"
 
@@ -18,7 +17,6 @@ UIRendererModule::UIRendererModule(const std::shared_ptr<Graphics>& graphics) no
     }),
     m_sortingLayers(1)
 {
-    this->PrepareDefaultMaterials();
 }
 
 void UIRendererModule::Update()
@@ -93,11 +91,6 @@ std::shared_ptr<const Graphics> UIRendererModule::GetGraphics() const noexcept
     return m_graphics;
 }
 
-void UIRendererModule::PrepareDefaultMaterials()
-{
-    m_uiMaterial = std::make_shared<Material>(g_positionColorUVVert, g_positionColorUVFrag);
-}
-
 void UIRendererModule::UpdateSpriteBatches()
 {
     for (auto& sortingLayer : m_sortingLayers)
@@ -113,17 +106,17 @@ void UIRendererModule::UpdateSpriteBatches()
 
 void UIRendererModule::FlushSpriteBatches()
 {
-    m_uiMaterial->Use();
-
     for (auto& camera : m_cameraList)
     {
-        m_uiMaterial->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
-
 #if DEBUG
         int32_t drawCall = 0;
 #endif
         for (auto& batch : m_batches)
         {
+            auto material = batch.GetMaterial();
+            material->Use();
+            material->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
+
             batch.FlushBatch(*m_graphics);
 #if DEBUG
             ++drawCall;

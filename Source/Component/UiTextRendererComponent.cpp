@@ -10,60 +10,59 @@ namespace tgon
 {
 
 UITextRendererComponent::UITextRendererComponent() :
-    UIRendererComponent(),
-    m_text(std::make_shared<UIText>())
+    UIRendererComponent(nullptr, std::make_shared<UIText>())
 {
 }
 
 void UITextRendererComponent::SetFontAtlas(const char* fontAtlasPath)
 {
     auto fontAtlas = Application::GetEngine()->FindModule<AssetModule>()->GetResource<FontAtlas>(fontAtlasPath);
-    m_text->SetFontAtlas(std::move(fontAtlas));
+    std::static_pointer_cast<UIText>(m_element)->SetFontAtlas(std::move(fontAtlas));
 }
 
 void UITextRendererComponent::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas) noexcept
 {
-    m_text->SetFontAtlas(fontAtlas);
+    std::static_pointer_cast<UIText>(m_element)->SetFontAtlas(fontAtlas);
 }
 
 void UITextRendererComponent::SetFontAtlas(std::shared_ptr<FontAtlas>&& fontAtlas) noexcept
 {
-    m_text->SetFontAtlas(std::move(fontAtlas));
+    std::static_pointer_cast<UIText>(m_element)->SetFontAtlas(std::move(fontAtlas));
 }
 
 void UITextRendererComponent::SetText(const std::string_view& text)
 {
-    m_text->SetText(text);
+    std::static_pointer_cast<UIText>(m_element)->SetText(text);
 }
 
 void UITextRendererComponent::SetFontSize(int32_t fontSize) noexcept
 {
-    m_text->SetFontSize(fontSize);
+    std::static_pointer_cast<UIText>(m_element)->SetFontSize(fontSize);
 }
 
 void UITextRendererComponent::SetLineSpacing(float lineSpacing) noexcept
 {
-    m_text->SetLineSpacing(lineSpacing);
+    std::static_pointer_cast<UIText>(m_element)->SetLineSpacing(lineSpacing);
 }
 
 void UITextRendererComponent::SetLineBreakMode(LineBreakMode lineBreakMode) noexcept
 {
-    m_text->SetLineBreakMode(lineBreakMode);
+    std::static_pointer_cast<UIText>(m_element)->SetLineBreakMode(lineBreakMode);
 }
 
 void UITextRendererComponent::SetTextAlignment(TextAlignment textAlignment) noexcept
 {
-    m_text->SetTextAlignment(textAlignment);
+    std::static_pointer_cast<UIText>(m_element)->SetTextAlignment(textAlignment);
 }
 
 void UITextRendererComponent::SetBlendColor(const Color4f& color) noexcept
 {
-    m_text->SetBlendColor(color);
+    std::static_pointer_cast<UIText>(m_element)->SetBlendColor(color);
 }
 
 void UITextRendererComponent::SetRect(const I32Rect& rect) noexcept
 {
-    m_text->SetRect(rect);
+    std::static_pointer_cast<UIText>(m_element)->SetRect(rect);
 }
 
 void UITextRendererComponent::SetSortingLayer(int32_t sortingLayer) noexcept
@@ -73,37 +72,37 @@ void UITextRendererComponent::SetSortingLayer(int32_t sortingLayer) noexcept
 
 LineBreakMode UITextRendererComponent::GetLineBreakMode() const noexcept
 {
-    return m_text->GetLineBreakMode();
+    return std::static_pointer_cast<UIText>(m_element)->GetLineBreakMode();
 }
 
 TextAlignment UITextRendererComponent::GetTextAlignment() const noexcept
 {
-    return m_text->GetTextAlignment();
+    return std::static_pointer_cast<UIText>(m_element)->GetTextAlignment();
 }
 
 const Color4f& UITextRendererComponent::GetBlendColor() const noexcept
 {
-    return m_text->GetBlendColor();
+    return std::static_pointer_cast<UIText>(m_element)->GetBlendColor();
 }
 
 std::shared_ptr<const FontAtlas> UITextRendererComponent::GetFontAtlas() const noexcept
 {
-    return m_text->GetFontAtlas();
+    return std::static_pointer_cast<UIText>(m_element)->GetFontAtlas();
 }
 
 std::shared_ptr<FontAtlas> UITextRendererComponent::GetFontAtlas() noexcept
 {
-    return m_text->GetFontAtlas();
+    return std::static_pointer_cast<UIText>(m_element)->GetFontAtlas();
 }
 
 int32_t UITextRendererComponent::GetFontSize() const noexcept
 {
-    return m_text->GetFontSize();
+    return std::static_pointer_cast<UIText>(m_element)->GetFontSize();
 }
 
 const I32Rect& UITextRendererComponent::GetRect() const noexcept
 {
-    return m_text->GetRect();
+    return std::static_pointer_cast<UIText>(m_element)->GetRect();
 }
 
 int32_t UITextRendererComponent::GetSortingLayer() const noexcept
@@ -113,7 +112,8 @@ int32_t UITextRendererComponent::GetSortingLayer() const noexcept
 
 void UITextRendererComponent::Update()
 {
-    if (m_text->GetBlendColor().a <= 0.0f)
+    auto text = std::static_pointer_cast<UIText>(m_element);
+    if (text->GetBlendColor().a <= 0.0f)
     {
         return;
     }
@@ -121,7 +121,7 @@ void UITextRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_uiRendererModule->AddUIElement(m_text, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
+        m_uiRendererModule->AddUIElement(text, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
     }
 }
 

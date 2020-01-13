@@ -42,10 +42,6 @@ public:
     const Color4f& GetBlendColor() const noexcept;
     const Vector2& GetPivot() const noexcept;
     void Update() override;
-
-/**@section Variable */
-protected:
-    std::shared_ptr<UISprite> m_sprite;
 };
 
 } /* namespace tgon */

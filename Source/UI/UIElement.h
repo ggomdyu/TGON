@@ -17,6 +17,9 @@ namespace tgon
 class UIElement :
     private NonCopyable
 {
+public:
+    UIElement();
+
 /**@section Destructor */
 public:
     virtual ~UIElement() = default;
@@ -29,9 +32,14 @@ public:
     std::shared_ptr<Material> GetMaterial() noexcept;
     std::shared_ptr<const Material> GetMaterial() const noexcept;
 
+private:
+    void InitializeDefaultMaterial();
+
 /**@section Variable */
 protected:
     std::shared_ptr<Material> m_material;
+    inline static std::shared_ptr<Material> m_defaultMaterial;
+
 };
 
 } /* namespace tgon */
