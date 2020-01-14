@@ -4,8 +4,8 @@
 
 #include "Diagnostics/Debug.h"
 
-#include "FileStream.h"
-#include "File.h"
+#include "../FileStream.h"
+#include "../File.h"
 
 namespace tgon
 {

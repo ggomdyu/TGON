@@ -51,6 +51,8 @@ TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::sha
     this->Initialize(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
 }
 
+UIText::~UIText() = default;
+
 void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
 {
     this->Clear();

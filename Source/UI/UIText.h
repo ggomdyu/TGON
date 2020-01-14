@@ -58,6 +58,10 @@ private:
 public:
     UIText();
     UIText(UIText&& rhs) noexcept;
+    
+/**@section Destructor */
+public:
+    ~UIText() override;
 
 /**@section Operator */
 public:
