@@ -14,8 +14,8 @@ function (init_tgon)
     set(TGON_GRAPHICS_NAME_LIST "OPENGL" "VULKAN" "DIRECT3D11" "DIRECT3D12" "METAL")
 
     foreach (SRC_PATH ${TEMP_SRC_PATH_LIST})
-        # Ignore third-party libraries
-        string(FIND ${SRC_PATH} "TGON/Source/ThirdParty/" SUBSTR_INDEX)
+        # Ignore third-party directories
+        string(FIND ${SRC_PATH} "/ThirdParty/" SUBSTR_INDEX)
         if (NOT SUBSTR_INDEX EQUAL -1)
             continue ()
         endif ()

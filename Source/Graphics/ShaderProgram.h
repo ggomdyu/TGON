@@ -68,7 +68,7 @@ private:
 
 /**@section Variable */
 private:
-    inline static std::array<Vector4, 64> m_uniformCache {};
+    std::array<Vector4, 64> m_uniformCache {};
     std::array<int32_t, 8> m_uniformLocationCache {};
 };
 

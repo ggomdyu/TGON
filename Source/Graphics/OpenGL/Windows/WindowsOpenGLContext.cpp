@@ -80,8 +80,8 @@ HGLRC MakeNewGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits, i
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& videoMode) :
-    wndHandle(reinterpret_cast<HWND>(displayTarget.GetNativeWindow())),
+OpenGLContext::OpenGLContext(const Window& displayWindow, const VideoMode& videoMode) :
+    wndHandle(reinterpret_cast<HWND>(displayWindow.GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     HGLRC oldGLRC = MakeOldGLRC(dcHandle, videoMode.colorBits, videoMode.depthBits,videoMode.stencilBits);
@@ -119,13 +119,11 @@ OpenGLContext::OpenGLContext(const Window& displayTarget, const VideoMode& video
 OpenGLContext::OpenGLContext(OpenGLContext&& rhs) noexcept :
     wndHandle(rhs.wndHandle),
     context(rhs.context),
-    dcHandle(rhs.dcHandle),
-    pixelFormat(rhs.pixelFormat)
+    dcHandle(rhs.dcHandle)
 {
     rhs.wndHandle = nullptr;
     rhs.context = nullptr;
     rhs.dcHandle = nullptr;
-    rhs.pixelFormat = 0;
 }
 
 OpenGLContext::~OpenGLContext()
@@ -133,19 +131,11 @@ OpenGLContext::~OpenGLContext()
     this->Destroy();
 }
 
-OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
+OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs) noexcept
 {
-    this->Destroy();
-
-    wndHandle = rhs.wndHandle;
-    context = rhs.context;
-    dcHandle = rhs.dcHandle;
-    pixelFormat = rhs.pixelFormat;
-    
-    rhs.wndHandle = nullptr;
-    rhs.context = nullptr;
-    rhs.dcHandle = nullptr;
-    rhs.pixelFormat = 0;
+    std::swap(wndHandle, rhs.wndHandle);
+    std::swap(context, rhs.context);
+    std::swap(dcHandle, rhs.dcHandle);
 
     return *this;
 }

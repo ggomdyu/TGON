@@ -29,7 +29,8 @@ class OpenGLContext final :
 {
 /**@section Constructor */
 public:
-    OpenGLContext(const Window& displayTarget, const VideoMode& videoMode);
+    OpenGLContext() noexcept = default;
+    OpenGLContext(const Window& displayWindow, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs) noexcept;
 
 /**@section Destructor */
@@ -38,7 +39,7 @@ public:
 
 /**@section Operator */
 public:
-    OpenGLContext& operator=(OpenGLContext&& rhs);
+    OpenGLContext& operator=(OpenGLContext&& rhs) noexcept;
 
 /**@section Method */
 public:
@@ -51,13 +52,12 @@ private:
 /**@section Variable */
 public:
 #if TGON_PLATFORM_WINDOWS
-    HWND wndHandle;
-    HGLRC context;
-    HDC dcHandle;
-    int pixelFormat;
+    HWND wndHandle = nullptr;
+    HGLRC context = nullptr;
+    HDC dcHandle = nullptr;
 #elif TGON_PLATFORM_MACOS
-    NSOpenGLPixelFormat* pixelFormat;
-    NSOpenGLContext* context;
+    NSOpenGLPixelFormat* pixelFormat = nil;
+    NSOpenGLContext* context = nil;
 #elif TGON_PLATFORM_ANDROID
 #elif TGON_PLATFORM_IOS
 #endif
