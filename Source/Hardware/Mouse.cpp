@@ -1,5 +1,12 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_PLATFORM_WINDOWS
+#   include <Windows.h>
+#elif TGON_PLATFORM_MACOS
+#   include <AppKit/AppKit.h>
+#endif
+
+#include "Platform/Application.h"
 #include "Misc/Algorithm.h"
 
 #include "Mouse.h"
@@ -41,7 +48,23 @@ I32Vector2 Mouse::GetPosition()
 
 void Mouse::GetPosition(int32_t* x, int32_t* y)
 {
-    // TODO: Impl
+#if TGON_PLATFORM_WINDOWS
+    POINT pt;
+    GetCursorPos(&pt);
+    ScreenToClient(reinterpret_cast<HWND>(Application::GetInstance().GetRootWindow()->GetNativeWindow()), &pt);
+
+    *x = static_cast<int32_t>(pt.x);
+    *y = static_cast<int32_t>(pt.y);
+#elif TGON_PLATFORM_MACOS
+    NSPoint pt = [NSEvent mouseLocation];
+    pt.y = [NSScreen mainScreen].frame.size.height - pt.y;
+    
+    *x = static_cast<int32_t>(pt.x);
+    *y = static_cast<int32_t>(pt.y);
+#else
+    *x = 0;
+    *y = 0;
+#endif
 }
 
 bool Mouse::IsMouseDown(MouseCode mouseCode) const

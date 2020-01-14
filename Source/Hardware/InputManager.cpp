@@ -11,10 +11,12 @@ InputManager::InputManager()
 {
     m_inputManager = std::make_unique<gainput::InputManager>();
 
+#if TGON_PLATFORM_WINDOWS
     Application::GetInstance().GetPlatformDependency().SetMessageHandler([](const MSG& msg)
     {
         m_inputManager->HandleMessage(msg);
     });
+#endif
 }
 
 InputManager::~InputManager()
