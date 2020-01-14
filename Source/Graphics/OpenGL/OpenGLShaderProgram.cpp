@@ -172,7 +172,7 @@ void ShaderProgram::SetParameter1f(int32_t location, float f)
     
     uniformCache = f;
     
-    TGON_GL_ERROR_CHECK(glUniform1f(location, f));
+    TGON_GL_ERROR_CHECK(glProgramUniform1f(m_programId, location, f));
 }
 
 void ShaderProgram::SetParameter2f(int32_t location, float f1, float f2)
@@ -186,7 +186,7 @@ void ShaderProgram::SetParameter2f(int32_t location, float f1, float f2)
     
     *uniformCache = v;
     
-    TGON_GL_ERROR_CHECK(glUniform2f(location, f1, f2));
+    TGON_GL_ERROR_CHECK(glProgramUniform2f(m_programId, location, f1, f2));
 }
 
 void ShaderProgram::SetParameter3f(int32_t location, float f1, float f2, float f3)
@@ -200,7 +200,7 @@ void ShaderProgram::SetParameter3f(int32_t location, float f1, float f2, float f
     
     *uniformCache = v;
     
-    TGON_GL_ERROR_CHECK(glUniform3f(location, f1, f2, f3));
+    TGON_GL_ERROR_CHECK(glProgramUniform3f(m_programId, location, f1, f2, f3));
 }
 
 void ShaderProgram::SetParameter4f(int32_t location, float f1, float f2, float f3, float f4)
@@ -214,12 +214,12 @@ void ShaderProgram::SetParameter4f(int32_t location, float f1, float f2, float f
     
     *uniformCache = v;
     
-    TGON_GL_ERROR_CHECK(glUniform4f(location, f1, f2, f3, f4));
+    TGON_GL_ERROR_CHECK(glProgramUniform4f(m_programId, location, f1, f2, f3, f4));
 }
 
 void ShaderProgram::SetParameterMatrix4fv(int32_t location, const float* f)
 {
-    TGON_GL_ERROR_CHECK(glUniformMatrix4fv(location, 1, GL_FALSE, f));
+    TGON_GL_ERROR_CHECK(glProgramUniformMatrix4fv(m_programId, location, 1, GL_FALSE, f));
 }
 
 void ShaderProgram::SetParameterSampler(int32_t location, uint32_t textureUnit, uint32_t texture)
@@ -227,7 +227,7 @@ void ShaderProgram::SetParameterSampler(int32_t location, uint32_t textureUnit, 
     TGON_GL_ERROR_CHECK(glActiveTexture(GL_TEXTURE0 + textureUnit));
 
     TGON_GL_ERROR_CHECK(glBindTexture(GL_TEXTURE_2D, texture));
-    TGON_GL_ERROR_CHECK(glUniform1i(location, texture));
+    TGON_GL_ERROR_CHECK(glProgramUniform1i(m_programId, location, texture));
 }
 
 } /* namespace tgon */
