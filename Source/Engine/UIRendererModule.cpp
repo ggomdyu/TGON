@@ -115,7 +115,7 @@ void UIRendererModule::FlushSpriteBatches()
         {
             auto material = batch.GetMaterial();
             material->Use();
-            material->GetShaderProgram().SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
+            material->SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
 
             batch.FlushBatch(*m_graphics);
 #if DEBUG

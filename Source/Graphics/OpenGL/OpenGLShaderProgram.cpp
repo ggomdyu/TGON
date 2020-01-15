@@ -123,12 +123,6 @@ void OpenGLShaderProgram::Destroy()
     }
 }
 
-ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
-    OpenGLShaderProgram(vertexShaderCode, fragmentShaderCode)
-{
-    this->UpdateUniformLocationCache();
-}
-
 void ShaderProgram::Use()
 {
     if (g_lastUsedShaderProgram == this)

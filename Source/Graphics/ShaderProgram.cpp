@@ -9,6 +9,12 @@
 namespace tgon
 {
 
+ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
+    PlatformShaderProgram(vertexShaderCode, fragmentShaderCode)
+{
+    this->UpdateUniformLocationCache();
+}
+
 PlatformShaderProgram& ShaderProgram::GetPlatformDependency() noexcept
 {
     return *this;
@@ -23,7 +29,6 @@ ShaderProgram::ShaderProgram(ShaderProgram&& rhs) noexcept :
     PlatformShaderProgram(std::move(rhs)),
     m_uniformLocationCache(rhs.m_uniformLocationCache)
 {
-    rhs.m_uniformLocationCache = {};
 }
 
 ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
@@ -31,8 +36,6 @@ ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
     PlatformShaderProgram::operator=(std::move(rhs));
 
     m_uniformLocationCache = rhs.m_uniformLocationCache;
-
-    rhs.m_uniformLocationCache = {};
 
     return *this;
 }

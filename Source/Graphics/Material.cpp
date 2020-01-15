@@ -1,9 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#if TGON_USING_OPENGL
-#   include "Graphics/OpenGL/OpenGLShaderCode.h"
-#endif
-
 #include "Material.h"
 
 namespace tgon
@@ -28,15 +24,75 @@ void Material::Unuse()
 {
     m_shaderProgram.Unuse();
 }
-    
-ShaderProgram& Material::GetShaderProgram() noexcept
+
+void Material::SetParameter1f(const char* name, float f)
 {
-    return m_shaderProgram;
+    m_shaderProgram.SetParameter1f(name, f);
 }
 
-const ShaderProgram& Material::GetShaderProgram() const noexcept
+void Material::SetParameter2f(const char* name, float f1, float f2)
 {
-    return m_shaderProgram;
+    m_shaderProgram.SetParameter2f(name, f1, f2);
+}
+
+void Material::SetParameter3f(const char* name, float f1, float f2, float f3)
+{
+    m_shaderProgram.SetParameter3f(name, f1, f2, f3);
+}
+
+void Material::SetParameter4f(const char* name, float f1, float f2, float f3, float f4)
+{
+    m_shaderProgram.SetParameter4f(name, f1, f2, f3, f4);
+}
+
+void Material::SetParameterMatrix4fv(const char* name, const float* f)
+{
+    m_shaderProgram.SetParameterMatrix4fv(name, f);
+}
+
+void Material::SetParameter1f(int32_t location, float f)
+{
+    m_shaderProgram.SetParameter1f(location, f);
+}
+
+void Material::SetParameter2f(int32_t location, float f1, float f2)
+{
+    m_shaderProgram.SetParameter2f(location, f1, f2);
+}
+
+void Material::SetParameter3f(int32_t location, float f1, float f2, float f3)
+{
+    m_shaderProgram.SetParameter3f(location, f1, f2, f3);
+}
+
+void Material::SetParameter4f(int32_t location, float f1, float f2, float f3, float f4)
+{
+    m_shaderProgram.SetParameter4f(location, f1, f2, f3, f4);
+}
+
+void Material::SetParameterMatrix4fv(int32_t location, const float* f)
+{
+    m_shaderProgram.SetParameterMatrix4fv(location, f);
+}
+
+void Material::SetParameterWVPMatrix4fv(const float* f)
+{
+    m_shaderProgram.SetParameterWVPMatrix4fv(f);
+}
+
+void Material::SetParameterSampler(int32_t location, uint32_t textureUnit, uint32_t texture)
+{
+    m_shaderProgram.SetParameterSampler(location, textureUnit, texture);
+}
+
+void Material::BindAttributeLocation(const char* name, uint32_t location)
+{
+    m_shaderProgram.BindAttributeLocation(name, location);
+}
+
+int32_t Material::GetUniformLocation(const char* name) const
+{
+    return m_shaderProgram.GetUniformLocation(name);
 }
 
 } /* namespace tgon */
