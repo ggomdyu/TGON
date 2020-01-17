@@ -13,6 +13,7 @@
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
+#include "Math/Extent.h"
 
 namespace tgon
 {
@@ -21,37 +22,32 @@ class OpenGLRenderTarget :
     private NonCopyable
 {
 /**@section Constructor */
-public:
-    OpenGLRenderTarget(float width, float height, int32_t depthBits);
+protected:
+    OpenGLRenderTarget();
     OpenGLRenderTarget(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Destructor */
-public:
+protected:
     ~OpenGLRenderTarget();
 
 /**@section Operator */
-public:
+protected:
     OpenGLRenderTarget& operator=(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Method */
-public:
-    void Use();
-    void Unuse();
-
-private:
-    GLuint CreateColorBuffer(float width, float height);
-    GLuint CreateDepthBuffer(float width, float height, int32_t depthBits) const;
-    GLuint CreateDepthStencilBuffer(float width, float height, int32_t depthBits) const;
-    GLuint CreateFrameBuffer() const;
+protected:
+    static GLuint CreateColorBuffer(const FExtent2D& extent);
+    static GLuint CreateDepthBuffer(const FExtent2D& extent, int32_t depthBits);
+    static GLuint CreateDepthStencilBuffer(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits);
+    static GLuint CreateFrameBuffer();
     void Destroy();
 
 /**@section Variable */
-private:
-    float m_width;
-    float m_height;
-    GLuint m_colorBufferHandle;
-    GLuint m_depthStencilBufferHandle;
-    GLuint m_frameBufferHandle;
+protected:
+    FExtent2D m_extent;
+    GLuint m_frameBufferHandle = 0;
+    GLuint m_colorBufferHandle = 0;
+    GLuint m_depthStencilBufferHandle = 0;
 };
     
 using PlatformRenderTarget = OpenGLRenderTarget;

@@ -3,43 +3,24 @@
 #if TGON_GRAPHICS_OPENGL
 #include <stdexcept>
 
-#include "OpenGLRenderTarget.h"
+#include "Diagnostics/Debug.h"
+
+#include "../RenderTarget.h"
 
 namespace tgon
 {
 
-OpenGLRenderTarget::OpenGLRenderTarget(float width, float height, int32_t depthBits) :
-    m_width(width),
-    m_height(height),
-    m_colorBufferHandle(this->CreateColorBuffer(m_width, m_height)),
-    m_frameBufferHandle(this->CreateFrameBuffer()),
-    m_depthStencilBufferHandle(this->CreateDepthStencilBuffer(m_width, m_height, depthBits))
+OpenGLRenderTarget::OpenGLRenderTarget() :
+    m_frameBufferHandle(CreateFrameBuffer())
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
-
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorBufferHandle, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthStencilBufferHandle);
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-    {
-        throw std::runtime_error("Failed to create frame buffer.");
-    }
-
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 OpenGLRenderTarget::OpenGLRenderTarget(OpenGLRenderTarget&& rhs) noexcept :
-    m_width(rhs.m_width),
-    m_height(rhs.m_height),
+    m_extent(rhs.m_extent),
+    m_frameBufferHandle(rhs.m_frameBufferHandle),
     m_colorBufferHandle(rhs.m_colorBufferHandle),
-    m_depthStencilBufferHandle(rhs.m_depthStencilBufferHandle),
-    m_frameBufferHandle(rhs.m_frameBufferHandle)
+    m_depthStencilBufferHandle(rhs.m_depthStencilBufferHandle)
 {
-    rhs.m_width = 0;
-    rhs.m_height = 0;
-    rhs.m_colorBufferHandle = 0;
-    rhs.m_depthStencilBufferHandle = 0;
-    rhs.m_frameBufferHandle = 0;
 }
 
 OpenGLRenderTarget::~OpenGLRenderTarget()
@@ -49,71 +30,85 @@ OpenGLRenderTarget::~OpenGLRenderTarget()
     
 OpenGLRenderTarget& OpenGLRenderTarget::operator=(OpenGLRenderTarget&& rhs) noexcept
 {
-    this->Destroy();
-    
-    m_width = rhs.m_width;
-    m_height = rhs.m_height;
-    m_colorBufferHandle = rhs.m_colorBufferHandle;
-    m_depthStencilBufferHandle = rhs.m_depthStencilBufferHandle;
-    m_frameBufferHandle = rhs.m_frameBufferHandle;
-    
-    rhs.m_width = 0;
-    rhs.m_height = 0;
-    rhs.m_colorBufferHandle = 0;
-    rhs.m_depthStencilBufferHandle = 0;
-    rhs.m_frameBufferHandle = 0;
+    std::swap(m_frameBufferHandle, rhs.m_frameBufferHandle);
+    std::swap(m_colorBufferHandle, rhs.m_colorBufferHandle);
+    std::swap(m_depthStencilBufferHandle, rhs.m_depthStencilBufferHandle);
+
+    m_extent = rhs.m_extent;
     
     return *this;
 }
 
-void OpenGLRenderTarget::Use()
+bool RenderTarget::Initialize(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits)
+{
+    m_colorBufferHandle = CreateColorBuffer(extent);
+    m_depthStencilBufferHandle = CreateDepthStencilBuffer(extent, depthBits, stencilBits);
+
+    //glNamedFramebufferTexture2DEXT(m_frameBufferHandle, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorBufferHandle, 0);
+    //glNamedFramebufferRenderbuffer(m_frameBufferHandle, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthStencilBufferHandle);
+    //glCheckNamedFramebufferStatus(m_frameBufferHandle, GL_FRAMEBUFFER);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorBufferHandle, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthStencilBufferHandle);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void RenderTarget::Use()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBufferHandle);
-    glViewport(0, 0, static_cast<GLsizei>(m_width), static_cast<GLsizei>(m_height));
+    glViewport(0, 0, static_cast<GLsizei>(m_extent.width), static_cast<GLsizei>(m_extent.height));
 }
 
-void OpenGLRenderTarget::Unuse()
+void RenderTarget::Unuse()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glBindTexture(GL_TEXTURE_2D, m_colorBufferHandle);
 }
 
-GLuint OpenGLRenderTarget::CreateColorBuffer(float width, float height)
+GLuint OpenGLRenderTarget::CreateColorBuffer(const FExtent2D& extent)
 {
-    GLuint colorBuffer;
-    glGenTextures(1, &colorBuffer);
-    glBindTexture(GL_TEXTURE_2D, colorBuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, static_cast<GLsizei>(width), static_cast<GLsizei>(height), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+    GLuint colorBufferHandle;
+    glGenTextures(1, &colorBufferHandle);
+    glBindTexture(GL_TEXTURE_2D, colorBufferHandle);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, static_cast<GLsizei>(extent.width), static_cast<GLsizei>(extent.height), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glBindTexture(GL_TEXTURE_2D, 0);
     
-    return colorBuffer;
+    return colorBufferHandle;
 }
 
-GLuint OpenGLRenderTarget::CreateDepthBuffer(float width, float height, int32_t depthBits) const
+GLuint OpenGLRenderTarget::CreateDepthBuffer(const FExtent2D& extent, int32_t depthBits)
 {
-    GLuint renderBuffer;
-    glGenRenderbuffers(1, &renderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, depthBits == 32 ? GL_DEPTH_COMPONENT32 : depthBits == 24 ? GL_DEPTH_COMPONENT24 : GL_DEPTH_COMPONENT16, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    Debug::Assert(depthBits == 32 || depthBits == 24 || depthBits == 16);
+
+    GLuint depthBufferHandle;
+    glGenRenderbuffers(1, &depthBufferHandle);
+    glBindRenderbuffer(GL_RENDERBUFFER, depthBufferHandle);
+    glRenderbufferStorage(GL_RENDERBUFFER, depthBits == 32 ? GL_DEPTH_COMPONENT32 : depthBits == 24 ? GL_DEPTH_COMPONENT24 : GL_DEPTH_COMPONENT16, static_cast<GLsizei>(extent.width), static_cast<GLsizei>(extent.height));
+    //glNamedRenderbufferStorage(depthBufferHandle, depthBits == 32 ? GL_DEPTH_COMPONENT32 : depthBits == 24 ? GL_DEPTH_COMPONENT24 : GL_DEPTH_COMPONENT16, static_cast<GLsizei>(extent.width), static_cast<GLsizei>(extent.height));
     
-    return renderBuffer;
+    return depthBufferHandle;
 }
 
-GLuint OpenGLRenderTarget::CreateDepthStencilBuffer(float width, float height, int32_t depthBits) const
+GLuint OpenGLRenderTarget::CreateDepthStencilBuffer(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits)
 {
-    GLuint renderBuffer;
-    glGenRenderbuffers(1, &renderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, depthBits == 32 ? GL_DEPTH32F_STENCIL8 : GL_DEPTH24_STENCIL8, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    Debug::Assert((depthBits == 32 || depthBits == 24) && stencilBits == 8);
 
-    return renderBuffer;
+    GLuint depthStencilBuffer;
+    glGenRenderbuffers(1, &depthStencilBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, depthStencilBuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, depthBits == 32 ? GL_DEPTH32F_STENCIL8 : GL_DEPTH24_STENCIL8, static_cast<GLsizei>(extent.width), static_cast<GLsizei>(extent.height));
+
+    return depthStencilBuffer;
 }
 
-GLuint OpenGLRenderTarget::CreateFrameBuffer() const
+GLuint OpenGLRenderTarget::CreateFrameBuffer()
 {
     GLuint frameBufferHandle;
     glGenFramebuffers(1, &frameBufferHandle);

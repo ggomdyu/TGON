@@ -5,7 +5,6 @@
  */
 
 #pragma once
-#include "Math/Extent.h"
 
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLRenderTarget.h"
@@ -19,14 +18,13 @@ class RenderTarget :
 {
 /**@section Constructor */
 public:
-    using PlatformRenderTarget::PlatformRenderTarget;
-
     RenderTarget(const FExtent2D& extent, int32_t depthBits);
-    
+
 /**@section Method */
 public:
-    using PlatformRenderTarget::Use;
-    using PlatformRenderTarget::Unuse;
+    bool Initialize(const FExtent2D& extent, int32_t depthBits = 0, int32_t stencilBits = 0);
+    void Use();
+    void Unuse();
 };
 
 } /* namespace tgon */

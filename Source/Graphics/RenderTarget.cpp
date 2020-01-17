@@ -5,9 +5,9 @@
 namespace tgon
 {
 
-RenderTarget::RenderTarget(const FExtent2D& extent, int32_t depthBits) :
-    RenderTarget(extent.width, extent.height, depthBits)
+RenderTarget::RenderTarget(const FExtent2D& extent, int32_t depthBits)
 {
+    this->Initialize(extent, depthBits);
 }
 
 } /* namespace tgon */

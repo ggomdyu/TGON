@@ -8,8 +8,9 @@
 #include <vector>
 #include <unordered_map>
 
-#include "GameObject.h"
 #include "Text/StringHash.h"
+
+#include "GameObject.h"
 
 namespace tgon
 {
