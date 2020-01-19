@@ -36,7 +36,12 @@ int32_t UIRendererComponent::GetSortingLayer() const noexcept
 
 std::shared_ptr<Material> UIRendererComponent::GetMaterial() noexcept
 {
-    return std::shared_ptr<Material>();
+    return m_material;
+}
+
+std::shared_ptr<const Material> UIRendererComponent::GetMaterial() const noexcept
+{
+    return m_material;
 }
 
 } /* namespace tgon */

@@ -17,7 +17,7 @@ class WindowsApplication :
 {
 /**@section Type */
 public:
-    using MessageHandler = void(*)(const MSG&);
+    using MessageHandler = void(*)(const MSG&, void*);
 
 /**@section Constructor */
 protected:
@@ -25,7 +25,7 @@ protected:
 
 /**@section Method */
 public:
-    static void SetMessageHandler(MessageHandler messageHandler);
+    static void SetMessageHandler(MessageHandler messageHandler, void* messageHandlerParam);
 
 private:
     static bool RegisterDefaultWindowClass();
@@ -33,6 +33,7 @@ private:
 /**@section Variable */
 protected:
     inline static MessageHandler m_messageHandler;
+    inline static void* m_messageHandlerParam;
 };
 
 using PlatformApplication = WindowsApplication;

@@ -5,12 +5,13 @@
 namespace tgon
 {
 
-Graphics::Graphics(const Window& displayTarget, const VideoMode& videoMode) :
-    PlatformGraphics(displayTarget, videoMode)
+Graphics::Graphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
+    PlatformGraphics(displayWindow, videoMode),
+    m_displayWindow(displayWindow)
 {
     this->EnableCullFace();
 
-    auto clientSize = displayTarget.GetClientSize();
+    auto clientSize = displayWindow->GetClientSize();
     this->SetViewport(0, 0, clientSize.width, clientSize.height);
     this->SetClearColor(videoMode.clearColor);
     this->SetCullMode(CullMode::CW);
@@ -27,6 +28,16 @@ PlatformGraphics& Graphics::GetPlatformDependency() noexcept
 const PlatformGraphics& Graphics::GetPlatformDependency() const noexcept
 {
     return *this;
+}
+
+std::shared_ptr<Window> Graphics::GetDisplayWindow() noexcept
+{
+    return m_displayWindow;
+}
+
+std::shared_ptr<const Window> Graphics::GetDisplayWindow() const noexcept
+{
+    return m_displayWindow;
 }
 
 } /* namespace tgon */

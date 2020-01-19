@@ -30,7 +30,7 @@ class OpenGLContext final :
 /**@section Constructor */
 public:
     OpenGLContext() noexcept = default;
-    OpenGLContext(const Window& displayWindow, const VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs) noexcept;
 
 /**@section Destructor */

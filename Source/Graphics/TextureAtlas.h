@@ -63,7 +63,7 @@ using I64extureAtlas = BasicTextureAtlas<int64_t>;
 
 template <typename _KeyType>
 inline BasicTextureAtlas<_KeyType>::BasicTextureAtlas(const I32Extent2D& atlasSize, PixelFormat atlasPixelFormat, int32_t paddingOffset) :
-    m_atlasTexture(std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, true)),
+    m_atlasTexture(std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Linear, WrapMode::Clamp, false, true)),
     m_paddingOffset(paddingOffset)
 {
     stbrp_init_target(&m_context, static_cast<int>(atlasSize.width), static_cast<int>(atlasSize.height), &m_nodes[0], 4096);
@@ -99,7 +99,7 @@ inline void BasicTextureAtlas<_KeyType>::Initialize(const I32Extent2D& atlasSize
 {
     if ((m_atlasTexture == nullptr) || (m_atlasTexture->GetSize() != atlasSize) || (m_atlasTexture->GetPixelFormat() != atlasPixelFormat))
     {
-        m_atlasTexture = std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Bilinear, WrapMode::Clamp, false, true);
+        m_atlasTexture = std::make_shared<Texture>(nullptr, atlasSize, atlasPixelFormat, FilterMode::Linear, WrapMode::Clamp, false, true);
     }
 
     m_context = {};

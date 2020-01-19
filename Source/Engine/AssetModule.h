@@ -9,9 +9,9 @@
 #include <unordered_map>
 #include <any>
 
+#include "Audio/AudioBuffer.h"
 #include "Text/StringHash.h"
 #include "Drawing/FontFactory.h"
-#include "Audio/AudioBuffer.h"
 #include "Graphics/Texture.h"
 #include "Graphics/FontAtlas.h"
 
@@ -88,7 +88,13 @@ inline std::shared_ptr<_ResourceType> AssetModule::CreateResource(const StringVi
 template <>
 inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    return std::make_shared<Texture>(path.Data(), FilterMode::Bilinear, WrapMode::Clamp, false, false);
+    auto image = Image::Create(path.Data());
+    if (image.has_value() == false)
+    {
+        return nullptr;
+    }
+
+    return std::make_shared<Texture>(*image, FilterMode::Linear, WrapMode::Clamp, false, false);
 }
 
 template <>

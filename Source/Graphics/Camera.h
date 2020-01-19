@@ -8,6 +8,8 @@
 #include "Math/Matrix4x4.h"
 #include "Math/Rect.h"
 
+#include "RenderTarget.h"
+
 namespace tgon
 {
     
@@ -25,15 +27,18 @@ public:
 
 /**@section Destructor */
 public:
-    virtual ~Camera() = 0;
+    virtual ~Camera() = default;
     
 /**@section Method */
 public:
     virtual void Update() = 0;
     void SetNearZ(float nearZ) noexcept;
     void SetFarZ(float farZ) noexcept;
+    void SetRenderTarget(const std::shared_ptr<RenderTarget>& renderTarget);
     float GetNearZ() const noexcept;
     float GetFarZ() const noexcept;
+    std::shared_ptr<RenderTarget> GetRenderTarget() noexcept;
+    std::shared_ptr<const RenderTarget> GetRenderTarget() const noexcept;
     ProjectionMode GetProjectionMode() const noexcept;
     const Matrix4x4& GetProjectionMatrix() const noexcept;
     const Matrix4x4& GetViewProjectionMatrix() const noexcept;
@@ -46,6 +51,7 @@ protected:
     Matrix4x4 m_matViewProj;
     bool m_isDirty;
     ProjectionMode m_projectionMode;
+    std::shared_ptr<RenderTarget> m_renderTarget;
 };
 
 class PerspectiveCamera :

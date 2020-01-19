@@ -22,7 +22,7 @@ public:
 public:
     Object() = default;
     Object(const StringHash& name);
-    Object(StringHash&& name);
+    Object(StringHash&& name) noexcept;
 
 /**@section Method */
 public:
@@ -40,7 +40,7 @@ inline Object::Object(const StringHash& name) :
 {
 }
 
-inline Object::Object(StringHash&& name) :
+inline Object::Object(StringHash&& name) noexcept :
     m_name(std::move(name))
 {
 }

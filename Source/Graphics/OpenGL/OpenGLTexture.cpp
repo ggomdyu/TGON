@@ -12,12 +12,12 @@ namespace tgon
 namespace
 {
 
-constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode) noexcept
+constexpr GLint ConvertTextureFilterModeToNative(FilterMode textureFilterMode, bool isUseMipmap) noexcept
 {
-    constexpr GLint nativeTextureFilterModes[] = {
-        GL_NEAREST,
-        GL_LINEAR
-    };
+    auto nativeTextureFilterModes = (isUseMipmap) ?
+        MakeArray(GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_LINEAR) :
+        MakeArray(GL_NEAREST, GL_LINEAR, GL_LINEAR);
+
     return nativeTextureFilterModes[UnderlyingCast(textureFilterMode)];
 }
     
@@ -65,8 +65,13 @@ GLuint CreatePixelBufferHandle(GLsizeiptr bufferBytes)
 
 } /* namespace */
 
-OpenGLTexture::OpenGLTexture() noexcept :
+OpenGLTexture::OpenGLTexture() :
     m_textureHandle(CreateTextureHandle())
+{
+}
+
+OpenGLTexture::OpenGLTexture(void* textureHandle) noexcept :
+    m_textureHandle(reinterpret_cast<GLuint>(textureHandle))
 {
 }
 
@@ -83,12 +88,7 @@ OpenGLTexture::~OpenGLTexture()
 
 OpenGLTexture& OpenGLTexture::operator=(OpenGLTexture&& rhs) noexcept
 {
-    this->Destroy();
-
-    m_textureHandle = rhs.m_textureHandle;
-
-    rhs.m_textureHandle = 0;
-
+    std::swap(m_textureHandle, rhs.m_textureHandle);
     return *this;
 }
 
@@ -108,11 +108,6 @@ void OpenGLTexture::CreateMipmap() const
     TGON_GL_ERROR_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
 }
 
-GLuint OpenGLTexture::GetTextureHandle() const noexcept
-{
-    return m_textureHandle;
-}
-
 void OpenGLTexture::Destroy()
 {
     if (m_textureHandle != 0)
@@ -125,30 +120,14 @@ void OpenGLTexture::Destroy()
 void OpenGLTexture::UpdateTexParameters()
 {
     // Update the texture filter
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)); // When Magnifying the image
-    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, ConvertTextureFilterModeToNative(reinterpret_cast<Texture*>(this)->GetFilterMode()))); // When minifying the image
+    auto downcastedMe = reinterpret_cast<Texture*>(this);
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, ConvertTextureFilterModeToNative(downcastedMe->GetFilterMode(), downcastedMe->IsUseMipmap())));
+    TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
     // Update the texture wrap mode
     auto wrapMode = ConvertTextureWrapModeToNative(reinterpret_cast<Texture*>(this)->GetWrapMode());
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode));
     TGON_GL_ERROR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode));
-}
-
-Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    OpenGLTexture(),
-    m_isUseMipmap(isUseMipmap),
-    m_isDynamicUsage(isDynamicUsage),
-    m_pixelFormat(pixelFormat),
-    m_filterMode(filterMode),
-    m_wrapMode(wrapMode),
-    m_size(size)
-{
-    this->SetData(imageData, size, pixelFormat);
-}
-
-bool Texture::IsValid() const
-{
-    return glIsTexture(m_textureHandle);
 }
 
 void Texture::SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat)
@@ -175,5 +154,21 @@ void Texture::SetData(const std::byte* imageData, const Vector2& pos, const I32E
     }
 }
 
+bool Texture::IsValid() const
+{
+    return glIsTexture(m_textureHandle);
+}
+
+bool Texture::IsUseMipmap() const noexcept
+{
+    return m_isUseMipmap;
+}
+
+void* Texture::GetNativeTexture() noexcept
+{
+    return reinterpret_cast<void*>(m_textureHandle);
+}
+
 } /* namespace tgon */
+
 #endif

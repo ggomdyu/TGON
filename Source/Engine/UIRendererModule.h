@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <gsl/span>
+
 #include "Graphics/Graphics.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Material.h"
@@ -23,23 +25,26 @@ class UIRendererModule :
 public:
     TGON_DECLARE_RTTI(UIRendererModule)
     
+/**@section Type */
+public:
+    using SortingLayer = int32_t;
+
 /**@section Constructor */
 public:
     explicit UIRendererModule(const std::shared_ptr<Graphics>& graphics) noexcept;
 
 /**@section Method */
 public:
-    void AddCamera(const std::shared_ptr<Camera>& camera);
-    void AddUIElement(const std::shared_ptr<UIElement>& element, int32_t sotringLayer, const Matrix4x4& matWorld);
-    bool RemoveCamera(const std::shared_ptr<Camera>& camera);
-    void SetMaxSortingLayer(int32_t maxSortingLayer) noexcept;
-    int32_t GetMaxSortingLayer() const noexcept;
-    std::shared_ptr<Graphics> GetGraphics() noexcept;
-    std::shared_ptr<const Graphics> GetGraphics() const noexcept;
+    void AddPrimitive(const std::shared_ptr<UIElement>& element, SortingLayer sotringLayer, const Matrix4x4& matWorld);
+    void AddSubCamera(const std::shared_ptr<Camera>& camera);
+    bool RemoveSubCamera(const std::shared_ptr<Camera>& camera);
+    void SetMaxSortingLayer(SortingLayer sortingLayer);
     void Update() override;
     void Draw();
 
 private:
+    static std::shared_ptr<Camera> CreateMainCamera(const std::shared_ptr<Window>& displayWindow);
+    void UpdateCameras();
     void UpdateSpriteBatches();
     void FlushSpriteBatches();
 
@@ -47,11 +52,12 @@ private:
 private:
     std::shared_ptr<Graphics> m_graphics;
     std::shared_ptr<Material> m_uiMaterial;
-    std::vector<float> m_spriteVertices;
     VertexBuffer m_spriteVertexBuffer;
+    std::vector<float> m_spriteVertices;
+    std::vector<UIBatch> m_spriteBatches;
     std::vector<std::vector<std::pair<std::shared_ptr<UIElement>, const Matrix4x4&>>> m_sortingLayers;
-    std::vector<UIBatch> m_batches;
-    std::vector<std::shared_ptr<Camera>> m_cameraList;
+    std::shared_ptr<Camera> m_mainCamera;
+    std::vector<std::shared_ptr<Camera>> m_subCameras;
 };
 
 } /* namespace tgon */

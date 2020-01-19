@@ -17,8 +17,9 @@ class OpenGLTexture :
     private NonCopyable
 {
 /**@section Constructor */
-protected:
-    OpenGLTexture() noexcept;
+public:
+    OpenGLTexture();
+    OpenGLTexture(void* nativeTexture) noexcept;
     OpenGLTexture(OpenGLTexture&& rhs) noexcept;
     
 /**@section Destructor */
@@ -33,12 +34,9 @@ protected:
 protected:
     void Use();
     void Unuse();
-    void CreateMipmap() const;
-    GLuint GetTextureHandle() const noexcept;
-    void Destroy();
-
-private:
     void UpdateTexParameters();
+    void CreateMipmap() const;
+    void Destroy();
 
 /**@section Variable */
 protected:

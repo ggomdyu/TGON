@@ -519,7 +519,7 @@ const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noex
 
 void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_fontAtlas->GetAtlasTexture(), FilterMode::Bilinear, WrapMode::Clamp, BlendMode::Alpha, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_fontAtlas->GetAtlasTexture(), FilterMode::Linear, WrapMode::Clamp, BlendMode::Alpha, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);

@@ -15,12 +15,16 @@ UIRendererModule::UIRendererModule(const std::shared_ptr<Graphics>& graphics) no
         VertexBufferLayoutDescriptor(VertexAttributeIndex::Color, 4, VertexFormatType::Float, true, sizeof(V3F_C4F_T2F), offsetof(V3F_C4F_T2F, color)),
         VertexBufferLayoutDescriptor(VertexAttributeIndex::UV, 2, VertexFormatType::Float, false, sizeof(V3F_C4F_T2F), offsetof(V3F_C4F_T2F, uv))
     }),
-    m_sortingLayers(1)
+    m_sortingLayers(1),
+    m_mainCamera(CreateMainCamera(graphics->GetDisplayWindow()))
 {
 }
 
 void UIRendererModule::Update()
 {
+    m_graphics->DisableDepthTest();
+
+    this->UpdateCameras();
     this->UpdateSpriteBatches();
     
     m_spriteVertexBuffer.Use();
@@ -33,62 +37,54 @@ void UIRendererModule::Draw()
 {
     m_graphics->ClearColorDepthBuffer();
 
-#ifndef NDEBUG
-    if (m_cameraList.size() <= 0)
-    {
-        Debug::WriteLine("UIRendererModule has no camera but trying to draw.");
-        return;
-    }
-#endif
     this->FlushSpriteBatches();
 
     m_graphics->SwapBuffer();
 }
 
-void UIRendererModule::AddUIElement(const std::shared_ptr<UIElement>& element, int32_t sotringLayer, const Matrix4x4& matWorld)
+void UIRendererModule::AddPrimitive(const std::shared_ptr<UIElement>& element, SortingLayer sotringLayer, const Matrix4x4& matWorld)
 {
-    auto& sortingLayer = m_sortingLayers[sotringLayer];
-    sortingLayer.emplace_back(element, matWorld);
+    m_sortingLayers[sotringLayer].emplace_back(element, matWorld);
 }
 
-void UIRendererModule::AddCamera(const std::shared_ptr<Camera>& camera)
+void UIRendererModule::AddSubCamera(const std::shared_ptr<Camera>& camera)
 {
-    m_cameraList.push_back(camera);
+    m_subCameras.push_back(camera);
 }
 
-bool UIRendererModule::RemoveCamera(const std::shared_ptr<Camera>& camera)
+bool UIRendererModule::RemoveSubCamera(const std::shared_ptr<Camera>& camera)
 {
-    auto iter = std::find_if(m_cameraList.begin(), m_cameraList.end(), [&](const std::shared_ptr<Camera>& item)
-    {
-        return item == camera;
-    });
-    if (iter == m_cameraList.end())
+    auto iter = std::find(m_subCameras.begin(), m_subCameras.end(), camera);
+    if (iter == m_subCameras.end())
     {
         return false;
     }
     
-    m_cameraList.erase(iter);
+    m_subCameras.erase(iter);
     return true;
 }
 
-void UIRendererModule::SetMaxSortingLayer(int32_t maxSortingLayer) noexcept
+void UIRendererModule::SetMaxSortingLayer(SortingLayer maxSortingLayer)
 {
     m_sortingLayers.resize(static_cast<size_t>(maxSortingLayer));
 }
 
-int32_t UIRendererModule::GetMaxSortingLayer() const noexcept
+std::shared_ptr<Camera> UIRendererModule::CreateMainCamera(const std::shared_ptr<Window>& displayWindow)
 {
-    return static_cast<int32_t>(m_sortingLayers.size());
+    auto clientSize = displayWindow->GetClientSize();
+    float halfWidth = static_cast<float>(clientSize.width) * 0.5f;
+    float halfHeight = static_cast<float>(clientSize.height) * 0.5f;
+    return std::make_shared<OrthographicCamera>(tgon::FRect(-halfWidth, -halfHeight, static_cast<float>(clientSize.width), static_cast<float>(clientSize.height)), -1.0f, 1024.0f);
 }
 
-std::shared_ptr<Graphics> UIRendererModule::GetGraphics() noexcept
+void UIRendererModule::UpdateCameras()
 {
-    return m_graphics;
-}
+    m_mainCamera->Update();
 
-std::shared_ptr<const Graphics> UIRendererModule::GetGraphics() const noexcept
-{
-    return m_graphics;
+    for (auto& subCamera : m_subCameras)
+    {
+        subCamera->Update();
+    }
 }
 
 void UIRendererModule::UpdateSpriteBatches()
@@ -97,7 +93,7 @@ void UIRendererModule::UpdateSpriteBatches()
     {
         for (auto& primitive : sortingLayer)
         {
-            primitive.first->GetBatches(&m_batches, primitive.second, &m_spriteVertices);
+            primitive.first->GetBatches(&m_spriteBatches, primitive.second, &m_spriteVertices);
         }
 
         sortingLayer.clear();
@@ -106,29 +102,35 @@ void UIRendererModule::UpdateSpriteBatches()
 
 void UIRendererModule::FlushSpriteBatches()
 {
-    for (auto& camera : m_cameraList)
+    auto flushSpriteBatches = [&](const std::shared_ptr<Camera>& camera)
     {
 #if DEBUG
         int32_t drawCall = 0;
 #endif
-        for (auto& batch : m_batches)
+        for (auto& spriteBatch : m_spriteBatches)
         {
-            auto material = batch.GetMaterial();
+            auto material = spriteBatch.GetMaterial();
             material->Use();
             material->SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
 
-            batch.FlushBatch(*m_graphics);
+            spriteBatch.FlushBatch(*m_graphics);
 #if DEBUG
             ++drawCall;
 #endif
         }
-
-        m_batches.clear();
 #if DEBUG
 //        Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
-#endif
+    #endif
+    };
+
+    flushSpriteBatches(m_mainCamera);
+
+    for (auto& subCamera : m_subCameras)
+    {
+        flushSpriteBatches(subCamera);
     }
 
+    m_spriteBatches.clear();
     m_spriteVertices.clear();
 }
 

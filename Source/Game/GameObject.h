@@ -22,12 +22,12 @@ public:
 
 /**@section Constructor */
 protected:
-    GameObject();
+    GameObject() noexcept;
     explicit GameObject(const StringHash& name);
-    explicit GameObject(StringHash&& name);
-    explicit GameObject(const std::shared_ptr<Transform>& transform);
+    explicit GameObject(StringHash&& name) noexcept;
+    explicit GameObject(const std::shared_ptr<Transform>& transform) noexcept;
     GameObject(const StringHash& name, const std::shared_ptr<Transform>& transform);
-    GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform);
+    GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform) noexcept;
 
 /**@section Method */
 public:

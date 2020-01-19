@@ -7,7 +7,7 @@
 namespace tgon
 {
                                    
-GameObject::GameObject() :
+GameObject::GameObject() noexcept :
     GameObject({}, {})
 {
 }
@@ -17,12 +17,12 @@ GameObject::GameObject(const StringHash& name) :
 {
 }
 
-GameObject::GameObject(StringHash&& name) :
+GameObject::GameObject(StringHash&& name) noexcept :
     GameObject(std::move(name), {})
 {
 }
 
-GameObject::GameObject(const std::shared_ptr<Transform>& transform) :
+GameObject::GameObject(const std::shared_ptr<Transform>& transform) noexcept :
     GameObject({}, transform)
 {
 }
@@ -34,7 +34,7 @@ GameObject::GameObject(const StringHash& name, const std::shared_ptr<Transform>&
 {
 }
 
-GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform) :
+GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform) noexcept :
     Object(std::move(name)),
     m_isActive(true),
     m_transform(transform)

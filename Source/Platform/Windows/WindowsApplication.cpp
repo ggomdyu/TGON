@@ -54,9 +54,10 @@ bool WindowsApplication::RegisterDefaultWindowClass()
     return RegisterClassExW(&wcex) != 0;
 }
 
-void WindowsApplication::SetMessageHandler(MessageHandler messageHandler)
+void WindowsApplication::SetMessageHandler(MessageHandler messageHandler, void* messageHandlerParam)
 {
     m_messageHandler = messageHandler;
+    m_messageHandlerParam = messageHandlerParam;
 }
 
 void Application::Terminate()
@@ -75,7 +76,7 @@ void Application::MessageLoop()
 
             if (m_messageHandler != nullptr)
             {
-                m_messageHandler(msg);
+                m_messageHandler(msg, m_messageHandlerParam);
             }
         }
         else
