@@ -22,7 +22,7 @@ class UISprite :
 /**@section Constructor */
 public:
     UISprite() = default;
-    UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode = FilterMode::Bilinear, WrapMode wrapMode = WrapMode::Clamp, BlendMode blendMode = BlendMode::Normal, Color4f blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f)) noexcept;
+    UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode = FilterMode::Linear, WrapMode wrapMode = WrapMode::Clamp, BlendMode blendMode = BlendMode::Normal, Color4f blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f)) noexcept;
     UISprite(UISprite&& rhs) noexcept;
     
 /**@section Operator */
@@ -55,7 +55,7 @@ private:
     std::shared_ptr<Texture> m_texture;
     FRect m_textureRect;
     FExtent2D m_textureSize;
-    FilterMode m_filterMode = FilterMode::Bilinear;
+    FilterMode m_filterMode = FilterMode::Linear;
     WrapMode m_wrapMode = WrapMode::Clamp;
     BlendMode m_blendMode = BlendMode::Normal;
     Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);

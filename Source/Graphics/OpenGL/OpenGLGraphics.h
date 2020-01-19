@@ -20,7 +20,7 @@ class OpenGLGraphics :
 {
 /**@section Constructor */
 protected:
-    OpenGLGraphics(const Window& displayTarget, const VideoMode& videoMode);
+    OpenGLGraphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode);
     OpenGLGraphics(OpenGLGraphics&& rhs) noexcept;
 
 protected:

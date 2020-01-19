@@ -121,7 +121,7 @@ void UITextRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_uiRendererModule->AddUIElement(text, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
+        m_uiRendererModule->AddPrimitive(text, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
     }
 }
 

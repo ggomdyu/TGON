@@ -60,10 +60,10 @@ NSOpenGLPixelFormat* FindSuitablePixelFormat(const VideoMode& videoMode)
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const Window& window, const VideoMode& videoMode) :
+OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
     context([[NSOpenGLContext alloc] initWithFormat:FindSuitablePixelFormat(videoMode) shareContext:nil])
 {
-    NSWindow* nativeWindow = (__bridge NSWindow*)window.GetNativeWindow();
+    NSWindow* nativeWindow = (__bridge NSWindow*)displayWindow->GetNativeWindow();
     
     // Create a NSOpenGLView and attach it to the target window.
     NSOpenGLView* openGLView = [[NSOpenGLView alloc] init];

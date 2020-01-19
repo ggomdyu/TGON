@@ -23,7 +23,7 @@ class OpenGLRenderTarget :
 {
 /**@section Constructor */
 protected:
-    OpenGLRenderTarget();
+    OpenGLRenderTarget(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits);
     OpenGLRenderTarget(OpenGLRenderTarget&& rhs) noexcept;
     
 /**@section Destructor */
@@ -39,7 +39,7 @@ protected:
     static GLuint CreateColorBuffer(const FExtent2D& extent);
     static GLuint CreateDepthBuffer(const FExtent2D& extent, int32_t depthBits);
     static GLuint CreateDepthStencilBuffer(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits);
-    static GLuint CreateFrameBuffer();
+    static GLuint CreateFrameBuffer(GLuint colorBufferHandle, GLuint depthStencilBufferHandle);
     void Destroy();
 
 /**@section Variable */

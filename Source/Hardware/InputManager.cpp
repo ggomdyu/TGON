@@ -7,21 +7,16 @@
 namespace tgon
 {
 
-InputManager::InputManager()
+InputManager::InputManager() :
+    m_inputManager(std::make_unique<gainput::InputManager>())
 {
-    m_inputManager = std::make_unique<gainput::InputManager>();
 
 #if TGON_PLATFORM_WINDOWS
-    Application::GetInstance().GetPlatformDependency().SetMessageHandler([](const MSG& msg)
+    Application::GetInstance().GetPlatformDependency().SetMessageHandler([](const MSG& msg, void* param)
     {
-        m_inputManager->HandleMessage(msg);
-    });
+        reinterpret_cast<gainput::InputManager*>(param)->HandleMessage(msg);
+    }, m_inputManager.get());
 #endif
-}
-
-InputManager::~InputManager()
-{
-    m_inputManager.release();
 }
 
 std::shared_ptr<Keyboard> InputManager::CreateKeyboard()

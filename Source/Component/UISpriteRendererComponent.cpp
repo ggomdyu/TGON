@@ -108,7 +108,7 @@ void UISpriteRendererComponent::Update()
     auto gameObject = m_gameObject.lock();
     if (gameObject != nullptr)
     {
-        m_uiRendererModule->AddUIElement(sprite, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
+        m_uiRendererModule->AddPrimitive(sprite, m_sortingLayer, gameObject->FindComponent<Transform>()->GetWorldMatrix());
     }
 }
 

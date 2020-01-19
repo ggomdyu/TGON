@@ -62,7 +62,7 @@ HGLRC MakeNewGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits, i
         return nullptr;
     }
 
-    PIXELFORMATDESCRIPTOR pfd;
+    PIXELFORMATDESCRIPTOR pfd {};
     if (SetPixelFormat(dcHandle, pixelFormat, &pfd) == FALSE)
     {
         return nullptr;
@@ -80,8 +80,8 @@ HGLRC MakeNewGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits, i
 
 } /* namespace */
 
-OpenGLContext::OpenGLContext(const Window& displayWindow, const VideoMode& videoMode) :
-    wndHandle(reinterpret_cast<HWND>(displayWindow.GetNativeWindow())),
+OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
+    wndHandle(reinterpret_cast<HWND>(displayWindow->GetNativeWindow())),
     dcHandle(GetDC(wndHandle))
 {
     HGLRC oldGLRC = MakeOldGLRC(dcHandle, videoMode.colorBits, videoMode.depthBits,videoMode.stencilBits);

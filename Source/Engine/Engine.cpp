@@ -34,7 +34,7 @@ void Engine::Initialize()
     this->AddModule<TimerModule>();
     this->AddModule<InputModule>(m_engineConfig.inputMode);
 
-    auto graphics = std::make_shared<Graphics>(*Application::GetInstance().GetRootWindow(), m_engineConfig.videoMode);
+    auto graphics = std::make_shared<Graphics>(Application::GetInstance().GetRootWindow(), m_engineConfig.videoMode);
     this->AddModule<UIRendererModule>(graphics);
 
     this->AddModule<SceneModule>();
@@ -62,6 +62,11 @@ void Engine::RemoveAllModule()
 {
     for (auto iter = m_moduleCache.rbegin(); iter != m_moduleCache.rend(); ++iter)
     {
+        if (*iter == nullptr)
+        {
+            continue;
+        }
+
         (*iter)->Destroy();
     }
 

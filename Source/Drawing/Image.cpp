@@ -33,18 +33,6 @@ constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
 
 } /* namespace */
 
-Image::Image(const char* filePath) :
-    Image()
-{
-    this->Initialize(filePath);
-}
-
-Image::Image(const gsl::span<const std::byte>& fileData) :
-    Image()
-{
-    this->Initialize(fileData);
-}
-
 Image::Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
     m_imageData(std::move(imageData)),
     m_size(size),
@@ -93,37 +81,27 @@ std::byte Image::operator[](size_t index) const noexcept
     return m_imageData[index];
 }
 
-bool Image::Initialize(const char* filePath)
+std::optional<Image> Image::Create(const char* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
     {
-        return false;
+        return {};
     }
 
-    return this->Initialize(*fileData);
+    return Create(*fileData);
 }
 
-bool Image::Initialize(const gsl::span<const std::byte>& fileData)
+std::optional<Image> Image::Create(const gsl::span<const std::byte>& fileData)
 {
     int width = 0, height = 0;
-    m_imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData[0]), static_cast<int>(fileData.size()), &width, &height, nullptr, STBI_rgb_alpha)));
-    if (m_imageData == nullptr)
+    auto imageData = std::unique_ptr<std::byte[]>(reinterpret_cast<std::byte*>(stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(&fileData[0]), static_cast<int>(fileData.size()), &width, &height, nullptr, STBI_rgb_alpha)));
+    if (imageData == nullptr)
     {
-        return false;
+        return {};
     }
 
-    m_size = I32Extent2D(static_cast<int32_t>(width), static_cast<int32_t>(height));
-    m_pixelFormat = PixelFormat::RGBA8888;
-
-    return true;
-}
-
-void Image::Initialize(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat)
-{
-    m_imageData = std::move(imageData);
-    m_size = size;
-    m_pixelFormat = pixelFormat;
+    return Image(std::move(imageData), {static_cast<int32_t>(width), static_cast<int32_t>(height)}, PixelFormat::RGBA8888);
 }
 
 std::byte* Image::GetData() noexcept

@@ -57,7 +57,7 @@ class Graphics final :
 {
 /**@section Constructor */
 public:
-    Graphics(const Window& displayTarget, const VideoMode& videoMode);
+    Graphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode);
 
 /**@section Method */
 public:
@@ -82,6 +82,12 @@ public:
     void SwapBuffer();
     void DrawPrimitives(PrimitiveType primitiveType, int32_t vertexStartOffset, int32_t vertexCount);
     void DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexCount);
+    std::shared_ptr<Window> GetDisplayWindow() noexcept;
+    std::shared_ptr<const Window> GetDisplayWindow() const noexcept;
+
+/**@section Variable */
+private:
+    std::shared_ptr<Window> m_displayWindow;
 };
 
 } /* namespace tgon */

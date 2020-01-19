@@ -21,10 +21,6 @@ class InputManager final :
 public:
     InputManager();
 
-/**@section Destructor */
-public:
-    ~InputManager();
-
 /**@section Method */
 public:
     void Update();
@@ -34,7 +30,7 @@ public:
 
 /**@section Variable */
 protected:
-    inline static std::unique_ptr<gainput::InputManager> m_inputManager;
+    std::unique_ptr<gainput::InputManager> m_inputManager;
 };
 
 } /* namespace tgon */

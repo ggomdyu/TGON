@@ -5,13 +5,25 @@
 namespace tgon
 {
 
-Texture::Texture(const char* filePath, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    Texture(Image(filePath), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    Texture(image.GetData(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
 {
 }
 
-Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
-    Texture(image.GetData(), image.GetSize(), image.GetPixelFormat(), filterMode, wrapMode, isUseMipmap, isDynamicUsage)
+Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
+    PlatformTexture(),
+    m_isUseMipmap(isUseMipmap),
+    m_isDynamicUsage(isDynamicUsage),
+    m_pixelFormat(pixelFormat),
+    m_filterMode(filterMode),
+    m_wrapMode(wrapMode),
+    m_size(size)
+{
+    this->SetData(imageData, size, pixelFormat);
+}
+
+Texture::Texture(void* nativeTexture) noexcept :
+    PlatformTexture(nativeTexture)
 {
 }
 
@@ -24,15 +36,9 @@ Texture::Texture(Texture&& rhs) noexcept :
     m_wrapMode(rhs.m_wrapMode),
     m_size(rhs.m_size)
 {
-    rhs.m_isUseMipmap = false;
-    rhs.m_isDynamicUsage = false;
-    rhs.m_pixelFormat = {};
-    rhs.m_filterMode = {};
-    rhs.m_wrapMode = {};
-    rhs.m_size = {};
 }
 
-Texture& Texture::operator=(Texture&& rhs)
+Texture& Texture::operator=(Texture&& rhs) noexcept
 {
     PlatformTexture::operator=(std::move(rhs));
     
@@ -42,13 +48,6 @@ Texture& Texture::operator=(Texture&& rhs)
     m_filterMode = rhs.m_filterMode;
     m_wrapMode = rhs.m_wrapMode;
     m_size = rhs.m_size;
-
-    rhs.m_isUseMipmap = false;
-    rhs.m_isDynamicUsage = false;
-    rhs.m_pixelFormat = {};
-    rhs.m_filterMode = {};
-    rhs.m_wrapMode = {};
-    rhs.m_size = {};
 
     return *this;
 }
@@ -98,6 +97,11 @@ FilterMode Texture::GetFilterMode() const noexcept
 WrapMode Texture::GetWrapMode() const noexcept
 {
     return m_wrapMode;
+}
+
+const void* Texture::GetNativeTexture() const noexcept
+{
+    return const_cast<Texture*>(this)->GetNativeTexture();
 }
 
 const I32Extent2D& Texture::GetSize() const noexcept

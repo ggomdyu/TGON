@@ -15,8 +15,6 @@ Camera::Camera(ProjectionMode projectionMode, float nearZ, float farZ) noexcept 
 {
 }
 
-Camera::~Camera() = default;
-
 void Camera::SetNearZ(float nearZ) noexcept
 {
     m_nearZ = nearZ;
@@ -29,6 +27,11 @@ void Camera::SetFarZ(float farZ) noexcept
     m_isDirty = true;
 }
 
+void Camera::SetRenderTarget(const std::shared_ptr<RenderTarget>& renderTarget)
+{
+    m_renderTarget = renderTarget;
+}
+
 float Camera::GetNearZ() const noexcept
 {
     return m_nearZ;
@@ -37,6 +40,16 @@ float Camera::GetNearZ() const noexcept
 float Camera::GetFarZ() const noexcept
 {
     return m_farZ;
+}
+
+std::shared_ptr<RenderTarget> Camera::GetRenderTarget() noexcept
+{
+    return m_renderTarget;
+}
+
+std::shared_ptr<const RenderTarget> Camera::GetRenderTarget() const noexcept
+{
+    return m_renderTarget;
 }
 
 ProjectionMode Camera::GetProjectionMode() const noexcept
