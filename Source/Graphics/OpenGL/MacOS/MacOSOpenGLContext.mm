@@ -87,13 +87,10 @@ OpenGLContext::~OpenGLContext()
 	this->Destroy();
 }
 
-OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs)
+OpenGLContext& OpenGLContext::operator=(OpenGLContext&& rhs) noexcept
 {
-    pixelFormat = rhs.pixelFormat;
-    context = rhs.context;
-        
-    rhs.pixelFormat = nil;
-    rhs.context = nil;
+    std::swap(pixelFormat, rhs.pixelFormat);
+    std::swap(context, rhs.context);
     
     return *this;
 }
