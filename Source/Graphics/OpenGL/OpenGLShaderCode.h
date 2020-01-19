@@ -111,7 +111,7 @@ in vec4 fragColor;                                                              
 in vec2 fragUV;                                                                     \n\
 out vec4 outColor;                                                                  \n\
                                                                                     \n\
-uniform vec4 clipUV;                                                                \n\
+uniform vec4 clipUV = vec4(0.0, 0.0, 1.0, 1.0);                                     \n\
 uniform sampler2D textureSampler;                                                   \n\
                                                                                     \n\
 void main()                                                                         \n\
