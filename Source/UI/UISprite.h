@@ -16,18 +16,21 @@
 namespace tgon
 {
 
-class UISprite :
+class UISprite final :
     public UIElement
 {
+public:
+    TGON_DECLARE_RTTI(UISprite)
+
 /**@section Constructor */
 public:
     UISprite() = default;
     UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode = FilterMode::Linear, WrapMode wrapMode = WrapMode::Clamp, BlendMode blendMode = BlendMode::Normal, Color4f blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f)) noexcept;
-    UISprite(UISprite&& rhs) noexcept;
-    
+    UISprite(UISprite&& rhs) noexcept = default;
+
 /**@section Operator */
 public:
-    UISprite& operator=(UISprite&& rhs) noexcept;
+    UISprite& operator=(UISprite&& rhs) noexcept = default;
     
 /**@section Method */
 public:

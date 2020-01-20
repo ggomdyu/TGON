@@ -57,7 +57,12 @@ std::shared_ptr<Texture> FontAtlas::GetAtlasTexture() noexcept
     return m_textureAtlas.GetAtlasTexture();
 }
 
-const FontFace& FontAtlas::GetFace(int32_t fontSize) const
+std::shared_ptr<FontFace> FontAtlas::GetFace(int32_t fontSize)
+{
+    return m_font->GetFace(fontSize);
+}
+
+std::shared_ptr<const FontFace> FontAtlas::GetFace(int32_t fontSize) const
 {
     return m_font->GetFace(fontSize);
 }

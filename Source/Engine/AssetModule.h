@@ -32,6 +32,10 @@ private:
     using ResourceUnitTable = std::vector<ResourceCache>;
     using ResourceUnit = size_t;
 
+/**@section Constructor */
+public:
+    AssetModule();
+
 /* @section Method */
 public:
     template <typename _ResourceType>
@@ -100,7 +104,7 @@ inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash
 template <>
 inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    return std::make_shared<Font>(path.Data(), m_fontFactory.GetFTLibrary());
+    return nullptr;
 }
 
 template <>

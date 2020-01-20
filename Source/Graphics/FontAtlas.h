@@ -11,7 +11,7 @@
 namespace tgon
 {
 
-class FontAtlas :
+class FontAtlas final :
     private NonCopyable
 {
 /**@section Type */
@@ -34,9 +34,10 @@ public:
     void Initialize(const std::shared_ptr<Font>& font);
     void Initialize(std::shared_ptr<Font>&& font);
     std::optional<FRect> GetTextureRect(char32_t ch, int32_t fontSize) const;
-    std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
     std::shared_ptr<Texture> GetAtlasTexture() noexcept;
-    const FontFace& GetFace(int32_t fontSize) const;
+    std::shared_ptr<const Texture> GetAtlasTexture() const noexcept;
+    std::shared_ptr<FontFace> GetFace(int32_t fontSize);
+    std::shared_ptr<const FontFace> GetFace(int32_t fontSize) const;
     const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
     I32Extent2D GetCharSize(char32_t ch, int32_t fontSize);

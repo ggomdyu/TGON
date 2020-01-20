@@ -10,15 +10,13 @@
 namespace tgon
 {
 
-class Font :
+class Font final :
     private NonCopyable
 {
 /**@section Constructor */
 public:
-    explicit Font(FT_Library library) noexcept;
-    Font(const char* filePath, FT_Library library);
-    Font(const std::vector<std::byte>& fileData, FT_Library library);
-    Font(std::vector<std::byte>&& fileData, FT_Library library);
+    template <typename _ContainerType>
+    Font(FT_Library library, _ContainerType&& fileData);
     Font(Font&& rhs) noexcept;
 
 /**@section Operator */
@@ -27,19 +25,24 @@ public:
 
 /**@section Method */
 public:
-    bool Initialize(const char* filePath);
-    void Initialize(std::vector<std::byte>&& fileData);
-    void Initialize(const std::vector<std::byte>& fileData);
-    const FontFace& GetFace(int32_t fontSize) const;
     const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
     I32Extent2D GetCharSize(char32_t ch, int32_t fontSize);
+    std::shared_ptr<FontFace> GetFace(int32_t fontSize);
+    std::shared_ptr<const FontFace> GetFace(int32_t fontSize) const;
 
 /**@section Variable */
 private:
+    FT_Library m_library;
     std::vector<std::byte> m_fileData;
-    FT_Library m_library = nullptr;
-    mutable std::unordered_map<int32_t, FontFace> m_fontFaces;
+    mutable std::unordered_map<int32_t, std::shared_ptr<FontFace>> m_fontFaces;
 };
+
+template <typename _ContainerType>
+inline Font::Font(FT_Library library, _ContainerType&& fileData) :
+    m_library(library),
+    m_fileData(std::forward<_ContainerType>(fileData))
+{
+}
 
 } /* namespace tgon */

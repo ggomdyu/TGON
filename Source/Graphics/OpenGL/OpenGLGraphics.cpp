@@ -5,7 +5,6 @@
 #include <stb_image_write.h>
 
 #include "Platform/Window.h"
-#include "Drawing/FontFactory.h"
 
 #include "OpenGLDebug.h"
 

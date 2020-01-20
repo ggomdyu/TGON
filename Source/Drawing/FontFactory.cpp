@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Diagnostics/Debug.h"
+#include "IO/File.h"
 
 #include "FontFactory.h"
 
@@ -40,33 +40,40 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
     return bytesTable[static_cast<int32_t>(pixelMode)];
 }
 
-FontFactory::FontFactory() :
-    m_library(nullptr)
+void FontFactory::FTLibraryDeleter::operator()(FT_Library library)
 {
-    FT_Error error = FT_Init_FreeType(&m_library) != 0;
+    if (library != nullptr)
+    {
+        FT_Done_FreeType(library);
+    }
+}
+
+FontFactory::FontFactory(FT_Library library) noexcept :
+    m_library(library)
+{
+}
+
+std::optional<FontFactory> FontFactory::Create()
+{
+    FT_Library library = nullptr;
+    FT_Error error = FT_Init_FreeType(&library) != 0;
     if (error)
     {
-        Debug::Fail("Failed to invoke FT_Init_FreeType.", ConvertFTErrorToString(error));
+        return {};
     }
+
+    return FontFactory(library);
 }
 
-FontFactory::~FontFactory()
+std::shared_ptr<Font> FontFactory::CreateFont(const char* filePath)
 {
-    if (m_library != nullptr)
+    auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
+    if (fileData.has_value() == false)
     {
-        FT_Done_FreeType(m_library);
-        m_library = nullptr;
+        return {};
     }
-}
 
-FT_Library FontFactory::GetFTLibrary() noexcept
-{
-    return m_library;
-}
-
-const FT_Library FontFactory::GetFTLibrary() const noexcept
-{
-    return m_library;
+    return this->CreateFont(std::move(*fileData));
 }
 
 } /* namespace tgon */

@@ -9,31 +9,9 @@ namespace tgon
 
 extern const char* ConvertFTErrorToString(FT_Error error);
 
-FontFace::FontFace(const std::vector<std::byte>& fileData, FT_Library library, int32_t fontSize) :
-    m_fontSize(fontSize),
-    m_fontFace([&]() -> FT_Face
-    {
-        FT_Face face = nullptr;
-        FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), static_cast<FT_Long>(fileData.size()), 0, &face);
-        if (error)
-        {
-            Debug::Fail("Failed to invoke FT_New_Memory_Face.", ConvertFTErrorToString(error));
-        }
-
-        error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
-        if (error)
-        {
-            Debug::Fail("Failed to invoke FT_Select_Charmap.", ConvertFTErrorToString(error));
-        }
-
-        error = FT_Set_Pixel_Sizes(face, 0, fontSize);
-        if (error)
-        {
-            Debug::Fail("Failed to invoke FT_Set_Pixel_Sizes.", ConvertFTErrorToString(error));
-        }
-
-        return face;
-    } ())
+FontFace::FontFace(FT_Face fontFace, int32_t fontSize) noexcept :
+    m_fontFace(fontFace),
+    m_fontSize(fontSize)
 {
 }
 
@@ -43,7 +21,6 @@ FontFace::FontFace(FontFace&& rhs) noexcept :
     m_glyphDatas(std::move(rhs.m_glyphDatas))
 {
     rhs.m_fontFace = nullptr;
-    rhs.m_fontSize = 0;
 }
 
 FontFace::~FontFace()
@@ -53,16 +30,36 @@ FontFace::~FontFace()
 
 FontFace& FontFace::operator=(FontFace&& rhs) noexcept
 {
-    this->Destroy();
-
     m_fontSize = rhs.m_fontSize;
-    m_fontFace = rhs.m_fontFace;
-    m_glyphDatas = std::move(rhs.m_glyphDatas);
 
-    rhs.m_fontSize = 0;
-    rhs.m_fontFace = nullptr;
+    std::swap(m_fontFace, rhs.m_fontFace);
+    std::swap(m_glyphDatas, rhs.m_glyphDatas);
 
     return *this;
+}
+
+std::shared_ptr<FontFace> FontFace::Create(FT_Library library, const std::vector<std::byte>& fileData, int32_t fontSize)
+{
+    FT_Face face = nullptr;
+    FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), static_cast<FT_Long>(fileData.size()), 0, &face);
+    if (error)
+    {
+        return {};
+    }
+
+    error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
+    if (error)
+    {
+        return {};
+    }
+
+    error = FT_Set_Pixel_Sizes(face, 0, fontSize);
+    if (error)
+    {
+        return {};
+    }
+
+    return std::make_shared<FontFace>(face, fontSize);
 }
 
 const GlyphData& FontFace::GetGlyphData(char32_t ch) const

@@ -38,9 +38,12 @@ enum class LineBreakMode
     TruncateTail,
 };
 
-class UIText :
+class UIText final :
     public UIElement
 {
+public:
+    TGON_DECLARE_RTTI(UIText)
+
 /**@section Struct */
 public:
     struct CharacterInfo
@@ -49,15 +52,11 @@ public:
         I32Rect rect;
         //Color4f color;
     };
-    
-/**@section Enum */
-private:
-    enum : int32_t { DefaultFontSize = 12 };
 
 /**@section Constructor */
 public:
     UIText();
-    UIText(UIText&& rhs) noexcept;
+    UIText(UIText&& rhs) noexcept = default;
     
 /**@section Destructor */
 public:
@@ -65,7 +64,7 @@ public:
 
 /**@section Operator */
 public:
-    UIText& operator=(UIText&& rhs) noexcept;
+    UIText& operator=(UIText&& rhs) noexcept = default;
     
 /**@section Method */
 public:
@@ -92,7 +91,8 @@ public:
     void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const override;
     
 /**@section Variable */
-private:
+public:
+    static constexpr int32_t DefaultFontSize = 12;
     std::string m_text;
     std::shared_ptr<FontAtlas> m_fontAtlas;
     int32_t m_fontSize = DefaultFontSize;

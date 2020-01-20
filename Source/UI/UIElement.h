@@ -7,7 +7,7 @@
 #pragma once
 #include <vector>
 
-#include "Core/NonCopyable.h"
+#include "Core/Object.h"
 
 #include "UIBatch.h"
 
@@ -15,15 +15,15 @@ namespace tgon
 {
 
 class UIElement :
-    private NonCopyable
+    private Object
 {
+public:
+    TGON_DECLARE_RTTI(UIElement)
+
+/**@section Constructor */
 public:
     UIElement();
 
-/**@section Destructor */
-public:
-    virtual ~UIElement() = default;
-    
 /**@section Method */
 public:
     virtual void GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const = 0;

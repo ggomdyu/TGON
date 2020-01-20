@@ -9,6 +9,7 @@
 #include <memory>
 #include <cstddef>
 #include <unordered_map>
+#include <optional>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -19,28 +20,28 @@
 namespace tgon
 {
 
-struct GlyphMetrics
+struct GlyphMetrics final
 {
     I32Extent2D size;
     I32Vector2 bearing;
     I32Vector2 advance;
 };
 
-struct GlyphData
+struct GlyphData final
 {
     char32_t ch;
     GlyphMetrics metrics;
     std::unique_ptr<std::byte[]> bitmap;
 };
 
-class FontFace :
+class FontFace final :
     private NonCopyable
 {
 /**@section Constructor */
 public:
-    FontFace(const std::vector<std::byte>& fileData, FT_Library library, int32_t fontSize);
+    FontFace(FT_Face fontFace, int32_t fontSize) noexcept;
     FontFace(FontFace&& rhs) noexcept;
-    
+
 /**@section Destructor */
 public:
     ~FontFace();
@@ -51,6 +52,7 @@ public:
 
 /**@section Method */
 public:
+    static std::shared_ptr<FontFace> Create(FT_Library library, const std::vector<std::byte>& fileData, int32_t fontSize);
     const GlyphData& GetGlyphData(char32_t ch) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
 

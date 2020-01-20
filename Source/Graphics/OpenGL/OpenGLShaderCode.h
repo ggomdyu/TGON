@@ -127,6 +127,24 @@ void main()                                                                     
 }                                                                                   \n\
 ";
 
+constexpr const char g_uvOffsetFrag[] =
+"                                                                                   \n\
+#version 330 core                                                                   \n\
+                                                                                    \n\
+in vec4 fragColor;                                                                  \n\
+in vec2 fragUV;                                                                     \n\
+out vec4 outColor;                                                                  \n\
+                                                                                    \n\
+uniform vec2 uvOffset;                                                              \n\
+uniform sampler2D textureSampler;                                                   \n\
+                                                                                    \n\
+void main()                                                                         \n\
+{                                                                                   \n\
+    fragUV += uvOffset;                                                             \n\
+    outColor = texture(textureSampler, fragUV) * fragColor;                         \n\
+}                                                                                   \n\
+";
+
 constexpr const char g_grayScaleFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\

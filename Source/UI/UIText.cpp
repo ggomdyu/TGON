@@ -365,36 +365,6 @@ UIText::UIText() :
 {
 }
 
-UIText::UIText(UIText&& rhs) noexcept :
-    m_text(std::move(rhs.m_text)),
-    m_fontAtlas(std::move(rhs.m_fontAtlas)),
-    m_fontSize(rhs.m_fontSize),
-    m_textAlignment(rhs.m_textAlignment),
-    m_lineSpacing(rhs.m_lineSpacing),
-    m_lineBreakMode(rhs.m_lineBreakMode),
-    m_blendColor(rhs.m_blendColor),
-    m_rect(rhs.m_rect),
-    m_isDirty(rhs.m_isDirty),
-    m_textBlock(std::move(rhs.m_textBlock))
-{
-}
-
-UIText& UIText::operator=(UIText&& rhs) noexcept
-{
-    m_text = std::move(rhs.m_text);
-    m_fontAtlas = std::move(rhs.m_fontAtlas);
-    m_fontSize = rhs.m_fontSize;
-    m_textAlignment = rhs.m_textAlignment;
-    m_lineSpacing = rhs.m_lineSpacing;
-    m_lineBreakMode = rhs.m_lineBreakMode;
-    m_blendColor = rhs.m_blendColor;
-    m_rect = rhs.m_rect;
-    m_isDirty = rhs.m_isDirty;
-    m_textBlock = std::move(rhs.m_textBlock);
-    
-    return *this;
-}
-
 void UIText::SetFontAtlas(const std::shared_ptr<FontAtlas>& fontAtlas)
 {
     m_fontAtlas = fontAtlas;
