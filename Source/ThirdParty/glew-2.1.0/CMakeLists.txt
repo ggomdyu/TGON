@@ -12,8 +12,9 @@ endfunction ()
 
 function (init_project_properties)
     target_include_directories(glew PUBLIC "include")
-
-	if (APPLE)
+	
+	if (WIN32)
+	elseif (APPLE)
 		find_library(GL_LIB_PATH OpenGL)
 		find_library(AGL_LIB_PATH AGL)
 		SET(GLEW_LIB_PATH ${GL_LIB_PATH} ${AGL_LIB_PATH})
