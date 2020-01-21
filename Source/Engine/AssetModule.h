@@ -6,8 +6,8 @@
 
 #pragma once
 #include <mutex>
-#include <unordered_map>
 #include <any>
+#include <unordered_map>
 
 #include "Audio/AudioBuffer.h"
 #include "Text/StringHash.h"
@@ -99,6 +99,18 @@ inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash
     }
 
     return std::make_shared<Texture>(*image, FilterMode::Linear, WrapMode::Clamp, false, false);
+}
+
+template <>
+inline std::shared_ptr<AudioBuffer> AssetModule::CreateResource(const StringViewHash& path) const
+{
+    auto audioBuffer = AudioBuffer::Create(path.Data());
+    if (audioBuffer.has_value() == false)
+    {
+        return nullptr;
+    }
+
+    return std::make_shared<AudioBuffer>();
 }
 
 template <>

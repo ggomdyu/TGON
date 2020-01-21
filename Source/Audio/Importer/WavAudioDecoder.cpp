@@ -48,10 +48,9 @@ std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
                 audioDataBytes = chunkHeader.chunkDataSize;
-                //audioData =
-//                std::shared_ptr<std::byte[]>(new std::byte[chunkHeader.chunkDataSize]);
-
-//                memcpy(&audioData[0], chunkData, chunkHeader.chunkDataSize);
+                audioData = std::shared_ptr<std::byte[]>(new std::byte[chunkHeader.chunkDataSize]);
+                
+                memcpy(&audioData[0], chunkData, chunkHeader.chunkDataSize);
             }
             break;
                 

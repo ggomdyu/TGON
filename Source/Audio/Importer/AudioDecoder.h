@@ -59,6 +59,11 @@ inline std::shared_ptr<const std::byte[]> AudioDecoder::GetAudioData() const noe
     return m_audioData;
 }
 
+inline int32_t AudioDecoder::GetAudioDataBytes() const noexcept
+{
+    return m_audioDataBytes;
+}
+
 inline int32_t AudioDecoder::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;

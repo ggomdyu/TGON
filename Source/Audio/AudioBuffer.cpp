@@ -1,5 +1,11 @@
 #include "PrecompiledHeader.h"
 
+#if TGON_PLATFORM_MACOS
+#   include <OpenAL/al.h>
+#else
+#   include <AL/al.h>
+#endif
+
 #include "Importer/WavAudioDecoder.h"
 #include "Importer/VorbisAudioDecoder.h"
 #include "IO/File.h"
@@ -46,38 +52,15 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
-AudioBuffer::AudioBuffer()
-{
-    TGON_AL_ERROR_CHECK(alGenBuffers(1, &m_alBufferId));
-}
-
-AudioBuffer::AudioBuffer(const char* filePath) :
-    AudioBuffer()
-{
-    this->Initialize(filePath);
-}
-
-AudioBuffer::AudioBuffer(const gsl::span<const std::byte>& fileData) :
-    AudioBuffer()
-{
-    this->Initialize(fileData);
-}
-
 AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :
     m_alBufferId(rhs.m_alBufferId),
     m_audioData(std::move(rhs.m_audioData)),
     m_audioDataBytes(rhs.m_audioDataBytes),
     m_bitsPerSample(rhs.m_bitsPerSample),
     m_channels(rhs.m_channels),
-    m_samplingRate(rhs.m_samplingRate),
-    m_alFormat(rhs.m_alFormat)
+    m_samplingRate(rhs.m_samplingRate)
 {
     rhs.m_alBufferId = 0;
-    rhs.m_audioDataBytes = 0;
-    rhs.m_bitsPerSample = 0;
-    rhs.m_channels = 0;
-    rhs.m_samplingRate = 0;
-    rhs.m_alFormat = 0;
 }
 
 AudioBuffer::~AudioBuffer()
@@ -115,90 +98,77 @@ std::optional<AudioBuffer> AudioBuffer::Create(const char* filePath)
     return Create(*fileData);
 }
 
-std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
-{
-    switch (audioFormat)
-    {
-    case AudioFormat::Wav:
-        {
-            WavAudioImporter importer(fileData);
-            if (importer.Initialize())
-            {
-                m_audioData = std::move(importer.GetAudioData());
-                m_audioDataBytes = importer.GetAudioDataBytes();
-                m_bitsPerSample = importer.GetBitsPerSample();
-                m_channels = importer.GetChannels();
-                m_samplingRate = importer.GetSamplingRate();
-                
-                return true;
-            }
-        }
-        break;
-        
-    case AudioFormat::Vorbis:
-        {
-            VorbisAudioImporter importer;
-            if (importer.Initialize(fileData))
-            {
-                m_audioData = std::move(importer.GetAudioData());
-                m_audioDataBytes = importer.GetAudioDataBytes();
-                m_bitsPerSample = importer.GetBitsPerSample();
-                m_channels = importer.GetChannels();
-                m_samplingRate = importer.GetSamplingRate();
-
-                return true;
-            }
-        }
-        break;
-
-    case AudioFormat::Mp3:
-    case AudioFormat::Flac:
-    case AudioFormat::M4a:
-    case AudioFormat::Opus:
-    case AudioFormat::Unknown:
-        break;
-    }
-
-    return false;
-
-    auto alFormat = ConvertToALFormat(m_channels, m_bitsPerSample);
-    if (alFormat == -1)
-    {
-        return false;
-    }
-        
-    TGON_AL_ERROR_CHECK(alBufferData(m_alBufferId, m_alFormat, m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate));
-
-    return true;
-}
-
 std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
-    if (WavAudioImporter::CheckFormat(fileData))
+    if (WavAudioDecoder::IsWav(fileData))
     {
         audioFormat = AudioFormat::Wav;
     }
-    else if (VorbisAudioImporter::CheckFormat(fileData))
+    else if (VorbisAudioDecoder::IsVorbis(fileData))
     {
         audioFormat = AudioFormat::Vorbis;
     }
     else
     {
-        return false;
+        return {};
     }
 
-    return this->Initialize(fileData, audioFormat);
+    return Create(fileData, audioFormat);
 }
 
-const std::byte* AudioBuffer::GetAudioData() const noexcept
+std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
-    return &m_audioData[0];
+    std::shared_ptr<std::byte[]> audioData;
+    int32_t audioDataBytes = 0;
+    int32_t bitsPerSample = 0;
+    int32_t channels = 0;
+    int32_t samplingRate = 0;
+
+    auto getDecodedAudioData = [&](auto& audioDecoder)
+    {
+        if (audioDecoder.has_value() == false)
+        {
+            return false;
+        }
+
+        audioData = audioDecoder->GetAudioData();
+        audioDataBytes = audioDecoder->GetAudioDataBytes();
+        bitsPerSample = audioDecoder->GetBitsPerSample();
+        channels = audioDecoder->GetChannels();
+        samplingRate = audioDecoder->GetSamplingRate();
+
+        return true;
+    };
+
+    if (audioFormat == AudioFormat::Wav)
+    {
+        auto audioDecoder = WavAudioDecoder::Create(fileData);
+        if (getDecodedAudioData(audioDecoder) == false)
+        {
+            return {};
+        }
+    }
+    else if (audioFormat == AudioFormat::Vorbis)
+    {
+        auto audioDecoder = VorbisAudioDecoder::Create(fileData);
+        if (getDecodedAudioData(audioDecoder) == false)
+        {
+            return {};
+        }
+    }
+
+    return AudioBuffer(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
-int32_t AudioBuffer::GetAudioDataBytes() const noexcept
+gsl::span<std::byte> AudioBuffer::GetAudioData() noexcept
 {
-    return m_audioDataBytes;
+    return {m_audioData.get(), static_cast<size_t>(m_audioDataBytes)};
+}
+
+gsl::span<const std::byte> AudioBuffer::GetAudioData() const noexcept
+{
+    return const_cast<AudioBuffer*>(this)->GetAudioData();
 }
 
 int32_t AudioBuffer::GetBitsPerSample() const noexcept
@@ -216,61 +186,17 @@ int32_t AudioBuffer::GetSamplingRate() const noexcept
     return m_samplingRate;
 }
 
-ALenum AudioBuffer::GetALFormat() const noexcept
-{
-    return m_alFormat;
-}
-
-ALuint AudioBuffer::GetALBufferId() const noexcept
+ALuint AudioBuffer::GetNativeBuffer() const noexcept
 {
     return m_alBufferId;
 }
 
-bool AudioBuffer::Decode(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
+ALuint AudioBuffer::CreateALBuffer()
 {
-    switch (audioFormat)
-    {
-    case AudioFormat::Wav:
-        {
-            WavAudioImporter importer;
-            if (importer.Initialize(fileData))
-            {
-                m_audioData = std::move(importer.GetAudioData());
-                m_audioDataBytes = importer.GetAudioDataBytes();
-                m_bitsPerSample = importer.GetBitsPerSample();
-                m_channels = importer.GetChannels();
-                m_samplingRate = importer.GetSamplingRate();
-                
-                return true;
-            }
-        }
-        break;
-        
-    case AudioFormat::Vorbis:
-        {
-            VorbisAudioImporter importer;
-            if (importer.Initialize(fileData))
-            {
-                m_audioData = std::move(importer.GetAudioData());
-                m_audioDataBytes = importer.GetAudioDataBytes();
-                m_bitsPerSample = importer.GetBitsPerSample();
-                m_channels = importer.GetChannels();
-                m_samplingRate = importer.GetSamplingRate();
+    ALuint alBufferId = 0;
+    TGON_AL_ERROR_CHECK(alGenBuffers(1, &alBufferId));
 
-                return true;
-            }
-        }
-        break;
-
-    case AudioFormat::Mp3:
-    case AudioFormat::Flac:
-    case AudioFormat::M4a:
-    case AudioFormat::Opus:
-    case AudioFormat::Unknown:
-        break;
-    }
-
-    return false;
+    return alBufferId;
 }
 
 } /* namespace tgon */

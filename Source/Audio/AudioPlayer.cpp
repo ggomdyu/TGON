@@ -60,7 +60,7 @@ void AudioPlayer::Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer)
 
     m_audioBuffer = audioBuffer;
 
-    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetALBufferId());
+    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer());
 }
 
 void AudioPlayer::Play()
@@ -147,7 +147,7 @@ float AudioPlayer::GetProgressInSeconds() const
 
 float AudioPlayer::GetTotalProgressInSeconds() const
 {
-    return static_cast<float>(m_audioBuffer->GetAudioDataBytes()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
+    return static_cast<float>(m_audioBuffer->GetAudioData().size()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
 }
 
 void AudioPlayer::SetPitch(float pitch)

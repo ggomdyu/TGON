@@ -6,6 +6,7 @@
 
 #pragma once
 #include <gsl/span>
+#include <optional>
 
 #include "AudioDecoder.h"
 
@@ -20,10 +21,11 @@ public:
     
 /**@section Constructor */
 public:
-    static std::optional<WavAudioDecoder> Create(const gsl::span<const std::byte>& fileData);
-    
+    using AudioDecoder::AudioDecoder;
+
 /**@section Method */
 public:
+    static std::optional<WavAudioDecoder> Create(const gsl::span<const std::byte>& fileData);
     static bool IsWav(const gsl::span<const std::byte>& fileData);
 };
 
