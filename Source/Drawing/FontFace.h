@@ -17,6 +17,9 @@
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 
+typedef struct FT_LibraryRec_ FT_LibraryRec;
+typedef struct FT_LibraryRec_* FT_Library;
+
 namespace tgon
 {
 
@@ -52,7 +55,7 @@ public:
 
 /**@section Method */
 public:
-    static std::shared_ptr<FontFace> Create(FT_Library library, const std::vector<std::byte>& fileData, int32_t fontSize);
+    static std::shared_ptr<FontFace> Create(const std::shared_ptr<FT_LibraryRec>& library, const std::vector<std::byte>& fileData, int32_t fontSize);
     const GlyphData& GetGlyphData(char32_t ch) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
 

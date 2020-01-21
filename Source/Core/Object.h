@@ -23,6 +23,11 @@ public:
     Object() = default;
     Object(const StringHash& name);
     Object(StringHash&& name) noexcept;
+    Object(Object&& rhs) noexcept;
+
+/**@section Operator */
+public:
+    Object& operator=(Object&& rhs) noexcept;
 
 /**@section Method */
 public:
@@ -43,6 +48,17 @@ inline Object::Object(const StringHash& name) :
 inline Object::Object(StringHash&& name) noexcept :
     m_name(std::move(name))
 {
+}
+
+inline Object::Object(Object&& rhs) noexcept :
+    m_name(std::move(rhs.m_name))
+{
+}
+
+inline Object& Object::operator=(Object&& rhs) noexcept
+{
+    m_name = std::move(rhs.m_name);
+    return *this;
 }
 
 inline void Object::SetName(const StringHash& name)

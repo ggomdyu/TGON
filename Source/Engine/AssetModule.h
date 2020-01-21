@@ -104,7 +104,7 @@ inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash
 template <>
 inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    return nullptr;
+    return m_fontFactory.CreateFont(path.Data());
 }
 
 template <>

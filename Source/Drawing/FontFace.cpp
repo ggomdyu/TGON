@@ -38,10 +38,10 @@ FontFace& FontFace::operator=(FontFace&& rhs) noexcept
     return *this;
 }
 
-std::shared_ptr<FontFace> FontFace::Create(FT_Library library, const std::vector<std::byte>& fileData, int32_t fontSize)
+std::shared_ptr<FontFace> FontFace::Create(const std::shared_ptr<FT_LibraryRec>& library, const std::vector<std::byte>& fileData, int32_t fontSize)
 {
     FT_Face face = nullptr;
-    FT_Error error = FT_New_Memory_Face(library, reinterpret_cast<const FT_Byte*>(fileData.data()), static_cast<FT_Long>(fileData.size()), 0, &face);
+    FT_Error error = FT_New_Memory_Face(library.get(), reinterpret_cast<const FT_Byte*>(fileData.data()), static_cast<FT_Long>(fileData.size()), 0, &face);
     if (error)
     {
         return {};

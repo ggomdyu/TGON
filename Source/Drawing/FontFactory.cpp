@@ -40,16 +40,14 @@ constexpr int32_t ConvertFTPixelModeToBits(FT_Pixel_Mode pixelMode) noexcept
     return bytesTable[static_cast<int32_t>(pixelMode)];
 }
 
-void FontFactory::FTLibraryDeleter::operator()(FT_Library library)
-{
-    if (library != nullptr)
-    {
-        FT_Done_FreeType(library);
-    }
-}
-
 FontFactory::FontFactory(FT_Library library) noexcept :
-    m_library(library)
+    m_library(library, [](FT_Library library)
+    {
+        if (library != nullptr)
+        {
+            FT_Done_FreeType(library);
+        }
+    })
 {
 }
 
@@ -65,7 +63,7 @@ std::optional<FontFactory> FontFactory::Create()
     return FontFactory(library);
 }
 
-std::shared_ptr<Font> FontFactory::CreateFont(const char* filePath)
+std::shared_ptr<Font> FontFactory::CreateFont(const char* filePath) const
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)

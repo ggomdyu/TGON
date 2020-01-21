@@ -1,5 +1,5 @@
 /**
- * @file    AtlasFont.h
+ * @file    FontAtlas.h
  * @author  ggomdyu
  * @since   11/11/2019
  */

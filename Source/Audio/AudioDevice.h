@@ -5,48 +5,39 @@
  */
 
 #pragma once
-#include "Core/NonCopyable.h"
+#include <optional>
 
-#if TGON_PLATFORM_MACOS
-#   include <OpenAL/alc.h>
-#else
-#   include <AL/alc.h>
-#endif
+#include "Core/Object.h"
+
+struct ALCdevice;
+struct ALCcontext;
 
 namespace tgon
 {
 
 class AudioDevice final :
-    private NonCopyable
+    public Object
 {
+public:
+    TGON_DECLARE_RTTI(AudioDevice)
+
 /**@section Constructor */
 public:
-    AudioDevice();
-    AudioDevice(AudioDevice&& rhs) noexcept;
-
-/**@section Destructor */
-public:
-    ~AudioDevice();
-
-/**@section Operator */
-public:
-    AudioDevice& operator=(AudioDevice&& rhs) noexcept;
-
+    AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept;
+    
 /**@section Method */
 public:
+    static std::optional<AudioDevice> Create();
     void MakeCurrent();
-    ALCdevice* GetDevice() noexcept;
-    ALCcontext* GetContext() noexcept;
-    const ALCdevice* GetDevice() const noexcept;
-    const ALCcontext* GetContext() const noexcept;
-
-private:
-    void Destroy();
+    std::shared_ptr<ALCdevice> GetDevice() noexcept;
+    std::shared_ptr<const ALCdevice> GetDevice() const noexcept;
+    std::shared_ptr<ALCcontext> GetContext() noexcept;
+    std::shared_ptr<const ALCcontext> GetContext() const noexcept;
 
 /**@section Variable */
 private:
-    ALCdevice* m_device = nullptr;
-    ALCcontext* m_context = nullptr;
+    std::shared_ptr<ALCdevice> m_device;
+    std::shared_ptr<ALCcontext> m_context;
 };
 
 } /* namespace tgon */

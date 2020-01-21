@@ -28,12 +28,10 @@ CameraComponent::CameraComponent(const std::shared_ptr<Camera>& camera) :
     Component(),
     m_camera(camera)
 {
-    Application::GetEngine()->FindModule<UIRendererModule>()->AddCamera(camera);
 }
 
 CameraComponent::~CameraComponent()
 {
-    Application::GetEngine()->FindModule<UIRendererModule>()->AddCamera(m_camera);
 }
 
 void CameraComponent::Update()

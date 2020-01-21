@@ -1,6 +1,10 @@
 #include "PrecompiledHeader.h"
 
-#include <stdexcept>
+#if TGON_PLATFORM_MACOS
+#   include <OpenAL/alc.h>
+#else
+#   include <AL/alc.h>
+#endif
 
 #include "AudioDevice.h"
 
@@ -11,90 +15,84 @@
 namespace tgon
 {
 
-AudioDevice::AudioDevice() :
-    m_device(alcOpenDevice(nullptr))
+
+AudioDevice::AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept :
+    m_device(device),
+    m_context(context)
 {
-    if (m_device == nullptr)
+}
+
+std::optional<AudioDevice> AudioDevice::Create()
+{
+    std::shared_ptr<ALCdevice> device(alcOpenDevice(nullptr), [](ALCdevice* device)
     {
-        throw std::runtime_error("Failed to invoke alcOpenDevice.");
+        alcCloseDevice(device);
+    });
+    if (device == nullptr)
+    {
+        return {};
     }
 
-    m_context = alcCreateContext(m_device, nullptr);
-    if (m_context == nullptr)
+    std::shared_ptr<ALCcontext> context(alcCreateContext(device.get(), nullptr), [](ALCcontext* context)
     {
-        throw std::runtime_error("Failed to invoke alcCreateContext.");
+        if (alcGetCurrentContext() == context)
+        {
+            alcMakeContextCurrent(nullptr);
+        }
+        
+        alcDestroyContext(context);
+    });
+    if (context == nullptr)
+    {
+        return {};
     }
-}
 
-AudioDevice::AudioDevice(AudioDevice&& rhs) noexcept :
-    m_device(rhs.m_device),
-    m_context(rhs.m_context)
-{
-    rhs.m_context = nullptr;
-    rhs.m_device = nullptr;
-}
-
-AudioDevice::~AudioDevice()
-{
-    this->Destroy();
-}
-
-AudioDevice& AudioDevice::operator=(AudioDevice&& rhs) noexcept
-{
-    this->Destroy();
-
-    m_context = rhs.m_context;
-    m_device = rhs.m_device;
-
-    rhs.m_context = nullptr;
-    rhs.m_device = nullptr;
-
-    return *this;
+    return AudioDevice(device, context);
 }
 
 void AudioDevice::MakeCurrent()
 {
-    alcMakeContextCurrent(m_context);
+    alcMakeContextCurrent(m_context.get());
 }
 
-ALCdevice* AudioDevice::GetDevice() noexcept
+std::shared_ptr<ALCdevice> AudioDevice::GetDevice() noexcept
 {
     return m_device;
 }
 
-const ALCdevice* AudioDevice::GetDevice() const noexcept
+std::shared_ptr<const ALCdevice> AudioDevice::GetDevice() const noexcept
 {
     return m_device;
 }
 
-ALCcontext* AudioDevice::GetContext() noexcept
+std::shared_ptr<ALCcontext> AudioDevice::GetContext() noexcept
 {
     return m_context;
 }
 
-const ALCcontext* AudioDevice::GetContext() const noexcept
+std::shared_ptr<const ALCcontext> AudioDevice::GetContext() const noexcept
 {
     return m_context;
 }
-
-void AudioDevice::Destroy()
-{
-    if (m_context != nullptr)
-    {
-        // If the current context indicates m_context, then set it to nullptr.
-        if (alcGetCurrentContext() == m_context)
-        {
-            alcMakeContextCurrent(nullptr);
-        }
-
-        alcDestroyContext(m_context);
-    }
-
-    if (m_device != nullptr)
-    {
-        alcCloseDevice(m_device);
-        m_device = nullptr;
-    }
-}
+//
+//void AudioDevice::Destroy()
+//{
+//    if (m_context != nullptr)
+//    {
+//        // If the current context indicates m_context, then set it to nullptr.
+//        if (alcGetCurrentContext() == m_context)
+//        {
+//            alcMakeContextCurrent(nullptr);
+//        }
+//
+//        alcDestroyContext(m_context);
+//    }
+//
+//    if (m_device != nullptr)
+//    {
+//        alcCloseDevice(m_device);
+//        m_device = nullptr;
+//    }
+//}
 
 } /* namespace tgon */

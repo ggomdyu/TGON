@@ -16,7 +16,7 @@ class Font final :
 /**@section Constructor */
 public:
     template <typename _ContainerType>
-    Font(FT_Library library, _ContainerType&& fileData);
+    Font(const std::shared_ptr<FT_LibraryRec>& library, _ContainerType&& fileData);
     Font(Font&& rhs) noexcept;
 
 /**@section Operator */
@@ -33,13 +33,13 @@ public:
 
 /**@section Variable */
 private:
-    FT_Library m_library;
+    std::shared_ptr<FT_LibraryRec> m_library;
     std::vector<std::byte> m_fileData;
     mutable std::unordered_map<int32_t, std::shared_ptr<FontFace>> m_fontFaces;
 };
 
 template <typename _ContainerType>
-inline Font::Font(FT_Library library, _ContainerType&& fileData) :
+inline Font::Font(const std::shared_ptr<FT_LibraryRec>& library, _ContainerType&& fileData) :
     m_library(library),
     m_fileData(std::forward<_ContainerType>(fileData))
 {
