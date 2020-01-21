@@ -104,12 +104,12 @@ std::optional<Image> Image::Create(const gsl::span<const std::byte>& fileData)
     return Image(std::move(imageData), {static_cast<int32_t>(width), static_cast<int32_t>(height)}, PixelFormat::RGBA8888);
 }
 
-std::byte* Image::GetData() noexcept
+std::byte* Image::GetImageData() noexcept
 {
     return &m_imageData[0];
 }
 
-const std::byte* Image::GetData() const noexcept
+const std::byte* Image::GetImageData() const noexcept
 {
     return &m_imageData[0];
 }

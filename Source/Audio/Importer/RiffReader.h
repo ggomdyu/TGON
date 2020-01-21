@@ -12,7 +12,7 @@ namespace tgon
 
 class RiffReader
 {
-/**@section Public struct */
+/**@section Struct */
 public:
     enum ChunkId : uint32_t
     {
@@ -75,8 +75,8 @@ public:
         AudioFormat audioFormat;
         AudioChannel channels;
         int32_t samplingRate;
-        int32_t avgBytesPerSec;     // samplingRate * channels * bitsPerSample / 8
-        int16_t blockAlign;         // channels * bitsPerSample / 8
+        int32_t avgBytesPerSec; // samplingRate * channels * bitsPerSample / 8
+        int16_t blockAlign; // channels * bitsPerSample / 8
         int16_t bitsPerSample;
     };
 

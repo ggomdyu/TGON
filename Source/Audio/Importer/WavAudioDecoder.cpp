@@ -1,34 +1,26 @@
-/**
- * @file    WavAudioImporter.h
- * @author  ggomdyu
- * @since   04/20/2018
- * @see     https://sites.google.com/site/musicgapi/technical-documents/wav-file-format
- *              http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html
- */
+#include "PrecompiledHeader.h"
 
-#pragma once
-#include "AudioImporter.h"
+#include <stb_vorbis.c>
+
+#include "WavAudioDecoder.h"
 #include "RiffReader.h"
 
 namespace tgon
 {
 
-class WavAudioImporter final :
-    public AudioImporter
+std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std::byte>& fileData)
 {
-/**@section Method */
-public:
-    static bool IsExactFormat(const gsl::span<const std::byte>& fileData);
-    bool Initialize(const gsl::span<const std::byte>& fileData) override;
-};
-
-inline bool WavAudioImporter::Initialize(const gsl::span<const std::byte>& fileData)
-{
-    if (WavAudioImporter::IsExactFormat(fileData) == false)
+    if (WavAudioDecoder::IsWav(fileData) == false)
     {
-        return false;
+        return {};
     }
 
+    std::shared_ptr<std::byte[]> audioData;
+    int32_t audioDataBytes = 0;
+    int32_t bitsPerSample = 0;
+    int32_t channels = 0;
+    int32_t samplingRate = 0;
+    
     RiffReader riffReader(fileData.data(), fileData.size());
     do
     {
@@ -42,9 +34,9 @@ inline bool WavAudioImporter::Initialize(const gsl::span<const std::byte>& fileD
             {
                 auto chunkData = reinterpret_cast<const RiffReader::FmtChunkData*>(chunkHeader.chunkData);
                 
-                m_channels = static_cast<decltype(m_channels)>(chunkData->channels);
-                m_samplingRate = chunkData->samplingRate;
-                m_bitsPerSample = chunkData->bitsPerSample;
+                channels = static_cast<decltype(m_channels)>(chunkData->channels);
+                samplingRate = chunkData->samplingRate;
+                bitsPerSample = chunkData->bitsPerSample;
             }
             break;
 
@@ -55,12 +47,13 @@ inline bool WavAudioImporter::Initialize(const gsl::span<const std::byte>& fileD
             {
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
-                m_audioDataBytes = chunkHeader.chunkDataSize;
-                m_audioData.reset(new std::byte[chunkHeader.chunkDataSize]);
+                audioDataBytes = chunkHeader.chunkDataSize;
+                //audioData =
+//                std::shared_ptr<std::byte[]>(new std::byte[chunkHeader.chunkDataSize]);
 
-                memcpy(&m_audioData[0], chunkData, chunkHeader.chunkDataSize);
+//                memcpy(&audioData[0], chunkData, chunkHeader.chunkDataSize);
             }
-            return true;
+            break;
                 
         default:
             break;
@@ -68,10 +61,10 @@ inline bool WavAudioImporter::Initialize(const gsl::span<const std::byte>& fileD
     }
     while (riffReader.ReadNext());
 
-    return true;
+    return WavAudioDecoder(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
-inline bool WavAudioImporter::IsExactFormat(const gsl::span<const std::byte>& fileData)
+bool WavAudioDecoder::IsWav(const gsl::span<const std::byte>& fileData)
 {
     if (fileData.size() < 16)
     {

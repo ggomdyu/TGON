@@ -15,7 +15,7 @@
 #   include <AL/al.h>
 #endif
 
-#include "Core/NonCopyable.h"
+#include "Core/Object.h"
 
 namespace tgon
 {
@@ -31,15 +31,18 @@ enum class AudioFormat
     Opus,
 };
 
-class AudioBuffer :
-    private NonCopyable
+class AudioBuffer final :
+    public Object
 {
+public:
+    TGON_DECLARE_RTTI(AudioBuffer)
+    
 /**@section Constructor */
 public:
-    AudioBuffer();
-    explicit AudioBuffer(const char* filePath);
-    explicit AudioBuffer(const gsl::span<const std::byte>& fileData);
     AudioBuffer(AudioBuffer&& rhs) noexcept;
+    
+private:
+    AudioBuffer(std::unique_ptr<std::byte[]>&& audioData);
 
 /**@section Operator */
 public:
@@ -51,9 +54,9 @@ public:
 
 /**@section Method */
 public:
-    bool Initialize(const char* filePath);
-    bool Initialize(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
-    bool Initialize(const gsl::span<const std::byte>& fileData);
+    static std::optional<AudioBuffer> Create(const char* filePath);
+    static std::optional<AudioBuffer> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
+    static std::optional<AudioBuffer> Create(const gsl::span<const std::byte>& fileData);
     const std::byte* GetAudioData() const noexcept;
     int32_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
@@ -64,17 +67,15 @@ public:
 
 private:
     bool Decode(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
-    void Destroy();
-
+    
 /**@section Variable */
-private:
+protected:
     ALuint m_alBufferId = 0;
     std::unique_ptr<std::byte[]> m_audioData;
     int32_t m_audioDataBytes = 0;
     int32_t m_bitsPerSample = 0;
     int32_t m_channels = 0;
     int32_t m_samplingRate = 0;
-    ALenum m_alFormat = 0;
 };
 
 } /* namespace tgon */

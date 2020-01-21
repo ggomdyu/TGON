@@ -57,8 +57,8 @@ public:
 public:
     static std::optional<Image> Create(const char* filePath);
     static std::optional<Image> Create(const gsl::span<const std::byte>& fileData);
-    std::byte* GetData() noexcept;
-    const std::byte* GetData() const noexcept;
+    std::byte* GetImageData() noexcept;
+    const std::byte* GetImageData() const noexcept;
     const I32Extent2D& GetSize() const noexcept;
     int32_t GetChannels() const noexcept;
     PixelFormat GetPixelFormat() const noexcept;
