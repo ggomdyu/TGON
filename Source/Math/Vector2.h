@@ -12,7 +12,7 @@
 #include <string>
 #include <gsl/span>
 
-#include "Misc/ExpressionTemplate.h"
+#include "Core/ExpressionTemplate.h"
 
 #if _MSC_VER
 #   define TGON_SPRINTF sprintf_s

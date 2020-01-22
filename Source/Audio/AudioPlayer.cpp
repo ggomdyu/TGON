@@ -7,19 +7,24 @@
 #endif
 
 #include "AudioPlayer.h"
+#include "AudioBuffer.h"
+#include "OpenALDebug.h"
 
 namespace tgon
 {
 
-AudioPlayer::AudioPlayer() :
-    m_alSource(0)
+AudioPlayer::AudioPlayer(ALuint alSource, const std::shared_ptr<AudioBuffer>& audioBuffer) noexcept :
+    m_alSource(alSource),
+    m_audioBuffer(audioBuffer)
 {
+    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()))
 }
 
-AudioPlayer::AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer) :
-    AudioPlayer()
+AudioPlayer::AudioPlayer(ALuint alSource, std::shared_ptr<AudioBuffer>&& audioBuffer) noexcept :
+    m_alSource(alSource),
+    m_audioBuffer(std::move(audioBuffer))
 {
-    this->Initialize(audioBuffer);
+    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()))
 }
 
 AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
@@ -31,42 +36,36 @@ AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
 
 AudioPlayer::~AudioPlayer()
 {
-    this->Destroy();
+    if (m_alSource != 0)
+    {
+        this->Stop();
+        TGON_AL_ERROR_CHECK(alDeleteSources(1, &m_alSource))
+    }
 }
 
 AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
 {
-    this->Destroy();
+    std::swap(m_alSource, rhs.m_alSource);
+    std::swap(m_audioBuffer, rhs.m_audioBuffer);
 
-    m_alSource = rhs.m_alSource;
-    m_audioBuffer = std::move(rhs.m_audioBuffer);
-
-    rhs.m_alSource = 0;
-    rhs.m_audioBuffer = nullptr;
-    
     return *this;
 }
 
-void AudioPlayer::Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer)
+std::optional<AudioPlayer> AudioPlayer::Create(const std::shared_ptr<AudioBuffer>& audioBuffer)
 {
-    if (m_audioBuffer != nullptr)
+    auto alSource = CreateALSource();
+    if (alSource.has_value() == false)
     {
-        this->Stop();
-    }
-    else if (m_alSource == 0)
-    {
-        m_alSource = this->CreateALSourceHandle();
+        return {};
     }
 
-    m_audioBuffer = audioBuffer;
-
-    alSourcei(m_alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer());
+    return AudioPlayer(*alSource, audioBuffer);
 }
 
 void AudioPlayer::Play()
 {
     this->SetProgressInSeconds(0.0f);
-    alSourcePlay(m_alSource);
+    TGON_AL_ERROR_CHECK(alSourcePlay(m_alSource))
 }
 
 void AudioPlayer::Play(float volume, bool isLooping)
@@ -79,68 +78,68 @@ void AudioPlayer::Play(float volume, bool isLooping)
 bool AudioPlayer::IsPlaying() const
 {
     ALint isPlaying = 0;
-    alGetSourcei(m_alSource, AL_SOURCE_STATE, &isPlaying);
+    TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_SOURCE_STATE, &isPlaying))
 
     return isPlaying == AL_PLAYING;
 }
 
 void AudioPlayer::Stop()
 {
-    alSourceStop(m_alSource);
+    TGON_AL_ERROR_CHECK(alSourceStop(m_alSource))
 }
 
 void AudioPlayer::Pause()
 {
-    alSourcePause(m_alSource);
+    TGON_AL_ERROR_CHECK(alSourcePause(m_alSource))
 }
 
 void AudioPlayer::Resume()
 {
-    alSourcePlay(m_alSource);
+    TGON_AL_ERROR_CHECK(alSourcePlay(m_alSource))
 }
 
 void AudioPlayer::SetVolume(float volume)
 {
-    alSourcef(m_alSource, AL_GAIN, volume);
+    TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_GAIN, volume))
 }
 
-void AudioPlayer::SetPosition(const Vector3& position)
+void AudioPlayer::SetPosition(float x, float y, float z)
 {
-    alSource3f(m_alSource, AL_POSITION, position.x, position.y, position.z);
+    TGON_AL_ERROR_CHECK(alSource3f(m_alSource, AL_POSITION, x, y, z))
 }
 
-void AudioPlayer::SetVelocity(const Vector3& velocity)
+void AudioPlayer::SetVelocity(float x, float y, float z)
 {
-    alSource3f(m_alSource, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
+    TGON_AL_ERROR_CHECK(alSource3f(m_alSource, AL_VELOCITY, x, y, z))
 }
 
-void AudioPlayer::SetListenerPosition(const Vector3& position)
+void AudioPlayer::SetListenerPosition(float x, float y, float z)
 {
-    alListener3f(AL_POSITION, position.x, position.y, position.z);
+    TGON_AL_ERROR_CHECK(alListener3f(AL_POSITION, x, y, z))
 }
 
-void AudioPlayer::SetListenerVelocity(const Vector3& velocity)
+void AudioPlayer::SetListenerVelocity(float x, float y, float z)
 {
-    alListener3f(AL_VELOCITY, velocity.x, velocity.y, velocity.z);
+    TGON_AL_ERROR_CHECK(alListener3f(AL_VELOCITY, x, y, z))
 }
 
 float AudioPlayer::GetVolume() const
 {
     float volume = 0.0f;
-    alGetSourcef(m_alSource, AL_GAIN, &volume);
+    TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_GAIN, &volume))
 
     return volume;
 }
 
 void AudioPlayer::SetProgressInSeconds(float seconds)
 {
-    alSourcef(m_alSource, AL_SEC_OFFSET, seconds);
+    TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_SEC_OFFSET, seconds))
 }
 
 float AudioPlayer::GetProgressInSeconds() const
 {
     float seconds = 0;
-    alGetSourcef(m_alSource, AL_SEC_OFFSET, &seconds);
+    TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_SEC_OFFSET, &seconds))
 
     return seconds;
 }
@@ -152,45 +151,40 @@ float AudioPlayer::GetTotalProgressInSeconds() const
 
 void AudioPlayer::SetPitch(float pitch)
 {
-    alSourcef(m_alSource, AL_PITCH, pitch);
+    TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_PITCH, pitch))
 }
 
 float AudioPlayer::GetPitch() const
 {
     float pitch = 0.0f;
-    alGetSourcef(m_alSource, AL_PITCH, &pitch);
+    TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_PITCH, &pitch))
 
     return pitch;
 }
 
 void AudioPlayer::SetLooping(bool isLooping)
 {
-    alSourcei(m_alSource, AL_LOOPING, isLooping ? AL_TRUE : AL_FALSE);
+    TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_LOOPING, isLooping ? AL_TRUE : AL_FALSE))
 }
 
 bool AudioPlayer::IsLooping() const
 {
     ALint isLooping = AL_FALSE;
-    alGetSourcei(m_alSource, AL_LOOPING, &isLooping);
+    TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_LOOPING, &isLooping))
 
     return isLooping == AL_TRUE ? true : false;
 }
 
-ALuint AudioPlayer::CreateALSourceHandle()
+std::optional<ALuint> AudioPlayer::CreateALSource()
 {
     ALuint alSource;
     alGenSources(1, &alSource);
+    if (alGetError() != AL_NO_ERROR)
+    {
+        return {};
+    }
 
     return alSource;
-}
-
-void AudioPlayer::Destroy()
-{
-    if (m_alSource != 0)
-    {
-        this->Stop();
-        alDeleteSources(1, &m_alSource);
-    }
 }
 
 } /* namespace tgon */

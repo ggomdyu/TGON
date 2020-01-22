@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "Misc/Algorithm.h"
+#include "Core/Algorithm.h"
 
 #include "ShaderProgram.h"
 

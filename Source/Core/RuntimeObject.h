@@ -5,24 +5,30 @@
  */
 
 #pragma once
-#include "Core/NonCopyable.h"
-
 #include "RTTI.h"
 
 namespace tgon
 {
 
-class RuntimeObject :
-    private NonCopyable
+class RuntimeObject
 {
 /**@section Type */
 public:
     using Super = void;
     using This = RuntimeObject;
 
+/**@section Constructor */
+public:
+    RuntimeObject() {}
+    RuntimeObject(RuntimeObject&& rhs) noexcept = default;
+
 /**@section Destructor */
 public:
     virtual ~RuntimeObject() {}
+    
+/**@section Operator */
+public:
+    RuntimeObject& operator=(RuntimeObject&& rhs) noexcept = default;
 
 /**@section Method */
 public:

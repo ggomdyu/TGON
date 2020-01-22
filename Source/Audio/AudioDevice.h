@@ -7,7 +7,7 @@
 #pragma once
 #include <optional>
 
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 struct ALCdevice;
 struct ALCcontext;
@@ -16,13 +16,13 @@ namespace tgon
 {
 
 class AudioDevice final :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(AudioDevice)
 
 /**@section Constructor */
-public:
+private:
     AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept;
     
 /**@section Method */

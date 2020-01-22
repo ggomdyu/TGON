@@ -26,7 +26,7 @@ namespace tgon
 {
 
 class Engine :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(Engine)

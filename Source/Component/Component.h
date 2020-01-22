@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 namespace tgon
 {
@@ -13,7 +13,7 @@ namespace tgon
 class GameObject;
 
 class Component :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(Component)

@@ -2,7 +2,7 @@
 
 #include "Diagnostics/Debug.h"
 #include "Text/Encoding.h"
-#include "Misc/Algorithm.h"
+#include "Core/Algorithm.h"
 #include "Platform/Windows/Windows.h"
 
 #include "../FileStream.h"

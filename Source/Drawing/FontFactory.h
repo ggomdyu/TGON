@@ -7,7 +7,7 @@
 #pragma once
 #include <optional>
 
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 #include "Font.h"
 
@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class FontFactory :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(FontFactory)

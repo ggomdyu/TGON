@@ -9,7 +9,7 @@
 #include <stb_image_write.h>
 
 #include "IO/File.h"
-#include "Misc/Algorithm.h"
+#include "Core/Algorithm.h"
 
 #include "Image.h"
 

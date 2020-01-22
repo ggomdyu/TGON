@@ -6,8 +6,8 @@
 #   include <AppKit/AppKit.h>
 #endif
 
+#include "Core/Algorithm.h"
 #include "Platform/Application.h"
-#include "Misc/Algorithm.h"
 
 #include "Mouse.h"
 

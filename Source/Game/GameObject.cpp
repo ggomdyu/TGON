@@ -28,14 +28,14 @@ GameObject::GameObject(const std::shared_ptr<Transform>& transform) noexcept :
 }
 
 GameObject::GameObject(const StringHash& name, const std::shared_ptr<Transform>& transform) :
-    Object(name),
+    m_name(name),
     m_isActive(true),
     m_transform(transform)
 {
 }
 
 GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& transform) noexcept :
-    Object(std::move(name)),
+    m_name(std::move(name)),
     m_isActive(true),
     m_transform(transform)
 {
@@ -90,6 +90,16 @@ void GameObject::Update()
     }
 }
 
+void GameObject::SetName(const StringHash& name)
+{
+    m_name = name;
+}
+
+void GameObject::SetName(StringHash&& name)
+{
+    m_name = std::move(name);
+}
+
 void GameObject::SetActive(bool isActive) noexcept
 {
     m_isActive = isActive;
@@ -113,6 +123,11 @@ std::shared_ptr<Transform> GameObject::GetTransform() noexcept
 std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
 {
     return m_transform;
+}
+
+const StringHash& GameObject::GetName() const noexcept
+{
+    return m_name;
 }
 
 bool GameObject::RemoveComponent(size_t componentId)

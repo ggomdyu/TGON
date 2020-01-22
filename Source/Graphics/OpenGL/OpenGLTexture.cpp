@@ -1,7 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #if TGON_GRAPHICS_OPENGL
-#include "Misc/Algorithm.h"
+#include "Core/Algorithm.h"
 
 #include "OpenGLDebug.h"
 

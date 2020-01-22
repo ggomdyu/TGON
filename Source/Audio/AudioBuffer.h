@@ -10,7 +10,7 @@
 #include <memory>
 #include <optional>
 
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 typedef unsigned int ALuint;
 
@@ -29,16 +29,17 @@ enum class AudioFormat
 };
 
 class AudioBuffer final :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(AudioBuffer)
     
 /**@section Constructor */
-public:
-    AudioBuffer(AudioBuffer&& rhs) noexcept;
 private:
     AudioBuffer(const std::shared_ptr<std::byte[]>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+
+public:
+    AudioBuffer(AudioBuffer&& rhs) noexcept;
     
 /**@section Operator */
 public:

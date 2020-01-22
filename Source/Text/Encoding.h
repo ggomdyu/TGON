@@ -19,8 +19,11 @@ namespace tgon
 {
 
 class Encoding final :
-    private NonCopyable
+    public RuntimeObject
 {
+public:
+    TGON_DECLARE_RTTI(Encoding)
+
 /**@section Constructor */
 public:
     Encoding() noexcept = default;
@@ -30,7 +33,7 @@ public:
 
 /**@section Destructor */
 public:
-    ~Encoding();
+    ~Encoding() override;
 
 /**@section Operator */
 public:

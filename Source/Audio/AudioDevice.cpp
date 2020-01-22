@@ -74,25 +74,5 @@ std::shared_ptr<const ALCcontext> AudioDevice::GetContext() const noexcept
 {
     return m_context;
 }
-//
-//void AudioDevice::Destroy()
-//{
-//    if (m_context != nullptr)
-//    {
-//        // If the current context indicates m_context, then set it to nullptr.
-//        if (alcGetCurrentContext() == m_context)
-//        {
-//            alcMakeContextCurrent(nullptr);
-//        }
-//
-//        alcDestroyContext(m_context);
-//    }
-//
-//    if (m_device != nullptr)
-//    {
-//        alcCloseDevice(m_device);
-//        m_device = nullptr;
-//    }
-//}
 
 } /* namespace tgon */

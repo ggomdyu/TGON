@@ -1,6 +1,6 @@
 #include "PrecompiledHeader.h"
 
-#include "Misc/Algorithm.h"
+#include "Core/Algorithm.h"
 
 #include "FileStream.h"
 

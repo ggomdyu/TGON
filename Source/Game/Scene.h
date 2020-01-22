@@ -16,7 +16,7 @@ namespace tgon
 {
 
 class Scene :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(Scene)

@@ -6,22 +6,26 @@
  */
 
 #pragma once
-#include "Core/NonCopyable.h"
-#include "Math/Vector3.h"
+#include <optional>
 
-#include "AudioBuffer.h"
+#include "Core/RuntimeObject.h"
 
 namespace tgon
 {
 
-class AudioPlayer :
-    private NonCopyable
+class AudioPlayer final :
+    public RuntimeObject
 {
-/**@section Constructor */
 public:
-    AudioPlayer();
+    TGON_DECLARE_RTTI(AudioPlayer)
+
+/**@section Constructor */
+private:
+    AudioPlayer(ALuint alSource, const std::shared_ptr<class AudioBuffer>& audioBuffer) noexcept;
+    AudioPlayer(ALuint alSource, std::shared_ptr<class AudioBuffer>&& audioBuffer) noexcept;
+
+public:
     AudioPlayer(AudioPlayer&& rhs) noexcept;
-    explicit AudioPlayer(const std::shared_ptr<AudioBuffer>& audioBuffer);
 
 /**@section Destructor */
 public:
@@ -33,7 +37,7 @@ public:
 
 /**@section Method */
 public:
-    void Initialize(const std::shared_ptr<AudioBuffer>& audioBuffer);
+    static std::optional<AudioPlayer> Create(const std::shared_ptr<class AudioBuffer>& audioBuffer);
     void Play();
     void Play(float volume, bool isLooping);
     bool IsPlaying() const;
@@ -41,10 +45,10 @@ public:
     void Pause();
     void Resume();
     void SetVolume(float volume);
-    void SetPosition(const Vector3& position);
-    void SetVelocity(const Vector3& velocity);
-    static void SetListenerPosition(const Vector3& position);
-    static void SetListenerVelocity(const Vector3& velocity);
+    void SetPosition(float x, float y, float z);
+    void SetVelocity(float x, float y, float z);
+    static void SetListenerPosition(float x, float y, float z);
+    static void SetListenerVelocity(float x, float y, float z);
     float GetVolume() const;
     void SetProgressInSeconds(float seconds);
     float GetProgressInSeconds() const;
@@ -55,18 +59,12 @@ public:
     bool IsLooping() const;
 
 private:
-    static ALuint CreateALSourceHandle();
-    void Destroy();
-
+    static std::optional<ALuint> CreateALSource();
+   
 /**@section Variable */
 private:
     ALuint m_alSource;
-    std::shared_ptr<AudioBuffer> m_audioBuffer;
-};
-
-class StreamAudioPlayer
-{
-public:
+    std::shared_ptr<class AudioBuffer> m_audioBuffer;
 };
 
 } /* namespace tgon */

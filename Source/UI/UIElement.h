@@ -7,7 +7,7 @@
 #pragma once
 #include <vector>
 
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 #include "UIBatch.h"
 
@@ -15,7 +15,7 @@ namespace tgon
 {
 
 class UIElement :
-    private Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(UIElement)

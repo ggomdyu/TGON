@@ -7,14 +7,15 @@
 #pragma once
 #include <vector>
 
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 #include "Component/Transform.h"
+#include "Text/StringHash.h"
 
 namespace tgon
 {
 
 class GameObject final :
-    public Object,
+    public RuntimeObject,
     public std::enable_shared_from_this<GameObject>
 {
 public:
@@ -43,11 +44,14 @@ public:
     std::shared_ptr<const _ComponentType> FindComponent() const;
     template <typename _ComponentType>
     std::shared_ptr<_ComponentType> FindComponent();
+    void SetName(const StringHash& name);
+    void SetName(StringHash&& name);
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
     void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
     std::shared_ptr<Transform> GetTransform() noexcept;
     std::shared_ptr<const Transform> GetTransform() const noexcept;
+    const StringHash& GetName() const noexcept;
 
 private:
     bool RemoveComponent(size_t componentId);
@@ -55,6 +59,7 @@ private:
 
 /**@section Variable */
 protected:
+    StringHash m_name;
     bool m_isActive;
     std::shared_ptr<Transform> m_transform;
     std::vector<std::shared_ptr<Component>> m_components;

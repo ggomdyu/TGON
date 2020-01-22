@@ -5,13 +5,13 @@
  */
 
 #pragma once
-#include "Core/Object.h"
+#include "Core/RuntimeObject.h"
 
 namespace tgon
 {
 
 class AudioDecoder :
-    public Object
+    public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(AudioDecoder)
