@@ -74,7 +74,8 @@ inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewH
         iter = resourceCache.emplace(path, this->CreateResource<_ResourceType>(path)).first;
     }
 
-    return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
+    auto ret = std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
+    return ret;
 }
 
 template<typename _ResourceType>

@@ -17,14 +17,14 @@ AudioPlayer::AudioPlayer(ALuint alSource, const std::shared_ptr<AudioBuffer>& au
     m_alSource(alSource),
     m_audioBuffer(audioBuffer)
 {
-    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()))
+    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer()))
 }
 
 AudioPlayer::AudioPlayer(ALuint alSource, std::shared_ptr<AudioBuffer>&& audioBuffer) noexcept :
     m_alSource(alSource),
     m_audioBuffer(std::move(audioBuffer))
 {
-    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()))
+    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer()))
 }
 
 AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
@@ -178,7 +178,7 @@ bool AudioPlayer::IsLooping() const
 std::optional<ALuint> AudioPlayer::CreateALSource()
 {
     ALuint alSource;
-    alGenSources(1, &alSource);
+    TGON_AL_ERROR_CHECK(alGenSources(1, &alSource));
     if (alGetError() != AL_NO_ERROR)
     {
         return {};

@@ -7,6 +7,7 @@
 #endif
 
 #include "AudioDevice.h"
+#include "OpenALDebug.h"
 
 #ifdef _MSC_VER
 #   pragma comment(lib, "Winmm.lib")
@@ -15,44 +16,21 @@
 namespace tgon
 {
 
-
 AudioDevice::AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept :
     m_device(device),
     m_context(context)
 {
+    this->MakeCurrent();
 }
 
 std::optional<AudioDevice> AudioDevice::Create()
 {
-    std::shared_ptr<ALCdevice> device(alcOpenDevice(nullptr), [](ALCdevice* device)
-    {
-        alcCloseDevice(device);
-    });
-    if (device == nullptr)
-    {
-        return {};
-    }
-
-    std::shared_ptr<ALCcontext> context(alcCreateContext(device.get(), nullptr), [](ALCcontext* context)
-    {
-        if (alcGetCurrentContext() == context)
-        {
-            alcMakeContextCurrent(nullptr);
-        }
-        
-        alcDestroyContext(context);
-    });
-    if (context == nullptr)
-    {
-        return {};
-    }
-
-    return AudioDevice(device, context);
+    return AudioDevice(nullptr, nullptr);
 }
 
 void AudioDevice::MakeCurrent()
 {
-    alcMakeContextCurrent(m_context.get());
+    TGON_AL_ERROR_CHECK(alcMakeContextCurrent(m_context.get()));
 }
 
 std::shared_ptr<ALCdevice> AudioDevice::GetDevice() noexcept
