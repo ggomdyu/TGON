@@ -52,6 +52,16 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
+AudioBuffer::AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
+    m_alBufferId(CreateALBuffer()),
+    m_audioData(audioData),
+    m_audioDataBytes(audioDataBytes),
+    m_bitsPerSample(bitsPerSample),
+    m_channels(channels),
+    m_samplingRate(samplingRate)
+{
+}
+
 AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :
     m_alBufferId(rhs.m_alBufferId),
     m_audioData(std::move(rhs.m_audioData)),
@@ -87,7 +97,7 @@ AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs) noexcept
     return *this;
 }
 
-std::optional<AudioBuffer> AudioBuffer::Create(const char* filePath)
+std::shared_ptr<AudioBuffer> AudioBuffer::Create(const char* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
@@ -98,7 +108,7 @@ std::optional<AudioBuffer> AudioBuffer::Create(const char* filePath)
     return Create(*fileData);
 }
 
-std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData)
+std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioDecoder::IsWav(fileData))
@@ -117,9 +127,9 @@ std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>&
     return Create(fileData, audioFormat);
 }
 
-std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
+std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
-    std::shared_ptr<std::byte[]> audioData;
+    std::shared_ptr<std::byte> audioData;
     int32_t audioDataBytes = 0;
     int32_t bitsPerSample = 0;
     int32_t channels = 0;
@@ -158,12 +168,12 @@ std::optional<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>&
         }
     }
 
-    return AudioBuffer(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
+    return std::make_shared<AudioBuffer>(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
 gsl::span<std::byte> AudioBuffer::GetAudioData() noexcept
 {
-    return {m_audioData.get(), static_cast<size_t>(m_audioDataBytes)};
+    return {m_audioData.get(), m_audioDataBytes};
 }
 
 gsl::span<const std::byte> AudioBuffer::GetAudioData() const noexcept

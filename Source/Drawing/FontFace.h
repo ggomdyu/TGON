@@ -6,14 +6,12 @@
 
 #pragma once
 #include <vector>
-#include <memory>
 #include <cstddef>
 #include <unordered_map>
-#include <optional>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "Core/NonCopyable.h"
+#include "Core/RuntimeObject.h"
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 
@@ -38,8 +36,11 @@ struct GlyphData final
 };
 
 class FontFace final :
-    private NonCopyable
+    public RuntimeObject
 {
+public:
+    TGON_DECLARE_RTTI(FontFace)
+    
 /**@section Constructor */
 public:
     FontFace(FT_Face fontFace, int32_t fontSize) noexcept;
@@ -59,13 +60,10 @@ public:
     const GlyphData& GetGlyphData(char32_t ch) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs) const;
 
-private:
-    void Destroy();
-
 /**@section Variable */
 private:
-    int32_t m_fontSize;
     FT_Face m_fontFace;
+    int32_t m_fontSize;
     mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
 };
 

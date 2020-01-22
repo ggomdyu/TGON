@@ -70,11 +70,6 @@ OpenGLTexture::OpenGLTexture() :
 {
 }
 
-OpenGLTexture::OpenGLTexture(void* textureHandle) noexcept :
-    m_textureHandle(reinterpret_cast<GLuint>(textureHandle))
-{
-}
-
 OpenGLTexture::OpenGLTexture(OpenGLTexture&& rhs) noexcept :
     m_textureHandle(rhs.m_textureHandle)
 {

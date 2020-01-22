@@ -19,7 +19,7 @@ public:
 
 /**@section Constructor */
 public:
-    RuntimeObject() {}
+    RuntimeObject() noexcept = default;
     RuntimeObject(RuntimeObject&& rhs) noexcept = default;
 
 /**@section Destructor */

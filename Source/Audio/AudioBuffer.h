@@ -35,10 +35,8 @@ public:
     TGON_DECLARE_RTTI(AudioBuffer)
     
 /**@section Constructor */
-private:
-    AudioBuffer(const std::shared_ptr<std::byte[]>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
-
 public:
+    AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
     AudioBuffer(AudioBuffer&& rhs) noexcept;
     
 /**@section Operator */
@@ -51,9 +49,9 @@ public:
 
 /**@section Method */
 public:
-    static std::optional<AudioBuffer> Create(const char* filePath);
-    static std::optional<AudioBuffer> Create(const gsl::span<const std::byte>& fileData);
-    static std::optional<AudioBuffer> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
+    static std::shared_ptr<AudioBuffer> Create(const char* filePath);
+    static std::shared_ptr<AudioBuffer> Create(const gsl::span<const std::byte>& fileData);
+    static std::shared_ptr<AudioBuffer> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
     gsl::span<std::byte> GetAudioData() noexcept;
     gsl::span<const std::byte> GetAudioData() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
@@ -67,21 +65,11 @@ private:
 /**@section Variable */
 protected:
     ALuint m_alBufferId = 0;
-    std::shared_ptr<std::byte[]> m_audioData;
+    std::shared_ptr<std::byte> m_audioData;
     int32_t m_audioDataBytes = 0;
     int32_t m_bitsPerSample = 0;
     int32_t m_channels = 0;
     int32_t m_samplingRate = 0;
 };
-
-inline AudioBuffer::AudioBuffer(const std::shared_ptr<std::byte[]>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
-    m_alBufferId(CreateALBuffer()),
-    m_audioData(audioData),
-    m_audioDataBytes(audioDataBytes),
-    m_bitsPerSample(bitsPerSample),
-    m_channels(channels),
-    m_samplingRate(samplingRate)
-{
-}
 
 } /* namespace tgon */

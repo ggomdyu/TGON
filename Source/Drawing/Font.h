@@ -11,8 +11,11 @@ namespace tgon
 {
 
 class Font final :
-    private NonCopyable
+    public RuntimeObject
 {
+public:
+    TGON_DECLARE_RTTI(Font)
+    
 /**@section Constructor */
 public:
     template <typename _ContainerType>

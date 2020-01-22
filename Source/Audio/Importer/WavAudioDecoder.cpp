@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include <stb_vorbis.c>
-
 #include "WavAudioDecoder.h"
 #include "RiffReader.h"
 
@@ -15,7 +13,7 @@ std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std
         return {};
     }
 
-    std::shared_ptr<std::byte[]> audioData;
+    std::shared_ptr<std::byte> audioData;
     int32_t audioDataBytes = 0;
     int32_t bitsPerSample = 0;
     int32_t channels = 0;
@@ -48,9 +46,9 @@ std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std
                 auto chunkData = reinterpret_cast<const RiffReader::DataChunkData*>(chunkHeader.chunkData);
                 
                 audioDataBytes = chunkHeader.chunkDataSize;
-                audioData = std::shared_ptr<std::byte[]>(new std::byte[chunkHeader.chunkDataSize]);
+                audioData = std::shared_ptr<std::byte>(new std::byte[5]);
                 
-                memcpy(&audioData[0], chunkData, chunkHeader.chunkDataSize);
+                memcpy(audioData.get(), chunkData, chunkHeader.chunkDataSize);
             }
             break;
                 

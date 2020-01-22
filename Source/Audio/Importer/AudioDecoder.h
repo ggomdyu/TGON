@@ -18,13 +18,13 @@ public:
     
 /**@section Constructor */
 public:
-    template <typename _SmartPointerType>
-    AudioDecoder(_SmartPointerType&& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+    AudioDecoder(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+    AudioDecoder(AudioDecoder&&) = default;
     
 /**@section Method */
 public:
-    std::shared_ptr<std::byte[]> GetAudioData() noexcept;
-    std::shared_ptr<const std::byte[]> GetAudioData() const noexcept;
+    std::shared_ptr<std::byte> GetAudioData() noexcept;
+    std::shared_ptr<const std::byte> GetAudioData() const noexcept;
     int32_t GetAudioDataBytes() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
@@ -32,16 +32,15 @@ public:
 
 /**@section Variable */
 protected:
-    std::shared_ptr<std::byte[]> m_audioData;
+    std::shared_ptr<std::byte> m_audioData;
     int32_t m_audioDataBytes = 0;
     int32_t m_bitsPerSample = 0;
     int32_t m_channels = 0;
     int32_t m_samplingRate = 0;
 };
 
-template <typename _SmartPointerType>
-inline AudioDecoder::AudioDecoder(_SmartPointerType&& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
-    m_audioData(std::forward<_SmartPointerType>(audioData)),
+inline AudioDecoder::AudioDecoder(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
+    m_audioData(audioData),
     m_audioDataBytes(audioDataBytes),
     m_bitsPerSample(bitsPerSample),
     m_channels(channels),
@@ -49,12 +48,12 @@ inline AudioDecoder::AudioDecoder(_SmartPointerType&& audioData, int32_t audioDa
 {
 }
 
-inline std::shared_ptr<std::byte[]> AudioDecoder::GetAudioData() noexcept
+inline std::shared_ptr<std::byte> AudioDecoder::GetAudioData() noexcept
 {
     return m_audioData;
 }
 
-inline std::shared_ptr<const std::byte[]> AudioDecoder::GetAudioData() const noexcept
+inline std::shared_ptr<const std::byte> AudioDecoder::GetAudioData() const noexcept
 {
     return m_audioData;
 }

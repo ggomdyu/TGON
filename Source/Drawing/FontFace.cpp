@@ -16,8 +16,8 @@ FontFace::FontFace(FT_Face fontFace, int32_t fontSize) noexcept :
 }
 
 FontFace::FontFace(FontFace&& rhs) noexcept :
-    m_fontSize(rhs.m_fontSize),
     m_fontFace(rhs.m_fontFace),
+    m_fontSize(rhs.m_fontSize),
     m_glyphDatas(std::move(rhs.m_glyphDatas))
 {
     rhs.m_fontFace = nullptr;
@@ -25,7 +25,11 @@ FontFace::FontFace(FontFace&& rhs) noexcept :
 
 FontFace::~FontFace()
 {
-    this->Destroy();
+    if (m_fontFace != nullptr)
+    {
+        FT_Done_Face(m_fontFace);
+        m_fontFace = nullptr;
+    }
 }
 
 FontFace& FontFace::operator=(FontFace&& rhs) noexcept
@@ -111,15 +115,6 @@ I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
     }
 
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
-}
-
-void FontFace::Destroy()
-{
-    if (m_fontFace != nullptr)
-    {
-        FT_Done_Face(m_fontFace);
-        m_fontFace = nullptr;
-    }
 }
 
 } /* namespace tgon */

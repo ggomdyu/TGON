@@ -7,22 +7,20 @@
 #pragma once
 #include <optional>
 
-#include "Core/RuntimeObject.h"
-
 #include "Font.h"
 
 namespace tgon
 {
 
-class FontFactory :
+class FontFactory final :
     public RuntimeObject
 {
 public:
     TGON_DECLARE_RTTI(FontFactory)
 
 /**@section Constructor */
-public:
-    FontFactory(FT_Library library) noexcept;
+private:
+    explicit FontFactory(FT_Library library) noexcept;
 
 /**@section Method */
 public:

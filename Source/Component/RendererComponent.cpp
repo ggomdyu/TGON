@@ -6,7 +6,6 @@ namespace tgon
 {
     
 RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) noexcept :
-    Component(),
     m_material(material)
 {
 }

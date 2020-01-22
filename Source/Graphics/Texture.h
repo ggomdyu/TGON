@@ -36,7 +36,6 @@ class Texture final :
 public:
     Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
     Texture(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage);
-    Texture(void* nativeTexture) noexcept;
     Texture(Texture&& rhs) noexcept;
 
 /**@section Operator */

@@ -19,7 +19,6 @@ class OpenGLTexture :
 /**@section Constructor */
 public:
     OpenGLTexture();
-    OpenGLTexture(void* nativeTexture) noexcept;
     OpenGLTexture(OpenGLTexture&& rhs) noexcept;
     
 /**@section Destructor */

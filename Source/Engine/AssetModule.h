@@ -86,7 +86,7 @@ inline std::shared_ptr<const _ResourceType> AssetModule::GetResource(const Strin
 template <typename _ResourceType>
 inline std::shared_ptr<_ResourceType> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    return std::make_shared<_ResourceType>(path.Data());
+    return _ResourceType::Create(path.Data());
 }
 
 template <>
@@ -99,18 +99,6 @@ inline std::shared_ptr<Texture> AssetModule::CreateResource(const StringViewHash
     }
 
     return std::make_shared<Texture>(*image, FilterMode::Linear, WrapMode::Clamp, false, false);
-}
-
-template <>
-inline std::shared_ptr<AudioBuffer> AssetModule::CreateResource(const StringViewHash& path) const
-{
-    auto audioBuffer = AudioBuffer::Create(path.Data());
-    if (audioBuffer.has_value() == false)
-    {
-        return nullptr;
-    }
-
-    return std::make_shared<AudioBuffer>();
 }
 
 template <>

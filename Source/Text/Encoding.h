@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <gsl/span>
 
-#include "Core/NonCopyable.h"
+#include "Core/RuntimeObject.h"
 
 struct UConverter;
 
@@ -26,7 +26,6 @@ public:
 
 /**@section Constructor */
 public:
-    Encoding() noexcept = default;
     explicit Encoding(const char* codePageName);
     explicit Encoding(int32_t codePage);
     explicit Encoding(UConverter* converter) noexcept;

@@ -22,11 +22,6 @@ Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelForma
     this->SetData(imageData, size, pixelFormat);
 }
 
-Texture::Texture(void* nativeTexture) noexcept :
-    PlatformTexture(nativeTexture)
-{
-}
-
 Texture::Texture(Texture&& rhs) noexcept :
     PlatformTexture(std::move(rhs)),
     m_isUseMipmap(rhs.m_isUseMipmap),
