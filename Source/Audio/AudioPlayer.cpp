@@ -7,24 +7,14 @@
 #endif
 
 #include "AudioPlayer.h"
-#include "AudioBuffer.h"
 #include "OpenALDebug.h"
 
 namespace tgon
 {
 
-AudioPlayer::AudioPlayer(ALuint alSource, const std::shared_ptr<AudioBuffer>& audioBuffer) noexcept :
-    m_alSource(alSource),
-    m_audioBuffer(audioBuffer)
+AudioPlayer::AudioPlayer(ALuint alSource) noexcept :
+    m_alSource(alSource)
 {
-    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer()))
-}
-
-AudioPlayer::AudioPlayer(ALuint alSource, std::shared_ptr<AudioBuffer>&& audioBuffer) noexcept :
-    m_alSource(alSource),
-    m_audioBuffer(std::move(audioBuffer))
-{
-    TGON_AL_ERROR_CHECK(alSourcei(alSource, AL_BUFFER, m_audioBuffer->GetNativeBuffer()))
 }
 
 AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
@@ -51,7 +41,7 @@ AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
     return *this;
 }
 
-std::optional<AudioPlayer> AudioPlayer::Create(const std::shared_ptr<AudioBuffer>& audioBuffer)
+std::optional<AudioPlayer> AudioPlayer::Create()
 {
     auto alSource = CreateALSource();
     if (alSource.has_value() == false)
@@ -59,7 +49,7 @@ std::optional<AudioPlayer> AudioPlayer::Create(const std::shared_ptr<AudioBuffer
         return {};
     }
 
-    return AudioPlayer(*alSource, audioBuffer);
+    return AudioPlayer(*alSource);
 }
 
 void AudioPlayer::Play()
@@ -96,6 +86,18 @@ void AudioPlayer::Pause()
 void AudioPlayer::Resume()
 {
     TGON_AL_ERROR_CHECK(alSourcePlay(m_alSource))
+}
+
+void AudioPlayer::SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer)
+{
+    TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()));
+    m_audioBuffer = audioBuffer;
+}
+
+void AudioPlayer::SetAudioBuffer(std::shared_ptr<AudioBuffer>&& audioBuffer)
+{
+    TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()));
+    m_audioBuffer = std::move(audioBuffer);
 }
 
 void AudioPlayer::SetVolume(float volume)

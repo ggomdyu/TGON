@@ -10,6 +10,8 @@
 
 #include "Core/RuntimeObject.h"
 
+#include "AudioBuffer.h"
+
 namespace tgon
 {
 
@@ -20,16 +22,13 @@ public:
     TGON_DECLARE_RTTI(AudioPlayer)
 
 /**@section Constructor */
-private:
-    AudioPlayer(ALuint alSource, const std::shared_ptr<class AudioBuffer>& audioBuffer) noexcept;
-    AudioPlayer(ALuint alSource, std::shared_ptr<class AudioBuffer>&& audioBuffer) noexcept;
-
 public:
+    AudioPlayer(ALuint alSource) noexcept;
     AudioPlayer(AudioPlayer&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~AudioPlayer();
+    ~AudioPlayer() override;
 
 /**@section Destructor */
 public:
@@ -37,13 +36,15 @@ public:
 
 /**@section Method */
 public:
-    static std::optional<AudioPlayer> Create(const std::shared_ptr<class AudioBuffer>& audioBuffer);
+    static std::optional<AudioPlayer> Create();
     void Play();
     void Play(float volume, bool isLooping);
     bool IsPlaying() const;
     void Stop();
     void Pause();
     void Resume();
+    void SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer);
+    void SetAudioBuffer(std::shared_ptr<AudioBuffer>&& audioBuffer);
     void SetVolume(float volume);
     void SetPosition(float x, float y, float z);
     void SetVelocity(float x, float y, float z);

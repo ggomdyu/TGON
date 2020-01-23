@@ -60,6 +60,7 @@ AudioBuffer::AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t au
     m_channels(channels),
     m_samplingRate(samplingRate)
 {
+    TGON_AL_ERROR_CHECK(alBufferData(m_alBufferId, ConvertToALFormat(m_channels, m_bitsPerSample), m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate));
 }
 
 AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :

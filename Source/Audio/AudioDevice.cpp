@@ -25,7 +25,30 @@ AudioDevice::AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::sh
 
 std::optional<AudioDevice> AudioDevice::Create()
 {
-    return AudioDevice(nullptr, nullptr);
+    std::shared_ptr<ALCdevice> device(alcOpenDevice(nullptr), [](ALCdevice* device)
+    {
+        alcCloseDevice(device);
+    });
+    if (device == nullptr)
+    {
+        return {};
+    }
+
+    std::shared_ptr<ALCcontext> context(alcCreateContext(device.get(), nullptr), [](ALCcontext* context)
+    {
+        if (alcGetCurrentContext() == context)
+        {
+            alcMakeContextCurrent(nullptr);
+        }
+        
+        alcDestroyContext(context);
+    });
+    if (context == nullptr)
+    {
+        return {};
+    }
+
+    return AudioDevice(device, context);
 }
 
 void AudioDevice::MakeCurrent()

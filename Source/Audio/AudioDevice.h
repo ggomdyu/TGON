@@ -22,7 +22,7 @@ public:
     TGON_DECLARE_RTTI(AudioDevice)
 
 /**@section Constructor */
-private:
+public:
     AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept;
     
 /**@section Method */
