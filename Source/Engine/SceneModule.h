@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <memory>
+#include <unordered_map>
 
 #include "Game/Scene.h"
 
@@ -45,7 +45,7 @@ inline void SceneModule::ChangeScene(_Args&&... args)
     // If there's no scene, then initialize it immediately.
     if (m_currScene == nullptr)
     {
-        m_currScene = std::make_unique<_SceneType>(std::forward<_Args>(args)...);
+        m_currScene = _SceneType::Create(std::forward<_Args>(args)...);
         m_currScene->Initialize();
         return;
     }

@@ -76,9 +76,9 @@ void GameObject::Update()
             component->Update();
         }
         
-        for (auto& child : m_transform->GetChildren())
+        for (auto& child : m_children)
         {
-            child->GetGameObject()->Update();
+            child->Update();
         }
     }
     else
@@ -88,6 +88,50 @@ void GameObject::Update()
             component->Update();
         }
     }
+}
+
+void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
+{
+    m_children.push_back(child);
+}
+
+bool GameObject::DetachChild(const std::shared_ptr<GameObject>& child)
+{
+    auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<GameObject>& object)
+    {
+        return child == object;
+    });
+    if (iter != m_children.end())
+    {
+        m_children.erase(iter);
+        return true;
+    }
+
+    return false;
+}
+
+void GameObject::DetachChildren()
+{
+    m_children.clear();
+}
+
+std::shared_ptr<GameObject> GameObject::FindObject(const StringViewHash& objectName)
+{
+    auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<GameObject>& item)
+    {
+        return item->GetName() == objectName;
+    });
+    if (m_children.end() == iter)
+    {
+        return nullptr;
+    }
+
+    return *iter;
+}
+
+std::shared_ptr<const GameObject> GameObject::FindObject(const StringViewHash& objectName) const
+{
+    return const_cast<GameObject*>(this)->FindObject(objectName);
 }
 
 void GameObject::SetName(const StringHash& name)
@@ -128,6 +172,16 @@ std::shared_ptr<const Transform> GameObject::GetTransform() const noexcept
 const StringHash& GameObject::GetName() const noexcept
 {
     return m_name;
+}
+
+std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() noexcept
+{
+    return m_children;
+}
+
+const std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() const noexcept
+{
+    return m_children;
 }
 
 bool GameObject::RemoveComponent(size_t componentId)

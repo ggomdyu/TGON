@@ -5,10 +5,11 @@
  */
 
 #pragma once
-#include <vector>
+#include <memory>
 
-#include "Component/Component.h"
 #include "Math/Matrix4x4.h"
+
+#include "Component.h"
 
 namespace tgon
 {
@@ -26,15 +27,9 @@ public:
 
 /**@section Method */
 public:
-    void SetParent(const std::shared_ptr<Transform>& parent);
-    void DetachChildren();
     void SetLocalPosition(const Vector3& localPosition) noexcept;
     void SetLocalRotation(const Vector3& localRotation) noexcept;
     void SetLocalScale(const Vector3& localScale) noexcept;
-    std::vector<std::shared_ptr<Transform>>& GetChildren() noexcept;
-    const std::vector<std::shared_ptr<Transform>>& GetChildren() const noexcept;
-    std::shared_ptr<Transform> GetParent() noexcept;
-    std::shared_ptr<const Transform> GetParent() const noexcept;
     const Vector3& GetLocalPosition() const noexcept;
     const Vector3& GetLocalRotation() const noexcept;
     const Vector3& GetLocalScale() const noexcept;
@@ -43,13 +38,8 @@ public:
     bool IsDirty() const noexcept;
     void Update() override;
 
-private:
-    bool DetachChild(const std::shared_ptr<Transform>& child);
-
 /**@section Variable */
 protected:
-    std::weak_ptr<Transform> m_parent;
-    std::vector<std::shared_ptr<Transform>> m_children;
     Vector3 m_localPosition;
     Vector3 m_localRotation;
     Vector3 m_localScale = Vector3(1.0f, 1.0f, 1.0f);

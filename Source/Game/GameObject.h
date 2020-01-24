@@ -7,7 +7,6 @@
 #pragma once
 #include <vector>
 
-#include "Core/RuntimeObject.h"
 #include "Text/StringHash.h"
 #include "Component/Transform.h"
 
@@ -36,23 +35,29 @@ public:
     static std::shared_ptr<GameObject> Create(const std::shared_ptr<Transform>& transform);
     virtual void Initialize() {}
     virtual void Update();
+    void AddChild(const std::shared_ptr<GameObject>& child);
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
-    void AddChild(const std::shared_ptr<GameObject>& child);
+    bool DetachChild(const std::shared_ptr<GameObject>& child);
+    void DetachChildren();
     template <typename _ComponentType>
     bool RemoveComponent();
-    template <typename _ComponentType>
-    std::shared_ptr<const _ComponentType> FindComponent() const;
+    std::shared_ptr<GameObject> FindObject(const StringViewHash& objectName);
+    std::shared_ptr<const GameObject> FindObject(const StringViewHash& objectName) const;
     template <typename _ComponentType>
     std::shared_ptr<_ComponentType> FindComponent();
+    template <typename _ComponentType>
+    std::shared_ptr<const _ComponentType> FindComponent() const;
     void SetName(const StringHash& name);
     void SetName(StringHash&& name);
+    void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
-    void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
-    std::shared_ptr<Tranform> GetTransform() noexcept;
+    std::shared_ptr<Transform> GetTransform() noexcept;
     std::shared_ptr<const Transform> GetTransform() const noexcept;
     const StringHash& GetName() const noexcept;
+    std::vector<std::shared_ptr<GameObject>>& GetChildren() noexcept;
+    const std::vector<std::shared_ptr<GameObject>>& GetChildren() const noexcept;
 
 private:
     bool RemoveComponent(size_t componentId);
@@ -62,8 +67,8 @@ private:
 protected:
     StringHash m_name;
     bool m_isActive;
-    std::shared_ptr<GameObject> m_children;
     std::shared_ptr<Transform> m_transform;
+    std::vector<std::shared_ptr<GameObject>> m_children;
     std::vector<std::shared_ptr<Component>> m_components;
 };
 

@@ -1,16 +1,18 @@
 #include "PrecompiledHeader.h"
 
-#include <memory>
-
 #include "Scene.h"
 
 namespace tgon
 {
 
-std::shared_ptr<Scene> Scene::Create()
+Scene::Scene() :
+    GameObject(StringHash{}, std::make_shared<Transform>())
 {
-    Scene scene(StringHash{}, std::shared_ptr<Transform>{});;
-    return {};
+}
+
+std::unique_ptr<Scene> Scene::Create()
+{
+    return std::unique_ptr<Scene>(new Scene());
 }
 
 } /* namespace tgon */

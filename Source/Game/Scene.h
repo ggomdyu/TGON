@@ -18,11 +18,11 @@ public:
 
 /**@section Constructor */
 protected:
-    using GameObject::GameObject;
+    Scene();
 
 /**@section Method */
 public:
-    static std::shared_ptr<Scene> Create();
+    static std::unique_ptr<Scene> Create();
 };
 
 } /* namespace tgon */

@@ -1,49 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #include "Math/Mathematics.h"
+#include "Game/GameObject.h"
 
 #include "Transform.h"
 
 namespace tgon
 {
     
-void Transform::SetParent(const std::shared_ptr<Transform>& parent)
-{
-    auto sharedThis = this->shared_from_this();
-    if (auto parent = m_parent.lock(); parent != nullptr)
-    {
-        parent->DetachChild(sharedThis);
-    }
-
-    if (parent != nullptr)
-    {
-        parent->m_children.push_back(sharedThis);
-    }
-    
-    m_parent = parent;
-    m_isDirty = true;
-}
-
-bool Transform::DetachChild(const std::shared_ptr<Transform>& child)
-{
-    auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<Transform>& object)
-    {
-        return child == object;
-    });
-    if (iter != m_children.end())
-    {
-        m_children.erase(iter);
-        return true;
-    }
-
-    return false;
-}
-
-void Transform::DetachChildren()
-{
-    m_children.clear();
-}
-
 void Transform::SetLocalPosition(const Vector3& localPosition) noexcept
 {
     m_localPosition = localPosition;
@@ -60,26 +24,6 @@ void Transform::SetLocalScale(const Vector3& localScale) noexcept
 {
     m_localScale = localScale;
     m_isDirty = true;
-}
-
-std::vector<std::shared_ptr<Transform>>& Transform::GetChildren() noexcept
-{
-    return m_children;
-}
-
-const std::vector<std::shared_ptr<Transform>>& Transform::GetChildren() const noexcept
-{
-    return m_children;
-}
-    
-std::shared_ptr<Transform> Transform::GetParent() noexcept
-{
-    return m_parent.lock();
-}
-
-std::shared_ptr<const Transform> Transform::GetParent() const noexcept
-{
-    return m_parent.lock();
 }
 
 const Vector3& Transform::GetLocalPosition() const noexcept
@@ -115,14 +59,14 @@ void Transform::Update()
         m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
         m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
         
-        if (auto parent = m_parent.lock(); parent != nullptr)
+        if (auto parent = this->GetGameObject()->GetParent(); parent != nullptr)
         {
-            m_matWorld *= parent->GetWorldMatrix();
+            m_matWorld *= parent->GetTransform()->GetWorldMatrix();
 
-            for (auto& child : m_children)
+            /*for (auto& child : m_children)
             {
                 child->m_isDirty = true;
-            }
+            }*/
         }
     }
     
