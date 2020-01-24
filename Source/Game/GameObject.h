@@ -8,13 +8,13 @@
 #include <vector>
 
 #include "Core/RuntimeObject.h"
-#include "Component/Transform.h"
 #include "Text/StringHash.h"
+#include "Component/Transform.h"
 
 namespace tgon
 {
 
-class GameObject final :
+class GameObject :
     public RuntimeObject,
     public std::enable_shared_from_this<GameObject>
 {
@@ -38,6 +38,7 @@ public:
     virtual void Update();
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
+    void AddChild(const std::shared_ptr<GameObject>& child);
     template <typename _ComponentType>
     bool RemoveComponent();
     template <typename _ComponentType>
@@ -49,7 +50,7 @@ public:
     void SetActive(bool isActive) noexcept;
     bool IsActive() const noexcept;
     void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
-    std::shared_ptr<Transform> GetTransform() noexcept;
+    std::shared_ptr<Tranform> GetTransform() noexcept;
     std::shared_ptr<const Transform> GetTransform() const noexcept;
     const StringHash& GetName() const noexcept;
 
@@ -61,6 +62,7 @@ private:
 protected:
     StringHash m_name;
     bool m_isActive;
+    std::shared_ptr<GameObject> m_children;
     std::shared_ptr<Transform> m_transform;
     std::vector<std::shared_ptr<Component>> m_components;
 };
