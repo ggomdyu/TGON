@@ -92,6 +92,8 @@ void GameObject::Update()
 
 void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
 {
+    child->m_parent = this->weak_from_this();
+    
     m_children.push_back(child);
 }
 
@@ -182,6 +184,26 @@ std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() noexcept
 const std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() const noexcept
 {
     return m_children;
+}
+
+std::weak_ptr<GameObject> GameObject::GetParent() noexcept
+{
+    if (m_parent.expired())
+    {
+        return {};
+    }
+    
+    return m_parent;
+}
+
+std::weak_ptr<const GameObject> GameObject::GetParent() const noexcept
+{
+    if (m_parent.expired())
+    {
+        return {};
+    }
+    
+    return m_parent;
 }
 
 bool GameObject::RemoveComponent(size_t componentId)

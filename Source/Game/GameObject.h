@@ -58,7 +58,9 @@ public:
     const StringHash& GetName() const noexcept;
     std::vector<std::shared_ptr<GameObject>>& GetChildren() noexcept;
     const std::vector<std::shared_ptr<GameObject>>& GetChildren() const noexcept;
-
+    std::weak_ptr<GameObject> GetParent() noexcept;
+    std::weak_ptr<const GameObject> GetParent() const noexcept;
+    
 private:
     bool RemoveComponent(size_t componentId);
     std::shared_ptr<Component> FindComponent(size_t componentId);
@@ -68,6 +70,7 @@ protected:
     StringHash m_name;
     bool m_isActive;
     std::shared_ptr<Transform> m_transform;
+    std::weak_ptr<GameObject> m_parent;
     std::vector<std::shared_ptr<GameObject>> m_children;
     std::vector<std::shared_ptr<Component>> m_components;
 };

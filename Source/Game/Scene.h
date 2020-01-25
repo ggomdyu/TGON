@@ -22,7 +22,7 @@ protected:
 
 /**@section Method */
 public:
-    static std::unique_ptr<Scene> Create();
+    static std::shared_ptr<Scene> Create();
 };
 
 } /* namespace tgon */

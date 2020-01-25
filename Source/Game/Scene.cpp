@@ -10,9 +10,18 @@ Scene::Scene() :
 {
 }
 
-std::unique_ptr<Scene> Scene::Create()
+std::shared_ptr<Scene> Scene::Create()
 {
-    return std::unique_ptr<Scene>(new Scene());
+    std::shared_ptr<Scene> scene(new Scene());
+    
+    if (scene->m_transform != nullptr)
+    {
+        scene->m_transform->SetGameObject(scene);
+    }
+    
+    scene->Initialize();
+
+    return scene;
 }
 
 } /* namespace tgon */
