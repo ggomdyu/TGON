@@ -104,7 +104,7 @@ void UIRendererModule::FlushSpriteBatches()
 {
     auto flushSpriteBatches = [&](const std::shared_ptr<Camera>& camera)
     {
-#if DEBUG
+#ifndef NDEBUG
         int32_t drawCall = 0;
 #endif
         for (auto& spriteBatch : m_spriteBatches)
@@ -114,12 +114,12 @@ void UIRendererModule::FlushSpriteBatches()
             material->SetParameterWVPMatrix4fv(camera->GetViewProjectionMatrix()[0]);
 
             spriteBatch.FlushBatch(*m_graphics);
-#if DEBUG
+#ifndef NDEBUG
             ++drawCall;
 #endif
         }
-#if DEBUG
-//        Debug::WriteLine(std::string("DrawCall: ") + std::to_string(drawCall));
+#ifndef NDEBUG
+        Debug::WriteLine(fmt::format("DrawCall: {0}", drawCall));
     #endif
     };
 
