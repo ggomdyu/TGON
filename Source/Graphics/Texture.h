@@ -56,8 +56,6 @@ public:
     PixelFormat GetPixelFormat() const noexcept;
     FilterMode GetFilterMode() const noexcept;
     WrapMode GetWrapMode() const noexcept;
-    void* GetNativeTexture() noexcept;
-    const void* GetNativeTexture() const noexcept;
     bool IsValid() const;
     bool IsUseMipmap() const noexcept;
     

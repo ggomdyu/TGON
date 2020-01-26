@@ -159,11 +159,6 @@ bool Texture::IsUseMipmap() const noexcept
     return m_isUseMipmap;
 }
 
-void* Texture::GetNativeTexture() noexcept
-{
-    return reinterpret_cast<void*>(m_textureHandle);
-}
-
 } /* namespace tgon */
 
 #endif

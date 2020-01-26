@@ -94,11 +94,6 @@ WrapMode Texture::GetWrapMode() const noexcept
     return m_wrapMode;
 }
 
-const void* Texture::GetNativeTexture() const noexcept
-{
-    return const_cast<Texture*>(this)->GetNativeTexture();
-}
-
 const I32Extent2D& Texture::GetSize() const noexcept
 {
     return m_size;

@@ -19,8 +19,8 @@ public:
 
 /**@section Method */
 public:
-    std::shared_ptr<const ICloneable> Clone() const;
     virtual std::shared_ptr<ICloneable> Clone() = 0;
+    std::shared_ptr<const ICloneable> Clone() const;
 };
     
 inline std::shared_ptr<const ICloneable> ICloneable::Clone() const

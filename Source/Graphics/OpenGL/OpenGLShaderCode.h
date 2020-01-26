@@ -140,8 +140,7 @@ uniform sampler2D textureSampler;                                               
                                                                                     \n\
 void main()                                                                         \n\
 {                                                                                   \n\
-    fragUV += uvOffset;                                                             \n\
-    outColor = texture(textureSampler, fragUV) * fragColor;                         \n\
+    outColor = texture(textureSampler, fragUV + uvOffset) * fragColor;                         \n\
 }                                                                                   \n\
 ";
 

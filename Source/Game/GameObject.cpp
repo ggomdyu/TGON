@@ -51,28 +51,26 @@ void GameObject::Update()
     if (m_transform != nullptr)
     {
         m_transform->Update();
-
-        for (auto& component : m_components)
-        {
-            component->Update();
-        }
-        
-        for (auto& child : m_children)
-        {
-            child->Update();
-        }
     }
-    else
+
+    for (auto& component : m_components)
     {
-        for (auto& component : m_components)
-        {
-            component->Update();
-        }
+        component->Update();
+    }
+        
+    for (auto& child : m_children)
+    {
+        child->Update();
     }
 }
 
 void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
 {
+    if (auto prevParent = child->m_parent.lock(); prevParent != nullptr)
+    {
+        prevParent->RemoveChild(child);
+    }
+
     child->m_parent = this->weak_from_this();
     
     m_children.push_back(child);

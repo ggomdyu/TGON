@@ -89,10 +89,10 @@ function (init_tgon_include_directory)
         ThirdParty/icu4c-64_2/icu/source/common
         ThirdParty/icu4c-64_2/icu/source/i18n
         ThirdParty/libiconv-1.9.2/include
-        ThirdParty/openal-soft-1.20.0
-        ThirdParty/openal-soft-1.20.0/alc
-        ThirdParty/openal-soft-1.20.0/common
-        ThirdParty/openal-soft-1.20.0/include
+        ThirdParty/openal-soft-1.20.1
+        ThirdParty/openal-soft-1.20.1/alc
+        ThirdParty/openal-soft-1.20.1/common
+        ThirdParty/openal-soft-1.20.1/include
         ThirdParty/stb
         ThirdParty/zlib-1.2.11
     )
@@ -108,7 +108,7 @@ function (init_thirdparty)
     option(ALSOFT_UTILS "" FALSE)
     option(ALSOFT_EXAMPLES "" FALSE)
     set(LIBTYPE "STATIC")
-    add_subdirectory(ThirdParty/openal-soft-1.20.0)
+    add_subdirectory(ThirdParty/openal-soft-1.20.1)
 
     option(GAINPUT_TESTS "" FALSE)
     option(GAINPUT_BUILD_SHARED "" FALSE)

@@ -7,8 +7,7 @@
 #pragma once
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
-
-#include "Component/Transform.h"
+#include "Game/Transform.h"
 
 namespace tgon
 {

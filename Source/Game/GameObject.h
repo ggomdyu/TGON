@@ -8,7 +8,8 @@
 #include <vector>
 
 #include "Text/StringHash.h"
-#include "Component/Transform.h"
+
+#include "Game/Transform.h"
 
 namespace tgon
 {

@@ -7,14 +7,12 @@
 #pragma once
 #include <unordered_map>
 
-#include "Game/GameObject.h"
+#include "Game/Scene.h"
 
 #include "Module.h"
 
 namespace tgon
 {
-
-using Scene = GameObject;
 
 class SceneModule :
     public Module

@@ -10,6 +10,7 @@ void SceneModule::Update()
     if (m_nextScene != nullptr)
     {
         m_currScene = std::move(m_nextScene);
+        m_currScene->Initialize();
     }
     
     if (m_currScene != nullptr)
@@ -24,6 +25,7 @@ void SceneModule::ChangeScene(const std::shared_ptr<Scene>& scene)
     if (m_currScene == nullptr)
     {
         m_currScene = scene;
+        m_currScene->Initialize();
         return;
     }
 
