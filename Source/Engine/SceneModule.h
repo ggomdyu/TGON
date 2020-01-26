@@ -7,12 +7,14 @@
 #pragma once
 #include <unordered_map>
 
-#include "Game/Scene.h"
+#include "Game/GameObject.h"
 
 #include "Module.h"
 
 namespace tgon
 {
+
+using Scene = GameObject;
 
 class SceneModule :
     public Module
@@ -23,35 +25,12 @@ public:
 /**@section Method */
 public:
     void Update() override;
-    template <typename _SceneType, typename... _Args>
-    void ChangeScene(_Args&&... args);
-    void AddGlobalObject(const std::shared_ptr<GameObject>& object);
-    void AddGlobalObject(std::shared_ptr<GameObject>&& object);
-    std::shared_ptr<GameObject> FindGlobalObject(const StringViewHash& objectName);
-    bool RemoveGlobalObject(const StringViewHash& objectName);
-    void RemoveAllGlobalObject();
+    void ChangeScene(const std::shared_ptr<Scene>& scene);
 
 /**@section Variable */
-private:
-    std::unique_ptr<Scene> m_currScene;
-    std::unique_ptr<Scene> m_nextScene;
-    std::vector<std::shared_ptr<GameObject>> m_globalObjectVector;
-    std::unordered_map<StringHash, std::shared_ptr<GameObject>> m_globalObjectMap;
+protected:
+    std::shared_ptr<Scene> m_currScene;
+    std::shared_ptr<Scene> m_nextScene;
 };
-
-template <typename _SceneType, typename ..._Args>
-inline void SceneModule::ChangeScene(_Args&&... args)
-{
-    // If there's no scene, then initialize it immediately.
-    if (m_currScene == nullptr)
-    {
-        m_currScene = _SceneType::Create(std::forward<_Args>(args)...);
-        m_currScene->Initialize();
-        return;
-    }
-    
-    // Otherwise, the scene will be initialized on next frame.
-    m_nextScene = std::make_unique<_SceneType>(std::forward<_Args>(args)...);
-}
 
 } /* namespace tgon */

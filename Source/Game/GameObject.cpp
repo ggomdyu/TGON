@@ -8,17 +8,17 @@ namespace tgon
 {
                                    
 GameObject::GameObject() noexcept :
-    GameObject({}, {})
+    GameObject(StringHash{})
 {
 }
 
 GameObject::GameObject(const StringHash& name) :
-   GameObject(name, {})
+   GameObject(name, std::make_shared<Transform>())
 {
 }
 
 GameObject::GameObject(StringHash&& name) noexcept :
-    GameObject(std::move(name), {})
+    GameObject(std::move(name), std::make_shared<Transform>())
 {
 }
 
@@ -39,25 +39,6 @@ GameObject::GameObject(StringHash&& name, const std::shared_ptr<Transform>& tran
     m_isActive(true),
     m_transform(transform)
 {
-}
-
-std::shared_ptr<GameObject> GameObject::Create(const StringHash& name, const std::shared_ptr<Transform>& transform)
-{
-    std::shared_ptr<GameObject> object(new GameObject(name, transform));
-    
-    if (transform != nullptr)
-    {
-        transform->SetGameObject(object);
-    }
-    
-    object->Initialize();
-
-    return object;
-}
-
-std::shared_ptr<GameObject> GameObject::Create(const std::shared_ptr<Transform>& transform)
-{
-    return GameObject::Create({}, transform);
 }
 
 void GameObject::Update()
@@ -97,7 +78,7 @@ void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
     m_children.push_back(child);
 }
 
-bool GameObject::DetachChild(const std::shared_ptr<GameObject>& child)
+bool GameObject::RemoveChild(const std::shared_ptr<GameObject>& child)
 {
     auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<GameObject>& object)
     {
@@ -112,12 +93,12 @@ bool GameObject::DetachChild(const std::shared_ptr<GameObject>& child)
     return false;
 }
 
-void GameObject::DetachChildren()
+void GameObject::RemoveChildren()
 {
     m_children.clear();
 }
 
-std::shared_ptr<GameObject> GameObject::FindObject(const StringViewHash& objectName)
+std::shared_ptr<GameObject> GameObject::FindChild(const StringViewHash& objectName)
 {
     auto iter = std::find_if(m_children.begin(), m_children.end(), [&](const std::shared_ptr<GameObject>& item)
     {
@@ -131,9 +112,9 @@ std::shared_ptr<GameObject> GameObject::FindObject(const StringViewHash& objectN
     return *iter;
 }
 
-std::shared_ptr<const GameObject> GameObject::FindObject(const StringViewHash& objectName) const
+std::shared_ptr<const GameObject> GameObject::FindChild(const StringViewHash& objectName) const
 {
-    return const_cast<GameObject*>(this)->FindObject(objectName);
+    return const_cast<GameObject*>(this)->FindChild(objectName);
 }
 
 void GameObject::SetName(const StringHash& name)
@@ -188,21 +169,11 @@ const std::vector<std::shared_ptr<GameObject>>& GameObject::GetChildren() const 
 
 std::weak_ptr<GameObject> GameObject::GetParent() noexcept
 {
-    if (m_parent.expired())
-    {
-        return {};
-    }
-    
     return m_parent;
 }
 
 std::weak_ptr<const GameObject> GameObject::GetParent() const noexcept
 {
-    if (m_parent.expired())
-    {
-        return {};
-    }
-    
     return m_parent;
 }
 

@@ -5,6 +5,8 @@
  */
 
 #pragma once
+#include <memory>
+
 #include "Core/RuntimeObject.h"
 
 namespace tgon
@@ -29,8 +31,8 @@ public:
     virtual void Update() {}
     void SetGameObject(const std::shared_ptr<GameObject>& gameObject) noexcept;
     void SetAcitve(bool isActive) noexcept;
-    std::shared_ptr<GameObject> GetGameObject() noexcept;
-    std::shared_ptr<const GameObject> GetGameObject() const noexcept;
+    std::weak_ptr<GameObject> GetGameObject() noexcept;
+    std::weak_ptr<const GameObject> GetGameObject() const noexcept;
     bool IsActive() const noexcept;
 
 /**@section Variable */

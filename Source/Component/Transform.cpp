@@ -59,14 +59,16 @@ void Transform::Update()
         m_matWorld *= Matrix4x4::Rotate(m_localRotation.x * Deg2Rad, m_localRotation.y * Deg2Rad, m_localRotation.z * Deg2Rad);
         m_matWorld *= Matrix4x4::Translate(m_localPosition.x, m_localPosition.y, m_localPosition.z);
         
-        auto owner = this->GetGameObject();
-        if (auto parent = owner->GetParent(); parent.expired() == false)
+        if (auto owner = this->GetGameObject().lock(); owner != nullptr)
         {
-            m_matWorld *= parent.lock()->GetTransform()->GetWorldMatrix();
-
-            for (auto& child : this->GetGameObject()->GetChildren())
+            if (auto parent = owner->GetParent().lock(); parent != nullptr)
             {
-                child->GetTransform()->m_isDirty = true;
+                m_matWorld *= parent->GetTransform()->GetWorldMatrix();
+
+                for (auto& child : owner->GetChildren())
+                {
+                    child->GetTransform()->m_isDirty = true;
+                }
             }
         }
     }

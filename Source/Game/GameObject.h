@@ -21,7 +21,7 @@ public:
     TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
-protected:
+public:
     GameObject() noexcept;
     explicit GameObject(const StringHash& name);
     explicit GameObject(StringHash&& name) noexcept;
@@ -31,19 +31,19 @@ protected:
 
 /**@section Method */
 public:
-    static std::shared_ptr<GameObject> Create(const StringHash& name = {}, const std::shared_ptr<Transform>& transform = std::make_shared<Transform>());
-    static std::shared_ptr<GameObject> Create(const std::shared_ptr<Transform>& transform);
+    template <typename _ObjectType = GameObject, typename... _ArgTypes>
+    static std::shared_ptr<_ObjectType> Create(_ArgTypes&&... args);
     virtual void Initialize() {}
     virtual void Update();
     void AddChild(const std::shared_ptr<GameObject>& child);
     template <typename _ComponentType, typename... _ArgTypes>
     std::shared_ptr<_ComponentType> AddComponent(_ArgTypes&&... args);
-    bool DetachChild(const std::shared_ptr<GameObject>& child);
-    void DetachChildren();
+    bool RemoveChild(const std::shared_ptr<GameObject>& child);
+    void RemoveChildren();
     template <typename _ComponentType>
     bool RemoveComponent();
-    std::shared_ptr<GameObject> FindObject(const StringViewHash& objectName);
-    std::shared_ptr<const GameObject> FindObject(const StringViewHash& objectName) const;
+    std::shared_ptr<GameObject> FindChild(const StringViewHash& objectName);
+    std::shared_ptr<const GameObject> FindChild(const StringViewHash& objectName) const;
     template <typename _ComponentType>
     std::shared_ptr<_ComponentType> FindComponent();
     template <typename _ComponentType>
@@ -52,7 +52,6 @@ public:
     void SetName(StringHash&& name);
     void SetTransform(const std::shared_ptr<Transform>& transform) noexcept;
     void SetActive(bool isActive) noexcept;
-    bool IsActive() const noexcept;
     std::shared_ptr<Transform> GetTransform() noexcept;
     std::shared_ptr<const Transform> GetTransform() const noexcept;
     const StringHash& GetName() const noexcept;
@@ -60,7 +59,8 @@ public:
     const std::vector<std::shared_ptr<GameObject>>& GetChildren() const noexcept;
     std::weak_ptr<GameObject> GetParent() noexcept;
     std::weak_ptr<const GameObject> GetParent() const noexcept;
-    
+    bool IsActive() const noexcept;
+
 private:
     bool RemoveComponent(size_t componentId);
     std::shared_ptr<Component> FindComponent(size_t componentId);
@@ -74,6 +74,21 @@ protected:
     std::vector<std::shared_ptr<GameObject>> m_children;
     std::vector<std::shared_ptr<Component>> m_components;
 };
+
+template <typename _ObjectType, typename... _ArgTypes>
+inline std::shared_ptr<_ObjectType> GameObject::Create(_ArgTypes&&... args)
+{
+    auto object = std::make_shared<_ObjectType>(std::forward<_ArgTypes>(args)...);
+    
+    if (object->m_transform != nullptr)
+    {
+        object->m_transform->SetGameObject(object);
+    }
+    
+    object->Initialize();
+
+    return object;
+}
 
 template <typename _ComponentType, typename... _ArgTypes>
 inline std::shared_ptr<_ComponentType> GameObject::AddComponent(_ArgTypes&&... args)
