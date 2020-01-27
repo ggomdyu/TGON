@@ -11,11 +11,9 @@
 namespace tgon
 {
     
-UIBatch::UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, int32_t vertexStartOffset) noexcept :
+UIBatch::UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, BlendMode blendMode, int32_t vertexStartOffset) noexcept :
     m_material(material),
     m_texture(texture),
-    m_filterMode(filterMode),
-    m_wrapMode(wrapMode),
     m_blendMode(blendMode),
     m_vertexStartOffset(vertexStartOffset),
     m_vertexEndOffset(vertexStartOffset)
@@ -26,8 +24,6 @@ bool UIBatch::CanBatch(const UIBatch& rhs) const noexcept
 {
     if (m_texture == rhs.m_texture &&
         m_material == rhs.m_material &&
-        m_filterMode == rhs.m_filterMode &&
-        m_wrapMode == rhs.m_wrapMode &&
         m_blendMode == rhs.m_blendMode)
     {
         return true;
@@ -62,11 +58,6 @@ std::shared_ptr<const Material> UIBatch::GetMaterial() const noexcept
 std::shared_ptr<const Texture> UIBatch::GetTexture() const noexcept
 {
     return m_texture;
-}
-
-FilterMode UIBatch::GetFilterMode() const noexcept
-{
-    return m_filterMode;
 }
 
 BlendMode UIBatch::GetBlendMode() const noexcept

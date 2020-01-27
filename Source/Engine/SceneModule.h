@@ -5,8 +5,6 @@
  */
 
 #pragma once
-#include <unordered_map>
-
 #include "Game/Scene.h"
 
 #include "Module.h"
@@ -28,7 +26,6 @@ public:
 /**@section Variable */
 protected:
     std::shared_ptr<Scene> m_currScene;
-    std::shared_ptr<Scene> m_nextScene;
 };
 
 } /* namespace tgon */

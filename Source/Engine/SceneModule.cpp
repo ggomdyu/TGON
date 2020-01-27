@@ -7,12 +7,6 @@ namespace tgon
 
 void SceneModule::Update()
 {
-    if (m_nextScene != nullptr)
-    {
-        m_currScene = std::move(m_nextScene);
-        m_currScene->Initialize();
-    }
-    
     if (m_currScene != nullptr)
     {
         m_currScene->Update();
@@ -21,16 +15,7 @@ void SceneModule::Update()
 
 void SceneModule::ChangeScene(const std::shared_ptr<Scene>& scene)
 {
-    // If there's no scene, then initialize it immediately.
-    if (m_currScene == nullptr)
-    {
-        m_currScene = scene;
-        m_currScene->Initialize();
-        return;
-    }
-
-    // Otherwise, the scene will be initialized on next frame.
-    m_nextScene = scene;
+    m_currScene = scene;
 }
 
 } /* namespace tgon */

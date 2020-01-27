@@ -22,7 +22,7 @@ public:
     TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
-public:
+protected:
     GameObject() noexcept;
     explicit GameObject(const StringHash& name);
     explicit GameObject(StringHash&& name) noexcept;
@@ -79,13 +79,13 @@ protected:
 template <typename _ObjectType, typename... _ArgTypes>
 inline std::shared_ptr<_ObjectType> GameObject::Create(_ArgTypes&&... args)
 {
-    auto object = std::make_shared<_ObjectType>(std::forward<_ArgTypes>(args)...);
-    
+    auto object = std::shared_ptr<_ObjectType>(new _ObjectType(std::forward<_ArgTypes>(args)...));
+
     if (object->m_transform != nullptr)
     {
         object->m_transform->SetGameObject(object);
     }
-    
+
     object->Initialize();
 
     return object;

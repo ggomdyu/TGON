@@ -20,7 +20,7 @@ class UIBatch
 {
 /**@section Constructor */
 public:
-    UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, int32_t vertexStartOffset) noexcept;
+    UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, BlendMode blendMode, int32_t vertexStartOffset) noexcept;
     
 /**@section Method */
 public:
@@ -39,8 +39,6 @@ public:
 private:
     std::shared_ptr<Material> m_material;
     std::shared_ptr<Texture> m_texture;
-    FilterMode m_filterMode;
-    WrapMode m_wrapMode;
     BlendMode m_blendMode;
     int32_t m_vertexStartOffset;
     int32_t m_vertexEndOffset;

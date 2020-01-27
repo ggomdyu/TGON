@@ -7,12 +7,10 @@
 namespace tgon
 {
 
-UISprite::UISprite(const std::shared_ptr<Texture>& texture, FilterMode filterMode, WrapMode wrapMode, BlendMode blendMode, Color4f blendColor) noexcept :
+UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode, Color4f blendColor) noexcept :
     m_texture(texture),
     m_textureRect(FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height))),
     m_textureSize(texture->GetSize()),
-    m_filterMode(filterMode),
-    m_wrapMode(wrapMode),
     m_blendMode(blendMode),
     m_blendColor(blendColor)
 {
@@ -40,16 +38,6 @@ void UISprite::SetTextureSize(const FExtent2D& textureSize) noexcept
 void UISprite::SetTextureRect(const FRect& textureRect) noexcept
 {
     m_textureRect = textureRect;
-}
-
-void UISprite::SetFilterMode(FilterMode filterMode) noexcept
-{
-    m_filterMode = filterMode;
-}
-
-void UISprite::SetWrapMode(WrapMode wrapMode) noexcept
-{
-    m_wrapMode = wrapMode;
 }
 
 void UISprite::SetBlendMode(BlendMode blendMode) noexcept
@@ -82,16 +70,6 @@ const FRect& UISprite::GetTextureRect() const noexcept
     return m_textureRect;
 }
 
-FilterMode UISprite::GetFilterMode() const noexcept
-{
-    return m_filterMode;
-}
-
-WrapMode UISprite::GetWrapMode() const noexcept
-{
-    return m_wrapMode;
-}
-
 BlendMode UISprite::GetBlendMode() const noexcept
 {
     return m_blendMode;
@@ -109,7 +87,7 @@ const Vector2& UISprite::GetPivot() const noexcept
 
 void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld, std::vector<float>* vertices) const
 {
-    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_texture, m_filterMode, m_wrapMode, m_blendMode, static_cast<int32_t>(vertices->size()));
+    UIBatch batch(m_material ? m_material : m_defaultMaterial, m_texture, m_blendMode, static_cast<int32_t>(vertices->size()));
     if (batches->empty() || batches->back().CanBatch(batch) == false)
     {
         batches->push_back(batch);

@@ -32,16 +32,6 @@ void UISpriteRendererComponent::SetTextureSize(const FExtent2D& textureSize) noe
     std::static_pointer_cast<UISprite>(m_element)->SetTextureSize(textureSize);
 }
 
-void UISpriteRendererComponent::SetFilterMode(FilterMode filterMode) noexcept
-{
-    std::static_pointer_cast<UISprite>(m_element)->SetFilterMode(filterMode);
-}
-
-void UISpriteRendererComponent::SetWrapMode(WrapMode wrapMode) noexcept
-{
-    std::static_pointer_cast<UISprite>(m_element)->SetWrapMode(wrapMode);
-}
-
 void UISpriteRendererComponent::SetBlendMode(BlendMode blendMode) noexcept
 {
     std::static_pointer_cast<UISprite>(m_element)->SetBlendMode(blendMode);
@@ -70,16 +60,6 @@ std::shared_ptr<const Texture> UISpriteRendererComponent::GetTexture() const noe
 const FRect& UISpriteRendererComponent::GetTextureRect() const noexcept
 {
     return std::static_pointer_cast<UISprite>(m_element)->GetTextureRect();
-}
-
-FilterMode UISpriteRendererComponent::GetFilterMode() const noexcept
-{
-    return std::static_pointer_cast<UISprite>(m_element)->GetFilterMode();
-}
-
-WrapMode UISpriteRendererComponent::GetWrapMode() const noexcept
-{
-    return std::static_pointer_cast<UISprite>(m_element)->GetWrapMode();
 }
 
 BlendMode UISpriteRendererComponent::GetBlendMode() const noexcept

@@ -33,18 +33,21 @@ public:
     const Vector3& GetLocalPosition() const noexcept;
     const Vector3& GetLocalRotation() const noexcept;
     const Vector3& GetLocalScale() const noexcept;
-    const Vector3& GetPosition() const noexcept;
     const Matrix4x4& GetWorldMatrix() const noexcept;
     bool IsDirty() const noexcept;
     void Update() override;
+
+private:
+    void UpdateWorldMatrix() const;
 
 /**@section Variable */
 protected:
     Vector3 m_localPosition;
     Vector3 m_localRotation;
     Vector3 m_localScale = Vector3(1.0f, 1.0f, 1.0f);
-    Matrix4x4 m_matWorld;
-    bool m_isDirty = true;
+    mutable Matrix4x4 m_matWorld;
+    mutable bool m_isDirty = true;
 };
 
 } /* namespace tgon */
+

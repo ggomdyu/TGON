@@ -15,7 +15,8 @@ namespace tgon
 class GameObject;
 
 class Component :
-    public RuntimeObject
+    public RuntimeObject,
+    public std::enable_shared_from_this<Component>
 {
 public:
     TGON_DECLARE_RTTI(Component)
