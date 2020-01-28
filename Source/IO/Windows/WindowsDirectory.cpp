@@ -3,7 +3,6 @@
 #include <sys/stat.h>
 
 #include "Platform/Windows/Windows.h"
-#include "Text/Encoding.h"
 
 #include "../DirectoryInfo.h"
 #include "../Directory.h"
@@ -12,9 +11,6 @@
 
 namespace tgon
 {
-
-extern thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
-
 namespace
 {
 
@@ -25,15 +21,15 @@ constexpr bool S_ISDIR(unsigned short m) noexcept
 }
 #endif
 
-std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t>& utf16Buffer)
+std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t>& utf16PathBuffer)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&utf16Buffer[0]), static_cast<int32_t>(utf16Buffer.size())) == -1)
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, &utf16PathBuffer[0], static_cast<int>(utf16PathBuffer.size())) == 0)
     {
         return {};
     }
 
     struct _stat s;
-    if (_wstat(reinterpret_cast<const wchar_t*>(&g_tempUtf16Buffer[0]), &s) != 0)
+    if (_wstat(&utf16PathBuffer[0], &s) != 0)
     {
         return {};
     }
@@ -60,7 +56,7 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
     }
 
     WIN32_FIND_DATAW findData;
-    HANDLE handle = FindFirstFileW(reinterpret_cast<const wchar_t*>(&tempPathStr[0]), &findData);
+    HANDLE handle = FindFirstFileW(&tempPathStr[0], &findData);
     if (handle != INVALID_HANDLE_VALUE)
     {
         do
@@ -98,7 +94,8 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
 
 bool Directory::Delete(const char* path, bool recursive)
 {
-    auto s = CreateStat(path, g_tempUtf16Buffer);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
         return false;
@@ -106,15 +103,16 @@ bool Directory::Delete(const char* path, bool recursive)
 
     if (recursive)
     {
-        return InternalRecursiveDelete(&g_tempUtf16Buffer[0]);
+        return InternalRecursiveDelete(utf16Path);
     }
 
-    return _wrmdir(&g_tempUtf16Buffer[0]) == 0;
+    return _wrmdir(utf16Path) == 0;
 }
 
 bool Directory::Exists(const char* path)
 {
-    auto s = CreateStat(path, g_tempUtf16Buffer);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
         return false;
@@ -144,46 +142,59 @@ std::vector<std::string> Directory::GetLogicalDrives()
 
 bool Directory::Move(const char* srcPath, const char* destPath)
 {
-    gsl::span<wchar_t> utf16SrcPath(&g_tempUtf16Buffer[0], g_tempUtf16Buffer.size() / 2);
+    wchar_t utf16SrcPath[4096];
     auto s = CreateStat(srcPath, utf16SrcPath);
     if (s.has_value() == false || S_ISDIR(s->st_mode) == false)
     {
         return false;
     }
 
-    gsl::span<wchar_t> utf16DestPath(&g_tempUtf16Buffer[g_tempUtf16Buffer.size() / 2], g_tempUtf16Buffer.size() / 2);
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(&utf16DestPath[0]), static_cast<int32_t>(utf16DestPath.size())) == -1)
+    wchar_t utf16DestPath[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, destPath, -1, &utf16DestPath[0], static_cast<int>(std::extent_v<decltype(utf16DestPath)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    return _wrename(reinterpret_cast<const wchar_t*>(utf16SrcPath.data()), reinterpret_cast<const wchar_t*>(utf16DestPath.data())) == 0;
+    return _wrename(utf16SrcPath, utf16DestPath) == 0;
 }
 
 bool Directory::SetCurrentDirectory(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, std::extent_v<decltype(utf16Path)>) == 0)
     {
         return false;
     }
 
-    return _wchdir(&g_tempUtf16Buffer[0]) == 0;
+    return _wchdir(utf16Path) == 0;
 }
 
-int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
-    auto utf16StrLen = GetCurrentDirectoryW(static_cast<DWORD>(g_tempUtf16Buffer.size()), &g_tempUtf16Buffer[0]);
-    return std::max(0, Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(utf16StrLen * 2), reinterpret_cast<std::byte*>(&destStr[0]), destStrBufferLen));
+    wchar_t utf16Path[4096];
+    if (GetCurrentDirectoryW(static_cast<DWORD>(std::extent_v<decltype(utf16Path)>), &utf16Path[0]) == 0)
+    {
+        return {};
+    }
+
+    auto utf8PathLen = WideCharToMultiByte(CP_UTF8, 0, utf16Path, -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    if (utf8PathLen == -1)
+    {
+        return {};
+    }
+
+    return utf8PathLen;
 }
 
 bool Directory::InternalCreateDirectory(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, std::extent_v<decltype(utf16Path)>) == 0)
     {
         return false;
     }
 
-    return _wmkdir(&g_tempUtf16Buffer[0]) == 0;
+    return _wmkdir(utf16Path) == 0;
 }
 
 } /* namespace tgon */

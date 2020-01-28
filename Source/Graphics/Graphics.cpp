@@ -1,5 +1,7 @@
 #include "PrecompiledHeader.h"
 
+#include "Platform/Window.h"
+
 #include "Graphics.h"
 
 namespace tgon

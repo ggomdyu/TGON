@@ -14,12 +14,12 @@ std::optional<std::string> Environment::GetEnvironmentVariable(const char* name)
 {
     std::array<char, 8192> str;
     auto strLen = GetEnvironmentVariable(name, str.data(), static_cast<int32_t>(str.size()));
-    if (strLen == -1)
+    if (strLen.has_value() == false)
     {
         return {};
     }
 
-    return std::string(str.data(), static_cast<size_t>(strLen));
+    return std::string(str.data(), static_cast<size_t>(*strLen));
 }
 
 std::string Environment::GetCurrentDirectory()
@@ -27,12 +27,12 @@ std::string Environment::GetCurrentDirectory()
     return Directory::GetCurrentDirectory();
 }
 
-int32_t Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
     return Directory::GetCurrentDirectory(destStr, destStrBufferLen);
 }
 
-int32_t Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
+std::optional<int32_t> Environment::GetCurrentDirectory(const gsl::span<char>& destStr)
 {
     return GetCurrentDirectory(destStr.data(), static_cast<int32_t>(destStr.size()));
 }
@@ -41,7 +41,12 @@ std::string Environment::GetFolderPath(SpecialFolder folder)
 {
     std::array<char, 8192> str;
     auto strLen = GetFolderPath(folder, str.data(), static_cast<int32_t>(str.size()));
-    return {str.data(), static_cast<size_t>(strLen)};
+    if (strLen.has_value() == false)
+    {
+        return {};
+    }
+
+    return {str.data(), static_cast<size_t>(*strLen)};
 }
 
 void Environment::Exit(int32_t exitCode)
@@ -56,23 +61,38 @@ int32_t Environment::GetProcessorCount()
 
 std::string Environment::GetUserName()
 {
-    std::array<char, 8192> str;
+    std::array<char, 4096> str;
     auto strLen = GetUserName(str.data(), static_cast<int32_t>(str.size()));
-    return {str.data(), static_cast<size_t>(strLen)};
+    if (strLen.has_value() == false)
+    {
+        return {};
+    }
+
+    return {str.data(), static_cast<size_t>(*strLen)};
 }
 
 std::string Environment::GetMachineName()
 {
-    std::array<char, 8192> str;
+    std::array<char, 4096> str;
     auto strLen = GetMachineName(str.data(), static_cast<int32_t>(str.size()));
-    return {str.data(), static_cast<size_t>(strLen)};
+    if (strLen.has_value() == false)
+    {
+        return {};
+    }
+
+    return {str.data(), static_cast<size_t>(*strLen)};
 }
 
 std::string Environment::GetUserDomainName()
 {
-    std::array<char, 8192> str;
+    std::array<char, 4096> str;
     auto strLen = GetUserDomainName(str.data(), static_cast<int32_t>(str.size()));
-    return {str.data(), static_cast<size_t>(strLen)};
+    if (strLen.has_value() == false)
+    {
+        return {};
+    }
+
+    return {str.data(), static_cast<size_t>(*strLen)};
 }
 
 void Environment::FailFast(const char* message)

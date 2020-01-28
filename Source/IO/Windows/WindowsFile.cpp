@@ -2,7 +2,6 @@
 
 #include <array>
 
-#include "Text/Encoding.h"
 #include "Misc/Windows/SafeFileHandle.h"
 #include "Platform/Windows/Windows.h"
 
@@ -10,9 +9,6 @@
 
 namespace tgon
 {
-
-thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
-
 namespace
 {
 
@@ -23,15 +19,15 @@ constexpr bool S_ISREG(unsigned short m) noexcept
 }
 #endif
 
-std::optional<struct _stat> CreateStat(const std::string_view& path)
+std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t>& utf16PathBuffer)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path.data()), static_cast<int32_t>(path.size()), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, &utf16PathBuffer[0], static_cast<int>(utf16PathBuffer.size())) == 0)
     {
         return {};
     }
 
     struct _stat s;
-    if (_wstat(reinterpret_cast<const wchar_t*>(&g_tempUtf16Buffer[0]), &s) != 0)
+    if (_wstat(&utf16PathBuffer[0], &s) != 0)
     {
         return {};
     }
@@ -51,18 +47,20 @@ bool File::Copy(const char* srcPath, const char* destPath, bool overwrite)
 
 bool File::Delete(const char* path)
 {
-    auto s = CreateStat(path);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
     }
 
-    return _wremove(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0])) == 0;
+    return _wremove(utf16Path) == 0;
 }
 
 bool File::Exists(const char* path)
 {
-    auto s = CreateStat(path);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
@@ -73,27 +71,26 @@ bool File::Exists(const char* path)
 
 bool File::Move(const char* srcPath, const char* destPath)
 {
-    auto s = CreateStat(srcPath);
+    wchar_t utf16SrcPath[4096];
+    auto s = CreateStat(srcPath, utf16SrcPath);
     if (s.has_value() == false || S_ISREG(s->st_mode) == false)
     {
         return false;
     }
 
-    wchar_t* utf16SrcPath = &g_tempUtf16Buffer[0];
-    auto utf16SrcPathLen = wcslen(utf16SrcPath);
-
-    wchar_t* utf16DestPath = &g_tempUtf16Buffer[utf16SrcPathLen + 1];
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(destPath), static_cast<int32_t>(strlen(destPath)), reinterpret_cast<std::byte*>(utf16DestPath), static_cast<int32_t>(g_tempUtf16Buffer.size() - (utf16SrcPathLen + 1))) == -1)
+    wchar_t utf16DestPath[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, destPath, -1, &utf16DestPath[0], static_cast<int>(std::extent_v<decltype(utf16DestPath)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    return _wrename(reinterpret_cast<const wchar_t*>(utf16SrcPath), reinterpret_cast<const wchar_t*>(utf16DestPath)) == 0;
+    return _wrename(utf16SrcPath, utf16DestPath) == 0;
 }
 
 std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 {
-    auto s = CreateStat(path);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false)
     {
         return {};
@@ -104,7 +101,8 @@ std::optional<DateTime> File::GetLastAccessTimeUtc(const char* path)
 
 std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 {
-    auto s = CreateStat(path);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false)
     {
         return {};
@@ -115,13 +113,13 @@ std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 
 bool File::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(utf16Path, GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -139,13 +137,13 @@ bool File::SetCreationTimeUtc(const char* path, const DateTime& creationTimeUtc)
 
 bool File::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(utf16Path, GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -163,13 +161,13 @@ bool File::SetLastAccessTimeUtc(const char* path, const DateTime& lastAccessTime
 
 bool File::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUtc)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    // TODO: Support directory
-    SafeFileHandle handle = CreateFile2(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
+    SafeFileHandle handle = CreateFile2(utf16Path, GENERIC_WRITE, FILE_SHARE_READ, OPEN_EXISTING, nullptr);
     if (handle.IsValid() == false)
     {
         return false;
@@ -187,7 +185,8 @@ bool File::SetLastWriteTimeUtc(const char* path, const DateTime& lastWriteTimeUt
 
 std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 {
-    auto s = CreateStat(path);
+    wchar_t utf16Path[4096];
+    auto s = CreateStat(path, utf16Path);
     if (s.has_value() == false)
     {
         return {};
@@ -198,13 +197,14 @@ std::optional<DateTime> File::GetCreationTimeUtc(const char* path)
 
 std::optional<FileAttributes> File::GetAttributes(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
         return {};
     }
 
     WIN32_FILE_ATTRIBUTE_DATA fileAttributeData;
-    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
+    if (GetFileAttributesExW(reinterpret_cast<LPCWSTR>(utf16Path), GET_FILEEX_INFO_LEVELS::GetFileExInfoStandard, &fileAttributeData) == FALSE)
     {
         return {};
     }
@@ -214,22 +214,24 @@ std::optional<FileAttributes> File::GetAttributes(const char* path)
 
 bool File::Decrypt(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    return DecryptFileW(&g_tempUtf16Buffer[0], 0) == TRUE;
+    return DecryptFileW(utf16Path, 0) == TRUE;
 }
 
 bool File::Encrypt(const char* path)
 {
-    if (Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(path), static_cast<int32_t>(strlen(path)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size())) == -1)
+    wchar_t utf16Path[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, path, -1, utf16Path, static_cast<int>(std::extent_v<decltype(utf16Path)>)) == 0)
     {
-        return false;
+        return {};
     }
 
-    return EncryptFileW(&g_tempUtf16Buffer[0]) == TRUE;
+    return EncryptFileW(utf16Path) == TRUE;
 }
 
 } /* namespace tgon */

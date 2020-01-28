@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include "Platform/Application.h"
+#include "UI/UIElement.h"
 
 #include "UIRendererComponent.h"
 

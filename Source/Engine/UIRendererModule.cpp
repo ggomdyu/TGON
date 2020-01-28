@@ -1,7 +1,13 @@
 #include "PrecompiledHeader.h"
 
 #include "Diagnostics/Debug.h"
+#include "Platform/Window.h"
+#include "Graphics/Camera.h"
+#include "Graphics/Material.h"
+#include "Graphics/Graphics.h"
 #include "Graphics/VertexFormat.h"
+#include "UI/UIElement.h"
+#include "UI/UIBatch.h"
 
 #include "UIRendererModule.h"
 

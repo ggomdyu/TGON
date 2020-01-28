@@ -5,19 +5,22 @@
  */
 
 #pragma once
-#include <gsl/span>
+#include <vector>
 
-#include "Graphics/Graphics.h"
-#include "Graphics/Camera.h"
-#include "Graphics/Material.h"
 #include "Graphics/VertexBuffer.h"
-#include "UI/UIElement.h"
-#include "UI/UIBatch.h"
+#include "Math/Matrix4x4.h"
 
 #include "Module.h"
 
 namespace tgon
 {
+
+class Camera;
+class Material;
+class Graphics;
+class Window;
+class UIBatch;
+class UIElement;
 
 class UIRendererModule :
     public Module

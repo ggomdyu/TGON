@@ -16,8 +16,7 @@
 #   include <OpenGL/OpenGL.h>
 #endif
 
-#include "Core/NonCopyable.h"
-#include "Platform/Window.h"
+#include "Core/RuntimeObject.h"
 
 #include "../VideoMode.h"
 
@@ -25,17 +24,20 @@ namespace tgon
 {
 
 class OpenGLContext final :
-    private NonCopyable
+    public RuntimeObject
 {
+public:
+    TGON_DECLARE_RTTI(OpenGLContext)
+
 /**@section Constructor */
 public:
     OpenGLContext() noexcept = default;
-    OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode);
+    OpenGLContext(const std::shared_ptr<class Window>& displayWindow, const VideoMode& videoMode);
     OpenGLContext(OpenGLContext&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~OpenGLContext();
+    ~OpenGLContext() override;
 
 /**@section Operator */
 public:

@@ -57,7 +57,12 @@ std::string Directory::GetCurrentDirectory()
 {
     std::array<char, 8192> str;
     auto strLen = GetCurrentDirectory(str.data(), static_cast<int32_t>(str.size()));
-    return {str.data(), static_cast<size_t>(strLen)};
+    if (strLen.has_value() == false)
+    {
+        return {};
+    }
+
+    return {str.data(), static_cast<size_t>(*strLen)};
 }
 
 bool Directory::SetCreationTime(const char* path, const DateTime& creationTime)

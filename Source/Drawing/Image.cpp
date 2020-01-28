@@ -61,12 +61,10 @@ bool Image::operator!=(const Image& rhs) const noexcept
 
 Image& Image::operator=(Image&& rhs) noexcept
 {
-    m_imageData = std::move(rhs.m_imageData);
+    std::swap(m_imageData, rhs.m_imageData);
+
     m_size = rhs.m_size;
     m_pixelFormat = rhs.m_pixelFormat;
-
-    rhs.m_size = {};
-    rhs.m_pixelFormat = PixelFormat::Unknown;
 
     return *this;
 }

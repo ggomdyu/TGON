@@ -11,6 +11,7 @@
 #include <memory>
 #include <optional>
 
+#include "Core/RuntimeObject.h"
 #include "Math/Extent.h"
 
 namespace tgon
@@ -37,11 +38,14 @@ enum class PixelFormat
     R8,
 };
 
-class Image
+class Image final :
+    public RuntimeObject
 {
+public:
+    TGON_DECLARE_RTTI(Image)
+
 /**@section Constructor */
 public:
-    Image() noexcept = default;
     Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat);
     Image(Image&& rhs) noexcept;
 

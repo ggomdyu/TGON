@@ -43,9 +43,9 @@ public:
     static std::optional<DateTime> GetLastWriteTime(const char* path);
     static std::optional<DateTime> GetLastWriteTimeUtc(const char* path);
     static std::string GetCurrentDirectory();
-    static int32_t GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
+    static std::optional<int32_t> GetCurrentDirectory(char* destStr, int32_t destStrBufferLen);
     template <int32_t Length>
-    static int32_t GetCurrentDirectory(const gsl::span<char, Length>& destStr);
+    static std::optional<int32_t> GetCurrentDirectory(const gsl::span<char, Length>& destStr);
     static std::string GetDirectoryRoot(const std::string_view& path);
     static std::vector<std::string> GetLogicalDrives();
     static DirectoryInfo GetParent(const std::string_view& path);
@@ -76,7 +76,7 @@ private:
 };
 
 template <int32_t Length>
-inline int32_t Directory::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
+inline std::optional<int32_t> Directory::GetCurrentDirectory(const gsl::span<char, Length>& destStr)
 {
     return GetCurrentDirectory(destStr.data(), Length);
 }

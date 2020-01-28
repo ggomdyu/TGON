@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include "Platform/Application.h"
+#include "Graphics/Graphics.h"
 
 #include "Engine.h"
 #include "AssetModule.h"

@@ -52,6 +52,8 @@ enum class BlendMode
     HardLight,
 };
 
+class Window;
+
 class Graphics final :
     private PlatformGraphics
 {
