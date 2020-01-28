@@ -57,23 +57,23 @@ bool Environment::SetEnvironmentVariable(const char* name, const char* value, En
     return false;
 }
 
-int32_t Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetEnvironmentVariable(const char* name, char* destStr, int32_t destStrBufferLen)
 {
     const char* envValue = getenv(name);
     if (envValue == nullptr)
     {
-        return -1;
+        return {};
     }
     
-    size_t envValueBytes = strlen(envValue);
-    if (envValueBytes + 1 > destStrBufferLen)
+    size_t envValueLen = strlen(envValue);
+    if (envValueLen + 1 > destStrBufferLen)
     {
-        return -1;
+        return {};
     }
     
-    memcpy(destStr, envValue, envValueBytes + 1);
+    memcpy(destStr, envValue, envValueLen + 1);
     
-    return static_cast<int32_t>(envValueBytes);
+    return static_cast<int32_t>(envValueLen);
 }
 
 std::optional<std::string> Environment::GetEnvironmentVariable(const char* name, EnvironmentVariableTarget target)
@@ -91,21 +91,21 @@ int32_t Environment::GetCurrentManagedThreadId()
     return static_cast<int32_t>(pthread_mach_thread_np(pthread_self()));
 }
 
-int32_t Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserName(char* destStr, int32_t destStrBufferLen)
 {
     if (getlogin_r(destStr, destStrBufferLen) != 0)
     {
-        return 0;
+        return {};
     }
     
     return static_cast<int32_t>(strlen(destStr));
 }
 
-int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
 {
     if (gethostname(destStr, destStrBufferLen) != 0)
     {
-        return 0;
+        return {};
     }
     
     utsname name;
@@ -114,7 +114,7 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
     int32_t nodeNameLen = static_cast<int32_t>(strlen(name.nodename));
     if (nodeNameLen + 1 > destStrBufferLen)
     {
-        return 0;
+        return {};
     }
     
     memcpy(destStr, name.nodename, nodeNameLen + 1);
@@ -122,12 +122,12 @@ int32_t Environment::GetMachineName(char* destStr, int32_t destStrBufferLen)
     return nodeNameLen;
 }
 
-int32_t Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetUserDomainName(char* destStr, int32_t destStrBufferLen)
 {
     return GetMachineName(destStr, destStrBufferLen);
 }
 
-int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t destStrBufferLen)
 {
     switch (folder)
     {
@@ -135,7 +135,7 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
         return GetSpecialDirectory(NSHomeDirectory(), ".config", destStr, destStrBufferLen);
             
     case SpecialFolder::CommonApplicationData:
-            return GetSpecialDirectory(@"/usr/share", {"", 0}, destStr, destStrBufferLen);
+        return GetSpecialDirectory(@"/usr/share", {"", 0}, destStr, destStrBufferLen);
        
     case SpecialFolder::Desktop:
     case SpecialFolder::DesktopDirectory:
@@ -167,10 +167,8 @@ int32_t Environment::GetFolderPath(SpecialFolder folder, char* destStr, int32_t 
         return GetSpecialDirectory(NSPicturesDirectory, NSUserDomainMask, {"", 0}, destStr, destStrBufferLen);
             
     default:
-        return 0;
+        return {};
     }
-    
-    return 0;
 }
 
 const std::string& Environment::GetCommandLine()

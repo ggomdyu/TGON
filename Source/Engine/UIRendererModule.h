@@ -7,8 +7,9 @@
 #pragma once
 #include <vector>
 
-#include "Graphics/VertexBuffer.h"
 #include "Math/Matrix4x4.h"
+#include "Graphics/VertexBuffer.h"
+#include "UI/UIBatch.h"
 
 #include "Module.h"
 
@@ -19,7 +20,6 @@ class Camera;
 class Material;
 class Graphics;
 class Window;
-class UIBatch;
 class UIElement;
 
 class UIRendererModule :

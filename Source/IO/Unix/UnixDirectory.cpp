@@ -84,11 +84,11 @@ bool Directory::SetCurrentDirectory(const char* path)
     return chdir(path) == 0;
 }
 
-int32_t Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
+std::optional<int32_t> Directory::GetCurrentDirectory(char* destStr, int32_t destStrBufferLen)
 {
     if (getcwd(destStr, destStrBufferLen) == nullptr)
     {
-        return 0;
+        return {};
     }
     
     return static_cast<int32_t>(strlen(destStr));

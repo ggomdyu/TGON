@@ -63,6 +63,8 @@ void SerialDispatchQueue::Dispatch()
     {
         task();
     }
+    
+    m_taskPool.clear();
 }
 
 ConcurrentDispatchQueue::ConcurrentDispatchQueue(int32_t threadPoolCount) :

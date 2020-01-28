@@ -148,6 +148,11 @@ float AudioPlayer::GetProgressInSeconds() const
 
 float AudioPlayer::GetTotalProgressInSeconds() const
 {
+    if (m_audioBuffer == nullptr)
+    {
+        return 0.0f;
+    }
+    
     return static_cast<float>(m_audioBuffer->GetAudioData().size()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
 }
 

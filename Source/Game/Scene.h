@@ -18,8 +18,8 @@ public:
 
 /**@section Method */
 public:
-    virtual void OnStart() {}
-    virtual void OnFinish() {}
+    virtual void OnActivate() {}
+    virtual void OnDeactivate() {}
 };
 
 } /* namespace tgon */
