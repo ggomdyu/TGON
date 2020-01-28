@@ -144,6 +144,37 @@ void main()                                                                     
 }                                                                                   \n\
 ";
 
+constexpr const char g_uberShaderFrag[] =
+"                                                                                   \n\
+in vec4 fragColor;                                                                  \n\
+in vec2 fragUV;                                                                     \n\
+out vec4 outColor;                                                                  \n\
+                                                                                    \n\
+#if (USE_SCISSOR == 1)                                                              \n\
+uniform vec4 clipUV = vec4(0.0, 0.0, 1.0, 1.0);                                     \n\
+#endif                                                                              \n\
+#if (USE_UV_OFFSET == 1)                                                            \n\
+uniform vec2 uvOffset;                                                              \n\
+#endif                                                                              \n\
+uniform sampler2D textureSampler;                                                   \n\
+                                                                                    \n\
+void main()                                                                         \n\
+{                                                                                   \n\
+#if (USE_SCISSOR == 1)                                                              \n\
+    if (fragUV.x < clipUV.x || fragUV.x > clipUV.z || fragUV.y < clipUV.y || fragUV.y > clipUV.w)\n\
+    {                                                                               \n\
+        outColor = vec4(1.0, 1.0, 1.0, 0.0);                                        \n\
+        return;                                                                     \n\
+    }                                                                               \n\
+#endif                                                                              \n\
+#if (USE_UV_OFFSET == 1)                                                            \n\
+    outColor = texture(textureSampler, fragUV + uvOffset) * fragColor;              \n\
+#else                                                                               \n\
+    outColor = texture(textureSampler, fragUV) * fragColor;                         \n\
+#endif                                                                              \n\
+}                                                                                   \n\
+";
+
 constexpr const char g_grayScaleFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\

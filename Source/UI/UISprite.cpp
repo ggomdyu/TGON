@@ -9,8 +9,8 @@ namespace tgon
 
 UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode, Color4f blendColor) noexcept :
     m_texture(texture),
-    m_textureRect(FRect(0, 0, static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height))),
-    m_textureSize(texture->GetSize()),
+    m_textureSize(texture ? texture->GetSize() : FExtent2D(0.0f, 0.0f)),
+    m_textureRect(0, 0, m_textureSize.width, m_textureSize.height),
     m_blendMode(blendMode),
     m_blendColor(blendColor)
 {
@@ -18,14 +18,14 @@ UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode,
 
 void UISprite::SetTexture(std::shared_ptr<Texture>&& texture) noexcept
 {
-    m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
+    m_textureSize = texture ? texture->GetSize() : FExtent2D(0.0f, 0.0f);
     m_textureRect = FRect(0, 0, m_textureSize.width, m_textureSize.height);
     m_texture = std::move(texture);
 }
 
 void UISprite::SetTexture(const std::shared_ptr<Texture>& texture) noexcept
 {
-    m_textureSize = FExtent2D(static_cast<float>(texture->GetSize().width), static_cast<float>(texture->GetSize().height));
+    m_textureSize = texture ? texture->GetSize() : FExtent2D(0.0f, 0.0f);
     m_textureRect = FRect(0, 0, m_textureSize.width, m_textureSize.height);
     m_texture = texture;
 }

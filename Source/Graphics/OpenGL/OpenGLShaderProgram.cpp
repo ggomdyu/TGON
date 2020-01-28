@@ -95,16 +95,16 @@ OpenGLShaderProgram::OpenGLShaderProgram(OpenGLShaderProgram&& rhs) noexcept :
 
 OpenGLShaderProgram::~OpenGLShaderProgram()
 {
-    this->Destroy();
+    if (m_programId != 0)
+    {
+        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
+        m_programId = 0;
+    }
 }
     
 OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) noexcept
 {
-    this->Destroy();
-    
-    m_programId = rhs.m_programId;
-    
-    rhs.m_programId = 0;
+    std::swap(m_programId, rhs.m_programId);
     
     return *this;
 }
@@ -112,15 +112,6 @@ OpenGLShaderProgram& OpenGLShaderProgram::operator=(OpenGLShaderProgram&& rhs) n
 GLuint OpenGLShaderProgram::GetProgramId() const noexcept
 {
     return m_programId;
-}
-
-void OpenGLShaderProgram::Destroy()
-{
-    if (m_programId != 0)
-    {
-        TGON_GL_ERROR_CHECK(glDeleteProgram(m_programId));
-        m_programId = 0;
-    }
 }
 
 void ShaderProgram::Use()

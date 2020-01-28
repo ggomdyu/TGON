@@ -33,9 +33,6 @@ protected:
 public:
     GLuint GetProgramId() const noexcept;
     
-private:
-    void Destroy();
-    
 /**@section Variable */
 protected:
     GLuint m_programId;

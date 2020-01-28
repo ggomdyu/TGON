@@ -52,8 +52,8 @@ public:
 /**@section Variable */
 private:
     std::shared_ptr<Texture> m_texture;
-    FRect m_textureRect;
     FExtent2D m_textureSize;
+    FRect m_textureRect;
     BlendMode m_blendMode = BlendMode::Normal;
     Color4f m_blendColor = Color4f(1.0f, 1.0f, 1.0f, 1.0f);
     Vector2 m_pivot = Vector2(0.5f, 0.5f);
