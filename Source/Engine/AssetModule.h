@@ -67,11 +67,16 @@ inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewH
 {
     std::lock_guard lock(m_mutex);
 
-    decltype(auto) resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
-    auto iter = resourceCache.find(path);
-    if (iter == resourceCache.end())
+    ResourceCache* resourceCache = &m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+    auto iter = resourceCache->find(path);
+    if (iter == resourceCache->end())
     {
-        iter = resourceCache.insert({path, this->CreateResource<_ResourceType>(path)}).first;
+        auto resource = this->CreateResource<_ResourceType>(path);
+
+        // resourceCache can be a dangling pointer because of reallocation of m_resourceUnitTable.
+        resourceCache = &m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+
+        iter = resourceCache->emplace(path, std::move(resource)).first;
     }
 
     return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
@@ -110,7 +115,7 @@ inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& p
 template <>
 inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    decltype(auto) resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
+    ResourceCache& resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
     auto iter = resourceCache.find(path);
     if (iter == resourceCache.end())
     {

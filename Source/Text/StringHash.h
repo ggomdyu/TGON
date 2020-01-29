@@ -278,7 +278,7 @@ inline int32_t BasicStringHash<_StringType>::CompareTo(const std::basic_string_v
 template <typename _StringType>
 inline int32_t BasicStringHash<_StringType>::IndexOf(const std::basic_string_view<ValueType>& str, int32_t startIndex) const
 {
-    return BasicStringTraits<ValueType>::IndexOf(this->Data() + startIndex, this->Length() - startIndex, str, str.length()) + startIndex;
+    return BasicStringTraits<ValueType>::IndexOf(this->Data() + startIndex, this->Length() - startIndex, str.data(), str.length()) + startIndex;
 }
 
 template <typename _StringType>
