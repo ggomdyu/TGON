@@ -45,8 +45,6 @@ Image::Image(Image&& rhs) noexcept :
     m_size(rhs.m_size),
     m_pixelFormat(rhs.m_pixelFormat)
 {
-    rhs.m_size = {};
-    rhs.m_pixelFormat = PixelFormat::Unknown;
 }
 
 bool Image::operator==(const Image& rhs) const noexcept
