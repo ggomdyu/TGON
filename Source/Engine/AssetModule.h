@@ -67,15 +67,14 @@ inline std::shared_ptr<_ResourceType> AssetModule::GetResource(const StringViewH
 {
     std::lock_guard lock(m_mutex);
 
-    ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
+    decltype(auto) resourceCache = m_resourceUnitTable[GetResourceUnit<_ResourceType>()];
     auto iter = resourceCache.find(path);
     if (iter == resourceCache.end())
     {
-        iter = resourceCache.emplace(path, this->CreateResource<_ResourceType>(path)).first;
+        iter = resourceCache.insert({path, this->CreateResource<_ResourceType>(path)}).first;
     }
 
-    auto ret = std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
-    return ret;
+    return std::any_cast<std::shared_ptr<_ResourceType>>(iter->second);
 }
 
 template<typename _ResourceType>
@@ -111,7 +110,7 @@ inline std::shared_ptr<Font> AssetModule::CreateResource(const StringViewHash& p
 template <>
 inline std::shared_ptr<FontAtlas> AssetModule::CreateResource(const StringViewHash& path) const
 {
-    ResourceCache resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
+    decltype(auto) resourceCache = m_resourceUnitTable[GetResourceUnit<Font>()];
     auto iter = resourceCache.find(path);
     if (iter == resourceCache.end())
     {
