@@ -1,6 +1,7 @@
 #include "PrecompiledHeader.h"
 
 #include <algorithm>
+#include <cassert>
 
 #include "GameObject.h"
 
@@ -66,6 +67,8 @@ void GameObject::Update()
 
 void GameObject::AddChild(const std::shared_ptr<GameObject>& child)
 {
+    assert(child != nullptr && child.get() != this);
+
     if (auto prevParent = child->m_parent.lock(); prevParent != nullptr)
     {
         prevParent->RemoveChild(child);
