@@ -17,39 +17,6 @@ Window::~Window()
     this->Close();
 }
 
-Window::Window(Window&& rhs) noexcept :
-    PlatformWindow(std::move(rhs)),
-    OnMove(std::move(rhs.OnMove)),
-    OnResize(std::move(rhs.OnResize)),
-    OnMaximize(std::move(rhs.OnMaximize)),
-    OnMinimize(std::move(rhs.OnMinimize)),
-    OnEnterFullScreen(std::move(rhs.OnEnterFullScreen)),
-    OnExitFullScreen(std::move(rhs.OnExitFullScreen)),
-    OnWillClose(std::move(rhs.OnWillClose)),
-    OnDidClose(std::move(rhs.OnDidClose)),
-    OnGetFocus(std::move(rhs.OnGetFocus)),
-    OnLoseFocus(std::move(rhs.OnLoseFocus))
-{
-}
-
-Window& Window::operator=(Window&& rhs) noexcept
-{
-    PlatformWindow::operator=(std::move(rhs));
-
-    OnMove = std::move(rhs.OnMove);
-    OnResize = std::move(rhs.OnResize);
-    OnMaximize = std::move(rhs.OnMaximize);
-    OnMinimize = std::move(rhs.OnMinimize);
-    OnEnterFullScreen = std::move(rhs.OnEnterFullScreen);
-    OnExitFullScreen = std::move(rhs.OnExitFullScreen);
-    OnWillClose = std::move(rhs.OnWillClose);
-    OnDidClose = std::move(rhs.OnDidClose);
-    OnGetFocus = std::move(rhs.OnGetFocus);
-    OnLoseFocus = std::move(rhs.OnLoseFocus);
-
-    return *this;
-}
-
 PlatformWindow& Window::GetPlatformDependency() noexcept
 {
     return *this;

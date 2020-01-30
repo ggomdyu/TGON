@@ -31,7 +31,7 @@ class Window final :
 /**@section Constructor */
 public:
     explicit Window(const WindowStyle& windowStyle);
-    Window(Window&& rhs) noexcept;
+    Window(Window&& rhs) noexcept = default;
 
 /**@section Destructor */
 public:
@@ -41,7 +41,7 @@ public:
 public:
     bool operator==(const Window& rhs) const noexcept;
     bool operator!=(const Window& rhs) const noexcept;
-    Window& operator=(Window&& rhs) noexcept;
+    Window& operator=(Window&& rhs) noexcept = default;
 
 /**@section Method */
 public:
