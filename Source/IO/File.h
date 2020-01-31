@@ -8,7 +8,6 @@
 #include <string_view>
 #include <optional>
 
-#include "Text/Encoding.h"
 #include "Time/DateTime.h"
 
 #include "FileStream.h"

@@ -1,6 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Text/Encoding.h"
 #include "Platform/Windows/Windows.h"
 
 #include "../Path.h"

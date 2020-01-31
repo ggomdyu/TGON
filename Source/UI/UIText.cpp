@@ -62,7 +62,7 @@ void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const st
  
     // TODO: First of all, we must check whether the text spill over.
     
-    gsl::span<const char32_t> charactersSpan = characters;
+    gsl::span<const char32_t> characterSpan = characters;
     while (true)
     {
         bool isTextSpillOver = m_contentRect.height > rect.height;
@@ -74,14 +74,14 @@ void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const st
 
         m_lineInfos.push_back(LineInfo{0, 0, I32Rect(rect.x, rect.y - m_contentRect.height, 0, 0)});
 
-        int32_t insertedCharacterLen = this->TryAddTextLine(charactersSpan, fontAtlas, fontSize, rect);
+        int32_t insertedCharacterLen = this->TryAddTextLine(characterSpan, fontAtlas, fontSize, rect);
         if (insertedCharacterLen == 0)
         {
             this->PopBackLine();
             break;
         }
 
-        charactersSpan = charactersSpan.subspan(insertedCharacterLen);
+        characterSpan = characterSpan.subspan(insertedCharacterLen);
     }
     
     // The default text alignment mode is upper left,

@@ -4,6 +4,7 @@
 
 #include "Misc/Windows/SafeFileHandle.h"
 #include "Platform/Windows/Windows.h"
+#include "Text/Encoding.h"
 
 #include "../File.h"
 

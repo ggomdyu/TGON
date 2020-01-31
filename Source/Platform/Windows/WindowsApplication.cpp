@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "Text/Encoding.h"
-
 #include "../Application.h"
 
 namespace tgon
