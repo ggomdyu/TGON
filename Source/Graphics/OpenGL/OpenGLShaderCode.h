@@ -260,12 +260,12 @@ void main()                                                                     
 constexpr const char g_blurFrag[] =
 "                                                                                   \n\
 #version 330 core                                                                   \n\
-\n\
+                                                                                    \n\
+in vec4 fragColor;                                                                  \n\
 in vec2 fragUV;                                                                     \n\
 out vec4 outColor;                                                                  \n\
 uniform sampler2D textureSampler;                                                   \n\
 uniform float centerKernel = 4;                                                     \n\
-uniform float aroundKernel = -1;                                                    \n\
 uniform float aroundUVOffset = 1.0 / 300.0;                                         \n\
 \n\
 void main()                                                                         \n\
@@ -288,6 +288,6 @@ void main()                                                                     
         finalColor += offsetTexColor * kernel[i];                                   \n\
     }                                                                               \n\
                                                                                     \n\
-    outColor = vec4(finalColor, 1.0);                                               \n\
+    outColor = vec4(finalColor, 1.0) * fragColor;                                   \n\
 }                                                                                   \n\
 ";
