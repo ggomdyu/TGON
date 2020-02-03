@@ -10,7 +10,7 @@
 #include "Importer/VorbisAudioDecoder.h"
 #include "IO/File.h"
 
-#include "AudioBuffer.h"
+#include "AudioClip.h"
 #include "OpenALDebug.h"
 
 namespace tgon
@@ -52,7 +52,7 @@ inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
     return 0;
 }
 
-AudioBuffer::AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
+AudioClip::AudioClip(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept :
     m_alBufferId(CreateALBuffer()),
     m_audioData(audioData),
     m_audioDataBytes(audioDataBytes),
@@ -63,7 +63,7 @@ AudioBuffer::AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t au
     TGON_AL_ERROR_CHECK(alBufferData(m_alBufferId, ConvertToALFormat(m_channels, m_bitsPerSample), m_audioData.get(), static_cast<ALsizei>(m_audioDataBytes), m_samplingRate));
 }
 
-AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :
+AudioClip::AudioClip(AudioClip&& rhs) noexcept :
     m_alBufferId(rhs.m_alBufferId),
     m_audioData(std::move(rhs.m_audioData)),
     m_audioDataBytes(rhs.m_audioDataBytes),
@@ -74,7 +74,7 @@ AudioBuffer::AudioBuffer(AudioBuffer&& rhs) noexcept :
     rhs.m_alBufferId = 0;
 }
 
-AudioBuffer::~AudioBuffer()
+AudioClip::~AudioClip()
 {
     if (m_alBufferId != 0)
     {
@@ -83,7 +83,7 @@ AudioBuffer::~AudioBuffer()
     }
 }
 
-AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs) noexcept
+AudioClip& AudioClip::operator=(AudioClip&& rhs) noexcept
 {
     std::swap(m_audioData, rhs.m_audioData);
     
@@ -98,7 +98,7 @@ AudioBuffer& AudioBuffer::operator=(AudioBuffer&& rhs) noexcept
     return *this;
 }
 
-std::shared_ptr<AudioBuffer> AudioBuffer::Create(const char* filePath)
+std::shared_ptr<AudioClip> AudioClip::Create(const char* filePath)
 {
     auto fileData = File::ReadAllBytes(filePath, ReturnVectorTag{});
     if (fileData.has_value() == false)
@@ -109,7 +109,7 @@ std::shared_ptr<AudioBuffer> AudioBuffer::Create(const char* filePath)
     return Create(*fileData);
 }
 
-std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData)
+std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& fileData)
 {
     AudioFormat audioFormat = AudioFormat::Unknown;
     if (WavAudioDecoder::IsWav(fileData))
@@ -128,7 +128,7 @@ std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte
     return Create(fileData, audioFormat);
 }
 
-std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
+std::shared_ptr<AudioClip> AudioClip::Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat)
 {
     std::shared_ptr<std::byte> audioData;
     int32_t audioDataBytes = 0;
@@ -169,40 +169,40 @@ std::shared_ptr<AudioBuffer> AudioBuffer::Create(const gsl::span<const std::byte
         }
     }
 
-    return std::make_shared<AudioBuffer>(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
+    return std::make_shared<AudioClip>(std::move(audioData), audioDataBytes, bitsPerSample, channels, samplingRate);
 }
 
-gsl::span<std::byte> AudioBuffer::GetAudioData() noexcept
+gsl::span<std::byte> AudioClip::GetData() noexcept
 {
     return {m_audioData.get(), m_audioDataBytes};
 }
 
-gsl::span<const std::byte> AudioBuffer::GetAudioData() const noexcept
+gsl::span<const std::byte> AudioClip::GetData() const noexcept
 {
-    return const_cast<AudioBuffer*>(this)->GetAudioData();
+    return const_cast<AudioClip*>(this)->GetData();
 }
 
-int32_t AudioBuffer::GetBitsPerSample() const noexcept
+int32_t AudioClip::GetBitsPerSample() const noexcept
 {
     return m_bitsPerSample;
 }
 
-int32_t AudioBuffer::GetChannels() const noexcept
+int32_t AudioClip::GetChannels() const noexcept
 {
     return m_channels;
 }
 
-int32_t AudioBuffer::GetSamplingRate() const noexcept
+int32_t AudioClip::GetSamplingRate() const noexcept
 {
     return m_samplingRate;
 }
 
-ALuint AudioBuffer::GetNativeBuffer() const noexcept
+ALuint AudioClip::GetNativeBuffer() const noexcept
 {
     return m_alBufferId;
 }
 
-ALuint AudioBuffer::CreateALBuffer()
+ALuint AudioClip::CreateALBuffer()
 {
     ALuint alBufferId = 0;
     TGON_AL_ERROR_CHECK(alGenBuffers(1, &alBufferId));

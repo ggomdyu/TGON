@@ -10,54 +10,55 @@
 
 #include "Core/RuntimeObject.h"
 
-#include "AudioBuffer.h"
-
 namespace tgon
 {
 
-class AudioPlayer final :
+class AudioClip;
+
+class AudioSource final :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(AudioPlayer)
+    TGON_DECLARE_RTTI(AudioSource)
 
 /**@section Constructor */
 public:
-    AudioPlayer(ALuint alSource) noexcept;
-    AudioPlayer(AudioPlayer&& rhs) noexcept;
+    AudioSource(ALuint alSource) noexcept;
+    AudioSource(AudioSource&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~AudioPlayer() override;
+    ~AudioSource() override;
 
-/**@section Destructor */
+/**@section Operator */
 public:
-    AudioPlayer& operator=(AudioPlayer&& rhs) noexcept;
+    AudioSource& operator=(AudioSource&& rhs) noexcept;
 
 /**@section Method */
 public:
-    static std::optional<AudioPlayer> Create();
+    static std::optional<AudioSource> Create();
     void Play();
-    void Play(float volume, bool isLooping);
-    bool IsPlaying() const;
     void Stop();
     void Pause();
-    void Resume();
-    void SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer);
-    void SetAudioBuffer(std::shared_ptr<AudioBuffer>&& audioBuffer);
+    void UnPause();
+    void SetClip(const std::shared_ptr<AudioClip>& audioBuffer);
+    void SetClip(std::shared_ptr<AudioClip>&& audioBuffer);
     void SetVolume(float volume);
     void SetPosition(float x, float y, float z);
     void SetVelocity(float x, float y, float z);
     static void SetListenerPosition(float x, float y, float z);
     static void SetListenerVelocity(float x, float y, float z);
-    float GetVolume() const;
     void SetProgressInSeconds(float seconds);
+    void SetPitch(float pitch);
+    void SetLoop(bool isLoop);
+    float GetVolume() const;
     float GetProgressInSeconds() const;
     float GetTotalProgressInSeconds() const;
-    void SetPitch(float pitch);
     float GetPitch() const;
-    void SetLooping(bool isLooping);
-    bool IsLooping() const;
+    std::shared_ptr<AudioClip> GetClip() noexcept;
+    std::shared_ptr<const AudioClip> GetClip() const noexcept;
+    bool IsLoop() const;
+    bool IsPlaying() const;
 
 private:
     static std::optional<ALuint> CreateALSource();
@@ -65,7 +66,7 @@ private:
 /**@section Variable */
 private:
     ALuint m_alSource;
-    std::shared_ptr<class AudioBuffer> m_audioBuffer;
+    std::shared_ptr<AudioClip> m_audioClip;
 };
 
 } /* namespace tgon */

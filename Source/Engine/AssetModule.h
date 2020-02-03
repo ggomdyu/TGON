@@ -9,7 +9,7 @@
 #include <any>
 #include <unordered_map>
 
-#include "Audio/AudioBuffer.h"
+#include "Audio/AudioClip.h"
 #include "Text/StringHash.h"
 #include "Drawing/FontFactory.h"
 #include "Graphics/Texture.h"

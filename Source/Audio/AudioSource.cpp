@@ -6,25 +6,26 @@
 #   include <AL/alc.h>
 #endif
 
-#include "AudioPlayer.h"
+#include "AudioSource.h"
+#include "AudioClip.h"
 #include "OpenALDebug.h"
 
 namespace tgon
 {
 
-AudioPlayer::AudioPlayer(ALuint alSource) noexcept :
+AudioSource::AudioSource(ALuint alSource) noexcept :
     m_alSource(alSource)
 {
 }
 
-AudioPlayer::AudioPlayer(AudioPlayer&& rhs) noexcept :
+AudioSource::AudioSource(AudioSource&& rhs) noexcept :
     m_alSource(rhs.m_alSource),
-    m_audioBuffer(std::move(rhs.m_audioBuffer))
+    m_audioClip(std::move(rhs.m_audioClip))
 {
     rhs.m_alSource = 0;
 }
 
-AudioPlayer::~AudioPlayer()
+AudioSource::~AudioSource()
 {
     if (m_alSource != 0)
     {
@@ -33,15 +34,15 @@ AudioPlayer::~AudioPlayer()
     }
 }
 
-AudioPlayer& AudioPlayer::operator=(AudioPlayer&& rhs) noexcept
+AudioSource& AudioSource::operator=(AudioSource&& rhs) noexcept
 {
     std::swap(m_alSource, rhs.m_alSource);
-    std::swap(m_audioBuffer, rhs.m_audioBuffer);
+    std::swap(m_audioClip, rhs.m_audioClip);
 
     return *this;
 }
 
-std::optional<AudioPlayer> AudioPlayer::Create()
+std::optional<AudioSource> AudioSource::Create()
 {
     auto alSource = CreateALSource();
     if (alSource.has_value() == false)
@@ -49,23 +50,16 @@ std::optional<AudioPlayer> AudioPlayer::Create()
         return {};
     }
 
-    return AudioPlayer(*alSource);
+    return AudioSource(*alSource);
 }
 
-void AudioPlayer::Play()
+void AudioSource::Play()
 {
     this->SetProgressInSeconds(0.0f);
     TGON_AL_ERROR_CHECK(alSourcePlay(m_alSource))
 }
 
-void AudioPlayer::Play(float volume, bool isLooping)
-{
-    this->SetVolume(volume);
-    this->SetLooping(isLooping);
-    this->Play();
-}
-
-bool AudioPlayer::IsPlaying() const
+bool AudioSource::IsPlaying() const
 {
     ALint isPlaying = 0;
     TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_SOURCE_STATE, &isPlaying))
@@ -73,59 +67,59 @@ bool AudioPlayer::IsPlaying() const
     return isPlaying == AL_PLAYING;
 }
 
-void AudioPlayer::Stop()
+void AudioSource::Stop()
 {
     TGON_AL_ERROR_CHECK(alSourceStop(m_alSource))
 }
 
-void AudioPlayer::Pause()
+void AudioSource::Pause()
 {
     TGON_AL_ERROR_CHECK(alSourcePause(m_alSource))
 }
 
-void AudioPlayer::Resume()
+void AudioSource::UnPause()
 {
     TGON_AL_ERROR_CHECK(alSourcePlay(m_alSource))
 }
 
-void AudioPlayer::SetAudioBuffer(const std::shared_ptr<AudioBuffer>& audioBuffer)
+void AudioSource::SetClip(const std::shared_ptr<AudioClip>& audioBuffer)
 {
     TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()));
-    m_audioBuffer = audioBuffer;
+    m_audioClip = audioBuffer;
 }
 
-void AudioPlayer::SetAudioBuffer(std::shared_ptr<AudioBuffer>&& audioBuffer)
+void AudioSource::SetClip(std::shared_ptr<AudioClip>&& audioBuffer)
 {
     TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_BUFFER, audioBuffer->GetNativeBuffer()));
-    m_audioBuffer = std::move(audioBuffer);
+    m_audioClip = std::move(audioBuffer);
 }
 
-void AudioPlayer::SetVolume(float volume)
+void AudioSource::SetVolume(float volume)
 {
     TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_GAIN, volume))
 }
 
-void AudioPlayer::SetPosition(float x, float y, float z)
+void AudioSource::SetPosition(float x, float y, float z)
 {
     TGON_AL_ERROR_CHECK(alSource3f(m_alSource, AL_POSITION, x, y, z))
 }
 
-void AudioPlayer::SetVelocity(float x, float y, float z)
+void AudioSource::SetVelocity(float x, float y, float z)
 {
     TGON_AL_ERROR_CHECK(alSource3f(m_alSource, AL_VELOCITY, x, y, z))
 }
 
-void AudioPlayer::SetListenerPosition(float x, float y, float z)
+void AudioSource::SetListenerPosition(float x, float y, float z)
 {
     TGON_AL_ERROR_CHECK(alListener3f(AL_POSITION, x, y, z))
 }
 
-void AudioPlayer::SetListenerVelocity(float x, float y, float z)
+void AudioSource::SetListenerVelocity(float x, float y, float z)
 {
     TGON_AL_ERROR_CHECK(alListener3f(AL_VELOCITY, x, y, z))
 }
 
-float AudioPlayer::GetVolume() const
+float AudioSource::GetVolume() const
 {
     float volume = 0.0f;
     TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_GAIN, &volume))
@@ -133,12 +127,12 @@ float AudioPlayer::GetVolume() const
     return volume;
 }
 
-void AudioPlayer::SetProgressInSeconds(float seconds)
+void AudioSource::SetProgressInSeconds(float seconds)
 {
     TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_SEC_OFFSET, seconds))
 }
 
-float AudioPlayer::GetProgressInSeconds() const
+float AudioSource::GetProgressInSeconds() const
 {
     float seconds = 0;
     TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_SEC_OFFSET, &seconds))
@@ -146,22 +140,22 @@ float AudioPlayer::GetProgressInSeconds() const
     return seconds;
 }
 
-float AudioPlayer::GetTotalProgressInSeconds() const
+float AudioSource::GetTotalProgressInSeconds() const
 {
-    if (m_audioBuffer == nullptr)
+    if (m_audioClip == nullptr)
     {
         return 0.0f;
     }
     
-    return static_cast<float>(m_audioBuffer->GetAudioData().size()) / (m_audioBuffer->GetSamplingRate() * m_audioBuffer->GetChannels() * (static_cast<float>(m_audioBuffer->GetBitsPerSample()) * 0.125f));
+    return static_cast<float>(m_audioClip->GetData().size()) / (m_audioClip->GetSamplingRate() * m_audioClip->GetChannels() * (static_cast<float>(m_audioClip->GetBitsPerSample()) * 0.125f));
 }
 
-void AudioPlayer::SetPitch(float pitch)
+void AudioSource::SetPitch(float pitch)
 {
     TGON_AL_ERROR_CHECK(alSourcef(m_alSource, AL_PITCH, pitch))
 }
 
-float AudioPlayer::GetPitch() const
+float AudioSource::GetPitch() const
 {
     float pitch = 0.0f;
     TGON_AL_ERROR_CHECK(alGetSourcef(m_alSource, AL_PITCH, &pitch))
@@ -169,20 +163,30 @@ float AudioPlayer::GetPitch() const
     return pitch;
 }
 
-void AudioPlayer::SetLooping(bool isLooping)
+std::shared_ptr<AudioClip> AudioSource::GetClip() noexcept
 {
-    TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_LOOPING, isLooping ? AL_TRUE : AL_FALSE))
+    return std::shared_ptr<AudioClip>();
 }
 
-bool AudioPlayer::IsLooping() const
+std::shared_ptr<const AudioClip> AudioSource::GetClip() const noexcept
 {
-    ALint isLooping = AL_FALSE;
-    TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_LOOPING, &isLooping))
-
-    return isLooping == AL_TRUE ? true : false;
+    return std::shared_ptr<const AudioClip>();
 }
 
-std::optional<ALuint> AudioPlayer::CreateALSource()
+void AudioSource::SetLoop(bool isLoop)
+{
+    TGON_AL_ERROR_CHECK(alSourcei(m_alSource, AL_LOOPING, isLoop ? AL_TRUE : AL_FALSE))
+}
+
+bool AudioSource::IsLoop() const
+{
+    ALint isLoop = AL_FALSE;
+    TGON_AL_ERROR_CHECK(alGetSourcei(m_alSource, AL_LOOPING, &isLoop))
+
+    return isLoop == AL_TRUE ? true : false;
+}
+
+std::optional<ALuint> AudioSource::CreateALSource()
 {
     ALuint alSource;
     TGON_AL_ERROR_CHECK(alGenSources(1, &alSource));

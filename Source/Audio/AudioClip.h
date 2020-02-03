@@ -28,32 +28,32 @@ enum class AudioFormat
     Opus,
 };
 
-class AudioBuffer final :
+class AudioClip final :
     public RuntimeObject
 {
 public:
-    TGON_DECLARE_RTTI(AudioBuffer)
+    TGON_DECLARE_RTTI(AudioClip)
     
 /**@section Constructor */
 public:
-    AudioBuffer(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
-    AudioBuffer(AudioBuffer&& rhs) noexcept;
+    AudioClip(const std::shared_ptr<std::byte>& audioData, int32_t audioDataBytes, int32_t bitsPerSample, int32_t channels, int32_t samplingRate) noexcept;
+    AudioClip(AudioClip&& rhs) noexcept;
     
 /**@section Operator */
 public:
-    AudioBuffer& operator=(AudioBuffer&& rhs) noexcept;
+    AudioClip& operator=(AudioClip&& rhs) noexcept;
 
 /**@section Destructor */
 public:
-    ~AudioBuffer() override;
+    ~AudioClip() override;
 
 /**@section Method */
 public:
-    static std::shared_ptr<AudioBuffer> Create(const char* filePath);
-    static std::shared_ptr<AudioBuffer> Create(const gsl::span<const std::byte>& fileData);
-    static std::shared_ptr<AudioBuffer> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
-    gsl::span<std::byte> GetAudioData() noexcept;
-    gsl::span<const std::byte> GetAudioData() const noexcept;
+    static std::shared_ptr<AudioClip> Create(const char* filePath);
+    static std::shared_ptr<AudioClip> Create(const gsl::span<const std::byte>& fileData);
+    static std::shared_ptr<AudioClip> Create(const gsl::span<const std::byte>& fileData, AudioFormat audioFormat);
+    gsl::span<std::byte> GetData() noexcept;
+    gsl::span<const std::byte> GetData() const noexcept;
     int32_t GetBitsPerSample() const noexcept;
     int32_t GetChannels() const noexcept;
     int32_t GetSamplingRate() const noexcept;
