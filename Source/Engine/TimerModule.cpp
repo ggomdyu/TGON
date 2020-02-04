@@ -56,9 +56,9 @@ bool TimerModule::ClearTimer(TimerHandle timerHandle)
 
 std::vector<TimerModule::TimerInfo>::iterator TimerModule::FindTimerInfo(TimerHandle timerHandle) noexcept
 {
-    return std::lower_bound(m_timerInfos.begin(), m_timerInfos.end(), timerHandle, [&](const TimerInfo& lhs, TimerHandle rhs)
+    return std::find_if(m_timerInfos.begin(), m_timerInfos.end(), [&](const TimerInfo& timerInfo)
     {
-        return lhs.timerHandle < rhs;
+        return timerInfo.timerHandle == timerHandle;
     });
 }
 
@@ -92,6 +92,11 @@ void TimerModule::Update()
                 if (timerInfo.isLoop)
                 {
                     timerInfo.elapsedTime = 0.0f;
+                }
+                else
+                {
+                    iter = m_timerInfos.erase(iter);
+                    continue;
                 }
             }
             else
