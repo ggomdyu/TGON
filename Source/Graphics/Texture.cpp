@@ -22,31 +22,6 @@ Texture::Texture(const std::byte* imageData, const I32Extent2D& size, PixelForma
     this->SetData(imageData, size, pixelFormat);
 }
 
-Texture::Texture(Texture&& rhs) noexcept :
-    PlatformTexture(std::move(rhs)),
-    m_isUseMipmap(rhs.m_isUseMipmap),
-    m_isDynamicUsage(rhs.m_isDynamicUsage),
-    m_pixelFormat(rhs.m_pixelFormat),
-    m_filterMode(rhs.m_filterMode),
-    m_wrapMode(rhs.m_wrapMode),
-    m_size(rhs.m_size)
-{
-}
-
-Texture& Texture::operator=(Texture&& rhs) noexcept
-{
-    PlatformTexture::operator=(std::move(rhs));
-    
-    m_isUseMipmap = rhs.m_isUseMipmap;
-    m_isDynamicUsage = rhs.m_isDynamicUsage;
-    m_pixelFormat = rhs.m_pixelFormat;
-    m_filterMode = rhs.m_filterMode;
-    m_wrapMode = rhs.m_wrapMode;
-    m_size = rhs.m_size;
-
-    return *this;
-}
-
 PlatformTexture& Texture::GetPlatformDependency() noexcept
 {
     return *this;
