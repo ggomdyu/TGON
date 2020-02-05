@@ -1,4 +1,5 @@
 # fmt
+```
 Copyright (c) 2012 - present, Victor Zverovich
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -26,6 +27,7 @@ As an exception, if, as a result of your compiling your source code, portions
 of this Software are embedded into a machine-executable object form of such
 source code, you may redistribute such embedded portions in such object form
 without including the above copyright and permission notices.
+```
 
 # freetype
 ```
@@ -199,6 +201,8 @@ Legal Terms
 
 --- end of FTL.TXT ---
 ```
+
+```
 # gainput
 Copyright (c) 2013-2017 Johannes Kuhlmann
 
@@ -207,7 +211,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
 
+```
 # glew
 The OpenGL Extension Wrangler Library
 Copyright (C) 2002-2007, Milan Ikits <milan ikits[]ieee org>
@@ -282,7 +288,9 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+```
 
+```
 # GSL
 Copyright (c) 2015 Microsoft Corporation. All rights reserved. 
  
@@ -305,7 +313,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
 THE SOFTWARE. 
+```
 
+```
 # icu4c
 COPYRIGHT AND PERMISSION NOTICE (ICU 58 and later)
 
@@ -721,7 +731,9 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
 
+```
 # openal-soft
                   GNU LIBRARY GENERAL PUBLIC LICENSE
                        Version 2, June 1991
@@ -1160,7 +1172,9 @@ SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
                      END OF TERMS AND CONDITIONS
+```
 
+```
 # stb
 This software is available under 2 licenses -- choose whichever you prefer.
 ------------------------------------------------------------------------------
@@ -1199,8 +1213,10 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
 ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
 
 # zlib
+```
  (C) 1995-2017 Jean-loup Gailly and Mark Adler
 
   This software is provided 'as-is', without any express or implied
@@ -1230,3 +1246,4 @@ Gailly and Mark Adler; it does not include third-party code.
 If you redistribute modified sources, we would appreciate that you include in
 the file ChangeLog history information documenting your changes.  Please read
 the FAQ for more information on the distribution of modified source versions.
+```
