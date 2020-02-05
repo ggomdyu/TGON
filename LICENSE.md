@@ -28,6 +28,7 @@ source code, you may redistribute such embedded portions in such object form
 without including the above copyright and permission notices.
 
 # freetype
+```
                     The FreeType Project LICENSE
                     ----------------------------
 
@@ -197,7 +198,7 @@ Legal Terms
 
 
 --- end of FTL.TXT ---
-
+```
 # gainput
 Copyright (c) 2013-2017 Johannes Kuhlmann
 
