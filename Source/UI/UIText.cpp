@@ -9,27 +9,18 @@ namespace tgon
 
 class TextBlock final
 {
-/**@section Struct */
-public:
-    struct LineInfo
-    {
-        int32_t characterStartIndex;
-        int32_t characterEndIndex;
-        I32Rect contentRect;
-    };
-    
 /**@section Constructor */
 public:
     TextBlock() = default;
-    TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
+    TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
     
 /**@section Method */
 public:
-    void Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept;
+    void SetText(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment);
     void Clear();
     const I32Rect& GetRect() const noexcept;
     const I32Rect& GetContentRect() const noexcept;
-    const std::vector<UIText::CharacterInfo>& GetCharacterInfos() const noexcept;
+    const std::vector<CharacterInfo>& GetCharacterInfos() const noexcept;
     
 private:
     int32_t TryAddTextLine(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect);
@@ -41,19 +32,19 @@ private:
 private:
     I32Rect m_rect;
     I32Rect m_contentRect;
-    std::vector<UIText::CharacterInfo> m_characterInfos;
+    std::vector<CharacterInfo> m_characterInfos;
     std::vector<LineInfo> m_lineInfos;
     int32_t m_iterIndex = 0;
 };
 
-TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
+TextBlock::TextBlock(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
 {
-    this->Initialize(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
+    this->SetText(characters, fontAtlas, fontSize, rect, lineBreakMode, textAlignment);
 }
 
 UIText::~UIText() = default;
 
-void TextBlock::Initialize(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment) noexcept
+void TextBlock::SetText(const gsl::span<const char32_t>& characters, const std::shared_ptr<FontAtlas>& fontAtlas, int32_t fontSize, const I32Rect& rect, LineBreakMode lineBreakMode, TextAlignment textAlignment)
 {
     this->Clear();
     
@@ -111,7 +102,7 @@ const I32Rect& TextBlock::GetContentRect() const noexcept
     return m_contentRect;
 }
 
-const std::vector<UIText::CharacterInfo>& TextBlock::GetCharacterInfos() const noexcept
+const std::vector<CharacterInfo>& TextBlock::GetCharacterInfos() const noexcept
 {
     return m_characterInfos;
 }
@@ -150,20 +141,25 @@ int32_t TextBlock::TryAddTextLine(const gsl::span<const char32_t>& characters, c
         auto ch = characters[i];
         
         const auto& glyphData = fontAtlas->GetGlyphData(ch, fontSize);
-        if (rect.width < xAdvance + glyphData.metrics.size.width)
+        if (glyphData == nullptr)
+        {
+            continue;
+        }
+        
+        if (rect.width < xAdvance + glyphData->metrics.size.width)
         {
             insertedTextLen = static_cast<int32_t>(i);
             break;
         }
 
-        I32Vector2 characterPos{rect.x + xAdvance + glyphData.metrics.bearing.x, rect.y + glyphData.metrics.bearing.y - m_contentRect.height};
-        m_characterInfos.push_back({glyphData.ch, {characterPos.x, characterPos.y, glyphData.metrics.size.width, glyphData.metrics.size.height}});
+        I32Vector2 characterPos{rect.x + xAdvance + glyphData->metrics.bearing.x, rect.y + glyphData->metrics.bearing.y - m_contentRect.height};
+        m_characterInfos.push_back({glyphData->ch, {characterPos.x, characterPos.y, glyphData->metrics.size.width, glyphData->metrics.size.height}});
         
-        yMin = std::min(yMin, characterPos.y - glyphData.metrics.size.height);
+        yMin = std::min(yMin, characterPos.y - glyphData->metrics.size.height);
         yMax = std::max(yMax, characterPos.y);
-        yMaxBearing = std::max(yMaxBearing, glyphData.metrics.bearing.y);
+        yMaxBearing = std::max(yMaxBearing, glyphData->metrics.bearing.y);
         
-        xAdvance += glyphData.metrics.advance.x;
+        xAdvance += glyphData->metrics.advance.x;
         m_iterIndex += 1;
     }
 
@@ -474,13 +470,13 @@ const I32Rect& UIText::GetContentRect() const noexcept
     return m_textBlock->GetContentRect();
 }
 
-const std::vector<UIText::CharacterInfo>& UIText::GetCharacterInfos() const noexcept
+const std::vector<CharacterInfo>& UIText::GetCharacterInfos() const noexcept
 {
     if (m_isDirty)
     {
         auto characters = Encoding::UTF8().GetChars(reinterpret_cast<const std::byte*>(&m_text[0]), static_cast<int32_t>(m_text.length()));
         
-        m_textBlock->Initialize(characters, m_fontAtlas, m_fontSize, m_rect, m_lineBreakMode, m_textAlignment);
+        m_textBlock->SetText(characters, m_fontAtlas, m_fontSize, m_rect, m_lineBreakMode, m_textAlignment);
         m_isDirty = false;
     }
     

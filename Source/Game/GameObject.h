@@ -22,7 +22,7 @@ public:
     TGON_DECLARE_RTTI(GameObject)
 
 /**@section Constructor */
-protected:
+public:
     GameObject() noexcept;
     explicit GameObject(const StringHash& name);
     explicit GameObject(StringHash&& name) noexcept;

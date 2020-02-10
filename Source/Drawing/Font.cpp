@@ -1,7 +1,5 @@
 #include "PrecompiledHeader.h"
 
-#include "IO/File.h"
-
 #include "Font.h"
 
 namespace tgon
@@ -42,7 +40,7 @@ std::shared_ptr<const FontFace> Font::GetFace(int32_t fontSize) const
     return const_cast<Font*>(this)->GetFace(fontSize);
 }
 
-const GlyphData& Font::GetGlyphData(char32_t ch, int32_t fontSize) const
+const GlyphData* Font::GetGlyphData(char32_t ch, int32_t fontSize) const
 {
     return this->GetFace(fontSize)->GetGlyphData(ch);
 }
@@ -50,11 +48,6 @@ const GlyphData& Font::GetGlyphData(char32_t ch, int32_t fontSize) const
 I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
 {
     return this->GetFace(fontSize)->GetKerning(lhs, rhs);
-}
-
-I32Extent2D Font::GetCharSize(char32_t ch, int32_t fontSize)
-{
-    return this->GetFace(fontSize)->GetGlyphData(ch).metrics.size;
 }
 
 } /* namespace tgon */

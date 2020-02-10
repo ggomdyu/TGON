@@ -26,6 +26,12 @@ function (init_tgon)
             continue ()
         endif ()
 
+        # Ignore legacy directories
+        string(FIND ${SRC_PATH} "/Test/" SUBSTR_INDEX)
+        if (NOT SUBSTR_INDEX EQUAL -1)
+            continue ()
+        endif ()
+
         # Ignore other platform sources
         set(IS_PLATFORM_SPECIFIC_SRC FALSE)
         set(IS_PLATFORM_MATCHED_SRC FALSE)

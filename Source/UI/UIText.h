@@ -38,20 +38,25 @@ enum class LineBreakMode
     TruncateTail,
 };
 
+struct CharacterInfo
+{
+    char32_t character;
+    I32Rect rect;
+    //Color4f color;
+};
+
+struct LineInfo
+{
+    int32_t characterStartIndex;
+    int32_t characterEndIndex;
+    I32Rect contentRect;
+};
+
 class UIText final :
     public UIElement
 {
 public:
     TGON_DECLARE_RTTI(UIText)
-
-/**@section Struct */
-public:
-    struct CharacterInfo
-    {
-        char32_t character;
-        I32Rect rect;
-        //Color4f color;
-    };
 
 /**@section Constructor */
 public:

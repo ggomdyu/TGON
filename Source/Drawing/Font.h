@@ -28,9 +28,8 @@ public:
 
 /**@section Method */
 public:
-    const GlyphData& GetGlyphData(char32_t ch, int32_t fontSize) const;
+    const GlyphData* GetGlyphData(char32_t ch, int32_t fontSize) const;
     I32Vector2 GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const;
-    I32Extent2D GetCharSize(char32_t ch, int32_t fontSize);
     std::shared_ptr<FontFace> GetFace(int32_t fontSize);
     std::shared_ptr<const FontFace> GetFace(int32_t fontSize) const;
 
