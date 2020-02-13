@@ -33,7 +33,7 @@ bool VorbisAudioDecoder::IsVorbis(const gsl::span<const std::byte>& fileData)
         return false;
     }
     
-    return !strncmp(reinterpret_cast<const char*>(&fileData[0]), "OggS", 4) && !strncmp(reinterpret_cast<const char*>(&fileData[29]), "vorbis", 6);
+    return !strncmp(reinterpret_cast<const char*>(&fileData[0]), "OggS", 4);
 }
 
 } /* namespace tgon */
