@@ -16,26 +16,42 @@
 
 namespace tgon
 {
-    
-class SerialDispatchQueue :
+
+class DispatchQueue :
     private NonCopyable
 {
+/**@section Destructor */
+public:
+    virtual ~DispatchQueue() = default;
+    
 /**@section Method */
 public:
-    void AddAsyncTask(const Delegate<void()>& task);
-    void AddAsyncTask(Delegate<void()>&& task);
-    void AddSyncTask(const Delegate<void()>& task);
-    void AddSyncTask(Delegate<void()>&& task);
+    virtual void AddAsyncTask(const Delegate<void()>& task) = 0;
+    virtual void AddAsyncTask(Delegate<void()>&& task) = 0;
+    virtual void AddSyncTask(const Delegate<void()>& task) = 0;
+    virtual void AddSyncTask(Delegate<void()>&& task) = 0;
     void Dispatch();
     
 /**@section Variable */
-private:
+protected:
     std::mutex m_mutex;
     std::deque<Delegate<void()>> m_taskPool;
 };
+    
+class SerialDispatchQueue final :
+    public DispatchQueue
+{
+/**@section Method */
+public:
+    void AddAsyncTask(const Delegate<void()>& task) override;
+    void AddAsyncTask(Delegate<void()>&& task) override;
+    void AddSyncTask(const Delegate<void()>& task) override;
+    void AddSyncTask(Delegate<void()>&& task) override;
+    void Dispatch();
+};
 
-class ConcurrentDispatchQueue :
-    private NonCopyable
+class ConcurrentDispatchQueue final :
+    public DispatchQueue
 {
 /**@section Constructor */
 public:
@@ -43,14 +59,14 @@ public:
     
 /**@section Destructor */
 public:
-    ~ConcurrentDispatchQueue();
+    ~ConcurrentDispatchQueue() override;
 
 /**@section Method */
 public:
-    void AddAsyncTask(const Delegate<void()>& task);
-    void AddAsyncTask(Delegate<void()>&& task);
-    void AddSyncTask(const Delegate<void()>& task);
-    void AddSyncTask(Delegate<void()>&& task);
+    void AddAsyncTask(const Delegate<void()>& task) override;
+    void AddAsyncTask(Delegate<void()>&& task) override;
+    void AddSyncTask(const Delegate<void()>& task) override;
+    void AddSyncTask(Delegate<void()>&& task) override;
     
 private:
     void DispatchQueueHandler();
@@ -58,9 +74,7 @@ private:
 /**@section Variable */
 private:
     std::condition_variable m_cv;
-    std::mutex m_mutex;
     std::vector<Thread> m_threadPool;
-    std::deque<Delegate<void()>> m_taskPool;
     bool m_needToDestroy;
 };
     
