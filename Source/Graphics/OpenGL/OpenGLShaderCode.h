@@ -267,7 +267,7 @@ out vec4 outColor;                                                              
 uniform sampler2D textureSampler;                                                   \n\
 uniform float centerKernel = 4;                                                     \n\
 uniform float aroundUVOffset = 1.0 / 300.0;                                         \n\
-\n\
+                                                                                    \n\
 void main()                                                                         \n\
 {                                                                                   \n\
     vec2 kernelOffset[] = vec2[](                                                   \n\
@@ -277,11 +277,11 @@ void main()                                                                     
     );                                                                              \n\
     float kernel[] = float[](                                                       \n\
         1.0 / 16.0, 2.0 / 16.0, 1.0 / 16.0,                                         \n\
-        2.0 / 16.0, centerKernel / 16.0, 2.0 / 16.0,                                       \n\
+        2.0 / 16.0, centerKernel / 16.0, 2.0 / 16.0,                                \n\
         1.0 / 16.0, 2.0 / 16.0, 1.0 / 16.0                                          \n\
     );                                                                              \n\
                                                                                     \n\
-    vec3 finalColor;                                                                \n\
+    vec3 finalColor = vec3(0.0, 0.0, 0.0);                                          \n\
     for (int i = 0; i < 9; ++i)                                                     \n\
     {                                                                               \n\
         vec3 offsetTexColor = vec3(texture(textureSampler, fragUV + kernelOffset[i]));  \n\
