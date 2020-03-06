@@ -110,7 +110,7 @@ function(init_tgon_properties)
     target_compile_definitions(TGON PUBLIC TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1)
 
     if(MSVC)
-        target_compile_options(TGON PRIVATE /YcPrecompiledHeader.h /Oi $<$<CONFIG:Debug>:/ZI> $<$<CONFIG:Release>:>)
+        target_compile_options(TGON PRIVATE /YcPrecompiledHeader.h /Oi $<$<CONFIG:Debug>:/Zi> $<$<CONFIG:Release>:>)
     endif()
 
     target_link_libraries(TGON PUBLIC common fmt freetype gainputstatic glew icu OpenAL)
