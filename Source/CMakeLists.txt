@@ -1,43 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
 
-function(init_thirdparty_subdirectories)
-    option(ALSOFT_TESTS "" FALSE)
-    option(ALSOFT_UTILS "" FALSE)
-    option(ALSOFT_EXAMPLES "" FALSE)
-    set(LIBTYPE "STATIC")
-    add_subdirectory(ThirdParty/openal-soft-1.20.1)
-
-    option(GAINPUT_TESTS "" FALSE)
-    option(GAINPUT_BUILD_SHARED "" FALSE)
-    option(GAINPUT_SAMPLES "" FALSE)
-    add_subdirectory(ThirdParty/gainput-1.0.0)
-
-    add_subdirectory(ThirdParty/fmt-6.1.2)
-    add_subdirectory(ThirdParty/freetype-2.10.1)
-    add_subdirectory(ThirdParty/glew-2.1.0)
-    add_subdirectory(ThirdParty/icu4c-64_2/icu)
-    add_subdirectory(ThirdParty/zlib-1.2.11)
-endfunction()
-
-function(init_thirdparty_properties)
-    target_compile_definitions(freetype PUBLIC FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY)
-    target_compile_definitions(glew PUBLIC GLEW_STATIC)
-    target_compile_definitions(icu PUBLIC U_STATIC_IMPLEMENTATION U_COMMON_IMPLEMENTATION U_I18N_IMPLEMENTATION)
-    target_compile_definitions(OpenAL PUBLIC AL_LIBTYPE_STATIC)
-    target_compile_definitions(common PUBLIC AL_LIBTYPE_STATIC)
-
-    set_target_properties(common PROPERTIES FOLDER ThirdParty)
-    set_target_properties(ex-common PROPERTIES FOLDER ThirdParty)
-    set_target_properties(fmt PROPERTIES FOLDER ThirdParty)
-    set_target_properties(freetype PROPERTIES FOLDER ThirdParty)
-    set_target_properties(gainputstatic PROPERTIES FOLDER ThirdParty)
-    set_target_properties(glew PROPERTIES FOLDER ThirdParty)
-    set_target_properties(icu PROPERTIES FOLDER ThirdParty)
-    set_target_properties(native-tools PROPERTIES FOLDER ThirdParty)
-    set_target_properties(OpenAL PROPERTIES FOLDER ThirdParty)
-    set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
-endfunction()
-
 function(init_tgon_subdirectories)
     set(GLOB_AGRUMENTS *.cpp *c *.h)
 
@@ -108,7 +70,7 @@ function(init_tgon_subdirectories)
                     endif()
                 endif()
             endforeach()
-
+            
             if(IS_GRAPHICS_SPECIFIC_SRC AND NOT IS_GRAPHICS_MATCHED_SRC)
                 continue()
             endif()
@@ -138,24 +100,61 @@ function(init_tgon_properties)
         ThirdParty/stb
         ThirdParty/zlib-1.2.11
     )
-
     if(WIN32)
         list(APPEND TGON_INCLUDE_PATH_LIST $ENV{DXSDK_DIR}/Include)
     endif()
 
-    set_target_properties(TGON PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO FOLDER TGON)
+    set_target_properties(TGON PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO FOLDER TGON)
 
     target_include_directories(TGON PUBLIC ${TGON_INCLUDE_PATH_LIST})
-    target_link_libraries(TGON PUBLIC comcon fmt freetype gainputstatic glew icu OpenAL)
-
     target_compile_definitions(TGON PUBLIC TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1)
+
     if(MSVC)
-        target_compile_options(TGON PRIVATE /YcPrecompiledHeader.h /Oi $<$<CONFIG:Debug>:/Zi> $<$<CONFIG:Release>:>)
+        target_compile_options(TGON PRIVATE /YcPrecompiledHeader.h /Oi $<$<CONFIG:Debug>:/ZI> $<$<CONFIG:Release>:>)
     endif()
+
+    target_link_libraries(TGON PUBLIC common fmt freetype gainputstatic glew icu OpenAL)
 endfunction()
 
-init_thirdparty_subdirectories()
-init_thirdparty_properties()
+function(init_thirdparty_subdirectories)
+    option(ALSOFT_TESTS "" FALSE)
+    option(ALSOFT_UTILS "" FALSE)
+    option(ALSOFT_EXAMPLES "" FALSE)
+    set(LIBTYPE "STATIC")
+    add_subdirectory(ThirdParty/openal-soft-1.20.1)
+
+    option(GAINPUT_TESTS "" FALSE)
+    option(GAINPUT_BUILD_SHARED "" FALSE)
+    option(GAINPUT_SAMPLES "" FALSE)
+    add_subdirectory(ThirdParty/gainput-1.0.0)
+
+    add_subdirectory(ThirdParty/fmt-6.1.2)
+    add_subdirectory(ThirdParty/freetype-2.10.1)
+    add_subdirectory(ThirdParty/glew-2.1.0)
+    add_subdirectory(ThirdParty/icu4c-64_2/icu)
+    add_subdirectory(ThirdParty/zlib-1.2.11)
+endfunction()
+
+function(init_thirdparty_properties)
+    target_compile_definitions(freetype PUBLIC FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY)
+    target_compile_definitions(glew PUBLIC GLEW_STATIC)
+    target_compile_definitions(icu PUBLIC U_STATIC_IMPLEMENTATION U_COMMON_IMPLEMENTATION U_I18N_IMPLEMENTATION)
+    target_compile_definitions(OpenAL PUBLIC AL_LIBTYPE_STATIC)
+    target_compile_definitions(common PUBLIC AL_LIBTYPE_STATIC)
+
+    set_target_properties(common PROPERTIES FOLDER ThirdParty)
+    set_target_properties(ex-common PROPERTIES FOLDER ThirdParty)
+    set_target_properties(fmt PROPERTIES FOLDER ThirdParty)
+    set_target_properties(freetype PROPERTIES FOLDER ThirdParty)
+    set_target_properties(gainputstatic PROPERTIES FOLDER ThirdParty)
+    set_target_properties(glew PROPERTIES FOLDER ThirdParty)
+    set_target_properties(icu PROPERTIES FOLDER ThirdParty)
+    set_target_properties(native-tools PROPERTIES FOLDER ThirdParty)
+    set_target_properties(OpenAL PROPERTIES FOLDER ThirdParty)
+    set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
+endfunction()
 
 init_tgon_subdirectories()
 init_tgon_properties()
+init_thirdparty_subdirectories()
+init_thirdparty_properties()
