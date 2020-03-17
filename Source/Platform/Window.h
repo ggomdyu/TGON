@@ -65,7 +65,7 @@ public:
     I32Extent2D GetWindowSize() const;
     void GetClientSize(int32_t* width, int32_t* height) const;
     I32Extent2D GetClientSize() const;
-    int32_t GetTitle(char* destTitle, int32_t destTitleBufferLen) const;
+    int32_t GetTitle(char* destStr, int32_t destStrBufferLen) const;
     std::string GetTitle() const;
     float GetTransparency() const;
     void* GetNativeWindow() const;

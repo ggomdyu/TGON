@@ -8,15 +8,12 @@
 #   pragma comment(lib, "dwmapi.lib")
 #endif
 
-#include "Text/Encoding.h"
 #include "Diagnostics/Debug.h"
 
 #include "../Window.h"
 
 namespace tgon
 {
-
-thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
 
 void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
 {
@@ -26,7 +23,7 @@ void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindow
     // Create a normal window style.
     {
         *rawWindowStyle |= WS_VISIBLE;
-        
+
         if (windowStyle.resizeable)
         {
             *rawWindowStyle |= WS_THICKFRAME;
@@ -73,7 +70,11 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
         windowPos.y = (GetSystemMetrics(SM_CYSCREEN) - windowStyle.height) / 2;
     }
 
-    auto utf16Title = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(windowStyle.title.data()), static_cast<int32_t>(windowStyle.title.size() + 1));
+    wchar_t utf16Title[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, windowStyle.title.data(), -1, utf16Title, static_cast<int>(std::extent_v<decltype(utf16Title)>)) == 0)
+    {
+        return {};
+    }
 
     // Convert the client size to window size.
     RECT windowSize {0, 0, windowStyle.width, windowStyle.height};
@@ -82,7 +83,7 @@ HWND CreateNativeWindow(const WindowStyle& windowStyle, HINSTANCE instanceHandle
     HWND wndHandle = ::CreateWindowExW(
         rawExtendedWindowStyle,
         className,
-        reinterpret_cast<LPCWSTR>(utf16Title.data()),
+        utf16Title,
         rawWindowStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
         windowPos.x,
         windowPos.y,
@@ -302,21 +303,22 @@ void Window::GetWindowSize(int32_t* width, int32_t* height) const
     *height = rt.bottom;
 }
 
-int32_t Window::GetTitle(char* destTitle, int32_t destTitleBufferLen) const
+int32_t Window::GetTitle(char* destStr, int32_t destStrBufferLen) const
 {
-    auto utf16TitleLen = GetWindowTextW(m_wndHandle, g_tempUtf16Buffer.data(), 256);
+    wchar_t utf16Title[4096];
+    auto utf16TitleLen = GetWindowTextW(m_wndHandle, utf16Title, 256);
     if (utf16TitleLen == 0)
     {
-        return -1;
+        return {};
     }
 
-    auto utf8TitleBytes = Encoding::Convert(Encoding::Unicode(), Encoding::UTF8(), reinterpret_cast<const std::byte*>(g_tempUtf16Buffer.data()), static_cast<int32_t>(utf16TitleLen * 2), reinterpret_cast<std::byte*>(destTitle), destTitleBufferLen);
-    if (utf8TitleBytes == -1)
+    auto utf8TitleLen = WideCharToMultiByte(CP_UTF8, 0, utf16Title, -1, destStr, destStrBufferLen, nullptr, nullptr) - 1;
+    if (utf8TitleLen == -1)
     {
-        return -1;
+        return {};
     }
 
-    return utf8TitleBytes;
+    return utf8TitleLen;
 }
 
 bool Window::IsResizable() const
@@ -419,13 +421,13 @@ void Window::SetContentSize(int32_t width, int32_t height)
 
 void Window::SetTitle(const char* title)
 {
-    auto utf16TitleBytes = Encoding::Convert(Encoding::UTF8(), Encoding::Unicode(), reinterpret_cast<const std::byte*>(&title[0]), static_cast<int32_t>(strlen(title)), reinterpret_cast<std::byte*>(&g_tempUtf16Buffer[0]), static_cast<int32_t>(g_tempUtf16Buffer.size()));
-    if (utf16TitleBytes == -1)
+    wchar_t utf16Title[4096];
+    if (MultiByteToWideChar(CP_UTF8, 0, title, -1, utf16Title, std::extent_v<decltype(utf16Title)>) == 0)
     {
         return;
     }
 
-    SetWindowTextW(m_wndHandle, reinterpret_cast<LPCWSTR>(&g_tempUtf16Buffer[0]));
+    SetWindowTextW(m_wndHandle, utf16Title);
 }
 
 void Window::SetTopMost(bool setTopMost)

@@ -10,55 +10,29 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TY
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
 
-if (WIN32)
+if(WIN32)
     set(TGON_PLATFORM_NAME "WINDOWS")
     set(TGON_GRAPHICS_NAME "OPENGL")
     set(TGON_UNIX_BASE_OS FALSE)
-elseif (APPLE)
+elseif(APPLE)
     set(TGON_GRAPHICS_NAME "OPENGL")
     set(TGON_UNIX_BASE_OS TRUE)
     set(CMAKE_CXX_FLAGS "-x objective-c++")
-    if (IOS)
+    if(IOS)
         set(TGON_PLATFORM_NAME "IOS")
-    else ()
+    else()
         set(TGON_PLATFORM_NAME "MACOS")
-    endif ()
-else ()
-    message(FATAL_ERROR "Not supported platform!")
-endif ()
-
-function (init_global_properties)
-    if (WIN32)
-        add_definitions(-DUNICODE -D_UNICODE)
-    endif ()
-endfunction ()
-
-function (init_tgon)
-    add_subdirectory(${TGON_SOURCE_PATH})
-    init_tgon_properties()
-endfunction ()
-
-function (init_tgon_properties)
-    set_target_properties(TGON PROPERTIES
-        CXX_STANDARD 17
-        CXX_STANDARD_REQUIRED YES
-        CXX_EXTENSIONS NO
-        FOLDER TGON
-    )
-
-    target_compile_definitions(TGON PUBLIC 
-        TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 
-        TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1
-    )
-
-    if (MSVC)
-        target_compile_options(TGON PRIVATE
-            /YcPrecompiledHeader.h /Oi
-            $<$<CONFIG:Debug>:/ZI>
-            $<$<CONFIG:Release>:>
-        )
     endif()
-endfunction ()
+else()
+    message(FATAL_ERROR "Your platform is not supported.")
+endif()
 
-init_global_properties()
-init_tgon()
+if(WIN32)
+    add_definitions(-DUNICODE -D_UNICODE)
+endif()
+
+function(init_source_subdirectories)
+    add_subdirectory(${TGON_SOURCE_PATH})
+endfunction()
+
+init_source_subdirectories()
