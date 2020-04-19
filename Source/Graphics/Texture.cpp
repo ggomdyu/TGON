@@ -2,7 +2,7 @@
 
 #include "Texture.h"
 
-namespace tgon
+namespace tg
 {
 
 Texture::Texture(const Image& image, FilterMode filterMode, WrapMode wrapMode, bool isUseMipmap, bool isDynamicUsage) :
@@ -79,4 +79,4 @@ PixelFormat Texture::GetPixelFormat() const noexcept
     return m_pixelFormat;
 }
 
-} /* namespace tgon */
+}

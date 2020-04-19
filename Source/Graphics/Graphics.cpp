@@ -4,7 +4,7 @@
 
 #include "Graphics.h"
 
-namespace tgon
+namespace tg
 {
 
 Graphics::Graphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
@@ -42,4 +42,4 @@ std::shared_ptr<const Window> Graphics::GetDisplayWindow() const noexcept
     return m_displayWindow;
 }
 
-} /* namespace tgon */
+}

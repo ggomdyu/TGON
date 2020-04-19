@@ -1,13 +1,8 @@
-/**
- * @file    Module.h
- * @author  ggomdyu
- * @since   07/13/2016
- */
-
 #pragma once
+
 #include "Core/RuntimeObject.h"
 
-namespace tgon
+namespace tg
 {
 
 class Module :
@@ -27,4 +22,4 @@ public:
     virtual void Update() {}
 };
 
-} /* namespace tgon */
+}

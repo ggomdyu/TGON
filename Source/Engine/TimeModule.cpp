@@ -4,7 +4,7 @@
 
 #include "TimeModule.h"
 
-namespace tgon
+namespace tg
 {
 
 TimeModule::TimeModule() :
@@ -37,4 +37,4 @@ void TimeModule::Update()
     m_lastRecordedTickTime = currTime;
 }
 
-} /* namespace tgon */
+}

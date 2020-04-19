@@ -2,7 +2,7 @@
 
 #include "IndexBuffer.h"
 
-namespace tgon
+namespace tg
 {
 
 PlatformIndexBuffer& IndexBuffer::GetPlatformDependency() noexcept
@@ -34,4 +34,4 @@ IndexBuffer& IndexBuffer::operator=(IndexBuffer&& rhs)
     return *this;
 }
 
-} /* namespace tgon */
+}

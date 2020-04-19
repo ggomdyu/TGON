@@ -1,16 +1,11 @@
-/**
- * @file    OpenGLShaderProgram.h
- * @author  ggomdyu
- * @since   01/06/2018
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 class OpenGLShaderProgram :
@@ -41,5 +36,5 @@ protected:
     
 using PlatformShaderProgram = OpenGLShaderProgram;
     
-} /* namespace tgon */
+}
 #endif

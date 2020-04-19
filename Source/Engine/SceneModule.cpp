@@ -2,20 +2,37 @@
 
 #include "SceneModule.h"
 
-namespace tgon
+namespace tg
 {
 
-void SceneModule::Update()
+void Scene::Update()
 {
-    if (m_currScene != nullptr)
+    for (auto& gameObject : m_gameObjects)
     {
-        m_currScene->Update();
+        if (gameObject->IsActive())
+        {
+            gameObject->Update();
+        }
     }
 }
 
-void SceneModule::ChangeScene(const std::shared_ptr<Scene>& scene)
+void SceneModule::Update()
 {
-    m_currScene = scene;
+    if (m_activeScene != nullptr)
+    {
+        m_activeScene->Update();
+    }
 }
 
-} /* namespace tgon */
+void SceneModule::NewScene(NewSceneSetup newSceneSetup)
+{
+}
+
+void SceneModule::OpenScene(const std::string& path, OpenSceneMode openSceneMode)
+{
+}
+
+std::shared_ptr<GameObject> SceneModule::Instantiate()
+{
+}
+}

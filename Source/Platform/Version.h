@@ -1,14 +1,9 @@
-/**
- * @file    Version.h
- * @author  ggomdyu
- * @since   11/17/2019
- */
-
 #pragma once
+
 #include <optional>
 #include <string>
 
-namespace tgon
+namespace tg
 {
 
 struct Version final
@@ -283,4 +278,4 @@ inline void Version::AppendPositiveNumber(int32_t num, std::string* str)
     } while (num > 0);
 }
 
-} /* namespace tgon */
+}

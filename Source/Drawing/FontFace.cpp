@@ -2,7 +2,7 @@
 
 #include "FontFace.h"
 
-namespace tgon
+namespace tg
 {
 
 FontFace::FontFace(FT_Face fontFace, int32_t fontSize) noexcept :
@@ -106,4 +106,4 @@ I32Vector2 FontFace::GetKerning(char32_t lhs, char32_t rhs) const
     return I32Vector2(static_cast<int32_t>(kerning.x >> 6), static_cast<int32_t>(kerning.y >> 6));
 }
 
-} /* namespace tgon */
+}

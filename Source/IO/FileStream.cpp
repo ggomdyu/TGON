@@ -4,7 +4,7 @@
 
 #include "FileStream.h"
 
-namespace tgon
+namespace tg
 {
 
 FileStream::FileStream(const char* path, FileMode mode) :
@@ -332,4 +332,4 @@ void FileStream::Flush(bool flushToDisk)
     }
 }
 
-} /* namespace tgon */
+}

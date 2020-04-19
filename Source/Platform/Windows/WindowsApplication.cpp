@@ -2,7 +2,7 @@
 
 #include "../Application.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -17,7 +17,7 @@ constexpr UINT ConvertMessageBoxIconToNative(MessageBoxIcon messageBoxIcon) noex
     return nativeMessageBoxIcons[static_cast<int32_t>(messageBoxIcon)];
 }
 
-} /* namespace */
+}
 
 WindowsApplication::WindowsApplication()
 {
@@ -100,4 +100,4 @@ void Application::ShowMessageBox(const char* title, const char* message, Message
     ::MessageBoxW(nullptr, &utf16Message[0], &utf16Title[0], ConvertMessageBoxIconToNative(messageBoxIcon) | MB_OK);
 }
 
-} /* namespace tgon */
+}

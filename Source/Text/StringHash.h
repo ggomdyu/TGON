@@ -1,10 +1,5 @@
-/**
- * @file    StringHash.h
- * @author  ggomdyu
- * @date    09/25/2018
- */
-
 #pragma once
+
 #include <string>
 
 #include "Core/TypeTraits.h"
@@ -12,7 +7,7 @@
 #include "Hash.h"
 #include "FixedString.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename>
@@ -27,7 +22,7 @@ struct IsBasicStringHash : std::false_type {};
 template <typename _StringType>
 struct IsBasicStringHash<BasicStringHash<_StringType>> : std::true_type {};
 
-} /* namespace detail */
+}
 
 template <typename _Type>
 constexpr bool IsBasicStringHash = detail::IsBasicStringHash<_Type>::value;
@@ -433,25 +428,25 @@ using U32FixedString2048Hash = BasicStringHash<U32FixedString2048>;
 using U32FixedString4096Hash = BasicStringHash<U32FixedString4096>;
 using U32FixedString8192Hash = BasicStringHash<U32FixedString8192>;
 
-} /* namespace tgon */
+}
 
 namespace std
 {
 
 template <typename _StringType>
-struct hash<tgon::BasicStringHash<_StringType>>
+struct hash<tg::BasicStringHash<_StringType>>
 {
 /* @section Method */
 public:
-    auto operator()(const tgon::BasicStringHash<_StringType>& rhs) const noexcept
+    auto operator()(const tg::BasicStringHash<_StringType>& rhs) const noexcept
     {
         return rhs.GetHashCode();
     }
     
     auto operator()(const char* rhs) const noexcept
     {
-        return tgon::X65599Hash(rhs);
+        return tg::X65599Hash(rhs);
     }
 };
 
-} /* namespace std */
+}

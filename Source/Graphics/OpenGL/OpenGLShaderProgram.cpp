@@ -7,7 +7,7 @@
 
 #include "../ShaderProgram.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -75,7 +75,7 @@ GLuint CompileShader(GLenum shaderType, const char* shaderCode)
     return shaderId;
 }
 
-} /* namespace */
+}
 
 OpenGLShaderProgram::OpenGLShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
     m_programId([&]()
@@ -215,5 +215,5 @@ void ShaderProgram::SetParameterSampler(int32_t location, uint32_t textureUnit, 
     TGON_GL_ERROR_CHECK(glProgramUniform1i(m_programId, location, texture));
 }
 
-} /* namespace tgon */
+}
 #endif

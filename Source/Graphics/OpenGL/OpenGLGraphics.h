@@ -1,10 +1,5 @@
-/**
- * @file    OpenGLGraphics.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
@@ -12,7 +7,7 @@
 
 #include "OpenGLContext.h"
 
-namespace tgon
+namespace tg
 {
     
 class OpenGLGraphics :
@@ -42,5 +37,5 @@ protected:
 
 using PlatformGraphics = OpenGLGraphics;
 
-} /* namespace tgon */
+}
 #endif

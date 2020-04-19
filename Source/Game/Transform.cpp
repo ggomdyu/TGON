@@ -5,7 +5,7 @@
 
 #include "Transform.h"
 
-namespace tgon
+namespace tg
 {
 
 void Transform::SetLocalPosition(const Vector3& localPosition) noexcept
@@ -87,4 +87,4 @@ bool Transform::IsDirty() const noexcept
     return m_isDirty;
 }
 
-} /* namespace tgon */
+}

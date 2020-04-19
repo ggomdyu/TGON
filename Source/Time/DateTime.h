@@ -1,12 +1,5 @@
-/**
- * @file    DateTime.h
- * @author  ggomdyu
- * @since   04/23/2017
- * @seealso https://referencesource.microsoft.com/#mscorlib/system/datetime.cs
-            https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
- */
-
 #pragma once
+
 #include <cstdint>
 #include <chrono>
 #include <ctime>
@@ -14,7 +7,7 @@
 
 #include "TimeSpan.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class DateTimeKind
@@ -561,4 +554,4 @@ inline int64_t DateTime::ToFileTimeUtc() const
 }
 
 
-} /* namespace tgon */
+}

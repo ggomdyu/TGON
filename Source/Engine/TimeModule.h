@@ -1,13 +1,8 @@
-/**
- * @file    TimeModule.h
- * @author  ggomdyu
- * @since   07/24/2016
- */
-
 #pragma once
+
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class TimeModule :
@@ -34,4 +29,4 @@ private:
     float m_tickTime;
 };
 
-} /* namespace tgon */
+}

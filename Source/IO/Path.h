@@ -1,10 +1,5 @@
-/**
- * @file    Path.h
- * @author  ggomdyu
- * @since   04/07/2017
- */
-
 #pragma once
+
 #include <cstdint>
 #include <string>
 #include <optional>
@@ -16,7 +11,7 @@
 #   include "Unix/UnixPath.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 class Path :
@@ -186,7 +181,7 @@ constexpr bool Path::IsValidDriveChar(char ch) noexcept
     return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
-} /* namespace tgon */
+}
 
 #if TGON_PLATFORM_WINDOWS
 #   include "Windows/WindowsPath.inl"

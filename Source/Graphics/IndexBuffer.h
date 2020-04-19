@@ -1,10 +1,5 @@
-/**
- * @file    IndexBuffer.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #include <initializer_list>
 #include <gsl/span>
 
@@ -12,7 +7,7 @@
 #   include "OpenGL/OpenGLIndexBuffer.h"
 #endif
 
-namespace tgon
+namespace tg
 {
     
 class IndexBuffer :
@@ -33,8 +28,8 @@ public:
 
 /**@section Method */
 public:
-    PlatformIndexBuffer& GetPlatformDependency() noexcept;
-    const PlatformIndexBuffer& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformIndexBuffer& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformIndexBuffer& GetPlatformDependency() const noexcept;
     template <typename _Type>
     void SetData(const gsl::span<_Type>& data, bool isDynamicUsage);
     void SetData(const void* data, int32_t dataBytes, bool isDynamicUsage);
@@ -51,4 +46,4 @@ inline void IndexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUsa
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }
 
-} /* namespace tgon */
+}

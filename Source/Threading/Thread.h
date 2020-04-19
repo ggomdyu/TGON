@@ -1,15 +1,10 @@
-/**
- * @file    Thread.h
- * @author  ggomdyu
- * @since   05/26/2019
- */
-
 #pragma once
+
 #include <thread>
 
 #include "Platform/Config.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class ThreadPriority
@@ -45,4 +40,4 @@ public:
     void* GetNativeHandle();
 };
 
-} /* namespace tgon */
+}

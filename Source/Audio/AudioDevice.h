@@ -1,10 +1,5 @@
-/**
- * @file    AudioDevice.h
- * @author  ggomdyu
- * @since   08/06/2018
- */
-
 #pragma once
+
 #include <optional>
 
 #include "Core/RuntimeObject.h"
@@ -12,7 +7,7 @@
 struct ALCdevice;
 struct ALCcontext;
 
-namespace tgon
+namespace tg
 {
 
 class AudioDevice final :
@@ -40,4 +35,4 @@ private:
     std::shared_ptr<ALCcontext> m_context;
 };
 
-} /* namespace tgon */
+}

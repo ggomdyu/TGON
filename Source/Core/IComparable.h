@@ -1,14 +1,8 @@
-/**
- * @file    IComparable.h
- * @author  ggomdyu
- * @since   04/07/2018
- * @brief   Interface class to compare two instances.
- */
-
 #pragma once
+
 #include <cstdint>
 
-namespace tgon
+namespace tg
 {
 
 class IComparable
@@ -43,4 +37,4 @@ inline bool IComparable::Equals(const IComparable* rhs) const
     return this->CompareTo(rhs) == 0;
 }
 
-} /* namespace tgon */
+}

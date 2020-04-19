@@ -1,15 +1,10 @@
-/**
- * @file    Gamepad.h
- * @author  ggomdyu
- * @since   05/15/2018
- */
-
 #pragma once
+
 #include <gainput/gainput.h>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 class Gamepad final :
@@ -37,4 +32,4 @@ private:
     gainput::InputDevicePad* m_nativeGamepad;
 };
     
-} /* namespace tgon */
+}

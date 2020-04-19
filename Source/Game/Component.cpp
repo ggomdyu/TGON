@@ -4,7 +4,7 @@
 
 #include "Component.h"
 
-namespace tgon
+namespace tg
 {
 
 Component::Component(const std::shared_ptr<GameObject>& gameObject) noexcept :
@@ -37,4 +37,4 @@ bool Component::IsActive() const noexcept
     return m_isActive;
 }
 
-} /* namespace tgon */
+}

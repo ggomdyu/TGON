@@ -1,18 +1,12 @@
-/**
- * @file    MacOSWindow.h
- * @author  ggomdyu
- * @since   07/16/2017
- * @brief   The platform specific window class implementation.
- */
-
 #pragma once
+
 #include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
 @class NSWindow;
 @class WindowDelegate;
 
-namespace tgon
+namespace tg
 {
 
 class MacOSWindow :
@@ -35,4 +29,4 @@ protected:
     
 using PlatformWindow = MacOSWindow;
 
-} /* namespace tgon */
+}

@@ -1,15 +1,10 @@
-/**
- * @file    Timer.h
- * @author  ggomdyu
- * @since   09/10/2018
- */
-
 #pragma once
+
 #include <cstdint>
 
 #include "Core/DelegateChain.h"
 
-namespace tgon
+namespace tg
 {
     
 class Timer final
@@ -61,4 +56,4 @@ private:
     bool m_isEnabled;
 };
 
-} /* namespace tgon */
+}

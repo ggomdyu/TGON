@@ -1,10 +1,5 @@
-/**
- * @file    Texture.h
- * @author  ggomdyu
- * @since   02/20/2018
- */
-
 #pragma once
+
 #include "Math/Vector2.h"
 #include "Drawing/Image.h"
 
@@ -12,7 +7,7 @@
 #   include "OpenGL/OpenGLTexture.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 enum class FilterMode
@@ -44,8 +39,8 @@ public:
   
 /**@section Method */
 public:
-    PlatformTexture& GetPlatformDependency() noexcept;
-    const PlatformTexture& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformTexture& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformTexture& GetPlatformDependency() const noexcept;
     void Use();
     void Unuse();
     void SetData(const std::byte* imageData, const I32Extent2D& size, PixelFormat pixelFormat);
@@ -70,4 +65,4 @@ protected:
     inline static Texture* g_lastUsedTexture;
 };
     
-} /* namespace tgon */
+}

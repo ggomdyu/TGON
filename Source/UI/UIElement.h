@@ -1,17 +1,12 @@
-/**
- * @file    UIElement.h
- * @author  ggomdyu
- * @since   11/20/2019
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Core/RuntimeObject.h"
 
 #include "UIBatch.h"
 
-namespace tgon
+namespace tg
 {
 
 class UIElement :
@@ -42,4 +37,4 @@ protected:
 
 };
 
-} /* namespace tgon */
+}

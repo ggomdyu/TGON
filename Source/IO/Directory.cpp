@@ -7,7 +7,7 @@
 #include "Directory.h"
 #include "DirectoryInfo.h"
 
-namespace tgon
+namespace tg
 {
 
 DirectoryInfo Directory::CreateDirectory(const std::string_view& path)
@@ -169,4 +169,4 @@ std::vector<std::string> Directory::GetFileSystemEntries(const char* path, const
     return ret;
 }
 
-} /* namespace tgon */
+}

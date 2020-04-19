@@ -2,7 +2,7 @@
 
 #include "InputModule.h"
 
-namespace tgon
+namespace tg
 {
 
 InputModule::InputModule(const InputMode& inputMode) :
@@ -47,4 +47,4 @@ void InputModule::Update()
     }
 }
 
-} /* namespace tgon */
+}

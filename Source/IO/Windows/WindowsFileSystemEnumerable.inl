@@ -1,10 +1,5 @@
-/**
- * @file    WindowsFileSystemEnumerable.inl
- * @author  ggomdyu
- * @since   11/09/2019
- */
-
 #pragma once
+
 #include <deque>
 #include <array>
 
@@ -15,7 +10,7 @@
 #include "../Path.h"
 #include "../FileSystemEnumerable.h"
 
-namespace tgon
+namespace tg
 {
 
 thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
@@ -152,7 +147,7 @@ void InternalEnumerateTopDirectoryOnly(const char* path, const char* searchPatte
     }
 }
 
-} /* namespace detail */
+}
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
@@ -193,4 +188,4 @@ inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, c
     }
 }
 
-} /* namespace tgon */
+}

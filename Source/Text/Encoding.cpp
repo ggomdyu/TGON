@@ -11,7 +11,7 @@
 extern const UConverterSharedData* getAlgorithmicTypeFromName(const char* realName);
 extern const UConverterSharedData* getAlgorithmicTypeFromCodePage(int32_t codePage);
 
-namespace tgon
+namespace tg
 {
 
 std::unordered_map<int32_t, Encoding> Encoding::m_encodingTable;
@@ -293,4 +293,4 @@ int32_t Encoding::GetMaxCharByte() const noexcept
     return m_converter->sharedData->staticData->maxBytesPerChar;
 }
 
-} /* namespace tgon */
+}

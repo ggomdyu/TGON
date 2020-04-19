@@ -1,11 +1,5 @@
-/**
- * @file    UUID.h
- * @author  ggomdyu
- * @date    10/28/2017
- * @see     https://en.wikipedia.org/wiki/Universally_unique_identifier
- */
-
 #pragma once
+
 #include <cstring>
 #ifdef _MSC_VER
 #   include <rpc.h>
@@ -19,7 +13,7 @@
 #   pragma comment(lib, "Rpcrt4.lib")
 #endif
 
-namespace tgon
+namespace tg
 {
 
 struct UUID :
@@ -103,4 +97,4 @@ inline const char UUID::operator[](int32_t index) const
     return Super::operator[](index);
 }
 
-} /* namespace tgon */
+}

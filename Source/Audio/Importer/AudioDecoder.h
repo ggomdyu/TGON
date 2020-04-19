@@ -1,13 +1,8 @@
-/**
- * @file    AudioDecoder.h
- * @author  ggomdyu
- * @since   05/02/2018
- */
-
 #pragma once
+
 #include "Core/RuntimeObject.h"
 
-namespace tgon
+namespace tg
 {
 
 class AudioDecoder :
@@ -78,4 +73,4 @@ inline int32_t AudioDecoder::GetSamplingRate() const noexcept
     return m_samplingRate;
 }
 
-} /* namespace tgon */
+}

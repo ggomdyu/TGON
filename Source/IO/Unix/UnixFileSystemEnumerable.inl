@@ -1,10 +1,5 @@
-/**
- * @file    UnixFileSystemEnumerable.inl
- * @author  ggomdyu
- * @since   11/06/2019
- */
-
 #pragma once
+
 #include <unistd.h>
 #include <dirent.h>
 #include <fnmatch.h>
@@ -16,7 +11,7 @@
 #include "../Path.h"
 #include "../FileSystemEnumerable.h"
 
-namespace tgon
+namespace tg
 {
 namespace detail
 {
@@ -121,7 +116,7 @@ inline void InternalEnumerateTopDirectoryOnly(const char* path, const char* sear
     }
 }
 
-} /* namespace detail */
+}
 
 template <typename _HandlerType>
 inline void FileSystemEnumerable::EnumerateDirectories(const char* path, const char* searchPattern, SearchOption searchOption, const _HandlerType& handler)
@@ -162,4 +157,4 @@ inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, c
     }
 }
 
-} /* namespace tgon */
+}

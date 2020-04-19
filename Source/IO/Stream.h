@@ -1,15 +1,10 @@
-/**
- * @file    Stream.h
- * @author  ggomdyu
- * @since   08/06/2019
- */
-
 #pragma once
+
 #include <gsl/span>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class SeekOrigin
@@ -55,4 +50,4 @@ inline bool Stream::Write(const gsl::span<const std::byte>& buffer)
     return this->Write(&buffer[0], static_cast<int32_t>(buffer.size()));
 }
 
-} /* namespace tgon */
+}

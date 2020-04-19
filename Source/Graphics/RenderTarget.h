@@ -1,17 +1,12 @@
-/**
- * @file    RenderTarget.h
- * @author  ggomdyu
- * @since   01/06/2018
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #   include "OpenGL/OpenGLRenderTarget.h"
 #endif
 
 #include "Texture.h"
 
-namespace tgon
+namespace tg
 {
 
 class RenderTarget final :
@@ -32,4 +27,4 @@ private:
     std::shared_ptr<Texture> m_texture;
 };
 
-} /* namespace tgon */
+}

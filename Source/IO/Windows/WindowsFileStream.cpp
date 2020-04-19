@@ -7,7 +7,7 @@
 
 #include "../FileStream.h"
 
-namespace tgon
+namespace tg
 {
 
 thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
@@ -42,7 +42,7 @@ HANDLE CreateFileOpenHandle(const char* path, FileMode mode, FileAccess access, 
     return CreateFileW(reinterpret_cast<LPCWSTR>(g_tempUtf16Buffer.data()), desiredAccess, static_cast<DWORD>(share), useSecurityAttributes ? &securityAttributes : nullptr, static_cast<DWORD>(mode), flagsAndAttributes, nullptr);
 }
 
-} /* namespace */
+}
 
 FileStream::FileStream(const char* path, FileMode mode, FileAccess access, FileShare share, int32_t bufferSize, FileOptions options) :
     m_nativeHandle(CreateFileOpenHandle(path, mode, access, share, options)),
@@ -194,4 +194,4 @@ void FileStream::InternalFlush()
     FlushFileBuffers(m_nativeHandle);
 }
 
-} /* namespace tgon */
+}

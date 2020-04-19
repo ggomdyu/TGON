@@ -1,10 +1,5 @@
-/**
- * @file    Directory.h
- * @author  ggomdyu
- * @since   09/28/2019
- */
-
 #pragma once
+
 #include <string>
 #include <optional>
 #include <vector>
@@ -14,7 +9,7 @@
 #include "File.h"
 #include "FileSystemEnumerable.h"
 
-namespace tgon
+namespace tg
 {
 
 class Directory final
@@ -135,4 +130,4 @@ inline void Directory::EnumerateFileSystemEntries(const char* path, const char* 
     return FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, searchOption, handler);
 }
 
-} /* namespace tgon */
+}

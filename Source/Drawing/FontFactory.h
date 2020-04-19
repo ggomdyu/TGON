@@ -1,15 +1,10 @@
-/**
- * @file    FontFactory.h
- * @author  ggomdyu
- * @since   06/01/2019
- */
-
 #pragma once
+
 #include <optional>
 
 #include "Font.h"
 
-namespace tgon
+namespace tg
 {
 
 class FontFactory final :
@@ -40,4 +35,4 @@ inline std::shared_ptr<Font> FontFactory::CreateFont(_ContainerType&& fileData) 
     return std::make_shared<Font>(m_library, std::forward<_ContainerType>(fileData));
 }
 
-} /* namespace tgon */
+}

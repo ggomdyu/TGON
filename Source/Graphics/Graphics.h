@@ -1,10 +1,5 @@
-/**
- * @file    Graphics.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #include "Math/Rect.h"
 #include "Math/Color.h"
 
@@ -12,7 +7,7 @@
 #   include "OpenGL/OpenGLGraphics.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 enum class PrimitiveType
@@ -63,8 +58,8 @@ public:
 
 /**@section Method */
 public:
-    PlatformGraphics& GetPlatformDependency() noexcept;
-    const PlatformGraphics& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformGraphics& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformGraphics& GetPlatformDependency() const noexcept;
     void SetScissorRect(const FRect& scissorRect);
     void SetClearColor(const Color4f& color);
     void SetFillMode(FillMode fillMode);
@@ -92,4 +87,4 @@ private:
     std::shared_ptr<Window> m_displayWindow;
 };
 
-} /* namespace tgon */
+}

@@ -2,7 +2,7 @@
 
 #include "RendererComponent.h"
 
-namespace tgon
+namespace tg
 {
     
 RendererComponent::RendererComponent(const std::shared_ptr<Material>& material) noexcept :
@@ -25,4 +25,4 @@ std::shared_ptr<const Material> RendererComponent::GetMaterial() const noexcept
     return m_material;
 }
 
-} /* namespace tgon */
+}

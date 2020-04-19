@@ -12,7 +12,7 @@
 
 #include "../Window.h"
 
-namespace tgon
+namespace tg
 {
 
 void ConvertWindowStyleToNative(const WindowStyle& windowStyle, DWORD* rawWindowStyle, DWORD* rawExtendedWindowStyle)
@@ -468,4 +468,4 @@ float Window::GetTransparency() const
 //#endif
 //}
 
-} /* namespace tgon */
+}

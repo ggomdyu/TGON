@@ -8,7 +8,7 @@
 
 #include "../File.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -36,7 +36,7 @@ std::optional<struct _stat> CreateStat(const char* path, const gsl::span<wchar_t
     return s;
 }
 
-} /* namespace */
+}
 
 bool File::Copy(const char* srcPath, const char* destPath, bool overwrite)
 {
@@ -235,4 +235,4 @@ bool File::Encrypt(const char* path)
     return EncryptFileW(utf16Path) == TRUE;
 }
 
-} /* namespace tgon */
+}

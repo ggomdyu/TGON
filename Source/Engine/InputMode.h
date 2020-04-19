@@ -1,12 +1,6 @@
-/**
- * @file    InputMode.h
- * @author  ggomdyu
- * @since   01/04/2020
- */
-
 #pragma once
 
-namespace tgon
+namespace tg
 {
 
 struct InputMode final
@@ -16,4 +10,4 @@ struct InputMode final
     bool isUseGamepad = true;
 };
 
-} /* namespace tgon */
+}

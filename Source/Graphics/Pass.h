@@ -1,13 +1,8 @@
-/**
- * @file    Pass.h
- * @author  ggomdyu
- * @since   12/13/2019
- */
-
 #pragma once
+
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 class Pass :
@@ -17,4 +12,4 @@ class Pass :
 public:
 };
 
-} /* namespace tgon */
+}

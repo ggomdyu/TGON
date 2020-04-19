@@ -1,13 +1,9 @@
-/**
- * @file    ISerializable.h
- * @author  ggomdyu
- * @since   10/28/2017
- */
-
 #pragma once
-#include <map>
 
-namespace tgon
+#include <map>
+#include <string>
+
+namespace tg
 {
 
 class SerializationInfo
@@ -35,4 +31,4 @@ public:
 public:
 };
 
-} /* namespace tgon */
+}

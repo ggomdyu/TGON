@@ -1,15 +1,10 @@
-/**
- * @file    RectTransform.h
- * @author  ggomdyu
- * @since   10/03/2018
- */
-
 #pragma once
+
 #include "Math/Vector2.h"
 #include "Math/Extent.h"
 #include "Game/Transform.h"
 
-namespace tgon
+namespace tg
 {
 
 class RectTransform :
@@ -37,4 +32,4 @@ protected:
     FExtent2D m_size;
 };
 
-} /* namespace tgon */
+}

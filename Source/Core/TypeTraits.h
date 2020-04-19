@@ -1,15 +1,9 @@
-/**
- * @file    TypeTraits.h
- * @author  ggomdyu
- * @since   05/24/2016
- * @brief   The set of type utilities.
- */
-
 #pragma once
+
 #include <type_traits>
 #include <string>
 
-namespace tgon
+namespace tg
 {
 namespace detail
 {
@@ -38,7 +32,7 @@ struct RemoveAllPointers<_Type*>
     using Type = typename RemoveAllPointers<_Type>::Type;
 };
 
-} /* namespace detail */
+}
 
 template <typename>
 struct FunctionTraits;
@@ -127,4 +121,4 @@ constexpr bool IsCharPointer = IsChar<Pure<_Type>> && std::is_pointer_v<_Type>;
 template <typename _Type>
 constexpr bool IsCharReference = IsChar<Pure<_Type>> && std::is_reference_v<_Type>;
 
-} /* namespace tgon */
+}

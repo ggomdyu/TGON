@@ -7,7 +7,7 @@
 
 #include "../VertexBuffer.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -36,7 +36,7 @@ GLuint CreateVertexBufferHandle()
     return vertexBufferHandle;
 }
 
-} /* namespace */
+}
 
 OpenGLVertexBuffer::OpenGLVertexBuffer(GLuint vertexBufferHandle) noexcept :
     m_vertexBufferHandle(vertexBufferHandle)
@@ -51,9 +51,7 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(OpenGLVertexBuffer&& rhs) noexcept :
 
 OpenGLVertexBuffer& OpenGLVertexBuffer::operator=(OpenGLVertexBuffer&& rhs) noexcept
 {
-    m_vertexBufferHandle = rhs.m_vertexBufferHandle;
-
-    rhs.m_vertexBufferHandle = 0;
+    std::swap(m_vertexBufferHandle, rhs.m_vertexBufferHandle);
 
     return *this;
 }
@@ -122,5 +120,5 @@ void VertexBuffer::Destroy()
     }
 }
 
-} /* namespace tgon */
+}
 #endif

@@ -1,16 +1,11 @@
-/**
- * @file    OpenGLIndexBuffer.h
- * @author  ggomdyu
- * @since   01/05/2018
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 class OpenGLIndexBuffer :
@@ -36,5 +31,5 @@ protected:
     
 using PlatformIndexBuffer = OpenGLIndexBuffer;
 
-} /* namespace tgon */
+}
 #endif

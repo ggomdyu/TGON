@@ -1,15 +1,10 @@
-/**
- * @file    RendererComponent.h
- * @author  ggomdyu
- * @since   11/02/2018
- */
-
 #pragma once
+
 #include "Graphics/Material.h"
 
 #include "Component.h"
 
-namespace tgon
+namespace tg
 {
 
 class RendererComponent :
@@ -33,4 +28,4 @@ protected:
     std::shared_ptr<Material> m_material;
 };
 
-} /* namespace tgon */
+}

@@ -1,10 +1,5 @@
-/**
- * @file    UIText.h
- * @author  ggomdyu
- * @since   11/11/2019
- */
-
 #pragma once
+
 #include <string>
 
 #include "Math/Color.h"
@@ -13,7 +8,7 @@
 
 #include "UIElement.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class TextAlignment
@@ -110,4 +105,4 @@ public:
     std::unique_ptr<class TextBlock> m_textBlock;
 };
 
-} /* namespace tgon */
+}

@@ -13,11 +13,11 @@
 #include "UIRendererModule.h"
 #include "SceneModule.h"
 
-namespace tgon
+namespace tg
 {
 
-Engine::Engine(const EngineConfig& enfingConfig) noexcept :
-    m_engineConfig(enfingConfig)
+Engine::Engine(const EngineConfig& engineConfig) noexcept :
+    m_engineConfig(engineConfig)
 {
 }
 
@@ -82,4 +82,4 @@ const EngineConfig& Engine::GetEngineConfig() const noexcept
     return m_engineConfig;
 }
 
-} /* namespace tgon */
+}

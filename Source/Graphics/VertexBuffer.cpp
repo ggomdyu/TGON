@@ -2,7 +2,7 @@
 
 #include "VertexBuffer.h"
 
-namespace tgon
+namespace tg
 {
 
 PlatformVertexBuffer& VertexBuffer::GetPlatformDependency() noexcept
@@ -26,10 +26,8 @@ VertexBuffer::~VertexBuffer()
     this->Destroy();
 }
 
-VertexBuffer& VertexBuffer::operator=(VertexBuffer&& rhs)
+VertexBuffer& VertexBuffer::operator=(VertexBuffer&& rhs) noexcept
 {
-    this->Destroy();
-
     PlatformVertexBuffer::operator=(std::move(rhs));
 
     m_vertexBufferLayoutDescs = std::move(rhs.m_vertexBufferLayoutDescs);
@@ -37,4 +35,4 @@ VertexBuffer& VertexBuffer::operator=(VertexBuffer&& rhs)
     return *this;
 }
 
-} /* namespace tgon */
+}

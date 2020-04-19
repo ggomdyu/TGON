@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    decltype(auto) application = tgon::Application::GetInstance();
+    decltype(auto) application = tg::Application::GetInstance();
     application.Initialize();
     application.MessageLoop();
     application.Destroy();

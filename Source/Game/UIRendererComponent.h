@@ -1,15 +1,10 @@
-/**
- * @file    UIRendererComponent.h
- * @author  ggomdyu
- * @since   01/05/2020
- */
-
 #pragma once
+
 #include "Engine/UIRendererModule.h"
 
 #include "RendererComponent.h"
 
-namespace tgon
+namespace tg
 {
 
 class UIRendererComponent :
@@ -38,4 +33,4 @@ protected:
     std::shared_ptr<UIRendererModule> m_uiRendererModule;
 };
 
-} /* namespace tgon */
+}

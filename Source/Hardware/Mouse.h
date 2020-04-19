@@ -1,16 +1,11 @@
-/**
- * @file    Mouse.h
- * @author  ggomdyu
- * @since   05/15/2018
- */
-
 #pragma once
+
 #include <gainput/gainput.h>
 
 #include "Math/Vector2.h"
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class MouseCode
@@ -69,4 +64,4 @@ private:
     gainput::InputDeviceMouse* m_nativeMouse;
 };
     
-} /* namespace tgon */
+}

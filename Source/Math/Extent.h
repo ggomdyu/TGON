@@ -1,10 +1,5 @@
-/**
- * @file    Extent.h
- * @author  ggomdyu
- * @since   04/02/2017
- */
-
 #pragma once
+
 #include <type_traits>
 #include <cstdint>
 #include <cstdio>
@@ -17,7 +12,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 template <typename _ValueType>
@@ -193,6 +188,6 @@ inline int32_t BasicExtent2D<double>::ToString(char* destStr, std::size_t destSt
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%lf %lf", width, height);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

@@ -1,13 +1,8 @@
-/**
- * @file    VideoMode.h
- * @author  ggomdyu
- * @since   10/03/2019
- */
-
 #pragma once
+
 #include "Math/Color.h"
 
-namespace tgon
+namespace tg
 {
 
 struct VideoMode final
@@ -23,4 +18,4 @@ struct VideoMode final
     uint16_t stencilBits = 8;
 };
 
-} /* namespace tgon */
+}

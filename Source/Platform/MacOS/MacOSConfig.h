@@ -1,10 +1,3 @@
-/**
- * @file    MacOSConfig.h
- * @author  ggomdyu
- * @since   07/16/2017
- * @brief   The set of platform specific configurations.
- */
-
 #pragma once
 
 #define TGON_PLATFORM_NAME MacOS

@@ -1,10 +1,5 @@
-/**
- * @file    Rect.h
- * @author  ggomdyu
- * @since   04/02/2017
- */
-
 #pragma once
+
 #include <type_traits>
 #include <cstdint>
 #include <cstdio>
@@ -17,7 +12,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 template <typename _ValueType>
@@ -227,6 +222,6 @@ inline int32_t BasicRect<double>::ToString(char* destStr, std::size_t destStrBuf
     return TGON_SPRINTF(destStr, sizeof(destStr[0]) * destStrBufferLen, "%lf %lf %lf %lf", x, y, width, height);
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

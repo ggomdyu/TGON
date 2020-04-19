@@ -1,10 +1,3 @@
-/**
- * @file    Prefix.h
- * @author  ggomdyu
- * @since   03/14/2016
- * @brief   Set of the compiler-agnostic prefix.
- */
-
 #pragma once
 
 #ifndef TGON_THREAD_LOCAL

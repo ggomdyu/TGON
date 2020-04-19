@@ -4,7 +4,7 @@
 
 #include "TaskModule.h"
 
-namespace tgon
+namespace tg
 {
 
 TaskModule::TaskModule(int32_t threadPoolCount) :
@@ -37,4 +37,4 @@ void TaskModule::Update()
     m_mainDispatchQueue.Dispatch();
 }
 
-} /* namespace tgon */
+}

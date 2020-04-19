@@ -3,7 +3,7 @@
 #include "TimeZoneInfo.h"
 #include "DateTime.h"
 
-namespace tgon
+namespace tg
 {
 
 DateTime DateTime::ToLocalTime() const
@@ -16,4 +16,4 @@ DateTime DateTime::ToUniversalTime() const
     return TimeZoneInfo::ConvertTimeToUtc(*this);
 }
 
-} /* namespace tgon */
+}

@@ -1,15 +1,10 @@
-/**
- * @file    RTTI.h
- * @author  ggomdyu
- * @since   10/29/2017
- */
-
 #pragma once
+
 #include <typeinfo>
 
 #include "TypeTraits.h"
 
-namespace tgon
+namespace tg
 {
 
 class RTTI final
@@ -111,22 +106,22 @@ inline bool RTTI::operator<=(const RTTI& rhs) const noexcept
     return !(*this > rhs);
 }
 
-} /* namespace tgon */
+}
 
 namespace std
 {
 
 template <>
-struct hash<tgon::RTTI>
+struct hash<tg::RTTI>
 {
 /* @section Method */
 public:
-    size_t operator()(const tgon::RTTI& rhs) const noexcept;
+    size_t operator()(const tg::RTTI& rhs) const noexcept;
 };
 
-inline size_t hash<tgon::RTTI>::operator()(const tgon::RTTI& rhs) const noexcept
+inline size_t hash<tg::RTTI>::operator()(const tg::RTTI& rhs) const noexcept
 {
     return rhs.GetHashCode();
 }
     
-} /* namespace std */
+}

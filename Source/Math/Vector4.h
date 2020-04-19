@@ -1,10 +1,5 @@
-/**
- * @file    Vector4.h
- * @author  ggomdyu
- * @since   05/18/2019
- */
-
 #pragma once
+
 #include "Vector3.h"
 #include "Matrix4x4.h"
 
@@ -14,7 +9,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 template <typename _ValueType>
@@ -348,6 +343,6 @@ inline std::string BasicVector4<_ValueType>::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

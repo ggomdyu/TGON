@@ -2,7 +2,7 @@
 
 #include "FontAtlas.h"
 
-namespace tgon
+namespace tg
 {
 
 FontAtlas::FontAtlas(const std::shared_ptr<Font>& font) :
@@ -82,4 +82,4 @@ FontAtlas::TextureAtlasKey FontAtlas::CreateTextureAtlasKey(char32_t ch, int32_t
     return static_cast<TextureAtlasKey>(ch) << 32 | fontSize;
 }
 
-} /* namespace tgon */
+}

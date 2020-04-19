@@ -1,21 +1,12 @@
-/**
- * @file    OpenGLRenderTarget.h
- * @author  ggomdyu
- * @since   07/14/2018
- * @see     https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenFramebuffers.xhtml
- *          https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glFramebufferRenderbuffer.xhtml
- *          https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glCheckFramebufferStatus.xhtml
- *          
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
 #include "Math/Extent.h"
 
-namespace tgon
+namespace tg
 {
    
 class OpenGLRenderTarget :
@@ -52,5 +43,5 @@ protected:
     
 using PlatformRenderTarget = OpenGLRenderTarget;
 
-} /* namespace tgon */
+}
 #endif

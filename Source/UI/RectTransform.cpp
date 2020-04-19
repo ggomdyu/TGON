@@ -2,7 +2,7 @@
 
 #include "RectTransform.h"
 
-namespace tgon
+namespace tg
 {
 
 void RectTransform::SetLocalPivot(const Vector2& localPivot) noexcept
@@ -49,4 +49,4 @@ float RectTransform::GetHeight() const noexcept
     return m_size.height;
 }
 
-} /* namespace tgon */
+}

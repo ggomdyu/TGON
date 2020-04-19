@@ -5,7 +5,7 @@
 #include "WELL1024a.h"
 #include "Random.h"
 
-namespace tgon
+namespace tg
 {
 
 Random::Random()
@@ -51,4 +51,4 @@ double Random::Sample() noexcept
     return WELL1024a();
 }
 
-} /* namespace tgon */
+}

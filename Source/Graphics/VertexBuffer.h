@@ -1,10 +1,5 @@
-/**
- * @file    VertexBuffer.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #include <vector>
 #include <gsl/span>
 
@@ -12,7 +7,7 @@
 #   include "OpenGL/OpenGLVertexBuffer.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 enum class VertexFormatType
@@ -76,12 +71,12 @@ public:
 
 /**@section Operator */
 protected:
-    VertexBuffer& operator=(VertexBuffer&& rhs);
+    VertexBuffer& operator=(VertexBuffer&& rhs) noexcept;
 
 /**@section Method */
 public:
-    PlatformVertexBuffer& GetPlatformDependency() noexcept;
-    const PlatformVertexBuffer& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformVertexBuffer& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformVertexBuffer& GetPlatformDependency() const noexcept;
     template <typename _Type>
     void SetData(const gsl::span<_Type>& data, bool isDynamicUsage);
     void SetData(const void* data, std::size_t dataBytes, bool isDynamicUsage);
@@ -103,4 +98,4 @@ inline void VertexBuffer::SetData(const gsl::span<_Type>& data, bool isDynamicUs
     this->SetData(data.data(), data.size() * sizeof(_Type), isDynamicUsage);
 }
 
-} /* namespace tgon */
+}

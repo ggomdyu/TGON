@@ -7,7 +7,7 @@
 
 #include "Environment.h"
 
-namespace tgon
+namespace tg
 {
 
 std::optional<std::string> Environment::GetEnvironmentVariable(const char* name)
@@ -117,4 +117,4 @@ std::vector<std::string> Environment::GetLogicalDrives()
     return Directory::GetLogicalDrives();
 }
 
-} /* namespace tgon */
+}

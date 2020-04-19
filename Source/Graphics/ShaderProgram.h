@@ -1,10 +1,5 @@
-/**
- * @file    ShaderProgram.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #include <array>
 
 #include "Math/Vector4.h"
@@ -13,7 +8,7 @@
 #   include "OpenGL/OpenGLShaderProgram.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 class ShaderProgram :
@@ -39,12 +34,12 @@ public:
     
 /**@section Operator */
 public:
-    ShaderProgram& operator=(ShaderProgram&& rhs);
+    ShaderProgram& operator=(ShaderProgram&& rhs) noexcept;
    
 /**@section Method */
 public:
-    PlatformShaderProgram& GetPlatformDependency() noexcept;
-    const PlatformShaderProgram& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformShaderProgram& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformShaderProgram& GetPlatformDependency() const noexcept;
     void Use();
     void Unuse();
     void SetParameter1f(const char* name, float f);
@@ -72,4 +67,4 @@ private:
     std::array<int32_t, 8> m_uniformLocationCache {};
 };
 
-} /* namespace tgon */
+}

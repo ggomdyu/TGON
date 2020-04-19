@@ -1,10 +1,5 @@
-/**
- * @file    Encoding.h
- * @author  ggomdyu
- * @since   04/09/2017
- */
-
 #pragma once
+
 #include <string>
 #include <cstdint>
 #include <vector>
@@ -15,7 +10,7 @@
 
 struct UConverter;
 
-namespace tgon
+namespace tg
 {
 
 class Encoding final :
@@ -72,4 +67,4 @@ private:
     static std::unordered_map<int32_t, Encoding> m_encodingTable;
 };
 
-} /* namespace tgon */
+}

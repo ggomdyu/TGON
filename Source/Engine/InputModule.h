@@ -1,10 +1,5 @@
-/**
- * @file    InputModule.h
- * @author  ggomdyu
- * @since   05/15/2018
- */
-
 #pragma once
+
 #include <memory>
 
 #include "Hardware/InputManager.h"
@@ -12,7 +7,7 @@
 #include "Module.h"
 #include "InputMode.h"
 
-namespace tgon
+namespace tg
 {
 
 class InputModule :
@@ -40,4 +35,4 @@ public:
     std::shared_ptr<Mouse> m_mouse;
 };
 
-} /* namespace tgon */
+}

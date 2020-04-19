@@ -1,10 +1,5 @@
-/**
- * @file    OpenGLContext.h
- * @author  ggomdyu
- * @since   10/22/2017
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #if TGON_PLATFORM_WINDOWS
 #   ifndef WIN32_LEAN_AND_MEAN
@@ -20,7 +15,7 @@
 
 #include "../VideoMode.h"
 
-namespace tgon
+namespace tg
 {
 
 class OpenGLContext final :
@@ -65,5 +60,5 @@ public:
 #endif
 };
 
-} /* namespace tgon */
+}
 #endif

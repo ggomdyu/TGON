@@ -4,7 +4,7 @@
 
 #include "AudioModule.h"
 
-namespace tgon
+namespace tg
 {
 
 AudioModule::AudioModule() :
@@ -21,4 +21,4 @@ AudioModule::AudioModule() :
 {
 }
 
-} /* namespace tgon */
+}

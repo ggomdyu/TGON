@@ -1,10 +1,5 @@
-/**
- * @file    Matrix4x4.h
- * @author  ggomdyu
- * @since   03/14/2016
- */
-
 #pragma once
+
 #include <cstdint>
 #include <cassert>
 #include <cmath>
@@ -18,7 +13,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 struct Matrix4x4
@@ -441,6 +436,6 @@ inline std::string Matrix4x4::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

@@ -7,7 +7,7 @@
 
 #include "../RenderTarget.h"
 
-namespace tgon
+namespace tg
 {
 
 OpenGLRenderTarget::OpenGLRenderTarget(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits) :
@@ -131,5 +131,5 @@ void RenderTarget::Unuse()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-} /* namespace tgon */
+}
 #endif

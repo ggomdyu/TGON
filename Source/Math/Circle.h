@@ -1,9 +1,5 @@
-///**
-// * @file      Circle.h
-// * @author    ggomdyu
-// */
-//
 //#pragma once
+//
 //#include <type_traits>
 //#include <cstdint>
 //#include <cstdio>
@@ -215,4 +211,4 @@
 //}
 //
 //
-//} /* namespace tgon */
+//}

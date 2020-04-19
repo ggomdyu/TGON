@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-namespace tgon
+namespace tg
 {
     
 extern std::unique_ptr<Engine> CreateEngine();
@@ -64,4 +64,4 @@ const PlatformApplication& Application::GetPlatformDependency() const noexcept
     return *this;
 }
 
-} /* namespace tgon */
+}

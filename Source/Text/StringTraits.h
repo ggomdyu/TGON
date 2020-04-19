@@ -1,10 +1,5 @@
-/**
- * @file    StringTraits.h
- * @author  ggomdyu
- * @date    08/06/2017
- */
-
 #pragma once
+
 #include <algorithm>
 #include <cstdarg>
 #include <cassert>
@@ -12,7 +7,7 @@
 #include <string_view>
 #include <memory>
 
-namespace tgon
+namespace tg
 {
 
 template <typename _CharType>
@@ -191,4 +186,4 @@ inline void BasicStringTraits<_CharType>::ToUpper(const _CharType* srcStr, int32
     std::transform(srcStr, srcStr + srcStrLen, destStr, ::toupper);
 }
 
-} /* namespace tgon */
+}

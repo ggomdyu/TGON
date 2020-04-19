@@ -1,16 +1,9 @@
-/**
- * @file    ExpressionTemplate.h
- * @author  ggomdyu
- * @since   06/20/2017
- * @brief   Utility support for Expression template.
- * @see     https://en.wikipedia.org/wiki/Expression_templates
- */
-
 #pragma once
+
 #include <cstddef>
 #include <type_traits>
 
-namespace tgon
+namespace tg
 {
 
 template <typename _FirstOperandType, typename _SecondOperandType>
@@ -241,4 +234,4 @@ private:
     const _SecondOperandType& m_secondOperand;
 };
 
-} /* namespace tgon */
+}

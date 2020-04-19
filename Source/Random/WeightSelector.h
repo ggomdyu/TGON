@@ -1,16 +1,11 @@
-/**
- * @file    WeightSelector.h
- * @author  ggomdyu
- * @since   08/09/2018
- */
-
 #pragma once
+
 #include <vector>
 #include <type_traits>
 
 #include "Core/Delegate.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename _WeightType>
@@ -129,4 +124,4 @@ inline bool WeightSelector<_WeightType>::IsEmpty() const noexcept
     return m_weightDescList.size() <= 0;
 }
 
-} /* namespace tgon */
+}

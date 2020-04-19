@@ -5,7 +5,7 @@
 
 #include "UIRendererComponent.h"
 
-namespace tgon
+namespace tg
 {
     
 UIRendererComponent::UIRendererComponent(const std::shared_ptr<Material>& material) noexcept :
@@ -45,4 +45,4 @@ std::shared_ptr<const Material> UIRendererComponent::GetMaterial() const noexcep
     return m_material;
 }
 
-} /* namespace tgon */
+}

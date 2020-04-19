@@ -1,13 +1,8 @@
-/**
- * @file    TimerHandle.h
- * @author  ggomdyu
- * @since   12/02/2019
- */
-
 #pragma once
+
 #include <cstdint>
 
-namespace tgon
+namespace tg
 {
 
 class TimerHandle
@@ -54,4 +49,4 @@ constexpr bool TimerHandle::operator<(const TimerHandle& rhs) const noexcept
     return m_rawTimerHandle < rhs.m_rawTimerHandle;
 }
 
-} /* namespace tgon */
+}

@@ -1,16 +1,42 @@
-/**
- * @file    SceneModule.h
- * @author  ggomdyu
- * @since   07/24/2016
- */
-
 #pragma once
-#include "Game/Scene.h"
+
+#include <string>
+
+#include "Core/RuntimeObject.h"
+#include "Core/Delegate.h"
+#include "Game/GameObject.h"
 
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
+
+enum class NewSceneSetup
+{
+    EmptyScene,
+    DefaultGameObjects,
+};
+
+enum class OpenSceneMode
+{
+    Single,
+    Additive,
+};
+
+class Scene :
+    public RuntimeObject
+{
+public:
+    TGON_DECLARE_RTTI(Scene)
+
+/**@section Method */
+public:
+    void Initialize();
+    void Update();
+
+private:
+    std::vector<std::shared_ptr<GameObject>> m_gameObjects;
+};
 
 class SceneModule :
     public Module
@@ -18,14 +44,26 @@ class SceneModule :
 public:
     TGON_DECLARE_RTTI(SceneModule)
 
+    using NewSceneCreatedCallback = Delegate<void(const std::shared_ptr<Scene>&, NewSceneSetup)>;
+    using SceneOpeningCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;
+    using SceneOpenCallback = Delegate<void(const std::shared_ptr<Scene>&, OpenSceneMode)>;
+
 /**@section Method */
 public:
     void Update() override;
-    void ChangeScene(const std::shared_ptr<Scene>& scene);
+    void NewScene(NewSceneSetup newSceneSetup);
+    void OpenScene(const std::string& path, OpenSceneMode openSceneMode);
+    std::shared_ptr<GameObject> Instantiate();
+
+/**@section Event handler */
+public:
+    SceneOpeningCallback OnOpeningScene;
+    SceneOpenCallback OnOpenScene;
 
 /**@section Variable */
 protected:
-    std::shared_ptr<Scene> m_currScene;
+    std::shared_ptr<Scene> m_activeScene;
+    std::vector<std::shared_ptr<Scene>> m_sceneList;
 };
 
-} /* namespace tgon */
+}

@@ -2,7 +2,7 @@
 
 #include "Mesh.h"
 
-namespace tgon
+namespace tg
 {
 
 Mesh::Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<IndexBuffer>& indexBuffer) :
@@ -54,4 +54,4 @@ std::shared_ptr<const IndexBuffer> Mesh::GetIndexBuffer() const noexcept
     return m_indexBuffer;
 }
 
-} /* namespace tgon */
+}

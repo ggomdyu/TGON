@@ -1,10 +1,5 @@
-/**
- * @file    FontFace.h
- * @author  ggomdyu
- * @since   11/11/2019
- */
-
 #pragma once
+
 #include <vector>
 #include <cstddef>
 #include <unordered_map>
@@ -18,7 +13,7 @@
 typedef struct FT_LibraryRec_ FT_LibraryRec;
 typedef struct FT_LibraryRec_* FT_Library;
 
-namespace tgon
+namespace tg
 {
 
 struct GlyphMetrics final
@@ -67,4 +62,4 @@ private:
     mutable std::unordered_map<char32_t, GlyphData> m_glyphDatas;
 };
 
-} /* namespace tgon */
+}

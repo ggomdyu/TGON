@@ -4,7 +4,7 @@
 
 #include "UISpriteRendererComponent.h"
 
-namespace tgon
+namespace tg
 {
 
 UISpriteRendererComponent::UISpriteRendererComponent() :
@@ -92,4 +92,4 @@ void UISpriteRendererComponent::Update()
     }
 }
 
-} /* namespace tgon */
+}

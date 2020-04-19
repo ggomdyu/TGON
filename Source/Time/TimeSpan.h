@@ -1,14 +1,9 @@
-/**
- * @file    TimeSpan.h
- * @author  ggomdyu
- * @since   07/16/2019
- */
-
 #pragma once
+
 #include <cstdint>
 #include <numeric>
 
-namespace tgon
+namespace tg
 {
 
 struct TimeSpan final
@@ -357,4 +352,4 @@ constexpr TimeSpan TimeSpan::GetZero() noexcept
     return TimeSpan(0);
 }
 
-} /* namespace tgon */
+}

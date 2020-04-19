@@ -1,10 +1,5 @@
-/**
- * @file    DispatchQueue.h
- * @author  ggomdyu
- * @since   05/23/2019
- */
-
 #pragma once
+
 #include <deque>
 #include <vector>
 #include <mutex>
@@ -14,7 +9,7 @@
 
 #include "Thread.h"
 
-namespace tgon
+namespace tg
 {
 
 class DispatchQueue :
@@ -78,4 +73,4 @@ private:
     bool m_needToDestroy;
 };
     
-} /* namespace tgon */
+}

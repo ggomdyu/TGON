@@ -4,7 +4,7 @@
 
 #include "Keyboard.h"
 
-namespace tgon
+namespace tg
 {
     
 Keyboard::Keyboard(gainput::InputDeviceKeyboard* nativeKeyboard) noexcept :
@@ -49,4 +49,4 @@ bool Keyboard::IsKeyUp(KeyCode keyCode) const
     return m_nativeKeyboard->GetBoolPrevious(castedKeyCode) && m_nativeKeyboard->GetBool(castedKeyCode) == false;
 }
     
-} /* namespace tgon */
+}

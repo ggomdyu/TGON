@@ -1,16 +1,11 @@
-/**
- * @file    Delegate.h
- * @author  ggomdyu
- * @since   09/25/2016
- */
-
 #pragma once
+
 #include <type_traits>
 #include <array>
 
 #include "TypeTraits.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename>
@@ -127,7 +122,7 @@ inline size_t FunctorImpl<_FunctionType, _ReturnType, _ArgTypes...>::GetBytes() 
     return sizeof(*this);
 }
 
-} /* namespace detail */
+}
 
 template <typename _Type>
 constexpr bool IsDelegate = detail::IsDelegate<_Type>::value;
@@ -375,4 +370,4 @@ inline void Delegate<_ReturnType(_ArgTypes...)>::Destroy()
     m_storage = {};
 }
 
-} /* namespace tgon */
+}

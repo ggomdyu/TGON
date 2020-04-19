@@ -4,7 +4,7 @@
 
 #include "AssetModule.h"
 
-namespace tgon
+namespace tg
 {
 
 AssetModule::AssetModule() :
@@ -21,4 +21,4 @@ AssetModule::AssetModule() :
 {
 }
 
-} /* namespace tgon */
+}

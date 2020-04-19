@@ -4,7 +4,7 @@
 #include "DirectoryInfo.h"
 #include "Directory.h"
 
-namespace tgon
+namespace tg
 {
 
 DirectoryInfo::DirectoryInfo(const std::string_view& path) :
@@ -78,4 +78,4 @@ const std::string& DirectoryInfo::ToString() const noexcept
     return m_fullPath;
 }
 
-} /* namespace tgon */
+}

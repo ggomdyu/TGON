@@ -1,16 +1,11 @@
-/**
- * @file    OpenGLTexture.h
- * @author  ggomdyu
- * @since   02/20/2018
- */
-
 #pragma once
+
 #if TGON_GRAPHICS_OPENGL
 #include <GL/glew.h>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 class OpenGLTexture :
@@ -44,5 +39,5 @@ protected:
 
 using PlatformTexture = OpenGLTexture;
 
-} /* namespace tgon */
+}
 #endif

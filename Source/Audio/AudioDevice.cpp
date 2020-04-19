@@ -13,7 +13,7 @@
 #   pragma comment(lib, "Winmm.lib")
 #endif
 
-namespace tgon
+namespace tg
 {
 
 AudioDevice::AudioDevice(const std::shared_ptr<ALCdevice>& device, const std::shared_ptr<ALCcontext>& context) noexcept :
@@ -76,4 +76,4 @@ std::shared_ptr<const ALCcontext> AudioDevice::GetContext() const noexcept
     return m_context;
 }
 
-} /* namespace tgon */
+}

@@ -1,15 +1,10 @@
-/**
- * @file    Keyboard.h
- * @author  ggomdyu
- * @since   05/15/2018
- */
-
 #pragma once
+
 #include <gainput/gainput.h>
 
 #include "Core/NonCopyable.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class KeyCode
@@ -159,4 +154,4 @@ private:
     gainput::InputDeviceKeyboard* m_nativeKeyboard;
 };
     
-} /* namespace tgon */
+}

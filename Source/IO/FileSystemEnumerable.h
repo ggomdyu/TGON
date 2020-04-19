@@ -1,12 +1,6 @@
-/**
- * @file    FileSystemEnumerable.h
- * @author  ggomdyu
- * @since   09/28/2019
- */
-
 #pragma once
 
-namespace tgon
+namespace tg
 {
 
 enum class SearchOption
@@ -79,7 +73,7 @@ inline void FileSystemEnumerable::EnumerateFileSystemEntries(const char* path, c
     FileSystemEnumerable::EnumerateFileSystemEntries(path, searchPattern, SearchOption::TopDirectoryOnly, handler);
 }
 
-} /* namespace tgon */
+}
 
 #if TGON_PLATFORM_WINDOWS
 #include "Windows/WindowsFileSystemEnumerable.inl"

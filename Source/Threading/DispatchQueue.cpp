@@ -3,7 +3,7 @@
 #include "DispatchQueue.h"
 #include "Thread.h"
 
-namespace tgon
+namespace tg
 {
     
 void SerialDispatchQueue::AddAsyncTask(const Delegate<void()>& task)
@@ -157,4 +157,4 @@ void ConcurrentDispatchQueue::DispatchQueueHandler()
     }
 }
 
-} /* namespace tgon */
+}

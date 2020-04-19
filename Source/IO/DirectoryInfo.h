@@ -1,16 +1,11 @@
-/**
- * @file    DirectoryInfo.h
- * @author  ggomdyu
- * @since   09/28/2019
- */
-
 #pragma once
+
 #include <string>
 #include <vector>
 
 #include "FileSystemEnumerable.h"
 
-namespace tgon
+namespace tg
 {
 
 struct FullPathTag {};
@@ -113,4 +108,4 @@ inline void DirectoryInfo::EnumerateFileSystemEntries(const char* searchPattern,
     FileSystemEnumerable::EnumerateFileSystemEntries(m_fullPath.c_str(), searchPattern, searchOption, handler);
 }
 
-} /* namespace tgon */
+}

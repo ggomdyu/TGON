@@ -1,12 +1,6 @@
-/**
- * @file    WindowsPath.h
- * @author  ggomdyu
- * @since   08/31/2019
- */
-
 #pragma once
 
-namespace tgon
+namespace tg
 {
 
 class WindowsPath
@@ -25,4 +19,4 @@ public:
 
 using PlatformPath = WindowsPath;
 
-} /* namespace tgon */
+}

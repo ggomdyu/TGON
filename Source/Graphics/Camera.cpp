@@ -4,7 +4,7 @@
 
 #include "Camera.h"
 
-namespace tgon
+namespace tg
 {
     
 Camera::Camera(ProjectionMode projectionMode, float nearZ, float farZ) noexcept :
@@ -150,4 +150,4 @@ const FRect& OrthographicCamera::GetOrthoPlane() const noexcept
     return m_orthoPlane;
 }
 
-} /* namespace tgon */
+}

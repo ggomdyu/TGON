@@ -21,7 +21,7 @@
 
 #define TGON_THROW_SEH_EXCEPTION() volatile int temp = 0; temp = 1 / temp;
 
-namespace tgon
+namespace tg
 {
 
 thread_local std::array<wchar_t, 16383> g_tempUtf16Buffer;
@@ -417,6 +417,6 @@ bool Environment::GetUserInteractive()
     return !isUserNonInteractive;
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_THROW_SEH_EXCEPTION

@@ -2,7 +2,7 @@
 
 #include "Gamepad.h"
 
-namespace tgon
+namespace tg
 {
 
 Gamepad::Gamepad(gainput::InputDevicePad* nativeGamepad) noexcept :
@@ -15,7 +15,7 @@ Gamepad::Gamepad(Gamepad&& rhs) noexcept :
 {
 }
 
-Gamepad& tgon::Gamepad::operator=(Gamepad&& rhs) noexcept
+Gamepad& tg::Gamepad::operator=(Gamepad&& rhs) noexcept
 {
     m_nativeGamepad = rhs.m_nativeGamepad;
 
@@ -48,4 +48,4 @@ bool Gamepad::IsButtonUp(int32_t buttonNumber) const
     return false;
 }
 
-} /* namespace tgon */
+}

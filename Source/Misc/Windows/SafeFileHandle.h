@@ -1,16 +1,11 @@
-/**
- * @file    SafeFileHandle.h
- * @author  ggomdyu
- * @since   07/29/2019
- */
-
 #pragma once
+
 #include <string>
 
 #include "Core/NonCopyable.h"
 #include "Platform/Windows/Windows.h"
 
-namespace tgon
+namespace tg
 {
 
 class SafeFileHandle :
@@ -93,4 +88,4 @@ inline bool SafeFileHandle::IsValid() const noexcept
     return m_handle != INVALID_HANDLE_VALUE;
 }
 
-} /* namespace tgon */
+}

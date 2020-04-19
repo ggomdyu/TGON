@@ -10,7 +10,7 @@
 #include "AudioClip.h"
 #include "OpenALDebug.h"
 
-namespace tgon
+namespace tg
 {
 
 AudioSource::AudioSource(ALuint alSource) noexcept :
@@ -198,4 +198,4 @@ std::optional<ALuint> AudioSource::CreateALSource()
     return alSource;
 }
 
-} /* namespace tgon */
+}

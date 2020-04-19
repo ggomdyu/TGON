@@ -4,7 +4,7 @@
 
 #include "../Path.h"
 
-namespace tgon
+namespace tg
 {
 
 thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
@@ -39,4 +39,4 @@ gsl::span<const char> Path::GetInvalidPathChars() noexcept
     return gsl::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 
-} /* namespace tgon */
+}

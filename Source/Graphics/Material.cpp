@@ -2,7 +2,7 @@
 
 #include "Material.h"
 
-namespace tgon
+namespace tg
 {
 
 Material::Material(ShaderProgram&& shaderProgram) noexcept :
@@ -95,4 +95,4 @@ int32_t Material::GetUniformLocation(const char* name) const
     return m_shaderProgram.GetUniformLocation(name);
 }
 
-} /* namespace tgon */
+}

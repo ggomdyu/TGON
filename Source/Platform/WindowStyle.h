@@ -1,14 +1,9 @@
-/**
- * @file    WindowStyle.h
- * @author  ggomdyu
- * @since   01/04/2020
- */
-
 #pragma once
+
 #include <cstdint>
 #include <string>
 
-namespace tgon
+namespace tg
 {
 
 struct WindowStyle final
@@ -26,4 +21,4 @@ struct WindowStyle final
     bool showMiddle = true;
 };
 
-} /* namespace tgon */
+}

@@ -1,14 +1,9 @@
-/**
- * @file    FontAtlas.h
- * @author  ggomdyu
- * @since   11/11/2019
- */
-
 #pragma once
+
 #include "Drawing/Font.h"
 #include "Graphics/TextureAtlas.h"
 
-namespace tgon
+namespace tg
 {
 
 class FontAtlas final :
@@ -52,4 +47,4 @@ private:
     mutable BasicTextureAtlas<TextureAtlasKey> m_textureAtlas = {FontAtlas::DefaultAtlasSize, FontAtlas::DefaultPixelFormat, FontAtlas::DefaultPaddingOffset};
 };
 
-} /* namespace tgon */
+}

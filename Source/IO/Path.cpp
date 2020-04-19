@@ -8,7 +8,7 @@
 #include "Path.h"
 #include "Directory.h"
 
-namespace tgon
+namespace tg
 {
 
 std::string Path::Combine(const std::string_view& path1, const std::string_view& path2)
@@ -297,4 +297,4 @@ std::string Path::RemoveRelativeSegments(const std::string_view& path)
     return ret;
 }
 
-} /* namespace tgon */
+}

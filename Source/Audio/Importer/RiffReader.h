@@ -1,13 +1,8 @@
-/**
- * @file    RiffReader.h
- * @author  ggomdyu
- * @since   05/03/2018
- */
-
 #pragma once
+
 #include <cstdint>
 
-namespace tgon
+namespace tg
 {
 
 class RiffReader
@@ -148,4 +143,4 @@ inline RiffReader::ChunkHeader RiffReader::GetChunkHeader() const
     return ChunkHeader(static_cast<ChunkId>(*reinterpret_cast<const uint32_t*>(&m_fileDataIter[0])), *reinterpret_cast<const uint32_t*>(&m_fileDataIter[4]), &m_fileDataIter[8]);
 }
 
-} /* namespace tgon */
+}

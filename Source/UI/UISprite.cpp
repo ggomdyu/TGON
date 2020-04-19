@@ -4,7 +4,7 @@
 
 #include "UISprite.h"
 
-namespace tgon
+namespace tg
 {
 
 UISprite::UISprite(const std::shared_ptr<Texture>& texture, BlendMode blendMode, Color4f blendColor) noexcept :
@@ -96,4 +96,4 @@ void UISprite::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWor
     batches->back().Merge(m_textureRect, m_textureSize, m_pivot, m_blendColor, matWorld, vertices);
 }
 
-} /* namespace tgon */
+}

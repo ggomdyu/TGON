@@ -1,16 +1,11 @@
-/**
- * @file    Mesh.h
- * @author  ggomdyu
- * @since   01/06/2018
- */
-
 #pragma once
+
 #include <memory>
 
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
-namespace tgon
+namespace tg
 {
 
 class Mesh
@@ -36,4 +31,4 @@ protected:
     std::shared_ptr<IndexBuffer> m_indexBuffer;
 };
 
-} /* namespace tgon */
+}

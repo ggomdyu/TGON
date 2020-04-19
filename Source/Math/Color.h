@@ -1,10 +1,5 @@
-/**
- * @file    Color.h
- * @author  ggomdyu
- * @since   05/03/2017
- */
-
 #pragma once
+
 #include <cstdint>
 #include <cstdio>
 #include <gsl/span>
@@ -15,7 +10,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 struct Color4b
@@ -319,6 +314,6 @@ inline std::string Color4f::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

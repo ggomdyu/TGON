@@ -3,7 +3,7 @@
 #include "WavAudioDecoder.h"
 #include "RiffReader.h"
 
-namespace tgon
+namespace tg
 {
 
 std::optional<WavAudioDecoder> WavAudioDecoder::Create(const gsl::span<const std::byte>& fileData)
@@ -86,4 +86,4 @@ bool WavAudioDecoder::IsWav(const gsl::span<const std::byte>& fileData)
     return true;
 }
 
-} /* namespace tgon */
+}

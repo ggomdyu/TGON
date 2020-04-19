@@ -1,17 +1,12 @@
-/**
- * @file    Transform.h
- * @author  ggomdyu
- * @since   08/19/2018
- */
-
 #pragma once
+
 #include <memory>
 
 #include "Math/Matrix4x4.h"
 
 #include "Component.h"
 
-namespace tgon
+namespace tg
 {
 
 class Transform :
@@ -49,5 +44,5 @@ protected:
     mutable bool m_isDirty = true;
 };
 
-} /* namespace tgon */
+}
 

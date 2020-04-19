@@ -1,13 +1,8 @@
-/**
- * @file    UnixPath.h
- * @author  ggomdyu
- * @since   10/30/2019
- */
-
 #pragma once
+
 #include "Platform/Config.h"
 
-namespace tgon
+namespace tg
 {
 
 class UnixPath
@@ -26,4 +21,4 @@ public:
 
 using PlatformPath = UnixPath;
 
-} /* namespace tgon */
+}

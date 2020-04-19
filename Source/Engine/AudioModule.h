@@ -1,15 +1,10 @@
-/**
- * @file    AudioModule.h
- * @author  ggomdyu
- * @since   08/06/2018
- */
-
 #pragma once
+
 #include "Audio/AudioDevice.h"
 
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class AudioModule :
@@ -27,4 +22,4 @@ private:
     AudioDevice m_audioDevice;
 };
 
-} /* namespace tgon */
+}

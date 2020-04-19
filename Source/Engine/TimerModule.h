@@ -1,10 +1,5 @@
-/**
- * @file    TimerModule.h
- * @author  ggomdyu
- * @since   12/02/2019
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Core/Delegate.h"
@@ -12,7 +7,7 @@
 #include "TimerHandle.h"
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class TimerModule :
@@ -56,4 +51,4 @@ private:
     std::vector<TimerInfo> m_timerInfos;
 };
 
-} /* namespace tgon */
+}

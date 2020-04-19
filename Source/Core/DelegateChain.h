@@ -1,16 +1,10 @@
-/**
- * @file    DelegateChain.h
- * @author  ggomdyu
- * @since   06/30/2018
- * @brief   The list that contains delegates.
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Delegate.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename>
@@ -167,4 +161,4 @@ inline const std::vector<Delegate<_ReturnType(_ArgTypes...)>>& DelegateChain<_Re
     return m_invocationList;
 }
 
-} /* namespace tgon */
+}

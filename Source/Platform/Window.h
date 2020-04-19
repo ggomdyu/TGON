@@ -1,11 +1,5 @@
-/**
- * @file    Window.h
- * @author  ggomdyu
- * @since   02/15/2018
- * @brief   The platform agnostic window class implementation.
- */
-
 #pragma once
+
 #include "Core/DelegateChain.h"
 #include "Math/Extent.h"
 #include "Math/Vector2.h"
@@ -22,7 +16,7 @@
 
 #include "WindowStyle.h"
 
-namespace tgon
+namespace tg
 {
 
 class Window final :
@@ -31,7 +25,7 @@ class Window final :
 /**@section Constructor */
 public:
     explicit Window(const WindowStyle& windowStyle);
-    Window(Window&& rhs) noexcept = default;
+    Window(Window&&) noexcept = default;
 
 /**@section Destructor */
 public:
@@ -45,8 +39,8 @@ public:
 
 /**@section Method */
 public:
-    PlatformWindow& GetPlatformDependency() noexcept;
-    const PlatformWindow& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformWindow& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformWindow& GetPlatformDependency() const noexcept;
     void Show();
     void Hide();
     void Close();
@@ -89,4 +83,4 @@ public:
     DelegateChain<void()> OnLoseFocus;
 };
 
-} /* namespace tgon */
+}

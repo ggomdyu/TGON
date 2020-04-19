@@ -1,15 +1,10 @@
-/**
- * @file    WindowsApplication.h
- * @author  ggomdyu
- * @since   02/13/2018
- */
-
 #pragma once
+
 #include "Core/NonCopyable.h"
 
 typedef struct tagMSG MSG;
 
-namespace tgon
+namespace tg
 {
 
 class WindowsApplication :
@@ -38,4 +33,4 @@ protected:
 
 using PlatformApplication = WindowsApplication;
 
-} /* namespace tgon */                               
+}                               

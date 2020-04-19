@@ -1,10 +1,5 @@
-/**
- * @file    Vector3.h
- * @author  ggomdyu
- * @since   03/14/2016
- */
-
 #pragma once
+
 #include "Vector2.h"
 
 #if _MSC_VER
@@ -13,7 +8,7 @@
 #   define TGON_SPRINTF snprintf
 #endif
 
-namespace tgon
+namespace tg
 {
 
 template <typename _ValueType>
@@ -336,6 +331,6 @@ inline std::string BasicVector3<_ValueType>::ToString() const
     return {&str[0], static_cast<size_t>(strLen)};
 }
 
-} /* namespace tgon */
+}
 
 #undef TGON_SPRINTF

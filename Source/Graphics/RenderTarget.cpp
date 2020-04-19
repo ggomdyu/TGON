@@ -2,7 +2,7 @@
 
 #include "RenderTarget.h"
 
-namespace tgon
+namespace tg
 {
 
 RenderTarget::RenderTarget(const FExtent2D& extent, int32_t depthBits, int32_t stencilBits) :
@@ -20,4 +20,4 @@ std::shared_ptr<const Texture> RenderTarget::GetTexture() const noexcept
     return m_texture;
 }
 
-} /* namespace tgon */
+}

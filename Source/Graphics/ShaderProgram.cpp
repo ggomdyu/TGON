@@ -6,7 +6,7 @@
 
 #include "ShaderProgram.h"
 
-namespace tgon
+namespace tg
 {
 
 ShaderProgram::ShaderProgram(const char* vertexShaderCode, const char* fragmentShaderCode) :
@@ -31,7 +31,7 @@ ShaderProgram::ShaderProgram(ShaderProgram&& rhs) noexcept :
 {
 }
 
-ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs)
+ShaderProgram& ShaderProgram::operator=(ShaderProgram&& rhs) noexcept
 {
     PlatformShaderProgram::operator=(std::move(rhs));
 
@@ -81,4 +81,4 @@ void ShaderProgram::SetParameterWVPMatrix4fv(const float* f)
     this->SetParameterMatrix4fv(location, f);
 }
 
-} /* namespace tgon */
+}

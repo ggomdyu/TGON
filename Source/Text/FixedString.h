@@ -1,17 +1,11 @@
-/**
- * @file    FixedString.h
- * @author  ggomdyu
- * @date    03/16/2017
- * @brief   String class that uses only stack memory and has fixed buffer size.
- */
-
 #pragma once
+
 #include <type_traits>
 #include <array>
 
 #include "StringTraits.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
@@ -104,7 +98,7 @@ struct IsBasicFixedString : std::false_type {};
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType>
 struct IsBasicFixedString<BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>> : std::true_type {};
 
-} /* namespace detail */
+}
 
 template <typename _CharType, int32_t _CharBufferSize, typename _StringTraitsType = BasicStringTraits<_CharType>>
 BasicFixedString(const _CharType(&)[_CharBufferSize]) -> BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>;
@@ -427,4 +421,4 @@ inline typename BasicFixedString<_CharType, _CharBufferSize, _StringTraitsType>:
     return m_str.data() + m_strLen;
 }
 
-} /* namespace tgon */
+}

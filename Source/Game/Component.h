@@ -1,15 +1,10 @@
-/**
- * @file    Component.h
- * @author  ggomdyu
- * @since   04/26/2015
- */
-
 #pragma once
+
 #include <memory>
 
 #include "Core/RuntimeObject.h"
 
-namespace tgon
+namespace tg
 {
 
 class GameObject;
@@ -42,4 +37,4 @@ protected:
     bool m_isActive = true;
 };
 
-} /* namespace tgon */
+}

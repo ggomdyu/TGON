@@ -9,7 +9,7 @@
 #include "../File.h"
 #include "../Path.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -90,7 +90,7 @@ bool InternalRecursiveDelete(const std::wstring_view& path)
     return _wrmdir(path.data()) == 0;
 }
 
-} /* namespace */
+}
 
 bool Directory::Delete(const char* path, bool recursive)
 {
@@ -197,4 +197,4 @@ bool Directory::InternalCreateDirectory(const char* path)
     return _wmkdir(utf16Path) == 0;
 }
 
-} /* namespace tgon */
+}

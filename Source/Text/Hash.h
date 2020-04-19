@@ -1,16 +1,11 @@
-/**
- * @file    Hash.h
- * @author  ggomdyu
- * @since   03/04/2017
- */
-
 #pragma once
+
 #include <cstdint>
 #include <cstddef>
 
 #include "Core/TypeTraits.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename _CharType, typename std::enable_if_t<IsChar<_CharType>>* = nullptr>
@@ -36,4 +31,4 @@ constexpr size_t X65599Hash(const _CharType* str) noexcept
     return hashValue ^ (hashValue >> 16);
 }
 
-} /* namespace tgon */
+}

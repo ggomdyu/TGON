@@ -13,7 +13,7 @@
 #include "AudioClip.h"
 #include "OpenALDebug.h"
 
-namespace tgon
+namespace tg
 {
 
 inline ALenum ConvertToALFormat(int32_t channels, int32_t bitsPerSample)
@@ -210,4 +210,4 @@ ALuint AudioClip::CreateALBuffer()
     return alBufferId;
 }
 
-} /* namespace tgon */
+}

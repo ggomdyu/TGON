@@ -4,7 +4,7 @@
 
 #include "UIText.h"
 
-namespace tgon
+namespace tg
 {
 
 class TextBlock final
@@ -503,4 +503,4 @@ void UIText::GetBatches(std::vector<UIBatch>* batches, const Matrix4x4& matWorld
     }
 }
 
-} /* namespace tgon */
+}

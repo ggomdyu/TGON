@@ -1,10 +1,5 @@
-/**
- * @file    AssetModule.h
- * @author  ggomdyu
- * @since   08/07/2018
- */
-
 #pragma once
+
 #include <mutex>
 #include <any>
 #include <unordered_map>
@@ -17,7 +12,7 @@
 
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class AssetModule :
@@ -155,4 +150,4 @@ inline void AssetModule::PurgeAllResource()
     m_resourceUnitTable.clear();
 }
 
-} /* namespace tgon */
+}

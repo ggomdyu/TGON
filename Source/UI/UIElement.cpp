@@ -4,7 +4,7 @@
 
 #include "UIElement.h"
 
-namespace tgon
+namespace tg
 {
 
 UIElement::UIElement()
@@ -41,4 +41,4 @@ void UIElement::InitializeDefaultMaterial()
     } ();
 }
 
-} /* namespace tgon */
+}

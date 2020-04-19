@@ -1,13 +1,8 @@
-/**
- * @file    Font.h
- * @author  ggomdyu
- * @since   11/11/2019
- */
-
 #pragma once
+
 #include "FontFace.h"
 
-namespace tgon
+namespace tg
 {
 
 class Font final :
@@ -47,4 +42,4 @@ inline Font::Font(const std::shared_ptr<FT_LibraryRec>& library, _ContainerType&
 {
 }
 
-} /* namespace tgon */
+}

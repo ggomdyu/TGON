@@ -1,16 +1,11 @@
-/**
- * @file    EngineConfig.h
- * @author  ggomdyu
- * @since   01/04/2020
- */
-
 #pragma once
+
 #include "Graphics/VideoMode.h"
 #include "Platform/WindowStyle.h"
 
 #include "InputMode.h"
 
-namespace tgon
+namespace tg
 {
 
 struct EngineConfig final
@@ -39,4 +34,4 @@ inline EngineConfig::EngineConfig(const WindowStyle& windowStyle, const InputMod
 {
 }
 
-} /* namespace tgon */
+}

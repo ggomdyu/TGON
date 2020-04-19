@@ -7,7 +7,7 @@
 
 #include "../Debug.h"
 
-namespace tgon
+namespace tg
 {
 
 thread_local extern std::array<wchar_t, 16383> g_tempUtf16Buffer;
@@ -70,4 +70,4 @@ void Debug::Assert(bool condition, const std::string_view& message, const std::s
 #endif
 }
 
-} /* namespace tgon */
+}

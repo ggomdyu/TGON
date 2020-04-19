@@ -1,16 +1,11 @@
-/**
- * @file    WavAudioDecoder.h
- * @author  ggomdyu
- * @since   04/20/2018
- */
-
 #pragma once
+
 #include <gsl/span>
 #include <optional>
 
 #include "AudioDecoder.h"
 
-namespace tgon
+namespace tg
 {
 
 class WavAudioDecoder final :
@@ -29,4 +24,4 @@ public:
     static bool IsWav(const gsl::span<const std::byte>& fileData);
 };
 
-} /* namespace tgon */
+}

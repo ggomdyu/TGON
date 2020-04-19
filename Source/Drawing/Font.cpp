@@ -2,7 +2,7 @@
 
 #include "Font.h"
 
-namespace tgon
+namespace tg
 {
 
 extern const char* ConvertFTErrorToString(FT_Error error);
@@ -50,4 +50,4 @@ I32Vector2 Font::GetKerning(char32_t lhs, char32_t rhs, int32_t fontSize) const
     return this->GetFace(fontSize)->GetKerning(lhs, rhs);
 }
 
-} /* namespace tgon */
+}

@@ -7,7 +7,7 @@
 
 #include "Hash.h"
 
-namespace tgon
+namespace tg
 {
     
 //class HashCollisionChecker
@@ -72,4 +72,4 @@ namespace tgon
 //}
 //
 
-} /* namespace tgon */
+}

@@ -1,18 +1,12 @@
-/**
- * @file    Algorithm.h
- * @author  ggomdyu
- * @since   07/05/2016
- * @brief   Utility support for algorithm.
- */
-
 #pragma once
+
 #include <cstddef>
 #include <tuple>
 #include <type_traits>
 #include <array>
 #include <algorithm>
 
-namespace tgon
+namespace tg
 {
 
 template <typename _ValueType>
@@ -146,4 +140,4 @@ inline bool BinarySearch(_IteratorType begin, _IteratorType end, const _ValueTyp
     return !(begin == end) && !predicate(*begin, value);
 }
 
-} /* namespace tgon */
+}

@@ -4,7 +4,7 @@
 
 #include "Window.h"
 
-namespace tgon
+namespace tg
 {
 
 Window::Window(const WindowStyle& windowStyle) :
@@ -55,4 +55,4 @@ std::string Window::GetTitle() const
     return {&str[0], static_cast<size_t>(titleLen)};
 }
 
-} /* namespace tgon */
+}

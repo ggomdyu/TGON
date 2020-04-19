@@ -1,9 +1,3 @@
-/**
- * @file    WindowsConfig.h
- * @author  ggomdyu
- * @since   04/24/2016
- */
-
 #pragma once
 
 #define TGON_PLATFORM_NAME Windows

@@ -7,7 +7,7 @@
 
 #include "../IndexBuffer.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -20,7 +20,7 @@ GLuint CreateIndexBufferHandle()
     return vertexBufferHandle;
 }
 
-} /* namespace */
+}
 
 OpenGLIndexBuffer::OpenGLIndexBuffer(GLuint indexBufferHandle) noexcept :
     m_indexBufferHandle(indexBufferHandle)
@@ -77,5 +77,5 @@ void IndexBuffer::Destroy()
     }
 }
 
-} /* namespace tgon */
+}
 #endif

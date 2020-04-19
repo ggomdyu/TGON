@@ -14,7 +14,7 @@
 #   pragma comment(lib, "OpenGL32.Lib")
 #endif
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -54,7 +54,7 @@ constexpr GLenum ConvertCullModeToNative(CullMode cullMode) noexcept
     return nativecullModes[static_cast<int>(cullMode)];
 }
     
-} /* namespace */
+}
 
 OpenGLGraphics::OpenGLGraphics(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
     m_context(displayWindow, videoMode)
@@ -211,5 +211,5 @@ void Graphics::DrawIndexedPrimitives(PrimitiveType primitiveType, int32_t indexC
     TGON_GL_ERROR_CHECK(glDrawElements(ConvertPrimitiveTypeToNative(primitiveType), indexCount, GL_UNSIGNED_INT, nullptr));
 }
 
-} /* namespace tgon */
+}
 #endif

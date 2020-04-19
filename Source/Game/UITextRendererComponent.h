@@ -1,16 +1,11 @@
-/**
- * @file    TextRendererComponent.h
- * @author  ggomdyu
- * @since   08/11/2018
- */
-
 #pragma once
+
 #include "Math/Color.h"
 #include "UI/UIText.h"
 
 #include "UIRendererComponent.h"
 
-namespace tgon
+namespace tg
 {
 
 class UITextRendererComponent :
@@ -47,4 +42,4 @@ public:
     void Update() override;
 };
 
-} /* namespace tgon */
+}

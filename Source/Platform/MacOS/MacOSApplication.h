@@ -1,14 +1,9 @@
-/**
- * @file    MacOSApplication.h
- * @author  ggomdyu
- * @since   07/21/2017
- */
-
 #pragma once
+
 #include "Core/NonCopyable.h"
 #include "Platform/Config.h"
 
-namespace tgon
+namespace tg
 {
 
 class MacOSApplication :
@@ -18,4 +13,4 @@ class MacOSApplication :
 
 using PlatformApplication = MacOSApplication;
 
-} /* namespace tgon */
+}

@@ -1,16 +1,11 @@
-/**
- * @file    Camera.h
- * @author  ggomdyu
- * @since   09/01/2017
- */
-
 #pragma once
+
 #include "Math/Matrix4x4.h"
 #include "Math/Rect.h"
 
 #include "RenderTarget.h"
 
-namespace tgon
+namespace tg
 {
     
 enum class ProjectionMode
@@ -96,4 +91,4 @@ protected:
     FRect m_orthoPlane;
 };
 
-} /* namespace tgon */
+}

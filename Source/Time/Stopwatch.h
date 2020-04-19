@@ -1,14 +1,9 @@
-/**
- * @file    Stopwatch.h
- * @author  ggomdyu
- * @since   04/07/2018
- */
-
 #pragma once
+
 #include <chrono>
 #include <cassert>
 
-namespace tgon
+namespace tg
 {
 
 class Stopwatch final
@@ -95,4 +90,4 @@ inline int64_t Stopwatch::GetElapsedNanoseconds() const
     }
 }
 
-} /* namespace tgon */
+}

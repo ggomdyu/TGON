@@ -13,7 +13,7 @@
 
 #include "Image.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -31,7 +31,7 @@ constexpr int32_t ConvertPixelFormatToChannelCount(PixelFormat pixelFormat)
     return channelCountTable[UnderlyingCast(pixelFormat)];
 }
 
-} /* namespace */
+}
 
 Image::Image(std::unique_ptr<std::byte[]>&& imageData, const I32Extent2D& size, PixelFormat pixelFormat) :
     m_imageData(std::move(imageData)),
@@ -145,4 +145,4 @@ bool Image::SaveAsTga(const char* saveFilePath) const
     return stbi_write_tga(saveFilePath, m_size.width, m_size.height, 4, m_imageData.get()) != 0;
 }
 
-} /* namespace tgon */
+}

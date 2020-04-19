@@ -1,16 +1,11 @@
-/**
- * @file    UnicodeScalar.h
- * @author  ggomdyu
- * @since   04/09/2017
- */
-
 #pragma once
+
 #include <cstdint>
 
 #include "Encoding.h"
 #include "Hash.h"
 
-namespace tgon
+namespace tg
 {
 
 class UnicodeScalar
@@ -151,22 +146,22 @@ constexpr char32_t UnicodeScalar::ToChar32(const char* str)
     return 0;
 }
 
-} /* namespace tgon */
+}
 
 namespace std
 {
 
 template <>
-struct hash<tgon::UnicodeScalar>
+struct hash<tg::UnicodeScalar>
 {
 /* @section Method */
 public:
-    size_t operator()(const tgon::UnicodeScalar& rhs) const noexcept;
+    size_t operator()(const tg::UnicodeScalar& rhs) const noexcept;
 };
 
-inline size_t hash<tgon::UnicodeScalar>::operator()(const tgon::UnicodeScalar& rhs) const noexcept
+inline size_t hash<tg::UnicodeScalar>::operator()(const tg::UnicodeScalar& rhs) const noexcept
 {
     return rhs.GetHashCode();
 }
     
-} /* namespace std */
+}

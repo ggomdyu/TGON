@@ -1,15 +1,10 @@
-/**
- * @file    TaskModule.h
- * @author  ggomdyu
- * @since   05/22/2019
- */
-
 #pragma once
+
 #include "Threading/DispatchQueue.h"
 
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class TaskModule :
@@ -36,4 +31,4 @@ private:
     ConcurrentDispatchQueue m_globalDispatchQueue;
 };
 
-} /* namespace tgon */
+}

@@ -1,10 +1,3 @@
-/**
- * @file    Config.h
- * @author  ggomdyu
- * @since   04/01/2016
- * @see     https://sourceforge.net/p/predef/wiki/OperatingSystems/
- */
-
 #pragma once
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__TOS_WIN__) || defined(__WINDOWS__)

@@ -1,10 +1,5 @@
-/**
- * @file    TextureAtlas.h
- * @author  ggomdyu
- * @since   06/18/2019
- */
-
 #pragma once
+
 #include <unordered_map>
 #include <optional>
 #include <memory>
@@ -16,7 +11,7 @@
 
 #include "Texture.h"
 
-namespace tgon
+namespace tg
 {
 
 template <typename _KeyType>
@@ -168,4 +163,4 @@ inline std::shared_ptr<Texture> BasicTextureAtlas<_KeyType>::GetAtlasTexture() n
     return m_atlasTexture;
 }
 
-} /* namespace tgon */
+}

@@ -1,16 +1,10 @@
-/**
- * @file    AudioPlayer.h
- * @author  ggomdyu
- * @since   05/06/2018
- * @see     https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf
- */
-
 #pragma once
+
 #include <optional>
 
 #include "Core/RuntimeObject.h"
 
-namespace tgon
+namespace tg
 {
 
 class AudioClip;
@@ -69,4 +63,4 @@ private:
     std::shared_ptr<AudioClip> m_audioClip;
 };
 
-} /* namespace tgon */
+}

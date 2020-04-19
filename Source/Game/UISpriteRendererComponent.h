@@ -1,15 +1,10 @@
-/**
- * @file    SpriteRendererComponent.h
- * @author  ggomdyu
- * @since   08/11/2018
- */
-
 #pragma once
+
 #include "UI/UISprite.h"
 
 #include "UIRendererComponent.h"
 
-namespace tgon
+namespace tg
 {
 
 class UISpriteRendererComponent :
@@ -40,4 +35,4 @@ public:
     void Update() override;
 };
 
-} /* namespace tgon */
+}

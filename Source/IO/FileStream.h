@@ -1,17 +1,11 @@
-/**
- * @file    FileStream.h
- * @author  ggomdyu
- * @since   08/04/2019
- * @see     https://referencesource.microsoft.com/#mscorlib/system/io/filestream.cs
- */
-
 #pragma once
+
 #include <vector>
 #include <string>
 
 #include "Stream.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class FileMode
@@ -120,4 +114,4 @@ protected:
     std::string m_fileName;    
 };
 
-} /* namespace tgon */
+}

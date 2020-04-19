@@ -1,10 +1,5 @@
-/**
- * @file    Environment.h
- * @author  ggomdyu
- * @since   08/18/2019
- */
-
 #pragma once
+
 #include <string>
 #include <vector>
 #include <optional>
@@ -12,7 +7,7 @@
 
 #include "Version.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class EnvironmentVariableTarget
@@ -143,4 +138,4 @@ public:
     static std::vector<std::string> GetLogicalDrives();
 };
 
-} /* namespace tgon */
+}

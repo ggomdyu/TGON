@@ -1,14 +1,9 @@
-/**
- * @file    Material.h
- * @author  ggomdyu
- * @since   01/06/2018
- */
-
 #pragma once
+
 #include "ShaderProgram.h"
 #include "Pass.h"
 
-namespace tgon
+namespace tg
 {
 
 class Material :
@@ -47,4 +42,4 @@ protected:
     ShaderProgram m_shaderProgram;
 };
 
-} /* namespace tgon */
+}

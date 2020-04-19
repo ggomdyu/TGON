@@ -1,10 +1,5 @@
-/**
- * @file    Image.h
- * @author  ggomdyu
- * @since   01/20/2018
- */
-
 #pragma once
+
 #include <vector>
 #include <string_view>
 #include <algorithm>
@@ -14,7 +9,7 @@
 #include "Core/RuntimeObject.h"
 #include "Math/Extent.h"
 
-namespace tgon
+namespace tg
 {
 
 enum class ImageFormat
@@ -22,7 +17,6 @@ enum class ImageFormat
     Unknown = 0,
     Bmp,
     Jpg,
-    Jpeg = Jpg,
     Png,
     Tiff,
     Gif,
@@ -78,4 +72,4 @@ private:
     PixelFormat m_pixelFormat = PixelFormat::Unknown;
 };
 
-} /* namespace tgon */
+}

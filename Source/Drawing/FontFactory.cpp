@@ -9,7 +9,7 @@
 #define FT_ERROR_START_LIST     {
 #define FT_ERROR_END_LIST       {0, 0}};
 
-namespace tgon
+namespace tg
 {
 
 const char* ConvertFTErrorToString(FT_Error error)
@@ -74,7 +74,7 @@ std::shared_ptr<Font> FontFactory::CreateFont(const char* filePath) const
     return this->CreateFont(std::move(*fileData));
 }
 
-} /* namespace tgon */
+}
 
 #undef FT_ERRORDEF
 #undef FT_ERROR_START_LIST

@@ -1,10 +1,5 @@
-/**
- * @file    Application.h
- * @author  ggomdyu
- * @since   04/01/2016
- */
-
 #pragma once
+
 #include <memory>
 
 #include "Engine/Engine.h"
@@ -21,7 +16,7 @@
 #   include "IOS/IOSApplication.h"
 #endif
 
-namespace tgon
+namespace tg
 {
 
 enum class MessageBoxIcon
@@ -40,8 +35,8 @@ private:
 
 /**@section Method */
 public:
-    PlatformApplication& GetPlatformDependency() noexcept;
-    const PlatformApplication& GetPlatformDependency() const noexcept;
+    [[nodiscard]] PlatformApplication& GetPlatformDependency() noexcept;
+    [[nodiscard]] const PlatformApplication& GetPlatformDependency() const noexcept;
     static Application& GetInstance();
     void Initialize();
     void Destroy();
@@ -60,4 +55,4 @@ protected:
     std::shared_ptr<Window> m_rootWindow;
 };
 
-} /* namespace tgon */
+}

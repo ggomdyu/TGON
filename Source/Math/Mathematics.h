@@ -1,17 +1,12 @@
-/**
- * @file    Mathematics.h
- * @author  ggomdyu
- * @since   03/14/2016
- */
-
 #pragma once
+
 #include <algorithm>
 #include <cmath>
 #include <type_traits>
 
 #include "Vector3.h"
 
-namespace tgon
+namespace tg
 {
 
 constexpr float Pi = 3.14159265358f;
@@ -174,4 +169,4 @@ inline float Sqrt(float number)
     return std::sqrtf(number);
 }
 
-} /* namespace tgon */
+}

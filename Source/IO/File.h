@@ -1,10 +1,5 @@
-/**
- * @file    File.h
- * @author  ggomdyu
- * @since   07/14/2019
- */
-
 #pragma once
+
 #include <string_view>
 #include <optional>
 
@@ -12,7 +7,7 @@
 
 #include "FileStream.h"
 
-namespace tgon
+namespace tg
 {
 
 class ReturnVectorTag {};
@@ -105,4 +100,4 @@ public:
     //static void WriteAllText(const std::string_view& path, string contents, Encoding encoding);
 };
 
-} /* namespace tgon */
+}

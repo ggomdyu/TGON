@@ -1,17 +1,12 @@
-/**
- * @file    Engine.h
- * @author  ggomdyu
- * @since   06/11/2018
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Module.h"
 #include "EngineConfig.h"
 
 #define TGON_DECLARE_ENGINE(className)\
-    namespace tgon\
+    namespace tg\
     {\
     \
     std::unique_ptr<Engine> CreateEngine()\
@@ -20,9 +15,9 @@
         return std::make_unique<className>();\
     }\
     \
-    } /* namespace tgon */
+    }
 
-namespace tgon
+namespace tg
 {
 
 class Engine :
@@ -34,11 +29,11 @@ public:
 /* @section Type */
 private:
     using ModuleUnit = size_t;
-    using ModuleCache = std::vector<std::shared_ptr<Module>>;
+    using ModuleCache = std::vector<std::unique_ptr<Module>>;
 
 /**@section Constructor */
 public:
-    explicit Engine(const EngineConfig& enfingConfig) noexcept;
+    explicit Engine(const EngineConfig& engineConfig) noexcept;
 
 /**@section Destructor */
 public:
@@ -50,11 +45,11 @@ public:
     virtual void Destroy();
     virtual void Update();
     template <typename _ModuleType, typename... _ArgTypes>
-    std::shared_ptr<_ModuleType> AddModule(_ArgTypes&&... args);
+    _ModuleType* AddModule(_ArgTypes&&... args);
     template <typename _ModuleType>
-    std::shared_ptr<_ModuleType> FindModule() noexcept;
+    _ModuleType* FindModule() noexcept;
     template <typename _ModuleType>
-    std::shared_ptr<const _ModuleType> FindModule() const noexcept;
+    const _ModuleType* FindModule() const noexcept;
     template <typename _ModuleType>
     bool RemoveModule();
     void RemoveAllModule();
@@ -72,18 +67,18 @@ private:
 };
     
 template <typename _ModuleType, typename... _ArgTypes>
-inline std::shared_ptr<_ModuleType> Engine::AddModule(_ArgTypes&&... args)
+inline _ModuleType* Engine::AddModule(_ArgTypes&&... args)
 {
     auto moduleUnit = GetModuleUnit<_ModuleType>();
-    auto module = std::make_shared<_ModuleType>(std::forward<_ArgTypes>(args)...);
-    m_moduleCache[moduleUnit] = module;
+    auto module = std::make_unique<_ModuleType>(std::forward<_ArgTypes>(args)...);
+    m_moduleCache[moduleUnit] = std::move(module);
+    m_moduleCache[moduleUnit]->Initialize();
     
-    module->Initialize();
-    return module;
+    return m_moduleCache[moduleUnit].get();
 }
 
 template <typename _ModuleType>
-inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
+inline _ModuleType* Engine::FindModule() noexcept
 {
     auto moduleUnit = GetModuleUnit<_ModuleType>();
     if (moduleUnit >= m_moduleCache.size() || m_moduleCache[moduleUnit] == nullptr)
@@ -95,7 +90,7 @@ inline std::shared_ptr<_ModuleType> Engine::FindModule() noexcept
 }
 
 template <typename _ModuleType>
-inline std::shared_ptr<const _ModuleType> Engine::FindModule() const noexcept
+inline const _ModuleType* Engine::FindModule() const noexcept
 {
     return const_cast<Engine*>(this)->FindModule<_ModuleType>();
 }
@@ -119,7 +114,7 @@ inline Engine::ModuleUnit Engine::GetModuleUnit() const
 {
     static ModuleUnit moduleUnit = [&]()
     {
-        ModuleUnit ret = m_maxModuleUnit;
+        const ModuleUnit ret = m_maxModuleUnit;
         m_moduleCache.resize(++m_maxModuleUnit);
         return ret;
     } ();
@@ -127,4 +122,4 @@ inline Engine::ModuleUnit Engine::GetModuleUnit() const
     return moduleUnit;
 }
 
-} /* namespace tgon */
+}

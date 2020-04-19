@@ -1,10 +1,5 @@
-/**
- * @file    Sprite.h
- * @author  ggomdyu
- * @since   06/06/2018
- */
-
 #pragma once
+
 #include "Graphics/Graphics.h"
 #include "Graphics/Texture.h"
 #include "Math/Rect.h"
@@ -13,7 +8,7 @@
 
 #include "UIElement.h"
 
-namespace tgon
+namespace tg
 {
 
 class UISprite final :
@@ -59,4 +54,4 @@ private:
     Vector2 m_pivot = Vector2(0.5f, 0.5f);
 };
 
-} /* namespace tgon */
+}

@@ -5,7 +5,7 @@
 
 #include "Debug.h"
 
-namespace tgon
+namespace tg
 {
 
 void Debug::Assert(bool condition)
@@ -71,4 +71,4 @@ void Debug::Unindent()
 #endif
 }
 
-} /* namespace tgon */
+}

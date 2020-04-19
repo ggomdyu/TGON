@@ -4,7 +4,7 @@
 
 #include "Timer.h"
 
-namespace tgon
+namespace tg
 {
     
 Timer::Timer() noexcept :
@@ -82,4 +82,4 @@ void Timer::Update()
     }
 }
 
-} /* namespace tgon */
+}

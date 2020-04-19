@@ -1,16 +1,10 @@
-/**
- * @file    TimeZoneInfo.h
- * @author  ggomdyu
- * @since   07/22/2019
- * @warn    TimeZoneInfo doesn't consider time conversion with Daylight Saving Time currently!!
- */
-
 #pragma once
+
 #include <string>
 
 #include "DateTime.h"
 
-namespace tgon
+namespace tg
 {
 
 class TimeZoneInfo final
@@ -159,4 +153,4 @@ inline DateTime TimeZoneInfo::ConvertTime(const DateTime& dateTime, const TimeZo
     }
 }
 
-} /* namespace tgon */
+}

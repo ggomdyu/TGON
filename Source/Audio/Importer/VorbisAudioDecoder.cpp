@@ -4,7 +4,7 @@
 
 #include "VorbisAudioDecoder.h"
 
-namespace tgon
+namespace tg
 {
 
 std::optional<VorbisAudioDecoder> VorbisAudioDecoder::Create(const gsl::span<const std::byte>& fileData)
@@ -36,4 +36,4 @@ bool VorbisAudioDecoder::IsVorbis(const gsl::span<const std::byte>& fileData)
     return !strncmp(reinterpret_cast<const char*>(&fileData[0]), "OggS", 4);
 }
 
-} /* namespace tgon */
+}

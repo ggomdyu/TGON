@@ -1,15 +1,10 @@
-/**
- * @file    VertexFormat.h
- * @author  ggomdyu
- * @since   03/15/2018
- */
-
 #pragma once
+
 #include "Math/Vector3.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 
-namespace tgon
+namespace tg
 {
 
 struct V3F_C2F
@@ -46,4 +41,4 @@ struct V3F_N3F_T2F
     Vector2 uv;
 };
 
-} /* namespace tgon */
+}

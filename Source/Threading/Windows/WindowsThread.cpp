@@ -4,7 +4,7 @@
 
 #include "../Thread.h"
 
-namespace tgon
+namespace tg
 {
 
 constexpr int ConvertThreadPriorityToNative(ThreadPriority threadPriority) noexcept
@@ -30,4 +30,4 @@ void Thread::SetPriority(ThreadPriority threadPriority)
     }
 }
 
-} /* namespace tgon */
+}

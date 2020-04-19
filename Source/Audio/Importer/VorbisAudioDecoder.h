@@ -1,16 +1,11 @@
-/**
- * @file    VorbisAudioDecoder.h
- * @author  ggomdyu
- * @since   04/20/2018
- */
- 
 #pragma once
+
 #include <gsl/span>
 #include <optional>
 
 #include "AudioDecoder.h"
 
-namespace tgon
+namespace tg
 {
 
 class VorbisAudioDecoder final :
@@ -29,4 +24,4 @@ public:
     static bool IsVorbis(const gsl::span<const std::byte>& fileData);
 };
 
-} /* namespace tgon */
+}

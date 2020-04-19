@@ -5,7 +5,7 @@
 
 #include "TimerModule.h"
 
-namespace tgon
+namespace tg
 {
 
 TimerModule::TimerModule() noexcept :
@@ -114,4 +114,4 @@ void TimerModule::Update()
     }
 }
 
-} /* namespace tgon */
+}

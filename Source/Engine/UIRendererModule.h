@@ -1,10 +1,5 @@
-/**
- * @file    UIRendererModule.h
- * @author  ggomdyu
- * @since   12/31/2017
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Math/Matrix4x4.h"
@@ -13,7 +8,7 @@
 
 #include "Module.h"
 
-namespace tgon
+namespace tg
 {
 
 class Camera;
@@ -63,4 +58,4 @@ private:
     std::vector<std::shared_ptr<Camera>> m_subCameras;
 };
 
-} /* namespace tgon */
+}

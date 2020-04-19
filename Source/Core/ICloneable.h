@@ -1,14 +1,8 @@
-/**
- * @file    ICloneable.h
- * @author  ggomdyu
- * @since   10/28/2017
- * @brief   Interface class for virtual copy constructor.
- */
-
 #pragma once
+
 #include <memory>
 
-namespace tgon
+namespace tg
 {
 
 class ICloneable
@@ -28,4 +22,4 @@ inline std::shared_ptr<const ICloneable> ICloneable::Clone() const
     return const_cast<ICloneable*>(this)->Clone();
 }
 
-} /* namespace tgon */
+}

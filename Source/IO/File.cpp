@@ -9,7 +9,7 @@
 
 #include "File.h"
 
-namespace tgon
+namespace tg
 {
 
 std::optional<DateTime> File::GetCreationTime(const char* path)
@@ -199,4 +199,4 @@ FileStream File::Open(const char* path, FileMode mode, FileAccess access, FileSh
     return FileStream(path, mode, access, share);
 }
 
-} /* namespace tgon */
+}

@@ -1,14 +1,9 @@
-/**
- * @file    Random.h
- * @author  ggomdyu
- * @since   03/14/2016
- */
-
 #pragma once
+
 #include <cstddef>
 #include <cstdint>
 
-namespace tgon
+namespace tg
 {
 
 class Random
@@ -34,4 +29,4 @@ protected:
     virtual double Sample() noexcept;
 };
 
-} /* namespace tgon */
+}

@@ -6,7 +6,7 @@
 
 #include "UITextRendererComponent.h"
 
-namespace tgon
+namespace tg
 {
 
 UITextRendererComponent::UITextRendererComponent() :
@@ -125,4 +125,4 @@ void UITextRendererComponent::Update()
     }
 }
 
-} /* namespace tgon */
+}

@@ -1,9 +1,3 @@
-/**
- * @file    OpenGLShaderCode.h
- * @author  ggomdyu
- * @since   12/19/2017
- */
-
 #pragma once
 
 constexpr const char g_positionColorVert[] =

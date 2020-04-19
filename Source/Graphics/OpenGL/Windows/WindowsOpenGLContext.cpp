@@ -10,7 +10,7 @@
 
 #include "../OpenGLContext.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -78,7 +78,7 @@ HGLRC MakeNewGLRC(HDC dcHandle, int colorBits, int depthBits, int stencilBits, i
     return wglCreateContextAttribsARB(dcHandle, nullptr, contextAttributes);
 }
 
-} /* namespace */
+}
 
 OpenGLContext::OpenGLContext(const std::shared_ptr<Window>& displayWindow, const VideoMode& videoMode) :
     wndHandle(reinterpret_cast<HWND>(displayWindow->GetNativeWindow())),
@@ -167,4 +167,4 @@ void OpenGLContext::Destroy()
     }
 }
 
-} /* namespace tgon */
+}

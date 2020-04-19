@@ -11,7 +11,7 @@
 
 #include "Mouse.h"
 
-namespace tgon
+namespace tg
 {
 
 Mouse::Mouse(gainput::InputDeviceMouse* nativeMouse) noexcept :
@@ -112,4 +112,4 @@ bool Mouse::IsMouseUp(MouseCode mouseCode) const
     }
 }
 
-} /* namespace tgon */
+}

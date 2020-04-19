@@ -1,12 +1,6 @@
-/**
- * @file    NonCopyable.h
- * @author  ggomdyu
- * @since   09/08/2019
- */
-
 #pragma once
 
-namespace tgon
+namespace tg
 {
 
 class NonCopyable
@@ -25,4 +19,4 @@ public:
     NonCopyable& operator=(const NonCopyable&) = delete;
 };
 
-} /* namespace tgon */
+}

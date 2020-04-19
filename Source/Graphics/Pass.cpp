@@ -2,7 +2,7 @@
 
 #include "Pass.h"
 
-namespace tgon
+namespace tg
 {
 //
 //Material::Material(ShaderProgram&& shaderProgram) noexcept :
@@ -35,4 +35,4 @@ namespace tgon
 //    return m_shaderProgram;
 //}
 
-} /* namespace tgon */
+}

@@ -8,7 +8,7 @@
 
 #include "UIBatch.h"
 
-namespace tgon
+namespace tg
 {
     
 UIBatch::UIBatch(const std::shared_ptr<Material>& material, const std::shared_ptr<Texture>& texture, BlendMode blendMode, int32_t vertexStartOffset) noexcept :
@@ -165,4 +165,4 @@ void UIBatch::Merge(const FRect& textureRect, const FExtent2D& textureSize, cons
     newVertices[5] = newVertices[0];
 }
 
-} /* namespace tgon */
+}

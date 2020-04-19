@@ -11,7 +11,7 @@
 
 #include "UIRendererModule.h"
 
-namespace tgon
+namespace tg
 {
 
 UIRendererModule::UIRendererModule(const std::shared_ptr<Graphics>& graphics) noexcept :
@@ -80,7 +80,7 @@ std::shared_ptr<Camera> UIRendererModule::CreateMainCamera(const std::shared_ptr
     auto clientSize = displayWindow->GetClientSize();
     float halfWidth = static_cast<float>(clientSize.width) * 0.5f;
     float halfHeight = static_cast<float>(clientSize.height) * 0.5f;
-    return std::make_shared<OrthographicCamera>(tgon::FRect(-halfWidth, -halfHeight, static_cast<float>(clientSize.width), static_cast<float>(clientSize.height)), -1.0f, 1024.0f);
+    return std::make_shared<OrthographicCamera>(tg::FRect(-halfWidth, -halfHeight, static_cast<float>(clientSize.width), static_cast<float>(clientSize.height)), -1.0f, 1024.0f);
 }
 
 void UIRendererModule::UpdateCameras()
@@ -140,4 +140,4 @@ void UIRendererModule::FlushSpriteBatches()
     m_spriteVertices.clear();
 }
 
-} /* namespace tgon */
+}

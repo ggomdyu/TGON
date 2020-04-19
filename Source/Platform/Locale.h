@@ -1,16 +1,10 @@
-/**
- * @file    Locale.h
- * @author  ggomdyu
- * @since   05/15/2016
- * @brief   Set of Platform-agnostic Locale interfaces.
- */
-
 #pragma once
+
 #include <cstdlib>
 #include <cstdint>
 #include <string>
 
-namespace tgon
+namespace tg
 {
 
 /**
@@ -23,4 +17,4 @@ int32_t GetLanguage(char* destStr, std::size_t destStrBufferLen);
 /**@brief   Returns the current system language. */
 std::string GetLanguage();
 
-} /* namespace tgon */
+}

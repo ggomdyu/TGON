@@ -1,11 +1,5 @@
-/**
- * @file    WindowsWindow.h
- * @author  ggomdyu
- * @since   01/09/2016
- * @brief   The platform specific window class implementation.
- */
-
 #pragma once
+
 #ifndef WIN32_LEAN_AND_MEAN
 #    define WIN32_LEAN_AND_MEAN
 #endif
@@ -14,7 +8,7 @@
 
 #include "Windows.h"
 
-namespace tgon
+namespace tg
 {
 
 class WindowsWindow :
@@ -48,4 +42,4 @@ protected:
 
 using PlatformWindow = WindowsWindow;
 
-} /* namespace tgon */
+}

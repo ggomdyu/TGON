@@ -1,15 +1,9 @@
-/**
- * @file    Debug.h
- * @author  ggomdyu
- * @since   04/01/2016
- * @brief   The platform agnostic debugging interfaces.
- */
-
 #pragma once
+
 #include <string_view>
 #include <mutex>
 
-namespace tgon
+namespace tg
 {
 
 class Debug
@@ -38,4 +32,4 @@ private:
     inline static std::recursive_mutex m_mutex;
 };
 
-} /* namespace tgon */
+}

@@ -26,14 +26,14 @@
 
 #define FACT 2.32830643653869628906e-10
 
-namespace tgon
+namespace tg
 {
 namespace
 {
 
 thread_local std::unique_ptr<unsigned int[]> state;
 
-} /* namespace */
+}
 
 void SrandWELL1024a()
 {
@@ -64,4 +64,4 @@ double WELL1024a() noexcept
     return static_cast<double>(state[state_i]) * FACT;
 }
 
-} /* namespace tgon */
+}

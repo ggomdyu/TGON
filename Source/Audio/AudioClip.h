@@ -1,11 +1,5 @@
-/**
- * @file    AudioBuffer.h
- * @author  ggomdyu
- * @since   04/30/2018
- * @see     https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf
- */
-
 #pragma once
+
 #include <gsl/span>
 #include <memory>
 #include <optional>
@@ -14,7 +8,7 @@
 
 typedef unsigned int ALuint;
 
-namespace tgon
+namespace tg
 {
 
 enum class AudioFormat
@@ -72,4 +66,4 @@ protected:
     int32_t m_samplingRate = 0;
 };
 
-} /* namespace tgon */
+}

@@ -1,10 +1,5 @@
-/**
- * @file    UIBatch.h
- * @author  ggomdyu
- * @since   06/03/2018
- */
-
 #pragma once
+
 #include <vector>
 
 #include "Graphics/Graphics.h"
@@ -13,7 +8,7 @@
 #include "Math/Color.h"
 #include "Math/Matrix4x4.h"
 
-namespace tgon
+namespace tg
 {
 
 class UIBatch
@@ -44,4 +39,4 @@ private:
     int32_t m_vertexEndOffset;
 };
 
-} /* namespace tgon */
+}

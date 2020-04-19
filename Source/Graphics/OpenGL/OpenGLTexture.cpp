@@ -7,7 +7,7 @@
 
 #include "../Texture.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -63,7 +63,7 @@ GLuint CreatePixelBufferHandle(GLsizeiptr bufferBytes)
     return pixelBufferHandle;
 }
 
-} /* namespace */
+}
 
 OpenGLTexture::OpenGLTexture() :
     m_textureHandle(CreateTextureHandle())
@@ -159,6 +159,6 @@ bool Texture::IsUseMipmap() const noexcept
     return m_isUseMipmap;
 }
 
-} /* namespace tgon */
+}
 
 #endif
