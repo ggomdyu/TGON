@@ -4,7 +4,7 @@
 
 #include "../Application.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -73,4 +73,4 @@ void Application::MessageLoop()
     }
 }
 
-} /* namespace tgon */
+}

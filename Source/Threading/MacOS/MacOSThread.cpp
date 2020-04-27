@@ -4,7 +4,7 @@
 
 #include "../Thread.h"
 
-namespace tgon
+namespace tg
 {
     
 int ConvertThreadPriorityToNative(ThreadPriority threadPriority)
@@ -29,4 +29,4 @@ void Thread::SetPriority(ThreadPriority threadPriority)
     pthread_setschedparam(this->native_handle(), SCHED_FIFO, &schedParam);
 }
 
-} /* namespace tgon */
+}

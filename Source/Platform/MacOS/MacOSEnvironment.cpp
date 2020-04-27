@@ -10,7 +10,7 @@
 
 #include "../Environment.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -242,4 +242,4 @@ int32_t Environment::GetStackTrace(char* destStr, int32_t destStrBufferLen)
     return destStrLen;
 }
 
-} /* namespace tgon */
+}

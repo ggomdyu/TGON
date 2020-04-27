@@ -9,7 +9,7 @@
 
 #include "../OpenGLContext.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -111,5 +111,5 @@ void OpenGLContext::Destroy()
     context = nil;
 }
 
-} /* namespace tgon */
+}
 #endif

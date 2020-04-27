@@ -12,15 +12,15 @@
 {
 }
 
-@property (readonly, assign) tgon::Window* window;
+@property (readonly, assign) tg::Window* window;
 
-- (id)initWithWindow:(tgon::Window*)window;
+- (id)initWithWindow:(tg::Window*)window;
 
 @end
 
 @implementation WindowDelegate
 
-- (id)initWithWindow:(tgon::Window*)window
+- (id)initWithWindow:(tg::Window*)window
 {
     self = [super init];
     if (self)
@@ -82,7 +82,7 @@
 }
 @end
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -327,4 +327,4 @@ bool Window::IsMinimized() const
     return static_cast<bool>([m_window isMiniaturized]);
 }
 
-} /* namespace tgon */
+}

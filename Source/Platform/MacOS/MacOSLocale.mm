@@ -6,7 +6,7 @@
 
 #include "../Locale.h"
 
-namespace tgon
+namespace tg
 {
     
 int32_t GetLanguage(char* destStr, std::size_t destStrBufferLen)
@@ -19,4 +19,4 @@ int32_t GetLanguage(char* destStr, std::size_t destStrBufferLen)
     return static_cast<std::int32_t>(currentLanguageCode.length);
 }
 
-} /* namespace tgon */
+}

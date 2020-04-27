@@ -4,7 +4,7 @@
 
 #include "../TimeZoneInfo.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -31,4 +31,4 @@ const TimeZoneInfo& TimeZoneInfo::Local()
     return timeZoneInfo;
 }
 
-} /* namespace tgon */
+}

@@ -4,7 +4,7 @@
 
 #include "../File.h"
 
-namespace tgon
+namespace tg
 {
 
 bool File::Delete(const char* path)
@@ -85,4 +85,4 @@ std::optional<DateTime> File::GetLastWriteTimeUtc(const char* path)
 #endif
 }
 
-} /* namespace tgon */
+}

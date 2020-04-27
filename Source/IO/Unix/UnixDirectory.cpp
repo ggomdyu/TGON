@@ -8,7 +8,7 @@
 #include "../DirectoryInfo.h"
 #include "../Directory.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -105,5 +105,5 @@ bool Directory::InternalCreateDirectory(const char* path)
     return mkdir(path, 0777) == 0;
 }
 
-} /* namespace tgon */
+}
 

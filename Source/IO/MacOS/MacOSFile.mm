@@ -7,7 +7,7 @@
 
 #include "../File.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -68,4 +68,4 @@ bool File::Copy(const char* srcPath, const char* destPath, bool overwrite)
     return [[NSFileManager defaultManager] copyItemAtPath:nsSrcPath toPath:nsDestPath error:nil];
 }
 
-} /* namespace tgon */
+}

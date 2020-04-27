@@ -6,7 +6,7 @@
 
 #include "../Debug.h"
 
-namespace tgon
+namespace tg
 {
 
 void Debug::Write(const std::string_view& message)
@@ -44,4 +44,4 @@ void Debug::Assert(bool condition, const std::string_view& message, const std::s
 #endif
 }
    
-} /* namespace tgon */
+}

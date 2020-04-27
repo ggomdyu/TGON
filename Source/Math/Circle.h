@@ -4,7 +4,7 @@
 //#include <cstdint>
 //#include <cstdio>
 //
-//namespace tgon
+//namespace tg
 //{
 //
 //{

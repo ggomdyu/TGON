@@ -4,7 +4,7 @@
 
 #include "../Path.h"
 
-namespace tgon
+namespace tg
 {
     
 gsl::span<const char> Path::GetInvalidFileNameChars() noexcept
@@ -19,4 +19,4 @@ gsl::span<const char> Path::GetInvalidPathChars() noexcept
     return gsl::span(invalidPathChars, std::extent_v<decltype(invalidPathChars)> - 1);
 }
 
-} /* namespace tgon */
+}

@@ -7,7 +7,7 @@
 #include "../FileStream.h"
 #include "../File.h"
 
-namespace tgon
+namespace tg
 {
 namespace
 {
@@ -152,4 +152,4 @@ void FileStream::InternalFlush()
     fflush(reinterpret_cast<FILE*>(m_nativeHandle));
 }
 
-} /* namespace tgon */
+}
