@@ -8,8 +8,12 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TY
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
 
-function(init_source_subdirectories)
+function(init_tgon)
+    init_tgon_subdirectories()
+endfunction()
+
+function(init_tgon_subdirectories)
     add_subdirectory(Source)
 endfunction()
 
-init_source_subdirectories()
+init_tgon()
