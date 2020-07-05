@@ -1,90 +1,97 @@
 cmake_minimum_required(VERSION 3.8)
 
+include(CheckIncludeFile)
+include(CheckIncludeFiles)
+
+set(TGON_PATH ${CMAKE_CURRENT_LIST_DIR} CACHE STRING "")
+
+CHECK_INCLUDE_FILE(emmintrin.h TGON_SUPPORT_SSE2)
+CHECK_INCLUDE_FILE(arm_neon.h TGON_SUPPORT_NEON)
+set(TGON_SUPPORT_SIMD FALSE)
+if(TGON_SUPPORT_SSE2 OR TGON_SUPPORT_NEON)
+    set(TGON_SUPPORT_SIMD TRUE)
+endif()
+option(TGON_USING_SIMD "" ${TGON_SUPPORT_SIMD})
+
+set(TGON_SUPPORT_POSIX FALSE)
+if(NOT TGON_PLATFORM STREQUAL "Windows")
+    set(TGON_SUPPORT_POSIX TRUE)
+endif()
+
+if(WIN32)
+    set(TGON_PLATFORM "Windows" CACHE STRING "")
+    set_property(CACHE TGON_PLATFORM PROPERTY STRINGS "Windows" "MacOS" "Android" "iOS")
+    set(TGON_GRAPHICS "OpenGL" CACHE STRING "")
+    set_property(CACHE TGON_GRAPHICS PROPERTY STRINGS "OpenGL" "Direct3D11" "Direct3D12" "Vulkan")
+elseif(APPLE)
+    set(TGON_PLATFORM "MacOS" CACHE STRING "")
+    set_property(CACHE TGON_PLATFORM PROPERTY STRINGS "MacOS" "iOS")
+    set(TGON_GRAPHICS "OpenGL" CACHE STRING "")
+    set_property(CACHE TGON_GRAPHICS PROPERTY STRINGS "OpenGL" "Metal")
+
+    set(CMAKE_CXX_FLAGS "-x objective-c++")
+else()
+    message(FATAL_ERROR "Your platform is not supported.")
+endif()
+
+function(init_tgon)
+    init_tgon_subdirectories()
+    
+    init_tgon_properties()
+    init_tgon_include_directories()
+    init_tgon_compile_definitions()
+    init_tgon_compile_options()
+    init_tgon_link_libraries()
+endfunction()
+
 function(init_tgon_subdirectories)
-    set(GLOB_AGRUMENTS *.cpp *c *.h)
+    set(GLOB_AGRUMENTS *.cpp *c *.h *.mm)
+    file(GLOB_RECURSE ALL_SRC_PATHS ${GLOB_AGRUMENTS})
 
-    if(APPLE)
-        list(APPEND GLOB_AGRUMENTS ${TGON_SOURCE_PATH}/*/*.mm)
-    endif()
+    set(SRC_PATHS)
+    string(TOUPPER ${TGON_PLATFORM} UPPERCASED_PLATFORM)
+    string(TOUPPER ${TGON_GRAPHICS} UPPERCASED_GRAPHICS)
 
-    file(GLOB_RECURSE TEMP_SRC_PATH_LIST ${GLOB_AGRUMENTS})
-
-    set(SRC_PATH_LIST)
-    set(TGON_PLATFORM_NAME_LIST "WINDOWS" "MACOS" "ANDROID" "IOS" "LINUX" "UNIX")
-    set(TGON_GRAPHICS_NAME_LIST "OPENGL" "VULKAN" "DIRECT3D11" "DIRECT3D12" "METAL")
-
-    foreach(SRC_PATH ${TEMP_SRC_PATH_LIST})
-        # Ignore third-party directories
-        string(FIND ${SRC_PATH} "/ThirdParty/" SUBSTR_INDEX)
-        if(NOT SUBSTR_INDEX EQUAL -1)
-            continue()
-        endif()
-
-        # Ignore legacy directories
-        string(FIND ${SRC_PATH} "/Legacy/" SUBSTR_INDEX)
-        if(NOT SUBSTR_INDEX EQUAL -1)
-            continue()
-        endif()
-
-        # Ignore legacy directories
-        string(FIND ${SRC_PATH} "/Test/" SUBSTR_INDEX)
-        if(NOT SUBSTR_INDEX EQUAL -1)
+    foreach(SRC_PATH ${ALL_SRC_PATHS})
+        # Ignore special directories
+        string(TOUPPER ${SRC_PATH} UPPERCASED_SRC_PATH)
+        if(${UPPERCASED_SRC_PATH} MATCHES "/THIRDPARTY/|/LEGACY/|/TEST/")
             continue()
         endif()
 
         # Ignore other platform sources
-        set(IS_PLATFORM_SPECIFIC_SRC FALSE)
-        set(IS_PLATFORM_MATCHED_SRC FALSE)
-        string(TOUPPER ${SRC_PATH} UPPERCASE_SRC_PATH)
-        foreach(PLATFORM_NAME ${TGON_PLATFORM_NAME_LIST})
-            string(FIND ${UPPERCASE_SRC_PATH} /${PLATFORM_NAME}/ SUBSTR_INDEX)
-            if(NOT SUBSTR_INDEX EQUAL -1)
-                set(IS_PLATFORM_SPECIFIC_SRC TRUE)
-                if(PLATFORM_NAME STREQUAL TGON_PLATFORM_NAME)
-                    set(IS_PLATFORM_MATCHED_SRC TRUE)
-                    break()
-                elseif(TGON_UNIX_BASE_OS AND PLATFORM_NAME STREQUAL "UNIX")
-                    set(IS_PLATFORM_MATCHED_SRC TRUE)
-                    break()
+        if(${UPPERCASED_SRC_PATH} MATCHES "/WINDOWS|/MACOS|/ANDROID|/IOS|/LINUX|/POSIX")
+            if(NOT ${UPPERCASED_SRC_PATH} MATCHES ${UPPERCASED_PLATFORM})
+                if(NOT(${TGON_SUPPORT_POSIX} AND ${UPPERCASED_SRC_PATH} MATCHES "/POSIX"))
+                    continue()
                 endif()
             endif()
-        endforeach()
-
-        if(IS_PLATFORM_SPECIFIC_SRC AND NOT IS_PLATFORM_MATCHED_SRC)
-            continue()
         endif()
 
-        # Ignore other graphics API sources
-        string(FIND ${SRC_PATH} "TGON/Source/Graphics/" SUBSTR_INDEX)
-        if(NOT SUBSTR_INDEX EQUAL -1)
-            set(IS_GRAPHICS_SPECIFIC_SRC FALSE)
-            set(IS_GRAPHICS_MATCHED_SRC FALSE)
-            string(TOUPPER ${SRC_PATH} UPPERCASE_SRC_PATH)
-            foreach(GRAPHICS_NAME ${TGON_GRAPHICS_NAME_LIST})
-                string(FIND ${UPPERCASE_SRC_PATH} /${GRAPHICS_NAME}/ SUBSTR_INDEX)
-                if(NOT SUBSTR_INDEX EQUAL -1)
-                    set(IS_GRAPHICS_SPECIFIC_SRC TRUE)
-                    if(GRAPHICS_NAME STREQUAL TGON_GRAPHICS_NAME)
-                        set(IS_GRAPHICS_MATCHED_SRC TRUE)
-                        break()
-                    endif()
-                endif()
-            endforeach()
-            
-            if(IS_GRAPHICS_SPECIFIC_SRC AND NOT IS_GRAPHICS_MATCHED_SRC)
+        # Ignore unsupported graphics API sources
+        if(${UPPERCASED_SRC_PATH} MATCHES "/GRAPHICS/(OPENGL|VULKAN|DIRECT3D11|DIRECT3D12|METAL)")
+            if(NOT ${UPPERCASED_SRC_PATH} MATCHES ${UPPERCASED_GRAPHICS})
                 continue()
             endif()
         endif()
 
-        list(APPEND SRC_PATH_LIST ${SRC_PATH})
+        list(APPEND SRC_PATHS ${SRC_PATH})
     endforeach()
 
-    add_library(TGON ${SRC_PATH_LIST})
-    source_group(TREE ${TGON_PATH} FILES ${SRC_PATH_LIST})
+    add_library(TGON ${SRC_PATHS})
+    source_group(TREE ${TGON_PATH} FILES ${SRC_PATHS})
 endfunction()
 
 function(init_tgon_properties)
-    set(TGON_INCLUDE_PATH_LIST
+    set_target_properties(TGON PROPERTIES
+        CXX_STANDARD_REQUIRED YES
+        CXX_EXTENSIONS NO
+        FOLDER TGON
+    )
+endfunction()
+
+function(init_tgon_include_directories)
+    set(TGON_INCLUDE_PATHS
         ${CMAKE_CURRENT_SOURCE_DIR}
         ThirdParty/assimp-4.1.0/include
         ThirdParty/fmt-6.1.2/include
@@ -101,19 +108,57 @@ function(init_tgon_properties)
         ThirdParty/zlib-1.2.11
     )
     if(WIN32)
-        list(APPEND TGON_INCLUDE_PATH_LIST $ENV{DXSDK_DIR}/Include)
+        list(APPEND TGON_INCLUDE_PATHS $ENV{DXSDK_DIR}/Include)
     endif()
+    target_include_directories(TGON PUBLIC ${TGON_INCLUDE_PATHS})
+endfunction()
 
-    set_target_properties(TGON PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO FOLDER TGON)
+function(init_tgon_compile_definitions)
+    target_compile_definitions(TGON PUBLIC
+        $<$<STREQUAL:$<UPPER_CASE:"${TGON_PLATFORM}">,"WINDOWS">:
+            -DUNICODE
+            -D_UNICODE
+        >
+        $<UPPER_CASE:TGON_PLATFORM_${TGON_PLATFORM}>=1
+        $<UPPER_CASE:TGON_GRAPHICS_${TGON_GRAPHICS}>=1
+        TGON_USING_SIMD=$<BOOL:${TGON_USING_SIMD}>
+        TGON_SUPPORT_SIMD=$<BOOL:${TGON_SUPPORT_SIMD}>
+        $<IF:$<BOOL:${TGON_SUPPORT_SSE2}>,TGON_SIMD_SSE2=1,
+        $<IF:$<BOOL:${TGON_SUPPORT_NEON}>,TGON_SIMD_NEON=1,>>
+    )
+endfunction()
 
-    target_include_directories(TGON PUBLIC ${TGON_INCLUDE_PATH_LIST})
-    target_compile_definitions(TGON PUBLIC TGON_PLATFORM_${TGON_PLATFORM_NAME}=1 TGON_GRAPHICS_${TGON_GRAPHICS_NAME}=1)
-
+function(init_tgon_compile_options)
     if(MSVC)
-        target_compile_options(TGON PRIVATE /YcPrecompiledHeader.h /Oi $<$<CONFIG:Debug>:/Zi> $<$<CONFIG:Release>:>)
+        target_compile_options(TGON PRIVATE 
+            /YcPrecompiledHeader.h 
+            /Oi
+            /std:c++latest
+            $<$<CONFIG:Debug>:/Zi>
+        )
+        
+        # CXX_STANDARD 20 doesn't working correctly now, so we will add an option to support c++20.
+        target_compile_options(TGON PUBLIC /std:c++latest)
     endif()
+endfunction()
 
-    target_link_libraries(TGON PUBLIC common fmt freetype gainputstatic glew icu OpenAL)
+function(init_tgon_link_libraries)
+    target_link_libraries(TGON PUBLIC 
+        common 
+        fmt 
+        freetype 
+        gainputstatic 
+        glew 
+        icu 
+        OpenAL
+    )
+endfunction()
+
+function(init_thirdparty)
+    init_thirdparty_subdirectories()
+    init_thirdparty_compile_definitions()
+    init_thirdparty_target_properties()
+    init_thirdparty_unset()
 endfunction()
 
 function(init_thirdparty_subdirectories)
@@ -122,12 +167,12 @@ function(init_thirdparty_subdirectories)
     option(ALSOFT_EXAMPLES "" FALSE)
     set(LIBTYPE "STATIC")
     add_subdirectory(ThirdParty/openal-soft-1.20.1)
-
+ 
     option(GAINPUT_TESTS "" FALSE)
     option(GAINPUT_BUILD_SHARED "" FALSE)
     option(GAINPUT_SAMPLES "" FALSE)
     add_subdirectory(ThirdParty/gainput-1.0.0)
-
+    
     add_subdirectory(ThirdParty/fmt-6.1.2)
     add_subdirectory(ThirdParty/freetype-2.10.1)
     add_subdirectory(ThirdParty/glew-2.1.0)
@@ -135,13 +180,23 @@ function(init_thirdparty_subdirectories)
     add_subdirectory(ThirdParty/zlib-1.2.11)
 endfunction()
 
-function(init_thirdparty_properties)
-    target_compile_definitions(freetype PUBLIC FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY)
+function(init_thirdparty_compile_definitions)
+    target_compile_definitions(freetype PUBLIC 
+        FT_DEBUG_LEVEL_ERROR 
+        FT_DEBUG_LEVEL_TRACE 
+        FT2_BUILD_LIBRARY
+    )
     target_compile_definitions(glew PUBLIC GLEW_STATIC)
-    target_compile_definitions(icu PUBLIC U_STATIC_IMPLEMENTATION U_COMMON_IMPLEMENTATION U_I18N_IMPLEMENTATION)
+    target_compile_definitions(icu PUBLIC 
+        U_STATIC_IMPLEMENTATION 
+        U_COMMON_IMPLEMENTATION 
+        U_I18N_IMPLEMENTATION
+    )
     target_compile_definitions(OpenAL PUBLIC AL_LIBTYPE_STATIC)
     target_compile_definitions(common PUBLIC AL_LIBTYPE_STATIC)
+endfunction()
 
+function(init_thirdparty_target_properties)
     set_target_properties(common PROPERTIES FOLDER ThirdParty)
     set_target_properties(ex-common PROPERTIES FOLDER ThirdParty)
     set_target_properties(fmt PROPERTIES FOLDER ThirdParty)
@@ -154,7 +209,80 @@ function(init_thirdparty_properties)
     set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
 endfunction()
 
-init_tgon_subdirectories()
-init_tgon_properties()
-init_thirdparty_subdirectories()
-init_thirdparty_properties()
+function(init_thirdparty_unset)
+    unset(ALSOFT_AMBDEC_PRESETS CACHE)
+    unset(ALSOFT_BACKEND_DSOUND CACHE)
+    unset(ALSOFT_BACKEND_WASAPI CACHE)
+    unset(ALSOFT_BACKEND_WAVE CACHE)
+    unset(ALSOFT_BACKEND_WINMM CACHE)
+    unset(ALSOFT_BUILD_ROUTER CACHE)
+    unset(ALSOFT_CONFIG CACHE)
+    unset(ALSOFT_CPUEXT_SSE CACHE)
+    unset(ALSOFT_CPUEXT_SSE2 CACHE)
+    unset(ALSOFT_CPUEXT_SSE3 CACHE)
+    unset(ALSOFT_CPUEXT_SSE4_1 CACHE)
+    unset(ALSOFT_DLOPEN CACHE)
+    unset(ALSOFT_EMBED_HRTF_DATA CACHE)
+    unset(ALSOFT_HRTF_DEFS CACHE)
+    unset(ALSOFT_INSTALL CACHE)
+    unset(ALSOFT_NATIVE_TOOLS_PATH CACHE)
+    unset(ALSOFT_NO_CONFIG_UTIL CACHE)
+    unset(ALSOFT_NO_UID_DEFS CACHE)
+    unset(ALSOFT_REQUIRE_ALSA CACHE)
+    unset(ALSOFT_REQUIRE_COREAUDIO CACHE)
+    unset(ALSOFT_REQUIRE_DSOUND CACHE)
+    unset(ALSOFT_REQUIRE_JACK CACHE)
+    unset(ALSOFT_REQUIRE_NEON CACHE)
+    unset(ALSOFT_EXAMPLES CACHE)
+    unset(ALSOFT_REQUIRE_OPENSL CACHE)
+    unset(ALSOFT_REQUIRE_OSS CACHE)
+    unset(ALSOFT_REQUIRE_PORTAUDIO CACHE)
+    unset(ALSOFT_REQUIRE_PULSEAUDIO CACHE)
+    unset(ALSOFT_REQUIRE_QSA CACHE)
+    unset(ALSOFT_REQUIRE_SDL2 CACHE)
+    unset(ALSOFT_REQUIRE_SNDIO CACHE)
+    unset(ALSOFT_REQUIRE_SOLARIS CACHE)
+    unset(ALSOFT_REQUIRE_SSE CACHE)
+    unset(ALSOFT_REQUIRE_SSE2 CACHE)
+    unset(ALSOFT_REQUIRE_SSE3 CACHE)
+    unset(ALSOFT_REQUIRE_SSE4_1 CACHE)
+    unset(ALSOFT_REQUIRE_WASAPI CACHE)
+    unset(ALSOFT_REQUIRE_WINMM CACHE)
+    unset(ALSOFT_TESTS CACHE)
+    unset(ALSOFT_UTILS CACHE)
+    unset(ALSOFT_WERROR CACHE)
+    unset(FORCE_STATIC_VCRT CACHE)
+    unset(SDL2MAIN_LIBRARY CACHE)
+    unset(SDL2_CORE_LIBRARY CACHE)
+    unset(SDL2_INCLUDE_DIR CACHE)
+    unset(COREAUDIO_FRAMEWORK CACHE)
+    unset(WINMM_LIBRARY CACHE)
+    unset(AUDIOUNIT_INCLUDE_DIR CACHE)
+    unset(CMAKE_DEBUG_POSTFIX CACHE)
+    unset(CMAKE_BACKWARDS_COMPATIBILITY CACHE)
+    unset(CMAKE_BUILD_TYPE CACHE)
+
+    unset(GAINPUT_BUILD_SHARED CACHE)
+    unset(GAINPUT_BUILD_STATIC CACHE)
+    unset(GAINPUT_SAMPLES CACHE)
+    unset(GAINPUT_TESTS CACHE)
+
+    unset(FMT_CUDA_TEST CACHE)
+    unset(FMT_DOC CACHE)
+    unset(FMT_FUZZ CACHE)
+    unset(FMT_INSTALL CACHE)
+    unset(FMT_PEDANTIC CACHE)
+    unset(FMT_TEST CACHE)
+    unset(FMT_WERROR CACHE)
+
+    unset(FT_WITH_BZIP2 CACHE)
+    unset(FT_WITH_HARFBUZZ CACHE)
+    unset(FT_WITH_PNG CACHE)
+    unset(FT_WITH_ZLIB CACHE)
+
+    unset(EXECUTABLE_OUTPUT_PATH CACHE)
+    unset(LIBRARY_OUTPUT_PATH CACHE)
+endfunction()
+
+init_tgon()
+init_thirdparty()
